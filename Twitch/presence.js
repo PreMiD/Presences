@@ -63,8 +63,8 @@ function updateData() {
 		watchingSinceTimestamp = Math.floor(Date.now() / 1000);
 	}
 
-	if (window.location.pathname.includes('')) {
-		videoStream = document.querySelector('.video-player');
+	if (typeof document.querySelector('.player-video') == 'undefinded') {
+		videoStream = document.querySelector('.player-video');
 		if (isNaN(videoStream.duration)) return;
 
 		duration = Math.floor(videoStream.duration);
@@ -114,7 +114,7 @@ function updateData() {
 	var event = new CustomEvent('PreMiD_UpdatePresence', { detail: data });
 	window.dispatchEvent(event);
 }
-
+console.log(updateData);
 /**
  * Get Timestamps
  * @param {Number} videoTime Current video time seconds
