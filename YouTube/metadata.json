@@ -1,0 +1,13 @@
+{
+	"author": {
+		"name": "Timeraa",
+		"id": "223238938716798978"
+	},
+	"service": "YouTube",
+	"description": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
+	"url": "www.youtube.com",
+	"version": "2.0",
+	"logo": "https://i.imgur.com/C9ZEmge.png",
+	"color": "#E40813",
+	"tags": [ "video", "media" ]
+}

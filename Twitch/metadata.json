@@ -1,0 +1,13 @@
+{
+	"author": {
+		"name": "Fruxh",
+		"id": "259407123782434816"
+	},
+	"service": "Twitch",
+	"description": "We are a global community of millions who come together each day to create their own entertainment.",
+	"url": "www.twitch.tv",
+	"version": "2.0",
+	"logo": "https://images-eu.ssl-images-amazon.com/images/I/312EjBsxqzL.png",
+	"color": "#6441A5",
+	"tags": [ "video", "media" ]
+}
