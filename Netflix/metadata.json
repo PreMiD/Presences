@@ -1,0 +1,13 @@
+{
+	"author": {
+		"name": "Timeraa",
+		"id": "223238938716798978"
+	},
+	"service": "Netflix",
+	"description": "Netflix is the world's leading internet entertainment service with 139 million paid memberships in over 190 countries enjoying TV series, documentaries and feature films across a wide variety of genres and languages.",
+	"url": "www.netflix.com",
+	"version": "2.0",
+	"logo": "https://svgur.com/i/BjZ.svg",
+	"color": "#db0000",
+	"tags": [ "video", "media" ]
+}
