@@ -63,14 +63,14 @@ function updateData() {
 		watchingSinceTimestamp = Math.floor(Date.now() / 1000);
 	}
 
-	if (typeof document.querySelector('.player-video') == 'undefinded') {
-		videoStream = document.querySelector('.player-video');
+	if (typeof document.querySelector('.player-video video') != 'undefined') {
+		videoStream = document.querySelector('.player-video video');
 		if (isNaN(videoStream.duration)) return;
 
 		duration = Math.floor(videoStream.duration);
 		currentTime = Math.floor(videoStream.currentTime);
 		paused = videoStream.paused;
-		title = document.querySelectorAll('.tw-font-size-4')[0].innerText;
+		title = document.querySelectorAll('.tw-ellipsis.tw-mg-b-05.tw-mg-r-2 .tw-font-size-4')[0].innerText;
 		author = document.querySelector('.channel-header__user h5').innerText;
 		live = Boolean(document.querySelector('.player-streamstatus__label'));
 
@@ -114,7 +114,7 @@ function updateData() {
 	var event = new CustomEvent('PreMiD_UpdatePresence', { detail: data });
 	window.dispatchEvent(event);
 }
-console.log(updateData);
+
 /**
  * Get Timestamps
  * @param {Number} videoTime Current video time seconds
