@@ -67,7 +67,10 @@ function updateData() {
 		watchingSinceTimestamp = Math.floor(Date.now() / 1000);
 	}
 
-	if (window.location.pathname.includes('/watch')) {
+	if (
+		document.querySelector('.video-stream') != undefined &&
+		document.querySelectorAll('.title.style-scope.ytmusic-player-bar') != null
+	) {
 		videoStream = document.querySelector('.video-stream');
 		if (isNaN(videoStream.duration)) return;
 
