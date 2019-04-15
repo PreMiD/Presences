@@ -69,7 +69,10 @@ function updateData() {
 		watchingSinceTimestamp = Math.floor(Date.now() / 1000);
 	}
 
-	if (window.location.pathname.includes('/watch')) {
+	if (
+		document.querySelector('.video-stream') != null &&
+		document.querySelectorAll('h1.title.ytd-video-primary-info-renderer')[0].innerText != ''
+	) {
 		videoStream = document.querySelector('.video-stream');
 		if (isNaN(videoStream.duration)) return;
 
