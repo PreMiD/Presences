@@ -7,7 +7,7 @@
 	"description": "A new music service with official albums, singles, videos, remixes, live performances and more for Android, iOS and desktop. It's all here.",
 	"url": "music.youtube.com",
 	"version": "2.0",
-	"logo": "https://en.wikipedia.org/wiki/YouTube_Music#/media/File:Youtube_Music_logo.svg",
+	"logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Youtube_Music_logo.svg/1024px-Youtube_Music_logo.svg.png",
 	"color": "#E40813",
 	"tags": [ "audio", "music" ]
 }
