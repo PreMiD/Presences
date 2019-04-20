@@ -12,7 +12,7 @@ setTimeout(function() {
 			strings: {
 				playing: 'presence.playback.playing',
 				paused: 'presence.playback.paused',
-				live: 'presence.playback.live'
+				live: 'presence.activity.live'
 			},
 			version: "chrome.runtime.getManifest().name + ' V' + chrome.runtime.getManifest().version"
 		}

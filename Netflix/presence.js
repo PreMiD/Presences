@@ -12,8 +12,7 @@ setTimeout(function() {
 			strings: {
 				playing: 'presence.playback.playing',
 				paused: 'presence.playback.paused',
-				browsing: 'presence.browsing',
-				watching: 'presence.watching'
+				browsing: 'presence.activity.browsing'
 			},
 			version: "chrome.runtime.getManifest().name + ' V' + chrome.runtime.getManifest().version"
 		}
@@ -130,8 +129,7 @@ function updateData() {
 				'.video-title span'
 			).textContent}`;
 		} else {
-			data.presenceData.details = extensionData.strings.watching;
-			data.presenceData.state = document.querySelector('.video-title').textContent;
+			data.presenceData.details = document.querySelector('.video-title').textContent;
 			data.trayTitle = document.querySelector('.video-title').textContent;
 		}
 	}
