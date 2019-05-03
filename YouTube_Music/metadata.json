@@ -8,6 +8,7 @@
 	"url": "music.youtube.com",
 	"version": "2.0",
 	"logo": "https://rainnews.com/wp-content/uploads/2018/05/youtube-music-logo.png",
+	"thumbnail": "https://i.imgur.com/iQ8MA50.png",
 	"color": "#E40813",
 	"tags": [ "audio", "music" ]
 }

@@ -8,6 +8,7 @@
 	"url": "www.netflix.com",
 	"version": "2.0",
 	"logo": "https://svgur.com/i/BjZ.svg",
+	"thumbnail": "https://i.imgur.com/KEKNkk9.jpg",
 	"color": "#db0000",
 	"tags": [ "video", "media" ]
 }

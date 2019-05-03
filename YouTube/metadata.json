@@ -8,6 +8,7 @@
 	"url": "www.youtube.com",
 	"version": "2.0",
 	"logo": "https://i.imgur.com/C9ZEmge.png",
+	"thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
 	"color": "#E40813",
 	"tags": [ "video", "media" ]
 }

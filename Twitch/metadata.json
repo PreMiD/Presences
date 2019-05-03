@@ -8,6 +8,7 @@
 	"url": "www.twitch.tv",
 	"version": "2.0",
 	"logo": "https://images-eu.ssl-images-amazon.com/images/I/312EjBsxqzL.png",
+	"thumbnail": "https://i.imgur.com/0SFrVOJ.jpg",
 	"color": "#6441A5",
 	"tags": [ "stream", "media" ]
 }
