@@ -1,0 +1,14 @@
+{
+	"author": {
+		"name": "Fruxh",
+		"id": "259407123782434816"
+	},
+	"service": "SoundCloud",
+	"description": "SoundCloud is a music and podcast streaming platform that lets you listen to millions of songs from around the world, or upload your own. Start listening now!",
+	"url": "soundcloud.com",
+	"version": "2.0",
+	"logo": "https://upload.wikimedia.org/wikipedia/de/f/f4/SoundCloud_-_Logo.svg",
+	"thumbnail": "https://i.imgur.com/mLlUWdH.png",
+	"color": "#ff7700",
+	"tags": [ "audio", "music" ]
+}
