@@ -6,7 +6,8 @@
   "service": "Arena of Kings",
   "description": "N/A",
   "url": "arenaofkings.com",
-  "logo": "N/A",
+  "logo": "",
+  "thumbnail": "",
   "color": "N/A",
   "tags": ["game"],
   "button": false
