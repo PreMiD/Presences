@@ -4,11 +4,11 @@
     "id": "223238938716798978"
   },
   "service": "Arena of Kings",
-  "description": "N/A",
+  "description": "Arena of Kings is a next-gen fast-paced PvP Arena Game played in the browser. Join forces with heroes to claim the throne!",
   "url": "arenaofkings.com",
   "logo": "https://i.imgur.com/939UKF6.png",
-  "thumbnail": "",
-  "color": "N/A",
+  "thumbnail": "https://i.imgur.com/2K6n54H.png",
+  "color": "#ff9900",
   "tags": ["game"],
   "button": false
 }
