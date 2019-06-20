@@ -1,0 +1,14 @@
+{
+	"author": {
+		"name": "KaikeCarlos",
+		"id": "123231508625489920"
+	},
+	"service": "Mixer",
+	"description": "Is a video game live streaming platform owned by Microsoft.",
+	"url": "www.mixer.com",
+	"version": "2.0",
+	"logo": "https://i.imgur.com/epuGx2r.png",
+	"thumbnail": "https://i.imgur.com/i5RZ1Xj.png",
+	"color": "#1A99D0",
+	"tags": [ "stream", "media" ]
+}
