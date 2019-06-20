@@ -34,7 +34,7 @@ var duration,
 	title,
 	author,
 	videoStream = null,
-	live = false,
+	live = true,
 	data,
 	videoTimestamps,
 	watchingSinceTimestamp,
@@ -62,16 +62,18 @@ function updateData() {
 		watchingSinceTimestamp = Math.floor(Date.now() / 1000);
 	}
 
-	if (typeof document.querySelector('.light-player') != 'undefined') {
-		videoStream = document.querySelector('.light-player');
+	if (typeof document.querySelector('.light-player') !== null) {
+		videoStream = document.querySelector('.light-player');	
 		if (isNaN(videoStream.duration)) return;
 
 		duration = Math.floor(videoStream.duration);
 		currentTime = Math.floor(videoStream.currentTime);
 		paused = videoStream.paused;
 		title = document.querySelectorAll('.stream-title span')[0].innerText;
-		author = document.querySelector('.profile-header h2').innerText;
-    live = Boolean(document.querySelector('.offline-message h3'));
+		author = document.querySelector('.profile-header h2')[0].innerText;
+		if(document.querySelector('.offline-message') !== null) {
+		    live = false;
+		}
     
 
 		data = {
