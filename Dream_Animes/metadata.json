@@ -1,0 +1,14 @@
+{
+	"author": {
+		"name": "Evil",
+		"id": "200761917189521409"
+	},
+	"service": "Dream Animes",
+	"description": "Nossa objetivo é de proporcionar à todos um site para assistir animes, tanto online quanto baixado, sem qualquer propaganda ofensiva. E hoje, nos tornamos um site capaz de conquistar o Brasil com a facilidade, e os benefícios que oferecemos à todos os usuários que assistem por nós.",
+	"url": "www.dreamanimes.com.br",
+	"version": "2.0",
+	"logo": "https://i.imgur.com/iwQt7Zu.png",
+	"thumbnail": "https://i.imgur.com/7TFWTH4.png",
+	"color": "#1997c6",
+	"tags": [ "video", "media", "anime" ]
+}
