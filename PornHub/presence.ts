@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "605201869257572387",
+    clientId: "607352899214901248",
     mediaKeys: true
   }),
   strings = presence.getStrings({
