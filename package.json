@@ -1,0 +1,10 @@
+{
+  "name": "presences",
+  "version": "2.0.0",
+  "author": "Timeraa",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "0.0.86",
+    "typescript": "3.4.3"
+  }
+}
