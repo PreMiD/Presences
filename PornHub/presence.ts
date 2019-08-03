@@ -13,11 +13,9 @@ presence.on("UpdateData", async () => {
   if (video[0] !== null && !isNaN(video.duration)) {
     //* Get required tags
     var title : any;
-
       title =
         document.querySelector(".video-wrapper .title-container .title");
-
-    //TODO Find solution for uploader in miniplayer
+      
     var uploader =
         document.querySelector(".video-actions-container .video-info-row .usernameWrap a"),
       timestamps = getTimestamps(
