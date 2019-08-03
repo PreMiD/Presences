@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
       presenceData: presenceData = {
         details: title.innerText,
         state: uploader.textContent,
-        largeImageKey: "ph3",
+        largeImageKey: "lg",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
           ? (await strings).pause
