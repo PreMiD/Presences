@@ -35,9 +35,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname.startsWith("/p")) {
+        let author = document.getElementsByClassName("FPmhX notranslate nJAzx")[0].textContent;
         let presenceData = {
             details: "Viewing a post",
-            state: "NAME-HERE",
+            state: author,
             largeImageKey: "logo"
         };
         presence.setActivity(presenceData);
