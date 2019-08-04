@@ -1,0 +1,14 @@
+{
+  "author": {
+    "name": "Alanexei ✔",
+    "id": "607362931180699648"
+  },
+  "service": "Mixer",
+  "description": "Mixer is a next-generation live streaming platform for gamers that lets viewers participate in the gameplay itself.",
+  "url": "mixer.com",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/G358RGW.jpg",
+  "thumbnail": "https://i.imgur.com/K28BAra.jpg",
+  "color": "#1FBAED",
+  "tags": ["mixer", "video", "streaming"]
+}
