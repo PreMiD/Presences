@@ -1,0 +1,14 @@
+{
+  "author": {
+    "name": "CRUGG",
+    "id": "228965621478588416"
+  },
+  "service": "plug.dj",
+  "description": "Listen, play, discover and connect with music fans around the world!",
+  "url": "plug.dj",
+  "version": "2.0",
+  "logo": "https://crugg.de/premid/pdjlogo.png",
+  "thumbnail": "https://crugg.de/premid/pdjbanner.png",
+  "color": "#E1306C",
+  "tags": ["music", "community", "chatting", "media"]
+}
