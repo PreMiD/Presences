@@ -1,0 +1,14 @@
+{
+  "author": {
+    "name": "Alanexei ✔",
+    "id": "163319338403627008"
+  },
+  "service": "Deezer",
+  "description": "Listen to all the songs you love anytime, anywhere.",
+  "url": "www.deezer.com",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/DBj8DXy.png",
+  "thumbnail": "https://i.imgur.com/3vCIxNO.png",
+  "color": "#EE9B01",
+  "tags": ["deezer", "music"]
+}
