@@ -22,7 +22,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         var uploader = document.querySelector("#redtube_layout #section_main #content_float #content_wrapper #content_container #main-container #video_left_col #video_underplayer #video-infobox #video-infobox-wrap .video-infobox-col .video-infobox-row .video-infobox-content .video-infobox-link"), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), presenceData = {
             details: title.innerText,
             state: uploader.textContent,
-            largeImageKey: "rt",
+            largeImageKey: "lg",
             smallImageKey: video.paused ? "pause" : "play",
             smallImageText: video.paused
                 ? (yield strings).pause
