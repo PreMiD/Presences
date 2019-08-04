@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     };
     presence.setActivity(presenceData);
   } else {
-    // TODO: Check if the page is really a profile, in case I forgot something in line 34
+    // TODO: Check if the page is really a profile
     let presenceData: presenceData = {
       details: "Viewing a profile",
       state: document.location.pathname.split("/")[1],
