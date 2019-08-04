@@ -8,16 +8,24 @@ var strings = presence.getStrings({
   live: "presence.activity.live"
 });
 
+var live, elapsed, oldUrl;
+
 presence.on("UpdateData", async () => {
-  var live = true;
   var video: HTMLVideoElement = document.querySelector(
     "body > b-app > div > b-channel-page-wrapper > b-channel-web-page > div > section > div > b-stage > div.arrangement-container > b-stage-arrangement > div > b-player > light-player > light-player-projector > video"
   );
-  if (video === null) {
+  if (video) {
+    live = true;
+  } else {
     video = document.querySelector(
       "body > b-app > div > b-channel-page-wrapper > b-channel-web-page > div > section > div > b-recording-stage > b-player > light-player > light-player-projector > video"
     );
     live = false;
+  }
+
+  if (oldUrl !== window.location.href) {
+    oldUrl = window.location.href;
+    elapsed = Math.floor(Date.now() / 1000);
   }
 
   if (video && !isNaN(video.duration)) {
@@ -52,6 +60,7 @@ presence.on("UpdateData", async () => {
       if (live) {
         data.smallImageKey = "live";
         data.smallImageText = (await strings).live;
+        data.startTimestamp = elapsed;
       }
     }
 

@@ -43,16 +43,23 @@ var strings = presence.getStrings({
     pause: "presence.playback.paused",
     live: "presence.activity.live"
 });
+var live, elapsed, oldUrl;
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
-    var live, video, title, streamer, timestamps, data, _a, _b, _c;
+    var video, title, streamer, timestamps, data, _a, _b, _c;
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0:
-                live = true;
                 video = document.querySelector("body > b-app > div > b-channel-page-wrapper > b-channel-web-page > div > section > div > b-stage > div.arrangement-container > b-stage-arrangement > div > b-player > light-player > light-player-projector > video");
-                if (video === null) {
+                if (video) {
+                    live = true;
+                }
+                else {
                     video = document.querySelector("body > b-app > div > b-channel-page-wrapper > b-channel-web-page > div > section > div > b-recording-stage > b-player > light-player > light-player-projector > video");
                     live = false;
+                }
+                if (oldUrl !== window.location.href) {
+                    oldUrl = window.location.href;
+                    elapsed = Math.floor(Date.now() / 1000);
                 }
                 if (!(video && !isNaN(video.duration))) return [3 /*break*/, 7];
                 title = document.querySelector("body > b-app > div > b-channel-page-wrapper > b-channel-web-page > div > section > b-channel-profile > div.channel-info-container > b-channel-info-bar > div > div > div.title.layout-column > b-truncated-text > div").firstChild.textContent;
@@ -88,6 +95,7 @@ presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, 
                 return [4 /*yield*/, strings];
             case 5:
                 _c.smallImageText = (_d.sent()).live;
+                data.startTimestamp = elapsed;
                 _d.label = 6;
             case 6:
                 if (video && title !== null && streamer !== null) {
