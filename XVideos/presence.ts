@@ -11,12 +11,12 @@ presence.on("UpdateData", async () => {
   var video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
   if (video[0] !== null && !isNaN(video.duration)) {
     //* Get required tags
-    var title : any;
-      title =
-        document.querySelector(".video-page #main .page-title");
+    var title: any;
+    title = document.querySelector(".video-page #main .page-title");
 
-    var uploader =
-        document.querySelector(".video-page #main .video-metadata .uploader-tag .name"),
+    var uploader = document.querySelector(
+        ".video-page #main .video-metadata .uploader-tag .name"
+      ),
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
       presenceData: presenceData = {
         details: title.innerText,
         state: uploader.textContent,
-        largeImageKey: "xv",
+        largeImageKey: "lg",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
           ? (await strings).pause
@@ -54,7 +54,9 @@ presence.on("UpdateData", async () => {
 presence.on("MediaKeys", (key: string) => {
   switch (key) {
     case "pause":
-      var video = document.querySelector(".video-bg-pic video") as HTMLVideoElement;
+      var video = document.querySelector(
+        ".video-bg-pic video"
+      ) as HTMLVideoElement;
       video.paused ? video.play() : video.pause();
       break;
   }
