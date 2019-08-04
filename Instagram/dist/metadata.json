@@ -1,0 +1,14 @@
+{
+  "author": {
+    "name": "CRUGG",
+    "id": "228965621478588416"
+  },
+  "service": "Instagram",
+  "description": "A simple, fun & creative way to capture, edit & share photos, videos & messages with friends & family.",
+  "url": "www.instagram.com",
+  "version": "2.0",
+  "logo": "https://crugg.de/premid/iglogo.png",
+  "thumbnail": "https://crugg.de/premid/igbanner.png",
+  "color": "#E1306C",
+  "tags": ["photos", "images", "media"]
+}
