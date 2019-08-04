@@ -1,0 +1,14 @@
+{
+    "author": {
+      "name": "TheDrop.",
+      "id": "293828021134295040"
+    },
+    "service": "FiPlay",
+    "description": "FiPlay is a online movie/series streaming site from Finland.",
+    "url": "fiplay.net",
+    "version": "2.0",
+    "logo": "https://i.imgur.com/WpVz6hj.png",
+    "thumbnail": "https://i.imgur.com/1PibvI2.png",
+    "color": "#0397d6",
+    "tags": [ "video", "media" ]
+  }

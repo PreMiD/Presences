@@ -5,7 +5,7 @@
     },
     "service": "RedTube",
     "description": "RedTube is a premier adult video sharing platform.",
-    "url": "www.redtube.com",
+    "url": [ "www.redtube.com", "de.redtube.com", "pl.redtube.com", "redtube.com.br", "es.redtube.com", "it.redtube.com", "ru.redtube.com", "jp.redtube.com" ],
     "version": "2.0",
     "logo": "https://i.imgur.com/MlqNqGr.jpg",
     "thumbnail": "https://i.imgur.com/6DD83q7.png",
