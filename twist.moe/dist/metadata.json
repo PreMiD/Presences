@@ -1,0 +1,14 @@
+{
+    "author": {
+      "name": "TheDrop.",
+      "id": "293828021134295040"
+    },
+    "service": "twist.moe",
+    "description": "twist.moe is a free anime streaming site.",
+    "url": "twist.moe",
+    "version": "2.0",
+    "logo": "https://i.imgur.com/QUWUPTI.jpg",
+    "thumbnail": "https://i.imgur.com/S90UKep.png",
+    "color": "#0397d6",
+    "tags": [ "video", "anime" ]
+  }
