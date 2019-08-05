@@ -1,0 +1,14 @@
+{
+  "author": {
+    "name": "CRUGG",
+    "id": "228965621478588416"
+  },
+  "service": "nekos.life",
+  "description": "A neko makes your day bright - nekos.life provides you with thousands of sfw and nsfw images of nekos (cat-girls)",
+  "url": "nekos.life",
+  "version": "2.0",
+  "logo": "https://crugg.de/premid/nllogo.png",
+  "thumbnail": "https://crugg.de/premid/nlbanner.png",
+  "color": "#512da8",
+  "tags": ["anime", "manga", "images", "random", "nsfw"]
+}
