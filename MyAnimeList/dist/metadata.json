@@ -1,0 +1,14 @@
+{
+  "author": {
+    "name": "CRUGG",
+    "id": "228965621478588416"
+  },
+  "service": "MyAnimeList",
+  "description": "The world's most active online anime and manga community and database. Join the online community, create your anime and manga list and so much more!",
+  "url": "myanimelist.net",
+  "version": "2.0",
+  "logo": "https://crugg.de/premid/mallogo.png",
+  "thumbnail": "https://crugg.de/premid/malbanner.png",
+  "color": "#2e51a2",
+  "tags": ["anime", "manga", "community"]
+}
