@@ -1,0 +1,14 @@
+{
+  "author": {
+    "name": "Alanexei ✔",
+    "id": "163319338403627008"
+  },
+  "service": "Hulu",
+  "description": "Watch current hit shows, classic series, and acclaimed movies instantly with Hulu.",
+  "url": "www.hulu.com",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/kJKqfdw.png",
+  "thumbnail": "https://i.imgur.com/66aqtJT.jpg",
+  "color": "#66AA33",
+  "tags": ["hulu", "video", "tv", "movies"]
+}
