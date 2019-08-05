@@ -1,14 +1,14 @@
 {
-	"author": {
-		"name": "Fruxh",
-		"id": "259407123782434816"
-	},
-	"service": "Twitch",
-	"description": "We are a global community of millions who come together each day to create their own entertainment.",
-	"url": "www.twitch.tv",
-	"version": "2.0",
-	"logo": "https://images-eu.ssl-images-amazon.com/images/I/312EjBsxqzL.png",
-	"thumbnail": "https://i.imgur.com/0SFrVOJ.jpg",
-	"color": "#6441A5",
-	"tags": [ "stream", "media" ]
+  "author": {
+    "name": "Alanexei ✔",
+    "id": "163319338403627008"
+  },
+  "service": "Twitch",
+  "description": "Twitch is the world's leading live streaming platform for gamers and the things we love. Watch and chat now with millions of other fans from around the world.",
+  "url": "www.twitch.tv",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/3BrZVTM.png",
+  "thumbnail": "https://i.imgur.com/q76Mauk.jpg",
+  "color": "#6441A5",
+  "tags": ["twitch", "video", "streaming"]
 }
