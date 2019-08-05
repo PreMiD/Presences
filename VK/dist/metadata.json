@@ -6,7 +6,7 @@
     "service": "VK",
     "description": {
         "en": "This presence will be displaying things that you usually do in VK. It displays a music info (if you're on the Music page), a video info (when you watching video) and info if you're watching community or user profile.",
-        "ru": "Тестовое сообщение!"
+        "ru": "Этот статус будет отображать штуки, которые вы обычно делаете в ВК. Оно отображает информацию о музыке (если вы на странице Музыка), информацию о видео! (когда вы смотрите его) и информацию о просматриваемых вами группах или профилях."
     },
     "url": "vk.com",
     "version": "1.0",
