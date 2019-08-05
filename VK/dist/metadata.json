@@ -4,7 +4,10 @@
         "id": "213305189657083905"
     },
     "service": "VK",
-    "description": "This presence will be displaying things that you usually do in VK. It displays a music info (if you're on the Music page), a video info (when you watching video) and info if you're watching community or user profile.",
+    "description": {
+        "en": "This presence will be displaying things that you usually do in VK. It displays a music info (if you're on the Music page), a video info (when you watching video) and info if you're watching community or user profile.",
+        "ru: "Тестовое сообщение!"
+    },
     "url": "vk.com",
     "version": "1.0",
     "logo": "https://i.imgur.com/VB6AuBG.png",
