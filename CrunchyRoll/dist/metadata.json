@@ -1,0 +1,15 @@
+{
+    "author": {
+      "name": "TheDrop.",
+      "id": "293828021134295040"
+    },
+    "service": "Crunchyroll",
+    "description": "Crunchyroll is the world’s largest destination for anime and manga, boasting a global community of more than 45 million registered users and over 2 million subscribers.",
+    "url": "www.crunchyroll.com",
+    "version": "2.0",
+    "logo": "https://i.imgur.com/JuZAJut.png",
+    "thumbnail": "https://i.imgur.com/hzM7YCb.png",
+    "color": "#0397d6",
+    "tags": [ "video", "anime" ],
+    "iframe": true
+  }
