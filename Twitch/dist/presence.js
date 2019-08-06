@@ -43,85 +43,199 @@ var strings = presence.getStrings({
     pause: "presence.playback.paused",
     live: "presence.activity.live"
 });
-var live, elapsed, oldURL;
+var title, streamer, largeImage = "twitch", smallImageKey, smallImageText, videoTime, videoDuration, live, elapsed, oldURL, type, logging = false;
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
-    var video, live_indicator, title, streamer, timestamps, title, streamer, timestamps, data, _a, _b, _c;
-    return __generator(this, function (_d) {
-        switch (_d.label) {
+    var elements, video, squad, users, user_path, index, _a, timestamps, _b, timestamps, location, user, user_header, game, data, error_1;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
-                video = document.querySelector("#root > div > div.tw-flex.tw-flex-column.tw-flex-nowrap.tw-full-height > div > main > div.root-scrollable.scrollable-area.scrollable-area--suppress-scroll-x > div.simplebar-scroll-content > div > div > div.persistent-player.tw-border-radius-none > div > div.video-player.video-player--logged-in > div > div.player-video > video");
-                live_indicator = document.querySelector("#root > div > div.tw-flex.tw-flex-column.tw-flex-nowrap.tw-full-height > div > main > div:nth-child(1) > div > div.tw-flex.tw-flex-nowrap.tw-full-height.tw-justify-content-between.tw-mg-x-3 > div.tw-align-items-stretch.tw-flex.tw-flex-nowrap.tw-flex-shrink-0 > div.channel-header__banner-toggle.channel-header__user.channel-header__user--selected.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-pd-r-2.tw-pd-y-05 > div > div.tw-mg-l-1 > div > div.tw-align-center.tw-border-radius-small.tw-c-text-overlay.tw-channel-status-text-indicator.tw-font-size-6.tw-inline-block.tw-pd-x-05 > p");
-                if (live_indicator) {
-                    live = true;
-                }
-                else {
-                    live = false;
-                }
+                elements = {
+                    squad: {
+                        users: document.querySelector("div.tw-align-items-center.tw-flex.tw-flex-row.tw-mg-l-1.tw-pd-l-05 > div.tw-align-items-center.tw-flex.tw-mg-l-1"),
+                        user: function (index) {
+                            return document.querySelector("div:nth-child(" + index + ") > div > div.tw-absolute.tw-balloon.tw-balloon--down.tw-hide > div > div > div > div.tw-flex.tw-flex-column.tw-flex-grow-1.tw-pd-b-1.tw-pd-t-4.tw-pd-x-1 > div.tw-align-center.tw-flex.tw-flex-column.tw-justify-content-center > p > a");
+                        }
+                    },
+                    live: {
+                        title: document.querySelector("div.tw-flex.tw-justify-content-between.tw-mg-b-05 > h2"),
+                        streamer: document.querySelector("div.channel-header__banner-toggle.channel-header__user.channel-header__user--selected.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-pd-r-2.tw-pd-y-05 > div > h5")
+                    },
+                    video: {
+                        title: document.querySelector("div.tw-mg-b-05 > p"),
+                        streamer: document.querySelector("a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05 > div > h5"),
+                        time: document.querySelector("div.player-seek__time-container > span:nth-child(1)"),
+                        duration: document.querySelector("span.player-seek__time.player-seek__time--total")
+                    },
+                    clip: {
+                        title: document.querySelector("span.tw-ellipsis.tw-font-size-5.tw-strong"),
+                        streamer: document.querySelector("a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05 > div > h5")
+                    }
+                };
                 if (window.location.href !== oldURL) {
                     oldURL = window.location.href;
                     elapsed = Math.floor(Date.now() / 1000);
                 }
-                if (!(video && !isNaN(video.duration))) return [3 /*break*/, 8];
-                if (!live) {
-                    title = document.querySelector("#root > div > div.tw-flex.tw-flex-column.tw-flex-nowrap.tw-full-height > div > main > div.root-scrollable.scrollable-area.scrollable-area--suppress-scroll-x > div.simplebar-scroll-content > div > div > div.channel-root.tw-full-height > div.channel-root__player-container.tw-pd-b-2 > div > div.tw-c-background-base.tw-elevation-1 > div > div.tw-flex-grow-1.tw-full-height.tw-pd-x-1.tw-pd-y-1.video-description__info-container > div > div > div.video-info__container > div.tw-mg-b-05 > p");
-                    streamer = document.querySelector("#root > div > div.tw-flex.tw-flex-column.tw-flex-nowrap.tw-full-height > div > main > div:nth-child(1) > div > div.tw-flex.tw-flex-nowrap.tw-full-height.tw-justify-content-between.tw-mg-x-3 > div.tw-align-items-stretch.tw-flex.tw-flex-nowrap.tw-flex-shrink-0 > a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05 > div > h5");
-                    timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+                video = document.querySelector("div.player-video > video");
+                squad = document.querySelector("div.squad-stream-top-bar__container.tw-align-items-center.tw-c-background-base.tw-flex.tw-flex-shrink-0.tw-relative");
+                if (squad) {
+                    type = "squad";
+                }
+                else if (elements.live.title) {
+                    type = "live";
+                }
+                else if (elements.video.title) {
+                    type = "video";
+                }
+                else if (elements.clip.title) {
+                    type = "clip";
                 }
                 else {
-                    title = document.querySelector("#root > div > div.tw-flex.tw-flex-column.tw-flex-nowrap.tw-full-height > div > main > div.root-scrollable.scrollable-area.scrollable-area--suppress-scroll-x > div.simplebar-scroll-content > div > div > div.channel-root.tw-full-height > div.channel-root__player-container.tw-pd-b-2 > div > div.channel-info-bar.tw-border-b.tw-border-bottom-left-radius-large.tw-border-bottom-right-radius-large.tw-border-l.tw-border-r.tw-border-t.tw-flex.tw-flex-wrap.tw-justify-content-between.tw-lg-pd-b-0.tw-lg-pd-t-1.tw-lg-pd-x-1.tw-pd-1 > div > div > div > div.channel-info-bar__content-right.tw-full-width > div.tw-flex.tw-justify-content-between.tw-mg-b-05 > h2");
-                    streamer = document.querySelector("#root > div > div.tw-flex.tw-flex-column.tw-flex-nowrap.tw-full-height > div > main > div:nth-child(1) > div > div.tw-flex.tw-flex-nowrap.tw-full-height.tw-justify-content-between.tw-mg-x-3 > div.tw-align-items-stretch.tw-flex.tw-flex-nowrap.tw-flex-shrink-0 > div.channel-header__banner-toggle.channel-header__user.channel-header__user--selected.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-pd-r-2.tw-pd-y-05 > div > h5");
-                    timestamps = [elapsed, undefined];
+                    type = "browsing";
                 }
-                _a = {
-                    details: title.textContent,
-                    state: streamer.textContent,
-                    largeImageKey: "twitch",
-                    smallImageKey: video.paused ? "pause" : "play"
-                };
-                if (!video.paused) return [3 /*break*/, 2];
-                return [4 /*yield*/, strings];
+                if (logging) {
+                    console.log("Type: " + type);
+                    console.log("Video Time: " + (video ? video.currentTime : 0));
+                    console.log("Video Duration: " + (video ? video.duration : 0));
+                }
+                _c.label = 1;
             case 1:
-                _b = (_d.sent()).pause;
-                return [3 /*break*/, 4];
-            case 2: return [4 /*yield*/, strings];
-            case 3:
-                _b = (_d.sent()).play;
-                _d.label = 4;
-            case 4:
-                data = (_a.smallImageText = _b,
-                    _a.startTimestamp = timestamps[0],
-                    _a.endTimestamp = timestamps[1],
-                    _a);
-                if (!live) return [3 /*break*/, 6];
-                data.smallImageKey = "live";
-                _c = data;
+                _c.trys.push([1, 17, , 18]);
+                if (!(type === "squad")) return [3 /*break*/, 3];
+                users = [];
+                user_path = elements.squad.users;
+                for (index = 1; index <= user_path.children.length; index++) {
+                    users = users.concat(elements.squad.user(index).textContent);
+                }
+                title = "Squad Stream";
+                streamer = users.join(", ");
+                smallImageKey = "live";
                 return [4 /*yield*/, strings];
+            case 2:
+                smallImageText = (_c.sent()).live;
+                videoTime = elapsed;
+                videoDuration = undefined;
+                return [3 /*break*/, 16];
+            case 3:
+                if (!(type === "live")) return [3 /*break*/, 5];
+                title = elements.live.title.textContent;
+                streamer = elements.live.streamer.textContent;
+                smallImageKey = "live";
+                return [4 /*yield*/, strings];
+            case 4:
+                smallImageText = (_c.sent()).live;
+                videoTime = elapsed;
+                videoDuration = undefined;
+                return [3 /*break*/, 16];
             case 5:
-                _c.smallImageText = (_d.sent()).live;
-                return [3 /*break*/, 7];
+                if (!(type === "video")) return [3 /*break*/, 10];
+                title = elements.video.title.textContent;
+                streamer = elements.video.streamer.textContent;
+                smallImageKey = video.paused ? "pause" : "play";
+                if (!video.paused) return [3 /*break*/, 7];
+                return [4 /*yield*/, strings];
             case 6:
-                if (video.paused) {
+                _a = (_c.sent()).pause;
+                return [3 /*break*/, 9];
+            case 7: return [4 /*yield*/, strings];
+            case 8:
+                _a = (_c.sent()).play;
+                _c.label = 9;
+            case 9:
+                smallImageText = _a;
+                timestamps = getElementTimestamps(elements.video.time.textContent, elements.video.duration.textContent);
+                videoTime = timestamps[0];
+                videoDuration = timestamps[1];
+                return [3 /*break*/, 16];
+            case 10:
+                if (!(type === "clip")) return [3 /*break*/, 15];
+                title = elements.clip.title.textContent;
+                streamer = elements.clip.streamer.textContent;
+                smallImageKey = video.paused ? "pause" : "play";
+                if (!video.paused) return [3 /*break*/, 12];
+                return [4 /*yield*/, strings];
+            case 11:
+                _b = (_c.sent()).pause;
+                return [3 /*break*/, 14];
+            case 12: return [4 /*yield*/, strings];
+            case 13:
+                _b = (_c.sent()).play;
+                _c.label = 14;
+            case 14:
+                smallImageText = _b;
+                timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+                videoTime = timestamps[0];
+                videoDuration = timestamps[1];
+                return [3 /*break*/, 16];
+            case 15:
+                if (type === "browsing") {
+                    location = window.location.pathname;
+                    title = "Browsing";
+                    streamer = "Home";
+                    smallImageKey = undefined;
+                    smallImageText = undefined;
+                    videoTime = undefined;
+                    videoDuration = undefined;
+                    user = location.match("/(\\S*)/(\\S*)");
+                    user_header = document.querySelector("a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05");
+                    if (user && user_header) {
+                        title = "Browsing";
+                        streamer = user[1] + "'s " + user[2];
+                    }
+                    if (location.match("/directory")) {
+                        title = "Browsing";
+                        streamer = "All";
+                    }
+                    if (location.match("/directory/following")) {
+                        title = "Browsing Followers";
+                        streamer = "Overview";
+                    }
+                    if (location.match("/directory/following/live")) {
+                        streamer = "Channels";
+                    }
+                    if (location.match("/directory/following/hosts")) {
+                        streamer = "Hosts";
+                    }
+                    if (location.match("/directory/following/games")) {
+                        streamer = "Categories";
+                    }
+                    if (location.match("/directory/game")) {
+                        game = document.querySelector("div.tw-flex.tw-justify-content-between.tw-mg-b-1.tw-relative > h1").textContent;
+                        title = "Browsing Game";
+                        if (game)
+                            streamer = game;
+                    }
+                }
+                _c.label = 16;
+            case 16:
+                data = {
+                    details: title,
+                    state: streamer,
+                    largeImageKey: largeImage,
+                    smallImageKey: smallImageKey,
+                    smallImageText: smallImageText,
+                    startTimestamp: videoTime,
+                    endTimestamp: videoDuration
+                };
+                if (video && video.paused) {
                     delete data.startTimestamp;
                     delete data.endTimestamp;
                 }
-                _d.label = 7;
-            case 7:
                 if (title !== null && streamer !== null) {
-                    presence.setActivity(data, !video.paused);
+                    presence.setActivity(data, video ? !video.paused : true);
                     presence.setTrayTitle(data.title);
                 }
-                return [3 /*break*/, 9];
-            case 8:
-                hub();
-                _d.label = 9;
-            case 9: return [2 /*return*/];
+                return [3 /*break*/, 18];
+            case 17:
+                error_1 = _c.sent();
+                return [3 /*break*/, 18];
+            case 18: return [2 /*return*/];
         }
     });
 }); });
 presence.on("MediaKeys", function (key) {
     switch (key) {
         case "pause":
-            var pause = document.querySelector("#default-player > div > div.hover-display.pl-hover-transition-in > div > div.pl-controls-bottom.pl-flex.qa-controls-bottom > div.player-buttons-left > button");
+            var pause = document.querySelector("div.player-buttons-left > button");
             if (pause)
                 pause.click();
             break;
@@ -149,16 +263,21 @@ function hub() {
         state = "Categories";
     }
     if (location.match("/directory/game")) {
-        var game = document.querySelector("#root > div > div.tw-flex.tw-flex-column.tw-flex-nowrap.tw-full-height > div > main > div.root-scrollable.scrollable-area.scrollable-area--suppress-scroll-x > div.simplebar-scroll-content > div > div > div > div.directory-header-new__banner-cover.tw-overflow-hidden.tw-relative > div.tw-bottom-0.tw-left-0.tw-mg-b-2.tw-mg-t-3.tw-mg-x-3.tw-right-0 > div > div.tw-flex.tw-flex-column.tw-full-width.tw-justify-content-center > div.tw-flex.tw-justify-content-between.tw-mg-b-1.tw-relative > h1").textContent;
+        var game = document.querySelector("div.tw-flex.tw-justify-content-between.tw-mg-b-1.tw-relative > h1").textContent;
         details = "Browsing Game";
         if (game)
             state = game;
     }
+    /*
     var user = location.match("/(\\S*)/(\\S*)");
-    if (user) {
-        details = "Browsing";
-        state = user[1] + "'s " + user[2];
+    var user_header = document.querySelector(
+      "a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05"
+    );
+    if (user && user_header) {
+      details = "Browsing";
+      state = user[1] + "'s " + user[2];
     }
+    */
     presence.setActivity({
         details: details,
         state: state,
@@ -169,4 +288,20 @@ function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
+}
+function getElementTimestamps(audioTime, audioDuration) {
+    var splitAudioTime = audioTime.split(":").reverse();
+    var splitAudioDuration = audioDuration.split(":").reverse();
+    var parsedAudioTime = getTime(splitAudioTime);
+    var parsedAudioDuration = getTime(splitAudioDuration);
+    var startTime = Date.now();
+    var endTime = Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+    return [Math.floor(startTime / 1000), endTime];
+}
+function getTime(list) {
+    var ret = 0;
+    for (var index = list.length - 1; index >= 0; index--) {
+        ret += parseInt(list[index]) * Math.pow(60, index);
+    }
+    return ret;
 }
