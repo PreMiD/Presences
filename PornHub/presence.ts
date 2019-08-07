@@ -9,17 +9,15 @@ var presence = new Presence({
 
 presence.on("UpdateData", async () => {
   //* If user is on /view_video...
-  var video: HTMLVideoElement = document.querySelector(
-    ".mhp1138_videoWrapper video"
-  );
+  var video: HTMLVideoElement = document.querySelector(".mhp1138_videoWrapper video");
   if (video[0] !== null && !isNaN(video.duration)) {
     //* Get required tags
-    var title: any;
-    title = document.querySelector(".video-wrapper .title-container .title");
+    var title : any;
+      title =
+        document.querySelector(".video-wrapper .title-container .title");
 
-    var uploader = document.querySelector(
-        ".video-actions-container .video-info-row .usernameWrap a"
-      ),
+    var uploader =
+        document.querySelector(".video-actions-container .video-info-row .usernameWrap a"),
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
@@ -27,7 +25,7 @@ presence.on("UpdateData", async () => {
       presenceData: presenceData = {
         details: title.innerText,
         state: uploader.textContent,
-        largeImageKey: "lg",
+        largeImageKey: "ph3",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
           ? (await strings).pause
@@ -57,9 +55,7 @@ presence.on("UpdateData", async () => {
 presence.on("MediaKeys", (key: string) => {
   switch (key) {
     case "pause":
-      var video = document.querySelector(
-        ".mhp1138_videoWrapper video"
-      ) as HTMLVideoElement;
+      var video = document.querySelector(".mhp1138_videoWrapper video") as HTMLVideoElement;
       video.paused ? video.play() : video.pause();
       break;
   }

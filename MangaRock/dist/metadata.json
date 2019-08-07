@@ -4,11 +4,14 @@
       "id": "293828021134295040"
     },
     "service": "MangaRock",
-    "description": "Manga Rock is a online manga reading site.",
+    "description": {
+      "en": "Manga Rock is a online manga reading site.",
+      "ro": "Manga Rock este un site pentru citirea de manga."
+    },
     "url": "mangarock.com",
     "version": "2.0",
     "logo": "https://i.imgur.com/FjCCNhp.jpg",
     "thumbnail": "https://i.imgur.com/cefZ60h.png",
-    "color": "#28b6f6",
+    "color": "#f3c669",
     "tags": [ "manga", "anime" ]
   }
