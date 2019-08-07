@@ -4,7 +4,10 @@
     "id": "293828021134295040"
   },
   "service": "PornHub",
-  "description": "PornHub is the number one free porn site in the world with hundreds of thousands of free videos, including free HD and downloading capabilities.",
+  "description": {
+      "en": "PornHub is the number one free porn site in the world with hundreds of thousands of free videos, including free HD and downloading capabilities.",
+      "ro": "PornHub este cel mai bun site de filme porno din lume cu sute de mii de videoclipuri gratuite, incluzând HD gratuit și capabilitatea de descărcare."
+  },
   "url": [
     "www.pornhub.com",
     "pt.pornhub.com",

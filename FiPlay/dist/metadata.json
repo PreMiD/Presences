@@ -4,7 +4,10 @@
       "id": "293828021134295040"
     },
     "service": "FiPlay",
-    "description": "FiPlay is a online movie/series streaming site from Finland.",
+    "description": {
+      "en": "FiPlay is a online movie/series streaming site from Finland.",
+      "ro": "FiPlay este un site de streaming din Finlanda pentru filme/seriale."
+    },
     "url": "fiplay.net",
     "version": "2.0",
     "logo": "https://i.imgur.com/WpVz6hj.png",

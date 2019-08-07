@@ -4,7 +4,10 @@
       "id": "293828021134295040"
     },
     "service": "HBO GO (Romania)",
-    "description": "HBO GO is HBO’s streaming service offered a participating television providers that gives you unlimited access to HBO on your computer, mobile, tablet and other devices.",
+    "description": {
+      "en": "HBO GO is HBO’s streaming service offered a participating television providers that gives you unlimited access to HBO on your computer, mobile, tablet and other devices.",
+      "ro": "HBO GO este serviciul de streaming oferit de către HBO care îți dă acces nelimitat la HBO pe calculator, telefon, tabletă sau alte dispozitive."
+    },
     "url": "hbogo.ro",
     "version": "2.0",
     "logo": "https://i.imgur.com/TTHQtBH.png",

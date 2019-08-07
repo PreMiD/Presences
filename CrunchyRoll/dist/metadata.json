@@ -4,7 +4,10 @@
       "id": "293828021134295040"
     },
     "service": "Crunchyroll",
-    "description": "Crunchyroll is the world’s largest destination for anime and manga, boasting a global community of more than 45 million registered users and over 2 million subscribers.",
+    "description": {
+      "en": "Crunchyroll is the world’s largest destination for anime and manga, boasting a global community of more than 45 million registered users and over 2 million subscribers.",
+      "ro": "Crunchyroll este cel mai mare site din lume pentru anime și manga, având o comunitate de peste 45 milioane de oameni înregistrați și peste 2 miloande de abonați."
+    },
     "url": "www.crunchyroll.com",
     "version": "2.0",
     "logo": "https://i.imgur.com/JuZAJut.png",

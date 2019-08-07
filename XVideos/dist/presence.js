@@ -17,7 +17,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var video = document.querySelector(".video-bg-pic video");
     if (video[0] !== null && !isNaN(video.duration)) {
         var title;
-        title = document.querySelector(".video-page #main .page-title");
+        title =
+            document.querySelector(".video-page #main .page-title");
         var uploader = document.querySelector(".video-page #main .video-metadata .uploader-tag .name"), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), presenceData = {
             details: title.innerText,
             state: uploader.textContent,
