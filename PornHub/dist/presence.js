@@ -17,12 +17,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var video = document.querySelector(".mhp1138_videoWrapper video");
     if (video[0] !== null && !isNaN(video.duration)) {
         var title;
-        title =
-            document.querySelector(".video-wrapper .title-container .title");
+        title = document.querySelector(".video-wrapper .title-container .title");
         var uploader = document.querySelector(".video-actions-container .video-info-row .usernameWrap a"), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), presenceData = {
             details: title.innerText,
             state: uploader.textContent,
-            largeImageKey: "ph3",
+            largeImageKey: "lg",
             smallImageKey: video.paused ? "pause" : "play",
             smallImageText: video.paused
                 ? (yield strings).pause
