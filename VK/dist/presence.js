@@ -21,7 +21,6 @@ function getVKTrackTimeLeft() {
         timeLeft = playerDuration.innerText;
         playerDuration.click();
     }
-    //* Removing the `-` symbol.
     timeLeft = timeLeft.slice(1);
     return timeLeft.split(":");
 }
@@ -38,15 +37,12 @@ function getVKTrackTimePassed() {
     }
     return timePassed.split(":");
 }
-//* Returns VK track length.
 function getVKTrackLength() {
     var timeLeft, timePassed, overallTime;
     let playerDuration = document.querySelector(".audio_page_player_duration");
     timeLeft = getVKTrackTimeLeft();
     timePassed = getVKTrackTimePassed();
-    //* Summing minutes and seconds from time passed and left.
     overallTime = [(Number(timePassed[0]) + Number(timeLeft[0])), (Number(timePassed[1]) + Number(timeLeft[1]))];
-    //* Checking if overall time have more than 60 seconds and adding 1 minute if it does.
     if (Number(overallTime[1]) > 60) {
         var t1 = overallTime[0] + 1;
         var t2 = overallTime[1] - 60;
@@ -54,13 +50,14 @@ function getVKTrackLength() {
     }
     return overallTime;
 }
+var browsingTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if (!strings)
         strings = yield presence.getStrings({
             play: "presence.playback.playing",
             pause: "presence.playback.paused"
         });
-    if (window.location.href.match(/https:\/\/vk.com\/audios.*/)) {
+    if (document.location.pathname.startsWith("/audios")) {
         var title = document.querySelector(".audio_page_player_title_song").innerText, author = document.querySelector(".audio_page_player_title_performer a").innerText, isPlaying;
         if (document.querySelector(".audio_playing") == null) {
             isPlaying = true;
@@ -78,7 +75,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             startTimestamp: timestamps[0],
             endTimestamp: timestamps[1]
         };
-        presence.setActivity(presenceData, isPlaying);
+        presence.setActivity(presenceData, true);
     }
     else if (window.location.href.match(/https:\/\/vk.com\/.*?z=video.*/)) {
         var isPlaying;
@@ -94,7 +91,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             startTimestamp: timestamps[0],
             endTimestamp: timestamps[1]
         };
-        presence.setActivity(presenceData, isPlaying);
+        presence.setActivity(presenceData, true);
     }
     else if (document.querySelector(".page_name") !== null) {
         var page_title = document.querySelector(".page_name").innerText;
@@ -102,6 +99,15 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             details: "Browsing",
             state: page_title,
             largeImageKey: "vk_logo",
+            startTimestamp: browsingTimestamp
+        };
+        presence.setActivity(presenceData, true);
+    }
+    else if (document.location.pathname.startsWith("/feed")) {
+        var presenceData = {
+            details: "Browsing feed...",
+            largeImageKey: "vk_logo",
+            startTimestamp: browsingTimestamp
         };
         presence.setActivity(presenceData, true);
     }
@@ -122,9 +128,6 @@ presence.on("MediaKeys", key => {
             break;
     }
 });
-/**
- * Get Timestamps
- */
 function getTimestamps(currentTime, overallTime) {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - currentTime + overallTime;

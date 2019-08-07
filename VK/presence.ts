@@ -64,6 +64,8 @@ function getVKTrackLength(): Object {
 
 }
 
+var browsingTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 
     if (!strings)
@@ -72,7 +74,7 @@ presence.on("UpdateData", async () => {
             pause: "presence.playback.paused"
     });
 
-    if (window.location.href.match(/https:\/\/vk.com\/audios.*/)) {
+    if (document.location.pathname.startsWith("/audios")) {
 
         var title: string = (document.querySelector(".audio_page_player_title_song") as HTMLElement).innerText,
             author: string = (document.querySelector(".audio_page_player_title_performer a") as HTMLElement).innerText,
@@ -99,7 +101,7 @@ presence.on("UpdateData", async () => {
             endTimestamp: timestamps[1]
         };
 
-        presence.setActivity(presenceData, isPlaying);
+        presence.setActivity(presenceData, true);
     } else if (window.location.href.match(/https:\/\/vk.com\/.*?z=video.*/)) {
 
         var isPlaying: boolean;
@@ -126,15 +128,26 @@ presence.on("UpdateData", async () => {
             endTimestamp: timestamps[1]
         };
 
-        presence.setActivity(presenceData, isPlaying);
+        presence.setActivity(presenceData, true);
 
     } else if (document.querySelector(".page_name") !== null) {
 
         var page_title = (document.querySelector(".page_name") as HTMLElement).innerText
+
         var presenceData: presenceData = {
             details: "Browsing",
             state: page_title,
             largeImageKey: "vk_logo",
+            startTimestamp: browsingTimestamp
+        };
+
+        presence.setActivity(presenceData, true);
+
+    } else if (document.location.pathname.startsWith("/feed")) {
+        var presenceData: presenceData = {
+            details: "Browsing feed...",
+            largeImageKey: "vk_logo",
+            startTimestamp: browsingTimestamp
         };
 
         presence.setActivity(presenceData, true);
