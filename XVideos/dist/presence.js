@@ -22,7 +22,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         var uploader = document.querySelector(".video-page #main .video-metadata .uploader-tag .name"), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), presenceData = {
             details: title.innerText,
             state: uploader.textContent,
-            largeImageKey: "xv",
+            largeImageKey: "lg",
             smallImageKey: video.paused ? "pause" : "play",
             smallImageText: video.paused
                 ? (yield strings).pause
