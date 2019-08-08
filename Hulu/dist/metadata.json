@@ -6,6 +6,7 @@
   "service": "Hulu",
   "description": {
       "en": "Watch current hit shows, classic series, and acclaimed movies instantly with Hulu.",
+      "ro": "Vizionează spectacolele de succes, seriale clasice și filme apreciate instantaneu cu Hulu.",
       "pt_BR": "Assista shows de sucesso, séries clássicas e filmes aclamados instanteamente com o Hulu."
 },
   "url": "www.hulu.com",

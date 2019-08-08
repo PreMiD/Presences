@@ -6,6 +6,7 @@
   "service": "SoundCloud",
   "description": {
     "en": "SoundCloud is a music and podcast streaming platform that lets you listen to millions of songs from around the world, or upload your own.",
+    "ro": "SoundCloud este o platformă pentru streaming de muzică și podcast-uri, care te lasă să asculți milioane de melodii din toată lumea, sau încarc-o pe a ta.",
     "pt_BR": "SoundCloud é uma plataforma de streaming de músicas e podcasts que te permite ouvir milhões de músicas do mundo todo, ou enviar suas próprias."
   },
   "url": "soundcloud.com",

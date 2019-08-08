@@ -6,6 +6,7 @@
   "service": "MyAnimeList",
   "description": {
     "en": "The world's most active online anime and manga community and database. Join the online community, create your anime and manga list and so much more!",
+    "ro": "Cel mai activ anime online, comunitate manga și bază de date. Alătură-te comunității, creează-ți anime-ul tău și lista manga și multe altele!",
     "pt_BR": "A comunidade e banco de dados de anime e mangá online mais ativo do mundo. Se junte a comunidade, crie sua lista de mangá e anime e muito mais!"
   },
   "url": "myanimelist.net",

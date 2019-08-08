@@ -6,6 +6,7 @@
 	"service": "Netflix",
 	"description": {
 		"en": "Netflix is the world's leading internet entertainment service with 139 million paid memberships in over 190 countries enjoying TV series, documentaries and feature films across a wide variety of genres and languages.",
+		"ro": "Netflix este cel mai mare serviciu de divertisment pe internet din lume, cu 139 de milioane de abonamente plătite în peste 190 de țări care se bucură de seriale TV, documentare și lungmetraje într-o mare varietate de genuri și limbi.",
 		"pt_BR": "Neflix é líder mundial em entretenimento na internet com 139 milhões de assinaturas pagas em mais de 190 países contendo séries de TV, documentários e filmes através de uma ampla variedade de gêneros e línguas."
 	},
 	"url": "www.netflix.com",
