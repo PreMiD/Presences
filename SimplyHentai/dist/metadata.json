@@ -1,13 +1,14 @@
 {
     "author": {
-      "name": "TheDrop.",
-      "id": "293828021134295040"
+        "name": "TheDrop.",
+        "id": "293828021134295040"
     },
     "service": "Simply Hentai",
     "description": {
-      "en": "Simply Hentai is a free hosting service for hentai mangas.",
-      "ro": "Simply Hentai este un serviciu gratuit de hostare pentru manga hentai.",
-      "pt_BR": "Simply Hentai é um serviço de hospedagem gratuito para mangás de hentai."
+        "en": "Simply Hentai is a free hosting service for hentai mangas.",
+        "ro": "Simply Hentai este un serviciu gratuit de hostare pentru manga hentai.",
+        "pt_BR": "Simply Hentai é um serviço de hospedagem gratuito para mangás de hentai.",
+        "fr": "Simply Hentai est un service d'hébergement de mangas hentai gratuit."
     },
     "url": "www.simply-hentai.com",
     "version": "2.0",
@@ -15,4 +16,4 @@
     "thumbnail": "https://i.imgur.com/9PuX1Jf.png",
     "color": "#f3c669",
     "tags": [ "manga", "hentai", "nsfw" ]
-  }
+}

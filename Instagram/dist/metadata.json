@@ -1,18 +1,19 @@
 {
-  "author": {
-    "name": "CRUGG",
-    "id": "228965621478588416"
-  },
-  "service": "Instagram",
-  "description": {
-    "en": "A simple, fun & creative way to capture, edit & share photos, videos & messages with friends & family.",
-    "ro": "O modalitate simplă, distractivă și creativă de a captura, edita și partaja poze, videoclipuri și mesaje cu prietenii și familia.",
-    "pt_BR": "Uma simples, divertida e criativa forma de capturar, editar e compartilhar fotos, vídeos e mensagens com amigos e família."
-  },
-  "url": "www.instagram.com",
-  "version": "2.0",
-  "logo": "https://crugg.de/premid/iglogo.png",
-  "thumbnail": "https://crugg.de/premid/igbanner.png",
-  "color": "#E1306C",
-  "tags": ["photos", "images", "media"]
+    "author": {
+        "name": "CRUGG",
+        "id": "228965621478588416"
+    },
+    "service": "Instagram",
+    "description": {
+        "en": "A simple, fun & creative way to capture, edit & share photos, videos & messages with friends & family.",
+        "ro": "O modalitate simplă, distractivă și creativă de a captura, edita și partaja poze, videoclipuri și mesaje cu prietenii și familia.",
+        "pt_BR": "Uma simples, divertida e criativa forma de capturar, editar e compartilhar fotos, vídeos e mensagens com amigos e família.",
+        "fr": "Une simple, divertissante et créative forme de capturer, editer et partager des photos, vidéos et messages avec des amis ou famille."
+    },
+    "url": "www.instagram.com",
+    "version": "2.0",
+    "logo": "https://crugg.de/premid/iglogo.png",
+    "thumbnail": "https://crugg.de/premid/igbanner.png",
+    "color": "#E1306C",
+    "tags": [ "photos", "images", "media" ]
 }

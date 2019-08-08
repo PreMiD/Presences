@@ -1,13 +1,14 @@
 {
     "author": {
-      "name": "TheDrop.",
-      "id": "293828021134295040"
+        "name": "TheDrop.",
+        "id": "293828021134295040"
     },
     "service": "XVideos",
     "description": {
-      "en": "XVideos.com is a free hosting service for porn videos.",
-      "ro": "XVideos.com este un serviciu gratuit de hostare pentru filme porno.",
-      "pt_BR" : "XVideos.com é um serviço gratuito de hospedagem para vídeos pornô."
+        "en": "XVideos is a free hosting service for porn videos.",
+        "ro": "XVideos este un serviciu gratuit de hostare pentru filme porno.",
+        "pt_BR": "XVideos é um serviço gratuito de hospedagem para vídeos pornô.",
+        "fr": "XVideos est un service d'hébergement de vidéos pornographiques gratuit."
     },
     "url": "www.xvideos.com",
     "version": "2.0",
@@ -15,4 +16,4 @@
     "thumbnail": "https://i.imgur.com/RVcVhQy.png",
     "color": "#d90e15",
     "tags": [ "video", "nsfw" ]
-  }
+}
