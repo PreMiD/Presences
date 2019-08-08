@@ -43,19 +43,18 @@ var strings = presence.getStrings({
     pause: "presence.playback.paused"
 });
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
-    var player, player_button, player_button_aria, paused, title, author, audioTime, audioDuration, timestamps, data, _a, _b;
+    var player, player_button, paused, title, author, audioTime, audioDuration, timestamps, data, _a, _b;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
-                player = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible.m-googleCastActive > section");
+                player = document.querySelector(".playControls__elements");
                 if (!player) return [3 /*break*/, 5];
-                player_button = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible.m-googleCastActive > section > div > div.playControls__elements > button.playControl.sc-ir.playControls__control.playControls__play");
-                player_button_aria = player_button.getAttribute("aria-label");
-                paused = player_button_aria === "Play current";
-                title = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible.m-googleCastActive > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > div > a > span:nth-child(2)").textContent;
-                author = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible.m-googleCastActive > section > div > div.playControls__elements > div.playControls__soundBadge > div > div.playbackSoundBadge__titleContextContainer > a").textContent;
-                audioTime = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible.m-googleCastActive > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__timePassed > span:nth-child(2)").textContent;
-                audioDuration = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible.m-googleCastActive > section > div > div.playControls__elements > div.playControls__timeline > div > div.playbackTimeline__duration > span:nth-child(2)").textContent;
+                player_button = document.querySelector(".playControls__play");
+                paused = player_button.classList.contains("playing") === false;
+                title = document.querySelector(".playbackSoundBadge__titleContextContainer > div span:nth-child(2)").textContent;
+                author = document.querySelector(".playbackSoundBadge__titleContextContainer > a").textContent;
+                audioTime = document.querySelector(".playbackTimeline__timePassed span:nth-child(2)").textContent;
+                audioDuration = document.querySelector(".playbackTimeline__duration span:nth-child(2)").textContent;
                 timestamps = getTimestamps(audioTime, audioDuration);
                 _a = {
                     details: title,
@@ -95,15 +94,15 @@ presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, 
 presence.on("MediaKeys", function (key) {
     switch (key) {
         case "pause":
-            var pause_button = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible.m-googleCastActive > section > div > div.playControls__elements > button.playControl.sc-ir.playControls__control.playControls__play");
+            var pause_button = document.querySelector(".playControls__play");
             pause_button.click();
             break;
         case "nextTrack":
-            var next_button = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible.m-googleCastActive > section > div > div.playControls__elements > button.skipControl.sc-ir.playControls__control.playControls__next.skipControl__next");
+            var next_button = document.querySelector(".skipControl__next");
             next_button.click();
             break;
         case "previousTrack":
-            var prev_button = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible.m-googleCastActive > section > div > div.playControls__elements > button.skipControl.sc-ir.playControls__control.playControls__prev.skipControl__previous");
+            var prev_button = document.querySelector(".skipControl__previous");
             prev_button.click();
             break;
     }
