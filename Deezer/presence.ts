@@ -14,11 +14,6 @@ presence.on("UpdateData", async () => {
   var player = document.querySelector(".page-player");
 
   if (player) {
-    var player_button = document.querySelector(
-      ".svg-icon-group-item:nth-child(3)"
-    );
-    var player_button_aria = player_button.getAttribute("aria-label");
-
     var paused =
       document.querySelector(
         ".svg-icon-group-item:nth-child(3) .svg-icon-pause"
