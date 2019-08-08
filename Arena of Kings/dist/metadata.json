@@ -4,7 +4,10 @@
     "id": "223238938716798978"
   },
   "service": "Arena of Kings",
-  "description": "Arena of Kings is a next-gen fast-paced PvP Arena Game played in the browser. Join forces with heroes to claim the throne!",
+  "description": {
+      "en": "Arena of Kings is a next-gen fast-paced PvP Arena Game played in the browser. Join forces with heroes to claim the throne!",
+      "pt_BR": "Arena of Kings é um jogo de Arena PvP da próxima geração com ritmo acelerado para jogar no navegador. Junte forças com heróis reivindicar o trono!"
+},
   "version": "2.0",
   "url": "arenaofkings.com",
   "logo": "https://i.imgur.com/939UKF6.png",

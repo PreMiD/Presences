@@ -4,7 +4,10 @@
 		"id": "200761917189521409"
 	},
 	"service": "Dream Animes",
-	"description": "Dream Animes is a brazilian website to provide a place to watch free anime content, both online and offline, and without any abusive ads.",
+	"description": {
+         "en": "Dream Animes is a brazilian website to provide a place to watch free anime content, both online and offline and without any abusive ads.",
+         "pt_BR": "Dream Animes é um website brasileiro que fornece um lugar para assistir conteúdos de anime gratuitamente, tanto online e offline, e sem anúncios abusivos."
+},
 	"url": "www.dreamanimes.com.br",
 	"version": "2.0",
 	"logo": "https://i.imgur.com/iwQt7Zu.png",

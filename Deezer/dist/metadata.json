@@ -4,7 +4,10 @@
     "id": "163319338403627008"
   },
   "service": "Deezer",
-  "description": "Listen to all the songs you love anytime, anywhere.",
+  "description": {
+      "en": "Listen to all the songs you love anytime, anywhere.",
+      "pt_BR": "Escute todas as músicas que você ama a qualquer hora, em qualquer lugar."
+},
   "url": "www.deezer.com",
   "version": "1.0",
   "logo": "https://i.imgur.com/DBj8DXy.png",

@@ -6,7 +6,8 @@
     "service": "RedTube",
     "description": {
       "en": "RedTube is a premier adult video sharing platform.",
-      "ro": "RedTube este o platformă pentru partajarea videoclipurilor de adulți."
+      "ro": "RedTube este o platformă pentru partajarea videoclipurilor de adulți.",
+      "pt_BR": "RedTube é uma plataforma de compartilhamento de vídeos adultos de primeira linha."
     },
     "url": [ "www.redtube.com", "de.redtube.com", "pl.redtube.com", "redtube.com.br", "es.redtube.com", "it.redtube.com", "ru.redtube.com", "jp.redtube.com" ],
     "version": "2.0",

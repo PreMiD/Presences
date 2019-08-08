@@ -4,7 +4,10 @@
 		"id": "223238938716798978"
 	},
 	"service": "Netflix",
-	"description": "Netflix is the world's leading internet entertainment service with 139 million paid memberships in over 190 countries enjoying TV series, documentaries and feature films across a wide variety of genres and languages.",
+	"description": {
+		"en": "Netflix is the world's leading internet entertainment service with 139 million paid memberships in over 190 countries enjoying TV series, documentaries and feature films across a wide variety of genres and languages.",
+		"pt_BR": "Neflix é líder mundial em entretenimento na internet com 139 milhões de assinaturas pagas em mais de 190 países contendo séries de TV, documentários e filmes através de uma ampla variedade de gêneros e línguas."
+	},
 	"url": "www.netflix.com",
 	"version": "2.0",
 	"logo": "https://svgur.com/i/BjZ.svg",

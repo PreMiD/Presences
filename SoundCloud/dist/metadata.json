@@ -4,7 +4,10 @@
     "id": "163319338403627008"
   },
   "service": "SoundCloud",
-  "description": "SoundCloud is a music and podcast streaming platform that lets you listen to millions of songs from around the world, or upload your own.",
+  "description": {
+    "en": "SoundCloud is a music and podcast streaming platform that lets you listen to millions of songs from around the world, or upload your own.",
+    "pt_BR": "SoundCloud é uma plataforma de streaming de músicas e podcasts que te permite ouvir milhões de músicas do mundo todo, ou enviar suas próprias."
+  },
   "url": "soundcloud.com",
   "version": "1.0",
   "logo": "https://i.imgur.com/KgOkfIz.png",

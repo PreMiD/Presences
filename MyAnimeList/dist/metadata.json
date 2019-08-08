@@ -4,7 +4,10 @@
     "id": "228965621478588416"
   },
   "service": "MyAnimeList",
-  "description": "The world's most active online anime and manga community and database. Join the online community, create your anime and manga list and so much more!",
+  "description": {
+    "en": "The world's most active online anime and manga community and database. Join the online community, create your anime and manga list and so much more!",
+    "pt_BR": "A comunidade e banco de dados de anime e mangá online mais ativo do mundo. Se junte a comunidade, crie sua lista de mangá e anime e muito mais!"
+  },
   "url": "myanimelist.net",
   "version": "2.0",
   "logo": "https://crugg.de/premid/mallogo.png",
