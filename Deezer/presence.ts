@@ -11,19 +11,20 @@ var strings = presence.getStrings({
 var live, prevLive, elapsed;
 
 presence.on("UpdateData", async () => {
-  var player = document.querySelector("#page_player > div");
+  var player = document.querySelector(".page-player");
 
   if (player) {
     var player_button = document.querySelector(
-      "#page_player > div > div.player-controls > ul > li:nth-child(3) > button"
+      ".svg-icon-group-item:nth-child(3)"
     );
     var player_button_aria = player_button.getAttribute("aria-label");
 
-    var paused = player_button_aria === "Play";
+    var paused =
+      document.querySelector(
+        ".svg-icon-group-item:nth-child(3) .svg-icon-pause"
+      ) === null;
 
-    var on_air = document.querySelector(
-      "#page_player > div > div.player-track > div > div.track-heading > span"
-    );
+    var on_air = document.querySelector(".track-label");
 
     if (on_air && on_air.textContent == "ON AIR") {
       live = true;
@@ -36,23 +37,17 @@ presence.on("UpdateData", async () => {
     }
 
     if (!live) {
-      var title = document.querySelector(
-        "#page_player > div > div.player-track > div > div.track-heading > div.track-title > div > div > div > a:nth-child(1)"
-      ).textContent;
-      var author = document.querySelector(
-        "#page_player > div > div.player-track > div > div.track-heading > div.track-title > div > div > div > a:nth-child(2)"
-      ).textContent;
-      var audioTime = document.querySelector(
-        "#page_player > div > div.player-track > div > div.track-seekbar > div > div.slider-counter.slider-counter-current"
-      ).textContent;
-      var audioDuration = document.querySelector(
-        "#page_player > div > div.player-track > div > div.track-seekbar > div > div.slider-counter.slider-counter-max"
-      ).textContent;
+      var title = document.querySelector(".track-link:nth-child(1)")
+        .textContent;
+      var author = document.querySelector(".track-link:nth-child(2)")
+        .textContent;
+      var audioTime = document.querySelector(".slider-counter-current")
+        .textContent;
+      var audioDuration = document.querySelector(".slider-counter-max")
+        .textContent;
       var timestamps = getTimestamps(audioTime, audioDuration);
     } else {
-      var title = document.querySelector(
-        "#page_player > div > div.player-track > div > div.track-heading > div.track-title > div > div > div"
-      ).textContent;
+      var title = document.querySelector(".marquee-content").textContent;
       var author = "On Air";
       var timestamps: number[] = [elapsed, undefined];
     }
@@ -81,36 +76,30 @@ presence.on("UpdateData", async () => {
       var details = "Browsing...";
       var state = undefined;
 
-      var playlist = document.querySelector(
-        "#page_naboo_playlist > div.catalog-content > div > div.catalog-header > div.header-info.has-info-list > h1"
-      );
+      var header = document.querySelector("div.header-infos.ellipsis > h1");
+
+      var playlist = document.querySelector("#page_naboo_playlist");
       if (playlist) {
-        details = "Viewing " + playlist.textContent;
-        state = "Playlist";
+        details = "Viewing Playlist";
       }
 
-      var album = document.querySelector(
-        "#page_naboo_album > div:nth-child(1) > div > div.catalog-header > div.header-info.has-info-list > h1"
-      );
+      var album = document.querySelector("#page_naboo_album");
       if (album) {
-        details = "Viewing " + album.textContent;
-        state = "Album";
+        details = "Viewing Album";
       }
 
-      var artist = document.querySelector(
-        "#page_naboo_artist > div.catalog-header > div > div.catalog-header-infos > div.header-infos.ellipsis > h1"
-      );
+      var artist = document.querySelector("#page_naboo_artist");
       if (artist) {
-        details = "Viewing " + artist.textContent;
-        state = "Artist";
+        details = "Viewing Artist";
       }
 
-      var podcast = document.querySelector(
-        "#page_naboo_show > div.catalog-content > div > div.catalog-header > div.header-info > h1"
-      );
+      var podcast = document.querySelector("#page_naboo_podcast");
       if (podcast) {
-        details = "Viewing " + podcast.textContent;
-        state = "Podcast";
+        details = "Viewing Podcast";
+      }
+
+      if (header) {
+        state = header.textContent;
       }
 
       presence.setActivity(
@@ -133,19 +122,19 @@ presence.on("MediaKeys", (key: string) => {
   switch (key) {
     case "pause":
       var pause_button = document.querySelector(
-        "#page_player > div > div.player-controls > ul > li:nth-child(3) > button"
+        ".svg-icon-group-item:nth-child(3)"
       );
       pause_button.click();
       break;
     case "nextTrack":
       var next_button = document.querySelector(
-        "#page_player > div > div.player-controls > ul > li:nth-child(5) > div > button"
+        ".svg-icon-group-item:nth-child(5)"
       );
       next_button.click();
       break;
     case "previousTrack":
       var prev_button = document.querySelector(
-        "#page_player > div > div.player-controls > ul > li:nth-child(1) > div > button"
+        ".svg-icon-group-item:nth-child(1)"
       );
       prev_button.click();
       break;

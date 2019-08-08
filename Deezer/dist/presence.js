@@ -45,16 +45,16 @@ var strings = presence.getStrings({
 });
 var live, prevLive, elapsed;
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
-    var player, player_button, player_button_aria, paused, on_air, title, author, audioTime, audioDuration, timestamps, title, author, timestamps, data, _a, _b, _c, details, state, playlist, album, artist, podcast;
+    var player, player_button, player_button_aria, paused, on_air, title, author, audioTime, audioDuration, timestamps, title, author, timestamps, data, _a, _b, _c, details, state, header, playlist, album, artist, podcast;
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0:
-                player = document.querySelector("#page_player > div");
+                player = document.querySelector(".page-player");
                 if (!player) return [3 /*break*/, 7];
-                player_button = document.querySelector("#page_player > div > div.player-controls > ul > li:nth-child(3) > button");
+                player_button = document.querySelector(".svg-icon-group-item:nth-child(3)");
                 player_button_aria = player_button.getAttribute("aria-label");
-                paused = player_button_aria === "Play";
-                on_air = document.querySelector("#page_player > div > div.player-track > div > div.track-heading > span");
+                paused = document.querySelector(".svg-icon-group-item:nth-child(3) .svg-icon-pause") === null;
+                on_air = document.querySelector(".track-label");
                 if (on_air && on_air.textContent == "ON AIR") {
                     live = true;
                     if (prevLive !== live) {
@@ -66,14 +66,18 @@ presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, 
                     live = false;
                 }
                 if (!live) {
-                    title = document.querySelector("#page_player > div > div.player-track > div > div.track-heading > div.track-title > div > div > div > a:nth-child(1)").textContent;
-                    author = document.querySelector("#page_player > div > div.player-track > div > div.track-heading > div.track-title > div > div > div > a:nth-child(2)").textContent;
-                    audioTime = document.querySelector("#page_player > div > div.player-track > div > div.track-seekbar > div > div.slider-counter.slider-counter-current").textContent;
-                    audioDuration = document.querySelector("#page_player > div > div.player-track > div > div.track-seekbar > div > div.slider-counter.slider-counter-max").textContent;
+                    title = document.querySelector(".track-link:nth-child(1)")
+                        .textContent;
+                    author = document.querySelector(".track-link:nth-child(2)")
+                        .textContent;
+                    audioTime = document.querySelector(".slider-counter-current")
+                        .textContent;
+                    audioDuration = document.querySelector(".slider-counter-max")
+                        .textContent;
                     timestamps = getTimestamps(audioTime, audioDuration);
                 }
                 else {
-                    title = document.querySelector("#page_player > div > div.player-track > div > div.track-heading > div.track-title > div > div > div").textContent;
+                    title = document.querySelector(".marquee-content").textContent;
                     author = "On Air";
                     timestamps = [elapsed, undefined];
                 }
@@ -112,25 +116,25 @@ presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, 
                 if (timestamps[0] === timestamps[1]) {
                     details = "Browsing...";
                     state = undefined;
-                    playlist = document.querySelector("#page_naboo_playlist > div.catalog-content > div > div.catalog-header > div.header-info.has-info-list > h1");
+                    header = document.querySelector("div.header-infos.ellipsis > h1");
+                    playlist = document.querySelector("#page_naboo_playlist");
                     if (playlist) {
-                        details = "Viewing " + playlist.textContent;
-                        state = "Playlist";
+                        details = "Viewing Playlist";
                     }
-                    album = document.querySelector("#page_naboo_album > div:nth-child(1) > div > div.catalog-header > div.header-info.has-info-list > h1");
+                    album = document.querySelector("#page_naboo_album");
                     if (album) {
-                        details = "Viewing " + album.textContent;
-                        state = "Album";
+                        details = "Viewing Album";
                     }
-                    artist = document.querySelector("#page_naboo_artist > div.catalog-header > div > div.catalog-header-infos > div.header-infos.ellipsis > h1");
+                    artist = document.querySelector("#page_naboo_artist");
                     if (artist) {
-                        details = "Viewing " + artist.textContent;
-                        state = "Artist";
+                        details = "Viewing Artist";
                     }
-                    podcast = document.querySelector("#page_naboo_show > div.catalog-content > div > div.catalog-header > div.header-info > h1");
+                    podcast = document.querySelector("#page_naboo_podcast");
                     if (podcast) {
-                        details = "Viewing " + podcast.textContent;
-                        state = "Podcast";
+                        details = "Viewing Podcast";
+                    }
+                    if (header) {
+                        state = header.textContent;
                     }
                     presence.setActivity({
                         details: details,
@@ -152,15 +156,15 @@ presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, 
 presence.on("MediaKeys", function (key) {
     switch (key) {
         case "pause":
-            var pause_button = document.querySelector("#page_player > div > div.player-controls > ul > li:nth-child(3) > button");
+            var pause_button = document.querySelector(".svg-icon-group-item:nth-child(3)");
             pause_button.click();
             break;
         case "nextTrack":
-            var next_button = document.querySelector("#page_player > div > div.player-controls > ul > li:nth-child(5) > div > button");
+            var next_button = document.querySelector(".svg-icon-group-item:nth-child(5)");
             next_button.click();
             break;
         case "previousTrack":
-            var prev_button = document.querySelector("#page_player > div > div.player-controls > ul > li:nth-child(1) > div > button");
+            var prev_button = document.querySelector(".svg-icon-group-item:nth-child(1)");
             prev_button.click();
             break;
     }
