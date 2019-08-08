@@ -4,7 +4,10 @@
     "id": "163319338403627008"
   },
   "service": "Mixer",
-  "description": "Mixer is a next-generation live streaming platform for gamers that lets viewers participate in the gameplay itself.",
+  "description": {
+    "en" : "Mixer is a next-generation live streaming platform for gamers that lets viewers participate in the gameplay itself.",
+    "pt-BR" : "Mixer é uma plataforma de streaming ao vivo da última geração para gamers que permite os espectadores participarem na gameplay do jogo."
+  },
   "url": "mixer.com",
   "version": "1.0",
   "logo": "https://i.imgur.com/G358RGW.jpg",

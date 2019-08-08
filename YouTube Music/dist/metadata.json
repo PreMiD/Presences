@@ -4,7 +4,10 @@
     "id": "223238938716798978"
   },
   "service": "YouTube Music",
-  "description": "A new music service with official albums, singles, videos, remixes, live performances and more for Android, iOS and desktop. It's all here.",
+  "description": {
+    "en" : "A new music service with official albums, singles, videos, remixes, live performances and more for Android, iOS and desktop. It's all here.",
+    "pt-BR" : "Um novo serviço de música com albuns oficiais, singles, vídeos, remixes, apresentações ao vivo e mais para Android, iOS e desktop, está tudo aqui."
+  },
   "url": "music.youtube.com",
   "version": "2.0",
   "logo": "https://rainnews.com/wp-content/uploads/2018/05/youtube-music-logo.png",
