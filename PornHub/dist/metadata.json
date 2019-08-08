@@ -1,44 +1,44 @@
 {
-  "author": {
-    "name": "TheDrop.",
-    "id": "293828021134295040"
-  },
-  "service": "PornHub",
-  "description": {
-      "en": "PornHub is the number one free porn site in the world with hundreds of thousands of free videos, including free HD and downloading capabilities.",
-      "ro": "PornHub este cel mai bun site de filme porno din lume cu sute de mii de videoclipuri gratuite, incluzând HD gratuit și capabilitatea de descărcare.",
-      "pt_BR" : "PornHub é o site pornô gratuito número um no mundo com centenas de milhares de vídeos gratuitos, incluindo opção HD gratuita e download de vídeos."
-  },
-  "url": [
-    "www.pornhub.com",
-    "pt.pornhub.com",
-    "fr.pornhub.com",
-    "rt.pornhub.com",
-    "it.pornhub.com",
-    "jp.pornhub.com",
-    "es.pornhub.com",
-    "de.pornhub.com",
-    "cz.pornhub.com",
-    "nl.pornhub.com",
-    "www.pornhubpremium.com",
-    "es.pornhubpremium.com",
-    "ru.pornhubpremium.com",
-    "fr.pornhubpremium.com",
-    "pl.pornhubpremium.com",
-    "rt.pornhubpremium.com",
-    "nl.pornhubpremium.com",
-    "it.pornhubpremium.com",
-    "jp.pornhubpremium.com",
-    "pt.pornhubpremium.com",
-    "de.pornhubpremium.com",
-    "cz.pornhubpremium.com",
-    "ma.pornhubpremium.com",
-    "cn.pornhubpremium.com"
-    
-  ],
-  "version": "2.0",
-  "logo": "https://i.imgur.com/ey3BiTYl.jpg",
-  "thumbnail": "https://i.imgur.com/HpbdwCv.png",
-  "color": "#ff9801",
-  "tags": ["video", "nsfw"]
+    "author": {
+        "name": "TheDrop.",
+        "id": "293828021134295040"
+    },
+    "service": "PornHub",
+    "description": {
+        "en": "PornHub is the number one free porn site in the world with hundreds of thousands of free videos, including free HD and downloading capabilities.",
+        "ro": "PornHub este cel mai bun site de filme porno din lume cu sute de mii de videoclipuri gratuite, incluzând HD gratuit și capabilitatea de descărcare.",
+        "pt_BR": "PornHub é o site pornô gratuito número um no mundo com centenas de milhares de vídeos gratuitos, incluindo opção HD gratuita e download de vídeos.",
+        "fr": "PornHub est le site numéro un de pornographie dans le monde avec des centaines de milliers de vidéos gratuites, incluant l'option HD gratuite et la possibilité de télécharger les vidéos."
+    },
+    "url": [
+        "www.pornhub.com",
+        "pt.pornhub.com",
+        "fr.pornhub.com",
+        "rt.pornhub.com",
+        "it.pornhub.com",
+        "jp.pornhub.com",
+        "es.pornhub.com",
+        "de.pornhub.com",
+        "cz.pornhub.com",
+        "nl.pornhub.com",
+        "www.pornhubpremium.com",
+        "es.pornhubpremium.com",
+        "ru.pornhubpremium.com",
+        "fr.pornhubpremium.com",
+        "pl.pornhubpremium.com",
+        "rt.pornhubpremium.com",
+        "nl.pornhubpremium.com",
+        "it.pornhubpremium.com",
+        "jp.pornhubpremium.com",
+        "pt.pornhubpremium.com",
+        "de.pornhubpremium.com",
+        "cz.pornhubpremium.com",
+        "ma.pornhubpremium.com",
+        "cn.pornhubpremium.com"
+    ],
+    "version": "2.0",
+    "logo": "https://i.imgur.com/ey3BiTYl.jpg",
+    "thumbnail": "https://i.imgur.com/HpbdwCv.png",
+    "color": "#ff9801",
+    "tags": [ "video", "nsfw" ]
 }
