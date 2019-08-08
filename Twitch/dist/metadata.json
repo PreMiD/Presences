@@ -4,7 +4,10 @@
     "id": "163319338403627008"
   },
   "service": "Twitch",
-  "description": "Twitch is the world's leading live streaming platform for gamers and the things we love. Watch and chat now with millions of other fans from around the world.",
+  "description": {
+    "en": "Twitch is the world's leading live streaming platform for gamers and the things we love. Watch and chat now with millions of other fans from around the world.",
+    "pt_BR": "Twitch é a plataforma líder mundial em streaming para gamers e coisas que amamos. Assista e converse agora com milhões de outros fãs ao redor do mundo."
+  },
   "url": "www.twitch.tv",
   "version": "1.0",
   "logo": "https://i.imgur.com/3BrZVTM.png",
