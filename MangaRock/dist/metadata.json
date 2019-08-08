@@ -7,7 +7,7 @@
     "description": {
       "en": "Manga Rock is a online manga reading site.",
       "ro": "Manga Rock este un site pentru citirea de manga.",
-      "pt-BR" : "Manga Rock é um site de leitura de manga online."
+      "pt_BR" : "Manga Rock é um site de leitura de manga online."
     },
     "url": "mangarock.com",
     "version": "2.0",
