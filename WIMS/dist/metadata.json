@@ -4,7 +4,10 @@
 		"id": "123859829453357056"
 	},
 	"service": "WIMS (default theme)",
-	"description": "WIMS is a multipurpose server-project designed for mathematical exercises. Get it now to show people how hard you're working on your assignments.",
+	"description": {
+		"en": "WIMS is a multipurpose server-project designed for mathematical exercises. Get it now to show people how hard you're working on your assignments.",
+		"pt_BR": "WIMS é um servidor de projeto de propósito geral projetado para exercícios matemáticos. Obtenha-o agora para mostrar para as pessoas o quão difícil você está trabalhando em sua tarefa matemática."
+	},
 	"url": [ "wims-schaersvoorde.nl" , "85.148.206.56" ],
 	"version": "2.0",
 	"logo": "https://i.imgur.com/E9FdAjM.png",
