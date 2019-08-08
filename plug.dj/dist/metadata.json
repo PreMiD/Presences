@@ -4,7 +4,10 @@
     "id": "228965621478588416"
   },
   "service": "plug.dj",
-  "description": "Listen, play, discover and connect with music fans around the world!",
+  "description": "description": {
+      "en": "Listen, play, discover and connect with music fans around the world!",
+      "pt_BR": "Escute, assista, descubra e conecte-se com fãs de músicas ao redor do mundo!
+},
   "url": "plug.dj",
   "version": "2.0",
   "logo": "https://crugg.de/premid/pdjlogo.png",
