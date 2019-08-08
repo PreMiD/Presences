@@ -6,7 +6,8 @@
     "service": "GitHub",
     "description": {
       "en": "GitHub is a project management and code versioning system as well as a social network platform made for developers.",
-      "ro": "GitHub este un sistem de gestionare pentru proiecte și cod, precum și o rețea de socializare pentru developeri."
+      "ro": "GitHub este un sistem de gestionare pentru proiecte și cod, precum și o rețea de socializare pentru developeri.",
+      'pt_BR": "GitHub é um sistema de versionamento de código e gerenciamento de projetos assim como rede social feita para desenvolvedores."
     },
     "url": "github.com",
     "version": "2.0",
