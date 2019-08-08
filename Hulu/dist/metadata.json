@@ -4,7 +4,10 @@
     "id": "163319338403627008"
   },
   "service": "Hulu",
-  "description": "Watch current hit shows, classic series, and acclaimed movies instantly with Hulu.",
+  "description": {
+      "en": "Watch current hit shows, classic series, and acclaimed movies instantly with Hulu.",
+      "pt_BR": "Assista shows de sucesso, séries clássicas e filmes aclamados instanteamente com o Hulu."
+},
   "url": "www.hulu.com",
   "version": "1.0",
   "logo": "https://i.imgur.com/kJKqfdw.png",
