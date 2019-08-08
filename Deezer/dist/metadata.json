@@ -6,6 +6,7 @@
   "service": "Deezer",
   "description": {
       "en": "Listen to all the songs you love anytime, anywhere.",
+      "ro": "Ascultă toate melodiile iubite, oricând, oriunde.",
       "pt_BR": "Escute todas as músicas que você ama a qualquer hora, em qualquer lugar."
 },
   "url": "www.deezer.com",

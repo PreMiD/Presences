@@ -6,6 +6,7 @@
   "service": "ToradorAPI",
   "description": {
    "en": "Providing you with lots of screenshots and fanarts from the anime Toradora!",
+   "ro": "Îți oferim multe capturi de ecran și fan art de la anime-urile Toradora!",
    "pt_BR": "Proporcionando-lhe muitas capturas de tela e fanarts do anime Toradora!"
   },
   "url": "toradorapi.crugg.de",
