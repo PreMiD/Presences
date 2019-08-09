@@ -6,7 +6,7 @@
     "service": "twist.moe",
     "description": {
         "en": "twist.moe is a free anime streaming site.",
-        "ro": "twist.moe este un site de streaming gratuit pentru anime.",
+        "ro_RO": "twist.moe este un site de streaming gratuit pentru anime.",
         "pt_BR": "twist.moe é um site de streaming de animes gratuito.",
         "fr": "twist.moe est un site de streaming d'animés gratuit."
     },
