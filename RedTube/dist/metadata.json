@@ -6,7 +6,7 @@
     "service": "RedTube",
     "description": {
         "en": "RedTube is a premier adult video sharing platform.",
-        "ro": "RedTube este o platformă pentru partajarea videoclipurilor de adulți.",
+        "ro_RO": "RedTube este o platformă pentru partajarea videoclipurilor de adulți.",
         "pt_BR": "RedTube é uma plataforma de compartilhamento de vídeos adultos de primeira linha.",
         "fr": "RedTube est une plateforme de partage de vidéos pour adultes de premier ordre."
     },
