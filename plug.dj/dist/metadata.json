@@ -6,7 +6,7 @@
     "service": "plug.dj",
     "description": {
         "en": "Listen, play, discover and connect with music fans around the world!",
-        "ro": "Ascultă, redă, descoperă și conectează-te cu fani de muzică din toată lumea!",
+        "ro_RO": "Ascultă, redă, descoperă și conectează-te cu fani de muzică din toată lumea!",
         "pt_BR": "Escute, assista, descubra e conecte-se com fãs de músicas ao redor do mundo!",
         "fr": "Écoutez, jouez, découvrez et connectez-vous avec des fans de musique du monde entier!"
     },
