@@ -6,9 +6,7 @@
     "service": "Wikipedia",
     "description": {
         "en": "Wikipedia is a multilingual online encyclopedia, based on open collaboration through a wiki-based content editing system.",
-        "ro_RO": "Wikipedia este o enciclopedie generală, disponibilă pe Internet în mai multe limbi, având conținut ce poate fi utilizat liber și dezvoltat de oricine.",
-        "pt_BR": "Wikipedia is a multilingual online encyclopedia, based on open collaboration through a wiki-based content editing system.",
-        "fr": "Wikipedia is a multilingual online encyclopedia, based on open collaboration through a wiki-based content editing system."
+        "ro_RO": "Wikipedia este o enciclopedie generală, disponibilă pe Internet în mai multe limbi, având conținut ce poate fi utilizat liber și dezvoltat de oricine."
     },
     "url": [
         "en.wikipedia.org",
