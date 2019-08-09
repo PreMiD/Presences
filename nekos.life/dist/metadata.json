@@ -1,18 +1,19 @@
 {
-  "author": {
-    "name": "CRUGG",
-    "id": "228965621478588416"
-  },
-  "service": "nekos.life",
-  "description": {
-    "en" : "A neko makes your day bright - nekos.life provides you with thousands of sfw and nsfw images of nekos (cat-girls)",
-    "ro": "Un neko îți face ziua mai luminoasă - nekos.life îți oferă mii de poze SFW și NSFW cu nekos (fete-pisică)",
-    "pt_BR" : "Uma neko faz seu dia brilhar - nekos.life fornece para você milhares de imagens SFW e NSFW de nekos (cat-girls)"
-  },
-  "url": "nekos.life",
-  "version": "2.0",
-  "logo": "https://crugg.de/premid/nllogo.png",
-  "thumbnail": "https://crugg.de/premid/nlbanner.png",
-  "color": "#512da8",
-  "tags": ["anime", "manga", "images", "random", "nsfw"]
+    "author": {
+        "name": "CRUGG",
+        "id": "228965621478588416"
+    },
+    "service": "nekos.life",
+    "description": {
+        "en": "A neko makes your day bright - nekos.life provides you with thousands of SFW and NSFW images of nekos (cat-girls).",
+        "ro": "Un neko îți face ziua mai luminoasă - nekos.life îți oferă mii de poze SFW și NSFW cu nekos (fete-pisică).",
+        "pt_BR": "Uma neko faz seu dia brilhar - nekos.life fornece para você milhares de imagens SFW e NSFW de nekos (mulheres-gato).",
+        "fr": "Un neko rend votre journée lumineuse - nekos.life vous fournit des milliers d'images SFW et NSFW de nekos (femmes-chat)."
+    },
+    "url": "nekos.life",
+    "version": "2.0",
+    "logo": "https://crugg.de/premid/nllogo.png",
+    "thumbnail": "https://crugg.de/premid/nlbanner.png",
+    "color": "#512da8",
+    "tags": [ "anime", "manga", "images", "random", "nsfw" ]
 }

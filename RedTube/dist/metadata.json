@@ -1,23 +1,25 @@
 {
     "author": {
-      "name": "TheDrop.",
-      "id": "293828021134295040"
+        "name": "TheDrop.",
+        "id": "293828021134295040"
     },
     "service": "RedTube",
     "description": {
-      "en": "RedTube is a premier adult video sharing platform.",
-      "ro": "RedTube este o platformă pentru partajarea videoclipurilor de adulți.",
-      "pt_BR": "RedTube é uma plataforma de compartilhamento de vídeos adultos de primeira linha."
+        "en": "RedTube is a premier adult video sharing platform.",
+        "ro": "RedTube este o platformă pentru partajarea videoclipurilor de adulți.",
+        "pt_BR": "RedTube é uma plataforma de compartilhamento de vídeos adultos de primeira linha.",
+        "fr": "RedTube est une plateforme de partage de vidéos pour adultes de premier ordre."
     },
     "url": [
-      "www.redtube.com",
-      "de.redtube.com",
-      "pl.redtube.com",
-      "redtube.com.br",
-      "es.redtube.com",
-      "it.redtube.com",
-      "ru.redtube.com",
-      "jp.redtube.com"
+        "www.redtube.com",
+        "de.redtube.com",
+        "pl.redtube.com",
+        "redtube.com.br",
+        "es.redtube.com",
+        "it.redtube.com",
+        "ru.redtube.com",
+        "jp.redtube.com",
+        "fr.redtube.com"
     ],
     "version": "2.0",
     "logo": "https://i.imgur.com/MlqNqGr.jpg",
