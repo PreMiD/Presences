@@ -1,13 +1,14 @@
 {
     "author": {
-      "name": "TheDrop.",
-      "id": "293828021134295040"
+        "name": "TheDrop.",
+        "id": "293828021134295040"
     },
     "service": "FiPlay",
     "description": {
-      "en": "FiPlay is a online movie/series streaming site from Finland.",
-      "ro": "FiPlay este un site de streaming din Finlanda pentru filme/seriale.",
-      "pt_BR": "FiPlay é um site de streaming da Finlândia focado em séries e filmes."
+        "en": "FiPlay is a online movie/series streaming site from Finland.",
+        "ro": "FiPlay este un site de streaming din Finlanda pentru filme/seriale.",
+        "pt_BR": "FiPlay é um site de streaming da Finlândia focado em séries e filmes.",
+        "fr": "FiPlay est un site de streaming finlandais centré sur des séries et films."
     },
     "url": "fiplay.net",
     "version": "2.0",
@@ -15,4 +16,4 @@
     "thumbnail": "https://i.imgur.com/1PibvI2.png",
     "color": "#0397d6",
     "tags": [ "video", "media" ]
-  }
+}

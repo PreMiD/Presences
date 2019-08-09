@@ -1,13 +1,14 @@
 {
     "author": {
-      "name": "TheDrop.",
-      "id": "293828021134295040"
+        "name": "TheDrop.",
+        "id": "293828021134295040"
     },
     "service": "twist.moe",
     "description": {
-      "en": "twist.moe is a free anime streaming site.",
-      "ro": "twist.moe este un site de streaming gratuit pentru anime.",
-      "pt_BR": "twist.moe é um serviço de streaming gratuito focado em animes."
+        "en": "twist.moe is a free anime streaming site.",
+        "ro": "twist.moe este un site de streaming gratuit pentru anime.",
+        "pt_BR": "twist.moe é um site de streaming de animes gratuito.",
+        "fr": "twist.moe est un site de streaming d'animés gratuit."
     },
     "url": "twist.moe",
     "version": "2.0",
@@ -15,4 +16,4 @@
     "thumbnail": "https://i.imgur.com/S90UKep.png",
     "color": "#0397d6",
     "tags": [ "video", "anime" ]
-  }
+}
