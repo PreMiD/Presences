@@ -4,12 +4,7 @@
     "id": "163319338403627008"
   },
   "service": "Deezer",
-  "description": {
-    "en": "Listen to all the songs you love anytime, anywhere.",
-    "ro": "Ascultă toate melodiile iubite, oricând, oriunde.",
-    "pt_BR": "Escute todas as músicas que você ama a qualquer hora, em qualquer lugar.",
-    "fr": "Écoutez toutes les musiques que vous aimez quand vous voulez, où vous voulez."
-  },
+  "description": "Listen to all the songs you love anytime, anywhere.",
   "url": "www.deezer.com",
   "version": "1.1",
   "logo": "https://i.imgur.com/GKMQi3h.png",
