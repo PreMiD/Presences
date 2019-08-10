@@ -4,11 +4,16 @@
     "id": "163319338403627008"
   },
   "service": "Deezer",
-  "description": "Listen to all the songs you love anytime, anywhere.",
+  "description": {
+    "en": "Listen to all the songs you love anytime, anywhere.",
+    "ro": "Ascultă toate melodiile iubite, oricând, oriunde.",
+    "pt_BR": "Escute todas as músicas que você ama a qualquer hora, em qualquer lugar.",
+    "fr": "Écoutez toutes les musiques que vous aimez quand vous voulez, où vous voulez."
+  },
   "url": "www.deezer.com",
-  "version": "1.0",
-  "logo": "https://i.imgur.com/DBj8DXy.png",
-  "thumbnail": "https://i.imgur.com/3vCIxNO.png",
+  "version": "1.1",
+  "logo": "https://i.imgur.com/GKMQi3h.png",
+  "thumbnail": "https://i.imgur.com/gVAvQ6k.png",
   "color": "#EE9B01",
-  "tags": ["deezer", "music"]
+  "tags": ["radio", "music"]
 }
