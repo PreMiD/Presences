@@ -11,6 +11,9 @@ var browsingStamp = Math.floor(Date.now()/1000);
 
 var title : any;
 
+var actionURL = new URL(document.location.href);
+var title2URL = new URL(document.location.href);
+
 presence.on("UpdateData", async () => {
 
   let presenceData: presenceData = {
@@ -21,10 +24,7 @@ presence.on("UpdateData", async () => {
 
   title = document.querySelector('h1#firstHeading');
 
-  var actionURL = new URL(document.location.href);
   var actionResult = actionURL.searchParams.get("action");
-
-  var title2URL = new URL(document.location.href);
   var title2Result = title2URL.searchParams.get("title");
 
 

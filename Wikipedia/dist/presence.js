@@ -15,6 +15,8 @@ var presence = new Presence({
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var title;
+var actionURL = new URL(document.location.href);
+var title2URL = new URL(document.location.href);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
         details: "In construction",
@@ -22,9 +24,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         largeImageKey: "lg"
     };
     title = document.querySelector('h1#firstHeading');
-    var actionURL = new URL(document.location.href);
     var actionResult = actionURL.searchParams.get("action");
-    var title2URL = new URL(document.location.href);
     var title2Result = title2URL.searchParams.get("title");
     if (document.location.pathname == "/wiki/Main_Page") {
         presenceData.state = "Main Page | Home";
