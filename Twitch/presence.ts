@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
     },
     clip: {
       title: document.querySelector("span.tw-ellipsis.tw-font-size-5.tw-strong"),
-      streamer: document.querySelector("a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05 > div > h5");
+      streamer: document.querySelector("a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05 > div > h5")
     }
   };
 
