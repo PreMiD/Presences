@@ -13,4 +13,4 @@ This repository contains the source code of PreMiD's presences. If you want to g
 
 <h1>Additional informations</h1>
 
-If you would like to <strong>create</strong> a presence, please feel free to join our <strong>Discord</strong> server mentioned above. Or if you want to <strong>request</strong> a presence, don't be afraid to create a <a href="https://github.com/PreMiD/Presences/issues/new">issue</a>.
+If you would like to <strong>create</strong> a presence, please feel free to open a pull request and to join our <strong>Discord</strong> server mentioned above in order to get a special role. Or if you want to <strong>request</strong> a presence, don't be afraid to create a <a href="https://github.com/PreMiD/Presences/issues/new">issue</a>. <strong>PreMiD</strong> Presences are made using TypeScript. If you need help creating presences, take a look on our <a href="docs.premid.app">documentation</a>.
