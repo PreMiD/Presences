@@ -6,7 +6,8 @@
     "service": "dlive",
     "description": {
         "en": "DLive.tv is the largest live streaming community on blockchain that powered by Lino blockchain.",
-        "ro_RO": "DLive.tv este cea mai mare comunitate de live streaming pe blockchain cu spirjinul blockchain-ului Lino."
+        "ro_RO": "DLive.tv este cea mai mare comunitate de live streaming pe blockchain cu spirjinul blockchain-ului Lino.",
+        "nl": "DLive.tv is de grootste live streaming community op blockchain die wordt aangedreven door Lino blockchain."
     },
     "url": "dlive.tv",
     "version": "2.0",
