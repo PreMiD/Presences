@@ -9,6 +9,11 @@ strings = presence.getStrings({
 
 var browsingStamp = Math.floor(Date.now()/1000);
 
+var search = "/search?q=";
+var searchURL = new URL(document.location.href);
+var searchResult = searchURL.searchParams.get("q");
+var profileURL = new URL(document.location.href);
+
 presence.on("UpdateData", async () => {
 
   var profileName : any, profileNickname : any;
@@ -27,14 +32,9 @@ presence.on("UpdateData", async () => {
   if(profileName) {
 
     var profileTabs = "/" + profileNickname.innerText + "?tab=";
-    var profileURL = new URL(document.location.href);
     var profileCurrentTab = profileURL.searchParams.get("tab");
 
   }
-
-  var search = "/search?q=";
-  var searchURL = new URL(document.location.href);
-  var searchResult = searchURL.searchParams.get("q");
 
 
   let presenceData: presenceData = {
