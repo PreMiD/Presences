@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
   jobLastPage = document.querySelectorAll("div.pagination a");
 
   questionsLastPage = document.querySelectorAll("div.pager.fl a");
-  
+
 
   if(document.location.pathname.includes("/users") || document.location.pathname.includes("/tags")) {
 
