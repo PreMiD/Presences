@@ -10,9 +10,12 @@ element : HTMLSelectElement,
 presenceData : presenceData = {
     largeImageKey: "union_lg",
     startTimestamp: startedBrowsingTimestamp
-};
+},
+strings = presence.getStrings({
+    browsing: "presence.activity.browsing"
+});
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
     if (window.location.pathname.includes("lista-mangas")) {
         presenceData.details = "Procurando um mangá";
     } else if (window.location.pathname.includes("manga")) {
@@ -23,8 +26,7 @@ presence.on("UpdateData", () => {
         mangaName = document.querySelector(".titulo-leitura").textContent.split(' - ')[0];
         mangaChapter = document.querySelector(".titulo-leitura").textContent.split(' - ')[1];
         presenceData.details = "Lendo " + mangaName;
-        element = document.getElementById("modo_leitura") as HTMLSelectElement;
-        if (element.options[element.selectedIndex].value == "Passar páginas") {
+        if (!document.querySelector('#paginas').getAttribute('style').split(';')[1].includes('none')) {
             element = document.getElementById("paginas") as HTMLSelectElement;
             mangaPage = element.options[element.selectedIndex].value;
             presenceData.state = mangaChapter + " - Página " + mangaPage;
@@ -34,7 +36,7 @@ presence.on("UpdateData", () => {
     } else if (window.location.pathname.includes("scans")) {
         presenceData.details = "Procurando uma Scan";
     } else {
-        presenceData.details = "Navegando...";
+        presenceData.details = (await strings).browsing;
     }
     presence.setActivity(presenceData, true);
 })
