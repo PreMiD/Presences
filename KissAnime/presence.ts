@@ -41,22 +41,6 @@ presence.on("iFrameData", data => {
 });
 
 presence.on("UpdateData", async () => {
-  
-  if(!playback) {
-
-    presenceData: presenceData = {
-      largeImageKey: "lg"
-    }
-    
-    presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
-
-    presence.setActivity(presenceData, true);
-    
-  }
 
   if (iFrameVideo !== null && !isNaN(duration) && document.location.pathname.includes("/Anime/")) {
 
@@ -102,6 +86,20 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData, !paused);
       }
     
+    } else {
+
+      presenceData: presenceData = {
+        largeImageKey: "lg"
+      }
+      
+      presenceData.details = "Browsing...";
+      presenceData.startTimestamp = browsingStamp;
+  
+      delete presenceData.state;
+      delete presenceData.smallImageKey;
+  
+      presence.setActivity(presenceData, true);
+      
     }
 
 });

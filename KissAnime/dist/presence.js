@@ -34,16 +34,6 @@ presence.on("iFrameData", data => {
     }
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    if (!playback) {
-        presenceData: presenceData = {
-            largeImageKey: "lg"
-        };
-        presenceData.details = "Browsing...";
-        presenceData.startTimestamp = browsingStamp;
-        delete presenceData.state;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData, true);
-    }
     if (iFrameVideo !== null && !isNaN(duration) && document.location.pathname.includes("/Anime/")) {
         var videoTitle, episod, episode, tabTitle;
         tabTitle = document.title;
@@ -73,6 +63,16 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         if (videoTitle !== null) {
             presence.setActivity(presenceData, !paused);
         }
+    }
+    else {
+        presenceData: presenceData = {
+            largeImageKey: "lg"
+        };
+        presenceData.details = "Browsing...";
+        presenceData.startTimestamp = browsingStamp;
+        delete presenceData.state;
+        delete presenceData.smallImageKey;
+        presence.setActivity(presenceData, true);
     }
 }));
 function getTimestamps(videoTime, videoDuration) {
