@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
     
   }
 
-  if (iFrameVideo !== null && !isNaN(duration)) {
+  if (iFrameVideo !== null && !isNaN(duration) && document.location.pathname.includes("/Anime/")) {
 
       var videoTitle : any, episod : any, episode : any, tabTitle : any;
 
