@@ -5,7 +5,8 @@
     },
     "service": "Mixcloud",
     "description": {
-        "en": "Listen to the best DJs and radio presenters in the world for free."
+        "en": "Listen to the best DJs and radio presenters in the world for free.",
+        "pt_BR": "Escute os melhores DJs e apresentadores de rádio do mundo de graça."
     },
     "url": "www.mixcloud.com",
     "version": "1.0",
