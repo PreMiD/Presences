@@ -3,7 +3,7 @@ let presence = new Presence({
 }),
 startedBrowsingTimestamp = Math.floor(Date.now() / 1000),
 presenceData = {
-    largeImageKey: "reddit_logo",
+    largeImageKey: "reddit_lg",
     startTimestamp: startedBrowsingTimestamp,
     state: ""
 },
