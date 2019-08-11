@@ -5,7 +5,7 @@
     },
     "service": "KissAnime",
     "description": {
-        "en": "KissAnime is a russian anime hosting site.",
+        "en": "KissAnime is a russian anime hosting site. ATTENTION: Supported servers: RapidVideo, MP4Upload, Beta, Beta2.",
         "ro_RO": "KissAnime este un site rus de hostare pentru anime."
 },
     "url": "kissanime.ru",

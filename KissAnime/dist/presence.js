@@ -44,7 +44,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         delete presenceData.smallImageKey;
         presence.setActivity(presenceData, true);
     }
-    if (iFrameVideo !== null && !isNaN(duration)) {
+    if (iFrameVideo !== null && !isNaN(duration) && document.location.pathname.includes("/Anime/")) {
         var videoTitle, episod, episode, tabTitle;
         tabTitle = document.title;
         var pattern = "Episode";
