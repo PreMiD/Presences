@@ -20,6 +20,10 @@ presence.on("UpdateData", async () => {
 
   var repositoryAuthor : any, repositoryName : any, repositoryLocation : any, repositoryLocation2 : any;
 
+  var pullRequestTitle : any, pullRequestAuthor : any, pullRequestID : any;
+
+  var issueTitle : any, issueAuthor : any, issueID : any;
+
 
   profileName = document.querySelector('.vcard-names .p-name');
   profileNickname = document.querySelector('.vcard-names .p-nickname');
@@ -28,6 +32,10 @@ presence.on("UpdateData", async () => {
   repositoryName = document.querySelector('.public strong a');
   repositoryLocation = document.querySelectorAll('.breadcrumb.mb-2');
   repositoryLocation2 = document.querySelectorAll('#blob-path');
+
+  pullRequestTitle = issueTitle = document.querySelector("div.gh-header-show h1 span.js-issue-title");
+  pullRequestAuthor = issueAuthor = document.querySelectorAll("div div.timeline-comment-header.clearfix h3 strong a");
+  pullRequestID = issueID = document.querySelector("div.gh-header-show h1 span.gh-header-number");
 
   if(profileName) {
 
@@ -278,7 +286,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
 
 
-    } else if(repositoryAuthor.innerText.length > 0 && repositoryName.innerText.length > 0 && document.location.pathname.includes("/issues")) {
+    } else if(document.location.pathname == ("/" + repositoryAuthor.innerText + "/" + repositoryName.innerText + "/issues/")) {
 
 
         presenceData.details = "Browsing issues from:";
@@ -297,6 +305,58 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
 
+
+    } else if(document.location.pathname.includes("/" + repositoryAuthor.innerText + "/" + repositoryName.innerText + "/pull/")) {
+
+
+      presenceData.details = "Looking on pull request " + pullRequestID.innerText;
+
+      presenceData.state = pullRequestAuthor[0].innerText + " - " + pullRequestTitle.innerText;
+
+      presenceData.startTimestamp = browsingStamp;
+
+
+    } else if(document.location.pathname.includes("/" + repositoryAuthor.innerText + "/" + repositoryName.innerText + "/issues/")) {
+
+
+      presenceData.details = "Looking on issue " + issueID.innerText;
+
+      presenceData.state = issueAuthor[0].innerText + " - " + issueTitle.innerText;
+
+      presenceData.startTimestamp = browsingStamp;
+
+
+    } else if(document.location.pathname.includes("/pulse") || document.location.pathname.includes("/graphs/contributors") || document.location.pathname.includes("/community") || document.location.pathname.includes("/graphs/commit-activity") || document.location.pathname.includes("/graphs/code-frequency") || document.location.pathname.includes("/network/dependencies") || document.location.pathname.includes("/graphs/commit-activity") || document.location.pathname.includes("/network") || document.location.pathname.includes("/network/members")) {
+
+
+      var insightsTab : any = document.querySelector("nav a.js-selected-navigation-item.selected.menu-item")
+
+      presenceData.details = "Browsing insights from " + repositoryAuthor.innerText + " / "  + repositoryName.innerText;
+
+      presenceData.state = insightsTab.innerText;
+
+      presenceData.startTimestamp = browsingStamp;
+
+
+    } else if(document.location.pathname.includes("/projects")) {
+
+
+      presenceData.details = "Browsing projects from:";
+
+      presenceData.state = repositoryAuthor.innerText + " / "  + repositoryName.innerText;
+
+      presenceData.startTimestamp = browsingStamp;
+
+
+    } else if(document.location.pathname.includes("/issues")) {
+
+
+      presenceData.details = "Browsing issues from:";
+
+      presenceData.state = repositoryAuthor.innerText + " / "  + repositoryName.innerText;
+
+      presenceData.startTimestamp = browsingStamp;
+      
 
     }
     
