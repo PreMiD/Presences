@@ -356,7 +356,17 @@ presence.on("UpdateData", async () => {
       presenceData.state = repositoryAuthor.innerText + " / "  + repositoryName.innerText;
 
       presenceData.startTimestamp = browsingStamp;
-      
+
+
+    } else if(document.location.pathname.includes("/upload")) {
+
+
+      presenceData.details = "Uploading files to:";
+
+      presenceData.state = repositoryAuthor.innerText + " / "  + repositoryName.innerText;
+
+      presenceData.startTimestamp = browsingStamp;
+
 
     }
     

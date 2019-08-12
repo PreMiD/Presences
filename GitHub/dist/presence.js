@@ -190,6 +190,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.state = repositoryAuthor.innerText + " / " + repositoryName.innerText;
             presenceData.startTimestamp = browsingStamp;
         }
+        else if (document.location.pathname.includes("/upload")) {
+            presenceData.details = "Uploading files to:";
+            presenceData.state = repositoryAuthor.innerText + " / " + repositoryName.innerText;
+            presenceData.startTimestamp = browsingStamp;
+        }
     }
     else if (!repositoryAuthor && !repositoryName && document.location.pathname.includes("/issues")) {
         presenceData.details = "Browsing issues...";
