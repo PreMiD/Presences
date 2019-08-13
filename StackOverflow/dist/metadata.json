@@ -1,0 +1,17 @@
+{
+    "author": {
+        "name": "TheDrop.",
+        "id": "293828021134295040"
+    },
+    "service": "Stack Overflow",
+    "description": {
+        "en": "Stack Overflow is an open community for anyone that codes. It helps you to get answers to your toughest coding questions, share knowledge with your coworkers in private, and find your next dream job.",
+        "ro_RO": "Stack Overflow este o comunitate deschisă pentru oricine care programează. Te ajută să găsești răspunsuri la cele mai grele întrebări despre programare, împărtășește-ți cunoștințele cu colegii tăi în privat și găsește-ți următorul loc de muncă mult dorit."
+    },
+    "url": "stackoverflow.com",
+    "version": "2.0",
+    "logo": "https://i.imgur.com/iTWct8S.png",
+    "thumbnail": "https://i.imgur.com/Z4LQn2d.png",
+    "color": "#f48023",
+    "tags": [ "coding", "help" ]
+}

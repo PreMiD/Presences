@@ -1,0 +1,21 @@
+{
+    "author": {
+        "name": "Eai",
+        "id": "132779412771962880"
+    },
+    "service": "niconico",
+    "description": {
+        "ja": "日本最大級の動画サービスniconico（ニコニコ）。動画にコメントを付けて楽しむニコニコ動画や、生放送番組にリアルタイムでコメントを付けられるニコニコ生放送のほか、画像・イラスト・電子書籍・マンガ・最新ニュース・ブログ・3Dコンテンツなど、エンターテイメントを全て無料で楽しめる！"
+    },
+    "url": [
+        "www.nicovideo.jp",
+        "live.nicovideo.jp",
+        "live2.nicovideo.jp",
+        "seiga.nicovideo.jp"
+    ],
+    "version": "1.0",
+    "logo": "https://i.imgur.com/If04KDa.png",
+    "thumbnail": "https://i.imgur.com/CfLTbDJ.jpg",
+    "color": "#272727",
+    "tags": ["video", "live", "manga"]
+}
