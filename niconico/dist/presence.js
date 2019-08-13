@@ -114,6 +114,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
                     };
                     presence.setActivity(presenceData);
                 }
+                else if (location.pathname.startsWith("/watch/mg")) {
+                    const title = document.querySelector(".title").textContent;
+                    const owner = document.querySelector(".author_name")
+                        .textContent;
+                    const [mangaId] = location.pathname.match(/mg\d+/);
+                    const presenceData = {
+                        details: title,
+                        state: `${owner} - ${mangaId}`,
+                        largeImageKey: "niconico"
+                    };
+                    presence.setActivity(presenceData);
+                }
                 else {
                     presence.clearActivity();
                 }
