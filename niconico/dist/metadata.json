@@ -5,7 +5,8 @@
     },
     "service": "niconico",
     "description": {
-        "ja": "日本最大級の動画サービスniconico（ニコニコ）。動画にコメントを付けて楽しむニコニコ動画や、生放送番組にリアルタイムでコメントを付けられるニコニコ生放送のほか、画像・イラスト・電子書籍・マンガ・最新ニュース・ブログ・3Dコンテンツなど、エンターテイメントを全て無料で楽しめる！"
+        "ja": "日本最大級の動画サービスniconico（ニコニコ）。動画にコメントを付けて楽しむニコニコ動画や、生放送番組にリアルタイムでコメントを付けられるニコニコ生放送のほか、画像・イラスト・電子書籍・マンガ・最新ニュース・ブログ・3Dコンテンツなど、エンターテイメントを全て無料で楽しめる！",
+        "pt_BR": "niconico é o maior serviço de entretenimento no Japão. Desfrute do niconico Video com comentários em vídeos e transmita ao vivo no niconico Live que permite comentar programas de transmissão ao vivo em tempo real, assim como no niconico Seiga com imagens, ilustrações, e-books, mangá, últimas notícias, blogs e conteúdo 3D de graça!"
     },
     "url": [
         "www.nicovideo.jp",
