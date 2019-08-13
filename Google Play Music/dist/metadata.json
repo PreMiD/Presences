@@ -6,7 +6,8 @@
     "service": "Google Play Music",
     "description": {
         "en": "Free radio for everything you do. Store 50,000 tracks from your personal collection. Subscribe for on-demand access to 40 million songs and offline listening.",
-        "ja": "広告なしで、4000万曲にオンデマンドでアクセス。ダウンロードしてオフラインで再生。お好みの曲を最大 50,000 曲アップロードして、いつでもどこでも再生できます。"
+        "ja": "広告なしで、4000万曲にオンデマンドでアクセス。ダウンロードしてオフラインで再生。お好みの曲を最大 50,000 曲アップロードして、いつでもどこでも再生できます。",
+        "pt_BR": "Rádio grátis para tudo o que você fazer. Guarde até 50,000 músicas em sua coleção pessoal. Inscreva-se para acesso sob demanda para 40 milhões de músicas e modo offline."
     },
     "url": ["play.google.com"],
     "version": "1.0",
