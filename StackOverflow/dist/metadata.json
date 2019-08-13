@@ -6,7 +6,8 @@
     "service": "Stack Overflow",
     "description": {
         "en": "Stack Overflow is an open community for anyone that codes. It helps you to get answers to your toughest coding questions, share knowledge with your coworkers in private, and find your next dream job.",
-        "ro_RO": "Stack Overflow este o comunitate deschisă pentru oricine care programează. Te ajută să găsești răspunsuri la cele mai grele întrebări despre programare, împărtășește-ți cunoștințele cu colegii tăi în privat și găsește-ți următorul loc de muncă mult dorit."
+        "ro_RO": "Stack Overflow este o comunitate deschisă pentru oricine care programează. Te ajută să găsești răspunsuri la cele mai grele întrebări despre programare, împărtășește-ți cunoștințele cu colegii tăi în privat și găsește-ți următorul loc de muncă mult dorit.",
+        "pt_BR": "Stack Overflow é uma comunidade aberta para programadores. Ele te ajuda a conseguir respostas para suas mais difíceis perguntas, compartilhar conhecimento com seus colegas de trabalho em particular, e encontrar seu próximo emprego dos sonhos."
     },
     "url": "stackoverflow.com",
     "version": "2.0",
