@@ -12,6 +12,7 @@
     },
     "url": [
         "en.wikipedia.org",
+        "de.wikipedia.org",
         "ceb.wikipedia.org",
         "sv.wikipedia.org",
         "fr.wikipedia.org",
@@ -314,7 +315,7 @@
         "hz.wikipedia.org",
         "kr.wikipedia.org"
     ],
-    "version": "2.1",
+    "version": "2.2",
     "logo": "https://i.imgur.com/zFdTVKT.png",
     "thumbnail": "https://i.imgur.com/vJiuzZy.png",
     "color": "#f9f9f9",
