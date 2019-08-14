@@ -10,6 +10,28 @@ var presence = new Presence({
     clientId: "514771696134389760",
     mediaKeys: true
 }), strings;
+var localeStrings = {
+    "en": {
+        "Browsing": "Browsing",
+        "BrowsingFeed": "Browsing feed..."
+    },
+    "ru": {
+        "Browsing": "Просматривает",
+        "BrowsingFeed": "Смотрит ленту..."
+    }
+};
+function getLocale() {
+    return window.navigator.language.replace("-", "_").toLowerCase();
+}
+function getLocalizedString(stringPath) {
+    if (localeStrings[getLocale()][stringPath] !== undefined) {
+        return localeStrings[getLocale()][stringPath];
+    }
+    else {
+        console.warn(`Language for [${stringPath}] was not found!`);
+        return localeStrings['en'][stringPath];
+    }
+}
 function getVKTrackTimeLeft() {
     let playerDuration = document.querySelector(".audio_page_player_duration");
     var timeLeft;
@@ -96,7 +118,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.querySelector(".page_name") !== null) {
         var page_title = document.querySelector(".page_name").innerText;
         var presenceData = {
-            details: "Browsing",
+            details: getLocalizedString('Browsing'),
             state: page_title,
             largeImageKey: "vk_logo",
             startTimestamp: browsingTimestamp
@@ -105,13 +127,14 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else if (document.location.pathname.startsWith("/feed")) {
         var presenceData = {
-            details: "Browsing feed...",
+            details: getLocalizedString('BrowsingFeed'),
             largeImageKey: "vk_logo",
             startTimestamp: browsingTimestamp
         };
         presence.setActivity(presenceData, true);
     }
     else {
+        browsingTimestamp = Math.floor(Date.now() / 1000);
         presence.clearActivity();
     }
 }));
