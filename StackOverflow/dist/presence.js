@@ -37,12 +37,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname == "/questions") {
         lastPage = questionsLastPage[questionsLastPage.length - 2].innerText;
     }
-    if (title) {
-        if (document.location.pathname.includes("/questions/")) {
-            presenceData.details = "Reading a question.";
-            presenceData.state = title.innerText;
-            presenceData.startTimestamp = browsingStamp;
-        }
+    if (title && document.location.pathname.includes("/questions/")) {
+        presenceData.details = "Reading a question.";
+        presenceData.state = title.innerText;
+        presenceData.startTimestamp = browsingStamp;
     }
     else {
         if (document.location.pathname == "/") {
@@ -94,8 +92,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.state = "Current page: " + usersortagsPageNumber.innerText + "/" + lastPage;
             presenceData.startTimestamp = browsingStamp;
         }
-        presence.setActivity(presenceData);
     }
+    presence.setActivity(presenceData);
 }));
 function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
