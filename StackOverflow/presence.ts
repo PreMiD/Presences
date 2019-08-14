@@ -48,21 +48,13 @@ presence.on("UpdateData", async () => {
 
   }
 
+  if(title && document.location.pathname.includes("/questions/")) {
 
-
-  if(title) {
-
-    if(document.location.pathname.includes("/questions/")) {
-
-
-      presenceData.details = "Reading a question.";
+    presenceData.details = "Reading a question.";
   
-      presenceData.state = title.innerText;
+    presenceData.state = title.innerText;
   
-      presenceData.startTimestamp = browsingStamp;
-  
-  
-    } 
+    presenceData.startTimestamp = browsingStamp;
 
   } else {
 
@@ -163,10 +155,9 @@ presence.on("UpdateData", async () => {
 
   }
 
-
-  presence.setActivity(presenceData);
-
 }
+
+presence.setActivity(presenceData);
 
 });
 
