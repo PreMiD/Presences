@@ -1,0 +1,16 @@
+{
+    "author": {
+        "name": "TheSlowly",
+        "id": "505071508851523599"
+    },
+    "service": "osu!ppy",
+    "description": {
+        "en": "a funny rhythm game"
+    },
+    "url": "osu.ppy.sh",
+    "version": "1.0",
+    "logo": "https://imgur.com/a/AQ8xKHJ",
+    "thumbnail": "https://i.imgur.com/6YEJ9sY.png",
+    "color": "#AD698D",
+    "tags": [ "games" ]
+}
