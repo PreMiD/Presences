@@ -6,7 +6,8 @@
     "service": "BraniTube",
     "description": {
         "en": "BraniTube is a brazillian anime streaming site.",
-        "ro_RO": "BraniTube este un site de streaming brazilian pentru anime."
+        "ro_RO": "BraniTube este un site de streaming brazilian pentru anime.",
+        "pt_BR": "Branitube é um site brasileiro de streaming de animes."
     },
     "url": "www.branitube.org",
     "version": "2.0",
