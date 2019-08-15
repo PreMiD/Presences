@@ -1,0 +1,16 @@
+{
+    "author": {
+        "name": "TheSlowly",
+        "id": "505071508851523599"
+    },
+    "service": "Derpibooru",
+    "description": {
+        "en": "Derpibooru is an image repository which lets people bring together art from all over the internet, annotate the images with tags and an original source URL for easy searching, and discuss the artwork."
+    },
+    "url": "derpibooru.org",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/XWZYhJA.png",
+    "thumbnail": "https://i.imgur.com/en2ygta.png",
+    "color": "#3D92D0",
+    "tags": [ "pictures", "nsfw" ]
+}
