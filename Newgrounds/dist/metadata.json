@@ -1,0 +1,18 @@
+{
+    "author": {
+        "name": "TheDrop.",
+        "id": "293828021134295040"
+    },
+    "service": "Newgrounds",
+    "description": {
+        "en": "Newgrounds is place where artists can put their work to everyone to see.",
+        "ro": "Newgrounds este un loc unde artiștii își pot arăta munca tuturor."
+    },
+    "url": "www.newgrounds.com",
+    "version": "2.0",
+    "logo": "https://i.imgur.com/hamkgjX.png",
+    "thumbnail": "https://i.imgur.com/M7rgM2p.png",
+    "color": "#fff17a",
+    "tags": [ "video", "art", "games" ],
+    "iframe": true
+}
