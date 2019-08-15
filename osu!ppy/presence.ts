@@ -1,73 +1,66 @@
 var presence = new Presence({
   clientId: "609774216430092298",
   mediaKeys: false
-}), presenceData:presenceData;
+}), presenceData: presenceData = {
+  largeImageKey: "logo"
+};
 
 presence.on("UpdateData", async () => {
-  if(document.location.pathname == ("/home")) {
-     presenceData = {
-      details: "Viewing the homepage",
-      largeImageKey: "logo"
-    };
 
-  }else if(document.location.pathname.startsWith("/home/download")) {
-    presenceData = {
-     details: "downloading the game",
-     largeImageKey: "logo"
-   };
+  if(document.location.pathname == ("/home")) {
+
+      presenceData.details = "Viewing the homepage";
+
+  } else if(document.location.pathname.startsWith("/home/download")) {
+    
+     presenceData.details = "downloading the game";
+
    
  } else if(document.location.pathname.startsWith("/beatmapsets")) {
-     presenceData = {
-      details: "Searching for new beatmaps",
-      largeImageKey: "logo"
-    };
+     
+      presenceData.details = "Searching for new beatmaps";
+
     
   } else if(document.location.pathname.startsWith("/store")) {
-     presenceData = {
-      details: "Browsing through the store",
-      largeImageKey: "logo"
-    };
+     
+      presenceData.details = "Browsing through the store";
+
     
   } else if(document.location.pathname.startsWith("/rankings")) {
-     presenceData = {
-      details: "Browsing through the rankings",
-      largeImageKey: "logo"
-    };
+     
+      presenceData.details = "Browsing through the rankings";
+
     
   } else if(document.location.pathname.startsWith("/forums")) {
-     presenceData = {
-      details: "Browsing through the forum",
-      largeImageKey: "logo"
-    };
+     
+      presenceData.details = "Browsing through the forum";
+
     
   } else if(document.location.pathname.startsWith("/home/search")) {
-    presenceData = {
-      details: "is searching something",
-      largeImageKey: "logo"
-    };
+    
+      presenceData.details = "is searching something";
+
+    
   } else if(document.location.pathname.startsWith("/home/account/edit")) {
-    presenceData = {
-      details: "changing their account settings",
-      largeImageKey: "logo"
-    };
+    
+      presenceData.details = "changing their account settings";
+
+    
   } else if(document.location.pathname.startsWith("/wiki")) {
-     presenceData = {
-      details: "Browsing through the wiki",
-      largeImageKey: "logo"
-    };
+     
+      presenceData.details = "Browsing through the wiki";
+
     
   } else if(document.location.pathname.startsWith("/users")) {
-     presenceData = {
-      details: "Looking at " + (document.querySelector(".profile-info__name") as HTMLElement).innerText + "'s Profile",
-      state: "Rank: " + (document.querySelector(".value-display__value") as HTMLElement).innerText + " / " + (document.querySelector('.value-display--pp .value-display__value') as HTMLElement).innerText + "pp",
-      largeImageKey: "logo"
-    };
+
+      presenceData.details = "Looking at " + (document.querySelector(".profile-info__name") as HTMLElement).innerText + "'s Profile";
+
+      presenceData.state = "Rank: " + (document.querySelector(".value-display__value") as HTMLElement).innerText + " / " + (document.querySelector('.value-display--pp .value-display__value') as HTMLElement).innerText + "pp";
+
     
   } else {
-     presenceData = {
-      details: "seems to be somewhere wrongly",
-      largeImageKey: "logo"
-    };
+      presenceData.details = "seems to be somewhere wrongly";
+
   }
   presence.setActivity(presenceData);
 });
@@ -76,13 +69,3 @@ presence.on('iFrameData', function(data) {
   console.log(data);
 });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
