@@ -24,9 +24,13 @@ var iFrameVideo : any, currentTime : any, duration : any, paused : any;
 
 presence.on("iFrameData", data => {
 
-  playback = 
-    data.iframe_video.dur !== null
-      ? true : false
+  setInterval(function() {
+
+    playback = 
+    data.iframe_video !== null
+      ? true : false;
+
+  }, 1000);
 
   if(playback) {
 
