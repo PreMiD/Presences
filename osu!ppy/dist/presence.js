@@ -49,7 +49,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.startsWith("/home/account/edit")) {
         presenceData.details = "Changing their account settings";
     }
-    else if (document.location.pathname.startsWith("/wiki")) {
+    else if (document.location.pathname.startsWith("/help/wiki")) {
         presenceData.details = "Browsing through the wiki";
     }
     else if (document.location.pathname.startsWith("/home/changelog")) {

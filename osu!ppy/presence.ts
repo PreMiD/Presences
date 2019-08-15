@@ -55,10 +55,10 @@ presence.on("UpdateData", async () => {
     
       presenceData.details = "Changing their account settings";
   
-  } else if(document.location.pathname.startsWith("/wiki")) {
+  } else if(document.location.pathname.startsWith("/help/wiki")) {
      
       presenceData.details = "Browsing through the wiki";
-//https://osu.ppy.sh/home/changelog
+
   } else if(document.location.pathname.startsWith("/home/changelog")) {
 
     presenceData.details = "Looking at the changelog";
