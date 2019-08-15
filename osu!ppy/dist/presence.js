@@ -17,7 +17,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = "Viewing the homepage";
     }
     else if (document.location.pathname.startsWith("/home/download")) {
-        presenceData.details = "downloading the game";
+        presenceData.details = "Downloading the game";
     }
     else if (document.location.pathname.startsWith("/beatmapsets")) {
         presenceData.details = "Searching for new beatmaps";
@@ -28,24 +28,42 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.startsWith("/rankings")) {
         presenceData.details = "Browsing through the rankings";
     }
-    else if (document.location.pathname.startsWith("/forums")) {
+    else if (document.location.pathname.startsWith("/community/forums")) {
         presenceData.details = "Browsing through the forum";
     }
+    else if (document.location.pathname.startsWith("/community/chat")) {
+        presenceData.details = "Chatting";
+    }
+    else if (document.location.pathname.startsWith("/community/contests")) {
+        presenceData.details = "Browsing through the Contests";
+    }
+    else if (document.location.pathname.startsWith("/community/livestreams")) {
+        presenceData.details = "Browsing through livestreams";
+    }
+    else if (document.location.pathname.startsWith("/community/tournaments")) {
+        presenceData.details = "Browsing through Tournaments";
+    }
     else if (document.location.pathname.startsWith("/home/search")) {
-        presenceData.details = "is searching something";
+        presenceData.details = "Is searching something";
     }
     else if (document.location.pathname.startsWith("/home/account/edit")) {
-        presenceData.details = "changing their account settings";
+        presenceData.details = "Changing their account settings";
     }
     else if (document.location.pathname.startsWith("/wiki")) {
         presenceData.details = "Browsing through the wiki";
+    }
+    else if (document.location.pathname.startsWith("/home/changelog")) {
+        presenceData.details = "Looking at the changelog";
+    }
+    else if (document.location.pathname.startsWith("/home/friends")) {
+        presenceData.details = "Browsing through the friend list";
     }
     else if (document.location.pathname.startsWith("/users")) {
         presenceData.details = "Looking at " + document.querySelector(".profile-info__name").innerText + "'s Profile";
         presenceData.state = "Rank: " + document.querySelector(".value-display__value").innerText + " / " + document.querySelector('.value-display--pp .value-display__value').innerText + "pp";
     }
     else {
-        presenceData.details = "seems to be somewhere wrongly";
+        presenceData.details = "Seems to be somewhere wrongly";
     }
     presence.setActivity(presenceData);
 }));
