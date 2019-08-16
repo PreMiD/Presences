@@ -3,9 +3,10 @@ var presence = new Presence({
   mediaKeys: false
 }), presenceData: presenceData = {
   largeImageKey: "logo"
-};
+}, customData:boolean = false;
 
 presence.on("UpdateData", async () => {
+  customData = false;
 
   if(document.location.pathname == ("/home")) {
 
@@ -17,7 +18,30 @@ presence.on("UpdateData", async () => {
 
  } else if(document.location.pathname.startsWith("/beatmapsets")) {
      
-      presenceData.details = "Searching for new beatmaps";
+      var title = document.querySelector(".beatmapset-header__details-text--title"),
+          diff = document.querySelector(".beatmapset-header__diff-name")
+
+          if(title != null && diff != null) {
+            customData = true;
+    
+            var beatmapData: presenceData = {
+              details: "Looking at the beatmap:",
+              state: (title as HTMLElement).innerText + 
+              "[" + (diff as HTMLElement).innerText + "]",
+              largeImageKey: "logo"
+         };
+        presence.setActivity(beatmapData);
+      }else{
+        presenceData.details = "Searching for new beatmaps"
+      }
+
+  } else if(document.location.pathname.startsWith("/beatmaps/packs")) {
+     
+    presenceData.details = "Browsing through beatmap packs";
+
+  } else if(document.location.pathname.startsWith("/beatmaps/artists")) {
+     
+    presenceData.details = "Browsing through featured artists";
 
   } else if(document.location.pathname.startsWith("/store")) {
      
@@ -69,13 +93,21 @@ presence.on("UpdateData", async () => {
 
   }  else if(document.location.pathname.startsWith("/users")) {
 
-      presenceData.details = "Looking at " + (document.querySelector(".profile-info__name") as HTMLElement).innerText + "'s Profile";
-      presenceData.state = "Rank: " + (document.querySelector(".value-display__value") as HTMLElement).innerText + " / " + (document.querySelector('.value-display--pp .value-display__value') as HTMLElement).innerText + "pp";
+      customData = true;
+      var profileData: presenceData = {
+        details:  "Looking at " + (document.querySelector(".profile-info__name") as HTMLElement).innerText + "'s Profile",
+        state: "Rank: " + (document.querySelector(".value-display__value") as HTMLElement).innerText + 
+                  " / " + (document.querySelector('.value-display--pp .value-display__value') as HTMLElement).innerText + "pp",
+        largeImageKey: "logo"
+       };
+      presence.setActivity(profileData);
 
   } else {
       presenceData.details = "Seems to be somewhere wrongly";
   }
-  presence.setActivity(presenceData);
+  if(!customData) {
+    presence.setActivity(presenceData);
+  }
 });
 
 presence.on('iFrameData', function(data) {
