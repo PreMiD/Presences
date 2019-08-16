@@ -4,8 +4,9 @@ In this folder you can find resource images which you can use to display the sta
 
 ## These Include:
 
-| IMAGE                                                                        | NAME                     |
-| ---------------------------------------------------------------------------- | ------------------------ |
-| <img src="play.png" style="background: black;" height="50px">   | [play.png](play.png)     |
+| IMAGE                                                                          | NAME                     |
+| ------------------------------------------------------------------------------ | ------------------------ |
+| <img src="play.png" style="background: black;" height="50px">                  | [play.png](play.png)     |
 | <img src="pause.png" style="background-color: rgba(0,0,0,25);" height="50px">  | [pause.png](pause.png)   |
 | <img src="search.png" style="background-color: rgba(0,0,0,25);" height="50px"> | [search.png](search.png) |
+| <img src="live.png" style="background-color: rgba(0,0,0,25);" height="50px">   | [live.png](live.png)     |
