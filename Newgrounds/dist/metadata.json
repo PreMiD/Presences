@@ -6,7 +6,8 @@
     "service": "Newgrounds",
     "description": {
         "en": "Newgrounds is place where artists can put their work to everyone to see.",
-        "ro": "Newgrounds este un loc unde artiștii își pot arăta munca tuturor."
+        "ro": "Newgrounds este un loc unde artiștii își pot arăta munca tuturor.",
+        "pt_BR": "Newgrounds é um lugar aonde artistas podem colocar seus trabalhos para todos verem."
     },
     "url": "www.newgrounds.com",
     "version": "2.0",
