@@ -11,8 +11,9 @@ var presence = new Presence({
     mediaKeys: false
 }), presenceData = {
     largeImageKey: "logo"
-};
+}, customData = false;
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+    customData = false;
     if (document.location.pathname == ("/home")) {
         presenceData.details = "Viewing the homepage";
     }
@@ -20,7 +21,26 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = "Downloading the game";
     }
     else if (document.location.pathname.startsWith("/beatmapsets")) {
-        presenceData.details = "Searching for new beatmaps";
+        var title = document.querySelector(".beatmapset-header__details-text--title"), diff = document.querySelector(".beatmapset-header__diff-name");
+        if (title != null && diff != null) {
+            customData = true;
+            var beatmapData = {
+                details: "Looking at the beatmap:",
+                state: title.innerText +
+                    "[" + diff.innerText + "]",
+                largeImageKey: "logo"
+            };
+            presence.setActivity(beatmapData);
+        }
+        else {
+            presenceData.details = "Searching for new beatmaps";
+        }
+    }
+    else if (document.location.pathname.startsWith("/beatmaps/packs")) {
+        presenceData.details = "Browsing through beatmap packs";
+    }
+    else if (document.location.pathname.startsWith("/beatmaps/artists")) {
+        presenceData.details = "Browsing through featured artists";
     }
     else if (document.location.pathname.startsWith("/store")) {
         presenceData.details = "Browsing through the store";
@@ -59,13 +79,21 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = "Browsing through the friend list";
     }
     else if (document.location.pathname.startsWith("/users")) {
-        presenceData.details = "Looking at " + document.querySelector(".profile-info__name").innerText + "'s Profile";
-        presenceData.state = "Rank: " + document.querySelector(".value-display__value").innerText + " / " + document.querySelector('.value-display--pp .value-display__value').innerText + "pp";
+        customData = true;
+        var profileData = {
+            details: "Looking at " + document.querySelector(".profile-info__name").innerText + "'s Profile",
+            state: "Rank: " + document.querySelector(".value-display__value").innerText +
+                " / " + document.querySelector('.value-display--pp .value-display__value').innerText + "pp",
+            largeImageKey: "logo"
+        };
+        presence.setActivity(profileData);
     }
     else {
         presenceData.details = "Seems to be somewhere wrongly";
     }
-    presence.setActivity(presenceData);
+    if (!customData) {
+        presence.setActivity(presenceData);
+    }
 }));
 presence.on('iFrameData', function (data) {
     console.log(data);
