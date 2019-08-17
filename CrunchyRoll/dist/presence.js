@@ -22,9 +22,11 @@ if (lastPlaybackState != playback) {
 }
 var iFrameVideo, currentTime, duration, paused;
 presence.on("iFrameData", data => {
-    playback =
-        data.iframe_video.dur !== null
-            ? true : false;
+    setInterval(function () {
+        playback =
+            data.iframe_video !== null
+                ? true : false;
+    }, 1000);
     if (playback) {
         iFrameVideo = data.iframe_video.iFrameVideo;
         currentTime = data.iframe_video.currTime;
