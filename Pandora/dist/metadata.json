@@ -1,0 +1,16 @@
+{
+  "author": {
+    "name": "Alanexei ✔",
+    "id": "163319338403627008"
+  },
+  "service": "Pandora",
+  "description": {
+    "en": "Play the songs, albums, playlists and podcasts you love on the all-new Pandora."
+  },
+  "url": "www.pandora.com",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/vA52VTl.png",
+  "thumbnail": "https://i.imgur.com/fRQo8Vc.png",
+  "color": "#224099",
+  "tags": ["music", "audio"]
+}
