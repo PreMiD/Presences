@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "removeComments": true,
+    "typeRoots": ["@types"]
+  },
+  "exclude": ["node_modules"]
+}
