@@ -8,9 +8,9 @@
         "en": "Languages can be learned in a playful way. This game is 100% free, fun and scientifically proven."
     },
     "url": "www.duolingo.com",
-    "version": "1.0",
+    "version": "1.1",
     "logo": "https://i.imgur.com/ETbwYrY.jpg",
     "thumbnail": "https://i.imgur.com/rDHSj8L.png",
-    "color": "#FF0000",
-    "tags": [ "votes" ] 
+    "color": "#8EE000",
+    "tags": [ "education", "games", "languages" ] 
 }
