@@ -6,7 +6,8 @@
     "service": "Roblox",
     "description": {
         "en": "Roblox’s mission is to bring the world together through play.",
-        "ro": "Misiunea Roblox-ului este de a aduce lumea mai aproape să se joace împreună."
+        "ro": "Misiunea Roblox-ului este de a aduce lumea mai aproape să se joace împreună.",
+        "nl": "De missie van Roblox is om de wereld samen te brengen door te spelen."
     },
     "url": ["www.roblox.com", "web.roblox.com"],
     "version": "2.1",

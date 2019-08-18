@@ -6,7 +6,8 @@
     "service": "Duolingo",
     "description": {
         "en": "Languages can be learned in a playful way. Duolingo is 100% free, fun and scientifically proven.",
-        "de": "Sprachen können auf spielerische Weise erlernt werden. Duolingo ist 100% kostenlos, macht Spaß und ist wissenschaftlich belegt."
+        "de": "Sprachen können auf spielerische Weise erlernt werden. Duolingo ist 100% kostenlos, macht Spaß und ist wissenschaftlich belegt.",
+        "nl": "Talen kunnen op een speelse manier geleerd worden. Dit spel is 100% gratis, leuk en wetenschappelijk bewezen."
     },
     "url": "www.duolingo.com",
     "version": "1.1",
