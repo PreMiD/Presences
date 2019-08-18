@@ -6,7 +6,8 @@
     "service": "Steam",
     "description": {
         "en": "Steam is the ultimate destination for playing, discussing, and creating games.",
-        "ro": "Steam este destinatia finală pentru a te juca, discuta și de a crea jocuri."
+        "ro": "Steam este destinatia finală pentru a te juca, discuta și de a crea jocuri.",
+        "nl": "Steam is de ultieme bestemming voor het spelen, bespreken en maken van games."
     },
     "url": ["steamcommunity.com", "store.steampowered.com"],
     "version": "2.0",
