@@ -8,8 +8,8 @@
         "en": "Roblox’s mission is to bring the world together through play.",
         "ro": "Misiunea Roblox-ului este de a aduce lumea mai aproape să se joace împreună."
     },
-    "url": "www.roblox.com",
-    "version": "2.0",
+    "url": ["www.roblox.com", "web.roblox.com"],
+    "version": "2.1",
     "logo": "https://i.imgur.com/2X8ySVG.png",
     "thumbnail": "https://i.imgur.com/pufi4q1.png",
     "color": "#1b1d1e",
