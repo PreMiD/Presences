@@ -49,6 +49,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Searching for a doodle:";
             presenceData.state = doodleResult;
             presenceData.startTimestamp = browsingStamp;
+            presenceData.smallImageKey = "search";
         }
         else {
             presenceData.details = "Current page:";
@@ -60,6 +61,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         var searchURL = new URL(document.location.href);
         searchTab = searchURL.searchParams.get("tbm");
         resultsInfo = document.querySelector("#resultStats");
+        presenceData.smallImageKey = "search";
         if (!searchTab) {
             presenceData.details = "Searching for " + homepageInput.value;
             presenceData.state = resultsInfo.innerText;

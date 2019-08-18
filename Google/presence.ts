@@ -79,6 +79,8 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
 
+      presenceData.smallImageKey = "search";
+
 
     } else {
 
@@ -99,6 +101,8 @@ presence.on("UpdateData", async () => {
     searchTab = searchURL.searchParams.get("tbm");
 
     resultsInfo = document.querySelector("#resultStats");
+
+    presenceData.smallImageKey = "search";
 
     if(!searchTab) {
 
