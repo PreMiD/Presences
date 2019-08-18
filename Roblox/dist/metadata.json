@@ -1,0 +1,17 @@
+{
+    "author": {
+        "name": "TheDrop.",
+        "id": "293828021134295040"
+    },
+    "service": "Roblox",
+    "description": {
+        "en": "Roblox’s mission is to bring the world together through play.",
+        "ro": "Misiunea Roblox-ului este de a aduce lumea mai aproape să se joace împreună."
+    },
+    "url": "www.roblox.com",
+    "version": "2.0",
+    "logo": "https://i.imgur.com/2X8ySVG.png",
+    "thumbnail": "https://i.imgur.com/pufi4q1.png",
+    "color": "#1b1d1e",
+    "tags": [ "game", "community", "gaming" ]
+}
