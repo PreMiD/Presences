@@ -20,10 +20,10 @@ presence.on('UpdateData', async () => {
   }
 
   title = 'Browsing...';
-  info = capitalize(path.split('/')[1]) + ' Page';
+  info = capitalize(path.split('/')[1]);
 
   if (path.match('/i/')) {
-    info = capitalize(path.split('/')[2]) + ' Page';
+    info = capitalize(path.split('/')[2]);
   }
 
   if (path.match('/tos')) {
@@ -52,7 +52,7 @@ presence.on('UpdateData', async () => {
   }
 
   var objHeader: HTMLElement = document.querySelector(
-    'span.css-901oao.css-16my406.css-bfa6kz.r-1fmj7o5.r-1qd0xha.r-1vr29t4.r-ad9z0x.r-bcqeeo.r-3s2u2q.r-qvutc0 > span > span'
+    'span.css-901oao.css-16my406.css-bfa6kz.r-jwli3a.r-1qd0xha.r-1vr29t4.r-ad9z0x.r-bcqeeo.r-3s2u2q.r-qvutc0 > span > span'
   );
 
   if (objHeader) {
@@ -78,7 +78,7 @@ presence.on('UpdateData', async () => {
     title = 'Browsing Tweet...';
     info = stripText(
       document.querySelector(
-        'div.css-901oao.css-bfa6kz.r-1fmj7o5.r-1qd0xha.r-a023e6.r-vw2c0b.r-ad9z0x.r-bcqeeo.r-3s2u2q.r-qvutc0 > span > span'
+        'div.css-901oao.css-bfa6kz.r-jwli3a.r-1qd0xha.r-a023e6.r-vw2c0b.r-ad9z0x.r-bcqeeo.r-3s2u2q.r-qvutc0 > span > span'
       ),
       'Tweet'
     );
