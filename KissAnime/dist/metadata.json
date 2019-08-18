@@ -6,6 +6,7 @@
     "service": "KissAnime",
     "description": {
         "en": "KissAnime is a russian anime hosting site. ATTENTION: Supported servers: RapidVideo, MP4Upload, Beta, Beta2.",
+        "de": "KissAnime ist eine russische Anime Seite. HINWEIS: Unterstützte Server: RapidVideo, MP4Upload, Beta, Beta, Beta2.",
         "ro_RO": "KissAnime este un site rus de hostare pentru anime. Servere suportate: RapidVideo, MP4Upload, Beta, Beta2.",
         "uk": "KissAnime - російський хостинг-сайт для аніме. УВАГА: Підтримувані сервери: RapidVideo, MP4Upload, Beta, Beta2."
 },

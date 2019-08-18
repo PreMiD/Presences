@@ -5,7 +5,8 @@
     },
     "service": "Derpibooru",
     "description": {
-        "en": "Derpibooru is an image repository which lets people bring together art from all over the internet, annotate the images with tags and an original source URL for easy searching, and discuss the artwork."
+        "en": "Derpibooru is an image repository which lets people bring together art from all over the internet, annotate the images with tags and an original source URL for easy searching, and discuss the artwork.",
+        "de": "Derpibooru ist ein Bildarchiv, das es Menschen ermöglicht, Kunst aus dem ganzen Internet zusammenzubringen, die Bilder mit Tags und einer originellen Quell-URL zur einfachen Suche zu kommentieren und über das Kunstwerk zu diskutieren."
     },
     "url": "derpibooru.org",
     "version": "1.0",

@@ -5,7 +5,8 @@
   },
   "service": "Pandora",
   "description": {
-    "en": "Play the songs, albums, playlists and podcasts you love on the all-new Pandora."
+    "en": "Play the songs, albums, playlists and podcasts you love on the all-new Pandora.",
+    "de": "Genieße die Songs, Alben, Playlisten und Podcasts, die du liebst, auf dem brandneuem Pandora."
   },
   "url": "www.pandora.com",
   "version": "1.0",
