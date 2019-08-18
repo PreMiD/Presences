@@ -7,7 +7,8 @@
     "description": {
         "en": "Change the world",
         "de": "Verändere die Welt",
-        "nl": "Verander de wereld"
+        "nl": "Verander de wereld",
+        "pt_BR": "Mude o mundo"
     },
     "url": "www.change.org",
     "version": "1.0",
