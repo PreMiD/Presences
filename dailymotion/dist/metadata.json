@@ -5,7 +5,8 @@
     },
     "service": "dailymotion",
     "description": {
-        "en": "In Explore, you can discover and watch new music, news, sports, and trailers from dailymotion's best creators, brands, and channels"
+        "en": "In Explore, you can discover and watch new music, news, sports, and trailers from dailymotion's best creators, brands, and channels.",
+        "nl": "In Explore, kan je nieuwe muziek, nieuws, sport en trailers van de beste Dailymotion makers, merken en kanalen ontdekken en bekijken."
     },
     "url": "www.dailymotion.com",
     "version": "1.0",
