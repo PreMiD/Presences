@@ -20,9 +20,9 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
         elapsed = Math.floor(Date.now() / 1000);
     }
     title = 'Browsing...';
-    info = capitalize(path.split('/')[1]) + ' Page';
+    info = capitalize(path.split('/')[1]);
     if (path.match('/i/')) {
-        info = capitalize(path.split('/')[2]) + ' Page';
+        info = capitalize(path.split('/')[2]);
     }
     if (path.match('/tos')) {
         title = 'Browsing...';
@@ -44,7 +44,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
             return;
         info = stripText(selectedList[1], 'Selected');
     }
-    var objHeader = document.querySelector('span.css-901oao.css-16my406.css-bfa6kz.r-1fmj7o5.r-1qd0xha.r-1vr29t4.r-ad9z0x.r-bcqeeo.r-3s2u2q.r-qvutc0 > span > span');
+    var objHeader = document.querySelector('span.css-901oao.css-16my406.css-bfa6kz.r-jwli3a.r-1qd0xha.r-1vr29t4.r-ad9z0x.r-bcqeeo.r-3s2u2q.r-qvutc0 > span > span');
     if (objHeader) {
         title = 'Browsing Profile...';
         info = `${stripText(objHeader, 'Object Header')} // ${capitalize(path.split('/')[1])}`;
@@ -60,7 +60,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
     }
     if (objHeader === null && path.match('/status/')) {
         title = 'Browsing Tweet...';
-        info = stripText(document.querySelector('div.css-901oao.css-bfa6kz.r-1fmj7o5.r-1qd0xha.r-a023e6.r-vw2c0b.r-ad9z0x.r-bcqeeo.r-3s2u2q.r-qvutc0 > span > span'), 'Tweet');
+        info = stripText(document.querySelector('div.css-901oao.css-bfa6kz.r-jwli3a.r-1qd0xha.r-a023e6.r-vw2c0b.r-ad9z0x.r-bcqeeo.r-3s2u2q.r-qvutc0 > span > span'), 'Tweet');
     }
     if (path.match('/messages') && objHeader) {
         title = 'Browsing Message...';
