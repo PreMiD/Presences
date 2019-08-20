@@ -20,7 +20,7 @@ var minutesDuration, minutesDurationString, secondsDuration, secondsDurationStri
 var currentMinutes, currentMinutesString, currentSeconds, currentSecondsString;
 var duration, currentTime;
 var play, pause;
-var currentUser, albumName;
+var currentUser, albumName, currentArtist;
 var truncateBefore = function (str, pattern) {
     return str.slice(str.indexOf(pattern) + pattern.length);
 };
@@ -35,6 +35,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         largeImageKey: "lg"
     };
     currentUser = document.querySelector("#jp_container_1 > div.wrapper > aside.main-sidebar > section > div > div.pull-left.info > p");
+    currentArtist = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-artist.menu-item");
     musicTitle = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div.song-title.overflow");
     albumName = document.querySelector("footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-album.menu-item");
     if (musicTitle.innerText.length > 1) {
@@ -58,11 +59,17 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         var timestamps = getTimestamps(currentTime, duration);
         presenceData.details = "Song: " + musicTitle.innerText;
-        if (albumName.innerText.length > 0) {
+        if (albumName.innerText.length > 0 && currentArtist.innerText.length > 0) {
             presenceData.state = currentUser.innerText + " / " + albumName.innerText;
         }
-        else {
-            presenceData.state = currentUser.innerText + " / No album";
+        else if (albumName.innerText.length == 0 && currentArtist.innerText.length > 0) {
+            presenceData.state = currentArtist.innerText + " / No album";
+        }
+        else if (albumName.innerText.length > 0 && currentArtist.innerText.length == 0) {
+            presenceData.state = "No artist / " + albumName.innerText;
+        }
+        else if (albumName.innerText.length == 0 && currentArtist.innerText.length == 0) {
+            presenceData.state = "No artist / No album";
         }
         presenceData.smallImageKey = playback ? "play" : "pause";
         presenceData.smallImageText = playback ? (yield strings).pause : (yield strings).play;

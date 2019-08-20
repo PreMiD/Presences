@@ -21,7 +21,7 @@ var duration : any, currentTime : any;
 
 var play : any, pause : any;
 
-var currentUser : any, albumName : any;
+var currentUser : any, albumName : any, currentArtist : any;
 
 var truncateBefore = function (str, pattern) {
   return str.slice(str.indexOf(pattern) + pattern.length);
@@ -43,6 +43,8 @@ presence.on("UpdateData", async () => {
   };
 
   currentUser = document.querySelector("#jp_container_1 > div.wrapper > aside.main-sidebar > section > div > div.pull-left.info > p");
+
+  currentArtist = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-artist.menu-item");
 
   musicTitle = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div.song-title.overflow");
 
@@ -98,15 +100,24 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Song: " + musicTitle.innerText;
 
 
-    if(albumName.innerText.length > 0) {
+    if(albumName.innerText.length > 0 && currentArtist.innerText.length > 0) {
 
       presenceData.state = currentUser.innerText + " / " + albumName.innerText;
 
-    } else {
+    } else if(albumName.innerText.length == 0 && currentArtist.innerText.length > 0) {
 
-      presenceData.state = currentUser.innerText + " / No album";
+      presenceData.state = currentArtist.innerText + " / No album";
+
+    } else if(albumName.innerText.length > 0 && currentArtist.innerText.length == 0) {
+
+      presenceData.state = "No artist / " + albumName.innerText;
+
+    } else if(albumName.innerText.length == 0 && currentArtist.innerText.length == 0) {
+
+      presenceData.state = "No artist / No album";
 
     }
+
 
     presenceData.smallImageKey = playback ? "play" : "pause";
 
