@@ -93,9 +93,10 @@ presence.on("UpdateData", async () => {
 
   }  else if(document.location.pathname.startsWith("/users")) {
 
+    var name:string = (document.querySelector(".profile-info__name .u-ellipsis-overflow") as HTMLElement).innerText;
       customData = true;
       var profileData: presenceData = {
-        details:  "Looking at " + (document.querySelector(".profile-info__name") as HTMLElement).innerText + "'s Profile",
+        details:  "Looking at " +  name + "'s Profile",
         state: "Rank: " + (document.querySelector(".value-display__value") as HTMLElement).innerText + 
                   " / " + (document.querySelector('.value-display--pp .value-display__value') as HTMLElement).innerText + "pp",
         largeImageKey: "logo"
