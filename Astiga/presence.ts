@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
 
     if(albumName.innerText.length > 0 && currentArtist.innerText.length > 0) {
 
-      presenceData.state = currentUser.innerText + " / " + albumName.innerText;
+      presenceData.state = currentArtist.innerText + " / " + albumName.innerText;
 
     } else if(albumName.innerText.length == 0 && currentArtist.innerText.length > 0) {
 
