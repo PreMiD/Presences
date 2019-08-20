@@ -79,9 +79,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = "Browsing through the friend list";
     }
     else if (document.location.pathname.startsWith("/users")) {
+        var name = document.querySelector(".profile-info__name .u-ellipsis-overflow").innerText;
         customData = true;
         var profileData = {
-            details: "Looking at " + document.querySelector(".profile-info__name").innerText + "'s Profile",
+            details: "Looking at " + name + "'s Profile",
             state: "Rank: " + document.querySelector(".value-display__value").innerText +
                 " / " + document.querySelector('.value-display--pp .value-display__value').innerText + "pp",
             largeImageKey: "logo"
