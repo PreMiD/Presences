@@ -8,7 +8,7 @@
     "en": "The Node Package Manager is a package manager for the JavaScript runtime environment node.js.",
     "de": "Der Node Package Manager ist ein Paketmanager für die JavaScript-Laufzeitumgebung node.js."
   },
-  "url": "www.npmjs.org",
+  "url": "www.npmjs.com",
   "version": "2.0",
   "logo": "https://raw.githubusercontent.com/npm/logos/master/npm%20square/n-large.png",
   "thumbnail": "https://crugg.de/premid/npmbanner.png",
