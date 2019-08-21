@@ -27,6 +27,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "pvfm",
         smallImageKey: "pause",
       };
+      presence.setActivity(presenceData);
     } else {
       let presenceData: presenceData = {
         details: stationStatus,
@@ -35,9 +36,9 @@ presence.on("UpdateData", async () => {
         smallImageKey: "play",
         startTimestamp: timeElapsed
       };
+      presence.setActivity(presenceData);
     };
-  };
-  if(document.location.pathname == ("/player/two")) {
+  } else if(document.location.pathname == ("/player/two")) {
     otherListeners = document.querySelector("html > body > #playerContent > #about > div > div.col-sm-12 > h4 > small")
     if document.querySelector("html > body > #playerContent > #about > div.row > div.col-sm-12 > div.sm2-bar-ui.textured.full-width.playing") == null {
       stationStatus = "Paused on PVFM Two",
@@ -53,6 +54,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "pvfm",
         smallImageKey: "pause",
       };
+      presence.setActivity(presenceData);
     } else {
       let presenceData: presenceData = {
         details: stationStatus,
@@ -61,9 +63,9 @@ presence.on("UpdateData", async () => {
         smallImageKey: "play",
         startTimestamp: timeElapsed
       };
+      presence.setActivity(presenceData);
     };
-  };
-  if(document.location.pathname == ("/player/free")) {
+  } else if(document.location.pathname == ("/player/free")) {
     otherListeners = document.querySelector("html > body > #playerContent > #about > div > div.col-sm-12 > h4 > small")
     if document.querySelector("html > body > #playerContent > #about > div.row > div.col-sm-12 > div.sm2-bar-ui.textured.full-width.playing") == null {
       stationStatus = "Paused on PVFM Free",
@@ -79,6 +81,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "pvfm",
         smallImageKey: "pause",
       };
+      presence.setActivity(presenceData);
     } else {
       let presenceData: presenceData = {
         details: stationStatus,
@@ -87,7 +90,7 @@ presence.on("UpdateData", async () => {
         smallImageKey: "play",
         startTimestamp: timeElapsed
       };
+      presence.setActivity(presenceData);
     };
   };
-  presence.setActivity(presenceData);
 });
