@@ -11,8 +11,9 @@ let presence = new Presence({
 }), startedBrowsingTimestamp = Math.floor(Date.now() / 1000), presenceData = {
     largeImageKey: "reddit_lg",
     startTimestamp: startedBrowsingTimestamp
-}, subReddit, postTitle, profile, nickname, path, strings = presence.getStrings({
-    browsing: "presence.activity.browsing"
+}, subReddit, postTitle, profile, nickname, rpanTitle, path, strings = presence.getStrings({
+    browsing: "presence.activity.browsing",
+    live: "presence.activity.live"
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     path = window.location.pathname;
@@ -36,6 +37,14 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = "Searching...";
         delete presenceData.state;
         presenceData.smallImageKey = "search";
+        presenceData.smallImageText = "Searching";
+    }
+    else if (path.includes('rpan')) {
+        rpanTitle = document.querySelector('._17PXlsAvhmFm8yKmnpboBI') ? document.querySelector('._17PXlsAvhmFm8yKmnpboBI').textContent : "Loading title...";
+        presenceData.details = "Watching RPAN";
+        presenceData.state = rpanTitle;
+        presenceData.smallImageKey = "live";
+        presenceData.smallImageText = (yield strings).live;
     }
     else {
         subReddit = document.querySelector('span._1GieMuLljOrqnVpRAwz7VP').textContent;

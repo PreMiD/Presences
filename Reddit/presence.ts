@@ -10,9 +10,11 @@ subReddit : string,
 postTitle : string,
 profile : string,
 nickname : string,
+rpanTitle : string,
 path : string,
 strings = presence.getStrings({
-    browsing: "presence.activity.browsing"
+    browsing: "presence.activity.browsing",
+    live: "presence.activity.live"
 });
 
 presence.on("UpdateData", async () => {
@@ -35,6 +37,13 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Searching...";
         delete presenceData.state;
         presenceData.smallImageKey = "search";
+        presenceData.smallImageText = "Searching";
+    } else if (path.includes('rpan')) {
+        rpanTitle = document.querySelector('._17PXlsAvhmFm8yKmnpboBI') ? document.querySelector('._17PXlsAvhmFm8yKmnpboBI').textContent : "Loading title...";
+        presenceData.details = "Watching RPAN";
+        presenceData.state = rpanTitle;
+        presenceData.smallImageKey = "live";
+        presenceData.smallImageText = (await strings).live;
     } else {
         subReddit = document.querySelector('span._1GieMuLljOrqnVpRAwz7VP').textContent;
         presenceData.details = (await strings).browsing;
