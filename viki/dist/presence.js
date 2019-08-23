@@ -37,7 +37,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageKey: "viki"
         };
         presenceData.startTimestamp = browsingStamp;
-        console.log(document.URL);
         if (document.location.hostname == "www.viki.com" && document.location.pathname == "/") {
             presenceData.details = "Browsing through";
             presenceData.smallImageKey = "reading";
@@ -304,6 +303,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             delete presenceData.state;
             presence.setActivity(presenceData);
         }
+        else if (document.location.hostname == "www.viki.com" && document.location.pathname.includes("/tv/")) {
+            title = document.querySelector("body > div.page-wrapper > div.main-container > div.container > div:nth-child(2) > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1");
+            presenceData.details = "Browsing for episodes of:";
+            presenceData.smallImageKey = "reading";
+            presenceData.state = title.innerText;
+            presence.setActivity(presenceData);
+        }
         else {
             presence.setActivity();
             presence.setTrayTitle();
@@ -328,7 +334,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         episodefinish = episode.innerText.replace(": " + title.innerText, "");
         rating = document.querySelector("body > div.page-wrapper > div.main-container > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(5) > span.strong");
         presenceData.details = title.innerText;
-        presenceData.state = episodefinish + " \(Rating: " + rating.innerText + "\)";
+        presenceData.state = episodefinish + " \(Rating: " + rating.innerText + "\/10\)";
         if (video.paused) {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;

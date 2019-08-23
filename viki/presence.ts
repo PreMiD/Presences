@@ -61,7 +61,6 @@ if (!playback) {
   }
  
   presenceData.startTimestamp = browsingStamp;
-  console.log(document.URL);
 
   if (document.location.hostname == "www.viki.com" && document.location.pathname == "/") {
     presenceData.details = "Browsing through";
@@ -390,6 +389,15 @@ if (!playback) {
  
     presence.setActivity(presenceData);
 
+  } else if (document.location.hostname == "www.viki.com" && document.location.pathname.includes("/tv/")) {
+    title = document.querySelector("body > div.page-wrapper > div.main-container > div.container > div:nth-child(2) > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1");
+
+    presenceData.details = "Browsing for episodes of:";
+    presenceData.smallImageKey = "reading";
+    presenceData.state = title.innerText;
+ 
+    presence.setActivity(presenceData);
+
   } else {
     
     presence.setActivity();
@@ -437,7 +445,7 @@ presenceData.details = title.innerText;
  
  
 // Set presence state to views value
-presenceData.state = episodefinish + " \(Rating: " + rating.innerText + "\)";
+presenceData.state = episodefinish + " \(Rating: " + rating.innerText + "\/10\)";
  
  
 //* Remove timestamps if paused
