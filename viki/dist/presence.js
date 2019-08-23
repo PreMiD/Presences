@@ -18,7 +18,7 @@ function PMD_success(message) {
         "border-radius: 0 25px 25px 0; background: #50ff50; color: black;", "color: unset;");
 }
 var presence = new Presence({
-    clientId: "614123183225700362",
+    clientId: "614387676467953674",
     mediaKeys: true
 }), strings = presence.getStrings({
     play: "presence.playback.playing",

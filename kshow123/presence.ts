@@ -31,7 +31,7 @@ function PMD_success(message) {
 PMD_info("An error might be created called: \"Cannot read property 'duration'\". You may ignore this error, as it is automatically fixed in seconds.");
 
 var presence = new Presence({
-    clientId: "613746483078103071", // CLIENT ID FOR YOUR PRESENCE
+    clientId: "614388233886760972", // CLIENT ID FOR YOUR PRESENCE
     mediaKeys: true
  }),
 

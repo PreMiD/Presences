@@ -29,7 +29,7 @@ function PMD_success(message) {
 }
 
 var presence = new Presence({
-  clientId: "614123183225700362", // CLIENT ID FOR YOUR PRESENCE
+  clientId: "614387676467953674", // CLIENT ID FOR YOUR PRESENCE
   mediaKeys: true
 }),
  
