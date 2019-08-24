@@ -26,17 +26,3 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     }
 }));
-presence.on("MediaKeys", (key) => {
-    switch (key) {
-        case "pause":
-            break;
-    }
-});
-presence.on('iFrameData', function (data) {
-    console.log(data);
-});
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}
