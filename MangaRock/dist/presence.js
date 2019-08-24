@@ -16,37 +16,37 @@ var presence = new Presence({
 var lastPlaybackState = null;
 var reading;
 var browsingStamp = Math.floor(Date.now() / 1000);
+var title, chapter, selected, page, currentPage;
 if (lastPlaybackState != reading) {
     lastPlaybackState = reading;
     browsingStamp = Math.floor(Date.now() / 1000);
 }
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+    let presenceData = {
+        largeImageKey: "lg"
+    };
     reading =
         document.querySelector("._2ymbc a") !== null &&
             document.querySelector("._2d0an.lefgy select") !== null
             ? true : false;
-    var title, chapter, selected;
     if (reading) {
         title = document.querySelector("._2ymbc a");
         chapter = document.querySelector("._2d0an.lefgy select");
         selected = chapter.selectedOptions[0].text;
-        let presenceData = {
-            details: title.innerText,
-            state: selected,
-            largeImageKey: "lg"
-        };
+        page = document.querySelector("#page-content > div > div._1UwHa > div._2d0an._3r-80 > select");
+        currentPage = page.selectedOptions[0].text;
+        presenceData.details = title.innerText;
+        presenceData.state = selected + " [" + currentPage + "]";
+        presenceData.startTimestamp = browsingStamp;
         presence.setActivity(presenceData, true);
     }
     else {
-        let presenceData = {
-            largeImageKey: "lg"
-        };
         presenceData.details = "Browsing...";
         presenceData.startTimestamp = browsingStamp;
         delete presenceData.state;
         delete presenceData.smallImageKey;
-        presence.setActivity(presenceData, true);
     }
+    presence.setActivity(presenceData, true);
 }));
 function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
