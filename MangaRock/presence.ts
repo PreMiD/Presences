@@ -8,8 +8,9 @@ var presence = new Presence({
   });
 
   var lastPlaybackState = null;
-  var reading;
+  var reading : any;
   var browsingStamp = Math.floor(Date.now()/1000);
+  var title : any, chapter : any, selected : any, page : any, currentPage : any;
 
   if(lastPlaybackState != reading) {
 
@@ -20,44 +21,53 @@ var presence = new Presence({
 
 presence.on("UpdateData", async () => {
 
-reading = 
-  document.querySelector("._2ymbc a") !== null &&
-  document.querySelector("._2d0an.lefgy select") !== null
-  ? true : false;
-
-var title : any, chapter : any, selected : any;
-
-if(reading) {
-
-title = document.querySelector("._2ymbc a");
-chapter = document.querySelector("._2d0an.lefgy select");
-selected = chapter.selectedOptions[0].text;
-
-
-let presenceData: presenceData = {
-  details: title.innerText,
-  state: selected,
-  largeImageKey: "lg"
-
-};
-
-presence.setActivity(presenceData, true);
-
-} else {
-
   let presenceData: presenceData = {
     largeImageKey: "lg"
   }
-  
-  presenceData.details = "Browsing...";
+
+  reading = 
+    document.querySelector("._2ymbc a") !== null &&
+    document.querySelector("._2d0an.lefgy select") !== null
+    ? true : false;
+
+if(reading) {
+
+  title = document.querySelector("._2ymbc a");
+
+
+  chapter = document.querySelector("._2d0an.lefgy select");
+
+  selected = chapter.selectedOptions[0].text;
+
+
+  page = document.querySelector("#page-content > div > div._1UwHa > div._2d0an._3r-80 > select");
+
+  currentPage = page.selectedOptions[0].text;
+
+
+  presenceData.details = title.innerText;
+
+  presenceData.state = selected + " [" + currentPage + "]";
+
   presenceData.startTimestamp = browsingStamp;
 
-  delete presenceData.state;
-  delete presenceData.smallImageKey;
 
   presence.setActivity(presenceData, true);
 
+} else {
+  
+  presenceData.details = "Browsing...";
+
+  presenceData.startTimestamp = browsingStamp;
+
+
+  delete presenceData.state;
+
+  delete presenceData.smallImageKey;
+
 }
+
+presence.setActivity(presenceData, true);
 
 
 });
