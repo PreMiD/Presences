@@ -51,8 +51,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
                     const title = document.querySelector(".VideoTitle")
                         .textContent;
                     const ownerElement = document.querySelector(".ChannelInfo-pageLink") ||
-                        document.querySelector(".VideoOwnerInfo-pageLink");
-                    const [, owner] = ownerElement.textContent.match(/(.+) さん$/) || [, ownerElement.textContent];
+                        document.querySelector(".VideoOwnerInfo-pageLink") ||
+                        null;
+                    let owner;
+                    if (ownerElement) {
+                        [, owner] = ownerElement.textContent.match(/(.+) さん$/) || [, ownerElement.textContent];
+                    }
+                    else {
+                        owner = "Deleted User";
+                    }
                     const [videoId] = location.pathname.match(/..\d+$/);
                     const isPlaying = !!document.querySelector(".PlayerPauseButton");
                     const video = document.querySelector(".VideoPlayer video");
