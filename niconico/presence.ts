@@ -56,10 +56,16 @@
 
                     const ownerElement =
                         document.querySelector(".ChannelInfo-pageLink") ||
-                        document.querySelector(".VideoOwnerInfo-pageLink");
-                    const [, owner] = ownerElement.textContent.match(
-                        /(.+) さん$/
-                    ) || [, ownerElement.textContent];
+                        document.querySelector(".VideoOwnerInfo-pageLink") ||
+                        null;
+                    let owner;
+                    if (ownerElement) {
+                        [, owner] = ownerElement.textContent.match(
+                            /(.+) さん$/
+                        ) || [, ownerElement.textContent];
+                    } else {
+                        owner = "Deleted User";
+                    }
 
                     const [videoId] = location.pathname.match(/..\d+$/);
 
