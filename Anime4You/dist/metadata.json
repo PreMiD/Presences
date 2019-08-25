@@ -14,5 +14,5 @@
   "thumbnail": "https://crugg.de/premid/a4ybanner.png",
   "color": "#172C3C",
   "tags": ["video", "media", "anime"],
-  "iframe": true
+  "iframe": false
 }
