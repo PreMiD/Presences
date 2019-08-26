@@ -18,5 +18,10 @@
     "logo": "https://crugg.de/premid/mallogo.png",
     "thumbnail": "https://crugg.de/premid/malbanner.png",
     "color": "#2e51a2",
-    "tags": [ "anime", "manga", "community" ]
+    "tags": [
+        "anime",
+        "manga",
+        "community"
+    ],
+    "category": "anime"
 }

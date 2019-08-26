@@ -198,10 +198,14 @@
         "www.google.co.zm",
         "www.google.co.zw",
         "www.google.cat"
-        ],
+    ],
     "version": "2.0",
     "logo": "https://i.imgur.com/ZZvx6Dq.png",
     "thumbnail": "https://i.imgur.com/8Ayu4Re.png",
     "color": "#ffffff",
-    "tags": [ "search", "popular" ]
+    "tags": [
+        "search",
+        "popular"
+    ],
+    "category": "other"
 }

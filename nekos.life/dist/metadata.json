@@ -18,5 +18,12 @@
     "logo": "https://crugg.de/premid/nllogo.png",
     "thumbnail": "https://crugg.de/premid/nlbanner.png",
     "color": "#512da8",
-    "tags": [ "anime", "manga", "images", "random", "nsfw" ]
+    "tags": [
+        "anime",
+        "manga",
+        "images",
+        "random",
+        "nsfw"
+    ],
+    "category": "anime"
 }

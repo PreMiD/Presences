@@ -18,6 +18,10 @@
     "logo": "https://i.imgur.com/LpTKP8c.png",
     "thumbnail": "https://i.imgur.com/hzM7YCb.png",
     "color": "#f47521",
-    "tags": [ "video", "anime" ],
-    "iframe": true
+    "tags": [
+        "video",
+        "anime"
+    ],
+    "iframe": true,
+    "category": "anime"
 }

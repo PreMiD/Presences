@@ -22,5 +22,10 @@
     "logo": "https://i.imgur.com/If04KDa.png",
     "thumbnail": "https://i.imgur.com/CfLTbDJ.jpg",
     "color": "#272727",
-    "tags": ["video", "live", "manga"]
+    "tags": [
+        "video",
+        "live",
+        "manga"
+    ],
+    "category": "videos"
 }

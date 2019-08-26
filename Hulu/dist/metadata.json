@@ -18,5 +18,11 @@
     "logo": "https://i.imgur.com/kJKqfdw.png",
     "thumbnail": "https://i.imgur.com/66aqtJT.jpg",
     "color": "#66AA33",
-    "tags": [ "hulu", "video", "tv", "movies" ]
+    "tags": [
+        "hulu",
+        "video",
+        "tv",
+        "movies"
+    ],
+    "category": "videos"
 }

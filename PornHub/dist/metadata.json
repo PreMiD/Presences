@@ -43,5 +43,9 @@
     "logo": "https://i.imgur.com/ey3BiTYl.jpg",
     "thumbnail": "https://i.imgur.com/HpbdwCv.png",
     "color": "#ff9801",
-    "tags": [ "video", "nsfw" ]
+    "tags": [
+        "video",
+        "nsfw"
+    ],
+    "category": "videos"
 }

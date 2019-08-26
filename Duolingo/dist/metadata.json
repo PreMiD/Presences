@@ -15,5 +15,10 @@
     "logo": "https://i.imgur.com/ETbwYrY.jpg",
     "thumbnail": "https://i.imgur.com/rDHSj8L.png",
     "color": "#8EE000",
-    "tags": [ "education", "games", "languages" ] 
+    "tags": [
+        "education",
+        "games",
+        "languages"
+    ],
+    "category": "other"
 }

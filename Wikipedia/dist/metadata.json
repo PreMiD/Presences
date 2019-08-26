@@ -321,5 +321,10 @@
     "logo": "https://i.imgur.com/zFdTVKT.png",
     "thumbnail": "https://i.imgur.com/vJiuzZy.png",
     "color": "#f9f9f9",
-    "tags": [ "encyclopedia", "popular", "informations" ]
+    "tags": [
+        "encyclopedia",
+        "popular",
+        "informations"
+    ],
+    "category": "other"
 }
