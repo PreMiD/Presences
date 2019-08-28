@@ -18,6 +18,7 @@ var reading;
 var browsingStamp = Math.floor(Date.now() / 1000);
 var title, title2, currentPage, pageNumber, tabTitle, homeCurrentPage;
 var pattern = "- Page";
+var character, parody;
 var searchURL = new URL(document.location.href);
 var searchResult = searchURL.searchParams.get("q");
 var truncateAfter = function (str, pattern) {
@@ -92,6 +93,18 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/search/")) {
         presenceData.details = "Searching for: ";
         presenceData.state = searchResult;
+        presenceData.startTimestamp = browsingStamp;
+    }
+    else if (document.location.pathname.includes("/character/")) {
+        character = document.querySelector("#content > h1 > span:nth-child(2)");
+        presenceData.details = "Searching by character: ";
+        presenceData.state = character.innerText;
+        presenceData.startTimestamp = browsingStamp;
+    }
+    else if (document.location.pathname.includes("/parody/")) {
+        parody = document.querySelector("#content > h1 > span:nth-child(2)");
+        presenceData.details = "Searching by parody: ";
+        presenceData.state = parody.innerText;
         presenceData.startTimestamp = browsingStamp;
     }
     else {
