@@ -32,11 +32,11 @@ presence.on("UpdateData", async () => {
         title = document.querySelector(".watch-title");
     }
 
-    //TODO Find solution for uploader in miniplayer
+    //TODO: Find solution for uploader in miniplayer
     var uploader =
         document.querySelector("#owner-name a") !== null
           ? document.querySelector("#owner-name a")
-          : document.querySelector(".yt-user-info a"),
+          : document.querySelector(".ytd-channel-name a"),
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)

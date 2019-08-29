@@ -34,7 +34,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         var uploader = document.querySelector("#owner-name a") !== null
             ? document.querySelector("#owner-name a")
-            : document.querySelector(".yt-user-info a"), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), presenceData = {
+            : document.querySelector(".ytd-channel-name a"), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), presenceData = {
             details: title.innerText,
             state: uploader.textContent,
             largeImageKey: "yt_lg",
