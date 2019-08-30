@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     var uploader =
         document.querySelector("#owner-name a") !== null
           ? document.querySelector("#owner-name a")
-          : document.querySelector(".ytd-channel-name a"),
+          : document.querySelector('div#upload-info > ytd-channel-name > div > div > yt-formatted-string > a'),
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
