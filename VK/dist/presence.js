@@ -61,7 +61,6 @@ function getVKTrackTimePassed() {
 }
 function getVKTrackLength() {
     var timeLeft, timePassed, overallTime;
-    let playerDuration = document.querySelector(".audio_page_player_duration");
     timeLeft = getVKTrackTimeLeft();
     timePassed = getVKTrackTimePassed();
     overallTime = [(Number(timePassed[0]) + Number(timeLeft[0])), (Number(timePassed[1]) + Number(timeLeft[1]))];
@@ -79,7 +78,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             play: "presence.playback.playing",
             pause: "presence.playback.paused"
         });
-    if (document.location.pathname.startsWith("/audios")) {
+    if (document.location.pathname.startsWith("/audios") || document.querySelector(".audio_layer_container")) {
         var title = document.querySelector(".audio_page_player_title_song").innerText, author = document.querySelector(".audio_page_player_title_performer a").innerText, isPlaying;
         if (document.querySelector(".audio_playing") == null) {
             isPlaying = true;

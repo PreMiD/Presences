@@ -68,8 +68,6 @@ function getVKTrackLength(): Object {
 
     var timeLeft, timePassed, overallTime;
 
-    let playerDuration = document.querySelector(".audio_page_player_duration") as HTMLElement;
-
     timeLeft = getVKTrackTimeLeft();
     timePassed = getVKTrackTimePassed();
 
@@ -96,9 +94,9 @@ presence.on("UpdateData", async () => {
         strings = await presence.getStrings({
             play: "presence.playback.playing",
             pause: "presence.playback.paused"
-    });
+        });
 
-    if (document.location.pathname.startsWith("/audios")) {
+    if (document.location.pathname.startsWith("/audios") || document.querySelector(".audio_layer_container")) {
 
         var title: string = (document.querySelector(".audio_page_player_title_song") as HTMLElement).innerText,
             author: string = (document.querySelector(".audio_page_player_title_performer a") as HTMLElement).innerText,
