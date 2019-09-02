@@ -45,7 +45,7 @@ if (!loggedout) {
     if (document.querySelector(".main_body .titre")) {
       if (document.querySelector(".main_body .titre") && document.getElementsByTagName("kbd")[1] && !document.querySelector(".answer")) {
         var EXNo = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/)[0];
-        var Exercise = (document.querySelector(".main_body .titre") as HTMLElement).innerText + " - " + EXNo;
+        var Exercise = (((document.querySelector(".sheet") as HTMLAnchorElement).href.match(/#ex(.?.?)/))[1]).replace(/&|#/g,"") + "." + EXNo + " - " + (document.querySelector(".main_body .titre") as HTMLElement).innerText;
       } else var Exercise = (document.querySelector(".main_body .titre") as HTMLElement).innerText // Results page, so no EXNo
     }
     if (document.querySelector(".oeftitle")) {
