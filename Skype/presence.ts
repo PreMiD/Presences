@@ -64,7 +64,6 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       
         presence.setActivity(presenceData); 
-        console.log(presenceData);
 
       }
     } else if (bot !== null) {
@@ -82,7 +81,6 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       
         presence.setActivity(presenceData); 
-        console.log(presenceData);
 
       } 
     } else { 

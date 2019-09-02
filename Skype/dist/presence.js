@@ -44,7 +44,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 presenceData.state = user.innerText;
                 presenceData.smallImageKey = "reading";
                 presence.setActivity(presenceData);
-                console.log(presenceData);
             }
         }
         else if (bot !== null) {
@@ -59,7 +58,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 presenceData.state = bot.innerText;
                 presenceData.smallImageKey = "reading";
                 presence.setActivity(presenceData);
-                console.log(presenceData);
             }
         }
         else {
