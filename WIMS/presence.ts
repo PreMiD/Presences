@@ -60,6 +60,14 @@ if (!loggedout) {
       var timestamp = 0;
     } else var timestamp = Date.now(); // Else reset time
   }
+
+  // In Exam
+  else if (document.baseURI.match(/(exam=)/)) {
+    var Worksheet = "";
+    var Exercise = (document.querySelector("h1.wims_title font") as HTMLElement).innerText;
+    var timeleft = Date.now() + (parseInt((document.querySelector("p#exam_clock") as HTMLElement).innerText.split(":")[1])*60 + parseInt((document.querySelector("p#exam_clock") as HTMLElement).innerText.split(":")[2]))*1000;
+    console.log(timeleft)
+  }
 }
 
 presence.on("UpdateData", async () => {
@@ -67,6 +75,7 @@ presence.on("UpdateData", async () => {
     details: Classname + Worksheet,
     state: Exercise,
     startTimestamp: timestamp,
+    endTimestamp: timeleft,
     largeImageKey: "wims_lg"
   };
   if (loggedout) {
