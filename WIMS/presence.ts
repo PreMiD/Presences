@@ -66,7 +66,6 @@ if (!loggedout) {
     var Worksheet = "";
     var Exercise = (document.querySelector("h1.wims_title font") as HTMLElement).innerText;
     var timeleft = Date.now() + (parseInt((document.querySelector("p#exam_clock") as HTMLElement).innerText.split(":")[1])*60 + parseInt((document.querySelector("p#exam_clock") as HTMLElement).innerText.split(":")[2]))*1000;
-    console.log(timeleft)
   }
 }
 
