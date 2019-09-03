@@ -43,8 +43,8 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       let presenceData: presenceData = {
-        details: songName.innerText + " on " + stationName.textContent,
-        state: "by " + artistName.innerText,
+        details: songName.innerText + " by " + artistName.innerText,
+        state: "Listening on " + stationName.textContent,
         largeImageKey: "rainwv",
         smallImageKey: "live",
         startTimestamp: timeElapsed

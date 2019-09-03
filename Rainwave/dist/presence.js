@@ -52,8 +52,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         else {
             let presenceData = {
-                details: songName.innerText + " on " + stationName.textContent,
-                state: "by " + artistName.innerText,
+                details: songName.innerText + " by " + artistName.innerText,
+                state: "Listening on " + stationName.textContent,
                 largeImageKey: "rainwv",
                 smallImageKey: "live",
                 startTimestamp: timeElapsed
