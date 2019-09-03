@@ -41,7 +41,7 @@ if (!loggedout) {
         if (document.querySelector(".main_body .titre")) {
             if (document.querySelector(".main_body .titre") && document.getElementsByTagName("kbd")[1] && !document.querySelector(".answer")) {
                 var EXNo = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/)[0];
-                var Exercise = document.querySelector(".main_body .titre").innerText + " - " + EXNo;
+                var Exercise = ((document.querySelector(".sheet").href.match(/#ex(.?.?)/))[1]).replace(/&|#/g, "") + "." + EXNo + " - " + document.querySelector(".main_body .titre").innerText;
             }
             else
                 var Exercise = document.querySelector(".main_body .titre").innerText;
@@ -63,12 +63,18 @@ if (!loggedout) {
         else
             var timestamp = Date.now();
     }
+    else if (document.baseURI.match(/(exam=)/)) {
+        var Worksheet = "";
+        var Exercise = document.querySelector("h1.wims_title font").innerText;
+        var timeleft = Date.now() + (parseInt(document.querySelector("p#exam_clock").innerText.split(":")[1]) * 60 + parseInt(document.querySelector("p#exam_clock").innerText.split(":")[2])) * 1000;
+    }
 }
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
         details: Classname + Worksheet,
         state: Exercise,
         startTimestamp: timestamp,
+        endTimestamp: timeleft,
         largeImageKey: "wims_lg"
     };
     if (loggedout) {
