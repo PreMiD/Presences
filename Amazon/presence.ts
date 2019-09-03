@@ -260,13 +260,6 @@ presence.on("UpdateData", async () => {
 
       }
     }
-  } else if (document.location.hostname == "www.skype.com") {
-    presenceData.details = "Skype";
-    presenceData.state = "Browsing...";
-      
-    delete presenceData.smallImageKey;
-      
-    presence.setActivity(presenceData); 
   } else { 
 
     presence.setActivity();

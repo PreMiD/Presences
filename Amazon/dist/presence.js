@@ -212,12 +212,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
         }
     }
-    else if (document.location.hostname == "www.skype.com") {
-        presenceData.details = "Skype";
-        presenceData.state = "Browsing...";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
     else {
         presence.setActivity();
         presence.setTrayTitle();
