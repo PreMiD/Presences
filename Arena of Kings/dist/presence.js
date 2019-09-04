@@ -6,13 +6,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var presence = new Presence({
+const presence = new Presence({
     clientId: "555834227833307146"
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    var presenceData = yield presence.getPageVariable("PreMiD_PresenceData");
-    if (presenceData === null)
-        presence.setActivity();
-    else
-        presence.setActivity(presenceData.data);
+    const presenceData = yield presence.getPageVariable("PreMiD_PresenceData");
+    presence.setActivity(presenceData === null ? undefined : presenceData.data);
 }));
