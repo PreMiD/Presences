@@ -1,9 +1,8 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -15,29 +14,48 @@ var presence = new Presence({
     pause: "presence.playback.paused",
     live: "presence.activity.live"
 });
+var pattern = "•";
+var truncateAfter = function (str, pattern) {
+    return str.slice(0, str.indexOf(pattern));
+};
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var video = document.querySelector(".video-stream");
     if (video !== null && !isNaN(video.duration)) {
         var oldYouTube = null;
+        var YouTubeTV = null;
         var title;
         document.querySelector(".watch-title") !== null
             ? (oldYouTube = true)
             : (oldYouTube = false);
-        if (!oldYouTube) {
+        document.querySelector(".player-video-title") !== null
+            ? (YouTubeTV = true)
+            : (YouTubeTV = false);
+        if (!oldYouTube && !YouTubeTV) {
             title =
                 document.location.pathname !== "/watch"
                     ? document.querySelector(".ytd-miniplayer .title")
                     : document.querySelector(".title.ytd-video-primary-info-renderer");
         }
         else {
-            if (document.location.pathname == "/watch")
-                title = document.querySelector(".watch-title");
+            if (oldYouTube) {
+                if (document.location.pathname == "/watch")
+                    title = document.querySelector(".watch-title");
+            }
+            else if (YouTubeTV) {
+                title = document.querySelector(".player-video-title");
+            }
         }
+        var uploaderTV;
+        uploaderTV = document.querySelector(".player-video-details");
         var uploader = document.querySelector("#owner-name a") !== null
             ? document.querySelector("#owner-name a")
-            : document.querySelector('div#upload-info > ytd-channel-name > div > div > yt-formatted-string > a'), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), presenceData = {
+            : document.querySelector(".ytd-channel-name a") !== null
+                ? document.querySelector(".ytd-channel-name a")
+                : uploaderTV = truncateAfter(uploaderTV.innerText, pattern), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), presenceData = {
             details: title.innerText,
-            state: uploader.textContent,
+            state: uploaderTV !== null
+                ? uploaderTV
+                : uploader.innerText,
             largeImageKey: "yt_lg",
             smallImageKey: video.paused ? "pause" : "play",
             smallImageText: video.paused
