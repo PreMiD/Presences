@@ -65,7 +65,10 @@ declare class Presence {
      * @param strings String object with keys being the key for string, keyValue is the string value
      * @link https://docs.premid.app/presence-development/coding/presence-class#getstrings-object
      */
-    getStrings(strings: Object): Promise<any>;
+    getStrings<
+      M extends { [key: string]: string },
+      U extends { [key in keyof M]: string }
+    >(strings: M): Promise<U>;
     /**
      * Get variables from the actual site.
      * @param {Array} variables Array of variable names to get
@@ -79,10 +82,24 @@ declare class Presence {
      */
     private sendData;
     /**
-     * Subscribe to events emitted by the extension
+     * Subscribe to the UpdateData event emitted by the extension
      * @param eventName EventName to subscribe to
      * @param callback Callback function for event
      * @link https://docs.premid.app/presence-development/coding/presence-class#events
      */
-    on(eventName: "UpdateData" | "MediaKeys" | "iFrameData", callback: Function): void;
+    on(eventName: "UpdateData", callback: () => void): void;
+    /**
+     * Subscribe to the MediaKeys event emitted by the extension
+     * @param eventName EventName to subscribe to
+     * @param callback Callback function for event
+     * @link https://docs.premid.app/presence-development/coding/presence-class#events
+     */
+    on(eventName: "MediaKeys", callback: (key: string) => void): void;
+    /**
+     * Subscribe to the iFrameData event emitted by the extension
+     * @param eventName EventName to subscribe to
+     * @param callback Callback function for event
+     * @link https://docs.premid.app/presence-development/coding/presence-class#events
+     */
+    on(eventName: "iFrameData", callback: (data: any) => void): void;
 }
