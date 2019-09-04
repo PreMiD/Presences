@@ -6,68 +6,44 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var presence = new Presence({
+const presence = new Presence({
     clientId: "470178791428325376",
     mediaKeys: false
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    if (document.location.pathname.startsWith("/show")) {
-        let homepagePresence = {
-            details: document.getElementsByClassName("titel")[0].getElementsByTagName("h3")[0].innerText,
-            largeImageKey: "logo"
-        };
-        presence.setActivity(homepagePresence);
+    const { pathname } = window.location;
+    const presenceData = {
+        largeImageKey: "logo"
+    };
+    if (pathname.startsWith("/show")) {
+        presenceData.details = document
+            .getElementsByClassName("titel")[0]
+            .getElementsByTagName("h3")[0].innerText;
     }
-    else if (document.location.pathname.startsWith("/speedsuche") || document.location.pathname.startsWith("/suche")) {
-        let searchingPresence = {
-            details: "Sucht...",
-            state: "Sucht nach einem Anime",
-            largeImageKey: "logo"
-        };
-        presence.setActivity(searchingPresence);
+    else if (pathname.startsWith("/speedsuche") ||
+        pathname.startsWith("/suche")) {
+        presenceData.details = "Sucht...";
+        presenceData.state = "Sucht nach einem Anime";
     }
-    else if (document.location.pathname == "/") {
-        let homepagePresence = {
-            details: "Inaktiv...",
-            state: "Hängt auf der Startseite ab",
-            largeImageKey: "logo"
-        };
-        presence.setActivity(homepagePresence);
+    else if (pathname == "/") {
+        presenceData.details = "Inaktiv...";
+        presenceData.state = "Hängt auf der Startseite ab";
     }
-    else if (document.location.pathname.startsWith("/animes")) {
-        let overviewPresence = {
-            details: "Schaut sich um...",
-            state: "Sucht nach Animes",
-            largeImageKey: "logo"
-        };
-        presence.setActivity(overviewPresence);
+    else if (pathname.startsWith("/animes")) {
+        presenceData.details = "Schaut sich um...";
+        presenceData.state = "Sucht nach Animes";
     }
-    else if (document.location.pathname.startsWith("/kalender")) {
-        let calenderPresence = {
-            details: "Schaut in den Kalender",
-            largeImageKey: "logo"
-        };
-        presence.setActivity(calenderPresence);
+    else if (pathname.startsWith("/kalender")) {
+        presenceData.details = "Schaut in den Kalender";
     }
     else {
-        let inactivePresence = {
-            details: "Inaktiv...",
-            largeImageKey: "logo"
-        };
-        presence.setActivity(inactivePresence);
+        presenceData.details = "Inaktiv...";
     }
+    presence.setActivity(presenceData);
 }));
-presence.on("MediaKeys", (key) => {
+presence.on("MediaKeys", key => {
     switch (key) {
         case "pause":
             break;
     }
 });
-presence.on('iFrameData', function (data) {
-    console.log(data);
-});
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}
