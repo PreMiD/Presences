@@ -1,0 +1,24 @@
+{
+    "author": {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    },
+    "service": "NameMC",
+    "description": { 
+        "en" : "Minecraft Names & Skins"
+    },
+    "url": [
+      "namemc.com",
+      "store.namemc.com"
+    ],
+    "version": "1.0",
+    "logo": "https://i.gyazo.com/93e3d0ffa8808c99b7bb6a637bbac979.png",
+    "thumbnail": "https://i.gyazo.com/a57949ce7bd6e6a2b80d86675deb074f.png",
+    "color": "#00000",
+    "tags": [
+        "namemc",
+        "minecraft",
+        "gaming"
+    ],
+    "category": "games"
+  }
