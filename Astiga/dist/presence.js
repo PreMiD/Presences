@@ -6,93 +6,62 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var presence = new Presence({
+const presence = new Presence({
     clientId: "612746548631044116",
     mediaKeys: false
-}), strings = presence.getStrings({
+});
+const startTimestamp = Math.floor(Date.now() / 1000);
+const stringsPromise = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
-var musicTitle;
-var pattern = ":";
-var minutesDuration, minutesDurationString, secondsDuration, secondsDurationString;
-var currentMinutes, currentMinutesString, currentSeconds, currentSecondsString;
-var duration, currentTime;
-var play, pause;
-var currentUser, albumName, currentArtist;
-var truncateBefore = function (str, pattern) {
-    return str.slice(str.indexOf(pattern) + pattern.length);
-};
-var truncateAfter = function (str, pattern) {
-    return str.slice(0, str.indexOf(pattern));
-};
-var playback = false;
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    let presenceData = {
-        details: "In construction",
-        state: "-",
+    const presenceData = {
         largeImageKey: "lg"
     };
-    currentUser = document.querySelector("#jp_container_1 > div.wrapper > aside.main-sidebar > section > div > div.pull-left.info > p");
-    currentArtist = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-artist.menu-item");
-    musicTitle = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div.song-title.overflow");
-    albumName = document.querySelector("footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-album.menu-item");
-    if (musicTitle.innerText.length > 1) {
-        play = document.querySelector("footer > div.jp-controls > div.btn-music-container > div:nth-child(2) > a.jp-play.btn.btn-music.btn-sm");
-        pause = document.querySelector("footer > div.jp-controls > div.btn-music-container > div:nth-child(2) > a.jp-pause.btn.btn-music.btn-sm");
-        currentMinutesString = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-current-time");
-        currentMinutes = truncateAfter(currentMinutesString.innerText, pattern);
-        currentSecondsString = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-current-time");
-        currentSeconds = truncateBefore(currentSecondsString.innerText, pattern);
-        minutesDurationString = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-duration");
-        minutesDuration = truncateAfter(minutesDurationString.innerText, pattern);
-        secondsDurationString = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-duration");
-        secondsDuration = truncateBefore(secondsDurationString.innerText, pattern);
-        currentTime = getSeconds(currentMinutes, currentSeconds);
-        duration = getSeconds(minutesDuration, secondsDuration);
-        if (!play.style.display || currentTime == 0) {
-            playback = false;
+    const musicTitleElement = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div.song-title.overflow");
+    const musicTitle = musicTitleElement.innerText;
+    const currentArtistElement = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-artist.menu-item");
+    let currentArtist = currentArtistElement.innerText;
+    if (currentArtist.length === 0) {
+        currentArtist = "No artist";
+    }
+    const albumNameElement = document.querySelector("footer > div.jp-controls > div.btn-music-container > div:nth-child(1) > div:nth-child(2) > a.song-album.menu-item");
+    let albumName = albumNameElement.innerText;
+    if (albumName.length === 0) {
+        albumName = "No album";
+    }
+    if (musicTitle.length > 1) {
+        const play = document.querySelector("footer > div.jp-controls > div.btn-music-container > div:nth-child(2) > a.jp-play.btn.btn-music.btn-sm");
+        const currentTimeElement = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-current-time");
+        const currentTime = getSeconds(currentTimeElement.innerText);
+        const durationElement = document.querySelector("#jp_container_1 > div.wrapper > footer > div.jp-controls > div.btn-music-container > div.hidden-xs > span.jp-duration");
+        const duration = getSeconds(durationElement.innerText);
+        const playback = !(!play.style.display || currentTime == 0);
+        const timestamps = getTimestamps(currentTime, duration);
+        const strings = yield stringsPromise;
+        if (!playback) {
+            presenceData.startTimestamp = timestamps[0];
+            presenceData.endTimestamp = timestamps[1];
         }
-        else {
-            playback = true;
-        }
-        var timestamps = getTimestamps(currentTime, duration);
-        presenceData.details = "Song: " + musicTitle.innerText;
-        if (albumName.innerText.length > 0 && currentArtist.innerText.length > 0) {
-            presenceData.state = currentArtist.innerText + " / " + albumName.innerText;
-        }
-        else if (albumName.innerText.length == 0 && currentArtist.innerText.length > 0) {
-            presenceData.state = currentArtist.innerText + " / No album";
-        }
-        else if (albumName.innerText.length > 0 && currentArtist.innerText.length == 0) {
-            presenceData.state = "No artist / " + albumName.innerText;
-        }
-        else if (albumName.innerText.length == 0 && currentArtist.innerText.length == 0) {
-            presenceData.state = "No artist / No album";
-        }
+        presenceData.details = "Song: " + musicTitle;
         presenceData.smallImageKey = playback ? "play" : "pause";
-        presenceData.smallImageText = playback ? (yield strings).pause : (yield strings).play;
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
-        if (playback == false) {
-            delete presenceData.startTimestamp;
-            delete presenceData.endTimestamp;
-        }
+        presenceData.smallImageText = strings[playback ? "play" : "pause"];
+        presenceData.state = `${currentArtist} / ${albumName}`;
     }
     else {
+        const currentUserElement = document.querySelector("#jp_container_1 > div.wrapper > aside.main-sidebar > section > div > div.pull-left.info > p");
         presenceData.details = "No music playing.";
-        presenceData.state = "Logged in user: " + currentUser.innerText;
+        presenceData.state = `Logged in user: ${currentUserElement === null ? "unknown" : currentUserElement.innerText}`;
     }
-    presence.setActivity(presenceData);
+    presence.setActivity(presenceData, true);
 }));
 function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    const startTime = Date.now();
+    const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
 }
-function getSeconds(minutes, seconds) {
-    var minutesToSeconds = Number(Math.floor(minutes * 60));
-    var result = minutesToSeconds + Number(seconds);
-    return result;
+function getSeconds(string) {
+    const [minutesStr, secondsStr] = string.split(":");
+    return Math.floor(Number(minutesStr) * 60) + Number(secondsStr);
 }
