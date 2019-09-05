@@ -1,86 +1,60 @@
-var presence = new Presence({
-    clientId: "611657413350654010",
-    mediaKeys: true
-  }),
-
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-  var lastPlaybackState = null;
-  var playback;
-  var browsingStamp = Math.floor(Date.now()/1000);
-
-  if(lastPlaybackState != playback) {
-
-      lastPlaybackState = playback
-      browsingStamp = Math.floor(Date.now()/1000)
-      
-  }
+const presence = new Presence({
+  clientId: "611657413350654010",
+  mediaKeys: true
+});
+const stringsPromise = presence.getStrings({
+  play: "presence.playback.playing",
+  pause: "presence.playback.paused"
+});
+const startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
+  const presenceData: presenceData = {
+    largeImageKey: "lg"
+  };
+  const videoElement: HTMLVideoElement = document.querySelector(
+    "#player > div.jw-media.jw-reset > video"
+  );
 
-  playback = 
-    document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") !== null
-      ? true : false
-  
-  if (!playback) {
+  if (videoElement !== null) {
+    const videoTitle: HTMLDivElement = document.querySelector(
+      "div.playlistAssistir > div.infosAtulEpisodio > div.nomeAnime"
+    );
+    const episode: HTMLDivElement = document.querySelector(
+      "div.playlistAssistir > div.infosAtulEpisodio > div.epEpisodio"
+    );
+    const timestamps = getTimestamps(
+      Math.floor(videoElement.currentTime),
+      Math.floor(videoElement.duration)
+    );
 
-    let presenceData: presenceData = {
-      largeImageKey: "lg"
-    };
-    
+    const strings = await stringsPromise;
+
+    presenceData.details = videoTitle.innerText;
+    presenceData.state = episode.innerText;
+    presenceData.smallImageKey = videoElement.paused ? "pause" : "play";
+    presenceData.smallImageText =
+      strings[videoElement.paused ? "pause" : "play"];
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
+
+    presence.setTrayTitle(videoTitle.innerText);
+  } else {
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = startTimestamp;
 
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
-
-    presence.setActivity(presenceData, true);
-    
+    presence.setTrayTitle();
   }
 
-  var video: HTMLVideoElement = document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
-
-  if (video !== null) {
-
-      var videoTitle : any;
-
-      videoTitle = document.querySelector("div.playlistAssistir > div.infosAtulEpisodio > div.nomeAnime");
-      var episode : any = document.querySelector("div.playlistAssistir > div.infosAtulEpisodio > div.epEpisodio"),
-        timestamps = getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        ),
-        presenceData: presenceData = {
-          details: videoTitle.innerText,
-          state: episode.innerText,
-          largeImageKey: "lg",
-          smallImageKey: video.paused ? "pause" : "play",
-          smallImageText: video.paused
-            ? (await strings).pause
-            : (await strings).play,
-          startTimestamp: timestamps[0],
-          endTimestamp: timestamps[1]
-        };
-
-      presence.setTrayTitle(videoTitle.innerText);
-
-      presenceData.details = videoTitle.innerText;
-      presenceData.state = episode.innerText;
-      presenceData.startTimestamp = browsingStamp;
- 
-      presence.setActivity(presenceData, true);
-    
-    }
-
+  presence.setActivity(presenceData, true);
 });
 
 presence.on("MediaKeys", (key: string) => {
   switch (key) {
     case "pause":
-      var video = document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") as HTMLVideoElement;
+      var video = document.querySelector(
+        "#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+      ) as HTMLVideoElement;
       video.paused ? video.play() : video.pause();
       break;
   }

@@ -6,55 +6,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var presence = new Presence({
+const presence = new Presence({
     clientId: "611657413350654010",
     mediaKeys: true
-}), strings = presence.getStrings({
+});
+const stringsPromise = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
 });
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
-if (lastPlaybackState != playback) {
-    lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
-}
+const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    playback =
-        document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") !== null
-            ? true : false;
-    if (!playback) {
-        let presenceData = {
-            largeImageKey: "lg"
-        };
-        presenceData.details = "Browsing...";
-        presenceData.startTimestamp = browsingStamp;
-        delete presenceData.state;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData, true);
-    }
-    var video = document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
-    if (video !== null) {
-        var videoTitle;
-        videoTitle = document.querySelector("div.playlistAssistir > div.infosAtulEpisodio > div.nomeAnime");
-        var episode = document.querySelector("div.playlistAssistir > div.infosAtulEpisodio > div.epEpisodio"), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), presenceData = {
-            details: videoTitle.innerText,
-            state: episode.innerText,
-            largeImageKey: "lg",
-            smallImageKey: video.paused ? "pause" : "play",
-            smallImageText: video.paused
-                ? (yield strings).pause
-                : (yield strings).play,
-            startTimestamp: timestamps[0],
-            endTimestamp: timestamps[1]
-        };
-        presence.setTrayTitle(videoTitle.innerText);
+    const presenceData = {
+        largeImageKey: "lg"
+    };
+    const videoElement = document.querySelector("#player > div.jw-media.jw-reset > video");
+    if (videoElement !== null) {
+        const videoTitle = document.querySelector("div.playlistAssistir > div.infosAtulEpisodio > div.nomeAnime");
+        const episode = document.querySelector("div.playlistAssistir > div.infosAtulEpisodio > div.epEpisodio");
+        const timestamps = getTimestamps(Math.floor(videoElement.currentTime), Math.floor(videoElement.duration));
+        const strings = yield stringsPromise;
         presenceData.details = videoTitle.innerText;
         presenceData.state = episode.innerText;
-        presenceData.startTimestamp = browsingStamp;
-        presence.setActivity(presenceData, true);
+        presenceData.smallImageKey = videoElement.paused ? "pause" : "play";
+        presenceData.smallImageText =
+            strings[videoElement.paused ? "pause" : "play"];
+        presenceData.startTimestamp = timestamps[0];
+        presenceData.endTimestamp = timestamps[1];
+        presence.setTrayTitle(videoTitle.innerText);
     }
+    else {
+        presenceData.details = "Browsing...";
+        presenceData.startTimestamp = startTimestamp;
+        presence.setTrayTitle();
+    }
+    presence.setActivity(presenceData, true);
 }));
 presence.on("MediaKeys", (key) => {
     switch (key) {
