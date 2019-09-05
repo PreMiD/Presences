@@ -34,7 +34,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             title =
                 document.location.pathname !== "/watch"
                     ? document.querySelector(".ytd-miniplayer .title")
-                    : document.querySelector(".title.ytd-video-primary-info-renderer");
+                    : document.querySelector("h1 yt-formatted-string.ytd-video-primary-info-renderer");
         }
         else {
             if (oldYouTube) {
@@ -45,17 +45,30 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 title = document.querySelector(".player-video-title");
             }
         }
-        var uploaderTV;
+        var uploaderTV, uploaderMiniPlayer, uploader2, edited;
+        edited = false;
         uploaderTV = document.querySelector(".player-video-details");
-        var uploader = document.querySelector("#owner-name a") !== null
-            ? document.querySelector("#owner-name a")
-            : document.querySelector(".ytd-channel-name a") !== null
-                ? document.querySelector(".ytd-channel-name a")
-                : uploaderTV = truncateAfter(uploaderTV.innerText, pattern), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), presenceData = {
+        uploaderMiniPlayer = document.querySelector("yt-formatted-string#owner-name");
+        if (uploaderMiniPlayer !== null) {
+            if (uploaderMiniPlayer.innerText == "YouTube") {
+                edited = true;
+                uploaderMiniPlayer.setAttribute("premid-value", "Listening to a playlist");
+            }
+        }
+        uploader2 = document.querySelector("#owner-name a");
+        var uploader = uploaderMiniPlayer !== null && uploaderMiniPlayer.innerText.length > 0
+            ? uploaderMiniPlayer
+            : uploader2 !== null && uploader2.innerText.length > 0
+                ? uploader2
+                : document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a") !== null
+                    ? document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a")
+                    : uploaderTV = truncateAfter(uploaderTV.innerText, pattern), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), presenceData = {
             details: title.innerText,
-            state: uploaderTV !== null
-                ? uploaderTV
-                : uploader.innerText,
+            state: edited == true
+                ? uploaderMiniPlayer.getAttribute("premid-value")
+                : uploaderTV !== null
+                    ? uploaderTV
+                    : uploader.innerText,
             largeImageKey: "yt_lg",
             smallImageKey: video.paused ? "pause" : "play",
             smallImageText: video.paused

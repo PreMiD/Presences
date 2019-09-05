@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       title =
         document.location.pathname !== "/watch"
           ? document.querySelector(".ytd-miniplayer .title")
-          : document.querySelector(".title.ytd-video-primary-info-renderer");
+          : document.querySelector("h1 yt-formatted-string.ytd-video-primary-info-renderer");
     } else {
       if(oldYouTube) {
         if (document.location.pathname == "/watch")
@@ -46,17 +46,35 @@ presence.on("UpdateData", async () => {
       }
     }
 
-    var uploaderTV : any;
+    var uploaderTV : any, uploaderMiniPlayer : any, uploader2 : any, edited : boolean;
+
+    edited = false;
 
     uploaderTV = document.querySelector(".player-video-details");
 
-    //TODO: Find solution for uploader in miniplayer
+    uploaderMiniPlayer = document.querySelector("yt-formatted-string#owner-name");
+
+    if(uploaderMiniPlayer !== null) {
+
+      if(uploaderMiniPlayer.innerText == "YouTube") {
+
+        edited = true;
+
+        uploaderMiniPlayer.setAttribute("premid-value", "Listening to a playlist");
+        
+      }
+
+    }
+    uploader2 = document.querySelector("#owner-name a");
+
     var uploader : any =
-        document.querySelector("#owner-name a") !== null
-          ? document.querySelector("#owner-name a")
-          : document.querySelector(".ytd-channel-name a") !== null 
-            ? document.querySelector(".ytd-channel-name a")
-            : uploaderTV = truncateAfter(uploaderTV.innerText, pattern),
+      uploaderMiniPlayer !== null && uploaderMiniPlayer.innerText.length > 0
+          ? uploaderMiniPlayer
+          : uploader2 !== null && uploader2.innerText.length > 0
+            ? uploader2
+            : document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a") !== null 
+              ? document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a")
+              : uploaderTV = truncateAfter(uploaderTV.innerText, pattern),
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
@@ -64,7 +82,9 @@ presence.on("UpdateData", async () => {
       live = Boolean(document.querySelector(".ytp-live")),
       presenceData: presenceData = {
         details: title.innerText,
-        state: uploaderTV !== null
+        state: edited == true
+        ? uploaderMiniPlayer.getAttribute("premid-value")
+        : uploaderTV !== null
           ? uploaderTV
           : uploader.innerText,
         largeImageKey: "yt_lg",
