@@ -22,15 +22,13 @@ presence.on('UpdateData', async () => {
     synced;
 
   const videoElements: NodeListOf<HTMLVideoElement> = document.querySelectorAll(
-    '.light-player'
+    '.spectre-player'
   );
-  var videoElement: HTMLVideoElement;
+  var videoElement: HTMLVideoElement = document.querySelector("video");
 
   if (videoElements.length > 1) {
     state = 'clip';
-    videoElement = videoElements[1];
   } else if (videoElements.length === 1) {
-    videoElement = videoElements[0];
     const buttonElements: HTMLElement = document.querySelector(
       '.bui-tabs-bordered'
     );
