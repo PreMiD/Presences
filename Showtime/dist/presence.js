@@ -12,7 +12,8 @@ var presence = new Presence({
     mediaKeys: true
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
+    live: "presence.activity.live"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
@@ -29,23 +30,25 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             description = "Movie";
         }
         var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
-        var currentState;
+        var currentState, smallImageKey, smallImageText;
         if (description.includes("ON NOW")) {
             currentState = "Live TV";
             timestamps[0] = 0;
             timestamps[1] = 0;
+            smallImageKey = "live";
+            smallImageText = (yield strings).live;
         }
         else {
             currentState = description.substring(description.lastIndexOf("  ") + 1);
+            smallImageKey = video.paused ? "pause" : "play";
+            smallImageText = video.paused ? (yield strings).pause : (yield strings).play;
         }
         var data = {
             details: title,
             state: currentState,
             largeImageKey: "showtime-logo",
-            smallImageKey: video.paused ? "pause" : "play",
-            smallImageText: video.paused
-                ? (yield strings).pause
-                : (yield strings).play,
+            smallImageKey: smallImageKey,
+            smallImageText: smallImageText,
             startTimestamp: timestamps[0],
             endTimestamp: timestamps[1]
         };
