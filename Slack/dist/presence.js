@@ -51,13 +51,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else if (chat !== null) {
             if (!typing.className.includes("ql-blank")) {
                 presenceData.details = "Typing in channel:";
-                presenceData.state = chat.innerText + " (Workspace: " + group.innerText + ")";
+                presenceData.state = "#" + chat.innerText + " (Workspace: " + group.innerText + ")";
                 delete presenceData.smallImageKey;
                 presence.setActivity(presenceData);
             }
             else {
                 presenceData.details = "Reading channel messages:";
-                presenceData.state = chat.innerText + " (Workspace: " + group.innerText + ")";
+                presenceData.state = "#" + chat.innerText + " (Workspace: " + group.innerText + ")";
                 presenceData.smallImageKey = "reading";
                 presence.setActivity(presenceData);
             }
