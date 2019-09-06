@@ -1,0 +1,29 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "Spotify",
+    "description": {
+        "en": "Music for everyone. Note: Show only if you are listening to a podcast or if you are not and not listening to a song, it shows page info. To show normal songs use the Spotify x Discord connection.",
+        "nl": "Muziek voor iedereen. Opmerking: Laat alleen zien als je naar een podcast luistert of als je dat niet doet en niet naar een liedje luistert laat het pagina info zien. Om normale liedjes te laten zien gebruik de Spotify x Discord connectie."
+    },
+    "url": [
+        "www.spotify.com",
+        "open.spotify.com",
+        "newsroom.spotify.com",
+        "artists.spotify.com",
+        "developer.spotify.com",
+        "investors.spotify.com",
+        "support.spotify.com"
+    ],
+    "version": "1.0",
+    "logo": "https://i.imgur.com/q3tKDRA.png",
+    "thumbnail": "https://i.imgur.com/AzNhQ4j.png",
+    "color": "#1ed760",
+    "tags": [
+        "audio",
+        "podcast"
+    ],
+    "category": "music"
+}
