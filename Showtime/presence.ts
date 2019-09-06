@@ -9,8 +9,6 @@ var presence = new Presence({
     live: "presence.activity.live"
 });
 
-var browsingStamp = Math.floor(Date.now()/1000);
-
 presence.on("UpdateData", async () => {
     var video: HTMLVideoElement = document.querySelector("#main-container > div > video");
     
