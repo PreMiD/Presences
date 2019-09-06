@@ -1,28 +1,26 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "612042450785271811",
   mediaKeys: false
-}),
- presenceData: presenceData = {
-  largeImageKey: "logo"
-};
+});
 
 presence.on("UpdateData", async () => {
-
-  var title:HTMLElement = document.querySelector(".mtl.mbxxxl.xs-mts.xs-mbxs.petition-title")
-    if(title !== null) {
-      var votes = document.querySelector(".mbxs span strong")
-      presenceData.details = (title as HTMLElement).innerText
-      presenceData.state = (votes as HTMLElement).innerText
-      presenceData.largeImageKey = "logo"
-
-      presence.setActivity(presenceData);
-  
-} else {
-
-  var pageData: presenceData = {
-    details: "Browsing..",
+  const presenceData: presenceData = {
     largeImageKey: "logo"
   };
-  presence.setActivity(pageData);
+  const titleElement: HTMLHeadingElement = document.querySelector(
+    ".mtl.mbxxxl.xs-mts.xs-mbxs.petition-title"
+  );
+
+  if (titleElement !== null) {
+    let votesElement: HTMLElement = document.querySelector(".mbxs span strong");
+    if (votesElement === null) {
+      votesElement = document.querySelector("div.xs-phs.xs-pbs > div.hidden-xs > p.type-weak");
+    }
+    presenceData.details = titleElement.innerText;
+    presenceData.state = votesElement.innerText;
+  } else {
+    presenceData.details = "Browsing...";
   }
+
+  presence.setActivity(presenceData);
 });

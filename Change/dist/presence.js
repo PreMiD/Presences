@@ -6,26 +6,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var presence = new Presence({
+const presence = new Presence({
     clientId: "612042450785271811",
     mediaKeys: false
-}), presenceData = {
-    largeImageKey: "logo"
-};
+});
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    var title = document.querySelector(".mtl.mbxxxl.xs-mts.xs-mbxs.petition-title");
-    if (title !== null) {
-        var votes = document.querySelector(".mbxs span strong");
-        presenceData.details = title.innerText;
-        presenceData.state = votes.innerText;
-        presenceData.largeImageKey = "logo";
-        presence.setActivity(presenceData);
+    const presenceData = {
+        largeImageKey: "logo"
+    };
+    const titleElement = document.querySelector(".mtl.mbxxxl.xs-mts.xs-mbxs.petition-title");
+    if (titleElement !== null) {
+        let votesElement = document.querySelector(".mbxs span strong");
+        if (votesElement === null) {
+            votesElement = document.querySelector("div.xs-phs.xs-pbs > div.hidden-xs > p.type-weak");
+        }
+        presenceData.details = titleElement.innerText;
+        presenceData.state = votesElement.innerText;
     }
     else {
-        var pageData = {
-            details: "Browsing..",
-            largeImageKey: "logo"
-        };
-        presence.setActivity(pageData);
+        presenceData.details = "Browsing...";
     }
+    presence.setActivity(presenceData);
 }));
