@@ -14,29 +14,61 @@ var presence = new Presence({
     pause: "presence.playback.paused",
     live: "presence.activity.live"
 });
+var pattern = "•";
+var truncateAfter = function (str, pattern) {
+    return str.slice(0, str.indexOf(pattern));
+};
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var video = document.querySelector(".video-stream");
     if (video !== null && !isNaN(video.duration)) {
         var oldYouTube = null;
+        var YouTubeTV = null;
         var title;
         document.querySelector(".watch-title") !== null
             ? (oldYouTube = true)
             : (oldYouTube = false);
-        if (!oldYouTube) {
+        document.querySelector(".player-video-title") !== null
+            ? (YouTubeTV = true)
+            : (YouTubeTV = false);
+        if (!oldYouTube && !YouTubeTV) {
             title =
                 document.location.pathname !== "/watch"
                     ? document.querySelector(".ytd-miniplayer .title")
-                    : document.querySelector(".title.ytd-video-primary-info-renderer");
+                    : document.querySelector("h1 yt-formatted-string.ytd-video-primary-info-renderer");
         }
         else {
-            if (document.location.pathname == "/watch")
-                title = document.querySelector(".watch-title");
+            if (oldYouTube) {
+                if (document.location.pathname == "/watch")
+                    title = document.querySelector(".watch-title");
+            }
+            else if (YouTubeTV) {
+                title = document.querySelector(".player-video-title");
+            }
         }
-        var uploader = document.querySelector("#owner-name a") !== null
-            ? document.querySelector("#owner-name a")
-            : document.querySelector(".yt-user-info a"), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), presenceData = {
+        var uploaderTV, uploaderMiniPlayer, uploader2, edited;
+        edited = false;
+        uploaderTV = document.querySelector(".player-video-details");
+        uploaderMiniPlayer = document.querySelector("yt-formatted-string#owner-name");
+        if (uploaderMiniPlayer !== null) {
+            if (uploaderMiniPlayer.innerText == "YouTube") {
+                edited = true;
+                uploaderMiniPlayer.setAttribute("premid-value", "Listening to a playlist");
+            }
+        }
+        uploader2 = document.querySelector("#owner-name a");
+        var uploader = uploaderMiniPlayer !== null && uploaderMiniPlayer.innerText.length > 0
+            ? uploaderMiniPlayer
+            : uploader2 !== null && uploader2.innerText.length > 0
+                ? uploader2
+                : document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a") !== null
+                    ? document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a")
+                    : uploaderTV = truncateAfter(uploaderTV.innerText, pattern), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), presenceData = {
             details: title.innerText,
-            state: uploader.textContent,
+            state: edited == true
+                ? uploaderMiniPlayer.getAttribute("premid-value")
+                : uploaderTV !== null
+                    ? uploaderTV
+                    : uploader.innerText,
             largeImageKey: "yt_lg",
             smallImageKey: video.paused ? "pause" : "play",
             smallImageText: video.paused

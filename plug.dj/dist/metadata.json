@@ -18,5 +18,11 @@
     "logo": "https://crugg.de/premid/pdjlogo.png",
     "thumbnail": "https://crugg.de/premid/pdjbanner.png",
     "color": "#E1306C",
-    "tags": [ "music", "community", "chatting", "media" ]
+    "tags": [
+        "music",
+        "community",
+        "chatting",
+        "media"
+    ],
+    "category": "music"
 }

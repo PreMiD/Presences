@@ -16,5 +16,9 @@
     "logo": "https://i.imgur.com/iTWct8S.png",
     "thumbnail": "https://i.imgur.com/Z4LQn2d.png",
     "color": "#f48023",
-    "tags": [ "coding", "help" ]
+    "tags": [
+        "coding",
+        "help"
+    ],
+    "category": "other"
 }

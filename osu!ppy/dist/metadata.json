@@ -28,5 +28,8 @@
     "logo": "https://i.imgur.com/IWWqSYR.png",
     "thumbnail": "https://i.imgur.com/6YEJ9sY.png",
     "color": "#FF66AA",
-    "tags": [ "games" ]
+    "tags": [
+        "games"
+    ],
+    "category": "other"
 }

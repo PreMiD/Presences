@@ -8,12 +8,18 @@ var presence = new Presence({
     live: "presence.activity.live"
   });
 
+var pattern = "•";
+var truncateAfter = function (str, pattern) {
+  return str.slice(0, str.indexOf(pattern));
+} 
+
 presence.on("UpdateData", async () => {
   //* If user is on /watch?v=...
   var video: HTMLVideoElement = document.querySelector(".video-stream");
   if (video !== null && !isNaN(video.duration)) {
     //* Get required tags
     var oldYouTube: boolean = null;
+    var YouTubeTV: boolean = null;
     var title;
 
     //* Checking if user has old YT layout.
@@ -21,22 +27,54 @@ presence.on("UpdateData", async () => {
       ? (oldYouTube = true)
       : (oldYouTube = false);
 
+    document.querySelector(".player-video-title") !== null
+      ? (YouTubeTV = true)
+      : (YouTubeTV = false)
+
     //* Due to differences between old and new YouTube, we should add different selectors.
-    if (!oldYouTube) {
+    if (!oldYouTube && !YouTubeTV) {
       title =
         document.location.pathname !== "/watch"
           ? document.querySelector(".ytd-miniplayer .title")
-          : document.querySelector(".title.ytd-video-primary-info-renderer");
+          : document.querySelector("h1 yt-formatted-string.ytd-video-primary-info-renderer");
     } else {
-      if (document.location.pathname == "/watch")
-        title = document.querySelector(".watch-title");
+      if(oldYouTube) {
+        if (document.location.pathname == "/watch")
+          title = document.querySelector(".watch-title");
+      } else if(YouTubeTV) {
+        title = document.querySelector(".player-video-title");
+      }
     }
 
-    //TODO Find solution for uploader in miniplayer
-    var uploader =
-        document.querySelector("#owner-name a") !== null
-          ? document.querySelector("#owner-name a")
-          : document.querySelector(".yt-user-info a"),
+    var uploaderTV : any, uploaderMiniPlayer : any, uploader2 : any, edited : boolean;
+
+    edited = false;
+
+    uploaderTV = document.querySelector(".player-video-details");
+
+    uploaderMiniPlayer = document.querySelector("yt-formatted-string#owner-name");
+
+    if(uploaderMiniPlayer !== null) {
+
+      if(uploaderMiniPlayer.innerText == "YouTube") {
+
+        edited = true;
+
+        uploaderMiniPlayer.setAttribute("premid-value", "Listening to a playlist");
+        
+      }
+
+    }
+    uploader2 = document.querySelector("#owner-name a");
+
+    var uploader : any =
+      uploaderMiniPlayer !== null && uploaderMiniPlayer.innerText.length > 0
+          ? uploaderMiniPlayer
+          : uploader2 !== null && uploader2.innerText.length > 0
+            ? uploader2
+            : document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a") !== null 
+              ? document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a")
+              : uploaderTV = truncateAfter(uploaderTV.innerText, pattern),
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
@@ -44,7 +82,11 @@ presence.on("UpdateData", async () => {
       live = Boolean(document.querySelector(".ytp-live")),
       presenceData: presenceData = {
         details: title.innerText,
-        state: uploader.textContent,
+        state: edited == true
+        ? uploaderMiniPlayer.getAttribute("premid-value")
+        : uploaderTV !== null
+          ? uploaderTV
+          : uploader.innerText,
         largeImageKey: "yt_lg",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused

@@ -45,7 +45,7 @@ if (!loggedout) {
     if (document.querySelector(".main_body .titre")) {
       if (document.querySelector(".main_body .titre") && document.getElementsByTagName("kbd")[1] && !document.querySelector(".answer")) {
         var EXNo = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/)[0];
-        var Exercise = (document.querySelector(".main_body .titre") as HTMLElement).innerText + " - " + EXNo;
+        var Exercise = (((document.querySelector(".sheet") as HTMLAnchorElement).href.match(/#ex(.?.?)/))[1]).replace(/&|#/g,"") + "." + EXNo + " - " + (document.querySelector(".main_body .titre") as HTMLElement).innerText;
       } else var Exercise = (document.querySelector(".main_body .titre") as HTMLElement).innerText // Results page, so no EXNo
     }
     if (document.querySelector(".oeftitle")) {
@@ -60,6 +60,13 @@ if (!loggedout) {
       var timestamp = 0;
     } else var timestamp = Date.now(); // Else reset time
   }
+
+  // In Exam
+  else if (document.baseURI.match(/(exam=)/)) {
+    var Worksheet = "";
+    var Exercise = (document.querySelector("h1.wims_title font") as HTMLElement).innerText;
+    var timeleft = Date.now() + (parseInt((document.querySelector("p#exam_clock") as HTMLElement).innerText.split(":")[1])*60 + parseInt((document.querySelector("p#exam_clock") as HTMLElement).innerText.split(":")[2]))*1000;
+  }
 }
 
 presence.on("UpdateData", async () => {
@@ -67,6 +74,7 @@ presence.on("UpdateData", async () => {
     details: Classname + Worksheet,
     state: Exercise,
     startTimestamp: timestamp,
+    endTimestamp: timeleft,
     largeImageKey: "wims_lg"
   };
   if (loggedout) {

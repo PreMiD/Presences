@@ -15,6 +15,8 @@ var presence = new Presence({
 
   var pattern = "- Page";
 
+  var character : any, parody : any;
+
   var searchURL = new URL(document.location.href);
   var searchResult = searchURL.searchParams.get("q");
 
@@ -154,6 +156,30 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching for: ";
 
     presenceData.state = searchResult;
+
+    presenceData.startTimestamp = browsingStamp;
+
+
+  } else if(document.location.pathname.includes("/character/")) {
+
+    character = document.querySelector("#content > h1 > span:nth-child(2)");
+
+
+    presenceData.details = "Searching by character: ";
+
+    presenceData.state = character.innerText;
+
+    presenceData.startTimestamp = browsingStamp;
+
+
+  } else if(document.location.pathname.includes("/parody/")) {
+
+    parody = document.querySelector("#content > h1 > span:nth-child(2)");
+
+
+    presenceData.details = "Searching by parody: ";
+
+    presenceData.state = parody.innerText;
 
     presenceData.startTimestamp = browsingStamp;
 

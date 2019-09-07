@@ -18,5 +18,10 @@
     "logo": "https://i.imgur.com/G358RGW.jpg",
     "thumbnail": "https://i.imgur.com/K28BAra.jpg",
     "color": "#1FBAED",
-    "tags": [ "mixer", "video", "streaming" ]
+    "tags": [
+        "mixer",
+        "video",
+        "streaming"
+    ],
+    "category": "videos"
 }

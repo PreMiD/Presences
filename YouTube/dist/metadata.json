@@ -13,9 +13,13 @@
         "nl": "Geniet van de video's en muziek waar je van houdt, upload originele inhoud en deel het allemaal met vrienden, familie en de wereld op YouTube."
     },
     "url": "www.youtube.com",
-    "version": "2.0",
+    "version": "2.2",
     "logo": "https://i.imgur.com/C9ZEmge.png",
     "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
     "color": "#E40813",
-    "tags": [ "video", "media" ]
+    "tags": [
+        "video",
+        "media"
+    ],
+    "category": "videos"
 }

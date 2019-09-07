@@ -12,10 +12,15 @@
         "uk": "Безкоштовне радіо для всього, що ви робите. Зберігайте 50 000 композицій у особистій колекції. Підпишіться для доступу за потребою до 40 мільйонів пісень та прослуховування в режимі офлайн.",
         "nl": "Gratis radio voor alles wat je doet. Bewaar 50.000 nummers uit uw persoonlijke verzameling. Abonneer op on-demand voor toegang tot 40 miljoen nummers en offline luisteren."
     },
-    "url": ["play.google.com"],
+    "url": [
+        "play.google.com"
+    ],
     "version": "1.0",
     "logo": "https://i.imgur.com/jFuYt2A.png",
     "thumbnail": "https://i.imgur.com/NQrR9PK.jpg",
     "color": "#ff5722",
-    "tags": ["music"]
+    "tags": [
+        "music"
+    ],
+    "category": "music"
 }

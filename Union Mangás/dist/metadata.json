@@ -1,7 +1,7 @@
 {
     "author": {
-      "name": "Viruz",
-      "id": "158973226465230848"
+        "name": "Viruz",
+        "id": "158973226465230848"
     },
     "service": "Union Mangás",
     "description": {
@@ -15,5 +15,9 @@
     "logo": "https://i.imgur.com/6J5Zxx5.png",
     "thumbnail": "https://i.imgur.com/OJirx3W.png",
     "color": "#a43030",
-    "tags": ["manga", "novel"]
-  }
+    "tags": [
+        "manga",
+        "novel"
+    ],
+    "category": "other"
+}

@@ -16,6 +16,11 @@
     "logo": "https://i.imgur.com/hamkgjX.png",
     "thumbnail": "https://i.imgur.com/M7rgM2p.png",
     "color": "#fff17a",
-    "tags": [ "video", "art", "games" ],
-    "iframe": true
+    "tags": [
+        "video",
+        "art",
+        "games"
+    ],
+    "iframe": true,
+    "category": "videos"
 }

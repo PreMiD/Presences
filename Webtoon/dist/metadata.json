@@ -1,7 +1,7 @@
 {
     "author": {
-      "name": "Viruz",
-      "id": "158973226465230848"
+        "name": "Viruz",
+        "id": "158973226465230848"
     },
     "service": "Webtoon",
     "description": {
@@ -14,5 +14,8 @@
     "logo": "https://i.imgur.com/Ickm2Yv.jpg",
     "thumbnail": "https://i.imgur.com/t5zk4c8.jpg",
     "color": "#00d564",
-    "tags": ["comics"]
-  }
+    "tags": [
+        "comics"
+    ],
+    "category": "other"
+}
