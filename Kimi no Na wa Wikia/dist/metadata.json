@@ -13,5 +13,9 @@
   "logo": "https://crugg.de/premid/knnwlogo.png",
   "thumbnail": "https://crugg.de/premid/knnwbanner.png",
   "color": "#7DA1BB",
-  "tags": ["anime", "wiki"]
+  "tags": [
+    "anime",
+    "wiki"
+  ],
+  "category": "anime"
 }
