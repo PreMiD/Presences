@@ -13,7 +13,6 @@ presence.on("UpdateData", async () => {
 
     var path = window.location.href;
     var emailCheck = window.location.href.split("/").length == 7 ? false : true;
-    console.log(emailCheck)
     if (emailCheck) {
         data.details = "Viewing an Email"
         data.startTimestamp = elapsed
