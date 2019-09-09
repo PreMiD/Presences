@@ -6,95 +6,62 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var presence = new Presence({
+const presence = new Presence({
     clientId: "614200757989670934",
     mediaKeys: false
-}), strings = presence.getStrings({
+});
+const stringsPromise = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
-var translatePageTitle;
-var translatingFile, translateProject, translatingLanguage;
-var profileName, profileNickname;
-var projectsTab;
+const PROJECT_PAGE_REGEX = /^\/project\/(?<project>\w+)(\/(?<page>[\w-_]+))?$/;
+const startTimestamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    let presenceData = {
-        details: "In construction",
-        state: "-",
-        largeImageKey: "lg"
+    const { pathname } = window.location;
+    const presenceData = {
+        largeImageKey: "lg",
+        startTimestamp
     };
-    if (document.location.pathname == "/" || !document.location.pathname || document.location.pathname == "/project/premid") {
-        translatePageTitle = document.querySelector("#wrap > div.section > div > h1");
+    let regexResult;
+    if (pathname === "/") {
         presenceData.details = "Home";
-        presenceData.state = translatePageTitle.innerText;
-        presenceData.startTimestamp = browsingStamp;
     }
-    else if (document.location.pathname.includes("/project/")) {
-        translatePageTitle = document.querySelector("#wrap > div.section > div > h1");
-        if (document.location.pathname.includes("activity_stream")) {
-            presenceData.details = "Viewing activity";
-            presenceData.state = translatePageTitle.innerText;
-            presenceData.startTimestamp = browsingStamp;
-        }
-        else if (document.location.pathname.includes("reports")) {
-            presenceData.details = "Viewing reports";
-            presenceData.state = translatePageTitle.innerText;
-            presenceData.startTimestamp = browsingStamp;
-        }
-        else if (document.location.pathname.includes("discussions")) {
-            presenceData.details = "Viewing discussions";
-            presenceData.state = translatePageTitle.innerText;
-            presenceData.startTimestamp = browsingStamp;
-        }
-        else if (document.location.pathname.includes("tasks")) {
-            presenceData.details = "Viewing tasks";
-            presenceData.state = translatePageTitle.innerText;
-            presenceData.startTimestamp = browsingStamp;
-        }
-        else if (document.location.pathname.includes("translators")) {
-            presenceData.details = "Viewing translators";
-            presenceData.state = translatePageTitle.innerText;
-            presenceData.startTimestamp = browsingStamp;
+    else if ((regexResult = pathname.match(PROJECT_PAGE_REGEX)) !== null) {
+        const { page } = regexResult.groups;
+        const projectNameElement = document.querySelector("#wrap > div.section > div > h1 > span.project-name-text");
+        if (projectNameElement !== null) {
+            presenceData.details = projectNameElement.innerText;
+            presenceData.state = `Viewing ${page ? page.split("_")[0] : "home"}`;
         }
         else {
-            presenceData.details = "Home";
-            presenceData.state = translatePageTitle.innerText;
-            presenceData.startTimestamp = browsingStamp;
+            const projectNamePreviewElement = document.querySelector("a.title-name.project-name-preview");
+            const languageNameElement = document.querySelector("#wrap > div.section > div > h1.language-header");
+            presenceData.details = projectNamePreviewElement.innerText;
+            presenceData.state = `Viewing files (${languageNameElement.innerText})`;
         }
     }
-    else if (document.location.pathname.includes("/translate")) {
-        translatingFile = document.querySelector("#file-menu-item > div > span.file-name");
-        translatingLanguage = document.querySelector("#file-language-info > a.btn.mdc-button.open-language-menu > span");
-        translateProject = document.querySelector("#project-menu-content > ul > li:nth-child(1) > h3");
-        presenceData.details = "Translating " + translatingFile.innerHTML;
-        presenceData.state = translateProject.innerText + " (" + translatingLanguage.innerHTML + ")";
-        presenceData.startTimestamp = browsingStamp;
+    else if (pathname.startsWith("/translate/")) {
+        const fileNameElement = document.querySelector("#file-menu-item > div > span.file-name");
+        const languageNameElement = document.querySelector("#file-language-info > a.btn.mdc-button.open-language-menu > span");
+        const projectNameElement = document.querySelector("#project-menu-content > ul > li:nth-child(1) > h3");
+        presenceData.details = `${projectNameElement.innerText} (${languageNameElement.innerText})`;
+        presenceData.state = `Translating ${fileNameElement.innerText}`;
     }
-    else if (document.location.pathname.includes("/profile")) {
-        profileName = document.querySelector("#profile-page > div > div > div.profile-left-pane > div > div.profile-page-user.clearfix > div > h3");
-        profileNickname = document.querySelector("#profile-page > div > div > div.profile-left-pane > div > div.profile-page-user.clearfix > div > div > span");
-        if (document.location.pathname.includes("activity")) {
-            presenceData.details = "Viewing activity";
-            presenceData.state = profileName.innerText + " - " + profileNickname.innerText;
-            presenceData.startTimestamp = browsingStamp;
-        }
-        else {
-            presenceData.details = "Viewing a profile";
-            presenceData.state = profileName.innerText + " - " + profileNickname.innerText;
-            presenceData.startTimestamp = browsingStamp;
-        }
+    else if (pathname.startsWith("/profile")) {
+        const usernameElement = document.querySelector("#profile-page > div > div > div.profile-left-pane > div > div.profile-page-user.clearfix > div > h3");
+        const nicknameElement = document.querySelector("#profile-page > div > div > div.profile-left-pane > div > div.profile-page-user.clearfix > div > div > span");
+        presenceData.details = pathname.endsWith("/activity")
+            ? "Viewing activity"
+            : "Viewing a profile";
+        presenceData.state =
+            usernameElement.innerText +
+                (nicknameElement ? ` - ${nicknameElement.innerText}` : "");
     }
-    else if (document.location.pathname.includes("/projects")) {
-        projectsTab = document.querySelector("#search_form > div > div > ul > li.active > a");
+    else if (pathname.startsWith("/projects")) {
+        const hash = window.location.hash;
         presenceData.details = "Exploring projects";
-        presenceData.state = projectsTab.innerText;
-        presenceData.startTimestamp = browsingStamp;
+        presenceData.state =
+            !hash || hash === "#showcases" ? "Showcases" : "Searching";
     }
     presence.setActivity(presenceData);
 }));
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}
