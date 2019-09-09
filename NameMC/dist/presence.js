@@ -177,7 +177,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else if (document.location.pathname.startsWith("/cape")) {
         var title = document.querySelector(".default-skin main.container h1");
-        var cape = title.innerText.split("Minecraft")[0];
+        var cape = title.innerHTML.split("<")[0];
         let presenceData = {
             details: "Viewing a Cape",
             state: cape + " Cape",

@@ -152,7 +152,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
     } else if (document.location.pathname.startsWith("/cape")) {
         var title = document.querySelector(".default-skin main.container h1");
-        var cape = (title as HTMLElement).innerText.split("Minecraft")[0];
+        var cape = (title as HTMLElement).innerHTML.split("<")[0];
             let presenceData: presenceData = {
                 details: "Viewing a Cape",
                 state: cape + " Cape",
