@@ -26,6 +26,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         data.details = "Browsing Stories",
             data.startTimestamp = browsingStamp;
     }
+    else if (path.startsWith("/user")) {
+        var user = document.querySelector("#alias").textContent;
+        data.details = "Viewing User Profile",
+            data.state = user;
+        data.startTimestamp = browsingStamp;
+    }
     else if (path.includes("/myworks")) {
         if (path.endsWith("/myworks")) {
             data.details = "Viewing their Stories",

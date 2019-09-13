@@ -19,6 +19,11 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("/stories") || path.includes("/featured")) {
         data.details = "Browsing Stories",
         data.startTimestamp = browsingStamp
+    } else if (path.startsWith("/user")) {
+        var user = document.querySelector("#alias").textContent;
+        data.details = "Viewing User Profile",
+        data.state = user;
+        data.startTimestamp = browsingStamp
     } else if (path.includes("/myworks")) {
         if (path.endsWith("/myworks")) {
             data.details = "Viewing their Stories",
