@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
     } else if (path == ("/rooms")) {
         data.details = "Viewing Rooms"
         data.startTimestamp = elapsed
-    } else if (gameLink) {
+    } else if (gameLink || path == "/room") {
         var inSetup = document.querySelector(".infosUsers") ? true : false;
         if (inSetup) {
             var players = document.querySelector(".infosRoom li:last-child span strong").textContent;

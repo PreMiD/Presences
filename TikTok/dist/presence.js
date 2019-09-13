@@ -8,42 +8,41 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var presence = new Presence({
-    clientId: "620839311629221889",
+    clientId: "621881103380381716",
     mediaKeys: false
 });
 var elapsed = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let data = {
-        largeImageKey: "gartic-logo"
+        largeImageKey: "tiktok-logo"
     };
     var path = document.location.pathname;
-    var gameLink = document.location.pathname.split("/")[1].match(/^\d/) ? true : false;
-    if (path == ("/")) {
-        data.details = "Viewing the Homepage";
+    if (path.includes("/trending")) {
+        data.details = "Viewing Trending";
         data.startTimestamp = elapsed;
     }
-    else if (path == ("/rooms")) {
-        data.details = "Viewing Rooms";
+    else if (path.includes("/tag")) {
+        var tag = document.querySelector("._challenge_header_title").textContent;
+        data.details = "Viewing a tag";
+        data.state = tag;
         data.startTimestamp = elapsed;
     }
-    else if (gameLink || path == "/room") {
-        var inSetup = document.querySelector(".infosUsers") ? true : false;
-        if (inSetup) {
-            var players = document.querySelector(".infosRoom li:last-child span strong").textContent;
-            data.details = "Setting up Info to Join";
-            data.state = "Players: " + players;
+    else if (path.startsWith("/@")) {
+        if (path.includes("/video/")) {
+            var user = document.querySelector("._video_card_big_user_info_handle").textContent;
+            data.details = "Viewing a TikTok";
+            data.state = user;
             data.startTimestamp = elapsed;
         }
         else {
-            var user = document.querySelector(".you .nick").textContent;
-            var points = document.querySelector(".you .points").textContent;
-            data.details = "User: " + user;
-            data.state = "Points: " + points.split("pts")[0].trim();
+            var user = document.querySelector("._user_header_uniqueId").textContent;
+            data.details = "Viewing a Profile";
+            data.state = user;
             data.startTimestamp = elapsed;
         }
     }
     else {
-        data.details = "Somewhere on-site";
+        data.details = "Viewing the Homepage";
         data.startTimestamp = elapsed;
     }
     presence.setActivity(data);

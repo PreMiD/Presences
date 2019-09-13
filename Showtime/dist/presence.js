@@ -15,7 +15,6 @@ var presence = new Presence({
     pause: "presence.playback.paused",
     live: "presence.activity.live"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var video = document.querySelector("#main-container > div > video");
     if (video && !isNaN(video.duration)) {
