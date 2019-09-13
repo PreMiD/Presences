@@ -16,8 +16,9 @@ presence.on("UpdateData", async () => {
     if (gameLink) {
         var user = document.querySelector("div.user.proprio .dados span").textContent;
         var points = document.querySelector("div.user.proprio .dados pre").textContent;
-        data.details = "User: " + user.split("~")[1]
-        data.state = "Points: " + points.split("pontos")[0].trim();
+        var lobby = document.querySelector("title").innerText;
+        data.details = user + " - " + points.split("pontos")[0].trim() + " points"
+        data.state = "Lobby: " + lobby.split("-")[0];
         data.startTimestamp = elapsed
     } else {
         data.details = "Not in-game"
