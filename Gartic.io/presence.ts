@@ -29,8 +29,9 @@ presence.on("UpdateData", async () => {
         } else {
             var user = document.querySelector(".you .nick").textContent;
             var points = document.querySelector(".you .points").textContent;
-            data.details = "User: " + user
-            data.state = "Points: " + points.split("pts")[0].trim();
+            var lobby = document.querySelector("title").innerText;
+            data.details = user + " - " + points.split("pts")[0].trim() + " points"
+            data.state = "Lobby: " + lobby.split("-")[0]
             data.startTimestamp = elapsed
         }
     } else {
