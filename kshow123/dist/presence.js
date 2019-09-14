@@ -6,18 +6,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-function PMD_info(message) {
-    console.log("%cPreMiD%cINFO%c " + message, genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;", genericStyle + "border-radius: 0 25px 25px 0; background: #5050ff;", "color: unset;");
-}
-function PMD_error(message) {
-    console.log("%cPreMiD%cERROR%c " + message, genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;", genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;", "color: unset;");
-}
-function PMD_success(message) {
-    console.log("%cPreMiD%cSUCCESS%c " + message, genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;", genericStyle +
-        "border-radius: 0 25px 25px 0; background: #50ff50; color: black;", "color: unset;");
-}
-PMD_info("An error might be created called: \"Cannot read property 'duration'\". You may ignore this error, as it is automatically fixed in seconds.");
 var presence = new Presence({
     clientId: "614388233886760972",
     mediaKeys: true
@@ -56,7 +44,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setTrayTitle();
     }
     else if (document.location.pathname.includes(".html")) {
-        if (iFrameVideo !== null && !isNaN(duration)) {
+        if (iFrameVideo == true && !isNaN(duration)) {
             var a = '', timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)), presenceData = {
                 largeImageKey: "ksow123stack",
                 smallImageKey: paused ? "pause" : "play",
