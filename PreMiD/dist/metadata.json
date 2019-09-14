@@ -1,0 +1,21 @@
+{
+    "author": {
+        "name": "ItsMeShisuii",
+        "id": "482142808556306446"
+    },
+    "service": "PreMiD",
+    "description": {
+        "en": "PreMiD adds Discord Rich Presence support to a lot of services you use and love.",
+        "de": "PreMiD ergänzt viele Dienste, die du nutzt und liebst, um die Unterstützung von Discord Rich Presence.",
+        "fr": "PreMiD ajoute le support de Discord Rich Presence à de nombreux services que vous utilisez et aimez."
+    },
+    "url": ["premid.app", "beta.premid.app"],
+    "version": "2.0",
+    "logo": "",
+    "thumbnail": "",
+    "color": "",
+    "tags": [
+        "discord"
+    ],
+    "category": "other"
+}
