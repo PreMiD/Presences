@@ -1,35 +1,3 @@
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-
-function PMD_info(message) {
-  console.log(
-    "%cPreMiD%cINFO%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-function PMD_error(message) {
-  console.log(
-    "%cPreMiD%cERROR%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
-    "color: unset;"
-  );
-}
-
-function PMD_success(message) {
-  console.log(
-    "%cPreMiD%cSUCCESS%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle +
-      "border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
-    "color: unset;"
-  );
-}
-
-PMD_info("An error might be created called: \"Cannot read property 'duration'\". You may ignore this error, as it is automatically fixed in seconds.");
-
 var presence = new Presence({
     clientId: "614388233886760972", // CLIENT ID FOR YOUR PRESENCE
     mediaKeys: true
@@ -43,7 +11,7 @@ var presence = new Presence({
   var browsingStamp = Math.floor(Date.now()/1000);
 
   var title : any, views : any, air : any, air2 : any;
-  var iFrameVideo : any, currentTime : any, duration : any, paused : any;
+  var iFrameVideo : boolean, currentTime : any, duration : any, paused : any;
 
   // the video variable is a html video element
   var video : HTMLVideoElement, videoDuration : any, videoCurrentTime : any;
@@ -60,7 +28,7 @@ var presence = new Presence({
   }
 
 if (document.location.pathname.includes(".html")) {
-
+ 
   presence.on("iFrameData", data => {
 
     playback = 
@@ -83,7 +51,6 @@ if (document.location.pathname.includes(".html")) {
 }
 
 presence.on("UpdateData", async () => {
-  
 // Get the video
 video = document.querySelector("#mediaplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
 
@@ -92,7 +59,7 @@ if (document.location.pathname.includes(".html") && document.location.pathname.i
   presence.setActivity();
   presence.setTrayTitle();
 } else if (document.location.pathname.includes(".html")) {
-  if (iFrameVideo !== null && !isNaN(duration)) {
+  if (iFrameVideo == true && !isNaN(duration)) {
     var a =
         '',
         timestamps = getTimestamps(
