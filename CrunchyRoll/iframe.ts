@@ -1,3 +1,5 @@
+var iframe = new iFrame()
+
 setInterval(function() {
 
     if(document.location.hostname == "static.crunchyroll.com") {
@@ -9,7 +11,7 @@ setInterval(function() {
             iframe.send(
             {
                 iframe_video: {
-                    iFrameVideo: video,
+                    iFrameVideo: true,
                     currTime: video.currentTime,
                     dur: video.duration,
                     paused: video.paused

@@ -22,11 +22,9 @@ if (lastPlaybackState != playback) {
 }
 var iFrameVideo, currentTime, duration, paused;
 presence.on("iFrameData", data => {
-    setInterval(function () {
-        playback =
-            data.iframe_video !== null
-                ? true : false;
-    }, 1000);
+    playback =
+        data.iframe_video !== null
+            ? true : false;
     if (playback) {
         iFrameVideo = data.iframe_video.iFrameVideo;
         currentTime = data.iframe_video.currTime;
@@ -45,7 +43,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         delete presenceData.smallImageKey;
         presence.setActivity(presenceData, true);
     }
-    if (iFrameVideo !== null && !isNaN(duration)) {
+    if (iFrameVideo !== false && !isNaN(duration)) {
         var videoTitle, episod, episode, epName;
         videoTitle = document.querySelector('.ellipsis .text-link span');
         episod = document.querySelectorAll('#showmedia_about_media h4');
