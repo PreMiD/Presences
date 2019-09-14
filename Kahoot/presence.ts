@@ -1,5 +1,4 @@
 var presence = new Presence({
-  //TODO: Update client id.
   clientId: '612793327510749210',
   mediaKeys: false
 });
