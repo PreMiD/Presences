@@ -1,7 +1,7 @@
 {
     "author": {
-        "name": "Evil",
-        "id": "200761917189521409"
+        "name": "Viruz",
+        "id": "158973226465230848"
     },
     "service": "Dream Animes",
     "description": {
@@ -17,7 +17,7 @@
         "www.dreamanimes.com.br",
         "www.myotakulist.com"
     ],
-    "version": "2.0",
+    "version": "3.0",
     "logo": "https://i.imgur.com/iwQt7Zu.png",
     "thumbnail": "https://i.imgur.com/RbXnJIO.png",
     "color": "#1997c6",
