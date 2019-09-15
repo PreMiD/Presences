@@ -17,5 +17,6 @@
     "tags": [
         "discord"
     ],
-    "category": "other"
+    "category": "other",
+    "button": false
 }
