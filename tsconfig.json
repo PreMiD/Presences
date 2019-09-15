@@ -3,7 +3,9 @@
     "module": "commonjs",
     "target": "es6",
     "removeComments": true,
-    "typeRoots": ["@types"]
+    "typeRoots": ["@types"],
+    "pretty": false,
+    "inlineSourceMap": true
   },
   "exclude": ["node_modules"]
 }
