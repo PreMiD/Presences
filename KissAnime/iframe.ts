@@ -1,3 +1,5 @@
+var iframe = new iFrame()
+
 setInterval(function() {
 
     if(document.location.hostname == "www.rapidvid.to" || document.location.hostname == "www.mp4upload.com") {
@@ -9,7 +11,7 @@ setInterval(function() {
             iframe.send(
             {
                 iframe_video: {
-                    iFrameVideo: video,
+                    iFrameVideo: true,
                     currTime: video.currentTime,
                     dur: video.duration,
                     paused: video.paused
@@ -28,7 +30,7 @@ setInterval(function() {
             iframe.send(
             {
                 iframe_video: {
-                    iFrameVideo: video,
+                    iFrameVideo: true,
                     currTime: video.currentTime,
                     dur: video.duration,
                     paused: video.paused
@@ -46,7 +48,7 @@ setInterval(function() {
             iframe.send(
             {
                 iframe_video: {
-                    iFrameVideo: video,
+                    iFrameVideo: true,
                     currTime: video.currentTime,
                     dur: video.duration,
                     paused: video.paused
