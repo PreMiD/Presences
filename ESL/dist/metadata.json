@@ -21,10 +21,11 @@
         "photos.eslgaming.com",
         "www.esl-one.com",
         "www.intelextrememasters.com",
-        "intelgrandslam.eslgaming.com"
+        "intelgrandslam.eslgaming.com",
+        "www.schulmeisterschaft.de"
     ],
-    "version": "1.0",
-    "logo": "https://i.imgur.com/McgokDa.png",
+    "version": "2.1",
+    "logo": "https://i.imgur.com/wKmn7nB.png",
     "thumbnail": "https://i.imgur.com/76vHTIg.png",
     "color": "#46afe4",
     "tags": [
