@@ -401,6 +401,60 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presence.setTrayTitle();
         }
     }
+    else if (document.location.hostname == "forum.eslgaming.com") {
+        if (document.location.pathname.includes("/discussion/")) {
+            item = document.querySelector("#vanilla_discussion_index > section > div > main > div.MessageList.Discussion > div > h1");
+            presenceData.details = "ESL Forums, reading:";
+            if (item.innerText.length > 128) {
+                presenceData.state = item.innerText.substring(0, 125) + "...";
+            }
+            else {
+                presenceData.state = item.innerText;
+            }
+            presenceData.smallImageKey = "reading";
+            presence.setActivity(presenceData);
+        }
+        else if (document.location.pathname.includes("/categories/")) {
+            presenceData.details = "ESL Forums, Browsing category:";
+            presenceData.state = document.location.pathname.split("categories/")[1];
+            delete presenceData.smallImageKey;
+            presence.setActivity(presenceData);
+        }
+        else if (document.location.pathname.includes("/categories")) {
+            presenceData.details = "ESL Forums, viewing:";
+            presenceData.state = "all categories";
+            delete presenceData.smallImageKey;
+            presence.setActivity(presenceData);
+        }
+        else if (document.location.pathname.includes("/profile/comments")) {
+            presenceData.details = "ESL Forums, viewing profile:";
+            presenceData.state = document.location.pathname.split("/")[4];
+            delete presenceData.smallImageKey;
+            presence.setActivity(presenceData);
+        }
+        else if (document.location.pathname.includes("/profile/discussions")) {
+            presenceData.details = "ESL Forums, viewing profile:";
+            presenceData.state = document.location.pathname.split("/")[4];
+            delete presenceData.smallImageKey;
+            presence.setActivity(presenceData);
+        }
+        else if (document.location.pathname.includes("/profile")) {
+            presenceData.details = "ESL Forums, viewing profile:";
+            presenceData.state = document.location.pathname.split("/")[3];
+            delete presenceData.smallImageKey;
+            presence.setActivity(presenceData);
+        }
+        else if (document.location.pathname.includes("/discussions")) {
+            presenceData.details = "ESL Forums, viewing:";
+            presenceData.state = "the lastest discussions";
+            delete presenceData.smallImageKey;
+            presence.setActivity(presenceData);
+        }
+        else {
+            presence.setActivity();
+            presence.setTrayTitle();
+        }
+    }
     else {
         presence.setActivity();
         presence.setTrayTitle();
