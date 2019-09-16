@@ -21,17 +21,30 @@ var presence = new Presence({
     clientId: "616940877042155531",
     mediaKeys: false
 });
-var user, group, typing, teamfinish, freeornah, freeornah2, card, personal, personal2, profile, board2;
+var user, group, typing, teamfinish, freeornah, freeornah2, card, personal, personal2, profile, connected;
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
         largeImageKey: "discordwhite"
     };
     presenceData.startTimestamp = browsingStamp;
-    if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/channels/@me/")) {
-        user = document.querySelector("#app-mount > div.app-19_DXt.platform-web > div > div.layers-3iHuyZ.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.spacer-1fA9zc > div > div > div.flex-1xMQg5.flex-1O1GKY.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.base-3dtUhz > div.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.spacer-29U_x8.firefoxFixScrollFlex-cnI2ix > div.chat-3bRxxu.firefoxFixScrollFlex-cnI2ix > div.title-3qD0b-.container-1r6BKw > div.children-19S4PO > h3");
-        group = document.querySelector("#app-mount > div.app-19_DXt.platform-web > div > div.layers-3iHuyZ.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.spacer-1fA9zc > div > div > div.flex-1xMQg5.flex-1O1GKY.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.base-3dtUhz > div.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.spacer-29U_x8.firefoxFixScrollFlex-cnI2ix > div.chat-3bRxxu.firefoxFixScrollFlex-cnI2ix > div.title-3qD0b-.container-1r6BKw > div.children-19S4PO > div.container-3FPLD3 > div > div > div");
-        typing = document.querySelector("#app-mount > div.app-19_DXt.platform-web > div > div.layers-3iHuyZ.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.spacer-1fA9zc > div > div > div.flex-1xMQg5.flex-1O1GKY.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.base-3dtUhz > div.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.spacer-29U_x8.firefoxFixScrollFlex-cnI2ix > div.chat-3bRxxu.firefoxFixScrollFlex-cnI2ix > div.content-yTz4x3.firefoxFixScrollFlex-cnI2ix > div > form > div > div > div > textarea");
+    connected = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div");
+    if (document.location.hostname == "discordapp.com" && connected !== null) {
+        if (connected.innerText.includes("@")) {
+            presenceData.details = "Voice connected with";
+            presenceData.state = connected.innerText;
+        }
+        else {
+            presenceData.details = "Voice connected to";
+            presenceData.state = connected.innerText.replace(" / " + connected.innerText.split(" / ").pop(), "") + " (Server: " + connected.innerText.split(" / ").pop() + ")";
+        }
+        delete presenceData.smallImageKey;
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/channels/@me/")) {
+        user = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > h3");
+        group = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > div");
+        typing = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > form > div > div > div > textarea");
         if (user !== null) {
             if (typing.value !== null && typing.value !== "") {
                 presenceData.details = "Typing in DMs to:";
@@ -78,9 +91,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     }
     else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/channels/")) {
-        group = document.querySelector("#app-mount > div.app-19_DXt.platform-web > div > div.layers-3iHuyZ.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.spacer-1fA9zc > div > div > div.flex-1xMQg5.flex-1O1GKY.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.base-3dtUhz > div.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.spacer-29U_x8.firefoxFixScrollFlex-cnI2ix > div.channels-Ie2l6A.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr > div.container-PNkimc > div.flexChild-faoVW3 > div > header > span");
-        typing = document.querySelector("#app-mount > div.app-19_DXt.platform-web > div > div.layers-3iHuyZ.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.spacer-1fA9zc > div > div > div.flex-1xMQg5.flex-1O1GKY.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.base-3dtUhz > div.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.spacer-29U_x8.firefoxFixScrollFlex-cnI2ix > div.chat-3bRxxu.firefoxFixScrollFlex-cnI2ix > div.content-yTz4x3.firefoxFixScrollFlex-cnI2ix > div.spacer-1fA9zc.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr > form > div > div > div > textarea");
-        card = document.querySelector("#app-mount > div.app-19_DXt.platform-web > div > div.layers-3iHuyZ.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.spacer-1fA9zc > div > div > div.flex-1xMQg5.flex-1O1GKY.vertical-V37hAW.flex-1O1GKY.directionColumn-35P_nr.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.base-3dtUhz > div.flex-1xMQg5.flex-1O1GKY.horizontal-1ae9ci.horizontal-2EEEnY.flex-1O1GKY.directionRow-3v3tfG.justifyStart-2NDFzi.alignStretch-DpGPf3.noWrap-3jynv6.spacer-29U_x8.firefoxFixScrollFlex-cnI2ix > div.chat-3bRxxu.firefoxFixScrollFlex-cnI2ix > div.title-3qD0b-.container-1r6BKw > div.children-19S4PO > h3");
+        group = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > header > h1");
+        typing = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > form > div > div > div > textarea");
+        card = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > h3");
         if (typing.value !== null && typing.value !== "") {
             presenceData.details = "Typing in channel: ";
             presenceData.state = "#" + card.innerText + " (Server: " + group.innerText + ")";
