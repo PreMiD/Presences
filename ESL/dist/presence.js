@@ -10,13 +10,14 @@ var presence = new Presence({
     clientId: "623229289864626195",
     mediaKeys: false
 });
-var item, typing, index, categorytext, search, dropdowninnertext, split, item2, itemfinish, board2;
+var item, typing, index, admin, search, dropdowninnertext, split, item2, itemfinish, board2;
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
         largeImageKey: "esl"
     };
     presenceData.startTimestamp = browsingStamp;
+    admin = document.querySelector("#adminEnableLink > div");
     if (document.location.hostname == "fantasy.eslgaming.com") {
         presenceData.details = "ESL Fantasy";
         delete presenceData.state;
@@ -409,7 +410,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         }
-        else if (document.querySelector("#adminEnableLink > div") !== null) {
+        else if (admin.innerText == "Admin") {
             presence.setActivity();
             presence.setTrayTitle();
         }
@@ -556,7 +557,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         }
-        else if (document.querySelector("#adminEnableLink > div") !== null) {
+        else if (admin.innerText == "Admin") {
             presence.setActivity();
             presence.setTrayTitle();
         }
