@@ -3,7 +3,7 @@ var presence = new Presence({
   mediaKeys: false
 })
 
-var item : any, typing : any, index : any, categorytext : any, search : any, dropdowninnertext : any, split : any, item2 : any, itemfinish : any, board2 : any;
+var item : any, typing : any, index : any, admin : any, search : any, dropdowninnertext : any, split : any, item2 : any, itemfinish : any, board2 : any;
  
 var browsingStamp = Math.floor(Date.now()/1000);
 
@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
   };
 
   presenceData.startTimestamp = browsingStamp;
-
+  admin = document.querySelector("#adminEnableLink > div");
   if(document.location.hostname == "fantasy.eslgaming.com") {
     presenceData.details = "ESL Fantasy";
     delete presenceData.state;
@@ -458,7 +458,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
-    }  else if(document.querySelector("#adminEnableLink > div") !== null) {
+    }  else if(admin.innerText == "Admin") {
       presence.setActivity();
       presence.setTrayTitle();
     } else if (item2.innerText.includes(" | ESL Play")) {
@@ -613,7 +613,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData);
-    } else if(document.querySelector("#adminEnableLink > div") !== null) {
+    } else if(admin.innerText == "Admin") {
       presence.setActivity();
       presence.setTrayTitle();
     } else {
