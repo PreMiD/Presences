@@ -15,7 +15,6 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
   admin = document.querySelector("#adminEnableLink > div");
-  console.log(admin);
   if(document.location.hostname == "fantasy.eslgaming.com") {
     presenceData.details = "ESL Fantasy";
     delete presenceData.state;
@@ -291,7 +290,6 @@ presence.on("UpdateData", async () => {
     }
   } else if(document.location.hostname == "www.esl-one.com") {
     item2 = document.querySelector("head > title");
-    console.log(item2.innerText);
     if(document.location.pathname.includes("/legal/")) {
       presenceData.details = "ESL ONE";
       presenceData.state = "Reading legal stuff";
@@ -459,9 +457,18 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
-    }  else if(admin == null) {
-      presence.setActivity();
-      presence.setTrayTitle();
+    } else if(admin !== null) {
+      if (admin.innerText == "Admin") {
+        presence.setActivity();
+        presence.setTrayTitle();
+      } else {
+        item = document.querySelector("head > title");
+        presenceData.details = "ESL Play, viewing:";
+        presenceData.state = item.innerText.split(" | ESL Play")[0];            
+        delete presenceData.smallImageKey;
+      
+        presence.setActivity(presenceData); 
+      }
     } else if (item2.innerText.includes(" | ESL Play")) {
       presenceData.details = "ESL Play, viewing:";
       presenceData.state = item2.innerText.split(" | ESL Play")[0];
@@ -614,9 +621,18 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData);
-    } else if(admin == null) {
-      presence.setActivity();
-      presence.setTrayTitle();
+    } else if(admin !== null) {
+      if (admin.innerText == "Admin") {
+        presence.setActivity();
+        presence.setTrayTitle();
+      } else {
+        item = document.querySelector("head > title");
+        presenceData.details = "ESL - Schulmeisterschaft";
+        presenceData.state = "Viewing: " + item.innerText.split(" | Schulmeisterschaft")[0];            
+        delete presenceData.smallImageKey;
+      
+        presence.setActivity(presenceData); 
+      }
     } else {
       item = document.querySelector("head > title");
       presenceData.details = "ESL - Schulmeisterschaft";
