@@ -458,6 +458,9 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
+    }  else if(document.querySelector("#adminEnableLink > div") !== null) {
+      presence.setActivity();
+      presence.setTrayTitle();
     } else if (item2.innerText.includes(" | ESL Play")) {
       presenceData.details = "ESL Play, viewing:";
       presenceData.state = item2.innerText.split(" | ESL Play")[0];
@@ -610,6 +613,9 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData);
+    } else if(document.querySelector("#adminEnableLink > div") !== null) {
+      presence.setActivity();
+      presence.setTrayTitle();
     } else {
       item = document.querySelector("head > title");
       presenceData.details = "ESL - Schulmeisterschaft";
