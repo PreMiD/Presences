@@ -15,6 +15,7 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
   admin = document.querySelector("#adminEnableLink > div");
+  console.log(admin);
   if(document.location.hostname == "fantasy.eslgaming.com") {
     presenceData.details = "ESL Fantasy";
     delete presenceData.state;
@@ -458,7 +459,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
-    }  else if(admin.innerText == "Admin") {
+    }  else if(admin == null) {
       presence.setActivity();
       presence.setTrayTitle();
     } else if (item2.innerText.includes(" | ESL Play")) {
@@ -613,7 +614,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData);
-    } else if(admin.innerText == "Admin") {
+    } else if(admin == null) {
       presence.setActivity();
       presence.setTrayTitle();
     } else {
