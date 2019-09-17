@@ -18,6 +18,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     };
     presenceData.startTimestamp = browsingStamp;
     admin = document.querySelector("#adminEnableLink > div");
+    console.log(admin);
     if (document.location.hostname == "fantasy.eslgaming.com") {
         presenceData.details = "ESL Fantasy";
         delete presenceData.state;
@@ -410,7 +411,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         }
-        else if (admin.innerText == "Admin") {
+        else if (admin == null) {
             presence.setActivity();
             presence.setTrayTitle();
         }
@@ -557,7 +558,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         }
-        else if (admin.innerText == "Admin") {
+        else if (admin == null) {
             presence.setActivity();
             presence.setTrayTitle();
         }
