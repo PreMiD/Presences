@@ -409,6 +409,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         }
+        else if (document.querySelector("#adminEnableLink > div") !== null) {
+            presence.setActivity();
+            presence.setTrayTitle();
+        }
         else if (item2.innerText.includes(" | ESL Play")) {
             presenceData.details = "ESL Play, viewing:";
             presenceData.state = item2.innerText.split(" | ESL Play")[0];
@@ -551,6 +555,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.state = "Viewing: play-eS";
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
+        }
+        else if (document.querySelector("#adminEnableLink > div") !== null) {
+            presence.setActivity();
+            presence.setTrayTitle();
         }
         else {
             item = document.querySelector("head > title");
