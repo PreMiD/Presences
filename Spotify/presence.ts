@@ -265,7 +265,7 @@ presenceData: presenceData = {
   state: "",
   largeImageKey: "spotify",
   smallImageKey: pause ? "pause" : "play", // if the video is paused, show the pause icon else the play button
-  smallImageText: pause ? "paused" : "playing",
+  smallImageText: pause ? "Paused" : "Playing",
   startTimestamp: timestamps[0],
   endTimestamp: timestamps[1]
 };

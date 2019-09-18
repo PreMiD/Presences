@@ -229,7 +229,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             state: "",
             largeImageKey: "spotify",
             smallImageKey: pause ? "pause" : "play",
-            smallImageText: pause ? "paused" : "playing",
+            smallImageText: pause ? "Paused" : "Playing",
             startTimestamp: timestamps[0],
             endTimestamp: timestamps[1]
         };
