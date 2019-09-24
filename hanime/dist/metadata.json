@@ -13,7 +13,7 @@
     "thumbnail": "https://i.imgur.com/zeoWi1W.png",
     "color": "#FF0000",
     "tags": [ "nsfw", "videos" ],
-    "category": "anime"
+    "category": "anime",
     "iframe": true,
     "iFrameRegExp": "player.hanime.tv"
 }
