@@ -3,12 +3,16 @@ var presence = new Presence({
 });
 
 var oldState = null;
+var presenceName : any, profileName : any;
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "lg"
   };
 
-  if (document.location.pathname.startsWith("/store"))
+  presenceName = document.querySelector("div.header__title > h1.presence-name");
+  profileName = document.querySelector("div.userpage__header > div.user-data > p");
+
+  if (document.location.pathname.startsWith("/store") && presenceName == null)
     presenceData.state = "Store";
   else if (document.location.pathname.startsWith("/downloads"))
     presenceData.state = "Downloads";
@@ -24,6 +28,13 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Wiki";
   else if (document.location.hostname.startsWith("docs"))
     presenceData.state = "Docs";
+  else if (document.location.pathname.includes("/store/presences/")){
+    presenceData.details = "Presence Page";
+    presenceData.state = presenceName.innerText;
+  } else if (document.location.pathname.startsWith("/users")){
+    presenceData.details = "User Profile";
+    presenceData.state = profileName.innerText;
+  }
   else presenceData = null;
 
   if (oldState !== presenceData && presenceData !== null) {
