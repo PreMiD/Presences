@@ -52,7 +52,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else {
         var pageData = {
-            details: "Browsing.. (developing)",
+            details: "Browsing..",
             largeImageKey: "logo"
         };
         presence.setActivity(pageData);

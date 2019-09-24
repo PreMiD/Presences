@@ -61,7 +61,7 @@ if (iFrameVideo != false && !isNaN(duration)) {
 } else {
 
   var pageData: presenceData = {
-    details: "Browsing.. (developing)",
+    details: "Browsing..",
     largeImageKey: "logo"
   };
   presence.setActivity(pageData);
