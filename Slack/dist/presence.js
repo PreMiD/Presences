@@ -28,7 +28,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         largeImageKey: "slack"
     };
     presenceData.startTimestamp = browsingStamp;
-    console.log(document.location.pathname);
     if (document.location.hostname == "app.slack.com") {
         group = document.querySelector("#team-menu-trigger > div.p-classic_nav__team_header__team > div.p-classic_nav__team_header__team__name");
         user = document.querySelector("body > div.p-client_container > div > div > div.p-workspace__top_nav > div > div.p-classic_nav__channel_header.p-classic_nav__model_header > div.p-classic_nav__model__title > div.p-classic_nav__model__title__name.p-classic_nav__no_drag > button > span:nth-child(1)");
@@ -269,6 +268,27 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.hostname == "slack.com" && document.location.pathname.includes("/intl")) {
         presenceData.details = "Slack";
         presenceData.state = "Home page";
+        delete presenceData.smallImageKey;
+        presence.setActivity(presenceData);
+    }
+    else if (document.querySelector("#header_team_name > a") !== null) {
+        group = document.querySelector("#header_team_name > a");
+        presenceData.details = "Viewing admin pages for:";
+        presenceData.state = group.innerText;
+        delete presenceData.smallImageKey;
+        presence.setActivity(presenceData);
+    }
+    else if (document.querySelector("#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > div > div > div > div > div.c-menu_select__label") !== null) {
+        group = document.querySelector("#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > div > div > div > div > div.c-menu_select__label");
+        presenceData.details = "Viewing admin pages for:";
+        presenceData.state = group.innerText;
+        delete presenceData.smallImageKey;
+        presence.setActivity(presenceData);
+    }
+    else if (document.querySelector("#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > span") !== null) {
+        group = document.querySelector("#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > span");
+        presenceData.details = "Viewing admin pages for:";
+        presenceData.state = group.innerText;
         delete presenceData.smallImageKey;
         presence.setActivity(presenceData);
     }

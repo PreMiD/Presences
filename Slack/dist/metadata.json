@@ -11,12 +11,10 @@
     "url": [
         "slack.com",
         "slackdemo.com",
-        "api.slack.com",
         "get.slack.help",
-        "slackhq.com",
-        "app.slack.com"
+        "slackhq.com"
     ],
-    "version": "1.1",
+    "version": "1.2",
     "logo": "https://i.imgur.com/wgUEowI.png",
     "thumbnail": "https://i.imgur.com/cnx0MKh.png",
     "color": "#611f69",
@@ -27,5 +25,6 @@
         "work",
         "management"
     ],
-    "category": "socials"
+    "category": "socials",
+    "regExp": "([a-z0-9]+)[.]slack[.]com"
 }

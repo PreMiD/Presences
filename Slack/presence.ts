@@ -44,7 +44,6 @@ presence.on("UpdateData", async () => {
   };
 
   presenceData.startTimestamp = browsingStamp;
-  console.log(document.location.pathname)
 
   if(document.location.hostname == "app.slack.com") {
     group = document.querySelector("#team-menu-trigger > div.p-classic_nav__team_header__team > div.p-classic_nav__team_header__team__name");
@@ -325,6 +324,30 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "slack.com" && document.location.pathname.includes("/intl")) {
     presenceData.details = "Slack";
     presenceData.state = "Home page";
+      
+    delete presenceData.smallImageKey;
+      
+    presence.setActivity(presenceData); 
+  } else if (document.querySelector("#header_team_name > a") !== null) {
+    group = document.querySelector("#header_team_name > a");
+    presenceData.details = "Viewing admin pages for:";
+    presenceData.state = group.innerText;
+      
+    delete presenceData.smallImageKey;
+      
+    presence.setActivity(presenceData); 
+  } else if (document.querySelector("#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > div > div > div > div > div.c-menu_select__label") !== null) {
+    group = document.querySelector("#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > div > div > div > div > div.c-menu_select__label");
+    presenceData.details = "Viewing admin pages for:";
+    presenceData.state = group.innerText;
+      
+    delete presenceData.smallImageKey;
+      
+    presence.setActivity(presenceData); 
+  } else if (document.querySelector("#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > span") !== null) {
+    group = document.querySelector("#apps-page-app-element > header > nav > div.menu_actions > ul > li.left_margin.float_right > span");
+    presenceData.details = "Viewing admin pages for:";
+    presenceData.state = group.innerText;
       
     delete presenceData.smallImageKey;
       
