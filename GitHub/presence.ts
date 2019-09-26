@@ -385,8 +385,16 @@ presence.on("UpdateData", async () => {
     if(!document.location.pathname.indexOf(profileTabs)) {
 
       presenceData.details = "Browsing a profile...";
+      
+      if(profileName.innerText.length == 0 || profileName == null) {
 
-      presenceData.state = profileName.innerText + " | " + profileNickname.innerText;
+        presenceData.state = profileNickname.innerText;
+
+      } else if(profileNickname.innerText.length == 0 || profileNickname == null) {
+
+        presenceData.state = profileName.innerText;
+
+      } else presenceData.state = profileName.innerText + " | " + profileNickname.innerText;
 
       presenceData.startTimestamp = browsingStamp;
 
@@ -394,7 +402,15 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = "Browsing " + profileCurrentTab + " from:";
 
-        presenceData.state = profileName.innerText + " | " + profileNickname.innerText;
+        if(profileName.innerText.length == 0 || profileName == null) {
+
+          presenceData.state = profileNickname.innerText;
+  
+        } else if(profileNickname.innerText.length == 0 || profileNickname == null) {
+  
+          presenceData.state = profileName.innerText;
+  
+        } else presenceData.state = profileName.innerText + " | " + profileNickname.innerText;
 
         presenceData.startTimestamp = browsingStamp;   
         
@@ -402,9 +418,17 @@ presence.on("UpdateData", async () => {
 
           presenceData.details = "Browsing a profile...";
 
-          presenceData.state = profileName.innerText + " | " + profileNickname.innerText;
+          if(profileName.innerText.length == 0 || profileName == null) {
+
+            presenceData.state = profileNickname.innerText;
     
-          presenceData.startTimestamp = browsingStamp;
+          } else if(profileNickname.innerText.length == 0 || profileNickname == null) {
+    
+            presenceData.state = profileName.innerText;
+    
+          } else presenceData.state = profileName.innerText + " | " + profileNickname.innerText;
+    
+            presenceData.startTimestamp = browsingStamp;
 
         }
 
