@@ -4,7 +4,7 @@ setInterval(function() {
 
     if(document.location.hostname == "static.crunchyroll.com") {
 
-        var video : HTMLVideoElement = document.querySelector("#player_html5_api");
+        var video : HTMLVideoElement = document.querySelector("#player0");
 
         if(video != undefined && !isNaN(video.duration)) {
 
