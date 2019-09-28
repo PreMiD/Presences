@@ -41,10 +41,10 @@ presence.on("UpdateData", async () => {
         presence.setActivity(data);
     } else if (document.location.pathname.includes("/show")) {
         if (document.location.pathname.includes("/episode/")) {
-            var showname = document.querySelector("div.episode-infos.extended div.basic-infos span").textContent;
+            var showname = document.querySelector("div.info-box h3 a").textContent;
             var shownumber = document.querySelector("div.info-box h1 .episode-label").textContent;
             data.details = "Viewing an Episode",
-            data.state = shownumber + " - " + showname;
+            data.state = showname + " - " + shownumber;
             data.startTimestamp = browsingStamp
             presence.setActivity(data);
         } else if (document.location.pathname.endsWith("/explore")) {
