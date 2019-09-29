@@ -1,57 +1,57 @@
 var presence = new Presence({
-  clientId: "607754656453623843",
+  clientId: '607754656453623843',
   mediaKeys: true
 });
 var strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  live: "presence.activity.live"
+  play: 'presence.playback.playing',
+  pause: 'presence.playback.paused',
+  live: 'presence.activity.live'
 });
 
 var title,
-streamer,
-largeImage = "twitch",
-smallImageKey,
-smallImageText,
-videoTime,
-videoDuration,
-live,
-elapsed,
-oldURL,
-type,
-logging = false;
+  streamer,
+  largeImage = 'twitch',
+  smallImageKey,
+  smallImageText,
+  videoTime,
+  videoDuration,
+  live,
+  elapsed,
+  oldURL,
+  type,
+  logging = false;
 
-presence.on("UpdateData", async () => {
+presence.on('UpdateData', async () => {
   var elements = {
     squad: {
       users: document.querySelector(
-        "div.tw-align-items-center.tw-flex.tw-flex-row.tw-mg-l-1.tw-pd-l-05 > div.tw-align-items-center.tw-flex.tw-mg-l-1"
+        '.tw-align-items-center.tw-flex.tw-mg-l-1:nth-child(2)'
       ),
       user: index => {
-        return document.querySelector(
-          `div:nth-child(${index}) > div > div.tw-absolute.tw-balloon.tw-balloon--down.tw-hide > div > div > div > div.tw-flex.tw-flex-column.tw-flex-grow-1.tw-pd-b-1.tw-pd-t-4.tw-pd-x-1 > div.tw-align-center.tw-flex.tw-flex-column.tw-justify-content-center > p > a`
-        );
+        return document.querySelectorAll(
+          '.tw-interactive.tw-link.tw-link--hover-underline-none.tw-link--inherit'
+        )[index];
       }
     },
     live: {
-      title: document.querySelector(
-        "div.tw-flex.tw-justify-content-between.tw-mg-b-05 > h2"
-      ),
-      streamer: document.querySelector(
-        "div.channel-header__banner-toggle.channel-header__user.channel-header__user--selected.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-pd-r-2.tw-pd-y-05 > div > h5"
-      )
+      label: document.querySelector('.player-streamstatus__label'),
+      title: document.querySelector('.tw-font-size-4.tw-line-height-body'),
+      streamer: document.querySelector('.tw-font-size-5.tw-nowrap'),
+      host: document.querySelector('.tw-c-text-overlay.tw-strong')
     },
     video: {
-      title: document.querySelector("div.tw-mg-b-05 > p"),
-      streamer: document.querySelector(
-        "a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05 > div > h5"
+      title: document.querySelector('.tw-font-size-4.tw-strong'),
+      streamer: document.querySelector('.tw-font-size-5.tw-nowrap'),
+      time: document.querySelector(
+        'div.player-seek__time-container > span:nth-child(1)'
       ),
-      time: document.querySelector("div.player-seek__time-container > span:nth-child(1)"),      
-      duration: document.querySelector("span.player-seek__time.player-seek__time--total")
+      duration: document.querySelector(
+        'span.player-seek__time.player-seek__time--total'
+      )
     },
     clip: {
-      title: document.querySelector("span.tw-ellipsis.tw-font-size-5.tw-strong"),
-      streamer: document.querySelector("a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05 > div > h5");
+      title: document.querySelector('.tw-font-size-4.tw-strong'),
+      streamer: document.querySelector('.tw-font-size-5.tw-nowrap')
     }
   };
 
@@ -61,210 +61,176 @@ presence.on("UpdateData", async () => {
   }
 
   var video: HTMLVideoElement = document.querySelector(
-    "div.player-video > video"
+    'div.player-video > video'
   );
 
-  var squad = document.querySelector(
-    "div.squad-stream-top-bar__container.tw-align-items-center.tw-c-background-base.tw-flex.tw-flex-shrink-0.tw-relative"
-  );
+  var squad = document.querySelector('.squad-stream-top-bar__container');
 
   if (squad) {
-    type = "squad";
-  } else if (elements.live.title) {
-    type = "live";
+    type = 'squad';
+  } else if (
+    (elements.live.title && elements.live.label) ||
+    elements.live.host
+  ) {
+    type = 'live';
   } else if (elements.video.title) {
-    type = "video";
+    type = 'video';
   } else if (elements.clip.title) {
-    type = "clip";
+    type = 'clip';
   } else {
-    type = "browsing"
+    type = 'browsing';
   }
 
   if (logging) {
     console.log(`Type: ${type}`);
-    console.log(`Video Time: ${video ? video.currentTime : 0}`)
-    console.log(`Video Duration: ${video ? video.duration : 0}`)
+    console.log(`Video Time: ${video ? video.currentTime : 0}`);
+    console.log(`Video Duration: ${video ? video.duration : 0}`);
   }
 
-  /* Catch */
   try {
-    if (type === "squad") {
+    if (type === 'squad') {
       var users = [];
       var user_path = elements.squad.users;
-  
-      for (var index = 1; index <= user_path.children.length; index++) {
+
+      for (var index = 0; index <= user_path.children.length - 1; index++) {
         users = users.concat(elements.squad.user(index).textContent);
       }
-  
-      title = "Squad Stream";
-      streamer = users.join(", ");
-      smallImageKey = "live";
+
+      title = 'Squad Stream';
+      streamer = users.join(', ');
+      smallImageKey = 'live';
       smallImageText = (await strings).live;
       videoTime = elapsed;
       videoDuration = undefined;
-    } else if (type === "live") {
-      title = elements.live.title.textContent;
+    } else if (type === 'live') {
+      title = elements.live.title
+        ? elements.live.title.textContent
+        : `Hosting ${elements.live.host.textContent}`;
       streamer = elements.live.streamer.textContent;
-      smallImageKey = "live";
+      smallImageKey = 'live';
       smallImageText = (await strings).live;
       videoTime = elapsed;
       videoDuration = undefined;
-    } else if (type === "video") {
+    } else if (type === 'video') {
       title = elements.video.title.textContent;
       streamer = elements.video.streamer.textContent;
-      smallImageKey = video.paused ? "pause" : "play";
-      smallImageText = video.paused ? (await strings).pause : (await strings).play;
-      var timestamps = getElementTimestamps(elements.video.time.textContent, elements.video.duration.textContent);
-      videoTime= timestamps[0];
+      smallImageKey = video.paused ? 'pause' : 'play';
+      smallImageText = video.paused
+        ? (await strings).pause
+        : (await strings).play;
+      var timestamps = getElementTimestamps(
+        elements.video.time.textContent,
+        elements.video.duration.textContent
+      );
+      videoTime = timestamps[0];
       videoDuration = timestamps[1];
-    } else if (type === "clip") {
+    } else if (type === 'clip') {
       title = elements.clip.title.textContent;
       streamer = elements.clip.streamer.textContent;
-      smallImageKey = video.paused ? "pause" : "play";
-      smallImageText = video.paused ? (await strings).pause : (await strings).play;
-      var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
-      videoTime= timestamps[0];
+      smallImageKey = video.paused ? 'pause' : 'play';
+      smallImageText = video.paused
+        ? (await strings).pause
+        : (await strings).play;
+      var timestamps = getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
+      videoTime = timestamps[0];
       videoDuration = timestamps[1];
-    } else if (type === "browsing") {
+    } else if (type === 'browsing') {
       var location = window.location.pathname;
-  
-      title = "Browsing"
-      streamer = "Home"
+
+      title = 'Browsing';
+      streamer = undefined;
       smallImageKey = undefined;
       smallImageText = undefined;
       videoTime = undefined;
       videoDuration = undefined;
-  
-      var user = location.match("/(\\S*)/(\\S*)");
-      var user_header = document.querySelector(
-        "a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05"
-      );
+
+      var user = location.match('/(\\S*)/(\\S*)');
+      var user_header = document.querySelector('.tw-bold.tw-font-size-2');
+
       if (user && user_header) {
-        title = "Browsing";
         streamer = user[1] + "'s " + user[2];
       }
-  
-      if (location.match("/directory")) {
-        title = "Browsing";
-        streamer = "All";
+
+      if (elements.live.streamer) {
+        streamer = elements.live.streamer.textContent;
       }
-  
-      if (location.match("/directory/following")) {
-        title = "Browsing Followers";
-        streamer = "Overview";
+
+      if (location.match('/directory')) {
+        streamer = 'Categories';
       }
-  
-      if (location.match("/directory/following/live")) {
-        streamer = "Channels";
+
+      if (location.match('/directory/all')) {
+        streamer = 'Live';
       }
-  
-      if (location.match("/directory/following/hosts")) {
-        streamer = "Hosts";
+
+      if (location.match('/directory/following')) {
+        title = 'Browsing Following';
+        streamer = 'Overview';
       }
-  
-      if (location.match("/directory/following/games")) {
-        streamer = "Categories";
+
+      if (location.match('/directory/following/live')) {
+        streamer = 'Live';
       }
-      
-      if (location.match("/directory/game")) {
-        var game = document.querySelector(
-          "div.tw-flex.tw-justify-content-between.tw-mg-b-1.tw-relative > h1"
+
+      if (location.match('/directory/following/videos')) {
+        streamer = 'Videos';
+      }
+
+      if (location.match('/directory/following/hosts')) {
+        streamer = 'Hosts';
+      }
+
+      if (location.match('/directory/following/games')) {
+        streamer = 'Categories';
+      }
+
+      if (location.match('/directory/following/channels')) {
+        streamer = 'Channels';
+      }
+
+      if (location.match('/directory/game')) {
+        title = 'Browsing Game';
+        streamer = document.querySelector(
+          '.tw-c-text-base.tw-font-size-2.tw-strong'
         ).textContent;
-        title = "Browsing Game";
-        if (game) streamer = game;
       }
     }
+  } catch (err) {}
 
-    var data: presenceData = {
-      details: title,
-      state: streamer,
-      largeImageKey: largeImage,
-      smallImageKey: smallImageKey,
-      smallImageText: smallImageText,
-      startTimestamp: videoTime,
-      endTimestamp: videoDuration
-    };
-    
-    if (video && video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-    }
-    
-    if (title !== null && streamer !== null) {
-      presence.setActivity(data, video ? !video.paused : true);
-      presence.setTrayTitle(data.title);
-    }
-  } catch (error) {}
+  var data: presenceData = {
+    details: title,
+    state: streamer,
+    largeImageKey: largeImage,
+    smallImageKey: smallImageKey,
+    smallImageText: smallImageText,
+    startTimestamp: videoTime,
+    endTimestamp: videoDuration
+  };
 
+  if (video && video.paused) {
+    delete data.startTimestamp;
+    delete data.endTimestamp;
+  }
+
+  if (title !== null && streamer !== null) {
+    presence.setActivity(data, video ? !video.paused : true);
+    presence.setTrayTitle(title);
+  }
 });
 
-presence.on("MediaKeys", (key: string) => {
+presence.on('MediaKeys', (key: string) => {
   switch (key) {
-    case "pause":
+    case 'pause':
       var pause: HTMLButtonElement = document.querySelector(
-        "div.player-buttons-left > button"
+        'div.player-buttons-left > button'
       );
       if (pause) pause.click();
       break;
   }
 });
-
-function hub() {
-  var details = "Browsing";
-  var state = undefined;
-
-  var location = window.location.pathname;
-
-  if (location.match("/directory")) {
-    details = "Browsing";
-    state = "All";
-  }
-
-  if (location.match("/directory/following")) {
-    details = "Browsing Followers";
-    state = "Overview";
-  }
-
-  if (location.match("/directory/following/live")) {
-    state = "Channels";
-  }
-
-  if (location.match("/directory/following/hosts")) {
-    state = "Hosts";
-  }
-
-  if (location.match("/directory/following/games")) {
-    state = "Categories";
-  }
-  
-  if (location.match("/directory/game")) {
-    var game = document.querySelector(
-      "div.tw-flex.tw-justify-content-between.tw-mg-b-1.tw-relative > h1"
-    ).textContent;
-    details = "Browsing Game";
-    if (game) state = game;
-  }
-  /*
-  var user = location.match("/(\\S*)/(\\S*)");
-  var user_header = document.querySelector(
-    "a.channel-header__user.tw-align-items-center.tw-flex.tw-flex-nowrap.tw-flex-shrink-0.tw-interactive.tw-link.tw-link--hover-underline-none.tw-pd-r-2.tw-pd-y-05"
-  );
-  if (user && user_header) {
-    details = "Browsing";
-    state = user[1] + "'s " + user[2];
-  }
-  */
-
-
-  presence.setActivity(
-    {
-      details: details,
-      state: state,
-      largeImageKey: "twitch"
-    },
-    true
-  );
-}
 
 function getTimestamps(videoTime: number, videoDuration: number) {
   var startTime = Date.now();
@@ -273,8 +239,8 @@ function getTimestamps(videoTime: number, videoDuration: number) {
 }
 
 function getElementTimestamps(audioTime: string, audioDuration: string) {
-  var splitAudioTime = audioTime.split(":").reverse();
-  var splitAudioDuration = audioDuration.split(":").reverse();
+  var splitAudioTime = audioTime.split(':').reverse();
+  var splitAudioDuration = audioDuration.split(':').reverse();
 
   var parsedAudioTime = getTime(splitAudioTime);
   var parsedAudioDuration = getTime(splitAudioDuration);
