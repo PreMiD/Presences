@@ -22,6 +22,9 @@ var presence = new Presence({
           presenceData.smallImageKey = "reading";
   
           presence.setActivity(presenceData);
+      } else if (document.location.pathname.includes("/private-accounts/")) {
+        presence.setActivity();
+        presence.setTrayTitle();
       } else if (document.location.pathname.includes("/advertising/")) {
           presenceData.details = "Viewing the";
           presenceData.state = "advertising page";
@@ -61,7 +64,7 @@ var presence = new Presence({
           } else if (document.location.pathname.includes("/categories/")) {
               title = document.querySelector("#content > div > div > div.titleBar > h1");
               presenceData.details = "Resources, viewing";
-              presenceData.state = "category: " + title.innerText.replace("Add Resource", "");
+              presenceData.state = "category: " + title.innerText.replace("Add Resource", "").replace("Sell your OG", "").replace("Sell your Semi-OG", "").replace("Sell your cape account", "").replace("Sell your Rank Account", "").replace("Post New Thread", "");
   
               delete presenceData.smallImageKey;
   
@@ -153,19 +156,24 @@ var presence = new Presence({
           presence.setActivity(presenceData);
       } else if (document.location.pathname.includes("/threads/")) {
           title = document.querySelector("#content > div > div > div.titleBar > h1");
-          presenceData.details = "Reading thread:";
-          if (title.innerText.length > 128) {
-              presenceData.state = title.innerText.substring(0, 125) + "...";
+          if (title.innerText.includes("Private OG")) {
+            presence.setActivity();
+            presence.setTrayTitle();
           } else {
+            presenceData.details = "Reading thread:";
+            if (title.innerText.length > 128) {
+              presenceData.state = title.innerText.substring(0, 125) + "...";
+            } else {
               presenceData.state = title.innerText;
-          }
-          presenceData.smallImageKey = "reading";
+            }
+            presenceData.smallImageKey = "reading";
 
-          presence.setActivity(presenceData);
+            presence.setActivity(presenceData);
+          }
       } else if (document.location.pathname.includes("/forums/")) {
           title = document.querySelector("#content > div > div > div.titleBar > h1");
           presenceData.details = "Viewing category:";
-          presenceData.state = title.innerText.replace("Post New Thread", "");
+          presenceData.state = title.innerText.replace("Post New Thread", "").replace("Sell your OG", "").replace("Sell your Semi-OG", "").replace("Sell your cape account", "").replace("Sell your Rank Account", "");
 
           delete presenceData.smallImageKey;
 
