@@ -31,17 +31,17 @@ if (!loggedout) {
         var Classname = document.querySelector(".wimscenter").innerText.split("\n")[0] + " ";
     if (document.baseURI.match(/sh=/)) {
         var WSNo = ((document.baseURI.match(/sh=(.?.?)/))[1]).replace(/&|#/g, "");
-        var Worksheet = " - " + (document.getElementsByClassName("text_item ")[1].innerHTML) + "" + WSNo;
+        var Worksheet = ": " + (document.getElementsByClassName("text_item ")[1].innerHTML) + "" + WSNo;
         var Exercise = "...";
     }
     else if (document.baseURI.match(/(worksheet=|reply)/)) {
         var WSNo = ((document.querySelector(".sheet").href.match(/sh=(.?.?)/))[1]).replace(/&|#/g, "");
-        var Worksheet = " - " + document.querySelector(".sheet").innerText + " " + WSNo;
+        var Worksheet = ": " + document.querySelector(".sheet").innerText + " " + WSNo;
         var Classname = (document.querySelectorAll("td.small")[2].innerText.split(" ")[0]) + " ";
         if (document.querySelector(".main_body .titre")) {
             if (document.querySelector(".main_body .titre") && document.getElementsByTagName("kbd")[1] && !document.querySelector(".answer")) {
                 var EXNo = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/)[0];
-                var Exercise = ((document.querySelector(".sheet").href.match(/#ex(.?.?)/))[1]).replace(/&|#/g, "") + "." + EXNo + " - " + document.querySelector(".main_body .titre").innerText;
+                var Exercise = ((document.querySelector(".sheet").href.match(/#ex(.?.?)/))[1]).replace(/&|#/g, "") + "." + EXNo + ": " + document.querySelector(".main_body .titre").innerText;
             }
             else
                 var Exercise = document.querySelector(".main_body .titre").innerText;
@@ -49,7 +49,7 @@ if (!loggedout) {
         if (document.querySelector(".oeftitle")) {
             if (document.querySelector(".oeftitle") && document.getElementsByTagName("kbd")[1] && !document.querySelector(".oefanswer")) {
                 var EXNo = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/)[0];
-                var Exercise = document.querySelector(".oeftitle").innerText + " - " + EXNo;
+                var Exercise = document.querySelector(".oeftitle").innerText + ": " + EXNo;
             }
             else
                 var Exercise = document.querySelector(".oeftitle").innerText;
