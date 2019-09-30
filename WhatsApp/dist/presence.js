@@ -29,21 +29,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 
 let presence = new Presence({
-        clientId: "628019683718856714"
-    });
+    clientId: "628019683718856714"
+});
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    let name = document.querySelectorAll("header")[1] ? document.querySelectorAll("header")[1].getElementsByTagName("span")[1].innerText : null,
-        typing = document.getElementsByClassName("hnQHL")[1] ? document.getElementsByClassName("hnQHL")[1].firstElementChild.tagName : null,
-        textPermission = document.getElementsByClassName("wjdTm")[0] ? true : false;
+    let name = document.querySelector("#main > header > div._3V5x5 > div._1lpto > div > span"),
+        typing = document.querySelector("#main > footer > div._2i7Ej.copyable-area > div:nth-child(3)") ? document.querySelector("#main > footer > div._2i7Ej.copyable-area > div:nth-child(3)").firstChild : null,
+        textPermission = document.querySelector("#main > footer > div._2i7Ej.copyable-area > div._13mgZ") ? true : false,
+        contactName = null;
 
-    if (!name || name === null || name == "") return;
-    if (!isNaN(document.querySelectorAll("header")[1].getElementsByTagName("span")[1].innerText.replace("+", "").replace(/ /g, ""))) name = "a private person"; // This will protect you from showing people the unsaved contact's number.
+    if (!name || name === null || name.innerText == "") return presence.clearActivity();
+    if (isNaN(name.innerText.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, ""))) contactName = name.innerText; // This will protect you from showing people the unsaved contact's number.
 
     const data = {
         largeImageKey: "waweb-logo",
-        details: `Texting with ${name}`,
-        state: `${typing && typing == "BUTTON" ? "Typing..." : `${!typing && !textPermission ? "Can't really type..." : "Just waiting..."}`}`,
+        details: `Texting with ${contactName ? contactName : 'someone'}`,
+        state: `${typing && typing.tagName == "BUTTON" ? "Typing..." : `${!typing && !textPermission ? "Can't really type..." : "Just waiting..."}`}`,
         startTimestamp: Math.floor(Date.now() / 1000)
     };
 
