@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "611657413350654010",
-    mediaKeys: true
+    mediaKeys: false
   }),
 
   strings = presence.getStrings({
@@ -22,7 +22,7 @@ var presence = new Presence({
 presence.on("UpdateData", async () => {
 
   playback = 
-    document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") !== null
+  document.querySelector("#player > div.jw-media.jw-reset > video") !== null
       ? true : false
   
   if (!playback) {
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
     
   }
 
-  var video: HTMLVideoElement = document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
+  var video: HTMLVideoElement = document.querySelector("#player > div.jw-media.jw-reset > video");
 
   if (video !== null) {
 
@@ -70,6 +70,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = videoTitle.innerText;
       presenceData.state = episode.innerText;
       presenceData.startTimestamp = browsingStamp;
+
+      if (video.paused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
  
       presence.setActivity(presenceData, true);
     
