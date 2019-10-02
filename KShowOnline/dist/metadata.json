@@ -1,0 +1,23 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "KShowOnline",
+    "description": {
+        "en": "Watch Korean Variety Shows Online with English Subtitles.",
+        "nl": "Bekijk Koreaanse variëteitsshows online met Engelse ondertiteling."
+    },
+    "url": "kshowonline.com",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/fqNzu3W.png",
+    "thumbnail": "https://i.imgur.com/aeinr6l.png",
+    "color": "#0070C3",
+    "tags": [
+        "video",
+        "media",
+        "kpop"
+    ],
+    "iframe": true,
+    "category": "videos"
+}
