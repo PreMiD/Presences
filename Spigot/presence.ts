@@ -118,13 +118,13 @@ var presence = new Presence({
               presence.setActivity(presenceData);
             }
           } else if (document.location.pathname.includes("/authors/")) {
-              title = document.querySelector("#authorStats > div > dl.authorName > dd > a");
-              presenceData.details = "Resources, Viewing author:";
-              presenceData.state = title.innerText;
+            title = document.querySelector("#authorStats > div > dl.authorName > dd > a");
+            presenceData.details = "Resources, Viewing author:";
+            presenceData.state = title.innerText;
   
-              delete presenceData.smallImageKey;
+            delete presenceData.smallImageKey;
   
-              presence.setActivity(presenceData);
+            presence.setActivity(presenceData);
           } else if (document.location.pathname.includes("/categories/")) {
             title = document.querySelector("#content > div > div > div.mainContainer_noSidebar > div > div.titleBar > h1");
             presenceData.details = "Resources, Viewing category:";
@@ -134,17 +134,24 @@ var presence = new Presence({
 
             presence.setActivity(presenceData);
           } else if (document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.resourceInfo > h1") != null) {
-              title = document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.resourceInfo > h1");
-              presenceData.details = "Resources, Viewing:";
-              if (title.innerText.length > 128) {
-                  presenceData.state = title.innerText.substring(0, 125) + "...";
-              } else {
-                  presenceData.state = title.innerText;
-              }
+            title = document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.resourceInfo > h1");
+            presenceData.details = "Resources, Viewing:";
+            if (title.innerText.length > 128) {
+              presenceData.state = title.innerText.substring(0, 125) + "...";
+            } else {
+              presenceData.state = title.innerText;
+            }
   
-              delete presenceData.smallImageKey;
+            delete presenceData.smallImageKey;
   
-              presence.setActivity(presenceData);
+            presence.setActivity(presenceData);
+          } else if (document.location.pathname.includes("/edit")) { 
+            presenceData.details = "Resources, Doing an edit...";
+            delete presenceData.state;
+    
+            delete presenceData.smallImageKey;
+    
+            presence.setActivity(presenceData);
           } else {
             presenceData.details = "Resources, Browsing...";
             delete presenceData.state;

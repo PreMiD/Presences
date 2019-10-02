@@ -140,6 +140,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 delete presenceData.smallImageKey;
                 presence.setActivity(presenceData);
             }
+            else if (document.location.pathname.includes("/edit")) {
+                presenceData.details = "Resources, Doing an edit...";
+                delete presenceData.state;
+                delete presenceData.smallImageKey;
+                presence.setActivity(presenceData);
+            }
             else {
                 presenceData.details = "Resources, Browsing...";
                 delete presenceData.state;
