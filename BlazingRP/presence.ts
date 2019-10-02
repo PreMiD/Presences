@@ -26,8 +26,13 @@ mainPresence.on("UpdateData", async () => {
     } else if(document.location.pathname.startsWith("/changelogs")) {
       presenceData.details = "Betrachtet die Changelogs..."
     } else if(document.location.pathname.startsWith("/wiki")) {
-      presenceData.details = "Liest einen Wiki Artikel...";
-      presenceData.state = document.getElementsByClassName("page-header")[0].textContent;
+      if(document.getElementsByClassName("page-header")[0].textContent.startsWith("Bearbeiten von „")) {
+        presenceData.details = "Bearbeitet einen Wiki Artikel...";
+        presenceData.state = document.getElementsByClassName("page-header")[0].textContent.replace("Bearbeiten von „", "").replace("“", "");
+      } else {
+          presenceData.details = "Liest einen Wiki Artikel...";
+          presenceData.state = document.getElementsByClassName("page-header")[0].textContent;
+      }
     }
     mainPresence.setActivity(presenceData);
   } else if(document.location.hostname == "hub.blazingrp.net") {
