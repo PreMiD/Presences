@@ -5,8 +5,8 @@
     },
     "service": "Spotify",
     "description": {
-        "en": "Music for everyone. Note: Show only if you are listening to a podcast or if you are not and not listening to a song, it shows page info. To show normal songs use the Spotify x Discord connection.",
-        "nl": "Muziek voor iedereen. Opmerking: Laat alleen zien als je naar een podcast luistert of als je dat niet doet en niet naar een liedje luistert laat het pagina info zien. Om normale liedjes te laten zien gebruik de Spotify x Discord connectie."
+        "en": "Music for everyone. Note: Only podcasts and site info! To show normal songs use the Spotify x Discord connection.",
+        "nl": "Muziek voor iedereen. Opmerking: Alleen podcasts en pagina informatie! Om normale liedjes te laten zien gebruik de Spotify x Discord connectie."
     },
     "url": [
         "www.spotify.com",
@@ -17,7 +17,7 @@
         "investors.spotify.com",
         "support.spotify.com"
     ],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "logo": "https://i.imgur.com/q3tKDRA.png",
     "thumbnail": "https://i.imgur.com/AzNhQ4j.png",
     "color": "#1ed760",
