@@ -9,40 +9,9 @@
         "nl": "Online winkelen uit 's werelds grootste selectie van boeken, tijdschriften, muziek, dvd's, video's, elektronica, computers, software, kleding en accessoires, schoenen, sieraden, gereedschap en hardware, huishoudelijke artikelen, meubels, sportartikelen, schoonheid en persoonlijke verzorging, breedband en dsl, gourmet eten en zo ongeveer alles."
     },
     "url": [
-        "www.amazon.com.au",
-        "www.amazon.de",
-        "www.amazon.ca",
-        "www.amazon.cn",
-        "www.amazon.es",
-        "www.amazon.com",
-        "www.amazon.fr",
-        "www.amazon.nl",
-        "www.amazon.in",
-        "www.amazon.it",
-        "www.amazon.co.jp",
-        "www.amazon.com.mx",
-        "www.amazon.ae",
-        "www.amazon.co.uk",
-        "www.amazon.com.tr",
-        "www.amazon.com.br",
-        "smile.amazon.com.au",
-        "smile.amazon.de",
-        "smile.amazon.ca",
-        "smile.amazon.cn",
-        "smile.amazon.es",
-        "smile.amazon.com",
-        "smile.amazon.fr",
-        "smile.amazon.nl",
-        "smile.amazon.in",
-        "smile.amazon.it",
-        "smile.amazon.co.jp",
-        "smile.amazon.com.mx",
-        "smile.amazon.ae",
-        "smile.amazon.co.uk",
-        "smile.amazon.com.tr",
-        "smile.amazon.com.br"
+        "www.amazon.com"
     ],
-    "version": "1.1",
+    "version": "1.2",
     "logo": "https://i.imgur.com/qPBCqNA.png",
     "thumbnail": "https://i.imgur.com/Y6njoa3.png",
     "color": "#ff9900",
@@ -50,5 +19,6 @@
         "store",
         "shopping"
     ],
-    "category": "other"
+    "category": "other",
+    "regExp": "([a-z0-9]+)[.]amazon[.]([a-z0-9]+)([.]([a-z0-9]+))?"
 }
