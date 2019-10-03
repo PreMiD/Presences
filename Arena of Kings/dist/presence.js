@@ -10,7 +10,7 @@ var presence = new Presence({
     clientId: "555834227833307146"
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    var presenceData = yield presence.getPageVariable("PreMiD_PresenceData");
+    var presenceData = yield presence.getPageletiable("PreMiD_PresenceData");
     if (presenceData === null)
         presence.setActivity();
     else
