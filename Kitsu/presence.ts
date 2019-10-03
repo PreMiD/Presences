@@ -1,18 +1,12 @@
-//@ts-ignore
 let presence = new Presence({
     clientId: '629413852391669791'
 });
-//@ts-ignore
 let presenceData: presenceData = {
     largeImageKey: 'kitsu_lg'
 }
 
-//@ts-ignore
-let path, user, title: string;
-
+let path, user: string;
 let started: number = Math.floor(Date.now() / 1000)
-
-//@ts-ignore
 let strings = presence.getStrings({
     "browsing": "presence.activity.browsing"
 })
