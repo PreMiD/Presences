@@ -182,6 +182,13 @@ var presence = new Presence({
         delete presenceData.smallImageKey;
       
         presence.setActivity(presenceData);
+      } else if (document.location.pathname.includes("/npc/")) {
+        presenceData.details = "Using the";
+        presenceData.state = "NPC generator";
+      
+        delete presenceData.smallImageKey;
+      
+        presence.setActivity(presenceData);
       } else {
         presence.setActivity();
         presence.setTrayTitle();
