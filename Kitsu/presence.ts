@@ -6,7 +6,6 @@ let presenceData: presenceData = {
 }
 
 let path, user: string;
-let started: number = Math.floor(Date.now() / 1000)
 let strings = presence.getStrings({
     "browsing": "presence.activity.browsing"
 })
