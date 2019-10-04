@@ -128,7 +128,7 @@ var presence = new Presence({
         presence.setActivity(presenceData);
       } else if (document.querySelector("#rootEntity") != null) {
         presenceData.details = "MCStacker for latest";
-        presenceData.state = "Making a /excute command";
+        presenceData.state = "Making a /execute command";
       
         delete presenceData.smallImageKey;
       
