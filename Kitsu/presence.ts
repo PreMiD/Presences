@@ -46,6 +46,37 @@ presence.on('UpdateData', async () => {
         presenceData.details = 'Browsing for groups'
 
         delete presenceData.state
+    } else if (path.startsWith('/feedback')) {
+        presenceData.details = 'Browsing feedback section'
+        switch (path.split('/')[2]) {
+            case 'bugs':
+                presenceData.state = 'Viewing bugs'
+            
+                break;
+
+            case 'feature-requests':
+                presenceData.state = 'Viewing feature requests'
+
+                break;
+
+            case 'database-requests':
+                presenceData.state = 'Viewing database requests'
+
+                break;
+
+            case 'mobile-bugs':
+                presenceData.state = 'Viewing mobile bugs'
+
+                break;
+
+            case 'mobile-features':
+                presenceData.state = 'Viewing mobile features'
+
+                break;
+
+            default:
+                presenceData.state = 'some unknown place'
+        }
     }
 
     presence.setActivity(presenceData, true);
