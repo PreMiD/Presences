@@ -25,8 +25,6 @@ presence.on('UpdateData', async () => {
         user = document.querySelector(".cover-username").textContent.trim();
         presenceData.details = `Viewing ${user} profile`;
         presenceData.state = 'Viewing their library';
-
-        delete presenceData.startTimestamp;
     } else if (path.startsWith('/anime/')) {
         presenceData.details = 'Looking through anime'
         presenceData.state = `Viewing ${document.querySelector('h3').textContent.trim()}`;
