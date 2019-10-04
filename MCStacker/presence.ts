@@ -189,6 +189,13 @@ var presence = new Presence({
         delete presenceData.smallImageKey;
       
         presence.setActivity(presenceData);
+      } else if (document.location.pathname.includes("/murals/")) {
+        presenceData.details = "Using the";
+        presenceData.state = "Mural generator";
+      
+        delete presenceData.smallImageKey;
+      
+        presence.setActivity(presenceData);
       } else {
         presence.setActivity();
         presence.setTrayTitle();
