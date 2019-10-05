@@ -21,9 +21,6 @@ presence.on('UpdateData', async () => {
         presenceData.details = `Viewing ${user} profile`;
 
         switch (path.split('/')[3]) {
-            case 'activity':
-                presenceData.state = 'Viewing their activity'
-                break;
             case 'library':
                 presenceData.state = 'Viewing their library'
                 break;
@@ -40,7 +37,7 @@ presence.on('UpdateData', async () => {
                 presenceData.state = 'Viewing their groups'
                 break;
             default:
-                presenceData.state = 'I don\'t think they even know what they\'re viewing'
+                presenceData.state = 'Viewing their activity'
         }
     } else if (path.startsWith('/anime')) {
         presenceData.details = 'Looking through anime'
