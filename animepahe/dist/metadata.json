@@ -18,5 +18,7 @@
         "media"
     ],
     "category": "anime",
+    "regExp": "animepahe.com",
+    "iFrameRegExp": "kwik.cx\/e",
     "iframe": true
 }
