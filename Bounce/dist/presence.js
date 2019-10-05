@@ -5,7 +5,29 @@ var presence = new Presence({
 });
 var play, artist, track, title;
 var browsingStamp = Math.floor(Date.now() / 1000);
+let sartist, strack, slisteners, sdj;
+setInterval(newStats, 6000)
+function newStats() {
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      let data = JSON.parse(this.responseText);
+	strack = data.track;
+	sartist = data.artist;
+	sdj = data.dj;
+	slisteners= data.listeners;
+    }
+  };
+  xhttp.open('GET', 'https://wearebounce.net/api/index.php?stats2=1&key=GivemeaccessBitCH!', true);
+  xhttp.send();
+	
+}
+
+
+
 presence.on("UpdateData", () => {
+
+
     let presenceData = {
         largeImageKey: "bouncelogo"
     };
@@ -33,17 +55,10 @@ presenceData.smallImageKey = "pause";
                 break;
             case "togl fa fa-pause":
 presenceData.smallImageKey = "play";
-  let xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      let data = JSON.parse(this.responseText);
-	presenceData.details = data.track +" - "+ data.artist
-	presenceData.state = data.dj +" - "+ data.listeners + " listeners"
+	presenceData.details = strack +" - "+ sartist
+	presenceData.state = sdj +" - "+ slisteners + " listeners"
 	presence.setActivity(presenceData)
-    }
-  };
-  xhttp.open('GET', 'https://wearebounce.net/api/index.php?stats2=1&key=GivemeaccessBitCH!', true);
-  xhttp.send();
+
 
 
 
