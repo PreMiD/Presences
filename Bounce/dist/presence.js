@@ -1,8 +1,26 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+    return new(P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -21,18 +39,15 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = "Reading article:";
         if (title.innerText.length > 128) {
             presenceData.state = title.innerText.substring(0, 125) + "...";
-        }
-        else {
+        } else {
             presenceData.state = title.innerText;
         }
         presenceData.smallImageKey = "reading";
         presence.setActivity(presenceData);
-    }
-    else if (document.URL.includes("#Bounce.Timetable")) {
+    } else if (document.URL.includes("#Bounce.Timetable")) {
         presenceData.details = "Viewing the timetable";
         presence.setActivity(presenceData);
-    }
-    else if (document.URL.includes("#Bounce.Home")) {
+    } else if (document.URL.includes("#Bounce.Home")) {
         play = document.querySelector("body > div.web > div > div > div > div > div.player > div.stats-p > div > div.buttons > center > div > i");
         play = play.className;
         switch (play) {
@@ -41,15 +56,18 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 presence.setActivity(presenceData);
                 break;
             case "togl fa fa-pause":
-        var xmlhttp = new XMLHttpRequest();
-          xmlhttp.onreadystatechange = function() {
-          presence.setActivity(presenceData);	    if (this.readyState == 4 && this.status == 200) {
-           var data = JSON.parse(this.responseText);
-           presenceData.setActivity = data.track + " (Artist: " + data.artist + ")";
-          presence.state(data.dj + " - " + data.listeners + " listeners");
-    }
-    }
-    else {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    presence.setActivity(presenceData);
+                    if (this.readyState == 4 && this.status == 200) {
+                        var data = JSON.parse(this.responseText);
+                        presenceData.details = data.track + " (Artist: " + data.artist + ")";
+                        presenceData.state = (data.dj + " - " + data.listeners + " listeners");
+                        presence.setActivity();
+                    }
+                }
+        }
+    } else {
         presence.setActivity();
         presence.setTrayTitle();
     }
