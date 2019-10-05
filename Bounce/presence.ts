@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "629818846433247232", // CLIENT ID FOR YOUR PRESENCE
+    clientId: "629819064642043925", // CLIENT ID FOR YOUR PRESENCE
     mediaKeys: false
   })
   
@@ -10,7 +10,7 @@ var presence = new Presence({
   presence.on("UpdateData", async () => {
   
     let presenceData: presenceData = {
-      largeImageKey: "bounce"
+      largeImageKey: "bouncelogo"
     };
     if (document.URL.includes("#Bounce.News")) { 
       title = document.querySelector("body > div.web > div > div > div > div > div.pageajax > div.leftnews1 > center > b:nth-child(1)");
