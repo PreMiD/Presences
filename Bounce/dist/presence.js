@@ -1,36 +1,11 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new(P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
 
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
     clientId: "629819064642043925",
     mediaKeys: false
 });
 var play, artist, track, title;
 var browsingStamp = Math.floor(Date.now() / 1000);
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+presence.on("UpdateData", () => {
     let presenceData = {
         largeImageKey: "bouncelogo"
     };
@@ -56,19 +31,24 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 presence.setActivity(presenceData);
                 break;
             case "togl fa fa-pause":
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function () {
-                    presence.setActivity(presenceData);
-                    if (this.readyState == 4 && this.status == 200) {
-                        var data = JSON.parse(this.responseText);
-                        presenceData.details = data.track + " (Artist: " + data.artist + ")";
-                        presenceData.state = (data.dj + " - " + data.listeners + " listeners");
-                        presence.setActivity();
-                    }
-                }
+
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      let data = JSON.parse(this.responseText);
+	presenceData.details = data.track +" - "+ data.artist
+	presenceData.state = data.dj +" - "+ data.listeners + " listeners"
+	presence.setActivity(presenceData)
+    }
+  };
+  xhttp.open('GET', 'https://wearebounce.net/api/index.php?stats2=1&key=GivemeaccessBitCH!', true);
+  xhttp.send();
+
+
+
         }
     } else {
         presence.setActivity();
         presence.setTrayTitle();
     }
-}));
+});
