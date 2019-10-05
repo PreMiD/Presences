@@ -37,12 +37,12 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = "Searching";
     } else if (path.includes('anime')) {
         title = document.querySelector('div.content > h1').textContent.trim();
-        presenceData.details = "Looking an anime";
+        presenceData.details = "Viewing an anime";
         presenceData.state = title;
         delete presenceData.smallImageKey;
     } else if (path.includes('manga')) {
         title = document.querySelector('div.content > h1').textContent.trim();
-        presenceData.details = "Looking an manga";
+        presenceData.details = "Viewing a manga";
         presenceData.state = title;
         delete presenceData.smallImageKey;
     } else if (path.includes('forum')) {
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
         }
         delete presenceData.smallImageKey;
     } else if (path.includes('studio')) {
-        presenceData.details = "Looking a studio";
+        presenceData.details = "Viewing a studio";
         presenceData.state = document.querySelector('div.container > h1').textContent;
         delete presenceData.smallImageKey;
     } else {
