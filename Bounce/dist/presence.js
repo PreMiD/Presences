@@ -27,11 +27,12 @@ presence.on("UpdateData", () => {
         play = play.className;
         switch (play) {
             case "togl fa fa-play":
+presenceData.smallImageKey = "pause";
                 presenceData.details = "Viewing the home page";
                 presence.setActivity(presenceData);
                 break;
             case "togl fa fa-pause":
-
+presenceData.smallImageKey = "play";
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
