@@ -106,15 +106,16 @@ presence.on('UpdateData', async () => {
   }
 
   if (window.location.href.match('tweetdeck.twitter.com/')) {
-    title = 'Browsing Tweetdeck...';
+    var container =
+      document.querySelector('#container > div') ||
+      document.createElement('HTMLDivElement');
+
+    title = `Tweetdeck (${container.childElementCount} Columns)`;
     info = undefined;
     image = 'tweetdeck';
 
     var header = document.querySelector('.mdl-header-title');
     var profile = document.querySelector('.js-action-url > .fullname');
-    if (header || profile) {
-      title = 'Tweetdeck';
-    }
 
     if (header) {
       info = 'Viewing ' + capitalize(header.textContent);
