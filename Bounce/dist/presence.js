@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var presence = new Presence({
-    clientId: "629818846433247232",
+    clientId: "629819064642043925",
     mediaKeys: false
 });
 var play, artist, track, title;
@@ -41,16 +41,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 presence.setActivity(presenceData);
                 break;
             case "togl fa fa-pause":
-                presenceData.details = "Listening to bounce:";
-                track = document.querySelector("body > div.web > div > div > div > div > div.player > div.stats-p > div > div.stt > h2");
-                artist = document.querySelector("body > div.web > div > div > div > div > div.player > div.stats-p > div > div.stt > div > h4");
-                presenceData.state = track.innerText + " (Artist: " + artist.innerText + ")";
-                presence.setActivity(presenceData);
-                break;
-            default:
-                presence.setActivity();
-                presence.setTrayTitle();
-        }
+        var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function() {
+          presence.setActivity(presenceData);	    if (this.readyState == 4 && this.status == 200) {
+           var data = JSON.parse(this.responseText);
+           presenceData.setActivity = data.track + " (Artist: " + data.artist + ")";
+          presence.state(data.dj + " - " + data.listeners + " listeners");
+    }
     }
     else {
         presence.setActivity();
