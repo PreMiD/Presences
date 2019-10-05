@@ -3,7 +3,7 @@
         "name": "Nekolen",
         "id": "270125856679002113"
     },
-    "service": "https://duelingnexus.com/",
+    "service": "Dueling Nexus",
     "description": {
         "en": "duelingnexus.com is a free online yugioh simulator for browsers.",
         "ro": "duelingnexus.com este un simulator gratuit de yugioh online pentru browsere.",
@@ -17,11 +17,10 @@
     "logo": "https://cdn.discordapp.com/attachments/465278458986102786/629582146821947392/unknown.png",
     "thumbnail": "https://cdn.discordapp.com/attachments/465278458986102786/629579458214494208/DgP2dkxWAAAWsbP.jpg",
     "color":"#FF4500",
-
     "tags": [
         "game",
         "Yu-Gi-Oh",
         "browser"
     ],
-    "category": "Game"
+    "category": "games"
 }
