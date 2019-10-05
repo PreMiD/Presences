@@ -14,7 +14,7 @@ var play, artist, track, title;
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
-        largeImageKey: "bounce"
+        largeImageKey: "bouncelogo"
     };
     if (document.URL.includes("#Bounce.News")) {
         title = document.querySelector("body > div.web > div > div > div > div > div.pageajax > div.leftnews1 > center > b:nth-child(1)");
