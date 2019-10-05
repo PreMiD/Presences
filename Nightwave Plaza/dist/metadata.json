@@ -8,14 +8,14 @@
 	"url": [
 		"plaza.one"
 	],
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"logo": "https://i.imgur.com/rNVPwya.png",
 	"thumbnail": "https://i.imgur.com/qnTU97o.jpg",
 	"color": "#F58EA8",
 	"tags": [
 		"music",
 		"radio",
-		"vaorwave"
+		"vaporwave"
 	],
 	"iframe": false,
 	"category": "music"
