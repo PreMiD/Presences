@@ -1,0 +1,15 @@
+{
+    "author": {
+      "name": "Kewaii",
+      "id": "135112599460118528"
+    },
+    "service": "TugaStrikes",
+    "description": "TugaStrikes is a Gaming Community Founded in 2017 focusing on CS:GO",
+    "url": ["tugastrikes.com"],
+    "version": "1.0.1",
+    "logo": "https://tugastrikes.com/images/img1.png",
+    "thumbnail": "https://i.imgur.com/CQa1csF.png",
+    "color": "#00ecec",
+    "tags": ["games"],
+    "iframe": false
+  }
