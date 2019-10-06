@@ -1,0 +1,16 @@
+{
+  "author": {
+    "name": "thatdevjon",
+    "id": "570656255610191874"
+  },
+  "service": "Pastebin",
+  "description": "Pastebin.com is the number one paste tool since 2002. Pastebin is a website where you can store text online for a set period of time.",
+  "url": ["pastebin.com", "www.pastebin.com"],
+  "version": "1",
+  "logo": "https://pastebin.com/i/facebook.png",
+  "thumbnail": "https://pastebin.com/i/facebook.png",
+  "color": "#023859",
+  "tags": ["PASTEBIN", "TEXT"],
+  "category": "OTHER",
+  "iframe": false
+}
