@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
       }
       
       presenceData.details = "Taking a " + language + " lesson";
-      presenceData.state = path.split("/")[3].replace("-", " ");
+      presenceData.state = path.split("/")[1].replace("-", " ");
       presenceData.largeImageKey = "logo";
 
       presence.setActivity(presenceData);
