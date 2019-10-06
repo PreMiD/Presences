@@ -3,9 +3,6 @@ var presence = new Presence({
     mediaKeys: true
 });
 
-var play, artist, track, title;
-var browsingStamp = Math.floor(Date.now() / 1000);
-
 presence.on("UpdateData", () => {
     let presenceData = {
         largeImageKey: "upbeatlogo"
