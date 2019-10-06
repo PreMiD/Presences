@@ -116,7 +116,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         else if (document.querySelector("#rootEntity") != null) {
             presenceData.details = "MCStacker for latest";
-            presenceData.state = "Making a /excute command";
+            presenceData.state = "Making a /execute command";
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         }
@@ -159,6 +159,18 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else if (document.URL.includes("/versions.php")) {
             presenceData.details = "MCStacker viewing:";
             presenceData.state = "Version page";
+            delete presenceData.smallImageKey;
+            presence.setActivity(presenceData);
+        }
+        else if (document.location.pathname.includes("/npc/")) {
+            presenceData.details = "Using the";
+            presenceData.state = "NPC generator";
+            delete presenceData.smallImageKey;
+            presence.setActivity(presenceData);
+        }
+        else if (document.location.pathname.includes("/murals/")) {
+            presenceData.details = "Using the";
+            presenceData.state = "Mural generator";
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         }

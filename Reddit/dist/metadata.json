@@ -11,8 +11,11 @@
         "uk": "Reddit дає вам все найкраще в Інтернеті в одному місці. Отримайте постійно оновлювані новини, цікаві історії, фотографії, меми та відео лише для вас.",
         "nl": "Reddit biedt u het beste van internet op één plek. Ontvang een constant bijgewerkte feed met het laatste nieuws, leuke verhalen, foto's, memes en video's speciaal voor jou."
     },
-    "url": "www.reddit.com",
-    "version": "2.1",
+    "url": [
+        "www.reddit.com",
+        "old.reddit.com"
+    ],
+    "version": "2.2",
     "logo": "https://i.imgur.com/Yzr4SeJ.png",
     "thumbnail": "https://i.imgur.com/fPUwXN5.png",
     "color": "#ff4500",
