@@ -31,6 +31,8 @@ presence.on("UpdateData", () => {
     let presenceData = {
         largeImageKey: "bouncelogo"
     };
+	  presenceData.startTimestamp = browsingStamp;
+
     if (document.URL.includes("#Bounce.News")) {
         title = document.querySelector("body > div.web > div > div > div > div > div.pageajax > div.leftnews1 > center > b:nth-child(1)");
         presenceData.details = "Reading article:";
