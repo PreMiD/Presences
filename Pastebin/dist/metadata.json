@@ -8,11 +8,11 @@
     "en": "Pastebin.com is the number one paste tool since 2002. Pastebin is a website where you can store text online for a set period of time."
    },
   "url": ["pastebin.com", "www.pastebin.com"],
-  "version": "1",
+  "version": "1.0",
   "logo": "https://pastebin.com/i/facebook.png",
   "thumbnail": "https://i.imgur.com/kZT3m1r.png",
   "color": "#023859",
-  "tags": ["PASTEBIN", "TEXT"],
-  "category": "OTHER",
+  "tags": ["text"],
+  "category": "other",
   "iframe": false
 }
