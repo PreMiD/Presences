@@ -6,7 +6,6 @@
 This repository contains the source code of all presences that are available in PreMiD Store.  
 If you would like to <strong>publish</strong> your presence, please feel free to open a <a href="https://github.com/PreMiD/Presences/pulls">pull request</a>.  
 
-Currently, if you want to **create** a presence you must have **beta access** to new PreMiD versions that have support for PreMiD Store, you can get **beta access** by boosting our Discord server or donating. Be sure to join our Discord server to have latest news about PreMiD's development process.
 <div align="left">
     <a href="https://discord.gg/WvfVZ8T" title="Join our Discord!" rel="nofollow">
     <img src="https://camo.githubusercontent.com/987903b512adb37c953df3e83f1921dc29140493/68747470733a2f2f646973636f72646170702e636f6d2f6170692f6775696c64732f3439333133303733303534393830353035372f7769646765742e706e673f7374796c653d62616e6e657232" height="76px" alt="Join our Discord!" data-canonical-src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" style="max-width:100%;">
