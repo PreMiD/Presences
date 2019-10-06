@@ -20,6 +20,7 @@ presence.on("UpdateData", async () => {
     //* Get required tags
     var oldYouTube: boolean = null;
     var YouTubeTV: boolean = null;
+    var YouTubeEmbed: boolean = null;
     var title;
 
     //* Checking if user has old YT layout.
@@ -31,12 +32,21 @@ presence.on("UpdateData", async () => {
       ? (YouTubeTV = true)
       : (YouTubeTV = false)
 
+    document.location.pathname.includes("/embed")
+      ? (YouTubeEmbed = true)
+      : (YouTubeEmbed = false)
+
     //* Due to differences between old and new YouTube, we should add different selectors.
     if (!oldYouTube && !YouTubeTV) {
-      title =
-        document.location.pathname !== "/watch"
-          ? document.querySelector(".ytd-miniplayer .title")
-          : document.querySelector("h1 yt-formatted-string.ytd-video-primary-info-renderer");
+      if(YouTubeEmbed) {
+        title = document.querySelector("div.ytp-title-text > a");
+      }
+      else {
+        title =
+          document.location.pathname !== "/watch"
+            ? document.querySelector(".ytd-miniplayer .title")
+            : document.querySelector("h1 yt-formatted-string.ytd-video-primary-info-renderer");
+      }
     } else {
       if(oldYouTube) {
         if (document.location.pathname == "/watch")
@@ -46,11 +56,13 @@ presence.on("UpdateData", async () => {
       }
     }
 
-    var uploaderTV : any, uploaderMiniPlayer : any, uploader2 : any, edited : boolean;
+    var uploaderTV : any, uploaderMiniPlayer : any, uploader2 : any, edited : boolean, uploaderEmbed : any;
 
     edited = false;
 
     uploaderTV = document.querySelector(".player-video-details");
+
+    uploaderEmbed = document.querySelector("div.ytp-title-expanded-heading > h2 > a");
 
     uploaderMiniPlayer = document.querySelector("yt-formatted-string#owner-name");
 
@@ -74,7 +86,9 @@ presence.on("UpdateData", async () => {
             ? uploader2
             : document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a") !== null 
               ? document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a")
-              : uploaderTV = truncateAfter(uploaderTV.innerText, pattern),
+              : uploaderEmbed !== null && YouTubeEmbed && uploaderEmbed.innerText.length > 0
+                ? uploaderEmbed
+                  : uploaderTV = truncateAfter(uploaderTV.innerText, pattern),
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
