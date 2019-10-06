@@ -71,7 +71,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageKey: "banner",
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
-            smallImageText: "in game",
+            smallImageText: document.location.href,
         };
         presence.setActivity(presenceData);
     }
