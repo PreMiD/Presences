@@ -11,9 +11,6 @@ presence.on("UpdateData", () => {
         largeImageKey: "upbeatlogo"
     };
 	
-	let urlData = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1'); // Get everything after the / in the URL, for paste ID's
-	let currentPage = (document.title).slice(15); // Get the page title, and remove the "Pastebin.com - " part
-    
     if (window.location.pathname.includes("News.Article")) {
         presenceData.details = "Reading an article";
 
