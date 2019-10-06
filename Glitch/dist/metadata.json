@@ -7,15 +7,15 @@
     "description": {
         "en": "Glitch is the friendly community where you can find or create the app of your dreams. Over a million people have become part of the Glitch community, creating amazing apps, bots, websites, art projects, virtual reality experiences, interactive infographics and much more."
     },
-    "url": ["glitch.com", "support.glitch.com", "status.glitch.com"],
-    "version": "1.2",
+    "url": ["glitch.com", "support.glitch.com", "status.glitch.com", "*.glitch.me", "glitch.me"],
+    "version": "1.3",
     "logo": "https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Flogo-sunset.svg",
     "thumbnail": "https://downbeat.is-inside.me/S3bomlzS.png",
     "color": "#f003fc",
     "tags": [
 	"developing",
-	"hosting"
+    "hosting",
+    "community"
     ],
-    "category": "other",
-    "regExp": "([a-z0-9]+)[.]glitch[.]me"
+    "category": "other"
 }
