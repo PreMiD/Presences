@@ -75,6 +75,10 @@ presence.on('UpdateData', async () => {
             default:
                 presenceData.state = 'some unknown place'
         }
+    } else if (path.startsWith('/api') ) {
+        presenceData.details = 'Messing with the kitsu API'
+
+        delete presenceData.state;
     }
 
     presence.setActivity(presenceData, true);
