@@ -77,9 +77,9 @@
 		"theuselessweb.com"
 	],
 	"version": "1.0",
-	"logo": "https://theuselessweb.com/favicon.ico",
+	"logo": "https://i.pinimg.com/originals/f8/11/0f/f8110f44c511022ebe4d05d558127849.jpg",
 	"thumbnail": "https://downbeat.is-inside.me/LBnja6ty.png",
 	"color": "#ae3484",
-	"tags": "random",
+	"tags": ["random", "fun"],
 	"category": "other"
 }
