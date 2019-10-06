@@ -7,7 +7,13 @@ presence.on("UpdateData", () => {
     let presenceData = {
         largeImageKey: "glitchlogo"
     };
-    if(window.location.href.includes("status.glitch.com")) {
+    
+    
+if(window.location.href.includes(".glitch.me")) {
+    presenceData.details = "Viewing a webpage";
+    presenceData.state(window.location.hostname)
+   }    
+    else if(window.location.href.includes("status.glitch.com")) {
         presenceData.details = "https://status.glitch.com"
     } 
 else if (window.location.href.includes("support.glitch.com")) {
