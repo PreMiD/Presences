@@ -14,13 +14,6 @@ presence.on("UpdateData", () => {
 	let urlData = window.location.pathname.replace(/^\/([^\/]*).*$/, '$1'); // Get everything after the / in the URL, for paste ID's
 	let currentPage = (document.title).slice(15); // Get the page title, and remove the "Pastebin.com - " part
 	
-	let pasteID;
-	if(urlData.length = 8) { // Checking if the urlData variable (Everything after the /) is the average amount for a paste ID
-		let pasteID = urlData; 
-	}
-	
-	console.log(urlData.length);
-	
     if (urlData.length == 8) {
     
         let element = document.querySelector('.paste_box_line1'); // Getting the element which contains the title in a HTML tag
