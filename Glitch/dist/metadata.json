@@ -18,5 +18,5 @@
     "community"
     ],
     "category": "other",
-    "reqExp": "(([a-z0-9]+)[.])?glitch[.]([a-z0-9]+)"
+    "regExp": "(([a-z0-9]+)[.])?glitch[.]([a-z0-9]+)"
 }
