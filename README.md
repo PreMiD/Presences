@@ -19,7 +19,7 @@ If you would like to <strong>publish</strong> your presence, please feel free to
 
 # Getting started
 We made a documentation to make your development process a little bit better and faster.  
-You can see it [**here**](https://docs.premid.app/presence-development/coding).
+You can see it [**here**](https://docs.premid.app/en/dev/presence).
 
 # Folder structure
 ```
