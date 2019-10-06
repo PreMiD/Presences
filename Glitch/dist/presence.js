@@ -11,12 +11,12 @@ presence.on("UpdateData", () => {
     
 if(window.location.href.includes(".glitch.me")) {
     presenceData.details = "Viewing a webpage";
-    presenceData.state(window.location.hostname)
+    presenceData.state = (window.location.hostname).replace(".glitch.me", "")
    }    
-    else if(window.location.href.includes("status.glitch.com")) {
+    if(window.location.href.includes("status.glitch.com")) {
         presenceData.details = "https://status.glitch.com"
     } 
-else if (window.location.href.includes("support.glitch.com")) {
+if (window.location.href.includes("support.glitch.com")) {
         if (window.location.pathname.toLowerCase() === "/") {
             presenceData.details = "Viewing support topics";
             presenceData.state = "Latest topics"
@@ -49,7 +49,10 @@ else if (window.location.href.includes("support.glitch.com")) {
             presenceData.details = "Viewing a user profile:";
             presenceData.state = document.querySelector("body > section > div > div > div > section > section > div > div > div > div > h2 ").innerHTML;
         }
-    } else {
+    } 
+    
+    
+    if(window.location.hostname.toLowerCase() === ("glitch.com")){
         if (window.location.pathname.toLowerCase() === "/") {
             presenceData.details = "Viewing a page:";
             presenceData.state = "Homepage";
