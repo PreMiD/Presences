@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
         largeImageKey: "slitherlogo"
     };
 
-    let length=document.querySelector("[style=\"opacity: .35;\"]").innerHTML
+    let length=document.querySelector("[style=\"opacity: .8; font-weight: bold;\"]").innerHTML
     let rank= document.querySelector("[style=\"opacity: .35;\"]").innerHTML
 presenceData.details="Length: "+length;
 presenceData.staet= "Rank: " +rank;
