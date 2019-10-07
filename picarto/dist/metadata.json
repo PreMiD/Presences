@@ -12,5 +12,6 @@
     "logo": "https://i.imgur.com/Oljre0e.png",
     "thumbnail": "https://i.imgur.com/DSNnMk5.png",
     "color": "#FF0000",
-    "tags": [ "video" ]
+    "tags": [ "video" ],
+    "category": "videos"
 }
