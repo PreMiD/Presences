@@ -9,10 +9,10 @@
    },
   "url": ["pastr.io", "www.pastr.io"],
   "version": "1.0",
-  "logo": "http://cdn.jon.irish/files/premid/extensions/assets/pastr_logo.png",
-  "thumbnail": "http://cdn.jon.irish/files/premid/extensions/assets/pastr_thumb.png",
+  "logo": "https://cdn.jon.irish/files/premid/extensions/assets/pastr_logo.png",
+  "thumbnail": "https://cdn.jon.irish/files/premid/extensions/assets/pastr_thumb.png",
   "color": "#008EFF",
-  "tags": ["pastr", "paste", "paster", "thatdevjon"],
+  "tags": ["pastr", "paste", "paster"],
   "category": "other",
   "iframe": false
 }
