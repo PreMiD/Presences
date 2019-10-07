@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "630480553694593025",
-    mediaKeys: false
+    mediaKeys: false // TODO: change it to true after Timeraa fixes the media keys issue
 }),
 
 strings = presence.getStrings({
