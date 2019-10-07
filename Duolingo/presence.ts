@@ -59,8 +59,7 @@ presence.on("UpdateData", async () => {
       presenceData.largeImageKey = "logo";
 
       presence.setActivity(presenceData);
-    }
-    if(document.location.pathname.startsWith("/learn")) {
+    } else if(document.location.pathname.startsWith("/learn")) {
         var pageData: presenceData = {
             details: "Choosing level to learn..",
             largeImageKey: "logo"
