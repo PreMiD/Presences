@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "Nekolen",
+        "id": "270125856679002113"
+    },
+    "service": "Fanfiction",
+    "description": {
+        "en": "FanFiction | unleash your imagination"
+    },
+    "url": "www.fanfiction.net",
+    "version": "1.0",
+    "logo": "https://i1.wp.com/geezerwench.com/wp-content/uploads/2017/10/Fanfiction-net-logo-400x400.png?fit=400%2C400",
+    "thumbnail": "https://images-eu.ssl-images-amazon.com/images/I/417sQ2crmUL.jpg",
+    "color":"#0000FF",
+    "tags": [
+        "Fanfics",
+        "Story",
+        "Entertainment",
+        "Reading"
+    ],
+    "category": "other"
+}
