@@ -1,0 +1,27 @@
+{
+    "author": {
+        "name": "Nekolen",
+        "id": "270125856679002113"
+    },
+    "service": "Yu-Gi-Oh Top decks",
+    "description": {
+        "en": "Yu-Gi-Oh top decks is a database of best decklists.",
+        "ro": "Yu-Gi-Oh top decks este o bază de date cu cele mai bune liste de pachete.",
+        "pt_BR": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
+        "fr": "Yu-Gi-Oh top decks est une base de données des meilleures listes de decks.",
+        "uk": "Верхні колоди Yu-Gi-Oh - це база даних кращих колодних списків.",
+        "nl": "Yu-Gi-Oh topdecks is een database met de beste decklists."
+    },
+    "url": "yugiohtopdecks.com",
+    "version": "1.0",
+    "logo": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/8f0f7a16-4cd7-4af1-9538-9baf8d70c934/d9z438b-d9bbd8a3-831e-4fc8-8168-fa1f2a9d0ee9.png",
+    "thumbnail": "https://wallpaperaccess.com/full/463797.jpg",
+    "color":"#FFD700",
+    "tags": [
+        "Yu-Gi-Oh",
+        "tcg",
+        "database",
+        "decks"
+    ],
+    "category": "other"
+}
