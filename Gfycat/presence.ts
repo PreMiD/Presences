@@ -88,7 +88,6 @@ presence.on("UpdateData", async () => {
 
             presence.setActivity(data);
         } else {
-            console.log("Cannot find video player");
             data.details = "Browsing...";
             data.startTimestamp = Date.now();
 
