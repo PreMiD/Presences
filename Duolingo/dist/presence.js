@@ -62,11 +62,39 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.largeImageKey = "logo";
         presence.setActivity(presenceData);
     }
-    else {
+    if(document.location.pathname.startsWith("/learn")) {
         var pageData = {
-            details: "Browsing..",
+            details: "Choosing level to learn..",
             largeImageKey: "logo"
-        };
+        }
         presence.setActivity(pageData);
-    }
+    } else if(document.location.pathname.startsWith("/shop")) {
+        var pageData = {
+            details: "Browsing shop..",
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+    } else if(document.location.pathname.includes("/dictionary")) {
+		var path = document.location.pathname;
+        var pageData = {
+            details: "Using dictionary..",
+            state: "Language: " + document.location.pathname.split("/")[2],
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+    } else if(document.location.pathname.includes("/profile")) {
+		var path = document.location.pathname;
+        var pageData = {
+            details: "Browsing profile..",
+            state: "Browsing: " + document.location.pathname.split("/")[2],
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+	} else {
+		var pageData = {
+			details: "Browsing..",
+			largeImageKey: "logo"
+		}
+        presence.setActivity(pageData);
+	}
 }));
