@@ -12,6 +12,6 @@
 	"logo": "https://upload.wikimedia.org/wikipedia/commons/d/db/Google_Translate_Icon.png",
 	"thumbnail": "https://downbeat.is-inside.me/MvMUM6FP.png",
 	"color": "#ae3484",
-	"tags": "random",
+	"tags": ["random", "translate"],
 	"category": "other"
 }
