@@ -19,7 +19,7 @@ presence.on('UpdateData', async () => {
 
     try {
       var title = document.querySelector(
-        '.playbackSoundBadge__titleLink > span:nth-child(1)'
+        '.playbackSoundBadge__titleLink > span:nth-child(2)'
       ).textContent;
       var author = document.querySelector('.playbackSoundBadge__lightLink')
         .textContent;

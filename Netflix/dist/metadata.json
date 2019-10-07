@@ -19,8 +19,8 @@
     "uk": "Netflix - це лідер Інтернет-розваг у світі, що має 139 мільйонів платних підписників у понад 190 країнах, які дивляться телесеріали, документальні фільми та художні фільми у широкому спектрі жанрів та мов.",
     "nl": "Netflix is wereldwijd de leider in online entertainmentdienst met 139 miljoen betaalde lidmaatschappen in meer dan 190 landen die genieten van tv-series, documentaires en speelfilms in een breed scala aan genres en talen."
   },
-  "url": "www.netflix.com",
-  "version": "3.1",
+  "url": ["www.netflix.com", "netflix.com"],
+  "version": "3.3",
   "logo": "https://i.gyazo.com/2161fe603eec5196905176f5b8dcc325.png",
   "thumbnail": "https://i.gyazo.com/28e3c4caccda67a4a299588c8058da50.jpg",
   "color": "#db0000",
