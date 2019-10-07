@@ -61,8 +61,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.state = "Language: " + path.split("/")[2].replace("-", " ");
         presenceData.largeImageKey = "logo";
         presence.setActivity(presenceData);
-    }
-    if(document.location.pathname.startsWith("/learn")) {
+    } else if(document.location.pathname.startsWith("/learn")) {
         var pageData = {
             details: "Choosing level to learn..",
             largeImageKey: "logo"
