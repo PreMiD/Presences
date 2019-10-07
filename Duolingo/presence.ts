@@ -40,6 +40,7 @@ lang.set('hu', 'Hungarian');
 lang.set('uk', 'Ukrainian');
 lang.set('eo', 'Esperanto');
 lang.set('nv', 'Navajo');
+lang.set('en', 'English');
 
 presence.on("UpdateData", async () => {
     var path = document.location.pathname;
@@ -54,7 +55,7 @@ presence.on("UpdateData", async () => {
       }
       
       presenceData.details = "Taking a " + language + " lesson";
-      presenceData.state = path.split("/")[1].replace("-", " ");
+      presenceData.state = "Language: " + path.split("/")[2].replace("-", " ");
       presenceData.largeImageKey = "logo";
 
       presence.setActivity(presenceData);
