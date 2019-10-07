@@ -46,6 +46,7 @@ lang.set('hu', 'Hungarian');
 lang.set('uk', 'Ukrainian');
 lang.set('eo', 'Esperanto');
 lang.set('nv', 'Navajo');
+lang.set('en', 'English');
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var path = document.location.pathname;
     if (path.length > 1 && path.split("/")[2] !== null && path.split("/")[2].length == 2) {
@@ -57,7 +58,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
         }
         presenceData.details = "Taking a " + language + " lesson";
-        presenceData.state = path.split("/")[1].replace("-", " ");
+        presenceData.state = "Language: " + path.split("/")[2].replace("-", " ");
         presenceData.largeImageKey = "logo";
         presence.setActivity(presenceData);
     }
