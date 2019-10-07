@@ -59,13 +59,40 @@ presence.on("UpdateData", async () => {
       presenceData.largeImageKey = "logo";
 
       presence.setActivity(presenceData);
-  
-} else {
-
-  var pageData: presenceData = {
-    details: "Browsing..",
-    largeImageKey: "logo"
-  };
-  presence.setActivity(pageData);
-  }
+    }
+    if(document.location.pathname.startsWith("/learn")) {
+        var pageData: presenceData = {
+            details: "Choosing level to learn..",
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+    } else if(document.location.pathname.startsWith("/shop")) {
+        var pageData: presenceData = {
+            details: "Browsing shop..",
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+    } else if(document.location.pathname.includes("/dictionary")) {
+		var path = document.location.pathname;
+        var pageData: presenceData = {
+            details: "Using dictionary..",
+            state: "Language: " + document.location.pathname.split("/")[2],
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+    } else if(document.location.pathname.includes("/profile")) {
+		var path = document.location.pathname;
+        var pageData: presenceData = {
+            details: "Browsing profile..",
+            state: "Browsing: " + document.location.pathname.split("/")[2],
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+    } else {
+		var pageData: presenceData = {
+	    details: "Browsing..",
+	    largeImageKey: "logo"
+	}
+        presence.setActivity(pageData);
+    }
 });
