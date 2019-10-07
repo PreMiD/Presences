@@ -16,7 +16,19 @@ const pages = {
     "/odullerimiz": "Ödüllerimiz",
     "/kunye": "Künye",
     "/gizlilik": "Gizlilik",
-    "/iletisim": "İletişim"
+    "/iletisim": "İletişim",
+    "/haber/": "Haberler",
+    "/video/": "Videolar",
+    "/en-cok-okunanlar/": "En Çok Okunan Gönderiler",
+    "/en-cok-paylasilanlar/": "En Çok Paylaşılan Gönderiler",
+    "/en-cok-izlenenler/": "En Çok İzlenilen Videolar",
+    "/uye/favorilerim/": "Favorilerim",
+    "/hakkimizda/": "Hakkımızda",
+    "/yazarlar/": "Yazarlar",
+    "/odullerimiz/": "Ödüllerimiz",
+    "/kunye/": "Künye",
+    "/gizlilik/": "Gizlilik",
+    "/iletisim/": "İletişim"
 },
     smallImageKey = {
         "/ara": "searching",
