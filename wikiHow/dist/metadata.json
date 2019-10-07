@@ -6,11 +6,6 @@
     "service": "wikiHow",
     "description": {
         "en": "wikiHow - How to do anything!",
-        "ro": "wikiHow - Cum să faci orice!",
-        "pt_BR": "wikiHow - Як зробити що-небудь!",
-        "fr": "wikiHow - Comment faire n'importe quoi!",
-        "uk": "wikiHow - Як зробити що-небудь!",
-        "nl": "wikiHow - Як зробити що-небудь!"
     },
     "url": "www.wikihow.com",
     "version": "1.0",
