@@ -1,0 +1,27 @@
+{
+    "author": {
+        "name": "Nekolen",
+        "id": "270125856679002113"
+    },
+    "service": "wikiHow",
+    "description": {
+        "en": "wikiHow - How to do anything!",
+        "ro": "wikiHow - Cum să faci orice!",
+        "pt_BR": "wikiHow - Як зробити що-небудь!",
+        "fr": "wikiHow - Comment faire n'importe quoi!",
+        "uk": "wikiHow - Як зробити що-небудь!",
+        "nl": "wikiHow - Як зробити що-небудь!"
+    },
+    "url": "www.wikihow.com",
+    "version": "1.0",
+    "logo": "https://images-na.ssl-images-amazon.com/images/I/518WTWU4+bL.png",
+    "thumbnail": "https://www.wikihow.com/images/thumb/2/21/File-a-Trademark-Step-21.jpg/aid1068180-v4-728px-File-a-Trademark-Step-21.jpg",
+    "color":"#BFFF00",
+    "tags": [
+        "wiki",
+        "life hacks",
+        "tutorial",
+        "how to"
+    ],
+    "category": "other"
+}
