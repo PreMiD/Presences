@@ -88,7 +88,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
         }
         presenceData.details = "Taking a " + language + " lesson";
-        presenceData.state = "Language: " + path.split("/")[2].replace("-", " ");
+        presenceData.state = "Language: " + path1.split("/")[2].replace("-", " ");
         presenceData.largeImageKey = "logo";
         presence.setActivity(presenceData);
     	    }
