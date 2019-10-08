@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "Nekolen",
+        "id": "270125856679002113"
+    },
+    "service": "alltheflavors",
+    "description": {
+        "en": "alltheflavors.com is a DIY recipe and flavor information site."
+    },
+    "url": "alltheflavors.com",
+    "version": "1.0",
+    "thumbnail": "https://cdn.discordapp.com/attachments/286525747806470144/631123749642567703/unknown.png",
+    "logo": "https://i.imgur.com/y9Bj4mt.png",
+    "color":"#FF6347",
+    "tags": [
+        "food",
+        "DIY",
+        "tutorial",
+        "recipes"
+    ],
+    "category": "other"
+}
