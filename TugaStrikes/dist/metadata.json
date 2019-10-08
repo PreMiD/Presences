@@ -10,6 +10,12 @@
     "logo": "https://tugastrikes.com/images/img1.png",
     "thumbnail": "https://i.imgur.com/CQa1csF.png",
     "color": "#00ecec",
-    "tags": ["games"],
+    "tags": [
+      "community",
+      "csgo",
+      "gaming",
+      "tugastrikes"
+    ],
+    "category": "games",
     "iframe": false
   }
