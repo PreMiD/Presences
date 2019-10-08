@@ -78,6 +78,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageKey: "logo"
         }
         presence.setActivity(pageData);
+    } else if(document.location.pathname == "/" || !document.location.pathname) {
+	var pageData = {
+		details: "Browsing..",
+		largeImageKey: "logo"
+	}
+	presence.setActivity(pageData);
     } else {
     if (path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
         var language;
