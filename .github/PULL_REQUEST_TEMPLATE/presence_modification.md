@@ -7,3 +7,5 @@ About: Pull request template for publishing changes for a presnce.
 
 **Screenshots**
 Please upload screenshots to github showing what the changes looks like in action. You do not have to publish screenshots if the changes are in the `metadata` or in the `tsconfig`. *Try to avoid using third-party image hosting websites.*
+
+> After your pull request has been made, you should have a screenshot and the code.
