@@ -48,20 +48,9 @@ lang.set('eo', 'Esperanto');
 lang.set('nv', 'Navajo');
 lang.set('en', 'English');
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    var path = document.location.pathname;
-    if (path.length > 1 && path.split("/")[2] !== null && path.split("/")[2].length == 2) {
-        var language;
-        for (let value of lang.keys()) {
-            if (path.split("/")[2] == value) {
-                language = lang.get(value);
-                break;
-            }
-        }
-        presenceData.details = "Taking a " + language + " lesson";
-        presenceData.state = "Language: " + path.split("/")[2].replace("-", " ");
-        presenceData.largeImageKey = "logo";
-        presence.setActivity(presenceData);
-    } else if(document.location.pathname.startsWith("/learn")) {
+    var path1 = document.location.pathname;
+    if(path1.split("/")[2] == null || path1.includes("/profile") || path1.includes("/dictionary")) {
+	if(document.location.pathname.startsWith("/learn")) {
         var pageData = {
             details: "Choosing level to learn..",
             largeImageKey: "logo"
@@ -89,11 +78,20 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageKey: "logo"
         }
         presence.setActivity(pageData);
-	} else {
-		var pageData = {
-			details: "Browsing..",
-			largeImageKey: "logo"
-		}
-        presence.setActivity(pageData);
-	}
+    } else {
+    if (path.length > 1 && path.split("/")[2] !== null && path.split("/")[2].length == 2) {
+        var language;
+        for (let value of lang.keys()) {
+            if (path.split("/")[2] == value) {
+                language = lang.get(value);
+                break;
+            }
+        }
+        presenceData.details = "Taking a " + language + " lesson";
+        presenceData.state = "Language: " + path.split("/")[2].replace("-", " ");
+        presenceData.largeImageKey = "logo";
+        presence.setActivity(presenceData);
+    	    }
+        }
+    }
 }));
