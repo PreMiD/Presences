@@ -7,3 +7,5 @@ About: Pull request template for adding presences.
 
 **Screenshots**
 Please upload screenshots to github showing what the presence looks like in action. *Try to avoid using third-party image hosting websites.*
+
+> After your pull request has been made, you should have a screenshot and the code about the presence.
