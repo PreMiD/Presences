@@ -10,7 +10,9 @@ console.log(
 var oldUrl, elapsed;
 
 presence.on('UpdateData', async () => {
-  var title, info;
+  var title,
+    info,
+    image = 'twitter';
 
   const path = window.location.pathname;
 
@@ -103,10 +105,31 @@ presence.on('UpdateData', async () => {
     info = capitalize(path.split('/')[1]);
   }
 
+  if (window.location.href.match('tweetdeck.twitter.com/')) {
+    var container =
+      document.querySelector('#container > div') ||
+      document.createElement('HTMLDivElement');
+
+    title = `Tweetdeck (${container.childElementCount} Columns)`;
+    info = undefined;
+    image = 'tweetdeck';
+
+    var header = document.querySelector('.mdl-header-title');
+    var profile = document.querySelector('.js-action-url > .fullname');
+
+    if (header) {
+      info = 'Viewing ' + capitalize(header.textContent);
+    }
+
+    if (profile) {
+      info = 'Viewing Profile // ' + profile.textContent;
+    }
+  }
+
   var data: presenceData = {
     details: title,
     state: info,
-    largeImageKey: 'twitter',
+    largeImageKey: image,
     startTimestamp: elapsed
   };
 

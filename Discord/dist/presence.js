@@ -18,10 +18,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     };
     presenceData.startTimestamp = browsingStamp;
     connected = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div");
-    apptitle = document.querySelector("#react-select-2--value-item > div > div.appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi");
-    if (apptitle == null) {
-        apptitle = document.querySelector("#react-select-4--value-item > div > div.appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi");
-    }
+    apptitle = document.querySelector('.appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi');
     if (document.location.hostname == "discordapp.com" && connected !== null) {
         if (connected.innerText.includes("@")) {
             presenceData.details = "Voice connected with";
