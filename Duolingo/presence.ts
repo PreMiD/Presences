@@ -73,6 +73,12 @@ presence.on("UpdateData", async () => {
             largeImageKey: "logo"
         }
         presence.setActivity(pageData);
+    } else if(document.location.pathname == "/" || !document.location.pathname) {
+	var pageData: presenceData = {
+		details: "Browsing..",
+		largeImageKey: "logo"
+	}
+	presence.setActivity(pageData);
     } else {
     if(path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
       var language:string;
