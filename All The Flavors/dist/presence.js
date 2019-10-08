@@ -21,9 +21,16 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
 
         else if(["/flavors",'/recipes','/users',"/contests","/vendors","/top100"].includes(document.location.pathname)){
             elapsed =  Math.floor(Date.now() / 1000)
+            if(document.location.search!=''){
+                 var urlParams = new URLSearchParams(document.location.search) 
+                var  dstate = `searching for ${urlParams.get("name_like")}`
+            }
+            else {
+                var dstate = "browsing list"
+            }
             let presenceData = {
                 details: `Browing ${document.location.pathname.replace("/",'')} `,
-                //state: "on All The Flavors",
+                state:dstate,
                 //largeImageKey: "banner",
                 largeImageKey: "logo",
                 smallImageKey:"search",
