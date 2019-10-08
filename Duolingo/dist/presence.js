@@ -63,7 +63,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         presence.setActivity(pageData);
     } else if(document.location.pathname.includes("/dictionary")) {
-		var path = document.location.pathname;
+	var path = document.location.pathname;
         var pageData = {
             details: "Using dictionary..",
             state: "Language: " + document.location.pathname.split("/")[2],
@@ -71,7 +71,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         presence.setActivity(pageData);
     } else if(document.location.pathname.includes("/profile")) {
-		var path = document.location.pathname;
+	var path = document.location.pathname;
         var pageData = {
             details: "Browsing profile..",
             state: "Browsing: " + document.location.pathname.split("/")[2],
@@ -79,10 +79,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         presence.setActivity(pageData);
     } else {
-    if (path.length > 1 && path.split("/")[2] !== null && path.split("/")[2].length == 2) {
+    if (path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
         var language;
         for (let value of lang.keys()) {
-            if (path.split("/")[2] == value) {
+            if (path1.split("/")[2] == value) {
                 language = lang.get(value);
                 break;
             }
