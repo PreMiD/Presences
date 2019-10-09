@@ -113,8 +113,8 @@ presence.on("UpdateData", async () => {
 
     presence.setTrayTitle(video.paused ? "" : title.innerText);
 
-    //* Remove timestamps if paused, live, or playing ads
-    if (video.paused || live || ads) {
+    //* Remove timestamps if paused or live
+    if (video.paused || live) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
 
@@ -122,6 +122,12 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "live";
         presenceData.smallImageText = (await strings).live;
       }
+    }
+      
+    //* Update title to indicate when an ad is being played
+    if (ads) {
+      presenceData.details = "Currently Watching an Ad";
+      delete presenceData.state;
     }
 
     //* If tags are not "null"
