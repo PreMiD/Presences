@@ -1,0 +1,23 @@
+{
+    "author": {
+        "name": "Nekolen",
+        "id": "270125856679002113"
+    },
+    "service": "TCRF",
+    "description": {
+        "en": "The Cutting Room Floor is a site dedicated to unearthing and researching unused and cut content from video games."
+    },
+    "url": "tcrf.net",
+    "version": "1.0",
+    "logo": "https://images-na.ssl-images-amazon.com/images/I/518WTWU4+bL.png",
+    "thumbnail": "https://www.wikihow.com/images/thumb/2/21/File-a-Trademark-Step-21.jpg/aid1068180-v4-728px-File-a-Trademark-Step-21.jpg",
+    "color":"#D3D3D3",
+    "tags": [
+        "games",
+        "retro",
+        "wiki",
+        "research",
+        "cut contents"
+    ],
+    "category": "games"
+}
