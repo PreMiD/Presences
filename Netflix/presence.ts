@@ -1,11 +1,12 @@
 var presence = new Presence({
-    clientId: "622568654701199360",
-    mediaKeys: true
+    clientId: "630480553694593025",
+    mediaKeys: false // TODO: change it to true after Timeraa fixes the media keys issue
 }),
 
-    strings = presence.getStrings({
+strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
+    browsing: "presence.activity.browsing"
 });
 
 presence.on("UpdateData", async () => {
@@ -21,7 +22,7 @@ presence.on("UpdateData", async () => {
             var title = document.querySelector(".video-title h4").textContent;
             var timestamps = getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
 
-            data.details = title
+            data.details = " " + title;
 
             if (showCheck) {
                 var season = document.querySelector(".video-title span").textContent;
@@ -46,7 +47,7 @@ presence.on("UpdateData", async () => {
             }
         }
     } else {
-        data.details = "Browsing...",
+        data.details = (await strings).browsing,
         presence.setActivity(data);
     }
 });
@@ -55,4 +56,4 @@ function getTimestamps(videoTime: number, videoDuration: number) {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
-  }
+}
