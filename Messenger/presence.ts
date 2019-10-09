@@ -25,15 +25,18 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     user = document.querySelector("#u_0_0 > div.r30xiam5.m0q0jmkx.alrytcbg.hp5uecnq.g2121wdl > div > div:nth-child(5) > div > div > div > div > div.prklkq8o.t7elcel3.sd0tyowg.ocjcko58.p3f4w9ai.f5zavhip.foed1vyy > div > div > div.ocjcko58.foed1vyy > div > p");
     if (user == null || user.innerText == null) {
-      presenceData.details = "In a video call or";
+      //presenceData.details = "In a video call or";
       user = "user not found.";
+      presenceData.details = "In videocall with someone";
       presenceData.smallImageKey = "videocall";
     } else {
-      presenceData.details = "In call with:";
+      //presenceData.details = "In call with:";
       user = user.innerText;
+      presenceData.details = "In call with someone";
       presenceData.smallImageKey = "call";
     }
-    presenceData.state = user;
+    //presenceData.state = user;
+    presenceData.state = "(Hidden untill presence settings.)"; // Add setting for this when presence settings are a thing!!
   } else if (document.location.pathname.includes("/t/")){
     presenceData.largeImageKey = "messenger";
     presenceData.startTimestamp = browsingStamp;
@@ -46,7 +49,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Writing to:";
       presenceData.smallImageKey = "writing";
     }
-    presenceData.state = user.innerText;
+    //presenceData.state = user.innerText;
+    presenceData.state = "(Hidden untill presence settings.)"; // Add setting for this when presence settings are a thing!!
   } else if (document.location.pathname.includes("/new")) {
     presenceData.largeImageKey = "messenger";
     presenceData.startTimestamp = browsingStamp;
