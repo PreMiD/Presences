@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "Nekolen",
+        "id": "270125856679002113"
+    },
+    "service": "Akinator",
+    "description": {
+        "en": "Think about a real or fictional character.I will try to guess who it is"
+    },
+    "url": "en.akinator.com/",
+    "version": "1.1",
+    "logo": "https://cdn.discordapp.com/attachments/270798717089480704/631543121829691404/akinator.png",
+    "thumbnail": "https://cdn.discordapp.com/attachments/270798717089480704/631542944532267043/unknown.png",
+    "color":"#0000ff",
+    "tags": [
+        "Akinator",
+        "Guessing game",
+        "Fun"
+    ],
+    "category": "games",
+    "regExp": "([a-z]+)[.]akinator[.]com"
+}
