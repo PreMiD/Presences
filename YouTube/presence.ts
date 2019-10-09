@@ -126,7 +126,7 @@ presence.on("UpdateData", async () => {
       
     //* Update title to indicate when an ad is being played
     if (ads) {
-      presenceData.details = "Currently Watching an Ad";
+      presenceData.details = "Currently watching an ad";
       delete presenceData.state;
     }
 

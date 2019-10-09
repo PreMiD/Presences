@@ -100,7 +100,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
         }
         if (ads) {
-            presenceData.details = "Currently Watching an Ad";
+            presenceData.details = "Currently watching an ad";
             delete presenceData.state;
         }
         if (video && title !== null && uploader !== null) {
