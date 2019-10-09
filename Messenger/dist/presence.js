@@ -32,7 +32,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "In call with someone";
             presenceData.smallImageKey = "call";
         }
-        presenceData.state = "(Hidden untill presence settings.)";
+        presenceData.state = "(Hidden until presence settings.)";
     }
     else if (document.location.pathname.includes("/t/")) {
         presenceData.largeImageKey = "messenger";
@@ -47,7 +47,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Writing to:";
             presenceData.smallImageKey = "writing";
         }
-        presenceData.state = "(Hidden untill presence settings.)";
+        presenceData.state = "(Hidden until presence settings.)";
     }
     else if (document.location.pathname.includes("/new")) {
         presenceData.largeImageKey = "messenger";
