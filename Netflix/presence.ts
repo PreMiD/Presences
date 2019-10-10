@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "630480553694593025",
-    mediaKeys: false
+    mediaKeys: false // TODO: change it to true after Timeraa fixes the media keys issue
 }),
 
 strings = presence.getStrings({
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
             var title = document.querySelector(".video-title h4").textContent;
             var timestamps = getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
 
-            data.details = title
+            data.details = " " + title;
 
             if (showCheck) {
                 var season = document.querySelector(".video-title span").textContent;

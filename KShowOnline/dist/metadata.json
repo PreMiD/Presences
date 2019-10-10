@@ -6,7 +6,8 @@
     "service": "KShowOnline",
     "description": {
         "en": "Watch Korean Variety Shows Online with English Subtitles.",
-        "nl": "Bekijk Koreaanse variëteitsshows online met Engelse ondertiteling."
+        "nl": "Bekijk Koreaanse variëteitsshows online met Engelse ondertiteling.",
+        "pt_BR": "Assista a uma variedade de shows Coreanos online com legendas em inglês." 
     },
     "url": "kshowonline.com",
     "version": "1.0",

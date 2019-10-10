@@ -8,8 +8,14 @@
     "url": ["tugastrikes.com"],
     "version": "1.0.1",
     "logo": "https://tugastrikes.com/images/img1.png",
-    "thumbnail": "https://i.imgur.com/CQa1csF.png",
+    "thumbnail": "https://cdn.discordapp.com/attachments/622477468653060099/631283808687095818/unknown.png",
     "color": "#00ecec",
-    "tags": ["games"],
+    "tags": [
+      "community",
+      "csgo",
+      "gaming",
+      "tugastrikes"
+    ],
+    "category": "games",
     "iframe": false
   }
