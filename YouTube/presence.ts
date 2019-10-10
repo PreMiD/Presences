@@ -94,6 +94,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
       live = Boolean(document.querySelector(".ytp-live")),
+      ads = Boolean(document.querySelector(".ytp-ad-player-overlay")),
       presenceData: presenceData = {
         details: title.innerText,
         state: edited == true
@@ -112,7 +113,7 @@ presence.on("UpdateData", async () => {
 
     presence.setTrayTitle(video.paused ? "" : title.innerText);
 
-    //* Remove timestamps if paused
+    //* Remove timestamps if paused or live
     if (video.paused || live) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
@@ -121,6 +122,12 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "live";
         presenceData.smallImageText = (await strings).live;
       }
+    }
+      
+    //* Update title to indicate when an ad is being played
+    if (ads) {
+      presenceData.details = "Currently watching an ad";
+      delete presenceData.state;
     }
 
     //* If tags are not "null"
