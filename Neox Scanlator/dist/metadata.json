@@ -5,7 +5,8 @@
     },
     "service": "Neox Scanlator",
     "description": {
-        "pt_BR": "Neox Scanlator - Somos uma franquia de tradução de manhwas, light novels, e muito mais..."
+        "pt_BR": "Neox Scanlator - Somos uma franquia de tradução de manhwas, light novels, e muito mais.",
+		"en": "Neox Scanlator - We are a manhwas translation franchise, light novels and more."
     },
     "url": [ 
         "neoxscan.com",
