@@ -18,18 +18,17 @@ presence.on("UpdateData", async () =>
 
     if (path == "/")
     {
-        data.details = "Viewing Homepage";
+        data.details = "Viewing homepage";
     }
     else if (path.startsWith("/manage/edit"))
     {
         var editData = document.querySelector(".card-body h2 .cosmetic-name");
-
-        data.details = "Editing Item";
+        data.details = "Editing item";
         data.state = editData.textContent;
     }
     else if (path.startsWith("/manage/sets"))
     {
-        data.details = "Editing Item Sets";
+        data.details = "Editing item sets";
     }
     else if (path.startsWith("/backpack")
           || path.startsWith("/banner")
@@ -50,79 +49,75 @@ presence.on("UpdateData", async () =>
     {
         var itemTitle = document.querySelector(".col-md-10.col-s12.item-full h3");
         var itemInfo = document.querySelector(".col-md-10.col-s12.item-full h4");
-
         data.details = "Viewing " + itemTitle.firstChild.textContent;
         data.state = itemInfo.textContent;
     }
     else if (path.startsWith("/upcoming"))
     {
-        data.details = "Viewing Upcoming Items";
+        data.details = "Viewing upcoming items";
     }
     else if (path.startsWith("/list"))
     {
-        data.details = "Viewing Cosmetics List";
+        data.details = "Viewing cosmetics list";
     }
     else if (path.startsWith("/sets/"))
     {
         var setName = document.querySelector(".col-md-12 h2");
         var setInfo = document.querySelector(".col-md-12 p");
-
         data.details = "Viewing " + setName.textContent;
         data.state = setInfo.textContent;
     }
     else if (path.startsWith("/sets"))
     {
-        data.details = "Viewing Item Sets";
+        data.details = "Viewing item sets";
     }
     else if (path.startsWith("/png"))
     {
-        data.details = "Viewing Cosmetics PNG";
+        data.details = "Viewing cosmetics png";
     }
     else if (path.startsWith("/icons"))
     {
-        data.details = "Viewing Cosmetics Icons";
+        data.details = "Viewing cosmetics icons";
     }
     else if (path.startsWith("/reminders"))
     {
-        data.details = "Viewing Item Reminders";
+        data.details = "Viewing item reminders";
     }
     else if (path.startsWith("/history"))
     {
-        data.details = "Viewing Shop History";
+        data.details = "Viewing shop history";
     }
     else if (path.startsWith("/shop/"))
     {
         var shopHistoryData = document.querySelector(".col-md-12 h2 .you");
-
-        data.details = "Viewing Item Shop";
+        data.details = "Viewing item shop";
         data.state = shopHistoryData.textContent;
     }
     else if (path.startsWith("/shop"))
     {
         var shopData = document.querySelector(".col-m.col-12.primary h2 .you");
-
-        data.details = "Viewing Item Shop";
+        data.details = "Viewing item shop";
         data.state = shopData.textContent;
     }
     else if (path.startsWith("/modes"))
     {
-        data.details = "Viewing LTM's";
+        data.details = "Viewing ltm's";
     }
     else if (path.startsWith("/news"))
     {
-        data.details = "Viewing News";
+        data.details = "Viewing news";
     }
     else if (path.startsWith("/random"))
     {
-        data.details = "Randomising Items";
+        data.details = "Randomising items";
     }
     else if (path.startsWith("/api"))
     {
-        data.details = "Viewing API Documentation";
+        data.details = "Viewing api documentation";
     }
     else if (path.startsWith("/account"))
     {
-        data.details = "Viewing Account Data";
+        data.details = "Viewing account data";
     }
     else
     {
