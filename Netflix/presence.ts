@@ -29,10 +29,11 @@ presence.on("UpdateData", async () => {
                 var episodeName;
                 try {
                     episodeName = document.querySelector(".video-title span:nth-child(3)").textContent;
+                    data.state = season + " " + episodeName
                 } catch {
                     episodeName = document.querySelector(".video-title span").textContent;
+                    data.state = episodeName
                 }
-                data.state = season + " " + episodeName
             } else {
                 data.state = "Movie"
             }
