@@ -50,7 +50,7 @@ presence.on("UpdateData", async () =>
     {
         var itemTitle = document.querySelector(".col-md-10.col-s12.item-full h3");
         var itemInfo = document.querySelector(".col-md-10.col-s12.item-full h4");
-        
+
         data.details = "Viewing " + itemTitle.firstChild.textContent;
         data.state = itemInfo.textContent;
     }
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () =>
     }
     else if (path.startsWith("/list"))
     {
-        data.details = "Viewing List";
+        data.details = "Viewing Cosmetics List";
     }
     else if (path.startsWith("/sets/"))
     {
@@ -72,19 +72,19 @@ presence.on("UpdateData", async () =>
     }
     else if (path.startsWith("/sets"))
     {
-        data.details = "Viewing Sets";
+        data.details = "Viewing Item Sets";
     }
     else if (path.startsWith("/png"))
     {
-        data.details = "Viewing PNG's";
+        data.details = "Viewing Cosmetics PNG";
     }
     else if (path.startsWith("/icons"))
     {
-        data.details = "Viewing Icons";
+        data.details = "Viewing Cosmetics Icons";
     }
     else if (path.startsWith("/reminders"))
     {
-        data.details = "Viewing Reminders";
+        data.details = "Viewing Item Reminders";
     }
     else if (path.startsWith("/history"))
     {
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () =>
     {
         var shopData = document.querySelector(".col-m.col-12.primary h2 .you");
 
-        data.details = "Viewing Shop";
+        data.details = "Viewing Item Shop";
         data.state = shopData.textContent;
     }
     else if (path.startsWith("/modes"))
@@ -118,7 +118,7 @@ presence.on("UpdateData", async () =>
     }
     else if (path.startsWith("/api"))
     {
-        data.details = "Viewing Documentation";
+        data.details = "Viewing API Documentation";
     }
     else if (path.startsWith("/account"))
     {
