@@ -58,8 +58,8 @@ const presence = new Presence({
         "help": {
             details: "Viewing help page",
             state: "Probably needs some help."
-        }
-    }
+        } // We can add some stuff if we find it "necessary" in the future.
+    };
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     const page = document.location.pathname,
