@@ -16,19 +16,7 @@ const pages = {
     "/odullerimiz": "Ödüllerimiz",
     "/kunye": "Künye",
     "/gizlilik": "Gizlilik",
-    "/iletisim": "İletişim",
-    "/haber/": "Haberler",
-    "/video/": "Videolar",
-    "/en-cok-okunanlar/": "En Çok Okunan Gönderiler",
-    "/en-cok-paylasilanlar/": "En Çok Paylaşılan Gönderiler",
-    "/en-cok-izlenenler/": "En Çok İzlenilen Videolar",
-    "/uye/favorilerim/": "Favorilerim",
-    "/hakkimizda/": "Hakkımızda",
-    "/yazarlar/": "Yazarlar",
-    "/odullerimiz/": "Ödüllerimiz",
-    "/kunye/": "Künye",
-    "/gizlilik/": "Gizlilik",
-    "/iletisim/": "İletişim"
+    "/iletisim": "İletişim"
 },
     smallImageKey = {
         "/ara": "searching",
@@ -68,7 +56,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity(data);
     } else {
         data.details = "Geziniyor...";
-        data.state = pages[document.location.pathname] ? pages[document.location.pathname] : "Ana Sayfa"
+        data.state = pages[document.location.pathname] || pages[document.location.pathname.slice(0, -1)] ? pages[document.location.pathname] || pages[document.location.pathname.slice(0, 1)] : "Ana Sayfa"
         smallImageKey[document.location.pathname] ? data.smallImageKey = smallImageKey[document.location.pathname] : "";
 
         presence.setActivity(data);
