@@ -12,12 +12,12 @@
   "version": "1.0",
   "logo": "https://premid.is-inside.me/4fSRYhLs.png",
   "thumbnail": "https://premid.is-inside.me/1HG5aWUu.png",
-  "color": "#0dc143",
+  "color": "#141210",
   "tags": [
-    "whatsapp",
+    "medium",
     "social",
-    "media"
+    "stories"
   ],
-  "category": "social",
+  "category": "socials",
   "regExp": "([a-z0-9|-]+[.])*medium+[.]com+"
 }
