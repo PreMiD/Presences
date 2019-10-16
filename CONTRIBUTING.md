@@ -21,6 +21,7 @@ Before you begin working on your presence, keep the following list in mind.
 - The presence **must not** have any malicious intentions. These include stealing/leaking private information, negatively affecting the behavior of the website, etc...
 - If you design a presence for a website and the website happens to change in the future, you **ARE** responsible for updating the presence again to work as expected. If you do not fix it within an acceptable time frame, other presence developers are allowed to **overwrite** your presence to comply with the changes.
 - The presence must be tested before publishing to confirm that everything works as expected.
+- Your presence must have sfw images and descriptions. If your presence is built around an nsfw website, please include the `nsfw` tag in your metadata. 
 
 ## Modification
 
@@ -39,6 +40,8 @@ Our presence verification team has their own role, look out for `Presence Verifi
 
 1. If your presence is new, three of our verification team members will review it. If you happen to get change requests, make the proper effort to fix it or it will not be added.
 2. If you are updating an existing presence, it will only take two verifiers to confirm that it is up to standards.
-
+3. You are allowed to take screenshots of changes made with the help of another user. ( e.g. its author in case you can't access it for any reason).
+4. If it is an update or patch, the screenshot **must** show the new additions working, not any old features from previous pull requests.
+5. The screenshots can not be fake.
 
 After all of the proper reviews have been met, your pull request will be merged with the store.
