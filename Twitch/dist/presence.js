@@ -27,18 +27,18 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
         live: {
             label: document.querySelector('.player-streamstatus__label'),
             title: document.querySelector('.tw-font-size-4.tw-line-height-body'),
-            streamer: document.querySelector('.tw-font-size-5.tw-nowrap'),
+            streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap'),
             host: document.querySelector('.tw-c-text-overlay.tw-strong')
         },
         video: {
             title: document.querySelector('.tw-font-size-4.tw-strong'),
-            streamer: document.querySelector('.tw-font-size-5.tw-nowrap'),
+            streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap'),
             time: document.querySelector('div.player-seek__time-container > span:nth-child(1)'),
             duration: document.querySelector('span.player-seek__time.player-seek__time--total')
         },
         clip: {
             title: document.querySelector('.tw-font-size-4.tw-strong'),
-            streamer: document.querySelector('.tw-font-size-5.tw-nowrap')
+            streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap')
         }
     };
     if (window.location.href !== oldURL) {

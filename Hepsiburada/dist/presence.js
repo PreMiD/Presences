@@ -45,21 +45,7 @@ const presence = new Presence({
         "/kampanyalar": "Kampanyalar",
         "/girisimci-kadinlar": "Girişimci Kadınlar",
         "/yardim": "Yardım & Destek",
-        "/hesabim/bize-sorun": "Bize Sorun",
-        "/siparislerim/": "Siparişlerim",
-        "/hesabim/": "Hesabım",
-        "/ayagina-gelsin/teslimat-adreslerim/": "Teslimat Adreslerim",
-        "/ayagina-gelsin/fatura-adreslerim/": "Fatura Adreslerim",
-        "/ayagina-gelsin/hediye-ceklerim/": "Hedi Çeklerim",
-        "/yorumlarim/": "Yorumlarım",
-        "/mesajlarim/": "Müşteri Hizmetleri Mesajlarım",
-        "/ayagina-gelsin/sepetim/": "Sepet",
-        "/gunun-firsati-teklifi/": "Günün Fırsatları",
-        "/hepsiglobal/": "Yurt Dışı Alışveriş (Hepsiglobal)",
-        "/kampanyalar/": "Kampanyalar",
-        "/girisimci-kadinlar/": "Girişimci Kadınlar",
-        "/yardim/": "Yardım & Destek",
-        "/hesabim/bize-sorun/": "Bize Sorun"
+        "/hesabim/bize-sorun": "Bize Sorun"
     };
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
@@ -73,19 +59,19 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         startTimestamp: Math.floor(Date.now() / 1000)
     };
 
-    if (productName && productName.innerHTML != "") {
+    if (productName && productName.textContent != "") {
         data.details = "Bir ürüne göz atıyor:"
-        data.state = `${productName.innerHTML.trim()}${price ? " - " + price + " TL" : ""}`;
-    } else if (pages[page]) {
+        data.state = `${productName.textContent.trim()}${price ? " - " + price + " TL" : ""}`;
+    } else if (pages[page] || pages[page.slice(0, -1)]) {
         data.details = "Bir sayfaya göz atıyor:"
-        data.state = pages[page];
+        data.state = pages[page] || pages[page.slice(0, -1)];
     } else if (page.includes("/ara")) {
         data.details = "Bir şey arıyor:"
         data.state = document.title && document.title.includes(" - Hepsiburada") ? document.title.replace(" - Hepsiburada", "") : "";
         data.smallImageKey = "search";
-    } else if (seller && seller.innerHTML != "") {
+    } else if (seller && seller.textContent != "") {
         data.details = "Bir mağazaya göz atıyor:"
-        data.state = seller.innerHTML.trim()
+        data.state = seller.textContent.trim()
     } else {
         data.details = "Bir sayfaya göz atıyor:"
         data.state = "Ana Sayfa"
