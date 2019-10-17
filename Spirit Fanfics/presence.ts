@@ -1,4 +1,4 @@
-const presence: Presence = new Presence({
+const presence = new Presence({
     clientId: "628786533587091490"
 });
 const { pathname } = window.location,
@@ -14,13 +14,33 @@ presence.on("UpdateData", async () => {
     },
     nav = document.querySelector('#secaoNav').lastChild.textContent;
     if (pathname.startsWith('/historia')) {
-        if (pathname === '/historia/gerenciar') {
-            presenceData.details = "Vendo Minhas Histórias";
+        if (pathname.startsWith(`/historia/gerenciar`)) {
+            if (pathname === `/historia/gerenciar`) {
+                presenceData.details = "Vendo Minhas Histórias";
+            } else if (nav === `Gerenciar Capítulos`) {
+                presenceData.details = `Gerenciando capítulos`;
+                presenceData.state = document.querySelector('.tituloPrincipal').textContent.replace('História ', '').split(' - ')[0];
+            }
+        } else if (pathname.startsWith(`/historia/adicionar`) || pathname.startsWith(`/historia/termos`)) {
+            if (nav === `Adicionar História` || nav === `Termos`) {
+                presenceData.details = `Criando uma nova história`;
+            } else if (nav === `Adicionar Capítulo`) {
+                presenceData.details = `Escrevendo um novo capítulo`;
+                presenceData.state = document.querySelector('.tituloPrincipal').textContent.replace('História ', '').split(' - ')[0];
+                presenceData.smallImageKey = `writing`;
+                presenceData.smallImageText = `Escrevendo`;
+            }
+        } else if (pathname.startsWith(`/historia/editar`)) {
+            presenceData.details = `Editando uma história`;
+            presenceData.state = document.querySelector('.tituloPrincipal').textContent.replace('Editar História ', '');
+
         } else {
             const title = document.querySelector('.tituloPrincipal').textContent.replace('História ', '').split(' - ');
             if (pathname.match(/\/historia\/(\w+-)+\d+\/\w+/)) {
-                presenceData.details = `Lendo ${title[0]}`;
+                presenceData.details = title[0];
                 presenceData.state = `${title[1]} - ${nav}`;
+                presenceData.smallImageKey = `reading`;
+                presenceData.smallImageText = `Lendo`;
             } else {
                 presenceData.details = "Vendo uma história";
                 presenceData.state = title[0];
