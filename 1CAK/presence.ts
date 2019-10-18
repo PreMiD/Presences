@@ -21,8 +21,22 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Friends Page";
     } else if (document.location.pathname === "/rules") {
         presenceData.details = "Reading the rules";
+    } else if (document.location.pathname === "/notifications") {
+        presenceData.details = "Notifications Page";
+    } else if (document.location.pathname === "/weeklytop" || document.location.pathname === "/alltimetop") {
+        presenceData.details = "Top Users";
+    } else if (document.location.pathname === "/preferences" || document.location.pathname === "/privacy_setting") {
+        presenceData.details = "Settings";
     } else if (document.location.pathname.slice(1).startsWith("of")) {
         presenceData.details = document.querySelector("#content > h3").textContent.trim();
+    } else if (document.location.pathname.slice(1).startsWith("saved")) {
+        if (!document.querySelector("#content > p")) {
+            presenceData.details = "Saved Posts";
+        };
+    } else if (document.location.pathname.slice(1).startsWith("voteof")) {
+        if (!document.querySelector("#content > p")) {
+            presenceData.details = "Voted Posts";
+        };
     } else if (!isNaN(parseInt(document.location.pathname.slice(1)))) {
         const author = document.querySelector("#content > div > table > tbody > tr > td > div > .blur a > b").textContent.trim();
         presenceData.details = `Viewing ${author}'s post`;
