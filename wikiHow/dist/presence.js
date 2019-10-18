@@ -33,45 +33,45 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    const topic = document.getElementById("intro") && document.getElementById("intro").firstElementChild && document.getElementById("intro").firstElementChild.textContent ? document.getElementById("intro").firstElementChild.textContent : null,
-        author = document.getElementById("expert_coauthor") && document.getElementById("expert_coauthor").children[0] && document.getElementById("expert_coauthor").children[0].innerText ? document.getElementById("expert_coauthor").children[0].innerText : null,
-        date = document.getElementById("expert_coauthor") && document.getElementById("expert_coauthor").children[1] && document.getElementById("expert_coauthor").children[1].innerText ? document.getElementById("expert_coauthor").children[1].innerText : null;
+    const path = document.location.pathname,
+        topic = document.querySelector("#intro > h1 > a");
 
-    if (topic && author && date) {
-        const presenceData = {
-            details: topic,
-            state: `by ${author} (${date}) `,
-            largeImageKey: "banner",
-            smallImageKey: "logo",
-            smallImageText: document.location.href
-        };
-
-        presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/index.php") {
-        const newTopic = document.getElementsByClassName("firstHeading")[0] ? document.getElementsByClassName("firstHeading")[0].innerText : null;
-
-        const presenceData = {
-            details: "Editing/Writing How to",
-            state: `Topic: ${newTopic ? newTopic : "Unknown."} `,
-            largeImageKey: "banner",
-            smallImageKey: "logo",
-            smallImageText: document.location.href,
-            startTimestamp: Math.floor(Date.now() / 1000)
-        };
+    if (topic && topic.textContent != "") {
+        const author = document.querySelector("#expert_coauthor > a"),
+            date = document.querySelector("#expert_coauthor > p"),
+            presenceData = {
+                details: topic.textContent,
+                state: `by ${author && author.textContent != "" ? author.textContent : "unknown"}${date && date.textContent != "" ? ` (${date})` : ""} `,
+                largeImageKey: "banner",
+                smallImageKey: "logo",
+                smallImageText: decodeURIComponent(document.location.href),
+                startTimestamp: Math.floor(Date.now() / 1000)
+            };
 
         presence.setActivity(presenceData);
+    } else if (path == "/index.php") {
+        // Note that I (EGGSY) didn't work on this part, I don't know if it's working on the main site but I'm sure it doesn't work on Spanish version.
+        const newTopic = document.getElementsByClassName("firstHeading")[0] ? document.getElementsByClassName("firstHeading")[0].innerText : null,
+            presenceData = {
+                details: "Editing/Writing How to",
+                state: `Topic: ${newTopic ? newTopic : "Unknown."} `,
+                largeImageKey: "banner",
+                smallImageKey: "logo",
+                smallImageText: decodeURIComponent(document.location.href),
+                startTimestamp: Math.floor(Date.now() / 1000)
+            };
 
-    } else if (document.location.pathname == "/wikiHowTo") {
-        const searching = document.location.search.replace("?search=", '')
-
-        const presenceData = {
-            details: `Searching for:`,
-            state: `${searching[0].toUpperCase() + searching.slice(1).toLowerCase()}`,
-            largeImageKey: "banner",
-            smallImageKey: "logo",
-            smallImageText: "searching",
-            startTimestamp: Math.floor(Date.now() / 1000)
-        };
+        presence.setActivity(presenceData);
+    } else if (path == "/wikiHowTo") {
+        const searching = document.location.search.replace("?search=", ''),
+            presenceData = {
+                details: `Searching for:`,
+                state: `${searching[0].toUpperCase() + searching.slice(1).toLowerCase()}`,
+                largeImageKey: "banner",
+                smallImageKey: "logo",
+                smallImageText: "searching",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            };
 
         presence.setActivity(presenceData);
     } else {
