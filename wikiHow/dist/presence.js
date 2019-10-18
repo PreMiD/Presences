@@ -34,14 +34,26 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     const path = document.location.pathname,
-        topic = document.querySelector("#intro > h1 > a");
+        topic = document.querySelector("#intro > h1 > a"),
+        category = document.querySelector("#article > div.wh_block > h1");
 
     if (topic && topic.textContent != "") {
         const author = document.querySelector("#expert_coauthor > a"),
             date = document.querySelector("#expert_coauthor > p"),
             presenceData = {
                 details: topic.textContent,
-                state: `by ${author && author.textContent != "" ? author.textContent : "unknown"}${date && date.textContent != "" ? ` (${date})` : ""} `,
+                state: `by ${author && author.textContent != "" ? author.textContent : "unknown"}${date && date.textContent != "" ? ` (${date.textContent.replace("Updated: ", "")})` : ""} `,
+                largeImageKey: "banner",
+                smallImageKey: "logo",
+                smallImageText: decodeURIComponent(document.location.href),
+                startTimestamp: Math.floor(Date.now() / 1000)
+            };
+
+        presence.setActivity(presenceData);
+    } else if (category && category.textContent != "") {
+        const presenceData = {
+                details: "Viewing a category:",
+                state: category.textContent,
                 largeImageKey: "banner",
                 smallImageKey: "logo",
                 smallImageText: decodeURIComponent(document.location.href),
@@ -51,7 +63,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     } else if (path == "/index.php") {
         // Note that I (EGGSY) didn't work on this part, I don't know if it's working on the main site but I'm sure it doesn't work on Spanish version.
-        const newTopic = document.getElementsByClassName("firstHeading")[0] ? document.getElementsByClassName("firstHeading")[0].innerText : null,
+        const newTopic = document.getElementsByClassName("firstHeading")[0] ? document.getElementsByClassName("firstHeading")[0].textContent : null,
             presenceData = {
                 details: "Editing/Writing How to",
                 state: `Topic: ${newTopic ? newTopic : "Unknown."} `,
