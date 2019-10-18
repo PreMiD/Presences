@@ -81,7 +81,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 state: `${searching[0].toUpperCase() + searching.slice(1).toLowerCase()}`,
                 largeImageKey: "banner",
                 smallImageKey: "logo",
-                smallImageText: "searching",
+                smallImageText: "Searching...",
                 startTimestamp: Math.floor(Date.now() / 1000)
             };
 
