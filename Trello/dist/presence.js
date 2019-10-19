@@ -21,7 +21,7 @@ var presence = new Presence({
     clientId: "614583717951963137",
     mediaKeys: false
 });
-var board, team, team2, teamfinish, freeornah, freeornah2, card, personal, personal2, profile, board2;
+var board, team, team2, teamfinish, user, freeornah, freeornah2, card, personal, personal2, profile, board2;
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
@@ -37,6 +37,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         freeornah2 = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > a.board-header-btn.board-header-btn-org-name.js-open-org-menu > span > span");
         personal = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > div:nth-child(3) > a.board-header-btn.board-header-btn-without-icon.board-header-btn-text.js-add-board-to-team.no-edit");
         personal2 = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > div:nth-child(3) > a.board-header-btn.board-header-btn-without-icon.board-header-btn-text.js-add-board-to-team");
+        user = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > div:nth-child(5) > div > div.member.js-member.has-crown.long-initials > span.member-initials");
         if (team !== null) {
             teamfinish = team.innerText.replace(freeornah.innerText, "");
         }
@@ -48,6 +49,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         else if (personal2 !== null) {
             teamfinish = "Personal";
+        }
+        else if (user !== null) {
+            teamfinish = user.title;
         }
         else {
             teamfinish = "ERROR, UNKNOWN";
