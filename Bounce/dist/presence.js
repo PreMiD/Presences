@@ -7,6 +7,7 @@ var play, artist, track, title;
 var browsingStamp = Math.floor(Date.now() / 1000);
 let sartist, strack, slisteners, sdj;
 setInterval(newStats, 6000)
+newStats();
 function newStats() {
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
