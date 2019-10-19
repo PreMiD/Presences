@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
         case "/privacy_setting":
             presenceData.details = "Settings";
             break;
-    }
+    };
 
     if (document.location.pathname.slice(1).startsWith("of")) {
         presenceData.details = document.querySelector("#content > h3").textContent.trim();
