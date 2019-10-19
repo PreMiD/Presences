@@ -11,3 +11,6 @@ In this folder you can find resource images which you can use to display the sta
 | <img src="search.png" style="background-color: rgba(0,0,0,25);" height="50px">  | [search.png](search.png)   |
 | <img src="live.png" style="background-color: rgba(0,0,0,25);" height="50px">    | [live.png](live.png)       |
 | <img src="reading.png" style="background-color: rgba(0,0,0,25);" height="50px"> | [reading.png](reading.png) |
+| <img src="writing.png" style="background-color: rgba(0,0,0,25);" height="50px"> | [writing.png](writing.png) |
+| <img src="call.png" style="background-color: rgba(0,0,0,25);" height="50px">    | [call.png](call.png)       |
+| <img src="vcall.png" style="background-color: rgba(0,0,0,25);" height="50px">   | [vcall.png](vcall.png)     |

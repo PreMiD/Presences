@@ -12,6 +12,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else {
             text = document.getElementsByTagName("p")[3].innerHTML
         }
+        elapsed =  Math.floor(Date.now() / 1000)
         let presenceData = {
             details: "Online as "+text.replace("Welcome back, ",''),
             state: "waiting in lobby",
@@ -19,12 +20,14 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageKey: "banner",
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
-            smallImageText: "in game"
+            smallImageText: "in game",
+            startTimestamp: elapsed
         };
 
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname == "/decks") {
+        elapsed =  Math.floor(Date.now() / 1000)
         let presenceData = {
             details: "Online on Duelingnexus",
             state: "Looking at decklists",
@@ -32,10 +35,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
             smallImageText: "in game",
+            startTimestamp: elapsed
         };
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname.includes("/editor")) {
+        elapsed =  Math.floor(Date.now() / 1000)
         d = document.getElementsByTagName("strong")[0].innerText
         let presenceData = {
             details: "Building Decks",
@@ -44,10 +49,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
             smallImageText: "in game",
+            startTimestamp: elapsed
         };
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname.includes("/game")) {
+        elapsed =  Math.floor(Date.now() / 1000)
         opponent = document.getElementById("game-opponent-name").innerText
         mylife = document.getElementById("game-life-player").innerText 
         opplife = document.getElementById("game-life-opponent").innerText 
@@ -71,11 +78,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageKey: "banner",
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
-            smallImageText: "in game",
+            smallImageText: document.location.href,
+            startTimestamp: elapsed
         };
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname.includes("/hostgame")) {
+        elapsed =  Math.floor(Date.now() / 1000)
         let presenceData = {
             details: "Hosting a Game",
             state: "at the custom game menu",
@@ -83,10 +92,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
             smallImageText: "in game",
+            startTimestamp: elapsed
         };
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname.includes("/gamelist")) {
+        elapsed =  Math.floor(Date.now() / 1000)
         let presenceData = {
             details: "Looking for Game",
             state: "at All game list",
@@ -94,10 +105,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
             smallImageText: "in game",
+            startTimestamp: elapsed
         };
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname.includes("/profile")) {
+        elapsed =  Math.floor(Date.now() / 1000)
         let presenceData = {
             details: "Editing Profile",
             state: "changing stuffs",
@@ -105,10 +118,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
             smallImageText: "in game",
+            startTimestamp: elapsed
         };
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname.includes("/duel")) {
+        elapsed =  Math.floor(Date.now() / 1000)
         let presenceData = {
             details: "Searching for Duels",
             state: "Choosing game mode",
@@ -116,6 +131,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
             smallImageText: "in game",
+            startTimestamp: elapsed
         };
         presence.setActivity(presenceData);
     }

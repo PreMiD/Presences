@@ -17,23 +17,7 @@ const presence = new Presence({
         "/hesabim/sepetim": "Sepet",
         "/sepetim": "Sepet",
         "/moda11": "Moda11 (giybi)",
-        "/market11": "Market11",
-        "/hesabim/siparislerim/": "Siparişlerim",
-        "/hesabim/iptal-degisim-iade/": "İptal, Değişim ve İade",
-        "/hesabim/biletlerim/": "Biletlerim",
-        "/hesabim/kuponlarim/": "Kuponlarım",
-        "/hesabim/garajim/": "Garajım",
-        "/hesabim/istek-listelerim/": "Favorilerim / Listelerim",
-        "/hesabim/yorumlarim-incelemelerim/": "Yorumlarım",
-        "/hesabim/soru-cevap/": "Soru & Cevap",
-        "/hesabim/bilgi-guncelleme/": "Üyelik Bilgilerim",
-        "/hesabim/teslimat-adresi/": "Adreslerim",
-        "/hesabim/sifre-degistir/": "Şifre Değiştir",
-        "/hesabim/uyelik-iptali/": "Üyelik İptali",
-        "/hesabim/sepetim/": "Sepet",
-        "/sepetim/": "Sepet",
-        "/moda11/": "Moda11 (giybi)",
-        "/market11/": "Market11"
+        "/market11": "Market11"
     }
 presence.on("UpdateData", async () => {
     const page = document.location.pathname,
@@ -45,12 +29,12 @@ presence.on("UpdateData", async () => {
         startTimestamp: Math.floor(Date.now() / 1000)
     };
 
-    if (productName && productName.innerHTML != "") {
+    if (productName && productName.textContent != "") {
         data.details = "Bir ürüne göz atıyor:"
-        data.state = `${productName.innerHTML.trim()}${price ? " - " + price + " TL" : ""}`;
-    } else if (pages[page]) {
+        data.state = `${productName.textContent.trim()}${price ? " - " + price + " TL" : ""}`;
+    } else if (pages[page] || pages[page.slice(0, -1)]) {
         data.details = "Bir sayfaya göz atıyor:"
-        data.state = pages[page];
+        data.state = pages[page] || pages[page.slice(0, -1)];
     } else if (page.includes("/arama") && document.location.search != "?s=GOB2CGlobal") {
         data.details = "Bir şey arıyor:"
         data.state = document.title && document.title.includes(" - n11.com") ? document.title.replace(" - n11.com", "") : "";
@@ -60,7 +44,7 @@ presence.on("UpdateData", async () => {
         data.state = "Yurt Dışından Ürünler";
     } else if (page.includes("/magaza/")) {
         data.details = "Bir mağazaya göz atıyor:"
-        data.state = document.querySelector("#contentSellerShop > div > section.shopHeader > div.sellerInfo > div.sellerDetail > div.title > h1") ? document.querySelector("#contentSellerShop > div > section.shopHeader > div.sellerInfo > div.sellerDetail > div.title > h1").innerHTML : "Belirsiz";
+        data.state = document.querySelector("#contentSellerShop > div > section.shopHeader > div.sellerInfo > div.sellerDetail > div.title > h1") ? document.querySelector("#contentSellerShop > div > section.shopHeader > div.sellerInfo > div.sellerDetail > div.title > h1").textContent : "Belirsiz";
     } else {
         data.details = "Bir sayfaya göz atıyor:"
         data.state = "Ana Sayfa"

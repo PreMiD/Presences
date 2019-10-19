@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "605119835751579649",
-    mediaKeys: true
+    mediaKeys: false
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -9,8 +9,7 @@ var presence = new Presence({
 
 presence.on("UpdateData", async () => {
   var video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
-  if (video[0] !== null && !isNaN(video.duration)) {
-    //* Get required tags
+  if (video !== null && !isNaN(video.duration)) {
     var title : any;
       title =
         document.querySelector(".video-page #main .page-title");

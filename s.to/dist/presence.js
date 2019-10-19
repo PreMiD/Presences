@@ -86,6 +86,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         delete presenceData.smallImageText;
         
         presence.setActivity(presenceData);
+        
+           
     }
     else if (document.location.pathname == "/serie/stream/") {
         presenceData.details = "Schaut nach";
@@ -126,10 +128,28 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       
         presence.setActivity(presenceData);
     }
-    else if (document.location.pathname.includes("/subscribed")) {
+    else if (document.location.pathname.startsWith("/user/") && document.location.pathname.endsWith("/subscribed")) {
         test1 = document.querySelector("#wrapper > div.container > div.seriesListContainer.row > div.pageTitle45 > h2");
-        presenceData.details = "Ist in einer Watchlist";
+        presenceData.details = "Durchstöbert";
         presenceData.state = test1.innerText;        
+        presenceData.smallImageKey = "reading";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.startsWith("/user/") && document.location.pathname.endsWith("/watched")) {       
+        name7 = document.querySelector("#wrapper > div.container > div.seriesListContainer.row > div.pageTitle45 > h2");
+        presenceData.details = "Durchstöbert";
+        presenceData.state = name7.innerText;        
+        presenceData.smallImageKey = "reading";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.startsWith("/user/") && document.location.pathname.endsWith("/watchlist")) {       
+        name8 = document.querySelector("#wrapper > div.container > div.seriesListContainer.row > div.pageTitle45 > h2");
+        presenceData.details = "Durchstöbert";
+        presenceData.state = name8.innerText;        
         presenceData.smallImageKey = "reading";
         delete presenceData.smallImageText;
       
@@ -149,6 +169,56 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         name2 = document.querySelector("#userDetails > div > div > div.col-lg-6.col-md-6.col-xs-12.col-sm-6 > a > h1");
         presenceData.state = name2.innerText;
         presenceData.smallImageKey = "reading";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+
+    else if (document.location.pathname.includes("/katalog/")) {
+        presenceData.details = "Sucht eine Serie im Katalog";
+        katalog1 = document.querySelector("#wrapper > div.container.marginBottom > div.pageTitle > h1 > strong");
+        presenceData.state = "Serien mit " + katalog1.innerText;
+        presenceData.smallImageKey = "search";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.includes ("/account/subscribed")) {
+        presenceData.details = "Informiert sich über";
+        presenceData.state = "Abonnierte Serien";
+        presenceData.smallImageKey = "reading";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.includes("/account/watchlist")) {
+        presenceData.details = "Informiert sich über";
+        presenceData.state = "Watchlist";
+        presenceData.smallImageKey = "reading";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.includes("/account/watched")) {
+        presenceData.details = "Liest den Log über";
+        presenceData.state = "Zuletzt geschaute Episoden";
+        presenceData.smallImageKey = "reading";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.includes("/news")) {
+        presenceData.details = "Informiert sich über";
+        presenceData.state = "Neuigkeiten von S.To";
+        presenceData.smallImageKey = "reading";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.includes("/neu")) {
+        presenceData.details = "Sucht neue Serien";
+        presenceData.state = "OwO";
+        presenceData.smallImageKey = "search";
         delete presenceData.smallImageText;
       
         presence.setActivity(presenceData);

@@ -66,7 +66,9 @@ presenceData.smallImageKey = "play";
 
         }
     } else {
-        presence.setActivity();
-        presence.setTrayTitle();
+	presenceData.smallImageKey = "play";
+	presenceData.details = strack +" - "+ sartist
+	presenceData.state = sdj +" - "+ slisteners + " listeners"
     }
+	presence.setActivity(presenceData)
 });
