@@ -9,25 +9,43 @@ let presenceData: presenceData = {
 presence.on("UpdateData", async () => {
     let startTimestamp: number = Date.now();
     presenceData.startTimestamp = startTimestamp;
-    if (document.location.pathname === "/") {
-        presenceData.details = "Home Page";
-    } else if (document.location.pathname === "/trending") {
-        presenceData.details = "Trending Page";
-    } else if (document.location.pathname === "/recent") {
-        presenceData.details = "Recent Page";
-    } else if (document.location.pathname === "/legendary") {
-        presenceData.details = "Legendary Page";
-    } else if (document.location.pathname === "/friends") {
-        presenceData.details = "Friends Page";
-    } else if (document.location.pathname === "/rules") {
-        presenceData.details = "Reading the rules";
-    } else if (document.location.pathname === "/notifications") {
-        presenceData.details = "Notifications Page";
-    } else if (document.location.pathname === "/weeklytop" || document.location.pathname === "/alltimetop") {
-        presenceData.details = "Top Users";
-    } else if (document.location.pathname === "/preferences" || document.location.pathname === "/privacy_setting") {
-        presenceData.details = "Settings";
-    } else if (document.location.pathname.slice(1).startsWith("of")) {
+    switch (document.location.pathname) {
+        case "/":
+            presenceData.details = "Home Page";
+            break;
+        case "/trending":
+            presenceData.details = "Trending Page";
+            break;
+        case "/recent":
+            presenceData.details = "Recent Page";
+            break;
+        case "/legendary":
+            presenceData.details = "Legendary Page";
+            break;
+        case "/friends":
+            presenceData.details = "Friends Page";
+            break;
+        case "rules":
+            presenceData.details = "Reading the rules";
+            break;
+        case "/notifications":
+            presenceData.details = "Notifications Page";
+            break;
+        case "/weeklytop":
+            presenceData.details = "Top Users";
+            break;
+        case "/alltimetop":
+            presenceData.details = "Top Users";
+            break;
+        case "/preferences":
+            presenceData.details = "Settings";
+            break;
+        case "/privacy_setting":
+            presenceData.details = "Settings";
+            break;
+    }
+
+    if (document.location.pathname.slice(1).startsWith("of")) {
         presenceData.details = document.querySelector("#content > h3").textContent.trim();
     } else if (document.location.pathname.slice(1).startsWith("saved")) {
         if (!document.querySelector("#content > p")) {
@@ -40,10 +58,6 @@ presence.on("UpdateData", async () => {
     } else if (!isNaN(parseInt(document.location.pathname.slice(1)))) {
         const author = document.querySelector("#content > div > table > tbody > tr > td > div > .blur a > b").textContent.trim();
         presenceData.details = `Viewing ${author}'s post`;
-    } else {
-        presenceData = {
-            largeImageKey: "logo"
-        };
     };
     presence.setActivity(presenceData);
 });
