@@ -4,7 +4,7 @@
   "author": "Timeraa",
   "license": "ISC",
   "devDependencies": {
-    "@types/chrome": "0.0.89",
-    "typescript": "3.6.3"
+    "@types/chrome": "0.0.91",
+    "typescript": "3.6.4"
   }
 }

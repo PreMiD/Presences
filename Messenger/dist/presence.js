@@ -22,18 +22,17 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.largeImageKey = "messenger";
         presenceData.startTimestamp = browsingStamp;
         user = document.querySelector("#u_0_0 > div.r30xiam5.m0q0jmkx.alrytcbg.hp5uecnq.g2121wdl > div > div:nth-child(5) > div > div > div > div > div.prklkq8o.t7elcel3.sd0tyowg.ocjcko58.p3f4w9ai.f5zavhip.foed1vyy > div > div > div.ocjcko58.foed1vyy > div > p");
-        console.log(document.querySelector("#u_0_0 > div.r30xiam5.m0q0jmkx.alrytcbg.hp5uecnq.g2121wdl > div > div:nth-child(5) > div > div > div > div > div.prklkq8o.t7elcel3.sd0tyowg.ocjcko58.p3f4w9ai.f5zavhip.foed1vyy > div > div > div.ocjcko58.foed1vyy > div > p"));
         if (user == null || user.innerText == null) {
-            presenceData.details = "In a video call or";
             user = "user not found.";
+            presenceData.details = "In videocall with someone";
             presenceData.smallImageKey = "videocall";
         }
         else {
-            presenceData.details = "In call with:";
             user = user.innerText;
+            presenceData.details = "In call with someone";
             presenceData.smallImageKey = "call";
         }
-        presenceData.state = user;
+        presenceData.state = "(Hidden until presence settings.)";
     }
     else if (document.location.pathname.includes("/t/")) {
         presenceData.largeImageKey = "messenger";
@@ -48,7 +47,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Writing to:";
             presenceData.smallImageKey = "writing";
         }
-        presenceData.state = user.innerText;
+        presenceData.state = "(Hidden until presence settings.)";
     }
     else if (document.location.pathname.includes("/new")) {
         presenceData.largeImageKey = "messenger";
