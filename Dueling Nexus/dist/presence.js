@@ -13,8 +13,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             text = document.getElementsByTagName("p")[3].innerHTML
         }
         elapsed =  Math.floor(Date.now() / 1000)
+
+        if(localStorage.getItem("name")==null){
+            localStorage.setItem("name", text.split(",")[1])
+        }
         let presenceData = {
-            details: "Online as "+text.replace("Welcome back, ",''),
+            details: "Online as "+text.split(",")[1],
             state: "waiting in lobby",
             //largeImageKey: "banner",
             largeImageKey: "banner",
@@ -29,7 +33,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname == "/decks") {
         elapsed =  Math.floor(Date.now() / 1000)
         let presenceData = {
-            details: "Online on Duelingnexus",
+            details: `Online as ${localStorage.getItem("name")}`,
             state: "Looking at decklists",
             largeImageKey: "banner",
             largeImageText: "https://duelingnexus.com",
@@ -58,23 +62,36 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         opponent = document.getElementById("game-opponent-name").innerText
         mylife = document.getElementById("game-life-player").innerText 
         opplife = document.getElementById("game-life-opponent").innerText 
-        if (parseInt(mylife)>parseInt(opplife)){
-            status = "Beating "+ opponent
-        }
-        else if (parseInt(mylife) == parseInt(opplife)){
-            status = "Dueling "+ opponent
-        }
+        myname = document.getElementById("game-player-name").innerText
         
+         
+        if (myname=="Player" || myname=="Opponent"){
+            myname = document.getElementById("game-room-player1-username").innerText
+        }
+        if (opponent=="Opponent" || opponent=="Player"){
+            if(document.getElementById("game-room-player2-username").innerText == "---"){
+                opponent ="waiting.."
+            }
+            else{
+                opponent = document.getElementById("game-room-player2-username").innerText
+            }
+        }
+        state = `Current lp: ${mylife}, Opponent LP: ${opplife}`
+        status = `Game: ${myname}(me) vs ${opponent}`
+        if ((parseInt(mylife) == 0) && (0==parseInt(opplife))) {
+            state = "Game not started"
+            status = `Game: ${myname} vs ${opponent}`
+        }
+       /* if(localStorage.getItem("name").replace(" ",'')==myname){
+           var  status = `Dueling ${opponent}`
+        }
         else {
-            status = "Losing to "+opponent
+          var   status = `Spectating: ${myname} vs ${opponent}`
         }
-         if ((parseInt(mylife) == 0) && (0==parseInt(opplife))) {
-            status = "Waiting for "+ opponent
-        }
-
+*/
         let presenceData = {
             details: status,
-            state: `Current lp: ${mylife}, Opponent LP: ${opplife}`,
+            state: state,
             largeImageKey: "banner",
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
@@ -86,8 +103,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/hostgame")) {
         elapsed =  Math.floor(Date.now() / 1000)
         let presenceData = {
-            details: "Hosting a Game",
-            state: "at the custom game menu",
+            details: `Hosting Game `,
+            state: `as ${localStorage.getItem("name")}`,
             largeImageKey: "banner",
             largeImageText: "https://duelingnexus.com",
             smallImageKey: "logo",
