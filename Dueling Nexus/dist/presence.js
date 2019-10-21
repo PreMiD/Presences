@@ -62,11 +62,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             if (e.ctrlKey &&  e.which == 89){
               if(localStorage.getItem("sock")==null){
                 localStorage.setItem("sock","yes")
-                alert("sock script applied")
+                alert("Deckbuilder Script Applied")
+                document.location.reload()
               }
               else{
                 localStorage.removeItem("sock")
-                alert("sock script removed")
+                alert("Deckbuilder Script Removed")
                 document.location.reload()
               }
           }  
