@@ -2,7 +2,8 @@ let presence = new Presence({
     clientId: "618212337895079996" 
 });
 
-
+//added external deckbuilding js as per request
+var sock = "https://rawcdn.githack.com/LimitlessSocks/DuelingNexusUserScripts/1c3c8afe55f1981de04c8baffcab2c674d20dad6/beta/RefinedSearch/RefinedSearch.user.js"
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if (document.location.pathname == "/home") {
@@ -44,6 +45,32 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname.includes("/editor")) {
+        //script on off toggle
+        if(localStorage.getItem("sock")=="yes"){
+            if(document.getElementById("sockscript")==undefined){
+              var node = document.createElement("script");
+          node.id = "sockscript"
+          node.src = sock
+          node.type = "application/javascript"
+          document.head.appendChild(node)
+            }
+            else{
+            }
+          }
+        document.onkeyup = function(e){
+            //shortcut key ctrl+y
+            if (e.ctrlKey &&  e.which == 89){
+              if(localStorage.getItem("sock")==null){
+                localStorage.setItem("sock","yes")
+                alert("sock script applied")
+              }
+              else{
+                localStorage.removeItem("sock")
+                alert("sock script removed")
+                document.location.reload()
+              }
+          }  
+      }
         elapsed =  Math.floor(Date.now() / 1000)
         d = document.getElementsByTagName("strong")[0].innerText
         let presenceData = {
