@@ -43,7 +43,7 @@ presence.on("UpdateData", () => async () => {
             genre = url.searchParams.get("tur"),
             showName = url.searchParams.get("dizi_adi");
 
-        if (!document.location.search || document.location.search == "") {
+        if (!document.location.search || document.location.search == "" || document.location.search != "" && !genre && !showName || document.location.search != "" && genre == "" && showName == "") {
             presence.setActivity({
                 largeImageKey: "dl-logo",
                 details: "Bir sayfaya göz atıyor:",
