@@ -35,9 +35,6 @@ if (document.querySelector("#view-wrapper > div:nth-child(2) > div > div.episode
     data.iframe_video.duration !== null
       ? true : false
 
-  //console.log(data.iframe_video);
-  //console.log(document.location.pathname);
-
   if(playback) {
 
     iFrameVideo = data.iframe_video.iFrameVideo;
@@ -51,8 +48,6 @@ if (document.querySelector("#view-wrapper > div:nth-child(2) > div > div.episode
 }
 
 presence.on("UpdateData", async () => {
-
-// Get the video
 var a =
         '',
         timestamps = getTimestamps(
@@ -80,9 +75,6 @@ if (document.querySelector("#view-wrapper > div:nth-child(2) > div > div.episode
 
     air = document.querySelector("#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > h1");
     presenceData.details = air.innerText;
-
-  
-    // Set presence state to views value
     
       if (paused) {
         delete presenceData.startTimestamp;
@@ -187,11 +179,6 @@ presence.on("MediaKeys", (key: string) => {
   }
 });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
 function getTimestamps(videoTime: number, videoDuration: number) {
   var startTime = Date.now();
   var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
