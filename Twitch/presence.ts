@@ -1,6 +1,5 @@
 var presence = new Presence({
-  clientId: '607754656453623843',
-  mediaKeys: true
+  clientId: '607754656453623843'
 });
 var strings = presence.getStrings({
   play: 'presence.playback.playing',
@@ -34,7 +33,7 @@ presence.on('UpdateData', async () => {
       }
     },
     live: {
-      label: document.querySelector('.player-streamstatus__label'),
+      label: document.querySelector('.tw-channel-status-text-indicator'),
       title: document.querySelector('.tw-font-size-4.tw-line-height-body'),
       streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap'),
       host: document.querySelector('.tw-c-text-overlay.tw-strong')
@@ -42,11 +41,9 @@ presence.on('UpdateData', async () => {
     video: {
       title: document.querySelector('.tw-font-size-4.tw-strong'),
       streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap'),
-      time: document.querySelector(
-        'div.player-seek__time-container > span:nth-child(1)'
-      ),
+      time: document.querySelector('.vod-seekbar-time-labels > p:nth-child(1)'),
       duration: document.querySelector(
-        'span.player-seek__time.player-seek__time--total'
+        '.vod-seekbar-time-labels > p:nth-child(2)'
       )
     },
     clip: {
@@ -60,22 +57,25 @@ presence.on('UpdateData', async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  var video: HTMLVideoElement = document.querySelector(
-    'div.player-video > video'
-  );
+  var video: HTMLVideoElement = document.querySelector('video');
 
   var squad = document.querySelector('.squad-stream-top-bar__container');
 
   if (squad) {
     type = 'squad';
   } else if (
-    (elements.live.title && elements.live.label) ||
+    (elements.live.title && elements.live.streamer && elements.live.label) ||
     elements.live.host
   ) {
     type = 'live';
-  } else if (elements.video.title) {
+  } else if (
+    elements.video.title &&
+    elements.video.streamer &&
+    elements.video.time &&
+    elements.video.duration
+  ) {
     type = 'video';
-  } else if (elements.clip.title) {
+  } else if (elements.clip.title && elements.clip.streamer) {
     type = 'clip';
   } else {
     type = 'browsing';
@@ -150,12 +150,8 @@ presence.on('UpdateData', async () => {
       var user = location.match('/(\\S*)/(\\S*)');
       var user_header = document.querySelector('.tw-bold.tw-font-size-2');
 
-      if (user && user_header) {
-        streamer = user[1] + "'s " + user[2];
-      }
-
-      if (elements.live.streamer) {
-        streamer = elements.live.streamer.textContent;
+      if (elements.live.streamer && user && user_header) {
+        streamer = elements.live.streamer.textContent + "'s " + user[2];
       }
 
       if (location.match('/directory')) {
@@ -221,7 +217,7 @@ presence.on('UpdateData', async () => {
   }
 });
 
-presence.on('MediaKeys', (key: string) => {
+/*presence.on('MediaKeys', (key: string) => {
   switch (key) {
     case 'pause':
       var pause: HTMLButtonElement = document.querySelector(
@@ -230,7 +226,7 @@ presence.on('MediaKeys', (key: string) => {
       if (pause) pause.click();
       break;
   }
-});
+});*/
 
 function getTimestamps(videoTime: number, videoDuration: number) {
   var startTime = Date.now();
