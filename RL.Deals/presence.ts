@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Reading about RL.Deals";
     presenceData.smallImageKey = "reading";
-  } else if (document.URL.includes("#trading")) {
+  } else if (document.URL.includes("#trading") || document.location.pathname == "/") {
     title = document.querySelector("#root > div > div > div:nth-child(1) > div:nth-child(1) > div > div > h5");
     user = document.querySelector("#root > div > div > div:nth-child(3) > div:nth-child(1) > div > div > h5");
     replace = document.querySelector("#root > div > div > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > ul > li:nth-child(1) > div > div > div > div > span");
