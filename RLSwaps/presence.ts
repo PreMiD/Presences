@@ -25,6 +25,7 @@ presence.on("UpdateData", async () => {
   user = document.querySelector("#receive-balance");
 
   if (document.location.pathname.includes("/history")) {
+    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing their history"
   } else if (title.innerText !== "0.00" || user.innerText !== "0.00") {
     presenceData.startTimestamp = browsingStamp;
