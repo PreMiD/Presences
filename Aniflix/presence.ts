@@ -71,7 +71,7 @@ var a =
     
       search = document.querySelector("#searchbar > div > input[type=text]");
       search = search.value;
-if (document.querySelector("#view-wrapper > div:nth-child(2) > div > div.episode") != null) {
+if (document.querySelector("#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > h1") != null) {
   if (iFrameVideo == true && !isNaN(duration)) {
     
     title = document.querySelector("#view-wrapper > div:nth-child(2) > div > div.episode > div.infos > div:nth-child(1) > div > a"); 
