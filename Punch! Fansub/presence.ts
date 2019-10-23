@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
         const start = Math.floor(Date.now() / 1000);
   
         presenceData.startTimestamp = start;
-        presenceData.endTimestamp = Math.floor(start - vid.currentTime + vid.duration);
+        presenceData.endTimestamp = Math.floor(start - currentTime + duration);
         presenceData.smallImageKey = 'play';
         presenceData.smallImageText = (await strings).playing;
 
