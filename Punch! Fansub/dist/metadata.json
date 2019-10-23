@@ -10,12 +10,11 @@
     },
     "url": "punchsubs.net",
     "version": "2.0",
-    "logo": "https://punchsubs.net/imagens/favicon-96x96.png",
-    "color": "#2e51a2",
+    "logo": "https://i.imgur.com/pyU2frB.png",
+    "color": "#002e5e",
     "tags": [
         "anime",
-        "manga",
-        "community"
+        "video"
     ],
     "category": "anime"
 }
