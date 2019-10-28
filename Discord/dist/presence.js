@@ -256,6 +256,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         delete presenceData.smallImageKey;
         presence.setActivity(presenceData);
     }
+    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/invite")) {
+        presenceData.details = "Viewing invite:";
+        presenceData.state = document.URL.split("/")[4];
+        delete presenceData.smallImageKey;
+        presence.setActivity(presenceData);
+    }
     else if (document.location.hostname == "status.discordapp.com") {
         presenceData.details = "Discord Status";
         presenceData.state = "Reading Discords status";
@@ -334,6 +340,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else if (document.location.hostname == "discordapp.com") {
         presenceData.details = "Home page";
+        delete presenceData.state;
+        delete presenceData.smallImageKey;
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.hostname == "discord.gg") {
+        presenceData.details = "Viewing an invite";
         delete presenceData.state;
         delete presenceData.smallImageKey;
         presence.setActivity(presenceData);
