@@ -14,8 +14,8 @@ var presence = new Presence({
 // [x] YDKJ: Full Stream
 // [x] Patently Stupid
 // [x] Mad Verse City
-// [] Zeeple Dome
-// [] Split The Room
+// [x] Zeeple Dome
+// [x] Split The Room
 //
 // PP4
 // [x] Fibbage 3
