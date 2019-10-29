@@ -13,7 +13,8 @@ var presence = new Presence({
     play: 'presence.playback.playing',
     pause: 'presence.playback.paused'
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
+var lastRadio = '';
+var browsingStamp = 0;
 
 presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
     var presenceData = {
@@ -29,18 +30,48 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
             if(!document.getElementsByClassName('player__animate-icon player__animate-icon--playing')['0'].style.display) {
                 presenceData.smallImageKey = 'play';
                 presenceData.smallImageText = (yield strings).play;
-                presenceData.startTimestamp = browsingStamp = Math.floor(Date.now() / 1000);
+                if(!browsingStamp || path[1] != lastRadio) {
+                    browsingStamp = Math.floor(Date.now() / 1000);
+                }
+                presenceData.startTimestamp = browsingStamp;
+                lastRadio = path[1];
+            } else {
+                presenceData.smallImageKey = 'pause';
+                presenceData.smallImageText = (yield strings).pause;
+                browsingStamp = 0;
+            }
+            break;
+        case 'p':
+            browsingStamp = 0;
+            presenceData.details = document.querySelectorAll('h1')['0'].firstChild.data;
+            presenceData.state = document.getElementsByClassName('player__song')['0'].innerText;
+            if(!document.getElementsByClassName('player__animate-icon player__animate-icon--playing')['0'].style.display) {
+                presenceData.smallImageKey = 'play';
+                presenceData.smallImageText = (yield strings).play;
+                presenceData.startTimestamp = 0;
+                presenceData.endTimestamp = 0;
+                var times = document.getElementsByClassName('player__timing-wrap')['0'].innerText.split('\n|\n');
+                times[0].split(':').reverse().forEach((time, pos) => {
+                    presenceData.startTimestamp += parseInt(time) * Math.pow(60, pos);
+                })
+                presenceData.startTimestamp = Math.floor(Date.now() / 1000) - presenceData.startTimestamp;
+                times[1].split(':').reverse().forEach((time, pos) => {
+                    presenceData.endTimestamp += parseInt(time) * Math.pow(60, pos);
+                })
+                presenceData.endTimestamp = presenceData.startTimestamp + presenceData.endTimestamp;
             } else {
                 presenceData.smallImageKey = 'pause';
                 presenceData.smallImageText = (yield strings).pause;
             }
             break;
         case 'search':
+            browsingStamp = 0;
             presenceData.details = `Searching for "${new URLSearchParams(window.location.search).get('q')}"`;
             presenceData.smallImageKey = 'search';
             presenceData.smallImageText = 'Searching';
             break;
         case 'genre':
+            browsingStamp = 0;
             if(path.length > 1) {
                 presenceData.details = `Browsing genre "${document.getElementsByClassName('headline-large')['0'].firstChild.data.replace('\n', '')}"`;
             } else {
@@ -48,6 +79,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
             }
             break;
         case 'topic':
+            browsingStamp = 0;
             if(path.length > 1) {
                 presenceData.details = `Browsing topic "${document.getElementsByClassName('headline-large')['0'].firstChild.data.replace('\n', '')}"`;
             } else {
@@ -55,12 +87,15 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
             }
             break;
         case 'local-stations':
+            browsingStamp = 0;
             presenceData.details = 'Browsing through local stations';
             break;
         case 'top-stations':
+            browsingStamp = 0;
             presenceData.details = 'Browsing through top stations';
             break;
         default:
+            browsingStamp = 0;
             if(path.length > 0) {
                 presenceData.details = 'Browsing';
             } else {
