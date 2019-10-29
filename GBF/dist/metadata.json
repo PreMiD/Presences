@@ -5,12 +5,10 @@
     },
     "service": "GBF",
     "description": {
-        "en": " Japanese role playing game"
-        
+        "en": "Japanese role playing game"
     },
     "url": "game.granbluefantasy.jp",
     "version": "1.0",
-    "largeImageKey": "logo",
     "logo": "https://i.imgur.com/W0nvASk.png",
     "thumbnail": "https://i.imgur.com/2GPNZM8.jpg",
     "color": "#2F4F7A",
@@ -18,7 +16,6 @@
         "grandblue fanstasy",
         "game",
         "jrpg"
-       
     ],
     "category": "games"
 }
