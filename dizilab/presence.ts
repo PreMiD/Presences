@@ -15,6 +15,7 @@ const presence = new Presence({
         "/sifre_sifirla": "Şifre Sıfırla",
         "/mesajlar": "Özel Mesajlar",
         "/oyuncular": "Oyuncular",
+        "/pano": "Pano",
         "/pano/sosyal-akis": "Sosyal Akış",
         "/pano/takip-ettiklerim": "Takip Ettiklerim",
         "/pano/izleme-listesi": "İzleme Listesi",
