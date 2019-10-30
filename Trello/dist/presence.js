@@ -21,7 +21,7 @@ var presence = new Presence({
     clientId: "614583717951963137",
     mediaKeys: false
 });
-var board, team, team2, teamfinish, user, freeornah, freeornah2, card, personal, personal2, profile, board2;
+var board, team, team2, teamfinish, user, user2, freeornah, freeornah2, freeornah3, card, personal, personal2, profile, board2;
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
@@ -38,11 +38,16 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         personal = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > div:nth-child(3) > a.board-header-btn.board-header-btn-without-icon.board-header-btn-text.js-add-board-to-team.no-edit");
         personal2 = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > div:nth-child(3) > a.board-header-btn.board-header-btn-without-icon.board-header-btn-text.js-add-board-to-team");
         user = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > div:nth-child(5) > div > div.member.js-member.has-crown.long-initials > span.member-initials");
+        user2 = document.querySelector("#content > div > div > div > div:nth-child(3) > a > span");
+        freeornah3 = document.querySelector("#content > div > div > div > div:nth-child(3) > a > span > span");
         if (team !== null) {
             teamfinish = team.innerText.replace(freeornah.innerText, "");
         }
         else if (team2 !== null) {
             teamfinish = team2.innerText.replace(freeornah2.innerText, "");
+        }
+        else if (user2 !== null) {
+            teamfinish = user2.innerText.replace(freeornah3.innerText, "");
         }
         else if (personal !== null) {
             teamfinish = "Personal";
@@ -54,7 +59,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             teamfinish = user.title;
         }
         else {
-            teamfinish = "ERROR, UNKNOWN";
+            teamfinish = "ERROR, SEE CONSOLE";
+            PMD_error("Error in catching the board leader/team name, please contact Bas950#0950 on the PreMiD discord. discord.gg/premid");
         }
         if (board !== null) {
             presenceData.details = "Viewing board: " + board.innerText;
