@@ -1,7 +1,7 @@
 {
     "author": {
-        "name": "Bas950",
-        "id": "241278257335500811"
+        "name": "Callum",
+        "id": "506899274748133376"
     },
     "service": "Bounce",
     "description": {
@@ -12,11 +12,12 @@
     "version": "1.7",
     "logo": "https://wearebounce.net/branding/LogoIconColour.png",
     "thumbnail": "https://downbeat.is-inside.me/JOEMiVbm.png",
-    "color": "#ae3484",
+    "color": "#32a852",
     "tags": [
         "music",
         "radio",
-        "gamers"
+        "gamers",
+        "community"
     ],
     "category": "music"
 }
