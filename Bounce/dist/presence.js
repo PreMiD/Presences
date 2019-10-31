@@ -19,7 +19,7 @@ function newStats() {
 	slisteners= data.listeners;
     }
   };
-  xhttp.open('GET', 'https://wearebounce.net/api/index.php?stats2=1&key=GivemeaccessBitCH!', true);
+  xhttp.open('GET', 'https://callumdev.wearebounce.net/premidStats', true);
   xhttp.send();
 	
 }
