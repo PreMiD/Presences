@@ -33,11 +33,9 @@ presence.on("UpdateData", () => {
         largeImageKey: "bouncelogo"
     };
     presenceData.startTimestamp = browsingStamp;
-    presenceData.smallImageKey = "play";
-    presenceData.details = strack + " - " + sartist
-    presenceData.state = sdj + " - " + slisteners + " listeners"
 
-    switch (document.location.hash) {
+
+    switch (document.location.hash.replace("#", "")) {
         case "Bounce.Home":
             play = document.querySelector("body > div.web > div > div > div > div > div.player > div.stats-p > div > div.buttons > center > div > i");
             play = play.className;
@@ -49,7 +47,8 @@ presence.on("UpdateData", () => {
                 case "togl fa fa-pause":
                     presenceData.smallImageKey = "play";
                     presenceData.details = strack + " - " + sartist
-                    presenceData.state = sdj + " - " + slisteners + " listeners"
+                    presenceData.state = sdj
+                    presenceData.smallImageText = slisteners + " Listeners"
             }
             break;
         case "Bounce.Login":
