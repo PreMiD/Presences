@@ -3,6 +3,10 @@
         "name": "Timeraa",
         "id": "223238938716798978"
     },
+    "contributors": [{
+        "name": "Bas950",
+        "id": "241278257335500811"
+    }],
     "service": "YouTube",
     "description": {
         "en": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
@@ -12,8 +16,11 @@
         "uk": "Насолоджуйтесь улюбленими відео та музикою, завантажуйте оригінальний вміст і діліться цим усім з друзями, родиною та світом на YouTube.",
         "nl": "Geniet van de video's en muziek waar je van houdt, upload originele inhoud en deel het allemaal met vrienden, familie en de wereld op YouTube."
     },
-    "url": "www.youtube.com",
-    "version": "2.4",
+    "url": [
+        "www.youtube.com",
+        "studio.youtube.com"
+    ],
+    "version": "3.0",
     "logo": "https://i.imgur.com/C9ZEmge.png",
     "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
     "color": "#E40813",
