@@ -12,7 +12,7 @@ const octokit = new Octokit({
 connect(
   `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
   {
-    appname: "PreMiD-API",
+    appname: "PreMiD-PresenceUpdater",
     useUnifiedTopology: true
   }
 ).then(run);
@@ -64,7 +64,7 @@ async function run(MongoClient: MongoClient) {
       )
       .map(dP => repoPresences.find(p => p.service === dP.service));
 
-  Promise.all(
+  const aPP = Promise.all(
     newPresences.map(async p => {
       let iframeJs = null;
 
@@ -91,43 +91,45 @@ async function run(MongoClient: MongoClient) {
     })
   ).then(pTA => {
     if (pTA.length > 0)
-      MongoClient.db("PreMiD")
+      return MongoClient.db("PreMiD")
         .collection("presences")
         .insertMany(pTA.filter(p => p));
   });
 
-  deletedPresences.map(p => {
-    MongoClient.db("PreMiD")
-      .collection("presences")
-      .deleteOne({ name: p.service });
-  });
-
-  outdatedPresences.map(async p => {
-    let iframeJs = null;
-
-    try {
-      const presenceJs = (await base(`${p.path}/dist/presence.js`)).data;
-      if (p.metadata.iframe)
-        iframeJs = (await base(`${p.path}/dist/iframe.js`)).data;
-
-      let res: any = {
-        metadata: p.metadata,
-        name: p.metadata.service,
-        presenceJs: presenceJs,
-        url: `https://api.premid.app/v2/presences/${p.metadata.service}/`
-      };
-
-      if (p.metadata.iframe) res.iframeJs = iframeJs;
-
+  const dPP = Promise.all(
+    deletedPresences.map(p => {
       MongoClient.db("PreMiD")
         .collection("presences")
-        .findOneAndReplace({ name: p.service }, res);
-    } catch (e) {
-      //TODO SEND MESSAGE TO DISCORD
-    }
-  });
-
-  Promise.all([newPresences, outdatedPresences, deletedPresences]).then(() =>
-    MongoClient.close()
+        .deleteOne({ name: p.service });
+    })
   );
+
+  const uPP = Promise.all(
+    outdatedPresences.map(async p => {
+      let iframeJs = null;
+
+      try {
+        const presenceJs = (await base(`${p.path}/dist/presence.js`)).data;
+        if (p.metadata.iframe)
+          iframeJs = (await base(`${p.path}/dist/iframe.js`)).data;
+
+        let res: any = {
+          metadata: p.metadata,
+          name: p.metadata.service,
+          presenceJs: presenceJs,
+          url: `https://api.premid.app/v2/presences/${p.metadata.service}/`
+        };
+
+        if (p.metadata.iframe) res.iframeJs = iframeJs;
+
+        await MongoClient.db("PreMiD")
+          .collection("presences")
+          .findOneAndReplace({ name: p.metadata.service }, res);
+      } catch (e) {
+        //TODO SEND MESSAGE TO DISCORD
+      }
+    })
+  );
+
+  Promise.all([aPP, uPP, dPP]).then(() => MongoClient.close());
 }

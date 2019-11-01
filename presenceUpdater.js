@@ -45,12 +45,12 @@ var octokit = new Octokit({
     baseURL: "https://raw.githubusercontent.com/PreMiD/Presences/master/"
 });
 mongodb_1.connect("mongodb://" + process.env.MONGO_USERNAME + ":" + process.env.MONGO_PASSWORD + "@" + process.env.MONGO_IP + ":27017", {
-    appname: "PreMiD-API",
+    appname: "PreMiD-PresenceUpdater",
     useUnifiedTopology: true
 }).then(run);
 function run(MongoClient) {
     return __awaiter(this, void 0, void 0, function () {
-        var dbPresences, repoPresences, newPresences, deletedPresences, outdatedPresences;
+        var dbPresences, repoPresences, newPresences, deletedPresences, outdatedPresences, aPP, dPP, uPP;
         var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -94,7 +94,7 @@ function run(MongoClient) {
                         return repoPresences.find(function (dp) { return p.service === dp.service && dp.version !== p.version; });
                     })
                         .map(function (dP) { return repoPresences.find(function (p) { return p.service === dP.service; }); });
-                    Promise.all(newPresences.map(function (p) { return __awaiter(_this, void 0, void 0, function () {
+                    aPP = Promise.all(newPresences.map(function (p) { return __awaiter(_this, void 0, void 0, function () {
                         var iframeJs, presenceJs, res, e_1;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
@@ -130,16 +130,16 @@ function run(MongoClient) {
                         });
                     }); })).then(function (pTA) {
                         if (pTA.length > 0)
-                            MongoClient.db("PreMiD")
+                            return MongoClient.db("PreMiD")
                                 .collection("presences")
                                 .insertMany(pTA.filter(function (p) { return p; }));
                     });
-                    deletedPresences.map(function (p) {
+                    dPP = Promise.all(deletedPresences.map(function (p) {
                         MongoClient.db("PreMiD")
                             .collection("presences")
                             .deleteOne({ name: p.service });
-                    });
-                    outdatedPresences.map(function (p) { return __awaiter(_this, void 0, void 0, function () {
+                    }));
+                    uPP = Promise.all(outdatedPresences.map(function (p) { return __awaiter(_this, void 0, void 0, function () {
                         var iframeJs, presenceJs, res, e_2;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
@@ -147,7 +147,7 @@ function run(MongoClient) {
                                     iframeJs = null;
                                     _a.label = 1;
                                 case 1:
-                                    _a.trys.push([1, 5, , 6]);
+                                    _a.trys.push([1, 6, , 7]);
                                     return [4 /*yield*/, base(p.path + "/dist/presence.js")];
                                 case 2:
                                     presenceJs = (_a.sent()).data;
@@ -165,20 +165,20 @@ function run(MongoClient) {
                                     };
                                     if (p.metadata.iframe)
                                         res.iframeJs = iframeJs;
-                                    MongoClient.db("PreMiD")
-                                        .collection("presences")
-                                        .findOneAndReplace({ name: p.service }, res);
-                                    return [3 /*break*/, 6];
+                                    return [4 /*yield*/, MongoClient.db("PreMiD")
+                                            .collection("presences")
+                                            .findOneAndReplace({ name: p.metadata.service }, res)];
                                 case 5:
+                                    _a.sent();
+                                    return [3 /*break*/, 7];
+                                case 6:
                                     e_2 = _a.sent();
-                                    return [3 /*break*/, 6];
-                                case 6: return [2 /*return*/];
+                                    return [3 /*break*/, 7];
+                                case 7: return [2 /*return*/];
                             }
                         });
-                    }); });
-                    Promise.all([newPresences, outdatedPresences, deletedPresences]).then(function () {
-                        return MongoClient.close();
-                    });
+                    }); }));
+                    Promise.all([aPP, uPP, dPP]).then(function () { return MongoClient.close(); });
                     return [2 /*return*/];
             }
         });
