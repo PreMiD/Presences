@@ -13,7 +13,11 @@
     "thumbnail": "https://i.imgur.com/lXDvidg.png",
     "color": "#8dd6f1",
     "tags": [
-        "other"
+        "other",
+        "development",
+        "discord.js",
+        "d.js",
+        "programming"
     ],
     "category": "other"
 }
