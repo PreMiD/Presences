@@ -2,9 +2,6 @@ import * as Octokit from "@octokit/rest";
 import axios from "axios";
 import { connect, MongoClient } from "mongodb";
 
-import { config } from "dotenv";
-config();
-
 const octokit = new Octokit({
     auth: process.env.GHTOKEN
   }),
