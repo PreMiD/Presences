@@ -7,8 +7,8 @@ on:
       - "**.js"
       - "**.json"
 jobs:
-  updatePresences:
-    runs-on: "ubuntu-latest",
+  UpdatePresences:
+    runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
