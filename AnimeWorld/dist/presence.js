@@ -39,7 +39,7 @@ presence.on("iFrameData", data => {
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var a = '', timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)), presenceData = {
-        largeImageKey: "aw"
+        largeImageKey: "aw2"
     };
     if (document.location.pathname.includes("/watch/")) {
         if (iFrameVideo == true && !isNaN(duration)) {
@@ -47,11 +47,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.smallImageText = paused ? (yield strings).pause : (yield strings).play;
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
-            title = document.querySelector("#main > div > div.widget.player > div.widget-title > h1 > font > font");
-            if (title == null) {
-                title = document.querySelector("#main > div > div.widget.player > div.widget-title > h1");
-            }
-            presenceData.details = title.innerText;
+            title = document.querySelector("head > title");
+            presenceData.details = title.innerText.replace("AnimeWorld: ", "").replace(" Streaming & Download SUB ITA!", "");
             air = document.querySelector("#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(4) > font > font");
             if (air == null) {
                 air = document.querySelector("#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(4)");
