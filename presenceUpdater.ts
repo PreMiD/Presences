@@ -123,5 +123,7 @@ async function run(MongoClient: MongoClient) {
     }
   });
 
-  console.log(newPresences, deletedPresences, outdatedPresences);
+  Promise.all([newPresences, outdatedPresences, deletedPresences]).then(() =>
+    MongoClient.close()
+  );
 }

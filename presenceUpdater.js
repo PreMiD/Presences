@@ -174,7 +174,9 @@ function run(MongoClient) {
                             }
                         });
                     }); });
-                    console.log(newPresences, deletedPresences, outdatedPresences);
+                    Promise.all([newPresences, outdatedPresences, deletedPresences]).then(function () {
+                        return MongoClient.close();
+                    });
                     return [2 /*return*/];
             }
         });
