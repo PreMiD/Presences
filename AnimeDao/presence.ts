@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
         largeImageKey: "animedao_lg"
     }
-    if (hostname === `animedao26.stream`) {
+    if (hostname === `animedao26.stream` || hostname === `animedao28.stream`) {
         const title = document.querySelector('h2').textContent.trim();
         if ((episode = title.match(/\WEpisode\W\d{1,3}/)) != null) {
             presenceData.details = title.replace(episode[0], '');

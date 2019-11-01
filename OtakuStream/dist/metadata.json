@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "OtakuStream",
+    "description": {
+        "en": "Watch anime online (English Subbed) in high quality and direct download for FREE! New anime manga daily added.",
+        "nl": "Bekijk anime online (English Subbed) in hoge kwaliteit en direct gratis downloaden! Nieuwe anime-manga dagelijks toegevoegd."
+    },
+    "url": "otakustream.tv",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/aDqhS9D.png",
+    "thumbnail": "https://i.imgur.com/oUvilzR.png",
+    "color": "#f04d3f",
+    "tags": [
+        "anime",
+        "videos"
+    ],
+    "iframe": true,
+    "category": "anime"
+}
