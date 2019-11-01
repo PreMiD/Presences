@@ -114,7 +114,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         var user;
         var browsingStamp = Math.floor(Date.now() / 1000);
         if (document.location.pathname.includes("/results")) {
-            search = document.querySelector("#search-input > div > div:nth-child(2) > input");
+            search = document.querySelector("#search");
             presenceData.details = "Searching for:";
             presenceData.state = search.value;
             presenceData.smallImageKey = "search";
@@ -123,15 +123,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else if (document.location.pathname.includes("/channel") || document.location.pathname.includes("/user")) {
             user = document.querySelector("#channel-name > div > div > yt-formatted-string");
             if (user.innerText == "") {
-                console.log("b");
-                console.log(user);
                 user = document.querySelector("#channel-header-container > a > div > h1 > yt-formatted-string");
             }
             console.log("Please ignore this console log.");
-            console.log(user.textContent);
+            console.log(user.innerText);
             if (document.location.pathname.includes("/videos")) {
                 presenceData.details = "Browsing through videos";
-                presenceData.state = "of channel: " + user.textContent;
+                presenceData.state = "of channel: " + user.innerText;
                 presenceData.startTimestamp = browsingStamp;
             }
             else if (document.location.pathname.includes("/playlists")) {
