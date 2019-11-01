@@ -2,6 +2,9 @@ import * as Octokit from "@octokit/rest";
 import axios from "axios";
 import { connect, MongoClient } from "mongodb";
 
+import { config } from "dotenv";
+config();
+
 const octokit = new Octokit({
     auth: process.env.GHTOKEN
   }),
@@ -57,7 +60,11 @@ async function run(MongoClient: MongoClient) {
       dP => !repoPresences.some(p => p.service === dP.service)
     ),
     outdatedPresences = dbPresences
-      .filter(p => !repoPresences.some(dp => dp.version === p.version))
+      .filter(p =>
+        repoPresences.find(
+          dp => p.service === dp.service && dp.version !== p.version
+        )
+      )
       .map(dP => repoPresences.find(p => p.service === dP.service));
 
   Promise.all(

@@ -39,6 +39,8 @@ exports.__esModule = true;
 var Octokit = require("@octokit/rest");
 var axios_1 = require("axios");
 var mongodb_1 = require("mongodb");
+var dotenv_1 = require("dotenv");
+dotenv_1.config();
 var octokit = new Octokit({
     auth: process.env.GHTOKEN
 }), base = axios_1["default"].create({
@@ -90,7 +92,9 @@ function run(MongoClient) {
                 case 2:
                     repoPresences = _a.sent();
                     newPresences = repoPresences.filter(function (p) { return !dbPresences.some(function (dP) { return dP.service === p.service; }); }), deletedPresences = dbPresences.filter(function (dP) { return !repoPresences.some(function (p) { return p.service === dP.service; }); }), outdatedPresences = dbPresences
-                        .filter(function (p) { return !repoPresences.some(function (dp) { return dp.version === p.version; }); })
+                        .filter(function (p) {
+                        return repoPresences.find(function (dp) { return p.service === dp.service && dp.version !== p.version; });
+                    })
                         .map(function (dP) { return repoPresences.find(function (p) { return p.service === dP.service; }); });
                     Promise.all(newPresences.map(function (p) { return __awaiter(_this, void 0, void 0, function () {
                         var iframeJs, presenceJs, res, e_1;
