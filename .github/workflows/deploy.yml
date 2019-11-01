@@ -6,9 +6,10 @@ on:
       - "**.ts"
       - "**.js"
       - "**.json"
+      - "**.yml"
 jobs:
   UpdatePresences:
-    runs-on: "ubuntu-latest",
+    runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
