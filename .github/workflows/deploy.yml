@@ -6,6 +6,7 @@ on:
       - "**.ts"
       - "**.js"
       - "**.json"
+      - "**.yml"
 jobs:
   UpdatePresences:
     runs-on: "ubuntu-latest"
