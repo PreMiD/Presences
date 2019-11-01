@@ -7,12 +7,12 @@
     "description": {
         "en": "Discover our Anime Streaming (Italian Subbed). Download or stream your favorite series completely for free.",
         "nl": "Ontdek onze Anime Streaming (Italian Subbed). Download of stream je favoriete serie helemaal gratis.",
-        "it-IT": "Scopri il nostro sito di Streaming Anime (Sub ITA). Scarica o guarda le tue serie preferite completamente gratis."
+        "it": "Scopri il nostro sito di Streaming Anime (Sub ITA). Scarica o guarda le tue serie preferite completamente gratis."
     },
     "url": "www.animeworld.tv",
-    "version": "1.0",
-    "logo": "https://i.imgur.com/aDqhS9D.png",
-    "thumbnail": "https://i.imgur.com/oUvilzR.png",
+    "version": "1.0.1",
+    "logo": "https://i.imgur.com/dpkToVT.png",
+    "thumbnail": "https://i.imgur.com/CDwYD2B.png",
     "color": "#165fa7",
     "tags": [
         "anime",
