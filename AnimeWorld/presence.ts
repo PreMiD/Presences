@@ -58,7 +58,7 @@ var a =
           Math.floor(duration)
         ),
         presenceData: presenceData = {
-          largeImageKey: "aw"
+          largeImageKey: "aw2"
       };
     
       
@@ -70,11 +70,8 @@ if (document.location.pathname.includes("/watch/")) {
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
     
-    title = document.querySelector("#main > div > div.widget.player > div.widget-title > h1 > font > font"); 
-    if (title == null) {
-      title = document.querySelector("#main > div > div.widget.player > div.widget-title > h1");
-    }
-    presenceData.details = title.innerText;
+    title = document.querySelector("head > title");
+    presenceData.details = title.innerText.replace("AnimeWorld: ","").replace(" Streaming & Download SUB ITA!","");
 
     air = document.querySelector("#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(4) > font > font");
     if (air == null) {
