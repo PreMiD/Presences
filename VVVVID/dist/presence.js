@@ -42,31 +42,31 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             paused = document.querySelector("#pl_controls > div:nth-child(1) > div.pppause.active") !== null ? false : true;
             if (paused == true) {
                 presenceData.smallImageKey = "pause";
-                presenceData.smallImageText = "Paused";
+                presenceData.smallImageText = "In pausa";
             }
             else {
                 timestamps = getTimestamps(time, time2);
                 presenceData.startTimestamp = timestamps[0];
                 presenceData.endTimestamp = timestamps[1];
                 presenceData.smallImageKey = "play";
-                presenceData.smallImageText = "Playing";
+                presenceData.smallImageText = "Riproducendo";
             }
             presenceData.details = document.querySelector("#player-video-info > div.player-info-container > div.player-info-publisher.player-info-show").textContent;
             presenceData.state = document.querySelector("#player-video-info > div.player-info-container > div.player-info-title").textContent;
         }
         else if (document.location.pathname.includes("/show/")) {
             presenceData.startTimestamp = browsingStamp;
-            presenceData.details = "Viewing show:";
+            presenceData.details = "Guardando una serie:";
             presenceData.state = document.querySelector("#content-body > div.show-container.fillParent > div > div > div.show-inside-container > div.show-top-container > div.show-title").textContent;
         }
         else if (document.location.pathname.includes("/fandom")) {
             presenceData.startTimestamp = browsingStamp;
-            presenceData.details = "Viewing fandom:";
+            presenceData.details = "Guardando un fandom:";
             presenceData.state = document.querySelector("#content-body > div.show-container.fillParent > div > div > div.show-inside-container > div.show-top-container > div.show-title").textContent;
         }
         else if (document.location.pathname.includes("/profile/")) {
             presenceData.startTimestamp = browsingStamp;
-            presenceData.details = "Viewing user:";
+            presenceData.details = "Visualizzando un utente:";
             presenceData.state = document.querySelector("#content-body > div.profile-container-opaque.text-shadow.open > div.profile-friend-content > div > div.profile-friend-top > div.profile-friend-top-right > div.profile-friend-name-container > div").textContent;
         }
     }
