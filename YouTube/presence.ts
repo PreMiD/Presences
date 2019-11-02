@@ -145,6 +145,9 @@ presence.on("UpdateData", async () => {
 
     if(document.location.pathname.includes("/results")) { //When searching something
       search = document.querySelector("#search-input > div > div:nth-child(2) > input");
+      if (search == null) {
+        search = document.querySelector("#search-input > input");
+      }
       presenceData.details = "Searching for:";
       presenceData.state = search.value;
       presenceData.smallImageKey = "search";
