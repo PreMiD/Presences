@@ -115,6 +115,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         var browsingStamp = Math.floor(Date.now() / 1000);
         if (document.location.pathname.includes("/results")) {
             search = document.querySelector("#search-input > div > div:nth-child(2) > input");
+            if (search == null) {
+                search = document.querySelector("#search-input > input");
+            }
             presenceData.details = "Searching for:";
             presenceData.state = search.value;
             presenceData.smallImageKey = "search";
