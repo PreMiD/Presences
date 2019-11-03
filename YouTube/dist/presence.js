@@ -124,14 +124,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = browsingStamp;
         }
         else if (document.location.pathname.includes("/channel") || document.location.pathname.includes("/user")) {
-            user = document.querySelector("#channel-name > div > div > yt-formatted-string");
+            user = document.querySelector("#channel-name");
             if (user.innerText == "") {
-                console.log("b");
-                console.log(user);
                 user = document.querySelector("#channel-header-container > a > div > h1 > yt-formatted-string");
             }
-            console.log("Please ignore this console log.");
-            console.log(user.textContent);
             if (document.location.pathname.includes("/videos")) {
                 presenceData.details = "Browsing through videos";
                 presenceData.state = "of channel: " + user.textContent;
