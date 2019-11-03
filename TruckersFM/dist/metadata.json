@@ -5,14 +5,13 @@
   },
   "service": "TruckersFM",
   "description": {
-    "en": "TruckersFM is your staiton for driving."
+    "en": "The number one hit music station for Trucking Simulators. Radio made for driving, now playing online, in cab and on the go."
    },
-  "url": ["truckers.fm"],
+  "url": "truckers.fm",
   "version": "1.0",
   "logo": "https://ninjalabs.co.uk/i/p0ezmnp.png",
   "thumbnail": "https://ninjalabs.co.uk/i/g931v7g.png",
   "color": "#fc0303",
   "tags": ["TFM", "radio", "ETS2", "ATS", "Your Drive, Your Music"],
-  "category": "music",
-  "iframe": false
+  "category": "music"
 }
