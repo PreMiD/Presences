@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "638884787733659648",
+    clientId: "640914619082211338",
     mediaKeys: true
 });
 
@@ -7,21 +7,20 @@ var song;
 var dj;
 
 presence.on("UpdateData", () => {
-    let presenceData = {
-        largeImageKey: "TFMLogo"
-    }
 
     title = `${document.querySelector(".player-title-text").innerText} - ${document.querySelector(".player-artist-text").innerText} `;
     dj = document.querySelector(".live-name").innerText;
-
-    presenceData.details = title;
-    presenceData.state = "Listening to TruckersFM";
-
+    liveTill = document.querySelector(".live-time").innerText;
     let pageName = (document.title).slice(13);
+    liveTime = liveTill.slice(6)
+    let presenceData = {
+        largeImageKey: "tfmlogo",
+        smallImageKey: "smalltfmlogo",
+        smallImageText: `Viewing: ${pageName}`,
+    }    
 	
-    presenceData.details = "Viewing a page";
-    pageName = (document.title).slice(13);
-    presenceData.state = pageName;
+    presenceData.details = `${title}`;
+    presenceData.state = `${dj} till ${liveTime}`;
 	  
       presence.setActivity(presenceData);
       presence.setTrayTitle();
