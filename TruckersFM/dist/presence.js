@@ -8,7 +8,7 @@ var dj;
 
 presence.on("UpdateData", () => {
 
-    title = `${document.querySelector(".player-title-text").innerText} - ${document.querySelector(".player-artist-text").innerText} `;
+    title = `${document.querySelector(".player-artist-text").innerText} - ${document.querySelector(".player-title-text").innerText} `;
     dj = document.querySelector(".live-name").innerText;
     liveTill = document.querySelector(".live-time").innerText;
     let pageName = (document.title).slice(13);
