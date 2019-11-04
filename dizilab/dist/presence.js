@@ -137,11 +137,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             startTimestamp: Math.floor(Date.now() / 1000)
         });
     } else if (isVideoData) {
-        const title = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span"),
-            _episode = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div");
+        const title = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span") || document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span"),
+            _episode = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div") && document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div").textContent ? document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div").textContent : null || document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span") && document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)") ? `${document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span").textContent.trim()}. Sezon ${document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)").textContent}. Bölüm` : null;
 
-        if (title && title.textContent != "" && _episode && _episode.textContent != "") {
-            const fixedEpisodeName = _episode.textContent.replace(/\n/g, "").replace(/-/g, "").replace(title.textContent, "").replace(" ", "").trim(),
+        if (title && title.textContent != "" && _episode) {
+            const fixedEpisodeName = _episode.replace(/\n/g, "").replace(/-/g, "").replace(title.textContent, "").replace(" ", "").trim(),
                 timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration))
 
             let data = {
