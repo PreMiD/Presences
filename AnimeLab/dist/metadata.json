@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "AnimeLab",
+    "description": {
+        "en": "Watch the latest anime hits and simulcasts direct from Japan online in HD. AnimeLab is exclusive to Australia and New Zealand.",
+        "nl": "Bekijk de nieuwste anime-hits en simulcasts rechtstreeks vanuit Japan online in HD. AnimeLab is exclusief voor Australië en Nieuw-Zeeland."
+    },
+    "url": "www.animelab.com",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/Fj1RBAc.png",
+    "thumbnail": "https://i.imgur.com/oDT9Z0I.png",
+    "color": "#3e2d7d",
+    "tags": [
+        "anime",
+        "australia",
+        "new zealand"
+    ],
+    "category": "anime"
+}
