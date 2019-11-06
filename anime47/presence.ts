@@ -64,20 +64,19 @@ var a =
       
 
 if (document.querySelector("body > div.container > div:nth-child(3) > div > div.movie-info > div > div.block-wrapper.page-single > div > div.block-movie-info.movie-info-box > div > div.col-6.movie-detail > h1 > span.title-1") !== null) {
-  presenceData.details = "Looking at:";
+  presenceData.details = "Đang xem:";
   presenceData.state = document.querySelector("body > div.container > div:nth-child(3) > div > div.movie-info > div > div.block-wrapper.page-single > div > div.block-movie-info.movie-info-box > div > div.col-6.movie-detail > h1 > span.title-1").textContent;
   presenceData.startTimestamp = browsingStamp;
   presenceData.smallImageKey = "reading";
 } else if (document.querySelector("body > div.container > ol > li:nth-child(5) > a > span") !== null) {
-  console.log(document.querySelector("body > div.container > ol > li:nth-child(5) > a > span"));
   if (iFrameVideo == true && !isNaN(duration)) {
     presenceData.smallImageKey = paused ? "pause" : "play";
     presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
     
-    presenceData.details = document.querySelector("body > div.container > ol > li:nth-child(5) > a > span").textContent;
-    presenceData.state = document.querySelector("body > div.container > ol > li.active").textContent;
+    presenceData.details = document.querySelector("head > title").textContent.split("- ")[0];
+    presenceData.state = document.querySelector("head > title").textContent.split("- ")[1];
     
     if (paused) {
       delete presenceData.startTimestamp;
@@ -88,7 +87,7 @@ if (document.querySelector("body > div.container > div:nth-child(3) > div > div.
 
      presenceData.startTimestamp = browsingStamp;
      presenceData.details = "Đang xem: ";
-     title = document.querySelector("body > div.container > ol > li:nth-child(5) > a > span").textContent; 
+     title = document.querySelector("head > title").textContent; 
      
      presenceData.state = title;
      presenceData.smallImageKey = "reading";
