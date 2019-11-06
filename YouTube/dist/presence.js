@@ -124,41 +124,38 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = browsingStamp;
         }
         else if (document.location.pathname.includes("/channel") || document.location.pathname.includes("/user")) {
-            user = document.querySelector("#channel-name");
-            if (user.innerText == "") {
-                user = document.querySelector("#channel-header-container > a > div > h1 > yt-formatted-string");
-            }
+            user = document.querySelector(".ytd-channel-name").textContent.replace(/\s+/g, '');
             if (document.location.pathname.includes("/videos")) {
                 presenceData.details = "Browsing through videos";
-                presenceData.state = "of channel: " + user.textContent;
+                presenceData.state = "of channel: " + user;
                 presenceData.startTimestamp = browsingStamp;
             }
             else if (document.location.pathname.includes("/playlists")) {
                 presenceData.details = "Browsing through playlists";
-                presenceData.state = "of channel: " + user.innerText;
+                presenceData.state = "of channel: " + user;
                 presenceData.startTimestamp = browsingStamp;
             }
             else if (document.location.pathname.includes("/community")) {
                 presenceData.details = "Viewing community posts";
-                presenceData.state = "of channel: " + user.innerText;
+                presenceData.state = "of channel: " + user;
                 presenceData.startTimestamp = browsingStamp;
             }
             else if (document.location.pathname.includes("/about")) {
                 presenceData.details = "Reading about channel:";
-                presenceData.state = user.innerText;
+                presenceData.state = user;
                 presenceData.smallImageKey = "reading";
                 presenceData.startTimestamp = browsingStamp;
             }
             else if (document.location.pathname.includes("/search")) {
                 search = document.URL.split("search?query=")[1];
-                presenceData.details = "Searching through channel: " + user.innerText;
+                presenceData.details = "Searching through channel: " + user;
                 presenceData.state = "for: " + search;
                 presenceData.smallImageKey = "search";
                 presenceData.startTimestamp = browsingStamp;
             }
             else {
                 presenceData.details = "Viewing channel:";
-                presenceData.state = user.innerText;
+                presenceData.state = user;
                 presenceData.startTimestamp = browsingStamp;
             }
         }
