@@ -1,0 +1,20 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "Abstract Radio",
+    "description": {
+        "en": "Radio on Abstract"
+    },
+    "url": "weareabstract.com",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/8MmvSWI.png",
+    "thumbnail": "https://i.imgur.com/nLLAUEm.png",
+    "color": "#000000",
+    "tags": [
+        "abstract",
+        "radio"
+    ],
+    "category": "music"
+}
