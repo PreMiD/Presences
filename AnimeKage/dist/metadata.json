@@ -10,7 +10,7 @@
         "ro": "Serii anime online traduse în limba română. Naruto, Naruto Shippuden, Bleach, Gintama, şi multe altele. Site-ul nostru oferă traduceri la sute de serii anime şi manga subtitrate în limba română."
     },
     "url": "ak151.anime-kage.eu",
-    "version": "1.0",
+    "version": "1.1",
     "logo": "https://i.imgur.com/zVbpanX.png",
     "thumbnail": "https://i.imgur.com/0pir8CX.png",
     "color": "#2bb4ba",
@@ -19,5 +19,6 @@
         "videos"
     ],
     "iframe": true,
-    "category": "anime"
+    "category": "anime",
+    "regExp": "([a-z0-9]+)[.]anime-kage[.]eu"
 }
