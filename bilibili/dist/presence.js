@@ -52,6 +52,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             if (video == null) {
                 video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
             }
+            if (video == null) {
+                video = document.querySelector(".bilibili-player-video > video");
+            }
             videoDuration = video.duration;
             videoCurrentTime = video.currentTime;
             paused = video.paused;
@@ -66,6 +69,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
             title = document.querySelector("#viewbox_report > h1");
             user = document.querySelector("#v_upinfo > div.u-info > div.name");
+            if (user == null) {
+                user = document.querySelector("#v_upinfo > div.info > div.user.clearfix > a");
+            }
             presenceData.details = title.innerText;
             presenceData.state = "By user: " + user.innerText;
         }
