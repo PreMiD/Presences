@@ -14,6 +14,9 @@ var title : any;
 var replace : any;
 var search : any;
 
+var typeURL = new URL(document.location.href);
+var typeResult = typeURL.searchParams.get("type");
+
 presence.on("UpdateData", async () => {
 
 
@@ -48,13 +51,24 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing:";
       presenceData.state = document.querySelector("#wrapper > div.layout-body > div > h1 > a").textContent;
+    } else if (document.location.pathname.includes("/history.php")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing History";
     } else if (document.location.pathname.includes("/bookmark")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing bookmarks"
+    } else if (document.location.pathname.includes("/mypixiv_all.php")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing My pixiv";
+    } else if (document.location.pathname.includes("/stacc")) {
+      presenceData.startTimestamp = browsingStamp;
+      user = document.querySelector("#stacc_center_title");
+      presenceData.details = "Browsing Feed";
+      presenceData.state = user.innerText;
     } else if (document.location.pathname.includes("/fanbox")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing fanbox"
-    } else if (document.location.pathname.includes("/event")) {
+    } else if (document.location.pathname.includes("/event/")) {
       if (document.querySelector("#contents > div.pane.full.group > h1") !== null) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing event:";
@@ -63,6 +77,12 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Browsing events..."
       }
+    } else if (document.location.pathname.includes("/event_add")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Ready to create an event"
+    } else if (document.location.pathname.includes("/profile_event")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Manage event..."
     } else if (document.location.pathname.includes("/tag")) {
       title = document.querySelector("#container > div.page > div.main-wrap > div.profile > section > header > h1");
       presenceData.startTimestamp = browsingStamp;
@@ -74,7 +94,93 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Searching for:";
       presenceData.state = search.innerText;
       presenceData.smallImageKey = "search";
+            //Account Settings
+      //User settings
+    } else if (document.location.pathname.includes("/setting_user.php")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "User settings";
+      presenceData.state = "Basic settings";
+    } else if (document.location.pathname.includes("/setting_social_login.php")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "User settings";
+      presenceData.state = "Link other accounts to pixiv";
+    } else if (document.location.pathname.includes("/setting_sns_post")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "User settings";
+      presenceData.state = "Post on social media";
+      //Profile settings
+    } else if (document.location.pathname.includes("/setting_profile.php")) {
+      presenceData.details = "Profile settings";
+      presenceData.state = "Profile information";
+    } else if (document.location.pathname.includes("/setting_profile_img.php")) {
+      presenceData.details = "Profile settings";
+      presenceData.state = "Profile images";
+    } else if (document.location.pathname.includes("/setting_workspace.php")) {
+      presenceData.details = "Profile settings";
+      presenceData.state = "Workspace";
+    } else if (document.location.pathname.includes("/setting_design.php")) {
+      presenceData.details = "Profile settings";
+      presenceData.state = "Design";
+      //Notification Settings
+    } else if (document.location.pathname.includes("/setting_info.php")) {
+      presenceData.details = "Notification Settings";
+      //Auto Feed activity
+    } else if (document.location.pathname.includes("/stacc/my/setting")) {
+      presenceData.details = "Auto Feed activity";
+      ///Mute setting
+    } else if (document.location.pathname.includes("/setting_mute.php")) {
+      presenceData.details = "Mute setting | Tags";
+      if (typeResult == "user")
+      presenceData.details = "Mute setting | User";
+      //Premium
+    } else if (document.location.pathname.includes("/premium")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing Premium Registered Info";
+      //Private message
+    } else if (document.location.pathname.includes("/messages.php")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing Private message";
+      //Discovery
+    } else if (document.location.pathname.includes("/discovery")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing Recommended Works";
+      if (document.location.pathname.includes("/users"))
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing Recommended Users";
+      //Upload
+    } else if (document.location.pathname.includes("/upload.php")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Submiting New Illustrations";
+      if (typeResult == "manga")
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Submiting New Manga";
+    } else if (document.location.pathname.includes("/ugoira_upload.php")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Submiting New Ugoira(Animations)";
+    } else if (document.location.pathname.includes("/novel/upload.php")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Submit New Novel";
+      //Managing Works
+    } else if (document.location.pathname.includes("/manage")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Managing Artworks";
+      //report
+    } else if (document.location.pathname.includes("/report")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing report";
+      presenceData.state = (document.querySelector("#wrapper > div.layout-body > section.analytics-menu-unit > nav > span.label") as HTMLElement).innerText;
+      //something
+    } else if (document.location.pathname.includes("/group")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing group";
+    } else if (document.location.pathname.includes("/idea")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing idea";
+    } else if (document.location.pathname.includes("/howto")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing Howto";
     }
+
   } else if (document.location.hostname == "sketch.pixiv.net") {
     presenceData.smallImageKey = "writing";
     if (document.location.pathname == "/" || document.location.pathname.includes("/public")) {
