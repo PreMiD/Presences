@@ -19,7 +19,7 @@ var typeResult = typeURL.searchParams.get("type");
 
 presence.on("UpdateData", async () => {
 
-
+  
   let presenceData: presenceData = {
     largeImageKey: "pix"
   };
