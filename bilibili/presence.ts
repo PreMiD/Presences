@@ -13,6 +13,7 @@ var user : any;
 var title : any;
 var replace : any;
 var search : any;
+var UID : any ;
 
 presence.on("UpdateData", async () => {
 
@@ -36,6 +37,9 @@ presence.on("UpdateData", async () => {
       if (video == null) {
         video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
       }
+      if (video == null) {
+        video = document.querySelector(".bilibili-player-video > video");
+      }
       videoDuration = video.duration;
       videoCurrentTime = video.currentTime;
       paused = video.paused;
@@ -53,7 +57,10 @@ presence.on("UpdateData", async () => {
       }
       
       title = document.querySelector("#viewbox_report > h1");
-      user = document.querySelector("#v_upinfo > div.info > div.user.clearfix > a.name.is-vip");
+      user = document.querySelector("#v_upinfo > div.u-info > div > a.username");
+      if (user == null) {
+        user = document.querySelector("#v_upinfo > div.info > div.user.clearfix > a")
+      }
       presenceData.details = title.innerText;
       presenceData.state = "By user: " + user.innerText;
       //Subcategory
@@ -499,22 +506,62 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Browsing for column";
       }
-      
-/*
-    } else if (document.location.hostname == ("t.bilibili.com")){
-        user = document.querySelector("#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a");
-      if (user !== null) {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Reading " + user.innerText + "'s dynamic";
-        presenceData.smallImageKey = "reading";
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Browsing for dynamic";
-      }*/
     }
-  }
-
+    //dynamic
+  } else if (document.location.hostname == ("t.bilibili.com")){
+    user = document.querySelector("#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a");
+    if (user !== null) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Reading " + user.innerText + "'s dynamic";
+      presenceData.smallImageKey = "reading";
+    } else {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing for dynamic";
+    }
+    //shortfilm
+  } else if (document.location.hostname == ("vc.bilibili.com")){
+    user = document.querySelector("#app > div > div.left-section.f-left > div.uploader-box.module-card.border-box > div > div > div.user > a");
+    if (user !== null) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Watching " + user.innerText + "'s shortfilm";
+      presenceData.smallImageKey = "vcall";
+    } else {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing for shortfilm";
+    }
+    //space
+  } else if (document.location.hostname == ("space.bilibili.com")){
+    user = document.querySelector("#h-name");
+    UID = document.querySelector("#page-index > div.col-2 > div.section.user.private > div.info > div > div > div > div.item.uid > span.text");
+    if (user !== null && UID !== null) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing user space";
+      presenceData.state = user.innerText + " | UID: " + UID.innerText
+    } else {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing for dynamic";
+    }
+    //live
+  } else if (document.location.hostname == ("live.bilibili.com")){
+    user = document.querySelector("#head-info-vm > div > div > div.room-info-down-row > a.room-owner-username.live-skin-normal-a-text.dp-i-block.v-middle");
+    title = document.querySelector("#head-info-vm > div > div > div.room-info-upper-row.p-relative > div.normal-mode > div:nth-child(1) > h1 > span.title-length-limit.live-skin-main-text.v-middle.dp-i-block.small-title");
+    if (user !== null && UID !== null) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Watching " + user.innerText + "'s streaming"
+      presenceData.state = title.innerText
+      presenceData.smallImageKey = "live";
+    } else {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing for live channels";
+    }
+  } 
+  
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
     presence.setActivity(presenceData);
+  }
 
 });
 
