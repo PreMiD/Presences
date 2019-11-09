@@ -25,9 +25,6 @@
   "thumbnail": "https://i.imgur.com/wKnEEei.jpg",
   "color": "#05acff",
   "tags": ["video", "anime"],
-  "category": [
-    "anime",
-    "video"
-  ],
+  "category": "anime",
   "regExp": "(([a-z0-9]+)[.])?bilibili[.]com"
 }
