@@ -508,7 +508,7 @@ presence.on("UpdateData", async () => {
       }
     }
     //dynamic
-  } else if (document.location.hostname == ("t.bilibili.com")){
+  } else if (document.location.hostname == "t.bilibili.com"){
     user = document.querySelector("#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a");
     if (user !== null) {
       presenceData.startTimestamp = browsingStamp;
@@ -519,18 +519,32 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing for dynamic";
     }
     //shortfilm
-  } else if (document.location.hostname == ("vc.bilibili.com")){
+  } else if (document.location.hostname == "vc.bilibili.com"){
     user = document.querySelector("#app > div > div.left-section.f-left > div.uploader-box.module-card.border-box > div > div > div.user > a");
+    video = document.querySelector("#app > div > div.left-section.f-left > div.player-area.module-card > div.player-box > div > div > div.bilibili-link-player-video-component > div > video");
+    videoDuration = video.duration;
+    videoCurrentTime = video.currentTime;
+    paused = video.paused;
+
+    var timestamps = getTimestamps(Math.floor(videoCurrentTime), Math.floor(videoDuration));
+
+    presenceData.smallImageKey = paused ? "pause" : "play";
+    presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
+    
+    if (paused) {
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+    }
     if (user !== null) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Watching " + user.innerText + "'s shortfilm";
       presenceData.smallImageKey = "vcall";
     } else {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing for shortfilm";
     }
     //space
-  } else if (document.location.hostname == ("space.bilibili.com")){
+  } else if (document.location.hostname == "space.bilibili.com"){
     user = document.querySelector("#h-name");
     UID = document.querySelector("#page-index > div.col-2 > div.section.user.private > div.info > div > div > div > div.item.uid > span.text");
     if (user !== null && UID !== null) {
@@ -542,7 +556,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing for dynamic";
     }
     //live
-  } else if (document.location.hostname == ("live.bilibili.com")){
+  } else if (document.location.hostname == "live.bilibili.com"){
     user = document.querySelector("#head-info-vm > div > div > div.room-info-down-row > a.room-owner-username.live-skin-normal-a-text.dp-i-block.v-middle");
     title = document.querySelector("#head-info-vm > div > div > div.room-info-upper-row.p-relative > div.normal-mode > div:nth-child(1) > h1 > span.title-length-limit.live-skin-main-text.v-middle.dp-i-block.small-title");
     if (user !== null && UID !== null) {
