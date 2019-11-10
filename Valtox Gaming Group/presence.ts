@@ -80,6 +80,21 @@ presence.on("UpdateData", async () => {
       presenceData.details = "🌐 Viewing their";
       presenceData.state = "📰 VTC dashboard";
     }
+  } else if (document.location.hostname == "panel.valtoxgaminggroup.com") {
+    if (document.location.pathname == "/") {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "🌐 Staff Panel";
+      presenceData.state = "📰 Viewing panel home";
+    } else if (document.location.pathname.includes("/account")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "🌐 Staff Panel";
+      presenceData.state = "📰 Viewing their account";
+    } else if (document.location.pathname.includes("/server/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "🌐 Staff Panel - Editing";
+      title = document.querySelector(".card-title") || document.querySelector("body > div > div.content-wrapper > section.content-header > ol > li:nth-child(2) > a")
+      presenceData.state = "📰 Server: " + title.textContent
+    }
   }
 
   if (presenceData.details == null) {
