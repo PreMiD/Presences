@@ -326,7 +326,14 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/invite")) {
 
     presenceData.details = "Viewing invite:";
-    presenceData.state = document.URL.split("/")[4];
+    apptitle = document.URL.split("/")[4]
+    if (apptitle.includes("?")) {
+      presenceData.state = apptitle.split("?")[0];
+    } else {
+      presenceData.state = document.URL.split("/")[4];
+    }
+
+    presenceData.state = "COMING SOON."; // Change this when presence settings is a thing.
       
     delete presenceData.smallImageKey;
       

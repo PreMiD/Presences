@@ -1,0 +1,23 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "FreightFM",
+    "description": {
+        "en": "FreightFM is an online, licensed radio station dedicated to providing the best tunes for the Trucking Community and the Farming Simulator Community.",
+        "nl": "FreightFM is een online, gelicentieerd radiostation dat zich toelegt op het leveren van de beste nummers voor de Trucking Community en de Farming Simulator Community."
+    },
+    "url": "freightfm.com",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/z00RJfB.png",
+    "thumbnail": "https://i.imgur.com/NK1O1dM.png",
+    "color": "#c41732",
+    "tags": [
+        "music",
+        "radio",
+        "gamers",
+        "community"
+    ],
+    "category": "music"
+}
