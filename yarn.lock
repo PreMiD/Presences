@@ -84,10 +84,10 @@
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
   integrity sha1-wFTor02d11205jq8dviFFocU1LM=
 
-"@types/mongodb@3.3.9":
-  version "3.3.9"
-  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.3.9.tgz#46a5f23a49bb8e8e88de95772ff485dcdc6ffe11"
-  integrity sha512-jvB6SfyHxs47R6vvywV0pWNU7191t4GwnypqMLMZKmdG21KxHT6t4wdfpzIhbfz8bfKoXg+qJuv3ALCNOC/7Bg==
+"@types/mongodb@3.3.10":
+  version "3.3.10"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.3.10.tgz#ef8255cc78b32ecd8afd901796e458f4379d9bc2"
+  integrity sha512-0irlIjqs0UVcs+1ih7qdA9Rs4gkN9hBX7PI6IBWYu/kcMQ52L+oLW19gKT8wBJD2uMBkgT4mVKDmEo6ygObnHA==
   dependencies:
     "@types/bson" "*"
     "@types/node" "*"
