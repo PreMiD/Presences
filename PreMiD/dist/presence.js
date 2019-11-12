@@ -6,49 +6,67 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var presence = new Presence({
+
+const presence = new Presence({
     clientId: "503557087041683458"
-});
-var oldState = null;
-var presenceName, profileName;
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    let presenceData = {
-        largeImageKey: "lg"
+}),
+    pages = {
+        "/store": "Store",
+        "/downloads": "Downloads",
+        "/contributors": "Contributors",
+        "/cookies": "Cookie Policy",
+        "/privacy": "Privacy Policy",
+        "/tos": "Terms of Services",
+        "/wiki": "Wiki",
+        "/en/home": "Docs Homepage",
+        "/about": "About",
+        "/install/requirements": "System Requirements",
+        "/install": "Installation",
+        "/troubleshooting": "Troubleshooting",
+        "/dev": "Getting Started",
+        "/dev/api": "API",
+        "/dev/presence": "Presence Development"
     };
-    presenceName = document.querySelector("div.header__title > h1.presence-name");
-    profileName = document.querySelector("div.userpage__header > div.user-data > p");
-    if (document.location.pathname.startsWith("/store") && presenceName == null)
-        presenceData.state = "Store";
-    else if (document.location.pathname.startsWith("/downloads"))
-        presenceData.state = "Downloads";
-    else if (document.location.pathname.startsWith("/contributors"))
-        presenceData.state = "Contributors";
-    else if (document.location.pathname.startsWith("/cookies"))
-        presenceData.state = "Cookie Policy";
-    else if (document.location.pathname.startsWith("/privacy"))
-        presenceData.state = "Privacy Policy";
-    else if (document.location.pathname.startsWith("/tos"))
-        presenceData.state = "Terms of Service";
-    else if (document.location.hostname.startsWith("wiki"))
-        presenceData.state = "Wiki";
-    else if (document.location.hostname.startsWith("docs"))
-        presenceData.state = "Docs";
-    else if (document.location.pathname.includes("/store/presences/")) {
-        presenceData.details = "Presence Page";
-        presenceData.state = presenceName.innerText;
+
+presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+    const page = document.location.pathname,
+        page2 = document.location.pathname.slice(3),
+        host = document.location.hostname,
+        presenceName = document.querySelector("div.header__title > h1.presence-name"),
+        profileName = document.querySelector("div.userpage__header > div.user-data > p") && document.querySelector("div.userpage__header > div.user-data > p").textContent != "" ? document.querySelector("div.userpage__header > div.user-data > p").textContent : null,
+        fixedProfileName = profileName ? profileName.slice(1, (profileName.indexOf("#") - 1)) + profileName.slice(profileName.indexOf("#"), profileName.length) : null;
+
+    if (host == "premid.app") {
+        if (page.includes("/users/") && fixedProfileName) {
+            presence.setActivity({
+                largeImageKey: "lg",
+                details: "User Profile",
+                state: fixedProfileName || "Unknown",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            })
+        } else if (page.includes("/store/presences/") && presenceName && presenceName.textContent != "") {
+            presence.setActivity({
+                largeImageKey: "lg",
+                details: "Presence Page",
+                state: presenceName.textContent || "Unknown",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            })
+        } else if (pages[page] || pages[page.slice(0, -1)]) {
+            presence.setActivity({
+                largeImageKey: "lg",
+                details: "Viewing a Page",
+                state: pages[page] || pages[page.slice(0, -1)],
+                startTimestamp: Math.floor(Date.now() / 1000)
+            })
+        }
+    } else if (host == "docs.premid.app") {
+        if (pages[page2] || pages[page2.slice(0, -1)]) {
+            presence.setActivity({
+                largeImageKey: "lg",
+                details: "Viewing a Page on Docs",
+                state: pages[page2] || pages[page2.slice(0, -1)],
+                startTimestamp: Math.floor(Date.now() / 1000)
+            })
+        }
     }
-    else if (document.location.pathname.startsWith("/users")) {
-        presenceData.details = "User Profile";
-        presenceData.state = profileName.innerText;
-    }
-    else
-        presenceData = null;
-    if (oldState !== presenceData && presenceData !== null) {
-        oldState = presenceData;
-        presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-    }
-    presenceData === null
-        ? presence.setActivity()
-        : presence.setActivity(presenceData);
 }));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUFBLElBQUksUUFBUSxHQUFHLElBQUksUUFBUSxDQUFDO0lBQzFCLFFBQVEsRUFBRSxvQkFBb0I7Q0FDL0IsQ0FBQyxDQUFDO0FBRUgsSUFBSSxRQUFRLEdBQUcsSUFBSSxDQUFDO0FBQ3BCLElBQUksWUFBa0IsRUFBRSxXQUFpQixDQUFDO0FBQzFDLFFBQVEsQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLEdBQVMsRUFBRTtJQUNuQyxJQUFJLFlBQVksR0FBaUI7UUFDL0IsYUFBYSxFQUFFLElBQUk7S0FDcEIsQ0FBQztJQUVGLFlBQVksR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLHNDQUFzQyxDQUFDLENBQUM7SUFDOUUsV0FBVyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsMENBQTBDLENBQUMsQ0FBQztJQUVqRixJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQUMsSUFBSSxZQUFZLElBQUksSUFBSTtRQUN6RSxZQUFZLENBQUMsS0FBSyxHQUFHLE9BQU8sQ0FBQztTQUMxQixJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxZQUFZLENBQUM7UUFDMUQsWUFBWSxDQUFDLEtBQUssR0FBRyxXQUFXLENBQUM7U0FDOUIsSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDO1FBQzdELFlBQVksQ0FBQyxLQUFLLEdBQUcsY0FBYyxDQUFDO1NBQ2pDLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLFVBQVUsQ0FBQztRQUN4RCxZQUFZLENBQUMsS0FBSyxHQUFHLGVBQWUsQ0FBQztTQUNsQyxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxVQUFVLENBQUM7UUFDeEQsWUFBWSxDQUFDLEtBQUssR0FBRyxnQkFBZ0IsQ0FBQztTQUNuQyxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxNQUFNLENBQUM7UUFDcEQsWUFBWSxDQUFDLEtBQUssR0FBRyxrQkFBa0IsQ0FBQztTQUNyQyxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxNQUFNLENBQUM7UUFDcEQsWUFBWSxDQUFDLEtBQUssR0FBRyxNQUFNLENBQUM7U0FDekIsSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsTUFBTSxDQUFDO1FBQ3BELFlBQVksQ0FBQyxLQUFLLEdBQUcsTUFBTSxDQUFDO1NBQ3pCLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLG1CQUFtQixDQUFDLEVBQUM7UUFDaEUsWUFBWSxDQUFDLE9BQU8sR0FBRyxlQUFlLENBQUM7UUFDdkMsWUFBWSxDQUFDLEtBQUssR0FBRyxZQUFZLENBQUMsU0FBUyxDQUFDO0tBQzdDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLEVBQUM7UUFDekQsWUFBWSxDQUFDLE9BQU8sR0FBRyxjQUFjLENBQUM7UUFDdEMsWUFBWSxDQUFDLEtBQUssR0FBRyxXQUFXLENBQUMsU0FBUyxDQUFDO0tBQzVDOztRQUNJLFlBQVksR0FBRyxJQUFJLENBQUM7SUFFekIsSUFBSSxRQUFRLEtBQUssWUFBWSxJQUFJLFlBQVksS0FBSyxJQUFJLEVBQUU7UUFDdEQsUUFBUSxHQUFHLFlBQVksQ0FBQztRQUN4QixZQUFZLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO0tBQzdEO0lBRUQsWUFBWSxLQUFLLElBQUk7UUFDbkIsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxXQUFXLEVBQUU7UUFDeEIsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDLENBQUM7QUFDekMsQ0FBQyxDQUFBLENBQUMsQ0FBQyJ9
