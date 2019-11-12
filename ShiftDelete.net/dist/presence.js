@@ -135,6 +135,15 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 state: user.textContent,
                 startTimestamp: Math.floor(Date.now() / 1000)
             });
+        } else if (page.includes("/post-thread")) {
+            const newTitle = document.querySelector(".js-titleInput");
+
+            presence.setActivity({
+                largeImageKey: "sd-logo",
+                details: "Yeni bir forum gönderisi açıyor:",
+                state: newTitle && newTitle.value != "" ? newTitle.value : "Henüz Başlık Girilmemiş",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            });
         } else if (page.includes("/forums/")) {
             const forumTitle = document.querySelector("#top > div.p-body > div > div.p-body-header > div.p-title > h1");
 
