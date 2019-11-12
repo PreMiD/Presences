@@ -142,7 +142,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             episodeX = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div") && document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div").textContent ? document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div").textContent : null || document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span") && document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)") ? `${document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span").textContent.trim()}. Sezon ${document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)").textContent}. Bölüm` : null;
 
         const fixedEpisodeName = episodeX.replace(/\n/g, "").replace(/-/g, "").replace(title.textContent, "").replace(" ", "").trim(),
-            timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration))
+            timestamps = getTimestamps(Math.floor(_video.currentTime), Math.floor(_video.duration))
 
         let data = {
             largeImageKey: "dl-logo",
