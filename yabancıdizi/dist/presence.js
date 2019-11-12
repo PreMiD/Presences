@@ -94,6 +94,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 state: categoryTitle.textContent,
                 startTimestamp: Math.floor(Date.now() / 1000)
             });
+        } else if (page.includes("/dizi/tur") && categoryTitle && categoryTitle.textContent != "") {
+            presence.setActivity({
+                largeImageKey: "yd-logo",
+                details: "Bir kategoriye göz atıyor:",
+                state: categoryTitle.textContent,
+                startTimestamp: Math.floor(Date.now() / 1000)
+            });
         } else if (page.includes("/film-izle") && categoryTitle2 && categoryTitle2.textContent != "") {
             presence.setActivity({
                 largeImageKey: "yd-logo",
@@ -116,7 +123,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 startTimestamp: Math.floor(Date.now() / 1000)
             });
         } else if (pages[page] || pages[page.slice(0, -1)]) {
-            console.log("hello there")
             presence.setActivity({
                 largeImageKey: "yd-logo",
                 details: "Bir sayfaya göz atıyor:",
