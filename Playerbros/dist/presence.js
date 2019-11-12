@@ -84,6 +84,17 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             state: fixedTag || "Belirsiz",
             startTimestamp: Math.floor(Date.now() / 1000)
         });
+    } else if (document.location.search.includes("?s=")) {
+        const searchingFor = document.querySelector("#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"),
+            fixedSearch = searchingFor && searchingFor.textContent != "" ? searchingFor.textContent.split(" ")[searchingFor.textContent.split(" ").length - 1].replace(/"/g, "") : null;
+
+        presence.setActivity({
+            largeImageKey: "pb-logo",
+            details: "Bir şey arıyor:",
+            state: fixedSearch || "Belirsiz",
+            smallImageKey: "search",
+            startTimestamp: Math.floor(Date.now() / 1000)
+        });
     } else if (pages[page] || pages[page.slice(0, -1)]) {
         presence.setActivity({
             largeImageKey: "pb-logo",
