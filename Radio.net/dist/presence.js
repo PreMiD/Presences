@@ -86,6 +86,11 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
                 presenceData.details = 'Browsing through topics';
             }
             break;
+        case 'country':
+        case 'city':
+            browsingStamp = 0;
+            presenceData.details = `Browsing through ${document.getElementsByClassName('headline-large')['0'].innerText.split(' ')[0]} stations from ${document.getElementsByClassName('headline-large')['0'].innerText.split(' ').slice(1).join(' ')}`;
+            break;
         case 'local-stations':
             browsingStamp = 0;
             presenceData.details = 'Browsing through local stations';
@@ -95,13 +100,9 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = 'Browsing through top stations';
             break;
         default:
-            browsingStamp = 0;
-            if(path.length > 0) {
-                presenceData.details = 'Browsing';
-            } else {
-                presenceData.details = 'Home';
-            }
-            break;
+            presence.setTrayTitle('Radio.net');
+            presence.setActivity();
+            return;
     }
 
     presence.setActivity(presenceData);
