@@ -1,0 +1,21 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "ROCKRADIO.COM",
+    "description": {
+        "en": "100% Rock Internet Radio, streaming the most diverse variety of rock music online.",
+        "nl": "100% Rock Internet Radio, streaming van de meest uiteenlopende rockmuziek online."
+    },
+    "url": "www.rockradio.com",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/fEecbHy.png",
+    "thumbnail": "https://i.imgur.com/z9ZapJ5.png",
+    "color": "#fce53f",
+    "tags": [
+        "radio",
+        "rock"
+    ],
+    "category": "music"
+}

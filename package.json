@@ -4,7 +4,13 @@
   "author": "Timeraa",
   "license": "ISC",
   "devDependencies": {
+    "axios": "0.19.0",
+    "mongodb": "3.3.4",
+    "typescript": "3.7.2"
+  },
+  "dependencies": {
+    "@octokit/rest": "16.35.0",
     "@types/chrome": "0.0.91",
-    "typescript": "3.6.4"
+    "@types/mongodb": "3.3.10"
   }
 }
