@@ -135,7 +135,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             episode = document.querySelector("#router-view > div.bg-cover-faker > div.ui.grid.mt-0 > div > h1 > span");
 
         if (page.includes("/film") && movieTitle && movieTitle.textContent != "") {
-            const timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration))
+            const timestamps = getTimestamps(Math.floor(_video.currentTime), Math.floor(_video.duration))
 
             let data = {
                 largeImageKey: "yd-logo",
