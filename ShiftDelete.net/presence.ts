@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
             presence.setActivity({
                 largeImageKey: "sd-logo",
                 details: title.textContent || "Belirsiz",
-                state: `Yazar: ${author.textContent.replace("yazar", "")} (${time.textContent.replace("eklendi", "")})`,
+                state: `Yazar: ${author.textContent.replace("yazar", "")} (${time.textContent.trim().replace("eklendi", "")})`,
                 smallImageKey: "read",
                 smallImageText: "Bir gönderi okuyor...",
                 startTimestamp: Math.floor(Date.now() / 1000)
