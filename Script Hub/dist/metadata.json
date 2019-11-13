@@ -1,0 +1,18 @@
+{
+    "author": {
+        "name": "mon#0010",
+        "id": "608817245417898004"
+    },
+    "service": "Script Hub",
+    "description": {
+        "es": "Conjunto de guías para la programación de bots con Discord en Español.",
+        "en": "Set of guides to program bots with Discord in Spanish."
+    },
+    "url": "scripthubteam.github.io",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/daIkWaM.png",
+    "thumbnail": "https://i.imgur.com/kbOtjue.png",
+    "color": "#36393f",
+    "tags": ["BOTS", "DEVELOPMENT"],
+    "category": "other"
+}

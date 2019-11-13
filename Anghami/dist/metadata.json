@@ -1,0 +1,18 @@
+{
+  "author": {
+    "name": "DooMLorD",
+    "id": "465105167751315471"
+  },
+  "service": "Anghami",
+  "description": {
+    "en": "All the music you love, all the freedom you need. Arabic and International in one place",
+    "ar-SA": "كل الموسيقى التي تحبها ، كل الحرية التي تحتاجها. العربية والدولية في مكان واحد"
+  },
+  "url": "play.anghami.com",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/nYR7Rgy.jpg",
+  "thumbnail": "https://i.imgur.com/isSJhHt.png",
+  "color": "#d3369f",
+  "tags": ["subscription-based", "music", "region-restricted"],
+  "category": "music"
+}
