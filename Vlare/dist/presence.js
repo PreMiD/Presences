@@ -220,6 +220,15 @@ else if (document.location.pathname.includes("/analytics")) {
     };
 presence.setActivity(data)
 }
+else if (document.location.pathname.includes("/following") || document.location.pathname.includes("/following/")) {
+        
+    let data = {
+        details: "Viewing my follows",
+        largeImageKey: "logo",
+        startTimestamp: browsingStamp
+    };
+presence.setActivity(data)
+}
     else if (document.location.pathname.includes("/v/")) {
     if (video && !isNaN(video.duration)) {
         var title = document.getElementById("v_page_title").textContent;
