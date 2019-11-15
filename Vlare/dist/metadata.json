@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "fror",
+      "id": "515668127829458945"
+    },
+    "service": "Vlare",
+    "description": { 
+        "en" : "Vimeo is an ad-free video platform headquartered in New York City, providing free video viewing services as a competitor to YouTube. In 2007, Vimeo became the first video sharing site to support high-definition video."
+    },
+    "url": "vlare.tv",
+    "version": "1.0",
+    "logo": "https://menma.is-inside.me/ZgLDPB6q.png",
+    "thumbnail": "https://image.prntscr.com/image/Uj4OVYezSGqbjn6iTSkZpg.png",
+    "color": "#57b4fb",
+    "tags": [
+        "vlare",
+        "video",
+        "media"
+    ],
+    "category": "videos"
+  }
