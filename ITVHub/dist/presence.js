@@ -10,8 +10,6 @@ presence.on("UpdateData", () => {
 
     const path = document.location.pathname;
 
-    console.log(path);
-
     if(path === '/') {
         presenceData.details = "Browsing ITV Hub",
 		presenceData.state = "Home Page"
@@ -64,23 +62,25 @@ presence.on("UpdateData", () => {
             episode: document.getElementsByClassName('episode-info__episode-title')[0].textContent.trim()
         }
 
-        let video = document.getElementsByTagName('video')[0]
-        if(video.hasAttribute('autoplay')) {
+        let video = document.getElementsByTagName('video')[0];
+        if(!video.paused) {
             let timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
 
             presenceData.details = `Watching ${showDetails.name}`;
             presenceData.state = showDetails.episode;
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
+            presenceData.smallImageKey = 'play';
+            presenceData.smallImageText = 'Playing';
             presence.setActivity(presenceData);
-        };
-        
-
-        
-
-        console.log(showDetails);
+        } else {
+            presenceData.details = `Watching ${showDetails.name}`;
+            presenceData.state = showDetails.episode;
+            presenceData.smallImageKey = 'pause';
+            presenceData.smallImageText = 'Paused';
+            presence.setActivity(presenceData);
+        }
     }
-
 });
 
 function getTimestamps(videoTime, videoDuration) {
