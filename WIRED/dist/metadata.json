@@ -1,0 +1,17 @@
+{
+    "author": {
+        "name": "eaz",
+        "id": "234339792773578762"
+    },
+    "service": "WIRED",
+    "description": {
+        "en": "An American science and technology magazine and website."
+    },
+    "url": ["wired.com"],
+    "version": "1.0",
+    "logo": "https://i.imgur.com/zAxyOti.png",
+    "thumbnail": "https://i.imgur.com/zAxyOti.png",
+    "color": "#ffffff",
+    "tags": "news",
+    "category": "other"
+}
