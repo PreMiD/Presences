@@ -25,11 +25,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     };
     language = window.navigator.language;
     if (document.location.hostname == "app.plex.tv") {
-        if (document.URL == "https://app.plex.tv/" || document.URL == "https://app.plex.tv/desktop" || document.URL == "https://app.plex.tv/desktop#") {
-            presenceData.startTimestamp = browsingStamp;
-            presenceData.details = getTranslation("HomePage");
-        }
-        else if (document.querySelector("#plex > div:nth-child(7) > div > div > video") !== null || document.querySelector("#plex > div:nth-child(7) > div > div > audio") !== null) {
+        if (document.querySelector("#plex > div:nth-child(7) > div > div > video") !== null || document.querySelector("#plex > div:nth-child(7) > div > div > audio") !== null) {
             var currentTime, duration, paused, timestamps, video;
             video = document.querySelector("#plex > div:nth-child(7) > div > div > video") || document.querySelector("#plex > div:nth-child(7) > div > div > audio");
             currentTime = video.currentTime;
@@ -48,6 +44,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 delete presenceData.startTimestamp;
                 delete presenceData.endTimestamp;
             }
+        }
+        else if (document.URL == "https://app.plex.tv/" || document.URL == "https://app.plex.tv/desktop" || document.URL == "https://app.plex.tv/desktop#") {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = getTranslation("HomePage");
         }
         else if (document.URL.includes("/tv.plex.provider.webshows")) {
             presenceData.startTimestamp = browsingStamp;
