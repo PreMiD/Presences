@@ -28,10 +28,7 @@ presence.on("UpdateData", async () => {
   //Language list can be found here: https://api.premid.app/v2/langFile/list
 
   if (document.location.hostname == "app.plex.tv") {
-    if (document.URL == "https://app.plex.tv/" || document.URL == "https://app.plex.tv/desktop" || document.URL == "https://app.plex.tv/desktop#") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = getTranslation("HomePage");
-    } else if (document.querySelector("#plex > div:nth-child(7) > div > div > video") !== null || document.querySelector("#plex > div:nth-child(7) > div > div > audio") !== null){
+    if (document.querySelector("#plex > div:nth-child(7) > div > div > video") !== null || document.querySelector("#plex > div:nth-child(7) > div > div > audio") !== null) {
       var currentTime : any, duration : any, paused : any, timestamps : any, video : HTMLVideoElement;
       video = document.querySelector("#plex > div:nth-child(7) > div > div > video") || document.querySelector("#plex > div:nth-child(7) > div > div > audio");
       currentTime = video.currentTime;
@@ -51,6 +48,9 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
+    } else if (document.URL == "https://app.plex.tv/" || document.URL == "https://app.plex.tv/desktop" || document.URL == "https://app.plex.tv/desktop#") {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = getTranslation("HomePage");
     } else if (document.URL.includes("/tv.plex.provider.webshows")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("WebShows");
