@@ -52,8 +52,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "vtc.valtoxgaminggroup.com") {
     if (document.location.pathname.includes("/truckinglive")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "🌐 Viewing the trucking";
-      presenceData.state = "🌐 live tracker";
+      presenceData.details = "🌐 Viewing Live Tracker";
+      presenceData.state = "🌍 Tracking Info";
     }
   } else if (document.location.hostname == "hub.valtoxgaminggroup.com") {
     if (document.location.pathname.includes("/logbook")) {
