@@ -16,7 +16,7 @@ uvu.on("UpdateData", () => {
         presenceData.state = `Página ${path.split("?page=")[1] ? path.split("?page=")[1] : "1"}`;
         presenceData.startTimestamp = browsingStamp;
     }
-    else if (path[1] === "logros") {
+    else if (owo[1] === "logros") {
         presenceData.details = "Viendo la lista de logros";
         presenceData.startTimestamp = browsingStamp;
     }
