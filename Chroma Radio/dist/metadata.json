@@ -1,0 +1,20 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "Chroma Radio",
+    "description": {
+        "en": "We are a non-profit radio station, that busts the beats through your sound system into your preferred listening type. This is Chroma!"
+    },
+    "url": "chromaradio.pw",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/jyQ06HK.png",
+    "thumbnail": "https://i.imgur.com/FK2kW1L.png",
+    "color": "#ffffff",
+    "tags": [
+        "radio",
+        "music"
+    ],
+    "category": "music"
+}
