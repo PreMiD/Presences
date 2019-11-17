@@ -82,6 +82,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = getTranslation("Collection");
             presenceData.state = document.querySelector("#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span").textContent;
         }
+        else if (document.URL.includes("content.playlists") && document.querySelector("#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span") !== null) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = getTranslation("Playlist");
+            presenceData.state = document.querySelector("#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span").textContent;
+        }
     }
     if (presenceData.details == null) {
         presence.setTrayTitle();
@@ -179,6 +184,16 @@ function getTranslation(stringName) {
                     break;
                 default:
                     return "Viewing collection:";
+                    break;
+            }
+            break;
+        case "Playlist":
+            switch (language) {
+                case "nl":
+                    return "Bekijkt afspeellijst:";
+                    break;
+                default:
+                    return "Viewing playlist:";
                     break;
             }
             break;
