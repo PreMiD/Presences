@@ -323,6 +323,21 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
       
     presence.setActivity(presenceData); 
+  } else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/invite")) {
+
+    presenceData.details = "Viewing invite:";
+    apptitle = document.URL.split("/")[4]
+    if (apptitle.includes("?")) {
+      presenceData.state = apptitle.split("?")[0];
+    } else {
+      presenceData.state = document.URL.split("/")[4];
+    }
+
+    presenceData.state = "COMING SOON."; // Change this when presence settings is a thing.
+      
+    delete presenceData.smallImageKey;
+      
+    presence.setActivity(presenceData); 
   } else if (document.location.hostname == "status.discordapp.com") {
 
     presenceData.details = "Discord Status";
@@ -423,6 +438,14 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "discordapp.com") {
 
     presenceData.details = "Home page";
+    delete presenceData.state;
+      
+    delete presenceData.smallImageKey;
+      
+    presence.setActivity(presenceData); 
+  } else if (document.location.hostname == "discord.gg") {
+
+    presenceData.details = "Viewing an invite";
     delete presenceData.state;
       
     delete presenceData.smallImageKey;

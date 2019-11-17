@@ -1,0 +1,23 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "TruckStopRadio",
+    "description": {
+        "en": "We are a Radio Station based around the Euro Truck Simulator 2 & American Truck Simulator game and now Farming Simulator 19.",
+        "nl": "Wij zijn een radiostation gebaseerd op het spel Euro Truck Simulator 2 & American Truck Simulator en nu ook Farming Simulator 19."
+    },
+    "url": "truckstopradio.co.uk",
+    "version": "1.0.1",
+    "logo": "https://i.imgur.com/ZQwVDes.png",
+    "thumbnail": "https://i.imgur.com/yjTHssz.png",
+    "color": "#ff0000",
+    "tags": [
+        "radio",
+        "ets2",
+        "ats",
+        "farming"
+    ],
+    "category": "music"
+}

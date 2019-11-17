@@ -1,9 +1,8 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -21,7 +20,7 @@ var truncateAfter = function (str, pattern) {
 };
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var video = document.querySelector(".video-stream");
-    if (video !== null && !isNaN(video.duration)) {
+    if (video !== null && !isNaN(video.duration) && document.location.pathname.includes("/watch")) {
         var oldYouTube = null;
         var YouTubeTV = null;
         var YouTubeEmbed = null;
@@ -75,7 +74,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                     ? document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a")
                     : uploaderEmbed !== null && YouTubeEmbed && uploaderEmbed.innerText.length > 0
                         ? uploaderEmbed
-                        : uploaderTV = truncateAfter(uploaderTV.innerText, pattern), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), presenceData = {
+                        : uploaderTV = truncateAfter(uploaderTV.innerText, pattern), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), ads = Boolean(document.querySelector(".ytp-ad-player-overlay")), presenceData = {
             details: title.innerText,
             state: edited == true
                 ? uploaderMiniPlayer.getAttribute("premid-value")
@@ -99,13 +98,226 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 presenceData.smallImageText = (yield strings).live;
             }
         }
+        if (ads) {
+            presenceData.details = "Currently watching an ad";
+            delete presenceData.state;
+        }
         if (video && title !== null && uploader !== null) {
             presence.setActivity(presenceData, !video.paused);
         }
     }
-    else {
-        presence.setActivity();
-        presence.setTrayTitle();
+    else if (document.location.hostname == "www.youtube.com") {
+        let presenceData = {
+            largeImageKey: "yt_lg"
+        };
+        var search;
+        var user;
+        var browsingStamp = Math.floor(Date.now() / 1000);
+        if (document.location.pathname.includes("/results")) {
+            search = document.querySelector("#search-input > div > div:nth-child(2) > input");
+            if (search == null) {
+                search = document.querySelector("#search-input > input");
+            }
+            presenceData.details = "Searching for:";
+            presenceData.state = search.value;
+            presenceData.smallImageKey = "search";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/channel") || document.location.pathname.includes("/user")) {
+            user = document.querySelector(".ytd-channel-name").textContent.replace(/\s+/g, '');
+            if (document.location.pathname.includes("/videos")) {
+                presenceData.details = "Browsing through videos";
+                presenceData.state = "of channel: " + user;
+                presenceData.startTimestamp = browsingStamp;
+            }
+            else if (document.location.pathname.includes("/playlists")) {
+                presenceData.details = "Browsing through playlists";
+                presenceData.state = "of channel: " + user;
+                presenceData.startTimestamp = browsingStamp;
+            }
+            else if (document.location.pathname.includes("/community")) {
+                presenceData.details = "Viewing community posts";
+                presenceData.state = "of channel: " + user;
+                presenceData.startTimestamp = browsingStamp;
+            }
+            else if (document.location.pathname.includes("/about")) {
+                presenceData.details = "Reading about channel:";
+                presenceData.state = user;
+                presenceData.smallImageKey = "reading";
+                presenceData.startTimestamp = browsingStamp;
+            }
+            else if (document.location.pathname.includes("/search")) {
+                search = document.URL.split("search?query=")[1];
+                presenceData.details = "Searching through channel: " + user;
+                presenceData.state = "for: " + search;
+                presenceData.smallImageKey = "search";
+                presenceData.startTimestamp = browsingStamp;
+            }
+            else {
+                presenceData.details = "Viewing channel:";
+                presenceData.state = user;
+                presenceData.startTimestamp = browsingStamp;
+            }
+        }
+        else if (document.location.pathname.includes("/feed/trending")) {
+            title = document.querySelector("#title");
+            if (title !== null) {
+                presenceData.details = "Viewing trending " + title.innerText;
+                presenceData.startTimestamp = browsingStamp;
+            }
+            else {
+                presenceData.details = "Viewing what's trending";
+                presenceData.startTimestamp = browsingStamp;
+            }
+        }
+        else if (document.location.pathname.includes("/feed/subscriptions")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "their subscriptions";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/feed/library")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "their library";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/feed/history")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "their history";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/feed/purchases")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "their purchases";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/playlist")) {
+            presenceData.details = "Viewing playlist:";
+            title = document.querySelector("#text-displayed");
+            if (title == null) {
+                title = document.querySelector("#title > yt-formatted-string > a");
+            }
+            presenceData.state = title.innerText;
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/premium")) {
+            presenceData.details = "Reading about";
+            presenceData.state = "Youtube Premium";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/gaming")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "Youtube Gaming";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/account")) {
+            presenceData.details = "Viewing their account";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/reporthistory")) {
+            presenceData.details = "Viewing their report history";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/intl")) {
+            presenceData.details = "Reading about:";
+            title = document.querySelector("head > title");
+            presenceData.state = title.innerText.replace(" - YouTube", "");
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.URL == "https://www.youtube.com/") {
+            presenceData.details = "Browsing the main page...";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/upload")) {
+            presenceData.details = "Uploading something...";
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.smallImageKey = "writing";
+        }
+        else if (document.location.pathname.includes("/view_all_playlists")) {
+            presenceData.details = "Viewing all their playlists";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/my_live_events")) {
+            presenceData.details = "Viewing their live events";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/live_dashboard")) {
+            presenceData.details = "Viewing their live dashboard";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/audiolibrary")) {
+            presenceData.details = "Viewing the audio library";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        if (presenceData.details == null) {
+            presence.setTrayTitle();
+            presence.setActivity();
+        }
+        else {
+            presence.setActivity(presenceData);
+        }
+    }
+    else if (document.location.hostname == "studio.youtube.com") {
+        let presenceData = {
+            largeImageKey: "yt_lg",
+            smallImageKey: "studio",
+            smallImageText: "Youtube Studio"
+        };
+        var search;
+        var user;
+        var browsingStamp = Math.floor(Date.now() / 1000);
+        if (document.location.pathname.includes("/videos")) {
+            presenceData.details = "Viewing their videos";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/video")) {
+            title = document.querySelector("#entity-name");
+            presenceData.startTimestamp = browsingStamp;
+            if (document.location.pathname.includes("/edit")) {
+                presenceData.details = "Editing video:";
+                presenceData.state = title.innerText;
+            }
+            else if (document.location.pathname.includes("/analytics")) {
+                presenceData.details = "Viewing analytics of video:";
+                presenceData.state = title.innerText;
+            }
+            else if (document.location.pathname.includes("/comments")) {
+                presenceData.details = "Viewing comments of video:";
+                presenceData.state = title.innerText;
+            }
+            else if (document.location.pathname.includes("/translations")) {
+                presenceData.details = "Viewing translations of video:";
+                presenceData.state = title.innerText;
+            }
+        }
+        else if (document.location.pathname.includes("/analytics")) {
+            presenceData.details = "Viewing their";
+            presenceData.state = "channel analytics";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/comments")) {
+            presenceData.details = "Viewing their";
+            presenceData.state = "channel comments";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/translations")) {
+            presenceData.details = "Viewing their";
+            presenceData.state = "channel translations";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        else if (document.location.pathname.includes("/channel")) {
+            presenceData.details = "Viewing their dashboard";
+            presenceData.startTimestamp = browsingStamp;
+        }
+        if (presenceData.details == null) {
+            presence.setTrayTitle();
+            presence.setActivity();
+        }
+        else {
+            presence.setActivity(presenceData);
+        }
     }
 }));
 presence.on("MediaKeys", (key) => {
@@ -127,4 +339,3 @@ function getTimestamps(videoTime, videoDuration) {
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxJQUFJLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUN4QixRQUFRLEVBQUUsb0JBQW9CO0lBQzlCLFNBQVMsRUFBRSxJQUFJO0NBQ2hCLENBQUMsRUFDRixPQUFPLEdBQUcsUUFBUSxDQUFDLFVBQVUsQ0FBQztJQUM1QixJQUFJLEVBQUUsMkJBQTJCO0lBQ2pDLEtBQUssRUFBRSwwQkFBMEI7SUFDakMsSUFBSSxFQUFFLHdCQUF3QjtDQUMvQixDQUFDLENBQUM7QUFFTCxJQUFJLE9BQU8sR0FBRyxHQUFHLENBQUM7QUFDbEIsSUFBSSxhQUFhLEdBQUcsVUFBVSxHQUFHLEVBQUUsT0FBTztJQUN4QyxPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLEdBQUcsQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQztBQUM1QyxDQUFDLENBQUE7QUFFRCxRQUFRLENBQUMsRUFBRSxDQUFDLFlBQVksRUFBRSxHQUFTLEVBQUU7SUFFbkMsSUFBSSxLQUFLLEdBQXFCLFFBQVEsQ0FBQyxhQUFhLENBQUMsZUFBZSxDQUFDLENBQUM7SUFDdEUsSUFBSSxLQUFLLEtBQUssSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsRUFBRTtRQUU1QyxJQUFJLFVBQVUsR0FBWSxJQUFJLENBQUM7UUFDL0IsSUFBSSxTQUFTLEdBQVksSUFBSSxDQUFDO1FBQzlCLElBQUksWUFBWSxHQUFZLElBQUksQ0FBQztRQUNqQyxJQUFJLEtBQUssQ0FBQztRQUdWLFFBQVEsQ0FBQyxhQUFhLENBQUMsY0FBYyxDQUFDLEtBQUssSUFBSTtZQUM3QyxDQUFDLENBQUMsQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDO1lBQ3JCLENBQUMsQ0FBQyxDQUFDLFVBQVUsR0FBRyxLQUFLLENBQUMsQ0FBQztRQUV6QixRQUFRLENBQUMsYUFBYSxDQUFDLHFCQUFxQixDQUFDLEtBQUssSUFBSTtZQUNwRCxDQUFDLENBQUMsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO1lBQ3BCLENBQUMsQ0FBQyxDQUFDLFNBQVMsR0FBRyxLQUFLLENBQUMsQ0FBQTtRQUV2QixRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDO1lBQzNDLENBQUMsQ0FBQyxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUM7WUFDdkIsQ0FBQyxDQUFDLENBQUMsWUFBWSxHQUFHLEtBQUssQ0FBQyxDQUFBO1FBRzFCLElBQUksQ0FBQyxVQUFVLElBQUksQ0FBQyxTQUFTLEVBQUU7WUFDN0IsSUFBRyxZQUFZLEVBQUU7Z0JBQ2YsS0FBSyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsd0JBQXdCLENBQUMsQ0FBQzthQUMxRDtpQkFDSTtnQkFDSCxLQUFLO29CQUNILFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxLQUFLLFFBQVE7d0JBQ3JDLENBQUMsQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLHdCQUF3QixDQUFDO3dCQUNsRCxDQUFDLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyx3REFBd0QsQ0FBQyxDQUFDO2FBQ3hGO1NBQ0Y7YUFBTTtZQUNMLElBQUcsVUFBVSxFQUFFO2dCQUNiLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLElBQUksUUFBUTtvQkFDeEMsS0FBSyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsY0FBYyxDQUFDLENBQUM7YUFDbEQ7aUJBQU0sSUFBRyxTQUFTLEVBQUU7Z0JBQ25CLEtBQUssR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLHFCQUFxQixDQUFDLENBQUM7YUFDdkQ7U0FDRjtRQUVELElBQUksVUFBZ0IsRUFBRSxrQkFBd0IsRUFBRSxTQUFlLEVBQUUsTUFBZ0IsRUFBRSxhQUFtQixDQUFDO1FBRXZHLE1BQU0sR0FBRyxLQUFLLENBQUM7UUFFZixVQUFVLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDO1FBRTdELGFBQWEsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLHlDQUF5QyxDQUFDLENBQUM7UUFFbEYsa0JBQWtCLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxnQ0FBZ0MsQ0FBQyxDQUFDO1FBRTlFLElBQUcsa0JBQWtCLEtBQUssSUFBSSxFQUFFO1lBRTlCLElBQUcsa0JBQWtCLENBQUMsU0FBUyxJQUFJLFNBQVMsRUFBRTtnQkFFNUMsTUFBTSxHQUFHLElBQUksQ0FBQztnQkFFZCxrQkFBa0IsQ0FBQyxZQUFZLENBQUMsY0FBYyxFQUFFLHlCQUF5QixDQUFDLENBQUM7YUFFNUU7U0FFRjtRQUNELFNBQVMsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLGVBQWUsQ0FBQyxDQUFDO1FBRXBELElBQUksUUFBUSxHQUNWLGtCQUFrQixLQUFLLElBQUksSUFBSSxrQkFBa0IsQ0FBQyxTQUFTLENBQUMsTUFBTSxHQUFHLENBQUM7WUFDbEUsQ0FBQyxDQUFDLGtCQUFrQjtZQUNwQixDQUFDLENBQUMsU0FBUyxLQUFLLElBQUksSUFBSSxTQUFTLENBQUMsU0FBUyxDQUFDLE1BQU0sR0FBRyxDQUFDO2dCQUNwRCxDQUFDLENBQUMsU0FBUztnQkFDWCxDQUFDLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxxREFBcUQsQ0FBQyxLQUFLLElBQUk7b0JBQ3RGLENBQUMsQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLHFEQUFxRCxDQUFDO29CQUMvRSxDQUFDLENBQUMsYUFBYSxLQUFLLElBQUksSUFBSSxZQUFZLElBQUksYUFBYSxDQUFDLFNBQVMsQ0FBQyxNQUFNLEdBQUcsQ0FBQzt3QkFDNUUsQ0FBQyxDQUFDLGFBQWE7d0JBQ2IsQ0FBQyxDQUFDLFVBQVUsR0FBRyxhQUFhLENBQUMsVUFBVSxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUMsRUFDdkUsVUFBVSxHQUFHLGFBQWEsQ0FDeEIsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsV0FBVyxDQUFDLEVBQzdCLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxDQUMzQixFQUNELElBQUksR0FBRyxPQUFPLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxXQUFXLENBQUMsQ0FBQyxFQUNuRCxZQUFZLEdBQWlCO1lBQzNCLE9BQU8sRUFBRSxLQUFLLENBQUMsU0FBUztZQUN4QixLQUFLLEVBQUUsTUFBTSxJQUFJLElBQUk7Z0JBQ3JCLENBQUMsQ0FBQyxrQkFBa0IsQ0FBQyxZQUFZLENBQUMsY0FBYyxDQUFDO2dCQUNqRCxDQUFDLENBQUMsVUFBVSxLQUFLLElBQUk7b0JBQ25CLENBQUMsQ0FBQyxVQUFVO29CQUNaLENBQUMsQ0FBQyxRQUFRLENBQUMsU0FBUztZQUN0QixhQUFhLEVBQUUsT0FBTztZQUN0QixhQUFhLEVBQUUsS0FBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxNQUFNO1lBQzlDLGNBQWMsRUFBRSxLQUFLLENBQUMsTUFBTTtnQkFDMUIsQ0FBQyxDQUFDLENBQUMsTUFBTSxPQUFPLENBQUMsQ0FBQyxLQUFLO2dCQUN2QixDQUFDLENBQUMsQ0FBQyxNQUFNLE9BQU8sQ0FBQyxDQUFDLElBQUk7WUFDeEIsY0FBYyxFQUFFLFVBQVUsQ0FBQyxDQUFDLENBQUM7WUFDN0IsWUFBWSxFQUFFLFVBQVUsQ0FBQyxDQUFDLENBQUM7U0FDNUIsQ0FBQztRQUVKLFFBQVEsQ0FBQyxZQUFZLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLENBQUM7UUFHM0QsSUFBSSxLQUFLLENBQUMsTUFBTSxJQUFJLElBQUksRUFBRTtZQUN4QixPQUFPLFlBQVksQ0FBQyxjQUFjLENBQUM7WUFDbkMsT0FBTyxZQUFZLENBQUMsWUFBWSxDQUFDO1lBRWpDLElBQUksSUFBSSxFQUFFO2dCQUNSLFlBQVksQ0FBQyxhQUFhLEdBQUcsTUFBTSxDQUFDO2dCQUNwQyxZQUFZLENBQUMsY0FBYyxHQUFHLENBQUMsTUFBTSxPQUFPLENBQUMsQ0FBQyxJQUFJLENBQUM7YUFDcEQ7U0FDRjtRQUdELElBQUksS0FBSyxJQUFJLEtBQUssS0FBSyxJQUFJLElBQUksUUFBUSxLQUFLLElBQUksRUFBRTtZQUNoRCxRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksRUFBRSxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsQ0FBQztTQUNuRDtLQUNGO1NBQU07UUFDTCxRQUFRLENBQUMsV0FBVyxFQUFFLENBQUM7UUFDdkIsUUFBUSxDQUFDLFlBQVksRUFBRSxDQUFDO0tBQ3pCO0FBQ0gsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUVILFFBQVEsQ0FBQyxFQUFFLENBQUMsV0FBVyxFQUFFLENBQUMsR0FBVyxFQUFFLEVBQUU7SUFDdkMsUUFBUSxHQUFHLEVBQUU7UUFDWCxLQUFLLE9BQU87WUFDVixJQUFJLEtBQUssR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLGVBQWUsQ0FBcUIsQ0FBQztZQUN4RSxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxLQUFLLEVBQUUsQ0FBQztZQUM1QyxNQUFNO1FBQ1IsS0FBSyxXQUFXO1lBQ2IsUUFBUSxDQUFDLGFBQWEsQ0FBQyxrQkFBa0IsQ0FBdUIsQ0FBQyxLQUFLLEVBQUUsQ0FBQztZQUMxRSxNQUFNO1FBQ1IsS0FBSyxlQUFlO1lBQ2pCLFFBQVEsQ0FBQyxhQUFhLENBQUMsa0JBQWtCLENBQXVCLENBQUMsS0FBSyxFQUFFLENBQUM7WUFDMUUsTUFBTTtLQUNUO0FBQ0gsQ0FBQyxDQUFDLENBQUM7QUFPSCxTQUFTLGFBQWEsQ0FBQyxTQUFpQixFQUFFLGFBQXFCO0lBQzdELElBQUksU0FBUyxHQUFHLElBQUksQ0FBQyxHQUFHLEVBQUUsQ0FBQztJQUMzQixJQUFJLE9BQU8sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsR0FBRyxTQUFTLEdBQUcsYUFBYSxDQUFDO0lBQ3ZFLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsRUFBRSxPQUFPLENBQUMsQ0FBQztBQUNqRCxDQUFDIn0=

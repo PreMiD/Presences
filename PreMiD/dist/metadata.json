@@ -11,17 +11,21 @@
     {
       "name": "TheDrop.",
       "id": "293828021134295040"
+    },
+    {
+      "name": "EGGSY",
+      "id": "162969778699501569"
     }
   ],
   "service": "PreMiD",
   "description": {
     "en": "PreMiD adds Discord Rich Presence support to a lot of services you use and love.",
     "de": "PreMiD ergänzt viele Dienste, die du nutzt und liebst, um die Unterstützung von Discord Rich Presence.",
-    "fr": "PreMiD ajoute le support de Discord Rich Presence à de nombreux services que vous utilisez et aimez."
+    "fr": "PreMiD ajoute le support de Discord Rich Presence à de nombreux services que vous utilisez et aimez.",
+    "tr": "PreMiD, kullandığınız internet servisleri için Discord profilinize Rich Presence bilgisi ekler."
   },
-  "url": "premid.app",
-  "regExp": "premid.app",
-  "version": "2.0.2",
+  "url": ["premid.app", "docs.premid.app"],
+  "version": "2.0.5",
   "logo": "https://crugg.de/premid/premid2.png",
   "thumbnail": "https://crugg.de/premid/premid3.png",
   "color": "#7289DA",

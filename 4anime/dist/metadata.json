@@ -1,0 +1,25 @@
+{
+    "author": {
+        "name": "safan41",
+        "id": "323284856610095104"
+    },
+    "service": "4anime",
+    "description": {
+        "en": "Watch anime online in high 1080p quality with english subtitles. Just sit back and relax!",
+        "ro": "Urmăriţi animeul online de înaltă calitate 1080p cu subtitrare în engleză. Stai jos şi relaxează-te!",
+        "pt_BR": "Assistir anime online em alta qualidade 1080p com legendas em inglês. Apenas sente-se e relaxe!",
+        "fr": "Visionnez des animes en ligne en haute qualité 1080p avec sous-titres anglais. Asseyez-vous et détendez-vous!",
+        "uk": "Дивитися аніме онлайн у високій якості 1080p з англійськими субтитрами. Сідайте і відпочивайте!",
+        "nl": "Bekijk anime online in hoge kwaliteit 1080p met Engelse ondertitels. Ga zitten en ontspan!"
+    },
+    "url": "4anime.to",
+    "version": "1.0",
+    "logo": "https://4anime.to/static/logo.png",
+    "thumbnail": "https://i.imgur.com/Tcf3IMX.png",
+    "color": "#ff0808",
+    "tags": [
+        "video",
+        "anime"
+    ],
+    "category": "anime"
+}

@@ -26,8 +26,14 @@ presence.on("UpdateData", async () => {
 
             if (showCheck) {
                 var season = document.querySelector(".video-title span").textContent;
-                var episode = document.querySelector(".video-title span:nth-child(3)").textContent;
-                data.state = season + " " + episode
+                var episodeName;
+                try {
+                    episodeName = document.querySelector(".video-title span:nth-child(3)").textContent;
+                    data.state = season + " " + episodeName
+                } catch {
+                    episodeName = document.querySelector(".video-title span").textContent;
+                    data.state = episodeName
+                }
             } else {
                 data.state = "Movie"
             }
@@ -42,7 +48,7 @@ presence.on("UpdateData", async () => {
                 delete data.endTimestamp;
             }
     
-            if (title !== null && season !== null && episode !== null) {
+            if (title !== null && season !== null && episodeName !== null) {
                 presence.setActivity(data, !video.paused);
             }
         }
