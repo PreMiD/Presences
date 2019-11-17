@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
 
 
   let presenceData: presenceData = {
-    largeImageKey: "chroma"
+    largeImageKey: "chroma2"
   };
 
   presenceData.startTimestamp = browsingStamp;
