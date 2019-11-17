@@ -1,10 +1,6 @@
 const presence = new Presence({
     clientId: '645051733961211934',
     mediaKeys: false
-}),
-strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
 });
 
 var elapsed, oldURL;
@@ -36,7 +32,6 @@ presence.on("UpdateData", async() => {
     if(document.location.pathname.includes("/video/watch/")) {
         details = "Watching: ";
         state = title.replace(" | WIRED Video | CNE", "");
-        
     }
 
     if(document.location.pathname.includes("/author/") || document.location.pathname.includes("/category/") || document.location.pathname.includes("/coupons") || document.location.pathname.includes("/subscribe/") || document.location.pathname.includes("/wired-advertising/") || document.location.pathname.includes("/sitemap/") || document.location.pathname.includes("/about/") || document.location.pathname.includes("/securedrop/") || document.location.pathname.includes("/newsletter")) {
@@ -47,9 +42,9 @@ presence.on("UpdateData", async() => {
     var data: presenceData = {
         details: details,
         state: state,
-        largeImageKey: "WIRED",
+        largeImageKey: "wired",
         startTimestamp: elapsed,
     };
-    
+
     presence.setActivity(data);
 });
