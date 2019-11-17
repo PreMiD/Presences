@@ -7,11 +7,14 @@
     "description": {
         "en": "An American science and technology magazine and website."
     },
-    "url": ["wired.com"],
+    "url": ["www.wired.com"],
     "version": "1.0",
     "logo": "https://i.imgur.com/zAxyOti.png",
     "thumbnail": "https://i.imgur.com/zAxyOti.png",
     "color": "#ffffff",
-    "tags": "news",
+    "tags": [
+        "news",
+        "articles"
+    ],
     "category": "other"
 }
