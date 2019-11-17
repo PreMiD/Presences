@@ -311,6 +311,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Viewing their dashboard";
             presenceData.startTimestamp = browsingStamp;
         }
+        else if (document.location.pathname.includes("/artist")) {
+            presenceData.details = "Viewing their";
+            presenceData.state = "artist page";
+            presenceData.startTimestamp = browsingStamp;
+        }
         if (presenceData.details == null) {
             presence.setTrayTitle();
             presence.setActivity();
