@@ -13,7 +13,7 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
-        largeImageKey: "chroma"
+        largeImageKey: "chroma2"
     };
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Listening to Chroma";

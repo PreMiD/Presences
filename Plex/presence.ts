@@ -73,6 +73,14 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Library");
       presenceData.state = document.querySelector("#content > div > div > div:nth-child(2) > div > div > div > a > div").textContent;
+    } else if (document.URL.includes("content.collections")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = getTranslation("Collection");
+      presenceData.state = document.querySelector("#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span").textContent;
+    } else if (document.URL.includes("content.playlists") && document.querySelector("#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span") !== null) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = getTranslation("Playlist");
+      presenceData.state = document.querySelector("#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span").textContent;
     }
   }
 
@@ -121,7 +129,10 @@ function getTranslation(stringName: String) {
       switch (language) {
         case "nl":
           return "Bekijkt de startpagina";
-          break;
+        break;
+        case "de":
+          return "Ist auf der Startseite";
+        break;  
         default:
           return "Viewing home page";  
           break;
@@ -131,6 +142,9 @@ function getTranslation(stringName: String) {
       switch (language) {
         case "nl":
           return "Bladeren door het niews";
+        break;
+        case "de":
+          return "Sieht sich News an";
         break;
         default:
           return "Browsing news";
@@ -142,6 +156,9 @@ function getTranslation(stringName: String) {
         case "nl":
           return "Bladeren door alle shows";
         break;
+        case "de":
+          return "Sieht sich Shows an";
+        break;
         default:
           return "Browsing shows";
         break;  
@@ -151,6 +168,9 @@ function getTranslation(stringName: String) {
       switch (language) {
         case "nl":
           return "Bladeren door podcasts";
+        break;
+        case "de":
+          return "Sieht sich Podcasts an";
         break;
         default:
           return "Browsing podcasts";
@@ -162,6 +182,9 @@ function getTranslation(stringName: String) {
         case "nl":
           return "Bladeren door muziek";
         break;
+        case "de":
+          return "Sieht sich Musik an";
+        break;
         default:
           return "Browsing music";
         break;  
@@ -171,6 +194,9 @@ function getTranslation(stringName: String) {
       switch (language) {
         case "nl":
           return "Zoekt naar:";
+        break;
+        case "de":
+          return "Sucht nach:";
         break;
         default:
           return "Searching for:";
@@ -182,8 +208,37 @@ function getTranslation(stringName: String) {
         case "nl":
           return "Bekijkt bibliotheek:";
         break;
+        case "de":
+          return "Ist in der Bibliothek:";
+        break;
         default:
           return "Viewing library:";
+        break;  
+      }
+    break;
+    case "Collection":
+      switch (language) {
+        case "nl":
+          return "Bekijkt collectie:";
+        break;
+        case "de":
+          return "Ist in der Kollektion";
+        break;
+        default:
+          return "Viewing collection:";
+        break;  
+      }
+    break;
+    case "Playlist":
+      switch (language) {
+        case "nl":
+          return "Bekijkt afspeellijst:";
+        break;
+        case "de":
+          return "Ist in der Playlist";
+        break;
+        default:
+          return "Viewing playlist:";
         break;  
       }
     break;
