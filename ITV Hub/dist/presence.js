@@ -15,28 +15,34 @@ presence.on("UpdateData", () => {
 		presenceData.state = "Home Page"
 		presence.setActivity(presenceData);
     } else if(path === '/hub/itv') {
-        presenceData.details = "Watching live",
-		presenceData.state = "Channel: ITV"
-		presence.setActivity(presenceData);
+        let show = document.getElementsByClassName('schedule__title--now')[0].innerHTML;
+        presenceData.details = "Watching ITV live",
+		presenceData.state = show;
+        presence.setActivity(presenceData);
     } else if(path === '/hub/itv2') {
-        presenceData.details = "Watching live",
-		presenceData.state = "Channel: ITV2"
+        let show = document.getElementsByClassName('schedule__title--now')[0].innerHTML;
+        presenceData.details = "Watching ITV2 live",
+		presenceData.state = show;
 		presence.setActivity(presenceData);
     } else if(path === '/hub/itvbe') {
-        presenceData.details = "Watching live",
-		presenceData.state = "Channel: ITVBe"
+        let show = document.getElementsByClassName('schedule__title--now')[0].innerHTML;
+        presenceData.details = "Watching ITVBe live",
+		presenceData.state = show;
 		presence.setActivity(presenceData);
     } else if(path === '/hub/itv3') {
-        presenceData.details = "Watching live",
-		presenceData.state = "Channel: ITV3"
+        let show = document.getElementsByClassName('schedule__title--now')[0].innerHTML;
+        presenceData.details = "Watching ITV3 live",
+		presenceData.state = show;
 		presence.setActivity(presenceData);
     } else if(path === '/hub/itv4') {
-        presenceData.details = "Watching live",
-		presenceData.state = "Channel: ITV4"
+        let show = document.getElementsByClassName('schedule__title--now')[0].innerHTML;
+        presenceData.details = "Watching ITV4 live",
+		presenceData.state = show;
 		presence.setActivity(presenceData);
     } else if(path === '/hub/citv') {
-        presenceData.details = "Watching live",
-		presenceData.state = "Channel: CITV"
+        let show = document.getElementsByClassName('schedule__title--now')[0].innerHTML;
+        presenceData.details = "Watching CITV live",
+		presenceData.state = show;
 		presence.setActivity(presenceData);
     } else if(path === '/hub/tv-guide') {
         presenceData.details = "Browsing ITV",
