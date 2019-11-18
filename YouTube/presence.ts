@@ -16,7 +16,7 @@ var truncateAfter = function (str, pattern) {
 presence.on("UpdateData", async () => {
   //* If user is on /watch?v=...
   var video: HTMLVideoElement = document.querySelector(".video-stream");
-  if (video !== null && !isNaN(video.duration) && document.location.pathname.includes("/watch")) {
+  if (video !== null && !isNaN(video.duration)) {
     //* Get required tags
     var oldYouTube: boolean = null;
     var YouTubeTV: boolean = null;
@@ -123,13 +123,19 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).live;
       }
     }
-      
+    if (uploader == null && document.querySelector(".style-scope.ytd-channel-name > a") !== null) { // fixes issue with movies
+      uploader = document.querySelector(".style-scope.ytd-channel-name > a");
+      presenceData.state = uploader.textContent;
+    }
+    if (title == null && document.querySelector(".title.style-scope.ytd-video-primary-info-renderer") !== null) {
+      title = document.querySelector(".title.style-scope.ytd-video-primary-info-renderer");
+      presenceData.details = title.textContent;
+    }   
     //* Update title to indicate when an ad is being played
     if (ads) {
       presenceData.details = "Currently watching an ad";
       delete presenceData.state;
     }
-
     //* If tags are not "null"
     if (video && title !== null && uploader !== null) {
       presence.setActivity(presenceData, !video.paused);

@@ -20,7 +20,7 @@ var truncateAfter = function (str, pattern) {
 };
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var video = document.querySelector(".video-stream");
-    if (video !== null && !isNaN(video.duration) && document.location.pathname.includes("/watch")) {
+    if (video !== null && !isNaN(video.duration)) {
         var oldYouTube = null;
         var YouTubeTV = null;
         var YouTubeEmbed = null;
@@ -97,6 +97,14 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 presenceData.smallImageKey = "live";
                 presenceData.smallImageText = (yield strings).live;
             }
+        }
+        if (uploader == null && document.querySelector(".style-scope.ytd-channel-name > a") !== null) {
+            uploader = document.querySelector(".style-scope.ytd-channel-name > a");
+            presenceData.state = uploader.textContent;
+        }
+        if (title == null && document.querySelector(".title.style-scope.ytd-video-primary-info-renderer") !== null) {
+            title = document.querySelector(".title.style-scope.ytd-video-primary-info-renderer");
+            presenceData.details = title.textContent;
         }
         if (ads) {
             presenceData.details = "Currently watching an ad";
