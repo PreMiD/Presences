@@ -28,6 +28,60 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
         }
       }
+    } else if(document.location.pathname.startsWith("/game")) {
+    gName = document.querySelector("h1.dynamicTitle")
+    if (gName.innerText == "GBAtemp Game Center Home") {
+      let presenceData: presenceData = {
+        details: "Browsing...",
+        largeImageKey: "tempy",
+        startTimestamp: timeElapsed
+      };
+      presence.setActivity(presenceData);
+    } else {
+      let presenceData: presenceData = {
+        details: "Reading about a game",
+        state: gName.innerText,
+        largeImageKey: "tempy",
+        startTimestamp: timeElapsed
+      };
+      presence.setActivity(presenceData);
+    }
+    } else if(document.location.pathname.startsWith("/platform")) {
+    pName = document.querySelector("h1.dynamicTitle")
+    if (pName.innerText == "Game Center Platform List") {
+      let presenceData: presenceData = {
+        details: "Browsing...",
+        largeImageKey: "tempy",
+        startTimestamp: timeElapsed
+      };
+      presence.setActivity(presenceData);
+    } else {
+      let presenceData: presenceData = {
+        details: "Reading about a platform",
+        state: pName.innerText,
+        largeImageKey: "tempy",
+        startTimestamp: timeElapsed
+      };
+      presence.setActivity(presenceData);
+    }
+    } else if(document.location.pathname.startsWith("/company")) {
+    cName = document.querySelector("h1.dynamicTitle")
+    if (cName.innerText == "List of video game companies") {
+      let presenceData: presenceData = {
+        details: "Browsing...",
+        largeImageKey: "tempy",
+        startTimestamp: timeElapsed
+      };
+      presence.setActivity(presenceData);
+    } else {
+      let presenceData: presenceData = {
+        details: "Reading about a company",
+        state: cName.innerText,
+        largeImageKey: "tempy",
+        startTimestamp: timeElapsed
+      };
+      presence.setActivity(presenceData);
+    }
     } else if(document.location.pathname.startsWith("/questions")) {
     threadName = document.querySelector("h1.blueHeader")
     let presenceData: presenceData = {
