@@ -160,7 +160,6 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/channel") || document.location.pathname.includes("/user")) {
       user = document.querySelector(".ytd-channel-name").textContent.replace(/\s+/g, '');
-      console.log("." + user + ".");
       if (user == "" || user == "‌") {
         user = "null";
       }
