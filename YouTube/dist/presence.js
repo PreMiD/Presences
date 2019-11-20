@@ -168,15 +168,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
         }
         else if (document.location.pathname.includes("/feed/trending")) {
-            title = document.querySelector("#title");
-            if (title !== null) {
-                presenceData.details = "Viewing trending " + title.innerText;
-                presenceData.startTimestamp = browsingStamp;
-            }
-            else {
-                presenceData.details = "Viewing what's trending";
-                presenceData.startTimestamp = browsingStamp;
-            }
+            presenceData.details = "Viewing what's trending";
+            presenceData.startTimestamp = browsingStamp;
         }
         else if (document.location.pathname.includes("/feed/subscriptions")) {
             presenceData.details = "Browsing through";
