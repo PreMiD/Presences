@@ -46,6 +46,15 @@ presence.on("UpdateData", () => async () => {
             startTimestamp: Math.floor(Date.now() / 1000),
             smallImageKey: "search"
         });
+    } else if (page.includes("/category/")) {
+        const categoryName = document.querySelector("body > div.wrapper > div.container.st > div > div.top_right_arsiv > h5");
+
+        presence.setActivity({
+            largeImageKey: "wh-logo",
+            details: "Bir kategoriye göz atıyor:",
+            state: categoryName && categoryName.textContent != "" ? categoryName.textContent.replace("Dizileri", "") : "Bilinmeyen",
+            startTimestamp: Math.floor(Date.now() / 1000)
+        });
     } else if (page.includes("/movie/") && video) {
         const title = document.querySelector("body > div.wrapper > div:nth-child(4) > div > div:nth-child(1) > div.col-md-9 > h2"),
             IMDb = document.querySelector("body > div.wrapper > div:nth-child(4) > div > div:nth-child(3) > div:nth-child(1) > button > span"),
