@@ -29,8 +29,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         user = document.querySelector("#artist > p > span");
         dj = document.querySelector("#dj > p");
         listeners = document.querySelector("#listeners > span");
-        presenceData.details = title.innerText + " by: " + user.innerText;
-        presenceData.state = "DJ: " + dj.innerText + " Listeners: " + listeners.innerText;
+        presenceData.details = user.innerText + " - " + title.innerText;
+        presenceData.state = "DJ: " + dj.innerText + " / Listeners: " + listeners.innerText;
         presenceData.smallImageKey = "play";
     }
     else if (document.location.pathname.includes("/staff")) {
