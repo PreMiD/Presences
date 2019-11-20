@@ -8,8 +8,7 @@
         "en": "Buy many products with 80% discount.",
         "de": "Kaufe viele Produkte mit 80% Rabatt."
     },
-    "url": ["www.wish.com"
-    ],
+    "url": "www.wish.com",
     "version": "1.0",
     "logo": "https://i.imgur.com/XsZ2IOn.jpg",
     "thumbnail": "https://i.imgur.com/R7AkWiP.png",
