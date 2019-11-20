@@ -100,6 +100,25 @@ presence.on("UpdateData", () => async () => {
             state: actorName.textContent,
             startTimestamp: Math.floor(Date.now() / 1000)
         });
+    } else if (!isVideoData && page.includes("/forum")) {
+        const postTitle = document.querySelector("#container > div.content > div.right > div.right-inner > h2 > span"),
+            forumTitle = document.querySelector("#container > div.content > div.right > div.forum-head > h1");
+
+        if (page.slice(page.indexOf("/forum") + 6).length <= 0) {
+            presence.setActivity({
+                largeImageKey: "dl-logo",
+                details: `${forumTitle && forumTitle.textContent != "" ? forumTitle.textContent.replace(" tartışma forumu", "") : "Bilinmeyen"} dizisinin forumlarına bakıyor:`,
+                state: "Ana Sayfa",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            });
+        } else {
+            presence.setActivity({
+                largeImageKey: "dl-logo",
+                details: `${forumTitle && forumTitle.textContent != "" ? forumTitle.textContent.replace(" tartışma forumu", "") : "Bilinmeyen"} dizisinin forumlarına bakıyor:`,
+                state: postTitle && postTitle.textContent != "" ? postTitle.textContent : "Bilinmeyen",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            });
+        }
     } else if (pages[page] || pages[page.slice(0, -1)]) {
         presence.setActivity({
             largeImageKey: "dl-logo",
