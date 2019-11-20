@@ -55,6 +55,13 @@ presence.on("UpdateData", async () => {
         startTimestamp: timeElapsed
       };
       presence.setActivity(presenceData);
+    } else if (pName.innerText == "Game Database") {
+      let presenceData: presenceData = {
+        details: "Browsing...",
+        largeImageKey: "tempy",
+        startTimestamp: timeElapsed
+      };
+      presence.setActivity(presenceData);
     } else {
       let presenceData: presenceData = {
         details: "Reading about a platform",
