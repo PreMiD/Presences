@@ -7,9 +7,9 @@
     "description": {
         "en": "We are a non-profit radio station, that busts the beats through your sound system into your preferred listening type. This is Chroma!"
     },
-    "url": "chromaradio.pw",
-    "version": "1.0",
-    "logo": "https://i.imgur.com/jyQ06HK.png",
+    "url": ["chromaradio.pw", "chromaftw.pw"],
+    "version": "1.1",
+    "logo": "https://i.imgur.com/OfiXTs0.jpg",
     "thumbnail": "https://i.imgur.com/FK2kW1L.png",
     "color": "#ffffff",
     "tags": [
