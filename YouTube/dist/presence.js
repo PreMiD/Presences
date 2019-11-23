@@ -133,6 +133,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         else if (document.location.pathname.includes("/channel") || document.location.pathname.includes("/user")) {
             user = document.querySelector(".ytd-channel-name").textContent.replace(/\s+/g, '');
+            if (user == "" || user == "‌") {
+                user = "null";
+            }
             if (document.location.pathname.includes("/videos")) {
                 presenceData.details = "Browsing through videos";
                 presenceData.state = "of channel: " + user;
@@ -168,15 +171,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
         }
         else if (document.location.pathname.includes("/feed/trending")) {
-            title = document.querySelector("#title");
-            if (title !== null) {
-                presenceData.details = "Viewing trending " + title.innerText;
-                presenceData.startTimestamp = browsingStamp;
-            }
-            else {
-                presenceData.details = "Viewing what's trending";
-                presenceData.startTimestamp = browsingStamp;
-            }
+            presenceData.details = "Viewing what's trending";
+            presenceData.startTimestamp = browsingStamp;
         }
         else if (document.location.pathname.includes("/feed/subscriptions")) {
             presenceData.details = "Browsing through";

@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
 
 
   let presenceData: presenceData = {
-    largeImageKey: "ab"
+    largeImageKey: "abstract"
   };
 
   if (document.location.hostname == "weareabstract.com") {
