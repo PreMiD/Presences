@@ -18,7 +18,7 @@ function newStats() {
             selapsed = data.now_playing.elapsed;
         }
     };
-    xhttp.open('GET', 'https://178.62.87.183/api/nowplaying/2', true);
+    xhttp.open('GET', 'https://gb.lxquid.uk/api/nowplaying/2', true);
     xhttp.send();
 }
 presence.on("UpdateData", () => {
