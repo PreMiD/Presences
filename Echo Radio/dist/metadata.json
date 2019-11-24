@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "Echo Radio",
+    "description": {
+        "en": "Echo. The online radio bringing you the biggest hits!"
+    },
+    "url": "echoradio.rf.gd",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/XqXslBm.png",
+    "thumbnail": "https://i.imgur.com/BjCW52r.png",
+    "color": "#38bdd5",
+    "tags": [
+        "music",
+        "radio",
+        "gamers",
+        "community"
+    ],
+    "category": "music"
+}
