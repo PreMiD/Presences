@@ -46,9 +46,9 @@ presence.on("UpdateData", () => {
                     break;
                 case "togl fa fa-pause":
                     presenceData.smallImageKey = "play";
-                    presenceData.details = strack + " - " + sartist
-                    presenceData.state = sdj
-                    presenceData.smallImageText = slisteners + " Listeners"
+                    presenceData.details = strack || "Loading..." + " - " + sartist || "Loading..."
+                    presenceData.state = sdj || "Loading..."
+                    presenceData.smallImageText = slisteners || "Loading..." + " Listeners"
             }
             break;
         case "Bounce.Login":
