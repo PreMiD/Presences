@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "dang",
+        "id": "474169687287136256"
+    },
+    "service": "Proxim Radio",
+    "description": {
+        "en": "The radio for all your chill time needs."
+    },
+    "url": "proximradio.com",
+    "version": "1.0",
+    "logo": "https://cdn.discordapp.com/attachments/645768280178688010/648620658192023565/proxim.png",
+    "thumbnail": "http://prntscr.com/q1yqq4",
+    "color": "#800080",
+    "tags": [
+        "music",
+        "radio",
+        "gamers",
+        "community"
+    ],
+    "category": "radio"
+}
