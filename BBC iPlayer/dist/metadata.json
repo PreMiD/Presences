@@ -12,11 +12,8 @@
         "en": "Watch live BBC TV channels, enjoy TV programmes you missed and view exclusive content on BBC iPlayer.",
         "fr": "Regardez des chaînes de télévision en direct sur BBC, profitez des émissions télévisées que vous avez manquées et visualisez du contenu exclusif sur BBC iPlayer."
 	},
-	"url": [
-		"https://www.bbc.co.uk",
-		"www.bbc.co.uk"
-	],
-	"version": "0.1",
+	"url": "www.bbc.co.uk",
+	"version": "1.0",
 	"logo": "https://i.imgur.com/Tbp45tU.png",
 	"thumbnail": "https://i.imgur.com/KKBfAEx.png",
 	"color": "#FF91E0",
@@ -24,6 +21,6 @@
 		"bbc",
 		"bbc iplayer"
 	],
-	"category": "other",
+	"category": "videos",
 	"iframe": true
 }
