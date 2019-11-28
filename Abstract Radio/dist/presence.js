@@ -20,7 +20,7 @@ var replace;
 var search;
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
-        largeImageKey: "ab"
+        largeImageKey: "abstract"
     };
     if (document.location.hostname == "weareabstract.com") {
         presenceData.smallImageKey = "play";

@@ -39,7 +39,7 @@ presence.on("iFrameData", data => {
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var a = '', timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)), presenceData = {
-        largeImageKey: "aw2"
+        largeImageKey: "awnew"
     };
     if (document.location.pathname.includes("/watch/")) {
         if (iFrameVideo == true && !isNaN(duration)) {

@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "Jonax",
+        "id": "394799641192824834"
+    },
+    "service": "Gravity Radio",
+    "description": {
+        "en": "Down to Earth Radio"
+    },
+    "url": "gravityradio.pw",
+    "version": "1.0",
+    "logo": "https://cdn.discordapp.com/attachments/588263881047277569/648128883279003658/well_ok.png",
+    "thumbnail": "https://i.imgur.com/5kEPT5c.png",
+    "color": "#5F0A87",
+    "tags": [
+        "music",
+        "radio",
+        "gamers",
+        "community"
+    ],
+    "category": "music"
+}
