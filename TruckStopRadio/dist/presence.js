@@ -10,32 +10,39 @@ var presence = new Presence({
     clientId: "639107568672702484",
     mediaKeys: false
 }), strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    play: "presence.playback.playing"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
-var user;
-var title;
-var replace;
-var search;
-var dj;
-var listeners;
+let dj, listeners, artist, track;
+setInterval(newStats, 1000);
+newStats();
+function newStats() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let data = JSON.parse(this.responseText);
+            track = data.song;
+            artist = data.artist;
+            listeners = data.listeners;
+            dj = data.dj;
+        }
+    };
+    xhttp.open('GET', 'https://truckstopradio.co.uk/assets/php/premid.php', true);
+    xhttp.send();
+}
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
         largeImageKey: "tsr"
     };
-    if (document.querySelector("#mep_0 > div > div.radioplayer-controls > div.radioplayer-button.radioplayer-playpause-button.radioplayer-pause") !== null) {
-        title = document.querySelector("#song > p > marquee > span");
-        user = document.querySelector("#artist > p > span");
-        dj = document.querySelector("#dj > p");
-        listeners = document.querySelector("#listeners > span");
-        presenceData.details = title.innerText + " by: " + user.innerText;
-        presenceData.state = "DJ: " + dj.innerText + " Listeners: " + listeners.innerText;
+    if (document.querySelector('.fa.fa-pause') !== null) {
+        presenceData.details = artist + " - " + track;
+        presenceData.state = "DJ: " + dj + " / Listeners: " + listeners;
         presenceData.smallImageKey = "play";
+        presenceData.smallImageText = (yield strings).play;
     }
-    else if (document.location.pathname.includes("/staff")) {
+    else if (document.location.pathname.includes("/team")) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing staff members";
+        presenceData.details = "Viewing the staff team";
     }
     else if (document.location.pathname.includes("/schedule")) {
         presenceData.startTimestamp = browsingStamp;
@@ -48,6 +55,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/apply")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Applying for staff";
+        presenceData.smallImageKey = "writing";
     }
     else if (document.location.pathname.includes("/about")) {
         presenceData.startTimestamp = browsingStamp;
@@ -58,6 +66,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Contacting TSR";
         presenceData.smallImageKey = "writing";
+    }
+    else if (document.location.pathname.includes("/news/")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Reading article:";
+        presenceData.state = document.querySelector('.section_title').textContent;
+        presenceData.smallImageKey = "reading";
     }
     else if (document.location.pathname == "/") {
         presenceData.startTimestamp = browsingStamp;
@@ -71,8 +85,3 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     }
 }));
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}

@@ -10,11 +10,12 @@
     "it": "Scopri il nostro sito di Streaming Anime (Sub ITA). Scarica o guarda le tue serie preferite completamente gratis."
   },
   "url": "www.animeworld.tv",
-  "version": "1.1.1.1",
-  "logo": "https://i.imgur.com/RJ5GTaq.png",
+  "version": "2.0",
+  "logo": "https://i.imgur.com/UOy5uus.png",
   "thumbnail": "https://i.imgur.com/CDwYD2B.png",
   "color": "#165fa7",
   "tags": ["anime", "videos"],
   "iframe": true,
-  "category": "anime"
+  "category": "anime",
+  "regExp": "(([a-z0-9]+)[.])?animeworld[.]([a-z0-9]+)"
 }
