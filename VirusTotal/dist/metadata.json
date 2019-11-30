@@ -8,8 +8,7 @@
         "en": "Check every Software for your safety",
         "de": "Überprüfe deine Dateien für deine Sicherheit"
     },
-    "url": [
-        "www.virustotal.com"],
+    "url": ["www.virustotal.com"],
     "version": "1.0",
     "logo": "https://i.imgur.com/QPKWLTc.png",
     "thumbnail": "https://i.imgur.com/HE2xzdF.png",

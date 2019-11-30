@@ -130,94 +130,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
    }
        
 
- 
-   
-        //presenceData.state = "Lurking on LautFM"; break;
-        //default : presenceData.state = "ZZzzzZZ"; 
-        ////
-        //playingnow = document.querySelector("#app > div.fixed.fixed--top > div > a > div > div > span > b").innerText;
-        //presenceData.details = "Playing " + playingnow;
-        //music = document.querySelector("#app > div.fixed.fixed--top > div > a > div > div > div").innerText;
-        //presenceData.state = music;
-       // break; 
-        ////  
-
     presence.setActivity(presenceData);
 }));
 
-/**
- 
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    console.log("starting lautfm");
-    var a = '', presenceData = {
-        largeImageKey: "logo"
-        //  if (document.querySelector("#app > div.fixed.fixed--top > div > div.fm-player__btn-container > button:nth-child(2)").className !== "btn playbutton fm-player__btnfm-player__btn--stop playbutton--play)") {
-            
-    };
-    presenceData.startTimestamp = browsingStamp;
-    video = document.querySelector("#app > div.fixed.fixed--top > div > div.fm-player__btn-container > button.btn.playbutton.fm-player__btn.fm-player__btn--stop.playbutton--playing");
-    if (document.querySelector("#app > div.fixed.fixed--top > div > div.fm-player__btn-container > button.btn.playbutton.fm-player__btn.fm-player__btn--stop.playbutton--playing").className == "btn playbutton fm-player__btn fm-player__btn--stop playbutton--play") {
-        
-        presence.details = "Its a Test toast";
-        presence.setActivity(presenceData);
-        
-    }
-    else if (document.location.pathname == "/") {
-        playingnow = document.querySelector("#app > div.fixed.fixed--top > div > a > div > div > span > b").innerText;
-        presenceData.details = "Hört " + playingnow;
-        music = document.querySelector("#app > div.fixed.fixed--top > div > a > div > div > div > span.player-display__meta.player-display__meta--title").innerText
-        presenceData.state = music;
-         presence.setActivity(presenceData);
-           
-    } 
-    else if (document.location.pathname.includes("/dashboard")) {
-        presenceData.details = "Reading something in";
-        presenceData.state = "Dashboard";
-        presence.setActivity(presenceData);
-       
-    } 
-    else if (document.location.pathname.includes("/premium")) {
-    presenceData.details = "Think about";
-    presenceData.state = "Premium";
-    presence.setActivity(presenceData);
-   
-    } 
-    else if (document.location.pathname.includes("/login")) {
-        username1 = document.querySelector("#username");
-    presenceData.details = "Log In";
-    presenceData.state = username1.value;
-    presence.setActivity(presenceData);
-   
-    } 
-    else if (document.location.pathname.includes("/register")) {
-        username2 = document.querySelector("#username");
-    presenceData.details = "Sign Up";
-    presenceData.state = "Maybe as " + username2.value;
-    presence.setActivity(presenceData);
-   
-    } 
 
-    else if (document.location.pathname.includes ("/servers/")) {
-        tab1 = document.querySelector("#search");
-            presenceData.details = "Search a Server";
-            presenceData.state = tab1.value;
-            presence.setActivity(presenceData);
-         
-    } 
-    else if (document.location.pathname.includes("/server/")) {
-        tab1SN = document.querySelector("#main > div.mb-4.mt-5.row > div:nth-child(1) > a > span");
-            presenceData.details = "Watching a Server";
-            presenceData.state = tab1SN.innerText;
-            presence.setActivity(presenceData);
-         
-    }
-    
-        
-     
-));
-
-
- */
 
 function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
