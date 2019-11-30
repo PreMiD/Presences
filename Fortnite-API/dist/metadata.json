@@ -7,11 +7,8 @@
 	"description": {
 		"en": "Stop paying for outdated API's. We provide a reliable API with always updated content."
 	},
-	"url": [
-		"https://fortnite-api.com",
-		"fortnite-api.com"
-	],
-	"version": "0.1",
+	"url": "fortnite-api.com",
+	"version": "0.2",
 	"logo": "https://i.imgur.com/gb0Qq2I.png",
 	"thumbnail": "https://i.imgur.com/eITBg3y.png",
 	"color": "#FF91E0",
