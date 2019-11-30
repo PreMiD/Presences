@@ -20,5 +20,5 @@ about: Suggest Rich Presence support for a website
 **What should the Presence display?**
 <!--- Required, make sure to be as clear as possible on what should be added. -->
 
-**Please provide a square logo for the service (512x512 minimum)**
+**If possible, please provide a logo for the service (512x512 minimum)**
 <!--- Optional, it is recommended to upload the image here instead of using a 3rd-party host. -->
