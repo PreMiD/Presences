@@ -32,15 +32,15 @@ const presence = new Presence({
     clientId: "650492842615242765"
 }),
     pages = {
-    "/trending": "Trending Page",
-    "/lol": "Lol Page",
-    "/win": "Win Page",
-    "/quizzes": "Quiz Page",
-    "/giftguide": "Gift Guide page",
-    "/shopping": "Shopping Page",
-    "/tvandmovies": "Tv & Movies Page",
-    "/celebrity": "Celebrity Page",
-    "/newsletters": "Newsletter Page"
+    "/trending": "Trending ",
+    "/lol": "Lol ",
+    "/win": "Win ",
+    "/quizzes": "Quiz ",
+    "/giftguide": "Gift Guide ",
+    "/shopping": "Shopping ",
+    "/tvandmovies": "Tv & Movies ",
+    "/celebrity": "Celebrity ",
+    "/newsletters": "Newsletter "
 };
 
 
@@ -68,17 +68,17 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         data.details = "Reads a Post:"
         data.state = `${posttitle.textContent.trim()}`;
     } else if (pages[page] || pages[page.slice(0, -1)]) {
-        data.details = "Shows to a Page:"
+        data.details = "looks to a Page:"
         data.state = pages[page] || pages[page.slice(0, -1)];
     } else if (page.includes("/search")) {
         data.details = "Searching:"
         data.state = document.title;
         data.smallImageKey = "logo";
     } else if (user && user.textContent != "") {
-        data.details = "Shows to User Profile:"
+        data.details = "looks to a user Profile:"
         data.state = user.textContent.trim()
     } else {
-        data.details = "Shows to a Page:"
+        data.details = "looks to a Page:"
         data.state = "Homepage"
     }
 
