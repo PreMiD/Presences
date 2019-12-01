@@ -10,8 +10,6 @@ presence.on("UpdateData", () => {
 
     const path = document.location.pathname;
 
-	console.log(path);
-
     if (path === '/') {
 		presenceData.details = "Browing Domino's Pizza";
 		presenceData.state = "Home Page";
