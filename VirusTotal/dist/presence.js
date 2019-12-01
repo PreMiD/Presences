@@ -9,8 +9,6 @@ presence.on("UpdateData", () => {
     };
 
     const path = document.location.pathname;
-
-	console.log(path);
 	
 	if(path === '/') {
 		presenceData.details = "Browsing Virus Total",
