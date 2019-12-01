@@ -566,9 +566,6 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing 创作中心";
-    } else {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing 创作中心";
     }
     //会员购
   } else if (document.location.hostname == "show.bilibili.com"){
@@ -596,13 +593,18 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     }
     //手游
-  } else if (document.location.hostname == "biligame.com" || "game.bilibili.com"){
+  } else if (document.location.hostname == "biligame.com"){
     title = document.querySelector("body > div.bui-gc > div.header-bar.one-row > div.right-panel > div > div > h2 > span:nth-child(1)");
     if (title !== null) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing Game";
       presenceData.state = title.innerText
     } else {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing Game";
+    }
+  } else if (document.location.hostname == "game.bilibili.com"){
+    if (document.location.pathname.includes("/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Game";
     }
