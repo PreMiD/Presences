@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     };
     presenceData.startTimestamp = browsingStamp;
     if (document.location.hostname.includes("v3rmillion.net")) {
-        
+
         /* Home Page */
         if (document.location.pathname.includes("index.php") || document.location.pathname == "/") {
             profile = document.querySelector("#panel strong");
@@ -65,7 +65,6 @@ presence.on("UpdateData", async () => {
                 presenceData.details = "Replying to Thread:";
                 presenceData.state = title.innerText;
                 presenceData.smallImageKey = "twemoji-memo-1024x";
-                // TODO: ADD PENCIL EMOTE smallImageKey
             }
         }
 
