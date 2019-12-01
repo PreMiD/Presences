@@ -68,17 +68,17 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         data.details = "Reads a Post:"
         data.state = `${posttitle.textContent.trim()}`;
     } else if (pages[page] || pages[page.slice(0, -1)]) {
-        data.details = "looks to a Page:"
+        data.details = "Viewing Page:"
         data.state = pages[page] || pages[page.slice(0, -1)];
     } else if (page.includes("/search")) {
         data.details = "Searching:"
         data.state = document.title;
         data.smallImageKey = "logo";
     } else if (user && user.textContent != "") {
-        data.details = "looks to a user Profile:"
+        data.details = "Viewing User Profile:"
         data.state = user.textContent.trim()
     } else {
-        data.details = "looks to a Page:"
+        data.details = "Viewing Page:"
         data.state = "Homepage"
     }
 
