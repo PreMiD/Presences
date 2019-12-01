@@ -526,16 +526,7 @@ presence.on("UpdateData", async () => {
     videoDuration = video.duration;
     videoCurrentTime = video.currentTime;
     paused = video.paused;
-      } else if (document.location.hostname == "t.bilibili.com"){
-    user = document.querySelector("#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a");
-    if (user !== null) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Reading " + user.innerText + "'s dynamic";
-      presenceData.smallImageKey = "reading";
-    } else {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing for dynamic";
-    }
+
     var timestamps = getTimestamps(Math.floor(videoCurrentTime), Math.floor(videoDuration));
 
     presenceData.smallImageKey = paused ? "pause" : "play";
@@ -565,9 +556,14 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Someone's space";
     }
+  } else if (document.location.hostname == "account.bilibili.com"){
+    if (document.location.pathname.includes("/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing account setting";
+    }
     //创作中心
   } else if (document.location.hostname == "member.bilibili.com"){
-    if (document.location.pathname == "/") {
+    if (document.location.pathname.includes("/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing 创作中心";
     } else {
