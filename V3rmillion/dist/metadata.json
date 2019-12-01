@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "philanthropistical",
+        "id": "148521718388883456"
+    },
+    "service": "V3rmillion",
+    "description": {
+        "en": "Vermillion is a Programming and Gaming community forum dedicated to the conversation of a range of topics, within and out of the programming world."
+    },
+    "url": "v3rmillion.net",
+    "version": "1.0",
+    "logo": "https://cdn.discordapp.com/attachments/517512676134354946/650571659262033921/favicon.png",
+    "thumbnail": "https://cdn.discordapp.com/attachments/517512676134354946/650572101106925607/front-page.png",
+    "color": "#CD1818",
+    "tags": [
+        "forum",
+        "programming",
+        "sharing",
+        "coding"
+    ],
+    "category": "other"
+}
