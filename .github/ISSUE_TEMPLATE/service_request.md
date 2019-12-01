@@ -3,14 +3,22 @@ name: Service request
 about: Suggest Rich Presence support for a website
 ---
 
+**Prerequisites and essential questions**
+<!--- Required, please answer the following questions as honestly as possible, not checking a question counts as "No". -->
+* [ ] Is it a popular site?
+* [ ] Is the site locked to a specific country/region?
+* [ ] Is the site a paid service? (e.g. Netflix, Hulu)
+* [ ] Are you a donator/patron?
+* [ ] Do you acknowledge that coding presences is completely voluntary and may take time for your service to be added regardless of priority?
+
+**What's your Discord username?**
+<!--- Optional, unless you are a donator/patron. Ex. Clyde#0000 -->
+
 **What's the name of the service?**
-Ex. www.youtube.com | YouTube
+<!--- Required, Ex. www.youtube.com | YouTube -->
 
 **What should the Presence display?**
-Informations about the current video
+<!--- Required, make sure to be as clear as possible on what should be added. -->
 
-**Why do you want support for this service?**
-Tell us why you want to have support for this website. Please don't just tell us "I use it all the time"
-
-**Are you able to provide an image for the service? (512x512 minimum)**
-If you can provide the logo pls paste a link in here or the image
+**If possible, please provide a logo for the service (512x512 minimum)**
+<!--- Optional, it is recommended to upload the image here instead of using a 3rd-party host. -->
