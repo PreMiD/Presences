@@ -1,0 +1,23 @@
+{
+	"author": {
+		"name": "dAn",
+		"id": "169516316124905473"
+	},
+	"service": "VirusTotal",
+	"description": {
+		"en": "Analyze suspicious files and URLs to detect types of malware, automatically share them with the security community"
+	},
+	"url": [
+		"www.virustotal.com",
+		"virustotal.com"
+	],
+	"version": "1.0",
+	"logo": "https://i.imgur.com/EzIPyes.png",
+	"thumbnail": "https://i.imgur.com/muknVpT.png",
+	"color": "#424FF9",
+	"tags": [
+		"virustotal",
+		"virus"
+	],
+	"category": "other"
+}
