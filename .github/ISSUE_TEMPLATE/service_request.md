@@ -3,9 +3,9 @@ name: Service request
 about: Suggest Rich Presence support for a website
 ---
 
-**Prerequisites and essential questions**
-<!--- Required, please answer the following questions as honestly as possible, not checking a question counts as "No". -->
+**Prerequisites and essential questions** <!--- Required, please answer the following questions as honestly as possible by changing the "[ ]" to "[x]" or by marking it after creating the issue (easier), not checking a question counts as "No". -->
 * [ ] Is it a popular site?
+* [ ] Is the website older than 2 months? <!--- It is necessary for the website to be older than 2 months. -->
 * [ ] Is the site locked to a specific country/region?
 * [ ] Is the site a paid service? (e.g. Netflix, Hulu)
 * [ ] Are you a donator/patron?
