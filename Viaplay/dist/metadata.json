@@ -7,8 +7,8 @@
     "description": {
         "en": "Stream TV, comics, movies and sports online!"
         },
-    "url":"viaplay.se",
-    "version": "1.0",
+    "url": ["viaplay.se", "viaplay.no"],
+    "version": "1.1",
     "logo": "https://i.imgur.com/ChKRz5r.png",
     "thumbnail": "https://i.imgur.com/Kntj5Fp.png",
     "color": "#ec5a7f",

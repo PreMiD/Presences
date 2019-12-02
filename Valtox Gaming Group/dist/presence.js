@@ -59,8 +59,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.hostname == "vtc.valtoxgaminggroup.com") {
         if (document.location.pathname.includes("/truckinglive")) {
             presenceData.startTimestamp = browsingStamp;
-            presenceData.details = "🌐 Viewing the trucking";
-            presenceData.state = "🌐 live tracker";
+            presenceData.details = "🌐 Viewing Live Tracker";
+            presenceData.state = "🌍 Tracking Info";
         }
     }
     else if (document.location.hostname == "hub.valtoxgaminggroup.com") {

@@ -1,0 +1,23 @@
+{
+    "author": {
+      "name": "EGGSY",
+      "id": "162969778699501569"
+    },
+    "service": "WoXArea",
+    "description": {
+        "en" : "WoXArea is a Turkish multiplayer game cheating and hacking forum.",
+        "tr": "WoXArea istediğiniz oyunların hilelerini bulabileceğiniz bir platformdur."
+    },
+    "url": "woxhub.com",
+    "version": "1.0",
+    "logo": "https://premid.is-inside.me/vGu23v78.png",
+    "thumbnail": "https://premid.is-inside.me/Atszu52z.png",
+    "color": "#ff7e00",
+    "tags": [
+        "hacking",
+        "cheats",
+        "game",
+        "turkish"
+    ],
+    "category": "other"
+  }

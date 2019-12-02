@@ -3,6 +3,10 @@
         "name": "Eai",
         "id": "132779412771962880"
     },
+    "contributors": [{
+        "name": "Bas950",
+        "id": "241278257335500811"
+    }],
     "service": "Google Play Music",
     "description": {
         "en": "Free radio for everything you do. Store 50,000 tracks from your personal collection. Subscribe for on-demand access to 40 million songs and offline listening.",
@@ -15,7 +19,7 @@
     "url": [
         "play.google.com"
     ],
-    "version": "1.0",
+    "version": "1.0.1",
     "logo": "https://i.imgur.com/jFuYt2A.png",
     "thumbnail": "https://i.imgur.com/NQrR9PK.jpg",
     "color": "#ff5722",

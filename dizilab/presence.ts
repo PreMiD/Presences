@@ -35,6 +35,7 @@ presence.on("iFrameData", data => {
 
 presence.on("UpdateData", () => async () => {
     const page = document.location.pathname,
+        _video = document.querySelector("video") as HTMLVideoElement,
         isVideoData = Object.keys(video).length > 0 ? true : false,
         showTitle = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-profile-head > div.tv-series-right-content > h1"),
         actorName = document.querySelector("#container > div.content > div.right > div.artist-right > div.artist-name > h1");
@@ -99,6 +100,25 @@ presence.on("UpdateData", () => async () => {
             state: actorName.textContent,
             startTimestamp: Math.floor(Date.now() / 1000)
         });
+    } else if (!isVideoData && page.includes("/forum")) {
+        const postTitle = document.querySelector("#container > div.content > div.right > div.right-inner > h2 > span"),
+            forumTitle = document.querySelector("#container > div.content > div.right > div.forum-head > h1");
+
+        if (page.slice(page.indexOf("/forum") + 6).length <= 0) {
+            presence.setActivity({
+                largeImageKey: "dl-logo",
+                details: `${forumTitle && forumTitle.textContent != "" ? forumTitle.textContent.replace(" tartışma forumu", "") : "Bilinmeyen"} dizisinin forumlarına bakıyor:`,
+                state: "Ana Sayfa",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            });
+        } else {
+            presence.setActivity({
+                largeImageKey: "dl-logo",
+                details: `${forumTitle && forumTitle.textContent != "" ? forumTitle.textContent.replace(" tartışma forumu", "") : "Bilinmeyen"} dizisinin forumlarına bakıyor:`,
+                state: postTitle && postTitle.textContent != "" ? postTitle.textContent : "Bilinmeyen",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            });
+        }
     } else if (pages[page] || pages[page.slice(0, -1)]) {
         presence.setActivity({
             largeImageKey: "dl-logo",
@@ -106,6 +126,32 @@ presence.on("UpdateData", () => async () => {
             state: pages[page] || pages[page.slice(0, -1)],
             startTimestamp: Math.floor(Date.now() / 1000)
         });
+    } else if (_video && _video.currentTime) {
+        const title = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span") || document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span"),
+            episodeX = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div") && document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div").textContent ? document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div").textContent : null || document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span") && document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)") ? `${document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span").textContent.trim()}. Sezon ${document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)").textContent}. Bölüm` : null;
+
+        const fixedEpisodeName = episodeX.replace(/\n/g, "").replace(/-/g, "").replace(title.textContent, "").replace(" ", "").trim(),
+            timestamps = getTimestamps(Math.floor(_video.currentTime), Math.floor(_video.duration))
+
+        let data: { [k: string]: any } = {
+            largeImageKey: "dl-logo",
+            details: title.textContent,
+            state: fixedEpisodeName,
+            smallImageKey: video.paused ? "pause" : "play",
+            smallImageText: video.paused ? (await strings).pause : (await strings).play,
+        }
+
+        if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
+            data.startTimestamp = timestamps[0];
+            data.endTimestamp = timestamps[1];
+        }
+        if (video.paused) {
+            delete data.startTimestamp;
+            delete data.endTimestamp;
+        }
+
+        presence.setTrayTitle(video.paused ? "" : `${title.textContent} - ${fixedEpisodeName}`);
+        presence.setActivity(data);
     } else if (isVideoData) {
         const title = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span") || document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > a > span > span"),
             episodeX = document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div") && document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div").textContent ? document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div").textContent : null || document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span") && document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)") ? `${document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(2) > span").textContent.trim()}. Sezon ${document.querySelector("#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)").textContent}. Bölüm` : null;

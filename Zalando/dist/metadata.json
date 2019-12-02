@@ -1,0 +1,24 @@
+{
+    "author": {
+        "name": "Bas950",
+        "id": "241278257335500811"
+    },
+    "service": "Zalando",
+    "description": {
+        "en": "Zalando | Buy shoes online: Shoes from top brands.",
+        "nl": "Zalando online shop | Kleding, schoenen, sportartikelen, accessoires en meer | Jouw favoriete brands voor dames, heren en kids"
+    },
+    "url": [
+        "www.zalando.com"
+    ],
+    "version": "1.0",
+    "logo": "https://i.imgur.com/APLPI4i.png",
+    "thumbnail": "https://i.imgur.com/lFWmRc9.png",
+    "color": "#f47127",
+    "tags": [
+        "shop",
+        "fashion"
+    ],
+    "category": "other",
+    "regExp": "(([a-z0-9]+)[.])?zalando[.]([a-z0-9]+)"
+}
