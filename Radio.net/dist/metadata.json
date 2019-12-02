@@ -18,12 +18,15 @@
       "www.radio.pt",
       "www.radio.es",
       "www.radio.it",
-      "www.radio.pl"
+      "www.radio.pl",
+      "br.radio.net",
+      "mx.radio.net",
+      "co.radio.net"
   ],
-  "version": "1.1",
+  "version": "2.0",
   "logo": "https://cdn.discordapp.com/attachments/534018310128402435/634122665942056961/logo.png",
   "thumbnail": "https://cdn.discordapp.com/attachments/534018310128402435/634122750981701634/thumbnail.png",
   "color": "#67e350",
-  "tags": ["radio", "music", "stream"],
+  "tags": ["radio", "podcast", "music", "stream"],
   "category": "music"
 }
