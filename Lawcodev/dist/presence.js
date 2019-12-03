@@ -68,6 +68,11 @@ owa.on("UpdateData", () => {
         presenceData.details = "Creando un álbum";
         presenceData.startTimestamp = browsingStamp;
     }
+    else if (route[1] === "post") {
+        presenceData.details = "Viendo un post";
+        presenceData.state = `De ${document.querySelector("b").innerHTML}`;
+        presenceData.startTimestamp = browsingStamp;
+    }
     else if (route[1] === "setting") {
         presenceData.details = "Cambiando configuraciones";
         presenceData.state = `${route[2][0].toUpperCase().includes("-") ? `${route[2][0].toUpperCase().replace(/-+/g, " ") + route[2].slice(1)}` : `${route[2][0].toUpperCase() + route[2].slice(1)}`}`;
