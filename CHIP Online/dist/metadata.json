@@ -8,14 +8,14 @@
         "tr": "Teknoloji/spor/gündem ve insanların blog oluşturduğu, Türkiye'de popüler bir site.",
          "en": "CHIP Online is the independent web portal of the CHIP brand."
     },
-    "url": ["https://www.chip.com.tr/", "https://www.chip.com.tr", "www.chip.com.tr"],
+    "url": "http://www.chip.com.tr",
     "version": "1.0",
     "logo": "https://erens.glitch.me/fBLP.png",
     "thumbnail": "https://erens.glitch.me/fBLP.png",
     "color": "#1cb6e6",
     "tags": [
-    "social"
+    "news",
+    "turkish"
     ],
-    "category": "other",
-    "regExp": "(([a-z0-9]+)[.])?chip[.]([a-z0-9]+)"
+    "category": "other"
 }
