@@ -39,6 +39,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     const page = document.location.pathname,
         article = document.querySelector('#js-post-container > div > div.grid-layout-main.xs-mb2.lg-mb0 > header > h1'),
         sections = document.querySelector('#news-content > div.content-column.xs-mt2.lg-mt0.md-mb4 > h1 > span'),
+        user = document.querySelector('#news-content > div.xs-m2.sm-m0.sm-mb4 > div > div > div.xs-ml2 > h1'),
         writer = document.querySelector('#js-post-container > div > div.grid-layout-main.xs-mb2.lg-mb0 > header > div.news-article-header__byline-wrapper-desktop > a > span > span.news-byline-full__name.xs-block.link-initial--text-black');
 
 
