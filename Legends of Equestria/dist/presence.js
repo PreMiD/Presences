@@ -13,7 +13,6 @@ var presence = new Presence({
     largeImageKey: "logo"
 };
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    console.log(document.location.pathname);
     if (document.location.pathname == "/" || document.location.pathname == "/home") {
         presenceData.details = "Viewing the homepage";
     }
