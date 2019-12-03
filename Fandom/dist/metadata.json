@@ -5,7 +5,7 @@
    },
    "service": "Fandom",
    "url": "fandom.com",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "logo": "https://i.imgur.com/sko4P3c.png",
    "thumbnail": "https://i.imgur.com/VrVSD2b.png",
    "color": "#002A32",
@@ -17,6 +17,6 @@
    "description": {
       "en": "The entertainment site where fans come first. Your daily source for all things TV, movies, and games, including Star Wars, Fallout, Marvel, DC and more."
    },
-   "category": "others",
+   "category": "other",
    "regExp": "[a-zA-Z-]+\\.fandom\\.com"
 }
