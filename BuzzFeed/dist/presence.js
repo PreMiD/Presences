@@ -57,11 +57,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         author = document.querySelector('#mod-buzz-header-1 > div.buzz-byline.xs-mb2 > a > div > div.sm-flex.sm-flex-align-center > span'),
         userdesc = document.querySelectorAll('.user-info__bio');
 
-        const article = document.querySelector('#js-post-container > div > div.grid-layout-main.xs-mb2.lg-mb0 > header > h1'),
-        sections = document.querySelector('#news-content > div.content-column.xs-mt2.lg-mt0.md-mb4 > h1 > span'),
-        userbfn = document.querySelector('#news-content > div.xs-m2.sm-m0.sm-mb4 > div > div > div.xs-ml2 > h1'),
-        writer = document.querySelector('#js-post-container > div > div.grid-layout-main.xs-mb2.lg-mb0 > header > div.news-article-header__byline-wrapper-desktop > a > span > span.news-byline-full__name.xs-block.link-initial--text-black');
-
 
     let data = {
         largeImageKey: "logo",
@@ -71,12 +66,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if (posttitle && posttitle.textContent != "") {
         data.details = "Reads a Post:"
         data.state = `${posttitle.textContent}`;
-    }else if (page.includes('/article')) {
-        data.details = "Reads a Post:"
-        data.state = `${article.textContent}`;
-        data.smallImageKey = "bfnews-logo";
-
-    }  else if (pages[page] || pages[page.slice(0, -1)]) {
+    }
+    else if (pages[page] || pages[page.slice(0, -1)]) {
         data.details = "Viewing Page:"
         data.state = pages[page] || pages[page.slice(0, -1)];
     } else if (page.includes("/search")) {
@@ -86,11 +77,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     } else if (user && user.textContent != "") {
         data.details = "Viewing User Profile:"
         data.state = user.textContent
-    } else if (userbfn && userbfn.textContent != "") {
-        data.details = "Viewing User Profile:"
-        data.state = userbfn.textContent
-        data.smallImageKey = "bfnews-logo";
-    }  else {
+    }else {
         data.details = "Viewing Page:"
         data.state = "Homepage"
     }
