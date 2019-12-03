@@ -13,9 +13,9 @@
         "nl": "Wikipedia is een meertalige online encyclopedie, gebaseerd op open samenwerking via een wiki-gebaseerd contentbewerkingssysteem."
     },
     "url": [
-        "en.wikipedia.org"
+        "wikipedia.org"
     ],
-    "version": "2.3",
+    "version": "2.4",
     "logo": "https://i.imgur.com/zFdTVKT.png",
     "thumbnail": "https://i.imgur.com/vJiuzZy.png",
     "color": "#f9f9f9",

@@ -8,10 +8,10 @@
         "en" : "Vlare is a video-sharing-centric social website, basically meaning 'a video sharing website with social features.'"
     },
     "url": "vlare.tv",
-    "version": "1.0",
-    "logo": "https://menma.is-inside.me/ZgLDPB6q.png",
-    "thumbnail": "https://image.prntscr.com/image/C8sATei7QN2DxZb0mwfTcg.png",
-    "color": "#57b4fb",
+    "version": "1.1",
+    "logo": "https://vlare.tv/static/img/meta/small_social.png",
+    "thumbnail": "https://image.prntscr.com/image/dD-zj3--Tn__zdC34O2ZXg.png",
+    "color": "#00AAFF",
     "tags": [
         "vlare",
         "video",
