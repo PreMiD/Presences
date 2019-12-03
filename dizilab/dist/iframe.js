@@ -1,31 +1,22 @@
 const iframe = new iFrame();
 
 setInterval(function () {
-    let video = document.querySelector("video");
+    let video;
+
+    switch (document.location.hostname) {
+        case "vidmoly.to":
+            video = document.querySelector("video.jw-video");
+            break;
+        default:
+            video = document.querySelector("video");
+            break;
+    }
 
     if (!video || !video.duration || video.paused == undefined || !video.currentTime || video && isNaN(video.duration)) {
         iframe.send({
             error: true
         });
-    };
-
-    if (document.location.hostname == "lb.dizilabapi.com") {
-        iframe.send({
-            error: false,
-            currentTime: video.currentTime,
-            duration: video.duration,
-            paused: video.paused
-        });
     } else if (document.location.hostname == "vidmoly.to") {
-        video = document.querySelectorAll("video")[1];
-
-        iframe.send({
-            error: false,
-            currentTime: video.currentTime,
-            duration: video.duration,
-            paused: video.paused
-        });
-    } else if (document.location.hostname == "rapidvid.to") {
         iframe.send({
             error: false,
             currentTime: video.currentTime,
