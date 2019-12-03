@@ -6,7 +6,6 @@ var presence = new Presence({
 };
 
 presence.on("UpdateData", async () => {
-  console.log(document.location.pathname);
   
   if(document.location.pathname == "/" || document.location.pathname == "/home") {
 
