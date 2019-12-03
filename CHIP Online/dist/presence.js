@@ -7,9 +7,6 @@ presence.on("UpdateData", () => {
     let presenceData = {
         largeImageKey: "logo-chip"
     };
-   
-    
-    
     
      if (window.location.pathname.startsWith("/haber/")) {
     presenceData.details = "Bir haber okuyor:";
@@ -37,7 +34,6 @@ presence.on("UpdateData", () => {
 
     }
     
-    
     else if (window.location.pathname.endsWith("inceleme/")) 
     {
     
@@ -63,7 +59,6 @@ presence.on("UpdateData", () => {
             {
     presenceData.details = "Tüm forumlara göz atıyor..."
             }
-    
     
             else if (window.location.pathname.endsWith("canli/"))
             {
