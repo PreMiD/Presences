@@ -29,18 +29,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 
 const presence = new Presence({
-    clientId: "650492842615242765"
+    clientId: "651454408768487441"
 }),
     pages = {
-    "/trending": "Trending ",
-    "/lol": "Lol ",
-    "/win": "Win ",
-    "/quizzes": "Quiz ",
-    "/giftguide": "Gift Guide ",
-    "/shopping": "Shopping ",
-    "/tvandmovies": "Tv & Movies ",
-    "/celebrity": "Celebrity ",
-    "/newsletters": "Newsletter "
+    "/questions": "Questions ",
+    "/tags": "Tags ",
+    "/users": "Users ",
+    "/unanswered": "Unanswered "
 };
 
 
@@ -51,11 +46,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
        
         
 
-        title = document.querySelector("body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-title > h1"), 
+        title = document.querySelector("#question-header > h1"), 
         posttitle = document.querySelector("#mod-buzz-header-1 > div.buzz-header__hgroup.xs-my2.md-mt0 > h1"), 
-        user = document.querySelector("body > main > div > div > div > div.user-info.xs-px2.sm-p0.xs-mb3.md-mb4 > div > div.xs-ml2.xs-flex.xs-flex-column > div > h1"),
+        user = document.querySelector("#user-card > div > div.grid--cell.fl1.wmn0 > div > div.grid--cell.fl1.w0.overflow-x-hidden.overflow-y-auto.pr16.profile-user--about.about > div > div:nth-child(1) > h2 > div"),
         author = document.querySelector('#mod-buzz-header-1 > div.buzz-byline.xs-mb2 > a > div > div.sm-flex.sm-flex-align-center > span'),
+        searchresult = document.querySelector('#bigsearch > div > input')
         userdesc = document.querySelectorAll('.user-info__bio');
+
 
 
     let data = {
@@ -63,21 +60,20 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         startTimestamp: Math.floor(Date.now() / 1000)
     };
 
-    if (posttitle && posttitle.textContent != "") {
-        data.details = "Reads a Post:"
-        data.state = `${posttitle.textContent}`;
-    }
-    else if (pages[page] || pages[page.slice(0, -1)]) {
+    if (title && title.textContent != "") {
+        data.details = "Reads a Question:"
+        data.state = `${title.textContent}`;
+    } else if (pages[page] || pages[page.slice(0, -1)]) {
         data.details = "Viewing Page:"
         data.state = pages[page] || pages[page.slice(0, -1)];
     } else if (page.includes("/search")) {
         data.details = "Searching:"
-        data.state = document.title;
+        data.state = searchresult.value;
         data.smallImageKey = "logo";
-    } else if (user && user.textContent != "") {
+    } else if (page.includes('/users')) {
         data.details = "Viewing User Profile:"
-        data.state = user.textContent
-    }else {
+        data.state = user.textContent.trim()
+    } else {
         data.details = "Viewing Page:"
         data.state = "Homepage"
     }
