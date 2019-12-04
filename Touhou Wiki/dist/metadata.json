@@ -12,7 +12,7 @@
     ],
     "version": "1.0",
     "logo": "https://menma.is-inside.me/NURdVr2c.png",
-    "thumbnail": "https://image.prntscr.com/image/S26o3wwqRqWZLKtIotEeBQ.png",
+    "thumbnail": "https://menma.is-inside.me/TzsO9Q1O.png",
     "color": "#9B0101",
     "tags": [
         "wiki",
@@ -22,6 +22,6 @@
         "video game encyclopedia",
         "encyclopedia"
     ],
-    "category": "other",
+    "category": "games",
     "regExp": "([a-z0-9]+)[.]touhouwiki[.]net"
 }
