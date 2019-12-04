@@ -9,10 +9,10 @@
          "en": "The fastest way to reach news."
     },
     "url": "www.bundlehaber.com",
-    "version": "1.1",
+    "version": "1.2",
     "logo": "https://erens.glitch.me/1I13.png",
     "thumbnail": "https://erens.glitch.me/b96R.png",
-    "color": "#FDFAFA",
+    "color": "#BBBBBB", 
     "tags": [
     "news",
     "turkish"
