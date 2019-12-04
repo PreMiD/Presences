@@ -9,10 +9,10 @@
          "en": "CHIP Online is the independent web portal of the CHIP brand."
     },
     "url": "www.chip.com.tr",
-    "version": "1.1",
+    "version": "1.2",
     "logo": "https://erens.glitch.me/fBLP.png",
     "thumbnail": "https://erens.glitch.me/2XIU.png",
-    "color": "#1cb6e6",
+    "color": "#F10C0C",
     "tags": [
     "news",
     "turkish"
