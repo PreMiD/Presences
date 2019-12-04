@@ -9,15 +9,16 @@ presence.on("UpdateData", () => {
     };
     
      if (window.location.pathname.startsWith("/haber/")) {
-    presenceData.details = "Bir haber okuyor:";
+    
+        presenceData.details = "Bir haberi okuyor:";
      presenceData.state=document.querySelector("#colana > article > h1").textContent
-          
+    
     }
     
     else if (window.location.pathname.endsWith("video/"))
     {
     
-    presenceData.details = "Bütün videolara göz atıyor..."
+    presenceData.details = "Bütün videolara göz atıyor."
     presenceData.state = "CHIP Online"
     
     }
@@ -25,19 +26,15 @@ presence.on("UpdateData", () => {
     
     else if (window.location.pathname.endsWith("haber/")) {
     
-    presenceData.state = "Bütün haberlere göz atıyor..."
+    presenceData.state = "Bütün haberlere göz atıyor."
     presenceData.details = "CHIP Online"
-    
-             // some bugs
-
-
-
+             // looks like its broken.
     }
     
     else if (window.location.pathname.endsWith("inceleme/")) 
     {
     
-    presenceData.state = "Bütün incelemelere göz atıyor..."
+    presenceData.state = "Bütün incelemelere göz atıyor."
     presenceData.details = "CHIP Online"
     
     }
@@ -57,22 +54,21 @@ presence.on("UpdateData", () => {
     
         else if (window.location.pathname.endsWith("forum/"))
             {
-    presenceData.details = "Tüm forumlara göz atıyor..."
+    presenceData.details = "Tüm forumlara göz atıyor."
             }
     
             else if (window.location.pathname.endsWith("canli/"))
             {
     presenceData.state= "CHIP Online"
-     presenceData.details = "Tüm Tech-Talk arşivine göz atıyor..."
+     presenceData.details = "Tüm Tech-Talk arşivine göz atıyor."
         }
     
         else if (window.location.pathname.startsWith("/forum/"))
         {
-    presenceData.state= "Adlı konuyu/gönderiyi okuyor..."
+    presenceData.state= "Adlı konuyu/gönderiyi okuyor."
     presenceData.details=document.querySelector("#forumwrap > h1").textContent
     } 
     
-
 
     presence.setActivity(presenceData);
 
