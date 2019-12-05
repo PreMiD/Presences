@@ -9,14 +9,14 @@
     }],
     "service": "Dream News",
     "description": {
-        "en": "Top news for anime, mangá, light novel and everything related to this world! Read on your Computer, Notebook, Smartphone or any other Mobile Device.",
+        "en": "Main news about animes, mangas, light novels and everything related to the Otaku world! Read on your Computer, Notebook, Smartphone or any other Mobile Device.",
         "pt_BR": "Principais notícias sobre animes, mangás, light novel e tudo relacionado ao mundo Otaku! Leia em seu Computador, Notebook, Smartphone ou qualquer outro Dispositivo Móvel."
     },
     "url": [
         "www.dreamnews.live"
     ],
-    "version": "1.1",
-    "logo": "https://menma.is-inside.me/n1DGYByn.png",
+    "version": "1.1.1",
+    "logo": "https://menma.is-inside.me/lcMhkI1e.png",
     "thumbnail": "https://menma.is-inside.me/M6AvnGvt.png",
     "color": "#0c8a2e",
     "tags": [
@@ -24,5 +24,5 @@
         "manga",
         "news"
     ],
-    "category": "anime"
+    "category": "other"
 }

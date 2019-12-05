@@ -1,8 +1,12 @@
 {
     "author": {
+        "name": "Evil",
+        "id": "200761917189521409"
+    },
+    "contributors": [{
         "name": "Viruz",
         "id": "158973226465230848"
-    },
+    }],
     "service": "Dream Animes",
     "description": {
         "en": "Dream Animes is a brazilian website to provide a place to watch free anime content, both online and offline and without any abusive ads.",
@@ -17,7 +21,7 @@
         "www.dreamanimes.com.br",
         "www.myotakulist.com"
     ],
-    "version": "3.0",
+    "version": "3.0.1",
     "logo": "https://i.imgur.com/iwQt7Zu.png",
     "thumbnail": "https://i.imgur.com/RbXnJIO.png",
     "color": "#1997c6",
