@@ -14,7 +14,7 @@ var presence = new Presence({
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 let dj, listeners, artist, track;
-setInterval(newStats, 1000);
+setInterval(newStats, 10000);
 newStats();
 function newStats() {
     let xhttp = new XMLHttpRequest();
