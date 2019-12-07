@@ -8,11 +8,22 @@
     "en": "NSFW Anime Image board running on Gelbooru",
     "de": "NSFW Anime Image board running on Gelbooru"
   },
-  "url": ["xbooru.com"],
-  "version": "2.0",
+  "url": [
+    "xbooru.com"
+  ],
+  "version": "2.1",
   "logo": "https://i.imgur.com/F2AnL3o.png",
   "thumbnail": "https://i.imgur.com/ilNOKbU.png",
   "color": "#f3efc0",
-  "tags": ["nsfw", "anime", "gelbooru", "imageboard", "images", "fanart", "art", "rule34"],
+  "tags": [
+    "nsfw",
+    "anime",
+    "gelbooru",
+    "imageboard",
+    "images",
+    "fanart",
+    "art",
+    "rule34"
+  ],
   "category": "anime"
 }

@@ -9,11 +9,14 @@
     "nl": "Bekijk anime online (Russion Subbed) in hoge kwaliteit en direct gratis downloaden! Nieuwe anime-manga dagelijks toegevoegd."
   },
   "url": "yummyanime.club",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/12xbQOt.png",
   "thumbnail": "https://i.imgur.com/5C3B63m.png",
   "color": "#ff6766",
-  "tags": ["anime", "videos"],
+  "tags": [
+    "anime",
+    "videos"
+  ],
   "iframe": true,
   "category": "anime"
 }

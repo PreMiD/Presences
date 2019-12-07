@@ -13,10 +13,13 @@
     "nl": "Twitch is 's werelds leider in live streaming platform voor gamers en de dingen waar we van houden. Kijk en chat nu met miljoenen andere fans van over de hele wereld."
   },
   "url": "www.twitch.tv",
-  "version": "1.5",
+  "version": "1.6",
   "logo": "https://i.imgur.com/So7h3G0.png",
   "thumbnail": "https://i.imgur.com/OAcBmwW.png",
   "color": "#9146FF",
-  "tags": ["video", "streaming"],
+  "tags": [
+    "video",
+    "streaming"
+  ],
   "category": "videos"
 }
