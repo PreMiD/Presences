@@ -11,14 +11,10 @@ about: Suggest Rich Presence support for a website
 * [ ] Are you a donator/patron?
 * [ ] Do you acknowledge that coding presences is completely voluntary and may take time for your service to be added regardless of priority?
 
-**What's your Discord username?**
-<!--- Optional, unless you are a donator/patron. Ex. Clyde#0000 -->
+**What's your Discord username?** <!--- Optional, unless you are a donator/patron. Ex. Clyde#0000 -->
 
-**What's the name of the service?**
-<!--- Required, Ex. www.youtube.com | YouTube -->
+**What's the name of the service?** <!--- Required, Ex. www.youtube.com | YouTube -->
 
-**What should the Presence display?**
-<!--- Required, make sure to be as clear as possible on what should be added. -->
+**What should the Presence display?** <!--- Required, make sure to be as clear as possible on what should be added. -->
 
-**If possible, please provide a logo for the service (512x512 minimum)**
-<!--- Optional, it is recommended to upload the image here instead of using a 3rd-party host. -->
+**If possible, please provide a logo for the service (512x512 minimum)** <!--- Optional, it is recommended to upload the image here instead of using a 3rd-party host. -->
