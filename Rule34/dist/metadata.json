@@ -8,11 +8,22 @@
     "en": "Rule 34 - If it exists, there's porn of it. If not, start uploading!",
     "de": "Regel 34 - Wenn es existiert, gibt es Porn davon. Falls nicht, fang an etwas hochzuladen!"
   },
-  "url": ["rule34.xxx", "rule34.paheal.net"],
-  "version": "2.0",
+  "url": [
+    "rule34.xxx",
+    "rule34.paheal.net"
+  ],
+  "version": "2.1",
   "logo": "https://i.imgur.com/3jHxZJW.png",
   "thumbnail": "https://i.imgur.com/hnS39Sk.png",
   "color": "#AAE5A3",
-  "tags": ["nsfw", "anime", "hentai", "gelbooru", "shimmie", "imageboard", "rule34"],
+  "tags": [
+    "nsfw",
+    "anime",
+    "hentai",
+    "gelbooru",
+    "shimmie",
+    "imageboard",
+    "rule34"
+  ],
   "category": "other"
 }

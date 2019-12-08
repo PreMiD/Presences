@@ -3,10 +3,12 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
-  "contributors": [{
-    "name": "Moe Kotoki",
-    "id": "276627005280092162"
-}],
+  "contributors": [
+    {
+      "name": "Moe Kotoki",
+      "id": "276627005280092162"
+    }
+  ],
   "service": "bilibili",
   "description": {
     "en": "bilibili is a well-known video barrage website in China. Here is the most timely animation new fan, the best ACG atmosphere, the most creative Up master. Everyone can find a lot of joy here.",
@@ -18,13 +20,21 @@
     "vc.bilibili.com",
     "t.bilibili.com",
     "space.bilibili.com",
-    "live.bilibili.com"
+    "live.bilibili.com",
+    "game.bilibili.com",
+    "show.bilibili.com",
+    "member.bilibili.com",
+    "account.bilibili.com",
+    "biligame.com"
   ],
-  "version": "1.5",
+  "version": "1.8",
   "logo": "https://i.imgur.com/w7q6IS0.png",
   "thumbnail": "https://i.imgur.com/wKnEEei.jpg",
   "color": "#05acff",
-  "tags": ["video", "anime"],
+  "tags": [
+    "video",
+    "anime"
+  ],
   "category": "anime",
   "regExp": "(([a-z0-9]+)[.])?bilibili[.]com"
 }
