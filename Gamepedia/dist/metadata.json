@@ -1,0 +1,22 @@
+{
+	"author": {
+		"name": "Hans5958",
+		"id": "279855717203050496"
+	},
+	"service": "Gamepedia",
+	"url": "gamepedia.com",
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/EUu0IPu.png",
+	"thumbnail": "https://i.imgur.com/Dr5wG06.png",
+	"color": "#F48020",
+	"tags": [
+		"encyclopedia",
+		"popular",
+		"informations"
+	],
+	"description": {
+		"en": "Gamepedia is the largest video game wiki platform on the web, featuring thousands of community-driven wiki projects.\nOwned and operated by FANDOM, Gamepedia is home to everything from indie title wikis to some of the best-known gaming wikis such as the Official Minecraft Wiki, Leaguepedia, and the Official ARK Wiki."
+	},
+	"category": "other",
+	"regExp": "[a-zA-Z-]+\\.gamepedia\\.com"
+}
