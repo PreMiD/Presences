@@ -164,4 +164,30 @@ iframe.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             });
         }
     }
+    else if (document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") !== null) {
+        var video = document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
+        if (video != undefined && !isNaN(video.duration)) {
+            iframe.send({
+                iframe_video: {
+                    iFrameVideo: true,
+                    currTime: video.currentTime,
+                    dur: video.duration,
+                    paused: video.paused
+                }
+            });
+        }
+    }
+    else if (document.querySelector('video') !== null) {
+        var video = document.querySelector('video');
+        if (video != undefined && !isNaN(video.duration)) {
+            iframe.send({
+                iframe_video: {
+                    iFrameVideo: true,
+                    currTime: video.currentTime,
+                    dur: video.duration,
+                    paused: video.paused
+                }
+            });
+        }
+    }
 }));

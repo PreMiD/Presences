@@ -9,8 +9,8 @@ const strings = presence.getStrings({
     browsing: "presence.activity.browsing",
 })
 
-let series: string
 let title: string
+let subtitle: string
 
 presence.on("UpdateData", async () => {
     let data: presenceData = {
@@ -23,16 +23,14 @@ presence.on("UpdateData", async () => {
         if (video && !isNaN(video.duration)) {
             const timestamps: number[] = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration))
 
-            const yearField: HTMLDivElement = document.querySelector(".btm-media-overlays-container .year-field")
-            series = yearField ? yearField.textContent : null
-
             const titleField: HTMLDivElement = document.querySelector(".btm-media-overlays-container .title-field")
             title = titleField ? titleField.textContent : null
+            const subtitleField: HTMLDivElement = document.querySelector(".btm-media-overlays-container .subtitle-field")
+            subtitle = subtitleField ? subtitleField.textContent : null
 
-            // movie: titleField = movie title, yearField = empty
-            // series: titleField = episode, yearField = series title
-            data.details = series ? series : title
-            data.state = series ? title : "Movie"
+            // subtitleField is episode for series, empty for movies
+            data.details = title
+            data.state = subtitle ? subtitle : "Movie"
 
             data.smallImageKey = video.paused ? "pause" : "play"
             data.smallImageText = video.paused ? (await strings).pause : (await strings).play

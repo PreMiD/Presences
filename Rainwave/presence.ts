@@ -3,38 +3,45 @@ var presence = new Presence({
   mediaKeys: false
 });
 
-timeElapsed = Math.floor(Date.now()/1000);
-
+let timeElapsed = Math.floor(Date.now() / 1000),
   strings = presence.getStrings({
     live: "presence.activity.live",
     pause: "presence.playback.paused"
   });
 
 presence.on("UpdateData", async () => {
-  if(document.location.pathname.startsWith("/pages/playback_history") {
+  if (document.location.pathname.startsWith("/pages/playback_history")) {
     let presenceData: presenceData = {
       details: "Looking at playback history...",
       largeImageKey: "rainwv"
     };
     presence.setActivity(presenceData);
-  } else if(document.location.pathname.startsWith("/forums") {
+  } else if (document.location.pathname.startsWith("/forums")) {
     let presenceData: presenceData = {
       details: "Browsing the forums...",
       largeImageKey: "rainwv"
-    }
+    };
     presence.setActivity(presenceData);
-  } else if(document.location.pathname.startsWith("/api4") {
+  } else if (document.location.pathname.startsWith("/api4")) {
     let presenceData: presenceData = {
       details: "Looking at the API...",
       largeImageKey: "rainwv"
-    }
+    };
     presence.setActivity(presenceData);
   } else {
-    stationName = document.querySelector("a.station.selected_station > div.station_details > div.station_name")
-    songName = document.querySelector("div.song.now_playing > div.song_content > div.title")
-    artistName = document.querySelector("div.song.now_playing > div.song_content > div.artist")
-    playCheck = document.querySelector("div#r4_audio_player.unselectable.playing")
-    if playCheck == null {
+    let stationName = document.querySelector(
+        "a.station.selected_station > div.station_details > div.station_name"
+      ),
+      songName = document.querySelector(
+        "div.song.now_playing > div.song_content > div.title"
+      ) as HTMLDivElement,
+      artistName = document.querySelector(
+        "div.song.now_playing > div.song_content > div.artist"
+      ) as HTMLDivElement,
+      playCheck = document.querySelector(
+        "div#r4_audio_player.unselectable.playing"
+      );
+    if (playCheck == null) {
       let presenceData: presenceData = {
         details: "Not listening.",
         largeImageKey: "rainwv",
@@ -50,6 +57,6 @@ presence.on("UpdateData", async () => {
         startTimestamp: timeElapsed
       };
       presence.setActivity(presenceData);
-    };
-  };
+    }
+  }
 });

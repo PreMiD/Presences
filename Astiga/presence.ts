@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.smallImageKey = playback ? "play" : "pause";
 
-    presenceData.smallImageText = playback ? (await strings).pause : (await strings).play;
+    presenceData.smallImageText = playback ?  (await strings).play : (await strings).pause;
 
     presenceData.startTimestamp = timestamps[0];
 

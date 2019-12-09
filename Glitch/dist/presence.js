@@ -11,7 +11,7 @@ presence.on("UpdateData", () => {
     
 if(window.location.href.includes(".glitch.me")) {
     presenceData.details = "Viewing a webpage";
-    presenceData.state(window.location.hostname)
+    presenceData.state = (window.location.hostname)
    }    
     else if(window.location.href.includes("status.glitch.com")) {
         presenceData.details = "https://status.glitch.com"
@@ -93,6 +93,5 @@ else if (window.location.href.includes("support.glitch.com")) {
         }
     }
     presence.setActivity(presenceData);
-    presence.setTrayTitle();
 
 });

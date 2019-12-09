@@ -44,8 +44,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             document.querySelector(".now-playing-info-wrapper")) {
             const title = document.querySelector("#currently-playing-title")
                 .textContent;
-            const artist = document.querySelector("#player-artist").textContent;
-            const album = document.querySelector(".player-album").textContent;
+            const artist = document.querySelector("#player-artist").textContent || document.querySelector("#music-content > div.g-content.view-transition > div > table > tbody > tr.song-row.currently-playing > td:nth-child(1) > span").textContent.split(" - ")[1];
+            const album = document.querySelector(".player-album").textContent || document.querySelector("#music-content > div.g-content.view-transition > div > table > tbody > tr.song-row.currently-playing > td:nth-child(1) > span").textContent.split(" - ")[0];
             const isPlaying = !!document.querySelector("#player-bar-play-pause.playing");
             const presenceData = {
                 details: title,

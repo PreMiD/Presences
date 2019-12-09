@@ -18,10 +18,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     };
     presenceData.startTimestamp = browsingStamp;
     connected = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div");
-    apptitle = document.querySelector("#react-select-2--value-item > div > div.appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi");
-    if (apptitle == null) {
-        apptitle = document.querySelector("#react-select-4--value-item > div > div.appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi");
-    }
+    apptitle = document.querySelector('.appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi');
     if (document.location.hostname == "discordapp.com" && connected !== null) {
         if (connected.innerText.includes("@")) {
             presenceData.details = "Voice connected with";
@@ -259,6 +256,19 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         delete presenceData.smallImageKey;
         presence.setActivity(presenceData);
     }
+    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/invite")) {
+        presenceData.details = "Viewing invite:";
+        apptitle = document.URL.split("/")[4];
+        if (apptitle.includes("?")) {
+            presenceData.state = apptitle.split("?")[0];
+        }
+        else {
+            presenceData.state = document.URL.split("/")[4];
+        }
+        presenceData.state = "COMING SOON.";
+        delete presenceData.smallImageKey;
+        presence.setActivity(presenceData);
+    }
     else if (document.location.hostname == "status.discordapp.com") {
         presenceData.details = "Discord Status";
         presenceData.state = "Reading Discords status";
@@ -337,6 +347,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else if (document.location.hostname == "discordapp.com") {
         presenceData.details = "Home page";
+        delete presenceData.state;
+        delete presenceData.smallImageKey;
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.hostname == "discord.gg") {
+        presenceData.details = "Viewing an invite";
         delete presenceData.state;
         delete presenceData.smallImageKey;
         presence.setActivity(presenceData);

@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "630480553694593025",
-    mediaKeys: false
+    mediaKeys: false // TODO: change it to true after Timeraa fixes the media keys issue
 }),
 
 strings = presence.getStrings({
@@ -22,12 +22,18 @@ presence.on("UpdateData", async () => {
             var title = document.querySelector(".video-title h4").textContent;
             var timestamps = getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
 
-            data.details = title
+            data.details = " " + title;
 
             if (showCheck) {
                 var season = document.querySelector(".video-title span").textContent;
-                var episode = document.querySelector(".video-title span:nth-child(3)").textContent;
-                data.state = season + " " + episode
+                var episodeName;
+                try {
+                    episodeName = document.querySelector(".video-title span:nth-child(3)").textContent;
+                    data.state = season + " " + episodeName
+                } catch {
+                    episodeName = document.querySelector(".video-title span").textContent;
+                    data.state = episodeName
+                }
             } else {
                 data.state = "Movie"
             }
@@ -42,7 +48,7 @@ presence.on("UpdateData", async () => {
                 delete data.endTimestamp;
             }
     
-            if (title !== null && season !== null && episode !== null) {
+            if (title !== null && season !== null && episodeName !== null) {
                 presence.setActivity(data, !video.paused);
             }
         }

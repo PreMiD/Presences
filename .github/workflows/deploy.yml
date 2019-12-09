@@ -1,0 +1,26 @@
+name: DePloY
+on:
+  push:
+    branches: master
+    paths:
+      - "**.ts"
+      - "**.js"
+      - "**.json"
+      - "**.yml"
+jobs:
+  UpdatePresences:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+      - name: Install Dependencies
+        run: |
+          npm i -g yarn
+          yarn
+      - name: Update Presences
+        env:
+          MONGO_IP: ${{ secrets.MONGO_IP }}
+          MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          GHTOKEN: ${{ secrets.GHTOKEN }}
+        run: node presenceUpdater.js

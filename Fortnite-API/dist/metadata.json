@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "Leafage",
+    "id": "631499344863821877"
+  },
+  "service": "Fortnite-API",
+  "description": {
+    "en": "Stop paying for outdated API's. We provide a reliable API with always updated content."
+  },
+  "url": "fortnite-api.com",
+  "version": "3",
+  "logo": "https://i.imgur.com/gb0Qq2I.png",
+  "thumbnail": "https://i.imgur.com/eITBg3y.png",
+  "color": "#FF91E0",
+  "tags": [
+    "fortnite",
+    "fortnite-api"
+  ],
+  "category": "other"
+}
