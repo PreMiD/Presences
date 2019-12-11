@@ -19,7 +19,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
         largeImageKey: "carllogo"
     };
-    console.log("Test")
     if (document.location.hostname == "carl.gg") {
         presenceData.startTimestamp = browsingStamp;
         if (document.location.pathname.includes("/dashboard/")) {
