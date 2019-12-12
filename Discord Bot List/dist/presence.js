@@ -49,5 +49,12 @@ presence.on("UpdateData", () => {
         presenceData.startTimestamp = browsingStamp;
     }
 
-    presence.setActivity(presenceData);
+    if (presenceData.details == null) {
+        presence.setTrayTitle();
+        presence.setActivity();
+    }
+    else {
+        presence.setActivity(presenceData);
+    }
+
 });
