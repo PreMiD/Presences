@@ -44,6 +44,18 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 presenceData.state = search.value;
             }
         }
+        else if (document.location.pathname.includes("/programacao")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Viewing the schedule";
+        }
+        else if (document.location.pathname.includes("/configuracoes")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Viewing my settings";
+        }
+        else if (document.location.pathname.includes("/minha-lista")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Viewing my watch list";
+        }
         else if (document.location.pathname.includes("/p/")) {
             presenceData.startTimestamp = browsingStamp;
             user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.program-header > div > div.playkit-container > div > div.playkit-media-cover__header > h1");
