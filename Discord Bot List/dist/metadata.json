@@ -5,7 +5,8 @@
     },
     "service": "Discord Bot List",
     "description": {
-         "en": "Discord bot list is listing discord bots."
+        "en": "Discord Bot List is listing discord bots.",
+        "tr": "Discord Bot List bir bot listesidir."
     },
     "url": "discordbotlist.com",
     "version": "1.0.1",
@@ -13,9 +14,9 @@
     "thumbnail": "https://erens.glitch.me/MxWr.png",
     "color": "#10C0E7",
     "tags": [
-    "discord",
-    "bot",
-    "discord bot list"
+        "discord",
+        "bot",
+        "discord bot list"
     ],
     "category": "other"
 }
