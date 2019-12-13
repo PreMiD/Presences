@@ -100,8 +100,8 @@ presence.on("UpdateData", async () => {
         state: edited == true
         ? uploaderMiniPlayer.getAttribute("premid-value")
         : uploaderTV !== null
-          ? uploaderTV
-          : uploader.innerText,
+          ? uploaderTV.textContent
+          : uploader.textContent,
         largeImageKey: "yt_lg",
         smallImageKey: video.paused ? "pause" : "play", //general.playing general.paused
         smallImageText: video.paused
@@ -147,8 +147,9 @@ presence.on("UpdateData", async () => {
 
 
     //* If tags are not "null"
-    if (video && title !== null && uploader !== null) {
-      presence.setActivity(presenceData, !video.paused);
+    uploader = uploader; 
+    if (title !== null && uploader !== null) {
+      presence.setActivity(presenceData);
     }
   } else if (document.location.hostname == "www.youtube.com") {
     let presenceData: presenceData = {
