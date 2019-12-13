@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "DooMLorD",
+    "id": "465105167751315471"
+  },
+  "service": "VLC",
+  "description": {
+    "en": "VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files and various streaming protocols."
+  },
+  "url": "localhost",
+  "version": "1.0",
+  "logo": "https://doomlord.s-ul.eu/IyWiyxlH",
+  "thumbnail": "https://doomlord.s-ul.eu/LOCgKTnx",
+  "color": "#ff7c00",
+  "tags": [
+    "videolan",
+    "media-player",
+    "application"
+  ],
+  "category": "videos"
+}
