@@ -44,6 +44,18 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 presenceData.state = search.value;
             }
         }
+        else if (document.location.pathname.includes("/programacao")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Viewing the schedule";
+        }
+        else if (document.location.pathname.includes("/configuracoes")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Viewing my settings";
+        }
+        else if (document.location.pathname.includes("/minha-lista")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Viewing my watch list";
+        }
         else if (document.location.pathname.includes("/p/")) {
             presenceData.startTimestamp = browsingStamp;
             user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.program-header > div > div.playkit-container > div > div.playkit-media-cover__header > h1");
@@ -60,29 +72,25 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         else if (document.location.pathname.includes("/v/")) {
             var currentTime, duration, paused, timestamps, video;
-            video = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--compact > div > div > div.video-stage__stage-container > div > section > div > div > div > div.container.master-container.pointer-enabled > div.id-playback > video");
-            if (video == null) {
-                video = video = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--extended > div > div > div.video-stage__stage-container > div > section > div > div > div > div.container.master-container.pointer-enabled > div.id-playback > video");
-            }
-            title = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--compact > div > div > div.video-stage__video-info-area-wrapper > div > div > div.playkit-video-info__container_info.playkit-video-stage__area-video-info-container > section > div.playkit-video-info__program-title > a > span.playkit-video-info__link-text");
-            if (title == null) {
-                title = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--extended > div > div > div.video-stage__video-info-area-wrapper > div > div > div.playkit-video-info__container_info.playkit-video-stage__area-video-info-container > section > div.playkit-video-info__program-title > a > span.playkit-video-info__link-text");
-            }
-            user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--compact > div > div > div.video-stage__video-info-area-wrapper > div > div > div.playkit-video-info__container_info.playkit-video-stage__area-video-info-container > section > div.playkit-video-info__ep-section > h1");
-            if (user == null) {
-                user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--extended > div > div > div.video-stage__video-info-area-wrapper > div > div > div.playkit-video-info__container_info.playkit-video-stage__area-video-info-container > section > div.playkit-video-info__ep-section > h1");
-            }
+            video = document.querySelector('video');
             currentTime = video.currentTime;
             duration = video.duration;
             paused = video.paused;
-            timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+            if (document.location.pathname.includes("/programa/")) {
+                title = document.querySelector('.playkit-video-info__link-text').textContent;
+                presenceData.state = document.querySelector('.playkit-video-info__ep-title').textContent;
+            }
+            else {
+                title = document.querySelector('.playkit-video-info__ep-title').textContent;
+                presenceData.state = document.querySelector('.playkit-video-info__detail-season').textContent;
+            }
             if (!isNaN(duration)) {
+                timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
                 presenceData.smallImageKey = paused ? "pause" : "play";
                 presenceData.smallImageText = paused ? (yield strings).pause : (yield strings).play;
                 presenceData.startTimestamp = timestamps[0];
                 presenceData.endTimestamp = timestamps[1];
-                presenceData.details = title.textContent;
-                presenceData.state = user.textContent;
+                presenceData.details = title;
                 if (paused) {
                     delete presenceData.startTimestamp;
                     delete presenceData.endTimestamp;
@@ -91,8 +99,14 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             else if (isNaN(duration)) {
                 presenceData.startTimestamp = browsingStamp;
                 presenceData.details = "Looing at:";
-                presenceData.state = title.textContent;
+                presenceData.state = title;
             }
+        }
+        else if (document.location.pathname.includes("/agora-na-globo/")) {
+            presenceData.details = document.querySelector('.playkit-channels-navigation__program-name').textContent;
+            presenceData.state = document.querySelector('.playkit-channels-navigation__program-time').textContent;
+            presenceData.smallImageKey = "live";
+            presenceData.startTimestamp = browsingStamp;
         }
     }
     if (presenceData.details == null) {
