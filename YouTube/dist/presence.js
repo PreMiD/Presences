@@ -56,7 +56,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         var uploaderTV, uploaderMiniPlayer, uploader2, edited, uploaderEmbed;
         edited = false;
-        uploaderTV = document.querySelector(".player-video-details");
+        uploaderTV = document.querySelector(".player-video-details") || document.querySelector(".ytd-channel-name");
         uploaderEmbed = document.querySelector("div.ytp-title-expanded-heading > h2 > a");
         uploaderMiniPlayer = document.querySelector("yt-formatted-string#owner-name");
         if (uploaderMiniPlayer !== null) {
@@ -74,8 +74,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                     ? document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a")
                     : uploaderEmbed !== null && YouTubeEmbed && uploaderEmbed.innerText.length > 0
                         ? uploaderEmbed
-                        : uploaderTV = truncateAfter(uploaderTV.innerText, pattern), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), ads = Boolean(document.querySelector(".ytp-ad-player-overlay")), presenceData = {
-            details: title.innerText,
+                        : uploaderTV = truncateAfter(uploaderTV.textContent.replace(/\s+/g, ''), pattern), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), live = Boolean(document.querySelector(".ytp-live")), ads = Boolean(document.querySelector(".ytp-ad-player-overlay")), presenceData = {
+            details: title.textContent.replace(/\s+/g, '') == "" ? document.querySelector("div.ytp-title-text > a").textContent : title.textContent,
             state: edited == true
                 ? uploaderMiniPlayer.getAttribute("premid-value")
                 : uploaderTV !== null
@@ -135,6 +135,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             user = document.querySelector(".ytd-channel-name").textContent.replace(/\s+/g, '');
             if (user == "" || user == "‌") {
                 user = "null";
+            }
+            else {
+                user = document.querySelector(".ytd-channel-name").textContent;
             }
             if (document.location.pathname.includes("/videos")) {
                 presenceData.details = "Browsing through videos";
