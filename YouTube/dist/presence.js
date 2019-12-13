@@ -79,8 +79,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             state: edited == true
                 ? uploaderMiniPlayer.getAttribute("premid-value")
                 : uploaderTV !== null
-                    ? uploaderTV
-                    : uploader.innerText,
+                    ? uploaderTV.textContent
+                    : uploader.textContent,
             largeImageKey: "yt_lg",
             smallImageKey: video.paused ? "pause" : "play",
             smallImageText: video.paused
@@ -110,8 +110,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Currently watching an ad";
             delete presenceData.state;
         }
-        if (video && title !== null && uploader !== null) {
-            presence.setActivity(presenceData, !video.paused);
+        uploader = uploader; 
+        if (title !== null && uploader !== null) {
+            presence.setActivity(presenceData);
         }
     }
     else if (document.location.hostname == "www.youtube.com") {
