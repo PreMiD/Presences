@@ -1,4 +1,5 @@
 # How to activate VLC's web interface
+Needed for the VLC presence to work.
 
 ### Open VLC and go to `Tools->Preferences`
 ![image](https://doomlord.s-ul.eu/Hqf0JbyH)
