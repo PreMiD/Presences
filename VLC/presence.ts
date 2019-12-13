@@ -1,4 +1,4 @@
-if(document.title.includes("VLC media player")) { // yeah i know.
+if(document.title.includes("VLC media player")) { // yeah i know, the url is localhost so we won't interfere if it's not the VLC interface.
 
 	var presence = new Presence({
 	    clientId: "654399399316684802",
@@ -91,7 +91,6 @@ if(document.title.includes("VLC media player")) { // yeah i know.
 			presence.setActivity(data, false);
 
 		}
-		console.log(data);
 
 	}); 
 
@@ -108,7 +107,7 @@ if(document.title.includes("VLC media player")) { // yeah i know.
 
 		req.onload = function () {
 			if (req.readyState === req.DONE) {
-				console.log(req.status);
+
 				if (req.status === 200) {
 
 					if(i > 0) i = 0;
