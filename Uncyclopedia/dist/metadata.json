@@ -22,8 +22,6 @@
         "psyklopedin.org",
         "la.uncyclopedia.info",
         "ikkepedia.org",
-        "uncyclopedia.infoMain_Page",
-        "uncyclomedia.org",
         "spademanns.org",
         "hikipedia.org",
         "desciclopedia.org",
@@ -33,7 +31,6 @@
         "beidipedia.org",
         "oncyclopedia.org",
         "sr.neciklopedija.org",
-        "commons.uncyclomedia.org",
         "necyklopedie.org",
         "fa.uncyclopedia.info",
         "mg.uncyclopedia.info",
@@ -95,9 +92,9 @@
         "uncyclopedia.ca",
         "desciclopedia.ws"
     ],
-    "version": "1.0",
+    "version": "1.2",
     "logo": "https://menma.is-inside.me/Z65P02WL.png",
-    "thumbnail": "https://cdn.discordapp.com/attachments/587122068957560893/645804177339056164/unknown.png",
+    "thumbnail": "https://menma.is-inside.me/KpYlBQsB.png",
     "color": "#A1825C",
     "tags": [
         "encyclopedia",
