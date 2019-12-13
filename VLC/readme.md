@@ -16,10 +16,10 @@ Needed for the VLC presence to work.
 ### Set a password for `Lua HTTP` there (remember it)
 ![image](https://doomlord.s-ul.eu/LR9MZk2P)
 
-### Go to http://localhost:8080 and enter the password you've set before **( leave the username field blank )**
+### Go to http://localhost:8080 **( THE PORT MUST BE 8080! )** and enter the password you've set before **( leave the username field blank )**
 ![image](https://doomlord.s-ul.eu/GKzMdZAl)
  
-### Done, don't forget to keep the page open (better pin it to)
+### Done, don't forget to keep the page open (better pin it too)
 ![image](https://doomlord.s-ul.eu/iHuiBr8x)
 
 
