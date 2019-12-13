@@ -32,7 +32,7 @@ presence.on("UpdateData", () => {
         presence.setActivity(presenceData);
     }
 
-}));
+});
 function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
