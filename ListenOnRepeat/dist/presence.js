@@ -45,7 +45,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     };
     if (title !== null) {
         if (iFrameVideo == true && !isNaN(duration)) {
-            presenceData.smallImageKey = paused ? "pause" : "play";
+            presenceData.smallImageKey = paused ? "pause" : "repeat";
             presenceData.smallImageText = paused ? (yield strings).pause : (yield strings).play;
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
