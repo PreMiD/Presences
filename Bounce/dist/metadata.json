@@ -11,11 +11,12 @@
     "description": {
         "en": "Bounce Radio is a 24/7 international hit music station that provides hit music to everyone. Made by gamers for gamers.",
         "nl": "Bounce Radio is een 24/7 internationaal hitmuziekstation dat iedereen hitmuziek biedt. Gemaakt door gamers voor gamers."
+        "fr": "Bounce Radio est une station de musique à succès internationale 24/7 qui fournit de la musique à succès à tout le monde. Fabriqué par des joueurs pour des joueurs."
     },
     "url": ["wearebounce.net", "www.wearebounce.net"],
     "version": "1.7.1",
     "logo": "https://wearebounce.net/branding/LogoIconColour.png",
-    "thumbnail": "https://downbeat.is-inside.me/JOEMiVbm.png",
+    "thumbnail": "https://i.imgur.com/3hwAxFu.png",
     "color": "#32a852",
     "tags": [
         "music",
