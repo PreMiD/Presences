@@ -64,8 +64,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/v/")) {
       var currentTime : any, duration : any, paused : any, timestamps : any, video : HTMLVideoElement;
       video = document.querySelector('video');
-      currentTime = video.currentTime;
-      duration = video.duration;
+      currentTime = video.currentTime,
+      duration = video.duration,
       paused = video.paused;
 
       if (document.location.pathname.includes("/programa/")) {
@@ -73,7 +73,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = document.querySelector('.playkit-video-info__ep-title').textContent;
       } else {
         title = document.querySelector('.playkit-video-info__ep-title').textContent;
-        presenceData.state = document.querySelector('.playkit-video-info__detail-season').textContent;
       }
 
       if (!isNaN(duration)) {
@@ -92,7 +91,7 @@ presence.on("UpdateData", async () => {
 
       } else if (isNaN(duration)) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Looing at:";
+        presenceData.details = "Looking at:";
         presenceData.state = title;
       }
     } else if (document.location.pathname.includes("/agora-na-globo/")) {
