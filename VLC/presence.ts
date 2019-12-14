@@ -1,32 +1,32 @@
-if(document.title.includes("VLC media player")) { // yeah i know, the url is localhost so we won't interfere if it's not the VLC interface.
-
-	var presence = new Presence({
-	    clientId: "654399399316684802",
-	    mediaKeys: false
-	}),
-	    strings = presence.getStrings({
-	    play: "presence.playback.playing",
-	    pause: "presence.playback.paused",
-	    browsing: "presence.activity.browsing"
-	}),
-	    isShow: boolean = false,
-	    isSong: boolean = false,
-	    prev: any, elapsed: any, i: any,
-	    media = { // anyone is welcome to suggest more metadata via GH issues
-	        time: null,
-	        length: null,
-	        state: "stopped",
-	        filename: null,
-	    	title: null,
-	    	artist: null,
-	    	track_number: null,
-	    	showName: null,
-	    	seasonNumber: null,
-	    	episodeNumber: null
-	};
+var presence = new Presence({
+    clientId: "654399399316684802",
+    mediaKeys: false
+}),
+    strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browsing: "presence.activity.browsing"
+}),
+    isShow: boolean = false,
+    isSong: boolean = false,
+    prev: any, elapsed: any, i: any,
+    media = { // anyone is welcome to suggest more metadata via GH issues
+        time: null,
+        length: null,
+        state: "stopped",
+        filename: null,
+    	title: null,
+    	artist: null,
+    	track_number: null,
+    	showName: null,
+    	seasonNumber: null,
+    	episodeNumber: null
+};
 
 
-	presence.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
+
+	if(document.title.includes("VLC media player")) {
 
 	    var data: presenceData = {
 	        largeImageKey: "vlc"
@@ -91,16 +91,19 @@ if(document.title.includes("VLC media player")) { // yeah i know, the url is loc
 			presence.setActivity(data, false);
 
 		}
-
-	}); 
-
-	function getTimestamps(mediaTime: any, mediaDuration: any) {
-	  var startTime = Date.now();
-	  var endTime = Math.floor(startTime / 1000) - mediaTime + mediaDuration;
-	  return [Math.floor(startTime / 1000), endTime];
 	}
 
-	var getStatus = setLoop(function(){
+}); 
+
+function getTimestamps(mediaTime: any, mediaDuration: any) {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - mediaTime + mediaDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+var getStatus = setLoop(function(){
+
+	if(document.title.includes("VLC media player")) {
 
 		const req = new XMLHttpRequest();
 		// jquery sucks!!!
@@ -178,11 +181,11 @@ if(document.title.includes("VLC media player")) { // yeah i know, the url is loc
 			+ (document.location.port ? document.location.port : '') + "/requests/status.xml", true);
 		req.send();
 
-	}, 2000); // if you lower it, you may as well microwave the CPU
-
-	function setLoop(f, ms) {
-	  f();
-	  return setInterval(f, ms);
 	}
 
+}, 2000); // if you lower it, you may as well microwave the CPU
+
+function setLoop(f, ms) {
+  f();
+  return setInterval(f, ms);
 }

@@ -8,14 +8,14 @@
     "en": "WARNING! read https://kek.gg/u/bpKr"
   },
   "url": "localhost",
-  "version": "1.0",
+  "version": "1.0.1",
   "logo": "https://doomlord.s-ul.eu/IyWiyxlH",
   "thumbnail": "https://doomlord.s-ul.eu/LOCgKTnx",
   "color": "#ff7c00",
   "tags": [
     "videolan",
     "media-player",
-    "application"
+    "experimental-app"
   ],
   "category": "videos"
 }
