@@ -35,6 +35,16 @@ const presence = new Presence({
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     const page = document.location.pathname;
     const browsingStamp = Math.floor(Date.now() / 1000);
+
+    if (page.startsWith('/home')) {
+        presence.setActivity({
+            largeImageKey: "gly-logo",
+            details: "Ana Sayfa",
+            state: 'Gönderilere bakıyor...',
+            startTimestamp: browsingStamp
+        });
+    }
+
     // News
     if (page.startsWith('/news') && page.length > ('/news'.length + 1)) {
         let title = document.querySelector("#content > div:nth-child(3) > a.title");
