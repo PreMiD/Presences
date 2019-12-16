@@ -15,7 +15,7 @@ presence.on("UpdateData", () => {
         presenceData.startTimestamp = browsingStamp;
         if (document.location.pathname.includes("/dashboard/")) {
             presenceData.details = "Managing the settings of";
-            title = document.getElementById('__BVID__16__BV_button_').innerText
+            title = document.querySelector("#__BVID__17__BV_button_ > strong").innerText
             presenceData.state = "server: " + title;
         } else if (document.location.pathname.includes("/servers")) {
             presenceData.details = "Browsing through";
