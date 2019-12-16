@@ -29,6 +29,11 @@ presence.on("UpdateData", () => {
         presenceData.state=document.querySelector("#__layout > div > main > div > section.profile__header > div > div > div").textContent
 		presenceData.startTimestamp = browsingStamp;
     }
+		 if (page.includes("terms")) {
+       presenceData.details = "Viewing a page:";
+        presenceData.state = "Terms of Service";
+		presenceData.startTimestamp = browsingStamp;
+    }
  	else if (page.startsWith("/about")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "About";
