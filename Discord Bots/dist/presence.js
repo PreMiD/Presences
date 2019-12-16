@@ -24,12 +24,12 @@ presence.on("UpdateData", () => {
         presenceData.state=document.querySelector("#__layout > div > main > div > section.bot__header > div > div > div > div.bot__name").textContent
         presenceData.startTimestamp = browsingStamp;   
    }
-   	 if (page.includes("profile")) {
+   	else if (page.includes("profile")) {
         presenceData.details = "Viewing a profile:";
         presenceData.state=document.querySelector("#__layout > div > main > div > section.profile__header > div > div > div").textContent
 		presenceData.startTimestamp = browsingStamp;
     }
-		 if (page.includes("terms")) {
+        else if (page.includes("terms")) {
        presenceData.details = "Viewing a page:";
         presenceData.state = "Terms of Service";
 		presenceData.startTimestamp = browsingStamp;
