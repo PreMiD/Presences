@@ -14,8 +14,12 @@ presence.on("UpdateData", () => {
     if (document.location.hostname == "carl.gg") {
         presenceData.startTimestamp = browsingStamp;
         if (document.location.pathname.includes("/dashboard/")) {
+            if (document.querySelector("#__BVID__135__BV_button_ > strong")) {
+                title = document.querySelector("#__BVID__135__BV_button_ > strong")
+            } else if (document.querySelector("#__BVID__17__BV_button_ > strong").textContent) {
+                title = document.querySelector("#__BVID__17__BV_button_ > strong").textContent
+            }
             presenceData.details = "Managing the settings of";
-            title = document.querySelector("#__BVID__17__BV_button_ > strong").innerText
             presenceData.state = "server: " + title;
         } else if (document.location.pathname.includes("/servers")) {
             presenceData.details = "Browsing through";
