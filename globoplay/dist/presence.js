@@ -73,8 +73,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else if (document.location.pathname.includes("/v/")) {
             var currentTime, duration, paused, timestamps, video;
             video = document.querySelector('video');
-            currentTime = video.currentTime;
-            duration = video.duration;
+            currentTime = video.currentTime,
+            duration = video.duration,
             paused = video.paused;
             if (document.location.pathname.includes("/programa/")) {
                 title = document.querySelector('.playkit-video-info__link-text').textContent;
@@ -82,7 +82,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
             else {
                 title = document.querySelector('.playkit-video-info__ep-title').textContent;
-                presenceData.state = document.querySelector('.playkit-video-info__detail-season').textContent;
             }
             if (!isNaN(duration)) {
                 timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
@@ -98,7 +97,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
             else if (isNaN(duration)) {
                 presenceData.startTimestamp = browsingStamp;
-                presenceData.details = "Looing at:";
+                presenceData.details = "Looking at:";
                 presenceData.state = title;
             }
         }

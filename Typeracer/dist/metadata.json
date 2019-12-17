@@ -1,0 +1,21 @@
+{
+	"author": {
+		"name": "Hans5958",
+		"id": "279855717203050496"
+	},
+	"service": "Typeracer",
+	"url": ["play.typeracer.com", "data.typeracer.com"],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/tms4xbr.png",
+	"thumbnail": "https://i.imgur.com/HEhUuhF.png",
+	"color": "#007ec5",
+	"tags": [
+		"typing",
+		"multiplayer",
+		"competition"
+	],
+	"description": {
+		"en": "The award-winning online typing competition, TypeRacer, allows people to race each-other by typing quotes from books, movies, and songs. It is the first multiplayer typing game on the web."
+	},
+	"category": "games"
+}
