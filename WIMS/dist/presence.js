@@ -12,7 +12,7 @@ if (document.getElementsByTagName("frame")[1]) {
     }
 }
 var presence = new Presence({
-    clientId: "556828545469513730",
+    clientId: "656959119118565406",
     mediaKeys: false
 });
 if (document.baseURI.match(/module=adm/) && document.baseURI.match(/(type=|classes)/) || (document.getElementsByClassName("menuitem")[1]).innerText == "") {
