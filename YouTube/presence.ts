@@ -9,7 +9,7 @@ strings = presence.getStrings({
 });
 
 
-// well idk lmao
+// YouTube TV separator pattern
 var pattern = "•";
 function truncateAfter(str, pattern) {
   return str.slice(0, str.indexOf(pattern));
@@ -73,7 +73,6 @@ presence.on("UpdateData", async () => {
     var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
     var live = Boolean(document.querySelector(".ytp-live")), ads = Boolean(document.querySelector(".ytp-ad-player-overlay"));
     
-
     var presenceData: presenceData = {
       details: title.textContent.replace(/\s+/g, '') == "" ? document.querySelector("div.ytp-title-text > a").textContent : title.textContent,
       state: edited == true
@@ -153,11 +152,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = search.value;
       presenceData.smallImageKey = "search";
       presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/channel") || document.location.pathname.includes("/user")) { //Sometimes causes problems
-      user = document.querySelector(".ytd-channel-name").textContent.replace(/\s+/g, '');
-      (user == "" || user == "‌")
-        ? user = "null"
-        : user = document.querySelector(".ytd-channel-name").textContent;
+    } else if (document.location.pathname.includes("/channel") || document.location.pathname.includes("/user")) { //Sometimes causes problems     
+
+      user = document.title.substr(0, document.title.lastIndexOf(' - YouTube'));
+
+      // don't remove the second, includes an invisible character
+      if(user.replace(/\s+/g, '') == "" || user.replace(/\s+/g, '') == "‌") user = "null";
       
       if (document.location.pathname.includes("/videos")) {
         presenceData.details = "Browsing through videos";//youtube.browsingVideos
@@ -234,8 +234,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/intl")) {
       presenceData.details = "Reading about:";//general.readingAbout
-      title = document.querySelector("head > title");
-      presenceData.state = title.textContent.replace(" - YouTube", "");
+      presenceData.state = document.title.substr(0, document.title.lastIndexOf(' - YouTube'));
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.URL == "https://www.youtube.com/") {
