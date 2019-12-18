@@ -46,8 +46,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname == "/leaderboards") {
         presenceData.details = "Checking the leaderboards!";
     }
-    else if (document.location.pathname == "") {
-    }
     else {
         presenceData.details = "Breaking stuff!";
     }
