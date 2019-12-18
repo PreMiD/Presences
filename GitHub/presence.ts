@@ -88,8 +88,18 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
 
       delete presenceData.details;
+      
+  
+  } else if(document.location.pathname.startsWith("/issues")) {
+    
 
+      presenceData.state = "Browsing issues...";
 
+      presenceData.startTimestamp = browsingStamp;
+
+      delete presenceData.details;
+  
+    
   } else if(document.location.pathname.startsWith("/pulls")) {
 
 
