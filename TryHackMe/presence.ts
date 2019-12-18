@@ -48,8 +48,6 @@ presence.on("UpdateData", async () => {
         
         presenceData.details = "Checking the leaderboards!"
 
-    } else if (document.location.pathname == "") {
-
     } else {
         presenceData.details = "Breaking stuff!"
     }
