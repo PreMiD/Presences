@@ -22,9 +22,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
         largeImageKey: "sdarot"
     };
-    if (document.location.pathname == "/") {
+    if (document.location.pathname == "/" || document.location.pathname == "/index") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "צופה בדף הבית";
+    }
+    else if (document.location.pathname == "/series") {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "צופה ברשימת הסדרות";
     }
     else if (document.location.pathname.includes("/watch/")) {
         var currentTime, duration, paused, timestamps, video;
