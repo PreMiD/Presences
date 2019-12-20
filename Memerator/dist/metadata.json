@@ -1,0 +1,20 @@
+{
+   "author": {
+      "name": "Chew",
+      "id": "476488167042580481"
+   },
+   "url": "memerator.me",
+   "description": {
+      "Memerator": "Memerator is a up and coming meme website where you can post and rate other's memes."
+   },
+   "service": "Memerator",
+   "version": "1.0.0",
+   "logo": "https://cdn.memerator.me/memerator.png",
+   "thumbnail": "https://memerator.me/scott_stretch.png",
+   "color": "#FABC4D",
+   "tags": [
+      "meme"
+   ],
+   "category": "socials",
+   "regExp": "(beta)?[.]?memerator[.]me"
+}
