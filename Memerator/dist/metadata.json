@@ -5,7 +5,7 @@
    },
    "url": ["memerator.me", "beta.memerator.me"],
    "description": {
-      "Memerator": "Memerator is a up and coming meme website where you can post and rate other's memes."
+      "en": "Memerator is a up and coming meme website where you can post and rate other's memes."
    },
    "service": "Memerator",
    "version": "1.0.0",
