@@ -3,7 +3,7 @@
       "name": "Chew",
       "id": "476488167042580481"
    },
-   "url": "memerator.me",
+   "url": ["memerator.me", "beta.memerator.me"],
    "description": {
       "Memerator": "Memerator is a up and coming meme website where you can post and rate other's memes."
    },
@@ -16,5 +16,4 @@
       "meme"
    ],
    "category": "socials",
-   "regExp": "(beta)?[.]?memerator[.]me"
 }
