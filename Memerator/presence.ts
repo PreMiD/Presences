@@ -40,6 +40,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing recent memes";
       } else if (document.location.pathname.includes("/meme/reports")){
         presenceData.details = "Viewing memes they've reported";
+      } else if (document.location.pathname.includes("/meme/submit")){
+        presenceData.details = "Submitting a meme";
       } else if (document.location.pathname.includes("/meme/following")){
         presenceData.details = "Viewing memes from following";
       } else if (document.location.pathname.includes("/meme/topmemers")){
