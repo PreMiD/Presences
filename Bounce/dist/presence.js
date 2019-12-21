@@ -118,8 +118,7 @@ presence.on("UpdateData", () => {
      else if(document.location.pathname.startsWith("/portal")) {
       presenceData.state = "Browsing Staff Panel";
       presenceData.details = "Logging in" 
-     
-         break;
+     switch (document.location.hash.replace("#", "")) {       
          case "user.home":
             presenceData.details = "Viewing Homepage"
          break;
