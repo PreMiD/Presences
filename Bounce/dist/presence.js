@@ -118,7 +118,8 @@ presence.on("UpdateData", () => {
      else if(document.location.pathname.startsWith("/portal")) {
       presenceData.state = "Browsing Staff Panel";
       presenceData.details = "Logging in" 
-     switch (document.location.hash.replace("#", "")) {       
+     switch (document.location.hash.replace("#", "")) {   
+         break;
          case "user.home":
             presenceData.details = "Viewing Homepage"
          break;
@@ -138,7 +139,10 @@ presence.on("UpdateData", () => {
             presenceData.details = "Updating Account"
          break;
          case "manager.createaccount":
-            presenceData.details = "Creating Account"                  
+            presenceData.details = "Creating Account"   
+         break;
+         case "presenter.resources":
+            presenceData.details = "Viewing Resources" 
 }   
 
     if (document.location.hash.includes("Bounce.News")) {
