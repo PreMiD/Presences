@@ -117,8 +117,30 @@ presence.on("UpdateData", () => {
     }
      else if(document.location.pathname.startsWith("/portal")) {
       presenceData.state = "Browsing Staff Panel";
-      presenceData.details = "Logging in"
-  }
+      presenceData.details = "Logging in" 
+     
+         break;
+         case "user.home":
+            presenceData.details = "Viewing Homepage"
+         break;
+         case "user.rules":
+            presenceData.details = "Viewing Rules"
+         break;
+         case "user.bookaway":
+            presenceData.details = "Booking Away"
+         break;
+         case "news.create":
+            presenceData.details = "Creating Article"
+         break;
+         case "editor.allstories":
+            presenceData.details = "Viewing Articles"
+         break;
+         case "manager.modifyaccounts":
+            presenceData.details = "Updating Account"
+         break;
+         case "manager.createaccount":
+            presenceData.details = "Creating Account"                  
+}   
 
     if (document.location.hash.includes("Bounce.News")) {
         title = document.querySelector("body > div.web > div > div > div > div > div.pageajax > div.leftnews1 > center > b:nth-child(1)");
