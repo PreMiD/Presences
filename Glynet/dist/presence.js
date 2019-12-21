@@ -159,4 +159,4 @@ presence.on("UpdateData", () => {
         });
     }
 
-}));
+});
