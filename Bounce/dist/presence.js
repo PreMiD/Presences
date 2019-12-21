@@ -115,6 +115,10 @@ presence.on("UpdateData", () => {
         presenceData.details = "Booking a slot";
         presenceData.state = "Day: " + day;
     }
+     else if(document.location.pathname.startsWith("/portal")) {
+      presenceData.state = "Browsing Staff Panel";
+      presenceData.details = "Logging in"
+  }
 
     if (document.location.hash.includes("Bounce.News")) {
         title = document.querySelector("body > div.web > div > div > div > div > div.pageajax > div.leftnews1 > center > b:nth-child(1)");
