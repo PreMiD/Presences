@@ -142,7 +142,8 @@ presence.on("UpdateData", () => {
             presenceData.details = "Creating Account"   
          break;
          case "presenter.resources":
-            presenceData.details = "Viewing Resources" 
+            presenceData.details = "Viewing Resources"
+         break;
 }   
 
     if (document.location.hash.includes("Bounce.News")) {
