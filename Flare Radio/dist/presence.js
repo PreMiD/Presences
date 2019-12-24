@@ -10,22 +10,32 @@ function newStats() {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            let dataa = JSON.parse(this.responseText);
-            strack = dataa.data[0].track.title;
-            sartist = dataa.data[0].track.artist;
-            slisteners = dataa.data[0].listenertotal;
+            let data = JSON.parse(this.responseText);
+            strack = data.now_playing.song.title;
+            sartist = data.now_playing.song.artist;
+            slisteners = data.listeners.total;
+            sduration = data.now_playing.duration;
+            selapsed = data.now_playing.elapsed;
         }
     };
-    xhttp.open('GET', 'https://centauri.shoutca.st/rpc/flareradio/streaminfo.get', true);
+    xhttp.open('GET', 'https://radio.flareradio.net/api/nowplaying/1', true);
     xhttp.send();
 }
 presence.on("UpdateData", () => {
     let presenceData = {
         largeImageKey: "flare"
     };
+    timestamps = getTimestamps(Math.floor(selapsed),Math.floor(sduration));
     presenceData.smallImageKey = "play";
     presenceData.details = sartist + " - " + strack;
     presenceData.state = slisteners + " Listeners";
     presenceData.smallImageText = "Playing";
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
     presence.setActivity(presenceData);
 });
+function getTimestamps(videoTime, videoDuration) {
+    var startTime = Date.now();
+    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    return [Math.floor(startTime / 1000), endTime];
+}
