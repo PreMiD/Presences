@@ -6,8 +6,7 @@ var presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-}),
-    tv: any, 
+}), 
     video = {
         duration: 0,
         currentTime: 0,
