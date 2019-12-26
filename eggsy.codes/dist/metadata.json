@@ -9,10 +9,10 @@
         "tr": "eggsy.codes, EGGSY'nin PreMiD ile ve bir çok başka projesiyle alakalı işlerini sergilediği internet sitesidir!"
     },
     "url": "eggsy.codes",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "logo": "https://premid.is-inside.me/L7cXeX83.jpg",
     "thumbnail": "https://premid.is-inside.me/pTbIrxn7.png",
-    "color": "#7289da",
+    "color": "#212121",
     "tags": [
         "eggsy",
         "premid"
