@@ -119,7 +119,6 @@ presence.on("UpdateData", () => {
       presenceData.state = "Browsing Staff Panel";
       presenceData.details = "Logging in" 
      switch (document.location.hash.replace("#", "")) {   
-         break;
          case "user.home":
             presenceData.details = "Viewing Homepage"
          break;
