@@ -9,10 +9,8 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
     let presenceData = {
-        largeImageKey: "logo",
-        smallImageKey: "author",
-        smallImageText: "Developer: Dominik#7464"
-    };
+        largeImageKey: "logo"
+};
     if (document.location.hostname == "bots.discordlabs.org") {
         presenceData.details = "Viewing Page:";
         presenceData.state = ('DiscordLabs Bot List')
