@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "Dominik",
+      "id": "594491170248458250"
+    },
+    "service": "Usercord.org",
+    "description": {
+      "en": "Fraud prevention, scam prevention and Discord safety brought to you by UserCord."
+    },
+    "url": "usercord.org",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/MmTi5zJ.png",
+    "thumbnail": "https://i.imgur.com/olNX0gM.png",
+    "color": "#00ff00",
+    "tags": [
+      "Users",
+      "Discord",
+      "List"
+    ],
+    "category": "other"
+  }
