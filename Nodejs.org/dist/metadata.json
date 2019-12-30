@@ -1,0 +1,20 @@
+{
+    "author": {
+      "name": "Dominik",
+      "id": "594491170248458250"
+    },
+    "service": "Nodejs.org",
+    "description": {
+      "en": "Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine."
+    },
+    "url": "nodejs.org",
+    "version": "1.0",
+    "logo": "https://cdn.discordapp.com/attachments/629811375551676429/630434980463640576/usercord_u_logo_tpArtboard_1.png",
+    "thumbnail": "https://i.imgur.com/K7XK8SV.png",
+    "color": "#013220",
+    "tags": [
+      "Node.js",
+      "JavaScript"
+    ],
+    "category": "other"
+  }
