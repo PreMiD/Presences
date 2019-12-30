@@ -1,0 +1,21 @@
+{
+    "author": {
+        "name": "Nekolen",
+        "id": "270125856679002113"
+    },
+    "service": "Just Light Novels",
+    "description": {
+        "en": "Just Light Novels! Home of All Light Novels"
+    },
+    "url": "justlightnovels.com",
+    "version": "1.0",
+    "logo": "https://cdn.discordapp.com/attachments/270798717089480704/631596622090076161/unknown.png",
+    "thumbnail": "https://cdn.discordapp.com/attachments/270798717089480704/631592561995415562/unknown.png",
+    "color":"#0000ff",
+    "tags": [
+        "light novels",
+        "reading",
+        "free"
+    ],
+    "category": "other"
+}

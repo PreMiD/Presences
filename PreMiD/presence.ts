@@ -1,48 +1,67 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "503557087041683458"
-});
-
-var oldState = null;
-var presenceName : any, profileName : any;
-presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
-    largeImageKey: "lg"
+}),
+  pages = {
+    "/": "Homepage",
+    "/home": "Homepage",
+    "/store": "Store",
+    "/downloads": "Downloads",
+    "/contributors": "Contributors",
+    "/cookies": "Cookie Policy",
+    "/privacy": "Privacy Policy",
+    "/tos": "Terms of Services",
+    "/wiki": "Wiki",
+    "/en/home": "Docs Homepage",
+    "/about": "About",
+    "/install/requirements": "System Requirements",
+    "/install": "Installation",
+    "/troubleshooting": "Troubleshooting",
+    "/dev": "Getting Started",
+    "/dev/api": "API",
+    "/dev/presence": "Presence Development"
   };
 
-  presenceName = document.querySelector("div.header__title > h1.presence-name");
-  profileName = document.querySelector("div.userpage__header > div.user-data > p");
+presence.on("UpdateData", async () => {
+  console.log("hhey")
 
-  if (document.location.pathname.startsWith("/store") && presenceName == null)
-    presenceData.state = "Store";
-  else if (document.location.pathname.startsWith("/downloads"))
-    presenceData.state = "Downloads";
-  else if (document.location.pathname.startsWith("/contributors"))
-    presenceData.state = "Contributors";
-  else if (document.location.pathname.startsWith("/cookies"))
-    presenceData.state = "Cookie Policy";
-  else if (document.location.pathname.startsWith("/privacy"))
-    presenceData.state = "Privacy Policy";
-  else if (document.location.pathname.startsWith("/tos"))
-    presenceData.state = "Terms of Service";
-  else if (document.location.hostname.startsWith("wiki"))
-    presenceData.state = "Wiki";
-  else if (document.location.hostname.startsWith("docs"))
-    presenceData.state = "Docs";
-  else if (document.location.pathname.includes("/store/presences/")){
-    presenceData.details = "Presence Page";
-    presenceData.state = presenceName.innerText;
-  } else if (document.location.pathname.startsWith("/users")){
-    presenceData.details = "User Profile";
-    presenceData.state = profileName.innerText;
+  const page = document.location.pathname,
+    page2 = document.location.pathname.slice(3),
+    host = document.location.hostname,
+    presenceName = document.querySelector("div.header__title > h1.presence-name"),
+    profileName = document.querySelector("div.userpage__header > div.user-data > p") as any && document.querySelector("div.userpage__header > div.user-data > p").textContent != "" ? document.querySelector("div.userpage__header > div.user-data > p").textContent : null,
+    fixedProfileName = profileName ? profileName.slice(1, (profileName.indexOf("#") - 1)) + profileName.slice(profileName.indexOf("#"), profileName.length) as any : null;
+
+  if (host == "premid.app") {
+    if (page.includes("/users/") && fixedProfileName) {
+      presence.setActivity({
+        largeImageKey: "lg",
+        details: "User Profile",
+        state: fixedProfileName || "Unknown",
+        startTimestamp: Math.floor(Date.now() / 1000)
+      })
+    } else if (page.includes("/store/presences/") && presenceName && presenceName.textContent != "") {
+      presence.setActivity({
+        largeImageKey: "lg",
+        details: "Presence Page",
+        state: presenceName.textContent || "Unknown",
+        startTimestamp: Math.floor(Date.now() / 1000)
+      })
+    } else if (pages[page] || pages[page.slice(0, -1)]) {
+      presence.setActivity({
+        largeImageKey: "lg",
+        details: "Viewing a page:",
+        state: pages[page] || pages[page.slice(0, -1)],
+        startTimestamp: Math.floor(Date.now() / 1000)
+      })
+    }
+  } else if (host == "docs.premid.app") {
+    if (pages[page2] || pages[page2.slice(0, -1)]) {
+      presence.setActivity({
+        largeImageKey: "lg",
+        details: "Viewing a page on docs:",
+        state: pages[page2] || pages[page2.slice(0, -1)],
+        startTimestamp: Math.floor(Date.now() / 1000)
+      })
+    }
   }
-  else presenceData = null;
-
-  if (oldState !== presenceData && presenceData !== null) {
-    oldState = presenceData;
-    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-  }
-
-  presenceData === null
-    ? presence.setActivity()
-    : presence.setActivity(presenceData);
 });

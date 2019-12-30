@@ -7,6 +7,10 @@
     {
       "name": "Bryan",
       "id": "293775922757238784"
+    },
+    {
+      "name": "DooMLorD",
+      "id": "465105167751315471"
     }
   ],
   "service": "Netflix",
@@ -17,10 +21,11 @@
     "pt_BR": "Netflix é líder mundial em entretenimento na internet com 139 milhões de assinaturas pagas em mais de 190 países contendo séries de TV, documentários e filmes através de uma ampla variedade de gêneros e línguas.",
     "fr": "Netflix est le leader mondial de service de divertissement d'internet avec 139 millions de souscrivants dans plus de 190 pays profirant de séries télévisées, documentaires et films à travers une grande variété de genres et langues.",
     "uk": "Netflix - це лідер Інтернет-розваг у світі, що має 139 мільйонів платних підписників у понад 190 країнах, які дивляться телесеріали, документальні фільми та художні фільми у широкому спектрі жанрів та мов.",
-    "nl": "Netflix is wereldwijd de leider in online entertainmentdienst met 139 miljoen betaalde lidmaatschappen in meer dan 190 landen die genieten van tv-series, documentaires en speelfilms in een breed scala aan genres en talen."
+    "nl": "Netflix is wereldwijd de leider in online entertainmentdienst met 139 miljoen betaalde lidmaatschappen in meer dan 190 landen die genieten van tv-series, documentaires en speelfilms in een breed scala aan genres en talen.",
+    "tr": "Netflix, 190'dan fazla ülkede 139 milyon ücretli üyeliğin, dizi, belgesel ve çeşitli tür ve dillerdeki sinema filmlerinin tadını çıkarttığı, dünyanın önde gelen internet dizi/film hizmetidir."
   },
-  "url": "www.netflix.com",
-  "version": "3.1",
+  "url": ["www.netflix.com", "netflix.com"],
+  "version": "3.5",
   "logo": "https://i.gyazo.com/2161fe603eec5196905176f5b8dcc325.png",
   "thumbnail": "https://i.gyazo.com/28e3c4caccda67a4a299588c8058da50.jpg",
   "color": "#db0000",

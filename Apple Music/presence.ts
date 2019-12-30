@@ -15,10 +15,10 @@ presence.on("UpdateData", async () => {
         largeImageKey: "applemusic-logo",
     };
     
-    var playerCheck = document.querySelector(".web-chrome-playback-lcd__playback-description") ? true : false;
+    var playerCheck = document.querySelector(".web-chrome-playback-controls__playback-btn[disabled]") ? false : true;
     if (playerCheck) {
-        var title = document.querySelector(".web-chrome-playback-lcd__song-name").textContent;
-        var author = document.querySelector(".web-chrome-playback-lcd__sub-copy").textContent;
+        var title = document.querySelector(".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper").textContent.trim();
+        var author = document.querySelector(".web-chrome-playback-lcd__sub-copy-scroll").textContent.split("—")[0];
         var audioTime = document.querySelector(".web-chrome-playback-lcd__time-remaining").textContent;
         var timestamps = getTimestamps(audioTime);
         var paused = document.querySelector(".web-chrome-playback-controls__playback-btn[aria-label='Play']") ? true : false;

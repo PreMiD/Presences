@@ -19,16 +19,12 @@ presence.on('UpdateData', async () => {
 
     try {
       var title = document.querySelector(
-        '.playbackSoundBadge__titleLink > span:nth-child(1)'
+        '.playbackSoundBadge__titleLink > span:nth-child(2)'
       ).textContent;
       var author = document.querySelector('.playbackSoundBadge__lightLink')
         .textContent;
-      var audioTime = document.querySelector(
-        '.playbackTimeline__timePassed > span:nth-child(2)'
-      ).textContent;
-      var audioDuration = document.querySelector(
-        '.playbackTimeline__duration > span:nth-child(2)'
-      ).textContent;
+      var audioTime = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div > div > div > div.playbackTimeline__timePassed > span:nth-child(2)").textContent;
+      var audioDuration = document.querySelector("#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div > div > div > div.playbackTimeline__duration > span:nth-child(2)").textContent;
       var timestamps = getTimestamps(audioTime, audioDuration);
     } catch (err) {}
 

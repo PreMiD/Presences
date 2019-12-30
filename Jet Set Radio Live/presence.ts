@@ -3,21 +3,26 @@ var presence = new Presence({
   mediaKeys: false
 });
 
-timeElapsed = Math.floor(Date.now()/1000);
-
+let timeElapsed = Math.floor(Date.now() / 1000),
   strings = presence.getStrings({
-    pause: "presence.playback.paused"
-    live: "presence.playback.live",
-  });
+    pause: "presence.playback.paused",
+    live: "presence.playback.live"
+  }),
+  songName,
+  presenceState;
 
 presence.on("UpdateData", async () => {
-  songName = document.querySelector("html > body > div#information.objectSettings.touchableOff > font#programInformationText.objectSettings.touchableOff")
-  presenceState = document.querySelector("html > body > font#dateTextField.objectSettings.touchableOff")
-  if(songName.innerText.length < 1){
+  songName = document.querySelector(
+    "html > body > div#information.objectSettings.touchableOff > font#programInformationText.objectSettings.touchableOff"
+  );
+  presenceState = document.querySelector(
+    "html > body > font#dateTextField.objectSettings.touchableOff"
+  );
+  if (songName.innerText.length < 1) {
     let presenceData: presenceData = {
       details: "Not tuned in.",
       largeImageKey: "jsrl",
-      smallImageKey: "pause",
+      smallImageKey: "pause"
     };
     presence.setActivity(presenceData);
   } else {
@@ -26,8 +31,8 @@ presence.on("UpdateData", async () => {
       state: presenceState.innerText,
       largeImageKey: "jsrl",
       smallImageKey: "live",
-      startTimestamp: timeElapsed,
+      startTimestamp: timeElapsed
     };
     presence.setActivity(presenceData);
-  };
-};
+  }
+});
