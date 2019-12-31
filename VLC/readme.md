@@ -15,8 +15,10 @@ Needed for the VLC presence to work.
 
 ### Set a password for `Lua HTTP` there (remember it)
 ![image](https://doomlord.s-ul.eu/LR9MZk2P)
-
-### Go to http://localhost:8080 **( THE PORT MUST BE 8080! )** and enter the password you've set before **( leave the username field blank )**
+### Open Command Prompt/Terminal and type this (assuming you installed VLC into the default path):
+For Windows: (drive you installed VLC to):\"Program Files"\VideoLAN\VLC\vlc --http-host=localhost --http-port=8080</br>
+For Linux: vlc --http-host localhost --http-port 8080
+### Go to http://localhost:8080 (THE PORT MUST BE 8080!) and enter the password you've set before (leave the username field blank)
 ![image](https://doomlord.s-ul.eu/GKzMdZAl)
  
 ### Done, don't forget to keep the page open (better pin it too)
