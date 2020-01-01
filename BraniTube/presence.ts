@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
 
       var videoTitle : any;
 
-      videoTitle = document.querySelector("div.playlistAssistir > div.infosAtulEpisodio > div.nomeAnime");
-      var episode : any = document.querySelector("div.playlistAssistir > div.infosAtulEpisodio > div.epEpisodio"),
+      videoTitle = document.querySelector("div > div.episodeInfo > div.nomeAnime");
+      var episode : any = document.querySelector("div > div.episodeInfo > div.epInfo"),
         timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
