@@ -48,8 +48,6 @@ presence.on("UpdateData", async () => {
       var videoTitle : any;
 
       videoTitle = document.querySelector("div > div.episodeInfo > div.nomeAnime");
-      console.log(videoTitle);
-      console.log(videoTitle.innerText);
       var episode : any = document.querySelector("div > div.episodeInfo > div.epInfo"),
         timestamps = getTimestamps(
           Math.floor(video.currentTime),
