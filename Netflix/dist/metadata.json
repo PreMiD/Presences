@@ -7,6 +7,10 @@
     {
       "name": "Bryan",
       "id": "293775922757238784"
+    },
+    {
+      "name": "DooMLorD",
+      "id": "465105167751315471"
     }
   ],
   "service": "Netflix",
@@ -21,7 +25,7 @@
     "tr": "Netflix, 190'dan fazla ülkede 139 milyon ücretli üyeliğin, dizi, belgesel ve çeşitli tür ve dillerdeki sinema filmlerinin tadını çıkarttığı, dünyanın önde gelen internet dizi/film hizmetidir."
   },
   "url": ["www.netflix.com", "netflix.com"],
-  "version": "3.4.4",
+  "version": "3.5",
   "logo": "https://i.gyazo.com/2161fe603eec5196905176f5b8dcc325.png",
   "thumbnail": "https://i.gyazo.com/28e3c4caccda67a4a299588c8058da50.jpg",
   "color": "#db0000",

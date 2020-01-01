@@ -9,7 +9,7 @@ strings = presence.getStrings({
 });
 
 
-// well idk lmao
+// YouTube TV separator pattern
 var pattern = "•";
 function truncateAfter(str, pattern) {
   return str.slice(0, str.indexOf(pattern));
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 
     //* Due to differences between old and new YouTube, we should add different selectors.
     // Get title
-    YouTubeEmbed 
+    YouTubeEmbed
       ? title = document.querySelector("div.ytp-title-text > a")
       : (oldYouTube && document.location.pathname.includes("/watch"))
         ? title = document.querySelector(".watch-title")
@@ -47,9 +47,9 @@ presence.on("UpdateData", async () => {
             : title = document.querySelector("h1 yt-formatted-string.ytd-video-primary-info-renderer");
 
     var uploaderTV : any, uploaderMiniPlayer : any, uploader2 : any, edited : boolean, uploaderEmbed : any;
-    
+
     edited = false,
-    uploaderTV = document.querySelector(".player-video-details") || document.querySelector(".ytd-channel-name"),
+    uploaderTV = document.querySelector(".player-video-details") || document.querySelector("ytd-video-owner-renderer  .ytd-channel-name"),
     uploaderEmbed = document.querySelector("div.ytp-title-expanded-heading > h2 > a"),
     uploaderMiniPlayer = document.querySelector("yt-formatted-string#owner-name"),
     uploader2 = document.querySelector("#owner-name a");
@@ -64,15 +64,14 @@ presence.on("UpdateData", async () => {
           ? uploaderMiniPlayer
           : uploader2 !== null && uploader2.textContent.length > 0
             ? uploader2
-            : document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a") !== null 
+            : document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a") !== null
               ? document.querySelector("#upload-info yt-formatted-string.ytd-channel-name a")
               : uploaderEmbed !== null && YouTubeEmbed && uploaderEmbed.textContent.length > 0
                 ? uploaderEmbed
                 : uploaderTV = truncateAfter(uploaderTV.textContent.replace(/\s+/g, ''), pattern);
-                
+
     var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
     var live = Boolean(document.querySelector(".ytp-live")), ads = Boolean(document.querySelector(".ytp-ad-player-overlay"));
-    
 
     var presenceData: presenceData = {
       details: title.textContent.replace(/\s+/g, '') == "" ? document.querySelector("div.ytp-title-text > a").textContent : title.textContent,
@@ -90,9 +89,9 @@ presence.on("UpdateData", async () => {
       endTimestamp: timestamps[1]
     };
 
-    presence.setTrayTitle(video.paused 
-      ? "" 
-      : title == null 
+    presence.setTrayTitle(video.paused
+      ? ""
+      : title == null
         ? document.querySelector(".title.style-scope.ytd-video-primary-info-renderer").textContent
         : title.textContent);
 
@@ -106,12 +105,12 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).live; //general.live
       }
     }
-    
+
     //* YouTube Movies
     if (title == null && document.querySelector(".title.style-scope.ytd-video-primary-info-renderer") !== null) {
       presenceData.details = document.querySelector(".title.style-scope.ytd-video-primary-info-renderer").textContent;
     }
-    if (uploader == null && document.querySelector(".style-scope.ytd-channel-name > a") !== null) { 
+    if (uploader == null && document.querySelector(".style-scope.ytd-channel-name > a") !== null) {
       presenceData.state = document.querySelector(".style-scope.ytd-channel-name > a").textContent;
     }
 
@@ -154,11 +153,12 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/channel") || document.location.pathname.includes("/user")) { //Sometimes causes problems
-      user = document.querySelector(".ytd-channel-name").textContent.replace(/\s+/g, '');
-      (user == "" || user == "‌")
-        ? user = "null"
-        : user = document.querySelector(".ytd-channel-name").textContent;
-      
+
+      user = document.title.substr(0, document.title.lastIndexOf(' - YouTube'));
+
+      // don't remove the second, includes an invisible character
+      if(user.replace(/\s+/g, '') == "" || user.replace(/\s+/g, '') == "‌") user = "null";
+
       if (document.location.pathname.includes("/videos")) {
         presenceData.details = "Browsing through videos";//youtube.browsingVideos
         presenceData.state = "of channel: " + user;//youtube.ofChannel
@@ -184,10 +184,10 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       } else {
         presenceData.details = "Viewing channel:";//general.viewChannel
-        presenceData.state = user; 
+        presenceData.state = user;
         presenceData.startTimestamp = browsingStamp;
       }
-    } else if (document.location.pathname.includes("/feed/trending")) { 
+    } else if (document.location.pathname.includes("/feed/trending")) {
       presenceData.details = "Viewing what's trending";//youtube.trending
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/feed/subscriptions")) {
@@ -202,11 +202,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing through";//youtube.browsingThrough
       presenceData.state = "their history";//youtube.history
       presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/feed/purchases")) { 
+    } else if (document.location.pathname.includes("/feed/purchases")) {
       presenceData.details = "Browsing through";//youtube.browsingThrough
       presenceData.state = "their purchases";//youtube.purchases
       presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/playlist")) { 
+    } else if (document.location.pathname.includes("/playlist")) {
       presenceData.details = "Viewing playlist:";//general.viewPlaylist
 
       title = document.querySelector("#text-displayed");
@@ -234,8 +234,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/intl")) {
       presenceData.details = "Reading about:";//general.readingAbout
-      title = document.querySelector("head > title");
-      presenceData.state = title.textContent.replace(" - YouTube", "");
+      presenceData.state = document.title.substr(0, document.title.lastIndexOf(' - YouTube'));
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.URL == "https://www.youtube.com/") {
@@ -264,14 +263,14 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
     } else {
       presence.setActivity(presenceData);
-    } 
+    }
   } else if (document.location.hostname == "studio.youtube.com") {
     let presenceData: presenceData = {
       largeImageKey: "yt_lg",
       smallImageKey: "studio",
       smallImageText: "Youtube Studio"
     };
-    
+
     var search : any;
     var user : any;
     var browsingStamp = Math.floor(Date.now()/1000);
@@ -321,8 +320,8 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
     } else {
       presence.setActivity(presenceData);
-    } 
-  } 
+    }
+  }
 });
 
 /**

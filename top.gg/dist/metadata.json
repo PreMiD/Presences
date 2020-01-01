@@ -6,10 +6,11 @@
     "service": "top.gg",
     "description": {
         "en": "Rich Presence for top.gg - The biggest Discord Bot List and more",
+        "tr": "top.gg, en büyük ve en gelişmiş Discord bot listesidir.",
         "de": "Rich Presence für top.gg - Die größte Discord Bot Liste und mehr"
     },
     "url": "top.gg",
-    "version": "1.0",
+    "version": "1.1",
     "logo": "https://luca.is-inside.me/HIPxkOZ0.png",
     "thumbnail": "https://luca.is-inside.me/Y3pArIMt.png",
     "color": "#7289DA",
