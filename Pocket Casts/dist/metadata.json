@@ -4,10 +4,10 @@
     "id": "421371986824921109"
   },
   "service": "Pocket Casts",
-  "description": "All the features you need in a podcasting app without any of the bloat. Podcast listening turned up to 11.",
-  "url": [
-    "play.pocketcasts.com"
-  ],
+  "description": {
+    "en": "All the features you need in a podcasting app without any of the bloat. Podcast listening turned up to 11."
+  },
+  "url": "play.pocketcasts.com",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/dyQLFDS.png",
   "thumbnail": "https://i.imgur.com/AJS6zcg.png",
