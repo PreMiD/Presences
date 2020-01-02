@@ -10,355 +10,312 @@ var presence = new Presence({
     clientId: "616940877042155531",
     mediaKeys: false
 });
-var user, group, typing, teamfinish, freeornah, freeornah2, card, personal, personal2, profile, connected, apptitle;
-var browsingStamp = Math.floor(Date.now() / 1000);
+var user, group, typing, typingicon, card, connected, apptitle, lastData, thisData, lastStamp;
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
         largeImageKey: "discordwhite"
     };
-    presenceData.startTimestamp = browsingStamp;
     connected = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div");
     apptitle = document.querySelector('.appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi');
-    if (document.location.hostname == "discordapp.com" && connected !== null) {
-        if (connected.innerText.includes("@")) {
-            presenceData.details = "Voice connected with";
-            presenceData.state = connected.innerText;
-        }
-        else {
-            presenceData.details = "Voice connected to";
-            presenceData.state = connected.innerText.replace(" / " + connected.innerText.split(" / ").pop(), "") + " (Server: " + connected.innerText.split(" / ").pop() + ")";
-        }
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/channels/@me/")) {
-        user = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > h3");
-        group = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > div");
-        typing = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > form > div > div > div > textarea");
-        if (user !== null) {
-            if (typing.value !== null && typing.value !== "") {
-                presenceData.details = "Typing in DMs to:";
-                presenceData.state = user.innerText;
-                delete presenceData.smallImageKey;
-                presence.setActivity(presenceData);
+    typingicon = "﻿";
+    if (document.location.hostname == "discordapp.com") {
+        if (connected !== null && connected.textContent !== "") {
+            presenceData.startTimestamp = getTimeStamp();
+            presenceData.smallImageKey = "call";
+            if (connected.textContent.includes("@")) {
+                presenceData.details = "Voice connected with";
+                presenceData.state = connected.textContent;
             }
             else {
-                presenceData.details = "Reading DMs with:";
-                presenceData.state = user.innerText;
-                presenceData.smallImageKey = "reading";
-                presence.setActivity(presenceData);
+                presenceData.details = "Voice connected to";
+                presenceData.state = connected.textContent.replace(" / " + connected.textContent.split(" / ").pop(), "") + " (Server: " + connected.textContent.split(" / ").pop() + ")";
             }
         }
-        else if (group !== null) {
-            if (typing.value !== null && typing.value !== "") {
-                presenceData.details = "Typing in group DM: ";
-                presenceData.state = group.innerText;
-                delete presenceData.smallImageKey;
-                presence.setActivity(presenceData);
+        else if (document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div:nth-child(2) > div:nth-child(3) > div > div.sidebarRegion-VFTUkN > div > div > nav > div > div:nth-child(1)") !== null) {
+            presenceData.details = "Changing their settings";
+            presenceData.smallImageKey = "writing";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/channels/@me/")) {
+            typing = document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.content-yTz4x3 > div > form > div > div > div > div.textArea-12jD-V.slateContainer-3Qkn2x > div.markup-2BOw-j.slateTextArea-1Mkdgw").textContent !== typingicon;
+            user = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > h3");
+            group = document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.title-3qD0b-.container-1r6BKw.themed-ANHk51 > div.children-19S4PO > div.container-3FPLD3 > div > div > div");
+            if (user !== null) {
+                if (typing) {
+                    presenceData.details = "Typing in DMs to:";
+                    presenceData.state = user.textContent;
+                    presenceData.smallImageKey = "writing";
+                    presenceData.startTimestamp = getTimeStamp();
+                }
+                else {
+                    presenceData.details = "Reading DMs from:";
+                    presenceData.state = user.textContent;
+                    presenceData.smallImageKey = "reading";
+                    presenceData.startTimestamp = getTimeStamp();
+                }
+            }
+            else if (group !== null) {
+                if (typing) {
+                    presenceData.details = "Typing in group DM: ";
+                    presenceData.state = group.textContent;
+                    presenceData.smallImageKey = "writing";
+                    presenceData.startTimestamp = getTimeStamp();
+                }
+                else {
+                    presenceData.details = "Reading groups DMs of:";
+                    presenceData.state = group.textContent;
+                    presenceData.smallImageKey = "reading";
+                    presenceData.startTimestamp = getTimeStamp();
+                }
+            }
+        }
+        else if (document.location.pathname.includes("/channels/@me")) {
+            presenceData.details = "Browsing through friends";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/store")) {
+            presenceData.details = "Browsing through the store";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/channels/")) {
+            group = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > header > h1");
+            typing = document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.content-yTz4x3 > div.chatContent-a9vAAp > form > div > div > div > div.textArea-12jD-V.slateContainer-3Qkn2x > div.markup-2BOw-j.slateTextArea-1Mkdgw");
+            if (typing == null) {
+                typing = false;
             }
             else {
-                presenceData.details = "Reading groups DMs of:";
-                presenceData.state = group.innerText;
+                typing = typing.textContent !== typingicon;
+            }
+            card = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > h3");
+            if (typing) {
+                presenceData.details = "Typing in channel: ";
+                presenceData.state = "#" + card.textContent + " (Server: " + group.textContent + ")";
+                presenceData.smallImageKey = "writing";
+                presenceData.startTimestamp = getTimeStamp();
+            }
+            else {
+                presenceData.details = "Reading messages in channel:";
+                presenceData.state = "#" + card.textContent + " (Server: " + group.textContent + ")";
                 presenceData.smallImageKey = "reading";
-                presence.setActivity(presenceData);
+                presenceData.startTimestamp = getTimeStamp();
             }
         }
-        else {
-            presence.setActivity();
-            presence.setTrayTitle();
+        else if (document.location.pathname.includes("/developers/applications/")) {
+            presenceData.details = "Developer Portal";
+            presenceData.state = "Editing app: " + apptitle.textContent;
+            presenceData.smallImageKey = "writing";
+            presenceData.startTimestamp = getTimeStamp();
         }
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/channels/@me")) {
-        presenceData.details = "Browsing through friends";
-        delete presenceData.state;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/store")) {
-        presenceData.details = "Browsing through the store";
-        delete presenceData.state;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/channels/")) {
-        group = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > header > h1");
-        typing = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > form > div > div > div > textarea");
-        card = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > h3");
-        if (typing.value !== null && typing.value !== "") {
-            presenceData.details = "Typing in channel: ";
-            presenceData.state = "#" + card.innerText + " (Server: " + group.innerText + ")";
-            delete presenceData.smallImageKey;
-            presence.setActivity(presenceData);
+        else if (document.location.pathname.includes("/developers/applications")) {
+            presenceData.details = "Developer Portal";
+            presenceData.state = "Browsing through apps";
+            presenceData.startTimestamp = getTimeStamp();
         }
-        else {
-            presenceData.details = "Reading messages in channel:";
-            presenceData.state = "#" + card.innerText + " (Server: " + group.innerText + ")";
+        else if (document.location.pathname.includes("/developers/teams")) {
+            group = document.querySelector("div.label-1RJQNH.small.weightMedium-3xlxJi");
+            if (group !== null) {
+                presenceData.details = "Developer Portal";
+                presenceData.state = "Editing team: " + group.textContent;
+                presenceData.smallImageKey = "writing";
+                presenceData.startTimestamp = getTimeStamp();
+            }
+            else {
+                presenceData.details = "Developer Portal";
+                presenceData.state = "Browsing through teams";
+                presenceData.startTimestamp = getTimeStamp();
+            }
+        }
+        else if (document.location.pathname.includes("/developers/docs/")) {
+            presenceData.details = "Developer Portal";
+            presenceData.state = "Reading documentation";
             presenceData.smallImageKey = "reading";
-            presence.setActivity(presenceData);
+            presenceData.startTimestamp = getTimeStamp();
         }
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/developers/applications/") && document.location.pathname.includes("/information")) {
-        presenceData.details = "Developer Portal";
-        presenceData.state = "Editing app: " + apptitle.innerText;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/developers/applications/") && document.location.pathname.includes("/oauth")) {
-        presenceData.details = "Developer Portal";
-        presenceData.state = "Editing app: " + apptitle.innerText;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/developers/applications/") && document.location.pathname.includes("/bots")) {
-        presenceData.details = "Developer Portal";
-        presenceData.state = "Editing app: " + apptitle.innerText;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/developers/applications/") && document.location.pathname.includes("/whitelist")) {
-        presenceData.details = "Developer Portal";
-        presenceData.state = "Editing app: " + apptitle.innerText;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/developers/applications/") && document.location.pathname.includes("/rich-presence")) {
-        presenceData.details = "Developer Portal";
-        presenceData.state = "Editing app: " + apptitle.innerText;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/developers/applications/") && document.location.pathname.includes("/developer-license")) {
-        presenceData.details = "Developer Portal";
-        presenceData.state = "Editing app: " + apptitle.innerText;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/developers/applications")) {
-        presenceData.details = "Developer Portal";
-        presenceData.state = "Browsing through apps";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/developers/teams")) {
-        group = document.querySelector("div.label-1RJQNH.small.weightMedium-3xlxJi");
-        if (group !== null) {
-            presenceData.details = "Developer Portal";
-            presenceData.state = "Editing team: " + group.innerText;
-            delete presenceData.smallImageKey;
-            presence.setActivity(presenceData);
+        else if (document.location.pathname.includes("/activity")) {
+            presenceData.details = "Browsing through activity";
+            presenceData.startTimestamp = getTimeStamp();
         }
-        else {
-            presenceData.details = "Developer Portal";
-            presenceData.state = "Browsing through teams";
-            delete presenceData.smallImageKey;
-            presence.setActivity(presenceData);
+        else if (document.location.pathname.includes("/library")) {
+            presenceData.details = "Browsing through their library";
+            presenceData.startTimestamp = getTimeStamp();
         }
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/developers/docs/")) {
-        presenceData.details = "Developer Portal";
-        presenceData.state = "Reading documentation";
-        presenceData.smallImageKey = "reading";
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/activity")) {
-        presenceData.details = "Browsing through activity";
-        delete presenceData.state;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/library")) {
-        presenceData.details = "Browsing through their library";
-        delete presenceData.state;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/nitro")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "Discord Nitro";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/jobs")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "Discords Jobs page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/sell-your-game")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "sell-your-game page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/rich-presence")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "rich-presence page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/verification")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "verification page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/open-source")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "open-source page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/partners")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "partners page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/hypesquad")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "hypesquad page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/guidelines")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "Discords guidelines";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/security")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "security page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/download")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "download page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/branding")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "branding page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/terms")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "Terms Of Service page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/company")) {
-        presenceData.details = "Browsing through";
-        presenceData.state = "about page";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com" && document.location.pathname.includes("/invite")) {
-        presenceData.details = "Viewing invite:";
-        apptitle = document.URL.split("/")[4];
-        if (apptitle.includes("?")) {
-            presenceData.state = apptitle.split("?")[0];
+        else if (document.location.pathname.includes("/nitro")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "Discord Nitro";
+            presenceData.startTimestamp = getTimeStamp();
         }
-        else {
-            presenceData.state = document.URL.split("/")[4];
+        else if (document.location.pathname.includes("/jobs")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "Discords Jobs page";
+            presenceData.startTimestamp = getTimeStamp();
         }
-        presenceData.state = "COMING SOON.";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
+        else if (document.location.pathname.includes("/sell-your-game")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "sell-your-game page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/rich-presence")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "rich-presence page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/verification")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "verification page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/open-source")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "open-source page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/partners")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "partners page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/hypesquad")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "hypesquad page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/guidelines")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "Discords guidelines";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/security")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "security page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/download")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "download page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/branding")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "branding page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/terms")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "Terms Of Service page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/company")) {
+            presenceData.details = "Browsing through";
+            presenceData.state = "about page";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/invite")) {
+            presenceData.details = "Viewing invite:";
+            presenceData.startTimestamp = getTimeStamp();
+            apptitle = document.URL.split("/")[4];
+            if (apptitle.includes("?")) {
+                presenceData.state = apptitle.split("?")[0];
+            }
+            else {
+                presenceData.state = document.URL.split("/")[4];
+            }
+            presenceData.state = "COMING SOON.";
+        }
     }
     else if (document.location.hostname == "status.discordapp.com") {
         presenceData.details = "Discord Status";
-        presenceData.state = "Reading Discords status";
+        presenceData.state = "Viewing Discords status";
         presenceData.smallImageKey = "reading";
-        presence.setActivity(presenceData);
+        presenceData.startTimestamp = getTimeStamp();
     }
-    else if (document.location.hostname == "support.discordapp.com" && document.location.pathname.includes("/topics/")) {
-        group = document.querySelector("body > main > div.container > header > h1");
-        presenceData.details = "Discord Support";
-        presenceData.state = "Browsing Topic: " + group.innerText;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "support.discordapp.com" && document.location.pathname.includes("/topics")) {
-        presenceData.details = "Discord Support";
-        presenceData.state = "Browsing through topics";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "support.discordapp.com" && document.location.pathname.includes("/search")) {
-        group = document.querySelector("body > main > div.container > header > p");
-        user = group.innerText.split(" ", 5);
-        presenceData.details = "Discord Support";
-        presenceData.state = "Searching for: " + user[3];
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "support.discordapp.com" && document.location.pathname.includes("/articles")) {
-        group = document.querySelector("#article-container > article > header > h1");
-        presenceData.details = "Discord Support";
-        presenceData.state = "Reading article: " + group.innerText;
-        presenceData.smallImageKey = "reading";
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "blog.discordapp.com" && document.location.pathname.includes("/@")) {
-        group = document.location.pathname.split("@", 2);
-        presenceData.details = "Discord Blog";
-        presenceData.state = "Viewing profile: " + group[1];
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "blog.discordapp.com" && document.location.pathname.includes("/tagged")) {
-        group = document.location.pathname.split("/", 8);
-        presenceData.details = "Discord Blog";
-        presenceData.state = "Browsing tag: " + group[2];
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "blog.discordapp.com" && document.location.pathname.includes("/archive")) {
-        group = document.location.pathname.split("/", 8);
-        presenceData.details = "Discord Blog";
-        presenceData.state = "Browsing the archive";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "blog.discordapp.com" && document.location.pathname.includes("/")) {
-        group = document.querySelector("#root > div > article > div > section > div > div > div > h1");
-        if (group !== null) {
-            presenceData.details = "Discord Blog";
-            presenceData.state = "Reading: " + group.innerText;
-            presenceData.smallImageKey = "reading";
-            presence.setActivity(presenceData);
+    else if (document.location.hostname == "support.discordapp.com") {
+        if (document.location.pathname.includes("/topics/")) {
+            group = document.querySelector("body > main > div.container > header > h1");
+            presenceData.details = "Discord Support";
+            presenceData.state = "Browsing Topic: " + group.textContent;
+            presenceData.startTimestamp = getTimeStamp();
         }
-        else {
+        else if (document.location.pathname.includes("/topics")) {
+            presenceData.details = "Discord Support";
+            presenceData.state = "Browsing through topics";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/search")) {
+            group = document.querySelector("body > main > div.container > header > p");
+            user = group.textContent.split(" ", 5);
+            presenceData.details = "Discord Support";
+            presenceData.state = "Searching for: " + user[3];
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/articles")) {
+            group = document.querySelector("#article-container > article > header > h1");
+            presenceData.details = "Discord Support";
+            presenceData.state = "Reading article: " + group.textContent;
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+    }
+    else if (document.location.hostname == "blog.discordapp.com") {
+        if (document.location.pathname.includes("/@")) {
+            group = document.location.pathname.split("@", 2);
             presenceData.details = "Discord Blog";
-            delete presenceData.state;
-            delete presenceData.smallImageKey;
-            presence.setActivity(presenceData);
+            presenceData.state = "Viewing profile: " + group[1];
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/tagged")) {
+            group = document.location.pathname.split("/", 8);
+            presenceData.details = "Discord Blog";
+            presenceData.state = "Browsing tag: " + group[2];
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/archive")) {
+            group = document.location.pathname.split("/", 8);
+            presenceData.details = "Discord Blog";
+            presenceData.state = "Browsing the archive";
+            presenceData.startTimestamp = getTimeStamp();
+        }
+        else if (document.location.pathname.includes("/")) {
+            group = document.querySelector("#root > div > article > div > section > div > div > div > h1");
+            if (group !== null) {
+                presenceData.details = "Discord Blog";
+                presenceData.state = "Reading: " + group.textContent;
+                presenceData.smallImageKey = "reading";
+                presenceData.startTimestamp = getTimeStamp();
+            }
+            else {
+                presenceData.details = "Discord Blog";
+                presenceData.startTimestamp = getTimeStamp();
+            }
         }
     }
     else if (document.location.hostname == "merch.discordapp.com") {
         presenceData.details = "Discord Merch";
         presenceData.state = "Looking at merch";
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
-    }
-    else if (document.location.hostname == "discordapp.com") {
-        presenceData.details = "Home page";
-        delete presenceData.state;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
+        presenceData.startTimestamp = getTimeStamp();
     }
     else if (document.location.hostname == "discord.gg") {
         presenceData.details = "Viewing an invite";
-        delete presenceData.state;
-        delete presenceData.smallImageKey;
-        presence.setActivity(presenceData);
+        presenceData.startTimestamp = getTimeStamp();
+    }
+    if (presenceData.details == null) {
+        presence.setTrayTitle();
+        presence.setActivity();
+        lastData = presenceData.details;
     }
     else {
-        presence.setActivity();
-        presence.setTrayTitle();
+        presence.setActivity(presenceData);
+        lastData = null;
+    }
+    function getTimeStamp() {
+        var browsingStamp;
+        thisData = presenceData.details;
+        if (lastData == thisData) {
+            browsingStamp = lastStamp;
+        }
+        else {
+            lastStamp = Math.floor(Date.now() / 1000);
+            browsingStamp = Math.floor(Date.now() / 1000);
+        }
+        return browsingStamp;
     }
 }));
