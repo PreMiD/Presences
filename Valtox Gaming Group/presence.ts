@@ -25,11 +25,11 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "🌐 Viewing home page";
-    } else if (document.location.pathname.includes("/profile/")){
+    } else if (document.location.pathname.includes("/profile/") || document.location.pathname.includes("/user/")){
       presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector("body > div:nth-child(3) > div > div:nth-child(2) > h2");
+      user = document.querySelector('.title.m-0');
       presenceData.details = "🌐 Viewing user:";
-      presenceData.state = "📰 " + user.innerText.replace("Sign out","").replace(document.querySelector("body > div:nth-child(3) > div > div:nth-child(2) > h2 > span").textContent, "");
+      presenceData.state = "📰 " + user.textContent;
     } else if (document.location.pathname.includes("/logistics")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "📰 Reading about the logistics";
@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
