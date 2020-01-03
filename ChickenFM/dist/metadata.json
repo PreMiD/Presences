@@ -1,0 +1,23 @@
+{
+    "author": {
+      "name": "TheChicken14",
+      "id": "354289971361742848"
+    },
+    "url": [
+      "chickenfm.com",
+      "www.chickenfm.com"
+    ],
+    "description": {
+      "en": "ChickenFM is an online radio station that plays the latest hits!"
+    },
+    "service": "ChickenFM",
+    "version": "1.0.0",
+    "logo": "https://chickenfm.com/images/default.png",
+    "thumbnail": "https://chickenfm.com/images/cover.png",
+    "color": "#0049FF",
+    "category": "music",
+    "tags": [
+      "music",
+      "radio"
+    ]
+  }
