@@ -1,15 +1,15 @@
-var presence = new Presence({
-    clientId: "662841394171346955",
-    mediaKeys: false
-}),
+var presence, strings, browsingStamp;
 
+presence = new Presence({
+    clientId: "662841394171346955",
+    mediaKeys: false,
+});
 strings = presence.getStrings({
     playing: "presence.playback.playing",
     paused: "presence.playback.paused",
     browsing: "presence.activity.browsing"
 });
-
-var browsingStamp = Math.floor(Date.now()/1000);
+browsingStamp = Math.floor(Date.now()/1000);
 
 presence.on("UpdateData", async () => {
     var presenceData: presenceData = {largeImageKey: "wakanim"};
