@@ -48,7 +48,11 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.getElementsByClassName("podcast-title player_podcast_title")[0].textContent;
 
 		var time = document.getElementsByClassName("time-text current-time")[0].textContent.split(":").map(n => Number(n));
-		presenceData.startTimestamp = Date.now() - ((time[0] * 60 + time[1]) * 1000);
+		if (time.length == 3) {
+			presenceData.startTimestamp = Date.now() - ((time[0] * 3600 + time[1] * 60 + time[2]) * 1000);
+		} else {
+			presenceData.startTimestamp = Date.now() - ((time[0] * 60 + time[1]) * 1000);
+		};
 
 		if (document.getElementsByClassName("pause_button").length == 0) {
 			presenceData.smallImageKey = "pause";
