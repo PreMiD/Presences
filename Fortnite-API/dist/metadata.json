@@ -1,23 +1,24 @@
 {
-	"author": {
-		"name": "Leafage",
-		"id": "631499344863821877"
-	},
-	"service": "Fortnite-API",
-	"description": {
-		"en": "Stop paying for outdated API's. We provide a reliable API with always updated content."
-	},
-	"url": [
-		"https://fortnite-api.com",
-		"fortnite-api.com"
-	],
-	"version": "0.1",
-	"logo": "https://i.imgur.com/gb0Qq2I.png",
-	"thumbnail": "https://i.imgur.com/eITBg3y.png",
-	"color": "#FF91E0",
-	"tags": [
-		"fortnite",
-		"fortnite-api"
-	],
-	"category": "other"
+  "author": {
+    "name": "Leafage",
+    "id": "631499344863821877"
+  },
+  "contributors": [{
+    "name": "Not Officer",
+    "id": "373913699943186432"
+  }],
+  "service": "Fortnite-API",
+  "description": {
+    "en": "Fortnite-API.com is an unofficial API for Fortnite."
+  },
+  "url": "fortnite-api.com",
+  "version": "4",
+  "logo": "https://i.imgur.com/2ogl2Ll.png",
+  "thumbnail": "https://i.imgur.com/xno9CLs.png",
+  "color": "#FF91E0",
+  "tags": [
+    "fortnite",
+    "fortnite-api"
+  ],
+  "category": "other"
 }

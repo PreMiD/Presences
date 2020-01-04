@@ -5,12 +5,12 @@
   "license": "ISC",
   "devDependencies": {
     "axios": "0.19.0",
-    "mongodb": "3.3.4",
-    "typescript": "3.7.2"
+    "mongodb": "3.4.1",
+    "typescript": "3.7.4"
   },
   "dependencies": {
-    "@octokit/rest": "16.35.0",
+    "@octokit/rest": "16.36.0",
     "@types/chrome": "0.0.91",
-    "@types/mongodb": "3.3.11"
+    "@types/mongodb": "3.3.14"
   }
 }

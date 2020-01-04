@@ -10,11 +10,14 @@
     "de": "Aniflix bietet dir eine Vielfalt an Anime Serien. Außerdem erscheinen bei uns jeden Tag viele neue Anime Folgen auf Ger Sub direkt nach Japan-Release."
   },
   "url": "www2.aniflix.tv",
-  "version": "1.0.1",
+  "version": "1.2",
   "logo": "https://i.imgur.com/lza7ROE.png",
   "thumbnail": "https://i.imgur.com/Io2fHvW.png",
   "color": "#ff3645",
-  "tags": ["anime", "german"],
+  "tags": [
+    "anime",
+    "german"
+  ],
   "iframe": true,
   "category": "anime"
 }

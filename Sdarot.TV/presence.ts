@@ -22,9 +22,12 @@ presence.on("UpdateData", async () => {
   };
 
   
-  if (document.location.pathname == "/") {
+  if (document.location.pathname == "/" || document.location.pathname == "/index") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "צופה בדף הבית";
+  } else if (document.location.pathname == "/series") {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "צופה ברשימת הסדרות";
   } else if (document.location.pathname.includes("/watch/")) {
     var currentTime : any, duration : any, paused : any, timestamps : any, video : HTMLVideoElement;
     video = document.querySelector("#playerDiv > div > video");

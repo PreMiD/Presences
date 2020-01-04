@@ -89,9 +89,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         
            
     }
-    else if (document.location.pathname == "/serie/stream/") {
-        presenceData.details = "Schaut nach";
-        presenceData.state = "einer Serie";
+    else if (document.location.pathname.includes("/serie/stream/")) {
+        presenceData.details = "Schaut";
+        nameofserie = document.querySelector("#series > section > div.container.row > div.series-meta.col-md-6-5.col-sm-6.col-xs-12 > div.series-title > h1 > span");
+        presenceData.state = nameofserie.innerText;
         delete presenceData.smallImageText;
         
         presence.setActivity(presenceData);
@@ -119,7 +120,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       
         presence.setActivity(presenceData);
     }
-    else if (document.location.pathname.includes("/statistics")) {
+    else if (document.location.pathname == "/statistics") {
         presenceData.details = "Informiert sich über S.To";
         info1 = document.querySelector("#wrapper > div.container > div.row > div:nth-child(1) > div.facts.row > div:nth-child(4) > h3"); 
         presenceData.state = info1.innerText;        
@@ -155,7 +156,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       
         presence.setActivity(presenceData);
     }
-    else if (document.location.pathname.includes("/info")) {
+    else if (document.location.pathname == "/info") {
         name1 = document.querySelector("#wrapper > div.container > div > div > div.col-lg-12 > div > h2");
         presenceData.details = "Sieht...";
         presenceData.state = name1.innerText;        
@@ -215,7 +216,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       
         presence.setActivity(presenceData);
     }
-    else if (document.location.pathname.includes("/neu")) {
+    else if (document.location.pathname == "/neu") {
         presenceData.details = "Sucht neue Serien";
         presenceData.state = "OwO";
         presenceData.smallImageKey = "search";
@@ -232,10 +233,26 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       
         presence.setActivity(presenceData);
     }
-    else if (document.location.pathname.includes("/support")) {
-        tickets1 = document.querySelector("#wrapper > div.container > div.pageTitle > h1");
-        presenceData.details = "Befindet sich im Supportmenü";
-        presenceData.state = tickets1.innerText;        
+    else if (document.location.pathname == "/support") {
+       presenceData.details = "Befindet sich im Support";
+       supportzahl = document.querySelector("#wrapper > div.container.noPadding > div:nth-child(6) > h3").innerText;
+        presenceData.state = supportzahl;        
+        presenceData.smallImageKey = "reading";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.includes("/support/frage/")) {
+        frage1 = document.querySelector("#wrapper > div.container > div.row > div.col-lg-8 > section:nth-child(1) > article > h1").innerText;
+        presenceData.details = "Liest Fragen...";
+        presenceData.state = frage1;        
+        presenceData.smallImageKey = "reading";
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname == "/support/fragen") {
+        presenceData.details = "Liest Fragen...";    
         presenceData.smallImageKey = "reading";
         delete presenceData.smallImageText;
       
@@ -249,14 +266,35 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       
         presence.setActivity(presenceData);
     }
-    else if (document.location.pathname.includes("/anleitung")) {
+    else if (document.location.pathname.includes("/account/support")) {
+        supporttickets = document.querySelector("#wrapper > div.container > div.pageTitle > h1").innerText;
+        presenceData.details = "Liest Supporttickets";
+        presenceData.state = supporttickets;          
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname == "/account/friendships") {        
+        presenceData.details = "Beobachtet";
+        presenceData.state = "die Freundesliste";          
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname == "/support/anleitung") {
                 presenceData.details = "Liest das Tutorial";
         presenceData.state = "So viel Text owo";         
         delete presenceData.smallImageText;
       
         presence.setActivity(presenceData);
     }
-      else if (document.location.pathname.includes("/registrierung")) {
+    else if (document.location.pathname.endsWith("/account/statistics")) {
+        presenceData.details = "Betrachtet Statisken...";         
+        delete presenceData.smallImageText;
+      
+        presence.setActivity(presenceData);
+    }
+      else if (document.location.pathname == "/registrierung") {
           username1 = document.querySelector("#formUsername");
         presenceData.details = "Registriert sich gerade...";
         presenceData.state = "Vielleicht als " + username1.value;         
@@ -264,7 +302,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       
         presence.setActivity(presenceData);
     }
-    else if (document.location.pathname.includes("/account")) {
+    else if (document.location.pathname == "/account") {
         user3 = document.querySelector("#wrapper > header > div > div.header-content > nav > div > div.dd > p > a > span.name");
         presenceData.details = "Angemeldet als";
         presenceData.state = user3.innerText;          
@@ -272,7 +310,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       
         presence.setActivity(presenceData);
     }
-    else if (document.location.pathname.includes("/serienwuensche")) {
+    else if (document.location.pathname == "/serienwuensche") {
         name4 = document.querySelector("#wrapper > div.container > div.row.leaderboardBox > div.col-md-3 > div > strong");
         presenceData.details = "Votet für neue Serien";
         presenceData.state = name4.innerText + " Serienwünsche";          
@@ -307,12 +345,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/search")) {
         views = document.querySelector("#search");
         presenceData.smallImageKey = "search";
-        presenceData.details = "Sucht eine Serie:";
+        presenceData.details = "Sucht...";
         presenceData.state = views.value;
         delete presenceData.smallImageText;
         
         presence.setActivity(presenceData);
     }
+   
     else {
         presence.setActivity();
         presence.setTrayTitle();

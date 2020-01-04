@@ -13,7 +13,8 @@ var user : any;
 var title : any;
 var replace : any;
 var search : any;
-var UID : any ;
+var UID : any;
+var page : any;
 
 presence.on("UpdateData", async () => {
 
@@ -553,7 +554,59 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.innerText + " | UID: " + UID.innerText
     } else {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing for dynamic";
+      presenceData.details = "Browsing Someone's space";
+    }
+  } else if (document.location.hostname == "account.bilibili.com"){
+    if (document.location.pathname.includes("/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing account setting";
+    }
+    //创作中心
+  } else if (document.location.hostname == "member.bilibili.com"){
+    if (document.location.pathname.includes("/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing 创作中心";
+    }
+    //会员购
+  } else if (document.location.hostname == "show.bilibili.com"){
+    title = document.querySelector("#app > div.buyticket > div.whole-detail-info-wrapper > div.detail-info-wrapper > div.product-info-name");
+    if (title !== null) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing 会员购";
+      presenceData.state = title.innerText
+    } else {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing 会员购";
+    }
+    //漫画
+  } else if (document.location.hostname == "manga.bilibili.com"){
+    page = document.querySelector("body > div.reader-layout.w-100.h-100.p-absolute.p-zero > div > div.info-hud.none-select.info-hud.p-absolute.info-layer > div.hinter-image-container.single > span");
+    title = document.querySelector("body > div.reader-layout.w-100.h-100.p-absolute.p-zero > div > div.manga-reader-ui > div.navbar-container.w-100.p-absolute.p-zero.a-move-in-bottom > nav > div > div.read-nav > a:nth-child(3)");
+    if (title !== null) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = title.innerText
+      presenceData.state = "Reading P." + page.innerText
+      presenceData.smallImageKey = "reading";
+    } else {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing Manga";
+      presenceData.smallImageKey = "reading";
+    }
+    //手游
+  } else if (document.location.hostname == "biligame.com"){
+    title = document.querySelector("body > div.bui-gc > div.header-bar.one-row > div.right-panel > div > div > h2 > span:nth-child(1)");
+    if (title !== null) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing Game";
+      presenceData.state = title.innerText
+    } else {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing Game";
+    }
+  } else if (document.location.hostname == "game.bilibili.com"){
+    if (document.location.pathname.includes("/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing Game";
     }
     //live
   } else if (document.location.hostname == "live.bilibili.com"){
