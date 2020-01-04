@@ -1,14 +1,13 @@
-console.log("LOADED");
 var presence = new Presence({
-        clientId: "662841394171346955",
-        mediaKeys: false
-    }),
+    clientId: "662841394171346955",
+    mediaKeys: false
+}),
 
-    strings = presence.getStrings({
-        playing: "presence.playback.playing",
-        paused: "presence.playback.paused",
-        browsing: "presence.activity.browsing"
-    });
+strings = presence.getStrings({
+    playing: "presence.playback.playing",
+    paused: "presence.playback.paused",
+    browsing: "presence.activity.browsing"
+});
 
 var browsingStamp = Math.floor(Date.now()/1000);
 
@@ -18,7 +17,6 @@ presence.on("UpdateData", async () => {
     var video = document.querySelector("video");
 
     if (path.includes("/v2/catalogue/episode/") && video != null) {
-        console.log("playing");
         browsingStamp = Math.floor(Date.now()/1000);
         presenceData.details = document.querySelector(".episode_title").innerHTML;
         presenceData.state = capitalize(document.querySelector(".episode_subtitle").innerText);
