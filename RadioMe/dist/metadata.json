@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "ACertainCoder",
+    "id": "320507572455079949"
+  },
+  "service": "RadioMe",
+  "description": {
+    "en": "Listening to the radio made easy. Radio stations from all regions of Germany, France and Austria.",
+    "de": "Radio hören leicht gemacht. Radiosender aus allen Regionen von Deutschland, Frankreich und Österreich.",
+    "fr": "Écouter la radio facilement. Stations de radio de toutes les régions d'Allemagne, de France et d'Autriche."
+  },
+  "url": [
+      "radiome.de",
+      "radiome.at",
+      "radiome.fr"
+  ],
+  "version": "1.0",
+  "logo": "https://cdn.discordapp.com/attachments/534018310128402435/660519124732084244/logo.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/534018310128402435/660518138735099904/thumbnail.png",
+  "color": "#67e350",
+  "tags": ["radio", "music", "stream"],
+  "category": "music"
+}
