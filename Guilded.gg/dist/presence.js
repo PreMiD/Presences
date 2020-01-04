@@ -53,7 +53,7 @@ presence.on("UpdateData", () => {
 
     } else if (document.location.pathname.includes("/groups/")) {
         var edit = document.querySelector(".StatusContext-container.OptionsMenu-option-content") !== null;
-        var add = document.querySelector(".ToggleFieldWrapper-label") !== null;
+        var add = document.querySelector(".InputControllerWrapper-container.InputControllerWrapper-container-grid.InputControllerWrapper-container-2-columns.RadiosField-panel-inputs.RadiosField-layout-horizontal") !== null;
         var status = document.querySelector(".StatusContext-container.ModalV2-modal-content.ModalV2-modal-content-scrollable") !== null;
         if (add) {
           presenceData.details = `Creating Channel In`; 
@@ -74,8 +74,30 @@ presence.on("UpdateData", () => {
          var profilename = priceEls[i].innerText;
         presenceData.details = `Viewing a profile:`; 
         presenceData.state = profilename
-        }
-     }
+      }
+    } else if (document.location.pathname.includes("/games")) {
+        presenceData.details = `Viewing Page:`; 
+        presenceData.state = `Game Directory`;
+    } else if (document.location.pathname.includes("/overview")) {
+        presenceData.details = `Overviewing`;
+        presenceData.state = document.querySelector("#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.StatusContext-container.AppV2-container > div > div.LayerContext-container > div.LayerContext-layer-item-wrapper > div > div > div.LayerContext-container > div > div > div.TeamPageContent-content > div.TeamPlaqueV2-container.TeamPlaqueV2-container-desktop.TeamPageContent-team-plaque > div.SkeletonPlaceholder-container.TeamPlaqueV2-name-placeholder > h1").textContent
+    } else if (document.location.pathname.includes("/members")) {
+        presenceData.details = `Viewing Members In`; 
+        presenceData.state = document.querySelector("#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.StatusContext-container.AppV2-container > div > div.WebAppSidebar-container.WebAppV2-sidebar > div > div > div.TeamNavHeaderV3-container.TeamPageNavV3-header > div.TeamNavHeaderV3-content > div > div.SkeletonPlaceholder-container.TeamNavHeaderV3-team-name > h2").textContent
+    } else if (document.location.pathname.includes("/recruitment")) {
+        presenceData.details = `Viewing Team Aplications In`; 
+        presenceData.state = document.querySelector("#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.StatusContext-container.AppV2-container > div > div.WebAppSidebar-container.WebAppV2-sidebar > div > div > div.TeamNavHeaderV3-container.TeamPageNavV3-header > div.TeamNavHeaderV3-content > div > div.SkeletonPlaceholder-container.TeamNavHeaderV3-team-name > h2").textContent
+    } else if (document.location.pathname.includes("/audit")) {
+        presenceData.details = `Viewing Audit Logs In`; 
+        presenceData.state = document.querySelector("#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.StatusContext-container.AppV2-container > div > div.WebAppSidebar-container.WebAppV2-sidebar > div > div > div.TeamNavHeaderV3-container.TeamPageNavV3-header > div.TeamNavHeaderV3-content > div > div.SkeletonPlaceholder-container.TeamNavHeaderV3-team-name > h2").textContent
+    } else if (document.location.pathname.includes("/matches")) {
+        presenceData.details = `Viewing Matches In`; 
+        presenceData.state = document.querySelector("#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.StatusContext-container.AppV2-container > div > div.WebAppSidebar-container.WebAppV2-sidebar > div > div > div.TeamNavHeaderV3-container.TeamPageNavV3-header > div.TeamNavHeaderV3-content > div > div.SkeletonPlaceholder-container.TeamNavHeaderV3-team-name > h2").textContent
+    } else if (document.location.pathname.includes("/insights")) {
+        presenceData.details = `Viewing Team Stats In`; 
+        presenceData.state = document.querySelector("#app > div > div.ReorderPortalContext-container > div.GameContext-container.GameContext-container-no-game.AppV2-game-context > div.StatusContext-container.AppV2-container > div > div.WebAppSidebar-container.WebAppV2-sidebar > div > div > div.TeamNavHeaderV3-container.TeamPageNavV3-header > div.TeamNavHeaderV3-content > div > div.SkeletonPlaceholder-container.TeamNavHeaderV3-team-name > h2").textContent
+    }
+    
     
     if (presenceData.details == null) {
         presence.setTrayTitle();
