@@ -12,6 +12,16 @@ strings = presence.getStrings({
 browsingStamp = Math.floor(Date.now() / 1000);
 
 
+function capitalize(str) {
+    var text = str.toLowerCase().split(" ");
+    for (var i = 0, x = text.length; i < x; i++) {
+        text[i] = text[i][0].toUpperCase() + text[i].substr(1);
+    }
+
+    return text.join(" ");
+}
+
+
 presence.on("UpdateData", async () => {
     var presenceData: presenceData = { largeImageKey: "wakanim" };
     var path = document.location.pathname;
@@ -23,7 +33,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = capitalize(document.querySelector(".episode_subtitle").innerText);
 
         if (video.paused) {
-            presenceData.smallImageKey = "paused"
+            presenceData.smallImageKey = "paused";
             presenceData.smallImageText = (await strings).paused;
         } else {
             presenceData.startTimestamp = Math.floor(Date.now() / 1000);
@@ -43,13 +53,3 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
     }
 });
-
-
-function capitalize(str) {
-    var text = str.toLowerCase().split(" ");
-    for (var i = 0, x = text.length; i < x; i++) {
-        text[i] = text[i][0].toUpperCase() + text[i].substr(1);
-    }
-
-    return text.join(" ");
-}
