@@ -1,13 +1,14 @@
-var presence, strings, browsingStamp;
-presence = new Presence({
+var presence = new Presence({
     clientId: "662841394171346955",
     mediaKeys: false
-});
+}),
+
 strings = presence.getStrings({
     browsing: "presence.activity.browsing",
     paused: "presence.playback.paused",
     playing: "presence.playback.playing",
-});
+}),
+
 browsingStamp = Math.floor(Date.now() / 1000);
 
 
@@ -51,4 +52,4 @@ function capitalize(str) {
     }
 
     return text.join(" ");
-};
+}
