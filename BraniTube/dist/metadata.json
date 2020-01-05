@@ -3,13 +3,13 @@
     "name": "TheDrop.",
     "id": "293828021134295040"
   },
-  "service": "BraniTube",
+  "service": "Branitube",
   "description": {
-    "en": "BraniTube is a brazillian anime streaming site.",
-    "de": "BraniTube ist eine brasilianische Anime Streaming Seite.",
-    "ro_RO": "BraniTube este un site de streaming brazilian pentru anime.",
+    "en": "Branitube is a brazillian anime streaming site.",
+    "de": "Branitube ist eine brasilianische Anime Streaming Seite.",
+    "ro_RO": "Branitube este un site de streaming brazilian pentru anime.",
     "pt_BR": "Branitube é um site brasileiro de streaming de animes.",
-    "nl": "BraniTube is een braziliaanse anime streaming website."
+    "nl": "Branitube is een braziliaanse anime streaming website."
   },
   "url": "www.branitube.net",
   "version": "2.3",
