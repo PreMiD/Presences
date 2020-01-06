@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "DooMLorD",
+    "id": "465105167751315471"
+  },
+  "service": "movs4u / mvs4u",
+  "description": {
+    "en": "9anime is a streaming website where you can watch anime plus dubbed audio in English.",
+    "ar_SA": "موفيز فور يو لتحميل و مشاهدة المسلسلات والأفلام مباشرة اون لاين عربى واجنبى"
+  },
+  "url": [
+    "mvs4u.co",
+    "www.mvs4u.co"
+  ],
+  "version": "1.0",
+  "logo": "https://doomlord.s-ul.eu/xc1YBUDW",
+  "thumbnail": "https://doomlord.s-ul.eu/nYxeuT3r",
+  "color": "#ff7800",
+  "tags": ["embedded-links", "dedicated-server", "movs4u", "mvs4u", "streaming"],
+  "category": "videos",
+  "iframe": true
+}
