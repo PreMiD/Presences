@@ -43,10 +43,9 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
     }
 
-    if (! regex.test(document.location.href)) {
+    if (! regex.test(document.location.href) && document.location.hostname != "www.primevideo.com") {
         presence.clearActivity();
-    }
-    else if (presenceData.details == null) {
+    } else if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
     } else {
