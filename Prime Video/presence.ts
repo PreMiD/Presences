@@ -11,25 +11,23 @@ var presence = new Presence({
 
     browsingStamp = Math.floor(Date.now() / 1000),
 
-    regex = RegExp("https:\\/\\/www\\.amazon\\.(.*?)\\/\\b(?:Prime-Video|gp\\/video)\\b");
+    regex = RegExp("https:\\/\\/www\\.amazon\\.(.*?)\\/\\b(?:Prime-Video|Prime-Instant-Video|gp\\/video)\\b");
 
 
 presence.on("UpdateData", async () => {
     var presenceData: presenceData = { largeImageKey: "prime-video" };;
     var video = document.querySelector("video");
+    var title = document.querySelector("div.center > div > div.title");
+    var subtitle = document.querySelector("div.center > div > div.subtitle");
 
-    if (video != null) {
+    if (video != null && title) {
+        console.log("asd");
         browsingStamp = Math.floor(Date.now() / 1000);
-        presenceData.details = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div " +
-            "> div:nth-child(2) > div > div > div.scalingUiContainerBottom > div > div.controlsOverlay " +
-            "> div.controlsOverlayTop > div.controlsOverlayTopMain > div.controlsOverlayTopRight > div > div.center " +
-            "> div > div.title"
-        ).innerText;
-        presenceData.state = document.querySelector(
-            "#dv-web-player > div > div:nth-child(1) > div > div > div:nth-child(2) > div > div " +
-            "> div.scalingUiContainerBottom > div > div.controlsOverlay > div.controlsOverlayTop " +
-            "> div.controlsOverlayTopMain > div.controlsOverlayTopRight > div > div.center > div > div.subtitle"
-        ).innerText;
+        presenceData.details = title.innerText;
+        if (subtitle && subtitle.innerText) {
+            console.log("yeet");
+            presenceData.state = subtitle.innerText;
+        }
 
         if (video.paused) {
             presenceData.smallImageKey = "paused";
@@ -45,7 +43,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
     }
 
-    if (! regex.test(window.location.href)) {
+    if (! regex.test(document.location.href)) {
         presence.clearActivity();
     }
     else if (presenceData.details == null) {

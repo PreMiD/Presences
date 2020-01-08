@@ -26,11 +26,15 @@ presence.on("UpdateData", async () => {
     var presenceData: presenceData = { largeImageKey: "wakanim" };
     var path = document.location.pathname;
     var video = document.querySelector("video");
+    var title = document.querySelector(".episode_title");
+    var subtitle = document.querySelector(".episode_subtitle");
 
-    if (path.includes("/v2/catalogue/episode/") && video != null) {
+    if (path.includes("/v2/catalogue/episode/") && video != null && title) {
         browsingStamp = Math.floor(Date.now() / 1000);
-        presenceData.details = document.querySelector(".episode_title").innerHTML;
-        presenceData.state = capitalize(document.querySelector(".episode_subtitle").innerText);
+        presenceData.details = title.innerHTML;
+        if (subtitle && subtitle.innerText) {
+            presenceData.state = capitalize(subtitle.innerText);
+        }
 
         if (video.paused) {
             presenceData.smallImageKey = "paused";
