@@ -8,31 +8,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var presence = new Presence({
-    clientId: "662841394171346955",
+    clientId: "664568915325747230",
     mediaKeys: false
 }), strings = presence.getStrings({
     browsing: "presence.activity.browsing",
     paused: "presence.playback.paused",
     playing: "presence.playback.playing",
-}), browsingStamp = Math.floor(Date.now() / 1000);
-function capitalize(str) {
-    var text = str.toLowerCase().split(" ");
-    for (var i = 0, x = text.length; i < x; i++) {
-        text[i] = text[i][0].toUpperCase() + text[i].substr(1);
-    }
-    return text.join(" ");
-}
+}), browsingStamp = Math.floor(Date.now() / 1000), regex = RegExp("https:\\/\\/www\\.amazon\\.(.*?)\\/\\b(?:Prime-Video|Prime-Instant-Video|gp\\/video)\\b");
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    var presenceData = { largeImageKey: "wakanim" };
-    var path = document.location.pathname;
+    var presenceData = { largeImageKey: "prime-video" };
+    ;
     var video = document.querySelector("video");
-    var title = document.querySelector(".episode_title");
-    var subtitle = document.querySelector(".episode_subtitle");
-    if (path.includes("/v2/catalogue/episode/") && video != null && title) {
+    var title = document.querySelector("div.center > div > div.title");
+    var subtitle = document.querySelector("div.center > div > div.subtitle");
+    if (video != null && title) {
+        console.log("asd");
         browsingStamp = Math.floor(Date.now() / 1000);
-        presenceData.details = title.innerHTML;
+        presenceData.details = title.innerText;
         if (subtitle && subtitle.innerText) {
-            presenceData.state = capitalize(subtitle.innerText);
+            console.log("yeet");
+            presenceData.state = subtitle.innerText;
         }
         if (video.paused) {
             presenceData.smallImageKey = "paused";
@@ -49,7 +44,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = (yield strings).browsing;
         presenceData.startTimestamp = browsingStamp;
     }
-    if (presenceData.details == null) {
+    if (!regex.test(document.location.href) && document.location.hostname != "www.primevideo.com") {
+        presence.clearActivity();
+    }
+    else if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
     }
