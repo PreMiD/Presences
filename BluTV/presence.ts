@@ -55,13 +55,14 @@ presence.on("UpdateData", async () => {
         }
     
     
-        presenceData.smallImageKey = video && video.paused ? "paused" : "playing";
-        presenceData.smallImageText = video && video.paused ? (await strings).paused : (await strings).playing;
+        
     
-        if (video && !video.paused) {
-    
+        if (video) {
+            presenceData.smallImageKey = video.paused ? "pause" : "play";
+            presenceData.smallImageText = video.paused ? (await strings).paused : (await strings).playing;
+            
             let timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
-            if (!document.location.pathname.startsWith('/canli-yayin')) {
+            if (video.duration && !video.paused && !document.location.pathname.startsWith('/canli-yayin')) {
                 presenceData.startTimestamp = timestamps[0];
                 presenceData.endTimestamp = timestamps[1];
             }
@@ -72,6 +73,7 @@ presence.on("UpdateData", async () => {
 
     else {
 
+        presenceData.startTimestamp = startTimestamp;
         presenceData.details = (await strings).browsing;
 
     }

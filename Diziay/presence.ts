@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
     
     if (video) {
 
-        presenceData.smallImageKey = video.paused ? "diziay-paused" : "diziay-playing";
+        presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused ? (await strings).paused : (await strings).playing;
 
         if (!video.paused && video.duration) {
