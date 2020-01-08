@@ -84,7 +84,8 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 					
 					} else if (path[0] === "deviations") {
 						presenceData.details = "Viewing deviations"
-						presenceData.state = path.slice(1).concat((new URL(document.location)).searchParams.get("order")).join(" > ").replace(/-/g, ' ').toLowerCase().split(' ').map(w => w.replace(w[0], w[0].toUpperCase())).join(' ')
+						presenceData.state = path.slice(1).concat((new URL(document.location)).searchParams.get("order") ? (new URL(document.location)).searchParams.get("order") : []).join(" > ").trim().replace(/-/g, ' ').toLowerCase().split(' ').map(w => w.replace(w[0], w[0].toUpperCase())).join(' ')
+
 						
 					} else if (path[0] === "daily-deviations") {
 						presenceData.details = "Viewing daily deviations"
@@ -126,7 +127,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 						/* Should I also make it more detailed? */
 	
 					} else if (path[0] === "account") {
-						presenceData.details = "Viewing the account settings"
+						presenceData.details = "Viewing the account pages"
 						/* This might expose some stuff, because the page shows orders, points, and earnings. Consider this. */
 	
 					} else if (path[0] === "checkout") {
@@ -326,7 +327,8 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 		function getName(override: boolean = false) {
 			try {
 				if (websiteTheme === "eclipse" && !override) {
-					return document.querySelector("#root > main > div > div > div > div > div > div > div > div > span > a.user-link").textContent
+					try {return document.querySelector("#content-container > div > div > div > div > div > a.user-link").textContent}
+					catch {return document.querySelector("#root > main > div > div > div > div > div > div > div > div > span > a.user-link").textContent}
 				} else {
 					try {return lastItem(document.querySelectorAll("h1 .author .u .u")).textContent}
 					catch {return document.querySelector("h1 .u .u").textContent}
