@@ -40,9 +40,9 @@ presence.on("UpdateData", async () => {
 
         if (data.series) {
     
-            let name = seriesName(path.split('/')[3].replace(/-/gi, ' '));
+            let name = data.series.name ? data.series.name : seriesName(path.split('/')[3].replace(/-/gi, ' '));
     
-            presenceData.details = data.series.seriesName ? data.series.seriesName : name;
+            presenceData.details = name;
             presenceData.state = `${data.series.season} | ${data.series.ep}`;
     
         } 

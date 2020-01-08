@@ -28,14 +28,14 @@ iframe.on("UpdateData", async () => {
         epTitle = titleArr[0].charAt(titleArr[0].length - 1)+"."+titleArr[1];
         
         let rx = new RegExp(epTitle, "g");
-        let seriesName: string = title.textContent.charAt(0) === epTitle.split('.')[0] ? title.textContent.replace(rx, '') : null;
-        
+        let seriesName: string = title.textContent.charAt(0) != epTitle.split('.')[0] ? title.textContent.replace(rx, '') : null;
+
         iframe.send({
             video: {
                 ...videoMessage
             },
             series: {
-                seriesName,
+                name: seriesName,
                 ep: epTitle,
                 season: season && season.textContent && season.textContent.includes('Sezon') ? season.textContent : '1. Sezon'
             }
