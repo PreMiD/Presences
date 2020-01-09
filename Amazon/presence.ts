@@ -37,6 +37,8 @@ var item : any, dropdown : any, dropdownfinal : any, dropdownplus1 : any, search
  
 var browsingStamp = Math.floor(Date.now()/1000);
 
+var regex = RegExp("https:\\/\\/www\\.amazon\\.(.*?)\\/\\b(?:Prime-Video|Prime-Instant-Video|gp\\/video)\\b");
+
 presence.on("UpdateData", async () => {
 
   let presenceData: presenceData = {
@@ -45,7 +47,9 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if(document.location.hostname == "www.amazon.com" || document.location.hostname == "www.amazon.com.au" || document.location.hostname == "www.amazon.de" || document.location.hostname == "www.amazon.ca" || document.location.hostname == "www.amazon.cn" || document.location.hostname == "www.amazon.es" || document.location.hostname == "www.amazon.fr" || document.location.hostname == "www.amazon.nl" || document.location.hostname == "www.amazon.in" || document.location.hostname == "www.amazon.co.jp" || document.location.hostname == "www.amazon.ae" || document.location.hostname == "www.amazon.co.uk" || document.location.hostname == "www.amazon.com.tr" || document.location.hostname == "www.amazon.com.br" || document.location.hostname == "smile.amazon.com" || document.location.hostname == "smile.amazon.com.au" || document.location.hostname == "smile.amazon.de" || document.location.hostname == "smile.amazon.ca" || document.location.hostname == "smile.amazon.cn" || document.location.hostname == "smile.amazon.es" || document.location.hostname == "smile.amazon.fr" || document.location.hostname == "smile.amazon.nl" || document.location.hostname == "smile.amazon.in" || document.location.hostname == "smile.amazon.co.jp" || document.location.hostname == "smile.amazon.ae" || document.location.hostname == "smile.amazon.co.uk" || document.location.hostname == "smile.amazon.com.tr" || document.location.hostname == "smile.amazon.com.br") {
+  if (regex.test(document.location.href)) {
+    presence.clearActivity();
+  } else if(document.location.hostname == "www.amazon.com" || document.location.hostname == "www.amazon.com.au" || document.location.hostname == "www.amazon.de" || document.location.hostname == "www.amazon.ca" || document.location.hostname == "www.amazon.cn" || document.location.hostname == "www.amazon.es" || document.location.hostname == "www.amazon.fr" || document.location.hostname == "www.amazon.nl" || document.location.hostname == "www.amazon.in" || document.location.hostname == "www.amazon.co.jp" || document.location.hostname == "www.amazon.ae" || document.location.hostname == "www.amazon.co.uk" || document.location.hostname == "www.amazon.com.tr" || document.location.hostname == "www.amazon.com.br" || document.location.hostname == "smile.amazon.com" || document.location.hostname == "smile.amazon.com.au" || document.location.hostname == "smile.amazon.de" || document.location.hostname == "smile.amazon.ca" || document.location.hostname == "smile.amazon.cn" || document.location.hostname == "smile.amazon.es" || document.location.hostname == "smile.amazon.fr" || document.location.hostname == "smile.amazon.nl" || document.location.hostname == "smile.amazon.in" || document.location.hostname == "smile.amazon.co.jp" || document.location.hostname == "smile.amazon.ae" || document.location.hostname == "smile.amazon.co.uk" || document.location.hostname == "smile.amazon.com.tr" || document.location.hostname == "smile.amazon.com.br") {
     item = document.querySelector("#search > span > h1 > div > div.sg-col-14-of-20.sg-col-26-of-32.sg-col-18-of-24.sg-col.sg-col-22-of-28.s-breadcrumb.sg-col-10-of-16.sg-col-30-of-36.sg-col-6-of-12 > div > div > span.a-color-state.a-text-bold");
 
     if(document.querySelector("#productTitle") !== null) {
@@ -58,16 +62,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = item.innerText;
       }
             
-      delete presenceData.smallImageKey;
-      
-      presence.setActivity(presenceData); 
-
-    } else if(document.querySelector("#a-page > div.av-page-desktop.avu-retail-page > div.avu-content.avu-section > div > div > div.DVWebNode-detail-atf-wrapper.DVWebNode > div.av-detail-section > div > h1") !== null) {
-      item = document.querySelector("#a-page > div.av-page-desktop.avu-retail-page > div.avu-content.avu-section > div > div > div.DVWebNode-detail-atf-wrapper.DVWebNode > div.av-detail-section > div > h1");
-
-      presenceData.details = "Viewing Prime Video:";//amazon.primeVid
-      presenceData.state = item.innerText;
-      
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
