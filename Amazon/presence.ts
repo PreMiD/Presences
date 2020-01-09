@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
     if(document.querySelector("#productTitle") !== null) {
       item = document.querySelector("#productTitle");
 
-      presenceData.details = "Viewing product:";
+      presenceData.details = "Viewing product:";//general.viewProduct
       if (item.innerText.length > 128) {
         presenceData.state = item.innerText.substring(0,125) + "...";
       } else {
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
     } else if(document.querySelector("#a-page > div.av-page-desktop.avu-retail-page > div.avu-content.avu-section > div > div > div.DVWebNode-detail-atf-wrapper.DVWebNode > div.av-detail-section > div > h1") !== null) {
       item = document.querySelector("#a-page > div.av-page-desktop.avu-retail-page > div.avu-content.avu-section > div > div > div.DVWebNode-detail-atf-wrapper.DVWebNode > div.av-detail-section > div > h1");
 
-      presenceData.details = "Viewing Prime Video:";
+      presenceData.details = "Viewing Prime Video:";//amazon.primeVid
       presenceData.state = item.innerText;
       
       delete presenceData.smallImageKey;
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/s") && item !== null) {
       item = document.querySelector("#search > span > h1 > div > div.sg-col-14-of-20.sg-col-26-of-32.sg-col-18-of-24.sg-col.sg-col-22-of-28.s-breadcrumb.sg-col-10-of-16.sg-col-30-of-36.sg-col-6-of-12 > div > div > span.a-color-state.a-text-bold");
       
-      presenceData.details = "Searching for:";
+      presenceData.details = "Searching for:";//general.searchFor
       presenceData.state = item.innerText;
       
       presenceData.smallImageKey = "search";
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
     } else if (document.querySelector("#gc-asin-title") !== null) {
       item = document.querySelector("#gc-asin-title");
 
-      presenceData.details = "Viewing product:";
+      presenceData.details = "Viewing product:";//general.viewProduct
       if (item.innerText.length > 128) {
         presenceData.state = item.innerText.substring(0,125) + "...";
       } else {
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
 
     } else if (document.location.pathname.includes("/profile")) {
       item = document.querySelector("#customer-profile-name-header > div.a-row.a-spacing-none.name-container > span");
-      presenceData.details = "Viewing profile:";
+      presenceData.details = "Viewing profile:";//general.viewProfile
       presenceData.state = item.innerText;
       
       delete presenceData.smallImageKey;
@@ -105,119 +105,119 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/store")) {
       item = document.title.split(":");
-      presenceData.details = "Viewing store:";
+      presenceData.details = "Viewing store:";//amazon.store
       presenceData.state = item[1];
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/history")) {
-      presenceData.details = "Viewing their history";
+      presenceData.details = "Viewing their history";//amazon.history
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/gift-cards")) {
-      presenceData.details = "Viewing Giftcards";
-      delete presenceData.state;
+      presenceData.details = "Viewing Giftcards";//amazon.viewTheir
+      delete presenceData.state;//amazon.giftcards
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/yourstore")) {
-      presenceData.details = "Viewing recommended";
+      presenceData.details = "Viewing recommended";//amazon.recommended
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/wishlist")) {
-      presenceData.details = "Viewing their wishlist";
-      delete presenceData.state;
+      presenceData.details = "Viewing their wishlist";//amazon.viewTheir
+      delete presenceData.state;//amazon.wishlist
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/cart")) {
-      presenceData.details = "Viewing their cart";
-      delete presenceData.state;
+      presenceData.details = "Viewing their cart";//amazon.viewTheir
+      delete presenceData.state;//amazon.cart
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/order-history")) {
-      presenceData.details = "Viewing their";
-      presenceData.state = "order history";
+      presenceData.details = "Viewing their";//amazon.viewTheir
+      presenceData.state = "order history";//amazon.orderHistory
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/order-details")) {
-      presenceData.details = "Viewing their";
-      presenceData.state = "order details";
+      presenceData.details = "Viewing their";//amazon.viewTheir
+      presenceData.state = "order details";//amazon.orderDetails
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/amazonprime")) {
-      presenceData.details = "Viewing Amazon Prime";
+      presenceData.details = "Viewing Amazon Prime";//amazon.prime
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/site-directory")) {
-      presenceData.details = "Viewing all categories";
+      presenceData.details = "Viewing all categories";//amazon.catergoriesAll
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/yourpets")) {
-      presenceData.details = "Viewing pets";
+      presenceData.details = "Viewing pets";//amazon.pets
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/addresses")) {
-      presenceData.details = "Viewing addresses";
+      presenceData.details = "Viewing addresses";//amazon.address
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/managepaymentmethods")) {
-      presenceData.details = "Viewing payment methods";
+      presenceData.details = "Viewing payment methods";//amazon.payment
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/balance")) {
-      presenceData.details = "Viewing their balance";
+      presenceData.details = "Viewing their balance";//amazon.balance
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/adprefs")) {
-      presenceData.details = "Viewing their adprefs";
+      presenceData.details = "Viewing their adprefs";//amazon.adprefs
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.pathname.includes("/yourmembershipsandsubscriptions")) {
-      presenceData.details = "Viewing subscriptions";
+      presenceData.details = "Viewing subscriptions";//amazon.subscriptions
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
       
       presence.setActivity(presenceData); 
     } else if (document.location.search.includes("nav_youraccount_ya") || document.location.pathname.includes("/your-account")) {
-      presenceData.details = "Viewing their account";
+      presenceData.details = "Viewing their account";//general.viewAccount
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
@@ -227,7 +227,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle(); 
     } else if (document.location.pathname.includes("/help/")) {
-      presenceData.details = "Viewing Help Center";
+      presenceData.details = "Viewing Help Center";//general.viewing + Help Center
       delete presenceData.state;
       
       delete presenceData.smallImageKey;
@@ -241,7 +241,7 @@ presence.on("UpdateData", async () => {
         dropdowninnertext = document.querySelector(dropdownfinal).innerText;
         split = document.location.pathname.split("/" , 3);
         if (dropdown !== "0" || split[1] !== "") {
-          presenceData.details = "Browsing category:";
+          presenceData.details = "Browsing category:";//general.viewCategory
           presenceData.state = dropdowninnertext;
         
           delete presenceData.smallImageKey;
