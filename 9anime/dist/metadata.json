@@ -8,12 +8,12 @@
     "en": "9anime is a streaming website where you can watch anime plus dubbed audio in English."
   },
   "url": "9anime.to",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "logo": "https://doomlord.s-ul.eu/bMa7Rrbf",
   "thumbnail": "https://doomlord.s-ul.eu/PS3e421E",
   "color": "#694ba1",
   "tags": ["embedded-links", "9anime", "streaming"],
   "category": "anime",
-  "regExp": "([a-z0-9]+)[.]9anime[.]([a-z0-9]+)",
+  "regExp": "(([a-z0-9]+)[.])?9anime[.]([a-z0-9]+)",
   "iframe": true
 }
