@@ -1,0 +1,25 @@
+{
+  "author": {
+    "name": "Tellen",
+    "id": "535214819520020510"
+  },
+  "service": "HentaiWorld",
+  "description": {
+    "en": "Discover our Hentai Streaming (Italian & English Subbed). Download or stream your favorite series completely for free.",
+    "nl": "Ontdek onze Hentai Streaming (Italian & English Subbed). Download of stream je favoriete serie helemaal gratis.",
+    "it": "Scopri il nostro sito di Streaming Hentai (Sub EN/ITA). Scarica o guarda le tue serie preferite completamente gratis."
+  },
+  "url": "www.hentaiworld.eu",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/m0PJnP6.png",
+  "thumbnail": "https://i.imgur.com/l2qYoLH.png",
+  "color": "#dd1f26",
+  "tags": [
+	"anime",
+    "videos",
+	"nsfw"
+  ],
+  "iframe": true,
+  "category": "anime",
+  "regExp": "(([a-z0-9]+)[.])?hentaiworld[.]([a-z0-9]+)"
+}
