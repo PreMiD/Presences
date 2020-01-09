@@ -14,7 +14,7 @@ var presence = new Presence({
     browsing: "presence.activity.browsing",
     paused: "presence.playback.paused",
     playing: "presence.playback.playing",
-}), browsingStamp = Math.floor(Date.now() / 1000), regex = RegExp("https:\\/\\/www\\.amazon\\.(.*?)\\/\\b(?:Prime-Video|Prime-Instant-Video|gp\\/video)\\b");
+}), browsingStamp = Math.floor(Date.now() / 1000), regex = RegExp("https:\\/\\/www\\.amazon\\.(.*?)\\/\\b(?:Prime-Video|Prime-Instant-Video|Amazon-Video|gp\\/video)\\b");
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var presenceData = { largeImageKey: "prime-video" };
     ;
@@ -22,12 +22,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var title = document.querySelector("div.center > div > div.title");
     var subtitle = document.querySelector("div.center > div > div.subtitle");
     if (video != null && title) {
-        console.log("asd");
         browsingStamp = Math.floor(Date.now() / 1000);
-        presenceData.details = title.innerText;
-        if (subtitle && subtitle.innerText) {
-            console.log("yeet");
-            presenceData.state = subtitle.innerText;
+        presenceData.details = title.textContent;
+        if (subtitle && subtitle.textContent) {
+            presenceData.state = subtitle.textContent;
         }
         if (video.paused) {
             presenceData.smallImageKey = "paused";

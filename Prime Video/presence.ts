@@ -11,7 +11,7 @@ var presence = new Presence({
 
     browsingStamp = Math.floor(Date.now() / 1000),
 
-    regex = RegExp("https:\\/\\/www\\.amazon\\.(.*?)\\/\\b(?:Prime-Video|Prime-Instant-Video|gp\\/video)\\b");
+    regex = RegExp("https:\\/\\/www\\.amazon\\.(.*?)\\/\\b(?:Prime-Video|Prime-Instant-Video|Amazon-Video|gp\\/video)\\b");
 
 
 presence.on("UpdateData", async () => {
@@ -21,12 +21,10 @@ presence.on("UpdateData", async () => {
     var subtitle = document.querySelector("div.center > div > div.subtitle");
 
     if (video != null && title) {
-        console.log("asd");
         browsingStamp = Math.floor(Date.now() / 1000);
-        presenceData.details = title.innerText;
-        if (subtitle && subtitle.innerText) {
-            console.log("yeet");
-            presenceData.state = subtitle.innerText;
+        presenceData.details = title.textContent;
+        if (subtitle && subtitle.textContent) {
+            presenceData.state = subtitle.textContent;
         }
 
         if (video.paused) {
