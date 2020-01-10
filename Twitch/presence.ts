@@ -33,10 +33,12 @@ presence.on('UpdateData', async () => {
       }
     },
     live: {
-      label: document.querySelector('.tw-channel-status-text-indicator'),
+      label: document.querySelector(
+        '.video-player .tw-channel-status-text-indicator'
+      ),
       title: document.querySelector('.tw-font-size-4.tw-line-height-body'),
       streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap'),
-      host: document.querySelector('.tw-c-text-overlay.tw-strong')
+      host: document.querySelector('.video-player-hosting-ui__header')
     },
     video: {
       title: document.querySelector('.tw-font-size-4.tw-strong'),

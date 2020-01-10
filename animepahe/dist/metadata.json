@@ -8,11 +8,15 @@
     "en": "Anime site with good bitrate video streaming in english sub with scheduled uploads and a growing library"
   },
   "url": "animepahe.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://animepahe.com/app/images/apdoesnthavelogotheysaidapistooplaintheysaid.png",
   "thumbnail": "https://i.imgur.com/Tm58ZXt.png",
   "color": "#d5015b",
-  "tags": ["anime", "video", "media"],
+  "tags": [
+    "anime",
+    "video",
+    "media"
+  ],
   "category": "anime",
   "regExp": "animepahe.com",
   "iFrameRegExp": "kwik.cx/e",

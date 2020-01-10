@@ -4,7 +4,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             resolve(value);
         });
     }
-    return new(P || (P = Promise))(function (resolve, reject) {
+    return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) {
             try {
                 step(generator.next(value));
@@ -29,8 +29,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 
 const presence = new Presence({
-        clientId: "635199664290922512"
-    }),
+    clientId: "635199664290922512"
+}),
     strings = presence.getStrings({
         play: "presence.playback.playing",
         pause: "presence.playback.paused"
@@ -130,6 +130,25 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             state: actorName.textContent,
             startTimestamp: Math.floor(Date.now() / 1000)
         });
+    } else if (!isVideoData && page.includes("/forum")) {
+        const postTitle = document.querySelector("#container > div.content > div.right > div.right-inner > h2 > span"),
+            forumTitle = document.querySelector("#container > div.content > div.right > div.forum-head > h1");
+
+        if (page.slice(page.indexOf("/forum") + 6).length <= 0) {
+            presence.setActivity({
+                largeImageKey: "dl-logo",
+                details: `${forumTitle && forumTitle.textContent != "" ? forumTitle.textContent.replace(" tartışma forumu", "") : "Bilinmeyen"} dizisinin forumlarına bakıyor:`,
+                state: "Ana Sayfa",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            });
+        } else {
+            presence.setActivity({
+                largeImageKey: "dl-logo",
+                details: `${forumTitle && forumTitle.textContent != "" ? forumTitle.textContent.replace(" tartışma forumu", "") : "Bilinmeyen"} dizisinin forumlarına bakıyor:`,
+                state: postTitle && postTitle.textContent != "" ? postTitle.textContent : "Bilinmeyen",
+                startTimestamp: Math.floor(Date.now() / 1000)
+            });
+        }
     } else if (pages[page] || pages[page.slice(0, -1)]) {
         presence.setActivity({
             largeImageKey: "dl-logo",

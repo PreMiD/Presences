@@ -58,7 +58,7 @@ var a =
           Math.floor(duration)
         ),
         presenceData: presenceData = {
-          largeImageKey: "aw2"
+          largeImageKey: "awnew"
       };
     
       

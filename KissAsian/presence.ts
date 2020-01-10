@@ -13,7 +13,26 @@ var user : any;
 var title : any;
 var replace : any;
 var search : any;
+var iFrameVideo : boolean, currentTime : any, duration : any, paused : any, playback : any, video : HTMLVideoElement, timestamps : any;
+presence.on("iFrameData", data => {
 
+  playback = 
+  data.iframe_video.duration !== null
+    ? true : false
+
+//console.log(data.iframe_video);
+//console.log(document.location.pathname);
+
+if(playback) {
+
+  iFrameVideo = data.iframe_video.iFrameVideo;
+  currentTime = data.iframe_video.currTime;
+  duration    = data.iframe_video.dur;
+  paused      = data.iframe_video.paused;
+
+}
+
+});
 presence.on("UpdateData", async () => {
 
 
@@ -26,17 +45,15 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.querySelector("#selectEpisode") !== null) {
-      var currentTime : any, duration : any, paused : any, timestamps : any, video : HTMLVideoElement;
-      video = document.querySelector("#my_video_1_html5_api");
-      if (video == null) {
-        video = document.querySelector("#centerDivVideo > div > div > video");
+      video = document.querySelector("#my_video_1_html5_api") || document.querySelector("#centerDivVideo > div > div > video") || document.querySelector('video');
+      if (video !== null) {
+        currentTime = video.currentTime;
+        duration = video.duration;
+        paused = video.paused;
       }
       title = document.querySelector("#navsubbar > p > a").textContent.replace("information", "").replace("Drama", "");
       user = document.querySelector("head > title").textContent.replace("Watch", "").replace("online with English sub | KissAsian", "");
       
-      currentTime = video.currentTime;
-      duration = video.duration;
-      paused = video.paused;
       timestamps = getTimestamps(Math.floor(currentTime),Math.floor(duration));
       if (!isNaN(duration)) {
         presenceData.smallImageKey = paused ? "pause" : "play";

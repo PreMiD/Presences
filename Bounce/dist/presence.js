@@ -46,9 +46,9 @@ presence.on("UpdateData", () => {
                     break;
                 case "togl fa fa-pause":
                     presenceData.smallImageKey = "play";
-                    presenceData.details = strack + " - " + sartist
-                    presenceData.state = sdj
-                    presenceData.smallImageText = slisteners + " Listeners"
+                    presenceData.details = strack || "Loading..." + " - " + sartist || "Loading..."
+                    presenceData.state = sdj || "Loading..."
+                    presenceData.smallImageText = slisteners || "Loading..." + " Listeners"
             }
             break;
         case "Bounce.Login":
@@ -115,6 +115,35 @@ presence.on("UpdateData", () => {
         presenceData.details = "Booking a slot";
         presenceData.state = "Day: " + day;
     }
+     else if(document.location.pathname.startsWith("/portal")) {
+      presenceData.state = "Browsing Staff Panel";
+      presenceData.details = "Logging in" 
+     switch (document.location.hash.replace("#", "")) {   
+         case "user.home":
+            presenceData.details = "Viewing Homepage"
+         break;
+         case "user.rules":
+            presenceData.details = "Viewing Rules"
+         break;
+         case "user.bookaway":
+            presenceData.details = "Booking Away"
+         break;
+         case "news.create":
+            presenceData.details = "Creating Article"
+         break;
+         case "editor.allstories":
+            presenceData.details = "Viewing Articles"
+         break;
+         case "manager.modifyaccounts":
+            presenceData.details = "Updating Account"
+         break;
+         case "manager.createaccount":
+            presenceData.details = "Creating Account"   
+         break;
+         case "presenter.resources":
+            presenceData.details = "Viewing Resources"
+         break;
+}   
 
     if (document.location.hash.includes("Bounce.News")) {
         title = document.querySelector("body > div.web > div > div > div > div > div.pageajax > div.leftnews1 > center > b:nth-child(1)");
