@@ -1,0 +1,28 @@
+{
+	"author": {
+		"name": "Smallkan",
+		"id": "210052575158861824"
+	},
+	"service": "Animes Vision",
+	"description": {
+		"en": "Animes Vision - The largest anime site in Brazil!",
+		"pt_BR": "Animes Vision - O Maior site de Animes do Brasil!",
+		"ja_JP": "Animes Vision - ブラジル最大のアニメサイト！"
+	},
+	"url": [
+		"www.animesvision.com.br",
+		"www.animesvision.online"
+	],
+	"version": "1.0.0",
+	"logo": "https://i.imgur.com/LRZPULY.png",
+	"thumbnail": "https://i.imgur.com/QhBkzcI.jpg",
+	"color": "#0eafc1",
+	"tags": [
+		"anime",
+		"media",
+		"manga",
+		"video"
+	],
+	"category": "anime",
+	"iframe": false
+}
