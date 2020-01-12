@@ -3,14 +3,14 @@
     "name": "HiddenRealm",
     "id": "444628005646499851"
   },
-  "url": "jummbus.bitbucket.io/",
+  "url": "jummbus.bitbucket.io",
   "description": {
-    "english": "English"
+    "english": "Allows users to see music creation info and time used"
   },
   "service": "Jummbox",
   "version": "1.0.0",
-  "logo": "https://jummbus.bitbucket.io/favicon.ico",
-  "thumbnail": "https://jummbus.bitbucket.io/favicon.ico",
+  "logo": "https://imgur.com/a/MnRTrLM",
+  "thumbnail": "https://imgur.com/a/MnRTrLM",
   "color": "#040410",
   "category": "music",
   "tags": [
