@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "HiddenRealm",
+    "id": "444628005646499851"
+  },
+  "url": "jummbus.bitbucket.io/",
+  "description": {
+    "english": "English"
+  },
+  "service": "Jummbox",
+  "version": "1.0.0",
+  "logo": "https://jummbus.bitbucket.io/favicon.ico",
+  "thumbnail": "https://jummbus.bitbucket.io/favicon.ico",
+  "color": "#040410",
+  "category": "music",
+  "tags": [
+    "music",
+    "music creation",
+    "beepbox",
+    "jummbox",
+    "chiptune"
+  ]
+}
