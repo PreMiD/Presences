@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Peralask",
+    "id": "581599393107673098"
+  },
+  "url": "theuselessweb.site",
+  "description": {
+    "en": "WHY IS DORA THE EXPLORER IN A COMA?"
+  },
+  "service": "Dora the Explorer",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/3UCGEh0.png",
+  "thumbnail": "https://i.imgur.com/sehMCx8.png",
+  "color": "#087EA5",
+  "category": "other",
+  "tags": [
+    "dora",
+    "in",
+    "a",
+    "coma"
+  ]
+}
