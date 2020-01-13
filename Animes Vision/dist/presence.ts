@@ -1,52 +1,56 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 const presence = new Presence({
-    clientId: '666023707243839530',
+    clientId: '477937036423331872',
     mediaKeys: false
-}),
-strings = presence.getStrings({
+}), strings = presence.getStrings({
     playing: 'presence.playback.playing',
     paused: 'presence.playback.paused',
     browsing: 'presence.activity.browsing',
     episode: 'presence.media.info.episode'
 });
-
-presence.on('UpdateData', async () => {
-    const presenceData: presenceData = {
+presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
+    const presenceData = {
         largeImageKey: 'vision_img',
-        details: (await strings).browsing,
+        details: (yield strings).browsing,
         startTimestamp: Math.floor(Date.now() / 1000)
-    },
-    path = window.location.pathname;
+    }, path = window.location.pathname;
     if (path.startsWith('/animes')) {
         delete presenceData.startTimestamp, presenceData.endTimestamp;
         const video = document.querySelector('video');
         const title = document.querySelector('novisao').textContent;
         const episode = document.querySelector('novisaoep').textContent;
-
         presenceData.details = title;
-        presenceData.state = (await strings).episode.replace('{0}', episode);
+        presenceData.state = (yield strings).episode.replace('{0}', episode);
         if (!video.paused) {
             const { duration, currentTime } = video;
             const timestamps = getTimestamps(currentTime, duration);
-
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
             presenceData.smallImageKey = 'play';
-            presenceData.smallImageText = (await strings).playing;
-        } else if (video.currentTime > 0) {
-            presenceData.smallImageKey = 'pause';
-            presenceData.smallImageText = (await strings).paused
+            presenceData.smallImageText = (yield strings).playing;
         }
-        
-    } else if (path.startsWith('/all-series')) {
-        presenceData.details = 'Vendo a Lista de Animes';
-    } else if (path.startsWith('/lancamentos')) {
-        presenceData.details = 'Vendo os Lançamentos';
+        else if (video.currentTime > 0) {
+            presenceData.smallImageKey = 'pause';
+            presenceData.smallImageText = (yield strings).paused;
+        }
     }
+} else if (path.startsWith('/all-series')) {
+    presenceData.details = 'Vendo a Lista de Animes';
+} else if (path.startsWith('/lancamentos')) {
+    presenceData.details = 'Vendo os Lançamentos';
+}
     presence.setActivity(presenceData, true);
-})
-
+}));
 function getTimestamps(videoTime, videoDuration) {
-	var startTime = Math.floor(Date.now() / 1000);
-	var endTime = Math.floor(startTime - videoTime + videoDuration);
-	return [ startTime, endTime ];
+    var startTime = Math.floor(Date.now() / 1000);
+    var endTime = Math.floor(startTime - videoTime + videoDuration);
+    return [startTime, endTime];
 }
