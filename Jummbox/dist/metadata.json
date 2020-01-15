@@ -8,10 +8,10 @@
     "en": "Allows users to see music creation info and time used"
   },
   "service": "Jummbox",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/sjvwfGn.png",
   "thumbnail": "https://i.imgur.com/ZdN3BgW.png",
-  "color": "#040410",
+  "color": "#7744FF",
   "category": "music",
   "tags": [
     "music",
