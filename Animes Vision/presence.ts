@@ -1,52 +1,80 @@
-const presence = new Presence({
-    clientId: '477937036423331872',
-    mediaKeys: false
+let presence = new Presence({
+    clientId: '666023707243839530',
+    mediaKeys: true
 }),
+startedBrowsing : number = Math.floor(Date.now() / 1000),
+playback : boolean,
+video : HTMLVideoElement,
+currentTime : number,
+duration : number,
+timestamps : number[],
+videoTitle : string,
+episode : string,
+paused : boolean,
+path : string = window.location.pathname,
 strings = presence.getStrings({
-    playing: 'presence.playback.playing',
-    paused: 'presence.playback.paused',
-    browsing: 'presence.activity.browsing',
-    episode: 'presence.media.info.episode'
-});
+    "browsing": "presence.activity.browsing",
+    "playing": "presence.playback.playing",
+    "paused": "presence.playback.paused"
+}),
+presenceData : presenceData = {
+    largeImageKey: "vision_img",
+    startTimestamp: startedBrowsing
+};
 
-presence.on('UpdateData', async () => {
-    const presenceData: presenceData = {
-        largeImageKey: 'vision_img',
-        details: (await strings).browsing,
-        startTimestamp: Math.floor(Date.now() / 1000)
-    },
-    path = window.location.pathname;
-    if (path.startsWith('/animes')) {
-        delete presenceData.startTimestamp, presenceData.endTimestamp;
-        const video = document.querySelector('video');
-        const title = document.querySelector('novisao').textContent;
-        const episode = document.querySelector('novisaoep').textContent;
+presence.on("MediaKeys", (key: string) => {
+    if (video) {
+        if (key == "pause")
+            paused ? video.play() : video.pause();
+        }
+    }
+);
 
-        presenceData.details = title;
-        presenceData.state = (await strings).episode.replace('{0}', episode);
-        if (!video.paused) {
-            const { duration, currentTime } = video;
-            const timestamps = getTimestamps(currentTime, duration);
-
+presence.on("UpdateData", async () => {
+    playback = document.querySelector('div#playersd > div > div > video') || document.querySelector('div#playerhd > div > div > video') || document.querySelector('div#playerfhd > div > div > video') ? true : false;
+    if (playback) {
+        video = document.querySelector('div#playerhd > div > div > video');
+        video = video.currentTime != 0 ? video : document.querySelector('div#playersd > div > div > video');
+    }
+    if (playback && Math.floor(video.currentTime) != 0) {
+        duration = Math.floor(document.querySelector('video').duration);
+        videoTitle = document.querySelector('.novisao').textContent.split('–')[0].trim();
+        episode = document.querySelector('.novisao').textContent.split('–')[1].trim();
+        paused = video.paused
+        presenceData.smallImageKey = paused ? "pause" : "play";
+        presenceData.smallImageText = paused ? (await strings).paused : (await strings).playing;
+        if (!paused) {
+            currentTime = Math.floor(document.querySelector('video').currentTime);
+            timestamps = getTimestamps(currentTime, duration);
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
-            presenceData.smallImageKey = 'play';
-            presenceData.smallImageText = (await strings).playing;
-        } else if (video.currentTime > 0) {
-            presenceData.smallImageKey = 'pause';
-            presenceData.smallImageText = (await strings).paused
+        } else {
+            delete presenceData.startTimestamp;
+            delete presenceData.endTimestamp;
         }
-        
-    } else if (path.startsWith('/all-series')) {
-        presenceData.details = 'Vendo a Lista de Animes';
+        presenceData.details = 'Assistindo ' + videoTitle;
+        presenceData.state = episode;
+
+    }  else if (path.startsWith('/all-series')) {
+        presenceData.details = 'Vendo Lista de Animes';
     } else if (path.startsWith('/lancamentos')) {
         presenceData.details = 'Vendo os Lançamentos';
+    } else if (path.startsWith('/animes-dublado')) {
+        presenceData.details = 'Vendo Animes Dublados';
+    } else if (path.startsWith('/doramas')) {
+        presenceData.details = 'Vendo Lista de Doramas';
+    } else if (path.startsWith('/cartoons')) {
+        presenceData.details = 'Vendo Lista de Cartoons';
+    } else if (path.startsWith('/filmes')) {
+        presenceData.details = 'Vendo Lista de Filmes';
+    } else {
+        presenceData.details = (await strings).browsing;
     }
     presence.setActivity(presenceData, true);
 })
 
-function getTimestamps(videoTime, videoDuration) {
-	var startTime = Math.floor(Date.now() / 1000);
-	var endTime = Math.floor(startTime - videoTime + videoDuration);
-	return [ startTime, endTime ];
+function getTimestamps(curr : number, dura : number) {
+    let startTime = Math.floor(Date.now() / 1000),
+    duration = startTime - curr + dura;
+    return [startTime, duration];
 }
