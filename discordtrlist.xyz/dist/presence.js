@@ -17,11 +17,10 @@ presence.on("UpdateData", () => {
 } else if (document.location.pathname.includes("/api")) {
           presenceData.details = "Görültülenen Sayfa:";
           presenceData.state = ('Api sayfası')
-} else if (document.location.pathname.includes("/botlar")) {
+}else if (document.location.pathname.includes("/botlar")) {
           presenceData.details = "Görültülenen Sayfa:";
           presenceData.state = ('Bütün Botlar')
 
-    }
     } else if (document.location.pathname.includes("/profil/")) {
         var priceEls = document.getElementsByClassName("uname");
         for (var i = 0; i < priceEls.length; i++) {
