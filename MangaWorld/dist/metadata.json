@@ -9,12 +9,12 @@
     "it": "Scopri il nostro sito MangaWorld per leggere i tuoi Manga preferiti in Italiano e completamente gratis."
     },
     "url": ["mangaworld.biz", "www.mangaworld.biz"],
-    "version": "1.0",
-    "logo": "https://i.imgur.com/M5rhMZQ.png",
+    "version": "1.1",
+    "logo": "https://i.imgur.com/46FRVmF.png",
     "thumbnail": "https://i.imgur.com/BFsORve.png",
-    "color": "#FFD217",
+    "color": "#EE6B00",
     "tags": [
-        "mangadworld",
+        "mangaworld",
 		"manga",
         "reading"
     ],
