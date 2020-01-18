@@ -134,6 +134,11 @@ presence.on('UpdateData', async () => {
       data.details = 'Viewing Discussion';
       data.state = name;
     }
+
+    const tab = getElement('.tab.active');
+    if (tab) {
+      data.state = tab;
+    }
   }
 
   if (path.match('/Leaderboard')) {
