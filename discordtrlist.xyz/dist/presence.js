@@ -15,6 +15,10 @@ presence.on("UpdateData", () => {
         presenceData.details = "Tüm botlara göz atıyor.";
         presenceData.startTimestamp = browsingStamp;
     }
+else if (window.location.pathname.endsWith("")) {
+        presenceData.details = "Anasayfada Geziniyor.";
+        presenceData.startTimestamp = browsingStamp;
+    }
     else if (window.location.pathname.endsWith("api")) {
         presenceData.details = "Api dökümasyonlarına bakıyor.";
         presenceData.startTimestamp = browsingStamp;
