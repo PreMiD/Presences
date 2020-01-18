@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "A1D1+",
+        "id": "538049764592320543"
+    },
+    "service": "TR List",
+    "description": {
+        "tr": "Türkiyenin en gelişmiş listi.",
+         "en": "Turkey's most advanced bot list"
+    },
+    "url": "discordtrlist.xyz",
+    "version": "1.1",
+    "logo": "https://cdn.discordapp.com/avatars/540077622202335233/f9cd6e9433d58ca9a84566cf3c242ef9.png",
+    "thumbnail": "https://cdn.discordapp.com/avatars/54007762220233523/f9cd6e9433d58ca9a84566cf3c242ef9.png",
+    "color": "#F10C0C",
+    "tags": [
+    "botlist",
+    "trlist",
+    "turkish"
+    ],
+    "category": "other"
+}
