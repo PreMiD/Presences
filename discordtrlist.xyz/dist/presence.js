@@ -14,7 +14,7 @@ presence.on("UpdateData", () => {
     if (document.location.hostname == "discordtrlist.xyz") {
         presenceData.details = "Görültülenen sayfa:";
         presenceData.state = ('Anasayfa')
-} else if (document.location.pathname.includes("/api")) {
+if (document.location.pathname.includes("/api")) {
           presenceData.details = "Görültülenen Sayfa:";
           presenceData.state = ('Api sayfası')
 }else if (document.location.pathname.includes("/botlar")) {
@@ -31,12 +31,16 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/botekle")) {
             presenceData.details = "Görültülenen Sayfa:";    
             presenceData.state = "Bot ekleme sayfası";
+    } else if (document.location.pathname.includes("/yetkili")) {
+            presenceData.details = "Görültülenen Sayfa:";    
+            presenceData.state = "Yetkili paneli";
 
-    } else if (document.location.pathname.includes("/bot/")) {
-        var priceEls = document.getElementsByClassName("botname");
+    }
+     else if (document.location.pathname.includes("/bot/")) {
+        var priceEls = document.getElementsByClassName("ubot");
         for (var i = 0; i < priceEls.length; i++) {
          var botname = priceEls[i].innerText;
-            presenceData.details = "Viewing a Discord bot:";
+            presenceData.details = "Bir Bota bakıyor:";
             presenceData.state = botname
         }
                     }
