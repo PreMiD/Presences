@@ -9,7 +9,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
     let presenceData = {
-        largeImageKey: "f92075da7d77f4147ef028a5fe5e149f-512x512"
+        largeImageKey: "logo"
 };
     if (document.location.hostname == "discordtrlist.xyz") {
         presenceData.details = "Görültülenen sayfa:";
