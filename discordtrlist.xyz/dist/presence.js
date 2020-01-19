@@ -8,7 +8,7 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
     let presenceData = {
-        largeImageKey: "logo",
+        largeImageKey: "logo"
 };
     if (document.location.hostname == "discordtrlist.xyz") {
         presenceData.details = "Görüntülenen sayfa:";
