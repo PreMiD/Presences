@@ -11,23 +11,23 @@ presence.on("UpdateData", () => {
         largeImageKey: "logo"
 };
     if (document.location.hostname == "discordtrlist.xyz") {
-        presenceData.details = "Görüntülenen sayfa:";
+        presenceData.details = "Bir Sayfaya Bakıyor:";
         presenceData.state = ('Anasayfa')
         presenceData.startTimestamp = browsingStamp;
 if (document.location.pathname.includes("/api")) {
-          presenceData.details = "Görüntülenen Sayfa:";
+          presenceData.details = "Bir Sayfaya Bakıyor:";
           presenceData.state = ('Api sayfası')
           presenceData.startTimestamp = browsingStamp;
 }else if (document.location.pathname.includes("/botlar")) {
-          presenceData.details = "Görüntülenen Sayfa:";
-          presenceData.state = ('Bütün Botlar')
+          presenceData.details = "Bir Sayfaya Bakıyor:";
+          presenceData.state = ('Botların Hepsine')
           presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/giris")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Siteye giriş";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/cikis")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Siteden çıkış";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/oyver")) {
@@ -39,11 +39,11 @@ var priceEls = document.getElementsByClassName("ubott");
             presenceData.startTimestamp = browsingStamp;
         }
     } else if (document.location.pathname.includes("/duzenle")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
-            presenceData.state = "Botu düzenliyor.";
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
+            presenceData.state = "Botu değiştiriyor.";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/rapor")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Botu raporluyor.";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/profil/")) {
@@ -55,45 +55,49 @@ var priceEls = document.getElementsByClassName("ubott");
             presenceData.startTimestamp = browsingStamp;
         }
     } else if (document.location.pathname.includes("/botekle")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Bot ekleme sayfası";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/yetkili")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Yetkili paneli";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/yetkili/tum")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
-            presenceData.state = "Yetkili paneli ~ Tüm Botlar";
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
+            presenceData.state = "Yetkili paneli ~ Botların Hepsi";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/yetkili/onayl")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Yetkili paneli ~ Onaylı Botlar";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/yetkili/red")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Yetkili paneli ~ Reddedilmiş Botlar";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/yetkili/bekle")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Yetkili paneli ~ Beklemede Olan Botlar";
             presenceData.startTimestamp = browsingStamp;
       
+    } else if (document.location.pathname.includes("/kurucu")) {
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
+            presenceData.state = "Kurucu paneli";
+            presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/kurucu/duyuru")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Kurucu paneli ~ Duyuru";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/kurucu/yliste")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Kurucu paneli ~ Yetkili Listesi";
             presenceData.startTimestamp = browsingStamp;
     
     } else if (document.location.pathname.includes("/kurucu/yekle")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Kurucu paneli ~ Yetkili Ekle";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/kurucu/reklamlibot")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
+            presenceData.details = "Bir Sayfaya Bakıyor:";    
             presenceData.state = "Kurucu paneli ~ Reklamlı Bot Ekle";
             presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/bot/")) {
