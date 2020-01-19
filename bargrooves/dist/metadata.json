@@ -1,0 +1,26 @@
+{
+    "author": {
+      "name": "Chezzer",
+      "id": "195979856733929472"
+    },
+    "url": [
+        "bargrooves.live",
+        "www.bargrooves.live"
+      ],
+    "description": {
+      "english": "Bargrooves curates bespoke soundtracks for discerning house music fans; compilations and playlists to suit your seasonal moods, featuring the best current dance music alongside well-loved classics. Use this extension to show your friends what your listening to."
+    },
+    "service": "Bargrooves",
+    "version": "0.9",
+    "logo": "https://bargrooves.live/_assets/_img/default.png",
+    "thumbnail": "https://i.imgur.com/VUxIYVe.png",
+    "color": "#FFBB00",
+    "category": "music",
+    "tags": [
+      "music",
+      "bargrooves",
+      "bargrooves FM",
+      "house music",
+      "bargrooves.live"
+    ]
+  }
