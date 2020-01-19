@@ -22,10 +22,6 @@ if (document.location.pathname.includes("/api")) {
           presenceData.details = "Görüntülenen Sayfa:";
           presenceData.state = ('Bütün Botlar')
           presenceData.startTimestamp = browsingStamp;
-} else if (document.location.pathname.includes("/bot/")) {
-            presenceData.details = "Görüntülenen Sayfa:";    
-            presenceData.state = "Geçersiz Sayfa";
-            presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/giris")) {
             presenceData.details = "Görüntülenen Sayfa:";    
             presenceData.state = "Siteye giriş";
