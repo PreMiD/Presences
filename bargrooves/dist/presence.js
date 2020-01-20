@@ -31,7 +31,7 @@ presence.on("UpdateData", () => {
             presenceData.state = 'Looking at ' + document.title.replace("Bargrooves FM - ", "");
             presenceData.smallImageKey = "pause";
         } else {
-            presenceData.details = "Listening to the player";
+            presenceData.details = "Listening to " + document.getElementById("current-album").innerHTML.split("<")[0];
             presenceData.state = document.getElementById("csong").innerHTML + " - " + document.getElementById("cartist").innerHTML;
             presenceData.smallImageKey = "play";
         }
