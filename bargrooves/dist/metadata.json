@@ -8,10 +8,10 @@
         "www.bargrooves.live"
       ],
     "description": {
-      "english": "Bargrooves curates bespoke soundtracks for discerning house music fans; compilations and playlists to suit your seasonal moods, featuring the best current dance music alongside well-loved classics. Use this extension to show your friends what your listening to."
+      "en": "Bargrooves curates bespoke soundtracks for discerning house music fans; compilations and playlists to suit your seasonal moods, featuring the best current dance music alongside well-loved classics. Use this extension to show your friends what your listening to."
     },
     "service": "Bargrooves",
-    "version": "0.9",
+    "version": "1",
     "logo": "https://bargrooves.live/_assets/_img/default.png",
     "thumbnail": "https://i.imgur.com/VUxIYVe.png",
     "color": "#FFBB00",
