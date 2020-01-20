@@ -58,8 +58,10 @@ presence.on("UpdateData", async () => {
 		    		media.filename ? data.details = media.filename : "something";
 		    	media.seasonNumber ? data.state = ("season " + media.seasonNumber) : 
 		    		media.episodeNumber ? data.state = ("episode " + media.episodeNumber) : delete data.state;
-		    }
-
+			}
+			
+			if(data.details && data.details.length > 100) data.details = data.details.substring(0, 127);
+			if(data.state && data.state.length > 100) data.state = data.state.substring(0, 127);
 	    	data.smallImageKey = media.state == "playing" ? "play" : "pause";
 	    	data.smallImageText = media.state == "playing" ? (await strings).play : (await strings).pause;
 	        data.startTimestamp = timestamps[0];
