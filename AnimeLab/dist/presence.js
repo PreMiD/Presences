@@ -23,15 +23,15 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         largeImageKey: "al"
     };
     if (document.location.hostname == "www.animelab.com") {
-        if (document.location.pathname == "/") {
+        if (document.location.pathname == "/" || document.location.pathname == "/home") {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing home page";
         }
         else if (document.location.pathname.includes("/player/")) {
             var currentTime, duration, paused, timestamps, video;
             video = document.querySelector("#video-component");
-            title = document.querySelector("#video-info-container > div > h1").textContent;
-            user = document.querySelector("#video-info-container > div > h3").textContent;
+            title = document.querySelector(".primary-title").textContent;
+            user = document.querySelector(".secondary-title").textContent;
             currentTime = video.currentTime;
             duration = video.duration;
             paused = video.paused;
@@ -55,16 +55,16 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
         }
         else if (document.location.pathname.includes("/shows/")) {
-            if (document.querySelector("body > div.site-wrapper > div.show-info-wrapper > div > div.row > div > div.show-info > h1") !== null) {
+            if (document.querySelector(".show-title") !== null) {
                 presenceData.startTimestamp = browsingStamp;
                 presenceData.details = "Viewing show:";
-                presenceData.state = document.querySelector("body > div.site-wrapper > div.show-info-wrapper > div > div.row > div > div.show-info > h1").textContent;
+                presenceData.state = document.querySelector(".show-title").textContent;
             }
             else if (document.location.pathname.includes("/search")) {
                 presenceData.startTimestamp = browsingStamp;
                 presenceData.smallImageKey = "search";
                 presenceData.details = "Searching for:";
-                presenceData.state = document.querySelector("body > div.site-wrapper > div.listing-block.restricted > div > h2").textContent.replace("Search results for ", "").replace(document.querySelector("body > div.site-wrapper > div.listing-block.restricted > div > h2 > span").textContent, "");
+                presenceData.state = document.querySelector(".shelf-header-title").textContent.replace("Search Results for ", "").replace("\'", "");
             }
             else {
                 presenceData.startTimestamp = browsingStamp;
@@ -74,7 +74,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else if (document.location.pathname.includes("/genres/")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing genre:";
-            presenceData.state = document.querySelector("body > div.site-wrapper > div.listing-block.genre-header > div > h1").textContent;
+            presenceData.state = document.querySelector(".shelf-header-title").textContent;
             presenceData.smallImageKey = "reading";
         }
         else if (document.location.pathname.includes("/genres")) {
@@ -84,6 +84,18 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else if (document.location.pathname.includes("/simulcasts")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Browsing simulcasts...";
+        }
+        else if (document.location.pathname.includes("/movies")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Browsing movies...";
+        }
+        else if (document.location.pathname.includes("/watchlist")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Viewing their watchlist...";
+        }
+        else if (document.location.pathname.includes("/profile")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Viewing their profile...";
         }
     }
     if (presenceData.details == null) {
