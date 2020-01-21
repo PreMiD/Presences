@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@octokit/rest": "16.37.0",
-    "@types/chrome": "0.0.91",
+    "@types/chrome": "0.0.92",
     "@types/mongodb": "3.3.14"
   }
 }
