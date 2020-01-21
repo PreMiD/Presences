@@ -310,32 +310,41 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* async 
             ctn_Paus = cnt.innerText.replace("Lista de Em Pausa ", ""),
             ctn_Hunt = cnt.innerText.replace("Lista de Presas Hunter ", ""),
             aaa_ = document.querySelector('#geral #corpo .conteudoBox .boxBarraInfo') || document.querySelector('#geral #corpo .conteudoBoxHome .boxBarraInfo'),
-            //bbb_ = ,
+            bbb_ = document.querySelector("#menu-link-perfil-sobre > ul:nth-child(2) > li:nth-child(3)"),
             ccc_ = document.querySelector("#corpo > div.conteudoBoxHome > h2"),
             ddd_2 = document.querySelector("#corpo > div.conteudoBoxHome > div.friend_list > div > div.rows_list.embed-1062831115 > div.box.sendPlayer > b")
         if(aaa_.innerText.includes('Sobre')){
-                presenceData.details = 'Visualizando Perfil';
-                presenceData.state = perfiName.innerText;
-                presenceData.smallImageKey = "perfil"
-                presenceData.smallImageText = "Perfil"
-                presence.setActivity(presenceData);  
+            presenceData.details = "Perfil: " + perfiName.innerText
+            presenceData.smallImageKey = "perfil"
+            presenceData.smallImageText = bbb_.innerText
+
+            if(document.querySelector("#menu-link-perfil-sobre > ul:nth-child(2) > li.sizeFull") === null){
+                presenceData.state = "Perfil sem descrição."
+                presence.setActivity(presenceData);
+                delete presenceData.startTimestamp;
+            } else {
+                presenceData.state = document.querySelector("#menu-link-perfil-sobre > ul:nth-child(2) > li.sizeFull").innerText
+                presence.setActivity(presenceData);
+                delete presenceData.startTimestamp;
+            }
+            presence.setActivity(presenceData);
         } else if(document.location.hostname == "www.superanimes.org" && document.location.pathname.includes("/favorito")){
                 presenceData.details = 'Lista de Favoritos' + ' ' + ctn_Fav;
-                presenceData.state = perfiName.innerText;
                 presenceData.smallImageKey = "perfil"
                 presenceData.smallImageText = "Perfil"
+                presenceData.state = perfiName.innerText;
                 presence.setActivity(presenceData);  
         } else if(document.URL.includes('mod=embed')){
                 presenceData.details = 'Moderador: ' + perfiName.innerText;
                 presenceData.state = 'Filtrando Embeds';
                 //presenceData.startTimestamp = browsingStamp;
                 presence.setActivity(presenceData);  
-        } else if(ccc_.innerText.includes('Moderadores no site ')){
+        } /*else if(ccc_.innerText.includes('Moderadores no site ')){
                 presenceData.details = 'Moderador: ' + perfiName.innerText;
                 presenceData.state = 'Log de Embed dos Mods';
                 //presenceData.startTimestamp = browsingStamp;
                 presence.setActivity(presenceData);  
-        } else if(document.URL.includes('mod=log-embed&id=')){
+        }*/ else if(document.URL.includes('mod=log-embed&id=')){
                 presenceData.details = 'Moderador: ' + ddd_2.innerText;
                 presenceData.state = 'Log de Embed dos Mods';
                 //presenceData.startTimestamp = browsingStamp;

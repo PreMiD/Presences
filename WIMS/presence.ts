@@ -6,7 +6,7 @@ if (document.getElementsByTagName("frame")[1]) {
 }
 
 var presence = new Presence({
-  clientId: "556828545469513730",
+  clientId: "656959119118565406",
   mediaKeys: false
 })
 
@@ -30,7 +30,7 @@ if (!loggedout) {
   // Set Worksheet
   if (document.baseURI.match(/sh=/)) {
     var WSNo = ((document.baseURI.match(/sh=(.?.?)/))[1]).replace(/&|#/g,"");
-    var Worksheet = ": " + (document.getElementsByClassName("text_item ")[1].innerHTML) + "" + WSNo;
+    var Worksheet = "- " + (document.getElementsByClassName("text_item ")[1].innerHTML) + "" + WSNo;
     var Exercise = "...";
   }
   
@@ -38,7 +38,7 @@ if (!loggedout) {
   else if (document.baseURI.match(/(worksheet=|reply)/)) {
     // Set Worksheet
     var WSNo = (((document.querySelector(".sheet") as HTMLAnchorElement).href.match(/sh=(.?.?)/))[1]).replace(/&|#/g,"");
-    var Worksheet = ": " + (document.querySelector(".sheet") as HTMLElement).innerText + " " + WSNo;
+    var Worksheet = "- " + (document.querySelector(".sheet") as HTMLElement).innerText + " " + WSNo;
     var Classname = ((document.querySelectorAll("td.small")[2] as HTMLElement).innerText.split(" ")[0]) + " ";
     
     // Set Exercise

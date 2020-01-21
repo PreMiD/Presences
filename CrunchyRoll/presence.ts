@@ -5,7 +5,8 @@ var presence = new Presence({
 
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
+    browse: "presence.activity.browsing"
   });
 
 var lastPlaybackState = null;
@@ -46,8 +47,8 @@ presence.on("UpdateData", async () => {
     presenceData: presenceData = {
       largeImageKey: "lg"
     }
-    
-    presenceData.details = "Browsing...";
+
+    presenceData.details = (await strings).browse;
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
