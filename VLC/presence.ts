@@ -13,9 +13,12 @@ var presence = new Presence({
     media = { // anyone is welcome to suggest more metadata via GH issues
         time: null,
         length: null,
-        state: "stopped",
+		state: "stopped",
+		loop: null,
+		repeat: null,
         filename: null,
-    	title: null,
+		title: null,
+		album: null,
     	artist: null,
     	track_number: null,
     	showName: null,
@@ -26,7 +29,7 @@ var presence = new Presence({
 
 presence.on("UpdateData", async () => {
 
-	if(document.title.includes("VLC media player")) {
+	if(document.querySelector(".footer") && document.querySelector(".footer").textContent.includes("VLC")) {
 
 	    var data: presenceData = {
 	        largeImageKey: "vlc"
@@ -42,9 +45,13 @@ presence.on("UpdateData", async () => {
 	    if(media.state == "playing" || media.state == "paused") {
 
 		    if(isSong) {
-		    	media.title ? data.details = (media.track_number ? media.track_number + ". " : "") + media.title 
-		    		: data.details = "a song by";
-		    	media.title ? data.state = "by " + media.artist : data.state = media.artist;
+				if(media.title && media.album && (media.title == media.album)) {
+					media.album = null;
+				}
+				data.details = (media.title ? media.title : media.track_number ? "Track N°" + media.track_number : "A song") 
+					+ (media.album ? " on " + media.album : "");
+				media.artist ? data.state = "by " + media.artist :
+					data.state = media.filename;
 		    }
 		    else if(isShow) {
 		    	media.showName ? data.details = media.showName :
@@ -62,8 +69,13 @@ presence.on("UpdateData", async () => {
 			
 			if(data.details && data.details.length > 100) data.details = data.details.substring(0, 127);
 			if(data.state && data.state.length > 100) data.state = data.state.substring(0, 127);
-	    	data.smallImageKey = media.state == "playing" ? "play" : "pause";
-	    	data.smallImageText = media.state == "playing" ? (await strings).play : (await strings).pause;
+
+			data.smallImageKey = (media.loop === "true" && media.repeat === "false") ? "repeat" 
+							: (media.repeat === "true" && media.loop === "false") ? "repeat-one" 
+							: (media.state === "playing") ? "play" : "pause";
+			data.smallImageText = (media.loop === "true" && media.repeat === "false") ? "All on loop" 
+							: (media.repeat === "true" && media.loop === "false") ? "On loop" 
+							: (media.state === "playing") ? (await strings).play : (await strings).pause;
 	        data.startTimestamp = timestamps[0];
 	        data.endTimestamp = timestamps[1];
 
@@ -105,7 +117,7 @@ function getTimestamps(mediaTime: any, mediaDuration: any) {
 
 var getStatus = setLoop(function(){
 
-	if(document.title.includes("VLC media player")) {
+	if(document.querySelector(".footer") && document.querySelector(".footer").textContent.includes("VLC")) {
 
 		const req = new XMLHttpRequest();
 		// jquery sucks!!!
@@ -122,11 +134,15 @@ var getStatus = setLoop(function(){
 
 		            if(media.state !== "stopped") {
 			            media.time = req.responseXML.getElementsByTagName("time")[0].textContent;
-			            media.length = req.responseXML.getElementsByTagName("length")[0].textContent;
+						media.length = req.responseXML.getElementsByTagName("length")[0].textContent;
+						media.loop = req.responseXML.getElementsByTagName("loop")[0].textContent;
+						media.repeat = req.responseXML.getElementsByTagName("repeat")[0].textContent;
 			        }
 			        else {
 			            media.time = null;
-			            media.length = null;
+						media.length = null;
+						media.loop = null;
+						media.repeat = null;
 			        }
 
 		            req.responseXML.getElementsByName("filename")[0] ? 
@@ -136,13 +152,15 @@ var getStatus = setLoop(function(){
 		            req.responseXML.getElementsByName("showName")[0] ? 
 		            	media.showName = req.responseXML.getElementsByName("showName")[0].textContent : media.showName = null;
 
-		            if(req.responseXML.getElementsByName("artist")[0]) {
+		            if(req.responseXML.getElementsByName("artist")[0] || req.responseXML.getElementsByName("album")[0]) {
 		            	isSong = true;
-		            	media.artist = req.responseXML.getElementsByName("artist")[0].textContent;
-		            }
+						req.responseXML.getElementsByName("artist")[0] ? media.artist = req.responseXML.getElementsByName("artist")[0].textContent : media.artist = null;
+						req.responseXML.getElementsByName("album")[0] ? media.album = req.responseXML.getElementsByName("album")[0].textContent : media.album = null;
+					}
 		            else {
 		            	isSong = false;
-		            	media.artist = null;
+						media.artist = null;
+						media.album = null;
 		            }
 
 		            req.responseXML.getElementsByName("track_number")[0] ? 
