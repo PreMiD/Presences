@@ -48,20 +48,20 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     presence.setActivity(data);
 	}
 	else if (document.location.pathname.match("/ep/")) {
-	var animefwt1 = document.querySelector("head > title").textContent;
-	var animefwt2 = animefwt1.replace("AnimeSaturn - ","").split(" Episodio")[0];
-	var animefwe = animefwt1.replace(animefwt2, "").replace("AnimeSaturn - ", "").replace("Episodio ", "").replace(" Streaming SUB ITA e ITA", "");
-    localStorage.setItem("Anime", animefwt2);
-    localStorage.setItem("Episode", animefwe);
-    data.details = "Sta per guardare: " + animefwt2,
-	data.state = "Episodio: " + animefwe,
+	var animeept1 = document.querySelector("head > title").textContent;
+	var animeept = animeept1.replace("AnimeSaturn - ","").split(" Episodio")[0];
+	var animeepe = animeept1.replace(animeept, "").replace("AnimeSaturn - ", "").replace("Episodio ", "").replace(" Streaming SUB ITA e ITA", "");
+    localStorage.setItem("Anime", animeept);
+    localStorage.setItem("Episode", animeepe);
+    data.details = "Sta per guardare: " + animeept,
+	data.state = "Episodio: " + animeepe,
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
     } else if (document.location.pathname.match("/watch")) {
-    var animefwt2 = localStorage.getItem("Anime");
-    var animefwe = localStorage.getItem("Episode");
-    data.details = "Sta guardando: " + animefwt2,
-    data.state = "Episodio: " + animefwe,
+    var animewt = localStorage.getItem("Anime");
+    var animewe = localStorage.getItem("Episode");
+    data.details = "Sta guardando: " + animewt,
+    data.state = "Episodio: " + animewe,
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
     }
