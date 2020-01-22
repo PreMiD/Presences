@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
     clientId: "669254632400355358",
     mediaKeys: false
@@ -57,12 +48,21 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     presence.setActivity(data);
 	}
 	else if (document.location.pathname.match("/ep/")) {
-		var animefwt1 = document.querySelector("head > title").textContent;
-		var animefwt2 = animefwt1.replace("AnimeSaturn - ","").split(" Episodio")[0];
-		var animefwe = animefwt1.replace(animefwt2, "").replace("AnimeSaturn - ", "").replace("Episodio ", "").replace(" Streaming SUB ITA e ITA", "");
+	var animefwt1 = document.querySelector("head > title").textContent;
+	var animefwt2 = animefwt1.replace("AnimeSaturn - ","").split(" Episodio")[0];
+	var animefwe = animefwt1.replace(animefwt2, "").replace("AnimeSaturn - ", "").replace("Episodio ", "").replace(" Streaming SUB ITA e ITA", "");
+    localStorage.setItem("Anime", animefwt2);
+    localStorage.setItem("Episode", animefwe);
     data.details = "Sta per guardare: " + animefwt2,
 	data.state = "Episodio: " + animefwe,
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
-    };
-}));
+    } else if (document.location.pathname.match("/watch")) {
+    var animefwt2 = localStorage.getItem("Anime");
+    var animefwe = localStorage.getItem("Episode");
+    data.details = "Sta guardando: " + animefwt2,
+    data.state = "Episodio: " + animefwe,
+    data.startTimestamp = browsingStamp;
+    presence.setActivity(data);
+    }
+    }));
