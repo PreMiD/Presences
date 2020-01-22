@@ -156,4 +156,5 @@ presence.on("UpdateData", () => {
         presenceData.smallImageKey = "reading";
     }
     presence.setActivity(presenceData)
+     }
 });
