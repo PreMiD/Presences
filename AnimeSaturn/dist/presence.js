@@ -12,7 +12,7 @@ var presence = new Presence({
     mediaKeys: false
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+presence.on("UpdateData", () => {
     let data = {
         largeImageKey: "asnew"
     };
