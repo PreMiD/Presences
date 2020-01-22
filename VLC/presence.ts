@@ -141,16 +141,16 @@ var getStatus = setLoop(function() {
                     }
 
                     req.responseXML.getElementsByName("filename")[0] ?
-                        media.filename = req.responseXML.getElementsByName("filename")[0].textContent : media.filename = null;
+                        media.filename = decodeReq(req.responseXML.getElementsByName("filename")[0]) : media.filename = null;
                     req.responseXML.getElementsByName("title")[0] ?
-                        media.title = req.responseXML.getElementsByName("title")[0].textContent : media.title = null;
+                        media.title = decodeReq(req.responseXML.getElementsByName("title")[0]) : media.title = null;
                     req.responseXML.getElementsByName("showName")[0] ?
-                        media.showName = req.responseXML.getElementsByName("showName")[0].textContent : media.showName = null;
+                        media.showName = decodeReq(req.responseXML.getElementsByName("showName")[0]) : media.showName = null;
 
                     if (req.responseXML.getElementsByName("artist")[0] || req.responseXML.getElementsByName("album")[0]) {
                         isSong = true;
-                        req.responseXML.getElementsByName("artist")[0] ? media.artist = req.responseXML.getElementsByName("artist")[0].textContent : media.artist = null;
-                        req.responseXML.getElementsByName("album")[0] ? media.album = req.responseXML.getElementsByName("album")[0].textContent : media.album = null;
+                        req.responseXML.getElementsByName("artist")[0] ? media.artist = decodeReq(req.responseXML.getElementsByName("artist")[0]) : media.artist = null;
+                        req.responseXML.getElementsByName("album")[0] ? media.album = decodeReq(req.responseXML.getElementsByName("album")[0]) : media.album = null;
                     } else {
                         isSong = false;
                         media.artist = null;
@@ -158,13 +158,13 @@ var getStatus = setLoop(function() {
                     }
 
                     req.responseXML.getElementsByName("track_number")[0] ?
-                        media.track_number = req.responseXML.getElementsByName("track_number")[0].textContent : media.track_number = null;
+                        media.track_number = decodeReq(req.responseXML.getElementsByName("track_number")[0]) : media.track_number = null;
 
 
                     if (req.responseXML.getElementsByName("seasonNumber")[0] && req.responseXML.getElementsByName("episodeNumber")[0]) {
                         isShow = true;
-                        media.seasonNumber = req.responseXML.getElementsByName("seasonNumber")[0].textContent;
-                        media.episodeNumber = req.responseXML.getElementsByName("episodeNumber")[0].textContent;
+                        media.seasonNumber = decodeReq(req.responseXML.getElementsByName("seasonNumber")[0]);
+                        media.episodeNumber = decodeReq(req.responseXML.getElementsByName("episodeNumber")[0]);
                     } else {
                         isShow = false;
                         media.seasonNumber = null;
@@ -200,4 +200,11 @@ var getStatus = setLoop(function() {
 function setLoop(f, ms) {
     f();
     return setInterval(f, ms);
+}
+
+function decodeReq(entity) {
+    // decoding HTML entities the stackoverflow way 
+    var txt = document.createElement("textarea");
+    txt.innerHTML = entity.textContent;
+    return txt.value;
 }
