@@ -40,10 +40,10 @@
     once "^1.4.0"
     universal-user-agent "^4.0.0"
 
-"@octokit/rest@16.38.0":
-  version "16.38.0"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.38.0.tgz#5dc50c1cb34d8f0cab4e2848703a4025f043a753"
-  integrity sha512-3zbHsRyBeTIHUpBbYy7rzP5Zgcw9lC22yE9BkwF4J+BgfVoA9BxK6gRfWqem0nsUN3mwftf/nnYIwmZih/X0ug==
+"@octokit/rest@16.38.1":
+  version "16.38.1"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.38.1.tgz#be24e0faa7d0bdb9459fbc089ec866ed11774b72"
+  integrity sha512-zyNFx+/Bd1EXt7LQjfrc6H4wryBQ/oDuZeZhGMBSFr1eMPFDmpEweFQR3R25zjKwBQpDY7L5GQO6A3XSaOfV1w==
   dependencies:
     "@octokit/auth-token" "^2.4.0"
     "@octokit/request" "^5.2.0"
