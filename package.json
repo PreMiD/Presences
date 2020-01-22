@@ -4,7 +4,7 @@
   "author": "Timeraa",
   "license": "ISC",
   "devDependencies": {
-    "axios": "0.19.1",
+    "axios": "0.19.2",
     "mongodb": "3.5.2",
     "typescript": "3.7.5"
   },
