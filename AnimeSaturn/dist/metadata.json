@@ -19,5 +19,4 @@
     "videos"
   ],
   "category": "anime",
-  "regExp": "(([a-z0-9]+)[.])?animesaturn[.]([a-z0-9]+)"
 }
