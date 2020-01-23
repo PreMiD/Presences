@@ -20,31 +20,18 @@ const PRESENCE_ART_ASSETS = {
 }
 
 let presence = new Presence({
-    clientId: "669359568391766018", // The client ID of the Application created at https://discordapp.com/developers/applications
-    mediaKeys: false // Enable use and detection of media key presses
+    clientId: "669359568391766018",
+    mediaKeys: false
 });
 
-// View https://docs.premid.app/en/dev/presence/class -> presenceData interface for more
+// View https://docs.premid.app/en/dev/presence/class -> presenceData interfac
 let presenceData = {
-    /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
     largeImageKey: PRESENCE_ART_ASSETS.logo,
-
-    /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
     // smallImageKey: "key",
-
-    //The text which is displayed when hovering over the small image
     // smallImageText: "Some hover text",
-
-    // The upper section of the presence text, 2nd line
     // details: "",
-
-    // The lower section of the presence text, 3rd line
     // state: "",
-
-    // The unix epoch timestamp for when to start counting from
     // startTimestamp: null,
-
-    // If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
     // endTimestamp: 1577151472000
 };
 
@@ -407,9 +394,7 @@ presence.on("UpdateData", async () => {
     // if jellyfin is detected init/update the presence status
     if (showPresence) {
         if (presenceData.details == null) {
-            // Clears the tray title for mac users
             presence.setTrayTitle();
-            // make the large image the Discord Application icon, and the text the Discord Application name
             presence.setActivity();
 
         } else {
