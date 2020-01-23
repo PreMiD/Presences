@@ -380,7 +380,7 @@ function setDefaultsToPresence() {
 
 // tick function, this is called several times a second where possible
 presence.on("UpdateData", async () => {
-    // setDefaultsToPresence();
+    setDefaultsToPresence();
 
     let showPresence = false;
 
