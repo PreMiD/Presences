@@ -83,7 +83,7 @@ async function isJellyfinWebClient() {
 	}
 
 	if (typeof ApiClient === "object") {
-		if (ApiClient["_appName"] === APP_NAME) {
+		if (ApiClient["_appName"] && ApiClient["_appName"] === APP_NAME) {
 			 return true;
 		}
 	}
