@@ -19,10 +19,43 @@ const PRESENCE_ART_ASSETS = {
     write: "writing"
 }
 
-let presence = new Presence({
-    clientId: "669359568391766018",
-    mediaKeys: false
-});
+let presence;
+
+async function init() {
+    let validPage = false;
+
+    // jellyfin website
+    if (location.host === JELLYFIN_URL) {
+        validPage = true;
+        log("Jellyfin website detected");
+
+    // web client
+    } else {
+        try {
+            let data = JSON.parse(localStorage.getItem("jellyfin_credentials"));
+
+            for (let server of data.Servers) {
+                // user has accessed in the last 30 seconds, should be enough for slow connections
+                if (Date.now() - new Date(server.DateLastAccessed) < 30 * 1000) {
+                    validPage = true;
+                    log("Jellyfin web client detected");
+                }
+            }
+        } catch (e) {
+            validPage = false;
+        }
+    }
+
+    if (validPage) {
+        presence = new Presence({
+            clientId: "669359568391766018",
+            mediaKeys: false
+        });
+
+        presence.on("UpdateData", updateData);
+    }
+}
+init();
 
 // View https://docs.premid.app/en/dev/presence/class -> presenceData interfac
 let presenceData = {
@@ -73,9 +106,10 @@ function handleOfficialWebsite() {
 }
 
 /**
- * isJellyfinWebClient - verifies that we are in the jellyfin web client
+ * isJellyfinWebClient - imports the ApiClient variable and
+ * verifies that we are in the jellyfin web client
  *
- * @return {boolean}
+ * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isJellyfinWebClient() {
 	if (!ApiClient) {
@@ -371,8 +405,12 @@ function setDefaultsToPresence() {
     }
 }
 
-// tick function, this is called several times a second where possible
-presence.on("UpdateData", async () => {
+/**
+ * updateData - tick function, this is called several times a second by UpdateData event
+ *
+ * @return {void}
+ */
+async function updateData() {
     setDefaultsToPresence();
 
     let showPresence = false;
@@ -407,4 +445,15 @@ presence.on("UpdateData", async () => {
             presence.setActivity(presenceData);
         }
     }
-});
+}
+
+
+/**
+ * log - log into the user console prepending [PreMid]
+ *
+ * @param  {string} txt text to log into the console
+ * @return {void}
+ */
+function log(txt) {
+    console.log(`[%cPreMid%c] ${txt}`, "color: #7289da", "color: default");
+}
