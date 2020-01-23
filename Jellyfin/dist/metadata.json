@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "alexbcberio",
+    "id": "202915432175239169"
+  },
+  "url": "jellyfin.org",
+  "description": {
+    "en": "The Free Software Media System"
+  },
+  "service": "Jellyfin",
+  "version": "1.0",
+  "logo": "https://raw.githubusercontent.com/jellyfin/jellyfin/master/Emby.Dlna/Images/logo240.png",
+  "thumbnail": "https://jellyfin.org/favicon.ico",
+  "color": "#00698c",
+  "category": "videos",
+  "tags": [
+      "video",
+      "movie",
+      "tv",
+      "media"
+  ],
+  "regExp": "([a-z0-9]+[.])*([a-z0-9]+)"
+}
