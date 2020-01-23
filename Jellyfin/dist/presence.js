@@ -200,7 +200,7 @@ async function handleWebClient() {
             break;
 
         case "videoosd.html":
-            handleVideoPlayback();
+            await handleVideoPlayback();
             break;
 
         // TODO: add music, books, images, music videos, and mix content categories urls
@@ -220,7 +220,7 @@ async function handleWebClient() {
  *
  * @return {void}
  */
-function handleVideoPlayback() {
+async function handleVideoPlayback() {
     let videoPlayerPage = document.getElementById("videoOsdPage");
 
     if (videoPlayerPage === null) {
@@ -240,15 +240,30 @@ function handleVideoPlayback() {
     // title on the osdControls
     let osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle");
 
-    // movie
-    if (!headerTitleElem.innerText) {
-        title = `Playing movie: ${osdTitleElem.innerText}`;
-        subtitle = "";
+    // with this url we can obtain the id of the item we are playing back
+    let backgroundImageUrl = document.body.getElementsByClassName("videoPlayerContainer")[0].style.backgroundImage.split("\"")[1].replace(ApiClient["_serverAddress"], "");
 
-    // tv show
+    let mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[2]);
+
+    // display generic info
+    if (!mediaInfo) {
+        title = "Watching unknown content";
+        subtitle = "Could't obtain metadata of media";
+
     } else {
-        title = `Playing tv series: ${headerTitleElem.innerText}`;
-        subtitle = osdTitleElem.innerText;
+        switch (mediaInfo.Type) {
+            case "Movie":
+                title = "Watching a Movie";
+                subtitle = osdTitleElem.innerText;
+                break;
+            case "Series":
+                title = `Watching ${headerTitleElem.innerText}`;
+                subtitle = osdTitleElem.innerText;
+                break;
+            default:
+                title = `Watching ${mediaInfo.Type}`;
+                subtitle = mediaInfo.Name;
+        }
     }
 
     // playing
@@ -260,7 +275,7 @@ function handleVideoPlayback() {
     // paused
     } else {
         presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
-        presenceData.smallImageText = `Paused at: ${videoOsdPage.querySelector(".osdPositionText").innerText}`;
+        presenceData.smallImageText = "Paused";
         delete presenceData.endTimestamp;
     }
 
