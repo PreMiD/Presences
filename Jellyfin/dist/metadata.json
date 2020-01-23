@@ -9,8 +9,8 @@
   },
   "service": "Jellyfin",
   "version": "1.0",
-  "logo": "https://raw.githubusercontent.com/jellyfin/jellyfin/master/Emby.Dlna/Images/logo240.png",
-  "thumbnail": "https://jellyfin.org/favicon.ico",
+  "logo": "https://i.imgur.com/nPzEemG.png",
+  "thumbnail": "https://i.imgur.com/J61378N.png",
   "color": "#00698c",
   "category": "videos",
   "tags": [
