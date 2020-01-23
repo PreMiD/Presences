@@ -251,7 +251,13 @@ function handleVideoPlayback() {
  * @return {string}  user id
  */
 function getUserId() {
-    return ApiClient["_currentUser"]["Id"];
+    try {
+        return ApiClient["_currentUser"]["Id"];
+    } catch (e) {
+        console.log("Got user id from localStorage");
+        // TODO: if multitple servers check the server id from location.hash
+        return JSON.parse(localStorage.getItem("jellyfin_credentials")).Servers[0].UserId;
+    }
 }
 
 // cache the requested media
