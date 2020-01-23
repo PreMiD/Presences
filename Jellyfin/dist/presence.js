@@ -124,6 +124,14 @@ async function isJellyfinWebClient() {
  * @return {void}  description
  */
 async function handleWebClient() {
+    let audioElems = document.body.getElementsByTagName("audio");
+
+    // audio player active
+    if (audioElems.length > 0 && audioElems[0].classList.contains("mediaPlayerAudio") && audioElems[0].src) {
+        handleAudioPlayback();
+        return;
+    }
+
     presenceData.details = "web client";
 
     // obtain the path, on the example would return "login.html"
@@ -191,6 +199,10 @@ async function handleWebClient() {
             presenceData.state = "Browsing tv series";
             break;
 
+        case "music.html":
+            presenceData.state = "Browsing music";
+            break;
+
         case "edititemmetadata.html":
             presenceData.state = "Editing media metadata";
             break;
@@ -203,7 +215,11 @@ async function handleWebClient() {
             await handleVideoPlayback();
             break;
 
-        // TODO: add music, books, images, music videos, and mix content categories urls
+        case "nowplaying.html":
+            presenceData.state = "Viewing the audio playlist";
+            break;
+
+        // TODO: add books, images, music videos, and mix content categories urls
 
         default:
             if (path.substr(0, 3) === "dlg") {
@@ -384,13 +400,52 @@ async function handleItemDetails() {
 				}
 				presenceData.state = `${data.Type} ─ ${description}`;
 				break;
+            case "MusicAlbum":
+                presenceData.state = `${data.Type} ─ ${data.RecursiveItemCount} songs`;
+                break;
+            case "MusicArtist":
+                presenceData.state = `${data.Type} ─ No further information available`;
+                break;
 
-			// TODO: add music, books, images, music videos, and mix content categories urls
+			// TODO: add books, images, music videos, and mix content categories urls
 			default:
 				// console.log(`${data.Type}:`, data);
 				presenceData.state = "No further information available";
 		}
 	}
+}
+
+
+/**
+ * handleAudioPlayback - handles the presence when the audio player is active
+ *
+ * @return {void}
+ */
+function handleAudioPlayback() {
+    // sometimes the buttons are not created fast enough
+    try {
+        let audioElem = document.getElementsByTagName("audio")[0];
+        let infoContainer = document.getElementsByClassName("nowPlayingBar")[0];
+        let buttons = infoContainer.querySelectorAll("button.itemAction");
+
+        presenceData.details = `Listening to: ${(buttons.length >= 1) ? buttons[0].innerText : "unknown title"}`;
+        presenceData.state = `By: ${(buttons.length >= 2) ? buttons[1].innerText : "unknown artist"}`;
+
+        // playing
+        if (!audioElem.paused) {
+            presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+            presenceData.smallImageText = "Playing";
+            presenceData.endTimestamp = new Date(Date.now() + (audioElem.duration - audioElem.currentTime) * 1000).getTime();
+
+            // paused
+        } else {
+            presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+            presenceData.smallImageText = "Paused";
+            delete presenceData.endTimestamp;
+        }
+    } catch (e) {
+        // do nothing
+    }
 }
 
 /**
