@@ -57,15 +57,8 @@ async function init() {
 }
 init();
 
-// View https://docs.premid.app/en/dev/presence/class -> presenceData interfac
 let presenceData = {
-    largeImageKey: PRESENCE_ART_ASSETS.logo,
-    // smallImageKey: "key",
-    // smallImageText: "Some hover text",
-    // details: "",
-    // state: "",
-    // startTimestamp: null,
-    // endTimestamp: 1577151472000
+    largeImageKey: PRESENCE_ART_ASSETS.logo
 };
 
 let ApiClient;
