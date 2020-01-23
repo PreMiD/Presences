@@ -109,7 +109,7 @@ async function isJellyfinWebClient() {
 		ApiClient = await presence.getPageletiable("ApiClient");
 	}
 
-	if (typeof ApiClient === "object") {
+	if (ApiClient && typeof ApiClient === "object") {
 		if (ApiClient["_appName"] && ApiClient["_appName"] === APP_NAME) {
 			 return true;
 		}
