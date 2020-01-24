@@ -178,6 +178,8 @@ async function handleWebClient() {
         case "dlnasettings.html": // dlna settings
         // live tv section
         case "livetvstatus.html": // manage live tv
+        case "livetvtuner.html": // add/manage tv tuner
+        case "livetvguideprovider.html": // add/manage tv guide provider
         case "livetvsettings.html": // live tv settings (dvr)
         // advanced section
         case "networking.html": // networking
@@ -201,6 +203,10 @@ async function handleWebClient() {
 
         case "music.html":
             presenceData.state = "Browsing music";
+            break;
+
+        case "livetv.html":
+            presenceData.state = "Browsing Live TV";
             break;
 
         case "edititemmetadata.html":
@@ -256,10 +262,24 @@ async function handleVideoPlayback() {
     // title on the osdControls
     let osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle");
 
-    // with this url we can obtain the id of the item we are playing back
-    let backgroundImageUrl = document.body.getElementsByClassName("videoPlayerContainer")[0].style.backgroundImage.split("\"")[1].replace(ApiClient["_serverAddress"], "");
+    // media metadata
+    let mediaInfo;
 
-    let mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[2]);
+    let videoPlayerContainerElem = document.body.getElementsByClassName("videoPlayerContainer")[0];
+
+    // no background image, we're playing live tv
+    if (videoPlayerContainerElem.style.backgroundImage) {
+        // with this url we can obtain the id of the item we are playing back
+        let backgroundImageUrl = videoPlayerContainerElem.style.backgroundImage.split("\"")[1].replace(ApiClient["_serverAddress"], "");
+
+        mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[2]);
+
+    } else {
+        // simulate the expected data
+        mediaInfo = {
+            Type: "TvChannel"
+        };
+    }
 
     // display generic info
     if (!mediaInfo) {
@@ -276,14 +296,23 @@ async function handleVideoPlayback() {
                 title = `Watching ${headerTitleElem.innerText}`;
                 subtitle = osdTitleElem.innerText;
                 break;
+            case "TvChannel":
+                title = "Watching Live Tv";
+                subtitle = osdTitleElem.innerText;
+                break;
             default:
                 title = `Watching ${mediaInfo.Type}`;
                 subtitle = mediaInfo.Name;
         }
     }
 
+    // watching live tv
+    if (mediaInfo && mediaInfo.Type === "TvChannel") {
+        presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
+        presenceData.smallImageText = "Live TV";
+
     // playing
-    if (!videoPlayerElem.paused) {
+    } else if (!videoPlayerElem.paused) {
         presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
         presenceData.smallImageText = "Playing";
         presenceData.endTimestamp = new Date(Date.now() + (videoPlayerElem.duration - videoPlayerElem.currentTime) * 1000).getTime();
@@ -414,12 +443,12 @@ async function handleItemDetails() {
                 presenceData.state = `${data.Type} ─ ${data.RecursiveItemCount} songs`;
                 break;
             case "MusicArtist":
+            case "TvChannel":
                 presenceData.state = `${data.Type} ─ No further information available`;
                 break;
 
 			// TODO: add books, images, music videos, and mix content categories urls
 			default:
-				// console.log(`${data.Type}:`, data);
 				presenceData.state = "No further information available";
 		}
 	}
