@@ -1,34 +1,81 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
     clientId: "620072679139180575",
     mediaKeys: false
 });
 var elapsed = Math.floor(Date.now() / 1000);
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+presence.on("UpdateData", () => {
     let data = {
         largeImageKey: "gmail-logo"
     };
     var path = window.location.href;
     var emailCheck = window.location.href.split("/").length == 7 ? false : true;
     console.log(emailCheck);
-    if (emailCheck) {
+    if (emailCheck) { if (path.endsWith("#category/social")) {
+        data.details = "Viewing Social Mails";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("#category/updates")) {
+        data.details = "Viewing Updates Mails";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("#category/forums")) {
+        data.details = "Viewing Forums Mails";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("#category/promotions")) {
+        data.details = "Viewing Promotions Mails";
+        data.startTimestamp = elapsed;
+    } else if (path.match("/#label/")) {
+    var labelname = document.querySelector("head > title").textContent;
+        data.details = "In the Label: ";
+        data.state = labelname.replace('"', "").split('" - ')[0];
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/general")) {
+        data.details = "In the General settings";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/labels")) {
+        data.details = "In the Labels settings";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/inbox")) {
+        data.details = "In the settings of the";
+        data.state = "Inbox Mails";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/accounts")) {
+        data.details = "In the Account settings";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/filters")) {
+        data.details = "In the Filter settings";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/fwdandpop")) {
+        data.details = "In the settings:";
+        data.state = "POP and IMAP";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/addons")) {
+        data.details = "In the Addons settings";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/chat")) {
+        data.details = "In the Chat settings";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/labs")) {
+        data.details = "In the Advanced settings";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/offline")) {
+        data.details = "In the Offline settings";
+        data.startTimestamp = elapsed;
+    } else if (path.endsWith("/#settings/oldthemes")) {
+        data.details = "In the Themes settings";
+        data.startTimestamp = elapsed;
+    } else if (path.match("/#search/")) {
+        data.details = "Looking for a mail";
+        data.startTimestamp = elapsed;
+    } else {
         data.details = "Viewing an Email";
+        data.startTimestamp = elapsed;
+    }
+}
+    else if (path.endsWith("inbox")) {
+        data.details = "Viewing Inbox";
         data.startTimestamp = elapsed;
     }
     else if (path.endsWith("compose=new")) {
         data.details = "Composing a New Email";
-        data.startTimestamp = elapsed;
-    }
-    else if (path.endsWith("inbox")) {
-        data.details = "Viewing Inbox";
         data.startTimestamp = elapsed;
     }
     else if (path.endsWith("starred")) {
@@ -67,9 +114,17 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         data.details = "Viewing Spam";
         data.startTimestamp = elapsed;
     }
+    else if (path.endsWith("trash")) {
+        data.details = "Viewing Trash";
+        data.startTimestamp = elapsed;
+    }
+    else if (path.endsWith("#category/social")) {
+        data.details = "Viewing Social Mails";
+        data.startTimestamp = elapsed;
+    }
     else {
         data.details = "Viewing Mail";
         data.startTimestamp = elapsed;
     }
     presence.setActivity(data);
-}));
+});
