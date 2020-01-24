@@ -9,10 +9,10 @@ presence.on("UpdateData", () => {
     }
 
     let pageName = (document.title).slice(9);
-    
+	
     if (window.location.pathname.includes("News.Article")) {
         presenceData.details = "Reading an article";
-	    
+
         let newsArticleName = (document.title).slice(9);
         presenceData.state = newsArticleName;
     }  else if(pageName === "Home") {
@@ -21,13 +21,12 @@ presence.on("UpdateData", () => {
 
         presenceData.details = songName;
         presenceData.state = songArtist;
-
+        
     } else {
         presenceData.details = "Viewing a page";
         pageName = (document.title).slice(9);
         presenceData.state = pageName;
-    }  
-}   
+      }
 	  
       presence.setActivity(presenceData);
       presence.setTrayTitle();
