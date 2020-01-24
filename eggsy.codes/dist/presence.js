@@ -35,9 +35,9 @@ const presence = new Presence({
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     /* THIS IS EASY AND EFFICIENT! */
 
-    const details = document.querySelector("[property~=premid-details][content]") ? document.querySelector("[property~=premid-details][content]").content : null,
-        state = document.querySelector("[property~=premid-state][content]") ? document.querySelector("[property~=premid-state][content]").content : null,
-        smallImage = document.querySelector("[property~=premid-smallImage][content]") ? document.querySelector("[property~=premid-smallImage][content]").content : null;
+    const details = document.querySelector("[name~=premid-details][content]") ? document.querySelector("[name~=premid-details][content]").content : null,
+        state = document.querySelector("[name~=premid-state][content]") ? document.querySelector("[name~=premid-state][content]").content : null,
+        smallImage = document.querySelector("[name~=premid-smallImage][content]") ? document.querySelector("[name~=premid-smallImage][content]").content : null;
 
     if (state && details) presence.setActivity({
         largeImageKey: "ec-logo",

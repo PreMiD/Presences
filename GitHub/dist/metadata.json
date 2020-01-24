@@ -6,6 +6,7 @@
   "service": "GitHub",
   "description": {
     "en": "GitHub is a project management and code versioning system as well as a social network platform made for developers.",
+    "tr": "GitHub bir proje yönetimi ve kod versiyonlama sisteminin yanı sıra geliştiriciler için yapılmış bir sosyal ağ platformudur.",
     "de": "GitHub ist ein Projektmanagement- und Codeversionierungssystem sowie eine soziale Plattform für Entwickler.",
     "ro": "GitHub este un sistem de gestionare pentru proiecte și cod, precum și o rețea de socializare pentru developeri.",
     "pt_BR": "GitHub é um sistema de versionamento de código e gerenciamento de projetos assim como rede social feita para desenvolvedores.",
@@ -14,7 +15,7 @@
     "nl": "GitHub is een systeem voor projectbeheer en codeversie systeem, evenals een sociaal netwerkplatform gemaakt voor ontwikkelaars."
   },
   "url": "github.com",
-  "version": "2.4",
+  "version": "2.5",
   "logo": "https://i.imgur.com/mGxuWWu.png",
   "thumbnail": "https://i.imgur.com/G816tlo.png",
   "color": "#000000",

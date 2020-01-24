@@ -7,6 +7,10 @@
     {
       "name": "Bas950",
       "id": "241278257335500811"
+    },
+    {
+      "name": "DooMLorD",
+      "id": "465105167751315471"
     }
   ],
   "service": "YouTube",
@@ -16,19 +20,14 @@
     "pt_BR": "Aproveite os vídeos e as músicas que você ama, envie conteúdo original, e compartilhe-o com os seus amigos, sua família, e para o mundo no YouTube.",
     "fr": "Profitez des vidéos et de la musique que vous aimez, envoyez du contenu originel, et partagez-le avec vos amis, votre famille, et le monde entier sur YouTube.",
     "uk": "Насолоджуйтесь улюбленими відео та музикою, завантажуйте оригінальний вміст і діліться цим усім з друзями, родиною та світом на YouTube.",
-    "nl": "Geniet van de video's en muziek waar je van houdt, upload originele inhoud en deel het allemaal met vrienden, familie en de wereld op YouTube."
+    "nl": "Geniet van de video's en muziek waar je van houdt, upload originele inhoud en deel het allemaal met vrienden, familie en de wereld op YouTube.",
+    "tr": "Sevdiğiniz videoların ve müziğin keyfini çıkarın, orijinal içerik yükleyin ve hepsini YouTube'da arkadaşlarınızla, ailenizle ve tüm dünyayla paylaşın."
   },
-  "url": [
-    "www.youtube.com",
-    "studio.youtube.com"
-  ],
-  "version": "3.2.2",
+  "url": ["www.youtube.com", "studio.youtube.com"],
+  "version": "4.1.3",
   "logo": "https://i.imgur.com/C9ZEmge.png",
   "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
   "color": "#E40813",
-  "tags": [
-    "video",
-    "media"
-  ],
+  "tags": ["video", "media"],
   "category": "videos"
 }

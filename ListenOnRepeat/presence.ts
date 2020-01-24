@@ -67,7 +67,7 @@ var a =
 
 if (title !== null) {
   if (iFrameVideo == true && !isNaN(duration)) {
-    presenceData.smallImageKey = paused ? "pause" : "play";
+    presenceData.smallImageKey = paused ? "pause" : "repeat";
     presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
