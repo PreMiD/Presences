@@ -27,7 +27,7 @@ async function init() {
     // jellyfin website
     if (location.host === JELLYFIN_URL) {
         validPage = true;
-        log("Jellyfin website detected");
+        prettyLog("Jellyfin website detected");
 
     // web client
     } else {
@@ -38,7 +38,7 @@ async function init() {
                 // user has accessed in the last 30 seconds, should be enough for slow connections
                 if (Date.now() - new Date(server.DateLastAccessed) < 30 * 1000) {
                     validPage = true;
-                    log("Jellyfin web client detected");
+                    prettyLog("Jellyfin web client detected");
                 }
             }
         } catch (e) {
@@ -551,11 +551,11 @@ async function updateData() {
 
 
 /**
- * log - log into the user console prepending [PreMid]
+ * prettyLog - prettyLog into the user console prepending [PreMid]
  *
  * @param  {string} txt text to log into the console
  * @return {void}
  */
-function log(txt) {
-    console.log(`[%cPreMid%c] ${txt}`, "color: #7289da", "color: default");
+function prettyLog(txt) {
+    console.log(`%cJellyfin Premid%c ${txt}`, "background-color: #00698c; color: white; black; padding: 3px 5px; border-radius: 30px;", "background-color: unset; color: unset; padding:0; border-radius: 0;");
 }
