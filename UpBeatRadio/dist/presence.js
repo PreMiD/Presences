@@ -10,28 +10,24 @@ presence.on("UpdateData", () => {
 
     let pageName = (document.title).slice(9);
     
-    if (window.location.pathname.includes("/staff/")) {
-        presenceData.details = "On staff panel.";
-        presenceData.state = "Browsing protected content.";
+    if (window.location.pathname.includes("News.Article")) {
+        presenceData.details = "Reading an article";
+	    
+        let newsArticleName = (document.title).slice(9);
+        presenceData.state = newsArticleName;
+    }  else if(pageName === "Home") {
+        let songArtist = document.querySelector(".stats-artist").innerHTML;
+        let songName = document.querySelector(".stats-song").innerHTML;
+
+        presenceData.details = songName;
+        presenceData.state = songArtist;
+
     } else {
-        if (window.location.pathname.includes("News.Article")) {
-            presenceData.details = "Reading an article";
-
-            let newsArticleName = (document.title).slice(9);
-            presenceData.state = newsArticleName;
-        }  else if(pageName === "Home") {
-            let songArtist = document.querySelector(".stats-artist").innerHTML;
-            let songName = document.querySelector(".stats-song").innerHTML;
-
-            presenceData.details = songName;
-            presenceData.state = songArtist;
-
-        } else {
-            presenceData.details = "Viewing a page";
-            pageName = (document.title).slice(9);
-            presenceData.state = pageName;
-        }
-    }   
+        presenceData.details = "Viewing a page";
+        pageName = (document.title).slice(9);
+        presenceData.state = pageName;
+    }  
+}   
 	  
       presence.setActivity(presenceData);
       presence.setTrayTitle();
