@@ -312,9 +312,19 @@ function getUserId() {
     try {
         return ApiClient["_currentUser"]["Id"];
     } catch (e) {
-        console.log("Got user id from localStorage");
-        // TODO: if multitple servers check the server id from location.hash
-        return JSON.parse(localStorage.getItem("jellyfin_credentials")).Servers[0].UserId;
+        let servers = JSON.parse(localStorage.getItem("jellyfin_credentials")).Servers;
+
+        for (let param of location.hash.split("?")[1].split("&")) {
+            if (param.startsWith("serverId")) {
+                let serverId = param.split("=")[1];
+
+                for (let server of servers) {
+                    if (server.Id === serverId) {
+                        return server.UserId;
+                    }
+                }
+            }
+        }
     }
 }
 
