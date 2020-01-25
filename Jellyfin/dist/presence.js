@@ -21,6 +21,11 @@ const PRESENCE_ART_ASSETS = {
 
 let presence;
 
+/**
+ * init - check if the presence should be initialized, if so start doing the magic
+ *
+ * @return {void}
+ */
 async function init() {
     let validPage = false;
 
@@ -65,8 +70,6 @@ let ApiClient;
 
 /**
  * handleOfficialWebsite - handle the presence while the user is in the official website
- *
- * @return {void}
  */
 function handleOfficialWebsite() {
     presenceData.details = "At jellyfin.org";
@@ -120,8 +123,6 @@ async function isJellyfinWebClient() {
 
 /**
  * handleWebClient - handle the presence while the user is in the web client
- *
- * @return {void}  description
  */
 async function handleWebClient() {
     let audioElems = document.body.getElementsByTagName("audio");
@@ -225,22 +226,15 @@ async function handleWebClient() {
             presenceData.state = "Viewing the audio playlist";
             break;
 
-        // TODO: add books, images, music videos, and mix content categories urls
-
         default:
             if (path.substr(0, 3) === "dlg") {
                 // generic popup do nothing
-            } else {
-                // for testing purposes
-                // presenceData.state = path;
             }
     }
 }
 
 /**
  * handleVideoPlayback - handles the presence when the user is using the video player
- *
- * @return {void}
  */
 async function handleVideoPlayback() {
     let videoPlayerPage = document.getElementById("videoOsdPage");
@@ -284,7 +278,7 @@ async function handleVideoPlayback() {
     // display generic info
     if (!mediaInfo) {
         title = "Watching unknown content";
-        subtitle = "Could't obtain metadata of media";
+        subtitle = "No metadata could be obtained";
 
     } else {
         switch (mediaInfo.Type) {
@@ -343,23 +337,27 @@ function getUserId() {
     } catch (e) {
         let servers = JSON.parse(localStorage.getItem("jellyfin_credentials")).Servers;
 
-        for (let param of location.hash.split("?")[1].split("&")) {
-            if (param.startsWith("serverId")) {
-                let serverId = param.split("=")[1];
+        // server id available on browser location
+        if (location.hash.indexOf("?") > 0) {
+            for (let param of location.hash.split("?")[1].split("&")) {
+                if (param.startsWith("serverId")) {
+                    let serverId = param.split("=")[1];
 
-                for (let server of servers) {
-                    if (server.Id === serverId) {
-                        return server.UserId;
+                    for (let server of servers) {
+                        if (server.Id === serverId) {
+                            return server.UserId;
+                        }
                     }
                 }
             }
+        } else {
+            return servers[0].UserId;
         }
     }
 }
 
 // cache the requested media
 let media = [];
-
 
 /**
  * obtainMediaInfo - obtain the metadata of the given id
@@ -393,18 +391,14 @@ async function obtainMediaInfo(itemId) {
 
 /**
  * handleItemDetails - handles the presence when the user is viewing the details of an item
- *
- * @return {void}
  */
 async function handleItemDetails() {
 	let params = location.hash.split("?")[1].split("&");
 	let id;
 
 	for (let param of params) {
-		let p = param.split("=");
-
-		if (p[0] === "id") {
-			id = p[1];
+		if (param.startsWith("id=")) {
+			id = param.split("=")[1];
 			break;
 		}
 	}
@@ -446,8 +440,6 @@ async function handleItemDetails() {
             case "TvChannel":
                 presenceData.state = `${data.Type} ─ No further information available`;
                 break;
-
-			// TODO: add books, images, music videos, and mix content categories urls
 			default:
 				presenceData.state = "No further information available";
 		}
@@ -457,8 +449,6 @@ async function handleItemDetails() {
 
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
- *
- * @return {void}
  */
 function handleAudioPlayback() {
     // sometimes the buttons are not created fast enough
@@ -489,8 +479,6 @@ function handleAudioPlayback() {
 
 /**
  * setDefaultsToPresence - set defaul values to the presenceData object
- *
- * @return {void}
  */
 function setDefaultsToPresence() {
     if (presenceData.smallImageKey) {
@@ -509,8 +497,6 @@ function setDefaultsToPresence() {
 
 /**
  * updateData - tick function, this is called several times a second by UpdateData event
- *
- * @return {void}
  */
 async function updateData() {
     setDefaultsToPresence();
@@ -526,13 +512,9 @@ async function updateData() {
 	} else if (await isJellyfinWebClient()) {
         showPresence = true;
         await handleWebClient();
-
-    } else {
-		// clear presence, we are not on a jellyfin web client
-		// cannot clear the presence, as it could clear it while it's active on other tab
-		// presence.clearActivity();
     }
 
+    // force the display of some counter
 	if (!presenceData.startTimestamp || !presenceData.endTimestamp) {
 		presenceData.startTimestamp = Date.now();
 	}
@@ -554,7 +536,6 @@ async function updateData() {
  * prettyLog - prettyLog into the user console prepending [PreMid]
  *
  * @param  {string} txt text to log into the console
- * @return {void}
  */
 function prettyLog(txt) {
     console.log(`%cJellyfin Premid%c ${txt}`, "background-color: #00698c; color: white; black; padding: 3px 5px; border-radius: 30px;", "background-color: unset; color: unset; padding:0; border-radius: 0;");
