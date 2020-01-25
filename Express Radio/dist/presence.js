@@ -7,8 +7,7 @@ let sartist, strack, slisteners, sdj;
 
 function newStats() {
     let data = JSON.parse(document.querySelector("#premid_data").innerHTML);
-    strack = data.response.objects[0].title;
-    sartist = data.response.objects[0].author;
+    strack = data.response.objects[0].metadata;
     slisteners = data.response.objects[0].n_listeners;
     sdj = data.response.objects[0].dj_name;
 }
@@ -19,7 +18,7 @@ presence.on("UpdateData", () => {
         largeImageKey: "logo"
     };
     presenceData.smallImageKey = "play";
-    presenceData.details = (strack || "Loading...") + " - " + (sartist || "Loading...");
+    presenceData.details = (strack || "Loading...");
     presenceData.state = "DJ: " + (sdj || "Loading...");
     presenceData.smallImageText = (slisteners || "Loading...") + " Listeners";
     presenceData.startTimestamp = browsingStamp;
