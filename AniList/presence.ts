@@ -3,7 +3,8 @@ let presence : Presence = new Presence({
 }),
 startTimestamp: number = Math.floor(Date.now() / 1000),
 strings = presence.getStrings({
-    "browsing": "presence.activity.browsing"
+    "browsing": "presence.activity.browsing",
+    "reading": "presence.activity.reading"
 });
 
 presence.on("UpdateData", async () => {
@@ -38,14 +39,23 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
     } else if (pathname.startsWith(`/forum`)) {
         if (pathname.split('/').length > 3) {
-            presenceData.details = "Reading a forum post"
+            presenceData.details = "Reading a forum post";
             presenceData.state = `'${document.querySelector('h1.title').textContent.trim()}'`;
+            presenceData.smallImageKey = `reading`;
+            presenceData.smallImageText = (await strings).reading;
         } else {
             presenceData.details = "Browsing the forum";
         }
     } else if (pathname.startsWith(`/studio`)) {
         presenceData.details = "Viewing a studio";
         presenceData.state = document.querySelector('div.container > h1').textContent;
+    } else if (pathname.startsWith(`/review`)) {
+        const title = document.querySelector(`a.title`).textContent.trim();
+        presenceData.details = `Reading a '${title}' review`
+        const author = document.querySelector(`a.author`).textContent.trim().replace(`a review `, ``);
+        presenceData.state = `${author}`;
+        presenceData.smallImageKey = `reading`;
+        presenceData.smallImageText = (await strings).reading;
     }
     presence.setActivity(presenceData, true);
 })
