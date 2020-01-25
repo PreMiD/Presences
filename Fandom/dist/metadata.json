@@ -1,0 +1,22 @@
+{
+	"author": {
+		"name": "Hans5958",
+		"id": "279855717203050496"
+	},
+	"service": "Fandom",
+	"url": "fandom.com",
+	"version": "1.1.0",
+	"logo": "https://i.imgur.com/sko4P3c.png",
+	"thumbnail": "https://i.imgur.com/VrVSD2b.png",
+	"color": "#002A32",
+	"tags": [
+		"encyclopedia",
+		"popular",
+		"informations"
+	],
+	"description": {
+		"en": "The entertainment site where fans come first. Your daily source for all things TV, movies, and games, including Star Wars, Fallout, Marvel, DC and more.\nThis presence works on the editoral side of Fandom (www.fandom.com) and the wiki side of fandom (formerly Wikia)."
+	},
+	"category": "other",
+	"regExp": "[a-zA-Z-]+\\.fandom\\.com"
+}

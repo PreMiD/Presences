@@ -5,14 +5,18 @@ var presence = new Presence({
     strings;
 
 var localeStrings = {
-    "en": {
-        "Browsing": "Browsing",
-        "BrowsingFeed": "Browsing feed..."
-    },
-    "ru": {
-        "Browsing": "Просматривает",
-        "BrowsingFeed": "Смотрит ленту..."
-    }
+  en: {
+    Chatting: "Browsing PM's...",
+    Watching: 'Watching',
+    Browsing: 'Browsing',
+    BrowsingFeed: 'Browsing feed...',
+  },
+  ru: {
+    Chatting: 'Смотрит сообщения...',
+    Watching: 'Смотрит',
+    Browsing: 'Просматривает',
+    BrowsingFeed: 'Смотрит ленту...',
+  },
 }
 
 function getLocale() {
@@ -98,8 +102,8 @@ presence.on("UpdateData", async () => {
 
     if (document.location.pathname.startsWith("/audios") || document.querySelector(".audio_layer_container")) {
 
-        var title: string = (document.querySelector(".audio_page_player_title_song") as HTMLElement).innerText,
-            author: string = (document.querySelector(".audio_page_player_title_performer a") as HTMLElement).innerText,
+        var title: string = (document.querySelector(".audio_page_player_title_song") as HTMLElement).textContent,
+            author: string = (document.querySelector(".audio_page_player_title_performer a") as HTMLElement).textContent,
             isPlaying: boolean;
 
         if (document.querySelector(".audio_playing") == null) {
@@ -116,39 +120,41 @@ presence.on("UpdateData", async () => {
         var presenceData: presenceData = {
             details: title,
             state: author,
-            largeImageKey: "vk_logo",
-            smallImageKey: isPlaying ? "pause" : "play",
+            largeImageKey: 'vk_logo',
+            smallImageKey: isPlaying ? 'pause' : 'play',
             smallImageText: isPlaying ? strings.pause : strings.play,
-            startTimestamp: timestamps[0],
-            endTimestamp: timestamps[1]
-        };
+            startTimestamp: isPlaying ? null : timestamps[0],
+            endTimestamp: isPlaying ? null : timestamps[1],
+        }
 
         presence.setActivity(presenceData, true);
     } else if (window.location.href.match(/https:\/\/vk.com\/.*?z=video.*/)) {
 
         var isPlaying: boolean;
-           
-        (document.querySelector(".videoplayer_btn_play")) ? isPlaying = true : isPlaying = false;
+
+        document.querySelector('.videoplayer_ui').getAttribute('data-state') == 'paused'
+          ? (isPlaying = true)
+          : (isPlaying = false)
 
         var videoTitle = (document.querySelector(".mv_title") as HTMLElement).innerText,
             videoCurrentTime = (document.querySelector("._time_current") as HTMLElement).innerText.split(":"),
             videoDuration = (document.querySelector("._time_duration") as HTMLElement).innerText.split(":"),
             videoAuthor = (document.querySelector(".mv_author_name a") as HTMLElement).innerText;
-        
+
         var timestamps = getTimestamps(
             Math.floor((Number(videoCurrentTime[0]) * 60) + Number(videoCurrentTime[1])),
             Math.floor((Number(videoDuration[0]) * 60) + Number(videoDuration[1]))
         );
-        
+
         var presenceData: presenceData = {
-            details: videoTitle,
+            details: getLocalizedString('Watching') + " " + videoTitle,
             state: videoAuthor,
-            largeImageKey: "vk_logo",
-            smallImageKey: isPlaying ? "pause" : "play",
+            largeImageKey: 'vk_logo',
+            smallImageKey: isPlaying ? 'pause' : 'play',
             smallImageText: isPlaying ? strings.pause : strings.play,
-            startTimestamp: timestamps[0],
-            endTimestamp: timestamps[1]
-        };
+            startTimestamp: isPlaying ? null : timestamps[0],
+            endTimestamp: isPlaying ? null : timestamps[1],
+        }
 
         presence.setActivity(presenceData, true);
 
@@ -157,8 +163,7 @@ presence.on("UpdateData", async () => {
         var page_title = (document.querySelector(".page_name") as HTMLElement).innerText
 
         var presenceData: presenceData = {
-            details: getLocalizedString('Browsing'),
-            state: page_title,
+            details: page_title,
             largeImageKey: "vk_logo",
             startTimestamp: browsingTimestamp
         };
@@ -171,6 +176,15 @@ presence.on("UpdateData", async () => {
             largeImageKey: "vk_logo",
             startTimestamp: browsingTimestamp
         };
+
+        presence.setActivity(presenceData, true);
+
+    } else if (document.location.pathname.startsWith("/im")) {
+        var presenceData: presenceData = {
+            details: getLocalizedString('Chatting'),
+            largeImageKey: 'vk_logo',
+            startTimestamp: browsingTimestamp,
+        }
 
         presence.setActivity(presenceData, true);
     } else {

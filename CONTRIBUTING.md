@@ -38,10 +38,11 @@ In order for your presence to reach the stores, it must go through a process on 
 
 Our presence verification team has their own role, look out for `Presence Verifier` on the discord server to know who is involved.
 
-1. If your presence is new, three of our verification team members will review it. If you happen to get change requests, make the proper effort to fix it or it will not be added.
-2. If you are updating an existing presence, it will only take two verifiers to confirm that it is up to standards.
+1. It takes two verifiers to confirm that your presence is up to standards. If you happen to get change requests, make the proper effort to fix it or it will not be added.
+2. If we request changes and your Pull Request exceeds **7 days of inactivity** without making the necessary ones, we'll be forced to close it.
 3. You are allowed to take screenshots of changes made with the help of another user. ( e.g. its author in case you can't access it for any reason).
 4. If it is an update or patch, the screenshot **must** show the new additions working, not any old features from previous pull requests.
-5. The screenshots can not be fake.
+5. The provided screenshots should be real, not edited.
+6. Any contributed code that gets merged to this repository will be licensed under the **Mozilla Public License 2.0**.
 
 After all of the proper reviews have been met, your pull request will be merged with the store.

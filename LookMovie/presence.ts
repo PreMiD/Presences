@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "lm"
     };
 
-    var video: HTMLVideoElement = document.querySelector("#video_player_html5_api");
+    var video: HTMLVideoElement = document.querySelectorAll("video")[0];
 
     if(video != null && !isNaN(video.duration)) {
     	var timestamps = getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));

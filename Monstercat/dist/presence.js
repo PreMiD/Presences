@@ -83,6 +83,14 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             else if (document.location.pathname.includes("/artists")) {
                 presenceData.details = "Viewing artists";
             }
+            else if (document.location.pathname.includes("/playlist/")) {
+                title = document.querySelector("body > section > div > h1");
+                presenceData.details = "Viewing playlist:";
+                presenceData.state = title.innerText;
+            }
+            else if (document.location.pathname.includes("/playlists")) {
+                presenceData.details = "Viewing their playlists";
+            }
             else if (document.location.pathname.includes("/events")) {
                 presenceData.details = "Viewing events";
             }
@@ -105,6 +113,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             }
             else if (document.location.pathname.includes("/gold")) {
                 presenceData.details = "Viewing Monstercat Gold";
+            }
+            else if (document.location.pathname.includes("/account")) {
+                presenceData.details = "Viewing their account";
             }
             else if (document.location.pathname.includes("/blog/")) {
                 if (document.location.pathname.includes("/tags/")) {

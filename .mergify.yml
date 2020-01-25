@@ -1,8 +1,0 @@
-pull_request_rules:
-  - name: Automatic merge
-    conditions:
-      - base=master
-      - "#approved-reviews-by>=3"
-    actions:
-      merge:
-        strict: true
