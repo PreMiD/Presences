@@ -1,0 +1,16 @@
+{
+  "author": {
+    "name": "Flashlight",
+    "id": "158418656861093888"
+  },
+  "url": "japari-library.com",
+  "description": {
+    "en_us": "Japari Library is a wiki based around the Kemono Friends multimedia franchise."
+  },
+  "service": "Japari Library",
+  "version": "1.0",
+  "logo": "https://japari-library.com/w/resources/assets/Jlibrarywglogo.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/544479934467276841/670661324732104704/favicon.png",
+  "color": "#4CC5FF",
+  "category": "anime"
+}
