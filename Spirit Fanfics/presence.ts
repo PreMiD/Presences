@@ -3,7 +3,9 @@ const presence = new Presence({
 });
 const { pathname } = window.location,
 strings = presence.getStrings({
-    browsing: "presence.activity.browsing"
+    browsing: "presence.activity.browsing",
+    searching: "presence.activity.searching",
+    reading: "presence.activity.reading"
 });
 
 presence.on("UpdateData", async () => {
@@ -33,16 +35,18 @@ presence.on("UpdateData", async () => {
         } else if (pathname.startsWith(`/historia/editar`)) {
             presenceData.details = `Editando uma história`;
             presenceData.state = document.querySelector('.tituloPrincipal').textContent.replace('Editar História ', '');
-
+        } else if (pathname.startsWith(`/historia/apagar`)){
+            presenceData.details = `Apagando uma história`;
+            presenceData.state = document.querySelector('.tituloPrincipal').textContent.replace('Apagar História ', '');
         } else {
             const title = document.querySelector('.tituloPrincipal').textContent.replace('História ', '').split(' - ');
             if (pathname.match(/\/historia\/(\w+-)+\d+\/\w+/)) {
                 presenceData.details = title[0];
                 presenceData.state = `${title[1]} - ${nav}`;
                 presenceData.smallImageKey = `reading`;
-                presenceData.smallImageText = `Lendo`;
+                presenceData.smallImageText = (await strings).reading;
             } else {
-                presenceData.details = "Vendo uma história";
+                presenceData.details = `Vendo uma história`;
                 presenceData.state = title[0];
             }
         }
@@ -67,6 +71,10 @@ presence.on("UpdateData", async () => {
         presenceData.details = `Vendo o histórico`;
     } else if (pathname.startsWith('/grupos')) {
         presenceData.state = `Vendo grupos`;
+    } else if (pathname.startsWith(`/busca`)) {
+        presenceData.details = `${(await strings).searching}...`;
+        presenceData.smallImageKey = `search`;
+        presenceData.smallImageText = (await strings).searching;
     } else {
         presenceData.state = nav;
     }
