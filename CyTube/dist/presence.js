@@ -40,8 +40,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     };
     function set_video(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            let room = path.split('r/')[1];
-            let motd = document.getElementById('motd').textContent;
             let current_service = service(data.site);
             presenceData.details = `Watching ${document.getElementById('currenttitle').textContent.replace('Currently Playing:', '')}
             - ${current_service.display}`;
