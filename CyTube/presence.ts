@@ -35,8 +35,6 @@ presence.on("UpdateData", async () => {
     }
 
     async function set_video(data: video_data) {
-        let room: string = path.split('r/')[1];
-        let motd: string = document.getElementById('motd').textContent;
         let current_service: match = service(data.site)
     
         presenceData.details = `Watching ${
