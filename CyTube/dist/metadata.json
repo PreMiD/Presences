@@ -9,7 +9,7 @@
   },
   "url": "cytu.be",
   "version": "1.0.0",
-  "logo": "https://cdn.discordapp.com/app-assets/653639828826750976/653686085808947240.png?size=512",
+  "logo": "https://i.imgur.com/gp4nfwi.png",
   "thumbnail": "https://i.imgur.com/kKZRocg.png",
   "color": "#e91e63",
   "tags": [
@@ -18,7 +18,5 @@
     "media"
   ],
   "category": "videos",
-  "regExp": "cytu.be",
   "iframe": true
-
 }
