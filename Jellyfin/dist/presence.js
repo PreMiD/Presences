@@ -1,9 +1,6 @@
 // official website
 const JELLYFIN_URL = "jellyfin.org";
 
-// web client document.title value (case sensitive)
-const DOCUMENT_TITLE = "Jellyfin";
-
 // web client app name
 const APP_NAME = "Jellyfin Web";
 
