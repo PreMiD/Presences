@@ -24,41 +24,41 @@ presence.on("UpdateData", async () => {
   if (document.location.hostname == "globoplay.globo.com") {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing home page";
+      presenceData.details = "Vendo a página inicial";
     } else if (document.location.pathname.includes("/categorias/")){
       presenceData.startTimestamp = browsingStamp;
       user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div > div.page-template__header > h1");
-      presenceData.details = "Viewing category:";
+      presenceData.details = "Vendo a categoria:";
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/busca")){
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Getting ready to";
-      presenceData.state = "search something up...";
+      presenceData.details = "Se preparando para";
+      presenceData.state = "pesquisar algo...";
       search = document.querySelector("#search-bar-input");
       if (search.value.length > 2) {
-        presenceData.details = "Searching for:";
+        presenceData.details = "Pesquisando por:";
         presenceData.state = search.value;
       }
     } else if (document.location.pathname.includes("/programacao")){
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing the schedule";
+      presenceData.details = "Vendo a programação";
     } else if (document.location.pathname.includes("/configuracoes")){
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing my settings";
+      presenceData.details = "Vendo minhas configurações";
     } else if (document.location.pathname.includes("/minha-lista")){
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing my watch list";
+      presenceData.details = "Vendo a Minha Lista";
     } else if (document.location.pathname.includes("/p/")){
       presenceData.startTimestamp = browsingStamp;
       user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.program-header > div > div.playkit-container > div > div.playkit-media-cover__header > h1");
-      presenceData.details = "Viewing show:";
+      presenceData.details = "Vendo o programa:";
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/t/")){
       presenceData.startTimestamp = browsingStamp;
       user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.title-header > div > div.playkit-container > div > div.playkit-media-cover__header > h1");
-      presenceData.details = "Viewing movie:";
+      presenceData.details = "Vendo o filme:";
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/v/")) {
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 
       } else if (isNaN(duration)) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Looking at:";
+        presenceData.details = "Olhando para:";
         presenceData.state = title;
       }
     } else if (document.location.pathname.includes("/agora-na-globo/")) {
@@ -99,6 +99,18 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector('.playkit-channels-navigation__program-time').textContent;
       presenceData.smallImageKey = "live";
       presenceData.startTimestamp = browsingStamp;
+    }
+    else if (document.location.pathname.includes("/transmissoes/")) {
+      if(document.location.pathname.includes("/244881")) {
+        presenceData.details = "Acompanhando a casa do BBB";
+        presenceData.smallImageKey = "live";
+        presenceData.startTimestamp = browsingStamp;
+      } else {
+        presenceData.details = "Vendo a câmera do BBB:"
+        presenceData.state = document.querySelector('.playkit-channels-navigation__program-name').textContent;
+        presenceData.smallImageKey = "live";
+        presenceData.startTimestamp = browsingStamp;
+      }
     }
   }
 
