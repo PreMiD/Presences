@@ -80,10 +80,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/chrome@0.0.92":
-  version "0.0.92"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.92.tgz#8630a52fcbcd0b30a2301f2a092386018ece1de6"
-  integrity sha512-bTv1EljZ03bexRJwS5FwSZmrudtw+QNbzwUY2sxVtXWgtxk752G4I2owhZ+Mlzbf3VKvG+rBYSw/FnvzuZ4xOA==
+"@types/chrome@0.0.93":
+  version "0.0.93"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.93.tgz#d46aaedfcf36032a749fe63e6268b3265c6dd046"
+  integrity sha512-Esw1xlLYYFj85YdqdM7FCSJ2WtVu75fJ3yikty71zUwQkp3u4dctcVDj5cQIRHCAElUHD0667cpv4U8HZeFiNw==
   dependencies:
     "@types/filesystem" "*"
 
@@ -99,23 +99,23 @@
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
   integrity sha1-wFTor02d11205jq8dviFFocU1LM=
 
-"@types/mongodb@3.3.14":
-  version "3.3.14"
-  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.3.14.tgz#5b44bf16b5856eb829545edcc2c4d7726b44b864"
-  integrity sha512-Ie0Fjoifm/TPY2rNOgixzhNSjDgxgR0dMKQk9XqUXHnkfuw26SpbMXjwECfxSnEdG1bH6bIlpLIK7HvGHQhzqg==
+"@types/mongodb@3.3.15":
+  version "3.3.15"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.3.15.tgz#f8b80a7a1f42fa90f58a1273df80f0e5764e3d25"
+  integrity sha512-q2dL0VEdFdE9iS0xrTP0NSgJJBFH4hBvt3beglCwU3qMWrz7dCuu/CrRjPB4+R8jLjCi/Gik2Mkd+lU0sYsZgQ==
   dependencies:
     "@types/bson" "*"
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^12.11.1":
-  version "12.12.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.4.tgz#8ed27dba0a83b020fca035f003ffe21f70207a9c"
-  integrity sha512-tJUH7//zNZ/539DH4cgZS3NsmW0b9ShDeRBzoCEMCEAlHn5WHUghOfHdycvpo4RCxxEPmQ3WfjDogh+DCCvuSg==
-
-"@types/node@>= 8":
+"@types/node@*", "@types/node@>= 8":
   version "13.1.8"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.8.tgz#1d590429fe8187a02707720ecf38a6fe46ce294b"
   integrity sha512-6XzyyNM9EKQW4HKuzbo/CkOIjn/evtCmsU+MUM1xDfJ+3/rNjBttM1NgN7AOQvN6tP1Sl1D1PIKMreTArnxM9A==
+
+"@types/node@^12.11.1":
+  version "12.12.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.4.tgz#8ed27dba0a83b020fca035f003ffe21f70207a9c"
+  integrity sha512-tJUH7//zNZ/539DH4cgZS3NsmW0b9ShDeRBzoCEMCEAlHn5WHUghOfHdycvpo4RCxxEPmQ3WfjDogh+DCCvuSg==
 
 atob-lite@^2.0.0:
   version "2.0.0"
