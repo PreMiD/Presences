@@ -54,6 +54,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     }
 }));
+// todo video/audio browsingStamp support
 function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
