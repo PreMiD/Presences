@@ -16,6 +16,51 @@ const PRESENCE_ART_ASSETS = {
     write: "writing"
 }
 
+// generic log style for PMD_[info|error|success] calls
+const GENERIC_LOG_STYLE = "font-weight: 800; padding: 2px 5px; color: white;";
+
+/**
+ * PMD_info - log into the user console info messages
+ *
+ * @param  {string} txt text to log into the console
+ */
+function PMD_info(message) {
+  console.log(
+    "%cPreMiD%cINFO%c " + message,
+    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
+    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #5050ff;",
+    "color: unset;"
+  );
+}
+
+/**
+ * PMD_error - log into the user console error messages
+ *
+ * @param  {string} txt text to log into the console
+ */
+function PMD_error(message) {
+  console.log(
+    "%cPreMiD%cERROR%c " + message,
+    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
+    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #ff5050;",
+    "color: unset;"
+  );
+}
+
+/**
+ * PMD_success - log into the user console success messages
+ *
+ * @param  {string} txt text to log into the console
+ */
+function PMD_success(message) {
+  console.log(
+    "%cPreMiD%cSUCCESS%c " + message,
+    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
+    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
+    "color: unset;"
+  );
+}
+
 let presence;
 
 /**
@@ -29,7 +74,7 @@ async function init() {
     // emby website
     if (location.host === EMBY_URL) {
         validPage = true;
-        prettyLog("Emby website detected");
+        PMD_info("Emby website detected");
 
     // web client
     } else {
@@ -40,7 +85,7 @@ async function init() {
                 // user has accessed in the last 30 seconds, should be enough for slow connections
                 if (Date.now() - new Date(server.DateLastAccessed) < 30 * 1000) {
                     validPage = true;
-                    prettyLog("Emby web client detected");
+                    PMD_info("Emby web client detected");
                 }
             }
         } catch (e) {
@@ -235,7 +280,7 @@ async function handleWebClient() {
             if (path.substr(0, 3) === "dlg") {
                 // generic popup do nothing
             } else
-            prettyLog(`path: ${path}`);
+            PMD_info(`path: ${path}`);
     }
 }
 
@@ -534,14 +579,4 @@ async function updateData() {
             presence.setActivity(presenceData);
         }
     }
-}
-
-
-/**
- * prettyLog - prettyLog into the user console prepending [PreMid]
- *
- * @param  {string} txt text to log into the console
- */
-function prettyLog(txt) {
-    console.log(`%cEmby Premid%c ${txt}`, "background-color: #52B54B; color: white; black; padding: 3px 5px; border-radius: 30px;", "background-color: unset; color: unset; padding:0; border-radius: 0;");
 }
