@@ -1,8 +1,8 @@
 // official website
-const JELLYFIN_URL = "jellyfin.org";
+const EMBY_URL = "emby.media";
 
 // web client app name
-const APP_NAME = "Jellyfin Web";
+const APP_NAME = "Emby Web";
 
 // all the presence art assets uploaded to discord
 const PRESENCE_ART_ASSETS = {
@@ -65,25 +65,27 @@ let presence;
 
 /**
  * init - check if the presence should be initialized, if so start doing the magic
+ *
+ * @return {void}
  */
 async function init() {
     let validPage = false;
 
-    // jellyfin website
-    if (location.host === JELLYFIN_URL) {
+    // emby website
+    if (location.host === EMBY_URL) {
         validPage = true;
-        PMD_info("Jellyfin website detected");
+        PMD_info("Emby website detected");
 
     // web client
     } else {
         try {
-            let data = JSON.parse(localStorage.getItem("jellyfin_credentials"));
+            let data = JSON.parse(localStorage.getItem("servercredentials3"));
 
             for (let server of data.Servers) {
                 // user has accessed in the last 30 seconds, should be enough for slow connections
                 if (Date.now() - new Date(server.DateLastAccessed) < 30 * 1000) {
                     validPage = true;
-                    PMD_info("Jellyfin web client detected");
+                    PMD_info("Emby web client detected");
                 }
             }
         } catch (e) {
@@ -93,7 +95,7 @@ async function init() {
 
     if (validPage) {
         presence = new Presence({
-            clientId: "669359568391766018",
+            clientId: "671807692297207828",
             mediaKeys: false
         });
 
@@ -112,42 +114,50 @@ let ApiClient;
  * handleOfficialWebsite - handle the presence while the user is in the official website
  */
 function handleOfficialWebsite() {
-    presenceData.details = "At jellyfin.org";
+    presenceData.details = `At ${EMBY_URL}`;
 
     switch (location.pathname) {
         case "/":
+        case "/index.html":
             presenceData.state = "On landing page";
             break;
-        case "/posts/":
-            presenceData.state = "Reading the latest posts";
+        case "/about.html":
+            presenceData.state = "On about page";
+            break;
+        case "/blog.html":
+            presenceData.state = "Reading the blog";
             presenceData.smallImageKey = PRESENCE_ART_ASSETS.read;
             break;
-        case "/downloads/":
+        case "/download.html":
             presenceData.state = "On downloads";
             presenceData.smallImageKey = PRESENCE_ART_ASSETS.download;
             break;
-        case "/contribute/":
-            presenceData.state = "Learning how to contribute";
+        case "/premiere.html":
+        case "/premiere-ext.html": // extended premiere options
+        case "/premiereterms.html": // tos
+            presenceData.state = "Learning about premiere";
             break;
-        case "/contact/":
-            presenceData.state = "On contact page";
+        case "/support.html":
+            presenceData.state = "On support page";
             break;
         default:
             // reading the docs
-            if (location.pathname.indexOf("/docs/") === 0) {
-                presenceData.state = `Reading the docs: ${document.title.split("|")[0].trim()}`;
+            if (location.pathname.startsWith("/community")) {
+                presenceData.state = "On community page";
+            } else if (document.querySelector(".w-pagehead > h1") && document.querySelector(".w-pagehead > h1").innerText === "Emby Blog") {
+                presenceData.state = "Reading the blog";
                 presenceData.smallImageKey = PRESENCE_ART_ASSETS.read;
             }
     }
 }
 
 /**
- * isJellyfinWebClient - imports the ApiClient variable and
- * verifies that we are in the jellyfin web client
+ * isEmbyWebClient - imports the ApiClient variable and
+ * verifies that we are in the emby web client
  *
  * @return {boolean} true once the variable has been imported, otherwise false
  */
-async function isJellyfinWebClient() {
+async function isEmbyWebClient() {
 	if (!ApiClient) {
 		ApiClient = await presence.getPageletiable("ApiClient");
 	}
@@ -180,24 +190,27 @@ async function handleWebClient() {
     path = location.hash.split("?")[0].substr(3);
 
     switch (path) {
-        case "login.html":
+        case "startup/login.html":
+        case "startup/manuallogin.html":
+        case "startup/forgotpassword.html":
             presenceData.state = "Logging in";
             break;
         case "home.html":
             presenceData.state = "At home";
             break;
-        case "search.html":
+        case "search/search.html":
             presenceData.state = "Searching";
             presenceData.smallImageKey = PRESENCE_ART_ASSETS.search;
             break;
 
         // user preferences
-        case "mypreferencesmenu.html":
-        case "myprofile.html": // profile
-        case "mypreferencesdisplay.html": // display
-        case "mypreferenceshome.html": // home
-        case "mypreferenceslanguages.html": // languages
-        case "mypreferencessubtitles.html": // subtitles
+        case "settings/settings.html":
+        case "settings/display.html": // display
+        case "settings/homescreen.html": // home screen
+        case "settings/playback.html": // playback
+        case "settings/subtitles.html": // subtitles
+        case "settings/profile.html": // profile
+        case "settings/password.html": // password
             presenceData.state = "On user preferences";
             break;
 
@@ -205,71 +218,69 @@ async function handleWebClient() {
         case "dashboard.html":
         // server section
         case "dashboardgeneral.html": // general
-        case "userprofiles.html": // user profiles
+        case "users/users.html": // user profiles
         case "useredit.html": // editing user profile
-        case "library.html": // managing library
-        case "librarydisplay.html": // library display settings
-        case "metadataimages.html": // library metadata settings
-        case "metadatanfo.html": // library NFO settings
-        case "encodingsettings.html": // encoding settings
+        case "userlibraryaccess.html": // editing user library access
+        case "userparentalcontrol.html": // editing user parental control
+        case "userpassword.html": // editing user password
+        case "supporterkey.html": // emby premiere key
+        case "librarysetup/library.html": // managing library
+        case "librarysetup/advanced.html": // managing library advanced
+        case "network/network.html": // network section
+        case "encodingsettings.html": // transcode settings
+        case "syncactivity.html": // conversions && downloads
+        case "syncsettings.html": // conversions settings
+        case "configurationpage": // generic config page
         // devices section
-        case "devices.html": // devices
-        case "device.html": // editing device
-        case "serveractivity.html": // server activity
-        case "dlnasettings.html": // dlna settings
+        case "devices/devices.html": // devices
+        case "devices/device.html": // editing device
+        case "devices/cameraupload.html": // camera upload
         // live tv section
-        case "livetvstatus.html": // manage live tv
-        case "livetvtuner.html": // add/manage tv tuner
-        case "livetvguideprovider.html": // add/manage tv guide provider
-        case "livetvsettings.html": // live tv settings (dvr)
+        case "livetvsetup/livetvstatus.html": // manage live tv
+        case "livetvsetup/livetvtuner.html": // add/manage tv tuner
+        case "livetvsetup/guideprovider.html": // add/manage tv guide provider
+        case "livetvsetup/livetvsettings.html": // live tv settings (dvr)
         // advanced section
-        case "networking.html": // networking
-        case "apikeys.html": // api keys
-        case "log.html": // logs
+        case "logs/logs.html": // logs
         case "notificationsettings.html": // notification settings
-        case "installedplugins.html": // plugins
-        case "availableplugins.html": // plugins catalog
-        case "scheduledtasks.html": // scheduled tasks
-        case "configurationpage": // plugins configuration page
+        case "plugins/plugins.html": // plugins
+        case "plugins/plugincatalog.html": // plugins catalog
+        case "plugins/addplugin.html": // add plugin
+        case "scheduledtasks/scheduledtasks.html": // scheduled tasks
+        case "scheduledtasks/scheduledtask.html": // scheduled task settings
+        case "apikeys/apikeys.html": // api keys
             presenceData.state = "On admin dashboard";
             break;
 
-        case "movies.html":
+        case "movies/movies.html":
             presenceData.state = "Browsing movies";
             break;
 
-        case "tv.html":
+        case "tv/tv.html":
             presenceData.state = "Browsing tv series";
             break;
 
-        case "music.html":
+        case "music/music.html":
             presenceData.state = "Browsing music";
-            break;
-
-        case "livetv.html":
-            presenceData.state = "Browsing Live TV";
             break;
 
         case "edititemmetadata.html":
             presenceData.state = "Editing media metadata";
             break;
 
-        case "itemdetails.html":
+        case "item/item.html":
 			await handleItemDetails();
             break;
 
-        case "videoosd.html":
+        case "videoosd/videoosd.html":
             await handleVideoPlayback();
-            break;
-
-        case "nowplaying.html":
-            presenceData.state = "Viewing the audio playlist";
             break;
 
         default:
             if (path.substr(0, 3) === "dlg") {
                 // generic popup do nothing
-            }
+            } else
+            PMD_info(`path: ${path}`);
     }
 }
 
@@ -277,7 +288,7 @@ async function handleWebClient() {
  * handleVideoPlayback - handles the presence when the user is using the video player
  */
 async function handleVideoPlayback() {
-    let videoPlayerPage = document.getElementById("videoOsdPage");
+    let videoPlayerPage = document.querySelector("[data-type='video-osd']");
 
     if (videoPlayerPage === null) {
         // elements not loaded yet
@@ -291,10 +302,10 @@ async function handleVideoPlayback() {
     let subtitle;
 
     // title on the header
-    let headerTitleElem = document.querySelector("h3.pageTitle");
+    let headerTitleElem = videoPlayerPage.querySelector("h3.videoOsdTitle");
 
     // title on the osdControls
-    let osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle");
+    let osdParentTitleElem = videoPlayerPage.querySelector("h1.videoOsdParentTitle");
 
     // media metadata
     let mediaInfo;
@@ -304,9 +315,9 @@ async function handleVideoPlayback() {
     // no background image, we're playing live tv
     if (videoPlayerContainerElem.style.backgroundImage) {
         // with this url we can obtain the id of the item we are playing back
-        let backgroundImageUrl = videoPlayerContainerElem.style.backgroundImage.split("\"")[1].replace(ApiClient["_serverAddress"], "");
+        let mediaId = videoPlayerContainerElem.style.backgroundImage.split("\"")[1].split("/")[5];
 
-        mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[2]);
+        mediaInfo = await obtainMediaInfo(mediaId);
 
     } else {
         // simulate the expected data
@@ -324,15 +335,15 @@ async function handleVideoPlayback() {
         switch (mediaInfo.Type) {
             case "Movie":
                 title = "Watching a Movie";
-                subtitle = osdTitleElem.innerText;
+                subtitle = osdParentTitleElem.innerText;
                 break;
             case "Series":
                 title = `Watching ${headerTitleElem.innerText}`;
-                subtitle = osdTitleElem.innerText;
+                subtitle = osdParentTitleElem.innerText;
                 break;
             case "TvChannel":
                 title = "Watching Live Tv";
-                subtitle = osdTitleElem.innerText;
+                subtitle = osdParentTitleElem.innerText;
                 break;
             default:
                 title = `Watching ${mediaInfo.Type}`;
@@ -375,7 +386,7 @@ function getUserId() {
     try {
         return ApiClient["_currentUser"]["Id"];
     } catch (e) {
-        let servers = JSON.parse(localStorage.getItem("jellyfin_credentials")).Servers;
+        let servers = JSON.parse(localStorage.getItem("servercredentials3")).Servers;
 
         // server id available on browser location
         if (location.hash.indexOf("?") > 0) {
@@ -415,8 +426,7 @@ async function obtainMediaInfo(itemId) {
     }
 
     media[itemId] = "pending";
-
-    fetch(`/Users/${getUserId()}/Items/${itemId}`, {
+    fetch(`/emby/Users/${getUserId()}/Items/${itemId}`, {
         credentials: "include",
         headers: {
             "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
@@ -543,13 +553,13 @@ async function updateData() {
 
     let showPresence = false;
 
-    // we are on the official jellyfin page
-    if (location.host.toLowerCase() === JELLYFIN_URL) {
+    // we are on the official emby page
+    if (location.host.toLowerCase() === EMBY_URL) {
         showPresence = true;
         handleOfficialWebsite();
 
     // we are on the web client and has been verified
-	} else if (await isJellyfinWebClient()) {
+} else if (await isEmbyWebClient()) {
         showPresence = true;
         await handleWebClient();
     }
@@ -559,7 +569,7 @@ async function updateData() {
 		presenceData.startTimestamp = Date.now();
 	}
 
-    // if jellyfin is detected init/update the presence status
+    // if emby is detected init/update the presence status
     if (showPresence) {
         if (presenceData.details == null) {
             presence.setTrayTitle();
