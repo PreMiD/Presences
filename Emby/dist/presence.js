@@ -183,7 +183,7 @@ async function handleWebClient() {
         return;
     }
 
-    presenceData.details = "web client";
+    presenceData.details = "At web client";
 
     // obtain the path, on the example would return "login.html"
     // https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
