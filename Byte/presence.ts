@@ -178,7 +178,7 @@ presence.on('UpdateData', async () => {
     }
   }
 
-  if (data !== null && data.details !== undefined) {
+  if (data.details !== undefined) {
     if (data.details.match('(Browsing|Viewing)')) {
       data.smallImageKey = 'reading';
       data.smallImageText = (await strings).browse;
