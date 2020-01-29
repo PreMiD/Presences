@@ -3,7 +3,7 @@
     "name": "dAn",
     "id": "169516316124905473"
   },
-  "service": "Dominos Pizza",
+  "service": "Domino's Pizza (UK)",
   "description": {
     "en": "Order your favourite pizza custom made to your taste"
   },
@@ -11,7 +11,7 @@
     "www.dominos.co.uk",
     "dominos.co.uk"
   ],
-  "version": "1.1",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/GYkNfcY.png",
   "thumbnail": "https://i.imgur.com/Rld7QY1.png",
   "color": "#E31837",
@@ -19,7 +19,8 @@
     "pizza",
     "dominos",
     "dominos uk",
-    "pizza uk"
+    "pizza uk",
+    "region-locked"
   ],
   "category": "other"
 }
