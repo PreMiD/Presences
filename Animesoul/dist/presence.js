@@ -46,9 +46,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = "Viewing the Shop";
     }
     else if (document.location.pathname.includes("/bank")) {
-         //user = document.querySelector("title");
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = `Viewing ${user}'s Bank`;
+        presenceData.details = "Viewing the Bank";
     }
     else if (document.location.pathname.includes("/cards")) {
         presenceData.startTimestamp = browsingStamp;
@@ -63,9 +62,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = "Viewing Card Events";
     }
     else if (document.location.pathname.includes("/inventory")) {
-        //user = document.querySelector("title");
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = `Viewing ${user}'s Inventory`;
+        presenceData.details = "Viewing Inventory";
     }
     else if (document.location.pathname.includes("/fusion")) {
         presenceData.startTimestamp = browsingStamp;
