@@ -85,6 +85,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing AS Creators";
     }
+    else if (document.location.pathname.includes("/medals")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Viewing AS Medals";
+    }
     else if (document.location.pathname.includes("/leaderboards")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing Leaderboards";
@@ -108,6 +112,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/staff-list")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing Staff List";
+    }
+    else if (document.location.pathname.includes("/settings")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Viewing Settings";
     }
     if (presenceData.details == null) {
         presence.setTrayTitle();
