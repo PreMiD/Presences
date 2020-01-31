@@ -113,6 +113,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing Guides";
     }
+    else if (document.location.pathname.includes("/events")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Viewing AS Events";
+    }
     else if (document.location.pathname.includes("/rules")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Reading the rules";
