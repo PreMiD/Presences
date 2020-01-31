@@ -125,6 +125,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing Settings";
     }
+    else if (document.location.pathname.includes("/staff")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Viewing Hidden Page";
+    }
     if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
