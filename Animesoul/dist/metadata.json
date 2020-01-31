@@ -1,0 +1,16 @@
+{
+  "author": {
+    "name": "Dana",
+    "id": "211982234964590592"
+  },
+  "url": "animesoul.com",
+  "description": {
+    "en": "The Largest Anime Discord Server in the World!"
+  },
+  "service": "Anime Soul",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/RyucGVu.png",
+  "thumbnail": "https://i.imgur.com/RyucGVu.png",
+  "color": "#FF0000",
+  "category": "anime"
+}
