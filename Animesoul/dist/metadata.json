@@ -3,14 +3,15 @@
     "name": "Dana",
     "id": "211982234964590592"
   },
-  "url": "animesoul.com",
+  "service": "Anime Soul",
   "description": {
     "en": "The Largest Anime Discord Server in the World!"
   },
-  "service": "Anime Soul",
-  "version": "1.0",
+  "url": "animesoul.com",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/RyucGVu.png",
   "thumbnail": "https://i.imgur.com/RyucGVu.png",
-  "color": "#FF0000",
-  "category": "anime"
+  "color": "#7289da",
+  "tags": ["anime", "discord-server"],
+  "category": "other"
 }
