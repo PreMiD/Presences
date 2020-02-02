@@ -1,11 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
     clientId: "672156210627084328",
     mediaKeys: false
@@ -89,6 +81,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing Notifications";
     }
+    else if (document.location.pathname.includes("/events")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Viewing AS Events";
+    }
     else if (document.location.pathname.includes("/creators")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing AS Creators";
@@ -120,6 +116,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/staff-list")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing Staff List";
+    }
+    else if (document.location.pathname.includes("/staff")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Viewing Hidden Page";
     }
     else if (document.location.pathname.includes("/settings")) {
         presenceData.startTimestamp = browsingStamp;
