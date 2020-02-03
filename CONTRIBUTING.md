@@ -4,7 +4,7 @@
 </div>
 
 # Guidelines
-> If you do not follow all of the guidelines, your presence or pull request will be deleted off of the GitHub.
+> If you do not follow all of the guidelines, your presence or pull request will be deleted off of the GitHub repository.
 
 When publishing presences to this GitHub, we require you to follow a set of guidelines.
 To some, these strict rules may seem harsh. However, the implementation of these rulesets will keep our servers from running into any issues.
