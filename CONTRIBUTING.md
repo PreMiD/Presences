@@ -67,7 +67,7 @@ Our presence verification team has their role, look out for `Presence Verifier`s
 10. The requirements for logos are 1:1 (Square) in 512px, thumbnails, however, should either be [wide promotional cards](https://i.imgur.com/3QfIc5v.jpg) or simply [screenshots](https://i.imgur.com/OAcBmwW.png) if the first is not available.
 11. Presences should at least have 1 tag, this is a requirement by design and may be optional in the future.
 12. The `url` field must not include `http://` or `https://`, neither the parameters (e.g. a presence for `https://www.google.com/search?gws_rd=ssl` will only have `www.google.com` in the `url` field).
-13. Descriptions and tags should always be in arrays, even when it's only one element. URLs however, should be a string if it's only one domain.
-14. Unstable sites that constantly change APIs, domains or randomize HTML elements or just being still in development are not allowed and will be removed from the store.
+13. Descriptions and tags should always be in arrays, even when it's only one element. The `url` field, however, should only be a string if it's one domain.
+14. Unstable sites that constantly change APIs/domains, randomize HTML elements or just still being in heavy development are not allowed and will be removed from the store.
 
 After all of the proper reviews have been met, your pull request will be merged with the store.
