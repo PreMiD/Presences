@@ -49,7 +49,7 @@ In some situations, presences may behave unexpectedly or could use some minor ch
 - Do not re-brand/overwrite a presence completely unless permitted by a `Presence Verifier` or staff member. 
 
 # Verification
-> When you make pull requests about adding or modifying existing presences, you must include a screenshot. However, modifications to a presence's **"metadata.json"** or **tsconfig.json** files do not require a screenshot. *Your screenshot must be uploaded directly to GitHub with the pull request, do not use third-party image sharing websites.*
+> When you make pull requests about adding or modifying existing presences, you must include a screenshot. However, modifications to a presence's **"metadata.json"** or **"tsconfig.json"** files do not require a screenshot. *Your screenshot must be uploaded directly to GitHub with the pull request, do not use third-party image sharing websites.*
 
 For your presence to reach the stores, it must go through a process on GitHub to confirm that it works as expected. Here is a couple of things to look out for when you make your pull request.
 
