@@ -9,7 +9,7 @@
     "typescript": "3.7.5"
   },
   "dependencies": {
-    "@octokit/rest": "16.40.1",
+    "@octokit/rest": "16.42.0",
     "@types/chrome": "0.0.93",
     "@types/mongodb": "3.3.15"
   }
