@@ -1,10 +1,7 @@
 var presence = new Presence({
     clientId: "668933003434655781",
     mediaKeys: false
-}), strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-});
+})
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
@@ -37,8 +34,3 @@ presence.on("UpdateData", () => {
     }
 
 });
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}
