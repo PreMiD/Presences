@@ -1,7 +1,13 @@
 {
   "author": {
-    "name": "thatdevjon",
-    "id": "570656255610191874"
+    "name": [
+      "thatdevjon",
+      "Dominik"
+    ],
+"id": [
+  "570656255610191874",
+  "594491170248458250"
+]
   },
   "service": "UpBeatRadio",
   "description": {
