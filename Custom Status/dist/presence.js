@@ -48,7 +48,6 @@ presence.on("UpdateData", () =>
       JSON.parse(objectElement.textContent) &&
       Object.keys(JSON.parse(objectElement.textContent)).length > 0 &&
       JSON.parse(objectElement.textContent).details &&
-      JSON.parse(objectElement.textContent).state &&
       JSON.parse(objectElement.textContent).largeImageKey
     ) {
       presence.setActivity(JSON.parse(objectElement.textContent));
