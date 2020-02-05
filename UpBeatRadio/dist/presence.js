@@ -22,6 +22,18 @@ presence.on("UpdateData", () => {
         presenceData.details = songName;
         presenceData.state = songArtist;
         
+    } else if (document.location.pathname.includes("/core")) {
+        presenceData.details = "Viewing a page";
+        presenceData.state = (document.title).slice(11);
+
+    } else if (document.location.pathname.includes("/radio")) {
+        presenceData.details = "Viewing a page";
+        presenceData.state = (document.title).slice(11);
+
+    } else if (document.location.pathname.includes("/news")) {
+        presenceData.details = "Viewing a page";
+        presenceData.state = (document.title).slice(11);
+
     } else {
         presenceData.details = "Viewing a page";
         pageName = (document.title).slice(9);
