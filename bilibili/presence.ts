@@ -114,10 +114,10 @@ if (document.location.hostname == "www.bilibili.com") {
     }
     
     title = document.querySelector("#media_module > div > a.media-title");
-    page = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video-top.bilibili-player-video-top-pgc > div.bilibili-player-video-top-title");
+    page = document.querySelector("#eplist_module > div.list-wrapper.simple > ul > li.ep-item.cursor.visited > span");
 
     presenceData.details = title.innerText;
-    presenceData.state = page.innerText;
+    presenceData.state = "Episode: " + page.innerText + "";
     //小黑屋
   } else if(document.location.pathname == ("/blackroom/")) {
     presenceData.startTimestamp = browsingStamp;
