@@ -17,9 +17,25 @@ var search : any;
 var UID : any;
 var page : any;
 var searchTab : any;
+var iFrameVideo : boolean, currentTime : any, duration : any, paused : any, playback : any, iFramePaused : any;
 
 searchhome = document.querySelector("#server-search-app > div > div > div.home-suggest.clearfix");
 
+presence.on("iFrameData", data => {
+
+  playback = 
+  data.iframe_video.duration !== null
+    ? true : false
+
+if(playback) {
+
+  iFrameVideo = data.iframe_video.iFrameVideo;
+  currentTime = data.iframe_video.currTime;
+  duration    = data.iframe_video.dur;
+  iFramePaused      = data.iframe_video.test;
+}
+
+});
 
 presence.on("UpdateData", async () => {
 
@@ -35,7 +51,7 @@ if (document.location.hostname == "www.bilibili.com") {
     user = document.querySelector("#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a");
     //video
   } else if (document.location.pathname.includes("/video/")) {
-    var video : HTMLVideoElement, videoDuration : any, videoCurrentTime : any, paused : any;
+    var video : HTMLVideoElement, videoDuration : any, videoCurrentTime : any, videoPaused : any;
     video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
     if (video == null) {
       video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.video-state-pause > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
@@ -52,16 +68,16 @@ if (document.location.hostname == "www.bilibili.com") {
 
     videoDuration = video.duration;
     videoCurrentTime = video.currentTime;
-    paused = video.paused;
+    videoPaused = video.paused;
 
     var timestamps = getTimestamps(Math.floor(videoCurrentTime), Math.floor(videoDuration));
 
-    presenceData.smallImageKey = paused ? "pause" : "play";
-    presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+    presenceData.smallImageKey = videoPaused ? "pause" : "play";
+    presenceData.smallImageText = videoPaused ? (await strings).pause : (await strings).play;
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
     
-    if (paused) {
+    if (videoPaused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
@@ -74,9 +90,20 @@ if (document.location.hostname == "www.bilibili.com") {
   } else if(document.location.pathname == ("/account/history")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing history";
-    //专题
+    //活动
   } else if (document.location.pathname.includes("/blackboard/")) {
-    presenceData.startTimestamp = browsingStamp;
+    var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+    
+    presenceData.smallImageKey = iFramePaused ? "pause" : "play";
+    presenceData.smallImageText = iFramePaused ? (await strings).pause : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
+    
+    if (iFramePaused) {
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+    }
+    
     title = document.querySelector("head > title");
     presenceData.details = "Viewing Blackboard";
     presenceData.state = title.innerText.replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili","").replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~ - bilibili","").replace(" - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili","");
@@ -700,6 +727,16 @@ if (document.location.hostname == "www.bilibili.com") {
     presenceData.smallImageKey = "reading";
   }
   //手游
+} else if (document.location.hostname == "www.biligame.com"){
+  title = document.querySelector("body > div.bui-gc > div.header-bar.one-row > div.right-panel > div > div > h2 > span:nth-child(1)");
+  if (title !== null) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing Game";
+    presenceData.state = title.innerText
+  } else {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing Game";
+  }
 } else if (document.location.hostname == "game.bilibili.com"){
   if (document.location.pathname.includes("/")) {
     presenceData.startTimestamp = browsingStamp;
@@ -731,39 +768,34 @@ if (document.location.hostname == "www.bilibili.com") {
     presenceData.state = searchinput.innerHTML.replace(" - 搜索结果 - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili","");
   }
 } else if (document.location.hostname == "message.bilibili.com"){
-  if (document.location.pathname == ("/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing message";
-/* not working
-  } else if (document.location.pathname == ("/#/reply")) {
+  if (document.URL.includes("/#/reply")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing message";
     presenceData.state = "Reply";
-  } else if (document.location.pathname == ("/#/at")) {
+  } else if (document.URL.includes("/#/at")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing message";
     presenceData.state = "At";
-  } else if (document.location.pathname.includes("/#/love")) {
+  } else if (document.URL.includes("/#/love")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing message";
     presenceData.state = "Love";
-  } else if (document.location.pathname.includes("/#/system")) {
+  } else if (document.URL.includes("/#/system")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing message";
     presenceData.state = "System message";
-  } else if (document.location.pathname.includes("/#/whisper")) {
+  } else if (document.URL.includes("/#/whisper")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing message";
     presenceData.state = "Private message";
-  } else if (document.location.pathname.includes("/#/archive")) {
+  } else if (document.URL.includes("/#/archive")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing message";
     presenceData.state = "PM archive";
-  } else if (document.location.pathname.includes("/#/config")) {
+  } else if (document.URL.includes("/#/config")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing message";
     presenceData.state = "Message setting";
-*/
   }
 } 
   
