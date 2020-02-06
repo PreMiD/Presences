@@ -24,8 +24,7 @@
     "game.bilibili.com",
     "show.bilibili.com",
     "member.bilibili.com",
-    "account.bilibili.com",
-    "biligame.com"
+    "account.bilibili.com"
   ],
   "version": "1.8",
   "logo": "https://i.imgur.com/w7q6IS0.png",
@@ -35,6 +34,5 @@
     "video",
     "anime"
   ],
-  "category": "anime",
-  "regExp": "(([a-z0-9]+)[.])?bilibili[.]com"
+  "category": "anime"
 }
