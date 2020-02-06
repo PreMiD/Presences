@@ -24,9 +24,11 @@
     "game.bilibili.com",
     "show.bilibili.com",
     "member.bilibili.com",
+    "message.bilibili.com",
+    "search.bilibili.com",
     "account.bilibili.com"
   ],
-  "version": "1.8",
+  "version": "1.9.0",
   "logo": "https://i.imgur.com/w7q6IS0.png",
   "thumbnail": "https://i.imgur.com/wKnEEei.jpg",
   "color": "#05acff",
