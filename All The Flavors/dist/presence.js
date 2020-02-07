@@ -7,7 +7,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if (document.location.pathname == "/") {
         elapsed =  Math.floor(Date.now() / 1000)
         let presenceData = {
-            details: "Browing Homepage",
+            details: "Browsing Homepage",
             state: "at Homepage",
             //largeImageKey: "banner",
             largeImageKey: "logo",
@@ -29,7 +29,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
                 var dstate = "browsing list"
             }
             let presenceData = {
-                details: `Browing ${document.location.pathname.replace("/",'')} `,
+                details: `Browsing ${document.location.pathname.replace("/",'')} `,
                 state:dstate,
                 //largeImageKey: "banner",
                 largeImageKey: "logo",
@@ -46,7 +46,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else if(["/getting_started","/help/how_to_mix","/go_pro",'/help/report_recipe'].includes(document.location.pathname)){
             elapsed =  Math.floor(Date.now() / 1000)
             let presenceData = {
-                details: `Browing help `,
+                details: `Browsing help `,
                 state: `on ${document.location.pathname.replace("/help",'').split("_").join(" ").replace("/",'')}`,
                 //largeImageKey: "banner",
                 largeImageKey: "logo",
@@ -62,7 +62,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else if(document.location.pathname.startsWith("/flavors/")){
             elapsed =  Math.floor(Date.now() / 1000)
             let presenceData = {
-                details: `Browing Flavors `,
+                details: `Browsing Flavors `,
                 state: `flavor: ${document.location.pathname.replace(/\d/,'').replace(/\d/,'').split("_").join(' ').replace("/flavors/",'').split("-").join(" ").replace("/",'')}`,
                 //largeImageKey: "banner",
                 largeImageKey: "logo",
