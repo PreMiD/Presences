@@ -32,10 +32,10 @@ presence.on("UpdateData", async () => {
       	var timestamps = getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
 
         if(tv) {
-            let name = document.querySelector("#movie li.active span").textContent;
+            let name = document.querySelector("#movie li.active span").textContent.trim();
             let date = document.querySelector("#info  div dl:nth-child(2) > dd:nth-child(4)").textContent;
-            data.details = name.slice(0, name.lastIndexOf(' ')) + " (" + date.slice(0, date.indexOf('-')) + ")";
-            data.state = "S" + document.querySelector("#movie li.active span").textContent.split(' ').pop() + ":E" + document.querySelector("#servers li a.active").textContent;
+            data.details = name.replace(/[_0-9]+$/, '') + " (" + date.slice(0, date.indexOf('-')) + ")";
+            data.state = (/\d$/.test(name) ? "S" + document.querySelector("#movie li.active span").textContent.split(' ').pop() + ":" : "") + "E" + document.querySelector("#servers li a.active").textContent;
         }
         else {
             let date = document.querySelector("#info  div dl:nth-child(2) > dd:nth-child(4)").textContent;
