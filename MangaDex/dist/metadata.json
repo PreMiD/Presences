@@ -1,8 +1,12 @@
 {
-    "author": {
-      "name": "Bryan",
-      "id": "293775922757238784"
-    },
+  "author": {
+    "name": "Bryan",
+    "id": "293775922757238784"
+  },
+  "contributors": [{
+    "name": "Aya",
+    "id": "256422547556401152"
+  }],
     "service": "MangaDex",
     "description": { 
         "en" : "Read manga online for free at MangaDex with no ads, high quality images and support scanlation groups!"
