@@ -1,0 +1,22 @@
+{
+    "author": {
+      "name": "The Colorman",
+      "id": "298842558610800650"
+    },
+    "url": "aniwatch.me",
+    "description": {
+      "en": "Presence for the anime streaming site \"aniwatch.me\". Displays current anime, episode number and time left."
+    },
+    "service": "Aniwatch",
+    "version": "1.0",
+    "logo": "https://anilivery.aniwatch.me/img/site_icon/icon_512.png",
+    "thumbnail": "https://i.imgur.com/ai1Lxd6.png",
+    "color": "#348FFF",
+    "tags": [
+      "anime",
+      "aniwatch",
+      "streaming",
+      "video"
+    ],
+    "category": "anime"
+  }
