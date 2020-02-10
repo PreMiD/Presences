@@ -1,20 +1,15 @@
 {
   "author": {
-    "name": "ItsMeShisuii",
-    "id": "482142808556306446"
+    "name": "EGGSY",
+    "id": "162969778699501569"
   },
-  "contributors": [
-    {
+  "contributors": [{
       "name": "Timeraa",
       "id": "223238938716798978"
     },
     {
       "name": "TheDrop.",
       "id": "293828021134295040"
-    },
-    {
-      "name": "EGGSY",
-      "id": "162969778699501569"
     }
   ],
   "service": "PreMiD",
@@ -25,7 +20,7 @@
     "tr": "PreMiD, kullandığınız internet servisleri için Discord profilinize Rich Presence bilgisi ekler."
   },
   "url": ["premid.app", "docs.premid.app", "beta.premid.app"],
-  "version": "2.0.6",
+  "version": "2.0.7",
   "logo": "https://crugg.de/premid/premid2.png",
   "thumbnail": "https://crugg.de/premid/premid3.png",
   "color": "#7289DA",
