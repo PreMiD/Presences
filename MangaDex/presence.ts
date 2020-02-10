@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
         var chapter = document.querySelector("head > title").innerText.replace(title + " -", "").replace(" - MangaDex", "");
         data.details = title,
             data.state = chapter;
-        data.startTimestamp = browsingStamp;
+        data.startTimestamp = browsingStamp
         presence.setActivity(data);
     } else if (document.location.pathname.startsWith("/genre")) {
         var genre = document.querySelector(".card-header").textContent.trim();
