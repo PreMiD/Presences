@@ -3,6 +3,16 @@ var presence = new Presence({
     mediaKeys: false
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
+presence.on("iFrameData", data => {
+    playback =
+        data.iframe_video.duration !== null
+            ? true : false;
+    if (playback) {
+        iFrameVideo = data.iframe_video.iFrameVideo;
+        currentTime = data.iframe_video.currTime;
+        paused = data.iframe_video.paused;
+    }
+});
 presence.on("UpdateData", () => {
     let data = {
         largeImageKey: "asnew"
@@ -77,6 +87,7 @@ presence.on("UpdateData", () => {
     var animewt = localStorage.getItem("Anime");
     var animewe = localStorage.getItem("Episode");
     var animename = localStorage.getItem("AnimeName");
+    if (document.location.href.endsWith("&s=alt")){
         if (animewe === null) {
             if (animename === null) {
             data.smallImageKey = "watching",
@@ -94,7 +105,25 @@ presence.on("UpdateData", () => {
     data.smallImageKey = "watching",
     data.details = "Sta guardando: " + animewt,
     data.state = "Episodio: " + animewe,
-    data.startTimestamp = browsingStamp;
+    presence.setActivity(data);}
+    } else
+    if (animewe === null) {
+            if (animename === null) {
+            data.smallImageKey = "watching",
+            data.details = "Sta guardando un",
+            data.state = "anime",
+            data.startTimestamp = browsingStamp;
+            presence.setActivity(data);
+        } else {
+        data.smallImageKey = "watching",
+        data.details = "Sta guardando:",
+        data.state = animename,
+        data.startTimestamp = browsingStamp;
+        presence.setActivity(data);}
+    } else {
+    data.smallImageKey = paused ? "pause" : "play",
+    data.details = "Guarda: " + animewt,
+    data.state = paused ? ("Ep: " + animewe + " - In pausa") : ("Ep: " + animewe + " - Minuto: " + currentTime),
     presence.setActivity(data);}
     }
     });
