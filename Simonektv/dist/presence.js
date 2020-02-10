@@ -12,9 +12,5 @@ presence.on("UpdateData", () => {
     data.state = "ORBAZZO FIERO"
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
-    } else
-    data.details = "Guarda",
-    data.state = "ORBAZZO FIERO"
-    data.startTimestamp = browsingStamp;
-    presence.setActivity(data);
+    }
 });
