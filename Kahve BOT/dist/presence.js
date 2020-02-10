@@ -7,63 +7,48 @@ presence.on("UpdateData", () => {
     let presenceData = {
         largeImageKey: "logo"
     };
-    
+
+    const browsingStamp = Math.floor(Date.now() / 1000);
+    const page = document.location.pathname;
+
     if (window.location.pathname.endsWith("blog")) {
-    
         presenceData.details = "Tüm bloglara göz atıyor...";
-     presenceData.state = "kahvebot.com/blog"
-    
+        presenceData.startTimestamp = browsingStamp;
     }
-    
-  
     else if (window.location.pathname.endsWith("faq")) {
-    
         presenceData.details = "Tüm sıkça sorulan sorulara göz atıyor...";
-     presenceData.state = "kahvebot.com/faq"
-    
+        presenceData.startTimestamp = browsingStamp;
     }
-
     else if (window.location.pathname.endsWith("commands")) {
-    
         presenceData.details = "Tüm komutlara göz atıyor...";
-     presenceData.state = "kahvebot.com/commands"
-    
+        presenceData.startTimestamp = browsingStamp;
     }
-
     else if (window.location.pathname.endsWith("menu")) {
-    
         presenceData.details = "Kahve menüsüne göz atıyor...";
-     presenceData.state = "kahvebot.com/menu"
-    
+        presenceData.startTimestamp = browsingStamp;
     }
-
     else if (window.location.pathname.endsWith("dashboard")) {
-    
         presenceData.details = "Sunucularına göz atıyor...";
-     presenceData.state = "kahvebot.com/dashboard"
-    
+        presenceData.startTimestamp = browsingStamp;
     }
-
     else if (window.location.pathname.startsWith("/dashboard/")) {
-    
         presenceData.details = "Bir sunucuyu dashboard üzerinden kontrol ediyor:";
-     presenceData.state=document.querySelector('html body.scrollbar.scrollbar-night-fade div.navbar-expand-lg.navbar-dark div.container-fluid ul.navbar-nav.text-white li.nav-item.avatar.dropdown > a ').textContent
-    
+        presenceData.state = document.querySelector('html body.scrollbar.scrollbar-night-fade div.navbar-expand-lg.navbar-dark div.container-fluid ul.navbar-nav.text-white li.nav-item.avatar.dropdown > a ').textContent
+        presenceData.startTimestamp = browsingStamp;
     }
-
     else if (window.location.pathname.endsWith("discord-bot-ekleme")) {
-    
         presenceData.details = "Discord Bot Ekleme bloguna göz atıyor...";
-        presenceData.state = "kahvebot.com/discord-bot-ekleme"
+        presenceData.startTimestamp = browsingStamp;
     }
-    
     else if (window.location.pathname.endsWith("kahve-bot-projesi-nasil-basladi")) {
-    
         presenceData.details = "Kahve bot projesi nasıl başladı bloguna göz atıyor...";
-        presenceData.state = "kahvebot.com/kahve-bot-projesi-nasil-basladi"
+        presenceData.startTimestamp = browsingStamp;
     }
-
-
-    presence.setActivity(presenceData);
-
+    if (presenceData.details == null) {
+        presence.setTrayTitle();
+        presence.setActivity();
+    }
+    else {
+        presence.setActivity(presenceData);
+    }
 });

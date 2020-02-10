@@ -10,8 +10,6 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
     let presenceData = {
         largeImageKey: "logo1",
-        smallImageKey: "author",
-        smallImageText: "Dominik#7464"
     };
     if (document.location.hostname == "iloot.it") {
         presenceData.startTimestamp = browsingStamp;

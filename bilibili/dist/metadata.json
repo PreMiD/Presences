@@ -24,10 +24,12 @@
     "game.bilibili.com",
     "show.bilibili.com",
     "member.bilibili.com",
+    "message.bilibili.com",
+    "search.bilibili.com",
     "account.bilibili.com",
     "biligame.com"
   ],
-  "version": "1.8",
+  "version": "2.0",
   "logo": "https://i.imgur.com/w7q6IS0.png",
   "thumbnail": "https://i.imgur.com/wKnEEei.jpg",
   "color": "#05acff",
@@ -36,5 +38,6 @@
     "anime"
   ],
   "category": "anime",
-  "regExp": "(([a-z0-9]+)[.])?bilibili[.]com"
+  "regExp": "(([a-z0-9]+)[.])?(bilibili|biligame)[.]com",
+  "iframe": true
 }
