@@ -5,7 +5,7 @@
     },
     "url": "aniwatch.me",
     "description": {
-      "en": "Presence for the anime streaming site \"aniwatch.me\". Displays current anime, episode number and time left."
+      "en": "Aniwatch.me is a free anime streaming site with no ads and easy to use UI."
     },
     "service": "Aniwatch",
     "version": "1.0",
