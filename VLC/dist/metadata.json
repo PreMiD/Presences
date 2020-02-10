@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "DooMLorD",
+    "id": "465105167751315471"
+  },
+  "service": "VLC",
+  "description": {
+    "en": "WARNING! read https://kek.gg/u/bpKr"
+  },
+  "url": "localhost",
+  "version": "1.3",
+  "logo": "https://doomlord.s-ul.eu/MHqVX7v0",
+  "thumbnail": "https://doomlord.s-ul.eu/LOCgKTnx",
+  "color": "#ff7c00",
+  "tags": [
+    "videolan",
+    "media-player",
+    "experimental-app"
+  ],
+  "category": "videos"
+}

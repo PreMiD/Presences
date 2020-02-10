@@ -24,60 +24,65 @@ presence.on("UpdateData", async () => {
   if (document.location.hostname == "globoplay.globo.com") {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing home page";
+      presenceData.details = "Vendo a página inicial";
     } else if (document.location.pathname.includes("/categorias/")){
       presenceData.startTimestamp = browsingStamp;
       user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div > div.page-template__header > h1");
-      presenceData.details = "Viewing category:";
+      presenceData.details = "Vendo a categoria:";
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/busca")){
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Getting ready to";
-      presenceData.state = "search something up...";
+      presenceData.details = "Se preparando para";
+      presenceData.state = "pesquisar algo...";
       search = document.querySelector("#search-bar-input");
       if (search.value.length > 2) {
-        presenceData.details = "Searching for:";
+        presenceData.details = "Pesquisando por:";
         presenceData.state = search.value;
       }
+    } else if (document.location.pathname.includes("/programacao")){
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Vendo a programação";
+    } else if (document.location.pathname.includes("/configuracoes")){
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Vendo minhas configurações";
+    } else if (document.location.pathname.includes("/minha-lista")){
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Vendo a Minha Lista";
     } else if (document.location.pathname.includes("/p/")){
       presenceData.startTimestamp = browsingStamp;
       user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.program-header > div > div.playkit-container > div > div.playkit-media-cover__header > h1");
-      presenceData.details = "Viewing show:";
+      presenceData.details = "Vendo o programa:";
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/t/")){
       presenceData.startTimestamp = browsingStamp;
       user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.title-header > div > div.playkit-container > div > div.playkit-media-cover__header > h1");
-      presenceData.details = "Viewing movie:";
+      presenceData.details = "Vendo o filme:";
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/v/")) {
       var currentTime : any, duration : any, paused : any, timestamps : any, video : HTMLVideoElement;
-      video = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--compact > div > div > div.video-stage__stage-container > div > section > div > div > div > div.container.master-container.pointer-enabled > div.id-playback > video");
-      if (video == null) {
-        video = video = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--extended > div > div > div.video-stage__stage-container > div > section > div > div > div > div.container.master-container.pointer-enabled > div.id-playback > video");
-      }
-      title = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--compact > div > div > div.video-stage__video-info-area-wrapper > div > div > div.playkit-video-info__container_info.playkit-video-stage__area-video-info-container > section > div.playkit-video-info__program-title > a > span.playkit-video-info__link-text");
-      if (title == null) {
-        title = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--extended > div > div > div.video-stage__video-info-area-wrapper > div > div > div.playkit-video-info__container_info.playkit-video-stage__area-video-info-container > section > div.playkit-video-info__program-title > a > span.playkit-video-info__link-text");
-      }
-      user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--compact > div > div > div.video-stage__video-info-area-wrapper > div > div > div.playkit-video-info__container_info.playkit-video-stage__area-video-info-container > section > div.playkit-video-info__ep-section > h1");
-      if (user == null) {
-        user = document.querySelector("#app > div > div > div > div.application-controller__view > span > div > div > div.video-stage.video-stage--extended > div > div > div.video-stage__video-info-area-wrapper > div > div > div.playkit-video-info__container_info.playkit-video-stage__area-video-info-container > section > div.playkit-video-info__ep-section > h1");
-      }
-      currentTime = video.currentTime;
-      duration = video.duration;
+      video = document.querySelector('video');
+      currentTime = video.currentTime,
+      duration = video.duration,
       paused = video.paused;
-      timestamps = getTimestamps(Math.floor(currentTime),Math.floor(duration));
+
+      if (document.location.pathname.includes("/programa/")) {
+        title = document.querySelector('.playkit-video-info__link-text').textContent;
+        presenceData.state = document.querySelector('.playkit-video-info__ep-title').textContent;
+      } else {
+        title = document.querySelector('.playkit-video-info__ep-title').textContent;
+      }
+
       if (!isNaN(duration)) {
+        timestamps = getTimestamps(Math.floor(currentTime),Math.floor(duration));
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
         presenceData.startTimestamp = timestamps[0];
         presenceData.endTimestamp = timestamps[1];
 
-        presenceData.details = title.textContent;
-        presenceData.state = user.textContent;
+        presenceData.details = title;
     
         if (paused) {
           delete presenceData.startTimestamp;
@@ -86,15 +91,32 @@ presence.on("UpdateData", async () => {
 
       } else if (isNaN(duration)) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Looing at:";
-        presenceData.state = title.textContent;
+        presenceData.details = "Olhando para:";
+        presenceData.state = title;
+      }
+    } else if (document.location.pathname.includes("/agora-na-globo/")) {
+      presenceData.details = document.querySelector('.playkit-channels-navigation__program-name').textContent;
+      presenceData.state = document.querySelector('.playkit-channels-navigation__program-time').textContent;
+      presenceData.smallImageKey = "live";
+      presenceData.startTimestamp = browsingStamp;
+    }
+    else if (document.location.pathname.includes("/transmissoes/")) {
+      if(document.location.pathname.includes("/244881")) {
+        presenceData.details = "Acompanhando a casa do BBB";
+        presenceData.smallImageKey = "live";
+        presenceData.startTimestamp = browsingStamp;
+      } else {
+        presenceData.details = "Vendo a câmera do BBB:"
+        presenceData.state = document.querySelector('.playkit-channels-navigation__program-name').textContent;
+        presenceData.smallImageKey = "live";
+        presenceData.startTimestamp = browsingStamp;
       }
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }

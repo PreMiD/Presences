@@ -6,6 +6,7 @@
   "service": "1337x",
   "description": {
     "en": "1337x is a search engine to find your favorite torrents.",
+    "tr": "1337x, en sevdiğiniz torrentleri bulmak için bir arama motorudur.",
     "nl": "1337x is een zoekmachine om je favoriete torrents te vinden."
   },
   "url": [
@@ -16,7 +17,7 @@
     "x1337x.se",
     "1337x.is"
   ],
-  "version": "1.1",
+  "version": "1.2",
   "logo": "https://i.imgur.com/zc7kuDN.png",
   "thumbnail": "https://i.imgur.com/Ut7qqHx.png",
   "color": "#d63600",

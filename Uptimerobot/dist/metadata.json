@@ -10,7 +10,7 @@
   "url": [
     "uptimerobot.com"
   ],
-  "version": "1.1",
+  "version": "1.2",
   "logo": "https://i.imgur.com/D2RsWKt.jpg",
   "thumbnail": "https://i.imgur.com/9uhpjDJ.png",
   "color": "#7FFF00",
@@ -19,5 +19,5 @@
     "Uptimerobot",
     "stats"
   ],
-  "category": "service"
+  "category": "other"
 }

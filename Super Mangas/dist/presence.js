@@ -47,11 +47,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = startedBrowsingTimestamp;
         presence.setActivity(presenceData);
     }
-    else if (host == "www.supermangas.site" && path.startsWith("/manga/") || path.startsWith("/manhwa/") && path.replace("/manga/", "")) {
+    else if (host == "www.supermangas.site" && path.startsWith("/manga/") || path.startsWith("/manhwa/") && path.replace("/manga/", "") || path.startsWith("/manhua/") && path.replace("/manga/", "")) {
         if(document.title.includes("Capítulo", "")){
-            mangaPage = document.querySelector("#corpo > div:nth-child(1) > div.capBox > div > div.capMenu.capMenuFixedTop > select.capListPage > option.capituloPage.active")
-            mangaName = document.querySelector("#corpo > div:nth-child(2) > div.videoSidebar > div.capaCategory > div > h3 > a")
-            mangaChapter = document.querySelector("#corpo > div:nth-child(1) > div.capBox > div > div.capMenu.capMenuFixedTop > select.capList > option:nth-child(1)")
+            mangaPage = document.querySelector("#corpo > div.conteudoBox.box_suport > div.capBox > div.capPageContent > div.capMenu.capMenuFixedTop > select.capListPage > option.capituloPage.active")
+            mangaName = document.querySelector("#corpo > div:nth-child(3) > div.videoSidebar > div.capaCategory > div > h3 > a")
+            mangaChapter = document.querySelector("#corpo > div.conteudoBox.box_suport > div.capBox.focus > div.capPageContent > div.capMenu.capMenuFixedTop.fixed > select.capList > option:nth-child(1)")
             presenceData.details = 'Lendo: ' + mangaName.innerText;
             presenceData.startTimestamp = startedBrowsingTimestamp;
             presenceData.state = mangaChapter.innerText + " - " + mangaPage.textContent.replace("Pagina", "Página");
@@ -64,6 +64,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = startedBrowsingTimestamp;
             presence.setActivity(presenceData);
         }
+    }
+    else if (host == "www.supermangas.site" && path.startsWith("/arte")) {
+        presenceData.details = "Mangás do Desenhista";
+        presenceData.state = document.querySelector("#corpo > div.conteudoBox > div.boxBarraInfo").innerText.replace('Conteúdos do Desenhista', "");
+        presenceData.startTimestamp = startedBrowsingTimestamp;
+        presence.setActivity(presenceData);
     }
     else if (host == "www.supermangas.site" && path.startsWith("/contato")) {
         presenceData.details = 'Fale Conosco';

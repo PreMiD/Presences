@@ -8,6 +8,7 @@ about: Suggest Rich Presence support for a website
 * [ ] Is the website older than 2 months? <!--- It is necessary for the website to be older than 2 months. -->
 * [ ] Is the site locked to a specific country/region?
 * [ ] Is the site a paid service? (e.g. Netflix, Hulu)
+* [ ] Does the website feature NSFW content? (e.g. porn, etc...)
 * [ ] Are you a donator/patron?
 * [ ] Do you acknowledge that coding presences is completely voluntary and may take time for your service to be added regardless of priority?
 
