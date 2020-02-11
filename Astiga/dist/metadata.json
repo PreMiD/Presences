@@ -6,7 +6,8 @@
   "service": "Astiga",
   "description": {
     "en": "Easily play back the music that is stored on your cloud service, directly in your browser or on your phone.",
-    "ro": "Redă ușor muzica care este stocată in serviciul tău cloud, direct pe browser-ul/telefonul tău."
+    "ro": "Redă ușor muzica care este stocată in serviciul tău cloud, direct pe browser-ul/telefonul tău.",
+    "zh_cn": "直接在浏览器或手机上轻松播放存储在云服务中的音乐。"
   },
   "url": "play.asti.ga",
   "version": "2.5",

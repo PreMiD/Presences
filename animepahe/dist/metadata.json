@@ -5,7 +5,8 @@
   },
   "service": "animepahe",
   "description": {
-    "en": "Anime site with good bitrate video streaming in english sub with scheduled uploads and a growing library"
+    "en": "Anime site with good bitrate video streaming in english sub with scheduled uploads and a growing library",
+    "zh_cn": "具有良好视频质量的英语字幕动漫网站。"
   },
   "url": "animepahe.com",
   "version": "1.0.3",

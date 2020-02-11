@@ -8,46 +8,46 @@
 | zh_CN | zh_TW |website                |
 |-------|-------|-----------------------|
 |&check;|&check;|1337x                  |
-|&check;|       |1CAK                   |
-|&check;|       |4anime                 |
+|&check;|&check;|1CAK                   |
+|&check;|&check;|4anime                 |
 |&check;|&check;|4gamers                |
-|&check;|       |5Mods                  |
+|&check;|&check;|5Mods                  |
 |&check;|       |9anime                 |
 |&check;|&check;|9GAG                   |
 |&check;|&check;|Akinator               |
 |&check;|&check;|AliExpress             |
-|       |       |All The Flavors        |
-|       |       |Altdentifier           |
-|       |       |Amazon                 |
-|       |       |Amazon Music           |
-|       |       |Anghami                |
-|       |       |Aniflix                |
-|       |       |AniList                |
-|       |       |Anime News Network     |
-|       |       |Anime Soul             |
-|       |       |anime47                |
-|       |       |Anime4You              |
-|       |       |AnimeDao               |
-|       |       |AnimeDigitalNetwork    |
-|       |       |animeflix              |
-|       |       |AnimeFLV               |
-|       |       |AnimeKage              |
-|       |       |AnimeLab               |
-|       |       |AnimeOnDemand          |
-|       |       |animepahe              |
-|       |       |Animes Online          |
-|       |       |AnimeSaturn            |
-|       |       |AnimeWorld             |
-|       |       |AniNews                |
-|       |       |ApertureBot            |
-|       |       |Apple Music            |
-|       |       |Aranzulla.it           |
-|       |       |Arena of Kings         |
-|       |       |AskUbuntu              |
-|       |       |Astiga                 |
-|       |       |Aternos                |
-|       |       |Audiomack              |
-|       |       |Azur Lane Wiki         |
+|&check;|       |All The Flavors        |
+|&check;|       |Altdentifier           |
+|&check;|&check;|Amazon                 |
+|&check;|       |Amazon Music           |
+|&check;|       |Anghami                |
+|&check;|       |Aniflix                |
+|&check;|       |AniList                |
+|&check;|       |Anime News Network     |
+|&check;|       |Anime Soul             |
+|&check;|       |anime47                |
+|&check;|       |Anime4You              |
+|&check;|       |AnimeDao               |
+|&check;|       |AnimeDigitalNetwork    |
+|&check;|       |animeflix              |
+|&check;|       |AnimeFLV               |
+|&check;|       |AnimeKage              |
+|&check;|       |AnimeLab               |
+|&check;|       |AnimeOnDemand          |
+|&check;|       |animepahe              |
+|&check;|       |Animes Online          |
+|&check;|       |AnimeSaturn            |
+|&check;|       |AnimeWorld             |
+|&check;|       |AniNews                |
+|&check;|       |ApertureBot            |
+|&check;|&check;|Apple Music            |
+|&check;|       |Aranzulla.it           |
+|&check;|       |Arena of Kings         |
+|&check;|       |AskUbuntu              |
+|&check;|       |Astiga                 |
+|&check;|       |Aternos                |
+|&check;|       |Audiomack              |
+|&check;|       |Azur Lane Wiki         |
 |       |       |Bandcamp               |
 |       |       |BanG Dream! Wikia      |
 |       |       |bargrooves             |
@@ -272,7 +272,7 @@
 |       |       |Pocket Casts           |
 |       |       |Pokemon Showdown       |
 |       |       |PonyvilleFM            |
-|       |       |PornHub                |
+|&check;|       |PornHub                |
 |       |       |Power Radio            |
 |       |       |Prambors Radio         |
 |       |       |PreMiD                 |
@@ -284,23 +284,23 @@
 |       |       |Punch! Fansub          |
 |       |       |Q-dance                |
 |       |       |QDSSClub               |
-|       |       |R10.net                |
-|       |       |Radio.net              |
-|       |       |RadioMe                |
-|       |       |Rainwave               |
-|       |       |RealBooru              |
-|       |       |Reddit                 |
-|       |       |RedTube                |
-|       |       |RL Insider             |
-|       |       |RL.Deals               |
-|       |       |RLSwaps                |
-|       |       |RLTracker.pro          |
-|       |       |Ro the Bot             |
-|       |       |Roblox                 |
-|       |       |Rocket League          |
-|       |       |Rocket League Garage   |
-|       |       |ROCKRADIO.COM          |
-|       |       |Rule34                 |
+|&check;|       |R10.net                |
+|&check;|       |Radio.net              |
+|&check;|       |RadioMe                |
+|&check;|       |Rainwave               |
+|&check;|       |RealBooru              |
+|&check;|       |Reddit                 |
+|&check;|       |RedTube                |
+|&check;|       |RL Insider             |
+|&check;|       |RL.Deals               |
+|&check;|       |RLSwaps                |
+|&check;|       |RLTracker.pro          |
+|&check;|       |Ro the Bot             |
+|&check;|       |Roblox                 |
+|&check;|       |Rocket League          |
+|&check;|       |Rocket League Garage   |
+|&check;|       |ROCKRADIO.COM          |
+|&check;|       |Rule34                 |
 |       |       |s.to                   |
 |       |       |sahibinden.com         |
 |       |       |SCP Wiki               |
@@ -407,16 +407,16 @@
 |       |       |WIRED                  |
 |       |       |Wish                   |
 |       |       |Wolfy                  |
-|       |       |Xbooru                 |
-|       |       |XVideos                |
-|       |       |yabanc?dizi            |
-|       |       |YAGPDB                 |
-|       |       |Yahoo Mail             |
-|       |       |Yay Animes             |
+|&check;|       |Xbooru                 |
+|&check;|       |XVideos                |
+|&check;|       |yabanc?dizi            |
+|&check;|       |YAGPDB                 |
+|&check;|       |Yahoo Mail             |
+|&check;|       |Yay Animes             |
 |&check;|&check;|YouTube                |
 |&check;|&check;|YouTube Music          |
-|       |       |Yu-Gi-Oh Top Decks     |
-|       |       |YummyAnime             |
-|       |       |Zalando                |
+|&check;|       |Yu-Gi-Oh Top Decks     |
+|&check;|       |YummyAnime             |
+|&check;|       |Zalando                |
 |&check;|&check;|巴哈姆特                |
 |&check;|&check;|巴哈姆特動畫瘋          |

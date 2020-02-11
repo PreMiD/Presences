@@ -5,7 +5,8 @@
     },
     "service": "Amazon Music",
     "description": { 
-        "en" : "Amazon Music is a music streaming platform and online music store operated by Amazon.com. Launched in public beta on September 25, 2007, in January 2008 it became the first music store to sell music without digital rights management from the four major music labels, as well as many independents."
+        "en" : "Amazon Music is a music streaming platform and online music store operated by Amazon.com. Launched in public beta on September 25, 2007, in January 2008 it became the first music store to sell music without digital rights management from the four major music labels, as well as many independents.",
+        "zh_cn": "Amazon Music是由Amazon.com经营的音乐媒体平台和在线音乐商店。"
     },
     "url": [
         "music.amazon.com"

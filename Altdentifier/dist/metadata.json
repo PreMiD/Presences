@@ -5,7 +5,8 @@
     },
     "service": "Altdentifier",
     "description": {
-      "en": "The best Discord security and checkpoint bot!"
+      "en": "The best Discord security and checkpoint bot!",
+      "zh_cn": "最好的Discord安全检查机器人！"
     },
     "url": [
       "altdentifier.com"
