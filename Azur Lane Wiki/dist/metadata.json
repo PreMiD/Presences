@@ -5,7 +5,8 @@
     },
     "service": "Azur Lane Wiki",
     "description": {
-        "en": "Azur Lane English Wiki!"
+        "en": "Azur Lane English Wiki!",
+        "zh_cn": "自由的碧蓝航线英语维基"
     },
     "url": "azurlane.koumakan.jp",
     "version": "1.0.0",

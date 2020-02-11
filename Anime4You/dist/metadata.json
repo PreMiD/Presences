@@ -6,7 +6,8 @@
     "service": "Anime4You",
     "description": {
         "en": "Anime4You lets you watch a variety of Animes with german dubs or subs. | INFO: Currently not showing the pause/play status and time left. Will be added soon!",
-        "de": "Anime4You lässt dich eine Vielzahl von Animes mit deutschen Dubs oder Subs anschauen. | INFO: Derzeit wird der Pausen-/Wiedergabestatus und die verbleibende Zeit nicht angezeigt. Wird in Kürze hinzugefügt!"
+        "de": "Anime4You lässt dich eine Vielzahl von Animes mit deutschen Dubs oder Subs anschauen. | INFO: Derzeit wird der Pausen-/Wiedergabestatus und die verbleibende Zeit nicht angezeigt. Wird in Kürze hinzugefügt!",
+        "zh_cn": "Anime4You可让您使用德语观看各种动漫。"
     },
     "url": "www.anime4you.one",
     "version": "2.0",

@@ -10,7 +10,8 @@
     "service": "AniNews",
     "description": {
         "en": "Main news about animes, mangas, light novels and everything related to the Otaku world! Read on your Computer, Notebook, Smartphone or any other Mobile Device.",
-        "pt_BR": "Principais notícias sobre animes, mangás, light novel e tudo relacionado ao mundo Otaku! Leia em seu Computador, Notebook, Smartphone ou qualquer outro Dispositivo Móvel."
+        "pt_BR": "Principais notícias sobre animes, mangás, light novel e tudo relacionado ao mundo Otaku! Leia em seu Computador, Notebook, Smartphone ou qualquer outro Dispositivo Móvel.",
+        "zh_cn": "有关动漫，漫画，轻小说以及与宅男世界相关的一切的新闻报道都在这里！"
     },
     "url": [
         "www.aninews.live"

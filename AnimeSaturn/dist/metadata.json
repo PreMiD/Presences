@@ -6,7 +6,8 @@
   "service": "AnimeSaturn",
   "description": {
     "en": "On our website AnimeSaturn you will find Anime (Sub ITA). Download or stream your favorite series completely for free.",
-    "it": "Sul sito AnimeSaturn troverai Anime (Sub ITA). Scarica o guarda le tue serie preferite completamente gratis."
+    "it": "Sul sito AnimeSaturn troverai Anime (Sub ITA). Scarica o guarda le tue serie preferite completamente gratis.",
+    "zh_cn": "在AnimeSaturn网站上你可以找到完全免费的意大利语字幕动漫视频。 "
   },
   "url": "www.animesaturn.com",
   "version": "2.0",

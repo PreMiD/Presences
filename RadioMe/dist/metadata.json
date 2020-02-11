@@ -7,7 +7,8 @@
   "description": {
     "en": "Listening to the radio made easy. Radio stations from all regions of Germany, France and Austria.",
     "de": "Radio hören leicht gemacht. Radiosender aus allen Regionen von Deutschland, Frankreich und Österreich.",
-    "fr": "Écouter la radio facilement. Stations de radio de toutes les régions d'Allemagne, de France et d'Autriche."
+    "fr": "Écouter la radio facilement. Stations de radio de toutes les régions d'Allemagne, de France et d'Autriche.",
+    "zh_cn": "让听广播变得容易! 来自德国，法国和奥地利所有地区的广播电台。"
   },
   "url": [
       "radiome.de",
