@@ -22,7 +22,7 @@
 |&check;|&check;|Amazon Music           |
 |&check;|&check;|Anghami                |
 |&check;|       |Aniflix                |
-|&check;|       |AniList                |
+|&check;|&check;|AniList                |
 |&check;|       |Anime News Network     |
 |&check;|       |Anime Soul             |
 |&check;|       |anime47                |
