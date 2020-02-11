@@ -407,9 +407,9 @@
 |       |       |WIRED                  |
 |       |       |Wish                   |
 |       |       |Wolfy                  |
-|       |       |Xbooru                 |
-|       |       |XVideos                |
-|       |       |yabanc?dizi            |
+|&check;|       |Xbooru                 |
+|&check;|       |XVideos                |
+|&check;|       |yabanc?dizi            |
 |&check;|       |YAGPDB                 |
 |&check;|       |Yahoo Mail             |
 |&check;|       |Yay Animes             |
