@@ -6,7 +6,7 @@
     "service": "AnimeDigitalNetwork",
     "description": { 
         "en" : "Anime Digital Network is the best of the live animated Japan! See all Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, and more.",
-        "zh_cn": "AnimeDigitalNetwork是最棒的日本在线动漫网站。"
+        "zh_CN": "AnimeDigitalNetwork是最棒的日本在线动漫网站。"
     },
     "url": "animedigitalnetwork.fr",
     "version": "1.1",

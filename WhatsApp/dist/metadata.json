@@ -7,8 +7,8 @@
     "description": { 
         "en" : "Quickly send and receive WhatsApp messages right from your computer.",
         "tr": "Bilgisayarınızdan hızlıca WhatsApp üzerinden mesaj gönderin ve alın.",
-        "zh_cn": "WhatsApp是一款非常受欢迎的跨平台应用程序，用于智能手机之间的通讯。",
-        "zh_tw": "WhatsApp是Facebook公司的旗下一款用於智慧型手機的跨平台加密即時通訊應用程式。"
+        "zh_CN": "WhatsApp是一款非常受欢迎的跨平台应用程序，用于智能手机之间的通讯。",
+        "zh_TW": "WhatsApp是Facebook公司的旗下一款用於智慧型手機的跨平台加密即時通訊應用程式。"
     },
     "url": "web.whatsapp.com",
     "version": "1.1",

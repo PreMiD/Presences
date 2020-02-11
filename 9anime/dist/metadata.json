@@ -6,8 +6,8 @@
   "service": "9anime",
   "description": {
     "en": "9anime is a streaming website where you can watch anime plus dubbed audio in English.",
-    "zh_cn": "9anime是一个动漫视频网站，您可以在其中以英语来观看各种动漫。",
-    "zh_tw": "9anime是一個動漫視頻網站，您可以用英語配音來觀看各種動漫。"
+    "zh_CN": "9anime是一个动漫视频网站，您可以在其中以英语来观看各种动漫。",
+    "zh_TW": "9anime是一個動漫視頻網站，您可以用英語配音來觀看各種動漫。"
   },
   "url": "9anime.to",
   "version": "1.0.7",

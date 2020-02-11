@@ -6,7 +6,7 @@
   "service": "Animeflix",
   "description": {
     "en": "Watch Anime Online",
-    "zh_cn": "观看在线动漫"
+    "zh_CN": "观看在线动漫"
   },
   "url": "animeflix.io",
   "version": "1.0",
