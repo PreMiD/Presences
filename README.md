@@ -38,7 +38,7 @@
 |&check;|       |Animes Online          |
 |&check;|       |AnimeSaturn            |
 |&check;|       |AnimeWorld             |
-|&check;|       |AniNews                |
+|&check;|&check;|AniNews                |
 |&check;|       |ApertureBot            |
 |&check;|&check;|Apple Music            |
 |&check;|       |Aranzulla.it           |
