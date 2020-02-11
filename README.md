@@ -410,7 +410,7 @@
 |       |       |Xbooru                 |
 |       |       |XVideos                |
 |       |       |yabanc?dizi            |
-|       |       |YAGPDB                 |
+|&check;|       |YAGPDB                 |
 |&check;|       |Yahoo Mail             |
 |&check;|       |Yay Animes             |
 |&check;|&check;|YouTube                |
