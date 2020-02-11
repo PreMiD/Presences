@@ -1,29 +1,414 @@
-<div align="center">
-    <img src="https://avatars3.githubusercontent.com/u/46326568?s=400&amp;u=15e4a4988014780288d30ffb969fd1569fec23e6&amp;v=4" width="128px" style="max-width:100%;">
-    <h1>PreMiD Presences</h1>
-</div>
-
-This repository contains the source code of all presences that are available in PreMiD Store.  
-If you would like to <strong>publish</strong> your presence, please feel free to open a <a href="https://github.com/PreMiD/Presences/pulls">pull request</a>.  
-
-<div align="left">
-    <a href="https://discord.gg/WvfVZ8T" title="Join our Discord!" rel="nofollow">
-    <img src="https://camo.githubusercontent.com/987903b512adb37c953df3e83f1921dc29140493/68747470733a2f2f646973636f72646170702e636f6d2f6170692f6775696c64732f3439333133303733303534393830353035372f7769646765742e706e673f7374796c653d62616e6e657232" height="76px" alt="Join our Discord!" data-canonical-src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" style="max-width:100%;">
-    </a>
-</div>
-
-# Requirements to create a presence
-- Have latest LTS **Node** version installed on your PC.
-- Have TypeScript Compiler installed.
-- Basic knowlege of JavaScript or TypeScript.
-
-# Getting started
-We made a documentation to make your development process a little bit better and faster.  
-You can see it [**here**](https://docs.premid.app/en/dev/presence).
-
-# Folder structure
-```
-/presences 
-└─ /(presence)
-   └─ /dist (contains code that will be used in store, must have `metadata.json` and `presence.js` in it.)
-```
+# Presences Chinese Project
+- [x] 1337x
+- [x] 1CAK
+- [x] 4anime
+- [x] 4gamers
+- [x] 5Mods
+- [x] 9anime
+- [x] 9GAG
+- [x] Akinator
+- [x] AliExpress
+- [ ] All The Flavors
+- [ ] Altdentifier
+- [ ] Amazon
+- [ ] Amazon Music
+- [ ] Anghami
+- [ ] Aniflix
+- [ ] AniList
+- [ ] Anime News Network
+- [ ] Anime Soul
+- [ ] anime47
+- [ ] Anime4You
+- [ ] AnimeDao
+- [ ] AnimeDigitalNetwork
+- [ ] animeflix
+- [ ] AnimeFLV
+- [ ] AnimeKage
+- [ ] AnimeLab
+- [ ] AnimeOnDemand
+- [ ] animepahe
+- [ ] Animes Online
+- [ ] AnimeSaturn
+- [ ] AnimeWorld
+- [ ] AniNews
+- [ ] ApertureBot
+- [ ] Apple Music
+- [ ] Aranzulla.it
+- [ ] Arena of Kings
+- [ ] AskUbuntu
+- [ ] Astiga
+- [ ] Aternos
+- [ ] Audiomack
+- [ ] Azur Lane Wiki
+- [ ] Bandcamp
+- [ ] BanG Dream! Wikia
+- [ ] bargrooves
+- [ ] BBC iPlayer
+- [x] bilibili
+- [ ] BluTV
+- [ ] Boo.rip
+- [ ] Bounce
+- [ ] Branitube
+- [ ] bronyradiogermany
+- [ ] bs.to
+- [ ] Bukkit
+- [ ] Bundle Haber
+- [ ] BuzzFeed
+- [ ] BuzzFeed News
+- [ ] Byte
+- [ ] Canva
+- [ ] Carl-bot
+- [ ] CartoonCrazy.net
+- [ ] Change
+- [ ] Chaturbate
+- [ ] ChickenFM
+- [ ] CHIP Online
+- [ ] CodAre
+- [ ] Codeforces
+- [ ] codepen
+- [ ] ComedyCentral
+- [ ] CoolMathGames
+- [ ] Crowdin
+- [ ] CRUGGs Image Board
+- [ ] CrunchyRoll
+- [ ] CurseForge
+- [ ] CyTube
+- [ ] dailymotion
+- [ ] dAnimeStore
+- [ ] Dank Memer
+- [ ] DeepL
+- [ ] Deezer
+- [ ] Derpibooru
+- [ ] DeviantArt
+- [ ] Di.FM
+- [ ] DirtMC
+- [ ] Discord
+- [ ] Discord Bot List
+- [ ] Discord Bots
+- [ ] Discord.js
+- [ ] DiscordLabs.org
+- [ ] discordtrlist.xyz
+- [ ] Disney+
+- [ ] divinediscordbots
+- [ ] Diziay
+- [ ] DiziBOX
+- [ ] dizilab
+- [ ] dlive
+- [ ] Domino's Pizza (UK)
+- [ ] Dream Animes
+- [ ] Dueling Nexus
+- [ ] Duolingo
+- [ ] Dyno
+- [ ] e621
+- [ ] eBay
+- [ ] Ecosia
+- [ ] Edge Me Please
+- [ ] eggsy.codes
+- [ ] ek?i s?zlük
+- [ ] Ek?i ?eyler
+- [ ] Emby
+- [ ] enthix.net
+- [ ] ESL
+- [ ] Etsy
+- [ ] Facebook
+- [ ] Fandom
+- [ ] Fanfiction
+- [ ] filmmodu
+- [ ] FimFiction
+- [ ] FiPlay
+- [ ] fizy
+- [ ] Flare Radio
+- [ ] FlipAnim
+- [ ] FlixTor
+- [ ] Fmovies
+- [ ] fnbr.co
+- [ ] Fortnite-API
+- [ ] Funimation
+- [ ] G2A
+- [ ] Game Jolt
+- [ ] Gamepedia
+- [ ] GameStar
+- [ ] Gartic.com.br
+- [ ] Gartic.io
+- [ ] GBAtemp.net
+- [ ] GBF
+- [ ] Gelbooru
+- [ ] Genius
+- [ ] GeoGuessr
+- [ ] Gfycat
+- [ ] Giphy
+- [ ] GitHub
+- [ ] GittiGidiyor
+- [ ] Glitch
+- [ ] globoplay
+- [ ] Glynet
+- [ ] Gmail
+- [ ] Google
+- [ ] Google Calendar
+- [ ] Google Classroom
+- [ ] Google Docs
+- [ ] Google Drive
+- [ ] Google Play Music
+- [ ] Google Translate
+- [ ] Goyabu
+- [ ] Gravity Radio
+- [ ] Groovy
+- [ ] Guilded.gg
+- [ ] HabboFests
+- [ ] HackerNoon
+- [ ] Hangout Hotel
+- [ ] hanime
+- [ ] HBO GO
+- [ ] HentaiHaven
+- [ ] HentaiWorld
+- [ ] HepBoat
+- [ ] Hepsiburada
+- [ ] HLTV
+- [ ] Horizon GO
+- [ ] htmlcsscolor
+- [ ] Hulu
+- [ ] Humble Bundle
+- [ ] Hypixel
+- [ ] iHeartRadio
+- [ ] Iloot.it
+- [ ] IMDb
+- [ ] Imgur
+- [ ] Instagram
+- [ ] ITV Hub
+- [ ] Jackbox
+- [ ] Japari Library
+- [ ] Jellyfin
+- [ ] Jet Set Radio Live
+- [ ] Jetanimes
+- [ ] JeuxVideo.com
+- [ ] JioCinema
+- [ ] JUKE
+- [ ] Jummbox
+- [ ] Just Light Novels
+- [ ] Kabal's
+- [ ] Kahoot
+- [ ] Kahve BOT
+- [ ] KimCartoon
+- [ ] Kimi no Na wa Wikia
+- [ ] KissAnime
+- [ ] KissAsian
+- [ ] KissManga
+- [ ] Kitsu
+- [ ] Krunker
+- [ ] kshow123
+- [ ] KShowOnline
+- [ ] LabyDesigns
+- [ ] LabyMod
+- [ ] lain game
+- [ ] LautFM
+- [ ] Lawcodev
+- [ ] Legends of Equestria
+- [ ] Lichess
+- [ ] LISTEN.moe
+- [ ] ListenOnRepeat
+- [ ] Log.com.tr
+- [ ] LookMovie
+- [ ] Love Live! Wikia
+- [ ] LucidChart
+- [ ] Manga Livre
+- [ ] MangaDex
+- [ ] MangaWorld
+- [ ] MC-Market
+- [ ] MCStacker
+- [ ] Medium
+- [ ] MEE6
+- [ ] Memerator
+- [ ] Messenger
+- [ ] Metastream
+- [ ] MinecraftForge
+- [ ] Mixcloud
+- [ ] Mixer
+- [ ] Monstercat
+- [ ] Musescore
+- [ ] mvs4u
+- [ ] MyAnimeList
+- [ ] MyBOT
+- [ ] myCANAL
+- [ ] n11.com
+- [ ] NameMC
+- [ ] nekos.life
+- [ ] Neox Scanlator
+- [ ] Netflix
+- [ ] Newgrounds
+- [ ] nhentai
+- [ ] niconico
+- [ ] Nightwave Plaza
+- [ ] Nodejs.org
+- [ ] NON-STOP NYAN CAT!
+- [ ] NPM Package Registry
+- [ ] Nyaa.si
+- [ ] OKanime
+- [ ] openrec
+- [x] osu!gatari
+- [x] osu!kawata
+- [ ] osu!ppy
+- [ ] p90.zone
+- [ ] Pandora
+- [ ] PartydoosMediaGroup
+- [ ] Pastebin
+- [ ] Pastr
+- [ ] Paybutik
+- [ ] piapro
+- [ ] picarto
+- [ ] Pinterest
+- [ ] pixiv
+- [ ] Playerbros
+- [ ] Plex
+- [ ] plug.dj
+- [ ] PlutoTV
+- [ ] Pocket Casts
+- [ ] Pokemon Showdown
+- [ ] PonyvilleFM
+- [ ] PornHub
+- [ ] Power Radio
+- [ ] Prambors Radio
+- [ ] PreMiD
+- [ ] Prime Video
+- [ ] PrimeMC
+- [ ] ProBot
+- [ ] Proxim Radio
+- [ ] puhutv
+- [ ] Punch! Fansub
+- [ ] Q-dance
+- [ ] QDSSClub
+- [ ] R10.net
+- [ ] Radio.net
+- [ ] RadioMe
+- [ ] Rainwave
+- [ ] RealBooru
+- [ ] Reddit
+- [ ] RedTube
+- [ ] RL Insider
+- [ ] RL.Deals
+- [ ] RLSwaps
+- [ ] RLTracker.pro
+- [ ] Ro the Bot
+- [ ] Roblox
+- [ ] Rocket League
+- [ ] Rocket League Garage
+- [ ] ROCKRADIO.COM
+- [ ] Rule34
+- [ ] s.to
+- [ ] sahibinden.com
+- [ ] SCP Wiki
+- [ ] Scratch
+- [ ] Script Hub
+- [ ] Sdarot.TV
+- [ ] ShiftDelete.net
+- [ ] Showtime
+- [ ] SimplyHentai
+- [ ] Simulator Radio
+- [ ] Skillshare
+- [ ] Skribbl.io
+- [ ] Skype
+- [ ] Slack
+- [ ] Slither.io
+- [ ] SoloLearn
+- [ ] SoundCloud
+- [ ] Sparklin Labs
+- [ ] speedrun.com
+- [ ] Spigot
+- [ ] Spirit Fanfics
+- [ ] splix.io
+- [ ] SpongePowered
+- [ ] Spotify Podcasts
+- [ ] StackOverflow
+- [ ] Starz
+- [ ] Steam
+- [ ] StopotS
+- [ ] Streamable
+- [ ] Sunshine Live
+- [ ] Super Animes
+- [ ] Super Mangas
+- [ ] surviv.io
+- [ ] SVT Play
+- [ ] Tatsumaki
+- [ ] TCRF
+- [ ] TeamTrees
+- [ ] Teknobuk
+- [ ] Telegram
+- [ ] The Archon
+- [ ] The useless web
+- [ ] Tidal
+- [ ] TikTok
+- [ ] Time.is
+- [ ] top.gg
+- [ ] Toradora Wikia
+- [ ] ToradorAPI
+- [ ] Touhou Wiki
+- [ ] Trello
+- [ ] Trendyol
+- [ ] TruckersFM
+- [ ] TruckersMP
+- [ ] TruckSimFM
+- [ ] TruckStopRadio
+- [ ] TryHackMe
+- [ ] Tubi
+- [ ] tuga.tv
+- [ ] TugaStrikes
+- [ ] TuMangaOnline
+- [ ] Tumblr
+- [ ] Tune Radio
+- [ ] TuneIn
+- [ ] TVNOW
+- [ ] tvtime
+- [ ] twist.moe
+- [ ] Twitch
+- [ ] Twitter
+- [ ] Typeracer
+- [ ] Türk Hack Team
+- [ ] TürkAnimeTV
+- [ ] Udemy
+- [ ] Uncyclopedia
+- [ ] Union Mangás
+- [ ] UpBeatRadio
+- [ ] Uptimerobot
+- [ ] Usercord.org
+- [ ] V LIVE
+- [ ] V3rmillion
+- [ ] Valtox Gaming Group
+- [ ] Viaplay
+- [ ] Vibe Radio
+- [ ] viki
+- [ ] Vimeo
+- [ ] Virgin Media
+- [ ] VirusTotal
+- [ ] VK
+- [ ] Vlare
+- [ ] VLC
+- [ ] Voiranime
+- [ ] VRV
+- [ ] Vui Ghê
+- [ ] VVVVID
+- [ ] W3Schools
+- [ ] Wakanim
+- [ ] Wanflix
+- [ ] Watchill
+- [ ] Wattpad
+- [ ] Webtekno
+- [ ] Webtoon
+- [ ] WhatsApp
+- [ ] wikiHow
+- [ ] Wikipedia
+- [ ] WIMS
+- [ ] WIRED
+- [ ] Wish
+- [ ] Wolfy
+- [ ] Xbooru
+- [ ] XVideos
+- [ ] yabanc?dizi
+- [ ] YAGPDB
+- [ ] Yahoo Mail
+- [ ] Yay Animes
+- [x] YouTube
+- [x] YouTube Music
+- [ ] Yu-Gi-Oh Top Decks
+- [ ] YummyAnime
+- [ ] Zalando
+- [x] 巴哈姆特
+- [x] 巴哈姆特動畫瘋
