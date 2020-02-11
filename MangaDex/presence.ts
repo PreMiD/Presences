@@ -80,10 +80,10 @@ presence.on("UpdateData", async () => {
             presence.setActivity(data);
         }
     } else if (document.location.pathname.startsWith("/chapter")) {
-        var title = document.querySelector(".manga-link").textContent;
-        var chapter = document.querySelector(".chapter-title").textContent;
-        data.details = "Reading " + title,
-        data.state = "Chapter: " + chapter;
+		var title = document.querySelector(".manga-link").textContent;
+        var chapter = document.querySelector("head > title").innerText.replace(title + " -", "").replace(" - MangaDex", "");
+        data.details = title,
+            data.state = chapter;
         data.startTimestamp = browsingStamp
         presence.setActivity(data);
     } else if (document.location.pathname.startsWith("/genre")) {
