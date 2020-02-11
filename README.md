@@ -412,7 +412,7 @@
 |       |       |yabanc?dizi            |
 |       |       |YAGPDB                 |
 |       |       |Yahoo Mail             |
-|       |       |Yay Animes             |
+|&check;|       |Yay Animes             |
 |&check;|&check;|YouTube                |
 |&check;|&check;|YouTube Music          |
 |&check;|       |Yu-Gi-Oh Top Decks     |
