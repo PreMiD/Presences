@@ -6,7 +6,9 @@
   "service": "Spotify Podcasts",
   "description": {
     "en": "Music for everyone. Note: Only podcasts and site info! To show normal songs use the Spotify x Discord connection.",
-    "nl": "Muziek voor iedereen. Opmerking: Alleen podcasts en pagina informatie! Om normale liedjes te laten zien gebruik de Spotify x Discord connectie."
+    "nl": "Muziek voor iedereen. Opmerking: Alleen podcasts en pagina informatie! Om normale liedjes te laten zien gebruik de Spotify x Discord connectie.",
+    "zh_tw": "音樂人人愛。",
+    "zh_cn": "音乐人人爱。 注意：仅播客和网站信息！要显示普通歌曲，请使用Spotify x Discord连接。"
   },
   "url": [
     "www.spotify.com",

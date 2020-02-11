@@ -12,15 +12,15 @@
 |&check;|&check;|4anime                 |
 |&check;|&check;|4gamers                |
 |&check;|&check;|5Mods                  |
-|&check;|       |9anime                 |
+|&check;|&check;|9anime                 |
 |&check;|&check;|9GAG                   |
 |&check;|&check;|Akinator               |
 |&check;|&check;|AliExpress             |
-|&check;|       |All The Flavors        |
-|&check;|       |Altdentifier           |
+|&check;|&check;|All The Flavors        |
+|&check;|&check;|Altdentifier           |
 |&check;|&check;|Amazon                 |
-|&check;|       |Amazon Music           |
-|&check;|       |Anghami                |
+|&check;|&check;|Amazon Music           |
+|&check;|&check;|Anghami                |
 |&check;|       |Aniflix                |
 |&check;|       |AniList                |
 |&check;|       |Anime News Network     |
@@ -118,7 +118,7 @@
 |       |       |enthix.net             |
 |       |       |ESL                    |
 |       |       |Etsy                   |
-|       |       |Facebook               |
+|&check;|       |Facebook               |
 |       |       |Fandom                 |
 |       |       |Fanfiction             |
 |       |       |filmmodu               |
@@ -145,17 +145,17 @@
 |       |       |GeoGuessr              |
 |       |       |Gfycat                 |
 |       |       |Giphy                  |
-|       |       |GitHub                 |
+|&check;|&check;|GitHub                 |
 |       |       |GittiGidiyor           |
 |       |       |Glitch                 |
 |       |       |globoplay              |
 |       |       |Glynet                 |
-|       |       |Gmail                  |
-|       |       |Google                 |
+|&check;|       |Gmail                  |
+|&check;|       |Google                 |
 |       |       |Google Calendar        |
 |       |       |Google Classroom       |
-|       |       |Google Docs            |
-|       |       |Google Drive           |
+|&check;|&check;|Google Docs            |
+|&check;|&check;|Google Drive           |
 |       |       |Google Play Music      |
 |       |       |Google Translate       |
 |       |       |Goyabu                 |
@@ -234,7 +234,7 @@
 |       |       |Monstercat             |
 |       |       |Musescore              |
 |       |       |mvs4u                  |
-|       |       |MyAnimeList            |
+|&check;|       |MyAnimeList            |
 |       |       |MyBOT                  |
 |       |       |myCANAL                |
 |       |       |n11.com                |
@@ -254,7 +254,7 @@
 |       |       |openrec                |
 |&check;|       |osu!gatari             |
 |&check;|       |osu!kawata             |
-|       |       |osu!ppy                |
+|&check;|&check;|osu!ppy                |
 |       |       |p90.zone               |
 |       |       |Pandora                |
 |       |       |PartydoosMediaGroup    |
@@ -324,7 +324,7 @@
 |       |       |Spirit Fanfics         |
 |       |       |splix.io               |
 |       |       |SpongePowered          |
-|       |       |Spotify Podcasts       |
+|&check;|&check;|Spotify Podcasts       |
 |       |       |StackOverflow          |
 |       |       |Starz                  |
 |&check;|&check;|Steam                  |
@@ -402,7 +402,7 @@
 |       |       |Webtoon                |
 |&check;|&check;|WhatsApp               |
 |       |       |wikiHow                |
-|       |       |Wikipedia              |
+|&check;|       |Wikipedia              |
 |       |       |WIMS                   |
 |       |       |WIRED                  |
 |       |       |Wish                   |
