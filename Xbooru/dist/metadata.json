@@ -6,7 +6,8 @@
   "service": "Xbooru",
   "description": {
     "en": "NSFW Anime Image board running on Gelbooru",
-    "de": "NSFW Anime Image board running on Gelbooru"
+    "de": "NSFW Anime Image board running on Gelbooru"，
+    "zh_cn": "一个服务器位于哥伦布的色图网站"
   },
   "url": [
     "xbooru.com"
