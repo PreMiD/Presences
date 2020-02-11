@@ -416,7 +416,7 @@
 |&check;|&check;|YouTube                |
 |&check;|&check;|YouTube Music          |
 |       |       |Yu-Gi-Oh Top Decks     |
-|       |       |YummyAnime             |
+|&check;|       |YummyAnime             |
 |&check;|       |Zalando                |
 |&check;|&check;|巴哈姆特                |
 |&check;|&check;|巴哈姆特動畫瘋          |
