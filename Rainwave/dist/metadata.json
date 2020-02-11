@@ -5,7 +5,8 @@
     },
     "service": "Rainwave",
     "description": {
-        "en": "Video game music online radio, including remixes and original soundtracks! Vote for the songs you want to hear!"
+        "en": "Video game music online radio, including remixes and original soundtracks! Vote for the songs you want to hear!",
+        "zh_cn": "电子游戏音乐在线广播，包括混音和原声带！ 为您想听的歌曲投票！"
     },
     "url": "rainwave.cc",
     "version": "1.0",
