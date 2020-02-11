@@ -415,7 +415,7 @@
 |       |       |Yay Animes             |
 |&check;|&check;|YouTube                |
 |&check;|&check;|YouTube Music          |
-|       |       |Yu-Gi-Oh Top Decks     |
+|&check;|       |Yu-Gi-Oh Top Decks     |
 |&check;|       |YummyAnime             |
 |&check;|       |Zalando                |
 |&check;|&check;|巴哈姆特                |
