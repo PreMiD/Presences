@@ -411,7 +411,7 @@
 |       |       |XVideos                |
 |       |       |yabanc?dizi            |
 |       |       |YAGPDB                 |
-|       |       |Yahoo Mail             |
+|&check;|       |Yahoo Mail             |
 |&check;|       |Yay Animes             |
 |&check;|&check;|YouTube                |
 |&check;|&check;|YouTube Music          |
