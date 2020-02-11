@@ -1,5 +1,10 @@
 # Presences Chinese Project
+## Contributing
+只需要修改每个dist文件夹内的metadata.json中的description分段。
+简体中文对应`zh_cn`, 繁体中文对应`zh_tw`。
+为了防止破坏原项目结构，请在 Kotoki1337-zh-translate-plan 分支中提交pr
 
+## Project progress
 | zh_CN | zh_TW |website                |
 |-------|-------|-----------------------|
 |&check;|&check;|1337x                  |
