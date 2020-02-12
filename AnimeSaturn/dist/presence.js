@@ -10,6 +10,8 @@ presence.on("iFrameData", data => {
     if (playback) {
         iFrameVideo = data.iframe_video.iFrameVideo;
         currentTime = data.iframe_video.currTime;
+        duration = data.iframe_video.duration;
+        videosource = data.iframe_video.source;
         paused = data.iframe_video.paused;
     }
 });
@@ -87,13 +89,15 @@ presence.on("UpdateData", () => {
     var animewt = localStorage.getItem("Anime");
     var animewe = localStorage.getItem("Episode");
     var animename = localStorage.getItem("AnimeName");
+    var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
     if (document.location.href.endsWith("&s=alt")){
         if (animewe === null) {
             if (animename === null) {
-            data.smallImageKey = "watching",
+            data.smallImageKey = paused ? "pause" : "play",
             data.details = "Sta guardando un",
             data.state = "anime",
-            data.startTimestamp = browsingStamp;
+            data.startTimestamp = paused ? "" : timestamps[0],
+            data.endTimestamp = paused ? "" : timestamps[1],
             presence.setActivity(data);
         } else {
         data.smallImageKey = "watching",
@@ -101,29 +105,57 @@ presence.on("UpdateData", () => {
         data.state = animename,
         data.startTimestamp = browsingStamp;
         presence.setActivity(data);}
-    } else {
+        window.onbeforeunload = function () { // When the WebSite get closed -> delete all the localStorage
+        localStorage.removeItem("Anime");
+        localStorage.removeItem("Episode");
+        localStorage.removeItem("AnimeName");
+    };} else {
     data.smallImageKey = "watching",
     data.details = "Sta guardando: " + animewt,
     data.state = "Episodio: " + animewe,
     presence.setActivity(data);}
-    } else
+    window.onbeforeunload = function () { // When the WebSite get closed -> delete all the localStorage
+    localStorage.removeItem("Anime");
+    localStorage.removeItem("Episode");
+    localStorage.removeItem("AnimeName");
+    };} else
     if (animewe === null) {
             if (animename === null) {
-            data.smallImageKey = "watching",
+            data.smallImageKey = paused ? "pause" : "play",
             data.details = "Sta guardando un",
             data.state = "anime",
-            data.startTimestamp = browsingStamp;
+            data.startTimestamp = paused ? "" : timestamps[0],
+            data.endTimestamp = paused ? "" : timestamps[1],
             presence.setActivity(data);
         } else {
-        data.smallImageKey = "watching",
-        data.details = "Sta guardando:",
-        data.state = animename,
-        data.startTimestamp = browsingStamp;
+        var animeweextra = videosource.split("Ep_")[1].split("_")[0];
+        data.smallImageKey = paused ? "pause" : "play",
+        data.details = "Guardando: " + animename,
+        data.state = paused ? "Ep. " + animeweextra + "｜In pausa" : "Ep. " + animeweextra + "｜In riproduzione",
+        data.startTimestamp = paused ? "" : timestamps[0],
+        data.endTimestamp = paused ? "" : timestamps[1],
         presence.setActivity(data);}
+        window.onbeforeunload = function () { // When the WebSite get closed -> delete all the localStorage
+        localStorage.removeItem("Anime");
+        localStorage.removeItem("Episode");
+        localStorage.removeItem("AnimeName");
+        };
     } else {
     data.smallImageKey = paused ? "pause" : "play",
-    data.details = "Guarda: " + animewt,
-    data.state = paused ? ("Ep: " + animewe + " - In pausa") : ("Ep: " + animewe + " - Minuto: " + currentTime),
+    data.details = "Guardando: " + animewt,
+    data.state = paused ? "Ep. " + animewe + "｜In pausa" : "Ep. " + animewe + "｜In riproduzione",
+    data.startTimestamp = paused ? "" : timestamps[0],
+    data.endTimestamp = paused ? "" : timestamps[1],
     presence.setActivity(data);}
+    window.onbeforeunload = function () { // When the WebSite get closed -> delete all the localStorage
+    localStorage.removeItem("Anime");
+    localStorage.removeItem("Episode");
+    localStorage.removeItem("AnimeName");
+    };
     }
     });
+    function getTimestamps(videoTime, videoDuration) {
+        var startTime = Date.now();
+        var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+        return [Math.floor(startTime / 1000), endTime];
+    }
