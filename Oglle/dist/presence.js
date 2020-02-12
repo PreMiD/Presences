@@ -11,22 +11,22 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = browsingStamp;
 
     if(window.location.pathname.includes("/#Inicio")) {
-        presenceData.state = "Inicio"
+        presenceData.details = "Inicio"
     }
     if(window.location.pathname.includes("/nossos-programas")) {
-        presenceData.state = "Programas"
+        presenceData.details = "Programas"
     }
     if(window.location.pathname.includes("/servicos")) {
-        presenceData.state = "Serviços"
+        presenceData.details = "Serviços"
     }
     if(window.location.pathname.includes("/noticias")) {
-        presenceData.state = "Notícias"
+        presenceData.details = "Notícias"
     }
     if(window.location.pathname.includes("/#Contato")) {
-        presenceData.state = "Contato"
+        presenceData.details = "Contato"
     }
     if(window.location.pathname.includes("/anuncios")) {
-        presenceData.state = "Ganhando dinheiro com a Oglle.com.br!"
+        presenceData.details = "Ganhando dinheiro com a Oglle.com.br!"
     }
 
     presence.setActivity(presenceData);
