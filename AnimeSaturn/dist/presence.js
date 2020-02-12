@@ -20,79 +20,78 @@ presence.on("UpdateData", () => {
         largeImageKey: "asnew"
     };
 		 if (document.location.pathname == ("/")) {
-    localStorage.removeItem("Anime");
-    localStorage.removeItem("Episode");
-    localStorage.removeItem("AnimeName");
-    data.smallImageKey = "search",
+        if ( document.cookie.includes("pmd_")) deleteCookies;
+    data.smallImageKey = "search", // Homepage
     data.details = "Navigando...",
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
     }
-    else if (document.location.pathname.endsWith("/info")) {
+    else if (document.location.pathname.endsWith("/info")) { // Info
     data.smallImageKey = "info",
     data.details = "Nelle Info del Sito",
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
 	}
-    else if (document.location.pathname.endsWith("/animelist")) {
+    else if (document.location.pathname.endsWith("/animelist")) { // Anime Archive
     data.smallImageKey = "archive",
     data.details = "Sfogliando l'Archivio",
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
 	}
-	else if (document.location.pathname.endsWith("/animeincorso")) {
+	else if (document.location.pathname.endsWith("/animeincorso")) { // On Going Anime
     data.smallImageKey = "new",
     data.details = "Sfogliando gli Anime",
 	data.state = "in Corso",
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
 	}
-	else if (document.location.pathname.endsWith("/toplist")) {
+	else if (document.location.pathname.endsWith("/toplist")) { // Top Anime
     data.smallImageKey = "top",
     data.details = "Guarda la TOP List degli",
 	data.state = "Anime",
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
 	}
-	else if (document.location.pathname.endsWith("/calendario")) {
+	else if (document.location.pathname.endsWith("/calendario")) { // Schedule
     data.smallImageKey = "schedule",
     data.details = "Consulta il Calendario",
 	data.state = "delle uscite settimanali",
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
 	}
-    else if (document.location.pathname.startsWith("/anime/")) {
-    localStorage.removeItem("Anime");
-    localStorage.removeItem("Episode");
-    localStorage.removeItem("AnimeName");
+    else if (document.location.pathname.startsWith("/anime/")) { // Anime
+        if ( document.cookie.includes("pmd_")) deleteCookies;
     var animev = document.querySelector("head > title").textContent;
     var animename = animev.replace("AnimeSaturn - ","").replace(" Streaming SUB ITA e ITA", "");
-    localStorage.setItem("AnimeName", animename);
+    setCookie("animename", animename)
     data.smallImageKey = "viewing",
     data.details = "Valuta se guardare:",
 	data.state = animename,
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
 	}
-	else if (document.location.pathname.match("/ep/")) {
+	else if (document.location.pathname.match("/ep/")) { // Episode
 	var animeept1 = document.querySelector("head > title").textContent;
 	var animeept = animeept1.replace("AnimeSaturn - ","").split(" Episodio")[0];
-	var animeepe = animeept1.replace(animeept, "").replace("AnimeSaturn - ", "").replace("Episodio ", "").replace(" Streaming SUB ITA e ITA", "");
-    localStorage.setItem("Anime", animeept);
-    localStorage.setItem("Episode", animeepe);
+    var animeepe = animeept1.replace(animeept, "").replace("AnimeSaturn - ", "").replace("Episodio ", "").replace(" Streaming SUB ITA e ITA", "");
+    setCookie("anime", animeept)
+    setCookie("episode", animeepe)
     data.smallImageKey = "watching",
     data.details = "Sta per guardare: " + animeept,
 	data.state = "Episodio: " + animeepe,
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
-    } else if (document.location.pathname.match("/watch")) {
-    var animewt = localStorage.getItem("Anime");
-    var animewe = localStorage.getItem("Episode");
-    var animename = localStorage.getItem("AnimeName");
+    } else if (document.location.pathname.match("/watch")) { // Watching Page
+        if (document.cookie.includes("_animepmd")){
+        var animewt = getCookie("anime");}
+        if (document.cookie.includes("_episodepmd")){
+        var animewe = getCookie("episode");}
+        if (document.cookie.includes("_animenamepmd")){
+        var animename = getCookie("animename");}
     var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
     if (document.location.href.endsWith("&s=alt")){
-        if (animewe === null) {
-            if (animename === null) {
+        if (animewe[0] === undefined) {
+            if (animename[0] === undefined) {
             data.smallImageKey = paused ? "pause" : "play",
             data.details = "Sta guardando un",
             data.state = "anime",
@@ -105,22 +104,16 @@ presence.on("UpdateData", () => {
         data.state = animename,
         data.startTimestamp = browsingStamp;
         presence.setActivity(data);}
-        window.onbeforeunload = function () { // When the WebSite get closed -> delete all the localStorage
-        localStorage.removeItem("Anime");
-        localStorage.removeItem("Episode");
-        localStorage.removeItem("AnimeName");
-    };} else {
+        window.onbeforeunload = deleteCookies;
+    } else {
     data.smallImageKey = "watching",
     data.details = "Sta guardando: " + animewt,
     data.state = "Episodio: " + animewe,
     presence.setActivity(data);}
-    window.onbeforeunload = function () { // When the WebSite get closed -> delete all the localStorage
-    localStorage.removeItem("Anime");
-    localStorage.removeItem("Episode");
-    localStorage.removeItem("AnimeName");
-    };} else
-    if (animewe === null) {
-            if (animename === null) {
+    window.onbeforeunload = deleteCookies;
+    } else
+    if (animewe === undefined) {
+            if (animename === undefined) {
             data.smallImageKey = paused ? "pause" : "play",
             data.details = "Sta guardando un",
             data.state = "anime",
@@ -135,25 +128,28 @@ presence.on("UpdateData", () => {
         data.startTimestamp = paused ? "" : timestamps[0],
         data.endTimestamp = paused ? "" : timestamps[1],
         presence.setActivity(data);}
-        window.onbeforeunload = function () { // When the WebSite get closed -> delete all the localStorage
-        localStorage.removeItem("Anime");
-        localStorage.removeItem("Episode");
-        localStorage.removeItem("AnimeName");
-        };
-    } else {
+        window.onbeforeunload = deleteCookies; // When the WebSite get closed -> Call Function deleteCookies
+    } else
     data.smallImageKey = paused ? "pause" : "play",
     data.details = "Guardando: " + animewt,
     data.state = paused ? "Ep. " + animewe + "｜In pausa" : "Ep. " + animewe + "｜In riproduzione",
     data.startTimestamp = paused ? "" : timestamps[0],
     data.endTimestamp = paused ? "" : timestamps[1],
     presence.setActivity(data);}
-    window.onbeforeunload = function () { // When the WebSite get closed -> delete all the localStorage
-    localStorage.removeItem("Anime");
-    localStorage.removeItem("Episode");
-    localStorage.removeItem("AnimeName");
-    };
-    }
+    window.onbeforeunload = deleteCookies;
     });
+    function setCookie(cookieName , cookieValue) {  // Function By Tellen U_U This is are the first Functions in all my life
+        document.cookie = "pmd_" + cookieName + "=" + cookieValue + "_" + cookieName + "pmd; path=/"
+    }
+    function getCookie(cookieName) { // Function By Tellen U_U
+        var cookie = document.cookie.split("pmd_" + cookieName + "=")[1].split("_" + cookieName + "pmd" )[0];
+        return cookie
+    }
+    function deleteCookies() { // Function By Tellen U_U
+        document.cookie = " pmd_anime=;max-age=0; path=/";
+        document.cookie = " pmd_episode=;max-age=0; path=/";
+        document.cookie = " pmd_animename=;max-age=0; path=/";
+    }
     function getTimestamps(videoTime, videoDuration) {
         var startTime = Date.now();
         var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
