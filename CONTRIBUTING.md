@@ -40,16 +40,17 @@ Before you begin working on your presence, keep the following list in mind.
 - The media you include (icon/thumbnail) **MUST** be related to the website and should be understandable in terms of size and quality.
 - The file structure **MUST** be clean and managed, do not have random files that provide nothing to the presence's function.
 - The presence **MUST NOT** have any malicious intentions. These include stealing/leaking private information, negatively affecting the behavior of the website, etc...
-- If you design a presence for a website and the website happens to change in the future, you **ARE** responsible for updating the presence again to work as expected. If you do not fix it within an acceptable time frame, other presence developers are allowed to **OVERWRITE** your presence to comply with the changes.
+- If you design a presence for a website and the website happens to change in the future, you **ARE** responsible for updating the presence again to work as expected. If you do not fix it within 7 days, other presence developers are allowed to **OVERWRITE** your presence to comply with the changes.
 - The presence **MUST** be tested before publishing to confirm that everything works as expected.
 - Your presence **MUST** have SFW images and descriptions regardless if it is NSFW or not. If your presence is about an NSFW website, please add the `nsfw` tag to your metadata.
 - Your presence **CANNOT** manipulate local storage on the browser.
+- Your presence may use cookies to store data. All data stored by the presence should be prefixed with `pmd_`.
 
 ## Modification
 > You MUST change the version in the **metadata** to be a higher value from previous version when making changes to either the **presence.js** or **metadata.json**.
 
 In some situations, presences may behave unexpectedly or could use some minor changes to improve its functionality. Here is a compiled list that you **MUST** follow to modify presences.
-- You are not allowed rewrite a presence or change it's author. If the presence author was banned from the official server or hasn't made required changes in many months, you may contact a PreMiD `Presence Verifier` to see if you are applicable to rewrite the presence of choice. 
+- You are not allowed rewrite a presence or change it's author. If the presence author was banned from the official server or hasn't made required changes in a 7 day period, you may contact a PreMiD `Presence Verifier` to see if you are applicable to rewrite the presence of choice. 
 - If you make modifications to a presence and change at least a **QUARTER** of the presence's codebase, you are allowed to add yourself as a contributor. Contact a `Presence Verifier` for more information about this subject.
 - Make sure the modifications are useful. These may include fixes (code and typos),  additions (descriptions and tags), etc... Do not change images if they are not outdated and have a decent resolution.
 - Confirm that your changes work before publishing. Do not create pull requests without knowing the outcome of your changes.
