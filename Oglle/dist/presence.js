@@ -12,25 +12,24 @@ presence.on("UpdateData", () => {
     };
     presenceData.startTimestamp = browsingStamp;
 
-    if(window.location.pathname.toLowerCase() === ("/#Inicio")) {
+    if(window.location.pathname.toLowerCase().includes("/#Inicio")) {
         presenceData.state = "Inicio"
     }
-    if(window.location.pathname.toLowerCase() === ("/nossos-programas")) {
+    if(window.location.pathname.toLowerCase().includes("/nossos-programas")) {
         presenceData.state = "Programas"
     }
-    if(window.location.pathname.toLowerCase() === ("/servicos")) {
+    if(window.location.pathname.toLowerCase().includes("/servicos")) {
         presenceData.state = "Serviços"
     }
-    if(window.location.pathname.toLowerCase() === ("/noticias")) {
+    if(window.location.pathname.toLowerCase().includes("/noticias")) {
         presenceData.state = "Notícias"
     }
-    if(window.location.pathname.toLowerCase() === ("/#Contato")) {
+    if(window.location.pathname.toLowerCase().includes("/#Contato")) {
         presenceData.state = "Contato"
     }
-    if(window.location.pathname.toLowerCase() === ("/anuncios")) {
+    if(window.location.pathname.toLowerCase().includes("/anuncios")) {
         presenceData.state = "Ganhando dinheiro com a Oglle.com.br!"
     }
 
     presence.setActivity(presenceData);
-
 });
