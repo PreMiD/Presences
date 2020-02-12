@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "630418879411126282",
+    clientId: "641614088215986186",
     mediaKeys: false
 });
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
     };
     presenceData.startTimestamp = browsingStamp;
 
-    if(window.location.pathname.includes("/#Inicio")) {
+    if(window.location.pathname.includes("")) {
         presenceData.details = "Inicio"
     }
     if(window.location.pathname.includes("/nossos-programas")) {
@@ -22,11 +22,8 @@ presence.on("UpdateData", () => {
     if(window.location.pathname.includes("/noticias")) {
         presenceData.details = "Notícias"
     }
-    if(window.location.pathname.includes("/#Contato")) {
-        presenceData.details = "Contato"
-    }
     if(window.location.pathname.includes("/anuncios")) {
-        presenceData.details = "Ganhando dinheiro com a Oglle.com.br!"
+        presenceData.details = "Ganhando Dinheiro"
     }
 
     presence.setActivity(presenceData);
