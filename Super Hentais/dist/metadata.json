@@ -16,11 +16,11 @@
     "version": "1.1",
     "logo": "https://www.superhentais.com/apple-touch-icon.png",
     "thumbnail": "https://i.imgur.com/tE8W4W7.png",
-    "color": "#FF7878",
+    "color": "#ff4545",
     "tags": [
-	    "anime",
-        "videos",
-        "nsfw",
+	"nsfw",
+	"anime",
+	"manga",
         "superhentais"
     ],
     "category": "anime"
