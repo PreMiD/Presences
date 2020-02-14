@@ -10,7 +10,10 @@ presence.on("UpdateData", () => {
     };
     presenceData.startTimestamp = browsingStamp;
 
-    if(window.location.pathname.includes("")) {
+    if(window.location.pathname.includes()) {
+        presenceData.details = "Inicio"
+    }
+    if(window.location.pathname.includes("/")) {
         presenceData.details = "Inicio"
     }
     if(window.location.pathname.includes("/nossos-programas")) {
