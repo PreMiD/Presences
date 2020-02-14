@@ -226,29 +226,13 @@ presence.on("UpdateData", async () => {
 
 	// ------------------------------ Perfil de manga hentai ------------------------------ //
 
-	/*else if (document.location.pathname.startsWith("/hentai-manga")) {
-		var name = document.querySelector(".boxBarraInfo h1").textContent;
-		if(document.querySelector("#corpo > div.conteudoBox.box_suport > div.boxSubTitulo > h2") === null){
-            data.details = "Visualizando Hentai - Manga",
-            data.state = name;
-			data.startTimestamp = browsingStamp;
-            presence.setActivity(data);
-        } else {
-			data.details = name,
-            data.state = document.querySelector("#corpo > div.conteudoBox.box_suport > div.boxSubTitulo > h2").innerText;
-			data.startTimestamp = browsingStamp;
-            presence.setActivity(data);
-        }
-		data.startTimestamp = browsingStamp;
-        presence.setActivity(data);
-	}*/
 	else if (document.location.pathname.startsWith("/hentai-manga")) {
         if(document.title.includes("Capítulo", "")){
             var mangaPage = document.querySelector("#corpo > div.conteudoBox.box_suport > div.capBox > div.capPageContent > div.capMenu.capMenuFixedTop > select.capListPage > option.capituloPage.active"),
             mangaName = document.querySelector("#corpo > div:nth-child(4) > div.videoSidebar > div.capaCategory > div > h3 > a"),
             mangaChapter = document.querySelector("#corpo > div.conteudoBox.box_suport > div.boxBarraInfo > h1"),
 			a = mangaChapter.innerText.replace(mangaName.innerText, "")
-			data.details = 'Lendo: ' + mangaName.innerText;
+			data.details = mangaName.innerText;
             data.startTimestamp = browsingStamp;
             data.state = a + " - " + mangaPage.textContent.replace("Pagina", "Página");
             data.startTimestamp = browsingStamp;
@@ -261,30 +245,14 @@ presence.on("UpdateData", async () => {
 		}
 		data.startTimestamp = browsingStamp;
         presence.setActivity(data);
-    }/*
-	else if (document.location.pathname.startsWith("/hq-ero")) {
-		var name = document.querySelector(".boxBarraInfo h1").textContent;
-		if(document.querySelector("#corpo > div.conteudoBox.box_suport > div.boxSubTitulo > h2") === null){
-			data.details = "Visualizando HQ - Ero",
-			data.state = name;
-			data.startTimestamp = browsingStamp;
-			presence.setActivity(data);
-        } else {
-			data.details = name,
-			data.state = document.querySelector("#corpo > div.conteudoBox.box_suport > div.boxSubTitulo > h2").innerText;
-			data.startTimestamp = browsingStamp;
-			presence.setActivity(data);
-        }
-		data.startTimestamp = browsingStamp;
-		presence.setActivity(data);
-	}*/
+    }
 	else if (document.location.pathname.startsWith("/hq-ero")) {
         if(document.title.includes("Capítulo", "")){
             var mangaPage = document.querySelector("#corpo > div.conteudoBox.box_suport > div.capBox > div.capPageContent > div.capMenu.capMenuFixedTop > select.capListPage > option.capituloPage.active"),
             mangaName = document.querySelector("#corpo > div:nth-child(4) > div.videoSidebar > div.capaCategory > div > h3 > a"),
             mangaChapter = document.querySelector("#corpo > div.conteudoBox.box_suport > div.boxBarraInfo > h1"),
 			a = mangaChapter.innerText.replace(mangaName.innerText, "")
-			data.details = 'Lendo: ' + mangaName.innerText;
+			data.details = mangaName.innerText;
             data.startTimestamp = browsingStamp;
             data.state = a + " - " + mangaPage.textContent.replace("Pagina", "Página");
             data.startTimestamp = browsingStamp;
