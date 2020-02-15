@@ -5,7 +5,8 @@
   },
   "service": "Anime Soul",
   "description": {
-    "en": "The Largest Anime Discord Server in the World!"
+    "en": "The Largest Anime Discord Server in the World!",
+    "zh_CN": "世界上最大的动漫Discord服务器！"
   },
   "url": "animesoul.com",
   "version": "1.0.2",

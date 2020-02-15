@@ -18,7 +18,9 @@
 	  "moderation"
    ],
    "description": {
-      "en": "ApertureBot is a fork of b1nzy's rowboat, a utilitarian and administration assistant for Discord."
+      "en": "ApertureBot is a fork of b1nzy's rowboat, a utilitarian and administration assistant for Discord.",
+      "zh_CN": "ApertureBot, 你全新的Discord服务器助理！"
+
    },
    "category": "other"
 }

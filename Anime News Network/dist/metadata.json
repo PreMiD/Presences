@@ -5,7 +5,8 @@
     },
     "service": "Anime News Network",
     "description": {
-        "en": "Anime News Network - The Internet's Most Trusted Anime News Source."
+        "en": "Anime News Network - The Internet's Most Trusted Anime News Source.",
+        "zh_CN": "Anime News Network - 互联网上最受信任的动漫新闻源。"
     },
     "url": "www.animenewsnetwork.com",
     "version": "1.1",
