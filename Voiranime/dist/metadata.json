@@ -12,15 +12,11 @@
     "voiranime.com",
     "www.voiranime.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.0",
   "logo": "https://doomlord.s-ul.eu/FgXXdKsC",
   "thumbnail": "https://doomlord.s-ul.eu/Ld8gJh40",
   "color": "#8919be",
-  "tags": [
-    "embedded-links",
-    "voiranime",
-    "streaming"
-  ],
+  "tags": ["embedded-links", "voiranime", "streaming"],
   "category": "anime",
   "iframe": true
 }

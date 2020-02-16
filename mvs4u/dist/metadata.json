@@ -14,17 +14,11 @@
     "movs4u.tv",
     "www.movs4u.tv"
   ],
-  "version": "1.0.2",
+  "version": "1.0.1",
   "logo": "https://doomlord.s-ul.eu/xc1YBUDW",
   "thumbnail": "https://doomlord.s-ul.eu/nYxeuT3r",
   "color": "#ff7800",
-  "tags": [
-    "embedded-links",
-    "dedicated-server",
-    "movs4u",
-    "mvs4u",
-    "streaming"
-  ],
+  "tags": ["embedded-links", "dedicated-server", "movs4u", "mvs4u", "streaming"],
   "category": "videos",
   "iframe": true
 }
