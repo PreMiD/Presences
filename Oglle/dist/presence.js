@@ -10,7 +10,10 @@ presence.on("UpdateData", () => {
     };
     presenceData.startTimestamp = browsingStamp;
 
-    if(window.location.pathname.includes("")) {
+    if(window.location.pathname.includes()) {
+        presenceData.details = "Inicio"
+    }
+    if(window.location.pathname.includes("/")) {
         presenceData.details = "Inicio"
     }
     if(window.location.pathname.includes("/nossos-programas")) {
@@ -24,6 +27,12 @@ presence.on("UpdateData", () => {
     }
     if(window.location.pathname.includes("/anuncios")) {
         presenceData.details = "Ganhando Dinheiro"
+    }
+    if(window.location.pathname.includes("/admin")) {
+        presenceData.details = "Painel De Administração"
+    }
+    if(window.location.pathname.includes("/wp-admin")) {
+        presenceData.details = "Painel De Administração"
     }
 
     presence.setActivity(presenceData);
