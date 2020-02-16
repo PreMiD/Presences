@@ -12,11 +12,15 @@
     "jetanimes.com",
     "www.jetanimes.com"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://doomlord.s-ul.eu/KrulWglE",
   "thumbnail": "https://doomlord.s-ul.eu/Xt3UeIHd",
   "color": "#144d80",
-  "tags": ["embedded-links", "jetanimes", "streaming"],
+  "tags": [
+    "embedded-links",
+    "jetanimes",
+    "streaming"
+  ],
   "category": "anime",
   "iframe": true
 }
