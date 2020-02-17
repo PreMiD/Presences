@@ -33,7 +33,7 @@ var presence = new Presence({
   mediaKeys: false
 })
 
-var board : any, team : any, team2 : any, teamfinish : any, freeornah : any, freeornah2 : any, card : any, personal : any, personal2 : any, profile : any, board2 : any;
+var board : any, team : any, team2 : any, teamfinish : any, user : any, user2 : any, freeornah : any, freeornah2 : any, freeornah3 : any, card : any, personal : any, personal2 : any, profile : any, board2 : any;
  
 var browsingStamp = Math.floor(Date.now()/1000);
 
@@ -56,16 +56,25 @@ presence.on("UpdateData", async () => {
     personal = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > div:nth-child(3) > a.board-header-btn.board-header-btn-without-icon.board-header-btn-text.js-add-board-to-team.no-edit");
     personal2 = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > div:nth-child(3) > a.board-header-btn.board-header-btn-without-icon.board-header-btn-text.js-add-board-to-team");
 
+    user = document.querySelector("#content > div > div.board-main-content > div.board-header.u-clearfix.js-board-header > div:nth-child(5) > div > div.member.js-member.has-crown.long-initials > span.member-initials");
+    user2 = document.querySelector("#content > div > div > div > div:nth-child(3) > a > span");
+    freeornah3 = document.querySelector("#content > div > div > div > div:nth-child(3) > a > span > span");
+
     if (team !== null) {
       teamfinish = team.innerText.replace(freeornah.innerText, "");
     } else if (team2 !== null) {
       teamfinish = team2.innerText.replace(freeornah2.innerText, "");
+    } else if (user2 !== null) {
+      teamfinish = user2.innerText.replace(freeornah3.innerText, "");
     } else if (personal !== null){
       teamfinish = "Personal"
     } else if (personal2 !== null){
       teamfinish = "Personal"
+    } else if (user !== null) { 
+      teamfinish = user.title;
     } else {
-      teamfinish = "ERROR, UNKNOWN";
+      teamfinish = "ERROR, SEE CONSOLE";
+      PMD_error("Error in catching the board leader/team name, please contact Bas950#0950 on the PreMiD discord. discord.gg/premid");
     }
 
     if (board !== null) {
