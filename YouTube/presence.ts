@@ -174,11 +174,11 @@ presence.on("UpdateData", async () => {
     }
 
     /*
-  If (Hide title etc.) {
-    general.watchingVid
-    general.watchingLive
-  }
-  */
+    If (Hide title etc.) {
+      general.watchingVid
+      general.watchingLive
+    }
+    */
 
     if (presenceData.details == null) {
       presence.setTrayTitle();
