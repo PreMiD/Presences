@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 
     var presenceData: presenceData = {
       details:
-        title.textContent.replace(/\s+/g, "") == ""
+        title == null || title.textContent.replace(/\s+/g, "") == ""
           ? document.querySelector("div.ytp-title-text > a").textContent
           : title.textContent,
       state:
@@ -174,11 +174,11 @@ presence.on("UpdateData", async () => {
     }
 
     /*
-    If (Hide title etc.) {
-      general.watchingVid
-      general.watchingLive
-    }
-    */
+  If (Hide title etc.) {
+    general.watchingVid
+    general.watchingLive
+  }
+  */
 
     if (presenceData.details == null) {
       presence.setTrayTitle();
