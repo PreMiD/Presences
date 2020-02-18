@@ -1,0 +1,18 @@
+{
+    "author": {
+      "name": "Swardoric",
+      "id":371652403071811595
+    },
+    "service": "Roblox Developer Forum",
+    "description": {
+      "en": "A place where Roblox's developer community can share their thoughts about creating games and get updates from staff members.",
+      "fr":"Un endroit où la communauté des développeurs de Roblox peut partager leurs réflexions sur la création de jeux et obtenir des mises à jour des membres du personnel."
+    },
+    "url": "devforum.roblox.com",
+    "version": "0.0.1",
+    "logo": "https://cdn.discordapp.com/attachments/612706620220375041/678894683442642954/RDF_icon.png",
+    "thumbnail": "https://media.discordapp.net/attachments/612706620220375041/678924929491795968/unknown.png?width=1920&height=1080",
+    "color": "#00a1ff",
+    "tags": ["other", "roblox"],
+    "category": "game"
+  }
