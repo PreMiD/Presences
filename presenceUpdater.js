@@ -36,10 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var Octokit = require("@octokit/rest");
+var rest_1 = require("@octokit/rest");
 var axios_1 = require("axios");
 var mongodb_1 = require("mongodb");
-var octokit = new Octokit({
+var octokit = new rest_1.Octokit({
     auth: process.env.GHTOKEN
 }), base = axios_1["default"].create({
     baseURL: "https://raw.githubusercontent.com/PreMiD/Presences/master/"

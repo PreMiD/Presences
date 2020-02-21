@@ -6,7 +6,8 @@
   "service": "4gamers",
   "description": {
     "en": "An integrated company for planning, executing, marketing and broadcasting of e-sports in Taiwan .",
-    "zh-TW": "一家台灣電競規劃、執行、行銷和轉播的整合公司。"
+    "zh_CN": "一家台湾电竞规划、执行、行销和转播的整合公司。",
+    "zh_TW": "一家台灣電競規劃、執行、行銷和轉播的整合公司。"
   },
   "url": "www.4gamers.com.tw",
   "version": "1.0.1",

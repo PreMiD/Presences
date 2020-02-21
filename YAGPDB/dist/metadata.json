@@ -6,7 +6,8 @@
   "service": "YAGPDB",
   "description": {
     "en": "YAGPDB is a multi-purpose Discord Bot.",
-    "nl": "YAGPDB is een multifunctionele Discord Bot."
+    "nl": "YAGPDB is een multifunctionele Discord Bot.",
+    "zh_CN": "YAGPDB 是一个多用途的 Discord 机器人"
   },
   "url": [
     "yagpdb.xyz",

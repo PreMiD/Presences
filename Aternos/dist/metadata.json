@@ -5,7 +5,8 @@
     },
     "service": "Aternos",
     "description": {
-        "en": "Minecraft servers. Free. Forever. Your very own Minecraft server, the only one that stays free forever."
+        "en": "Minecraft servers. Free. Forever. Your very own Minecraft server, the only one that stays free forever.",
+        "zh_CN": "属于您自己的Minecraft服务器，我们永久免费。"
     },
     "url": [
         "aternos.org",

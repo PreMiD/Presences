@@ -5,7 +5,9 @@
   },
   "service": "All The Flavors",
   "description": {
-    "en": "alltheflavors.com is a DIY recipe and flavor information site."
+    "en": "alltheflavors.com is a DIY recipe and flavor information site.",
+    "zh_CN": "alltheflavors.com是一个DIY食谱教程网站。",
+    "zh_TW": "alltheflavors.com是一個DIY食譜教程和調味資訊網站"
   },
   "url": "alltheflavors.com",
   "version": "1.2",
