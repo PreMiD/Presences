@@ -69,7 +69,6 @@ if(window.location.pathname.startsWith("/staff")) {
 } else if(window.location.pathname.startsWith("/countdown") || window.location.pathname.startsWith("/mobile")) {
     presenceData.details = (strack || "Loading...") + " - " + (sartist || "Loading...");
     presenceData.state = (sdj || "Loading...") + " • " + (slisteners + " Listeners"|| "Loading...");
-    delete presenceData.startTimestamp;
     presence.setActivity(presenceData);
 }
 });
