@@ -44,7 +44,7 @@ mongodb_1.connect("mongodb://" + process.env.MONGO_USERNAME + ":" + process.env.
 }).then(run);
 function run(MongoClient) {
     return __awaiter(this, void 0, void 0, function () {
-        var dbPresences, presenceFolders, presences, newPresences, deletedPresences, outdatedPresences;
+        var dbPresences, presenceFolders, presences, newPresences, deletedPresences, outdatedPresences, nP, dP, oP;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, MongoClient.db("PreMiD")
@@ -76,23 +76,23 @@ function run(MongoClient) {
                         return presences.find(function (dp) { return p.name === dp.name && dp.metadata.version !== p.metadata.version; });
                     })
                         .map(function (dP) { return presences.find(function (p) { return p.name === dP.name; }); });
-                    console.log(newPresences.length, deletedPresences.length, outdatedPresences.length);
                     if (newPresences.length > 0)
-                        MongoClient.db("PreMiD")
+                        nP = MongoClient.db("PreMiD")
                             .collection("presences")
                             .insertMany(newPresences);
                     if (deletedPresences.length > 0)
-                        deletedPresences.map(function (p) {
+                        dP = deletedPresences.map(function (p) {
                             MongoClient.db("PreMiD")
                                 .collection("presences")
                                 .deleteOne({ name: p.name });
                         });
                     if (outdatedPresences.length > 0)
-                        outdatedPresences.map(function (p) {
+                        oP = outdatedPresences.map(function (p) {
                             MongoClient.db("PreMiD")
                                 .collection("presences")
                                 .findOneAndUpdate({ name: p.metadata.service }, { $set: p });
                         });
+                    Promise.all([nP, dP, oP]).then(function () { return MongoClient.close(); });
                     return [2 /*return*/];
             }
         });

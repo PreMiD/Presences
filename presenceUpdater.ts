@@ -56,28 +56,26 @@ async function run(MongoClient: MongoClient) {
 			)
 			.map(dP => presences.find(p => p.name === dP.name));
 
-	console.log(
-		newPresences.length,
-		deletedPresences.length,
-		outdatedPresences.length
-	);
+	let nP, dP, oP;
 
 	if (newPresences.length > 0)
-		MongoClient.db("PreMiD")
+		nP = MongoClient.db("PreMiD")
 			.collection("presences")
 			.insertMany(newPresences);
 
 	if (deletedPresences.length > 0)
-		deletedPresences.map(p => {
+		dP = deletedPresences.map(p => {
 			MongoClient.db("PreMiD")
 				.collection("presences")
 				.deleteOne({ name: p.name });
 		});
 
 	if (outdatedPresences.length > 0)
-		outdatedPresences.map(p => {
+		oP = outdatedPresences.map(p => {
 			MongoClient.db("PreMiD")
 				.collection("presences")
 				.findOneAndUpdate({ name: p.metadata.service }, { $set: p });
 		});
+
+	Promise.all([nP, dP, oP]).then(() => MongoClient.close());
 }
