@@ -157,6 +157,7 @@ if(window.location.pathname.startsWith("/staff")) {
         break;
     }
 } else if(window.location.pathname.startsWith("/countdown") || window.location.pathname.startsWith("/mobile")) {
+    if(!slisteners || slisteners === 0) return presenceData.details = "Fetching stats from API", presenceData.state = "Loading...";
     presenceData.details = (strack || "Loading...") + " - " + (sartist || "Loading...");
     presenceData.state = (sdj || "Loading...") + " • " + (slisteners + " Listeners"|| "Loading...");
     presence.setActivity(presenceData);
