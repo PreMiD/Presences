@@ -13,10 +13,11 @@
         "nl": "Bekijk anime online in hoge kwaliteit 1080p met Engelse ondertitels. Ga zitten en ontspan!",
         "tr": "4anime, yüksek kalitede İngilizce altyazılı anime izleyebileceğiniz bir internet sitesidir.",
         "zh_CN": "观看带有字幕的1080p高品质在线动漫。快来放松一下！",
-        "zh_TW": "在線觀看帶有字幕的1080p高畫質動漫。快來放鬆一下！"
+        "zh_TW": "在線觀看帶有字幕的1080p高畫質動漫。快來放鬆一下！",
+        "ga": "Féach ar anime ar líne i gcaighdeán ard 1080p le fotheidil Bhéarla. Suí siar agus scíth a ligean!"
     },
     "url": "4anime.to",
-    "version": "1.2",
+    "version": "1.3",
     "logo": "https://premid.is-inside.me/0Ki4Cf2i.png",
     "thumbnail": "https://i.imgur.com/Tcf3IMX.png",
     "color": "#ff0808",
