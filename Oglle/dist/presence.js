@@ -25,15 +25,28 @@ presence.on("UpdateData", () => {
     if(window.location.pathname.includes("/noticias")) {
         presenceData.details = "Notícias"
     }
+    if(window.location.pathname.includes("/noticia")) {
+        presenceData.details = "Lendo Notícia"
+    }
+    if(window.location.pathname.includes("/trabalhe-conosco")) {
+        presenceData.details = "Trabalhe Conosco"
+    }
+    if(window.location.pathname.includes("/politica-de-privacidade")) {
+        presenceData.details = "Politica de Privacidade"
+    }
     if(window.location.pathname.includes("/anuncios")) {
         presenceData.details = "Ganhando Dinheiro"
     }
     if(window.location.pathname.includes("/admin")) {
         presenceData.details = "Painel De Administração"
     }
+    if(window.location.pathname.includes("/wp-login")) {
+        presenceData.details = "Login Painel"
+    }
     if(window.location.pathname.includes("/wp-admin")) {
         presenceData.details = "Painel De Administração"
     }
+    
 
     presence.setActivity(presenceData);
 });

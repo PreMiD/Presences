@@ -12,15 +12,11 @@
     "okanime.com",
     "www.okanime.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.0",
   "logo": "https://doomlord.s-ul.eu/lUNHPZMs",
   "thumbnail": "https://doomlord.s-ul.eu/OepzczZT",
   "color": "#a5173b",
-  "tags": [
-    "embedded-links",
-    "okanime",
-    "streaming"
-  ],
+  "tags": ["embedded-links", "okanime", "streaming"],
   "category": "anime",
   "iframe": true
 }

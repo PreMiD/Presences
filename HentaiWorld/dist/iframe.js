@@ -10,6 +10,7 @@ iframe.on("UpdateData", () => {
                     duration: hentai.duration,
                     paused: hentai.paused
                 }
-        });}
+            });
+        }
     }
 });
