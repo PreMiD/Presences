@@ -36,149 +36,63 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var rest_1 = require("@octokit/rest");
-var axios_1 = require("axios");
 var mongodb_1 = require("mongodb");
-var octokit = new rest_1.Octokit({
-    auth: process.env.GHTOKEN
-}), base = axios_1["default"].create({
-    baseURL: "https://raw.githubusercontent.com/PreMiD/Presences/master/"
-});
+var fs_1 = require("fs");
 mongodb_1.connect("mongodb://" + process.env.MONGO_USERNAME + ":" + process.env.MONGO_PASSWORD + "@" + process.env.MONGO_IP + ":27017", {
     appname: "PreMiD-PresenceUpdater",
     useUnifiedTopology: true
 }).then(run);
 function run(MongoClient) {
     return __awaiter(this, void 0, void 0, function () {
-        var dbPresences, repoPresences, newPresences, deletedPresences, outdatedPresences, aPP, dPP, uPP;
-        var _this = this;
+        var dbPresences, presenceFolders, presences, newPresences, deletedPresences, outdatedPresences;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, MongoClient.db("PreMiD")
                         .collection("presences")
-                        .find({}, { projection: { _id: false, metadata: true } })
+                        .find()
                         .toArray()];
                 case 1:
-                    dbPresences = (_a.sent()).map(function (p) {
-                        return { service: p.metadata.service, version: p.metadata.version };
+                    dbPresences = _a.sent();
+                    presenceFolders = fs_1.readdirSync("./").filter(function (pF) {
+                        return !pF.startsWith("@") &&
+                            !pF.startsWith(".") &&
+                            !pF.startsWith("node_modules") &&
+                            fs_1.statSync(pF).isDirectory();
                     });
-                    return [4 /*yield*/, octokit.repos
-                            .getContents({ owner: "PreMiD", repo: "Presences", path: "/" })
-                            .then(function (res) {
-                            var presences = res.data.filter(function (f) {
-                                return f.type === "dir" && !f.name.startsWith(".") && f.name !== "@types";
-                            });
-                            return Promise.all(presences.map(function (f) { return __awaiter(_this, void 0, void 0, function () {
-                                var json, res;
-                                return __generator(this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0: return [4 /*yield*/, base(encodeURI(f.name) + "/dist/metadata.json")];
-                                        case 1:
-                                            json = (_a.sent())
-                                                .data;
-                                            res = {
-                                                path: encodeURI(f.name),
-                                                service: json.service,
-                                                version: json.version,
-                                                metadata: json
-                                            };
-                                            return [2 /*return*/, res];
-                                    }
-                                });
-                            }); }));
-                        })];
-                case 2:
-                    repoPresences = _a.sent();
-                    newPresences = repoPresences.filter(function (p) { return !dbPresences.some(function (dP) { return dP.service === p.service; }); }), deletedPresences = dbPresences.filter(function (dP) { return !repoPresences.some(function (p) { return p.service === dP.service; }); }), outdatedPresences = dbPresences
+                    presences = presenceFolders.map(function (pF) {
+                        var metadata = JSON.parse(fs_1.readFileSync(pF + "/dist/metadata.json", "utf-8")), presenceJs = fs_1.readFileSync(pF + "/dist/presence.js", "utf-8");
+                        var resJson = {
+                            name: metadata.service,
+                            url: "https://api.premid.app/v2/presences/" + encodeURI(metadata.service),
+                            metadata: metadata,
+                            presenceJs: presenceJs
+                        };
+                        if (metadata.iframe)
+                            resJson.iframeJs = fs_1.readFileSync(pF + "/dist/iframe.js", "utf-8");
+                        return resJson;
+                    });
+                    newPresences = presences.filter(function (p) { return !dbPresences.some(function (dP) { return dP.name === p.name; }); }), deletedPresences = dbPresences.filter(function (dP) { return !presences.some(function (p) { return p.name === dP.name; }); }), outdatedPresences = dbPresences
                         .filter(function (p) {
-                        return repoPresences.find(function (dp) { return p.service === dp.service && dp.version !== p.version; });
+                        return presences.find(function (dp) { return p.name === dp.name && dp.metadata.version !== p.metadata.version; });
                     })
-                        .map(function (dP) { return repoPresences.find(function (p) { return p.service === dP.service; }); });
-                    aPP = Promise.all(newPresences.map(function (p) { return __awaiter(_this, void 0, void 0, function () {
-                        var iframeJs, presenceJs, res, e_1;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    iframeJs = null;
-                                    _a.label = 1;
-                                case 1:
-                                    _a.trys.push([1, 5, , 6]);
-                                    return [4 /*yield*/, base(p.path + "/dist/presence.js")];
-                                case 2:
-                                    presenceJs = (_a.sent()).data;
-                                    if (!p.metadata.iframe) return [3 /*break*/, 4];
-                                    return [4 /*yield*/, base(p.path + "/dist/iframe.js")];
-                                case 3:
-                                    iframeJs = (_a.sent()).data;
-                                    _a.label = 4;
-                                case 4:
-                                    res = {
-                                        metadata: p.metadata,
-                                        name: p.metadata.service,
-                                        presenceJs: presenceJs,
-                                        url: "https://api.premid.app/v2/presences/" + p.metadata.service + "/"
-                                    };
-                                    if (p.metadata.iframe)
-                                        res.iframeJs = iframeJs;
-                                    return [2 /*return*/, res];
-                                case 5:
-                                    e_1 = _a.sent();
-                                    //TODO SEND MESSAGE TO DISCORD
-                                    return [2 /*return*/, false];
-                                case 6: return [2 /*return*/];
-                            }
-                        });
-                    }); })).then(function (pTA) {
-                        if (pTA.length > 0)
-                            return MongoClient.db("PreMiD")
-                                .collection("presences")
-                                .insertMany(pTA.filter(function (p) { return p; }));
-                    });
-                    dPP = Promise.all(deletedPresences.map(function (p) {
+                        .map(function (dP) { return presences.find(function (p) { return p.name === dP.name; }); });
+                    console.log(newPresences.length, deletedPresences.length, outdatedPresences.length);
+                    if (newPresences.length > 0)
                         MongoClient.db("PreMiD")
                             .collection("presences")
-                            .deleteOne({ name: p.service });
-                    }));
-                    uPP = Promise.all(outdatedPresences.map(function (p) { return __awaiter(_this, void 0, void 0, function () {
-                        var iframeJs, presenceJs, res, e_2;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    iframeJs = null;
-                                    _a.label = 1;
-                                case 1:
-                                    _a.trys.push([1, 6, , 7]);
-                                    return [4 /*yield*/, base(p.path + "/dist/presence.js")];
-                                case 2:
-                                    presenceJs = (_a.sent()).data;
-                                    if (!p.metadata.iframe) return [3 /*break*/, 4];
-                                    return [4 /*yield*/, base(p.path + "/dist/iframe.js")];
-                                case 3:
-                                    iframeJs = (_a.sent()).data;
-                                    _a.label = 4;
-                                case 4:
-                                    res = {
-                                        metadata: p.metadata,
-                                        name: p.metadata.service,
-                                        presenceJs: presenceJs,
-                                        url: "https://api.premid.app/v2/presences/" + p.metadata.service + "/"
-                                    };
-                                    if (p.metadata.iframe)
-                                        res.iframeJs = iframeJs;
-                                    return [4 /*yield*/, MongoClient.db("PreMiD")
-                                            .collection("presences")
-                                            .findOneAndReplace({ name: p.metadata.service }, res)];
-                                case 5:
-                                    _a.sent();
-                                    return [3 /*break*/, 7];
-                                case 6:
-                                    e_2 = _a.sent();
-                                    return [3 /*break*/, 7];
-                                case 7: return [2 /*return*/];
-                            }
+                            .insertMany(newPresences);
+                    if (deletedPresences.length > 0)
+                        deletedPresences.map(function (p) {
+                            MongoClient.db("PreMiD")
+                                .collection("presences")
+                                .deleteOne({ name: p.name });
                         });
-                    }); }));
-                    Promise.all([aPP, uPP, dPP]).then(function () { return MongoClient.close(); });
+                    if (outdatedPresences.length > 0)
+                        outdatedPresences.map(function (p) {
+                            MongoClient.db("PreMiD")
+                                .collection("presences")
+                                .findOneAndUpdate({ name: p.metadata.service }, { $set: p });
+                        });
                     return [2 /*return*/];
             }
         });

@@ -4,12 +4,11 @@
 	"author": "Timeraa",
 	"license": "MPL-2.0",
 	"devDependencies": {
-		"axios": "^0.19.2",
+		"@types/node": "^13.7.4",
 		"mongodb": "^3.5.3",
 		"typescript": "^3.8.2"
 	},
 	"dependencies": {
-		"@octokit/rest": "^17.0.0",
 		"@types/chrome": "^0.0.96",
 		"@types/mongodb": "^3.3.16"
 	}
