@@ -9,27 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var presence = new Presence({
     clientId: "642714892201230336",
     mediaKeys: false
-}), strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user;
-var title;
-var replace;
-var search;
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
         largeImageKey: "time"
     };
+    var clock = document.querySelector("#clock0_bg") || document.querySelector("#time_section > div:nth-child(2) > div");
     if (document.location.hostname == "time.is") {
         if (document.location.pathname == "/") {
             presenceData.details = "My time is:";
-            presenceData.state = document.querySelector("#clock0").textContent;
+            presenceData.state = clock.textContent;
         }
-        else if (document.querySelector("#clock0") !== null) {
+        else if (clock !== null) {
             presenceData.details = document.querySelector("#msgdiv > h1").textContent;
-            presenceData.state = document.querySelector("#clock0").textContent;
+            presenceData.state = clock.textContent;
         }
     }
     if (presenceData.details == null) {
@@ -40,8 +33,3 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     }
 }));
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}
