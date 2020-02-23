@@ -6,7 +6,7 @@
     "service": "Slither.io",
     "description": {
         "en": "Slither.io is a massively multiplayer video game available for iOS, Android, and web browsers, developed by Steve Howse. Players control an avatar resembling a worm, which consumes multicolored pellets, both from other players and ones that naturally spawn on the map in the game, to grow in size.",
-        "ga": "Is cluiche físe il-imreora é Slither.io atá ar fáil do iOS, Android, agus brabhsálaithe gréasáin, arna fhorbairt ag Steve Howse. Rialaíonn Rannpháirtithe avatar atá cosúil le péist, a ídíonn millíní ildaite, ó imreoirí eile agus cinn a sceitheann go nádúrtha ar an léarscáil sa chluiche, le fás i méid."
+        "ga_IE": "Is cluiche físe il-imreora é Slither.io atá ar fáil do iOS, Android, agus brabhsálaithe gréasáin, arna fhorbairt ag Steve Howse. Rialaíonn Rannpháirtithe avatar atá cosúil le péist, a ídíonn millíní ildaite, ó imreoirí eile agus cinn a sceitheann go nádúrtha ar an léarscáil sa chluiche, le fás i méid."
     },
     "url": "slither.io",
     "version": "1.3",
