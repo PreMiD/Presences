@@ -40,12 +40,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       presence.setActivity(presenceData);
 
    } else if (document.location.pathname =="/profiles"){
-    presenceData.details = "Browsing thought";
+    presenceData.details = "Browsing though";
     presenceData.state = "top upvoted profiles...";
     presence.setActivity(presenceData);
   
    } else if (document.location.pathname == "/plans"){
-    presenceData.details = "Browsing thought";
+    presenceData.details = "Browsing though";
     presenceData.state = "Premium plans";
     presence.setActivity(presenceData);
 
