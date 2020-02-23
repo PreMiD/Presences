@@ -30,18 +30,6 @@ if (lastPlaybackState != playback) {
     browsingStamp = Math.floor(Date.now() / 1000);
 }
 
-presence.on("iFrameData", data => {
-    playback =
-        data.iframe_video.duration !== null
-            ? true : false;
-    if (playback) {
-        iFrameVideo = data.iframe_video.iFrameVideo;
-        currentTime = data.iframe_video.currTime;
-        duration = data.iframe_video.dur;
-        paused = data.iframe_video.paused;
-    }
-});
-
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var a = presenceData = '', presenceData = {
         largeImageKey: "logo"            
@@ -66,9 +54,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     presence.setActivity(presenceData);
 
    } else if (document.location.pathname.includes("/p/")){
-    nameofprofile = document.querySelector("#app > div > div.my-auto > div > div.ProfilePage > div > div > div > div > div > div.bg-notdark.rounded-b-lg.px-6.pt-12.pb-4 > span.text-white.font-bold.text-3xl.mr-1").innerText
+    nameofprofile = document.location.pathname.split("/");
     presenceData.details = "Viewing profile";
-    presenceData.state = nameofprofile;
+    presenceData.state = "dsc.bio/" + nameofprofile[2];
     presence.setActivity(presenceData);
    
    }
