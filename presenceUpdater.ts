@@ -31,7 +31,9 @@ async function run(MongoClient: MongoClient) {
 
 		let resJson: any = {
 			name: metadata.service,
-			url: `https://api.premid.app/v2/presences/${encodeURI(metadata.service)}`,
+			url: `https://api.premid.app/v2/presences/${encodeURI(
+				metadata.service
+			)}/`,
 			metadata,
 			presenceJs
 		};
