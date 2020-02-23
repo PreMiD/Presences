@@ -6,7 +6,7 @@
     "service": "Di.FM",
     "description": {
         "en": "Di.FM is an Internet radio broadcaster consisting of over 90 channels dedicated exclusively to electronic music, such as house, trance, techno, drum and bass, and dubstep.",
-        "ga": "Di.FM is craoltóir raidió Idirlín é atá comhdhéanta de níos mó ná 90 cainéal atá tiomnaithe go heisiach do cheol leictreonach, amhail teach, trance, techno, druma agus dord, agus dubstep."
+        "ga_IE": "Di.FM is craoltóir raidió Idirlín é atá comhdhéanta de níos mó ná 90 cainéal atá tiomnaithe go heisiach do cheol leictreonach, amhail teach, trance, techno, druma agus dord, agus dubstep."
     },
     "url": "di.fm",
     "version": "1.1",
