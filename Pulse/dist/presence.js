@@ -18,7 +18,7 @@ function newStats() {
             slisteners = " • " + data.listeners.unique;
         }
     };
-    xhttp.open('GET', 'https://radio.itspulse.net/api/nowplaying/1', true);
+    xhttp.open('GET', 'https://callumdev.wearebounce.net/premidStats2', true);
     xhttp.send();
 }
 
