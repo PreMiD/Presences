@@ -4,7 +4,7 @@ var presence = new Presence({
 });
 var play, artist, track, title;
 var browsingStamp = Math.floor(Date.now() / 1000);
-let sartist, strack, slisteners, sdj;
+let sartist, strack, slisteners, sdj, apiSmallImg;
 setInterval(newStats, 6000)
 newStats();
 function newStats() {
@@ -16,6 +16,7 @@ function newStats() {
             sartist = data.now_playing.song.artist;
             sdj = data.live.is_live ? "DJ " + data.live.streamer_name : "AutoDJ"
             slisteners = " • " + data.listeners.unique;
+            apiSmallImg = data.smallImage
         }
     };
     xhttp.open('GET', 'https://callumdev.wearebounce.net/premidStats2', true);
@@ -36,14 +37,14 @@ presence.on("UpdateData", () => {
                 presenceData.smallImageKey = "pause";
                 presenceData.state = (strack || "Loading...") + (" - " + sartist || "Loading...")
                 presenceData.details = (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners"
-                presenceData.smallImageText = "https://itspulse.net"
+                presenceData.smallImageText = apiSmallImg || "itspulse.net"
                 break;
             case "fa fa-pause":
                 // Music Playing
                 presenceData.smallImageKey = "play";
                 presenceData.state = (strack || "Loading...") + (" - " + sartist || "Loading...")
                 presenceData.details = (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners"
-                presenceData.smallImageText = "https://itspulse.net"
+                presenceData.smallImageText = apiSmallImg || "itspulse.net"
         }
     }
     presence.setActivity(presenceData)
