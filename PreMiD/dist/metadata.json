@@ -3,7 +3,8 @@
     "name": "EGGSY",
     "id": "162969778699501569"
   },
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Timeraa",
       "id": "223238938716798978"
     },
@@ -25,7 +26,9 @@
   "logo": "https://crugg.de/premid/premid2.png",
   "thumbnail": "https://crugg.de/premid/premid3.png",
   "color": "#7289DA",
-  "tags": ["discord"],
+  "tags": [
+    "discord"
+  ],
   "category": "other",
   "button": false
 }
