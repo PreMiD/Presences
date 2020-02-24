@@ -5,10 +5,11 @@
   },
   "service": "anime47",
   "description": {
-    "en": "Anime Vietsub Online"
+    "en": "Anime Vietsub Online",
+    "zh_CN": "在线的越南字幕动漫"
   },
   "url": "anime47.com",
-  "version": "1.0.1.2",
+  "version": "1.0.1.2.1",
   "logo": "https://i.imgur.com/Vmm3C6N.png",
   "thumbnail": "https://i.imgur.com/07GZCVx.png",
   "color": "#ffffff",
