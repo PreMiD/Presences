@@ -40,31 +40,69 @@ lang.set('hu', 'Hungarian');
 lang.set('uk', 'Ukrainian');
 lang.set('eo', 'Esperanto');
 lang.set('nv', 'Navajo');
+lang.set('en', 'English');
 
 presence.on("UpdateData", async () => {
-    var path = document.location.pathname;
 
-    if(path.length > 1 && path.split("/")[2] !== null && path.split("/")[2].length == 2) {
-      var language:string;
-      for (let value of lang.keys()) {
-        if(path.split("/")[2] == value) {
-          language = lang.get(value);
-          break
+    var path1 = document.location.pathname;
+
+    if(path1.split("/")[2] == null) {
+
+	if(document.location.pathname.startsWith("/learn")) {
+        var pageData: presenceData = {
+            details: "Choosing level to learn..",
+            largeImageKey: "logo"
         }
-      }
-      
-      presenceData.details = "Taking a " + language + " lesson";
-      presenceData.state = path.split("/")[3].replace("-", " ");
+        presence.setActivity(pageData);
+    } else if(document.location.pathname.startsWith("/shop")) {
+        var pageData: presenceData = {
+            details: "Browsing shop..",
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+    } else if(document.location.pathname.includes("/dictionary")) {
+	var path = document.location.pathname;
+        var pageData: presenceData = {
+            details: "Using dictionary..",
+            state: "Language: " + document.location.pathname.split("/")[2],
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+    } else if(document.location.pathname.includes("/profile")) {
+	var path = document.location.pathname;
+        var pageData: presenceData = {
+            details: "Browsing profile..",
+            state: "Browsing: " + document.location.pathname.split("/")[2],
+            largeImageKey: "logo"
+        }
+        presence.setActivity(pageData);
+    }  else if (document.location.pathname.includes("/words")) {
+      presenceData.details = "Checking words...";
       presenceData.largeImageKey = "logo";
-
       presence.setActivity(presenceData);
-  
-} else {
+    }  else if(document.location.pathname == "/" || !document.location.pathname) {
 
   var pageData: presenceData = {
-    details: "Browsing..",
-    largeImageKey: "logo"
-  };
-  presence.setActivity(pageData);
+      details: "Browsing..",
+      largeImageKey: "logo"
+    }
+      presence.setActivity(pageData);
   }
+    } else {
+      console.log(path1.split("/")[2]);
+
+      if(path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
+        var language:string;
+        for (let value of lang.keys()) {
+          if(path1.split("/")[2] == value) {
+            language = lang.get(value);
+            break
+          }
+        }
+        presenceData.details = "Taking a lesson";
+        presenceData.state = "Language: " + language;
+        presenceData.largeImageKey = "logo";
+        presence.setActivity(presenceData);
+        }
+      }
 });
