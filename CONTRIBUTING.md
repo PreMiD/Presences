@@ -45,6 +45,7 @@ Before you begin working on your presence, keep the following list in mind.
 - Your presence **MUST** have SFW images and descriptions regardless if it is NSFW or not. If your presence is about an NSFW website, please add the `nsfw` tag to your metadata.
 - Your presence **CANNOT** manipulate local storage on the browser.
 - Your presence may use cookies to store data. All data stored by the presence should be prefixed with `pmd_`.
+- The name of your presence **MUST** be the name of your presence's directory name. For example, a presence named `Google Docs` must have a directory of `/Google Docs/`. (All spaces, periods, commas, and any other special characters must be included.)
 
 ## Modification
 > You MUST change the version in the **metadata** to be a higher value from previous version when making changes to either the **presence.js** or **metadata.json**.
