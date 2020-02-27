@@ -89,7 +89,6 @@ presence.on("UpdateData", async () => {
       presence.setActivity(pageData);
   }
     } else {
-      console.log(path1.split("/")[2]);
 
       if(path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
         var language:string;
