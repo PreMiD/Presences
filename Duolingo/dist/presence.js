@@ -84,20 +84,24 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
 		largeImageKey: "logo"
 	}
 	presence.setActivity(pageData);
+    } else if (document.location.pathname.includes("/words")) {
+        presenceData.details = "Checking words...";
+        presenceData.largeImageKey = "logo";
+        presence.setActivity(presenceData);
+    }
     } else {
-    if (path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
-        var language;
+	if(path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
+	var language;
         for (let value of lang.keys()) {
             if (path1.split("/")[2] == value) {
                 language = lang.get(value);
                 break;
             }
         }
-        presenceData.details = "Taking a " + language + " lesson";
-        presenceData.state = "Language: " + path1.split("/")[2].replace("-", " ");
+        presenceData.details = "Taking a lesson";
+        presenceData.state = "Language: " + language;
         presenceData.largeImageKey = "logo";
         presence.setActivity(presenceData);
-    	    }
-        }
-    }
+		}
+	}
 }));
