@@ -6,7 +6,7 @@ if (document.getElementsByTagName("frame")[1]) {
 }
 
 var presence = new Presence({
-  clientId: "556828545469513730",
+  clientId: "656959119118565406",
   mediaKeys: false
 })
 
@@ -30,7 +30,7 @@ if (!loggedout) {
   // Set Worksheet
   if (document.baseURI.match(/sh=/)) {
     var WSNo = ((document.baseURI.match(/sh=(.?.?)/))[1]).replace(/&|#/g,"");
-    var Worksheet = " - " + (document.getElementsByClassName("text_item ")[1].innerHTML) + "" + WSNo;
+    var Worksheet = "- " + (document.getElementsByClassName("text_item ")[1].innerHTML) + "" + WSNo;
     var Exercise = "...";
   }
   
@@ -38,20 +38,20 @@ if (!loggedout) {
   else if (document.baseURI.match(/(worksheet=|reply)/)) {
     // Set Worksheet
     var WSNo = (((document.querySelector(".sheet") as HTMLAnchorElement).href.match(/sh=(.?.?)/))[1]).replace(/&|#/g,"");
-    var Worksheet = " - " + (document.querySelector(".sheet") as HTMLElement).innerText + " " + WSNo;
+    var Worksheet = "- " + (document.querySelector(".sheet") as HTMLElement).innerText + " " + WSNo;
     var Classname = ((document.querySelectorAll("td.small")[2] as HTMLElement).innerText.split(" ")[0]) + " ";
     
     // Set Exercise
     if (document.querySelector(".main_body .titre")) {
       if (document.querySelector(".main_body .titre") && document.getElementsByTagName("kbd")[1] && !document.querySelector(".answer")) {
         var EXNo = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/)[0];
-        var Exercise = (document.querySelector(".main_body .titre") as HTMLElement).innerText + " - " + EXNo;
+        var Exercise = (((document.querySelector(".sheet") as HTMLAnchorElement).href.match(/#ex(.?.?)/))[1]).replace(/&|#/g,"") + "." + EXNo + ": " + (document.querySelector(".main_body .titre") as HTMLElement).innerText;
       } else var Exercise = (document.querySelector(".main_body .titre") as HTMLElement).innerText // Results page, so no EXNo
     }
     if (document.querySelector(".oeftitle")) {
       if (document.querySelector(".oeftitle") && document.getElementsByTagName("kbd")[1] && !document.querySelector(".oefanswer")) {
         var EXNo = document.getElementsByTagName("kbd")[1].innerText.match(/\d+/)[0];
-        var Exercise = (document.querySelector(".oeftitle") as HTMLElement).innerText + " - " + EXNo;
+        var Exercise = (document.querySelector(".oeftitle") as HTMLElement).innerText + ": " + EXNo;
       } else var Exercise = (document.querySelector(".oeftitle") as HTMLElement).innerText;
     }
     if (EXNo > "1") { // If exercise >1 get last time
@@ -60,6 +60,13 @@ if (!loggedout) {
       var timestamp = 0;
     } else var timestamp = Date.now(); // Else reset time
   }
+
+  // In Exam
+  else if (document.baseURI.match(/(exam=)/)) {
+    var Worksheet = "";
+    var Exercise = (document.querySelector("h1.wims_title font") as HTMLElement).innerText;
+    var timeleft = Date.now() + (parseInt((document.querySelector("p#exam_clock") as HTMLElement).innerText.split(":")[1])*60 + parseInt((document.querySelector("p#exam_clock") as HTMLElement).innerText.split(":")[2]))*1000;
+  }
 }
 
 presence.on("UpdateData", async () => {
@@ -67,6 +74,7 @@ presence.on("UpdateData", async () => {
     details: Classname + Worksheet,
     state: Exercise,
     startTimestamp: timestamp,
+    endTimestamp: timeleft,
     largeImageKey: "wims_lg"
   };
   if (loggedout) {

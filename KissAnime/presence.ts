@@ -19,15 +19,13 @@ if(lastPlaybackState != playback) {
       
 }
 
-var iFrameVideo : HTMLVideoElement, currentTime : any, duration : any, paused : any;
+var iFrameVideo : any, currentTime : any, duration : any, paused : any;
 
 presence.on("iFrameData", data => {
 
   playback = 
-    data.iframe_video.dur !== null
+    data.iframe_video !== null
       ? true : false
-
-  console.log(data.iframe_video);
 
   if(playback) {
 
@@ -42,7 +40,7 @@ presence.on("iFrameData", data => {
 
 presence.on("UpdateData", async () => {
 
-  if (iFrameVideo !== null && !isNaN(duration) && document.location.pathname.includes("/Anime/")) {
+  if (iFrameVideo !== false && !isNaN(duration) && document.location.pathname.includes("/Anime/")) {
 
       var videoTitle : any, episod : any, episode : any, tabTitle : any;
 

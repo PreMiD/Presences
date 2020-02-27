@@ -5,7 +5,8 @@ var presence = new Presence({
 
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
+    browse: "presence.activity.browsing"
   });
 
 var lastPlaybackState = null;
@@ -24,13 +25,9 @@ var iFrameVideo : any, currentTime : any, duration : any, paused : any;
 
 presence.on("iFrameData", data => {
 
-  setInterval(function() {
-
-    playback = 
-    data.iframe_video !== null
-      ? true : false;
-
-  }, 1000);
+  playback = 
+  data.iframe_video !== null
+    ? true : false;
 
   if(playback) {
 
@@ -50,8 +47,8 @@ presence.on("UpdateData", async () => {
     presenceData: presenceData = {
       largeImageKey: "lg"
     }
-    
-    presenceData.details = "Browsing...";
+
+    presenceData.details = (await strings).browse;
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
@@ -61,7 +58,7 @@ presence.on("UpdateData", async () => {
     
   }
 
-  if (iFrameVideo !== null && !isNaN(duration)) {
+  if (iFrameVideo !== false && !isNaN(duration)) {
 
       var videoTitle : any, episod : any, episode : any, epName : any;
 
