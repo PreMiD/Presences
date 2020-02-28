@@ -22,5 +22,6 @@
     "radio",
     "upbeatradio"
   ],
-  "category": "music"
+  "category": "music",
+  "button":false
 }
