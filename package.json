@@ -1,16 +1,15 @@
 {
-  "name": "presences",
-  "version": "2.0.0",
-  "author": "Timeraa",
-  "license": "ISC",
-  "devDependencies": {
-    "axios": "0.19.2",
-    "mongodb": "3.5.2",
-    "typescript": "3.7.5"
-  },
-  "dependencies": {
-    "@octokit/rest": "16.43.1",
-    "@types/chrome": "0.0.93",
-    "@types/mongodb": "3.3.16"
-  }
+	"name": "presences",
+	"version": "2.0.0",
+	"author": "Timeraa",
+	"license": "MPL-2.0",
+	"devDependencies": {
+		"@types/node": "^13.7.6",
+		"mongodb": "^3.5.3",
+		"typescript": "^3.8.2"
+	},
+	"dependencies": {
+		"@types/chrome": "^0.0.96",
+		"@types/mongodb": "^3.3.16"
+	}
 }

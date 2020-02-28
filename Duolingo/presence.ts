@@ -43,8 +43,11 @@ lang.set('nv', 'Navajo');
 lang.set('en', 'English');
 
 presence.on("UpdateData", async () => {
+
     var path1 = document.location.pathname;
-    if(path1.split("/")[2] == null || path1.includes("/profile") || path1.includes("/dictionary")) {
+
+    if(path1.split("/")[2] == null) {
+
 	if(document.location.pathname.startsWith("/learn")) {
         var pageData: presenceData = {
             details: "Choosing level to learn..",
@@ -73,26 +76,32 @@ presence.on("UpdateData", async () => {
             largeImageKey: "logo"
         }
         presence.setActivity(pageData);
-    } else if(document.location.pathname == "/" || !document.location.pathname) {
-	var pageData: presenceData = {
-		details: "Browsing..",
-		largeImageKey: "logo"
-	}
-	presence.setActivity(pageData);
-    } else {
-    if(path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
-      var language:string;
-      for (let value of lang.keys()) {
-        if(path1.split("/")[2] == value) {
-          language = lang.get(value);
-          break
-        }
-      }
-      presenceData.details = "Taking a " + language + " lesson";
-      presenceData.state = "Language: " + path1.split("/")[2].replace("-", " ");
+    }  else if (document.location.pathname.includes("/words")) {
+      presenceData.details = "Checking words...";
       presenceData.largeImageKey = "logo";
       presence.setActivity(presenceData);
-    	}
-      }
+    }  else if(document.location.pathname == "/" || !document.location.pathname) {
+
+  var pageData: presenceData = {
+      details: "Browsing..",
+      largeImageKey: "logo"
     }
+      presence.setActivity(pageData);
+  }
+    } else {
+
+      if(path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
+        var language:string;
+        for (let value of lang.keys()) {
+          if(path1.split("/")[2] == value) {
+            language = lang.get(value);
+            break
+          }
+        }
+        presenceData.details = "Taking a lesson";
+        presenceData.state = "Language: " + language;
+        presenceData.largeImageKey = "logo";
+        presence.setActivity(presenceData);
+        }
+      }
 });

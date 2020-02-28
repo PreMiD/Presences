@@ -166,7 +166,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname.includes("/profil")) {
-        presenceData.details = "Beoachtet ein Profil";
+        presenceData.details = "Beobachtet ein Profil";
         name2 = document.querySelector("#userDetails > div > div > div.col-lg-6.col-md-6.col-xs-12.col-sm-6 > a > h1");
         presenceData.state = name2.innerText;
         presenceData.smallImageKey = "reading";
