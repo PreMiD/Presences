@@ -1,8 +1,12 @@
 {
     "author": {
-        "name": "Callum",
-        "id": "506899274748133376"
+        "name": "Calum",
+        "id": "506899474748133376"
     },
+    "contributors": [{
+        "name": "Jake.#1111",
+        "id": "480407581085532180"
+    }],
     "service": "Google Drive",
     "description": {
         "en": "Google Drive is a file storage and synchronization service developed by Google. Launched on April 24, 2012, Google Drive allows users to store files on their servers, synchronize files across devices, and share files.",
@@ -11,7 +15,7 @@
         "ga_IE": "Is seirbhís stórála agus sioncronaithe é Google Drive a d'fhorbair Google. Le seoladh ar 24 Aibreán, 2012, ceadaíonn Google Drive d'úsáideoirí comhaid a stóráil ar a bhfreastalaithe, comhaid a shioncrónú ar fud na bhfeistí, agus comhaid a roinnt."
     },
     "url": "drive.google.com",
-    "version": "1.1",
+    "version": "1.2",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/d/da/Google_Drive_logo.png",
     "thumbnail": "https://skyose.com/wp-content/uploads/2018/10/1_QmYN-vDIlLqqyLcxRqd-FQ.png",
     "color": "#3aa154",
