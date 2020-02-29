@@ -111,7 +111,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
             break;
 
             //! The web dashboard is currently non functional - This part will be added once it's possible to use it again
-            switch(path[0]) {
+            /*switch(path[0]) {
                 //Manage Guilds
                 //------------------------------------------------------------------------------
                 //TODO: Server-Selection, Player-Status (Play, Pause, Nothing, Current Time)
@@ -134,7 +134,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
                     return;
                 //------------------------------------------------------------------------------
             }
-            break;
+            break;*/
     }
 
     presence.setActivity(presenceData);
@@ -146,7 +146,7 @@ presence.on('MediaKeys', key => {
     return;
 
     //! The web dashboard is currently non functional - This part will be added once it's possible to use it again
-    if(host == 'web.rythmbot.co') {
+    /*if(host == 'web.rythmbot.co') {
         //TODO: Interaction with the web dashboard & validation of the path
         switch(key) {
             //Play / Pause / Stop
@@ -166,6 +166,6 @@ presence.on('MediaKeys', key => {
                 break;
             //------------------------------------------------------------------------------
         }
-    }
+    }*/
 });
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
