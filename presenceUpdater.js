@@ -35,9 +35,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 exports.__esModule = true;
 var mongodb_1 = require("mongodb");
 var fs_1 = require("fs");
+process.env.MONGO_USERNAME = "Timeraa";
+process.env.MONGO_PASSWORD = "T8CQa3u7VqgN";
+process.env.MONGO_IP = "premid.app";
 mongodb_1.connect("mongodb://" + process.env.MONGO_USERNAME + ":" + process.env.MONGO_PASSWORD + "@" + process.env.MONGO_IP + ":27017", {
     appname: "PreMiD-PresenceUpdater",
     useUnifiedTopology: true
@@ -63,7 +73,7 @@ function run(MongoClient) {
                         var metadata = JSON.parse(fs_1.readFileSync(pF + "/dist/metadata.json", "utf-8")), presenceJs = fs_1.readFileSync(pF + "/dist/presence.js", "utf-8");
                         var resJson = {
                             name: metadata.service,
-                            url: "https://api.premid.app/v2/presences/" + encodeURI(metadata.service),
+                            url: "https://api.premid.app/v2/presences/" + encodeURI(metadata.service) + "/",
                             metadata: metadata,
                             presenceJs: presenceJs
                         };
@@ -82,17 +92,17 @@ function run(MongoClient) {
                             .insertMany(newPresences);
                     if (deletedPresences.length > 0)
                         dP = deletedPresences.map(function (p) {
-                            MongoClient.db("PreMiD")
+                            return MongoClient.db("PreMiD")
                                 .collection("presences")
                                 .deleteOne({ name: p.name });
                         });
                     if (outdatedPresences.length > 0)
                         oP = outdatedPresences.map(function (p) {
-                            MongoClient.db("PreMiD")
+                            return MongoClient.db("PreMiD")
                                 .collection("presences")
                                 .findOneAndUpdate({ name: p.metadata.service }, { $set: p });
                         });
-                    Promise.all([nP, dP, oP]).then(function () { return MongoClient.close(); });
+                    Promise.all(__spreadArrays([nP, dP], oP)).then(function () { return MongoClient.close(); });
                     return [2 /*return*/];
             }
         });
