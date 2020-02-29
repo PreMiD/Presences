@@ -105,7 +105,6 @@ presence.on("UpdateData", () =>
         });
       }
     } else if (host == "status.premid.app") {
-      console.log(1)
         let path = window.location.pathname.toLowerCase();
 
       if(path === "/") {
