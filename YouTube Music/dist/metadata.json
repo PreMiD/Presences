@@ -16,32 +16,10 @@
 		"zh_TW": "全新的音樂服務，包含適用於Android，iOS和PC的官方專輯，單曲，視頻，混音，現場表演等。都在這裡！"
 	},
 	"url": "music.youtube.com",
-	"version": "2.3.2",
+	"version": "2.3.3",
 	"logo": "https://rainnews.com/wp-content/uploads/2018/05/youtube-music-logo.png",
 	"thumbnail": "https://i.imgur.com/iQ8MA50.png",
 	"color": "#E40813",
 	"tags": ["audio", "music"],
-	"category": "music",
-	"settings": [
-		{
-			"id": "showBrowsing",
-			"title": "Show browsing status",
-			"icon": "fas fa-cog",
-			"value": true
-		},
-		{
-			"id": "authorFormat",
-			"title": "Author Format",
-			"icon": "fas fa-paragraph",
-			"value": "%album - %author (%year)",
-			"placeholder": "This is a placeholder"
-		},
-		{
-			"id": "lang",
-			"title": "Language",
-			"icon": "fas fa-language",
-			"value": 0,
-			"values": ["English", "German", "Romanian"]
-		}
-	]
+	"category": "music"
 }
