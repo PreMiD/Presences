@@ -9,7 +9,7 @@
 		"typescript": "^3.8.3"
 	},
 	"dependencies": {
-		"@types/chrome": "^0.0.96",
+		"@types/chrome": "^0.0.98",
 		"@types/mongodb": "^3.3.16"
 	}
 }
