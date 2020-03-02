@@ -55,6 +55,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Contact us";
     }
+    else if (document.location.pathname.includes("/misc/style")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Style chooser";
+    }
     else if (document.location.pathname.includes("/threads/")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
@@ -63,31 +67,31 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else if (document.location.pathname.includes("/forums/gaming-forum.7/")) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing the Gaming Forum";
+        presenceData.details = "Gaming Forum";
     }
     else if (document.location.pathname.includes("/forums/gaming-hangouts.8/")) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing the Gaming Hangouts";
+        presenceData.details = "Gaming Hangouts";
     }
     else if (document.location.pathname.includes("/forums/etcetera-forum.9/")) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing the EtcetEra Forum";
+        presenceData.details = "EtcetEra Forum";
     }
     else if (document.location.pathname.includes("/forums/etcetera-hangouts.10/")) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing the EtcetEra Hangouts";
+        presenceData.details = "EtcetEra Hangouts";
     }
     else if (document.location.pathname.includes("/forums/-/latest-threads/")) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing the Latest threads";
+        presenceData.details = "Latest threads";
     }
     else if (document.location.pathname.includes("/trending/")) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing Trending threads";
+        presenceData.details = "Trending threads";
     }
     else if (document.location.pathname.includes("/watched/threads")) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing your Watched threads";
+        presenceData.details = "Watched threads";
     }
     else if (document.location.pathname.includes("/members/")) {
         presenceData.startTimestamp = browsingStamp;
@@ -137,10 +141,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Settings";
         presenceData.state = "Image and media options";
-    }
-    else if (document.location.pathname.includes("/misc/style")) {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Style chooser";
     }
     else if (document.location.pathname.includes("/conversations/")) {
         presenceData.startTimestamp = browsingStamp;
