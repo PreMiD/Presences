@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
 	
     if (document.location.pathname == ("/")) {
         data.details = "Página principal",
-		data.startTimestamp = browsingStamp;
+	data.startTimestamp = browsingStamp;
         presence.setActivity(data);
     }
 	
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 	else if (document.location.pathname.startsWith("/lista-de-mangas")) {
 		data.details = "Lista de mangás",
 		data.state = "Ordenada por: " + document.querySelector("#menu-titulos > li.active > a > span").innerText;
-        data.startTimestamp = browsingStamp;
+                data.startTimestamp = browsingStamp;
 		presence.setActivity(data);
 	}
 	else if (document.location.pathname.startsWith("/lista-de-categorias")) {
@@ -73,16 +73,16 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.startsWith("/manga")) {	
 		if(document.querySelector("#reader-wrapper > div.reader-navigation.clear-fix > div.series-info-container > div.series-info > div.series-title > span.title") === null){
 			data.details = "Visualizando Mangá",
-		    data.state = document.querySelector("#series-data > div.series-info.touchcarousel > span.series-title > h1").innerText;
+		        data.state = document.querySelector("#series-data > div.series-info.touchcarousel > span.series-title > h1").innerText;
 			data.startTimestamp = browsingStamp;
 			presence.setActivity(data);
         } else {
 			data.details = document.querySelector("#reader-wrapper > div.reader-navigation.clear-fix > div.series-info-container > div.series-info > div.series-title > span.title").innerText;
-            data.state = "Capítulo " + document.querySelector("#reader-wrapper > div.reader-navigation.clear-fix > div.chapter-selection-container > div.chapter-selection > span.current-chapter > em").innerText;
+                        data.state = "Capítulo " + document.querySelector("#reader-wrapper > div.reader-navigation.clear-fix > div.chapter-selection-container > div.chapter-selection > span.current-chapter > em").innerText;
 			data.startTimestamp = browsingStamp;
 			presence.setActivity(data);
         }
-		data.startTimestamp = browsingStamp;
+	data.startTimestamp = browsingStamp;
         presence.setActivity(data);
 	}
 });
