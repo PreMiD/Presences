@@ -100,10 +100,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
     }
     else if (document.location.pathname.startsWith("/chapter")) {
-        var title = document.querySelector(".manga-link").textContent;
-        var chapter = document.querySelector(".chapter-title").textContent;
-        data.details = "Reading " + title,
-            data.state = "Chapter: " + chapter;
+		var title = document.querySelector(".manga-link").textContent;
+        var chapter = document.querySelector("head > title").innerText.replace(title + " -", "").replace(" - MangaDex", "");
+        data.details = title,
+            data.state = chapter;
         data.startTimestamp = browsingStamp;
         presence.setActivity(data);
     }

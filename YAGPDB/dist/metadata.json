@@ -6,13 +6,14 @@
   "service": "YAGPDB",
   "description": {
     "en": "YAGPDB is a multi-purpose Discord Bot.",
-    "nl": "YAGPDB is een multifunctionele Discord Bot."
+    "nl": "YAGPDB is een multifunctionele Discord Bot.",
+    "zh_CN": "YAGPDB 是一个多用途的 Discord 机器人"
   },
   "url": [
     "yagpdb.xyz",
     "docs.yagpdb.xyz"
   ],
-  "version": "1.1",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/h7A6CAX.png",
   "thumbnail": "https://i.imgur.com/7vDKD0t.png",
   "color": "#ec7760",

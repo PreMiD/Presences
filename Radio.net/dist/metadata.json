@@ -6,7 +6,8 @@
   "service": "Radio.net",
   "description": {
     "en": "Radio.net brings together more than 30,000 radio stations and podcasts. It has 4 million monthly users worldwide and has been downloaded more than 20 million times.",
-    "de": "Radio.net bietet Zugang zu mehr als 30.000 Sender und Podcasts und hat weltweit 4 Millionen monatliche Nutzer und über 24 Millionen App Downloads."
+    "de": "Radio.net bietet Zugang zu mehr als 30.000 Sender und Podcasts und hat weltweit 4 Millionen monatliche Nutzer und über 24 Millionen App Downloads.",
+    "zh_CN": "Radio.net汇集了30,000多个广播电台和播客。 它在全球每月有400万用户，已被下载超过2000万次。"
   },
   "url": [
       "www.radio.net",
@@ -23,10 +24,15 @@
       "mx.radio.net",
       "co.radio.net"
   ],
-  "version": "2.0",
-  "logo": "https://cdn.discordapp.com/attachments/534018310128402435/634122665942056961/logo.png",
-  "thumbnail": "https://cdn.discordapp.com/attachments/534018310128402435/634122750981701634/thumbnail.png",
+  "version": "2.1",
+  "logo": "https://i.imgur.com/3IBLlpc.png",
+  "thumbnail": "https://i.imgur.com/x2U3j65.png",
   "color": "#67e350",
-  "tags": ["radio", "podcast", "music", "stream"],
+  "tags": [
+    "radio",
+    "podcast",
+    "music",
+    "stream"
+  ],
   "category": "music"
 }

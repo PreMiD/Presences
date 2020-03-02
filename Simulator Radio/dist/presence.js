@@ -2,7 +2,7 @@ var presence = new Presence({
     clientId: "651455140477272065"
 });
 
-setInterval(newStats, 1000);
+setInterval(newStats, 10000);
 newStats();
 
 function newStats() {

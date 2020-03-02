@@ -1,135 +1,87 @@
-import * as Octokit from "@octokit/rest";
-import axios from "axios";
 import { connect, MongoClient } from "mongodb";
+import { readdirSync, statSync, readFileSync } from "fs";
 
-const octokit = new Octokit({
-    auth: process.env.GHTOKEN
-  }),
-  base = axios.create({
-    baseURL: `https://raw.githubusercontent.com/PreMiD/Presences/master/`
-  });
+process.env.MONGO_USERNAME = "Timeraa";
+process.env.MONGO_PASSWORD = "T8CQa3u7VqgN";
+process.env.MONGO_IP = "premid.app";
 
 connect(
-  `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
-  {
-    appname: "PreMiD-PresenceUpdater",
-    useUnifiedTopology: true
-  }
+	`mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
+	{
+		appname: "PreMiD-PresenceUpdater",
+		useUnifiedTopology: true
+	}
 ).then(run);
 
 async function run(MongoClient: MongoClient) {
-  const dbPresences = (await MongoClient.db("PreMiD")
-    .collection("presences")
-    .find({}, { projection: { _id: false, metadata: true } })
-    .toArray()).map(p => {
-    return { service: p.metadata.service, version: p.metadata.version };
-  });
+	const dbPresences = await MongoClient.db("PreMiD")
+		.collection("presences")
+		.find()
+		.toArray();
 
-  const repoPresences = await octokit.repos
-    .getContents({ owner: "PreMiD", repo: "Presences", path: "/" })
-    .then((res: any) => {
-      let presences: Octokit.ReposGetContentsResponseItem[] = res.data.filter(
-        (f: Octokit.ReposGetContentsResponseItem) =>
-          f.type === "dir" && !f.name.startsWith(".") && f.name !== "@types"
-      );
+	const presenceFolders = readdirSync("./").filter(
+		pF =>
+			!pF.startsWith("@") &&
+			!pF.startsWith(".") &&
+			!pF.startsWith("node_modules") &&
+			statSync(pF).isDirectory()
+	);
 
-      return Promise.all(
-        presences.map(async f => {
-          const json = (await base(`${encodeURI(f.name)}/dist/metadata.json`))
-            .data;
+	const presences = presenceFolders.map(pF => {
+		const metadata = JSON.parse(
+				readFileSync(`${pF}/dist/metadata.json`, "utf-8")
+			),
+			presenceJs = readFileSync(`${pF}/dist/presence.js`, "utf-8");
 
-          let res: any = {
-            path: encodeURI(f.name),
-            service: json.service,
-            version: json.version,
-            metadata: json
-          };
+		let resJson: any = {
+			name: metadata.service,
+			url: `https://api.premid.app/v2/presences/${encodeURI(
+				metadata.service
+			)}/`,
+			metadata,
+			presenceJs
+		};
 
-          return res;
-        })
-      );
-    });
+		if (metadata.iframe)
+			resJson.iframeJs = readFileSync(`${pF}/dist/iframe.js`, "utf-8");
 
-  const newPresences = repoPresences.filter(
-      p => !dbPresences.some(dP => dP.service === p.service)
-    ),
-    deletedPresences = dbPresences.filter(
-      dP => !repoPresences.some(p => p.service === dP.service)
-    ),
-    outdatedPresences = dbPresences
-      .filter(p =>
-        repoPresences.find(
-          dp => p.service === dp.service && dp.version !== p.version
-        )
-      )
-      .map(dP => repoPresences.find(p => p.service === dP.service));
+		return resJson;
+	});
 
-  const aPP = Promise.all(
-    newPresences.map(async p => {
-      let iframeJs = null;
+	const newPresences = presences.filter(
+			p => !dbPresences.some(dP => dP.name === p.name)
+		),
+		deletedPresences = dbPresences.filter(
+			dP => !presences.some(p => p.name === dP.name)
+		),
+		outdatedPresences = dbPresences
+			.filter(p =>
+				presences.find(
+					dp => p.name === dp.name && dp.metadata.version !== p.metadata.version
+				)
+			)
+			.map(dP => presences.find(p => p.name === dP.name));
 
-      try {
-        const presenceJs = (await base(`${p.path}/dist/presence.js`)).data;
-        if (p.metadata.iframe)
-          iframeJs = (await base(`${p.path}/dist/iframe.js`)).data;
+	let nP, dP, oP;
 
-        let res: any = {
-          metadata: p.metadata,
-          name: p.metadata.service,
-          presenceJs: presenceJs,
-          url: `https://api.premid.app/v2/presences/${p.metadata.service}/`
-        };
+	if (newPresences.length > 0)
+		nP = MongoClient.db("PreMiD")
+			.collection("presences")
+			.insertMany(newPresences);
 
-        if (p.metadata.iframe) res.iframeJs = iframeJs;
+	if (deletedPresences.length > 0)
+		dP = deletedPresences.map(p =>
+			MongoClient.db("PreMiD")
+				.collection("presences")
+				.deleteOne({ name: p.name })
+		);
 
-        return res;
-      } catch (e) {
-        //TODO SEND MESSAGE TO DISCORD
+	if (outdatedPresences.length > 0)
+		oP = outdatedPresences.map(p =>
+			MongoClient.db("PreMiD")
+				.collection("presences")
+				.findOneAndUpdate({ name: p.metadata.service }, { $set: p })
+		);
 
-        return false;
-      }
-    })
-  ).then(pTA => {
-    if (pTA.length > 0)
-      return MongoClient.db("PreMiD")
-        .collection("presences")
-        .insertMany(pTA.filter(p => p));
-  });
-
-  const dPP = Promise.all(
-    deletedPresences.map(p => {
-      MongoClient.db("PreMiD")
-        .collection("presences")
-        .deleteOne({ name: p.service });
-    })
-  );
-
-  const uPP = Promise.all(
-    outdatedPresences.map(async p => {
-      let iframeJs = null;
-
-      try {
-        const presenceJs = (await base(`${p.path}/dist/presence.js`)).data;
-        if (p.metadata.iframe)
-          iframeJs = (await base(`${p.path}/dist/iframe.js`)).data;
-
-        let res: any = {
-          metadata: p.metadata,
-          name: p.metadata.service,
-          presenceJs: presenceJs,
-          url: `https://api.premid.app/v2/presences/${p.metadata.service}/`
-        };
-
-        if (p.metadata.iframe) res.iframeJs = iframeJs;
-
-        await MongoClient.db("PreMiD")
-          .collection("presences")
-          .findOneAndReplace({ name: p.metadata.service }, res);
-      } catch (e) {
-        //TODO SEND MESSAGE TO DISCORD
-      }
-    })
-  );
-
-  Promise.all([aPP, uPP, dPP]).then(() => MongoClient.close());
+	Promise.all([nP, dP, ...oP]).then(() => MongoClient.close());
 }
