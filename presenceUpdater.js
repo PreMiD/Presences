@@ -45,9 +45,6 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 exports.__esModule = true;
 var mongodb_1 = require("mongodb");
 var fs_1 = require("fs");
-process.env.MONGO_USERNAME = "Timeraa";
-process.env.MONGO_PASSWORD = "T8CQa3u7VqgN";
-process.env.MONGO_IP = "premid.app";
 mongodb_1.connect("mongodb://" + process.env.MONGO_USERNAME + ":" + process.env.MONGO_PASSWORD + "@" + process.env.MONGO_IP + ":27017", {
     appname: "PreMiD-PresenceUpdater",
     useUnifiedTopology: true
