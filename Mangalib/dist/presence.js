@@ -17,8 +17,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let route = document.location.href.split("/").slice(2);
     let presenceData = {
         largeImageKey: "mangalib_large",
-        smallImageKey: "developer_image",
-        smallImageText: "by Mirax"
+        smallImageKey: "mangalib_mini",
+        smallImageText: "mangalib"
 
     };
 
