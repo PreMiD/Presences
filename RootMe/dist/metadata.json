@@ -1,0 +1,28 @@
+{
+    "author": {
+      "name": "EvilBrain",
+      "id": "591702135310385157"
+    },
+    "url": [
+      "root-me.org",
+      "www.root-me.org"
+    ],
+    "description": {
+      "fr": "Root Me est une plateforme permettant à chacun de tester et d'améliorer ses connaissances dans le domaine de la sécurité informatique et du hacking à travers la publication de challenges, de solutions, d'articles.",
+      "en": "Root Me is a platform for everyone to test and improve knowledge in computer security and hacking."
+    },
+    "service": "RootMe",
+    "version": "0.9",
+    "logo": "https://files.evilbrain.ml/presence/root-me/logo.jpg",
+    "thumbnail": "https://i.ytimg.com/vi/XKYkuDy_OlU/maxresdefault.jpg",
+    "color": "#191C22",
+    "tags": [
+      "hack",
+      "hacking",
+      "challenge",
+      "ctf",
+      "capture the flag"
+    ],
+    "category": "other",
+    "iframe": false
+}
