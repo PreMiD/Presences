@@ -1,6 +1,6 @@
 {
     "author": {
-      "name": "EvilBrain",
+      "name": "Deleted 7.12i",
       "id": "591702135310385157"
     },
     "url": [
@@ -12,9 +12,9 @@
       "en": "Root Me is a platform for everyone to test and improve knowledge in computer security and hacking."
     },
     "service": "RootMe",
-    "version": "0.9",
-    "logo": "https://files.evilbrain.ml/presence/root-me/logo.jpg",
-    "thumbnail": "https://i.ytimg.com/vi/XKYkuDy_OlU/maxresdefault.jpg",
+    "version": "1.0",
+    "logo": "https://imgur.com/RqcY9ZL.png",
+    "thumbnail": "https://imgur.com/jD8QJKf.png",
     "color": "#191C22",
     "tags": [
       "hack",
@@ -23,6 +23,5 @@
       "ctf",
       "capture the flag"
     ],
-    "category": "other",
-    "iframe": false
+    "category": "other"
 }
