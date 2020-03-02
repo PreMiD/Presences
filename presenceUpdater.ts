@@ -1,10 +1,6 @@
 import { connect, MongoClient } from "mongodb";
 import { readdirSync, statSync, readFileSync } from "fs";
 
-process.env.MONGO_USERNAME = "Timeraa";
-process.env.MONGO_PASSWORD = "T8CQa3u7VqgN";
-process.env.MONGO_IP = "premid.app";
-
 connect(
 	`mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
 	{
