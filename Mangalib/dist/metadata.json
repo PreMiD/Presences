@@ -3,13 +3,10 @@
     "name": "Mirax",
     "id": "223355525826347018"
   },
-  "contributors": [{
-    "name": "Mirazex",
-    "id": "223355525826347018"
-  }],
   "service": "Mangalib",
   "description": {
-    "ru": "Сайт для прочтения манги на русском языке."
+    "ru": "Сайт для прочтения манги на русском языке.",
+    "en": "Website for reading manga"
   },
   "url": "mangalib.me",
   "version": "1.0.0",
