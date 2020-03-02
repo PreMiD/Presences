@@ -1,3 +1,4 @@
+import "source-map-support/register";
 import { connect, MongoClient } from "mongodb";
 import { readdirSync, statSync, readFileSync } from "fs";
 
@@ -58,7 +59,9 @@ async function run(MongoClient: MongoClient) {
 			)
 			.map(dP => presences.find(p => p.name === dP.name));
 
-	let nP, dP, oP;
+	let nP,
+		dP = [],
+		oP = [];
 
 	if (newPresences.length > 0)
 		nP = MongoClient.db("PreMiD")
@@ -79,5 +82,5 @@ async function run(MongoClient: MongoClient) {
 				.findOneAndUpdate({ name: p.metadata.service }, { $set: p })
 		);
 
-	Promise.all([nP, dP, ...oP]).then(() => MongoClient.close());
+	Promise.all([nP, ...dP, ...oP]).then(() => MongoClient.close());
 }
