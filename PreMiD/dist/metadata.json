@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "ItsMeShisuii",
-    "id": "482142808556306446"
+    "name": "EGGSY",
+    "id": "162969778699501569"
   },
   "contributors": [
     {
@@ -13,23 +13,26 @@
       "id": "293828021134295040"
     },
     {
-      "name": "EGGSY",
-      "id": "162969778699501569"
+      "name": "Callum",
+      "id": "506899274748133376"
     }
   ],
   "service": "PreMiD",
   "description": {
     "en": "PreMiD adds Discord Rich Presence support to a lot of services you use and love.",
+    "ga_IE": "Cuireann PreMiD tacaíocht Discord Rich Presence ar fáil do go leor seirbhísí a úsáideann tú agus a bhfuil grá agat dóibh.",
     "de": "PreMiD ergänzt viele Dienste, die du nutzt und liebst, um die Unterstützung von Discord Rich Presence.",
     "fr": "PreMiD ajoute le support de Discord Rich Presence à de nombreux services que vous utilisez et aimez.",
     "tr": "PreMiD, kullandığınız internet servisleri için Discord profilinize Rich Presence bilgisi ekler."
   },
-  "url": ["premid.app", "docs.premid.app", "beta.premid.app"],
-  "version": "2.0.6",
+  "url": ["premid.app", "docs.premid.app", "beta.premid.app", "status.premid.app"],
+  "version": "2.1.0",
   "logo": "https://crugg.de/premid/premid2.png",
   "thumbnail": "https://crugg.de/premid/premid3.png",
   "color": "#7289DA",
-  "tags": ["discord"],
+  "tags": [
+    "discord"
+  ],
   "category": "other",
   "button": false
 }

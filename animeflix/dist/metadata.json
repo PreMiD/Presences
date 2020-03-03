@@ -5,14 +5,18 @@
   },
   "service": "Animeflix",
   "description": {
-    "en": "Watch Anime Online"
+    "en": "Watch Anime Online",
+    "zh_CN": "观看在线动漫"
   },
   "url": "animeflix.io",
-  "version": "1.0",
+  "version": "1.0.1",
   "logo": "https://puu.sh/EwFAX/363bea3fde.PNG",
   "thumbnail": "https://puu.sh/EwFCC/125489dee5.PNG",
   "color": "#45A8FC",
-  "tags": ["streaming", "animeflix"],
+  "tags": [
+    "streaming",
+    "animeflix"
+  ],
   "category": "anime",
   "iframe": false
 }

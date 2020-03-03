@@ -1,9 +1,6 @@
 // official website
 const JELLYFIN_URL = "jellyfin.org";
 
-// web client document.title value (case sensitive)
-const DOCUMENT_TITLE = "Jellyfin";
-
 // web client app name
 const APP_NAME = "Jellyfin Web";
 
@@ -19,15 +16,63 @@ const PRESENCE_ART_ASSETS = {
     write: "writing"
 }
 
+// generic log style for PMD_[info|error|success] calls
+const GENERIC_LOG_STYLE = "font-weight: 800; padding: 2px 5px; color: white;";
+
+/**
+ * PMD_info - log into the user console info messages
+ *
+ * @param  {string} txt text to log into the console
+ */
+function PMD_info(message) {
+  console.log(
+    "%cPreMiD%cINFO%c " + message,
+    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
+    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #5050ff;",
+    "color: unset;"
+  );
+}
+
+/**
+ * PMD_error - log into the user console error messages
+ *
+ * @param  {string} txt text to log into the console
+ */
+function PMD_error(message) {
+  console.log(
+    "%cPreMiD%cERROR%c " + message,
+    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
+    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #ff5050;",
+    "color: unset;"
+  );
+}
+
+/**
+ * PMD_success - log into the user console success messages
+ *
+ * @param  {string} txt text to log into the console
+ */
+function PMD_success(message) {
+  console.log(
+    "%cPreMiD%cSUCCESS%c " + message,
+    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
+    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
+    "color: unset;"
+  );
+}
+
 let presence;
 
+/**
+ * init - check if the presence should be initialized, if so start doing the magic
+ */
 async function init() {
     let validPage = false;
 
     // jellyfin website
     if (location.host === JELLYFIN_URL) {
         validPage = true;
-        log("Jellyfin website detected");
+        PMD_info("Jellyfin website detected");
 
     // web client
     } else {
@@ -38,7 +83,7 @@ async function init() {
                 // user has accessed in the last 30 seconds, should be enough for slow connections
                 if (Date.now() - new Date(server.DateLastAccessed) < 30 * 1000) {
                     validPage = true;
-                    log("Jellyfin web client detected");
+                    PMD_info("Jellyfin web client detected");
                 }
             }
         } catch (e) {
@@ -65,8 +110,6 @@ let ApiClient;
 
 /**
  * handleOfficialWebsite - handle the presence while the user is in the official website
- *
- * @return {void}
  */
 function handleOfficialWebsite() {
     presenceData.details = "At jellyfin.org";
@@ -109,7 +152,7 @@ async function isJellyfinWebClient() {
 		ApiClient = await presence.getPageletiable("ApiClient");
 	}
 
-	if (typeof ApiClient === "object") {
+	if (ApiClient && typeof ApiClient === "object") {
 		if (ApiClient["_appName"] && ApiClient["_appName"] === APP_NAME) {
 			 return true;
 		}
@@ -120,11 +163,17 @@ async function isJellyfinWebClient() {
 
 /**
  * handleWebClient - handle the presence while the user is in the web client
- *
- * @return {void}  description
  */
 async function handleWebClient() {
-    presenceData.details = "web client";
+    let audioElems = document.body.getElementsByTagName("audio");
+
+    // audio player active
+    if (audioElems.length > 0 && audioElems[0].classList.contains("mediaPlayerAudio") && audioElems[0].src) {
+        handleAudioPlayback();
+        return;
+    }
+
+    presenceData.details = "At web client";
 
     // obtain the path, on the example would return "login.html"
     // https://media.domain.tld/web/index.html#!/login.html?serverid=randomserverid
@@ -170,6 +219,8 @@ async function handleWebClient() {
         case "dlnasettings.html": // dlna settings
         // live tv section
         case "livetvstatus.html": // manage live tv
+        case "livetvtuner.html": // add/manage tv tuner
+        case "livetvguideprovider.html": // add/manage tv guide provider
         case "livetvsettings.html": // live tv settings (dvr)
         // advanced section
         case "networking.html": // networking
@@ -191,6 +242,14 @@ async function handleWebClient() {
             presenceData.state = "Browsing tv series";
             break;
 
+        case "music.html":
+            presenceData.state = "Browsing music";
+            break;
+
+        case "livetv.html":
+            presenceData.state = "Browsing Live TV";
+            break;
+
         case "edititemmetadata.html":
             presenceData.state = "Editing media metadata";
             break;
@@ -200,27 +259,24 @@ async function handleWebClient() {
             break;
 
         case "videoosd.html":
-            handleVideoPlayback();
+            await handleVideoPlayback();
             break;
 
-        // TODO: add music, books, images, music videos, and mix content categories urls
+        case "nowplaying.html":
+            presenceData.state = "Viewing the audio playlist";
+            break;
 
         default:
             if (path.substr(0, 3) === "dlg") {
                 // generic popup do nothing
-            } else {
-                // for testing purposes
-                // presenceData.state = path;
             }
     }
 }
 
 /**
  * handleVideoPlayback - handles the presence when the user is using the video player
- *
- * @return {void}
  */
-function handleVideoPlayback() {
+async function handleVideoPlayback() {
     let videoPlayerPage = document.getElementById("videoOsdPage");
 
     if (videoPlayerPage === null) {
@@ -240,19 +296,57 @@ function handleVideoPlayback() {
     // title on the osdControls
     let osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle");
 
-    // movie
-    if (!headerTitleElem.innerText) {
-        title = `Playing movie: ${osdTitleElem.innerText}`;
-        subtitle = "";
+    // media metadata
+    let mediaInfo;
 
-    // tv show
+    let videoPlayerContainerElem = document.body.getElementsByClassName("videoPlayerContainer")[0];
+
+    // no background image, we're playing live tv
+    if (videoPlayerContainerElem.style.backgroundImage) {
+        // with this url we can obtain the id of the item we are playing back
+        let backgroundImageUrl = videoPlayerContainerElem.style.backgroundImage.split("\"")[1].replace(ApiClient["_serverAddress"], "");
+
+        mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[2]);
+
     } else {
-        title = `Playing tv series: ${headerTitleElem.innerText}`;
-        subtitle = osdTitleElem.innerText;
+        // simulate the expected data
+        mediaInfo = {
+            Type: "TvChannel"
+        };
     }
 
+    // display generic info
+    if (!mediaInfo) {
+        title = "Watching unknown content";
+        subtitle = "No metadata could be obtained";
+
+    } else {
+        switch (mediaInfo.Type) {
+            case "Movie":
+                title = "Watching a Movie";
+                subtitle = osdTitleElem.innerText;
+                break;
+            case "Series":
+                title = `Watching ${headerTitleElem.innerText}`;
+                subtitle = osdTitleElem.innerText;
+                break;
+            case "TvChannel":
+                title = "Watching Live Tv";
+                subtitle = osdTitleElem.innerText;
+                break;
+            default:
+                title = `Watching ${mediaInfo.Type}`;
+                subtitle = mediaInfo.Name;
+        }
+    }
+
+    // watching live tv
+    if (mediaInfo && mediaInfo.Type === "TvChannel") {
+        presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
+        presenceData.smallImageText = "Live TV";
+
     // playing
-    if (!videoPlayerElem.paused) {
+    } else if (!videoPlayerElem.paused) {
         presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
         presenceData.smallImageText = "Playing";
         presenceData.endTimestamp = new Date(Date.now() + (videoPlayerElem.duration - videoPlayerElem.currentTime) * 1000).getTime();
@@ -260,7 +354,7 @@ function handleVideoPlayback() {
     // paused
     } else {
         presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
-        presenceData.smallImageText = `Paused at: ${videoOsdPage.querySelector(".osdPositionText").innerText}`;
+        presenceData.smallImageText = "Paused";
         delete presenceData.endTimestamp;
     }
 
@@ -281,15 +375,29 @@ function getUserId() {
     try {
         return ApiClient["_currentUser"]["Id"];
     } catch (e) {
-        console.log("Got user id from localStorage");
-        // TODO: if multitple servers check the server id from location.hash
-        return JSON.parse(localStorage.getItem("jellyfin_credentials")).Servers[0].UserId;
+        let servers = JSON.parse(localStorage.getItem("jellyfin_credentials")).Servers;
+
+        // server id available on browser location
+        if (location.hash.indexOf("?") > 0) {
+            for (let param of location.hash.split("?")[1].split("&")) {
+                if (param.startsWith("serverId")) {
+                    let serverId = param.split("=")[1];
+
+                    for (let server of servers) {
+                        if (server.Id === serverId) {
+                            return server.UserId;
+                        }
+                    }
+                }
+            }
+        } else {
+            return servers[0].UserId;
+        }
     }
 }
 
 // cache the requested media
 let media = [];
-
 
 /**
  * obtainMediaInfo - obtain the metadata of the given id
@@ -323,18 +431,14 @@ async function obtainMediaInfo(itemId) {
 
 /**
  * handleItemDetails - handles the presence when the user is viewing the details of an item
- *
- * @return {void}
  */
 async function handleItemDetails() {
 	let params = location.hash.split("?")[1].split("&");
 	let id;
 
 	for (let param of params) {
-		let p = param.split("=");
-
-		if (p[0] === "id") {
-			id = p[1];
+		if (param.startsWith("id=")) {
+			id = param.split("=")[1];
 			break;
 		}
 	}
@@ -369,19 +473,52 @@ async function handleItemDetails() {
 				}
 				presenceData.state = `${data.Type} ─ ${description}`;
 				break;
-
-			// TODO: add music, books, images, music videos, and mix content categories urls
+            case "MusicAlbum":
+                presenceData.state = `${data.Type} ─ ${data.RecursiveItemCount} songs`;
+                break;
+            case "MusicArtist":
+            case "TvChannel":
+                presenceData.state = `${data.Type} ─ No further information available`;
+                break;
 			default:
-				// console.log(`${data.Type}:`, data);
 				presenceData.state = "No further information available";
 		}
 	}
 }
 
+
+/**
+ * handleAudioPlayback - handles the presence when the audio player is active
+ */
+function handleAudioPlayback() {
+    // sometimes the buttons are not created fast enough
+    try {
+        let audioElem = document.getElementsByTagName("audio")[0];
+        let infoContainer = document.getElementsByClassName("nowPlayingBar")[0];
+        let buttons = infoContainer.querySelectorAll("button.itemAction");
+
+        presenceData.details = `Listening to: ${(buttons.length >= 1) ? buttons[0].innerText : "unknown title"}`;
+        presenceData.state = `By: ${(buttons.length >= 2) ? buttons[1].innerText : "unknown artist"}`;
+
+        // playing
+        if (!audioElem.paused) {
+            presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+            presenceData.smallImageText = "Playing";
+            presenceData.endTimestamp = new Date(Date.now() + (audioElem.duration - audioElem.currentTime) * 1000).getTime();
+
+            // paused
+        } else {
+            presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+            presenceData.smallImageText = "Paused";
+            delete presenceData.endTimestamp;
+        }
+    } catch (e) {
+        // do nothing
+    }
+}
+
 /**
  * setDefaultsToPresence - set defaul values to the presenceData object
- *
- * @return {void}
  */
 function setDefaultsToPresence() {
     if (presenceData.smallImageKey) {
@@ -400,8 +537,6 @@ function setDefaultsToPresence() {
 
 /**
  * updateData - tick function, this is called several times a second by UpdateData event
- *
- * @return {void}
  */
 async function updateData() {
     setDefaultsToPresence();
@@ -417,13 +552,9 @@ async function updateData() {
 	} else if (await isJellyfinWebClient()) {
         showPresence = true;
         await handleWebClient();
-
-    } else {
-		// clear presence, we are not on a jellyfin web client
-		// cannot clear the presence, as it could clear it while it's active on other tab
-		// presence.clearActivity();
     }
 
+    // force the display of some counter
 	if (!presenceData.startTimestamp || !presenceData.endTimestamp) {
 		presenceData.startTimestamp = Date.now();
 	}
@@ -438,15 +569,4 @@ async function updateData() {
             presence.setActivity(presenceData);
         }
     }
-}
-
-
-/**
- * log - log into the user console prepending [PreMid]
- *
- * @param  {string} txt text to log into the console
- * @return {void}
- */
-function log(txt) {
-    console.log(`[%cPreMid%c] ${txt}`, "color: #7289da", "color: default");
 }

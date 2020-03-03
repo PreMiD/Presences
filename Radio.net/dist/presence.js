@@ -19,6 +19,7 @@ var presence = new Presence({
 var language = navigator.language || navigator.userLanguage;//Browser language
 var lastPath = '';//Last played radio station or podcast
 var browsingStamp = 0;//Timestamp when started listening to a radio station
+
 switch(language) {
     //German
     //---------------------------------------
@@ -47,12 +48,8 @@ switch(language) {
         language = 'en';
         break;
 }
-
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
 presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
-    if(!window.playerCallbacks) {
-        window.updateCommands('playerCallbacks');
-    }
     const host = window.location.hostname.replace('www.', '');
     const path = window.location.pathname.split('/').slice(1);
     var presenceData = {
@@ -153,7 +150,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
                     if(host != 'radio.net') presenceData.state = `auf ${host}`;
                     break;
                 case 'en':
-                    presenceData.smallImageText = 'Rummaging';
+                    presenceData.smallImageText = 'Browsing';
                     presenceData.details = 'Browsing through genres';
                     if(host != 'radio.net') presenceData.state = `on ${host}`;
                     break;
@@ -183,7 +180,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
                     if(host != 'radio.net') presenceData.state = `auf ${host}`;
                     break;
                 case 'en':
-                    presenceData.smallImageText = 'Rummaging';
+                    presenceData.smallImageText = 'Browsing';
                     presenceData.details = 'Browsing through topics';
                     if(host != 'radio.net') presenceData.state = `on ${host}`;
                     break;
@@ -213,7 +210,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
                     presenceData.state = `Ergebnisse: ${document.getElementsByClassName('headline-large')[0].firstElementChild.innerText}`;
                     break;
                 case 'en':
-                    presenceData.smallImageText = 'Rummaging';
+                    presenceData.smallImageText = 'Browsing';
                     presenceData.details = `Country: ${document.getElementsByClassName('headline-large')[0].lastElementChild.innerText}`;
                     presenceData.state = `Results: ${document.getElementsByClassName('headline-large')[0].firstElementChild.innerText}`;
                     break;
@@ -231,7 +228,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
                     presenceData.state = `Ergebnisse: ${document.getElementsByClassName('headline-large')[0].firstElementChild.innerText}`;
                     break;
                 case 'en':
-                    presenceData.smallImageText = 'Rummaging';
+                    presenceData.smallImageText = 'Browsing';
                     presenceData.details = `City: ${document.getElementsByClassName('headline-large')[0].lastElementChild.innerText}`;
                     presenceData.state = `Results: ${document.getElementsByClassName('headline-large')[0].firstElementChild.innerText}`;
                     break;
@@ -249,7 +246,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
                     if(host != 'radio.net') presenceData.state = `auf ${host}`;
                     break;
                 case 'en':
-                    presenceData.smallImageText = 'Rummaging';
+                    presenceData.smallImageText = 'Browsing';
                     presenceData.details = `Browsing through ${document.getElementsByClassName('headline-large')[0].firstElementChild.innerText} local radios`;
                     if(host != 'radio.net') presenceData.state = `on ${host}`;
                     break;
@@ -267,7 +264,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
                     if(host != 'radio.net') presenceData.state = `auf ${host}`;
                     break;
                 case 'en':
-                    presenceData.smallImageText = 'Rummaging';
+                    presenceData.smallImageText = 'Browsing';
                     presenceData.details = `Top 100 radios`;
                     if(host != 'radio.net') presenceData.state = `on ${host}`;
                     break;

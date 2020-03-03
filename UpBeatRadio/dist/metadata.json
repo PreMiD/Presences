@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "thatdevjon",
-    "id": "570656255610191874"
+    "name": "Dominik",
+    "id": "594491170248458250"
   },
   "service": "UpBeatRadio",
   "description": {
@@ -9,10 +9,12 @@
   },
   "url": [
     "upbeatradio.net",
-    "www.upbeatradio.net"
+    "www.upbeatradio.net",
+    "upbeat.pw",
+    "www.upbeat.pw"
   ],
-  "version": "1.2",
-  "logo": "https://upbeatradio.net/v3/_images_/_favicon_/apple-icon-120x120.png",
+  "version": "2.0.1",
+  "logo": "https://i.imgur.com/t3vwqSJ.pngg",
   "thumbnail": "https://i.imgur.com/QK1qN8G.jpg",
   "color": "#212121",
   "tags": [
@@ -21,5 +23,5 @@
     "upbeatradio"
   ],
   "category": "music",
-  "iframe": false
+  "button":false
 }

@@ -8,11 +8,15 @@
     "en": "Ecosia uses the ad revenue from your searches to plant trees where they are needed the most.",
     "de": "Ecosia verwendet die Werbeeinnahmen deiner Suchanfragen, um dort Bäume zu pflanzen, wo sie am meisten gebraucht werden."
   },
-  "url": ["www.ecosia.org"],
-  "version": "1",
+  "url": [
+    "www.ecosia.org"
+  ],
+  "version": "1.1",
   "logo": "https://crugg.de/premid/ecosialogo.png",
   "thumbnail": "https://crugg.de/premid/ecosiabanner.png",
   "color": "#44AEBA",
-  "tags": ["search"],
+  "tags": [
+    "search"
+  ],
   "category": "other"
 }
