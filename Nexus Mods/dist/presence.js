@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-    function rejected(value) { try { step(generator['throw'](value)); } catch (e) { reject(e); } }
-    function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
 var presence = new Presence({
   clientId: '683438933841018928',
   mediaKeys: false
@@ -14,7 +5,7 @@ var presence = new Presence({
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
+presence.on('UpdateData', () => {
   var subdomain = window.location.host.split('.')[0];
   var path = window.location.pathname.split('/').slice(1);
   var presenceData = {
@@ -96,7 +87,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
       }
 
       // www. entry point
-      if (path.length > 0 && (yield isValidGame(path[0]))) {
+      if (path.length > 0 && isValidGame(path[0])) {
         // Games
         if (path.length > 1 && path[1] !== '') {
           switch (path[1]) {
@@ -192,7 +183,7 @@ presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
   } else {
     presence.setActivity(presenceData);
   }
-}));
+});
 
 /**
  * Since Nexus Mods is relatively RESTful, we can easily re-use some basic logic to

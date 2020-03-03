@@ -21,6 +21,6 @@
     "modmanager",
     "nexusmodmanager"
   ],
-  "category": "game",
+  "category": "games",
   "regExp": "(([a-z0-9]+)[.])?nexusmods[.]com([\/]([a-z0-9]+))?"
 }
