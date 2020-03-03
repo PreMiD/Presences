@@ -15,12 +15,7 @@ let startDate = Math.floor(Date.now() / 1000)
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let route = document.location.href.split("/").slice(2);
-    let presenceData = {
-        largeImageKey: "mangalib_large",
-        smallImageKey: "mangalib_mini",
-        smallImageText: "mangalib"
-
-    };
+    let presenceData = { largeImageKey: "mangalib_large", smallImageText: "mangalib" };
 
     presenceData.startTimestamp = startDate
     if (route.length === 2 && route[1] === "?section=all-updates") {
