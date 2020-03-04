@@ -1,0 +1,21 @@
+{
+    "author": {
+        "name": "Jake.#1111",
+        "id": "480407581085532180"
+    },
+    "service": "Repl.it",
+    "description": {
+        "en": "Repl.it is a San Francisco based start-up and an online IDE (integrated development environment) supporting 40 programming languages, including Python, Lua, JavaScript, Julia, C++, C++11, C, C#, HTML/CSS/JS, Python with turtle and LOLCODE. Repl.it allows users to write code and build apps using a browser, without having to install any software on their devices."
+    },
+    "url": "repl.it",
+    "version": "1.0",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Repl.it_logo.svg/512px-Repl.it_logo.svg.png",
+    "thumbnail": "https://pasteboard.co/IXzehgY.png",
+    "color": "grey",
+    "tags": [
+        "developing",
+        "hosting",
+        "coding"
+    ],
+    "category": "other"
+}
