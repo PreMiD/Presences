@@ -52,4 +52,4 @@ presence.on("UpdateData", () => {
     else {
         presence.setActivity(presenceData);
     }
-}));
+});
