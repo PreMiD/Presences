@@ -85,11 +85,10 @@ presence.on('UpdateData', async () => {
     if (header !== undefined) {
       data.details = 'Viewing';
       data.state = header;
-      console.log('changed');
     }
 
     const profile = getElement(
-      '.page_wrapper.show > #profile_name_title > .userName'
+      '.page_wrapper.show > .page_content > #profile_name_title > .userName'
     );
     if (profile !== undefined) {
       data.details = 'Viewing Profile';
@@ -107,8 +106,6 @@ presence.on('UpdateData', async () => {
     }
   }
 
-  console.debug(path, query);
-  console.debug(data);
   if (data.details !== undefined) {
     if (data.details.match('(Browsing|Viewing)')) {
       data.smallImageKey = 'reading';
