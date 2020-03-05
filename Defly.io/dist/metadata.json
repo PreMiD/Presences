@@ -8,9 +8,9 @@
     "en": "Fly your helicopter and shoot at enemies. Build walls to protect yourself and conquer as much territory as possible."
   },
   "service": "Defly.io",
-  "logo": "https://defly.io/favicon/android-icon-192x192.png",
-  "thumbnail": "https://defly.io/favicon/android-icon-192x192.png",
+  "logo": "https://i.imgur.com/vTAH4DD.png",
+  "thumbnail": "https://i.imgur.com/vTAH4DD.png",
   "color": "#3D5DFF",
-  "tags": [],
+  "tags": ["game", "defly", "multiplayer", "defly.io", "browser game"],
   "category": "games"
 }
