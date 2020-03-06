@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "plex"
   };
-  
+
   language = window.navigator.language; //Make this change-able with presence settings
   //en = English
   //nl = Nederlands
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector("#plex > div:nth-child(7) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) > span > a") || document.querySelector("#plex > div:nth-child(7) > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > div > div > span > a") || document.querySelector("#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH.AudioVideoFullPlayer-hideControls-3B1pWE > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span > a") || document.querySelector("#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span > a") || document.querySelector("#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span > a") || document.querySelector("#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH.AudioVideoFullPlayer-hideControls-3B1pWE > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div.AudioVideoInfoBar-container-2ewFys > div:nth-child(1)") || document.querySelector("#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH.AudioVideoFullPlayer-hideControls-3B1pWE > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span") || document.querySelector("#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span") || document.querySelector("#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div:nth-child(2) > div > div > div.PlayerControls-controls-e59abb.PlayerControls-hasLandscapePoster-23Gat5 > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div.PlayerControlsMetadata-container-2wqMfv > span")
       presenceData.details = user.textContent;
       presenceData.state = title.textContent;
-    
+
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
@@ -132,12 +132,12 @@ function getTranslation(stringName: String) {
         break;
         case "de":
           return "Ist auf der Startseite";
-        break;  
+        break;
         default:
-          return "Viewing home page";  
+          return "Viewing home page";
           break;
       }
-    break; 
+    break;
     case "News":
       switch (language) {
         case "nl":
@@ -148,7 +148,7 @@ function getTranslation(stringName: String) {
         break;
         default:
           return "Browsing news";
-        break;  
+        break;
       }
     break;
     case "WebShows":
@@ -161,7 +161,7 @@ function getTranslation(stringName: String) {
         break;
         default:
           return "Browsing shows";
-        break;  
+        break;
       }
     break;
     case "Podcasts":
@@ -174,7 +174,7 @@ function getTranslation(stringName: String) {
         break;
         default:
           return "Browsing podcasts";
-        break;  
+        break;
       }
     break;
     case "Music":
@@ -187,7 +187,7 @@ function getTranslation(stringName: String) {
         break;
         default:
           return "Browsing music";
-        break;  
+        break;
       }
     break;
     case "Search":
@@ -200,7 +200,7 @@ function getTranslation(stringName: String) {
         break;
         default:
           return "Searching for:";
-        break;  
+        break;
       }
     break;
     case "Library":
@@ -213,7 +213,7 @@ function getTranslation(stringName: String) {
         break;
         default:
           return "Viewing library:";
-        break;  
+        break;
       }
     break;
     case "Collection":
@@ -226,7 +226,7 @@ function getTranslation(stringName: String) {
         break;
         default:
           return "Viewing collection:";
-        break;  
+        break;
       }
     break;
     case "Playlist":
@@ -239,12 +239,12 @@ function getTranslation(stringName: String) {
         break;
         default:
           return "Viewing playlist:";
-        break;  
+        break;
       }
     break;
     default:
       PMD_error("Unknown StringName please contact the Developer of this presence!\nYou can contact him/her in the PreMiD Discord (discord.gg/premid)");
       return "Unknown stringName";
-    break;  
+    break;
   }
 }
