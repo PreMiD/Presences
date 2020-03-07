@@ -10,17 +10,12 @@ presence.on('UpdateData', () => {
         Path = document.location.pathname,
         Details = {};
     presenceData.startTimestamp = Math.floor(Date.now() / 1000)
-    if (Path.startsWith('/')) {
-        if (Path.length > 1) {
-            presenceData.details = `Viewing a font's page :`
-            presenceData.state = `${document.querySelector('#width > div > div > div > div:nth-child(9) > h1').textContent} ( ${document.querySelector('#width > div > div > div > div:nth-child(9) > div.lv2right > span').textContent} )`
-        } else {
+    if (Path =='/') {
             Details.Fonts = {
                 total: document.querySelector('#width > div.minwidth > div > div > div:nth-child(9) > div:nth-child(3) > div.dfsmall > strong').textContent
             }
             presenceData.details = `Browsing the main page :`
             presenceData.state = `${Details.Fonts.total}`
-        }
     } else if (Path.startsWith('/themes.php')) {
         Details.Themes = {
             total: document.querySelector('#menuthemespp > table > tbody > tr').children.length
@@ -70,6 +65,10 @@ presence.on('UpdateData', () => {
         presenceData.details = `Logging into their account `
     } else if (Path.startsWith('/register.php')) {
         presenceData.details = `Registering a new account  `
+    } else if (Path.endsWith('.font')) {
+        presenceData.details = `Viewing a font's page :`
+        presenceData.state = `${document.querySelector('#width > div > div > div > div:nth-child(9) > h1').textContent} ( ${document.querySelector('#width > div > div > div > div:nth-child(9) > div.lv2right > span').textContent} )` 
     }
+
     presence.setActivity(presenceData);
 });
