@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "Livida",
+      "id": "559160676485169161"
+    },
+    "service": "Livida Blog",
+    "description": {
+      "en": "The latest news and information from Livida, an online community with a focus of mainly gaming."
+    },
+    "url": "blog.livida.net",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/o1KuRqv.png",
+    "thumbnail": "https://i.imgur.com/nFvYPjX.png",
+    "color": "#45a5fc",
+    "tags": [
+      "music",
+      "radio",
+      "community"
+    ],
+    "category": "music"
+  }
