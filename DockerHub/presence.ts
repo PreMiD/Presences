@@ -17,101 +17,111 @@ var match: any
 presence.on("UpdateData", async () => {
 
   let presenceData: presenceData = {
-    details: "TODO",
+    details: "TODO", // Left here as a clue to find missing possible states
     largeImageKey: "logo"
   };
 
-  language = window.navigator.language; //Make this change-able with presence settings
-  //en = English
-  //Language list can be found here: https://api.premid.app/v2/langFile/list
-  if (document.location.hostname == "hub.docker.com") {
+  language = window.navigator.language;
+
+  if (document.location.host == "hub.docker.com") {
     presenceData.startTimestamp = browsingStamp;
 
-    if(document.URL.match(/hub.docker.com\/(repositories)?$/)) {
+    if(document.location.pathname.match(/^\/(repositories)?$/)) {
       presenceData.details = "Bowsing own repositories"
 
-    } else if(document.URL.match(/hub.docker.com\/settings/)) {
+    } else if(document.location.pathname.match(/^\/settings/)) {
       presenceData.details = `On settings page`
 
-    } else if(document.URL.match(/search\?.*/)) {
-      var type: any = document.URL.match(`${searchItems['type']}=([^&]+)`)
-      type = type && decodeURIComponent(type[1]) || `image`
+    } else if(document.location.pathname.match(/^\/search/)) {
+      var match: Array<string> = document.location.search.match(`${searchItems['type']}=([^&]+)`)
+      var type: string = match && decodeURIComponent(match[1]) || `image`
 
-      var edition: any = document.URL.match(`${searchItems['edition']}=([^&]+)`)
-      edition = edition && decodeURIComponent(edition[1]) || ``
+      match = document.location.search.match(`${searchItems['edition']}=([^&]+)`)
+      var edition: string = match && decodeURIComponent(match[1]) || ``
 
-      var query: any = document.URL.match(`${searchItems['query']}=([^&]+)`)
-      query = query && decodeURIComponent(query[1]) || null
+      match = document.location.search.match(`${searchItems['query']}=([^&]+)`)
+      var query: string = match && decodeURIComponent(match[1]) || null
 
-      var os: any = document.URL.match(`${searchItems['os']}=([^&]+)`)
-      os = os && decodeURIComponent(os[1]) || null
+      match = document.location.search.match(`${searchItems['os']}=([^&]+)`)
+      var os: string = match && decodeURIComponent(match[1]) || null
 
-      var arch: any = document.URL.match(`${searchItems['arch']}=([^&]+)`)
-      arch = arch && decodeURIComponent(arch[1]) || null
+      match = document.location.search.match(`${searchItems['arch']}=([^&]+)`)
+      arch = match && decodeURIComponent(match[1]) || null
 
       presenceData.details = `Searching for${(query ? `: ${query}` : ` ${edition} ${type}s`)}`
 
+      if(query && edition) presenceData.state = `${capitalize(edition)} ${type}s`
       if(os || arch) presenceData.state = `${os ? `${capitalize(os)} ` : ``}${arch ? arch.toUpperCase() : ""}`
 
-    } else if(document.URL.match(/\/orgs$/)) {
+    } else if(document.location.pathname.match(/^\/orgs$/)) {
       presenceData.details = `Browsing organizations`
-    } else if(match = document.URL.match(/\/orgs\/([^\/]+)(?:\/([^\/]+))?/)) {
+
+    } else if(match = document.location.pathname.match(/^\/orgs\/([^\/]+)(?:\/([^\/]+))?/)) {
       var name: string = match[1]
       var tab: string = match[2]
       tab = tab || `members`
       presenceData.details = `On org ${tab ? `${tab} ` : ``}page`
       presenceData.state = `${name}`
 
-    } else if(match = document.URL.match(/\/_\/([^?]+)(?:\?tab=(.+))?/)) {
+    } else if(match = document.location.pathname.match(/^\/_\/([^?]+)/)) {
       var name: string = match[1]
-      var tab: string = match[2]
+
+      match = document.location.search.match(/\?tab=(\d+)/)
+      var tab: string = match && match[1] || null
 
       presenceData.details = `On image ${tab ? `${tab} ` : ``}page`
       presenceData.state = `${name}`
 
-    } else if(match = document.URL.match(/\/r\/([^\/]+)\/([^\/]+)(?:(?:\/([^?]+))(?:\?page=(.+))?)?/)) {
-      var owner: string = match[1], name: string = match[2], tab: string = match[3], page: string = match[4]
+    } else if(match = document.location.pathname.match(/^\/r\/([^\/]+)\/([^\/]+)(?:\/([^?]+))?/)) {
+      var owner: string = match[1], name: string = match[2], tab: string = match[3]
+
+      match = document.location.search.match(/(?:\?page=(\d+))?/)
+      var page: string = match && match[1] || null
 
       presenceData.details = `On image ${tab ? tab : ``} page${page ? ` ${page}` : ``}`
       presenceData.state = `${owner}/${name}`
 
-    } else if(match = document.URL.match(/\/layers\/([^\/]+)\/([^\/]+)\/([^\/]+)/)) {
-      var owner: string = match[1], name: string = match[2], tag: string = match[3], arch: any = null
-      arch = document.querySelector('.Select-value').textContent
+    } else if(match = document.location.pathname.match(/^\/layers\/([^\/]+)\/([^\/]+)\/([^\/]+)/)) {
+      var owner: string = match[1], name: string = match[2], tag: string = match[3]
+
+      var selector: Node = document.querySelector('.Select-value') || null
+      var arch: string = selector && selector.textContent || null
 
       presenceData.details = `On image history`
-      presenceData.state = `${owner}/${name}:${tag} ${arch}`
+      presenceData.state = `${owner}/${name}:${tag} ${(arch ? arch : ``)}`
 
-    } else if(match = document.URL.match(/\/u\/([^\/]+)(?:\/([^\/]+))?/)) {
+    } else if(match = document.location.pathname.match(/^\/u\/([^\/]+)(?:\/([^\/]+))?/)) {
       var user: string = match[1]
       var tab: string = match[2] || `repositories`
       presenceData.details = `On profile ${tab} page`
       presenceData.state = user
 
-    } else if(document.URL.match(/repository\/create/)) {
+    } else if(document.location.pathname.match(/^\/repository\/create/)) {
       presenceData.details = `Creating repository`
 
-    } else if(match = document.URL.match(/repository(?:\/([^\/?]+))+(?:\?page=(\d+))?/)) {
+    } else if(match = document.location.pathname.match(/^\/repository(?:\/([^\/?]+))+/)) {
       presenceData.details = `On personal repository`
       var tab: string = match[1]
-      var page: string = match[3] || null
-      var selector: any = document.querySelector('#contextNav > div > div.styles__breadcrumbs___18Yr8 > div:nth-child(2) > a')
+      match = document.location.search.match(/page=(\d+)/)
+      var page: string = match && match[1] || null
+      var selector: Node = document.querySelector('#contextNav > div > div.styles__breadcrumbs___18Yr8 > div:nth-child(2) > a')
       var breadcrum: string = selector && selector.textContent || null
       if(breadcrum && breadcrum.match(tab)) {
         tab = `general`
-      } else if(document.URL.match(/\/builds\//)) {
+      } else if(document.location.pathname.match(/\/builds\//)) {
         tab = `builds`
       }
       presenceData.state = `${capitalize(tab)}${page ? ` ${page}` : ``}`
 
-    } else if(match = document.URL.match(/support\/(?:(doc)?(contact)?)/)) {
+    } else if(match = document.location.pathname.match(/^\/support\/(?:(doc)?(contact)?)/)) {
       presenceData.details = `Reading FAQ`
       if(match[1]) {
-        presenceData.state = document.querySelector('#gatsby-focus-wrapper > div > main > div > div.MuiCardHeader-root > div > span').textContent
+        var selector: Node = document.querySelector('#gatsby-focus-wrapper > div > main > div > div.MuiCardHeader-root > div > span') || null
+        presenceData.state = selector && selector.textContent || null
       } else if(match[2]) {
         presenceData.details = `Contact page`
       }
-    } else if(document.URL.match(/hub.docker.com\/billing/)) {
+    } else if(document.location.pathname.match(/^\/billing/)) {
       presenceData.details = `Checking billing info`
     }
   }
