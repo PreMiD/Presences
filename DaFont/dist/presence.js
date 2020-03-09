@@ -5,11 +5,12 @@ const presence = new Presence({
 
 presence.on('UpdateData', () => {
     const presenceData = {
-            largeImageKey: "dafont"
+            largeImageKey: "dafont",
+            startTimestamp: Math.floor(Date.now() / 1000)
         },
         Path = document.location.pathname,
         Details = {};
-    presenceData.startTimestamp = Math.floor(Date.now() / 1000)
+    
     if (Path =='/') {
             Details.Fonts = {
                 total: document.querySelector('#width > div.minwidth > div > div > div:nth-child(9) > div:nth-child(3) > div.dfsmall > strong').textContent
