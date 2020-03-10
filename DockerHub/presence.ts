@@ -3,28 +3,31 @@ var presence = new Presence({
   mediaKeys: false
 })
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now()/1000)
 var searchItems = {
-  "query": "q",
-  "type": "type",
-  "edition": "offering",
   "arch": "architecture",
-  "os": "operating_system"
+  "edition": "offering",
+  "os": "operating_system",
+  "page": "page",
+  "query": "q",
+  "tab": "tab",
+  "type": "type"
 }
-var language: any
-var match: any
+
+var language: string
+var match: Array<string>
 
 presence.on("UpdateData", async () => {
 
   let presenceData: presenceData = {
     details: "TODO", // Left here as a clue to find missing possible states
     largeImageKey: "logo"
-  };
+  }
 
-  language = window.navigator.language;
+  language = window.navigator.language
 
   if (document.location.host == "hub.docker.com") {
-    presenceData.startTimestamp = browsingStamp;
+    presenceData.startTimestamp = browsingStamp
 
     if(document.location.pathname.match(/^\/(repositories)?$/)) {
       presenceData.details = "Bowsing own repositories"
@@ -33,20 +36,22 @@ presence.on("UpdateData", async () => {
       presenceData.details = `On settings page`
 
     } else if(document.location.pathname.match(/^\/search/)) {
-      var match: Array<string> = document.location.search.match(`${searchItems['type']}=([^&]+)`)
-      var type: string = match && decodeURIComponent(match[1]) || `image`
+      var url: URL = new URL(document.location.href)
+      var params: URLSearchParams = url.searchParams
 
-      match = document.location.search.match(`${searchItems['edition']}=([^&]+)`)
-      var edition: string = match && decodeURIComponent(match[1]) || ``
+      var query: string = params.get(searchItems.query)
 
-      match = document.location.search.match(`${searchItems['query']}=([^&]+)`)
-      var query: string = match && decodeURIComponent(match[1]) || null
+      var type: string = params.get(searchItems.type)
+      type = type && decodeURIComponent(type) || `image`
 
-      match = document.location.search.match(`${searchItems['os']}=([^&]+)`)
-      var os: string = match && decodeURIComponent(match[1]) || null
+      var edition: string = params.get(searchItems.type)
+      edition = edition && decodeURIComponent(edition) || ``
 
-      match = document.location.search.match(`${searchItems['arch']}=([^&]+)`)
-      arch = match && decodeURIComponent(match[1]) || null
+      var os: string = params.get(searchItems.os)
+      os = os && decodeURIComponent(os) || null
+
+      var arch: string = params.get(searchItems.arch)
+      arch = arch && decodeURIComponent(arch) || null
 
       presenceData.details = `Searching for${(query ? `: ${query}` : ` ${edition} ${type}s`)}`
 
@@ -64,19 +69,25 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${name}`
 
     } else if(match = document.location.pathname.match(/^\/_\/([^?]+)/)) {
+      var url: URL = new URL(document.location.href)
+      var params: URLSearchParams = url.searchParams
+
       var name: string = match[1]
 
-      match = document.location.search.match(/\?tab=(\d+)/)
-      var tab: string = match && match[1] || null
+      var tab: string = params.get(searchItems.tab)
 
       presenceData.details = `On image ${tab ? `${tab} ` : ``}page`
       presenceData.state = `${name}`
 
     } else if(match = document.location.pathname.match(/^\/r\/([^\/]+)\/([^\/]+)(?:\/([^?]+))?/)) {
-      var owner: string = match[1], name: string = match[2], tab: string = match[3]
+      var url: URL = new URL(document.location.href)
+      var params: URLSearchParams = url.searchParams
 
-      match = document.location.search.match(/(?:\?page=(\d+))?/)
-      var page: string = match && match[1] || null
+      var owner: string = match[1]
+      var name: string = match[2]
+      var tab: string = match[3]
+
+      var page: string = params.get(searchItems.page)
 
       presenceData.details = `On image ${tab ? tab : ``} page${page ? ` ${page}` : ``}`
       presenceData.state = `${owner}/${name}`
@@ -100,12 +111,17 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Creating repository`
 
     } else if(match = document.location.pathname.match(/^\/repository(?:\/([^\/?]+))+/)) {
+      var url: URL = new URL(document.location.href)
+      var params: URLSearchParams = url.searchParams
+
       presenceData.details = `On personal repository`
+
       var tab: string = match[1]
-      match = document.location.search.match(/page=(\d+)/)
-      var page: string = match && match[1] || null
+
+      var page: string = params.get(searchItems.page)
       var selector: Node = document.querySelector('#contextNav > div > div.styles__breadcrumbs___18Yr8 > div:nth-child(2) > a')
       var breadcrum: string = selector && selector.textContent || null
+
       if(breadcrum && breadcrum.match(tab)) {
         tab = `general`
       } else if(document.location.pathname.match(/\/builds\//)) {
@@ -114,11 +130,13 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${capitalize(tab)}${page ? ` ${page}` : ``}`
 
     } else if(match = document.location.pathname.match(/^\/support\/(?:(doc)?(contact)?)/)) {
+      var doc: boolean = match[1] && true
+      var contact: boolean = match[2] && true
       presenceData.details = `Reading FAQ`
-      if(match[1]) {
+      if(doc) {
         var selector: Node = document.querySelector('#gatsby-focus-wrapper > div > main > div > div.MuiCardHeader-root > div > span') || null
         presenceData.state = selector && selector.textContent || null
-      } else if(match[2]) {
+      } else if(contact) {
         presenceData.details = `Contact page`
       }
     } else if(document.location.pathname.match(/^\/billing/)) {
@@ -127,13 +145,13 @@ presence.on("UpdateData", async () => {
   }
 
   if (presenceData.details == null) {
-    presence.setTrayTitle();
+    presence.setTrayTitle()
     presence.setActivity()
   } else {
-    presence.setActivity(presenceData);
+    presence.setActivity(presenceData)
   }
 
-});
+})
 
 /**
  * Send PreMiD error message in console of browser
