@@ -17,7 +17,7 @@ presence.on("UpdateData", () => {
     let authorName = document.querySelector("span.postedBy > span.posted.iconKey > a.username");
     let newsAuthor = document.querySelector("div.news-author > a.username > b");
 
-    presenceData.details = `Reading a ${authorName ? "thread" : "news post"} by ` + authorName ? authorName.innerText : newsAuthor.innerText;
+    presenceData.details = `Reading a ${authorName ? "thread" : "news post"} by ` + (authorName ? authorName.innerText : newsAuthor.innerText);
     presenceData.state = title.innerText;
 
   } else if (document.location.pathname.startsWith("/game")) {
