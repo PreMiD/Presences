@@ -20,7 +20,7 @@ var match: Array<string>
 presence.on("UpdateData", async () => {
 
   let presenceData: presenceData = {
-    details: "TODO", // Left here as a clue to find missing possible states
+    details: "MISSING", // Left here as a clue to find missing possible states
     largeImageKey: "logo"
   }
 
