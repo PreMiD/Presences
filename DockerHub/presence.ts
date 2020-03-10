@@ -93,13 +93,22 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${owner}/${name}`
 
     } else if(match = document.location.pathname.match(/^\/layers\/([^\/]+)\/([^\/]+)\/([^\/]+)/)) {
-      var owner: string = match[1], name: string = match[2], tag: string = match[3]
+      var url: URL = new URL(document.location.href)
+      var params: URLSearchParams = url.searchParams
 
-      var selector: Node = document.querySelector('.Select-value') || null
-      var arch: string = selector && selector.textContent || null
+      var context: string = params.get("context")
+      if(context && context == "repo") {
+        presenceData.details = `On personal repository`
+        presenceData.state = `Image history`
+      } else {
+        var owner: string = match[1], name: string = match[2], tag: string = match[3]
 
-      presenceData.details = `On image history`
-      presenceData.state = `${owner}/${name}:${tag} ${(arch ? arch : ``)}`
+        var selector: Node = document.querySelector('.Select-value') || null
+        var arch: string = selector && selector.textContent || null
+
+        presenceData.details = `On image history`
+        presenceData.state = `${owner}/${name}:${tag} ${(arch ? arch : ``)}`
+      }
 
     } else if(match = document.location.pathname.match(/^\/u\/([^\/]+)(?:\/([^\/]+))?/)) {
       var user: string = match[1]
