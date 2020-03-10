@@ -15,6 +15,5 @@
   "tags": [
     "docker"
   ],
-  "category": "other",
-  "regExp": "hub\\.docker\\.com"
+  "category": "other"
 }
