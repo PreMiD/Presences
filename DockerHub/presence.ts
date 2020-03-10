@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       var type: string = params.get(searchItems.type)
       type = type && decodeURIComponent(type) || `image`
 
-      var edition: string = params.get(searchItems.type)
+      var edition: string = params.get(searchItems.edition)
       edition = edition && decodeURIComponent(edition) || ``
 
       var os: string = params.get(searchItems.os)
