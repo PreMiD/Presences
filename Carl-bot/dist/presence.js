@@ -9,23 +9,20 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
     let presenceData = {
-        largeImageKey: "carllogo"
+        largeImageKey: "carllogo",
+        startTimestamp: browsingStamp
     };
     if (document.location.hostname == "carl.gg") {
-        presenceData.startTimestamp = browsingStamp;
-        if (document.location.pathname.includes("/dashboard/")) {
-            if (document.querySelector("#__BVID__135__BV_button_ > strong")) {
-                title = document.querySelector("#__BVID__135__BV_button_ > strong")
-            } else if (document.querySelector("#__BVID__17__BV_button_ > strong").textContent) {
-                title = document.querySelector("#__BVID__17__BV_button_ > strong").textContent
-            }
-            presenceData.details = "Managing the settings of";
-            presenceData.state = "server: " + title;
-        } else if (document.location.pathname.includes("/servers")) {
+        if (document.location.pathname.startsWith("/dashboard/")) {
+            title = document.querySelector("body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div").innerText
+            presenceData.details = "Managing the settings of:";
+            presenceData.state = title;
+        } else if (document.location.pathname.startsWith("/servers")) {
             presenceData.details = "Browsing through";
             presenceData.state = "servers";
-        } else if (document.location.pathname.includes("/premium")) {
-            presenceData.details = "Viewing Premium Plans";
+        } else if (document.location.pathname.startsWith("/status")) {
+            presenceData.details = "Viewing a page:";
+            presenceData.state = "Carl-bot Status"
         }
     }
     if (presenceData.details == null) {
@@ -35,8 +32,8 @@ presence.on("UpdateData", () => {
     else {
         presence.setActivity(presenceData);
     }
-
 });
+
 function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
