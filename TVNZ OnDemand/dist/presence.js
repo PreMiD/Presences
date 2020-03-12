@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
 const presence = new Presence({
     clientId: "687426695417823238",
     mediaKeys: false
@@ -17,18 +8,15 @@ const strings = presence.getStrings({
     pause: "presence.playback.paused"
 });
 
-let iFrameVideo, currentTime, duration, paused;
-let video, videoDuration, videoCurrentTime;
+let iFrameVideo, currentTime, duration, paused, video, videoDuration, videoCurrentTime;
 
 presence.on("iFrameData", data => {
-    playback =
-        data.iframe_video.duration !== null
-            ? true : false;
+    playback = data.duration !== null ? true : false;
     if (playback) {
-        iFrameVideo = data.iframe_video.iFrameVideo;
-        currentTime = data.iframe_video.currentTime;
-        duration = data.iframe_video.dur;
-        paused = data.iframe_video.paused;
+        iFrameVideo = data.iFrameVideo;
+        currentTime = data.currentTime;
+        duration = data.duration;
+        paused = data.paused;
     }
 });
 
@@ -45,7 +33,7 @@ presence.on("UpdateData", () => {
         presenceData.details = "Browsing the main page";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     } else if (document.location.pathname.includes("/episodes/")) {
-        if (!isNaN(timestamps[1] )) {
+        if (timestamps[1] !== NaN) {
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
         }
