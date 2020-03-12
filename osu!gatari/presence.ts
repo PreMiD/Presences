@@ -196,7 +196,7 @@ presence.on("UpdateData", async () => {
       customData = true;
       var profileData: presenceData = {
         details:  "Looking at " +  name + "'s Profile",
-        state: (document.querySelector("#chart1 > div > span") as HTMLElement).innerText,
+        state: "Performance: " + (document.querySelector("#chart1 > div > span") as HTMLElement).innerText,
         largeImageKey: "logo"
        };
       presence.setActivity(profileData);
