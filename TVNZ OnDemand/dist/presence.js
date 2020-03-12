@@ -45,7 +45,7 @@ presence.on("UpdateData", () => {
         presenceData.details = "Browsing the main page";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     } else if (document.location.pathname.includes("/episodes/")) {
-        if (timestamps[1] !== NaN) {
+        if (!isNaN(timestamps[1] )) {
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
         }
