@@ -4,7 +4,7 @@
 	"author": "Timeraa",
 	"license": "MPL-2.0",
 	"devDependencies": {
-		"@types/node": "^13.7.7",
+		"@types/node": "^13.9.1",
 		"mongodb": "^3.5.4",
 		"source-map-support": "^0.5.16",
 		"typescript": "^3.8.3"
