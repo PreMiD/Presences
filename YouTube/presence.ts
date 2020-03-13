@@ -9,7 +9,7 @@ var presence = new Presence({
   });
 
 // YouTube TV separator pattern
-var pattern = "•";
+const pattern = "•";
 function truncateAfter(str, pattern) {
   return str.slice(0, str.indexOf(pattern));
 }
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
     (edited = false),
       (uploaderTV =
         document.querySelector(".player-video-details") ||
-        document.querySelector("ytd-video-owner-renderer  .ytd-channel-name")),
+        document.querySelector("ytd-video-owner-renderer  .ytd-channel-name a")),
       (uploaderEmbed = document.querySelector(
         "div.ytp-title-expanded-heading > h2 > a"
       )),
