@@ -10,7 +10,7 @@ var presence = new Presence({
 
 // YouTube TV separator pattern
 const pattern = "•";
-function truncateAfter(str, pattern) {
+function truncateAfter(str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern));
 }
 
