@@ -272,6 +272,11 @@ presence.on("UpdateData", async () => {
         presenceData.state = user;
         presenceData.startTimestamp = browsingStamp;
       }
+    } else if (document.location.pathname.includes("/post")) {
+      presenceData.details = "Viewing community post";
+      var selector: Node = document.querySelector("#author-text")
+      presenceData.state = selector && `of: ${selector.textContent}` || null;
+      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/feed/trending")) {
       presenceData.details = "Viewing what's trending"; //youtube.trending
       presenceData.startTimestamp = browsingStamp;
