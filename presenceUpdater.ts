@@ -1,3 +1,4 @@
+import "source-map-support/register";
 import { connect, MongoClient } from "mongodb";
 import { readdirSync, statSync, readFileSync } from "fs";
 
@@ -58,7 +59,9 @@ async function run(MongoClient: MongoClient) {
 			)
 			.map(dP => presences.find(p => p.name === dP.name));
 
-	let nP, dP, oP;
+	let nP,
+		dP = [],
+		oP = [];
 
 	if (newPresences.length > 0)
 		nP = MongoClient.db("PreMiD")
@@ -66,18 +69,18 @@ async function run(MongoClient: MongoClient) {
 			.insertMany(newPresences);
 
 	if (deletedPresences.length > 0)
-		dP = deletedPresences.map(p => {
+		dP = deletedPresences.map(p =>
 			MongoClient.db("PreMiD")
 				.collection("presences")
-				.deleteOne({ name: p.name });
-		});
+				.deleteOne({ name: p.name })
+		);
 
 	if (outdatedPresences.length > 0)
-		oP = outdatedPresences.map(p => {
+		oP = outdatedPresences.map(p =>
 			MongoClient.db("PreMiD")
 				.collection("presences")
-				.findOneAndUpdate({ name: p.metadata.service }, { $set: p });
-		});
+				.findOneAndUpdate({ name: p.metadata.service }, { $set: p })
+		);
 
-	Promise.all([nP, dP, oP]).then(() => MongoClient.close());
+	Promise.all([nP, ...dP, ...oP]).then(() => MongoClient.close());
 }

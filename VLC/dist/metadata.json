@@ -8,7 +8,7 @@
     "en": "VLC presence for PreMiD! Please read [this page](https://kek.gg/u/bpKr) to get started!"
   },
   "url": "localhost",
-  "version": "1.3.5.1",
+  "version": "1.3.6",
   "logo": "https://doomlord.s-ul.eu/MHqVX7v0",
   "thumbnail": "https://doomlord.s-ul.eu/LOCgKTnx",
   "color": "#ff7c00",
@@ -17,5 +17,6 @@
     "media-player",
     "experimental-app"
   ],
+  "warning": true,
   "category": "videos"
 }

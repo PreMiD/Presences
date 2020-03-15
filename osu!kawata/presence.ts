@@ -23,27 +23,48 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/leaderboard")) {
   presenceData.startTimestamp = browsingStamp;
   presenceData.details = "Browsing Leaderboard";
-  /*
-  presenceData.state = "osu!Standard";
+  
+  var url: URL = new URL(document.location.href);
+  var mode: number = parseInt(url.searchParams.get("mode"))
+  switch (mode) {
+    case 1:
+      presenceData.state = "Taiko";
+      break;
+    case 2:
+      presenceData.state = "Catch the Beat";
+      break;
+    case 3:
+      presenceData.state = "osu!mania";
+      break;
+    default:
+      presenceData.state = "osu! standard";
+      break;
+  }
 
-  } else if (document.location.pathname.includes("/leaderboard?mode=1")) {
-    
-  presenceData.details = "Browsing Leaderboard";
-  presenceData.state = "osu!Taiko";
-
-  } else if (document.location.pathname.includes("/leaderboard?mode=2")) {
-    
-  presenceData.details = "Browsing Leaderboard";
-  presenceData.state = "osu!Catch the Beat";
-
-  } else if (document.location.pathname.includes("/leaderboard?mode=3")) {
-    
-  presenceData.details = "Browsing Leaderboard";
-  presenceData.state = "osu!mania";
-  */
 } else if (document.location.pathname.includes("/clans")) {
   presenceData.startTimestamp = browsingStamp;
   presenceData.details = "Browsing Clans";
+
+  var url: URL = new URL(document.location.href);
+  var mode: number = parseInt(url.searchParams.get("mode"))
+  switch (mode) {
+    case 1:
+      presenceData.state = "osu!taiko";
+      break;
+    case 2:
+      presenceData.state = "osu!catch";
+      break;
+    case 3:
+      presenceData.state = "osu!mania";
+      break;
+    default:
+      presenceData.state = "osu!standard";
+      break;
+  }
+
+} else if (document.location.pathname.includes("/register")) {
+  presenceData.startTimestamp = browsingStamp;
+  presenceData.details = "Registering account";
 
 } else if (document.location.pathname.includes("/u")) {
   user = document.querySelector("body > div.ui.full.height.main.wrapper > div.h-container > div:nth-child(2) > div.ui.top.attached.segment.overflow.auto > div:nth-child(1) > div:nth-child(2) > h1");

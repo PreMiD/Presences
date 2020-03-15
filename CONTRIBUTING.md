@@ -52,9 +52,11 @@ Before you begin working on your presence, keep the following list in mind.
 
 In some situations, presences may behave unexpectedly or could use some minor changes to improve its functionality. Here is a compiled list that you **MUST** follow to modify presences.
 - You are not allowed rewrite a presence or change it's author. If the presence author was banned from the official server or hasn't made required changes in a 7 day period, you may contact a PreMiD `Presence Verifier` to see if you are applicable to rewrite the presence of choice. 
+- Anyone may provide hotfixes to fix bugs, however, try **NOT** to make changes to code that does not need to be fixed. Valid modifications are, but not limited to, *missing paths*, *typos*, *missing images*, etc...
 - If you make modifications to a presence and change at least a **QUARTER** of the presence's codebase, you are allowed to add yourself as a contributor. Contact a `Presence Verifier` for more information about this subject.
 - Make sure the modifications are useful. These may include fixes (code and typos),  additions (descriptions and tags), etc... Do not change images if they are not outdated and have a decent resolution.
 - Confirm that your changes work before publishing. Do not create pull requests without knowing the outcome of your changes.
+- Maintain the language the presence author used when writing the presence. For example, do **NOT** delete typescript files and use the javascript files instead.
 
 # Verification
 
@@ -73,7 +75,8 @@ For your presence to reach the stores, it MUST go through a process on GitHub to
 9. The requirements for logos are 1:1 (Square) in 512px, thumbnails, however, should either be [wide promotional cards](https://i.imgur.com/3QfIc5v.jpg) or simply [screenshots](https://i.imgur.com/OAcBmwW.png) if the first is not available.
 10. Presences should at least have 1 tag, this is a requirement by design and may be optional in the future.
 11. The `url` field **MUST NOT** include `http://` or `https://`, neither the parameters (e.g. a presence for `https://www.google.com/search?gws_rd=ssl` will only have `www.google.com` in the `url` field).
-12. Descriptions and tags should always be in arrays, even when it's only one element. The `url` field, however, should only be a string if it's one domain.
+12. Descriptions and tags should always be in an array, even when it's only one element. The `url` field, however, should only be a string if it's one domain.
 13. Unstable sites that constantly change APIs/domains, randomize HTML elements or just still being in heavy development are not allowed and will be removed from the store.
+14. The logo and thumbnail on your presence MUST either be `i.imgur.com`, from a CDN that **YOU** own, or from a CDN that gives you permission to **CHANGE** image files.
 
-After all of the proper reviews have been met, your pull request will be merged with the store.
+After meeting all of the guidelines and having your presence reviewed at least twice, your presence will be merged with the store.

@@ -104,6 +104,50 @@ presence.on("UpdateData", () =>
           startTimestamp: Math.floor(Date.now() / 1000)
         });
       }
+    } else if (host == "status.premid.app") {
+        let path = window.location.pathname.toLowerCase();
+
+      if(path === "/") {
+        presence.setActivity({
+          largeImageKey: "lg",
+          details: "PreMiD Status",
+          state: "Viewing current status",
+          startTimestamp: Math.floor(Date.now() / 1000)
+        });
+      }
+        else 
+      if(path.startsWith("/history")) {
+        let page;
+        if(window.location.href.replace(window.location.host, "").replace(window.location.protocol, "").replace("///history","") === "") {
+          page = "1"
+        } else {
+          page = window.location.href.replace(window.location.host, "").replace(window.location.protocol, "").replace("///history?page=","")
+        }
+        presence.setActivity({
+          largeImageKey: "lg",
+          details: "PreMiD Status",
+          state: "Viewing previous incidents - Page " + page,
+          startTimestamp: Math.floor(Date.now() / 1000)
+        });
+      }
+        else
+      if(path.startsWith("/incidents")) {
+        presence.setActivity({
+          largeImageKey: "lg",
+          details: "PreMiD Status",
+          state: "Viewing an incident - " + document.title.replace("PreMiD Status - ", ""),
+          startTimestamp: Math.floor(Date.now() / 1000)
+        });
+      }
+        else
+      if(path.startsWith("/uptime")) {
+        presence.setActivity({
+          largeImageKey: "lg",
+          details: "PreMiD Status",
+          state: "Viewing past uptime",
+          startTimestamp: Math.floor(Date.now() / 1000)
+        });
+      }
     }
   })
 );

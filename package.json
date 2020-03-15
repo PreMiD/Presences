@@ -4,12 +4,13 @@
 	"author": "Timeraa",
 	"license": "MPL-2.0",
 	"devDependencies": {
-		"@types/node": "^13.7.6",
-		"mongodb": "^3.5.3",
-		"typescript": "^3.8.2"
+		"@types/node": "^13.7.7",
+		"mongodb": "^3.5.4",
+		"source-map-support": "^0.5.16",
+		"typescript": "^3.8.3"
 	},
 	"dependencies": {
-		"@types/chrome": "^0.0.96",
+		"@types/chrome": "^0.0.98",
 		"@types/mongodb": "^3.3.16"
 	}
 }
