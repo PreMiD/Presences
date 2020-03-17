@@ -10,7 +10,6 @@ presence.on("UpdateData", async () => {
     const q = new URLSearchParams(window.location.search);
 
     if (window.location.href.includes("gdbrowser.com")) {
-            console.log("PreMID Presence Active.")
 
             // LevelData is just for regular levels
             function LevelData(){
@@ -46,7 +45,6 @@ presence.on("UpdateData", async () => {
                 } else {
                     presenceData.details = "Viewing the homepage";
                 }
-                // presenceData.details = "Viewing the homepage";
             }
 
 
@@ -55,11 +53,7 @@ presence.on("UpdateData", async () => {
                 presenceData.details = "In the iconkit";
             }
 
-            // if (window.location.pathname.toLowerCase() === ("/search")) {
-            //         presenceData.details = "Searching for levels";
-                    
-            // }
-            
+
             if (window.location.pathname.toLowerCase().includes("/search")) {
 
                 if (window.location.pathname.toLowerCase() === ("/search")) {
