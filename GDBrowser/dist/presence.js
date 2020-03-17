@@ -11,8 +11,8 @@ presence.on("UpdateData", async () => {
 
     if (window.location.href.includes("gdbrowser.com")) {
 
-            // LevelData is just for regular levels
-            function LevelData(){
+            // Levels
+            if (!isNaN(window.location.pathname.toLowerCase().replace("/", "")) && window.location.pathname.toLowerCase() !== "/" || window.location.pathname.toLowerCase() === "/daily" || window.location.pathname.toLowerCase() === "/weekly"){
                 let downloads = document.getElementsByClassName("inline smaller spaced")[0].innerHTML
                 let likes = document.getElementsByClassName("inline smaller spaced")[1].innerHTML
                 let orbs = document.getElementsByClassName("orbs")[1].innerHTML
@@ -20,19 +20,6 @@ presence.on("UpdateData", async () => {
                 presenceData.details = `${document.getElementsByTagName("h1")[0].innerText} ${document.getElementById("authorLink").innerText}`
                 presenceData.smallImageKey = `diff_${document.getElementById("difficultytext").innerHTML.toLowerCase().replace("<br>", "_")}`
                 presenceData.smallImageText = `${document.getElementById("difficultytext").innerHTML.replace("<br>", " ")}`
-            }
-
-            // If the url has numbers at the end (/)
-            if (!isNaN(window.location.pathname.toLowerCase().replace("/", "")) && window.location.pathname.toLowerCase() !== "/"){
-                LevelData()
-            }
-
-            if (window.location.pathname.toLowerCase() === "/daily") {
-                LevelData()
-            }
-            
-            if (window.location.pathname.toLowerCase() === "/weekly") {
-                LevelData()
             }
 
 
