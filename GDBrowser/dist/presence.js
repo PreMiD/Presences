@@ -39,7 +39,6 @@ presence.on("UpdateData", async () => {
             // Homepage
             if (window.location.pathname.toLowerCase() === "/") {
                 if(document.getElementById("credits").style.display === "block"){
-                    console.log("yes")
                     presenceData.details = "Viewing the credits"
                     presenceData.state = "❤"
                 } else {
@@ -59,64 +58,84 @@ presence.on("UpdateData", async () => {
                 if (window.location.pathname.toLowerCase() === ("/search")) {
                         presenceData.details = "Searching for levels";        
                 } else {
-
                     presenceData.details = "Searching for levels";
 
-                    // Map Pack
+                    // Map Packs
                     if(q.get("mappack") === 1){
                         presenceData.state = "Viewing a map pack";
+                    }
 
 
-                    // Quick Search
-                    } else if(q.get("type") === "recent"){
-                        presenceData.state = "🕒 Viewing recent levels";
-                    } else if(q.get("type") === "mostdownloaded"){
-                        presenceData.state = "🔽 Viewing top downloaded levels";
-                    } else if(q.get("type") === "mostliked"){
-                        presenceData.state = "👍 Viewing top liked levels";
-                    } else if(q.get("type") === "trending"){
-                        presenceData.state = "📈 Viewing trending levels";
-                    } else if(q.get("type") === "magic"){
-                        presenceData.state = "✨ Viewing magic levels"
-                    } else if(q.get("type") === "awarded"){
-                        presenceData.state = "⭐ Viewing awarded levels"
-                    } else if(q.get("type") === "featured"){
-                        presenceData.state = "⭐ Viewing featured levels"
-                    } else if(q.get("type") === "followed"){
-                        presenceData.state = "💙 Viewing followed levels"
-                    
-                        
-                    // Diffs
-                    } else if(q.get("diff") === "1"){
-                        presenceData.state = "😄 Viewing Easy levels"
-                    } else if(q.get("diff") === "2"){
-                        presenceData.state = "😃 Viewing Normal levels"
-                    } else if(q.get("diff") === "3"){
-                        presenceData.state = "😅 Viewing Hard levels"
-                    } else if(q.get("diff") === "4"){
-                        presenceData.state = "😐 Viewing Harder levels"
-                    } else if(q.get("diff") === "5"){
-                        presenceData.state = "🙁 Viewing Insane levels"
-                    } else if(q.get("diff") === "-1"){
-                        presenceData.state = "😶 Viewing Unrated levels"
-                    } else if(q.get("diff") === "-3"){
-                        presenceData.state = "🤖 Viewing Auto levels"
+                    // Quick Search (Now with 100% more switch)
+                    switch(q.get("type"))  {
+                        case "recent":
+                            presenceData.state = "🕒 Viewing recent levels";
+                            break;
+                        case "mostdownloaded":
+                            presenceData.state = "🔽 Viewing top downloaded levels";
+                            break;
+                        case "mostliked":
+                            presenceData.state = "👍 Viewing top liked levels";
+                            break;
+                        case "trending":
+                            presenceData.state = "📈 Viewing trending levels";
+                            break;
+                        case "magic":
+                            presenceData.state = "✨ Viewing magic levels"
+                            break;
+                        case "awarded":
+                            presenceData.state = "⭐ Viewing awarded levels"
+                            break;
+                        case "featured":
+                            presenceData.state = "⭐ Viewing featured levels"
+                            break;
+                        case "followed":
+                            presenceData.state = "💙 Viewing followed levels"
+                            break;
+                    }
 
-                    // Demons
-                    } else if(q.get("diff") === "-2"){
-                        if(q.get("demonFilter") === "1"){
-                            presenceData.state = "😠 Viewing Easy Demons"
-                        } else if(q.get("demonFilter") === "2"){
-                            presenceData.state = "😡 Viewing Medium Demons"
-                        } else if(q.get("demonFilter") === "3"){
-                            presenceData.state = "🤬 Viewing Hard Demons"
-                        } else if(q.get("demonFilter") === "4"){
-                            presenceData.state = "😈 Viewing Insane Demons"
-                        } else if(q.get("demonFilter") === "5"){
-                            presenceData.state = "👿 Viewing Extreme Demons"
-                        } 
-                    } else {
-                        presenceData.state = `Searching for ${document.getElementById("header").innerHTML}`
+                    // Diffs (Also with 101% more switch statement)
+                    switch(q.get("diff")){
+                        case "1":
+                            presenceData.state = "😄 Viewing Easy levels"
+                            break;
+                        case "2":
+                            presenceData.state = "😃 Viewing Normal levels"
+                            break;
+                        case "3":
+                            presenceData.state = "😅 Viewing Hard levels"
+                            break;
+                        case "4":
+                            presenceData.state = "😐 Viewing Harder levels"
+                            break;
+                        case "5":
+                            presenceData.state = "🙁 Viewing Insane levels"
+                            break;
+                        case "-1":
+                            presenceData.state = "😶 Viewing Unrated levels"
+                            break;
+                        case "-2":
+                            switch(q.get("demonFilter")){
+                                case "1":
+                                    presenceData.state = "😠 Viewing Easy Demons"
+                                    break;
+                                case "2":
+                                    presenceData.state = "😡 Viewing Medium Demons"
+                                    break;
+                                case "3":
+                                    presenceData.state = "🤬 Viewing Hard Demons"
+                                    break;
+                                case "4":
+                                    presenceData.state = "😈 Viewing Insane Demons"
+                                    break;
+                                case "5":
+                                    presenceData.state = "👿 Viewing Extreme Demons"
+                                    break;
+                            }
+                            break;
+                        default:
+                            presenceData.state = `Searching for ${document.getElementById("header").innerHTML}`
+
                     }
                 }
             }
