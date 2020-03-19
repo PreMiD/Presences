@@ -106,19 +106,27 @@ presence.on("UpdateData", () => {
     }
     else if (document.location.pathname.startsWith("/manga/")) {
         if (document.location.pathname.match("/capitolo")) {
+            var manganame = document.title.replace(" - MangaWorld", "").replace(" scan ITA", "");
+            if (manganame.includes("- Scan ITA")) {
+                manganame = manganame.replace(" - Scan ITA", "")
+            };
             var chapternumber = document.location.href.split("capitolo-")[1].split("/p/")[0].replace("-", ".");
             var pagenumber = document.location.href.split("/p/")[1].replace("/", "");
             data.smallImageKey = "reading",
                 data.smallImageText = "Legge",
-                data.details = "Legge: " + document.title.replace(" - MangaWorld", ""),
+                data.details = "Legge: " + manganame,
                 data.state = "Capitolo: " + chapternumber + "｜Pag. " + pagenumber,
                 data.startTimestamp = browsingStamp;
             presence.setActivity(data);
         } else if (document.location.pathname.match("/oneshot")) {
             var pagenumber = document.location.href.split("/p/")[1].replace("/", "");
+            var manganame = document.title.replace(" - MangaWorld", "").replace(" scan ITA", "");
+            if (manganame.includes("- Scan ITA")) {
+                manganame = manganame.replace(" - Scan ITA", "")
+            };
             data.smallImageKey = "reading",
                 data.smallImageText = "Legge",
-                data.details = "Legge: " + document.title.replace(" - MangaWorld", ""),
+                data.details = "Legge: " + manganame,
                 data.state = "Oneshot｜Pag. " + pagenumber,
                 data.startTimestamp = browsingStamp;
             presence.setActivity(data);
@@ -131,10 +139,14 @@ presence.on("UpdateData", () => {
             presence.setActivity(data);
         }
         else {
+            var manganame = document.title.replace(" - MangaWorld", "").replace(" scan ITA", "");
+            if (manganame.includes("- Scan ITA")) {
+                manganame = manganame.replace(" - Scan ITA", "")
+            };
             data.smallImageKey = "viewing",
                 data.smallImageText = "Visualizza",
                 data.details = "Visualizza il Manga:",
-                data.state = document.title.replace(" - MangaWorld", ""),
+                data.state = manganame,
                 data.startTimestamp = browsingStamp;
             presence.setActivity(data);
         }
