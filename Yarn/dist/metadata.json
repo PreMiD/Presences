@@ -3,9 +3,7 @@
       "name": "Deleted 7.12i",
       "id": "591702135310385157"
     },
-    "url": [
-      "yarnpkg.com"
-    ],
+    "url": "yarnpkg.com",
     "description": {
       "fr": "Yarn est un gestionnaire de paquets.",
       "en": "Yarn is a package manager that doubles down as project manager."
