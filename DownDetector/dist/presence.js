@@ -20,12 +20,12 @@ presence.on("UpdateData", () => {
             presenceData.smallImageKey = "search"
         } else if (document.location.pathname.includes('/archive/')) {
             presenceData.details = "Viewing an archive for:";
-            title = document.querySelector("body > div.container.px-3.px-md-0 > nav > ol > li.breadcrumb-item.active > a").innerText
-            presenceData.state = title;
+            title = document.querySelector("body > div.container.px-3.px-md-0 > nav > ol > li.breadcrumb-item.active > a")
+            presenceData.state = decodeReq(title);
         } else if (document.location.pathname.includes("/news/")) {
             presenceData.details = "Viewing a status overview for:"
-            title = document.querySelector("body > div.container.px-3.px-md-0 > nav > ol > li:nth-child(2) > a").innerText
-            presenceData.state = title;
+            title = document.querySelector("body > div.container.px-3.px-md-0 > nav > ol > li:nth-child(2) > a")
+            presenceData.state = decodeReq(title);
         } else if (document.location.pathname.includes("/map/")) {
             presenceData.details = "Viewing outage map for:";
             title = document.title.split("outage")[0];
@@ -33,8 +33,8 @@ presence.on("UpdateData", () => {
         }
         else if (document.location.pathname.includes("/status/")) {
             presenceData.details = "Viewing a status for:";
-            title = document.querySelector("body > div.container.px-3.px-md-0 > div.mx-auto > nav > ol > li.breadcrumb-item.active").innerHTML
-            presenceData.state = title;
+            title = document.querySelector("body > div.container.px-3.px-md-0 > div.mx-auto > nav > ol > li.breadcrumb-item.active")
+            presenceData.state = decodeReq(title);
         } else if (document.location.pathname.includes("/companies/")) {
             presenceData.details = "Viewing a page:"
             presenceData.state = "Companies";
@@ -64,4 +64,10 @@ function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
+}
+
+function decodeReq(entity) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = entity.textContent;
+    return txt.value;
 }
