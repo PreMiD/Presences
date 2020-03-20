@@ -5,7 +5,6 @@ var presence = new Presence({
 setInterval(getSongData, 10000);
 getSongData();
 
-
 function getSongData(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -24,16 +23,119 @@ function getSongData(){
     xhttp.send();
 }
 
+var currentTime = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", () => {
     var presenceData = {
-        largeImageKey: "sfmlogo",
-        smallImageKey: "play",
-        smallImageText: dListeners + " Listeners",
-        details: dSong + " - " + dArtist,
-        state: "DJ: " + dDJ,
-        startTimestamp: dStart,
-        endTimestamp: dFinish
-    };
+        largeImageKey: "sfmlogo"
+    }
+    if (document.location.hostname == "simulator.fm") {
+        if (document.location.pathname.includes("/home")){
+
+            presenceData.details = dSong + " - " + dArtist;
+            presenceData.state = "DJ: " + dDJ;
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "play";
+            presenceData.startTimestamp = dStart;
+            presenceData.endTimestamp = dFinish;
+
+        }else if (document.location.pathname.includes("/team")){
+
+            presenceData.details = "Viewing the Staff Team";
+            if(document.querySelector("ng-component > div > div > h2") !== null){
+                presenceData.state = "User: " + document.querySelector("ng-component > div > div > h2").textContent;
+            }
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "search";
+            presenceData.startTimestamp = currentTime;
+
+        }else if (document.location.pathname.includes("/request")){
+
+            presenceData.details = "Making a Request";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "writing";
+            presenceData.startTimestamp = currentTime;
+
+        }else if (document.location.pathname.includes("/timetable")){
+
+            presenceData.details = "Viewing the Timetable";
+            presenceData.state = "Date: " + document.querySelector("div.p-timetable__day.p-timetable__day--selected").textContent;
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        }else if (document.location.pathname.includes("/apply")){
+
+            presenceData.details = "Applying for the Team";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        }else if (document.location.pathname.includes("/contact")){
+
+            presenceData.details = "Viewing the Contact Page";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        } else {
+
+            presenceData.details = "Unknown Page";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        }
+    } else if (document.location.hostname == "panel.simulator.fm") {
+        if (document.location.pathname.includes("/dashboard")){
+
+            presenceData.details = "Staff Panel";
+            presenceData.state = "Viewing Dashboard";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        } else if (document.location.pathname.includes("/timetable")){
+
+            presenceData.details = "Staff Panel";
+            presenceData.state = "Viewing Timetable";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        }else if (document.location.pathname.includes("/requests")){
+
+            presenceData.details = "Staff Panel";
+            presenceData.state = "Viewing Requests";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        }else if (document.location.pathname.includes("/admin/applications")){
+
+            presenceData.details = "Staff Panel";
+            presenceData.state = "Viewing Applications";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        }else if (document.location.pathname.includes("/song-history")){
+
+            presenceData.details = "Staff Panel";
+            presenceData.state = "Viewing Song History";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        } else {
+
+            presenceData.details = "Staff Panel";
+            presenceData.smallImageText = dListeners + " Listeners";
+            presenceData.smallImageKey = "reading";
+            presenceData.startTimestamp = currentTime;
+
+        }
+    }
 
     if (presenceData.details == null) {
         presence.setTrayTitle();
