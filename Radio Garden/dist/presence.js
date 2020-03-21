@@ -20,17 +20,22 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         else if(document.getElementsByClassName('ListItem_isLoading__2rDhr').length == 1){
             presenceData.smallImageKey = "statusplay";
-            presenceData.smallImageText = "Loading";
+            presenceData.smallImageText = "Tuning";
             delete presenceData.startTimestamp;
         }
         else if(document.getElementsByClassName('ListItem_isPaused__3xqrt').length == 1){
             presenceData.smallImageKey = "statusstop";
             presenceData.smallImageText = "Stopped";
             delete presenceData.startTimestamp;
-        }
-        else {
-            console.log("broke")
-        }
-        console.log(presenceData)
+        };
+//        This could work with some tweaks. It detects when youre not tuned into anything, but trips if radio youre tuned into is not in view...
+//        else {
+//            presenceData.smallImageKey = "statusstop";
+//            presenceData.smallImageText = "Tuning";
+//            presenceData.details = "Tuning";
+//            delete presenceData.state;
+//            delete presenceData.startTimestamp;
+//            console.log("broke")
+//        };
         presence.setActivity(presenceData)
 }}));
