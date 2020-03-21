@@ -18,8 +18,8 @@ presence.on("UpdateData", async () => {
 
   if (playback) {
     var selectors: NodeListOf<Node> = document.querySelectorAll(".duration-text");
-    var current: string = selectors[0] && selectors[0].textContent.trim() || "";
-    var length: string = selectors[1] && selectors[1].textContent.trim() || "";
+    var current: string = selectors[0] && selectors[0].textContent.trim() || "0:0";
+    var length: string = selectors[1] && selectors[1].textContent.trim() || "0:0";
     var timestamps = getTimestamps(current, length);
 
     var playing: boolean = document.querySelector("anghami-player anghami-icon.icon.pause") != null;
