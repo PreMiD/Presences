@@ -1,49 +1,50 @@
 var presence = new Presence({
-    clientId: "640289470855380992",
-    mediaKeys: false
+  clientId: "640289470855380992",
+  mediaKeys: false
 }),
-    strings = presence.getStrings({
+  strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-});
+  });
 
 presence.on("UpdateData", async () => {
 
-    var data: presenceData = {
-        largeImageKey: "anlg"
-    };
+  var data: presenceData = {
+    largeImageKey: "anlg"
+  };
 
-    var playback = document.querySelector("anghami-player anghami-icon.icon.play").className.includes("show");
+  var playback: boolean = document.querySelector("anghami-player") != null;
 
-    if(playback != null && (document.querySelector("anghami-player .player-actions") != null &&
-     document.querySelector("anghami-player .player-actions").textContent.length > 1)) {
+  if (playback) {
+    var selectors: NodeListOf<Node> = document.querySelectorAll(".duration-text");
+    var current: string = selectors[0] && selectors[0].textContent.trim() || "";
+    var length: string = selectors[1] && selectors[1].textContent.trim() || "";
+    var timestamps = getTimestamps(current, length);
 
-      	var timestamps = getTimestamps(document.querySelector("anghami-player .player-actions").textContent.split("/")[0], 
-      		document.querySelector("anghami-player .player-actions").textContent.split("/")[1]);
+    var playing: boolean = document.querySelector("anghami-player anghami-icon.icon.pause") != null;
+    var selector: Node = document.querySelector("anghami-player .action-title .trim");
+    data.details = selector && selector.textContent || null;
+    selector = document.querySelector("anghami-player .action-artist .trim");
+    data.state = selector && selector.textContent || null;
 
-        data.details = document.querySelector("anghami-player .action-title .trim").textContent;
-        data.state = document.querySelector("anghami-player .action-artist .trim").textContent;
+    data.smallImageKey = playing ? "play" : "pause";
+    data.smallImageText = playing ? (await strings).play : (await strings).pause;
+    data.startTimestamp = timestamps[0];
+    data.endTimestamp = timestamps[1];
 
-        data.smallImageKey = !playback ? "pause" : "play",
-        data.smallImageText = !playback ? (await strings).pause : (await strings).play,
-        data.startTimestamp = timestamps[0],
-        data.endTimestamp = timestamps[1]
-
-    	if (!playback) {
-            delete data.startTimestamp;
-            delete data.endTimestamp;
-        }
-
-        presence.setActivity(data, playback);
+    if (!playing) {
+      delete data.startTimestamp;
+      delete data.endTimestamp;
     }
 
-   	else {
-   		data.details = (await strings).browsing;
-   		data.smallImageKey = "search";
-   		data.smallImageText = (await strings).browsing;
-   		presence.setActivity(data);
-   	}
+    presence.setActivity(data, playback);
+  } else {
+    data.details = (await strings).browsing;
+    data.smallImageKey = "search";
+    data.smallImageText = (await strings).browsing;
+    presence.setActivity(data);
+  }
 });
 
 function getTimestamps(audioTime: any, audioDuration: any) {
