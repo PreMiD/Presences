@@ -8,7 +8,7 @@
     "en": "Real-time problem & outage monitoring"
   },
   "service": "Down Detector",
-  "version": "1.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/STs8Nfw.png",
   "thumbnail": "https://i.imgur.com/Qy1lbXE.png",
   "color": "#FF160A",
