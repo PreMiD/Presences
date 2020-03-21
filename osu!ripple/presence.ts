@@ -23,12 +23,12 @@ presence.on
     }
     else if(document.location.pathname.includes("/login")) 
     {
-      presenceData.details = "Regitstering account";
+      presenceData.details = "Logging in";
       presenceData.startTimestamp = browsingStamp;
     }
     else if(document.location.pathname.includes("/register")) 
     {
-      presenceData.details = "Logging in";
+      presenceData.details = "Regitstering account";
       presenceData.startTimestamp = browsingStamp;
     }
     else if (document.location.pathname.includes("/u")) {

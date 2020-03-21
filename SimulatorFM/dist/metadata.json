@@ -7,16 +7,20 @@
   "description": {
     "en": "Your Music, For Your Simulation."
   },
-  "url": "simulator.fm",
-  "version": "1.0.0",
+  "url": [
+    "simulator.fm",
+    "panel.simulator.fm"
+  ],
+  "version": "2.0.0",
   "logo": "https://i.imgur.com/Zpdg2tx.png",
-  "thumbnail": "https://i.imgur.com/Iqy2rMp.png",
+  "thumbnail": "https://i.imgur.com/0sZjLM9.png",
   "color": "#65B6FF",
   "tags": [
     "SFM",
     "ETS2",
     "ATS",
-    "TMP"
+    "TMP",
+    "FS19"
   ],
   "category": "music"
 }
