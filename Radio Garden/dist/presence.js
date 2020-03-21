@@ -5,8 +5,6 @@ var presence = new Presence({
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if(!document.title.includes("Explore live radio by rotating")){
-        //var container = document.querySelector(".channel-list")
-        //console.log(document.querySelector("div.mod-active").innerText)
         var elapsed =  Math.floor(Date.now() / 1000)
         var presenceData
         presenceData = {
@@ -34,7 +32,5 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             console.log("broke")
         }
         console.log(presenceData)
-        //presenceData.smallImageText = "smallImageText"
-        //delete presenceData.startTimestamp
         presence.setActivity(presenceData)
 }}));
