@@ -38,7 +38,7 @@ presence.on('UpdateData', async () => {
       ),
       title: document.querySelector('.tw-font-size-4.tw-line-height-body'),
       streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap'),
-      host: document.querySelector('.video-player-hosting-ui__header')
+      host: document.querySelector('.tw-c-text-overlay.tw-strong')
     },
     video: {
       title: document.querySelector('.tw-font-size-4.tw-strong'),
