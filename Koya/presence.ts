@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Dashboard";
         presenceData.state = "Choose a server...";
     } else if(document.location.pathname.includes("/server/")) {
-        presenceData.details = "Edit server : " + document.querySelector(".title").textContent;
+        presenceData.details = "Edit a server : " + document.querySelector(".title").textContent;
         if(!route[3]) {
             presenceData.state = "Main";
         } else {
