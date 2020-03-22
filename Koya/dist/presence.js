@@ -26,7 +26,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else if (document.location.pathname.includes("/dashboard")) {
         presenceData.details = "Dashboard";
-        presenceData.state = "Choose a server...";
+        presenceData.state = "Choosing a server...";
     }
     else if (document.location.pathname.includes("/server/")) {
         presenceData.details = "Edit a server : " + document.querySelector(".title").textContent;
