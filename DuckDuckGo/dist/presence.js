@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
         largeImageKey: "logo" 
     }
 
-    if (document.URL === "https://duckduckgo.com/") {
+    if (document.location.pathname.includes("/")) {
         presenceData.details = "Chilling on the homepage";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     } else if (document.location.href.includes("/settings")) {
