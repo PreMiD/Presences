@@ -112,7 +112,7 @@ presence.on("UpdateData", () => {
             if (document.location.href.includes("/scores")) {
                 presenceData.details = "Viewing sports news related to...";
                 presenceData.state = "Scoring";
-            } if (document.location.href.includes("/scores")) {
+            } else if (document.location.href.includes("/opinion")) {
                 presenceData.details = "Viewing sports news related to...";
                 presenceData.state = "Opinion";
             } else if (document.location.href.includes("/rugby")) {
@@ -158,7 +158,7 @@ presence.on("UpdateData", () => {
             if (document.location.href.includes("/bravo")) {
                 presenceData.details = "Viewing articles related to...";
                 presenceData.state = "Bravo";
-            } if (document.location.href.includes("/celebrities")) {
+            } else if (document.location.href.includes("/celebrities")) {
                 presenceData.details = "Viewing entertainment articles related to...";
                 presenceData.state = "Celebrities";
             } else if (document.location.href.includes("/film")) {
@@ -190,7 +190,7 @@ presence.on("UpdateData", () => {
             if (document.location.href.includes("/love-sex")) {
                 presenceData.details = "Viewing lifestyle articles related to...";
                 presenceData.state = "Love & Sex";
-            } if (document.location.href.includes("/well-good")) {
+            } else if (document.location.href.includes("/well-good")) {
                 presenceData.details = "Viewing lifestyle articles related to...";
                 presenceData.state = "Well & Good";
             } else if (document.location.href.includes("/food-wine")) {
@@ -227,7 +227,7 @@ presence.on("UpdateData", () => {
             if (document.location.href.includes("/back-your-backyard")) {
                 presenceData.details = "Viewing travel articles related to...";
                 presenceData.state = "Back your Backyard";
-            } if (document.location.href.includes("/green-travel")) {
+            } else if (document.location.href.includes("/green-travel")) {
                 presenceData.details = "Viewing travel articles related to...";
                 presenceData.state = "Green Travel";
             } else if (document.location.href.includes("/kiwi-traveller")) {
@@ -259,7 +259,7 @@ presence.on("UpdateData", () => {
             if (document.location.href.includes("/electric-vehicles")) {
                 presenceData.details = "Viewing motoring articles related to...";
                 presenceData.state = "Electric Vehicles";
-            } if (document.location.href.includes("/road-tests")) {
+            } else if (document.location.href.includes("/road-tests")) {
                 presenceData.details = "Viewing travel articles related to...";
                 presenceData.state = "Reviews";
             } else if (document.location.href.includes("/bikes")) {
