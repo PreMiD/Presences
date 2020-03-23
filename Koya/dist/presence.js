@@ -55,7 +55,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else {
         if (presenceData.state == null)
-            presenceData.state = "Navigate...";
+            presenceData.state = "Navigating...";
         presence.setActivity(presenceData);
     }
 }));
