@@ -3,14 +3,18 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
-  "service": "Animu",
+  "contributors": [{
+    "name": "fror",
+    "id": "I515668127829458945"
+  }],
+  "service": "Rádio Animu",
   "description": {
     "en": "The most moe radio in Brazil",
     "pt_BR": "A rádio mais moe do Brasil"
   },
   "url": "www.animu.com.br",
-  "version": "1.1",
-  "logo": "https://i.imgur.com/rvGHd5z.png",
+  "version": "1.1.1",
+  "logo": "https://i.imgur.com/vMsQ4Bd.png",
   "thumbnail": "https://i.imgur.com/Ke5HBcL.png",
   "color": "#6bdb00",
   "tags": [
