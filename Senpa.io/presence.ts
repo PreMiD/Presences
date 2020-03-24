@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Home";
     } else if(document.location.pathname.includes("/web/")) {
         presenceData.details = `Playing on server : ${document.querySelector("#room-stats-hud").textContent}`;
-        presenceData.state = `Player : ${!document.querySelector("#name").nodeValue ? "no nick" : document.querySelector("#name").nodeValue}` + ` | ${document.querySelector("#stats-hud").textContent}`;
+        presenceData.state = `Player :${!document.querySelector("#tag").nodeValue ? "" : ` [${document.querySelector("#tag").nodeValue}]`} ${!document.querySelector("#name").nodeValue ? "no nick" : document.querySelector("#name").nodeValue}` + ` | ${document.querySelector("#stats-hud").textContent}`;
         presenceData.startTimestamp = Date.now();
     } else {
         presenceData.details = document.querySelector(".alt-page h1").textContent;
