@@ -1,14 +1,8 @@
 {
   "author": {
-    "name": "Bas950",
-    "id": "241278257335500811"
+    "name": "Callum",
+    "id": "506899274748133376"
   },
-  "contributors": [
-    {
-      "name": "Callum",
-      "id": "506899274748133376"
-    }
-  ],
   "service": "Bounce",
   "description": {
       "en": "Bounce Radio is a 24/7 international hit music station that provides hit music to everyone. Made by gamers for gamers.",
@@ -17,7 +11,7 @@
       "ga_IE": "Is stáisiún ceoil idirnáisiúnta buailte é Bounce Radio a chuireann ceol buailte ar fáil do gach duine. Déanta ag gamers do gamers."
   },
   "url": ["wearebounce.net", "www.wearebounce.net"],
-  "version": "2.1",
+  "version": "2.2",
   "logo": "https://i.imgur.com/KHn11HE.png",
   "thumbnail": "https://i.imgur.com/XmJTiZY.png",
   "color": "#32a852",
@@ -25,7 +19,10 @@
     "music",
     "radio",
     "gamers",
-    "community"
+    "community",
+    "bounce",
+    "bounceradio"
   ],
-  "category": "music"
+  "category": "music",
+  "regExp": "(([a-z0-9])+[.])?(wearebounce|boun)[.](cc|net)"
 }
