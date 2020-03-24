@@ -27,9 +27,7 @@ presence.on("UpdateData", () => {
         largeImageKey: "logo" 
     }
 
-    if (document.URL.includes("login.tech.tvnz.co.nz")) {
-        presenceData.details = "Logging in..."
-    } else if (document.location.pathname.includes("/choose-profile") || document.location.pathname.includes("/profiles-welcome")) {
+    if (document.location.pathname.includes("/choose-profile") || document.location.pathname.includes("/profiles-welcome")) {
         presenceData.details = "Choosing a profile"
     } else if (document.URL === "https://www.tvnz.co.nz/" || document.URL === "https://www.tvnz.co.nz" || document.URL === "https://www.tvnz.co.nz/shows") {
         presenceData.details = "Browsing the main page";

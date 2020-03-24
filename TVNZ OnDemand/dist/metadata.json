@@ -3,10 +3,7 @@
       "name": "Cairo",
       "id": "208105877838888960"
     },
-    "url": [
-        "www.tvnz.co.nz",
-        "login.tech.tvnz.co.nz"
-    ],
+    "url": "www.tvnz.co.nz",
     "description": {
       "en": "TVNZ OnDemand. We've rounded up the best of the best for you. Finding your favourite TVNZ shows and discovering new ones has never been easier."
     },
