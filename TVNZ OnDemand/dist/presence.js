@@ -27,7 +27,12 @@ presence.on("UpdateData", () => {
         largeImageKey: "logo" 
     }
 
-    if (document.location.pathname.includes("/choose-profile") || document.location.pathname.includes("/profiles-welcome")) {
+    if (document.location.pathname.includes("/1-news-special")) {
+        presenceData.details = "Watching a live 1 NEWS Special";
+        presenceData.state = document.getElementsByClassName("Hero-title")[1].innerText;
+        presenceData.smallImageKey = "one";
+        presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+    } else if (document.location.pathname.includes("/choose-profile") || document.location.pathname.includes("/profiles-welcome")) {
         presenceData.details = "Choosing a profile"
     } else if (document.URL === "https://www.tvnz.co.nz/" || document.URL === "https://www.tvnz.co.nz" || document.URL === "https://www.tvnz.co.nz/shows") {
         presenceData.details = "Browsing the main page";
