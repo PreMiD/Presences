@@ -26,8 +26,10 @@ presence.on("UpdateData", () => {
     let presenceData = { 
         largeImageKey: "logo" 
     }
-
-    if (document.location.pathname.includes("/1-news-special")) {
+    if (document.location.href.includes("login.tech.tvnz.co.nz")) {
+        presenceData.details = "Logging in...";
+        presenceData.smallImageKey = "login";
+    } else if (document.location.pathname.includes("/1-news-special")) {
         presenceData.details = "Watching a live 1 NEWS Special";
         presenceData.state = document.getElementsByClassName("Hero-title")[1].innerText;
         presenceData.smallImageKey = "one";
