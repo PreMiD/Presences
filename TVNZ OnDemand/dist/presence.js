@@ -27,9 +27,11 @@ presence.on("UpdateData", () => {
         largeImageKey: "logo" 
     }
 
-    if (document.location.pathname.includes("/choose-profile")) {
+    if (document.URL.includes("login.tech.tvnz.co.nz")) {
+        presenceData.details = "Logging in..."
+    } else if (document.location.pathname.includes("/choose-profile") || document.location.pathname.includes("/profiles-welcome")) {
         presenceData.details = "Choosing a profile"
-    } else if (document.URL === "https://www.tvnz.co.nz/" || document.URL === "https://www.tvnz.co.nz/shows") {
+    } else if (document.URL === "https://www.tvnz.co.nz/" || document.URL === "https://www.tvnz.co.nz" || document.URL === "https://www.tvnz.co.nz/shows") {
         presenceData.details = "Browsing the main page";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     } else if (document.location.pathname.includes("/episodes/")) {
@@ -37,14 +39,8 @@ presence.on("UpdateData", () => {
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
         }
-
-        let showName;
-        const tagCollection = document.getElementsByClassName("Player-title");
-        for (tag of tagCollection) {
-            showName = tag.innerText;
-        }
         
-        presenceData.state = showName;
+        presenceData.state = document.getElementsByClassName("Player-title")[0].innerText;
 
         if (paused) {
             presenceData.details = "Watching a show"; 
@@ -57,33 +53,14 @@ presence.on("UpdateData", () => {
         }
     } else if (document.location.pathname.includes("/shows/")) {
         presenceData.details = "Viewing a show"; 
-
-        let showName;
-        const tagCollection = document.getElementsByTagName("a")
-        for (tag of tagCollection) { 
-            if (tag.hasAttribute("data-test-show-hero-title") === true) {
-                showName = tag.innerText
-            }
-        }
-
-        presenceData.state = showName
-    } else if (document.URL === "https://www.tvnz.co.nz/" || document.URL === "https://www.tvnz.co.nz/shows") {
-        presenceData.details = "Browsing the main page";
-        presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+        presenceData.state = document.getElementsByClassName("Hero-title")[1].innerText;
     } else if (document.URL === "https://www.tvnz.co.nz/categories/my-favourites") {
         presenceData.details = "Browsing favourite shows";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     } else if (document.location.pathname.includes("/categories/")) {
         presenceData.details = "Browsing a category";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-
-        let categoryName;
-        const tagCollection = document.getElementsByClassName("PageHeader-title");
-        for (tag of tagCollection) { 
-            categoryName = tag.innerText
-        }
-
-        presenceData.state = categoryName;
+        presenceData.state = document.getElementsByClassName("PageHeader-title")[0].innerText;
     } else if (document.location.pathname.includes("/manage-profiles") || document.location.pathname.includes("/add-profile")) {
         presenceData.details = "Managing profiles";
     } else if (document.location.pathname.includes("/settings")) {
@@ -97,38 +74,17 @@ presence.on("UpdateData", () => {
         presenceData.details = "Watching TVNZ 1 Live";
         presenceData.smallImageKey = "one";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-
-        let liveTVShowName;
-        const tagCollection = document.getElementsByClassName("Player-title")
-        for (tag of tagCollection) { 
-            liveTVShowName = tag.innerText
-        }
-
-        presenceData.state = liveTVShowName;
+        presenceData.state = document.getElementsByClassName("Player-title")[0].innerText;
     } else if (document.URL === "https://www.tvnz.co.nz/livetv/tvnz-2") {
         presenceData.details = "Watching TVNZ 2 Live";
         presenceData.smallImageKey = "two";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-
-        let liveTVShowName;
-        const tagCollection = document.getElementsByClassName("Player-title")
-        for (tag of tagCollection) { 
-            liveTVShowName = tag.innerText
-        }
-
-        presenceData.state = liveTVShowName;
+        presenceData.state = document.getElementsByClassName("Player-title")[0].innerText;
     } else if (document.URL === "https://www.tvnz.co.nz/livetv/tvnz-duke") {
         presenceData.details = "Watching TVNZ Duke Live";
         presenceData.smallImageKey = "duke";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-
-        let liveTVShowName;
-        const tagCollection = document.getElementsByClassName("Player-title")
-        for (tag of tagCollection) { 
-            liveTVShowName = tag.innerText
-        }
-
-        presenceData.state = liveTVShowName;
+        presenceData.state = document.getElementsByClassName("Player-title")[0].innerText;
     } else if (document.location.pathname.includes("/one-news")) {
         presenceData.details = "Browsing 1 NEWS";
         presenceData.smallImageKey = "one";
