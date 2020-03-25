@@ -3,7 +3,7 @@ let sartist, strack, slisteners, sdj;
 setInterval(newStats, 5000)
 newStats();
 
-function newStats() {
+async function newStats() {
   let data = await window.fetch("https://wearebounce.net/api/?request=stats").then(res => res.json());
   strack = data.song.track;
   sartist = data.song.artist;
