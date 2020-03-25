@@ -32,7 +32,7 @@ presence.on("UpdateData", () => {
 
     var presenceData = {
         largeImageKey: "https://cdn.discordapp.com/attachments/681603738468614247/692449501197369404/logo_pink_and_black.png", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-        smallImageKey: "Art Assets/small", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
+        smallImageKey: "https://cdn.discordapp.com/attachments/681603738468614247/692449497921355846/logo_blacvk.png", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
         smallImageText: "GamingAnthems Logo", //The text which is displayed when hovering over the small image
         details: "Listening To The Station", //The upper section of the presence text
         state: "No1 Gaming Radio Station", //The lower section of the presence text
