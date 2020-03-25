@@ -19,6 +19,6 @@ presence.on("UpdateData", () => {
     info.details = `Streaming to ${slisteners} listeners`;
     info.state = `${strack} - ${sartist}`;
     info.smallImageText = `${sdj} is live!`;
-    if(sdj.toLowerCase() !== "AutoDJ") {info.smallImageKey = "bouncelive"} else {info.smallImageKey = ""};
+    if(sdj.toLowerCase() !== "autodj") {info.smallImageKey = "bouncelive"} else {info.smallImageKey = ""};
     presence.setActivity(info);
 });
