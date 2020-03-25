@@ -1,6 +1,6 @@
 var presence = new Presence({clientId: "545248528750870530"});
 let sartist, strack, slisteners, sdj;
-setInterval(newStats, 5000)
+setInterval(newStats, 10000)
 newStats();
 
 async function newStats() {
