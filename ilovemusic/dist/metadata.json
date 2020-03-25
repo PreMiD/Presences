@@ -5,8 +5,8 @@
   },
   "service": "I Love Music",
   "description": {
-    "en": "The best Web-Radio of Germany",
-    "de": "Das beste Internet-Radio in Deutschland"
+    "en": "The best Web-Radio of Germany - The best Music for everyone!",
+    "de": "Das beste Internet-Radio in Deutschland - Die beste Musik für jeden!"
   },
   "url": "www.ilovemusic.de",
   "version": "1.0",
@@ -14,5 +14,4 @@
   "thumbnail": "https://i.imgur.com/LFMmAHc.png",
   "color": "#F7C516",
   "tags": ["music", "internet radio"],
-"category": "music"
-}
+"category": "music"}
