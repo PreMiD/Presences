@@ -5,13 +5,13 @@
   },
   "service": "TruckersFM",
   "description": {
-    "en": "TruckersFM is the  #1 community station for Trucking Simulators. TruckersFM provides a variety of shows from live presenters 24/7, meaning no matter where you are from, the tunes will keep on playing!"
+    "en": "Truckers.FM is the  No.1 Hit Music Station as voted by the TruckersMP Community 5 years running. Broadcasting live online, on TuneIn and on your smart speaker, Truckers.FM provides round the clock entertainment broadcasting a variety of shows, ranging from the Top 40 to the biggest throwbacks. Be sure to follow us on our social media channels @TruckersFM"
   },
   "url": "https://truckers.fm",
   "version": "1.0.3",
-  "logo": "https://ninjalabs.co.uk/i/p0ezmnp.png",
-  "thumbnail": "https://ninjalabs.co.uk/i/i48db0v.png",
-  "color": "#fc0303",
+  "logo": "https://i.imgur.com/f4JkWUI.png",
+  "thumbnail": "https://i.imgur.com/vMj6Rcz.png",
+  "color": "#E1306C",
   "tags": [
     "TFM",
     "TruckersMP".
