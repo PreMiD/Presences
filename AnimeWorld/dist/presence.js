@@ -60,10 +60,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.smallImageText = "Notifiche";
             presenceData.details = "Sfoglia le notifiche";
         }
-        else
+        else {
             presenceData.smallImageKey = "settings";
         presenceData.smallImageText = "Impostazioni";
         presenceData.details = "Nelle impostazioni";
+        }
     }
     else if (document.location.pathname.startsWith("/profile")) {
         if (document.location.href.includes("watchlist")) {
