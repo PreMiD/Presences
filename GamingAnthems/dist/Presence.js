@@ -36,8 +36,7 @@ presence.on("UpdateData", () => {
         smallImageText: "GamingAnthems Logo", //The text which is displayed when hovering over the small image
         details: "Listening To The Station", //The upper section of the presence text
         state: "No1 Gaming Radio Station", //The lower section of the presence text
-        startTimestamp: 1577232000, //The unix epoch timestamp for when to start counting from
-        endTimestamp: 1577151472000 //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
+        Math.floor(Date.now() / 1000);, //The unix epoch timestamp for when to start counting from
     }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
 
     if (presenceData.details == null) {
