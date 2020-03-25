@@ -31,7 +31,7 @@ presence.on("UpdateData", () => {
     //It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.
 
     var presenceData = {
-        largeImageKey: "Art Assets/large", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
+        largeImageKey: "https://cdn.discordapp.com/attachments/681603738468614247/692449501197369404/logo_pink_and_black.png", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
         smallImageKey: "Art Assets/small", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
         smallImageText: "GamingAnthems Logo", //The text which is displayed when hovering over the small image
         details: "Listening To The Station", //The upper section of the presence text
