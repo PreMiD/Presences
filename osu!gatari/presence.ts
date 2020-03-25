@@ -174,6 +174,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing account setting";
     presenceData.state = "Accounts";
 
+  } else if(document.location.pathname.startsWith("/user/register")) {
+
+    presenceData.details = "Registering account";
+
+  } else if(document.location.pathname.startsWith("/recover")) {
+
+    presenceData.details = "Recovering account";
+
   } else if(document.location.pathname.startsWith("/friends")) {
 
     presenceData.details = "Browsing friend list";
