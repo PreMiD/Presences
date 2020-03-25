@@ -4,21 +4,22 @@ setInterval(newStats, 5000)
 newStats();
 
 async function newStats() {
-  let data = await window.fetch("https://wearebounce.net/api/?request=stats").then(res => res.json());
+  let data = await window.fetch("https://panelapi.boun.cc/v1/premidStats").then(res => res.json());
   strack = data.song.track;
   sartist = data.song.artist;
   sdj = data.presenter.name;
   slisteners = data.listeners.unique;
 }
 
-let info = {};
-info.largeImageKey = "bouncelogo";
-info.startTimestamp = Math.floor(Date.now() / 1000);
-
+let stamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
-    info.details = `Streaming to ${slisteners} listeners`;
-    info.state = `${strack} - ${sartist}`;
-    info.smallImageText = `${sdj} is live!`;
-    if(sdj.toLowerCase() !== "autodj") {info.smallImageKey = "bouncelive"} else {info.smallImageKey = ""};
+  let info = {
+    largeImageKey: "bouncelogo",
+    details: `Streaming to ${slisteners} listeners`,
+    state: `${strack || "Loading"} - ${sartist || "Loading"}`,
+    smallImageText: `${sdj || "Loading"} is live!`,
+    startTimestamp: stamp
+  };
+    if(sdj !== "AutoDJ") {info.smallImageKey = "bouncelive"} else {delete smallImageKey}
     presence.setActivity(info);
 });
