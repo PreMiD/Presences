@@ -58,9 +58,10 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "notifications";
 			presenceData.smallImageText = "Notifiche";
 			presenceData.details = "Sfoglia le notifiche";
-		} else presenceData.smallImageKey = "settings";
+		} else { presenceData.smallImageKey = "settings";
 		presenceData.smallImageText = "Impostazioni";
 		presenceData.details = "Nelle impostazioni";
+		       }
 	} else if (document.location.pathname.startsWith("/profile")) {
 		// Profile
 		if (document.location.href.includes("watchlist")) {
