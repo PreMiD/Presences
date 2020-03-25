@@ -1,12 +1,11 @@
 var presence = new Presence({
-    clientId: "692465350788251748", //The client ID of the Application created at https://discordapp.com/developers/applications
-    mediaKeys: false //Enable use and detection of media key presses
+    clientId: "692465350788251748",
+    mediaKeys: false 
 }),
 
 strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-    //You can use this to get translated strings
 });
 
 /*
@@ -33,10 +32,10 @@ presence.on("UpdateData", () => {
     var presenceData = {
         largeImageKey: "large", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
         smallImageKey: "small", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-        smallImageText: "GamingAnthems Logo", //The text which is displayed when hovering over the small image
-        details: "Listening To The Station", //The upper section of the presence text
-        state: "No1 Gaming Radio Station", //The lower section of the presence text
-        Math.floor(Date.now() / 1000);, //The unix epoch timestamp for when to start counting from
+        smallImageText: "GamingAnthems Logo", 
+        details: "Listening To The Station", 
+        state: "No1 Gaming Radio Station", 
+        Math.floor(Date.now() / 1000);, 
     }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
 
     if (presenceData.details == null) {
