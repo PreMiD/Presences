@@ -8,8 +8,12 @@
       "en": "Check our our amazing list of lab approved discord bots!",
       "pl": "Sprawdź naszą niesamowitą listę zatwierdzonych przez laboratorium botów discord!"
     },
-    "url": "bots.discordlabs.org",
-    "version": "1.0",
+    "url": [ 
+      "bots.discordlabs.org",
+      "discordlabs.org",
+      "status.discordlabs.org"
+    ],
+    "version": "1.0.1",
     "logo": "https://i.imgur.com/f22iobC.png",
     "thumbnail": "https://i.imgur.com/H08Aem9.png",
     "color": "#6a0dad",

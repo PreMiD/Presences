@@ -1,0 +1,25 @@
+{
+    "author": {
+      "name": "Dominik",
+      "id": "594491170248458250"
+    },
+    "service": "Statcord.com",
+    "description": {
+      "en": "Statcord makes it easy to grow your Discord Bot. Connect your bot and get really nice statistics on whats going on.",
+      "pl": "Statcord ułatwia rozwój Discord Botów. Połącz swojego bota i uzyskaj naprawdę ładne statystyki na temat tego, co się dzieje."
+    },
+    "url": [
+      "statcord.com",
+      "docs.statcord.com"
+    ],
+    "version": "1.0.0",
+    "logo": "https://cdn.statcord.com/logo.png",
+    "thumbnail": "https://i.imgur.com/2iJVEDe.png",
+    "color": "#6a0dad",
+    "tags": [
+      "Bots",
+      "Discord",
+      "Stats"
+    ],
+    "category": "other"
+  }
