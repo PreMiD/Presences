@@ -12,8 +12,8 @@
     "it": "Scopri il meglio di Disney, Pixar, Marvel, Star Wars e National Geographic. Film, serie, produzioni originali e molto altro.",
     "es": "El servicio de streaming de Disney, Pixar, Marvel, Star Wars y National Geographic."
   },
-  "url": "www.disneyplus.com",
-  "version": "1.2.3",
+  "regExp": "(?:www[.])?disneyplus[.]com",
+  "version": "1.2.4",
   "logo": "https://i.imgur.com/zuUeb2A.png",
   "thumbnail": "https://i.imgur.com/NA7FWJN.png",
   "color": "#233778",
