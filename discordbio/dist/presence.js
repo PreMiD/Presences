@@ -40,12 +40,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       presence.setActivity(presenceData);
 
    } else if (document.location.pathname =="/profiles"){
-    presenceData.details = "Browsing though";
+    presenceData.details = "Browsing through";
     presenceData.state = "top upvoted profiles...";
     presence.setActivity(presenceData);
   
    } else if (document.location.pathname == "/plans"){
-    presenceData.details = "Browsing though";
+    presenceData.details = "Browsing through";
     presenceData.state = "Premium plans";
     presence.setActivity(presenceData);
 
@@ -59,8 +59,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     presenceData.state = "dsc.bio/" + nameofprofile[2];
     presence.setActivity(presenceData);
    
-   }
-    presence.setActivity(presenceData);
+   } 
+    presence.setActivity(presenceData); 
 }));
  
 function getTimestamps(videoTime, videoDuration) {

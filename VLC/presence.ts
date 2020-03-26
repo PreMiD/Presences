@@ -1,7 +1,7 @@
 var presence = new Presence({
-        clientId: "654399399316684802",
-        mediaKeys: false
-    }),
+    clientId: "654399399316684802",
+    mediaKeys: false
+}),
     strings = presence.getStrings({
         play: "presence.playback.playing",
         pause: "presence.playback.paused",
@@ -9,7 +9,7 @@ var presence = new Presence({
     }),
     isShow: boolean = false,
     isSong: boolean = false,
-    prev: any, elapsed: any, i: any,
+    prev: string, elapsed: number, i: number,
     media = { // anyone is welcome to suggest more metadata via GH issues
         time: null,
         length: null,
@@ -55,12 +55,12 @@ presence.on("UpdateData", async () => {
             } else if (isShow) {
                 media.showName ? data.details = media.showName :
                     media.title ? data.details = media.title :
-                    media.filename ? data.details = media.filename : "some TV";
+                        media.filename ? data.details = media.filename : "some TV";
                 data.state = "S" + media.seasonNumber + "E" + media.episodeNumber;
             } else {
                 media.showName ? data.details = media.showName :
                     media.title ? data.details = media.title :
-                    media.filename ? data.details = media.filename : "something";
+                        media.filename ? data.details = media.filename : "something";
                 media.seasonNumber ? data.state = ("season " + media.seasonNumber) :
                     media.episodeNumber ? data.state = ("episode " + media.episodeNumber) : delete data.state;
             }
@@ -68,12 +68,16 @@ presence.on("UpdateData", async () => {
             if (data.details && data.details.length > 100) data.details = data.details.substring(0, 127);
             if (data.state && data.state.length > 100) data.state = data.state.substring(0, 127);
 
-            data.smallImageKey = (media.loop === "true" && media.repeat === "false") ? "repeat" :
-                (media.repeat === "true" && media.loop === "false") ? "repeat-one" :
-                (media.state === "playing") ? "play" : "pause";
-            data.smallImageText = (media.loop === "true" && media.repeat === "false") ? "All on loop" :
-                (media.repeat === "true" && media.loop === "false") ? "On loop" :
-                (media.state === "playing") ? (await strings).play : (await strings).pause;
+            data.smallImageKey = media.state === "paused" ? "pause" :
+                (media.loop === "true" && media.repeat === "false") ? "repeat" :
+                    (media.repeat === "true" && media.loop === "false") ? "repeat-one" :
+                        media.state === "playing" ? "play" : "pause";
+
+            data.smallImageText = media.state === "paused" ? (await strings).pause :
+                (media.loop === "true" && media.repeat === "false") ? "All on loop" :
+                    (media.repeat === "true" && media.loop === "false") ? "On loop" :
+                        media.state === "playing" ? (await strings).play : (await strings).pause;
+
             data.startTimestamp = timestamps[0];
             data.endTimestamp = timestamps[1];
 
@@ -111,18 +115,17 @@ function getTimestamps(mediaTime: any, mediaDuration: any) {
     return [Math.floor(startTime / 1000), endTime];
 }
 
-var getStatus = setLoop(function() {
+var getStatus = setLoop(function () {
 
     if (document.querySelector(".footer") && document.querySelector(".footer").textContent.includes("VLC")) {
 
         const req = new XMLHttpRequest();
         // jquery sucks!!!
 
-        req.onload = function() {
+        req.onload = function () {
             if (req.readyState === req.DONE) {
 
                 if (req.status === 200) {
-
                     if (i > 0) i = 0;
 
                     req.responseXML.getElementsByTagName("state")[0].textContent.length > 0 ?
@@ -140,35 +143,74 @@ var getStatus = setLoop(function() {
                         media.repeat = null;
                     }
 
-                    req.responseXML.getElementsByName("filename")[0] ?
-                        media.filename = decodeReq(req.responseXML.getElementsByName("filename")[0]) : media.filename = null;
-                    req.responseXML.getElementsByName("title")[0] ?
-                        media.title = decodeReq(req.responseXML.getElementsByName("title")[0]) : media.title = null;
-                    req.responseXML.getElementsByName("showName")[0] ?
-                        media.showName = decodeReq(req.responseXML.getElementsByName("showName")[0]) : media.showName = null;
+                    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+                        const collection = req.responseXML.getElementsByTagName("info");
 
-                    if (req.responseXML.getElementsByName("artist")[0] || req.responseXML.getElementsByName("album")[0]) {
-                        isSong = true;
-                        req.responseXML.getElementsByName("artist")[0] ? media.artist = decodeReq(req.responseXML.getElementsByName("artist")[0]) : media.artist = null;
-                        req.responseXML.getElementsByName("album")[0] ? media.album = decodeReq(req.responseXML.getElementsByName("album")[0]) : media.album = null;
-                    } else {
-                        isSong = false;
-                        media.artist = null;
-                        media.album = null;
+                        // basically the same thing but with a Firefox workaround because it's annoying
+
+                        getTag(collection, "filename") ?
+                            media.filename = decodeReq(getTag(collection, "filename")) : media.filename = null;
+                        getTag(collection, "title") ?
+                            media.title = decodeReq(getTag(collection, "title")) : media.title = null;
+                        getTag(collection, "showName") ?
+                            media.showName = decodeReq(getTag(collection, "showName")) : media.showName = null;
+
+                        if (getTag(collection, "artist") || getTag(collection, "album")) {
+                            isSong = true;
+                            getTag(collection, "artist") ? media.artist = decodeReq(getTag(collection, "artist")) : media.artist = null;
+                            getTag(collection, "album") ? media.album = decodeReq(getTag(collection, "album")) : media.album = null;
+                        } else {
+                            isSong = false;
+                            media.artist = null;
+                            media.album = null;
+                        }
+
+                        getTag(collection, "track_number") ?
+                            media.track_number = decodeReq(getTag(collection, "track_number")) : media.track_number = null;
+
+
+                        if (getTag(collection, "seasonNumber") && getTag(collection, "episodeNumber")) {
+                            isShow = true;
+                            media.seasonNumber = decodeReq(getTag(collection, "seasonNumber"));
+                            media.episodeNumber = decodeReq(getTag(collection, "episodeNumber"));
+                        } else {
+                            isShow = false;
+                            media.seasonNumber = null;
+                            media.episodeNumber = null;
+                        }
+
                     }
+                    else {
+                        req.responseXML.getElementsByName("filename")[0] ?
+                            media.filename = decodeReq(req.responseXML.getElementsByName("filename")[0]) : media.filename = null;
+                        req.responseXML.getElementsByName("title")[0] ?
+                            media.title = decodeReq(req.responseXML.getElementsByName("title")[0]) : media.title = null;
+                        req.responseXML.getElementsByName("showName")[0] ?
+                            media.showName = decodeReq(req.responseXML.getElementsByName("showName")[0]) : media.showName = null;
 
-                    req.responseXML.getElementsByName("track_number")[0] ?
-                        media.track_number = decodeReq(req.responseXML.getElementsByName("track_number")[0]) : media.track_number = null;
+                        if (req.responseXML.getElementsByName("artist")[0] || req.responseXML.getElementsByName("album")[0]) {
+                            isSong = true;
+                            req.responseXML.getElementsByName("artist")[0] ? media.artist = decodeReq(req.responseXML.getElementsByName("artist")[0]) : media.artist = null;
+                            req.responseXML.getElementsByName("album")[0] ? media.album = decodeReq(req.responseXML.getElementsByName("album")[0]) : media.album = null;
+                        } else {
+                            isSong = false;
+                            media.artist = null;
+                            media.album = null;
+                        }
+
+                        req.responseXML.getElementsByName("track_number")[0] ?
+                            media.track_number = decodeReq(req.responseXML.getElementsByName("track_number")[0]) : media.track_number = null;
 
 
-                    if (req.responseXML.getElementsByName("seasonNumber")[0] && req.responseXML.getElementsByName("episodeNumber")[0]) {
-                        isShow = true;
-                        media.seasonNumber = decodeReq(req.responseXML.getElementsByName("seasonNumber")[0]);
-                        media.episodeNumber = decodeReq(req.responseXML.getElementsByName("episodeNumber")[0]);
-                    } else {
-                        isShow = false;
-                        media.seasonNumber = null;
-                        media.episodeNumber = null;
+                        if (req.responseXML.getElementsByName("seasonNumber")[0] && req.responseXML.getElementsByName("episodeNumber")[0]) {
+                            isShow = true;
+                            media.seasonNumber = decodeReq(req.responseXML.getElementsByName("seasonNumber")[0]);
+                            media.episodeNumber = decodeReq(req.responseXML.getElementsByName("episodeNumber")[0]);
+                        } else {
+                            isShow = false;
+                            media.seasonNumber = null;
+                            media.episodeNumber = null;
+                        }
                     }
 
                 } else {
@@ -185,8 +227,9 @@ var getStatus = setLoop(function() {
             }
         }
 
-        req.onerror = function(e) {
+        req.onerror = function (e) {
             media.state = "stopped";
+            console.log(e);
         };
 
         req.open("GET", document.location.protocol + "//" + document.location.hostname + ":" +
@@ -195,16 +238,22 @@ var getStatus = setLoop(function() {
 
     }
 
-}, 2000); // if you lower it, you may as well microwave the CPU
+}, ((navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ? 5 : 2) * 1000)); // if you lower it, you may as well fry the CPU
 
-function setLoop(f, ms) {
+function setLoop(f: Function, ms: number) {
     f();
     return setInterval(f, ms);
 }
 
-function decodeReq(entity) {
+function decodeReq(entity: Element) {
     // decoding HTML entities the stackoverflow way 
     var txt = document.createElement("textarea");
     txt.innerHTML = entity.textContent;
     return txt.value;
+}
+
+function getTag(collection: HTMLCollection, tagName: string) {
+    for (let tag of collection) {
+        if (tag.getAttribute("name") === tagName) return tag;
+    }
 }

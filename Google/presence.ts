@@ -1,206 +1,151 @@
 var presence = new Presence({
-  clientId: "612704158826496028",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+		clientId: "612704158826496028",
+		mediaKeys: false
+	}),
+	strings = presence.getStrings({
+		play: "presence.playback.playing",
+		pause: "presence.playback.paused"
+	});
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var doodleTitle : any;
+var doodleTitle: any;
 
-var homepageImage : any;
+var homepageImage: any;
 
-var resultsInfo : any, searchTab : any;
+var resultsInfo: any, searchTab: any;
 
-var pageInput : any, homepageInput;
+var pageInput: any, homepageInput;
 
-homepageInput = document.querySelector("#tsf > div:nth-child(2) > div > div.RNNXgb > div > div.a4bIc > input");
+homepageInput = document.querySelector(
+	"#tsf > div:nth-child(2) > div.A8SBwf > div.RNNXgb > div > div.a4bIc > input"
+);
 
 homepageImage = document.querySelector("#hplogo");
 
+var imgInput: any = document.querySelector("#REsRA");
+
 presence.on("UpdateData", async () => {
+	let presenceData: presenceData = {
+		details: "In construction",
+		state: "-",
+		largeImageKey: "lg"
+	};
 
+	if ((homepageInput && homepageImage) || !document.location.pathname) {
+		presenceData.state = "Home";
 
-  let presenceData: presenceData = {
-    details: "In construction",
-    state: "-",
-    largeImageKey: "lg"
-  };
+		presenceData.startTimestamp = browsingStamp;
 
+		delete presenceData.details;
+	} else if (document.location.pathname.startsWith("/doodles/")) {
+		var searchURL = new URL(document.location.href);
 
-  if(document.location.pathname.includes("/") && homepageInput && homepageImage || !document.location.pathname ) {
+		var doodleResult = searchURL.searchParams.get("q");
 
+		doodleTitle = document.querySelector("#title-card > div > h2");
 
-      presenceData.state = "Home";
+		if (document.location.pathname.includes("/about")) {
+			presenceData.details = "Doodles";
 
-      presenceData.startTimestamp = browsingStamp;
+			presenceData.state = "About";
 
-      delete presenceData.details;
+			presenceData.startTimestamp = browsingStamp;
+		} else if (doodleTitle != null) {
+			presenceData.details = "Viewing a doodle:";
 
+			presenceData.state = doodleTitle.innerText;
 
-  } else if(document.location.pathname.startsWith("/doodles/")) {
+			presenceData.startTimestamp = browsingStamp;
+		} else if (doodleResult && document.location.pathname == "/doodles/") {
+			presenceData.details = "Searching for a doodle:";
 
-    var searchURL = new URL(document.location.href);
+			presenceData.state = doodleResult;
 
-    var doodleResult = searchURL.searchParams.get("q");
+			presenceData.startTimestamp = browsingStamp;
 
-    doodleTitle = document.querySelector("#title-card > div > h2");
+			presenceData.smallImageKey = "search";
+		} else {
+			presenceData.details = "Current page:";
 
+			presenceData.state = "Doodles";
 
-    if(document.location.pathname.includes("/about")){
+			presenceData.startTimestamp = browsingStamp;
+		}
+	} else if (document.location.pathname.startsWith("/search")) {
+		var searchURL = new URL(document.location.href);
 
+		searchTab = searchURL.searchParams.get("tbm");
 
-      presenceData.details = "Doodles";
+		resultsInfo = document.querySelector("#result-stats");
 
-      presenceData.state = "About";
+		presenceData.smallImageKey = "search";
 
-      presenceData.startTimestamp = browsingStamp;
+		if (!searchTab) {
+			presenceData.details = "Searching for " + homepageInput.value;
 
+			presenceData.state = resultsInfo.textContent;
 
-    } else if(doodleTitle != null) {
+			presenceData.startTimestamp = browsingStamp;
+		} else if (searchTab == "isch") {
+			presenceData.details = "Google Images";
 
+			presenceData.state = "Searching for " + imgInput.value;
 
-      presenceData.details = "Viewing a doodle:";
+			presenceData.startTimestamp = browsingStamp;
+		} else if (searchTab == "vid") {
+			pageInput = document.querySelector("#lst-ib");
 
-      presenceData.state = doodleTitle.innerText;
+			presenceData.details = "Google Videos";
 
-      presenceData.startTimestamp = browsingStamp;
+			presenceData.state = "Searching for " + pageInput.value;
 
+			presenceData.startTimestamp = browsingStamp;
+		} else if (searchTab == "nws") {
+			pageInput = document.querySelector("#lst-ib");
 
-    } else if(doodleResult && document.location.pathname == "/doodles/") {
+			presenceData.details = "Google News";
 
-      
-      presenceData.details = "Searching for a doodle:";
+			presenceData.state = "Searching for " + pageInput.value;
 
-      presenceData.state = doodleResult;
+			presenceData.startTimestamp = browsingStamp;
+		} else if (searchTab == "bks") {
+			pageInput = document.querySelector("#lst-ib");
 
-      presenceData.startTimestamp = browsingStamp;
+			presenceData.details = "Google Books";
 
-      presenceData.smallImageKey = "search";
+			presenceData.state = "Searching for " + pageInput.value;
 
+			presenceData.startTimestamp = browsingStamp;
+		} else if (searchTab == "fin") {
+			pageInput = document.querySelector("#lst-ib");
 
-    } else {
+			presenceData.details = "Google Finance";
 
+			presenceData.state = "Searching for " + pageInput.value;
 
-      presenceData.details = "Current page:";
+			presenceData.startTimestamp = browsingStamp;
+		} else if (searchTab == "pers") {
+			pageInput = document.querySelector("#lst-ib");
 
-      presenceData.state = "Doodles";
+			presenceData.details = "Google Personal";
 
-      presenceData.startTimestamp = browsingStamp;
+			presenceData.state = "Searching for " + pageInput.value;
 
+			presenceData.startTimestamp = browsingStamp;
+		}
+	}
 
-    }
-
-  } else if(document.location.pathname.startsWith("/search")) {
-
-    var searchURL = new URL(document.location.href);
-
-    searchTab = searchURL.searchParams.get("tbm");
-
-    resultsInfo = document.querySelector("#resultStats");
-
-    presenceData.smallImageKey = "search";
-
-    if(!searchTab) {
-
-      
-      presenceData.details = "Searching for " + homepageInput.value;
-
-      presenceData.state = resultsInfo.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
-
-
-    } else if(searchTab == "isch") {
-
-      
-      presenceData.details = "Google Images";
-
-      presenceData.state = "Searching for " + homepageInput.value;
-
-      presenceData.startTimestamp = browsingStamp;
-      
-
-    } else if(searchTab == "vid") {
-
-      
-      pageInput = document.querySelector("#lst-ib");
-
-      presenceData.details = "Google Videos";
-
-      presenceData.state = "Searching for " + pageInput.value;
-
-      presenceData.startTimestamp = browsingStamp;
-      
-      
-    } else if(searchTab == "nws") {
-
-
-      pageInput = document.querySelector("#lst-ib");
-      
-      presenceData.details = "Google News";
-
-      presenceData.state = "Searching for " + pageInput.value;
-
-      presenceData.startTimestamp = browsingStamp;
-      
-
-    } else if(searchTab == "bks") {
-
-
-      pageInput = document.querySelector("#lst-ib");
-      
-      presenceData.details = "Google Books";
-
-      presenceData.state = "Searching for " + pageInput.value;
-
-      presenceData.startTimestamp = browsingStamp;
-      
-
-    } else if(searchTab == "fin") {
-
-
-      pageInput = document.querySelector("#lst-ib");
-      
-      presenceData.details = "Google Finance";
-
-      presenceData.state = "Searching for " + pageInput.value;
-
-      presenceData.startTimestamp = browsingStamp;
-      
-
-    } else if(searchTab == "pers") {
-
-
-      pageInput = document.querySelector("#lst-ib");
-      
-      presenceData.details = "Google Personal";
-
-      presenceData.state = "Searching for " + pageInput.value;
-
-      presenceData.startTimestamp = browsingStamp;
-      
-
-    }
-  
-  }
-
-
-  presence.setActivity(presenceData);
-
+	presence.setActivity(presenceData);
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
+	var startTime = Date.now();
+	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+	return [Math.floor(startTime / 1000), endTime];
 }

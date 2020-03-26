@@ -1,9 +1,6 @@
+import "source-map-support/register";
 import { connect, MongoClient } from "mongodb";
 import { readdirSync, statSync, readFileSync } from "fs";
-
-process.env.MONGO_USERNAME = "Timeraa";
-process.env.MONGO_PASSWORD = "T8CQa3u7VqgN";
-process.env.MONGO_IP = "premid.app";
 
 connect(
 	`mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
@@ -62,7 +59,9 @@ async function run(MongoClient: MongoClient) {
 			)
 			.map(dP => presences.find(p => p.name === dP.name));
 
-	let nP, dP, oP;
+	let nP,
+		dP = [],
+		oP = [];
 
 	if (newPresences.length > 0)
 		nP = MongoClient.db("PreMiD")
@@ -83,5 +82,5 @@ async function run(MongoClient: MongoClient) {
 				.findOneAndUpdate({ name: p.metadata.service }, { $set: p })
 		);
 
-	Promise.all([nP, dP, ...oP]).then(() => MongoClient.close());
+	Promise.all([nP, ...dP, ...oP]).then(() => MongoClient.close());
 }

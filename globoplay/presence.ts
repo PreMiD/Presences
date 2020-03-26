@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/v/")) {
       var currentTime : any, duration : any, paused : any, timestamps : any, video : HTMLVideoElement;
-      video = document.querySelector('video');
+      video = document.querySelector(".id-playback > video");
       currentTime = video.currentTime,
       duration = video.duration,
       paused = video.paused;
