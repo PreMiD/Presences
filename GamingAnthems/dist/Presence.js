@@ -28,8 +28,9 @@ presence.on("UpdateData", () => {
     //UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
 
     //It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.
-
+var browsingStamp = Math.floor(Date.now() / 1000);
     var presenceData = {
+        presenceData.startTimestamp = browsingStamp;,
         largeImageKey: "large", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
         smallImageKey: "small", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
         smallImageText: "GamingAnthems Logo", 
