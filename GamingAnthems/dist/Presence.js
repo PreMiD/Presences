@@ -36,7 +36,6 @@ var browsingStamp = Math.floor(Date.now() / 1000);
         smallImageText: "GamingAnthems Logo", 
         details: "Listening To The Station", 
         state: "No1 Gaming Radio Station", 
-        Math.floor(Date.now() / 1000), 
     }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
 
     if (presenceData.details == null) {
