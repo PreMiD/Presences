@@ -27,7 +27,7 @@ if (lastPlaybackState != playback) {
 }
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    var a = presenceData = {
+    var presenceData = {
         largeImageKey: "logo"  
     };
 
