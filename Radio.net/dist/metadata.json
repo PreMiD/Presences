@@ -9,24 +9,11 @@
     "de": "Radio.net bietet Zugang zu mehr als 30.000 Sender und Podcasts und hat weltweit 4 Millionen monatliche Nutzer und über 24 Millionen App Downloads.",
     "zh_CN": "Radio.net汇集了30,000多个广播电台和播客。 它在全球每月有400万用户，已被下载超过2000万次。"
   },
-  "url": [
-    "www.radio.net",
-    "www.radio.de",
-    "www.radio.at",
-    "www.radio.fr",
-    "www.radio.se",
-    "www.radio.dk",
-    "www.radio.pt",
-    "www.radio.es",
-    "www.radio.it",
-    "www.radio.pl",
-    "br.radio.net",
-    "mx.radio.net",
-    "co.radio.net"
-  ],
-  "version": "2.2",
+  "url": "www.radio.net",
+  "regExp": "((www|br|mx|co).radio.net|www.radio.(de|at|fr|se|dk|pt|es|it|pl))",
+  "version": "2.3",
   "logo": "https://i.imgur.com/3IBLlpc.png",
-  "thumbnail": "https://i.imgur.com/x2U3j65.png",
+  "thumbnail": "https://i.imgur.com/pYZzRDV.png",
   "color": "#67e350",
   "tags": [
     "radio",
