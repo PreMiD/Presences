@@ -72,7 +72,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         else if (document.location.pathname.includes("/v/")) {
             var currentTime, duration, paused, timestamps, video;
-            video = document.querySelector('video');
+            video = document.querySelector(".id-playback > video");
             currentTime = video.currentTime,
             duration = video.duration,
             paused = video.paused;
