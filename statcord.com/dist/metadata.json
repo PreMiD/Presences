@@ -12,14 +12,14 @@
       "statcord.com",
       "docs.statcord.com"
     ],
-    "version": "1.0.0",
-    "logo": "https://cdn.statcord.com/logo.png",
+    "version": "1.0.1",
+    "logo": "https://i.imgur.com/4pcX180.png",
     "thumbnail": "https://i.imgur.com/2iJVEDe.png",
     "color": "#6a0dad",
     "tags": [
-      "Bots",
-      "Discord",
-      "Stats"
+      "bots",
+      "discord",
+      "stats"
     ],
     "category": "other"
   }

@@ -55,6 +55,9 @@ presence.on("UpdateData", () => {
                 presenceData.details = "Viewing a Discord bot:";
                 presenceData.state = botname
             }
+        } else {
+            presenceData.details = "Viewing Page:";
+            presenceData.state = "Main Page"
         }
     }
     if (presenceData.details == null) {

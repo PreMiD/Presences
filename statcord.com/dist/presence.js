@@ -30,6 +30,9 @@ presence.on("UpdateData", () => {
         } else if (document.location.pathname.includes("/profile/")) {
             presenceData.details = `Viewing Page:`;
             presenceData.state = `My Bots Page`;
+        } else {
+            presenceData.details = "Viewing Page:";
+            presenceData.state = "Main Page"
         }
     }
     presence.setActivity(presenceData);

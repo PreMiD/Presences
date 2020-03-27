@@ -55,8 +55,8 @@ presence.on("UpdateData", () => {
                 presenceData.state = profilename
             }
         } else {
-            presenceData.details = "Viewing a profile:";
-            presenceData.state = profilename
+            presenceData.details = "Viewing Page:";
+            presenceData.state = "Main Page"
         }
     }
     presence.setActivity(presenceData);
