@@ -1,115 +1,97 @@
 var presence = new Presence({
-    clientId: "616754182858342426",
-    mediaKeys: true
-  }),
+		clientId: "616754182858342426",
+		mediaKeys: true
+	}),
+	strings = presence.getStrings({
+		play: "presence.playback.playing",
+		pause: "presence.playback.paused"
+	});
 
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+var lastPlaybackState = null;
+var playback: boolean;
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-  var lastPlaybackState = null;
-  var playback;
-  var browsingStamp = Math.floor(Date.now()/1000);
-
-  var season : any, episode : any;
-
-  if(lastPlaybackState != playback) {
-
-      lastPlaybackState = playback
-      browsingStamp = Math.floor(Date.now()/1000)
-      
-  }
+if (lastPlaybackState != playback) {
+	lastPlaybackState = playback;
+	browsingStamp = Math.floor(Date.now() / 1000);
+}
 
 presence.on("UpdateData", async () => {
+	let presenceData: presenceData = {
+		details: "Unknown page",
+		largeImageKey: "lg"
+	};
 
-  playback = 
-  document.querySelector("#player > div.jw-media.jw-reset > video") !== null
-      ? true : false
-  
-  if (!playback) {
+	let video: HTMLVideoElement = document.querySelector(
+		"#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+	);
 
-    presenceData: presenceData = {
-      largeImageKey: "lg"
-    }
-    
-    presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+	playback = video !== null ? true : false;
 
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
+	if (!playback) {
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingStamp;
 
-    presence.setActivity(presenceData);
-    
-  }
+		delete presenceData.state;
+		delete presenceData.smallImageKey;
 
-  var video: HTMLVideoElement = document.querySelector("#player > div.jw-media.jw-reset > video");
+		presence.setActivity(presenceData);
+	}
 
-  if (video !== null && !isNaN(video.duration)) {
+	if (video !== null && !isNaN(video.duration)) {
+		let videoTitle: HTMLElement = document.querySelector(
+				"div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down"
+			),
+			season: HTMLElement = document.querySelector("#playercontainer span.outPes"),
+			episode: HTMLElement = document.querySelector("#playercontainer span.outPep");
 
-      var videoTitle : any;
+		let timestamps = getTimestamps(
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		);
 
-      videoTitle = document.querySelector("div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down");
+		presenceData = {
+			largeImageKey: "lg",
+			smallImageKey: video.paused ? "pause" : "play",
+			smallImageText: video.paused ? (await strings).pause : (await strings).play,
+			startTimestamp: timestamps[0],
+			endTimestamp: timestamps[1]
+		};
 
-      season = document.querySelector("#playercontainer span.outPes");
+		presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
 
-      episode = document.querySelector("#playercontainer span.outPep");
+		if (season && episode) {
+			presenceData.details = videoTitle.innerText;
+			presenceData.state =
+				"Season " + season.innerText + ", Episode " + episode.innerText;
+		} else if (!season && episode) {
+			presenceData.details = videoTitle.innerText;
+			presenceData.state = "Episode " + episode.innerText;
+		} else {
+			presenceData.details = "Watching";
+			presenceData.state = videoTitle.innerText;
+		}
 
-      var uploader =
-          '',
-        timestamps = getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        ),
-        presenceData: presenceData = {
-          largeImageKey: "lg",
-          smallImageKey: video.paused ? "pause" : "play",
-          smallImageText: video.paused
-            ? (await strings).pause
-            : (await strings).play,
-          startTimestamp: timestamps[0],
-          endTimestamp: timestamps[1]
-        };
+		if (video.paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
 
-      presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
-
-      if(season && episode) {
-
-        presenceData.details = videoTitle.innerText
-        presenceData.state = "Season " + season.innerText + ", Episode " + episode.innerText;
-
-      } else if(!season && episode) {
-
-        presenceData.details = videoTitle.innerText
-        presenceData.state = "Episode " + episode.innerText;
-
-      } else {
-
-      presenceData.details = "Watching";
-      presenceData.state = videoTitle.innerText;
-
-      }
-
-      if (video.paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
- 
-      if (videoTitle !== null) {
-        presence.setActivity(presenceData, !video.paused);
-      }
-    
-    }
-
+		if (videoTitle !== null) {
+			presence.setActivity(presenceData, !video.paused);
+		}
+	}
 });
 
 presence.on("MediaKeys", (key: string) => {
-  switch (key) {
-    case "pause":
-      var video = document.querySelector("#player > div.jw-media.jw-reset > video") as HTMLVideoElement;
-      video.paused ? video.play() : video.pause();
-      break;
-  }
+	switch (key) {
+		case "pause":
+			var video = document.querySelector(
+				"#player > div.jw-media.jw-reset > video"
+			) as HTMLVideoElement;
+			video.paused ? video.play() : video.pause();
+			break;
+	}
 });
 
 /**
@@ -118,7 +100,7 @@ presence.on("MediaKeys", (key: string) => {
  * @param {Number} videoDuration Video duration seconds
  */
 function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+	var startTime = Date.now();
+	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+	return [Math.floor(startTime / 1000), endTime];
 }
