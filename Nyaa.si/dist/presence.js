@@ -4,6 +4,8 @@ var presence = new Presence({
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
+    search: "presence.activity.searching",
+    reading: "presence.activity.reading"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var user;
@@ -22,6 +24,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.details = "Searching for:";
         presenceData.state = document.querySelector('input').value;
         presenceData.smallImageKey = "search";
+        presenceData.smallImageText = (yield strings).search;
     }
     else if (document.location.pathname == "/") {
         presenceData.startTimestamp = browsingStamp;
@@ -31,16 +34,19 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
         presenceData.details = "Reading the rules";
+        presenceData.smallImageText = (yield strings).reading;
     }
     else if (document.location.pathname.includes("/help")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
         presenceData.details = "Reading the help section";
+        presenceData.smallImageText = (yield strings).reading;
     }
     else if (document.location.pathname.includes("/upload")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "upload";
         presenceData.details = "Uploading a torrent";
+        presenceData.smallImageText = "Uploading";
     }
     else if (document.location.pathname.includes("/view/")) {
         presenceData.startTimestamp = browsingStamp;
@@ -60,8 +66,3 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setActivity(presenceData);
     }
 }));
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}

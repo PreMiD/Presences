@@ -2,7 +2,7 @@ var presence = new Presence({
     clientId: "683031551193514047",
     mediaKeys: false
 }), strings = presence.getStrings({
-    readinga: "presence.activity.reading"
+    reading: "presence.activity.reading"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -24,30 +24,35 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/help/smilies/")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (yield strings).reading;
         presenceData.details = "Help";
         presenceData.state = "Smilies"
     }
     else if (document.location.pathname.includes("/help/bb-codes/")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (yield strings).reading;
         presenceData.details = "Help";
         presenceData.state = "BB codes"
     }
     else if (document.location.pathname.includes("/help/cookies/")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (yield strings).reading;
         presenceData.details = "Help";
         presenceData.state = "Cookie usage"
     }
     else if (document.location.pathname.includes("/help/privacy-policy/")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (yield strings).reading;
         presenceData.details = "Help";
         presenceData.state = "Privacy Policy"
     }
     else if (document.location.pathname.includes("/help/terms/")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (yield strings).reading;
         presenceData.details = "Help";
         presenceData.state = "Terms and rules"
     }
@@ -62,6 +67,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/threads/")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (yield strings).reading;
         presenceData.details = "Thread";
         presenceData.state = document.querySelector("h1.p-title-value").textContent;
     }
@@ -141,6 +147,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Settings";
         presenceData.state = "Image and media options";
+    }
+    else if (document.location.pathname.includes("/giveaways/")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Giveaways";
     }
     else if (document.location.pathname.includes("/conversations/")) {
         presenceData.startTimestamp = browsingStamp;

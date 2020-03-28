@@ -12,8 +12,6 @@ var actionURL = new URL(document.location.href);
 var title2URL = new URL(document.location.href);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
-        details: "In construction",
-        state: "-",
         largeImageKey: "logo"
     };
     title = document.querySelector('h1#firstHeading');
@@ -48,11 +46,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.state = title2Result;
         }
         presenceData.startTimestamp = browsingStamp;
+        
+    }
+    if (presenceData.details == null) {
+        presence.setTrayTitle();
+        presence.setActivity();
     }
     presence.setActivity(presenceData);
 }));
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}

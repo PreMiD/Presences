@@ -19,6 +19,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Página Inicial";
     }
+    // if i ever have patience, todo show whay category you are seeing
+    else if (document.location.pathname.includes("/categorias")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Categorias";
+    }
     else if (document.location.pathname.includes("/busca/")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Pesquisando por:";

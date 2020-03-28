@@ -2,7 +2,7 @@ var presence = new Presence({
     clientId: "684627733145452555",
     mediaKeys: false
 }), strings = presence.getStrings({
-    reading: "presence.activity.reading"
+    reading: "presence.activity.reading",
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -40,6 +40,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         var page = document.querySelector("select.backgsla.frightrr").value;
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
+        presenceData.smallImageText = (yield strings).reading;
         presenceData.details = manga +" - "+ chapter;
         presenceData.state = "Página " + page;
     }

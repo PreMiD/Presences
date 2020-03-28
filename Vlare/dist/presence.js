@@ -3,7 +3,8 @@ var presence = new Presence({
     mediaKeys: false
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
+    search: "presence.activity.searching",
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     var video = document.querySelector("#wbplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
@@ -178,6 +179,7 @@ else if (document.location.pathname.includes("/search/")) {
         state: search,
         largeImageKey: "logo",
         smallImageKey: "search",
+        smallImageText: (yield strings).search,
         startTimestamp: browsingStamp
     };
 presence.setActivity(data)
@@ -198,6 +200,7 @@ else if (document.location.pathname.includes("/upload")) {
         details: "Uploading a video",
         largeImageKey: "logo",
         smallImageKey: "upload",
+        smallImageText: "Uploading",
         startTimestamp: browsingStamp
     };
 presence.setActivity(data)
