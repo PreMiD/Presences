@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
+    "module": "CommonJS",
+    "target": "ES2020",
     "removeComments": true,
     "typeRoots": ["@types"],
     "inlineSourceMap": true
