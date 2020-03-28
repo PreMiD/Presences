@@ -168,7 +168,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         else if (pt.includes("/payments")) {
             state("Viewing payments")
         } 
-        else if (pt.includes("/main/accountInformation")) {
+        else if (pt.includes("/main/accountinformation")) {
             state("Account - Information")
         } 
         else if (pt.includes("/main/personal-settings")) {
