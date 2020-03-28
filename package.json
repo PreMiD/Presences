@@ -1,16 +1,16 @@
 {
 	"name": "presences",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"author": "Timeraa",
 	"license": "MPL-2.0",
 	"devDependencies": {
-		"@types/node": "^13.9.3",
-		"mongodb": "^3.5.5",
-		"source-map-support": "^0.5.16",
-		"typescript": "^3.8.3"
+		"@types/node": "13.9.5",
+		"mongodb": "3.5.5",
+		"source-map-support": "0.5.16",
+		"typescript": "3.8.3"
 	},
 	"dependencies": {
-		"@types/chrome": "^0.0.101",
-		"@types/mongodb": "^3.5.2"
+		"@types/chrome": "0.0.103",
+		"@types/mongodb": "3.5.4"
 	}
 }
