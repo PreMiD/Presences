@@ -20,19 +20,19 @@ var punishmentUser;
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
-        largeImageKey: "MCCentral"
+        largeImageKey: "mccentral"
     };
 
     if (document.location.pathname == "/community/") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Home Page";
+        presenceData.state = "Home page";
     }
 
     else if (document.location.pathname == "/") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Store Home Page";
+        presenceData.state = "Store home page";
     }
     else if (document.location.pathname.includes("/category/91801")){
         presenceData.startTimestamp = browsingStamp;
@@ -43,48 +43,42 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/category/205563")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Checking on Store:";
-        presenceData.state = "Coal Rank Upgrades";
+        presenceData.state = "Coal Rank upgrades";
     }
     else if (document.location.pathname.includes("/category/205565")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Checking on Store:";
-        presenceData.state = "Iron Rank Upgrades";
+        presenceData.state = "Iron Rank upgrades";
     }
     else if (document.location.pathname.includes("/category/205567")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Checking on Store:";
-        presenceData.state = "Gold Rank Upgrades";
+        presenceData.state = "Gold Rank upgrades";
     }
     else if (document.location.pathname.includes("/category/205569")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Checking on Store:";
-        presenceData.state = "Lapis Rank Upgrades";
+        presenceData.state = "Lapis Rank upgrades";
     }
     else if (document.location.pathname.includes("/category/205570")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Checking on Store:";
-        presenceData.state = "Emerald Rank Upgrades";
+        presenceData.state = "Emerald Rank upgrades";
     }
     else if (document.location.pathname.includes("/category/205571")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Checking on Store:";
-        presenceData.state = "Diamond Rank Upgrades";
+        presenceData.state = "Diamond Rank upgrades";
     }
     else if (document.location.pathname.includes("/category/512622")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Checking on Store:";
-        presenceData.state = "Bedrock Rank Upgrades";
+        presenceData.state = "Bedrock Rank upgrades";
     }
     else if (document.location.pathname.includes("/category/860358")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Checking on Store:";
-        presenceData.state = "Legend Rank Upgrades";
-    }
-
-    else if (document.location.pathname.includes("/category/860358")){
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Checking on Store:";
-        presenceData.state = "Legend Rank Upgrades";
+        presenceData.state = "Legend Rank upgrades";
     }
 
     else if (document.location.pathname.includes("/category/519352")){
@@ -120,17 +114,17 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname == "/community/forums/"){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Forums Main Page";
+        presenceData.state = "Forums main page";
     }
 
     else if (document.location.pathname.includes("/add-reply")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Replying a Thread";
+        presenceData.details = "Replying a thread";
     }
     else if (document.location.pathname.includes("/threads/")){
         thread = document.querySelector(".titleBar > h1").innerText;
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing the Thread:";
+        presenceData.details = "Viewing the thread:";
         presenceData.state = "\"" + thread + "\"";
     }
 
@@ -157,35 +151,35 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/bugs/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Bug Reports Main Page";
+        presenceData.state = "Bug Reports main page";
     }
     else if (document.location.pathname.includes("/forms/bug-reports.15/")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Reporting a Bug";
+        presenceData.details = "Reporting a bug";
     }
     else if (document.location.pathname.includes("/support/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Support Forums";
+        presenceData.state = "Support forums";
     }
 
     else if (document.location.pathname.includes("/apply/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Staff Application Forums";
+        presenceData.state = "Staff Application forums";
     }
     else if (document.location.pathname.includes("/forms/staff-application.5/")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Applying for Staff";
+        presenceData.details = "Applying for staff";
     }
     else if (document.location.pathname.includes("/forms/previous-staff-application.7/")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Applying for Returning Staff";
+        presenceData.details = "Applying for returning staff";
     }
     else if (document.location.pathname.includes("/youtuber/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Youtuber Application Forums";
+        presenceData.state = "Youtuber Application forums";
     }
     else if (document.location.pathname.includes("/forms/youtuber-application.6/")){
         presenceData.startTimestamp = browsingStamp;
@@ -195,103 +189,103 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/reports/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Report Players Forums";
+        presenceData.state = "Report Players forums";
     }
     else if (document.location.pathname.includes("/forms/report-players.2/")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Reporting a Player";
+        presenceData.details = "Reporting a player";
     }
 
     else if (document.location.pathname.includes("/reports-staff/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Report Staff Forums";
+        presenceData.state = "Report Staff forums";
     }
     else if (document.location.pathname.includes("/forms/report-staff.17/")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Reporting a Staff Member";
+        presenceData.details = "Reporting a staff member";
     }
 
     else if (document.location.pathname.includes("/appeals/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Punishment Appeals Forums";
+        presenceData.state = "Punishment Appeals forums";
     }
     else if (document.location.pathname.includes("/forms/punishment-appeal.1/")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Making a Punishment Appeal";
+        presenceData.details = "Making a punishment appeal";
     }
 
     else if (document.location.pathname.includes("/punishments/")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Searching for Punishments";
+        presenceData.details = "Searching for punishments";
     }
     
     else if (document.location.pathname.includes("/general/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "General Discussion Forums";
+        presenceData.state = "General Discussion forums";
     }
     else if (document.location.pathname == ("/community/forums/skyblock/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Skyblock Discussion Forums";
+        presenceData.state = "Skyblock Discussion forums";
     }
     else if (document.location.pathname == ("/community/forums/creative/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Creative Discussion Forums";
+        presenceData.state = "Creative Discussion forums";
     }
     else if (document.location.pathname == ("/community/forums/kitpvp/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "KitPvP Discussion Forums";
+        presenceData.state = "KitPvP Discussion forums";
     }
     else if (document.location.pathname == ("/community/forums/survival/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Survival Discussion Forums";
+        presenceData.state = "Survival Discussion forums";
     }
     else if (document.location.pathname == ("/community/forums/prison/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Prison Discussion Forums";
+        presenceData.state = "Prison Discussion forums";
     }
     else if (document.location.pathname == ("/community/forums/factions/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Factions Discussion Forums";
+        presenceData.state = "Factions Discussion forums";
     }
     else if (document.location.pathname == ("/community/forums/minigames/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Minigames Discussion Forums";
+        presenceData.state = "Minigames Discussion forums";
     }
 
     else if (document.location.pathname.includes("/off-topic/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Off Topic Forums";
+        presenceData.state = "Off Topic forums";
     }
     else if (document.location.pathname.includes("/giveaways/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Giveaways Forums";
+        presenceData.state = "Giveaways forums";
     }
     else if (document.location.pathname.includes("/suggestions/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Server Suggestions Forums";
+        presenceData.state = "Server Suggestions forums";
     }
     else if (document.location.pathname.includes("/maps/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Map Submission Forums";
+        presenceData.state = "Map Submission forums";
     }
     else if (document.location.pathname.includes("/community-ticket/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Community Ticket Forums";
+        presenceData.state = "Community Ticket forums";
     }
     else if (document.location.pathname.includes("/forms/community-ticket.18/")){
         presenceData.startTimestamp = browsingStamp;
@@ -301,109 +295,109 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (document.location.pathname.includes("/staff/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Staff Members Page";
+        presenceData.state = "Staff Members page";
     }
     else if (document.location.pathname.includes("/rules/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Rules Page";
+        presenceData.state = "Rules page";
     }
     else if (document.location.pathname.includes("/vote/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Voting Page";
+        presenceData.state = "Voting page";
     }
 
     else if (document.location.pathname == ("/community/leaderboards/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Leaderboards Page";
+        presenceData.state = "Leaderboards page";
     }
     else if (document.location.pathname.includes("/guilds/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Guilds Leaderboards";
+        presenceData.state = "Guilds leaderboards";
     }
     else if (document.location.pathname.includes("/survivalgames/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Survival Games Leaderboards";
+        presenceData.state = "Survival Games leaderboards";
     }
     else if (document.location.pathname.includes("/skywars/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Skywars Leaderboards";
+        presenceData.state = "Skywars leaderboards";
     }
     else if (document.location.pathname.includes("/walls/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Speedy Walls Leaderboards";
+        presenceData.state = "Speedy Walls leaderboards";
     }
     else if (document.location.pathname.includes("/ctf/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "CTF Leaderboards";
+        presenceData.state = "CTF leaderboards";
     }
     else if (document.location.pathname.includes("/murder/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Murder Mayhem Leaderboards";
+        presenceData.state = "Murder Mayhem leaderboards";
     }
     else if (document.location.pathname.includes("/championbuilder/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Champion Builder Leaderboards";
+        presenceData.state = "Champion Builder leaderboards";
     }
     else if (document.location.pathname.includes("/cakewars/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Cakewars Leaderboards";
+        presenceData.state = "Cakewars leaderboards";
     }
     else if (document.location.pathname.includes("/uhc/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "UHC Leaderboards";
+        presenceData.state = "UHC leaderboards";
     }
 
     else if (document.location.pathname == ("/community/leaderboards/skyblock/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Skyblock Leaderboards";
+        presenceData.state = "Skyblock leaderboards";
     }
     else if (document.location.pathname == ("/community/leaderboards/survival/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Survival Leaderboards";
+        presenceData.state = "Survival leaderboards";
     }
     else if (document.location.pathname == ("/community/leaderboards/factions/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Factions Leaderboards";
+        presenceData.state = "Factions leaderboards";
     }
     else if (document.location.pathname == ("/community/leaderboards/prison/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Prison Leaderboards";
+        presenceData.state = "Prison leaderboards";
     }
     else if (document.location.pathname == ("/community/leaderboards/kitpvp/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "KitPvP Leaderboards";
+        presenceData.state = "KitPvP leaderboards";
     }
     else if (document.location.pathname == ("/community/leaderboards/arenapvp/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "ArenaPvP Leaderboards";
+        presenceData.state = "ArenaPvP leaderboards";
     }
 
     else if (document.location.pathname == ("/community/account/")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Changing Personal Details";
+        presenceData.details = "Changing personal details";
     }
     else if (document.location.pathname.includes("/account/alerts")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Latest Alerts";
+        presenceData.state = "Latest alerts";
     }
     else if (document.location.pathname == ("/community/conversations/")){
         presenceData.startTimestamp = browsingStamp;
@@ -412,22 +406,22 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else if (document.location.pathname == ("/community/conversations/add")){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Starting a New Conversation";
+        presenceData.details = "Starting a new conversation";
     }
     else if (document.location.pathname.includes("/account/")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Account Details";
+        presenceData.state = "Account details";
     }
     else if (document.location.pathname == ("/community/watched/threads")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Unread Watched Threads";
+        presenceData.state = "Unread watched threads";
     }
     else if (document.location.pathname == ("/community/watched/forums")){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing:";
-        presenceData.state = "Watched Forums";
+        presenceData.state = "Watched forums";
     }
 
     else if (document.location.pathname.includes("/members/")) {
