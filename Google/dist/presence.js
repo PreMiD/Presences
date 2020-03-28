@@ -113,7 +113,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = browsingStamp;
         }
     } else if (pagePath.startsWith("/adsense")) {
-        var pt = pagePath.replace("/adsense/")
+        var pt = pagePath.replace("/adsense/");
         presenceData.details = "Google Adsense";
         function state(state) {
             presenceData.state = state
@@ -121,28 +121,30 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         if (pt.startsWith("start/")) {
             state("Homepage")
         } 
-        else if (pt.startsWith("start/solutions")) {
-            state("Solutions")
-        } 
-        else if (pt.startsWith("start/solutions/auto-ads/")) {
+        else if (pt.includes("/solutions/auto-ads/")) {
             state("Solutions - Auto Ads")
         } 
-        else if (pt.startsWith("start/solutions/responsive-ads/")) {
+        else if (pt.includes("/solutions/responsive-ads/")) {
             state("Solutions - Responsive Ads")
         } 
-        else if (pt.startsWith("start/success-stories/")) {
+        else if (pt.includes("/solutions")) {
+            state("Solutions")
+        }
+        else if (pt.includes("/success-stories/")) {
             state("Success Stories")
         } 
-        else if (pt.startsWith("start/resources/")) {
+        else if (pt.includes("/resources/")) {
             state("Resources")
         } 
-        else if (pt.startsWith("signup/new/lead")) {
+        else if (pt.includes("/signup/new/lead")) {
             state("Sign-up")
         } 
-        else if (pt.inclues("/home") || pt.includes("/new")) {
+        else if (pt.includes("/home") || 
+                 pt.includes("/new")) {
             state("Viewing income and stats")
         } 
-        else if (pt.includes("/myads/sites") || pt.includes("/myads/units")) {
+        else if (pt.includes("/myads/sites") || 
+                 pt.includes("/myads/units")) {
             state("Viewing custom ads & sites")
         } 
         else if (pt.includes("/main/myads-viewall-channels")) {
