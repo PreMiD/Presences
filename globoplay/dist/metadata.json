@@ -20,9 +20,6 @@
   "logo": "https://i.imgur.com/OorSTmb.png",
   "thumbnail": "https://i.imgur.com/eEb3Dy7.png",
   "color": "#fc1e1e",
-  "tags": [
-    "shows",
-    "movies"
-  ],
+  "tags": ["shows", "movies"],
   "category": "videos"
 }

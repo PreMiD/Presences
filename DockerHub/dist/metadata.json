@@ -12,8 +12,6 @@
   "logo": "https://i.imgur.com/xr2Gulz.png",
   "thumbnail": "https://i.imgur.com/n3Ox5DQ.png",
   "color": "#099CEC",
-  "tags": [
-    "docker"
-  ],
+  "tags": ["docker"],
   "category": "other"
 }

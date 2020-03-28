@@ -12,9 +12,6 @@
   "logo": "https://i.imgur.com/pI3mGWH.png",
   "thumbnail": "https://i.imgur.com/hT57Bkm.png",
   "color": "#761FA1",
-  "tags": [
-    "fnbr",
-    "fortnite"
-  ],
+  "tags": ["fnbr", "fortnite"],
   "category": "games"
 }

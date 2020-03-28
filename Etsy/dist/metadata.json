@@ -18,9 +18,6 @@
   "logo": "https://i.imgur.com/eKl4W7F.png",
   "thumbnail": "https://i.imgur.com/n2iARpf.png",
   "color": "#f27224",
-  "tags": [
-    "store",
-    "shopping"
-  ],
+  "tags": ["store", "shopping"],
   "category": "other"
 }

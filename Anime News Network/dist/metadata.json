@@ -13,9 +13,6 @@
   "logo": "https://cdn.discordapp.com/attachments/270798717089480704/631523459268345856/66183238-75d14f80-e64e-11e9-9409-f2ca1bbd3d0b.png",
   "thumbnail": "https://cdn.discordapp.com/attachments/270798717089480704/631523654509002752/unknown.png",
   "color": "#afeeee",
-  "tags": [
-    "Anime",
-    "News"
-  ],
+  "tags": ["Anime", "News"],
   "category": "anime"
 }

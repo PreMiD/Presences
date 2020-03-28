@@ -13,10 +13,6 @@
   "logo": "https://erens.glitch.me/dk8T.png",
   "thumbnail": "https://erens.glitch.me/rUaA.png",
   "color": "#2942BF",
-  "tags": [
-    "discord",
-    "bot",
-    "turkish"
-  ],
+  "tags": ["discord", "bot", "turkish"],
   "category": "other"
 }

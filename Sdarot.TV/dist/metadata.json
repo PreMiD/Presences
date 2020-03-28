@@ -14,10 +14,7 @@
   "logo": "https://i.imgur.com/hW1oWxv.png",
   "thumbnail": "https://i.imgur.com/reRsSMK.png",
   "color": "#f5d80b",
-  "tags": [
-    "israel",
-    "videos"
-  ],
+  "tags": ["israel", "videos"],
   "category": "videos",
   "regExp": "(([a-z0-9]+)[.])?sdarot[.]([a-z0-9]+)"
 }

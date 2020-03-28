@@ -12,10 +12,6 @@
   "logo": "https://erens.glitch.me/QKiB.png",
   "thumbnail": "https://erens.glitch.me/Y6Po.png",
   "color": "#A910E7",
-  "tags": [
-    "bot",
-    "english",
-    "groovy"
-  ],
+  "tags": ["bot", "english", "groovy"],
   "category": "other"
 }

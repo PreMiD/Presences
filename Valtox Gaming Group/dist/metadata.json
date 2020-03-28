@@ -13,14 +13,7 @@
   "logo": "https://i.imgur.com/N9hqBPt.png",
   "thumbnail": "https://i.imgur.com/voX96Tr.png",
   "color": "#ff0000",
-  "tags": [
-    "vtc",
-    "ets2",
-    "ats",
-    "minecraft",
-    "fivem",
-    "gtav"
-  ],
+  "tags": ["vtc", "ets2", "ats", "minecraft", "fivem", "gtav"],
   "category": "games",
   "regExp": "(([a-z0-9]+)[.])?valtoxgaminggroup[.]com"
 }

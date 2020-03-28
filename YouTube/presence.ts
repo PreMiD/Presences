@@ -1,11 +1,10 @@
 var presence = new Presence({
     clientId: "463097721130188830",
-    mediaKeys: false
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live"
+    live: "presence.activity.live",
   });
 
 // YouTube TV separator pattern
@@ -55,11 +54,12 @@ presence.on("UpdateData", async () => {
       uploader2: any,
       edited: boolean,
       uploaderEmbed: any;
-
     (edited = false),
       (uploaderTV =
         document.querySelector(".player-video-details") ||
-        document.querySelector("ytd-video-owner-renderer  .ytd-channel-name a")),
+        document.querySelector(
+          "ytd-video-owner-renderer  .ytd-channel-name a"
+        )),
       (uploaderEmbed = document.querySelector(
         "div.ytp-title-expanded-heading > h2 > a"
       )),
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play,
       startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
+      endTimestamp: timestamps[1],
     };
 
     presence.setTrayTitle(
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
     document.location.hostname == "youtube.com"
   ) {
     let presenceData: presenceData = {
-      largeImageKey: "yt_lg"
+      largeImageKey: "yt_lg",
     };
 
     var search: any;
@@ -274,8 +274,8 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/post")) {
       presenceData.details = "Viewing community post";
-      var selector: Node = document.querySelector("#author-text")
-      presenceData.state = selector && `of: ${selector.textContent}` || null;
+      var selector: Node = document.querySelector("#author-text");
+      presenceData.state = (selector && `of: ${selector.textContent}`) || null;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/feed/trending")) {
       presenceData.details = "Viewing what's trending"; //youtube.trending
@@ -361,7 +361,7 @@ presence.on("UpdateData", async () => {
     let presenceData: presenceData = {
       largeImageKey: "yt_lg",
       smallImageKey: "studio",
-      smallImageText: "Youtube Studio"
+      smallImageText: "Youtube Studio",
     };
 
     var search: any;

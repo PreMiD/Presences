@@ -1,28 +1,10 @@
 var presence = new Presence({
     clientId: "463151177836658699",
-    mediaKeys: true
   }),
   strings: any = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
   });
-
-presence.on("MediaKeys", (key: string) => {
-  switch (key) {
-    case "pause": {
-      var video = document.querySelector(".video-stream") as HTMLVideoElement;
-
-      video.paused ? video.play() : video.pause();
-      break;
-    }
-    case "nextTrack":
-      (document.querySelector(".next-button") as HTMLAnchorElement).click();
-      break;
-    case "previousTrack":
-      (document.querySelector(".previous-button") as HTMLAnchorElement).click();
-      break;
-  }
-});
 
 presence.on("UpdateData", async () => {
   var title = (document.querySelector(
@@ -44,7 +26,7 @@ presence.on("UpdateData", async () => {
           ? (await strings).pause
           : (await strings).play,
         startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
+        endTimestamp: timestamps[1],
       };
 
     if (video.paused) {
@@ -79,7 +61,7 @@ function getAuthorString() {
     //* Build output string
     authorString = `${authorsArray
       .slice(0, authorsArray.length - 1)
-      .map(a => a.innerText)
+      .map((a) => a.innerText)
       .join(", ")} - ${
       authorsArray[authorsArray.length - 1].innerText
     } (${year})`;

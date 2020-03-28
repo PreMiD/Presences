@@ -12,11 +12,7 @@
   "logo": "http://i.cubeupload.com/vHaa4W.png",
   "thumbnail": "https://downbeat.is-inside.me/iLWNLsjM.png",
   "color": "#fc8c03",
-  "tags": [
-    "creations",
-    "design",
-    "community"
-  ],
+  "tags": ["creations", "design", "community"],
   "category": "other",
   "regExp": "(([a-z0-9]+)[.])?(scratch|scratchfoundation|scratch-wiki|donationpay|scratched[.]gse[.]harvard|scratchjr)[.](mit[.]edu|org|info|edu)"
 }

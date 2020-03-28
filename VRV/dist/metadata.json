@@ -13,11 +13,7 @@
   "logo": "https://i.imgur.com/p6Xv2Bv.png",
   "thumbnail": "https://i.imgur.com/2oWOoen.png",
   "color": "#fdde0a",
-  "tags": [
-    "anime",
-    "videos",
-    "documentories"
-  ],
+  "tags": ["anime", "videos", "documentories"],
   "iframe": true,
   "category": "videos"
 }

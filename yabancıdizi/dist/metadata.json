@@ -14,11 +14,7 @@
   "logo": "https://premid.is-inside.me/zi1WNlTV.png",
   "thumbnail": "https://premid.is-inside.me/dEtgRixU.png",
   "color": "#14161d",
-  "tags": [
-    "video",
-    "tvshows",
-    "turkish"
-  ],
+  "tags": ["video", "tvshows", "turkish"],
   "iframe": true,
   "category": "videos"
 }

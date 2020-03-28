@@ -1,12 +1,11 @@
 var presence = new Presence({
   clientId: "613628090219757599",
-  mediaKeys: false
 });
 
 let timeElapsed = Math.floor(Date.now() / 1000),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
   }),
   otherListeners,
   stationStatus,
@@ -36,7 +35,7 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: stationStatus,
         largeImageKey: "pvfm",
-        smallImageKey: "pause"
+        smallImageKey: "pause",
       };
       presence.setActivity(presenceData);
     } else {
@@ -45,7 +44,7 @@ presence.on("UpdateData", async () => {
         state: "On air: " + onAir.innerText,
         largeImageKey: "pvfm",
         smallImageKey: "play",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     }
@@ -71,7 +70,7 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: stationStatus,
         largeImageKey: "pvfm",
-        smallImageKey: "pause"
+        smallImageKey: "pause",
       };
       presence.setActivity(presenceData);
     } else {
@@ -80,7 +79,7 @@ presence.on("UpdateData", async () => {
         state: "On air: " + onAir.innerText,
         largeImageKey: "pvfm",
         smallImageKey: "play",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     }
@@ -106,7 +105,7 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: stationStatus,
         largeImageKey: "pvfm",
-        smallImageKey: "pause"
+        smallImageKey: "pause",
       };
       presence.setActivity(presenceData);
     } else {
@@ -115,7 +114,7 @@ presence.on("UpdateData", async () => {
         state: "On air: " + onAir.innerText,
         largeImageKey: "pvfm",
         smallImageKey: "play",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     }

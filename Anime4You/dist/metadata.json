@@ -14,11 +14,7 @@
   "logo": "https://crugg.de/premid/a4ylogo.png",
   "thumbnail": "https://crugg.de/premid/a4ybanner.png",
   "color": "#172C3C",
-  "tags": [
-    "video",
-    "media",
-    "anime"
-  ],
+  "tags": ["video", "media", "anime"],
   "iframe": false,
   "category": "anime"
 }

@@ -14,12 +14,7 @@
   "logo": "https://premid.is-inside.me/PsLr519L.PNG",
   "thumbnail": "https://premid.is-inside.me/rWy3ggow.png",
   "color": "#212121",
-  "tags": [
-    "eggsy",
-    "premid",
-    "custom",
-    "status"
-  ],
+  "tags": ["eggsy", "premid", "custom", "status"],
   "warning": true,
   "category": "other"
 }

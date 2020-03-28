@@ -23,9 +23,6 @@
   "logo": "https://i.imgur.com/q3tKDRA.png",
   "thumbnail": "https://i.imgur.com/AzNhQ4j.png",
   "color": "#1ed760",
-  "tags": [
-    "audio",
-    "podcast"
-  ],
+  "tags": ["audio", "podcast"],
   "category": "music"
 }

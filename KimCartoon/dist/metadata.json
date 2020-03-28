@@ -13,10 +13,7 @@
   "logo": "https://i.imgur.com/0oTbCN4.png",
   "thumbnail": "https://i.imgur.com/pk2GCF7.png",
   "color": "#fdf5ad",
-  "tags": [
-    "cartoon",
-    "videos"
-  ],
+  "tags": ["cartoon", "videos"],
   "iframe": true,
   "category": "videos"
 }

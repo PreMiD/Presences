@@ -14,11 +14,7 @@
   "logo": "https://i.imgur.com/7jVKxPj.png",
   "thumbnail": "https://i.imgur.com/nVzkCX1.png",
   "color": "#dbc1ff",
-  "tags": [
-    "animesaturn",
-    "anime",
-    "videos"
-  ],
+  "tags": ["animesaturn", "anime", "videos"],
   "iframe": true,
   "category": "anime",
   "regExp": "(([a-z0-9]+)[.])?animesaturn[.]([a-z0-9]+)"

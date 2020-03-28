@@ -12,11 +12,6 @@
   "logo": "https://i.imgur.com/vyvEtfe.png",
   "thumbnail": "https://i.imgur.com/ai1Lxd6.png",
   "color": "#348FFF",
-  "tags": [
-    "anime",
-    "aniwatch",
-    "streaming",
-    "video"
-  ],
+  "tags": ["anime", "aniwatch", "streaming", "video"],
   "category": "anime"
 }

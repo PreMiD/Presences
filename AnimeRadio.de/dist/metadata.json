@@ -25,9 +25,6 @@
   "logo": "https://i.imgur.com/9q7Vuqr.png",
   "thumbnail": "https://i.imgur.com/nBe7Cfw.jpg",
   "color": "#ccf5fd",
-  "tags": [
-    "anime",
-    "german"
-  ],
+  "tags": ["anime", "german"],
   "category": "anime"
 }

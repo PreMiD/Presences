@@ -21,11 +21,7 @@
   "logo": "https://doomlord.s-ul.eu/bv6vxuSC",
   "thumbnail": "https://doomlord.s-ul.eu/O2X6Qwtt",
   "color": "#00acc1",
-  "tags": [
-    "embedded-links",
-    "fmovies",
-    "streaming"
-  ],
+  "tags": ["embedded-links", "fmovies", "streaming"],
   "category": "videos",
   "iframe": true
 }

@@ -1,41 +1,42 @@
 var presence = new Presence({
-  clientId: "640538683392655370",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+    clientId: "640538683392655370",
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+  });
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user : any;
-var title : any;
-var player : any;
-var search : any;
-var dj : any;
-var listeners : any;
+var user: any;
+var title: any;
+var player: any;
+var search: any;
+var dj: any;
+var listeners: any;
 
 presence.on("UpdateData", async () => {
-
-
   let presenceData: presenceData = {
-    largeImageKey: "tsfm"
+    largeImageKey: "tsfm",
   };
-//presenceData.startTimestamp = browsingStamp;
-player = document.querySelector("#player");
+  //presenceData.startTimestamp = browsingStamp;
+  player = document.querySelector("#player");
   if (!player.paused) {
     title = document.querySelector("#songname");
     dj = document.querySelector("#djname");
     listeners = document.querySelector("#listeners");
     presenceData.details = title.textContent;
-    presenceData.state = "DJ: " + dj.textContent + " Listeners: " + listeners.textContent.replace(" Listeners","");
+    presenceData.state =
+      "DJ: " +
+      dj.textContent +
+      " Listeners: " +
+      listeners.textContent.replace(" Listeners", "");
     presenceData.smallImageKey = "play";
   } else if (document.location.pathname.includes("/recent")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the recently";
     presenceData.state = "played songs";
-    presenceData.smallImageKey = "reading"; 
+    presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/team")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the staff team";
@@ -91,21 +92,19 @@ player = document.querySelector("#player");
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }

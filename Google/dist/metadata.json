@@ -14,10 +14,7 @@
   "logo": "https://i.imgur.com/ZZvx6Dq.png",
   "thumbnail": "https://i.imgur.com/8Ayu4Re.png",
   "color": "#ffffff",
-  "tags": [
-    "search",
-    "popular"
-  ],
+  "tags": ["search", "popular"],
   "category": "other",
   "regExp": "www[.]google[.]([a-z0-9]+)|[.]([a-z0-9]+)"
 }

@@ -1,21 +1,20 @@
 var presence = new Presence({
     clientId: "605119835751579649",
-    mediaKeys: false
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
   });
 
 presence.on("UpdateData", async () => {
   var video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
   if (video !== null && !isNaN(video.duration)) {
-    var title : any;
-      title =
-        document.querySelector(".video-page #main .page-title");
+    var title: any;
+    title = document.querySelector(".video-page #main .page-title");
 
-    var uploader =
-        document.querySelector(".video-page #main .video-metadata .uploader-tag .name"),
+    var uploader = document.querySelector(
+        ".video-page #main .video-metadata .uploader-tag .name"
+      ),
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
@@ -29,7 +28,7 @@ presence.on("UpdateData", async () => {
           ? (await strings).pause
           : (await strings).play,
         startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
+        endTimestamp: timestamps[1],
       };
 
     presence.setTrayTitle(video.paused ? "" : title.innerText);
@@ -47,15 +46,6 @@ presence.on("UpdateData", async () => {
   } else {
     presence.setActivity();
     presence.setTrayTitle();
-  }
-});
-
-presence.on("MediaKeys", (key: string) => {
-  switch (key) {
-    case "pause":
-      var video = document.querySelector(".video-bg-pic video") as HTMLVideoElement;
-      video.paused ? video.play() : video.pause();
-      break;
   }
 });
 

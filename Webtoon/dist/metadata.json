@@ -14,8 +14,6 @@
   "logo": "https://i.imgur.com/Ickm2Yv.jpg",
   "thumbnail": "https://i.imgur.com/t5zk4c8.jpg",
   "color": "#00d564",
-  "tags": [
-    "comics"
-  ],
+  "tags": ["comics"],
   "category": "other"
 }

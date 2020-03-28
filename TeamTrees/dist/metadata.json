@@ -13,9 +13,6 @@
   "logo": "https://i.imgur.com/vrYCBSK.png",
   "thumbnail": "https://i.imgur.com/t0W0P5C.jpg",
   "color": "#8ab740",
-  "tags": [
-    "trees",
-    "mrbeast"
-  ],
+  "tags": ["trees", "mrbeast"],
   "category": "other"
 }

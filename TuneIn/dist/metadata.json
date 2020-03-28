@@ -12,11 +12,6 @@
   "logo": "https://i.gyazo.com/ee5e1c5b58462507a5f9fc2a4a88c298.png",
   "thumbnail": "https://i.gyazo.com/b245c3b75577dfd18720ff346fcdfbcb.png",
   "color": "#33B6A8",
-  "tags": [
-    "tunein",
-    "music",
-    "radio",
-    "media"
-  ],
+  "tags": ["tunein", "music", "radio", "media"],
   "category": "music"
 }

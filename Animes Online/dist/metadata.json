@@ -14,9 +14,6 @@
   "logo": "https://i.imgur.com/IcaSbEw.png",
   "thumbnail": "https://i.imgur.com/JsYwXRb.png",
   "color": "#008000",
-  "tags": [
-    "anime",
-    "online"
-  ],
+  "tags": ["anime", "online"],
   "category": "anime"
 }

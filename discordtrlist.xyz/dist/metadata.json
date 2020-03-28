@@ -13,10 +13,6 @@
   "logo": "https://i.hizliresim.com/Z5GBgg.jpg",
   "thumbnail": "https://i.hizliresim.com/Z5GBgg.jpg",
   "color": "#F10C0C",
-  "tags": [
-    "botlist",
-    "trlist",
-    "turkish"
-  ],
+  "tags": ["botlist", "trlist", "turkish"],
   "category": "other"
 }

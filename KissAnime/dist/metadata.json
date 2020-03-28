@@ -17,10 +17,7 @@
   "logo": "https://i.imgur.com/tFIQhTE.jpg",
   "thumbnail": "https://i.imgur.com/sgnvfWx.png",
   "color": "#75ae07",
-  "tags": [
-    "video",
-    "anime"
-  ],
+  "tags": ["video", "anime"],
   "iframe": true,
   "category": "anime"
 }

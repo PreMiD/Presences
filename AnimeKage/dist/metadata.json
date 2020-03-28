@@ -15,10 +15,7 @@
   "logo": "https://i.imgur.com/zVbpanX.png",
   "thumbnail": "https://i.imgur.com/0pir8CX.png",
   "color": "#2bb4ba",
-  "tags": [
-    "anime",
-    "videos"
-  ],
+  "tags": ["anime", "videos"],
   "iframe": true,
   "category": "anime",
   "regExp": "([a-z0-9]+)[.]anime-kage[.]eu"

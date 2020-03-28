@@ -15,10 +15,6 @@
   "logo": "https://i.imgur.com/fqyhsZ5.png",
   "thumbnail": "https://i.imgur.com/ooIBlD5.jpg",
   "color": "#02A9FF",
-  "tags": [
-    "anime",
-    "manga",
-    "list"
-  ],
+  "tags": ["anime", "manga", "list"],
   "category": "anime"
 }

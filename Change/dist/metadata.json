@@ -15,8 +15,6 @@
   "logo": "https://i.imgur.com/BwMtgWb.jpg",
   "thumbnail": "https://i.imgur.com/bjNVk3Z.png",
   "color": "#FF0000",
-  "tags": [
-    "votes"
-  ],
+  "tags": ["votes"],
   "category": "other"
 }

@@ -12,9 +12,6 @@
   "logo": "https://i.imgur.com/gTv6Nu3.png",
   "thumbnail": "https://i.imgur.com/E31fDeI.png",
   "color": "#4CAF50",
-  "tags": [
-    "programming",
-    "learning"
-  ],
+  "tags": ["programming", "learning"],
   "category": "other"
 }

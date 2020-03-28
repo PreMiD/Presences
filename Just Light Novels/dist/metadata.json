@@ -12,10 +12,6 @@
   "logo": "https://cdn.discordapp.com/attachments/270798717089480704/631596622090076161/unknown.png",
   "thumbnail": "https://cdn.discordapp.com/attachments/270798717089480704/631592561995415562/unknown.png",
   "color": "#0000ff",
-  "tags": [
-    "light novels",
-    "reading",
-    "free"
-  ],
+  "tags": ["light novels", "reading", "free"],
   "category": "other"
 }

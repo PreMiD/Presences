@@ -14,9 +14,6 @@
   "logo": "https://i.imgur.com/fEecbHy.png",
   "thumbnail": "https://i.imgur.com/z9ZapJ5.png",
   "color": "#fce53f",
-  "tags": [
-    "radio",
-    "rock"
-  ],
+  "tags": ["radio", "rock"],
   "category": "music"
 }

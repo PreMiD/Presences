@@ -18,9 +18,6 @@
   "logo": "https://i.imgur.com/X785snB.png",
   "thumbnail": "https://i.imgur.com/LTkN2jF.png",
   "color": "#2096e1",
-  "tags": [
-    "minecraft",
-    "bukkit"
-  ],
+  "tags": ["minecraft", "bukkit"],
   "category": "games"
 }

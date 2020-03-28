@@ -1,24 +1,21 @@
 var presence = new Presence({
-  clientId: "633795089600348160",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+    clientId: "633795089600348160",
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+  });
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user : any;
-var title : any;
-var replace : any;
-var search : any;
+var user: any;
+var title: any;
+var replace: any;
+var search: any;
 
 presence.on("UpdateData", async () => {
-
-
   let presenceData: presenceData = {
-    largeImageKey: "logo_y"
+    largeImageKey: "logo_y",
   };
 
   if (document.location.hostname == "yagpdb.xyz") {
@@ -44,7 +41,9 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname == "docs.yagpdb.xyz") {
     title = document.querySelector("head > title");
-    search = document.querySelector("#__GITBOOK__ROOT__ > div > div.reset-3c756112--bodyContent-2f98451b > div > div.reset-3c756112--backdrop-1322b68a--sheetBackdrop-457fd54f > div > div.reset-3c756112--sheetHeader-2187bd71--small-2783b5d4 > div.reset-3c756112--sheetHeaderInner-96159b50 > div > div > div.reset-3c756112--inputInnerSizer-756c9114 > input");
+    search = document.querySelector(
+      "#__GITBOOK__ROOT__ > div > div.reset-3c756112--bodyContent-2f98451b > div > div.reset-3c756112--backdrop-1322b68a--sheetBackdrop-457fd54f > div > div.reset-3c756112--sheetHeader-2187bd71--small-2783b5d4 > div.reset-3c756112--sheetHeaderInner-96159b50 > div > div > div.reset-3c756112--inputInnerSizer-756c9114 > input"
+    );
     presenceData.startTimestamp = browsingStamp;
     if (search !== null) {
       if (search.value != "") {
@@ -59,28 +58,26 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing the helpdesk";
     } else {
       presenceData.details = "Docs viewing:";
-      presenceData.state = title.innerText.replace(" - YAGPDB", "")
+      presenceData.state = title.innerText.replace(" - YAGPDB", "");
       presenceData.smallImageKey = "reading";
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }

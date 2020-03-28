@@ -13,10 +13,6 @@
   "logo": "https://i.imgur.com/X7rXtq7.png",
   "thumbnail": "https://i.imgur.com/i4Q6yaC.png",
   "color": "#5398ee",
-  "tags": [
-    "radio",
-    "ets2",
-    "ats"
-  ],
+  "tags": ["radio", "ets2", "ats"],
   "category": "music"
 }

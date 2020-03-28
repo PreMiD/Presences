@@ -3,10 +3,12 @@
     "name": "Ninja",
     "id": "150987570715688960"
   },
-  "contributors": [{
-    "name": "Pascal",
-    "id": "156560379089125376"
-  }],
+  "contributors": [
+    {
+      "name": "Pascal",
+      "id": "156560379089125376"
+    }
+  ],
   "service": "TruckersFM",
   "description": {
     "en": "Truckers.FM is the No.1 Hit Music Station as voted by the TruckersMP Community 5 years, providing round the clock entertainment broadcasting a variety of shows, ranging from the Top 40 to the biggest throwbacks."

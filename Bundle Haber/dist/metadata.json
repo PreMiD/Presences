@@ -13,9 +13,6 @@
   "logo": "https://imgur.com/fshr89j.png",
   "thumbnail": "https://imgur.com/ntbbC9T.png",
   "color": "#BBBBBB",
-  "tags": [
-    "news",
-    "turkish"
-  ],
+  "tags": ["news", "turkish"],
   "category": "other"
 }

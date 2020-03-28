@@ -13,9 +13,6 @@
   "logo": "https://i.imgur.com/jgsd4vO.png",
   "thumbnail": "https://i.imgur.com/Sqk5GVy.png",
   "color": "#3273dc",
-  "tags": [
-    "io-game",
-    "games"
-  ],
+  "tags": ["io-game", "games"],
   "category": "games"
 }

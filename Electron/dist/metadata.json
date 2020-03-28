@@ -3,10 +3,7 @@
     "name": "Deleted 7.12i",
     "id": "591702135310385157"
   },
-  "url": [
-    "electronjs.org",
-    "www.electronjs.org"
-  ],
+  "url": ["electronjs.org", "www.electronjs.org"],
   "description": {
     "fr": "Développez des applications desktop multi-plateformes avec JavaScript, HTML et CSS",
     "en": "Build cross-platform desktop apps with JavaScript, HTML, and CSS",
@@ -24,10 +21,6 @@
   "logo": "https://i.imgur.com/QjEGajr.png",
   "thumbnail": "https://i.imgur.com/jXKMM75.png",
   "color": "#74b1be",
-  "tags": [
-    "framework",
-    "javascript",
-    "desktop app"
-  ],
+  "tags": ["framework", "javascript", "desktop app"],
   "category": "other"
 }

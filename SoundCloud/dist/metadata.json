@@ -19,9 +19,6 @@
   "logo": "https://i.imgur.com/KgOkfIz.png",
   "thumbnail": "https://i.imgur.com/eZyrvbS.jpg",
   "color": "#FF7E30",
-  "tags": [
-    "soundcloud",
-    "music"
-  ],
+  "tags": ["soundcloud", "music"],
   "category": "music"
 }

@@ -292,9 +292,6 @@
   "logo": "https://i.imgur.com/FuSdtYk.png",
   "thumbnail": "https://i.imgur.com/WajY5CI.png",
   "color": "#e53238",
-  "tags": [
-    "store",
-    "shopping"
-  ],
+  "tags": ["store", "shopping"],
   "category": "other"
 }

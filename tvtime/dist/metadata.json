@@ -12,10 +12,6 @@
   "logo": "https://i.gyazo.com/02694b977eeb514613a3fc13edbc74a9.png",
   "thumbnail": "https://i.gyazo.com/a7b3b0063570cfadce31d2f64c5a69a2.png",
   "color": "#FDDF39",
-  "tags": [
-    "tvtime",
-    "movies",
-    "shows"
-  ],
+  "tags": ["tvtime", "movies", "shows"],
   "category": "other"
 }

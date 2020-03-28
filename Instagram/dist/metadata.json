@@ -20,10 +20,6 @@
   "logo": "https://crugg.de/premid/iglogo.png",
   "thumbnail": "https://crugg.de/premid/igbanner.png",
   "color": "#E1306C",
-  "tags": [
-    "photos",
-    "images",
-    "media"
-  ],
+  "tags": ["photos", "images", "media"],
   "category": "socials"
 }

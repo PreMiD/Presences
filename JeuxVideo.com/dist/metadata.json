@@ -8,9 +8,7 @@
     "en": "JVC (jeuxvideo.com) is a famous french board and news site about video games.",
     "fr": "JVC (jeuxvideo.com) est un forum et site d'actualité populaire sur les jeux vidéos."
   },
-  "url": [
-    "www.jeuxvideo.com"
-  ],
+  "url": ["www.jeuxvideo.com"],
   "version": "1.1.2",
   "logo": "https://i.imgur.com/EnEXs1P.jpg",
   "thumbnail": "https://i.imgur.com/VRpec9o.png",

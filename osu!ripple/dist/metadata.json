@@ -21,8 +21,6 @@
   "logo": "https://i.imgur.com/mWU4B5Y.png",
   "thumbnail": "https://i.imgur.com/00lpqgv.png",
   "color": "#FF66AA",
-  "tags": [
-    "games"
-  ],
+  "tags": ["games"],
   "category": "games"
 }

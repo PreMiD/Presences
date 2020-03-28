@@ -14,9 +14,6 @@
   "logo": "https://i.imgur.com/QckmKnj.png",
   "thumbnail": "https://i.imgur.com/QggYFa4.png",
   "color": "#00c901",
-  "tags": [
-    "shows",
-    "swedish"
-  ],
+  "tags": ["shows", "swedish"],
   "category": "videos"
 }

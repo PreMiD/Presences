@@ -12,9 +12,6 @@
   "logo": "https://i.imgur.com/STs8Nfw.png",
   "thumbnail": "https://i.imgur.com/Qy1lbXE.png",
   "color": "#FF160A",
-  "tags": [
-    "status",
-    "monitoring"
-  ],
+  "tags": ["status", "monitoring"],
   "category": "other"
 }

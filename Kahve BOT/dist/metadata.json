@@ -13,9 +13,6 @@
   "logo": "https://erens.glitch.me/kL2A.png",
   "thumbnail": "https://erens.glitch.me/yYJT.png",
   "color": "#F10C0C",
-  "tags": [
-    "bot",
-    "turkish"
-  ],
+  "tags": ["bot", "turkish"],
   "category": "other"
 }

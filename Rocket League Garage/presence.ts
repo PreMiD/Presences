@@ -1,26 +1,23 @@
 var presence = new Presence({
-  clientId: "636622538356686871",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+    clientId: "636622538356686871",
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+  });
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user : any;
-var title : any;
-var replace : any;
-var search : any;
+var user: any;
+var title: any;
+var replace: any;
+var search: any;
 
 presence.on("UpdateData", async () => {
-
-
   let presenceData: presenceData = {
-    largeImageKey: "rlg"
+    largeImageKey: "rlg",
   };
-  
+
   title = document.querySelector("#offer-balance");
   user = document.querySelector("#receive-balance");
 
@@ -34,7 +31,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/news/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Reading article:";
-    title = document.querySelector("body > main > section > div > div > div > div.col-2-3 > h1");
+    title = document.querySelector(
+      "body > main > section > div > div > div > div.col-2-3 > h1"
+    );
     presenceData.state = title.innerText;
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/livefeed")) {
@@ -45,11 +44,13 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/sequence/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing training sequence:";
-      title = document.querySelector("#rlg-training-page > div.row > div.col-3-3 > h1");
+      title = document.querySelector(
+        "#rlg-training-page > div.row > div.col-3-3 > h1"
+      );
       presenceData.state = title.innerText;
     } else {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing training maps"
+      presenceData.details = "Browsing training maps";
     }
   } else if (document.location.pathname.includes("/items")) {
     presenceData.startTimestamp = browsingStamp;
@@ -85,27 +86,27 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/trade/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing trade of user:";
-    title = document.querySelector("body > main > div > div > div > div.col-3-3.rlg-trade-page > div.rlg-trade-display-container.is--user > div.rlg-trade-display-header > a > div > div.rlg-trade-platform-name > span:nth-child(1)");
+    title = document.querySelector(
+      "body > main > div > div > div > div.col-3-3.rlg-trade-page > div.rlg-trade-display-container.is--user > div.rlg-trade-display-header > a > div > div.rlg-trade-platform-name > span:nth-child(1)"
+    );
     presenceData.state = title.innerText;
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }

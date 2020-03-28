@@ -13,11 +13,7 @@
   "logo": "https://i.imgur.com/DqhX1vW.png",
   "thumbnail": "https://i.imgur.com/Tm58ZXt.png",
   "color": "#d5015b",
-  "tags": [
-    "anime",
-    "video",
-    "media"
-  ],
+  "tags": ["anime", "video", "media"],
   "category": "anime",
   "regExp": "animepahe.com",
   "iFrameRegExp": "kwik.cx/e",

@@ -18,9 +18,6 @@
   "logo": "https://i.imgur.com/WpVz6hj.png",
   "thumbnail": "https://i.imgur.com/1PibvI2.png",
   "color": "#0397d6",
-  "tags": [
-    "video",
-    "media"
-  ],
+  "tags": ["video", "media"],
   "category": "videos"
 }

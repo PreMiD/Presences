@@ -21,10 +21,7 @@
   "logo": "https://upload.wikimedia.org/wikipedia/commons/d/da/Google_Drive_logo.png",
   "thumbnail": "https://skyose.com/wp-content/uploads/2018/10/1_QmYN-vDIlLqqyLcxRqd-FQ.png",
   "color": "#3aa154",
-  "tags": [
-    "drive",
-    "google"
-  ],
+  "tags": ["drive", "google"],
   "category": "other",
   "regExp": "drive[.]google[.]([a-z0-9]+)"
 }

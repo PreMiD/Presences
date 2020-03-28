@@ -13,10 +13,6 @@
   "logo": "https://i.imgur.com/3hsUon3.png",
   "thumbnail": "https://i.imgur.com/aTmmCpt.png",
   "color": "#33abe0",
-  "tags": [
-    "telegram",
-    "message",
-    "social"
-  ],
+  "tags": ["telegram", "message", "social"],
   "category": "socials"
 }

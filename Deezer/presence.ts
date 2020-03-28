@@ -1,11 +1,10 @@
 var presence = new Presence({
   clientId: "607651992567021580",
-  mediaKeys: true
 });
 var strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
-  live: "presence.activity.live"
+  live: "presence.activity.live",
 });
 
 var live, prevLive, elapsed;
@@ -54,7 +53,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: paused ? "pause" : "play",
       smallImageText: paused ? (await strings).pause : (await strings).play,
       startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
+      endTimestamp: timestamps[1],
     };
 
     if (live) {
@@ -101,7 +100,7 @@ presence.on("UpdateData", async () => {
         {
           details: details,
           state: state,
-          largeImageKey: "deezer"
+          largeImageKey: "deezer",
         },
         true
       );
@@ -110,29 +109,6 @@ presence.on("UpdateData", async () => {
     }
   } else {
     presence.clearActivity();
-  }
-});
-
-presence.on("MediaKeys", (key: string) => {
-  switch (key) {
-    case "pause":
-      var pause_button = document.querySelector(
-        ".svg-icon-group-item:nth-child(3)"
-      );
-      pause_button.click();
-      break;
-    case "nextTrack":
-      var next_button = document.querySelector(
-        ".svg-icon-group-item:nth-child(5)"
-      );
-      next_button.click();
-      break;
-    case "previousTrack":
-      var prev_button = document.querySelector(
-        ".svg-icon-group-item:nth-child(1)"
-      );
-      prev_button.click();
-      break;
   }
 });
 

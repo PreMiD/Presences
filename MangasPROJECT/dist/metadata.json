@@ -13,8 +13,6 @@
   "logo": "https://i.imgur.com/M33LuGj.png",
   "thumbnail": "https://i.imgur.com/PGvPuOd.png",
   "color": "#d4c196",
-  "tags": [
-    "manga"
-  ],
+  "tags": ["manga"],
   "category": "anime"
 }

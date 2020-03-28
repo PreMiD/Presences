@@ -14,10 +14,6 @@
   "logo": "https://i.gyazo.com/22ea0c15a89f2d4897cbdb522dc9fd23.png",
   "thumbnail": "https://i.gyazo.com/c876228b6b947f416252d1ef83faab73.png",
   "color": "#EA7F06",
-  "tags": [
-    "audiomack",
-    "music",
-    "media"
-  ],
+  "tags": ["audiomack", "music", "media"],
   "category": "music"
 }

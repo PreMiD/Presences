@@ -13,9 +13,6 @@
   "logo": "https://crugg.de/premid/deepllogo.png",
   "thumbnail": "https://crugg.de/premid/deeplbanner.png",
   "color": "#042B48",
-  "tags": [
-    "translation",
-    "international"
-  ],
+  "tags": ["translation", "international"],
   "category": "other"
 }

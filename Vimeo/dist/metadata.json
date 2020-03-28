@@ -12,10 +12,6 @@
   "logo": "https://i.gyazo.com/1c653f737cbc237518af07536849eb00.png",
   "thumbnail": "https://i.gyazo.com/2512f2339ae0088fa329c8911e3aa732.png",
   "color": "#18B3E2",
-  "tags": [
-    "vimeo",
-    "video",
-    "media"
-  ],
+  "tags": ["vimeo", "video", "media"],
   "category": "videos"
 }

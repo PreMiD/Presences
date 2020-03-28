@@ -12,11 +12,6 @@
   "logo": "https://i.vgy.me/RNs8y0.png",
   "thumbnail": "https://i.vgy.me/LtyBwC.png",
   "color": "#CD1818",
-  "tags": [
-    "forum",
-    "programming",
-    "sharing",
-    "coding"
-  ],
+  "tags": ["forum", "programming", "sharing", "coding"],
   "category": "other"
 }

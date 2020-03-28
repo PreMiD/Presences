@@ -13,10 +13,6 @@
   "logo": "https://i.imgur.com/di7LB5b.png",
   "thumbnail": "https://imgur.com/MG4Uj0j.png",
   "color": "#3FA549",
-  "tags": [
-    "bot",
-    "turkish",
-    "tatsumaki"
-  ],
+  "tags": ["bot", "turkish", "tatsumaki"],
   "category": "other"
 }

@@ -1,6 +1,5 @@
 var presence = new Presence({
   clientId: "632110854543769601",
-  mediaKeys: false
 });
 
 let timeElapsed = Math.floor(Date.now() / 1000),
@@ -28,7 +27,7 @@ presence.on("UpdateData", async () => {
         details: "Reading a news post by " + newsAuthor.innerText,
         state: threadName.innerText,
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     } else {
@@ -36,7 +35,7 @@ presence.on("UpdateData", async () => {
         details: "Reading a thread by " + authorName.innerText,
         state: threadName.innerText,
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     }
@@ -46,7 +45,7 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Browsing...",
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     } else {
@@ -54,7 +53,7 @@ presence.on("UpdateData", async () => {
         details: "Reading about a game",
         state: gName.innerText,
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     }
@@ -64,14 +63,14 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Browsing...",
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     } else if (pName.innerText == "Game Database") {
       let presenceData: presenceData = {
         details: "Browsing...",
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     } else {
@@ -79,7 +78,7 @@ presence.on("UpdateData", async () => {
         details: "Reading about a platform",
         state: pName.innerText,
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     }
@@ -89,7 +88,7 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Browsing...",
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     } else {
@@ -97,7 +96,7 @@ presence.on("UpdateData", async () => {
         details: "Reading about a company",
         state: cName.innerText,
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     }
@@ -107,7 +106,7 @@ presence.on("UpdateData", async () => {
       details: "Reading a question",
       state: threadName.innerText,
       largeImageKey: "tempy",
-      startTimestamp: timeElapsed
+      startTimestamp: timeElapsed,
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/members")) {
@@ -118,14 +117,14 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Browsing...",
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     } else {
       let presenceData: presenceData = {
         details: "Looking at " + profileName.innerText + "'s profile",
         largeImageKey: "tempy",
-        startTimestamp: timeElapsed
+        startTimestamp: timeElapsed,
       };
       presence.setActivity(presenceData);
     }
@@ -133,21 +132,21 @@ presence.on("UpdateData", async () => {
     let presenceData: presenceData = {
       details: "Chatting in IRC",
       largeImageKey: "tempy",
-      startTimestamp: timeElapsed
+      startTimestamp: timeElapsed,
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/shoutbox")) {
     let presenceData: presenceData = {
       details: "Chatting in the Shoutbox",
       largeImageKey: "tempy",
-      startTimestamp: timeElapsed
+      startTimestamp: timeElapsed,
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/search")) {
     let presenceData: presenceData = {
       details: "Searching...",
       largeImageKey: "tempy",
-      startTimestamp: timeElapsed
+      startTimestamp: timeElapsed,
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/review")) {
@@ -157,7 +156,7 @@ presence.on("UpdateData", async () => {
       details: "Reading a review by " + reviewAuthor.innerText,
       state: reviewTitle.innerText,
       largeImageKey: "tempy",
-      startTimestamp: timeElapsed
+      startTimestamp: timeElapsed,
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/entry")) {
@@ -169,14 +168,14 @@ presence.on("UpdateData", async () => {
       details: "Reading a blog post by " + blogAuthor.innerText,
       state: blogTitle.innerText,
       largeImageKey: "tempy",
-      startTimestamp: timeElapsed
+      startTimestamp: timeElapsed,
     };
     presence.setActivity(presenceData);
   } else {
     let presenceData: presenceData = {
       details: "Browsing...",
       largeImageKey: "tempy",
-      startTimestamp: timeElapsed
+      startTimestamp: timeElapsed,
     };
     presence.setActivity(presenceData);
   }

@@ -10,17 +10,12 @@
     "zh_CN": "世界上最大的互联网线上零售商。",
     "zh_TW": "全球最大的網際網路線上零售商。"
   },
-  "url": [
-    "www.amazon.com"
-  ],
+  "url": ["www.amazon.com"],
   "version": "1.4.2",
   "logo": "https://i.imgur.com/qPBCqNA.png",
   "thumbnail": "https://i.imgur.com/Y6njoa3.png",
   "color": "#ff9900",
-  "tags": [
-    "store",
-    "shopping"
-  ],
+  "tags": ["store", "shopping"],
   "category": "other",
   "regExp": "([a-z0-9]+)[.]amazon[.]([a-z0-9]+)([.]([a-z0-9]+))?"
 }

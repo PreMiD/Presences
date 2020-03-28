@@ -13,11 +13,7 @@
   "logo": "https://viruz.s-ul.eu/OhUMdsvv",
   "thumbnail": "https://viruz.s-ul.eu/9rCjD4qj",
   "color": "#171717",
-  "tags": [
-    "movies",
-    "videos",
-    "series"
-  ],
+  "tags": ["movies", "videos", "series"],
   "category": "videos",
   "iframe": true,
   "regExp": "(.+[.])?tuga.tv"

@@ -7,16 +7,11 @@
   "description": {
     "en": "Habbo fansite"
   },
-  "url": [
-    "habbofests.com"
-  ],
+  "url": ["habbofests.com"],
   "version": "1.2.2",
   "logo": "https://i.imgur.com/1KxRWTE.png",
   "thumbnail": "https://i.imgur.com/MNuaxiQ.png",
   "color": "#00c3c5",
-  "tags": [
-    "Radio",
-    "Habbo"
-  ],
+  "tags": ["Radio", "Habbo"],
   "category": "music"
 }

@@ -13,12 +13,7 @@
   "logo": "https://i.imgur.com/pq4fPgo.png",
   "thumbnail": "https://i.imgur.com/5TWSDos.png",
   "color": "#e7b96d",
-  "tags": [
-    "diziay",
-    "series",
-    "movie",
-    "video"
-  ],
+  "tags": ["diziay", "series", "movie", "video"],
   "iframe": true,
   "category": "videos"
 }

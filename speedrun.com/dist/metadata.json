@@ -13,9 +13,6 @@
   "logo": "https://i.imgur.com/MExOoiX.png",
   "thumbnail": "https://i.imgur.com/jsMsjMk.png",
   "color": "#c6a24c",
-  "tags": [
-    "speed",
-    "run"
-  ],
+  "tags": ["speed", "run"],
   "category": "games"
 }

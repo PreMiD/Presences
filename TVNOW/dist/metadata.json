@@ -14,9 +14,6 @@
   "logo": "https://i.imgur.com/Z9NwC2O.png",
   "thumbnail": "https://i.imgur.com/2TqBWPd.png",
   "color": "#ffbc2d",
-  "tags": [
-    "tv",
-    "now"
-  ],
+  "tags": ["tv", "now"],
   "category": "videos"
 }

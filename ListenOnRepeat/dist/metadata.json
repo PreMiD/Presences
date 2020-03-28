@@ -13,10 +13,7 @@
   "logo": "https://i.imgur.com/F7W7Vnn.png",
   "thumbnail": "https://i.imgur.com/jhah8BE.png",
   "color": "#ff0066",
-  "tags": [
-    "listen",
-    "repeat"
-  ],
+  "tags": ["listen", "repeat"],
   "iframe": true,
   "category": "videos"
 }

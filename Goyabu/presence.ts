@@ -1,15 +1,14 @@
 var presence = new Presence({
     clientId: "629768767987122217",
-    mediaKeys: false
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
   });
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "goyabu"
+    largeImageKey: "goyabu",
   };
 
   let path = document.location.pathname,
@@ -87,7 +86,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (host == "goyabu.com" && path.includes("/user.php")) {
-    let pfName = document.querySelector("#home-content > h1");
+    let pfName = document.querySelector("#home-content > h1") as HTMLElement;
     presenceData.details = "Visualizando Perfil";
     presenceData.state = pfName.innerText.replace("Olá! ", "");
     presenceData.smallImageText = "Perfil";

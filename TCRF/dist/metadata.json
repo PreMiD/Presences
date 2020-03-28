@@ -12,12 +12,6 @@
   "thumbnail": "https://cdn.discordapp.com/attachments/270798717089480704/631259161677660192/unknown.png",
   "logo": "https://upload.wikimedia.org/wikipedia/en/d/d1/TCRFLogo.png",
   "color": "#D3D3D3",
-  "tags": [
-    "games",
-    "retro",
-    "wiki",
-    "research",
-    "cut contents"
-  ],
+  "tags": ["games", "retro", "wiki", "research", "cut contents"],
   "category": "games"
 }

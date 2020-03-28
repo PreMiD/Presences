@@ -13,10 +13,6 @@
   "logo": "https://premid.is-inside.me/jkkrf9Iw.png",
   "thumbnail": "https://premid.is-inside.me/BNLzUCdl.png",
   "color": "#c5c5c5",
-  "tags": [
-    "lichess",
-    "games",
-    "chess"
-  ],
+  "tags": ["lichess", "games", "chess"],
   "category": "games"
 }

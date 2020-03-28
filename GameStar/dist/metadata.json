@@ -14,10 +14,7 @@
   "logo": "https://i.imgur.com/fQZETmM.png",
   "thumbnail": "https://i.imgur.com/4Nwp1iV.png",
   "color": "#162781",
-  "tags": [
-    "articles",
-    "german"
-  ],
+  "tags": ["articles", "german"],
   "category": "other",
   "regExp": "(([a-z0-9]+)[.])?gamestar[.]de"
 }

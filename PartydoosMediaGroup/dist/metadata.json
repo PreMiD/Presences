@@ -12,9 +12,6 @@
   "logo": "https://i.imgur.com/Qejrged.png",
   "thumbnail": "https://i.imgur.com/3vMtIJb.png",
   "color": "#F97D00",
-  "tags": [
-    "hosting",
-    "cloud"
-  ],
+  "tags": ["hosting", "cloud"],
   "category": "other"
 }

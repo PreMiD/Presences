@@ -12,11 +12,7 @@
   "logo": "https://i.imgur.com/t7j0bcF.png",
   "thumbnail": "https://i.imgur.com/N8CRfMJ.png",
   "color": "#FF0050",
-  "tags": [
-    "streaming",
-    "video",
-    "media"
-  ],
+  "tags": ["streaming", "video", "media"],
   "category": "videos",
   "iframe": true
 }

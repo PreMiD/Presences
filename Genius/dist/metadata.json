@@ -12,10 +12,6 @@
   "logo": "https://i.gyazo.com/357a0d4aaf1cedfa41dfb38bf3acb961.png",
   "thumbnail": "https://i.gyazo.com/b731765a33a4395e361782abfeb650d5.png",
   "color": "#FFFF64",
-  "tags": [
-    "genius",
-    "lyrics",
-    "music"
-  ],
+  "tags": ["genius", "lyrics", "music"],
   "category": "music"
 }

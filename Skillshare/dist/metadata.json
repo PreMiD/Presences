@@ -13,9 +13,6 @@
   "logo": "https://i.imgur.com/WTfjamG.png",
   "thumbnail": "https://i.imgur.com/PdormPN.png",
   "color": "#2abfc6",
-  "tags": [
-    "share",
-    "skills"
-  ],
+  "tags": ["share", "skills"],
   "category": "videos"
 }

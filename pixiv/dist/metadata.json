@@ -20,11 +20,7 @@
   "logo": "https://i.imgur.com/D8Lf2t2.png",
   "thumbnail": "https://i.imgur.com/Ggekra0.png",
   "color": "#009cff",
-  "tags": [
-    "novels",
-    "pics",
-    "artworks"
-  ],
+  "tags": ["novels", "pics", "artworks"],
   "category": "socials",
   "regExp": "(([a-z0-9]+)[.])?pixiv[.]net"
 }

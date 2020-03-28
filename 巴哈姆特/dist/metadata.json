@@ -14,11 +14,7 @@
   "logo": "https://i2.bahamut.com.tw/baha_logo5.png",
   "thumbnail": "https://i.imgur.com/WM3Rhii.png",
   "color": "#2E93A5",
-  "tags": [
-    "baha",
-    "games",
-    "anime"
-  ],
+  "tags": ["baha", "games", "anime"],
   "category": "socials",
   "iframe": false
 }

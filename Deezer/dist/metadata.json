@@ -18,9 +18,6 @@
   "logo": "https://i.imgur.com/GKMQi3h.png",
   "thumbnail": "https://i.imgur.com/gVAvQ6k.png",
   "color": "#A31D7C",
-  "tags": [
-    "radio",
-    "music"
-  ],
+  "tags": ["radio", "music"],
   "category": "music"
 }

@@ -13,8 +13,6 @@
   "logo": "https://raw.githubusercontent.com/npm/logos/master/npm%20square/n-large.png",
   "thumbnail": "https://crugg.de/premid/npmbanner.png",
   "color": "#C12127",
-  "tags": [
-    "programming"
-  ],
+  "tags": ["programming"],
   "category": "other"
 }

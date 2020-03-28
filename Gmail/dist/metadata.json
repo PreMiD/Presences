@@ -19,10 +19,6 @@
   "logo": "https://i.imgur.com/RFFiUCL.png",
   "thumbnail": "https://i.imgur.com/zLejTHm.png",
   "color": "#DD4B3E",
-  "tags": [
-    "gmail",
-    "email",
-    "other"
-  ],
+  "tags": ["gmail", "email", "other"],
   "category": "other"
 }

@@ -9,9 +9,7 @@
     "de": "NSFW Anime Image board running on Gelbooru",
     "zh_CN": "一个服务器位于哥伦布的色图网站"
   },
-  "url": [
-    "xbooru.com"
-  ],
+  "url": ["xbooru.com"],
   "version": "2.1.2",
   "logo": "https://i.imgur.com/F2AnL3o.png",
   "thumbnail": "https://i.imgur.com/ilNOKbU.png",

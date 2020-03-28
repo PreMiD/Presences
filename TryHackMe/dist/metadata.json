@@ -12,9 +12,6 @@
   "logo": "https://i.imgur.com/nYQ4R2R.png",
   "thumbnail": "https://i.imgur.com/jojxLOU.png",
   "color": "#343C42",
-  "tags": [
-    "security",
-    "games"
-  ],
+  "tags": ["security", "games"],
   "category": "other"
 }

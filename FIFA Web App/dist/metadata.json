@@ -13,12 +13,7 @@
   "logo": "https://i.imgur.com/uXThlTp.png",
   "thumbnail": "https://i.imgur.com/UxPGmuo.png",
   "color": "#FFFFFF",
-  "tags": [
-    "fifa",
-    "web-app",
-    "fut20",
-    "fifa-ultimate-team"
-  ],
+  "tags": ["fifa", "web-app", "fut20", "fifa-ultimate-team"],
   "category": "games",
   "regExp": "(([a-z0-9]+)[.])?easports[.]com\\/([a-z0-9]+)\\/fifa\\/ultimate-team\\/web-app\\/"
 }

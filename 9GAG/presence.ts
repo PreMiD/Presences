@@ -1,42 +1,49 @@
 var presence = new Presence({
-  clientId: "631566704648126503",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+    clientId: "631566704648126503",
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+  });
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user : any;
-var title : any;
-var replace : any;
-var search : any;
+var user: any;
+var title: any;
+var replace: any;
+var search: any;
 
 presence.on("UpdateData", async () => {
-
-
   let presenceData: presenceData = {
-    largeImageKey: "9gag"
+    largeImageKey: "9gag",
   };
 
   if (document.location.hostname == "9gag.com") {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
-    } else if (document.location.pathname.includes("/u/")){
+    } else if (document.location.pathname.includes("/u/")) {
       presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector("#container > div.page > div.main-wrap > div > section > header > h2");
+      user = document.querySelector(
+        "#container > div.page > div.main-wrap > div > section > header > h2"
+      );
       presenceData.details = "Viewing user:";
       presenceData.state = user.innerText;
-    } else if (document.querySelector("#container > div.page > div.main-wrap > div.profile > section > header > h2") !== null) {
-      user = document.querySelector("#container > div.page > div.main-wrap > div.profile > section > header > h2");
+    } else if (
+      document.querySelector(
+        "#container > div.page > div.main-wrap > div.profile > section > header > h2"
+      ) !== null
+    ) {
+      user = document.querySelector(
+        "#container > div.page > div.main-wrap > div.profile > section > header > h2"
+      );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing catagory:";
       presenceData.state = user.innerText;
     } else if (document.location.pathname.includes("/gag/")) {
-      title = document.querySelector("#individual-post > article > header > h1");
+      title = document.querySelector(
+        "#individual-post > article > header > h1"
+      );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing gag:";
       if (title.innerText.length > 128) {
@@ -46,17 +53,19 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/hot")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing what's hot"
+      presenceData.details = "Viewing what's hot";
     } else if (document.location.pathname.includes("/trending")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing what's trending"
+      presenceData.details = "Viewing what's trending";
     } else if (document.location.pathname.includes("/fresh")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing what's fresh"
+      presenceData.details = "Viewing what's fresh";
     } else if (document.location.pathname.includes("/tag")) {
-      title = document.querySelector("#container > div.page > div.main-wrap > div.profile > section > header > h1");
+      title = document.querySelector(
+        "#container > div.page > div.main-wrap > div.profile > section > header > h1"
+      );
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing tag:"
+      presenceData.details = "Viewing tag:";
       presenceData.state = title.innerText;
     } else if (document.location.pathname.includes("/search")) {
       search = document.querySelector("#search-hero");
@@ -74,13 +83,19 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing store page";
     } else if (document.location.pathname.includes("/products/")) {
-      title = document.querySelector("#ProductSection-product-template > div > div:nth-child(2) > div.product-single__meta > h1");
+      title = document.querySelector(
+        "#ProductSection-product-template > div > div:nth-child(2) > div.product-single__meta > h1"
+      );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Shop - Viewing product:";
       presenceData.state = title.innerText;
     } else if (document.location.pathname.includes("/collections/")) {
-      title = document.querySelector("#shopify-section-collection-template > div > header > div > div > h1 > span");
-      replace = document.querySelector("#shopify-section-collection-template > div > header > div > div > h1 > span > span");
+      title = document.querySelector(
+        "#shopify-section-collection-template > div > header > div > div > h1 > span"
+      );
+      replace = document.querySelector(
+        "#shopify-section-collection-template > div > header > div > div > h1 > span > span"
+      );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Shop - Viewing collection:";
       presenceData.state = title.innerText.replace(replace.innerText, "");
@@ -98,21 +113,19 @@ presence.on("UpdateData", async () => {
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }

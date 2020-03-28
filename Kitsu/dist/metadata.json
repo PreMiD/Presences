@@ -12,10 +12,6 @@
   "logo": "https://media.kitsu.io/groups/avatars/1830/large.png?1480533989",
   "thumbnail": "https://i.imgur.com/0yjRrph.png",
   "color": "#FD755C",
-  "tags": [
-    "anime",
-    "manga",
-    "list"
-  ],
+  "tags": ["anime", "manga", "list"],
   "category": "anime"
 }

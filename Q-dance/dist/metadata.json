@@ -12,10 +12,6 @@
   "logo": "https://i.gyazo.com/48dc40e4519fa8b1ef6dd5e22d38b5b0.png",
   "thumbnail": "https://i.gyazo.com/229ad40a7c41fdfeb3e24c30cc266ee7.png",
   "color": "#EA580C",
-  "tags": [
-    "q-dance",
-    "music",
-    "media"
-  ],
+  "tags": ["q-dance", "music", "media"],
   "category": "music"
 }

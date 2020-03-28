@@ -13,9 +13,6 @@
   "logo": "https://i.imgur.com/BXd1SBE.png",
   "thumbnail": "https://i.imgur.com/D0tVFhI.png",
   "color": "#f2a012",
-  "tags": [
-    "draw",
-    "anim"
-  ],
+  "tags": ["draw", "anim"],
   "category": "other"
 }

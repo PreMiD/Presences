@@ -10,12 +10,6 @@
   "logo": "https://i.imgur.com/NJ6Ezno.png",
   "thumbnail": "https://i.imgur.com/wIrv2wD.png",
   "color": "#f8ba00",
-  "tags": [
-    "Comedy Central",
-    "CC",
-    "video",
-    "tv",
-    "movies"
-  ],
+  "tags": ["Comedy Central", "CC", "video", "tv", "movies"],
   "category": "videos"
 }

@@ -17,10 +17,6 @@
   "logo": "https://cdn.discordapp.com/attachments/465278458986102786/629582146821947392/unknown.png",
   "thumbnail": "https://cdn.discordapp.com/attachments/465278458986102786/629579458214494208/DgP2dkxWAAAWsbP.jpg",
   "color": "#FF4500",
-  "tags": [
-    "game",
-    "Yu-Gi-Oh",
-    "browser"
-  ],
+  "tags": ["game", "Yu-Gi-Oh", "browser"],
   "category": "games"
 }
