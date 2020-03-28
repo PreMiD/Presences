@@ -20,7 +20,7 @@ var punishmentUser;
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {
-        largeImageKey: "mccentral"
+        largeImageKey: "mccentrallogo"
     };
 
     if (document.location.pathname == "/community/") {

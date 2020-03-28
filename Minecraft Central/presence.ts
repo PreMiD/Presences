@@ -13,7 +13,7 @@ var presence = new Presence({
   
   
     let presenceData: presenceData = {
-      largeImageKey: "mccentral"
+      largeImageKey: "mccentrallogo"
     };
   
     
