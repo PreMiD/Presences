@@ -6,18 +6,18 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000),
 	href = new URL(document.location.href),
 	presenceData = {
-		details: <string> 'In construction',
-		state: <string> null,
-		largeImageKey: <string> "lg",
-		startTimestamp: <number> browsingStamp,
-		endTimestamp: <number> null
+		details: <string>'In construction',
+		state: <string>null,
+		largeImageKey: <string>"lg",
+		startTimestamp: <number>browsingStamp,
+		endTimestamp: <number>null
 	},
 	updateCallback = {
 		_function: null,
 		get function() {
 			return this._function;
 		},
-		set function(parameter){
+		set function(parameter) {
 			this._function = parameter
 		},
 		get present() {
@@ -35,7 +35,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 		This one is for the editorial part of Fandom.
 
 		*/
-		
+
 		if (href.pathname === "/") {
 			presenceData.state = "Index"
 			delete presenceData.details
@@ -93,20 +93,20 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 
 		*/
 
-		let title: string, 
+		let title: string,
 			sitename: string,
 			actionResult = href.searchParams.get("action") || href.searchParams.get("veaction"),
 			titleFromURL = () => {
-			let raw: string, lang: string
-			if (href.pathname.startsWith("/wiki/")) {
-				raw = href.pathname.slice(6)
-			} else {
-				lang = href.pathname.split("/")[0]
-				raw = href.pathname.slice(7 + lang.length)
+				let raw: string, lang: string
+				if (href.pathname.startsWith("/wiki/")) {
+					raw = href.pathname.slice(6)
+				} else {
+					lang = href.pathname.split("/")[0]
+					raw = href.pathname.slice(7 + lang.length)
+				}
+				if (raw.includes("_")) return raw.replace(/_/g, " ")
+				else return raw
 			}
-			if (raw.includes("_")) return raw.replace(/_/g, " ")
-			else return raw
-		}
 
 		try {
 			title = document.querySelector('.page-header__title').innerHTML
@@ -143,7 +143,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 			"Thread": "Viewing a forum thread",
 			"Board": "Viewing a forum board",
 			"Topic": "Viewing a forum topic",
-		} 
+		}
 
 		if (title === "Home") {
 			sitename = document.querySelector("meta[property='og:title']").content
@@ -184,10 +184,10 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 
 		updateCallback.function = () => {
 			var presenceData = {
-				details: <string> 'In construction',
-				state: <string> null,
-				largeImageKey: <string> "lg",
-				startTimestamp: <number> browsingStamp,
+				details: <string>'In construction',
+				state: <string>null,
+				largeImageKey: <string>"lg",
+				startTimestamp: <number>browsingStamp,
 			};
 			href = new URL(document.location.href)
 			if (href.pathname === "/f") {
@@ -199,7 +199,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 				presenceData.details = "Viewing a discussion user page"
 				presenceData.state = document.querySelector(".user-overview__username").textContent
 			}
-			cleanData()	
+			cleanData()
 		}
 
 	}
@@ -235,11 +235,11 @@ function getTimestamps(videoTime: number, videoDuration: number) {
  */
 function resetData() {
 	presenceData = {
-		details: <string> 'In construction',
-		state: <string> null,
-		largeImageKey: <string> "lg",
-		startTimestamp: <number> browsingStamp,
-		endTimestamp: <number> null
+		details: <string>'In construction',
+		state: <string>null,
+		largeImageKey: <string>"lg",
+		startTimestamp: <number>browsingStamp,
+		endTimestamp: <number>null
 	};
 }
 

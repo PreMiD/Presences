@@ -1,34 +1,34 @@
 var presence = new Presence({
-  clientId: "622436057866043434",
-  mediaKeys: false
+	clientId: "622436057866043434",
+	mediaKeys: false
 }),
-presenceData: presenceData = {
-  largeImageKey: "logo"
-};
+	presenceData: presenceData = {
+		largeImageKey: "logo"
+	};
 
 presence.on("UpdateData", async () => {
 
-var audio: HTMLAudioElement = document.querySelector("#jp_audio_0");
-if (audio !== null) {
+	var audio: HTMLAudioElement = document.querySelector("#jp_audio_0");
+	if (audio !== null) {
 
-  var title:HTMLElement = document.querySelector(".brg-player-title");
-      
-  presenceData.details = (title as HTMLElement).innerText
-  presenceData.largeImageKey = "logo"
+		var title: HTMLElement = document.querySelector(".brg-player-title");
 
-  presence.setTrayTitle(audio.paused ? "" : title.innerText);
+		presenceData.details = (title as HTMLElement).innerText
+		presenceData.largeImageKey = "logo"
 
-  if (audio && title !== null) {
-    presence.setActivity(presenceData, !audio.paused);
-  }
-} else {
+		presence.setTrayTitle(audio.paused ? "" : title.innerText);
 
-  var pageData: presenceData = {
-    details: "Browsing..",
-    largeImageKey: "logo"
-  };
-  presence.setActivity(pageData);
-  }
+		if (audio && title !== null) {
+			presence.setActivity(presenceData, !audio.paused);
+		}
+	} else {
+
+		var pageData: presenceData = {
+			details: "Browsing..",
+			largeImageKey: "logo"
+		};
+		presence.setActivity(pageData);
+	}
 });
 
 
@@ -38,7 +38,7 @@ if (audio !== null) {
 * @param {Number} videoDuration Video duration seconds
 */
 function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
+	var startTime = Date.now();
+	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+	return [Math.floor(startTime / 1000), endTime];
 }

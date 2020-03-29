@@ -1,7 +1,7 @@
 var presence = new Presence({
-		clientId: "607587875122446359",
-		mediaKeys: false
-	}),
+	clientId: "607587875122446359",
+	mediaKeys: false
+}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -172,7 +172,7 @@ presence.on("UpdateData", async () => {
 			repositoryAuthor.innerText.length > 0 &&
 			repositoryName.innerText.length > 0 &&
 			document.location.pathname ==
-				"/" + repositoryAuthor.innerText + "/" + repositoryName.innerText
+			"/" + repositoryAuthor.innerText + "/" + repositoryName.innerText
 		) {
 			presenceData.details = "Browsing a repository...";
 

@@ -6,18 +6,18 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000),
 	href = new URL(document.location.href),
 	presenceData = {
-		details: <string> 'In construction',
-		state: <string> null,
-		largeImageKey: <string> "lg",
-		startTimestamp: <number> browsingStamp,
-		endTimestamp: <number> null
+		details: <string>'In construction',
+		state: <string>null,
+		largeImageKey: <string>"lg",
+		startTimestamp: <number>browsingStamp,
+		endTimestamp: <number>null
 	},
 	updateCallback = {
 		_function: null,
 		get function() {
 			return this._function;
 		},
-		set function(parameter){
+		set function(parameter) {
 			this._function = parameter
 		},
 		get present() {
@@ -25,7 +25,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 		}
 	};
 
-(() => { 
+(() => {
 
 	if (document.querySelector("section.game")) {
 		updateCallback.function = () => {
@@ -85,15 +85,15 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 			presenceData.state = pageNames[href.pathname.split("/")[2]]
 		}
 	}
-	
+
 })();
 
 if (updateCallback.present) {
 	presence.on("UpdateData", async () => {
 		resetData()
-        updateCallback.function();
+		updateCallback.function();
 		cleanData()
-        presence.setActivity(presenceData);
+		presence.setActivity(presenceData);
 	})
 } else {
 	cleanData()
@@ -107,11 +107,11 @@ if (updateCallback.present) {
  */
 function resetData() {
 	presenceData = {
-		details: <string> 'In construction',
-		state: <string> null,
-		largeImageKey: <string> "lg",
-		startTimestamp: <number> browsingStamp,
-		endTimestamp: <number> null
+		details: <string>'In construction',
+		state: <string>null,
+		largeImageKey: <string>"lg",
+		startTimestamp: <number>browsingStamp,
+		endTimestamp: <number>null
 	};
 }
 

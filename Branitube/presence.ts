@@ -1,94 +1,94 @@
 var presence = new Presence({
-    clientId: "611657413350654010",
-    mediaKeys: false
-  }),
+	clientId: "611657413350654010",
+	mediaKeys: false
+}),
 
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+	strings = presence.getStrings({
+		play: "presence.playback.playing",
+		pause: "presence.playback.paused"
+	});
 
-  var lastPlaybackState = null;
-  var playback;
-  var browsingStamp = Math.floor(Date.now()/1000);
+var lastPlaybackState = null;
+var playback;
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-  if(lastPlaybackState != playback) {
+if (lastPlaybackState != playback) {
 
-      lastPlaybackState = playback
-      browsingStamp = Math.floor(Date.now()/1000)
-      
-  }
+	lastPlaybackState = playback
+	browsingStamp = Math.floor(Date.now() / 1000)
+
+}
 
 presence.on("UpdateData", async () => {
 
-  playback = 
-  document.querySelector("#player > div.jw-media.jw-reset > video") !== null
-      ? true : false
-  
-  if (!playback) {
+	playback =
+		document.querySelector("#player > div.jw-media.jw-reset > video") !== null
+			? true : false
 
-    let presenceData: presenceData = {
-      largeImageKey: "lg"
-    };
-    
-    presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+	if (!playback) {
 
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
+		let presenceData: presenceData = {
+			largeImageKey: "lg"
+		};
 
-    presence.setActivity(presenceData, true);
-    
-  }
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingStamp;
 
-  var video: HTMLVideoElement = document.querySelector("#player > div.jw-media.jw-reset > video");
+		delete presenceData.state;
+		delete presenceData.smallImageKey;
 
-  if (video !== null) {
+		presence.setActivity(presenceData, true);
 
-      var videoTitle : any;
+	}
 
-      videoTitle = document.querySelector("div > div.episodeInfo > div.nomeAnime");
-      var episode : any = document.querySelector("div > div.episodeInfo > div.epInfo"),
-        timestamps = getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        ),
-        presenceData: presenceData = {
-          details: videoTitle.innerText,
-          state: episode.innerText,
-          largeImageKey: "lg",
-          smallImageKey: video.paused ? "pause" : "play",
-          smallImageText: video.paused
-            ? (await strings).pause
-            : (await strings).play,
-          startTimestamp: timestamps[0],
-          endTimestamp: timestamps[1]
-        };
+	var video: HTMLVideoElement = document.querySelector("#player > div.jw-media.jw-reset > video");
 
-      presence.setTrayTitle(videoTitle.innerText);
+	if (video !== null) {
 
-      presenceData.details = videoTitle.innerText;
-      presenceData.state = episode.innerText;
-      presenceData.startTimestamp = browsingStamp;
+		var videoTitle: any;
 
-      if (video.paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
- 
-      presence.setActivity(presenceData, true);
-    
-    }
+		videoTitle = document.querySelector("div > div.episodeInfo > div.nomeAnime");
+		var episode: any = document.querySelector("div > div.episodeInfo > div.epInfo"),
+			timestamps = getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			),
+			presenceData: presenceData = {
+				details: videoTitle.innerText,
+				state: episode.innerText,
+				largeImageKey: "lg",
+				smallImageKey: video.paused ? "pause" : "play",
+				smallImageText: video.paused
+					? (await strings).pause
+					: (await strings).play,
+				startTimestamp: timestamps[0],
+				endTimestamp: timestamps[1]
+			};
+
+		presence.setTrayTitle(videoTitle.innerText);
+
+		presenceData.details = videoTitle.innerText;
+		presenceData.state = episode.innerText;
+		presenceData.startTimestamp = browsingStamp;
+
+		if (video.paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+
+		presence.setActivity(presenceData, true);
+
+	}
 
 });
 
 presence.on("MediaKeys", (key: string) => {
-  switch (key) {
-    case "pause":
-      var video = document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") as HTMLVideoElement;
-      video.paused ? video.play() : video.pause();
-      break;
-  }
+	switch (key) {
+		case "pause":
+			var video = document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") as HTMLVideoElement;
+			video.paused ? video.play() : video.pause();
+			break;
+	}
 });
 
 /**
@@ -97,7 +97,7 @@ presence.on("MediaKeys", (key: string) => {
  * @param {Number} videoDuration Video duration seconds
  */
 function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+	var startTime = Date.now();
+	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+	return [Math.floor(startTime / 1000), endTime];
 }

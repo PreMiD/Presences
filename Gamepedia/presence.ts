@@ -6,18 +6,18 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000),
 	href = new URL(document.location.href),
 	presenceData = {
-		details: <string> 'In construction',
-		state: <string> null,
-		largeImageKey: <string> "lg",
-		startTimestamp: <number> browsingStamp,
-		endTimestamp: <number> null
+		details: <string>'In construction',
+		state: <string>null,
+		largeImageKey: <string>"lg",
+		startTimestamp: <number>browsingStamp,
+		endTimestamp: <number>null
 	},
 	updateCallback = {
 		_function: null,
 		get function() {
 			return this._function;
 		},
-		set function(parameter){
+		set function(parameter) {
 			this._function = parameter
 		},
 		get present() {
@@ -61,8 +61,8 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 		}
 
 	} else {
-		
-		let title: string, 
+
+		let title: string,
 			sitename: string,
 			actionResult = href.searchParams.get("action"),
 			titleFromURL = () => {
@@ -103,7 +103,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 			"Help talk": "Viewing a help talk page",
 			"Category": "Viewing a category",
 			"Category talk": "Viewing a category talk page"
-		} 
+		}
 
 		if (title === sitename) {
 			presenceData.state = "Home"
@@ -116,7 +116,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 			presenceData.state = title
 		} else if (title.startsWith("UserProfile:")) {
 			presenceData.details = "Viewing a user profile"
-			presenceData.state = document.querySelector(".mw-headline").textContent			
+			presenceData.state = document.querySelector(".mw-headline").textContent
 		} else {
 			if (namespaceDetails[title.split(":")[0]]) presenceData.details = namespaceDetails[title.split(":")[0]]
 			else presenceData.details = "Reading a wiki page"
@@ -126,7 +126,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 		presenceData.startTimestamp = browsingStamp
 		presenceData.state += " | " + sitename
 
-	} 
+	}
 
 	cleanData()
 
@@ -159,11 +159,11 @@ function getTimestamps(videoTime: number, videoDuration: number) {
  */
 function resetData() {
 	presenceData = {
-		details: <string> 'In construction',
-		state: <string> null,
-		largeImageKey: <string> "lg",
-		startTimestamp: <number> browsingStamp,
-		endTimestamp: <number> null
+		details: <string>'In construction',
+		state: <string>null,
+		largeImageKey: <string>"lg",
+		startTimestamp: <number>browsingStamp,
+		endTimestamp: <number>null
 	};
 }
 

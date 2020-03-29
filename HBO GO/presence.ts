@@ -1,116 +1,116 @@
 var presence = new Presence({
-    clientId: "605437254776651786",
-    mediaKeys: true
-  }),
+	clientId: "605437254776651786",
+	mediaKeys: true
+}),
 
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+	strings = presence.getStrings({
+		play: "presence.playback.playing",
+		pause: "presence.playback.paused"
+	});
 
-  var lastPlaybackState = null;
-  var playback;
-  var browsingStamp = Math.floor(Date.now()/1000);
+var lastPlaybackState = null;
+var playback;
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-  if(lastPlaybackState != playback) {
+if (lastPlaybackState != playback) {
 
-      lastPlaybackState = playback
-      browsingStamp = Math.floor(Date.now()/1000)
-      
-  }
+	lastPlaybackState = playback
+	browsingStamp = Math.floor(Date.now() / 1000)
+
+}
 
 presence.on("UpdateData", async () => {
 
-  playback = 
-    document.querySelector("#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api") !== null &&
-    document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header span#player-title') !== null
-      ? true : false
+	playback =
+		document.querySelector("#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api") !== null &&
+			document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header span#player-title') !== null
+			? true : false
 
-  var video: HTMLVideoElement = document.querySelector("#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api");
-  
-  if (!playback || video.paused && video[0] == null) {
+	var video: HTMLVideoElement = document.querySelector("#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api");
 
-    presenceData: presenceData = {
-      largeImageKey: "lg"
-    }
-    
-    presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
+	if (!playback || video.paused && video[0] == null) {
 
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
+		presenceData: presenceData = {
+			largeImageKey: "lg"
+		}
 
-    presence.setActivity(presenceData, true);
-    
-  }
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingStamp;
 
-  if (video[0] !== null && !isNaN(video.duration)) {
-      //* Get required tags
-      var videoTitle : any, state : any, playerTitle : any;
+		delete presenceData.state;
+		delete presenceData.smallImageKey;
 
-      var a : any = document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header #player-title span');
+		presence.setActivity(presenceData, true);
 
-      playerTitle = document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header span#player-title');
+	}
 
-      if(a.innerText.length > 0) {
+	if (video[0] !== null && !isNaN(video.duration)) {
+		//* Get required tags
+		var videoTitle: any, state: any, playerTitle: any;
 
-        videoTitle = playerTitle.firstChild.nodeValue;
+		var a: any = document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header #player-title span');
 
-        state = document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header #player-title span');
+		playerTitle = document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header span#player-title');
 
-      } else {
+		if (a.innerText.length > 0) {
 
-        videoTitle = "Watching";
-        state = document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header #player-title');
+			videoTitle = playerTitle.firstChild.nodeValue;
 
-      }
+			state = document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header #player-title span');
 
-      var uploader =
-          document.querySelector(".video-actions-container .video-info-row .usernameWrap a"),
-        timestamps = getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        ),
-        presenceData: presenceData = {
-          details: videoTitle,
-          state: state.innerText,
-          largeImageKey: "lg",
-          smallImageKey: video.paused ? "pause" : "play",
-          smallImageText: video.paused
-            ? (await strings).pause
-            : (await strings).play,
-          startTimestamp: timestamps[0],
-          endTimestamp: timestamps[1]
-        };
+		} else {
 
-      presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
+			videoTitle = "Watching";
+			state = document.querySelector('#hbo-sdk--controller-osd #hbo-sdk--player-header #player-title');
 
-      //* Remove timestamps if paused
-      if (video.paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-      }
- 
-      //* If tags are not "null"
-      if (videoTitle !== null && state !== null) {
-        presence.setActivity(presenceData, !video.paused);
-      }
-    
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
+		}
 
-    } 
+		var uploader =
+			document.querySelector(".video-actions-container .video-info-row .usernameWrap a"),
+			timestamps = getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			),
+			presenceData: presenceData = {
+				details: videoTitle,
+				state: state.innerText,
+				largeImageKey: "lg",
+				smallImageKey: video.paused ? "pause" : "play",
+				smallImageText: video.paused
+					? (await strings).pause
+					: (await strings).play,
+				startTimestamp: timestamps[0],
+				endTimestamp: timestamps[1]
+			};
+
+		presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
+
+		//* Remove timestamps if paused
+		if (video.paused) {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+		}
+
+		//* If tags are not "null"
+		if (videoTitle !== null && state !== null) {
+			presence.setActivity(presenceData, !video.paused);
+		}
+
+	} else {
+		presence.setActivity();
+		presence.setTrayTitle();
+
+	}
 
 });
 
 presence.on("MediaKeys", (key: string) => {
-  switch (key) {
-    case "pause":
-      var video = document.querySelector("#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api") as HTMLVideoElement;
-      video.paused ? video.play() : video.pause();
-      break;
-  }
+	switch (key) {
+		case "pause":
+			var video = document.querySelector("#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api") as HTMLVideoElement;
+			video.paused ? video.play() : video.pause();
+			break;
+	}
 });
 
 /**
@@ -119,7 +119,7 @@ presence.on("MediaKeys", (key: string) => {
  * @param {Number} videoDuration Video duration seconds
  */
 function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+	var startTime = Date.now();
+	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+	return [Math.floor(startTime / 1000), endTime];
 }

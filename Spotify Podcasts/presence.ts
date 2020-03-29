@@ -23,15 +23,15 @@ function PMD_success(message) {
 		"%cPreMiD%cSUCCESS%c " + message,
 		genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
 		genericStyle +
-			"border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
+		"border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
 		"color: unset;"
 	);
 }
 
 let presence = new Presence({
-		clientId: "619561001234464789",
-		mediaKeys: false
-	}),
+	clientId: "619561001234464789",
+	mediaKeys: false
+}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"

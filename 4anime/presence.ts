@@ -50,9 +50,9 @@ presence.on("UpdateData", async () => {
 		seasonepisode = document.querySelector('span#titleleft');
 
 		var timestamps = getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
-			),
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		),
 			presenceData: presenceData = {
 				largeImageKey: "logo",
 				smallImageKey: video.paused ? "pause" : "play",

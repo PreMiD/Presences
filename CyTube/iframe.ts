@@ -5,22 +5,22 @@ var iframe = new iFrame();
 let sendback;
 
 iframe.on("UpdateData", () => {
-    const link = document.location;
+	const link = document.location;
 
-    if (document.getElementsByTagName('video').length != 0) {
-        let video: HTMLVideoElement = document.getElementsByTagName('video')[0];
-        sendback = {
-            audio: false,
-            current_time: video.currentTime,
-            duration: video.duration,
-            paused: video.paused,
-            site: link.href
-        }
-    }
-    send()
+	if (document.getElementsByTagName('video').length != 0) {
+		let video: HTMLVideoElement = document.getElementsByTagName('video')[0];
+		sendback = {
+			audio: false,
+			current_time: video.currentTime,
+			duration: video.duration,
+			paused: video.paused,
+			site: link.href
+		}
+	}
+	send()
 })
 function send() {
-    iframe.send(sendback);
+	iframe.send(sendback);
 }
 
 

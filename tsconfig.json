@@ -6,6 +6,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
+		"inlineSourceMap": true,
 		"typeRoots": [
 			"@types"
 		]

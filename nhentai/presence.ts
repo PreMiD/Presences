@@ -1,215 +1,215 @@
 var presence = new Presence({
-    clientId: "612653415419609088",
-    mediaKeys: false
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+	clientId: "612653415419609088",
+	mediaKeys: false
+}),
+	strings = presence.getStrings({
+		play: "presence.playback.playing",
+		pause: "presence.playback.paused"
+	});
 
-  var lastPlaybackState = null;
-  var reading;
-  var browsingStamp = Math.floor(Date.now()/1000);
+var lastPlaybackState = null;
+var reading;
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-  var title : any, title2 : any, currentPage : any, pageNumber : any, tabTitle : any, homeCurrentPage : any;
+var title: any, title2: any, currentPage: any, pageNumber: any, tabTitle: any, homeCurrentPage: any;
 
-  var pattern = "- Page";
+var pattern = "- Page";
 
-  var character : any, parody : any;
+var character: any, parody: any;
 
-  var searchURL = new URL(document.location.href);
-  var searchResult = searchURL.searchParams.get("q");
+var searchURL = new URL(document.location.href);
+var searchResult = searchURL.searchParams.get("q");
 
-  var truncateAfter = function (str, pattern) {
-    return str.slice(0, str.indexOf(pattern));
-  } 
+var truncateAfter = function (str, pattern) {
+	return str.slice(0, str.indexOf(pattern));
+}
 
-  if(lastPlaybackState != reading) {
+if (lastPlaybackState != reading) {
 
-      lastPlaybackState = reading;
-      browsingStamp = Math.floor(Date.now()/1000);
-      
-  }
+	lastPlaybackState = reading;
+	browsingStamp = Math.floor(Date.now() / 1000);
+
+}
 
 presence.on("UpdateData", async () => {
 
-  let presenceData: presenceData = {
+	let presenceData: presenceData = {
 
-    largeImageKey: "lg"
-    
-  };
+		largeImageKey: "lg"
 
-  tabTitle = document.title;
+	};
 
-  title = document.querySelector("#info > h1");
+	tabTitle = document.title;
 
-  if(document.location.pathname == "/" || !document.location.pathname) {
+	title = document.querySelector("#info > h1");
 
+	if (document.location.pathname == "/" || !document.location.pathname) {
 
-    homeCurrentPage = document.querySelector("#content > section.pagination > a.page.current");
 
-    presenceData.details = "Home";
+		homeCurrentPage = document.querySelector("#content > section.pagination > a.page.current");
 
-    presenceData.state = "Page: " + homeCurrentPage.innerText;
+		presenceData.details = "Home";
 
-    presenceData.startTimestamp = browsingStamp;
+		presenceData.state = "Page: " + homeCurrentPage.innerText;
 
+		presenceData.startTimestamp = browsingStamp;
 
-  } else if(document.location.pathname.includes("/g/")) {
 
-  
-    if(tabTitle.includes("Page")) {
+	} else if (document.location.pathname.includes("/g/")) {
 
-      currentPage = document.querySelector("#pagination-page-top > button > span.current");
 
-      pageNumber = document.querySelector("#pagination-page-top > button > span.num-pages");
+		if (tabTitle.includes("Page")) {
 
-      title2 = truncateAfter(tabTitle, pattern);
+			currentPage = document.querySelector("#pagination-page-top > button > span.current");
 
-      presenceData.details = "Reading: " + title2;
+			pageNumber = document.querySelector("#pagination-page-top > button > span.num-pages");
 
-      presenceData.state = "Current page: " + currentPage.innerText + "/" + pageNumber.innerText;
+			title2 = truncateAfter(tabTitle, pattern);
 
-      presenceData.startTimestamp = browsingStamp;
+			presenceData.details = "Reading: " + title2;
 
-    } else if(title.innerText.length > 0) {
+			presenceData.state = "Current page: " + currentPage.innerText + "/" + pageNumber.innerText;
 
-      if(title.innerText.length > 128) {
+			presenceData.startTimestamp = browsingStamp;
 
-        presenceData.state = "Title longer than 128 characters.";
+		} else if (title.innerText.length > 0) {
 
-      } else {
+			if (title.innerText.length > 128) {
 
-        presenceData.state = title.innerText;
+				presenceData.state = "Title longer than 128 characters.";
 
-      }
+			} else {
 
-      presenceData.details = "Viewing a page: ";
-  
-      presenceData.startTimestamp = browsingStamp;
-  
-    }
+				presenceData.state = title.innerText;
 
-  } else if(document.location.pathname.includes("/tags/")) {
+			}
 
+			presenceData.details = "Viewing a page: ";
 
-    presenceData.details = "Browsing tags...";
+			presenceData.startTimestamp = browsingStamp;
 
-    presenceData.startTimestamp = browsingStamp;
+		}
 
-    delete presenceData.state;
+	} else if (document.location.pathname.includes("/tags/")) {
 
 
-  } else if(document.location.pathname.includes("/artists/")) {
+		presenceData.details = "Browsing tags...";
 
+		presenceData.startTimestamp = browsingStamp;
 
-    presenceData.details = "Browsing artists...";
+		delete presenceData.state;
 
-    presenceData.startTimestamp = browsingStamp;
 
-    delete presenceData.state;
+	} else if (document.location.pathname.includes("/artists/")) {
 
 
-  } else if(document.location.pathname.includes("/characters/")) {
+		presenceData.details = "Browsing artists...";
 
+		presenceData.startTimestamp = browsingStamp;
 
-    presenceData.details = "Browsing characters...";
+		delete presenceData.state;
 
-    presenceData.startTimestamp = browsingStamp;
 
-    delete presenceData.state;
+	} else if (document.location.pathname.includes("/characters/")) {
 
 
-  } else if(document.location.pathname.includes("/parodies/")) {
+		presenceData.details = "Browsing characters...";
 
+		presenceData.startTimestamp = browsingStamp;
 
-    presenceData.details = "Browsing parodies...";
+		delete presenceData.state;
 
-    presenceData.startTimestamp = browsingStamp;
 
-    delete presenceData.state;
+	} else if (document.location.pathname.includes("/parodies/")) {
 
 
-  } else if(document.location.pathname.includes("/groups/")) {
+		presenceData.details = "Browsing parodies...";
 
+		presenceData.startTimestamp = browsingStamp;
 
-    presenceData.details = "Browsing groups...";
+		delete presenceData.state;
 
-    presenceData.startTimestamp = browsingStamp;
 
-    delete presenceData.state;
+	} else if (document.location.pathname.includes("/groups/")) {
 
 
-  } else if(document.location.pathname.includes("/info/")) {
+		presenceData.details = "Browsing groups...";
 
+		presenceData.startTimestamp = browsingStamp;
 
-    presenceData.details = "Reading informations...";
+		delete presenceData.state;
 
-    presenceData.startTimestamp = browsingStamp;
 
-    delete presenceData.state;
+	} else if (document.location.pathname.includes("/info/")) {
 
 
-  } else if(document.location.pathname.includes("/search/")) {
+		presenceData.details = "Reading informations...";
 
+		presenceData.startTimestamp = browsingStamp;
 
-    presenceData.details = "Searching for: ";
+		delete presenceData.state;
 
-    presenceData.state = searchResult;
 
-    presenceData.startTimestamp = browsingStamp;
+	} else if (document.location.pathname.includes("/search/")) {
 
 
-  } else if(document.location.pathname.includes("/character/")) {
+		presenceData.details = "Searching for: ";
 
-    character = document.querySelector("#content > h1 > span:nth-child(2)");
+		presenceData.state = searchResult;
 
+		presenceData.startTimestamp = browsingStamp;
 
-    presenceData.details = "Searching by character: ";
 
-    presenceData.state = character.innerText;
+	} else if (document.location.pathname.includes("/character/")) {
 
-    presenceData.startTimestamp = browsingStamp;
+		character = document.querySelector("#content > h1 > span:nth-child(2)");
 
 
-  } else if(document.location.pathname.includes("/parody/")) {
+		presenceData.details = "Searching by character: ";
 
-    parody = document.querySelector("#content > h1 > span:nth-child(2)");
+		presenceData.state = character.innerText;
 
+		presenceData.startTimestamp = browsingStamp;
 
-    presenceData.details = "Searching by parody: ";
 
-    presenceData.state = parody.innerText;
+	} else if (document.location.pathname.includes("/parody/")) {
 
-    presenceData.startTimestamp = browsingStamp;
+		parody = document.querySelector("#content > h1 > span:nth-child(2)");
 
 
-  } else {
+		presenceData.details = "Searching by parody: ";
 
-    presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
-  
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
+		presenceData.state = parody.innerText;
 
-  }
+		presenceData.startTimestamp = browsingStamp;
 
-  presence.setActivity(presenceData);
 
-/*
+	} else {
 
-  let presenceData: presenceData = {
-    largeImageKey: "lg"
-  }
-  
-  presenceData.details = "Browsing...";
-  presenceData.startTimestamp = browsingStamp;
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingStamp;
 
-  delete presenceData.state;
-  delete presenceData.smallImageKey;
+		delete presenceData.state;
+		delete presenceData.smallImageKey;
 
-  presence.setActivity(presenceData, true);
-*/
+	}
+
+	presence.setActivity(presenceData);
+
+	/*
+	
+		let presenceData: presenceData = {
+			largeImageKey: "lg"
+		}
+	  
+		presenceData.details = "Browsing...";
+		presenceData.startTimestamp = browsingStamp;
+	
+		delete presenceData.state;
+		delete presenceData.smallImageKey;
+	
+		presence.setActivity(presenceData, true);
+	*/
 
 
 
@@ -221,7 +221,7 @@ presence.on("UpdateData", async () => {
  * @param {Number} videoDuration Video duration seconds
  */
 function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+	var startTime = Date.now();
+	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+	return [Math.floor(startTime / 1000), endTime];
 }

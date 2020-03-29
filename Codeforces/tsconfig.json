@@ -1,7 +1,7 @@
 {
-    "extends": "../tsconfig.json",
-    "compileOnSave": true,
-    "compilerOptions": {
-        "outDir": "./dist/"
-    }
+	"extends": "../tsconfig.json",
+	"compileOnSave": true,
+	"compilerOptions": {
+		"outDir": "./dist/"
+	}
 }

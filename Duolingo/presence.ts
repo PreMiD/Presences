@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "612071822321647648",
-  mediaKeys: false
+	clientId: "612071822321647648",
+	mediaKeys: false
 }),
- presenceData: presenceData = {
-  largeImageKey: "logo"
-};
+	presenceData: presenceData = {
+		largeImageKey: "logo"
+	};
 
 let lang = new Map();
 lang.set('de', 'German');
@@ -44,64 +44,64 @@ lang.set('en', 'English');
 
 presence.on("UpdateData", async () => {
 
-    var path1 = document.location.pathname;
+	var path1 = document.location.pathname;
 
-    if(path1.split("/")[2] == null) {
+	if (path1.split("/")[2] == null) {
 
-	if(document.location.pathname.startsWith("/learn")) {
-        var pageData: presenceData = {
-            details: "Choosing level to learn..",
-            largeImageKey: "logo"
-        }
-        presence.setActivity(pageData);
-    } else if(document.location.pathname.startsWith("/shop")) {
-        var pageData: presenceData = {
-            details: "Browsing shop..",
-            largeImageKey: "logo"
-        }
-        presence.setActivity(pageData);
-    } else if(document.location.pathname.includes("/dictionary")) {
-	var path = document.location.pathname;
-        var pageData: presenceData = {
-            details: "Using dictionary..",
-            state: "Language: " + document.location.pathname.split("/")[2],
-            largeImageKey: "logo"
-        }
-        presence.setActivity(pageData);
-    } else if(document.location.pathname.includes("/profile")) {
-	var path = document.location.pathname;
-        var pageData: presenceData = {
-            details: "Browsing profile..",
-            state: "Browsing: " + document.location.pathname.split("/")[2],
-            largeImageKey: "logo"
-        }
-        presence.setActivity(pageData);
-    }  else if (document.location.pathname.includes("/words")) {
-      presenceData.details = "Checking words...";
-      presenceData.largeImageKey = "logo";
-      presence.setActivity(presenceData);
-    }  else if(document.location.pathname == "/" || !document.location.pathname) {
+		if (document.location.pathname.startsWith("/learn")) {
+			var pageData: presenceData = {
+				details: "Choosing level to learn..",
+				largeImageKey: "logo"
+			}
+			presence.setActivity(pageData);
+		} else if (document.location.pathname.startsWith("/shop")) {
+			var pageData: presenceData = {
+				details: "Browsing shop..",
+				largeImageKey: "logo"
+			}
+			presence.setActivity(pageData);
+		} else if (document.location.pathname.includes("/dictionary")) {
+			var path = document.location.pathname;
+			var pageData: presenceData = {
+				details: "Using dictionary..",
+				state: "Language: " + document.location.pathname.split("/")[2],
+				largeImageKey: "logo"
+			}
+			presence.setActivity(pageData);
+		} else if (document.location.pathname.includes("/profile")) {
+			var path = document.location.pathname;
+			var pageData: presenceData = {
+				details: "Browsing profile..",
+				state: "Browsing: " + document.location.pathname.split("/")[2],
+				largeImageKey: "logo"
+			}
+			presence.setActivity(pageData);
+		} else if (document.location.pathname.includes("/words")) {
+			presenceData.details = "Checking words...";
+			presenceData.largeImageKey = "logo";
+			presence.setActivity(presenceData);
+		} else if (document.location.pathname == "/" || !document.location.pathname) {
 
-  var pageData: presenceData = {
-      details: "Browsing..",
-      largeImageKey: "logo"
-    }
-      presence.setActivity(pageData);
-  }
-    } else {
+			var pageData: presenceData = {
+				details: "Browsing..",
+				largeImageKey: "logo"
+			}
+			presence.setActivity(pageData);
+		}
+	} else {
 
-      if(path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
-        var language:string;
-        for (let value of lang.keys()) {
-          if(path1.split("/")[2] == value) {
-            language = lang.get(value);
-            break
-          }
-        }
-        presenceData.details = "Taking a lesson";
-        presenceData.state = "Language: " + language;
-        presenceData.largeImageKey = "logo";
-        presence.setActivity(presenceData);
-        }
-      }
+		if (path1.length > 1 && path1.split("/")[2] !== null && path1.split("/")[2].length == 2) {
+			var language: string;
+			for (let value of lang.keys()) {
+				if (path1.split("/")[2] == value) {
+					language = lang.get(value);
+					break
+				}
+			}
+			presenceData.details = "Taking a lesson";
+			presenceData.state = "Language: " + language;
+			presenceData.largeImageKey = "logo";
+			presence.setActivity(presenceData);
+		}
+	}
 });

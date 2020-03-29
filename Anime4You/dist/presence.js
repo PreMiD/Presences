@@ -1,16 +1,7 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
-    clientId: "470178791428325376",
-    mediaKeys: false
+    clientId: "470178791428325376"
 });
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+presence.on("UpdateData", async () => {
     if (document.location.pathname.startsWith("/show")) {
         let homepagePresence = {
             details: document.getElementsByClassName("titel")[0].getElementsByTagName("h3")[0].innerText,
@@ -55,12 +46,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageKey: "logo"
         };
         presence.setActivity(inactivePresence);
-    }
-}));
-presence.on("MediaKeys", (key) => {
-    switch (key) {
-        case "pause":
-            break;
     }
 });
 presence.on('iFrameData', function (data) {

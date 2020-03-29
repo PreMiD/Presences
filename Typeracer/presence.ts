@@ -3,21 +3,21 @@ var presence = new Presence({
 	mediaKeys: false
 })
 
-var browsingStamp = Math.floor(Date.now() / 1000), 
+var browsingStamp = Math.floor(Date.now() / 1000),
 	href = new URL(document.location.href),
 	presenceData = {
-		details: <string> 'In construction',
-		state: <string> null,
-		largeImageKey: <string> "lg",
-		startTimestamp: <number> browsingStamp,
-		endTimestamp: <number> null
+		details: <string>'In construction',
+		state: <string>null,
+		largeImageKey: <string>"lg",
+		startTimestamp: <number>browsingStamp,
+		endTimestamp: <number>null
 	},
 	updateCallback = {
 		_function: null,
 		get function() {
 			return this._function;
 		},
-		set function(parameter){
+		set function(parameter) {
 			this._function = parameter
 		},
 		get present() {
@@ -26,7 +26,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 	},
 	raceStamp = null;
 
-(() => { 
+(() => {
 
 	if (href.hostname === "play.typeracer.com") {
 
@@ -43,18 +43,18 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 
 				presenceData.details = "Playing a race"
 				let gameStatusLabel = document.querySelector(".gameStatusLabel").textContent
-				
+
 				if (gameStatusLabel === "Waiting for more people...") {
 					presenceData.state = "Waiting for more people..."
-					if (raceStamp === null) raceStamp = Math.floor(Date.now()/1000)
+					if (raceStamp === null) raceStamp = Math.floor(Date.now() / 1000)
 					presenceData.startTimestamp = raceStamp
-				
+
 				} else if (gameStatusLabel === "The race is about to start!") {
 					let timeString = document.querySelector(".countdownPopup .time").textContent
 					presenceData.state = "Counting down..."
-					presenceData.endTimestamp = Math.floor(Date.now()/1000) + Number(document.querySelector(".countdownPopup .time").textContent.slice(1))
+					presenceData.endTimestamp = Math.floor(Date.now() / 1000) + Number(document.querySelector(".countdownPopup .time").textContent.slice(1))
 					raceStamp = null
-				
+
 				} else if (gameStatusLabel === "The race is on! Type the text below:" || gameStatusLabel === "Go!") {
 					const textBox = document.querySelector("table.gameView > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div > div")
 					const lettersTotal = textBox.textContent.length
@@ -66,12 +66,12 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 							}
 						}
 					}
-					let percentage = Math.round((lettersTyped/lettersTotal)*10000)/100
+					let percentage = Math.round((lettersTyped / lettersTotal) * 10000) / 100
 					let wpm = document.querySelector(".rankPanelWpm-self").textContent.toUpperCase()
 					presenceData.state = `${percentage}%, ${wpm}`
-					if (raceStamp === null) raceStamp = Math.floor(Date.now()/1000)
+					if (raceStamp === null) raceStamp = Math.floor(Date.now() / 1000)
 					presenceData.startTimestamp = raceStamp
-				
+
 				} else if (gameStatusLabel === "The race has ended." || gameStatusLabel.startsWith("You finished")) {
 					presenceData.details = "Just finished with a race"
 					let wpm = document.querySelector(".rankPanelWpm-self").textContent.toUpperCase()
@@ -138,7 +138,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 			if (path[1] === "about") {
 				presenceData.details = "Viewing a page"
 				presenceData.state = "About"
-			} 
+			}
 		} else if (path[0] === "admin") {
 			presenceData.details = "Viewing school admin pages"
 		}
@@ -150,9 +150,9 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 if (updateCallback.present) {
 	presence.on("UpdateData", async () => {
 		resetData()
-        updateCallback.function();
+		updateCallback.function();
 		cleanData()
-        presence.setActivity(presenceData);
+		presence.setActivity(presenceData);
 	})
 } else {
 	cleanData()
@@ -166,11 +166,11 @@ if (updateCallback.present) {
  */
 function resetData() {
 	presenceData = {
-		details: <string> 'In construction',
-		state: <string> null,
-		largeImageKey: <string> "lg",
-		startTimestamp: <number> browsingStamp,
-		endTimestamp: <number> null
+		details: <string>'In construction',
+		state: <string>null,
+		largeImageKey: <string>"lg",
+		startTimestamp: <number>browsingStamp,
+		endTimestamp: <number>null
 	};
 }
 

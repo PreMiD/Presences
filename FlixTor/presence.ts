@@ -1,7 +1,7 @@
 var presence = new Presence({
-		clientId: "616754182858342426",
-		mediaKeys: true
-	}),
+	clientId: "616754182858342426",
+	mediaKeys: true
+}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -40,8 +40,8 @@ presence.on("UpdateData", async () => {
 
 	if (video !== null && !isNaN(video.duration)) {
 		let videoTitle: HTMLElement = document.querySelector(
-				"div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down"
-			),
+			"div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down"
+		),
 			season: HTMLElement = document.querySelector("#playercontainer span.outPes"),
 			episode: HTMLElement = document.querySelector("#playercontainer span.outPep");
 

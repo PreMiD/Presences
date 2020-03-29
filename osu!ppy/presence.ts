@@ -1,117 +1,117 @@
 var presence = new Presence({
-  clientId: "609774216430092298",
-  mediaKeys: false
+	clientId: "609774216430092298",
+	mediaKeys: false
 }), presenceData: presenceData = {
-  largeImageKey: "logo"
-}, customData:boolean = false;
+	largeImageKey: "logo"
+}, customData: boolean = false;
 
 presence.on("UpdateData", async () => {
-  customData = false;
+	customData = false;
 
-  if(document.location.pathname == ("/home")) {
+	if (document.location.pathname == ("/home")) {
 
-      presenceData.details = "Viewing the homepage";
+		presenceData.details = "Viewing the homepage";
 
-  } else if(document.location.pathname.startsWith("/home/download")) {
-    
-     presenceData.details = "Downloading the game";
+	} else if (document.location.pathname.startsWith("/home/download")) {
 
- } else if(document.location.pathname.startsWith("/beatmapsets")) {
-     
-      var title = document.querySelector(".beatmapset-header__details-text--title"),
-          diff = document.querySelector(".beatmapset-header__diff-name")
+		presenceData.details = "Downloading the game";
 
-          if(title != null && diff != null) {
-            customData = true;
-    
-            var beatmapData: presenceData = {
-              details: "Looking at the beatmap:",
-              state: (title as HTMLElement).innerText + 
-              "[" + (diff as HTMLElement).innerText + "]",
-              largeImageKey: "logo"
-         };
-        presence.setActivity(beatmapData);
-      }else{
-        presenceData.details = "Searching for new beatmaps"
-      }
+	} else if (document.location.pathname.startsWith("/beatmapsets")) {
 
-  } else if(document.location.pathname.startsWith("/beatmaps/packs")) {
-     
-    presenceData.details = "Browsing through beatmap packs";
+		var title = document.querySelector(".beatmapset-header__details-text--title"),
+			diff = document.querySelector(".beatmapset-header__diff-name")
 
-  } else if(document.location.pathname.startsWith("/beatmaps/artists")) {
-     
-    presenceData.details = "Browsing through featured artists";
+		if (title != null && diff != null) {
+			customData = true;
 
-  } else if(document.location.pathname.startsWith("/store")) {
-     
-      presenceData.details = "Browsing through the store";
+			var beatmapData: presenceData = {
+				details: "Looking at the beatmap:",
+				state: (title as HTMLElement).innerText +
+					"[" + (diff as HTMLElement).innerText + "]",
+				largeImageKey: "logo"
+			};
+			presence.setActivity(beatmapData);
+		} else {
+			presenceData.details = "Searching for new beatmaps"
+		}
 
-  } else if(document.location.pathname.startsWith("/rankings")) {
-     
-      presenceData.details = "Browsing through the rankings";
+	} else if (document.location.pathname.startsWith("/beatmaps/packs")) {
 
-  } else if(document.location.pathname.startsWith("/community/forums")) {
-     
-      presenceData.details = "Browsing through the forum";
+		presenceData.details = "Browsing through beatmap packs";
 
-  } else if(document.location.pathname.startsWith("/community/chat")) {
-     
-    presenceData.details = "Chatting";
+	} else if (document.location.pathname.startsWith("/beatmaps/artists")) {
 
-} else if(document.location.pathname.startsWith("/community/contests")) {
-     
-  presenceData.details = "Browsing through the Contests";
+		presenceData.details = "Browsing through featured artists";
 
-} else if(document.location.pathname.startsWith("/community/livestreams")) {
-     
-  presenceData.details = "Browsing through livestreams";
+	} else if (document.location.pathname.startsWith("/store")) {
 
-}  else if(document.location.pathname.startsWith("/community/tournaments")) {
-     
-  presenceData.details = "Browsing through Tournaments";
+		presenceData.details = "Browsing through the store";
 
-} else if(document.location.pathname.startsWith("/home/search")) {
-    
-      presenceData.details = "Is searching something";
+	} else if (document.location.pathname.startsWith("/rankings")) {
 
-    } else if(document.location.pathname.startsWith("/home/account/edit")) {
-    
-      presenceData.details = "Changing their account settings";
-  
-  } else if(document.location.pathname.startsWith("/help/wiki")) {
-     
-      presenceData.details = "Browsing through the wiki";
+		presenceData.details = "Browsing through the rankings";
 
-  } else if(document.location.pathname.startsWith("/home/changelog")) {
+	} else if (document.location.pathname.startsWith("/community/forums")) {
 
-    presenceData.details = "Looking at the changelog";
+		presenceData.details = "Browsing through the forum";
 
-  } else if(document.location.pathname.startsWith("/home/friends")) {
+	} else if (document.location.pathname.startsWith("/community/chat")) {
 
-    presenceData.details = "Browsing through the friend list";
+		presenceData.details = "Chatting";
 
-  }  else if(document.location.pathname.startsWith("/users")) {
+	} else if (document.location.pathname.startsWith("/community/contests")) {
 
-    var name:string = (document.querySelector(".profile-info__name .u-ellipsis-overflow") as HTMLElement).innerText;
-      customData = true;
-      var profileData: presenceData = {
-        details:  "Looking at " +  name + "'s Profile",
-        state: "Rank: " + (document.querySelector(".value-display__value") as HTMLElement).innerText + 
-                  " / " + (document.querySelector('.value-display--pp .value-display__value') as HTMLElement).innerText + "pp",
-        largeImageKey: "logo"
-       };
-      presence.setActivity(profileData);
+		presenceData.details = "Browsing through the Contests";
 
-  } else {
-      presenceData.details = "Seems to be somewhere wrongly";
-  }
-  if(!customData) {
-    presence.setActivity(presenceData);
-  }
+	} else if (document.location.pathname.startsWith("/community/livestreams")) {
+
+		presenceData.details = "Browsing through livestreams";
+
+	} else if (document.location.pathname.startsWith("/community/tournaments")) {
+
+		presenceData.details = "Browsing through Tournaments";
+
+	} else if (document.location.pathname.startsWith("/home/search")) {
+
+		presenceData.details = "Is searching something";
+
+	} else if (document.location.pathname.startsWith("/home/account/edit")) {
+
+		presenceData.details = "Changing their account settings";
+
+	} else if (document.location.pathname.startsWith("/help/wiki")) {
+
+		presenceData.details = "Browsing through the wiki";
+
+	} else if (document.location.pathname.startsWith("/home/changelog")) {
+
+		presenceData.details = "Looking at the changelog";
+
+	} else if (document.location.pathname.startsWith("/home/friends")) {
+
+		presenceData.details = "Browsing through the friend list";
+
+	} else if (document.location.pathname.startsWith("/users")) {
+
+		var name: string = (document.querySelector(".profile-info__name .u-ellipsis-overflow") as HTMLElement).innerText;
+		customData = true;
+		var profileData: presenceData = {
+			details: "Looking at " + name + "'s Profile",
+			state: "Rank: " + (document.querySelector(".value-display__value") as HTMLElement).innerText +
+				" / " + (document.querySelector('.value-display--pp .value-display__value') as HTMLElement).innerText + "pp",
+			largeImageKey: "logo"
+		};
+		presence.setActivity(profileData);
+
+	} else {
+		presenceData.details = "Seems to be somewhere wrongly";
+	}
+	if (!customData) {
+		presence.setActivity(presenceData);
+	}
 });
 
-presence.on('iFrameData', function(data) {
-  console.log(data);
+presence.on('iFrameData', function (data) {
+	console.log(data);
 });
 
