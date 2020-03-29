@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "HiddenRealm",
+      "id": "444628005646499851"
+    },
+    "url": "moddedbeepbox.github.io/",
+    "description": {
+      "en": "Mod off of BeepBox. Pre- 3.0 update."
+    },
+    "service": "ModBox",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/fUVwEfq.png",
+    "thumbnail": "https://i.imgur.com/BWAwj32.png",
+    "color": "#44FF44",
+    "tags": [
+      "music",
+      "music creation",
+      "beepbox"
+    ],
+    "category": "music"
+  }
