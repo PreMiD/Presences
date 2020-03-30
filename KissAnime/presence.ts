@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "609500599238656000",
+    clientId: "609500599238656000"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var lastPlaybackState = null;
@@ -17,7 +17,7 @@ if (lastPlaybackState != playback) {
 
 var iFrameVideo: any, currentTime: any, duration: any, paused: any;
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   playback = data.iframe_video !== null ? true : false;
 
   if (playback) {
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
     var videoTitle: any, episod: any, episode: any;
 
     var pattern = "Episode";
-    var truncateAfter = function (str, pattern) {
+    var truncateAfter = function(str, pattern) {
       return str.slice(0, str.indexOf(pattern));
     };
 
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
         smallImageKey: paused ? "pause" : "play",
         smallImageText: paused ? (await strings).pause : (await strings).play,
         startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1],
+        endTimestamp: timestamps[1]
       };
 
     presence.setTrayTitle(paused ? "" : videoTitle.innerText);
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
     }
   } else {
     presenceData: presenceData = {
-      largeImageKey: "lg",
+      largeImageKey: "lg"
     };
 
     presenceData.details = "Browsing...";

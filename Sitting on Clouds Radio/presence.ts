@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "689724677274337290",
+  clientId: "689724677274337290"
 });
 
 let timeElapsed = Math.floor(Date.now() / 1000),
   strings = presence.getStrings({
-    live: "presence.playback.live",
+    live: "presence.playback.live"
   }),
   songName,
   albumName,
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     let presenceData: presenceData = {
       details: "Not tuned in.",
       largeImageKey: "clouds",
-      smallImageKey: "pause",
+      smallImageKey: "pause"
     };
     presence.setActivity(presenceData);
   } else {
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
       state: artistName.innerText + " - " + albumName.innerText,
       largeImageKey: "clouds",
       smallImageKey: "live",
-      startTimestamp: timeElapsed,
+      startTimestamp: timeElapsed
     };
     presence.setActivity(presenceData);
   }

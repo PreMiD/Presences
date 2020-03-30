@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "634299110782140416",
+  clientId: "634299110782140416"
 });
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "hepboat",
+    largeImageKey: "hepboat"
   };
 
   if (document.location.pathname.startsWith("/guilds/")) {

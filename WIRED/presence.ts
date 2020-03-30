@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "645051733961211934",
+  clientId: "645051733961211934"
 });
 
 var elapsed, oldURL;
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
     details: details,
     state: state,
     largeImageKey: "wired",
-    startTimestamp: elapsed,
+    startTimestamp: elapsed
   };
 
   presence.setActivity(data);

@@ -1,13 +1,13 @@
 var presence = new Presence({
-    clientId: "629473655218241557",
+    clientId: "629473655218241557"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 presence.on("UpdateData", async () => {
   let Data: presenceData = {
-    largeImageKey: "musescore",
+    largeImageKey: "musescore"
   };
 
   // ALL ON THE .ORG website
@@ -164,7 +164,7 @@ presence.on("UpdateData", async () => {
           .querySelector(
             "#jmuse-container > div:nth-child(1) > div > div > div > div._1DDmo.undefined > div:nth-child(1) > div > div > div._3vWaq > span"
           )
-          .textContent.split("/")[1],
+          .textContent.split("/")[1]
       ]);
       Data.startTimestamp = getTimestamps(time[0], time[1])[0];
       Data.endTimestamp = getTimestamps(time[0], time[1])[1];

@@ -1,14 +1,14 @@
 var presence = new Presence({
-    clientId: "630533580119998496",
+    clientId: "630533580119998496"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "comedycentral",
+    largeImageKey: "comedycentral"
   };
 
   if (document.location.pathname.startsWith("/episodes")) {

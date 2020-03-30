@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "620829310399545344",
+  clientId: "620829310399545344"
 });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "skribblio-logo",
+    largeImageKey: "skribblio-logo"
   };
   var inGame =
     document.querySelector("#containerGamePlayers").textContent === ""

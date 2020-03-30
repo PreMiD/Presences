@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "630125847134863371",
+  clientId: "630125847134863371"
 });
 const { pathname } = window.location,
   startTimestamp = Math.floor(Date.now() / 1000);
@@ -8,10 +8,10 @@ let current: number, duration: number, paused: boolean, played: boolean;
 const strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing",
+  browsing: "presence.activity.browsing"
 });
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   current = data.current;
   duration = data.duration;
   paused = data.paused;
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
     largeImageKey: "tuga_lg",
     details: (await strings).browsing,
-    startTimestamp,
+    startTimestamp
   };
   if (pathname === `/`) {
     presenceData.state = `Home page`;

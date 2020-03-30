@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "639591760791732224",
+    clientId: "639591760791732224"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -27,7 +27,7 @@ searchhome = document.querySelector(
   "#server-search-app > div > div > div.home-suggest.clearfix"
 );
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   playback = data.iframe_video.duration !== null ? true : false;
 
   if (playback) {
@@ -40,7 +40,7 @@ presence.on("iFrameData", (data) => {
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "bb",
+    largeImageKey: "bb"
   };
 
   if (document.location.hostname == "www.bilibili.com") {

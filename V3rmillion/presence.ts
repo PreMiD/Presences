@@ -1,6 +1,6 @@
 /* Global variables */
 let presence = new Presence({
-  clientId: "650569876993343529",
+  clientId: "650569876993343529"
 });
 var item: any, profile: any, title: any;
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -38,7 +38,7 @@ function PMD_success(message) {
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "logo-512",
+    largeImageKey: "logo-512"
   };
   presenceData.startTimestamp = browsingStamp;
   if (document.location.hostname.includes("v3rmillion.net")) {

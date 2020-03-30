@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "633805202868273153",
+    clientId: "633805202868273153"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -15,7 +15,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "g2alogo",
+    largeImageKey: "g2alogo"
   };
 
   if (document.location.hostname == "www.g2a.com") {

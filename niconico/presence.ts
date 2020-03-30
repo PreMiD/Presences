@@ -1,11 +1,11 @@
 {
   const presence = new Presence({
-    clientId: "609220157910286346",
+    clientId: "609220157910286346"
   });
   const strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   });
 
   presence.on("UpdateData", async () => {
@@ -25,7 +25,7 @@
           if (ownerElement) {
             [, owner] = ownerElement.textContent.match(/(.+) さん$/) || [
               ,
-              ownerElement.textContent,
+              ownerElement.textContent
             ];
           } else {
             owner = "Deleted User";
@@ -48,7 +48,7 @@
             smallImageText: isPlaying
               ? (await strings).play
               : (await strings).pause,
-            startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec,
+            startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
           };
 
           if (isPlaying) {
@@ -84,7 +84,7 @@
             smallImageKey: "live",
             smallImageText: (await strings).live,
             startTimestamp:
-              Math.floor(Date.now() / 1000) - getTimesec(elapsed).elapsedSec,
+              Math.floor(Date.now() / 1000) - getTimesec(elapsed).elapsedSec
           };
 
           presence.setActivity(presenceData);
@@ -105,7 +105,7 @@
           const presenceData: presenceData = {
             details: title,
             state: `${owner} - ${seigaId}`,
-            largeImageKey: "niconico",
+            largeImageKey: "niconico"
           };
 
           presence.setActivity(presenceData);
@@ -117,7 +117,7 @@
           const presenceData: presenceData = {
             details: title,
             state: `${owner} - ${mangaId}`,
-            largeImageKey: "niconico",
+            largeImageKey: "niconico"
           };
 
           presence.setActivity(presenceData);

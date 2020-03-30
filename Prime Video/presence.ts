@@ -1,10 +1,10 @@
 var presence = new Presence({
-    clientId: "664568915325747230",
+    clientId: "664568915325747230"
   }),
   strings = presence.getStrings({
     browsing: "presence.activity.browsing",
     paused: "presence.playback.paused",
-    playing: "presence.playback.playing",
+    playing: "presence.playback.playing"
   }),
   browsingStamp = Math.floor(Date.now() / 1000),
   regex = RegExp(

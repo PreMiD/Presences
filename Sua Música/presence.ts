@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "692230804402864148",
+    clientId: "692230804402864148"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 presence.on("UpdateData", async () => {
@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     details: getTrackPlaying(),
     state: getArtistPlaying(),
     startTimestamp: 0,
-    endTimestamp: 0,
+    endTimestamp: 0
   };
 
   if (presenceData.details == null) {
@@ -77,7 +77,7 @@ function actionPlay(): string {
  * Transforms the first letter of the string to uppercase.
  */
 function firstLetterUp(str): string {
-  return str.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
+  return str.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
     return a.toUpperCase();
   });
 }

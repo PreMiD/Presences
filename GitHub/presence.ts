@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "607587875122446359",
+    clientId: "607587875122446359"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
 
   let presenceData: presenceData = {
     details: "Unknown page",
-    largeImageKey: "lg",
+    largeImageKey: "lg"
   };
 
   if (document.location.pathname == "/" || !document.location.pathname) {
@@ -187,7 +187,7 @@ presence.on("UpdateData", async () => {
     ) {
       var repLoc: any;
 
-      repositoryLocation.forEach((item) => {
+      repositoryLocation.forEach(item => {
         repLoc = item.innerText;
       });
 
@@ -208,7 +208,7 @@ presence.on("UpdateData", async () => {
     ) {
       var repLoc2: any;
 
-      repositoryLocation2.forEach((item) => {
+      repositoryLocation2.forEach(item => {
         repLoc2 = item.innerText;
       });
 

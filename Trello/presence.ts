@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "614583717951963137", // CLIENT ID FOR YOUR PRESENCE
+  clientId: "614583717951963137" // CLIENT ID FOR YOUR PRESENCE
 });
 
 var board: any, profile: any;
@@ -8,7 +8,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "trello",
+    largeImageKey: "trello"
   };
 
   presenceData.startTimestamp = browsingStamp;

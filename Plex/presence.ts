@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "645028677033132033",
+    clientId: "645028677033132033"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -16,7 +16,7 @@ var language: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "plex",
+    largeImageKey: "plex"
   };
 
   language = window.navigator.language; //Make this change-able with presence settings

@@ -1,17 +1,17 @@
 var presence = new Presence({
-    clientId: "620283906234777600",
+    clientId: "620283906234777600"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "iheartradio-logo",
+    largeImageKey: "iheartradio-logo"
   };
 
   var playerCheck = document.querySelector("div.css-s6sc4j.e14pqrjs0")

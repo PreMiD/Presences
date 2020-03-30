@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "616940877042155531", // CLIENT ID FOR YOUR PRESENCE
+  clientId: "616940877042155531" // CLIENT ID FOR YOUR PRESENCE
 });
 
 var user: any,
@@ -15,7 +15,7 @@ var user: any,
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "discordwhite",
+    largeImageKey: "discordwhite"
   };
   connected = document.querySelector(
     "#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div"

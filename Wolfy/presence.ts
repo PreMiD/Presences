@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "644235680012042261",
+    clientId: "644235680012042261"
   }),
   path,
   prev,
@@ -9,12 +9,12 @@ var presence = new Presence({
   currTime: any,
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    browsing: "presence.activity.browsing",
+    browsing: "presence.activity.browsing"
   });
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "wf",
+    largeImageKey: "wf"
   };
 
   path = document.location.pathname;

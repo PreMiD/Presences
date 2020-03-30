@@ -1,8 +1,8 @@
 var presence = new Presence({
-    clientId: "675322225490001924",
+    clientId: "675322225490001924"
   }),
   presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   },
   customData: boolean = false;
 
@@ -143,6 +143,6 @@ presence.on("UpdateData", async () => {
   }
 });
 
-presence.on("iFrameData", function (data) {
+presence.on("iFrameData", function(data) {
   console.log(data);
 });

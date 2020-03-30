@@ -1,15 +1,15 @@
 var presence = new Presence({
-    clientId: "630480553694593025",
+    clientId: "630480553694593025"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing",
+    browsing: "presence.activity.browsing"
   });
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "netflix-logo",
+    largeImageKey: "netflix-logo"
   };
 
   if (document.location.pathname.includes("/watch")) {

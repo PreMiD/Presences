@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "632013978608074764",
+    clientId: "632013978608074764"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -20,7 +20,7 @@ lastState = null;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "monstercat",
+    largeImageKey: "monstercat"
   };
 
   if (document.location.hostname == "www.monstercat.com") {

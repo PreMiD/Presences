@@ -1,25 +1,25 @@
 let presence = new Presence({
-  clientId: "664350968585912350",
+  clientId: "664350968585912350"
 });
 
 let strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing",
+  browsing: "presence.activity.browsing"
 });
 
 let startTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement;
 
-presence.on("iFrameData", async (msg) => {
+presence.on("iFrameData", async msg => {
   if (!msg) return;
   video = msg;
 });
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "diziay",
+    largeImageKey: "diziay"
   };
 
   let seriesBool = document.querySelector(

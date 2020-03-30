@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "640275259282686015",
+    clientId: "640275259282686015"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -23,7 +23,7 @@ var search: any;
 presence.on("UpdateData", async () => {
   var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
     presenceData: presenceData = {
-      largeImageKey: "tv",
+      largeImageKey: "tv"
     };
 
   if (

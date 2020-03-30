@@ -1,8 +1,8 @@
 var presence = new Presence({
-    clientId: "611544256758153225",
+    clientId: "611544256758153225"
   }),
   presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
 presence.on("UpdateData", async () => {
@@ -143,12 +143,12 @@ presence.on("UpdateData", async () => {
     }
   } else {
     presenceData = {
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
   }
   presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", function (data) {
+presence.on("iFrameData", function(data) {
   console.log(data);
 });

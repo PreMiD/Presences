@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "634032819915456552",
+    clientId: "634032819915456552"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -15,7 +15,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "hltv",
+    largeImageKey: "hltv"
   };
 
   if (document.location.hostname == "www.hltv.org") {

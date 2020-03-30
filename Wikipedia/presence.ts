@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "609364070684033044",
+    clientId: "609364070684033044"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -16,7 +16,7 @@ var title2URL = new URL(document.location.href);
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     details: "Unknown page",
-    largeImageKey: "lg",
+    largeImageKey: "lg"
   };
 
   title = document.querySelector("h1#firstHeading");

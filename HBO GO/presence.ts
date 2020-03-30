@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "605437254776651786",
+    clientId: "605437254776651786"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var lastPlaybackState = null;
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 
   if (!playback || (video.paused && video[0] == null)) {
     presenceData: presenceData = {
-      largeImageKey: "lg",
+      largeImageKey: "lg"
     };
 
     presenceData.details = "Browsing...";
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
           ? (await strings).pause
           : (await strings).play,
         startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1],
+        endTimestamp: timestamps[1]
       };
 
     presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);

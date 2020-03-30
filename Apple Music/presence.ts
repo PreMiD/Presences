@@ -1,16 +1,16 @@
 var presence = new Presence({
-    clientId: "621819308481445934",
+    clientId: "621819308481445934"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "applemusic-logo",
+    largeImageKey: "applemusic-logo"
   };
 
   var playerCheck = document.querySelector(

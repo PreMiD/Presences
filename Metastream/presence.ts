@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "630462023003799583",
+  clientId: "630462023003799583"
 });
 var strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
-  live: "presence.activity.live",
+  live: "presence.activity.live"
 });
 
 var elapsed, oldUrl;
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
     smallImageKey: smallImageKey,
     smallImageText: smallImageText,
     startTimestamp: startTimestamp,
-    endTimestamp: endTimestamp,
+    endTimestamp: endTimestamp
   };
 
   presence.setActivity(data, playing);

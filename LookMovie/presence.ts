@@ -1,15 +1,15 @@
 let presence = new Presence({
-    clientId: "630349560501370900",
+    clientId: "630349560501370900"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing",
+    browsing: "presence.activity.browsing"
   });
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "lm",
+    largeImageKey: "lm"
   };
 
   var video: HTMLVideoElement = document.querySelectorAll("video")[0];

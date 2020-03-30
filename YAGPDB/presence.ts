@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "633795089600348160",
+    clientId: "633795089600348160"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -15,7 +15,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "logo_y",
+    largeImageKey: "logo_y"
   };
 
   if (document.location.hostname == "yagpdb.xyz") {

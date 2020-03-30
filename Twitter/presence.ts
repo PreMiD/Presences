@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "612437291574755349",
+  clientId: "612437291574755349"
 });
 
 console.log(
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
     details: title,
     state: info,
     largeImageKey: image,
-    startTimestamp: elapsed,
+    startTimestamp: elapsed
   };
 
   presence.setActivity(data, true);
@@ -138,7 +138,7 @@ presence.on("UpdateData", async () => {
 const capitalize = (text: string) => {
   var texts = text.replace(/[\[{(_)}\]]/g, " ").split(" ");
   return texts
-    .map((str) => {
+    .map(str => {
       return str.charAt(0).toUpperCase() + str.slice(1);
     })
     .join(" ");

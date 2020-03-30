@@ -1,63 +1,63 @@
 var presence = new Presence({
-  clientId: "684570342085099546",
+  clientId: "684570342085099546"
 });
 var strings = presence.getStrings({
-  browse: "presence.activity.browsing",
+  browse: "presence.activity.browsing"
 });
 
 const paths = {
   "/": {
-    details: "Browsing",
+    details: "Browsing"
   },
   "/forum": {
     details: "Viewing Page",
-    state: "Forums",
-  },
+    state: "Forums"
+  }
 };
 
 const queries = {
   forgot_login: {
-    details: "Forgot Login",
+    details: "Forgot Login"
   },
   register: {
-    details: "Registering...",
+    details: "Registering..."
   },
   newgame: {
     details: "Creating",
-    state: "New Game",
+    state: "New Game"
   },
   joingame: {
     details: "Joining",
-    state: "New Game",
+    state: "New Game"
   },
   shop: {
     details: "Viewing",
-    state: "Shop",
+    state: "Shop"
   },
   donations: {
     details: "Viewing",
-    state: "Donations",
+    state: "Donations"
   },
   info: {
     details: "Viewing",
-    state: "Game Info",
+    state: "Game Info"
   },
   recruit: {
     details: "Viewing",
-    state: "Recruit a Friend",
+    state: "Recruit a Friend"
   },
   terms: {
     details: "Viewing",
-    state: "Terms of Service",
+    state: "Terms of Service"
   },
   privacy: {
     details: "Viewing",
-    state: "Privacy Policy",
+    state: "Privacy Policy"
   },
   contact: {
     details: "Viewing",
-    state: "Contact",
-  },
+    state: "Contact"
+  }
 };
 
 presence.on("UpdateData", async () => {
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
     smallImageKey: undefined,
     smallImageText: undefined,
     startTimestamp: undefined,
-    endTimestamp: undefined,
+    endTimestamp: undefined
   };
 
   const host = location.host;

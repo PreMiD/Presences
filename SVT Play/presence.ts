@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "641353660986687508",
+    clientId: "641353660986687508"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -16,7 +16,7 @@ var timestamp: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "svt",
+    largeImageKey: "svt"
   };
 
   if (document.location.hostname == "www.svtplay.se") {

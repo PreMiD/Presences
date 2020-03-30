@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "630896385889271819",
+    clientId: "630896385889271819"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);

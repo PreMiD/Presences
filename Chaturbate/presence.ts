@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "633681675792023572",
+    clientId: "633681675792023572"
   }),
   prev,
   elapsed: number,
@@ -9,12 +9,12 @@ var presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   });
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "ch",
+    largeImageKey: "ch"
   };
 
   path = document.location.pathname;

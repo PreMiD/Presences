@@ -1,17 +1,17 @@
 var presence = new Presence({
-    clientId: "620678620041576478",
+    clientId: "620678620041576478"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "mycanal-logo",
+    largeImageKey: "mycanal-logo"
   };
 
   var video: HTMLVideoElement = document.querySelector(

@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: `633637979952250881`,
+    clientId: `633637979952250881`
   }),
   { pathname } = window.location,
   { hostname } = window.location,
@@ -10,7 +10,7 @@ let episode,
   paused: boolean,
   played: boolean;
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   current = data.current;
   duration = data.duration;
   paused = data.paused;
@@ -21,11 +21,11 @@ presence.on("UpdateData", async () => {
   const strings = await presence.getStrings({
     playing: "presence.playback.playing",
     paused: "presence.playback.paused",
-    browsing: "presence.activity.browsing",
+    browsing: "presence.activity.browsing"
   });
 
   const presenceData: presenceData = {
-    largeImageKey: "animedao_lg",
+    largeImageKey: "animedao_lg"
   };
   if (hostname === `animedao26.stream` || hostname === `animedao28.stream`) {
     const title = document.querySelector("h2").textContent.trim();

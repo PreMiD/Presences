@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "518193753433833499",
+  clientId: "518193753433833499"
 });
 
 presence.on("UpdateData", async () => {
@@ -11,13 +11,13 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Looking at screenshots",
         state: "Taiga Aisaka",
-        largeImageKey: "lg-tapi",
+        largeImageKey: "lg-tapi"
       };
       presence.setActivity(presenceData);
     } else {
       let presenceData: presenceData = {
         details: "Looking at screenshots",
-        largeImageKey: "lg-tapi",
+        largeImageKey: "lg-tapi"
       };
       presence.setActivity(presenceData);
     }
@@ -26,19 +26,19 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Looking at fanart",
         state: "Taiga Aisaka",
-        largeImageKey: "lg-tapi",
+        largeImageKey: "lg-tapi"
       };
       presence.setActivity(presenceData);
     } else {
       let presenceData: presenceData = {
         details: "Looking at fanart",
-        largeImageKey: "lg-tapi",
+        largeImageKey: "lg-tapi"
       };
       presence.setActivity(presenceData);
     }
   } else {
     let presenceData: presenceData = {
-      largeImageKey: "lg-tapi",
+      largeImageKey: "lg-tapi"
     };
     presence.setActivity(presenceData);
   }

@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "642714892201230336",
+  clientId: "642714892201230336"
 });
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "time",
+    largeImageKey: "time"
   };
 
   var clock =

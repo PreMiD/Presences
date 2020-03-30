@@ -2,20 +2,20 @@
 //       maybe at some point he'll finish it and this will need updating.
 
 let presence = new Presence({
-    clientId: "629355416714739732", // Contact if you want me to edit the discord assets/keys/whatever
+    clientId: "629355416714739732" // Contact if you want me to edit the discord assets/keys/whatever
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 let iframe_response = {
   paused: true,
   duration: 0,
-  current_time: 0,
+  current_time: 0
 };
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   iframe_response = data;
 });
 
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "animepahe",
     details: "loading",
-    state: "animepahe",
+    state: "animepahe"
   };
   if (!path.includes("anime")) {
     presenceData.smallImageKey = "presence_browsing_home";
@@ -119,13 +119,13 @@ function getTimestamp(time) {
 }
 
 function getTimesFromMs(ms) {
-  const p60 = (x) => Math.floor(x % 60);
+  const p60 = x => Math.floor(x % 60);
   let sec = p60(ms) < 10 ? "0" + p60(ms) : p60(ms),
     min = p60(ms / 60) <= 0 ? 0 : p60(ms / 60),
     hrs = p60(ms / 60 / 60);
   return {
     hrs: hrs,
     sec: sec,
-    min: min,
+    min: min
   };
 }

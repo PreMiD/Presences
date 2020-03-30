@@ -1,18 +1,18 @@
 var presence = new Presence({
-    clientId: "622375113702113281",
+    clientId: "622375113702113281"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   }),
   presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 var playback;
 
 var iFrameVideo: any, currentTime: any, duration: any, paused: any;
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   playback = data.iframe_video.dur !== null ? true : false;
 
   if (playback) {
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
   } else {
     var pageData: presenceData = {
       details: "Browsing..",
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(pageData);
   }

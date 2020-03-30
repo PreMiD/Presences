@@ -1,13 +1,13 @@
 let presence: Presence = new Presence({
-    clientId: "612415911877672971",
+    clientId: "612415911877672971"
   }),
   startedBrowsing: number = Math.floor(Date.now() / 1000),
   presenceData: presenceData = {
     largeImageKey: "webtoon_lg",
-    startTimestamp: startedBrowsing,
+    startTimestamp: startedBrowsing
   },
   strings = presence.getStrings({
-    browsing: "presence.activity.browsing",
+    browsing: "presence.activity.browsing"
   }),
   webtoon: string,
   chapter: string,

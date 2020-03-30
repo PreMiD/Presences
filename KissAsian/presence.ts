@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "641402862961950733",
+    clientId: "641402862961950733"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -19,7 +19,7 @@ var iFrameVideo: boolean,
   playback: any,
   video: HTMLVideoElement,
   timestamps: any;
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   playback = data.iframe_video.duration !== null ? true : false;
 
   //console.log(data.iframe_video);
@@ -34,7 +34,7 @@ presence.on("iFrameData", (data) => {
 });
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "ka",
+    largeImageKey: "ka"
   };
 
   if (document.location.hostname == "kissasian.sh") {

@@ -1,10 +1,10 @@
 var presence = new Presence({
-    clientId: "463097721130188830",
+    clientId: "463097721130188830"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   });
 
 // YouTube TV separator pattern
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play,
       startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1],
+      endTimestamp: timestamps[1]
     };
 
     presence.setTrayTitle(
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
     document.location.hostname == "youtube.com"
   ) {
     let presenceData: presenceData = {
-      largeImageKey: "yt_lg",
+      largeImageKey: "yt_lg"
     };
 
     var search: any;
@@ -361,7 +361,7 @@ presence.on("UpdateData", async () => {
     let presenceData: presenceData = {
       largeImageKey: "yt_lg",
       smallImageKey: "studio",
-      smallImageText: "Youtube Studio",
+      smallImageText: "Youtube Studio"
     };
 
     var search: any;

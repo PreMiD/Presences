@@ -1,10 +1,10 @@
 var presence = new Presence({
-    clientId: "608065709741965327",
+    clientId: "608065709741965327"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    browse: "presence.activity.browsing",
+    browse: "presence.activity.browsing"
   });
 
 var lastPlaybackState = null;
@@ -18,7 +18,7 @@ if (lastPlaybackState != playback) {
 
 var iFrameVideo: any, currentTime: any, duration: any, paused: any;
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   playback = data.iframe_video !== null ? true : false;
 
   if (playback) {
@@ -32,7 +32,7 @@ presence.on("iFrameData", (data) => {
 presence.on("UpdateData", async () => {
   if (!playback) {
     presenceData: presenceData = {
-      largeImageKey: "lg",
+      largeImageKey: "lg"
     };
 
     presenceData.details = (await strings).browse;
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
         smallImageKey: paused ? "pause" : "play",
         smallImageText: paused ? (await strings).pause : (await strings).play,
         startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1],
+        endTimestamp: timestamps[1]
       };
 
     presence.setTrayTitle(paused ? "" : videoTitle.innerText);

@@ -1,25 +1,25 @@
 var presence = new Presence({
-    clientId: "630857591744102461",
+    clientId: "630857591744102461"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing",
+    browsing: "presence.activity.browsing"
   }),
   tv: boolean = false,
   video = {
     duration: 0,
     currentTime: 0,
-    paused: true,
+    paused: true
   };
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   video = data;
 });
 
 presence.on("UpdateData", async () => {
   var data: presenceData = {
-    largeImageKey: "fml",
+    largeImageKey: "fml"
   };
 
   if (

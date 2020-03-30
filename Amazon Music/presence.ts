@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "619041735795802112",
+    clientId: "619041735795802112"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 presence.on("UpdateData", async () => {
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: paused ? "pause" : "play",
       smallImageText: paused ? (await strings).pause : (await strings).play,
       startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1],
+      endTimestamp: timestamps[1]
     };
 
     if (paused) {

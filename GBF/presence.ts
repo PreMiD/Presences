@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "632983924414349333",
+  clientId: "632983924414349333"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -10,7 +10,7 @@ var raid: any;
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   data.startTimestamp = browsingStamp;

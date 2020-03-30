@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "614389710625964045", // CLIENT ID FOR YOUR PRESENCE
+    clientId: "614389710625964045" // CLIENT ID FOR YOUR PRESENCE
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -24,7 +24,7 @@ if (lastPlaybackState != playback) {
 }
 
 if (document.location.pathname.includes("/kshow/")) {
-  presence.on("iFrameData", (data) => {
+  presence.on("iFrameData", data => {
     playback = data.iframe_video.duration !== null ? true : false;
 
     //console.log(data.iframe_video);
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: paused ? "pause" : "play",
       smallImageText: paused ? (await strings).pause : (await strings).play,
       startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1],
+      endTimestamp: timestamps[1]
     };
 
   video = document.querySelector(

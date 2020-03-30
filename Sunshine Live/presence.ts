@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "624914025247146000",
+  clientId: "624914025247146000"
 });
 presence.on("UpdateData", () => {
   let paused = true;
@@ -23,7 +23,7 @@ presence.on("UpdateData", () => {
     state:
       document.getElementsByClassName("trackInfos-artist")[0].textContent +
       " - " +
-      document.getElementsByClassName("trackInfos-title")[0].textContent,
+      document.getElementsByClassName("trackInfos-title")[0].textContent
   };
   presence.setActivity(presenceData);
 });

@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "632936001269923880",
+    clientId: "632936001269923880"
   }),
   pages = {
     "/elemental-by-medium": "Elemental by Medium",
@@ -22,13 +22,13 @@ const presence = new Presence({
     "/creators": "Creators",
     "/me/list/bookmarks": "Bookmarks",
     "/me/publications": "Publications",
-    "/me/settings": "Settings",
+    "/me/settings": "Settings"
   },
   subdomains = {
     help: {
       details: "Viewing help page",
-      state: "Probably needs some help.",
-    }, // We can add some stuff if we find it "necessary" in the future.
+      state: "Probably needs some help."
+    } // We can add some stuff if we find it "necessary" in the future.
   };
 
 presence.on("UpdateData", async () => {
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 
   let data: { [k: string]: any } = {
     largeImageKey: "medium-logo",
-    startTimestamp: Math.floor(Date.now() / 1000),
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
 
   if (

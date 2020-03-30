@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "463151177836658699",
+    clientId: "463151177836658699"
   }),
   strings: any = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 presence.on("UpdateData", async () => {
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
           ? (await strings).pause
           : (await strings).play,
         startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1],
+        endTimestamp: timestamps[1]
       };
 
     if (video.paused) {
@@ -61,7 +61,7 @@ function getAuthorString() {
     //* Build output string
     authorString = `${authorsArray
       .slice(0, authorsArray.length - 1)
-      .map((a) => a.innerText)
+      .map(a => a.innerText)
       .join(", ")} - ${
       authorsArray[authorsArray.length - 1].innerText
     } (${year})`;

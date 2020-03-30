@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "631803867708915732",
+    clientId: "631803867708915732"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -22,7 +22,7 @@ var video: any,
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "facebook",
+    largeImageKey: "facebook"
   };
 
   if (document.location.pathname.includes("/messages/")) {

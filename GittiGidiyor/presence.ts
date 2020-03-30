@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "632914600949710868",
+    clientId: "632914600949710868"
   }),
   pages = {
     "/yildiz-firsatlar": "Yıldız Fırsatlar",
@@ -17,7 +17,7 @@ const presence = new Presence({
     "/BanaOzel/hesaplarim.php": "Hesap Hareketlerim",
     "/BanaOzel/ayarlarim.php": "Bilgilerim",
     "/bana-ozel/promosyonlarim": "Promosyonlarım",
-    "/sepetim": "Sepetim",
+    "/sepetim": "Sepetim"
   };
 
 presence.on("UpdateData", async () => {
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
 
   let data: { [k: string]: any } = {
     largeImageKey: "gg-logo",
-    startTimestamp: Math.floor(Date.now() / 1000),
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
 
   if (productName && productName.textContent != "") {

@@ -1,9 +1,9 @@
 let presence = new Presence({
-    clientId: "653639828826750976", // Contact if you want me to edit the discord assets/keys/whatever
+    clientId: "653639828826750976" // Contact if you want me to edit the discord assets/keys/whatever
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 class video_data {
@@ -16,7 +16,7 @@ class video_data {
 
 let iframe_response = new video_data();
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   iframe_response = data;
 });
 
@@ -25,12 +25,12 @@ presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "cytube_logo",
     details: "loading",
-    state: "CyTube",
+    state: "CyTube"
   };
 
   let translate = {
     pause: (await strings).pause,
-    play: (await strings).play,
+    play: (await strings).play
   };
 
   async function set_video(data: video_data) {
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
           current_time: video.currentTime,
           duration: video.duration,
           paused: video.paused,
-          site: video.src,
+          site: video.src
         });
       }
     }
@@ -124,24 +124,24 @@ function getTimestamp(time) {
 }
 
 function getTimesFromMs(ms) {
-  const p60 = (x) => Math.floor(x % 60);
+  const p60 = x => Math.floor(x % 60);
   let sec = p60(ms) < 10 ? "0" + p60(ms) : p60(ms),
     min = p60(ms / 60) <= 0 ? 0 : p60(ms / 60),
     hrs = p60(ms / 60 / 60);
   return {
     hrs: hrs,
     sec: sec,
-    min: min,
+    min: min
   };
 }
 
 function service(service: string) {
   let return_match: match = {
     display: "Unknown Service",
-    image_key: "cytube_service_uk",
+    image_key: "cytube_service_uk"
   };
 
-  Object.keys(matches).forEach((key) => {
+  Object.keys(matches).forEach(key => {
     if (service.includes(key)) return_match = matches[key];
   });
 
@@ -160,46 +160,46 @@ interface matchList {
 let matches: matchList = {
   youtube: {
     display: "YouTube",
-    image_key: "cytube_service_yt",
+    image_key: "cytube_service_yt"
   },
   googlevideo: {
     display: "YouTube",
-    image_key: "cytube_service_yt",
+    image_key: "cytube_service_yt"
   },
   "docs.google": {
     display: "Google Drive",
-    image_key: "cytube_service_gd",
+    image_key: "cytube_service_gd"
   },
   googleusercontent: {
     display: "Google Drive",
-    image_key: "cytube_service_gd",
+    image_key: "cytube_service_gd"
   },
   appspot: {
     display: "Google Cloud",
-    image_key: "cytube_service_gc",
+    image_key: "cytube_service_gc"
   },
   blogspot: {
     display: "Google Cloud",
-    image_key: "cytube_service_gc",
+    image_key: "cytube_service_gc"
   },
   dropbox: {
     display: "Dropbox",
-    image_key: "cytube_service_dbx",
+    image_key: "cytube_service_dbx"
   },
   amazonaws: {
     display: "Amazon AWS",
-    image_key: "cytube_service_aws",
+    image_key: "cytube_service_aws"
   },
   soundcloud: {
     display: "Soundcloud",
-    image_key: "cytube_service_sc",
+    image_key: "cytube_service_sc"
   },
   discordapp: {
     display: "Discord",
-    image_key: "cytube_service_dc",
+    image_key: "cytube_service_dc"
   },
   "vimeo-prod-": {
     display: "Vimeo",
-    image_key: "cytube_service_ve",
-  },
+    image_key: "cytube_service_ve"
+  }
 };

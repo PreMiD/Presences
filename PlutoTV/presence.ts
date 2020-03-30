@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "640292045117980713",
+    clientId: "640292045117980713"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -22,7 +22,7 @@ oldTitle = null;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "plutotv",
+    largeImageKey: "plutotv"
   };
 
   if (document.location.hostname == "pluto.tv") {

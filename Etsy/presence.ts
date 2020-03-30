@@ -29,7 +29,7 @@ function PMD_success(message) {
 }
 
 var presence = new Presence({
-  clientId: "620721262112538625", // CLIENT ID FOR YOUR PRESENCE
+  clientId: "620721262112538625" // CLIENT ID FOR YOUR PRESENCE
 });
 
 var item: any,
@@ -47,7 +47,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "etsy",
+    largeImageKey: "etsy"
   };
 
   presenceData.startTimestamp = browsingStamp;

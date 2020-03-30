@@ -1,8 +1,8 @@
 var presence = new Presence({
-    clientId: "616738921765667023",
+    clientId: "616738921765667023"
   }),
   presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
 presence.on("UpdateData", async () => {
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
         var artists = [];
 
         Array.from(document.querySelectorAll(".tag-type-artist")).forEach(
-          (artistHTML) => {
+          artistHTML => {
             if (Array.from(artistHTML.querySelectorAll("a"))[1]) {
               artists.push(
                 Array.from(artistHTML.querySelectorAll("a"))[1].innerText

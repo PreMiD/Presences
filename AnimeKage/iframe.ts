@@ -11,8 +11,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (document.querySelector("#video-player") !== null) {
@@ -24,8 +24,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (
@@ -43,8 +43,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (
@@ -62,8 +62,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (
@@ -81,8 +81,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (document.querySelector("#vid_html5_api") !== null) {
@@ -94,8 +94,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (
@@ -112,8 +112,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (document.querySelector("#mgvideo > div.vjs-poster") !== null) {
@@ -127,8 +127,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (document.querySelector("#olvideo_html5_api") !== null) {
@@ -140,8 +140,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (document.querySelector("#vid_html5_api") !== null) {
@@ -153,8 +153,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (document.querySelector("#videojs_html5_api") !== null) {
@@ -166,8 +166,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (
@@ -185,8 +185,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (document.querySelector("#mgvideo_html5_api") !== null) {
@@ -198,8 +198,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (
@@ -215,8 +215,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (
@@ -234,8 +234,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (document.querySelector("video") !== null) {
@@ -247,8 +247,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   }

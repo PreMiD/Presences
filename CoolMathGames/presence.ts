@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "630561466872889344",
+  clientId: "630561466872889344"
 });
 
 var elapsed, oldUrl;
@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
     details: details,
     state: state,
     largeImageKey: "coolmathgames",
-    startTimestamp: startTimestamp,
+    startTimestamp: startTimestamp
   };
 
   presence.setActivity(data);
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 
 enum PageType {
   Game = 0,
-  Category = 1,
+  Category = 1
 }
 
 const parse = (path: string) => {
@@ -97,7 +97,7 @@ const parse = (path: string) => {
 
 const capitalize = (text: Array<String>) => {
   return text
-    .map((str) => {
+    .map(str => {
       return str.charAt(0).toUpperCase() + str.slice(1);
     })
     .join(" ");

@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "641409342566039558",
+  clientId: "641409342566039558"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -11,7 +11,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "ml",
+    largeImageKey: "ml"
   };
 
   if (document.location.hostname == "mangalivre.com") {

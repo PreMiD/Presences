@@ -1,16 +1,16 @@
 let presence = new Presence({
-    clientId: "687352219598585905",
+    clientId: "687352219598585905"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 let browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "animeradio",
+    largeImageKey: "animeradio"
   };
 
   presenceData.startTimestamp = browsingStamp;

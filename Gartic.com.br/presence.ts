@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "630480364288081942",
+  clientId: "630480364288081942"
 });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "gartic-logo",
+    largeImageKey: "gartic-logo"
   };
 
   var gameLink = document.location.pathname.split("/")[1].match(/^\d/)

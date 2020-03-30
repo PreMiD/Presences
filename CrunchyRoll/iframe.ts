@@ -1,6 +1,6 @@
 var iframe = new iFrame();
 
-setInterval(function () {
+setInterval(function() {
   if (document.location.hostname == "static.crunchyroll.com") {
     var video: HTMLVideoElement =
       document.querySelector("#player0") !== null
@@ -13,8 +13,8 @@ setInterval(function () {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   }

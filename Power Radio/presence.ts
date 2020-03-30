@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "640617785696976906",
+    clientId: "640617785696976906"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -17,7 +17,7 @@ var listeners: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "ppower",
+    largeImageKey: "ppower"
   };
   if (document.querySelector("#pauseButtoni").className == "fa fa-pause") {
     user = document.querySelector("#infocontainer > div:nth-child(2) > p");

@@ -1,6 +1,6 @@
 var iframe = new iFrame();
 
-setInterval(function () {
+setInterval(function() {
   if (
     document.location.hostname == "www.rapidvid.to" ||
     document.location.hostname == "www.mp4upload.com"
@@ -13,8 +13,8 @@ setInterval(function () {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else if (document.location.hostname == "www.novelplanet.me") {
@@ -28,8 +28,8 @@ setInterval(function () {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   } else {
@@ -41,8 +41,8 @@ setInterval(function () {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   }

@@ -1,17 +1,17 @@
 let presence = new Presence({
-  clientId: "682593223948238849",
+  clientId: "682593223948238849"
 });
 let presenceGit = new Presence({
-  clientId: "682593596301508662",
+  clientId: "682593596301508662"
 });
 let presenceCommunity = new Presence({
-  clientId: "682593903656173569",
+  clientId: "682593903656173569"
 });
 let presenceAnigifs = new Presence({
-  clientId: "682594082274410511",
+  clientId: "682594082274410511"
 });
 let presenceLabs = new Presence({
-  clientId: "682595885880049668",
+  clientId: "682595885880049668"
 });
 
 let browsingStamp = Math.floor(Date.now() / 1000);
@@ -19,7 +19,7 @@ let browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "lg",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
   if (
     document.location.hostname == "taigabot.net" ||
@@ -136,7 +136,7 @@ presence.on("UpdateData", async () => {
 presenceGit.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "lg",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
   if (document.location.hostname == "git.taigabot.net") {
     if (document.location.pathname == "/") {
@@ -285,7 +285,7 @@ presenceGit.on("UpdateData", async () => {
 presenceCommunity.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "lg",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
   if (document.location.hostname == "community.taigabot.net") {
     // taiga Community isn't public yet (you can't register) so there's no extensive Presence yet
@@ -296,7 +296,7 @@ presenceCommunity.on("UpdateData", async () => {
 presenceAnigifs.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "lg",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
   if (document.location.hostname == "anigifs.taigabot.net") {
     let urlArgs = document.location.pathname.split("/");
@@ -320,7 +320,7 @@ presenceAnigifs.on("UpdateData", async () => {
 presenceLabs.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "lg",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
   if (document.location.hostname == "labs.taigabot.net") {
     if (document.location.pathname == "/") {

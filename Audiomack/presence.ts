@@ -1,16 +1,16 @@
 var presence = new Presence({
-    clientId: "621808181877669904",
+    clientId: "621808181877669904"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "audiomack-logo",
+    largeImageKey: "audiomack-logo"
   };
 
   var playerCheck = document.querySelector(".player--active") ? true : false;

@@ -1,9 +1,9 @@
 const presence = new Presence({
-    clientId: "628341182581440531",
+    clientId: "628341182581440531"
   }),
   strings: any = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 presence.on("UpdateData", async () => {
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "puhu-logo",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Geziniyor...",
-      state: category && category.innerHTML ? category.innerHTML : "Ana Sayfa",
+      state: category && category.innerHTML ? category.innerHTML : "Ana Sayfa"
     });
   } else {
     const video = document.querySelector(
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
         smallImageKey: video.paused ? "paused" : "playing",
         smallImageText: video.paused
           ? (await strings).pause
-          : (await strings).play,
+          : (await strings).play
       };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {

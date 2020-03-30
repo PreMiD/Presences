@@ -1,13 +1,13 @@
 let presence = new Presence({
-  clientId: "629413852391669791",
+  clientId: "629413852391669791"
 });
 let presenceData: presenceData = {
-  largeImageKey: "kitsu_lg",
+  largeImageKey: "kitsu_lg"
 };
 
 let path, user: string;
 let strings = presence.getStrings({
-  browsing: "presence.activity.browsing",
+  browsing: "presence.activity.browsing"
 });
 
 presence.on("UpdateData", async () => {

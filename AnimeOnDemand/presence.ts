@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "639583736970739733",
+    clientId: "639583736970739733"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -15,7 +15,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "aod",
+    largeImageKey: "aod"
   };
 
   if (document.location.hostname == "www.anime-on-demand.de") {

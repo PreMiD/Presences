@@ -1,17 +1,17 @@
 const presence = new Presence({
-    clientId: "636322995329302543",
+    clientId: "636322995329302543"
   }),
   strings = presence.getStrings({
     playing: "presence.playback.playing",
     paused: "presence.playback.paused",
     browsing: "presence.activity.browsing",
-    episode: "presence.media.info.episode",
+    episode: "presence.media.info.episode"
   });
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     details: "Home",
-    largeImageKey: "main",
+    largeImageKey: "main"
   };
   if (document.location.pathname == "/home") {
     presence.setActivity(presenceData);

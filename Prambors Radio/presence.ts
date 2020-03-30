@@ -1,12 +1,12 @@
 const presence = new Presence({
-  clientId: "630428033966276612",
+  clientId: "630428033966276612"
 });
 const strings = presence.getStrings({
   play: "presence.playback.playing",
-  pause: "presence.playback.paused",
+  pause: "presence.playback.paused"
 });
 let presenceData: presenceData = {
-  largeImageKey: "logo",
+  largeImageKey: "logo"
 };
 let timestamp: number;
 

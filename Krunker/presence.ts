@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "631970829348896769",
+  clientId: "631970829348896769"
 });
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "krunker",
+    largeImageKey: "krunker"
   };
 
   var gameInfo = document.querySelector("#curGameInfo");

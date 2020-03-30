@@ -1,5 +1,5 @@
 let presence: Presence = new Presence({
-    clientId: "613510331066482699",
+    clientId: "613510331066482699"
   }),
   startedBrowsing: number = Math.floor(Date.now() / 1000),
   playback: boolean,
@@ -14,11 +14,11 @@ let presence: Presence = new Presence({
   strings = presence.getStrings({
     browsing: "presence.activity.browsing",
     playing: "presence.playback.playing",
-    paused: "presence.playback.paused",
+    paused: "presence.playback.paused"
   }),
   presenceData: presenceData = {
     largeImageKey: "yay_lg",
-    startTimestamp: startedBrowsing,
+    startTimestamp: startedBrowsing
   };
 
 presence.on("UpdateData", async () => {

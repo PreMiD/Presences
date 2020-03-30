@@ -1,11 +1,11 @@
 const presence: Presence = new Presence({
-  clientId: "630236276829716483",
+  clientId: "630236276829716483"
 });
 
 const strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
-  browsing: "presence.activity.browsing",
+  browsing: "presence.activity.browsing"
 });
 
 let title: string;
@@ -13,7 +13,7 @@ let subtitle: string;
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "disneyplus-logo",
+    largeImageKey: "disneyplus-logo"
   };
 
   if (document.location.pathname.includes("/video")) {

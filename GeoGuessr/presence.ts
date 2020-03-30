@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "654906151523057664",
+  clientId: "654906151523057664"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000),
@@ -9,7 +9,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     state: <string>null,
     largeImageKey: <string>"lg",
     startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null,
+    endTimestamp: <number>null
   },
   updateCallback = {
     _function: null,
@@ -21,7 +21,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     },
     get present() {
       return this._function !== null;
-    },
+    }
   };
 
 (() => {
@@ -94,7 +94,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     let pageNames = {
       "faq.html": "FAQ",
       "terms.html": "Terms of Service",
-      "privacy.html": "Privacy Policy",
+      "privacy.html": "Privacy Policy"
     };
     presenceData.details = "Viewing a page";
     presenceData.state = pageNames[href.pathname.split("/")[2]];
@@ -110,7 +110,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
         likes: "Favorite maps",
         badges: "Badges",
         maps: "My maps",
-        "map-maker": "Map Maker",
+        "map-maker": "Map Maker"
       };
       presenceData.details = "Viewing a personal page";
       presenceData.state = pageNames[href.pathname.split("/")[2]];
@@ -141,7 +141,7 @@ function resetData() {
     state: <string>null,
     largeImageKey: <string>"lg",
     startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null,
+    endTimestamp: <number>null
   };
 }
 

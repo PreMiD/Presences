@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: `676041156437737472`,
+    clientId: `676041156437737472`
   }),
   strings = presence.getStrings({
     play: `presence.playback.playing`,
-    pause: `presence.playback.paused`,
+    pause: `presence.playback.paused`
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -31,7 +31,7 @@ var timestamps: any;
 
 presence.on(`UpdateData`, async () => {
   let presenceData: presenceData = {
-    largeImageKey: `aw`,
+    largeImageKey: `aw`
   };
 
   title = document.title; //title of the page; a lot of work's already done, just need to grab it from the title
@@ -191,7 +191,7 @@ presence.on(`UpdateData`, async () => {
         `popular seasonals`,
         `popular upcomings`,
         `hot anime`,
-        `best rated anime`,
+        `best rated anime`
       ]; //types of anime you can browse
       parameters = fullPath.slice(5).split(`&`); //get an array of parameters. I'm using slice to remove '/top?' from the url
       type = parameters[0].slice(2); //grabbing type from parameters
@@ -213,7 +213,7 @@ presence.on(`UpdateData`, async () => {
         `Animelist`,
         `Media`,
         `Friends`,
-        `Settings`,
+        `Settings`
       ]; //list of tabs
       type = fullPath.slice(13); //tab we are currently on
       presenceData.startTimestamp = browsingStamp;

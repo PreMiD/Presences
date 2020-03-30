@@ -1,25 +1,25 @@
 let presence = new Presence({
-  clientId: "666074265233260555",
+  clientId: "666074265233260555"
 });
 
 let strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing",
+  browsing: "presence.activity.browsing"
 });
 
 let startTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement;
 
-presence.on("iFrameData", async (msg) => {
+presence.on("iFrameData", async msg => {
   if (!msg) return;
   video = msg;
 });
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "turkanime",
+    largeImageKey: "turkanime"
   };
 
   let title = document.querySelector(
@@ -38,7 +38,10 @@ presence.on("UpdateData", async () => {
   if (title && ep) {
     presenceData.details = title.textContent;
     presenceData.state = ep.textContent.replace(
-      title.textContent.split(" ").slice(1).join(" "),
+      title.textContent
+        .split(" ")
+        .slice(1)
+        .join(" "),
       ""
     );
   }

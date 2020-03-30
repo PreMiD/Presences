@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "640963335826833418",
+    clientId: "640963335826833418"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -15,7 +15,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "tumblr",
+    largeImageKey: "tumblr"
   };
 
   if (document.location.hostname == "www.tumblr.com") {

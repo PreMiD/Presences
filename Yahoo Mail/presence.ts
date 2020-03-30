@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "620084360120369172",
+  clientId: "620084360120369172"
 });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "yahoomail-logo",
+    largeImageKey: "yahoomail-logo"
   };
 
   var path = document.location.pathname;

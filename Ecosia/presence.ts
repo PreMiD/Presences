@@ -1,11 +1,11 @@
 var browsingStamp = Math.floor(Date.now() / 1000);
 var presence = new Presence({
-  clientId: "629653820405710848",
+  clientId: "629653820405710848"
 });
 presence.on("UpdateData", () => {
   var urlParams = new URLSearchParams(window.location.search);
   var presenceData: presenceData = {
-    largeImageKey: "lg",
+    largeImageKey: "lg"
   };
   if (document.location.pathname == "/") {
     presenceData.details = "Home";

@@ -3,7 +3,7 @@
 */
 
 var presence = new Presence({
-  clientId: "614903529240395782",
+  clientId: "614903529240395782"
 });
 
 presence.on("UpdateData", async () => {
@@ -13,12 +13,12 @@ presence.on("UpdateData", async () => {
         .textContent,
       state: document.getElementsByClassName("translate_to")[0].parentNode
         .textContent,
-      largeImageKey: "lg-deepl",
+      largeImageKey: "lg-deepl"
     };
     presence.setActivity(presenceData);
   } else {
     let presenceData: presenceData = {
-      largeImageKey: "lg-deepl",
+      largeImageKey: "lg-deepl"
     };
     presence.setActivity(presenceData);
   }

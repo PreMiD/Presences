@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "624006279769227265", // CLIENT ID FOR YOUR PRESENCE
+  clientId: "624006279769227265" // CLIENT ID FOR YOUR PRESENCE
 });
 
 var item: any,
@@ -15,7 +15,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "truckersmp",
+    largeImageKey: "truckersmp"
   };
 
   presenceData.startTimestamp = browsingStamp;

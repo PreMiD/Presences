@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "514771696134389760",
+    clientId: "514771696134389760"
   }),
   strings;
 
@@ -8,14 +8,14 @@ var localeStrings = {
     Chatting: "Browsing PM's...",
     Watching: "Watching",
     Browsing: "Browsing",
-    BrowsingFeed: "Browsing feed...",
+    BrowsingFeed: "Browsing feed..."
   },
   ru: {
     Chatting: "Смотрит сообщения...",
     Watching: "Смотрит",
     Browsing: "Просматривает",
-    BrowsingFeed: "Смотрит ленту...",
-  },
+    BrowsingFeed: "Смотрит ленту..."
+  }
 };
 
 function getLocale() {
@@ -80,7 +80,7 @@ function getVKTrackLength(): Object {
   //* Summing minutes and seconds from time passed and left.
   overallTime = [
     Number(timePassed[0]) + Number(timeLeft[0]),
-    Number(timePassed[1]) + Number(timeLeft[1]),
+    Number(timePassed[1]) + Number(timeLeft[1])
   ];
 
   //* Checking if overall time have more than 60 seconds and adding 1 minute if it does.
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
   if (!strings)
     strings = await presence.getStrings({
       play: "presence.playback.playing",
-      pause: "presence.playback.paused",
+      pause: "presence.playback.paused"
     });
 
   if (
@@ -138,7 +138,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: isPlaying ? "pause" : "play",
       smallImageText: isPlaying ? strings.pause : strings.play,
       startTimestamp: isPlaying ? null : timestamps[0],
-      endTimestamp: isPlaying ? null : timestamps[1],
+      endTimestamp: isPlaying ? null : timestamps[1]
     };
 
     presence.setActivity(presenceData, true);
@@ -175,7 +175,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: isPlaying ? "pause" : "play",
       smallImageText: isPlaying ? strings.pause : strings.play,
       startTimestamp: isPlaying ? null : timestamps[0],
-      endTimestamp: isPlaying ? null : timestamps[1],
+      endTimestamp: isPlaying ? null : timestamps[1]
     };
 
     presence.setActivity(presenceData, true);
@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
     var presenceData: presenceData = {
       details: page_title,
       largeImageKey: "vk_logo",
-      startTimestamp: browsingTimestamp,
+      startTimestamp: browsingTimestamp
     };
 
     presence.setActivity(presenceData, true);
@@ -194,7 +194,7 @@ presence.on("UpdateData", async () => {
     var presenceData: presenceData = {
       details: getLocalizedString("BrowsingFeed"),
       largeImageKey: "vk_logo",
-      startTimestamp: browsingTimestamp,
+      startTimestamp: browsingTimestamp
     };
 
     presence.setActivity(presenceData, true);
@@ -202,7 +202,7 @@ presence.on("UpdateData", async () => {
     var presenceData: presenceData = {
       details: getLocalizedString("Chatting"),
       largeImageKey: "vk_logo",
-      startTimestamp: browsingTimestamp,
+      startTimestamp: browsingTimestamp
     };
 
     presence.setActivity(presenceData, true);

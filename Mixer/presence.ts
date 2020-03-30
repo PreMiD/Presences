@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "607362931180699648",
+  clientId: "607362931180699648"
 });
 const strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
-  live: "presence.activity.live",
+  live: "presence.activity.live"
 });
 
 // The synced variable determines whether or not the presence should stay on or should stay out of sync (disappear after one minute).
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
     smallImageKey: smallImageKey,
     smallImageText: smallImageText,
     startTimestamp: videoTime,
-    endTimestamp: videoDuration,
+    endTimestamp: videoDuration
   };
 
   if (state && videoElement && videoElement.paused) {

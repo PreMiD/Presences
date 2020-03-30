@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "664595715242197008",
+  clientId: "664595715242197008"
 });
 
 presence.on("UpdateData", async () => {
   let path = document.location.href;
 
   let presenceData: presenceData = {
-    largeImageKey: "telegram",
+    largeImageKey: "telegram"
   };
 
   let title = document.querySelector(

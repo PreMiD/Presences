@@ -1,18 +1,18 @@
 let presence = new Presence({
-  clientId: "664216462038401066",
+  clientId: "664216462038401066"
 });
 
 let strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing",
+  browsing: "presence.activity.browsing"
 });
 
 let startTimestamp = Math.floor(Date.now() / 1000);
 
 let data: any, video: HTMLVideoElement;
 
-presence.on("iFrameData", async (msg) => {
+presence.on("iFrameData", async msg => {
   if (!msg) return;
   data = msg;
   video = msg.video;
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
   let path = document.location.pathname;
 
   let presenceData: presenceData = {
-    largeImageKey: "blutv",
+    largeImageKey: "blutv"
   };
 
   if (!path.includes("izle")) {
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
 });
 
 function seriesName(name: string) {
-  return name.replace(/([^\W_]+[^\s-]*) */g, function (text) {
+  return name.replace(/([^\W_]+[^\s-]*) */g, function(text) {
     return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
   });
 }

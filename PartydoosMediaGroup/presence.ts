@@ -1,8 +1,8 @@
 var presence = new Presence({
-  clientId: "671918505267822594",
+  clientId: "671918505267822594"
 });
 var strings = presence.getStrings({
-  browsing: "presence.activity.browsing",
+  browsing: "presence.activity.browsing"
 });
 
 var oldUrl, elapsed;
@@ -14,18 +14,18 @@ var data: presenceData = {
   smallImageKey: undefined,
   smallImageText: undefined,
   startTimestamp: undefined,
-  endTimestamp: undefined,
+  endTimestamp: undefined
 };
 
 presence.on("UpdateData", async () => {
   const static = {
     "": {
-      details: "Browsing",
+      details: "Browsing"
     },
     "/privacy.html": {
       details: "Viewing",
-      state: "Privacy and Terms of Service",
-    },
+      state: "Privacy and Terms of Service"
+    }
   };
 
   const host = location.host;

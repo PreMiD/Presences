@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "641243628903333900",
+    clientId: "641243628903333900"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -15,7 +15,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "ao",
+    largeImageKey: "ao"
   };
 
   if (document.location.hostname == "www.animesonline.cz") {

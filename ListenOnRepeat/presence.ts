@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "639534386538348565",
+    clientId: "639534386538348565"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var repeats: any, timestamps: any;
@@ -16,7 +16,7 @@ var video: HTMLVideoElement,
 var lastPlaybackState = null;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   playback = data.iframe_video.duration !== null ? true : false;
 
   if (playback) {
@@ -29,7 +29,7 @@ presence.on("iFrameData", (data) => {
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "lr",
+    largeImageKey: "lr"
   };
 
   if (lastPlaybackState != playback) {

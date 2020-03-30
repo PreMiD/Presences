@@ -12,7 +12,7 @@ iframe.on("UpdateData", async () => {
     videoMessage = {
       paused: video.paused,
       duration: video.duration,
-      currentTime: video.currentTime,
+      currentTime: video.currentTime
     };
   }
 
@@ -34,7 +34,7 @@ iframe.on("UpdateData", async () => {
 
     iframe.send({
       video: {
-        ...videoMessage,
+        ...videoMessage
       },
       series: {
         name: seriesName,
@@ -42,8 +42,8 @@ iframe.on("UpdateData", async () => {
         season:
           season && season.textContent && season.textContent.includes("Sezon")
             ? season.textContent
-            : "1. Sezon",
-      },
+            : "1. Sezon"
+      }
     });
   }
 
@@ -51,11 +51,11 @@ iframe.on("UpdateData", async () => {
   else {
     iframe.send({
       video: {
-        ...videoMessage,
+        ...videoMessage
       },
       movie: {
-        name: title.textContent,
-      },
+        name: title.textContent
+      }
     });
   }
 });

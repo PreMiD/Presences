@@ -1,8 +1,8 @@
 var presence = new Presence({
-    clientId: "612071822321647648",
+    clientId: "612071822321647648"
   }),
   presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
 let lang = new Map();
@@ -48,27 +48,27 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.startsWith("/learn")) {
       var pageData: presenceData = {
         details: "Choosing level to learn..",
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(pageData);
     } else if (document.location.pathname.startsWith("/shop")) {
       var pageData: presenceData = {
         details: "Browsing shop..",
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(pageData);
     } else if (document.location.pathname.includes("/dictionary")) {
       var pageData: presenceData = {
         details: "Using dictionary..",
         state: "Language: " + document.location.pathname.split("/")[2],
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(pageData);
     } else if (document.location.pathname.includes("/profile")) {
       var pageData: presenceData = {
         details: "Browsing profile..",
         state: "Browsing: " + document.location.pathname.split("/")[2],
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(pageData);
     } else if (document.location.pathname.includes("/words")) {
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
     ) {
       var pageData: presenceData = {
         details: "Browsing..",
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(pageData);
     }

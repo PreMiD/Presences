@@ -8,8 +8,8 @@ iframe.on("UpdateData", async () => {
       iframe_radio: {
         artist: document.querySelector(".status").textContent.split(" - ")[0],
         title: document.querySelector(".status").textContent.split(" - ")[1],
-        playing: true,
-      },
+        playing: true
+      }
     });
   }
 });

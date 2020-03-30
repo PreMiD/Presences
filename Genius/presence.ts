@@ -1,16 +1,16 @@
 var presence = new Presence({
-    clientId: "630480419598499840",
+    clientId: "630480419598499840"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "genius-logo",
+    largeImageKey: "genius-logo"
   };
 
   var lyricCheck = document.querySelector(".song_body-lyrics") ? true : false;

@@ -1,8 +1,8 @@
 const presence = new Presence({
-  clientId: "631166262881550359",
+  clientId: "631166262881550359"
 });
 let presenceData: presenceData = {
-  largeImageKey: "logo",
+  largeImageKey: "logo"
 };
 let startTimestamp: number;
 
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
 });
 
 function toTitleCase(str: string) {
-  return str.replace(/\w\S*/g, function (txt) {
+  return str.replace(/\w\S*/g, function(txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }

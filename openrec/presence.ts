@@ -1,13 +1,13 @@
 var presence = new Presence({
-    clientId: "612652426180296849",
+    clientId: "612652426180296849"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   }),
   presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
 presence.on("UpdateData", async () => {
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
   } else {
     var pageData: presenceData = {
       details: "Browsing..",
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(pageData);
   }

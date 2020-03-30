@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "619967690056007699",
+  clientId: "619967690056007699"
 });
 
 presence.on("UpdateData", async () => {
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname == "/") {
       let pdata: presenceData = {
         details: "Viewing the homepage...",
-        largeImageKey: "lg-r34",
+        largeImageKey: "lg-r34"
       };
       presence.setActivity(pdata);
     } else if (
@@ -21,13 +21,13 @@ presence.on("UpdateData", async () => {
           let pdata: presenceData = {
             details: "Searching...",
             state: urlParams.get("tags").replace(" ", ", "),
-            largeImageKey: "lg-r34",
+            largeImageKey: "lg-r34"
           };
           presence.setActivity(pdata);
         } else {
           let pdata: presenceData = {
             details: "Viewing Posts List...",
-            largeImageKey: "lg-r34",
+            largeImageKey: "lg-r34"
           };
           presence.setActivity(pdata);
         }
@@ -35,18 +35,18 @@ presence.on("UpdateData", async () => {
         let pdata: presenceData = {
           details: "Viewing a Post...",
           state: "Post " + urlParams.get("id"),
-          largeImageKey: "lg-r34",
+          largeImageKey: "lg-r34"
         };
         presence.setActivity(pdata);
       } else {
         let pdata: presenceData = {
-          largeImageKey: "lg-r34",
+          largeImageKey: "lg-r34"
         };
         presence.setActivity(pdata);
       }
     } else {
       let pdata: presenceData = {
-        largeImageKey: "lg-r34",
+        largeImageKey: "lg-r34"
       };
       presence.setActivity(pdata);
     }
@@ -55,39 +55,39 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname == "/") {
       let pdata: presenceData = {
         details: "Viewing the homepage...",
-        largeImageKey: "lg-r34",
+        largeImageKey: "lg-r34"
       };
       presence.setActivity(pdata);
     } else if (path[1] == "post") {
       if (path[2] == "list" && path.length == 3) {
         let pdata: presenceData = {
           details: "Viewing Posts List...",
-          largeImageKey: "lg-r34",
+          largeImageKey: "lg-r34"
         };
         presence.setActivity(pdata);
       } else if (path[2] == "list" && path.length > 3) {
         let pdata: presenceData = {
           details: "Searching...",
           state: path[3].replace("%20", ", ").replace("%21", "!"),
-          largeImageKey: "lg-r34",
+          largeImageKey: "lg-r34"
         };
         presence.setActivity(pdata);
       } else if (path[2] == "view") {
         let pdata: presenceData = {
           details: "Viewing a post...",
           state: "Post " + path[3],
-          largeImageKey: "lg-r34",
+          largeImageKey: "lg-r34"
         };
         presence.setActivity(pdata);
       } else {
         let pdata: presenceData = {
-          largeImageKey: "lg-r34",
+          largeImageKey: "lg-r34"
         };
         presence.setActivity(pdata);
       }
     } else {
       let pdata: presenceData = {
-        largeImageKey: "lg-r34",
+        largeImageKey: "lg-r34"
       };
       presence.setActivity(pdata);
     }

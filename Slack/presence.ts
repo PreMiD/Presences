@@ -29,7 +29,7 @@ function PMD_success(message) {
 }
 
 var presence = new Presence({
-  clientId: "617113314572369973", // CLIENT ID FOR YOUR PRESENCE
+  clientId: "617113314572369973" // CLIENT ID FOR YOUR PRESENCE
 });
 
 var group: any,
@@ -47,7 +47,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "slack",
+    largeImageKey: "slack"
   };
 
   presenceData.startTimestamp = browsingStamp;

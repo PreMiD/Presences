@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "612793327510749210",
+  clientId: "612793327510749210"
 });
 
 var oldUrl, elapsed, state, gameName, gameScore, gamePlace, gameQuestions;
@@ -167,7 +167,7 @@ presence.on("UpdateData", async () => {
     details: title,
     state: info,
     largeImageKey: "kahoot",
-    startTimestamp: elapsed,
+    startTimestamp: elapsed
   };
 
   presence.setActivity(data, true);

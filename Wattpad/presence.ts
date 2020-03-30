@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "619740858257899520",
+  clientId: "619740858257899520"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "wattpad-logo",
+    largeImageKey: "wattpad-logo"
   };
 
   var path = document.location.pathname;

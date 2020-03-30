@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "607651992567021580",
+  clientId: "607651992567021580"
 });
 var strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
-  live: "presence.activity.live",
+  live: "presence.activity.live"
 });
 
 var live, prevLive, elapsed;
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: paused ? "pause" : "play",
       smallImageText: paused ? (await strings).pause : (await strings).play,
       startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1],
+      endTimestamp: timestamps[1]
     };
 
     if (live) {
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
         {
           details: details,
           state: state,
-          largeImageKey: "deezer",
+          largeImageKey: "deezer"
         },
         true
       );

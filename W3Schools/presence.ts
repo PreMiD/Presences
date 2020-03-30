@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "630239297521319953",
+  clientId: "630239297521319953"
 });
 
 var whitelist = ["HTML", "CSS", "SQL", "PHP", "W3.CSS", "JQUERY", "XML"];
@@ -22,7 +22,7 @@ presence.on("UpdateData", () => {
 
   if (language) {
     details = "Learning " + capitalize(language.textContent.toLowerCase());
-    if (whitelist.some((lang) => lang === language.textContent))
+    if (whitelist.some(lang => lang === language.textContent))
       details = "Learning " + language.textContent;
   }
 
@@ -39,7 +39,7 @@ presence.on("UpdateData", () => {
     details: details,
     state: state,
     largeImageKey: "w3schools",
-    startTimestamp: elapsed,
+    startTimestamp: elapsed
   };
 
   presence.setActivity(data);
@@ -48,7 +48,7 @@ presence.on("UpdateData", () => {
 const capitalize = (text: string) => {
   var texts = text.replace(/[\[{(_)}\]]/g, " ").split(" ");
   return texts
-    .map((str) => {
+    .map(str => {
       return str.charAt(0).toUpperCase() + str.slice(1);
     })
     .join(" ");

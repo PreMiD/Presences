@@ -1,10 +1,10 @@
 {
   const presence = new Presence({
-    clientId: "610102236374368267",
+    clientId: "610102236374368267"
   });
   const strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
   presence.on("UpdateData", async () => {
@@ -37,7 +37,7 @@
         smallImageText: isPlaying
           ? (await strings).play
           : (await strings).pause,
-        startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec,
+        startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
       };
 
       if (isPlaying) {

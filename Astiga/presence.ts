@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "612746548631044116",
+    clientId: "612746548631044116"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -28,11 +28,11 @@ var play: any, pause: any;
 
 var currentUser: any, albumName: any, currentArtist: any;
 
-var truncateBefore = function (str, pattern) {
+var truncateBefore = function(str, pattern) {
   return str.slice(str.indexOf(pattern) + pattern.length);
 };
 
-var truncateAfter = function (str, pattern) {
+var truncateAfter = function(str, pattern) {
   return str.slice(0, str.indexOf(pattern));
 };
 
@@ -41,7 +41,7 @@ var playback: Boolean = false;
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     details: "Unknown page",
-    largeImageKey: "lg",
+    largeImageKey: "lg"
   };
 
   currentUser = document.querySelector(

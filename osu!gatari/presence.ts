@@ -1,8 +1,8 @@
 var presence = new Presence({
-    clientId: "642393312392904705",
+    clientId: "642393312392904705"
   }),
   presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   },
   customData: boolean = false;
 
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
           (act as HTMLElement).innerText +
           " - " +
           (title as HTMLElement).innerText,
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(beatmapData);
     } else {
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
           (act as HTMLElement).innerText +
           " - " +
           (title as HTMLElement).innerText,
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(beatmapData);
     } else {
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
           (act as HTMLElement).innerText +
           " - " +
           (title as HTMLElement).innerText,
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(beatmapData);
     } else {
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
       let beatmapData: presenceData = {
         details: "Browsing " + (doc as HTMLElement).innerText,
         state: (title as HTMLElement).innerText,
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(beatmapData);
     } else {
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
         "Performance: " +
         (document.querySelector("#chart1 > div > span") as HTMLElement)
           .innerText,
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(profileData);
   }
@@ -167,6 +167,6 @@ if (document.location.hostname == "sig.gatari.pw") {
   presenceData.details = "Ready to generator a Signature";
 }
 
-presence.on("iFrameData", function (data) {
+presence.on("iFrameData", function(data) {
   console.log(data);
 });

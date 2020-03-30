@@ -1,8 +1,8 @@
 var presence = new Presence({
-    clientId: "609774216430092298",
+    clientId: "609774216430092298"
   }),
   presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   },
   customData: boolean = false;
 
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
           "[" +
           (diff as HTMLElement).innerText +
           "]",
-        largeImageKey: "logo",
+        largeImageKey: "logo"
       };
       presence.setActivity(beatmapData);
     } else {
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
           ".value-display--pp .value-display__value"
         ) as HTMLElement).innerText +
         "pp",
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(profileData);
   } else {
@@ -90,6 +90,6 @@ presence.on("UpdateData", async () => {
   }
 });
 
-presence.on("iFrameData", function (data) {
+presence.on("iFrameData", function(data) {
   console.log(data);
 });

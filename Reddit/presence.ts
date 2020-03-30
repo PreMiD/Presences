@@ -1,5 +1,5 @@
 let presence: Presence = new Presence({
-    clientId: "609183409440555018",
+    clientId: "609183409440555018"
   }),
   startTimestamp = Math.floor(Date.now() / 1000),
   subReddit: string,
@@ -9,14 +9,14 @@ let presence: Presence = new Presence({
   rpanTitle: string,
   strings = presence.getStrings({
     browsing: "presence.activity.browsing",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   }),
   oldReddit = document.querySelector("._1tvdSTbdxaK-BnUbzUIqIY") == null;
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
     largeImageKey: "reddit_lg",
-    startTimestamp,
+    startTimestamp
   };
   const { pathname } = window.location;
   if (oldReddit) {

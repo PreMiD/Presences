@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "652880245371699222",
+  clientId: "652880245371699222"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000),
@@ -9,7 +9,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     state: <string>null,
     largeImageKey: <string>"lg",
     startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null,
+    endTimestamp: <number>null
   },
   updateCallback = {
     _function: null,
@@ -21,7 +21,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     },
     get present() {
       return this._function !== null;
-    },
+    }
   };
 
 (() => {
@@ -106,7 +106,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
       Help: "Viewing a help page",
       "Help talk": "Viewing a help talk page",
       Category: "Viewing a category",
-      "Category talk": "Viewing a category talk page",
+      "Category talk": "Viewing a category talk page"
     };
 
     if (title === sitename) {
@@ -166,7 +166,7 @@ function resetData() {
     state: <string>null,
     largeImageKey: <string>"lg",
     startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null,
+    endTimestamp: <number>null
   };
 }
 

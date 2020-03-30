@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "640711877609127976",
+  clientId: "640711877609127976"
 });
 
 /*
@@ -24,7 +24,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   active =
@@ -48,16 +48,16 @@ presence.on("UpdateData", async () => {
       var duo = document.querySelector("#btn-start-mode-1");
       var squad = document.querySelector("#btn-start-mode-2");
 
-      solo.addEventListener("mousedown", function () {
+      solo.addEventListener("mousedown", function() {
         console.log("Works");
         value = "Solos: ";
       });
 
-      duo.addEventListener("mousedown", function () {
+      duo.addEventListener("mousedown", function() {
         value = "Duos: ";
       });
 
-      squad.addEventListener("mousedown", function () {
+      squad.addEventListener("mousedown", function() {
         value = "Squads: ";
       });
 

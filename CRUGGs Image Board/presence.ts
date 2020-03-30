@@ -1,15 +1,15 @@
 var presence = new Presence({
-  clientId: "620283648171835392",
+  clientId: "620283648171835392"
 });
 
 const boards = {
   toradora: "Toradora!",
-  kiminonawa: "Kimi no Na wa. / Your Name.",
+  kiminonawa: "Kimi no Na wa. / Your Name."
 };
 
 presence.on("UpdateData", () => {
   var presenceData: presenceData = {
-    largeImageKey: "lg-imgb",
+    largeImageKey: "lg-imgb"
   };
   var path = document.location.pathname.split("/");
   var board = "N/A";
@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
     presenceData = {
       details: "Board: " + board,
       state: "Viewing the frontpage",
-      largeImageKey: "lg-imgb",
+      largeImageKey: "lg-imgb"
     };
     presence.setActivity(presenceData);
   } else if (boards[path[1]]) {
@@ -29,7 +29,7 @@ presence.on("UpdateData", () => {
         presenceData = {
           details: "Board: " + board,
           state: "Viewing Posts List...",
-          largeImageKey: "lg-imgb",
+          largeImageKey: "lg-imgb"
         };
         presence.setActivity(presenceData);
       } else if (path[3] == "list" && path.length > 4) {
@@ -37,34 +37,34 @@ presence.on("UpdateData", () => {
           details: "Board: " + board,
           state:
             "Searching: " + path[4].replace("%20", ", ").replace("%21", "!"),
-          largeImageKey: "lg-imgb",
+          largeImageKey: "lg-imgb"
         };
         presence.setActivity(presenceData);
       } else if (path[3] == "view") {
         presenceData = {
           details: "Board: " + board,
           state: "Viewing a Post... (" + path[4] + ")",
-          largeImageKey: "lg-imgb",
+          largeImageKey: "lg-imgb"
         };
         presence.setActivity(presenceData);
       } else {
         presenceData = {
           details: "Board: " + board,
-          largeImageKey: "lg-imgb",
+          largeImageKey: "lg-imgb"
         };
         presence.setActivity(presenceData);
       }
     } else {
       presenceData = {
         details: "Board: " + board,
-        largeImageKey: "lg-imgb",
+        largeImageKey: "lg-imgb"
       };
       presence.setActivity(presenceData);
     }
   } else {
     presenceData = {
       details: "Board: " + board,
-      largeImageKey: "lg-imgb",
+      largeImageKey: "lg-imgb"
     };
     presence.setActivity(presenceData);
   }

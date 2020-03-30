@@ -1,9 +1,9 @@
 const presence = new Presence({
-    clientId: "634816982843129857",
+    clientId: "634816982843129857"
   }),
   strings: any = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   }),
   pages = {
     "/film-arsivi": "Film Arşivi",
@@ -15,7 +15,7 @@ const presence = new Presence({
     "/turkce-dublaj-izle": "Türkçe Dublajlı Filmler",
     "/giris-yap": "Giriş Yap",
     "/kayit-ol": "Kayıt Ol",
-    "/iletisim": "İletişim",
+    "/iletisim": "İletişim"
   };
 
 presence.on("UpdateData", async () => {
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "fm-logo",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Bir sayfaya göz atıyor:",
-      state: pages[page] || pages[page.slice(0, -1)],
+      state: pages[page] || pages[page.slice(0, -1)]
     });
   } else if (page.includes("/liste/")) {
     const listName = document.querySelector(
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       state:
         listName && listName.textContent != ""
           ? listName.textContent
-          : "Belirsiz",
+          : "Belirsiz"
     });
   } else if (page.includes("/film-ara")) {
     const searching = document.querySelector(
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
         fixedSearching != "Belirsiz"
           ? fixedSearching[0].toUpperCase() + fixedSearching.slice(1)
           : "Belirsiz",
-      smallImageKey: "search",
+      smallImageKey: "search"
     });
   } else if (page.includes("/kategori/")) {
     const categoryName = document.querySelector(
@@ -77,14 +77,14 @@ presence.on("UpdateData", async () => {
       state:
         categoryName && categoryName.textContent != ""
           ? categoryName.textContent
-          : "Belirsiz",
+          : "Belirsiz"
     });
   } else if (title && title.textContent != "" && !video) {
     presence.setActivity({
       largeImageKey: "fm-logo",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Bir filmi inceliyor:",
-      state: title.textContent,
+      state: title.textContent
     });
   } else if (title && title.textContent != "" && video) {
     const timestamps = getTimestamps(
@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: video.paused ? "pause" : "play",
       smallImageText: video.paused
         ? (await strings).pause
-        : (await strings).play,
+        : (await strings).play
     };
 
     if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "fm-logo",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Bir sayfaya göz atıyor:",
-      state: "Ana Sayfa",
+      state: "Ana Sayfa"
     });
   }
 });

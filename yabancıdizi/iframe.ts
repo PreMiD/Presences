@@ -1,6 +1,6 @@
 const iframe = new iFrame();
 
-setInterval(function () {
+setInterval(function() {
   const video = document.querySelector("video") as HTMLVideoElement;
 
   if (
@@ -13,11 +13,11 @@ setInterval(function () {
       error: false,
       currentTime: video.currentTime,
       duration: video.duration,
-      paused: video.paused,
+      paused: video.paused
     });
   } else {
     iframe.send({
-      error: true,
+      error: true
     });
   }
 }, 100);

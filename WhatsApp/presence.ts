@@ -1,7 +1,7 @@
 // Not sure if this TypeScript works. JavaScript file works just fine :3
 
 let presence = new Presence({
-  clientId: "628019683718856714",
+  clientId: "628019683718856714"
 });
 
 presence.on("UpdateData", async () => {
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
               : "Just waiting..."
           }`
     }`,
-    startTimestamp: Math.floor(Date.now() / 1000),
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
 
   presence.setActivity(data);

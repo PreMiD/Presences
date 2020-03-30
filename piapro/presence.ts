@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "641416608790609942",
+    clientId: "641416608790609942"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -18,7 +18,7 @@ var paused: any, timestamps: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "pia",
+    largeImageKey: "pia"
   };
 
   if (document.location.hostname == "piapro.jp") {

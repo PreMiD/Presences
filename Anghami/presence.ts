@@ -1,15 +1,15 @@
 var presence = new Presence({
-    clientId: "640289470855380992",
+    clientId: "640289470855380992"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing",
+    browsing: "presence.activity.browsing"
   });
 
 presence.on("UpdateData", async () => {
   var data: presenceData = {
-    largeImageKey: "anlg",
+    largeImageKey: "anlg"
   };
 
   var playback: boolean = document.querySelector("anghami-player") != null;

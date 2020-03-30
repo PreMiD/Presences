@@ -1,6 +1,6 @@
 const iframe = new iFrame();
 
-setInterval(function () {
+setInterval(function() {
   const video =
     (document.querySelector("#vplayer video") as HTMLVideoElement) ||
     (document.querySelector("video") as HTMLVideoElement);
@@ -10,18 +10,18 @@ setInterval(function () {
       error: false,
       currentTime: video.currentTime,
       duration: video.duration,
-      paused: video.paused,
+      paused: video.paused
     });
   } else if (video && document.location.hostname != "vidmoly.to") {
     iframe.send({
       error: false,
       currentTime: video.currentTime,
       duration: video.duration,
-      paused: video.paused,
+      paused: video.paused
     });
   } else {
     iframe.send({
-      error: true,
+      error: true
     });
   }
 }, 100);

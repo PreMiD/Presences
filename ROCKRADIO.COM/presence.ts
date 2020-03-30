@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "639616115873546261",
+    clientId: "639616115873546261"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -16,7 +16,7 @@ var playing: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "rock",
+    largeImageKey: "rock"
   };
 
   if (document.location.hostname == "www.rockradio.com") {

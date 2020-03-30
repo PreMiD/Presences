@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "640234287525920834",
+    clientId: "640234287525920834"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -18,7 +18,7 @@ var typeResult = typeURL.searchParams.get("type");
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "pix",
+    largeImageKey: "pix"
   };
 
   if (document.location.hostname == "www.pixiv.net") {

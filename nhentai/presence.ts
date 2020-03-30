@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "612653415419609088",
+    clientId: "612653415419609088"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var lastPlaybackState = null;
@@ -24,7 +24,7 @@ var character: any, parody: any;
 var searchURL = new URL(document.location.href);
 var searchResult = searchURL.searchParams.get("q");
 
-var truncateAfter = function (str, pattern) {
+var truncateAfter = function(str, pattern) {
   return str.slice(0, str.indexOf(pattern));
 };
 
@@ -35,7 +35,7 @@ if (lastPlaybackState != reading) {
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "lg",
+    largeImageKey: "lg"
   };
 
   tabTitle = document.title;

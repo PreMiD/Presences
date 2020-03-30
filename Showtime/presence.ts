@@ -1,10 +1,10 @@
 var presence = new Presence({
-    clientId: "617741834701242406",
+    clientId: "617741834701242406"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   });
 
 presence.on("UpdateData", async () => {
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: smallImageKey,
       smallImageText: smallImageText,
       startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1],
+      endTimestamp: timestamps[1]
     };
 
     if (video.paused) {
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
   } else {
     let browsingPresence: presenceData = {
       details: "Browsing...",
-      largeImageKey: "showtime-logo",
+      largeImageKey: "showtime-logo"
     };
     presence.setActivity(browsingPresence);
   }

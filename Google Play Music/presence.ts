@@ -1,10 +1,10 @@
 {
   const presence = new Presence({
-    clientId: "610850440266907648",
+    clientId: "610850440266907648"
   });
   const strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
   presence.on("UpdateData", async () => {
@@ -38,9 +38,7 @@
         state: `${artist} - ${album}`,
         largeImageKey: "gpm",
         smallImageKey: isPlaying ? "play" : "pause",
-        smallImageText: isPlaying
-          ? (await strings).play
-          : (await strings).pause,
+        smallImageText: isPlaying ? (await strings).play : (await strings).pause
       };
 
       if (!document.hidden) {

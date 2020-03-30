@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "655247212728811530",
+  clientId: "655247212728811530"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000),
@@ -9,7 +9,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     state: <string>null,
     largeImageKey: <string>"lg",
     startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null,
+    endTimestamp: <number>null
   },
   updateCallback = {
     _function: null,
@@ -21,7 +21,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     },
     get present() {
       return this._function !== null;
-    },
+    }
   },
   raceStamp = null;
 
@@ -127,7 +127,10 @@ var browsingStamp = Math.floor(Date.now() / 1000),
         presenceData.details = "Viewing a race result";
         presenceData.state = `Race ${
           href.searchParams.get("id").split("|")[2]
-        } of ${href.searchParams.get("id").split("|")[1].slice(3)}`;
+        } of ${href.searchParams
+          .get("id")
+          .split("|")[1]
+          .slice(3)}`;
       } else if (path[1] === "race_history") {
         presenceData.details = "Viewing someone's race history";
         presenceData.state = href.searchParams.get("user") || null;
@@ -155,7 +158,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
         let pageNames = {
           upgrade_account: "Upgrade your account",
           tos: "Terms of Service",
-          privacy_poicy: "Privacy Policy",
+          privacy_poicy: "Privacy Policy"
         };
         presenceData.details = "Viewing a page";
         presenceData.state = pageNames[path[1]];
@@ -194,7 +197,7 @@ function resetData() {
     state: <string>null,
     largeImageKey: <string>"lg",
     startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null,
+    endTimestamp: <number>null
   };
 }
 

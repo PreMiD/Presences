@@ -1,10 +1,10 @@
 var presence = new Presence({
-    clientId: "654399399316684802",
+    clientId: "654399399316684802"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing",
+    browsing: "presence.activity.browsing"
   }),
   isShow: boolean = false,
   isSong: boolean = false,
@@ -25,7 +25,7 @@ var presence = new Presence({
     track_number: null,
     showName: null,
     seasonNumber: null,
-    episodeNumber: null,
+    episodeNumber: null
   };
 
 presence.on("UpdateData", async () => {
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     document.querySelector(".footer").textContent.includes("VLC")
   ) {
     var data: presenceData = {
-      largeImageKey: "vlc",
+      largeImageKey: "vlc"
     };
 
     var timestamps = getTimestamps(Number(media.time), Number(media.length));
@@ -138,7 +138,7 @@ function getTimestamps(mediaTime: any, mediaDuration: any) {
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var getStatus = setLoop(function () {
+var getStatus = setLoop(function() {
   if (
     document.querySelector(".footer") &&
     document.querySelector(".footer").textContent.includes("VLC")
@@ -146,7 +146,7 @@ var getStatus = setLoop(function () {
     const req = new XMLHttpRequest();
     // jquery sucks!!!
 
-    req.onload = function () {
+    req.onload = function() {
       if (req.readyState === req.DONE) {
         if (req.status === 200) {
           if (i > 0) i = 0;
@@ -309,7 +309,7 @@ var getStatus = setLoop(function () {
       }
     };
 
-    req.onerror = function (e) {
+    req.onerror = function(e) {
       media.state = "stopped";
       console.log(e);
     };

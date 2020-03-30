@@ -1,10 +1,10 @@
 var presence = new Presence({
-    clientId: "647973934603567130",
+    clientId: "647973934603567130"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    reading: "presence.playback.reading",
+    reading: "presence.playback.reading"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -16,7 +16,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "bahamut",
+    largeImageKey: "bahamut"
   };
 
   if (document.location.hostname == "forum.gamer.com.tw") {

@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "617622829978091530",
+  clientId: "617622829978091530"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -9,14 +9,14 @@ presence.on("UpdateData", async () => {
     let homepagePresence: presenceData = {
       details: "Viewing the homepage",
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(homepagePresence);
   } else if (document.location.pathname.startsWith("/minecraft-names")) {
     let presenceData: presenceData = {
       details: "Viewing Upcoming Names",
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/minecraft-skins")) {
@@ -24,21 +24,21 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Viewing Top Skins",
         largeImageKey: "namemc-logo",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       };
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("/new")) {
       let presenceData: presenceData = {
         details: "Viewing New Skins",
         largeImageKey: "namemc-logo",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       };
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("/random")) {
       let presenceData: presenceData = {
         details: "Viewing Random Skins",
         largeImageKey: "namemc-logo",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       };
       presence.setActivity(presenceData);
     } else if (document.location.pathname.startsWith("/minecraft-skins/tag")) {
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
         let presenceData: presenceData = {
           details: "Viewing Tagged Skins",
           largeImageKey: "namemc-logo",
-          startTimestamp: browsingStamp,
+          startTimestamp: browsingStamp
         };
         presence.setActivity(presenceData);
       } else {
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
         let presenceData: presenceData = {
           details: "Viewing Skins with " + tag + " Tag",
           largeImageKey: "namemc-logo",
-          startTimestamp: browsingStamp,
+          startTimestamp: browsingStamp
         };
         presence.setActivity(presenceData);
       }
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Viewing Trending Skins",
         largeImageKey: "namemc-logo",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       };
       presence.setActivity(presenceData);
     }
@@ -70,21 +70,21 @@ presence.on("UpdateData", async () => {
     let presenceData: presenceData = {
       details: "Viewing Capes",
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/minecraft-servers")) {
     let presenceData: presenceData = {
       details: "Viewing Servers",
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/claim-your-profile")) {
     let presenceData: presenceData = {
       details: "Viewing How To Claim Profile",
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/my-profile")) {
@@ -92,35 +92,35 @@ presence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Editing Profile Info",
         largeImageKey: "namemc-logo",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       };
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("/skins")) {
       let presenceData: presenceData = {
         details: "Viewing Profile Skins",
         largeImageKey: "namemc-logo",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       };
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("/friends")) {
       let presenceData: presenceData = {
         details: "Viewing Profile Friends",
         largeImageKey: "namemc-logo",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       };
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("/emoji")) {
       let presenceData: presenceData = {
         details: "Viewing Profile Emojis",
         largeImageKey: "namemc-logo",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       };
       presence.setActivity(presenceData);
     } else if (document.location.pathname.endsWith("/abandon")) {
       let presenceData: presenceData = {
         details: "Viewing Profile Abandon Page",
         largeImageKey: "namemc-logo",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       };
       presence.setActivity(presenceData);
     }
@@ -131,21 +131,21 @@ presence.on("UpdateData", async () => {
       details: "Viewing a Profile",
       state: username,
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/privacy")) {
     let presenceData: presenceData = {
       details: "Viewing Privacy Policy",
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/skin")) {
     let presenceData: presenceData = {
       details: "Viewing a Skin",
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/cape")) {
@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
       details: "Viewing a Cape",
       state: cape + " Cape",
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/server")) {
@@ -164,7 +164,7 @@ presence.on("UpdateData", async () => {
       details: "Viewing a Server",
       state: server,
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/search")) {
@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
       details: "Searching for a Profile",
       state: searchuser,
       largeImageKey: "namemc-logo",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   }

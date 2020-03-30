@@ -1,16 +1,16 @@
 var presence = new Presence({
-    clientId: "637737627151368202",
+    clientId: "637737627151368202"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 presence.on("UpdateData", async () => {
   var presenceData = {
     largeImageKey: "large",
     details: "Using Jummbox",
-    state: "Making a Beep",
+    state: "Making a Beep"
   };
 
   if (presenceData.details == null) {

@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "619416396337643531",
+  clientId: "619416396337643531"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "kissmanga-logo",
+    largeImageKey: "kissmanga-logo"
   };
 
   if (document.location.pathname == "/") {

@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "682218734391394338",
+  clientId: "682218734391394338"
 });
 
 let browsingStamp = Math.floor(Date.now() / 1000);
@@ -7,7 +7,7 @@ let browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "lg",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
   if (document.location.pathname == "/") {
     presenceData.details = "Viewing the front page...";

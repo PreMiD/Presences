@@ -1,45 +1,45 @@
 var presence = new Presence({
-  clientId: "671199009674756146",
+  clientId: "671199009674756146"
 });
 var strings = presence.getStrings({
   browse: "presence.activity.browsing",
-  search: "presence.activity.searching",
+  search: "presence.activity.searching"
 });
 
 var oldUrl, elapsed;
 
 const statics = {
   "/": {
-    details: "Browsing",
+    details: "Browsing"
   },
   "/about/": {
     details: "Viewing",
-    state: "About",
+    state: "About"
   },
   "/faq/": {
     details: "Viewing",
-    state: "Frequently Asked Questions",
+    state: "Frequently Asked Questions"
   },
   "/terms/": {
     details: "Viewing",
-    state: "Terms of Service",
+    state: "Terms of Service"
   },
   "/tos/": {
     details: "Viewing",
-    state: "Terms of Service",
+    state: "Terms of Service"
   },
   "/privacy/": {
     details: "Viewing",
-    state: "Privacy",
+    state: "Privacy"
   },
   "/guidelines/": {
     details: "Viewing",
-    state: "Guidelines",
+    state: "Guidelines"
   },
   "/contact/": {
     details: "Viewing",
-    state: "Contact",
-  },
+    state: "Contact"
+  }
 };
 
 presence.on("UpdateData", async () => {
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
     smallImageKey: undefined,
     smallImageText: undefined,
     startTimestamp: undefined,
-    endTimestamp: undefined,
+    endTimestamp: undefined
   };
 
   if (oldUrl !== path) {

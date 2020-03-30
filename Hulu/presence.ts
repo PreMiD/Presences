@@ -1,11 +1,11 @@
 var presence = new Presence({
-  clientId: "607719679011848220",
+  clientId: "607719679011848220"
 });
 var strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
   live: "presence.activity.live",
-  search: "presence.activity.searching",
+  search: "presence.activity.searching"
 });
 
 var elapsed = undefined,
@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
     smallImageKey: smallImageKey,
     smallImageText: smallImageText,
     startTimestamp: startTimestamp,
-    endTimestamp: endTimestamp,
+    endTimestamp: endTimestamp
   };
 
   if (data) {

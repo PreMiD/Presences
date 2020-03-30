@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "607754656453623843",
+  clientId: "607754656453623843"
 });
 var strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
-  live: "presence.activity.live",
+  live: "presence.activity.live"
 });
 
 var title,
@@ -26,11 +26,11 @@ presence.on("UpdateData", async () => {
       users: document.querySelector(
         ".tw-align-items-center.tw-flex.tw-mg-l-1:nth-child(2)"
       ),
-      user: (index) => {
+      user: index => {
         return document.querySelectorAll(
           ".tw-interactive.tw-link.tw-link--hover-underline-none.tw-link--inherit"
         )[index];
-      },
+      }
     },
     live: {
       label: document.querySelector(
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
       ),
       title: document.querySelector(".tw-font-size-4.tw-line-height-body"),
       streamer: document.querySelector(".tw-font-size-5.tw-white-space-nowrap"),
-      host: document.querySelector(".tw-c-text-overlay.tw-strong"),
+      host: document.querySelector(".tw-c-text-overlay.tw-strong")
     },
     video: {
       title: document.querySelector(".tw-font-size-4.tw-strong"),
@@ -46,12 +46,12 @@ presence.on("UpdateData", async () => {
       time: document.querySelector(".vod-seekbar-time-labels > p:nth-child(1)"),
       duration: document.querySelector(
         ".vod-seekbar-time-labels > p:nth-child(2)"
-      ),
+      )
     },
     clip: {
       title: document.querySelector(".tw-font-size-4.tw-strong"),
-      streamer: document.querySelector(".tw-font-size-5.tw-white-space-nowrap"),
-    },
+      streamer: document.querySelector(".tw-font-size-5.tw-white-space-nowrap")
+    }
   };
 
   if (window.location.href !== oldURL) {
@@ -205,7 +205,7 @@ presence.on("UpdateData", async () => {
     smallImageKey: smallImageKey,
     smallImageText: smallImageText,
     startTimestamp: videoTime,
-    endTimestamp: videoDuration,
+    endTimestamp: videoDuration
   };
 
   if (video && video.paused) {

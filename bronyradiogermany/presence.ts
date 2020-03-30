@@ -1,8 +1,8 @@
 var presence = new Presence({
-    clientId: "622436057866043434",
+    clientId: "622436057866043434"
   }),
   presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
 presence.on("UpdateData", async () => {
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
   } else {
     var pageData: presenceData = {
       details: "Browsing..",
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(pageData);
   }

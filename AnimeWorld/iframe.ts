@@ -8,8 +8,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: anime.currentTime,
           duration: anime.duration,
-          paused: anime.paused,
-        },
+          paused: anime.paused
+        }
       });
     }
   }
@@ -29,8 +29,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: anime.currentTime,
           duration: anime.duration,
-          paused: anime.paused,
-        },
+          paused: anime.paused
+        }
       });
     }
   }
@@ -42,8 +42,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: anime.currentTime,
           duration: anime.duration,
-          paused: anime.paused,
-        },
+          paused: anime.paused
+        }
       });
     }
   }
@@ -59,8 +59,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: anime.currentTime,
           duration: anime.duration,
-          paused: anime.paused,
-        },
+          paused: anime.paused
+        }
       });
     }
   }
@@ -72,8 +72,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: anime.currentTime,
           duration: anime.duration,
-          paused: anime.paused,
-        },
+          paused: anime.paused
+        }
       });
     }
   }
@@ -87,8 +87,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: anime.currentTime,
           duration: anime.duration,
-          paused: anime.paused,
-        },
+          paused: anime.paused
+        }
       });
     }
   }
@@ -100,8 +100,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: anime.currentTime,
           duration: anime.duration,
-          paused: anime.paused,
-        },
+          paused: anime.paused
+        }
       });
     }
   }
@@ -113,8 +113,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: anime.currentTime,
           duration: anime.duration,
-          paused: anime.paused,
-        },
+          paused: anime.paused
+        }
       });
     }
   }

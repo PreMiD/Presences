@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "663151599924936714",
+  clientId: "663151599924936714"
 });
 
 presence.on("UpdateData", async () => {
   let path = document.location.pathname;
 
   let presenceData: presenceData = {
-    largeImageKey: "paybutik",
+    largeImageKey: "paybutik"
   };
 
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);

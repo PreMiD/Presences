@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "670669014363668481",
+    clientId: "670669014363668481"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     details: "In construction",
     state: "-",
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   title = document.querySelector("h1#firstHeading");

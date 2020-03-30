@@ -29,11 +29,11 @@ function PMD_success(message) {
 }
 
 let presence = new Presence({
-    clientId: "619561001234464789",
+    clientId: "619561001234464789"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 let title: any, uploader: any, search: any;
@@ -51,7 +51,7 @@ let playback: boolean;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "spotify",
+    largeImageKey: "spotify"
   };
 
   video = document.querySelector("span.react-contextmenu-wrapper > span > a");

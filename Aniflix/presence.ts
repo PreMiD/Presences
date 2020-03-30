@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "630093952342687794", // CLIENT ID FOR YOUR PRESENCE
+    clientId: "630093952342687794" // CLIENT ID FOR YOUR PRESENCE
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -28,7 +28,7 @@ if (
     "#view-wrapper > div:nth-child(2) > div > div.episode"
   ) != null
 ) {
-  presence.on("iFrameData", (data) => {
+  presence.on("iFrameData", data => {
     playback = data.iframe_video.duration !== null ? true : false;
 
     if (playback) {
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: paused ? "pause" : "play",
       smallImageText: paused ? (await strings).pause : (await strings).play,
       startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1],
+      endTimestamp: timestamps[1]
     };
 
   search = document.querySelector("#searchbar > div > input[type=text]");

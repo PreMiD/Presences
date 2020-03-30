@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "639916600031707149",
+    clientId: "639916600031707149"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -18,7 +18,7 @@ var paused: any, timestamps: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "vid",
+    largeImageKey: "vid"
   };
 
   if (document.location.hostname == "www.vvvvid.it") {

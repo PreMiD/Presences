@@ -10,8 +10,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     } else {
       iframe.send({
@@ -19,8 +19,8 @@ iframe.on("UpdateData", async () => {
           iFrameVideo: null,
           currTime: null,
           dur: null,
-          paused: null,
-        },
+          paused: null
+        }
       });
     }
   }

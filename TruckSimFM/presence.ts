@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "640538683392655370",
+    clientId: "640538683392655370"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -17,7 +17,7 @@ var listeners: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "tsfm",
+    largeImageKey: "tsfm"
   };
   //presenceData.startTimestamp = browsingStamp;
   player = document.querySelector("#player");

@@ -4,10 +4,10 @@
 */
 
 var englishPresence = new Presence({
-  clientId: "613417749489778689",
+  clientId: "613417749489778689"
 });
 var germanPresence = new Presence({
-  clientId: "613418400042975329",
+  clientId: "613418400042975329"
 });
 
 englishPresence.on("UpdateData", async () => {
@@ -31,7 +31,7 @@ englishPresence.on("UpdateData", async () => {
       let presenceData: presenceData = {
         details: "Viewing a page...",
         state: page,
-        largeImageKey: "lg-twiki",
+        largeImageKey: "lg-twiki"
       };
       englishPresence.setActivity(presenceData);
     }
@@ -57,7 +57,7 @@ englishPresence.on("UpdateData", async () => {
         let presenceData: presenceData = {
           details: "Schaut eine Seite an...",
           state: page,
-          largeImageKey: "lg-twiki",
+          largeImageKey: "lg-twiki"
         };
         germanPresence.setActivity(presenceData);
       }

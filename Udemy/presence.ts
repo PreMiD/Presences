@@ -1,9 +1,9 @@
 const presence = new Presence({
-    clientId: "639131130703904808",
+    clientId: "639131130703904808"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   }),
   pages = {
     "/": "Homepage",
@@ -41,7 +41,7 @@ const presence = new Presence({
     "/home/my-courses/search": "My Courses",
     "/home/my-courses/collections": "My Courses (Collections)",
     "/home/my-courses/wishlist": "My Courses (Wishlist)",
-    "/home/my-courses/archived": "My Courses (Archived)",
+    "/home/my-courses/archived": "My Courses (Archived)"
   };
 
 presence.on("UpdateData", async () => {
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
       state:
         searching && searching.textContent != ""
           ? searching.textContent
-          : "Something",
+          : "Something"
     });
   } else if (page.includes("/courses/")) {
     const category = document.querySelector(
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
       state:
         category && category.textContent != ""
           ? category.textContent
-          : "Unknown Category",
+          : "Unknown Category"
     });
   } else if (page.includes("/course/") && video && video.currentTime) {
     const title =
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: video.paused ? "pause" : "play",
       smallImageText: video.paused
         ? (await strings).pause
-        : (await strings).play,
+        : (await strings).play
     };
 
     if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
@@ -145,21 +145,21 @@ presence.on("UpdateData", async () => {
       largeImageKey: "ud-logo",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Viewing a course:",
-      state: courseTitle.textContent,
+      state: courseTitle.textContent
     });
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     presence.setActivity({
       largeImageKey: "ud-logo",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Viewing a page:",
-      state: pages[page] || pages[page.slice(0, -1)],
+      state: pages[page] || pages[page.slice(0, -1)]
     });
   } else {
     presence.setActivity({
       largeImageKey: "ud-logo",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: "Viewing a page:",
-      state: "Homepage",
+      state: "Homepage"
     });
   }
 });

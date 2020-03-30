@@ -29,7 +29,7 @@ function PMD_success(message) {
 }
 
 var presence = new Presence({
-  clientId: "618138980273094695", // CLIENT ID FOR YOUR PRESENCE
+  clientId: "618138980273094695" // CLIENT ID FOR YOUR PRESENCE
 });
 
 var item: any,
@@ -51,7 +51,7 @@ var regex = RegExp(
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "amazon",
+    largeImageKey: "amazon"
   };
 
   presenceData.startTimestamp = browsingStamp;

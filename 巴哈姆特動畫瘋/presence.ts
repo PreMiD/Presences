@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "640194732718292992",
+    clientId: "640194732718292992"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -15,7 +15,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "ani",
+    largeImageKey: "ani"
   };
 
   if (document.location.hostname == "ani.gamer.com.tw") {

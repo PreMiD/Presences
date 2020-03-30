@@ -1,11 +1,11 @@
 let presence = new Presence({
-  clientId: "678265146883178519",
+  clientId: "678265146883178519"
 });
 
 let browsingStamp = Math.floor(Date.now() / 1000);
 let iFrameVideo, currentTime, duration, paused, playback;
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
     iFrameVideo = data.iframe_video.iFrameVideo;
@@ -17,7 +17,7 @@ presence.on("iFrameData", (data) => {
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "pokemonlogo", // Bas has been here
+    largeImageKey: "pokemonlogo" // Bas has been here
   };
 
   presenceData.startTimestamp = browsingStamp;

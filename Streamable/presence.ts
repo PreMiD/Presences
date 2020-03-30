@@ -1,14 +1,14 @@
 var presence = new Presence({
-    clientId: "630847999106482176",
+    clientId: "630847999106482176"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "streamable",
+    largeImageKey: "streamable"
   };
 
   var player: HTMLVideoElement = document.querySelector(".video-player-tag");

@@ -1,8 +1,8 @@
 const presence = new Presence({
-  clientId: "632293282847784973",
+  clientId: "632293282847784973"
 });
 let presenceData: presenceData = {
-  largeImageKey: "logo",
+  largeImageKey: "logo"
 };
 let startTimestamp: number;
 
@@ -36,6 +36,6 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData);
   presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 });

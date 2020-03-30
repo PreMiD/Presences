@@ -1,9 +1,9 @@
 const presence = new Presence({
-    clientId: "643788489871196161",
+    clientId: "643788489871196161"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   }),
   pages = {
     "/": "Ana Sayfa",
@@ -17,12 +17,12 @@ const presence = new Presence({
     "/izlediklerim": "İzlediklerim",
     "/izleyeceklerim": "İzleyeceklerim",
     "/yorumlarim": "Yorumlarım",
-    "/hesap-ayarlari": "Hesap Ayarları",
+    "/hesap-ayarlari": "Hesap Ayarları"
   };
 
 let video: { [k: string]: any } = {};
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", data => {
   if (!data.error) {
     video.dataAvailable = true;
     video.currentTime = data.currentTime;
@@ -53,7 +53,7 @@ presence.on("UpdateData", () => async () => {
           showName && showName.textContent != ""
             ? showName.textContent
             : "Belirsiz",
-        startTimestamp: Math.floor(Date.now() / 1000),
+        startTimestamp: Math.floor(Date.now() / 1000)
       });
     } else if (document.location.search.includes("?s=")) {
       const searchingFor =
@@ -71,7 +71,7 @@ presence.on("UpdateData", () => async () => {
         details: "Bir dizi arıyor:",
         state: searchingFor || "Belirsiz",
         smallImageKey: "search",
-        startTimestamp: Math.floor(Date.now() / 1000),
+        startTimestamp: Math.floor(Date.now() / 1000)
       });
     } else if (page.includes("/author/")) {
       const user = document.querySelector(
@@ -82,14 +82,14 @@ presence.on("UpdateData", () => async () => {
         largeImageKey: "db-logo",
         details: "Bir üyenin profiline bakıyor:",
         state: user && user.textContent ? user.textContent : "Belirsiz",
-        startTimestamp: Math.floor(Date.now() / 1000),
+        startTimestamp: Math.floor(Date.now() / 1000)
       });
     } else if (pages[page] || pages[page.slice(0, -1)]) {
       presence.setActivity({
         largeImageKey: "db-logo",
         details: "Bir sayfaya göz atıyor:",
         state: pages[page] || pages[page.slice(0, -1)],
-        startTimestamp: Math.floor(Date.now() / 1000),
+        startTimestamp: Math.floor(Date.now() / 1000)
       });
     }
   } else {
@@ -113,7 +113,7 @@ presence.on("UpdateData", () => async () => {
         smallImageKey: _video.paused ? "pause" : "play",
         smallImageText: _video.paused
           ? (await strings).pause
-          : (await strings).play,
+          : (await strings).play
       };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
@@ -153,7 +153,7 @@ presence.on("UpdateData", () => async () => {
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
           ? (await strings).pause
-          : (await strings).play,
+          : (await strings).play
       };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {

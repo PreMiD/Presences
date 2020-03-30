@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "691080074006495303",
+  clientId: "691080074006495303"
 });
 
 var user: any;
@@ -92,7 +92,11 @@ presence.on("UpdateData", async () => {
 function getCookie(name?: string): any {
   var value = "; " + document.cookie;
   var parts = value.split("; " + name + "=");
-  if (parts.length == 2) return parts.pop().split(";").shift();
+  if (parts.length == 2)
+    return parts
+      .pop()
+      .split(";")
+      .shift();
 }
 
 function parseQueryString(queryString?: string): any {

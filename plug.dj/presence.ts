@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "475590192464396288",
+  clientId: "475590192464396288"
 });
 
 presence.on("UpdateData", async () => {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
         .textContent,
       state: document.getElementsByClassName("community__song-playing")[0]
         .textContent,
-      largeImageKey: "pdjlogo",
+      largeImageKey: "pdjlogo"
     };
     presence.setActivity(testPresenceData);
   }

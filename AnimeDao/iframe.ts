@@ -14,7 +14,7 @@ iframe.on("UpdateData", async () => {
         current: video.currentTime,
         duration: video.duration,
         paused: video.paused,
-        played,
+        played
       });
     }
   }

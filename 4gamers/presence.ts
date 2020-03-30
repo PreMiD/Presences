@@ -1,8 +1,8 @@
 var presence = new Presence({
-    clientId: "648494004870184981",
+    clientId: "648494004870184981"
   }),
   strings = presence.getStrings({
-    reading: "presence.playback.reading",
+    reading: "presence.playback.reading"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -14,7 +14,7 @@ var search: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "4gamers",
+    largeImageKey: "4gamers"
   };
 
   if (document.location.hostname == "www.4gamers.com.tw") {

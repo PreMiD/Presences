@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "691325899307483197",
+  clientId: "691325899307483197"
 });
 
 var user: any;
@@ -11,7 +11,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   var route = document.location.pathname.split("/");

@@ -1,44 +1,44 @@
 var presence = new Presence({
-  clientId: "547436289960574977",
+  clientId: "547436289960574977"
 });
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
     let homepagePresence: presenceData = {
       details: "Viewing the homepage",
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(homepagePresence);
   } else if (document.location.pathname.startsWith("/stories")) {
     let presenceData: presenceData = {
       details: "Viewing a story",
       state: document.location.pathname.split("/")[2],
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/accounts")) {
     let presenceData: presenceData = {
       details: "Settings",
       state: "Changing their Settings",
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/p")) {
     let presenceData: presenceData = {
       details: "Viewing a post",
       state: "NAME-HERE",
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/explore")) {
     let presenceData: presenceData = {
       details: "Exploring...",
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/nametag")) {
     let presenceData: presenceData = {
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
   } else {
@@ -46,13 +46,13 @@ presence.on("UpdateData", async () => {
     let presenceData: presenceData = {
       details: "Viewing a profile",
       state: document.location.pathname.split("/")[1],
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
   }
 });
 
-presence.on("iFrameData", function (data) {
+presence.on("iFrameData", function(data) {
   console.log(data);
 });
 

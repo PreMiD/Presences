@@ -1,9 +1,9 @@
 const presence = new Presence({
-    clientId: "633985961604415519",
+    clientId: "633985961604415519"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 presence.on("UpdateData", async () => {
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
     playing = player ? (player.paused ? false : true) : false;
 
   let data: { [k: string]: any } = {
-    largeImageKey: "fizy-logo",
+    largeImageKey: "fizy-logo"
   };
 
   const songName = document.querySelector(

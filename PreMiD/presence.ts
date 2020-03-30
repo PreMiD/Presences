@@ -1,11 +1,11 @@
 var presence = new Presence({
-    clientId: "688166209736409100",
+    clientId: "688166209736409100"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing",
-    reading: "presence.activity.reading",
+    reading: "presence.activity.reading"
   }),
   host: string,
   path: string,
@@ -14,7 +14,7 @@ var presence = new Presence({
 presence.on("UpdateData", async () => {
   var data: presenceData = {
     largeImageKey: "lg",
-    startTimestamp: timestamp,
+    startTimestamp: timestamp
   };
 
   (host = document.location.hostname), (path = document.location.pathname);

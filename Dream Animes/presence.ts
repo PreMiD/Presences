@@ -1,18 +1,18 @@
 const presence = new Presence({
-    clientId: "477937036423331872",
+    clientId: "477937036423331872"
   }),
   strings = presence.getStrings({
     playing: "presence.playback.playing",
     paused: "presence.playback.paused",
     browsing: "presence.activity.browsing",
-    episode: "presence.media.info.episode",
+    episode: "presence.media.info.episode"
   });
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
       largeImageKey: "drim_sonhos2",
       details: (await strings).browsing,
-      startTimestamp: Math.floor(Date.now() / 1000),
+      startTimestamp: Math.floor(Date.now() / 1000)
     },
     path = window.location.pathname;
   if (path.startsWith("/online")) {

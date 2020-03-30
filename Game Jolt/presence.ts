@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "633419305836347393",
+    clientId: "633419305836347393"
   }),
   pages = {
     "/games": "Games",
@@ -16,7 +16,7 @@ const presence = new Presence({
     "/library": "Game Library",
     "/dashboard/profile/edit": "Edit Profile",
     "/settings": "Settings",
-    "/dashboard/games/add": "Add a Game",
+    "/dashboard/games/add": "Add a Game"
   };
 
 presence.on("UpdateData", async () => {
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
 
   let data: { [k: string]: any } = {
     largeImageKey: "gj-logo",
-    startTimestamp: Math.floor(Date.now() / 1000),
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
 
   if (page.includes("/games/tag-")) {

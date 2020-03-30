@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "620839311629221889",
+  clientId: "620839311629221889"
 });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "gartic-logo",
+    largeImageKey: "gartic-logo"
   };
 
   var path = document.location.pathname;

@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "612416330003382314",
+    clientId: "612416330003382314"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -25,7 +25,7 @@ gameName = document.querySelector(
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     details: "Unknown page",
-    largeImageKey: "lg",
+    largeImageKey: "lg"
   };
 
   if (document.location.pathname.includes("/home")) {

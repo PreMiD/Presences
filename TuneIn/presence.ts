@@ -1,17 +1,17 @@
 var presence = new Presence({
-    clientId: "619817171928743938",
+    clientId: "619817171928743938"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "tunein-logo",
+    largeImageKey: "tunein-logo"
   };
 
   var playerCheck = document.querySelector(".player__playerContainer___JEJ2U")

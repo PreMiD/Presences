@@ -13,8 +13,8 @@ iframe.on("UpdateData", async () => {
           test: test,
           currTime: video.currentTime,
           dur: video.duration,
-          pause: test,
-        },
+          pause: test
+        }
       });
     }
   }

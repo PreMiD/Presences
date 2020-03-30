@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "621881103380381716",
+  clientId: "621881103380381716"
 });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    largeImageKey: "tiktok-logo",
+    largeImageKey: "tiktok-logo"
   };
 
   var path = document.location.pathname;

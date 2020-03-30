@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "614200757989670934",
+    clientId: "614200757989670934"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -19,7 +19,7 @@ var projectsTab: any;
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     details: "Unknown page",
-    largeImageKey: "lg",
+    largeImageKey: "lg"
   };
 
   if (

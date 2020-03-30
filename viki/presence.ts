@@ -29,12 +29,12 @@ function PMD_success(message) {
 }
 
 var presence = new Presence({
-    clientId: "614387676467953674", // CLIENT ID FOR YOUR PRESENCE
+    clientId: "614387676467953674" // CLIENT ID FOR YOUR PRESENCE
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   });
 
 var title: any,
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 
   if (!playback) {
     let presenceData: presenceData = {
-      largeImageKey: "viki",
+      largeImageKey: "viki"
     };
 
     presenceData.startTimestamp = browsingStamp;
@@ -552,7 +552,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause // paused text when you hover the pause icon on discord
         : (await strings).play,
       startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1],
+      endTimestamp: timestamps[1]
     };
 
     // Get the video duration

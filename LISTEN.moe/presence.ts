@@ -1,5 +1,5 @@
 let presence: Presence = new Presence({
-    clientId: "615652705565933581",
+    clientId: "615652705565933581"
   }),
   path: string,
   startTimestamp: number,
@@ -13,10 +13,10 @@ let presence: Presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   }),
   presenceData: presenceData = {
-    largeImageKey: "listen_moe_lg",
+    largeImageKey: "listen_moe_lg"
   };
 
 function resetTimestamp(): any {
