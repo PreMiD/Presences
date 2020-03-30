@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "646716119289298984"
-}),
+		clientId: "646716119289298984"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -19,7 +19,9 @@ const presence = new Presence({
 presence.on("UpdateData", () => async () => {
 	const page = document.location.pathname,
 		video = document.querySelector("video") as HTMLVideoElement,
-		showTitle = document.querySelector("body > div.wrapper > div.fw.movieDetailAll > div.container > div > div > div.movieDetailRightCol > div > div.fw.movieDetailTitle > h1"),
+		showTitle = document.querySelector(
+			"body > div.wrapper > div.fw.movieDetailAll > div.container > div > div > div.movieDetailRightCol > div > div.fw.movieDetailTitle > h1"
+		),
 		username = document.querySelector("#profile_fullname");
 
 	if (page.includes("/show/") && showTitle && showTitle.textContent != "") {
@@ -29,7 +31,11 @@ presence.on("UpdateData", () => async () => {
 			state: showTitle.textContent || "Bilinmeyen",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
-	} else if (page.includes("/user/") && username && username.textContent != "") {
+	} else if (
+		page.includes("/user/") &&
+		username &&
+		username.textContent != ""
+	) {
 		presence.setActivity({
 			largeImageKey: "wh-logo",
 			details: "Bir üyenin profiline bakıyor:",
@@ -37,7 +43,10 @@ presence.on("UpdateData", () => async () => {
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	} else if (page.includes("/search/")) {
-		const searchingFor = decodeURI(page.replace("/search/", "")).split(" ").map(i => i[0].toUpperCase() + i.slice(1).toLowerCase()).join(" ");
+		const searchingFor = decodeURI(page.replace("/search/", ""))
+			.split(" ")
+			.map(i => i[0].toUpperCase() + i.slice(1).toLowerCase())
+			.join(" ");
 
 		presence.setActivity({
 			largeImageKey: "wh-logo",
@@ -47,26 +56,43 @@ presence.on("UpdateData", () => async () => {
 			smallImageKey: "search"
 		});
 	} else if (page.includes("/category/")) {
-		const categoryName = document.querySelector("body > div.wrapper > div.container.st > div > div.top_right_arsiv > h5");
+		const categoryName = document.querySelector(
+			"body > div.wrapper > div.container.st > div > div.top_right_arsiv > h5"
+		);
 
 		presence.setActivity({
 			largeImageKey: "wh-logo",
 			details: "Bir kategoriye göz atıyor:",
-			state: categoryName && categoryName.textContent != "" ? categoryName.textContent.replace("Dizileri", "") : "Bilinmeyen",
+			state:
+				categoryName && categoryName.textContent != ""
+					? categoryName.textContent.replace("Dizileri", "")
+					: "Bilinmeyen",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	} else if (page.includes("/movie/") && video) {
-		const title = document.querySelector("body > div.wrapper > div:nth-child(4) > div > div:nth-child(1) > div.col-md-9 > h2"),
-			IMDb = document.querySelector("body > div.wrapper > div:nth-child(4) > div > div:nth-child(3) > div:nth-child(1) > button > span"),
-			timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration))
+		const title = document.querySelector(
+				"body > div.wrapper > div:nth-child(4) > div > div:nth-child(1) > div.col-md-9 > h2"
+			),
+			IMDb = document.querySelector(
+				"body > div.wrapper > div:nth-child(4) > div > div:nth-child(3) > div:nth-child(1) > button > span"
+			),
+			timestamps = getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
 
 		let data: { [k: string]: any } = {
 			largeImageKey: "wh-logo",
-			details: title && title.textContent != "" ? title.textContent : "Bilinmeyen",
-			state: `IMDb: ${IMDb && IMDb.textContent != "" ? IMDb.textContent : "Bilinmiyor"}`,
+			details:
+				title && title.textContent != "" ? title.textContent : "Bilinmeyen",
+			state: `IMDb: ${
+				IMDb && IMDb.textContent != "" ? IMDb.textContent : "Bilinmiyor"
+			}`,
 			smallImageKey: video.paused ? "pause" : "play",
-			smallImageText: video.paused ? (await strings).pause : (await strings).play,
-		}
+			smallImageText: video.paused
+				? (await strings).pause
+				: (await strings).play
+		};
 
 		if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
 			data.startTimestamp = timestamps[0];
@@ -80,17 +106,40 @@ presence.on("UpdateData", () => async () => {
 		presence.setTrayTitle(video.paused ? "" : `${title.textContent}`);
 		presence.setActivity(data);
 	} else if (page.includes("/watch/") && video) {
-		const showName = document.querySelector("#mep_0 > div > div.mejs__layers > div.mejs__currentlayer-layer > div > h1") || document.querySelector("body > div.wrapper > div.fw.playBotAll > div > div > div.playTopInfo > ul > li.title"),
-			episode = document.querySelector("#mep_0 > div > div.mejs__layers > div.mejs__currentlayer-layer > div > h3") || document.querySelector("body > div.wrapper > div.fw.playBotAll > div > div > div.playTopInfo > ul > li.desc"),
-			timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration))
+		const showName =
+				document.querySelector(
+					"#mep_0 > div > div.mejs__layers > div.mejs__currentlayer-layer > div > h1"
+				) ||
+				document.querySelector(
+					"body > div.wrapper > div.fw.playBotAll > div > div > div.playTopInfo > ul > li.title"
+				),
+			episode =
+				document.querySelector(
+					"#mep_0 > div > div.mejs__layers > div.mejs__currentlayer-layer > div > h3"
+				) ||
+				document.querySelector(
+					"body > div.wrapper > div.fw.playBotAll > div > div > div.playTopInfo > ul > li.desc"
+				),
+			timestamps = getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
 
 		let data: { [k: string]: any } = {
 			largeImageKey: "wh-logo",
-			details: showName && showName.textContent != "" ? showName.textContent.trim() : "Bilinmeyen",
-			state: episode && episode.textContent != "" ? episode.textContent.trim() : "Bilinmeyen",
+			details:
+				showName && showName.textContent != ""
+					? showName.textContent.trim()
+					: "Bilinmeyen",
+			state:
+				episode && episode.textContent != ""
+					? episode.textContent.trim()
+					: "Bilinmeyen",
 			smallImageKey: video.paused ? "pause" : "play",
-			smallImageText: video.paused ? (await strings).pause : (await strings).play,
-		}
+			smallImageText: video.paused
+				? (await strings).pause
+				: (await strings).play
+		};
 
 		if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
 			data.startTimestamp = timestamps[0];
@@ -101,7 +150,9 @@ presence.on("UpdateData", () => async () => {
 			delete data.endTimestamp;
 		}
 
-		presence.setTrayTitle(video.paused ? "" : `${showName.textContent} - ${episode.textContent}`);
+		presence.setTrayTitle(
+			video.paused ? "" : `${showName.textContent} - ${episode.textContent}`
+		);
 		presence.setActivity(data);
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
 		presence.setActivity({
@@ -129,4 +180,4 @@ function getTimestamps(videoTime, videoDuration) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
 	return [Math.floor(startTime / 1000), endTime];
-};
+}

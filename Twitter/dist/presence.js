@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const presence = new Presence({
     clientId: '612437291574755349',
-    mediaKeys: false
+    
 });
 console.log('When using the Twitter presence for PreMiD, make sure you have the latest UI update. Twitter classic and any legacy versions before it will not work with this presence.');
 var oldUrl, elapsed;

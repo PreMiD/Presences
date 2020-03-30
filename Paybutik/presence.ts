@@ -1,6 +1,5 @@
 var presence = new Presence({
-	clientId: "663151599924936714",
-	mediaKeys: false
+	clientId: "663151599924936714"
 });
 
 presence.on("UpdateData", async () => {
@@ -10,126 +9,62 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "paybutik"
 	};
 
-
 	presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
 	if (path === "/") {
-
 		presenceData.details = "Ana sayfada geziniyor..";
-
-	}
-	else if (path === "/dashboard") {
-
+	} else if (path === "/dashboard") {
 		presenceData.details = "Hesabını kontrol ediyor.";
-
-	}
-
-	else if (path === "/orders") {
-
+	} else if (path === "/orders") {
 		presenceData.details = "Siparişlerine bakıyor..";
-
-	}
-
-	else if (path === "/collections") {
-
+	} else if (path === "/collections") {
 		presenceData.details = "Tahsilatlarına bakıyor..";
-
-	}
-
-	else if (path === "/user/edit") {
-
+	} else if (path === "/user/edit") {
 		presenceData.details = "Bilgilerini düzenliyor..";
-
-	}
-
-	else if (path === "/auth/login") {
-
+	} else if (path === "/auth/login") {
 		presenceData.details = "Panele giriş yapıyor..";
-
-	}
-
-	else if (path === "/auth/register") {
-
+	} else if (path === "/auth/register") {
 		presenceData.details = "Kayıt oluyor..";
-
-	}
-
-	else if (path === "/wallet") {
-
+	} else if (path === "/wallet") {
 		presenceData.details = "Cündanını görüntülüyor..";
-
-	}
-
-	else if (path === "/docs") {
-
+	} else if (path === "/docs") {
 		presenceData.details = "Dökümanlara bakıyor..";
-
-	}
-
-	else if (path.includes('/support/get/')) {
-
+	} else if (path.includes("/support/get/")) {
 		presenceData.details = "Destek talebine bakıyor:";
-		presenceData.state = document.querySelector('body > div > div > div > div > div > div > div > div > div > h2 ').textContent;
-
-	}
-
-	else if (path === "/support") {
-
+		presenceData.state = document.querySelector(
+			"body > div > div > div > div > div > div > div > div > div > h2 "
+		).textContent;
+	} else if (path === "/support") {
 		presenceData.details = "Destek taleplerine bakıyor..";
-
-	}
-
-	else if (path === "/support/newTicket") {
-
+	} else if (path === "/support/newTicket") {
 		presenceData.details = "Destek talebi oluşturuyor..";
-
-	}
-
-
-	else if (path.includes('/products/new-product') && path.startsWith('/project/')) {
-
+	} else if (
+		path.includes("/products/new-product") &&
+		path.startsWith("/project/")
+	) {
 		presenceData.details = "Bir ürün oluşturuyor..";
 		let form = document.forms[2];
 
 		presenceData.smallImageKey = "project";
 		presenceData.smallImageText = (<HTMLInputElement>form[0]).value;
-
-	}
-
-	else if (path.startsWith('/project/') && path.includes('/products/')) {
-
+	} else if (path.startsWith("/project/") && path.includes("/products/")) {
 		presenceData.details = "Bir ürünü düzenliyor:";
 		let form = document.forms[2];
 
 		presenceData.smallImageKey = "project";
 		presenceData.smallImageText = (<HTMLInputElement>form[0]).value;
 		presenceData.state = `${(<HTMLInputElement>form[1]).value}`;
-
-	}
-
-	else if (path.startsWith('/project/new-project')) {
-
+	} else if (path.startsWith("/project/new-project")) {
 		presenceData.details = "Bir proje oluşturuyor..";
-
-	}
-
-	else if (path.startsWith('/project/')) {
-
+	} else if (path.startsWith("/project/")) {
 		presenceData.details = "Bir projeyi düzenliyor:";
-		presenceData.state = document.querySelector('body > div > div > div > div > div > div > div > h1 ').textContent.split('|')[0];
-
-	}
-
-	else if (path.includes('/verify')) {
-
+		presenceData.state = document
+			.querySelector("body > div > div > div > div > div > div > div > h1 ")
+			.textContent.split("|")[0];
+	} else if (path.includes("/verify")) {
 		presenceData.details = "E-postasını doğruluyor..";
-
-	}
-
-	else {
-
+	} else {
 		presenceData.details = "Bir sayfayı görüntülüyor..";
-
 	}
 
 	presence.setActivity(presenceData);

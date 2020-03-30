@@ -19,7 +19,7 @@ function PMD_success(message) {
 }
 var presence = new Presence({
     clientId: "617500416887881748",
-    mediaKeys: false
+    
 });
 var group, typing, chat, user, search, card, bot, personal2, profile, board2;
 var browsingStamp = Math.floor(Date.now() / 1000);

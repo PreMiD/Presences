@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var presence = new Presence({ clientId: "688752009079160852", mediaKeys: false }), presenceData = { largeImageKey: "logo" }, customData = false;
+var presence = new Presence({ clientId: "688752009079160852",  }), presenceData = { largeImageKey: "logo" }, customData = false;
 var browsingStamp = Math.floor(Date.now() / 1000);
 var url;
 var title;

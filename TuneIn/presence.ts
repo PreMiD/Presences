@@ -1,45 +1,53 @@
 var presence = new Presence({
-	clientId: "619817171928743938",
-	mediaKeys: false
-}),
+		clientId: "619817171928743938"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: 'presence.activity.live'
+		live: "presence.activity.live"
 	});
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	let data: presenceData = {
-		largeImageKey: "tunein-logo",
+		largeImageKey: "tunein-logo"
 	};
 
-	var playerCheck = document.querySelector(".player__playerContainer___JEJ2U") ? true : false;
+	var playerCheck = document.querySelector(".player__playerContainer___JEJ2U")
+		? true
+		: false;
 	if (playerCheck) {
-		var liveCheck = document.querySelector("#scrubberElapsed").textContent == "LIVE" ? true : false;
+		var liveCheck =
+			document.querySelector("#scrubberElapsed").textContent == "LIVE"
+				? true
+				: false;
 		if (liveCheck) {
-			var playCheck = document.querySelector(".player-play-button__playerPlayButton___1Kc2Y[data-testid='player-status-playing']") ? true : false;
+			var playCheck = document.querySelector(
+				".player-play-button__playerPlayButton___1Kc2Y[data-testid='player-status-playing']"
+			)
+				? true
+				: false;
 			if (playCheck) {
 				var title = document.querySelector("#playerTitle").textContent;
 				var author = document.querySelector("#playerSubtitle").textContent;
 
-				data.details = title
+				data.details = title;
 				if (title.length > 128) {
 					data.details = title.substring(0, 125) + "...";
 				}
 
-				data.state = author
+				data.state = author;
 				if (author.length > 128) {
 					data.state = author.substring(0, 125) + "...";
 				}
 
-				data.smallImageKey = "live"
-				data.smallImageText = (await strings).live
+				data.smallImageKey = "live";
+				data.smallImageText = (await strings).live;
 				if (elapsed === null) {
 					elapsed = Math.floor(Date.now() / 1000);
 				}
-				data.startTimestamp = elapsed
+				data.startTimestamp = elapsed;
 				presence.setActivity(data);
 			} else {
 				elapsed = null;
@@ -49,9 +57,14 @@ presence.on("UpdateData", async () => {
 			var title = document.querySelector("#playerTitle").textContent;
 			var author = document.querySelector("#playerSubtitle").textContent;
 			var audioTime = document.querySelector("#scrubberElapsed").textContent;
-			var audioDuration = document.querySelector("#scrubberDuration").textContent;
+			var audioDuration = document.querySelector("#scrubberDuration")
+				.textContent;
 			var timestamps = getTimestamps(audioTime, audioDuration);
-			const paused = document.querySelector(".player-play-button__playerPlayButton___1Kc2Y[data-testid='player-status-paused']") ? true : false;
+			const paused = document.querySelector(
+				".player-play-button__playerPlayButton___1Kc2Y[data-testid='player-status-paused']"
+			)
+				? true
+				: false;
 
 			data.details = title;
 			if (title.length > 128) {
@@ -63,12 +76,12 @@ presence.on("UpdateData", async () => {
 				data.state = author.substring(0, 125) + "...";
 			}
 
-			data.smallImageKey = paused ? "pause" : "play",
-				data.smallImageText = paused
+			(data.smallImageKey = paused ? "pause" : "play"),
+				(data.smallImageText = paused
 					? (await strings).pause
-					: (await strings).play,
-				data.startTimestamp = timestamps[0],
-				data.endTimestamp = timestamps[1]
+					: (await strings).play),
+				(data.startTimestamp = timestamps[0]),
+				(data.endTimestamp = timestamps[1]);
 
 			if (paused) {
 				delete data.startTimestamp;
@@ -101,5 +114,4 @@ presence.on("UpdateData", async () => {
 		}
 		return ret;
 	}
-
 });

@@ -1,6 +1,5 @@
 var presence = new Presence({
-	clientId: "607651992567021580",
-	mediaKeys: true
+	clientId: "607651992567021580"
 });
 var strings = presence.getStrings({
 	play: "presence.playback.playing",
@@ -110,29 +109,6 @@ presence.on("UpdateData", async () => {
 		}
 	} else {
 		presence.clearActivity();
-	}
-});
-
-presence.on("MediaKeys", (key: string) => {
-	switch (key) {
-		case "pause":
-			var pause_button = document.querySelector(
-				".svg-icon-group-item:nth-child(3)"
-			);
-			pause_button.click();
-			break;
-		case "nextTrack":
-			var next_button = document.querySelector(
-				".svg-icon-group-item:nth-child(5)"
-			);
-			next_button.click();
-			break;
-		case "previousTrack":
-			var prev_button = document.querySelector(
-				".svg-icon-group-item:nth-child(1)"
-			);
-			prev_button.click();
-			break;
 	}
 });
 

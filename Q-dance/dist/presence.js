@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "619768959717343242",
-    mediaKeys: false
+    
 }), strings = presence.getStrings({
     live: 'presence.activity.live'
 });

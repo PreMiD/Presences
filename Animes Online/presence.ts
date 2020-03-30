@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "641243628903333900",
-	mediaKeys: false
-}),
+		clientId: "641243628903333900"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "ao"
 	};
@@ -27,7 +24,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing home page";
 		} else if (document.location.pathname.includes("/animes-dublado/")) {
 			presenceData.startTimestamp = browsingStamp;
-			user = document.querySelector("#wrapper > div.container > div.row > div:nth-child(3) > div:nth-child(1) > div.panel.panel-primary > div.panel-heading > h1 > span");
+			user = document.querySelector(
+				"#wrapper > div.container > div.row > div:nth-child(3) > div:nth-child(1) > div.panel.panel-primary > div.panel-heading > h1 > span"
+			);
 			presenceData.details = "Viewing anime dubbed:";
 			presenceData.state = user.textContent;
 			presenceData.smallImageKey = "reading";
@@ -36,7 +35,9 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Browsing for anime dubbeds...";
 		} else if (document.location.pathname.includes("/anime/")) {
 			presenceData.startTimestamp = browsingStamp;
-			user = document.querySelector("#wrapper > div.container > div.row > div:nth-child(3) > div:nth-child(1) > div.panel.panel-primary > div.panel-heading > h1 > span");
+			user = document.querySelector(
+				"#wrapper > div.container > div.row > div:nth-child(3) > div:nth-child(1) > div.panel.panel-primary > div.panel-heading > h1 > span"
+			);
 			presenceData.details = "Viewing anime:";
 			presenceData.state = user.textContent;
 			presenceData.smallImageKey = "reading";
@@ -47,16 +48,26 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing a genre...";
 		} else if (document.location.pathname.includes("/videos/")) {
-			var currentTime: any, duration: any, paused: any, timestamps: any, video: HTMLVideoElement;
-			video = document.querySelector("#playersdbeta > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
-			title = document.querySelector("#wrapper > div.container > div:nth-child(1) > div:nth-child(2) > h1").textContent;
+			var currentTime: any,
+				duration: any,
+				paused: any,
+				timestamps: any,
+				video: HTMLVideoElement;
+			video = document.querySelector(
+				"#playersdbeta > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+			);
+			title = document.querySelector(
+				"#wrapper > div.container > div:nth-child(1) > div:nth-child(2) > h1"
+			).textContent;
 			currentTime = video.currentTime;
 			duration = video.duration;
 			paused = video.paused;
 			timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
 			if (!isNaN(duration)) {
 				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+				presenceData.smallImageText = paused
+					? (await strings).pause
+					: (await strings).play;
 				presenceData.startTimestamp = timestamps[0];
 				presenceData.endTimestamp = timestamps[1];
 
@@ -67,7 +78,6 @@ presence.on("UpdateData", async () => {
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
 				}
-
 			} else if (isNaN(duration)) {
 				presenceData.startTimestamp = browsingStamp;
 				presenceData.details = "Looing at:";
@@ -78,19 +88,17 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

@@ -1,14 +1,19 @@
 var presence = new Presence({
-	clientId: "624006279769227265", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "624006279769227265" // CLIENT ID FOR YOUR PRESENCE
+});
 
-var item: any, user: any, search: any, item2: any, item3: any, server: any, players: any, output: any;
+var item: any,
+	user: any,
+	search: any,
+	item2: any,
+	item3: any,
+	server: any,
+	players: any,
+	output: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "truckersmp"
 	};
@@ -58,7 +63,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/user/")) {
-			item = document.querySelector("body > div.wrapper > div.container.content.profile > div.row > div.col-md-9 > div > div.row > div.col-sm-8.sm-margin-bottom-30 > div > div.profile-bio > div > div > h1");
+			item = document.querySelector(
+				"body > div.wrapper > div.container.content.profile > div.row > div.col-md-9 > div > div.row > div.col-sm-8.sm-margin-bottom-30 > div > div.profile-bio > div > div > h1"
+			);
 			presenceData.details = "Viewing user:";
 			presenceData.state = item.innerText;
 
@@ -66,8 +73,12 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/vtc")) {
-			item = document.querySelector("body > div.wrapper > div.breadcrumbs-v1.text-center.hidden-sm.hidden-xs > div > div > div.col-lg-10.col-md-9 > div > h2");
-			item2 = document.querySelector("body > div.wrapper > div.container > div > div.col-md-9 > h1");
+			item = document.querySelector(
+				"body > div.wrapper > div.breadcrumbs-v1.text-center.hidden-sm.hidden-xs > div > div > div.col-lg-10.col-md-9 > div > h2"
+			);
+			item2 = document.querySelector(
+				"body > div.wrapper > div.container > div > div.col-md-9 > h1"
+			);
 			if (document.location.pathname.includes("/news")) {
 				presenceData.details = "VTC, reading post:";
 				if (item2 == null) {
@@ -118,7 +129,9 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/blog/")) {
-			item = document.querySelector("body > div.wrapper > div.breadcrumbs-v1.text-center.hidden-sm.hidden-xs > div > h1");
+			item = document.querySelector(
+				"body > div.wrapper > div.breadcrumbs-v1.text-center.hidden-sm.hidden-xs > div > h1"
+			);
 			presenceData.details = "Blog, Viewing post:";
 			if (item.innerText.length > 128) {
 				presenceData.state = item.innerText.substring(0, 125) + "...";
@@ -129,24 +142,30 @@ presence.on("UpdateData", async () => {
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-
 		} else if (document.location.pathname.includes("/blog")) {
 			presenceData.details = "Viewing blog posts";
 			delete presenceData.state;
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-
 		} else {
 			presence.setActivity();
 			presence.setTrayTitle();
 		}
 	} else if (document.location.hostname == "forum.truckersmp.com") {
-		item = document.querySelector("#ipsLayout_mainArea > div.ipsColumns > div.ipsColumn.ipsColumn_fluid > div > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span > span");
-		item2 = document.querySelector("#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span > span");
-		item3 = document.querySelector("#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span.ipsType_break.ipsContained > span");
+		item = document.querySelector(
+			"#ipsLayout_mainArea > div.ipsColumns > div.ipsColumn.ipsColumn_fluid > div > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span > span"
+		);
+		item2 = document.querySelector(
+			"#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span > span"
+		);
+		item3 = document.querySelector(
+			"#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span.ipsType_break.ipsContained > span"
+		);
 		if (document.URL.includes("/forum/")) {
-			item = document.querySelector("#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > header > h1");
+			item = document.querySelector(
+				"#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > header > h1"
+			);
 			presenceData.details = "Forums, viewing category:";
 			presenceData.state = item.innerText;
 
@@ -175,7 +194,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.URL.includes("/profile/")) {
-			item = document.querySelector("#elProfileHeader > div.ipsColumns.ipsColumns_collapsePhone > div.ipsColumn.ipsColumn_fluid > div > h1");
+			item = document.querySelector(
+				"#elProfileHeader > div.ipsColumns.ipsColumns_collapsePhone > div.ipsColumn.ipsColumn_fluid > div > h1"
+			);
 			presenceData.details = "Forums, viewing user:";
 			presenceData.state = item.innerText;
 
@@ -251,7 +272,15 @@ presence.on("UpdateData", async () => {
 		if (!user.style.cssText.includes("display: none")) {
 			user = document.querySelector("#playerClicked > div.player-name");
 			item = document.querySelector("#game-time");
-			output = user.innerText + " (Server: " + server + ", In-game time: " + item.innerText + ", " + players + " online)";
+			output =
+				user.innerText +
+				" (Server: " +
+				server +
+				", In-game time: " +
+				item.innerText +
+				", " +
+				players +
+				" online)";
 			presenceData.details = "ETS2Map, tracking player:";
 			if (output.length > 128) {
 				presenceData.state = output.substring(0, 125) + "...";
@@ -263,7 +292,14 @@ presence.on("UpdateData", async () => {
 			presence.setActivity(presenceData);
 		} else {
 			item = document.querySelector("#game-time");
-			output = "Server: " + server + ", In-game time: " + item.innerText + ", " + players + " online"
+			output =
+				"Server: " +
+				server +
+				", In-game time: " +
+				item.innerText +
+				", " +
+				players +
+				" online";
 			presenceData.details = "ETS2Map, viewing:";
 			if (output.length > 128) {
 				presenceData.state = output.substring(0, 125) + "...";
@@ -276,30 +312,39 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.hostname == "traffic.krashnz.com") {
 		if (document.location.pathname.split("/")[3] !== undefined) {
-			item = document.querySelector("body > div.container > div > div:nth-child(1) > ol > li:nth-child(2) > a");
-			item2 = document.querySelector("body > div.container > div > div:nth-child(1) > ol > li.breadcrumb-item.active");
+			item = document.querySelector(
+				"body > div.container > div > div:nth-child(1) > ol > li:nth-child(2) > a"
+			);
+			item2 = document.querySelector(
+				"body > div.container > div > div:nth-child(1) > ol > li.breadcrumb-item.active"
+			);
 			presenceData.details = "Traffic Stats, viewing city:";
-			presenceData.state = item2.innerText.replace(" (City)", "") + " (Server: " + item.innerText + ")";
+			presenceData.state =
+				item2.innerText.replace(" (City)", "") +
+				" (Server: " +
+				item.innerText +
+				")";
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.split("/")[2] !== undefined) {
-			item = document.querySelector("body > div.container > div > div > ol > li.breadcrumb-item.active");
+			item = document.querySelector(
+				"body > div.container > div > div > ol > li.breadcrumb-item.active"
+			);
 			item2 = document.querySelector("#stats-players");
 			output = document.querySelector("#stats-time");
 			presenceData.details = "Traffic Stats, viewing server:";
-			presenceData.state = item.innerText + " (Online: " + item2.innerText + ")";
+			presenceData.state =
+				item.innerText + " (Online: " + item2.innerText + ")";
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
 		} else {
-
 			presenceData.details = "Viewing Traffic Stats";
 			delete presenceData.state;
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-
 		}
 	} else if (document.location.hostname == "stats.truckersmp.com") {
 		if (document.location.pathname.includes("/history")) {
@@ -330,10 +375,7 @@ presence.on("UpdateData", async () => {
 			presence.setActivity(presenceData);
 		}
 	} else {
-
 		presence.setActivity();
 		presence.setTrayTitle();
-
 	}
-
 });

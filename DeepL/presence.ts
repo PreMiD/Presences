@@ -3,15 +3,16 @@
 */
 
 var presence = new Presence({
-	clientId: "614903529240395782",
-	mediaKeys: false
+	clientId: "614903529240395782"
 });
 
 presence.on("UpdateData", async () => {
 	if (document.location.pathname == "/translator") {
 		let presenceData: presenceData = {
-			details: document.getElementsByClassName("translate_from")[0].parentNode.textContent,
-			state: document.getElementsByClassName("translate_to")[0].parentNode.textContent,
+			details: document.getElementsByClassName("translate_from")[0].parentNode
+				.textContent,
+			state: document.getElementsByClassName("translate_to")[0].parentNode
+				.textContent,
 			largeImageKey: "lg-deepl"
 		};
 		presence.setActivity(presenceData);

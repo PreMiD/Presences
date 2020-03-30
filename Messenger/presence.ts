@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "630896385889271819",
-	mediaKeys: false
-}),
+		clientId: "630896385889271819"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -14,16 +13,14 @@ var user: any;
 var typing: any;
 
 presence.on("UpdateData", async () => {
-
-
-	let presenceData: presenceData = {
-	};
-
+	let presenceData: presenceData = {};
 
 	if (document.location.pathname.includes("/videocall/")) {
 		presenceData.largeImageKey = "messenger";
 		presenceData.startTimestamp = browsingStamp;
-		user = document.querySelector("#u_0_0 > div.r30xiam5.m0q0jmkx.alrytcbg.hp5uecnq.g2121wdl > div > div:nth-child(5) > div > div > div > div > div.prklkq8o.t7elcel3.sd0tyowg.ocjcko58.p3f4w9ai.f5zavhip.foed1vyy > div > div > div.ocjcko58.foed1vyy > div > p");
+		user = document.querySelector(
+			"#u_0_0 > div.r30xiam5.m0q0jmkx.alrytcbg.hp5uecnq.g2121wdl > div > div:nth-child(5) > div > div > div > div > div.prklkq8o.t7elcel3.sd0tyowg.ocjcko58.p3f4w9ai.f5zavhip.foed1vyy > div > div > div.ocjcko58.foed1vyy > div > p"
+		);
 		if (user == null || user.innerText == null) {
 			//presenceData.details = "In a video call or";
 			user = "user not found.";
@@ -40,8 +37,10 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/t/")) {
 		presenceData.largeImageKey = "messenger";
 		presenceData.startTimestamp = browsingStamp;
-		user = document.querySelector('._3oh-');
-		typing = document.querySelector("body > div > div > div > div:nth-child(2) > span > div._20bp > div._4_j4 > div._4rv3._7og6 > div > div._7kpk > div > div > div:nth-child(1) > div > div > div > div > div > div > span > span");
+		user = document.querySelector("._3oh-");
+		typing = document.querySelector(
+			"body > div > div > div > div:nth-child(2) > span > div._20bp > div._4_j4 > div._4rv3._7og6 > div > div._7kpk > div > div > div:nth-child(1) > div > div > div > div > div > div > span > span"
+		);
 		if (typing == null) {
 			presenceData.details = "Reading messages from:";
 			presenceData.smallImageKey = "reading";
@@ -63,15 +62,13 @@ presence.on("UpdateData", async () => {
 	}
 
 	presence.setActivity(presenceData);
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

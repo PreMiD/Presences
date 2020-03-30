@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "636654506607771680",
-	mediaKeys: false
-}),
+		clientId: "636654506607771680"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "rlinsider"
 	};
@@ -45,19 +42,17 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

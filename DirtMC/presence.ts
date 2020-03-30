@@ -1,14 +1,12 @@
 var presence = new Presence({
-	clientId: "631995227132919819", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "631995227132919819" // CLIENT ID FOR YOUR PRESENCE
+});
 
 var item: any, user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "dirtmc"
 	};
@@ -36,7 +34,9 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageKey = "reading";
 
 			presence.setActivity(presenceData);
-		} else if (document.querySelector("#site-main > article > header > h1") != null) {
+		} else if (
+			document.querySelector("#site-main > article > header > h1") != null
+		) {
 			title = document.querySelector("#site-main > article > header > h1");
 			presenceData.details = "Reading thread:";
 			if (title.innerText.length > 128) {
@@ -59,10 +59,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else {
-
 		presence.setActivity();
 		presence.setTrayTitle();
-
 	}
-
 });

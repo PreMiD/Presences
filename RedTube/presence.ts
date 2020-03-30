@@ -1,23 +1,25 @@
 var presence = new Presence({
-	clientId: "605861238852943988",
-	mediaKeys: true
-}),
+		clientId: "605861238852943988"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
 	});
 
 presence.on("UpdateData", async () => {
-
-	var video: HTMLVideoElement = document.querySelector(".mhp1138_videoWrapper video");
+	var video: HTMLVideoElement = document.querySelector(
+		".mhp1138_videoWrapper video"
+	);
 	if (video[0] !== null && !isNaN(video.duration)) {
 		//* Get required tags
 		var title: any;
-		title =
-			document.querySelector("#redtube_layout #section_main #content_float #content_wrapper #content_container #main-container #video_left_col .video_left_section .video_header_container #video_header h1");
+		title = document.querySelector(
+			"#redtube_layout #section_main #content_float #content_wrapper #content_container #main-container #video_left_col .video_left_section .video_header_container #video_header h1"
+		);
 
-		var uploader =
-			document.querySelector("#redtube_layout #section_main #content_float #content_wrapper #content_container #main-container #video_left_col #video_underplayer #video-infobox #video-infobox-wrap .video-infobox-col .video-infobox-row .video-infobox-content .video-infobox-link"),
+		var uploader = document.querySelector(
+				"#redtube_layout #section_main #content_float #content_wrapper #content_container #main-container #video_left_col #video_underplayer #video-infobox #video-infobox-wrap .video-infobox-col .video-infobox-row .video-infobox-content .video-infobox-link"
+			),
 			timestamps = getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
@@ -49,15 +51,6 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity();
 		presence.setTrayTitle();
-	}
-});
-
-presence.on("MediaKeys", (key: string) => {
-	switch (key) {
-		case "pause":
-			var video = document.querySelector(".mhp1138_videoWrapper video") as HTMLVideoElement;
-			video.paused ? video.play() : video.pause();
-			break;
 	}
 });
 

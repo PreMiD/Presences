@@ -8,11 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var englishPresence = new Presence({
     clientId: "613417749489778689",
-    mediaKeys: false
+    
 });
 var germanPresence = new Presence({
     clientId: "613418400042975329",
-    mediaKeys: false
+    
 });
 englishPresence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if (document.location.href.includes("tora-dora.fandom.com")) {

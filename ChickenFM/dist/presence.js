@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "614154889206956043",
-    mediaKeys: false
+    
 })
 var loadTimeStamp = Math.floor(Date.now() / 1000);
 let trackTitle, trackArtist, stationName;

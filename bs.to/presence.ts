@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "639568013590528030",
-	mediaKeys: false
-}),
+		clientId: "639568013590528030"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "bs"
 	};
@@ -35,7 +32,9 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing all series";
 		} else if (document.location.pathname.includes("/search")) {
-			search = document.querySelector("#root > section > form > fieldset > label:nth-child(1) > input[type=text]");
+			search = document.querySelector(
+				"#root > section > form > fieldset > label:nth-child(1) > input[type=text]"
+			);
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Searching for:";
 			presenceData.state = search.value;
@@ -43,7 +42,9 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.hostname == "board.bs.to") {
 		if (document.URL.includes("/topic/")) {
-			title = document.querySelector("#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span.ipsType_break.ipsContained > span");
+			title = document.querySelector(
+				"#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span.ipsType_break.ipsContained > span"
+			);
 			presenceData.details = "Forums, viewing thread:";
 			if (title.innerText.length > 128) {
 				presenceData.state = title.innerText.substring(0, 125) + "...";
@@ -60,35 +61,49 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.URL.includes("/profile")) {
-			user = document.querySelector("#elProfileHeader > div.ipsColumns.ipsColumns_collapsePhone > div.ipsColumn.ipsColumn_fluid > div > h1");
+			user = document.querySelector(
+				"#elProfileHeader > div.ipsColumns.ipsColumns_collapsePhone > div.ipsColumn.ipsColumn_fluid > div > h1"
+			);
 			presenceData.details = "Viewing the profile of:";
 			presenceData.state = user.innerText;
 
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.URL.includes("/whats-new/") && document.URL.includes("/profile-posts")) {
+		} else if (
+			document.URL.includes("/whats-new/") &&
+			document.URL.includes("/profile-posts")
+		) {
 			presenceData.details = "Forums, Viewing the list of";
 			presenceData.state = "latest profile posts";
 
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.URL.includes("/whats-new/") && document.URL.includes("/posts")) {
+		} else if (
+			document.URL.includes("/whats-new/") &&
+			document.URL.includes("/posts")
+		) {
 			presenceData.details = "Forums, Viewing the list of";
 			presenceData.state = "latest posts";
 
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.URL.includes("/whats-new/") && document.URL.includes("/news-feed")) {
+		} else if (
+			document.URL.includes("/whats-new/") &&
+			document.URL.includes("/news-feed")
+		) {
 			presenceData.details = "Forums, Viewing the";
 			presenceData.state = "news feed";
 
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.URL.includes("/whats-new/") && document.URL.includes("/news-feed")) {
+		} else if (
+			document.URL.includes("/whats-new/") &&
+			document.URL.includes("/news-feed")
+		) {
 			presenceData.details = "Forums, Viewing the";
 			presenceData.state = "latest activity";
 
@@ -119,10 +134,14 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.URL.includes("/search/")) {
-			search = document.querySelector("#ipsLayout_mainArea > div > div.ipsResponsive_hidePhone.ipsResponsive_block.ipsPageHeader > p");
+			search = document.querySelector(
+				"#ipsLayout_mainArea > div > div.ipsResponsive_hidePhone.ipsResponsive_block.ipsPageHeader > p"
+			);
 			if (search != null) {
 				presenceData.details = "Forums, searching for:";
-				presenceData.state = search.innerText.replace("Showing results for '", "").replace("'.", "");
+				presenceData.state = search.innerText
+					.replace("Showing results for '", "")
+					.replace("'.", "");
 
 				presenceData.smallImageKey = "search";
 
@@ -194,7 +213,9 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.URL.includes("/forum/")) {
-			title = document.querySelector("#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > header > h1");
+			title = document.querySelector(
+				"#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > header > h1"
+			);
 			if (title != null) {
 				presenceData.details = "Forums, viewing category:";
 				presenceData.state = title.innerText;
@@ -206,19 +227,17 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

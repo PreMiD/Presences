@@ -1,7 +1,12 @@
 var presence = new Presence({
-	clientId: "644235680012042261",
-	mediaKeys: false
-}), path, prev, elapsed, prevState, cp: any, currTime: any,
+		clientId: "644235680012042261"
+	}),
+	path,
+	prev,
+	elapsed,
+	prevState,
+	cp: any,
+	currTime: any,
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		browsing: "presence.activity.browsing"
@@ -26,12 +31,20 @@ presence.on("UpdateData", async () => {
 	data.smallImageText = (await strings).browsing;
 	data.startTimestamp = elapsed;
 
-	if (path.includes("/articles/") && (path.split("/")[2] != null && path.split("/")[2].length > 1)) {
+	if (
+		path.includes("/articles/") &&
+		path.split("/")[2] != null &&
+		path.split("/")[2].length > 1
+	) {
 		data.state = document.querySelector("body h1").textContent;
-	}
-	else if (path.includes("/game/") && (path.split("/")[2] != null && path.split("/")[2].length > 1)) {
-
-		data.state = document.querySelector("#chat p.phase").textContent.toUpperCase();
+	} else if (
+		path.includes("/game/") &&
+		path.split("/")[2] != null &&
+		path.split("/")[2].length > 1
+	) {
+		data.state = document
+			.querySelector("#chat p.phase")
+			.textContent.toUpperCase();
 
 		if (data.state !== prevState) {
 			delete data.startTimestamp;
@@ -50,14 +63,10 @@ presence.on("UpdateData", async () => {
 		if (currTime && currTime.includes(":")) {
 			data.startTimestamp = timestamps[0];
 			data.endTimestamp = timestamps[1];
-		}
-		else {
+		} else {
 			data.startTimestamp = cp;
 		}
-
-	}
-	else {
-
+	} else {
 		switch (path) {
 			case "/settings":
 				data.state = "Paramètres";
@@ -75,16 +84,14 @@ presence.on("UpdateData", async () => {
 			default:
 				data.state = "Page d'accueil";
 		}
-
 	}
 	presence.setActivity(data);
-
 });
 
 // ty soundcloud :*
 
 function getTimestamps(audioTime: any, audioDuration: string) {
-	var splitAudioDuration = audioDuration.split(':').reverse();
+	var splitAudioDuration = audioDuration.split(":").reverse();
 
 	var parsedAudioTime = getTime(audioTime);
 	var parsedAudioDuration = getTime(splitAudioDuration);

@@ -4,10 +4,17 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => async () => {
 	const page = document.location.pathname,
-		postTitle = document.querySelector("#content-body-area > div > div > div.content-heading > h1");
+		postTitle = document.querySelector(
+			"#content-body-area > div > div > div.content-heading > h1"
+		);
 
 	if (page.includes("/kategori/")) {
-		const category = document.title[0].toUpperCase() + document.title.replace(" - Ekşi Şeyler", "").slice(1, document.title.length).toLowerCase();
+		const category =
+			document.title[0].toUpperCase() +
+			document.title
+				.replace(" - Ekşi Şeyler", "")
+				.slice(1, document.title.length)
+				.toLowerCase();
 
 		presence.setActivity({
 			largeImageKey: "es-logo",
@@ -16,7 +23,12 @@ presence.on("UpdateData", () => async () => {
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	} else if (page.includes("/kanal/")) {
-		const channel = document.title[0].toUpperCase() + document.title.replace(" - Ekşi Şeyler", "").slice(1, document.title.length).toLowerCase();
+		const channel =
+			document.title[0].toUpperCase() +
+			document.title
+				.replace(" - Ekşi Şeyler", "")
+				.slice(1, document.title.length)
+				.toLowerCase();
 
 		presence.setActivity({
 			largeImageKey: "es-logo",
@@ -25,12 +37,17 @@ presence.on("UpdateData", () => async () => {
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	} else if (page.includes("/derleme/arama/")) {
-		const searchingFor = document.querySelector("#main-content > div > div > div.search-result-info > span");
+		const searchingFor = document.querySelector(
+			"#main-content > div > div > div.search-result-info > span"
+		);
 
 		presence.setActivity({
 			largeImageKey: "es-logo",
 			details: "Bir şey arıyor:",
-			state: searchingFor && searchingFor.textContent != "" ? searchingFor.textContent : "Belirsiz",
+			state:
+				searchingFor && searchingFor.textContent != ""
+					? searchingFor.textContent
+					: "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	} else if (postTitle && postTitle.textContent != "") {

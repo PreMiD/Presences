@@ -1,6 +1,5 @@
 var presence = new Presence({
-	clientId: "620298986380591104",
-	mediaKeys: false
+	clientId: "620298986380591104"
 });
 
 presence.on("UpdateData", () => {
@@ -11,7 +10,11 @@ presence.on("UpdateData", () => {
 			largeImageKey: "lg"
 		};
 		presence.setActivity(presenceData);
-	} else if (urlParams.get("page") && urlParams.get("s") && urlParams.get("page") == "post") {
+	} else if (
+		urlParams.get("page") &&
+		urlParams.get("s") &&
+		urlParams.get("page") == "post"
+	) {
 		if (urlParams.get("s") == "list") {
 			if (urlParams.get("tags")) {
 				var presenceData: presenceData = {

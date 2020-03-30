@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "640969147911503910",
-	mediaKeys: false
-}),
+		clientId: "640969147911503910"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "star"
 	};
@@ -27,21 +24,33 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Betrachtet die Startseite";
 		} else if (document.location.pathname.includes("/artikel/")) {
 			presenceData.startTimestamp = browsingStamp;
-			user = document.querySelector("#content > div:nth-child(3) > div > div > div.col-xs-12.div-article-title > div:nth-child(6) > div:nth-child(1) > h1");
+			user = document.querySelector(
+				"#content > div:nth-child(3) > div > div > div.col-xs-12.div-article-title > div:nth-child(6) > div:nth-child(1) > h1"
+			);
 			presenceData.details = "Liest Artikel:";
 			presenceData.state = user.textContent;
 			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/videos/")) {
-			var currentTime: any, duration: any, paused: any, timestamps: any, video: HTMLVideoElement;
-			video = document.querySelector("#playerID > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
-			title = document.querySelector("#content > div:nth-child(3) > div > div > div > div:nth-child(3) > div > h1").textContent;
+			var currentTime: any,
+				duration: any,
+				paused: any,
+				timestamps: any,
+				video: HTMLVideoElement;
+			video = document.querySelector(
+				"#playerID > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+			);
+			title = document.querySelector(
+				"#content > div:nth-child(3) > div > div > div > div:nth-child(3) > div > h1"
+			).textContent;
 			currentTime = video.currentTime;
 			duration = video.duration;
 			paused = video.paused;
 			timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
 			if (!isNaN(duration)) {
 				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+				presenceData.smallImageText = paused
+					? (await strings).pause
+					: (await strings).play;
 				presenceData.startTimestamp = timestamps[0];
 				presenceData.endTimestamp = timestamps[1];
 
@@ -52,7 +61,6 @@ presence.on("UpdateData", async () => {
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
 				}
-
 			} else if (isNaN(duration)) {
 				presenceData.startTimestamp = browsingStamp;
 				presenceData.details = "Betrachtet:";
@@ -69,15 +77,13 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

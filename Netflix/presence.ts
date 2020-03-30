@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "630480553694593025",
-	mediaKeys: false
-}),
+		clientId: "630480553694593025"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
@@ -14,46 +13,68 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.location.pathname.includes("/watch")) {
-
-		var video: HTMLVideoElement = document.querySelector(".VideoContainer video");
+		var video: HTMLVideoElement = document.querySelector(
+			".VideoContainer video"
+		);
 		if (video && !isNaN(video.duration)) {
-
-			var showCheck = document.querySelector("[class$='title'] .ellipsize-text span") ? true : false;
-			var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+			var showCheck = document.querySelector(
+				"[class$='title'] .ellipsize-text span"
+			)
+				? true
+				: false;
+			var timestamps = getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
 
 			if (showCheck) {
-				data.details = " " + document.querySelector("[class$='title'] .ellipsize-text h4").textContent;
+				data.details =
+					" " +
+					document.querySelector("[class$='title'] .ellipsize-text h4")
+						.textContent;
 
-				if (document.querySelector("[class$='title'] .ellipsize-text span:nth-child(3)")) {
+				if (
+					document.querySelector(
+						"[class$='title'] .ellipsize-text span:nth-child(3)"
+					)
+				) {
 					// if the episode has a title, it's added to season and episode numbers
-					data.state = document.querySelector("[class$='title'] .ellipsize-text span").textContent + " "
-						+ document.querySelector("[class$='title'] .ellipsize-text span:nth-child(3)").textContent;
-				}
-				else {
+					data.state =
+						document.querySelector("[class$='title'] .ellipsize-text span")
+							.textContent +
+						" " +
+						document.querySelector(
+							"[class$='title'] .ellipsize-text span:nth-child(3)"
+						).textContent;
+				} else {
 					// if no episode title, it proceeds with the season and episode numbers only
-					data.state = document.querySelector("[class$='title'] .ellipsize-text span").textContent;
+					data.state = document.querySelector(
+						"[class$='title'] .ellipsize-text span"
+					).textContent;
 				}
-			}
-			else {
+			} else {
 				// if not a show
-				var regExp: any, title = document.querySelector("[class$='title'] h4.ellipsize-text").textContent;
+				var regExp: any,
+					title = document.querySelector("[class$='title'] h4.ellipsize-text")
+						.textContent;
 				if (/\(([^)]+)\)/.test(title.toLowerCase())) {
 					// if is an extra, trailer, teaser or something else
 					regExp = /\(([^)]+)\)/.exec(title);
 					data.details = " " + title.replace(regExp[0], "");
 					data.state = regExp[1];
-				}
-				else {
+				} else {
 					// if it's a movie
 					data.details = " " + title;
 					data.state = "Movie";
 				}
 			}
 
-			data.smallImageKey = video.paused ? "pause" : "play",
-				data.smallImageText = video.paused ? (await strings).pause : (await strings).play,
-				data.startTimestamp = timestamps[0],
-				data.endTimestamp = timestamps[1];
+			(data.smallImageKey = video.paused ? "pause" : "play"),
+				(data.smallImageText = video.paused
+					? (await strings).pause
+					: (await strings).play),
+				(data.startTimestamp = timestamps[0]),
+				(data.endTimestamp = timestamps[1]);
 
 			if (video.paused) {
 				delete data.startTimestamp;
@@ -62,8 +83,7 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(data, !video.paused);
 		}
-	}
-	else {
+	} else {
 		data.details = (await strings).browsing;
 		presence.setActivity(data);
 	}

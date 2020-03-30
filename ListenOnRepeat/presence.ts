@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "639534386538348565",
-	mediaKeys: false
-}),
+		clientId: "639534386538348565"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -9,16 +8,16 @@ var presence = new Presence({
 
 var repeats: any, timestamps: any;
 var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any, playback: any;
+var video: HTMLVideoElement,
+	videoDuration: any,
+	videoCurrentTime: any,
+	playback: any;
 
 var lastPlaybackState = null;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("iFrameData", data => {
-
-	playback =
-		data.iframe_video.duration !== null
-			? true : false
+	playback = data.iframe_video.duration !== null ? true : false;
 
 	if (playback) {
 		iFrameVideo = data.iframe_video.iFrameVideo;
@@ -26,7 +25,6 @@ presence.on("iFrameData", data => {
 		duration = data.iframe_video.dur;
 		paused = data.iframe_video.paused;
 	}
-
 });
 
 presence.on("UpdateData", async () => {
@@ -35,18 +33,22 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (lastPlaybackState != playback) {
-		lastPlaybackState = playback
-		browsingStamp = Math.floor(Date.now() / 1000)
+		lastPlaybackState = playback;
+		browsingStamp = Math.floor(Date.now() / 1000);
 	}
 
 	if (iFrameVideo == true && !isNaN(duration)) {
 		timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
 		presenceData.smallImageKey = paused ? "pause" : "repeat";
-		presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+		presenceData.smallImageText = paused
+			? (await strings).pause
+			: (await strings).play;
 		presenceData.startTimestamp = timestamps[0];
 		presenceData.endTimestamp = timestamps[1];
 		presenceData.details = document.title.split(" - Listen On Repeat")[0];
-		repeats = document.querySelector("#content > div.main-area-offset > div:nth-child(2) > div.player-card > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(2) > div > span");
+		repeats = document.querySelector(
+			"#content > div.main-area-offset > div:nth-child(2) > div.player-card > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(2) > div > span"
+		);
 		presenceData.state = "Repeats: " + repeats.textContent;
 		if (paused) {
 			delete presenceData.startTimestamp;
@@ -58,7 +60,6 @@ presence.on("UpdateData", async () => {
 		presenceData.state = document.title.split(" - Listen On Repeat")[0];
 		presenceData.smallImageKey = "reading";
 	}
-
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();

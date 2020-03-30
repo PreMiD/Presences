@@ -1,14 +1,12 @@
 var presence = new Presence({
-	clientId: "629428243061145640", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "629428243061145640" // CLIENT ID FOR YOUR PRESENCE
+});
 
 var item: any, user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "pinterest"
 	};
@@ -21,17 +19,30 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/search/")) {
-		search = document.querySelector("#HeaderContent > div > div > div > div > div > div > div > div > div > div > input");
+		search = document.querySelector(
+			"#HeaderContent > div > div > div > div > div > div > div > div > div > div > input"
+		);
 		presenceData.details = "Searching for:";
 		presenceData.state = search.value;
 
 		presenceData.smallImageKey = "search";
 
 		presence.setActivity(presenceData);
-	} else if (document.querySelector("#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5") != null || document.querySelector("body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5") != null) {
-		user = document.querySelector("#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5");
+	} else if (
+		document.querySelector(
+			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
+		) != null ||
+		document.querySelector(
+			"body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
+		) != null
+	) {
+		user = document.querySelector(
+			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
+		);
 		if (user == null) {
-			user = document.querySelector("body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5");
+			user = document.querySelector(
+				"body > div > div.App.AppBase > div.appContent > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h5"
+			);
 		}
 		presenceData.details = "Viewing user:";
 		presenceData.state = user.innerText;
@@ -39,10 +50,21 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData);
-	} else if (document.querySelector("#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4") != null || document.querySelector("body > div > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4")) {
-		user = document.querySelector("#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4");
+	} else if (
+		document.querySelector(
+			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
+		) != null ||
+		document.querySelector(
+			"body > div > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
+		)
+	) {
+		user = document.querySelector(
+			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
+		);
 		if (user == null) {
-			user = document.querySelector("body > div > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4");
+			user = document.querySelector(
+				"body > div > div.App.AppBase > div.appContent > div > div > div > div > div.BrioProfileHeaderWrapper > div:nth-child(1) > div > div > div > div > div > div > div > div:nth-child(1) > h4"
+			);
 		}
 		presenceData.details = "Viewing user:";
 		presenceData.state = user.innerText;
@@ -50,10 +72,21 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData);
-	} else if (document.querySelector("body > div > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4") != null || document.querySelector("#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4") != null) {
-		title = document.querySelector("body > div > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4");
+	} else if (
+		document.querySelector(
+			"body > div > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
+		) != null ||
+		document.querySelector(
+			"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
+		) != null
+	) {
+		title = document.querySelector(
+			"body > div > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
+		);
 		if (title == null) {
-			title = document.querySelector("#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4");
+			title = document.querySelector(
+				"#__PWS_ROOT__ > div.App.AppBase > div.appContent > div > div > div > div > div > div > div > div > div > div.boardHeaderWrapper > div > div > div > div:nth-child(1) > h4"
+			);
 		}
 		presenceData.details = "Viewing board:";
 		presenceData.state = title.innerText;
@@ -89,7 +122,11 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData);
-	} else if (document.querySelector("#__PWS_ROOT__ > div.App.AppBase") != null && document.querySelector("#__PWS_ROOT__ > div.App.AppBase").className == "App AppBase") {
+	} else if (
+		document.querySelector("#__PWS_ROOT__ > div.App.AppBase") != null &&
+		document.querySelector("#__PWS_ROOT__ > div.App.AppBase").className ==
+			"App AppBase"
+	) {
 		presenceData.details = "Viewing the home page";
 		delete presenceData.state;
 
@@ -105,5 +142,4 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	}
-
 });

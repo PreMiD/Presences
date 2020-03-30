@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: '612793327510749210',
-    mediaKeys: false
+    
 });
 var oldUrl, elapsed, state, gameName, gameScore, gamePlace, gameQuestions;
 presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {

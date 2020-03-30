@@ -1,24 +1,32 @@
 var presence = new Presence({
-	clientId: "626536244670889985", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "626536244670889985" // CLIENT ID FOR YOUR PRESENCE
+});
 
 var item: any, user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "curseforge"
 	};
-	function setStateGame(game: string, categoryURL: string, categoryText: string, categoryTextSingle: string) {
+	function setStateGame(
+		game: string,
+		categoryURL: string,
+		categoryText: string,
+		categoryTextSingle: string
+	) {
 		if (document.location.pathname.includes("/" + categoryURL + "/")) {
-			title = document.querySelector("body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > header > div.container.mx-auto.mt-auto.flex.justify-between > div:nth-child(1) > div > div:nth-child(1) > h2");
+			title = document.querySelector(
+				"body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > header > div.container.mx-auto.mt-auto.flex.justify-between > div:nth-child(1) > div > div:nth-child(1) > h2"
+			);
 			if (title == null) {
-				title = document.querySelector("body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > div > section > div.px-2.flex-1 > div > div.flex.flex-col.mb-4 > h2");
+				title = document.querySelector(
+					"body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > div > section > div.px-2.flex-1 > div > div.flex.flex-col.mb-4 > h2"
+				);
 				presenceData.details = game + ", Viewing category:";
-				presenceData.state = categoryText + " - " + title.innerText.replace("All ", "");
+				presenceData.state =
+					categoryText + " - " + title.innerText.replace("All ", "");
 
 				delete presenceData.smallImageKey;
 
@@ -51,8 +59,6 @@ presence.on("UpdateData", async () => {
 			presence.setActivity(presenceData);
 		}
 	}
-
-
 
 	presenceData.startTimestamp = browsingStamp;
 	if (document.location.hostname == "www.curseforge.com") {
@@ -149,7 +155,9 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/staxel/")) {
 			setStateGame("Staxel", "staxel-mods", "Mods", "mod");
 		} else if (document.location.pathname.includes("/members/")) {
-			user = document.querySelector("body > div.flex.flex-col.min-h-full.min-h-screen > main > section > div > div.text-base > div.username.text-xl");
+			user = document.querySelector(
+				"body > div.flex.flex-col.min-h-full.min-h-screen > main > section > div > div.text-base > div.username.text-xl"
+			);
 			presenceData.details = "Viewing user:";
 			presenceData.state = user.innerText;
 
@@ -188,7 +196,10 @@ presence.on("UpdateData", async () => {
 			presence.setActivity();
 			presence.setTrayTitle();
 		}
-	} else if (document.location.hostname == "minecraft.curseforge.com" || document.location.hostname == "authors.curseforge.com") {
+	} else if (
+		document.location.hostname == "minecraft.curseforge.com" ||
+		document.location.hostname == "authors.curseforge.com"
+	) {
 		if (document.location.pathname.includes("/forums/")) {
 			title = document.querySelector("#content > section > div > header > h2");
 			if (title != null) {
@@ -198,8 +209,14 @@ presence.on("UpdateData", async () => {
 				delete presenceData.smallImageKey;
 
 				presence.setActivity(presenceData);
-			} else if (document.querySelector("#content > section > div > div > header > h2") !== null) {
-				title = document.querySelector("#content > section > div > div > header > h2");
+			} else if (
+				document.querySelector(
+					"#content > section > div > div > header > h2"
+				) !== null
+			) {
+				title = document.querySelector(
+					"#content > section > div > div > header > h2"
+				);
 				presenceData.details = "Forums, reading thread:";
 				if (title.innerText.length > 128) {
 					presenceData.state = title.innerText.substring(0, 125) + "...";
@@ -314,8 +331,14 @@ presence.on("UpdateData", async () => {
 						presence.setActivity(presenceData);
 						break;
 				}
-			} else if (document.querySelector("#content > section > section > div.p-user-info > ul.p-user-details > li.username") !== null) {
-				user = document.querySelector("#content > section > section > div.p-user-info > ul.p-user-details > li.username");
+			} else if (
+				document.querySelector(
+					"#content > section > section > div.p-user-info > ul.p-user-details > li.username"
+				) !== null
+			) {
+				user = document.querySelector(
+					"#content > section > section > div.p-user-info > ul.p-user-details > li.username"
+				);
 				presenceData.details = "Forums, Viewing user:";
 				presenceData.state = user.innerText;
 
@@ -338,8 +361,14 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		}
-	} else if (document.querySelector("#content > section > div.featured-site-info-container > div > h2") !== null) {
-		title = document.querySelector("#content > section > div.featured-site-info-container > div > h2");
+	} else if (
+		document.querySelector(
+			"#content > section > div.featured-site-info-container > div > h2"
+		) !== null
+	) {
+		title = document.querySelector(
+			"#content > section > div.featured-site-info-container > div > h2"
+		);
 		presenceData.details = "Viewing game:";
 		presenceData.state = title.innerText;
 
@@ -347,10 +376,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else {
-
 		presence.setActivity();
 		presence.setTrayTitle();
-
 	}
-
 });

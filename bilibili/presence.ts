@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "639591760791732224",
-	mediaKeys: false
-}),
+		clientId: "639591760791732224"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -17,29 +16,29 @@ var search: any;
 var UID: any;
 var page: any;
 var searchTab: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any, playback: any, iFramePaused: any;
+var iFrameVideo: boolean,
+	currentTime: any,
+	duration: any,
+	paused: any,
+	playback: any,
+	iFramePaused: any;
 
-searchhome = document.querySelector("#server-search-app > div > div > div.home-suggest.clearfix");
+searchhome = document.querySelector(
+	"#server-search-app > div > div > div.home-suggest.clearfix"
+);
 
 presence.on("iFrameData", data => {
-
-	playback =
-		data.iframe_video.duration !== null
-			? true : false
+	playback = data.iframe_video.duration !== null ? true : false;
 
 	if (playback) {
-
 		iFrameVideo = data.iframe_video.iFrameVideo;
 		currentTime = data.iframe_video.currTime;
 		duration = data.iframe_video.dur;
 		iFramePaused = data.iframe_video.test;
 	}
-
 });
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "bb"
 	};
@@ -48,32 +47,50 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname == "/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Browsing...";
-			user = document.querySelector("#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a");
+			user = document.querySelector(
+				"#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a"
+			);
 			//video
 		} else if (document.location.pathname.includes("/video/")) {
-			var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any, videoPaused: any;
-			video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
+			var video: HTMLVideoElement,
+				videoDuration: any,
+				videoCurrentTime: any,
+				videoPaused: any;
+			video = document.querySelector(
+				"#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+			);
 			if (video == null) {
-				video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.video-state-pause > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
+				video = document.querySelector(
+					"#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.video-state-pause > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+				);
 			}
 			if (video == null) {
-				video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
+				video = document.querySelector(
+					"#bilibiliPlayer > div.bilibili-player-area.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+				);
 			}
 			if (video == null) {
 				video = document.querySelector(".bilibili-player-video > video");
 			}
 			if (video == null) {
-				video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.progress-shadow-show > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
+				video = document.querySelector(
+					"#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.progress-shadow-show > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+				);
 			}
 
 			videoDuration = video.duration;
 			videoCurrentTime = video.currentTime;
 			videoPaused = video.paused;
 
-			var timestamps = getTimestamps(Math.floor(videoCurrentTime), Math.floor(videoDuration));
+			var timestamps = getTimestamps(
+				Math.floor(videoCurrentTime),
+				Math.floor(videoDuration)
+			);
 
 			presenceData.smallImageKey = videoPaused ? "pause" : "play";
-			presenceData.smallImageText = videoPaused ? (await strings).pause : (await strings).play;
+			presenceData.smallImageText = videoPaused
+				? (await strings).pause
+				: (await strings).play;
 			presenceData.startTimestamp = timestamps[0];
 			presenceData.endTimestamp = timestamps[1];
 
@@ -83,19 +100,26 @@ presence.on("UpdateData", async () => {
 			}
 
 			title = document.querySelector("#viewbox_report > h1");
-			user = document.querySelector("#v_upinfo > div.u-info > div > a.username");
+			user = document.querySelector(
+				"#v_upinfo > div.u-info > div > a.username"
+			);
 			presenceData.details = title.innerText;
 			presenceData.state = "By user: " + user.innerText;
 			//播放历史
-		} else if (document.location.pathname == ("/account/history")) {
+		} else if (document.location.pathname == "/account/history") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing history";
 			//活动
 		} else if (document.location.pathname.includes("/blackboard/")) {
-			var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+			var timestamps = getTimestamps(
+				Math.floor(currentTime),
+				Math.floor(duration)
+			);
 
 			presenceData.smallImageKey = iFramePaused ? "pause" : "play";
-			presenceData.smallImageText = iFramePaused ? (await strings).pause : (await strings).play;
+			presenceData.smallImageText = iFramePaused
+				? (await strings).pause
+				: (await strings).play;
 			presenceData.startTimestamp = timestamps[0];
 			presenceData.endTimestamp = timestamps[1];
 
@@ -106,32 +130,54 @@ presence.on("UpdateData", async () => {
 
 			title = document.querySelector("head > title");
 			presenceData.details = "Viewing Blackboard";
-			presenceData.state = title.innerText.replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili", "").replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~ - bilibili", "").replace(" - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili", "");
+			presenceData.state = title.innerText
+				.replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili", "")
+				.replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~ - bilibili", "")
+				.replace(
+					" - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili",
+					""
+				);
 			//番剧
 		} else if (document.location.pathname.includes("/bangumi/")) {
-			var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any, paused: any;
-			video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
+			var video: HTMLVideoElement,
+				videoDuration: any,
+				videoCurrentTime: any,
+				paused: any;
+			video = document.querySelector(
+				"#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+			);
 			if (video == null) {
-				video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.video-state-pause > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
+				video = document.querySelector(
+					"#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.video-state-pause > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+				);
 			}
 			if (video == null) {
-				video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
+				video = document.querySelector(
+					"#bilibiliPlayer > div.bilibili-player-area.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+				);
 			}
 			if (video == null) {
 				video = document.querySelector(".bilibili-player-video > video");
 			}
 			if (video == null) {
-				video = document.querySelector("#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.progress-shadow-show > div.bilibili-player-video-wrap > div.bilibili-player-video > video");
+				video = document.querySelector(
+					"#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.progress-shadow-show > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+				);
 			}
 
 			videoDuration = video.duration;
 			videoCurrentTime = video.currentTime;
 			paused = video.paused;
 
-			var timestamps = getTimestamps(Math.floor(videoCurrentTime), Math.floor(videoDuration));
+			var timestamps = getTimestamps(
+				Math.floor(videoCurrentTime),
+				Math.floor(videoDuration)
+			);
 
 			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+			presenceData.smallImageText = paused
+				? (await strings).pause
+				: (await strings).play;
 			presenceData.startTimestamp = timestamps[0];
 			presenceData.endTimestamp = timestamps[1];
 
@@ -141,19 +187,21 @@ presence.on("UpdateData", async () => {
 			}
 
 			title = document.querySelector("#media_module > div > a.media-title");
-			page = document.querySelector("#eplist_module > div.list-wrapper.simple > ul > li.ep-item.cursor.visited > span");
+			page = document.querySelector(
+				"#eplist_module > div.list-wrapper.simple > ul > li.ep-item.cursor.visited > span"
+			);
 
 			presenceData.details = title.innerText;
 			presenceData.state = "Episode: " + page.innerText + "";
 			//小黑屋
-		} else if (document.location.pathname == ("/blackroom/")) {
+		} else if (document.location.pathname == "/blackroom/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Blackroom system";
 		} else if (document.location.pathname.includes("/blackroom/ban/")) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Blackroom system";
 			presenceData.state = "Browsing Banned";
-		} else if (document.location.pathname == ("/judgement/")) {
+		} else if (document.location.pathname == "/judgement/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Judgement system";
 		} else if (document.location.pathname.includes("/judgement/index")) {
@@ -169,7 +217,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Judgement system";
 			presenceData.state = "Overwatching case";
 			//ranking
-		} else if (document.location.pathname == ("/ranking")) {
+		} else if (document.location.pathname == "/ranking") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Browsing ranking";
 		} else if (document.location.pathname.includes("/ranking/all/")) {
@@ -194,7 +242,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Newbie";
 			//Subcategory
 			//动画
-		} else if (document.location.pathname == ("/v/douga/")) {
+		} else if (document.location.pathname == "/v/douga/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Anime";
 		} else if (document.location.pathname.includes("/v/douga/mad")) {
@@ -218,7 +266,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Anime";
 			presenceData.state = "└ Other";
 			//番剧
-		} else if (document.location.pathname == ("/anime/")) {
+		} else if (document.location.pathname == "/anime/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Bangumi";
 		} else if (document.location.pathname.includes("/v/anime/serial/")) {
@@ -246,7 +294,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Bangumi";
 			presenceData.state = "└ Index";
 			//国创
-		} else if (document.location.pathname == ("/guochuang/")) {
+		} else if (document.location.pathname == "/guochuang/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Domestic";
 		} else if (document.location.pathname.includes("/v/guochuang/chinese/")) {
@@ -261,11 +309,15 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Domestic";
 			presenceData.state = "└ Glove puppetry";
-		} else if (document.location.pathname.includes("/v/guochuang/motioncomic/")) {
+		} else if (
+			document.location.pathname.includes("/v/guochuang/motioncomic/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Domestic";
 			presenceData.state = "└ Motioncomic·Radio";
-		} else if (document.location.pathname.includes("/v/guochuang/information/")) {
+		} else if (
+			document.location.pathname.includes("/v/guochuang/information/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Domestic";
 			presenceData.state = "└ Information";
@@ -278,7 +330,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Domestic";
 			presenceData.state = "└ Index";
 			//音乐
-		} else if (document.location.pathname == ("/v/music/")) {
+		} else if (document.location.pathname == "/v/music/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Music";
 		} else if (document.location.pathname.includes("/v/music/original/")) {
@@ -319,7 +371,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Music";
 			presenceData.state = "└ Audio";
 			//舞蹈
-		} else if (document.location.pathname == ("/v/dance/")) {
+		} else if (document.location.pathname == "/v/dance/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Dance";
 		} else if (document.location.pathname.includes("/v/dance/otaku/")) {
@@ -347,7 +399,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Dance";
 			presenceData.state = "└ Tutorial";
 			//游戏
-		} else if (document.location.pathname == ("/v/game/")) {
+		} else if (document.location.pathname == "/v/game/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Game";
 		} else if (document.location.pathname.includes("/v/game/stand_alone/")) {
@@ -387,7 +439,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Dance";
 			presenceData.state = "└ Tournaments";
 			//科技
-		} else if (document.location.pathname == ("/v/technology/")) {
+		} else if (document.location.pathname == "/v/technology/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Tech";
 		} else if (document.location.pathname.includes("/v/technology/fun/")) {
@@ -398,7 +450,9 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Tech";
 			presenceData.state = "└ Technique";
-		} else if (document.location.pathname.includes("/v/technology/speech_course/")) {
+		} else if (
+			document.location.pathname.includes("/v/technology/speech_course/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Tech";
 			presenceData.state = "└ Speech·Open class";
@@ -406,16 +460,20 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Tech";
 			presenceData.state = "└ Military";
-		} else if (document.location.pathname.includes("/v/technology/mechanical/")) {
+		} else if (
+			document.location.pathname.includes("/v/technology/mechanical/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Tech";
 			presenceData.state = "└ Mechanical";
-		} else if (document.location.pathname.includes("/v/technology/automobile/")) {
+		} else if (
+			document.location.pathname.includes("/v/technology/automobile/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Tech";
 			presenceData.state = "└ Automobile";
 			//数码
-		} else if (document.location.pathname == ("/v/digital/")) {
+		} else if (document.location.pathname == "/v/digital/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Digital";
 		} else if (document.location.pathname.includes("/v/digital/mobile/")) {
@@ -430,12 +488,14 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Digital";
 			presenceData.state = "└ Photography";
-		} else if (document.location.pathname.includes("/v/digital/intelligence_av/")) {
+		} else if (
+			document.location.pathname.includes("/v/digital/intelligence_av/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Digital";
 			presenceData.state = "└ Intelligence";
 			//生活
-		} else if (document.location.pathname == ("/v/life/")) {
+		} else if (document.location.pathname == "/v/life/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Life";
 		} else if (document.location.pathname.includes("/v/life/funny/")) {
@@ -471,7 +531,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Life";
 			presenceData.state = "└ Other";
 			//鬼畜
-		} else if (document.location.pathname == ("/v/kichiku/")) {
+		} else if (document.location.pathname == "/v/kichiku/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Kichiku";
 		} else if (document.location.pathname.includes("/v/kichiku/guide/")) {
@@ -482,7 +542,9 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Kichiku";
 			presenceData.state = "└ Voice MAD";
-		} else if (document.location.pathname.includes("/v/kichiku/manual_vocaloid/")) {
+		} else if (
+			document.location.pathname.includes("/v/kichiku/manual_vocaloid/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Kichiku";
 			presenceData.state = "└ Manual Vocaloid";
@@ -491,7 +553,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Kichiku";
 			presenceData.state = "└ Course";
 			//时尚
-		} else if (document.location.pathname == ("/v/fashion/")) {
+		} else if (document.location.pathname == "/v/fashion/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Fashion";
 		} else if (document.location.pathname.includes("/v/fashion/makeup/")) {
@@ -515,11 +577,11 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Fashion";
 			presenceData.state = "└ Trends";
 			//广告
-		} else if (document.location.pathname == ("/v/ad/ad")) {
+		} else if (document.location.pathname == "/v/ad/ad") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing ADs";
 			//娱乐
-		} else if (document.location.pathname == ("/v/ent/")) {
+		} else if (document.location.pathname == "/v/ent/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Entertainment";
 		} else if (document.location.pathname.includes("/v/ent/variety/")) {
@@ -535,7 +597,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Entertainment";
 			presenceData.state = "└ Variety Korea";
 			//影视
-		} else if (document.location.pathname == ("/v/cinephile/")) {
+		} else if (document.location.pathname == "/v/cinephile/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Film";
 		} else if (document.location.pathname.includes("/v/cinephile/cinecism/")) {
@@ -550,16 +612,18 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Film";
 			presenceData.state = "└ Shortfilm";
-		} else if (document.location.pathname.includes("/v/cinephile/trailer_info/")) {
+		} else if (
+			document.location.pathname.includes("/v/cinephile/trailer_info/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Film";
 			presenceData.state = "└ Information";
 			//放映厅
-		} else if (document.location.pathname == ("/cinema/")) {
+		} else if (document.location.pathname == "/cinema/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing cinema";
 			//纪录片
-		} else if (document.location.pathname == ("/documentary/")) {
+		} else if (document.location.pathname == "/documentary/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Documentary";
 		} else if (document.location.pathname.includes("/v/documentary/history/")) {
@@ -570,7 +634,9 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Documentary";
 			presenceData.state = "└ Science·Exploration·Nature";
-		} else if (document.location.pathname.includes("/v/documentary/military/")) {
+		} else if (
+			document.location.pathname.includes("/v/documentary/military/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Documentary";
 			presenceData.state = "└ Military";
@@ -583,7 +649,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Documentary";
 			presenceData.state = "└ Index";
 			//电影
-		} else if (document.location.pathname == ("/movie/")) {
+		} else if (document.location.pathname == "/movie/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Movie";
 		} else if (document.location.pathname.includes("/v/movie/chinese/")) {
@@ -607,7 +673,7 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing Movie";
 			presenceData.state = "└ Index";
 			//电视剧
-		} else if (document.location.pathname == ("/tv/")) {
+		} else if (document.location.pathname == "/tv/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing TV series";
 		} else if (document.location.pathname.includes("/v/tv/mainland/")) {
@@ -624,8 +690,12 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "└ index";
 			//专栏
 		} else if (document.location.pathname.includes("/read/")) {
-			user = document.querySelector("body > div.page-container > div.up-info-holder > div > div.up-info-block > div > div.row > a");
-			title = document.querySelector("body > div.page-container > div.head-container > div.title-container > h1");
+			user = document.querySelector(
+				"body > div.page-container > div.up-info-holder > div > div.up-info-block > div > div.row > a"
+			);
+			title = document.querySelector(
+				"body > div.page-container > div.head-container > div.title-container > h1"
+			);
 			if (user !== null && title !== null) {
 				presenceData.startTimestamp = browsingStamp;
 				presenceData.details = "Reading column: ";
@@ -638,13 +708,17 @@ presence.on("UpdateData", async () => {
 		}
 		//dynamic
 	} else if (document.location.hostname == "t.bilibili.com") {
-		user = document.querySelector("#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a");
+		user = document.querySelector(
+			"#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a"
+		);
 		if (user !== null) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Reading " + user.innerText + "'s dynamic";
 			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/topic")) {
-			title = document.querySelector("#app > div.page-container.p-rel > div.top-header.p-rel > div.tag-title-content.fs-28.ls-0 > div.tag-title.d-i-block")
+			title = document.querySelector(
+				"#app > div.page-container.p-rel > div.top-header.p-rel > div.tag-title-content.fs-28.ls-0 > div.tag-title.d-i-block"
+			);
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Browsing dynamic";
 			presenceData.state = "Tag: " + title.innerText;
@@ -655,16 +729,25 @@ presence.on("UpdateData", async () => {
 
 		//shortfilm
 	} else if (document.location.hostname == "vc.bilibili.com") {
-		user = document.querySelector("#app > div > div.left-section.f-left > div.uploader-box.module-card.border-box > div > div > div.user > a");
-		video = document.querySelector("#app > div > div.left-section.f-left > div.player-area.module-card > div.player-box > div > div > div.bilibili-link-player-video-component > div > video");
+		user = document.querySelector(
+			"#app > div > div.left-section.f-left > div.uploader-box.module-card.border-box > div > div > div.user > a"
+		);
+		video = document.querySelector(
+			"#app > div > div.left-section.f-left > div.player-area.module-card > div.player-box > div > div > div.bilibili-link-player-video-component > div > video"
+		);
 		videoDuration = video.duration;
 		videoCurrentTime = video.currentTime;
 		paused = video.paused;
 
-		var timestamps = getTimestamps(Math.floor(videoCurrentTime), Math.floor(videoDuration));
+		var timestamps = getTimestamps(
+			Math.floor(videoCurrentTime),
+			Math.floor(videoDuration)
+		);
 
 		presenceData.smallImageKey = paused ? "pause" : "play";
-		presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+		presenceData.smallImageText = paused
+			? (await strings).pause
+			: (await strings).play;
 		presenceData.startTimestamp = timestamps[0];
 		presenceData.endTimestamp = timestamps[1];
 
@@ -681,11 +764,13 @@ presence.on("UpdateData", async () => {
 		//space
 	} else if (document.location.hostname == "space.bilibili.com") {
 		user = document.querySelector("#h-name");
-		UID = document.querySelector("#page-index > div.col-2 > div.section.user.private > div.info > div > div > div > div.item.uid > span.text");
+		UID = document.querySelector(
+			"#page-index > div.col-2 > div.section.user.private > div.info > div > div > div > div.item.uid > span.text"
+		);
 		if (user !== null && UID !== null) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing user space";
-			presenceData.state = user.innerText + " | UID: " + UID.innerText
+			presenceData.state = user.innerText + " | UID: " + UID.innerText;
 		} else {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Browsing Someone's space";
@@ -703,23 +788,29 @@ presence.on("UpdateData", async () => {
 		}
 		//会员购
 	} else if (document.location.hostname == "show.bilibili.com") {
-		title = document.querySelector("#app > div.buyticket > div.whole-detail-info-wrapper > div.detail-info-wrapper > div.product-info-name");
+		title = document.querySelector(
+			"#app > div.buyticket > div.whole-detail-info-wrapper > div.detail-info-wrapper > div.product-info-name"
+		);
 		if (title !== null) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing 会员购";
-			presenceData.state = title.innerText
+			presenceData.state = title.innerText;
 		} else {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Browsing 会员购";
 		}
 		//漫画
 	} else if (document.location.hostname == "manga.bilibili.com") {
-		page = document.querySelector("body > div.reader-layout.w-100.h-100.p-absolute.p-zero > div > div.info-hud.none-select.info-hud.p-absolute.info-layer > div.hinter-image-container.single > span");
-		title = document.querySelector("body > div.reader-layout.w-100.h-100.p-absolute.p-zero > div > div.manga-reader-ui > div.navbar-container.w-100.p-absolute.p-zero.a-move-in-bottom > nav > div > div.read-nav > a:nth-child(3)");
+		page = document.querySelector(
+			"body > div.reader-layout.w-100.h-100.p-absolute.p-zero > div > div.info-hud.none-select.info-hud.p-absolute.info-layer > div.hinter-image-container.single > span"
+		);
+		title = document.querySelector(
+			"body > div.reader-layout.w-100.h-100.p-absolute.p-zero > div > div.manga-reader-ui > div.navbar-container.w-100.p-absolute.p-zero.a-move-in-bottom > nav > div > div.read-nav > a:nth-child(3)"
+		);
 		if (title !== null) {
 			presenceData.startTimestamp = browsingStamp;
-			presenceData.details = title.innerText
-			presenceData.state = "Reading P." + page.innerText
+			presenceData.details = title.innerText;
+			presenceData.state = "Reading P." + page.innerText;
 			presenceData.smallImageKey = "reading";
 		} else {
 			presenceData.startTimestamp = browsingStamp;
@@ -728,11 +819,13 @@ presence.on("UpdateData", async () => {
 		}
 		//手游
 	} else if (document.location.hostname == "www.biligame.com") {
-		title = document.querySelector("body > div.bui-gc > div.header-bar.one-row > div.right-panel > div > div > h2 > span:nth-child(1)");
+		title = document.querySelector(
+			"body > div.bui-gc > div.header-bar.one-row > div.right-panel > div > div > h2 > span:nth-child(1)"
+		);
 		if (title !== null) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing Game";
-			presenceData.state = title.innerText
+			presenceData.state = title.innerText;
 		} else {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Browsing Game";
@@ -744,15 +837,21 @@ presence.on("UpdateData", async () => {
 		}
 		//live
 	} else if (document.location.hostname == "live.bilibili.com") {
-		user = document.querySelector("#head-info-vm > div > div > div.room-info-down-row > a.room-owner-username.live-skin-normal-a-text.dp-i-block.v-middle");
-		title = document.querySelector("#head-info-vm > div > div > div.room-info-upper-row.p-relative > div.normal-mode > div:nth-child(1) > h1 > span.title-length-limit.live-skin-main-text.v-middle.dp-i-block.small-title");
+		user = document.querySelector(
+			"#head-info-vm > div > div > div.room-info-down-row > a.room-owner-username.live-skin-normal-a-text.dp-i-block.v-middle"
+		);
+		title = document.querySelector(
+			"#head-info-vm > div > div > div.room-info-upper-row.p-relative > div.normal-mode > div:nth-child(1) > h1 > span.title-length-limit.live-skin-main-text.v-middle.dp-i-block.small-title"
+		);
 		if (user !== null && UID !== null) {
 			presenceData.startTimestamp = browsingStamp;
-			presenceData.details = "Watching " + user.innerText + "'s streaming"
-			presenceData.state = title.innerText
+			presenceData.details = "Watching " + user.innerText + "'s streaming";
+			presenceData.state = title.innerText;
 			presenceData.smallImageKey = "live";
 		} else if (document.location.pathname.includes("/p/")) {
-			title = document.querySelector("body > div.app-ctnr > div.wrapper > div > header > h2");
+			title = document.querySelector(
+				"body > div.app-ctnr > div.wrapper > div > header > h2"
+			);
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Browsing for live category";
 			presenceData.state = "└ " + title.innerText;
@@ -765,7 +864,10 @@ presence.on("UpdateData", async () => {
 			var searchinput = document.querySelector("head > title");
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Bilibili Search";
-			presenceData.state = searchinput.innerHTML.replace(" - 搜索结果 - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili", "");
+			presenceData.state = searchinput.innerHTML.replace(
+				" - 搜索结果 - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili",
+				""
+			);
 		}
 	} else if (document.location.hostname == "message.bilibili.com") {
 		if (document.URL.includes("/#/reply")) {
@@ -805,17 +907,13 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
-
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

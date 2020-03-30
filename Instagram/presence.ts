@@ -1,10 +1,9 @@
 var presence = new Presence({
-	clientId: "547436289960574977",
-	mediaKeys: false
+	clientId: "547436289960574977"
 });
 
 presence.on("UpdateData", async () => {
-	if (document.location.pathname == ("/")) {
+	if (document.location.pathname == "/") {
 		let homepagePresence: presenceData = {
 			details: "Viewing the homepage",
 			largeImageKey: "logo"
@@ -53,7 +52,7 @@ presence.on("UpdateData", async () => {
 	}
 });
 
-presence.on('iFrameData', function (data) {
+presence.on("iFrameData", function(data) {
 	console.log(data);
 });
 

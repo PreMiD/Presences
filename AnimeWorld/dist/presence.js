@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 let presence = new Presence({
     clientId: "678265146883178519",
-    mediaKeys: false
+    
 });
 let browsingStamp = Math.floor(Date.now() / 1000);
 let iFrameVideo, currentTime, duration, paused, playback;

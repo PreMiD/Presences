@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 let presence = new Presence({
     clientId: "630349560501370900",
-    mediaKeys: false
+    
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",

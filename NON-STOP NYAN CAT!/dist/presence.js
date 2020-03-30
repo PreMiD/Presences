@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "631039621656084480",
-    mediaKeys: false
+    
 });
 timeNyaned = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {

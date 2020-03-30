@@ -1,40 +1,29 @@
 var presence = new Presence({
-	clientId: "632983924414349333",
-	mediaKeys: false
+	clientId: "632983924414349333"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-var url = new URL(document.location.href)
+var url = new URL(document.location.href);
 
 var raid: any;
 
-
 presence.on("UpdateData", async () => {
-
 	let data: presenceData = {
 		largeImageKey: "logo"
-	}
+	};
 
 	data.startTimestamp = browsingStamp;
 
-	if (document.location.hostname == ("game.granbluefantasy.jp")) {
-
-
-
+	if (document.location.hostname == "game.granbluefantasy.jp") {
 		if (document.location.href.includes("/#mypage")) {
 			data.details = "Home page";
-
-
-
 		} else if (document.location.href.includes("/#quest")) {
 			data.details = "Selecting a quest";
 			if (document.location.href.includes("/#quest/extra")) {
 				data.state = "Treasure Quests / Event Quest";
-
 			} else if (document.location.href.includes("/#quest/assist")) {
 				data.state = "Joining a raid";
-
 			} else if (document.location.href.includes("/#quest/supporter")) {
 				data.state = "Choosing a summon";
 			} else if (document.location.href.includes("/#quest/fate")) {
@@ -44,14 +33,13 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (document.location.href.includes("/#result")) {
 			data.details = "In a Quest result screen";
-
-		} else if (document.location.href.includes("/#raid") || (document.location.href.includes("/#raid_multi"))) {
+		} else if (
+			document.location.href.includes("/#raid") ||
+			document.location.href.includes("/#raid_multi")
+		) {
 			data.details = "In a battle";
-
 		} else if (document.location.href.includes("/#party/index/0/npc/0")) {
 			data.details = "Viewing party";
-
-
 		} else if (document.location.href.includes("/#enhancement")) {
 			data.details = "Upgrading : ";
 
@@ -62,7 +50,6 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.href.includes("/#enhancement/summon")) {
 				data.state = "Summons";
 			}
-
 		} else if (document.location.href.includes("/#evolution")) {
 			data.details = "Uncapping :";
 
@@ -73,7 +60,6 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.href.includes("/#evolution/summon")) {
 				data.state = "Summons";
 			}
-
 		} else if (document.location.href.includes("/#coopraid")) {
 			data.details = "Co-op :";
 
@@ -82,11 +68,9 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.href.includes("/#coopraid/room")) {
 				data.state = "In a coop room";
 			}
-
 		} else if (document.location.href.includes("/#lobby/room")) {
 			data.details = "Co-op :";
 			data.state = "In a raid coop room";
-
 		} else if (document.location.href.includes("/#casino")) {
 			data.details = "Casino :";
 			data.state = "Main menu";
@@ -107,22 +91,16 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.href.includes("/#casino/rule/casino")) {
 				data.state = "Viewing casino rules";
 			}
-
 		} else if (document.location.href.includes("/#gacha")) {
 			data.details = "In the Draw menu";
-
 		} else if (document.location.href.includes("/#profile")) {
 			data.details = "Viewing profile page";
-
 		} else if (document.location.href.includes("/#archive")) {
 			data.details = "Viewing journal";
-
 		} else if (document.location.href.includes("/#title")) {
 			data.details = "Viewing trophies";
-
 		} else if (document.location.href.includes("/#guild")) {
 			data.details = "Viewing crew";
-
 		} else if (document.location.href.includes("/#shop")) {
 			data.details = "Shop :";
 			data.state = "Main menu";
@@ -131,7 +109,9 @@ presence.on("UpdateData", async () => {
 				data.state = "Pendants shop";
 			} else if (document.location.href.includes("/#shop/exchange/moon")) {
 				data.state = "Trading moons";
-			} else if (document.location.href.includes("/#shop/exchange/trajectory")) {
+			} else if (
+				document.location.href.includes("/#shop/exchange/trajectory")
+			) {
 				data.state = "Journey drops";
 			} else if (document.location.href.includes("/#shop/exchange/ceiling")) {
 				data.state = "Trading ceruleans stones";
@@ -144,7 +124,6 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.href.includes("/#shop/exchange/list")) {
 				data.state = "Treasure trading";
 			}
-
 		} else if (document.location.href.includes("/#archaic")) {
 			data.details = "Shop :";
 			data.state = "Weapons Crafting";
@@ -161,32 +140,23 @@ presence.on("UpdateData", async () => {
 			} else if (document.location.href.includes("/#archaic/omega")) {
 				data.state = "Crafting Ultima weapons";
 			}
-
 		} else if (document.location.href.includes("#arcarum2/enhancement")) {
 			data.details = " Shop :";
 			data.state = "Crafting Arcarum summons";
-
 		} else if (document.location.href.includes("/#item")) {
 			data.details = "Viewing supplies";
-
 		} else if (document.location.href.includes("/#present")) {
 			data.details = "Viewing Crate";
-
 		} else if (document.location.href.includes("/#list")) {
 			data.details = "Viewing inventory";
-
 		} else if (document.location.href.includes("/#container")) {
 			data.details = "Viewing stash";
-
 		} else if (document.location.href.includes("/#friend")) {
 			data.details = "Viewing friends list";
-
 		} else if (document.location.href.includes("/#event")) {
 			data.details = "Event Menu";
-
 		} else if (document.location.href.includes("/#setting")) {
 			data.details = "Changing settings";
-
 		} else if (document.location.href.includes("/#teaser")) {
 			data.details = "Viewing event preview";
 		} else if (document.location.href.includes("/#sell")) {
@@ -198,19 +168,18 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.href.includes("/#help")) {
 			data.details = "Viewing help";
 		} else if (document.location.href.includes("/#sidestory")) {
-			data.details = "Viewing side stories"
+			data.details = "Viewing side stories";
 		} else if (document.location.href.includes("/#trial_battle")) {
-			data.details = "Viewing trial battles"
+			data.details = "Viewing trial battles";
 		} else if (document.location.href.includes("/#campaign/panel")) {
-			data.details = "Viewing pinboard missions"
+			data.details = "Viewing pinboard missions";
 		} else if (document.location.href.includes("/#beginnercomic")) {
-			data.details = "Reading This is Granblue Fantasy"
+			data.details = "Reading This is Granblue Fantasy";
 		} else if (document.location.href.includes("/#news")) {
-			data.details = "Viewing the news"
+			data.details = "Viewing the news";
 		} else if (document.location.href.includes("/#comic")) {
-			data.details = "Reading Grand Blues"
+			data.details = "Reading Grand Blues";
 		}
 		presence.setActivity(data);
-
 	}
 });

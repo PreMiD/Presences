@@ -23,16 +23,25 @@ presence.on("UpdateData", async () => {
 		presenceData.details = `Olhando um mangá`;
 		presenceData.state = mangaName;
 	} else if (pathname.startsWith(`/leitor`)) {
-		const title = document.querySelector(".titulo-leitura").textContent.split(' - ');
+		const title = document
+			.querySelector(".titulo-leitura")
+			.textContent.split(" - ");
 		const mangaName = title[0];
 		const mangaChapter = title[1];
 		presenceData.details = mangaName;
-		if (!document.querySelector('#paginas').getAttribute('style').match(/display:\Wnone/)) {
-			const mangaPage = (document.querySelector(`#paginas`) as HTMLSelectElement).options.selectedIndex + 1;
+		if (
+			!document
+				.querySelector("#paginas")
+				.getAttribute("style")
+				.match(/display:\Wnone/)
+		) {
+			const mangaPage =
+				(document.querySelector(`#paginas`) as HTMLSelectElement).options
+					.selectedIndex + 1;
 			presenceData.state = `${mangaChapter} - Página ${mangaPage}`;
 		} else {
 			presenceData.state = mangaChapter;
-		};
+		}
 		presenceData.smallImageKey = `reading`;
 		presenceData.smallImageText = `Lendo`;
 	} else if (pathname.startsWith(`/scans`)) {
@@ -43,4 +52,4 @@ presence.on("UpdateData", async () => {
 		presenceData.details = (await strings).browsing;
 	}
 	presence.setActivity(presenceData, true);
-})
+});

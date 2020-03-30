@@ -23,22 +23,29 @@ function PMD_success(message) {
 		"%cPreMiD%cSUCCESS%c " + message,
 		genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
 		genericStyle +
-		"border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
+			"border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
 		"color: unset;"
 	);
 }
 
 var presence = new Presence({
-	clientId: "620721262112538625", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "620721262112538625" // CLIENT ID FOR YOUR PRESENCE
+});
 
-var item: any, typing: any, index: any, categorytext: any, search: any, dropdowninnertext: any, split: any, item2: any, itemfinish: any, board2: any;
+var item: any,
+	typing: any,
+	index: any,
+	categorytext: any,
+	search: any,
+	dropdowninnertext: any,
+	split: any,
+	item2: any,
+	itemfinish: any,
+	board2: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "etsy"
 	};
@@ -68,8 +75,9 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 	} else if (document.location.hostname == "www.etsy.com") {
 		if (document.location.pathname.includes("/listing/")) {
-
-			item = document.querySelector("#listing-page-cart > div > div.listing-page-title-component > h1");
+			item = document.querySelector(
+				"#listing-page-cart > div > div.listing-page-title-component > h1"
+			);
 			presenceData.details = "Viewing product:";
 			if (item.innerText.length > 128) {
 				presenceData.state = item.innerText.substring(0, 125) + "...";
@@ -80,9 +88,10 @@ presence.on("UpdateData", async () => {
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-
 		} else if (document.location.pathname.includes("/c/")) {
-			item = document.querySelector("#content > div > div > div > div > div > h1");
+			item = document.querySelector(
+				"#content > div > div > div > div > div > h1"
+			);
 			presenceData.details = "Viewing category:";
 			presenceData.state = item.innerText;
 
@@ -90,7 +99,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/shop/")) {
-			item = document.querySelector("#content > div.shop-home > div:nth-child(1) > div > div > div > div > div > div > h1");
+			item = document.querySelector(
+				"#content > div.shop-home > div:nth-child(1) > div > div > div > div > div > div > h1"
+			);
 
 			presenceData.details = "Viewing shop:";
 			presenceData.state = item.innerText;
@@ -99,7 +110,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/people/")) {
-			item = document.querySelector("#content > div > div:nth-child(1) > div > div > div > div > h1")
+			item = document.querySelector(
+				"#content > div > div:nth-child(1) > div > div > div > div > h1"
+			);
 
 			presenceData.details = "Viewing profile:";
 			presenceData.state = item.innerText;
@@ -108,7 +121,6 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/redeem")) {
-
 			presenceData.details = "Viewing page:";
 			presenceData.state = "Redeem codes";
 
@@ -116,7 +128,6 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/cart")) {
-
 			presenceData.details = "Viewing cart";
 			delete presenceData.state;
 
@@ -124,7 +135,6 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/purchases")) {
-
 			presenceData.details = "Viewing purchases";
 			delete presenceData.state;
 
@@ -132,7 +142,6 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/account")) {
-
 			presenceData.details = "Viewing their account";
 			delete presenceData.state;
 
@@ -175,7 +184,7 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/search")) {
-			item = document.querySelector("#global-enhancements-search-query")
+			item = document.querySelector("#global-enhancements-search-query");
 
 			presenceData.details = "Searching for:";
 			presenceData.state = item.value;
@@ -191,8 +200,14 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/conversations")) {
-			if (document.querySelector("#root > div > div > div > div > div > div > div > div > h3 > span:nth-child(2)") !== null) {
-				item = document.querySelector("#root > div > div > div > div > div > div > div > div > div > div > div > div > a");
+			if (
+				document.querySelector(
+					"#root > div > div > div > div > div > div > div > div > h3 > span:nth-child(2)"
+				) !== null
+			) {
+				item = document.querySelector(
+					"#root > div > div > div > div > div > div > div > div > div > div > div > div > a"
+				);
 
 				presenceData.details = "Reading DMs with:";
 				presenceData.state = item.innerText;
@@ -201,7 +216,9 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/sent")) {
-				item = document.querySelector("#root > div > div > div > div > div > div > div > div > div > div > div > div > a");
+				item = document.querySelector(
+					"#root > div > div > div > div > div > div > div > div > div > div > div > div > a"
+				);
 
 				presenceData.details = "Etsy Direct Messages";
 				presenceData.state = "Viewing sent messages";
@@ -210,7 +227,9 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/unread")) {
-				item = document.querySelector("#root > div > div > div > div > div > div > div > div > div > div > div > div > a");
+				item = document.querySelector(
+					"#root > div > div > div > div > div > div > div > div > div > div > div > div > a"
+				);
 
 				presenceData.details = "Etsy Direct Messages";
 				presenceData.state = "Viewing unreaded messages";
@@ -219,7 +238,9 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/spam")) {
-				item = document.querySelector("#root > div > div > div > div > div > div > div > div > div > div > div > div > a");
+				item = document.querySelector(
+					"#root > div > div > div > div > div > div > div > div > div > div > div > div > a"
+				);
 
 				presenceData.details = "Etsy Direct Messages";
 				presenceData.state = "Viewing spam messages";
@@ -228,7 +249,9 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/trash")) {
-				item = document.querySelector("#root > div > div > div > div > div > div > div > div > div > div > div > div > a");
+				item = document.querySelector(
+					"#root > div > div > div > div > div > div > div > div > div > div > div > div > a"
+				);
 
 				presenceData.details = "Etsy Direct Messages";
 				presenceData.state = "Viewing trash can";
@@ -237,7 +260,9 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/all")) {
-				item = document.querySelector("#root > div > div > div > div > div > div > div > div > div > div > div > div > a");
+				item = document.querySelector(
+					"#root > div > div > div > div > div > div > div > div > div > div > div > div > a"
+				);
 
 				presenceData.details = "Etsy Direct Messages";
 				presenceData.state = "Viewing all messages";
@@ -254,16 +279,11 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else {
-
 			presence.setActivity();
 			presence.setTrayTitle();
-
 		}
 	} else {
-
 		presence.setActivity();
 		presence.setTrayTitle();
-
 	}
-
 });

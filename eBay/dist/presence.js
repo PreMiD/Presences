@@ -19,7 +19,7 @@ function PMD_success(message) {
 }
 var presence = new Presence({
     clientId: "619219701146583080",
-    mediaKeys: false
+    
 });
 var item, typing, index, categorytext, search, dropdowninnertext, split, item2, itemfinish, board2;
 var browsingStamp = Math.floor(Date.now() / 1000);

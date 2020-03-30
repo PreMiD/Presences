@@ -1,14 +1,12 @@
 var presence = new Presence({
-	clientId: "625795936286932993", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "625795936286932993" // CLIENT ID FOR YOUR PRESENCE
+});
 
 var item: any, user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "spigot"
 	};
@@ -16,9 +14,13 @@ presence.on("UpdateData", async () => {
 	presenceData.startTimestamp = browsingStamp;
 	if (document.location.hostname == "www.spigotmc.org") {
 		if (document.location.pathname.includes("/threads/")) {
-			title = document.querySelector("#content > div > div > div.mainContainer_noSidebar > div > div.titleBar > h1");
+			title = document.querySelector(
+				"#content > div > div > div.mainContainer_noSidebar > div > div.titleBar > h1"
+			);
 			if (title == null) {
-				title = document.querySelector("#content > div > div > div.mainContainer_noSidebar > div > div.resourceInfo > h1");
+				title = document.querySelector(
+					"#content > div > div > div.mainContainer_noSidebar > div > div.resourceInfo > h1"
+				);
 				presenceData.details = "Forums, viewing thread:";
 				if (title.innerText.length > 128) {
 					presenceData.state = title.innerText.substring(0, 125) + "...";
@@ -38,7 +40,9 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/forums/")) {
-			title = document.querySelector("#content > div > div > div.mainContainer_noSidebar > div > div.titleBar > h1");
+			title = document.querySelector(
+				"#content > div > div > div.mainContainer_noSidebar > div > div.titleBar > h1"
+			);
 			if (title != null) {
 				presenceData.details = "Forums, viewing category:";
 				presenceData.state = title.innerText;
@@ -55,7 +59,9 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/search/")) {
-			search = document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.titleBar > h1 > a > em");
+			search = document.querySelector(
+				"#content > div > div > div.uix_contentFix > div > div > div.titleBar > h1 > a > em"
+			);
 			presenceData.details = "Forums, searching for:";
 			presenceData.state = search.innerText;
 
@@ -63,7 +69,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/members/")) {
-			user = document.querySelector("#content > div > div > div.mainContainer_noSidebar > div > div > div.mainProfileColumn > div > div > h1");
+			user = document.querySelector(
+				"#content > div > div > div.mainContainer_noSidebar > div > div > div.mainProfileColumn > div > div > h1"
+			);
 			presenceData.details = "Forums, viewing user:";
 			presenceData.state = user.innerText;
 
@@ -85,7 +93,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/wiki/")) {
-			title = document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.titleBar > h1");
+			title = document.querySelector(
+				"#content > div > div > div.uix_contentFix > div > div > div.titleBar > h1"
+			);
 			presenceData.details = "Wiki, viewing:";
 			presenceData.state = title.innerText;
 
@@ -118,7 +128,9 @@ presence.on("UpdateData", async () => {
 					presence.setActivity(presenceData);
 				}
 			} else if (document.location.pathname.includes("/authors/")) {
-				title = document.querySelector("#authorStats > div > dl.authorName > dd > a");
+				title = document.querySelector(
+					"#authorStats > div > dl.authorName > dd > a"
+				);
 				presenceData.details = "Resources, Viewing author:";
 				presenceData.state = title.innerText;
 
@@ -126,15 +138,23 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/categories/")) {
-				title = document.querySelector("#content > div > div > div.mainContainer_noSidebar > div > div.titleBar > h1");
+				title = document.querySelector(
+					"#content > div > div > div.mainContainer_noSidebar > div > div.titleBar > h1"
+				);
 				presenceData.details = "Resources, Viewing category:";
 				presenceData.state = title.innerText;
 
 				delete presenceData.smallImageKey;
 
 				presence.setActivity(presenceData);
-			} else if (document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.resourceInfo > h1") != null) {
-				title = document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.resourceInfo > h1");
+			} else if (
+				document.querySelector(
+					"#content > div > div > div.uix_contentFix > div > div > div.resourceInfo > h1"
+				) != null
+			) {
+				title = document.querySelector(
+					"#content > div > div > div.uix_contentFix > div > div > div.resourceInfo > h1"
+				);
 				presenceData.details = "Resources, Viewing:";
 				if (title.innerText.length > 128) {
 					presenceData.state = title.innerText.substring(0, 125) + "...";
@@ -161,8 +181,14 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/conversations/")) {
-			if (document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.titleBar > h1") != null) {
-				title = document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.titleBar > h1");
+			if (
+				document.querySelector(
+					"#content > div > div > div.uix_contentFix > div > div > div.titleBar > h1"
+				) != null
+			) {
+				title = document.querySelector(
+					"#content > div > div > div.uix_contentFix > div > div > div.titleBar > h1"
+				);
 				presenceData.details = "Forums, Reading DM:";
 				if (title.innerText.length > 128) {
 					presenceData.state = title.innerText.substring(0, 125) + "...";
@@ -211,10 +237,7 @@ presence.on("UpdateData", async () => {
 			presence.setActivity(presenceData);
 		}
 	} else {
-
 		presence.setActivity();
 		presence.setTrayTitle();
-
 	}
-
 });

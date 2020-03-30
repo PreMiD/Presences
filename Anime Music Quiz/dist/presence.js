@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "691494438349832227",
-    mediaKeys: false
+    
 });
 
 var browsingStamp

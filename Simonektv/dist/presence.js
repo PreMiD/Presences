@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "676411728925294605",
-    mediaKeys: false
+    
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {

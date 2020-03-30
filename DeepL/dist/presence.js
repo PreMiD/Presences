@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "614903529240395782",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if (document.location.pathname == "/translator") {

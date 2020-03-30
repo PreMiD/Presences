@@ -1,24 +1,22 @@
 var presence = new Presence({
-	clientId: "612042450785271811",
-	mediaKeys: false
-}),
+		clientId: "612042450785271811"
+	}),
 	presenceData: presenceData = {
 		largeImageKey: "logo"
 	};
 
 presence.on("UpdateData", async () => {
-
-	var title: HTMLElement = document.querySelector(".mtl.mbxxxl.xs-mts.xs-mbxs.petition-title")
+	var title: HTMLElement = document.querySelector(
+		".mtl.mbxxxl.xs-mts.xs-mbxs.petition-title"
+	);
 	if (title !== null) {
-		var votes = document.querySelector(".mbxs span strong")
-		presenceData.details = (title as HTMLElement).innerText
-		presenceData.state = (votes as HTMLElement).innerText
-		presenceData.largeImageKey = "logo"
+		var votes = document.querySelector(".mbxs span strong");
+		presenceData.details = (title as HTMLElement).innerText;
+		presenceData.state = (votes as HTMLElement).innerText;
+		presenceData.largeImageKey = "logo";
 
 		presence.setActivity(presenceData);
-
 	} else {
-
 		var pageData: presenceData = {
 			details: "Browsing..",
 			largeImageKey: "logo"

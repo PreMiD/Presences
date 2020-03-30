@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "634032819915456552",
-	mediaKeys: false
-}),
+		clientId: "634032819915456552"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "hltv"
 	};
@@ -25,21 +22,29 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = browsingStamp;
 		if (document.location.pathname.includes("/news/")) {
 			presenceData.details = "Reading news post:";
-			title = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > article > h1");
+			title = document.querySelector(
+				"body > div.bgPadding > div > div.colCon > div.contentCol > article > h1"
+			);
 			presenceData.state = title.innerText;
 			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/profile/")) {
-			title = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > div > div.top-info > div > div.info.col > div.headline");
+			title = document.querySelector(
+				"body > div.bgPadding > div > div.colCon > div.contentCol > div > div.top-info > div > div.info.col > div.headline"
+			);
 			presenceData.details = "Viewing profile:";
 			presenceData.state = title.innerText;
 		} else if (document.location.pathname.includes("/forums/")) {
 			if (document.location.pathname.includes("/threads/")) {
-				title = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > div.forumthread > div.standard-box > div.forum-topbar > div.topic");
-				presenceData.details = "Reading forum thread:"
+				title = document.querySelector(
+					"body > div.bgPadding > div > div.colCon > div.contentCol > div.forumthread > div.standard-box > div.forum-topbar > div.topic"
+				);
+				presenceData.details = "Reading forum thread:";
 				presenceData.state = title.innerText;
 				presenceData.smallImageKey = "reading";
 			} else {
-				title = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > div > span:nth-child(2)");
+				title = document.querySelector(
+					"body > div.bgPadding > div > div.colCon > div.contentCol > div > span:nth-child(2)"
+				);
 				presenceData.details = "Viewing forums category:";
 				presenceData.state = title.innerText;
 			}
@@ -55,46 +60,64 @@ presence.on("UpdateData", async () => {
 			presenceData.details = "Viewing the results";
 		} else if (document.location.pathname.includes("/events/")) {
 			presenceData.details = "Viewing event:";
-			title = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > div > div.event-header-component.event-holder.header > a > div > div");
+			title = document.querySelector(
+				"body > div.bgPadding > div > div.colCon > div.contentCol > div > div.event-header-component.event-holder.header > a > div > div"
+			);
 			presenceData.state = title.innerText;
 		} else if (document.location.pathname.includes("/events")) {
 			presenceData.details = "Viewing list of events";
 		} else if (document.location.pathname.includes("/player/")) {
-			title = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > div > div.standard-box.profileTopBox.clearfix.flex > div.profile-info-container > div.profile-player-info-container > div.profile-player-info > h1");
+			title = document.querySelector(
+				"body > div.bgPadding > div > div.colCon > div.contentCol > div > div.standard-box.profileTopBox.clearfix.flex > div.profile-info-container > div.profile-player-info-container > div.profile-player-info > h1"
+			);
 			presenceData.details = "Viewing player:";
 			presenceData.state = title.innerText;
 		} else if (document.location.pathname.includes("/team/")) {
-			title = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > div > div.standard-box.profileTopBox.clearfix > div.flex > div.profile-team-container.text-ellipsis > div.profile-team-info > div.profile-team-name.text-ellipsis");
+			title = document.querySelector(
+				"body > div.bgPadding > div > div.colCon > div.contentCol > div > div.standard-box.profileTopBox.clearfix > div.flex > div.profile-team-container.text-ellipsis > div.profile-team-info > div.profile-team-name.text-ellipsis"
+			);
 			presenceData.details = "Viewing team:";
 			presenceData.state = title.innerText;
 		} else if (document.location.pathname.includes("/stats/")) {
 			presenceData.details = "Viewing stats of:";
-			title = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > div > div.playerSummaryStatBox > div.summaryBreakdownContainer > div.summaryShortInfo > h1");
+			title = document.querySelector(
+				"body > div.bgPadding > div > div.colCon > div.contentCol > div > div.playerSummaryStatBox > div.summaryBreakdownContainer > div.summaryShortInfo > h1"
+			);
 			presenceData.state = title.innerText;
 		} else if (document.location.pathname.includes("/stats")) {
 			presenceData.details = "Viewing the stats";
 		} else if (document.location.pathname.includes("/gallery/")) {
 			presenceData.details = "Viewing gallery:";
-			title = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > div > div.event-header-component.event-holder.header > a > div > div");
+			title = document.querySelector(
+				"body > div.bgPadding > div > div.colCon > div.contentCol > div > div.event-header-component.event-holder.header > a > div > div"
+			);
 			presenceData.state = title.innerText;
 		} else if (document.location.pathname.includes("/galleries")) {
 			presenceData.details = "Browsing galleries";
 		} else if (document.location.pathname.includes("/betting")) {
 			presenceData.details = "Viewing betting";
 		} else if (document.location.pathname.includes("/live")) {
-			title = document.querySelector("#LiveApplication > div > div.stats-container.gtSmartphone-only > div > div.team1-stats > div.team.text-ellipsis > span");
-			user = document.querySelector("#LiveApplication > div > div.stats-container.gtSmartphone-only > div > div.team2-stats > div.team.text-ellipsis > span");
+			title = document.querySelector(
+				"#LiveApplication > div > div.stats-container.gtSmartphone-only > div > div.team1-stats > div.team.text-ellipsis > span"
+			);
+			user = document.querySelector(
+				"#LiveApplication > div > div.stats-container.gtSmartphone-only > div > div.team2-stats > div.team.text-ellipsis > span"
+			);
 			presenceData.details = "Watching live match:";
 			presenceData.state = title.innerText + " vs. " + user.innerText;
 			presenceData.smallImageKey = "live";
 		} else if (document.location.pathname.includes("/fantasy/")) {
 			presenceData.details = "Viewing fantasy of:";
-			title = document.querySelector("#fantasy > div > div.fantasy-content > div > div.eventBarFragment > div.countdownContainer > div > div.textBox > h1");
+			title = document.querySelector(
+				"#fantasy > div > div.fantasy-content > div > div.eventBarFragment > div.countdownContainer > div > div.textBox > h1"
+			);
 			presenceData.state = title.innerText;
 		} else if (document.location.pathname.includes("/fantasy")) {
 			presenceData.details = "Browsing fantasy";
 		} else if (document.location.pathname.includes("/search")) {
-			search = document.querySelector("body > div.bgPadding > div > div.colCon > div.contentCol > div > div:nth-child(2) > div > form > input.searchInput");
+			search = document.querySelector(
+				"body > div.bgPadding > div > div.colCon > div.contentCol > div > div:nth-child(2) > div > form > input.searchInput"
+			);
 			presenceData.details = "Searching for:";
 			presenceData.state = search.value;
 			presenceData.smallImageKey = "search";
@@ -103,19 +126,17 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

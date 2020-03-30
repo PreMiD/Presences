@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "640711877609127976",
-	mediaKeys: false
-})
+	clientId: "640711877609127976"
+});
 
 /*
 const pagetype;
@@ -25,33 +24,44 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 	let data: presenceData = {
-		largeImageKey: "logo",
-	}
+		largeImageKey: "logo"
+	};
 
-	active = window.getComputedStyle(document.getElementById("game-area-wrapper")).display != "none" ? true : false
-	end = window.getComputedStyle(document.getElementById("ui-stats")).display != "none" ? true : false;
+	active =
+		window.getComputedStyle(document.getElementById("game-area-wrapper"))
+			.display != "none"
+			? true
+			: false;
+	end =
+		window.getComputedStyle(document.getElementById("ui-stats")).display !=
+		"none"
+			? true
+			: false;
 	if (!active) {
-		pagetype = window.getComputedStyle(document.getElementById("start-menu")).display != "none" ? "default" : "private";
+		pagetype =
+			window.getComputedStyle(document.getElementById("start-menu")).display !=
+			"none"
+				? "default"
+				: "private";
 		if (pagetype == "default") {
 			var solo = document.querySelector("#btn-start-mode-0");
 			var duo = document.querySelector("#btn-start-mode-1");
 			var squad = document.querySelector("#btn-start-mode-2");
 
-			solo.addEventListener("mousedown", function () {
-				console.log("Works")
+			solo.addEventListener("mousedown", function() {
+				console.log("Works");
 				value = "Solos: ";
 			});
 
-			duo.addEventListener("mousedown", function () {
+			duo.addEventListener("mousedown", function() {
 				value = "Duos: ";
 			});
 
-			squad.addEventListener("mousedown", function () {
+			squad.addEventListener("mousedown", function() {
 				value = "Squads: ";
 			});
 
-			gametype = value
-
+			gametype = value;
 		} else if (pagetype == "private") {
 			var button = document.querySelector("a.btn-hollow-selected");
 			gametype = button.innerHTML + "s: ";
@@ -60,12 +70,13 @@ presence.on("UpdateData", async () => {
 		data.state = "Looking for game...";
 		data.startTimestamp = browsingStamp;
 
-		gameregion = document.querySelector("[data-label]:checked").innerHTML.match(regionregex)[1];
+		gameregion = document
+			.querySelector("[data-label]:checked")
+			.innerHTML.match(regionregex)[1];
 		presence.setActivity(data, true);
-
 	} else if (end) {
 		place = document.querySelector(".ui-stats-header-value").innerHTML;
-		data.state = "Placed " + place
+		data.state = "Placed " + place;
 		data.startTimestamp = browsingStamp;
 		presence.setActivity(data, true);
 	} else if (active) {
@@ -73,8 +84,11 @@ presence.on("UpdateData", async () => {
 		killcount = document.querySelector(".ui-player-kills").innerHTML;
 
 		data.startTimestamp = browsingStamp;
-		data.details = parseInt(killcount) != 1 ? killcount + " kills with " + alivecount + " alive" : killcount + " kill with " + alivecount + " alive"
+		data.details =
+			parseInt(killcount) != 1
+				? killcount + " kills with " + alivecount + " alive"
+				: killcount + " kill with " + alivecount + " alive";
 		data.state = gametype + " " + gameregion;
 		presence.setActivity(data, true);
-	};
+	}
 });

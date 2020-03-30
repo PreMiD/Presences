@@ -2,7 +2,11 @@ const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
 	const { hostname } = window.location;
-	if (hostname === `animeproxy.info` || hostname === `rapidvid.to` || hostname === `openload.co`) {
+	if (
+		hostname === `animeproxy.info` ||
+		hostname === `rapidvid.to` ||
+		hostname === `openload.co`
+	) {
 		const video = document.querySelector(`video`);
 		if (video != null) {
 			const played = video.duration != 0;

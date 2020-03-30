@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "633805202868273153",
-	mediaKeys: false
-}),
+		clientId: "633805202868273153"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "g2alogo"
 	};
@@ -30,25 +27,37 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/search")) {
 			presenceData.details = "Searching for:";
 			search = document.querySelector("head > title");
-			presenceData.state = title.innerText.replace("\" - G2A.COM", "").replace("Search results - \"", "");
+			presenceData.state = title.innerText
+				.replace('" - G2A.COM', "")
+				.replace('Search results - "', "");
 			presenceData.smallImageKey = "search";
 		} else if (document.location.pathname.includes("/category")) {
 			presenceData.details = "Viewing category:";
 			title = document.querySelector("head > title");
 			presenceData.state = title.innerText.replace(" - G2A.COM", "");
-		} else if (document.querySelector("#app > div > div.content > div > article > header > div > div > h1 > span") !== null) {
+		} else if (
+			document.querySelector(
+				"#app > div > div.content > div > article > header > div > div > h1 > span"
+			) !== null
+		) {
 			presenceData.details = "Viewing item:";
-			title = document.querySelector("#app > div > div.content > div > article > header > div > div > h1 > span");
+			title = document.querySelector(
+				"#app > div > div.content > div > article > header > div > div > h1 > span"
+			);
 			presenceData.state = title.innerText;
 		} else if (document.location.pathname.includes("/user")) {
 			presenceData.details = "Viewing user:";
-			user = document.querySelector("#app > div > div.content > div > div > div > section > div.user-info > button > strong");
+			user = document.querySelector(
+				"#app > div > div.content > div > div > div > section > div.user-info > button > strong"
+			);
 			presenceData.state = user.innerText;
 		} else if (document.location.pathname.includes("/goldmine")) {
 			presenceData.details = "Using the goldmine";
 		} else if (document.location.pathname.includes("/news/")) {
 			presenceData.startTimestamp = browsingStamp;
-			title = document.querySelector("body > div.single-article.single-article--feature.default-template > div.review-top > div.review-top__wrapper > div > header > h1");
+			title = document.querySelector(
+				"body > div.single-article.single-article--feature.default-template > div.review-top > div.review-top__wrapper > div > header > h1"
+			);
 			if (title == null) {
 				presenceData.details = "Browsing news section";
 			} else {
@@ -84,19 +93,17 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

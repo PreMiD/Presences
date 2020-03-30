@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "514771696134389760",
-    mediaKeys: true
+    
 }), strings;
 var localeStrings = {
     en: {

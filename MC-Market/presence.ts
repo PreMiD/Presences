@@ -1,14 +1,12 @@
 var presence = new Presence({
-	clientId: "626148940927991829", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "626148940927991829" // CLIENT ID FOR YOUR PRESENCE
+});
 
 var item: any, user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "mc-market"
 	};
@@ -33,7 +31,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/search/")) {
-			search = document.querySelector("#content > div > div > div.mainContainer > div > div.titleBar > h1 > a > em");
+			search = document.querySelector(
+				"#content > div > div > div.mainContainer > div > div.titleBar > h1 > a > em"
+			);
 			if (search !== null) {
 				presenceData.details = "Searching for:";
 				presenceData.state = search.innerText;
@@ -50,7 +50,9 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/resources/")) {
-			title = document.querySelector("#content > div > div > div.mainContainer > div > div.resourceInfo > h1");
+			title = document.querySelector(
+				"#content > div > div > div.mainContainer > div > div.resourceInfo > h1"
+			);
 			if (title !== null) {
 				presenceData.details = "Resources, viewing:";
 				if (title.innerText.length > 128) {
@@ -62,9 +64,19 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/categories/")) {
-				title = document.querySelector("#content > div > div > div.titleBar > h1");
+				title = document.querySelector(
+					"#content > div > div > div.titleBar > h1"
+				);
 				presenceData.details = "Resources, viewing";
-				presenceData.state = "category: " + title.innerText.replace("Add Resource", "").replace("Sell your OG", "").replace("Sell your Semi-OG", "").replace("Sell your cape account", "").replace("Sell your Rank Account", "").replace("Post New Thread", "");
+				presenceData.state =
+					"category: " +
+					title.innerText
+						.replace("Add Resource", "")
+						.replace("Sell your OG", "")
+						.replace("Sell your Semi-OG", "")
+						.replace("Sell your cape account", "")
+						.replace("Sell your Rank Account", "")
+						.replace("Post New Thread", "");
 
 				delete presenceData.smallImageKey;
 
@@ -105,7 +117,9 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/authors")) {
-				user = document.querySelector("#content > div > div > div.mainContainer > div > div.titleBar > h1");
+				user = document.querySelector(
+					"#content > div > div > div.mainContainer > div > div.titleBar > h1"
+				);
 				if (user !== null) {
 					presenceData.details = "Resources, viewing author:";
 					presenceData.state = user.innerText.replace("Resources from ", "");
@@ -129,7 +143,10 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			}
-		} else if (document.location.pathname.includes("/support/") || document.location.pathname.includes("/help/")) {
+		} else if (
+			document.location.pathname.includes("/support/") ||
+			document.location.pathname.includes("/help/")
+		) {
 			presenceData.details = "Viewing the";
 			presenceData.state = "support center";
 
@@ -137,9 +154,13 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/wiki/")) {
-			title = document.querySelector("#content > div > div > div.mainContainer > div > div.titleBar > h1");
+			title = document.querySelector(
+				"#content > div > div > div.mainContainer > div > div.titleBar > h1"
+			);
 			if (title == null) {
-				title = document.querySelector("#content > div > div > div.titleBar > h1");
+				title = document.querySelector(
+					"#content > div > div > div.titleBar > h1"
+				);
 			}
 			presenceData.details = "Wiki, viewing:";
 			presenceData.state = title.innerText;
@@ -155,7 +176,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/threads/")) {
-			title = document.querySelector("#content > div > div > div.titleBar > h1");
+			title = document.querySelector(
+				"#content > div > div > div.titleBar > h1"
+			);
 			if (title.innerText.includes("Private OG")) {
 				presence.setActivity();
 				presence.setTrayTitle();
@@ -171,9 +194,16 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/forums/")) {
-			title = document.querySelector("#content > div > div > div.titleBar > h1");
+			title = document.querySelector(
+				"#content > div > div > div.titleBar > h1"
+			);
 			presenceData.details = "Viewing category:";
-			presenceData.state = title.innerText.replace("Post New Thread", "").replace("Sell your OG", "").replace("Sell your Semi-OG", "").replace("Sell your cape account", "").replace("Sell your Rank Account", "");
+			presenceData.state = title.innerText
+				.replace("Post New Thread", "")
+				.replace("Sell your OG", "")
+				.replace("Sell your Semi-OG", "")
+				.replace("Sell your cape account", "")
+				.replace("Sell your Rank Account", "");
 
 			delete presenceData.smallImageKey;
 
@@ -214,7 +244,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/categories/")) {
-			title = document.querySelector("#content > div > div > div.titleBar > h1");
+			title = document.querySelector(
+				"#content > div > div > div.titleBar > h1"
+			);
 			presenceData.details = "Viewing category:";
 			presenceData.state = title.innerText;
 
@@ -271,8 +303,14 @@ presence.on("UpdateData", async () => {
 				delete presenceData.smallImageKey;
 
 				presence.setActivity(presenceData);
-			} else if (document.querySelector("#content > div > div > div.profilePage > div.mainProfileColumn > div > div > h1") !== null) {
-				user = document.querySelector("#content > div > div > div.profilePage > div.mainProfileColumn > div > div > h1");
+			} else if (
+				document.querySelector(
+					"#content > div > div > div.profilePage > div.mainProfileColumn > div > div > h1"
+				) !== null
+			) {
+				user = document.querySelector(
+					"#content > div > div > div.profilePage > div.mainProfileColumn > div > div > h1"
+				);
 				presenceData.details = "Viewing user:";
 				presenceData.state = user.innerText;
 
@@ -287,14 +325,20 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			}
-		} else if (document.location.pathname.includes("/find-new/") && document.location.pathname.includes("/profile-posts")) {
+		} else if (
+			document.location.pathname.includes("/find-new/") &&
+			document.location.pathname.includes("/profile-posts")
+		) {
 			presenceData.details = "Viewing the list of";
 			presenceData.state = "latest profile posts";
 
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.location.pathname.includes("/find-new/") && document.location.pathname.includes("/posts")) {
+		} else if (
+			document.location.pathname.includes("/find-new/") &&
+			document.location.pathname.includes("/posts")
+		) {
 			presenceData.details = "Viewing the list of";
 			presenceData.state = "latest posts";
 
@@ -325,7 +369,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/conversations/")) {
-			title = document.querySelector("#content > div > div > div.mainContainer > div > div.titleBar > h1");
+			title = document.querySelector(
+				"#content > div > div > div.mainContainer > div > div.titleBar > h1"
+			);
 			if (title == null) {
 				presenceData.details = "Viewing their";
 				presenceData.state = "conversations";
@@ -353,10 +399,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else {
-
 		presence.setActivity();
 		presence.setTrayTitle();
-
 	}
-
 });

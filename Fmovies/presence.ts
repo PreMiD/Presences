@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "630857591744102461",
-	mediaKeys: false
-}),
+		clientId: "630857591744102461"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
@@ -16,37 +15,70 @@ var presence = new Presence({
 
 presence.on("iFrameData", data => {
 	video = data;
-})
+});
 
 presence.on("UpdateData", async () => {
-
 	var data: presenceData = {
 		largeImageKey: "fml"
 	};
 
-	if (video != null && !isNaN(video.duration) && document.location.pathname.includes("/film")) {
+	if (
+		video != null &&
+		!isNaN(video.duration) &&
+		document.location.pathname.includes("/film")
+	) {
+		tv =
+			document.querySelector("#movie li:nth-child(2) span") &&
+			document
+				.querySelector("#movie li:nth-child(2) span")
+				.textContent.includes("TV")
+				? true
+				: false;
 
-		tv = document.querySelector("#movie li:nth-child(2) span")
-			&& document.querySelector("#movie li:nth-child(2) span").textContent.includes("TV") ? true : false;
-
-		var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+		var timestamps = getTimestamps(
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		);
 
 		if (tv) {
-			let name = document.querySelector("#movie li.active span").textContent.trim();
-			let date = document.querySelector("#info  div dl:nth-child(2) > dd:nth-child(4)").textContent;
-			data.details = name.replace(/[_0-9]+$/, '') + " (" + date.slice(0, date.indexOf('-')) + ")";
-			data.state = (/\d$/.test(name) ? "S" + document.querySelector("#movie li.active span").textContent.split(' ').pop() + ":" : "") + "E" + document.querySelector("#servers li a.active").textContent;
-		}
-		else {
-			let date = document.querySelector("#info  div dl:nth-child(2) > dd:nth-child(4)").textContent;
-			data.details = document.querySelector("#movie li.active span").textContent;
-			data.state = date.slice(0, date.indexOf('-'));
+			let name = document
+				.querySelector("#movie li.active span")
+				.textContent.trim();
+			let date = document.querySelector(
+				"#info  div dl:nth-child(2) > dd:nth-child(4)"
+			).textContent;
+			data.details =
+				name.replace(/[_0-9]+$/, "") +
+				" (" +
+				date.slice(0, date.indexOf("-")) +
+				")";
+			data.state =
+				(/\d$/.test(name)
+					? "S" +
+					  document
+							.querySelector("#movie li.active span")
+							.textContent.split(" ")
+							.pop() +
+					  ":"
+					: "") +
+				"E" +
+				document.querySelector("#servers li a.active").textContent;
+		} else {
+			let date = document.querySelector(
+				"#info  div dl:nth-child(2) > dd:nth-child(4)"
+			).textContent;
+			data.details = document.querySelector(
+				"#movie li.active span"
+			).textContent;
+			data.state = date.slice(0, date.indexOf("-"));
 		}
 
-		data.smallImageKey = video.paused ? "pause" : "play",
-			data.smallImageText = video.paused ? (await strings).pause : (await strings).play,
-			data.startTimestamp = timestamps[0],
-			data.endTimestamp = timestamps[1]
+		(data.smallImageKey = video.paused ? "pause" : "play"),
+			(data.smallImageText = video.paused
+				? (await strings).pause
+				: (await strings).play),
+			(data.startTimestamp = timestamps[0]),
+			(data.endTimestamp = timestamps[1]);
 
 		if (video.paused) {
 			delete data.startTimestamp;
@@ -54,9 +86,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presence.setActivity(data, !video.paused);
-	}
-
-	else {
+	} else {
 		data.details = (await strings).browsing;
 		data.smallImageKey = "search";
 		data.smallImageText = (await strings).browsing;

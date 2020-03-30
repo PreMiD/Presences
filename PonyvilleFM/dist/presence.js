@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "613628090219757599",
-    mediaKeys: false
+    
 });
 timeElapsed = Math.floor(Date.now() / 1000);
 strings = presence.getStrings({

@@ -1,6 +1,5 @@
 var presence = new Presence({
-	clientId: "651930315279040512",
-	mediaKeys: false
+	clientId: "651930315279040512"
 });
 
 presence.on("UpdateData", async () => {
@@ -20,19 +19,27 @@ presence.on("UpdateData", async () => {
 		presenceData.state = truncateString(video, 128);
 	} else if (document.location.pathname.includes("/test/")) {
 		let test = document.querySelector(".gameHeaderBanner__title").textContent;
-		let note = document.querySelector(".bloc-avis-testeur > .note > strong").textContent;
+		let note = document.querySelector(".bloc-avis-testeur > .note > strong")
+			.textContent;
 		presenceData.details = "Lis un test";
 		presenceData.state = truncateString(test, 128) + " (" + note + "/20)";
 	} else if (document.location.pathname.includes("/messages-prives/")) {
 		presenceData.details = "Lis ses MP";
 	} else if (document.location.pathname.includes("/forums/0-")) {
-		let forum = document.querySelector("#forum-main-col > .titre-head-bloc > .titre-bloc-forum").textContent;
-		let connected = document.querySelector(".panel-heading > .nb-connect-fofo").textContent;
+		let forum = document.querySelector(
+			"#forum-main-col > .titre-head-bloc > .titre-bloc-forum"
+		).textContent;
+		let connected = document.querySelector(".panel-heading > .nb-connect-fofo")
+			.textContent;
 		presenceData.details = truncateString(forum, 64);
 		presenceData.state = connected;
 	} else if (document.location.pathname.includes("/forums/")) {
-		let forum = document.querySelector(".bloc-fil-ariane-crumb-forum > .fil-ariane-crumb > span:last-of-type > a").textContent;
-		let thread = document.querySelector("#forum-main-col > .titre-head-bloc > .titre-bloc-forum > #bloc-title-forum").textContent;
+		let forum = document.querySelector(
+			".bloc-fil-ariane-crumb-forum > .fil-ariane-crumb > span:last-of-type > a"
+		).textContent;
+		let thread = document.querySelector(
+			"#forum-main-col > .titre-head-bloc > .titre-bloc-forum > #bloc-title-forum"
+		).textContent;
 		presenceData.details = truncateString(forum, 64);
 		presenceData.state = truncateString(thread, 128);
 	}
@@ -46,10 +53,10 @@ presence.on("UpdateData", async () => {
 });
 
 /**
-* Truncate a string by "..." if needed
-* @param {String} text The string to truncate
-* @param {Number} length The desized length
-*/
+ * Truncate a string by "..." if needed
+ * @param {String} text The string to truncate
+ * @param {Number} length The desized length
+ */
 function truncateString(text: string, length: number) {
 	if (text.length > length) {
 		return text.substring(0, length - 3) + "...";

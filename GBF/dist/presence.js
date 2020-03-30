@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var presence = new Presence({
     clientId: "632983924414349333",
-    mediaKeys: false
+    
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var url = new URL(document.location.href);

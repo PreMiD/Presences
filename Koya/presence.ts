@@ -1,6 +1,5 @@
 const presence = new Presence({
-	clientId: "691325899307483197",
-	mediaKeys: false
+	clientId: "691325899307483197"
 });
 
 var user: any;
@@ -15,7 +14,7 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "logo"
 	};
 
-	var route = document.location.pathname.split('/');
+	var route = document.location.pathname.split("/");
 
 	if (document.location.pathname === "/") {
 		presenceData.details = "Home";
@@ -23,7 +22,8 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Dashboard";
 		presenceData.state = "Choosing a server...";
 	} else if (document.location.pathname.includes("/server/")) {
-		presenceData.details = "Edit a server : " + document.querySelector(".title").textContent;
+		presenceData.details =
+			"Edit a server : " + document.querySelector(".title").textContent;
 		if (!route[3]) {
 			presenceData.state = "Main";
 		} else {
@@ -34,7 +34,9 @@ presence.on("UpdateData", async () => {
 		presenceData.state = "Watching current status of Koya";
 	} else if (document.location.pathname.includes("/commands")) {
 		presenceData.details = "Commands";
-		presenceData.state = document.querySelector("a.cat-toggle.is-active").textContent;
+		presenceData.state = document.querySelector(
+			"a.cat-toggle.is-active"
+		).textContent;
 	} else if (document.location.pathname.includes("/premium")) {
 		presenceData.details = "Premium";
 		presenceData.state = "Watching premium page";

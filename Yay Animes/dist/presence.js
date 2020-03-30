@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 let presence = new Presence({
     clientId: "613510331066482699",
-    mediaKeys: true
+    
 }), startedBrowsing = Math.floor(Date.now() / 1000), playback, video, currentTime, duration, timestamps, videoTitle, episode, paused, path = window.location.pathname, strings = presence.getStrings({
     "browsing": "presence.activity.browsing",
     "playing": "presence.playback.playing",

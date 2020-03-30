@@ -1,6 +1,6 @@
 var presence = new Presence({
-	clientId: "630533580119998496"
-}),
+		clientId: "630533580119998496"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -21,9 +21,8 @@ presence.on("UpdateData", async () => {
 		var epNumber: any = document.querySelector(".meta span");
 		if (epNumber) {
 			var epNumber: any =
-				epNumber.textContent
-					.replace("Season ", "S")
-					.replace(" Ep ", ":E") + " ";
+				epNumber.textContent.replace("Season ", "S").replace(" Ep ", ":E") +
+				" ";
 		} else {
 			var epNumber: any = "";
 		}

@@ -1,40 +1,50 @@
 var presence = new Presence({
-	clientId: "629413450774347786", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "629413450774347786" // CLIENT ID FOR YOUR PRESENCE
+});
 
 var item: any, user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "mcstacker"
 	};
 	presenceData.startTimestamp = browsingStamp;
-	if (document.location.hostname == "bimbimma.com" && document.URL.includes("/mcstacker/2014-08-31.php")) {
+	if (
+		document.location.hostname == "bimbimma.com" &&
+		document.URL.includes("/mcstacker/2014-08-31.php")
+	) {
 		presenceData.details = "MCStacker for 1.7.x";
 		delete presenceData.state;
 
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData);
-	} else if (document.location.hostname == "mcstacker.bimbimma.com" && document.URL.includes("/mcstacker1.10.php")) {
+	} else if (
+		document.location.hostname == "mcstacker.bimbimma.com" &&
+		document.URL.includes("/mcstacker1.10.php")
+	) {
 		presenceData.details = "MCStacker for 1.8.x - 1.10.x";
 		delete presenceData.state;
 
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData);
-	} else if (document.location.hostname == "mcstacker.bimbimma.com" || document.URL.includes("mcstacker.net/1.12.php")) {
+	} else if (
+		document.location.hostname == "mcstacker.bimbimma.com" ||
+		document.URL.includes("mcstacker.net/1.12.php")
+	) {
 		presenceData.details = "MCStacker for 1.12.x";
 		delete presenceData.state;
 
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData);
-	} else if (document.location.hostname == "mcstacker.bimbimma.com" || document.URL.includes("mcstacker.net/1.12.php")) {
+	} else if (
+		document.location.hostname == "mcstacker.bimbimma.com" ||
+		document.URL.includes("mcstacker.net/1.12.php")
+	) {
 		presenceData.details = "MCStacker for 1.12.x";
 		delete presenceData.state;
 
@@ -69,7 +79,7 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData);
-	} else if (document.location.hostname == ("mcstacker.net")) {
+	} else if (document.location.hostname == "mcstacker.net") {
 		if (document.querySelector("#lootTableContainer") != null) {
 			presenceData.details = "MCStacker for latest";
 			presenceData.state = "Making a loot table";
@@ -201,10 +211,7 @@ presence.on("UpdateData", async () => {
 			presence.setTrayTitle();
 		}
 	} else {
-
 		presence.setActivity();
 		presence.setTrayTitle();
-
 	}
-
 });

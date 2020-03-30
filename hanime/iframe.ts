@@ -1,7 +1,9 @@
 var iframe = new iFrame();
 iframe.on("UpdateData", async () => {
 	if (document.location.hostname.match("player.hanime.tv")) {
-		var video: HTMLVideoElement = document.querySelector('#primary_video_html5_api');
+		var video: HTMLVideoElement = document.querySelector(
+			"#primary_video_html5_api"
+		);
 		if (video != undefined && !isNaN(video.duration)) {
 			iframe.send({
 				iframe_video: {
@@ -11,8 +13,7 @@ iframe.on("UpdateData", async () => {
 					paused: video.paused
 				}
 			});
-		}
-		else {
+		} else {
 			iframe.send({
 				iframe_video: {
 					iFrameVideo: null,
@@ -24,4 +25,3 @@ iframe.on("UpdateData", async () => {
 		}
 	}
 });
-

@@ -1,45 +1,10 @@
 {
 	const presence = new Presence({
-		clientId: "611012705306017792",
-		mediaKeys: true
+		clientId: "611012705306017792"
 	});
 	const strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
-	});
-
-	presence.on("MediaKeys", (key: string) => {
-		if (
-			location.pathname.startsWith("/animestore/sc_d_pc") &&
-			document.querySelector("#video")
-		) {
-			console.log(key);
-			switch (key) {
-				case "pause": {
-					const button: HTMLElement = document.querySelector(
-						".playButton"
-					);
-					if (button) button.click();
-					break;
-				}
-
-				case "nextTrack": {
-					const button: HTMLElement = document.querySelector(
-						".skipButton"
-					);
-					if (button) button.click();
-					break;
-				}
-
-				case "previousTrack": {
-					const button: HTMLElement = document.querySelector(
-						".backButton"
-					);
-					if (button) button.click();
-					break;
-				}
-			}
-		}
 	});
 
 	presence.on("UpdateData", async () => {

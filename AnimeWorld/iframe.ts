@@ -13,8 +13,16 @@ iframe.on("UpdateData", async () => {
 			});
 		}
 	}
-	if (document.querySelector("#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") !== null) {
-		var anime = <HTMLVideoElement>document.querySelector("#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
+	if (
+		document.querySelector(
+			"#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+		) !== null
+	) {
+		var anime = <HTMLVideoElement>(
+			document.querySelector(
+				"#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
+			)
+		);
 		if (anime != undefined && !isNaN(anime.duration)) {
 			iframe.send({
 				iframe_video: {
@@ -39,8 +47,12 @@ iframe.on("UpdateData", async () => {
 			});
 		}
 	}
-	if (document.querySelector("#player > div.jw-media.jw-reset > video") !== null) {
-		var anime = <HTMLVideoElement>document.querySelector("#player > div.jw-media.jw-reset > video");
+	if (
+		document.querySelector("#player > div.jw-media.jw-reset > video") !== null
+	) {
+		var anime = <HTMLVideoElement>(
+			document.querySelector("#player > div.jw-media.jw-reset > video")
+		);
 		if (anime != undefined && !isNaN(anime.duration)) {
 			iframe.send({
 				iframe_video: {
@@ -66,7 +78,9 @@ iframe.on("UpdateData", async () => {
 		}
 	}
 	if (document.querySelector("div.html5-video-container > video") !== null) {
-		var anime = <HTMLVideoElement>document.querySelector("div.html5-video-container > video");
+		var anime = <HTMLVideoElement>(
+			document.querySelector("div.html5-video-container > video")
+		);
 		if (anime != undefined && !isNaN(anime.duration)) {
 			iframe.send({
 				iframe_video: {

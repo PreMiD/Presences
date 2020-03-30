@@ -1,8 +1,6 @@
 var presence = new Presence({
-	clientId: "607678684010381330",
-	mediaKeys: true
-}),
-
+		clientId: "607678684010381330"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -13,23 +11,17 @@ var playback;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
-
-	lastPlaybackState = playback
-	browsingStamp = Math.floor(Date.now() / 1000)
-
+	lastPlaybackState = playback;
+	browsingStamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-
-	playback =
-		document.querySelector(".jw-video video") !== null
-			? true : false
+	playback = document.querySelector(".jw-video video") !== null ? true : false;
 
 	if (!playback) {
-
 		presenceData: presenceData = {
 			largeImageKey: "lg"
-		}
+		};
 
 		presenceData.details = "Browsing...";
 		presenceData.startTimestamp = browsingStamp;
@@ -38,20 +30,16 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData, true);
-
 	}
 
 	var video: HTMLVideoElement = document.querySelector(".jw-video video");
 
 	if (video !== null && !isNaN(video.duration)) {
-
 		var videoTitle: any;
 
-		videoTitle = document.querySelector('#bread .breadcrumb .active');
+		videoTitle = document.querySelector("#bread .breadcrumb .active");
 
-		var uploader =
-			'',
-			timestamps = getTimestamps(
+		var timestamps = getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			),
@@ -78,17 +66,6 @@ presence.on("UpdateData", async () => {
 		if (videoTitle !== null) {
 			presence.setActivity(presenceData, !video.paused);
 		}
-
-	}
-
-});
-
-presence.on("MediaKeys", (key: string) => {
-	switch (key) {
-		case "pause":
-			var video = document.querySelector(".jw-video video") as HTMLVideoElement;
-			video.paused ? video.play() : video.pause();
-			break;
 	}
 });
 

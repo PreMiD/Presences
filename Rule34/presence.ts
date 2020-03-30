@@ -1,6 +1,5 @@
 var presence = new Presence({
-	clientId: "619967690056007699",
-	mediaKeys: false
+	clientId: "619967690056007699"
 });
 
 presence.on("UpdateData", async () => {
@@ -12,7 +11,11 @@ presence.on("UpdateData", async () => {
 				largeImageKey: "lg-r34"
 			};
 			presence.setActivity(presenceData);
-		} else if (urlParams.get("page") && urlParams.get("s") && urlParams.get("page") == "post") {
+		} else if (
+			urlParams.get("page") &&
+			urlParams.get("s") &&
+			urlParams.get("page") == "post"
+		) {
 			if (urlParams.get("s") == "list") {
 				if (urlParams.get("tags")) {
 					var presenceData: presenceData = {
@@ -47,8 +50,7 @@ presence.on("UpdateData", async () => {
 			};
 			presence.setActivity(presenceData);
 		}
-	}
-	else if (document.location.href.includes("rule34.paheal.net")) {
+	} else if (document.location.href.includes("rule34.paheal.net")) {
 		var path = document.location.pathname.split("/");
 		if (document.location.pathname == "/") {
 			var presenceData: presenceData = {

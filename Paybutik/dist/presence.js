@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "663151599924936714",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let path = document.location.pathname;

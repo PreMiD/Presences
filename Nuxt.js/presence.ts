@@ -1,6 +1,5 @@
 const presence = new Presence({
-	clientId: "691080074006495303",
-	mediaKeys: false
+	clientId: "691080074006495303"
 });
 
 var user: any;
@@ -21,8 +20,8 @@ presence.on("UpdateData", async () => {
 	}
 	presenceData.smallImageKey = "reading";
 
-	var route = document.location.pathname.split('/');
-	var subdomain = document.location.hostname.split('.');
+	var route = document.location.pathname.split("/");
+	var subdomain = document.location.hostname.split(".");
 
 	switch (subdomain[0]) {
 		case "fr":
@@ -93,7 +92,11 @@ presence.on("UpdateData", async () => {
 function getCookie(name?: string): any {
 	var value = "; " + document.cookie;
 	var parts = value.split("; " + name + "=");
-	if (parts.length == 2) return parts.pop().split(";").shift();
+	if (parts.length == 2)
+		return parts
+			.pop()
+			.split(";")
+			.shift();
 }
 
 function parseQueryString(queryString?: string): any {
@@ -105,7 +108,9 @@ function parseQueryString(queryString?: string): any {
 	queries.forEach((indexQuery: string) => {
 		const indexPair = indexQuery.split("=");
 		const queryKey = decodeURIComponent(indexPair[0]);
-		const queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
+		const queryValue = decodeURIComponent(
+			indexPair.length > 1 ? indexPair[1] : ""
+		);
 		params[queryKey] = queryValue;
 	});
 	return params;

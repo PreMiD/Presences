@@ -1,6 +1,5 @@
 const presence = new Presence({
-	clientId: "690635264124518493",
-	mediaKeys: false
+	clientId: "690635264124518493"
 });
 
 var user: any;
@@ -10,22 +9,31 @@ var search: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-
 presence.on("UpdateData", async () => {
 	let presenceData: presenceData = {
 		largeImageKey: "logo"
 	};
 
-	var route = document.location.pathname.split('/');
+	var route = document.location.pathname.split("/");
 
 	if (document.location.pathname == "/") {
 		presenceData.details = "Home";
-		presenceData.state = parseQueryString(document.location.hash).q ? `Searching ${parseQueryString(document.location.hash).q} (page ${parseQueryString(document.location.hash).p ? parseQueryString(document.location.hash).p : '0'})` : `Navigate...`;
-		presenceData.smallImageKey = parseQueryString(document.location.hash).q ? 'search' : null;
+		presenceData.state = parseQueryString(document.location.hash).q
+			? `Searching ${parseQueryString(document.location.hash).q} (page ${
+					parseQueryString(document.location.hash).p
+						? parseQueryString(document.location.hash).p
+						: "0"
+			  })`
+			: `Navigate...`;
+		presenceData.smallImageKey = parseQueryString(document.location.hash).q
+			? "search"
+			: null;
 		presenceData.smallImageText = "Searching...";
 	} else if (document.location.pathname.includes("/package/")) {
 		presenceData.details = "Watching package";
-		presenceData.state = !parseQueryString(document.location.hash).files ? `${document.querySelector("section h2").textContent}` : document.querySelector("header h2").textContent;
+		presenceData.state = !parseQueryString(document.location.hash).files
+			? `${document.querySelector("section h2").textContent}`
+			: document.querySelector("header h2").textContent;
 	} else if (document.location.pathname.includes("/getting-started")) {
 		presenceData.details = "Getting Started";
 		if (route[2] === "install") {
@@ -70,7 +78,9 @@ function parseQueryString(queryString?: string): any {
 	queries.forEach((indexQuery: string) => {
 		const indexPair = indexQuery.split("=");
 		const queryKey = decodeURIComponent(indexPair[0]);
-		const queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
+		const queryValue = decodeURIComponent(
+			indexPair.length > 1 ? indexPair[1] : ""
+		);
 		params[queryKey] = queryValue;
 	});
 	return params;

@@ -10,13 +10,13 @@ video.ondurationchange = () => {
 		current_time: video.currentTime,
 		duration: video.duration,
 		paused: video.paused
-	})
-}
+	});
+};
 
 video.ontimeupdate = () => {
 	iframe.send({
 		current_time: video.currentTime,
 		duration: video.duration,
 		paused: video.paused
-	})
-}
+	});
+};

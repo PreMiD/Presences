@@ -1,47 +1,11 @@
 {
 	const presence = new Presence({
-		clientId: "609220157910286346",
-		mediaKeys: true
+		clientId: "609220157910286346"
 	});
 	const strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
 		live: "presence.activity.live"
-	});
-
-	presence.on("MediaKeys", (key: string) => {
-		// media key is works only video page.
-		if (
-			location.host === "www.nicovideo.jp" &&
-			location.pathname.startsWith("/watch/")
-		) {
-			console.log(key);
-			switch (key) {
-				case "pause": {
-					const button: HTMLElement =
-						document.querySelector(".PlayerPauseButton") ||
-						document.querySelector(".PlayerPlayButton");
-					if (button) button.click();
-					break;
-				}
-
-				case "nextTrack": {
-					const button: HTMLElement = document.querySelector(
-						".PlayerSkipNextButton"
-					);
-					if (button) button.click();
-					break;
-				}
-
-				case "previousTrack": {
-					const button: HTMLElement = document.querySelector(
-						".SeekToHeadButton"
-					);
-					if (button) button.click();
-					break;
-				}
-			}
-		}
 	});
 
 	presence.on("UpdateData", async () => {
@@ -51,8 +15,7 @@
 					location.pathname.startsWith("/watch/") &&
 					document.querySelector(".VideoPlayer video")
 				) {
-					const title = document.querySelector(".VideoTitle")
-						.textContent;
+					const title = document.querySelector(".VideoTitle").textContent;
 
 					const ownerElement =
 						document.querySelector(".ChannelInfo-pageLink") ||
@@ -60,18 +23,17 @@
 						null;
 					let owner;
 					if (ownerElement) {
-						[, owner] = ownerElement.textContent.match(
-							/(.+) さん$/
-						) || [, ownerElement.textContent];
+						[, owner] = ownerElement.textContent.match(/(.+) さん$/) || [
+							,
+							ownerElement.textContent
+						];
 					} else {
 						owner = "Deleted User";
 					}
 
 					const [videoId] = location.pathname.match(/..\d+$/);
 
-					const isPlaying = !!document.querySelector(
-						".PlayerPauseButton"
-					);
+					const isPlaying = !!document.querySelector(".PlayerPauseButton");
 
 					const video: HTMLVideoElement = document.querySelector(
 						".VideoPlayer video"
@@ -86,8 +48,7 @@
 						smallImageText: isPlaying
 							? (await strings).play
 							: (await strings).pause,
-						startTimestamp:
-							Math.floor(Date.now() / 1000) - elapsedSec
+						startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
 					};
 
 					if (isPlaying) {
@@ -104,16 +65,11 @@
 			case "live.nicovideo.jp":
 			case "live2.nicovideo.jp": {
 				if (location.pathname.startsWith("/watch/lv")) {
-					const title = document.querySelector(
-						"[class^='___title___']"
-					).textContent;
+					const title = document.querySelector("[class^='___title___']")
+						.textContent;
 					const ownerElement =
-						document.querySelector(
-							"[class^='___channel-name-anchor___']"
-						) ||
-						document.querySelector(
-							"[class^='___group-name-anchor___']"
-						);
+						document.querySelector("[class^='___channel-name-anchor___']") ||
+						document.querySelector("[class^='___group-name-anchor___']");
 					const owner = ownerElement.textContent;
 					const [liveId] = location.pathname.match(/lv\d+/);
 
@@ -128,8 +84,7 @@
 						smallImageKey: "live",
 						smallImageText: (await strings).live,
 						startTimestamp:
-							Math.floor(Date.now() / 1000) -
-							getTimesec(elapsed).elapsedSec
+							Math.floor(Date.now() / 1000) - getTimesec(elapsed).elapsedSec
 					};
 
 					presence.setActivity(presenceData);
@@ -156,8 +111,7 @@
 					presence.setActivity(presenceData);
 				} else if (location.pathname.startsWith("/watch/mg")) {
 					const title = document.querySelector(".title").textContent;
-					const owner = document.querySelector(".author_name")
-						.textContent;
+					const owner = document.querySelector(".author_name").textContent;
 					const [mangaId] = location.pathname.match(/mg\d+/);
 
 					const presenceData: presenceData = {
@@ -216,8 +170,7 @@
 				break;
 			}
 			case 2: {
-				durationSec =
-					parseInt(duration[0]) * 60 + parseInt(duration[1]);
+				durationSec = parseInt(duration[0]) * 60 + parseInt(duration[1]);
 				break;
 			}
 			case 1: {

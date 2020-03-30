@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const presence = new Presence({
     clientId: "691325899307483197",
-    mediaKeys: false
+    
 });
 var user;
 var title;

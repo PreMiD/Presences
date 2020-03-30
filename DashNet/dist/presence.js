@@ -1,5 +1,5 @@
 let presence = new Presence({
-    mediaKeys: false
+    
 });
 
 let browsingStamp = Math.floor(Date.now() / 1000);

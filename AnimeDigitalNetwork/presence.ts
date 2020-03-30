@@ -1,21 +1,22 @@
 var presence = new Presence({
-	clientId: "630480510753308694",
-	mediaKeys: true
-}),
-
+		clientId: "630480510753308694"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
 	});
 
 presence.on("UpdateData", async () => {
-
 	var video: HTMLVideoElement = document.querySelector("video.vjs-tech");
 
 	if (video && !isNaN(video.duration)) {
 		var title = document.querySelector(".adn-player-header a").textContent;
-		var subtitle = document.querySelector(".adn-player-header span").textContent;
-		var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+		var subtitle = document.querySelector(".adn-player-header span")
+			.textContent;
+		var timestamps = getTimestamps(
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		);
 
 		let data: presenceData = {
 			details: title,
@@ -27,7 +28,7 @@ presence.on("UpdateData", async () => {
 				: (await strings).play,
 			startTimestamp: timestamps[0],
 			endTimestamp: timestamps[1]
-		}
+		};
 
 		if (video.paused) {
 			delete data.startTimestamp;
@@ -37,11 +38,10 @@ presence.on("UpdateData", async () => {
 		if (title !== null && subtitle !== null) {
 			presence.setActivity(data, !video.paused);
 		}
-
 	} else {
 		let browsingPresence: presenceData = {
 			details: "Browsing...",
-			largeImageKey: "adn-logo",
+			largeImageKey: "adn-logo"
 		};
 		presence.setActivity(browsingPresence);
 	}

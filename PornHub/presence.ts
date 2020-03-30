@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "607352899214901248",
-	mediaKeys: true
-}),
+		clientId: "607352899214901248"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -18,8 +17,8 @@ presence.on("UpdateData", async () => {
 		title = document.querySelector(".video-wrapper .title-container .title");
 
 		var uploader = document.querySelector(
-			".video-actions-container .video-info-row .usernameWrap a"
-		),
+				".video-actions-container .video-info-row .usernameWrap a"
+			),
 			timestamps = getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
@@ -54,22 +53,11 @@ presence.on("UpdateData", async () => {
 	}
 });
 
-presence.on("MediaKeys", (key: string) => {
-	switch (key) {
-		case "pause":
-			var video = document.querySelector(
-				".mhp1138_videoWrapper video"
-			) as HTMLVideoElement;
-			video.paused ? video.play() : video.pause();
-			break;
-	}
-});
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

@@ -1,8 +1,6 @@
 var presence = new Presence({
-	clientId: "618822781404053505",
-	mediaKeys: true
-}),
-
+		clientId: "618822781404053505"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -11,12 +9,22 @@ var presence = new Presence({
 presence.on("UpdateData", async () => {
 	var player = document.querySelector(".footerPlayer--2d1-L");
 	if (player) {
-		var title = document.querySelector(".footerPlayer--2d1-L .mediaInformation--1dAUh span").textContent;
-		var artist = document.querySelector(".footerPlayer--2d1-L .mediaArtists--3UIyd").textContent;
-		var currentTime = document.querySelector(".footerPlayer--2d1-L .currentTime--2fCqA").textContent;
-		var durationTime = document.querySelector(".footerPlayer--2d1-L .duration--3f3-B").textContent;
+		var title = document.querySelector(
+			".footerPlayer--2d1-L .mediaInformation--1dAUh span"
+		).textContent;
+		var artist = document.querySelector(
+			".footerPlayer--2d1-L .mediaArtists--3UIyd"
+		).textContent;
+		var currentTime = document.querySelector(
+			".footerPlayer--2d1-L .currentTime--2fCqA"
+		).textContent;
+		var durationTime = document.querySelector(
+			".footerPlayer--2d1-L .duration--3f3-B"
+		).textContent;
 		var timestamps = getTimestamps(currentTime, durationTime);
-		var paused = document.querySelector(".playbackToggle--1eQO2[title]").getAttribute("title");
+		var paused = document
+			.querySelector(".playbackToggle--1eQO2[title]")
+			.getAttribute("title");
 		var smallImageKey;
 		if (paused !== "Pause") {
 			smallImageKey = "pause";
@@ -45,7 +53,6 @@ presence.on("UpdateData", async () => {
 		if (title !== null && artist !== null) {
 			presence.setActivity(data, paused);
 		}
-
 	} else {
 		presence.clearActivity();
 	}

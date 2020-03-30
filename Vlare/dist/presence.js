@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "643606929570005014",
-    mediaKeys: false
+    
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"

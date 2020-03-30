@@ -1,8 +1,6 @@
 var presence = new Presence({
-	clientId: "611657413350654010",
-	mediaKeys: false
-}),
-
+		clientId: "611657413350654010"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -13,20 +11,17 @@ var playback;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
-
-	lastPlaybackState = playback
-	browsingStamp = Math.floor(Date.now() / 1000)
-
+	lastPlaybackState = playback;
+	browsingStamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-
 	playback =
 		document.querySelector("#player > div.jw-media.jw-reset > video") !== null
-			? true : false
+			? true
+			: false;
 
 	if (!playback) {
-
 		let presenceData: presenceData = {
 			largeImageKey: "lg"
 		};
@@ -38,17 +33,21 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData, true);
-
 	}
 
-	var video: HTMLVideoElement = document.querySelector("#player > div.jw-media.jw-reset > video");
+	var video: HTMLVideoElement = document.querySelector(
+		"#player > div.jw-media.jw-reset > video"
+	);
 
 	if (video !== null) {
-
 		var videoTitle: any;
 
-		videoTitle = document.querySelector("div > div.episodeInfo > div.nomeAnime");
-		var episode: any = document.querySelector("div > div.episodeInfo > div.epInfo"),
+		videoTitle = document.querySelector(
+			"div > div.episodeInfo > div.nomeAnime"
+		);
+		var episode: any = document.querySelector(
+				"div > div.episodeInfo > div.epInfo"
+			),
 			timestamps = getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
@@ -77,17 +76,6 @@ presence.on("UpdateData", async () => {
 		}
 
 		presence.setActivity(presenceData, true);
-
-	}
-
-});
-
-presence.on("MediaKeys", (key: string) => {
-	switch (key) {
-		case "pause":
-			var video = document.querySelector("#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") as HTMLVideoElement;
-			video.paused ? video.play() : video.pause();
-			break;
 	}
 });
 

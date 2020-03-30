@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "680160273474388014",
-    mediaKeys: false
+    
 });
 var play, artist, track, title;
 var browsingStamp = Math.floor(Date.now() / 1000);

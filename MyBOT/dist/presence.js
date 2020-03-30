@@ -1,6 +1,6 @@
 var uvu = new Presence({
     clientId: "645079866710163477",
-    mediaKeys: false
+    
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 uvu.on("UpdateData", () => {

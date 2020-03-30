@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var presence = new Presence({
     clientId: "629751665242669056",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
     var testPresenceData;

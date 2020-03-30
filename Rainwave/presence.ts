@@ -1,6 +1,5 @@
 var presence = new Presence({
-	clientId: "618233809481236491",
-	mediaKeys: false
+	clientId: "618233809481236491"
 });
 
 let timeElapsed = Math.floor(Date.now() / 1000),
@@ -30,8 +29,8 @@ presence.on("UpdateData", async () => {
 		presence.setActivity(presenceData);
 	} else {
 		let stationName = document.querySelector(
-			"a.station.selected_station > div.station_details > div.station_name"
-		),
+				"a.station.selected_station > div.station_details > div.station_name"
+			),
 			songName = document.querySelector(
 				"div.song.now_playing > div.song_content > div.title"
 			) as HTMLDivElement,

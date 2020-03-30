@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "607587875122446359",
-	mediaKeys: false
-}),
+		clientId: "607587875122446359"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -172,7 +171,7 @@ presence.on("UpdateData", async () => {
 			repositoryAuthor.innerText.length > 0 &&
 			repositoryName.innerText.length > 0 &&
 			document.location.pathname ==
-			"/" + repositoryAuthor.innerText + "/" + repositoryName.innerText
+				"/" + repositoryAuthor.innerText + "/" + repositoryName.innerText
 		) {
 			presenceData.details = "Browsing a repository...";
 
@@ -193,7 +192,10 @@ presence.on("UpdateData", async () => {
 			});
 
 			presenceData.details =
-				"Browsing " + repositoryAuthor.innerText + "/" + repositoryName.innerText;
+				"Browsing " +
+				repositoryAuthor.innerText +
+				"/" +
+				repositoryName.innerText;
 
 			presenceData.state = repLoc;
 
@@ -221,7 +223,11 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 		} else if (
 			document.location.pathname ==
-			"/" + repositoryAuthor.innerText + "/" + repositoryName.innerText + "/issues/"
+			"/" +
+				repositoryAuthor.innerText +
+				"/" +
+				repositoryName.innerText +
+				"/issues/"
 		) {
 			presenceData.details = "Browsing issues from:";
 
@@ -242,10 +248,15 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 		} else if (
 			document.location.pathname.includes(
-				"/" + repositoryAuthor.innerText + "/" + repositoryName.innerText + "/pull/"
+				"/" +
+					repositoryAuthor.innerText +
+					"/" +
+					repositoryName.innerText +
+					"/pull/"
 			)
 		) {
-			presenceData.details = "Looking on pull request " + pullRequestID.innerText;
+			presenceData.details =
+				"Looking on pull request " + pullRequestID.innerText;
 
 			presenceData.state =
 				pullRequestAuthor[0].innerText + " - " + pullRequestTitle.innerText;
@@ -253,12 +264,17 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 		} else if (
 			document.location.pathname.includes(
-				"/" + repositoryAuthor.innerText + "/" + repositoryName.innerText + "/issues/"
+				"/" +
+					repositoryAuthor.innerText +
+					"/" +
+					repositoryName.innerText +
+					"/issues/"
 			)
 		) {
 			presenceData.details = "Looking on issue " + issueID.innerText;
 
-			presenceData.state = issueAuthor[0].innerText + " - " + issueTitle.innerText;
+			presenceData.state =
+				issueAuthor[0].innerText + " - " + issueTitle.innerText;
 
 			presenceData.startTimestamp = browsingStamp;
 		} else if (
@@ -326,7 +342,8 @@ presence.on("UpdateData", async () => {
 			} else if (profileNickname.innerText.length == 0) {
 				presenceData.state = profileName.innerText;
 			} else
-				presenceData.state = profileName.innerText + " | " + profileNickname.innerText;
+				presenceData.state =
+					profileName.innerText + " | " + profileNickname.innerText;
 
 			presenceData.startTimestamp = browsingStamp;
 		} else if (document.location.pathname.indexOf(profileTabs)) {
@@ -337,7 +354,8 @@ presence.on("UpdateData", async () => {
 			} else if (profileNickname.innerText.length == 0) {
 				presenceData.state = profileName.innerText;
 			} else
-				presenceData.state = profileName.innerText + " | " + profileNickname.innerText;
+				presenceData.state =
+					profileName.innerText + " | " + profileNickname.innerText;
 
 			presenceData.startTimestamp = browsingStamp;
 
@@ -349,7 +367,8 @@ presence.on("UpdateData", async () => {
 				} else if (profileNickname.innerText.length == 0) {
 					presenceData.state = profileName.innerText;
 				} else
-					presenceData.state = profileName.innerText + " | " + profileNickname.innerText;
+					presenceData.state =
+						profileName.innerText + " | " + profileNickname.innerText;
 
 				presenceData.startTimestamp = browsingStamp;
 			}

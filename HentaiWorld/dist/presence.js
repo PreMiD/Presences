@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "660882722839068702",
-    mediaKeys: false
+    
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var iFrameVideo, currentTime, duration, paused;

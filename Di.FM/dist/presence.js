@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "630542731701387276",
-    mediaKeys: false
+    
 });
 let oo;
 let songt;

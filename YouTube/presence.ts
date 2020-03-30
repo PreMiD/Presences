@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "463097721130188830",
-	mediaKeys: false
-}),
+		clientId: "463097721130188830"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
@@ -41,25 +40,26 @@ presence.on("UpdateData", async () => {
 		YouTubeEmbed
 			? (title = document.querySelector("div.ytp-title-text > a"))
 			: oldYouTube && document.location.pathname.includes("/watch")
-				? (title = document.querySelector(".watch-title"))
-				: YouTubeTV
-					? (title = document.querySelector(".player-video-title"))
-					: !document.location.pathname.includes("/watch")
-						? (title = document.querySelector(".ytd-miniplayer .title"))
-						: (title = document.querySelector(
-							"h1 yt-formatted-string.ytd-video-primary-info-renderer"
-						));
+			? (title = document.querySelector(".watch-title"))
+			: YouTubeTV
+			? (title = document.querySelector(".player-video-title"))
+			: !document.location.pathname.includes("/watch")
+			? (title = document.querySelector(".ytd-miniplayer .title"))
+			: (title = document.querySelector(
+					"h1 yt-formatted-string.ytd-video-primary-info-renderer"
+			  ));
 
 		var uploaderTV: any,
 			uploaderMiniPlayer: any,
 			uploader2: any,
 			edited: boolean,
 			uploaderEmbed: any;
-
 		(edited = false),
 			(uploaderTV =
 				document.querySelector(".player-video-details") ||
-				document.querySelector("ytd-video-owner-renderer  .ytd-channel-name a")),
+				document.querySelector(
+					"ytd-video-owner-renderer  .ytd-channel-name a"
+				)),
 			(uploaderEmbed = document.querySelector(
 				"div.ytp-title-expanded-heading > h2 > a"
 			)),
@@ -83,21 +83,21 @@ presence.on("UpdateData", async () => {
 			uploaderMiniPlayer !== null && uploaderMiniPlayer.textContent.length > 0
 				? uploaderMiniPlayer
 				: uploader2 !== null && uploader2.textContent.length > 0
-					? uploader2
-					: document.querySelector(
+				? uploader2
+				: document.querySelector(
 						"#upload-info yt-formatted-string.ytd-channel-name a"
-					) !== null
-						? document.querySelector(
-							"#upload-info yt-formatted-string.ytd-channel-name a"
-						)
-						: uploaderEmbed !== null &&
-							YouTubeEmbed &&
-							uploaderEmbed.textContent.length > 0
-							? uploaderEmbed
-							: (uploaderTV = truncateAfter(
-								uploaderTV.textContent.replace(/\s+/g, ""),
-								pattern
-							));
+				  ) !== null
+				? document.querySelector(
+						"#upload-info yt-formatted-string.ytd-channel-name a"
+				  )
+				: uploaderEmbed !== null &&
+				  YouTubeEmbed &&
+				  uploaderEmbed.textContent.length > 0
+				? uploaderEmbed
+				: (uploaderTV = truncateAfter(
+						uploaderTV.textContent.replace(/\s+/g, ""),
+						pattern
+				  ));
 
 		var timestamps = getTimestamps(
 			Math.floor(video.currentTime),
@@ -115,8 +115,8 @@ presence.on("UpdateData", async () => {
 				edited == true
 					? uploaderMiniPlayer.getAttribute("premid-value")
 					: uploaderTV !== null
-						? uploaderTV.textContent
-						: uploader.textContent,
+					? uploaderTV.textContent
+					: uploader.textContent,
 			largeImageKey: "yt_lg",
 			smallImageKey: video.paused ? "pause" : "play", //general.playing general.paused
 			smallImageText: video.paused
@@ -130,10 +130,10 @@ presence.on("UpdateData", async () => {
 			video.paused
 				? ""
 				: title == null
-					? document.querySelector(
+				? document.querySelector(
 						".title.style-scope.ytd-video-primary-info-renderer"
-					).textContent
-					: title.textContent
+				  ).textContent
+				: title.textContent
 		);
 
 		//* Remove timestamps if paused or live
@@ -173,7 +173,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.state;
 		}
 
-    /*
+		/*
     If (Hide title etc.) {
       general.watchingVid
       general.watchingLive
@@ -274,8 +274,8 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (document.location.pathname.includes("/post")) {
 			presenceData.details = "Viewing community post";
-			var selector: Node = document.querySelector("#author-text")
-			presenceData.state = selector && `of: ${selector.textContent}` || null;
+			var selector: Node = document.querySelector("#author-text");
+			presenceData.state = (selector && `of: ${selector.textContent}`) || null;
 			presenceData.startTimestamp = browsingStamp;
 		} else if (document.location.pathname.includes("/feed/trending")) {
 			presenceData.details = "Viewing what's trending"; //youtube.trending

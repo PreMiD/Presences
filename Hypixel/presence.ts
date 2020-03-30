@@ -1,24 +1,28 @@
 var presence = new Presence({
-	clientId: "629093766170411014", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "629093766170411014" // CLIENT ID FOR YOUR PRESENCE
+});
 
 var item: any, user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "hypixel"
 	};
 
 	presenceData.startTimestamp = browsingStamp;
 	if (document.location.hostname == "hypixel.net") {
-		title = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav > fieldset > span > span > a > span");
+		title = document.querySelector(
+			"#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav > fieldset > span > span > a > span"
+		);
 		if (document.location.pathname.includes("/threads/")) {
-			title = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1");
-			search = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav");
+			title = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1"
+			);
+			search = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav"
+			);
 			title = title.innerText.replace(search.innerText, "").replace("»", "");
 			presenceData.details = "Forums, viewing thread:";
 			if (title.length > 128) {
@@ -29,10 +33,16 @@ presence.on("UpdateData", async () => {
 			delete presenceData.smallImageKey;
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/forums/")) {
-			title = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1");
+			title = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1"
+			);
 			if (title != null) {
-				title = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1");
-				search = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav");
+				title = document.querySelector(
+					"#headerFix > div.hypixel_titleWrapper > div > div > h1"
+				);
+				search = document.querySelector(
+					"#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav"
+				);
 				title = title.innerText.replace(search.innerText, "").replace("»", "");
 				presenceData.details = "Forums, viewing category:";
 				presenceData.state = title;
@@ -48,21 +58,30 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			}
-		} else if (document.location.pathname.includes("/find-new/") && document.location.pathname.includes("/profile-posts")) {
+		} else if (
+			document.location.pathname.includes("/find-new/") &&
+			document.location.pathname.includes("/profile-posts")
+		) {
 			presenceData.details = "Forums, Viewing the list of";
 			presenceData.state = "latest profile posts";
 
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.location.pathname.includes("/find-new/") && document.location.pathname.includes("/posts")) {
+		} else if (
+			document.location.pathname.includes("/find-new/") &&
+			document.location.pathname.includes("/posts")
+		) {
 			presenceData.details = "Forums, Viewing the list of";
 			presenceData.state = "latest posts";
 
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.location.pathname.includes("/find-new/") && document.location.pathname.includes("/media")) {
+		} else if (
+			document.location.pathname.includes("/find-new/") &&
+			document.location.pathname.includes("/media")
+		) {
 			presenceData.details = "Forums, Viewing the list of";
 			presenceData.state = "latest media posts";
 
@@ -70,7 +89,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/search/")) {
-			search = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1 > a > em");
+			search = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1 > a > em"
+			);
 			if (search != null) {
 				presenceData.details = "Forums, searching for:";
 				presenceData.state = search.innerText;
@@ -87,7 +108,9 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/members/")) {
-			user = document.querySelector("#content > div > div > div.mainContainer_noSidebar > div > div.mainProfileColumn > div > div > h1");
+			user = document.querySelector(
+				"#content > div > div > div.mainContainer_noSidebar > div > div.mainProfileColumn > div > div > h1"
+			);
 			presenceData.details = "Forums, viewing user:";
 			presenceData.state = user.innerText;
 
@@ -125,8 +148,14 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/media/")) {
-			if (document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.mediaAttribution > h1") != null) {
-				title = document.querySelector("#content > div > div > div.uix_contentFix > div > div > div.mediaAttribution > h1");
+			if (
+				document.querySelector(
+					"#content > div > div > div.uix_contentFix > div > div > div.mediaAttribution > h1"
+				) != null
+			) {
+				title = document.querySelector(
+					"#content > div > div > div.uix_contentFix > div > div > div.mediaAttribution > h1"
+				);
 				presenceData.details = "Media, Viewing post:";
 				presenceData.state = title.innerText;
 
@@ -134,8 +163,12 @@ presence.on("UpdateData", async () => {
 
 				presence.setActivity(presenceData);
 			} else if (document.location.pathname.includes("/categories/")) {
-				title = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1");
-				search = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav");
+				title = document.querySelector(
+					"#headerFix > div.hypixel_titleWrapper > div > div > h1"
+				);
+				search = document.querySelector(
+					"#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav"
+				);
 				title = title.innerText.replace(search.innerText, "").replace("»", "");
 				presenceData.details = "Media, Viewing category:";
 				presenceData.state = title;
@@ -152,9 +185,17 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/conversations/")) {
-			if (document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1") != null) {
-				title = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1");
-				search = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav");
+			if (
+				document.querySelector(
+					"#headerFix > div.hypixel_titleWrapper > div > div > h1"
+				) != null
+			) {
+				title = document.querySelector(
+					"#headerFix > div.hypixel_titleWrapper > div > div > h1"
+				);
+				search = document.querySelector(
+					"#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav"
+				);
 				title = title.innerText.replace(search.innerText, "").replace("»", "");
 				presenceData.details = "Forums, Reading DM:";
 				if (title.length > 128) {
@@ -182,7 +223,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/player/")) {
-			user = document.querySelector("#headerFix > div.hypixel_titleWrapper.shiftedTitle > div > div > h1 > nav > fieldset > span > span:nth-child(2) > a > span");
+			user = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper.shiftedTitle > div > div > h1 > nav > fieldset > span > span:nth-child(2) > a > span"
+			);
 			presenceData.details = "Players, Viewing:";
 			presenceData.state = user.innerText;
 
@@ -212,8 +255,12 @@ presence.on("UpdateData", async () => {
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/help/")) {
 			presenceData.details = "Help, viewing:";
-			title = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1");
-			search = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav");
+			title = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1"
+			);
+			search = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav"
+			);
 			title = title.innerText.replace(search.innerText, "").replace("»", "");
 			presenceData.state = title;
 
@@ -221,9 +268,16 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/leaderboard")) {
-			title = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1");
-			search = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav");
-			title = title.innerText.replace(search.innerText, "").replace("»", "").replace(" - Leaderboard", "");
+			title = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1"
+			);
+			search = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav"
+			);
+			title = title.innerText
+				.replace(search.innerText, "")
+				.replace("»", "")
+				.replace(" - Leaderboard", "");
 			presenceData.details = "Leaderboards, Viewing:";
 			presenceData.state = title;
 
@@ -231,8 +285,12 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (title !== null && title.innerText == "Games") {
-			title = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1");
-			search = document.querySelector("#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav");
+			title = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1"
+			);
+			search = document.querySelector(
+				"#headerFix > div.hypixel_titleWrapper > div > div > h1 > nav"
+			);
 			title = title.innerText.replace(search.innerText, "").replace("»", "");
 			presenceData.details = "Viewing game:";
 			presenceData.state = title;
@@ -260,10 +318,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else {
-
 		presence.setActivity();
 		presence.setTrayTitle();
-
 	}
-
 });

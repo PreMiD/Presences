@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "688166209736409100",
-	mediaKeys: false
-}),
+		clientId: "688166209736409100"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
@@ -46,16 +45,16 @@ presence.on("UpdateData", async () => {
 			case pathIncludes("/users/"):
 				data.details = document.querySelector("div.user-data p")
 					? document
-						.querySelector("div.user-data p")
-						.textContent.replace(/[\s\n]+/gi, "")
+							.querySelector("div.user-data p")
+							.textContent.replace(/[\s\n]+/gi, "")
 					: "...";
 				data.state = "User page";
 				break;
 			case pathIncludes("/store/presences/"):
 				data.details = document.querySelector("h1.presence-name")
 					? document
-						.querySelector("h1.presence-name")
-						.textContent.replace(/[\s\n]+/gi, "")
+							.querySelector("h1.presence-name")
+							.textContent.replace(/[\s\n]+/gi, "")
 					: "Store";
 				data.state = "Presence page";
 				break;

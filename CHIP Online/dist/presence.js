@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "651438286962688044",
-    mediaKeys: false
+    
 });
 
 presence.on("UpdateData", () => {

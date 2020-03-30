@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "630023998767497217",
-    mediaKeys: false
+    
 });
 var item, user, search, title;
 var browsingStamp = Math.floor(Date.now() / 1000);

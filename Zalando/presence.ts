@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "644645903973482536",
-	mediaKeys: false
-}),
+		clientId: "644645903973482536"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -18,8 +17,6 @@ var search: any;
 var language: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "zalando"
 	};
@@ -29,23 +26,42 @@ presence.on("UpdateData", async () => {
 	//nl = Nederlands
 	//Language list can be found here: https://api.premid.app/v2/langFile/list
 
-	if (document.location.pathname == "/" || document.location.pathname.includes("home/")) {
+	if (
+		document.location.pathname == "/" ||
+		document.location.pathname.includes("home/")
+	) {
 		presenceData.startTimestamp = browsingStamp;
 		presenceData.details = getTranslation("HomePage");
 	} else if (document.location.pathname.includes(".html")) {
 		presenceData.startTimestamp = browsingStamp;
-		user = document.querySelector(".h-container.h-product-title.topSection.h-align-left > div:nth-child(2) > h1");
-		title = document.querySelector(".h-container.h-product-title.topSection.h-align-left > div:nth-child(1) > a > h2");
+		user = document.querySelector(
+			".h-container.h-product-title.topSection.h-align-left > div:nth-child(2) > h1"
+		);
+		title = document.querySelector(
+			".h-container.h-product-title.topSection.h-align-left > div:nth-child(1) > a > h2"
+		);
 		presenceData.details = getTranslation("ProductView");
 		presenceData.state = user.textContent + " > " + title.textContent;
-	} else if (document.querySelector("#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a") !== null) {
+	} else if (
+		document.querySelector(
+			"#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a"
+		) !== null
+	) {
 		presenceData.startTimestamp = browsingStamp;
-		user = document.querySelector("#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a");
+		user = document.querySelector(
+			"#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a"
+		);
 		presenceData.details = getTranslation("BrandView");
 		presenceData.state = user.textContent;
-	} else if (document.querySelector("#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul") !== null) {
+	} else if (
+		document.querySelector(
+			"#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul"
+		) !== null
+	) {
 		presenceData.startTimestamp = browsingStamp;
-		user = document.querySelector("#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul");
+		user = document.querySelector(
+			"#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul"
+		);
 		presenceData.details = getTranslation("CategoryView");
 		presenceData.state = user.textContent;
 	} else if (document.location.pathname.includes("/cart/")) {
@@ -62,22 +78,19 @@ presence.on("UpdateData", async () => {
 		presenceData.details = getTranslation("FAQ");
 	}
 
-
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
 		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
@@ -184,7 +197,9 @@ function getTranslation(stringName: String) {
 			}
 			break;
 		default:
-			PMD_error("Unknown StringName please contact the Developer of this presence!\nYou can contact him/her in the PreMiD Discord (discord.gg/premid)");
+			PMD_error(
+				"Unknown StringName please contact the Developer of this presence!\nYou can contact him/her in the PreMiD Discord (discord.gg/premid)"
+			);
 			return "Unknown stringName";
 			break;
 	}

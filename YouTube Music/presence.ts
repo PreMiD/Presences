@@ -1,40 +1,22 @@
 var presence = new Presence({
-	clientId: "463151177836658699",
-	mediaKeys: true
-}),
+		clientId: "463151177836658699"
+	}),
 	strings: any = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
 	});
 
-presence.on("MediaKeys", (key: string) => {
-	switch (key) {
-		case "pause": {
-			var video = document.querySelector(".video-stream") as HTMLVideoElement;
-
-			video.paused ? video.play() : video.pause();
-			break;
-		}
-		case "nextTrack":
-			(document.querySelector(".next-button") as HTMLAnchorElement).click();
-			break;
-		case "previousTrack":
-			(document.querySelector(".previous-button") as HTMLAnchorElement).click();
-			break;
-	}
-});
-
 presence.on("UpdateData", async () => {
 	var title = (document.querySelector(
-		".ytmusic-player-bar.title"
-	) as HTMLElement).innerText,
+			".ytmusic-player-bar.title"
+		) as HTMLElement).innerText,
 		video = document.querySelector(".video-stream") as HTMLVideoElement;
 
 	if (title !== "" && !isNaN(video.duration)) {
 		var timestamps = getTimestamps(
-			Math.floor(video.currentTime),
-			Math.floor(video.duration)
-		),
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			),
 			presenceData: presenceData = {
 				details: title,
 				state: getAuthorString(),
@@ -60,8 +42,8 @@ presence.on("UpdateData", async () => {
 function getAuthorString() {
 	//* Get authors
 	var authors = document.querySelectorAll(
-		"span yt-formatted-string.ytmusic-player-bar a"
-	) as NodeListOf<HTMLAnchorElement>,
+			"span yt-formatted-string.ytmusic-player-bar a"
+		) as NodeListOf<HTMLAnchorElement>,
 		authorsArray: Array<HTMLAnchorElement>,
 		authorString: string;
 
@@ -82,7 +64,7 @@ function getAuthorString() {
 			.map(a => a.innerText)
 			.join(", ")} - ${
 			authorsArray[authorsArray.length - 1].innerText
-			} (${year})`;
+		} (${year})`;
 	}
 	//* If from default YouTube music return Uploader
 	else

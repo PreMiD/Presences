@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "620072679139180575",
-    mediaKeys: false
+    
 });
 var elapsed = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {

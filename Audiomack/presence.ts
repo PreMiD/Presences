@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "621808181877669904",
-	mediaKeys: false
-}),
+		clientId: "621808181877669904"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -10,32 +9,40 @@ var presence = new Presence({
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let data: presenceData = {
-		largeImageKey: "audiomack-logo",
+		largeImageKey: "audiomack-logo"
 	};
 
 	var playerCheck = document.querySelector(".player--active") ? true : false;
 	if (playerCheck) {
-		var playCheck = document.querySelector(".player__controls button.play-button--playing") ? true : false;
+		var playCheck = document.querySelector(
+			".player__controls button.play-button--playing"
+		)
+			? true
+			: false;
 		var title = document.querySelector(".player__title").textContent;
 		var author = document.querySelector(".player__artist").textContent;
 		var audioTime = document.querySelector(".waveform__elapsed").textContent;
-		var audioDuration = document.querySelector(".waveform__duration").textContent;
+		var audioDuration = document.querySelector(".waveform__duration")
+			.textContent;
 		var timestamps = getTimestamps(audioTime, audioDuration);
 
 		data.details = title;
-		var featureCheck = document.querySelector(".player__featuring") ? true : false;
+		var featureCheck = document.querySelector(".player__featuring")
+			? true
+			: false;
 		if (featureCheck) {
 			var feature = document.querySelector(".player__featuring").textContent;
 			data.state = author + " " + feature;
 		} else {
 			data.state = author;
 		}
-		data.smallImageKey = !playCheck ? "pause" : "play",
-			data.smallImageText = !playCheck ? (await strings).pause : (await strings).play,
-			data.startTimestamp = timestamps[0],
-			data.endTimestamp = timestamps[1]
+		(data.smallImageKey = !playCheck ? "pause" : "play"),
+			(data.smallImageText = !playCheck
+				? (await strings).pause
+				: (await strings).play),
+			(data.startTimestamp = timestamps[0]),
+			(data.endTimestamp = timestamps[1]);
 
 		if (!playCheck) {
 			delete data.startTimestamp;
@@ -46,7 +53,6 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.clearActivity();
 	}
-
 });
 
 function getTimestamps(audioTime: string, audioDuration: string) {

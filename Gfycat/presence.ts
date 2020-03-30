@@ -1,6 +1,6 @@
 var presence = new Presence({
-	clientId: "630874255990587402"
-}),
+		clientId: "630874255990587402"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -12,8 +12,7 @@ presence.on("UpdateData", async () => {
 	};
 
 	if (document.location.pathname.startsWith("/discover")) {
-		var section = document.querySelector(".multiple-view__title")
-			.textContent;
+		var section = document.querySelector(".multiple-view__title").textContent;
 		if (section) {
 			data.state = section;
 		}
@@ -65,8 +64,7 @@ presence.on("UpdateData", async () => {
 
 		if (player) {
 			var title = document.querySelector(".gif-info .title").textContent;
-			var views = document.querySelector(".gif-info .gif-views")
-				.textContent;
+			var views = document.querySelector(".gif-info .gif-views").textContent;
 			var timestamps = getTimestamps(
 				Math.floor(player.currentTime),
 				Math.floor(player.duration)

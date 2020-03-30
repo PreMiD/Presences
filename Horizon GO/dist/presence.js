@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "647443051819565076",
-    mediaKeys: false
+    
 }), presenceData = {
     largeImageKey: "icon"
 };

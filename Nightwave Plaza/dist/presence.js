@@ -1,6 +1,6 @@
 let presence = new Presence({
 	clientId: "620204628608417832",
-	mediaKeys: false
+	
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
 	if (document.getElementById("player-time").textContent == "Welcome back") return;

@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "636649694109499393",
-	mediaKeys: false
-}),
+		clientId: "636649694109499393"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "rl"
 	};
@@ -26,7 +23,10 @@ presence.on("UpdateData", async () => {
 	if (document.location.hostname == "www.rocketleagueesports.com") {
 		title = document.querySelector("head > title");
 		presenceData.details = "Esports - Viewing:";
-		presenceData.state = title.innerText.replace(" | Rocket League Esports", "");
+		presenceData.state = title.innerText.replace(
+			" | Rocket League Esports",
+			""
+		);
 	} else {
 		if (document.location.pathname == "/") {
 			presenceData.startTimestamp = browsingStamp;
@@ -37,8 +37,14 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "the game info";
 		} else if (document.location.pathname.includes("/news/")) {
 			presenceData.startTimestamp = browsingStamp;
-			if (document.querySelector("#content > div:nth-child(1) > div > div > div:nth-child(1) > h1") !== null) {
-				title = document.querySelector("#content > div:nth-child(1) > div > div > div:nth-child(1) > h1");
+			if (
+				document.querySelector(
+					"#content > div:nth-child(1) > div > div > div:nth-child(1) > h1"
+				) !== null
+			) {
+				title = document.querySelector(
+					"#content > div:nth-child(1) > div > div > div:nth-child(1) > h1"
+				);
 				presenceData.details = "Reading article:";
 				presenceData.state = title.innerText;
 				presenceData.smallImageKey = "reading";
@@ -54,11 +60,13 @@ presence.on("UpdateData", async () => {
 			if (document.location.pathname.includes("/sequence/")) {
 				presenceData.startTimestamp = browsingStamp;
 				presenceData.details = "Viewing training sequence:";
-				title = document.querySelector("#rlg-training-page > div.row > div.col-3-3 > h1");
+				title = document.querySelector(
+					"#rlg-training-page > div.row > div.col-3-3 > h1"
+				);
 				presenceData.state = title.innerText;
 			} else {
 				presenceData.startTimestamp = browsingStamp;
-				presenceData.details = "Browsing training maps"
+				presenceData.details = "Browsing training maps";
 			}
 		} else if (document.location.pathname.includes("/items")) {
 			presenceData.startTimestamp = browsingStamp;
@@ -94,7 +102,9 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/trade/")) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing trade of user:";
-			title = document.querySelector("body > main > div > div > div > div.col-3-3.rlg-trade-page > div.rlg-trade-display-container.is--user > div.rlg-trade-display-header > a > div > div.rlg-trade-platform-name > span:nth-child(1)");
+			title = document.querySelector(
+				"body > main > div > div > div > div.col-3-3.rlg-trade-page > div.rlg-trade-display-container.is--user > div.rlg-trade-display-header > a > div > div.rlg-trade-platform-name > span:nth-child(1)"
+			);
 			presenceData.state = title.innerText;
 		} else if (document.location.pathname.includes("/media")) {
 			presenceData.startTimestamp = browsingStamp;
@@ -104,19 +114,17 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

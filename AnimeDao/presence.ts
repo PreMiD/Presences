@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: `633637979952250881`
-}),
+		clientId: `633637979952250881`
+	}),
 	{ pathname } = window.location,
 	{ hostname } = window.location,
 	startTimestamp = Math.floor(Date.now() / 1000);
@@ -15,7 +15,7 @@ presence.on("iFrameData", data => {
 	duration = data.duration;
 	paused = data.paused;
 	played = data.played;
-})
+});
 
 presence.on("UpdateData", async () => {
 	const strings = await presence.getStrings({
@@ -26,12 +26,14 @@ presence.on("UpdateData", async () => {
 
 	const presenceData: presenceData = {
 		largeImageKey: "animedao_lg"
-	}
+	};
 	if (hostname === `animedao26.stream` || hostname === `animedao28.stream`) {
-		const title = document.querySelector('h2').textContent.trim();
+		const title = document.querySelector("h2").textContent.trim();
 		if ((episode = title.match(/\WEpisode\W\d{1,3}/)) != null) {
-			presenceData.details = title.replace(episode[0], '');
-			presenceData.state = `${episode[0]} - ${document.querySelector(`h4`).textContent}`;
+			presenceData.details = title.replace(episode[0], "");
+			presenceData.state = `${episode[0]} - ${
+				document.querySelector(`h4`).textContent
+			}`;
 		} else {
 			presenceData.details = title;
 		}
@@ -42,7 +44,9 @@ presence.on("UpdateData", async () => {
 				presenceData.endTimestamp = timestamps[1];
 			}
 			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused ? (await strings).paused : (await strings).playing;
+			presenceData.smallImageText = paused
+				? (await strings).paused
+				: (await strings).playing;
 		}
 	} else if (hostname === `animedao.com`) {
 		presenceData.startTimestamp = startTimestamp;
@@ -54,7 +58,10 @@ presence.on("UpdateData", async () => {
 			const genre = document.querySelector(`h2`).textContent.trim();
 			presenceData.details = `Viewing genres`;
 			if (pathname !== `/genre`) {
-				presenceData.state = `${genre.replace(genre.match(/Genre\W-\W/)[0], ``)}`;
+				presenceData.state = `${genre.replace(
+					genre.match(/Genre\W-\W/)[0],
+					``
+				)}`;
 			}
 		} else if (pathname.startsWith(`/popular-anime`)) {
 			presenceData.details = `Viewing popular anime`;

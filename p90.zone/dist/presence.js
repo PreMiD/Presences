@@ -1,6 +1,6 @@
 let presence = new Presence({
 	clientId: "633714339999645737",
-	mediaKeys: false
+	
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
 	let ts = document.querySelector("body > div.menu.main > div > h2").textContent;

@@ -1,6 +1,5 @@
 var presence = new Presence({
-	clientId: "613628090219757599",
-	mediaKeys: false
+	clientId: "613628090219757599"
 });
 
 let timeElapsed = Math.floor(Date.now() / 1000),

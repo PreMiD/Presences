@@ -1,6 +1,6 @@
 var presence = new Presence({
-	clientId: "636588416854917130"
-}),
+		clientId: "636588416854917130"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -14,14 +14,14 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "1337x"
 	};
 
-
-	if (document.location.pathname == "/" || document.location.pathname == "/home/") {
+	if (
+		document.location.pathname == "/" ||
+		document.location.pathname == "/home/"
+	) {
 		presenceData.startTimestamp = browsingStamp;
 		presenceData.details = "Viewing home page";
 	} else if (document.location.pathname.includes("/movie-library")) {
@@ -43,7 +43,9 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = browsingStamp;
 		presenceData.details = "Viewing Anime torrents";
 	} else if (document.location.pathname.includes("/sub/")) {
-		title = document.querySelector("body > main > div > div > div.box-info.trending > div > h1");
+		title = document.querySelector(
+			"body > main > div > div > div.box-info.trending > div > h1"
+		);
 		presenceData.startTimestamp = browsingStamp;
 		presenceData.details = "Viewing:";
 		presenceData.state = title.innerText;
@@ -89,10 +91,14 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/torrent/")) {
 		presenceData.startTimestamp = browsingStamp;
 		presenceData.details = "Viewing torrent:";
-		title = document.querySelector("body > main > div > div > div > div.box-info-heading.clearfix > h1");
+		title = document.querySelector(
+			"body > main > div > div > div > div.box-info-heading.clearfix > h1"
+		);
 		presenceData.state = title.innerText;
 	} else if (document.location.pathname.includes("/search")) {
-		search = document.querySelector("body > main > div > div > div > div.box-info-heading.clearfix > h1 > span");
+		search = document.querySelector(
+			"body > main > div > div > div > div.box-info-heading.clearfix > h1 > span"
+		);
 		presenceData.startTimestamp = browsingStamp;
 		presenceData.details = "Searching for:";
 		presenceData.state = search.innerText;
@@ -101,19 +107,17 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

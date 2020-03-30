@@ -9,12 +9,17 @@ var presence = new Presence({
 presence.on("UpdateData", async () => {
 	if (document.location.pathname.startsWith("/show")) {
 		let homepagePresence: presenceData = {
-			details: document.getElementsByClassName("titel")[0].getElementsByTagName("h3")[0].innerText,
+			details: document
+				.getElementsByClassName("titel")[0]
+				.getElementsByTagName("h3")[0].innerText,
 			// state: "Schaut gerade nicht",
 			largeImageKey: "logo"
 		};
 		presence.setActivity(homepagePresence);
-	} else if (document.location.pathname.startsWith("/speedsuche") || document.location.pathname.startsWith("/suche")) {
+	} else if (
+		document.location.pathname.startsWith("/speedsuche") ||
+		document.location.pathname.startsWith("/suche")
+	) {
 		let searchingPresence: presenceData = {
 			details: "Sucht...",
 			state: "Sucht nach einem Anime",
@@ -50,7 +55,7 @@ presence.on("UpdateData", async () => {
 	}
 });
 
-presence.on('iFrameData', function (data) {
+presence.on("iFrameData", function(data) {
 	console.log(data);
 });
 

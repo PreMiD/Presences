@@ -42,21 +42,27 @@ presence.on("UpdateData", async () => {
 		case "/privacy_setting":
 			presenceData.details = "Settings";
 			break;
-	};
+	}
 
 	if (document.location.pathname.slice(1).startsWith("of")) {
-		presenceData.details = document.querySelector("#content > h3").textContent.trim();
+		presenceData.details = document
+			.querySelector("#content > h3")
+			.textContent.trim();
 	} else if (document.location.pathname.slice(1).startsWith("saved")) {
 		if (!document.querySelector("#content > p")) {
 			presenceData.details = "Saved Posts";
-		};
+		}
 	} else if (document.location.pathname.slice(1).startsWith("voteof")) {
 		if (!document.querySelector("#content > p")) {
 			presenceData.details = "Voted Posts";
-		};
+		}
 	} else if (!isNaN(parseInt(document.location.pathname.slice(1)))) {
-		const author = document.querySelector("#content > div > table > tbody > tr > td > div > .blur a > b").textContent.trim();
+		const author = document
+			.querySelector(
+				"#content > div > table > tbody > tr > td > div > .blur a > b"
+			)
+			.textContent.trim();
 		presenceData.details = `Viewing ${author}'s post`;
-	};
+	}
 	presence.setActivity(presenceData);
 });

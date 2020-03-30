@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 var presence = new Presence({
     clientId: "607651992567021580",
-    mediaKeys: true
+    
 });
 var strings = presence.getStrings({
     play: "presence.playback.playing",

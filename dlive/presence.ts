@@ -1,8 +1,6 @@
 var presence = new Presence({
-	clientId: "609531561389588480",
-	mediaKeys: true
-}),
-
+		clientId: "609531561389588480"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -13,20 +11,17 @@ var playback;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
-
-	lastPlaybackState = playback
-	browsingStamp = Math.floor(Date.now() / 1000)
-
+	lastPlaybackState = playback;
+	browsingStamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-
 	playback =
 		document.querySelector("video.dplayer-video.dplayer-video-current") !== null
-			? true : false
+			? true
+			: false;
 
 	if (!playback) {
-
 		let presenceData: presenceData = {
 			largeImageKey: "lg"
 		};
@@ -38,17 +33,21 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData, true);
-
 	}
 
-	var video: HTMLVideoElement = document.querySelector("video.dplayer-video.dplayer-video-current");
+	var video: HTMLVideoElement = document.querySelector(
+		"video.dplayer-video.dplayer-video-current"
+	);
 
 	if (video !== null) {
-
 		var videoTitle: any, streamer: any;
 
-		videoTitle = document.querySelector('.info-line-left.flex-box .flex-column.flex-justify-center div');
-		streamer = document.querySelector('div.channel-header span.dlive-name span.overflow-ellipsis');
+		videoTitle = document.querySelector(
+			".info-line-left.flex-box .flex-column.flex-justify-center div"
+		);
+		streamer = document.querySelector(
+			"div.channel-header span.dlive-name span.overflow-ellipsis"
+		);
 
 		let presenceData: presenceData = {
 			largeImageKey: "lg",
@@ -62,17 +61,6 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = browsingStamp;
 
 		presence.setActivity(presenceData, true);
-
-	}
-
-});
-
-presence.on("MediaKeys", (key: string) => {
-	switch (key) {
-		case "pause":
-			var video = document.querySelector(".jw-video video") as HTMLVideoElement;
-			video.paused ? video.play() : video.pause();
-			break;
 	}
 });
 

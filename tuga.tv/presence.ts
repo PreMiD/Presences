@@ -3,10 +3,7 @@ const presence = new Presence({
 });
 const { pathname } = window.location,
 	startTimestamp = Math.floor(Date.now() / 1000);
-let current: number,
-	duration: number,
-	paused: boolean,
-	played: boolean;
+let current: number, duration: number, paused: boolean, played: boolean;
 
 const strings = presence.getStrings({
 	playing: "presence.playback.playing",
@@ -19,14 +16,14 @@ presence.on("iFrameData", data => {
 	duration = data.duration;
 	paused = data.paused;
 	played = data.played;
-})
+});
 
 presence.on("UpdateData", async () => {
 	const presenceData: presenceData = {
 		largeImageKey: "tuga_lg",
 		details: (await strings).browsing,
 		startTimestamp
-	}
+	};
 	if (pathname === `/`) {
 		presenceData.state = `Home page`;
 	} else if (pathname.startsWith(`/filmes`)) {
@@ -39,8 +36,12 @@ presence.on("UpdateData", async () => {
 		presenceData.startTimestamp = undefined;
 		const title = document.querySelector(`h3`).textContent;
 		const episode = title.match(/((S|E)\d{1,2}){2}/);
-		presenceData.details = pathname.startsWith(`/serie`) ? title.replace(episode[0], '') : title;
-		presenceData.state = pathname.startsWith(`/serie`) ? `${episode[0]}` : undefined;
+		presenceData.details = pathname.startsWith(`/serie`)
+			? title.replace(episode[0], "")
+			: title;
+		presenceData.state = pathname.startsWith(`/serie`)
+			? `${episode[0]}`
+			: undefined;
 		if (played) {
 			if (!paused) {
 				const timestamps = getTimestamps(current, duration);
@@ -48,7 +49,9 @@ presence.on("UpdateData", async () => {
 				presenceData.endTimestamp = timestamps[1];
 			}
 			presenceData.smallImageKey = paused ? "pause" : "play";
-			presenceData.smallImageText = paused ? (await strings).paused : (await strings).playing;
+			presenceData.smallImageText = paused
+				? (await strings).paused
+				: (await strings).playing;
 		}
 	}
 	presence.setActivity(presenceData, true);

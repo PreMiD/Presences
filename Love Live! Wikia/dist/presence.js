@@ -1,7 +1,7 @@
 /// @todo maybe support all the languages soon
 var presence = new Presence({
     clientId: "638565041154555913",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if (document.location.pathname.startsWith("/wiki/")) {

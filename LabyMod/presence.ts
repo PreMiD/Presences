@@ -1,14 +1,12 @@
 var presence = new Presence({
-	clientId: "629072489238233111", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "629072489238233111" // CLIENT ID FOR YOUR PRESENCE
+});
 
 var item: any, user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "labymod"
 	};
@@ -30,8 +28,12 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/idea")) {
-			item = document.querySelector("#content > div > div:nth-child(1) > div > div:nth-child(2) > h3 > label");
-			title = document.querySelector("#content > div > div:nth-child(1) > div > div:nth-child(2) > h3");
+			item = document.querySelector(
+				"#content > div > div:nth-child(1) > div > div:nth-child(2) > h3 > label"
+			);
+			title = document.querySelector(
+				"#content > div > div:nth-child(1) > div > div:nth-child(2) > h3"
+			);
 			if (item != null) {
 				title = title.innerText.replace(item.innerText, "");
 			} else {
@@ -44,7 +46,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/shop")) {
-			title = document.querySelector("#variSection > div.contentWrapper > article.selectedProduct > table > tbody > tr > td:nth-child(2) > h3");
+			title = document.querySelector(
+				"#variSection > div.contentWrapper > article.selectedProduct > table > tbody > tr > td:nth-child(2) > h3"
+			);
 			user = document.querySelector("#renderoverlay");
 			if (user.width == "0") {
 				presenceData.details = "Shop, Ordering...";
@@ -97,10 +101,8 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else {
-
 			presence.setActivity();
 			presence.setTrayTitle();
-
 		}
 	} else if (document.location.hostname == "faq.labymod.net") {
 		presenceData.details = "Viewing frequently";
@@ -117,8 +119,12 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else if (document.location.hostname == "docs.labymod.net") {
-		title = document.querySelector("body > div > main > div > div.md-content > article > h1");
-		user = document.querySelector("body > div > main > div > div.md-sidebar.md-sidebar--primary > div > div > nav > ul > li.md-nav__item.md-nav__item--active.md-nav__item--nested > label");
+		title = document.querySelector(
+			"body > div > main > div > div.md-content > article > h1"
+		);
+		user = document.querySelector(
+			"body > div > main > div > div.md-sidebar.md-sidebar--primary > div > div > nav > ul > li.md-nav__item.md-nav__item--active.md-nav__item--nested > label"
+		);
 		title = user.innerText + " - " + title.innerText;
 		presenceData.details = "Docs viewing:";
 		presenceData.state = title;
@@ -130,5 +136,4 @@ presence.on("UpdateData", async () => {
 		presence.setActivity();
 		presence.setTrayTitle();
 	}
-
 });

@@ -1,15 +1,17 @@
 var presence = new Presence({
-	clientId: "620283648171835392",
-	mediaKeys: false
+	clientId: "620283648171835392"
 });
 
-const boards = { toradora: "Toradora!", kiminonawa: "Kimi no Na wa. / Your Name." }
+const boards = {
+	toradora: "Toradora!",
+	kiminonawa: "Kimi no Na wa. / Your Name."
+};
 
 presence.on("UpdateData", () => {
 	var path = document.location.pathname.split("/");
-	var board = "N/A"
+	var board = "N/A";
 	if (path[1] && boards[path[1]]) {
-		board = boards[path[1]]
+		board = boards[path[1]];
 	}
 	if (document.location.pathname == "/") {
 		var presenceData: presenceData = {
@@ -30,7 +32,8 @@ presence.on("UpdateData", () => {
 			} else if (path[3] == "list" && path.length > 4) {
 				var presenceData: presenceData = {
 					details: "Board: " + board,
-					state: "Searching: " + path[4].replace("%20", ", ").replace("%21", "!"),
+					state:
+						"Searching: " + path[4].replace("%20", ", ").replace("%21", "!"),
 					largeImageKey: "lg-imgb"
 				};
 				presence.setActivity(presenceData);
@@ -62,5 +65,4 @@ presence.on("UpdateData", () => {
 		};
 		presence.setActivity(presenceData);
 	}
-
 });

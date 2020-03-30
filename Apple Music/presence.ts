@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "621819308481445934",
-	mediaKeys: false
-}),
+		clientId: "621819308481445934"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -10,25 +9,42 @@ var presence = new Presence({
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let data: presenceData = {
-		largeImageKey: "applemusic-logo",
+		largeImageKey: "applemusic-logo"
 	};
 
-	var playerCheck = document.querySelector(".web-chrome-playback-controls__playback-btn[disabled]") ? false : true;
+	var playerCheck = document.querySelector(
+		".web-chrome-playback-controls__playback-btn[disabled]"
+	)
+		? false
+		: true;
 	if (playerCheck) {
-		var title = document.querySelector(".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper").textContent.trim();
-		var author = document.querySelector(".web-chrome-playback-lcd__sub-copy-scroll").textContent.split("—")[0];
-		var audioTime = document.querySelector(".web-chrome-playback-lcd__time-remaining").textContent;
+		var title = document
+			.querySelector(
+				".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
+			)
+			.textContent.trim();
+		var author = document
+			.querySelector(".web-chrome-playback-lcd__sub-copy-scroll")
+			.textContent.split("—")[0];
+		var audioTime = document.querySelector(
+			".web-chrome-playback-lcd__time-remaining"
+		).textContent;
 		var timestamps = getTimestamps(audioTime);
-		var paused = document.querySelector(".web-chrome-playback-controls__playback-btn[aria-label='Play']") ? true : false;
+		var paused = document.querySelector(
+			".web-chrome-playback-controls__playback-btn[aria-label='Play']"
+		)
+			? true
+			: false;
 
 		data.details = title;
 		data.state = author;
-		data.smallImageKey = paused ? "pause" : "play",
-			data.smallImageText = paused ? (await strings).pause : (await strings).play,
-			data.startTimestamp = timestamps[0],
-			data.endTimestamp = timestamps[1]
+		(data.smallImageKey = paused ? "pause" : "play"),
+			(data.smallImageText = paused
+				? (await strings).pause
+				: (await strings).play),
+			(data.startTimestamp = timestamps[0]),
+			(data.endTimestamp = timestamps[1]);
 
 		if (paused) {
 			delete data.startTimestamp;
@@ -39,7 +55,6 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.clearActivity();
 	}
-
 });
 
 function getTimestamps(audioDuration: string) {

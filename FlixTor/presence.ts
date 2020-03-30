@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "616754182858342426",
-	mediaKeys: true
-}),
+		clientId: "616754182858342426"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -40,10 +39,14 @@ presence.on("UpdateData", async () => {
 
 	if (video !== null && !isNaN(video.duration)) {
 		let videoTitle: HTMLElement = document.querySelector(
-			"div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down"
-		),
-			season: HTMLElement = document.querySelector("#playercontainer span.outPes"),
-			episode: HTMLElement = document.querySelector("#playercontainer span.outPep");
+				"div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down"
+			),
+			season: HTMLElement = document.querySelector(
+				"#playercontainer span.outPes"
+			),
+			episode: HTMLElement = document.querySelector(
+				"#playercontainer span.outPep"
+			);
 
 		let timestamps = getTimestamps(
 			Math.floor(video.currentTime),
@@ -53,7 +56,9 @@ presence.on("UpdateData", async () => {
 		presenceData = {
 			largeImageKey: "lg",
 			smallImageKey: video.paused ? "pause" : "play",
-			smallImageText: video.paused ? (await strings).pause : (await strings).play,
+			smallImageText: video.paused
+				? (await strings).pause
+				: (await strings).play,
 			startTimestamp: timestamps[0],
 			endTimestamp: timestamps[1]
 		};
@@ -80,17 +85,6 @@ presence.on("UpdateData", async () => {
 		if (videoTitle !== null) {
 			presence.setActivity(presenceData, !video.paused);
 		}
-	}
-});
-
-presence.on("MediaKeys", (key: string) => {
-	switch (key) {
-		case "pause":
-			var video = document.querySelector(
-				"#player > div.jw-media.jw-reset > video"
-			) as HTMLVideoElement;
-			video.paused ? video.play() : video.pause();
-			break;
 	}
 });
 

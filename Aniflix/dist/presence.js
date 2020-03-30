@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "630093952342687794",
-    mediaKeys: true
+    
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
@@ -144,14 +144,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         presence.setTrayTitle();
     }
 }));
-presence.on("MediaKeys", (key) => {
-    switch (key) {
-        case "pause":
-            var video = document.querySelector(".jw-video video");
-            video.paused ? video.play() : video.pause();
-            break;
-    }
-});
+
 function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

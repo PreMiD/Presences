@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "630418879411126282",
-    mediaKeys: false
+    
 });
 
 

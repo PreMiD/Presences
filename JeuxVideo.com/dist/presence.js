@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "651930315279040512",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     let presenceData = {

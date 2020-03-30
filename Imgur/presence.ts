@@ -1,21 +1,21 @@
 var presence = new Presence({
-	clientId: "623657389706444820", // CLIENT ID FOR YOUR PRESENCE
-	mediaKeys: false
-})
+	clientId: "623657389706444820" // CLIENT ID FOR YOUR PRESENCE
+});
 
 var item: any, user: any, search: any, item2: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let presenceData: presenceData = {
 		largeImageKey: "imgur"
 	};
 
 	presenceData.startTimestamp = browsingStamp;
 	if (document.location.hostname == "imgur.com") {
-		user = document.querySelector("#root > div > div.desktop-app.App > div > div.App-cover.NewCover.ProfileCover > div.ProfileCover-header > div.ProfileMeta > div > div.ProfileMeta-user");
+		user = document.querySelector(
+			"#root > div > div.desktop-app.App > div > div.App-cover.NewCover.ProfileCover > div.ProfileCover-header > div.ProfileMeta > div > div.ProfileMeta-user"
+		);
 		if (document.location.pathname.includes("/posts")) {
 			presenceData.details = "Viewing posts by user:";
 			presenceData.state = user.innerText;
@@ -23,21 +23,30 @@ presence.on("UpdateData", async () => {
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.location.pathname.includes("/user/") && document.location.pathname.includes("/favorites")) {
+		} else if (
+			document.location.pathname.includes("/user/") &&
+			document.location.pathname.includes("/favorites")
+		) {
 			presenceData.details = "Viewing favorites of user:";
 			presenceData.state = user.innerText;
 
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.location.pathname.includes("/user/") && document.location.pathname.includes("/comments")) {
+		} else if (
+			document.location.pathname.includes("/user/") &&
+			document.location.pathname.includes("/comments")
+		) {
 			presenceData.details = "Viewing comments by:";
 			presenceData.state = user.innerText;
 
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.location.pathname.includes("/user/") && document.location.pathname.includes("/about")) {
+		} else if (
+			document.location.pathname.includes("/user/") &&
+			document.location.pathname.includes("/about")
+		) {
 			presenceData.details = "Viewing about user:";
 			presenceData.state = user.innerText;
 
@@ -58,8 +67,13 @@ presence.on("UpdateData", async () => {
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.location.pathname.includes("/account/") && document.location.pathname.includes("/messages")) {
-			item = document.querySelector("body > div.message-container > div > div.message-conversation > div.message-conversation-heading > strong > a");
+		} else if (
+			document.location.pathname.includes("/account/") &&
+			document.location.pathname.includes("/messages")
+		) {
+			item = document.querySelector(
+				"body > div.message-container > div > div.message-conversation > div.message-conversation-heading > strong > a"
+			);
 			if (item !== null) {
 				presenceData.details = "Imgur DMs, messaging:";
 				presenceData.state = item.innerText;
@@ -111,7 +125,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/t/")) {
-			item = document.querySelector("#root > div > div.desktop-app.App > div > div.App-cover.NewCover.TagsCover > div.Cover-metadata > h1");
+			item = document.querySelector(
+				"#root > div > div.desktop-app.App > div > div.App-cover.NewCover.TagsCover > div.Cover-metadata > h1"
+			);
 			presenceData.details = "Exploring the tag:";
 			presenceData.state = item.innerText;
 
@@ -119,12 +135,19 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/search")) {
-			search = document.querySelector("#content > div.sentence-sorting.search-sentence > span.search-term-text.sorting-text-align");
+			search = document.querySelector(
+				"#content > div.sentence-sorting.search-sentence > span.search-term-text.sorting-text-align"
+			);
 			item = document.querySelector("#sort > div.selection");
 			item2 = document.querySelector("#window > div.selection");
 			presenceData.details = "Searching for:";
 			if (item2 !== null) {
-				presenceData.state = search.innerText + ", sorted by " + item.innerText + " of " + item2.innerText;
+				presenceData.state =
+					search.innerText +
+					", sorted by " +
+					item.innerText +
+					" of " +
+					item2.innerText;
 			} else {
 				presenceData.state = search.innerText + ", sorted by " + item.innerText;
 			}
@@ -133,7 +156,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/a/")) {
-			item = document.querySelector("#inside > div.left.post-pad > div.post-container > div.post-header > div > div.post-title-container > h1");
+			item = document.querySelector(
+				"#inside > div.left.post-pad > div.post-container > div.post-header > div > div.post-title-container > h1"
+			);
 			if (item !== null) {
 				presenceData.details = "Viewing a hidden post:";
 				if (item.innerText.length > 128) {
@@ -154,7 +179,9 @@ presence.on("UpdateData", async () => {
 				presence.setActivity(presenceData);
 			}
 		} else if (document.location.pathname.includes("/gallery/")) {
-			item = document.querySelector("#inside > div.left.post-pad > div.post-container > div.post-header > div > div.post-title-container > h1");
+			item = document.querySelector(
+				"#inside > div.left.post-pad > div.post-container > div.post-header > div > div.post-title-container > h1"
+			);
 			if (document.location.pathname.includes("/comment/")) {
 				presenceData.details = "Viewing comment at post:";
 				if (item.innerText.length > 128) {
@@ -235,8 +262,14 @@ presence.on("UpdateData", async () => {
 			delete presenceData.smallImageKey;
 
 			presence.setActivity(presenceData);
-		} else if (document.querySelector("#main-content > article > header > div.clearfix > h1") !== null) {
-			item = document.querySelector("#main-content > article > header > div.clearfix > h1");
+		} else if (
+			document.querySelector(
+				"#main-content > article > header > div.clearfix > h1"
+			) !== null
+		) {
+			item = document.querySelector(
+				"#main-content > article > header > div.clearfix > h1"
+			);
 			presenceData.details = "Blog, reading article:";
 			if (item.innerText.length > 128) {
 				presenceData.state = item.innerText.substring(0, 125) + "...";
@@ -269,8 +302,14 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else if (document.location.hostname == "imgurstore.com") {
-		if (document.querySelector("#body-wrapper > div > div > div.container-fluid.container > div.row > div.col-md-5 > div.row.desktop-product-title.hidden-xs.hidden-sm > div > h1") !== null) {
-			item = document.querySelector("#body-wrapper > div > div > div.container-fluid.container > div.row > div.col-md-5 > div.row.desktop-product-title.hidden-xs.hidden-sm > div > h1");
+		if (
+			document.querySelector(
+				"#body-wrapper > div > div > div.container-fluid.container > div.row > div.col-md-5 > div.row.desktop-product-title.hidden-xs.hidden-sm > div > h1"
+			) !== null
+		) {
+			item = document.querySelector(
+				"#body-wrapper > div > div > div.container-fluid.container > div.row > div.col-md-5 > div.row.desktop-product-title.hidden-xs.hidden-sm > div > h1"
+			);
 			presenceData.details = "Store, viewing product:";
 			presenceData.state = item.innerText;
 
@@ -341,7 +380,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/c/")) {
-			item = document.querySelector("#main-outlet > div.list-controls > div > section > div.category-navigation > ol > li > div > span > span > span.badge-category.clear-badge > span");
+			item = document.querySelector(
+				"#main-outlet > div.list-controls > div > section > div.category-navigation > ol > li > div > span > span > span.badge-category.clear-badge > span"
+			);
 			presenceData.details = "Community, Browsing";
 			presenceData.state = "category: " + item.innerText;
 
@@ -349,7 +390,9 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else if (document.location.pathname.includes("/u/")) {
-			item = document.querySelector("#main-outlet > div:nth-child(3) > section > section > div.details > div.primary > div.primary-textual > div.user-profile-names > h2");
+			item = document.querySelector(
+				"#main-outlet > div:nth-child(3) > section > section > div.details > div.primary > div.primary-textual > div.user-profile-names > h2"
+			);
 			presenceData.details = "Community, viewing";
 			presenceData.state = "user: " + item.innerText;
 
@@ -357,10 +400,8 @@ presence.on("UpdateData", async () => {
 
 			presence.setActivity(presenceData);
 		} else {
-
 			presence.setActivity();
 			presence.setTrayTitle();
-
 		}
 	} else if (document.location.hostname == "apidocs.imgur.com") {
 		presenceData.details = "Reading the API Docs";
@@ -370,10 +411,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else {
-
 		presence.setActivity();
 		presence.setTrayTitle();
-
 	}
-
 });

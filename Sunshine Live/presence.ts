@@ -1,10 +1,10 @@
 var presence = new Presence({
-	clientId: "624914025247146000",
-	mediaKeys: false
+	clientId: "624914025247146000"
 });
 presence.on("UpdateData", () => {
 	let paused = true;
-	let children = document.getElementById("audioPlayer-controls-buttons").children;
+	let children = document.getElementById("audioPlayer-controls-buttons")
+		.children;
 	console.log(children);
 	for (let i = 0; i < children.length; i++) {
 		console.log(children[i].id);
@@ -15,10 +15,15 @@ presence.on("UpdateData", () => {
 
 	let presenceData: presenceData = {
 		largeImageKey: "lg",
-		smallImageKey: (paused) ? "pause" : "play",
-		smallImageText: (paused) ? "Pausiert" : "Spielt",
-		details: "Channel: " + document.getElementsByClassName("trackInfos-stream")[0].textContent,
-		state: document.getElementsByClassName("trackInfos-artist")[0].textContent + " - " + document.getElementsByClassName("trackInfos-title")[0].textContent
+		smallImageKey: paused ? "pause" : "play",
+		smallImageText: paused ? "Pausiert" : "Spielt",
+		details:
+			"Channel: " +
+			document.getElementsByClassName("trackInfos-stream")[0].textContent,
+		state:
+			document.getElementsByClassName("trackInfos-artist")[0].textContent +
+			" - " +
+			document.getElementsByClassName("trackInfos-title")[0].textContent
 	};
 	presence.setActivity(presenceData);
 });

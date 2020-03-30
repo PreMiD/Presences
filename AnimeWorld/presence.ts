@@ -1,6 +1,5 @@
 let presence = new Presence({
-	clientId: "678265146883178519",
-	mediaKeys: false
+	clientId: "678265146883178519"
 });
 
 let browsingStamp = Math.floor(Date.now() / 1000);
@@ -59,7 +58,7 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = "Notifiche";
 			presenceData.details = "Sfoglia le notifiche";
 		} else {
-		presenceData.smallImageKey = "settings";
+			presenceData.smallImageKey = "settings";
 			presenceData.smallImageText = "Impostazioni";
 			presenceData.details = "Nelle impostazioni";
 		}

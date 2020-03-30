@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "634816982843129857"
-}),
+		clientId: "634816982843129857"
+	}),
 	strings: any = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -20,7 +20,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
-		title = document.querySelector("body > div.watch-page > div:nth-child(1) > div > div.col-md-7.col-xs-12.titles > h1") as HTMLElement,
+		title = document.querySelector(
+			"body > div.watch-page > div:nth-child(1) > div > div.col-md-7.col-xs-12.titles > h1"
+		) as HTMLElement,
 		video = document.querySelector("video") as HTMLVideoElement;
 
 	if (pages[page] || pages[page.slice(0, -1)]) {
@@ -31,33 +33,51 @@ presence.on("UpdateData", async () => {
 			state: pages[page] || pages[page.slice(0, -1)]
 		});
 	} else if (page.includes("/liste/")) {
-		const listName = document.querySelector("body > main > div.row.category-head > div > h2") as HTMLElement;
+		const listName = document.querySelector(
+			"body > main > div.row.category-head > div > h2"
+		) as HTMLElement;
 
 		presence.setActivity({
 			largeImageKey: "fm-logo",
 			startTimestamp: Math.floor(Date.now() / 1000),
 			details: "Bir listeye göz atıyor:",
-			state: listName && listName.textContent != "" ? listName.textContent : "Belirsiz"
+			state:
+				listName && listName.textContent != ""
+					? listName.textContent
+					: "Belirsiz"
 		});
 	} else if (page.includes("/film-ara")) {
-		const searching = document.querySelector("body > main > div.row.category-head > div > h2") as HTMLElement,
-			fixedSearching = searching && searching.textContent != "" ? searching.textContent.replace(/"/g, "").replace(" Sonuçları", "") : "Belirsiz";
+		const searching = document.querySelector(
+				"body > main > div.row.category-head > div > h2"
+			) as HTMLElement,
+			fixedSearching =
+				searching && searching.textContent != ""
+					? searching.textContent.replace(/"/g, "").replace(" Sonuçları", "")
+					: "Belirsiz";
 
 		presence.setActivity({
 			largeImageKey: "fm-logo",
 			startTimestamp: Math.floor(Date.now() / 1000),
 			details: "Bir şey arıyor:",
-			state: fixedSearching != "Belirsiz" ? fixedSearching[0].toUpperCase() + fixedSearching.slice(1) : "Belirsiz",
+			state:
+				fixedSearching != "Belirsiz"
+					? fixedSearching[0].toUpperCase() + fixedSearching.slice(1)
+					: "Belirsiz",
 			smallImageKey: "search"
 		});
 	} else if (page.includes("/kategori/")) {
-		const categoryName = document.querySelector("body > main > div.row.category-head > div:nth-child(1) > h2") as HTMLElement;
+		const categoryName = document.querySelector(
+			"body > main > div.row.category-head > div:nth-child(1) > h2"
+		) as HTMLElement;
 
 		presence.setActivity({
 			largeImageKey: "fm-logo",
 			startTimestamp: Math.floor(Date.now() / 1000),
 			details: "Bir kategoriyi inceliyor:",
-			state: categoryName && categoryName.textContent != "" ? categoryName.textContent : "Belirsiz"
+			state:
+				categoryName && categoryName.textContent != ""
+					? categoryName.textContent
+					: "Belirsiz"
 		});
 	} else if (title && title.textContent != "" && !video) {
 		presence.setActivity({
@@ -67,15 +87,20 @@ presence.on("UpdateData", async () => {
 			state: title.textContent
 		});
 	} else if (title && title.textContent != "" && video) {
-		const timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+		const timestamps = getTimestamps(
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		);
 
 		let data: { [k: string]: any } = {
 			largeImageKey: "fm-logo",
 			details: "Bir film izliyor:",
 			state: title.textContent,
 			smallImageKey: video.paused ? "pause" : "play",
-			smallImageText: video.paused ? (await strings).pause : (await strings).play
-		}
+			smallImageText: video.paused
+				? (await strings).pause
+				: (await strings).play
+		};
 
 		if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
 			data.startTimestamp = timestamps[0];
@@ -94,7 +119,7 @@ presence.on("UpdateData", async () => {
 			details: "Bir sayfaya göz atıyor:",
 			state: "Ana Sayfa"
 		});
-	};
+	}
 });
 
 function getTimestamps(videoTime, videoDuration) {

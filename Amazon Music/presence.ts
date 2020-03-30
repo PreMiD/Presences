@@ -1,8 +1,6 @@
 var presence = new Presence({
-	clientId: "619041735795802112",
-	mediaKeys: true
-}),
-
+		clientId: "619041735795802112"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -13,9 +11,15 @@ presence.on("UpdateData", async () => {
 	if (player) {
 		var title = document.querySelector(".trackTitle span").textContent;
 		var artist = document.querySelector(".trackArtist span").textContent;
-		var durationTime = document.querySelector(".listViewDurationContextButton .listViewDuration").textContent;
+		var durationTime = document.querySelector(
+			".listViewDurationContextButton .listViewDuration"
+		).textContent;
 		var timestamps = getTimestamps(durationTime.replace("-", ""));
-		const paused = document.querySelector(".playbackControls span.playerIconPause") ? false : true;
+		const paused = document.querySelector(
+			".playbackControls span.playerIconPause"
+		)
+			? false
+			: true;
 
 		var data: presenceData = {
 			details: title,

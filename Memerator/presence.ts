@@ -1,35 +1,34 @@
 var presence = new Presence({
-	clientId: "657402289132273668",
-	mediaKeys: false
-}),
-
+		clientId: "657402289132273668"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
 	});
 
-
-
 presence.on("UpdateData", async () => {
-
 	var presenceData = {
-		largeImageKey: "memerator",
+		largeImageKey: "memerator"
 	};
 
 	if (document.location.pathname == "/") {
 		presenceData.details = "Viewing home page";
 	} else if (document.location.pathname.includes("following")) {
-		user = document.querySelector("#fix > span")
-		fol = document.querySelector("body > div.container > div > div > div > p:nth-child(2)")
+		user = document.querySelector("#fix > span");
+		fol = document.querySelector(
+			"body > div.container > div > div > div > p:nth-child(2)"
+		);
 		presenceData.details = "Viewing who " + user.innerText + " is following";
 		presenceData.state = fol.innerText;
 	} else if (document.location.pathname.includes("followers")) {
-		user = document.querySelector("#fix > span")
-		fol = document.querySelector("body > div.container > div > div > div > p:nth-child(2)")
+		user = document.querySelector("#fix > span");
+		fol = document.querySelector(
+			"body > div.container > div > div > div > p:nth-child(2)"
+		);
 		presenceData.details = "Viewing " + user.innerText + "'s followers";
 		presenceData.state = fol.innerText;
 	} else if (document.location.pathname.includes("/profile/")) {
-		user = document.querySelector("#fix > span")
+		user = document.querySelector("#fix > span");
 		presenceData.details = "Viewing Profile";
 		presenceData.state = user.innerText;
 	} else if (document.location.pathname == "/ratings") {
@@ -53,8 +52,10 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/transfer")) {
 		presenceData.details = "Transferring a meme!";
 	} else if (document.location.pathname.includes("/meme")) {
-		user = document.querySelector("#memeid")
-		author = document.querySelector("body > div.container > div > div > div.col > p:nth-child(2) > a")
+		user = document.querySelector("#memeid");
+		author = document.querySelector(
+			"body > div.container > div > div > div.col > p:nth-child(2) > a"
+		);
 		presenceData.details = "Viewing Meme " + user.innerText;
 		presenceData.state = " by " + author.innerText;
 	} else if (document.location.pathname.includes("/settings")) {
@@ -76,7 +77,9 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/support")) {
 		presenceData.details = "Viewing Support Pages";
 	} else if (document.location.pathname.includes("/search")) {
-		user = document.querySelector("body > div.container > div > div > div > div > div.bootstrap-table.bootstrap4 > div.fixed-table-toolbar > div > input")
+		user = document.querySelector(
+			"body > div.container > div > div > div > div > div.bootstrap-table.bootstrap4 > div.fixed-table-toolbar > div > input"
+		);
 		presenceData.details = "Searching for users";
 		if (user != null && user.value != "" && user.value != null) {
 			presenceData.state = '"' + user.value + '"';
@@ -86,7 +89,6 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.pathname.includes("/pro")) {
 		presenceData.details = "Viewing the Pro Page";
 	}
-
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();

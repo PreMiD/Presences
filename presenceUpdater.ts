@@ -26,8 +26,8 @@ async function run(MongoClient: MongoClient) {
 
 	const presences = presenceFolders.map(pF => {
 		const metadata = JSON.parse(
-			readFileSync(`${pF}/dist/metadata.json`, "utf-8")
-		),
+				readFileSync(`${pF}/dist/metadata.json`, "utf-8")
+			),
 			presenceJs = readFileSync(`${pF}/dist/presence.js`, "utf-8");
 
 		let resJson: any = {
@@ -46,8 +46,8 @@ async function run(MongoClient: MongoClient) {
 	});
 
 	const newPresences = presences.filter(
-		p => !dbPresences.some(dP => dP.name === p.name)
-	),
+			p => !dbPresences.some(dP => dP.name === p.name)
+		),
 		deletedPresences = dbPresences.filter(
 			dP => !presences.some(p => p.name === dP.name)
 		),

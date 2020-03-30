@@ -9,23 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 let presence = new Presence({
     clientId: "682593223948238849",
-    mediaKeys: false
+    
 });
 let presenceGit = new Presence({
     clientId: "682593596301508662",
-    mediaKeys: false
+    
 });
 let presenceCommunity = new Presence({
     clientId: "682593903656173569",
-    mediaKeys: false
+    
 });
 let presenceAnigifs = new Presence({
     clientId: "682594082274410511",
-    mediaKeys: false
+    
 });
 let presenceLabs = new Presence({
     clientId: "682595885880049668",
-    mediaKeys: false
+    
 });
 let browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {

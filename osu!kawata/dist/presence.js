@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "675322225490001924",
-    mediaKeys: false
+    
 }), presenceData = {
     largeImageKey: "logo"
 }, customData = false;

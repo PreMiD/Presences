@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "640146822257573928",
-	mediaKeys: false
-}),
+		clientId: "640146822257573928"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "valtox"
 	};
@@ -25,9 +22,12 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname == "/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "🌐 Viewing home page";
-		} else if (document.location.pathname.includes("/profile/") || document.location.pathname.includes("/user/")) {
+		} else if (
+			document.location.pathname.includes("/profile/") ||
+			document.location.pathname.includes("/user/")
+		) {
 			presenceData.startTimestamp = browsingStamp;
-			user = document.querySelector('.title.m-0');
+			user = document.querySelector(".title.m-0");
 			presenceData.details = "🌐 Viewing user:";
 			presenceData.state = "📰 " + user.textContent;
 		} else if (document.location.pathname.includes("/logistics")) {
@@ -59,7 +59,19 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname.includes("/logbook")) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "🌐 Viewing their logbook";
-			presenceData.state = "📰 " + document.querySelector("#jobskm").textContent + " " + document.querySelector("#page-content-wrapper > div > div.row > div:nth-child(1) > div > span.count-name.white").textContent + " | " + document.querySelector("#jobscount").textContent + " " + document.querySelector("#page-content-wrapper > div > div.row > div:nth-child(2) > div > span.count-name").textContent;
+			presenceData.state =
+				"📰 " +
+				document.querySelector("#jobskm").textContent +
+				" " +
+				document.querySelector(
+					"#page-content-wrapper > div > div.row > div:nth-child(1) > div > span.count-name.white"
+				).textContent +
+				" | " +
+				document.querySelector("#jobscount").textContent +
+				" " +
+				document.querySelector(
+					"#page-content-wrapper > div > div.row > div:nth-child(2) > div > span.count-name"
+				).textContent;
 		} else if (document.location.pathname.includes("/downloads")) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "🌐 Viewing the";
@@ -92,8 +104,12 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/server/")) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "🌐 Staff Panel - Editing";
-			title = document.querySelector(".card-title") || document.querySelector("body > div > div.content-wrapper > section.content-header > ol > li:nth-child(2) > a")
-			presenceData.state = "📰 Server: " + title.textContent
+			title =
+				document.querySelector(".card-title") ||
+				document.querySelector(
+					"body > div > div.content-wrapper > section.content-header > ol > li:nth-child(2) > a"
+				);
+			presenceData.state = "📰 Server: " + title.textContent;
 		}
 	}
 
@@ -103,15 +119,13 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

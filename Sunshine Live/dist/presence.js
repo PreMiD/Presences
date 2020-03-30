@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "624914025247146000",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", () => {
     let paused = true;

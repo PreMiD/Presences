@@ -1,6 +1,5 @@
 var presence = new Presence({
-	clientId: "629751665242669056",
-	mediaKeys: false
+	clientId: "629751665242669056"
 });
 
 presence.on("UpdateData", async () => {
@@ -8,6 +7,6 @@ presence.on("UpdateData", async () => {
 		details: "Luister radio op juke.nl",
 		state: "Browsen...",
 		largeImageKey: "juke-large"
-	}
+	};
 	presence.setActivity(testPresenceData);
 });

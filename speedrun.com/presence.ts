@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "639603634451120138",
-	mediaKeys: false
-}),
+		clientId: "639603634451120138"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "run"
 	};
@@ -32,7 +29,9 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing all streams";
 		} else if (document.location.pathname.includes("/thread/")) {
-			title = document.querySelector("#centerbar > div > div:nth-child(1) > span");
+			title = document.querySelector(
+				"#centerbar > div > div:nth-child(1) > span"
+			);
 			presenceData.smallImageKey = "reading";
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing forum post:";
@@ -43,7 +42,7 @@ presence.on("UpdateData", async () => {
 			}
 		} else if (document.location.pathname.includes("/forum")) {
 			presenceData.startTimestamp = browsingStamp;
-			presenceData.details = "Browsing the forums..."
+			presenceData.details = "Browsing the forums...";
 		}
 	}
 
@@ -56,15 +55,13 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

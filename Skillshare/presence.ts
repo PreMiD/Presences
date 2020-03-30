@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "642122988925485086",
-	mediaKeys: false
-}),
+		clientId: "642122988925485086"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,34 +14,53 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "sh"
 	};
 
 	if (document.location.hostname == "www.skillshare.com") {
-		if (document.location.pathname == "/" || document.location.pathname == "/home") {
+		if (
+			document.location.pathname == "/" ||
+			document.location.pathname == "/home"
+		) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing home page";
 		} else if (document.location.pathname.includes("/classes/")) {
-			var currentTime: any, duration: any, paused: any, timestamps: any, video: HTMLVideoElement;
+			var currentTime: any,
+				duration: any,
+				paused: any,
+				timestamps: any,
+				video: HTMLVideoElement;
 			video = document.querySelector("#vjs_video_3_html5_api");
 			if (video == null) {
 				video = document.querySelector(".video-player-module > div > video");
 			}
-			title = document.querySelector(".class-details-header-name").textContent.trim();
-			user = document.querySelector(".class-details-header-teacher").textContent.trim().replace(document.querySelector(".follow-button-wrapper-class-details").textContent, "");
+			title = document
+				.querySelector(".class-details-header-name")
+				.textContent.trim();
+			user = document
+				.querySelector(".class-details-header-teacher")
+				.textContent.trim()
+				.replace(
+					document.querySelector(".follow-button-wrapper-class-details")
+						.textContent,
+					""
+				);
 
 			if (video !== null) {
 				currentTime = video.currentTime;
 				duration = video.duration;
 				paused = video.paused;
-				timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+				timestamps = getTimestamps(
+					Math.floor(currentTime),
+					Math.floor(duration)
+				);
 			}
 			if (!isNaN(duration)) {
 				presenceData.smallImageKey = paused ? "pause" : "play";
-				presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+				presenceData.smallImageText = paused
+					? (await strings).pause
+					: (await strings).play;
 				presenceData.startTimestamp = timestamps[0];
 				presenceData.endTimestamp = timestamps[1];
 
@@ -53,7 +71,6 @@ presence.on("UpdateData", async () => {
 					delete presenceData.startTimestamp;
 					delete presenceData.endTimestamp;
 				}
-
 			} else if (isNaN(duration)) {
 				presenceData.startTimestamp = browsingStamp;
 				presenceData.details = "Viewing class:";
@@ -81,7 +98,9 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/search")) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Searching for:";
-			presenceData.state = document.querySelector("#search-form > div > div > div.search-input-wrapper.clear > div.ellipsis.query-placeholder.left").textContent;
+			presenceData.state = document.querySelector(
+				"#search-form > div > div > div.search-input-wrapper.clear > div.ellipsis.query-placeholder.left"
+			).textContent;
 			presenceData.smallImageKey = "search";
 		} else if (document.location.pathname.includes("/your-classes")) {
 			presenceData.startTimestamp = browsingStamp;
@@ -111,19 +130,17 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

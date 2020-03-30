@@ -1,22 +1,29 @@
 var presence = new Presence({
-	clientId: "468420510632509473",
-	mediaKeys: false
+	clientId: "468420510632509473"
 });
 
 presence.on("UpdateData", async () => {
-	if (document.location.pathname == ("/")) {
+	if (document.location.pathname == "/") {
 		let presenceData: presenceData = {
 			details: "Viewing the homepage",
 			largeImageKey: "lg-mal"
 		};
 		presence.setActivity(presenceData);
-	} else if (document.location.pathname == ("/anime.php") || document.location.pathname.startsWith("/topanime") || document.location.pathname.startsWith("/watch")) {
+	} else if (
+		document.location.pathname == "/anime.php" ||
+		document.location.pathname.startsWith("/topanime") ||
+		document.location.pathname.startsWith("/watch")
+	) {
 		let presenceData: presenceData = {
 			details: "Looking for anime",
 			largeImageKey: "lg-mal"
 		};
 		presence.setActivity(presenceData);
-	} else if (document.location.pathname == ("/manga.php") || document.location.pathname.startsWith("/topmanga") || document.location.pathname.startsWith("/store")) {
+	} else if (
+		document.location.pathname == "/manga.php" ||
+		document.location.pathname.startsWith("/topmanga") ||
+		document.location.pathname.startsWith("/store")
+	) {
 		let presenceData: presenceData = {
 			details: "Looking for manga",
 			largeImageKey: "lg-mal"
@@ -60,7 +67,8 @@ presence.on("UpdateData", async () => {
 		if (document.getElementsByClassName("js-anime-edit-info-button")[0]) {
 			let presenceData: presenceData = {
 				details: "Viewing an anime",
-				state: document.getElementsByClassName("header-right")[0].parentNode.childNodes[1].textContent,
+				state: document.getElementsByClassName("header-right")[0].parentNode
+					.childNodes[1].textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);
@@ -76,7 +84,8 @@ presence.on("UpdateData", async () => {
 		if (document.getElementsByClassName("js-manga-edit-info-button")[0]) {
 			let presenceData: presenceData = {
 				details: "Viewing a manga",
-				state: document.getElementsByClassName("header-right")[0].parentNode.childNodes[1].textContent,
+				state: document.getElementsByClassName("header-right")[0].parentNode
+					.childNodes[1].textContent,
 				largeImageKey: "lg-mal"
 			};
 			presence.setActivity(presenceData);

@@ -1,7 +1,6 @@
 let presence: Presence = new Presence({
-	clientId: "632618001824219167",
-	mediaKeys: true
-}),
+		clientId: "632618001824219167"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -17,7 +16,8 @@ presence.on("UpdateData", async () => {
 		let video: HTMLVideoElement = document.getElementsByTagName("video")[0],
 			timestamps = getTimestamps(
 				Math.floor(video.currentTime),
-				Math.floor(video.duration)),
+				Math.floor(video.duration)
+			),
 			tokens = url.split("/");
 		const title = capitalise(tokens[6].split("-"));
 		presenceData = {
@@ -32,19 +32,20 @@ presence.on("UpdateData", async () => {
 		};
 
 		if (tokens.length > 8) {
-			presenceData.state = capitalise(tokens[7].split("-")) + " " + capitalise(tokens[8].split("-"));
+			presenceData.state =
+				capitalise(tokens[7].split("-")) +
+				" " +
+				capitalise(tokens[8].split("-"));
 		}
 
 		if (video.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-	}
-	else if (url.includes("#search")) {
+	} else if (url.includes("#search")) {
 		presenceData.details = "Searching...";
 		presenceData.smallImageKey = "search";
-	}
-	else {
+	} else {
 		presenceData.details = "Browsing";
 	}
 
@@ -59,8 +60,11 @@ function getTimestamps(videoTime: number, videoDuration: number) {
 
 function capitalise(splitStr) {
 	for (var i = 0; i < splitStr.length; i++) {
-		splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-		splitStr[i] = splitStr[i].replace("Sasong", "Season").replace("Avsnitt", "Episode");
+		splitStr[i] =
+			splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+		splitStr[i] = splitStr[i]
+			.replace("Sasong", "Season")
+			.replace("Avsnitt", "Episode");
 	}
 	return splitStr.join(" ");
 }

@@ -1,43 +1,51 @@
 var presence = new Presence({
-	clientId: "620283906234777600",
-	mediaKeys: false
-}),
+		clientId: "620283906234777600"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
-		live: 'presence.activity.live'
+		live: "presence.activity.live"
 	});
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let data: presenceData = {
 		largeImageKey: "iheartradio-logo"
 	};
 
-	var playerCheck = document.querySelector("div.css-s6sc4j.e14pqrjs0") ? true : false;
+	var playerCheck = document.querySelector("div.css-s6sc4j.e14pqrjs0")
+		? true
+		: false;
 	if (playerCheck) {
-		var liveCheck = document.querySelector("div.css-1gs73tw.e1ka8agw0 time[data-test='player-current-time']") ? false : true;
+		var liveCheck = document.querySelector(
+			"div.css-1gs73tw.e1ka8agw0 time[data-test='player-current-time']"
+		)
+			? false
+			: true;
 		if (liveCheck) {
-			var playCheck = document.querySelector("button.ekca8d00 span[aria-labelledby='Stop']") ? true : false;
+			var playCheck = document.querySelector(
+				"button.ekca8d00 span[aria-labelledby='Stop']"
+			)
+				? true
+				: false;
 			if (playCheck) {
 				var title = document.querySelector(".css-19ebljp").textContent;
 				var author = document.querySelector(".css-zzaxa6").textContent;
 				var song = document.querySelector(".css-9be0f7").textContent;
 				var subtitle = author + " - " + song;
 
-				title = checkLength(title)
-				data.details = title
-				subtitle = checkLength(subtitle)
-				data.state = subtitle
+				title = checkLength(title);
+				data.details = title;
+				subtitle = checkLength(subtitle);
+				data.state = subtitle;
 
-				data.smallImageKey = "live"
-				data.smallImageText = (await strings).live
+				data.smallImageKey = "live";
+				data.smallImageText = (await strings).live;
 				if (elapsed === null) {
 					elapsed = Math.floor(Date.now() / 1000);
 				}
-				data.startTimestamp = elapsed
+				data.startTimestamp = elapsed;
 				presence.setActivity(data);
 			} else {
 				elapsed = null;
@@ -57,19 +65,22 @@ presence.on("UpdateData", async () => {
 			var audioTime = document.querySelector(".css-9dpnv0").textContent;
 			var audioDuration = document.querySelector(".css-xf5pff").textContent;
 			var timestamps = getTimestamps(audioTime, audioDuration);
-			const paused = document.querySelector("button.ekca8d00 span[aria-labelledby='Play']") ? true : false;
+			const paused = document.querySelector(
+				"button.ekca8d00 span[aria-labelledby='Play']"
+			)
+				? true
+				: false;
 
-			title = checkLength(title)
-			data.details = title
-			subtitle = checkLength(subtitle)
-			data.state = subtitle
-
-			data.smallImageKey = paused ? "pause" : "play",
-				data.smallImageText = paused
+			title = checkLength(title);
+			data.details = title;
+			subtitle = checkLength(subtitle);
+			data.state = subtitle;
+			(data.smallImageKey = paused ? "pause" : "play"),
+				(data.smallImageText = paused
 					? (await strings).pause
-					: (await strings).play,
-				data.startTimestamp = timestamps[0],
-				data.endTimestamp = timestamps[1]
+					: (await strings).play),
+				(data.startTimestamp = timestamps[0]),
+				(data.endTimestamp = timestamps[1]);
 
 			if (paused) {
 				delete data.startTimestamp;
@@ -81,14 +92,13 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.clearActivity();
 	}
-
 });
 
 function checkLength(string: string) {
 	if (string.length > 128) {
 		return string.substring(0, 125) + "...";
 	} else {
-		return string
+		return string;
 	}
 }
 

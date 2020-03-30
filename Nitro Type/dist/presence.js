@@ -2,7 +2,7 @@ var PREMID_DEBUG_LOGGING = true
 
 var presence = new Presence({
     clientId: "676560908578717702",
-    mediaKeys: false 
+     
 })
 
 function log() {

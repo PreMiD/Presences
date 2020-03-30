@@ -1,22 +1,17 @@
 let presence = new Presence({
-	clientId: "682593223948238849",
-	mediaKeys: false
+	clientId: "682593223948238849"
 });
 let presenceGit = new Presence({
-	clientId: "682593596301508662",
-	mediaKeys: false
+	clientId: "682593596301508662"
 });
 let presenceCommunity = new Presence({
-	clientId: "682593903656173569",
-	mediaKeys: false
+	clientId: "682593903656173569"
 });
 let presenceAnigifs = new Presence({
-	clientId: "682594082274410511",
-	mediaKeys: false
+	clientId: "682594082274410511"
 });
 let presenceLabs = new Presence({
-	clientId: "682595885880049668",
-	mediaKeys: false
+	clientId: "682595885880049668"
 });
 
 let browsingStamp = Math.floor(Date.now() / 1000);
@@ -26,7 +21,10 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "lg",
 		startTimestamp: browsingStamp
 	};
-	if (document.location.hostname == "taigabot.net" || document.location.hostname == "beta.taigabot.net") {
+	if (
+		document.location.hostname == "taigabot.net" ||
+		document.location.hostname == "beta.taigabot.net"
+	) {
 		presenceData.details = "taiga Website";
 		if (document.location.pathname == "/") {
 			presenceData.state = "Viewing the Frontpage...";
@@ -49,15 +47,25 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.hostname == "api.taigabot.net") {
 		presenceData.details = "taiga API";
 		if (document.location.pathname.startsWith("/docs")) {
-			presenceData.state = "Reading the Documentation"
+			presenceData.state = "Reading the Documentation";
 		} else {
 			presenceData.state = "Endpoint: " + document.location.pathname;
 		}
 		presence.setActivity(presenceData);
 	} else if (document.location.hostname == "cdn.taigabot.net") {
 		presenceData.details = "taiga CDN";
-		if (document.location.pathname.endsWith(".pdf") || document.location.pathname.endsWith(".zip") || document.location.pathname.endsWith(".svg") || document.location.pathname.endsWith(".png") || document.location.pathname.endsWith(".jpg") || document.location.pathname.endsWith(".svg") || document.location.pathname.endsWith(".css") || document.location.pathname.endsWith(".ico")) {
-			presenceData.state = "Viewing a File... (" + document.location.pathname + ")";
+		if (
+			document.location.pathname.endsWith(".pdf") ||
+			document.location.pathname.endsWith(".zip") ||
+			document.location.pathname.endsWith(".svg") ||
+			document.location.pathname.endsWith(".png") ||
+			document.location.pathname.endsWith(".jpg") ||
+			document.location.pathname.endsWith(".svg") ||
+			document.location.pathname.endsWith(".css") ||
+			document.location.pathname.endsWith(".ico")
+		) {
+			presenceData.state =
+				"Viewing a File... (" + document.location.pathname + ")";
 		}
 		presence.setActivity(presenceData);
 	} else if (document.location.hostname == "cdnadmin.taigabot.net") {
@@ -66,11 +74,16 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.hostname == "legal.taigabot.net") {
 		presenceData.details = "taiga Documents";
 		if (document.location.pathname.endsWith(".pdf")) {
-			presenceData.state = "Reading a Document... (" + document.location.pathname.split("/")[document.location.pathname.split("/").length - 1] + ")";
+			presenceData.state =
+				"Reading a Document... (" +
+				document.location.pathname.split("/")[
+					document.location.pathname.split("/").length - 1
+				] +
+				")";
 		}
 		presence.setActivity(presenceData);
 	} else if (document.location.hostname == "taipl.taigabot.net") {
-		presenceData.details = "taiga Plugin Engine"
+		presenceData.details = "taiga Plugin Engine";
 		if (document.location.pathname == "/") {
 			presenceData.state = "Viewing the Frontpage...";
 		} else if (document.location.pathname.startsWith("/docs")) {
@@ -83,13 +96,13 @@ presence.on("UpdateData", async () => {
 	} else if (document.location.hostname == "translate.taigabot.net") {
 		presenceData.details = "taiga Translate";
 		if (document.location.pathname == "/login") {
-			presenceData.state = "Logging in..."
+			presenceData.state = "Logging in...";
 		} else if (document.location.pathname == "/signup") {
-			presenceData.state = "Signing up..."
+			presenceData.state = "Signing up...";
 		} else if (document.location.pathname.startsWith("/projects")) {
 			let urlParams = document.location.pathname.split("/");
 			if (urlParams.length == 2) {
-				presenceData.state = "Viewing their Projects..."
+				presenceData.state = "Viewing their Projects...";
 			} else if (urlParams.length == 4) {
 				presenceData.state = "";
 				if (urlParams[3] == "terms") {
@@ -107,10 +120,14 @@ presence.on("UpdateData", async () => {
 				} else if (urlParams[3] == "settings") {
 					presenceData.state = "Changing Project Settings...";
 				}
-				presenceData.state += " (Project: " + document.querySelector(".font-serif.text-white.truncate.mb-1").textContent + ")"
+				presenceData.state +=
+					" (Project: " +
+					document.querySelector(".font-serif.text-white.truncate.mb-1")
+						.textContent +
+					")";
 			}
 		} else if (document.location.pathname == "/user-settings") {
-			presenceData.details = "Changing their Settings..."
+			presenceData.details = "Changing their Settings...";
 		}
 		presence.setActivity(presenceData);
 	}
@@ -124,75 +141,102 @@ presenceGit.on("UpdateData", async () => {
 	if (document.location.hostname == "git.taigabot.net") {
 		if (document.location.pathname == "/") {
 			presenceData.details = "Viewing the front page...";
-		} else if (document.location.pathname == "/user/login" || document.location.pathname == "/user/login/openid") {
-			presenceData.details = "Logging in..."
+		} else if (
+			document.location.pathname == "/user/login" ||
+			document.location.pathname == "/user/login/openid"
+		) {
+			presenceData.details = "Logging in...";
 		} else if (document.location.pathname == "/user/sign_up") {
-			presenceData.details = "Signing up..."
+			presenceData.details = "Signing up...";
 		} else if (document.location.pathname == "/issues") {
-			presenceData.details = "Viewing their Issues..."
+			presenceData.details = "Viewing their Issues...";
 		} else if (document.location.pathname == "/pulls") {
-			presenceData.details = "Viewing their Pull Requests..."
+			presenceData.details = "Viewing their Pull Requests...";
 		} else if (document.location.pathname == "/milestones") {
-			presenceData.details = "Viewing their Milestones..."
+			presenceData.details = "Viewing their Milestones...";
 		} else if (document.location.pathname == "/explore/repos") {
-			presenceData.details = "Exploring Repositories..."
+			presenceData.details = "Exploring Repositories...";
 		} else if (document.location.pathname == "/explore/users") {
-			presenceData.details = "Exploring Users..."
+			presenceData.details = "Exploring Users...";
 		} else if (document.location.pathname == "/explore/organizations") {
-			presenceData.details = "Exploring Organizations..."
+			presenceData.details = "Exploring Organizations...";
 		} else if (document.location.pathname.startsWith("/user/settings")) {
-			presenceData.details = "Changing their Settings..."
+			presenceData.details = "Changing their Settings...";
 		} else if (document.location.pathname.startsWith("/notifications")) {
-			presenceData.details = "Checking their Notifications..."
+			presenceData.details = "Checking their Notifications...";
 		} else if (document.location.pathname.startsWith("/repo/create")) {
-			presenceData.details = "Creating a new Repository..."
+			presenceData.details = "Creating a new Repository...";
 		} else if (document.location.pathname.startsWith("/repo/migrate")) {
-			presenceData.details = "Creating a new Migration Repository..."
+			presenceData.details = "Creating a new Migration Repository...";
 		} else if (document.location.pathname.startsWith("/org/create")) {
-			presenceData.details = "Creating a new Organization..."
+			presenceData.details = "Creating a new Organization...";
 		} else {
 			if (document.querySelector(".user.profile")) {
 				// Profile Page
 				let searchParams = new URLSearchParams(window.location.search);
-				presenceData.details = "Viewing Profile: " + document.getElementsByClassName("username")[0].innerHTML;
-				if (document.getElementsByClassName("username")[0].parentElement.firstElementChild) {
-					presenceData.details += " (" + document.getElementsByClassName("username")[0].parentElement.firstElementChild.textContent + ")"
+				presenceData.details =
+					"Viewing Profile: " +
+					document.getElementsByClassName("username")[0].innerHTML;
+				if (
+					document.getElementsByClassName("username")[0].parentElement
+						.firstElementChild
+				) {
+					presenceData.details +=
+						" (" +
+						document.getElementsByClassName("username")[0].parentElement
+							.firstElementChild.textContent +
+						")";
 				}
 				let tab = searchParams.get("tab");
 				if (tab) {
 					if (tab == "activity") {
-						presenceData.state = "Tab: Public Activity"
+						presenceData.state = "Tab: Public Activity";
 					} else if (tab == "stars") {
-						presenceData.state = "Tab: Starred Repositories"
+						presenceData.state = "Tab: Starred Repositories";
 					} else if (tab == "following") {
-						presenceData.state = "Tab: Following"
+						presenceData.state = "Tab: Following";
 					} else if (tab == "followers") {
-						presenceData.state = "Tab: Followers"
+						presenceData.state = "Tab: Followers";
 					}
 				} else {
-					presenceData.state = "Tab: Repositories"
+					presenceData.state = "Tab: Repositories";
 				}
 			} else if (document.querySelector("#org-info")) {
 				// Organization Page
-				let displayName = document.querySelector("#org-info").querySelector(".ui.header").textContent.replace(/\s*(?=(shaare))/gm, "").replace(/(?<=(shaare))\s*/gm, "");
+				let displayName = document
+					.querySelector("#org-info")
+					.querySelector(".ui.header")
+					.textContent.replace(/\s*(?=(shaare))/gm, "")
+					.replace(/(?<=(shaare))\s*/gm, "");
 				let orgName = document.location.pathname.split("/")[1];
 				if (displayName == orgName) {
 					presenceData.details = "Viewing Organization: " + orgName;
 				} else {
-					presenceData.details = "Viewing Organization: " + displayName + " (" + orgName + ")"
+					presenceData.details =
+						"Viewing Organization: " + displayName + " (" + orgName + ")";
 				}
 			} else if (document.querySelector(".repository")) {
 				// Repository Page
-				presenceData.details = "Viewing Repository: " + document.location.pathname.split("/")[1] + "/" + document.location.pathname.split("/")[2];
+				presenceData.details =
+					"Viewing Repository: " +
+					document.location.pathname.split("/")[1] +
+					"/" +
+					document.location.pathname.split("/")[2];
 				if (document.location.pathname.split("/")[3] == "issues") {
 					if (document.getElementById("issue-title")) {
-						presenceData.state = "Viewing an Issue... (" + document.querySelector(".index").textContent + ")";
+						presenceData.state =
+							"Viewing an Issue... (" +
+							document.querySelector(".index").textContent +
+							")";
 					} else {
 						presenceData.state = "Viewing Issues...";
 					}
 				} else if (document.location.pathname.split("/")[3] == "pulls") {
 					if (document.getElementById("issue-title")) {
-						presenceData.state = "Viewing a Pull Request... (" + document.querySelector(".index").textContent + ")";
+						presenceData.state =
+							"Viewing a Pull Request... (" +
+							document.querySelector(".index").textContent +
+							")";
 					} else {
 						presenceData.state = "Viewing Pull Requests...";
 					}
@@ -201,28 +245,36 @@ presenceGit.on("UpdateData", async () => {
 				} else if (document.location.pathname.split("/")[3] == "wiki") {
 					presenceData.state = "Viewing Wiki...";
 					if (document.querySelector(".basic.small.button")) {
-						presenceData.state += " (" + document.querySelector(".basic.small.button").firstElementChild.innerHTML.match(/<strong>.*<\/strong>/m)[0].replace(/(<strong>|<\/strong>)/gm, "") + ")";
+						presenceData.state +=
+							" (" +
+							document
+								.querySelector(".basic.small.button")
+								.firstElementChild.innerHTML.match(/<strong>.*<\/strong>/m)[0]
+								.replace(/(<strong>|<\/strong>)/gm, "") +
+							")";
 					}
 				} else if (document.location.pathname.split("/")[3] == "activity") {
-					presenceData.state = "Viewing Activity..."
+					presenceData.state = "Viewing Activity...";
 				} else if (document.location.pathname.split("/")[3] == "src") {
-					let branch = document.getElementsByClassName("octicon-git-branch")[1].parentNode.lastChild.textContent;
-					presenceData.state = "Viewing Files... (" + branch + " Branch)"
+					let branch = document.getElementsByClassName("octicon-git-branch")[1]
+						.parentNode.lastChild.textContent;
+					presenceData.state = "Viewing Files... (" + branch + " Branch)";
 				} else if (document.location.pathname.split("/")[3] == "commits") {
-					let branch = document.getElementsByClassName("octicon-git-branch")[1].parentNode.lastChild.textContent;
-					presenceData.state = "Viewing Commits... (" + branch + " Branch)"
+					let branch = document.getElementsByClassName("octicon-git-branch")[1]
+						.parentNode.lastChild.textContent;
+					presenceData.state = "Viewing Commits... (" + branch + " Branch)";
 				} else if (document.location.pathname.split("/")[3] == "branches") {
-					presenceData.state = "Viewing Branches"
+					presenceData.state = "Viewing Branches";
 				} else if (document.location.pathname.split("/")[3] == "forks") {
-					presenceData.state = "Viewing Forks"
+					presenceData.state = "Viewing Forks";
 				} else if (document.location.pathname.split("/")[3] == "stars") {
-					presenceData.state = "Viewing Stargazers"
+					presenceData.state = "Viewing Stargazers";
 				} else if (document.location.pathname.split("/")[3] == "watchers") {
-					presenceData.state = "Viewing Watchers"
+					presenceData.state = "Viewing Watchers";
 				} else if (document.location.pathname.split("/")[3] == "labels") {
-					presenceData.state = "Viewing Labels"
+					presenceData.state = "Viewing Labels";
 				} else if (!document.location.pathname.split("/")[3]) {
-					presenceData.state = "Viewing Files... (master Branch)"
+					presenceData.state = "Viewing Files... (master Branch)";
 				}
 			}
 		}
@@ -250,7 +302,7 @@ presenceAnigifs.on("UpdateData", async () => {
 		let urlArgs = document.location.pathname.split("/");
 		console.log(urlArgs.length);
 		if (urlArgs.length < 3) {
-			presenceData.details = "Viewing the Frontpage"
+			presenceData.details = "Viewing the Frontpage";
 		} else {
 			let imageTypeIds: Array<string> = ["hug"];
 			let imageTypeNames: Array<string> = ["Interactions: Hug"];
@@ -272,7 +324,7 @@ presenceLabs.on("UpdateData", async () => {
 	};
 	if (document.location.hostname == "labs.taigabot.net") {
 		if (document.location.pathname == "/") {
-			presenceData.details = "Viewing the Frontpage..."
+			presenceData.details = "Viewing the Frontpage...";
 		} else {
 			let appsTypeIds: Array<string> = ["card-tool"];
 			let appsTypeNames: Array<string> = ["taiga Card Tool"];

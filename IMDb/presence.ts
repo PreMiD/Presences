@@ -1,7 +1,6 @@
 let presence: Presence = new Presence({
-	clientId: "631379801826918400",
-	mediaKeys: true
-}),
+		clientId: "631379801826918400"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -17,9 +16,12 @@ presence.on("UpdateData", async () => {
 		let video: HTMLVideoElement = document.getElementsByTagName("video")[0],
 			timestamps = getTimestamps(
 				Math.floor(video.currentTime),
-				Math.floor(video.duration)),
+				Math.floor(video.duration)
+			),
 			title = document.querySelectorAll("h1.title")[0].textContent,
-			authorElement = <HTMLElement>document.getElementsByClassName("primary-relation-name")[0],
+			authorElement = <HTMLElement>(
+				document.getElementsByClassName("primary-relation-name")[0]
+			),
 			author = authorElement.innerText;
 		presenceData = {
 			details: title,
@@ -36,45 +38,40 @@ presence.on("UpdateData", async () => {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
 		}
-	}
-	else if (url.includes("/find?")) {
+	} else if (url.includes("/find?")) {
 		presenceData.details = "Searching...";
 		presenceData.smallImageKey = "search";
-	}
-	else if (url.includes("/title/")) {
+	} else if (url.includes("/title/")) {
 		let tokens = document.title.split(" - ");
 		tokens = [...new Set(tokens)];
 		const title = tokens[0];
 		presenceData.details = title;
 		if (tokens[1].trim() == "IMDb") {
 			presenceData.state = "Browsing...";
-		}
-		else {
+		} else {
 			presenceData.state = tokens[1].trim();
 		}
-	}
-	else if (url.includes("/user/") || url.includes("/poll/")) {
+	} else if (url.includes("/user/") || url.includes("/poll/")) {
 		presenceData.details = document.title.split(" - ")[0];
-	}
-	else if (url.includes("/list/")) {
+	} else if (url.includes("/list/")) {
 		presenceData.details = document.title.split(" - ")[0];
 		presenceData.state = "Viewing a list";
-	}
-	else if (url.includes("/search/")) {
+	} else if (url.includes("/search/")) {
 		presenceData.details = document.title.split(" - ")[0];
 		presenceData.state = "Searching...";
-	}
-	else if (url.includes("/name/")) {
+	} else if (url.includes("/name/")) {
 		presenceData.details = document.title.split(" - ")[0];
 		if (document.title.split(" - ")[1].trim() == "IMDb") {
 			presenceData.state = "Filmography";
-		}
-		else {
+		} else {
 			presenceData.state = document.title.split(" - ")[1].trim();
 		}
-	}
-	else {
-		if (!url.includes("/ap/") && !url.includes("/registration/") && url != "https://www.imdb.com/") {
+	} else {
+		if (
+			!url.includes("/ap/") &&
+			!url.includes("/registration/") &&
+			url != "https://www.imdb.com/"
+		) {
 			presenceData.details = document.title.split(" - ")[0];
 		}
 		presenceData.state = "Browsing";

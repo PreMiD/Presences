@@ -1,12 +1,11 @@
 var presence = new Presence({
-	clientId: "518193753433833499",
-	mediaKeys: false
+	clientId: "518193753433833499"
 });
 
 presence.on("UpdateData", async () => {
 	let urlParams = new URLSearchParams(window.location.search);
-	let typeParam = urlParams.get('type');
-	let charParam = urlParams.get('char');
+	let typeParam = urlParams.get("type");
+	let charParam = urlParams.get("char");
 	if (typeParam == "original") {
 		if (charParam.toLowerCase() == "taiga") {
 			let presenceData: presenceData = {

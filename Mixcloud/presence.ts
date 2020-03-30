@@ -10,8 +10,7 @@
 	presence.on("UpdateData", async () => {
 		const player = document.querySelector(".player");
 		if (player) {
-			const title = player.querySelector(".player-cloudcast-title")
-				.textContent;
+			const title = player.querySelector(".player-cloudcast-title").textContent;
 			const author = player.querySelector(".player-cloudcast-author-link")
 				.textContent;
 
@@ -28,9 +27,7 @@
 				elapsedSec = parseInt(elapsed[0]) * 60 + parseInt(elapsed[1]);
 			}
 
-			const isPlaying = player.querySelector(".pause-state")
-				? true
-				: false;
+			const isPlaying = player.querySelector(".pause-state") ? true : false;
 
 			const presenceData: presenceData = {
 				details: title,

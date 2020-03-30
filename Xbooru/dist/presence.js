@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "620298986380591104",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", () => {
     var urlParams = new URLSearchParams(window.location.search);

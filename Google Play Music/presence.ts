@@ -1,41 +1,10 @@
 {
 	const presence = new Presence({
-		clientId: "610850440266907648",
-		mediaKeys: true
+		clientId: "610850440266907648"
 	});
 	const strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
-	});
-
-	presence.on("MediaKeys", (key: string) => {
-		if (location.pathname.startsWith("/music/listen")) {
-			switch (key) {
-				case "pause": {
-					const button: HTMLElement = document.querySelector(
-						"#player-bar-play-pause"
-					);
-					if (button) button.click();
-					break;
-				}
-
-				case "nextTrack": {
-					const button: HTMLElement = document.querySelector(
-						"#player-bar-forward"
-					);
-					if (button) button.click();
-					break;
-				}
-
-				case "previousTrack": {
-					const button: HTMLElement = document.querySelector(
-						"#player-bar-rewind"
-					);
-					if (button) button.click();
-					break;
-				}
-			}
-		}
 	});
 
 	presence.on("UpdateData", async () => {
@@ -45,8 +14,20 @@
 		) {
 			const title = document.querySelector("#currently-playing-title")
 				.textContent;
-			const artist = document.querySelector("#player-artist").textContent || document.querySelector("#music-content > div.g-content.view-transition > div > table > tbody > tr.song-row.currently-playing > td:nth-child(1) > span").textContent.split(" - ")[1];
-			const album = document.querySelector(".player-album").textContent || document.querySelector("#music-content > div.g-content.view-transition > div > table > tbody > tr.song-row.currently-playing > td:nth-child(1) > span").textContent.split(" - ")[0];
+			const artist =
+				document.querySelector("#player-artist").textContent ||
+				document
+					.querySelector(
+						"#music-content > div.g-content.view-transition > div > table > tbody > tr.song-row.currently-playing > td:nth-child(1) > span"
+					)
+					.textContent.split(" - ")[1];
+			const album =
+				document.querySelector(".player-album").textContent ||
+				document
+					.querySelector(
+						"#music-content > div.g-content.view-transition > div > table > tbody > tr.song-row.currently-playing > td:nth-child(1) > span"
+					)
+					.textContent.split(" - ")[0];
 
 			const isPlaying = !!document.querySelector(
 				"#player-bar-play-pause.playing"
@@ -57,18 +38,14 @@
 				state: `${artist} - ${album}`,
 				largeImageKey: "gpm",
 				smallImageKey: isPlaying ? "play" : "pause",
-				smallImageText: isPlaying
-					? (await strings).play
-					: (await strings).pause
+				smallImageText: isPlaying ? (await strings).play : (await strings).pause
 			};
 
 			if (!document.hidden) {
-				const elapsed = document.querySelector(
-					"#time_container_current"
-				).textContent;
+				const elapsed = document.querySelector("#time_container_current")
+					.textContent;
 				presenceData.startTimestamp =
-					Math.floor(Date.now() / 1000) -
-					getTimesec(elapsed).elapsedSec;
+					Math.floor(Date.now() / 1000) - getTimesec(elapsed).elapsedSec;
 			}
 
 			if (isPlaying) {
@@ -119,8 +96,7 @@
 				break;
 			}
 			case 2: {
-				durationSec =
-					parseInt(duration[0]) * 60 + parseInt(duration[1]);
+				durationSec = parseInt(duration[0]) * 60 + parseInt(duration[1]);
 				break;
 			}
 			case 1: {

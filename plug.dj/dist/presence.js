@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "475590192464396288",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if (document.getElementsByClassName("community__name")[0]) {

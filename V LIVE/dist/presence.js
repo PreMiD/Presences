@@ -19,7 +19,7 @@ function PMD_success(message) {
 }
 var presence = new Presence({
     clientId: "614386371532161054",
-    mediaKeys: true
+    
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",

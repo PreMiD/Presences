@@ -1,6 +1,5 @@
 const presence = new Presence({
-	clientId: "691669470057594940",
-	mediaKeys: false
+	clientId: "691669470057594940"
 });
 
 var user: any;
@@ -15,13 +14,24 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "logo"
 	};
 
-	var route = document.location.pathname.split('/');
+	var route = document.location.pathname.split("/");
 
 	if (document.location.pathname === "/") {
 		presenceData.details = "Home";
 	} else if (document.location.pathname.includes("/web/")) {
-		presenceData.details = `Playing on server : ${document.querySelector("#room-stats-hud").textContent}`;
-		presenceData.state = `Player :${!document.querySelector("#tag").nodeValue ? "" : ` [${document.querySelector("#tag").nodeValue}]`} ${!document.querySelector("#name").nodeValue ? "no nick" : document.querySelector("#name").nodeValue}` + ` | ${document.querySelector("#stats-hud").textContent}`;
+		presenceData.details = `Playing on server : ${
+			document.querySelector("#room-stats-hud").textContent
+		}`;
+		presenceData.state =
+			`Player :${
+				!document.querySelector("#tag").nodeValue
+					? ""
+					: ` [${document.querySelector("#tag").nodeValue}]`
+			} ${
+				!document.querySelector("#name").nodeValue
+					? "no nick"
+					: document.querySelector("#name").nodeValue
+			}` + ` | ${document.querySelector("#stats-hud").textContent}`;
 		presenceData.startTimestamp = Date.now();
 	} else {
 		presenceData.details = document.querySelector(".alt-page h1").textContent;
@@ -45,8 +55,10 @@ function parseQueryString(queryString?: string): any {
 	queries.forEach((indexQuery: string) => {
 		const indexPair = indexQuery.split("=");
 		const queryKey = decodeURIComponent(indexPair[0]);
-		const queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
+		const queryValue = decodeURIComponent(
+			indexPair.length > 1 ? indexPair[1] : ""
+		);
 		params[queryKey] = queryValue;
 	});
 	return params;
-};
+}

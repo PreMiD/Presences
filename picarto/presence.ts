@@ -1,19 +1,20 @@
 var presence = new Presence({
-	clientId: "630771716058120192",
-	mediaKeys: false
-}),
+		clientId: "630771716058120192"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
-		pause: "presence.playback.paused",
-	}), presenceData: presenceData = {
+		pause: "presence.playback.paused"
+	}),
+	presenceData: presenceData = {
 		largeImageKey: "logo"
 	};
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
-	var video: HTMLVideoElement = document.querySelector("#picarto-player-1_html5_api");
+	var video: HTMLVideoElement = document.querySelector(
+		"#picarto-player-1_html5_api"
+	);
 	if (video !== null && !isNaN(video.duration)) {
 		var title: any, uploader: any, timestamps: any, live: boolean;
 
@@ -27,7 +28,9 @@ presence.on("UpdateData", async () => {
 		presenceData.state = (uploader as HTMLElement).textContent;
 		presenceData.largeImageKey = "logo";
 		presenceData.smallImageKey = video.paused ? "pause" : "play";
-		presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+		presenceData.smallImageText = video.paused
+			? (await strings).pause
+			: (await strings).play;
 		presenceData.startTimestamp = browsingStamp;
 
 		presence.setTrayTitle(video.paused ? "" : title.innerText);
@@ -41,7 +44,6 @@ presence.on("UpdateData", async () => {
 			presence.setActivity(presenceData, !video.paused);
 		}
 	} else {
-
 		var pageData: presenceData = {
 			details: "Browsing..",
 			largeImageKey: "logo"
@@ -50,12 +52,11 @@ presence.on("UpdateData", async () => {
 	}
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

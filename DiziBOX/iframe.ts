@@ -1,9 +1,14 @@
 const iframe = new iFrame();
 
-setInterval(function () {
+setInterval(function() {
 	let video = document.querySelector("video") as HTMLVideoElement;
 
-	if (video && video.currentTime && video.duration && video.paused !== undefined) {
+	if (
+		video &&
+		video.currentTime &&
+		video.duration &&
+		video.paused !== undefined
+	) {
 		iframe.send({
 			error: false,
 			currentTime: video.currentTime,
@@ -14,5 +19,5 @@ setInterval(function () {
 		iframe.send({
 			error: true
 		});
-	};
+	}
 }, 100);

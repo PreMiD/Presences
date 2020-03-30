@@ -1,6 +1,6 @@
 var presence = new Presence({
-	clientId: "630858272718454836"
-}),
+		clientId: "630858272718454836"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
@@ -15,29 +15,47 @@ var presence = new Presence({
 
 presence.on("iFrameData", data => {
 	video = data;
-})
+});
 
 presence.on("UpdateData", async () => {
-
 	var data: presenceData = {
 		largeImageKey: "9anime"
 	};
 
-	if (video != null && !isNaN(video.duration) && document.location.pathname.includes("/watch")) {
+	if (
+		video != null &&
+		!isNaN(video.duration) &&
+		document.location.pathname.includes("/watch")
+	) {
+		tv =
+			document.querySelector("#servers-container .episodes a.active") != null &&
+			/\d/.test(
+				document.querySelector("#servers-container .episodes a.active")
+					.textContent
+			)
+				? true
+				: false;
 
-		tv = document.querySelector("#servers-container .episodes a.active") != null
-			&& /\d/.test(document.querySelector("#servers-container .episodes a.active").textContent) ? true : false;
-
-		var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+		var timestamps = getTimestamps(
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		);
 
 		data.details = document.querySelector("#main .title").textContent;
-		data.state = tv ? document.querySelector("#main div dl:nth-child(1) > dd:nth-child(2)").textContent + " • E" + document.querySelector("#servers-container .episodes a.active").textContent
-			: document.querySelector("#main div dl:nth-child(1) > dd:nth-child(2)").textContent;
-
-		data.smallImageKey = video.paused ? "pause" : "play",
-			data.smallImageText = video.paused ? (await strings).pause : (await strings).play,
-			data.startTimestamp = timestamps[0],
-			data.endTimestamp = timestamps[1]
+		data.state = tv
+			? document.querySelector("#main div dl:nth-child(1) > dd:nth-child(2)")
+					.textContent +
+			  " • E" +
+			  document.querySelector("#servers-container .episodes a.active")
+					.textContent
+			: document.querySelector("#main div dl:nth-child(1) > dd:nth-child(2)")
+					.textContent;
+		(data.smallImageKey = video.paused ? "pause" : "play"),
+			(data.smallImageText = video.paused
+				? (await strings).pause
+				: (await strings).play),
+			(data.startTimestamp = timestamps[0]),
+			(data.endTimestamp = timestamps[1]);
 
 		if (video.paused) {
 			delete data.startTimestamp;
@@ -45,9 +63,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presence.setActivity(data, !video.paused);
-	}
-
-	else {
+	} else {
 		data.details = (await strings).browsing;
 		data.smallImageKey = "search";
 		data.smallImageText = (await strings).browsing;

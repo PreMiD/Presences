@@ -1,7 +1,7 @@
 
 var presence = new Presence({
     clientId: "651145049811451924",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     if (document.location.pathname.startsWith("/wiki/")) {

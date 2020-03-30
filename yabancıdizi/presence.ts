@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "643593006821408778"
-}),
+		clientId: "643593006821408778"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -17,7 +17,7 @@ const presence = new Presence({
 		"/koleksiyon": "Koleksiyon",
 		"/birlikte-izle": "Birlikte İzle",
 		"/profil/ayarlar": "Hesap Ayarları"
-	}
+	};
 
 let video: { [k: string]: any } = {};
 
@@ -34,11 +34,21 @@ presence.on("UpdateData", () => async () => {
 	const page = document.location.pathname,
 		_video = document.querySelector("video") as HTMLVideoElement,
 		isVideoData = Object.keys(video).length > 0 ? true : false,
-		categoryTitle = document.querySelector("#router-view > div.ui.grid.mb-0 > div.left.floated.sixteen.wide.tablet.twelve.wide.computer.column.pb-0 > h1"),
-		categoryTitle2 = document.querySelector("#router-view > div.ui.grid.mb-0 > div.left.floated.sixteen.wide.tablet.ten.wide.computer.column.pb-0 > h1"),
-		showName = document.querySelector("#router-view > div.bg-cover-faker > div.ui.grid > div.left.floated.sixteen.wide.tablet.nine.wide.computer.column > a > h1"),
-		movieTitle = document.querySelector("#router-view > div.bg-cover-faker > div:nth-child(3) > div.left.floated.sixteen.wide.tablet.eight.wide.computer.column > a > h1"),
-		userName = document.querySelector("#router-view > section > div.ui.grid > div.left.floated.sixteen.wide.tablet.four.wide.computer.column > div > section:nth-child(1) > h2 > a");
+		categoryTitle = document.querySelector(
+			"#router-view > div.ui.grid.mb-0 > div.left.floated.sixteen.wide.tablet.twelve.wide.computer.column.pb-0 > h1"
+		),
+		categoryTitle2 = document.querySelector(
+			"#router-view > div.ui.grid.mb-0 > div.left.floated.sixteen.wide.tablet.ten.wide.computer.column.pb-0 > h1"
+		),
+		showName = document.querySelector(
+			"#router-view > div.bg-cover-faker > div.ui.grid > div.left.floated.sixteen.wide.tablet.nine.wide.computer.column > a > h1"
+		),
+		movieTitle = document.querySelector(
+			"#router-view > div.bg-cover-faker > div:nth-child(3) > div.left.floated.sixteen.wide.tablet.eight.wide.computer.column > a > h1"
+		),
+		userName = document.querySelector(
+			"#router-view > section > div.ui.grid > div.left.floated.sixteen.wide.tablet.four.wide.computer.column > div > section:nth-child(1) > h2 > a"
+		);
 
 	if (!isVideoData && !_video) {
 		if (page.includes("/kesfet")) {
@@ -49,7 +59,9 @@ presence.on("UpdateData", () => async () => {
 				startTimestamp: Math.floor(Date.now() / 1000)
 			});
 		} else if (page.includes("/oyuncu/")) {
-			const actorName = document.querySelector("#router-view > div > div.profile-header > div.heading-user-title > h1");
+			const actorName = document.querySelector(
+				"#router-view > div > div.profile-header > div.heading-user-title > h1"
+			);
 
 			presence.setActivity({
 				largeImageKey: "yd-logo",
@@ -57,35 +69,55 @@ presence.on("UpdateData", () => async () => {
 				state: actorName ? actorName.textContent.trim() : "Belirsiz",
 				startTimestamp: Math.floor(Date.now() / 1000)
 			});
-		} else if (page.includes("/film/tur/") && categoryTitle && categoryTitle.textContent != "") {
+		} else if (
+			page.includes("/film/tur/") &&
+			categoryTitle &&
+			categoryTitle.textContent != ""
+		) {
 			presence.setActivity({
 				largeImageKey: "yd-logo",
 				details: "Bir kategoriye göz atıyor:",
 				state: categoryTitle.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000)
 			});
-		} else if (page.includes("/dizi/tur") && categoryTitle && categoryTitle.textContent != "") {
+		} else if (
+			page.includes("/dizi/tur") &&
+			categoryTitle &&
+			categoryTitle.textContent != ""
+		) {
 			presence.setActivity({
 				largeImageKey: "yd-logo",
 				details: "Bir kategoriye göz atıyor:",
 				state: categoryTitle.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000)
 			});
-		} else if (page.includes("/film-izle") && categoryTitle2 && categoryTitle2.textContent != "") {
+		} else if (
+			page.includes("/film-izle") &&
+			categoryTitle2 &&
+			categoryTitle2.textContent != ""
+		) {
 			presence.setActivity({
 				largeImageKey: "yd-logo",
 				details: "Bir kategoriye göz atıyor:",
 				state: categoryTitle2.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000)
 			});
-		} else if (page.includes("/dizi/") && showName && showName.textContent != "") {
+		} else if (
+			page.includes("/dizi/") &&
+			showName &&
+			showName.textContent != ""
+		) {
 			presence.setActivity({
 				largeImageKey: "yd-logo",
 				details: "Bir diziye göz atıyor:",
 				state: showName.textContent,
 				startTimestamp: Math.floor(Date.now() / 1000)
 			});
-		} else if (page.includes("/profil/") && userName && userName.textContent != "") {
+		} else if (
+			page.includes("/profil/") &&
+			userName &&
+			userName.textContent != ""
+		) {
 			presence.setActivity({
 				largeImageKey: "yd-logo",
 				details: "Bir profile göz atıyor:",
@@ -101,19 +133,28 @@ presence.on("UpdateData", () => async () => {
 			});
 		}
 	} else if (_video && !isNaN(_video.currentTime)) {
-		const title = document.querySelector("#router-view > div.bg-cover-faker > div.ui.grid.mt-0 > div > h1 > a"),
-			episode = document.querySelector("#router-view > div.bg-cover-faker > div.ui.grid.mt-0 > div > h1 > span");
+		const title = document.querySelector(
+				"#router-view > div.bg-cover-faker > div.ui.grid.mt-0 > div > h1 > a"
+			),
+			episode = document.querySelector(
+				"#router-view > div.bg-cover-faker > div.ui.grid.mt-0 > div > h1 > span"
+			);
 
 		if (page.includes("/film") && movieTitle && movieTitle.textContent != "") {
-			const timestamps = getTimestamps(Math.floor(_video.currentTime), Math.floor(_video.duration))
+			const timestamps = getTimestamps(
+				Math.floor(_video.currentTime),
+				Math.floor(_video.duration)
+			);
 
 			let data: { [k: string]: any } = {
 				largeImageKey: "yd-logo",
 				details: "Bir film izliyor:",
 				state: movieTitle.textContent,
 				smallImageKey: _video.paused ? "pause" : "play",
-				smallImageText: _video.paused ? (await strings).pause : (await strings).play,
-			}
+				smallImageText: _video.paused
+					? (await strings).pause
+					: (await strings).play
+			};
 
 			if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
 				data.startTimestamp = timestamps[0];
@@ -126,16 +167,27 @@ presence.on("UpdateData", () => async () => {
 
 			presence.setTrayTitle(video.paused ? "" : `${movieTitle.textContent}`);
 			presence.setActivity(data);
-		} else if (page.includes("/dizi/") && title && episode && title.textContent != "" && episode.textContent != "") {
-			const timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration))
+		} else if (
+			page.includes("/dizi/") &&
+			title &&
+			episode &&
+			title.textContent != "" &&
+			episode.textContent != ""
+		) {
+			const timestamps = getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
 
 			let data: { [k: string]: any } = {
 				largeImageKey: "yd-logo",
 				details: "Bir film izliyor:",
 				state: title.textContent,
 				smallImageKey: video.paused ? "pause" : "play",
-				smallImageText: video.paused ? (await strings).pause : (await strings).play,
-			}
+				smallImageText: video.paused
+					? (await strings).pause
+					: (await strings).play
+			};
 
 			if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
 				data.startTimestamp = timestamps[0];
@@ -146,23 +198,34 @@ presence.on("UpdateData", () => async () => {
 				delete data.endTimestamp;
 			}
 
-			presence.setTrayTitle(video.paused ? "" : `${title.textContent} - ${episode.textContent}`);
+			presence.setTrayTitle(
+				video.paused ? "" : `${title.textContent} - ${episode.textContent}`
+			);
 			presence.setActivity(data);
 		}
 	} else if (isVideoData && video && !isNaN(video.duration)) {
-		const showName2 = document.querySelector("#router-view > div.bg-cover-faker > div.ui.grid.mt-0 > div > h1 > a"),
-			episode = document.querySelector("#router-view > div.bg-cover-faker > div.ui.grid.mt-0 > div > h1 > span");
+		const showName2 = document.querySelector(
+				"#router-view > div.bg-cover-faker > div.ui.grid.mt-0 > div > h1 > a"
+			),
+			episode = document.querySelector(
+				"#router-view > div.bg-cover-faker > div.ui.grid.mt-0 > div > h1 > span"
+			);
 
 		if (page.includes("/film/") && movieTitle && movieTitle.textContent != "") {
-			const timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+			const timestamps = getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
 
 			let data: { [k: string]: any } = {
 				largeImageKey: "yd-logo",
 				details: "Bir film izliyor:",
 				state: movieTitle.textContent,
 				smallImageKey: video.paused ? "pause" : "play",
-				smallImageText: video.paused ? (await strings).pause : (await strings).play,
-			}
+				smallImageText: video.paused
+					? (await strings).pause
+					: (await strings).play
+			};
 
 			if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
 				data.startTimestamp = timestamps[0];
@@ -175,16 +238,27 @@ presence.on("UpdateData", () => async () => {
 
 			presence.setTrayTitle(video.paused ? "" : `${movieTitle.textContent}`);
 			presence.setActivity(data);
-		} else if (page.includes("/dizi/") && showName2 && showName2.textContent != "" && episode && episode.textContent != "") {
-			const timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+		} else if (
+			page.includes("/dizi/") &&
+			showName2 &&
+			showName2.textContent != "" &&
+			episode &&
+			episode.textContent != ""
+		) {
+			const timestamps = getTimestamps(
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			);
 
 			let data: { [k: string]: any } = {
 				largeImageKey: "yd-logo",
 				details: showName2.textContent,
 				state: episode.textContent,
 				smallImageKey: video.paused ? "pause" : "play",
-				smallImageText: video.paused ? (await strings).pause : (await strings).play,
-			}
+				smallImageText: video.paused
+					? (await strings).pause
+					: (await strings).play
+			};
 
 			if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
 				data.startTimestamp = timestamps[0];
@@ -195,7 +269,9 @@ presence.on("UpdateData", () => async () => {
 				delete data.endTimestamp;
 			}
 
-			presence.setTrayTitle(video.paused ? "" : `${showName2.textContent} - ${episode.textContent}`);
+			presence.setTrayTitle(
+				video.paused ? "" : `${showName2.textContent} - ${episode.textContent}`
+			);
 			presence.setActivity(data);
 		}
 	} else {
@@ -217,4 +293,4 @@ function getTimestamps(videoTime, videoDuration) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
 	return [Math.floor(startTime / 1000), endTime];
-};
+}

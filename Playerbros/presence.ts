@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "643848955586805770"
-}),
+		clientId: "643848955586805770"
+	}),
 	pages = {
 		"/": "Ana Sayfa",
 		"/espor": "Espor Haberleri",
@@ -24,11 +24,20 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
 	const page = document.location.pathname,
 		postTitle = document.querySelector("#mvp-article-head > h1"),
-		date = document.querySelector("#mvp-article-head > div > ul > li > span > p > time"),
+		date = document.querySelector(
+			"#mvp-article-head > div > ul > li > span > p > time"
+		),
 		author = document.querySelector("#mvp-author-box-head > span > a"),
 		_author = document.querySelector("#mvp-author-top-right > h1");
 
-	if (postTitle && author && date && postTitle.textContent != "" && author.textContent != "" && date.textContent != "") {
+	if (
+		postTitle &&
+		author &&
+		date &&
+		postTitle.textContent != "" &&
+		author.textContent != "" &&
+		date.textContent != ""
+	) {
 		presence.setActivity({
 			largeImageKey: "pb-logo",
 			details: postTitle.textContent || "Belirsiz",
@@ -37,7 +46,11 @@ presence.on("UpdateData", async () => {
 			smallImageText: "Bir gönderi okuyor...",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
-	} else if (page.includes("/author/") && _author && _author.textContent != "") {
+	} else if (
+		page.includes("/author/") &&
+		_author &&
+		_author.textContent != ""
+	) {
 		presence.setActivity({
 			largeImageKey: "pb-logo",
 			details: "Bir yazara göz atıyor:",
@@ -45,8 +58,15 @@ presence.on("UpdateData", async () => {
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	} else if (page.includes("/etiket/")) {
-		const tag = document.querySelector("#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"),
-			fixedTag = tag && tag.textContent != "" ? tag.textContent.split(" ")[tag.textContent.split(" ").length - 1].replace(/"/g, "") : null;
+		const tag = document.querySelector(
+				"#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"
+			),
+			fixedTag =
+				tag && tag.textContent != ""
+					? tag.textContent
+							.split(" ")
+							[tag.textContent.split(" ").length - 1].replace(/"/g, "")
+					: null;
 
 		presence.setActivity({
 			largeImageKey: "pb-logo",
@@ -55,8 +75,15 @@ presence.on("UpdateData", async () => {
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	} else if (document.location.search.includes("?s=")) {
-		const searchingFor = document.querySelector("#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"),
-			fixedSearch = searchingFor && searchingFor.textContent != "" ? searchingFor.textContent.split(" ")[searchingFor.textContent.split(" ").length - 1].replace(/"/g, "") : null;
+		const searchingFor = document.querySelector(
+				"#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"
+			),
+			fixedSearch =
+				searchingFor && searchingFor.textContent != ""
+					? searchingFor.textContent
+							.split(" ")
+							[searchingFor.textContent.split(" ").length - 1].replace(/"/g, "")
+					: null;
 
 		presence.setActivity({
 			largeImageKey: "pb-logo",

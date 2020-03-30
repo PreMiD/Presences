@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "687070418804408445", //The client ID of the Application created at https://discordapp.com/developers/applications
-    mediaKeys: false //Enable use and detection of media key presses
+     //Enable use and detection of media key presses
 });
 
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {

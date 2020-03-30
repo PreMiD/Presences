@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "612416330003382314",
-	mediaKeys: false
-}),
+		clientId: "612416330003382314"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -43,7 +42,9 @@ presence.on("UpdateData", async () => {
 			"div.profile-header-top > div.header-caption > div.header-title > h2"
 		);
 
-		profileTabs = document.querySelector("#horizontal-tabs li.rbx-tab.active a");
+		profileTabs = document.querySelector(
+			"#horizontal-tabs li.rbx-tab.active a"
+		);
 
 		//console.log(profileTabs.innerText);
 

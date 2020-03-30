@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "636614830698004480",
-	mediaKeys: false
-}),
+		clientId: "636614830698004480"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -15,8 +14,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "rlswaps"
 	};
@@ -26,31 +23,30 @@ presence.on("UpdateData", async () => {
 
 	if (document.location.pathname.includes("/history")) {
 		presenceData.startTimestamp = browsingStamp;
-		presenceData.details = "Viewing their history"
+		presenceData.details = "Viewing their history";
 	} else if (title.innerText !== "0.00" || user.innerText !== "0.00") {
 		presenceData.startTimestamp = browsingStamp;
 		presenceData.details = "Trading...";
-		presenceData.state = title.innerText + " keys worth for " + user.innerText + "worth of items";
+		presenceData.state =
+			title.innerText + " keys worth for " + user.innerText + "worth of items";
 	} else {
 		presenceData.startTimestamp = browsingStamp;
-		presenceData.details = "Going to trade..."
+		presenceData.details = "Going to trade...";
 	}
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

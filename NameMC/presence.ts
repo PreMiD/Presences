@@ -1,13 +1,11 @@
 var presence = new Presence({
-	clientId: "617622829978091530",
-	mediaKeys: false
+	clientId: "617622829978091530"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
-	if (document.location.pathname == ("/")) {
+	if (document.location.pathname == "/") {
 		let homepagePresence: presenceData = {
 			details: "Viewing the homepage",
 			largeImageKey: "namemc-logo",
@@ -128,7 +126,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.startsWith("/profile")) {
 		var userlink = document.location.pathname.split("/")[2];
-		var username = userlink.split('.')[0];
+		var username = userlink.split(".")[0];
 		let presenceData: presenceData = {
 			details: "Viewing a Profile",
 			state: username,
@@ -179,5 +177,5 @@ presence.on("UpdateData", async () => {
 			startTimestamp: browsingStamp
 		};
 		presence.setActivity(presenceData);
-	};
+	}
 });

@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 
 var presence = new Presence({
     clientId: '665519810054062100',
-    mediaKeys: false
+    
 }), strings = presence.getStrings({
     search: 'presence.activity.searching',
     browsing: 'presence.activity.browsing',

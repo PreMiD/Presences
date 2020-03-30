@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "655247212728811530",
-    mediaKeys: false
+    
 });
 var browsingStamp = Math.floor(Date.now() / 1000), href = new URL(document.location.href), presenceData = {
     details: 'In construction',

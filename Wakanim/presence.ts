@@ -1,16 +1,12 @@
 var presence = new Presence({
-	clientId: "662841394171346955",
-	mediaKeys: false
-}),
-
+		clientId: "662841394171346955"
+	}),
 	strings = presence.getStrings({
 		browsing: "presence.activity.browsing",
 		paused: "presence.playback.paused",
-		playing: "presence.playback.playing",
+		playing: "presence.playback.playing"
 	}),
-
 	browsingStamp = Math.floor(Date.now() / 1000);
-
 
 function capitalize(str) {
 	var text = str.toLowerCase().split(" ");
@@ -20,7 +16,6 @@ function capitalize(str) {
 
 	return text.join(" ");
 }
-
 
 presence.on("UpdateData", async () => {
 	var presenceData: presenceData = { largeImageKey: "wakanim" };
@@ -41,7 +36,9 @@ presence.on("UpdateData", async () => {
 			presenceData.smallImageText = (await strings).paused;
 		} else {
 			presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-			presenceData.endTimestamp = Math.floor(presenceData.startTimestamp + (video.duration - video.currentTime));
+			presenceData.endTimestamp = Math.floor(
+				presenceData.startTimestamp + (video.duration - video.currentTime)
+			);
 			presenceData.smallImageKey = "playing";
 			presenceData.smallImageText = (await strings).playing;
 		}

@@ -12,8 +12,8 @@ iframe.on("UpdateData", async () => {
 			document.querySelector("video[id$='_html5_api']") != null
 				? document.querySelector("video[id$='_html5_api']")
 				: document.querySelector("div.jw-media.jw-reset > video")
-					? document.querySelector("div.jw-media.jw-reset > video")
-					: document.querySelector("video");
+				? document.querySelector("div.jw-media.jw-reset > video")
+				: document.querySelector("video");
 		if (video != null && !isNaN(video.duration)) {
 			iframe.send({
 				duration: video.duration,

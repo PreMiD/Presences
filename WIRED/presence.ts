@@ -1,6 +1,5 @@
 const presence = new Presence({
-	clientId: '645051733961211934',
-	mediaKeys: false
+	clientId: "645051733961211934"
 });
 
 var elapsed, oldURL;
@@ -14,7 +13,10 @@ presence.on("UpdateData", async () => {
 		elapsed = Math.floor(Date.now() / 1000);
 	}
 
-	if (document.location.pathname.includes("/gallery/") || document.location.pathname.includes("/story/")) {
+	if (
+		document.location.pathname.includes("/gallery/") ||
+		document.location.pathname.includes("/story/")
+	) {
 		details = "Reading: ";
 		state = title.replace(" | WIRED", "");
 	} else if (document.location.pathname.includes("/video/watch/")) {

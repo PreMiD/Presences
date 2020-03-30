@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "634081860972052490",
-	mediaKeys: false
-}),
+		clientId: "634081860972052490"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
@@ -16,24 +15,30 @@ var presence = new Presence({
 
 presence.on("iFrameData", data => {
 	video = data;
-})
+});
 
 presence.on("UpdateData", async () => {
-
 	var data: presenceData = {
 		largeImageKey: "animeflv"
 	};
 
-	if (video != null && !isNaN(video.duration) && document.location.pathname.includes("/watch")) {
-
-		var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+	if (
+		video != null &&
+		!isNaN(video.duration) &&
+		document.location.pathname.includes("/watch")
+	) {
+		var timestamps = getTimestamps(
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		);
 
 		data.details = document.querySelector("#XpndCn .title").textContent;
-
-		data.smallImageKey = video.paused ? "pause" : "play",
-			data.smallImageText = video.paused ? (await strings).pause : (await strings).play,
-			data.startTimestamp = timestamps[0],
-			data.endTimestamp = timestamps[1]
+		(data.smallImageKey = video.paused ? "pause" : "play"),
+			(data.smallImageText = video.paused
+				? (await strings).pause
+				: (await strings).play),
+			(data.startTimestamp = timestamps[0]),
+			(data.endTimestamp = timestamps[1]);
 
 		if (video.paused) {
 			delete data.startTimestamp;
@@ -41,9 +46,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presence.setActivity(data, !video.paused);
-	}
-
-	else {
+	} else {
 		data.details = (await strings).browsing;
 		data.smallImageKey = "search";
 		data.smallImageText = (await strings).browsing;

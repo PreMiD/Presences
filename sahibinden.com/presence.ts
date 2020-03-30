@@ -1,6 +1,6 @@
 const presence = new Presence({
-	clientId: "643777046731816962"
-}),
+		clientId: "643777046731816962"
+	}),
 	pages = {
 		"/giris": "Giriş",
 		"/kayit": "Kayıt",
@@ -29,7 +29,8 @@ const presence = new Presence({
 		"/izinlerim/iletisim": "İletişim İzinlerim",
 		"/izinlerim/okundu-bilgisi": "Mesaj Okundu Bilgisi",
 		"/merkez-adres": "Merkez Adresim",
-		"/mesafeli-satis-sozlesmelerim/satis": "Mesafeli Satış Sözleşmelerim (Satış)",
+		"/mesafeli-satis-sozlesmelerim/satis":
+			"Mesafeli Satış Sözleşmelerim (Satış)",
 		"/adreslerim": "Adreslerim",
 		"/yorum-yonetimi": "Yorum Yönetimi",
 		"/kurumsal/hakkimizda": "Hakkımızda",
@@ -53,7 +54,8 @@ const presence = new Presence({
 		"/sozlesmeler/bireysel-uyelik-sozlesmesi-0": "Bireysel Üyelik Sözleşmesi",
 		"/sozlesmeler/kullanim-kosullari-35": "Kullanım Koşulları",
 		"/site-haritasi": "Site Haritası",
-		"/sozlesmeler/kisisel-verilerin-korunmasi-58": "Kişisel Verilerin Korunması",
+		"/sozlesmeler/kisisel-verilerin-korunmasi-58":
+			"Kişisel Verilerin Korunması",
 		"/mesajlarim": "Mesajlarım",
 		"/get/mesajlarim": "GET Mesajlarım",
 		"/bilgilendirmeler": "Bilgilendirmeler",
@@ -61,7 +63,8 @@ const presence = new Presence({
 		"/hasar-sorgu": "Hasar Sorgu",
 		"/arac-detay-sorgu": "Araç Detay Sorgu",
 		"/gecmis-sorgularim": "Geçmiş Sorgularım",
-		"/urun-ve-hizmetlerimiz/arac-sigorta-teklifleri": "Araç Sigortası Teklifleri",
+		"/urun-ve-hizmetlerimiz/arac-sigorta-teklifleri":
+			"Araç Sigortası Teklifleri",
 		"/urun-ve-hizmetlerimiz/ekspertiz-hizmeti": "Ekspertiz Hizmeti",
 		"/urun-ve-hizmetlerimiz/emlak-endeksi": "Emlak Endeksi",
 		"/favori-ilanlar": "Favori İlanlarım",
@@ -72,32 +75,64 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => async () => {
 	const page = document.location.pathname,
-		searchingFor = document.querySelector("#searchResultsSearchForm > div > div.searchResultsRight > div.relativeContainer > div.infoSearchResults > div > div.result-text > h1 > span") || document.querySelector("#wideContainer > div > div.results-header > h1 > strong > b"),
-		category = document.querySelector("#container > div.top-menu-container.clearfix.custom-category-container > div.top-menu-left > div > div.uiInlineBoxTitle > h1") || document.querySelector("#searchContainer > div.searchResultsPage.uiContent > div.specialCatHeaders > div > h1") || document.querySelector("#container > div > div.categoryPageLeft > div:nth-child(1) > div.uiInlineBoxTitle > h1");
+		searchingFor =
+			document.querySelector(
+				"#searchResultsSearchForm > div > div.searchResultsRight > div.relativeContainer > div.infoSearchResults > div > div.result-text > h1 > span"
+			) ||
+			document.querySelector(
+				"#wideContainer > div > div.results-header > h1 > strong > b"
+			),
+		category =
+			document.querySelector(
+				"#container > div.top-menu-container.clearfix.custom-category-container > div.top-menu-left > div > div.uiInlineBoxTitle > h1"
+			) ||
+			document.querySelector(
+				"#searchContainer > div.searchResultsPage.uiContent > div.specialCatHeaders > div > h1"
+			) ||
+			document.querySelector(
+				"#container > div > div.categoryPageLeft > div:nth-child(1) > div.uiInlineBoxTitle > h1"
+			);
 
-	if (page.includes("/kategori/") || category && category.textContent != "") {
+	if (page.includes("/kategori/") || (category && category.textContent != "")) {
 		presence.setActivity({
 			largeImageKey: "s-logo",
 			details: "Bir kategoriye göz atıyor:",
 			state: category.textContent.trim() || "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
-	} else if (page.includes("/kelime-ile-arama") || searchingFor && searchingFor.textContent != "") {
+	} else if (
+		page.includes("/kelime-ile-arama") ||
+		(searchingFor && searchingFor.textContent != "")
+	) {
 		presence.setActivity({
 			largeImageKey: "s-logo",
 			details: "Bir şey arıyor:",
-			state: searchingFor && searchingFor.textContent ? searchingFor.textContent : "Belirsiz",
+			state:
+				searchingFor && searchingFor.textContent
+					? searchingFor.textContent
+					: "Belirsiz",
 			smallImageKey: "search",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	} else if (page.includes("/ilan/")) {
-		const stuff = document.querySelector("#classifiedDetail > div.classifiedDetail > div.classifiedDetailTitle > h1"),
-			price = document.querySelector("#classifiedDetail > div.classifiedDetail > div.classifiedDetailContent > div.classifiedInfo > h3");
+		const stuff = document.querySelector(
+				"#classifiedDetail > div.classifiedDetail > div.classifiedDetailTitle > h1"
+			),
+			price = document.querySelector(
+				"#classifiedDetail > div.classifiedDetail > div.classifiedDetailContent > div.classifiedInfo > h3"
+			);
 
 		presence.setActivity({
 			largeImageKey: "s-logo",
 			details: "Bir ilana göz atıyor:",
-			state: stuff && stuff.textContent != "" ? `${stuff.textContent.trim()} ${price && price.textContent != "" ? "(" + price.textContent.trim().split(" ")[0] + " TL)" : ""}` : "Belirsiz",
+			state:
+				stuff && stuff.textContent != ""
+					? `${stuff.textContent.trim()} ${
+							price && price.textContent != ""
+								? "(" + price.textContent.trim().split(" ")[0] + " TL)"
+								: ""
+					  }`
+					: "Belirsiz",
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	} else if (pages[page] || pages[page.slice(0, -1)]) {
@@ -107,7 +142,10 @@ presence.on("UpdateData", () => async () => {
 			state: pages[page] || pages[page.slice(0, -1)],
 			startTimestamp: Math.floor(Date.now() / 1000)
 		});
-	} else if (document.location.hostname == "banaozel.sahibinden.com" && document.location.pathname == "/") {
+	} else if (
+		document.location.hostname == "banaozel.sahibinden.com" &&
+		document.location.pathname == "/"
+	) {
 		presence.setActivity({
 			largeImageKey: "s-logo",
 			details: "Bir sayfaya göz atıyor:",

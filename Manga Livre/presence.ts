@@ -1,6 +1,5 @@
 var presence = new Presence({
-	clientId: "641409342566039558",
-	mediaKeys: false
+	clientId: "641409342566039558"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -11,8 +10,6 @@ var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "ml"
 	};
@@ -21,15 +18,28 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname == "/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Browsing...";
-		} else if (document.querySelector(".page-navigation > span > em:nth-child(1)") !== null) {
-			presenceData.details = "Reading '" + document.querySelector(".title").textContent + "'";
-			presenceData.state = "Chapter " + document.querySelector(".current-chapter").textContent.replace("Chap ", "") + " - Page " + document.querySelector(".page-navigation > span > em:nth-child(1)").textContent;
+		} else if (
+			document.querySelector(".page-navigation > span > em:nth-child(1)") !==
+			null
+		) {
+			presenceData.details =
+				"Reading '" + document.querySelector(".title").textContent + "'";
+			presenceData.state =
+				"Chapter " +
+				document
+					.querySelector(".current-chapter")
+					.textContent.replace("Chap ", "") +
+				" - Page " +
+				document.querySelector(".page-navigation > span > em:nth-child(1)")
+					.textContent;
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/manga/")) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing the manga:";
-			presenceData.state = document.querySelector(".series-title > h1").textContent;
+			presenceData.state = document.querySelector(
+				".series-title > h1"
+			).textContent;
 			presenceData.smallImageKey = "reading";
 		} else if (document.location.pathname.includes("/lista-de-mangas")) {
 			presenceData.startTimestamp = browsingStamp;
@@ -50,7 +60,14 @@ presence.on("UpdateData", async () => {
 		} else if (document.location.pathname.includes("/mangas/")) {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Viewing category:";
-			presenceData.state = document.querySelector("#wraper > div > a > div > h2").textContent.replace(document.querySelector("#wraper > div > a > div > h2 > div > span").textContent, "").trim();
+			presenceData.state = document
+				.querySelector("#wraper > div > a > div > h2")
+				.textContent.replace(
+					document.querySelector("#wraper > div > a > div > h2 > div > span")
+						.textContent,
+					""
+				)
+				.trim();
 		}
 	}
 
@@ -60,5 +77,4 @@ presence.on("UpdateData", async () => {
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });

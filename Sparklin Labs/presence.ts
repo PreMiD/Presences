@@ -1,12 +1,10 @@
 var presence = new Presence({
-	clientId: "620444226324529177",
-	mediaKeys: false
+	clientId: "620444226324529177"
 });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-
 	let data: presenceData = {
 		largeImageKey: "sparklin-logo"
 	};
@@ -52,7 +50,7 @@ presence.on("UpdateData", async () => {
 			var chan = document.querySelector(".room-name").textContent;
 			var channel = chan.charAt(0).toUpperCase() + chan.slice(1);
 			data.details = "Playing Guess What";
-			data.state = channel
+			data.state = channel;
 			data.startTimestamp = elapsed;
 		} else {
 			data.details = "Guess What Home";

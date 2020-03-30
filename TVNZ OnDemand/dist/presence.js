@@ -1,6 +1,6 @@
 const presence = new Presence({
     clientId: "687426695417823238",
-    mediaKeys: false
+    
 });
 
 const strings = presence.getStrings({

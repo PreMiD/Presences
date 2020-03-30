@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var presence = new Presence({
     clientId: "679008701063102512",
-    mediaKeys: false
+    
 });
 var elapsed = Math.floor(Date.now() / 1000);
 var actualCode = `

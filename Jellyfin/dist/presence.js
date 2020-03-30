@@ -94,7 +94,7 @@ async function init() {
     if (validPage) {
         presence = new Presence({
             clientId: "669359568391766018",
-            mediaKeys: false
+            
         });
 
         presence.on("UpdateData", updateData);

@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "620283648171835392",
-    mediaKeys: false
+    
 });
 const boards = { toradora: "Toradora!", kiminonawa: "Kimi no Na wa. / Your Name." };
 presence.on("UpdateData", () => {

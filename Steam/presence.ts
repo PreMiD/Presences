@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "612299892764966923",
-	mediaKeys: false
-}),
+		clientId: "612299892764966923"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -168,7 +167,8 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Watching a broadcast.";
 
-			presenceData.state = broadcastTitle.innerText + " - " + broadcaster.innerText;
+			presenceData.state =
+				broadcastTitle.innerText + " - " + broadcaster.innerText;
 
 			presenceData.startTimestamp = browsingStamp;
 		} else if (document.location.pathname == "/market") {
@@ -184,7 +184,8 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Community Market.";
 
-			presenceData.state = itemName.innerText + " (" + itemPrice.innerText + ").";
+			presenceData.state =
+				itemName.innerText + " (" + itemPrice.innerText + ").";
 
 			presenceData.startTimestamp = browsingStamp;
 		} else if (document.location.pathname == "/workshop/") {
@@ -276,7 +277,9 @@ presence.on("UpdateData", async () => {
 			presenceData.startTimestamp = browsingStamp;
 		} else if (document.location.pathname.includes("/tags")) {
 			let parts = document.location.href.split("/");
-			let result = parts[parts.length - 2].replace(/%20/g, " ").replace(/%26/g, "&");
+			let result = parts[parts.length - 2]
+				.replace(/%20/g, " ")
+				.replace(/%26/g, "&");
 
 			presenceData.state = result;
 

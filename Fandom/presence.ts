@@ -1,12 +1,11 @@
 var presence = new Presence({
-	clientId: "644400074008297512",
-	mediaKeys: false
-})
+	clientId: "644400074008297512"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000),
 	href = new URL(document.location.href),
 	presenceData = {
-		details: <string>'In construction',
+		details: <string>"In construction",
 		state: <string>null,
 		largeImageKey: <string>"lg",
 		startTimestamp: <number>browsingStamp,
@@ -18,17 +17,15 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 			return this._function;
 		},
 		set function(parameter) {
-			this._function = parameter
+			this._function = parameter;
 		},
 		get present() {
-			return this._function !== null
+			return this._function !== null;
 		}
 	};
 
 (() => {
-
 	if (href.host === "www.fandom.com") {
-
 		/*
 
 		Chapter 1
@@ -37,54 +34,71 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 		*/
 
 		if (href.pathname === "/") {
-			presenceData.state = "Index"
-			delete presenceData.details
+			presenceData.state = "Index";
+			delete presenceData.details;
 		} else if (href.pathname.includes("/signin")) {
-			presenceData.details = "Signing in"
+			presenceData.details = "Signing in";
 		} else if (href.pathname.includes("/register")) {
-			presenceData.details = "Registering an account"
-			delete presenceData.details
+			presenceData.details = "Registering an account";
+			delete presenceData.details;
 		} else if (href.pathname.includes("/articles/")) {
-			presenceData.details = "Reading an article"
-			presenceData.state = document.querySelector(".article-header__title").textContent
+			presenceData.details = "Reading an article";
+			presenceData.state = document.querySelector(
+				".article-header__title"
+			).textContent;
 		} else if (href.pathname.includes("/topics/")) {
-			presenceData.details = "Viewing a topic"
-			presenceData.state = document.querySelector(".topic-header__title").firstElementChild.innerHTML
+			presenceData.details = "Viewing a topic";
+			presenceData.state = document.querySelector(
+				".topic-header__title"
+			).firstElementChild.innerHTML;
 		} else if (href.pathname.includes("/video")) {
 			updateCallback.function = () => {
-				resetData()
-				presenceData.details = "Watching a video"
-				presenceData.state = document.querySelector(".video-page-featured-player__title").textContent
+				resetData();
+				presenceData.details = "Watching a video";
+				presenceData.state = document.querySelector(
+					".video-page-featured-player__title"
+				).textContent;
 				try {
-					if (document.querySelector(".jw-icon-playback").getAttribute("aria-label") === "Pause") {
-						let video = document.querySelector(".jw-video")
-						let timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration))
-						presenceData.startTimestamp = timestamps[0]
-						presenceData.endTimestamp = timestamps[1]
+					if (
+						document
+							.querySelector(".jw-icon-playback")
+							.getAttribute("aria-label") === "Pause"
+					) {
+						let video = document.querySelector(".jw-video");
+						let timestamps = getTimestamps(
+							Math.floor(video.currentTime),
+							Math.floor(video.duration)
+						);
+						presenceData.startTimestamp = timestamps[0];
+						presenceData.endTimestamp = timestamps[1];
 					} else {
-						delete presenceData.startTimestamp
-						delete presenceData.endTimestamp
+						delete presenceData.startTimestamp;
+						delete presenceData.endTimestamp;
 					}
 				} catch (e) {
-					delete presenceData.startTimestamp
-					delete presenceData.endTimestamp
+					delete presenceData.startTimestamp;
+					delete presenceData.endTimestamp;
 				}
-				console.log(presenceData)
-			}
+				console.log(presenceData);
+			};
 		} else if (href.pathname.includes("/curated/")) {
-			presenceData.details = "Viewing a curation"
-			presenceData.state = document.querySelector(".card__title").textContent
+			presenceData.details = "Viewing a curation";
+			presenceData.state = document.querySelector(".card__title").textContent;
 		} else {
-			presenceData.details = "Viewing a page"
-			if (href.pathname.includes("/explore")) presenceData.state = "Explore"
-			else if (href.pathname.includes("/about")) presenceData.state = "About"
-			else if (href.pathname.includes("/carriers")) presenceData.state = "Carriers"
-			else if (href.pathname.includes("/terms-of-use")) presenceData.state = "Terms of Use"
-			else if (href.pathname.includes("/privacy-policy")) presenceData.state = "Privacy Policy"
-			else if (href.pathname.includes("/mediakit")) presenceData.state = "Media Kit"
-			else if (href.pathname.includes("/local-sitemap")) presenceData.state = "Local Sitemap"
+			presenceData.details = "Viewing a page";
+			if (href.pathname.includes("/explore")) presenceData.state = "Explore";
+			else if (href.pathname.includes("/about")) presenceData.state = "About";
+			else if (href.pathname.includes("/carriers"))
+				presenceData.state = "Carriers";
+			else if (href.pathname.includes("/terms-of-use"))
+				presenceData.state = "Terms of Use";
+			else if (href.pathname.includes("/privacy-policy"))
+				presenceData.state = "Privacy Policy";
+			else if (href.pathname.includes("/mediakit"))
+				presenceData.state = "Media Kit";
+			else if (href.pathname.includes("/local-sitemap"))
+				presenceData.state = "Local Sitemap";
 		}
-
 	} else if (href.pathname.includes("/wiki/")) {
 		/*
 
@@ -95,86 +109,93 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 
 		let title: string,
 			sitename: string,
-			actionResult = href.searchParams.get("action") || href.searchParams.get("veaction"),
+			actionResult =
+				href.searchParams.get("action") || href.searchParams.get("veaction"),
 			titleFromURL = () => {
-				let raw: string, lang: string
+				let raw: string, lang: string;
 				if (href.pathname.startsWith("/wiki/")) {
-					raw = href.pathname.slice(6)
+					raw = href.pathname.slice(6);
 				} else {
-					lang = href.pathname.split("/")[0]
-					raw = href.pathname.slice(7 + lang.length)
+					lang = href.pathname.split("/")[0];
+					raw = href.pathname.slice(7 + lang.length);
 				}
-				if (raw.includes("_")) return raw.replace(/_/g, " ")
-				else return raw
-			}
+				if (raw.includes("_")) return raw.replace(/_/g, " ");
+				else return raw;
+			};
 
 		try {
-			title = document.querySelector('.page-header__title').innerHTML
+			title = document.querySelector(".page-header__title").innerHTML;
 		} catch (e) {
-			title = titleFromURL()
+			title = titleFromURL();
 		}
 
 		try {
-			sitename = document.querySelector("meta[property='og:site_name']").content
+			sitename = document.querySelector("meta[property='og:site_name']")
+				.content;
 		} catch (e) {
-			sitename = null
+			sitename = null;
 		}
 
 		let namespaceDetails = {
-			"Media": "Viewing a media",
-			"Special": "Viewing a special page",
-			"Talk": "Viewing a talk page",
-			"User": "Viewing a user page",
+			Media: "Viewing a media",
+			Special: "Viewing a special page",
+			Talk: "Viewing a talk page",
+			User: "Viewing a user page",
 			"User talk": "Viewing a user talk page",
 			[sitename]: "Viewing a project page",
 			[sitename + " talk"]: "Viewing a project talk page",
-			"File": "Viewing a file",
+			File: "Viewing a file",
 			"File talk": "Viewing a file talk page",
-			"MediaWiki": "Viewing a MediaWiki page",
+			MediaWiki: "Viewing a MediaWiki page",
 			"MediaWiki talk": "Viewing a MediaWiki talk page",
-			"Template": "Viewing a template",
+			Template: "Viewing a template",
 			"Template talk": "Viewing a template talk",
-			"Help": "Viewing a help page",
+			Help: "Viewing a help page",
 			"Help talk": "Viewing a help talk page",
-			"Category": "Viewing a category",
+			Category: "Viewing a category",
 			"Category talk": "Viewing a category talk page",
-			"Blog": "Viewing a blog",
+			Blog: "Viewing a blog",
 			"Message Wall": "Viewing a message wall",
-			"Thread": "Viewing a forum thread",
-			"Board": "Viewing a forum board",
-			"Topic": "Viewing a forum topic",
-		}
+			Thread: "Viewing a forum thread",
+			Board: "Viewing a forum board",
+			Topic: "Viewing a forum topic"
+		};
 
 		if (title === "Home") {
-			sitename = document.querySelector("meta[property='og:title']").content
-			presenceData.state = "Home"
-			delete presenceData.details
+			sitename = document.querySelector("meta[property='og:title']").content;
+			presenceData.state = "Home";
+			delete presenceData.details;
 		} else if (actionResult == "history" && titleFromURL) {
-			presenceData.details = "Viewing revision history"
-			presenceData.state = titleFromURL()
+			presenceData.details = "Viewing revision history";
+			presenceData.state = titleFromURL();
 		} else if (actionResult == "edit" && titleFromURL) {
-			if (href.searchParams.has("action")) title = document.querySelector("#EditPageHeader").children[2].textContent
-			presenceData.details = "Editing a wiki page"
-			presenceData.state = titleFromURL()
+			if (href.searchParams.has("action"))
+				title = document.querySelector("#EditPageHeader").children[2]
+					.textContent;
+			presenceData.details = "Editing a wiki page";
+			presenceData.state = titleFromURL();
 		} else if (href.pathname.includes("User_blog:")) {
 			if (title) {
-				presenceData.details = "Reading a user blog post"
-				presenceData.state = title + " by " + document.querySelector(".page-header__blog-post-details").firstElementChild.textContent
+				presenceData.details = "Reading a user blog post";
+				presenceData.state =
+					title +
+					" by " +
+					document.querySelector(".page-header__blog-post-details")
+						.firstElementChild.textContent;
 			} else {
-				presenceData.details = "Viewing a user blog"
-				presenceData.state = titleFromURL()
+				presenceData.details = "Viewing a user blog";
+				presenceData.state = titleFromURL();
 			}
 		} else {
-			if (namespaceDetails[title.split(":")[0]]) presenceData.details = namespaceDetails[title.split(":")[0]]
-			else presenceData.details = "Reading a wiki page"
-			presenceData.state = title
+			if (namespaceDetails[title.split(":")[0]])
+				presenceData.details = namespaceDetails[title.split(":")[0]];
+			else presenceData.details = "Reading a wiki page";
+			presenceData.state = title;
 		}
 
-		presenceData.startTimestamp = browsingStamp
-		presenceData.state += " | " + sitename
-
+		presenceData.startTimestamp = browsingStamp;
+		presenceData.state += " | " + sitename;
 	} else if (href.pathname === "/f" || href.pathname.includes("/f/")) {
-
 		/*
 
 		Chapter 3
@@ -184,39 +205,39 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 
 		updateCallback.function = () => {
 			var presenceData = {
-				details: <string>'In construction',
+				details: <string>"In construction",
 				state: <string>null,
 				largeImageKey: <string>"lg",
-				startTimestamp: <number>browsingStamp,
+				startTimestamp: <number>browsingStamp
 			};
-			href = new URL(document.location.href)
+			href = new URL(document.location.href);
 			if (href.pathname === "/f") {
-				presenceData.details = "Viewing the discussion page"
+				presenceData.details = "Viewing the discussion page";
 			} else if (href.pathname.includes("/p/")) {
-				presenceData.details = "Reading an discussion post"
-				presenceData.state = document.querySelector(".post__title").textContent
+				presenceData.details = "Reading an discussion post";
+				presenceData.state = document.querySelector(".post__title").textContent;
 			} else if (href.pathname.includes("/u/")) {
-				presenceData.details = "Viewing a discussion user page"
-				presenceData.state = document.querySelector(".user-overview__username").textContent
+				presenceData.details = "Viewing a discussion user page";
+				presenceData.state = document.querySelector(
+					".user-overview__username"
+				).textContent;
 			}
-			cleanData()
-		}
-
+			cleanData();
+		};
 	}
 
-	cleanData()
-
-})()
+	cleanData();
+})();
 
 if (updateCallback.present) {
 	presence.on("UpdateData", async () => {
-		updateCallback.function()
-		presence.setActivity(presenceData)
-	})
+		updateCallback.function();
+		presence.setActivity(presenceData);
+	});
 } else {
 	presence.on("UpdateData", async () => {
-		presence.setActivity(presenceData)
-	})
+		presence.setActivity(presenceData);
+	});
 }
 
 /**
@@ -225,9 +246,9 @@ if (updateCallback.present) {
  * @param {Number} videoDuration Video duration seconds
  */
 function getTimestamps(videoTime: number, videoDuration: number) {
-	var startTime = Date.now()
-	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration
-	return [Math.floor(startTime / 1000), endTime]
+	var startTime = Date.now();
+	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+	return [Math.floor(startTime / 1000), endTime];
 }
 
 /**
@@ -235,7 +256,7 @@ function getTimestamps(videoTime: number, videoDuration: number) {
  */
 function resetData() {
 	presenceData = {
-		details: <string>'In construction',
+		details: <string>"In construction",
 		state: <string>null,
 		largeImageKey: <string>"lg",
 		startTimestamp: <number>browsingStamp,
@@ -247,6 +268,6 @@ function resetData() {
  * Cleans presenceData
  */
 function cleanData() {
-	if (presenceData.state === null) delete presenceData.state
-	if (presenceData.endTimestamp === null) delete presenceData.endTimestamp
+	if (presenceData.state === null) delete presenceData.state;
+	if (presenceData.endTimestamp === null) delete presenceData.endTimestamp;
 }

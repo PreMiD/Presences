@@ -1,7 +1,7 @@
 var browsingStamp = Math.floor(Date.now() / 1000);
 var presence = new Presence({
     clientId: "629653820405710848",
-    mediaKeys: false
+    
 });
 presence.on("UpdateData", () => {
     var urlParams = new URLSearchParams(window.location.search);

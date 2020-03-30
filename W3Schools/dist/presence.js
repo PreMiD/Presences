@@ -1,6 +1,6 @@
 const presence = new Presence({
     clientId: '630239297521319953',
-    mediaKeys: false
+    
 });
 var whitelist = ['HTML', 'CSS', 'SQL', 'PHP', 'W3.CSS', 'JQUERY', 'XML'];
 var elapsed, oldUrl;

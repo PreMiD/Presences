@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "640644330666852382"
-}),
-
+		clientId: "640644330666852382"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -12,22 +11,17 @@ var playback;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
-
-	lastPlaybackState = playback
-	browsingStamp = Math.floor(Date.now() / 1000)
-
+	lastPlaybackState = playback;
+	browsingStamp = Math.floor(Date.now() / 1000);
 }
 presence.on("UpdateData", async () => {
-
 	playback =
-		document.querySelector(".vjs-current-time-display") !== null
-			? true : false
+		document.querySelector(".vjs-current-time-display") !== null ? true : false;
 
 	if (!playback) {
-
 		presenceData: presenceData = {
 			largeImageKey: "logo"
-		}
+		};
 
 		presenceData.details = "Browsing...";
 		presenceData.startTimestamp = browsingStamp;
@@ -36,23 +30,21 @@ presence.on("UpdateData", async () => {
 		delete presenceData.smallImageKey;
 
 		presence.setActivity(presenceData, true);
-
 	}
 
 	var video: HTMLVideoElement = document.querySelector("#video1_html5_api");
 
 	if (video !== null && !isNaN(video.duration)) {
-
 		var videoTitle: any;
-		var seasonepisode
+		var seasonepisode;
 
-		videoTitle = document.querySelector('a#titleleft');
-		seasonepisode = document.querySelector('span#titleleft');
+		videoTitle = document.querySelector("a#titleleft");
+		seasonepisode = document.querySelector("span#titleleft");
 
 		var timestamps = getTimestamps(
-			Math.floor(video.currentTime),
-			Math.floor(video.duration)
-		),
+				Math.floor(video.currentTime),
+				Math.floor(video.duration)
+			),
 			presenceData: presenceData = {
 				largeImageKey: "logo",
 				smallImageKey: video.paused ? "pause" : "play",
@@ -76,9 +68,7 @@ presence.on("UpdateData", async () => {
 		if (videoTitle !== null) {
 			presence.setActivity(presenceData, !video.paused);
 		}
-
 	}
-
 });
 
 function getTimestamps(videoTime: number, videoDuration: number) {

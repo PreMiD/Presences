@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 
 
-let presence = new Presence({ clientId: '684124119146692619', mediaKeys: false })
+let presence = new Presence({ clientId: '684124119146692619',  })
 
 let startDate = Math.floor(Date.now() / 1000)
 let locales = {

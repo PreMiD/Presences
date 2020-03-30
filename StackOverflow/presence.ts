@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "610123745033584651",
-	mediaKeys: false
-}),
+		clientId: "610123745033584651"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -81,7 +80,8 @@ presence.on("UpdateData", async () => {
 
 			presenceData.details = "Browsing all the questions.";
 
-			presenceData.state = "Current page: " + pageNumber.innerText + "/" + lastPage;
+			presenceData.state =
+				"Current page: " + pageNumber.innerText + "/" + lastPage;
 
 			presenceData.startTimestamp = browsingStamp;
 		} else if (document.location.pathname == "/jobs") {

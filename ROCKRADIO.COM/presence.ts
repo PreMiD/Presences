@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "639616115873546261",
-	mediaKeys: false
-}),
+		clientId: "639616115873546261"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -16,8 +15,6 @@ var search: any;
 var playing: any;
 
 presence.on("UpdateData", async () => {
-
-
 	let presenceData: presenceData = {
 		largeImageKey: "rock"
 	};
@@ -26,13 +23,27 @@ presence.on("UpdateData", async () => {
 		if (document.location.pathname == "/") {
 			presenceData.startTimestamp = browsingStamp;
 			presenceData.details = "Browsing...";
-		} else if (document.querySelector("#now-playing > div.info-container > div.progress-container > div > span > span > span.total") !== null) {
-			user = document.querySelector("#now-playing > div.info-container > div.progress-container > div > span > span > span.remain");
-			title = document.querySelector("#now-playing > div.info-container > div.title-container > div > span > span.artist-name");
-			replace = document.querySelector("#now-playing > div.info-container > div.title-container > div > span > span.track-name");
+		} else if (
+			document.querySelector(
+				"#now-playing > div.info-container > div.progress-container > div > span > span > span.total"
+			) !== null
+		) {
+			user = document.querySelector(
+				"#now-playing > div.info-container > div.progress-container > div > span > span > span.remain"
+			);
+			title = document.querySelector(
+				"#now-playing > div.info-container > div.title-container > div > span > span.artist-name"
+			);
+			replace = document.querySelector(
+				"#now-playing > div.info-container > div.title-container > div > span > span.track-name"
+			);
 			presenceData.details = title.innerText + replace.innerText;
 			presenceData.state = user.innerText.replace("-", "") + " left";
-			playing = document.querySelector("#play-button > div > a").className == "ico icon-pause" ? "play" : "pause";
+			playing =
+				document.querySelector("#play-button > div > a").className ==
+				"ico icon-pause"
+					? "play"
+					: "pause";
 			presenceData.smallImageKey = playing;
 		} else if (document.querySelector("#channel-title") !== null) {
 			title = document.querySelector("#channel-title");
@@ -44,19 +55,17 @@ presence.on("UpdateData", async () => {
 
 	if (presenceData.details == null) {
 		presence.setTrayTitle();
-		presence.setActivity()
+		presence.setActivity();
 	} else {
 		presence.setActivity(presenceData);
 	}
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;

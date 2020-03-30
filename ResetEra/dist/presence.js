@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "683031551193514047",
-    mediaKeys: false
+    
 }), strings = presence.getStrings({
     readinga: "presence.activity.reading"
 });

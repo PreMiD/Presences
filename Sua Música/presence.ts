@@ -1,12 +1,9 @@
 var presence = new Presence({
-	clientId: "692230804402864148",
-	mediaKeys: false
-}),
-
+		clientId: "692230804402864148"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
-
 	});
 
 presence.on("UpdateData", async () => {
@@ -30,10 +27,10 @@ presence.on("UpdateData", async () => {
 
 /**
  * Check if the element exists on the web page
- * 
+ *
  */
 function elementExist(element): boolean {
-	if (typeof (element) != 'undefined' && element != null) {
+	if (typeof element != "undefined" && element != null) {
 		return true;
 	} else {
 		return false;
@@ -46,7 +43,7 @@ function elementExist(element): boolean {
 function getTrackPlaying(): string {
 	const element = document.querySelector("#trackInfo > a");
 	if (elementExist(element) && element.innerHTML.length > 0) {
-		return '🎧  ' + firstLetterUp(element.innerHTML);
+		return "🎧  " + firstLetterUp(element.innerHTML);
 	} else {
 		return "📀 Navegando...";
 	}
@@ -58,7 +55,7 @@ function getTrackPlaying(): string {
 function getArtistPlaying(): string {
 	const element = document.querySelector("#trackInfo > span > a");
 	if (elementExist(element) && element.innerHTML != " - ") {
-		return '🎤  ' + firstLetterUp(element.innerHTML);
+		return "🎤  " + firstLetterUp(element.innerHTML);
 	} else {
 		return "🇧🇷 suamusica.com.br";
 	}
@@ -80,5 +77,7 @@ function actionPlay(): string {
  * Transforms the first letter of the string to uppercase.
  */
 function firstLetterUp(str): string {
-	return str.toLowerCase().replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase(); });
+	return str.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
+		return a.toUpperCase();
+	});
 }

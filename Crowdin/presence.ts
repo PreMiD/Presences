@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "614200757989670934",
-	mediaKeys: false
-}),
+		clientId: "614200757989670934"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused"
@@ -28,13 +27,17 @@ presence.on("UpdateData", async () => {
 		!document.location.pathname ||
 		document.location.pathname == "/project/premid"
 	) {
-		translatePageTitle = document.querySelector("#wrap > div.section > div > h1");
+		translatePageTitle = document.querySelector(
+			"#wrap > div.section > div > h1"
+		);
 
 		presenceData.details = "Home";
 		presenceData.state = translatePageTitle.innerText;
 		presenceData.startTimestamp = browsingStamp;
 	} else if (document.location.pathname.includes("/project/")) {
-		translatePageTitle = document.querySelector("#wrap > div.section > div > h1");
+		translatePageTitle = document.querySelector(
+			"#wrap > div.section > div > h1"
+		);
 
 		if (document.location.pathname.includes("activity_stream")) {
 			presenceData.details = "Viewing activity";
@@ -86,11 +89,13 @@ presence.on("UpdateData", async () => {
 
 		if (document.location.pathname.includes("activity")) {
 			presenceData.details = "Viewing activity";
-			presenceData.state = profileName.innerText + " - " + profileNickname.innerText;
+			presenceData.state =
+				profileName.innerText + " - " + profileNickname.innerText;
 			presenceData.startTimestamp = browsingStamp;
 		} else {
 			presenceData.details = "Viewing a profile";
-			presenceData.state = profileName.innerText + " - " + profileNickname.innerText;
+			presenceData.state =
+				profileName.innerText + " - " + profileNickname.innerText;
 			presenceData.startTimestamp = browsingStamp;
 		}
 	} else if (document.location.pathname.includes("/projects")) {

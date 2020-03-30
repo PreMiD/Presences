@@ -1,7 +1,6 @@
 var presence = new Presence({
-	clientId: "659503939573776385",
-	mediaKeys: false
-}),
+		clientId: "659503939573776385"
+	}),
 	strings = presence.getStrings({
 		play: "presence.playback.playing",
 		pause: "presence.playback.paused",
@@ -15,23 +14,42 @@ var presence = new Presence({
 
 presence.on("iFrameData", data => {
 	video = data;
-})
+});
 
 presence.on("UpdateData", async () => {
-
 	var data: presenceData = {
 		largeImageKey: "va"
 	};
 
-	if ((video != null && !isNaN(video.duration) && video.duration > 0) && (document.querySelector("#headline span.current") && document.querySelector("#headline span.current").textContent.length > 5)) {
+	if (
+		video != null &&
+		!isNaN(video.duration) &&
+		video.duration > 0 &&
+		document.querySelector("#headline span.current") &&
+		document.querySelector("#headline span.current").textContent.length > 5
+	) {
+		var timestamps = getTimestamps(
+			Math.floor(video.currentTime),
+			Math.floor(video.duration)
+		);
 
-		var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
-
-		data.details = document.querySelector("#headline span.current").textContent.substr(0, document.querySelector("#headline span.current").textContent.lastIndexOf(' – '));
-		data.state = document.querySelector("#headline span.current").textContent.split(' – ').pop();
+		data.details = document
+			.querySelector("#headline span.current")
+			.textContent.substr(
+				0,
+				document
+					.querySelector("#headline span.current")
+					.textContent.lastIndexOf(" – ")
+			);
+		data.state = document
+			.querySelector("#headline span.current")
+			.textContent.split(" – ")
+			.pop();
 
 		data.smallImageKey = video.paused ? "pause" : "play";
-		data.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+		data.smallImageText = video.paused
+			? (await strings).pause
+			: (await strings).play;
 		data.startTimestamp = timestamps[0];
 		data.endTimestamp = timestamps[1];
 
@@ -41,10 +59,7 @@ presence.on("UpdateData", async () => {
 		}
 
 		presence.setActivity(data, !video.paused);
-
-	}
-	else {
-
+	} else {
 		data.details = (await strings).browsing;
 		data.smallImageKey = "search";
 		data.smallImageText = (await strings).browsing;
@@ -66,7 +81,6 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(data);
 	}
-
 });
 
 function getTimestamps(videoTime: number, videoDuration: number) {
