@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     posttitle = document.querySelector(
       "#mod-buzz-header-1 > div.buzz-header__hgroup.xs-my2.md-mt0 > h1"
-    );
+    ),
     user = document.querySelector(
       "body > main > div > div > div > div.user-info.xs-px2.sm-p0.xs-mb3.md-mb4 > div > div.xs-ml2.xs-flex.xs-flex-column > div > h1"
     );

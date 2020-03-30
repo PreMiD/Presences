@@ -116,7 +116,6 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.details = "Browsing Documentation";
     }
-  } else if (document.location.pathname.startsWith("/docs")) {
   } else if (document.location.pathname.startsWith("/user/notifications")) {
     presenceData.details = "Browsing Notifications";
   } else if (document.location.pathname.startsWith("/support")) {

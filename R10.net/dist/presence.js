@@ -27,16 +27,10 @@ presence.on("UpdateData", async () => {
   const post = document.querySelector(
     "body > main > div > div.pagination > div.left.double > a.rbtn.rgreen > span:nth-child(2)"
   );
-  const ozel = document.querySelector(
-    "body > main > div > div.privateMessages.single > div.left > div.head > div.title"
-  );
   const cevap = document.querySelector(
     "body > main > div > form > div:nth-child(12) > div.head"
   );
   const head = document.querySelector("head > title");
-  const grup = document.querySelector(
-    "body > main > div > div:nth-child(3) > div"
-  );
   const analiz = document.querySelector(
     "body > div.page-header.r10title > div > div > h4 > span"
   );

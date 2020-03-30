@@ -57,7 +57,6 @@
       }
 
       presence.setActivity(presenceData);
-    } else {
     }
   });
 
