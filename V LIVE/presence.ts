@@ -57,75 +57,75 @@ presence.on("UpdateData", async () => {
   playback = video ? true : false;
 
   if (!playback) {
-    presenceData: presenceData = {
+    let pdata: presenceData = {
       largeImageKey: "vlive2",
     };
 
-    presenceData.startTimestamp = browsingStamp;
+    pdata.startTimestamp = browsingStamp;
 
     if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/home/new"
     ) {
-      presenceData.details = "Browsing through the";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "new video's page";
+      pdata.details = "Browsing through the";
+      pdata.smallImageKey = "reading";
+      pdata.state = "new video's page";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/home/my"
     ) {
-      presenceData.details = "Browsing through their";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "followers recent uploads";
+      pdata.details = "Browsing through their";
+      pdata.smallImageKey = "reading";
+      pdata.state = "followers recent uploads";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname.includes("/home/chart")
     ) {
-      presenceData.details = "Browsing through";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "the charts page";
+      pdata.details = "Browsing through";
+      pdata.smallImageKey = "reading";
+      pdata.state = "the charts page";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/upcoming"
     ) {
-      presenceData.details = "Browsing through";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "the upcoming page";
+      pdata.details = "Browsing through";
+      pdata.smallImageKey = "reading";
+      pdata.state = "the upcoming page";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/channels"
     ) {
-      presenceData.details = "Browsing through";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "the channels page";
+      pdata.details = "Browsing through";
+      pdata.smallImageKey = "reading";
+      pdata.state = "the channels page";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/events"
     ) {
-      presenceData.details = "Browsing through";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "the events page";
+      pdata.details = "Browsing through";
+      pdata.smallImageKey = "reading";
+      pdata.state = "the events page";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname.includes("/vstore")
     ) {
-      presenceData.details = "Browsing through";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "the store page";
+      pdata.details = "Browsing through";
+      pdata.smallImageKey = "reading";
+      pdata.state = "the store page";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname.includes("/product/")
@@ -137,116 +137,116 @@ presence.on("UpdateData", async () => {
         "#content > div.title_series_home > div > div > div > div.series_info > div.series_tit > div > span:nth-child(2) > a"
       );
 
-      presenceData.details = "Looking at product by " + uploader.innerText;
-      presenceData.smallImageKey = "reading";
-      presenceData.state = search.innerText;
+      pdata.details = "Looking at product by " + uploader.innerText;
+      pdata.smallImageKey = "reading";
+      pdata.state = search.innerText;
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/my/profile"
     ) {
-      presenceData.details = "Editting their";
-      presenceData.smallImageKey = "search";
-      presenceData.state = "own profile";
+      pdata.details = "Editting their";
+      pdata.smallImageKey = "search";
+      pdata.state = "own profile";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/my/fanship"
     ) {
-      presenceData.details = "Looking at their";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "fanships subscriptions";
+      pdata.details = "Looking at their";
+      pdata.smallImageKey = "reading";
+      pdata.state = "fanships subscriptions";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/my/watched"
     ) {
-      presenceData.details = "Looking at their";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "watched videos";
+      pdata.details = "Looking at their";
+      pdata.smallImageKey = "reading";
+      pdata.state = "watched videos";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname.includes("/my/purchased")
     ) {
-      presenceData.details = "Looking at their";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "recent purchases";
+      pdata.details = "Looking at their";
+      pdata.smallImageKey = "reading";
+      pdata.state = "recent purchases";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/my/coin"
     ) {
-      presenceData.details = "Looking at their";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "coin balance";
+      pdata.details = "Looking at their";
+      pdata.smallImageKey = "reading";
+      pdata.state = "coin balance";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/my/devices"
     ) {
-      presenceData.details = "Looking at their";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "connected devices";
+      pdata.details = "Looking at their";
+      pdata.smallImageKey = "reading";
+      pdata.state = "connected devices";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/my"
     ) {
-      presenceData.details = "Looking at their";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "profile page";
+      pdata.details = "Looking at their";
+      pdata.smallImageKey = "reading";
+      pdata.state = "profile page";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname == "/my/channels"
     ) {
-      presenceData.details = "Looking at their";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "followed channels";
+      pdata.details = "Looking at their";
+      pdata.smallImageKey = "reading";
+      pdata.state = "followed channels";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname.includes("/search/")
     ) {
       search = document.querySelector("#search_txt3");
 
-      presenceData.details = "Searching for:";
-      presenceData.smallImageKey = "search";
-      presenceData.state = search.value;
+      pdata.details = "Searching for:";
+      pdata.smallImageKey = "search";
+      pdata.state = search.value;
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "channels.vlive.tv" &&
       document.location.pathname.includes("/home")
     ) {
       search = document.querySelector("#container > channel > div > div > h2");
 
-      presenceData.details = "Watching the home page";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "of " + search.innerText + "'s channel";
+      pdata.details = "Watching the home page";
+      pdata.smallImageKey = "reading";
+      pdata.state = "of " + search.innerText + "'s channel";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "channels.vlive.tv" &&
       document.location.pathname.includes("/video")
     ) {
       search = document.querySelector("#container > channel > div > div > h2");
 
-      presenceData.details = "Watching the video page";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "of " + search.innerText + "'s channel";
+      pdata.details = "Watching the video page";
+      pdata.smallImageKey = "reading";
+      pdata.state = "of " + search.innerText + "'s channel";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "channels.vlive.tv" &&
       document.location.pathname.includes("/celeb/")
@@ -257,44 +257,44 @@ presence.on("UpdateData", async () => {
       );
       let test = uploader.innerText.replace("celeb", "");
 
-      presenceData.details = "Reading an article by " + test;
-      presenceData.smallImageKey = "reading";
-      presenceData.state = search.innerText;
+      pdata.details = "Reading an article by " + test;
+      pdata.smallImageKey = "reading";
+      pdata.state = search.innerText;
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "channels.vlive.tv" &&
       document.location.pathname.includes("/celeb")
     ) {
       search = document.querySelector("#container > channel > div > div > h2");
 
-      presenceData.details = "Watching the post page";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "of " + search.innerText + "'s channel";
+      pdata.details = "Watching the post page";
+      pdata.smallImageKey = "reading";
+      pdata.state = "of " + search.innerText + "'s channel";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "channels.vlive.tv" &&
       document.location.pathname.includes("/fan")
     ) {
       search = document.querySelector("#container > channel > div > div > h2");
 
-      presenceData.details = "Watching the fan page";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "of " + search.innerText + "'s channel";
+      pdata.details = "Watching the fan page";
+      pdata.smallImageKey = "reading";
+      pdata.state = "of " + search.innerText + "'s channel";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "channels.vlive.tv" &&
       document.location.pathname.includes("/about")
     ) {
       search = document.querySelector("#container > channel > div > div > h2");
 
-      presenceData.details = "Watching the about page";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "of " + search.innerText + "'s channel";
+      pdata.details = "Watching the about page";
+      pdata.smallImageKey = "reading";
+      pdata.state = "of " + search.innerText + "'s channel";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname.includes("/fanship/")
@@ -304,20 +304,20 @@ presence.on("UpdateData", async () => {
       );
       let test = search.innerText.replace("+", "");
 
-      presenceData.details = "Watching the fanship page";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "of " + test;
+      pdata.details = "Watching the fanship page";
+      pdata.smallImageKey = "reading";
+      pdata.state = "of " + test;
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname.includes("/policies/")
     ) {
-      presenceData.details = "Reading the policies";
-      presenceData.smallImageKey = "reading";
-      delete presenceData.state;
+      pdata.details = "Reading the policies";
+      pdata.smallImageKey = "reading";
+      delete pdata.state;
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "channels.vlive.tv" &&
       document.location.pathname.includes("/vtoday/")
@@ -328,65 +328,65 @@ presence.on("UpdateData", async () => {
       );
       let test = uploader.innerText.replace("celeb", "");
 
-      presenceData.details = "Reading an article by " + test;
-      presenceData.smallImageKey = "reading";
-      presenceData.state = search.innerText;
+      pdata.details = "Reading an article by " + test;
+      pdata.smallImageKey = "reading";
+      pdata.state = search.innerText;
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "vtoday.vlive.tv" &&
       document.location.pathname == "/home"
     ) {
-      presenceData.details = "Browsing the home";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "page of V Today";
+      pdata.details = "Browsing the home";
+      pdata.smallImageKey = "reading";
+      pdata.state = "page of V Today";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "vtoday.vlive.tv" &&
       document.location.pathname == "/exclusive"
     ) {
-      presenceData.details = "Browsing the exclusive";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "page of V Today";
+      pdata.details = "Browsing the exclusive";
+      pdata.smallImageKey = "reading";
+      pdata.state = "page of V Today";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "vtoday.vlive.tv" &&
       document.location.pathname == "/celeb"
     ) {
-      presenceData.details = "Browsing the celeb";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "page of V Today";
+      pdata.details = "Browsing the celeb";
+      pdata.smallImageKey = "reading";
+      pdata.state = "page of V Today";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "vtoday.vlive.tv" &&
       document.location.pathname == "/music"
     ) {
-      presenceData.details = "Browsing the music";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "page of V Today";
+      pdata.details = "Browsing the music";
+      pdata.smallImageKey = "reading";
+      pdata.state = "page of V Today";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "vtoday.vlive.tv" &&
       document.location.pathname == "/tv"
     ) {
-      presenceData.details = "Browsing the tv";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "page of V Today";
+      pdata.details = "Browsing the tv";
+      pdata.smallImageKey = "reading";
+      pdata.state = "page of V Today";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "vtoday.vlive.tv" &&
       document.location.pathname == "/photo"
     ) {
-      presenceData.details = "Browsing the photo";
-      presenceData.smallImageKey = "reading";
-      presenceData.state = "page of V Today";
+      pdata.details = "Browsing the photo";
+      pdata.smallImageKey = "reading";
+      pdata.state = "page of V Today";
 
-      presence.setActivity(presenceData);
+      presence.setActivity(pdata);
     } else if (
       document.location.hostname == "www.vlive.tv" &&
       document.location.pathname.includes("/video/")
@@ -402,28 +402,28 @@ presence.on("UpdateData", async () => {
       );
 
       if (livechecker.innerText.includes('"viewType" : "live"')) {
-        presenceData.details = uploader.innerText;
-        presenceData.smallImageKey = "live";
-        presenceData.state = search.innerText;
-        delete presenceData.startTimestamp;
+        pdata.details = uploader.innerText;
+        pdata.smallImageKey = "live";
+        pdata.state = search.innerText;
+        delete pdata.startTimestamp;
 
-        presence.setActivity(presenceData);
+        presence.setActivity(pdata);
       } else if (
         livechecker.innerText.includes('"viewType" : "liveComingSoon"')
       ) {
-        presenceData.details =
+        pdata.details =
           "Waiting for livestream by " + uploader.innerText;
-        presenceData.smallImageKey = "live";
-        presenceData.state = search.innerText;
-        delete presenceData.startTimestamp;
+        pdata.smallImageKey = "live";
+        pdata.state = search.innerText;
+        delete pdata.startTimestamp;
 
-        presence.setActivity(presenceData);
+        presence.setActivity(pdata);
       } else {
-        presenceData.details = "Waiting for video by " + uploader.innerText;
-        presenceData.smallImageKey = "pause";
-        presenceData.state = search.innerText;
+        pdata.details = "Waiting for video by " + uploader.innerText;
+        pdata.smallImageKey = "pause";
+        pdata.state = search.innerText;
 
-        presence.setActivity(presenceData);
+        presence.setActivity(pdata);
       }
     } else {
       presence.setActivity();
@@ -433,11 +433,11 @@ presence.on("UpdateData", async () => {
 
   // Check if it can find the video
   if (video !== null && !isNaN(video.duration)) {
-    var timestamps = getTimestamps(
+    let timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      presenceData: presenceData = {
+      pdata: presenceData = {
         details: "",
         state: "",
         largeImageKey: "vlive2",
@@ -466,20 +466,20 @@ presence.on("UpdateData", async () => {
     );
 
     // Set presence details to the title (innerText - gets the text from the <strong> tag in this case)
-    presenceData.details = title.innerText;
+    pdata.details = title.innerText;
 
     // Set presence state to views value
-    presenceData.state = uploader.innerText;
+    pdata.state = uploader.innerText;
 
     //* Remove timestamps if paused
     if (video.paused) {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
+      delete pdata.startTimestamp;
+      delete pdata.endTimestamp;
     }
 
     //* If tags are not "null"
     if (title !== null && uploader !== null) {
-      presence.setActivity(presenceData, !video.paused);
+      presence.setActivity(pdata, !video.paused);
     }
   }
 });

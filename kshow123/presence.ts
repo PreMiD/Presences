@@ -126,10 +126,8 @@ presence.on("UpdateData", async () => {
       presence.setActivity(pdata);
     }
   } else if (document.location.pathname == "/") {
-    var pdata: presenceData = {
-      largeImageKey: "ksow123stack",
-    };
 
+    pdata.largeImageKey = "ksow123stack";
     pdata.details = "Browsing through";
     pdata.state = "the main page";
     delete pdata.endTimestamp;

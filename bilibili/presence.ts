@@ -139,10 +139,6 @@ presence.on("UpdateData", async () => {
         );
       //番剧
     } else if (document.location.pathname.includes("/bangumi/")) {
-      var video: HTMLVideoElement,
-        videoDuration: any,
-        videoCurrentTime: any,
-        paused: any;
       video = document.querySelector(
         "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
       );
