@@ -1,47 +1,12 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 {
     const presence = new Presence({
-        clientId: "611012705306017792",
-        
+        clientId: "611012705306017792"
     });
     const strings = presence.getStrings({
         play: "presence.playback.playing",
         pause: "presence.playback.paused"
     });
-    presence.on("MediaKeys", (key) => {
-        if (location.pathname.startsWith("/animestore/sc_d_pc") &&
-            document.querySelector("#video")) {
-            console.log(key);
-            switch (key) {
-                case "pause": {
-                    const button = document.querySelector(".playButton");
-                    if (button)
-                        button.click();
-                    break;
-                }
-                case "nextTrack": {
-                    const button = document.querySelector(".skipButton");
-                    if (button)
-                        button.click();
-                    break;
-                }
-                case "previousTrack": {
-                    const button = document.querySelector(".backButton");
-                    if (button)
-                        button.click();
-                    break;
-                }
-            }
-        }
-    });
-    presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+    presence.on("UpdateData", async () => {
         if (location.pathname.startsWith("/animestore/sc_d_pc") &&
             document.querySelector("#video")) {
             const video = document.querySelector("#video");
@@ -56,8 +21,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
                 largeImageKey: "danime",
                 smallImageKey: isPlaying ? "play" : "pause",
                 smallImageText: isPlaying
-                    ? (yield strings).play
-                    : (yield strings).pause,
+                    ? (await strings).play
+                    : (await strings).pause,
                 startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
             };
             if (isPlaying) {
@@ -68,5 +33,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             }
             presence.setActivity(presenceData);
         }
-    }));
+    });
 }
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNDLE1BQU0sUUFBUSxHQUFHLElBQUksUUFBUSxDQUFDO1FBQzdCLFFBQVEsRUFBRSxvQkFBb0I7S0FDOUIsQ0FBQyxDQUFDO0lBQ0gsTUFBTSxPQUFPLEdBQUcsUUFBUSxDQUFDLFVBQVUsQ0FBQztRQUNuQyxJQUFJLEVBQUUsMkJBQTJCO1FBQ2pDLEtBQUssRUFBRSwwQkFBMEI7S0FDakMsQ0FBQyxDQUFDO0lBRUgsUUFBUSxDQUFDLEVBQUUsQ0FBQyxZQUFZLEVBQUUsS0FBSyxJQUFJLEVBQUU7UUFDcEMsSUFDQyxRQUFRLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxxQkFBcUIsQ0FBQztZQUNuRCxRQUFRLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxFQUMvQjtZQUNELE1BQU0sS0FBSyxHQUFxQixRQUFRLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1lBQ2pFLE1BQU0sS0FBSyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsZUFBZSxDQUFDLENBQUMsV0FBVyxDQUFDO1lBQ2xFLE1BQU0sT0FBTyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsZUFBZSxDQUFDLENBQUMsV0FBVyxDQUFDO1lBQ3BFLE1BQU0sTUFBTSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsZUFBZSxDQUFDLENBQUMsV0FBVyxDQUFDO1lBRW5FLE1BQU0sU0FBUyxHQUFHLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQztZQUNoQyxNQUFNLFVBQVUsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxXQUFXLENBQUMsQ0FBQztZQUVqRCxNQUFNLFlBQVksR0FBaUI7Z0JBQ2xDLE9BQU8sRUFBRSxHQUFHLEtBQUssTUFBTSxPQUFPLEVBQUU7Z0JBQ2hDLEtBQUssRUFBRSxNQUFNO2dCQUNiLGFBQWEsRUFBRSxRQUFRO2dCQUN2QixhQUFhLEVBQUUsU0FBUyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLE9BQU87Z0JBQzNDLGNBQWMsRUFBRSxTQUFTO29CQUN4QixDQUFDLENBQUMsQ0FBQyxNQUFNLE9BQU8sQ0FBQyxDQUFDLElBQUk7b0JBQ3RCLENBQUMsQ0FBQyxDQUFDLE1BQU0sT0FBTyxDQUFDLENBQUMsS0FBSztnQkFDeEIsY0FBYyxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxHQUFHLFVBQVU7YUFDMUQsQ0FBQztZQUVGLElBQUksU0FBUyxFQUFFO2dCQUNkLFFBQVEsQ0FBQyxZQUFZLENBQUMsS0FBSyxDQUFDLENBQUM7YUFDN0I7aUJBQU07Z0JBQ04sT0FBTyxZQUFZLENBQUMsY0FBYyxDQUFDO2FBQ25DO1lBRUQsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsQ0FBQztTQUNuQztJQUNGLENBQUMsQ0FBQyxDQUFDO0NBQ0gifQ==

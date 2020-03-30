@@ -1,17 +1,8 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
-    clientId: "632110854543769601",
-    
+    clientId: "632110854543769601"
 });
-timeElapsed = Math.floor(Date.now() / 1000);
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+let timeElapsed = Math.floor(Date.now() / 1000), threadName, authorName, newsAuthor, profileName, reviewAuthor, reviewTitle, blogAuthor, blogTitle, gName, pName, cName;
+presence.on("UpdateData", async () => {
     if (document.location.pathname.startsWith("/threads")) {
         threadName = document.querySelector("a#threadTitle");
         authorName = document.querySelector("span.postedBy > span.posted.iconKey > a.username");
@@ -35,12 +26,144 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presence.setActivity(presenceData);
         }
     }
-}));
-if (document.location.pathname.startsWith("/game")) {
-    gName = document.querySelector("h1.dynamicTitle");
-    if (gName.innerText == "GBAtemp Game Center Home") {
+    else if (document.location.pathname.startsWith("/game")) {
+        gName = document.querySelector("h1.dynamicTitle");
+        if (gName.innerText == "GBAtemp Game Center Home") {
+            let presenceData = {
+                details: "Browsing...",
+                largeImageKey: "tempy",
+                startTimestamp: timeElapsed
+            };
+            presence.setActivity(presenceData);
+        }
+        else {
+            let presenceData = {
+                details: "Reading about a game",
+                state: gName.innerText,
+                largeImageKey: "tempy",
+                startTimestamp: timeElapsed
+            };
+            presence.setActivity(presenceData);
+        }
+    }
+    else if (document.location.pathname.startsWith("/platform")) {
+        pName = document.querySelector("h1.dynamicTitle");
+        if (pName.innerText == "Game Center Platform List") {
+            let presenceData = {
+                details: "Browsing...",
+                largeImageKey: "tempy",
+                startTimestamp: timeElapsed
+            };
+            presence.setActivity(presenceData);
+        }
+        else if (pName.innerText == "Game Database") {
+            let presenceData = {
+                details: "Browsing...",
+                largeImageKey: "tempy",
+                startTimestamp: timeElapsed
+            };
+            presence.setActivity(presenceData);
+        }
+        else {
+            let presenceData = {
+                details: "Reading about a platform",
+                state: pName.innerText,
+                largeImageKey: "tempy",
+                startTimestamp: timeElapsed
+            };
+            presence.setActivity(presenceData);
+        }
+    }
+    else if (document.location.pathname.startsWith("/company")) {
+        cName = document.querySelector("h1.dynamicTitle");
+        if (cName.innerText == "List of video game companies") {
+            let presenceData = {
+                details: "Browsing...",
+                largeImageKey: "tempy",
+                startTimestamp: timeElapsed
+            };
+            presence.setActivity(presenceData);
+        }
+        else {
+            let presenceData = {
+                details: "Reading about a company",
+                state: cName.innerText,
+                largeImageKey: "tempy",
+                startTimestamp: timeElapsed
+            };
+            presence.setActivity(presenceData);
+        }
+    }
+    else if (document.location.pathname.startsWith("/questions")) {
+        threadName = document.querySelector("h1.blueHeader");
         let presenceData = {
-            details: "Browsing...",
+            details: "Reading a question",
+            state: threadName.innerText,
+            largeImageKey: "tempy",
+            startTimestamp: timeElapsed
+        };
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.startsWith("/members")) {
+        profileName = document.querySelector("div.mainText.secondaryContent > h1.username");
+        if (profileName == null) {
+            let presenceData = {
+                details: "Browsing...",
+                largeImageKey: "tempy",
+                startTimestamp: timeElapsed
+            };
+            presence.setActivity(presenceData);
+        }
+        else {
+            let presenceData = {
+                details: "Looking at " + profileName.innerText + "'s profile",
+                largeImageKey: "tempy",
+                startTimestamp: timeElapsed
+            };
+            presence.setActivity(presenceData);
+        }
+    }
+    else if (document.location.pathname.startsWith("/chat")) {
+        let presenceData = {
+            details: "Chatting in IRC",
+            largeImageKey: "tempy",
+            startTimestamp: timeElapsed
+        };
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.startsWith("/shoutbox")) {
+        let presenceData = {
+            details: "Chatting in the Shoutbox",
+            largeImageKey: "tempy",
+            startTimestamp: timeElapsed
+        };
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.startsWith("/search")) {
+        let presenceData = {
+            details: "Searching...",
+            largeImageKey: "tempy",
+            startTimestamp: timeElapsed
+        };
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.startsWith("/review")) {
+        reviewAuthor = document.querySelector("span.review_author > a.username");
+        reviewTitle = document.querySelector("h1#review_title > a");
+        let presenceData = {
+            details: "Reading a review by " + reviewAuthor.innerText,
+            state: reviewTitle.innerText,
+            largeImageKey: "tempy",
+            startTimestamp: timeElapsed
+        };
+        presence.setActivity(presenceData);
+    }
+    else if (document.location.pathname.startsWith("/entry")) {
+        blogAuthor = document.querySelector("span.postedBy > span.posted.iconKey > a.username");
+        blogTitle = document.querySelector("a.newsTitle");
+        let presenceData = {
+            details: "Reading a blog post by " + blogAuthor.innerText,
+            state: blogTitle.innerText,
             largeImageKey: "tempy",
             startTimestamp: timeElapsed
         };
@@ -48,146 +171,11 @@ if (document.location.pathname.startsWith("/game")) {
     }
     else {
         let presenceData = {
-            details: "Reading about a game",
-            state: gName.innerText,
-            largeImageKey: "tempy",
-            startTimestamp: timeElapsed
-        };
-        presence.setActivity(presenceData);
-    }
-}
-else if (document.location.pathname.startsWith("/platform")) {
-    pName = document.querySelector("h1.dynamicTitle");
-    if (pName.innerText == "Game Center Platform List") {
-        let presenceData = {
             details: "Browsing...",
             largeImageKey: "tempy",
             startTimestamp: timeElapsed
         };
         presence.setActivity(presenceData);
     }
-    else if (pName.innerText == "Game Database") {
-        let presenceData = {
-            details: "Browsing...",
-            largeImageKey: "tempy",
-            startTimestamp: timeElapsed
-        };
-        presence.setActivity(presenceData);
-    }
-    else {
-        let presenceData = {
-            details: "Reading about a platform",
-            state: pName.innerText,
-            largeImageKey: "tempy",
-            startTimestamp: timeElapsed
-        };
-        presence.setActivity(presenceData);
-    }
-}
-else if (document.location.pathname.startsWith("/company")) {
-    cName = document.querySelector("h1.dynamicTitle");
-    if (cName.innerText == "List of video game companies") {
-        let presenceData = {
-            details: "Browsing...",
-            largeImageKey: "tempy",
-            startTimestamp: timeElapsed
-        };
-        presence.setActivity(presenceData);
-    }
-    else {
-        let presenceData = {
-            details: "Reading about a company",
-            state: cName.innerText,
-            largeImageKey: "tempy",
-            startTimestamp: timeElapsed
-        };
-        presence.setActivity(presenceData);
-    }
-}
-else if (document.location.pathname.startsWith("/questions")) {
-    threadName = document.querySelector("h1.blueHeader");
-    let presenceData = {
-        details: "Reading a question",
-        state: threadName.innerText,
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-}
-else if (document.location.pathname.startsWith("/members")) {
-    profileName = document.querySelector("div.mainText.secondaryContent > h1.username");
-    if (profileName == null) {
-        let presenceData = {
-            details: "Browsing...",
-            largeImageKey: "tempy",
-            startTimestamp: timeElapsed
-        };
-        presence.setActivity(presenceData);
-    }
-    else {
-        let presenceData = {
-            details: "Looking at " + profileName.innerText + "'s profile",
-            largeImageKey: "tempy",
-            startTimestamp: timeElapsed
-        };
-        presence.setActivity(presenceData);
-    }
-    ;
-}
-else if (document.location.pathname.startsWith("/chat")) {
-    let presenceData = {
-        details: "Chatting in IRC",
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-}
-else if (document.location.pathname.startsWith("/shoutbox")) {
-    let presenceData = {
-        details: "Chatting in the Shoutbox",
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-}
-else if (document.location.pathname.startsWith("/search")) {
-    let presenceData = {
-        details: "Searching...",
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-}
-else if (document.location.pathname.startsWith("/review")) {
-    reviewAuthor = document.querySelector("span.review_author > a.username");
-    reviewTitle = document.querySelector("h1#review_title > a");
-    let presenceData = {
-        details: "Reading a review by " + reviewAuthor.innerText,
-        state: reviewTitle.innerText,
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-}
-else if (document.location.pathname.startsWith("/entry")) {
-    blogAuthor = document.querySelector("span.postedBy > span.posted.iconKey > a.username");
-    blogTitle = document.querySelector("a.newsTitle");
-    let presenceData = {
-        details: "Reading a blog post by " + blogAuthor.innerText,
-        state: blogTitle.innerText,
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-}
-else {
-    let presenceData = {
-        details: "Browsing...",
-        largeImageKey: "tempy",
-        startTimestamp: timeElapsed
-    };
-    presence.setActivity(presenceData);
-}
-;
-;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUFBLElBQUksUUFBUSxHQUFHLElBQUksUUFBUSxDQUFDO0lBQzFCLFFBQVEsRUFBRSxvQkFBb0I7SUFDOUIsU0FBUyxFQUFFLEtBQUs7Q0FDakIsQ0FBQyxDQUFDO0FBRUgsV0FBVyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFDLElBQUksQ0FBQyxDQUFDO0FBRTFDLFFBQVEsQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLEdBQVMsRUFBRTtJQUNqQyxFQUFFLENBQUEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3ZELFVBQVUsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLGVBQWUsQ0FBQyxDQUFBO1FBQ3BELFVBQVUsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLGtEQUFrRCxDQUFDLENBQUE7UUFDdkYsVUFBVSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsa0NBQWtDLENBQUMsQ0FBQTtRQUNyRSxFQUFFLENBQUMsQ0FBQyxVQUFVLElBQUksSUFBSSxDQUFDLENBQUMsQ0FBQztZQUN2QixJQUFJLFlBQVksR0FBaUI7Z0JBQy9CLE9BQU8sRUFBRSx5QkFBeUIsR0FBRyxVQUFVLENBQUMsU0FBUztnQkFDekQsS0FBSyxFQUFFLFVBQVUsQ0FBQyxTQUFTO2dCQUMzQixhQUFhLEVBQUUsT0FBTztnQkFDdEIsY0FBYyxFQUFFLFdBQVc7YUFDNUIsQ0FBQztZQUNGLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDLENBQUM7UUFDckMsQ0FBQztRQUFDLElBQUksQ0FBQyxDQUFDO1lBQ04sSUFBSSxZQUFZLEdBQWlCO2dCQUMvQixPQUFPLEVBQUUsc0JBQXNCLEdBQUcsVUFBVSxD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
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUMzQixRQUFRLEVBQUUsb0JBQW9CO0NBQzlCLENBQUMsQ0FBQztBQUVILElBQUksV0FBVyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxFQUM5QyxVQUFVLEVBQ1YsVUFBVSxFQUNWLFVBQVUsRUFDVixXQUFXLEVBQ1gsWUFBWSxFQUNaLFdBQVcsRUFDWCxVQUFVLEVBQ1YsU0FBUyxFQUNULEtBQUssRUFDTCxLQUFLLEVBQ0wsS0FBSyxDQUFDO0FBRVAsUUFBUSxDQUFDLEVBQUUsQ0FBQyxZQUFZLEVBQUUsS0FBSyxJQUFJLEVBQUU7SUFDcEMsSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLEVBQUU7UUFDdEQsVUFBVSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsZUFBZSxDQUFDLENBQUM7UUFDckQsVUFBVSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQ2xDLGtEQUFrRCxDQUNsRCxDQUFDO1FBQ0YsVUFBVSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsa0NBQWtDLENBQUMsQ0FBQztRQUN4RSxJQUFJLFVBQVUsSUFBSSxJQUFJLEVBQUU7WUFDdkIsSUFBSSxZQUFZLEdBQWlCO2dCQUNoQyxPQUFPLEVBQUUseUJBQXlCLEdBQUcsVUFBVSxDQUFDLFNBQVM7Z0JBQ3pELEtBQUssRUFBRSxVQUFVLENBQUMsU0FBUztnQkFDM0IsYUFBYSxFQUFFLE9BQU87Z0JBQ3RCLGNBQWMsRUFBRSxXQUFXO2FBQzNCLENBQUM7WUFDRixRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxDQUFDO1NBQ25DO2FBQU07WUFDTixJQUFJLFlBQVksR0FBaUI7Z0JB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
