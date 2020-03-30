@@ -8,7 +8,7 @@ var presence = new Presence({
 	}),
 	browsingStamp = Math.floor(Date.now() / 1000);
 
-function capitalize(str) {
+function capitalize(str: string) {
 	var text = str.toLowerCase().split(" ");
 	for (var i = 0, x = text.length; i < x; i++) {
 		text[i] = text[i][0].toUpperCase() + text[i].substr(1);
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
 	var path = document.location.pathname;
 	var video = document.querySelector("video");
 	var title = document.querySelector(".episode_title");
-	var subtitle = document.querySelector(".episode_subtitle");
+	var subtitle = (document.querySelector(".episode_subtitle") as HTMLElement);
 
 	if (path.includes("/v2/catalogue/episode/") && video != null && title) {
 		browsingStamp = Math.floor(Date.now() / 1000);

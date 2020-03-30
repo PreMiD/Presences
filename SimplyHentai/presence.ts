@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 	reading =
 		document.querySelector(".margin-bottom-12 h1 a") !== null ? true : false;
 
-	var something: any, chapter: any, selected: any, a: any, b: any;
+	var something: any, a: any, b: any;
 
 	if (reading) {
 		something = document.querySelectorAll(".margin-bottom-12 h1 a");

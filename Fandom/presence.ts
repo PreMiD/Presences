@@ -64,7 +64,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 							.querySelector(".jw-icon-playback")
 							.getAttribute("aria-label") === "Pause"
 					) {
-						let video = document.querySelector(".jw-video");
+						let video = (document.querySelector(".jw-video") as HTMLVideoElement);
 						let timestamps = getTimestamps(
 							Math.floor(video.currentTime),
 							Math.floor(video.duration)
@@ -130,7 +130,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 		}
 
 		try {
-			sitename = document.querySelector("meta[property='og:site_name']")
+			sitename = (document.querySelector("meta[property='og:site_name']") as HTMLMetaElement)
 				.content;
 		} catch (e) {
 			sitename = null;
@@ -162,7 +162,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 		};
 
 		if (title === "Home") {
-			sitename = document.querySelector("meta[property='og:title']").content;
+			sitename = (document.querySelector("meta[property='og:title']") as HTMLMetaElement).content;
 			presenceData.state = "Home";
 			delete presenceData.details;
 		} else if (actionResult == "history" && titleFromURL) {

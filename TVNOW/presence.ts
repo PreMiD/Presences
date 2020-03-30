@@ -21,8 +21,7 @@ var user: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-	var a = "",
-		timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+	var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
 		presenceData: presenceData = {
 			largeImageKey: "tv"
 		};

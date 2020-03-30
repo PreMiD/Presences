@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 		(data.details = "Lista de mangás"),
 			(data.state =
 				"Ordenada por: " +
-				document.querySelector("#menu-titulos > li.active > a > span")
+				(document.querySelector("#menu-titulos > li.active > a > span") as HTMLElement)
 					.innerText);
 		data.startTimestamp = browsingStamp;
 		presence.setActivity(data);
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 		(data.details = "Lista de Categorias"),
 			(data.state =
 				"Ordenada por: " +
-				document.querySelector("#menu-categorias > li.active > a > span")
+				(document.querySelector("#menu-categorias > li.active > a > span") as HTMLElement)
 					.innerText);
 		data.startTimestamp = browsingStamp;
 		presence.setActivity(data);
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 		(data.details = "Lista de Grupos"),
 			(data.state =
 				"Ordenada por: " +
-				document.querySelector("#menu-grupos > li.active > a > span")
+				(document.querySelector("#menu-grupos > li.active > a > span") as HTMLElement)
 					.innerText);
 		data.startTimestamp = browsingStamp;
 		presence.setActivity(data);
@@ -50,17 +50,16 @@ presence.on("UpdateData", async () => {
 		(data.details = "Lista de Mangás"),
 			(data.state =
 				"Ordenada por: " +
-				document
-					.querySelector("head > title")
+				(document.querySelector("head > title") as HTMLElement)
 					.innerText.replace("Mangás:", ""));
 		data.startTimestamp = browsingStamp;
 		presence.setActivity(data);
 	} else if (document.location.pathname.startsWith("/scanlator")) {
 		data.details =
 			"Scan " +
-			document.querySelector(
+			(document.querySelector(
 				"#wraper > div > div.content-wraper.scan-data > div > ul > li > div.series-info.touchcarousel > span.series-title"
-			).innerText;
+			) as HTMLElement).innerText;
 		data.state = "Visualizando Principais Mangás da Scan";
 		data.startTimestamp = browsingStamp;
 		presence.setActivity(data);
@@ -74,20 +73,20 @@ presence.on("UpdateData", async () => {
 			) === null
 		) {
 			(data.details = "Visualizando Mangá"),
-				(data.state = document.querySelector(
+				(data.state = (document.querySelector(
 					"#series-data > div.series-info.touchcarousel > span.series-title > h1"
-				).innerText);
+				) as HTMLElement).innerText);
 			data.startTimestamp = browsingStamp;
 			presence.setActivity(data);
 		} else {
-			data.details = document.querySelector(
+			data.details = (document.querySelector(
 				"#reader-wrapper > div.reader-navigation.clear-fix > div.series-info-container > div.series-info > div.series-title > span.title"
-			).innerText;
+			) as HTMLElement).innerText;
 			data.state =
 				"Capítulo " +
-				document.querySelector(
+				(document.querySelector(
 					"#reader-wrapper > div.reader-navigation.clear-fix > div.chapter-selection-container > div.chapter-selection > span.current-chapter > em"
-				).innerText;
+				) as HTMLElement).innerText;
 			data.startTimestamp = browsingStamp;
 			presence.setActivity(data);
 		}

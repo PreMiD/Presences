@@ -74,8 +74,7 @@ presence.on("UpdateData", async () => {
 		}
 	} else if (document.location.pathname.startsWith("/chapter")) {
 		var title = document.querySelector(".manga-link").textContent;
-		var chapter = document
-			.querySelector("head > title")
+		var chapter = (document.querySelector("head > title") as HTMLElement)
 			.innerText.replace(title + " -", "")
 			.replace(" - MangaDex", "");
 		(data.details = title), (data.state = chapter);

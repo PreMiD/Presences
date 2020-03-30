@@ -54,8 +54,7 @@ presence.on("UpdateData", async () => {
 		presence.setTrayTitle();
 	} else if (document.location.pathname.includes(".html")) {
 		if (iFrameVideo == true && !isNaN(duration)) {
-			var a = "",
-				timestamps = getTimestamps(
+			var timestamps = getTimestamps(
 					Math.floor(currentTime),
 					Math.floor(duration)
 				),
@@ -105,8 +104,7 @@ presence.on("UpdateData", async () => {
 				"#player > div.alert.alert-info.hidden-xs > div.media > div > a > h1"
 			);
 
-			var a = "",
-				timestamps = getTimestamps(
+			var timestamps = getTimestamps(
 					Math.floor(currentTime),
 					Math.floor(duration)
 				),
@@ -128,8 +126,7 @@ presence.on("UpdateData", async () => {
 			presence.setActivity(presenceData);
 		}
 	} else if (document.location.pathname == "/") {
-		var a = "",
-			presenceData: presenceData = {
+		var presenceData: presenceData = {
 				largeImageKey: "ksow123stack"
 			};
 
@@ -142,8 +139,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname == "/show/latest/") {
-		var a = "",
-			presenceData: presenceData = {
+		var presenceData: presenceData = {
 				largeImageKey: "ksow123stack"
 			};
 
@@ -156,8 +152,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname == "/show/popular/") {
-		var a = "",
-			presenceData: presenceData = {
+		var presenceData: presenceData = {
 				largeImageKey: "ksow123stack"
 			};
 
@@ -170,8 +165,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname == "/show/rated/") {
-		var a = "",
-			presenceData: presenceData = {
+		var presenceData: presenceData = {
 				largeImageKey: "ksow123stack"
 			};
 
@@ -184,8 +178,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname == "/show/") {
-		var a = "",
-			presenceData: presenceData = {
+		var presenceData: presenceData = {
 				largeImageKey: "ksow123stack"
 			};
 
@@ -198,8 +191,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/show/")) {
-		var a = "",
-			presenceData: presenceData = {
+		var presenceData: presenceData = {
 				largeImageKey: "ksow123stack"
 			};
 
@@ -214,8 +206,7 @@ presence.on("UpdateData", async () => {
 
 		presence.setActivity(presenceData);
 	} else if (document.location.pathname.includes("/search/")) {
-		var a = "",
-			presenceData: presenceData = {
+		var presenceData: presenceData = {
 				largeImageKey: "ksow123stack"
 			};
 

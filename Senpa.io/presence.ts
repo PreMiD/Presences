@@ -14,8 +14,6 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "logo"
 	};
 
-	var route = document.location.pathname.split("/");
-
 	if (document.location.pathname === "/") {
 		presenceData.details = "Home";
 	} else if (document.location.pathname.includes("/web/")) {

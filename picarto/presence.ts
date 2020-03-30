@@ -16,14 +16,10 @@ presence.on("UpdateData", async () => {
 		"#picarto-player-1_html5_api"
 	);
 	if (video !== null && !isNaN(video.duration)) {
-		var title: any, uploader: any, timestamps: any, live: boolean;
+		var title: any, uploader: any;
 
 		title = document.querySelector(".d-flex h4");
 		uploader = document.querySelector("#userbar-name .d-flex .d-inline-block");
-		timestamps = getTimestamps(
-			Math.floor(video.currentTime),
-			Math.floor(video.duration)
-		);
 		presenceData.details = (title as HTMLElement).innerText;
 		presenceData.state = (uploader as HTMLElement).textContent;
 		presenceData.largeImageKey = "logo";

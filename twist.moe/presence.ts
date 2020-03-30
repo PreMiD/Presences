@@ -41,8 +41,7 @@ presence.on("UpdateData", async () => {
 		videoTitle = document.querySelector(".series-title span");
 		seasonepisode = document.querySelector(".series-episode");
 
-		var uploader = "",
-			timestamps = getTimestamps(
+		var timestamps = getTimestamps(
 				Math.floor(video.currentTime),
 				Math.floor(video.duration)
 			),

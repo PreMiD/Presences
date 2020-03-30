@@ -45,8 +45,6 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 					if (raceStamp === null) raceStamp = Math.floor(Date.now() / 1000);
 					presenceData.startTimestamp = raceStamp;
 				} else if (gameStatusLabel === "The race is about to start!") {
-					let timeString = document.querySelector(".countdownPopup .time")
-						.textContent;
 					presenceData.state = "Counting down...";
 					presenceData.endTimestamp =
 						Math.floor(Date.now() / 1000) +

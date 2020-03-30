@@ -34,9 +34,8 @@ presence.on("UpdateData", async () => {
 		!isNaN(duration) &&
 		document.location.pathname.includes("/Anime/")
 	) {
-		var videoTitle: any, episod: any, episode: any, tabTitle: any;
+		var videoTitle: any, episod: any, episode: any;
 
-		tabTitle = document.title;
 		var pattern = "Episode";
 		var truncateAfter = function(str, pattern) {
 			return str.slice(0, str.indexOf(pattern));
@@ -46,8 +45,7 @@ presence.on("UpdateData", async () => {
 		episode = document.querySelector("select#selectEpisode");
 		episod = episode.options[episode.selectedIndex].text;
 
-		var a = "",
-			timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+		var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
 			presenceData: presenceData = {
 				largeImageKey: "lg",
 				smallImageKey: paused ? "pause" : "play",
