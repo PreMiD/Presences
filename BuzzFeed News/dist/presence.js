@@ -9,9 +9,6 @@ presence.on("UpdateData", async () => {
     ),
     sections = document.querySelector(
       "#news-content > div.content-column.xs-mt2.lg-mt0.md-mb4 > h1 > span"
-    ),
-    writer = document.querySelector(
-      "#js-post-container > div > div.grid-layout-main.xs-mb2.lg-mb0 > header > div.news-article-header__byline-wrapper-desktop > a > span > span.news-byline-full__name.xs-block.link-initial--text-black"
     );
 
   let data = {

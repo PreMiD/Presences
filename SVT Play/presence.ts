@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing program genres";
       presenceData.details = "Navigerar program kategorier";
     } else if (document.location.pathname.includes("/kanaler/")) {
-      var video: HTMLVideoElement;
+      let video: HTMLVideoElement;
       video = document.querySelector(
         "#play_main-content > article > div.play_channels-video--show > div > div > div.play_video-player.lp_video.play_channels__active-video > div > video"
       );
@@ -69,8 +69,8 @@ presence.on("UpdateData", async () => {
         paused: any,
         time: any,
         live: any,
-        timestamps: any,
-        video: HTMLVideoElement;
+        timestamps: any;
+      let video: HTMLVideoElement;
       video = document.querySelector(
         "#js-play_video__fullscreen-container > div > div > video"
       );
