@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
     details: "Viewing the homepage...",
     largeImageKey: "lg-gb",
   };
-   
+
   var urlParams = new URLSearchParams(window.location.search);
   if (document.location.pathname == "/") {
     presenceData = {

@@ -85,8 +85,7 @@ presence.on("UpdateData", () => {
           .textContent.includes("OAV" || "OVA")
       ) {
         videoType = "OAV";
-      }
-      else if (
+      } else if (
         document
           .querySelector(
             "#Blog1 > div.blog-posts > article > div:nth-child(13)"

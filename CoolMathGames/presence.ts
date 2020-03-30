@@ -96,7 +96,9 @@ const parse = (path: string) => {
 };
 
 const capitalize = (text: Array<String>) => {
-  return text.map((str) => {
+  return text
+    .map((str) => {
       return str.charAt(0).toUpperCase() + str.slice(1);
-  }).join(' ');
-}
+    })
+    .join(" ");
+};

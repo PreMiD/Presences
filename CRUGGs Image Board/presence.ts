@@ -9,7 +9,7 @@ const boards = {
 
 presence.on("UpdateData", () => {
   var presenceData: presenceData = {
-    largeImageKey: "lg-imgb"
+    largeImageKey: "lg-imgb",
   };
   var path = document.location.pathname.split("/");
   var board = "N/A";

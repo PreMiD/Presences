@@ -411,8 +411,7 @@ presence.on("UpdateData", async () => {
       } else if (
         livechecker.innerText.includes('"viewType" : "liveComingSoon"')
       ) {
-        pdata.details =
-          "Waiting for livestream by " + uploader.innerText;
+        pdata.details = "Waiting for livestream by " + uploader.innerText;
         pdata.smallImageKey = "live";
         pdata.state = search.innerText;
         delete pdata.startTimestamp;

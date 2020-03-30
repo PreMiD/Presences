@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
           ? (data.details = media.title)
           : media.filename
           ? (data.details = media.filename)
-          : data.details = "some TV";
+          : (data.details = "some TV");
         data.state = "S" + media.seasonNumber + "E" + media.episodeNumber;
       } else {
         media.showName
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
           ? (data.details = media.title)
           : media.filename
           ? (data.details = media.filename)
-          : data.details = "something";
+          : (data.details = "something");
         media.seasonNumber
           ? (data.state = "season " + media.seasonNumber)
           : media.episodeNumber

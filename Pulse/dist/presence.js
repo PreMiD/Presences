@@ -35,8 +35,7 @@ presence.on("UpdateData", () => {
       case "fa fa-play":
         // Music Paused
         presenceData.smallImageKey = "pause";
-        presenceData.state =
-          (strack || "Loading...") + (" - " + sartist);
+        presenceData.state = (strack || "Loading...") + (" - " + sartist);
         presenceData.details =
           (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners";
         presenceData.smallImageText = "https://itspulse.net";
@@ -44,8 +43,7 @@ presence.on("UpdateData", () => {
       case "fa fa-pause":
         // Music Playing
         presenceData.smallImageKey = "play";
-        presenceData.state =
-          (strack || "Loading...") + (" - " + sartist);
+        presenceData.state = (strack || "Loading...") + (" - " + sartist);
         presenceData.details =
           (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners";
         presenceData.smallImageText = "https://itspulse.net";

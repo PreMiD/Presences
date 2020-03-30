@@ -47,7 +47,9 @@ presence.on("UpdateData", () => {
 
 const capitalize = (text: string) => {
   var texts = text.replace(/[\[{(_)}\]]/g, " ").split(" ");
-  return texts.map((str) => {
+  return texts
+    .map((str) => {
       return str.charAt(0).toUpperCase() + str.slice(1);
-  }).join(' ');
-}
+    })
+    .join(" ");
+};

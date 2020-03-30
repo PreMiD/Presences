@@ -88,15 +88,15 @@ presence.on("UpdateData", () => async () => {
     product2 &&
     product.textContent != "" &&
     product2.textContent != "" &&
+    price &&
     price.textContent != ""
   ) {
     presence.setActivity({
       largeImageKey: "ty-logo",
       details: "Bir ürüne göz atıyor:",
-      state:
-        `${product.textContent} | ${product2.textContent} ${
-          price ? `(${price.textContent})` : ""
-        }` || "Belirsiz",
+      state: `${product.textContent} | ${product2.textContent} ${
+        price ? `(${price.textContent})` : ""
+      }`,
       startTimestamp: Math.floor(Date.now() / 1000),
     });
   } else if (pages[page] || pages[page.slice(0, -1)]) {

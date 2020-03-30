@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 
   if (!playback) {
     let presenceData: presenceData = {
-      largeImageKey: "viki"
+      largeImageKey: "viki",
     };
 
     presenceData.startTimestamp = browsingStamp;
@@ -540,20 +540,20 @@ presence.on("UpdateData", async () => {
   // Check if it can find the video
   if (video !== null && !isNaN(video.duration)) {
     var timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
     let presenceData: presenceData = {
-        details: "",
-        state: "",
-        largeImageKey: "viki",
-        smallImageKey: video.paused ? "pause" : "play", // if the video is paused, show the pause icon else the play button
-        smallImageText: video.paused
-          ? (await strings).pause // paused text when you hover the pause icon on discord
-          : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1],
-      };
+      details: "",
+      state: "",
+      largeImageKey: "viki",
+      smallImageKey: video.paused ? "pause" : "play", // if the video is paused, show the pause icon else the play button
+      smallImageText: video.paused
+        ? (await strings).pause // paused text when you hover the pause icon on discord
+        : (await strings).play,
+      startTimestamp: timestamps[0],
+      endTimestamp: timestamps[1],
+    };
 
     // Get the video duration
     videoDuration = video.duration;
