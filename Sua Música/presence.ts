@@ -1,28 +1,28 @@
 var presence = new Presence({
-		clientId: "692230804402864148"
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
-	});
+    clientId: "692230804402864148",
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+  });
 
 presence.on("UpdateData", async () => {
-	var presenceData = {
-		largeImageKey: "mini_logo",
-		smallImageKey: actionPlay(),
-		smallImageText: "suamusica.com.br",
-		details: getTrackPlaying(),
-		state: getArtistPlaying(),
-		startTimestamp: 0,
-		endTimestamp: 0
-	};
+  var presenceData = {
+    largeImageKey: "mini_logo",
+    smallImageKey: actionPlay(),
+    smallImageText: "suamusica.com.br",
+    details: getTrackPlaying(),
+    state: getArtistPlaying(),
+    startTimestamp: 0,
+    endTimestamp: 0,
+  };
 
-	if (presenceData.details == null) {
-		presence.setTrayTitle();
-		presence.setActivity();
-	} else {
-		presence.setActivity(presenceData);
-	}
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
 });
 
 /**
@@ -30,54 +30,54 @@ presence.on("UpdateData", async () => {
  *
  */
 function elementExist(element): boolean {
-	if (typeof element != "undefined" && element != null) {
-		return true;
-	} else {
-		return false;
-	}
+  if (typeof element != "undefined" && element != null) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
  * get the name of the track playing
  */
 function getTrackPlaying(): string {
-	const element = document.querySelector("#trackInfo > a");
-	if (elementExist(element) && element.innerHTML.length > 0) {
-		return "🎧  " + firstLetterUp(element.innerHTML);
-	} else {
-		return "📀 Navegando...";
-	}
+  const element = document.querySelector("#trackInfo > a");
+  if (elementExist(element) && element.innerHTML.length > 0) {
+    return "🎧  " + firstLetterUp(element.innerHTML);
+  } else {
+    return "📀 Navegando...";
+  }
 }
 
 /**
  * get the name of the artist playing
  */
 function getArtistPlaying(): string {
-	const element = document.querySelector("#trackInfo > span > a");
-	if (elementExist(element) && element.innerHTML != " - ") {
-		return "🎤  " + firstLetterUp(element.innerHTML);
-	} else {
-		return "🇧🇷 suamusica.com.br";
-	}
+  const element = document.querySelector("#trackInfo > span > a");
+  if (elementExist(element) && element.innerHTML != " - ") {
+    return "🎤  " + firstLetterUp(element.innerHTML);
+  } else {
+    return "🇧🇷 suamusica.com.br";
+  }
 }
 
 /**
  * @returns {string} play if music is playing, pause if music stop
  */
 function actionPlay(): string {
-	const element = document.querySelector("a.btnPlayer.playPause.pause");
-	if (elementExist(element)) {
-		return "play";
-	} else {
-		return "pause";
-	}
+  const element = document.querySelector("a.btnPlayer.playPause.pause");
+  if (elementExist(element)) {
+    return "play";
+  } else {
+    return "pause";
+  }
 }
 
 /**
  * Transforms the first letter of the string to uppercase.
  */
 function firstLetterUp(str): string {
-	return str.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
-		return a.toUpperCase();
-	});
+  return str.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
+    return a.toUpperCase();
+  });
 }

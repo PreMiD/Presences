@@ -1,67 +1,67 @@
 var presence = new Presence({
-		clientId: "609531561389588480"
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
-	});
+    clientId: "609531561389588480",
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+  });
 
 var lastPlaybackState = null;
 var playback;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
-	lastPlaybackState = playback;
-	browsingStamp = Math.floor(Date.now() / 1000);
+  lastPlaybackState = playback;
+  browsingStamp = Math.floor(Date.now() / 1000);
 }
 
 presence.on("UpdateData", async () => {
-	playback =
-		document.querySelector("video.dplayer-video.dplayer-video-current") !== null
-			? true
-			: false;
+  playback =
+    document.querySelector("video.dplayer-video.dplayer-video-current") !== null
+      ? true
+      : false;
 
-	if (!playback) {
-		let presenceData: presenceData = {
-			largeImageKey: "lg"
-		};
+  if (!playback) {
+    let presenceData: presenceData = {
+      largeImageKey: "lg",
+    };
 
-		presenceData.details = "Browsing...";
-		presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing...";
+    presenceData.startTimestamp = browsingStamp;
 
-		delete presenceData.state;
-		delete presenceData.smallImageKey;
+    delete presenceData.state;
+    delete presenceData.smallImageKey;
 
-		presence.setActivity(presenceData, true);
-	}
+    presence.setActivity(presenceData, true);
+  }
 
-	var video: HTMLVideoElement = document.querySelector(
-		"video.dplayer-video.dplayer-video-current"
-	);
+  var video: HTMLVideoElement = document.querySelector(
+    "video.dplayer-video.dplayer-video-current"
+  );
 
-	if (video !== null) {
-		var videoTitle: any, streamer: any;
+  if (video !== null) {
+    var videoTitle: any, streamer: any;
 
-		videoTitle = document.querySelector(
-			".info-line-left.flex-box .flex-column.flex-justify-center div"
-		);
-		streamer = document.querySelector(
-			"div.channel-header span.dlive-name span.overflow-ellipsis"
-		);
+    videoTitle = document.querySelector(
+      ".info-line-left.flex-box .flex-column.flex-justify-center div"
+    );
+    streamer = document.querySelector(
+      "div.channel-header span.dlive-name span.overflow-ellipsis"
+    );
 
-		let presenceData: presenceData = {
-			largeImageKey: "lg",
-			smallImageKey: "live"
-		};
+    let presenceData: presenceData = {
+      largeImageKey: "lg",
+      smallImageKey: "live",
+    };
 
-		presence.setTrayTitle(videoTitle.innerText);
+    presence.setTrayTitle(videoTitle.innerText);
 
-		presenceData.details = videoTitle.innerText;
-		presenceData.state = streamer.innerText;
-		presenceData.startTimestamp = browsingStamp;
+    presenceData.details = videoTitle.innerText;
+    presenceData.state = streamer.innerText;
+    presenceData.startTimestamp = browsingStamp;
 
-		presence.setActivity(presenceData, true);
-	}
+    presence.setActivity(presenceData, true);
+  }
 });
 
 /**
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
  * @param {Number} videoDuration Video duration seconds
  */
 function getTimestamps(videoTime: number, videoDuration: number) {
-	var startTime = Date.now();
-	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-	return [Math.floor(startTime / 1000), endTime];
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }

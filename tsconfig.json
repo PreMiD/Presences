@@ -1,13 +1,13 @@
 {
-	"compilerOptions": {
-		"module": "CommonJS",
-		"target": "ES2020",
-		"removeComments": true,
-		"noFallthroughCasesInSwitch": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"inlineSourceMap": true,
-		"typeRoots": ["@types"]
-	},
-	"exclude": ["node_modules", "**/dist/*.js"]
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2020",
+    "removeComments": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "inlineSourceMap": true,
+    "typeRoots": ["@types"]
+  },
+  "exclude": ["node_modules", "**/dist/*.js"]
 }

@@ -1,52 +1,52 @@
 var presence = new Presence({
-		clientId: "605119835751579649"
-	}),
-	strings = presence.getStrings({
-		play: "presence.playback.playing",
-		pause: "presence.playback.paused"
-	});
+    clientId: "605119835751579649",
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+  });
 
 presence.on("UpdateData", async () => {
-	var video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
-	if (video !== null && !isNaN(video.duration)) {
-		var title: any;
-		title = document.querySelector(".video-page #main .page-title");
+  var video: HTMLVideoElement = document.querySelector(".video-bg-pic video");
+  if (video !== null && !isNaN(video.duration)) {
+    var title: any;
+    title = document.querySelector(".video-page #main .page-title");
 
-		var uploader = document.querySelector(
-				".video-page #main .video-metadata .uploader-tag .name"
-			),
-			timestamps = getTimestamps(
-				Math.floor(video.currentTime),
-				Math.floor(video.duration)
-			),
-			presenceData: presenceData = {
-				details: title.innerText,
-				state: uploader.textContent,
-				largeImageKey: "lg",
-				smallImageKey: video.paused ? "pause" : "play",
-				smallImageText: video.paused
-					? (await strings).pause
-					: (await strings).play,
-				startTimestamp: timestamps[0],
-				endTimestamp: timestamps[1]
-			};
+    var uploader = document.querySelector(
+        ".video-page #main .video-metadata .uploader-tag .name"
+      ),
+      timestamps = getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      ),
+      presenceData: presenceData = {
+        details: title.innerText,
+        state: uploader.textContent,
+        largeImageKey: "lg",
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play,
+        startTimestamp: timestamps[0],
+        endTimestamp: timestamps[1],
+      };
 
-		presence.setTrayTitle(video.paused ? "" : title.innerText);
+    presence.setTrayTitle(video.paused ? "" : title.innerText);
 
-		//* Remove timestamps if paused
-		if (video.paused) {
-			delete presenceData.startTimestamp;
-			delete presenceData.endTimestamp;
-		}
+    //* Remove timestamps if paused
+    if (video.paused) {
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+    }
 
-		//* If tags are not "null"
-		if (video && title !== null && uploader !== null) {
-			presence.setActivity(presenceData, !video.paused);
-		}
-	} else {
-		presence.setActivity();
-		presence.setTrayTitle();
-	}
+    //* If tags are not "null"
+    if (video && title !== null && uploader !== null) {
+      presence.setActivity(presenceData, !video.paused);
+    }
+  } else {
+    presence.setActivity();
+    presence.setTrayTitle();
+  }
 });
 
 /**
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
  * @param {Number} videoDuration Video duration seconds
  */
 function getTimestamps(videoTime: number, videoDuration: number) {
-	var startTime = Date.now();
-	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-	return [Math.floor(startTime / 1000), endTime];
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }
