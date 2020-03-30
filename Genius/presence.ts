@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
     var video: HTMLVideoElement = document.querySelector("video.vjs-tech");
     var title = document.querySelector("h1.article_title").textContent;
     if (title.length > 128) {
-      title.substring(0, 125) + "...";
+      title = title.substring(0, 125) + "...";
     }
     data.details = "Playing a Video";
     data.state = title;

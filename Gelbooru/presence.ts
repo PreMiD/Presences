@@ -3,9 +3,14 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
+  var presenceData: presenceData = {
+    details: "Viewing the homepage...",
+    largeImageKey: "lg-gb",
+  };
+   
   var urlParams = new URLSearchParams(window.location.search);
   if (document.location.pathname == "/") {
-    var presenceData: presenceData = {
+    presenceData = {
       details: "Viewing the homepage...",
       largeImageKey: "lg-gb",
     };
@@ -17,36 +22,30 @@ presence.on("UpdateData", () => {
   ) {
     if (urlParams.get("s") == "list") {
       if (urlParams.get("tags")) {
-        var presenceData: presenceData = {
+        presenceData = {
           details: "Searching...",
           state: urlParams.get("tags").replace(" ", ", "),
           largeImageKey: "lg-gb",
         };
         presence.setActivity(presenceData);
       } else {
-        var presenceData: presenceData = {
+        presenceData = {
           details: "Viewing Posts List...",
           largeImageKey: "lg-gb",
         };
         presence.setActivity(presenceData);
       }
     } else if (urlParams.get("s") == "view" && urlParams.get("id")) {
-      var presenceData: presenceData = {
+      presenceData = {
         details: "Viewing a Post...",
         state: "Post " + urlParams.get("id"),
         largeImageKey: "lg-gb",
       };
       presence.setActivity(presenceData);
     } else {
-      var presenceData: presenceData = {
-        largeImageKey: "lg-gb",
-      };
       presence.setActivity(presenceData);
     }
   } else {
-    var presenceData: presenceData = {
-      largeImageKey: "lg-gb",
-    };
     presence.setActivity(presenceData);
   }
 });

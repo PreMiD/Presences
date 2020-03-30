@@ -10,7 +10,7 @@ function setTime(a) {
 
 function findParents(b, a) {
   var r;
-  for (new i = 0; i < b.length; i++) {
+  for (let i = 0; i < b.length; i++) {
     if (b[i][0] == a) {
       r = b[i];
     }
@@ -93,14 +93,14 @@ var stopmsgs = [];
 var finishmsgs = [];
 var elapsed;
 
-for (new i = 0; i < messages["go"].length; i++) {
+for (let i = 0; i < messages["go"].length; i++) {
   gomsgs += messages["go"][i][0];
 }
 
-for (new i = 0; i < messages["stop"].length; i++) {
+for (let i = 0; i < messages["stop"].length; i++) {
   stopmsgs += messages["stop"][i][0];
 }
-for (new i = 0; i < messages["finish"].length; i++) {
+for (let i = 0; i < messages["finish"].length; i++) {
   finishmsgs += messages["finish"][i][0];
 }
 

@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
       .shadowRoot.querySelector("#authChecker > home-view")
       .shadowRoot.querySelector("#urlSearchInput")
       .shadowRoot.querySelector("#input").value;
-    if ((url2) => 1) {
+    if (url2 === 1) {
       presenceData.details = "Search for a URL...";
       presenceData.state = url2;
       // presence.setActivity(presenceData);

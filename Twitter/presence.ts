@@ -10,7 +10,7 @@ var oldUrl, elapsed;
 
 presence.on("UpdateData", async () => {
   var title,
-    info,
+    info, 
     image = "twitter";
 
   const path = window.location.pathname;
@@ -135,13 +135,11 @@ presence.on("UpdateData", async () => {
   presence.setActivity(data, true);
 });
 
-function capitalize(text: string) {
-  var ret = "";
+const capitalize = (text: string) => {
   var texts = text.replace(/[\[{(_)}\]]/g, " ").split(" ");
-  texts.map((text) => {
-    ret += text.charAt(0).toUpperCase() + text.slice(1) + " ";
-  });
-  return ret;
+  return texts.map((str) => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+  }).join(' ');
 }
 
 function stripText(
