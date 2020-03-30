@@ -2,21 +2,22 @@
 var PreMiD_Presence = true;
 
 //* PreMiD events
-window.addEventListener('PreMiD_MediaKeys', handleMediaKeys);
-window.addEventListener('PreMiD_UpdateData', updateData);
+window.addEventListener("PreMiD_MediaKeys", handleMediaKeys);
+window.addEventListener("PreMiD_UpdateData", updateData);
 
 //* Request data from PreMiD
-setTimeout(function() {
-	var event = new CustomEvent('PreMiD_RequestExtensionData', {
+setTimeout(function () {
+	var event = new CustomEvent("PreMiD_RequestExtensionData", {
 		detail: {
 			strings: {
-				playing: 'presence.playback.playing',
-				paused: 'presence.playback.paused',
-				live: 'presence.activity.live',
-				episode: 'presence.media.info.episode'
+				playing: "presence.playback.playing",
+				paused: "presence.playback.paused",
+				live: "presence.activity.live",
+				episode: "presence.media.info.episode",
 			},
-			version: "chrome.runtime.getManifest().name + ' V' + chrome.runtime.getManifest().version"
-		}
+			version:
+				"chrome.runtime.getManifest().name + ' V' + chrome.runtime.getManifest().version",
+		},
 	});
 
 	//* Trigger the event
@@ -24,7 +25,7 @@ setTimeout(function() {
 });
 
 //* Receive data from PreMiD
-window.addEventListener('PreMiD_ReceiveExtensionData', function(data) {
+window.addEventListener("PreMiD_ReceiveExtensionData", function (data) {
 	extensionData = data.detail;
 });
 
@@ -44,13 +45,13 @@ var duration,
 
 /**
  * Media keys received from application
- * @param {Object} mediaKey 
+ * @param {Object} mediaKey
  */
 function handleMediaKeys(mediaKey) {
 	if (!videoStream) return;
 
 	switch (mediaKey.detail) {
-		case 'pause':
+		case "pause":
 			paused ? videoStream.play() : videoStream.pause();
 			break;
 	}
@@ -66,42 +67,46 @@ function updateData() {
 	}
 
 	if (
-		document.querySelector('.vjs-tech') != null &&
-		document.querySelector('.entry-title').innerText.split(' – ')[0] != ''
+		document.querySelector(".vjs-tech") != null &&
+		document.querySelector(".entry-title").innerText.split(" – ")[0] != ""
 	) {
-		videoStream = document.querySelector('.vjs-tech');
+		videoStream = document.querySelector(".vjs-tech");
 		if (isNaN(videoStream.duration)) return;
 
 		duration = Math.floor(videoStream.duration);
 		currentTime = Math.floor(videoStream.currentTime);
 		paused = videoStream.paused;
-		title = document.querySelector('.entry-title').innerText.split(' – ')[0];
+		title = document.querySelector(".entry-title").innerText.split(" – ")[0];
 		author = extensionData.strings.episode.replace(
-			'{0}',
-			document.querySelector('.entry-title').innerText.split(' – Episode')[1]
+			"{0}",
+			document.querySelector(".entry-title").innerText.split(" – Episode")[1]
 		);
 
 		data = {
-			clientID: '516242947184787514',
+			clientID: "516242947184787514",
 			presenceData: {
 				details: title,
 				state: author,
-				largeImageKey: 'hh_lg',
+				largeImageKey: "hh_lg",
 				largeImageText: extensionData.version,
-				smallImageKey: paused ? 'pause' : 'play',
-				smallImageText: paused ? extensionData.strings.paused : extensionData.strings.playing
+				smallImageKey: paused ? "pause" : "play",
+				smallImageText: paused
+					? extensionData.strings.paused
+					: extensionData.strings.playing,
 			},
 			trayTitle: title,
 			playback: !paused,
-			service: 'HentaiHaven'
+			service: "HentaiHaven",
 		};
 
 		if (!paused) {
 			videoTimestamps = getTimestamps(currentTime, duration);
-			data.presenceData.startTimestamp = live ? watchingSinceTimestamp : videoTimestamps[0];
+			data.presenceData.startTimestamp = live
+				? watchingSinceTimestamp
+				: videoTimestamps[0];
 
 			if (live) {
-				data.presenceData.smallImageKey = 'live';
+				data.presenceData.smallImageKey = "live";
 				data.presenceData.smallImageText = extensionData.strings.live;
 			} else data.presenceData.endTimestamp = videoTimestamps[1];
 		} else {
@@ -111,14 +116,14 @@ function updateData() {
 	} else {
 		videoStream = null;
 		data = {
-			clientID: '516242947184787514',
-			service: 'HentaiHaven',
-			hidden: true
+			clientID: "516242947184787514",
+			service: "HentaiHaven",
+			hidden: true,
 		};
 	}
 
 	//* Send data back to PreMiD
-	var event = new CustomEvent('PreMiD_UpdatePresence', { detail: data });
+	var event = new CustomEvent("PreMiD_UpdatePresence", { detail: data });
 	window.dispatchEvent(event);
 }
 
@@ -130,5 +135,5 @@ function updateData() {
 function getTimestamps(videoTime, videoDuration) {
 	var startTime = Date.now();
 	var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-	return [ Math.floor(startTime / 1000), endTime ];
+	return [Math.floor(startTime / 1000), endTime];
 }

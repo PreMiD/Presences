@@ -1,5 +1,5 @@
 let presence = new Presence({
-	clientId: "689131326779031563"
+	clientId: "689131326779031563",
 });
 
 setInterval(newStats, 1000);
@@ -7,7 +7,7 @@ newStats();
 
 function newStats() {
 	let xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
+	xhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
 			let data = JSON.parse(this.responseText);
 			strack = data.now_playing.song.title;
@@ -30,9 +30,9 @@ let lastTimeStart = Math.floor(Date.now() / 1000);
 let lastDetails;
 let lastDetailsTimeStart = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", function() {
+presence.on("UpdateData", function () {
 	let presenceData = {
-		largeImageKey: "hlr"
+		largeImageKey: "hlr",
 	};
 
 	if (document.location.host == "blog.highlowradio.co.uk") {
