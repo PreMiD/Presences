@@ -15,20 +15,12 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
-    title = document.querySelector(
-      "body > div.wt-container > div.global-container.container > div.content > div.news.content-detail-page > article > div.content-title > h1"
-    ),
     posttitle = document.querySelector(
       "#mod-buzz-header-1 > div.buzz-header__hgroup.xs-my2.md-mt0 > h1"
-    ),
+    );
     user = document.querySelector(
       "body > main > div > div > div > div.user-info.xs-px2.sm-p0.xs-mb3.md-mb4 > div > div.xs-ml2.xs-flex.xs-flex-column > div > h1"
-    ),
-    author = document.querySelector(
-      "#mod-buzz-header-1 > div.buzz-byline.xs-mb2 > a > div > div.sm-flex.sm-flex-align-center > span"
-    ),
-    userdesc = document.querySelectorAll(".user-info__bio");
-
+    );
   let data = {
     largeImageKey: "logo",
     startTimestamp: Math.floor(Date.now() / 1000),

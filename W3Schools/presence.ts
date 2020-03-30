@@ -45,11 +45,9 @@ presence.on("UpdateData", () => {
   presence.setActivity(data);
 });
 
-function capitalize(text: string) {
-  var ret = "";
+const capitalize = (text: string) => {
   var texts = text.replace(/[\[{(_)}\]]/g, " ").split(" ");
-  texts.map((text) => {
-    ret += text.charAt(0).toUpperCase() + text.slice(1) + " ";
-  });
-  return ret;
+  return texts.map((str) => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+  }).join(' ');
 }

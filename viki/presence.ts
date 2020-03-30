@@ -58,8 +58,8 @@ presence.on("UpdateData", async () => {
   playback = video ? true : false;
 
   if (!playback) {
-    presenceData: presenceData = {
-      largeImageKey: "viki",
+    let presenceData: presenceData = {
+      largeImageKey: "viki"
     };
 
     presenceData.startTimestamp = browsingStamp;
@@ -542,8 +542,8 @@ presence.on("UpdateData", async () => {
     var timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      ),
-      presenceData: presenceData = {
+      );
+    let presenceData: presenceData = {
         details: "",
         state: "",
         largeImageKey: "viki",

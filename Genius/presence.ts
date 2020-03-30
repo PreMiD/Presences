@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
   } else if (path.startsWith("/a/")) {
     var article = document.querySelector("h1.article_title").textContent;
     if (article.length > 128) {
-      article.substring(0, 125) + "...";
+      article = article.substring(0, 125) + "...";
     }
     data.details = "Viewing an Article";
     data.state = article;

@@ -11,14 +11,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     title = document.querySelector("#question-header > h1"),
-    posttitle = document.querySelector(
-      "#mod-buzz-header-1 > div.buzz-header__hgroup.xs-my2.md-mt0 > h1"
-    ),
     user = document.querySelector(
       "#user-card > div > div.grid--cell.fl1.wmn0 > div > div.grid--cell.fl1.w0.overflow-x-hidden.overflow-y-auto.pr16.profile-user--about.about > div > div:nth-child(1) > h2 > div"
-    ),
-    author = document.querySelector(
-      "#mod-buzz-header-1 > div.buzz-byline.xs-mb2 > a > div > div.sm-flex.sm-flex-align-center > span"
     ),
     searchresult = document.querySelector("#bigsearch > div > input");
   userdesc = document.querySelectorAll(".user-info__bio");

@@ -64,8 +64,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else {
     var d = document.location.pathname.split("/");
-    if (d.length != 5) {
-    } else {
+    if(d.length === 5) {
       elapsed = Math.floor(Date.now() / 1000);
       let presenceData = {
         details: `Reading ${d[3].split("-").join(" ").capitalize()}(${d[1]})`,

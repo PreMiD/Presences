@@ -194,8 +194,6 @@ presence.on("UpdateData", () => {
                 document.querySelector("#qpAnimeNameHider").className ==
                 "center-text qpAnimeNameContainer hide"
               ) {
-                var animeName = document.querySelector("#qpAnimeName")
-                  .textContent;
                 (data.smallImageKey = "headset"),
                   (data.smallImageText = "Canzone da: " + animeName),
                   (data.details = "Round " + actualRoundNumber + " terminato"),

@@ -10,7 +10,7 @@ function setTime(a) {
 
 function findParents(b, a) {
   var r;
-  for (i = 0; i < b.length; i++) {
+  for (new i = 0; i < b.length; i++) {
     if (b[i][0] == a) {
       r = b[i];
     }
@@ -91,15 +91,16 @@ var messages = {
 var gomsgs = [];
 var stopmsgs = [];
 var finishmsgs = [];
+var elapsed;
 
-for (i = 0; i < messages["go"].length; i++) {
+for (new i = 0; i < messages["go"].length; i++) {
   gomsgs += messages["go"][i][0];
 }
 
-for (i = 0; i < messages["stop"].length; i++) {
+for (new i = 0; i < messages["stop"].length; i++) {
   stopmsgs += messages["stop"][i][0];
 }
-for (i = 0; i < messages["finish"].length; i++) {
+for (new i = 0; i < messages["finish"].length; i++) {
   finishmsgs += messages["finish"][i][0];
 }
 
@@ -108,7 +109,7 @@ presence.on("UpdateData", async () => {
     var choosen = document.getElementById("choose").style.display != "none";
 
     if (choosen) {
-      var elapsed = Math.floor(Date.now / 1000);
+      elapsed = Math.floor(Date.now / 1000);
       let presenceData = {
         details: "Preparing to Edge",
         state: `choosing settings `,
@@ -152,7 +153,7 @@ presence.on("UpdateData", async () => {
         messages["first"][0] ==
         document.getElementById("message").children[0].innerHTML
       ) {
-        var elapsed = Math.floor(Date.now / 1000);
+        elapsed = Math.floor(Date.now / 1000);
         let presenceData = {
           details: "jerking of slowly for edging",
           //largeImageKey: "banner",

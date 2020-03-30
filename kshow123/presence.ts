@@ -57,8 +57,7 @@ presence.on("UpdateData", async () => {
       var timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
-        ),
-        pdata: presenceData = {
+        ), pdata: presenceData = {
           largeImageKey: "ksow123stack",
           smallImageKey: paused ? "pause" : "play",
           smallImageText: paused ? (await strings).pause : (await strings).play,
@@ -107,8 +106,8 @@ presence.on("UpdateData", async () => {
       var timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
-        ),
-        pdata: presenceData = {
+        );
+      let pdata: presenceData = {
           largeImageKey: "ksow123stack",
           smallImageKey: paused ? "pause" : "play",
           smallImageText: paused ? (await strings).pause : (await strings).play,
@@ -126,8 +125,6 @@ presence.on("UpdateData", async () => {
       presence.setActivity(pdata);
     }
   } else if (document.location.pathname == "/") {
-
-    pdata.largeImageKey = "ksow123stack";
     pdata.details = "Browsing through";
     pdata.state = "the main page";
     delete pdata.endTimestamp;
@@ -137,10 +134,6 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(pdata);
   } else if (document.location.pathname == "/show/latest/") {
-    var pdata: presenceData = {
-      largeImageKey: "ksow123stack",
-    };
-
     pdata.details = "Browsing through";
     pdata.state = "the latest shows";
     delete pdata.endTimestamp;
@@ -150,10 +143,6 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(pdata);
   } else if (document.location.pathname == "/show/popular/") {
-    var pdata: presenceData = {
-      largeImageKey: "ksow123stack",
-    };
-
     pdata.details = "Browsing through";
     pdata.state = "the most popular shows";
     delete pdata.endTimestamp;
@@ -163,10 +152,6 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(pdata);
   } else if (document.location.pathname == "/show/rated/") {
-    var pdata: presenceData = {
-      largeImageKey: "ksow123stack",
-    };
-
     pdata.details = "Browsing through";
     pdata.state = "the highest rated shows";
     delete pdata.endTimestamp;
@@ -176,10 +161,6 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(pdata);
   } else if (document.location.pathname == "/show/") {
-    var pdata: presenceData = {
-      largeImageKey: "ksow123stack",
-    };
-
     pdata.details = "Browsing through";
     pdata.state = "a list of all shows";
     delete pdata.endTimestamp;
@@ -189,10 +170,6 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(pdata);
   } else if (document.location.pathname.includes("/show/")) {
-    var pdata: presenceData = {
-      largeImageKey: "ksow123stack",
-    };
-
     views = document.querySelector("#info > div.media > div > h1 > a");
 
     pdata.details = "Browsing through all episodes of:";
@@ -204,10 +181,6 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(pdata);
   } else if (document.location.pathname.includes("/search/")) {
-    var pdata: presenceData = {
-      largeImageKey: "ksow123stack",
-    };
-
     views = document.querySelector("#featured > div.page-header > h3");
 
     pdata.details = "Searching for:";

@@ -4,6 +4,7 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000);
 var currentTime;
 var duration;
+var videoType;
 presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
@@ -83,18 +84,18 @@ presence.on("UpdateData", () => {
           )
           .textContent.includes("OAV" || "OVA")
       ) {
-        var videoType = "OAV";
+        videoType = "OAV";
       }
-      if (
+      else if (
         document
           .querySelector(
             "#Blog1 > div.blog-posts > article > div:nth-child(13)"
           )
           .textContent.includes("Movie" || "Film")
       ) {
-        var videoType = "Movie";
+        videoType = "Movie";
       } else {
-        var videoType = "Anime";
+        videoType = "Anime";
       }
     }
     setCookie("videoName", videoName);
@@ -177,7 +178,7 @@ presence.on("UpdateData", () => {
         Math.floor(currentTime),
         Math.floor(duration)
       );
-      var videoType = getCookie("videoType");
+      videoType = getCookie("videoType");
       if (videoType == "Anime") {
         var videoName = getCookie("videoName");
         var videoEpisode = getCookie("videoEpisode");
