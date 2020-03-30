@@ -325,7 +325,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         }
         else if (document.location.pathname == ("/community/conversations/add")){
             presenceData.startTimestamp = browsingStamp;
-            presenceData.details = "Starting a new conversation";
+            presenceData.details = "Starting a:";
+            presenceData.state = "New conversation...";
         }
         else if (document.location.pathname.includes("/account/")){
             presenceData.startTimestamp = browsingStamp;
@@ -348,6 +349,16 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
             presenceData.state = user + "\'s profile page";
+        }
+
+        else if (document.location.pathname.includes("/search/search")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Searching for:";
+            presenceData.state = "No results.";
+        }
+        else if (document.location.pathname.includes("/search/")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Searching...";
         }
     }
 
