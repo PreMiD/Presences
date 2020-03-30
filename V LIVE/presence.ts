@@ -255,7 +255,7 @@ presence.on("UpdateData", async () => {
       uploader = document.querySelector(
         "#container > smarteditor-view > div > div.header > div > smarteditor-channel-info > div > div.info > a > div.info_area > div"
       );
-      var test = uploader.innerText.replace("celeb", "");
+      let test = uploader.innerText.replace("celeb", "");
 
       presenceData.details = "Reading an article by " + test;
       presenceData.smallImageKey = "reading";
@@ -302,7 +302,7 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#content > div.ticket_section > div > div.ticket_info_area > div > div > h4"
       );
-      var test = search.innerText.replace("+", "");
+      let test = search.innerText.replace("+", "");
 
       presenceData.details = "Watching the fanship page";
       presenceData.smallImageKey = "reading";
@@ -326,7 +326,7 @@ presence.on("UpdateData", async () => {
       uploader = document.querySelector(
         "#container > smarteditor-view > div > div.header > div > smarteditor-channel-info > div > div.info > a > div.info_area > div"
       );
-      var test = uploader.innerText.replace("celeb", "");
+      let test = uploader.innerText.replace("celeb", "");
 
       presenceData.details = "Reading an article by " + test;
       presenceData.smallImageKey = "reading";

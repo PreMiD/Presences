@@ -14,13 +14,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/beatmaps/rank_request")) {
     presenceData.details = "Requesting a beatmaps";
   } else if (document.location.pathname.startsWith("/beatmaps")) {
-    var title = document.querySelector(".map-title"),
+    let title = document.querySelector(".map-title"),
       act = document.querySelector(".map-artist");
 
     if (title != null && act != null) {
       customData = true;
 
-      var beatmapData: presenceData = {
+      let beatmapData: presenceData = {
         details: "Looking at the beatmap:",
         state:
           (act as HTMLElement).innerText +
@@ -33,13 +33,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Searching for new beatmaps";
     }
   } else if (document.location.pathname.startsWith("/s/")) {
-    var title = document.querySelector(".map-title"),
+    let title = document.querySelector(".map-title"),
       act = document.querySelector(".map-artist");
 
     if (title != null && act != null) {
       customData = true;
 
-      var beatmapData: presenceData = {
+      let beatmapData: presenceData = {
         details: "Looking at the beatmap:",
         state:
           (act as HTMLElement).innerText +
@@ -52,13 +52,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Searching for new beatmaps";
     }
   } else if (document.location.pathname.startsWith("/b/")) {
-    var title = document.querySelector(".map-title"),
+    let title = document.querySelector(".map-title"),
       act = document.querySelector(".map-artist");
 
     if (title != null && act != null) {
       customData = true;
 
-      var beatmapData: presenceData = {
+      let beatmapData: presenceData = {
         details: "Looking at the beatmap:",
         state:
           (act as HTMLElement).innerText +
@@ -101,13 +101,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/about")) {
     presenceData.details = "Browsing About";
   } else if (document.location.pathname.startsWith("/docs/")) {
-    var doc = document.querySelector(".ban-stroke1"),
+    let doc = document.querySelector(".ban-stroke1"),
       title = document.querySelector(".ban-stroke2");
 
     if (doc != null && title != null) {
       customData = true;
 
-      var beatmapData: presenceData = {
+      let beatmapData: presenceData = {
         details: "Browsing " + (doc as HTMLElement).innerText,
         state: (title as HTMLElement).innerText,
         largeImageKey: "logo",
@@ -145,10 +145,10 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/team")) {
     presenceData.details = "Look at Garati Team";
   } else if (document.location.pathname.startsWith("/u")) {
-    var name: string = (document.querySelector(".user-name") as HTMLElement)
+    let name: string = (document.querySelector(".user-name") as HTMLElement)
       .innerText;
     customData = true;
-    var profileData: presenceData = {
+    let profileData: presenceData = {
       details: "Looking at " + name + "'s Profile",
       state:
         "Performance: " +

@@ -45,7 +45,7 @@ presence.on("UpdateData", () => {
         // Music Playing
         presenceData.smallImageKey = "play";
         presenceData.state =
-          (strack || "Loading...") + (" - " + sartist || "Loading...");
+          (strack || "Loading...") + (" - " + sartist);
         presenceData.details =
           (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners";
         presenceData.smallImageText = "https://itspulse.net";

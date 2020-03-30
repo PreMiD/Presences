@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
       videoCurrentTime = video.currentTime;
       videoPaused = video.paused;
 
-      var timestamps = getTimestamps(
+      let timestamps = getTimestamps(
         Math.floor(videoCurrentTime),
         Math.floor(videoDuration)
       );
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing history";
       //活动
     } else if (document.location.pathname.includes("/blackboard/")) {
-      var timestamps = getTimestamps(
+      let timestamps = getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       );
@@ -169,7 +169,7 @@ presence.on("UpdateData", async () => {
       videoCurrentTime = video.currentTime;
       paused = video.paused;
 
-      var timestamps = getTimestamps(
+      let timestamps = getTimestamps(
         Math.floor(videoCurrentTime),
         Math.floor(videoDuration)
       );
@@ -739,7 +739,7 @@ presence.on("UpdateData", async () => {
     videoCurrentTime = video.currentTime;
     paused = video.paused;
 
-    var timestamps = getTimestamps(
+    let timestamps = getTimestamps(
       Math.floor(videoCurrentTime),
       Math.floor(videoDuration)
     );

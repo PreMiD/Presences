@@ -95,7 +95,7 @@ presence.on("UpdateData", () => async () => {
       details: "Bir ürüne göz atıyor:",
       state:
         `${product.textContent} | ${product2.textContent} ${
-          price && price.textContent != "" ? `(${price.textContent})` : ""
+          price ? `(${price.textContent})` : ""
         }` || "Belirsiz",
       startTimestamp: Math.floor(Date.now() / 1000),
     });
