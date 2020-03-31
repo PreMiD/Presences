@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
             thread = document.querySelector(".titleBar > h1");
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing the thread:";
-            presenceData.state = "\"" + thread + "\"";
+            presenceData.state = "\"" + thread.innerText + "\"";
         }
 
         else if (document.location.pathname.includes("/announcements/")){
@@ -340,7 +340,7 @@ presence.on("UpdateData", async () => {
             user = document.querySelector(".mainText > h1");
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
-            presenceData.state = user + "\'s profile page";
+            presenceData.state = user.innerText + "\'s profile page";
         }
 
         else if (document.location.pathname.includes("/search/search")) {
