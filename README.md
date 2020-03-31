@@ -12,20 +12,19 @@ If you would like to <strong>publish</strong> your presence, please feel free to
     </a>
 </div>
 
-# Requirements to create a presence
+## Requirements to create a presence
 
-- Have TypeScript Compiler installed. (If coding with TypeScript)
-  - Must have the Latest Version LTS **Node** installed.
-- Basic knowlege of JavaScript or TypeScript.
+- If coding with TypeScript, you must have the [latest TypeScript compiler](https://www.typescriptlang.org/#download-links) version installed
+- Basic knowlege of JavaScript or TypeScript
 
 _Note: If you code your presence with TypeScript, you must first compile `presence.ts` to `presence.js` and put the `js` file along with `metadata.json` in `/dist`_
 
-# Getting started
+## Getting started
 
 We made a documentation to make your development process a little bit better and faster.  
-You can see it [**here**](https://docs.premid.app/en/dev/presence).
+You can see it [**here**](https://docs.premid.app/dev/presence).
 
-# Folder structure
+## Folder structure
 
 ```
 /presences

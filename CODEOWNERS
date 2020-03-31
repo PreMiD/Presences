@@ -1,8 +1,8 @@
-* @Alanexei @TheDropX @frozaum @Bas950 @doomlerd
+* @Alanexei @frozaum @Bas950 @doomlerd
 
 @types/* @Timeraa
 LICENSE @Fruxh
-CONTRIBUTORS.md @Timeraa
-package.json @Timeraa
-yarn.lock @Timeraa
+CONTRIBUTING.md @Alanexei
+package.json @Timeraa @TheDropX
+yarn.lock @Timeraa @TheDropX
 presenceUpdater.ts @Timeraa
