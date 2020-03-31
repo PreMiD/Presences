@@ -1,16 +1,15 @@
 var presence = new Presence({
-  clientId: "642714892201230336",
-  mediaKeys: false
+  clientId: "642714892201230336"
 });
 
 presence.on("UpdateData", async () => {
-
-
   let presenceData: presenceData = {
     largeImageKey: "time"
   };
 
-  var clock = document.querySelector("#clock0_bg") || document.querySelector("#time_section > div:nth-child(2) > div");
+  var clock =
+    document.querySelector("#clock0_bg") ||
+    document.querySelector("#time_section > div:nth-child(2) > div");
 
   if (document.location.hostname == "time.is") {
     if (document.location.pathname == "/") {
@@ -28,5 +27,4 @@ presence.on("UpdateData", async () => {
   } else {
     presence.setActivity(presenceData);
   }
-
 });

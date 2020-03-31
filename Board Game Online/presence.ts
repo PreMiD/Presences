@@ -1,70 +1,70 @@
 var presence = new Presence({
-  clientId: '684570342085099546'
+  clientId: "684570342085099546"
 });
 var strings = presence.getStrings({
-  browse: 'presence.activity.browsing'
+  browse: "presence.activity.browsing"
 });
 
 const paths = {
-  '/': {
-    details: 'Browsing'
+  "/": {
+    details: "Browsing"
   },
-  '/forum': {
-    details: 'Viewing Page',
-    state: 'Forums'
+  "/forum": {
+    details: "Viewing Page",
+    state: "Forums"
   }
 };
 
 const queries = {
   forgot_login: {
-    details: 'Forgot Login'
+    details: "Forgot Login"
   },
   register: {
-    details: 'Registering...'
+    details: "Registering..."
   },
   newgame: {
-    details: 'Creating',
-    state: 'New Game'
+    details: "Creating",
+    state: "New Game"
   },
   joingame: {
-    details: 'Joining',
-    state: 'New Game'
+    details: "Joining",
+    state: "New Game"
   },
   shop: {
-    details: 'Viewing',
-    state: 'Shop'
+    details: "Viewing",
+    state: "Shop"
   },
   donations: {
-    details: 'Viewing',
-    state: 'Donations'
+    details: "Viewing",
+    state: "Donations"
   },
   info: {
-    details: 'Viewing',
-    state: 'Game Info'
+    details: "Viewing",
+    state: "Game Info"
   },
   recruit: {
-    details: 'Viewing',
-    state: 'Recruit a Friend'
+    details: "Viewing",
+    state: "Recruit a Friend"
   },
   terms: {
-    details: 'Viewing',
-    state: 'Terms of Service'
+    details: "Viewing",
+    state: "Terms of Service"
   },
   privacy: {
-    details: 'Viewing',
-    state: 'Privacy Policy'
+    details: "Viewing",
+    state: "Privacy Policy"
   },
   contact: {
-    details: 'Viewing',
-    state: 'Contact'
+    details: "Viewing",
+    state: "Contact"
   }
 };
 
-presence.on('UpdateData', async () => {
+presence.on("UpdateData", async () => {
   let data: presenceData = {
     details: undefined,
     state: undefined,
-    largeImageKey: 'boardgameonline',
+    largeImageKey: "boardgameonline",
     smallImageKey: undefined,
     smallImageText: undefined,
     startTimestamp: undefined,
@@ -74,31 +74,31 @@ presence.on('UpdateData', async () => {
   const host = location.host;
   const path = location.pathname;
   const query = location.search;
-  const queryString = query && query.split('page=')[1]?.split('&')[0];
+  const queryString = query && query.split("page=")[1]?.split("&")[0];
 
-  if (host === 'www.boardgame-online.com') {
+  if (host === "www.boardgame-online.com") {
     if (path in paths) data = { ...data, ...paths[path] };
     if (queryString && queryString in queries)
       data = { ...data, ...queries[queryString] };
 
-    const header = getElement('.page_wrapper.show > .page_content > h2');
+    const header = getElement(".page_wrapper.show > .page_content > h2");
     if (header !== undefined) {
-      data.details = 'Viewing';
+      data.details = "Viewing";
       data.state = header;
     }
 
     const profile = getElement(
-      '.page_wrapper.show > .page_content > #profile_name_title > .userName'
+      ".page_wrapper.show > .page_content > #profile_name_title > .userName"
     );
     if (profile !== undefined) {
-      data.details = 'Viewing Profile';
+      data.details = "Viewing Profile";
       data.state = profile;
     }
   } else {
-    const playerCount = document.querySelector('.rankingTable')
+    const playerCount = document.querySelector(".rankingTable")
       ?.childElementCount;
 
-    data.details = 'Playing Game';
+    data.details = "Playing Game";
     data.state = document.title;
 
     if (playerCount) {
@@ -107,8 +107,8 @@ presence.on('UpdateData', async () => {
   }
 
   if (data.details !== undefined) {
-    if (data.details.match('(Browsing|Viewing)')) {
-      data.smallImageKey = 'reading';
+    if (data.details.match("(Browsing|Viewing)")) {
+      data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;
     }
     presence.setActivity(data);
@@ -121,6 +121,6 @@ presence.on('UpdateData', async () => {
 const getElement = (query: string) => {
   const element = document.querySelector(query);
   if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, '');
+    return element.textContent.replace(/^\s+|\s+$/g, "");
   } else return undefined;
 };

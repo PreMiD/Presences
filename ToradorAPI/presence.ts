@@ -1,14 +1,13 @@
 var presence = new Presence({
-  clientId: "518193753433833499",
-  mediaKeys: false
+  clientId: "518193753433833499"
 });
 
 presence.on("UpdateData", async () => {
   let urlParams = new URLSearchParams(window.location.search);
-  let typeParam = urlParams.get('type');
-  let charParam = urlParams.get('char');
-  if(typeParam == "original") {
-    if(charParam.toLowerCase() == "taiga") {
+  let typeParam = urlParams.get("type");
+  let charParam = urlParams.get("char");
+  if (typeParam == "original") {
+    if (charParam.toLowerCase() == "taiga") {
       let presenceData: presenceData = {
         details: "Looking at screenshots",
         state: "Taiga Aisaka",
@@ -22,8 +21,8 @@ presence.on("UpdateData", async () => {
       };
       presence.setActivity(presenceData);
     }
-  } else if(typeParam == "fanart") {
-    if(charParam.toLowerCase() == "taiga") {
+  } else if (typeParam == "fanart") {
+    if (charParam.toLowerCase() == "taiga") {
       let presenceData: presenceData = {
         details: "Looking at fanart",
         state: "Taiga Aisaka",

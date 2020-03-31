@@ -1,28 +1,10 @@
 var presence = new Presence({
-    clientId: "463151177836658699",
-    mediaKeys: true
+    clientId: "463151177836658699"
   }),
   strings: any = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
-
-presence.on("MediaKeys", (key: string) => {
-  switch (key) {
-    case "pause": {
-      var video = document.querySelector(".video-stream") as HTMLVideoElement;
-
-      video.paused ? video.play() : video.pause();
-      break;
-    }
-    case "nextTrack":
-      (document.querySelector(".next-button") as HTMLAnchorElement).click();
-      break;
-    case "previousTrack":
-      (document.querySelector(".previous-button") as HTMLAnchorElement).click();
-      break;
-  }
-});
 
 presence.on("UpdateData", async () => {
   var title = (document.querySelector(
