@@ -1,0 +1,27 @@
+{
+  "author": {
+    "name": "TechLewi",
+    "id": "590575157718941708"
+  },
+  "service": "GamingAnthems",
+  "description": {
+    "en": "No1 Gaming Radio Station"
+  },
+  "url": [
+    "gaminganthems.com",
+    "raidstop.co.uk",
+    "raidstop.com"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/9PEupja.png",
+  "thumbnail": "https://i.imgur.com/Ay1xCyi.png",
+  "color": "#FFC0CB",
+  "tags": [
+    "no1",
+    "gaming",
+    "radio",
+    "game",
+    "music"
+  ],
+  "category": "music"
+}
