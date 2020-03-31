@@ -17,6 +17,8 @@ presence.on('UpdateData', async () => {
         details: 'Radio.net',
         largeImageKey: 'logo_big'
     };
+    var times = null;
+    var tags = null;
 
     switch(path[0]) {
         //Radio
@@ -45,7 +47,7 @@ presence.on('UpdateData', async () => {
 
                 presenceData.details = document.querySelector('h1').innerText;
                 presenceData.state = `${document.getElementById('st-ov-city-text').innerText}, ${document.getElementById('st-ov-country-text').innerText}`;
-                var tags = document.getElementsByClassName('station-info-tags__item');
+                tags = document.getElementsByClassName('station-info-tags__item');
                 tags = Object.keys(tags).map(tag => tags[tag]).filter(tag => tag.id.startsWith('st-ov-genre-text') || tag.id.startsWith('st-ov-topic-text'));
                 for(var i = 0; i < tags.length; i++) {
                     if(i == 0) {
@@ -56,7 +58,7 @@ presence.on('UpdateData', async () => {
                 }
 
                 if(!document.getElementsByClassName('player__info-wrap flex')[0].style.display) {
-                    var times = document.getElementsByClassName('player__info-wrap flex')[0].innerText.match(/\d+/g);
+                    times = document.getElementsByClassName('player__info-wrap flex')[0].innerText.match(/\d+/g);
 
                     if(times.length > 0) {
                         //Ad is playing
@@ -81,7 +83,7 @@ presence.on('UpdateData', async () => {
                 //Podcast is playing
                 //---------------------------------------
                 if(!browsingStamp || lastPath != path[1]) browsingStamp = Math.floor(Date.now() / 1000);
-                var times = document.getElementsByClassName('player__timing-wrap')[0].innerText.split('\n|\n');
+                times = document.getElementsByClassName('player__timing-wrap')[0].innerText.split('\n|\n');
                 presenceData.startTimestamp = 0;
                 times[0].split(':').reverse().forEach((time, pos) => presenceData.startTimestamp += parseInt(time) * Math.pow(60, pos));
                 presenceData.startTimestamp = Math.floor(Date.now() / 1000) - presenceData.startTimestamp;
@@ -106,7 +108,7 @@ presence.on('UpdateData', async () => {
 
                 presenceData.details = document.querySelector('h1').innerText;
                 presenceData.state = `${document.getElementById('st-ov-city-text').innerText}, ${document.getElementById('st-ov-country-text').innerText}`;
-                var tags = document.getElementsByClassName('station-info-tags__item');
+                tags = document.getElementsByClassName('station-info-tags__item');
                 tags = Object.keys(tags).map(tag => tags[tag]).filter(tag => tag.id.startsWith('st-ov-genre-text') || tag.id.startsWith('st-ov-topic-text'));
                 for(var i = 0; i < tags.length; i++) {
                     if(i == 0) {
@@ -117,7 +119,7 @@ presence.on('UpdateData', async () => {
                 }
 
                 if(!document.getElementsByClassName('player__info-wrap flex')[0].style.display) {
-                    var times = document.getElementsByClassName('player__info-wrap flex')[0].innerText.match(/\d+/g);
+                    times = document.getElementsByClassName('player__info-wrap flex')[0].innerText.match(/\d+/g);
 
                     if(times.length > 0) {
                         //Ad is playing

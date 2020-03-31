@@ -57,7 +57,7 @@ presence.on('UpdateData', async () => {
                         //Wallet
                         //---------------------------------------
                         case 'wallet':
-                            presenceData.details = presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
+                            presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
                             presenceData.state = document.getElementsByClassName('PageSubHeader_title')[0].innerText;
                             break;
                         //Unknown
@@ -76,7 +76,7 @@ presence.on('UpdateData', async () => {
             //News
             //------------------------------------------------------------------------------
             case 'news':
-                presenceData.details = presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
+                presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
 
                 if(path.length > 1) {
                     presenceData.smallImageKey = 'reading';

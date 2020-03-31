@@ -235,7 +235,9 @@ presence.on('UpdateData', async () => {
                 case 'space':
                 case 'weather':
                 case 'maker_webhooks':
+                    presenceData.details = 'My Services';
                     presenceData.state = document.querySelector('h1').innerText;
+                    break;
                 case 'my_services':
                     presenceData.details = 'My Services';
                     break;
