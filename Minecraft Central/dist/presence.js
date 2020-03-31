@@ -13,7 +13,6 @@ var presence = new Presence({
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
-
 var user;
 var thread;
 var punishmentUser;
@@ -29,13 +28,13 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Viewing:";
             presenceData.state = "Home page";
         }
-    
+
         else if (document.location.pathname == "/community/forums/"){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
             presenceData.state = "Forums main page";
         }
-    
+
         else if (document.location.pathname.includes("/add-reply")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Replying a thread";
@@ -46,7 +45,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Viewing the thread:";
             presenceData.state = "\"" + thread + "\"";
         }
-    
+
         else if (document.location.pathname.includes("/announcements/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -81,7 +80,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Viewing:";
             presenceData.state = "Support forums";
         }
-    
+
         else if (document.location.pathname.includes("/apply/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -104,7 +103,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Applying for Youtuber";
         }
-    
+
         else if (document.location.pathname.includes("/reports/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -114,7 +113,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Reporting a player";
         }
-    
+
         else if (document.location.pathname.includes("/reports-staff/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -124,7 +123,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Reporting a staff member";
         }
-    
+
         else if (document.location.pathname.includes("/appeals/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -134,12 +133,12 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Making a punishment appeal";
         }
-    
+
         else if (document.location.pathname.includes("/punishments/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Searching for punishments";
         }
-        
+
         else if (document.location.pathname.includes("/general/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -180,7 +179,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Viewing:";
             presenceData.state = "Minigames Discussion forums";
         }
-    
+
         else if (document.location.pathname.includes("/off-topic/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -210,7 +209,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Sending a Community Ticket";
         }
-    
+
         else if (document.location.pathname.includes("/staff/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -226,7 +225,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Viewing:";
             presenceData.state = "Voting page";
         }
-    
+
         else if (document.location.pathname == ("/community/leaderboards/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -277,7 +276,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Viewing:";
             presenceData.state = "UHC leaderboards";
         }
-    
+
         else if (document.location.pathname == ("/community/leaderboards/skyblock/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -308,7 +307,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Viewing:";
             presenceData.state = "ArenaPvP leaderboards";
         }
-    
+
         else if (document.location.pathname == ("/community/account/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Changing personal details";
@@ -343,7 +342,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Viewing:";
             presenceData.state = "Watched forums";
         }
-    
+
         else if (document.location.pathname.includes("/members/")) {
             user = document.querySelector(".mainText > h1").innerText;
             presenceData.startTimestamp = browsingStamp;
@@ -373,7 +372,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Checking on Store:";
             presenceData.state = "Ranks";
         }
-    
+
         else if (document.location.pathname.includes("/category/205563")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Checking on Store:";
@@ -414,7 +413,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presenceData.details = "Checking on Store:";
             presenceData.state = "Legend Rank upgrades";
         }
-    
+
         else if (document.location.pathname.includes("/category/519352")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Checking on Store:";

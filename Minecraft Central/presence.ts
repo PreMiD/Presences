@@ -1,21 +1,19 @@
 var presence = new Presence({
     clientId: "693097839424831489",
     mediaKeys: false
-  });
-  
-  var browsingStamp = Math.floor(Date.now()/1000);
-  
-  var user : any;
-  var thread : any;
-  var punishmentUser : any;
-  
-  presence.on("UpdateData", async () => {
-  
-  
+});
+
+var browsingStamp = Math.floor(Date.now()/1000);
+
+var user : any;
+var thread : any;
+var punishmentUser : any;
+
+presence.on("UpdateData", async () => {
+
     let presenceData: presenceData = {
-      largeImageKey: "mccentrallogo"
+        largeImageKey: "mccentrallogo"
     };
-  
 
     if (document.location.hostname == "mccentral.org") {
         if (document.location.pathname == "/community/") {
@@ -23,13 +21,13 @@ var presence = new Presence({
             presenceData.details = "Viewing:";
             presenceData.state = "Home page";
         }
-    
+
         else if (document.location.pathname == "/community/forums/"){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
             presenceData.state = "Forums main page";
         }
-    
+
         else if (document.location.pathname.includes("/add-reply")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Replying a thread";
@@ -40,7 +38,7 @@ var presence = new Presence({
             presenceData.details = "Viewing the thread:";
             presenceData.state = "\"" + thread + "\"";
         }
-    
+
         else if (document.location.pathname.includes("/announcements/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -75,7 +73,7 @@ var presence = new Presence({
             presenceData.details = "Viewing:";
             presenceData.state = "Support forums";
         }
-    
+
         else if (document.location.pathname.includes("/apply/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -98,7 +96,7 @@ var presence = new Presence({
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Applying for Youtuber";
         }
-    
+
         else if (document.location.pathname.includes("/reports/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -108,7 +106,7 @@ var presence = new Presence({
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Reporting a player";
         }
-    
+
         else if (document.location.pathname.includes("/reports-staff/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -118,7 +116,7 @@ var presence = new Presence({
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Reporting a staff member";
         }
-    
+
         else if (document.location.pathname.includes("/appeals/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -133,7 +131,7 @@ var presence = new Presence({
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Searching for punishments";
         }
-        
+
         else if (document.location.pathname.includes("/general/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -174,7 +172,7 @@ var presence = new Presence({
             presenceData.details = "Viewing:";
             presenceData.state = "Minigames Discussion forums";
         }
-    
+
         else if (document.location.pathname.includes("/off-topic/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -204,7 +202,7 @@ var presence = new Presence({
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Sending a Community Ticket";
         }
-    
+
         else if (document.location.pathname.includes("/staff/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -220,7 +218,7 @@ var presence = new Presence({
             presenceData.details = "Viewing:";
             presenceData.state = "Voting page";
         }
-    
+
         else if (document.location.pathname == ("/community/leaderboards/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -271,7 +269,7 @@ var presence = new Presence({
             presenceData.details = "Viewing:";
             presenceData.state = "UHC leaderboards";
         }
-    
+
         else if (document.location.pathname == ("/community/leaderboards/skyblock/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Viewing:";
@@ -302,7 +300,7 @@ var presence = new Presence({
             presenceData.details = "Viewing:";
             presenceData.state = "ArenaPvP leaderboards";
         }
-    
+
         else if (document.location.pathname == ("/community/account/")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Changing personal details";
@@ -337,7 +335,7 @@ var presence = new Presence({
             presenceData.details = "Viewing:";
             presenceData.state = "Watched forums";
         }
-    
+
         else if (document.location.pathname.includes("/members/")) {
             user = document.querySelector(".mainText > h1");
             presenceData.startTimestamp = browsingStamp;
@@ -367,7 +365,7 @@ var presence = new Presence({
             presenceData.details = "Checking on Store:";
             presenceData.state = "Ranks";
         }
-    
+
         else if (document.location.pathname.includes("/category/205563")){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Checking on Store:";
@@ -441,10 +439,9 @@ var presence = new Presence({
     }
 
     if (presenceData.details == null) {
-      presence.setTrayTitle();
-      presence.setActivity()
+        presence.setTrayTitle();
+        presence.setActivity()
     } else {
-      presence.setActivity(presenceData);
+        presence.setActivity(presenceData);
     }
-  
-  });
+});
