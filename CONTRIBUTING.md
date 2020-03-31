@@ -93,7 +93,7 @@ For your presence to reach the stores, it MUST go through a process on GitHub to
 ```ts
 presence.on("UpdateData", async () => { /*...*/ });
 ```
-It should **NOT** this:
+It should **NOT** be this:
 ```ts
 presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () { /*...*/ });
 ```
