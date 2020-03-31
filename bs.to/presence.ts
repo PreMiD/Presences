@@ -1,22 +1,19 @@
 var presence = new Presence({
-  clientId: "639568013590528030",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+    clientId: "639568013590528030"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused"
+  });
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user : any;
-var title : any;
-var replace : any;
-var search : any;
+var user: any;
+var title: any;
+var replace: any;
+var search: any;
 
 presence.on("UpdateData", async () => {
-
-
   let presenceData: presenceData = {
     largeImageKey: "bs"
   };
@@ -25,7 +22,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
-    } else if (document.location.pathname.includes("/serie/")){
+    } else if (document.location.pathname.includes("/serie/")) {
       presenceData.startTimestamp = browsingStamp;
       user = document.querySelector("#sp_left > h2");
       presenceData.details = "Viewing serie:";
@@ -35,7 +32,9 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing all series";
     } else if (document.location.pathname.includes("/search")) {
-      search = document.querySelector("#root > section > form > fieldset > label:nth-child(1) > input[type=text]");
+      search = document.querySelector(
+        "#root > section > form > fieldset > label:nth-child(1) > input[type=text]"
+      );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for:";
       presenceData.state = search.value;
@@ -43,52 +42,68 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname == "board.bs.to") {
     if (document.URL.includes("/topic/")) {
-          title = document.querySelector("#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span.ipsType_break.ipsContained > span");
-          presenceData.details = "Forums, viewing thread:";
-          if (title.innerText.length > 128) {
-            presenceData.state = title.innerText.substring(0, 125) + "...";
-          } else {
-            presenceData.state = title.innerText;
-          }
-          presenceData.smallImageKey = "reading";
-          presence.setActivity(presenceData);
-      } else if (document.URL.includes("/trending/")) {
-        presenceData.details = "Forums, Viewing the list of";
-        presenceData.state = "trending threads";
+      title = document.querySelector(
+        "#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > div.ipsPhotoPanel.ipsPhotoPanel_small.ipsPhotoPanel_notPhone.ipsClearfix > div > h1 > span.ipsType_break.ipsContained > span"
+      );
+      presenceData.details = "Forums, viewing thread:";
+      if (title.innerText.length > 128) {
+        presenceData.state = title.innerText.substring(0, 125) + "...";
+      } else {
+        presenceData.state = title.innerText;
+      }
+      presenceData.smallImageKey = "reading";
+      presence.setActivity(presenceData);
+    } else if (document.URL.includes("/trending/")) {
+      presenceData.details = "Forums, Viewing the list of";
+      presenceData.state = "trending threads";
 
-        delete presenceData.smallImageKey;
+      delete presenceData.smallImageKey;
 
-        presence.setActivity(presenceData);
-      } else if (document.URL.includes("/profile")) {
-        user = document.querySelector("#elProfileHeader > div.ipsColumns.ipsColumns_collapsePhone > div.ipsColumn.ipsColumn_fluid > div > h1");
-        presenceData.details = "Viewing the profile of:";
-        presenceData.state = user.innerText;
+      presence.setActivity(presenceData);
+    } else if (document.URL.includes("/profile")) {
+      user = document.querySelector(
+        "#elProfileHeader > div.ipsColumns.ipsColumns_collapsePhone > div.ipsColumn.ipsColumn_fluid > div > h1"
+      );
+      presenceData.details = "Viewing the profile of:";
+      presenceData.state = user.innerText;
 
-        delete presenceData.smallImageKey;
+      delete presenceData.smallImageKey;
 
-        presence.setActivity(presenceData);
-      } else if (document.URL.includes("/whats-new/") && document.URL.includes("/profile-posts")) {
-        presenceData.details = "Forums, Viewing the list of";
-        presenceData.state = "latest profile posts";
+      presence.setActivity(presenceData);
+    } else if (
+      document.URL.includes("/whats-new/") &&
+      document.URL.includes("/profile-posts")
+    ) {
+      presenceData.details = "Forums, Viewing the list of";
+      presenceData.state = "latest profile posts";
 
-        delete presenceData.smallImageKey;
+      delete presenceData.smallImageKey;
 
-        presence.setActivity(presenceData);
-    } else if (document.URL.includes("/whats-new/") && document.URL.includes("/posts")) {
-        presenceData.details = "Forums, Viewing the list of";
-        presenceData.state = "latest posts";
+      presence.setActivity(presenceData);
+    } else if (
+      document.URL.includes("/whats-new/") &&
+      document.URL.includes("/posts")
+    ) {
+      presenceData.details = "Forums, Viewing the list of";
+      presenceData.state = "latest posts";
 
-        delete presenceData.smallImageKey;
+      delete presenceData.smallImageKey;
 
-        presence.setActivity(presenceData);
-    } else if (document.URL.includes("/whats-new/") && document.URL.includes("/news-feed")) {
+      presence.setActivity(presenceData);
+    } else if (
+      document.URL.includes("/whats-new/") &&
+      document.URL.includes("/news-feed")
+    ) {
       presenceData.details = "Forums, Viewing the";
       presenceData.state = "news feed";
 
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
-    } else if (document.URL.includes("/whats-new/") && document.URL.includes("/news-feed")) {
+    } else if (
+      document.URL.includes("/whats-new/") &&
+      document.URL.includes("/news-feed")
+    ) {
       presenceData.details = "Forums, Viewing the";
       presenceData.state = "latest activity";
 
@@ -103,124 +118,128 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (document.URL.includes("/watched/")) {
-        if (document.URL.includes("/threads")) {
-          presenceData.details = "Forums, Viewing their";
-          presenceData.state = "watched threads";
+      if (document.URL.includes("/threads")) {
+        presenceData.details = "Forums, Viewing their";
+        presenceData.state = "watched threads";
 
-          delete presenceData.smallImageKey;
+        delete presenceData.smallImageKey;
 
-          presence.setActivity(presenceData);
-        } else {
-          presenceData.details = "Forums, Viewing their";
-          presenceData.state = "watched forums";
+        presence.setActivity(presenceData);
+      } else {
+        presenceData.details = "Forums, Viewing their";
+        presenceData.state = "watched forums";
 
-          delete presenceData.smallImageKey;
+        delete presenceData.smallImageKey;
 
-          presence.setActivity(presenceData);
-        }
-      } else if (document.URL.includes("/search/")) {
-        search = document.querySelector("#ipsLayout_mainArea > div > div.ipsResponsive_hidePhone.ipsResponsive_block.ipsPageHeader > p");
-        if (search != null) {
-          presenceData.details = "Forums, searching for:";
-          presenceData.state = search.innerText.replace("Showing results for '","").replace("'.","");
+        presence.setActivity(presenceData);
+      }
+    } else if (document.URL.includes("/search/")) {
+      search = document.querySelector(
+        "#ipsLayout_mainArea > div > div.ipsResponsive_hidePhone.ipsResponsive_block.ipsPageHeader > p"
+      );
+      if (search != null) {
+        presenceData.details = "Forums, searching for:";
+        presenceData.state = search.innerText
+          .replace("Showing results for '", "")
+          .replace("'.", "");
 
-          presenceData.smallImageKey = "search";
+        presenceData.smallImageKey = "search";
 
-          presence.setActivity(presenceData);
-        } else {
-          presenceData.details = "Forums, about to search";
-          presenceData.state = "something up";
+        presence.setActivity(presenceData);
+      } else {
+        presenceData.details = "Forums, about to search";
+        presenceData.state = "something up";
 
-          presenceData.smallImageKey = "search";
+        presenceData.smallImageKey = "search";
 
-          presence.setActivity(presenceData);
-        }
+        presence.setActivity(presenceData);
+      }
     } else if (document.URL.includes("/account/")) {
-        presenceData.details = "Forums, account settings";
+      presenceData.details = "Forums, account settings";
+      delete presenceData.state;
+
+      delete presenceData.smallImageKey;
+
+      presence.setActivity(presenceData);
+    } else if (document.URL.includes("/members/")) {
+      if (document.URL.includes("key=staff_members")) {
+        presenceData.details = "Viewing the list";
+        presenceData.state = "of staff members";
+
+        delete presenceData.smallImageKey;
+
+        presence.setActivity(presenceData);
+      } else if (document.URL.includes("key=todays_birthdays")) {
+        presenceData.details = "Viewing list of members";
+        presenceData.state = "with today as their birthday";
+
+        delete presenceData.smallImageKey;
+
+        presence.setActivity(presenceData);
+      } else if (document.URL.includes("/banned")) {
+        presenceData.details = "Viewing the list";
+        presenceData.state = "of banned users";
+
+        delete presenceData.smallImageKey;
+
+        presence.setActivity(presenceData);
+      } else if (document.URL.includes("/list")) {
+        presenceData.details = "Viewing the list";
+        presenceData.state = "of all users";
+
+        delete presenceData.smallImageKey;
+
+        presence.setActivity(presenceData);
+      } else if (document.URL.includes("key=most_likes")) {
+        presenceData.details = "Viewing list of members";
+        presenceData.state = "with the most reactions";
+
+        delete presenceData.smallImageKey;
+
+        presence.setActivity(presenceData);
+      } else if (document.URL.includes("key=most_messages")) {
+        presenceData.details = "Viewing list of members";
+        presenceData.state = "with the most messages";
+
+        delete presenceData.smallImageKey;
+
+        presence.setActivity(presenceData);
+      } else {
+        presenceData.details = "Viewing overview of members";
         delete presenceData.state;
 
         delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
-      } else if (document.URL.includes("/members/")) {
-        if (document.URL.includes("key=staff_members")) {
-            presenceData.details = "Viewing the list";
-            presenceData.state = "of staff members";
-
-            delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);  
-        } else if (document.URL.includes("key=todays_birthdays")) {
-            presenceData.details = "Viewing list of members";
-            presenceData.state = "with today as their birthday";
-
-            delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);  
-        } else if (document.URL.includes("/banned")) {
-            presenceData.details = "Viewing the list";
-            presenceData.state = "of banned users";
-
-            delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);
-        } else if (document.URL.includes("/list")) {
-            presenceData.details = "Viewing the list";
-            presenceData.state = "of all users";
-
-            delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);
-        } else if (document.URL.includes("key=most_likes")) {
-            presenceData.details = "Viewing list of members";
-            presenceData.state = "with the most reactions";
-
-            delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);  
-        } else if (document.URL.includes("key=most_messages")) {
-          presenceData.details = "Viewing list of members";
-          presenceData.state = "with the most messages";
-
-          delete presenceData.smallImageKey;
-
-          presence.setActivity(presenceData);  
-        } else {
-            presenceData.details = "Viewing overview of members";
-            delete presenceData.state;
-  
-            delete presenceData.smallImageKey;
-
-            presence.setActivity(presenceData);
-        }
-      } else if (document.URL.includes("/forum/")) {
-          title = document.querySelector("#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > header > h1");
-        if (title != null) {
-          presenceData.details = "Forums, viewing category:";
-          presenceData.state = title.innerText;
-        } else {
-          presenceData.details = "Forums, Browsing...";  
-        }
       }
+    } else if (document.URL.includes("/forum/")) {
+      title = document.querySelector(
+        "#ipsLayout_mainArea > div.ipsPageHeader.ipsClearfix > header > h1"
+      );
+      if (title != null) {
+        presenceData.details = "Forums, viewing category:";
+        presenceData.state = title.innerText;
+      } else {
+        presenceData.details = "Forums, Browsing...";
+      }
+    }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
-
 });
 
-
 /**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
 function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }

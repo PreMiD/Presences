@@ -1,6 +1,5 @@
 var presence = new Presence({
-  clientId: "689724677274337290",
-  mediaKeys: false
+  clientId: "689724677274337290"
 });
 
 let timeElapsed = Math.floor(Date.now() / 1000),
@@ -12,7 +11,9 @@ let timeElapsed = Math.floor(Date.now() / 1000),
   artistName;
 
 presence.on("UpdateData", async () => {
-  songName = document.querySelector("span#cardTitle.card-title.playerText.truncate");
+  songName = document.querySelector(
+    "span#cardTitle.card-title.playerText.truncate"
+  );
   albumName = document.querySelector("p#cardAlbum.playerText.truncate");
   artistName = document.querySelector("p#cardArtist.playerText.truncate");
   if (albumName.innerText == "Press the Play button to start the radio") {

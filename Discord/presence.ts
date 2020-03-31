@@ -1,20 +1,32 @@
 var presence = new Presence({
-  clientId: "616940877042155531", // CLIENT ID FOR YOUR PRESENCE
-  mediaKeys: false
-})
+  clientId: "616940877042155531" // CLIENT ID FOR YOUR PRESENCE
+});
 
-var user : any, group : any, typing : any, typingicon : any, card : any, connected : any, apptitle : any, lastData: any, thisData: any, lastStamp: any;
+var user: any,
+  group: any,
+  typing: any,
+  typingicon: any,
+  card: any,
+  connected: any,
+  apptitle: any,
+  lastData: any,
+  thisData: any,
+  lastStamp: any;
 
 presence.on("UpdateData", async () => {
   let presenceData: presenceData = {
     largeImageKey: "discordwhite"
   };
-  connected = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div");
-  apptitle = document.querySelector('.appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi');
+  connected = document.querySelector(
+    "#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div"
+  );
+  apptitle = document.querySelector(
+    ".appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi"
+  );
   typingicon = "﻿";
 
   if (document.location.hostname == "discordapp.com") {
-    if(connected !== null && connected.textContent !== "") {
+    if (connected !== null && connected.textContent !== "") {
       presenceData.startTimestamp = getTimeStamp();
       presenceData.smallImageKey = "call";
       if (connected.textContent.includes("@")) {
@@ -22,18 +34,36 @@ presence.on("UpdateData", async () => {
         presenceData.state = connected.textContent;
       } else {
         presenceData.details = "Voice connected to";
-        presenceData.state = connected.textContent.replace(" / " + connected.textContent.split(" / ").pop(), "") + " (Server: " + connected.textContent.split(" / ").pop() + ")";
+        presenceData.state =
+          connected.textContent.replace(
+            " / " + connected.textContent.split(" / ").pop(),
+            ""
+          ) +
+          " (Server: " +
+          connected.textContent.split(" / ").pop() +
+          ")";
       }
-    } else if (document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div:nth-child(2) > div:nth-child(3) > div > div.sidebarRegion-VFTUkN > div > div > nav > div > div:nth-child(1)") !== null) {
+    } else if (
+      document.querySelector(
+        "#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div:nth-child(2) > div:nth-child(3) > div > div.sidebarRegion-VFTUkN > div > div > nav > div > div:nth-child(1)"
+      ) !== null
+    ) {
       presenceData.details = "Changing their settings";
       presenceData.smallImageKey = "writing";
       presenceData.startTimestamp = getTimeStamp();
-    } else if(document.location.pathname.includes("/channels/@me/")) {
-      typing = document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.content-yTz4x3 > div > form > div > div > div > div.textArea-12jD-V.slateContainer-3Qkn2x > div.markup-2BOw-j.slateTextArea-1Mkdgw").textContent !== typingicon;
-      user = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > h3");
-      group = document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.title-3qD0b-.container-1r6BKw.themed-ANHk51 > div.children-19S4PO > div.container-3FPLD3 > div > div > div");
+    } else if (document.location.pathname.includes("/channels/@me/")) {
+      typing =
+        document.querySelector(
+          "#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.content-yTz4x3 > div > form > div > div > div > div.textArea-12jD-V.slateContainer-3Qkn2x > div.markup-2BOw-j.slateTextArea-1Mkdgw"
+        ).textContent !== typingicon;
+      user = document.querySelector(
+        "#app-mount > div > div > div > div > div > div > div > div > div > div > h3"
+      );
+      group = document.querySelector(
+        "#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.title-3qD0b-.container-1r6BKw.themed-ANHk51 > div.children-19S4PO > div.container-3FPLD3 > div > div > div"
+      );
       if (user !== null) {
-        if (typing){
+        if (typing) {
           presenceData.details = "Typing in DMs to:";
           presenceData.state = user.textContent;
           presenceData.smallImageKey = "writing";
@@ -45,10 +75,10 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = getTimeStamp();
         }
       } else if (group !== null) {
-        if (typing){
+        if (typing) {
           presenceData.details = "Typing in group DM: ";
           presenceData.state = group.textContent;
-          presenceData.smallImageKey = "writing"
+          presenceData.smallImageKey = "writing";
           presenceData.startTimestamp = getTimeStamp();
         } else {
           presenceData.details = "Reading groups DMs of:";
@@ -64,36 +94,50 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing through the store";
       presenceData.startTimestamp = getTimeStamp();
     } else if (document.location.pathname.includes("/channels/")) {
-      group = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > header > h1");
-      typing = document.querySelector("#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.content-yTz4x3 > div.chatContent-a9vAAp > form > div > div > div > div.textArea-12jD-V.slateContainer-3Qkn2x > div.markup-2BOw-j.slateTextArea-1Mkdgw");
+      group = document.querySelector(
+        "#app-mount > div > div > div > div > div > div > div > div > div > div > header > h1"
+      );
+      typing = document.querySelector(
+        "#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.content-yTz4x3 > div.chatContent-a9vAAp > form > div > div > div > div.textArea-12jD-V.slateContainer-3Qkn2x > div.markup-2BOw-j.slateTextArea-1Mkdgw"
+      );
       if (typing == null) {
         typing = false;
       } else {
         typing = typing.textContent !== typingicon;
       }
-      card = document.querySelector("#app-mount > div > div > div > div > div > div > div > div > div > div > h3");
-      if (typing){
+      card = document.querySelector(
+        "#app-mount > div > div > div > div > div > div > div > div > div > div > h3"
+      );
+      if (typing) {
         presenceData.details = "Typing in channel: ";
-        presenceData.state = "#" + card.textContent + " (Server: " + group.textContent + ")";
+        presenceData.state =
+          "#" + card.textContent + " (Server: " + group.textContent + ")";
         presenceData.smallImageKey = "writing";
         presenceData.startTimestamp = getTimeStamp();
       } else {
         presenceData.details = "Reading messages in channel:";
-        presenceData.state = "#" + card.textContent + " (Server: " + group.textContent + ")";
+        presenceData.state =
+          "#" + card.textContent + " (Server: " + group.textContent + ")";
         presenceData.smallImageKey = "reading";
         presenceData.startTimestamp = getTimeStamp();
-      } 
-    } else if (document.location.pathname.includes("/developers/applications/")) {
+      }
+    } else if (
+      document.location.pathname.includes("/developers/applications/")
+    ) {
       presenceData.details = "Developer Portal";
       presenceData.state = "Editing app: " + apptitle.textContent;
       presenceData.smallImageKey = "writing";
       presenceData.startTimestamp = getTimeStamp();
-    } else if (document.location.pathname.includes("/developers/applications")) {
+    } else if (
+      document.location.pathname.includes("/developers/applications")
+    ) {
       presenceData.details = "Developer Portal";
       presenceData.state = "Browsing through apps";
       presenceData.startTimestamp = getTimeStamp();
     } else if (document.location.pathname.includes("/developers/teams")) {
-      group = document.querySelector("div.label-1RJQNH.small.weightMedium-3xlxJi");
+      group = document.querySelector(
+        "div.label-1RJQNH.small.weightMedium-3xlxJi"
+      );
       if (group !== null) {
         presenceData.details = "Developer Portal";
         presenceData.state = "Editing team: " + group.textContent;
@@ -174,7 +218,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/invite")) {
       presenceData.details = "Viewing invite:";
       presenceData.startTimestamp = getTimeStamp();
-      apptitle = document.URL.split("/")[4]
+      apptitle = document.URL.split("/")[4];
       if (apptitle.includes("?")) {
         presenceData.state = apptitle.split("?")[0];
       } else {
@@ -189,7 +233,9 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = getTimeStamp();
   } else if (document.location.hostname == "support.discordapp.com") {
     if (document.location.pathname.includes("/topics/")) {
-      group = document.querySelector("body > main > div.container > header > h1");
+      group = document.querySelector(
+        "body > main > div.container > header > h1"
+      );
       presenceData.details = "Discord Support";
       presenceData.state = "Browsing Topic: " + group.textContent;
       presenceData.startTimestamp = getTimeStamp();
@@ -198,13 +244,17 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Browsing through topics";
       presenceData.startTimestamp = getTimeStamp();
     } else if (document.location.pathname.includes("/search")) {
-      group = document.querySelector("body > main > div.container > header > p");
-      user= group.textContent.split(" ", 5)
+      group = document.querySelector(
+        "body > main > div.container > header > p"
+      );
+      user = group.textContent.split(" ", 5);
       presenceData.details = "Discord Support";
       presenceData.state = "Searching for: " + user[3];
       presenceData.startTimestamp = getTimeStamp();
     } else if (document.location.pathname.includes("/articles")) {
-      group = document.querySelector("#article-container > article > header > h1");
+      group = document.querySelector(
+        "#article-container > article > header > h1"
+      );
       presenceData.details = "Discord Support";
       presenceData.state = "Reading article: " + group.textContent;
       presenceData.smallImageKey = "reading";
@@ -227,16 +277,18 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Browsing the archive";
       presenceData.startTimestamp = getTimeStamp();
     } else if (document.location.pathname.includes("/")) {
-      group = document.querySelector("#root > div > article > div > section > div > div > div > h1");
+      group = document.querySelector(
+        "#root > div > article > div > section > div > div > div > h1"
+      );
       if (group !== null) {
         presenceData.details = "Discord Blog";
         presenceData.state = "Reading: " + group.textContent;
         presenceData.smallImageKey = "reading";
         presenceData.startTimestamp = getTimeStamp();
-      } else { 
+      } else {
         presenceData.details = "Discord Blog";
         presenceData.startTimestamp = getTimeStamp();
-      } 
+      }
     }
   } else if (document.location.hostname == "merch.discordapp.com") {
     presenceData.details = "Discord Merch";
@@ -255,16 +307,15 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
     lastData = null;
   }
-function getTimeStamp() {
-var browsingStamp: any;
-thisData = presenceData.details;
-if (lastData == thisData) {
-  browsingStamp = lastStamp;
-} else {
-  lastStamp = Math.floor(Date.now()/1000);
-  browsingStamp = Math.floor(Date.now()/1000);
-}
-return browsingStamp;
-}
-
+  function getTimeStamp() {
+    var browsingStamp: any;
+    thisData = presenceData.details;
+    if (lastData == thisData) {
+      browsingStamp = lastStamp;
+    } else {
+      lastStamp = Math.floor(Date.now() / 1000);
+      browsingStamp = Math.floor(Date.now() / 1000);
+    }
+    return browsingStamp;
+  }
 });
