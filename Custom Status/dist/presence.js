@@ -1,13 +1,8 @@
 const presence = new Presence({
-  clientId: "673651706139246612"
+  clientId: "673651706139246612",
 });
 
-presence.on("UpdateData", () => {
-  document.querySelector("#__nuxt") &&
-  !document.querySelector("#__nuxt").classList.contains("presence")
-    ? document.querySelector("#__nuxt").classList.add("presence")
-    : false;
-
+presence.on("UpdateData", async () => {
   const objectElement = document.querySelector("#object");
 
   if (

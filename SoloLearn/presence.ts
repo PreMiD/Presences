@@ -1,8 +1,8 @@
 var presence = new Presence({
-  clientId: '668173626775830529'
+  clientId: "668173626775830529"
 });
 var strings = presence.getStrings({
-  browsing: 'presence.activity.browsing'
+  browsing: "presence.activity.browsing"
 });
 
 var oldUrl, elapsed;
@@ -10,48 +10,48 @@ var oldUrl, elapsed;
 var data: presenceData = {
   details: undefined,
   state: undefined,
-  largeImageKey: 'sololearn',
+  largeImageKey: "sololearn",
   smallImageKey: undefined,
   smallImageText: undefined,
   startTimestamp: undefined,
   endTimestamp: undefined
 };
 
-presence.on('UpdateData', async () => {
+presence.on("UpdateData", async () => {
   const static = {
-    '/': {
-      details: 'Browsing',
-      state: 'Homepage'
+    "/": {
+      details: "Browsing",
+      state: "Homepage"
     },
-    '/User/Login': {
-      details: 'Logging in...'
+    "/User/Login": {
+      details: "Logging in..."
     },
-    '/User/Register': {
-      details: 'Registering...'
+    "/User/Register": {
+      details: "Registering..."
     },
-    '/User/Edit': {
-      details: 'Editing profile...'
+    "/User/Edit": {
+      details: "Editing profile..."
     },
-    '/Features': {
-      details: 'Browsing',
-      state: 'Features'
+    "/Features": {
+      details: "Browsing",
+      state: "Features"
     },
-    '/Contact': {
-      details: 'Browsing',
-      state: 'Contact'
+    "/Contact": {
+      details: "Browsing",
+      state: "Contact"
     },
-    '/Terms-of-Use': {
-      details: 'Browsing',
-      state: 'Terms of Use'
+    "/Terms-of-Use": {
+      details: "Browsing",
+      state: "Terms of Use"
     },
-    '/faq': {
-      details: 'Browsing',
-      state: 'FAQ'
+    "/faq": {
+      details: "Browsing",
+      state: "FAQ"
     }
   };
 
   const host = location.host;
-  const path = location.pathname.replace(/\/$/, '');
+  const path = location.pathname.replace(/\/$/, "");
 
   if (oldUrl !== host) {
     oldUrl = host;
@@ -66,25 +66,25 @@ presence.on('UpdateData', async () => {
     data = { ...data, ...static[path] };
   }
 
-  if (path.match('/Certificate')) {
-    data.details = 'Viewing Certificate';
+  if (path.match("/Certificate")) {
+    data.details = "Viewing Certificate";
   }
 
-  const play = path.match('/Play/(.*)');
+  const play = path.match("/Play/(.*)");
   if (play) {
-    data.details = 'Learning';
+    data.details = "Learning";
 
     var course = play[1];
-    course = course.replace(/Plus/g, '+');
+    course = course.replace(/Plus/g, "+");
 
     data.state = course;
   }
 
-  if (path.match('/Profile')) {
-    data.details = 'Viewing Profile';
+  if (path.match("/Profile")) {
+    data.details = "Viewing Profile";
 
-    const name = getElement('.name');
-    const course = getElement('div.course .name');
+    const name = getElement(".name");
+    const course = getElement("div.course .name");
 
     if (name) {
       if (course) {
@@ -95,73 +95,73 @@ presence.on('UpdateData', async () => {
     }
   }
 
-  if (path.match('/Course')) {
-    data.details = 'Viewing Course';
+  if (path.match("/Course")) {
+    data.details = "Viewing Course";
 
-    const name = getElement('.courseDescription > h1');
+    const name = getElement(".courseDescription > h1");
     if (name) {
       data.state = name;
     }
   }
 
-  if (path.match('/Courses')) {
-    data.details = 'Viewing Courses';
+  if (path.match("/Courses")) {
+    data.details = "Viewing Courses";
   }
 
-  if (path.match('/Codes')) {
-    data.details = 'Viewing Codes';
+  if (path.match("/Codes")) {
+    data.details = "Viewing Codes";
 
-    const tab = getElement('.tab.active');
+    const tab = getElement(".tab.active");
     if (tab) {
       data.state = tab;
     }
   }
 
-  if (host.match('code.sololearn.com')) {
-    data.details = 'Viewing Code';
+  if (host.match("code.sololearn.com")) {
+    data.details = "Viewing Code";
 
-    const name = getElement('.codeName');
+    const name = getElement(".codeName");
     if (name) {
       data.state = name;
     }
   }
 
-  if (path.match('/Discuss')) {
-    data.details = 'Viewing Discussions';
+  if (path.match("/Discuss")) {
+    data.details = "Viewing Discussions";
 
-    const name = getElement('.question .header');
+    const name = getElement(".question .header");
     if (name) {
-      data.details = 'Viewing Discussion';
+      data.details = "Viewing Discussion";
       data.state = name;
     }
 
-    const tab = getElement('.tab.active');
+    const tab = getElement(".tab.active");
     if (tab) {
       data.state = tab;
     }
   }
 
-  if (path.match('/Leaderboard')) {
-    data.details = 'Viewing Leaderboard';
+  if (path.match("/Leaderboard")) {
+    data.details = "Viewing Leaderboard";
 
-    const type = getElement('.nameTitle');
+    const type = getElement(".nameTitle");
     if (type) {
       data.state = type;
     }
   }
 
-  if (path.match('/Blog')) {
-    data.details = 'Viewing Blog';
+  if (path.match("/Blog")) {
+    data.details = "Viewing Blog";
 
-    const name = getElement('.articleTitle');
+    const name = getElement(".articleTitle");
     if (name) {
       data.state = name;
     }
   }
 
   if (data !== null && data.details !== undefined) {
-    if (data.details.match('(Viewing|Browsing)')) {
-      data.smallImageKey = 'reading';
+    if (data.details.match("(Viewing|Browsing)")) {
+      data.smallImageKey = "reading";
       data.smallImageText = (await strings).browsing;
     }
 

@@ -1,34 +1,10 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
-    clientId: "463151177836658699",
-    mediaKeys: true
+    clientId: "463151177836658699"
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
 });
-presence.on("MediaKeys", (key) => {
-    switch (key) {
-        case "pause": {
-            var video = document.querySelector(".video-stream");
-            video.paused ? video.play() : video.pause();
-            break;
-        }
-        case "nextTrack":
-            document.querySelector(".next-button").click();
-            break;
-        case "previousTrack":
-            document.querySelector(".previous-button").click();
-            break;
-    }
-});
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+presence.on("UpdateData", async () => {
     var title = document.querySelector(".ytmusic-player-bar.title").innerText, video = document.querySelector(".video-stream");
     if (title !== "" && !isNaN(video.duration)) {
         var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), presenceData = {
@@ -37,8 +13,8 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             largeImageKey: "ytm_lg",
             smallImageKey: video.paused ? "pause" : "play",
             smallImageText: video.paused
-                ? (yield strings).pause
-                : (yield strings).play,
+                ? (await strings).pause
+                : (await strings).play,
             startTimestamp: timestamps[0],
             endTimestamp: timestamps[1]
         };
@@ -53,7 +29,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else
         presence.setActivity();
-}));
+});
 function getAuthorString() {
     var authors = document.querySelectorAll("span yt-formatted-string.ytmusic-player-bar a"), authorsArray, authorString;
     if (authors.length > 1) {
@@ -74,3 +50,4 @@ function getTimestamps(videoTime, videoDuration) {
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
 }
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUN4QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsRUFDRixPQUFPLEdBQVEsUUFBUSxDQUFDLFVBQVUsQ0FBQztJQUNqQyxJQUFJLEVBQUUsMkJBQTJCO0lBQ2pDLEtBQUssRUFBRSwwQkFBMEI7Q0FDbEMsQ0FBQyxDQUFDO0FBRUwsUUFBUSxDQUFDLEVBQUUsQ0FBQyxZQUFZLEVBQUUsS0FBSyxJQUFJLEVBQUU7SUFDbkMsSUFBSSxLQUFLLEdBQUksUUFBUSxDQUFDLGFBQWEsQ0FDL0IsMkJBQTJCLENBQ1osQ0FBQyxTQUFTLEVBQzNCLEtBQUssR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLGVBQWUsQ0FBcUIsQ0FBQztJQUV0RSxJQUFJLEtBQUssS0FBSyxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxFQUFFO1FBQzFDLElBQUksVUFBVSxHQUFHLGFBQWEsQ0FDMUIsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsV0FBVyxDQUFDLEVBQzdCLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxDQUMzQixFQUNELFlBQVksR0FBaUI7WUFDM0IsT0FBTyxFQUFFLEtBQUs7WUFDZCxLQUFLLEVBQUUsZUFBZSxFQUFFO1lBQ3hCLGFBQWEsRUFBRSxRQUFRO1lBQ3ZCLGFBQWEsRUFBRSxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLE1BQU07WUFDOUMsY0FBYyxFQUFFLEtBQUssQ0FBQyxNQUFNO2dCQUMxQixDQUFDLENBQUMsQ0FBQyxNQUFNLE9BQU8sQ0FBQyxDQUFDLEtBQUs7Z0JBQ3ZCLENBQUMsQ0FBQyxDQUFDLE1BQU0sT0FBTyxDQUFDLENBQUMsSUFBSTtZQUN4QixjQUFjLEVBQUUsVUFBVSxDQUFDLENBQUMsQ0FBQztZQUM3QixZQUFZLEVBQUUsVUFBVSxDQUFDLENBQUMsQ0FBQztTQUM1QixDQUFDO1FBRUosSUFBSSxLQUFLLENBQUMsTUFBTSxFQUFFO1lBQ2hCLE9BQU8sWUFBWSxDQUFDLGNBQWMsQ0FBQztZQUNuQyxPQUFPLFlBQVksQ0FBQyxZQUFZLENBQUM7WUFDakMsUUFBUSxDQUFDLFlBQVksRUFBRSxDQUFDO1NBQ3pCOztZQUFNLFFBQVEsQ0FBQyxZQUFZLENBQUMsS0FBSyxDQUFDLENBQUM7UUFFcEMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsQ0FBQztLQUNwQzs7UUFBTSxRQUFRLENBQUMsV0FBVyxFQUFFLENBQUM7QUFDaEMsQ0FBQyxDQUFDLENBQUM7QUFFSCxTQUFTLGVBQWU7SUFFdEIsSUFBSSxPQUFPLEdBQUcsUUFBUSxDQUFDLGdCQUFnQixDQUNuQywrQ0FBK0MsQ0FDZixFQUNsQyxZQUFzQyxFQUN0QyxZQUFvQixDQUFDO0lBR3ZCLElBQUksT0FBTyxDQUFDLE1BQU0sR0FBRyxDQUFDLEVBQUU7UUFFdEIsSUFBSSxJQUFJLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FDL0IsOENBQThDLENBQy9DLENBQUMsV0FBVyxDQUFDO1FBQ2QsSUFBSSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLE1BQU0sR0FBRyxDQUFDLEVBQUUsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBR2hELFlBQVksR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBR25DLFlBQVksR0FBRyxHQUFHLFlBQVk7YUFDM0IsS0FBSyxDQUFDLENBQUMsRUFBRSxZQUFZLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQzthQUNqQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUFDO2FBQ3JCLElBQUksQ0FBQyxJQUFJLENBQUMsTUFDWCxZQUFZLENBQUMsWUFBWSxDQUFDLE1BQU0sR0FBRyxDQUFDLENBQUMsQ0FBQyxTQUN4QyxLQUFLLElBQUksR0FBRyxDQUFDO0tBQ2Q7O1FBR0MsWUFBWSxHQUFJLFFBQVEsQ0FBQyxhQUFhLENBQ3BDLDZDQUE2QyxDQUN4QixDQUFDLFNBQVMsQ0FBQztJQUVwQyxPQUFPLFlBQVksQ0FBQztBQUN0QixDQUFDO0FBT0QsU0FBUyxhQUFhLENBQUMsU0FBaUIsRUFBRSxhQUFxQjtJQUM3RCxJQUFJLFNBQVMsR0FBRyxJQUFJLENBQUMsR0FBRyxFQUFFLENBQUM7SUFDM0IsSUFBSSxPQUFPLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLEdBQUcsU0FBUyxHQUFHLGFBQWEsQ0FBQztJQUN2RSxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLEVBQUUsT0FBTyxDQUFDLENBQUM7QUFDakQsQ0FBQyJ9
