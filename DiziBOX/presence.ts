@@ -31,7 +31,7 @@ presence.on("iFrameData", data => {
   }
 });
 
-presence.on("UpdateData", () => async () => {
+presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     isVideoData = Object.keys(video).length > 0 ? true : false,
     _video = document.querySelector("video");

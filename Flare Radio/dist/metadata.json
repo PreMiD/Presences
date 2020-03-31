@@ -8,10 +8,13 @@
     "en": "Flare is an online radio community playing you the biggest tunes from around the globe all the time."
   },
   "url": "flareradio.net",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "logo": "https://i.imgur.com/xcawQBf.png",
   "thumbnail": "https://i.imgur.com/5ZtrzDG.png",
   "color": "#663399",
-  "tags": ["flare", "radio"],
+  "tags": [
+    "flare",
+    "radio"
+  ],
   "category": "music"
 }

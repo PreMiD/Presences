@@ -13,10 +13,14 @@
     "nl": "Giphy is een GIF-zoek- en creatiesysteem."
   },
   "url": "giphy.com",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "logo": "https://giphy.com/static/img/giphy_logo_square_social.png",
   "thumbnail": "https://cdn.discordapp.com/attachments/622477468653060099/631283423948046366/unknown.png",
   "color": "#00FF00",
-  "tags": ["Gif", "Editor", "Creator"],
+  "tags": [
+    "Gif",
+    "Editor",
+    "Creator"
+  ],
   "category": "other"
 }

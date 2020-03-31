@@ -29,7 +29,7 @@ const presence = new Presence({
     "/Hesabim/Favoriler": "Favoriler"
   };
 
-presence.on("UpdateData", () => async () => {
+presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     category =
       document.querySelector(

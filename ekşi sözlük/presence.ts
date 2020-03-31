@@ -15,7 +15,7 @@ const presence = new Presence({
     "/modlog": "Modlog"
   };
 
-presence.on("UpdateData", () => async () => {
+presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     entry = document.querySelector("#title > a > span");
 

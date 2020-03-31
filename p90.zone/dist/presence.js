@@ -1,8 +1,7 @@
 let presence = new Presence({
-  clientId: "633714339999645737",
-  mediaKeys: false
+  clientId: "633714339999645737"
 });
-presence.on("UpdateData", () => async () => {
+presence.on("UpdateData", async () => {
   let ts = document.querySelector("body > div.menu.main > div > h2")
     .textContent;
   const video = document.querySelector("video");

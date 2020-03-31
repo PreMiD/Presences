@@ -73,7 +73,7 @@ const presence = new Presence({
     "/en": "English Homepage"
   };
 
-presence.on("UpdateData", () => async () => {
+presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     searchingFor =
       document.querySelector(

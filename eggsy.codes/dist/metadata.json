@@ -10,10 +10,13 @@
   },
   "url": "eggsy.codes",
   "regExp": "eggsy[.]codes(?!\\/projects\\/premid\\/custom-status)",
-  "version": "1.0.2.2",
+  "version": "1.1.0",
   "logo": "https://premid.is-inside.me/L7cXeX83.jpg",
   "thumbnail": "https://premid.is-inside.me/pTbIrxn7.png",
   "color": "#212121",
-  "tags": ["eggsy", "premid"],
+  "tags": [
+    "eggsy",
+    "premid"
+  ],
   "category": "other"
 }

@@ -8,10 +8,14 @@
     "en": "Fraud prevention, scam prevention and Discord safety brought to you by UserCord."
   },
   "url": "usercord.org",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "logo": "https://i.imgur.com/cVIFD4l.png",
   "thumbnail": "https://i.imgur.com/K7XK8SV.png",
   "color": "#00ff00",
-  "tags": ["Users", "Discord", "List"],
+  "tags": [
+    "Users",
+    "Discord",
+    "List"
+  ],
   "category": "other"
 }

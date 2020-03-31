@@ -13,11 +13,18 @@
     "uk": "Dream Animes - це бразильський веб-сайт, який забезпечує місце для перегляду безкоштовного аніме контенту, як в Інтернеті, так і в автономному режимі без будь-якої дратуючої реклами.",
     "nl": "Dream Animes is een braziliaanse website die een plek bied om gratis anime te bekijken, zowel online als offline en zonder misbruik van advertenties."
   },
-  "url": ["www.dreamanimes.com.br", "www.myotakulist.com"],
-  "version": "3.0.2.2",
+  "url": [
+    "www.dreamanimes.com.br",
+    "www.myotakulist.com"
+  ],
+  "version": "3.1.0",
   "logo": "https://i.imgur.com/iwQt7Zu.png",
   "thumbnail": "https://i.imgur.com/RbXnJIO.png",
   "color": "#1997c6",
-  "tags": ["video", "media", "anime"],
+  "tags": [
+    "video",
+    "media",
+    "anime"
+  ],
   "category": "anime"
 }

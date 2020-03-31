@@ -16,7 +16,7 @@ const presence = new Presence({
     "/profile": "Profilim"
   };
 
-presence.on("UpdateData", () => async () => {
+presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     video = document.querySelector("video") as HTMLVideoElement,
     showTitle = document.querySelector(

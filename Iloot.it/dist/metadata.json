@@ -7,11 +7,16 @@
   "description": {
     "en": "iLoot.it is an earnings platform desinged for gamers by gamers. Get money by doing tasks to buy yourself a new game."
   },
-  "url": ["iloot.it"],
-  "version": "1.1.2",
+  "url": [
+    "iloot.it"
+  ],
+  "version": "1.2.0",
   "logo": "https://i.imgur.com/t04RdxC.png",
   "thumbnail": "https://i.imgur.com/y5AkLOI.png",
   "color": "#d4af37",
-  "tags": ["money", "iloot.it"],
+  "tags": [
+    "money",
+    "iloot.it"
+  ],
   "category": "other"
 }

@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "643771565951025153"
 });
 
-presence.on("UpdateData", () => async () => {
+presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     postTitle = document.querySelector(
       "#content-body-area > div > div > div.content-heading > h1"
