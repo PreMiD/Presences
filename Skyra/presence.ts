@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "266624760782258186"
+  clientId: "266624760782258186",
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -8,7 +8,7 @@ var title: Element;
 
 presence.on("UpdateData", async () => {
   var presenceData: presenceData = {
-    largeImageKey: "skyra"
+    largeImageKey: "skyra",
   };
 
   if (document.location.hostname === "skyra.pw") {
