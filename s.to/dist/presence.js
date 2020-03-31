@@ -1,11 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
     clientId: "463000750193246209",
     mediaKeys: false
@@ -13,88 +5,31 @@ var presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title, views, air, air2, title2;
-var iFrameVideo, currentTime, duration, paused;
-var video, videoDuration, videoCurrentTime;
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
-if (lastPlaybackState != playback) {
-    lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
-}
 
-presence.on("iFrameData", data => {
-    playback =
-        data.iframe_video.duration !== null
-            ? true : false;
-    if (playback) {
-        iFrameVideo = data.iframe_video.iFrameVideo;
-        currentTime = data.iframe_video.currTime;
-        duration = data.iframe_video.dur;
-        paused = data.iframe_video.paused;
-    }
-});
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    var a = '', presenceData = {
+presence.on("UpdateData", () => {
+    var presenceData = {
         largeImageKey: "sto"
     };
-    presenceData.startTimestamp = browsingStamp;
-    video = document.querySelector("#mediaplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
-    if (document.querySelector("#wrapper > div.seriesContentBox > div.container.marginBottom > div:nth-child(4) > div.hosterSiteTitle > h2 > span") !== null) {
-       if (iFrameVideo == true && !isNaN(duration)) {
-            var a = '', timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)), presenceData = {
-                largeImageKey: "sto",
-                smallImageKey: paused ? "pause" : "play",
-                smallImageText: paused
-                    ? (yield strings).pause
-                    : (yield strings).play,
-                startTimestamp: timestamps[0],
-                endTimestamp: timestamps[1]
-            };
-            presenceData.details = "Schaut: ";
-            title = document.querySelector("head > title");
-            presenceData.state = title.innerText.split(" |")[0];
-            
-            if (paused) {
-                delete presenceData.startTimestamp;
-                delete presenceData.endTimestamp;
-            }
-            presence.setActivity(presenceData);
-        }
-        else if (iFrameVideo == null && isNaN(duration)) {
-            title = document.querySelector("head > title");
-            presenceData.state = title.innerText.split(" |")[0];
-            var a = '', timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)), presenceData = {
-                largeImageKey: "sto",
-                smallImageKey: paused ? "pause" : "play",
-                smallImageText: paused
-                    ? (yield strings).pause
-                    : (yield strings).play,
-                startTimestamp: timestamps[0],
-                endTimestamp: timestamps[1]
-            };
-            presenceData.details = "Schaut: ";
-            presenceData.state = title.innerText;
-            presence.setActivity(presenceData);
-        }
-    }
-    else if (document.location.pathname == "/") {
+   
+    if (document.location.pathname == "/") {
         presenceData.details = "Stöbert durch";
-        presenceData.state = "die Startseite";
-        delete presenceData.smallImageText;
+        presenceData.state = "die Startseite";       
         
         presence.setActivity(presenceData);
-        
-           
+         
     }
-    else if (document.location.pathname.includes("/serie/stream/")) {
-        presenceData.details = "Schaut";
+    else if (document.location.pathname.includes("/serie/stream/")) {        
         nameofserie = document.querySelector("#series > section > div.container.row > div.series-meta.col-md-6-5.col-sm-6.col-xs-12 > div.series-title > h1 > span");
-        presenceData.state = nameofserie.innerText;
+       // Try if Name of Title are visible
+        try {
+            presenceData.details = "Schaut " + nameofserie.innerText;
+            titleofserie = document.querySelector("#wrapper > div.seriesContentBox > div.container.marginBottom > div:nth-child(4) > div.hosterSiteTitle > h2 > span").innerText;          
+            presenceData.state = titleofserie;
+        } catch {
+            presenceData.details = "Schaut";
+            presenceData.state = nameofserie.innerText;
+        }
         delete presenceData.smallImageText;
-        
         presence.setActivity(presenceData);
     }
     else if (document.location.pathname == "/app") {
@@ -354,9 +289,9 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
    
     else {
         presence.setActivity();
-        presence.setTrayTitle();
+        
     }
-}));
+});
 function getTimestamps(videoTime, videoDuration) {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
