@@ -12,7 +12,7 @@
 When publishing presences to this GitHub, we require you to follow a set of guidelines.
 To some, these strict rules may seem harsh. However, the implementation of these rulesets will keep our servers from running into any issues.
 
-:x: **Note**: Media key support has been **COMPLETELY REMOVED**, if you are a presence developer that has media key support in any of your presences (new or old), please remove it.
+> :x: **Note**: Media key support has been **COMPLETELY REMOVED**, if you are a presence developer that has media key support in any of your presences (new or old), please remove it.
 
 ## Creation
 
