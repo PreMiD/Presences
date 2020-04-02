@@ -3,11 +3,12 @@
     "name": "TheSlowly",
     "id": "505071508851523599"
   },
-
-  "contributors": [{
-    "name": "narpi",
-    "id": "321665259842830336"
-  }],
+  "contributors": [
+    {
+      "name": "narpi",
+      "id": "321665259842830336"
+    }
+  ],
   "service": "Duolingo",
   "description": {
     "en": "Languages can be learned in a playful way. Duolingo is 100% free, fun and scientifically proven.",
@@ -16,7 +17,7 @@
     "pt_BR": "As línguas podem ser aprendidas de forma lúdica. Duolingo é 100% grátis, divertido e cientificamente comprovado."
   },
   "url": "www.duolingo.com",
-  "version": "1.7.2",
+  "version": "1.8.0",
   "logo": "https://i.imgur.com/ETbwYrY.jpg",
   "thumbnail": "https://i.imgur.com/rDHSj8L.png",
   "color": "#8EE000",

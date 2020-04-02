@@ -1,43 +1,42 @@
 var presence = new Presence({
-  clientId: "547436289960574977",
-  mediaKeys: false
+  clientId: "547436289960574977"
 });
 
 presence.on("UpdateData", async () => {
-  if(document.location.pathname == ("/")) {
+  if (document.location.pathname == "/") {
     let homepagePresence: presenceData = {
       details: "Viewing the homepage",
       largeImageKey: "logo"
     };
     presence.setActivity(homepagePresence);
-  } else if(document.location.pathname.startsWith("/stories")) {
+  } else if (document.location.pathname.startsWith("/stories")) {
     let presenceData: presenceData = {
       details: "Viewing a story",
       state: document.location.pathname.split("/")[2],
       largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
-  } else if(document.location.pathname.startsWith("/accounts")) {
+  } else if (document.location.pathname.startsWith("/accounts")) {
     let presenceData: presenceData = {
       details: "Settings",
       state: "Changing their Settings",
       largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
-  } else if(document.location.pathname.startsWith("/p")) {
+  } else if (document.location.pathname.startsWith("/p")) {
     let presenceData: presenceData = {
       details: "Viewing a post",
       state: "NAME-HERE",
       largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
-  } else if(document.location.pathname.startsWith("/explore")) {
+  } else if (document.location.pathname.startsWith("/explore")) {
     let presenceData: presenceData = {
       details: "Exploring...",
       largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
-  } else if(document.location.pathname.startsWith("/nametag")) {
+  } else if (document.location.pathname.startsWith("/nametag")) {
     let presenceData: presenceData = {
       largeImageKey: "logo"
     };
@@ -53,7 +52,7 @@ presence.on("UpdateData", async () => {
   }
 });
 
-presence.on('iFrameData', function(data) {
+presence.on("iFrameData", function(data) {
   console.log(data);
 });
 

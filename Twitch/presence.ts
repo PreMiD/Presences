@@ -38,7 +38,7 @@ presence.on('UpdateData', async () => {
       ),
       title: document.querySelector('.tw-font-size-4.tw-line-height-body'),
       streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap'),
-      host: document.querySelector('.video-player-hosting-ui__header')
+      host: document.querySelector('.tw-c-text-overlay.tw-strong')
     },
     moderator: {
       title: document.querySelector('.tw-c-text-overlay.tw-font-size-5'),
@@ -232,17 +232,6 @@ presence.on('UpdateData', async () => {
     presence.setTrayTitle(title);
   }
 });
-
-/*presence.on('MediaKeys', (key: string) => {
-  switch (key) {
-    case 'pause':
-      var pause: HTMLButtonElement = document.querySelector(
-        'div.player-buttons-left > button'
-      );
-      if (pause) pause.click();
-      break;
-  }
-});*/
 
 function getTimestamps(videoTime: number, videoDuration: number) {
   var startTime = Date.now();

@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: '630561466872889344'
+  clientId: "630561466872889344"
 });
 
 var elapsed, oldUrl;
 
-presence.on('UpdateData', async () => {
+presence.on("UpdateData", async () => {
   if (window.location.href !== oldUrl) {
     oldUrl = window.location.href;
     elapsed = Math.floor(Date.now() / 1000);
@@ -16,39 +16,39 @@ presence.on('UpdateData', async () => {
 
   var path = window.location.pathname;
 
-  if (path === '/') {
-    details = 'Browsing...';
-  } else if (path.match('/user') || path.match('/signup')) {
-    if (path.match('signup')) {
-      details = 'Signing up...';
+  if (path === "/") {
+    details = "Browsing...";
+  } else if (path.match("/user") || path.match("/signup")) {
+    if (path.match("signup")) {
+      details = "Signing up...";
     } else {
-      details = 'Logging in...';
+      details = "Logging in...";
     }
-  } else if (path.match('/terms-use')) {
-    details = 'Viewing Terms of Use';
-  } else if (path.match('/trivia')) {
-    details = 'Viewing Trivia';
+  } else if (path.match("/terms-use")) {
+    details = "Viewing Terms of Use";
+  } else if (path.match("/trivia")) {
+    details = "Viewing Trivia";
 
-    var title = document.querySelector('#start-the-quiz-title');
+    var title = document.querySelector("#start-the-quiz-title");
     if (title) {
       state = title.textContent;
     }
   } else {
-    var playlists = document.querySelector('.playlists-queue-wrapper');
-    var breadcrumb = document.querySelector('.pane-content > .breadcrumb > ol');
+    var playlists = document.querySelector(".playlists-queue-wrapper");
+    var breadcrumb = document.querySelector(".pane-content > .breadcrumb > ol");
     var breadcrumb_last = document.querySelector(
-      '.pane-content > .breadcrumb > ol > li:last-child > span'
+      ".pane-content > .breadcrumb > ol > li:last-child > span"
     );
-    var difficulty = document.querySelector('a.active');
+    var difficulty = document.querySelector("a.active");
     if (breadcrumb && breadcrumb_last && difficulty) {
-      details = 'Viewing Jigsaw Puzzle';
+      details = "Viewing Jigsaw Puzzle";
       state = `${breadcrumb_last.textContent} (${difficulty.textContent})`;
     } else if (breadcrumb && breadcrumb_last) {
-      details = 'Viewing Jigsaw Puzzles';
+      details = "Viewing Jigsaw Puzzles";
       state = breadcrumb_last.textContent;
     } else if (playlists) {
-      details = 'Viewing Category';
-      state = 'Jigsaw Puzzles';
+      details = "Viewing Category";
+      state = "Jigsaw Puzzles";
     } else {
       var parsedData = parse(path);
       if (parsedData) {
@@ -57,11 +57,11 @@ presence.on('UpdateData', async () => {
 
         switch (type) {
           case PageType.Category:
-            details = 'Viewing Category';
+            details = "Viewing Category";
             break;
 
           case PageType.Game:
-            details = 'Viewing Game';
+            details = "Viewing Game";
             break;
 
           default:
@@ -76,7 +76,7 @@ presence.on('UpdateData', async () => {
   var data: presenceData = {
     details: details,
     state: state,
-    largeImageKey: 'coolmathgames',
+    largeImageKey: "coolmathgames",
     startTimestamp: startTimestamp
   };
 
@@ -89,16 +89,16 @@ enum PageType {
 }
 
 const parse = (path: string) => {
-  path = path.replace('/', '');
-  var split: Array<string> = path.split('-');
+  path = path.replace("/", "");
+  var split: Array<string> = path.split("-");
 
   return [parseInt(split[0]), capitalize(split.slice(1))];
 };
 
-const capitalize = (text: Array<string>) => {
-  var ret = '';
-  text.map(text => {
-    ret += text.charAt(0).toUpperCase() + text.slice(1) + ' ';
-  });
-  return ret;
+const capitalize = (text: Array<String>) => {
+  return text
+    .map(str => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    })
+    .join(" ");
 };

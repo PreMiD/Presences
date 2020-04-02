@@ -1,6 +1,5 @@
 var presence = new Presence({
-    clientId: "463097721130188830",
-    mediaKeys: false
+    clientId: "463097721130188830"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -9,8 +8,8 @@ var presence = new Presence({
   });
 
 // YouTube TV separator pattern
-var pattern = "•";
-function truncateAfter(str, pattern) {
+const pattern = "•";
+function truncateAfter(str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern));
 }
 
@@ -55,11 +54,12 @@ presence.on("UpdateData", async () => {
       uploader2: any,
       edited: boolean,
       uploaderEmbed: any;
-
     (edited = false),
       (uploaderTV =
         document.querySelector(".player-video-details") ||
-        document.querySelector("ytd-video-owner-renderer  .ytd-channel-name")),
+        document.querySelector(
+          "ytd-video-owner-renderer  .ytd-channel-name a"
+        )),
       (uploaderEmbed = document.querySelector(
         "div.ytp-title-expanded-heading > h2 > a"
       )),
@@ -272,6 +272,11 @@ presence.on("UpdateData", async () => {
         presenceData.state = user;
         presenceData.startTimestamp = browsingStamp;
       }
+    } else if (document.location.pathname.includes("/post")) {
+      presenceData.details = "Viewing community post";
+      var selector: Node = document.querySelector("#author-text");
+      presenceData.state = (selector && `of: ${selector.textContent}`) || null;
+      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/feed/trending")) {
       presenceData.details = "Viewing what's trending"; //youtube.trending
       presenceData.startTimestamp = browsingStamp;

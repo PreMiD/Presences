@@ -1,24 +1,19 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
-    clientId: "619963616489242645",
-    mediaKeys: false
+    clientId: "619963616489242645"
 });
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+presence.on("UpdateData", async () => {
     if (document.location.pathname.startsWith("/wiki/")) {
         let page = "N/A";
         try {
-            page = document.getElementsByClassName("page-header__title")[0].textContent;
+            page = document.getElementsByClassName("page-header__title")[0]
+                .textContent;
         }
         catch (err) {
             let errCode = "KMNNWIKI_WIKIEN_GETPAGETITLE";
-            console.log("An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   " + errCode + "   :::   " + err);
+            console.log("An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   " +
+                errCode +
+                "   :::   " +
+                err);
         }
         let presenceData = {
             details: "Viewing a page...",
@@ -27,4 +22,5 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
         };
         presence.setActivity(presenceData);
     }
-}));
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUMxQixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsQ0FBQztBQUVILFFBQVEsQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLEtBQUssSUFBSSxFQUFFO0lBQ25DLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxFQUFFO1FBRW5ELElBQUksSUFBSSxHQUFHLEtBQUssQ0FBQztRQUNqQixJQUFJO1lBQ0YsSUFBSSxHQUFHLFFBQVEsQ0FBQyxzQkFBc0IsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDLENBQUMsQ0FBQztpQkFDNUQsV0FBVyxDQUFDO1NBQ2hCO1FBQUMsT0FBTyxHQUFHLEVBQUU7WUFDWixJQUFJLE9BQU8sR0FBRyw4QkFBOEIsQ0FBQztZQUM3QyxPQUFPLENBQUMsR0FBRyxDQUNULGtGQUFrRjtnQkFDaEYsT0FBTztnQkFDUCxXQUFXO2dCQUNYLEdBQUcsQ0FDTixDQUFDO1NBQ0g7UUFDRCxJQUFJLFlBQVksR0FBaUI7WUFDL0IsT0FBTyxFQUFFLG1CQUFtQjtZQUM1QixLQUFLLEVBQUUsSUFBSTtZQUNYLGFBQWEsRUFBRSxjQUFjO1NBQzlCLENBQUM7UUFDRixRQUFRLENBQUMsV0FBVyxDQUFDLFlBQVksQ0FBQyxDQUFDO0tBQ3BDO0FBQ0gsQ0FBQyxDQUFDLENBQUMifQ==

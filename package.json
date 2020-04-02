@@ -1,16 +1,29 @@
 {
-	"name": "presences",
-	"version": "2.0.0",
-	"author": "Timeraa",
-	"license": "MPL-2.0",
-	"devDependencies": {
-		"@types/node": "^13.7.7",
-		"mongodb": "^3.5.4",
-		"source-map-support": "^0.5.16",
-		"typescript": "^3.8.3"
-	},
-	"dependencies": {
-		"@types/chrome": "^0.0.98",
-		"@types/mongodb": "^3.3.16"
-	}
+  "name": "presences",
+  "version": "2.0.0",
+  "author": "Timeraa",
+  "license": "MPL-2.0",
+  "scripts": {
+    "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
+    "precommit": "node ./lintstaged.js",
+    "lintstaged:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop ./lintstaged.ts ./@types/lint-staged/index.d.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.5",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.1",
+    "mongodb": "^3.5.5",
+    "prettier": "^2.0.2",
+    "source-map-support": "^0.5.16",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@types/chrome": "^0.0.103",
+    "@types/mongodb": "^3.5.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
+    }
+  }
 }

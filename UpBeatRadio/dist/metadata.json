@@ -13,7 +13,7 @@
     "upbeat.pw",
     "www.upbeat.pw"
   ],
-  "version": "2.0.1",
+  "version": "2.1.0",
   "logo": "https://i.imgur.com/t3vwqSJ.pngg",
   "thumbnail": "https://i.imgur.com/QK1qN8G.jpg",
   "color": "#212121",
@@ -23,5 +23,5 @@
     "upbeatradio"
   ],
   "category": "music",
-  "button":false
+  "button": false
 }
