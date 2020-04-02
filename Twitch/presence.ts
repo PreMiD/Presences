@@ -40,6 +40,12 @@ presence.on('UpdateData', async () => {
       streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap'),
       host: document.querySelector('.video-player-hosting-ui__header')
     },
+    moderator: {
+      title: document.querySelector('.tw-c-text-overlay.tw-font-size-5'),
+      streamer: document.querySelector(
+        'p > a.tw-interactive.tw-link.tw-link--button.tw-link--overlay'
+      )
+    },
     video: {
       title: document.querySelector('.tw-font-size-4.tw-strong'),
       streamer: document.querySelector('.tw-font-size-5.tw-white-space-nowrap'),
@@ -70,6 +76,8 @@ presence.on('UpdateData', async () => {
     elements.live.host
   ) {
     type = 'live';
+  } else if (elements.moderator.title && elements.moderator.streamer) {
+    type = 'moderator';
   } else if (
     elements.video.title &&
     elements.video.streamer &&
@@ -104,11 +112,17 @@ presence.on('UpdateData', async () => {
       smallImageText = (await strings).live;
       videoTime = elapsed;
       videoDuration = undefined;
-    } else if (type === 'live') {
-      title = elements.live.title
-        ? elements.live.title.textContent
-        : `Hosting ${elements.live.host.textContent}`;
-      streamer = elements.live.streamer.textContent;
+    } else if (type === 'live' || type === 'moderator') {
+      if (type !== 'moderator') {
+        title = elements.live.title
+          ? elements.live.title.textContent
+          : `Hosting ${elements.live.host.textContent}`;
+        streamer = elements.live.streamer.textContent;
+      }
+      if (window.location.pathname.match('/moderator')) {
+        title = elements.moderator.title.textContent;
+        streamer = `Moderating ${elements.moderator.streamer.textContent}`;
+      }
       smallImageKey = 'live';
       smallImageText = (await strings).live;
       videoTime = elapsed;
