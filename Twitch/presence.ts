@@ -18,7 +18,7 @@ var title,
   elapsed,
   oldURL,
   type,
-  logging = true;
+  logging = false;
 
 presence.on('UpdateData', async () => {
   var elements = {
@@ -44,7 +44,8 @@ presence.on('UpdateData', async () => {
       title: document.querySelector('.tw-c-text-overlay.tw-font-size-5'),
       streamer: document.querySelector(
         'p > a.tw-interactive.tw-link.tw-link--button.tw-link--overlay'
-      )
+      ),
+      live: document.querySelector('.tw-font-size-6.tw-semibold.tw-upcase')
     },
     video: {
       title: document.querySelector('.tw-font-size-4.tw-strong'),
@@ -123,8 +124,10 @@ presence.on('UpdateData', async () => {
         title = elements.moderator.title.textContent;
         streamer = `Moderating ${elements.moderator.streamer.textContent}`;
       }
-      smallImageKey = 'live';
-      smallImageText = (await strings).live;
+      if (elements.moderator.live.textContent === 'Online') {
+        smallImageKey = 'live';
+        smallImageText = (await strings).live;
+      }
       videoTime = elapsed;
       videoDuration = undefined;
     } else if (type === 'video') {
