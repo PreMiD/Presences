@@ -18,7 +18,7 @@ var title,
   elapsed,
   oldURL,
   type,
-  logging = false;
+  logging = true;
 
 presence.on('UpdateData', async () => {
   var elements = {
@@ -71,13 +71,13 @@ presence.on('UpdateData', async () => {
 
   if (squad) {
     type = 'squad';
+  } else if (elements.moderator.title && elements.moderator.streamer) {
+    type = 'moderator';
   } else if (
     (elements.live.title && elements.live.streamer && elements.live.label) ||
     elements.live.host
   ) {
     type = 'live';
-  } else if (elements.moderator.title && elements.moderator.streamer) {
-    type = 'moderator';
   } else if (
     elements.video.title &&
     elements.video.streamer &&
