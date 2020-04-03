@@ -1,4 +1,3 @@
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
 var presence = new Presence({
     clientId: '660519861742731264'
 }), strings = presence.getStrings({
@@ -7,14 +6,13 @@ var presence = new Presence({
     browse: 'presence.activity.browsing',
     search: 'presence.activity.searching'
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 var language = navigator.language || navigator.userLanguage;//Browser language
 var lastRadio = '';
 var browsingStamp = 0;//Timestamp when started listening to a radio station
 
 switch(language) {
     //German
-    //---------------------------------------
     case 'de':
     case 'de-CH':
     case 'de-AT':
@@ -23,7 +21,6 @@ switch(language) {
         language = 'de';
         break;
     //French
-    //---------------------------------------
     case 'fr':
     case 'fr-BE':
     case 'fr-CA':
@@ -32,7 +29,6 @@ switch(language) {
         language = 'fr';
         break;
     //English / Unknown
-    //---------------------------------------
     case 'en':
     case 'en-US':
     case 'en-EG':
@@ -49,7 +45,7 @@ switch(language) {
         language = 'en';
         break;
 }
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 presence.on('UpdateData', async () => {
     const host = window.location.hostname.replace('www.', '');
     const path = window.location.pathname.split('/').slice(1);
@@ -59,105 +55,7 @@ presence.on('UpdateData', async () => {
     };
 
     switch(path[0]) {
-        //Radio / Region
-        //------------------------------------------------------------------------------
-        default:
-            if(path[0]) {
-                if(document.getElementById('station-website')) {
-                    //Radio
-                    //---------------------------------------
-                    if(document.getElementsByClassName('song-name')[0].innerText.length > 0) {
-                        if(document.getElementsByClassName('playbutton-global playbutton-global-playing').length > 0) {
-                            //Radio is playing
-                            //---------------------------------------
-                            if(!browsingStamp || lastRadio != document.getElementsByClassName('song-name')[0].innerText) browsingStamp = Math.floor(Date.now() / 1000);
-                            presenceData.startTimestamp = browsingStamp;
-                            lastRadio = document.getElementsByClassName('song-name')[0].innerText;
-            
-                            presenceData.smallImageKey = 'play';
-                            presenceData.smallImageText = (await strings).play;
-            
-                            presenceData.details = document.getElementsByClassName('song-name')[0].innerText;
-                        } else {
-                            //Radio is stopped
-                            //---------------------------------------
-                            browsingStamp = 0;
-            
-                            presenceData.smallImageKey = 'pause';
-                            presenceData.smallImageText = (await strings).pause;
-            
-                            presenceData.details = document.getElementsByClassName('song-name')[0].innerText;
-                        }
-                    } else {
-                        browsingStamp = 0;
-
-                        presenceData.details = document.querySelector('h1').innerText;
-                        switch(language) {
-                            case 'de':
-                                presenceData.state = `${document.getElementById('bar-ratingValue').innerText} von 5 Sternen (${document.getElementById('bar-ratingCount').innerText} Bewertungen)`;
-                                break;
-                            case 'fr':
-                                presenceData.state = `${document.getElementById('bar-ratingValue').innerText} sur 5 étoiles (${document.getElementById('bar-ratingCount').innerText} notes)`;
-                                break;
-                            case 'en':
-                                presenceData.state = `${document.getElementById('bar-ratingValue').innerText} of 5 stars (${document.getElementById('bar-ratingCount').innerText} Ratings)`;
-                                break;
-                        }
-                    }
-                } else {
-                    //Region
-                    //---------------------------------------
-                    presenceData.smallImageKey = 'reading';
-                    presenceData.smallImageText = (await strings).browse;
-                    switch(language) {
-                        case 'de':
-                            presenceData.details = document.querySelector('h1').innerText;
-                            presenceData.state = `auf ${host}`;
-                            break;
-                        case 'fr':
-                            presenceData.details = document.querySelector('h1').innerText;
-                            presenceData.state = `sur ${host}`;
-                            break;
-                        case 'en':
-                            presenceData.details = document.querySelector('h1').innerText;
-                            presenceData.state = `on ${host}`;
-                            break;
-                    }
-                }
-            } else {
-                //Home
-                //---------------------------------------
-                if(document.getElementsByClassName('song-name')[0].innerText.length > 0) {
-                    if(document.getElementsByClassName('playbutton-global playbutton-global-playing').length > 0) {
-                        //Radio is playing
-                        //---------------------------------------
-                        if(!browsingStamp || lastRadio != document.getElementsByClassName('song-name')[0].innerText) browsingStamp = Math.floor(Date.now() / 1000);
-                        presenceData.startTimestamp = browsingStamp;
-                        lastRadio = document.getElementsByClassName('song-name')[0].innerText;
-        
-                        presenceData.smallImageKey = 'play';
-                        presenceData.smallImageText = (await strings).play;
-        
-                        presenceData.details = document.getElementsByClassName('song-name')[0].innerText;
-                    } else {
-                        //Radio is stopped
-                        //---------------------------------------
-                        browsingStamp = 0;
-        
-                        presenceData.smallImageKey = 'pause';
-                        presenceData.smallImageText = (await strings).pause;
-        
-                        presenceData.details = document.getElementsByClassName('song-name')[0].innerText;
-                    }
-                } else {
-                    presence.setTrayTitle();
-                    presence.setActivity();
-                    return;
-                }
-            }
-            break;
         //Search
-        //------------------------------------------------------------------------------
         case 'search':
             browsingStamp = 0;
             presenceData.smallImageKey = 'search';
@@ -177,9 +75,101 @@ presence.on('UpdateData', async () => {
                     break;
             }
             break;
-        //------------------------------------------------------------------------------
+        
+        //Radio / Region
+        default:
+            if(path[0]) {
+                if(document.getElementById('station-website')) {
+                    //Radio
+                    if(document.getElementsByClassName('song-name')[0].innerText.length > 0) {
+                        //Player active
+                        if(document.getElementsByClassName('playbutton-global playbutton-global-playing').length > 0) {
+                            //Radio is playing
+                            if(!browsingStamp || lastRadio != document.getElementsByClassName('song-name')[0].innerText) browsingStamp = Math.floor(Date.now() / 1000);
+                            presenceData.startTimestamp = browsingStamp;
+                            lastRadio = document.getElementsByClassName('song-name')[0].innerText;
+            
+                            presenceData.smallImageKey = 'play';
+                            presenceData.smallImageText = (await strings).play;
+            
+                            presenceData.details = document.getElementsByClassName('song-name')[0].innerText;
+                        } else {
+                            //Radio is stopped
+                            browsingStamp = 0;
+            
+                            presenceData.smallImageKey = 'pause';
+                            presenceData.smallImageText = (await strings).pause;
+            
+                            presenceData.details = document.getElementsByClassName('song-name')[0].innerText;
+                        }
+                    } else {
+                        //Player inactive
+                        browsingStamp = 0;
+
+                        presenceData.details = document.querySelector('h1').innerText;
+                        switch(language) {
+                            case 'de':
+                                presenceData.state = `${document.getElementById('bar-ratingValue').innerText} von 5 Sternen (${document.getElementById('bar-ratingCount').innerText} Bewertungen)`;
+                                break;
+                            case 'fr':
+                                presenceData.state = `${document.getElementById('bar-ratingValue').innerText} sur 5 étoiles (${document.getElementById('bar-ratingCount').innerText} notes)`;
+                                break;
+                            case 'en':
+                                presenceData.state = `${document.getElementById('bar-ratingValue').innerText} of 5 stars (${document.getElementById('bar-ratingCount').innerText} Ratings)`;
+                                break;
+                        }
+                    }
+                } else {
+                    //Region
+                    presenceData.smallImageKey = 'reading';
+                    presenceData.smallImageText = (await strings).browse;
+                    switch(language) {
+                        case 'de':
+                            presenceData.details = document.querySelector('h1').innerText;
+                            presenceData.state = `auf ${host}`;
+                            break;
+                        case 'fr':
+                            presenceData.details = document.querySelector('h1').innerText;
+                            presenceData.state = `sur ${host}`;
+                            break;
+                        case 'en':
+                            presenceData.details = document.querySelector('h1').innerText;
+                            presenceData.state = `on ${host}`;
+                            break;
+                    }
+                }
+            } else {
+                //Home
+                if(document.getElementsByClassName('song-name')[0].innerText.length > 0) {
+                    //Player is active
+                    if(document.getElementsByClassName('playbutton-global playbutton-global-playing').length > 0) {
+                        //Radio is playing
+                        if(!browsingStamp || lastRadio != document.getElementsByClassName('song-name')[0].innerText) browsingStamp = Math.floor(Date.now() / 1000);
+                        presenceData.startTimestamp = browsingStamp;
+                        lastRadio = document.getElementsByClassName('song-name')[0].innerText;
+        
+                        presenceData.smallImageKey = 'play';
+                        presenceData.smallImageText = (await strings).play;
+        
+                        presenceData.details = document.getElementsByClassName('song-name')[0].innerText;
+                    } else {
+                        //Radio is stopped
+                        browsingStamp = 0;
+        
+                        presenceData.smallImageKey = 'pause';
+                        presenceData.smallImageText = (await strings).pause;
+        
+                        presenceData.details = document.getElementsByClassName('song-name')[0].innerText;
+                    }
+                } else {
+                    //Player is inactive
+                    presence.setTrayTitle();
+                    presence.setActivity();
+                    return;
+                }
+            }
+            break;
     }
 
     presence.setActivity(presenceData);
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------

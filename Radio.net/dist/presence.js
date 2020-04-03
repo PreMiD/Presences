@@ -1,4 +1,3 @@
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
 var presence = new Presence({
     clientId: '634124614544392193'
 }), strings = presence.getStrings({
@@ -7,10 +6,10 @@ var presence = new Presence({
     search: 'presence.activity.searching',
     browsing: 'presence.activity.browsing'
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 var lastPath = '';//Last played radio station or podcast
 var browsingStamp = 0;//Timestamp when started listening to a radio station
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 presence.on('UpdateData', async () => {
     const path = window.location.pathname.split('/').slice(1);
     var presenceData = {
@@ -22,11 +21,9 @@ presence.on('UpdateData', async () => {
 
     switch(path[0]) {
         //Radio
-        //------------------------------------------------------------------------------
         case 's':
             if(!document.getElementsByClassName('player__animate-icon player__animate-icon--playing')[0].style.display) {
                 //Radio is playing
-                //---------------------------------------
                 if(!browsingStamp || lastPath != path[1]) browsingStamp = Math.floor(Date.now() / 1000);
                 presenceData.startTimestamp = browsingStamp;
                 lastPath = path[1];
@@ -38,7 +35,6 @@ presence.on('UpdateData', async () => {
                 presenceData.state = document.getElementsByClassName('player__song')[0].innerText;
             } else {
                 //Radio is paused
-                //---------------------------------------
                 browsingStamp = 0;
                 lastPath = '';
 
@@ -81,7 +77,6 @@ presence.on('UpdateData', async () => {
         case 'p':
             if(!document.getElementsByClassName('player__animate-icon player__animate-icon--playing')[0].style.display) {
                 //Podcast is playing
-                //---------------------------------------
                 if(!browsingStamp || lastPath != path[1]) browsingStamp = Math.floor(Date.now() / 1000);
                 times = document.getElementsByClassName('player__timing-wrap')[0].innerText.split('\n|\n');
                 presenceData.startTimestamp = 0;
@@ -99,7 +94,6 @@ presence.on('UpdateData', async () => {
                 presenceData.state = document.getElementsByClassName('player__song')[0].innerText;
             } else {
                 //Podcast is paused
-                //---------------------------------------
                 browsingStamp = 0;
                 lastPath = '';
 
@@ -131,14 +125,13 @@ presence.on('UpdateData', async () => {
                         
                         presenceData.state = 'Currently watching an ad';
                     } else {
-                        //Radio is buffering
+                        //Podcast is buffering
                         presenceData.state = document.getElementsByClassName('player__info-wrap flex')[0].innerText;
                     }
                 }
             }
             break;
         //Search
-        //------------------------------------------------------------------------------
         case 'search':
             browsingStamp = 0;
             presenceData.smallImageKey = 'search';
@@ -148,9 +141,7 @@ presence.on('UpdateData', async () => {
             presenceData.details = new URLSearchParams(window.location.search).get('q');
             presenceData.state = `${results} results`;
             break;
-        //Genre
-        //Topic
-        //------------------------------------------------------------------------------
+        //Genre / Topic
         case 'genre':
         case 'topic':
             browsingStamp = 0;
@@ -159,9 +150,7 @@ presence.on('UpdateData', async () => {
 
             presenceData.details = document.querySelector('h1').innerText;
             break;
-        //Country
-        //City
-        //------------------------------------------------------------------------------
+        //Country / City
         case 'country':
         case 'city':
             browsingStamp = 0;
@@ -170,9 +159,7 @@ presence.on('UpdateData', async () => {
 
             presenceData.details = document.querySelector('h1').innerText;
             break;
-        //Local Stations
-        //Top 100 Stations
-        //------------------------------------------------------------------------------
+        //Local Stations / Top 100 Stations
         case 'local-stations':
         case 'top-stations':
             browsingStamp = 0;
@@ -181,10 +168,7 @@ presence.on('UpdateData', async () => {
 
             presenceData.details = document.querySelector('h1').innerText;
             break;
-        //My Profile
-        //Recently Played
-        //My Favorites
-        //------------------------------------------------------------------------------
+        //My Profile / Recently Played / My Favorites
         case 'profile':
         case 'recents':
         case 'favorites':
@@ -192,7 +176,6 @@ presence.on('UpdateData', async () => {
             presenceData.details = document.title;
             break;
         //Smartphone Apps
-        //------------------------------------------------------------------------------
         case 'iphone':
         case 'ipad':
         case 'android':
@@ -202,14 +185,11 @@ presence.on('UpdateData', async () => {
             presenceData.details = document.title;
             break;
         //Unknown
-        //------------------------------------------------------------------------------
         default:
             presence.setTrayTitle();
             presence.setActivity();
             return;
-        //------------------------------------------------------------------------------
     }
 
     presence.setActivity(presenceData);
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------

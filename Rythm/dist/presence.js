@@ -1,4 +1,3 @@
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
 var presence = new Presence({
     clientId: '683285340571566091'
 }), strings = presence.getStrings({
@@ -8,7 +7,7 @@ var presence = new Presence({
     reading: 'presence.activity.reading',
     browsing: 'presence.activity.browsing'
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 presence.on('UpdateData', async () => {
     const host = window.location.hostname.replace('www.', '');
     const path = window.location.pathname.split('/').slice(1);
@@ -19,11 +18,9 @@ presence.on('UpdateData', async () => {
 
     switch(host) {
         //Homepage
-        //---------------------------------------------------------------------------------------------------------------------
         case 'rythmbot.co':
             switch(path[0]) {
                 //Features & Commands
-                //------------------------------------------------------------------------------
                 case 'features':
                     presenceData.details = 'Features & Commands';
                     if(new URL(window.location).hash == '#list') {
@@ -34,7 +31,6 @@ presence.on('UpdateData', async () => {
                     }
                     break;
                 //Rythm FAQ
-                //------------------------------------------------------------------------------
                 case 'faq':
                     presenceData.details = 'Frequently Asked Questions';
                     if(document.getElementById('search').value.length > 0) {
@@ -48,7 +44,6 @@ presence.on('UpdateData', async () => {
                     }
                     break;
                 //Troubleshooting Guide
-                //------------------------------------------------------------------------------
                 case 'troubleshooting':
                     presenceData.details = 'Troubleshooting';
                     if(document.getElementById('search').value.length > 0) {
@@ -62,43 +57,36 @@ presence.on('UpdateData', async () => {
                     }
                     break;
                 //Contact Us
-                //------------------------------------------------------------------------------
                 case 'contact':
                     presenceData.details = 'Contact Us';
                     break;
                 //Terms of Service
-                //------------------------------------------------------------------------------
                 case 'tos':
                     presenceData.details = 'Terms of Service';
                     break;
                 //Community Reviews
-                //------------------------------------------------------------------------------
                 case 'reviews':
                     presenceData.details = 'Community Reviews';
                     break;
                 //Add to Discord
-                //------------------------------------------------------------------------------
                 case 'invite':
                 case 'rythm':
                 case 'rythm2':
                 case 'rythmcanary':
                 //Support Server
-                //------------------------------------------------------------------------------
                 case 'support':
                     presence.setTrayTitle();
                     presence.setActivity();
                     return;
                 //Unknown
-                //------------------------------------------------------------------------------
                 default:
                     presence.setTrayTitle();
                     presence.setActivity();
                     return;
-                //------------------------------------------------------------------------------
             }
             break;
+        
         //Web Dashboard
-        //---------------------------------------------------------------------------------------------------------------------
         case 'web.rythmbot.co':
             //! The web dashboard is currently non functional - This part will be added once it's possible to use it again
             presenceData.details = 'Web Dashboard';
@@ -107,4 +95,3 @@ presence.on('UpdateData', async () => {
 
     presence.setActivity(presenceData);
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------

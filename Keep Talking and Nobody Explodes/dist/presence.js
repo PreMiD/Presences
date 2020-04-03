@@ -1,13 +1,12 @@
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
 var presence = new Presence({
     clientId: '681116862930747520'
 }), strings = presence.getStrings({
     browsing: 'presence.activity.browsing',
     reading: 'presence.activity.reading'
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 var browsingStamp = 0;//Last started activity
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 presence.on('UpdateData', async () => {
     const host = window.location.hostname.replace('www.', '');
     const path = window.location.pathname.split('/').slice(1);
@@ -18,72 +17,62 @@ presence.on('UpdateData', async () => {
 
     switch(host) {
         //Keep Talking Game
-        //---------------------------------------------------------------------------------------------------------------------
         case 'keeptalkinggame.com':
             switch(path[0]) {
                 //Frequently Asked Questions
-                //------------------------------------------------------------------------------
                 case 'faq':
                     browsingStamp = 0;
 
                     presenceData.details = 'Frequently Asked Questions';
                     break;
                 //Commercial Licensing
-                //------------------------------------------------------------------------------
                 case 'commercial-license':
                     browsingStamp = 0;
 
                     presenceData.details = 'Commercial Licensing';
                     break;
                 //Non-Commercial Use
-                //------------------------------------------------------------------------------
                 case 'non-commercial-use':
                     browsingStamp = 0;
 
                     presenceData.details = 'Non-Commercial Use';
                     break;
                 //Community
-                //------------------------------------------------------------------------------
                 case 'community':
                     browsingStamp = 0;
 
                     presenceData.details = 'Community';
                     break;
                 //Press Kit
-                //------------------------------------------------------------------------------
                 case 'presskit':
                     browsingStamp = 0;
 
                     presenceData.details = 'Press Kit';
                     break;
                 //Contact Us
-                //------------------------------------------------------------------------------
                 case 'contact-us':
                     browsingStamp = 0;
 
                     presenceData.details = 'Contact Us';
                     break;
                 //Privacy Policy
-                //------------------------------------------------------------------------------
                 case 'privacy-policy':
                     browsingStamp = 0;
 
                     presenceData.details = 'Privacy Policy';
                     break;
                 //Unknown
-                //------------------------------------------------------------------------------
                 default:
                     presence.setTrayTitle();
                     presence.setActivity();
                     return;
             }
             break;
+        
         //Bombmanual
-        //---------------------------------------------------------------------------------------------------------------------
         case 'bombmanual.com':
             switch(path[0]) {
                 //Bomb Defusal Manual
-                //------------------------------------------------------------------------------
                 case 'print'://Currently not working for the pdf version
                 case 'web':
                     if(!browsingStamp) browsingStamp = Math.floor(Date.now() / 1000);
@@ -95,7 +84,6 @@ presence.on('UpdateData', async () => {
                     presenceData.details = 'Bomb Defusal Manual';
                     break;
                 //How to Play
-                //------------------------------------------------------------------------------
                 case 'how-to-play-pc.html':
                 case 'how-to-play-mobile.html':
                 case 'how-to-play-switch.html':
@@ -151,14 +139,12 @@ presence.on('UpdateData', async () => {
                     if(platform) presenceData.state = `on ${platform}`;
                     break;
                 //Other Languages
-                //------------------------------------------------------------------------------
                 case 'other-languages.html':
                     browsingStamp = 0;
 
                     presenceData.details = 'Other Languages';
                     break;
                 //Unknown
-                //------------------------------------------------------------------------------
                 case 'index.html':
                     presence.setTrayTitle();
                     presence.setActivity();
@@ -173,4 +159,3 @@ presence.on('UpdateData', async () => {
 
     presence.setActivity(presenceData);
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------

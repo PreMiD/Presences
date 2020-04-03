@@ -1,4 +1,3 @@
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
 var presence = new Presence({
     clientId: '665519810054062100'
 }), strings = presence.getStrings({
@@ -6,7 +5,7 @@ var presence = new Presence({
     browsing: 'presence.activity.browsing',
     reading: 'presence.activity.reading'
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 presence.on('UpdateData', async () => {
     const host = window.location.hostname.replace('www.', '');
     const path = window.location.pathname.split('/').slice(1);
@@ -17,24 +16,21 @@ presence.on('UpdateData', async () => {
 	
     switch(host) {
         //IFTTT URL Shortener (for the Help Center)
-        //---------------------------------------------------------------------------------------------------------------------
         case 'ift.tt':
             presence.setTrayTitle();
             presence.setActivity();
             return;
+        
         //IFTTT for Business
-        //---------------------------------------------------------------------------------------------------------------------
         case 'platform.ifttt.com':
             presenceData.details = 'for Business';
             if(path.length > 0) {
                 switch(path[0]) {
                     //Plans
-                    //------------------------------------------------------------------------------
                     case 'plans':
                         presenceData.state = 'Plans';
                         break;
                     //Documentation
-                    //------------------------------------------------------------------------------
                     case 'docs':
                         presenceData.state = 'Documentation';
 
@@ -50,7 +46,6 @@ presence.on('UpdateData', async () => {
                         }
                         break;
                     //Library
-                    //------------------------------------------------------------------------------
                     case 'blog':
                         presenceData.state = 'Library';
 
@@ -63,7 +58,6 @@ presence.on('UpdateData', async () => {
                         }
                         break;
                     //Case studies
-                    //------------------------------------------------------------------------------
                     case 'case_studies':
                         presenceData.state = 'Case studies';
 
@@ -76,32 +70,27 @@ presence.on('UpdateData', async () => {
                         }
                         break;
                     //Testimonials
-                    //------------------------------------------------------------------------------
                     case 'testimonials':
                         presenceData.state = 'Testimonials';
                         break;
-                    //------------------------------------------------------------------------------
                     //Contact
                     case 'contact_sales':
                         presenceData.state = 'Contact';
                         break;
                     //Terms of Use
-                    //------------------------------------------------------------------------------
                     case 'terms':
                         presenceData.state = 'Terms of Use';
                         break;
-                    //------------------------------------------------------------------------------
                 }
             }
             break;
+        
         //IFTTT Help Center
-        //---------------------------------------------------------------------------------------------------------------------
         case 'help.ifttt.com':
             presenceData.details = 'Help Center';
             if(path.length > 2) {
                 switch(path[2]) {
                     //Articles
-                    //------------------------------------------------------------------------------
                     case 'articles':
                         presenceData.smallImageKey = 'reading';
                         presenceData.smallImageText = (await strings).reading;
@@ -109,7 +98,6 @@ presence.on('UpdateData', async () => {
                         presenceData.state = document.querySelector('h1').innerText;
                         break;
                     //Categories
-                    //------------------------------------------------------------------------------
                     case 'categories':
                     case 'sections':
                         presenceData.smallImageKey = 'reading';
@@ -118,24 +106,21 @@ presence.on('UpdateData', async () => {
                         presenceData.state = document.querySelector('h1').innerText;
                         break;
                     //Search
-                    //------------------------------------------------------------------------------
                     case 'search':
                         presenceData.smallImageKey = 'search';
                         presenceData.smallImageText = (await strings).search;
 
                         presenceData.state = `Searching for "${new URLSearchParams(window.location.search).get('query')}"`;
                         break;
-                    //------------------------------------------------------------------------------
                 }
             }
             break;
+        
         //IFTTT
-        //---------------------------------------------------------------------------------------------------------------------
         default:
         case 'ifttt.com':
             switch(path[0]) {
                 //Applets / Connections
-                //------------------------------------------------------------------------------
                 case 'applets':
                 case 'connections':
                     presenceData.smallImageKey = 'reading';
@@ -145,21 +130,18 @@ presence.on('UpdateData', async () => {
                     presenceData.state = document.getElementsByClassName('owner by-and-author-link')[0].innerText.replace('\n', ' ');
                     break;
                 //Sign up
-                //------------------------------------------------------------------------------
                 case 'join':
                     presenceData.smallImageKey = 'writing';
 
                     presenceData.details = 'Sign up';
                     break;
                 //Sign in
-                //------------------------------------------------------------------------------
                 case 'login':
                     presenceData.smallImageKey = 'writing';
                     
                     presenceData.details = 'Sign in';
                     break;
                 //Session
-                //------------------------------------------------------------------------------
                 case 'session':
                     if(path.length > 1) {
                         switch(path[1]) {
@@ -176,7 +158,6 @@ presence.on('UpdateData', async () => {
                     }
                     break;
                 //Account settings
-                //------------------------------------------------------------------------------
                 case 'settings':
                 case 'profile':
                     presenceData.details = 'Settings';
@@ -198,12 +179,10 @@ presence.on('UpdateData', async () => {
                     }
                     break;
                 //My Applets
-                //------------------------------------------------------------------------------
                 case 'my_applets':
                     presenceData.details = 'My Applets';
                     break;
                 //Creating an Applet
-                //------------------------------------------------------------------------------
                 case 'create':
                     presenceData.details = 'Creating an Applet';
                     if(new URL(window.location).search && document.getElementsByClassName('header').length > 0) {
@@ -214,7 +193,6 @@ presence.on('UpdateData', async () => {
                     }
                     break;
                 //Activity
-                //------------------------------------------------------------------------------
                 case 'activity':
                     presenceData.details = 'Activity';
                     if(path.length > 1) {
@@ -226,7 +204,6 @@ presence.on('UpdateData', async () => {
                     }
                     break;
                 //My services
-                //------------------------------------------------------------------------------
                 case 'date_and_time':
                 case 'email':
                 case 'email_digest':
@@ -242,18 +219,15 @@ presence.on('UpdateData', async () => {
                     presenceData.details = 'My Services';
                     break;
                 //Connect services
-                //------------------------------------------------------------------------------
                 case 'connect':
                     presenceData.details = 'My Services';
                     presenceData.state = `Connect ${document.querySelector('h1').firstElementChild.title} to ${document.querySelector('h1').lastElementChild.title}`;
                     break;
                 //Explore
-                //------------------------------------------------------------------------------
                 case 'discover':
                     presenceData.details = 'Explore';
                     break;
                 //Search
-                //------------------------------------------------------------------------------
                 case 'search':
                     presenceData.smallImageKey = 'search';
                     presenceData.smallImageText = (await strings).search;
@@ -262,17 +236,14 @@ presence.on('UpdateData', async () => {
                     presenceData.state = `Tab: ${document.getElementsByClassName('active')[1].innerText}`;
                     break;
                 //Trust & Privacy
-                //------------------------------------------------------------------------------
                 case 'terms':
                     presenceData.details = 'Privacy Policy & Terms of Use';
                     break;
                 //Careers
-                //------------------------------------------------------------------------------
                 case 'careers':
                     presenceData.details = 'Careers';
                     break;
                 //Unknown
-                //------------------------------------------------------------------------------
                 default:
                     if(document.getElementsByClassName('brand-section').length > 0) {
                         presenceData.details = 'Services';
@@ -282,12 +253,9 @@ presence.on('UpdateData', async () => {
                         presence.setActivity();
                         return;
                     }
-                //------------------------------------------------------------------------------
             }
             break;
-        //---------------------------------------------------------------------------------------------------------------------
     }
 
     presence.setActivity(presenceData);
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------

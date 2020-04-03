@@ -1,13 +1,12 @@
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
 var presence = new Presence({
     clientId: '680498892651233310'
 }), strings = presence.getStrings({
     browsing: 'presence.activity.browsing',
     reading: 'presence.activity.reading'
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 var browsingStamp = 0;//Last started activity
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
+
 presence.on('UpdateData', async () => {
     const path = window.location.pathname.split('/').slice(1);
     var presenceData = {
@@ -17,10 +16,8 @@ presence.on('UpdateData', async () => {
 
     if(path.length > 0) {
         //Subpages
-        //---------------------------------------------------------------------------------------------------------------------
         switch(path[0]) {
             //Reward Categories
-            //------------------------------------------------------------------------------
             case 'reward_categories':
                 presenceData.smallImageKey = 'reading';
                 presenceData.smallImageText = (await strings).browsing;
@@ -30,7 +27,6 @@ presence.on('UpdateData', async () => {
                 if(path.length > 1) presenceData.state = document.getElementsByClassName('PageSubHeader_title')[0].innerText;
                 break;
             //Rewards
-            //------------------------------------------------------------------------------
             case 'rewards':
                 presenceData.smallImageKey = 'reading';
                 presenceData.smallImageText = (await strings).reading;
@@ -42,7 +38,6 @@ presence.on('UpdateData', async () => {
                 }
                 break;
             //Missions
-            //------------------------------------------------------------------------------
             case 'missions':
                 presenceData.smallImageKey = 'reading';
                 presenceData.smallImageText = (await strings).browsing;
@@ -50,18 +45,15 @@ presence.on('UpdateData', async () => {
                 presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
                 break;
             //Points
-            //------------------------------------------------------------------------------
             case 'point':
                 if(path.length > 1) {
                     switch(path[1]) {
                         //Wallet
-                        //---------------------------------------
                         case 'wallet':
                             presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
                             presenceData.state = document.getElementsByClassName('PageSubHeader_title')[0].innerText;
                             break;
                         //Unknown
-                        //---------------------------------------
                         default:
                             presence.setTrayTitle();
                             presence.setActivity();
@@ -74,7 +66,6 @@ presence.on('UpdateData', async () => {
                 }
                 break;
             //News
-            //------------------------------------------------------------------------------
             case 'news':
                 presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
 
@@ -91,12 +82,10 @@ presence.on('UpdateData', async () => {
                 }
                 break;
             //Redeem Point Codes
-            //------------------------------------------------------------------------------
             case 'serial_number':
                 presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
                 break;
             //Getting Started
-            //------------------------------------------------------------------------------
             case 'getting_started':
                 presenceData.smallImageKey = 'reading';
                 presenceData.smallImageText = (await strings).reading;
@@ -104,7 +93,6 @@ presence.on('UpdateData', async () => {
                 presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
                 break;
             //About Points
-            //------------------------------------------------------------------------------
             case 'about_point':
                 presenceData.smallImageKey = 'reading';
                 presenceData.smallImageText = (await strings).reading;
@@ -112,7 +100,6 @@ presence.on('UpdateData', async () => {
                 presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
                 break;
             //About Gold Points
-            //------------------------------------------------------------------------------
             case 'about_gold_point':
                 presenceData.smallImageKey = 'reading';
                 presenceData.smallImageText = (await strings).reading;
@@ -120,7 +107,6 @@ presence.on('UpdateData', async () => {
                 presenceData.details = document.getElementsByClassName('PageHeader_title')[0].innerText;
                 break;
             //Unknown
-            //------------------------------------------------------------------------------
             default:
                 presence.setTrayTitle();
                 presence.setActivity();
@@ -128,7 +114,6 @@ presence.on('UpdateData', async () => {
         }
     } else {
         //Homepage
-        //---------------------------------------------------------------------------------------------------------------------
         presence.setTrayTitle();
         presence.setActivity();
         return;
@@ -136,4 +121,3 @@ presence.on('UpdateData', async () => {
 
     presence.setActivity(presenceData);
 });
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
