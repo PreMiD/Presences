@@ -100,36 +100,9 @@ presence.on('UpdateData', async () => {
         //Web Dashboard
         //---------------------------------------------------------------------------------------------------------------------
         case 'web.rythmbot.co':
+            //! The web dashboard is currently non functional - This part will be added once it's possible to use it again
             presenceData.details = 'Web Dashboard';
             break;
-
-            //! The web dashboard is currently non functional - This part will be added once it's possible to use it again
-            /*
-            switch(path[0]) {
-                //Manage Guilds
-                //------------------------------------------------------------------------------
-                //TODO Server-Selection, Player-Status (Play, Pause, Nothing, Current Time)
-                case 'guilds':
-                    presenceData.details = 'Manage Guilds';
-                    if(document.getElementById('guild_search').value.length > 0) presenceData.state = `Searching for "${document.getElementById('guild_search').value}"`;
-                    break;
-                //Login
-                //------------------------------------------------------------------------------
-                case 'login':
-                //Logout
-                //------------------------------------------------------------------------------
-                case 'logout':
-                //Unknown
-                //------------------------------------------------------------------------------
-                //TODO Server-IDs
-                default:
-                    presence.setTrayTitle();
-                    presence.setActivity();
-                    return;
-                //------------------------------------------------------------------------------
-            }
-            break;
-            */
     }
 
     presence.setActivity(presenceData);
