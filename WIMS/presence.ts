@@ -1,3 +1,7 @@
+var presence = new Presence({
+  clientId: "656959119118565406",
+});
+
 // Redirect to iframe source, to prevent loss of progress
 if (document.getElementsByTagName("frame")[1]) {
   if (document.baseURI != document.getElementsByTagName("frame")[1].src) {
@@ -5,12 +9,8 @@ if (document.getElementsByTagName("frame")[1]) {
   }
 }
 
-var presence = new Presence({
-  clientId: "656959119118565406",
-});
-
 // Check whether loggedout
-var loggedout = false;
+var loggedout: Boolean = false;
 if (
   (document.baseURI.match(/module=adm/) &&
     document.baseURI.match(/(type=|classes)/)) ||
@@ -20,13 +20,13 @@ if (
   loggedout = true;
 }
 
-var Classname = "";
-var Worksheet = "...";
-var WSNo = "";
-var EXNo = "";
-var Exercise = "";
-var timestamp = null;
-var timeleft = null;
+var Classname: any;
+var Worksheet: String = "...";
+var WSNo: any;
+var EXNo: any;
+var Exercise: any;
+var timestamp: any;
+var timeleft: any;
 
 // In Worksheet
 if (!loggedout) {
