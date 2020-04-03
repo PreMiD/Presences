@@ -74,10 +74,10 @@ presence.on("UpdateData", async () => {
                 data.state = "Time remaining: " + timeRemaining,
                 presence.setActivity(data);
                 }
-                }
-                }
-                }
-                } else {
+            }
+        }
+    }
+} else {
                 data.smallImageKey = "menu",
                 data.smallImageText = "In the menu...",
                 data.details = "In the menu...",
@@ -172,11 +172,10 @@ presence.on("UpdateData", async () => {
                 data.state = "Tempo rimanente: " + timeRemaining,
                 presence.setActivity(data);
                 }
-                }
-                }
-                }
-                } else {
-
+            }
+        }
+    }
+} else {
                 data.smallImageKey = "menu",
                 data.smallImageText = "Nel menù...",
                 data.details = "Nel menù...",
