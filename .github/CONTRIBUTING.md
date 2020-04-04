@@ -87,5 +87,20 @@ For your presence to reach the stores, it MUST go through a process on GitHub to
 13. Tags should be used as alternate names whenever possible, shortened versions must be included as well (e.g. if an Amazon presence had included AWS support it would have its tags like : "amazon-web-services" and "aws").
 14. Unstable sites that constantly change APIs/domains, randomize HTML elements or just still being in heavy development are not allowed and will be removed from the store.
 15. The logo and thumbnail on your presence MUST either be `i.imgur.com`, from a CDN that **YOU** own, or from a CDN that gives you permission to **CHANGE** image files.
+<<<<<<< HEAD:CONTRIBUTING.md
+=======
+16. Verifiers will check if the presence contains an `__awaiter` function in the beginning of the code, whether it's in Typescript or Javascript, and in addition to that, make sure the `UpdateData` event used is similar to this:
+```ts
+presence.on("UpdateData", async () => { /*...*/ });
+```
+It should **NOT** be this:
+```ts
+presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () { /*...*/ });
+```
+17. You **MUST** include all source files (such as `presence.ts` or `iframe.ts`), do **NOT** include a source mapping url if your presence's language is Javascript.
+18. When **Deepscan** throws a lot of errors (and it will), it is mostly an issue with your branch being outdated, always have an up-to-date fork when making pull requests.
+19. Always make sure the version number is `<MAJOR>.<MINOR>.<PATCH>`, anything else like a `1.0.0.1` or `1.0` or `1` even a `1.0.0BETA` is **NOT** permitted.
+20. Presences with one context are **NOT** be allowed (only shows the logo and some text but never changes again).
+>>>>>>> upstream/master:.github/CONTRIBUTING.md
 
 After meeting all of the guidelines and having your presence reviewed at least twice, your presence will be merged with the store.
