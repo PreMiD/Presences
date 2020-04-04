@@ -76,7 +76,7 @@ For your presence to reach the stores, it MUST go through a process on GitHub to
 
 1. It takes two verifiers to confirm that your presence is up to standards. If you happen to get change requests, make the proper effort to fix it or it will **NOT** be added.
 2. If we request changes and your pull request exceeds **7 days of inactivity** without making the necessary ones, we'll be forced to close it.
-3. You are allowed to take screenshots of changes made with the help of another user, and you are allowed to stitch screenshots for viewing pleasure. ( e.g. its author in case you can't access it for any reason).
+3. You are allowed to take screenshots of changes made with the help of another user, and you are allowed to stitch screenshots for viewing pleasure. (e.g. its author in case you can't access it for any reason).
 4. If it is an update or patch, the screenshot **MUST** show the new additions working, **NOT** any old features from previous pull requests.
 5. The provided screenshots should be real, **NOT** edited.
 6. Any contributed code that gets merged to this repository will be licensed under the **Mozilla Public License 2.0**.
@@ -89,7 +89,7 @@ For your presence to reach the stores, it MUST go through a process on GitHub to
 13. Tags should be used as alternate names whenever possible, shortened versions must be included as well (e.g. if an Amazon presence had included AWS support it would have its tags like : "amazon-web-services" and "aws").
 14. Unstable sites that constantly change APIs/domains, randomize HTML elements or just still being in heavy development are not allowed and will be removed from the store.
 15. The logo and thumbnail on your presence MUST either be `i.imgur.com`, from a CDN that **YOU** own, or from a CDN that gives you permission to **CHANGE** image files.
-16. Verifiers will check if the presence contains an `__awaiter` function in the beginning of the code, whether it's in Typescript or Javascript, and in addition to that, make sure the `UpdateData` event used is similar to this:
+16. Verifiers will check if the presence contains an `__awaiter` function in the beginning of the code (which comes from an earlier version of ECMAScript), whether it's in Typescript or Javascript, and in addition to that, make sure the `UpdateData` event used is similar to this:
 
 ```ts
 presence.on("UpdateData", async () => {
@@ -114,11 +114,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
 17. You **MUST** include all source files (such as `presence.ts` or `iframe.ts`), do **NOT** include a source mapping url if your presence's language is Javascript.
 18. When **Deepscan** throws a lot of errors (and it will), it is mostly an issue with your branch being outdated, always have an up-to-date fork when making pull requests.
 19. Always make sure the version number follows [semantic versioning standards](https://semver.org), which translates to the following scheme :
-    `<NEW-FEATURE>.<HUGE-BUGFIX>.<SMALL-BUGFIX-OR-METADATA-CHANGES>`
-    anything else like "1.0.0.1", "1.0", "1", "1.0.0BETA" or changing "1.0.0" to "2.0.0" on a bug fix/small change is **NOT** permitted.
+    `<NEW-FEATURE>.<HUGE-BUGFIX>.<SMALL-BUGFIX-OR-METADATA-CHANGES>`.
+    anything else like `1.0.0.1`, `1.0`, `1`, `1.0.0-BETA` or changing `1.0.0` to `2.0.0` on a bug fix/small change is **NOT** permitted.
 20. Presences with one context are **NOT** be allowed (only shows the logo and some text but never changes again).
-21. Never use custom functions when [native variants are available](https://docs.premid.app/dev/presence#files-explained), this makes sure fixes on the extension level also apply to your presences, you're free to use whatever you need if you do not find them listed in the docs.
-22. It is not recommended to use comments on Javascript presences ( TypeScript ones or their compiled files are fine ) unless necessary, as it reduces code readability and increases file sizes.
-23. Declare the presence constant before everything to avoid such rare issues that may occur, this is not a requirement by design so it could be removed in the future.
+21. **NEVER** use custom functions when [native variants are available](https://docs.premid.app/dev/presence#files-explained), this makes sure fixes on the extension level also apply to your presences, you're free to use whatever you need if you do not find them listed in the docs.
+22. It is **NOT** recommended to use comments on Javascript presences unless necessary (TypeScript ones or their compiled files are fine), as it reduces code readability and increases file sizes.
+23. Declare the presence constant **before** everything to avoid such rare issues that may occur, this is not a requirement by design so it could be removed in the future.
 
 After meeting all of the guidelines and having your presence reviewed at least twice, your presence will be merged with the store.
