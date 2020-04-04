@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
         if(!parseQueryString(document.location.hash).page) {
             presenceData.state = "Watching home page";
         } else {
-            presenceData.state = parseQueryString(document.location.hash).inc ? `Watching ${parseQueryString(document.location.hash).page} page (${parseQueryString(document.location.hash).inc})` : `Watching ${parseQueryString(document.location.hash).page} page`;
+            presenceData.state = parseQueryString(document.location.hash).inc ? `Watching ${parseQueryString(document.location.hash).page} page (${document.querySelector("dl.tabs > dd.active").textContent} )` : `Watching ${parseQueryString(document.location.hash).page} page`;
         }
 
     } else if(document.location.pathname.includes("/Challenges/")) {
