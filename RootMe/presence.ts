@@ -1,6 +1,5 @@
 const presence = new Presence({
-    clientId: "673322920809988120",
-    mediaKeys: false
+    clientId: "673322920809988120"
 });
 
 var user : any;
