@@ -116,9 +116,11 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
 19. Always make sure the version number follows [semantic versioning standards](https://semver.org), which translates to the following scheme :
     `<NEW-FEATURE>.<HUGE-BUGFIX>.<SMALL-BUGFIX-OR-METADATA-CHANGES>`.
     anything else like `1.0.0.1`, `1.0`, `1`, `1.0.0-BETA` or changing `1.0.0` to `2.0.0` on a bug fix/small change is **NOT** permitted.
-20. Presences with one context are **NOT** be allowed (only shows the logo and some text but never changes again).
+20. Low quality presences (or ones with one context) are **NOT** be allowed (e.g. only showing the logo and some text but never changing again).
 21. **NEVER** use custom functions when [native variants are available](https://docs.premid.app/dev/presence#files-explained), this makes sure fixes on the extension level also apply to your presences, you're free to use whatever you need if you do not find them listed in the docs.
 22. It is **NOT** recommended to use comments on Javascript presences unless necessary (TypeScript ones or their compiled files are fine), as it reduces code readability and increases file sizes.
 23. Declare the presence constant **before** everything to avoid such rare issues that may occur, this is not a requirement by design so it could be removed in the future.
+24. Presences that target internal browser pages (like Chrome Web Store, `chrome://`, `about:` pages, etc...) are **NOT** allowed as they require an _experimental flag_ to be enabled on the user's end and could potentially cause damage to their browsers.
+25. It is **FORBIDDEN** to code presences for a website without adding support to its main language (e.g. a YouTube presence coded with support for Portuguese and Japanese, but not English itself).
 
 After meeting all of the guidelines and having your presence reviewed at least twice, your presence will be merged with the store.
