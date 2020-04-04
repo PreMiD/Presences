@@ -1,6 +1,5 @@
 var presence = new Presence({
 	clientId: "664057766809436161",
-	mediaKeys: false
 })
 
 var currentURL = new URL(document.location.href),
