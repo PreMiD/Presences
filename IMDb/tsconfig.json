@@ -2,6 +2,7 @@
   "extends": "../tsconfig.json",
   "compileOnSave": true,
   "compilerOptions": {
-    "outDir": "./dist/"
+    "outDir": "./dist/",
+    "downlevelIteration": true
   }
 }
