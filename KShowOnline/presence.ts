@@ -16,7 +16,6 @@ var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any;
 
 var lastPlaybackState = null;
 var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -24,7 +23,7 @@ if (lastPlaybackState != playback) {
 }
 
 if (document.location.pathname.includes("/kshow/")) {
-  presence.on("iFrameData", data => {
+  presence.on("iFrameData", (data) => {
     playback = data.iframe_video.duration !== null ? true : false;
 
     //console.log(data.iframe_video);

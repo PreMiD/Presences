@@ -1,9 +1,8 @@
 var iframe = new iFrame();
 iframe.on("UpdateData", async () => {
+  var video: HTMLVideoElement;
   if (document.querySelector("#dogevideo_html5_api") !== null) {
-    var video: HTMLVideoElement = document.querySelector(
-      "#dogevideo_html5_api"
-    );
+    video = document.querySelector("#dogevideo_html5_api");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
@@ -20,7 +19,7 @@ iframe.on("UpdateData", async () => {
       "#player > div > div.container.pointer-enabled > video"
     ) !== null
   ) {
-    var video: HTMLVideoElement = document.querySelector(
+    video = document.querySelector(
       "#player > div > div.container.pointer-enabled > video"
     );
 
@@ -39,7 +38,7 @@ iframe.on("UpdateData", async () => {
       "#mediaplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     ) !== null
   ) {
-    var video: HTMLVideoElement = document.querySelector(
+    video = document.querySelector(
       "#mediaplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
 
@@ -54,7 +53,7 @@ iframe.on("UpdateData", async () => {
       });
     }
   } else if (document.querySelector("#vid_html5_api") !== null) {
-    var video: HTMLVideoElement = document.querySelector("#vid_html5_api");
+    video = document.querySelector("#vid_html5_api");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
@@ -70,7 +69,7 @@ iframe.on("UpdateData", async () => {
     document.querySelector("#myElement > div.jw-media.jw-reset > video") !==
     null
   ) {
-    var video: HTMLVideoElement = document.querySelector(
+    video = document.querySelector(
       "#myElement > div.jw-media.jw-reset > video"
     );
 
@@ -85,9 +84,7 @@ iframe.on("UpdateData", async () => {
       });
     }
   } else if (document.querySelector("#mgvideo > div.vjs-poster") !== null) {
-    var video: HTMLVideoElement = document.querySelector(
-      "#mgvideo > div.vjs-poster"
-    );
+    video = document.querySelector("#mgvideo > div.vjs-poster");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
@@ -100,7 +97,7 @@ iframe.on("UpdateData", async () => {
       });
     }
   } else if (document.querySelector("#olvideo_html5_api") !== null) {
-    var video: HTMLVideoElement = document.querySelector("#olvideo_html5_api");
+    video = document.querySelector("#olvideo_html5_api");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
@@ -113,7 +110,7 @@ iframe.on("UpdateData", async () => {
       });
     }
   } else if (document.querySelector("#videojs_html5_api") !== null) {
-    var video: HTMLVideoElement = document.querySelector("#videojs_html5_api");
+    video = document.querySelector("#videojs_html5_api");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
@@ -130,7 +127,7 @@ iframe.on("UpdateData", async () => {
       "#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     ) !== null
   ) {
-    var video: HTMLVideoElement = document.querySelector(
+    video = document.querySelector(
       "#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
 
@@ -145,7 +142,7 @@ iframe.on("UpdateData", async () => {
       });
     }
   } else if (document.querySelector("#mgvideo_html5_api") !== null) {
-    var video: HTMLVideoElement = document.querySelector("#mgvideo_html5_api");
+    video = document.querySelector("#mgvideo_html5_api");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
@@ -160,9 +157,7 @@ iframe.on("UpdateData", async () => {
   } else if (
     document.querySelector("#player > div.jw-media.jw-reset > video") !== null
   ) {
-    var video: HTMLVideoElement = document.querySelector(
-      "#player > div.jw-media.jw-reset > video"
-    );
+    video = document.querySelector("#player > div.jw-media.jw-reset > video");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
@@ -179,7 +174,7 @@ iframe.on("UpdateData", async () => {
       "#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     ) !== null
   ) {
-    var video: HTMLVideoElement = document.querySelector(
+    video = document.querySelector(
       "#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
 
@@ -198,7 +193,7 @@ iframe.on("UpdateData", async () => {
       "#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     ) !== null
   ) {
-    var video: HTMLVideoElement = document.querySelector(
+    video = document.querySelector(
       "#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
 
@@ -213,7 +208,7 @@ iframe.on("UpdateData", async () => {
       });
     }
   } else if (document.querySelector("video") !== null) {
-    var video: HTMLVideoElement = document.querySelector("video");
+    video = document.querySelector("video");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
