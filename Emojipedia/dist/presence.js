@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "691867169251655758",
+  clientId: "691867169251655758"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   if (
@@ -39,7 +39,7 @@ presence.on("UpdateData", () => {
       "https://emojipedia.org/activity",
       "https://emojipedia.org/travel-places",
       "https://emojipedia.org/symbols",
-      "https://emojipedia.org/flags",
+      "https://emojipedia.org/flags"
     ];
 
     const eventURLs = [
@@ -84,20 +84,20 @@ presence.on("UpdateData", () => {
       "https://emojipedia.org/winter",
       "https://emojipedia.org/winter-olympics",
       "https://emojipedia.org/world-cup",
-      "https://emojipedia.org/world-emoji-day",
+      "https://emojipedia.org/world-emoji-day"
     ];
 
     let bypass = false;
     let isCategory = false;
     let isEvent = false;
 
-    for (n = 0; n < categoryURLs.length; n++) {
+    for (let n = 0; n < categoryURLs.length; n++) {
       if (document.URL.includes(categoryURLs[n]))
         (isCategory = true), (bypass = true);
     }
 
     if (bypass !== true) {
-      for (n = 0; n < eventURLs.length; n++) {
+      for (let n = 0; n < eventURLs.length; n++) {
         if (document.URL.includes(eventURLs[n]))
           (isEvent = true), (bypass = true);
       }
