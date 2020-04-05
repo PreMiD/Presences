@@ -8,17 +8,11 @@
     "en": "Laut.FM is a Website to create your own Music station or listening to music.",
     "de": "Laut.FM ist eine Webseite um dein eigenes Radio zu erstellen oder um Musik zu hören."
   },
-  "url": [
-    "laut.fm"
-  ],
-  "version": "1.2.0",
+  "url": "laut.fm",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/rncpOUV.png",
   "thumbnail": "https://i.imgur.com/FZh7OFc.png",
   "color": "#373b4a",
-  "tags": [
-    "Music",
-    "Radio",
-    "Station"
-  ],
+  "tags": ["Music", "Radio", "Station"],
   "category": "music"
 }

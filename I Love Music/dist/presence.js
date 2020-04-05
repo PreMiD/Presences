@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "477919120789078026",
+    clientId: "477919120789078026"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var title, views, air, air2, title2;
@@ -11,7 +11,6 @@ var iFrameVideo, currentTime, duration, paused;
 var video, videoDuration, videoCurrentTime;
 var lastPlaybackState = null;
 var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
@@ -60,16 +59,16 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname == "/hiphop/") {
       presenceData.details = "Sucht in Hip Hop...";
       presence.setActivity(presenceData);
-    }else if (document.location.pathname == "/channels/") {
+    } else if (document.location.pathname == "/channels/") {
       presenceData.details = "Sucht in Channelliste...";
       presence.setActivity(presenceData);
-    }else if (document.location.pathname == "/streams/") {
+    } else if (document.location.pathname == "/streams/") {
       presenceData.details = "Sucht in Streamlinks...";
       presence.setActivity(presenceData);
-    }else if (document.location.pathname == "/datenschutz/") {
+    } else if (document.location.pathname == "/datenschutz/") {
       presenceData.details = "Liest den Datenschutz...";
       presence.setActivity(presenceData);
-    }else if (document.location.pathname == "/impressum/") {
+    } else if (document.location.pathname == "/impressum/") {
       presenceData.details = "Liest Impressum durch...";
       presence.setActivity(presenceData);
     }

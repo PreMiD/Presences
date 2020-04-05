@@ -17,7 +17,7 @@ if (lastPlaybackState != playback) {
 
 var iFrameVideo: any, currentTime: any, duration: any, paused: any;
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   playback = data.iframe_video !== null ? true : false;
 
   if (playback) {
@@ -29,6 +29,9 @@ presence.on("iFrameData", data => {
 });
 
 presence.on("UpdateData", async () => {
+  var presenceData: presenceData = {
+    largeImageKey: "lg"
+  };
   if (
     iFrameVideo !== false &&
     !isNaN(duration) &&
@@ -37,7 +40,7 @@ presence.on("UpdateData", async () => {
     var videoTitle: any, episod: any, episode: any;
 
     var pattern = "Episode";
-    var truncateAfter = function(str, pattern) {
+    var truncateAfter = function (str, pattern) {
       return str.slice(0, str.indexOf(pattern));
     };
 
@@ -46,16 +49,15 @@ presence.on("UpdateData", async () => {
     episod = episode.options[episode.selectedIndex].text;
 
     var timestamps = getTimestamps(
-        Math.floor(currentTime),
-        Math.floor(duration)
-      ),
-      presenceData: presenceData = {
-        largeImageKey: "lg",
-        smallImageKey: paused ? "pause" : "play",
-        smallImageText: paused ? (await strings).pause : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
-      };
+      Math.floor(currentTime),
+      Math.floor(duration)
+    );
+    presenceData.smallImageKey = paused ? "pause" : "play";
+    presenceData.smallImageText = paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
 
     presence.setTrayTitle(paused ? "" : videoTitle.innerText);
 
@@ -71,15 +73,8 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, !paused);
     }
   } else {
-    presenceData: presenceData = {
-      largeImageKey: "lg"
-    };
-
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData, true);
   }

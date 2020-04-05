@@ -8,6 +8,7 @@ var presence = new Presence({
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
+var title;
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
@@ -22,13 +23,12 @@ presence.on("UpdateData", async () => {
     if (!Ad) {
       var path = document.location.pathname;
       if (path.includes("/live/")) {
-        var title = document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ")
-          .textContent;
+        title = document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ").textContent;
         data.smallImageKey = "live";
         data.smallImageText = (await strings).live;
         data.startTimestamp = elapsed;
       } else {
-        var title = document.querySelector(".bodyTitle___DZEtt").textContent;
+        title = document.querySelector(".bodyTitle___DZEtt").textContent;
         var timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)

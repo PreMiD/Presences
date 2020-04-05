@@ -8,6 +8,7 @@ var presence = new Presence({
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
+var title, author, song, subtitle;
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
@@ -30,10 +31,10 @@ presence.on("UpdateData", async () => {
         ? true
         : false;
       if (playCheck) {
-        var title = document.querySelector(".css-19ebljp").textContent;
-        var author = document.querySelector(".css-zzaxa6").textContent;
-        var song = document.querySelector(".css-9be0f7").textContent;
-        var subtitle = author + " - " + song;
+        title = document.querySelector(".css-19ebljp").textContent;
+        author = document.querySelector(".css-zzaxa6").textContent;
+        song = document.querySelector(".css-9be0f7").textContent;
+        subtitle = author + " - " + song;
 
         title = checkLength(title);
         data.details = title;
@@ -52,15 +53,15 @@ presence.on("UpdateData", async () => {
         presence.clearActivity();
       }
     } else {
-      var title = document.querySelector(".css-19ebljp").textContent;
+      title = document.querySelector(".css-19ebljp").textContent;
       try {
-        var author = document.querySelector(".css-x5q5qs").textContent;
-        var song = document.querySelector(".css-9be0f7").textContent;
-        var subtitle = author + " - " + song;
+        author = document.querySelector(".css-x5q5qs").textContent;
+        song = document.querySelector(".css-9be0f7").textContent;
+        subtitle = author + " - " + song;
       } catch {
-        var author = document.querySelector(".css-x5q5qs").textContent;
-        var song = document.querySelector(".css-1uhpu6r").textContent;
-        var subtitle = song + " - " + author;
+        author = document.querySelector(".css-x5q5qs").textContent;
+        song = document.querySelector(".css-1uhpu6r").textContent;
+        subtitle = song + " - " + author;
       }
       var audioTime = document.querySelector(".css-9dpnv0").textContent;
       var audioDuration = document.querySelector(".css-xf5pff").textContent;

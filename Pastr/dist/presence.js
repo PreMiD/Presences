@@ -1,12 +1,11 @@
 var presence = new Presence({
-  clientId: "630777829478498326",
+  clientId: "630777829478498326"
 });
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "pastrlogo",
+    largeImageKey: "pastrlogo"
   };
   let pageTitle = document.title.slice(11);
-  let currentPage;
   let action;
   let state;
   if (pageTitle == "Create") {

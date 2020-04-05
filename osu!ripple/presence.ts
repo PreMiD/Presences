@@ -2,13 +2,13 @@ var presence = new Presence({ clientId: "688752009079160852" }),
   presenceData: presenceData = { largeImageKey: "logo" },
   customData: boolean = false;
 var browsingStamp = Math.floor(Date.now() / 1000);
-var url: any;
 var title: any;
 var subtitle: any;
 var user: any;
-var mode: any;
 var pp: any;
 var rank: any;
+var url: URL;
+var mode: number;
 
 presence.on("UpdateData", async () => {
   customData = false;
@@ -29,12 +29,12 @@ presence.on("UpdateData", async () => {
     );
     presenceData.startTimestamp = browsingStamp;
 
-    var url: URL = new URL(document.location.href);
-    var mode: number = parseInt(url.searchParams.get("mode"));
+    url = new URL(document.location.href);
+    mode = parseInt(url.searchParams.get("mode"));
     switch (mode) {
       case 1:
-        var url: URL = new URL(document.location.href);
-        var mode: number = parseInt(url.searchParams.get("relax"));
+        url = new URL(document.location.href);
+        mode = parseInt(url.searchParams.get("relax"));
         switch (mode) {
           case 1:
             rank = document.querySelector(
@@ -60,8 +60,8 @@ presence.on("UpdateData", async () => {
         }
         break;
       case 2:
-        var url: URL = new URL(document.location.href);
-        var mode: number = parseInt(url.searchParams.get("relax"));
+        url = new URL(document.location.href);
+        mode = parseInt(url.searchParams.get("relax"));
         switch (mode) {
           case 1:
             rank = document.querySelector(
@@ -97,8 +97,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = rank.innerText + " | " + pp.innerText + "pp";
         break;
       default:
-        var url: URL = new URL(document.location.href);
-        var mode: number = parseInt(url.searchParams.get("relax"));
+        url = new URL(document.location.href);
+        mode = parseInt(url.searchParams.get("relax"));
         switch (mode) {
           case 1:
             rank = document.querySelector(
@@ -128,12 +128,12 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing Leaderboard";
 
-    var url: URL = new URL(document.location.href);
-    var mode: number = parseInt(url.searchParams.get("mode"));
+    url = new URL(document.location.href);
+    mode = parseInt(url.searchParams.get("mode"));
     switch (mode) {
       case 1:
-        var url: URL = new URL(document.location.href);
-        var mode: number = parseInt(url.searchParams.get("relax"));
+        url = new URL(document.location.href);
+        mode = parseInt(url.searchParams.get("relax"));
         switch (mode) {
           case 1:
             presenceData.state = "osu!taiko | Relax";
@@ -144,8 +144,8 @@ presence.on("UpdateData", async () => {
         }
         break;
       case 2:
-        var url: URL = new URL(document.location.href);
-        var mode: number = parseInt(url.searchParams.get("relax"));
+        url = new URL(document.location.href);
+        mode = parseInt(url.searchParams.get("relax"));
         switch (mode) {
           case 1:
             presenceData.state = "osu!catch | Relax";
@@ -159,8 +159,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = "osu!mania";
         break;
       default:
-        var url: URL = new URL(document.location.href);
-        var mode: number = parseInt(url.searchParams.get("relax"));
+        url = new URL(document.location.href);
+        mode = parseInt(url.searchParams.get("relax"));
         switch (mode) {
           case 1:
             presenceData.state = "osu!standard | Relax";
@@ -252,6 +252,6 @@ presence.on("UpdateData", async () => {
   }
 });
 
-presence.on("iFrameData", function(data) {
+presence.on("iFrameData", function (data) {
   console.log(data);
 });

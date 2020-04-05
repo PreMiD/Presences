@@ -22,14 +22,13 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/new")) {
-      var title = document.getElementsByClassName("news-header-title")[0]
-        .innerHTML;
+      title = document.getElementsByClassName("news-header-title")[0].innerHTML;
       var category = document.getElementsByClassName("news-header-category ")[0]
         .innerHTML;
       presenceData.details = title;
       presenceData.state = "Category: " + category;
     } else if (document.location.pathname.includes("magazine")) {
-      var title = document.getElementsByClassName("magazine-content-title")[0]
+      title = document.getElementsByClassName("magazine-content-title")[0]
         .innerHTML;
       var time = document.getElementsByClassName("magazine-content-time")[0]
         .innerHTML;

@@ -363,10 +363,7 @@ presence.on("UpdateData", async () => {
       smallImageKey: "studio",
       smallImageText: "Youtube Studio"
     };
-
-    var search: any;
-    var user: any;
-    var browsingStamp = Math.floor(Date.now() / 1000);
+    browsingStamp = Math.floor(Date.now() / 1000);
 
     if (document.location.pathname.includes("/videos")) {
       presenceData.details = "Viewing their videos"; //youtube.studio.viewVideos

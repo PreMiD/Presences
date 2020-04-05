@@ -15,7 +15,6 @@ var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any;
 
 var lastPlaybackState = null;
 var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
 
 var user: any;
 var search: any;

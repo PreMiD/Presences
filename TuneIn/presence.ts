@@ -8,6 +8,7 @@ var presence = new Presence({
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
+var title, author;
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
@@ -29,8 +30,8 @@ presence.on("UpdateData", async () => {
         ? true
         : false;
       if (playCheck) {
-        var title = document.querySelector("#playerTitle").textContent;
-        var author = document.querySelector("#playerSubtitle").textContent;
+        title = document.querySelector("#playerTitle").textContent;
+        author = document.querySelector("#playerSubtitle").textContent;
 
         data.details = title;
         if (title.length > 128) {
@@ -54,8 +55,8 @@ presence.on("UpdateData", async () => {
         presence.clearActivity();
       }
     } else {
-      var title = document.querySelector("#playerTitle").textContent;
-      var author = document.querySelector("#playerSubtitle").textContent;
+      title = document.querySelector("#playerTitle").textContent;
+      author = document.querySelector("#playerSubtitle").textContent;
       var audioTime = document.querySelector("#scrubberElapsed").textContent;
       var audioDuration = document.querySelector("#scrubberDuration")
         .textContent;
