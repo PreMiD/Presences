@@ -18,11 +18,11 @@ if (lastPlaybackState != playback) {
 presence.on("UpdateData", async () => {
   playback = document.querySelector(".AT-player video") !== null ? true : false;
 
-  if (!playback) {
-    presenceData: presenceData = {
-      largeImageKey: "lg"
-    };
+  var presenceData: presenceData = {
+    largeImageKey: "lg"
+  };
 
+  if (!playback) {
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
 
@@ -42,23 +42,23 @@ presence.on("UpdateData", async () => {
     seasonepisode = document.querySelector(".series-episode");
 
     var timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
-      presenceData: presenceData = {
-        largeImageKey: "lg",
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
-      };
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
+
+    presenceData.smallImageKey = video.paused ? "pause" : "play";
+    presenceData.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
 
     presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
 
-    presenceData.details = videoTitle.innerText;
-    presenceData.state = seasonepisode.innerText;
+    presenceData.details =
+      videoTitle !== null ? videoTitle.innerText : "Title not found...";
+    presenceData.state =
+      seasonepisode !== null ? seasonepisode.innerText : "Episode not found...";
 
     if (video.paused) {
       delete presenceData.startTimestamp;
