@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing home page";
     } else if (document.querySelector(".BH-menu") !== null) {
       if (document.location.pathname.includes("A.php")) {
-        var title = document
+        title = document
           .querySelector("div.BH-menu > ul.BH-menuE > li > a[title]")
           .getAttribute("title");
         presenceData.details = title;
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       }
       if (document.location.pathname.includes("B.php")) {
-        var title = document
+        title = document
           .querySelector("div.BH-menu > ul.BH-menuE > li > a[title]")
           .getAttribute("title");
         presenceData.details = title;
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       }
       if (document.location.pathname.includes("C.php")) {
-        var title = document
+        title = document
           .querySelector("div.BH-menu > ul.BH-menuE > li > a[title]")
           .getAttribute("title");
         var header_title = document.getElementsByClassName(
