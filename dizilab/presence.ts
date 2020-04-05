@@ -24,7 +24,7 @@ const presence = new Presence({
 
 let video: { [k: string]: any } = {};
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   if (!data.error) {
     video.dataAvailable = true;
     video.currentTime = data.currentTime;
@@ -192,7 +192,7 @@ presence.on("UpdateData", async () => {
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
               ).textContent
             }. Bölüm`
-          : null;
+          : "none found";
 
     const fixedEpisodeName = episodeX
         .replace(/\n/g, "")
