@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/search")) {
-    var searchURL = new URL(document.location.href);
+    searchURL = new URL(document.location.href);
 
     searchTab = searchURL.searchParams.get("tbm");
 
