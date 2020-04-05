@@ -10,12 +10,13 @@ presence.on("UpdateData", async () => {
   if (audio !== null) {
     var title: HTMLElement = document.querySelector(".brg-player-title");
 
-    presenceData.details = (title as HTMLElement).innerText;
+    presenceData.details =
+      title !== null ? (title as HTMLElement).innerText : "Title not found...";
     presenceData.largeImageKey = "logo";
 
     presence.setTrayTitle(audio.paused ? "" : title.innerText);
 
-    if (audio && title !== null) {
+    if (title !== null) {
       presence.setActivity(presenceData, !audio.paused);
     }
   } else {
