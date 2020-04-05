@@ -17,6 +17,9 @@ var progress: any;
 var lastState: any;
 var oldTitle: any;
 
+var currentTime: any, duration: any;
+var video: HTMLVideoElement, timestamps: any;
+
 lastState = null;
 oldTitle = null;
 
@@ -77,9 +80,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Playing";
     } else {
       //If there is no song playing display site information
-      var currentTime: any, duration: any, paused: any;
-      var video: HTMLVideoElement, timestamps: any;
-
       if (document.location.pathname.includes("/on-demand/movies/")) {
         video = document.querySelector(
           "#root > div.jss1.withHeader.withGuide > div.Player__Wrapper-kxPlPT.cCxNsj > div > div > div > div.Player__VideoWrapper-iChBud.eNibdw > div > div:nth-child(1) > div > div.container.chromeless.pointer-enabled > video"
