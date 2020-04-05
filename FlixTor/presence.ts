@@ -53,28 +53,34 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    presenceData = {
-      largeImageKey: "lg",
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+    presenceData.smallImageKey = video.paused ? "pause" : "play";
+    presenceData.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
 
-    presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
+    presence.setTrayTitle(
+      video.paused
+        ? ""
+        : videoTitle !== null
+        ? videoTitle.innerText
+        : "Title not found..."
+    );
 
     if (season && episode) {
-      presenceData.details = videoTitle.innerText;
+      presenceData.details =
+        videoTitle !== null ? videoTitle.innerText : "Title not found...";
       presenceData.state =
         "Season " + season.innerText + ", Episode " + episode.innerText;
     } else if (!season && episode) {
-      presenceData.details = videoTitle.innerText;
+      presenceData.details =
+        videoTitle !== null ? videoTitle.innerText : "Title not found...";
       presenceData.state = "Episode " + episode.innerText;
     } else {
       presenceData.details = "Watching";
-      presenceData.state = videoTitle.innerText;
+      presenceData.state =
+        videoTitle !== null ? videoTitle.innerText : "Title not found...";
     }
 
     if (video.paused) {
