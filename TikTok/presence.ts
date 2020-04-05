@@ -3,6 +3,7 @@ var presence = new Presence({
 });
 
 var elapsed = Math.floor(Date.now() / 1000);
+var user;
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
@@ -20,13 +21,13 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = elapsed;
   } else if (path.startsWith("/@")) {
     if (path.includes("/video/")) {
-      var user = document.querySelector("._video_card_big_user_info_handle")
+      user = document.querySelector("._video_card_big_user_info_handle")
         .textContent;
       data.details = "Viewing a TikTok";
       data.state = user;
       data.startTimestamp = elapsed;
     } else {
-      var user = document.querySelector("._user_header_uniqueId").textContent;
+      user = document.querySelector("._user_header_uniqueId").textContent;
       data.details = "Viewing a Profile";
       data.state = user;
       data.startTimestamp = elapsed;
