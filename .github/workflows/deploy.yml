@@ -1,7 +1,8 @@
 name: DePloY
 on:
   push:
-    branches: master
+    branches:
+      - master
     paths:
       - "**.ts"
       - "**.js"
@@ -9,11 +10,20 @@ on:
       - "**.yml"
 jobs:
   UpdatePresences:
-    runs-on: "ubuntu-latest"
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
-      - name: Install Dependencies
+      - name: Checkout Project
+        uses: actions/checkout@v2
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Restore CI Cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Deps
         run: yarn
       - name: Update Presences
         env:

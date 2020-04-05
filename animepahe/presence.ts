@@ -41,8 +41,7 @@ presence.on("UpdateData", async () => {
   } else if (!path.split("anime/")[1].includes("/")) {
     let type: string;
 
-    for (let info of document.querySelector("div.col-sm-4.anime-info")
-      .children) {
+    for (let info of (document.querySelector("div.col-sm-4.anime-info").children as unknown as any[])) {
       // Not uniform info order... ugh
       if (info.children[0].textContent == "Type:")
         info.children[1].textContent == "TV"
