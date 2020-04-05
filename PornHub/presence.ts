@@ -24,8 +24,8 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
       presenceData: presenceData = {
-        details: title.innerText,
-        state: uploader.textContent,
+        details: title ? title.innerText : "Title not found...",
+        state: uploader ? uploader.textContent : "Uploader not found...",
         largeImageKey: "lg",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
     }
 
     //* If tags are not "null"
-    if (video && title !== null && uploader !== null) {
+    if (title !== null && uploader !== null) {
       presence.setActivity(presenceData, !video.paused);
     }
   } else {
