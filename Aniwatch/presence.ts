@@ -44,7 +44,7 @@ presence.on(`UpdateData`, async () => {
     //make sure we're on aniwatch
     if (path == `/` || path == `/home`) {
       //if we're on the home page
-      presenceData.startTimestamp == browsingStamp; //start counting how long the site's been open
+      presenceData.startTimestamp = browsingStamp; //start counting how long the site's been open
       presenceData.details = `Viewing home page`;
     } else if (path.startsWith(`/anime`)) {
       //if we're on an anime page
