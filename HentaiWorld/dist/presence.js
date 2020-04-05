@@ -1,8 +1,9 @@
 var presence = new Presence({
-  clientId: "660882722839068702",
+  clientId: "660882722839068702"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var iFrameVideo, currentTime, duration, paused;
+var usernamewl, username, hentainame, episodenumber, timestamps;
 presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
@@ -14,7 +15,7 @@ presence.on("iFrameData", (data) => {
 });
 presence.on("UpdateData", () => {
   let data = {
-    largeImageKey: "hwnew",
+    largeImageKey: "hwnew"
   };
   if (!navigator.language.includes("it-IT")) {
     // English
@@ -65,15 +66,14 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.startsWith("/profile")) {
       // Profile
       if (document.location.href.includes("watchlist")) {
-        var usernamewl = document.querySelector("span.site-name > b")
-          .textContent;
+        usernamewl = document.querySelector("span.site-name > b").textContent;
         (data.smallImageKey = "userwl"),
           (data.details = "Watching the " + usernamewl + "'s"),
           (data.state = "WatchList"),
           (data.startTimestamp = browsingStamp);
         presence.setActivity(data);
       } else {
-        var username = document
+        username = document
           .querySelector("div.ruolo-aw2")
           .textContent.replace("Hey ", "")
           .replace(" Benvenuto!", "");
@@ -349,16 +349,13 @@ presence.on("UpdateData", () => {
     } // End Categories
     else if (document.location.pathname.startsWith("/watch")) {
       // Hentai Episode
-      var hentainame = document.title
+      hentainame = document.title
         .replace("HentaiWorld: ", "")
         .split(" Episodio")[0];
-      var episodenumber = document
+      episodenumber = document
         .querySelector("a#downloadLink.btn.btn-sm.btn-primary")
         .textContent.split("Ep ")[1];
-      var timestamps = getTimestamps(
-        Math.floor(currentTime),
-        Math.floor(duration)
-      );
+      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
       if (iFrameVideo == true && !isNaN(duration)) {
         (data.smallImageKey = paused ? "pause" : "play"),
           (data.details = "Watching: " + hentainame),
@@ -426,15 +423,14 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.startsWith("/profile")) {
       // Profile
       if (document.location.href.includes("watchlist")) {
-        var usernamewl = document.querySelector("span.site-name > b")
-          .textContent;
+        usernamewl = document.querySelector("span.site-name > b").textContent;
         (data.smallImageKey = "userwl"),
           (data.details = "Guarda la WatchList di:"),
           (data.state = usernamewl),
           (data.startTimestamp = browsingStamp);
         presence.setActivity(data);
       } else {
-        var username = document
+        username = document
           .querySelector("div.ruolo-aw2")
           .textContent.replace("Hey ", "")
           .replace(" Benvenuto!", "");
@@ -707,16 +703,13 @@ presence.on("UpdateData", () => {
     } // End Categories
     else if (document.location.pathname.startsWith("/watch")) {
       // Hentai Episode
-      var hentainame = document.title
+      hentainame = document.title
         .replace("HentaiWorld: ", "")
         .split(" Episodio")[0];
-      var episodenumber = document
+      episodenumber = document
         .querySelector("a#downloadLink.btn.btn-sm.btn-primary")
         .textContent.split("Ep ")[1];
-      var timestamps = getTimestamps(
-        Math.floor(currentTime),
-        Math.floor(duration)
-      );
+      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
       if (iFrameVideo == true && !isNaN(duration)) {
         (data.smallImageKey = paused ? "pause" : "play"),
           (data.details = "Guardando: " + hentainame),

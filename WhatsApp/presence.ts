@@ -22,8 +22,7 @@ presence.on("UpdateData", async () => {
       : false,
     contactName = null;
 
-  if (!name || name === null || name.innerText == "")
-    return presence.clearActivity();
+  if (!name || name.innerText == "") return presence.clearActivity();
   if (
     isNaN(name.innerText.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "") as any)
   )

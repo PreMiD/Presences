@@ -33,8 +33,10 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    presenceData.details = (title as HTMLElement).innerText;
-    presenceData.state = (game as HTMLElement).innerText;
+    presenceData.details =
+      title !== null ? (title as HTMLElement).innerText : "Title not found...";
+    presenceData.state =
+      game !== null ? (game as HTMLElement).innerText : "Game not found...";
     presenceData.largeImageKey = "logo";
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
@@ -55,7 +57,7 @@ presence.on("UpdateData", async () => {
       }
     }
 
-    if (video && title !== null && game !== null) {
+    if (title !== null && game !== null) {
       presence.setActivity(presenceData, !video.paused);
     }
   } else {

@@ -78,23 +78,23 @@ presence.on("UpdateData", async () => {
         .textContent;
       user = document.querySelector("#titel > h1 > span:nth-child(2)")
         .textContent;
-      if (video.duration == undefined || video.duration == null) {
-        time = false;
-        live = false;
-      } else if (video.duration == 9007199254740991) {
-        live = true;
-      } else {
-        time = true;
-        live = false;
-        currentTime = video.currentTime;
-        duration = video.duration;
-        paused = video.paused;
-        timestamps = getTimestamps(
-          Math.floor(currentTime),
-          Math.floor(duration)
-        );
-      }
       if (video !== null) {
+        if (video.duration == undefined) {
+          time = false;
+          live = false;
+        } else if (video.duration == 9007199254740991) {
+          live = true;
+        } else {
+          time = true;
+          live = false;
+          currentTime = video.currentTime;
+          duration = video.duration;
+          paused = video.paused;
+          timestamps = getTimestamps(
+            Math.floor(currentTime),
+            Math.floor(duration)
+          );
+        }
         if (time == true && !isNaN(duration) && live == false) {
           presenceData.smallImageKey = paused ? "pause" : "play";
           presenceData.smallImageText = paused

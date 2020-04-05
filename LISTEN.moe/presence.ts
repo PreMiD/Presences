@@ -49,8 +49,12 @@ function getTrack() {
   return track;
 }
 
-audio.onplay = resetTimestamp();
-audio.onpause = resetTimestamp();
+audio.onplay = function () {
+  resetTimestamp();
+};
+audio.onpause = function () {
+  resetTimestamp();
+};
 
 presence.on("UpdateData", async () => {
   path = window.location.pathname;
@@ -82,11 +86,9 @@ presence.on("UpdateData", async () => {
       delete presenceData.state;
     }
     presenceData.startTimestamp;
-    delete presenceData.smallImageKey, presenceData.smallImageText;
   } else {
     presenceData.details = "Not playing";
     presenceData.state = "Home";
-    delete presenceData.smallImageKey, presenceData.smallImageText;
   }
   presence.setActivity(presenceData, true);
 });

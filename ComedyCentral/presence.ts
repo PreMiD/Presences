@@ -18,13 +18,14 @@ presence.on("UpdateData", async () => {
 
     var show = document.querySelector(".header h3 a").textContent;
     var epTitle = document.querySelector(".sub-header h1").textContent;
-    var epNumber: any = document.querySelector(".meta span");
+    var epNumber: any;
+    epNumber = document.querySelector(".meta span");
     if (epNumber) {
-      var epNumber: any =
+      epNumber =
         epNumber.textContent.replace("Season ", "S").replace(" Ep ", ":E") +
         " ";
     } else {
-      var epNumber: any = "";
+      epNumber = "";
     }
     var timestamps = getTimestamps(
       Math.floor(player.currentTime),

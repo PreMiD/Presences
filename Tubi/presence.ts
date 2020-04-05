@@ -6,6 +6,8 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+var subtitle;
+
 presence.on("UpdateData", async () => {
   let data: presenceData = {
     largeImageKey: "tubi-logo"
@@ -27,7 +29,7 @@ presence.on("UpdateData", async () => {
     if (subtitleCheck) {
       subtitle = "Movie";
     } else {
-      var subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
+      subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
     }
 
     (data.details = title), (data.state = subtitle);

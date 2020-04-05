@@ -8,6 +8,7 @@ var presence = new Presence({
   });
 
 var elapsed = Math.floor(Date.now() / 1000);
+var subtitle;
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
@@ -34,7 +35,7 @@ presence.on("UpdateData", async () => {
     if (subtitleCheck) {
       subtitle = "Movie";
     } else {
-      var subtitle = document.querySelector("h3.slide-title").textContent;
+      subtitle = document.querySelector("h3.slide-title").textContent;
     }
 
     (data.details = title), (data.state = subtitle);

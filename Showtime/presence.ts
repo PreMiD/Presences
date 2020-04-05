@@ -12,21 +12,23 @@ presence.on("UpdateData", async () => {
     "#main-container > div > video"
   );
 
+  var description;
+
   if (video && !isNaN(video.duration)) {
     var title = document.querySelector(
       "#player-video-overlay .player-title .player-title-name"
     ).textContent;
     if (document.location.pathname.includes("/live")) {
-      var description = document.querySelector(
+      description = document.querySelector(
         "#player-video-overlay .player-title div span"
       ).textContent;
     } else {
-      var description = document.querySelector(
+      description = document.querySelector(
         "#player-video-overlay .player-title div"
       ).textContent;
     }
 
-    if (description.trim() == title) {
+    if (description == null || description.trim() == title) {
       description = "Movie";
     }
 
@@ -65,7 +67,7 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title !== null && description !== null) {
+    if (title !== null) {
       presence.setActivity(data, !video.paused);
     }
   } else {

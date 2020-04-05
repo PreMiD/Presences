@@ -1,10 +1,13 @@
 var presence = new Presence({
-  clientId: "669254632400355358",
+  clientId: "669254632400355358"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var currentTime;
 var duration;
 var videoType;
+var videoName;
+var videoEpisode;
+var timestamps;
 presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
@@ -17,7 +20,7 @@ presence.on("iFrameData", (data) => {
 });
 presence.on("UpdateData", () => {
   let data = {
-    largeImageKey: "asnew",
+    largeImageKey: "asnew"
   };
   if (document.location.pathname == "/") {
     if (document.cookie.includes("pmd_")) deleteCookies;
@@ -66,7 +69,7 @@ presence.on("UpdateData", () => {
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/anime/")) {
     deleteCookies;
-    var videoName = document.title
+    videoName = document.title
       .split("AnimeSaturn - ")[1]
       .split(" Streaming")[0];
     if (videoName.includes("(ITA)")) {
@@ -107,15 +110,11 @@ presence.on("UpdateData", () => {
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/ep/")) {
     deleteCookies;
-    var videoName = document.title
-      .split("AnimeSaturn - ")[1]
-      .split(" Episodio")[0];
+    videoName = document.title.split("AnimeSaturn - ")[1].split(" Episodio")[0];
     if (videoName.includes("(ITA)")) {
       videoName = videoName.replace(" (ITA)", "");
     }
-    var videoEpisode = document.title
-      .split(" Episodio")[1]
-      .split(" Streaming")[0];
+    videoEpisode = document.title.split(" Episodio")[1].split(" Streaming")[0];
     setCookie("videoName", videoName);
     setCookie("videoType", "Anime");
     setCookie("videoEpisode", videoEpisode);
@@ -127,7 +126,7 @@ presence.on("UpdateData", () => {
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/oav/")) {
     deleteCookies;
-    var videoName = document.title.split("AnimeSaturn - ")[1].split(" OAV")[0];
+    videoName = document.title.split("AnimeSaturn - ")[1].split(" OAV")[0];
     if (videoName.includes("(ITA)")) {
       videoName = videoName.replace(" (ITA)", "");
     }
@@ -137,7 +136,7 @@ presence.on("UpdateData", () => {
     if (videoName.includes("OVA")) {
       videoName = videoName.replace(" OVA", "");
     }
-    var videoEpisode = document.title.split(" OVA")[1].split(" Streaming")[0];
+    videoEpisode = document.title.split(" OVA")[1].split(" Streaming")[0];
     if (videoEpisode.includes(" OAV ")) {
       videoEpisode = videoEpisode.replace(" OAV ", "");
     }
@@ -152,7 +151,7 @@ presence.on("UpdateData", () => {
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/movie/")) {
     deleteCookies;
-    var videoName = document.title.split("AnimeSaturn - ")[1].split(" Film")[0];
+    videoName = document.title.split("AnimeSaturn - ")[1].split(" Film")[0];
     if (videoName.includes("(ITA)")) {
       videoName = videoName.replace(" (ITA)", "");
     }
@@ -173,14 +172,11 @@ presence.on("UpdateData", () => {
         (data.startTimestamp = browsingStamp),
         presence.setActivity(data);
     } else if (document.cookie.includes("videoType")) {
-      var timestamps = getTimestamps(
-        Math.floor(currentTime),
-        Math.floor(duration)
-      );
+      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
       videoType = getCookie("videoType");
       if (videoType == "Anime") {
-        var videoName = getCookie("videoName");
-        var videoEpisode = getCookie("videoEpisode");
+        videoName = getCookie("videoName");
+        videoEpisode = getCookie("videoEpisode");
         if (videoEpisode == null) {
           if (videoName == null) {
             (data.smallImageKey = paused ? "pause" : "play"),
@@ -191,7 +187,7 @@ presence.on("UpdateData", () => {
               (data.endTimestamp = paused ? "" : timestamps[1]),
               presence.setActivity(data);
           } else {
-            var videoEpisode = videosource.split("Ep_")[1].split("_")[0];
+            videoEpisode = videosource.split("Ep_")[1].split("_")[0];
             (data.smallImageKey = paused ? "pause" : "play"),
               (data.smallImageText = paused ? "In pausa" : "In riproduzione"),
               (data.details = "Guardando: " + videoName),
@@ -220,8 +216,8 @@ presence.on("UpdateData", () => {
         }
       }
       if (videoType == "OAV") {
-        var videoName = getCookie("videoName");
-        var videoEpisode = getCookie("videoEpisode");
+        videoName = getCookie("videoName");
+        videoEpisode = getCookie("videoEpisode");
         if (videoEpisode == null) {
           if (videoName != null) {
             (data.smallImageKey = paused ? "pause" : "play"),
@@ -232,7 +228,7 @@ presence.on("UpdateData", () => {
               (data.endTimestamp = paused ? "" : timestamps[1]),
               presence.setActivity(data);
           } else {
-            var videoEpisode = videosource.split("OVA_")[1].split("_")[0];
+            videoEpisode = videosource.split("OVA_")[1].split("_")[0];
             (data.smallImageKey = paused ? "pause" : "play"),
               (data.smallImageText = paused ? "In pausa" : "In riproduzione"),
               (data.details = "Guardando: " + videoName),
@@ -261,7 +257,7 @@ presence.on("UpdateData", () => {
         }
       }
       if (videoType == "Movie") {
-        var videoName = getCookie("videoName");
+        videoName = getCookie("videoName");
         if (videoName == null) {
           (data.smallImageKey = paused ? "pause" : "play"),
             (data.smallImageText = paused ? "In pausa" : "In riproduzione"),
@@ -282,10 +278,7 @@ presence.on("UpdateData", () => {
         }
       }
     } else {
-      var timestamps = getTimestamps(
-        Math.floor(currentTime),
-        Math.floor(duration)
-      );
+      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
       (data.smallImageKey = paused ? "pause" : "play"),
         (data.smallImageText = paused ? "In pausa" : "In riproduzione"),
         (data.details = "Sta guardando un"),

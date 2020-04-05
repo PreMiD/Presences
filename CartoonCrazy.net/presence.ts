@@ -15,7 +15,6 @@ var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any;
 
 var lastPlaybackState = null;
 var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
 
 var user: any;
 var search: any;
@@ -25,7 +24,7 @@ if (lastPlaybackState != playback) {
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
 
   if (playback) {
