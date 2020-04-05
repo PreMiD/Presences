@@ -112,10 +112,10 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     if (title === sitename) {
       presenceData.state = "Home";
       delete presenceData.details;
-    } else if (actionResult == "history" && titleFromURL) {
+    } else if (actionResult == "history") {
       presenceData.details = "Viewing revision history";
       presenceData.state = title;
-    } else if (actionResult == "edit" && titleFromURL) {
+    } else if (actionResult == "edit") {
       presenceData.details = "Editing a wiki page";
       presenceData.state = title;
     } else if (title.startsWith("UserProfile:")) {
