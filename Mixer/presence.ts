@@ -7,18 +7,11 @@ const strings = presence.getStrings({
   live: "presence.activity.live"
 });
 
-// The synced variable determines whether or not the presence should stay on or should stay out of sync (disappear after one minute).
-
 var oldUrl, elapsed, state;
+var timestamps;
 
 presence.on("UpdateData", async () => {
-  var title,
-    streamer,
-    smallImageKey,
-    smallImageText,
-    videoTime,
-    videoDuration,
-    synced;
+  var title, streamer, smallImageKey, smallImageText, videoTime, videoDuration;
 
   const videoElements: NodeListOf<HTMLVideoElement> = document.querySelectorAll(
     ".spectre-player"
@@ -65,7 +58,7 @@ presence.on("UpdateData", async () => {
     case "video":
       smallImageKey = "play";
       smallImageText = (await strings).play;
-      var timestamps = getTimestamps(
+      timestamps = getTimestamps(
         Math.floor(videoElement.currentTime),
         Math.floor(videoElement.duration)
       );
@@ -77,7 +70,7 @@ presence.on("UpdateData", async () => {
       title = "Watching a clip...";
       smallImageKey = "play";
       smallImageText = (await strings).play;
-      var timestamps = getTimestamps(
+      timestamps = getTimestamps(
         Math.floor(videoElement.currentTime),
         Math.floor(videoElement.duration)
       );
@@ -117,7 +110,7 @@ presence.on("UpdateData", async () => {
     data.smallImageText = (await strings).pause;
   }
 
-  presence.setActivity(data, synced && !videoElement.paused);
+  presence.setActivity(data, videoElement !== null && !videoElement.paused);
 });
 
 function capitalize(text: string) {
