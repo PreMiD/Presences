@@ -1,6 +1,8 @@
 let presence = new Presence({
-  clientId: "631523770988888074",
+  clientId: "631523770988888074"
 });
+
+var data;
 
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
@@ -14,7 +16,7 @@ presence.on("UpdateData", async () => {
       state: "at Homepage",
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -26,16 +28,15 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/feature/") ||
     document.location.pathname.startsWith("/interview/")
   ) {
-    var data = document.location.pathname.split("/");
+    data = document.location.pathname.split("/");
 
     elapsed = Math.floor(Date.now() / 1000);
-    var title = data[3].split("-").join(" ");
     let presenceData = {
       details: `Browsing ${data[1]}`,
       state: `Title: ${data[3].split("-").join(" ").capitalize()} (${data[2]})`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -57,12 +58,12 @@ presence.on("UpdateData", async () => {
         .capitalize()}`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/review/")) {
-    var data = document.location.pathname.split("/");
+    data = document.location.pathname.split("/");
     elapsed = Math.floor(Date.now() / 1000);
     let presenceData = {
       details: `Browsing Reviews`,
@@ -71,7 +72,7 @@ presence.on("UpdateData", async () => {
         .join(" ")})`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -82,7 +83,7 @@ presence.on("UpdateData", async () => {
       state: `for ${document.getElementById("page_header").innerText}`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -93,7 +94,7 @@ presence.on("UpdateData", async () => {
       state: `for ${document.getElementById("page_header").innerText}`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
