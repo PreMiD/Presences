@@ -51,25 +51,22 @@ presence.on("UpdateData", async () => {
       state = "Jigsaw Puzzles";
     } else {
       var parsedData = parse(path);
-      if (parsedData) {
-        var type = parsedData[0];
-        var name = parsedData[1];
+      var type = parsedData[0];
+      var name = parsedData[1];
 
-        switch (type) {
-          case PageType.Category:
-            details = "Viewing Category";
-            break;
+      switch (type) {
+        case PageType.Category:
+          details = "Viewing Category";
+          break;
 
-          case PageType.Game:
-            details = "Viewing Game";
-            break;
+        case PageType.Game:
+          details = "Viewing Game";
+          break;
 
-          default:
-            break;
-        }
-
-        state = name;
+        default:
+          break;
       }
+      state = name;
     }
   }
 
@@ -97,7 +94,7 @@ const parse = (path: string) => {
 
 const capitalize = (text: Array<String>) => {
   return text
-    .map(str => {
+    .map((str) => {
       return str.charAt(0).toUpperCase() + str.slice(1);
     })
     .join(" ");
