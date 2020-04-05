@@ -30,11 +30,10 @@ presence.on("UpdateData", async () => {
     "#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api"
   );
 
+  var presenceData: presenceData = {
+    largeImageKey: "lg"
+  };
   if (!playback || (video.paused && video[0] == null)) {
-    presenceData: presenceData = {
-      largeImageKey: "lg"
-    };
-
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
 
@@ -70,20 +69,19 @@ presence.on("UpdateData", async () => {
     }
 
     var timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
-      presenceData: presenceData = {
-        details: videoTitle,
-        state: state.innerText,
-        largeImageKey: "lg",
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
-      };
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
+
+    presenceData.details = videoTitle;
+    presenceData.state =
+      state !== null ? state.innerText : "State not found...";
+    presenceData.smallImageKey = video.paused ? "pause" : "play";
+    presenceData.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
 
     presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
 
