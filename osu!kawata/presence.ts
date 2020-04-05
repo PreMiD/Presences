@@ -13,6 +13,8 @@ var subtitle: any;
 var countryrank: any;
 var rank: any;
 var pp: any;
+var url: URL;
+var mode: number;
 
 presence.on("UpdateData", async () => {
   customData = false;
@@ -24,8 +26,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing Leaderboard";
 
-    var url: URL = new URL(document.location.href);
-    var mode: number = parseInt(url.searchParams.get("mode"));
+    url = new URL(document.location.href);
+    mode = parseInt(url.searchParams.get("mode"));
     switch (mode) {
       case 1:
         presenceData.state = "Taiko";
@@ -44,8 +46,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing Clans";
 
-    var url: URL = new URL(document.location.href);
-    var mode: number = parseInt(url.searchParams.get("mode"));
+    url = new URL(document.location.href);
+    mode = parseInt(url.searchParams.get("mode"));
     switch (mode) {
       case 1:
         presenceData.state = "osu!taiko";
@@ -143,6 +145,6 @@ presence.on("UpdateData", async () => {
   }
 });
 
-presence.on("iFrameData", function(data) {
+presence.on("iFrameData", function (data) {
   console.log(data);
 });
