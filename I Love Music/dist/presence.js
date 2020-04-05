@@ -19,7 +19,7 @@ if (lastPlaybackState != playback) {
 
 presence.on("UpdateData", async () => {
   var presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   var playing = document.querySelector("#playstop").innerText;
@@ -27,6 +27,7 @@ presence.on("UpdateData", async () => {
     station = document.getElementsByClassName("channelname")[0].innerText;
     presenceData.details = "Spielt gerade";
     presenceData.state = station;
+    presenceData.smallImageKey = "live";
     presence.setActivity(presenceData);
   } else {
     try {
@@ -58,6 +59,18 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (document.location.pathname == "/hiphop/") {
       presenceData.details = "Sucht in Hip Hop...";
+      presence.setActivity(presenceData);
+    }else if (document.location.pathname == "/channels/") {
+      presenceData.details = "Sucht in Channelliste...";
+      presence.setActivity(presenceData);
+    }else if (document.location.pathname == "/streams/") {
+      presenceData.details = "Sucht in Streamlinks...";
+      presence.setActivity(presenceData);
+    }else if (document.location.pathname == "/datenschutz/") {
+      presenceData.details = "Liest den Datenschutz...";
+      presence.setActivity(presenceData);
+    }else if (document.location.pathname == "/impressum/") {
+      presenceData.details = "Liest Impressum durch...";
       presence.setActivity(presenceData);
     }
     presence.setActivity(presenceData);

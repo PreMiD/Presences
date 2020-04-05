@@ -1,6 +1,6 @@
-var iframe = new iFrame();
+let iframe = new iFrame();
+let anime;
 iframe.on("UpdateData", async () => {
-  var anime;
   if (document.querySelector("#video-player") !== null) {
     anime = <HTMLVideoElement>document.querySelector("#video-player");
     if (anime != undefined && !isNaN(anime.duration)) {
@@ -108,6 +108,23 @@ iframe.on("UpdateData", async () => {
   }
   if (document.querySelector("#olvideo_html5_api") !== null) {
     anime = <HTMLVideoElement>document.querySelector("#olvideo_html5_api");
+    if (anime != undefined && !isNaN(anime.duration)) {
+      iframe.send({
+        iframe_video: {
+          iFrameVideo: true,
+          currTime: anime.currentTime,
+          duration: anime.duration,
+          paused: anime.paused
+        }
+      });
+    }
+  }
+  if (
+    document.querySelector("#vplayer").getElementsByTagName("video")[0] !== null
+  ) {
+    anime = <HTMLVideoElement>(
+      document.querySelector("#vplayer").getElementsByTagName("video")[0]
+    );
     if (anime != undefined && !isNaN(anime.duration)) {
       iframe.send({
         iframe_video: {
