@@ -16,7 +16,6 @@ presence.on("UpdateData", async () => {
     },
     path = window.location.pathname;
   if (path.startsWith("/online")) {
-    delete presenceData.startTimestamp, presenceData.endTimestamp;
     const video = document.querySelector("video");
     const title = document.querySelector("a#anime_name").textContent;
     const episode = document.querySelector("b#epid").textContent;
