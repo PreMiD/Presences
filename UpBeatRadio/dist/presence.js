@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "674714012541386752",
+  clientId: "674714012541386752"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   let request =
@@ -57,9 +57,6 @@ presence.on("UpdateData", () => {
     presenceData.smallImageKey = "read";
     presenceData.smallImageText = "Reading Article";
   } else if (document.location.pathname.includes("/Account.Profile")) {
-    let porfile = document.querySelector(
-      "#mainContent > div > div.col-sm-12 > div.profileBanner > div.profileNameContainer > div > span"
-    ).textContent;
     let profile = document.querySelector(
       "#mainContent > div > div.col-sm-12 > div.profileBanner > div.profileNameContainer > div > span"
     ).textContent;
