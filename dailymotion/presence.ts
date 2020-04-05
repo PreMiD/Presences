@@ -20,8 +20,12 @@ presence.on("UpdateData", async () => {
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
-    presenceData.details = (title as HTMLElement).innerText;
-    presenceData.state = (uploader as HTMLElement).textContent;
+    presenceData.details =
+      title !== null ? (title as HTMLElement).innerText : "Title not found...";
+    presenceData.state =
+      uploader !== null
+        ? (uploader as HTMLElement).textContent
+        : "Uploader not found...";
     presenceData.largeImageKey = "logo";
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
@@ -37,7 +41,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (video && title !== null && uploader !== null) {
+    if (title !== null && uploader !== null) {
       presence.setActivity(presenceData, !video.paused);
     }
   } else {
