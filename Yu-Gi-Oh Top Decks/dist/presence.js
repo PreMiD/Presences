@@ -1,6 +1,7 @@
 let presence = new Presence({
-  clientId: "630550023133724692",
+  clientId: "630550023133724692"
 });
+var top, deck;
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
@@ -10,7 +11,7 @@ presence.on("UpdateData", async () => {
       //largeImageKey: "banner",
       largeImageKey: "banner",
       smallImageKey: "icon",
-      smallImageText: "browsing",
+      smallImageText: "browsing"
     };
 
     presence.setActivity(presenceData);
@@ -29,12 +30,12 @@ presence.on("UpdateData", async () => {
       //largeImageKey: "banner",
       largeImageKey: "banner",
       smallImageKey: "icon",
-      smallImageText: deckurl,
+      smallImageText: deckurl
     };
 
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/top_decks") {
-    var top = document
+    top = document
       .getElementsByClassName("sortable")[0]
       .children[1].firstElementChild.children[1].innerText.replace(
         "Most Used Cards",
@@ -46,11 +47,11 @@ presence.on("UpdateData", async () => {
       //largeImageKey: "banner",
       largeImageKey: "banner",
       smallImageKey: "icon",
-      smallImageText: "looking",
+      smallImageText: "looking"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/top_cards") {
-    var top = document.getElementsByClassName("sortable")[0].children[1]
+    top = document.getElementsByClassName("sortable")[0].children[1]
       .firstElementChild.children[2].innerText;
     var price = document.getElementsByClassName("sortable")[0].children[1]
       .firstElementChild.children[4].innerText;
@@ -60,23 +61,23 @@ presence.on("UpdateData", async () => {
       //largeImageKey: "banner",
       largeImageKey: "banner",
       smallImageKey: "icon",
-      smallImageText: "looking",
+      smallImageText: "looking"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/new_deck") {
-    var deck = document.getElementsByName("deck_name")[0].value;
+    deck = document.getElementsByName("deck_name")[0].value;
     let presenceData = {
       details: "Building Deck",
       state: `Editing: ${deck}`,
       //largeImageKey: "banner",
       largeImageKey: "banner",
       smallImageKey: "icon",
-      smallImageText: "creating deck",
+      smallImageText: "creating deck"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/deck")) {
     if (/\d/.test("/deck/8205")) {
-      var deck = document.getElementsByClassName("large-12 columns panel")[0]
+      deck = document.getElementsByClassName("large-12 columns panel")[0]
         .firstElementChild.innerText;
       var by = document.getElementsByClassName("large-12 columns panel")[0]
         .children[1].children[1].innerText;
@@ -94,7 +95,7 @@ presence.on("UpdateData", async () => {
         //largeImageKey: "banner",
         largeImageKey: "banner",
         smallImageKey: "icon",
-        smallImageText: document.location.href,
+        smallImageText: document.location.href
       };
       presence.setActivity(presenceData);
     }
