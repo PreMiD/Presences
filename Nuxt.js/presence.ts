@@ -20,7 +20,6 @@ presence.on("UpdateData", async () => {
   }
   presenceData.smallImageKey = "reading";
 
-  var route = document.location.pathname.split("/");
   var subdomain = document.location.hostname.split(".");
 
   switch (subdomain[0]) {
@@ -50,32 +49,16 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Home";
   } else if (document.location.pathname.includes("/guide")) {
     presenceData.details = "Guide";
-    if (!route[2]) {
-      presenceData.state = document.querySelector("article h1").textContent;
-    } else {
-      presenceData.state = document.querySelector("article h1").textContent;
-    }
+    presenceData.state = document.querySelector("article h1").textContent;
   } else if (document.location.pathname.includes("/api")) {
     presenceData.details = "API";
-    if (!route[2]) {
-      presenceData.state = document.querySelector("article h1").textContent;
-    } else {
-      presenceData.state = document.querySelector("article h1").textContent;
-    }
+    presenceData.state = document.querySelector("article h1").textContent;
   } else if (document.location.pathname.includes("/examples")) {
     presenceData.details = "Examples";
-    if (!route[2]) {
-      presenceData.state = document.querySelector("article h1").textContent;
-    } else {
-      presenceData.state = document.querySelector("article h1").textContent;
-    }
+    presenceData.state = document.querySelector("article h1").textContent;
   } else if (document.location.pathname.includes("/faq")) {
     presenceData.details = "FAQ";
-    if (!route[2]) {
-      presenceData.state = document.querySelector("article h1").textContent;
-    } else {
-      presenceData.state = document.querySelector("article h1").textContent;
-    }
+    presenceData.state = document.querySelector("article h1").textContent;
   } else {
     presenceData.details = document.querySelector("title").textContent;
   }
@@ -92,11 +75,7 @@ presence.on("UpdateData", async () => {
 function getCookie(name?: string): any {
   var value = "; " + document.cookie;
   var parts = value.split("; " + name + "=");
-  if (parts.length == 2)
-    return parts
-      .pop()
-      .split(";")
-      .shift();
+  if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
 function parseQueryString(queryString?: string): any {
