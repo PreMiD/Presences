@@ -10,14 +10,11 @@
     "de": "Serien online sehen."
   },
   "url": "bs.to",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/vgjlpJn.png",
   "thumbnail": "https://i.imgur.com/dmPF4us.jpg",
   "color": "#ffffff",
-  "tags": [
-    "german",
-    "videos"
-  ],
+  "tags": ["german", "videos"],
   "category": "videos",
   "regExp": "(([a-z0-9]+)[.])?bs[.]to"
 }
