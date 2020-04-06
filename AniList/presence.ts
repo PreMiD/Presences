@@ -1,4 +1,4 @@
-let presence: Presence = new Presence({
+const presence: Presence = new Presence({
     clientId: "614220272790274199"
   }),
   startTimestamp: number = Math.floor(Date.now() / 1000),
