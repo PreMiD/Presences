@@ -2,7 +2,7 @@ var presence = new Presence({
   clientId: "651412198727352331"
 });
 
-let categories: Object = {
+const categories: Record<string, any> = {
   tools: "Tools",
   vehicles: "Vehicles",
   paintjobs: "Paint Jobs",
@@ -14,7 +14,7 @@ let categories: Object = {
 };
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "lg"
   };
   if (document.location.pathname == "/") {
