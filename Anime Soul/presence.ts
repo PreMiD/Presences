@@ -3,12 +3,9 @@ var presence: Presence = new Presence({
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var user;
-var title;
-var replace;
-var search;
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "animesoul"
   };
   if (
