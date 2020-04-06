@@ -22,6 +22,7 @@ module.exports = {
     semi: ["warn", "always", { omitLastInOneLineBlock: true }],
     quotes: "off",
     indent: "off",
+    camelcase: "off",
     "comma-dangle": ["warn", "never"],
     "linebreak-style": "off",
     "no-console": "off",
