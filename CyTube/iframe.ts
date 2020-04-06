@@ -4,11 +4,15 @@ var iframe = new iFrame();
 
 let sendback;
 
+function send(): void {
+  iframe.send(sendback);
+}
+
 iframe.on("UpdateData", () => {
   const link = document.location;
 
   if (document.getElementsByTagName("video").length != 0) {
-    let video: HTMLVideoElement = document.getElementsByTagName("video")[0];
+    const video: HTMLVideoElement = document.getElementsByTagName("video")[0];
     sendback = {
       audio: false,
       current_time: video.currentTime,
@@ -19,9 +23,6 @@ iframe.on("UpdateData", () => {
   }
   send();
 });
-function send() {
-  iframe.send(sendback);
-}
 
 /*if (document.getElementsByTagName('video')[0]) {
 } else if (document.getElementsByTagName('audio')[0]) {
