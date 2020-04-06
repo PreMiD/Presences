@@ -1,15 +1,11 @@
-let presence = new Presence({
-    clientId: "687352219598585905"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+const presence = new Presence({
+  clientId: "687352219598585905"
+});
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "animeradio"
   };
 
@@ -149,7 +145,9 @@ presence.on("UpdateData", async () => {
       document.querySelector("#content > li.active > a").textContent;
   } else if (document.location.host == "www.animefanshop.de") {
     presenceData.largeImageKey = "animefanshop";
-    let product = document.querySelector(".product-info-title-desktop > span");
+    const product = document.querySelector(
+      ".product-info-title-desktop > span"
+    );
     if (product !== null) {
       presenceData.details = "Betrachtet Produkt:";
       presenceData.state = product.textContent;
@@ -170,14 +168,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
