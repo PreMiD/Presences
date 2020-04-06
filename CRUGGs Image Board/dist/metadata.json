@@ -8,20 +8,11 @@
     "en": "SFW Image Boards for different Animes",
     "de": "SFW Image Boards für verschiedene Animes"
   },
-  "url": [
-    "imgb.crugg.de"
-  ],
-  "version": "2.1.0",
+  "url": "imgb.crugg.de",
+  "version": "2.1.1",
   "logo": "https://crugg.de/premid/imgblogo.png",
   "thumbnail": "https://crugg.de/premid/imgbbanner.png",
   "color": "#2D2D2D",
-  "tags": [
-    "anime",
-    "shimmie",
-    "imageboard",
-    "images",
-    "fanart",
-    "art"
-  ],
+  "tags": ["anime", "shimmie", "imageboard", "images", "fanart", "art"],
   "category": "anime"
 }
