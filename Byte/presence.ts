@@ -6,6 +6,13 @@ var strings = presence.getStrings({
   search: "presence.activity.searching"
 });
 
+const getElement = (query: string): string => {
+  const element = document.querySelector(query);
+  if (element) {
+    return element.textContent.replace(/^\s+|\s+$/g, "");
+  } else return undefined;
+};
+
 var oldUrl, elapsed;
 
 const statics = {
@@ -190,10 +197,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   }
 });
-
-const getElement = (query: string) => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return undefined;
-};
