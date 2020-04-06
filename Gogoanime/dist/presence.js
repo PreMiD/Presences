@@ -50,19 +50,19 @@ presence.on("UpdateData", () => {
     }
 
     else if(url.includes("/genre/")) {
-      var genre = url.split("/").pop();
+      let genre = url.split("/").pop();
       state = "Anime genre: " + upperCaseFirstChar(genre);
     }
 
     else if(url.includes("/category/")) {
-      var anime = url.split("/").pop().split("-");
+      let anime = url.split("/").pop().split("-");
       state = "Anime: " + formatAnime(anime);
     }
 
     else {
       detail = "Watching . . .";
-      var anime =  url.split("/").pop().split("-");
-      var episode = anime[anime.length - 2] + " " + anime[anime.length - 1];
+      let anime =  url.split("/").pop().split("-");
+      let episode = anime[anime.length - 2] + " " + anime[anime.length - 1];
       anime = anime.slice(0,anime.length - 2);
       state = formatAnime(anime) + ": " + upperCaseFirstChar(episode);
       smallImage = videoInfos.paused ? "pause" : "play";
@@ -95,9 +95,9 @@ presence.on("UpdateData", () => {
   });
       
   function formatAnime(anime) {
-    var format = "";
+    let format = "";
     for(var i = 0; i< anime.length;i++) {
-      var part = anime[i];
+      let part = anime[i];
       format += upperCaseFirstChar(part) + " ";
     }
     return format.replace("Dub","(Dub)");
@@ -109,8 +109,8 @@ function upperCaseFirstChar(word) {
 }
 
 function getEndTime(current,duration) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - current + duration;
+  let startTime = Date.now();
+  let endTime = Math.floor(startTime / 1000) - current + duration;
   return endTime;
 }
 
