@@ -6,7 +6,35 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+function getSeconds(minutes: number, seconds: number): number {
+  var minutesToSeconds = Number(Math.floor(minutes * 60));
+
+  var result = minutesToSeconds + Number(seconds);
+
+  return result;
+}
+
+var truncateBefore = function (str, pattern): string {
+  return str.slice(str.indexOf(pattern) + pattern.length);
+};
+
+var truncateAfter = function (str, pattern): string {
+  return str.slice(0, str.indexOf(pattern));
+};
 
 var musicTitle: any;
 
@@ -24,22 +52,14 @@ var currentMinutes: any,
 
 var duration: any, currentTime: any;
 
-var play: any, pause: any;
+var play: any;
 
 var currentUser: any, albumName: any, currentArtist: any;
 
-var truncateBefore = function(str, pattern) {
-  return str.slice(str.indexOf(pattern) + pattern.length);
-};
-
-var truncateAfter = function(str, pattern) {
-  return str.slice(0, str.indexOf(pattern));
-};
-
-var playback: Boolean = false;
+var playback = false;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
   };
@@ -63,10 +83,6 @@ presence.on("UpdateData", async () => {
   if (musicTitle.innerText.length > 1) {
     play = document.querySelector(
       "footer > div.jp-controls > div.btn-music-container > div:nth-child(2) > a.jp-play.btn.btn-music.btn-sm"
-    );
-
-    pause = document.querySelector(
-      "footer > div.jp-controls > div.btn-music-container > div:nth-child(2) > a.jp-pause.btn.btn-music.btn-sm"
     );
 
     currentMinutesString = document.querySelector(
@@ -150,22 +166,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getSeconds(minutes: number, seconds: number) {
-  var minutesToSeconds = Number(Math.floor(minutes * 60));
-
-  var result = minutesToSeconds + Number(seconds);
-
-  return result;
-}
