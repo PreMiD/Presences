@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "PsychoPast",
+    "id": "444779014888882177"
+  },
+  "service": "Gogoanime",
+  "description": {
+    "en": "Watch anime online in English. You can watch free series and movies online and English subtitle."
+    },
+  "url": [
+    "www2.gogoanime.video",
+    "www17.gogoanime.io"
+    
+  ],
+  "version": "1.0.0",
+  "logo": "https://cdn.psychopast.tk/files/gogoanime-logo.png?key=zsBPy7m=t79yBOvQQF5gKZRoRcpoi+kn",
+  "thumbnail": "https://cdn.psychopast.tk/files/gogoanime-thumb.png?key=zsBPy7m=t79yBOvQQF5gKZRoRcpoi+kn",
+  "color": "#4CA64C",
+  "tags": [
+    "anime"
+   ],
+  "category": "anime",
+  "iframe": true
+  }
