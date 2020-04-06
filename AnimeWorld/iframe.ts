@@ -1,15 +1,15 @@
-let iframe = new iFrame();
-let anime;
+const iframe = new iFrame();
+var video: HTMLVideoElement;
 iframe.on("UpdateData", async () => {
   if (document.querySelector("#video-player") !== null) {
-    anime = <HTMLVideoElement>document.querySelector("#video-player");
-    if (anime != undefined && !isNaN(anime.duration)) {
+    video = document.querySelector("#video-player");
+    if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
           iFrameVideo: true,
-          currTime: anime.currentTime,
-          duration: anime.duration,
-          paused: anime.paused
+          currTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }
@@ -19,31 +19,29 @@ iframe.on("UpdateData", async () => {
       "#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     ) !== null
   ) {
-    anime = <HTMLVideoElement>(
-      document.querySelector(
-        "#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-      )
+    video = document.querySelector(
+      "#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     );
-    if (anime != undefined && !isNaN(anime.duration)) {
+    if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
           iFrameVideo: true,
-          currTime: anime.currentTime,
-          duration: anime.duration,
-          paused: anime.paused
+          currTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }
   }
   if (document.querySelector("#video_1_html5_api") !== null) {
-    anime = <HTMLVideoElement>document.querySelector("#video_1_html5_api");
-    if (anime != undefined && !isNaN(anime.duration)) {
+    video = document.querySelector("#video_1_html5_api");
+    if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
           iFrameVideo: true,
-          currTime: anime.currentTime,
-          duration: anime.duration,
-          paused: anime.paused
+          currTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }
@@ -51,70 +49,66 @@ iframe.on("UpdateData", async () => {
   if (
     document.querySelector("#player > div.jw-media.jw-reset > video") !== null
   ) {
-    anime = <HTMLVideoElement>(
-      document.querySelector("#player > div.jw-media.jw-reset > video")
-    );
-    if (anime != undefined && !isNaN(anime.duration)) {
+    video = document.querySelector("#player > div.jw-media.jw-reset > video");
+    if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
           iFrameVideo: true,
-          currTime: anime.currentTime,
-          duration: anime.duration,
-          paused: anime.paused
+          currTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }
   }
   if (document.querySelector("#hola_html5_api") !== null) {
-    anime = <HTMLVideoElement>document.querySelector("#hola_html5_api");
-    if (anime != undefined && !isNaN(anime.duration)) {
+    video = document.querySelector("#hola_html5_api");
+    if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
           iFrameVideo: true,
-          currTime: anime.currentTime,
-          duration: anime.duration,
-          paused: anime.paused
+          currTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }
   }
   if (document.querySelector("div.html5-video-container > video") !== null) {
-    anime = <HTMLVideoElement>(
-      document.querySelector("div.html5-video-container > video")
-    );
-    if (anime != undefined && !isNaN(anime.duration)) {
+    video = document.querySelector("div.html5-video-container > video");
+    if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
           iFrameVideo: true,
-          currTime: anime.currentTime,
-          duration: anime.duration,
-          paused: anime.paused
+          currTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }
   }
   if (document.querySelector("#videojs_html5_api") !== null) {
-    anime = <HTMLVideoElement>document.querySelector("#videojs_html5_api");
-    if (anime != undefined && !isNaN(anime.duration)) {
+    video = document.querySelector("#videojs_html5_api");
+    if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
           iFrameVideo: true,
-          currTime: anime.currentTime,
-          duration: anime.duration,
-          paused: anime.paused
+          currTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }
   }
   if (document.querySelector("#olvideo_html5_api") !== null) {
-    anime = <HTMLVideoElement>document.querySelector("#olvideo_html5_api");
-    if (anime != undefined && !isNaN(anime.duration)) {
+    video = document.querySelector("#olvideo_html5_api");
+    if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
           iFrameVideo: true,
-          currTime: anime.currentTime,
-          duration: anime.duration,
-          paused: anime.paused
+          currTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }
@@ -122,16 +116,14 @@ iframe.on("UpdateData", async () => {
   if (
     document.querySelector("#vplayer").getElementsByTagName("video")[0] !== null
   ) {
-    anime = <HTMLVideoElement>(
-      document.querySelector("#vplayer").getElementsByTagName("video")[0]
-    );
-    if (anime != undefined && !isNaN(anime.duration)) {
+    video = document.querySelector("#vplayer").getElementsByTagName("video")[0];
+    if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
           iFrameVideo: true,
-          currTime: anime.currentTime,
-          duration: anime.duration,
-          paused: anime.paused
+          currTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }
