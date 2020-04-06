@@ -17,7 +17,13 @@ presence.on("UpdateData", () => {
   var detail = "Browsing . . .";
   var state : string;
   var smallImage = "browsing";
-  if(url === "/"){
+  const is404 = document.querySelector("#wrapper_bg > section > section.content_left > h1");
+  if (is404 != null && is404.textContent === "404"){
+       detail = "404";
+       state = "Page non existant";
+  }
+
+  else if(url === "/"){
     state = "Recent animes release";
   }
 
@@ -81,7 +87,7 @@ presence.on("UpdateData", () => {
       state: state,
     }; 
       
-    if(detail === "Watching . . ." && videoInfos != null && !isNaN(videoInfos.duration)) {
+    if(detail === "Watching . . ." && videoInfos != null) {
       if(videoInfos.paused) {
         presenceData.smallImageText = getTimestampAsString(videoInfos.duration, videoInfos.currentTime) + " left";
         delete presenceData.endTimestamp;
@@ -90,7 +96,6 @@ presence.on("UpdateData", () => {
       else {
         presenceData.endTimestamp = getEndTime(Math.floor(videoInfos.currentTime),Math.floor(videoInfos.duration));
       }
-
       presence.setActivity(presenceData,!videoInfos.paused);
     }
 
