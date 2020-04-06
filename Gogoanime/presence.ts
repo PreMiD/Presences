@@ -37,6 +37,12 @@ presence.on("UpdateData", () => {
     state = "Animes list";
   }
 
+  else if(url === "//search.html"){
+    detail = "Searching . . .";
+    let anime = decodeURI(document.location.href).split("=")[1].split(" ");
+    state = "Anime: " + formatAnime(anime);
+  }
+
     else if(url === "/new-season.html") {
       state = "Newest animes";
     }
