@@ -5,6 +5,13 @@ var strings = presence.getStrings({
   browse: "presence.activity.browsing"
 });
 
+const getElement = (query: string): string => {
+  const element = document.querySelector(query);
+  if (element) {
+    return element.textContent.replace(/^\s+|\s+$/g, "");
+  } else return undefined;
+};
+
 const paths = {
   "/": {
     details: "Browsing"
@@ -117,10 +124,3 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
   }
 });
-
-const getElement = (query: string) => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return undefined;
-};
