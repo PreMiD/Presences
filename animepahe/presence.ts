@@ -1,7 +1,7 @@
 // Note: Developer has been working on a new website design for ages,
 //       maybe at some point he'll finish it and this will need updating.
 
-let presence = new Presence({
+const presence = new Presence({
     clientId: "629355416714739732" // Contact if you want me to edit the discord assets/keys/whatever
   }),
   strings = presence.getStrings({
@@ -15,13 +15,44 @@ let iframe_response = {
   current_time: 0
 };
 
-presence.on("iFrameData", data => {
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+function getTimesFromMs(ms): Record<string, number> {
+  const floor = Math.floor(ms % 60);
+  const sec = floor < 10 ? 0 + floor : floor,
+    min = floor / 60 <= 0 ? 0 : floor / 60,
+    hrs = floor / 60 / 60;
+  return {
+    hrs: hrs,
+    sec: sec,
+    min: min
+  };
+}
+
+function getTimestamp(time): string {
+  const { sec, min, hrs } = getTimesFromMs(time);
+  return hrs > 0 ? hrs + ":" + min + ":" + sec : min + ":" + sec;
+}
+
+presence.on("iFrameData", (data) => {
   iframe_response = data;
 });
 
 presence.on("UpdateData", async () => {
   const path = document.location.pathname;
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "animepahe",
     details: "loading",
     state: "animepahe"
@@ -41,7 +72,10 @@ presence.on("UpdateData", async () => {
   } else if (!path.split("anime/")[1].includes("/")) {
     let type: string;
 
-    for (let info of (document.querySelector("div.col-sm-4.anime-info").children as unknown as any[])) {
+    for (const info of (document.querySelector("div.col-sm-4.anime-info")
+      .children as
+      unknown) as
+      any[]) {
       // Not uniform info order... ugh
       if (info.children[0].textContent == "Type:")
         info.children[1].textContent == "TV"
@@ -59,11 +93,11 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
   if (path.split("/")[1] == "play") {
-    let timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(iframe_response.current_time),
       Math.floor(iframe_response.duration)
     );
-    let movie: boolean =
+    const movie: boolean =
       document.querySelector(
         "body > section > article > div > div > div.theatre-info > div.anime-status > a"
       ).textContent == "Movie";
@@ -100,31 +134,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, false);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getTimestamp(time) {
-  let { sec, min, hrs } = getTimesFromMs(time);
-  return hrs > 0 ? hrs + ":" + min + ":" + sec : min + ":" + sec;
-}
-
-function getTimesFromMs(ms) {
-  const p60 = x => Math.floor(x % 60);
-  let sec = p60(ms) < 10 ? "0" + p60(ms) : p60(ms),
-    min = p60(ms / 60) <= 0 ? 0 : p60(ms / 60),
-    hrs = p60(ms / 60 / 60);
-  return {
-    hrs: hrs,
-    sec: sec,
-    min: min
-  };
-}
