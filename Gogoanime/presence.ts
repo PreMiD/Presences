@@ -15,7 +15,7 @@ var dataUpdated = false;
 presence.on("UpdateData", () => {
   var url = document.location.pathname;
   var detail = "Browsing . . .";
-  var state;
+  var state:string;
   const is404 = document.querySelector("#wrapper_bg > section > section.content_left > h1");
   if (is404 != null && is404.textContent === "404") {
       detail = "404";
