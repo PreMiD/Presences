@@ -5,28 +5,49 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000),
   href = new URL(document.location.href),
   presenceData = {
-    details: <string>"In construction",
-    state: <string>null,
-    largeImageKey: <string>"lg",
-    startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null
+    details: "In construction" as string,
+    state: null as string,
+    largeImageKey: "lg" as string,
+    startTimestamp: browsingStamp as number,
+    endTimestamp: null as number
   },
   updateCallback = {
     _function: null,
-    get function() {
+    get function(): any {
       return this._function;
     },
     set function(parameter) {
       this._function = parameter;
     },
-    get present() {
+    get present(): boolean {
       return this._function !== null;
     }
   };
 
-(() => {
+/**
+ * Initialize presenceData
+ */
+function resetData(): void {
+  presenceData = {
+    details: "In construction" as string,
+    state: null as string,
+    largeImageKey: "lg" as string,
+    startTimestamp: browsingStamp as number,
+    endTimestamp: null as number
+  };
+}
+
+/**
+ * Cleans presenceData
+ */
+function cleanData(): void {
+  if (presenceData.state === null) delete presenceData.state;
+  if (presenceData.endTimestamp === null) delete presenceData.endTimestamp;
+}
+
+((): void => {
   if (document.querySelector("section.game")) {
-    updateCallback.function = () => {
+    updateCallback.function = (): void => {
       presenceData.details = document.querySelector(
         ".game-info__section--map .game-info__value"
       ).textContent;
@@ -91,7 +112,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     presenceData.details = "Viewing a page";
     presenceData.state = "PRO Membership";
   } else if (href.pathname.startsWith("/static")) {
-    let pageNames = {
+    const pageNames = {
       "faq.html": "FAQ",
       "terms.html": "Terms of Service",
       "privacy.html": "Privacy Policy"
@@ -102,7 +123,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     if (href.pathname.split("/")[2] === undefined) {
       presenceData.details = "Viewing their own profile";
     } else {
-      let pageNames = {
+      const pageNames = {
         settings: "Settings",
         leagues: "Leagues",
         activities: "Activities",
@@ -130,25 +151,4 @@ if (updateCallback.present) {
   presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   });
-}
-
-/**
- * Initialize presenceData
- */
-function resetData() {
-  presenceData = {
-    details: <string>"In construction",
-    state: <string>null,
-    largeImageKey: <string>"lg",
-    startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null
-  };
-}
-
-/**
- * Cleans presenceData
- */
-function cleanData() {
-  if (presenceData.state === null) delete presenceData.state;
-  if (presenceData.endTimestamp === null) delete presenceData.endTimestamp;
 }
