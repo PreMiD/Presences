@@ -2,21 +2,12 @@ var presence = new Presence({
   clientId: "623229289864626195" // CLIENT ID FOR YOUR PRESENCE
 });
 
-var item: any,
-  typing: any,
-  index: any,
-  admin: any,
-  search: any,
-  dropdowninnertext: any,
-  split: any,
-  item2: any,
-  itemfinish: any,
-  board2: any;
+var item: any, admin: any, item2: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "esl"
   };
 
