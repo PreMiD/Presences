@@ -8,7 +8,7 @@ var presence = new Presence({
     largeImageKey: "logo"
   };
 
-let lang = new Map();
+const lang = new Map();
 lang.set("de", "German");
 lang.set("es", "Spanish");
 lang.set("fr", "French");
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
       path1.split("/")[2].length == 2
     ) {
       var language: string;
-      for (let value of lang.keys()) {
+      for (const value of lang.keys()) {
         if (path1.split("/")[2] == value) {
           language = lang.get(value);
           break;
