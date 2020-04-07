@@ -1,33 +1,46 @@
-let presence = new Presence({
-  clientId: "664350968585912350"
-});
+const presence = new Presence({
+    clientId: "664350968585912350"
+  }),
+  strings = presence.getStrings({
+    playing: "presence.playback.playing",
+    paused: "presence.playback.paused",
+    browsing: "presence.activity.browsing"
+  });
 
-let strings = presence.getStrings({
-  playing: "presence.playback.playing",
-  paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing"
-});
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
 
-let startTimestamp = Math.floor(Date.now() / 1000);
+const startTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement;
 
-presence.on("iFrameData", async msg => {
+presence.on("iFrameData", async (msg) => {
   if (!msg) return;
   video = msg;
 });
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "diziay"
   };
 
-  let seriesBool = document.querySelector(
+  const seriesBool = document.querySelector(
     "body > section > div > div > div.content__inner.movie__page.d-flex.justify-content-between > div.content__sidebar > div.card.card__bg1.mb-4.mb-hidden > div.card__title.title__no-icon.d-flex.justify-content-between > h2"
   )
     ? true
     : false;
-  let movieBool = document.querySelector(
+  const movieBool = document.querySelector(
     "body > section > div > div.content > div > div.content__sidebar > div.card.card__bg1.mb-4 > div.card__title.title__1 > h2 > strong"
   )
     ? true
@@ -40,7 +53,7 @@ presence.on("UpdateData", async () => {
   // Series
 
   if (seriesBool) {
-    let seriesTitle = document.querySelector(
+    const seriesTitle = document.querySelector(
       "body > section > div > div > div.content__inner.movie__page.d-flex.justify-content-between > div.content__container > div > div.card__content.pb-md-1.pb-0 > div > div.watch__title > div.watch__title__name > div > h2"
     ).textContent;
 
@@ -50,10 +63,10 @@ presence.on("UpdateData", async () => {
 
   // Movies
   else if (movieBool) {
-    let movieTitle = document.querySelector(
+    const movieTitle = document.querySelector(
       "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > h2"
     ).textContent;
-    let movieTitle2 = document.querySelector(
+    const movieTitle2 = document.querySelector(
       "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > span"
     ).textContent;
 
@@ -74,7 +87,7 @@ presence.on("UpdateData", async () => {
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      let timestamps = getTimestamps(
+      const timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -85,9 +98,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
