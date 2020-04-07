@@ -8,11 +8,25 @@ const strings = presence.getStrings({
   browsing: "presence.activity.browsing"
 });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 let title: string;
 let subtitle: string;
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "disneyplus-logo"
   };
 
@@ -59,10 +73,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  const startTime: number = Date.now();
-  const endTime: number =
-    Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
