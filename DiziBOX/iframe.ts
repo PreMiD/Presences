@@ -1,7 +1,7 @@
 const iframe = new iFrame();
 
 setInterval(function() {
-  let video = document.querySelector("video") as HTMLVideoElement;
+  const video = document.querySelector("video") as HTMLVideoElement;
 
   if (
     video &&
