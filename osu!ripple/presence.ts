@@ -1,9 +1,8 @@
 var presence = new Presence({ clientId: "688752009079160852" }),
   presenceData: presenceData = { largeImageKey: "logo" },
-  customData: boolean = false;
+  customData = false;
 var browsingStamp = Math.floor(Date.now() / 1000);
 var title: any;
-var subtitle: any;
 var user: any;
 var pp: any;
 var rank: any;
