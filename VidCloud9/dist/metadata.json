@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "GURRMAN375D",
+      "id": "446528923535278082"
+    },
+    "url": "vidcloud9.com",
+    "description": {
+      "en": "VidCloud9 is a great place to find shows you missed or movies your dieing to see."
+    },
+    "service": "VidCloud9",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/AEOuBRB.png",
+    "thumbnail": "https://i.imgur.com/AEOuBRB.png",
+    "color": "#00050C",
+    "tags": [
+      "watch movies",
+      "vidcloud9"
+    ],
+    "category": "videos",
+    "iframe": true
+  }
