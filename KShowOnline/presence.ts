@@ -1,18 +1,29 @@
 var presence = new Presence({
-    clientId: "614389710625964045" // CLIENT ID FOR YOUR PRESENCE
+    clientId: "614389710625964045"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-var title: any, views: any, air: any, air2: any;
+var title: any, views: any, air: any;
 var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-// the video variable is a html video element
-var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any;
 
 var lastPlaybackState = null;
 var playback;
@@ -25,9 +36,6 @@ if (lastPlaybackState != playback) {
 if (document.location.pathname.includes("/kshow/")) {
   presence.on("iFrameData", (data) => {
     playback = data.iframe_video.duration !== null ? true : false;
-
-    //console.log(data.iframe_video);
-    //console.log(document.location.pathname);
 
     if (playback) {
       iFrameVideo = data.iframe_video.iFrameVideo;
@@ -48,12 +56,6 @@ presence.on("UpdateData", async () => {
       startTimestamp: timestamps[0],
       endTimestamp: timestamps[1]
     };
-
-  video = document.querySelector(
-    "#mediaplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-  );
-
-  // Check if it can find the video
   if (
     document.location.pathname.includes(".html") &&
     document.location.pathname.includes("/pages/")
@@ -182,14 +184,3 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
