@@ -7,10 +7,25 @@ var presence = new Presence({
     live: "presence.activity.live"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var elapsed = Math.floor(Date.now() / 1000);
+var title;
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "mycanal-logo"
   };
 
@@ -22,13 +37,12 @@ presence.on("UpdateData", async () => {
     if (!Ad) {
       var path = document.location.pathname;
       if (path.includes("/live/")) {
-        var title = document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ")
-          .textContent;
+        title = document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ").textContent;
         data.smallImageKey = "live";
         data.smallImageText = (await strings).live;
         data.startTimestamp = elapsed;
       } else {
-        var title = document.querySelector(".bodyTitle___DZEtt").textContent;
+        title = document.querySelector(".bodyTitle___DZEtt").textContent;
         var timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
@@ -61,9 +75,3 @@ presence.on("UpdateData", async () => {
     (data.details = "Browsing..."), presence.setActivity(data);
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

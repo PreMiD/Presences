@@ -14,7 +14,7 @@ var user: any,
   lastStamp: any;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "discordwhite"
   };
   connected = document.querySelector(
@@ -24,6 +24,18 @@ presence.on("UpdateData", async () => {
     ".appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi"
   );
   typingicon = "﻿";
+
+  function getTimeStamp(): number {
+    var browsingStamp: any;
+    thisData = presenceData.details;
+    if (lastData == thisData) {
+      browsingStamp = lastStamp;
+    } else {
+      lastStamp = Math.floor(Date.now() / 1000);
+      browsingStamp = Math.floor(Date.now() / 1000);
+    }
+    return browsingStamp;
+  }
 
   if (document.location.hostname == "discordapp.com") {
     if (connected !== null && connected.textContent !== "") {
@@ -95,18 +107,18 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = getTimeStamp();
     } else if (document.location.pathname.includes("/channels/")) {
       group = document.querySelector(
-        "#app-mount > div > div > div > div > div > div > div > div > div > div > header > h1"
+        "#app-mount > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > nav > div > header > h1"
       );
       typing = document.querySelector(
-        "#app-mount > div.app-1q1i1E > div > div.layers-3iHuyZ.layers-3q14ss > div > div > div > div > div.chat-3bRxxu > div.content-yTz4x3 > div.chatContent-a9vAAp > form > div > div > div > div.textArea-12jD-V.slateContainer-3Qkn2x > div.markup-2BOw-j.slateTextArea-1Mkdgw"
+        "#app-mount > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(2) > div > main > form > div > div > div > div > div:nth-child(3) > div"
       );
-      if (typing == null) {
+      if (typing.className.toLowerCase().includes("placeholder")) {
         typing = false;
       } else {
         typing = typing.textContent !== typingicon;
       }
       card = document.querySelector(
-        "#app-mount > div > div > div > div > div > div > div > div > div > div > h3"
+        "#app-mount > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div > section > div > h3"
       );
       if (typing) {
         presenceData.details = "Typing in channel: ";
@@ -306,16 +318,5 @@ presence.on("UpdateData", async () => {
   } else {
     presence.setActivity(presenceData);
     lastData = null;
-  }
-  function getTimeStamp() {
-    var browsingStamp: any;
-    thisData = presenceData.details;
-    if (lastData == thisData) {
-      browsingStamp = lastStamp;
-    } else {
-      lastStamp = Math.floor(Date.now() / 1000);
-      browsingStamp = Math.floor(Date.now() / 1000);
-    }
-    return browsingStamp;
   }
 });

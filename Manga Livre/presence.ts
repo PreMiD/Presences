@@ -4,13 +4,8 @@ var presence = new Presence({
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user: any;
-var title: any;
-var replace: any;
-var search: any;
-
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "ml"
   };
 

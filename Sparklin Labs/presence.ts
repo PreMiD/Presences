@@ -3,9 +3,10 @@ var presence = new Presence({
 });
 
 var elapsed = Math.floor(Date.now() / 1000);
+var channel;
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "sparklin-logo"
   };
 
@@ -16,7 +17,7 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = elapsed;
   } else if (path.includes("bombparty")) {
     if (path.includes("play")) {
-      var channel = document.querySelector(".ChannelName").textContent;
+      channel = document.querySelector(".ChannelName").textContent;
       data.details = "Playing BombParty";
       data.state = channel;
       data.startTimestamp = elapsed;
@@ -26,7 +27,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("deathroulette")) {
     if (path.includes("play")) {
-      var channel = document.querySelector(".ChannelName").textContent;
+      channel = document.querySelector(".ChannelName").textContent;
       data.details = "Playing Death Roulette";
       data.state = channel;
       data.startTimestamp = elapsed;
@@ -36,7 +37,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("popsauce")) {
     if (path.includes("play")) {
-      var channel = document.querySelector(".ChannelName").textContent;
+      channel = document.querySelector(".ChannelName").textContent;
       data.details = "Playing PopSauce";
       data.state = channel;
       data.startTimestamp = elapsed;
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
     var playCheck = document.querySelector(".rooms h1") ? false : true;
     if (playCheck) {
       var chan = document.querySelector(".room-name").textContent;
-      var channel = chan.charAt(0).toUpperCase() + chan.slice(1);
+      channel = chan.charAt(0).toUpperCase() + chan.slice(1);
       data.details = "Playing Guess What";
       data.state = channel;
       data.startTimestamp = elapsed;

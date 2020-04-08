@@ -5,26 +5,34 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000),
   href = new URL(document.location.href),
   presenceData = {
-    details: <string>"In construction",
-    state: <string>null,
-    largeImageKey: <string>"lg",
-    startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null
+    details: "In construction" as string,
+    state: null as string,
+    largeImageKey: "lg" as string,
+    startTimestamp: browsingStamp as number,
+    endTimestamp: null as number
   },
   updateCallback = {
     _function: null,
-    get function() {
+    get function(): any {
       return this._function;
     },
     set function(parameter) {
       this._function = parameter;
     },
-    get present() {
+    get present(): boolean {
       return this._function !== null;
     }
   };
 
-(() => {
+/**
+ * Cleans presenceData
+ */
+function cleanData(): void {
+  if (presenceData.state === null) delete presenceData.state;
+  if (presenceData.endTimestamp === null) delete presenceData.endTimestamp;
+}
+
+((): void => {
   if (href.hostname === "www.gamepedia.com") {
     if (href.pathname === "/") {
       presenceData.state = "Index";
@@ -61,10 +69,9 @@ var browsingStamp = Math.floor(Date.now() / 1000),
       presenceData.startTimestamp = browsingStamp;
     }
   } else {
-    let title: string,
-      sitename: string,
-      actionResult = href.searchParams.get("action"),
-      titleFromURL = () => {
+    let title: string, sitename: string;
+    const actionResult = href.searchParams.get("action"),
+      titleFromURL = (): string => {
         let raw: string;
         if (href.pathname.startsWith("/index.php"))
           raw = href.searchParams.get("title");
@@ -74,22 +81,23 @@ var browsingStamp = Math.floor(Date.now() / 1000),
       };
 
     try {
-      title = (document.querySelector(
-        "meta[property='og:title']"
-      ) as HTMLMetaElement).content;
+      title = (
+        document.querySelector("meta[property='og:title']") as HTMLMetaElement
+      ).content;
     } catch (e) {
       title = titleFromURL();
     }
 
     try {
-      sitename = (document.querySelector(
-        "meta[property='og:site_name']"
-      ) as HTMLMetaElement).content;
+      sitename = (
+        document.querySelector("meta[property='og:site_name']") as
+        HTMLMetaElement
+      ).content;
     } catch (e) {
       sitename = null;
     }
 
-    let namespaceDetails = {
+    const namespaceDetails = {
       Media: "Viewing a media",
       Special: "Viewing a special page",
       Talk: "Viewing a talk page",
@@ -112,10 +120,10 @@ var browsingStamp = Math.floor(Date.now() / 1000),
     if (title === sitename) {
       presenceData.state = "Home";
       delete presenceData.details;
-    } else if (actionResult == "history" && titleFromURL) {
+    } else if (actionResult == "history") {
       presenceData.details = "Viewing revision history";
       presenceData.state = title;
-    } else if (actionResult == "edit" && titleFromURL) {
+    } else if (actionResult == "edit") {
       presenceData.details = "Editing a wiki page";
       presenceData.state = title;
     } else if (title.startsWith("UserProfile:")) {
@@ -144,36 +152,4 @@ if (updateCallback.present) {
   presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   });
-}
-
-/**
- * Get timestamps.
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-/**
- * Initialize presenceData
- */
-function resetData() {
-  presenceData = {
-    details: <string>"In construction",
-    state: <string>null,
-    largeImageKey: <string>"lg",
-    startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null
-  };
-}
-
-/**
- * Cleans presenceData
- */
-function cleanData() {
-  if (presenceData.state === null) delete presenceData.state;
-  if (presenceData.endTimestamp === null) delete presenceData.endTimestamp;
 }

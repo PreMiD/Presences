@@ -2,17 +2,19 @@ var presence = new Presence({
   clientId: "634299110782140416"
 });
 
+var pageTitle;
+
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "hepboat"
   };
 
   if (document.location.pathname.startsWith("/guilds/")) {
-    var pageTitle = document.querySelector(".panel-heading").textContent;
+    pageTitle = document.querySelector(".panel-heading").textContent;
     if (pageTitle.startsWith(" Guild Weekly Message Throughput")) {
-      var pageTitle = "Guild Stats";
+      pageTitle = "Guild Stats";
     } else if (pageTitle.startsWith(" Guild Banner")) {
-      var pageTitle = "Guild Info";
+      pageTitle = "Guild Info";
     }
 
     var guildName = document.querySelector(

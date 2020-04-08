@@ -1,4 +1,4 @@
-let presence: Presence = new Presence({
+const presence: Presence = new Presence({
     clientId: "612415911877672971"
   }),
   startedBrowsing: number = Math.floor(Date.now() / 1000),
@@ -9,10 +9,8 @@ let presence: Presence = new Presence({
   strings = presence.getStrings({
     browsing: "presence.activity.browsing"
   }),
-  webtoon: string,
-  chapter: string,
-  seriesPage: string,
   path: string = window.location.pathname;
+let webtoon: string, chapter: string, seriesPage: string;
 
 presence.on("UpdateData", async () => {
   if (path.includes("list")) {

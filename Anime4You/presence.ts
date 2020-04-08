@@ -8,7 +8,7 @@ var presence = new Presence({
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname.startsWith("/show")) {
-    let homepagePresence: presenceData = {
+    const homepagePresence: presenceData = {
       details: document
         .getElementsByClassName("titel")[0]
         .getElementsByTagName("h3")[0].innerText,
@@ -20,52 +20,37 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/speedsuche") ||
     document.location.pathname.startsWith("/suche")
   ) {
-    let searchingPresence: presenceData = {
+    const searchingPresence: presenceData = {
       details: "Sucht...",
       state: "Sucht nach einem Anime",
       largeImageKey: "logo"
     };
     presence.setActivity(searchingPresence);
   } else if (document.location.pathname == "/") {
-    let homepagePresence: presenceData = {
+    const homepagePresence: presenceData = {
       details: "Inaktiv...",
       state: "Hängt auf der Startseite ab",
       largeImageKey: "logo"
     };
     presence.setActivity(homepagePresence);
   } else if (document.location.pathname.startsWith("/animes")) {
-    let overviewPresence: presenceData = {
+    const overviewPresence: presenceData = {
       details: "Schaut sich um...",
       state: "Sucht nach Animes",
       largeImageKey: "logo"
     };
     presence.setActivity(overviewPresence);
   } else if (document.location.pathname.startsWith("/kalender")) {
-    let calenderPresence: presenceData = {
+    const calenderPresence: presenceData = {
       details: "Schaut in den Kalender",
       largeImageKey: "logo"
     };
     presence.setActivity(calenderPresence);
   } else {
-    let inactivePresence: presenceData = {
+    const inactivePresence: presenceData = {
       details: "Inaktiv...",
       largeImageKey: "logo"
     };
     presence.setActivity(inactivePresence);
   }
 });
-
-presence.on("iFrameData", function(data) {
-  console.log(data);
-});
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

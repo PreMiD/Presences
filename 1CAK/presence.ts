@@ -1,12 +1,12 @@
 const presence = new Presence({
   clientId: "634332519398899724"
 });
-let presenceData: presenceData = {
+const presenceData: presenceData = {
   largeImageKey: "logo"
 };
 
 presence.on("UpdateData", async () => {
-  let startTimestamp: number = Date.now();
+  const startTimestamp: number = Date.now();
   presenceData.startTimestamp = startTimestamp;
   switch (document.location.pathname) {
     case "/":

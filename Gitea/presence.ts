@@ -2,10 +2,10 @@ var presence = new Presence({
   clientId: "682218734391394338"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
   } else {
     if (document.querySelector(".user.profile")) {
       // Profile Page
-      let searchParams = new URLSearchParams(window.location.search);
+      const searchParams = new URLSearchParams(window.location.search);
       presenceData.details =
         "Viewing Profile: " +
         document.getElementsByClassName("username")[0].innerHTML;
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
             .firstElementChild.textContent +
           ")";
       }
-      let tab = searchParams.get("tab");
+      const tab = searchParams.get("tab");
       if (tab) {
         if (tab == "activity") {
           presenceData.state = "Tab: Public Activity";
@@ -73,12 +73,12 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.querySelector("#org-info")) {
       // Organization Page
-      let displayName = document
+      const displayName = document
         .querySelector("#org-info")
         .querySelector(".ui.header")
         .textContent.replace(/\s*(?=(shaare))/gm, "")
         .replace(/(?<=(shaare))\s*/gm, "");
-      let orgName = document.location.pathname.split("/")[1];
+      const orgName = document.location.pathname.split("/")[1];
       if (displayName == orgName) {
         presenceData.details = "Viewing Organization: " + orgName;
       } else {
@@ -126,11 +126,11 @@ presence.on("UpdateData", async () => {
       } else if (document.location.pathname.split("/")[3] == "activity") {
         presenceData.state = "Viewing Activity...";
       } else if (document.location.pathname.split("/")[3] == "src") {
-        let branch = document.getElementsByClassName("octicon-git-branch")[1]
+        const branch = document.getElementsByClassName("octicon-git-branch")[1]
           .parentNode.lastChild.textContent;
         presenceData.state = "Viewing Files... (" + branch + " Branch)";
       } else if (document.location.pathname.split("/")[3] == "commits") {
-        let branch = document.getElementsByClassName("octicon-git-branch")[1]
+        const branch = document.getElementsByClassName("octicon-git-branch")[1]
           .parentNode.lastChild.textContent;
         presenceData.state = "Viewing Commits... (" + branch + " Branch)";
       } else if (document.location.pathname.split("/")[3] == "branches") {

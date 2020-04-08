@@ -8,8 +8,30 @@ var strings = presence.getStrings({
   search: "presence.activity.searching"
 });
 
+function capitalize(text: string): string {
+  text = text.toLowerCase();
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var elapsed = undefined,
-  oldUrl = undefined;
+  oldUrl = undefined,
+  header,
+  title,
+  item;
 
 presence.on("UpdateData", async () => {
   var video: HTMLVideoElement = null,
@@ -33,8 +55,8 @@ presence.on("UpdateData", async () => {
   startTimestamp = elapsed;
 
   if (path.match("/hub")) {
-    var header = document.querySelector(".Hub__title");
-    var title = document.querySelector(".SimpleModalNav__title");
+    header = document.querySelector(".Hub__title");
+    title = document.querySelector(".SimpleModalNav__title");
     details = "Viewing Category";
     if (header) {
       state = header.textContent;
@@ -43,8 +65,8 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (path.match("/genre")) {
-    var header = document.querySelector(".Hub__title");
-    var title = document.querySelector(".SimpleModalNav__title");
+    header = document.querySelector(".Hub__title");
+    title = document.querySelector(".SimpleModalNav__title");
     details = "Viewing Genre";
     if (header) {
       state = header.textContent;
@@ -53,8 +75,8 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (path.match("/series")) {
-    var title = document.querySelector(".Masthead__title");
-    var item = document.querySelector(".Subnav__item.active");
+    title = document.querySelector(".Masthead__title");
+    item = document.querySelector(".Subnav__item.active");
     details = "Viewing Series";
     if (title) {
       state = title.textContent;
@@ -63,8 +85,8 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (path.match("/movie")) {
-    var title = document.querySelector(".Masthead__title");
-    var item = document.querySelector(".Subnav__item.active");
+    title = document.querySelector(".Masthead__title");
+    item = document.querySelector(".Subnav__item.active");
     details = "Viewing Movie";
     if (title) {
       state = title.textContent;
@@ -76,7 +98,7 @@ presence.on("UpdateData", async () => {
     var brand: HTMLImageElement = document.querySelector(
       ".SimpleModalNav__brandImage"
     );
-    var item = document.querySelector(".Subnav__item.active");
+    item = document.querySelector(".Subnav__item.active");
     details = "Viewing Network";
     if (brand) {
       state = brand.alt;
@@ -85,8 +107,8 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (path.match("/sports_episode")) {
-    var title = document.querySelector(".Masthead__title");
-    var item = document.querySelector(".Subnav__item.active");
+    title = document.querySelector(".Masthead__title");
+    item = document.querySelector(".Subnav__item.active");
     details = "Viewing Sports Episode";
     if (title) {
       state = title.textContent;
@@ -95,8 +117,8 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (path.match("/sports_team")) {
-    var title = document.querySelector(".Masthead__title");
-    var item = document.querySelector(".Subnav__item.active");
+    title = document.querySelector(".Masthead__title");
+    item = document.querySelector(".Subnav__item.active");
     details = "Viewing Sports Team";
     if (title) {
       state = title.textContent;
@@ -114,7 +136,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.match("/live")) {
     var category = document.querySelector(".LiveGuide__filter-item--selected");
-    var title = document.querySelector(".ModalHeader__showname");
+    title = document.querySelector(".ModalHeader__showname");
     details = "Viewing Live";
     if (category) {
       state = capitalize(category.textContent);
@@ -125,7 +147,7 @@ presence.on("UpdateData", async () => {
   } else if (path.match("/my-stuff")) {
     details = "Viewing My Stuff";
   } else if (path.match("/manage-dvr")) {
-    var item = document.querySelector(".Subnav__item.active");
+    item = document.querySelector(".Subnav__item.active");
     details = "Viewing My DVR";
     if (item) {
       state = capitalize(item.textContent);
@@ -134,7 +156,7 @@ presence.on("UpdateData", async () => {
     video = document.querySelector(".video-player");
     details = "Viewing Watch History";
     if (video) {
-      var title = document.querySelector(".metadata-area__second-line");
+      title = document.querySelector(".metadata-area__second-line");
       var content = document.querySelector(".metadata-area__third-line");
       var timestamps = getTimestamps(
         Math.floor(video.currentTime),
@@ -172,20 +194,6 @@ presence.on("UpdateData", async () => {
     startTimestamp: startTimestamp,
     endTimestamp: endTimestamp
   };
-
-  if (data) {
-    presence.setActivity(data, video ? !video.paused : true);
-    presence.setTrayTitle(details);
-  }
+  presence.setActivity(data, video ? !video.paused : true);
+  presence.setTrayTitle(details);
 });
-
-function capitalize(text: string) {
-  text = text.toLowerCase();
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

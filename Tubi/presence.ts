@@ -6,8 +6,24 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+  /**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+var subtitle;
+
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "tubi-logo"
   };
 
@@ -27,7 +43,7 @@ presence.on("UpdateData", async () => {
     if (subtitleCheck) {
       subtitle = "Movie";
     } else {
-      var subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
+      subtitle = document.querySelector("h2._29XQF._24NNJ").textContent;
     }
 
     (data.details = title), (data.state = subtitle);
@@ -51,9 +67,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

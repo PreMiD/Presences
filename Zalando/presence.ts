@@ -1,10 +1,6 @@
 var presence = new Presence({
-    clientId: "644645903973482536"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "644645903973482536"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -12,96 +8,13 @@ var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
 
 var user: any;
 var title: any;
-var replace: any;
-var search: any;
 var language: any;
-
-presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
-    largeImageKey: "zalando"
-  };
-
-  language = window.navigator.language; //Make this change-able with presence settings
-  //en = English
-  //nl = Nederlands
-  //Language list can be found here: https://api.premid.app/v2/langFile/list
-
-  if (
-    document.location.pathname == "/" ||
-    document.location.pathname.includes("home/")
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = getTranslation("HomePage");
-  } else if (document.location.pathname.includes(".html")) {
-    presenceData.startTimestamp = browsingStamp;
-    user = document.querySelector(
-      ".h-container.h-product-title.topSection.h-align-left > div:nth-child(2) > h1"
-    );
-    title = document.querySelector(
-      ".h-container.h-product-title.topSection.h-align-left > div:nth-child(1) > a > h2"
-    );
-    presenceData.details = getTranslation("ProductView");
-    presenceData.state = user.textContent + " > " + title.textContent;
-  } else if (
-    document.querySelector(
-      "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a"
-    ) !== null
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    user = document.querySelector(
-      "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a"
-    );
-    presenceData.details = getTranslation("BrandView");
-    presenceData.state = user.textContent;
-  } else if (
-    document.querySelector(
-      "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul"
-    ) !== null
-  ) {
-    presenceData.startTimestamp = browsingStamp;
-    user = document.querySelector(
-      "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul"
-    );
-    presenceData.details = getTranslation("CategoryView");
-    presenceData.state = user.textContent;
-  } else if (document.location.pathname.includes("/cart/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = getTranslation("Cart");
-  } else if (document.location.pathname.includes("/wishlist/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = getTranslation("Wishlist");
-  } else if (document.location.pathname.includes("/myaccount/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = getTranslation("AccountSettings");
-  } else if (document.location.pathname.includes("/faq/")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = getTranslation("FAQ");
-  }
-
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
-});
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 /**
  * Send PreMiD error message in console of browser
  * @param message the message that you want to be sent in console
  */
-function PMD_error(message: String) {
+function PMD_error(message: string): void {
   console.log(
     "%cPreMiD%cERROR%c " + message,
     genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
@@ -114,7 +27,7 @@ function PMD_error(message: String) {
  * Get Translation
  * @param stringName Name of string you want to get
  */
-function getTranslation(stringName: String) {
+function getTranslation(stringName: string): string {
   switch (stringName) {
     case "HomePage":
       switch (language) {
@@ -204,3 +117,73 @@ function getTranslation(stringName: String) {
       break;
   }
 }
+
+presence.on("UpdateData", async () => {
+  const presenceData: presenceData = {
+    largeImageKey: "zalando"
+  };
+
+  language = window.navigator.language; //Make this change-able with presence settings
+  //en = English
+  //nl = Nederlands
+  //Language list can be found here: https://api.premid.app/v2/langFile/list
+
+  if (
+    document.location.pathname == "/" ||
+    document.location.pathname.includes("home/")
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = getTranslation("HomePage");
+  } else if (document.location.pathname.includes(".html")) {
+    presenceData.startTimestamp = browsingStamp;
+    user = document.querySelector(
+      ".h-container.h-product-title.topSection.h-align-left > div:nth-child(2) > h1"
+    );
+    title = document.querySelector(
+      ".h-container.h-product-title.topSection.h-align-left > div:nth-child(1) > a > h2"
+    );
+    presenceData.details = getTranslation("ProductView");
+    presenceData.state = user.textContent + " > " + title.textContent;
+  } else if (
+    document.querySelector(
+      "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a"
+    ) !== null
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    user = document.querySelector(
+      "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > div > div > h1 > span > a"
+    );
+    presenceData.details = getTranslation("BrandView");
+    presenceData.state = user.textContent;
+  } else if (
+    document.querySelector(
+      "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul"
+    ) !== null
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    user = document.querySelector(
+      "#z-nvg-cognac-root > div > z-grid > z-grid-item:nth-child(2) > div > div > nav > ul"
+    );
+    presenceData.details = getTranslation("CategoryView");
+    presenceData.state = user.textContent;
+  } else if (document.location.pathname.includes("/cart/")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = getTranslation("Cart");
+  } else if (document.location.pathname.includes("/wishlist/")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = getTranslation("Wishlist");
+  } else if (document.location.pathname.includes("/myaccount/")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = getTranslation("AccountSettings");
+  } else if (document.location.pathname.includes("/faq/")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = getTranslation("FAQ");
+  }
+
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
+});

@@ -1,35 +1,5 @@
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-
-function PMD_info(message) {
-  console.log(
-    "%cPreMiD%cINFO%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-function PMD_error(message) {
-  console.log(
-    "%cPreMiD%cERROR%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
-    "color: unset;"
-  );
-}
-
-function PMD_success(message) {
-  console.log(
-    "%cPreMiD%cSUCCESS%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle +
-      "border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
-    "color: unset;"
-  );
-}
-
 var presence = new Presence({
-    clientId: "614387676467953674" // CLIENT ID FOR YOUR PRESENCE
+    clientId: "614387676467953674"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -37,16 +7,29 @@ var presence = new Presence({
     live: "presence.activity.live"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var title: any,
   uploader: any,
   search: any,
-  livechecker: any,
   episode: any,
   episodefinish: any,
   rating: any;
 
 // the video variable is a html video element
-var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any;
+var video: HTMLVideoElement;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -58,7 +41,7 @@ presence.on("UpdateData", async () => {
   playback = video ? true : false;
 
   if (!playback) {
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
       largeImageKey: "viki"
     };
 
@@ -543,7 +526,7 @@ presence.on("UpdateData", async () => {
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
       details: "",
       state: "",
       largeImageKey: "viki",
@@ -554,17 +537,6 @@ presence.on("UpdateData", async () => {
       startTimestamp: timestamps[0],
       endTimestamp: timestamps[1]
     };
-
-    // Get the video duration
-    videoDuration = video.duration;
-
-    // Get the video current time
-    videoCurrentTime = video.currentTime;
-
-    // Get title, can get the document.querySelector thing with the tips i sent you
-    title = document.querySelector(
-      "body > div.page-wrapper > div.main-container > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(4) > div.container-meta.col.s6.m8.l8 > h2 > a"
-    );
     episode = document.querySelector(
       "body > div.page-wrapper > div.main-container > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(1) > div.video-meta.col.s8.m8.l8 > h1 > a"
     );
@@ -575,7 +547,9 @@ presence.on("UpdateData", async () => {
     );
 
     // Set presence details to the title (innerText - gets the text from the <strong> tag in this case)
-    presenceData.details = title.innerText;
+    presenceData.details = document.querySelector(
+      "body > div.page-wrapper > div.main-container > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(4) > div.container-meta.col.s6.m8.l8 > h2 > a"
+    ).textContent;
 
     // Set presence state to views value
     presenceData.state =
@@ -588,19 +562,13 @@ presence.on("UpdateData", async () => {
     }
 
     //* If tags are not "null"
-    if (title !== null && uploader !== null) {
+    if (
+      document.querySelector(
+        "body > div.page-wrapper > div.main-container > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(4) > div.container-meta.col.s6.m8.l8 > h2 > a"
+      ) !== null &&
+      uploader !== null
+    ) {
       presence.setActivity(presenceData, !video.paused);
     }
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

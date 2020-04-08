@@ -20,13 +20,10 @@
     "hbogo.cz",
     "hbogo.sk"
   ],
-  "version": "2.2.0",
+  "version": "2.2.2",
   "logo": "https://i.imgur.com/TTHQtBH.png",
   "thumbnail": "https://i.imgur.com/vvAp3GI.png",
   "color": "#011921",
-  "tags": [
-    "video",
-    "media"
-  ],
+  "tags": ["video", "media"],
   "category": "videos"
 }

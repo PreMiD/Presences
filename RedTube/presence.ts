@@ -6,6 +6,20 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+  /**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   var video: HTMLVideoElement = document.querySelector(
     ".mhp1138_videoWrapper video"
@@ -25,8 +39,8 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
       presenceData: presenceData = {
-        details: title.innerText,
-        state: uploader.textContent,
+        details: title ? title.innerText : "Title not found...",
+        state: uploader ? uploader.textContent : "Uploader not found...",
         largeImageKey: "lg",
         smallImageKey: video.paused ? "pause" : "play",
         smallImageText: video.paused
@@ -45,7 +59,7 @@ presence.on("UpdateData", async () => {
     }
 
     //* If tags are not "null"
-    if (video && title !== null && uploader !== null) {
+    if (title !== null && uploader !== null) {
       presence.setActivity(presenceData, !video.paused);
     }
   } else {
@@ -53,14 +67,3 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

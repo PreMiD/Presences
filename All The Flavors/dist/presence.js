@@ -1,5 +1,5 @@
 let presence = new Presence({
-  clientId: "631122124630654979",
+  clientId: "631122124630654979"
 });
 
 presence.on("UpdateData", async () => {
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       smallImageKey: "search",
       smallImageText: "browsing",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -23,15 +23,16 @@ presence.on("UpdateData", async () => {
       "/users",
       "/contests",
       "/vendors",
-      "/top100",
+      "/top100"
     ].includes(document.location.pathname)
   ) {
     elapsed = Math.floor(Date.now() / 1000);
+    var dstate;
     if (document.location.search != "") {
       var urlParams = new URLSearchParams(document.location.search);
-      var dstate = `searching for ${urlParams.get("name_like")}`;
+      dstate = `searching for ${urlParams.get("name_like")}`;
     } else {
-      var dstate = "browsing list";
+      dstate = "browsing list";
     }
     let presenceData = {
       details: `Browing ${document.location.pathname.replace("/", "")} `,
@@ -40,7 +41,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       smallImageKey: "search",
       smallImageText: "browsing",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -49,7 +50,7 @@ presence.on("UpdateData", async () => {
       "/getting_started",
       "/help/how_to_mix",
       "/go_pro",
-      "/help/report_recipe",
+      "/help/report_recipe"
     ].includes(document.location.pathname)
   ) {
     elapsed = Math.floor(Date.now() / 1000);
@@ -64,7 +65,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       smallImageKey: "search",
       smallImageText: "browsing",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -85,7 +86,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       smallImageKey: "search",
       smallImageText: "browsing",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -102,7 +103,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       smallImageKey: "search",
       smallImageText: "browsing",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);

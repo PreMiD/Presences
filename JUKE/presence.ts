@@ -3,7 +3,7 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  let testPresenceData: presenceData = {
+  const testPresenceData: presenceData = {
     details: "Luister radio op juke.nl",
     state: "Browsen...",
     largeImageKey: "juke-large"

@@ -6,7 +6,7 @@ var elapsed, oldURL;
 
 presence.on("UpdateData", async () => {
   let details, state;
-  let title = document.title;
+  const title = document.title;
 
   if (window.location.href !== oldURL) {
     oldURL = window.location.href;

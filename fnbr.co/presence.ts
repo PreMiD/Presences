@@ -1,13 +1,9 @@
 var presence = new Presence({
-    clientId: "632047673754648586"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "632047673754648586"
+});
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "logo"
   };
   var path = document.location.pathname;

@@ -2,6 +2,26 @@ const presence = new Presence({
   clientId: "630561466872889344"
 });
 
+enum PageType {
+  Game = 0,
+  Category = 1
+}
+
+const capitalize = (text: Array<string>): string => {
+  return text
+    .map((str) => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    })
+    .join(" ");
+};
+
+const parse = (path: string): Array<string> => {
+  path = path.replace("/", "");
+  var split: Array<string> = path.split("-");
+
+  return [split[0], capitalize(split.slice(1))];
+};
+
 var elapsed, oldUrl;
 
 presence.on("UpdateData", async () => {
@@ -51,25 +71,22 @@ presence.on("UpdateData", async () => {
       state = "Jigsaw Puzzles";
     } else {
       var parsedData = parse(path);
-      if (parsedData) {
-        var type = parsedData[0];
-        var name = parsedData[1];
+      var type = parseInt(parsedData[0]);
+      var name = parsedData[1];
 
-        switch (type) {
-          case PageType.Category:
-            details = "Viewing Category";
-            break;
+      switch (type) {
+        case PageType.Category:
+          details = "Viewing Category";
+          break;
 
-          case PageType.Game:
-            details = "Viewing Game";
-            break;
+        case PageType.Game:
+          details = "Viewing Game";
+          break;
 
-          default:
-            break;
-        }
-
-        state = name;
+        default:
+          break;
       }
+      state = name;
     }
   }
 
@@ -82,23 +99,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(data);
 });
-
-enum PageType {
-  Game = 0,
-  Category = 1
-}
-
-const parse = (path: string) => {
-  path = path.replace("/", "");
-  var split: Array<string> = path.split("-");
-
-  return [parseInt(split[0]), capitalize(split.slice(1))];
-};
-
-const capitalize = (text: Array<String>) => {
-  return text
-    .map(str => {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    })
-    .join(" ");
-};

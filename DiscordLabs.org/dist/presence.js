@@ -1,15 +1,16 @@
 var presence = new Presence({
-    clientId: "660894911331172372",
+    clientId: "660894911331172372"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
+var priceEls;
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   if (document.location.hostname == "bots.discordlabs.org") {
     presenceData.details = "Viewing Page:";
@@ -19,7 +20,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing Page:";
       presenceData.state = "DiscordLabs Partners";
     } else if (document.location.pathname.includes("/profile/")) {
-      var priceEls = document.getElementsByClassName("uname");
+      priceEls = document.getElementsByClassName("uname");
       for (var i = 0; i < priceEls.length; i++) {
         var profilename = priceEls[i].innerText;
         presenceData.details = "Viewing a profile:";
@@ -37,7 +38,7 @@ presence.on("UpdateData", () => {
         .slice(39)
         .replace(/\+|%20/g, " ");
     } else if (document.location.pathname.includes("/bot/")) {
-      var priceEls = document.getElementsByClassName("botname");
+      priceEls = document.getElementsByClassName("botname");
       for (var i = 0; i < priceEls.length; i++) {
         var botname = priceEls[i].innerText;
         presenceData.details = "Viewing a Discord bot:";

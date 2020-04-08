@@ -1,31 +1,45 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "666074265233260555"
 });
 
-let strings = presence.getStrings({
+const strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
 });
 
-let startTimestamp = Math.floor(Date.now() / 1000);
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+const startTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement;
 
-presence.on("iFrameData", async msg => {
+presence.on("iFrameData", async (msg) => {
   if (!msg) return;
   video = msg;
 });
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "turkanime"
   };
 
-  let title = document.querySelector(
+  const title = document.querySelector(
     "#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(1) > a"
   );
-  let ep = document.querySelector(
+  const ep = document.querySelector(
     "#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(2) > a"
   );
 
@@ -38,10 +52,7 @@ presence.on("UpdateData", async () => {
   if (title && ep) {
     presenceData.details = title.textContent;
     presenceData.state = ep.textContent.replace(
-      title.textContent
-        .split(" ")
-        .slice(1)
-        .join(" "),
+      title.textContent.split(" ").slice(1).join(" "),
       ""
     );
   }
@@ -59,7 +70,7 @@ presence.on("UpdateData", async () => {
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      let timestamps = getTimestamps(
+      const timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -70,9 +81,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

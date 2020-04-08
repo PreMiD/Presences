@@ -5,19 +5,22 @@ var strings = presence.getStrings({
   browsing: "presence.activity.browsing"
 });
 
+const getElement = (selector: string): string => {
+  const element = document.querySelector(selector);
+
+  if (element) {
+    return element.textContent;
+  }
+};
+
 var oldUrl, elapsed;
 
 var data: presenceData = {
-  details: undefined,
-  state: undefined,
-  largeImageKey: "sololearn",
-  smallImageKey: undefined,
-  smallImageText: undefined,
-  startTimestamp: undefined,
-  endTimestamp: undefined
+  largeImageKey: "sololearn"
 };
 
 presence.on("UpdateData", async () => {
+  var browsing = (await strings).browsing;
   const static = {
     "/": {
       details: "Browsing",
@@ -160,10 +163,12 @@ presence.on("UpdateData", async () => {
   }
 
   if (data !== null && data.details !== undefined) {
-    if (data.details.match("(Viewing|Browsing)")) {
-      data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browsing;
-    }
+    data.smallImageKey = data.details.match("(Viewing|Browsing)")
+      ? "reading"
+      : null;
+    data.smallImageText = data.details.match("(Viewing|Browsing)")
+      ? browsing
+      : null;
 
     presence.setActivity(data);
   } else {
@@ -171,11 +176,3 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
   }
 });
-
-const getElement = (selector: string) => {
-  const element = document.querySelector(selector);
-
-  if (element) {
-    return element.textContent;
-  }
-};

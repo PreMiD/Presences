@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "640997739689279498",
+    clientId: "640997739689279498"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var title, views, air, air2, title2;
@@ -11,7 +11,6 @@ var iFrameVideo, currentTime, duration, paused;
 var video, videoDuration, videoCurrentTime;
 var lastPlaybackState = null;
 var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
@@ -31,10 +30,9 @@ presence.on("UpdateData", async () => {
   playing = document
     .getElementsByClassName("btn playbutton")[0]
     .getAttributeNode("data-trackingaction").value;
-  var a = (presenceData = ""),
-    presenceData = {
-      largeImageKey: "logo",
-    };
+  var presenceData = {
+    largeImageKey: "logo"
+  };
 
   switch (playing) {
     case "stop":

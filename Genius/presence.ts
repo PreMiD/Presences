@@ -6,10 +6,25 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var elapsed = Math.floor(Date.now() / 1000);
+var artist;
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "genius-logo"
   };
 
@@ -32,7 +47,7 @@ presence.on("UpdateData", async () => {
     data.state = article;
     data.startTimestamp = elapsed;
   } else if (path.startsWith("/artists/")) {
-    var artist = document
+    artist = document
       .querySelector("h1.profile_identity-name_iq_and_role_icon")
       .innerHTML.split("<")[0];
     data.details = "Viewing Artist Profile";
@@ -49,7 +64,7 @@ presence.on("UpdateData", async () => {
     var song = document.querySelector(
       "h1.header_with_cover_art-primary_info-title"
     ).textContent;
-    var artist = document.querySelector(
+    artist = document.querySelector(
       "a.header_with_cover_art-primary_info-primary_artist"
     ).textContent;
     data.details = "Viewing Lyrics";
@@ -75,17 +90,18 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-    }
 
-    data.smallImageKey = video.paused ? "pause" : "play";
-    data.smallImageText = video.paused
-      ? (await strings).pause
-      : (await strings).play;
-    (data.startTimestamp = timestamps[0]), (data.endTimestamp = timestamps[1]);
+      data.smallImageKey = video.paused ? "pause" : "play";
+      data.smallImageText = video.paused
+        ? (await strings).pause
+        : (await strings).play;
+      (data.startTimestamp = timestamps[0]),
+        (data.endTimestamp = timestamps[1]);
 
-    if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+      if (video.paused) {
+        delete data.startTimestamp;
+        delete data.endTimestamp;
+      }
     }
   } else if (path.startsWith("/search")) {
     var search = document.querySelector("h2.search_results_page-header")
@@ -101,9 +117,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(data);
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

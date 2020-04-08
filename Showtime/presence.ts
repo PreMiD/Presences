@@ -7,26 +7,42 @@ var presence = new Presence({
     live: "presence.activity.live"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   var video: HTMLVideoElement = document.querySelector(
     "#main-container > div > video"
   );
+
+  var description;
 
   if (video && !isNaN(video.duration)) {
     var title = document.querySelector(
       "#player-video-overlay .player-title .player-title-name"
     ).textContent;
     if (document.location.pathname.includes("/live")) {
-      var description = document.querySelector(
+      description = document.querySelector(
         "#player-video-overlay .player-title div span"
       ).textContent;
     } else {
-      var description = document.querySelector(
+      description = document.querySelector(
         "#player-video-overlay .player-title div"
       ).textContent;
     }
 
-    if (description.trim() == title) {
+    if (description == null || description.trim() == title) {
       description = "Movie";
     }
 
@@ -65,20 +81,14 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title !== null && description !== null) {
+    if (title !== null) {
       presence.setActivity(data, !video.paused);
     }
   } else {
-    let browsingPresence: presenceData = {
+    const browsingPresence: presenceData = {
       details: "Browsing...",
       largeImageKey: "showtime-logo"
     };
     presence.setActivity(browsingPresence);
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

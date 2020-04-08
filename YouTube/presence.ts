@@ -7,6 +7,20 @@ var presence = new Presence({
     live: "presence.activity.live"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 // YouTube TV separator pattern
 const pattern = "•";
 function truncateAfter(str: string, pattern: string): string {
@@ -190,7 +204,7 @@ presence.on("UpdateData", async () => {
     document.location.hostname == "www.youtube.com" ||
     document.location.hostname == "youtube.com"
   ) {
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
       largeImageKey: "yt_lg"
     };
 
@@ -358,15 +372,12 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     }
   } else if (document.location.hostname == "studio.youtube.com") {
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
       largeImageKey: "yt_lg",
       smallImageKey: "studio",
       smallImageText: "Youtube Studio"
     };
-
-    var search: any;
-    var user: any;
-    var browsingStamp = Math.floor(Date.now() / 1000);
+    browsingStamp = Math.floor(Date.now() / 1000);
 
     if (document.location.pathname.includes("/videos")) {
       presenceData.details = "Viewing their videos"; //youtube.studio.viewVideos
@@ -416,14 +427,3 @@ presence.on("UpdateData", async () => {
     }
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

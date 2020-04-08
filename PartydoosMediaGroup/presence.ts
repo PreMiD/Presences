@@ -8,16 +8,11 @@ var strings = presence.getStrings({
 var oldUrl, elapsed;
 
 var data: presenceData = {
-  details: undefined,
-  state: undefined,
-  largeImageKey: "pmg",
-  smallImageKey: undefined,
-  smallImageText: undefined,
-  startTimestamp: undefined,
-  endTimestamp: undefined
+  largeImageKey: "pmg"
 };
 
 presence.on("UpdateData", async () => {
+  var string = (await strings).browsing;
   const static = {
     "": {
       details: "Browsing"
@@ -47,7 +42,7 @@ presence.on("UpdateData", async () => {
   if (data.details !== undefined) {
     if (data.details.match("(Viewing|Browsing)")) {
       data.smallImageKey = "reading";
-      data.smallImageText = (await strings).browsing;
+      data.smallImageText = string;
     }
 
     presence.setActivity(data);
@@ -56,11 +51,3 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
   }
 });
-
-const getElement = (selector: string) => {
-  const element = document.querySelector(selector);
-
-  if (element) {
-    return element.textContent;
-  }
-};

@@ -8,7 +8,7 @@ var presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-function capitalize(str: string) {
+function capitalize(str: string): string {
   var text = str.toLowerCase().split(" ");
   for (var i = 0, x = text.length; i < x; i++) {
     text[i] = text[i][0].toUpperCase() + text[i].substr(1);

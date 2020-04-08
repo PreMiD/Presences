@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "658192386899312651",
+  clientId: "658192386899312651"
 });
 
 presence.on("UpdateData", () => {
@@ -14,12 +14,12 @@ presence.on("UpdateData", () => {
     "",
     "/wp-login",
     "/wp-admin",
-    "/etiket",
+    "/etiket"
   ];
 
   var presenceData = {
     largeImageKey: "buk-logo",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
 
   // Homepage
@@ -64,16 +64,14 @@ presence.on("UpdateData", () => {
   }
 
   if (page.startsWith("/ara")) {
-    let string = page.substring(4).split("/")[1];
     presenceData.details = "Arama bölümünde...";
   }
 
   if (presenceData.details == null) {
-    let page = document.location.pathname;
     presence.setTrayTitle();
     presence.setActivity({
       largeImageKey: "buk-logo",
-      details: "Bilinmeyen bir sayfada...",
+      details: "Bilinmeyen bir sayfada..."
     });
   } else {
     presence.setActivity(presenceData);

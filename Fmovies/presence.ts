@@ -6,14 +6,28 @@ var presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   }),
-  tv: boolean = false,
+  tv = false,
   video = {
     duration: 0,
     currentTime: 0,
     paused: true
   };
 
-presence.on("iFrameData", data => {
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+presence.on("iFrameData", (data) => {
   video = data;
 });
 
@@ -41,10 +55,10 @@ presence.on("UpdateData", async () => {
     );
 
     if (tv) {
-      let name = document
+      const name = document
         .querySelector("#movie li.active span")
         .textContent.trim();
-      let date = document.querySelector(
+      const date = document.querySelector(
         "#info  div dl:nth-child(2) > dd:nth-child(4)"
       ).textContent;
       data.details =
@@ -64,7 +78,7 @@ presence.on("UpdateData", async () => {
         "E" +
         document.querySelector("#servers li a.active").textContent;
     } else {
-      let date = document.querySelector(
+      const date = document.querySelector(
         "#info  div dl:nth-child(2) > dd:nth-child(4)"
       ).textContent;
       data.details = document.querySelector(
@@ -93,9 +107,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

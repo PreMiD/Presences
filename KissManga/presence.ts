@@ -5,9 +5,11 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "kissmanga-logo"
   };
+
+  var manga;
 
   if (document.location.pathname == "/") {
     (data.details = "Viewing Homepage"), (data.startTimestamp = browsingStamp);
@@ -20,12 +22,12 @@ presence.on("UpdateData", async () => {
       ? true
       : false;
     if (mangacheck) {
-      var manga = document.querySelector("div.barContent .bigChar").textContent;
+      manga = document.querySelector("div.barContent .bigChar").textContent;
       (data.details = "Viewing a Manga"), (data.state = manga);
       data.startTimestamp = browsingStamp;
       presence.setActivity(data);
     } else {
-      var manga = document
+      manga = document
         .querySelector("#headnav #navsubbar p a")
         .textContent.split("Manga")
         .pop()

@@ -1,10 +1,6 @@
 var presence = new Presence({
-    clientId: "608043966285348944"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "608043966285348944"
+});
 
 var lastPlaybackState = null;
 var reading;
@@ -30,7 +26,7 @@ presence.on("UpdateData", async () => {
       .querySelector(".page-jump.text-center")
       .getAttribute("value");
 
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
       details: a.innerText,
       state: b.innerText + " [Page: " + page + "]",
       largeImageKey: "lg"
@@ -40,7 +36,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData, true);
   } else {
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
       largeImageKey: "lg"
     };
 
@@ -53,14 +49,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

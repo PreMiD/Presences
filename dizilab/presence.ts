@@ -22,9 +22,23 @@ const presence = new Presence({
     "/pano/son-izlediklerim": "Son İzlediklerim"
   };
 
-let video: { [k: string]: any } = {};
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
 
-presence.on("iFrameData", data => {
+const video: { [k: string]: any } = {};
+
+presence.on("iFrameData", (data) => {
   if (!data.error) {
     video.dataAvailable = true;
     video.currentTime = data.currentTime;
@@ -192,7 +206,7 @@ presence.on("UpdateData", async () => {
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
               ).textContent
             }. Bölüm`
-          : null;
+          : "none found";
 
     const fixedEpisodeName = episodeX
         .replace(/\n/g, "")
@@ -205,7 +219,7 @@ presence.on("UpdateData", async () => {
         Math.floor(_video.duration)
       );
 
-    let data: { [k: string]: any } = {
+    const data: { [k: string]: any } = {
       largeImageKey: "dl-logo",
       details: title.textContent,
       state: fixedEpisodeName,
@@ -276,7 +290,7 @@ presence.on("UpdateData", async () => {
           Math.floor(video.duration)
         );
 
-      let data: { [k: string]: any } = {
+      const data: { [k: string]: any } = {
         largeImageKey: "dl-logo",
         details: title.textContent,
         state: fixedEpisodeName,
@@ -309,14 +323,3 @@ presence.on("UpdateData", async () => {
     }
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime, videoDuration) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

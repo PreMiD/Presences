@@ -1,16 +1,16 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "691794350081966080"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing"
   });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 let artist;
 let title;
 let playing;
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   playing = data.iframe_radio.playing;
   if (playing) {
     artist = data.iframe_radio.artist;
@@ -19,7 +19,7 @@ presence.on("iFrameData", data => {
 });
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "animu"
   };
 

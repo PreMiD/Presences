@@ -8,8 +8,12 @@ var presence = new Presence({
     reading: "presence.activity.reading"
   }),
   host: string,
-  path: string,
   timestamp: any = Math.floor(Date.now() / 1000);
+
+// checkmate javascript
+function pathIncludes(string: string): boolean {
+  return document.location.pathname.toLowerCase().includes(string);
+}
 
 presence.on("UpdateData", async () => {
   var data: presenceData = {
@@ -17,7 +21,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: timestamp
   };
 
-  (host = document.location.hostname), (path = document.location.pathname);
+  host = document.location.hostname;
 
   if (host === "premid.app" || host === "beta.premid.app") {
     host.includes("beta") ? (data.state = "Beta") : delete data.state;
@@ -150,8 +154,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(data);
 });
-
-// checkmate javascript
-function pathIncludes(string: string) {
-  return document.location.pathname.toLowerCase().includes(string);
-}

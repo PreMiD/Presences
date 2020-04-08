@@ -4,12 +4,8 @@ var presence = new Presence({
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-var url = new URL(document.location.href);
-
-var raid: any;
-
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "logo"
   };
 

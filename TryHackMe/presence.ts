@@ -5,7 +5,7 @@ var presence = new Presence({
   presenceData: presenceData = {
     largeImageKey: "icon"
   },
-  customData: boolean = false;
+  customData = false;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 

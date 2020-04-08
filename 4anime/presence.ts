@@ -6,6 +6,20 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var lastPlaybackState = null;
 var playback;
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -17,12 +31,10 @@ if (lastPlaybackState != playback) {
 presence.on("UpdateData", async () => {
   playback =
     document.querySelector(".vjs-current-time-display") !== null ? true : false;
-
+  var presenceData: presenceData = {
+    largeImageKey: "logo"
+  };
   if (!playback) {
-    presenceData: presenceData = {
-      largeImageKey: "logo"
-    };
-
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
 
@@ -38,26 +50,26 @@ presence.on("UpdateData", async () => {
     var videoTitle: any;
     var seasonepisode;
 
-    videoTitle = document.querySelector("a#titleleft");
+    videoTitle =
+      document.querySelector("a#titleleft") !== null
+        ? document.querySelector("a#titleleft").textContent
+        : "Title not found...";
     seasonepisode = document.querySelector("span#titleleft");
 
     var timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
-      presenceData: presenceData = {
-        largeImageKey: "logo",
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
-      };
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
+    presenceData.smallImageKey = video.paused ? "pause" : "play";
+    presenceData.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
 
-    presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
+    presence.setTrayTitle(video.paused ? "" : videoTitle);
 
-    presenceData.details = videoTitle.innerText;
+    presenceData.details = videoTitle;
     presenceData.state = seasonepisode.innerText;
 
     if (video.paused) {
@@ -65,14 +77,8 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    if (videoTitle !== null) {
+    if (videoTitle !== "Title not found...") {
       presence.setActivity(presenceData, !video.paused);
     }
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

@@ -2,12 +2,12 @@ var presence = new Presence({
   clientId: "631995227132919819" // CLIENT ID FOR YOUR PRESENCE
 });
 
-var item: any, user: any, search: any, title: any;
+var title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "dirtmc"
   };
 
@@ -15,21 +15,16 @@ presence.on("UpdateData", async () => {
   if (document.location.hostname == "dirtmc.net") {
     if (document.location.pathname == "/") {
       presenceData.details = "Viewing home page";
-      delete presenceData.state;
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname == "/rules/") {
       presenceData.details = "Reading the rules";
-      delete presenceData.state;
 
       presenceData.smallImageKey = "reading";
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname == "/how-to-play/") {
       presenceData.details = "Viewing how to play";
-      delete presenceData.state;
 
       presenceData.smallImageKey = "reading";
 
@@ -54,8 +49,6 @@ presence.on("UpdateData", async () => {
     title = document.querySelector("head > title");
     presenceData.details = "Store, viewing:";
     presenceData.state = title.innerText.replace("DirtMC | ", "");
-
-    delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
   } else {

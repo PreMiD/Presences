@@ -14,15 +14,10 @@
     "nl": "Luister, speel, ontdek en maak contact met muziekfans over de hele wereld!"
   },
   "url": "plug.dj",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "logo": "https://crugg.de/premid/pdjlogo.png",
   "thumbnail": "https://crugg.de/premid/pdjbanner.png",
   "color": "#E1306C",
-  "tags": [
-    "music",
-    "community",
-    "chatting",
-    "media"
-  ],
+  "tags": ["music", "community", "chatting", "media"],
   "category": "music"
 }

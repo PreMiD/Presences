@@ -1,5 +1,5 @@
 let presence = new Presence({
-  clientId: "630790482804473857",
+  clientId: "630790482804473857"
 });
 
 var tags = [
@@ -11,10 +11,11 @@ var tags = [
   "/misc/",
   "/movie/",
   "/play/",
-  "tv",
+  "tv"
 ];
+var anime;
 var crossover = [];
-for (i = 0; i < tags.length; i++) {
+for (let i = 0; i < tags.length; i++) {
   crossover += ["/crossovers" + tags[i]];
 }
 
@@ -26,7 +27,7 @@ presence.on("UpdateData", async () => {
       //largeImageKey: "banner",
       largeImageKey: "banner",
       smallImageKey: "logo",
-      smallImageText: "browsing",
+      smallImageText: "browsing"
     };
 
     presence.setActivity(presenceData);
@@ -39,7 +40,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "banner",
       smallImageKey: "logo",
       smallImageText: document.location.href,
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -60,7 +61,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "banner",
       smallImageKey: "logo",
       smallImageText: document.location.href,
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -75,12 +76,12 @@ presence.on("UpdateData", async () => {
       largeImageKey: "banner",
       smallImageKey: "logo",
       smallImageText: document.location.href,
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
   } else if (/\d/.test(document.location.pathname)) {
-    var anime = document.location.pathname
+    anime = document.location.pathname
       .split("/")
       .join("")
       .replace(/\d+/, "")
@@ -93,12 +94,12 @@ presence.on("UpdateData", async () => {
       largeImageKey: "banner",
       smallImageKey: "logo",
       smallImageText: document.location.href,
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
   } else if (/\d/.test(document.location.pathname)) {
-    var anime = document.location.pathname
+    anime = document.location.pathname
       .split("/")
       .join("")
       .replace(/\d+/, "")
@@ -111,7 +112,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "banner",
       smallImageKey: "logo",
       smallImageText: document.location.href,
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);

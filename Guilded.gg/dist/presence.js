@@ -1,19 +1,20 @@
 var presence = new Presence({
-    clientId: "662634921914925056",
+    clientId: "662634921914925056"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
+var login;
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   if (document.location.pathname == "/") {
-    var login =
+    login =
       document.querySelector(
         ".GuildedText-container.GuildedText-container-type-heading1"
       ) !== null;
@@ -34,7 +35,7 @@ presence.on("UpdateData", () => {
     presenceData.details = `Viewing Page:`;
     presenceData.state = `Guilded Teams`;
   } else if (document.location.pathname.includes("/matchmaking")) {
-    var login =
+    login =
       document.querySelector(
         ".MultiStageFlow-progress-bar.MultiStageProgressBar-container"
       ) !== null;

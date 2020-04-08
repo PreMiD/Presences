@@ -6,23 +6,182 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+var language = window.navigator.language; //Make this change-able with presence settings
+//en = English
+//nl = Nederlands
+//Language list can be found here: https://api.premid.app/v2/langFile/list
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
+
+/**
+ * Send PreMiD error message in console of browser
+ * @param message the message that you want to be sent in console
+ */
+function PMD_error(message: string): void {
+  console.log(
+    "%cPreMiD%cERROR%c " + message,
+    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
+    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
+    "color: unset;"
+  );
+}
+
+/**
+ * Get Translation
+ * @param stringName Name of string you want to get
+ */
+function getTranslation(stringName: string): string {
+  switch (stringName) {
+    case "HomePage":
+      switch (language) {
+        case "nl":
+          return "Bekijkt de startpagina";
+          break;
+        case "de":
+          return "Ist auf der Startseite";
+          break;
+        default:
+          return "Viewing home page";
+          break;
+      }
+      break;
+    case "News":
+      switch (language) {
+        case "nl":
+          return "Bladeren door het niews";
+          break;
+        case "de":
+          return "Sieht sich News an";
+          break;
+        default:
+          return "Browsing news";
+          break;
+      }
+      break;
+    case "WebShows":
+      switch (language) {
+        case "nl":
+          return "Bladeren door alle shows";
+          break;
+        case "de":
+          return "Sieht sich Shows an";
+          break;
+        default:
+          return "Browsing shows";
+          break;
+      }
+      break;
+    case "Podcasts":
+      switch (language) {
+        case "nl":
+          return "Bladeren door podcasts";
+          break;
+        case "de":
+          return "Sieht sich Podcasts an";
+          break;
+        default:
+          return "Browsing podcasts";
+          break;
+      }
+      break;
+    case "Music":
+      switch (language) {
+        case "nl":
+          return "Bladeren door muziek";
+          break;
+        case "de":
+          return "Sieht sich Musik an";
+          break;
+        default:
+          return "Browsing music";
+          break;
+      }
+      break;
+    case "Search":
+      switch (language) {
+        case "nl":
+          return "Zoekt naar:";
+          break;
+        case "de":
+          return "Sucht nach:";
+          break;
+        default:
+          return "Searching for:";
+          break;
+      }
+      break;
+    case "Library":
+      switch (language) {
+        case "nl":
+          return "Bekijkt bibliotheek:";
+          break;
+        case "de":
+          return "Ist in der Bibliothek:";
+          break;
+        default:
+          return "Viewing library:";
+          break;
+      }
+      break;
+    case "Collection":
+      switch (language) {
+        case "nl":
+          return "Bekijkt collectie:";
+          break;
+        case "de":
+          return "Ist in der Kollektion";
+          break;
+        default:
+          return "Viewing collection:";
+          break;
+      }
+      break;
+    case "Playlist":
+      switch (language) {
+        case "nl":
+          return "Bekijkt afspeellijst:";
+          break;
+        case "de":
+          return "Ist in der Playlist";
+          break;
+        default:
+          return "Viewing playlist:";
+          break;
+      }
+      break;
+    default:
+      PMD_error(
+        "Unknown StringName please contact the Developer of this presence!\nYou can contact him/her in the PreMiD Discord (discord.gg/premid)"
+      );
+      return "Unknown stringName";
+      break;
+  }
+}
+
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 var user: any;
 var title: any;
-var replace: any;
 var search: any;
-var language: any;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "plex"
   };
-
-  language = window.navigator.language; //Make this change-able with presence settings
-  //en = English
-  //nl = Nederlands
-  //Language list can be found here: https://api.premid.app/v2/langFile/list
 
   if (document.location.hostname == "app.plex.tv") {
     if (
@@ -181,161 +340,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-
-/**
- * Send PreMiD error message in console of browser
- * @param message the message that you want to be sent in console
- */
-function PMD_error(message: String) {
-  console.log(
-    "%cPreMiD%cERROR%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
-    "color: unset;"
-  );
-}
-
-/**
- * Get Translation
- * @param stringName Name of string you want to get
- */
-function getTranslation(stringName: String) {
-  switch (stringName) {
-    case "HomePage":
-      switch (language) {
-        case "nl":
-          return "Bekijkt de startpagina";
-          break;
-        case "de":
-          return "Ist auf der Startseite";
-          break;
-        default:
-          return "Viewing home page";
-          break;
-      }
-      break;
-    case "News":
-      switch (language) {
-        case "nl":
-          return "Bladeren door het niews";
-          break;
-        case "de":
-          return "Sieht sich News an";
-          break;
-        default:
-          return "Browsing news";
-          break;
-      }
-      break;
-    case "WebShows":
-      switch (language) {
-        case "nl":
-          return "Bladeren door alle shows";
-          break;
-        case "de":
-          return "Sieht sich Shows an";
-          break;
-        default:
-          return "Browsing shows";
-          break;
-      }
-      break;
-    case "Podcasts":
-      switch (language) {
-        case "nl":
-          return "Bladeren door podcasts";
-          break;
-        case "de":
-          return "Sieht sich Podcasts an";
-          break;
-        default:
-          return "Browsing podcasts";
-          break;
-      }
-      break;
-    case "Music":
-      switch (language) {
-        case "nl":
-          return "Bladeren door muziek";
-          break;
-        case "de":
-          return "Sieht sich Musik an";
-          break;
-        default:
-          return "Browsing music";
-          break;
-      }
-      break;
-    case "Search":
-      switch (language) {
-        case "nl":
-          return "Zoekt naar:";
-          break;
-        case "de":
-          return "Sucht nach:";
-          break;
-        default:
-          return "Searching for:";
-          break;
-      }
-      break;
-    case "Library":
-      switch (language) {
-        case "nl":
-          return "Bekijkt bibliotheek:";
-          break;
-        case "de":
-          return "Ist in der Bibliothek:";
-          break;
-        default:
-          return "Viewing library:";
-          break;
-      }
-      break;
-    case "Collection":
-      switch (language) {
-        case "nl":
-          return "Bekijkt collectie:";
-          break;
-        case "de":
-          return "Ist in der Kollektion";
-          break;
-        default:
-          return "Viewing collection:";
-          break;
-      }
-      break;
-    case "Playlist":
-      switch (language) {
-        case "nl":
-          return "Bekijkt afspeellijst:";
-          break;
-        case "de":
-          return "Ist in der Playlist";
-          break;
-        default:
-          return "Viewing playlist:";
-          break;
-      }
-      break;
-    default:
-      PMD_error(
-        "Unknown StringName please contact the Developer of this presence!\nYou can contact him/her in the PreMiD Discord (discord.gg/premid)"
-      );
-      return "Unknown stringName";
-      break;
-  }
-}

@@ -1,9 +1,11 @@
 let presence = new Presence({
-  clientId: "631595418085490689",
+  clientId: "631595418085490689"
 });
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };
+
+var stext;
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
@@ -13,24 +15,24 @@ presence.on("UpdateData", async () => {
       state: "at Homepage",
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "//") {
-    var stext = document.location.search.split("=");
+    stext = document.location.search.split("=");
     elapsed = Math.floor(Date.now() / 1000);
     let presenceData = {
       details: "Searching novels",
       state: `Keyword: ${stext[1].split("+").join(" ").capitalize()}`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/category/")) {
-    var stext = document.location.pathname.split("/");
+    stext = document.location.pathname.split("/");
     elapsed = Math.floor(Date.now() / 1000);
     let presenceData = {
       details: `Searching novels `,
@@ -40,7 +42,7 @@ presence.on("UpdateData", async () => {
         .capitalize()}`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -58,7 +60,7 @@ presence.on("UpdateData", async () => {
         .capitalize()}`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -75,7 +77,7 @@ presence.on("UpdateData", async () => {
         }`,
         //largeImageKey: "banner",
         largeImageKey: "logo",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
 
       presence.setActivity(presenceData);

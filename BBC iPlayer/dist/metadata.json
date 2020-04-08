@@ -15,14 +15,11 @@
     "fr": "Regardez des chaînes de télévision en direct sur BBC, profitez des émissions télévisées que vous avez manquées et visualisez du contenu exclusif sur BBC iPlayer."
   },
   "url": "www.bbc.co.uk",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/AudKvIg.png",
   "thumbnail": "https://i.imgur.com/KKBfAEx.png",
   "color": "#FF91E0",
-  "tags": [
-    "bbc",
-    "bbc iplayer"
-  ],
+  "tags": ["bbc", "bbc iplayer"],
   "category": "videos",
   "iframe": true
 }

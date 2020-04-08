@@ -8,24 +8,29 @@ var presence = new Presence({
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-var title: any, views: any, air: any, air2: any;
+var title: any, air: any;
 var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any;
 
 var lastPlaybackState = null;
 var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user: any;
 var search: any;
 
-if (lastPlaybackState != playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
 
   if (playback) {
@@ -33,6 +38,10 @@ presence.on("iFrameData", data => {
     currentTime = data.iframe_video.currTime;
     duration = data.iframe_video.dur;
     paused = data.iframe_video.paused;
+  }
+  if (lastPlaybackState != playback) {
+    lastPlaybackState = playback;
+    browsingStamp = Math.floor(Date.now() / 1000);
   }
 });
 
@@ -145,14 +154,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
