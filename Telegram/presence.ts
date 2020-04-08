@@ -3,21 +3,21 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  let path = document.location.href;
+  const path = document.location.href;
 
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "telegram"
   };
 
-  let title = document.querySelector(
+  const title = document.querySelector(
     "body > div.page_wrap > div:nth-child(1) > div > div > div.tg_head_main_wrap > div > div.tg_head_peer_title_wrap > a > div > span.tg_head_peer_title"
   );
 
   if (title && title.textContent) {
-    let textArea: HTMLTextAreaElement = document.querySelector(
+    const textArea: HTMLTextAreaElement = document.querySelector(
       "body > div.page_wrap > div.im_page_wrap.clearfix > div > div.im_history_col_wrap.noselect.im_history_loaded > div.im_history_selected_wrap > div > div.im_bottom_panel_wrap > div.im_send_panel_wrap.noselect > div > div > div > form > div.im_send_field_wrap.hasselect > textarea"
     );
-    let messages: NodeList = document.querySelectorAll("div.im_message_body");
+    const messages: NodeList = document.querySelectorAll("div.im_message_body");
 
     presenceData.details =
       "Talking this " +
