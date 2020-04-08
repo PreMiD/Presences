@@ -22,7 +22,6 @@ presence.on("iFrameData", (data) => {
         duration = data.iframe_video.dur;
         paused = data.iframe_video.paused;
     }
-    video = data;
 });
 
 if (lastPlaybackState != playback) {
@@ -69,16 +68,12 @@ presence.on("UpdateData", async() => {
                         : (await strings).play);
                     presenceData.startTimestamp = timestamps[0];
                     presenceData.endTimestamp = timestamps[1];
-                    console.log("Playing");
                 }
                 else if (paused) {
                     delete presenceData.startTimestamp;
                     delete presenceData.endTimestamp;
                     presenceData.details = "Paused:";
                     presenceData.smallImageKey = "pause";
-                    presence.setActivity(presenceData, video.paused);
-                    
-                    console.log("Paused");
             } 
             
         }
