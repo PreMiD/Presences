@@ -1,0 +1,24 @@
+{
+    "author": {
+      "name": "GURRMAN375D",
+      "id": "446528923535278082"
+    },
+    "url": "vidstreaming.io",
+    "description": {
+      "en": "A Test."
+    },
+    "service": "Vidstreaming",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/pFcvvz9.png",
+    "thumbnail": "https://i.imgur.com/pFcvvz9.png",
+    "color": "#020116",
+    "tags": [
+      "anime",
+      "vidstreaming",
+      "vidstream",
+      "vidstream",
+      "videostream"
+    ],
+    "category": "anime",
+    "iframe": true
+  }
