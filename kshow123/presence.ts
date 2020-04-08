@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "614388233886760972"
   }),
   strings = presence.getStrings({
@@ -6,13 +6,27 @@ let presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 let browsingStamp = Math.floor(Date.now() / 1000);
 let iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
 let lastPlaybackState = null,
   playback: any;
 
 if (document.location.pathname.includes(".html")) {
-  presence.on("iFrameData", data => {
+  presence.on("iFrameData", (data) => {
     playback = data.iframe_video.duration !== null ? true : false;
     if (playback) {
       iFrameVideo = data.iframe_video.iFrameVideo;
@@ -24,7 +38,7 @@ if (document.location.pathname.includes(".html")) {
 }
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "ksow123stack"
   };
 
@@ -43,7 +57,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes(".html")) {
     if (iFrameVideo == true && !isNaN(duration)) {
-      let timestamps = getTimestamps(
+      const timestamps = getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       );
@@ -55,18 +69,18 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
 
-      let title = document.querySelector(
+      const title = document.querySelector(
         "#player > div.alert.alert-info.hidden-xs > div.media > div > a > h1"
       );
-      let views = document.querySelector(
+      const views = document.querySelector(
         "#player > div.alert.alert-info.hidden-xs > div.media > div > p:nth-child(7)"
       );
       presenceData.details = title.textContent;
 
-      let air = document.querySelector(
+      const air = document.querySelector(
         "#player > div.alert.alert-info.hidden-xs > div.media > div > p:nth-child(9)"
       );
-      let air2 = document.querySelector(
+      const air2 = document.querySelector(
         "#player > div.alert.alert-info.hidden-xs > div.media > div > p:nth-child(8)"
       );
 
@@ -89,7 +103,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (iFrameVideo == null && isNaN(duration)) {
-      let title = document.querySelector(
+      const title = document.querySelector(
         "#player > div.alert.alert-info.hidden-xs > div.media > div > a > h1"
       );
       presenceData.details = "Looking at: ";
@@ -117,7 +131,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "a list of all shows";
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/show/")) {
-    let views = document.querySelector("#info > div.media > div > h1 > a");
+    const views = document.querySelector("#info > div.media > div > h1 > a");
 
     presenceData.details = "Browsing through all episodes of:";
     presenceData.state = views.textContent;
@@ -125,7 +139,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/search/")) {
-    let views = document.querySelector("#featured > div.page-header > h3");
+    const views = document.querySelector("#featured > div.page-header > h3");
 
     presenceData.details = "Searching for:";
     presenceData.state = views.textContent;
@@ -139,14 +153,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
