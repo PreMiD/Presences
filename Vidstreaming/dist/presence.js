@@ -65,19 +65,23 @@ presence.on("UpdateData", async() => {
         title = document.querySelector("body > #wrapper_bg > #wrapper > #main_bg > div > div > div.video-info-left > h1");
         if (title != null){
             presenceData.state = title.innerText;
-              if (iFrameVideo == true && !isNaN(duration) && title != null) {
-                presenceData.smallImageKey = paused ? "pause" : "play"; 
-                (presenceData.smallImageText = paused 
-                    ? (await strings).pause 
-                    : (await strings).play);
-                presenceData.startTimestamp = timestamps[0];
-                presenceData.endTimestamp = timestamps[1];
-            if (video.paused) {
+              if (iFrameVideo == true && !isNaN(duration) && title != null && video != null) {
+                if (!paused){
+                    presenceData.details = "Watching:";
+                    presenceData.smallImageKey = paused ? "pause" : "play"; 
+                    (presenceData.smallImageText = paused 
+                        ? (await strings).pause 
+                        : (await strings).play);
+                    presenceData.startTimestamp = timestamps[0];
+                    presenceData.endTimestamp = timestamps[1];
+                }
+                else if (paused) {
                     delete presenceData.startTimestamp;
                     delete presenceData.endTimestamp;
-                    presence.setActivity(presenceData, video.paused);
-                }
-                presence.setActivity(presenceData, !video.paused); 
+                    presenceData.details = "Paused:";
+                    presenceData.smallImageKey = "pause";
+            } 
+            
         }
             else if (iFrameVideo == null && isNaN(duration) && title != null) {
                 presenceData.details = "Viewing:";
