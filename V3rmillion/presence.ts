@@ -1,22 +1,12 @@
 /* Global variables */
-let presence = new Presence({
+const presence = new Presence({
   clientId: "650569876993343529"
 });
-var item: any, profile: any, title: any;
+var profile: any, title: any;
 var browsingStamp = Math.floor(Date.now() / 1000);
 var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
 
-/* Logging Functions */
-function PMD_info(message) {
-  console.log(
-    "%cPreMiD%cINFO%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-function PMD_error(message) {
+function PMD_error(message): void {
   console.log(
     "%cPreMiD%cERROR%c " + message,
     genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
@@ -25,19 +15,9 @@ function PMD_error(message) {
   );
 }
 
-function PMD_success(message) {
-  console.log(
-    "%cPreMiD%cSUCCESS%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle +
-      "border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
-    "color: unset;"
-  );
-}
-
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "logo-512"
   };
   presenceData.startTimestamp = browsingStamp;
@@ -59,7 +39,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "twemoji-paper-1024x";
 
       /* User is replying to thread using quick-reply box. */
-      let textarea = document.querySelector("form #message");
+      const textarea = document.querySelector("form #message");
       if (textarea != null && textarea == document.activeElement) {
         presenceData.details = "Replying to Thread:";
         presenceData.state = title.innerText;
@@ -104,7 +84,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Logged in as " + profile.innerText;
     } else if (document.location.pathname.includes("pages.php")) {
       /* Other page fallback */
-      let page = document.URL.substring(document.URL.indexOf(".php") + 10);
+      const page = document.URL.substring(document.URL.indexOf(".php") + 10);
       presenceData.details = "Reading page:";
       presenceData.state = page.charAt(0).toUpperCase() + page.substring(1);
       presenceData.smallImageKey = "twemoji-paper-1024x";
