@@ -2,12 +2,12 @@ var presence = new Presence({
   clientId: "629072489238233111" // CLIENT ID FOR YOUR PRESENCE
 });
 
-var item: any, user: any, search: any, title: any;
+var item: any, user: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "labymod"
   };
 
