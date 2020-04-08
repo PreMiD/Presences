@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "630441527826579467"
-  }),
-  strings = presence.getStrings({});
+  clientId: "630441527826579467"
+});
+
 presence.on("UpdateData", async () => {
-  let Data: presenceData = {
+  const Data: presenceData = {
     largeImageKey: "htmlcsscolor"
   };
 
