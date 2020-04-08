@@ -8,8 +8,22 @@ var presence = new Presence({
   presenceData: presenceData = {
     largeImageKey: "logo"
   };
-var playback;
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+var playback;
 var iFrameVideo: any, currentTime: any, duration: any, paused: any;
 
 presence.on("iFrameData", (data) => {
@@ -69,14 +83,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(pageData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
