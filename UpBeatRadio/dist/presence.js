@@ -1,32 +1,32 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "682781181863133220",
   mediaKeys: false
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData = {
+  const presenceData = {
     largeImageKey: "upbeat"
   };
 
-  let paused = document
+  const paused = document
     .querySelector("#radioPlayer > span > i")
     .className.includes("fa-play");
-  let newsreporterapply =
+  const newsreporterapply =
     document.querySelector("#modalmediaAppButton") !== null;
-  let partner = document.querySelector("#modalpartnerEnquiryButton") !== null;
-  let request = document.querySelector("#modalrequestFormModal") !== null;
-  let enquiry = document.querySelector("#modalcontactUsButton") !== null;
-  let djapply = document.querySelector("#modaldjAppButton") !== null;
-  let feedback = document.querySelector("#modalundefined") !== null;
-  let editingbio = document.querySelector("#accountBio") !== null;
-  let format1 = await presence.getSetting("sFormatNoDj1");
-  let format2 = await presence.getSetting("sFormatNoDj2");
-  let elapsed = await presence.getSetting("tElapsed");
-  let format = await presence.getSetting("sFormat");
-  let info = await presence.getSetting("sInfo");
-  let dj = await presence.getSetting("sDJ");
+  const partner = document.querySelector("#modalpartnerEnquiryButton") !== null;
+  const request = document.querySelector("#modalrequestFormModal") !== null;
+  const enquiry = document.querySelector("#modalcontactUsButton") !== null;
+  const djapply = document.querySelector("#modaldjAppButton") !== null;
+  const feedback = document.querySelector("#modalundefined") !== null;
+  const editingbio = document.querySelector("#accountBio") !== null;
+  const format1 = await presence.getSetting("sFormatNoDj1");
+  const format2 = await presence.getSetting("sFormatNoDj2");
+  const elapsed = await presence.getSetting("tElapsed");
+  const format = await presence.getSetting("sFormat");
+  const info = await presence.getSetting("sInfo");
+  const dj = await presence.getSetting("sDJ");
   let djType;
 
   if (elapsed) presenceData.startTimestamp = browsingStamp;

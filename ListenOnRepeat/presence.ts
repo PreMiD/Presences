@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "639534386538348565"
   }),
   strings = presence.getStrings({
@@ -6,12 +6,23 @@ let presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-let repeats: any, timestamps: any;
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+let timestamps: any;
 let iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-let video: HTMLVideoElement,
-  videoDuration: any,
-  videoCurrentTime: any,
-  playback: any;
+let playback: any;
 
 let lastPlaybackState = null;
 let browsingStamp = Math.floor(Date.now() / 1000);
@@ -32,22 +43,22 @@ presence.on("UpdateData", async () => {
     largeImageKey: "lr"
   };
 
-  let sGlobalRepeat = await presence.getSetting("sGlobalRepeat");
-  let sFormatRepeat = await presence.getSetting("sFormatRepeat");
-  let sFormatGlobalRepeat = await presence.getSetting("sFormatGlobalRepeat");
+  const sGlobalRepeat = await presence.getSetting("sGlobalRepeat");
+  const sFormatRepeat = await presence.getSetting("sFormatRepeat");
+  const sFormatGlobalRepeat = await presence.getSetting("sFormatGlobalRepeat");
 
   //TODO language selector and translation strings
-  let repeatsTrans = "Repeats";
-  let gRepeatTrans = "Global Repeats";
+  const repeatsTrans = "Repeats";
+  const gRepeatTrans = "Global Repeats";
 
-  let repeats = document
+  const repeats = document
     .querySelector(
       "#content > div.main-area-offset > div:nth-child(2) > div.player-card > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(2) > div > div > span"
     )
     .textContent.split(":")[1]
     .split("(")[0]
     .trim();
-  let globalRepeats = document
+  const globalRepeats = document
     .querySelector(
       "#content > div.main-area-offset > div:nth-child(2) > div.player-card > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1) > div > div > span"
     )
@@ -106,14 +117,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
