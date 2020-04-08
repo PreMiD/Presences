@@ -2,6 +2,31 @@ const presence = new Presence({
   clientId: "612437291574755349"
 });
 
+const capitalize = (text: string): string => {
+  var texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
+  return texts
+    .map((str) => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    })
+    .join(" ");
+};
+
+function stripText(element: HTMLElement, id = "None", log = true): string {
+  if (element && element.firstChild) {
+    return element.firstChild.textContent;
+  } else {
+    if (log)
+      console.log(
+        "%cTwitter%cERROR%c An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
+          id,
+        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 25px 0 0 25px; background: #596cae;",
+        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 0 25px 25px 0; background: #ff5050;",
+        "color: unset;"
+      );
+    return null;
+  }
+}
+
 console.log(
   "When using the Twitter presence for PreMiD, make sure you have the latest UI update. Twitter classic and any legacy versions before it will not work with this presence."
 );
@@ -40,7 +65,7 @@ presence.on("UpdateData", async () => {
   if (path.match("/settings/")) {
     info = `${capitalize(path.split("/")[1])} for ${path
       .split("/")[2]
-      .replace(/[\[{(_)}\]]/g, " ")}`;
+      .replace(/[[{(_)}\]]/g, " ")}`;
   }
 
   if (path.match("/search")) {
@@ -134,32 +159,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(data, true);
 });
-
-const capitalize = (text: string) => {
-  var texts = text.replace(/[\[{(_)}\]]/g, " ").split(" ");
-  return texts
-    .map(str => {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    })
-    .join(" ");
-};
-
-function stripText(
-  element: HTMLElement,
-  id: string = "None",
-  log: boolean = true
-) {
-  if (element && element.firstChild) {
-    return element.firstChild.textContent;
-  } else {
-    if (log)
-      console.log(
-        "%cTwitter%cERROR%c An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
-          id,
-        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 25px 0 0 25px; background: #596cae;",
-        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 0 25px 25px 0; background: #ff5050;",
-        "color: unset;"
-      );
-    return null;
-  }
-}
