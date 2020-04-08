@@ -61,11 +61,13 @@ presence.on("UpdateData", async () => {
     const tag = document.querySelector(
         "#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"
       ),
+      number =
+        tag && tag.textContent != ""
+          ? tag.textContent.split(" ").length - 1
+          : null,
       fixedTag =
         tag && tag.textContent != ""
-          ? tag.textContent
-              .split(" ")
-              [tag.textContent.split(" ").length - 1].replace(/"/g, "")
+          ? tag.textContent.split(" ")[number].replace(/"/g, "")
           : null;
 
     presence.setActivity({
@@ -78,11 +80,13 @@ presence.on("UpdateData", async () => {
     const searchingFor = document.querySelector(
         "#mvp-main-body > div > div > div > div.mvp-main-body-in2 > div > h1 > span"
       ),
+      number =
+        searchingFor && searchingFor.textContent != ""
+          ? searchingFor.textContent.split(" ").length - 1
+          : null,
       fixedSearch =
         searchingFor && searchingFor.textContent != ""
-          ? searchingFor.textContent
-              .split(" ")
-              [searchingFor.textContent.split(" ").length - 1].replace(/"/g, "")
+          ? searchingFor.textContent.split(" ")[number].replace(/"/g, "")
           : null;
 
     presence.setActivity({

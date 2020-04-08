@@ -2,15 +2,8 @@ const presence = new Presence({
   clientId: "691325899307483197"
 });
 
-var user: any;
-var title: any;
-var replace: any;
-var search: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "logo"
   };
 

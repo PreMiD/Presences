@@ -1,10 +1,16 @@
 const presence = new Presence({
   clientId: "631166262881550359"
 });
-let presenceData: presenceData = {
+const presenceData: presenceData = {
   largeImageKey: "logo"
 };
 let startTimestamp: number;
+
+function toTitleCase(str: string): string {
+  return str.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
+}
 
 presence.on("UpdateData", async () => {
   if (document.location.hostname === "aternos.org") {
@@ -30,25 +36,25 @@ presence.on("UpdateData", async () => {
     switch (page) {
       case "support":
         if (document.location.pathname.includes("categories")) {
-          let category = document.querySelector(".page-header h1");
+          const category = document.querySelector(".page-header h1");
           if (category) {
             presenceData.details = `Help Center - Viewing category:`;
             presenceData.state = category.textContent;
           }
         } else if (document.location.pathname.includes("sections")) {
-          let section = document.querySelector(".page-header h1");
+          const section = document.querySelector(".page-header h1");
           if (section) {
             presenceData.details = `Help Center - Viewing section:`;
             presenceData.state = section.textContent.trim();
           }
         } else if (document.location.pathname.includes("articles")) {
-          let article = document.querySelector(".article-title");
+          const article = document.querySelector(".article-title");
           if (article) {
             presenceData.details = `Help Center - Viewing article:`;
             presenceData.state = article.textContent.trim();
           }
         } else if (document.location.pathname.includes("search")) {
-          let article: HTMLInputElement = document.querySelector("#query");
+          const article: HTMLInputElement = document.querySelector("#query");
           presenceData.details = `Help Center - Searching:`;
           presenceData.state = article.value;
         } else {
@@ -63,9 +69,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData);
 });
-
-function toTitleCase(str: string) {
-  return str.replace(/\w\S*/g, function(txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}

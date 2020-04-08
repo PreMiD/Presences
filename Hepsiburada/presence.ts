@@ -29,11 +29,12 @@ presence.on("UpdateData", async () => {
         ? document.querySelector("#offering-price").attributes["content"]
             .textContent
         : null,
-    seller = document.querySelector(
-      "#productResult > div > div > div > div.col.lg-1.md-1.sm-1.filter-content > section > div > div.title-wrapper.with-bg.for-desktop.brand > h1"
-    ) as HTMLElement;
+    seller =
+      document.querySelector(
+        "#productResult > div > div > div > div.col.lg-1.md-1.sm-1.filter-content > section > div > div.title-wrapper.with-bg.for-desktop.brand > h1"
+      ) as HTMLElement;
 
-  let data: { [k: string]: any } = {
+  const data: { [k: string]: any } = {
     largeImageKey: "hb-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

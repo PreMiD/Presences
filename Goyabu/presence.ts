@@ -1,26 +1,36 @@
 var presence = new Presence({
-    clientId: "629768767987122217"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "629768767987122217"
+});
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "goyabu"
   };
 
-  let path = document.location.pathname,
+  const path = document.location.pathname,
     host = document.location.hostname,
     browsingStamp = Math.floor(Date.now() / 1000);
 
   if (host == "goyabu.com" && path == "/") {
-    let anSc2: HTMLSpanElement = document.querySelector(
+    const anSc2: HTMLSpanElement = document.querySelector(
       "#home-content > h1 > span"
     );
     if (anSc2.innerText.includes("VOCÊ PESQUISOU POR:")) {
-      let anSc = document.querySelector("#home-content > h1 > span");
+      const anSc = document.querySelector("#home-content > h1 > span");
       presenceData.details = "Pesquisando Animes";
       presenceData.state =
         "Pesquisou: " + anSc.textContent.replace("Você pesquisou por: ", "");
@@ -38,7 +48,7 @@ presence.on("UpdateData", async () => {
     path.startsWith("/anime/") &&
     path.replace("/anime/", "")
   ) {
-    let aniN: HTMLHeadingElement = document.querySelector(
+    const aniN: HTMLHeadingElement = document.querySelector(
       "#channel-content > div.row > div.left20.right20 > h1"
     );
     presenceData.details = "Visualizando Anime";
@@ -86,7 +96,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (host == "goyabu.com" && path.includes("/user.php")) {
-    let pfName = document.querySelector("#home-content > h1") as HTMLElement;
+    const pfName = document.querySelector("#home-content > h1") as HTMLElement;
     presenceData.details = "Visualizando Perfil";
     presenceData.state = pfName.innerText.replace("Olá! ", "");
     presenceData.smallImageText = "Perfil";
@@ -127,9 +137,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-function getTimestamps(videoTime, videoDuration) {
-  var startTime = Math.floor(Date.now() / 1000);
-  var endTime = Math.floor(startTime - videoTime + videoDuration);
-  return [startTime, endTime];
-}

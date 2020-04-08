@@ -1,27 +1,47 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "664216462038401066"
 });
 
-let strings = presence.getStrings({
+const strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
 });
 
-let startTimestamp = Math.floor(Date.now() / 1000);
+function seriesName(name: string): string {
+  return name.replace(/([^\W_]+[^\s-]*) */g, function (text) {
+    return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+  });
+}
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+const startTimestamp = Math.floor(Date.now() / 1000);
 
 let data: any, video: HTMLVideoElement;
 
-presence.on("iFrameData", async msg => {
+presence.on("iFrameData", async (msg) => {
   if (!msg) return;
   data = msg;
   video = msg.video;
 });
 
 presence.on("UpdateData", async () => {
-  let path = document.location.pathname;
+  const path = document.location.pathname;
 
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "blutv"
   };
 
@@ -32,7 +52,7 @@ presence.on("UpdateData", async () => {
 
   if (data) {
     if (data.series) {
-      let name = data.series.name
+      const name = data.series.name
         ? data.series.name
         : seriesName(path.split("/")[3].replace(/-/gi, " "));
 
@@ -51,7 +71,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).paused
         : (await strings).playing;
 
-      let timestamps = getTimestamps(
+      const timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -71,15 +91,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
-
-function seriesName(name: string) {
-  return name.replace(/([^\W_]+[^\s-]*) */g, function(text) {
-    return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
-  });
-}
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

@@ -3,9 +3,9 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  let path = document.location.pathname;
+  const path = document.location.pathname;
 
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "paybutik"
   };
 
@@ -43,17 +43,17 @@ presence.on("UpdateData", async () => {
     path.startsWith("/project/")
   ) {
     presenceData.details = "Bir ürün oluşturuyor..";
-    let form = document.forms[2];
+    const form = document.forms[2];
 
     presenceData.smallImageKey = "project";
-    presenceData.smallImageText = (<HTMLInputElement>form[0]).value;
+    presenceData.smallImageText = (form[0] as HTMLInputElement).value;
   } else if (path.startsWith("/project/") && path.includes("/products/")) {
     presenceData.details = "Bir ürünü düzenliyor:";
-    let form = document.forms[2];
+    const form = document.forms[2];
 
     presenceData.smallImageKey = "project";
-    presenceData.smallImageText = (<HTMLInputElement>form[0]).value;
-    presenceData.state = `${(<HTMLInputElement>form[1]).value}`;
+    presenceData.smallImageText = (form[0] as HTMLInputElement).value;
+    presenceData.state = `${(form[1] as HTMLInputElement).value}`;
   } else if (path.startsWith("/project/new-project")) {
     presenceData.details = "Bir proje oluşturuyor..";
   } else if (path.startsWith("/project/")) {

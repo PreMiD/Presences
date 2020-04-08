@@ -6,10 +6,25 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
-  const category = document.querySelector(
-    "#widget_serie_contents_3 > section > div > div > div.category-main-content-right > header > h1 > strong"
-  ) as HTMLElement;
+  const category =
+    document.querySelector(
+      "#widget_serie_contents_3 > section > div > div > div.category-main-content-right > header > h1 > strong"
+    ) as HTMLElement;
 
   if (
     document.location.pathname == "/" ||
@@ -23,9 +38,9 @@ presence.on("UpdateData", async () => {
       state: category && category.innerHTML ? category.innerHTML : "Ana Sayfa"
     });
   } else {
-    const video = document.querySelector(
-      "#dyg_player_dogusPlayer_html5_api"
-    ) as HTMLVideoElement;
+    const video =
+      document.querySelector("#dyg_player_dogusPlayer_html5_api") as
+      HTMLVideoElement;
 
     if (!video) return;
     else {
@@ -50,7 +65,7 @@ presence.on("UpdateData", async () => {
 
       if (!title || title.innerHTML == "") return;
 
-      let data: { [k: string]: any } = {
+      const data: { [k: string]: any } = {
         largeImageKey: "puhu-logo",
         details: title.innerHTML,
         state:
@@ -60,9 +75,11 @@ presence.on("UpdateData", async () => {
                 document.querySelector(
                   "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
                 )
-                  ? (document.querySelector(
-                      "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
-                    ) as any).innerText.replace("\n", ": ")
+                  ? (
+                      document.querySelector(
+                        "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
+                      ) as any
+                    ).innerText.replace("\n", ": ")
                   : null
               }`,
         smallImageKey: video.paused ? "paused" : "playing",
@@ -84,10 +101,3 @@ presence.on("UpdateData", async () => {
     }
   }
 });
-
-function getTimestamps(videoTime, videoDuration) {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-
-  return [Math.floor(startTime / 1000), endTime];
-}

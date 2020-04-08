@@ -6,6 +6,30 @@ var strings = presence.getStrings({
   pause: "presence.playback.paused"
 });
 
+function getTime(list: string[]): number {
+  var ret = 0;
+  for (let index = list.length - 1; index >= 0; index--) {
+    ret += parseInt(list[index]) * 60 ** index;
+  }
+  return ret;
+}
+
+function getTimestamps(
+  audioTime: string,
+  audioDuration: string
+): Array<number> {
+  var splitAudioTime = audioTime.split(":").reverse();
+  var splitAudioDuration = audioDuration.split(":").reverse();
+
+  var parsedAudioTime = getTime(splitAudioTime);
+  var parsedAudioDuration = getTime(splitAudioDuration);
+
+  var startTime = Date.now();
+  var endTime =
+    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   var player = document.querySelector(".playControls__elements");
 
@@ -29,7 +53,9 @@ presence.on("UpdateData", async () => {
         "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div > div > div > div.playbackTimeline__duration > span:nth-child(2)"
       ).textContent;
       var timestamps = getTimestamps(audioTime, audioDuration);
-    } catch (err) {}
+    } catch (err) {
+      console.log("Contact dev of this presence");
+    }
 
     var data: presenceData = {
       details: title,
@@ -53,24 +79,3 @@ presence.on("UpdateData", async () => {
     presence.clearActivity();
   }
 });
-
-function getTimestamps(audioTime: string, audioDuration: string) {
-  var splitAudioTime = audioTime.split(":").reverse();
-  var splitAudioDuration = audioDuration.split(":").reverse();
-
-  var parsedAudioTime = getTime(splitAudioTime);
-  var parsedAudioDuration = getTime(splitAudioDuration);
-
-  var startTime = Date.now();
-  var endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getTime(list: string[]) {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}

@@ -7,11 +7,43 @@ var presence = new Presence({
     live: "presence.activity.live"
   });
 
+function checkLength(string: string): string {
+  if (string.length > 128) {
+    return string.substring(0, 125) + "...";
+  } else {
+    return string;
+  }
+}
+
+function getTime(list: string[]): number {
+  var ret = 0;
+  for (let index = list.length - 1; index >= 0; index--) {
+    ret += parseInt(list[index]) * 60 ** index;
+  }
+  return ret;
+}
+
+function getTimestamps(
+  audioTime: string,
+  audioDuration: string
+): Array<number> {
+  var splitAudioTime = audioTime.split(":").reverse();
+  var splitAudioDuration = audioDuration.split(":").reverse();
+
+  var parsedAudioTime = getTime(splitAudioTime);
+  var parsedAudioDuration = getTime(splitAudioDuration);
+
+  var startTime = Date.now();
+  var endTime =
+    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var elapsed = Math.floor(Date.now() / 1000);
 var title, author, song, subtitle;
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "iheartradio-logo"
   };
 
@@ -94,32 +126,3 @@ presence.on("UpdateData", async () => {
     presence.clearActivity();
   }
 });
-
-function checkLength(string: string) {
-  if (string.length > 128) {
-    return string.substring(0, 125) + "...";
-  } else {
-    return string;
-  }
-}
-
-function getTimestamps(audioTime: string, audioDuration: string) {
-  var splitAudioTime = audioTime.split(":").reverse();
-  var splitAudioDuration = audioDuration.split(":").reverse();
-
-  var parsedAudioTime = getTime(splitAudioTime);
-  var parsedAudioDuration = getTime(splitAudioDuration);
-
-  var startTime = Date.now();
-  var endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getTime(list: string[]) {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}

@@ -8,6 +8,20 @@ const presence = new Presence({
     episode: "presence.media.info.episode"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
       largeImageKey: "drim_sonhos2",
@@ -43,9 +57,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData, true);
 });
-
-function getTimestamps(videoTime, videoDuration) {
-  var startTime = Math.floor(Date.now() / 1000);
-  var endTime = Math.floor(startTime - videoTime + videoDuration);
-  return [startTime, endTime];
-}

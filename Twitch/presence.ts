@@ -7,6 +7,44 @@ var strings = presence.getStrings({
   live: "presence.activity.live"
 });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+function getTime(list: string[]): number {
+  var ret = 0;
+  for (let index = list.length - 1; index >= 0; index--) {
+    ret += parseInt(list[index]) * 60 ** index;
+  }
+  return ret;
+}
+
+function getElementTimestamps(
+  audioTime: string,
+  audioDuration: string
+): Array<number> {
+  var splitAudioTime = audioTime.split(":").reverse();
+  var splitAudioDuration = audioDuration.split(":").reverse();
+
+  var parsedAudioTime = getTime(splitAudioTime);
+  var parsedAudioDuration = getTime(splitAudioDuration);
+
+  var startTime = Date.now();
+  var endTime =
+    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var title,
   streamer,
   largeImage = "twitch",
@@ -14,7 +52,6 @@ var title,
   smallImageText,
   videoTime,
   videoDuration,
-  live,
   elapsed,
   oldURL,
   type,
@@ -26,7 +63,7 @@ presence.on("UpdateData", async () => {
       users: document.querySelector(
         ".tw-align-items-center.tw-flex.tw-mg-l-1:nth-child(2)"
       ),
-      user: index => {
+      user: (index): Element => {
         return document.querySelectorAll(
           ".tw-interactive.tw-link.tw-link--hover-underline-none.tw-link--inherit"
         )[index];
@@ -215,7 +252,9 @@ presence.on("UpdateData", async () => {
         ).textContent;
       }
     }
-  } catch (err) {}
+  } catch (err) {
+    console.log("Error! Please contact dev of this presence.");
+  }
 
   var data: presenceData = {
     details: title,
@@ -237,30 +276,3 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle(title);
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getElementTimestamps(audioTime: string, audioDuration: string) {
-  var splitAudioTime = audioTime.split(":").reverse();
-  var splitAudioDuration = audioDuration.split(":").reverse();
-
-  var parsedAudioTime = getTime(splitAudioTime);
-  var parsedAudioDuration = getTime(splitAudioDuration);
-
-  var startTime = Date.now();
-  var endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getTime(list: string[]) {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}

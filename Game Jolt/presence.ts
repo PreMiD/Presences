@@ -21,17 +21,20 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
-    gameName = document.querySelector(
-      "#content > div > div > div > div > header > section > div.container > div.row > div > div > h1 > a"
-    ) as HTMLElement,
-    author = document.querySelector(
-      "#content > div > div > div > div > header > section > div.container > div.row > div > div > div > a > small"
-    ) as HTMLElement,
-    profile = document.querySelector(
-      "#content > div > div > header > section > div > div.row > div > div > h1 > small"
-    ) as HTMLElement;
+    gameName =
+      document.querySelector(
+        "#content > div > div > div > div > header > section > div.container > div.row > div > div > h1 > a"
+      ) as HTMLElement,
+    author =
+      document.querySelector(
+        "#content > div > div > div > div > header > section > div.container > div.row > div > div > div > a > small"
+      ) as HTMLElement,
+    profile =
+      document.querySelector(
+        "#content > div > div > header > section > div > div.row > div > div > h1 > small"
+      ) as HTMLElement;
 
-  let data: { [k: string]: any } = {
+  const data: { [k: string]: any } = {
     largeImageKey: "gj-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

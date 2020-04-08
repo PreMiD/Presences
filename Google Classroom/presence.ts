@@ -7,7 +7,7 @@ let presenceData: presenceData = {
 let startTimestamp: number;
 
 presence.on("UpdateData", async () => {
-  let path: string[] = document.location.pathname.split("/");
+  const path: string[] = document.location.pathname.split("/");
   path.shift();
   if (path[0] === "u") {
     path.splice(0, 2);

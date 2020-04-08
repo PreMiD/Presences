@@ -1,15 +1,6 @@
-let genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
+const genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
 
-function PMD_info(message) {
-  console.log(
-    "%cPreMiD%cINFO%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-function PMD_error(message) {
+function PMD_error(message): void {
   console.log(
     "%cPreMiD%cERROR%c " + message,
     genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
@@ -18,23 +9,27 @@ function PMD_error(message) {
   );
 }
 
-function PMD_success(message) {
-  console.log(
-    "%cPreMiD%cSUCCESS%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle +
-      "border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
-    "color: unset;"
-  );
-}
-
-let presence = new Presence({
+const presence = new Presence({
     clientId: "619561001234464789"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
 
 let title: any, uploader: any, search: any;
 let video: any,
@@ -46,11 +41,11 @@ let video: any,
   progressduration2: any,
   pause: any;
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 let playback: boolean;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "spotify"
   };
 
@@ -201,7 +196,7 @@ presence.on("UpdateData", async () => {
       pause = false;
     }
 
-    let timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(videoCurrentTime),
       Math.floor(videoDuration)
     );
@@ -230,9 +225,3 @@ presence.on("UpdateData", async () => {
     }
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

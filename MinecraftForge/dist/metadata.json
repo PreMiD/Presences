@@ -14,13 +14,10 @@
     "mcforge.readthedocs.io",
     "forgedev.flocker.tv"
   ],
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/yPLG6pu.png",
   "thumbnail": "https://i.imgur.com/xsz3eWv.png",
   "color": "#d7a664",
-  "tags": [
-    "minecraft",
-    "forge"
-  ],
+  "tags": ["minecraft", "forge"],
   "category": "games"
 }

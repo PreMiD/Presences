@@ -1,10 +1,6 @@
 var presence = new Presence({
-    clientId: "614200757989670934"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "614200757989670934"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -17,7 +13,7 @@ var profileName: any, profileNickname: any;
 var projectsTab: any;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
   };
@@ -112,14 +108,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

@@ -8,6 +8,55 @@
     live: "presence.activity.live"
   });
 
+  function getTimesec(
+    elapsedString = "00:00",
+    durationString = "00:00",
+    separator = ":"
+  ): { elapsedSec: number; durationSec: number } {
+    const elapsed = elapsedString.split(separator);
+    const duration = durationString.split(separator);
+
+    let elapsedSec: number, durationSec: number;
+
+    switch (elapsed.length) {
+      case 3: {
+        elapsedSec =
+          parseInt(elapsed[0]) * 60 * 60 +
+          parseInt(elapsed[1]) * 60 +
+          parseInt(elapsed[2]);
+        break;
+      }
+      case 2: {
+        elapsedSec = parseInt(elapsed[0]) * 60 + parseInt(elapsed[1]);
+        break;
+      }
+      case 1: {
+        elapsedSec = parseInt(elapsed[0]);
+        break;
+      }
+    }
+
+    switch (duration.length) {
+      case 3: {
+        durationSec =
+          parseInt(duration[0]) * 60 * 60 +
+          parseInt(duration[1]) * 60 +
+          parseInt(duration[2]);
+        break;
+      }
+      case 2: {
+        durationSec = parseInt(duration[0]) * 60 + parseInt(duration[1]);
+        break;
+      }
+      case 1: {
+        durationSec = parseInt(duration[0]);
+        break;
+      }
+    }
+
+    return { elapsedSec: elapsedSec, durationSec: durationSec };
+  }
+
   presence.on("UpdateData", async () => {
     switch (location.hostname) {
       case "www.nicovideo.jp": {
@@ -24,7 +73,6 @@
           let owner;
           if (ownerElement) {
             [, owner] = ownerElement.textContent.match(/(.+) さん$/) || [
-              ,
               ownerElement.textContent
             ];
           } else {
@@ -132,53 +180,4 @@
         break;
     }
   });
-
-  function getTimesec(
-    elapsedString: string = "00:00",
-    durationString: string = "00:00",
-    separator: string = ":"
-  ): { elapsedSec: number; durationSec: number } {
-    const elapsed = elapsedString.split(separator);
-    const duration = durationString.split(separator);
-
-    let elapsedSec: number, durationSec: number;
-
-    switch (elapsed.length) {
-      case 3: {
-        elapsedSec =
-          parseInt(elapsed[0]) * 60 * 60 +
-          parseInt(elapsed[1]) * 60 +
-          parseInt(elapsed[2]);
-        break;
-      }
-      case 2: {
-        elapsedSec = parseInt(elapsed[0]) * 60 + parseInt(elapsed[1]);
-        break;
-      }
-      case 1: {
-        elapsedSec = parseInt(elapsed[0]);
-        break;
-      }
-    }
-
-    switch (duration.length) {
-      case 3: {
-        durationSec =
-          parseInt(duration[0]) * 60 * 60 +
-          parseInt(duration[1]) * 60 +
-          parseInt(duration[2]);
-        break;
-      }
-      case 2: {
-        durationSec = parseInt(duration[0]) * 60 + parseInt(duration[1]);
-        break;
-      }
-      case 1: {
-        durationSec = parseInt(duration[0]);
-        break;
-      }
-    }
-
-    return { elapsedSec: elapsedSec, durationSec: durationSec };
-  }
 }

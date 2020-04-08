@@ -1,15 +1,6 @@
-let presence: Presence = new Presence({
+const presence: Presence = new Presence({
     clientId: "615652705565933581"
   }),
-  path: string,
-  startTimestamp: number,
-  audio: HTMLAudioElement = document.querySelector("audio"),
-  playback: boolean,
-  elemt,
-  artists = [],
-  user: string,
-  track: string,
-  artist: string,
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
@@ -17,13 +8,22 @@ let presence: Presence = new Presence({
   }),
   presenceData: presenceData = {
     largeImageKey: "listen_moe_lg"
-  };
+  },
+  audio: HTMLAudioElement = document.querySelector("audio");
+let path: string,
+  startTimestamp: number,
+  playback: boolean,
+  elemt,
+  artists = [],
+  user: string,
+  track: string,
+  artist: string;
 
 function resetTimestamp(): any {
   startTimestamp = Math.floor(Date.now() / 1000);
 }
 
-function getArtists() {
+function getArtists(): string {
   artists = [];
   elemt = document.querySelector("span.ja.player-song-artist-container")
     ? document.querySelector("span.ja.player-song-artist-container").childNodes
@@ -37,7 +37,7 @@ function getArtists() {
   return artist;
 }
 
-function getTrack() {
+function getTrack(): string {
   track = document.querySelector("span.ja.player-song-title")
     ? document
         .querySelector("span.ja.player-song-title")
@@ -49,10 +49,10 @@ function getTrack() {
   return track;
 }
 
-audio.onplay = function () {
+audio.onplay = function (): void {
   resetTimestamp();
 };
-audio.onpause = function () {
+audio.onpause = function (): void {
   resetTimestamp();
 };
 

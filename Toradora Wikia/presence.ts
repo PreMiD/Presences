@@ -20,7 +20,7 @@ englishPresence.on("UpdateData", async () => {
         page = document.getElementsByClassName("page-header__title")[0]
           .textContent;
       } catch (err) {
-        let errCode = "TWIKI_WIKIEN_GETPAGETITLE";
+        const errCode = "TWIKI_WIKIEN_GETPAGETITLE";
         console.log(
           "An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   " +
             errCode +
@@ -28,7 +28,7 @@ englishPresence.on("UpdateData", async () => {
             err
         );
       }
-      let presenceData: presenceData = {
+      const presenceData: presenceData = {
         details: "Viewing a page...",
         state: page,
         largeImageKey: "lg-twiki"
@@ -46,7 +46,7 @@ englishPresence.on("UpdateData", async () => {
           page = document.getElementsByClassName("page-header__title")[0]
             .textContent;
         } catch (err) {
-          let errCode = "TWIKI_WIKIDE_GETPAGETITLE";
+          const errCode = "TWIKI_WIKIDE_GETPAGETITLE";
           console.log(
             "An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   " +
               errCode +
@@ -54,7 +54,7 @@ englishPresence.on("UpdateData", async () => {
               err
           );
         }
-        let presenceData: presenceData = {
+        const presenceData: presenceData = {
           details: "Schaut eine Seite an...",
           state: page,
           largeImageKey: "lg-twiki"

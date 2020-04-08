@@ -1,20 +1,13 @@
 var presence = new Presence({
-    clientId: "642719342609432586"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "642719342609432586"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user: any;
 var title: any;
-var replace: any;
-var search: any;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "ff"
   };
 
@@ -58,9 +51,6 @@ presence.on("UpdateData", async () => {
         document.querySelector(
           "body > div.body-layout > div.body_container > div:nth-child(4) > div > div.content.mobile-no-margin > div > div.left > div > div.content_box.blog-post-content-box > h1 > span > a"
         );
-      replace = document.querySelector(
-        "body > div.body-layout > div.body_container > div:nth-child(4) > div > div.content.mobile-no-margin > div > div.left > div > div.content_box.blog-post-content-box > h1 > span > span.time.desktop"
-      );
       presenceData.state = title.textContent;
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = browsingStamp;
@@ -87,14 +77,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

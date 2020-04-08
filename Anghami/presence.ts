@@ -7,6 +7,23 @@ var presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
+function getTime(list: string[]): number {
+  var ret = 0;
+  for (let index = list.length - 1; index >= 0; index--) {
+    ret += parseInt(list[index]) * 60 ** index;
+  }
+  return ret;
+}
+
+function getTimestamps(audioTime: any, audioDuration: any): Array<number> {
+  audioTime = getTime(audioTime.split(":").reverse());
+  audioDuration = getTime(audioDuration.split(":").reverse());
+
+  var endTime = Math.floor(Date.now() / 1000) - audioTime + audioDuration;
+
+  return [Math.floor(Date.now() / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   var data: presenceData = {
     largeImageKey: "anlg"
@@ -53,20 +70,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   }
 });
-
-function getTimestamps(audioTime: any, audioDuration: any) {
-  audioTime = getTime(audioTime.split(":").reverse());
-  audioDuration = getTime(audioDuration.split(":").reverse());
-
-  var endTime = Math.floor(Date.now() / 1000) - audioTime + audioDuration;
-
-  return [Math.floor(Date.now() / 1000), endTime];
-}
-
-function getTime(list: string[]) {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}

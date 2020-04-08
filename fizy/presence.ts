@@ -6,13 +6,26 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
-  const player = document.querySelector(
-      "#audio-player_html5_api"
-    ) as HTMLAudioElement,
+  const player =
+      document.querySelector("#audio-player_html5_api") as HTMLAudioElement,
     playing = player ? (player.paused ? false : true) : false;
 
-  let data: { [k: string]: any } = {
+  const data: { [k: string]: any } = {
     largeImageKey: "fizy-logo"
   };
 
@@ -60,10 +73,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   }
 });
-
-function getTimestamps(videoTime, videoDuration) {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-
-  return [Math.floor(startTime / 1000), endTime];
-}

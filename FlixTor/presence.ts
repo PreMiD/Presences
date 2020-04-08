@@ -6,6 +6,20 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var lastPlaybackState = null;
 var playback: boolean;
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -16,12 +30,12 @@ if (lastPlaybackState != playback) {
 }
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
   };
 
-  let video: HTMLVideoElement = document.querySelector(
+  const video: HTMLVideoElement = document.querySelector(
     "#player > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
   );
 
@@ -31,14 +45,11 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
 
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
-
     presence.setActivity(presenceData);
   }
 
   if (video !== null && !isNaN(video.duration)) {
-    let videoTitle: HTMLElement = document.querySelector(
+    const videoTitle: HTMLElement = document.querySelector(
         "div.watch-header.h4.mb-0.font-weight-normal.link.hidden-sm-down"
       ),
       season: HTMLElement = document.querySelector(
@@ -48,7 +59,7 @@ presence.on("UpdateData", async () => {
         "#playercontainer span.outPep"
       );
 
-    let timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
@@ -93,14 +104,3 @@ presence.on("UpdateData", async () => {
     }
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

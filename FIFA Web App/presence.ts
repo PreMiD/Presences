@@ -1,11 +1,11 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "690628469746434089"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "fifa"
   };
 
@@ -230,9 +230,10 @@ presence.on("UpdateData", async () => {
     if (document.querySelector(".paginated-item-list") !== null) {
       presenceData.details = "Viewing their players";
       if (
-        (<HTMLImageElement>(
-          document.querySelector(".ut-list-header-icon > img")
-        )).src
+        (
+          document.querySelector(".ut-list-header-icon > img") as
+          HTMLImageElement
+        ).src
           .toLowerCase()
           .includes("staff")
       ) {
@@ -240,9 +241,10 @@ presence.on("UpdateData", async () => {
       } else if (document.querySelector(".consumable") !== null) {
         presenceData.details = "Viewing their consumables";
       } else if (
-        (<HTMLImageElement>(
-          document.querySelector(".ut-list-header-icon > img")
-        )).src
+        (
+          document.querySelector(".ut-list-header-icon > img") as
+          HTMLImageElement
+        ).src
           .toLowerCase()
           .includes("items")
       ) {

@@ -1,13 +1,13 @@
 var presence = new Presence({
-  clientId: "629428243061145640" // CLIENT ID FOR YOUR PRESENCE
+  clientId: "629428243061145640"
 });
 
-var item: any, user: any, search: any, title: any;
+var user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "pinterest"
   };
   presenceData.startTimestamp = browsingStamp;

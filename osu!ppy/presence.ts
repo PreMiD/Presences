@@ -4,7 +4,7 @@ var presence = new Presence({
   presenceData: presenceData = {
     largeImageKey: "logo"
   },
-  customData: boolean = false;
+  customData = false;
 
 presence.on("UpdateData", async () => {
   customData = false;

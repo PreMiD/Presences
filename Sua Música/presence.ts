@@ -1,28 +1,5 @@
 var presence = new Presence({
-    clientId: "692230804402864148"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-presence.on("UpdateData", async () => {
-  var presenceData = {
-    largeImageKey: "mini_logo",
-    smallImageKey: actionPlay(),
-    smallImageText: "suamusica.com.br",
-    details: getTrackPlaying(),
-    state: getArtistPlaying(),
-    startTimestamp: 0,
-    endTimestamp: 0
-  };
-
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  clientId: "692230804402864148"
 });
 
 /**
@@ -35,6 +12,15 @@ function elementExist(element): boolean {
   } else {
     return false;
   }
+}
+
+/**
+ * Transforms the first letter of the string to uppercase.
+ */
+function firstLetterUp(str): string {
+  return str.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
+    return a.toUpperCase();
+  });
 }
 
 /**
@@ -73,11 +59,21 @@ function actionPlay(): string {
   }
 }
 
-/**
- * Transforms the first letter of the string to uppercase.
- */
-function firstLetterUp(str): string {
-  return str.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
-    return a.toUpperCase();
-  });
-}
+presence.on("UpdateData", async () => {
+  var presenceData = {
+    largeImageKey: "mini_logo",
+    smallImageKey: actionPlay(),
+    smallImageText: "suamusica.com.br",
+    details: getTrackPlaying(),
+    state: getArtistPlaying(),
+    startTimestamp: 0,
+    endTimestamp: 0
+  };
+
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
+});

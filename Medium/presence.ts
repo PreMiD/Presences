@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
       .replace("https://", "")
       .replace("http://", "");
 
-  let data: { [k: string]: any } = {
+  const data: { [k: string]: any } = {
     largeImageKey: "medium-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

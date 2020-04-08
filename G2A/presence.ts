@@ -1,20 +1,14 @@
 var presence = new Presence({
-    clientId: "633805202868273153"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "633805202868273153"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 var user: any;
 var title: any;
-var replace: any;
-var search: any;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "g2alogo"
   };
 
@@ -26,7 +20,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing their cart";
     } else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching for:";
-      search = document.querySelector("head > title");
       presenceData.state = title.innerText
         .replace('" - G2A.COM', "")
         .replace('Search results - "', "");
@@ -98,14 +91,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

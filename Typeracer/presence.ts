@@ -5,27 +5,27 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000),
   href = new URL(document.location.href),
   presenceData = {
-    details: <string>"In construction",
-    state: <string>null,
-    largeImageKey: <string>"lg",
-    startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null
+    details: "In construction" as string,
+    state: null as string,
+    largeImageKey: "lg" as string,
+    startTimestamp: browsingStamp as number,
+    endTimestamp: null as number
   },
   updateCallback = {
     _function: null,
-    get function() {
+    get function(): any {
       return this._function;
     },
     set function(parameter) {
       this._function = parameter;
     },
-    get present() {
+    get present(): boolean {
       return this._function !== null;
     }
   },
   raceStamp = null;
 
-(() => {
+((): void => {
   if (href.hostname === "play.typeracer.com") {
     /*
 
@@ -34,10 +34,10 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 
 		*/
 
-    updateCallback.function = () => {
+    updateCallback.function = (): void => {
       if (document.querySelector(".gameView")) {
         presenceData.details = "Playing a race";
-        let gameStatusLabel = document.querySelector(".gameStatusLabel")
+        const gameStatusLabel = document.querySelector(".gameStatusLabel")
           .textContent;
 
         if (gameStatusLabel === "Waiting for more people...") {
@@ -76,9 +76,9 @@ var browsingStamp = Math.floor(Date.now() / 1000),
               }
             }
           }
-          let percentage =
+          const percentage =
             Math.round((lettersTyped / lettersTotal) * 10000) / 100;
-          let wpm = document
+          const wpm = document
             .querySelector(".rankPanelWpm-self")
             .textContent.toUpperCase();
           presenceData.state = `${percentage}%, ${wpm}`;
@@ -89,13 +89,13 @@ var browsingStamp = Math.floor(Date.now() / 1000),
           gameStatusLabel.startsWith("You finished")
         ) {
           presenceData.details = "Just finished with a race";
-          let wpm = document
+          const wpm = document
             .querySelector(".rankPanelWpm-self")
             .textContent.toUpperCase();
-          let accuracy = document.querySelector(
+          const accuracy = document.querySelector(
             ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)"
           ).textContent;
-          let time = document.querySelector(
+          const time = document.querySelector(
             ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(2)"
           ).textContent;
           presenceData.state = `${wpm}, ${accuracy} acc., ${time}`;
@@ -113,7 +113,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
 
 		*/
 
-    let path = href.pathname.slice(1).split("/");
+    const path = href.pathname.slice(1).split("/");
 
     if (path[0] === "pit") {
       if (path[1] === "profile") {
@@ -127,10 +127,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
         presenceData.details = "Viewing a race result";
         presenceData.state = `Race ${
           href.searchParams.get("id").split("|")[2]
-        } of ${href.searchParams
-          .get("id")
-          .split("|")[1]
-          .slice(3)}`;
+        } of ${href.searchParams.get("id").split("|")[1].slice(3)}`;
       } else if (path[1] === "race_history") {
         presenceData.details = "Viewing someone's race history";
         presenceData.state = href.searchParams.get("user") || null;
@@ -138,10 +135,10 @@ var browsingStamp = Math.floor(Date.now() / 1000),
         presenceData.details = "Viewing the pit stop";
       } else if (path[1] === "competitions") {
         presenceData.details = "Viewing the competition result";
-        let option = document
+        const option = document
           .querySelector("option[selected]")
           .textContent.trim();
-        let strong = document
+        const strong = document
           .querySelector("div.themeContent > div:nth-child(5) > strong")
           .textContent.trim()
           .slice(0, -1)
@@ -155,7 +152,7 @@ var browsingStamp = Math.floor(Date.now() / 1000),
       } else if (path[1] === "login") {
         presenceData.details = "Logging in";
       } else {
-        let pageNames = {
+        const pageNames = {
           upgrade_account: "Upgrade your account",
           tos: "Terms of Service",
           privacy_poicy: "Privacy Policy"
@@ -174,6 +171,29 @@ var browsingStamp = Math.floor(Date.now() / 1000),
   }
 })();
 
+/**
+ * Initialize presenceData
+ */
+function resetData(): void {
+  presenceData = {
+    details: "In construction" as string,
+    state: null as string,
+    largeImageKey: "lg" as string,
+    startTimestamp: browsingStamp as number,
+    endTimestamp: null as number
+  };
+}
+
+/**
+ * Cleans presenceData
+ */
+function cleanData(): void {
+  if (presenceData.details === null) delete presenceData.details;
+  if (presenceData.state === null) delete presenceData.state;
+  if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;
+  if (presenceData.endTimestamp === null) delete presenceData.endTimestamp;
+}
+
 if (updateCallback.present) {
   presence.on("UpdateData", async () => {
     resetData();
@@ -186,27 +206,4 @@ if (updateCallback.present) {
   presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   });
-}
-
-/**
- * Initialize presenceData
- */
-function resetData() {
-  presenceData = {
-    details: <string>"In construction",
-    state: <string>null,
-    largeImageKey: <string>"lg",
-    startTimestamp: <number>browsingStamp,
-    endTimestamp: <number>null
-  };
-}
-
-/**
- * Cleans presenceData
- */
-function cleanData() {
-  if (presenceData.details === null) delete presenceData.details;
-  if (presenceData.state === null) delete presenceData.state;
-  if (presenceData.startTimestamp === null) delete presenceData.startTimestamp;
-  if (presenceData.endTimestamp === null) delete presenceData.endTimestamp;
 }

@@ -10,15 +10,10 @@
     "zh_CN": "Anime4You可让您使用德语观看各种动漫。"
   },
   "url": "www.anime4you.one",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "logo": "https://crugg.de/premid/a4ylogo.png",
   "thumbnail": "https://crugg.de/premid/a4ybanner.png",
   "color": "#172C3C",
-  "tags": [
-    "video",
-    "media",
-    "anime"
-  ],
-  "iframe": false,
+  "tags": ["video", "media", "anime"],
   "category": "anime"
 }

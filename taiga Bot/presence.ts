@@ -1,23 +1,23 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "682593223948238849"
 });
-let presenceGit = new Presence({
+const presenceGit = new Presence({
   clientId: "682593596301508662"
 });
-let presenceCommunity = new Presence({
+const presenceCommunity = new Presence({
   clientId: "682593903656173569"
 });
-let presenceAnigifs = new Presence({
+const presenceAnigifs = new Presence({
   clientId: "682594082274410511"
 });
-let presenceLabs = new Presence({
+const presenceLabs = new Presence({
   clientId: "682595885880049668"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
@@ -100,7 +100,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname == "/signup") {
       presenceData.state = "Signing up...";
     } else if (document.location.pathname.startsWith("/projects")) {
-      let urlParams = document.location.pathname.split("/");
+      const urlParams = document.location.pathname.split("/");
       if (urlParams.length == 2) {
         presenceData.state = "Viewing their Projects...";
       } else if (urlParams.length == 4) {
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
 });
 
 presenceGit.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
@@ -173,7 +173,7 @@ presenceGit.on("UpdateData", async () => {
     } else {
       if (document.querySelector(".user.profile")) {
         // Profile Page
-        let searchParams = new URLSearchParams(window.location.search);
+        const searchParams = new URLSearchParams(window.location.search);
         presenceData.details =
           "Viewing Profile: " +
           document.getElementsByClassName("username")[0].innerHTML;
@@ -187,7 +187,7 @@ presenceGit.on("UpdateData", async () => {
               .firstElementChild.textContent +
             ")";
         }
-        let tab = searchParams.get("tab");
+        const tab = searchParams.get("tab");
         if (tab) {
           if (tab == "activity") {
             presenceData.state = "Tab: Public Activity";
@@ -203,12 +203,12 @@ presenceGit.on("UpdateData", async () => {
         }
       } else if (document.querySelector("#org-info")) {
         // Organization Page
-        let displayName = document
+        const displayName = document
           .querySelector("#org-info")
           .querySelector(".ui.header")
           .textContent.replace(/\s*(?=(shaare))/gm, "")
           .replace(/(?<=(shaare))\s*/gm, "");
-        let orgName = document.location.pathname.split("/")[1];
+        const orgName = document.location.pathname.split("/")[1];
         if (displayName == orgName) {
           presenceData.details = "Viewing Organization: " + orgName;
         } else {
@@ -256,12 +256,14 @@ presenceGit.on("UpdateData", async () => {
         } else if (document.location.pathname.split("/")[3] == "activity") {
           presenceData.state = "Viewing Activity...";
         } else if (document.location.pathname.split("/")[3] == "src") {
-          let branch = document.getElementsByClassName("octicon-git-branch")[1]
-            .parentNode.lastChild.textContent;
+          const branch = document.getElementsByClassName(
+            "octicon-git-branch"
+          )[1].parentNode.lastChild.textContent;
           presenceData.state = "Viewing Files... (" + branch + " Branch)";
         } else if (document.location.pathname.split("/")[3] == "commits") {
-          let branch = document.getElementsByClassName("octicon-git-branch")[1]
-            .parentNode.lastChild.textContent;
+          const branch = document.getElementsByClassName(
+            "octicon-git-branch"
+          )[1].parentNode.lastChild.textContent;
           presenceData.state = "Viewing Commits... (" + branch + " Branch)";
         } else if (document.location.pathname.split("/")[3] == "branches") {
           presenceData.state = "Viewing Branches";
@@ -283,7 +285,7 @@ presenceGit.on("UpdateData", async () => {
 });
 
 presenceCommunity.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
@@ -294,18 +296,18 @@ presenceCommunity.on("UpdateData", async () => {
 });
 
 presenceAnigifs.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
   if (document.location.hostname == "anigifs.taigabot.net") {
-    let urlArgs = document.location.pathname.split("/");
+    const urlArgs = document.location.pathname.split("/");
     console.log(urlArgs.length);
     if (urlArgs.length < 3) {
       presenceData.details = "Viewing the Frontpage";
     } else {
-      let imageTypeIds: Array<string> = ["hug"];
-      let imageTypeNames: Array<string> = ["Interactions: Hug"];
+      const imageTypeIds: Array<string> = ["hug"];
+      const imageTypeNames: Array<string> = ["Interactions: Hug"];
       imageTypeIds.forEach((imageTypeId, index) => {
         if (imageTypeId == urlArgs[urlArgs.length - 1]) {
           presenceData.details = "Viewing an Image";
@@ -318,7 +320,7 @@ presenceAnigifs.on("UpdateData", async () => {
 });
 
 presenceLabs.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
@@ -326,9 +328,9 @@ presenceLabs.on("UpdateData", async () => {
     if (document.location.pathname == "/") {
       presenceData.details = "Viewing the Frontpage...";
     } else {
-      let appsTypeIds: Array<string> = ["card-tool"];
-      let appsTypeNames: Array<string> = ["taiga Card Tool"];
-      let urlArgs = document.location.pathname.split("/");
+      const appsTypeIds: Array<string> = ["card-tool"];
+      const appsTypeNames: Array<string> = ["taiga Card Tool"];
+      const urlArgs = document.location.pathname.split("/");
       appsTypeIds.forEach((appsTypeId, index) => {
         if (appsTypeId == urlArgs[1]) {
           presenceData.details = "Using an App";

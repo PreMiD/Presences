@@ -13,16 +13,10 @@
     "nl": "Biedt je veel screenshots en fanarts van de anime Toradora!"
   },
   "url": "toradorapi.crugg.de",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "logo": "https://crugg.de/premid/tapilogo.png",
   "thumbnail": "https://crugg.de/premid/tapibanner2.png",
   "color": "#F9304B",
-  "tags": [
-    "anime",
-    "manga",
-    "images",
-    "random",
-    "toradora"
-  ],
+  "tags": ["anime", "manga", "images", "random", "toradora"],
   "category": "anime"
 }

@@ -22,7 +22,21 @@ const presence = new Presence({
     "/pano/son-izlediklerim": "Son İzlediklerim"
   };
 
-let video: { [k: string]: any } = {};
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+const video: { [k: string]: any } = {};
 
 presence.on("iFrameData", (data) => {
   if (!data.error) {
@@ -205,7 +219,7 @@ presence.on("UpdateData", async () => {
         Math.floor(_video.duration)
       );
 
-    let data: { [k: string]: any } = {
+    const data: { [k: string]: any } = {
       largeImageKey: "dl-logo",
       details: title.textContent,
       state: fixedEpisodeName,
@@ -276,7 +290,7 @@ presence.on("UpdateData", async () => {
           Math.floor(video.duration)
         );
 
-      let data: { [k: string]: any } = {
+      const data: { [k: string]: any } = {
         largeImageKey: "dl-logo",
         details: title.textContent,
         state: fixedEpisodeName,
@@ -309,14 +323,3 @@ presence.on("UpdateData", async () => {
     }
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime, videoDuration) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
