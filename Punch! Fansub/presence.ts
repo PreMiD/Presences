@@ -9,7 +9,7 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     details: "Home",
     largeImageKey: "main"
   };
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/projeto/")) {
     let vid: any = document.getElementById("playerIframe");
     vid = vid.contentDocument.getElementsByTagName("video")[0];
-    let anime: any = document.querySelectorAll(".content-heading h3")[0];
+    const anime: any = document.querySelectorAll(".content-heading h3")[0];
 
     if (document.getElementsByClassName("modal-open").length > 0) {
       if (vid && vid.currentTime > 0 && !vid.paused) {
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "play";
         presenceData.smallImageText = (await strings).playing;
 
-        let ep: any = document.getElementsByClassName("modal-title")[0];
+        const ep: any = document.getElementsByClassName("modal-title")[0];
 
         presenceData.details = anime.innerText;
         presenceData.state = `EP ${ep.innerText.substr(-2)}`;
