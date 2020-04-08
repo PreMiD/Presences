@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "656959119118565406",
+  clientId: "656959119118565406"
 });
 
 // Redirect to iframe source, to prevent loss of progress
@@ -10,7 +10,7 @@ if (document.getElementsByTagName("frame")[1]) {
 }
 
 // Check whether loggedout
-var loggedout: Boolean = false;
+var loggedout = false;
 if (
   (document.baseURI.match(/module=adm/) &&
     document.baseURI.match(/(type=|classes)/)) ||
@@ -21,7 +21,7 @@ if (
 }
 
 var Classname: any;
-var Worksheet: String = "...";
+var Worksheet = "...";
 var WSNo: any;
 var EXNo: any;
 var Exercise: any;
@@ -141,16 +141,16 @@ if (!loggedout) {
       ) *
         60 +
         parseInt(
-          (document.querySelector(
-            "p#exam_clock"
-          ) as HTMLElement).innerText.split(":")[2]
+          (
+            document.querySelector("p#exam_clock") as HTMLElement
+          ).innerText.split(":")[2]
         )) *
         1000;
   }
 }
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     details: Classname + Worksheet,
     state: Exercise,
     startTimestamp: timestamp,
