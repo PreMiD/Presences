@@ -8,6 +8,25 @@ var strings = presence.getStrings({
   search: "presence.activity.searching"
 });
 
+function capitalize(text: string): string {
+  text = text.toLowerCase();
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var elapsed = undefined,
   oldUrl = undefined,
   header,
@@ -178,14 +197,3 @@ presence.on("UpdateData", async () => {
   presence.setActivity(data, video ? !video.paused : true);
   presence.setTrayTitle(details);
 });
-
-function capitalize(text: string) {
-  text = text.toLowerCase();
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
