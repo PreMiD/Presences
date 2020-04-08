@@ -6,8 +6,8 @@ var presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   }),
-  isShow: boolean = false,
-  isSong: boolean = false,
+  isShow = false,
+  isSong = false,
   prev: string,
   elapsed: number,
   i: number,
@@ -27,6 +27,38 @@ var presence = new Presence({
     seasonNumber: null,
     episodeNumber: null
   };
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+function setLoop(f: Function, ms: number): any {
+  f();
+  return setInterval(f, ms);
+}
+
+function decodeReq(entity: Element): any {
+  // decoding HTML entities the stackoverflow way
+  var txt = document.createElement("textarea");
+  txt.innerHTML = entity.textContent;
+  return txt.value;
+}
+
+function getTag(collection: any[], tagName: string): any {
+  for (const tag of collection) {
+    if (tag.getAttribute("name") === tagName) return tag;
+  }
+}
 
 presence.on("UpdateData", async () => {
   if (
@@ -132,13 +164,7 @@ presence.on("UpdateData", async () => {
   }
 });
 
-function getTimestamps(mediaTime: any, mediaDuration: any) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - mediaTime + mediaDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var getStatus = setLoop(function() {
+var getStatus = setLoop(function () {
   if (
     document.querySelector(".footer") &&
     document.querySelector(".footer").textContent.includes("VLC")
@@ -146,7 +172,7 @@ var getStatus = setLoop(function() {
     const req = new XMLHttpRequest();
     // jquery sucks!!!
 
-    req.onload = function() {
+    req.onload = function (): void {
       if (req.readyState === req.DONE) {
         if (req.status === 200) {
           if (i > 0) i = 0;
@@ -179,7 +205,9 @@ var getStatus = setLoop(function() {
           }
 
           if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
-            const collection = req.responseXML.getElementsByTagName("info") as unknown as any[];
+            const collection =
+              (req.responseXML.getElementsByTagName("info") as unknown) as
+              any[];
 
             // basically the same thing but with a Firefox workaround because it's annoying
 
@@ -309,7 +337,7 @@ var getStatus = setLoop(function() {
       }
     };
 
-    req.onerror = function(e) {
+    req.onerror = function (e): void {
       media.state = "stopped";
       console.log(e);
     };
@@ -327,21 +355,3 @@ var getStatus = setLoop(function() {
     req.send();
   }
 }, (navigator.userAgent.toLowerCase().indexOf("firefox") > -1 ? 5 : 2) * 1000); // if you lower it, you may as well fry the CPU
-
-function setLoop(f: Function, ms: number) {
-  f();
-  return setInterval(f, ms);
-}
-
-function decodeReq(entity: Element) {
-  // decoding HTML entities the stackoverflow way
-  var txt = document.createElement("textarea");
-  txt.innerHTML = entity.textContent;
-  return txt.value;
-}
-
-function getTag(collection: any[], tagName: string) {
-  for (let tag of collection) {
-    if (tag.getAttribute("name") === tagName) return tag;
-  }
-}
