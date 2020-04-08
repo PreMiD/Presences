@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
     }
   } else {
     const playerCount = document.querySelector(".rankingTable")
-      ?.childElementCount;
+      .childElementCount;
 
     data.details = "Playing Game";
     data.state = document.title;
