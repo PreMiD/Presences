@@ -12,8 +12,28 @@ var presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
+function getTime(list: string[]): number {
+  var ret = 0;
+  for (let index = list.length - 1; index >= 0; index--) {
+    ret += parseInt(list[index]) * 60 ** index;
+  }
+  return ret;
+}
+
+function getTimestamps(audioTime: any, audioDuration: string): Array<number> {
+  var splitAudioDuration = audioDuration.split(":").reverse();
+
+  var parsedAudioTime = getTime(audioTime);
+  var parsedAudioDuration = getTime(splitAudioDuration);
+
+  var startTime = Date.now();
+  var endTime =
+    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "wf"
   };
 
@@ -87,25 +107,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(data);
 });
-
-// ty soundcloud :*
-
-function getTimestamps(audioTime: any, audioDuration: string) {
-  var splitAudioDuration = audioDuration.split(":").reverse();
-
-  var parsedAudioTime = getTime(audioTime);
-  var parsedAudioDuration = getTime(splitAudioDuration);
-
-  var startTime = Date.now();
-  var endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getTime(list: string[]) {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}
