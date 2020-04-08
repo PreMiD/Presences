@@ -23,13 +23,10 @@
     "telegram.taigabot.net",
     "translate.taigabot.net"
   ],
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://cdn.taigabot.net/assets/branding/taiga/premid_logo.png",
   "thumbnail": "https://cdn.taigabot.net/assets/branding/taiga/premid_banner.png",
   "color": "#ff006d",
-  "tags": [
-    "discord",
-    "bot"
-  ],
+  "tags": ["discord", "bot"],
   "category": "other"
 }
