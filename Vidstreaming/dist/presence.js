@@ -114,12 +114,6 @@ presence.on("UpdateData", async() => {
         presence.setTrayTitle();
         presence.setActivity();
     }
-    else if (iFrameVideo == true){
-        presence.setActivity(presenceData, !video.paused);
-    }
-    else if (iFrameVideo == true){
-        presence.setActivity(presenceData, video.paused);
-    }
     else {
         //This will fire if you set presence details
         presence.setActivity(presenceData);
