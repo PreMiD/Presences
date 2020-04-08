@@ -15,6 +15,15 @@ function elementExist(element): boolean {
 }
 
 /**
+ * Transforms the first letter of the string to uppercase.
+ */
+function firstLetterUp(str): string {
+  return str.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
+    return a.toUpperCase();
+  });
+}
+
+/**
  * get the name of the track playing
  */
 function getTrackPlaying(): string {
@@ -48,15 +57,6 @@ function actionPlay(): string {
   } else {
     return "pause";
   }
-}
-
-/**
- * Transforms the first letter of the string to uppercase.
- */
-function firstLetterUp(str): string {
-  return str.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
-    return a.toUpperCase();
-  });
 }
 
 presence.on("UpdateData", async () => {
