@@ -12,7 +12,21 @@ var presence = new Presence({
     paused: true
   };
 
-presence.on("iFrameData", data => {
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+presence.on("iFrameData", (data) => {
   video = data;
 });
 
@@ -60,9 +74,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
