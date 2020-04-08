@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
           ).attributes["content"].textContent
         : null;
 
-  let data: { [k: string]: any } = {
+  const data: { [k: string]: any } = {
     largeImageKey: "n11-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
