@@ -66,6 +66,21 @@ declare class Presence {
    */
   getPageLetiable(variable: string): Promise<any>;
   /**
+   * Get a setting from the presence metadata
+   * @param setting Id of setting as defined in metadata.
+   */
+  getSetting(setting: string): Promise<any>;
+  /**
+   * Hide a setting
+   * @param setting Id of setting
+   */
+  hideSetting(setting: string): Promise<void>;
+  /**
+   * Show a setting
+   * @param setting Id of setting
+   */
+  showSetting(setting: string): Promise<void>;
+  /**
    * Sends data back to application
    * @param data Data to send back to application
    */
