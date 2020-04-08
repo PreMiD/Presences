@@ -1,13 +1,8 @@
 var presence = new Presence({
-    clientId: "612416330003382314"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "612416330003382314"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000);
-
 var profileName: any,
   profileTabs: any,
   messageTab: any,
@@ -23,7 +18,7 @@ gameName = document.querySelector(
 );
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
   };
@@ -152,9 +147,9 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/catalog/")) {
-    let searchURL = new URL(document.location.href);
+    const searchURL = new URL(document.location.href);
 
-    let searchResult = searchURL.searchParams.get("Keyword");
+    const searchResult = searchURL.searchParams.get("Keyword");
 
     presenceData.details = "Current page:";
 
@@ -170,9 +165,9 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
     }
   } else if (document.location.pathname.includes("/search/users")) {
-    let searchURL = new URL(document.location.href);
+    const searchURL = new URL(document.location.href);
 
-    let searchResult = searchURL.searchParams.get("keyword");
+    const searchResult = searchURL.searchParams.get("keyword");
 
     presenceData.details = "Searching for an user:";
 
@@ -185,14 +180,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
