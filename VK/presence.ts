@@ -1,7 +1,6 @@
-var presence = new Presence({
-    clientId: "514771696134389760"
-  }),
-  strings;
+const presence = new Presence({
+  clientId: "514771696134389760"
+});
 
 var localeStrings = {
   en: {
@@ -21,11 +20,25 @@ var localeStrings = {
 var isPlaying: boolean;
 var timestamps;
 
-function getLocale() {
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+function getLocale(): string {
   return window.navigator.language.replace("-", "_").toLowerCase();
 }
 
-function getLocalizedString(stringPath) {
+function getLocalizedString(stringPath): string {
   if (localeStrings[getLocale()][stringPath] !== undefined) {
     return localeStrings[getLocale()][stringPath];
   } else {
@@ -34,10 +47,9 @@ function getLocalizedString(stringPath) {
   }
 }
 
-function getVKTrackTimeLeft(): Object {
-  let playerDuration = document.querySelector(
-    ".audio_page_player_duration"
-  ) as HTMLElement;
+function getVKTrackTimeLeft(): Record<string, any> {
+  const playerDuration =
+    document.querySelector(".audio_page_player_duration") as HTMLElement;
 
   var timeLeft;
 
@@ -55,10 +67,9 @@ function getVKTrackTimeLeft(): Object {
   return timeLeft.split(":");
 }
 
-function getVKTrackTimePassed(): Object {
-  let playerDuration = document.querySelector(
-    ".audio_page_player_duration"
-  ) as HTMLElement;
+function getVKTrackTimePassed(): Record<string, any> {
+  const playerDuration =
+    document.querySelector(".audio_page_player_duration") as HTMLElement;
 
   var timePassed;
 
@@ -74,7 +85,7 @@ function getVKTrackTimePassed(): Object {
 }
 
 //* Returns VK track length.
-function getVKTrackLength(): Object {
+function getVKTrackLength(): Record<string, any> {
   var timeLeft, timePassed, overallTime;
 
   timeLeft = getVKTrackTimeLeft();
@@ -104,22 +115,22 @@ presence.on("UpdateData", async () => {
     largeImageKey: "vk_logo"
   };
 
-  if (!strings)
-    strings = await presence.getStrings({
-      play: "presence.playback.playing",
-      pause: "presence.playback.paused"
-    });
+  const gstrings = await presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused"
+  });
 
   if (
     document.location.pathname.startsWith("/audios") ||
     document.querySelector(".audio_layer_container")
   ) {
-    var title: string = (document.querySelector(
-        ".audio_page_player_title_song"
-      ) as HTMLElement).textContent,
-      author: string = (document.querySelector(
-        ".audio_page_player_title_performer a"
-      ) as HTMLElement).textContent;
+    var title: string = (
+        document.querySelector(".audio_page_player_title_song") as HTMLElement
+      ).textContent,
+      author: string = (
+        document.querySelector(".audio_page_player_title_performer a") as
+        HTMLElement
+      ).textContent;
 
     if (document.querySelector(".audio_playing") == null) {
       isPlaying = true;
@@ -140,7 +151,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = title;
     presenceData.state = author;
     presenceData.smallImageKey = isPlaying ? "pause" : "play";
-    presenceData.smallImageText = isPlaying ? strings.pause : strings.play;
+    presenceData.smallImageText = isPlaying ? gstrings.pause : gstrings.play;
     presenceData.startTimestamp = isPlaying ? null : timestamps[0];
     presenceData.endTimestamp = isPlaying ? null : timestamps[1];
 
@@ -153,12 +164,12 @@ presence.on("UpdateData", async () => {
 
     var videoTitle = (document.querySelector(".mv_title") as HTMLElement)
         .innerText,
-      videoCurrentTime = (document.querySelector(
-        "._time_current"
-      ) as HTMLElement).innerText.split(":"),
-      videoDuration = (document.querySelector(
-        "._time_duration"
-      ) as HTMLElement).innerText.split(":"),
+      videoCurrentTime = (
+        document.querySelector("._time_current") as HTMLElement
+      ).innerText.split(":"),
+      videoDuration = (
+        document.querySelector("._time_duration") as HTMLElement
+      ).innerText.split(":"),
       videoAuthor = (document.querySelector(".mv_author_name a") as HTMLElement)
         .innerText;
 
@@ -172,7 +183,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = getLocalizedString("Watching") + " " + videoTitle;
     presenceData.state = videoAuthor;
     presenceData.smallImageKey = isPlaying ? "pause" : "play";
-    presenceData.smallImageText = isPlaying ? strings.pause : strings.play;
+    presenceData.smallImageText = isPlaying ? gstrings.pause : gstrings.play;
     presenceData.startTimestamp = isPlaying ? null : timestamps[0];
     presenceData.endTimestamp = isPlaying ? null : timestamps[1];
 
@@ -200,12 +211,3 @@ presence.on("UpdateData", async () => {
     presence.clearActivity();
   }
 });
-
-/**
- * Get Timestamps
- */
-function getTimestamps(currentTime: number, overallTime: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - currentTime + overallTime;
-  return [Math.floor(startTime / 1000), endTime];
-}
