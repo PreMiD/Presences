@@ -24,14 +24,16 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
-    game = document.querySelector(
-      "#main-wrap > main > aside > div > section > div.game__meta__infos > div > div > div"
-    ) as HTMLElement,
-    status = document.querySelector(
-      "#main-wrap > main > aside > div > section.status"
-    ) as HTMLElement;
+    game =
+      document.querySelector(
+        "#main-wrap > main > aside > div > section > div.game__meta__infos > div > div > div"
+      ) as HTMLElement,
+    status =
+      document.querySelector(
+        "#main-wrap > main > aside > div > section.status"
+      ) as HTMLElement;
 
-  let data: { [k: string]: any } = {
+  const data: { [k: string]: any } = {
     largeImageKey: "lc-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
