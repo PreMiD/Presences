@@ -4,7 +4,7 @@ var presence = new Presence({
   presenceData: presenceData = {
     largeImageKey: "logo"
   },
-  customData: boolean = false;
+  customData = false;
 
 presence.on("UpdateData", async () => {
   customData = false;
@@ -14,13 +14,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/beatmaps/rank_request")) {
     presenceData.details = "Requesting a beatmaps";
   } else if (document.location.pathname.startsWith("/beatmaps")) {
-    let title = document.querySelector(".map-title"),
+    const title = document.querySelector(".map-title"),
       act = document.querySelector(".map-artist");
 
     if (title != null && act != null) {
       customData = true;
 
-      let beatmapData: presenceData = {
+      const beatmapData: presenceData = {
         details: "Looking at the beatmap:",
         state:
           (act as HTMLElement).innerText +
@@ -33,13 +33,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Searching for new beatmaps";
     }
   } else if (document.location.pathname.startsWith("/s/")) {
-    let title = document.querySelector(".map-title"),
+    const title = document.querySelector(".map-title"),
       act = document.querySelector(".map-artist");
 
     if (title != null && act != null) {
       customData = true;
 
-      let beatmapData: presenceData = {
+      const beatmapData: presenceData = {
         details: "Looking at the beatmap:",
         state:
           (act as HTMLElement).innerText +
@@ -52,13 +52,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Searching for new beatmaps";
     }
   } else if (document.location.pathname.startsWith("/b/")) {
-    let title = document.querySelector(".map-title"),
+    const title = document.querySelector(".map-title"),
       act = document.querySelector(".map-artist");
 
     if (title != null && act != null) {
       customData = true;
 
-      let beatmapData: presenceData = {
+      const beatmapData: presenceData = {
         details: "Looking at the beatmap:",
         state:
           (act as HTMLElement).innerText +
@@ -101,13 +101,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/about")) {
     presenceData.details = "Browsing About";
   } else if (document.location.pathname.startsWith("/docs/")) {
-    let doc = document.querySelector(".ban-stroke1"),
+    const doc = document.querySelector(".ban-stroke1"),
       title = document.querySelector(".ban-stroke2");
 
     if (doc != null && title != null) {
       customData = true;
 
-      let beatmapData: presenceData = {
+      const beatmapData: presenceData = {
         details: "Browsing " + (doc as HTMLElement).innerText,
         state: (title as HTMLElement).innerText,
         largeImageKey: "logo"
@@ -144,10 +144,10 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/team")) {
     presenceData.details = "Look at Garati Team";
   } else if (document.location.pathname.startsWith("/u")) {
-    let name: string = (document.querySelector(".user-name") as HTMLElement)
+    const name: string = (document.querySelector(".user-name") as HTMLElement)
       .innerText;
     customData = true;
-    let profileData: presenceData = {
+    const profileData: presenceData = {
       details: "Looking at " + name + "'s Profile",
       state:
         "Performance: " +
@@ -167,6 +167,6 @@ if (document.location.hostname == "sig.gatari.pw") {
   presenceData.details = "Ready to generator a Signature";
 }
 
-presence.on("iFrameData", function(data) {
+presence.on("iFrameData", function (data) {
   console.log(data);
 });
