@@ -2,17 +2,27 @@ const presence = new Presence({
     clientId: "673322920809988120"
 });
 
-var user : any;
-var title : any;
-var replace : any;
-var search : any;
+function parseQueryString(queryString?: string): any {
+    if (!queryString) {
+        queryString = window.location.search.substring(1);
+    }
+    const params = {};
+    const queries = queryString.split("&");
+    queries.forEach((indexQuery: string) => {
+        const indexPair = indexQuery.split("=");
+        const queryKey = decodeURIComponent(indexPair[0]);
+        const queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
+        params[queryKey] = queryValue;
+    });
+    return params;
+}
 
-var browsingStamp = Math.floor(Date.now()/1000);
+//var browsingStamp = Math.floor(Date.now()/1000);
 
 console.log('%c RootMe Presence ', 'background: #7289da; color: white; padding: 2px; border-radius: 50px', "Presence detected !");
 
 presence.on("UpdateData", async () => {
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
         largeImageKey: "logo"
     };
 
@@ -92,18 +102,3 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
     }
 });
-
-function parseQueryString(queryString?: string): any {
-    if (!queryString) {
-        queryString = window.location.search.substring(1);
-    }
-    const params = {};
-    const queries = queryString.split("&");
-    queries.forEach((indexQuery: string) => {
-        const indexPair = indexQuery.split("=");
-        const queryKey = decodeURIComponent(indexPair[0]);
-        const queryValue = decodeURIComponent(indexPair.length > 1 ? indexPair[1] : "");
-        params[queryKey] = queryValue;
-    });
-    return params;
-}
