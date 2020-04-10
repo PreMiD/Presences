@@ -15,6 +15,12 @@ var videoState = 'paused'; // Default
 
 var metadata;
 
+// Set the default presence data for when the video is loading
+var presenceData = {
+    largeImageKey: "vudularge", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
+    details: "Browsing VUDU"
+};
+
 // Get the title
 function grabMetadata() {
 
@@ -83,7 +89,7 @@ presence.on("UpdateData", () => {
             }
 
             // Discord says "hey nice pause"
-            var presenceData = {
+            presenceData = {
                 largeImageKey: "vudularge", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
                 details: "Watching " + metadata, //The upper section of the presence text
                 state: "Paused"
@@ -97,7 +103,7 @@ presence.on("UpdateData", () => {
             }
 
             // Set presence to movie data
-            var presenceData = {
+            presenceData = {
                 largeImageKey: "vudularge", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
                 smallImageKey: "vudusmall", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
                 smallImageText: "Watching movies", //The text which is displayed when hovering over the small image
