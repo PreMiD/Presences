@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
         }
     } else if(document.location.pathname.includes("/Challenges/")) {
         presenceData.smallImageKey = "chall";
-        presenceData.smallImageText = "Challenges"
+        presenceData.smallImageText = "Challenges";
         presenceData.details = route[3] ? `${route[2]} - ${route[3].replace(/-/g, " ")}` : `${route[2]}`;
         presenceData.state = !route[4] ? "Navigating..." : document.querySelector(".crayon").textContent;
     } else if (document.location.pathname.includes("/Capture-The-Flag/")) {
