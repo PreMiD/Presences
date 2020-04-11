@@ -163,7 +163,7 @@ presence.on("UpdateData", async () => {
         title = elements.moderator.title.textContent;
         streamer = `Moderating ${elements.moderator.streamer.textContent}`;
       }
-      if (elements.moderator.live.textContent === "Online") {
+      if (elements.moderator.live.textContent === "Online" || type === "live") {
         smallImageKey = "live";
         smallImageText = (await strings).live;
       }
