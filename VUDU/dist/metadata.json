@@ -5,16 +5,15 @@
     },
     "url": "www.vudu.com",
     "description": {
-      "en": "This extension adds rich presence support to VUDU, a movie site."
+      "en": "Vudu distributes full-length movies and TV shows to internet-enabled devices in the United States of America."
     },
     "service": "VUDU",
     "version": "1.0.0",
-    "logo": "https://www.vudu.com/content/images/logo.svg",
-    "thumbnail": "https://cdn.discordapp.com/attachments/377284586326982666/697982989048741928/unknown.png",
+    "logo": "https://i.imgur.com/ialSC46.png",
+    "thumbnail": "https://i.imgur.com/4z07lus.png",
     "color": "#236cba",
     "tags": [
       "movies"
     ],
-    "category": "videos",
-    "iframe": false
+    "category": "videos"
 }
