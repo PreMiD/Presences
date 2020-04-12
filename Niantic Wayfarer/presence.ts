@@ -22,6 +22,7 @@ presence.on("UpdateData", async () => {
       ".flex-map-row > span:nth-child(2)"
     );
     if (title !== null && description !== null && location !== null) {
+      presenceData.largeImageKey = "wayfarer";
       presenceData.smallImageKey = "nw";
       presenceData.details = "Reviewing: " + title.textContent;
       presenceData.state = "Description: " + description.textContent;
