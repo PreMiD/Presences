@@ -59,9 +59,10 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
 
-      presenceData.details = document.querySelector(
-        "#adsIfrme > div > div > div > h1 > strong"
-      ).textContent;
+      presenceData.details = document
+        .querySelector("#adsIfrme > div > div > div > h1 > strong")
+        .textContent.replace("Watch ", "")
+        .replace(" online free", "");
       presenceData.state = document
         .querySelector("#selectEpisode")
         .textContent.trim();
@@ -74,8 +75,10 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at:";
       presenceData.state =
-        document.querySelector("#adsIfrme > div > div > div > h1 > strong")
-          .textContent +
+        document
+          .querySelector("#adsIfrme > div > div > div > h1 > strong")
+          .textContent.replace("Watch ", "")
+          .replace(" online free", "") +
         " " +
         document.querySelector("#selectEpisode").textContent.trim();
     }
