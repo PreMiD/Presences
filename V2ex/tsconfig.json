@@ -1,0 +1,6 @@
+{
+  "extends": "../../Presences/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/"
+  }
+}
