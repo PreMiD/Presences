@@ -16,14 +16,17 @@ presence.on("UpdateData", async () => {
   if (path === "/") {
     presenceData.state = "Homepage";
     presenceData.details = "Browsing Thread";
+    presenceData.smallImageKey = "curious";
   } else if (path.includes("/t/")) {
     title = document.querySelector("#Main > div.box > div.header > h1");
     presenceData.state = title.innerText.trim();
-    presenceData.details = "Reading page";
+    presenceData.details = "Reading post";
+    presenceData.smallImageKey = "famous";
   } else if (path.includes("/member/")) {
     title = document.querySelector("#Main > div.box h1");
     presenceData.state = title.innerText.trim();
     presenceData.details = "Viewing Profile";
+    presenceData.smallImageKey = "happy";
   } else if (path.includes("/go/")) {
     title = document.querySelector("head > title");
     presenceData.state = title.innerText
@@ -31,9 +34,11 @@ presence.on("UpdateData", async () => {
       .replace("›", "")
       .trim();
     presenceData.details = "Browsing node";
+    presenceData.smallImageKey = "tongue";
   } else if (path === "/new") {
     presenceData.state = "Compose";
     presenceData.details = "New post";
+    presenceData.smallImageKey = "famous_2";
   }
 
   if (presenceData.details == null) {
