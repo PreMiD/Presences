@@ -14,14 +14,19 @@ presence.on("UpdateData", async () => {
   const path = document.location.pathname;
 
   if (path === "/") {
-    presenceData.state = "Homepage";
+    presenceData.state = "Home";
     presenceData.details = "Browsing Thread";
     presenceData.smallImageKey = "curious";
   } else if (path.includes("/t/")) {
     title = document.querySelector("#Main > div.box > div.header > h1");
     presenceData.state = title.innerText.trim();
-    presenceData.details = "Reading post";
     presenceData.smallImageKey = "famous";
+
+    if (document.querySelector("#reply-box").classList.contains("reply-box-sticky")) {
+      presenceData.details = "Replying post";
+    } else {
+      presenceData.details = "Reading post";
+    }
   } else if (path.includes("/member/")) {
     title = document.querySelector("#Main > div.box h1");
     presenceData.state = title.innerText.trim();
