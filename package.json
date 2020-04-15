@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",
-    "@types/node": "^13.11.0",
+    "@types/node": "^13.11.1",
     "@types/prettier": "^2.0.0",
     "@types/semver": "^7.1.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
