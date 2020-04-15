@@ -11,24 +11,21 @@ presence.on("UpdateData", () => {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Terms";
     } else if (window.location.pathname.startsWith("/player/")) {
-        var item = document.getElementsByClassName("span7")[1].innerHTML;
-        var infos_tmp = stripHtml(item);
-        var infos = prepareArray(infos_tmp);
-        var clan = infos[0];
-        var level = infos[1];
-        var username = infos[2];
-        var staffstatus = infos[3];
+        var player_item = document.getElementsByClassName("span7")[1].innerHTML;
+        var player_infos_tmp = stripHtml(player_item);
+        var player_infos = prepareArray(player_infos_tmp);
+        var player_level = player_infos[1];
+        var player_name = player_infos[2];
         presenceData.details = "Viewing a player:";
-        presenceData.state = username + " - " + level;
+        presenceData.state = player_name + " - " + player_level;
     } else if (window.location.pathname.startsWith("/clan/")) {
-        var item = document.getElementsByClassName("span7")[1].innerHTML;
-        var infos_tmp = stripHtml(item);
-        var infos = prepareArray(infos_tmp);
-        var clanmember = infos[0];
-        var averagelevel = infos[1];
-        var clanname = infos[2];
+        var clan_item = document.getElementsByClassName("span7")[1].innerHTML;
+        var clan_infos_tmp = stripHtml(clan_item);
+        var clan_infos = prepareArray(clan_infos_tmp);
+        var clan_member = clan_infos[0];
+        var clan_name = clan_infos[2];
         presenceData.details = "Viewing a clan:";
-        presenceData.state = clanname + "| " + clanmember;
+        presenceData.state = clan_name + "| " + clan_member;
     } else if (window.location.pathname.startsWith("/about/")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "About";
