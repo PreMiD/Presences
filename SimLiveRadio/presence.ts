@@ -1,33 +1,12 @@
 var presence = new Presence({
-  clientId: "636649694109499393"
+  clientId: "699961797041455174"
 });
-let dDJ;
-
-function getSongData(): void {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function (): void {
-    if (this.readyState == 4 && this.status == 200) {
-      var data = JSON.parse(this.responseText);
-      dDJ = data.anzeigename;
-    }
-  };
-  xhttp.open(
-    "GET",
-    "https://sendeplan.simliveradio.net/index.php?page=infos&mode=json&opt=onair",
-    true
-  );
-  xhttp.withCredentials = true;
-  xhttp.send();
-}
-
-setInterval(getSongData, 10000);
-getSongData();
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
-    largeImageKey: "rl"
+    largeImageKey: "simlive"
   };
 
   presenceData.startTimestamp = browsingStamp;
@@ -50,9 +29,6 @@ presence.on("UpdateData", async () => {
         .replace('"', "")
         .replace('"', "");
       presenceData.smallImageKey = "play";
-      if (dDJ !== "mit Auto-DJ") {
-        presenceData.smallImageText = dDJ.replace("mit ", "");
-      }
 
       presence.setActivity(presenceData);
     }
