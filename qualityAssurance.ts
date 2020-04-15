@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import { blueBright, gray, green, red, yellow } from "chalk";
 import execa = require("execa");
 import { readdirSync, readFileSync, writeFileSync } from "fs";
@@ -61,7 +63,10 @@ const compileFile = (fileNames: string[], options: CompilerOptions): void => {
       const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
         diagnostic.start!
       );
-      const message = flattenDiagnosticMessageText(diagnostic.messageText, "\n");
+      const message = flattenDiagnosticMessageText(
+        diagnostic.messageText,
+        "\n"
+      );
       console.log(
         `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`
       );
