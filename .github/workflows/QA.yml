@@ -1,13 +1,8 @@
 name: QA
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - "**.ts"
-      - "**.js"
-      - "**.json"
+  schedule:
+    - cron: 0 1 * * *
 
 jobs:
   qa:
@@ -46,9 +41,9 @@ jobs:
             hub remote set-url origin "https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPOSITORY}.git";
             git config --local user.email "${GITHUB_EMAIL}";
             git config --local user.name "${GITHUB_USER}";
-            git checkout -b premid-bot/codequality/`date +%F-%H-%M`;
-            git commit -sam "refactor: run quality assurance";
-            hub pull-request -p -m "refactor: run quality assurance on the repo files" -m "*bleep bloop* I ran Codequality on the repo files";
+            git checkout -b semid/qa/`date +%F-%H-%M`;
+            git commit -sam "♻️ Refactoring";
+            hub pull-request -p -l "automation" -m "🤖 Daily QA" -m "*bleep bloop* I've prettified and refactored some Presences, feel free to fix or remove the ones that break.";
           fi
         env:
           GITHUB_USER: SeMiD
