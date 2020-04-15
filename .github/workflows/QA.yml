@@ -53,4 +53,4 @@ jobs:
         env:
           GITHUB_USER: SeMiD
           GITHUB_EMAIL: contact@premid.app
-          GITHUB_TOKEN: ${{ secrets.GH_BOT }}
+          GITHUB_TOKEN: ${{ secrets.AUTOMERGE }}

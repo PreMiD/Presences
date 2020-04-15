@@ -24,7 +24,7 @@ jobs:
       - name: automerge
         uses: "pascalgn/automerge-action@v0.8.0"
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_BOT }}
+          GITHUB_TOKEN: "${{ secrets.AUTOMERGE }}"
           MERGE_LABELS: ""
           UPDATE_LABELS: ""
           MERGE_COMMIT_MESSAGE: "*beep boop*"
