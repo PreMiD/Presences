@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "614154889206956043",
+  clientId: "614154889206956043"
 });
 var loadTimeStamp = Math.floor(Date.now() / 1000);
 let trackTitle, trackArtist, stationName;
@@ -24,7 +24,7 @@ function getData() {
 }
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "default",
+    largeImageKey: "default"
   };
   //presenceData.smallImageKey = "play";
   presenceData.details = trackArtist + " - " + trackTitle;

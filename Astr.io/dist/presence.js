@@ -1,12 +1,12 @@
 const presence = new Presence({
-  clientId: "683626678492332069",
+  clientId: "683626678492332069"
 });
 let tag = "",
   nickname = "";
 presence.on("UpdateData", () => {
   let presenceData = {
     largeImageKey: "astriologo",
-    smallImageKey: "transparent",
+    smallImageKey: "transparent"
   };
 
   if (window.location.pathname === "/") {

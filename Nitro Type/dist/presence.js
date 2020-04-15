@@ -1,7 +1,7 @@
 var PREMID_DEBUG_LOGGING = true;
 
 var presence = new Presence({
-  clientId: "676560908578717702",
+  clientId: "676560908578717702"
 });
 
 function log() {
@@ -25,7 +25,7 @@ presence.on("UpdateData", () => {
     var presenceData = {
       largeImageKey: "nt",
       smallImageKey: loggedIn ? "user" : "guest",
-      smallImageText: username,
+      smallImageText: username
     };
     var path = location.pathname;
     try {

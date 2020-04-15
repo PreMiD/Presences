@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "653578846448123906" });
 const pages = {
   "/usercp.php": "Kullanıcı Profili",
-  "/ihbar/": "İhbar Portalı",
+  "/ihbar/": "İhbar Portalı"
 };
 
 presence.on("UpdateData", async () => {
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 
   let data = {
     largeImageKey: "tht-logo",
-    startTimestamp: Math.floor(Date.now() / 1000),
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
 
   if (kategori && kategori.textContent != "") {

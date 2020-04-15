@@ -1,5 +1,5 @@
 var uvu = new Presence({
-  clientId: "645079866710163477",
+  clientId: "645079866710163477"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 uvu.on("UpdateData", () => {
@@ -8,7 +8,7 @@ uvu.on("UpdateData", () => {
     hash = doc.hash,
     owo = path.split("/"),
     presenceData = {
-      largeImageKey: "maisbos_1_",
+      largeImageKey: "maisbos_1_"
     };
   if (path === "/") {
     if (document.querySelector(".tab-item.active").id == "homeLink") {

@@ -1,11 +1,11 @@
 let presence = new Presence({
-  clientId: "650633388784615424",
+  clientId: "650633388784615424"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
     largeImageKey: "logo",
-    startTimestamp: new Date().getTime(),
+    startTimestamp: new Date().getTime()
   };
 
   const path = document.location.pathname;

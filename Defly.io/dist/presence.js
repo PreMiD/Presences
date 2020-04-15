@@ -1,14 +1,14 @@
 var presence = new Presence({
-    clientId: "685054359200858241",
+    clientId: "685054359200858241"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "deflyicon",
+    largeImageKey: "deflyicon"
   };
   if (document.location.pathname.includes("/gamemode-rules")) {
     presenceData.startTimestamp = browsingStamp;

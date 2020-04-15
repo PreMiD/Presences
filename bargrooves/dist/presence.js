@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "641955799869947914",
+  clientId: "641955799869947914"
 });
 
 presence.on("UpdateData", () => {
@@ -11,7 +11,7 @@ presence.on("UpdateData", () => {
     details: "Bargrooves.live",
     state: "Luxury House Music",
     startTimestamp: 0,
-    endTimestamp: 0,
+    endTimestamp: 0
   };
 
   if (window.location.pathname == "/") {

@@ -21,8 +21,9 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", async () => {
-  const player =
-      document.querySelector("#audio-player_html5_api") as HTMLAudioElement,
+  const player = document.querySelector(
+      "#audio-player_html5_api"
+    ) as HTMLAudioElement,
     playing = player ? (player.paused ? false : true) : false;
 
   const data: { [k: string]: any } = {

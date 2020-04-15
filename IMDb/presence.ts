@@ -34,9 +34,9 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
       title = document.querySelectorAll("h1.title")[0].textContent,
-      authorElement =
-        document.getElementsByClassName("primary-relation-name")[0] as
-        HTMLElement,
+      authorElement = document.getElementsByClassName(
+        "primary-relation-name"
+      )[0] as HTMLElement,
       author = authorElement.innerText;
     presenceData.details = title;
     presenceData.state = author;

@@ -1,8 +1,8 @@
 var presence = new Presence({
-    clientId: "647443051819565076",
+    clientId: "647443051819565076"
   }),
   presenceData = {
-    largeImageKey: "icon",
+    largeImageKey: "icon"
   };
 
 presence.on("UpdateData", async () => {
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
     var pageData = {
       state: "Channel: " + channelstate,
       details: "Watching: " + titledetailes.innerText,
-      largeImageKey: "icon",
+      largeImageKey: "icon"
     };
     presence.setActivity(pageData);
   } else if (path.includes("offset")) {
@@ -29,13 +29,13 @@ presence.on("UpdateData", async () => {
     var movieVideo = {
       state: "Video: " + document.title,
       details: "Watching: " + statedetails.innerText,
-      largeImageKey: "icon",
+      largeImageKey: "icon"
     };
     presence.setActivity(movieVideo);
   } else {
     var homepage = {
       details: "Browsing homepage.",
-      largeImageKey: "icon",
+      largeImageKey: "icon"
     };
     presence.setActivity(homepage);
   }

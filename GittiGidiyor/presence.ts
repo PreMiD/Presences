@@ -32,9 +32,9 @@ presence.on("UpdateData", async () => {
       (document.querySelector(
         "#col-center > div > div.border-e3e3e3 > ul.table-ul.gray-content.border-top-e3e3e3 > li.row-li.product-detail-product-price-info-ab-variant > ul > li.col-li.gg-w-17.gg-d-17.gg-t-16.gg-m-16.posr > div:nth-child(2) > div > div.low-price.extra-price.all-price.robotobold.clear.pl8.pt5"
       ) as HTMLElement),
-    seller =
-      document.querySelector("#store-page-title > div.store-name > h1") as
-      HTMLElement;
+    seller = document.querySelector(
+      "#store-page-title > div.store-name > h1"
+    ) as HTMLElement;
 
   const data: { [k: string]: any } = {
     largeImageKey: "gg-logo",

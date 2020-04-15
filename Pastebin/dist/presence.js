@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "630194809763790871",
+  clientId: "630194809763790871"
 });
 
 var play, artist, track, title;
@@ -7,7 +7,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "pastebinlogo",
+    largeImageKey: "pastebinlogo"
   };
 
   let urlData = window.location.pathname.replace(/^\/([^\/]*).*$/, "$1"); // Get everything after the / in the URL, for paste ID's

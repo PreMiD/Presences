@@ -73,9 +73,7 @@ presence.on("UpdateData", async () => {
     let type: string;
 
     for (const info of (document.querySelector("div.col-sm-4.anime-info")
-      .children as
-      unknown) as
-      any[]) {
+      .children as unknown) as any[]) {
       // Not uniform info order... ugh
       if (info.children[0].textContent == "Type:")
         info.children[1].textContent == "TV"

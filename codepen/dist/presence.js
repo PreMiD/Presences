@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "670111348130185267",
+  clientId: "670111348130185267"
 });
 
 presence.on("UpdateData", () => {
@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
     details: "Codepen.io",
     state: "Coding...",
     startTimestamp: 0,
-    endTimestamp: 0,
+    endTimestamp: 0
   };
 
   if (

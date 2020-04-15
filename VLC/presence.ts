@@ -205,9 +205,9 @@ var getStatus = setLoop(function () {
           }
 
           if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
-            const collection =
-              (req.responseXML.getElementsByTagName("info") as unknown) as
-              any[];
+            const collection = (req.responseXML.getElementsByTagName(
+              "info"
+            ) as unknown) as any[];
 
             // basically the same thing but with a Firefox workaround because it's annoying
 
