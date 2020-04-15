@@ -1,13 +1,18 @@
-name: Codequality
+name: Quality Assurance
 
 on:
-  schedule:
-    - cron: 0 0 */3 * *
+  push:
+    branches:
+      - master
+    paths:
+      - "**.ts"
+      - "**.js"
+      - "**.json"
 
 jobs:
   Codequality:
     name: Codequality
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -22,10 +27,13 @@ jobs:
           key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
       - name: Install Deps
         run: yarn
-      - name: Run codequality script
-        run: yarn codequality
-      - name: Install Hub
-        run: sudo snap install hub --classic
+      - name: Compile Script
+        run: yarn qa:compile
+      - name: Start QA
+        run: |
+          git config --global core.quotePath false
+          git config --global core.precomposeunicode true
+          yarn qa
       - name: Commit any changes
         run: |
           git add .;
@@ -39,10 +47,10 @@ jobs:
             git config --local user.email "${GITHUB_EMAIL}";
             git config --local user.name "${GITHUB_USER}";
             git checkout -b premid-bot/codequality/`date +%F-%H-%M`;
-            git commit -sam "refactor: run code quality";
-            hub pull-request -p -m "refactor: run code quality on the repo files" -m "*bleep bloop* I ran Codequality on the repo files";
+            git commit -sam "refactor: run quality assurance";
+            hub pull-request -p -m "refactor: run quality assurance on the repo files" -m "*bleep bloop* I ran Codequality on the repo files";
           fi
         env:
-          GITHUB_USER: premid-bot
+          GITHUB_USER: SeMiD
           GITHUB_EMAIL: contact@premid.app
           GITHUB_TOKEN: ${{ secrets.GH_BOT }}

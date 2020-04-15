@@ -1,5 +1,5 @@
 import { blueBright, gray, green, red, yellow } from "chalk";
-import execa from "execa";
+import execa = require("execa");
 import { readdirSync, readFileSync, writeFileSync } from "fs";
 import { sync as glob } from "glob";
 import { join, normalize, relative, resolve, sep } from "path";
@@ -26,7 +26,7 @@ const readFile = (path: string) => readFileSync(path, { encoding: "utf8" });
  * @param data Data to write
  * @param path Path to write the data to
  */
-const writeFile = <T>(data: T, path: string) =>
+const writeFile = <T>(path: string, data: T) =>
   writeFileSync(path, data, { encoding: "utf8" });
 
 /**

@@ -3,6 +3,10 @@ node_modules
 package-lock.json
 .env
 
+# Utilities
+presenceUpdater.js
+qualityAssurance.js
+
 # MacOS-generated files
 .DS_Store
 
