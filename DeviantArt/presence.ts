@@ -30,11 +30,9 @@ function resetData(): void {
   currentURL = new URL(document.location.href);
   currentPath = currentURL.pathname.slice(1).split("/");
   presenceData = {
-    details: "Viewing an unsupported page" as string,
-    state: undefined as string,
-    largeImageKey: "lg" as string,
-    startTimestamp: browsingStamp as number,
-    endTimestamp: undefined as number
+    details: "Viewing an unsupported page",
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
   };
 }
 
@@ -47,8 +45,14 @@ var logHandler = {
    * @param isCritical If the URL is essential to the operation, this should be true, so it will output an error, not a warning.
    */
   pageNotSupported(isCritical = false): void {
-    if (isCritical) console.error("Whoops. It seems that this page is not supported. \nPlease contact @Hans5958#0969 to request a support for this page.");
-    else console.warn("It seems that this page is not fully supported. \nPlease contact @Hans5958#0969 to request a support for this page.");
+    if (isCritical)
+      console.error(
+        "Whoops. It seems that this page is not supported. \nPlease contact @Hans5958#0969 to request a support for this page."
+      );
+    else
+      console.warn(
+        "It seems that this page is not fully supported. \nPlease contact @Hans5958#0969 to request a support for this page."
+      );
     console.log(currentURL.href);
   },
   /**
@@ -57,7 +61,9 @@ var logHandler = {
    */
   fatalError(error: string): void {
     console.groupEnd();
-    console.error("Fatal error! Terminating.\nPlease report this problem to @Hans5958#0969.");
+    console.error(
+      "Fatal error! Terminating.\nPlease report this problem to @Hans5958#0969."
+    );
     console.groupCollapsed("Error log");
     console.log(currentURL.href);
     console.error(error);
@@ -106,7 +112,8 @@ function getURLParam(urlParam: string): string {
       websiteTheme: string;
 
     // This one decides if the current theme is the old one or the new one, also known as Eclipse.
-    if (document.querySelector("table#overhead") === null) websiteTheme = "eclipse";
+    if (document.querySelector("table#overhead") === null)
+      websiteTheme = "eclipse";
     else websiteTheme = "old";
 
     // This one decides if the current page belongs to an user or a group
@@ -121,20 +128,43 @@ function getURLParam(urlParam: string): string {
       try {
         if (websiteTheme === "eclipse" && !override) {
           try {
-            return document.querySelector("#content-container > div > div > div > div > div > a.user-link").textContent;
+            return document.querySelector(
+              "#content-container > div > div > div > div > div > a.user-link"
+            ).textContent;
           } catch {
-            return document.querySelector("#root > main > div > div > div > div > div > div > div > div > span > a.user-link").textContent;
+            return document.querySelector(
+              "#root > main > div > div > div > div > div > div > div > div > span > a.user-link"
+            ).textContent;
           }
         } else {
           try {
-            return lastItem(document.querySelectorAll("h1 .author .u .u")).textContent;
+            return lastItem(document.querySelectorAll("h1 .author .u .u"))
+              .textContent;
           } catch {
             return document.querySelector("h1 .u .u").textContent;
           }
         }
       } catch {
-        if (currentPath[0].toLowerCase() === document.querySelector("title").textContent.split(" ")[0].toLowerCase()) return document.querySelector("title").textContent.split(" ")[0];
-        else if (currentPath[0].toLowerCase() === document.querySelector("title").textContent.split(" by ")[1].split(" ")[0].toLowerCase()) return (presenceData.state = document.querySelector("title").textContent.split(" by ")[1].split(" ")[0]);
+        if (
+          currentPath[0].toLowerCase() ===
+          document
+            .querySelector("title")
+            .textContent.split(" ")[0]
+            .toLowerCase()
+        )
+          return document.querySelector("title").textContent.split(" ")[0];
+        else if (
+          currentPath[0].toLowerCase() ===
+          document
+            .querySelector("title")
+            .textContent.split(" by ")[1]
+            .split(" ")[0]
+            .toLowerCase()
+        )
+          return (presenceData.state = document
+            .querySelector("title")
+            .textContent.split(" by ")[1]
+            .split(" ")[0]);
       }
     };
 
@@ -150,7 +180,42 @@ function getURLParam(urlParam: string): string {
           // This needs to be on the top since the 404 errors has no fixed URL.
           if (currentPath[0] === "") {
             presenceData.details = "Viewing the home page";
-          } else if (document.querySelector(".error-400") || document.querySelector(".error-401") || document.querySelector(".error-403") || document.querySelector(".error-404") || document.querySelector(".error-405") || document.querySelector(".error-500") || document.querySelector(".error-503") || document.querySelector(".error-banned") || document.querySelector(".error-beta") || document.querySelector(".error-blocked") || document.querySelector(".error-blockedbyuser") || document.querySelector(".error-contentblockedbyuser") || document.querySelector(".error-deactivated") || document.querySelector(".error-noreferrer") || document.querySelector(".error-pageflooder") || document.querySelector(".error-suspended") || document.querySelector(".error-threadflooder") || document.querySelector("#error-400") || document.querySelector("#error-401") || document.querySelector("#error-403") || document.querySelector("#error-404") || document.querySelector("#error-405") || document.querySelector("#error-500") || document.querySelector("#error-503") || document.querySelector("#error-banned") || document.querySelector("#error-beta") || document.querySelector("#error-blocked") || document.querySelector("#error-blockedbyuser") || document.querySelector("#error-contentblockedbyuser") || document.querySelector("#error-deactivated") || document.querySelector("#error-noreferrer") || document.querySelector("#error-pageflooder") || document.querySelector("#error-suspended") || document.querySelector("#error-threadflooder")) {
+          } else if (
+            document.querySelector(".error-400") ||
+            document.querySelector(".error-401") ||
+            document.querySelector(".error-403") ||
+            document.querySelector(".error-404") ||
+            document.querySelector(".error-405") ||
+            document.querySelector(".error-500") ||
+            document.querySelector(".error-503") ||
+            document.querySelector(".error-banned") ||
+            document.querySelector(".error-beta") ||
+            document.querySelector(".error-blocked") ||
+            document.querySelector(".error-blockedbyuser") ||
+            document.querySelector(".error-contentblockedbyuser") ||
+            document.querySelector(".error-deactivated") ||
+            document.querySelector(".error-noreferrer") ||
+            document.querySelector(".error-pageflooder") ||
+            document.querySelector(".error-suspended") ||
+            document.querySelector(".error-threadflooder") ||
+            document.querySelector("#error-400") ||
+            document.querySelector("#error-401") ||
+            document.querySelector("#error-403") ||
+            document.querySelector("#error-404") ||
+            document.querySelector("#error-405") ||
+            document.querySelector("#error-500") ||
+            document.querySelector("#error-503") ||
+            document.querySelector("#error-banned") ||
+            document.querySelector("#error-beta") ||
+            document.querySelector("#error-blocked") ||
+            document.querySelector("#error-blockedbyuser") ||
+            document.querySelector("#error-contentblockedbyuser") ||
+            document.querySelector("#error-deactivated") ||
+            document.querySelector("#error-noreferrer") ||
+            document.querySelector("#error-pageflooder") ||
+            document.querySelector("#error-suspended") ||
+            document.querySelector("#error-threadflooder")
+          ) {
             presenceData.details = "On a non-existent page";
 
             // The functions below is only valid on the Eclipse theme.
@@ -168,11 +233,23 @@ function getURLParam(urlParam: string): string {
               .join(" ");
           } else if (currentPath[0] === "daily-deviations") {
             presenceData.details = "Viewing daily deviations";
-            if (websiteTheme === "eclipse") presenceData.state = document.querySelector("#daily-deviation-picker").value;
-            else presenceData.state = document.querySelector(".dailyDevCurDate").textContent.split(", ").slice(1).join(", ");
+            if (websiteTheme === "eclipse")
+              presenceData.state = document.querySelector(
+                "#daily-deviation-picker"
+              ).value;
+            else
+              presenceData.state = document
+                .querySelector(".dailyDevCurDate")
+                .textContent.split(", ")
+                .slice(1)
+                .join(", ");
           } else if (currentPath[0] === "journals") {
             presenceData.details = "Viewing daily deviations";
-            if (currentPath[1]) presenceData.state = currentPath[1].replace(currentPath[1], currentPath[1].toUpperCase());
+            if (currentPath[1])
+              presenceData.state = currentPath[1].replace(
+                currentPath[1],
+                currentPath[1].toUpperCase()
+              );
             else presenceData.state = "All";
           } else if (currentPath[0] === "status-updates") {
             presenceData.details = "Viewing status updates";
@@ -189,8 +266,10 @@ function getURLParam(urlParam: string): string {
             presenceData.details = "Searching something";
             presenceData.state = getURLParam("q");
           } else if (currentPath[0] === "notifications") {
-            if (currentPath[1] === "notes") presenceData.details = "Reading notes";
-            if (currentPath[1] === "watch") presenceData.details = "Viewing the watch list";
+            if (currentPath[1] === "notes")
+              presenceData.details = "Reading notes";
+            if (currentPath[1] === "watch")
+              presenceData.details = "Viewing the watch list";
             else presenceData.details = "Reading notifications";
             // Detailed infos, such as what section does the user sees, might be implemented but disabled by default.
           } else if (currentPath[0] === "settings") {
@@ -214,18 +293,42 @@ function getURLParam(urlParam: string): string {
             presenceData.details = "Making a group";
 
             // The function below is only valid on the old theme.
-          } else if (websiteTheme === "old" && document.querySelector(".newbrowse") && !Object.keys({ presenceDataPlaced }).length) {
+          } else if (
+            websiteTheme === "old" &&
+            document.querySelector(".newbrowse") &&
+            !Object.keys({ presenceDataPlaced }).length
+          ) {
             if (getURLParam("q")) {
               presenceData.details = "Searching something";
               presenceData.state = getURLParam("q");
             } else {
               presenceData.details = "Viewing deviations";
-              const li = document.querySelectorAll(".browse-facet-category ul li");
-              if (currentPath[3]) presenceData.state = `${li[1].textContent} > ${li[2].textContent} > ${document.querySelector(".search-stats").textContent.trim().slice(7)} > `;
-              else if (currentPath[2]) presenceData.state = `${li[1].textContent} > ${document.querySelector(".search-stats").textContent.trim().slice(7)} > `;
-              else if (currentPath[1]) presenceData.state = `${document.querySelector(".search-stats").textContent.trim().slice(7)} > `;
+              const li = document.querySelectorAll(
+                ".browse-facet-category ul li"
+              );
+              if (currentPath[3])
+                presenceData.state = `${li[1].textContent} > ${
+                  li[2].textContent
+                } > ${document
+                  .querySelector(".search-stats")
+                  .textContent.trim()
+                  .slice(7)} > `;
+              else if (currentPath[2])
+                presenceData.state = `${
+                  li[1].textContent
+                } > ${document
+                  .querySelector(".search-stats")
+                  .textContent.trim()
+                  .slice(7)} > `;
+              else if (currentPath[1])
+                presenceData.state = `${document
+                  .querySelector(".search-stats")
+                  .textContent.trim()
+                  .slice(7)} > `;
               else if (currentPath[0]) presenceData.state = "";
-              presenceData.state += document.querySelector(".browse-facet-order ul li .selected").textContent;
+              presenceData.state += document.querySelector(
+                ".browse-facet-order ul li .selected"
+              ).textContent;
             }
           } else if (currentPath[0] === "watch") {
             presenceData.details = "Viewing the watch list";
@@ -239,31 +342,67 @@ function getURLParam(urlParam: string): string {
 
             // The functions below are vaild for users only.
           } else if (currentPath[1] === "art") {
-            presenceData.details = document.querySelector("title").textContent.split(" by ").slice(0, -1).join(" - ");
-            presenceData.state = document.querySelector("title").textContent.split(" by ").pop().split(" ")[0];
+            presenceData.details = document
+              .querySelector("title")
+              .textContent.split(" by ")
+              .slice(0, -1)
+              .join(" - ");
+            presenceData.state = document
+              .querySelector("title")
+              .textContent.split(" by ")
+              .pop()
+              .split(" ")[0];
             // I actually wanted to get it using the visible elements, but well, it's complicated.
-            if (presenceData.details === presenceDataPlaced.details && presenceData.state === presenceDataPlaced.state) throw new Error("Current status is the same as the previous.");
-            if (presenceData.details === "") throw new Error("No art title detected and user is from the homepage.");
+            if (
+              presenceData.details === presenceDataPlaced.details &&
+              presenceData.state === presenceDataPlaced.state
+            )
+              throw new Error("Current status is the same as the previous.");
+            if (presenceData.details === "")
+              throw new Error(
+                "No art title detected and user is from the homepage."
+              );
 
             // The function below are valid for users and groups.
-          } else if (currentPath[1] === "gallery" || currentPath[1] === "favourites") {
-            if (currentPath[1] === "gallery") presenceData.details = `Viewing a ${profileType}'s gallery`;
+          } else if (
+            currentPath[1] === "gallery" ||
+            currentPath[1] === "favourites"
+          ) {
+            if (currentPath[1] === "gallery")
+              presenceData.details = `Viewing a ${profileType}'s gallery`;
             else presenceData.details = `Viewing a ${profileType}'s favourites`;
             if (websiteTheme === "eclipse" && profileType === "user") {
-              presenceData.state = `${document.querySelector("h2.uUWfu").textContent} by ${getName()}`;
+              presenceData.state = `${
+                document.querySelector("h2.uUWfu").textContent
+              } by ${getName()}`;
             } else {
               if (profileType === "group" && !currentPath[2]) {
                 presenceData.state = getName(true);
               } else {
-                if (!document.querySelector(".gallery .active")) presenceData.state = `${document.querySelector(".folder-title").textContent} by ${getName(true)}`;
-                else if (document.querySelector(".gallery .active").textContent.slice(1) === "Featured") presenceData.state = `Featured by ${getName(true)}`;
-                else if (document.querySelector(".gallery .active").textContent.slice(1) === "All") presenceData.state = `All by ${getName(true)}`;
+                if (!document.querySelector(".gallery .active"))
+                  presenceData.state = `${
+                    document.querySelector(".folder-title").textContent
+                  } by ${getName(true)}`;
+                else if (
+                  document
+                    .querySelector(".gallery .active")
+                    .textContent.slice(1) === "Featured"
+                )
+                  presenceData.state = `Featured by ${getName(true)}`;
+                else if (
+                  document
+                    .querySelector(".gallery .active")
+                    .textContent.slice(1) === "All"
+                )
+                  presenceData.state = `All by ${getName(true)}`;
               }
             }
 
             // The functions below are vaild for users only.
           } else if (currentPath[1] === "print") {
-            presenceData.details = document.querySelector("h1 .title").textContent;
+            presenceData.details = document.querySelector(
+              "h1 .title"
+            ).textContent;
             presenceData.state = getName(true);
           } else if (currentPath[1] === "prints") {
             presenceData.details = `Viewing a user's prints`;
@@ -276,16 +415,28 @@ function getURLParam(urlParam: string): string {
               "Status Updates": "Viewing a user's statuses",
               Polls: "Viewing a user's polls"
             };
-            presenceData.details = details[document.querySelector("._3xmU1 div a").textContent];
+            presenceData.details =
+              details[document.querySelector("._3xmU1 div a").textContent];
             presenceData.state = getName();
           } else if (currentPath[1] === "journal") {
             if (currentPath[2]) {
               if (websiteTheme === "eclipse") {
-                presenceData.details = document.querySelector("._2-k1X").textContent;
+                presenceData.details = document.querySelector(
+                  "._2-k1X"
+                ).textContent;
               } else {
                 // This part is only valid on the old theme.
-                if (currentPath[2] === "poll") document.querySelector("h2").textContent.substr(1, document.querySelector("h2").textContent.length - 2);
-                else presenceData.details = document.querySelector("h1 .title").textContent;
+                if (currentPath[2] === "poll")
+                  document
+                    .querySelector("h2")
+                    .textContent.substr(
+                      1,
+                      document.querySelector("h2").textContent.length - 2
+                    );
+                else
+                  presenceData.details = document.querySelector(
+                    "h1 .title"
+                  ).textContent;
               }
               presenceData.state = `${getName()} (journal)`;
             } else {
@@ -296,18 +447,31 @@ function getURLParam(urlParam: string): string {
           } else if (currentPath[1] === "poll") {
             if (websiteTheme === "eclipse") {
               try {
-                presenceData.details = document.querySelector("._1ddsf").textContent;
+                presenceData.details = document.querySelector(
+                  "._1ddsf"
+                ).textContent;
               } catch {
-                presenceData.details = document.querySelector(".gfMBk").textContent;
+                presenceData.details = document.querySelector(
+                  ".gfMBk"
+                ).textContent;
               }
             } else {
-              presenceData.details = document.querySelector("h2").textContent.substr(1, document.querySelector("h2").textContent.length - 2);
+              presenceData.details = document
+                .querySelector("h2")
+                .textContent.substr(
+                  1,
+                  document.querySelector("h2").textContent.length - 2
+                );
             }
             presenceData.state = getName();
           } else if (currentPath[1] === "critique") {
             if (currentPath[2]) {
               presenceData.details = "Viewing a critique";
-              presenceData.state = `from ${getName()}, ${document.querySelector("h2").textContent.trim()} ${document.querySelector("h4").textContent.trim()}`;
+              presenceData.state = `from ${getName()}, ${document
+                .querySelector("h2")
+                .textContent.trim()} ${document
+                .querySelector("h4")
+                .textContent.trim()}`;
             } else {
               presenceData.details = "Viewing a user's critiques";
               presenceData.state = getName();
@@ -322,7 +486,9 @@ function getURLParam(urlParam: string): string {
             // This part is only valid on the old theme. (not quite sure)
             if (currentPath[2]) {
               presenceData.details = "Viewing a badge";
-              presenceData.state = `${document.querySelector("h3").textContent} from ${getName()}`;
+              presenceData.state = `${
+                document.querySelector("h3").textContent
+              } from ${getName()}`;
             } else {
               presenceData.details = `Viewing a ${profileType}'s badges`;
               presenceData.state = getName(true);
@@ -380,7 +546,8 @@ function getURLParam(urlParam: string): string {
         presenceData.state = "About";
         break;
       case "policy":
-        if (currentPath[1] === "etiquette") presenceData.state = "Etiquette Policy";
+        if (currentPath[1] === "etiquette")
+          presenceData.state = "Etiquette Policy";
         break;
       default:
         logHandler.pageNotSupported(false);
@@ -462,9 +629,12 @@ function getURLParam(urlParam: string): string {
       presenceData.state = getURLParam("q");
     } else {
       presenceData.details = "Viewing deviations on the shop";
-      const li = document.querySelectorAll(".browse-facet-product ul li .selected");
+      const li = document.querySelectorAll(
+        ".browse-facet-product ul li .selected"
+      );
       li.forEach((v) => {
-        if (presenceData.state === undefined) presenceData.state = v.textContent;
+        if (presenceData.state === undefined)
+          presenceData.state = v.textContent;
         else presenceData.state += ` > ${v.textContent}`;
       });
     }
@@ -519,8 +689,18 @@ function getURLParam(urlParam: string): string {
               presenceData.state = "DeviantArt muro";
               break;
             default:
-              presenceData.details = document.querySelector("title").textContent.split(" - ").slice(0, -1).join(" - ");
-              presenceData.state = `${document.querySelector("title").textContent.split(" - ").pop().split("'s")[0]} (sta.sh)`;
+              presenceData.details = document
+                .querySelector("title")
+                .textContent.split(" - ")
+                .slice(0, -1)
+                .join(" - ");
+              presenceData.state = `${
+                document
+                  .querySelector("title")
+                  .textContent.split(" - ")
+                  .pop()
+                  .split("'s")[0]
+              } (sta.sh)`;
               if (presenceData.details === "") {
                 throw new Error("No title found on Sta.sh");
               }
