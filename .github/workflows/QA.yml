@@ -1,4 +1,4 @@
-name: Quality Assurance
+name: QA
 
 on:
   push:
@@ -10,8 +10,8 @@ on:
       - "**.json"
 
 jobs:
-  Codequality:
-    name: Codequality
+  qa:
+    name: Quality Assurance
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout Project
