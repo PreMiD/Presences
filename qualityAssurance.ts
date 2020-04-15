@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { blueBright, gray, green, red, yellow } from "chalk";
 import execa = require("execa");
 import { readdirSync, readFileSync, writeFileSync } from "fs";
@@ -48,19 +49,19 @@ const writeJson = <T>(data: T, jsonPath: string) =>
  * @see https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API#a-minimal-compiler
  */
 const compileFile = (fileNames: string[], options: CompilerOptions): void => {
-  let program = createProgram(fileNames, options);
-  let emitResult = program.emit();
+  const program = createProgram(fileNames, options);
+  const emitResult = program.emit();
 
-  let allDiagnostics = getPreEmitDiagnostics(program).concat(
+  const allDiagnostics = getPreEmitDiagnostics(program).concat(
     emitResult.diagnostics
   );
 
   allDiagnostics.forEach((diagnostic) => {
     if (diagnostic.file) {
-      let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+      const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
         diagnostic.start!
       );
-      let message = flattenDiagnosticMessageText(diagnostic.messageText, "\n");
+      const message = flattenDiagnosticMessageText(diagnostic.messageText, "\n");
       console.log(
         `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`
       );
