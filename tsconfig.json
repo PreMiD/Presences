@@ -9,6 +9,5 @@
     "inlineSourceMap": true,
     "typeRoots": ["@types"],
     "esModuleInterop": true
-  },
-  "exclude": ["node_modules", "**/dist/*.js"]
+  }
 }

@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import { blueBright, gray, green, red, yellow } from "chalk";
-import execa from "execa";
+import execa = require("execa");
 import { readdirSync, readFileSync, writeFileSync } from "fs";
 import { sync as glob } from "glob";
 import { join, normalize, relative, resolve, sep } from "path";
@@ -26,7 +29,7 @@ const readFile = (path: string) => readFileSync(path, { encoding: "utf8" });
  * @param data Data to write
  * @param path Path to write the data to
  */
-const writeFile = <T>(data: T, path: string) =>
+const writeFile = <T>(path: string, data: T) =>
   writeFileSync(path, data, { encoding: "utf8" });
 
 /**
@@ -48,19 +51,22 @@ const writeJson = <T>(data: T, jsonPath: string) =>
  * @see https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API#a-minimal-compiler
  */
 const compileFile = (fileNames: string[], options: CompilerOptions): void => {
-  let program = createProgram(fileNames, options);
-  let emitResult = program.emit();
+  const program = createProgram(fileNames, options);
+  const emitResult = program.emit();
 
-  let allDiagnostics = getPreEmitDiagnostics(program).concat(
+  const allDiagnostics = getPreEmitDiagnostics(program).concat(
     emitResult.diagnostics
   );
 
   allDiagnostics.forEach((diagnostic) => {
     if (diagnostic.file) {
-      let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+      const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
         diagnostic.start!
       );
-      let message = flattenDiagnosticMessageText(diagnostic.messageText, "\n");
+      const message = flattenDiagnosticMessageText(
+        diagnostic.messageText,
+        "\n"
+      );
       console.log(
         `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`
       );
