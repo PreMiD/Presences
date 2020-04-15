@@ -5,7 +5,8 @@
   },
   "service": "RemDB",
   "description": {
-    "en": "RemDB is a Player- and Clan database from a private server (S4 Remnants) of the game S4 League."
+    "en": "RemDB is a Player- and Clandatabase from a private server (S4 Remnants) of the game S4 League.",
+    "de": "RemDB ist eine Spieler- und Clandatenbank für einen privaten Server (S4 Remnants) vom Spiel S4 League."
   },
   "url": ["remdb.net"],
   "version": "1.0.0",
