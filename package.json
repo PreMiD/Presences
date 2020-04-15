@@ -20,7 +20,7 @@
     "execa": "^4.0.0",
     "glob": "^7.1.6",
     "mongodb": "^3.5.5",
-    "prettier": "^2.0.3",
+    "prettier": "^2.0.4",
     "semver": "^7.3.2",
     "source-map-support": "^0.5.16",
     "typescript": "^3.8.3"
