@@ -2,18 +2,17 @@ var presence = new Presence({
   clientId: "654906151523057664"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000),
-  href = new URL(document.location.href),
-  presenceData = {
-    details: "In construction" as string,
-    state: null as string,
-    largeImageKey: "lg" as string,
-    startTimestamp: browsingStamp as number,
-    endTimestamp: null as number
+var currentURL = new URL(document.location.href),
+  currentPath = currentURL.pathname.slice(1).split("/"),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  presenceData: presenceData = {
+    details: "Viewing an unsupported page",
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
   },
   updateCallback = {
-    _function: null,
-    get function(): any {
+    _function: null as Function,
+    get function(): Function {
       return this._function;
     },
     set function(parameter) {
@@ -25,129 +24,144 @@ var browsingStamp = Math.floor(Date.now() / 1000),
   };
 
 /**
- * Initialize presenceData
+ * Initialize/reset presenceData.
  */
 function resetData(): void {
+  currentURL = new URL(document.location.href);
+  currentPath = currentURL.pathname.slice(1).split("/");
   presenceData = {
-    details: "In construction" as string,
-    state: null as string,
-    largeImageKey: "lg" as string,
-    startTimestamp: browsingStamp as number,
-    endTimestamp: null as number
+    details: "Viewing an unsupported page",
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
   };
 }
 
-/**
- * Cleans presenceData
- */
-function cleanData(): void {
-  if (presenceData.state === null) delete presenceData.state;
-  if (presenceData.endTimestamp === null) delete presenceData.endTimestamp;
-}
-
 ((): void => {
-  if (document.querySelector("section.game")) {
-    updateCallback.function = (): void => {
-      presenceData.details = document.querySelector(
-        ".game-info__section--map .game-info__value"
-      ).textContent;
-      if (
-        document.querySelector(".score__round") ||
-        document.querySelector(".score__final")
-      ) {
-        presenceData.state =
-          Number(
-            document
-              .querySelector(".game-info__section--round .game-info__value")
-              .textContent.split(" / ")[0]
-          ) +
-          1 +
-          " of 5, " +
-          document.querySelector(".game-info__section--score .game-info__value")
-            .textContent +
-          " points";
-        if (
-          document
-            .querySelector(".game-info__section--round .game-info__value")
-            .textContent.split(" / ")[0] === "5"
-        ) {
+  let loadedPath = [],
+    presenceDataPlaced: presenceData = {};
+
+  updateCallback.function = (): void => {
+    if (loadedPath !== currentPath) {
+      loadedPath = currentPath;
+
+      if (currentPath[0] === "") {
+        presenceData.details = "Viewing the home page";
+      } else if (currentPath[0] === "game") {
+        presenceData.details = document.querySelector(
+          ".game-status[data-qa=map-name] .game-status__body"
+        ).textContent;
+        if (document.querySelector(".result")) {
           presenceData.state =
-            "Finished, " +
+            Number(
+              document
+                .querySelector(
+                  ".game-status[data-qa=round-number] .game-status__body"
+                )
+                .textContent.split(" / ")[0]
+            ) +
+            1 +
+            " of 5, " +
             document.querySelector(
-              ".game-info__section--score .game-info__value"
+              ".game-status[data-qa=score] .game-status__body"
+            ).textContent +
+            " points";
+          if (
+            document
+              .querySelector(
+                ".game-status[data-qa=round-number] .game-status__body"
+              )
+              .textContent.split(" / ")[0] === "5"
+          ) {
+            presenceData.state =
+              "Finished, " +
+              document.querySelector(
+                ".game-status[data-qa=score] .game-status__body"
+              ).textContent +
+              " points";
+          }
+        } else {
+          presenceData.state =
+            document
+              .querySelector(
+                ".game-status[data-qa=round-number] .game-status__body"
+              )
+              .textContent.split(" / ")[0] +
+            " of 5, " +
+            document.querySelector(
+              ".game-status[data-qa=score] .game-status__body"
             ).textContent +
             " points";
         }
-      } else {
-        presenceData.state =
-          document
-            .querySelector(".game-info__section--round .game-info__value")
-            .textContent.split(" / ")[0] +
-          " of 5, " +
-          document.querySelector(".game-info__section--score .game-info__value")
-            .textContent +
-          " points";
+      } else if (currentPath[0] === "maps" && !currentPath[1]) {
+        presenceData.details = "Looking for a map";
+      } else if (currentPath[0] === "maps") {
+        if (document.querySelector(".map-block__title")) {
+          presenceData.details = "Viewing a map";
+          presenceData.state = document.querySelector(
+            ".map-block__title"
+          ).textContent;
+        } else {
+          presenceData.details = "Looking for a map";
+        }
+      } else if (currentPath[0] === "user") {
+        presenceData.details = "Viewing a user profile";
+        presenceData.state = document.querySelector(
+          ".profile-summary__nick"
+        ).textContent;
+      } else if (currentPath[0] === "daily-challenges") {
+        presenceData.details = "Viewing a page";
+        presenceData.state = "Daily Challenges";
+      } else if (currentPath[0] === "pro") {
+        presenceData.details = "Viewing a page";
+        presenceData.state = "PRO Membership";
+      } else if (currentPath[0] === "static") {
+        const pageNames = {
+          "faq.html": "FAQ",
+          "terms.html": "Terms of Service",
+          "privacy.html": "Privacy Policy"
+        };
+        presenceData.details = "Viewing a page";
+        presenceData.state = pageNames[currentURL.pathname.split("/")[2]];
+      } else if (currentPath[0] === "me") {
+        if (currentPath[2] === undefined) {
+          presenceData.details = "Viewing their own profile";
+        } else {
+          const pageNames = {
+            settings: "Settings",
+            leagues: "Leagues",
+            activities: "Activities",
+            current: "Ongoing games",
+            likes: "Favorite maps",
+            badges: "Badges",
+            maps: "My maps",
+            "map-maker": "Map Maker"
+          };
+          presenceData.details = "Viewing a personal page";
+          presenceData.state = pageNames[currentURL.pathname.split("/")[2]];
+        }
+      } else if (currentPath[0] === "signin") {
+        presenceData.details = "Signing in";
+      } else if (currentPath[0] === "signup") {
+        presenceData.details = "Registering an account";
+      } else if (currentPath[0] === "free") {
+        presenceData.details = "Viewing a page";
+        presenceData.state = "GeoGuessr Free";
       }
-    };
-  } else if (href.pathname === "/") {
-    presenceData.details = "Viewing the home page";
-  } else if (href.pathname === "/maps" || href.pathname === "/maps/") {
-    presenceData.details = "Looking for a map";
-  } else if (href.pathname.startsWith("/maps")) {
-    if (document.querySelector(".map__title")) {
-      presenceData.details = "Viewing a map";
-      presenceData.state = document.querySelector(".map__title").textContent;
+
+      presenceDataPlaced = presenceData;
     } else {
-      presenceData.details = "Looking for a map";
+      presenceData = presenceDataPlaced;
     }
-  } else if (href.pathname.startsWith("/user/")) {
-    presenceData.details = "Viewing a user profile";
-    presenceData.state = document.querySelector(
-      ".profile-summary__nick"
-    ).textContent;
-  } else if (href.pathname.startsWith("/daily-challenges")) {
-    presenceData.details = "Viewing a page";
-    presenceData.state = "Daily Challenges";
-  } else if (href.pathname.startsWith("/pro")) {
-    presenceData.details = "Viewing a page";
-    presenceData.state = "PRO Membership";
-  } else if (href.pathname.startsWith("/static")) {
-    const pageNames = {
-      "faq.html": "FAQ",
-      "terms.html": "Terms of Service",
-      "privacy.html": "Privacy Policy"
-    };
-    presenceData.details = "Viewing a page";
-    presenceData.state = pageNames[href.pathname.split("/")[2]];
-  } else if (href.pathname.startsWith("/me")) {
-    if (href.pathname.split("/")[2] === undefined) {
-      presenceData.details = "Viewing their own profile";
-    } else {
-      const pageNames = {
-        settings: "Settings",
-        leagues: "Leagues",
-        activities: "Activities",
-        current: "Ongoing games",
-        likes: "Favorite maps",
-        badges: "Badges",
-        maps: "My maps",
-        "map-maker": "Map Maker"
-      };
-      presenceData.details = "Viewing a personal page";
-      presenceData.state = pageNames[href.pathname.split("/")[2]];
-    }
-  }
+  };
 })();
 
 if (updateCallback.present) {
   presence.on("UpdateData", async () => {
     resetData();
     updateCallback.function();
-    cleanData();
     presence.setActivity(presenceData);
   });
 } else {
-  cleanData();
   presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   });
