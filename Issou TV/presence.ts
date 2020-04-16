@@ -37,14 +37,14 @@ function parseQueryString(
 
 
 presence.on("UpdateData", async () => {
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
         largeImageKey: "logo"
-    }
+    };
 
-    let pageTitle = document.querySelector("title").textContent.split(" | ");
-    let browsingStamp = Math.floor(Date.now() / 1000);
-    let route = document.location.pathname.split("/");
-    let query = await parseQueryString(document.location.hash).search;
+    const pageTitle = document.querySelector("title").textContent.split(" | ");
+    const browsingStamp = Math.floor(Date.now() / 1000);
+    const route = document.location.pathname.split("/");
+    const query = await parseQueryString(document.location.hash).search;
 
     if(document.location.pathname == "/") {
         presenceData.details = (await strings).browsing;
@@ -52,19 +52,19 @@ presence.on("UpdateData", async () => {
     } else if(document.location.pathname.includes("/videos/")) {
         if(document.location.pathname.includes("/category/")) {
             presenceData.details = query ? (await strings).searching : (await strings).browsing;
-            let routes = ["humour", "malaise", "game", "musique", "insolite", "18", "18-gore", "18-insolite", "18-vr"];
-            routes.map(r => {
+            const routes = ["humour", "malaise", "game", "musique", "insolite", "18", "18-gore", "18-insolite", "18-vr"];
+            routes.forEach(r => {
                 if(route[3] === `${r}`) {
                     presenceData.state = `${pageTitle[0]} - page ${route[4] ? route[5] : 1}`;
                 }
-            })
+            });
             presenceData.startTimestamp = browsingStamp;
         } else {
-            let video: HTMLVideoElement = document.querySelector(".mejs-mediaelement > mediaelementwrapper > video");
+            const video: HTMLVideoElement = document.querySelector(".mejs-mediaelement > mediaelementwrapper > video");
             presenceData.details = pageTitle[0];
             presenceData.smallImageKey = video.paused ? "pause" : "play";
             presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
-            let timestamps = getTimestamps(
+            const timestamps = getTimestamps(
                 Math.floor(video.currentTime),
                 Math.floor(video.duration)
             );
