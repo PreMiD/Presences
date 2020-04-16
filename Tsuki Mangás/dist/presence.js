@@ -37,7 +37,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "reading";
     presenceData.details = manga + " - " + chapter;
-    presenceData.state = "Página " + page;
+	page == "true" ? page = "Páginas abertas" : page = "Página " + page;
+    presenceData.state = page;
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();
