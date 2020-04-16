@@ -11,8 +11,8 @@ let locales = {
       edit: "Редактирует мангу",
       add: "Добавляет главу",
       bulk: "Добавляет главы",
-      create: "Добавляет мангу",
-    },
+      create: "Добавляет мангу"
+    }
   },
   search: {
     title: "Ищет",
@@ -23,12 +23,12 @@ let locales = {
       "4": "OEL-мангу",
       "8": "Румангу",
       "9": "Западный комикс",
-      all: "Мангу",
-    },
+      all: "Мангу"
+    }
   },
   friends: {
     default: "Друзья",
-    mutual: "Общие друзья",
+    mutual: "Общие друзья"
   },
   forum: "Читает форум",
   user: {
@@ -36,17 +36,17 @@ let locales = {
     comment: "Комментарии",
     friends: {
       default: "Друзья",
-      mutual: "Общие друзья",
-    },
+      mutual: "Общие друзья"
+    }
   },
   bookmark: "Проверяет закладки",
-  messages: "Проверяет сообщения",
+  messages: "Проверяет сообщения"
 };
 
 let presenceData = {
   largeImageKey: "mangalib_large",
   startTimestamp: startDate,
-  smallImageKey: "reading",
+  smallImageKey: "reading"
 };
 
 presence.on("UpdateData", async () => {

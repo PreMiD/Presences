@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "635876670146084880",
+  clientId: "635876670146084880"
 });
 
 presence.on("UpdateData", async () => {
   let presenceData = {
-    largeImageKey: "coin",
+    largeImageKey: "coin"
   };
 
   const q = new URLSearchParams(window.location.search);

@@ -10,7 +10,10 @@ presence.on("UpdateData", () => {
   };
   presenceData.startTimestamp = browsingTime;
 
-  if (window.location.pathname.toLowerCase() === "/" || window.location.pathname.toLowerCase() === "/index") {
+  if (
+    window.location.pathname.toLowerCase() === "/" ||
+    window.location.pathname.toLowerCase() === "/index"
+  ) {
     presenceData.details = "Accueil";
     presenceData.state = "Se connecte à HabboCity";
   }
@@ -18,7 +21,7 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase() === "/register") {
     presenceData.details = "Accueil - Inscription";
     presenceData.state = "S'inscrit sur HabboCity";
-    let registername = window.document.getElementById('registerusername').value;
+    let registername = window.document.getElementById("registerusername").value;
     if (registername && registername != "") {
       presenceData.state = "S'inscrit sur HabboCity - " + registername;
     }
@@ -35,7 +38,8 @@ presence.on("UpdateData", () => {
   }
 
   if (window.location.pathname.toLowerCase() === "/profil") {
-    presenceData.details = "Profil - " + window.document.title.replace("HabboCity:", "");
+    presenceData.details =
+      "Profil - " + window.document.title.replace("HabboCity:", "");
     presenceData.state = "Regarde sa page personnelle";
   }
 
@@ -47,12 +51,23 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase().startsWith("/profil/")) {
     presenceData.details = "Profil - " + window.document.title;
     presenceData.state = "Regarde le profil de " + window.document.title;
-    if (window.document.getElementById('profil87') && window.document.getElementById('profil87').style.display === 'block') {
-      if (window.document.getElementById('profil121')) {
-        if (window.document.getElementById('profil121').innerText === 'Mes apparts') {
-          presenceData.state = "Regarde les appartements de " + window.document.title;
-        } else if (window.document.getElementById('profil121').innerText === 'Mes groupes') {
-          presenceData.state = "Regarde les groupes de " + window.document.title;
+    if (
+      window.document.getElementById("profil87") &&
+      window.document.getElementById("profil87").style.display === "block"
+    ) {
+      if (window.document.getElementById("profil121")) {
+        if (
+          window.document.getElementById("profil121").innerText ===
+          "Mes apparts"
+        ) {
+          presenceData.state =
+            "Regarde les appartements de " + window.document.title;
+        } else if (
+          window.document.getElementById("profil121").innerText ===
+          "Mes groupes"
+        ) {
+          presenceData.state =
+            "Regarde les groupes de " + window.document.title;
         }
       }
     }
@@ -66,11 +81,14 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase() === "/news") {
     presenceData.details = "Nouveautés";
     presenceData.state = "Regarde les dernières nouveautés";
-    if (window.document.getElementById("search1") && window.document.getElementById("search1").style.display === "block") {
+    if (
+      window.document.getElementById("search1") &&
+      window.document.getElementById("search1").style.display === "block"
+    ) {
       let search = window.document.getElementById("search3").value;
       if (search != "") {
         presenceData.details = "Nouveautés - Recherche";
-        presenceData.state = "Recherche l'article : \"" + search + "\"";
+        presenceData.state = "Recherche l'article : \"" + search + '"';
       }
     }
   }
@@ -88,9 +106,12 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase() === "/community/fansites") {
     presenceData.details = "Communauté - Organisations";
     presenceData.state = "Regarde la page des organisations";
-    if (window.document.getElementById("f37") && window.document.getElementById("f37").style.display === 'block') {
+    if (
+      window.document.getElementById("f37") &&
+      window.document.getElementById("f37").style.display === "block"
+    ) {
       presenceData.state = "Propose son organisation";
-      let nameorga = window.document.querySelector('.sfdnom').value;
+      let nameorga = window.document.querySelector(".sfdnom").value;
       if (nameorga != "") {
         presenceData.state = "Propose son organisation - " + nameorga;
       }
@@ -100,9 +121,10 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase() === "/community/fansites/new") {
     presenceData.details = "Communauté - Organisations";
     presenceData.state = "Ajoute un article à la page organisations";
-    let titlearticle = window.document.getElementById('arttitre').value;
+    let titlearticle = window.document.getElementById("arttitre").value;
     if (titlearticle != "") {
-      presenceData.state = "Ajoute un article à la page organisations - " + titlearticle;
+      presenceData.state =
+        "Ajoute un article à la page organisations - " + titlearticle;
     }
   }
 
@@ -134,43 +156,62 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase() === "/forum") {
     presenceData.details = "Forum - Accueil";
     presenceData.state = "Regarde la liste des sujets";
-    if (window.document.getElementById("search1") && window.document.getElementById("search1").style.display === "block") {
+    if (
+      window.document.getElementById("search1") &&
+      window.document.getElementById("search1").style.display === "block"
+    ) {
       let search = window.document.getElementById("search3").value;
       if (search != "") {
         presenceData.details = "Forum - Recherche";
-        presenceData.state = "Recherche le sujet : \"" + search + "\"";
+        presenceData.state = 'Recherche le sujet : "' + search + '"';
       }
     }
   }
 
   if (window.location.pathname.toLowerCase().startsWith("/forum/")) {
-    if (!window.location.pathname.toLowerCase().startsWith("/forum/categorie")) {
+    if (
+      !window.location.pathname.toLowerCase().startsWith("/forum/categorie")
+    ) {
       const page = window.location.pathname.toLowerCase().split("/");
       let nbpage = page[3];
       presenceData.details = "Forum - Sujet";
-      presenceData.state = "Lit le sujet : " + window.document.title.replace("- HabboCity", "").replace("Page " + nbpage, "") + " - Page " + nbpage;
+      presenceData.state =
+        "Lit le sujet : " +
+        window.document.title
+          .replace("- HabboCity", "")
+          .replace("Page " + nbpage, "") +
+        " - Page " +
+        nbpage;
     }
   }
 
   if (window.location.pathname.toLowerCase().startsWith("/forum/categorie")) {
     presenceData.details = "Forum - Catégories";
-    if (window.document.title === 'Forum de HabboCity') {
+    if (window.document.title === "Forum de HabboCity") {
       presenceData.state = "Regarde la liste des sujets";
     } else {
       const page = window.location.pathname.toLowerCase().split("/");
       let nbpage = page[4];
-      presenceData.state = "Regarde la liste des sujets - " + window.document.title.replace("HabboCity:", "") + " - Page " + nbpage;
+      presenceData.state =
+        "Regarde la liste des sujets - " +
+        window.document.title.replace("HabboCity:", "") +
+        " - Page " +
+        nbpage;
     }
   }
 
-  if (window.location.pathname.toLowerCase().startsWith("/forum/categorie/com/")) {
+  if (
+    window.location.pathname.toLowerCase().startsWith("/forum/categorie/com/")
+  ) {
     const page = window.location.pathname.toLowerCase().split("/");
     let nbpage = page[4];
     presenceData.details = "Forum - Mes sujets commentés";
     presenceData.state = "Regarde ses sujets commentés - Page " + nbpage;
   }
 
-  if (window.location.pathname.toLowerCase().startsWith("/forum/categorie/mes/")) {
+  if (
+    window.location.pathname.toLowerCase().startsWith("/forum/categorie/mes/")
+  ) {
     const page = window.location.pathname.toLowerCase().split("/");
     let nbpage = page[4];
     presenceData.details = "Forum - Mes sujets";
@@ -178,8 +219,8 @@ presence.on("UpdateData", () => {
   }
 
   if (window.location.pathname.toLowerCase() === "/forum/new-sujet") {
-    let title = window.document.getElementById('topictitl').value;
-    let category = window.document.getElementById('topiccategory').value;
+    let title = window.document.getElementById("topictitl").value;
+    let category = window.document.getElementById("topiccategory").value;
     let nbcategory = {
       "1": "Discussion générale",
       "138": "Débats & sondages",
@@ -193,7 +234,8 @@ presence.on("UpdateData", () => {
     };
     presenceData.details = "Forum - Nouveau sujet";
     if (title !== "") {
-      presenceData.state = "Crée un nouveau sujet dans " + nbcategory[category] + " - " + title;
+      presenceData.state =
+        "Crée un nouveau sujet dans " + nbcategory[category] + " - " + title;
     } else {
       presenceData.state = "Crée un nouveau sujet dans " + nbcategory[category];
     }
@@ -212,7 +254,11 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase() === "/boutique/coffres") {
     presenceData.details = "Boutique - Coffres";
     presenceData.state = "Regarde les coffres disponibles";
-    if (window.document.getElementById("boutiqueload").style.display === 'block' && window.document.getElementById("b168")) {
+    if (
+      window.document.getElementById("boutiqueload").style.display ===
+        "block" &&
+      window.document.getElementById("b168")
+    ) {
       presenceData.state = "Achète un coffre";
     }
   }
@@ -250,128 +296,220 @@ presence.on("UpdateData", () => {
   if (window.location.pathname.toLowerCase() === "/settings") {
     presenceData.details = "Paramètres";
     presenceData.state = "Paramètre son compte";
-    if (window.document.getElementById("settings16").style.display === 'block' && window.document.getElementById("settings38")) {
-      if (window.document.getElementById("settings38").innerText === "Mon mot de passe") {
+    if (
+      window.document.getElementById("settings16").style.display === "block" &&
+      window.document.getElementById("settings38")
+    ) {
+      if (
+        window.document.getElementById("settings38").innerText ===
+        "Mon mot de passe"
+      ) {
         presenceData.details = "Paramètres - Mot de passe";
         presenceData.state = "Modifie son mot de passe";
       }
     }
-    if (window.document.getElementById("settings16").style.display === 'block' && window.document.getElementById("settings38")) {
-      if (window.document.getElementById("settings38").innerText === "Mon adresse email") {
+    if (
+      window.document.getElementById("settings16").style.display === "block" &&
+      window.document.getElementById("settings38")
+    ) {
+      if (
+        window.document.getElementById("settings38").innerText ===
+        "Mon adresse email"
+      ) {
         presenceData.details = "Paramètres - E-mail";
         presenceData.state = "Modifie son adresse mail";
       }
     }
-    if (window.document.getElementById("settings16").style.display === 'block' && window.document.getElementById("settings20")) {
-      if (window.document.getElementById("settings20").innerText === "Mes amis") {
+    if (
+      window.document.getElementById("settings16").style.display === "block" &&
+      window.document.getElementById("settings20")
+    ) {
+      if (
+        window.document.getElementById("settings20").innerText === "Mes amis"
+      ) {
         presenceData.details = "Paramètres - Amis";
         presenceData.state = "Gère sa liste d'amis";
       }
     }
-    if (window.document.getElementById("settings16").style.display === 'block' && window.document.getElementById("settings38")) {
-      if (window.document.getElementById("settings38").innerText === "Code pin") {
+    if (
+      window.document.getElementById("settings16").style.display === "block" &&
+      window.document.getElementById("settings38")
+    ) {
+      if (
+        window.document.getElementById("settings38").innerText === "Code pin"
+      ) {
         presenceData.details = "Paramètres - Code PIN";
         presenceData.state = "Modifie son code PIN";
       }
     }
   }
 
-  if (window.document.getElementById("cityclub") && window.document.getElementById("cityclub").style.display === 'block') {
+  if (
+    window.document.getElementById("cityclub") &&
+    window.document.getElementById("cityclub").style.display === "block"
+  ) {
     presenceData.details = "Boutique - CityClub";
     presenceData.state = "Adhère au CityClub";
   }
 
   if (window.location.pathname.toLowerCase().startsWith("/boutique")) {
-    if (window.document.getElementById("b101") && window.document.getElementById("b101").value != "") {
+    if (
+      window.document.getElementById("b101") &&
+      window.document.getElementById("b101").value != ""
+    ) {
       presenceData.details = "Boutique - Mon inventaire";
-      presenceData.state = "Recherche : " + window.document.getElementById("b101").value;
+      presenceData.state =
+        "Recherche : " + window.document.getElementById("b101").value;
     }
-    if (window.document.getElementById("boutiqueload").style.display === 'block' && window.document.getElementById("b280")) {
+    if (
+      window.document.getElementById("boutiqueload").style.display ===
+        "block" &&
+      window.document.getElementById("b280")
+    ) {
       presenceData.details = "Boutique - Banque";
       presenceData.state = "Convertit sa monnaie";
     }
-    if (window.document.getElementById("boutiqueload").style.display === 'block' && window.document.getElementById("b104x")) {
+    if (
+      window.document.getElementById("boutiqueload").style.display ===
+        "block" &&
+      window.document.getElementById("b104x")
+    ) {
       presenceData.details = "Boutique - Mon inventaire";
       presenceData.state = "Regarde ses mobiliers";
     }
-    if (window.document.getElementById("boutiqueload").style.display === 'block' && window.document.getElementById("b104")) {
+    if (
+      window.document.getElementById("boutiqueload").style.display ===
+        "block" &&
+      window.document.getElementById("b104")
+    ) {
       presenceData.details = "Boutique - Mon inventaire";
       presenceData.state = "Regarde ses badges";
     }
-    if (window.document.getElementById("boutiqueload").style.display === 'block' && window.document.getElementById("b106")) {
-      if (window.document.getElementById("b106").style.display === 'block') {
+    if (
+      window.document.getElementById("boutiqueload").style.display ===
+        "block" &&
+      window.document.getElementById("b106")
+    ) {
+      if (window.document.getElementById("b106").style.display === "block") {
         let badgetitle = document.getElementById("b110nom").innerText;
-        let badgecode = document.getElementById("b109").src.replace("https://swf.habbocity.me/c_images/album1584/", "");
+        let badgecode = document
+          .getElementById("b109")
+          .src.replace("https://swf.habbocity.me/c_images/album1584/", "");
         presenceData.details = "Boutique - Mon inventaire";
-        presenceData.state = "Vend le badge " + badgetitle + " - " + badgecode.replace(".gif", "");
+        presenceData.state =
+          "Vend le badge " + badgetitle + " - " + badgecode.replace(".gif", "");
       }
     }
-    if (window.document.getElementById("boutiqueload").style.display === 'block' && window.document.getElementById("b201")) {
+    if (
+      window.document.getElementById("boutiqueload").style.display ===
+        "block" &&
+      window.document.getElementById("b201")
+    ) {
       presenceData.details = "Boutique - Mon inventaire";
       presenceData.state = "Regarde son historique";
     }
-    if (window.document.getElementById("boutiqueload").style.display === 'block' && window.document.getElementById("b208")) {
+    if (
+      window.document.getElementById("boutiqueload").style.display ===
+        "block" &&
+      window.document.getElementById("b208")
+    ) {
       presenceData.details = "Boutique - Mon inventaire";
       presenceData.state = "Regarde ses appartements";
     }
-    if (window.document.getElementById("boutiqueload").style.display === 'block' && window.document.getElementById("b210")) {
-      if (window.document.getElementById("b210").style.display === 'block') {
+    if (
+      window.document.getElementById("boutiqueload").style.display ===
+        "block" &&
+      window.document.getElementById("b210")
+    ) {
+      if (window.document.getElementById("b210").style.display === "block") {
         presenceData.details = "Boutique - Mon inventaire";
         let apparttitle = document.getElementById("b215").innerText;
-        let sendto = document.getElementById('b219').value;
+        let sendto = document.getElementById("b219").value;
         if (sendto !== "") {
-          presenceData.state = "Transfère l'appartement \"" + apparttitle + "\" à " + sendto;
+          presenceData.state =
+            "Transfère l'appartement \"" + apparttitle + '" à ' + sendto;
         } else {
-          presenceData.state = "Vend l'appartement \"" + apparttitle + "\" sur le marché";
+          presenceData.state =
+            "Vend l'appartement \"" + apparttitle + '" sur le marché';
         }
       }
     }
   }
 
-  if (window.document.getElementById('fil1') && window.document.getElementById('fil1').style.right === '0px') {
+  if (
+    window.document.getElementById("fil1") &&
+    window.document.getElementById("fil1").style.right === "0px"
+  ) {
     presenceData.details = "Fil d'actualité";
-    if (window.document.getElementById('fil36')) {
-      if (window.document.getElementById('fil36').parentNode.id === 'fil34' || window.document.getElementById('fil36').parentNode.id === 'fil35') {
-        if (window.document.getElementById('fil36').parentNode.id === 'fil34') {
+    if (window.document.getElementById("fil36")) {
+      if (
+        window.document.getElementById("fil36").parentNode.id === "fil34" ||
+        window.document.getElementById("fil36").parentNode.id === "fil35"
+      ) {
+        if (window.document.getElementById("fil36").parentNode.id === "fil34") {
           presenceData.state = "Regarde le fil d'actualité";
         }
-        if (window.document.getElementById('fil36').parentNode.id === 'fil35') {
+        if (window.document.getElementById("fil36").parentNode.id === "fil35") {
           presenceData.state = "Regarde ses notifications";
         }
       } else {
         presenceData.state = "Regarde les nouveautés";
       }
     }
-    if (window.document.getElementById('fil25')) {
-      if (window.document.getElementById('fil25').value != "" && window.document.getElementById('fil25').value != "écrire quelque chose...") {
-        presenceData.state = "Écrit un Tweet - \"" + window.document.getElementById('fil25').value + "\"";
+    if (window.document.getElementById("fil25")) {
+      if (
+        window.document.getElementById("fil25").value != "" &&
+        window.document.getElementById("fil25").value !=
+          "écrire quelque chose..."
+      ) {
+        presenceData.state =
+          'Écrit un Tweet - "' +
+          window.document.getElementById("fil25").value +
+          '"';
       }
     }
   }
 
-  if (window.document.getElementById('rydHSG45s') && window.document.getElementById('rydHSG45s').style.display === 'block') {
+  if (
+    window.document.getElementById("rydHSG45s") &&
+    window.document.getElementById("rydHSG45s").style.display === "block"
+  ) {
     presenceData.details = "City Stories";
-    if (window.document.getElementById('str4')) {
-      presenceData.state = "Regarde la story de " + window.document.getElementById('str4').innerText;
+    if (window.document.getElementById("str4")) {
+      presenceData.state =
+        "Regarde la story de " +
+        window.document.getElementById("str4").innerText;
     }
   }
 
-  if (window.document.getElementById('rydHSG45si') && window.document.getElementById('rydHSG45si').style.display === 'block') {
+  if (
+    window.document.getElementById("rydHSG45si") &&
+    window.document.getElementById("rydHSG45si").style.display === "block"
+  ) {
     presenceData.details = "City Stories - Mes photos";
     presenceData.state = "Regarde ses photos";
-    if (window.document.getElementById('str46')) {
-      presenceData.state = "Édite une photo : \"" + window.document.getElementById('str46').innerText + "\""
+    if (window.document.getElementById("str46")) {
+      presenceData.state =
+        'Édite une photo : "' +
+        window.document.getElementById("str46").innerText +
+        '"';
     }
   }
 
-  if (window.document.getElementById('Parrainage') && window.document.getElementById('Parrainage').style.display === 'block') {
-    let link = window.document.getElementById('Parrainage-Link').value;
+  if (
+    window.document.getElementById("Parrainage") &&
+    window.document.getElementById("Parrainage").style.display === "block"
+  ) {
+    let link = window.document.getElementById("Parrainage-Link").value;
     presenceData.details = "Parrainage";
     presenceData.state = "Parraine ses amis - https://" + link;
   }
 
-  if (window.document.getElementById('ai1') && window.document.getElementById('ai1').style.display === 'block') {
-    let titlehelp = window.document.getElementById('ai5');
+  if (
+    window.document.getElementById("ai1") &&
+    window.document.getElementById("ai1").style.display === "block"
+  ) {
+    let titlehelp = window.document.getElementById("ai5");
     if (titlehelp) {
       if (titlehelp.innerText === "Centre d'aide") {
         presenceData.details = "Centre d'aide";
@@ -389,7 +527,7 @@ presence.on("UpdateData", () => {
   }
 
   if (presenceData.details == null) {
-    presenceData.details = 'Erreur - 404';
+    presenceData.details = "Erreur - 404";
     presenceData.state = "Page introuvable";
     presence.setActivity(presenceData);
   } else {

@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "630783537221468182",
+  clientId: "630783537221468182"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "slitherlogo",
+    largeImageKey: "slitherlogo"
   };
   if (document.querySelector('[style="opacity: .8; font-weight: bold;"]')) {
     let length = document.querySelector(

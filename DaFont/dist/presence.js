@@ -1,11 +1,11 @@
 const presence = new Presence({
-  clientId: "685827254256795677",
+  clientId: "685827254256795677"
 });
 
 presence.on("UpdateData", () => {
   const presenceData = {
       largeImageKey: "dafont",
-      startTimestamp: Math.floor(Date.now() / 1000),
+      startTimestamp: Math.floor(Date.now() / 1000)
     },
     Path = document.location.pathname,
     Details = {};
@@ -14,14 +14,14 @@ presence.on("UpdateData", () => {
     Details.Fonts = {
       total: document.querySelector(
         "#width > div.minwidth > div > div > div:nth-child(9) > div:nth-child(3) > div.dfsmall > strong"
-      ).textContent,
+      ).textContent
     };
     presenceData.details = `Browsing the main page :`;
     presenceData.state = `${Details.Fonts.total}`;
   } else if (Path.startsWith("/themes.php")) {
     Details.Themes = {
       total: document.querySelector("#menuthemespp > table > tbody > tr")
-        .children.length,
+        .children.length
     };
     presenceData.details = `Browsing the theme's page :`;
     presenceData.state = `${Details.Themes.total} total themes`;
@@ -31,7 +31,7 @@ presence.on("UpdateData", () => {
         .querySelector(
           "#width > div > div > div > div:nth-child(9) > div:nth-child(3) > div.dffont2"
         )
-        .innerHTML.replace("&gt;", ">"),
+        .innerHTML.replace("&gt;", ">")
     };
     presenceData.details = `Browsing a sub-theme's page :`;
     presenceData.state = `${Details.SubTheme.path}`;
@@ -39,7 +39,7 @@ presence.on("UpdateData", () => {
     Details.MainTheme = {
       path: document.querySelector(
         "#width > div > div > div > div:nth-child(9) > div:nth-child(5) > div.dffont2"
-      ).innerHTML,
+      ).innerHTML
     };
     presenceData.details = `Browsing a main-theme's page :`;
     presenceData.state = `${Details.MainTheme.path}`;
@@ -47,13 +47,13 @@ presence.on("UpdateData", () => {
     Details.NewFonts = {
       total: document.querySelector(
         "#width > div > div > div > div:nth-child(9) > div:nth-child(5) > span > span"
-      ).textContent,
+      ).textContent
     };
     presenceData.details = `Browsing the new fonts :`;
     presenceData.state = `${Details.NewFonts.total}`;
   } else if (Path.startsWith("/top.php")) {
     Details.TopFonts = {
-      timePeriod: document.location.search.length > 1 ? "All Time" : "Yesterda",
+      timePeriod: document.location.search.length > 1 ? "All Time" : "Yesterda"
     };
     presenceData.details = `Browsing the top fonts :`;
     presenceData.state = `${Details.TopFonts.timePeriod}`;

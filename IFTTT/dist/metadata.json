@@ -21,10 +21,20 @@
     "help.ifttt.com",
     "platform.ifttt.com"
   ],
-  "version": "1.1.2",
+  "version": "1.1.3",
   "logo": "https://i.imgur.com/1d8TEw1.png",
   "thumbnail": "https://i.imgur.com/oHMcwT3.png",
   "color": "#0d99fd",
-  "tags": ["if", "this", "than", "that", "app", "device", "work", "together", "connect"],
+  "tags": [
+    "if",
+    "this",
+    "than",
+    "that",
+    "app",
+    "device",
+    "work",
+    "together",
+    "connect"
+  ],
   "category": "other"
 }

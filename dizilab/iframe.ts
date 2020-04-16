@@ -1,6 +1,6 @@
 const iframe = new iFrame();
 
-setInterval(function() {
+setInterval(function () {
   const video =
     (document.querySelector("#vplayer video") as HTMLVideoElement) ||
     (document.querySelector("video") as HTMLVideoElement);

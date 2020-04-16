@@ -1,12 +1,12 @@
 var presence = new Presence({
-    clientId: "643606929570005014" 
+    clientId: "643606929570005014"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     search: "presence.activity.searching"
   });
-  presence.on("UpdateData", async () => {
+presence.on("UpdateData", async () => {
   var video = document.querySelector(
     "#wbplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
   );

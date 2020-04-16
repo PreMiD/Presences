@@ -81,18 +81,17 @@ function cleanData(): void {
       };
 
     try {
-      title = (
-        document.querySelector("meta[property='og:title']") as HTMLMetaElement
-      ).content;
+      title = (document.querySelector(
+        "meta[property='og:title']"
+      ) as HTMLMetaElement).content;
     } catch (e) {
       title = titleFromURL();
     }
 
     try {
-      sitename = (
-        document.querySelector("meta[property='og:site_name']") as
-        HTMLMetaElement
-      ).content;
+      sitename = (document.querySelector(
+        "meta[property='og:site_name']"
+      ) as HTMLMetaElement).content;
     } catch (e) {
       sitename = null;
     }

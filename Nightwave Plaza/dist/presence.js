@@ -1,5 +1,5 @@
 let presence = new Presence({
-  clientId: "620204628608417832",
+  clientId: "620204628608417832"
 });
 presence.on("UpdateData", async () => {
   if (document.getElementById("player-time").textContent == "Welcome back")
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
     smallImageKey:
       document.getElementById("player-play").textContent == "Stop"
         ? "play"
-        : "pause",
+        : "pause"
   };
   presence.setActivity(presenceData);
 });

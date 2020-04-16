@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "685559589625659492",
+  clientId: "685559589625659492"
 });
 
 presence.on("UpdateData", () => {
   const presenceData = {
-      largeImageKey: "photopea",
+      largeImageKey: "photopea"
     },
     Path = document.location.pathname,
     Details = {};
@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
         break;
       default:
         Details.currentFile = {
-          name: document.querySelector("div.active > span").textContent,
+          name: document.querySelector("div.active > span").textContent
         };
         presenceData.details = `Editing a ${
           Details.currentFile.name.split(".").length > 1

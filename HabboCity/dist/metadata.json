@@ -11,7 +11,7 @@
     "www.habbocity.me",
     "habbocity.me"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/IC0Md4k.png",
   "thumbnail": "https://i.imgur.com/plMx986.png",
   "color": "#FFEE51",
@@ -20,5 +20,5 @@
     "random",
     "habbo"
   ],
-  "category": "other" 
+  "category": "other"
 }

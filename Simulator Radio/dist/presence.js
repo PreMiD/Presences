@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "651455140477272065",
+  clientId: "651455140477272065"
 });
 
 setInterval(newStats, 10000);
@@ -27,7 +27,7 @@ var lastTimeStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", function () {
   var presenceData = {
-    largeImageKey: "srlogo",
+    largeImageKey: "srlogo"
   };
 
   if (document.querySelector(".fa.fa-play-circle") !== null) {

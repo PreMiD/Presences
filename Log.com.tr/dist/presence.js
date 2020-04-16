@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "657615662537244673",
+  clientId: "657615662537244673"
 });
 
 presence.on("UpdateData", () => {
@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
 
   var presenceData = {
     largeImageKey: "log-logo",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
 
   if (page.length == 1) {

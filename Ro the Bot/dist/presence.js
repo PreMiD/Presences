@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "547090981279891486",
+  clientId: "547090981279891486"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "bot-magic",
+    largeImageKey: "bot-magic"
   };
 
   if (window.location.href.includes("status.ro-the-bot.ga")) {

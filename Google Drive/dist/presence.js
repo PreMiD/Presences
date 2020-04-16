@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "630494559956107285",
+  clientId: "630494559956107285"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
-      largeImageKey: "drivelogo",
+      largeImageKey: "drivelogo"
     },
     path = document.location.pathname.toLowerCase();
 
