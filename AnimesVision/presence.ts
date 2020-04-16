@@ -59,6 +59,6 @@ presence.on("UpdateData", async () => {
    presenceData.smallImageKey = "pause";
    presenceData.smallImageText = (await strings).paused;
     }
-   }
+   };
   presence.setActivity(presenceData, true);
 })
