@@ -30,10 +30,10 @@ presence.on("UpdateData", async () => {
     },
    path = window.location.pathname;
    if(path.endsWith("/equipe")) {
-   presenceData.details = "Vendo os membros da equipe"
+   presenceData.details = "Vendo os membros da equipe";
    }
    if(path.startsWith("/top")) {
-   presenceData.details = "Vendo o top animes"
+   presenceData.details = "Vendo o top animes";
    } else if(path.endsWith("/doramas")) {
    presenceData.details = "Vendo a lista de doramas";
    } else if(path.endsWith("/filmes")) {
@@ -43,22 +43,22 @@ presence.on("UpdateData", async () => {
    } else if(path.endsWith("/animes")) {
    presenceData.details = "Vendo a lista de animes";
    } else if(path.endsWith("/legendado")) {
-   const episode = document.getElementById("current_episode_name").innerText.match(/\d+/g)
+   const episode = document.getElementById("current_episode_name").innerText.match(/\d+/g);
    const title = document.querySelectorAll(".active h1")[0].textContent.replace(" - Episodio ", "").replace(/[0-9]/g, '');
-   const video = document.querySelector("video")
+   const video = document.querySelector("video");
    presenceData.details = title
    presenceData.state = (await strings).episode.replace("{0}", episode[0]);
    if(!video.paused) {
-   	const { duration, currentTime } = video
-    const timestamps = getTimestamps(currentTime, duration);
-    console.log(timestamps[1])
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
-    presenceData.smallImageKey = "play";
-    presenceData.smallImageText = (await strings).playing;
+   const { duration, currentTime } = video;
+   const timestamps = getTimestamps(currentTime, duration);
+   console.log(timestamps[1])
+   presenceData.startTimestamp = timestamps[0];
+   presenceData.endTimestamp = timestamps[1];
+   presenceData.smallImageKey = "play";
+   presenceData.smallImageText = (await strings).playing;
    	} else if (video.currentTime > 0) {
-    presenceData.smallImageKey = "pause";
-    presenceData.smallImageText = (await strings).paused;
+   presenceData.smallImageKey = "pause";
+   presenceData.smallImageText = (await strings).paused;
     }
    }
   presence.setActivity(presenceData, true);
