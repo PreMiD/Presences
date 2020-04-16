@@ -1,0 +1,19 @@
+{
+    "author": {
+      "name": "Funeoz",
+      "id": "256093420206948352"
+    },
+    "service": "Chess",
+    "description": {
+      "en": "Chess.com is the main internet chess server. It is also an Internet forum and a social network dedicated to chess.",
+      "fr": "Chess.com est le principal serveur internet d'échecs. C'est également un forum internet et un réseau social consacré aux échecs. "
+    },
+    "url": "www.chess.com",
+    "version": "1.0.0",
+    "logo": "https://www.chess.com/bundles/web/favicons/favicon-32x32.c2a8280d.png",
+    "thumbnail": "https://i.imgur.com/boFdmKN.png",
+    "color": "#4d7737",
+    "tags": ["chess", "games"],
+    "category": "games"
+  }
+  
