@@ -14,11 +14,7 @@
   "logo": "https://cdn.discordapp.com/attachments/270798717089480704/631543121829691404/akinator.png",
   "thumbnail": "https://cdn.discordapp.com/attachments/270798717089480704/631542944532267043/unknown.png",
   "color": "#0000ff",
-  "tags": [
-    "Akinator",
-    "Guessing game",
-    "Fun"
-  ],
+  "tags": ["Akinator", "Guessing game", "Fun"],
   "category": "games",
   "regExp": "([a-z]+)[.]akinator[.]com"
 }

@@ -12,10 +12,6 @@
   "logo": "https://i.imgur.com/zl3jobl.png",
   "thumbnail": "https://i.imgur.com/VlPQGur.png",
   "color": "#FF5900",
-  "tags": [
-    "internet",
-    "browing",
-    "search"
-  ],
+  "tags": ["internet", "browing", "search"],
   "category": "other"
 }

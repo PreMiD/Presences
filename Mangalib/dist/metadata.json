@@ -13,11 +13,6 @@
   "logo": "https://i.imgur.com/n5XgMkt.png",
   "thumbnail": "https://i.imgur.com/6tzn5Gc.png",
   "color": "#E48F13",
-  "tags": [
-    "manga",
-    "mangalib",
-    "read",
-    "anime"
-  ],
+  "tags": ["manga", "mangalib", "read", "anime"],
   "category": "other"
 }

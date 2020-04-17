@@ -13,9 +13,6 @@
   "logo": "https://erens.glitch.me/fBLP.png",
   "thumbnail": "https://erens.glitch.me/2XIU.png",
   "color": "#F10C0C",
-  "tags": [
-    "news",
-    "turkish"
-  ],
+  "tags": ["news", "turkish"],
   "category": "other"
 }

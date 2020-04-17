@@ -12,9 +12,6 @@
   "logo": "https://erens.glitch.me/nskh.png",
   "thumbnail": "https://erens.glitch.me/aFq4.png",
   "color": "#555C56",
-  "tags": [
-    "discord",
-    "bot"
-  ],
+  "tags": ["discord", "bot"],
   "category": "other"
 }

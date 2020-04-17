@@ -12,11 +12,6 @@
   "logo": "https://i.imgur.com/D07iFyN.png",
   "thumbnail": "https://i.imgur.com/zStnjsO.png",
   "color": "#5F0A87",
-  "tags": [
-    "music",
-    "radio",
-    "gamers",
-    "community"
-  ],
+  "tags": ["music", "radio", "gamers", "community"],
   "category": "music"
 }

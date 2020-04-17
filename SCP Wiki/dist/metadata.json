@@ -28,11 +28,6 @@
   "logo": "https://scp-wiki.wdfiles.com/local--files/component%3Atheme/logo.png",
   "thumbnail": "https://i.imgur.com/el9c68A.png",
   "color": "#BB0011",
-  "tags": [
-    "fiction",
-    "horror",
-    "reading",
-    "wiki"
-  ],
+  "tags": ["fiction", "horror", "reading", "wiki"],
   "category": "other"
 }

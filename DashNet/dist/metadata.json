@@ -12,10 +12,7 @@
   "logo": "https://i.imgur.com/sbtwgku.png",
   "thumbnail": "https://i.imgur.com/PnsZ4Nv.png",
   "color": "#042B48",
-  "tags": [
-    "cookie",
-    "clicker"
-  ],
+  "tags": ["cookie", "clicker"],
   "category": "games",
   "regExp": "(([a-z0-9]+)[.])?dashnet[.]org"
 }

@@ -12,11 +12,7 @@
   "logo": "https://i.imgur.com/pFcvvz9.png",
   "thumbnail": "https://i.imgur.com/xRsdose.png",
   "color": "#020116",
-  "tags": [
-    "anime",
-    "video",
-    "streaming"
-  ],
+  "tags": ["anime", "video", "streaming"],
   "category": "anime",
   "iframe": true
 }

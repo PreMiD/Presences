@@ -7,18 +7,11 @@
   "description": {
     "fr": "HabboCity est un grand rétro Habbo français. Rejoins-nous et deviens célèbre, fais de nouvelles rencontres, tchates, construis, participe à des jeux et bien plus..."
   },
-  "url": [
-    "www.habbocity.me",
-    "habbocity.me"
-  ],
+  "url": ["www.habbocity.me", "habbocity.me"],
   "version": "1.0.1",
   "logo": "https://i.imgur.com/IC0Md4k.png",
   "thumbnail": "https://i.imgur.com/plMx986.png",
   "color": "#FFEE51",
-  "tags": [
-    "other",
-    "random",
-    "habbo"
-  ],
+  "tags": ["other", "random", "habbo"],
   "category": "other"
 }

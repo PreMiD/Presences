@@ -13,11 +13,6 @@
   "thumbnail": "https://i.imgur.com/gDfeWur.png",
   "color": "#52B54B",
   "category": "videos",
-  "tags": [
-    "video",
-    "movie",
-    "tv",
-    "media"
-  ],
+  "tags": ["video", "movie", "tv", "media"],
   "regExp": "([a-z0-9]+[.])*([a-z0-9]+)"
 }

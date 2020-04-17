@@ -13,12 +13,7 @@
   "logo": "https://www.apkdlmod.com/wp-content/uploads/2016/04/slither-io.jpg",
   "thumbnail": "https://downbeat.is-inside.me/c7UNKqPH.png",
   "color": "#319c2c",
-  "tags": [
-    "io-game",
-    "games",
-    "snake",
-    "ranks"
-  ],
+  "tags": ["io-game", "games", "snake", "ranks"],
   "category": "games",
   "regExp": "(([a-z0-9]+)[.])?slither.io"
 }
