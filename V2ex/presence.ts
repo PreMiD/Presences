@@ -22,7 +22,11 @@ presence.on("UpdateData", async () => {
     presenceData.state = title.innerText.trim();
     presenceData.smallImageKey = "famous";
 
-    if (document.querySelector("#reply-box").classList.contains("reply-box-sticky")) {
+    if (
+      document
+        .querySelector("#reply-box")
+        .classList.contains("reply-box-sticky")
+    ) {
       presenceData.details = "Replying post";
     } else {
       presenceData.details = "Reading post";

@@ -12,8 +12,6 @@
   "logo": "https://i.imgur.com/ialSC46.png",
   "thumbnail": "https://i.imgur.com/4z07lus.png",
   "color": "#236cba",
-  "tags": [
-    "movies"
-  ],
+  "tags": ["movies"],
   "category": "videos"
 }

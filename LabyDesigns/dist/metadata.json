@@ -12,10 +12,6 @@
   "logo": "https://i.imgur.com/RSfSMLM.png",
   "thumbnail": "https://i.imgur.com/RuYcGnT.png",
   "color": "#757575",
-  "tags": [
-    "labymod",
-    "labydesigns",
-    "minecraft"
-  ],
+  "tags": ["labymod", "labydesigns", "minecraft"],
   "category": "games"
 }

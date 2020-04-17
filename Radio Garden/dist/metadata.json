@@ -12,11 +12,6 @@
   "logo": "https://vikavo.lt/premidpresence/radiogardenglobe.webp",
   "thumbnail": "https://vikavo.lt/premidpresence/radiogardenthumb.png",
   "color": "#0DF675",
-  "tags": [
-    "radio",
-    "worldwide",
-    "global",
-    "media"
-  ],
+  "tags": ["radio", "worldwide", "global", "media"],
   "category": "socials"
 }

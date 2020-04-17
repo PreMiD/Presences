@@ -12,10 +12,7 @@
   "logo": "https://i.imgur.com/AEOuBRB.png",
   "thumbnail": "https://i.imgur.com/IeqotZd.png",
   "color": "#00050C",
-  "tags": [
-    "watch-movies",
-    "vidcloud9"
-  ],
+  "tags": ["watch-movies", "vidcloud9"],
   "category": "videos",
   "iframe": true
 }

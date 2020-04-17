@@ -18,12 +18,6 @@
   "logo": "https://i.imgur.com/VB6AuBG.png",
   "thumbnail": "https://i.imgur.com/lKGTJ26.jpg",
   "color": "#4680C2",
-  "tags": [
-    "social",
-    "music",
-    "video",
-    "info",
-    "data"
-  ],
+  "tags": ["social", "music", "video", "info", "data"],
   "category": "socials"
 }

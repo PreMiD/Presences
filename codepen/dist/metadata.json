@@ -3,10 +3,7 @@
     "name": "Chezzer",
     "id": "195979856733929472"
   },
-  "url": [
-    "codepen.io",
-    "www.codepen.io"
-  ],
+  "url": ["codepen.io", "www.codepen.io"],
   "description": {
     "en": "CodePen is an online community for testing and showcasing user-created HTML, CSS and JavaScript code snippets."
   },
@@ -16,9 +13,5 @@
   "thumbnail": "https://i.imgur.com/4cRd5t5.png",
   "color": "#0ebeff",
   "category": "other",
-  "tags": [
-    "other",
-    "codepen",
-    "code"
-  ]
+  "tags": ["other", "codepen", "code"]
 }

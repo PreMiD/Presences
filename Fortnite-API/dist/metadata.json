@@ -18,9 +18,6 @@
   "logo": "https://i.imgur.com/KTfOOq2.png",
   "thumbnail": "https://i.imgur.com/xno9CLs.png",
   "color": "#FF91E0",
-  "tags": [
-    "fortnite",
-    "fortnite-api"
-  ],
+  "tags": ["fortnite", "fortnite-api"],
   "category": "other"
 }
