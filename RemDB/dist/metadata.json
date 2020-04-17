@@ -1,7 +1,7 @@
 {
   "author": {
     "name": "Kevin",
-    "id": "698950867184779404"
+    "id": "601560798409654292"
   },
   "service": "RemDB",
   "description": {
@@ -9,7 +9,7 @@
     "de": "RemDB ist eine Spieler- und Clandatenbank für einen privaten Server (S4 Remnants) vom Spiel S4 League."
   },
   "url": "remdb.net",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/hjwhuAp.png",
   "thumbnail": "https://i.imgur.com/KkIjtHI.png",
   "color": "#008000",
