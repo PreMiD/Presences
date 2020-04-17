@@ -3,21 +3,15 @@
     "name": "Kevin",
     "id": "601560798409654292"
   },
-  "contributors": [
-    {
-      "name": "Melida",
-      "id": "236863914078371842"
-    }
-  ],
-  "url": "remdb.net",
+  "service": "RemDB",
   "description": {
     "en": "RemDB is a Player- and Clandatabase from a private server (S4 Remnants) of the game S4 League.",
     "de": "RemDB ist eine Spieler- und Clandatenbank für einen privaten Server (S4 Remnants) vom Spiel S4 League."
   },
-  "service": "RemDB",
+  "url": "remdb.net",
   "version": "1.0.2",
   "logo": "https://i.imgur.com/hjwhuAp.png",
-  "thumbnail": "https://i.imgur.com/hjwhuAp.png",
+  "thumbnail": "https://i.imgur.com/KkIjtHI.png",
   "color": "#008000",
   "tags": [
     "database",
