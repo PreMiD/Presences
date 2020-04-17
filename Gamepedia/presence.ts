@@ -2,18 +2,17 @@ var presence = new Presence({
   clientId: "652880245371699222"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000),
-  href = new URL(document.location.href),
-  presenceData = {
-    details: "In construction" as string,
-    state: null as string,
-    largeImageKey: "lg" as string,
-    startTimestamp: browsingStamp as number,
-    endTimestamp: null as number
+var currentURL = new URL(document.location.href),
+  currentPath = currentURL.pathname.slice(1).split("/"),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  presenceData: presenceData = {
+    details: "Viewing an unsupported page",
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
   },
   updateCallback = {
-    _function: null,
-    get function(): any {
+    _function: null as Function,
+    get function(): Function {
       return this._function;
     },
     set function(parameter) {
@@ -25,73 +24,84 @@ var browsingStamp = Math.floor(Date.now() / 1000),
   };
 
 /**
- * Cleans presenceData
+ * Initialize/reset presenceData.
  */
-function cleanData(): void {
-  if (presenceData.state === null) delete presenceData.state;
-  if (presenceData.endTimestamp === null) delete presenceData.endTimestamp;
+function resetData(): void {
+  currentURL = new URL(document.location.href);
+  currentPath = currentURL.pathname.slice(1).split("/");
+  presenceData = {
+    details: "Viewing an unsupported page",
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
+  };
 }
 
 ((): void => {
-  if (href.hostname === "www.gamepedia.com") {
-    if (href.pathname === "/") {
+  if (currentURL.hostname === "www.gamepedia.com") {
+    //
+    // Chapter 1
+    // This part is for the editorial part of Gamepedia.
+    //
+    if (currentPath[0] === "") {
       presenceData.state = "Index";
       presenceData.startTimestamp = browsingStamp;
       delete presenceData.details;
-    } else if (href.pathname.includes("/twitch-login")) {
+    } else if (currentPath[0] === "twitch-login") {
       presenceData.details = "Signing in";
       presenceData.startTimestamp = browsingStamp;
       delete presenceData.state;
-    } else if (href.pathname.includes("/twitch-signup")) {
+    } else if (currentPath[0] === "twitch-signup") {
       presenceData.details = "Registering an account";
       presenceData.startTimestamp = browsingStamp;
       delete presenceData.details;
-    } else if (href.pathname.includes("/news/")) {
+    } else if (currentPath[0] === "news") {
       presenceData.details = "Reading an news article";
       presenceData.state = document.querySelector(
         ".p-article-title"
       ).textContent;
       presenceData.startTimestamp = browsingStamp;
-    } else if (href.pathname.includes("/blog/")) {
+    } else if (currentPath[0] === "blog") {
       presenceData.details = "Reading a blog article";
       presenceData.state = document.querySelector(
         ".p-article-title"
       ).textContent;
       presenceData.startTimestamp = browsingStamp;
-    } else if (href.pathname.includes("/members/")) {
+    } else if (currentPath[0] === "members") {
       presenceData.details = "Reading a blog article";
       presenceData.state = document.querySelector(".username").textContent;
       presenceData.startTimestamp = browsingStamp;
     } else {
       presenceData.details = "Viewing a page";
-      if (href.pathname.includes("/PRO")) presenceData.state = "Gamepedia PRO";
+      if (currentPath[0] === "PRO") presenceData.state = "Gamepedia PRO";
       else presenceData.state = document.title.split(" - ")[0];
       presenceData.startTimestamp = browsingStamp;
     }
   } else {
-    let title: string, sitename: string;
-    const actionResult = href.searchParams.get("action"),
+    //
+    // Chapter 2
+    // This part is for the wiki part of Gamepedia.
+    //
+    var title: string,
+      sitename: string,
+      actionResult = currentURL.searchParams.get("action"),
       titleFromURL = (): string => {
-        let raw: string;
-        if (href.pathname.startsWith("/index.php"))
-          raw = href.searchParams.get("title");
-        else raw = href.pathname.slice(1);
+        var raw: string;
+        if (currentURL.pathname.startsWith("/index.php"))
+          raw = currentURL.searchParams.get("title");
+        else raw = currentURL.pathname.slice(1);
         if (raw.includes("_")) return raw.replace(/_/g, " ");
         else return raw;
       };
 
     try {
-      title = (document.querySelector(
-        "meta[property='og:title']"
-      ) as HTMLMetaElement).content;
+      title = document.querySelector("meta[property='og:title']").content;
     } catch (e) {
       title = titleFromURL();
     }
 
     try {
-      sitename = (document.querySelector(
-        "meta[property='og:site_name']"
-      ) as HTMLMetaElement).content;
+      sitename = document.querySelector("meta[property='og:site_name']")
+        .content;
     } catch (e) {
       sitename = null;
     }
@@ -138,12 +148,11 @@ function cleanData(): void {
     presenceData.startTimestamp = browsingStamp;
     presenceData.state += " | " + sitename;
   }
-
-  cleanData();
 })();
 
 if (updateCallback.present) {
   presence.on("UpdateData", async () => {
+    resetData();
     updateCallback.function();
     presence.setActivity(presenceData);
   });
