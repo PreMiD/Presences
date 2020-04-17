@@ -111,7 +111,8 @@ presence.on("UpdateData", () => {
     presenceData.state = "Shoutbox";
   } else {
     presenceData.details = "Viewing a page:";
-    presenceData.state = "Front page";
+    presenceData.state = "Front page (Online: " + document.querySelector("div > span#s4db-server-info-players")
+    .textContent + ")";
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();
