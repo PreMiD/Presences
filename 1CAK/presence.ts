@@ -8,33 +8,54 @@ const presenceData: presenceData = {
 presence.on("UpdateData", async () => {
   const startTimestamp: number = Date.now();
   presenceData.startTimestamp = startTimestamp;
-  switch (document.location.pathname) {
+  switch (document.location.pathname.endsWith("/") && document.location.pathname.length > 1 ? document.location.pathname.slice(0, document.location.pathname.length - 1) : document.location.pathname) {
     case "/":
-      presenceData.details = "Home Page";
+      presenceData.details = "Viewing fun through homepage";
       break;
-    case "/trending":
-      presenceData.details = "Trending Page";
+    case "/trends":
+      presenceData.details = "Looking at fun that is trending";
       break;
     case "/recent":
-      presenceData.details = "Recent Page";
+      presenceData.details = "Viewing recently uploaded fun";
       break;
-    case "/legendary":
-      presenceData.details = "Legendary Page";
+    case "/tv":
+      presenceData.details = "Viewing fun videos";
+      break;
+    case "/tvvote":
+      presenceData.details = "Viewing fun videos";
       break;
     case "/friends":
-      presenceData.details = "Friends Page";
+      presenceData.details = "My friend list";
       break;
     case "rules":
       presenceData.details = "Reading the rules";
       break;
     case "/notifications":
-      presenceData.details = "Notifications Page";
+      presenceData.details = "Viewing notifications";
+      break;
+    case "/upload":
+      presenceData.details = "Going to upload something fun";
+      break;
+    case "/about":
+      presenceData.details = "About 1CAK/1CUK";
+      break;
+    case "/terms":
+      presenceData.details = "Terms of Service";
+      break;
+    case "/privacy":
+      presenceData.details = "Privacy Policy";
+      break;
+    case "/disclaimer":
+      presenceData.details = "Disclaimer";
+      break;
+    case "/advertise":
+      presenceData.details = "Advertise with us";
       break;
     case "/weeklytop":
-      presenceData.details = "Top Users";
+      presenceData.details = "Viewing weekly top users";
       break;
     case "/alltimetop":
-      presenceData.details = "Top Users";
+      presenceData.details = "Viewing all time top users";
       break;
     case "/preferences":
       presenceData.details = "Settings";
@@ -50,11 +71,11 @@ presence.on("UpdateData", async () => {
       .textContent.trim();
   } else if (document.location.pathname.slice(1).startsWith("saved")) {
     if (!document.querySelector("#content > p")) {
-      presenceData.details = "Saved Posts";
+      presenceData.details = "My saved funs";
     }
   } else if (document.location.pathname.slice(1).startsWith("voteof")) {
     if (!document.querySelector("#content > p")) {
-      presenceData.details = "Voted Posts";
+      presenceData.details = "My funned funs";
     }
   } else if (!isNaN(parseInt(document.location.pathname.slice(1)))) {
     const author = document
@@ -62,7 +83,9 @@ presence.on("UpdateData", async () => {
         "#content > div > table > tbody > tr > td > div > .blur a > b"
       )
       .textContent.trim();
-    presenceData.details = `Viewing ${author}'s post`;
+    presenceData.details = `Viewing ${author}'s fun`;
+  } else if (document.location.pathname.slice(1).startsWith("legendary")) {
+    presenceData.details = "Viewing the most legendary fun";
   }
   presence.setActivity(presenceData);
 });
