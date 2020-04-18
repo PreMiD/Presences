@@ -4,31 +4,49 @@ const presence = new Presence({
 const presenceData: presenceData = {
   largeImageKey: "logo"
 };
-let startTimestamp: number;
 
-function toTitleCase(str: string): string {
-  return str.replace(/\w\S*/g, function (txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}
-
+const paths = {
+  "go": "Login Page",
+  "account": "Account",
+  "friends": "Friend Access",
+  "start": "Home",
+  "console": "Console",
+  "log": "Log",
+  "options": "Options",
+  "software": "Software",
+  "players": "Players",
+  "players/whitelist": "Whitelisted",
+  "players/ops": "OPs",
+  "players/banned-players": "Banned Players",
+  "players/banned-ips": "Banned IPs",
+  "files": "Files",
+  "addons": "Plugins",
+  "worlds": "Worlds",
+  "backups": "Backups"
+};
+  
 presence.on("UpdateData", async () => {
   if (document.location.hostname === "aternos.org") {
-    const panel = document.querySelector('base[href="/panel/"]');
+    presenceData.startTimestamp = Date.now();
+    const panel = document.querySelector("base[href=\"/panel/\"]");
     if (panel) {
-      let path = document.location.pathname;
-      if (path === "/go/") {
-        startTimestamp = null;
-        delete presenceData.startTimestamp;
-        presenceData.details = "Login Page";
+      let path = document.location.pathname.endsWith("/") ? document.location.pathname.replace("/", "").slice(0, document.location.pathname.replace("/", "").length - 1) : document.location.pathname.replace("/", "");
+      if (path.startsWith("software")) path = "software";
+      if (path.startsWith("files")) path = "files";
+      if (path.startsWith("addons")) path = "addons";
+      path = paths[path];
+      if (path) {
+        presenceData.details = `Panel - ${path}`;
       } else {
-        if (!startTimestamp) startTimestamp = Date.now();
-        path = toTitleCase(document.location.pathname.split("/")[1]);
-        presenceData.details = `Configuring Server - ${path}`;
-        presenceData.startTimestamp = startTimestamp;
+        presenceData.details = "404 Not Found";
+        presenceData.startTimestamp = null;
       }
     } else {
-      presenceData.details = "Home Page";
+      if (document.location.pathname === "/server/") {
+        presenceData.details = "Panel - Server";
+      } else {
+        presenceData.details = "Home Page";
+      }
     }
   } else {
     const page = document.location.hostname.split(".")[0];
@@ -38,24 +56,24 @@ presence.on("UpdateData", async () => {
         if (document.location.pathname.includes("categories")) {
           const category = document.querySelector(".page-header h1");
           if (category) {
-            presenceData.details = `Help Center - Viewing category:`;
-            presenceData.state = category.textContent;
+            presenceData.details = "Help Center - Viewing category:";
+            presenceData.state = category.textContent.trim();
           }
         } else if (document.location.pathname.includes("sections")) {
           const section = document.querySelector(".page-header h1");
           if (section) {
-            presenceData.details = `Help Center - Viewing section:`;
+            presenceData.details = "Help Center - Viewing section:";
             presenceData.state = section.textContent.trim();
           }
         } else if (document.location.pathname.includes("articles")) {
           const article = document.querySelector(".article-title");
           if (article) {
-            presenceData.details = `Help Center - Viewing article:`;
+            presenceData.details = "Help Center - Viewing article:";
             presenceData.state = article.textContent.trim();
           }
         } else if (document.location.pathname.includes("search")) {
           const article: HTMLInputElement = document.querySelector("#query");
-          presenceData.details = `Help Center - Searching:`;
+          presenceData.details = "Help Center - Searching:";
           presenceData.state = article.value;
         } else {
           presenceData.details = "Help Center";
@@ -69,3 +87,4 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData);
 });
+  
