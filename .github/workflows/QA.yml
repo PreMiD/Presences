@@ -21,7 +21,9 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
       - name: Install Deps
-        run: yarn
+        run: |
+          sudo snap install hub --classic
+          yarn
       - name: Compile Script
         run: yarn qa:compile
       - name: Start QA
