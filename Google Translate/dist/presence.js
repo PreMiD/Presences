@@ -1,11 +1,11 @@
 var presence = new Presence({
-  clientId: "630825100387549210",
+  clientId: "630825100387549210"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "translatelogo",
+    largeImageKey: "translatelogo"
   };
   let type = document.location.hash.split("&")[1];
   let from = document.location.hash.split("&")[2].replace("sl=", "");

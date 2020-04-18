@@ -1,0 +1,9 @@
+pull_request_rules:
+  - name: Automatic merge when required reviews are approved
+    conditions:
+      - base=master
+      - "#approved-reviews-by>=2"
+      - status-success=DeepScan
+    actions:
+      merge:
+        method: merge

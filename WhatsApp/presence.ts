@@ -5,10 +5,9 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const name =
-      document.querySelector(
-        "#main > header > div._3V5x5 > div._1lpto > div > span"
-      ) as HTMLElement,
+  const name = document.querySelector(
+      "#main > header > div._3V5x5 > div._1lpto > div > span"
+    ) as HTMLElement,
     typing = document.querySelector(
       "#main > footer > div._2i7Ej.copyable-area > div:nth-child(3)"
     )
@@ -16,12 +15,11 @@ presence.on("UpdateData", async () => {
           "#main > footer > div._2i7Ej.copyable-area > div:nth-child(3)"
         ).firstChild as HTMLElement)
       : null,
-    textPermission =
-      (document.querySelector(
-        "#main > footer > div._2i7Ej.copyable-area > div._13mgZ"
-      ) as HTMLElement)
-        ? true
-        : false;
+    textPermission = (document.querySelector(
+      "#main > footer > div._2i7Ej.copyable-area > div._13mgZ"
+    ) as HTMLElement)
+      ? true
+      : false;
   let contactName = null;
 
   if (!name || name.innerText == "") return presence.clearActivity();

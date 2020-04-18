@@ -1,11 +1,11 @@
 var presence = new Presence({
-  clientId: "630098355145539595",
+  clientId: "630098355145539595"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   var presenceData = {
-    largeImageKey: "lg",
+    largeImageKey: "lg"
   };
 
   let domain = "https://tugastrikes.com/";

@@ -90,6 +90,6 @@ presence.on("UpdateData", async () => {
   }
 });
 
-presence.on("iFrameData", function(data) {
+presence.on("iFrameData", function (data) {
   console.log(data);
 });

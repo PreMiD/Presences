@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "620072679139180575",
+  clientId: "620072679139180575"
 });
 var elapsed = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   let data = {
-    largeImageKey: "gmail-logo",
+    largeImageKey: "gmail-logo"
   };
   var path = window.location.href;
   var emailCheck = window.location.href.split("/").length == 7 ? false : true;

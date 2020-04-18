@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "674236194053160971",
+  clientId: "674236194053160971"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   let data = {
-    largeImageKey: "qdss",
+    largeImageKey: "qdss"
   };
   if (document.location.pathname == "/") {
     if (document.location.href.startsWith("https://www.qdssclub.com/?page=")) {

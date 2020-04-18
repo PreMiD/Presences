@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "638118757453004820",
+  clientId: "638118757453004820"
 });
 
 // TODO: Game List
@@ -51,7 +51,7 @@ var presence = new Presence({
 
 presence.on("UpdateData", async () => {
   let presenceData = {
-    largeImageKey: "jackbox",
+    largeImageKey: "jackbox"
   };
 
   // PP6
