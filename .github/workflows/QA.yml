@@ -45,7 +45,7 @@ jobs:
             git config --local user.name "${GITHUB_USER}";
             git checkout -b semid/qa/`date +%F-%H-%M`;
             git commit -sam "♻️ Refactoring";
-            hub pull-request -p -l "automation" -m "🤖 Daily QA" -m "*bleep bloop* I've prettified and refactored some Presences, feel free to fix or remove the ones that break.";
+            hub pull-request -p -m "🤖 Daily QA" -m "*beep boop* I've prettified and refactored some Presences, feel free to fix or remove the ones that break.";
           fi
         env:
           GITHUB_USER: SeMiD

@@ -6,31 +6,35 @@ const presenceData: presenceData = {
 };
 
 const paths = {
-  "go": "Login Page",
-  "account": "Account",
-  "friends": "Friend Access",
-  "start": "Home",
-  "console": "Console",
-  "log": "Log",
-  "options": "Options",
-  "software": "Software",
-  "players": "Players",
+  go: "Login Page",
+  account: "Account",
+  friends: "Friend Access",
+  start: "Home",
+  console: "Console",
+  log: "Log",
+  options: "Options",
+  software: "Software",
+  players: "Players",
   "players/whitelist": "Whitelisted",
   "players/ops": "OPs",
   "players/banned-players": "Banned Players",
   "players/banned-ips": "Banned IPs",
-  "files": "Files",
-  "addons": "Plugins",
-  "worlds": "Worlds",
-  "backups": "Backups"
+  files: "Files",
+  addons: "Plugins",
+  worlds: "Worlds",
+  backups: "Backups"
 };
-  
+
 presence.on("UpdateData", async () => {
   if (document.location.hostname === "aternos.org") {
     presenceData.startTimestamp = Date.now();
-    const panel = document.querySelector("base[href=\"/panel/\"]");
+    const panel = document.querySelector('base[href="/panel/"]');
     if (panel) {
-      let path = document.location.pathname.endsWith("/") ? document.location.pathname.replace("/", "").slice(0, document.location.pathname.replace("/", "").length - 1) : document.location.pathname.replace("/", "");
+      let path = document.location.pathname.endsWith("/")
+        ? document.location.pathname
+            .replace("/", "")
+            .slice(0, document.location.pathname.replace("/", "").length - 1)
+        : document.location.pathname.replace("/", "");
       if (path.startsWith("software")) path = "software";
       if (path.startsWith("files")) path = "files";
       if (path.startsWith("addons")) path = "addons";
@@ -87,4 +91,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData);
 });
-  

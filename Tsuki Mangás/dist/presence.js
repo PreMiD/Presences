@@ -1,6 +1,6 @@
 var presence = new Presence({
-  clientId: "684627733145452555"
-}),
+    clientId: "684627733145452555"
+  }),
   strings = presence.getStrings({
     reading: "presence.activity.reading"
   });
@@ -34,14 +34,27 @@ presence.on("UpdateData", async () => {
       presenceData.state = state;
     }
     if (document.location.pathname.split("/").slice(-1)[0] != "editar")
-      PerfilStatus("Vendo um perfil", document.querySelector("#capapl > b").textContent);
+      PerfilStatus(
+        "Vendo um perfil",
+        document.querySelector("#capapl > b").textContent
+      );
     else if (document.location.pathname.split("/").length == 4) {
-      var user = document.querySelector(
-        "#app > header > div.wrap > nav#menu > li.drop.mbl > ul.drop_menu > a"
-      ).href.toString().split(document.location.origin).join("").split("/").slice(-1)[0];
+      var user = document
+        .querySelector(
+          "#app > header > div.wrap > nav#menu > li.drop.mbl > ul.drop_menu > a"
+        )
+        .href.toString()
+        .split(document.location.origin)
+        .join("")
+        .split("/")
+        .slice(-1)[0];
       if (user == document.location.pathname.split("/").slice(-2)[0])
-        PerfilStatus("Editando perfil", user)
-      else PerfilStatus("Vendo um perfil", document.location.pathname.split("/").slice(-2)[0]);
+        PerfilStatus("Editando perfil", user);
+      else
+        PerfilStatus(
+          "Vendo um perfil",
+          document.location.pathname.split("/").slice(-2)[0]
+        );
     }
   } else if (document.location.pathname.includes("/manga") && notfound) {
     presenceData.startTimestamp = browsingStamp;
@@ -53,7 +66,7 @@ presence.on("UpdateData", async () => {
     var manga = document.querySelector("b.f20").textContent;
     var chapter = document.querySelector("b.f14c").innerText;
     var page = document.querySelector("select.backgsla.frightrr").value;
-    isNaN(page) ? page = "Páginas abertas" : page = "Página " + page;
+    isNaN(page) ? (page = "Páginas abertas") : (page = "Página " + page);
     presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "reading";
     presenceData.details = manga;
