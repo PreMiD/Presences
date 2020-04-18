@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Chess today";
   } else if (document.location.pathname.indexOf("/news/view/") == 0) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Reading news"
+      presenceData.details = "Reading news";
       presenceData.state = document.title;
   } else if (document.location.pathname == "/news") {
       presenceData.startTimestamp = browsingStamp;
@@ -144,8 +144,8 @@ presence.on("UpdateData", async () => {
       timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration));
-      presenceData.largeImageKey = "chess"
-      presenceData.details = "Watching video"
+      presenceData.largeImageKey = "chess";
+      presenceData.details = "Watching video";
       presenceData.state = document.title;
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
