@@ -74,6 +74,12 @@ presence.on("UpdateData", () => {
   } else if (window.location.pathname.startsWith("/trending/")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Trending";
+  } else if (window.location.pathname.startsWith("/register/")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Account register";
+  } else if (window.location.pathname.startsWith("/recover/")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Password recovery";
   } else if (window.location.pathname.startsWith("/news/")) {
     presenceData.details = "Reading news:";
     presenceData.state = document.querySelector(
