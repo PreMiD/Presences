@@ -86,6 +86,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = `Viewing ${author}'s fun`;
   } else if (document.location.pathname.slice(1).startsWith("legendary")) {
     presenceData.details = "Viewing the most legendary fun";
+  } else if (document.location.pathname.slice(1).startsWith("search")) {
+    const query = document.location.pathname.slice(10, document.location.pathname.length);
+    presenceData.details = "Searching fun:";
+    presenceData.state = query;
   }
   presence.setActivity(presenceData);
 });
