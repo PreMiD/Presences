@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { blueBright, gray, green, red, yellow } from "chalk";
+import { blueBright, green, red, yellow } from "chalk";
 import execa = require("execa");
 import { readdirSync, readFileSync, writeFileSync } from "fs";
 import { sync as glob } from "glob";
@@ -137,12 +137,9 @@ const prettify = async () => {
       filepath: fileToPrettify
     });
 
-    // If the file content is the same as the formatted content
-    if (formatted === fileContent) {
-      // Log it with a grey colour to indicate it didn't change
-      console.log(gray(relative(__dirname, fileToPrettify)));
-    } else {
-      // Otherwise write the file to the system
+    // If the file content isn't the same as the formatted content
+    if (formatted !== fileContent) {
+      // Write the file to the system
       writeFile(fileToPrettify, formatted);
       // And log the name with a green colour to indicate it did change
       console.log(green(relative(__dirname, fileToPrettify)));
@@ -277,6 +274,7 @@ main();
 /** Typings for the Metadata JSON file */
 interface Metadata {
   author: { name: string; id: string };
+  contributors: Array<{ name: string; id: string }>;
   service: string;
   description: Record<string, string>;
   url: string;
@@ -284,6 +282,15 @@ interface Metadata {
   logo: string;
   thumbnail: string;
   color: string;
-  tags: string[];
+  tags: Array<string>;
   category: string;
+  button: boolean;
+  settings: Array<{
+    id: string;
+    title: string;
+    icon: string;
+    placeholder: string;
+    value: string | number | boolean;
+    values: Array<string | number | boolean>;
+  }>;
 }
