@@ -1,13 +1,14 @@
 name: QA
 
 on:
-  schedule:
-    - cron: 0 1 * * *
+  push:
+    branches:
+      - master
 
 jobs:
   qa:
     name: Quality Assurance
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -21,9 +22,7 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
       - name: Install Deps
-        run: |
-          sudo snap install hub --classic
-          yarn
+        run: yarn
       - name: Compile Script
         run: yarn qa:compile
       - name: Start QA
@@ -45,7 +44,7 @@ jobs:
             git config --local user.name "${GITHUB_USER}";
             git checkout -b semid/qa/`date +%F-%H-%M`;
             git commit -sam "♻️ Refactoring";
-            hub pull-request -p -m "🤖 Daily QA" -m "*beep boop* I've prettified and refactored some Presences, feel free to fix or remove the ones that break.";
+            hub pull-request -p -m "🤖 Daily QA" -m "*beep boop* I've prettified and refactored some Presences...";
           fi
         env:
           GITHUB_USER: SeMiD

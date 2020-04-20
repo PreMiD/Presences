@@ -274,7 +274,7 @@ main();
 /** Typings for the Metadata JSON file */
 interface Metadata {
   author: { name: string; id: string };
-  contributors: Array<{ name: string; id: string }>;
+  contributors?: Array<{ name: string; id: string }>;
   service: string;
   description: Record<string, string>;
   url: string;
@@ -282,15 +282,15 @@ interface Metadata {
   logo: string;
   thumbnail: string;
   color: string;
-  tags: Array<string>;
+  tags: string | Array<string>;
   category: string;
-  button: boolean;
-  settings: Array<{
+  button?: boolean;
+  settings?: Array<{
     id: string;
     title: string;
     icon: string;
-    placeholder: string;
-    value: string | number | boolean;
-    values: Array<string | number | boolean>;
+    placeholder?: string;
+    value?: string | number | boolean;
+    values?: Array<string | number | boolean>;
   }>;
 }
