@@ -19,9 +19,6 @@
   "logo": "https://menma.is-inside.me/V5Ay5LwN.png",
   "thumbnail": "https://menma.is-inside.me/48rF9MaF.png",
   "color": "#161616",
-  "tags": [
-    "manga",
-    "reading"
-  ],
+  "tags": ["manga", "reading"],
   "category": "anime"
 }

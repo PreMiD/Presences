@@ -31,7 +31,10 @@ if (lastPlaybackState != playback) {
 }
 presence.on("UpdateData", async () => {
   playback =
-    (document.querySelector(".vjs-current-time-display") || document.querySelector(".jw-text-elapsed")) !== null ? true : false;
+    (document.querySelector(".vjs-current-time-display") ||
+      document.querySelector(".jw-text-elapsed")) !== null
+      ? true
+      : false;
   var presenceData: presenceData = {
     largeImageKey: "logo"
   };
@@ -45,7 +48,9 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  var video: HTMLVideoElement = document.querySelector("#video1_html5_api") || document.querySelector(".jw-video");
+  var video: HTMLVideoElement =
+    document.querySelector("#video1_html5_api") ||
+    document.querySelector(".jw-video");
 
   if (video !== null && !isNaN(video.duration)) {
     var videoTitle: any;
