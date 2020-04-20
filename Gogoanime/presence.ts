@@ -10,12 +10,16 @@ var videoInfos = {
 
 var dataUpdated = false;
 
-presence.on("iFrameData", (videoData: { duration: number; currentTime: number; paused: boolean; }) => {
+presence.on("iFrameData", (videoData: { duration: number; currentTime: number; paused: boolean }) => {
   videoInfos = videoData;
   dataUpdated = true;
 });
 
 var oldTime = 0;
+
+function upperCaseFirstChar(word: string): string {
+    return word[0].toUpperCase() + word.slice(1, word.length);
+  }
 
 function formatAnime(anime: string[]): string {
     let format = "";
@@ -24,10 +28,6 @@ function formatAnime(anime: string[]): string {
         format += upperCaseFirstChar(part) + " ";
     }
     return format.replace("Dub", "(Dub)");
-  }
-
-  function upperCaseFirstChar(word: string): string {
-    return word[0].toUpperCase() + word.slice(1, word.length);
   }
 
   function getEndTime(current: number, duration: number): number {
