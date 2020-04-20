@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "@types/chrome": "^0.0.104",
-    "@types/mongodb": "^3.5.5"
+    "@types/mongodb": "^3.5.8"
   }
 }
