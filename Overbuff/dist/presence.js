@@ -8,10 +8,11 @@ presence.on("UpdateData", () => {
     };
 
     if (window.location.pathname.includes("/players/")) {
-        var nickname = presenceData.state = document.querySelector("div.layout-header-primary-bio > h1").firstChild.textContent
+        var nickname = document.querySelector("div.layout-header-primary-bio > h1").firstChild.textContent;
+        var level = document.querySelector("div.image-with-corner > div.corner.corner-text").textContent;
         if (window.location.pathname.includes("pc")) {
             presenceData.smallImageKey = "windows";
-            presenceData.smallImageText = "Playing on Windows";
+            presenceData.smallImageText = "Playing on PC";
         } else if (window.location.pathname.includes("xbl")) {
             presenceData.smallImageKey = "xbox";
             presenceData.smallImageText = "Playing on Xbox";
@@ -19,9 +20,30 @@ presence.on("UpdateData", () => {
             presenceData.smallImageKey = "ps4";
             presenceData.smallImageText = "Playing on Playstation";
         }
-        presenceData.details = "Viewing a profile:";
-        presenceData.state = nickname +
-            " | Level: " + document.querySelector("div.image-with-corner > div.corner.corner-text").textContent;
+        presenceData.details = "Viewing a player:";
+        presenceData.state = nickname + ` | Level: ${level}`;
+        if (window.location.pathname.includes("/heroes")) {
+            presenceData.details = `Viewing ${nickname}`;
+            presenceData.state = "Browsing heroes";
+            try {
+                var get_hero = document.querySelector("div.name > a").textContent;
+                presenceData.state += ` (${get_hero})`;
+            } catch {
+                //Catch nothing
+            }
+        } else if (window.location.pathname.includes("/records")) {
+            presenceData.details = `Viewing ${nickname}`;
+            presenceData.state = "Browsing records";
+        } else if (window.location.pathname.includes("/trends")) {
+            presenceData.details = `Viewing ${nickname}`;
+            presenceData.state = "Browsing trends";
+        } else if (window.location.pathname.includes("/activity")) {
+            presenceData.details = `Viewing ${nickname}`;
+            presenceData.state = "Browsing activity";
+        } else if (window.location.pathname.includes("/trends")) {
+            presenceData.details = `Viewing ${nickname}`;
+            presenceData.state = "Browsing trends";
+        }
     } else if (window.location.pathname.includes("/heroes")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Heroes";
@@ -29,13 +51,23 @@ presence.on("UpdateData", () => {
             var hero_name = document.querySelector("div.layout-header-primary-bio > div > h1").firstChild.textContent;
             var hero_role = document.querySelector("div.layout-header-primary-bio > div > h1 > small").textContent;
             presenceData.details = "Viewing a Hero:";
-            presenceData.state = hero_name + " (" + hero_role + ")";
+            presenceData.state = `${hero_name} (${hero_role})`;
         } catch {
             console.log("That's not a Hero profile.")
         }
     } else if (window.location.pathname.includes("/roles")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Roles";
+        try {
+            var role_name = document.querySelector("div.layout-header-primary-bio > div > h1").firstChild.textContent;
+            presenceData.details = "Viewing a role:";
+            presenceData.state = role_name;
+            if (window.location.pathname.includes("/rankings")) {
+                presenceData.state = `${role_name} ranking`;
+            }
+        } catch {
+            console.log("That's not a Hero profile.")
+        }
     } else if (window.location.pathname.includes("/verified")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Verified Players";
@@ -48,6 +80,9 @@ presence.on("UpdateData", () => {
     } else if (window.location.pathname.includes("/live")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Live Streams";
+    } else if (window.location.pathname.includes("/compare")) {
+        presenceData.details = "Viewing a page:";
+        presenceData.state = "Compare players";
     } else if (window.location.pathname.includes("/blog")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Overbuff Blog";
