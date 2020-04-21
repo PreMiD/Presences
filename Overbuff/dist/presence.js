@@ -21,7 +21,7 @@ presence.on("UpdateData", () => {
             presenceData.smallImageText = "Playing on Playstation";
         }
         presenceData.details = "Viewing a player:";
-        presenceData.state = nickname + ` | Level: ${level}`;
+        presenceData.state = `${nickname} | Level: ${level}`;
         if (window.location.pathname.includes("/heroes")) {
             presenceData.details = `Viewing ${nickname}`;
             presenceData.state = "Browsing heroes";
