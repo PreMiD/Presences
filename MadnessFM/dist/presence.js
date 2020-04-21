@@ -1,5 +1,5 @@
 let presence = new Presence({
-  clientId: "456601190671843328"
+  clientId: "701922288488022046"
 });
 
 function getTimestamps(videoTime, videoDuration) {
@@ -8,65 +8,55 @@ function getTimestamps(videoTime, videoDuration) {
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let strack, sartist, slisteners, slive, sdj, sduration, selepased;
-
-setInterval(newStats, 1000);
-newStats();
-
-function newStats() {
-  let xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      let data = JSON.parse(this.responseText);
-      strack = data.now_playing.song.title;
-      sartist = data.now_playing.song.artist;
-      slisteners = data.listeners.total;
-      slive = data.live.is_live;
-      sDJ = data.live.streamer_name;
-      sduration = data.now_playing.duration;
-      selapsed = data.now_playing.elapsed;
-    }
-  };
-  xhttp.open("GET", "http://live.madnessfm.com/api/live/nowplaying/madness_fm", true);
-  xhttp.withCredentials = true;
-  xhttp.send();
-}
-
 let browsingStamp = Math.floor(Date.now() / 1000);
 let lastTitle;
 let lastTimeStart = Math.floor(Date.now() / 1000);
 let lastDetails;
 let lastDetailsTimeStart = Math.floor(Date.now() / 1000);
-
-presence.on("UpdateData", function () {
+var play, pause, songTitle, songArtist, dj;
+presence.on("UpdateData", async() => {
   let presenceData = {
-    largeImageKey: "hlr"
+    largeImageKey: "mad"
   };
 
-  if (sduration == 0) {
-    if (lastTitle != strack) {
-      lastTitle = strack;
-      lastTimeStart = Math.floor(Date.now() / 1000);
-    }
-
-    presenceData.startTimestamp = lastTimeStart;
-  } else {
-    let timestamps = getTimestamps(Math.floor(selapsed), Math.floor(sduration));
-
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+  if(document.location.pathname == "/" || document.location.pathname == "/home.php"){
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Choosing station";
   }
-
-  if (slive) {
-    presenceData.details = strack + " - " + sartist;
-    presenceData.state = "Listening to " + sDJ;
-  } else {
-    presenceData.details = strack;
-    presenceData.state = "by: " + sartist;
+  else if(document.location.pathname == "/team"){
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing the Team";
   }
-  presenceData.smallImageText = "Listeners: " + slisteners;
-  presenceData.smallImageKey = "play";
-
+  else if(document.location.pathname == "/schedule"){
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing the Schedule";
+  }
+  else if(document.location.pathname == "/community"){
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing the Community";
+  }
+  else if(document.location.pathname == "/community"){
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing the Community";
+  }
+  else if(document.location.pathname == "/getinvolved"){
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing how to get involved";
+  }
+  else if(document.location.pathname == "/contactus"){
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing Contact MadnessFM";
+  }
+  else if(document.location.pathname == "/popoutplayer.php"){
+    presenceData.startTimestamp = browsingStamp;
+    play = document.querySelector("#stream1 > div > div > div.ppBtn.play-btn");
+    pause = document.querySelector("#stream1 > div > div > div.ppBtn.playing.stop-btn");
+    songTitle = document.querySelector("#stream1 > div > div > div.player-ctr > div.track-info.animated > div.track-title.animated").textContent;
+    songArtist = document.querySelector("#stream1 > div > div > div.player-ctr > div.track-info.animated > div.artist-name.animated").textContent;
+    dj = document.querySelector("body > div.container > div > div.card-header.col-md-12.centertext.bg-danger > h5 > small").textContent;
+    presenceData.details = "Viewing:" + songTitle + songArtist;
+    presenceData.state = "DJ: " + dj;
+  }
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
