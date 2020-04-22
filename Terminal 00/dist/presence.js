@@ -8,15 +8,14 @@ presence.on("UpdateData", async () => {
   let presenceData = {
     largeImageKey: "irentae",
     startTimestamp: elapsed,
-    details: location.href.split(location.host)[1].replace(/^\//, "")
+    details: location.href.split(location.host)[1]
   };
 
   if (
     location.pathname === "/" ||
-    location.href.split(location.host)[1].replace(/^\//, "").toLowerCase() ===
-      "index"
+    location.href.split(location.host)[1].toLowerCase() === "/index"
   ) {
-    presenceData.details = "Index";
+    presenceData.details = "/index";
   }
 
   presence.setTrayTitle("Terminal 00 - " + presenceData.details);
