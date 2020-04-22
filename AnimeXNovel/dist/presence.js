@@ -1,19 +1,19 @@
 var presence = new Presence({
     clientId: "700596580218175548"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
-var resultsInfo, searchTab;
-var titulo = document.title;
-var pesquisaR = titulo.slice(77);
-var tituloLength = titulo.length - 3;
-var obraR = titulo.slice(0, tituloLength);
-var capituloR = titulo.slice(tituloLength);
-var removeanime = titulo.slice(7);
-var obraanimeR = removeanime.slice(0, titulo.length - 18);
-var listaR = titulo.slice(54);
-var capitulo = document.querySelector('h2.post-title.entry-title').textContent.match(/\d+/g) || null;
-var obra = document.querySelector('h2.post-title.entry-title').textContent;
-var noticia = document.querySelector('h2.post-title.entry-title').textContent;
+let browsingStamp = Math.floor(Date.now() / 1000);
+let resultsInfo, searchTab;
+let titulo = document.title;
+let pesquisaR = titulo.slice(77);
+let tituloLength = titulo.length - 3;
+let obraR = titulo.slice(0, tituloLength);
+let capituloR = titulo.slice(tituloLength);
+let removeanime = titulo.slice(7);
+let obraanimeR = removeanime.slice(0, titulo.length - 18);
+let listaR = titulo.slice(54);
+let capitulo = document.querySelector('h2.post-title.entry-title').textContent.match(/\d+/g) || null;
+let obra = document.querySelector('h2.post-title.entry-title').textContent;
+let noticia = document.querySelector('h2.post-title.entry-title').textContent;
 presence.on("UpdateData", async () => {
     const data = {
         largeImageKey: "axn-logo"
