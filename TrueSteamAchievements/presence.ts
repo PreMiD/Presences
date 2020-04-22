@@ -171,6 +171,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the leaderboards";
   } else if (document.location.pathname.includes("/userleaderboards.aspx")) {
     presenceData.details = "Viewing user created leaderboards";
+  } else if (document.location.pathname == "/") {
+    presenceData.details = "Browsing...";
   }
 
   if (presenceData.details == null) {
