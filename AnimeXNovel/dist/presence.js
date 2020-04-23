@@ -18,11 +18,7 @@ presence.on("UpdateData", async () => {
     const data = {
         largeImageKey: "axn-logo"
     };
-    if(document.location.pathname == "/") {
-        data.details = "Início";
-        data.startTimestamp = browsingStamp;
-    }
-    else if(document.location.pathname.indexOf("anime") != -1) {
+    if(document.location.pathname.indexOf("anime") != -1) {
         data.details = obraanimeR;
         data.state = "Episódio " + capituloR;
         data.startTimestamp = browsingStamp;
