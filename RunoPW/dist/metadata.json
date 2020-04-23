@@ -4,19 +4,19 @@
     "id": "665482610859966464"
   },
   "contributors": [{
-    "name": "Runo.PW",
+    "name": "Runo",
     "id": "702935358395908168"
   }],
-  "service": "Runo.PW",
+  "service": "Runo",
   "description": {
-    "en": "MAKE FRIENDS & CHAT WITH MILLIONS IN A VIRTUAL WORLD",
-    "tr": "MÜTHİŞ İNSANLARLA DOLU İLGİNÇ BİR YER"
+    "en": "Make Friends & Chat With Millions In A Virtual World",
+    "tr": "Müthiş İnsanlarla Dolu İlginç Bir Yer"
   },
   "url": "runo.pw",
   "version": "1.0.0",
   "logo": "https://runo.pw/public/images/logo.png",
   "thumbnail": "https://runo.pw/public/images/logo.png",
-  "color": "#HEXff0",
-  "tags": ["Games", "Games"],
+  "color": "#ffff00",
+  "tags": ["Runo", "Sanal Dünya"],
   "category": "games"
 }
