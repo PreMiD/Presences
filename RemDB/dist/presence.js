@@ -74,6 +74,12 @@ presence.on("UpdateData", () => {
   } else if (window.location.pathname.startsWith("/trending/")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Trending";
+  } else if (window.location.pathname.startsWith("/register/")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Account register";
+  } else if (window.location.pathname.startsWith("/recover/")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Password recovery";
   } else if (window.location.pathname.startsWith("/news/")) {
     presenceData.details = "Reading news:";
     presenceData.state = document.querySelector(
@@ -111,7 +117,11 @@ presence.on("UpdateData", () => {
     presenceData.state = "Shoutbox";
   } else {
     presenceData.details = "Viewing a page:";
-    presenceData.state = "Front page";
+    presenceData.state =
+      "Front page (Online: " +
+      document.querySelector("div > span#s4db-server-info-players")
+        .textContent +
+      ")";
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();

@@ -89,7 +89,9 @@ presence.on("UpdateData", async () => {
             : "A song") + (media.album ? " on " + media.album : "");
         media.artist
           ? (data.state = "by " + media.artist)
-          : (data.state = media.filename);
+          : media.filename
+          ? (data.state = media.filename)
+          : delete data.state;
       } else if (isShow) {
         media.showName
           ? (data.details = media.showName)
