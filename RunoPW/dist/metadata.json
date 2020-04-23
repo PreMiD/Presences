@@ -4,8 +4,8 @@
     "id": "665482610859966464"
   },
   "contributors": [{
-    "name": "RunoPW",
-    "id": "702935358395908168"
+    "name": "Fortes",
+    "id": "701832254644551774"
   }],
   "service": "RunoPW",
   "description": {
@@ -15,8 +15,8 @@
   "url": "runo.pw",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/utrvCGI.png",
-  "thumbnail": "https://i.imgur.com/utrvCGI.png",
+  "thumbnail": "https://i.imgur.com/f7C9hGS.png",
   "color": "#ffff00",
-  "tags": ["runo", "habbo", "sanal-oyun"],
+  "tags": ["runo", "habbo", "sanal-oyun", "sanal-game"],
   "category": "games"
 }
