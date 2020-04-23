@@ -15,18 +15,31 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Início";
-  } else if (document.location.pathname.includes("/lista-mangas") && !notfound) {
+  } else if (document.location.pathname.startsWith("/lista-mangas") && !notfound) {
+    var listCurrentPage = document.querySelector(
+      "#app > div.manga > div.alllc > ul.pagination > li.active"
+    );
+    var listMaxPage = document.querySelectorAll(
+      "#app > div.manga > div.alllc > ul.pagination > li > a"
+    );
+    var listPage = "";
+    if (listCurrentPage != null && listMaxPage != null) {
+      if (!listMaxPage[listMaxPage.length - 1].innerText.includes("Próximo"))
+        listMaxPage = listCurrentPage.innerText;
+      else listMaxPage = listMaxPage[listMaxPage.length - 2].innerText;
+      listPage = " - Página " + listCurrentPage.innerText + "/" + listMaxPage;
+    }
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Lista de Mangás";
+    presenceData.details = "Lista de Mangás" + listPage;
     var GenerosN = document.querySelector(
       "#app > div.manga > div.alllc > div.multiselect.boxgenman > div.multiselect__tags > div.multiselect__tags-wrap"
-    ).innerText;
-    if (GenerosN.toString().trim())
-      presenceData.state = GenerosN.toString().split("\n").join(", ");
-  } else if (document.location.pathname.includes("/equipe") && !notfound) {
+    );
+    if (GenerosN != null && GenerosN.innerText.trim())
+      presenceData.state = "Gêneros: " + GenerosN.innerText.split("\n").join(", ");
+  } else if (document.location.pathname.startsWith("/equipe") && !notfound) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Equipe";
-  } else if (document.location.pathname.includes("/perfil/") && !notfound) {
+  } else if (document.location.pathname.startsWith("/perfil/") && !notfound) {
     function PerfilStatus(detail, state) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = detail;
@@ -41,14 +54,9 @@ presence.on("UpdateData", async () => {
       var user = document
         .querySelector(
           "#app > header > div.wrap > nav#menu > li.drop.mbl > ul.drop_menu > a"
-        )
-        .href.toString()
-        .split(document.location.origin)
-        .join("")
-        .split("/")
-        .slice(-1)[0];
+        ).href.split("/").slice("-1")[0];
       if (user == document.location.pathname.split("/").slice(-2)[0])
-        PerfilStatus("Editando Perfil", "User: " + user);
+        PerfilStatus("Editando Perfil", user);
       else
         PerfilStatus(
           "Vendo um Perfil:",
@@ -56,40 +64,51 @@ presence.on("UpdateData", async () => {
         );
     }
   } else if (document.location.pathname.startsWith("/manga/") && !notfound) {
-    var MangaName = document.querySelector(
+    var MangaDefaultName = document.querySelector(
       "#app > div.manga.mtopmanga > div.all > div.rigt > div.tity > h2 > b"
-    ).innerText;
+    );
     var MangaAltNames = document.querySelector("#app > div.manga.mtopmanga > div.all > div.lef > div.altt");
+    var MangaName = "...";
+    if (MangaDefaultName != null && MangaDefaultName.innerText.trim()) {
+      (MangaAltNames == null || !MangaAltNames.innerText.trim()) ? (MangaAltNames = "") : (MangaAltNames = " (" + MangaAltNames.innerText + ")");
+      MangaName = MangaDefaultName.innerText + MangaAltNames;
+    }
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Vendo um Mangá:";
     presenceData.state = MangaName;
-    if (MangaAltNames != null)
-      presenceData.state = MangaName + " (" + document.getElementsByClassName("altt")[0].innerText + ")";
   } else if (document.location.pathname.startsWith("/leitor/") && !notfound) {
     var manga = document.querySelector("b.f20").textContent;
-    var chapter = document.querySelector("b.f14c").innerText;
+    var chapter = document.querySelector("b.f14c").innerText.replace(" - ", ": ");
     var page = document.querySelector("select.backgsla.frightrr").value;
     isNaN(page) ? (page = "Páginas abertas") : (page = "Página " + page);
     presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "reading";
     presenceData.details = manga;
-    presenceData.state = chapter + " - " + page;
-  } else if (document.location.pathname.startsWith("/scan/") && !notfound) {
-    var scanName = document.querySelector("#app > div.scan > div.contentscan > div > h2").innerText;
+    presenceData.state = (chapter + " - " + page);
+  } else if (document.location.pathname.startsWith("/scan/") && document.location.pathname != "/scan/" && !notfound) {
+    var scanName = document.querySelector("#app > div.scan > div.contentscan > div > h2");
     var scanCurrentPage = document.querySelector(
       "#app > div.scan > div.contentscan > div > ul.pagination > li.active > a"
     );
-    (scanCurrentPage == null) ? (scanCurrentPage = "1") : (scanCurrentPage = scanCurrentPage.innerText);
-    var scanMaxPage = document.querySelector(
-      "#app > div.scan > div.contentscan > div > ul.pagination"
+    var scanMaxPage = document.querySelectorAll(
+      "#app > div.scan > div.contentscan > div > ul.pagination > li > a"
     );
-    (scanMaxPage == null) ? (scanMaxPage = "1") : (scanMaxPage = scanMaxPage.innerText
-      .replace(" Próximo", "")
-      .replace("Voltar ", "")
-      .length.toString());
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Vendo um Scan Perfil:";
-    presenceData.state = scanName + " - Página " + scanCurrentPage + "/" + scanMaxPage;
+    var scanPage = "";
+    if (scanCurrentPage != null && scanMaxPage != null) {
+      if (!scanMaxPage[scanMaxPage.length - 1].innerText.includes("Próximo"))
+        scanMaxPage = scanCurrentPage.innerText;
+      else scanMaxPage = scanMaxPage[scanMaxPage.length - 2].innerText;
+      scanPage = " - Página " + scanCurrentPage.innerText + "/" + scanMaxPage;
+    }
+    var scanMembers = document.querySelectorAll(
+      "#app > div.scan > div.contentscan > div > div.membrosscan > b"
+    ).length;
+    (scanMembers != 0) ? (scanMembers = " - " + scanMembers.toString() + " Membros") : (scanMembers = "");
+    if (scanName != null && scanName.innerText.trim()) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Vendo um Scan Perfil:";
+      presenceData.state = (scanName.innerText + scanMembers + scanPage);
+    }
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();
