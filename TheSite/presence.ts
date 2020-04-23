@@ -236,7 +236,7 @@ presence.on("UpdateData", async () => {
         ".mv-movie-title > span > span > strong"
       ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/);
       const setting = await presence.getSetting("show-format");
-      let title: string = getElement(".mv-movie-title > span > a");
+      const title: string = getElement(".mv-movie-title > span > a");
       if (title !== "Loading...") {
         const season = regex.groups.season;
         const episode = regex.groups.episode;
@@ -268,7 +268,7 @@ presence.on("UpdateData", async () => {
         ".full-title > .content > .seq > em"
       ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/);
       const setting = await presence.getSetting("show-format");
-      let title: string = getElement(".full-title > .content > .title");
+      const title: string = getElement(".full-title > .content > .title");
       if (title !== "Loading...") {
         const season = regex.groups.season;
         const episode = regex.groups.episode;
