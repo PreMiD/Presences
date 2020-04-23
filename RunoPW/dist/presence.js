@@ -1,10 +1,7 @@
 var presence = new Presence({
     clientId: "702935358395908168"
   }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
