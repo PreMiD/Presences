@@ -8,7 +8,15 @@ const presenceData: presenceData = {
 presence.on("UpdateData", async () => {
   const startTimestamp: number = Date.now();
   presenceData.startTimestamp = startTimestamp;
-  switch (document.location.pathname.endsWith("/") && document.location.pathname.length > 1 ? document.location.pathname.slice(0, document.location.pathname.length - 1) : document.location.pathname) {
+  switch (
+    document.location.pathname.endsWith("/") &&
+    document.location.pathname.length > 1
+      ? document.location.pathname.slice(
+          0,
+          document.location.pathname.length - 1
+        )
+      : document.location.pathname
+  ) {
     case "/":
       presenceData.details = "Viewing fun through homepage";
       break;
@@ -87,7 +95,10 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.slice(1).startsWith("legendary")) {
     presenceData.details = "Viewing the most legendary fun";
   } else if (document.location.pathname.slice(1).startsWith("search")) {
-    const query = document.location.pathname.slice(10, document.location.pathname.length);
+    const query = document.location.pathname.slice(
+      10,
+      document.location.pathname.length
+    );
     presenceData.details = "Searching fun:";
     presenceData.state = query;
   }
