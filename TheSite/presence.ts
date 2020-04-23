@@ -166,7 +166,7 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = elapsed;
   }
 
-  const parseVideo = async () => {
+  const parseVideo = async (): Promise<void> => {
     const status = videoStatus(video);
     data.smallImageKey = status;
     data.smallImageText = (await strings)[status];
@@ -192,7 +192,7 @@ presence.on("UpdateData", async () => {
       data.state = `Requests (${getElement(".nav-tabs > .active")})`;
     }
     if (path.includes("/collections")) {
-      var title = getElement(".page-videolist > h1");
+      let title = getElement(".page-videolist > h1");
       title = title === "Loading..." ? undefined : title;
       data.details = "Browsing";
       data.state = "Collections";
@@ -236,7 +236,7 @@ presence.on("UpdateData", async () => {
         ".mv-movie-title > span > span > strong"
       ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/);
       const setting = await presence.getSetting("show-format");
-      var title: string = getElement(".mv-movie-title > span > a");
+      let title: string = getElement(".mv-movie-title > span > a");
       if (title !== "Loading...") {
         const season = regex.groups.season;
         const episode = regex.groups.episode;
@@ -268,7 +268,7 @@ presence.on("UpdateData", async () => {
         ".full-title > .content > .seq > em"
       ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/);
       const setting = await presence.getSetting("show-format");
-      var title: string = getElement(".full-title > .content > .title");
+      let title: string = getElement(".full-title > .content > .title");
       if (title !== "Loading...") {
         const season = regex.groups.season;
         const episode = regex.groups.episode;
