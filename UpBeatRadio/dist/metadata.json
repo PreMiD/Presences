@@ -41,8 +41,8 @@
       },
       "title": "Song format",
       "icon": "fas fa-paragraph",
-      "value": "\"%song\" by %artist",
-      "placeholder": "use %song or %artist"
+      "value": "\"%song%\" by %artist%",
+      "placeholder": "use %song% or %artist%"
     },
     {
       "id": "sFormatNoDj1",
@@ -51,8 +51,8 @@
       },
       "title": "Song format line 1",
       "icon": "fas fa-paragraph",
-      "value": "\"%song\"",
-      "placeholder": "use %song or %artist"
+      "value": "\"%song%\"",
+      "placeholder": "use %song% or %artist%"
     },
     {
       "id": "sFormatNoDj2",
@@ -61,8 +61,8 @@
       },
       "title": "Song format line 2",
       "icon": "fas fa-paragraph",
-      "value": "by %artist",
-      "placeholder": "use %song or %artist"
+      "value": "by %artist%",
+      "placeholder": "use %song% or %artist%"
     }
   ],
   "button": false

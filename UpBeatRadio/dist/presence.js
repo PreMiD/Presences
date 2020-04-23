@@ -153,24 +153,24 @@ presence.on("UpdateData", async () => {
 
     if (dj) {
       presenceData.details = format
-        .replace("%song", document.querySelector(".stats-song").textContent)
+        .replace("%song%", document.querySelector(".stats-song").textContent)
         .replace(
-          "%artist",
+          "%artist%",
           document.querySelector(".stats-artist").textContent
         );
       presenceData.state =
         djType + document.querySelector(".stats-djName").textContent;
     } else {
       presenceData.details = format1
-        .replace("%song", document.querySelector(".stats-song").textContent)
+        .replace("%song%", document.querySelector(".stats-song").textContent)
         .replace(
-          "%artist",
+          "%artist%",
           document.querySelector(".stats-artist").textContent
         );
       presenceData.state = format2
-        .replace("%song", document.querySelector(".stats-song").textContent)
+        .replace("%song%", document.querySelector(".stats-song").textContent)
         .replace(
-          "%artist",
+          "%artist%",
           document.querySelector(".stats-artist").textContent
         );
     }
