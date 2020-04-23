@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "め Kerem",
+    "id": "665482610859966464"
+  },
+  "contributors": [{
+    "name": "Runo.PW",
+    "id": "702935358395908168"
+  }],
+  "service": "Runo.PW",
+  "description": {
+    "en": "MAKE FRIENDS & CHAT WITH MILLIONS IN A VIRTUAL WORLD",
+    "tr": "MÜTHİŞ İNSANLARLA DOLU İLGİNÇ BİR YER"
+  },
+  "url": "runo.pw",
+  "version": "1.0.0",
+  "logo": "https://runo.pw/public/images/logo.png",
+  "thumbnail": "https://runo.pw/public/images/logo.png",
+  "color": "#HEXff0",
+  "tags": ["Games", "Games"],
+  "category": "games"
+}
