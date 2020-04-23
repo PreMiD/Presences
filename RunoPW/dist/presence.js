@@ -1,6 +1,6 @@
 var presence = new Presence({
     clientId: "702935358395908168"
-  }),
+  });
   
 var browsingStamp = Math.floor(Date.now() / 1000);
 
