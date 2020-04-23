@@ -84,19 +84,19 @@ presence.on("UpdateData", async () => {
     if (globalRepeats !== null) {
       if (sGlobalRepeat) {
         presenceData.state = sFormatGlobalRepeat
-          .replace("%repeatm", repeatsTrans)
-          .replace("%repeats", repeats)
-          .replace("%grepeatm", gRepeatTrans)
-          .replace("%grepeats", globalRepeats);
+          .replace("%repeatm%", repeatsTrans)
+          .replace("%repeats%", repeats)
+          .replace("%grepeatm%", gRepeatTrans)
+          .replace("%grepeats%", globalRepeats);
       } else {
         presenceData.state = sFormatRepeat
-          .replace("%repeatm", repeatsTrans)
-          .replace("%repeats", repeats);
+          .replace("%repeatm%", repeatsTrans)
+          .replace("%repeats%", repeats);
       }
     } else {
       presenceData.state = sFormatRepeat
-        .replace("%repeatm", repeatsTrans)
-        .replace("%repeats", repeats);
+        .replace("%repeatm%", repeatsTrans)
+        .replace("%repeats%", repeats);
     }
 
     if (paused) {

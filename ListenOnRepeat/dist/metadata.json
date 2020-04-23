@@ -30,8 +30,8 @@
       },
       "title": "Display Format",
       "icon": "fas fa-paragraph",
-      "value": "%repeatm: %repeats",
-      "placeholder": "use: %repeatm %repeats"
+      "value": "%repeatm%: %repeats%",
+      "placeholder": "use: %repeatm% %repeats%"
     },
     {
       "id": "sFormatGlobalRepeat",
@@ -40,8 +40,8 @@
       },
       "title": "Display Format (With global repeats)",
       "icon": "fas fa-paragraph",
-      "value": "%repeatm: %repeats, %grepeatm: %grepeats",
-      "placeholder": "use: %repeatm %repeats %grepeatm %grepeats"
+      "value": "%repeatm%: %repeats%, %grepeatm%: %grepeats%",
+      "placeholder": "use: %repeatm% %repeats% %grepeatm% %grepeats%"
     }
   ]
 }
