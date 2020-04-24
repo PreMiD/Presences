@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "687845217109409841",
+  clientId: "687845217109409841"
 });
 
 setInterval(getSongData, 10000);
@@ -27,7 +27,7 @@ var currentTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   var presenceData = {
-    largeImageKey: "sfmlogo",
+    largeImageKey: "sfmlogo"
   };
   if (document.location.hostname == "simulator.fm") {
     if (document.location.pathname.includes("/home")) {

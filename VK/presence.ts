@@ -39,7 +39,10 @@ function getLocale(): string {
 }
 
 function getLocalizedString(stringPath): string {
-  if (localeStrings[getLocale()][stringPath] !== undefined) {
+  if (
+    localeStrings[getLocale()] !== undefined &&
+    localeStrings[getLocale()][stringPath] !== undefined
+  ) {
     return localeStrings[getLocale()][stringPath];
   } else {
     console.warn(`Language for [${stringPath}] was not found!`);

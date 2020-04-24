@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "679008701063102512",
+  clientId: "679008701063102512"
 });
 var elapsed = Math.floor(Date.now() / 1000);
 var actualCode = `
@@ -48,14 +48,14 @@ presence.on("UpdateData", async () => {
     let data = {
       largeImageKey: "idlepuffle",
       details: "Viewing Homepage",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
     presence.setActivity(data);
   } else if (document.URL.includes("/#/redeem")) {
     let data = {
       largeImageKey: "redeemred",
       details: "Redeeming a Code",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
     presence.setActivity(data);
   } else if (document.URL.includes("/#/login")) {
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
       let data = {
         largeImageKey: "cprlogo",
         details: "Logging In",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "100") {
@@ -71,7 +71,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Town",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "110") {
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Coffee Shop",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "111") {
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Book Room",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "120") {
@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Night Club",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "121") {
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Dance Lounge",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "122") {
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Recycling Plant",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "130") {
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Gift Shop",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "200") {
@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Ski Village",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "212") {
@@ -135,7 +135,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Everyday Phoning Facility",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "213") {
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Recon Room",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "220") {
@@ -151,7 +151,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Ski Lodge",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "221") {
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Lodge Attic",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "230") {
@@ -167,7 +167,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Ski Hill",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "300") {
@@ -175,7 +175,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Plaza",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "310") {
@@ -183,7 +183,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Pet Shop",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "320") {
@@ -191,7 +191,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Dojo",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "321") {
@@ -199,7 +199,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Dojo Courtyard",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "322") {
@@ -207,7 +207,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Ninja Hideout",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "323") {
@@ -215,7 +215,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "EPF Command Room",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "330") {
@@ -223,7 +223,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Pizza Parlor",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "340") {
@@ -231,7 +231,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Stage",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "400") {
@@ -239,7 +239,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Beach",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "410") {
@@ -247,7 +247,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Lighthouse",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "411") {
@@ -255,7 +255,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Beacon",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "420") {
@@ -263,7 +263,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Migrator",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "421") {
@@ -271,7 +271,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Ship Hold",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "422") {
@@ -279,7 +279,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Captain's Quarters",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "423") {
@@ -287,7 +287,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Crow's Nest",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "800") {
@@ -295,7 +295,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Dock",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "801") {
@@ -303,7 +303,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Snow Forts",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "802") {
@@ -311,7 +311,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Stadium",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "803") {
@@ -319,7 +319,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "HQ",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "804") {
@@ -327,7 +327,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Boiler Room",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "805") {
@@ -335,7 +335,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Iceberg",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "806") {
@@ -343,7 +343,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Underground Pool",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "807") {
@@ -351,7 +351,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Mine Shack",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "808") {
@@ -359,7 +359,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Mine",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "809") {
@@ -367,7 +367,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Forest",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "810") {
@@ -375,7 +375,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Cove",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "811") {
@@ -383,7 +383,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Box Dimension",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "812") {
@@ -391,7 +391,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Fire Dojo",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "813") {
@@ -399,7 +399,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Cave Mine",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "814") {
@@ -407,7 +407,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Hidden Lake",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "815") {
@@ -415,7 +415,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Underwater Room",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "816") {
@@ -423,7 +423,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Water Dojo",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "817") {
@@ -431,7 +431,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Hidden Dojo Room",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "818") {
@@ -439,7 +439,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Dojo Pathway",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "819") {
@@ -447,7 +447,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Serene Springs",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     }
@@ -457,7 +457,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Astro Barrier",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "901") {
@@ -465,7 +465,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Bean Counters",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "902") {
@@ -473,7 +473,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Rounding up Puffles",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "903") {
@@ -481,7 +481,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Hydro-Hopper",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "904") {
@@ -489,7 +489,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Ice Fishing",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "905") {
@@ -497,7 +497,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Cart Surfer",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "906") {
@@ -505,7 +505,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Jet Pack Adventure",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "907") {
@@ -513,7 +513,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 1",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "908") {
@@ -521,7 +521,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 2",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "909") {
@@ -529,7 +529,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Thin Ice",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "910") {
@@ -537,7 +537,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Pizzatron 3000",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "911") {
@@ -545,7 +545,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 3",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "912") {
@@ -553,7 +553,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Catchin' Waves",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "913") {
@@ -561,7 +561,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 4",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "914") {
@@ -569,7 +569,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 5",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "915") {
@@ -577,7 +577,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 6",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "916") {
@@ -585,7 +585,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Aqua Grabber",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "917" || status == "918" || status == "919") {
@@ -593,7 +593,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Painting By Letters",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "920") {
@@ -601,7 +601,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 7",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "921") {
@@ -609,7 +609,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 8",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "922") {
@@ -617,7 +617,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 9",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "923") {
@@ -625,7 +625,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 10",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "926") {
@@ -633,7 +633,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing DJ3K",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "927") {
@@ -641,7 +641,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Mission 11",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "949") {
@@ -649,7 +649,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Rescuing Puffles",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "950") {
@@ -657,7 +657,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing System Defender",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "952") {
@@ -665,7 +665,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "In a Dance Contest",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "995") {
@@ -673,7 +673,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Launching Puffles",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "997") {
@@ -681,7 +681,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Card-Jitsu Fire",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "998") {
@@ -689,7 +689,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Card-Jitsu",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "999") {
@@ -697,7 +697,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Sled Racing",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "pufflescape") {
@@ -705,7 +705,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Pufflescape",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "941") {
@@ -713,7 +713,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Puffle Soaker",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "942") {
@@ -721,7 +721,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Balloon Pop",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "943") {
@@ -729,7 +729,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Ring the Bell",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "944") {
@@ -737,7 +737,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Feed-a-Puffle",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "945") {
@@ -745,7 +745,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Memory Card game",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "946") {
@@ -753,7 +753,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Puffle Paddle",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "947") {
@@ -761,7 +761,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Puffle Shuffle",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status == "948") {
@@ -769,7 +769,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "Playing Spin to Win",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status.length > 3 && !isNaN(status)) {
@@ -777,7 +777,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "In an Igloo",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     } else if (status.length < 4 && !isNaN(status)) {
@@ -785,7 +785,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "cprlogo",
         details: "In-Game",
         state: "In a Party Room",
-        startTimestamp: elapsed,
+        startTimestamp: elapsed
       };
       presence.setActivity(data);
     }

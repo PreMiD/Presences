@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
     largeImageKey: "curvelogo",
     details: `${sdj} • ${slisteners || "Loading statistics"}`,
     state: `${ssong || "Loading song"}`,
-    startTimestamp: stamp,
+    startTimestamp: stamp
   };
   presence.setActivity(info);
 });

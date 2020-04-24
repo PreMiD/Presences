@@ -1,15 +1,15 @@
 var presence = new Presence({
-    clientId: "662715886662057994",
+    clientId: "662715886662057994"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   if (document.location.hostname == "enthix.net") {
     presenceData.details = "Viewing Home Page";

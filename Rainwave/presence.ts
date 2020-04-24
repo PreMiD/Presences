@@ -27,14 +27,12 @@ presence.on("UpdateData", async () => {
     const stationName = document.querySelector(
         "a.station.selected_station > div.station_details > div.station_name"
       ),
-      songName =
-        document.querySelector(
-          "div.song.now_playing > div.song_content > div.title"
-        ) as HTMLDivElement,
-      artistName =
-        document.querySelector(
-          "div.song.now_playing > div.song_content > div.artist"
-        ) as HTMLDivElement,
+      songName = document.querySelector(
+        "div.song.now_playing > div.song_content > div.title"
+      ) as HTMLDivElement,
+      artistName = document.querySelector(
+        "div.song.now_playing > div.song_content > div.artist"
+      ) as HTMLDivElement,
       playCheck = document.querySelector(
         "div#r4_audio_player.unselectable.playing"
       );

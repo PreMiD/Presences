@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "640914619082211338",
+  clientId: "640914619082211338"
 });
 
 var song;
@@ -16,7 +16,7 @@ presence.on("UpdateData", () => {
   let presenceData = {
     largeImageKey: "tfmlogo",
     smallImageKey: "smalltfmlogo",
-    smallImageText: `Viewing: ${pageName}`,
+    smallImageText: `Viewing: ${pageName}`
   };
 
   presenceData.details = `${title}`;

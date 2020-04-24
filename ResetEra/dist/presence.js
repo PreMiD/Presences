@@ -1,15 +1,15 @@
 var presence = new Presence({
-    clientId: "683031551193514047",
+    clientId: "683031551193514047"
   }),
   strings = presence.getStrings({
-    readinga: "presence.activity.reading",
+    readinga: "presence.activity.reading"
   });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 var byString = "by ";
 presence.on("UpdateData", async () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   if (document.location.pathname == "/") {

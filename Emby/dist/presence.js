@@ -13,7 +13,7 @@ const PRESENCE_ART_ASSETS = {
   play: "play",
   read: "reading",
   search: "search",
-  write: "writing",
+  write: "writing"
 };
 
 // generic log style for PMD_[info|error|success] calls
@@ -96,7 +96,7 @@ async function init() {
 
   if (validPage) {
     presence = new Presence({
-      clientId: "671807692297207828",
+      clientId: "671807692297207828"
     });
 
     presence.on("UpdateData", updateData);
@@ -105,7 +105,7 @@ async function init() {
 init();
 
 let presenceData = {
-  largeImageKey: PRESENCE_ART_ASSETS.logo,
+  largeImageKey: PRESENCE_ART_ASSETS.logo
 };
 
 let ApiClient;
@@ -333,7 +333,7 @@ async function handleVideoPlayback() {
   } else {
     // simulate the expected data
     mediaInfo = {
-      Type: "TvChannel",
+      Type: "TvChannel"
     };
   }
 
@@ -443,8 +443,8 @@ async function obtainMediaInfo(itemId) {
   fetch(`/emby/Users/${getUserId()}/Items/${itemId}`, {
     credentials: "include",
     headers: {
-      "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`,
-    },
+      "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
+    }
   })
     .then((resp) => resp.json())
     .then((json) => {

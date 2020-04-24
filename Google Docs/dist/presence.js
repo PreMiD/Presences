@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "630478614894477337",
+  clientId: "630478614894477337"
 });
 let oo;
 let songt;
@@ -7,7 +7,7 @@ let songa;
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "docslogo",
+    largeImageKey: "docslogo"
   };
   if (window.location.pathname.toLowerCase().includes("/document")) {
     presenceData.largeImageKey = "docslogo";
