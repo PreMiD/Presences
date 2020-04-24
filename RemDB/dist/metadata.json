@@ -19,9 +19,6 @@
   "logo": "https://i.imgur.com/hjwhuAp.png",
   "thumbnail": "https://i.imgur.com/KkIjtHI.png",
   "color": "#008000",
-  "tags": [
-    "database",
-    "games"
-  ],
+  "tags": ["database", "games"],
   "category": "games"
 }
