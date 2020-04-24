@@ -1,10 +1,8 @@
 name: QA
-
 on:
   push:
     branches:
       - master
-
 jobs:
   qa:
     name: Quality Assurance
@@ -31,6 +29,7 @@ jobs:
           git config --global core.precomposeunicode true
           yarn qa
       - name: Commit any changes
+        if: always()
         run: |
           git add .;
           if git diff-index --quiet HEAD --; then
