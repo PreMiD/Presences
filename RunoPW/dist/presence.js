@@ -7,7 +7,6 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   let presenceData = {
     largeImageKey: "runo3",
-	smallImageKey: "aktif",
     startTimestamp: browsingStamp
   };
   if (document.location.hostname == "runo.pw") {
