@@ -136,11 +136,6 @@ presence.on("UpdateData", () => {
     } else {
   presence.setActivity();
   }
-function getTimestamps(videoTime, videoDuration) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 function refresh(presence) {
   refresh.refresh;
 }}})
