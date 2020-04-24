@@ -10,9 +10,12 @@ presence.on("UpdateData", async () => {
     largeImageKey: "instantgaming"
   };
   try {
-    var product_title = document.querySelector("div.product > div.infos > div.shadow.mainshadow > div.title > h1").textContent;
+    var product_title = document.querySelector(
+      "div.product > div.infos > div.shadow.mainshadow > div.title > h1"
+    ).textContent;
     var product_price = document.querySelector("div.price").textContent;
-    var product_platform = document.querySelector("div.subinfos > a.platform").textContent;
+    var product_platform = document.querySelector("div.subinfos > a.platform")
+      .textContent;
     if (product_platform.startsWith("Other")) {
       product_platform = "N/A";
     }
@@ -20,7 +23,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = `[${product_platform}] ${product_title} (${product_price})`;
   } catch {
     if (window.location.pathname.includes("/user/")) {
-      var profile_name = document.querySelector("div.ig-profile-info-nick > span").textContent;
+      var profile_name = document.querySelector(
+        "div.ig-profile-info-nick > span"
+      ).textContent;
       presenceData.details = "Viewing a profile:";
       presenceData.state = profile_name;
     } else {

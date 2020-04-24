@@ -6,7 +6,7 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-  /**
+/**
  * Get Timestamps
  * @param {Number} videoTime Current video time seconds
  * @param {Number} videoDuration Video duration seconds
@@ -21,25 +21,24 @@ function getTimestamps(
 }
 
 var browsingStamp = Math.floor(Date.now() / 1000);
-  
+
 presence.on("UpdateData", async () => {
   var presenceData: presenceData = {
     largeImageKey: "chess"
   };
 
-  if (document.location.pathname == "/home") 
-  {
+  if (document.location.pathname == "/home") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname.includes("/messages")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing messages";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing messages";
   } else if (document.location.pathname.includes("/stats")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing statistics";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing statistics";
   } else if (document.location.pathname.includes("/games/archive")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing games archive";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing games archive";
   } else if (document.location.pathname.includes("/live")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing live chess";
@@ -47,7 +46,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing daily chess";
     presenceData.state = document.title.substring(8);
-  } else if (document.location.pathname == "/daily"){
+  } else if (document.location.pathname == "/daily") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing daily chess";
   } else if (document.location.pathname.includes("/play/computer")) {
@@ -68,7 +67,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname == "/puzzles/battle") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing puzzles battle";
-  } else if (document.location.pathname.indexOf("/forum/view/daily-puzzles/") == 0) {
+  } else if (
+    document.location.pathname.indexOf("/forum/view/daily-puzzles/") == 0
+  ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Solving daily puzzle";
   } else if (document.location.pathname.includes("/solo-chess")) {
@@ -91,59 +92,59 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing videos";
   } else if (document.location.pathname.includes("/vision")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Training vision";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Training vision";
   } else if (document.location.pathname.includes("/openings")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing openings";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing openings";
   } else if (document.location.pathname.includes("/explorer")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Using games explorer";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Using games explorer";
   } else if (document.location.pathname.includes("/forum")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing through forum";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing through forum";
   } else if (document.location.pathname.includes("/clubs")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing through clubs";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing through clubs";
   } else if (document.location.pathname == "/blogs") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing through blogs";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing through blogs";
   } else if (document.location.pathname.indexOf("/blog/") == 0) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Reading a blog post";
-      presenceData.state = document.title;
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Reading a blog post";
+    presenceData.state = document.title;
   } else if (document.location.pathname.includes("/members")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing through members";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing through members";
   } else if (document.location.pathname.includes("/coaches")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing through coaches";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing through coaches";
   } else if (document.location.pathname.includes("/today")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing Chess today";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing Chess today";
   } else if (document.location.pathname.indexOf("/news/view/") == 0) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Reading news";
-      presenceData.state = document.title;
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Reading news";
+    presenceData.state = document.title;
   } else if (document.location.pathname == "/news") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing through news";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing through news";
   } else if (document.location.pathname.includes("/tv")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing ChessTV";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing ChessTV";
   } else if (document.location.pathname.includes("/games")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing master games";
     presenceData.state = document.title;
   } else if (document.location.pathname.indexOf("/video/player/") == 0) {
-    
     var video: HTMLVideoElement = document.querySelector("video");
-    
+
     if (video !== null && !isNaN(video.duration)) {
       var timestamps: any;
       timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration));
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
       presenceData.largeImageKey = "chess";
       presenceData.details = "Watching video";
       presenceData.state = document.title;
@@ -156,7 +157,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       } else {
         presenceData.smallImageKey = "play";
-        presenceData.smallImageText = (await strings).play; 
+        presenceData.smallImageText = (await strings).play;
       }
     }
   }
