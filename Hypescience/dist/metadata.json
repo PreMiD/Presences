@@ -1,0 +1,19 @@
+{
+    "author": {
+      "name": "Nanashin",
+      "id": "330030557457022986"
+    },
+    "service": "HypeScience",
+    "description": {
+       "en": "Science-related curiosity site",
+      "pt_BR": "Site de curiosidades relacionadas à ciência"
+    },
+    "url": "hypescience.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/vdlOt5b.png",
+    "thumbnail": "https://i.imgur.com/YgystIK.png",
+    "color": "#036",
+    "tags": "Curiosity",
+    "category": "other"
+  }
+  
