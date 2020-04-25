@@ -2,18 +2,6 @@ var presence = new Presence({
     clientId: "703447484025798717" 
 });
 
-/*
-function myOutsideHeavyLiftingFunction(){
-    //Grab and process all your data here
-
-    // element grabs //
-    // api calls //
-    // variable sets //
-}
-setInterval(10000, myOutsideHeavyLiftingFunction);
-//Run the function seperate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
-
-*/
 var elapsed = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
     var path = window.location.pathname;
