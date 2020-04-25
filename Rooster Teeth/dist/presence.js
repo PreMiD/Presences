@@ -12,7 +12,10 @@ presence.on("UpdateData", () => {
         details: "Browsing Rooster Teeth", 
         startTimestamp:elapsed, 
     }; 
-    if(path.includes("/live/rt-tv")){
+    if(window.location.hash.includes("#search?term=")){
+        presenceData.details="Searching For:"
+        presenceData.state=document.querySelector(".search__input").value
+    }else if(path.includes("/live/rt-tv")){
         try{
             video=document.querySelector(".vjs-tech")
             presenceData.details=document.querySelector(".livestream-card.livestream-schedule-item-fade-enter-done").querySelector(".livestream-show").innerText
