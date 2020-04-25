@@ -11,11 +11,11 @@ presence.on("UpdateData", async () => {
     } 
     else if (document.location.pathname.startsWith('/categoria/')) {
         data.details = 'Categoria';
-        data.state = document.querySelector('header.content-header.max h1.title.title--big.title--border span.title__text').textContent;
+        data.state = document.querySelector('header.content-header.max h1.title.title--big.title--border span.title__text').innerText;
     } 
     else if (document.title.includes('Busca por')) {
         data.details = 'Pesquisando por:';
-        data.state = document.querySelector('header.content-header.max h1.title.title--big.title--border span.title__text').textContent.slice(6);
+        data.state = document.querySelector('header.content-header.max h1.title.title--big.title--border span.title__text').innerText.slice(6);
     }
     else if (document.location.pathname == '/contato/') {
         data.details = 'Contato';
@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname == '/login/') {
         data.details = 'Login';
     }
-    else if ( document.querySelector('div.breadcrumbs.content-header__categories') != null || undefined && document.location.pathname.match('/', /^\D/, '/')) {
+    else if (document.location.pathname.startsWith('/') && document.location.pathname.endsWith('/')) {
         data.details = 'Matéria';
-        data.state = document.querySelector('header.content-header.max h1.title.title--content span').textContent;
+        data.state = document.querySelector('header.content-header.max h1.title.title--content span').innerText;
     }
     
     presence.setActivity(data);
