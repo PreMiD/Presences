@@ -28,7 +28,7 @@ presence.on("UpdateData", () => {
         try{
             presenceData.state="Balance: "+document.getElementsByClassName("sc-dnqmqq kpUaxq")[0].innerText.split("Equals to ")[1]
             presenceData.state+=", Gathered Today: "+document.getElementsByClassName("sc-dnqmqq kpUaxq")[1].innerText.split("Equals to ")[1]
-        }catch(e){console.log(e)}
+        }catch(e){}
      }else if(path.includes("/transactions")){
         presenceData.details="Viewing Transaction History"
         try{
