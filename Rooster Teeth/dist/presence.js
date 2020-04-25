@@ -33,7 +33,6 @@ presence.on("UpdateData", () => {
             }
 
         }catch(e){}
-
      }else if(path.includes("/watch")){
         try{
             if(document.querySelector(".video-details__heading")){
@@ -55,9 +54,7 @@ presence.on("UpdateData", () => {
                     break
                 }
             }
-        }catch(e){
-            
-        }    
+        }catch(e){}    
      }else if(path.includes("/series/")){
         presenceData.details="Browsing Through Videos Of:"
         try{
@@ -89,7 +86,6 @@ presence.on("UpdateData", () => {
     }else if(path.includes("/g")){
         presenceData.details="Browsing "+(path.includes("/g/all")?"All ":"")+"Groups"
     }
-
     if(video!=undefined){
         if(live){
             presenceData.smallImageKey= video.paused ? "livepause" : "live"
@@ -110,6 +106,4 @@ presence.on("UpdateData", () => {
     } else {
         presence.setActivity(presenceData);
     }
-}); 
-
-
+});
