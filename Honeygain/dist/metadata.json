@@ -1,0 +1,17 @@
+{
+    "author": {
+      "name": "qwerty142",
+      "id": "455167347464863746"
+    },
+    "service": "Honeygain",
+    "description": {
+      "en": "Honeygain is a crowdsourced network company which enables other businesses to conduct web intelligence, market research and content delivery."
+    },
+    "url": "dashboard.honeygain.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/fjaT2cF.jpg",
+    "thumbnail": "https://i.imgur.com/pThjE43.png",
+    "color": "#FFFF00",
+    "tags": [],
+    "category": "other"
+  }
