@@ -11,7 +11,7 @@ presence.on("UpdateData", () => {
   };
   if (document.location.hostname == "ihsanbakidogan.com") {
 	  
-    if (document.location.pathname.startsWith("/asdsdsa")) {
+    if (document.location.pathname.startsWith("/index")) {
       presenceData.details = "şu anda Ana Sayfaya,";
       presenceData.state = "göz atıyor...";
 	    
