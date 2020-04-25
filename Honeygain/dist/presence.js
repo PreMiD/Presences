@@ -1,7 +1,6 @@
 var presence = new Presence({
     clientId: "703447484025798717" 
 });
-
 var elapsed = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
     var path = window.location.pathname;
@@ -10,7 +9,6 @@ presence.on("UpdateData", () => {
         details: "Browsing Honeygain", 
         startTimestamp:elapsed, 
     }; 
-
     if(path=="/"){
         presenceData.details="Looking at Dashboard"
         try{
@@ -32,7 +30,6 @@ presence.on("UpdateData", () => {
     }else if(path.includes("/profile")){
         presenceData.details="Viewing Profile settings"
    }
-
     if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
