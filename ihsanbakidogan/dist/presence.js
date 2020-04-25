@@ -22,7 +22,7 @@ presence.on("UpdateData", () => {
 	      	      	      
       } else if (document.location.pathname.includes("/blog/gonderi/")) {
       presenceData.details = document.title;
-      presenceData.state = "adlı yazıya bakıyor...";
+      presenceData.state = "adlı yazıyı okuyor...";
 	      	
 
       } else if (document.location.pathname.includes("/kategori/")) {
