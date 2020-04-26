@@ -16,86 +16,70 @@ presence.on("UpdateData", () => {
     presenceData.details = "Searching For:";
     presenceData.state = document.querySelector(".search__input").value;
   } else if (path.includes("/live/rt-tv")) {
-    try {
-      video = document.querySelector(".vjs-tech");
-      presenceData.details = document
+    video = document.querySelector(".vjs-tech");
+    presenceData.details = document
+      .querySelector(
+        ".livestream-card.livestream-schedule-item-fade-enter-done"
+      )
+      .querySelector(".livestream-show").innerText;
+    presenceData.details +=
+      " " +
+      document
         .querySelector(
           ".livestream-card.livestream-schedule-item-fade-enter-done"
         )
-        .querySelector(".livestream-show").innerText;
-      presenceData.details +=
-        " " +
-        document
-          .querySelector(
-            ".livestream-card.livestream-schedule-item-fade-enter-done"
-          )
-          .querySelector(".livestream-title").innerText;
-    } catch (e) {}
+        .querySelector(".livestream-title").innerText;
     presenceData.state = "RT-TV";
     live = true;
   } else if (document.querySelector(".vjs-tech")) {
-    try {
-      live = false;
-      video = document.querySelector(".vjs-tech");
-      if (document.querySelector(".video-details__heading")) {
-        presenceData.details = document.querySelector(
-          ".video-details__title"
-        ).innerText;
-        presenceData.state = document.querySelector(
-          ".video-details__show"
-        ).innerText;
-      } else {
-        presenceData.details = document.querySelector(
-          ".player-title"
-        ).innerText;
-        presenceData.state = "Miniplayer";
-      }
-    } catch (e) {}
+    live = false;
+    video = document.querySelector(".vjs-tech");
+    if (document.querySelector(".video-details__heading")) {
+      presenceData.details = document.querySelector(
+        ".video-details__title"
+      ).innerText;
+      presenceData.state = document.querySelector(
+        ".video-details__show"
+      ).innerText;
+    } else {
+      presenceData.details = document.querySelector(".player-title").innerText;
+      presenceData.state = "Miniplayer";
+    }
   } else if (path.includes("/watch")) {
-    try {
-      if (document.querySelector(".video-details__heading")) {
-        presenceData.details = document.querySelector(
-          ".video-details__title"
-        ).innerText;
-        presenceData.state = document.querySelector(
-          ".video-details__show"
-        ).innerText;
-      } else {
-        presenceData.details = document.querySelector(
-          ".player-title"
-        ).innerText;
-        presenceData.state = "Miniplayer";
-      }
-    } catch (e) {}
+    if (document.querySelector(".video-details__heading")) {
+      presenceData.details = document.querySelector(
+        ".video-details__title"
+      ).innerText;
+      presenceData.state = document.querySelector(
+        ".video-details__show"
+      ).innerText;
+    } else {
+      presenceData.details = document.querySelector(".player-title").innerText;
+      presenceData.state = "Miniplayer";
+    }
   } else if (path.includes("/schedule")) {
     presenceData.details = "Viewing Schedule";
-    try {
-      for (var scheduleDay of document.getElementsByClassName("schedule-day")) {
-        var position = scheduleDay.getBoundingClientRect();
-        if (position.top < window.innerHeight && position.bottom >= 0) {
-          presenceData.state = scheduleDay
-            .querySelector(".schedule-day__heading")
-            .innerText.toLowerCase();
-          presenceData.state =
-            presenceData.state.substr(0, 1).toUpperCase() +
-            presenceData.state.substr(1);
-          break;
-        }
+    for (var scheduleDay of document.getElementsByClassName("schedule-day")) {
+      var position = scheduleDay.getBoundingClientRect();
+      if (position.top < window.innerHeight && position.bottom >= 0) {
+        presenceData.state = scheduleDay
+          .querySelector(".schedule-day__heading")
+          .innerText.toLowerCase();
+        presenceData.state =
+          presenceData.state.substr(0, 1).toUpperCase() +
+          presenceData.state.substr(1);
+        break;
       }
-    } catch (e) {}
+    }
   } else if (path.includes("/series/")) {
     presenceData.details = "Browsing Through Videos Of:";
-    try {
-      presenceData.state = document.querySelector(".featured-title").innerText;
-    } catch (e) {}
+    presenceData.state = document.querySelector(".featured-title").innerText;
   } else if (path.includes("/channel/")) {
     presenceData.details = "Viewing Channel:";
-    try {
-      presenceData.state = document
-        .querySelector(".carousel-container")
-        .querySelector(".carousel-title")
-        .innerText.split("RECENT EPISODES FROM ")[1];
-    } catch (e) {}
+    presenceData.state = document
+      .querySelector(".carousel-container")
+      .querySelector(".carousel-title")
+      .innerText.split("RECENT EPISODES FROM ")[1];
   } else if (path.includes("/series")) {
     presenceData.details = "Browsing Series";
   } else if (path.includes("/episodes")) {
@@ -110,15 +94,13 @@ presence.on("UpdateData", () => {
     }
   } else if (path.includes("/g/") && !path.includes("/g/all")) {
     presenceData.details = "Browsing Group:";
-    try {
-      if (path.includes("explore")) {
-        presenceData.state = "Explore";
-      } else {
-        presenceData.state = document
-          .querySelector(".content-sidebar")
-          .querySelector(".banner-title").innerText;
-      }
-    } catch (e) {}
+    if (path.includes("explore")) {
+      presenceData.state = "Explore";
+    } else {
+      presenceData.state = document
+        .querySelector(".content-sidebar")
+        .querySelector(".banner-title").innerText;
+    }
   } else if (path.includes("/g")) {
     presenceData.details =
       "Browsing " + (path.includes("/g/all") ? "All " : "") + "Groups";
