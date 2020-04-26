@@ -5,8 +5,8 @@
      },
      "service": "MangaYabu",
      "description": {
-       "en": "Read mangas in this brazilian site.",
-       "pt_BR": "Leia mangás neste site brasileiro."
+       "en": "Manga version website of goyabu.com",
+       "pt_BR": "Site versão mangá do famoso goyabu.com"
      },
      "url": "mangayabu.com",
      "version": "1.0.0",
