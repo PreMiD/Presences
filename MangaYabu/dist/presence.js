@@ -22,6 +22,13 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageText = 'Início';
             presenceData.startTimestamp = browsingStamp;
         };
+
+    } else if (document.location.pathname.includes('ler')) {
+        presenceData.details = document.querySelector('div.video-under.col-md-8.col-xs-12 div.oboxed.odet.mtop10 div.row.vibe-interactions h1').innerText.slice(0, document.querySelector('div.video-under.col-md-8.col-xs-12 div.oboxed.odet.mtop10 div.row.vibe-interactions h1').innerText.search('Capítulo') - 2);
+        presenceData.state = document.querySelector('div.video-under.col-md-8.col-xs-12 div.oboxed.odet.mtop10 div.row.vibe-interactions h1').innerText.slice(document.querySelector('div.video-under.col-md-8.col-xs-12 div.oboxed.odet.mtop10 div.row.vibe-interactions h1').innerText.search('Capítulo'));
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.smallImageKey = 'lendo';
+        presenceData.smallImageText = 'Lendo';
     } else if (document.location.pathname.includes('lista-de-mangas')) {
         presenceData.details = 'Vendo a lista de mangás';
         presenceData.smallImageKey = 'lista';
@@ -31,12 +38,6 @@ presence.on("UpdateData", async () => {
         presenceData.details = 'Vendo página de obra';
         presenceData.state = document.querySelector('div.row div.left20.right20 h1').innerText;
         presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes('ler')) {
-        presenceData.details = document.querySelector('div.video-under.col-md-8.col-xs-12 div.oboxed.odet.mtop10 div.row.vibe-interactions h1').innerText.slice(0, document.querySelector('div.video-under.col-md-8.col-xs-12 div.oboxed.odet.mtop10 div.row.vibe-interactions h1').innerText.search('Capítulo') - 2);
-        presenceData.state = document.querySelector('div.video-under.col-md-8.col-xs-12 div.oboxed.odet.mtop10 div.row.vibe-interactions h1').innerText.slice(document.querySelector('div.video-under.col-md-8.col-xs-12 div.oboxed.odet.mtop10 div.row.vibe-interactions h1').innerText.search('Capítulo'));
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.smallImageKey = 'lendo';
-        presenceData.smallImageText = 'Lendo';
     } else if (presenceData.state == null) {
         presence.setTrayTitle();
         presence.setActivity();
