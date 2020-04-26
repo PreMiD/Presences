@@ -6,6 +6,7 @@ jobs:
   qa:
     name: Quality Assurance
     runs-on: ubuntu-latest
+    if: github.repository_owner == 'PreMiD'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
