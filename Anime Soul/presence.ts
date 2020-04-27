@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
     }
     else if (document.location.pathname.includes("/friends")) {
         data.startTimestamp = browsingStamp;
-        data.details = "Viewing my Friends";
+        data.details = "Viewing AS Friends";
     }
     else if (document.location.pathname.includes("/leaderboards")) {
         data.startTimestamp = browsingStamp;
@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
     }
     else if (document.location.pathname.includes("/servers")) {
         data.startTimestamp = browsingStamp;
-        data.details = "Viewing Servers";
+        data.details = "Viewing AS Servers";
     }
 
     /// Anime Soul support section ///
