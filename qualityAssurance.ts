@@ -1,5 +1,8 @@
-import { blueBright, gray, green, red, yellow } from "chalk";
-import execa from "execa";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
+import { blueBright, green, red, yellow } from "chalk";
+import execa = require("execa");
 import { readdirSync, readFileSync, writeFileSync } from "fs";
 import { sync as glob } from "glob";
 import { join, normalize, relative, resolve, sep } from "path";
@@ -16,24 +19,33 @@ import {
 let finalExitCode = 0;
 
 /**
- * Helper function to read any file as string
- * @param path Path to the file
- */
-const readFile = (path: string) => readFileSync(path, { encoding: "utf8" });
-
-/**
- * Helper function to write any data to disk
- * @param data Data to write
- * @param path Path to write the data to
- */
-const writeFile = <T>(data: T, path: string) =>
-  writeFileSync(path, data, { encoding: "utf8" });
-
-/**
  * Helper function to read a JSON file into memory
  * @param jsonPath Path to the JSON file
  */
-const readJson = <T>(jsonPath: string) => JSON.parse(readFile(jsonPath)) as T;
+const readJson = <T>(jsonPath: string) => {
+  if (isValidJSON(jsonPath)) {
+    return JSON.parse(readFileSync(jsonPath, { encoding: "utf8" })) as T;
+  } else {
+    console.log(
+      red(`Unable to parse ${jsonPath ? jsonPath : "an unknown file"}`)
+    );
+
+    finalExitCode = 1;
+  }
+};
+
+/**
+ * Helper function to validate JSON data
+ * @param path JSON path
+ */
+function isValidJSON(path: string) {
+  try {
+    JSON.parse(readFileSync(path, { encoding: "utf8" }));
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 /**
  * Helper function to write a JSON file to disk
@@ -48,19 +60,22 @@ const writeJson = <T>(data: T, jsonPath: string) =>
  * @see https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API#a-minimal-compiler
  */
 const compileFile = (fileNames: string[], options: CompilerOptions): void => {
-  let program = createProgram(fileNames, options);
-  let emitResult = program.emit();
+  const program = createProgram(fileNames, options);
+  const emitResult = program.emit();
 
-  let allDiagnostics = getPreEmitDiagnostics(program).concat(
+  const allDiagnostics = getPreEmitDiagnostics(program).concat(
     emitResult.diagnostics
   );
 
   allDiagnostics.forEach((diagnostic) => {
     if (diagnostic.file) {
-      let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+      const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
         diagnostic.start!
       );
-      let message = flattenDiagnosticMessageText(diagnostic.messageText, "\n");
+      const message = flattenDiagnosticMessageText(
+        diagnostic.messageText,
+        "\n"
+      );
       console.log(
         `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`
       );
@@ -84,10 +99,6 @@ const prettify = async () => {
     absolute: true
   });
   const tsFiles = glob("**/*.ts", {
-    ignore: ["**/node_modules/**", "**/@types/**"],
-    absolute: true
-  });
-  const jsonFiles = glob("**/{metadata,tsconfig}.json", {
     ignore: ["**/node_modules/**", "**/@types/**"],
     absolute: true
   });
@@ -115,15 +126,11 @@ const prettify = async () => {
   }
 
   // Concatenate all the files to prettify
-  const filesToPrettify: string[] = [
-    ...tsFiles,
-    ...jsFilesToPrettify,
-    ...jsonFiles
-  ];
+  const filesToPrettify: string[] = [...tsFiles, ...jsFilesToPrettify];
 
   for (const fileToPrettify of filesToPrettify) {
     // Get the raw data from the file
-    const fileContent = readFile(fileToPrettify);
+    const fileContent = readFileSync(fileToPrettify, { encoding: "utf8" });
 
     // Format the file using Prettier
     const formatted = prettier(fileContent, {
@@ -131,13 +138,10 @@ const prettify = async () => {
       filepath: fileToPrettify
     });
 
-    // If the file content is the same as the formatted content
-    if (formatted === fileContent) {
-      // Log it with a grey colour to indicate it didn't change
-      console.log(gray(relative(__dirname, fileToPrettify)));
-    } else {
-      // Otherwise write the file to the system
-      writeFile(fileToPrettify, formatted);
+    // If the file content isn't the same as the formatted content
+    if (formatted !== fileContent) {
+      // Write the file to the system
+      writeFileSync(fileToPrettify, formatted, { encoding: "utf8" });
       // And log the name with a green colour to indicate it did change
       console.log(green(relative(__dirname, fileToPrettify)));
     }
@@ -188,6 +192,7 @@ const increaseSemver = async (filesToBump: string[]) => {
   console.time("semver_bump_time");
 
   for (const file of filesToBump) {
+    console.log(file);
     // Normalize the path and seperate it on OS specific seperator
     const normalizedPath = resolve(normalize(file)).split(sep);
 
@@ -196,9 +201,12 @@ const increaseSemver = async (filesToBump: string[]) => {
 
     const metadataPath = join(normalizedPath.join(sep), "metadata.json");
     const metadata = readJson<Metadata>(metadataPath);
-    const newVersion = valid(coerce(inc(metadata.version, "patch")));
 
-    writeJson({ ...metadata, version: newVersion }, metadataPath);
+    if (metadata && metadata.version) {
+      const newVersion = valid(coerce(inc(metadata.version, "patch")));
+
+      writeJson({ ...metadata, version: newVersion }, metadataPath);
+    }
   }
 
   console.timeEnd("semver_bump_time");
@@ -271,6 +279,7 @@ main();
 /** Typings for the Metadata JSON file */
 interface Metadata {
   author: { name: string; id: string };
+  contributors?: Array<{ name: string; id: string }>;
   service: string;
   description: Record<string, string>;
   url: string;
@@ -278,6 +287,20 @@ interface Metadata {
   logo: string;
   thumbnail: string;
   color: string;
-  tags: string[];
+  tags: string | Array<string>;
   category: string;
+  iframe?: boolean;
+  regExp?: RegExp;
+  iframeRegExp?: RegExp;
+  button?: boolean;
+  warning?: boolean;
+  settings?: Array<{
+    id: string;
+    title: string;
+    icon: string;
+    if?: Record<string, string>;
+    placeholder?: string;
+    value?: string | number | boolean;
+    values?: Array<string | number | boolean>;
+  }>;
 }

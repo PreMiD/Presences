@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "651771207385088031",
+  clientId: "651771207385088031"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "bundle",
+    largeImageKey: "bundle"
   };
 
   if (window.location.pathname.startsWith("/detay/")) {

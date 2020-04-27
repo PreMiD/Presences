@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "671599195462959104",
+  clientId: "671599195462959104"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   let data = {
-    largeImageKey: "gcalendar",
+    largeImageKey: "gcalendar"
   };
   if (document.location.pathname == "/") {
     (data.details = "In the Homepage"), (data.startTimestamp = browsingStamp);

@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "687426695417823238",
+  clientId: "687426695417823238"
 });
 
 const strings = presence.getStrings({
   play: "presence.playback.playing",
-  pause: "presence.playback.paused",
+  pause: "presence.playback.paused"
 });
 
 let iFrameVideo,
@@ -29,7 +29,7 @@ presence.on("UpdateData", () => {
   let timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
 
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   if (document.location.href.includes("login.tech.tvnz.co.nz")) {
     presenceData.details = "Logging in...";

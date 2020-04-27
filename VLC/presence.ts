@@ -89,7 +89,9 @@ presence.on("UpdateData", async () => {
             : "A song") + (media.album ? " on " + media.album : "");
         media.artist
           ? (data.state = "by " + media.artist)
-          : (data.state = media.filename);
+          : media.filename
+          ? (data.state = media.filename)
+          : delete data.state;
       } else if (isShow) {
         media.showName
           ? (data.details = media.showName)
@@ -205,9 +207,9 @@ var getStatus = setLoop(function () {
           }
 
           if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
-            const collection =
-              (req.responseXML.getElementsByTagName("info") as unknown) as
-              any[];
+            const collection = (req.responseXML.getElementsByTagName(
+              "info"
+            ) as unknown) as any[];
 
             // basically the same thing but with a Firefox workaround because it's annoying
 

@@ -1,5 +1,5 @@
 let presence = new Presence({
-  clientId: "631259475038175232",
+  clientId: "631259475038175232"
 });
 
 presence.on("UpdateData", async () => {
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
       state: "at Homepage",
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       state: `at ${d[1]}`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
       state: `${d[1]}: ${help[2].replace("%26", "&").split("_").join(" ")}`,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
       state: stated,
       //largeImageKey: "banner",
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);

@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "683438933841018928",
+  clientId: "683438933841018928"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
   var presenceData = {
     largeImageKey: "logo",
     smallImageKey: "reading",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
 
   // Main entry point
@@ -1222,7 +1222,7 @@ function isValidGame(name) {
     "wolcenlordsofmayhem",
     "metalunit",
     "plagueincevolved",
-    "mountandblade2bannerlord",
+    "mountandblade2bannerlord"
   ];
   return validGames.includes(name);
 }

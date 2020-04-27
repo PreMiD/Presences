@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "602573554780733450",
+  clientId: "602573554780733450"
 });
 
 let ready = false,
@@ -39,6 +39,6 @@ presence.on("UpdateData", () => {
     state: state,
     details: page,
     largeImageKey: "icon",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   });
 });

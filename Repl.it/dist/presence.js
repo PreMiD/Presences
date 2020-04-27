@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "684803357000335401",
+  clientId: "684803357000335401"
 });
 
 presence.on("UpdateData", () => {
   const presenceData = {
-      largeImageKey: "repl",
+      largeImageKey: "repl"
     },
     Path = document.location.pathname,
     Details = {};
@@ -22,7 +22,7 @@ presence.on("UpdateData", () => {
         ).alt,
         Name: document.querySelector(
           "#page > div > div > div > div:nth-child(1) > div > div > div > div.jsx-268062591.sidebar-layout-ws-header > div > div.jsx-718404847.jsx-1272337756.info-wrapper > div > div > div.jsx-1561825049.workspace-header-title > h1"
-        ).innerText,
+        ).innerText
       };
       presenceData.details = `Editing a ${Details.Project.Type} project :`;
       presenceData.state = `${Details.Project.Name}`;
@@ -31,7 +31,7 @@ presence.on("UpdateData", () => {
     Details.Repls = {
       Length: document.querySelector(
         "#__next > div > div.jsx-3936643749.sidebar-layout-content > div > div > div.jsx-1444742247 > div > div.jsx-3858180552.repls-dashboard-list > div.jsx-397300979.replsdashboard-list"
-      ).children.length,
+      ).children.length
     };
     presenceData.details = `Viewing repls (${Details.Repls.Length} total) :`;
     presenceData.state = `${

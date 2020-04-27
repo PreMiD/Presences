@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "660588527079391243",
+  clientId: "660588527079391243"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "labydesigns",
+    largeImageKey: "labydesigns"
   };
   presenceData.startTimestamp = browsingStamp;
   if (document.location.pathname.includes("/downloads")) {
