@@ -8,9 +8,9 @@
     "en": "SiriusXM is like nothing you've ever heard before — it's a whole new world of radio. Imagine channels and channels of anything you want to listen to."
   },
   "service": "SiriusXM",
-  "version": "1.0",
-  "logo": "https://imgur.com/WKHpLxp.jpg",
-  "thumbnail": "https://imgur.com/lTYYEyi.png",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/WKHpLxp.jpg",
+  "thumbnail": "https://i.imgur.com/lTYYEyi.png",
   "color": "#0081FF",
   "tags": ["music", "radio"],
   "category": "music"
