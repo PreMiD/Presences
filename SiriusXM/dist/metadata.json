@@ -1,19 +1,17 @@
 {
-    "author": {
-      "name": "Alexx",
-      "id": "604182077088202784"
-    },
-    "url": "player.siriusxm.com",
-    "description": {
-      "en": "SiriusXM is like nothing you've ever heard before — it's a whole new world of radio. Imagine channels and channels of anything you want to listen to."
-    },
-    "service": "SiriusXM",
-    "version": "1.0",
-    "logo": "https://user-images.githubusercontent.com/56901798/67913602-a1672d00-fb5b-11e9-94d0-f18297af306b.png",
-    "thumbnail": "https://user-images.githubusercontent.com/56901798/67913602-a1672d00-fb5b-11e9-94d0-f18297af306b.png",
-    "color": "#0081FF",
-    "tags": [
-      "music"
-    ],
-    "category": "music"
-  }
+  "author": {
+    "name": "Alexx",
+    "id": "604182077088202784"
+  },
+  "url": "player.siriusxm.com",
+  "description": {
+    "en": "SiriusXM is like nothing you've ever heard before — it's a whole new world of radio. Imagine channels and channels of anything you want to listen to."
+  },
+  "service": "SiriusXM",
+  "version": "1.0",
+  "logo": "https://user-images.githubusercontent.com/56901798/67913602-a1672d00-fb5b-11e9-94d0-f18297af306b.png",
+  "thumbnail": "https://user-images.githubusercontent.com/56901798/67913602-a1672d00-fb5b-11e9-94d0-f18297af306b.png",
+  "color": "#0081FF",
+  "tags": ["music"],
+  "category": "music"
+}
