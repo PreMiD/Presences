@@ -1,38 +1,33 @@
-// Not sure if this TypeScript works. JavaScript file works just fine :3
-
 const presence = new Presence({
   clientId: "628019683718856714"
 });
 
-presence.on("UpdateData", async () => {
-  const name = document.querySelector(
-      "#main > header > div._3V5x5 > div._1lpto > div > span"
-    ) as HTMLElement,
-    typing = document.querySelector(
-      "#main > footer > div._2i7Ej.copyable-area > div:nth-child(3)"
-    )
-      ? (document.querySelector(
-          "#main > footer > div._2i7Ej.copyable-area > div:nth-child(3)"
-        ).firstChild as HTMLElement)
-      : null,
-    textPermission = (document.querySelector(
-      "#main > footer > div._2i7Ej.copyable-area > div._13mgZ"
-    ) as HTMLElement)
-      ? true
-      : false;
+presence.on("UpdateData", () => {
+  const name: HTMLSpanElement = document.querySelector(
+      "#main > header > div._5SiUq > div._16vzP > div > span"
+    ),
+    typing: any = document.querySelector(
+      "#main > footer > div._3pkkz.V42si.copyable-area > div._1Plpp > div > div._2S1VP.copyable-text.selectable-text"
+    ),
+    textPermission: any = document.querySelector(
+      "#main > footer > .copyable-area"
+    );
+
   let contactName = null;
 
-  if (!name || name.innerText == "") return presence.clearActivity();
+  if (!name || name.innerText == "") return presence.setActivity();
   if (
-    isNaN(name.innerText.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "") as any)
+    isNaN(
+      Number(name.innerText.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, ""))
+    )
   )
-    contactName = name.innerText; // This will protect you from showing people the unsaved contact's number.
+    contactName = name.innerText;
 
-  const data = {
+  const data: presenceData = {
     largeImageKey: "waweb-logo",
     details: `Texting with ${contactName ? contactName : "someone"}`,
     state: `${
-      typing && typing.tagName == "BUTTON"
+      typing && typing.textContent
         ? "Typing..."
         : `${
             !typing && !textPermission
