@@ -91,6 +91,10 @@ declare class Presence {
    * @since 2.1
    */
   showSetting(settings: string | Array<string>): Promise<void>;
+  /**
+   * Sends data back to application
+   * @param data Data to send back to application
+   */
   private sendData;
   /**
    * Subscribe to events emitted by the extension
