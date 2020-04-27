@@ -10,8 +10,8 @@
   "service": "SiriusXM",
   "version": "1.0",
   "logo": "https://imgur.com/WKHpLxp.jpg",
-  "thumbnail": "https://imgur.com/WKHpLxp.jpg",
+  "thumbnail": "https://imgur.com/a/lTYYEyi.png",
   "color": "#0081FF",
-  "tags": ["music"],
+  "tags": ["music", "radio"],
   "category": "music"
 }
