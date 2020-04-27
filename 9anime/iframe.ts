@@ -1,6 +1,6 @@
 // same as fmovies, any update here must be added in the other presence too
 
-let iframe = new iFrame();
+const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
   if (

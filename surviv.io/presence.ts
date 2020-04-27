@@ -6,7 +6,7 @@ var presence = new Presence({
 const pagetype;
 const gametype;
 const gameregion;
- 
+
 */
 var value: any;
 var pagetype;
@@ -23,7 +23,7 @@ var end: boolean;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "logo"
   };
 
@@ -48,16 +48,16 @@ presence.on("UpdateData", async () => {
       var duo = document.querySelector("#btn-start-mode-1");
       var squad = document.querySelector("#btn-start-mode-2");
 
-      solo.addEventListener("mousedown", function() {
+      solo.addEventListener("mousedown", function () {
         console.log("Works");
         value = "Solos: ";
       });
 
-      duo.addEventListener("mousedown", function() {
+      duo.addEventListener("mousedown", function () {
         value = "Duos: ";
       });
 
-      squad.addEventListener("mousedown", function() {
+      squad.addEventListener("mousedown", function () {
         value = "Squads: ";
       });
 

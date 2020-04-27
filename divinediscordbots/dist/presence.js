@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "668933003434655781",
+  clientId: "668933003434655781"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   if (document.location.pathname.includes("/bot/")) {

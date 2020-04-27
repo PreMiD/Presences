@@ -3,7 +3,7 @@ var presence = new Presence({
 });
 presence.on("UpdateData", () => {
   let paused = true;
-  let children = document.getElementById("audioPlayer-controls-buttons")
+  const children = document.getElementById("audioPlayer-controls-buttons")
     .children;
   console.log(children);
   for (let i = 0; i < children.length; i++) {
@@ -13,7 +13,7 @@ presence.on("UpdateData", () => {
     }
   }
 
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "lg",
     smallImageKey: paused ? "pause" : "play",
     smallImageText: paused ? "Pausiert" : "Spielt",

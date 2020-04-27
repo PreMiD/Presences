@@ -1,16 +1,14 @@
 var iFrameVideo, currentTime, duration, paused;
 const presence = new Presence({
-  clientId: "648938148050632745",
+  clientId: "648938148050632745"
 });
 
 let presenceData = {
-  largeImageKey: "HelloYouLookingAtThisThisIsntRealHahaLOL",
+  largeImageKey: "HelloYouLookingAtThisThisIsntRealHahaLOL"
 };
 
 presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
-  //console.log(data.iframe_video);
-  //console.log(document.location.pathname);
   if (playback) {
     iFrameVideo = data.iframe_video.iFrameVideo;
     currentTime = data.iframe_video.currTime;
@@ -23,7 +21,7 @@ presence.on("UpdateData", () => {
   let path = document.location.pathname;
 
   if (document.location.pathname.includes("/iplayer/")) {
-    if (duration == null || duration == undefined) {
+    if (duration == null) {
       presenceData.details = document.querySelector(
         ".channel-panel-item__link__title.typo.typo--skylark.typo--bold"
       ).textContent;
@@ -69,9 +67,6 @@ presence.on("UpdateData", () => {
         break;
       case "/iplayer/live/bbcfour":
         presenceData.largeImageKey = "bbcfour";
-        break;
-      case "/iplayer/live/radio1":
-        presenceData.largeImageKey = "radio1";
         break;
       case "/iplayer/live/radio1":
         presenceData.largeImageKey = "radio1";

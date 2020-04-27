@@ -1,15 +1,15 @@
 var presence = new Presence({
-    clientId: "656574682916585473",
+    clientId: "656574682916585473"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   if (document.location.host == "downdetector.com") {
     presenceData.startTimestamp = browsingStamp;

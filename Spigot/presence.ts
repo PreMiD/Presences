@@ -1,13 +1,13 @@
 var presence = new Presence({
-  clientId: "625795936286932993" // CLIENT ID FOR YOUR PRESENCE
+  clientId: "625795936286932993"
 });
 
-var item: any, user: any, search: any, title: any;
+var user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "spigot"
   };
 

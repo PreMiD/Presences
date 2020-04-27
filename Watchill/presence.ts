@@ -16,6 +16,20 @@ const presence = new Presence({
     "/profile": "Profilim"
   };
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     video = document.querySelector("video") as HTMLVideoElement,
@@ -45,7 +59,7 @@ presence.on("UpdateData", async () => {
   } else if (page.includes("/search/")) {
     const searchingFor = decodeURI(page.replace("/search/", ""))
       .split(" ")
-      .map(i => i[0].toUpperCase() + i.slice(1).toLowerCase())
+      .map((i) => i[0].toUpperCase() + i.slice(1).toLowerCase())
       .join(" ");
 
     presence.setActivity({
@@ -81,7 +95,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       );
 
-    let data: { [k: string]: any } = {
+    const data: { [k: string]: any } = {
       largeImageKey: "wh-logo",
       details:
         title && title.textContent != "" ? title.textContent : "Bilinmeyen",
@@ -125,7 +139,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       );
 
-    let data: { [k: string]: any } = {
+    const data: { [k: string]: any } = {
       largeImageKey: "wh-logo",
       details:
         showName && showName.textContent != ""
@@ -170,14 +184,3 @@ presence.on("UpdateData", async () => {
     });
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime, videoDuration) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

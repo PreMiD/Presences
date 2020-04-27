@@ -1,17 +1,17 @@
-let presence: Presence = new Presence({
+const presence: Presence = new Presence({
     clientId: "609183409440555018"
   }),
   startTimestamp = Math.floor(Date.now() / 1000),
-  subReddit: string,
-  postTitle: string,
-  username: string,
-  nickname: string,
-  rpanTitle: string,
   strings = presence.getStrings({
     browsing: "presence.activity.browsing",
     live: "presence.activity.live"
   }),
   oldReddit = document.querySelector("._1tvdSTbdxaK-BnUbzUIqIY") == null;
+let subReddit: string,
+  postTitle: string,
+  username: string,
+  nickname: string,
+  rpanTitle: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {

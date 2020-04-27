@@ -18,6 +18,20 @@ const presence = new Presence({
     "/iletisim": "İletişim"
   };
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     title = document.querySelector(
@@ -92,7 +106,7 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    let data: { [k: string]: any } = {
+    const data: { [k: string]: any } = {
       largeImageKey: "fm-logo",
       details: "Bir film izliyor:",
       state: title.textContent,
@@ -121,10 +135,3 @@ presence.on("UpdateData", async () => {
     });
   }
 });
-
-function getTimestamps(videoTime, videoDuration) {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-
-  return [Math.floor(startTime / 1000), endTime];
-}

@@ -7,18 +7,45 @@ const strings = presence.getStrings({
   live: "presence.activity.live"
 });
 
-// The synced variable determines whether or not the presence should stay on or should stay out of sync (disappear after one minute).
+function capitalize(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function stripText(element: HTMLElement, id = "None", log: boolean): any {
+  if (element && element.firstChild) {
+    return element.firstChild.textContent;
+  } else {
+    if (log)
+      console.log(
+        "%cMixer%cERROR%c An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
+          id,
+        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 25px 0 0 25px; background: #596cae;",
+        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 0 25px 25px 0; background: #ff5050;",
+        "color: unset;"
+      );
+    return null;
+  }
+}
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
 
 var oldUrl, elapsed, state;
+var timestamps;
 
 presence.on("UpdateData", async () => {
-  var title,
-    streamer,
-    smallImageKey,
-    smallImageText,
-    videoTime,
-    videoDuration,
-    synced;
+  var title, streamer, smallImageKey, smallImageText, videoTime, videoDuration;
 
   const videoElements: NodeListOf<HTMLVideoElement> = document.querySelectorAll(
     ".spectre-player"
@@ -65,7 +92,7 @@ presence.on("UpdateData", async () => {
     case "video":
       smallImageKey = "play";
       smallImageText = (await strings).play;
-      var timestamps = getTimestamps(
+      timestamps = getTimestamps(
         Math.floor(videoElement.currentTime),
         Math.floor(videoElement.duration)
       );
@@ -77,7 +104,7 @@ presence.on("UpdateData", async () => {
       title = "Watching a clip...";
       smallImageKey = "play";
       smallImageText = (await strings).play;
-      var timestamps = getTimestamps(
+      timestamps = getTimestamps(
         Math.floor(videoElement.currentTime),
         Math.floor(videoElement.duration)
       );
@@ -93,7 +120,7 @@ presence.on("UpdateData", async () => {
               .split("/")
               .map((path, index) => {
                 if (index !== 1)
-                  return capitalize(path).replace(/[\[{()}\]]/g, "");
+                  return capitalize(path).replace(/[[{()}\]]/g, "");
               })
               .join(" ")
           : "Home";
@@ -117,31 +144,5 @@ presence.on("UpdateData", async () => {
     data.smallImageText = (await strings).pause;
   }
 
-  presence.setActivity(data, synced && !videoElement.paused);
+  presence.setActivity(data, videoElement !== null && !videoElement.paused);
 });
-
-function capitalize(text: string) {
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-function stripText(element: HTMLElement, id: string = "None", log: boolean) {
-  if (element && element.firstChild) {
-    return element.firstChild.textContent;
-  } else {
-    if (log)
-      console.log(
-        "%cMixer%cERROR%c An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
-          id,
-        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 25px 0 0 25px; background: #596cae;",
-        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 0 25px 25px 0; background: #ff5050;",
-        "color: unset;"
-      );
-    return null;
-  }
-}
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

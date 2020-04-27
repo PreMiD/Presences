@@ -2,12 +2,12 @@ var presence = new Presence({
   clientId: "626536244670889985" // CLIENT ID FOR YOUR PRESENCE
 });
 
-var item: any, user: any, search: any, title: any;
+var user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "curseforge"
   };
   function setStateGame(
@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
     categoryURL: string,
     categoryText: string,
     categoryTextSingle: string
-  ) {
+  ): void {
     if (document.location.pathname.includes("/" + categoryURL + "/")) {
       title = document.querySelector(
         "body > div.flex.flex-col.min-h-full.min-h-screen > main > div.z-0 > header > div.container.mx-auto.mt-auto.flex.justify-between > div:nth-child(1) > div > div:nth-child(1) > h2"

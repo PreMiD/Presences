@@ -7,7 +7,7 @@ var board: any, profile: any;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "trello"
   };
 

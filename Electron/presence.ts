@@ -2,15 +2,25 @@ const presence = new Presence({
   clientId: "691406198091677737"
 });
 
-var user: any;
-var title: any;
-var replace: any;
-var search: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+function parseQueryString(queryString?: string): any {
+  if (!queryString) {
+    queryString = window.location.search.substring(1);
+  }
+  const params = {};
+  const queries = queryString.split("&");
+  queries.forEach((indexQuery: string) => {
+    const indexPair = indexQuery.split("=");
+    const queryKey = decodeURIComponent(indexPair[0]);
+    const queryValue = decodeURIComponent(
+      indexPair.length > 1 ? indexPair[1] : ""
+    );
+    params[queryKey] = queryValue;
+  });
+  return params;
+}
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "logo"
   };
 
@@ -127,20 +137,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-function parseQueryString(queryString?: string): any {
-  if (!queryString) {
-    queryString = window.location.search.substring(1);
-  }
-  const params = {};
-  const queries = queryString.split("&");
-  queries.forEach((indexQuery: string) => {
-    const indexPair = indexQuery.split("=");
-    const queryKey = decodeURIComponent(indexPair[0]);
-    const queryValue = decodeURIComponent(
-      indexPair.length > 1 ? indexPair[1] : ""
-    );
-    params[queryKey] = queryValue;
-  });
-  return params;
-}

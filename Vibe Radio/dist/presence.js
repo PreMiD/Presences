@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "647803677284761619",
+  clientId: "647803677284761619"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 let sartist, strack, slisteners, sduration, selapsed, timestamps;
@@ -22,7 +22,7 @@ function newStats() {
 }
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "vibe",
+    largeImageKey: "vibe"
   };
   timestamps = getTimestamps(Math.floor(selapsed), Math.floor(sduration));
   presenceData.smallImageKey = "play";

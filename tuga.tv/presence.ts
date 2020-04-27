@@ -5,13 +5,27 @@ const { pathname } = window.location,
   startTimestamp = Math.floor(Date.now() / 1000);
 let current: number, duration: number, paused: boolean, played: boolean;
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 const strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
 });
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   current = data.current;
   duration = data.duration;
   paused = data.paused;
@@ -56,9 +70,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData, true);
 });
-
-function getTimestamps(curr: number, dura: number) {
-  let startTime = Math.floor(Date.now() / 1000),
-    duration = Math.floor(startTime - curr + dura);
-  return [startTime, duration];
-}

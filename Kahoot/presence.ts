@@ -2,6 +2,32 @@ var presence = new Presence({
   clientId: "612793327510749210"
 });
 
+var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
+
+function logError(name: string, message: string): void {
+  console.log(
+    `%c${name}%cINFO%c ${message}`,
+    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
+    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
+    "color: unset;"
+  );
+}
+
+function stripText(element: HTMLElement, id = "None", log = true): any {
+  if (element && element.firstChild) {
+    return element.firstChild.textContent;
+  } else {
+    if (log) {
+      logError(
+        "Kahoot",
+        "An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
+          id
+      );
+    }
+    return null;
+  }
+}
+
 var oldUrl, elapsed, state, gameName, gameScore, gamePlace, gameQuestions;
 
 presence.on("UpdateData", async () => {
@@ -18,7 +44,7 @@ presence.on("UpdateData", async () => {
   href.match("https://kahoot.it") ? (state = "player") : (state = "host");
 
   switch (state) {
-    case "player":
+    case "player": {
       title = "Playing";
       info = "Idling";
 
@@ -101,7 +127,8 @@ presence.on("UpdateData", async () => {
         info = "Giving Feedback";
       }
       break;
-    case "host":
+    }
+    case "host": {
       title = "Hosting";
       info = "Idling";
 
@@ -159,6 +186,7 @@ presence.on("UpdateData", async () => {
         info = "Giving Feedback";
       }
       break;
+    }
     default:
       break;
   }
@@ -172,52 +200,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(data, true);
 });
-
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-
-function logInfo(name: string, message: string) {
-  console.log(
-    `%c${name}%cINFO%c ${message}`,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-function logError(name: string, message: string) {
-  console.log(
-    `%c${name}%cINFO%c ${message}`,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
-    "color: unset;"
-  );
-}
-
-function logSuccess(name: string, message: string) {
-  console.log(
-    `%c${name}%cINFO%c ${message}`,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle +
-      "border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
-    "color: unset;"
-  );
-}
-
-function stripText(
-  element: HTMLElement,
-  id: string = "None",
-  log: boolean = true
-) {
-  if (element && element.firstChild) {
-    return element.firstChild.textContent;
-  } else {
-    if (log) {
-      logError(
-        "Kahoot",
-        "An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
-          id
-      );
-    }
-    return null;
-  }
-}

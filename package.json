@@ -5,25 +5,30 @@
   "license": "MPL-2.0",
   "scripts": {
     "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
-    "precommit": "node ./lintstaged.js",
-    "lintstaged:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop ./lintstaged.ts ./@types/lint-staged/index.d.ts"
+    "qa": "node ./qualityAssurance.js",
+    "qa:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --inlineSourceMap ./qualityAssurance.ts",
+    "pu": "node ./presenceUpdater.js",
+    "pu:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --inlineSourceMap ./presenceUpdater.ts"
   },
   "devDependencies": {
-    "@types/node": "^13.9.5",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.1.1",
-    "mongodb": "^3.5.5",
-    "prettier": "^2.0.2",
-    "source-map-support": "^0.5.16",
+    "@types/glob": "^7.1.1",
+    "@types/node": "^13.13.2",
+    "@types/prettier": "^2.0.0",
+    "@types/semver": "^7.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "chalk": "^4.0.0",
+    "eslint": "^6.8.0",
+    "execa": "^4.0.0",
+    "glob": "^7.1.6",
+    "mongodb": "^3.5.6",
+    "prettier": "^2.0.5",
+    "semver": "^7.3.2",
+    "source-map-support": "^0.5.19",
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@types/chrome": "^0.0.103",
-    "@types/mongodb": "^3.5.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn precommit"
-    }
+    "@types/chrome": "^0.0.104",
+    "@types/mongodb": "^3.5.10"
   }
 }

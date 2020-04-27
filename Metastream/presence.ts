@@ -7,6 +7,30 @@ var strings = presence.getStrings({
   live: "presence.activity.live"
 });
 
+function getTime(list: string[]): number {
+  var ret = 0;
+  for (let index = list.length - 1; index >= 0; index--) {
+    ret += parseInt(list[index]) * 60 ** index;
+  }
+  return ret;
+}
+
+function getTimestamps(
+  audioTime: string,
+  audioDuration: string
+): Array<number> {
+  var splitAudioTime = audioTime.split(":").reverse();
+  var splitAudioDuration = audioDuration.split(":").reverse();
+
+  var parsedAudioTime = getTime(splitAudioTime);
+  var parsedAudioDuration = getTime(splitAudioDuration);
+
+  var startTime = Date.now();
+  var endTime =
+    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var elapsed, oldUrl;
 
 presence.on("UpdateData", async () => {
@@ -134,24 +158,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(data, playing);
 });
-
-function getTimestamps(audioTime: string, audioDuration: string) {
-  var splitAudioTime = audioTime.split(":").reverse();
-  var splitAudioDuration = audioDuration.split(":").reverse();
-
-  var parsedAudioTime = getTime(splitAudioTime);
-  var parsedAudioDuration = getTime(splitAudioDuration);
-
-  var startTime = Date.now();
-  var endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getTime(list: string[]) {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}

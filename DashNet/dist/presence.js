@@ -6,7 +6,7 @@ presence.clearActivity();
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "dashnet",
+    largeImageKey: "dashnet"
   };
 
   if (document.location.pathname.includes("/cookieclicker/")) {

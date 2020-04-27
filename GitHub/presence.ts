@@ -1,10 +1,6 @@
 var presence = new Presence({
-    clientId: "607587875122446359"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "607587875122446359"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -48,7 +44,7 @@ presence.on("UpdateData", async () => {
     var profileCurrentTab = profileURL.searchParams.get("tab");
   }
 
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
   };
@@ -187,7 +183,7 @@ presence.on("UpdateData", async () => {
     ) {
       var repLoc: any;
 
-      repositoryLocation.forEach(item => {
+      repositoryLocation.forEach((item) => {
         repLoc = item.innerText;
       });
 
@@ -208,7 +204,7 @@ presence.on("UpdateData", async () => {
     ) {
       var repLoc2: any;
 
-      repositoryLocation2.forEach(item => {
+      repositoryLocation2.forEach((item) => {
         repLoc2 = item.innerText;
       });
 
@@ -377,14 +373,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

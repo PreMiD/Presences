@@ -5,6 +5,13 @@ var strings = presence.getStrings({
   browse: "presence.activity.browsing"
 });
 
+const getElement = (query: string): string => {
+  const element = document.querySelector(query);
+  if (element) {
+    return element.textContent.replace(/^\s+|\s+$/g, "");
+  } else return undefined;
+};
+
 const paths = {
   "/": {
     details: "Browsing"
@@ -62,19 +69,13 @@ const queries = {
 
 presence.on("UpdateData", async () => {
   let data: presenceData = {
-    details: undefined,
-    state: undefined,
-    largeImageKey: "boardgameonline",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: undefined,
-    endTimestamp: undefined
+    largeImageKey: "boardgameonline"
   };
 
   const host = location.host;
   const path = location.pathname;
   const query = location.search;
-  const queryString = query && query.split("page=")[1]?.split("&")[0];
+  const queryString = query && query.split("page=")[1].split("&")[0];
 
   if (host === "www.boardgame-online.com") {
     if (path in paths) data = { ...data, ...paths[path] };
@@ -96,7 +97,7 @@ presence.on("UpdateData", async () => {
     }
   } else {
     const playerCount = document.querySelector(".rankingTable")
-      ?.childElementCount;
+      .childElementCount;
 
     data.details = "Playing Game";
     data.state = document.title;
@@ -117,10 +118,3 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
   }
 });
-
-const getElement = (query: string) => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return undefined;
-};

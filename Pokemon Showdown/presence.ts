@@ -5,7 +5,7 @@ var presence = new Presence({
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "showdown-logo"
   };
 

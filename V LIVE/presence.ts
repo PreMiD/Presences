@@ -1,29 +1,10 @@
 var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
 
-function PMD_info(message) {
+function PMD_info(message): void {
   console.log(
     "%cPreMiD%cINFO%c " + message,
     genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
     genericStyle + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-function PMD_error(message) {
-  console.log(
-    "%cPreMiD%cERROR%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
-    "color: unset;"
-  );
-}
-
-function PMD_success(message) {
-  console.log(
-    "%cPreMiD%cSUCCESS%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle +
-      "border-radius: 0 25px 25px 0; background: #50ff50; color: black;",
     "color: unset;"
   );
 }
@@ -41,13 +22,23 @@ PMD_info(
   "An error might be created in console when loading a page, it means that PreMiD is trying to get information too fast. (The information isn't loaded yet.) You may ignore the error if it is created, the presence should still work fine."
 );
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var title: any, uploader: any, search: any, livechecker: any;
-
-// the video variable is a html video element
-var video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any;
-
+var video: HTMLVideoElement;
 var browsingStamp = Math.floor(Date.now() / 1000);
-
 var playback: boolean;
 
 presence.on("UpdateData", async () => {
@@ -57,7 +48,7 @@ presence.on("UpdateData", async () => {
   playback = video ? true : false;
 
   if (!playback) {
-    let pdata: presenceData = {
+    const pdata: presenceData = {
       largeImageKey: "vlive2"
     };
 
@@ -255,7 +246,7 @@ presence.on("UpdateData", async () => {
       uploader = document.querySelector(
         "#container > smarteditor-view > div > div.header > div > smarteditor-channel-info > div > div.info > a > div.info_area > div"
       );
-      let test = uploader.innerText.replace("celeb", "");
+      const test = uploader.innerText.replace("celeb", "");
 
       pdata.details = "Reading an article by " + test;
       pdata.smallImageKey = "reading";
@@ -302,7 +293,7 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "#content > div.ticket_section > div > div.ticket_info_area > div > div > h4"
       );
-      let test = search.innerText.replace("+", "");
+      const test = search.innerText.replace("+", "");
 
       pdata.details = "Watching the fanship page";
       pdata.smallImageKey = "reading";
@@ -326,7 +317,7 @@ presence.on("UpdateData", async () => {
       uploader = document.querySelector(
         "#container > smarteditor-view > div > div.header > div > smarteditor-channel-info > div > div.info > a > div.info_area > div"
       );
-      let test = uploader.innerText.replace("celeb", "");
+      const test = uploader.innerText.replace("celeb", "");
 
       pdata.details = "Reading an article by " + test;
       pdata.smallImageKey = "reading";
@@ -432,7 +423,7 @@ presence.on("UpdateData", async () => {
 
   // Check if it can find the video
   if (video !== null && !isNaN(video.duration)) {
-    let timestamps = getTimestamps(
+    const timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
@@ -448,27 +439,15 @@ presence.on("UpdateData", async () => {
         endTimestamp: timestamps[1]
       };
 
-    // Get the video duration
-    videoDuration = video.duration;
-
-    // Get the video current time
-    videoCurrentTime = video.currentTime;
-
-    // Get title, can get the document.querySelector thing with the tips i sent you
-    title = document.querySelector(
-      "#content > div.vlive_section > div > div.vlive_cont > div.vlive_area > div.vlive_info > strong"
-    );
-
-    // Get the views number
-    uploader = document.querySelector(
-      "#content > div.vlive_section > div > div.vlive_top > div.star_profile > div.info_area > a"
-    );
-
     // Set presence details to the title (innerText - gets the text from the <strong> tag in this case)
-    pdata.details = title.innerText;
+    pdata.details = document.querySelector(
+      "#content > div.vlive_section > div > div.vlive_cont > div.vlive_area > div.vlive_info > strong"
+    ).textContent;
 
     // Set presence state to views value
-    pdata.state = uploader.innerText;
+    pdata.state = document.querySelector(
+      "#content > div.vlive_section > div > div.vlive_top > div.star_profile > div.info_area > a"
+    ).textContent;
 
     //* Remove timestamps if paused
     if (video.paused) {
@@ -482,14 +461,3 @@ presence.on("UpdateData", async () => {
     }
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

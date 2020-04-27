@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "651244193624096778",
+    clientId: "651244193624096778"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var title = document
@@ -12,7 +12,7 @@ var title = document
   .trim();
 presence.on("UpdateData", async () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   if (document.location.pathname.includes("/resenhas/")) {

@@ -6,16 +6,27 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 var user: any;
 var title: any;
-var replace: any;
-var search: any;
-var timestamp: any;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "svt"
   };
 
@@ -29,8 +40,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing program genres";
       presenceData.details = "Navigerar program kategorier";
     } else if (document.location.pathname.includes("/kanaler/")) {
-      let video: HTMLVideoElement;
-      video = document.querySelector(
+      const video: HTMLVideoElement = document.querySelector(
         "#play_main-content > article > div.play_channels-video--show > div > div > div.play_video-player.lp_video.play_channels__active-video > div > video"
       );
       title = document.querySelector(
@@ -70,31 +80,30 @@ presence.on("UpdateData", async () => {
         time: any,
         live: any,
         timestamps: any;
-      let video: HTMLVideoElement;
-      video = document.querySelector(
+      const video: HTMLVideoElement = document.querySelector(
         "#js-play_video__fullscreen-container > div > div > video"
       );
       title = document.querySelector("#titel > h1 > span:nth-child(1)")
         .textContent;
       user = document.querySelector("#titel > h1 > span:nth-child(2)")
         .textContent;
-      if (video.duration == undefined || video.duration == null) {
-        time = false;
-        live = false;
-      } else if (video.duration == 9007199254740991) {
-        live = true;
-      } else {
-        time = true;
-        live = false;
-        currentTime = video.currentTime;
-        duration = video.duration;
-        paused = video.paused;
-        timestamps = getTimestamps(
-          Math.floor(currentTime),
-          Math.floor(duration)
-        );
-      }
       if (video !== null) {
+        if (video.duration == undefined) {
+          time = false;
+          live = false;
+        } else if (video.duration == 9007199254740991) {
+          live = true;
+        } else {
+          time = true;
+          live = false;
+          currentTime = video.currentTime;
+          duration = video.duration;
+          paused = video.paused;
+          timestamps = getTimestamps(
+            Math.floor(currentTime),
+            Math.floor(duration)
+          );
+        }
         if (time == true && !isNaN(duration) && live == false) {
           presenceData.smallImageKey = paused ? "pause" : "play";
           presenceData.smallImageText = paused
@@ -153,14 +162,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

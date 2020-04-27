@@ -7,6 +7,20 @@ var presence = new Presence({
     browse: "presence.activity.browsing"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var lastPlaybackState = null;
 var playback;
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -18,7 +32,7 @@ if (lastPlaybackState != playback) {
 
 var iFrameVideo: any, currentTime: any, duration: any, paused: any;
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   playback = data.iframe_video !== null ? true : false;
 
   if (playback) {
@@ -30,11 +44,11 @@ presence.on("iFrameData", data => {
 });
 
 presence.on("UpdateData", async () => {
-  if (!playback) {
-    presenceData: presenceData = {
-      largeImageKey: "lg"
-    };
+  var presenceData: presenceData = {
+    largeImageKey: "lg"
+  };
 
+  if (!playback) {
     presenceData.details = (await strings).browse;
     presenceData.startTimestamp = browsingStamp;
 
@@ -53,20 +67,26 @@ presence.on("UpdateData", async () => {
     episode = episod[1].innerText + " - " + epName.innerText;
 
     var timestamps = getTimestamps(
-        Math.floor(currentTime),
-        Math.floor(duration)
-      ),
-      presenceData: presenceData = {
-        largeImageKey: "lg",
-        smallImageKey: paused ? "pause" : "play",
-        smallImageText: paused ? (await strings).pause : (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
-      };
+      Math.floor(currentTime),
+      Math.floor(duration)
+    );
+    presenceData.smallImageKey = paused ? "pause" : "play";
+    presenceData.smallImageText = paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
 
-    presence.setTrayTitle(paused ? "" : videoTitle.innerText);
+    presence.setTrayTitle(
+      paused
+        ? ""
+        : videoTitle !== null
+        ? videoTitle.innerText
+        : "Title not found..."
+    );
 
-    presenceData.details = videoTitle.innerText;
+    presenceData.details =
+      videoTitle !== null ? videoTitle.innerText : "Title not found...";
     presenceData.state = episode;
 
     if (paused) {
@@ -79,14 +99,3 @@ presence.on("UpdateData", async () => {
     }
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

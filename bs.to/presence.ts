@@ -1,20 +1,15 @@
 var presence = new Presence({
-    clientId: "639568013590528030"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "639568013590528030"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 var user: any;
 var title: any;
-var replace: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "bs"
   };
 
@@ -57,8 +52,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Forums, Viewing the list of";
       presenceData.state = "trending threads";
 
-      delete presenceData.smallImageKey;
-
       presence.setActivity(presenceData);
     } else if (document.URL.includes("/profile")) {
       user = document.querySelector(
@@ -66,8 +59,6 @@ presence.on("UpdateData", async () => {
       );
       presenceData.details = "Viewing the profile of:";
       presenceData.state = user.innerText;
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (
@@ -77,8 +68,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Forums, Viewing the list of";
       presenceData.state = "latest profile posts";
 
-      delete presenceData.smallImageKey;
-
       presence.setActivity(presenceData);
     } else if (
       document.URL.includes("/whats-new/") &&
@@ -86,8 +75,6 @@ presence.on("UpdateData", async () => {
     ) {
       presenceData.details = "Forums, Viewing the list of";
       presenceData.state = "latest posts";
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (
@@ -97,8 +84,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Forums, Viewing the";
       presenceData.state = "news feed";
 
-      delete presenceData.smallImageKey;
-
       presence.setActivity(presenceData);
     } else if (
       document.URL.includes("/whats-new/") &&
@@ -107,14 +92,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Forums, Viewing the";
       presenceData.state = "latest activity";
 
-      delete presenceData.smallImageKey;
-
       presence.setActivity(presenceData);
     } else if (document.URL.includes("/whats-new/")) {
       presenceData.details = "Forums, Viewing whats new";
-      delete presenceData.state;
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.URL.includes("/watched/")) {
@@ -122,14 +102,10 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Forums, Viewing their";
         presenceData.state = "watched threads";
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Forums, Viewing their";
         presenceData.state = "watched forums";
-
-        delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       }
@@ -156,9 +132,6 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.URL.includes("/account/")) {
       presenceData.details = "Forums, account settings";
-      delete presenceData.state;
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.URL.includes("/members/")) {
@@ -166,49 +139,34 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing the list";
         presenceData.state = "of staff members";
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       } else if (document.URL.includes("key=todays_birthdays")) {
         presenceData.details = "Viewing list of members";
         presenceData.state = "with today as their birthday";
-
-        delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else if (document.URL.includes("/banned")) {
         presenceData.details = "Viewing the list";
         presenceData.state = "of banned users";
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       } else if (document.URL.includes("/list")) {
         presenceData.details = "Viewing the list";
         presenceData.state = "of all users";
-
-        delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else if (document.URL.includes("key=most_likes")) {
         presenceData.details = "Viewing list of members";
         presenceData.state = "with the most reactions";
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       } else if (document.URL.includes("key=most_messages")) {
         presenceData.details = "Viewing list of members";
         presenceData.state = "with the most messages";
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Viewing overview of members";
-        delete presenceData.state;
-
-        delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       }
@@ -232,14 +190,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

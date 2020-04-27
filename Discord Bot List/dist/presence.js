@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "653644508507930645",
+  clientId: "653644508507930645"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo-dbl",
+    largeImageKey: "logo-dbl"
   };
 
   const browsingStamp = Math.floor(Date.now() / 1000);

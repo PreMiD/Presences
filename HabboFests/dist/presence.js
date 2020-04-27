@@ -1,11 +1,11 @@
 var presence = new Presence({
-  clientId: "650325697742635009",
+  clientId: "650325697742635009"
 });
 var item, user, search, title;
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   let presenceData = {
-    largeImageKey: "habbofests",
+    largeImageKey: "habbofests"
   };
   presenceData.startTimestamp = browsingStamp;
   if (document.location.hostname == "habbofests.com") {

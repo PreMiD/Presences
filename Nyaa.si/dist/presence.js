@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "635213174144237601",
+    clientId: "635213174144237601"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var user;
@@ -13,7 +13,7 @@ var viewString = "Viewing ";
 var torrentString = "'s torrents";
 presence.on("UpdateData", async () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
 
   if (new URLSearchParams(window.location.search).has("q")) {

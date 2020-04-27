@@ -6,6 +6,24 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+function getTime(list: string[]): number {
+  var ret = 0;
+  for (let index = list.length - 1; index >= 0; index--) {
+    ret += parseInt(list[index]) * 60 ** index;
+  }
+  return ret;
+}
+
+function getTimestamps(audioDuration: string): Array<number> {
+  var splitAudioDuration = audioDuration.split(":").reverse();
+
+  var parsedAudioDuration = getTime(splitAudioDuration);
+
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   var player = document.querySelector(".playbackActive");
   if (player) {
@@ -43,21 +61,3 @@ presence.on("UpdateData", async () => {
     presence.clearActivity();
   }
 });
-
-function getTimestamps(audioDuration: string) {
-  var splitAudioDuration = audioDuration.split(":").reverse();
-
-  var parsedAudioDuration = getTime(splitAudioDuration);
-
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-function getTime(list: string[]) {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}

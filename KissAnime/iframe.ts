@@ -1,11 +1,12 @@
 var iframe = new iFrame();
 
-setInterval(function() {
+setInterval(function () {
+  var video: HTMLVideoElement;
   if (
     document.location.hostname == "www.rapidvid.to" ||
     document.location.hostname == "www.mp4upload.com"
   ) {
-    var video: HTMLVideoElement = document.querySelector("video.vjs-tech");
+    video = document.querySelector("video.vjs-tech");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
@@ -18,9 +19,7 @@ setInterval(function() {
       });
     }
   } else if (document.location.hostname == "www.novelplanet.me") {
-    var video: HTMLVideoElement = document.querySelector(
-      "video.jw-video.jw-reset"
-    );
+    video = document.querySelector("video.jw-video.jw-reset");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
@@ -33,7 +32,7 @@ setInterval(function() {
       });
     }
   } else {
-    var video: HTMLVideoElement = document.querySelector("video.vjs-tech");
+    video = document.querySelector("video.vjs-tech");
 
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({

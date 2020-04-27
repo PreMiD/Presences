@@ -2,12 +2,12 @@ var presence = new Presence({
   clientId: "626481021843669044" // CLIENT ID FOR YOUR PRESENCE
 });
 
-var item: any, user: any, search: any, title: any;
+var user: any, search: any, title: any;
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "bukkit"
   };
 
@@ -27,7 +27,6 @@ presence.on("UpdateData", async () => {
       } else {
         presenceData.state = title.innerText;
       }
-      delete presenceData.smallImageKey;
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/forums/")) {
       title = document.querySelector(
@@ -37,14 +36,9 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Forums, viewing category:";
         presenceData.state = title.innerText;
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Forums, Browsing...";
-        delete presenceData.state;
-
-        delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       }
@@ -72,28 +66,20 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Forums, Viewing the list";
         presenceData.state = "of staff members";
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       } else if (document.URL.includes("type=points")) {
         presenceData.details = "Forums, Viewing list of";
         presenceData.state = "members with the most points";
-
-        delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else if (document.URL.includes("type=staff")) {
         presenceData.details = "Forums, Viewing list of";
         presenceData.state = "staff members";
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       } else if (document.URL.includes("type=positive_ratings")) {
         presenceData.details = "Forums, Viewing list of";
         presenceData.state = "members with the most reactions";
-
-        delete presenceData.smallImageKey;
 
         presence.setActivity(presenceData);
       } else if (
@@ -107,29 +93,19 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Forums, Viewing user:";
         presenceData.state = user.innerText;
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       } else {
         presenceData.details = "Forums, Viewing list of";
         presenceData.state = "members with the most messages";
 
-        delete presenceData.smallImageKey;
-
         presence.setActivity(presenceData);
       }
     } else if (document.location.pathname.includes("/XenStaff/")) {
       presenceData.details = "Forums, viewing staff list";
-      delete presenceData.state;
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/account/")) {
       presenceData.details = "Forums, account settings";
-      delete presenceData.state;
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/help/")) {
@@ -167,9 +143,6 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       presenceData.details = "Docs, Browsing...";
-      delete presenceData.state;
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     }
@@ -178,14 +151,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Devs, viewing:";
       presenceData.state = "Dashboard";
 
-      delete presenceData.smallImageKey;
-
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/paste")) {
       presenceData.details = "Devs, viewing:";
       presenceData.state = "Paste";
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/bukkit-plugins/")) {
@@ -195,22 +164,16 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Devs, viewing plugins in";
       presenceData.state = "category: " + title.innerText;
 
-      delete presenceData.smallImageKey;
-
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/bukkit-plugins")) {
       presenceData.details = "Devs, viewing:";
       presenceData.state = "bukkit plugins";
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/search")) {
       search = document.querySelector("#field-search");
       presenceData.details = "Devs, searching for:";
       presenceData.state = search.value;
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/members/")) {
@@ -220,14 +183,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Devs, viewing user:";
       presenceData.state = title.innerText;
 
-      delete presenceData.smallImageKey;
-
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/members")) {
       presenceData.details = "Devs, viewing all users";
-      delete presenceData.state;
-
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/projects/")) {
@@ -240,7 +198,6 @@ presence.on("UpdateData", async () => {
       } else {
         presenceData.state = title.innerText;
       }
-      delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else {

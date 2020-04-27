@@ -5,8 +5,37 @@ var presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+function getTime(timegone, timetotal): Array<number> {
+  var timegoneN = parseInt(timegone[0]) + parseInt(timegone[1]) * 60;
+  var timetotalN = parseInt(timetotal[0]) + parseInt(timetotal[1]) * 60;
+  var back = [timegoneN, timetotalN];
+  return back;
+}
+
+function getTimeLeft(Time: string[]): Array<number> {
+  var TimeGone = Time[0].split(":").reverse();
+  var TimeTotal = Time[1].split(":").reverse();
+  var parsedAudioDuration = getTime(TimeGone, TimeTotal);
+  return [parsedAudioDuration[0], parsedAudioDuration[1]];
+}
+
 presence.on("UpdateData", async () => {
-  let Data: presenceData = {
+  const Data: presenceData = {
     largeImageKey: "musescore"
   };
 
@@ -154,7 +183,7 @@ presence.on("UpdateData", async () => {
         )
         .getAttribute("state")}` == "primary"
     ) {
-      let time = getTimeLeft([
+      const time = getTimeLeft([
         document
           .querySelector(
             "#jmuse-container > div:nth-child(1) > div > div > div > div._1DDmo.undefined > div:nth-child(1) > div > div > div._3vWaq > span"
@@ -270,22 +299,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(Data);
 });
-
-function getTimeLeft(Time: string[]) {
-  var TimeGone = Time[0].split(":").reverse();
-  var TimeTotal = Time[1].split(":").reverse();
-  var parsedAudioDuration = getTime(TimeGone, TimeTotal);
-  return [parsedAudioDuration[0], parsedAudioDuration[1]];
-}
-
-function getTime(timegone, timetotal) {
-  var timegoneN = parseInt(timegone[0]) + parseInt(timegone[1]) * 60;
-  var timetotalN = parseInt(timetotal[0]) + parseInt(timetotal[1]) * 60;
-  var back = [timegoneN, timetotalN];
-  return back;
-}
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

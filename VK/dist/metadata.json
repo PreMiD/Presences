@@ -3,6 +3,12 @@
     "name": "Voknehzyr",
     "id": "213305189657083905"
   },
+  "contributors": [
+    {
+      "name": "Bas950",
+      "id": "241278257335500811"
+    }
+  ],
   "service": "VK",
   "description": {
     "en": "This presence will be displaying things that you usually do in VK. It displays a music info (if you're on the Music page), a video info (when you watching video) and info if you're watching community or user profile.",
@@ -14,7 +20,7 @@
     "nl": "Deze presence zal dingen weergeven die je gewoonlijk in VK doet. Het toont muziekinfo (als je op de Muziek-pagina bent), video-info (wanneer je videos bekijkt) en info als je een community- of gebruikersprofiel bekijkt."
   },
   "url": "vk.com",
-  "version": "2.2.0",
+  "version": "2.2.5",
   "logo": "https://i.imgur.com/VB6AuBG.png",
   "thumbnail": "https://i.imgur.com/lKGTJ26.jpg",
   "color": "#4680C2",

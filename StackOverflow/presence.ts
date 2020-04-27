@@ -1,10 +1,6 @@
 var presence = new Presence({
-    clientId: "610123745033584651"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "610123745033584651"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -18,7 +14,7 @@ var title: any,
   questionsLastPage: any;
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
   };
@@ -85,8 +81,8 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname == "/jobs") {
-      let lastPageNumber: number = +lastPage;
-      var lastjobPageNumber: number = +jobPageNumber.innerText;
+      const lastPageNumber: number = +lastPage;
+      const lastjobPageNumber: number = +jobPageNumber.innerText;
 
       if (lastjobPageNumber > lastPageNumber) {
         console.log(lastPageNumber + " --- " + lastjobPageNumber);
@@ -101,7 +97,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname == "/users") {
-      let lastPageNumber: number = +lastPage;
+      const lastPageNumber: number = +lastPage;
       var lastusersortagsPageNumber: number = +usersortagsPageNumber.innerText;
 
       if (lastusersortagsPageNumber > lastPageNumber) {
@@ -117,8 +113,8 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname == "/tags") {
-      let lastPageNumber: number = +lastPage;
-      let lastusersortagsPageNumber: number = +usersortagsPageNumber.innerText;
+      const lastPageNumber: number = +lastPage;
+      const lastusersortagsPageNumber: number = +usersortagsPageNumber.innerText;
 
       if (lastusersortagsPageNumber > lastPageNumber) {
         console.log(lastPageNumber + " --- " + lastusersortagsPageNumber);
@@ -137,14 +133,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

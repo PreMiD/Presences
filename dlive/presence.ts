@@ -1,10 +1,6 @@
 var presence = new Presence({
-    clientId: "609531561389588480"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "609531561389588480"
+});
 
 var lastPlaybackState = null;
 var playback;
@@ -22,15 +18,12 @@ presence.on("UpdateData", async () => {
       : false;
 
   if (!playback) {
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
       largeImageKey: "lg"
     };
 
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.state;
-    delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData, true);
   }
@@ -49,7 +42,7 @@ presence.on("UpdateData", async () => {
       "div.channel-header span.dlive-name span.overflow-ellipsis"
     );
 
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
       largeImageKey: "lg",
       smallImageKey: "live"
     };
@@ -63,14 +56,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

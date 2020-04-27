@@ -1,5 +1,5 @@
 let presence = new Presence({
-  clientId: "618212337895079996",
+  clientId: "618212337895079996"
 });
 
 presence.on("UpdateData", async () => {
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
       largeImageText: "https://duelingnexus.com",
       smallImageKey: "logo",
       smallImageText: "in game",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       largeImageText: "https://duelingnexus.com",
       smallImageKey: "logo",
       smallImageText: "in game",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/editor")) {
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
       largeImageText: "https://duelingnexus.com",
       smallImageKey: "logo",
       smallImageText: "in game",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/game")) {
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
       largeImageText: "https://duelingnexus.com",
       smallImageKey: "logo",
       smallImageText: document.location.href,
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/hostgame")) {
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
       largeImageText: "https://duelingnexus.com",
       smallImageKey: "logo",
       smallImageText: "in game",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/gamelist")) {
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
       largeImageText: "https://duelingnexus.com",
       smallImageKey: "logo",
       smallImageText: "in game",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/profile")) {
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
       largeImageText: "https://duelingnexus.com",
       smallImageKey: "logo",
       smallImageText: "in game",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/duel")) {
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
       largeImageText: "https://duelingnexus.com",
       smallImageKey: "logo",
       smallImageText: "in game",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
     presence.setActivity(presenceData);
   }

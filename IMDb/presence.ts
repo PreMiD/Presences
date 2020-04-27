@@ -1,4 +1,4 @@
-let presence: Presence = new Presence({
+const presence: Presence = new Presence({
     clientId: "631379801826918400"
   }),
   strings = presence.getStrings({
@@ -6,34 +6,47 @@ let presence: Presence = new Presence({
     pause: "presence.playback.paused"
   }),
   startTimestamp = Math.floor(Date.now() / 1000);
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "large_img",
     startTimestamp
   };
   const url = document.URL;
   if (url.includes("/videoplayer/")) {
-    let video: HTMLVideoElement = document.getElementsByTagName("video")[0],
+    const video: HTMLVideoElement = document.getElementsByTagName("video")[0],
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
       title = document.querySelectorAll("h1.title")[0].textContent,
-      authorElement = <HTMLElement>(
-        document.getElementsByClassName("primary-relation-name")[0]
-      ),
+      authorElement = document.getElementsByClassName(
+        "primary-relation-name"
+      )[0] as HTMLElement,
       author = authorElement.innerText;
-    presenceData = {
-      details: title,
-      state: author,
-      largeImageKey: "large_img",
-      smallImageKey: video.paused ? "paused" : "playing",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+    presenceData.details = title;
+    presenceData.state = author;
+    presenceData.largeImageKey = "large_img";
+    presenceData.smallImageKey = video.paused ? "paused" : "playing";
+    presenceData.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
@@ -78,9 +91,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData, true);
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

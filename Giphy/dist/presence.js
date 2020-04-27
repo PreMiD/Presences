@@ -1,5 +1,5 @@
 let presence = new Presence({
-  clientId: "630507230852022273",
+  clientId: "630507230852022273"
 });
 
 presence.on("UpdateData", async () => {
@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
       //largeImageKey: "banner",
       largeImageKey: "giphy_big",
       smallImageKey: "browsing",
-      smallImageText: "browsing",
+      smallImageText: "browsing"
     };
 
     presence.setActivity(presenceData);
@@ -21,23 +21,23 @@ presence.on("UpdateData", async () => {
       //largeImageKey: "banner",
       largeImageKey: "giphy_big",
       smallImageKey: "creating",
-      smallImageText: "creating",
+      smallImageText: "creating"
     };
 
     presence.setActivity(presenceData);
   } else {
     var at = document.location.pathname;
-
+    var doing;
     if (at.includes("entertainment")) {
-      var doing = "Entertainment";
+      doing = "Entertainment";
     } else if (at.includes("sports")) {
-      var doing = "Sports";
+      doing = "Sports";
     } else if (at.includes("stickers")) {
-      var doing = "Stickers";
+      doing = "Stickers";
     } else if (at.includes("artist")) {
-      var doing = "Artists";
+      doing = "Artists";
     } else if (at.includes("reaction")) {
-      var doing = "Reactions";
+      doing = "Reactions";
     }
     let presenceData = {
       details: "Browsing Gifs...",
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
       //largeImageKey: "banner",
       largeImageKey: "giphy_big",
       smallImageKey: "browsing",
-      smallImageText: "browsing",
+      smallImageText: "browsing"
     };
     presence.setActivity(presenceData);
   }

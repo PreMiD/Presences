@@ -1,4 +1,4 @@
-let presence: Presence = new Presence({
+const presence: Presence = new Presence({
     clientId: "632479205707350037"
   }),
   strings = presence.getStrings({
@@ -6,29 +6,42 @@ let presence: Presence = new Presence({
     pause: "presence.playback.paused"
   }),
   startTimestamp = Math.floor(Date.now() / 1000);
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "large_img",
     startTimestamp
   };
   const url = window.location.href;
   if (url.includes("/watch/")) {
-    let video: HTMLVideoElement = document.getElementsByTagName("video")[0],
+    const video: HTMLVideoElement = document.getElementsByTagName("video")[0],
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
       title = document.getElementsByClassName("meta-data-title")[0].textContent;
-    presenceData = {
-      details: title,
-      largeImageKey: "large_img",
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+    presenceData.details = title;
+    presenceData.largeImageKey = "large_img";
+    presenceData.smallImageKey = video.paused ? "pause" : "play";
+    presenceData.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play;
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
     if (url.includes("/tv/")) {
       const episode = (document.querySelectorAll(
         "div.now-playing"
@@ -56,9 +69,3 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData, true);
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

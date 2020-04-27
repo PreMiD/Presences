@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
       "#content > div > div > header > section > div > div.row > div > div > h1 > small"
     ) as HTMLElement;
 
-  let data: { [k: string]: any } = {
+  const data: { [k: string]: any } = {
     largeImageKey: "gj-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

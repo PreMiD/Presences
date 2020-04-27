@@ -1,15 +1,7 @@
-let presence: Presence = new Presence({
+const presence: Presence = new Presence({
     clientId: "613510331066482699"
   }),
   startedBrowsing: number = Math.floor(Date.now() / 1000),
-  playback: boolean,
-  video: HTMLVideoElement,
-  currentTime: number,
-  duration: number,
-  timestamps: number[],
-  videoTitle: string,
-  episode: string,
-  paused: boolean,
   path: string = window.location.pathname,
   strings = presence.getStrings({
     browsing: "presence.activity.browsing",
@@ -20,6 +12,28 @@ let presence: Presence = new Presence({
     largeImageKey: "yay_lg",
     startTimestamp: startedBrowsing
   };
+let playback: boolean,
+  video: HTMLVideoElement,
+  currentTime: number,
+  duration: number,
+  timestamps: number[],
+  videoTitle: string,
+  episode: string,
+  paused: boolean;
+
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
 
 presence.on("UpdateData", async () => {
   playback =
@@ -87,9 +101,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData, true);
 });
-
-function getTimestamps(curr: number, dura: number) {
-  let startTime = Math.floor(Date.now() / 1000),
-    duration = startTime - curr + dura;
-  return [startTime, duration];
-}

@@ -16,8 +16,6 @@
   "logo": "https://i.imgur.com/I3yX6NQ.png",
   "thumbnail": "https://i.imgur.com/x4W3FoT.jpg",
   "color": "#5000ff",
-  "tags": [
-    "music"
-  ],
+  "tags": ["music"],
   "category": "music"
 }

@@ -1,0 +1,11 @@
+node_modules
+
+.vscode
+.npmrc
+.github
+
+qualityAssurance.ts
+presenceUpdater.ts
+
+*.js
+*.d.ts

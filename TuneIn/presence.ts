@@ -7,10 +7,35 @@ var presence = new Presence({
     live: "presence.activity.live"
   });
 
+function getTime(list: string[]): number {
+  var ret = 0;
+  for (let index = list.length - 1; index >= 0; index--) {
+    ret += parseInt(list[index]) * 60 ** index;
+  }
+  return ret;
+}
+
+function getTimestamps(
+  audioTime: string,
+  audioDuration: string
+): Array<number> {
+  var splitAudioTime = audioTime.split(":").reverse();
+  var splitAudioDuration = audioDuration.split(":").reverse();
+
+  var parsedAudioTime = getTime(splitAudioTime);
+  var parsedAudioDuration = getTime(splitAudioDuration);
+
+  var startTime = Date.now();
+  var endTime =
+    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 var elapsed = Math.floor(Date.now() / 1000);
+var title, author;
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  const data: presenceData = {
     largeImageKey: "tunein-logo"
   };
 
@@ -29,8 +54,8 @@ presence.on("UpdateData", async () => {
         ? true
         : false;
       if (playCheck) {
-        var title = document.querySelector("#playerTitle").textContent;
-        var author = document.querySelector("#playerSubtitle").textContent;
+        title = document.querySelector("#playerTitle").textContent;
+        author = document.querySelector("#playerSubtitle").textContent;
 
         data.details = title;
         if (title.length > 128) {
@@ -54,8 +79,8 @@ presence.on("UpdateData", async () => {
         presence.clearActivity();
       }
     } else {
-      var title = document.querySelector("#playerTitle").textContent;
-      var author = document.querySelector("#playerSubtitle").textContent;
+      title = document.querySelector("#playerTitle").textContent;
+      author = document.querySelector("#playerSubtitle").textContent;
       var audioTime = document.querySelector("#scrubberElapsed").textContent;
       var audioDuration = document.querySelector("#scrubberDuration")
         .textContent;
@@ -92,26 +117,5 @@ presence.on("UpdateData", async () => {
     }
   } else {
     presence.clearActivity();
-  }
-
-  function getTimestamps(audioTime: string, audioDuration: string) {
-    var splitAudioTime = audioTime.split(":").reverse();
-    var splitAudioDuration = audioDuration.split(":").reverse();
-
-    var parsedAudioTime = getTime(splitAudioTime);
-    var parsedAudioDuration = getTime(splitAudioDuration);
-
-    var startTime = Date.now();
-    var endTime =
-      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-    return [Math.floor(startTime / 1000), endTime];
-  }
-
-  function getTime(list: string[]) {
-    var ret = 0;
-    for (let index = list.length - 1; index >= 0; index--) {
-      ret += parseInt(list[index]) * 60 ** index;
-    }
-    return ret;
   }
 });

@@ -44,6 +44,20 @@ const presence = new Presence({
     "/home/my-courses/archived": "My Courses (Archived)"
   };
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
     courseTitle =
@@ -111,7 +125,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       );
 
-    let data: { [k: string]: any } = {
+    const data: { [k: string]: any } = {
       largeImageKey: "ud-logo",
       details:
         title && title.textContent != "" ? title.textContent : "Unknown Course",
@@ -163,10 +177,3 @@ presence.on("UpdateData", async () => {
     });
   }
 });
-
-function getTimestamps(videoTime, videoDuration) {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-
-  return [Math.floor(startTime / 1000), endTime];
-}

@@ -1,11 +1,11 @@
 var presence = new Presence({
-  clientId: "650373069172375577",
+  clientId: "650373069172375577"
 });
 var item, user, search, title;
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   let presenceData = {
-    largeImageKey: "uptimerobot",
+    largeImageKey: "uptimerobot"
   };
   presenceData.startTimestamp = browsingStamp;
   if (document.location.hostname == "uptimerobot.com") {

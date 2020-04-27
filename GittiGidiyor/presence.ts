@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       "#store-page-title > div.store-name > h1"
     ) as HTMLElement;
 
-  let data: { [k: string]: any } = {
+  const data: { [k: string]: any } = {
     largeImageKey: "gg-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

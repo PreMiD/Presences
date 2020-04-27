@@ -1,11 +1,25 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "678265146883178519"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+const browsingStamp = Math.floor(Date.now() / 1000);
 let iFrameVideo, currentTime, duration, paused, playback;
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
     iFrameVideo = data.iframe_video.iFrameVideo;
@@ -16,7 +30,7 @@ presence.on("iFrameData", data => {
 });
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "pokemonlogo" // Bas has been here
   };
 
@@ -65,13 +79,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/profile")) {
     // Profile
     if (document.location.href.includes("watchlist")) {
-      let usernamewl = document.title.split("Watchlist di ")[1];
+      const usernamewl = document.title.split("Watchlist di ")[1];
       presenceData.smallImageKey = "userwl";
       presenceData.smallImageText = "WatchList di " + usernamewl;
       presenceData.details = "Guarda la WatchList di:";
       presenceData.state = usernamewl;
     } else {
-      let username = document.title.split("Profilo di ")[1];
+      const username = document.title.split("Profilo di ")[1];
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "Profilo di " + username;
       presenceData.details = "Guarda il profilo di:";
@@ -183,7 +197,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Pagina: 1";
       }
     } else {
-      let newsName = document.title.split("~ ")[1];
+      const newsName = document.title.split("~ ")[1];
       presenceData.smallImageKey = "paper";
       presenceData.smallImageText = newsName;
       presenceData.details = "Legge la notizia:";
@@ -283,19 +297,19 @@ presence.on("UpdateData", async () => {
   } // End Categories
   else if (document.location.pathname.startsWith("/watch")) {
     // Anime Episode
-    let releaseDate = document.querySelector(
+    const releaseDate = document.querySelector(
       "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(4)"
     ).textContent;
-    let author = document.querySelector(
+    const author = document.querySelector(
       "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(8)"
     ).textContent;
-    let episode = document.querySelector(
+    const episode = document.querySelector(
       "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(2) > dd:nth-child(8) > font"
     ).textContent;
-    let vote = document.querySelector(
+    const vote = document.querySelector(
       "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(2) > dd.rating > span:nth-child(1)"
     ).textContent;
-    let visual = document.querySelector(
+    const visual = document.querySelector(
       "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(2) > dd:nth-child(10)"
     ).textContent;
     if (document.querySelector("#animeId > div > img") != null) {
@@ -310,7 +324,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Guarda l'annunciato:\n" + newname;
       presenceData.state =
         "Per più informazioni 🎦\n" +
-        "Uscirà il: " +
+        "\nUscirà il: " +
         releaseDate +
         "\n" +
         "Episodi: " +
@@ -338,10 +352,9 @@ presence.on("UpdateData", async () => {
         if (animename.includes("(ITA)")) {
           animename = animename.split(" (ITA)")[0];
         }
-        let animenumber = document
-          .querySelector("#episode-comment")
-          .textContent.replace("Episodio ", "");
-        let timestamps = getTimestamps(
+        const animenumber = document.querySelector("#episode-comment > span")
+          .textContent;
+        const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
         );
@@ -398,7 +411,7 @@ presence.on("UpdateData", async () => {
         if (moviename.includes("(ITA)")) {
           moviename = moviename.split(" (ITA)")[0];
         }
-        let timestamps = getTimestamps(
+        const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
         );
@@ -423,8 +436,8 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageText = moviename;
           presenceData.details = "Sta per guardare il film:\n" + moviename;
           presenceData.state =
-            "Per più informazioni 🎦\n\n" +
-            "Uscito il: " +
+            "Per più informazioni 🎦\n" +
+            "\nUscito il: " +
             releaseDate +
             "\n" +
             "Autore: " +
@@ -450,10 +463,9 @@ presence.on("UpdateData", async () => {
         if (oavname.includes("(ITA)")) {
           oavname = oavname.split(" (ITA)")[0];
         }
-        let oavnumber = document
-          .querySelector("#episode-comment")
-          .textContent.replace("Episodio ", "");
-        let timestamps = getTimestamps(
+        const oavnumber = document.querySelector("#episode-comment > span")
+          .textContent;
+        const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
         );
@@ -478,8 +490,8 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageText = oavname + "｜" + oavnumber + "° OAV";
           presenceData.details = "Sta per guardare:\n" + oavname;
           presenceData.state =
-            "Per più informazioni 🎦\n\n" +
-            "Uscito il: " +
+            "Per più informazioni 🎦\n" +
+            "\nUscito il: " +
             releaseDate +
             "\n" +
             oavnumber +
@@ -506,10 +518,9 @@ presence.on("UpdateData", async () => {
         if (onaname.includes("(ITA)")) {
           onaname = onaname.split(" (ITA)")[0];
         }
-        let onanumber = document
-          .querySelector("#episode-comment")
-          .textContent.replace("Episodio ", "");
-        let timestamps = getTimestamps(
+        const onanumber = document.querySelector("#episode-comment > span")
+          .textContent;
+        const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
         );
@@ -534,8 +545,8 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageText = onaname + "｜" + onanumber + "° ONA";
           presenceData.details = "Sta per guardare:\n" + onaname;
           presenceData.state =
-            "Per più informazioni 🎦\n\n" +
-            "Uscito il: " +
+            "Per più informazioni 🎦\n" +
+            "\nUscito il: " +
             releaseDate +
             "\n" +
             onanumber +
@@ -562,10 +573,9 @@ presence.on("UpdateData", async () => {
         if (specialname.includes("(ITA)")) {
           specialname = specialname.split(" (ITA)")[0];
         }
-        let specialnumber = document
-          .querySelector("#episode-comment")
-          .textContent.replace("Episodio ", "");
-        let timestamps = getTimestamps(
+        const specialnumber = document.querySelector("#episode-comment > span")
+          .textContent;
+        const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
         );
@@ -593,8 +603,8 @@ presence.on("UpdateData", async () => {
             specialname + "｜" + specialnumber + "° Special";
           presenceData.details = "Sta per guardare:\n" + specialname;
           presenceData.state =
-            "Per più informazioni 🎦\n\n" +
-            "Uscito il: " +
+            "Per più informazioni 🎦\n" +
+            "\nUscito il: " +
             releaseDate +
             "\n" +
             "° Special\n" +
@@ -620,7 +630,7 @@ presence.on("UpdateData", async () => {
         if (previewname.includes("(ITA)")) {
           previewname = previewname.split(" (ITA)")[0];
         }
-        let timestamps = getTimestamps(
+        const timestamps = getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
         );
@@ -645,8 +655,8 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageText = previewname;
           presenceData.details = "Sta per guardare la preview:\n" + previewname;
           presenceData.state =
-            "Per più informazioni 🎦\n\n" +
-            "Uscito il: " +
+            "Per più informazioni 🎦\n" +
+            "\nUscito il: " +
             releaseDate +
             "\n" +
             "Autore: " +
@@ -680,14 +690,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

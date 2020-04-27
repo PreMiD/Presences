@@ -8,16 +8,10 @@
     "en": "Krunker.io is a free io Multiplayer First Person Shooter. No Download browser FPS! Free!"
   },
   "url": "krunker.io",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/pvjY5Ox.png",
   "thumbnail": "https://i.imgur.com/TiNwU7O.png",
   "color": "#ffc147",
-  "tags": [
-    "Krunker",
-    "game",
-    "multiplayer",
-    "fps",
-    "browser"
-  ],
+  "tags": ["Krunker", "game", "multiplayer", "fps", "browser"],
   "category": "games"
 }

@@ -6,6 +6,20 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   var video: HTMLVideoElement = document.querySelector("video.vjs-tech");
 
@@ -18,7 +32,7 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    let data: presenceData = {
+    const data: presenceData = {
       details: title,
       state: subtitle,
       largeImageKey: "adn-logo",
@@ -39,16 +53,10 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data, !video.paused);
     }
   } else {
-    let browsingPresence: presenceData = {
+    const browsingPresence: presenceData = {
       details: "Browsing...",
       largeImageKey: "adn-logo"
     };
     presence.setActivity(browsingPresence);
   }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

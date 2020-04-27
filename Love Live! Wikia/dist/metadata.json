@@ -7,16 +7,11 @@
   "description": {
     "en": "Presence for the English Wikia of the Love Live! School Idol Project series"
   },
-  "url": [
-    "love-live.fandom.com"
-  ],
-  "version": "1.2.0",
+  "url": "love-live.fandom.com",
+  "version": "1.2.1",
   "logo": "https://menma.is-inside.me/CtLFeNGR.png",
   "thumbnail": "https://menma.is-inside.me/nSdzu11P.png",
   "color": "#E8218B",
-  "tags": [
-    "anime",
-    "wiki"
-  ],
+  "tags": ["anime", "wiki"],
   "category": "anime"
 }

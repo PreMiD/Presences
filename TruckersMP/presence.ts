@@ -4,7 +4,6 @@ var presence = new Presence({
 
 var item: any,
   user: any,
-  search: any,
   item2: any,
   item3: any,
   server: any,
@@ -14,7 +13,7 @@ var item: any,
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "truckersmp"
   };
 

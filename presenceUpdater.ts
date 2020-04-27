@@ -17,14 +17,14 @@ async function run(MongoClient: MongoClient) {
     .toArray();
 
   const presenceFolders = readdirSync("./").filter(
-    pF =>
+    (pF) =>
       !pF.startsWith("@") &&
       !pF.startsWith(".") &&
       !pF.startsWith("node_modules") &&
       statSync(pF).isDirectory()
   );
 
-  const presences = presenceFolders.map(pF => {
+  const presences = presenceFolders.map((pF) => {
     const metadata = JSON.parse(
         readFileSync(`${pF}/dist/metadata.json`, "utf-8")
       ),
@@ -46,18 +46,19 @@ async function run(MongoClient: MongoClient) {
   });
 
   const newPresences = presences.filter(
-      p => !dbPresences.some(dP => dP.name === p.name)
+      (p) => !dbPresences.some((dP) => dP.name === p.name)
     ),
     deletedPresences = dbPresences.filter(
-      dP => !presences.some(p => p.name === dP.name)
+      (dP) => !presences.some((p) => p.name === dP.name)
     ),
     outdatedPresences = dbPresences
-      .filter(p =>
+      .filter((p) =>
         presences.find(
-          dp => p.name === dp.name && dp.metadata.version !== p.metadata.version
+          (dp) =>
+            p.name === dp.name && dp.metadata.version !== p.metadata.version
         )
       )
-      .map(dP => presences.find(p => p.name === dP.name));
+      .map((dP) => presences.find((p) => p.name === dP.name));
 
   let nP,
     dP = [],
@@ -69,14 +70,14 @@ async function run(MongoClient: MongoClient) {
       .insertMany(newPresences);
 
   if (deletedPresences.length > 0)
-    dP = deletedPresences.map(p =>
+    dP = deletedPresences.map((p) =>
       MongoClient.db("PreMiD")
         .collection("presences")
         .deleteOne({ name: p.name })
     );
 
   if (outdatedPresences.length > 0)
-    oP = outdatedPresences.map(p =>
+    oP = outdatedPresences.map((p) =>
       MongoClient.db("PreMiD")
         .collection("presences")
         .findOneAndUpdate({ name: p.metadata.service }, { $set: p })

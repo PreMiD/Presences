@@ -1,12 +1,12 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "629413852391669791"
 });
-let presenceData: presenceData = {
+const presenceData: presenceData = {
   largeImageKey: "kitsu_lg"
 };
 
 let path, user: string;
-let strings = presence.getStrings({
+const strings = presence.getStrings({
   browsing: "presence.activity.browsing"
 });
 

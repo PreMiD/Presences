@@ -3,9 +3,12 @@ var presence = new Presence({
   }),
   presenceData: presenceData = {
     largeImageKey: "logo"
+  },
+  pageData: presenceData = {
+    largeImageKey: "logo"
   };
 
-let lang = new Map();
+const lang = new Map();
 lang.set("de", "German");
 lang.set("es", "Spanish");
 lang.set("fr", "French");
@@ -46,30 +49,18 @@ presence.on("UpdateData", async () => {
 
   if (path1.split("/")[2] == null) {
     if (document.location.pathname.startsWith("/learn")) {
-      var pageData: presenceData = {
-        details: "Choosing level to learn..",
-        largeImageKey: "logo"
-      };
+      pageData.details = "Choosing level to learn..";
       presence.setActivity(pageData);
     } else if (document.location.pathname.startsWith("/shop")) {
-      var pageData: presenceData = {
-        details: "Browsing shop..",
-        largeImageKey: "logo"
-      };
+      pageData.details = "Browsing shop..";
       presence.setActivity(pageData);
     } else if (document.location.pathname.includes("/dictionary")) {
-      var pageData: presenceData = {
-        details: "Using dictionary..",
-        state: "Language: " + document.location.pathname.split("/")[2],
-        largeImageKey: "logo"
-      };
+      pageData.details = "Using dictionary..";
+      pageData.state = "Language: " + document.location.pathname.split("/")[2];
       presence.setActivity(pageData);
     } else if (document.location.pathname.includes("/profile")) {
-      var pageData: presenceData = {
-        details: "Browsing profile..",
-        state: "Browsing: " + document.location.pathname.split("/")[2],
-        largeImageKey: "logo"
-      };
+      pageData.details = "Browsing profile..";
+      pageData.state = "Browsing: " + document.location.pathname.split("/")[2];
       presence.setActivity(pageData);
     } else if (document.location.pathname.includes("/words")) {
       presenceData.details = "Checking words...";
@@ -79,10 +70,6 @@ presence.on("UpdateData", async () => {
       document.location.pathname == "/" ||
       !document.location.pathname
     ) {
-      var pageData: presenceData = {
-        details: "Browsing..",
-        largeImageKey: "logo"
-      };
       presence.setActivity(pageData);
     }
   } else {
@@ -92,7 +79,7 @@ presence.on("UpdateData", async () => {
       path1.split("/")[2].length == 2
     ) {
       var language: string;
-      for (let value of lang.keys()) {
+      for (const value of lang.keys()) {
         if (path1.split("/")[2] == value) {
           language = lang.get(value);
           break;

@@ -6,6 +6,20 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
 presence.on("UpdateData", async () => {
   const category = document.querySelector(
     "#widget_serie_contents_3 > section > div > div > div.category-main-content-right > header > h1 > strong"
@@ -50,7 +64,7 @@ presence.on("UpdateData", async () => {
 
       if (!title || title.innerHTML == "") return;
 
-      let data: { [k: string]: any } = {
+      const data: { [k: string]: any } = {
         largeImageKey: "puhu-logo",
         details: title.innerHTML,
         state:
@@ -84,10 +98,3 @@ presence.on("UpdateData", async () => {
     }
   }
 });
-
-function getTimestamps(videoTime, videoDuration) {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-
-  return [Math.floor(startTime / 1000), endTime];
-}

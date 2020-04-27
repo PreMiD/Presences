@@ -1,5 +1,5 @@
 let owa = new Presence({
-  clientId: "651439039156715531",
+  clientId: "651439039156715531"
 });
 owa.on("UpdateData", () => {
   let doc = document.location,
@@ -8,7 +8,7 @@ owa.on("UpdateData", () => {
     browsingStamp = Math.floor(Date.now() / 1000),
     presenceData = {
       largeImageKey: "lawco",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     };
   if (path === "/") {
     presenceData.details = "Navegando por la página principal...";

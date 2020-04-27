@@ -1,11 +1,11 @@
 // Not sure if this TypeScript works. JavaScript file works just fine :3
 
-let presence = new Presence({
+const presence = new Presence({
   clientId: "628019683718856714"
 });
 
 presence.on("UpdateData", async () => {
-  let name = document.querySelector(
+  const name = document.querySelector(
       "#main > header > div._3V5x5 > div._1lpto > div > span"
     ) as HTMLElement,
     typing = document.querySelector(
@@ -19,11 +19,10 @@ presence.on("UpdateData", async () => {
       "#main > footer > div._2i7Ej.copyable-area > div._13mgZ"
     ) as HTMLElement)
       ? true
-      : false,
-    contactName = null;
+      : false;
+  let contactName = null;
 
-  if (!name || name === null || name.innerText == "")
-    return presence.clearActivity();
+  if (!name || name.innerText == "") return presence.clearActivity();
   if (
     isNaN(name.innerText.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "") as any)
   )

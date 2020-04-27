@@ -8,11 +8,25 @@ var presence = new Presence({
   presenceData: presenceData = {
     largeImageKey: "logo"
   };
-var playback;
 
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+var playback;
 var iFrameVideo: any, currentTime: any, duration: any, paused: any;
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   playback = data.iframe_video.dur !== null ? true : false;
 
   if (playback) {
@@ -33,8 +47,9 @@ presence.on("UpdateData", async () => {
     brand = document.querySelector(
       "div.hvpi-main.flex.column > div > div > div:nth-child(1) > a"
     );
-    (timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration))),
-      (presenceData.details = videoTitle.innerText);
+    timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+    presenceData.details =
+      videoTitle !== null ? videoTitle.innerText : "Title not found";
     presenceData.state = brand.innerText;
     presenceData.largeImageKey = "logo";
     presenceData.smallImageKey = paused ? "pause" : "play";
@@ -44,7 +59,13 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
 
-    presence.setTrayTitle(paused ? "" : videoTitle.innerText);
+    presence.setTrayTitle(
+      paused
+        ? ""
+        : videoTitle !== null
+        ? videoTitle.innerText
+        : "Title not found"
+    );
 
     if (paused) {
       delete presenceData.startTimestamp;
@@ -62,14 +83,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(pageData);
   }
 });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

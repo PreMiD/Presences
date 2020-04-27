@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
       page = document.getElementsByClassName("page-header__title")[0]
         .textContent;
     } catch (err) {
-      let errCode = "KMNNWIKI_WIKIEN_GETPAGETITLE";
+      const errCode = "KMNNWIKI_WIKIEN_GETPAGETITLE";
       console.log(
         "An error occured in the PreMiD Presence, please send this to CRUGG#0001   :::   " +
           errCode +
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
           err
       );
     }
-    let presenceData: presenceData = {
+    const presenceData: presenceData = {
       details: "Viewing a page...",
       state: page,
       largeImageKey: "lg-kmnnwwiki"
