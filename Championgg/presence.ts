@@ -6,7 +6,7 @@ var time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     var presenceData: presenceData = {
-        largeImageKey: "championgg"
+        largeImageKey: "championgg";
     }
 
       var path = document.location.pathname.toLowerCase();
@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
 
     }
     if (path.startsWith("/champion")){
-      let string = path.replace("/champion/", "");
+      let name = path.replace("/champion/", "");
       presenceData.details = "Checking Runes";
-      presenceData.state = string;
+      presenceData.state = name;
       presenceData.startTimestamp = time;
 
     }
