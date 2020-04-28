@@ -9,10 +9,15 @@
     "nl": "TrueTrophies is de plaats voor Playstation nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer."
   },
   "url": "www.truetrophies.com",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/bCSGyWh.png",
   "thumbnail": "https://i.imgur.com/WQSwVVv.png",
   "color": "#2e94d8",
-  "tags": ["true", "achievements", "playstation", "trophies"],
+  "tags": [
+    "true",
+    "achievements",
+    "playstation",
+    "trophies"
+  ],
   "category": "other"
 }
