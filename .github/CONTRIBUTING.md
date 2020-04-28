@@ -91,7 +91,7 @@ For your Presence to reach the stores, it **MUST** go through a process on GitHu
 14. Unstable sites that constantly change APIs/domains, randomize HTML elements, or just still being in heavy development are not allowed and will be removed from the store.
 15. The logo and thumbnail on your Presence **MUST** either be `i.imgur.com`, from a CDN that **YOU** own, or from a CDN that gives you permission to **CHANGE** image files.
 16. You **MUST** include all source files (such as `presence.ts` or `iframe.ts`).
-17. Verifiers will check if the Presence contains an `__awaiter` function at the beginning of the code (which comes from an earlier version of ECMAScript), whether it's in Typescript or Javascript, and in addition to that, make sure the `UpdateData` event used is similar to this:
+17. Verifiers will check if the Presence contains an `__awaiter` function at the beginning of the code (which comes from an earlier version of ECMAScript), and in addition to that, make sure the `UpdateData` event used is similar to this:
 
 ```ts
 presence.on("UpdateData", async () => {
