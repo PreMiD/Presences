@@ -17,8 +17,8 @@ To some, these strict rules may seem harsh. However, the implementation of these
 ## Creation
 
 > The code you write **MUST** be _well-written_ and **MUST** be _readable_. `DeepScan` on GitHub will report code quality issues to the `Presence Verification Team`. We recommend that your fork is up to date when you make pull requests, it will help limit false positives.
- 
-- The pull request **MUST** be complete, you need to have a proper file structure, drafts are **NOT** allowed. Including the `dist` folder, `presence.ts` file, and `metadata.json` file is mandatory the result would be what is represented in the following schema:
+
+- The pull request **MUST** be complete, you need to have a proper file structure, drafts are **NOT** allowed. Including the `dist` folder, `presence.ts` file, and `metadata.json` file is mandatory so the result would be what is represented in the following schema:
 
 ```bash
 presence
