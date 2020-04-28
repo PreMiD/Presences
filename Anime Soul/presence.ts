@@ -5,7 +5,9 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 var user;
 presence.on("UpdateData", async () => {
     const data = {
-        largeImageKey: "animesoul"
+        largeImageKey: "animesoul",
+        startTimestamp: 1577232000,
+        details: "Viewing home page",
     };
     if (document.location.pathname == "/" ||
         document.location.pathname == "/home/") {
