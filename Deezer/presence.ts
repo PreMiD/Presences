@@ -1,6 +1,5 @@
 var presence = new Presence({
-  clientId: "607651992567021580",
-  mediaKeys: true
+  clientId: "607651992567021580"
 });
 var strings = presence.getStrings({
   play: "presence.playback.playing",
@@ -8,7 +7,25 @@ var strings = presence.getStrings({
   live: "presence.activity.live"
 });
 
-var live, prevLive, elapsed;
+function getTimestamps(
+  audioTime: string,
+  audioDuration: string
+): Array<number> {
+  var splitAudioTime = audioTime.split(":");
+  var splitAudioDuration = audioDuration.split(":");
+
+  var parsedAudioTime =
+    parseInt(splitAudioTime[0]) * 60 + parseInt(splitAudioTime[1]);
+  var parsedAudioDuration =
+    parseInt(splitAudioDuration[0]) * 60 + parseInt(splitAudioDuration[1]);
+
+  var startTime = Date.now();
+  var endTime =
+    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  return [Math.floor(startTime / 1000), endTime];
+}
+
+var live, prevLive, elapsed, author, title, timestamps;
 
 presence.on("UpdateData", async () => {
   var player = document.querySelector(".page-player");
@@ -32,19 +49,17 @@ presence.on("UpdateData", async () => {
     }
 
     if (!live) {
-      var title = document.querySelector(".track-link:nth-child(1)")
-        .textContent;
-      var author = document.querySelector(".track-link:nth-child(2)")
-        .textContent;
+      title = document.querySelector(".track-link:nth-child(1)").textContent;
+      author = document.querySelector(".track-link:nth-child(2)").textContent;
       var audioTime = document.querySelector(".slider-counter-current")
         .textContent;
       var audioDuration = document.querySelector(".slider-counter-max")
         .textContent;
-      var timestamps = getTimestamps(audioTime, audioDuration);
+      timestamps = getTimestamps(audioTime, audioDuration);
     } else {
-      var title = document.querySelector(".marquee-content").textContent;
-      var author = "On Air";
-      var timestamps: number[] = [elapsed, undefined];
+      title = document.querySelector(".marquee-content").textContent;
+      author = "On Air";
+      timestamps = [elapsed, undefined];
     }
 
     var data: presenceData = {
@@ -112,41 +127,3 @@ presence.on("UpdateData", async () => {
     presence.clearActivity();
   }
 });
-
-presence.on("MediaKeys", (key: string) => {
-  switch (key) {
-    case "pause":
-      var pause_button = document.querySelector(
-        ".svg-icon-group-item:nth-child(3)"
-      );
-      pause_button.click();
-      break;
-    case "nextTrack":
-      var next_button = document.querySelector(
-        ".svg-icon-group-item:nth-child(5)"
-      );
-      next_button.click();
-      break;
-    case "previousTrack":
-      var prev_button = document.querySelector(
-        ".svg-icon-group-item:nth-child(1)"
-      );
-      prev_button.click();
-      break;
-  }
-});
-
-function getTimestamps(audioTime: string, audioDuration: string) {
-  var splitAudioTime = audioTime.split(":");
-  var splitAudioDuration = audioDuration.split(":");
-
-  var parsedAudioTime =
-    parseInt(splitAudioTime[0]) * 60 + parseInt(splitAudioTime[1]);
-  var parsedAudioDuration =
-    parseInt(splitAudioDuration[0]) * 60 + parseInt(splitAudioDuration[1]);
-
-  var startTime = Date.now();
-  var endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}

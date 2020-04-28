@@ -1,23 +1,14 @@
 var presence = new Presence({
-  clientId: "633816611022962708",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
+  clientId: "633816611022962708"
 });
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user : any;
-var title : any;
-var replace : any;
-var search : any;
+var title: any;
+var search: any;
 
 presence.on("UpdateData", async () => {
-
-
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "humble"
   };
 
@@ -43,7 +34,9 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing their wishlist";
       } else {
         presenceData.details = "Viewing item:";
-        title = document.querySelector("body > div.page-wrap > div.base-main-wrapper > div.inner-main-wrapper > section > div.main-content > div.full-width-container.js-page-content > div > div.row-view.gray-row.showcase-row > div > div:nth-child(1) > div > div > h1");
+        title = document.querySelector(
+          "body > div.page-wrap > div.base-main-wrapper > div.inner-main-wrapper > section > div.main-content > div.full-width-container.js-page-content > div > div.row-view.gray-row.showcase-row > div > div:nth-child(1) > div > div > h1"
+        );
         presenceData.state = title.innerText;
       }
     } else if (document.location.pathname.includes("/store")) {
@@ -80,7 +73,10 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "support.humblebundle.com") {
     presenceData.startTimestamp = browsingStamp;
     title = document.querySelector("head > title");
-    if (document.location.pathname == "/" || title.innerText == "Humble Bundle") {
+    if (
+      document.location.pathname == "/" ||
+      title.innerText == "Humble Bundle"
+    ) {
       presenceData.details = "Browsing Support Center";
     } else {
       presenceData.details = "Support - Reading:";
@@ -101,21 +97,8 @@ presence.on("UpdateData", async () => {
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
-
 });
-
-
-/**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
-function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
-}

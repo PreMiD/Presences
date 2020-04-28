@@ -1,101 +1,98 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-let presence = new Presence({
-    clientId: '629413852391669791'
+const presence = new Presence({
+    clientId: "629413852391669791"
 });
-let presenceData = {
-    largeImageKey: 'kitsu_lg'
+const presenceData = {
+    largeImageKey: "kitsu_lg"
 };
 let path, user;
-let strings = presence.getStrings({
-    "browsing": "presence.activity.browsing"
+const strings = presence.getStrings({
+    browsing: "presence.activity.browsing"
 });
-presence.on('UpdateData', () => __awaiter(this, void 0, void 0, function* () {
+presence.on("UpdateData", async () => {
     path = window.location.pathname;
-    if (path == '/' || path.startsWith('/explore')) {
-        presenceData.details = (yield strings).browsing;
+    if (path == "/" || path.startsWith("/explore")) {
+        presenceData.details = (await strings).browsing;
         delete presenceData.state;
     }
-    else if (path.includes('/users')) {
+    else if (path.includes("/users")) {
         user = document.querySelector(".cover-username").textContent.trim();
         presenceData.details = `Viewing ${user} profile`;
-        switch (path.split('/')[3]) {
-            case 'library':
-                presenceData.state = 'Viewing their library';
+        switch (path.split("/")[3]) {
+            case "library":
+                presenceData.state = "Viewing their library";
                 break;
-            case 'reactions':
-                presenceData.state = 'Viewing their reactions';
+            case "reactions":
+                presenceData.state = "Viewing their reactions";
                 break;
-            case 'followers':
-                presenceData.state = 'Viewing their followers';
+            case "followers":
+                presenceData.state = "Viewing their followers";
                 break;
-            case 'following':
-                presenceData.state = 'Viewing who they follow';
+            case "following":
+                presenceData.state = "Viewing who they follow";
                 break;
-            case 'groups':
-                presenceData.state = 'Viewing their groups';
-                break;
-            default:
-                presenceData.state = 'Viewing their activity';
-        }
-    }
-    else if (path.startsWith('/anime')) {
-        presenceData.details = 'Looking through anime';
-        if (path.split('/')[2]) {
-            presenceData.state = `Viewing ${document.querySelector('h3').textContent.trim()}`;
-        }
-        else
-            delete presenceData.state;
-    }
-    else if (path.startsWith('/manga')) {
-        presenceData.details = 'Looking through manga';
-        if (path.split('/')[2]) {
-            presenceData.state = `Viewing ${document.querySelector('h3').textContent.trim()}`;
-        }
-        else
-            delete presenceData.state;
-    }
-    else if (path.startsWith('/groups')) {
-        presenceData.details = 'Looking through groups';
-        if (path.split('/')[2]) {
-            presenceData.state = `Viewing ${document.querySelector('.cover-username').textContent.trim()}`;
-        }
-        else
-            delete presenceData.state;
-    }
-    else if (path.startsWith('/feedback')) {
-        presenceData.details = 'Browsing feedback section';
-        switch (path.split('/')[2]) {
-            case 'bugs':
-                presenceData.state = 'Viewing bugs';
-                break;
-            case 'feature-requests':
-                presenceData.state = 'Viewing feature requests';
-                break;
-            case 'database-requests':
-                presenceData.state = 'Viewing database requests';
-                break;
-            case 'mobile-bugs':
-                presenceData.state = 'Viewing mobile bugs';
-                break;
-            case 'mobile-features':
-                presenceData.state = 'Viewing mobile features';
+            case "groups":
+                presenceData.state = "Viewing their groups";
                 break;
             default:
-                presenceData.state = 'some unknown place';
+                presenceData.state = "Viewing their activity";
         }
     }
-    else if (path.startsWith('/api')) {
-        presenceData.details = 'Messing with the kitsu API';
+    else if (path.startsWith("/anime")) {
+        presenceData.details = "Looking through anime";
+        if (path.split("/")[2]) {
+            presenceData.state = `Viewing ${document
+                .querySelector("h3")
+                .textContent.trim()}`;
+        }
+        else
+            delete presenceData.state;
+    }
+    else if (path.startsWith("/manga")) {
+        presenceData.details = "Looking through manga";
+        if (path.split("/")[2]) {
+            presenceData.state = `Viewing ${document
+                .querySelector("h3")
+                .textContent.trim()}`;
+        }
+        else
+            delete presenceData.state;
+    }
+    else if (path.startsWith("/groups")) {
+        presenceData.details = "Looking through groups";
+        if (path.split("/")[2]) {
+            presenceData.state = `Viewing ${document
+                .querySelector(".cover-username")
+                .textContent.trim()}`;
+        }
+        else
+            delete presenceData.state;
+    }
+    else if (path.startsWith("/feedback")) {
+        presenceData.details = "Browsing feedback section";
+        switch (path.split("/")[2]) {
+            case "bugs":
+                presenceData.state = "Viewing bugs";
+                break;
+            case "feature-requests":
+                presenceData.state = "Viewing feature requests";
+                break;
+            case "database-requests":
+                presenceData.state = "Viewing database requests";
+                break;
+            case "mobile-bugs":
+                presenceData.state = "Viewing mobile bugs";
+                break;
+            case "mobile-features":
+                presenceData.state = "Viewing mobile features";
+                break;
+            default:
+                presenceData.state = "some unknown place";
+        }
+    }
+    else if (path.startsWith("/api")) {
+        presenceData.details = "Messing with the kitsu API";
         delete presenceData.state;
     }
     presence.setActivity(presenceData, true);
-}));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxJQUFJLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUN4QixRQUFRLEVBQUUsb0JBQW9CO0NBQ2pDLENBQUMsQ0FBQztBQUNILElBQUksWUFBWSxHQUFpQjtJQUM3QixhQUFhLEVBQUUsVUFBVTtDQUM1QixDQUFBO0FBRUQsSUFBSSxJQUFJLEVBQUUsSUFBWSxDQUFDO0FBQ3ZCLElBQUksT0FBTyxHQUFHLFFBQVEsQ0FBQyxVQUFVLENBQUM7SUFDOUIsVUFBVSxFQUFFLDRCQUE0QjtDQUMzQyxDQUFDLENBQUE7QUFFRixRQUFRLENBQUMsRUFBRSxDQUFDLFlBQVksRUFBRSxHQUFTLEVBQUU7SUFDakMsSUFBSSxHQUFHLE1BQU0sQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDO0lBRWhDLElBQUksSUFBSSxJQUFJLEdBQUcsSUFBSSxJQUFJLENBQUMsVUFBVSxDQUFDLFVBQVUsQ0FBQyxFQUFFO1FBQzVDLFlBQVksQ0FBQyxPQUFPLEdBQUcsQ0FBQyxNQUFNLE9BQU8sQ0FBQyxDQUFDLFFBQVEsQ0FBQztRQUNoRCxPQUFPLFlBQVksQ0FBQyxLQUFLLENBQUM7S0FDN0I7U0FBTSxJQUFJLElBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLEVBQUU7UUFDaEMsSUFBSSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsaUJBQWlCLENBQUMsQ0FBQyxXQUFXLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDcEUsWUFBWSxDQUFDLE9BQU8sR0FBRyxXQUFXLElBQUksVUFBVSxDQUFDO1FBRWpELFFBQVEsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRTtZQUN4QixLQUFLLFNBQVM7Z0JBQ1YsWUFBWSxDQUFDLEtBQUssR0FBRyx1QkFBdUIsQ0FBQTtnQkFDNUMsTUFBTTtZ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
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUM1QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsQ0FBQztBQUNILE1BQU0sWUFBWSxHQUFpQjtJQUNqQyxhQUFhLEVBQUUsVUFBVTtDQUMxQixDQUFDO0FBRUYsSUFBSSxJQUFJLEVBQUUsSUFBWSxDQUFDO0FBQ3ZCLE1BQU0sT0FBTyxHQUFHLFFBQVEsQ0FBQyxVQUFVLENBQUM7SUFDbEMsUUFBUSxFQUFFLDRCQUE0QjtDQUN2QyxDQUFDLENBQUM7QUFFSCxRQUFRLENBQUMsRUFBRSxDQUFDLFlBQVksRUFBRSxLQUFLLElBQUksRUFBRTtJQUNuQyxJQUFJLEdBQUcsTUFBTSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUM7SUFFaEMsSUFBSSxJQUFJLElBQUksR0FBRyxJQUFJLElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLEVBQUU7UUFDOUMsWUFBWSxDQUFDLE9BQU8sR0FBRyxDQUFDLE1BQU0sT0FBTyxDQUFDLENBQUMsUUFBUSxDQUFDO1FBQ2hELE9BQU8sWUFBWSxDQUFDLEtBQUssQ0FBQztLQUMzQjtTQUFNLElBQUksSUFBSSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsRUFBRTtRQUNsQyxJQUFJLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUNwRSxZQUFZLENBQUMsT0FBTyxHQUFHLFdBQVcsSUFBSSxVQUFVLENBQUM7UUFFakQsUUFBUSxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFO1lBQzFCLEtBQUssU0FBUztnQkFDWixZQUFZLENBQUMsS0FBSyxHQUFHLHVCQUF1QixDQUFDO2dCQUM3QyxNQUFNO1lBQ1Is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

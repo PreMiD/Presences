@@ -8,10 +8,8 @@
     "en": "NSFW Anime Image board running on Gelbooru",
     "de": "NSFW Anime Image board running on Gelbooru"
   },
-  "url": [
-    "gelbooru.com"
-  ],
-  "version": "2.1",
+  "url": ["gelbooru.com"],
+  "version": "2.2.0",
   "logo": "https://i.imgur.com/CgGzxXy.png",
   "thumbnail": "https://i.imgur.com/T7ge6JO.png",
   "color": "#0773FB",

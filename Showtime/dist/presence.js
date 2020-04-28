@@ -1,31 +1,27 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
-    clientId: "617741834701242406",
-    mediaKeys: true
+    clientId: "617741834701242406"
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     live: "presence.activity.live"
 });
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+function getTimestamps(videoTime, videoDuration) {
+    var startTime = Date.now();
+    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    return [Math.floor(startTime / 1000), endTime];
+}
+presence.on("UpdateData", async () => {
     var video = document.querySelector("#main-container > div > video");
+    var description;
     if (video && !isNaN(video.duration)) {
         var title = document.querySelector("#player-video-overlay .player-title .player-title-name").textContent;
         if (document.location.pathname.includes("/live")) {
-            var description = document.querySelector("#player-video-overlay .player-title div span").textContent;
+            description = document.querySelector("#player-video-overlay .player-title div span").textContent;
         }
         else {
-            var description = document.querySelector("#player-video-overlay .player-title div").textContent;
+            description = document.querySelector("#player-video-overlay .player-title div").textContent;
         }
-        if (description.trim() == title) {
+        if (description == null || description.trim() == title) {
             description = "Movie";
         }
         var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
@@ -35,12 +31,14 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             timestamps[0] = 0;
             timestamps[1] = 0;
             smallImageKey = "live";
-            smallImageText = (yield strings).live;
+            smallImageText = (await strings).live;
         }
         else {
             currentState = description.substring(description.lastIndexOf("  ") + 1);
             smallImageKey = video.paused ? "pause" : "play";
-            smallImageText = video.paused ? (yield strings).pause : (yield strings).play;
+            smallImageText = video.paused
+                ? (await strings).pause
+                : (await strings).play;
         }
         var data = {
             details: title,
@@ -55,28 +53,16 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             delete data.startTimestamp;
             delete data.endTimestamp;
         }
-        if (title !== null && description !== null) {
+        if (title !== null) {
             presence.setActivity(data, !video.paused);
         }
     }
     else {
-        let browsingPresence = {
+        const browsingPresence = {
             details: "Browsing...",
-            largeImageKey: "showtime-logo",
+            largeImageKey: "showtime-logo"
         };
         presence.setActivity(browsingPresence);
     }
-}));
-presence.on("MediaKeys", (key) => {
-    switch (key) {
-        case "pause":
-            var video = document.querySelector("#main-container > div > video#player-video");
-            video.paused ? video.play() : video.pause();
-            break;
-    }
 });
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUN4QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsRUFDRixPQUFPLEdBQUcsUUFBUSxDQUFDLFVBQVUsQ0FBQztJQUM1QixJQUFJLEVBQUUsMkJBQTJCO0lBQ2pDLEtBQUssRUFBRSwwQkFBMEI7SUFDakMsSUFBSSxFQUFFLHdCQUF3QjtDQUMvQixDQUFDLENBQUM7QUFPTCxTQUFTLGFBQWEsQ0FDcEIsU0FBaUIsRUFDakIsYUFBcUI7SUFFckIsSUFBSSxTQUFTLEdBQUcsSUFBSSxDQUFDLEdBQUcsRUFBRSxDQUFDO0lBQzNCLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxHQUFHLFNBQVMsR0FBRyxhQUFhLENBQUM7SUFDdkUsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxFQUFFLE9BQU8sQ0FBQyxDQUFDO0FBQ2pELENBQUM7QUFFRCxRQUFRLENBQUMsRUFBRSxDQUFDLFlBQVksRUFBRSxLQUFLLElBQUksRUFBRTtJQUNuQyxJQUFJLEtBQUssR0FBcUIsUUFBUSxDQUFDLGFBQWEsQ0FDbEQsK0JBQStCLENBQ2hDLENBQUM7SUFFRixJQUFJLFdBQVcsQ0FBQztJQUVoQixJQUFJLEtBQUssSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEVBQUU7UUFDbkMsSUFBSSxLQUFLLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FDaEMsd0RBQXdELENBQ3pELENBQUMsV0FBVyxDQUFDO1FBQ2QsSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLEVBQUU7WUFDaEQsV0FBVyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQ2xDLDhDQUE4QyxDQUMvQyxDQUFDLFdBQVcsQ0FBQztTQUNmO2FBQU07WUFDTCxXQUFXLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FDbEMseUNBQXlDLENBQzFDLENBQUMsV0FBVyxDQUFDO1NBQ2Y7UUFFRCxJQUFJLFdBQVcsSUFBSSxJQUFJLElBQUksV0FBVyxDQUFDLElBQUksRUFBRSxJQUFJLEtBQUssRUFBRTtZQUN0RCxXQUFXLEdBQUcsT0FBTyxDQUFDO1NBQ3ZCO1FBRUQsSUFBSSxVQUFVLEdBQUcsYUFBYSxDQUM1QixJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxXQUFXLENBQUMsRUFDN0IsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQzNCLENBQUM7UUFFRixJQUFJLFlBQVksRUFBRSxhQUFhLEVBQUUsY0FBYyxDQUFDO1FBQ2hELElBQUksV0FBVyxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsRUFBRTtZQUNsQyxZQUFZLEdBQUcsU0FBUyxDQUFDO1lBQ3pCLFVBQVUsQ0FBQyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUM7WUFDbEIsVUFBVSxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUNsQixhQUFhLEdBQUcsTUFBTSxDQUFDO1lBQ3ZCLGNBQWMsR0FBRyxDQUFDLE1BQU0sT0FBTyxDQUFDLENBQUMsSUFBSSxDQUFDO1NBQ3ZDO2FBQU07WUFDTCxZQUFZLEdBQUcsV0FBVyxDQUFDLFNBQVMsQ0FBQyxXQUFXLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDO1lBQ3hFLGFBQWEsR0FBRyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQztZQUNoRCxjQUFjLEdBQUcsS0FBSyxDQUFDLE1BQU07Z0JBQzNCLENBQUMsQ0FBQyxDQUFDLE1BQU0sT0FBTyxDQUFDLENBQUMsS0FBSztnQkFDdkIsQ0FBQyxDQUFDLENBQUMsTUFBTSxPQUFPLENBQUMsQ0FBQyxJQUFJLENBQUM7U0FDMUI7UUFFRCxJQUFJLElBQUksR0FBaUI7WUFDdkIsT0FBTyxFQUFFLEtBQUs7WUFDZCxLQUFLLEVBQUUsWUFBWTtZQUNuQixhQUFhLEVBQUUsZUFBZTtZQUM5QixhQUFhLEVBQUUsYUFBYTtZQUM1QixjQUFjLEVBQUUsY0FBYztZQUM5QixjQUFjLEVBQUUsVUFBVSxDQUFDLENBQUMsQ0FBQztZQUM3QixZQUFZLEVBQUUsVUFBVSxDQUFDLENBQUMsQ0FBQztTQUM1QixDQUFDO1FBRUYsSUFBSSxLQUFLLENBQUMsTUFBTSxFQUFFO1lBQ2hCLE9BQU8sSUFBSSxDQUFDLGNBQWMsQ0FBQztZQUMzQixPQUFPLElBQUksQ0FBQyxZQUFZLENBQUM7U0FDMUI7UUFFRCxJQUFJLEtBQUssS0FBSyxJQUFJLEVBQUU7WUFDbEIsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUM7U0FDM0M7S0FDRjtTQUFNO1FBQ0wsTUFBTSxnQkFBZ0IsR0FBaUI7WUFDckMsT0FBTyxFQUFFLGFBQWE7WUFDdEIsYUFBYSxFQUFFLGVBQWU7U0FDL0IsQ0FBQztRQUNGLFFBQVEsQ0FBQyxXQUFXLENBQUMsZ0JBQWdCLENBQUMsQ0FBQztLQUN4QztBQUNILENBQUMsQ0FBQyxDQUFDIn0=

@@ -1,18 +1,14 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
-    clientId: "607678684010381330",
-    mediaKeys: true
+    clientId: "607678684010381330"
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
 });
+function getTimestamps(videoTime, videoDuration) {
+    var startTime = Date.now();
+    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    return [Math.floor(startTime / 1000), endTime];
+}
 var lastPlaybackState = null;
 var playback;
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -20,36 +16,35 @@ if (lastPlaybackState != playback) {
     lastPlaybackState = playback;
     browsingStamp = Math.floor(Date.now() / 1000);
 }
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    playback =
-        document.querySelector(".jw-video video") !== null
-            ? true : false;
+presence.on("UpdateData", async () => {
+    playback = document.querySelector(".jw-video video") !== null ? true : false;
+    var presenceData = {
+        largeImageKey: "lg"
+    };
     if (!playback) {
-        presenceData: presenceData = {
-            largeImageKey: "lg"
-        };
         presenceData.details = "Browsing...";
         presenceData.startTimestamp = browsingStamp;
-        delete presenceData.state;
-        delete presenceData.smallImageKey;
         presence.setActivity(presenceData, true);
     }
     var video = document.querySelector(".jw-video video");
     if (video !== null && !isNaN(video.duration)) {
         var videoTitle;
-        videoTitle = document.querySelector('#bread .breadcrumb .active');
-        var uploader = '', timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), presenceData = {
-            largeImageKey: "lg",
-            smallImageKey: video.paused ? "pause" : "play",
-            smallImageText: video.paused
-                ? (yield strings).pause
-                : (yield strings).play,
-            startTimestamp: timestamps[0],
-            endTimestamp: timestamps[1]
-        };
-        presence.setTrayTitle(video.paused ? "" : videoTitle.innerText);
+        videoTitle = document.querySelector("#bread .breadcrumb .active");
+        var timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+        presenceData.smallImageKey = video.paused ? "pause" : "play";
+        presenceData.smallImageText = video.paused
+            ? (await strings).pause
+            : (await strings).play;
+        presenceData.startTimestamp = timestamps[0];
+        presenceData.endTimestamp = timestamps[1];
+        presence.setTrayTitle(video.paused
+            ? ""
+            : videoTitle !== null
+                ? videoTitle.innerText
+                : "Title not found...");
         presenceData.details = "Watching";
-        presenceData.state = videoTitle.innerText;
+        presenceData.state =
+            videoTitle !== null ? videoTitle.innerText : "Title not found...";
         if (video.paused) {
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;
@@ -58,17 +53,5 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             presence.setActivity(presenceData, !video.paused);
         }
     }
-}));
-presence.on("MediaKeys", (key) => {
-    switch (key) {
-        case "pause":
-            var video = document.querySelector(".jw-video video");
-            video.paused ? video.play() : video.pause();
-            break;
-    }
 });
-function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUN4QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsRUFDRixPQUFPLEdBQUcsUUFBUSxDQUFDLFVBQVUsQ0FBQztJQUM1QixJQUFJLEVBQUUsMkJBQTJCO0lBQ2pDLEtBQUssRUFBRSwwQkFBMEI7Q0FDbEMsQ0FBQyxDQUFDO0FBT0wsU0FBUyxhQUFhLENBQ3BCLFNBQWlCLEVBQ2pCLGFBQXFCO0lBRXJCLElBQUksU0FBUyxHQUFHLElBQUksQ0FBQyxHQUFHLEVBQUUsQ0FBQztJQUMzQixJQUFJLE9BQU8sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsR0FBRyxTQUFTLEdBQUcsYUFBYSxDQUFDO0lBQ3ZFLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsRUFBRSxPQUFPLENBQUMsQ0FBQztBQUNqRCxDQUFDO0FBRUQsSUFBSSxpQkFBaUIsR0FBRyxJQUFJLENBQUM7QUFDN0IsSUFBSSxRQUFRLENBQUM7QUFDYixJQUFJLGFBQWEsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsR0FBRyxJQUFJLENBQUMsQ0FBQztBQUVsRCxJQUFJLGlCQUFpQixJQUFJLFFBQVEsRUFBRTtJQUNqQyxpQkFBaUIsR0FBRyxRQUFRLENBQUM7SUFDN0IsYUFBYSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO0NBQy9DO0FBRUQsUUFBUSxDQUFDLEVBQUUsQ0FBQyxZQUFZLEVBQUUsS0FBSyxJQUFJLEVBQUU7SUFDbkMsUUFBUSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsaUJBQWlCLENBQUMsS0FBSyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsS0FBSyxDQUFDO0lBQzdFLElBQUksWUFBWSxHQUFpQjtRQUMvQixhQUFhLEVBQUUsSUFBSTtLQUNwQixDQUFDO0lBRUYsSUFBSSxDQUFDLFFBQVEsRUFBRTtRQUNiLFlBQVksQ0FBQyxPQUFPLEdBQUcsYUFBYSxDQUFDO1FBQ3JDLFlBQVksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO1FBRTVDLFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxFQUFFLElBQUksQ0FBQyxDQUFDO0tBQzFDO0lBRUQsSUFBSSxLQUFLLEdBQXFCLFFBQVEsQ0FBQyxhQUFhLENBQUMsaUJBQWlCLENBQUMsQ0FBQztJQUV4RSxJQUFJLEtBQUssS0FBSyxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxFQUFFO1FBQzVDLElBQUksVUFBZSxDQUFDO1FBRXBCLFVBQVUsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLDRCQUE0QixDQUFDLENBQUM7UUFFbEUsSUFBSSxVQUFVLEdBQUcsYUFBYSxDQUM1QixJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxXQUFXLENBQUMsRUFDN0IsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQzNCLENBQUM7UUFDRixZQUFZLENBQUMsYUFBYSxHQUFHLEtBQUssQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDO1FBQzdELFlBQVksQ0FBQyxjQUFjLEdBQUcsS0FBSyxDQUFDLE1BQU07WUFDeEMsQ0FBQyxDQUFDLENBQUMsTUFBTSxPQUFPLENBQUMsQ0FBQyxLQUFLO1lBQ3ZCLENBQUMsQ0FBQyxDQUFDLE1BQU0sT0FBTyxDQUFDLENBQUMsSUFBSSxDQUFDO1FBQ3pCLFlBQVksQ0FBQyxjQUFjLEdBQUcsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQzVDLFlBQVksQ0FBQyxZQUFZLEdBQUcsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBRTFDLFFBQVEsQ0FBQyxZQUFZLENBQ25CLEtBQUssQ0FBQyxNQUFNO1lBQ1YsQ0FBQyxDQUFDLEVBQUU7WUFDSixDQUFDLENBQUMsVUFBVSxLQUFLLElBQUk7Z0JBQ3JCLENBQUMsQ0FBQyxVQUFVLENBQUMsU0FBUztnQkFDdEIsQ0FBQyxDQUFDLG9CQUFvQixDQUN6QixDQUFDO1FBRUYsWUFBWSxDQUFDLE9BQU8sR0FBRyxVQUFVLENBQUM7UUFDbEMsWUFBWSxDQUFDLEtBQUs7WUFDaEIsVUFBVSxLQUFLLElBQUksQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsb0JBQW9CLENBQUM7UUFFcEUsSUFBSSxLQUFLLENBQUMsTUFBTSxFQUFFO1lBQ2hCLE9BQU8sWUFBWSxDQUFDLGNBQWMsQ0FBQztZQUNuQyxPQUFPLFlBQVksQ0FBQyxZQUFZLENBQUM7U0FDbEM7UUFFRCxJQUFJLFVBQVUsS0FBSyxJQUFJLEVBQUU7WUFDdkIsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLEVBQUUsQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUM7U0FDbkQ7S0FDRjtBQUNILENBQUMsQ0FBQyxDQUFDIn0=

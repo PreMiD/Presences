@@ -1,35 +1,30 @@
 var presence = new Presence({
-  clientId: '671918505267822594'
+  clientId: "671918505267822594"
 });
 var strings = presence.getStrings({
-  browsing: 'presence.activity.browsing'
+  browsing: "presence.activity.browsing"
 });
 
 var oldUrl, elapsed;
 
 var data: presenceData = {
-  details: undefined,
-  state: undefined,
-  largeImageKey: 'pmg',
-  smallImageKey: undefined,
-  smallImageText: undefined,
-  startTimestamp: undefined,
-  endTimestamp: undefined
+  largeImageKey: "pmg"
 };
 
-presence.on('UpdateData', async () => {
+presence.on("UpdateData", async () => {
+  var string = (await strings).browsing;
   const static = {
-    '': {
-      details: 'Browsing'
+    "": {
+      details: "Browsing"
     },
-    '/privacy.html': {
-      details: 'Viewing',
-      state: 'Privacy and Terms of Service'
+    "/privacy.html": {
+      details: "Viewing",
+      state: "Privacy and Terms of Service"
     }
   };
 
   const host = location.host;
-  const path = location.pathname.replace(/\/$/, '');
+  const path = location.pathname.replace(/\/$/, "");
 
   if (oldUrl !== host) {
     oldUrl = host;
@@ -45,9 +40,9 @@ presence.on('UpdateData', async () => {
   }
 
   if (data.details !== undefined) {
-    if (data.details.match('(Viewing|Browsing)')) {
-      data.smallImageKey = 'reading';
-      data.smallImageText = (await strings).browsing;
+    if (data.details.match("(Viewing|Browsing)")) {
+      data.smallImageKey = "reading";
+      data.smallImageText = string;
     }
 
     presence.setActivity(data);
@@ -56,11 +51,3 @@ presence.on('UpdateData', async () => {
     presence.setTrayTitle();
   }
 });
-
-const getElement = (selector: string) => {
-  const element = document.querySelector(selector);
-
-  if (element) {
-    return element.textContent;
-  }
-};

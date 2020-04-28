@@ -1,13 +1,21 @@
 const presence = new Presence({
-  clientId: '630239297521319953',
-  mediaKeys: false
+  clientId: "630239297521319953"
 });
 
-var whitelist = ['HTML', 'CSS', 'SQL', 'PHP', 'W3.CSS', 'JQUERY', 'XML'];
+const capitalize = (text: string): string => {
+  var texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
+  return texts
+    .map((str) => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    })
+    .join(" ");
+};
+
+var whitelist = ["HTML", "CSS", "SQL", "PHP", "W3.CSS", "JQUERY", "XML"];
 
 var elapsed, oldUrl;
 
-presence.on('UpdateData', () => {
+presence.on("UpdateData", () => {
   var details = undefined,
     state = undefined;
 
@@ -16,15 +24,15 @@ presence.on('UpdateData', () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  var language = document.querySelector('.w3-bar-item.w3-button.active');
-  var lesson = document.querySelector('#main > h1');
+  var language = document.querySelector(".w3-bar-item.w3-button.active");
+  var lesson = document.querySelector("#main > h1");
 
-  var exercise = document.querySelector('#completedExercisesNo');
+  var exercise = document.querySelector("#completedExercisesNo");
 
   if (language) {
-    details = 'Learning ' + capitalize(language.textContent.toLowerCase());
-    if (whitelist.some(lang => lang === language.textContent))
-      details = 'Learning ' + language.textContent;
+    details = "Learning " + capitalize(language.textContent.toLowerCase());
+    if (whitelist.some((lang) => lang === language.textContent))
+      details = "Learning " + language.textContent;
   }
 
   if (lesson) {
@@ -32,25 +40,16 @@ presence.on('UpdateData', () => {
   }
 
   if (exercise) {
-    details = `${capitalize(window.location.pathname.split('/')[1])} Exercise`;
-    state = exercise.textContent.match('[0-9](.*)[0-9]')[0];
+    details = `${capitalize(window.location.pathname.split("/")[1])} Exercise`;
+    state = exercise.textContent.match("[0-9](.*)[0-9]")[0];
   }
 
   var data: presenceData = {
     details: details,
     state: state,
-    largeImageKey: 'w3schools',
+    largeImageKey: "w3schools",
     startTimestamp: elapsed
   };
 
   presence.setActivity(data);
 });
-
-function capitalize(text: string) {
-  var ret = '';
-  var texts = text.replace(/[\[{(_)}\]]/g, ' ').split(' ');
-  texts.map(text => {
-    ret += text.charAt(0).toUpperCase() + text.slice(1) + ' ';
-  });
-  return ret;
-}

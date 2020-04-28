@@ -8,8 +8,8 @@
     "en": "SFW Image Boards for different Animes",
     "de": "SFW Image Boards für verschiedene Animes"
   },
-  "url": ["imgb.crugg.de"],
-  "version": "2.0",
+  "url": "imgb.crugg.de",
+  "version": "2.1.1",
   "logo": "https://crugg.de/premid/imgblogo.png",
   "thumbnail": "https://crugg.de/premid/imgbbanner.png",
   "color": "#2D2D2D",

@@ -1,44 +1,41 @@
 var presence = new Presence({
-    clientId: "653372675166568481",
-    mediaKeys: false
-}), strings = presence.getStrings({
+    clientId: "653372675166568481"
+  }),
+  strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-});
+  });
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-    let presenceData = {
-        largeImageKey: "carllogo"
-    };
-    if (document.location.hostname == "carl.gg") {
-        presenceData.startTimestamp = browsingStamp;
-        if (document.location.pathname.includes("/dashboard/")) {
-            if (document.querySelector("#__BVID__135__BV_button_ > strong")) {
-                title = document.querySelector("#__BVID__135__BV_button_ > strong")
-            } else if (document.querySelector("#__BVID__17__BV_button_ > strong").textContent) {
-                title = document.querySelector("#__BVID__17__BV_button_ > strong").textContent
-            }
-            presenceData.details = "Managing the settings of";
-            presenceData.state = "server: " + title;
-        } else if (document.location.pathname.includes("/servers")) {
-            presenceData.details = "Browsing through";
-            presenceData.state = "servers";
-        } else if (document.location.pathname.includes("/premium")) {
-            presenceData.details = "Viewing Premium Plans";
-        }
+  let presenceData = {
+    largeImageKey: "carllogo",
+    startTimestamp: browsingStamp
+  };
+  if (document.location.hostname == "carl.gg") {
+    if (document.location.pathname.startsWith("/dashboard/")) {
+      title = document.querySelector(
+        "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
+      ).innerText;
+      presenceData.details = "Managing the settings of:";
+      presenceData.state = title;
+    } else if (document.location.pathname.startsWith("/servers")) {
+      presenceData.details = "Browsing through";
+      presenceData.state = "servers";
+    } else if (document.location.pathname.startsWith("/status")) {
+      presenceData.details = "Viewing a page:";
+      presenceData.state = "Carl-bot Status";
     }
-    if (presenceData.details == null) {
-        presence.setTrayTitle();
-        presence.setActivity();
-    }
-    else {
-        presence.setActivity(presenceData);
-    }
-
+  }
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
 });
 function getTimestamps(videoTime, videoDuration) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }

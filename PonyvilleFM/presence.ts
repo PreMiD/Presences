@@ -1,17 +1,9 @@
 var presence = new Presence({
-  clientId: "613628090219757599",
-  mediaKeys: false
+  clientId: "613628090219757599"
 });
 
-let timeElapsed = Math.floor(Date.now() / 1000),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  }),
-  otherListeners,
-  stationStatus,
-  listeningCheck,
-  onAir;
+const timeElapsed = Math.floor(Date.now() / 1000);
+let otherListeners, stationStatus, listeningCheck, onAir;
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/player") {
@@ -33,14 +25,14 @@ presence.on("UpdateData", async () => {
       "html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3#mane_onair.ng-binding"
     );
     if (listeningCheck == "No") {
-      let presenceData: presenceData = {
+      const presenceData: presenceData = {
         details: stationStatus,
         largeImageKey: "pvfm",
         smallImageKey: "pause"
       };
       presence.setActivity(presenceData);
     } else {
-      let presenceData: presenceData = {
+      const presenceData: presenceData = {
         details: stationStatus,
         state: "On air: " + onAir.innerText,
         largeImageKey: "pvfm",
@@ -68,14 +60,14 @@ presence.on("UpdateData", async () => {
       "html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3"
     );
     if (listeningCheck == "No") {
-      let presenceData: presenceData = {
+      const presenceData: presenceData = {
         details: stationStatus,
         largeImageKey: "pvfm",
         smallImageKey: "pause"
       };
       presence.setActivity(presenceData);
     } else {
-      let presenceData: presenceData = {
+      const presenceData: presenceData = {
         details: stationStatus,
         state: "On air: " + onAir.innerText,
         largeImageKey: "pvfm",
@@ -103,14 +95,14 @@ presence.on("UpdateData", async () => {
       "html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3"
     );
     if (listeningCheck == "No") {
-      let presenceData: presenceData = {
+      const presenceData: presenceData = {
         details: stationStatus,
         largeImageKey: "pvfm",
         smallImageKey: "pause"
       };
       presence.setActivity(presenceData);
     } else {
-      let presenceData: presenceData = {
+      const presenceData: presenceData = {
         details: stationStatus,
         state: "On air: " + onAir.innerText,
         largeImageKey: "pvfm",

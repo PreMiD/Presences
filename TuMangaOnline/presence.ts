@@ -1,23 +1,13 @@
 var presence = new Presence({
-  clientId: "640980262750126080",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
+  clientId: "640980262750126080"
 });
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user : any;
-var title : any;
-var replace : any;
-var search : any;
+var user: any;
 
 presence.on("UpdateData", async () => {
-
-
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "tmo"
   };
 
@@ -25,9 +15,11 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing...";
-    } else if (document.location.pathname.includes("/library/manga/")){
+    } else if (document.location.pathname.includes("/library/manga/")) {
       presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector("#app > section > header > section > div > div > div:nth-child(3) > h1");
+      user = document.querySelector(
+        "#app > section > header > section > div > div > div:nth-child(3) > h1"
+      );
       presenceData.details = "Viewing manga:";
       presenceData.state = user.textContent;
       presenceData.smallImageKey = "reading";
@@ -37,48 +29,43 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/groups/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing group:";
-      presenceData.state = document.querySelector("#app > section > header > section > div > div > div:nth-child(2) > h1").textContent
+      presenceData.state = document.querySelector(
+        "#app > section > header > section > div > div > div:nth-child(2) > h1"
+      ).textContent;
     } else if (document.location.pathname.includes("/groups")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing groups";
     } else if (document.location.pathname.includes("/lists/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing group:";
-      presenceData.state = document.querySelector("#app > section > header > section > div > div > div:nth-child(2) > h1").textContent
+      presenceData.state = document.querySelector(
+        "#app > section > header > section > div > div > div:nth-child(2) > h1"
+      ).textContent;
     } else if (document.location.pathname.includes("/lists")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing groups";
     } else if (document.location.pathname.includes("/viewer/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing manga:";
-      presenceData.state = document.querySelector("#app > section:nth-child(2) > div > div > h1").textContent
+      presenceData.state = document.querySelector(
+        "#app > section:nth-child(2) > div > div > h1"
+      ).textContent;
     }
   } else if (document.location.hostname == "tmocommunity.com") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing the forums...";
     if (document.location.pathname.includes("/d/")) {
       presenceData.details = "Reading forum post:";
-      presenceData.state = document.querySelector("#content > div > div > header > div > ul > li.item-title > h2").textContent;
+      presenceData.state = document.querySelector(
+        "#content > div > div > header > div > ul > li.item-title > h2"
+      ).textContent;
     }
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
-
 });
-
-
-/**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
-function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
-}

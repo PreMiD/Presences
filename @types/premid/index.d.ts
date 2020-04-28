@@ -1,5 +1,5 @@
 /**
- * @link https://docs.premid.app/presence-development/coding/presence-class#getpagevariable-string
+ * @link https://docs.premid.app/presence-development/coding/presence-class#getpageletiable-string
  */
 interface presenceData {
   state?: string;
@@ -16,21 +16,15 @@ interface PresenceOptions {
    * @link https://docs.premid.app/presence-development/coding/presence-class#clientid
    */
   clientId: string;
-  /**
-   * Wether or not this presence supports media keys
-   * @default {mediaKeys: false}
-   * @link https://docs.premid.app/presence-development/coding/presence-class#mediakeys
-   * @deprecated Deprecated for now as browsers support it by default. May return soon.
-   */
-  mediaKeys?: boolean;
 }
 declare class Presence {
+  metadata: any;
+  _events: any;
   private clientId;
   private trayTitle;
   private playback;
-  private mediaKeys;
   private internalPresence;
-  _events: any;
+  private port;
   /**
    * Create a new Presence
    */
@@ -62,46 +56,53 @@ declare class Presence {
   /**
    * Get translations from the extension
    * @param strings String object with keys being the key for string, keyValue is the string value
+   * @param language Language
    * @link https://docs.premid.app/presence-development/coding/presence-class#getstrings-object
    */
-  getStrings<
-    M extends { [key: string]: string },
-    U extends { [key in keyof M]: string }
-  >(strings: M): Promise<U>;
+  getStrings(strings: Object, language?: string): Promise<any>;
   /**
-   * Get variables from the actual site.
-   * @param {Array} variables Array of variable names to get
-   * @example var pageVar = getPageVariable('pageVar') -> "Variable content"
-   * @link https://docs.premid.app/presence-development/coding/presence-class#getpagevariable-string
+   * Get letiables from the actual site.
+   * @param {Array} letiables Array of letiable names to get
+   * @example let pagelet = getPageletiable('pagelet') -> "letiable content"
+   * @link https://docs.premid.app/presence-development/coding/presence-class#getpageletiable-string
    */
-  getPageVariable(variable: string): Promise<any>;
+  getPageletiable(letiable: string): Promise<any>;
+  /**
+   * Returns extension version
+   * @param onlyNumeric version nubmer without dots
+   * @since 2.1
+   */
+  getExtensionVersion(onlyNumeric?: boolean): string | number;
+  /**
+   * Get a setting from the presence metadata
+   * @param setting Id of setting as defined in metadata.
+   * @since 2.1
+   */
+  getSetting(setting: string): Promise<any>;
+  /**
+   * Hide a setting
+   * @param setting Id of setting / Array of setting Id's
+   * @since 2.1
+   */
+  hideSetting(settings: string | Array<string>): Promise<void>;
+  /**
+   * Hide a setting
+   * @param setting Id of setting / Array of setting Id's
+   * @since 2.1
+   */
+  showSetting(settings: string | Array<string>): Promise<void>;
   /**
    * Sends data back to application
    * @param data Data to send back to application
    */
   private sendData;
   /**
-   * Subscribe to events the UpdateData event by the extension
+   * Subscribe to events emitted by the extension
    * @param eventName EventName to subscribe to
    * @param callback Callback function for event
    * @link https://docs.premid.app/presence-development/coding/presence-class#events
    */
-  on(eventName: "UpdateData", callback: () => void): void;
-  /**
-   * Subscribe to events the MediaKeys event by the extension
-   * @param eventName EventName to subscribe to
-   * @param callback Callback function for event
-   * @link https://docs.premid.app/presence-development/coding/presence-class#events
-   * @deprecated Deprecated for now as browsers support it by default. May return soon.
-   */
-  on(eventName: "MediaKeys", callback: (key: string) => void): void;
-  /**
-   * Subscribe to events the iFrameData event by the extension
-   * @param eventName EventName to subscribe to
-   * @param callback Callback function for event
-   * @link https://docs.premid.app/presence-development/coding/presence-class#events
-   */
-  on(eventName: "iFrameData", callback: (data: any) => void): void;
+  on(eventName: "UpdateData" | "iFrameData", callback: Function): void;
 }
 declare class iFrame {
   _events: any;
@@ -116,20 +117,9 @@ declare class iFrame {
    */
   getUrl(): Promise<string>;
   /**
-   * Subscribe to events the UpdateData event by the extension
-   * @param eventName EventName to subscribe to
-   * @param callback Callback function for event
-   * @link https://docs.premid.app/presence-development/coding/presence-class#events
-   * @since 2.0-BETA3
+   * Subscribe to events emitted by the extension
+   * @param eventName
+   * @param callback
    */
-  on(eventName: "UpdateData", callback: () => void): void;
-  /**
-   * Subscribe to events the MediaKeys event by the extension
-   * @param eventName EventName to subscribe to
-   * @param callback Callback function for event
-   * @link https://docs.premid.app/presence-development/coding/presence-class#events
-   * @since 2.0-BETA3
-   * @deprecated Deprecated for now as browsers support it by default. May return soon.
-   */
-  on(eventName: "MediaKeys", callback: (key: string) => void): void;
+  on(eventName: "UpdateData", callback: Function): void;
 }

@@ -1,41 +1,48 @@
 var presence = new Presence({
-  clientId: "640234287525920834",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
+  clientId: "640234287525920834"
 });
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user : any;
-var title : any;
-var replace : any;
-var search : any;
+var user: any;
+var title: any;
+var search: any;
 
 var typeURL = new URL(document.location.href);
 var typeResult = typeURL.searchParams.get("type");
 
 presence.on("UpdateData", async () => {
-
-  
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "pix"
   };
 
   if (document.location.hostname == "www.pixiv.net") {
-    if (document.location.pathname == "/" || document.location.pathname == "/en/") {
+    if (
+      document.location.pathname == "/" ||
+      document.location.pathname == "/en/"
+    ) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
-    } else if (document.querySelector("#root > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(2) > div > h1") !== null){
+    } else if (
+      document.querySelector(
+        "#root > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(2) > div > h1"
+      ) !== null
+    ) {
       presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector("#root > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(2) > div > h1");
+      user = document.querySelector(
+        "#root > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div:nth-child(2) > div > h1"
+      );
       presenceData.details = "Viewing user:";
       presenceData.state = user.innerText;
     } else if (document.location.pathname.includes("/novel/")) {
-      if (document.querySelector("#root > div > div > div > main > section > div:nth-child(1) > div > div:nth-child(2) > h1") !== null) {
-        title = document.querySelector("#root > div > div > div > main > section > div:nth-child(1) > div > div:nth-child(2) > h1");
+      if (
+        document.querySelector(
+          "#root > div > div > div > main > section > div:nth-child(1) > div > div:nth-child(2) > h1"
+        ) !== null
+      ) {
+        title = document.querySelector(
+          "#root > div > div > div > main > section > div:nth-child(1) > div > div:nth-child(2) > h1"
+        );
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing novel:";
         presenceData.state = title.innerText;
@@ -46,17 +53,21 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/artworks")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing artwork:";
-      presenceData.state = document.querySelector("#root > div:nth-child(2) > div > div > main > section > div > div > figcaption > div > div > h1").textContent;
+      presenceData.state = document.querySelector(
+        "#root > div:nth-child(2) > div > div > main > section > div > div > figcaption > div > div > h1"
+      ).textContent;
     } else if (document.location.pathname.includes("/ranking")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing:";
-      presenceData.state = document.querySelector("#wrapper > div.layout-body > div > h1 > a").textContent;
+      presenceData.state = document.querySelector(
+        "#wrapper > div.layout-body > div > h1 > a"
+      ).textContent;
     } else if (document.location.pathname.includes("/history.php")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing History";
     } else if (document.location.pathname.includes("/bookmark")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing bookmarks"
+      presenceData.details = "Viewing bookmarks";
     } else if (document.location.pathname.includes("/mypixiv_all.php")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing My pixiv";
@@ -67,40 +78,50 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.innerText;
     } else if (document.location.pathname.includes("/fanbox")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing fanbox"
+      presenceData.details = "Viewing fanbox";
     } else if (document.location.pathname.includes("/event/")) {
-      if (document.querySelector("#contents > div.pane.full.group > h1") !== null) {
+      if (
+        document.querySelector("#contents > div.pane.full.group > h1") !== null
+      ) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing event:";
-        presenceData.state = document.querySelector("#contents > div.pane.full.group > h1").textContent;
+        presenceData.state = document.querySelector(
+          "#contents > div.pane.full.group > h1"
+        ).textContent;
       } else {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Browsing events..."
+        presenceData.details = "Browsing events...";
       }
     } else if (document.location.pathname.includes("/event_add")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Ready to create an event"
+      presenceData.details = "Ready to create an event";
     } else if (document.location.pathname.includes("/profile_event")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Manage event..."
+      presenceData.details = "Manage event...";
     } else if (document.location.pathname.includes("/tag")) {
-      title = document.querySelector("#container > div.page > div.main-wrap > div.profile > section > header > h1");
+      title = document.querySelector(
+        "#container > div.page > div.main-wrap > div.profile > section > header > h1"
+      );
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing tag:"
+      presenceData.details = "Viewing tag:";
       presenceData.state = title.innerText;
     } else if (document.location.pathname.includes("/search")) {
-      search = document.querySelector("#wrapper > div.layout-body > div > div.column-header > div > h1 > a");
+      search = document.querySelector(
+        "#wrapper > div.layout-body > div > div.column-header > div > h1 > a"
+      );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for:";
       presenceData.state = search.innerText;
       presenceData.smallImageKey = "search";
-            //Account Settings
+      //Account Settings
       //User settings
     } else if (document.location.pathname.includes("/setting_user.php")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "User settings";
       presenceData.state = "Basic settings";
-    } else if (document.location.pathname.includes("/setting_social_login.php")) {
+    } else if (
+      document.location.pathname.includes("/setting_social_login.php")
+    ) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "User settings";
       presenceData.state = "Link other accounts to pixiv";
@@ -112,7 +133,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/setting_profile.php")) {
       presenceData.details = "Profile settings";
       presenceData.state = "Profile information";
-    } else if (document.location.pathname.includes("/setting_profile_img.php")) {
+    } else if (
+      document.location.pathname.includes("/setting_profile_img.php")
+    ) {
       presenceData.details = "Profile settings";
       presenceData.state = "Profile images";
     } else if (document.location.pathname.includes("/setting_workspace.php")) {
@@ -130,8 +153,7 @@ presence.on("UpdateData", async () => {
       ///Mute setting
     } else if (document.location.pathname.includes("/setting_mute.php")) {
       presenceData.details = "Mute setting | Tags";
-      if (typeResult == "user")
-      presenceData.details = "Mute setting | User";
+      if (typeResult == "user") presenceData.details = "Mute setting | User";
       //Premium
     } else if (document.location.pathname.includes("/premium")) {
       presenceData.startTimestamp = browsingStamp;
@@ -145,14 +167,13 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing Recommended Works";
       if (document.location.pathname.includes("/users"))
-      presenceData.startTimestamp = browsingStamp;
+        presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing Recommended Users";
       //Upload
     } else if (document.location.pathname.includes("/upload.php")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Submiting New Illustrations";
-      if (typeResult == "manga")
-      presenceData.startTimestamp = browsingStamp;
+      if (typeResult == "manga") presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Submiting New Manga";
     } else if (document.location.pathname.includes("/ugoira_upload.php")) {
       presenceData.startTimestamp = browsingStamp;
@@ -168,7 +189,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/report")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing report";
-      presenceData.state = (document.querySelector("#wrapper > div.layout-body > section.analytics-menu-unit > nav > span.label") as HTMLElement).innerText;
+      presenceData.state = (document.querySelector(
+        "#wrapper > div.layout-body > section.analytics-menu-unit > nav > span.label"
+      ) as HTMLElement).innerText;
       //something
     } else if (document.location.pathname.includes("/group")) {
       presenceData.startTimestamp = browsingStamp;
@@ -180,10 +203,12 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Howto";
     }
-
   } else if (document.location.hostname == "sketch.pixiv.net") {
     presenceData.smallImageKey = "writing";
-    if (document.location.pathname == "/" || document.location.pathname.includes("/public")) {
+    if (
+      document.location.pathname == "/" ||
+      document.location.pathname.includes("/public")
+    ) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing sketch page";
     } else if (document.location.pathname.includes("/lives/")) {
@@ -204,9 +229,13 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/@")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Sketch- Viewing user:";
-      presenceData.state = document.querySelector("#AppContent > div:nth-child(5) > div:nth-child(1) > div > div.UserHeaderBody > div > div.user > div.name").textContent;
+      presenceData.state = document.querySelector(
+        "#AppContent > div:nth-child(5) > div:nth-child(1) > div > div.UserHeaderBody > div > div.user > div.name"
+      ).textContent;
     } else if (document.location.pathname.includes("/tags")) {
-      search = document.querySelector("#TagHeader > div > div.CarouselOverlay > div > div");
+      search = document.querySelector(
+        "#TagHeader > div > div.CarouselOverlay > div > div"
+      );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Sketch- Viewing tag:";
       presenceData.state = search.innerText;
@@ -219,17 +248,4 @@ presence.on("UpdateData", async () => {
   } else {
     presence.setActivity(presenceData);
   }
-
 });
-
-
-/**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
-function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
-}

@@ -11,12 +11,10 @@
     "pt_BR": "Mude o mundo"
   },
   "url": "www.change.org",
-  "version": "1.1",
+  "version": "1.2.0",
   "logo": "https://i.imgur.com/BwMtgWb.jpg",
   "thumbnail": "https://i.imgur.com/bjNVk3Z.png",
   "color": "#FF0000",
-  "tags": [
-    "votes"
-  ],
+  "tags": ["votes"],
   "category": "other"
 }

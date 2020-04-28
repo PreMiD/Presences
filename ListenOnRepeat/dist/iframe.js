@@ -1,16 +1,8 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var iframe = new iFrame();
-var titleVid;
-iframe.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-    if (document.querySelector("#dogevideo_html5_api") !== null) {
-        var video = document.querySelector("#dogevideo_html5_api");
+iframe.on("UpdateData", async () => {
+    var video;
+    if (document.querySelector(".video") !== null) {
+        video = document.querySelector(".video");
         if (video != undefined && !isNaN(video.duration)) {
             iframe.send({
                 iframe_video: {
@@ -22,23 +14,8 @@ iframe.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             });
         }
     }
-    else if (document.querySelector("#player > div > div.html5-video-container > video") !== null) {
-        var video = document.querySelector("#player > div > div.html5-video-container > video");
-        titleVid = document.querySelector("#player > div > div.ytp-chrome-top.ytp-show-watch-later-title.ytp-show-share-title.ytp-show-cards-title.ytp-share-button-visible > div.ytp-title > div.ytp-title-text > a");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused,
-                    vidTitle: titleVid.innerText
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#player > div > div.container.pointer-enabled > video") !== null) {
-        var video = document.querySelector("#player > div > div.container.pointer-enabled > video");
+    else if (document.querySelector("body > div > div > div > video") !== null) {
+        video = document.querySelector("body > div > div > div > video");
         if (video != undefined && !isNaN(video.duration)) {
             iframe.send({
                 iframe_video: {
@@ -50,134 +27,5 @@ iframe.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
             });
         }
     }
-    else if (document.querySelector("#mediaplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") !== null) {
-        var video = document.querySelector("#mediaplayer > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#vid_html5_api") !== null) {
-        var video = document.querySelector("#vid_html5_api");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#myElement > div.jw-media.jw-reset > video") !== null) {
-        var video = document.querySelector("#myElement > div.jw-media.jw-reset > video");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#mgvideo > div.vjs-poster") !== null) {
-        var video = document.querySelector("#mgvideo > div.vjs-poster");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#olvideo_html5_api") !== null) {
-        var video = document.querySelector("#olvideo_html5_api");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#videojs_html5_api") !== null) {
-        var video = document.querySelector("#videojs_html5_api");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") !== null) {
-        var video = document.querySelector("#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#mgvideo_html5_api") !== null) {
-        var video = document.querySelector("#mgvideo_html5_api");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#player > div.jw-media.jw-reset > video") !== null) {
-        var video = document.querySelector("#player > div.jw-media.jw-reset > video");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-    else if (document.querySelector("#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video") !== null) {
-        var video = document.querySelector("#vstr > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video");
-        if (video != undefined && !isNaN(video.duration)) {
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: video.currentTime,
-                    dur: video.duration,
-                    paused: video.paused
-                }
-            });
-        }
-    }
-}));
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWZyYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vaWZyYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLElBQUksTUFBTSxHQUFHLElBQUksTUFBTSxFQUFFLENBQUM7QUFDMUIsTUFBTSxDQUFDLEVBQUUsQ0FBQyxZQUFZLEVBQUUsS0FBSyxJQUFJLEVBQUU7SUFDakMsSUFBSSxLQUF1QixDQUFDO0lBQzVCLElBQUksUUFBUSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsS0FBSyxJQUFJLEVBQUU7UUFDN0MsS0FBSyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDekMsSUFBSSxLQUFLLElBQUksU0FBUyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsRUFBRTtZQUNoRCxNQUFNLENBQUMsSUFBSSxDQUFDO2dCQUNWLFlBQVksRUFBRTtvQkFDWixXQUFXLEVBQUUsSUFBSTtvQkFDakIsUUFBUSxFQUFFLEtBQUssQ0FBQyxXQUFXO29CQUMzQixHQUFHLEVBQUUsS0FBSyxDQUFDLFFBQVE7b0JBQ25CLE1BQU0sRUFBRSxLQUFLLENBQUMsTUFBTTtpQkFDckI7YUFDRixDQUFDLENBQUM7U0FDSjtLQUNGO1NBQU0sSUFDTCxRQUFRLENBQUMsYUFBYSxDQUFDLGdDQUFnQyxDQUFDLEtBQUssSUFBSSxFQUNqRTtRQUNBLEtBQUssR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLGdDQUFnQyxDQUFDLENBQUM7UUFDakUsSUFBSSxLQUFLLElBQUksU0FBUyxJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsRUFBRTtZQUNoRCxNQUFNLENBQUMsSUFBSSxDQUFDO2dCQUNWLFlBQVksRUFBRTtvQkFDWixXQUFXLEVBQUUsSUFBSTtvQkFDakIsUUFBUSxFQUFFLEtBQUssQ0FBQyxXQUFXO29CQUMzQixHQUFHLEVBQUUsS0FBSyxDQUFDLFFBQVE7b0JBQ25CLE1BQU0sRUFBRSxLQUFLLENBQUMsTUFBTTtpQkFDckI7YUFDRixDQUFDLENBQUM7U0FDSjtLQUNGO0FBQ0gsQ0FBQyxDQUFDLENBQUMifQ==
