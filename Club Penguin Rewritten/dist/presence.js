@@ -586,7 +586,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
-        state: "Rounding up Puffles",
+        state: "Puffle Roundup",
         startTimestamp: elapsed
       };
       presence.setActivity(data);
@@ -721,7 +721,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
-        state: "Painting By Letters",
+        state: "Paint By Letters",
         startTimestamp: elapsed
       };
       presence.setActivity(data);
@@ -784,7 +784,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
-        state: "Rescuing Puffles",
+        state: "Puffle Rescue",
         startTimestamp: elapsed
       };
       presence.setActivity(data);
@@ -802,7 +802,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
-        state: "In a Dance Contest",
+        state: "Dance Contest",
         startTimestamp: elapsed
       };
       presence.setActivity(data);
@@ -811,7 +811,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
-        state: "Launching Puffles",
+        state: "Puffle Launch",
         startTimestamp: elapsed
       };
       presence.setActivity(data);
