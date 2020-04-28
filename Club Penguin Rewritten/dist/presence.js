@@ -807,7 +807,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       };
       presence.setActivity(data);
     }
-    else if (status=="995") {
+    else if (status=="955") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
