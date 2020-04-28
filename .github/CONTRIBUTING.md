@@ -12,8 +12,6 @@
 When publishing Presences to this GitHub, we require you to follow a set of guidelines.
 To some, these strict rules may seem harsh. However, the implementation of these rulesets will keep us and the users from running into any issues.
 
-> :x: **Note**: Media key support has been **COMPLETELY REMOVED**. If you are a Presence developer that has media key support in any of your Presences (new or old), please remove it.
-
 ## Creation
 
 > The code you write **MUST** be _well-written_ and **MUST** be _readable_. `DeepScan` on GitHub will report code quality issues to the `Presence Verification Team`. We recommend that your fork is up to date when you make pull requests, it will help limit false positives.
@@ -68,8 +66,11 @@ In some situations, Presences may behave unexpectedly or could use some minor ch
 - If you make modifications to a Presence and change at least a **QUARTER** of the Presence's codebase, you are allowed to add yourself as a contributor. Contact a `Presence Verifier` for more information about this subject.
 - Make sure the modifications are useful. These may include fixes (code and typos), additions (descriptions and tags), etc. Do **NOT** change images if they are not outdated and have a decent resolution.
 - Confirm that your changes work before publishing. Do **NOT** create pull requests without knowing the outcome of your changes.
+- When you make changes to a presence, modify the `presence.ts` file and compile it, do not make changes to the `presence.js` file directly.
 
 # Verification
+
+> ⚠️ **Warning**: Presence developers are now required to use `TypeScript`, the option for `JavaScript` presences has been completely removed.
 
 > If you need to contact someone, please use our official Discord server. All `Presence Verifiers` will have a unique role in their profile.
 
@@ -121,5 +122,6 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
 21. Declare the Presence const **BEFORE** everything to avoid such rare issues that may occur; this is not a requirement by design so it could be removed in the future.
 22. Presences that target internal browser pages (like Chrome Web Store, `chrome://`, `about:` pages, etc) are **NOT** allowed as they require an _experimental flag_ to be enabled on the user's end and could potentially cause damage to their browsers.
 23. It is **FORBIDDEN** to code Presences for a site without adding support to its main language (e.g., a YouTube Presence coded with support for Portuguese and Japanese, but not English itself).
+24. You must compile all `TypeScript` files in your presence before making a pull request. 
 
 After meeting all of the guidelines and having your Presence reviewed at least twice, your Presence will be merged with the store.
