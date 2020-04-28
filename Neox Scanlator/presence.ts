@@ -7,22 +7,22 @@ presence.on("UpdateData", async () => {
         largeImageKey: "logo",
         startTimestamp: Math.floor(Date.now() / 1000)
     };
-    const path :any = document.location.pathname;
-    let PesquisaTexto :any;
-    let UsuarioTexto: any;
-    let OrdenarTexto :any;
-    let GeneroTexto :any;
-    let StatusContaTexto : any;
-    let BlogText :any;
-    let opcaoLeitor :any;
-    let tipoObra :any;
-    let generoObra :any;
-    let spanObra :any;
-    let nomeObra :any;
-    let nomeObraLeitor :any;
-    let capituloLeitor :any;
-    let paginaLeitor :any;
-    let postagemData :any;
+    const path:any = document.location.pathname;
+    let PesquisaTexto:any;
+    let UsuarioTexto:any;
+    var OrdenarTexto:any;
+    let GeneroTexto:any;
+    let StatusContaTexto: any;
+    let BlogText:any;
+    let opcaoLeitor:any;
+    let tipoObra:any;
+    let generoObra:any;
+    let spanObra:any;
+    let nomeObra:any;
+    let nomeObraLeitor:any;
+    let capituloLeitor:any;
+    let paginaLeitor:any;
+    let postagemData:any;
     if (path.startsWith('/newsite/') || path.startsWith('/newsite')) {
         if(path == '/newsite/' || path == '/newsite') {
             if (document.title.includes('Resultados da pesquisa por')) {
@@ -35,19 +35,19 @@ presence.on("UpdateData", async () => {
                     presenceData.details = 'Usuário: ' + UsuarioTexto.innerText.slice(UsuarioTexto.innerText.search(',') + 1);
                 }
                 presenceData.state = 'Página inicial';
-            };
+            }
         } else if (path.includes('/projects/')) {
             presenceData.details = 'Vendo a lista de projetos';
             OrdenarTexto = document.querySelector("body > div.wrap > div > div.site-content > div.c-page-content.style-1 > div > div > div > div.main-col.col-md-8.col-sm-8 > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active");
             if(OrdenarTexto != null) {
                 presenceData.state = 'Ordenar por: ' + OrdenarTexto.innerText;
-            };
+            }
         } else if (path.includes('/manga-genre/')) {
             GeneroTexto = document.querySelector("body > div.wrap > div > div.site-content > div.c-page-content.style-1 > div > div > div > div.main-col.col-md-8.col-sm-8 > div.main-col-inner > div > div.entry-header > div > div > h1");
             presenceData.details = 'Gênero: ' + GeneroTexto.innerText;
             if (document.querySelector("body > div.wrap > div > div.site-content > div.c-page-content.style-1 > div > div > div > div.main-col.col-md-8.col-sm-8 > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active")) {
                 presenceData.state = 'Ordenar por: ' + OrdenarTexto.innerText;
-            };
+            }
         } else if (path.includes('/user-settings/')) {
             StatusContaTexto = document.querySelector("#post-11 > div.entry-content > div > div > div.col-md-3.col-sm-3 > div > ul > li.active");
             presenceData.details = 'Minha Conta';
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
                     presenceData.state = nomeObra.innerText.replace(spanObra.innerText, '');
                 } else {
                     presenceData.state = nomeObra.innerText;
-                };
+                }
             } else if (path.includes('capitulo') && document.title.includes('Capítulo')) {
                 paginaLeitor = document.getElementById("single-pager");
                 capituloLeitor = document.querySelector("body > div.wrap > div > div.site-content > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li.active");
@@ -79,17 +79,17 @@ presence.on("UpdateData", async () => {
                 } else {
                     presenceData.details = nomeObraLeitor.innerText;
                     presenceData.state = paginaLeitor.innerText + ' | Longstripe';
-                };
-            };
+                }
+            }
         } else if (document.querySelector("div.entry-header > div > div.entry-meta > div.post-on") !== null) {
             postagemData = document.querySelector("div.entry-header > div > div.entry-meta > div.post-on");
             if (postagemData.innerText.includes('postado em')) {
                 presenceData.details = 'Postagem';
                 presenceData.state = document.title.slice(0, document.title.search('-') - 15); 
-            };    
+            }
         } else if ((path.split('/').length - 1) == 3) {
             presenceData.details = document.title.slice(0, document.title.search('-') - 15);
-        };
+        }
     } else {
         presence.setTrayTitle();
         presence.setActivity();
