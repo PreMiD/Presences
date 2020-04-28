@@ -1,0 +1,17 @@
+{
+  "author": {
+    "name": "Alexx",
+    "id": "604182077088202784"
+  },
+  "url": "music.163.com",
+  "description": {
+    "en": "Netease Cloud Music is a freemium music streaming service developed and owned by NetEase, Inc. It's based in China."
+  },
+  "service": "NetEase Cloud Music",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/MhQutqe.png",
+  "thumbnail": "https://i.imgur.com/MhQutqe.png",
+  "color": "#FF0000",
+  "tags": ["music", "streaming"],
+  "category": "music"
+}
