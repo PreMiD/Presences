@@ -11,8 +11,6 @@ var actionURL = new URL(document.location.href);
 var title2URL = new URL(document.location.href);
 presence.on("UpdateData", async () => {
   let presenceData = {
-    details: "In construction",
-    state: "-",
     largeImageKey: "logo"
   };
   title = document.querySelector("h1#firstHeading");
