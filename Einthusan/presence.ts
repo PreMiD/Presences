@@ -1,10 +1,24 @@
-let presence = new Presence({
+var presence = new Presence({
     clientId: "702375041320484944"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-var search: string, movies: string, title: string, director: string, mlanguage: any, video: any, timestamps: any[];
+var search: string, title: string, director: string, video: any, timestamps: any[];
 let Name: any;
+
+function getTimestamps(videoTime: number, videoDuration: number): any {
+    var startTime = Date.now();
+    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    return [Math.floor(startTime / 1000), endTime];
+}
+function getSeconds(videoTime: string, videoDuration: string): any{
+    var a = videoTime.split(':');
+    var b = videoDuration.split(':');
+    var secondsStart = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+    var secondsEnd = (+b[0]) * 60 * 60 + (+b[1]) * 60 + (+b[2]);
+    return timestamps = getTimestamps(Math.floor(secondsStart), Math.floor(secondsEnd));
+}
+
 presence.on("UpdateData", async() => {
     var presenceData = {
         largeImageKey: "logo",
@@ -13,7 +27,7 @@ presence.on("UpdateData", async() => {
         smallImageKey: "",
         smallImageText: "",
         state: "",
-        endTimestamp: 0,
+        endTimestamp: 0
     };
     /* TODO:
     1. Check if the Movie Variables is Nessisary
@@ -21,7 +35,6 @@ presence.on("UpdateData", async() => {
     3. Publish
     */
     if(document.location.pathname == "/movie/browse/"){
-        movies = "/movie/browse";
         presenceData.details = "Browsing Movies";
         presenceData.startTimestamp = browsingStamp;
     }
@@ -87,7 +100,7 @@ presence.on("UpdateData", async() => {
         }
         else if (video != null && end != "--:--:--"){
             presenceData.details = title + " (" + Name+ ")";
-	        presenceData.state = director;
+            presenceData.state = director;
             delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;
             presenceData.smallImageKey = "pause";
@@ -179,16 +192,3 @@ presence.on("UpdateData", async() => {
         presence.setActivity(presenceData);
     }
 });
-
-function getTimestamps(videoTime: number, videoDuration: number) {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}
-function getSeconds(videoTime: string, videoDuration: string){
-    var a = videoTime.split(':');
-    var b = videoDuration.split(':');
-    var secondsStart = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
-    var secondsEnd = (+b[0]) * 60 * 60 + (+b[1]) * 60 + (+b[2]);
-    return timestamps = getTimestamps(Math.floor(secondsStart), Math.floor(secondsEnd));
-}
