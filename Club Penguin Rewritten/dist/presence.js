@@ -936,7 +936,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     else if (status.length<4&&!isNaN(status)) {
       let room = "In a Party Room";
       // Party room IDs are 851-899.
-      else if (status=="854") {
+      if (status=="854") {
         if (currentParty=="penguinawards") {room = "Limo";}
       }
       else if (status=="899") {
