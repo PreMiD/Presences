@@ -12,8 +12,6 @@
 When publishing Presences to this GitHub, we require you to follow a set of guidelines.
 To some, these strict rules may seem harsh. However, the implementation of these rulesets will keep us and the users from running into any issues.
 
-> :x: **Note**: Media key support has been **COMPLETELY REMOVED**. If you are a Presence developer that has media key support in any of your Presences (new or old), please remove it.
-
 ## Creation
 
 > The code you write **MUST** be _well-written_ and **MUST** be _readable_. `DeepScan` on GitHub will report code quality issues to the `Presence Verification Team`. We recommend that your fork is up to date when you make pull requests, it will help limit false positives.
@@ -66,9 +64,12 @@ In some situations, Presences may behave unexpectedly or could use some minor ch
 - If you make modifications to a Presence and change at least a **QUARTER** of the Presence's codebase, you are allowed to add yourself as a contributor. Contact a `Presence Verifier` for more information about this subject.
 - Make sure the modifications are useful. These may include fixes (code and typos), additions (descriptions and tags), etc. Do **NOT** change images if they are not outdated and have a decent resolution.
 - Confirm that your changes work before publishing. Do **NOT** create pull requests without knowing the outcome of your changes.
-- Maintain the language the Presence author used when writing the Presence. For example, do **NOT** delete typescript files and use the javascript files instead.
+- When you make changes to the presence, modify the `presence.ts` file and compile it, do not make changes to the `presence.js` file directly.
 
 # Verification
+
+> ⚠️ **Warning**: Presence developers are now required to use `TypeScript`, the option for `JavaScript` presences has been completely removed.
+
 
 > If you need to contact someone, please use our official Discord server. All `Presence Verifiers` will have a unique role in their profile.
 
@@ -89,38 +90,16 @@ For your Presence to reach the stores, it **MUST** go through a process on GitHu
 13. Tags should be used as alternate names whenever possible, and shortened versions must be included as well (e.g., if an Amazon Presence had included AWS support, it would have its tags like "amazon-web-services" and "aws").
 14. Unstable sites that constantly change APIs/domains, randomize HTML elements, or just still being in heavy development are not allowed and will be removed from the store.
 15. The logo and thumbnail on your Presence **MUST** either be `i.imgur.com`, from a CDN that **YOU** own, or from a CDN that gives you permission to **CHANGE** image files.
-16. Verifiers will check if the Presence contains an `__awaiter` function at the beginning of the code (which comes from an earlier version of ECMAScript), whether it's in Typescript or Javascript, and in addition to that, make sure the `UpdateData` event used is similar to this:
-
-```ts
-presence.on("UpdateData", async () => {
-  /*...*/
-  // Always use await when using async in the event
-  data.smallImageText = (await strings).playing;
-  /*...*/
-});
-```
-
-It should **NOT** be this:
-
-```ts
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
-  /*...*/
-  // Never use yield
-  data.smallImageText = (yield strings).playing;
-  /*...*/
-});
-```
-
-17. You **MUST** include all source files (such as `presence.ts` or `iframe.ts`), do **NOT** include a source mapping url if your Presence's language is Javascript.
-18. When **Deepscan** throws a lot of errors (and it will), it is mostly an issue with your branch being outdated, always update your GitHub fork when making pull requests.
-19. Always make sure the version number follows [semantic versioning standards](https://semver.org), which translates to the following scheme :
+16. You **MUST** include all source files (such as `presence.ts` or `iframe.ts`).
+17. When **Deepscan** throws a lot of errors (and it will), it is mostly an issue with your branch being outdated, always update your GitHub fork when making pull requests.
+18. Always make sure the version number follows [semantic versioning standards](https://semver.org), which translates to the following scheme :
     `<NEW-FEATURE>.<HUGE-BUGFIX>.<SMALL-BUGFIX-OR-METADATA-CHANGES>`.
     anything else like `1.0.0.1`, `1.0`, `1`, `1.0.0-BETA` or changing `1.0.0` to `2.0.0` on a bug fix/small change is **NOT** permitted.
-20. Low-quality Presences (or ones with one context) are **NOT** allowed (e.g., only showing the logo and some text but never changing again).
-21. **NEVER** use custom functions when [native variants are available](https://docs.premid.app/dev/presence#files-explained); this makes sure fixes on the extension level also apply to your Presences, you're free to use whatever you need if you do not find them listed in the docs.
-22. It is **NOT** recommended to use comments on Javascript Presences unless necessary (TypeScript ones or their compiled files are fine), as it reduces code readability and increases file sizes.
-23. Declare the Presence const **BEFORE** everything to avoid such rare issues that may occur; this is not a requirement by design so it could be removed in the future.
-24. Presences that target internal browser pages (like Chrome Web Store, `chrome://`, `about:` pages, etc) are **NOT** allowed as they require an _experimental flag_ to be enabled on the user's end and could potentially cause damage to their browsers.
-25. It is **FORBIDDEN** to code Presences for a site without adding support to its main language (e.g., a YouTube Presence coded with support for Portuguese and Japanese, but not English itself).
+19. Low-quality Presences (or ones with one context) are **NOT** allowed (e.g., only showing the logo and some text but never changing again).
+20. **NEVER** use custom functions when [native variants are available](https://docs.premid.app/dev/presence#files-explained); this makes sure fixes on the extension level also apply to your Presences, you're free to use whatever you need if you do not find them listed in the docs.
+21. Declare the Presence const **BEFORE** everything to avoid such rare issues that may occur; this is not a requirement by design so it could be removed in the future.
+22. Presences that target internal browser pages (like Chrome Web Store, `chrome://`, `about:` pages, etc) are **NOT** allowed as they require an _experimental flag_ to be enabled on the user's end and could potentially cause damage to their browsers.
+23. It is **FORBIDDEN** to code Presences for a site without adding support to its main language (e.g., a YouTube Presence coded with support for Portuguese and Japanese, but not English itself).
+24. All presences are **REQUIRED** to be written in TypeScript.
 
 After meeting all of the guidelines and having your Presence reviewed at least twice, your Presence will be merged with the store.
