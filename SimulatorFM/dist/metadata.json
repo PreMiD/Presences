@@ -1,14 +1,14 @@
 {
   "author": {
-    "name": "HuckinB",
-    "id": "228575716214702080"
+    "name": "PreMiD",
+    "id": "503557087041683458"
   },
   "service": "SimulatorFM",
   "description": {
     "en": "Your Music, For Your Simulation."
   },
   "url": ["simulator.fm", "panel.simulator.fm"],
-  "version": "2.1.1",
+  "version": "2.1.2",
   "logo": "https://i.imgur.com/Zpdg2tx.png",
   "thumbnail": "https://i.imgur.com/0sZjLM9.png",
   "color": "#65B6FF",
