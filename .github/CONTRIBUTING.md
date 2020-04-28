@@ -64,7 +64,7 @@ In some situations, Presences may behave unexpectedly or could use some minor ch
 - If you make modifications to a Presence and change at least a **QUARTER** of the Presence's codebase, you are allowed to add yourself as a contributor. Contact a `Presence Verifier` for more information about this subject.
 - Make sure the modifications are useful. These may include fixes (code and typos), additions (descriptions and tags), etc. Do **NOT** change images if they are not outdated and have a decent resolution.
 - Confirm that your changes work before publishing. Do **NOT** create pull requests without knowing the outcome of your changes.
-- When you make changes to the presence, modify the `presence.ts` file and compile it, do not make changes to the `presence.js` file directly.
+- When you make changes to a presence, modify the `presence.ts` file and compile it, do not make changes to the `presence.js` file directly.
 
 # Verification
 
