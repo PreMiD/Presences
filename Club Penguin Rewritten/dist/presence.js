@@ -935,31 +935,10 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else if (status.length<4&&!isNaN(status)) {
       let room = "In a Party Room";
-      if (status=="851") {}
-      else if (status=="852") {}
-      else if (status=="853") {}
+      // Party room IDs are 851-899.
       else if (status=="854") {
         if (currentParty=="penguinawards") {room = "Limo";}
       }
-      else if (status=="855") {}
-      else if (status=="856") {}
-      else if (status=="857") {}
-      else if (status=="858") {}
-      else if (status=="859") {}
-      else if (status=="860") {}
-      else if (status=="861") {}
-      else if (status=="862") {}
-      else if (status=="863") {}
-      else if (status=="864") {}
-      else if (status=="865") {}
-      else if (status=="866") {}
-      else if (status=="867") {}
-      else if (status=="868") {}
-      else if (status=="869") {}
-      else if (status=="870") {}
-      else if (status=="871") {}
-      else if (status=="872") {}
-      else if (status=="873") {}
       else if (status=="899") {
         if (currentParty=="penguinawards") {room = "Backstage";}
       }
