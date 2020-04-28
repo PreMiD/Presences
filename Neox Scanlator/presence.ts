@@ -7,22 +7,23 @@ presence.on("UpdateData", async () => {
         largeImageKey: "logo",
         startTimestamp: Math.floor(Date.now() / 1000)
     };
-    const path:any = document.location.pathname;
-    let PesquisaTexto:any;
-    let UsuarioTexto:any;
-    var OrdenarTexto:any;
-    let GeneroTexto:any;
+    const path :any = document.location.pathname;
+    let PesquisaTexto :any;
+    let UsuarioTexto :any;
+    let OrdenarTexto :any;
+    let OrdenarTextoObra :any;
+    let GeneroTexto :any;
     let StatusContaTexto: any;
-    let BlogText:any;
-    let opcaoLeitor:any;
-    let tipoObra:any;
-    let generoObra:any;
-    let spanObra:any;
-    let nomeObra:any;
-    let nomeObraLeitor:any;
-    let capituloLeitor:any;
-    let paginaLeitor:any;
-    let postagemData:any;
+    let BlogText :any;
+    let opcaoLeitor :any;
+    let tipoObra :any;
+    let generoObra :any;
+    let spanObra :any;
+    let nomeObra :any;
+    let nomeObraLeitor :any;
+    let capituloLeitor :any;
+    let paginaLeitor :any;
+    let postagemData :any;
     if (path.startsWith('/newsite/') || path.startsWith('/newsite')) {
         if(path == '/newsite/' || path == '/newsite') {
             if (document.title.includes('Resultados da pesquisa por')) {
@@ -43,10 +44,11 @@ presence.on("UpdateData", async () => {
                 presenceData.state = 'Ordenar por: ' + OrdenarTexto.innerText;
             }
         } else if (path.includes('/manga-genre/')) {
+            OrdenarTextoObra = document.querySelector("body > div.wrap > div > div.site-content > div.c-page-content.style-1 > div > div > div > div.main-col.col-md-8.col-sm-8 > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active");
             GeneroTexto = document.querySelector("body > div.wrap > div > div.site-content > div.c-page-content.style-1 > div > div > div > div.main-col.col-md-8.col-sm-8 > div.main-col-inner > div > div.entry-header > div > div > h1");
             presenceData.details = 'Gênero: ' + GeneroTexto.innerText;
             if (document.querySelector("body > div.wrap > div > div.site-content > div.c-page-content.style-1 > div > div > div > div.main-col.col-md-8.col-sm-8 > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active")) {
-                presenceData.state = 'Ordenar por: ' + OrdenarTexto.innerText;
+                presenceData.state = 'Ordenar por: ' + OrdenarTextoObra.innerText;
             }
         } else if (path.includes('/user-settings/')) {
             StatusContaTexto = document.querySelector("#post-11 > div.entry-content > div > div > div.col-md-3.col-sm-3 > div > ul > li.active");
@@ -93,6 +95,6 @@ presence.on("UpdateData", async () => {
     } else {
         presence.setTrayTitle();
         presence.setActivity();
-    };
+    }
     presence.setActivity(presenceData);
 });
