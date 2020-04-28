@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 
     }
     if (path.startsWith("/champion")){
-      let string = path.replace("/champion/", "")
+      let string = path.replace("/champion/", "");
       presenceData.details = "Checking Runes";
       presenceData.state = string;
       presenceData.startTimestamp = time;
