@@ -13,9 +13,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Listening to: " + songName.innerText;
     presenceData.state = "by: " + artistName.innerText;
   } else {
-    presenceData.startTimestamp == browsingStamp;
     presenceData.details = "Can't read page";
-    presenceData.state = browsingStamp
   }
 
   if (presenceData.details == null) {
