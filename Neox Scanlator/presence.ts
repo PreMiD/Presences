@@ -7,23 +7,23 @@ presence.on("UpdateData", async () => {
         largeImageKey: "logo",
         startTimestamp: Math.floor(Date.now() / 1000)
     };
-    const path : any = document.location.pathname;
-    let PesquisaTexto : any;
-    let UsuarioTexto : any;
-    let OrdenarTexto : any;
-    let OrdenarTextoObra : any;
-    let GeneroTexto : any;
-    let StatusContaTexto : any;
-    let BlogText : any;
-    let opcaoLeitor : any;
-    let tipoObra : any;
-    let generoObra : any;
-    let spanObra : any;
-    let nomeObra : any;
-    let nomeObraLeitor : any;
-    let capituloLeitor : any;
-    let paginaLeitor : any;
-    let postagemData : any;
+    const path: any = document.location.pathname;
+    let PesquisaTexto: any;
+    let UsuarioTexto: any;
+    let OrdenarTexto: any;
+    let OrdenarTextoObra: any;
+    let GeneroTexto: any;
+    let StatusContaTexto: any;
+    let BlogText: any;
+    let opcaoLeitor: any;
+    let tipoObra: any;
+    let generoObra: any;
+    let spanObra: any;
+    let nomeObra: any;
+    let nomeObraLeitor: any;
+    let capituloLeitor: any;
+    let paginaLeitor: any;
+    let postagemData: any;
     if (path.startsWith('/newsite/') || path.startsWith('/newsite')) {
         if(path == '/newsite/' || path == '/newsite') {
             if (document.title.includes('Resultados da pesquisa por')) {
