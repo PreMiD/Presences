@@ -1,11 +1,11 @@
 var presence = new Presence({
-  clientId: "704186478410072065",
+  clientId: "704186478410072065"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var title;
 presence.on("UpdateData", async () => {
   const presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   if (document.location.pathname == "/home/foryou") {
     presenceData.details = "Viewing SiriusXM Home";
