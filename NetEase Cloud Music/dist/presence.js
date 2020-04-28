@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
   const presenceData = {
     largeImageKey: "logo"
   };
-  if (document.location.pathname == "/#") {
+  if (document.location.pathname == "/") {
     songName = document.querySelector("a.f-thide.name.fc1.f-fl");
     artistName = document.querySelector("span.by.f-thide.f-fl");
     presenceData.details = "Listening to: " + songName.innerText;
