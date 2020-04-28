@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     const data = {
         largeImageKey: "animesoul",
         startTimestamp: 1577232000,
-        details: "Viewing home page",
+        details: "Viewing home page"
     };
     if (document.location.pathname == "/" ||
         document.location.pathname == "/home/") {
