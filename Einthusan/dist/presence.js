@@ -58,8 +58,10 @@ presence.on("UpdateData", async() => {
 
     // Watching Movie 
     else if(document.location.pathname.indexOf("/movie/watch/") == 0){
-	    title = document.querySelector("#UIMovieSummary > ul > li > div.block2 > a > h3").textContent;
-        director = document.querySelector("#UIMovieSummary > ul > li > div.block2 > div.professionals > div:nth-child(12) > div.prof > p").textContent;
+        title = document.querySelector("#UIMovieSummary > ul > li > div.block2 > a > h3").textContent;
+        var container_div = document.querySelector("div.professionals");
+        var count = container_div.getElementsByTagName('div').length;
+        director = document.querySelector("div.professionals > div:nth-child(" + (count - (count/3)) + " ) > div.prof > p").textContent;
         video = document.querySelector("#icons-and-text > div#play.show");
         var start = document.querySelector("#controlbar > div.durations > div.watched-duration").textContent;
         var end = document.querySelector("#controlbar > div.durations > div.content-duration").textContent;
