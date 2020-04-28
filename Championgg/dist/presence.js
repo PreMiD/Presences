@@ -27,7 +27,7 @@ var presence = new Presence({
       presence.setActivity(data);
     }
     if (path.startsWith("/champion")){
-      let string = path.replace("/champion/", "")
+      let string = path.replace("/champion/", "");
       data.details = "Checking Runes";
       data.state = string;
       data.startTimestamp = time;
