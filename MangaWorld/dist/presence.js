@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     const data = {
         largeImageKey: "mwnew"
     };
-    if (document.location.href == "https://mangaworld.biz/") {
+    if (document.location.href == "https://mangaworld.tv/") {
         data.smallImageKey = "search";
         data.smallImageText = "Homepage";
         data.details = "Navigando...";
