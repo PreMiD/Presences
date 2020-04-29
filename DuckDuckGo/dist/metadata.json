@@ -8,10 +8,89 @@
     "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs."
   },
   "service": "DuckDuckGo",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "logo": "https://i.imgur.com/zl3jobl.png",
   "thumbnail": "https://i.imgur.com/VlPQGur.png",
   "color": "#FF5900",
   "tags": ["internet", "browing", "search"],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+        "id": "homepageMessage",
+        "title": "Homepage Message",
+        "icon": "fas fa-home",
+        "value": "Chilling on the homepage",
+        "placeholder": "Chilling on the homepage"
+    },
+    {
+        "id": "settingsMessage",
+        "title": "Settings Message",
+        "icon": "fas fa-cogs",
+        "value": "Changing my settings!",
+        "placeholder": "Changing my settings!"
+    },
+    {
+        "id": "standardSearch",
+        "title": "Standard Search Format",
+        "icon": "fas fa-search",
+        "value": "Searching the interwebz for %search%",
+        "placeholder": "Searching the interwebz for %search%"
+    },
+    {
+        "id": "mapSearch",
+        "title": "Map Search Format",
+        "icon": "fas fa-map",
+        "value": "Examining the map for %search%",
+        "placeholder": "Examining the map for %search%"
+    },
+    {
+        "id": "videoSearch",
+        "title": "Video Search Format",
+        "icon": "fas fa-video",
+        "value": "Probing videos for %search%",
+        "placeholder": "Probing videos for %search%"
+    },
+    {
+        "id": "newsSearch",
+        "title": "News Search Format",
+        "icon": "fas fa-newspaper",
+        "value": "Inquiring the news about %search%",
+        "placeholder": "Inquiring the news about %search%"
+    },
+    {
+        "id": "meaningsSearch",
+        "title": "Meanings Search Format",
+        "icon": "fas fa-book",
+        "value": "Reading the meanings for %search%",
+        "placeholder": "Reading the meanings for %search%"
+    },
+    {
+        "id": "definitionSearch",
+        "title": "Definition Search Format",
+        "icon": "fas fa-atlas",
+        "value": "Reading the definition for %search%",
+        "placeholder": "Reading the definition for %search%"
+    },
+    {
+        "id": "shoppingSearch",
+        "title": "Shopping Search Format",
+        "icon": "fas fa-shopping-bag",
+        "value": "Browsing the shops for %search%",
+        "placeholder": "Browsing the shops for %search%"
+    },
+    {
+        "id": "recipeSearch",
+        "title": "Recipe Search Format",
+        "icon": "fas fa-utensils",
+        "value": "Finding some yummy recipies for %search%",
+        "placeholder": "Finding some yummy recipies for %search%"
+    },
+    {
+        "id": "stockSearch",
+        "title": "Stock Search Format",
+        "icon": "fas fa-money-bill-wave-alt",
+        "value": "Inspecting %content%'s stock",
+        "placeholder": "Inspecting %content%'s stock"
+    }
+  ]
 }
