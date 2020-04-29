@@ -1,4 +1,4 @@
-var presence = new Presence({
+var presence = new presence({
     clientId: "702375041320484944"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -21,13 +21,7 @@ function getSeconds(videoTime: string, videoDuration: string): any{
 
 presence.on("UpdateData", async() => {
     var presenceData = {
-        largeImageKey: "logo",
-        details: "",
-        startTimestamp: 0,
-        smallImageKey: "",
-        smallImageText: "",
-        state: "",
-        endTimestamp: 0
+        largeImageKey: "logo"
     };
     /* TODO:
     1. Check if the Movie Variables is Nessisary
