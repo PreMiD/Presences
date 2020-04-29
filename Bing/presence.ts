@@ -15,6 +15,13 @@ presence.on("UpdateData", async () => {
   }
 
   /**
+   * Get amount of results from query.
+   */
+  function queryResults(): HTMLElement {
+      return document.getElementsByClassName("sb_count")[0] as HTMLElement;
+  }
+
+  /**
    * Sets the timestamp.
    */
   function setTimestamp(): number {
@@ -53,6 +60,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = await handleFormatting("newsSearch");
     } else {
       presenceData.details = await handleFormatting("standardSearch");
+      presenceData.state = queryResults().innerText;
     }
   }
 
