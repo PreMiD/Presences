@@ -22,6 +22,7 @@ presence.on("UpdateData", async () => {
     let nomeObra: any;
     let nomeObraLeitor: any;
     let capituloLeitor: any;
+    let seasonLeitor: any;
     let paginaLeitor: any;
     let postagemData: any;
     if (path.startsWith('/newsite/') || path.startsWith('/newsite')) {
@@ -71,16 +72,27 @@ presence.on("UpdateData", async () => {
                     presenceData.state = nomeObra.innerText;
                 }
             } else if (path.includes('capitulo') && document.title.includes('Capítulo')) {
+                seasonLeitor = document.querySelector("body > div.wrap > div > div.site-content > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.select-view > div.c-selectpicker.selectpicker_volume > label > select");
                 paginaLeitor = document.getElementById("single-pager");
                 capituloLeitor = document.querySelector("body > div.wrap > div > div.site-content > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li.active");
                 nomeObraLeitor = document.querySelector("body > div.wrap > div > div.site-content > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.entry-header_wrap > div > div.c-breadcrumb > ol > li:nth-child(3) > a");
                 opcaoLeitor = document.querySelector("body > div.wrap > div > div.site-content > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.select-view > div.c-selectpicker.selectpicker_load > label > select > option[selected='selected']");
                 if(opcaoLeitor.innerText == "Paginação") {
-                    presenceData.details = nomeObraLeitor.innerText;
-                    presenceData.state =  capituloLeitor.innerText + ' | ' + (paginaLeitor.selectedIndex + 1) + '/' + (paginaLeitor[0].innerText.slice(paginaLeitor[0].innerText.search('/') + 1,  paginaLeitor[0].innerText.search('/') + 6 ));
+                    if (seasonLeitor != null) {
+                        presenceData.details = nomeObraLeitor.innerText + ' | ' + seasonLeitor[seasonLeitor.selectedIndex].innerText;
+                        presenceData.state =  capituloLeitor.innerText + ' | ' + (paginaLeitor.selectedIndex + 1) + '/' + (paginaLeitor[0].innerText.slice(paginaLeitor[0].innerText.search('/') + 1,  paginaLeitor[0].innerText.search('/') + 6 ));
+                    } else {
+                        presenceData.details = nomeObraLeitor.innerText;
+                        presenceData.state =  capituloLeitor.innerText + ' | ' + (paginaLeitor.selectedIndex + 1) + '/' + (paginaLeitor[0].innerText.slice(paginaLeitor[0].innerText.search('/') + 1,  paginaLeitor[0].innerText.search('/') + 6 ));
+                    }
                 } else {
-                    presenceData.details = nomeObraLeitor.innerText;
-                    presenceData.state = paginaLeitor.innerText + ' | Longstripe';
+                    if (seasonLeitor != null) {
+                        presenceData.details = nomeObraLeitor.innerText + seasonLeitor[seasonLeitor.selectedIndex].innerText;
+                        presenceData.state = paginaLeitor.innerText + ' | Longstripe';
+                    } else {
+                        presenceData.details = nomeObraLeitor.innerText;
+                        presenceData.state = paginaLeitor.innerText + ' | Longstripe';
+                    }
                 }
             }
         } else if (document.querySelector("div.entry-header > div > div.entry-meta > div.post-on") !== null) {
