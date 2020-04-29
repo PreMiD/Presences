@@ -3,16 +3,15 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "logo"
   };
 
   /**
    * Get search query from HTML form input.
    */
-  function searchQuery(): string {
-    return (<HTMLInputElement>document.getElementById("search_form_input"))
-      .value;
+  function searchQuery(): HTMLInputElement {
+    return (document.getElementById("search_form_input") as HTMLInputElement);
   }
 
   /**
@@ -27,9 +26,9 @@ presence.on("UpdateData", async () => {
    * @param {String} settingName Name of the setting
    * @param {String} content Optional - Replaces %content% with this input
    */
-  async function handleFormatting(settingName: string, content?: string) {
+  async function handleFormatting(settingName: string, content?: string): Promise<string> {
     const setting = await presence.getSetting(settingName);
-    if (!content) return setting.replace("%search%", searchQuery());
+    if (!content) return setting.replace("%search%", searchQuery().value);
     return setting.replace("%content%", content);
   }
 
