@@ -1,9 +1,5 @@
 var presence = new Presence({
     clientId: "704186478410072065" //The client ID of the Application created at https://discordapp.com/developers/applications
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
   });
 
 let channelName: any,
