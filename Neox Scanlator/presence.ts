@@ -1,7 +1,6 @@
 var presence = new Presence({
     clientId: "704585837949747330"
 });
-
 presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
         largeImageKey: "logo",
@@ -15,7 +14,7 @@ presence.on("UpdateData", async () => {
     let GeneroTexto: any;
     let StatusContaTexto: any;
     let BlogText: any;
-    let opcaoLeitor: any;
+    let opcaoLeitor: any;   
     let tipoObra: any;
     let generoObra: any;
     let spanObra: any;
@@ -85,13 +84,13 @@ presence.on("UpdateData", async () => {
                         presenceData.details = nomeObraLeitor.innerText;
                         presenceData.state =  capituloLeitor.innerText + ' | ' + (paginaLeitor.selectedIndex + 1) + '/' + (paginaLeitor[0].innerText.slice(paginaLeitor[0].innerText.search('/') + 1,  paginaLeitor[0].innerText.search('/') + 6 ));
                     }
-                } else {
+                } else if (opcaoLeitor.innerText == "Longstripe") {
                     if (seasonLeitor != null) {
                         presenceData.details = nomeObraLeitor.innerText + seasonLeitor[seasonLeitor.selectedIndex].innerText;
-                        presenceData.state = paginaLeitor.innerText + ' | Longstripe';
+                        presenceData.state = capituloLeitor.innerText + ' | Longstripe';
                     } else {
                         presenceData.details = nomeObraLeitor.innerText;
-                        presenceData.state = paginaLeitor.innerText + ' | Longstripe';
+                        presenceData.state = capituloLeitor.innerText + ' | Longstripe';
                     }
                 }
             }
