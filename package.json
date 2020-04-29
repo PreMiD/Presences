@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",
-    "@types/node": "^13.13.2",
+    "@types/node": "^13.13.4",
     "@types/prettier": "^2.0.0",
     "@types/semver": "^7.1.0",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
@@ -28,7 +28,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@types/chrome": "^0.0.104",
-    "@types/mongodb": "^3.5.10"
+    "@types/chrome": "^0.0.106",
+    "@types/mongodb": "^3.5.14"
   }
 }

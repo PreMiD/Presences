@@ -1,5 +1,4 @@
 name: DePloY
-
 on:
   push:
     branches:
@@ -9,10 +8,10 @@ on:
       - "**.js"
       - "**.json"
       - "**.yml"
-
 jobs:
   UpdatePresences:
     runs-on: ubuntu-18.04
+    if: github.repository_owner == 'PreMiD'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
