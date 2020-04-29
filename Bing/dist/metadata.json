@@ -19,22 +19,22 @@
         "id": "homepageMessage",
         "title": "Homepage Message",
         "icon": "fas fa-home",
-        "value": "Chilling on the homepage",
-        "placeholder": "Chilling on the homepage"
+        "value": "Viewing the homepage",
+        "placeholder": "Viewing the homepage"
     },
     {
         "id": "settingsMessage",
         "title": "Settings Message",
         "icon": "fas fa-cogs",
         "value": "Changing my settings!",
-        "placeholder": "Changing my settings!"
+        "placeholder": "Changing my settings"
     },
     {
         "id": "standardSearch",
         "title": "Standard Search Format",
         "icon": "fas fa-search",
-        "value": "Searching the interwebz for %search%",
-        "placeholder": "Searching the interwebz for %search%"
+        "value": "Searching for %search%",
+        "placeholder": "Searching for %search%"
     },
     {
         "id": "imageSearch",
