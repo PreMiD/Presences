@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "704186478410072065" //The client ID of the Application created at https://discordapp.com/developers/applications
+    clientId: "704186478410072065"
   });
 
 let channelName: any,
