@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
                     }
                 } else if (opcaoLeitor.innerText == "Longstripe") {
                     if (seasonLeitor != null) {
-                        presenceData.details = nomeObraLeitor.innerText + seasonLeitor[seasonLeitor.selectedIndex].innerText;
+                        presenceData.details = nomeObraLeitor.innerText + ' | ' + seasonLeitor[seasonLeitor.selectedIndex].innerText;
                         presenceData.state = capituloLeitor.innerText + ' | Longstripe';
                     } else {
                         presenceData.details = nomeObraLeitor.innerText;
