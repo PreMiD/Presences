@@ -27,7 +27,10 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname.includes("/home/")) {
     presenceData.details = "Browsing...";
   } else if (document.location.pathname.includes("/detail/")) {
-    const video: HTMLVideoElement = document.querySelector("video");
+    let video: HTMLVideoElement = document.querySelector("video");
+    if (isNaN(video.duration)) {
+      video = document.querySelector("video:nth-child(2)");
+    }
     const title: HTMLElement = document.querySelector(
       "div.center > div > div.title"
     );
