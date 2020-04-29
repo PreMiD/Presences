@@ -218,7 +218,7 @@ async function handleWebClient() {
     case "settings/subtitles.html": // subtitles
     case "settings/profile.html": // profile
     case "settings/password.html": // password
-    case "settings/keyboard.html": // keyboard and remote 
+    case "settings/keyboard.html": // keyboard and remote
       presenceData.state = "On user preferences";
       break;
 
