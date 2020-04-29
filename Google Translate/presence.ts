@@ -2,7 +2,7 @@ var presence = new Presence({
   clientId: "705033229719175179"
 });
 
-function languageCode(language: String): String {
+function languageCode(language: string): string {
   switch (language) {
     case "ar":
       return "Arabic";
