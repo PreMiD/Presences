@@ -20,7 +20,7 @@ function getSeconds(videoTime: string, videoDuration: string): any{
 }
 
 presence.on("UpdateData", async() => {
-    var presenceData: presenceData = {
+    const presenceData: presenceData = {
         largeImageKey: "logo"
     };
     /* TODO:
