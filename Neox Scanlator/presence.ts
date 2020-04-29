@@ -63,13 +63,13 @@ presence.on("UpdateData", async () => {
             if ((path.split('/').length - 1) == 4) {
                 tipoObra = document.querySelector("body > div.wrap > div > div.site-content > div > div.profile-manga > div > div > div > div.tab-summary > div.summary_content_wrap > div > div.post-content > div:nth-child(9) > div.summary-content");
                 generoObra = document.querySelector("body > div.wrap > div > div.site-content > div > div.profile-manga > div > div > div > div.c-breadcrumb-wrapper > div > ol > li:nth-child(3) > a");
-                presenceData.details = tipoObra.innerText + ' | ' + generoObra.innerText;    
+                presenceData.state = tipoObra.innerText + ' | ' + generoObra.innerText;    
                 nomeObra= document.querySelector("body > div.wrap > div > div.site-content > div > div.profile-manga > div > div > div > div.post-title > h1");
                 spanObra = document.querySelector("body > div.wrap > div > div.site-content > div > div.profile-manga > div > div > div > div.post-title > h1 > span");
                 if (spanObra != null) {
-                    presenceData.state = nomeObra.innerText.replace(spanObra.innerText, '');
+                    presenceData.details = nomeObra.innerText.replace(spanObra.innerText, '');
                 } else {
-                    presenceData.state = nomeObra.innerText;
+                    presenceData.details = nomeObra.innerText;
                 }
             } else if (path.includes('capitulo') && document.title.includes('Capítulo')) {
                 seasonLeitor = document.querySelector("body > div.wrap > div > div.site-content > div > div > div > div > div > div > div.c-blog-post > div.entry-header.header > div > div.select-view > div.c-selectpicker.selectpicker_volume > label > select");
