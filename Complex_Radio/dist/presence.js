@@ -36,7 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 var presence = new Presence({ clientId: "705189441484095508" });
-var ssong, slisteners, spresenter, strack;
+var ssong, slisteners, spresenter;
+setInterval(newStats, 2500);
+newStats();
 function newStats() {
     return __awaiter(this, void 0, void 0, function () {
         var data;
@@ -55,19 +57,18 @@ function newStats() {
         });
     });
 }
-setInterval(newStats, 2500);
-newStats();
+;
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
-    var stamp, info;
+    var stamp, details;
     return __generator(this, function (_a) {
         stamp = Math.floor(Date.now());
-        info = {
+        details = {
             largeImageKey: "complexlogo",
             details: spresenter + " \u2022 " + (slisteners || "Loading statistics"),
             state: "" + (ssong || "Loading song"),
             startTimestamp: stamp
         };
-        presence.setActivity(info);
+        presence.setActivity(details);
         return [2 /*return*/];
     });
 }); });
