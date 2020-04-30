@@ -1,6 +1,6 @@
 var presence = new Presence({ clientId: "705189441484095508" });
 
-var ssong, slisteners, spresenter, strack;
+var ssong, slisteners, spresenter;
 
 async function newStats() {
     var data = await window
