@@ -1,6 +1,6 @@
 var presence = new Presence({ clientId: "705189441484095508" });
 
-const ssong, slisteners, spresenter, strack;
+var ssong, slisteners, spresenter, strack;
 
 setInterval(newStats, 2500);
 newStats();
