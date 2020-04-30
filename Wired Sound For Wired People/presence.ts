@@ -1,11 +1,11 @@
-let presence = new Presence({
+var presence = new Presence({
     clientId: "705212564669202443"
   });
   
-  let elapsed = Math.floor(Date.now() / 1000);
+  var elapsed = Math.floor(Date.now() / 1000);
   
   presence.on("UpdateData", async () => {
-    let presenceData = {
+    var presenceData = {
       largeImageKey: "logo",
       startTimestamp: elapsed,
       details: location.href.split(location.host)[1]
