@@ -12,6 +12,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
+        function varb(t) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
@@ -29,10 +30,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     if (t[2]) _.ops.pop();
                     _.trys.pop(); continue;
             }
+            
             op = body.call(thisArg, _);
         } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
+}
 };
 var _this = this;
 var presence = new Presence({ clientId: "705189441484095508" });
