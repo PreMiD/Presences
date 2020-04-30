@@ -3,16 +3,36 @@
     "name": "GURRMAN375D",
     "id": "446528923535278082"
   },
-  "url": "vidstreaming.io",
+  "service": "Vidstreaming",
   "description": {
     "en": "Vidstreaming is a website where you can find the latest anime released."
   },
-  "service": "Vidstreaming",
-  "version": "1.0.1",
+  "url": "vidstreaming.io",
+  "version": "2.0.0",
   "logo": "https://i.imgur.com/pFcvvz9.png",
   "thumbnail": "https://i.imgur.com/xRsdose.png",
-  "color": "#020116",
-  "tags": ["anime", "video", "streaming"],
+  "color": "#ff9200",
+  "tags": ["anime","video","streaming"],
   "category": "anime",
-  "iframe": true
+  "iframe": true,
+  "settings": [
+        {
+            "id": "sSI",
+            "title": "Show Site Info",
+            "icon": "fas fa-info",
+            "value": true
+        },
+        {
+            "id": "sTE",
+            "title": "Show Time Elapsed",
+            "icon": "fas fa-clock",
+            "value": true
+        },
+        {
+          "id": "sVT",
+          "title": "Show Video Time",
+          "icon": "fas fa-clock",
+          "value": true
+      }          
+    ]
 }
