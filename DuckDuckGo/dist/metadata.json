@@ -75,8 +75,8 @@
         "id": "recipeSearch",
         "title": "Recipe Search Format",
         "icon": "fas fa-utensils",
-        "value": "Finding some yummy recipies for %search%",
-        "placeholder": "Finding some yummy recipies for %search%"
+        "value": "Finding recipes for %search%",
+        "placeholder": "Finding recipes for %search%"
     },
     {
         "id": "definitionSearch",
