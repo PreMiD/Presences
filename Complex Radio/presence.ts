@@ -2,10 +2,6 @@ var presence = new Presence({ clientId: "705189441484095508" });
 
 var ssong, slisteners, spresenter, strack;
 
-setInterval(newStats, 2500);
-newStats();
-
-
 async function newStats() {
     const data = await window
         .fetch("https://radio.complexr.pw/api/nowplaying/1")
@@ -14,6 +10,9 @@ async function newStats() {
     spresenter = data.live.is_live ? "Presenter " + data.live.streamer_name : "AutoDJ";
     slisteners = data.listeners.unique + " Listeners";
 }
+
+setInterval(newStats, 2500);
+newStats();
 
 presence.on("UpdateData", () => {
     const stamp = Math.floor(Date.now());
