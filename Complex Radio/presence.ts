@@ -12,7 +12,7 @@ async function newStats() {
 }
 
 setInterval(newStats, 2500);
-newStats();
+await newStats();
 
 presence.on("UpdateData", async () => {
     const stamp = Math.floor(Date.now());

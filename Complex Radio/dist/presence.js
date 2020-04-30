@@ -56,7 +56,7 @@ function newStats() {
     });
 }
 setInterval(newStats, 2500);
-newStats();
+await newStats();
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
     var stamp, info;
     return __generator(this, function (_a) {
