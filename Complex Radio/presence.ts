@@ -14,7 +14,7 @@ async function newStats() {
 setInterval(newStats, 2500);
 newStats();
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
     const stamp = Math.floor(Date.now());
     const info: presenceData = {
         largeImageKey: "complexlogo",
