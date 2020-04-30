@@ -9,7 +9,7 @@ strings = presence.getStrings({
 
 
 var iFrameVideo, currentTime, duration, paused;
-var video, videoDuration, videoCurrentTime;
+var video;
 var lastPlaybackState = null;
 var playback;
 var title;
@@ -77,7 +77,7 @@ presence.on("UpdateData", async() => {
         }
         //Used for the video files (Needs some work done here)
         else if(document.location.pathname.includes("/videos/")){
-            title = document.querySelector("#main_bg > div:nth-child(5) > div > div.video-info-left > h1")
+            title = document.querySelector("#main_bg > div:nth-child(5) > div > div.video-info-left > h1");
             if (title != null){
                 presenceData.state = title.innerText;
                 if (iFrameVideo == true && !isNaN(duration) && title != null && video != null) {
@@ -127,9 +127,8 @@ presence.on("UpdateData", async() => {
         }
 }
 else{
-
     presence.setActivity(presenceData);
-    return
+    return;
 }
 
     if (presenceData.details == null) {
