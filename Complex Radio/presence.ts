@@ -2,7 +2,7 @@ var presence = new Presence({ clientId: "705189441484095508" });
 
 var ssong, slisteners, spresenter;
 
-async function newStats():void {
+async function newStats(): void {
     var data = await window
         .fetch("https://radio.complexr.pw/api/nowplaying/1")
         .then((res) => res.json());
