@@ -7,11 +7,11 @@ strings = presence.getStrings({
     pause: "presence.playback.paused"
 });
 var iFrameVideo, currentTime, duration, paused;
-var video, videoDuration, videoCurrentTime;
+var video;
 var lastPlaybackState = null;
 var playback;
 var browsingStamp = Math.floor(Date.now() / 1000);
-var title,command;
+var title;
 
 
 presence.on("iFrameData", (data) => {
@@ -42,12 +42,12 @@ presence.on("UpdateData", async() => {
         }
     }
     if (elapsed){
-        var browsingStamp = Math.floor(Date.now() / 1000);
+        browsingStamp = Math.floor(Date.now() / 1000);
         console.log("Elapsed is on");
     }
 
     var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-    var presenceData:presenceData = {
+    var presenceData: presenceData = {
         largeImageKey: "logo"
 
     };
@@ -135,7 +135,7 @@ presence.on("UpdateData", async() => {
     }
     else{
         presence.setActivity(presenceData);
-        return
+        return;
     }
     if (presenceData.details == null) {
         //This will fire if you do not set presence details
