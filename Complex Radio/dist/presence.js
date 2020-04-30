@@ -35,9 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var presence = new Presence({ clientId: "705189441484095508" });
-var ssong, slisteners, spresenter, strack;
-setInterval(newStats, 2500);
-newStats();
+var ssong, slisteners, spresenter;
 function newStats() {
     return __awaiter(this, void 0, void 0, function () {
         var data;
@@ -56,6 +54,8 @@ function newStats() {
         });
     });
 }
+setInterval(newStats, 2500);
+newStats();
 presence.on("UpdateData", function () {
     var stamp = Math.floor(Date.now());
     var info = {
