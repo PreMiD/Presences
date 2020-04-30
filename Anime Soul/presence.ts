@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = browsingStamp;
         data.details = "Playing Mini Games";
     }
-
+    
     /// Anime Soul community section ///
     else if (document.location.pathname.includes("/creators")) {
         data.startTimestamp = browsingStamp;
