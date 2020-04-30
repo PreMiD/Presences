@@ -15,13 +15,12 @@ setInterval(newStats, 2500);
 newStats();
 
 presence.on("UpdateData", async () => {
-    return;
     var stamp = Math.floor(Date.now());
-    const details: presenceData = {
+    const info: presenceData = {
         largeImageKey: "complexlogo",
         details: `${spresenter} • ${slisteners || "Loading statistics"}`,
         state: `${ssong || "Loading song"}`,
         startTimestamp: stamp
     };
-    presence.setActivity(details);
+    presence.setActivity(info);
 });
