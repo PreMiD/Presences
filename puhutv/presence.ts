@@ -21,10 +21,9 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", async () => {
-  const category =
-    document.querySelector(
-      "#widget_serie_contents_3 > section > div > div > div.category-main-content-right > header > h1 > strong"
-    ) as HTMLElement;
+  const category = document.querySelector(
+    "#widget_serie_contents_3 > section > div > div > div.category-main-content-right > header > h1 > strong"
+  ) as HTMLElement;
 
   if (
     document.location.pathname == "/" ||
@@ -38,9 +37,9 @@ presence.on("UpdateData", async () => {
       state: category && category.innerHTML ? category.innerHTML : "Ana Sayfa"
     });
   } else {
-    const video =
-      document.querySelector("#dyg_player_dogusPlayer_html5_api") as
-      HTMLVideoElement;
+    const video = document.querySelector(
+      "#dyg_player_dogusPlayer_html5_api"
+    ) as HTMLVideoElement;
 
     if (!video) return;
     else {
@@ -75,11 +74,9 @@ presence.on("UpdateData", async () => {
                 document.querySelector(
                   "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
                 )
-                  ? (
-                      document.querySelector(
-                        "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
-                      ) as any
-                    ).innerText.replace("\n", ": ")
+                  ? (document.querySelector(
+                      "#widget_serie_detail_tab_5 > section > div > div > div > div.kunye-content-left > div:nth-child(3)"
+                    ) as any).innerText.replace("\n", ": ")
                   : null
               }`,
         smallImageKey: video.paused ? "paused" : "playing",

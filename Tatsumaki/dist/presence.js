@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "652773935829614592",
+  clientId: "652773935829614592"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   const browsingStamp = Math.floor(Date.now() / 1000);
   if (window.location.pathname.endsWith("about")) {

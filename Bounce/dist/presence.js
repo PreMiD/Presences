@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
     details: `Streaming to ${slisteners} listeners`,
     state: `${strack || "Loading"} - ${sartist || "Loading"}`,
     smallImageText: `${sdj || "Loading"} is live!`,
-    startTimestamp: stamp,
+    startTimestamp: stamp
   };
   if (sdj !== "AutoDJ") {
     info.smallImageKey = "bouncelive";

@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "653156362548805652" });
 const pages = {
   "/docs": "Documention",
-  "/login": "Login Page",
+  "/login": "Login Page"
 };
 
 presence.on("UpdateData", async () => {
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
 
   let data = {
     largeImageKey: "ap-logo_new",
-    startTimestamp: Math.floor(Date.now() / 1000),
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
 
   if (pages[page] || pages[page.slice(0, -1)]) {

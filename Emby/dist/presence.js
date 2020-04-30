@@ -13,7 +13,7 @@ const PRESENCE_ART_ASSETS = {
   play: "play",
   read: "reading",
   search: "search",
-  write: "writing",
+  write: "writing"
 };
 
 // generic log style for PMD_[info|error|success] calls
@@ -96,7 +96,7 @@ async function init() {
 
   if (validPage) {
     presence = new Presence({
-      clientId: "671807692297207828",
+      clientId: "671807692297207828"
     });
 
     presence.on("UpdateData", updateData);
@@ -105,7 +105,7 @@ async function init() {
 init();
 
 let presenceData = {
-  largeImageKey: PRESENCE_ART_ASSETS.logo,
+  largeImageKey: PRESENCE_ART_ASSETS.logo
 };
 
 let ApiClient;
@@ -202,30 +202,31 @@ async function handleWebClient() {
     case "startup/forgotpassword.html":
       presenceData.state = "Logging in";
       break;
-    case "home.html":
+    case "home":
       presenceData.state = "At home";
       break;
-    case "search/search.html":
+    case "search":
       presenceData.state = "Searching";
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.search;
       break;
 
     // user preferences
-    case "settings/settings.html":
+    case "settings":
     case "settings/display.html": // display
     case "settings/homescreen.html": // home screen
     case "settings/playback.html": // playback
     case "settings/subtitles.html": // subtitles
     case "settings/profile.html": // profile
     case "settings/password.html": // password
+    case "settings/keyboard.html": // keyboard and remote
       presenceData.state = "On user preferences";
       break;
 
     // admin dashboard
-    case "dashboard.html":
+    case "dashboard":
     // server section
     case "dashboardgeneral.html": // general
-    case "users/users.html": // user profiles
+    case "users": // user profiles
     case "useredit.html": // editing user profile
     case "userlibraryaccess.html": // editing user library access
     case "userparentalcontrol.html": // editing user parental control
@@ -233,13 +234,13 @@ async function handleWebClient() {
     case "supporterkey.html": // emby premiere key
     case "librarysetup/library.html": // managing library
     case "librarysetup/advanced.html": // managing library advanced
-    case "network/network.html": // network section
-    case "encodingsettings.html": // transcode settings
+    case "network": // network section
+    case "transcoding": // transcode settings
     case "syncactivity.html": // conversions && downloads
     case "syncsettings.html": // conversions settings
     case "configurationpage": // generic config page
     // devices section
-    case "devices/devices.html": // devices
+    case "devices": // devices
     case "devices/device.html": // editing device
     case "devices/cameraupload.html": // camera upload
     // live tv section
@@ -248,34 +249,34 @@ async function handleWebClient() {
     case "livetvsetup/guideprovider.html": // add/manage tv guide provider
     case "livetvsetup/livetvsettings.html": // live tv settings (dvr)
     // advanced section
-    case "logs/logs.html": // logs
+    case "logs": // logs
     case "notificationsettings.html": // notification settings
     case "plugins/plugins.html": // plugins
     case "plugins/plugincatalog.html": // plugins catalog
     case "plugins/addplugin.html": // add plugin
-    case "scheduledtasks/scheduledtasks.html": // scheduled tasks
-    case "scheduledtasks/scheduledtask.html": // scheduled task settings
-    case "apikeys/apikeys.html": // api keys
+    case "scheduledtasks": // scheduled tasks
+    case "scheduledtask": // scheduled task settings
+    case "apikeys": // api keys
       presenceData.state = "On admin dashboard";
       break;
 
-    case "movies/movies.html":
+    case "movies":
       presenceData.state = "Browsing movies";
       break;
 
-    case "tv/tv.html":
+    case "tv":
       presenceData.state = "Browsing tv series";
       break;
 
-    case "music/music.html":
+    case "music":
       presenceData.state = "Browsing music";
       break;
 
-    case "edititemmetadata.html":
+    case "metadatamanager":
       presenceData.state = "Editing media metadata";
       break;
 
-    case "item/item.html":
+    case "item":
       await handleItemDetails();
       break;
 
@@ -312,7 +313,7 @@ async function handleVideoPlayback() {
 
   // title on the osdControls
   let osdParentTitleElem = videoPlayerPage.querySelector(
-    "h1.videoOsdParentTitle"
+    "h2.videoOsdParentTitle"
   );
 
   // media metadata
@@ -333,7 +334,7 @@ async function handleVideoPlayback() {
   } else {
     // simulate the expected data
     mediaInfo = {
-      Type: "TvChannel",
+      Type: "TvChannel"
     };
   }
 
@@ -443,8 +444,8 @@ async function obtainMediaInfo(itemId) {
   fetch(`/emby/Users/${getUserId()}/Items/${itemId}`, {
     credentials: "include",
     headers: {
-      "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`,
-    },
+      "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
+    }
   })
     .then((resp) => resp.json())
     .then((json) => {

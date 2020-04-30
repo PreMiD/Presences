@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "687070418804408445", //The client ID of the Application created at https://discordapp.com/developers/applications
+  clientId: "687070418804408445" //The client ID of the Application created at https://discordapp.com/developers/applications
 });
 
 presence.on("UpdateData", async () => {
@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
       details: `${document.querySelector("div.mod-active").innerText}`,
       state: `${document.querySelector(".location-info-location").innerText}`,
       largeImageKey: "bigglobe",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);

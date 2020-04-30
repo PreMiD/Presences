@@ -12,7 +12,7 @@ var presence = new Presence({
     paused: true
   };
 
-  /**
+/**
  * Get Timestamps
  * @param {Number} videoTime Current video time seconds
  * @param {Number} videoDuration Video duration seconds
@@ -26,7 +26,7 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-presence.on("iFrameData", data => {
+presence.on("iFrameData", (data) => {
   video = data;
 });
 

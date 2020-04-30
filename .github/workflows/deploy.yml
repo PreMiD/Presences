@@ -10,7 +10,8 @@ on:
       - "**.yml"
 jobs:
   UpdatePresences:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
+    if: github.repository_owner == 'PreMiD'
     steps:
       - name: Checkout Project
         uses: actions/checkout@v2
@@ -25,10 +26,12 @@ jobs:
           key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
       - name: Install Deps
         run: yarn
+      - name: Compile Script
+        run: yarn pu:compile
       - name: Update Presences
         env:
           MONGO_IP: ${{ secrets.MONGO_IP }}
           MONGO_USERNAME: ${{ secrets.MONGO_USERNAME }}
           MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
           GHTOKEN: ${{ secrets.GHTOKEN }}
-        run: node presenceUpdater.js
+        run: yarn pu

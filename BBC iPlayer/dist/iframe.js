@@ -9,8 +9,8 @@ presence.on("UpdateData", async () => {
           iFrameVideo: true,
           currTime: video.currentTime,
           dur: video.duration,
-          paused: video.paused,
-        },
+          paused: video.paused
+        }
       });
     }
   }

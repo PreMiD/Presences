@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "655480486046466098",
+  clientId: "655480486046466098"
 });
 
 presence.on("UpdateData", () => {
@@ -11,7 +11,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "gly-logo",
       details: "Ana Sayfa",
       state: "Gönderilere bakıyor...",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
 
@@ -23,13 +23,13 @@ presence.on("UpdateData", () => {
       largeImageKey: "gly-logo",
       details: "Bir haber okuyor:",
       state: title ? title.textContent : "Bilinmeyen",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   } else if (page.startsWith("/news") && page.length <= "/news".length + 1) {
     presence.setActivity({
       largeImageKey: "gly-logo",
       details: "Haberlere göz atıyor...",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
 
@@ -38,7 +38,7 @@ presence.on("UpdateData", () => {
     presence.setActivity({
       largeImageKey: "gly-logo",
       details: "Şarkılara göz atıyor...",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   } else if (page.startsWith("/play")) {
     let artist = document.querySelector(
@@ -55,7 +55,7 @@ presence.on("UpdateData", () => {
           ? `${artist.textContent} - ${song.textContent}`
           : "Bilinmeyen",
       smallImageKey: "play-bt",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
 
@@ -64,7 +64,7 @@ presence.on("UpdateData", () => {
     presence.setActivity({
       largeImageKey: "gly-logo",
       details: "Keşfet bölümünde...",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
 
@@ -73,7 +73,7 @@ presence.on("UpdateData", () => {
     presence.setActivity({
       largeImageKey: "gly-logo",
       details: "Bildirimlerine göz atıyor...",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
 
@@ -83,70 +83,70 @@ presence.on("UpdateData", () => {
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Profil ayarlarında",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
     } else if (page == "/settings-bio")
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Hesap ayarlarında",
         state: "Bir ayar yapıyor: Biyografi",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
     else if (page == "/settings-avatar")
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Hesap ayarlarında",
         state: "Bir ayar yapıyor: Profil fotoğrafı",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
     else if (page == "/settings-exinfo")
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Hesap ayarlarında",
         state: "Bir ayar yapıyor: Ekstra bilgiler",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
     else if (page == "/settings-links")
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Profil ayarlarında",
         state: "Bir ayar yapıyor: Bağlantılar",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
     else if (page == "/settings-view")
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Profil ayarlarında",
         state: "Bir ayar yapıyor: Görünüm",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
     else if (page == "/settings-mail")
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Profil ayarlarında",
         state: "Bir ayar yapıyor: Mail",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
     else if (page == "/settings-password")
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Profil ayarlarında",
         state: "Bir ayar yapıyor: Parola",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
     else if (page == "/settings-privacy")
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Profil ayarlarında",
         state: "Bir ayar yapıyor: Gizlilik",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
     else if (page == "/settings-language")
       presence.setActivity({
         largeImageKey: "gly-logo",
         details: "Profil ayarlarında",
         state: "Bir ayar yapıyor: Dil",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
       });
   }
 
@@ -164,7 +164,7 @@ presence.on("UpdateData", () => {
       details: "Bir profile göz atıyor:",
       state: profile ? profile.textContent : "Bilinmeyen",
       smallImageText: profile ? page.substring(0) : "Bilinmeyen",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
 
@@ -177,7 +177,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "gly-logo",
       details: "Bir gönderiye göz atıyor,",
       state: profile ? "Gönderen: @" + profile.textContent : "Bilinmeyen",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
 
@@ -188,7 +188,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "gly-logo",
       details: "Server Error: 404",
       state: "Sayfa bulunamadı.",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
   if (page.startsWith("/403")) {
@@ -196,7 +196,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "gly-logo",
       details: "Server Error: 403",
       state: "Yasaklı bölge!",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
   if (page.startsWith("/503") || page.startsWith("/500")) {
@@ -204,7 +204,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "gly-logo",
       details: "Server Error: " + page.substring(1),
       state: "Sunucuya şu anda ulaşılamıyor.",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
   if (page.startsWith("/400")) {
@@ -212,7 +212,7 @@ presence.on("UpdateData", () => {
       largeImageKey: "gly-logo",
       details: "Server Error: 400",
       state: "Geçersiz istek.",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
 
@@ -221,7 +221,7 @@ presence.on("UpdateData", () => {
     presence.setActivity({
       largeImageKey: "gly-logo",
       details: "Giriş yapıyor...",
-      startTimestamp: browsingStamp,
+      startTimestamp: browsingStamp
     });
   }
 });

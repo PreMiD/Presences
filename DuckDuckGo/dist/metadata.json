@@ -8,14 +8,10 @@
     "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs."
   },
   "service": "DuckDuckGo",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/zl3jobl.png",
   "thumbnail": "https://i.imgur.com/VlPQGur.png",
   "color": "#FF5900",
-  "tags": [
-    "internet",
-    "browing",
-    "search"
-  ],
+  "tags": ["internet", "browing", "search"],
   "category": "other"
 }

@@ -11,8 +11,6 @@ var title2URL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
-    details: "In construction",
-    state: "-",
     largeImageKey: "logo"
   };
 

@@ -1,10 +1,10 @@
 var presence = new Presence({
-  clientId: "670612134878773297",
+  clientId: "670612134878773297"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   let data = {
-    largeImageKey: "canva",
+    largeImageKey: "canva"
   };
   if (document.location.pathname == "/") {
     (data.details = "In the Homepage"), (data.startTimestamp = browsingStamp);

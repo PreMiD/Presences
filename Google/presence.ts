@@ -22,8 +22,6 @@ var imgInput: any = document.querySelector("#REsRA");
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
-    details: "In construction",
-    state: "-",
     largeImageKey: "lg"
   };
 

@@ -48,16 +48,16 @@ presence.on("UpdateData", async () => {
       var duo = document.querySelector("#btn-start-mode-1");
       var squad = document.querySelector("#btn-start-mode-2");
 
-      solo.addEventListener("mousedown", function() {
+      solo.addEventListener("mousedown", function () {
         console.log("Works");
         value = "Solos: ";
       });
 
-      duo.addEventListener("mousedown", function() {
+      duo.addEventListener("mousedown", function () {
         value = "Duos: ";
       });
 
-      squad.addEventListener("mousedown", function() {
+      squad.addEventListener("mousedown", function () {
         value = "Squads: ";
       });
 

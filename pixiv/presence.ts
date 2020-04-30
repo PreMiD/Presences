@@ -189,11 +189,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/report")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing report";
-      presenceData.state = (
-        document.querySelector(
-          "#wrapper > div.layout-body > section.analytics-menu-unit > nav > span.label"
-        ) as HTMLElement
-      ).innerText;
+      presenceData.state = (document.querySelector(
+        "#wrapper > div.layout-body > section.analytics-menu-unit > nav > span.label"
+      ) as HTMLElement).innerText;
       //something
     } else if (document.location.pathname.includes("/group")) {
       presenceData.startTimestamp = browsingStamp;

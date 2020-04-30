@@ -34,10 +34,9 @@ function getTimestamps(
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
-    title =
-      document.querySelector(
-        "body > div.watch-page > div:nth-child(1) > div > div.col-md-7.col-xs-12.titles > h1"
-      ) as HTMLElement,
+    title = document.querySelector(
+      "body > div.watch-page > div:nth-child(1) > div > div.col-md-7.col-xs-12.titles > h1"
+    ) as HTMLElement,
     video = document.querySelector("video") as HTMLVideoElement;
 
   if (pages[page] || pages[page.slice(0, -1)]) {
@@ -48,10 +47,9 @@ presence.on("UpdateData", async () => {
       state: pages[page] || pages[page.slice(0, -1)]
     });
   } else if (page.includes("/liste/")) {
-    const listName =
-      document.querySelector(
-        "body > main > div.row.category-head > div > h2"
-      ) as HTMLElement;
+    const listName = document.querySelector(
+      "body > main > div.row.category-head > div > h2"
+    ) as HTMLElement;
 
     presence.setActivity({
       largeImageKey: "fm-logo",
@@ -63,10 +61,9 @@ presence.on("UpdateData", async () => {
           : "Belirsiz"
     });
   } else if (page.includes("/film-ara")) {
-    const searching =
-        document.querySelector(
-          "body > main > div.row.category-head > div > h2"
-        ) as HTMLElement,
+    const searching = document.querySelector(
+        "body > main > div.row.category-head > div > h2"
+      ) as HTMLElement,
       fixedSearching =
         searching && searching.textContent != ""
           ? searching.textContent.replace(/"/g, "").replace(" Sonuçları", "")
@@ -83,10 +80,9 @@ presence.on("UpdateData", async () => {
       smallImageKey: "search"
     });
   } else if (page.includes("/kategori/")) {
-    const categoryName =
-      document.querySelector(
-        "body > main > div.row.category-head > div:nth-child(1) > h2"
-      ) as HTMLElement;
+    const categoryName = document.querySelector(
+      "body > main > div.row.category-head > div:nth-child(1) > h2"
+    ) as HTMLElement;
 
     presence.setActivity({
       largeImageKey: "fm-logo",

@@ -8,10 +8,9 @@ var presence = new Presence({
 
 function getAuthorString(): string {
   //* Get authors
-  var authors =
-      document.querySelectorAll(
-        "span yt-formatted-string.ytmusic-player-bar a"
-      ) as NodeListOf<HTMLAnchorElement>,
+  var authors = document.querySelectorAll(
+      "span yt-formatted-string.ytmusic-player-bar a"
+    ) as NodeListOf<HTMLAnchorElement>,
     authorsArray: Array<HTMLAnchorElement>,
     authorString: string;
 
@@ -36,10 +35,9 @@ function getAuthorString(): string {
   }
   //* If from default YouTube music return Uploader
   else
-    authorString = (
-      document.querySelector("span yt-formatted-string.ytmusic-player-bar") as
-      HTMLAnchorElement
-    ).innerText;
+    authorString = (document.querySelector(
+      "span yt-formatted-string.ytmusic-player-bar"
+    ) as HTMLAnchorElement).innerText;
 
   return authorString;
 }
@@ -59,9 +57,9 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", async () => {
-  var title = (
-      document.querySelector(".ytmusic-player-bar.title") as HTMLElement
-    ).innerText,
+  var title = (document.querySelector(
+      ".ytmusic-player-bar.title"
+    ) as HTMLElement).innerText,
     video = document.querySelector(".video-stream") as HTMLVideoElement;
 
   if (title !== "" && !isNaN(video.duration)) {
