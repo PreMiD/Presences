@@ -3,7 +3,7 @@ var presence = new Presence({ clientId: "705189441484095508" });
 var ssong, slisteners, spresenter;
 
 async function newStats() {
-    const data = await window
+    var data = await window
         .fetch("https://radio.complexr.pw/api/nowplaying/1")
         .then((res) => res.json());
     ssong = data.now_playing.song.text;
@@ -12,10 +12,10 @@ async function newStats() {
 }
 
 setInterval(newStats, 2500);
-await newStats();
+newStats();
 
 presence.on("UpdateData", async () => {
-    const stamp = Math.floor(Date.now());
+    var stamp = Math.floor(Date.now());
     const info: presenceData = {
         largeImageKey: "complexlogo",
         details: `${spresenter} • ${slisteners || "Loading statistics"}`,
