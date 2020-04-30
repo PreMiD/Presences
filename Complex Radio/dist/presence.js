@@ -58,16 +58,18 @@ function newStats() {
 setInterval(newStats, 2500);
 newStats();
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
-    var stamp, info;
-    return __generator(this, function (_a) {
-        stamp = Math.floor(Date.now());
-        info = {
+    function stats() {
+        var stamp = Math.floor(Date.now());
+        var info = {
             largeImageKey: "complexlogo",
             details: spresenter + " \u2022 " + (slisteners || "Loading statistics"),
             state: "" + (ssong || "Loading song"),
             startTimestamp: stamp
         };
         presence.setActivity(info);
+    }
+    return __generator(this, function (_a) {
+        ;
         return [2 /*return*/];
     });
 }); });
