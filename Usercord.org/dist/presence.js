@@ -1,15 +1,15 @@
 var presence = new Presence({
-    clientId: "661150919584514067",
+    clientId: "661150919584514067"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   if (document.location.hostname == "usercord.org") {
     presenceData.details = "Viewing Page:";

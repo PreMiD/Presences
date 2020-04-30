@@ -1,5 +1,5 @@
 let presence = new Presence({
-  clientId: "639208971806310441",
+  clientId: "639208971806310441"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   let presenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp,
-    state: document.getElementById("page-title").textContent.trim(),
+    state: document.getElementById("page-title").textContent.trim()
   };
 
   if (document.location.hostname == "scp-int.wikidot.com")

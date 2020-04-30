@@ -1,15 +1,15 @@
 var presence = new Presence({
-    clientId: "655050505726197781",
+    clientId: "655050505726197781"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "probot",
+    largeImageKey: "probot"
   };
   if (document.location.hostname == "probot.io") {
     presenceData.startTimestamp = browsingStamp;

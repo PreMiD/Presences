@@ -1,15 +1,15 @@
 var presence = new Presence({
-    clientId: "660822610090655755",
+    clientId: "660822610090655755"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo1",
+    largeImageKey: "logo1"
   };
   if (document.location.hostname == "iloot.it") {
     presenceData.startTimestamp = browsingStamp;

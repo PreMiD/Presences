@@ -1,23 +1,39 @@
 {
   "author": {
-    "name": "Callum",
-    "id": "506899274748133376"
+    "name": "Bas950",
+    "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Callum",
+      "id": "506899274748133376"
+    }
+  ],
   "service": "Google Translate",
   "description": {
-    "en": "Google Translate is a free multilingual machine translation service developed by Google, to translate text. It offers a website interface, mobile apps for Android and iOS, and an API that helps developers build browser extensions and software applications. ",
-    "ga_IE": "Is seirbhís aistriúcháin meaisín ilteangach saor in aisce é Google Translate a d'fhorbair Google, chun téacs a aistriú. Tairgeann sé comhéadan gréasáin, apps soghluaiste do Android agus iOS, agus API a chuidíonn le forbróirí síntí bhrabhsálaí agus feidhmchláir bhogearraí a thógáil."
+    "en": "Google's free service instantly translates words, phrases, and web pages between English and over 100 other languages.",
+    "nl": "De gratis service van Google kan woorden, zinnen en webpagina's onmiddellijk vertalen tussen het Engels en meer dan 100 andere talen.",
+    "ga_IE": "Aistríonn seirbhís saor in aisce Google focail, frásaí agus leathanaigh ghréasáin go tapa idir an Béarla agus níos mó ná 100 teanga eile."
   },
   "url": "translate.google.com",
-  "version": "1.3.0",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/d/db/Google_Translate_Icon.png",
-  "thumbnail": "https://downbeat.is-inside.me/MvMUM6FP.png",
-  "color": "#ae3484",
-  "tags": [
-    "random",
-    "translate",
-    "google",
-    "utility"
-  ],
-  "category": "other"
+  "version": "2.0.0",
+  "logo": "https://i.imgur.com/TblAuvW.png",
+  "thumbnail": "https://i.imgur.com/HSrkJq0.png",
+  "color": "#4c8bf5",
+  "tags": ["translate", "google", "utility"],
+  "category": "other",
+  "settings": [
+    {
+      "id": "type",
+      "title": "Show translation type",
+      "icon": "fas fa-info",
+      "value": false
+    },
+    {
+      "id": "stamp",
+      "title": "Show time elapsed",
+      "icon": "fas fa-stopwatch",
+      "value": true
+    }
+  ]
 }

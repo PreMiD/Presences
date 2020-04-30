@@ -1,11 +1,11 @@
 let presence = new Presence({
-  clientId: "645290651604221999",
+  clientId: "645290651604221999"
 });
 
 presence.on("UpdateData", () => {
   let presenceData = {
     largeImageKey: "itv_logo",
-    startTimestamp: new Date().getTime(),
+    startTimestamp: new Date().getTime()
   };
 
   const path = document.location.pathname;
@@ -72,7 +72,7 @@ presence.on("UpdateData", () => {
       name: document.getElementById("programme-title").innerText,
       episode: document
         .getElementsByClassName("episode-info__episode-title")[0]
-        .textContent.trim(),
+        .textContent.trim()
     };
 
     let video = document.getElementsByTagName("video")[0];

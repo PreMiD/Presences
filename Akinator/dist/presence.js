@@ -1,5 +1,5 @@
 let presence = new Presence({
-  clientId: "631543282601558046",
+  clientId: "631543282601558046"
 });
 
 presence.on("UpdateData", async () => {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
       details: "Starting Akinator",
       //largeImageKey: "banner",
       largeImageKey: "akinator",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
       details: "Selecting Theme",
       //largeImageKey: "banner",
       largeImageKey: "akinator",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);
@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
       state: `Selecting: ${hover != undefined ? hover : "Still Thinking"}`,
       //largeImageKey: "banner",
       largeImageKey: "akinator",
-      startTimestamp: elapsed,
+      startTimestamp: elapsed
     };
 
     presence.setActivity(presenceData);

@@ -19,6 +19,8 @@ function parseQueryString(queryString?: string): any {
   return params;
 }
 
+//var browsingStamp = Math.floor(Date.now()/1000);
+
 console.log(
   "%c RootMe Presence ",
   "background: #7289da; color: white; padding: 2px; border-radius: 50px",
@@ -36,12 +38,48 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Home";
     if (!parseQueryString(document.location.hash).page) {
       presenceData.state = "Watching home page";
-    } else {
+    } else if (parseQueryString(document.location.hash).page === "news") {
       presenceData.state = parseQueryString(document.location.hash).inc
         ? `Watching ${parseQueryString(document.location.hash).page} page (${
             document.querySelector("dl.tabs > dd.active").textContent
           } )`
         : `Watching ${parseQueryString(document.location.hash).page} page`;
+    } else if (parseQueryString(document.location.hash).page === "structure") {
+      if (
+        parseQueryString(document.location.hash).inc === "inclusions/services"
+      ) {
+        presenceData.state = document.querySelector(".row > h1").textContent;
+      } else {
+        presenceData.state = document.querySelector(
+          ".ajaxbloc > h1"
+        ).textContent;
+      }
+    } else if (parseQueryString(document.location.hash).page === "contact") {
+      presenceData.state = document.querySelector(".t-body > h1").textContent;
+    } else if (parseQueryString(document.location.hash).page === "plan") {
+      presenceData.state = document.querySelector(".t-body > h1").textContent;
+    } else if (parseQueryString(document.location.hash).page === "faq") {
+      presenceData.state = document.querySelector("h1.crayon").textContent;
+    }
+    presenceData.smallImageKey = "reading";
+    switch (
+      document.querySelector("img.grayscale").getAttribute("alt") ||
+      document.querySelector("img.grayscale").getAttribute("title")
+    ) {
+      case "fr":
+        presenceData.smallImageText = "Language : français";
+        break;
+      case "es":
+        presenceData.smallImageText = "Language : espanol";
+        break;
+      case "de":
+        presenceData.smallImageText = "Language : deutsch";
+        break;
+      case "en":
+        presenceData.smallImageText = "Language : english";
+        break;
+      default:
+        break;
     }
   } else if (document.location.pathname.includes("/Challenges/")) {
     presenceData.smallImageKey = "chall";

@@ -1,9 +1,9 @@
 var presence = new Presence({
-    clientId: "643159616498171934",
+    clientId: "643159616498171934"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var title;
@@ -11,9 +11,7 @@ var actionURL = new URL(document.location.href);
 var title2URL = new URL(document.location.href);
 presence.on("UpdateData", async () => {
   let presenceData = {
-    details: "In construction",
-    state: "-",
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   title = document.querySelector("h1#firstHeading.firstHeading");
   var actionResult = actionURL.searchParams.get("action");

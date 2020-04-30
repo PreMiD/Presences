@@ -1,6 +1,6 @@
 var iframe = new iFrame();
 
-setInterval(function() {
+setInterval(function () {
   if (document.location.hostname == "static.crunchyroll.com") {
     var video: HTMLVideoElement =
       document.querySelector("#player0") !== null

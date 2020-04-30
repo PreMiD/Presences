@@ -10,14 +10,10 @@
     "de": "Österreichische E-Sport Organisation"
   },
   "url": "www.t-k-a.at",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/gcFnh7F.png",
   "thumbnail": "https://i.imgur.com/ITEGdCB.png",
   "color": "#212121",
-  "tags": [
-    "TKA",
-    "e-sports",
-    "gaming"
-  ],
+  "tags": ["TKA", "e-sports", "gaming"],
   "category": "games"
 }

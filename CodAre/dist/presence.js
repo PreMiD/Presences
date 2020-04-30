@@ -1,15 +1,15 @@
 var presence = new Presence({
-    clientId: "655044555632148518",
+    clientId: "655044555632148518"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused",
+    pause: "presence.playback.paused"
   });
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   let presenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   if (document.location.hostname == "codare.org") {
     presenceData.startTimestamp = browsingStamp;

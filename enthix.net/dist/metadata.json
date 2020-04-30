@@ -8,13 +8,10 @@
     "en": "MultiPlatform Games Network"
   },
   "url": "enthix.net",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/pFmxUh4.png",
   "thumbnail": "https://i.imgur.com/QnDRaNN.png",
   "color": "#ff0000",
-  "tags": [
-    "Game",
-    "enthix.net"
-  ],
+  "tags": ["Game", "enthix.net"],
   "category": "games"
 }

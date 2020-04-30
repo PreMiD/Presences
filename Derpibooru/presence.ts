@@ -149,6 +149,6 @@ presence.on("UpdateData", async () => {
   presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", function(data) {
+presence.on("iFrameData", function (data) {
   console.log(data);
 });

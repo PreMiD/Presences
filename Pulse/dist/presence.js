@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "680160273474388014",
+  clientId: "680160273474388014"
 });
 var play, artist, track, title;
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -24,7 +24,7 @@ function newStats() {
 presence.on("UpdateData", () => {
   let presenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
   if (document.location.pathname.startsWith("/lite")) {
     play = document.querySelector(
