@@ -20,5 +20,19 @@
     "classroom",
     "other"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+        "id": "eSI",
+        "title": "Show Site Info",
+        "icon": "fas fa-info",
+        "value": true
+    },
+    {
+        "id": "eCI",
+        "title": "Show Class",
+        "icon": "fas fa-clock",
+        "value": true
+    }  
+]
 }
