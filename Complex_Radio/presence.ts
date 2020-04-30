@@ -15,6 +15,7 @@ setInterval(newStats, 2500);
 newStats();
 
 presence.on("UpdateData", async () => {
+    return;
     var stamp = Math.floor(Date.now());
     const details: presenceData = {
         largeImageKey: "complexlogo",

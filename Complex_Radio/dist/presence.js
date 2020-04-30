@@ -60,14 +60,6 @@ newStats();
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
     var stamp, details;
     return __generator(this, function (_a) {
-        stamp = Math.floor(Date.now());
-        details = {
-            largeImageKey: "complexlogo",
-            details: spresenter + " \u2022 " + (slisteners || "Loading statistics"),
-            state: "" + (ssong || "Loading song"),
-            startTimestamp: stamp
-        };
-        presence.setActivity(details);
         return [2 /*return*/];
     });
 }); });
