@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
    * Get amount of results from query.
    */
   function queryResults(): HTMLElement {
-      return document.getElementsByClassName("sb_count")[0] as HTMLElement;
+    return document.getElementsByClassName("sb_count")[0] as HTMLElement;
   }
 
   /**
