@@ -41,10 +41,9 @@ presence.on("UpdateData", async () => {
     if (
       video !== null &&
       title &&
-      (
-        document.querySelector(".loadingSpinner.whiteSpinner") as
-        HTMLButtonElement
-      ).style.cssText !== "display: inline;"
+      (document.querySelector(
+        ".loadingSpinner.whiteSpinner"
+      ) as HTMLButtonElement).style.cssText !== "display: inline;"
     ) {
       presenceData.details = title.textContent;
       if (
