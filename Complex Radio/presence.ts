@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
         details: `${spresenter} • ${slisteners || "Loading statistics"}`,
         state: `${ssong || "Loading song"}`,
         startTimestamp: stamp
-    };
+    }
     presence.setActivity(info);
 };
 });
