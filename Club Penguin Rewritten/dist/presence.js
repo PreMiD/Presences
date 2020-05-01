@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var presence = new Presence({
     clientId: "679008701063102512",
     mediaKeys: false
@@ -72,7 +63,7 @@ var script = document.createElement('script');
 script.setAttribute("id", "injectedscript-bart");
 script.textContent = actualCode;
 (document.head||document.documentElement).appendChild(script);
-presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
+presence.on("UpdateData", async () => {
   let currentParty = document.querySelector("#currentParty").textContent;
   let status = document.querySelector("#statuslabel").textContent;
   if (document.URL.includes("/#/")==false) {
