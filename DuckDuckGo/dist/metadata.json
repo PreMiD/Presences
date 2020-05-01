@@ -26,7 +26,7 @@
         "id": "settingsMessage",
         "title": "Settings Message",
         "icon": "fas fa-cogs",
-        "value": "Changing my settings!",
+        "value": "Changing my settings",
         "placeholder": "Changing my settings"
     },
     {
