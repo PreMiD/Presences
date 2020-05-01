@@ -942,4 +942,4 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data);
     }
   }
-}));
+});
