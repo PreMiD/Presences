@@ -24,11 +24,11 @@ console.warn = function() {
   console.logs.push(Array.from(arguments));
   console.stdwarn.apply(console, arguments);
 }
-console.log("Code injected by PreMiD!")
+console.stdlog("Code injected by PreMiD!")
 let repeatTimer = setInterval(function() {
   if (typeof console.logs == "object") {
     var filteredLogs = console.logs.filter(function(logEntry) {
-      return logEntry[0] == "onJoinRoom" || logEntry[0] == "AS3-BootLoader:" || logEntry[0] == "AS3-GameLoader:" || (logEntry[0] == "received shell error" && logEntry[1].includes("No world with the id of")) || logEntry[0] == "_global[net]" || logEntry[0].includes("clientManager	: new party");
+      return logEntry[0] == "onJoinRoom" || logEntry[0] == "AS3-BootLoader:" || logEntry[0] == "AS3-GameLoader:" || (logEntry[0] == "received shell error" && logEntry[1].includes("No world with the id of")) || logEntry[0] == "_global[net]" || (typeof logEntry[0]=="string" && logEntry[0].includes("clientManager	: new party"));
     });
     var lastLog = filteredLogs.slice(-1).pop();
     if (typeof lastLog !== "undefined") {
