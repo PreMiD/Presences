@@ -266,7 +266,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       };
       presence.setActivity(data);
     }
-    else if (status=="320") {
+    else if (status=="320"||status=="951") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -491,7 +491,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
       };
       presence.setActivity(data);
     }
-    else if (status=="812") {
+    else if (status=="812"||status=="953") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -935,7 +935,7 @@ presence.on("UpdateData", () => __awaiter(this, void 0, void 0, function* () {
     }
     else if (status.length<4&&!isNaN(status)) {
       let room = "In a Party Room";
-      // Party room IDs are 851-899.
+      // Party room IDs are 851-873 and 899.
       if (status=="854") {
         if (currentParty=="penguinawards") {room = "Limo";}
       }
