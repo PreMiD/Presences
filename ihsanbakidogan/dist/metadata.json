@@ -1,0 +1,28 @@
+{
+    "author": {
+        "name": "め Kerem",
+        "id": "665482610859966464"
+    },
+    "contributors": [
+        {
+            "name": "ピオ -> Cringe Here",
+            "id": "535214819520020510"
+        }
+    ],
+    "service": "ihsanbakidogan.com",
+    "description": {
+        "en": "This is the heart of my projects; the place where I keep and host most of them! Make sure to check this out if you want to know more about me!",
+        "tr": "Bu benim projelerimin kalbi; sakladığım ve çoğunu ağırladığım yer! Benim hakkımda daha fazla bilgi edinmek istiyorsanız bunu kontrol etmeyi unutmayın!"
+    },
+    "url": "ihsanbakidogan.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/SY56pdl.png",
+    "thumbnail": "https://i.imgur.com/N12U20i.png",
+    "color": "#7289da",
+    "tags": [
+        "ibd",
+        "ihsanbakidogan",
+        "blog"
+    ],
+    "category": "other"
+}
