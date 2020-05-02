@@ -1,0 +1,18 @@
+{
+  "author": {
+    "name": "MertBhey",
+    "id": "623932457401450496"
+  },
+  "service": "Simsek Bot",
+  "description": {
+    "tr": "Simsek Bot - Bir 'Premium' bottan daha fazlası...",
+    "en": "Simsek Bot - Better than a 'Premium' bot..."
+  },
+  "url": ["simsekbot.com","istatistik.simsekbot.com"],
+  "version": "1.0",
+  "logo": "https://i.hizliresim.com/KVnvkg.png",
+  "thumbnail": "https://i.hizliresim.com/KVnvkg.png",
+  "color": "#a50101",
+  "tags": ["bot", "simsek", "simsekbot", "turkish"],
+  "category": "other"
+}
