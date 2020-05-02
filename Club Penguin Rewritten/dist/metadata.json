@@ -5,13 +5,13 @@
   },
   "service": "Club Penguin Rewritten",
   "description": {
-    "en": "A new free virtual world based on Disney's Club Penguin with weeky updates. Waddle around and meet new friends!"
+    "en": "Waddle around and meet new friends!"
   },
   "url": "play.cprewritten.net",
-  "version": "3.0.2",
+  "version": "3.0.1",
   "logo": "https://i.imgur.com/NgaY1xR.jpg",
   "thumbnail": "https://i.imgur.com/kMkyWlg.png",
   "color": "#0F4D88",
-  "tags": ["club-penguin-rewritten", "club-penguin" ,"cp" ,"cpr" ,"games" ,"virtual-world"],
+  "tags": ["club penguin rewritten", "club penguin", "games"],
   "category": "games"
 }
