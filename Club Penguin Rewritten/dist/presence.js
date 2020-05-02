@@ -1,6 +1,5 @@
 var presence = new Presence({
-    clientId: "679008701063102512",
-    mediaKeys: false
+  clientId: "679008701063102512"
 });
 var elapsed = Math.floor(Date.now() / 1000);
 var actualCode = `
@@ -53,29 +52,28 @@ let repeatTimer = setInterval(function() {
   }
 },50);
 `;
-var statuslabel = document.createElement('p');
+var statuslabel = document.createElement("p");
 statuslabel.setAttribute("id", "statuslabel");
-(document.head||document.documentElement).appendChild(statuslabel);
-var currentPartyLabel = document.createElement('p');
+(document.head || document.documentElement).appendChild(statuslabel);
+var currentPartyLabel = document.createElement("p");
 currentPartyLabel.setAttribute("id", "currentParty");
-(document.head||document.documentElement).appendChild(currentPartyLabel);
-var script = document.createElement('script');
+(document.head || document.documentElement).appendChild(currentPartyLabel);
+var script = document.createElement("script");
 script.setAttribute("id", "injectedscript-bart");
 script.textContent = actualCode;
-(document.head||document.documentElement).appendChild(script);
+(document.head || document.documentElement).appendChild(script);
 presence.on("UpdateData", async () => {
   let currentParty = document.querySelector("#currentParty").textContent;
   let status = document.querySelector("#statuslabel").textContent;
-  if (document.URL.includes("/#/")==false) {
+  if (document.URL.includes("/#/") == false) {
     let data = {
       largeImageKey: "idlepuffle",
       details: "Viewing Homepage",
       startTimestamp: elapsed
     };
     presence.setActivity(data);
-  }
-  else if (document.URL.includes("/#/")) {
-    if (status=="") {
+  } else if (document.URL.includes("/#/")) {
+    if (status == "") {
       if (document.URL.includes("/#/login")) {
         let data = {
           largeImageKey: "cprlogo",
@@ -84,8 +82,7 @@ presence.on("UpdateData", async () => {
           startTimestamp: elapsed
         };
         presence.setActivity(data);
-      }
-      else if (document.URL.includes("/#/redeem")) {
+      } else if (document.URL.includes("/#/redeem")) {
         let data = {
           largeImageKey: "redeemred",
           details: "Redeeming a Code",
@@ -93,8 +90,7 @@ presence.on("UpdateData", async () => {
         };
         presence.setActivity(data);
       }
-    }
-    else if (status=="serverSelect") {
+    } else if (status == "serverSelect") {
       if (document.URL.includes("/#/login")) {
         let data = {
           largeImageKey: "cprlogo",
@@ -103,8 +99,7 @@ presence.on("UpdateData", async () => {
           startTimestamp: elapsed
         };
         presence.setActivity(data);
-      }
-      else if (document.URL.includes("/#/redeem")) {
+      } else if (document.URL.includes("/#/redeem")) {
         let data = {
           largeImageKey: "redeemred",
           details: "Redeeming a Code",
@@ -112,8 +107,7 @@ presence.on("UpdateData", async () => {
         };
         presence.setActivity(data);
       }
-    }
-    else if (status=="queued") {
+    } else if (status == "queued") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Logging In",
@@ -121,8 +115,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="100") {
+    } else if (status == "100") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -130,8 +123,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="110") {
+    } else if (status == "110") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -139,8 +131,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="111") {
+    } else if (status == "111") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -148,8 +139,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="120") {
+    } else if (status == "120") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -157,8 +147,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="121") {
+    } else if (status == "121") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -166,8 +155,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="122") {
+    } else if (status == "122") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -175,8 +163,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="130") {
+    } else if (status == "130") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -184,8 +171,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="200") {
+    } else if (status == "200") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -193,8 +179,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="212") {
+    } else if (status == "212") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -202,8 +187,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="213") {
+    } else if (status == "213") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -211,8 +195,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="220") {
+    } else if (status == "220") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -220,8 +203,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="221") {
+    } else if (status == "221") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -229,8 +211,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="230") {
+    } else if (status == "230") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -238,8 +219,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="300") {
+    } else if (status == "300") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -247,8 +227,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="310") {
+    } else if (status == "310") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -256,8 +235,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="320"||status=="951") {
+    } else if (status == "320" || status == "951") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -265,8 +243,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="321") {
+    } else if (status == "321") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -274,8 +251,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="322") {
+    } else if (status == "322") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -283,8 +259,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="323") {
+    } else if (status == "323") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -292,8 +267,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="330") {
+    } else if (status == "330") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -301,8 +275,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="340") {
+    } else if (status == "340") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -310,8 +283,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="400") {
+    } else if (status == "400") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -319,8 +291,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="410") {
+    } else if (status == "410") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -328,8 +299,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="411") {
+    } else if (status == "411") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -337,8 +307,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="420") {
+    } else if (status == "420") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -346,8 +315,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="421") {
+    } else if (status == "421") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -355,8 +323,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="422") {
+    } else if (status == "422") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -364,8 +331,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="423") {
+    } else if (status == "423") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -373,8 +339,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="800") {
+    } else if (status == "800") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -382,8 +347,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="801") {
+    } else if (status == "801") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -391,8 +355,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="802") {
+    } else if (status == "802") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -400,8 +363,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="803") {
+    } else if (status == "803") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -409,8 +371,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="804") {
+    } else if (status == "804") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -418,8 +379,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="805") {
+    } else if (status == "805") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -427,8 +387,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="806") {
+    } else if (status == "806") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -436,8 +395,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="807") {
+    } else if (status == "807") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -445,8 +403,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="808") {
+    } else if (status == "808") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -454,8 +411,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="809") {
+    } else if (status == "809") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -463,8 +419,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="810") {
+    } else if (status == "810") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -472,8 +427,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="811") {
+    } else if (status == "811") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -481,8 +435,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="812"||status=="953") {
+    } else if (status == "812" || status == "953") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -490,8 +443,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="813") {
+    } else if (status == "813") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -499,8 +451,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="814") {
+    } else if (status == "814") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -508,8 +459,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="815") {
+    } else if (status == "815") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -517,8 +467,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="816") {
+    } else if (status == "816") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -526,8 +475,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="817") {
+    } else if (status == "817") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -535,8 +483,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="818") {
+    } else if (status == "818") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -544,8 +491,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="819") {
+    } else if (status == "819") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -555,7 +501,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data);
     }
     //Games
-    else if (status=="900") {
+    else if (status == "900") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -563,8 +509,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="901") {
+    } else if (status == "901") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -572,8 +517,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="902") {
+    } else if (status == "902") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -581,8 +525,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="903") {
+    } else if (status == "903") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -590,8 +533,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="904") {
+    } else if (status == "904") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -599,8 +541,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="905") {
+    } else if (status == "905") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -608,8 +549,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="906") {
+    } else if (status == "906") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -617,8 +557,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="907") {
+    } else if (status == "907") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -626,8 +565,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="908") {
+    } else if (status == "908") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -635,8 +573,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="909") {
+    } else if (status == "909") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -644,8 +581,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="910") {
+    } else if (status == "910") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -653,8 +589,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="911") {
+    } else if (status == "911") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -662,8 +597,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="912") {
+    } else if (status == "912") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -671,8 +605,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="913") {
+    } else if (status == "913") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -680,8 +613,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="914") {
+    } else if (status == "914") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -689,8 +621,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="915") {
+    } else if (status == "915") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -698,8 +629,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="916") {
+    } else if (status == "916") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -707,8 +637,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="917"||status=="918"||status=="919") {
+    } else if (status == "917" || status == "918" || status == "919") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -716,8 +645,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="920") {
+    } else if (status == "920") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -725,8 +653,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="921") {
+    } else if (status == "921") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -734,8 +661,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="922") {
+    } else if (status == "922") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -743,8 +669,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="923") {
+    } else if (status == "923") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -752,8 +677,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="926") {
+    } else if (status == "926") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -761,8 +685,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="927") {
+    } else if (status == "927") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -770,8 +693,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="949") {
+    } else if (status == "949") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -779,8 +701,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="950") {
+    } else if (status == "950") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -788,8 +709,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="952") {
+    } else if (status == "952") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -797,8 +717,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="955") {
+    } else if (status == "955") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -806,8 +725,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="997") {
+    } else if (status == "997") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -815,8 +733,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="998") {
+    } else if (status == "998") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -824,8 +741,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="999") {
+    } else if (status == "999") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -833,8 +749,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="pufflescape") {
+    } else if (status == "pufflescape") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -842,8 +757,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="941") {
+    } else if (status == "941") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -851,8 +765,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="942") {
+    } else if (status == "942") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -860,8 +773,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="943") {
+    } else if (status == "943") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -869,8 +781,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="944") {
+    } else if (status == "944") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -878,8 +789,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="945") {
+    } else if (status == "945") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -887,8 +797,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="946") {
+    } else if (status == "946") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -896,8 +805,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="947") {
+    } else if (status == "947") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -905,8 +813,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status=="948") {
+    } else if (status == "948") {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -914,8 +821,7 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status.length>3&&!isNaN(status)) {
+    } else if (status.length > 3 && !isNaN(status)) {
       let data = {
         largeImageKey: "cprlogo",
         details: "Online",
@@ -923,15 +829,17 @@ presence.on("UpdateData", async () => {
         startTimestamp: elapsed
       };
       presence.setActivity(data);
-    }
-    else if (status.length<4&&!isNaN(status)) {
+    } else if (status.length < 4 && !isNaN(status)) {
       let room = "In a Party Room";
       // Party room IDs are 851-873 and 899.
-      if (status=="854") {
-        if (currentParty=="penguinawards") {room = "Limo";}
-      }
-      else if (status=="899") {
-        if (currentParty=="penguinawards") {room = "Backstage";}
+      if (status == "854") {
+        if (currentParty == "penguinawards") {
+          room = "Limo";
+        }
+      } else if (status == "899") {
+        if (currentParty == "penguinawards") {
+          room = "Backstage";
+        }
       }
       let data = {
         largeImageKey: "cprlogo",
