@@ -1,11 +1,11 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "706234362575847536"
 })
  
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  let presenceData = {
+  const presenceData = {
     largeImageKey: "simsekbot_logo"
   };
   if (document.location.hostname == "simsekbot.com" || document.location.hostname == "www.simsekbot.com") {  
