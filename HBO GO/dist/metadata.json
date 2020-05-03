@@ -18,9 +18,10 @@
     "hbogo.com.br",
     "hbogo.pl",
     "hbogo.cz",
-    "hbogo.sk"
+    "hbogo.sk",
+    "hbogola.com"
   ],
-  "version": "2.2.2",
+  "version": "2.2.3",
   "logo": "https://i.imgur.com/TTHQtBH.png",
   "thumbnail": "https://i.imgur.com/vvAp3GI.png",
   "color": "#011921",

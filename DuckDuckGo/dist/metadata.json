@@ -8,7 +8,7 @@
     "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs."
   },
   "service": "DuckDuckGo",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/zl3jobl.png",
   "thumbnail": "https://i.imgur.com/VlPQGur.png",
   "color": "#FF5900",
@@ -26,7 +26,7 @@
         "id": "settingsMessage",
         "title": "Settings Message",
         "icon": "fas fa-cogs",
-        "value": "Changing my settings!",
+        "value": "Changing my settings",
         "placeholder": "Changing my settings"
     },
     {
