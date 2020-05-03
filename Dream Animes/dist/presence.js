@@ -65,6 +65,9 @@ presence.on("UpdateData", () => {
       case "ova":
         type = "OVA ";
         break;
+      case "especial":
+        type = "Especial ";
+        break;
       case "filme":
         type = "Filme ";
         break;
