@@ -23,14 +23,12 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = time;
       presence.setActivity(presenceData);
 
-
   }
   else if (path.startsWith("/matchup")) {
       presenceData.details = "Analysing matchup";
       presenceData.state = "Preparing to fight";
       presenceData.startTimestamp = time;
       presence.setActivity(presenceData);
-
 
   }
   else if (path.startsWith("/champion")){
@@ -39,7 +37,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = name;
     presenceData.startTimestamp = time;
     presence.setActivity(presenceData);
-
 
   }
   else if (presenceData.details == null) {
