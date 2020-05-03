@@ -82,12 +82,21 @@ presence.on("UpdateData", () => {
     presenceData.details = "Olhando um Mangá:";
     presenceData.state = MangaName;
   } else if (pathName.startsWith("/leitor/") && !notfound) {
-    const manga = document.querySelector("b.f20").textContent;
-    const chapter = document
-      .querySelector("b.f14c")
-      .textContent.replace(" - ", ": ");
-    let page = document.querySelector("select.backgsla.frightrr")["value"];
-    isNaN(page) ? (page = "Páginas abertas") : (page = "Página " + page);
+    const qmanga = document.querySelector("b.f20");
+    const qchapter = document.querySelector("b.f14c");
+    const qpage = document.querySelector("select.backgsla.frightrr");
+    let manga = "...";
+    if (qmanga != null && qmanga.textContent.trim()) manga = qmanga.textContent;
+    let chapter = "...";
+    if (qchapter != null && qchapter.textContent.trim())
+      chapter = qchapter.textContent.replace(" - ", ": ");
+    let page = "...";
+    if (qpage != null && qpage["value"].trim()) {
+      page = qpage["value"];
+      isNaN(Number(page))
+        ? (page = "Páginas abertas")
+        : (page = "Página " + page);
+    }
     presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "reading";
     presenceData.details = manga;
