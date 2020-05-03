@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
   let presenceData = {
     largeImageKey: "simsekbot_logo"
   };
-  if (document.location.hostname == "simsekbot.com") {  
+  if (document.location.hostname == "simsekbot.com" || document.location.hostname == "www.simsekbot.com") {  
     if (document.location.pathname === "/") {
       presenceData.details = "Anasayfayı inceliyor.";
       presenceData.startTimestamp = browsingStamp;
