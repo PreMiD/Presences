@@ -1,71 +1,195 @@
-var presence = new Presence({
-    clientId: "674714012541386752",
-    mediaKeys: true
+const presence = new Presence({
+  clientId: "682781181863133220"
 });
 
-presence.on("UpdateData", () => {
-    let presenceData = {
-        largeImageKey: "logo"
+const browsingStamp = Math.floor(Date.now() / 1000);
+
+presence.on("UpdateData", async () => {
+  const presenceData = {
+    largeImageKey: "upbeat"
+  };
+
+  const paused = document
+    .querySelector("#radioPlayer > span > i")
+    .className.includes("fa-play");
+  const newsreporterapply =
+    document.querySelector("#modalmediaAppButton") !== null;
+  const partner = document.querySelector("#modalpartnerEnquiryButton") !== null;
+  const request = document.querySelector("#modalrequestFormModal") !== null;
+  const enquiry = document.querySelector("#modalcontactUsButton") !== null;
+  const djapply = document.querySelector("#modaldjAppButton") !== null;
+  const feedback = document.querySelector("#modalundefined") !== null;
+  const editingbio = document.querySelector("#accountBio") !== null;
+  const format1 = await presence.getSetting("sFormatNoDj1");
+  const format2 = await presence.getSetting("sFormatNoDj2");
+  const elapsed = await presence.getSetting("tElapsed");
+  const format = await presence.getSetting("sFormat");
+  const info = await presence.getSetting("sInfo");
+  const dj = await presence.getSetting("sDJ");
+  let djType;
+
+  if (elapsed) presenceData.startTimestamp = browsingStamp;
+
+  if (info) {
+    if (document.location.pathname.includes("/UpBeat.Home")) {
+      if (paused) {
+        presenceData.details = "Viewing the main page...";
+        presenceData.smallImageKey = "pause";
+        presenceData.smallImageText = format
+          .replace("%song%", document.querySelector(".stats-song").textContent)
+          .replace(
+            "%artist%",
+            document.querySelector(".stats-artist").textContent
+          );
+      } else {
+        if (document.querySelector(".stats-djName").textContent == "UpBeat") {
+          djType = "AutoDJ - ";
+        } else {
+          djType = "DJ: ";
+        }
+
+        presenceData.smallImageKey = "play";
+
+        if (dj) {
+          presenceData.details = format
+            .replace(
+              "%song%",
+              document.querySelector(".stats-song").textContent
+            )
+            .replace(
+              "%artist%",
+              document.querySelector(".stats-artist").textContent
+            );
+          presenceData.state =
+            djType + document.querySelector(".stats-djName").textContent;
+        } else {
+          presenceData.details = format1
+            .replace(
+              "%song%",
+              document.querySelector(".stats-song").textContent
+            )
+            .replace(
+              "%artist%",
+              document.querySelector(".stats-artist").textContent
+            );
+          presenceData.state = format2
+            .replace(
+              "%song%",
+              document.querySelector(".stats-song").textContent
+            )
+            .replace(
+              "%artist%",
+              document.querySelector(".stats-artist").textContent
+            );
+        }
+      }
+    } else if (document.location.pathname.includes("/News.Article")) {
+      presenceData.details =
+        "Reading article: " +
+        document.querySelector(".title").textContent.trim();
+      presenceData.state =
+        "Written by: " + document.querySelector(".info > a").textContent.trim();
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/Account.Profile")) {
+      presenceData.details = "Viewing profile of:";
+      presenceData.state = document.querySelector(
+        ".profileName > span"
+      ).textContent;
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/Account.Settings")) {
+      presenceData.details = "Changing their settings...";
+      presenceData.smallImageKey = "writing";
+    } else if (document.location.pathname.includes("/Radio.RecentlyPlayed")) {
+      presenceData.details = "Viewing the";
+      presenceData.state = "recently played songs";
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/UpBeat.AboutUs")) {
+      presenceData.details = "Reading about UpBeat";
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/UpBeat.OurAffiliates")) {
+      presenceData.details = "Viewing the";
+      presenceData.state = "UpBeat affiliates";
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/Community.Members")) {
+      let type = document
+        .querySelector("#mainContent > div.m-b-md.m-t-sm > ul > .active > a")
+        .textContent.toLowerCase();
+      if (type == "vip's") type = "VIP";
+      presenceData.details = "Viewing the";
+      presenceData.state = type + " members";
+      presenceData.smallImageKey = "reading";
+    } else if (document.querySelector(".bigTitle") !== null) {
+      let type = document.querySelector(".bigTitle").textContent.toLowerCase();
+      if (type == "faq's") type = "FAQ's";
+      presenceData.details = "Viewing the";
+      presenceData.state = type;
+      presenceData.smallImageKey = "reading";
     }
 
-    let request = document.querySelector("#modalrequestFormModal > div > div > div.modal-body.m-t-n-lg") !==null;
-    let feedback = document.querySelector("#modalundefined > div > div > div.blurBG.b0") !==null;
-    let djapply = document.querySelector("#modaldjAppButton > div > div") !==null;
-    let newsreporterapply = document.querySelector("#modalmediaAppButton > div > div > div.modal-body > form > div") !==null;
-    let editingbio = document.querySelector("#accountBio") !==null;
- if(request){
-    presenceData.details = "Sending UpBeat"
-    presenceData.state = "Request"
- } else if (feedback) {
-    presenceData.details = "Sending UpBeat"
-    presenceData.state = "Feedback"
-} else if (djapply) {
-    presenceData.details = "Applying For"
-    presenceData.state = "Radio Presenter"
-} else if (newsreporterapply) {
-    presenceData.details = "Applying For"
-    presenceData.state = "News Reporter"
-} else if (editingbio) {
-    presenceData.details = "Editing"
-    presenceData.state = "Profile Information"
+    if (request) {
+      presenceData.details = "Sending in a request...";
+      presenceData.smallImageKey = "writing";
+    } else if (feedback) {
+      presenceData.details = "Sending in feedback...";
+      presenceData.smallImageKey = "writing";
+    } else if (djapply) {
+      presenceData.details = "Applying for:";
+      presenceData.state = "Radio Presenter";
+      presenceData.smallImageKey = "writing";
+    } else if (newsreporterapply) {
+      presenceData.details = "Applying for:";
+      presenceData.state = "News Reporter";
+      presenceData.smallImageKey = "writing";
+    } else if (editingbio) {
+      presenceData.details = "Editing their bio";
+      presenceData.smallImageKey = "writing";
+    } else if (enquiry) {
+      presenceData.details = "Sending in a";
+      presenceData.state = "general enquiry";
+      presenceData.smallImageKey = "writing";
+    } else if (partner) {
+      presenceData.details = "Sending in a";
+      presenceData.state = "partner enquiry";
+      presenceData.smallImageKey = "writing";
+    }
+  } else {
+    if (document.querySelector(".stats-djName").textContent == "UpBeat") {
+      djType = "AutoDJ - ";
+    } else {
+      djType = "DJ: ";
+    }
 
- } else if (document.location.pathname.includes("/UpBeat")) {
-    let songArtist = document.querySelector("#stats > div > div.left.a > div.statbox.top.artist > div > span").innerHTML;
-    let songName = document.querySelector("#stats > div > div.left.a > div.statbox.bottom.song > div > span").innerHTML;
-    presenceData.details = songArtist.replace('&amp;', '&');
-    presenceData.state = songName.replace('&amp;', '&')
+    if (dj) {
+      presenceData.details = format
+        .replace("%song%", document.querySelector(".stats-song").textContent)
+        .replace(
+          "%artist%",
+          document.querySelector(".stats-artist").textContent
+        );
+      presenceData.state =
+        djType + document.querySelector(".stats-djName").textContent;
+    } else {
+      presenceData.details = format1
+        .replace("%song%", document.querySelector(".stats-song").textContent)
+        .replace(
+          "%artist%",
+          document.querySelector(".stats-artist").textContent
+        );
+      presenceData.state = format2
+        .replace("%song%", document.querySelector(".stats-song").textContent)
+        .replace(
+          "%artist%",
+          document.querySelector(".stats-artist").textContent
+        );
+    }
 
- } else  if (document.location.pathname.includes("/News.Article")) {
-    let article = document.querySelector("#mainContent > div > div:nth-child(1) > div.glassBox.p-n > div.articleHeader > div > div.col-md-8.col-xs-12 > div.titleContainer > div").innerHTML;
-    let author = document.querySelector("#mainContent > div > div:nth-child(1) > div.glassBox.p-n > div.articleHeader > div > div.col-md-8.col-xs-12 > div.info > a").textContent;
-    presenceData.details = "Article: " + article;
-    presenceData.state = "Made By: " + author;
-    presenceData.smallImageKey = "read";
-    presenceData.smallImageText = "Reading Article";
- 
-} else if (document.location.pathname.includes("/Account.Profile")) {
-    let porfile = document.querySelector("#mainContent > div > div.col-sm-12 > div.profileBanner > div.profileNameContainer > div > span").textContent;
-  let profile = document.querySelector("#mainContent > div > div.col-sm-12 > div.profileBanner > div.profileNameContainer > div > span").textContent;
-    presenceData.details = "Viewing "+ profile +" Profile"
-
-} else if (document.location.pathname.includes("/core")) {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = (document.title).slice(11);
-
-} else if (document.location.pathname.includes("/radio")) {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = (document.title).slice(11);
-
-} else if (document.location.pathname.includes("/news")) {
-    presenceData.details = "Viewing Page:";
-    presenceData.state = (document.title).slice(11);
-
- } else {
-    presenceData.details = "Viewing Page:";
-    pageName = (document.title).slice(9);
-    presenceData.state = pageName;
+    presenceData.smallImageKey = "play";
   }
 
-      presence.setActivity(presenceData);
-      presence.setTrayTitle();
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
 });

@@ -6,16 +6,14 @@
   "service": "Rocket League Garage",
   "description": {
     "en": "Worlds first fansite for Rocket League",
-    "nl": "'S Werelds eerste fansite voor Rocket League"
+    "nl": "'S Werelds eerste fansite voor Rocket League",
+    "zh_CN": "'世界第一火箭联盟狂热爱好者。"
   },
   "url": "rocket-league.com",
-  "version": "1.1",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/axSJ7wX.png",
   "thumbnail": "https://i.imgur.com/qu30NON.png",
   "color": "#6963b7",
-  "tags": [
-    "rocket league",
-    "trading"
-  ],
+  "tags": ["rocket league", "trading"],
   "category": "games"
 }

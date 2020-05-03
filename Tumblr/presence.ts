@@ -1,23 +1,14 @@
 var presence = new Presence({
-  clientId: "640963335826833418",
-  mediaKeys: false
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
+  clientId: "640963335826833418"
 });
 
-var browsingStamp = Math.floor(Date.now()/1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-var user : any;
-var title : any;
-var replace : any;
-var search : any;
+var user: any;
+var search: any;
 
 presence.on("UpdateData", async () => {
-
-
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "tumblr"
   };
 
@@ -25,13 +16,21 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
-    } else if (document.location.pathname.includes("/u/")){
+    } else if (document.location.pathname.includes("/u/")) {
       presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector("#container > div.page > div.main-wrap > div > section > header > h2");
+      user = document.querySelector(
+        "#container > div.page > div.main-wrap > div > section > header > h2"
+      );
       presenceData.details = "Viewing user:";
       presenceData.state = user.innerText;
-    } else if (document.querySelector("#container > div.page > div.main-wrap > div.profile > section > header > h2") !== null) {
-      user = document.querySelector("#container > div.page > div.main-wrap > div.profile > section > header > h2");
+    } else if (
+      document.querySelector(
+        "#container > div.page > div.main-wrap > div.profile > section > header > h2"
+      ) !== null
+    ) {
+      user = document.querySelector(
+        "#container > div.page > div.main-wrap > div.profile > section > header > h2"
+      );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing catagory:";
       presenceData.state = user.innerText;
@@ -86,35 +85,30 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reading chats";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/search")) {
-      search = document.querySelector("#search_actions_search > div.l-container.l-container--flex > div > div > div.search_sub_header > h1");
+      search = document.querySelector(
+        "#search_actions_search > div.l-container.l-container--flex > div > div > div.search_sub_header > h1"
+      );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for:";
       presenceData.state = search.textContent;
       presenceData.smallImageKey = "search";
     }
-  } else if (document.querySelector("#header > div.blog-title-wrapper.content > div > h1 > a") !== null) {
+  } else if (
+    document.querySelector(
+      "#header > div.blog-title-wrapper.content > div > h1 > a"
+    ) !== null
+  ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing user:";
-    presenceData.state = document.querySelector("#header > div.blog-title-wrapper.content > div > h1 > a").textContent;
+    presenceData.state = document.querySelector(
+      "#header > div.blog-title-wrapper.content > div > h1 > a"
+    ).textContent;
   }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
-    presence.setActivity()
+    presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
-
 });
-
-
-/**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
-function getTimestamps(videoTime: number, videoDuration: number) {
-var startTime = Date.now();
-var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
-}

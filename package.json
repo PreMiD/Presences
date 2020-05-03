@@ -2,15 +2,33 @@
   "name": "presences",
   "version": "2.0.0",
   "author": "Timeraa",
-  "license": "ISC",
+  "license": "MPL-2.0",
+  "scripts": {
+    "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
+    "qa": "node ./qualityAssurance.js",
+    "qa:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --inlineSourceMap ./qualityAssurance.ts",
+    "pu": "node ./presenceUpdater.js",
+    "pu:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --inlineSourceMap ./presenceUpdater.ts"
+  },
   "devDependencies": {
-    "axios": "0.19.2",
-    "mongodb": "3.5.2",
-    "typescript": "3.7.5"
+    "@types/glob": "^7.1.1",
+    "@types/node": "^13.13.4",
+    "@types/prettier": "^2.0.0",
+    "@types/semver": "^7.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "chalk": "^4.0.0",
+    "eslint": "^6.8.0",
+    "execa": "^4.0.0",
+    "glob": "^7.1.6",
+    "mongodb": "^3.5.6",
+    "prettier": "^2.0.5",
+    "semver": "^7.3.2",
+    "source-map-support": "^0.5.19",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@octokit/rest": "16.43.1",
-    "@types/chrome": "0.0.93",
-    "@types/mongodb": "3.3.16"
+    "@types/chrome": "^0.0.106",
+    "@types/mongodb": "^3.5.14"
   }
 }

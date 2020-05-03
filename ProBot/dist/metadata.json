@@ -7,16 +7,11 @@
   "description": {
     "en": "Welcome images, moderation, global levels, logs, high quality music and many many more!"
   },
-  "url": [
-    "probot.io"
-  ],
-  "version": "1.1",
+  "url": ["probot.io"],
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/Oq9jXbz.png",
   "thumbnail": "https://i.imgur.com/98zTh1t.png",
   "color": "#450F40",
-  "tags": [
-    "bot",
-    "discord"
-  ],
+  "tags": ["bot", "discord"],
   "category": "other"
 }

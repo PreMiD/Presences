@@ -1,26 +1,17 @@
-var iframe = new iFrame();
-iframe.on("UpdateData", () => {
-    if (document.querySelector("#myvideo") !== null) {
-    var anime = document.querySelector("#myvideo").textContent;
-        if (anime !== isNaN) {
-            if (anime.includes("PauseDuration")) {
-            var currentTime1 = anime.split("VideoCurrent Time ")[1].split("PauseDuration")[0];
-            var pause1 = anime.includes("PlayDuration");
+const iframe = new iFrame();
+iframe.on("UpdateData", async () => {
+    if (document.querySelector("video") !== null) {
+        const video = document.querySelector("video");
+        if (video != undefined && !isNaN(video.duration)) {
             iframe.send({
                 iframe_video: {
                     iFrameVideo: true,
-                    currTime: currentTime1,
-                    paused: pause1,
-            }});
-            } else if (anime.includes("PlayDuration")) {
-            var currentTime2 = anime.split("VideoCurrent Time ")[1].split("PlayDuration")[0];
-            var pause2 = anime.includes("PlayDuration");
-            iframe.send({
-                iframe_video: {
-                    iFrameVideo: true,
-                    currTime: currentTime2,
-                    paused: pause2,
-            }});
+                    currTime: video.currentTime,
+                    duration: video.duration,
+                    paused: video.paused
+                }
+            });
         }
     }
-}});
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWZyYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vaWZyYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sTUFBTSxHQUFHLElBQUksTUFBTSxFQUFFLENBQUM7QUFFNUIsTUFBTSxDQUFDLEVBQUUsQ0FBQyxZQUFZLEVBQUUsS0FBSyxJQUFJLEVBQUU7SUFDakMsSUFBSSxRQUFRLENBQUMsYUFBYSxDQUFDLE9BQU8sQ0FBQyxLQUFLLElBQUksRUFBRTtRQUM1QyxNQUFNLEtBQUssR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQzlDLElBQUksS0FBSyxJQUFJLFNBQVMsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEVBQUU7WUFDaEQsTUFBTSxDQUFDLElBQUksQ0FBQztnQkFDVixZQUFZLEVBQUU7b0JBQ1osV0FBVyxFQUFFLElBQUk7b0JBQ2pCLFFBQVEsRUFBRSxLQUFLLENBQUMsV0FBVztvQkFDM0IsUUFBUSxFQUFFLEtBQUssQ0FBQyxRQUFRO29CQUN4QixNQUFNLEVBQUUsS0FBSyxDQUFDLE1BQU07aUJBQ3JCO2FBQ0YsQ0FBQyxDQUFDO1NBQ0o7S0FDRjtBQUNILENBQUMsQ0FBQyxDQUFDIn0=

@@ -16,15 +16,25 @@
     "nl": "IFTTT, de eevoudigste manier om meer te doen met jou favorite apps en devices, helemaal gratis! Maak uw huis relaxter. Maak uw werk productiever. Houd uw gegevens privé en veilig."
   },
   "url": [
-      "ift.tt",
-      "ifttt.com",
-      "help.ifttt.com",
-      "platform.ifttt.com"
+    "ift.tt",
+    "ifttt.com",
+    "help.ifttt.com",
+    "platform.ifttt.com"
   ],
-  "version": "1.0",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/1d8TEw1.png",
   "thumbnail": "https://i.imgur.com/oHMcwT3.png",
   "color": "#0d99fd",
-  "tags": ["if", "this", "than", "that", "app", "device", "work", "together", "connect"],
+  "tags": [
+    "if",
+    "this",
+    "than",
+    "that",
+    "app",
+    "device",
+    "work",
+    "together",
+    "connect"
+  ],
   "category": "other"
 }

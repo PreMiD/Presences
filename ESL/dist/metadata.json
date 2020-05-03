@@ -25,13 +25,10 @@
     "intelgrandslam.eslgaming.com",
     "www.schulmeisterschaft.de"
   ],
-  "version": "2.2.6",
+  "version": "2.3.1",
   "logo": "https://i.imgur.com/wKmn7nB.png",
   "thumbnail": "https://i.imgur.com/76vHTIg.png",
   "color": "#46afe4",
-  "tags": [
-    "gaming",
-    "eSport"
-  ],
+  "tags": ["gaming", "eSport"],
   "category": "games"
 }

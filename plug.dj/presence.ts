@@ -1,15 +1,16 @@
 var presence = new Presence({
-  clientId: "475590192464396288",
-  mediaKeys: false
+  clientId: "475590192464396288"
 });
 
 presence.on("UpdateData", async () => {
-  if(document.getElementsByClassName("community__name")[0]) {
-    let testPresenceData: presenceData = {
-      details: document.getElementsByClassName("community__name")[0].textContent,
-      state: document.getElementsByClassName("community__song-playing")[0].textContent,
+  if (document.getElementsByClassName("community__name")[0]) {
+    const testPresenceData: presenceData = {
+      details: document.getElementsByClassName("community__name")[0]
+        .textContent,
+      state: document.getElementsByClassName("community__song-playing")[0]
+        .textContent,
       largeImageKey: "pdjlogo"
-    }
+    };
     presence.setActivity(testPresenceData);
   }
 });

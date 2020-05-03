@@ -1,13 +1,6 @@
-import * as Octokit from "@octokit/rest";
-import axios from "axios";
+import "source-map-support/register";
 import { connect, MongoClient } from "mongodb";
-
-const octokit = new Octokit({
-    auth: process.env.GHTOKEN
-  }),
-  base = axios.create({
-    baseURL: `https://raw.githubusercontent.com/PreMiD/Presences/master/`
-  });
+import { readdirSync, statSync, readFileSync } from "fs";
 
 connect(
   `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
@@ -18,118 +11,77 @@ connect(
 ).then(run);
 
 async function run(MongoClient: MongoClient) {
-  const dbPresences = (await MongoClient.db("PreMiD")
+  const dbPresences = await MongoClient.db("PreMiD")
     .collection("presences")
-    .find({}, { projection: { _id: false, metadata: true } })
-    .toArray()).map(p => {
-    return { service: p.metadata.service, version: p.metadata.version };
+    .find()
+    .toArray();
+
+  const presenceFolders = readdirSync("./").filter(
+    (pF) =>
+      !pF.startsWith("@") &&
+      !pF.startsWith(".") &&
+      !pF.startsWith("node_modules") &&
+      statSync(pF).isDirectory()
+  );
+
+  const presences = presenceFolders.map((pF) => {
+    const metadata = JSON.parse(
+        readFileSync(`${pF}/dist/metadata.json`, "utf-8")
+      ),
+      presenceJs = readFileSync(`${pF}/dist/presence.js`, "utf-8");
+
+    let resJson: any = {
+      name: metadata.service,
+      url: `https://api.premid.app/v2/presences/${encodeURI(
+        metadata.service
+      )}/`,
+      metadata,
+      presenceJs
+    };
+
+    if (metadata.iframe)
+      resJson.iframeJs = readFileSync(`${pF}/dist/iframe.js`, "utf-8");
+
+    return resJson;
   });
 
-  const repoPresences = await octokit.repos
-    .getContents({ owner: "PreMiD", repo: "Presences", path: "/" })
-    .then((res: any) => {
-      let presences: Octokit.ReposGetContentsResponseItem[] = res.data.filter(
-        (f: Octokit.ReposGetContentsResponseItem) =>
-          f.type === "dir" && !f.name.startsWith(".") && f.name !== "@types"
-      );
-
-      return Promise.all(
-        presences.map(async f => {
-          const json = (await base(`${encodeURI(f.name)}/dist/metadata.json`))
-            .data;
-
-          let res: any = {
-            path: encodeURI(f.name),
-            service: json.service,
-            version: json.version,
-            metadata: json
-          };
-
-          return res;
-        })
-      );
-    });
-
-  const newPresences = repoPresences.filter(
-      p => !dbPresences.some(dP => dP.service === p.service)
+  const newPresences = presences.filter(
+      (p) => !dbPresences.some((dP) => dP.name === p.name)
     ),
     deletedPresences = dbPresences.filter(
-      dP => !repoPresences.some(p => p.service === dP.service)
+      (dP) => !presences.some((p) => p.name === dP.name)
     ),
     outdatedPresences = dbPresences
-      .filter(p =>
-        repoPresences.find(
-          dp => p.service === dp.service && dp.version !== p.version
+      .filter((p) =>
+        presences.find(
+          (dp) =>
+            p.name === dp.name && dp.metadata.version !== p.metadata.version
         )
       )
-      .map(dP => repoPresences.find(p => p.service === dP.service));
+      .map((dP) => presences.find((p) => p.name === dP.name));
 
-  const aPP = Promise.all(
-    newPresences.map(async p => {
-      let iframeJs = null;
+  let nP,
+    dP = [],
+    oP = [];
 
-      try {
-        const presenceJs = (await base(`${p.path}/dist/presence.js`)).data;
-        if (p.metadata.iframe)
-          iframeJs = (await base(`${p.path}/dist/iframe.js`)).data;
+  if (newPresences.length > 0)
+    nP = MongoClient.db("PreMiD")
+      .collection("presences")
+      .insertMany(newPresences);
 
-        let res: any = {
-          metadata: p.metadata,
-          name: p.metadata.service,
-          presenceJs: presenceJs,
-          url: `https://api.premid.app/v2/presences/${p.metadata.service}/`
-        };
-
-        if (p.metadata.iframe) res.iframeJs = iframeJs;
-
-        return res;
-      } catch (e) {
-        //TODO SEND MESSAGE TO DISCORD
-
-        return false;
-      }
-    })
-  ).then(pTA => {
-    if (pTA.length > 0)
-      return MongoClient.db("PreMiD")
-        .collection("presences")
-        .insertMany(pTA.filter(p => p));
-  });
-
-  const dPP = Promise.all(
-    deletedPresences.map(p => {
+  if (deletedPresences.length > 0)
+    dP = deletedPresences.map((p) =>
       MongoClient.db("PreMiD")
         .collection("presences")
-        .deleteOne({ name: p.service });
-    })
-  );
+        .deleteOne({ name: p.name })
+    );
 
-  const uPP = Promise.all(
-    outdatedPresences.map(async p => {
-      let iframeJs = null;
+  if (outdatedPresences.length > 0)
+    oP = outdatedPresences.map((p) =>
+      MongoClient.db("PreMiD")
+        .collection("presences")
+        .findOneAndUpdate({ name: p.metadata.service }, { $set: p })
+    );
 
-      try {
-        const presenceJs = (await base(`${p.path}/dist/presence.js`)).data;
-        if (p.metadata.iframe)
-          iframeJs = (await base(`${p.path}/dist/iframe.js`)).data;
-
-        let res: any = {
-          metadata: p.metadata,
-          name: p.metadata.service,
-          presenceJs: presenceJs,
-          url: `https://api.premid.app/v2/presences/${p.metadata.service}/`
-        };
-
-        if (p.metadata.iframe) res.iframeJs = iframeJs;
-
-        await MongoClient.db("PreMiD")
-          .collection("presences")
-          .findOneAndReplace({ name: p.metadata.service }, res);
-      } catch (e) {
-        //TODO SEND MESSAGE TO DISCORD
-      }
-    })
-  );
-
-  Promise.all([aPP, uPP, dPP]).then(() => MongoClient.close());
+  Promise.all([nP, ...dP, ...oP]).then(() => MongoClient.close());
 }
