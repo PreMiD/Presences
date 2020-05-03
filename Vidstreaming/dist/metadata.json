@@ -8,31 +8,35 @@
     "en": "Vidstreaming is a website where you can find the latest anime released."
   },
   "url": "vidstreaming.io",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/pFcvvz9.png",
   "thumbnail": "https://i.imgur.com/xRsdose.png",
   "color": "#ff9200",
-  "tags": ["anime","video","streaming"],
+  "tags": [
+    "anime",
+    "video",
+    "streaming"
+  ],
   "category": "anime",
   "iframe": true,
   "settings": [
-        {
-            "id": "sSI",
-            "title": "Show Site Info",
-            "icon": "fas fa-info",
-            "value": true
-        },
-        {
-            "id": "sTE",
-            "title": "Show Time Elapsed",
-            "icon": "fas fa-clock",
-            "value": true
-        },
-        {
-          "id": "sVT",
-          "title": "Show Video Time",
-          "icon": "fas fa-clock",
-          "value": true
-      }          
-    ]
+    {
+      "id": "sSI",
+      "title": "Show Site Info",
+      "icon": "fas fa-info",
+      "value": true
+    },
+    {
+      "id": "sTE",
+      "title": "Show Time Elapsed",
+      "icon": "fas fa-clock",
+      "value": true
+    },
+    {
+      "id": "sVT",
+      "title": "Show Video Time",
+      "icon": "fas fa-clock",
+      "value": true
+    }
+  ]
 }
