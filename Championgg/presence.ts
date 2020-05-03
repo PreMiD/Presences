@@ -8,24 +8,29 @@ presence.on("UpdateData", async () => {
   var presenceData: presenceData = {
       largeImageKey: "championgg"
   };
-
     var path = document.location.pathname.toLowerCase();
   if (path === "/") {
       presenceData.details = "Initial page";
       presenceData.state = "Viewing champions";
       presenceData.startTimestamp = time;
+      presence.setActivity(presenceData);
+
 
   }
   else if (path === "/statistics/") {
       presenceData.details = "Statistics";
       presenceData.state = "Viewing win rates";
       presenceData.startTimestamp = time;
+      presence.setActivity(presenceData);
+
 
   }
   else if (path.startsWith("/matchup")) {
       presenceData.details = "Analysing matchup";
       presenceData.state = "Preparing to fight";
       presenceData.startTimestamp = time;
+      presence.setActivity(presenceData);
+
 
   }
   else if (path.startsWith("/champion")){
@@ -33,6 +38,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Checking Runes";
     presenceData.state = name;
     presenceData.startTimestamp = time;
+    presence.setActivity(presenceData);
+
 
   }
   else if (presenceData.details == null) {
