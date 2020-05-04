@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
  
   if (itemsetting == true && itemsite == true) { // Ask for Settings
     itemdesc = document.querySelector("#related-products-scroll-container > div > div > div.ProductContainer__ProductMainSection-sc-1vbd28u-1.dXQSMR > div.ProductContainer__RightColumn-sc-1vbd28u-3.cgensx > div > div.PurchaseContainer__UpperWrapper-sc-1qlezk8-1.gwTXit > h1").innerText;
-    itemdesc = itemdesc.substring(0, itemdesc.length / 2) + "..."
+    itemdesc = itemdesc.substring(0, itemdesc.length / 2) + "...";
   } else {
     if (languagesetting == "0"){
     itemdesc = "Watching an item...";
@@ -284,6 +284,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   }
 });
-function refresh(presence) {
-  refresh.refresh;
-}
