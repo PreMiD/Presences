@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
   };
   var itemsetting = await presence.getSetting("items");
   var languagesetting = await presence.getSetting("language");
-  var itemsite = null
+  var itemsite = null;
 
   // _________________________________________________________________________________________________________________________ Product item
   if (document.querySelector("#related-products-scroll-container > div") == null) { // Ask for item-site
@@ -27,9 +27,9 @@ presence.on("UpdateData", async () => {
     itemdesc = itemdesc.substring(0, itemdesc.length / 2) + "..."
   } else {
     if (languagesetting == "0"){
-    itemdesc = "Watching an item..."
+    itemdesc = "Watching an item...";
     } else if (languagesetting == "1"){
-    itemdesc = "Beobachtet ein Produkt..."
+    itemdesc = "Beobachtet ein Produkt...";
     }
   }
   // ___________________________________________________________________________________________________________________________  
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
     } else if (languagesetting == "1"){
     presenceData.details = "Stöbert durch";
-    presenceData.state = "die Startseite..."
+    presenceData.state = "die Startseite...";
     presence.setActivity(presenceData);
     }
 
@@ -187,7 +187,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
     } else if (languagesetting == "1"){
     presenceData.details = "Stöbert durch";
-    presenceData.details = "Lokal Feed"
+    presenceData.details = "Lokal Feed";
     presence.setActivity(presenceData);
     }
     if (
@@ -226,7 +226,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
     } else if (languagesetting == "1"){
     presenceData.details = "Stöbert durch";
-    presenceData.state = "Express Feed"
+    presenceData.state = "Express Feed";
     presence.setActivity(presenceData);
     }
     if (
