@@ -183,7 +183,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "plex"
   };
 
-  if (document.location.hostname == "app.plex.tv") {
+  if (document.querySelector("#plex") !== null) {
     if (
       document.querySelector("#plex > div:nth-child(7) > div > div > video") !==
         null ||
@@ -237,6 +237,9 @@ presence.on("UpdateData", async () => {
         ) ||
         document.querySelector(
           "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div:nth-child(2) > div > div > div.PlayerControls-controls-e59abb.PlayerControls-hasLandscapePoster-23Gat5 > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div.PlayerControlsMetadata-container-2wqMfv > a"
+        ) ||
+        document.querySelector(
+          "#plex > div > div > div > div > div > div > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > a"
         );
       title =
         document.querySelector(
@@ -265,6 +268,9 @@ presence.on("UpdateData", async () => {
         ) ||
         document.querySelector(
           "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div:nth-child(2) > div > div > div.PlayerControls-controls-e59abb.PlayerControls-hasLandscapePoster-23Gat5 > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div.PlayerControlsMetadata-container-2wqMfv > span"
+        ) ||
+        document.querySelector(
+          "#plex > div > div > div > div > div > div > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span"
         );
       presenceData.details = user.textContent;
       if (title) {
@@ -280,13 +286,6 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else if (
-      document.URL == "https://app.plex.tv/" ||
-      document.URL == "https://app.plex.tv/desktop" ||
-      document.URL == "https://app.plex.tv/desktop#"
-    ) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = getTranslation("HomePage");
     } else if (document.URL.includes("/tv.plex.provider.webshows")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("WebShows");
@@ -330,13 +329,22 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(
         "#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span"
       ).textContent;
+    } else if (
+      document.URL == "https://app.plex.tv/" ||
+      document.URL == "https://app.plex.tv/desktop" ||
+      document.URL == "https://app.plex.tv/desktop#" ||
+      document.location.pathname == "/web/index.html" ||
+      document.location.pathname == "/web/index.html#"
+    ) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = getTranslation("HomePage");
     }
-  }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
+    if (presenceData.details == null) {
+      presence.setTrayTitle();
+      presence.setActivity();
+    } else {
+      presence.setActivity(presenceData);
+    }
   }
 });

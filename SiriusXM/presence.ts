@@ -1,6 +1,6 @@
 var presence = new Presence({
-    clientId: "704186478410072065"
-  });
+  clientId: "704186478410072065"
+});
 
 let channelName: any,
   channelNumber: any,
