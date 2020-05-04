@@ -1,29 +1,31 @@
-var presence = new Presence({
+var playing = new Presence({
     clientId: "706234362575847536"
-});
+})
  
-const browsingStamp = Math.floor(Date.now() / 1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", () => {
-  const presenceData = {
-    largeImageKey: "simsekbot_logo"
+playing.on("UpdateData", () => {
+  let playingData = {
+    largeImageKey: "simsekbot_logo",
+	details: "",
+	startTimestamp: 0
   };
   if (document.location.hostname == "simsekbot.com" || document.location.hostname == "www.simsekbot.com") {  
     if (document.location.pathname === "/") {
-      presenceData.details = "Anasayfayı inceliyor.";
-      presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/komutlar")) {
-      presenceData.details = "Bot komutlarını inceliyor.";
-      presenceData.startTimestamp = browsingStamp;
+      playingData.details = "Anasayfayı inceliyor.";
+      playingData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname === "/komutlar/") {
+      playingData.details = "Bot komutlarını inceliyor.";
+      playingData.startTimestamp = browsingStamp;
     }
   } else if(document.location.hostname === "istatistik.simsekbot.com") {
-      presenceData.details = "Bot istatistiklerini inceliyor.";
-      presenceData.startTimestamp = browsingStamp;
+      playingData.details = "Bot istatistiklerini inceliyor.";
+      playingData.startTimestamp = browsingStamp;
   }
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
+  if (playingData.details == null) {
+    playing.setTrayTitle();
+    playing.setActivity();
   } else {
-    presence.setActivity(presenceData);
+    playing.setActivity(playingData);
   }
 });
