@@ -1,11 +1,6 @@
 var presence = new Presence({
     clientId: "633005889619755038"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
+  })
 
 presence.on("UpdateData", async () => {
   var presenceData = {
