@@ -1,11 +1,11 @@
 var playing = new Presence({
     clientId: "706234362575847536"
-})
+});
  
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 playing.on("UpdateData", () => {
-  let playingData = {
+  const playingData = {
     largeImageKey: "simsekbot_logo",
 	details: "",
 	startTimestamp: 0
