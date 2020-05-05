@@ -13,6 +13,7 @@
     "zh_CN": "Discord是一款专为电子游戏社区设计的免费网络实时通话软件与数字发行平台。"
   },
   "url": [
+    "discord.com",
     "discordapp.com",
     "support.discordapp.com",
     "status.discordapp.com",
@@ -20,7 +21,7 @@
     "merch.discordapp.com",
     "discord.gg"
   ],
-  "version": "2.1.1",
+  "version": "2.1.2",
   "logo": "https://i.imgur.com/FkQDwnv.png",
   "thumbnail": "https://i.imgur.com/0v13nHT.png",
   "color": "#7289DA",

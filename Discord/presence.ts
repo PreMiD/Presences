@@ -37,7 +37,10 @@ presence.on("UpdateData", async () => {
     return browsingStamp;
   }
 
-  if (document.location.hostname == "discordapp.com") {
+  if (
+    document.location.hostname == "discordapp.com" ||
+    document.location.hostname == "discord.com"
+  ) {
     if (connected !== null && connected.textContent !== "") {
       presenceData.startTimestamp = getTimeStamp();
       presenceData.smallImageKey = "call";
