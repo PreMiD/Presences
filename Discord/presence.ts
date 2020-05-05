@@ -37,7 +37,10 @@ presence.on("UpdateData", async () => {
     return browsingStamp;
   }
 
-  if (document.location.hostname == "discordapp.com") {
+  if (
+    document.location.hostname == "discordapp.com" ||
+    document.location.hostname == "discord.com"
+  ) {
     if (connected !== null && connected.textContent !== "") {
       presenceData.startTimestamp = getTimeStamp();
       presenceData.smallImageKey = "call";
@@ -238,12 +241,18 @@ presence.on("UpdateData", async () => {
       }
       presenceData.state = "COMING SOON."; // Change this when presence settings is a thing.
     }
-  } else if (document.location.hostname == "status.discordapp.com") {
+  } else if (
+    document.location.hostname == "status.discordapp.com" ||
+    document.location.hostname == "status.discord.com"
+  ) {
     presenceData.details = "Discord Status";
     presenceData.state = "Viewing Discords status";
     presenceData.smallImageKey = "reading";
     presenceData.startTimestamp = getTimeStamp();
-  } else if (document.location.hostname == "support.discordapp.com") {
+  } else if (
+    document.location.hostname == "support.discordapp.com" ||
+    document.location.hostname == "support.discord.com"
+  ) {
     if (document.location.pathname.includes("/topics/")) {
       group = document.querySelector(
         "body > main > div.container > header > h1"
@@ -272,7 +281,10 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
       presenceData.startTimestamp = getTimeStamp();
     }
-  } else if (document.location.hostname == "blog.discordapp.com") {
+  } else if (
+    document.location.hostname == "blog.discordapp.com" ||
+    document.location.hostname == "blog.discord.com"
+  ) {
     if (document.location.pathname.includes("/@")) {
       group = document.location.pathname.split("@", 2);
       presenceData.details = "Discord Blog";
@@ -302,7 +314,10 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = getTimeStamp();
       }
     }
-  } else if (document.location.hostname == "merch.discordapp.com") {
+  } else if (
+    document.location.hostname == "merch.discordapp.com" ||
+    document.location.hostname == "merch.discord.com"
+  ) {
     presenceData.details = "Discord Merch";
     presenceData.state = "Looking at merch";
     presenceData.startTimestamp = getTimeStamp();
