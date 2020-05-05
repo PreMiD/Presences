@@ -323,7 +323,7 @@ presence.on("UpdateData", async () => {
       (presenceData.smallImageText = "Paused");
     presenceData.details = "Watching: " + Name.innerText;
     presenceData.state = "Paused";
-  } else if ((document.location.hostname = "localhost")) {
+  } else {
     Name = document.querySelector("div.playing-title");
     (Artist = document.querySelector("div.playing-subtitle")),
       (timeElapsed = document.querySelector("div.playing-time-current"));
