@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
                 : ""
 				}`
 			: "Belirsiz",
-			startTmestamp: Math.floor(Date.now() / 1000)
+			startTimestamp: Math.floor(Date.now() / 1000)
 		});
 	}
 	else if (page.includes("/u/")) {
