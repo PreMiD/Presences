@@ -13,12 +13,12 @@ presence.on("UpdateData", async () => {
     const page = document.location.pathname, searchingFor = document.querySelector("#icerik > h1"), category = document.querySelector("#icerik > h1");
     if (page.includes("/kategori/") && (category && category.textContent != "")) {
         if (page.includes("/page/")) {
-            var location = document.location.pathname.indexOf('page');
-            var pgnum = "Sayfa: " + document.location.pathname.slice(location + 5, document.location.pathname.length);
+            let location = document.location.pathname.indexOf('page');
+            var pgn = "Sayfa: " + document.location.pathname.slice(location + 5, document.location.pathname.length);
         }
-		var category2 = category.textContent.slice(0, category.textContent.length - 27).trim()
-		if (pgnum && pgnum != "")
-			category2 = category2 + "(" + pgnum + ")"
+		let category2 = category.textContent.slice(0, category.textContent.length - 27).trim();
+		if (pgn && pgn != "")
+			category2 = category2 + "(" + pgn + ")";
         presence.setActivity({
             largeImageKey: "fp-logo",
             details: "Bir kategoriyi inceliyor:",
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
         });
     }
     else if (page.includes("/page/")) {
-        var pgnum = "Ana Sayfa: " + document.location.pathname.slice(6, document.location.pathname.length);
+        let pgnum = "Ana Sayfa: " + document.location.pathname.slice(6, document.location.pathname.length);
         presence.setActivity({
             largeImageKey: "fp-logo",
             details: "Sayfalar arasında geziniyor:",
@@ -49,9 +49,9 @@ presence.on("UpdateData", async () => {
         });
     }
     else if (page.includes(".html")) {
-        var topic = document.querySelector("#icerik-yazi > div.icerik-baslik > h1 > a");
-        var published = document.querySelector("#icerik > div > div.yazi-alt > ul > li.tarih > span");
-        var publisher = document.querySelector("#icerik > div > div.yazi-alt > ul > li.yazar > a");
+        let topic = document.querySelector("#icerik-yazi > div.icerik-baslik > h1 > a");
+        let published = document.querySelector("#icerik > div > div.yazi-alt > ul > li.tarih > span");
+        let publisher = document.querySelector("#icerik > div > div.yazi-alt > ul > li.yazar > a");
         presence.setActivity({
             largeImageKey: "fp-logo",
             details: topic.textContent.trim() || "Belirsiz",
