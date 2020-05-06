@@ -6,7 +6,6 @@ var user;
 presence.on("UpdateData", async () => {
   const data = {
     largeImageKey: "gd-logo",
-    new Date().getTime(),
     details: "Anasayfada dolaşıyor."
   };
   if (
