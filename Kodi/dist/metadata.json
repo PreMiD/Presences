@@ -7,10 +7,10 @@
     "description": {
       "en": "Kodi presence for PreMiD! Please read [this page](https://github.com/PreMiD/Presences/blob/master/Kodi/readme.md) to get started!"
     },
-    "url": "localhost",
+    "url": ["localhost", "127.0.0.1"],
     "version": "1.0.0",
     "logo": "https://i.imgur.com/PKrgfd3.png",
-    "thumbnail": "https://doomlord.s-ul.eu/LOCgKTnx",
+    "thumbnail": "https://i.imgur.com/TlpZA7D.png",
     "color": "#ff7c00",
     "tags": ["kodi", "media-player"],
     "warning": true,
