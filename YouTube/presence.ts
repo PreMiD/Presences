@@ -118,7 +118,19 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
     var live = Boolean(document.querySelector(".ytp-live")),
+      isPlaylistLoop = false,
       ads = Boolean(document.querySelector(".ytp-ad-player-overlay"));
+
+    if (
+      document.querySelector("#playlist-actions .yt-icon-button#button") &&
+      document
+        .querySelector("#playlist-actions .yt-icon-button#button")
+        .getAttribute("aria-pressed")
+    )
+      isPlaylistLoop =
+        document
+          .querySelector("#playlist-actions .yt-icon-button#button")
+          .getAttribute("aria-pressed") === "true";
 
     var presenceData: presenceData = {
       details:
@@ -132,9 +144,19 @@ presence.on("UpdateData", async () => {
           ? uploaderTV.textContent
           : uploader.textContent,
       largeImageKey: "yt_lg",
-      smallImageKey: video.paused ? "pause" : "play", //general.playing general.paused
+      smallImageKey: video.paused
+        ? "pause"
+        : video.loop
+        ? "repeat-one"
+        : isPlaylistLoop
+        ? "repeat"
+        : "play", //general.playing general.paused
       smallImageText: video.paused
         ? (await strings).pause
+        : video.loop
+        ? "On loop"
+        : isPlaylistLoop
+        ? "Playlist on loop"
         : (await strings).play,
       startTimestamp: timestamps[0],
       endTimestamp: timestamps[1]
