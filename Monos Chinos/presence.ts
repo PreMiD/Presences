@@ -1,5 +1,5 @@
 type PageAction = {
-  id: string
+  id: string;
   path: string;
   text: string;
   icon?: string;
@@ -129,9 +129,9 @@ presence.on('UpdateData', async () => {
       return presence.setActivity(data);
     }
 
-    const [startTimestamp, endTimestamp] = getTimestamps.apply(
-      null, 
-      [video.elapsed, video.duration].map(time => Math.floor(time))
+    const [startTimestamp, endTimestamp] = getTimestamps(
+      Math.floor(video.elapsed),
+      Math.floor(video.duration)
     );
 
     Object.assign(data, {
