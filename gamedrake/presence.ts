@@ -2,7 +2,6 @@ var presence = new Presence({
   clientId: "707525132322865152"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
-var user;
 presence.on("UpdateData", async () => {
   const data = {
     largeImageKey: "gd-logo",
