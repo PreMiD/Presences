@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
         });
     }
     else if (page.includes("/page/")) {
-        const pgnum = "Ana Sayfa: " + document.location.pathname.slice(6, document.location.pathname.length);
+        var pgnum = "Ana Sayfa: " + document.location.pathname.slice(6, document.location.pathname.length);
         presence.setActivity({
             largeImageKey: "fp-logo",
             details: "Sayfalar arasında geziniyor:",
@@ -49,9 +49,9 @@ presence.on("UpdateData", async () => {
         });
     }
     else if (page.includes(".html")) {
-        const topic = document.querySelector("#icerik-yazi > div.icerik-baslik > h1 > a");
-        const published = document.querySelector("#icerik > div > div.yazi-alt > ul > li.tarih > span");
-        const publisher = document.querySelector("#icerik > div > div.yazi-alt > ul > li.yazar > a");
+        var topic = document.querySelector("#icerik-yazi > div.icerik-baslik > h1 > a");
+        var published = document.querySelector("#icerik > div > div.yazi-alt > ul > li.tarih > span");
+        var publisher = document.querySelector("#icerik > div > div.yazi-alt > ul > li.yazar > a");
         presence.setActivity({
             largeImageKey: "fp-logo",
             details: topic.textContent.trim() || "Belirsiz",
