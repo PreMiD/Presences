@@ -16,12 +16,13 @@ presence.on("UpdateData", async () => {
             var location = document.location.pathname.indexOf('page');
             var pgnum = "Sayfa: " + document.location.pathname.slice(location + 5, document.location.pathname.length);
         }
+		var category2 = category.textContent.slice(0, category.textContent.length - 27).trim()
+		if (pgnum && pgnum != "")
+			category2 = category2 + "(" + pgnum + ")"
         presence.setActivity({
             largeImageKey: "fp-logo",
             details: "Bir kategoriyi inceliyor:",
-            state: pgnum != ""
-                ? (category.textContent.slice(0, category.textContent.length - 27).trim() + "(" + pgnum + ")") || "Belirsiz"
-                : category.textContent.slice(0, category.textContent.length - 27).trim() || "Belirsiz",
+            state: category2 || "Belirsiz",
             startTimestamp: Math.floor(Date.now() / 1000)
         });
     }
@@ -41,7 +42,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity({
             largeImageKey: "fp-logo",
             details: "Sayfalar arasında geziniyor:",
-            state: pgnum
+            state: pgnum && pgnum != ""
                 ? pgnum
                 : "Belirsiz",
             startTimestamp: Math.floor(Date.now() / 1000)
