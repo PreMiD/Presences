@@ -1,0 +1,18 @@
+{
+    "author": {
+      "name": "slimmoe",
+      "id": "686244278304899077"
+    },
+    "service": "Gamedrake",
+    "description": {
+        "en": "Game Drake is the platform for players to learn about games.",
+        "tr": "Gamedrake, oyunlar hakkında bilgi edinebileceğiniz oyuncu platformu." 
+       },
+    "url": ["gamedrake.com"],
+    "version": "1.1.1",
+    "logo": "https://i.imgur.com/3OQTe8s.png",
+    "thumbnail": "https://i.imgur.com/3OQTe8s.png",
+    "color": "#4E83F9",
+    "tags": ["oyuncuplatformu", "gamedrake"],
+    "category": "other"
+  }
