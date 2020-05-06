@@ -6,7 +6,7 @@ var user;
 presence.on("UpdateData", async () => {
   const data = {
     largeImageKey: "gd-logo",
-    startTimestamp: 1577232000,
+    new Date().getTime(),
     details: "Anasayfada dolaşıyor."
   };
   if (
