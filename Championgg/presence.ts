@@ -8,7 +8,6 @@ presence.on("UpdateData", async () => {
   var presenceData: presenceData = {
     largeImageKey: "championgg"
   };
-
   var path = document.location.pathname.toLowerCase();
   if (path === "/") {
     presenceData.details = "Initial page";
@@ -27,7 +26,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Checking Runes";
     presenceData.state = name;
     presenceData.startTimestamp = time;
-  } else if (presenceData.details == null) {
+  }
+  if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
