@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
             var pgn = "Sayfa: " + document.location.pathname.slice(location + 5, document.location.pathname.length);
         }
 		var category2 = category.textContent.slice(0, category.textContent.length - 27).trim();
-		if (pgn && pgn !== "") {
+		if (pgn) {
 			category2 = category2 + "(" + pgn + ")";
 			}
         presence.setActivity({
@@ -39,11 +39,13 @@ presence.on("UpdateData", async () => {
         });
     }
     else if (page.includes("/page/")) {
-        const pgnum = "Ana Sayfa: " + document.location.pathname.slice(6, document.location.pathname.length);
+        var pgnum = document.location.pathname.slice(6, document.location.pathname.length);
         presence.setActivity({
             largeImageKey: "fp-logo",
             details: "Sayfalar arasında geziniyor:",
-            state: pgnum || "Belirsiz",
+            state: pgnum
+				? `Ana Sayfa: ${pgnum}`
+				: "Belirsiz",
             startTimestamp: Math.floor(Date.now() / 1000)
         });
     }
