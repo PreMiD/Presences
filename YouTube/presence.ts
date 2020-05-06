@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
     var live = Boolean(document.querySelector(".ytp-live")),
-      isPlaylistLoop: boolean = false,
+      isPlaylistLoop = false,
       ads = Boolean(document.querySelector(".ytp-ad-player-overlay"));
 
     if (
