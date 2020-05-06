@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     const text = "textContent" in document.body ? "textContent" : "innerText";
     document.title = document.getElementsByTagName("h1")[0][text];
     if (document.title.startsWith("Buy")) {
-      let name = document.title.replace("Buy ", "");
+      const name = document.title.replace("Buy ", "");
       presenceData.details = "Buying product";
       presenceData.state = name;
       presenceData.startTimestamp = time;
@@ -82,16 +82,16 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = time;
     presence.setActivity(presenceData);
   } else if (path.startsWith("/shop/buy")) {
-    let text = "textContent" in document.body ? "textContent" : "innerText";
+    const text = "textContent" in document.body ? "textContent" : "innerText";
     document.title = document.getElementsByTagName("h1")[0][text];
     if (document.title.startsWith("Buy")) {
-      let name = document.title.replace("Buy ", "");
+      const name = document.title.replace("Buy ", "");
       presenceData.details = "Buying product";
       presenceData.state = name;
       presenceData.startTimestamp = time;
       presence.setActivity(presenceData);
     } else if (document.title.startsWith("Customize")) {
-      let name = document.title.replace("Customize your ", "");
+      const name = document.title.replace("Customize your ", "");
       presenceData.details = "Buying product";
       presenceData.state = name;
       presenceData.startTimestamp = time;
