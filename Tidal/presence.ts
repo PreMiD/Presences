@@ -68,30 +68,30 @@ presence.on("UpdateData", async () => {
 	  var videoCurrent = (a1 * 60 + a2);
 	  var videoFull = (b1 * 60 + b2);
 	  
-    var timestamps = getTimestamps(
-        Math.floor(videoCurrent),
-        Math.floor(videoFull)
-      ),
-      presenceData: presenceData = {
-        details: playingfrom
-			? `${title} (From: ${playingfrom})`
-			: title,
-        state: getAuthorString(),
-        largeImageKey: "tidal-logo",
-        smallImageKey: "play",
-        smallImageText: (await strings).play,
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
-      };
-	  
-	if (playingbutton.textContent === "button__pause") {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
-	  presenceData.smallImageKey = "pause";
-	  presenceData.smallImageText = (await strings).pause;
-      presence.setTrayTitle();
-    } else presence.setTrayTitle(title);
+		var timestamps = getTimestamps(
+			Math.floor(videoCurrent),
+			Math.floor(videoFull)
+		),
+		presenceData: presenceData = {
+			details: playingfrom
+				? `${title} (From: ${playingfrom})`
+				: title,
+			state: getAuthorString(),
+			largeImageKey: "tidal-logo",
+			smallImageKey: "play",
+			smallImageText: (await strings).play,
+			startTimestamp: timestamps[0],
+			endTimestamp: timestamps[1]
+		};
+		
+		if (playingbutton.textContent === "button__pause") {
+			delete presenceData.startTimestamp;
+			delete presenceData.endTimestamp;
+			presenceData.smallImageKey = "pause";
+			presenceData.smallImageText = (await strings).pause;
+			presence.setTrayTitle();
+		} else presence.setTrayTitle(title);
 	
-    presence.setActivity(presenceData);
+	presence.setActivity(presenceData);
   } else presence.setActivity();
 });
