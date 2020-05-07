@@ -8,8 +8,8 @@
         "en": "Game Drake is the platform for players to learn about games.",
         "tr": "Gamedrake, oyunlar hakkında bilgi edinebileceğiniz oyuncu platformu." 
        },
-    "url": ["gamedrake.com"],
-    "version": "1.1.1",
+    "url": "gamedrake.com",
+    "version": "1.0.0",
     "logo": "https://i.imgur.com/3OQTe8s.png",
     "thumbnail": "https://i.imgur.com/3OQTe8s.png",
     "color": "#4E83F9",
