@@ -59,16 +59,16 @@ presence.on("UpdateData", async () => {
 	playingbutton = (document.querySelector("#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.centerColumn--1MAnN > div > button.playback-controls__button--white-icon.playbackToggle--1eQO2") as HTMLElement).attributes["data-type"];
 	
   if (title !== "" && current) {
-	  var a = current.replace(':', " ").split(' ').slice(0);
-	  var b = fulltime.replace(':', " ").split(' ').slice(0);
-	  var a1 = Number(a[0]);
-	  var a2 = Number(a[1]);
-	  var b1 = Number(b[0]);
-	  var b2 = Number(b[1]);
-	  var videoCurrent = (a1 * 60 + a2);
-	  var videoFull = (b1 * 60 + b2);
-	  
-		var timestamps = getTimestamps(
+    var a = current.replace(':', " ").split(' ').slice(0);
+    var b = fulltime.replace(':', " ").split(' ').slice(0);
+    var a1 = Number(a[0]);
+    var a2 = Number(a[1]);
+    var b1 = Number(b[0]);
+    var b2 = Number(b[1]);
+    var videoCurrent = (a1 * 60 + a2);
+    var videoFull = (b1 * 60 + b2);
+    
+    var timestamps = getTimestamps(
 			Math.floor(videoCurrent),
 			Math.floor(videoFull)
 		),
