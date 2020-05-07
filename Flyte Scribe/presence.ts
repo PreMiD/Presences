@@ -3,7 +3,7 @@ var presence = new Presence({
   }),
   presenceData: presenceData = {
     largeImageKey: "logo"
-  }
+  };
 
 presence.on("UpdateData", async () => {
   var blogCheck = false;
