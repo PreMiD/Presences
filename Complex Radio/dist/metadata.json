@@ -14,5 +14,5 @@
     "color": "#4a9aa8",
     "tags": ["music","radio","gamers","community","complex","complexradio"],
     "category": "music",
-    "regExp": "(([a-z0-9])+[.])?complexradio[.]com"
+    "regExp": "([a-z0-9])+[.])?(complexradio[.]com|complexr[.]pw)"
   }
