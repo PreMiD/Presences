@@ -3,16 +3,15 @@ var presence = new Presence({
   }),
   presenceData: presenceData = {
     largeImageKey: "logo"
-  },
-  customData = false;
+  }
 
 presence.on("UpdateData", async () => {
-  customData = false;
+  var blogCheck = false;
 
   if (document.location.pathname == "/") {
     presenceData.details = "Viewing the homepage";
   } else if (document.location.pathname == "/about/") {
-    presenceData.details = "Learning about the blog";
+    presenceData.details = "Looking at the blog info";
   } else if (document.location.pathname == "/flyte/") {
     presenceData.details = "Getting to know edo/flyte";
   } else {
@@ -22,9 +21,11 @@ presence.on("UpdateData", async () => {
       state: blogTitle.innerHTML,
       largeImageKey: "logo"
     };
+    blogCheck = true;
     presence.setActivity(blogData);
   }
-  if (!customData) {
+
+  if (!blogCheck) {
     presence.setActivity(presenceData);
   }
 });
