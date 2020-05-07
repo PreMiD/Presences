@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
     largeImageKey: "logo"
   };
-    if (document.location.hostname == "client.foldingathome.org") {
+  if (document.location.hostname == "client.foldingathome.org") {
     cpuUsage = document.querySelector(
       "div.ui-progressbar-value.ui-widget-header.ui-corner-left"
     );
