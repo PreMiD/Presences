@@ -1,0 +1,22 @@
+{
+    "author": {
+        "name": "Ezz",
+        "id": "256009740239241216"
+    },
+    "url": "flyte.moe",
+    "description": {
+        "en": "A simple presence for edo/flyte's blog."
+    },
+    "service": "Flyte Scribe",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/LI4SUhs.png",
+    "thumbnail": "https://i.imgur.com/nTdJdf9.png",
+    "color": "#FFFFFF",
+    "tags": [
+        "blog",
+        "edo",
+        "flyte",
+        "photography"
+    ],
+    "category": "other"
+}
