@@ -9,7 +9,7 @@
     "en": "AniTurk is an online anime viewing site."
   },
   "url": ["www.aniturk.net", "aniturk.net"],
-  "version": "0.4",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/J9rcwoy.png",
   "thumbnail": "https://i.imgur.com/0VdI8Mq.png",
   "color": "#ff31cb",

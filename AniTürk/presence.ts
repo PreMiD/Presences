@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "708082807775428678" // 708082807775428678
+  clientId: "708082807775428678"
 });
 
 const strings = presence.getStrings({
@@ -41,16 +41,16 @@ presence.on("UpdateData", async () => {
   if (!title || !episode) {
     video = null;
   }
-  
-  if (title && episode) { //Bölüm kısmı
+  //Episode part
+  if (title && episode) { 
     data.details = title.textContent;
     data.state = episode.textContent.replace(
       title.textContent.split(" ").slice(1).join(" "),
       ""
     );
   }
-  
-  else { // Göz atıyor kısmı
+  //Home page part
+  else { 
     data.details = (await strings).browsing;
     data.startTimestamp = startTimestamp;
   }
