@@ -29,7 +29,7 @@ function getTimestamps(
 }
 
 var oldUrl,
-    elapsed
+    elapsed;
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/");
@@ -88,13 +88,17 @@ presence.on("UpdateData", async () => {
         try {
           data.state = `${state[0]} (${state[1]})`;
           await parseVideo();
-        } catch {} // deepscan-disable
+        } catch {  
+          // deepscan
+        } 
       } else { // Movie Logic
         data.details = 'Watching Movie';
         try {
           data.state = state[0];
           await parseVideo();
-        } catch {} // deepscan-disable
+        } catch {
+          // deepscan
+        } 
       }
     }
   }
