@@ -8,8 +8,8 @@
         "pt_BR": "Oglle é uma rede social, onde qualquer um pode utiliza-la, aqui você pode fazer amigos e publicações, venha participar é grátis!",
         "en": "Oglle is a social network, where anyone can use it, here you can make friends and publications, come and participate is free!"
 	},
-	"url": ["oglle.com.br"],
-	"version": "1.3",
+	"url": "oglle.com.br",
+	"version": "1.3.0",
 	"logo": "https://i.imgur.com/MqPQK6Y.png",
 	"thumbnail": "https://i.imgur.com/7m0Xfhr.jpg",
 	"color": "#787878",
