@@ -29,9 +29,7 @@ function getTimestamps(
 }
 
 var oldUrl,
-    elapsed,
-    searchText = "",
-    searchElapsed = 0;
+    elapsed
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/");
@@ -84,19 +82,19 @@ presence.on("UpdateData", async () => {
   if (showVideoInfo) {
     if (video) {
       const show = getElement('#episodetitle') !== 'Feature Film';
-      const state = (document.querySelector('#infotitle') as HTMLElement).innerText.split('\n')
+      const state = (document.querySelector('#infotitle') as HTMLElement).innerText.split('\n');
       if (show) { // Show Logic
         data.details = 'Watching Show';
         try {
-          data.state = `${state[0]} (${state[1]})`
-          await parseVideo()
-        } catch {}
+          data.state = `${state[0]} (${state[1]})`;
+          await parseVideo();
+        } catch {} // deepscan-disable
       } else { // Movie Logic
         data.details = 'Watching Movie';
         try {
           data.state = state[0];
-          await parseVideo()
-        } catch {}
+          await parseVideo();
+        } catch {} // deepscan-disable
       }
     }
   }
