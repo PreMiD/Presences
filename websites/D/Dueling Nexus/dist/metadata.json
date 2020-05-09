@@ -3,6 +3,12 @@
     "name": "Nekolen",
     "id": "270125856679002113"
   },
+  "contributors": [
+    {
+      "name": "Bas950",
+      "id": "241278257335500811"
+    }
+  ],
   "service": "Dueling Nexus",
   "description": {
     "en": "duelingnexus.com is a free online Yu-Gi-Oh simulator for browsers.",
@@ -13,10 +19,10 @@
     "nl": "duelingnexus.com is een gratis online Yu-Gi-Oh-simulator voor browsers"
   },
   "url": "duelingnexus.com",
-  "version": "1.4.1",
-  "logo": "https://cdn.discordapp.com/attachments/465278458986102786/629582146821947392/unknown.png",
-  "thumbnail": "https://cdn.discordapp.com/attachments/465278458986102786/629579458214494208/DgP2dkxWAAAWsbP.jpg",
+  "version": "1.5.0",
+  "logo": "https://i.imgur.com/JFzVAdh.png",
+  "thumbnail": "https://i.imgur.com/7NXj9ih.jpg",
   "color": "#FF4500",
-  "tags": ["game", "Yu-Gi-Oh", "browser"],
+  "tags": ["game", "yu-gi-oh", "browser"],
   "category": "games"
 }
