@@ -1,4 +1,3 @@
-//@ts-ignore
 let presence: Presence, newID, latestID;
 function presenceSet(): void {
   if (document.location.pathname.includes("/cookieclicker/")) {
