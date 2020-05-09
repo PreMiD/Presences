@@ -3,6 +3,7 @@
     "module": "CommonJS",
     "target": "ES2020",
     "removeComments": true,
+    "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
