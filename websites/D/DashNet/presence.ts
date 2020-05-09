@@ -1,5 +1,5 @@
 //@ts-ignore
-let presence = new Presence({});
+const presence = new Presence({});
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 var latestID;
