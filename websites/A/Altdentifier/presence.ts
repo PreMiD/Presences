@@ -1,19 +1,6 @@
 var presence = new Presence({
-    clientId: "656152542429839380"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+  clientId: "656152542429839380"
+});
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
