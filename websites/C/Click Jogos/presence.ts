@@ -7,9 +7,6 @@ const presence = new Presence({
     search: "presence.activity.searching"
   });
 const browsingStamp = Math.floor(Date.now() / 1000);
-const url = new URLSearchParams(window.location.search).get("site");
-let title;
-let replace;
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
     largeImageKey: "logo"
