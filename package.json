@@ -1,6 +1,6 @@
 {
   "name": "presences",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": "Timeraa",
   "license": "MPL-2.0",
   "scripts": {
@@ -18,7 +18,7 @@
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.30.0",
     "chalk": "^4.0.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "execa": "^4.0.0",
     "glob": "^7.1.6",
     "mongodb": "^3.5.7",
@@ -28,7 +28,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@types/chrome": "^0.0.106",
+    "@types/chrome": "^0.0.107",
     "@types/mongodb": "^3.5.14"
   }
 }
