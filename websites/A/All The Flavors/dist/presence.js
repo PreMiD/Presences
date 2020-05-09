@@ -3,7 +3,7 @@ var presence = new Presence({
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-    let presenceData = {
+    var presenceData = {
         largeImageKey: "logo"
     };
     presenceData.startTimestamp = browsingStamp;
