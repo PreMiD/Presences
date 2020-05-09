@@ -1,10 +1,10 @@
-let presence = new Presence({
+var presence = new Presence({
   clientId: "631543282601558046"
 });
-const browsingStamp = Math.floor(Date.now() / 1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  var presenceData: presenceData = {
     largeImageKey: "akinator"
   };
 
