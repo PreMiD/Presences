@@ -1,10 +1,8 @@
 const presence = new Presence({ clientId: "545248528750870530" });
 let sartist, strack, slisteners, sdj;
-setInterval(newStats, 10000);
-newStats();
 
-async function newStats() {
-  let data = await window
+async function newStats(): Promise<void> {
+  const data = await window
     .fetch("https://panelapi.boun.cc/v1/premidStats")
     .then((res) => res.json());
   strack = data.song.track;
@@ -12,6 +10,9 @@ async function newStats() {
   sdj = data.presenter.name;
   slisteners = data.listeners.unique;
 }
+
+setInterval(newStats, 10000);
+newStats();
 
 const stamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
