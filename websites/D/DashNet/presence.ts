@@ -1,9 +1,23 @@
 //@ts-ignore
-const presence = new Presence({});
+let presence: Presence, newID, latestID;
+function presenceSet(): void {
+  if (document.location.pathname.includes("/cookieclicker/")) {
+    presence = new Presence({ clientId: "676126246928777250" });
+    newID = "676126246928777250";
+  } else {
+    presence = new Presence({ clientId: "676120967159742465" });
+    newID = "676120967159742465";
+  }
+
+  if (newID != latestID && latestID !== null) {
+    presence.clearActivity();
+    latestID = newID;
+  }
+}
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-var latestID;
-presence.clearActivity();
+
+presenceSet();
 
 presence.on("UpdateData", () => {
   const presenceData: presenceData = {
@@ -12,19 +26,10 @@ presence.on("UpdateData", () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.pathname.includes("/cookieclicker/")) {
-    presence.clientId = "676126246928777250";
-  } else {
-    presence.clientId = "676120967159742465";
-  }
-
-  if (presence.clientId != latestID) {
-    presence.clearActivity();
-    latestID = presence.clientId;
-  }
+  presenceSet();
 
   if (document.location.pathname.includes("/cookieclicker/")) {
-    var cookies = document
+    const cookies = document
       .querySelector("#cookies")
       .textContent.replace(
         document.querySelector("#cookies div").textContent,
