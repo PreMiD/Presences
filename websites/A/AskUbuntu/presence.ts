@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
     ),
     searchresult = document.querySelector("#bigsearch > div > input");
 
-  let presenceData: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
