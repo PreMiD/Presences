@@ -8,6 +8,9 @@ presence.on("UpdateData", () => {
   const presenceData: presenceData = {
     largeImageKey: "logo"
   };
+
+  presenceData.startTimestamp = browsingStamp;
+
   if (document.location.hostname == "bots.discordlabs.org") {
     presenceData.details = "Viewing Page:";
     presenceData.state = "DiscordLabs Bot List";
