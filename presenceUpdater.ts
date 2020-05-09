@@ -1,6 +1,7 @@
 import "source-map-support/register";
 import { connect, MongoClient } from "mongodb";
-import { readdirSync, statSync, readFileSync } from "fs";
+import { readFileSync as readFile } from "fs";
+import { sync as glob } from "glob";
 
 connect(
   `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
@@ -16,19 +17,13 @@ async function run(MongoClient: MongoClient) {
     .find()
     .toArray();
 
-  const presenceFolders = readdirSync("./").filter(
-    (pF) =>
-      !pF.startsWith("@") &&
-      !pF.startsWith(".") &&
-      !pF.startsWith("node_modules") &&
-      statSync(pF).isDirectory()
-  );
+  const presenceFolders = glob("./{websites,programs}/*/*/", {
+    ignore: ["**/node_modules/**", "**/@types/**"]
+  });
 
   const presences = presenceFolders.map((pF) => {
-    const metadata = JSON.parse(
-        readFileSync(`${pF}/dist/metadata.json`, "utf-8")
-      ),
-      presenceJs = readFileSync(`${pF}/dist/presence.js`, "utf-8");
+    const metadata = JSON.parse(readFile(`${pF}/dist/metadata.json`, "utf-8")),
+      presenceJs = readFile(`${pF}/dist/presence.js`, "utf-8");
 
     let resJson: any = {
       name: metadata.service,
@@ -40,7 +35,7 @@ async function run(MongoClient: MongoClient) {
     };
 
     if (metadata.iframe)
-      resJson.iframeJs = readFileSync(`${pF}/dist/iframe.js`, "utf-8");
+      resJson.iframeJs = readFile(`${pF}/dist/iframe.js`, "utf-8");
 
     return resJson;
   });
