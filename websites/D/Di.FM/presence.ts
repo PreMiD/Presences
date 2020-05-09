@@ -1,9 +1,6 @@
 const presence = new Presence({
   clientId: "630542731701387276"
 });
-let oo;
-let songt;
-let songa;
 
 presence.on("UpdateData", () => {
   const presenceData: presenceData = {
