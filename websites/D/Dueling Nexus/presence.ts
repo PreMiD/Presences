@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     const mylife = document.getElementById("game-life-player").textContent;
     const opplife = document.getElementById("game-life-opponent").textContent;
     let myname = document.getElementById("game-player-name").textContent;
-    let state;
+    let state, status;
 
     if (myname == "Player" || myname == "Opponent") {
       myname = document.getElementById("game-room-player1-username")
