@@ -1,4 +1,4 @@
-let iFrameVideo, currentTime, duration, paused, playback;
+let currentTime, duration, paused, playback;
 const presence = new Presence({
   clientId: "648938148050632745"
 });
@@ -15,7 +15,6 @@ function getTimestamps(
 presence.on("iFrameData", (data) => {
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
     currentTime = data.iframe_video.currTime;
     duration = data.iframe_video.dur;
     paused = data.iframe_video.paused;
