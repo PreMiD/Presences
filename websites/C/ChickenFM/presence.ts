@@ -7,7 +7,7 @@ let trackTitle, trackArtist, stationName;
 function getData(): void {
   const apiId = document.getElementById("premidstationname").innerHTML;
   const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
+  xhttp.onreadystatechange = function (): void {
     if (this.readyState == 4 && this.status == 200) {
       const api = JSON.parse(this.responseText);
       trackTitle = api.now_playing.song.title;
