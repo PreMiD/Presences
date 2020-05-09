@@ -28,8 +28,7 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var oldUrl,
-    elapsed;
+var oldUrl, elapsed;
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/");
@@ -73,40 +72,44 @@ presence.on("UpdateData", async () => {
 
   /* Browsing Info */
   if (showBrowseInfo) {
-    if (path === '/') {
-      data.details = 'Browsing';
+    if (path === "/") {
+      data.details = "Browsing";
     }
   }
 
   /* Video Info */
   if (showVideoInfo) {
     if (video) {
-      const show = getElement('#episodetitle') !== 'Feature Film';
-      const state = (document.querySelector('#infotitle') as HTMLElement).innerText.split('\n');
-      if (show) { // Show Logic
-        data.details = 'Watching Show';
+      const show = getElement("#episodetitle") !== "Feature Film";
+      const state = (document.querySelector(
+        "#infotitle"
+      ) as HTMLElement).innerText.split("\n");
+      if (show) {
+        // Show Logic
+        data.details = "Watching Show";
         try {
           data.state = `${state[0]} (${state[1]})`;
           await parseVideo();
-        } catch {  
+        } catch {
           // deepscan
-        } 
-      } else { // Movie Logic
-        data.details = 'Watching Movie';
+        }
+      } else {
+        // Movie Logic
+        data.details = "Watching Movie";
         try {
           data.state = state[0];
           await parseVideo();
         } catch {
           // deepscan
-        } 
+        }
       }
     }
   }
 
   /* Search Info */
   if (showSearchInfo) {
-    if (getElement('#indextitle').split('\n')[0] === 'Search Results') {
-      data.details = 'Searching for';
+    if (getElement("#indextitle").split("\n")[0] === "Search Results") {
+      data.details = "Searching for";
       data.state = search.value;
     }
   }
