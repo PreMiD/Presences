@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
 
     if (choosen) {
       elapsed = Math.floor((Date.now as any) / 1000);
-      let presenceData = {
+      const presenceData = {
         details: "Preparing to Edge",
         state: `choosing settings `,
         //largeImageKey: "banner",
@@ -153,7 +153,7 @@ presence.on("UpdateData", async () => {
         document.getElementById("message").children[0].innerHTML
       ) {
         elapsed = Math.floor((Date.now as any) / 1000);
-        let presenceData = {
+        const presenceData = {
           details: "jerking of slowly for edging",
           //largeImageKey: "banner",
           largeImageKey: "logo",
