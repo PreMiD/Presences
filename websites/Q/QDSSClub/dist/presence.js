@@ -3,203 +3,184 @@ const presence = new Presence({
 });
 const browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-    const data = {
+    const presenceData = {
         largeImageKey: "qdss"
     };
+    const href = document.location.href;
+    presenceData.startTimestamp = browsingStamp;
     if (document.location.pathname == "/") {
-        if (document.location.href.startsWith("https://www.qdssclub.com/?page=")) {
-            let hpforumpagenumber = document.location.href;
-            data.details = "Nella homepage";
-            data.state = "Sfoglia il forum. Pag: " + hpforumpagenumber.replace("https://www.qdssclub.com/?page=", "");
-            data.startTimestamp = browsingStamp;
+        if (href.startsWith("https://www.qdssclub.com/?page=")) {
+            presenceData.details = "Nella homepage";
+            presenceData.state =
+                "Sfoglia il forum. Pag: " +
+                    href.replace("https://www.qdssclub.com/?page=", "");
         }
-        else if (document.location.href.startsWith("https://www.qdssclub.com/?articoli=")) {
-            let hparticolipagenumber = document.location.href;
-            data.details = "Nella homepage";
-            data.state = "Sfoglia gli articoli. Pag: " + hparticolipagenumber.replace("https://www.qdssclub.com/?articoli=", "");
-            data.startTimestamp = browsingStamp;
+        else if (href.startsWith("https://www.qdssclub.com/?articoli=")) {
+            presenceData.details = "Nella homepage";
+            presenceData.state =
+                "Sfoglia gli articoli. Pag: " +
+                    href.replace("https://www.qdssclub.com/?articoli=", "");
         }
         else {
-            data.details = "Nella homepage";
-            data.startTimestamp = browsingStamp;
+            presenceData.details = "Nella homepage";
         }
     }
     else if (document.location.pathname.startsWith("/faq")) {
-        data.details = "Nella scheda FAQ";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Nella scheda FAQ";
     }
     else if (document.location.pathname.startsWith("/contatti")) {
-        data.details = "Vuole contattare";
-        data.state = "Quei Due Sul Server";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Vuole contattare";
+        presenceData.state = "Quei Due Sul Server";
     }
     else if (document.location.pathname.startsWith("/utente/profilo")) {
-        data.details = "Sta visualizzando";
-        data.state = "il suo profilo";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Sta visualizzando";
+        presenceData.state = "il suo profilo";
     }
     else if (document.location.pathname.startsWith("/cookies")) {
-        data.details = "Legge le informazioni";
-        data.state = "sui Cookies";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Legge le informazioni";
+        presenceData.state = "sui Cookies";
     }
     else if (document.location.pathname.startsWith("/privacy")) {
-        data.details = "Legge le informazioni";
-        data.state = "sulla Privcay";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Legge le informazioni";
+        presenceData.state = "sulla Privcay";
     }
     else if (document.location.pathname.startsWith("/disclaimer")) {
-        data.details = "Legge i Termini e le";
-        data.state = "Condizioni di utilizzo";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Legge i Termini e le";
+        presenceData.state = "Condizioni di utilizzo";
     }
-    else if (document.location.href.endsWith("/forums")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Pagina: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Pagina: 1";
     }
-    else if (document.location.href.endsWith("/Forums/")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Pagina: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/Forums/")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Pagina: 1";
     }
-    else if (document.location.href.startsWith("https://www.qdssclub.com/forums?page=")) {
-        let fforumpagenumber = document.location.href;
-        data.details = "Sfoglia il forum";
-        data.state = "Pagina: " + fforumpagenumber.replace("https://www.qdssclub.com/forums?page=", "");
-        data.startTimestamp = browsingStamp;
+    else if (href.startsWith("https://www.qdssclub.com/forums?page=")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state =
+            "Pagina: " + href.replace("https://www.qdssclub.com/forums?page=", "");
     }
-    else if (document.location.href.endsWith("/forums/category/Consigli")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Consigli Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/Consigli")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Consigli Pag: 1";
     }
-    else if (document.location.href.endsWith("/forums/category/Consigli/")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Consigli Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/Consigli/")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Consigli Pag: 1";
     }
-    else if (document.location.href.startsWith("https://www.qdssclub.com/forums/category/Consiglipage=")) {
-        let c1cforumpagenumber = document.location.href;
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Consigli Pag: " + c1cforumpagenumber.replace("https://www.qdssclub.com/forums/category/Consiglipage=", "");
-        data.startTimestamp = browsingStamp;
+    else if (href.startsWith("https://www.qdssclub.com/forums/category/Consiglipage=")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state =
+            "Categoria: Consigli Pag: " +
+                href.replace("https://www.qdssclub.com/forums/category/Consiglipage=", "");
     }
-    else if (document.location.href.endsWith("/forums/category/consigli")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Consigli Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/consigli")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Consigli Pag: 1";
     }
-    else if (document.location.href.endsWith("/forums/category/consigli/")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Consigli Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/consigli/")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Consigli Pag: 1";
     }
-    else if (document.location.href.startsWith("https://www.qdssclub.com/forums/category/consiglipage=")) {
-        let c2cforumpagenumber = document.location.href;
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Consigli Pag: " + c2cforumpagenumber.replace("https://www.qdssclub.com/forums/category/consiglipage=", "");
-        data.startTimestamp = browsingStamp;
+    else if (href.startsWith("https://www.qdssclub.com/forums/category/consiglipage=")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state =
+            "Categoria: Consigli Pag: " +
+                href.replace("https://www.qdssclub.com/forums/category/consiglipage=", "");
     }
-    else if (document.location.href.endsWith("/forums/category/Salotto")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Salotto Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/Salotto")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Salotto Pag: 1";
     }
-    else if (document.location.href.endsWith("/forums/category/Salotto/")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Salotto Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/Salotto/")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Salotto Pag: 1";
     }
-    else if (document.location.href.startsWith("https://www.qdssclub.com/forums/category/Salottopage=")) {
-        let s1sforumpagenumber = document.location.href;
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Salotto Pag: " + s1sforumpagenumber.replace("https://www.qdssclub.com/forums/category/Salottopage=", "");
-        data.startTimestamp = browsingStamp;
+    else if (href.startsWith("https://www.qdssclub.com/forums/category/Salottopage=")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state =
+            "Categoria: Salotto Pag: " +
+                href.replace("https://www.qdssclub.com/forums/category/Salottopage=", "");
     }
-    else if (document.location.href.endsWith("/forums/category/salotto")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Salotto Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/salotto")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Salotto Pag: 1";
     }
-    else if (document.location.href.endsWith("/forums/category/salotto/")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Salotto Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/salotto/")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Salotto Pag: 1";
     }
-    else if (document.location.href.startsWith("https://www.qdssclub.com/forums/category/salottopage=")) {
-        let s2sforumpagenumber = document.location.href;
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Salotto Pag: " + s2sforumpagenumber.replace("https://www.qdssclub.com/forums/category/salottopage=", "");
-        data.startTimestamp = browsingStamp;
+    else if (href.startsWith("https://www.qdssclub.com/forums/category/salottopage=")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state =
+            "Categoria: Salotto Pag: " +
+                href.replace("https://www.qdssclub.com/forums/category/salottopage=", "");
     }
-    else if (document.location.href.endsWith("/forums/category/Conosciamoci")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Conosciamoci Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/Conosciamoci")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Conosciamoci Pag: 1";
     }
-    else if (document.location.href.endsWith("/forums/category/Conosciamoci/")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Conosciamoci Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/Conosciamoci/")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Conosciamoci Pag: 1";
     }
-    else if (document.location.href.startsWith("https://www.qdssclub.com/forums/category/Conosciamocipage=")) {
-        let c1coforumpagenumber = document.location.href;
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Conosciamoci Pag: " + c1coforumpagenumber.replace("https://www.qdssclub.com/forums/category/Conosciamocipage=", "");
-        data.startTimestamp = browsingStamp;
+    else if (href.startsWith("https://www.qdssclub.com/forums/category/Conosciamocipage=")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state =
+            "Categoria: Conosciamoci Pag: " +
+                href.replace("https://www.qdssclub.com/forums/category/Conosciamocipage=", "");
     }
-    else if (document.location.href.endsWith("/forums/category/conosciamoci")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Conosciamoci Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/conosciamoci")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Conosciamoci Pag: 1";
     }
-    else if (document.location.href.endsWith("/forums/category/conosciamoci/")) {
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Conosciamoci Pag: 1";
-        data.startTimestamp = browsingStamp;
+    else if (href.endsWith("/forums/category/conosciamoci/")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state = "Categoria: Conosciamoci Pag: 1";
     }
-    else if (document.location.href.startsWith("https://www.qdssclub.com/forums/category/conosciamocipage=")) {
-        let c2coforumpagenumber = document.location.href;
-        data.details = "Sfoglia il forum";
-        data.state = "Categoria: Conosciamoci Pag: " + c2coforumpagenumber.replace("https://www.qdssclub.com/forums/category/conosciamocipage=", "");
-        data.startTimestamp = browsingStamp;
+    else if (href.startsWith("https://www.qdssclub.com/forums/category/conosciamocipage=")) {
+        presenceData.details = "Sfoglia il forum";
+        presenceData.state =
+            "Categoria: Conosciamoci Pag: " +
+                href.replace("https://www.qdssclub.com/forums/category/conosciamocipage=", "");
     }
     else if (document.location.pathname.startsWith("/forums/discussion/")) {
-        let discussionname = document.querySelector(".text-center h1").textContent;
-        data.details = "Legge la discussione:";
-        data.state = discussionname;
-        data.startTimestamp = browsingStamp;
+        const discussionname = document.querySelector(".text-center h1")
+            .textContent;
+        presenceData.details = "Legge la discussione:";
+        presenceData.state = discussionname;
     }
     else if (document.location.pathname.startsWith("/articolo")) {
-        let articoloname = document.querySelector(".text-center h3").textContent;
-        data.details = "Legge l'articolo:";
-        data.state = articoloname;
-        data.startTimestamp = browsingStamp;
+        const articoloname = document.querySelector(".text-center h3").textContent;
+        presenceData.details = "Legge l'articolo:";
+        presenceData.state = articoloname;
     }
     else if (document.location.pathname.startsWith("/login")) {
-        data.details = "Sta cercando di fare";
-        data.state = "l'accesso";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Sta cercando di fare";
+        presenceData.state = "l'accesso";
     }
     else if (document.location.pathname.startsWith("/password")) {
-        data.details = "Sta cercando di fare";
-        data.state = "l'accesso";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Sta cercando di fare";
+        presenceData.state = "l'accesso";
     }
     else if (document.location.pathname.startsWith("/register")) {
-        data.details = "Sta cercando di";
-        data.state = "registrarsi";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Sta cercando di";
+        presenceData.state = "registrarsi";
     }
     else if (document.location.pathname.startsWith("/convalida")) {
-        data.details = "Sta cercando di";
-        data.state = "registrarsi";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Sta cercando di";
+        presenceData.state = "registrarsi";
     }
     else {
-        data.details = "Navigando...";
-        data.startTimestamp = browsingStamp;
+        presenceData.details = "Navigando...";
+    }
+    if (presenceData.details == null) {
+        presence.setTrayTitle();
+        presence.setActivity();
+    }
+    else {
+        presence.setActivity(presenceData);
     }
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUM1QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsQ0FBQztBQUVILE1BQU0sYUFBYSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO0FBRXBELFFBQVEsQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLEtBQUssSUFBSSxFQUFFO0lBQ25DLE1BQU0sSUFBSSxHQUFpQjtRQUN6QixhQUFhLEVBQUUsTUFBTTtLQUN0QixDQUFDO0lBRUYsSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsSUFBSSxHQUFHLEVBQUU7UUFDckMsSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsaUNBQWlDLENBQUMsRUFBRTtZQUV4RSxJQUFJLGlCQUFpQixHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDO1lBRS9DLElBQUksQ0FBQyxPQUFPLEdBQUcsZ0JBQWdCLENBQUM7WUFDaEMsSUFBSSxDQUFDLEtBQUssR0FBRyx5QkFBeUIsR0FBRyxpQkFBaUIsQ0FBQyxPQUFPLENBQUMsaUNBQWlDLEVBQUUsRUFBRSxDQUFDLENBQUM7WUFDMUcsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7U0FFckM7YUFBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxxQ0FBcUMsQ0FBQyxFQUFFO1lBRW5GLElBQUksb0JBQW9CLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7WUFFbEQsSUFBSSxDQUFDLE9BQU8sR0FBRyxnQkFBZ0IsQ0FBQztZQUNoQyxJQUFJLENBQUMsS0FBSyxHQUFHLDZCQUE2QixHQUFHLG9CQUFvQixDQUFDLE9BQU8sQ0FBQyxxQ0FBcUMsRUFBRSxFQUFFLENBQUMsQ0FBQztZQUNySCxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztTQUVyQzthQUFNO1lBRUwsSUFBSSxDQUFDLE9BQU8sR0FBRyxnQkFBZ0IsQ0FBQztZQUNoQyxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztTQUVyQztLQUVGO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsTUFBTSxDQUFDLEVBQUU7UUFFeEQsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxFQUFFO1FBRTdELElBQUksQ0FBQyxPQUFPLEdBQUcsa0JBQWtCLENBQUM7UUFDbEMsSUFBSSxDQUFDLEtBQUssR0FBRyxxQkFBcUIsQ0FBQztRQUNuQyxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLGlCQUFpQixDQUFDLEVBQUU7UUFFbkUsSUFBSSxDQUFDLE9BQU8sR0FBRyxtQkFBbUIsQ0FBQztRQUNuQyxJQUFJLENBQUMsS0FBSyxHQUFHLGdCQUFnQixDQUFDO1FBQzlCLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLEVBQUU7UUFFNUQsSUFBSSxDQUFDLE9BQU8sR0FBRyx1QkFBdUIsQ0FBQztRQUN2QyxJQUFJLENBQUMsS0FBSyxHQUFHLGFBQWEsQ0FBQztRQUMzQixJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLFVBQVUsQ0FBQyxFQUFFO1FBRTVELElBQUksQ0FBQyxPQUFPLEdBQUcsdUJBQXVCLENBQUM7UUFDdkMsSUFBSSxDQUFDLEtBQUssR0FBRyxlQUFlLENBQUM7UUFDN0IsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxhQUFhLENBQUMsRUFBRTtRQUUvRCxJQUFJLENBQUMsT0FBTyxHQUFHLHNCQUFzQixDQUFDO1FBQ3RDLElBQUksQ0FBQyxLQUFLLEdBQUcsd0JBQXdCLENBQUM7UUFDdEMsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsRUFBRTtRQUVyRCxJQUFJLENBQUMsT0FBTyxHQUFHLGtCQUFrQixDQUFDO1FBQ2xDLElBQUksQ0FBQyxLQUFLLEdBQUcsV0FBVyxDQUFDO1FBQ3pCLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLEVBQUU7UUFFdEQsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLFdBQVcsQ0FBQztRQUN6QixJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLHVDQUF1QyxDQUFDLEVBQUU7UUFFckYsSUFBSSxnQkFBZ0IsR0FBRyxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQztRQUU5QyxJQUFJLENBQUMsT0FBTyxHQUFHLGtCQUFrQixDQUFDO1FBQ2xDLElBQUksQ0FBQyxLQUFLLEdBQUcsVUFBVSxHQUFHLGdCQUFnQixDQUFDLE9BQU8sQ0FBQyx1Q0FBdUMsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUNoRyxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLDJCQUEyQixDQUFDLEVBQUU7UUFFdkUsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLDRCQUE0QixDQUFDO1FBQzFDLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsNEJBQTRCLENBQUMsRUFBRTtRQUV4RSxJQUFJLENBQUMsT0FBTyxHQUFHLGtCQUFrQixDQUFDO1FBQ2xDLElBQUksQ0FBQyxLQUFLLEdBQUcsNEJBQTRCLENBQUM7UUFDMUMsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyx3REFBd0QsQ0FBQyxFQUFFO1FBRXRHLElBQUksa0JBQWtCLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFFaEQsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLDJCQUEyQixHQUFHLGtCQUFrQixDQUFDLE9BQU8sQ0FBQyx3REFBd0QsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUNwSSxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLDJCQUEyQixDQUFDLEVBQUU7UUFFdkUsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLDRCQUE0QixDQUFDO1FBQzFDLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsNEJBQTRCLENBQUMsRUFBRTtRQUV4RSxJQUFJLENBQUMsT0FBTyxHQUFHLGtCQUFrQixDQUFDO1FBQ2xDLElBQUksQ0FBQyxLQUFLLEdBQUcsNEJBQTRCLENBQUM7UUFDMUMsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyx3REFBd0QsQ0FBQyxFQUFFO1FBRXRHLElBQUksa0JBQWtCLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFFaEQsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLDJCQUEyQixHQUFHLGtCQUFrQixDQUFDLE9BQU8sQ0FBQyx3REFBd0QsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUNwSSxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLDBCQUEwQixDQUFDLEVBQUU7UUFFdEUsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLDJCQUEyQixDQUFDO1FBQ3pDLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsMkJBQTJCLENBQUMsRUFBRTtRQUV2RSxJQUFJLENBQUMsT0FBTyxHQUFHLGtCQUFrQixDQUFDO1FBQ2xDLElBQUksQ0FBQyxLQUFLLEdBQUcsMkJBQTJCLENBQUM7UUFDekMsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyx1REFBdUQsQ0FBQyxFQUFFO1FBRXJHLElBQUksa0JBQWtCLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFFaEQsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLDBCQUEwQixHQUFHLGtCQUFrQixDQUFDLE9BQU8sQ0FBQyx1REFBdUQsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUNsSSxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLDBCQUEwQixDQUFDLEVBQUU7UUFFdEUsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLDJCQUEyQixDQUFDO1FBQ3pDLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsMkJBQTJCLENBQUMsRUFBRTtRQUV2RSxJQUFJLENBQUMsT0FBTyxHQUFHLGtCQUFrQixDQUFDO1FBQ2xDLElBQUksQ0FBQyxLQUFLLEdBQUcsMkJBQTJCLENBQUM7UUFDekMsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyx1REFBdUQsQ0FBQyxFQUFFO1FBRXJHLElBQUksa0JBQWtCLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFFaEQsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLDBCQUEwQixHQUFHLGtCQUFrQixDQUFDLE9BQU8sQ0FBQyx1REFBdUQsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUNsSSxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLCtCQUErQixDQUFDLEVBQUU7UUFFM0UsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLGdDQUFnQyxDQUFDO1FBQzlDLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsZ0NBQWdDLENBQUMsRUFBRTtRQUU1RSxJQUFJLENBQUMsT0FBTyxHQUFHLGtCQUFrQixDQUFDO1FBQ2xDLElBQUksQ0FBQyxLQUFLLEdBQUcsZ0NBQWdDLENBQUM7UUFDOUMsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyw0REFBNEQsQ0FBQyxFQUFFO1FBRTFHLElBQUksbUJBQW1CLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFFakQsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLCtCQUErQixHQUFHLG1CQUFtQixDQUFDLE9BQU8sQ0FBQyw0REFBNEQsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUM3SSxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLCtCQUErQixDQUFDLEVBQUU7UUFFM0UsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLGdDQUFnQyxDQUFDO1FBQzlDLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsZ0NBQWdDLENBQUMsRUFBRTtRQUU1RSxJQUFJLENBQUMsT0FBTyxHQUFHLGtCQUFrQixDQUFDO1FBQ2xDLElBQUksQ0FBQyxLQUFLLEdBQUcsZ0NBQWdDLENBQUM7UUFDOUMsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyw0REFBNEQsQ0FBQyxFQUFFO1FBRTFHLElBQUksbUJBQW1CLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFFakQsSUFBSSxDQUFDLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQztRQUNsQyxJQUFJLENBQUMsS0FBSyxHQUFHLCtCQUErQixHQUFHLG1CQUFtQixDQUFDLE9BQU8sQ0FBQyw0REFBNEQsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUM3SSxJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLHFCQUFxQixDQUFDLEVBQUU7UUFFdkUsSUFBSSxjQUFjLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDLFdBQVcsQ0FBQztRQUUzRSxJQUFJLENBQUMsT0FBTyxHQUFHLHVCQUF1QixDQUFDO1FBQ3ZDLElBQUksQ0FBQyxLQUFLLEdBQUcsY0FBYyxDQUFDO1FBQzVCLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLEVBQUU7UUFFN0QsSUFBSSxZQUFZLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDLFdBQVcsQ0FBQztRQUV6RSxJQUFJLENBQUMsT0FBTyxHQUFHLG1CQUFtQixDQUFDO1FBQ25DLElBQUksQ0FBQyxLQUFLLEdBQUcsWUFBWSxDQUFDO1FBQzFCLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLEVBQUU7UUFFMUQsSUFBSSxDQUFDLE9BQU8sR0FBRyxzQkFBc0IsQ0FBQztRQUN0QyxJQUFJLENBQUMsS0FBSyxHQUFHLFdBQVcsQ0FBQztRQUN6QixJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxFQUFFO1FBRTdELElBQUksQ0FBQyxPQUFPLEdBQUcsc0JBQXNCLENBQUM7UUFDdEMsSUFBSSxDQUFDLEtBQUssR0FBRyxXQUFXLENBQUM7UUFDekIsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxXQUFXLENBQUMsRUFBRTtRQUU3RCxJQUFJLENBQUMsT0FBTyxHQUFHLGlCQUFpQixDQUFDO1FBQ2pDLElBQUksQ0FBQyxLQUFLLEdBQUcsYUFBYSxDQUFDO1FBQzNCLElBQUksQ0FBQyxjQUFjLEdBQUcsYUFBYSxDQUFDO0tBRXJDO1NBQU0sSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsWUFBWSxDQUFDLEVBQUU7UUFFOUQsSUFBSSxDQUFDLE9BQU8sR0FBRyxpQkFBaUIsQ0FBQztRQUNqQyxJQUFJLENBQUMsS0FBSyxHQUFHLGFBQWEsQ0FBQztRQUMzQixJQUFJLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUVyQztTQUFNO1FBRUwsSUFBSSxDQUFDLE9BQU8sR0FBRyxjQUFjLENBQUM7UUFDOUIsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7S0FFckM7QUFFSCxDQUFDLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUM1QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsQ0FBQztBQUVILE1BQU0sYUFBYSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO0FBRXBELFFBQVEsQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLEtBQUssSUFBSSxFQUFFO0lBQ25DLE1BQU0sWUFBWSxHQUFpQjtRQUNqQyxhQUFhLEVBQUUsTUFBTTtLQUN0QixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7SUFDcEMsWUFBWSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7SUFFNUMsSUFBSSxRQUFRLENBQUMsUUFBUSxDQUFDLFFBQVEsSUFBSSxHQUFHLEVBQUU7UUFDckMsSUFBSSxJQUFJLENBQUMsVUFBVSxDQUFDLGlDQUFpQyxDQUFDLEVBQUU7WUFDdEQsWUFBWSxDQUFDLE9BQU8sR0FBRyxnQkFBZ0IsQ0FBQztZQUN4QyxZQUFZLENBQUMsS0FBSztnQkFDaEIseUJBQXlCO29CQUN6QixJQUFJLENBQUMsT0FBTyxDQUFDLGlDQUFpQyxFQUFFLEVBQUUsQ0FBQyxDQUFDO1NBQ3ZEO2FBQU0sSUFBSSxJQUFJLENBQUMsVUFBVSxDQUFDLHFDQUFxQyxDQUFDLEVBQUU7WUFDakUsWUFBWSxDQUFDLE9BQU8sR0FBRyxnQkFBZ0IsQ0FBQztZQUN4QyxZQUFZLENBQUMsS0FBSztnQkFDaEIsNkJBQTZCO29CQUM3QixJQUFJLENBQUMsT0FBTyxDQUFDLHFDQUFxQyxFQUFFLEVBQUUsQ0FBQyxDQUFDO1NBQzNEO2FBQU07WUFDTCxZQUFZLENBQUMsT0FBTyxHQUFHLGdCQUFnQixDQUFD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
