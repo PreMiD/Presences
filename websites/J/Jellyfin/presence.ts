@@ -437,11 +437,6 @@ async function handleWebClient(): Promise<void> {
     case "nowplaying.html":
       presenceData.state = "Viewing the audio playlist";
       break;
-
-    default:
-      if (path.substr(0, 3) === "dlg") {
-        // generic popup do nothing
-      }
   }
 }
 
