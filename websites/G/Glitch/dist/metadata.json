@@ -9,9 +9,9 @@
     "ga_IE": "Is é Glitch an pobal cairdiúil inar féidir leat an app do aislingí a aimsiú nó a chruthú. Tá níos mó ná milliún duine anois mar chuid de phobal Glitch, ag cruthú apps, bots, láithreáin ghréasáin, tionscadail ealaíne, eispéiris réaltachta fhíorúla, grafaicí faisnéise idirghníomhacha agus i bhfad níos mó."
   },
   "url": ["glitch.com", "support.glitch.com", "status.glitch.com"],
-  "version": "1.7.1",
-  "logo": "https://cdn.glitch.com/e200ca48-8caa-472f-b105-1ab0ed3d605d%2Fglitch-fish-big.png",
-  "thumbnail": "https://downbeat.is-inside.me/S3bomlzS.png",
+  "version": "1.8.0",
+  "logo": "https://i.imgur.com/zU6eBwQ.png",
+  "thumbnail": "https://i.imgur.com/mnilDhS.png",
   "color": "#f003fc",
   "tags": ["developing", "hosting", "community"],
   "category": "other",
