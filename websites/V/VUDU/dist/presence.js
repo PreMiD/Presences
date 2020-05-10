@@ -1,120 +1,75 @@
-// Initialize the presence
-var presence = new Presence({
-  clientId: "697983563857002517"
+const presence = new Presence({
+    clientId: "697983563857002517"
 });
-
-// Global variables
-var startTime = Date.now();
-
-var videoPlayer;
-var videoDuration;
-var cuTime;
-
-var endTime;
-var videoState = "paused"; // Default
-
-var metadata;
-
-// Set the default presence data for when the video is loading
-var presenceData = {
-  largeImageKey:
-    "vudularge" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
-  details: "Browsing VUDU"
+let startTime = Date.now();
+let videoPlayer;
+let videoDuration;
+let cuTime;
+let endTime;
+let videoState = "paused";
+let metadata;
+let presenceData = {
+    largeImageKey: "vudularge",
+    details: "Browsing VUDU"
 };
-
-// Get the title
 function grabMetadata() {
-  // Get the close button first (Don't worry this will make sense)
-  var closeButton = document.querySelector('[aria-label="Close"]');
-
-  // If there's not a close button, then the user isn't watching anything
-  if (!closeButton) return;
-
-  // Get the parent
-  var metaParent = closeButton.parentElement;
-
-  // Get all the elements inside of the parent that are span (there should only be one) and get the innerHTML
-  metadata = metaParent.getElementsByTagName("span")[0].innerHTML;
+    var closeButton = document.querySelector('[aria-label="Close"]');
+    if (!closeButton)
+        return;
+    var metaParent = closeButton.parentElement;
+    metadata = metaParent.getElementsByTagName("span")[0].innerHTML;
 }
-
-// Get the video player element
 function getVideoPlayer() {
-  // VUDU plays movies in an iFrame. Cool! Let's get that iFrame
-  var VUDUIFrame = document.getElementById("contentPlayerFrame");
-
-  // Now let's get the content INSIDE of that.
-  var VUDUIFrameContent =
-    VUDUIFrame.contentDocument || VUDUIFrame.contentWindow.document;
-
-  // Finally... get the video
-  videoPlayer = VUDUIFrameContent.getElementById("videoPlayer");
-
-  videoDuration = videoPlayer.duration; // duration of movie in seconds
-
-  cuTime = videoPlayer.currentTime; // where the user is currently at
+    var VUDUIFrame = document.getElementById("contentPlayerFrame");
+    var VUDUIFrameContent = VUDUIFrame.contentDocument || VUDUIFrame.contentWindow.document;
+    videoPlayer = VUDUIFrameContent.getElementById("videoPlayer");
+    videoDuration = videoPlayer.duration;
+    cuTime = videoPlayer.currentTime;
 }
-
 function calculateEndTime() {
-  videoState = "playing"; // Tell PreMID the video is playing correctly (aka don't update the end time again)
-  startTime = Date.now(); // Get the point where the user started watching
-  endTime = startTime + (videoDuration - cuTime) * 1000; // Get the end of the video (time left)
-
-  if (isNaN(endTime)) {
-    // If the video DIDN'T load correctly then endTime will be NaN
-    videoState = "loading"; // Video is still loading, calculate again
-    calculateEndTime();
-  }
-}
-
-function pausePresence() {
-  videoState = "paused"; // Tell PreMID the user paused, this lets us calculate endTime again when the user starts playing
-}
-
-setInterval(grabMetadata, 10000); // Metadata shouldn't ever really change... so this is fine
-setInterval(getVideoPlayer, 1000); // If I was dumb enough to run this every frame I would, but I'm considerate and so it shall only run every second
-
-presence.on("UpdateData", () => {
-  // Video doesn't exist, and there's no metadata either.
-  // Aka, user isn't watching anything.
-  if (videoPlayer != null && metadata != undefined) {
-    // When the video pauses
-    if (videoPlayer.paused) {
-      // Only run this once
-      if (videoState != "paused") {
-        pausePresence();
-      }
-
-      // Discord says "hey nice pause"
-      presenceData = {
-        largeImageKey:
-          "vudularge" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
-        details: "Watching " + metadata, //The upper section of the presence text
-        state: "Paused"
-      };
-    } else {
-      // Only run this once
-      if (videoState != "playing") {
+    videoState = "playing";
+    startTime = Date.now();
+    endTime = startTime + (videoDuration - cuTime) * 1000;
+    if (isNaN(endTime)) {
+        videoState = "loading";
         calculateEndTime();
-      }
-
-      // Set presence to movie data
-      presenceData = {
-        largeImageKey:
-          "vudularge" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
-        smallImageKey:
-          "vudusmall" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
-        smallImageText: "Watching movies", //The text which is displayed when hovering over the small image
-        details: "Watching " + metadata, //The upper section of the presence text
-        startTimestamp: startTime, //The unix epoch timestamp for when to start counting from
-        endTimestamp: endTime //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
-      };
     }
-
-    // Send that activity to discord
-    presence.setActivity(presenceData);
-  } else {
-    // Clear activity
-    presence.setTrayTitle();
-    presence.setActivity();
-  }
+}
+function pausePresence() {
+    videoState = "paused";
+}
+setInterval(grabMetadata, 10000);
+setInterval(getVideoPlayer, 1000);
+presence.on("UpdateData", () => {
+    if (videoPlayer != null && metadata != undefined) {
+        if (videoPlayer.paused) {
+            if (videoState != "paused") {
+                pausePresence();
+            }
+            presenceData = {
+                largeImageKey: "vudularge",
+                details: "Watching " + metadata,
+                state: "Paused"
+            };
+        }
+        else {
+            if (videoState != "playing") {
+                calculateEndTime();
+            }
+            presenceData = {
+                largeImageKey: "vudularge",
+                smallImageKey: "vudusmall",
+                smallImageText: "Watching movies",
+                details: "Watching " + metadata,
+                startTimestamp: startTime,
+                endTimestamp: endTime
+            };
+        }
+        presence.setActivity(presenceData);
+    }
+    else {
+        presence.setTrayTitle();
+        presence.setActivity();
+    }
 });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQSxNQUFNLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUM1QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsQ0FBQztBQUdILElBQUksU0FBUyxHQUFHLElBQUksQ0FBQyxHQUFHLEVBQUUsQ0FBQztBQUUzQixJQUFJLFdBQVcsQ0FBQztBQUNoQixJQUFJLGFBQWEsQ0FBQztBQUNsQixJQUFJLE1BQU0sQ0FBQztBQUVYLElBQUksT0FBTyxDQUFDO0FBQ1osSUFBSSxVQUFVLEdBQUcsUUFBUSxDQUFDO0FBRTFCLElBQUksUUFBUSxDQUFDO0FBR2IsSUFBSSxZQUFZLEdBQWlCO0lBQy9CLGFBQWEsRUFDWCxXQUFXO0lBQ2IsT0FBTyxFQUFFLGVBQWU7Q0FDekIsQ0FBQztBQUdGLFNBQVMsWUFBWTtJQUVuQixJQUFJLFdBQVcsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLHNCQUFzQixDQUFDLENBQUM7SUFHakUsSUFBSSxDQUFDLFdBQVc7UUFBRSxPQUFPO0lBR3pCLElBQUksVUFBVSxHQUFHLFdBQVcsQ0FBQyxhQUFhLENBQUM7SUFHM0MsUUFBUSxHQUFHLFVBQVUsQ0FBQyxvQkFBb0IsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUM7QUFDbEUsQ0FBQztBQUdELFNBQVMsY0FBYztJQUVyQixJQUFJLFVBQVUsR0FBUSxRQUFRLENBQUMsY0FBYyxDQUFDLG9CQUFvQixDQUFDLENBQUM7SUFHcEUsSUFBSSxpQkFBaUIsR0FDbkIsVUFBVSxDQUFDLGVBQWUsSUFBSSxVQUFVLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQztJQUdsRSxXQUFXLEdBQUcsaUJBQWlCLENBQUMsY0FBYyxDQUFDLGFBQWEsQ0FBQyxDQUFDO0lBRTlELGFBQWEsR0FBRyxXQUFXLENBQUMsUUFBUSxDQUFDO0lBRXJDLE1BQU0sR0FBRyxXQUFXLENBQUMsV0FBVyxDQUFDO0FBQ25DLENBQUM7QUFFRCxTQUFTLGdCQUFnQjtJQUN2QixVQUFVLEdBQUcsU0FBUyxDQUFDO0lBQ3ZCLFNBQVMsR0FBRyxJQUFJLENBQUMsR0FBRyxFQUFFLENBQUM7SUFDdkIsT0FBTyxHQUFHLFNBQVMsR0FBRyxDQUFDLGFBQWEsR0FBRyxNQUFNLENBQUMsR0FBRyxJQUFJLENBQUM7SUFFdEQsSUFBSSxLQUFLLENBQUMsT0FBTyxDQUFDLEVBQUU7UUFFbEIsVUFBVSxHQUFHLFNBQVMsQ0FBQztRQUN2QixnQkFBZ0IsRUFBRSxDQUFDO0tBQ3BCO0FBQ0gsQ0FBQztBQUVELFNBQVMsYUFBYTtJQUNwQixVQUFVLEdBQUcsUUFBUSxDQUFDO0FBQ3hCLENBQUM7QUFFRCxXQUFXLENBQUMsWUFBWSxFQUFFLEtBQUssQ0FBQyxDQUFDO0FBQ2pDLFdBQVcsQ0FBQyxjQUFjLEVBQUUsSUFBSSxDQUFDLENBQUM7QUFFbEMsUUFBUSxDQUFDLEVBQUUsQ0FBQyxZQUFZLEVBQUUsR0FBRyxFQUFFO0lBRzdCLElBQUksV0FBVyxJQUFJLElBQUksSUFBSSxRQUFRLElBQUksU0FBUyxFQUFFO1FBRWhELElBQUksV0FBVyxDQUFDLE1BQU0sRUFBRTtZQUV0QixJQUFJLFVBQVUsSUFBSSxRQUFRLEVBQUU7Z0JBQzFCLGFBQWEsRUFBRSxDQUFDO2FBQ2pCO1lBR0QsWUFBWSxHQUFHO2dCQUNiLGFBQWEsRUFDWCxXQUFXO2dCQUNiLE9BQU8sRUFBRSxXQUFXLEdBQUcsUUFBUTtnQkFDL0IsS0FBSyxFQUFFLFFBQVE7YUFDaEIsQ0FBQztTQUNIO2FBQU07WUFFTCxJQUFJLFVBQVUsSUFBSSxTQUFTLEVBQUU7Z0JBQzNCLGdCQUFnQixFQUFFLENBQUM7YUFDcEI7WUFHRCxZQUFZLEdBQUc7Z0JBQ2IsYUFBYSxFQUNYLFdBQVc7Z0JBQ2IsYUFBYSxFQUNYLFdBQVc7Z0JBQ2IsY0FBYyxFQUFFLGlCQUFpQjtnQkFDakMsT0FBTyxFQUFFLFdBQVcsR0FBRyxRQUFRO2dCQUMvQixjQUFjLEVBQUUsU0FBUztnQkFDekIsWUFBWSxFQUFFLE9BQU87YUFDdEIsQ0FBQztTQUNIO1FBR0QsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLENBQUMsQ0FBQztLQUNwQztTQUFNO1FBRUwsUUFBUSxDQUFDLFlBQVksRUFBRSxDQUFDO1FBQ3hCLFFBQVEsQ0FBQyxXQUFXLEVBQUUsQ0FBQztLQUN4QjtBQUNILENBQUMsQ0FBQyxDQUFDIn0=
