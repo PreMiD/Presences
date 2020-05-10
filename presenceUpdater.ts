@@ -1,17 +1,10 @@
 import "source-map-support/register";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { connect, MongoClient } from "mongodb";
 import { readFileSync as readFile } from "fs";
 import { sync as glob } from "glob";
 
-connect(
-  `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
-  {
-    appname: "PreMiD-PresenceUpdater",
-    useUnifiedTopology: true
-  }
-).then(run);
-
-async function run(MongoClient: MongoClient) {
+async function run(MongoClient: MongoClient): Promise<void> {
   const dbPresences = await MongoClient.db("PreMiD")
     .collection("presences")
     .find()
@@ -25,7 +18,7 @@ async function run(MongoClient: MongoClient) {
     const metadata = JSON.parse(readFile(`${pF}/dist/metadata.json`, "utf-8")),
       presenceJs = readFile(`${pF}/dist/presence.js`, "utf-8");
 
-    let resJson: any = {
+    const resJson: any = {
       name: metadata.service,
       url: `https://api.premid.app/v2/presences/${encodeURI(
         metadata.service
@@ -80,3 +73,11 @@ async function run(MongoClient: MongoClient) {
 
   Promise.all([nP, ...dP, ...oP]).then(() => MongoClient.close());
 }
+
+connect(
+  `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
+  {
+    appname: "PreMiD-PresenceUpdater",
+    useUnifiedTopology: true
+  }
+).then(run);
