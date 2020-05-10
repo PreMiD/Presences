@@ -1,9 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "668933003434655781"
 });
 
 presence.on("UpdateData", () => {
-  let presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "logo"
   };
 
