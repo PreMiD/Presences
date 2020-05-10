@@ -1,12 +1,13 @@
-var presence = new Presence({
-  clientId: "676411728925294605"
+const presence = new Presence({
+    clientId: "676411728925294605"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
-presence.on("UpdateData", () => {
-  let data = {
-    largeImageKey: "orbazzo"
-  };
-  (data.details = "Guarda"), (data.state = "ORBAZZO FIERO");
-  data.startTimestamp = browsingStamp;
-  presence.setActivity(data);
+const browsingStamp = Math.floor(Date.now() / 1000);
+presence.on("UpdateData", async () => {
+    const data = {
+        largeImageKey: "orbazzo"
+    };
+    data.details = "Guarda";
+    data.state = "ORBAZZO FIERO";
+    data.startTimestamp = browsingStamp;
 });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUM1QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsQ0FBQztBQUVILE1BQU0sYUFBYSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO0FBRXBELFFBQVEsQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLEtBQUssSUFBSSxFQUFFO0lBQ25DLE1BQU0sSUFBSSxHQUFpQjtRQUN6QixhQUFhLEVBQUUsU0FBUztLQUN6QixDQUFDO0lBRUYsSUFBSSxDQUFDLE9BQU8sR0FBRyxRQUFRLENBQUM7SUFDeEIsSUFBSSxDQUFDLEtBQUssR0FBRyxlQUFlLENBQUM7SUFDN0IsSUFBSSxDQUFDLGNBQWMsR0FBRyxhQUFhLENBQUM7QUFFdEMsQ0FBQyxDQUFDLENBQUMifQ==
