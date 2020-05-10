@@ -1,8 +1,6 @@
 {
-  "extends": "../tsconfig.json",
-  "compileOnSave": true,
+  "extends": "../../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist/",
-    "downlevelIteration": true
+    "outDir": "./dist/"
   }
 }
