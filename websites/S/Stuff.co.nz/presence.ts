@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-  let presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "logo"
   };
 
@@ -50,7 +50,7 @@ presence.on("UpdateData", () => {
         presenceData.details = "Viewing the weather...";
         presenceData.state =
           document.getElementsByClassName("section-location-header")[0]
-            .innerText || "National Forecast";
+            .textContent || "National Forecast";
       } else if (document.location.href.includes("/quizzies")) {
         presenceData.details = "Looking at quizzes";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
@@ -288,7 +288,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Reading an article...";
     presenceData.state = document.getElementsByClassName(
       "sics-component__headline__title"
-    )[0].innerText;
+    )[0].textContent;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 
