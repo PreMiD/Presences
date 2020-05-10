@@ -1,45 +1,45 @@
-var presence = new Presence({
-  clientId: "647803677284761619"
+const presence = new Presence({
+    clientId: "647803677284761619"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 let sartist, strack, slisteners, sduration, selapsed, timestamps;
+function newStats() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            const data = JSON.parse(this.responseText);
+            strack = data.now_playing.song.title;
+            sartist = data.now_playing.song.artist;
+            slisteners = data.listeners.total;
+            sduration = data.now_playing.duration;
+            selapsed = data.now_playing.elapsed;
+        }
+    };
+    xhttp.open("GET", "https://radio.theviberadio.com/api/nowplaying/1", true);
+    xhttp.send();
+}
+function getTimestamps(videoTime, videoDuration) {
+    const startTime = Date.now();
+    const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    return [Math.floor(startTime / 1000), endTime];
+}
 setInterval(newStats, 1000);
 newStats();
-function newStats() {
-  let xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      let data = JSON.parse(this.responseText);
-      strack = data.now_playing.song.title;
-      sartist = data.now_playing.song.artist;
-      slisteners = data.listeners.total;
-      sduration = data.now_playing.duration;
-      selapsed = data.now_playing.elapsed;
-    }
-  };
-  xhttp.open("GET", "https://radio.theviberadio.com/api/nowplaying/1", true);
-  xhttp.send();
-}
 presence.on("UpdateData", () => {
-  let presenceData = {
-    largeImageKey: "vibe"
-  };
-  timestamps = getTimestamps(Math.floor(selapsed), Math.floor(sduration));
-  presenceData.smallImageKey = "play";
-  presenceData.details = sartist + " - " + strack;
-  presenceData.state = slisteners + " Listeners";
-  presenceData.smallImageText = "Playing";
-  presenceData.startTimestamp = timestamps[0];
-  presenceData.endTimestamp = timestamps[1];
-  if (sduration == 0) {
-    delete presenceData.endTimestamp;
-    presenceData.startTimestamp = browsingStamp;
-  }
-  presence.setActivity(presenceData);
+    const presenceData = {
+        largeImageKey: "vibe"
+    };
+    timestamps = getTimestamps(Math.floor(selapsed), Math.floor(sduration));
+    presenceData.smallImageKey = "play";
+    presenceData.details = sartist + " - " + strack;
+    presenceData.state = slisteners + " Listeners";
+    presenceData.smallImageText = "Playing";
+    presenceData.startTimestamp = timestamps[0];
+    presenceData.endTimestamp = timestamps[1];
+    if (sduration == 0) {
+        delete presenceData.endTimestamp;
+        presenceData.startTimestamp = browsingStamp;
+    }
+    presence.setActivity(presenceData);
 });
-
-function getTimestamps(videoTime, videoDuration) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUM1QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsQ0FBQztBQUVILE1BQU0sYUFBYSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO0FBQ3BELElBQUksT0FBTyxFQUFFLE1BQU0sRUFBRSxVQUFVLEVBQUUsU0FBUyxFQUFFLFFBQVEsRUFBRSxVQUFVLENBQUM7QUFFakUsU0FBUyxRQUFRO0lBQ2YsTUFBTSxLQUFLLEdBQUcsSUFBSSxjQUFjLEVBQUUsQ0FBQztJQUNuQyxLQUFLLENBQUMsa0JBQWtCLEdBQUc7UUFDekIsSUFBSSxJQUFJLENBQUMsVUFBVSxJQUFJLENBQUMsSUFBSSxJQUFJLENBQUMsTUFBTSxJQUFJLEdBQUcsRUFBRTtZQUM5QyxNQUFNLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQztZQUMzQyxNQUFNLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDO1lBQ3JDLE9BQU8sR0FBRyxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUM7WUFDdkMsVUFBVSxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDO1lBQ2xDLFNBQVMsR0FBRyxJQUFJLENBQUMsV0FBVyxDQUFDLFFBQVEsQ0FBQztZQUN0QyxRQUFRLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUM7U0FDckM7SUFDSCxDQUFDLENBQUM7SUFDRixLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxpREFBaUQsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUMzRSxLQUFLLENBQUMsSUFBSSxFQUFFLENBQUM7QUFDZixDQUFDO0FBRUQsU0FBUyxhQUFhLENBQ3BCLFNBQWlCLEVBQ2pCLGFBQXFCO0lBRXJCLE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxHQUFHLEVBQUUsQ0FBQztJQUM3QixNQUFNLE9BQU8sR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsR0FBRyxTQUFTLEdBQUcsYUFBYSxDQUFDO0lBQ3pFLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsRUFBRSxPQUFPLENBQUMsQ0FBQztBQUNqRCxDQUFDO0FBRUQsV0FBVyxDQUFDLFFBQVEsRUFBRSxJQUFJLENBQUMsQ0FBQztBQUM1QixRQUFRLEVBQUUsQ0FBQztBQUVYLFFBQVEsQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLEdBQUcsRUFBRTtJQUM3QixNQUFNLFlBQVksR0FBaUI7UUFDakMsYUFBYSxFQUFFLE1BQU07S0FDdEIsQ0FBQztJQUVGLFVBQVUsR0FBRyxhQUFhLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsRUFBRSxJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7SUFDeEUsWUFBWSxDQUFDLGFBQWEsR0FBRyxNQUFNLENBQUM7SUFDcEMsWUFBWSxDQUFDLE9BQU8sR0FBRyxPQUFPLEdBQUcsS0FBSyxHQUFHLE1BQU0sQ0FBQztJQUNoRCxZQUFZLENBQUMsS0FBSyxHQUFHLFVBQVUsR0FBRyxZQUFZLENBQUM7SUFDL0MsWUFBWSxDQUFDLGNBQWMsR0FBRyxTQUFTLENBQUM7SUFDeEMsWUFBWSxDQUFDLGNBQWMsR0FBRyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDNUMsWUFBWSxDQUFDLFlBQVksR0FBRyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDMUMsSUFBSSxTQUFTLElBQUksQ0FBQyxFQUFFO1FBQ2xCLE9BQU8sWUFBWSxDQUFDLFlBQVksQ0FBQztRQUNqQyxZQUFZLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztLQUM3QztJQUNELFFBQVEsQ0FBQyxXQUFXLENBQUMsWUFBWSxDQUFDLENBQUM7QUFDckMsQ0FBQyxDQUFDLENBQUMifQ==
