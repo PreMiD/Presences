@@ -1,16 +1,14 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "670111348130185267"
 });
 
 presence.on("UpdateData", () => {
-  var presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "logo",
     smallImageKey: "logo-outline",
     smallImageText: "codepen.io",
     details: "Codepen.io",
-    state: "Coding...",
-    startTimestamp: 0,
-    endTimestamp: 0
+    state: "Coding..."
   };
 
   if (
@@ -33,29 +31,29 @@ presence.on("UpdateData", () => {
         "Collection by " +
         document
           .getElementsByClassName("content-author")[0]
-          .innerText.split("\n")[0];
+          .textContent.split("\n")[0];
     } else {
       presenceData.state = document.getElementById("collection-desc").innerText;
     }
   } else if (window.location.pathname.includes("/topic/")) {
     presenceData.details =
       "Looking at topic " +
-      document.getElementsByClassName("Topics_topicTitle-3OfJU")[0].innerText;
+      document.getElementsByClassName("Topics_topicTitle-3OfJU")[0].textContent;
     presenceData.state = document
       .getElementsByClassName("Topics_topicDescription-2CNwF")[0]
-      .innerText.split("\n")[3];
+      .textContent.split("\n")[3];
   } else if (window.location.pathname.includes("/tv/")) {
     presenceData.details =
       "Watching " +
       document
         .getElementsByClassName("collection-details")[0]
-        .innerText.replace("From “", "")
+        .textContent.replace("From “", "")
         .replace("”", "") +
       " on Codepen TV";
     presenceData.state =
-      document.getElementsByClassName("item-title")[0].innerText +
+      document.getElementsByClassName("item-title")[0].textContent +
       " " +
-      document.getElementsByClassName("pen-author")[0].innerText;
+      document.getElementsByClassName("pen-author")[0].textContent;
   } else if (
     window.location.pathname.includes("/project/") ||
     window.location.pathname.includes("/project/")
@@ -69,10 +67,12 @@ presence.on("UpdateData", () => {
         .innerHTML.split("<")[0];
   } else if (window.location.pathname == "/write/") {
     presenceData.details = "Making a post";
-    if (document.getElementById("title").value == "") {
+    if ((document.getElementById("title") as HTMLInputElement).value == "") {
       presenceData.state = "Thinking about what the title should be.";
     } else {
-      presenceData.state = document.getElementById("title").value;
+      presenceData.state = (document.getElementById(
+        "title"
+      ) as HTMLInputElement).value;
     }
   } else if (window.location.pathname == "/") {
     presenceData.details = "On the home page";
@@ -91,7 +91,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Looking at page";
       presenceData.state = document
         .getElementsByClassName("title-header")[0]
-        .innerText.split("\n")[0];
+        .textContent.split("\n")[0];
     }
   }
 
