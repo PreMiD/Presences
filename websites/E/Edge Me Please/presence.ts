@@ -1,15 +1,15 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "631199223735517185"
 });
 
-function setTime(a) {
+function setTime(a: number): number {
   var time = new Date(Date.now());
   time.setSeconds(time.getSeconds() + a);
-  return Math.floor(<any>time / 1000);
+  return Math.floor((time as any) / 1000);
 }
 
-function findParents(b, a) {
-  var r;
+function findParents(b: string | any[], a: string): number {
+  var r: any;
   for (let i = 0; i < b.length; i++) {
     if (b[i][0] == a) {
       r = b[i];
@@ -78,7 +78,7 @@ var messages = {
     ["Gently slap your balls", 10, "slapping his balls"]
   ],
   first: [
-      "This is the warm-up round. Start jerking off and try to get to the edge when the bar gets to 100% of the EDGE zone.<br>You should be ready to cum when the bar reaches the CUM zone.<br>Try to get as close as possible, it will make the rest of the game even more fun!"
+    "This is the warm-up round. Start jerking off and try to get to the edge when the bar gets to 100% of the EDGE zone.<br>You should be ready to cum when the bar reaches the CUM zone.<br>Try to get as close as possible, it will make the rest of the game even more fun!"
   ],
   speed: [
     "The game will go faster now, remember NOT to cum yet!",
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
     var choosen = document.getElementById("choose").style.display != "none";
 
     if (choosen) {
-      elapsed = Math.floor(<any>Date.now / 1000);
+      elapsed = Math.floor((Date.now as any) / 1000);
       let presenceData = {
         details: "Preparing to Edge",
         state: `choosing settings `,
@@ -118,10 +118,11 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else {
+      let presenceData;
       var msg = document.getElementById("message").innerText;
       if (gomsgs.includes(msg)) {
         var cr = findParents(messages["go"], msg);
-        let presenceData = {
+        presenceData = {
           details: cr[2],
           //largeImageKey: "banner",
           largeImageKey: "logo",
@@ -130,7 +131,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       } else if (finishmsgs.includes(msg)) {
         var cr = findParents(messages["finish"], msg);
-        let presenceData = {
+        presenceData = {
           details: cr[2],
           //largeImageKey: "banner",
           largeImageKey: "logo",
@@ -139,7 +140,7 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       } else if (stopmsgs.includes(msg)) {
         var cr = findParents(messages["stop"], msg);
-        let presenceData = {
+        presenceData = {
           details: cr[2],
           //largeImageKey: "banner",
           largeImageKey: "logo",
@@ -151,7 +152,7 @@ presence.on("UpdateData", async () => {
         messages["first"][0] ==
         document.getElementById("message").children[0].innerHTML
       ) {
-        elapsed = Math.floor(<any>Date.now / 1000);
+        elapsed = Math.floor((Date.now as any) / 1000);
         let presenceData = {
           details: "jerking of slowly for edging",
           //largeImageKey: "banner",
