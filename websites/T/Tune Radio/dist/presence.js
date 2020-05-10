@@ -1,32 +1,28 @@
 const presence = new Presence({
-  clientId: "648283786676666409"
+    clientId: "648283786676666409"
 });
-
-let browsingStamp = Math.floor(Date.now() / 1000),
-  song,
-  dj,
-  listeners,
-  updateStats = () => {
+const browsingStamp = Math.floor(Date.now() / 1000);
+let song, dj, listeners;
+const updateStats = () => {
     (song = {
-      name: document.querySelector("#song-name").innerText,
-      artist: document
-        .querySelector("#song-artist")
-        .innerText.replace(/;/g, ", ")
+        name: document.querySelector("#song-name").textContent,
+        artist: document
+            .querySelector("#song-artist")
+            .textContent.replace(/;/g, ", ")
     }),
-      (dj = document.querySelector("#dj-name").innerText),
-      (listeners = document.querySelector("#listeners").innerText);
-  };
-
+        (dj = document.querySelector("#dj-name").textContent),
+        (listeners = document.querySelector("#listeners").textContent);
+};
 setInterval(updateStats, 1000);
 updateStats();
-
 presence.on("UpdateData", () => {
-  presence.setActivity({
-    state: `${dj} (${listeners})`,
-    details: `${song.name} - ${song.artist}`,
-    largeImageKey: "logo",
-    smallImageKey: "play",
-    smallImageText: "Listening to Tune",
-    startTimestamp: browsingStamp
-  });
+    presence.setActivity({
+        state: `${dj} (${listeners})`,
+        details: `${song.name} - ${song.artist}`,
+        largeImageKey: "logo",
+        smallImageKey: "play",
+        smallImageText: "Listening to Tune",
+        startTimestamp: browsingStamp
+    });
 });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUM1QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsQ0FBQztBQUVILE1BQU0sYUFBYSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO0FBQ3BELElBQUksSUFBSSxFQUFFLEVBQUUsRUFBRSxTQUFTLENBQUM7QUFDeEIsTUFBTSxXQUFXLEdBQUcsR0FBUyxFQUFFO0lBQzdCLENBQUMsSUFBSSxHQUFHO1FBQ04sSUFBSSxFQUFFLFFBQVEsQ0FBQyxhQUFhLENBQUMsWUFBWSxDQUFDLENBQUMsV0FBVztRQUN0RCxNQUFNLEVBQUUsUUFBUTthQUNiLGFBQWEsQ0FBQyxjQUFjLENBQUM7YUFDN0IsV0FBVyxDQUFDLE9BQU8sQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDO0tBQ25DLENBQUM7UUFDQSxDQUFDLEVBQUUsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLFVBQVUsQ0FBQyxDQUFDLFdBQVcsQ0FBQztRQUNyRCxDQUFDLFNBQVMsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUFDLFlBQVksQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDO0FBQ25FLENBQUMsQ0FBQztBQUVGLFdBQVcsQ0FBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLENBQUM7QUFDL0IsV0FBVyxFQUFFLENBQUM7QUFFZCxRQUFRLENBQUMsRUFBRSxDQUFDLFlBQVksRUFBRSxHQUFHLEVBQUU7SUFDN0IsUUFBUSxDQUFDLFdBQVcsQ0FBQztRQUNuQixLQUFLLEVBQUUsR0FBRyxFQUFFLEtBQUssU0FBUyxHQUFHO1FBQzdCLE9BQU8sRUFBRSxHQUFHLElBQUksQ0FBQyxJQUFJLE1BQU0sSUFBSSxDQUFDLE1BQU0sRUFBRTtRQUN4QyxhQUFhLEVBQUUsTUFBTTtRQUNyQixhQUFhLEVBQUUsTUFBTTtRQUNyQixjQUFjLEVBQUUsbUJBQW1CO1FBQ25DLGNBQWMsRUFBRSxhQUFhO0tBQzlCLENBQUMsQ0FBQztBQUNMLENBQUMsQ0FBQyxDQUFDIn0=

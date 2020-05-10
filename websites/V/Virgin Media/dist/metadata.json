@@ -8,11 +8,10 @@
     "en": "Fibre broadband, digital TV, landline phone and mobile services from Virgin Media. Order online for the best broadband, cable TV, phone and mobile deals."
   },
   "url": ["virginmedia.com", "www.virginmedia.com"],
-  "version": "1.2.1",
-  "logo": "https://www.virginmedia.com/etc/designs/onecms/clientlibs/onecms-critical/img/header-vm-logo.lg.png",
+  "version": "1.3.0",
+  "logo": "https://i.imgur.com/ucmvNa5.png",
   "thumbnail": "https://i.imgur.com/SE5FQlo.png",
   "color": "#ed0000",
   "tags": ["virginmedia", "virgin", "isp", "phonecontract"],
-  "category": "other",
-  "iframe": false
+  "category": "other"
 }

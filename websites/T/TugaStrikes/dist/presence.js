@@ -1,37 +1,38 @@
-var presence = new Presence({
-  clientId: "630098355145539595"
+const presence = new Presence({
+    clientId: "630098355145539595"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
-
+const browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
-  var presenceData = {
-    largeImageKey: "lg"
-  };
-
-  let domain = "https://tugastrikes.com/";
-  let url = window.location.href.replace(domain, "");
-  let parts = url.split("/");
-  let section = parts[1];
-  let page = parts[0];
-  if (section == "skins") {
-    state = "Skins";
-  } else if (section == "myskins") {
-    state = "My Skins";
-  } else if (section == "buyskins") {
-    state = "Buy Skins";
-  } else if (section == "sellskins") {
-    state = "Sell Skins";
-  } else {
-    state = "Home Page";
-  }
-  if (page == "market") {
-    presenceData.details = "Market";
-  }
-
-  presenceData.state = state;
-
-  presenceData.startTimestamp = browsingStamp;
-  delete presenceData.smallImageKey;
-
-  presence.setActivity(presenceData, true);
+    const presenceData = {
+        largeImageKey: "lg"
+    };
+    const domain = "https://tugastrikes.com/";
+    const url = window.location.href.replace(domain, "");
+    const parts = url.split("/");
+    const section = parts[1];
+    const page = parts[0];
+    let state;
+    if (section == "skins") {
+        state = "Skins";
+    }
+    else if (section == "myskins") {
+        state = "My Skins";
+    }
+    else if (section == "buyskins") {
+        state = "Buy Skins";
+    }
+    else if (section == "sellskins") {
+        state = "Sell Skins";
+    }
+    else {
+        state = "Home Page";
+    }
+    if (page == "market") {
+        presenceData.details = "Market";
+    }
+    presenceData.state = state;
+    presenceData.startTimestamp = browsingStamp;
+    delete presenceData.smallImageKey;
+    presence.setActivity(presenceData, true);
 });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJlc2VuY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9wcmVzZW5jZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLFFBQVEsR0FBRyxJQUFJLFFBQVEsQ0FBQztJQUM1QixRQUFRLEVBQUUsb0JBQW9CO0NBQy9CLENBQUMsQ0FBQztBQUVILE1BQU0sYUFBYSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO0FBRXBELFFBQVEsQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLEdBQUcsRUFBRTtJQUM3QixNQUFNLFlBQVksR0FBaUI7UUFDakMsYUFBYSxFQUFFLElBQUk7S0FDcEIsQ0FBQztJQUVGLE1BQU0sTUFBTSxHQUFHLDBCQUEwQixDQUFDO0lBQzFDLE1BQU0sR0FBRyxHQUFHLE1BQU0sQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxNQUFNLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFDckQsTUFBTSxLQUFLLEdBQUcsR0FBRyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUM3QixNQUFNLE9BQU8sR0FBRyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDekIsTUFBTSxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3RCLElBQUksS0FBSyxDQUFDO0lBQ1YsSUFBSSxPQUFPLElBQUksT0FBTyxFQUFFO1FBQ3RCLEtBQUssR0FBRyxPQUFPLENBQUM7S0FDakI7U0FBTSxJQUFJLE9BQU8sSUFBSSxTQUFTLEVBQUU7UUFDL0IsS0FBSyxHQUFHLFVBQVUsQ0FBQztLQUNwQjtTQUFNLElBQUksT0FBTyxJQUFJLFVBQVUsRUFBRTtRQUNoQyxLQUFLLEdBQUcsV0FBVyxDQUFDO0tBQ3JCO1NBQU0sSUFBSSxPQUFPLElBQUksV0FBVyxFQUFFO1FBQ2pDLEtBQUssR0FBRyxZQUFZLENBQUM7S0FDdEI7U0FBTTtRQUNMLEtBQUssR0FBRyxXQUFXLENBQUM7S0FDckI7SUFDRCxJQUFJLElBQUksSUFBSSxRQUFRLEVBQUU7UUFDcEIsWUFBWSxDQUFDLE9BQU8sR0FBRyxRQUFRLENBQUM7S0FDakM7SUFFRCxZQUFZLENBQUMsS0FBSyxHQUFHLEtBQUssQ0FBQztJQUUzQixZQUFZLENBQUMsY0FBYyxHQUFHLGFBQWEsQ0FBQztJQUM1QyxPQUFPLFlBQVksQ0FBQyxhQUFhLENBQUM7SUFFbEMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxZQUFZLEVBQUUsSUFBSSxDQUFDLENBQUM7QUFDM0MsQ0FBQyxDQUFDLENBQUMifQ==
