@@ -5,12 +5,13 @@ const presence = new Presence({
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const presenceData: presenceData = {
     largeImageKey: "orbazzo"
   };
 
-  data.details = "Guarda";
-  data.state = "ORBAZZO FIERO";
-  data.startTimestamp = browsingStamp;
+  presenceData.details = "Guarda";
+  presenceData.state = "ORBAZZO FIERO";
+  presenceData.startTimestamp = browsingStamp;
 
+  presence.setActivity(presenceData);
 });
