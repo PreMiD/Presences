@@ -13,15 +13,10 @@
     "www.keeptalkinggame.com",
     "www.bombmanual.com"
   ],
-  "version": "1.2.3",
+  "version": "1.3.0",
   "logo": "https://i.imgur.com/rrIWGBq.png",
   "thumbnail": "https://i.imgur.com/9ohIvQW.png",
   "color": "#222327",
-  "tags": [
-    "keep-talking-and-nobody-explodes",
-    "ktane",
-    "bomb",
-    "manual"
-  ],
+  "tags": ["keep-talking-and-nobody-explodes", "ktane", "bomb", "manual"],
   "category": "games"
 }
