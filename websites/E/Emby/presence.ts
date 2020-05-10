@@ -33,7 +33,7 @@ function PMD_info(message): void {
   );
 }
 
-let presence, ApiClient;
+let presence, ApiClient, ApiClientt;
 const presenceData: presenceData = {
   largeImageKey: PRESENCE_ART_ASSETS.logo
 };
@@ -92,7 +92,6 @@ function handleOfficialWebsite(): void {
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isEmbyWebClient(): Promise<boolean> {
-  let ApiClientt;
   if (!ApiClient) {
     ApiClientt = await presence.getPageletiable("ApiClient");
   } else {
@@ -151,7 +150,7 @@ function handleAudioPlayback(): void {
  */
 function getUserId(): string {
   try {
-    return ApiClient["_currentUser"]["Id"];
+    return ApiClientt["_currentUser"]["Id"];
   } catch (e) {
     const servers = JSON.parse(localStorage.getItem("servercredentials3"))
       .Servers;
@@ -194,7 +193,7 @@ async function obtainMediaInfo(itemId): Promise<any> {
   fetch(`/emby/Users/${getUserId()}/Items/${itemId}`, {
     credentials: "include",
     headers: {
-      "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
+      "x-emby-authorization": `MediaBrowser Client="${ApiClientt["_appName"]}", Device="${ApiClientt["_deviceName"]}", DeviceId="${ApiClientt["_deviceId"]}", Version="${ApiClientt["_appVersion"]}", Token="${ApiClientt["_serverInfo"]["AccessToken"]}"`
     }
   })
     .then((resp) => resp.json())
