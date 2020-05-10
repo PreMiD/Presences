@@ -470,9 +470,9 @@ async function handleWebClient(): Promise<void> {
       break;
 
     default:
-      if (path.substr(0, 3) === "dlg") {
-        // generic popup do nothing
-      } else PMD_info(`path: ${path}`);
+      if (path.substr(0, 3) !== "dlg") {
+        PMD_info(`path: ${path}`);
+      }
   }
 }
 
