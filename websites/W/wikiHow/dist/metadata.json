@@ -12,7 +12,7 @@
   "logo": "https://i.imgur.com/yY2L00N.png",
   "thumbnail": "https://i.imgur.com/YlrRdTn.png",
   "color": "#BFFF00",
-  "tags": ["wiki", "life_hacks", "tutorial", "how_to"],
+  "tags": ["wiki", "life-hacks", "tutorial", "how-to"],
   "category": "other",
   "regExp": "([a-z0-9|-]+[.])*wikihow+[.]com+"
 }
