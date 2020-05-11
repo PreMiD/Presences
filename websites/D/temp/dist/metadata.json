@@ -7,7 +7,7 @@
   "description": {
     "en": "Real-time problem & outage monitoring"
   },
-  "service": "Down Detector",
+  "service": "Downdetector",
   "version": "1.2.0",
   "logo": "https://i.imgur.com/STs8Nfw.png",
   "thumbnail": "https://i.imgur.com/Qy1lbXE.png",
