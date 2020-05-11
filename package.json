@@ -16,7 +16,7 @@
     "@types/prettier": "^2.0.0",
     "@types/semver": "^7.1.0",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.30.0",
+    "@typescript-eslint/parser": "^2.31.0",
     "chalk": "^4.0.0",
     "eslint": "^6.8.0",
     "execa": "^4.0.0",
