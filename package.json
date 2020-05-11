@@ -28,7 +28,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@types/chrome": "^0.0.106",
+    "@types/chrome": "^0.0.107",
     "@types/mongodb": "^3.5.14"
   }
 }
