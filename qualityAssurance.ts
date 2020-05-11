@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import "source-map-support/register";
 
 import { blueBright, green, red, yellow } from "chalk";
-import execa = require("execa");
-import { readdirSync, readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { sync as glob } from "glob";
 import { join, normalize, relative, resolve, sep } from "path";
 import { format as prettier, resolveConfig } from "prettier";
@@ -14,45 +12,39 @@ import {
   flattenDiagnosticMessageText,
   getPreEmitDiagnostics
 } from "typescript";
+import execa = require("execa");
 
 /** Tracker to keep track of the exit code that the CI action should exit with */
 let finalExitCode = 0;
 
 /**
+ * Helper function to read any file as string
+ * @param path Path to the file
+ */
+const readFile = (path: string): string =>
+  readFileSync(path, { encoding: "utf8" });
+
+/**
+ * Helper function to write any data to disk
+ * @param data Data to write
+ * @param path Path to write the data to
+ */
+const writeFile = <T>(path: string, data: T): void =>
+  writeFileSync(path, data, { encoding: "utf8" });
+
+/**
  * Helper function to read a JSON file into memory
  * @param jsonPath Path to the JSON file
  */
-const readJson = <T>(jsonPath: string) => {
-  if (isValidJSON(jsonPath)) {
-    return JSON.parse(readFileSync(jsonPath, { encoding: "utf8" })) as T;
-  } else {
-    console.log(
-      red(`Unable to parse ${jsonPath ? jsonPath : "an unknown file"}`)
-    );
-
-    finalExitCode = 1;
-  }
-};
-
-/**
- * Helper function to validate JSON data
- * @param path JSON path
- */
-function isValidJSON(path: string) {
-  try {
-    JSON.parse(readFileSync(path, { encoding: "utf8" }));
-    return true;
-  } catch {
-    return false;
-  }
-}
+const readJson = <T>(jsonPath: string): T =>
+  JSON.parse(readFile(jsonPath)) as T;
 
 /**
  * Helper function to write a JSON file to disk
  * @param data The data to write to the JSON file
  * @param jsonPath The path to write the JSON file to
  */
-const writeJson = <T>(data: T, jsonPath: string) =>
+const writeJson = <T>(data: T, jsonPath: string): void =>
   writeFileSync(jsonPath, JSON.stringify(data, null, 2), { encoding: "utf8" });
 
 /**
@@ -70,6 +62,7 @@ const compileFile = (fileNames: string[], options: CompilerOptions): void => {
   allDiagnostics.forEach((diagnostic) => {
     if (diagnostic.file) {
       const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         diagnostic.start!
       );
       const message = flattenDiagnosticMessageText(
@@ -91,46 +84,17 @@ const compileFile = (fileNames: string[], options: CompilerOptions): void => {
   }
 };
 
-const prettify = async () => {
+const prettify = async (): Promise<void> => {
   console.time("pretty_time");
-  // Grab all JS files, TS files and JSON files
-  const jsFiles = glob("**/*.js", {
-    ignore: ["**/node_modules/**", "**/@types/**"],
-    absolute: true
-  });
-  const tsFiles = glob("**/*.ts", {
+  // Grab all TS files and JSON files
+  const tsFiles = glob("./{websites,programs}/**/*.ts", {
     ignore: ["**/node_modules/**", "**/@types/**"],
     absolute: true
   });
 
-  // Analyze which JS files actually should receive prettification
-  const jsFilesToPrettify = [];
-  for (const file of jsFiles) {
-    // Normalize the path and seperate it on OS specific seperator
-    const normalizedPath = normalize(file).split(sep);
-
-    // If the file is not in a dist directory, ignore it
-    if (normalizedPath.indexOf("dist") === -1) continue;
-
-    // Splice off the presence.js and dist folder
-    normalizedPath.splice(-2, 2);
-
-    // Scan the files in the Presence service folder
-    const filesInDist = readdirSync(resolve(normalizedPath.join(sep)));
-
-    // If there is a source TypeScript file then ignore this JS file
-    if (filesInDist.includes("presence.ts")) continue;
-
-    // Add the file to the queue to prettify
-    jsFilesToPrettify.push(`${file}`);
-  }
-
-  // Concatenate all the files to prettify
-  const filesToPrettify: string[] = [...tsFiles, ...jsFilesToPrettify];
-
-  for (const fileToPrettify of filesToPrettify) {
+  for (const fileToPrettify of tsFiles) {
     // Get the raw data from the file
-    const fileContent = readFileSync(fileToPrettify, { encoding: "utf8" });
+    const fileContent = readFile(fileToPrettify);
 
     // Format the file using Prettier
     const formatted = prettier(fileContent, {
@@ -138,10 +102,10 @@ const prettify = async () => {
       filepath: fileToPrettify
     });
 
-    // If the file content isn't the same as the formatted content
+    // If the file content is not the same as the formatted content
     if (formatted !== fileContent) {
       // Write the file to the system
-      writeFileSync(fileToPrettify, formatted, { encoding: "utf8" });
+      writeFile(fileToPrettify, formatted);
       // And log the name with a green colour to indicate it did change
       console.log(green(relative(__dirname, fileToPrettify)));
     }
@@ -150,7 +114,7 @@ const prettify = async () => {
   console.timeEnd("pretty_time");
 };
 
-const compileTypeScript = async (filesToCompile: string[]) => {
+const compileTypeScript = async (filesToCompile: string[]): Promise<void> => {
   console.time("compile_time");
 
   // Get the path to the typings for PreMiD
@@ -188,23 +152,23 @@ const compileTypeScript = async (filesToCompile: string[]) => {
   console.timeEnd("compile_time");
 };
 
-const increaseSemver = async (filesToBump: string[]) => {
+const increaseSemver = async (filesToBump: string[]): Promise<void> => {
   console.time("semver_bump_time");
 
   for (const file of filesToBump) {
     console.log(file);
+
     // Normalize the path and seperate it on OS specific seperator
     const normalizedPath = resolve(normalize(file)).split(sep);
 
-    // Pop off the presence.js
+    // Pop off the presence.ts
     normalizedPath.pop();
 
     const metadataPath = join(normalizedPath.join(sep), "metadata.json");
     const metadata = readJson<Metadata>(metadataPath);
-
+    console.log(metadata);
     if (metadata && metadata.version) {
       const newVersion = valid(coerce(inc(metadata.version, "patch")));
-
       writeJson({ ...metadata, version: newVersion }, metadataPath);
     }
   }
@@ -213,7 +177,12 @@ const increaseSemver = async (filesToBump: string[]) => {
 };
 
 // Main function that calls the other functions above
-const main = async () => {
+const main = async (): Promise<void> => {
+  if (!process.env.GITHUB_ACTIONS)
+    console.log(
+      "\nPlease note that this script is ONLY supposed to run on a CI environment\n"
+    );
+
   await prettify();
 
   // Use Git to check what files have changed after prettification
@@ -258,7 +227,10 @@ const main = async () => {
   ]);
   const changedPresenceFiles = listOfChangedFiles
     .split("\n")
-    .filter((file) => file.includes("presence.js"));
+    .filter((file) => file.includes("presence.ts"));
+
+  console.log("e " + listOfChangedFiles);
+  console.log("a " + changedPresenceFiles);
 
   await increaseSemver(changedPresenceFiles);
 

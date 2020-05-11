@@ -5,9 +5,7 @@ on:
       - master
     paths:
       - "**.ts"
-      - "**.js"
       - "**.json"
-      - "**.yml"
 jobs:
   UpdatePresences:
     runs-on: ubuntu-18.04
@@ -27,7 +25,10 @@ jobs:
       - name: Install Deps
         run: yarn
       - name: Compile Script
-        run: yarn pu:compile
+        run: |
+          git config --global core.quotePath false
+          git config --global core.precomposeunicode true
+          yarn pu:compile
       - name: Update Presences
         env:
           MONGO_IP: ${{ secrets.MONGO_IP }}
