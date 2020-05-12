@@ -20,7 +20,8 @@ presence.on("UpdateData", async () => {
 
   switch (path[0]) {
     case "s": //Radio
-    case "p": //Podcast
+    case "p": {
+      //Podcast
       if (path[1] != lastPath || browsingStamp == 0)
         browsingStamp = Date.now() / 1000;
       const playerIcon = document.querySelector(
@@ -101,8 +102,9 @@ presence.on("UpdateData", async () => {
         }
       }
       break;
-    //Search
-    case "search":
+      //Search
+    }
+    case "search": {
       browsingStamp = 0;
       const results = document.querySelector("h1").innerText.match(/\d+/g)[0];
 
@@ -114,7 +116,8 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = (await strings).search;
       break;
-    //Genre / Topic
+      //Genre / Topic
+    }
     case "genre":
     case "topic": //Country / City
     case "country":
