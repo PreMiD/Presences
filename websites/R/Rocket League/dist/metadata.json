@@ -14,7 +14,7 @@
   "logo": "https://i.imgur.com/mW47NQQ.png",
   "thumbnail": "https://i.imgur.com/rAqm5wD.jpg",
   "color": "#0055ab",
-  "tags": ["rocket league", "cars", "soccer"],
+  "tags": ["rocket-league", "cars", "soccer"],
   "category": "games",
   "regExp": "([a-z0-9]+)[.]rocketleague[.]com"
 }

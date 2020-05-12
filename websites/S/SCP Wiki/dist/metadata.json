@@ -4,7 +4,9 @@
     "id": "421371986824921109"
   },
   "service": "SCP Wiki",
-  "description": "Operating clandestine and worldwide, the Foundation operates beyond jurisdiction, empowered and entrusted by every major national government with the task of containing anomalous objects, entities, and phenomena.",
+  "description": {
+    "en": "Operating clandestine and worldwide, the Foundation operates beyond jurisdiction, empowered and entrusted by every major national government with the task of containing anomalous objects, entities, and phenomena."
+  },
   "url": [
     "www.scp-wiki.net",
     "scp-wiki-cn.wikidot.com",

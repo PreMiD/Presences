@@ -4,7 +4,9 @@
     "id": "421371986824921109"
   },
   "service": "Nightwave Plaza",
-  "description": "Nightwave Plaza is a free 24/7 online vaporwave radio station. The broadcast also includes some future funk and experimental genres. We hope you enjoy.",
+  "description": {
+    "en": "Nightwave Plaza is a free 24/7 online vaporwave radio station. The broadcast also includes some future funk and experimental genres. We hope you enjoy."
+  },
   "url": "plaza.one",
   "version": "1.2.0",
   "logo": "https://i.imgur.com/rNVPwya.png",

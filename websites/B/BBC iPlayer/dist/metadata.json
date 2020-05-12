@@ -20,7 +20,7 @@
   "logo": "https://i.imgur.com/AudKvIg.png",
   "thumbnail": "https://i.imgur.com/KKBfAEx.png",
   "color": "#FF91E0",
-  "tags": ["bbc", "bbc iplayer"],
+  "tags": ["bbc", "bbc-iplayer"],
   "category": "videos",
   "iframe": true
 }

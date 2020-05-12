@@ -9,14 +9,11 @@
     "nl": "Pokémon zijn wezens in alle soorten en maten die in het wild of naast mensen leven. Voor het grootste deel spreken Pokémon niet, behalve om hun namen uit te spreken. Er zijn momenteel meer dan 700 wezens die het Pokémon-universum bewonen."
   },
   "url": "www.pokemon.com",
-  "version": null,
+  "version": "1.1.0",
   "logo": "https://i.imgur.com/1BcRgET.png",
   "thumbnail": "https://i.imgur.com/WBJfQkW.jpg",
   "color": "#ffcb05",
-  "tags": [
-    "Pokémon",
-    "PokémonTV"
-  ],
+  "tags": ["pokémon", "pokémontv"],
   "category": "games",
   "regExp": "(([a-z0-9]+)[.])?(pokemon|portal-pokemon|pokemontcg|pokemoncenter|pokemoncenter-online|pokemon-cafe|pokemonkorea|pokemoncard|pokemonstore|pokemon-movie|pokemon-card)[.]([a-z0-9]+)([.]([a-z0-9]+))?",
   "settings": [

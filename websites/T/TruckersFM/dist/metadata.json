@@ -18,14 +18,6 @@
   "logo": "https://i.imgur.com/f4JkWUI.png",
   "thumbnail": "https://i.imgur.com/vMj6Rcz.png",
   "color": "#E1306C",
-  "tags": [
-    "tfm",
-    "truckersmp",
-    "radio",
-    "music",
-    "ets2",
-    "ats",
-    "simulator-radio"
-  ],
+  "tags": ["tfm", "truckersmp", "radio", "music", "ets2", "ats"],
   "category": "music"
 }

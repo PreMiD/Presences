@@ -13,7 +13,7 @@
   "logo": "https://i.imgur.com/DiUTf7t.png",
   "thumbnail": "https://i.imgur.com/7a04Cps.jpg",
   "color": "#cc2127",
-  "tags": ["Pinterest"],
+  "tags": ["pinterest"],
   "category": "other",
   "regExp": "([a-z0-9]+)[.]pinterest[.]([a-z0-9]+)"
 }

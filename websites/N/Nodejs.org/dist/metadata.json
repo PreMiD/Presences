@@ -12,6 +12,6 @@
   "logo": "https://i.imgur.com/MmTi5zJ.png",
   "thumbnail": "https://i.imgur.com/olNX0gM.png",
   "color": "#00ff00",
-  "tags": ["Node.js", "JavaScript"],
+  "tags": ["node-js", "javascript"],
   "category": "other"
 }

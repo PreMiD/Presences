@@ -1,4 +1,3 @@
-
 {
   "author": {
     "name": "Nanashin",
@@ -15,10 +14,6 @@
   "logo": "https://i.imgur.com/L5sBw6j.png",
   "thumbnail": "https://i.imgur.com/ljNKCp1.png",
   "color": "#079ac7",
-  "tags": [
-    "manga",
-    "fansub",
-    "Neox"
-  ],
+  "tags": ["manga", "fansub", "neox"],
   "category": "other"
 }

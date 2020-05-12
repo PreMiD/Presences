@@ -4,8 +4,10 @@
     "id": "135112599460118528"
   },
   "service": "TugaStrikes",
-  "description": "TugaStrikes is a Gaming Community Founded in 2017 focusing on CS:GO",
-  "url": ["tugastrikes.com"],
+  "description": {
+    "en": "TugaStrikes is a Gaming Community Founded in 2017 focusing on CS:GO"
+  },
+  "url": "tugastrikes.com",
   "version": "1.2.0",
   "logo": "https://i.imgur.com/nDCQmhr.png",
   "thumbnail": "https://i.imgur.com/fgUUaYV.png",
