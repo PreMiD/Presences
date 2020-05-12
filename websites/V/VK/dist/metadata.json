@@ -16,7 +16,7 @@
     "ro": "Această prezență va afișa chestile pe care le faci deobicei pe VK. Afișează informații despre melodie (dacă ești pe pagina melodiei), informații despre videoclip (când te uiți la un videoclip) și informații despre comunități sau profiluri.",
     "pt_BR": "Esta presença vai mostrar o que você geralmente faz no VK. Essa presença mostra informação de uma música (se você estiver na página de música), informação de vídeo (quando você estiver assistindo um vídeo) e mostra se você está vendo uma comunidade ou um perfil de usuário.",
     "fr": "Cette présence affichera que vous faites habituellement sur VK. Elle affiche les informations d'une musique (si vous êtes sur la page Musique), des informations sur la vidéo (lorsque vous regardez une vidéo) et des informations si vous regardez une communauté ou un profil utilisateur.",
-    "uk": "Цей статус буде показувати штуки, які ви зазвичай робите у ВК. Оновлює інформацію про музику (якщо ви на сторінкці Музика), інформацію про відео! (коли Ви дивитеся його) та інформацію про групи або профілі, які Ви переглядаєте.",
+    "uk_UA": "Цей статус буде показувати штуки, які ви зазвичай робите у ВК. Оновлює інформацію про музику (якщо ви на сторінкці Музика), інформацію про відео! (коли Ви дивитеся його) та інформацію про групи або профілі, які Ви переглядаєте.",
     "nl": "Deze presence zal dingen weergeven die je gewoonlijk in VK doet. Het toont muziekinfo (als je op de Muziek-pagina bent), video-info (wanneer je videos bekijkt) en info als je een community- of gebruikersprofiel bekijkt."
   },
   "url": "vk.com",
@@ -24,12 +24,6 @@
   "logo": "https://i.imgur.com/VB6AuBG.png",
   "thumbnail": "https://i.imgur.com/lKGTJ26.jpg",
   "color": "#4680C2",
-  "tags": [
-    "social",
-    "music",
-    "video",
-    "info",
-    "data"
-  ],
+  "tags": ["social", "music", "video", "info", "data"],
   "category": "socials"
 }

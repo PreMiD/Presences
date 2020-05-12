@@ -6,17 +6,13 @@
   "url": "animesvision.biz",
   "description": {
     "en": "Animes Vision is one of the largest Brazilian anime sites.",
-    "pt_br": "Animes Vision é um dos maiores sites brasileiros de anime."
+    "pt_BR": "Animes Vision é um dos maiores sites brasileiros de anime."
   },
   "service": "Animes Vision",
   "version": "1.0.1",
   "logo": "https://i.imgur.com/LRZPULY.png",
   "thumbnail": "https://i.imgur.com/OIHNhHg.png",
   "color": "#0EAFC1",
-  "tags": [
-    "anime",
-    "media",
-    "video"
-  ],
+  "tags": ["anime", "media", "video"],
   "category": "anime"
 }

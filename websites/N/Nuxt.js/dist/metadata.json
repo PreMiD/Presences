@@ -26,6 +26,6 @@
   "logo": "https://i.imgur.com/XSYIbbu.png",
   "thumbnail": "https://i.imgur.com/mlwpfWK.png",
   "color": "#00c58e",
-  "tags": ["nuxt", "nuxt.js", "vue.js", "framework", "application"],
+  "tags": ["nuxt", "nuxt-js", "vue-js", "framework", "application"],
   "category": "other"
 }

@@ -6,7 +6,7 @@
   "url": "champion.gg",
   "description": {
     "en": "Champion.gg provides League of Legends champion statistics, guides, builds, runes, masteries, skill orders and counters by role - including Win Rate, Ban Rate...",
-    "pt_br": "Champion.gg fornece estatísticas, guias, builds, runas, masteries, ordens de habilidade e counters de campeões em League of Legends por função - incluindo Win Rate, Ban Rate..."
+    "pt_BR": "Champion.gg fornece estatísticas, guias, builds, runas, masteries, ordens de habilidade e counters de campeões em League of Legends por função - incluindo Win Rate, Ban Rate..."
   },
   "service": "Championgg",
   "version": "1.0.2",
