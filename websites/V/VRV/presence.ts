@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     }
   } else if (document.location.pathname.includes("/serie")) {
-    presenceData.details = "Viewing serie:";
+    presenceData.details = "Viewing series:";
     presenceData.state = document.querySelector(
       "#content > div > div.app-body-wrapper > div > div.content > div.series-metadata > div.text-wrapper > div.erc-series-info > div.series-title"
     ).textContent;
