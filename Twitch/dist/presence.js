@@ -38,24 +38,24 @@ presence.on("UpdateData", async () => {
         },
         live: {
             label: document.querySelector(".video-player .tw-channel-status-text-indicator"),
-            title: document.querySelector(".tw-font-size-4.tw-line-height-body"),
-            streamer: document.querySelector(".tw-font-size-5.tw-white-space-nowrap"),
-            host: document.querySelector(".tw-c-text-overlay.tw-strong")
+            title: document.querySelector(".tw-ellipsis.tw-font-size-5.tw-word-break-word"),
+            streamer: document.querySelector(".tw-c-text-base.tw-line-height-heading.tw-strong"),
+            host: document.querySelector("p.tw-c-text-base.tw-font-size-4")
         },
         moderator: {
-            title: document.querySelector(".tw-c-text-overlay.tw-font-size-5"),
-            streamer: document.querySelector("p > a.tw-interactive.tw-link.tw-link--button.tw-link--overlay"),
+            title: document.querySelector(".tw-ellipsis.tw-font-size-5.tw-line-clamp-2"),
+            streamer: document.querySelector(".tw-ellipsis.tw-font-size-5.tw-line-height-heading"),
             live: document.querySelector(".tw-font-size-6.tw-semibold.tw-upcase")
         },
         video: {
             title: document.querySelector(".tw-font-size-4.tw-strong"),
-            streamer: document.querySelector(".tw-font-size-5.tw-white-space-nowrap"),
+            streamer: document.querySelector(".tw-c-text-base.tw-line-height-heading.tw-strong"),
             time: document.querySelector(".vod-seekbar-time-labels > p:nth-child(1)"),
             duration: document.querySelector(".vod-seekbar-time-labels > p:nth-child(2)")
         },
         clip: {
             title: document.querySelector(".tw-font-size-4.tw-strong"),
-            streamer: document.querySelector(".tw-font-size-5.tw-white-space-nowrap")
+            streamer: document.querySelector(".tw-c-text-base.tw-line-height-heading.tw-strong")
         }
     };
     if (window.location.href !== oldURL) {
@@ -67,12 +67,12 @@ presence.on("UpdateData", async () => {
     if (squad) {
         type = "squad";
     }
-    else if (elements.moderator.title && elements.moderator.streamer) {
-        type = "moderator";
-    }
     else if ((elements.live.title && elements.live.streamer && elements.live.label) ||
         elements.live.host) {
         type = "live";
+    }
+    else if (elements.moderator.title && elements.moderator.streamer) {
+        type = "moderator";
     }
     else if (elements.video.title &&
         elements.video.streamer &&
@@ -125,7 +125,10 @@ presence.on("UpdateData", async () => {
             videoDuration = undefined;
         }
         else if (type === "video") {
-            title = elements.video.title.textContent;
+            let pretty = elements.video.title.textContent.split("•");
+            pretty.pop();
+
+            title = pretty.join("•");
             streamer = elements.video.streamer.textContent;
             smallImageKey = video.paused ? "pause" : "play";
             smallImageText = video.paused
@@ -148,7 +151,7 @@ presence.on("UpdateData", async () => {
         }
         else if (type === "browsing") {
             var location = window.location.pathname;
-            title = "Browsing";
+            title = "Browsing...";
             streamer = undefined;
             smallImageKey = undefined;
             smallImageText = undefined;
