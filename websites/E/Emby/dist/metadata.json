@@ -21,5 +21,5 @@
   "color": "#52B54B",
   "category": "videos",
   "tags": ["video", "movie", "tv", "media"],
-  "regExp": " *\/web\/index[.]html"
+  "regExp": ".*\/web\/index[.]html"
 }
