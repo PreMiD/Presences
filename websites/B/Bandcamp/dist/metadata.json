@@ -15,5 +15,5 @@
   "color": "#61929c",
   "tags": ["music", "albums"],
   "category": "music",
-  "regExp": "(([a-z0-9]+)[.])?bandcamp[.]com"
+  "regExp": "^([a-z0-9-]+[.])*bandcamp([.][a-z]+)+\/"
 }
