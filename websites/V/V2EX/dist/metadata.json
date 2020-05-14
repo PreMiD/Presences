@@ -17,5 +17,5 @@
   "color": "#aab0c6",
   "tags": ["sharing", "programming"],
   "category": "socials",
-  "regExp": "(([a-z0-9]+)[.])?v2ex[.]com"
+  "regExp": "([a-z0-9-]+[.])*v2ex[.]com\/"
 }

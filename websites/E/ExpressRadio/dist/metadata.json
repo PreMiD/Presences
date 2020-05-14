@@ -15,5 +15,5 @@
   "color": "#4a9aa8",
   "tags": ["music", "radio", "gamers", "community", "express", "expressradio"],
   "category": "music",
-  "regExp": "(([a-z0-9])+[.])?expressradio[.]co"
+  "regExp": "([a-z0-9-]+[.])*expressradio[.]co\/"
 }

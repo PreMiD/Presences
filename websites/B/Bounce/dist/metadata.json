@@ -17,5 +17,5 @@
   "color": "#32a852",
   "tags": ["music", "radio", "gamers", "community", "bounce", "bounceradio"],
   "category": "music",
-  "regExp": "(([a-z0-9])+[.])?(wearebounce|boun)[.](cc|net)"
+  "regExp": "([a-z0-9-]+[.])*(wearebounce[.]net|boun[.]cc)\/"
 }

@@ -23,5 +23,5 @@
   "color": "#0000ff",
   "tags": ["akinator", "guessing", "game", "fun"],
   "category": "games",
-  "regExp": "([a-z]+)[.]akinator[.]com"
+  "regExp": "([a-z0-9-]+[.])*akinator[.]com\/"
 }

@@ -18,5 +18,5 @@
   "tags": ["anime", "videos"],
   "iframe": true,
   "category": "anime",
-  "regExp": "([a-z0-9]+)[.]anime-kage[.]eu"
+  "regExp": "([a-z0-9-]+[.])*anime-kage[.]eu\/"
 }

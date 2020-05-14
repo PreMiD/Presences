@@ -22,5 +22,5 @@
   "color": "#009cff",
   "tags": ["novels", "pics", "artworks"],
   "category": "socials",
-  "regExp": "(([a-z0-9]+)[.])?pixiv[.]net"
+  "regExp": "([a-z0-9-]+[.])*pixiv[.]net\/"
 }

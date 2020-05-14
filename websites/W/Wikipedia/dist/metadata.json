@@ -20,5 +20,5 @@
   "color": "#f9f9f9",
   "tags": ["encyclopedia", "popular", "informations"],
   "category": "other",
-  "regExp": "([a-z0-9]+)[.]wikipedia[.]org"
+  "regExp": "([a-z0-9-]+[.])*wikipedia[.]org\/"
 }

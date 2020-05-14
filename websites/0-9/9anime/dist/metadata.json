@@ -16,6 +16,6 @@
   "color": "#694ba1",
   "tags": ["embedded-links", "9anime", "streaming"],
   "category": "anime",
-  "regExp": "(([a-z0-9]+)[.])?9anime[.]([a-z0-9]+)",
+  "regExp": "([a-z0-9-]+[.])*9anime([.][a-z]+)+\/",
   "iframe": true
 }

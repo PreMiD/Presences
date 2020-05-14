@@ -15,7 +15,6 @@
   "color": "#d5015b",
   "tags": ["anime", "video", "media"],
   "category": "anime",
-  "regExp": "animepahe.com",
   "iFrameRegExp": "kwik.cx/e",
   "iframe": true
 }

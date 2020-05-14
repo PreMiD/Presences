@@ -15,5 +15,5 @@
   "color": "#cc2127",
   "tags": ["pinterest"],
   "category": "other",
-  "regExp": "([a-z0-9]+)[.]pinterest[.]([a-z0-9]+)"
+  "regExp": "([a-z0-9-]+[.])*pinterest([.][a-z]+)+\/"
 }

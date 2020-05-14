@@ -17,5 +17,5 @@
   "color": "#3a404a",
   "tags": ["docs", "google"],
   "category": "other",
-  "regExp": "docs[.]google[.]([a-z0-9]+)"
+  "regExp": "docs[.]google([.][a-z]+)+\/"
 }

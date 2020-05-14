@@ -16,5 +16,5 @@
   "color": "#162781",
   "tags": ["articles", "german"],
   "category": "other",
-  "regExp": "(([a-z0-9]+)[.])?gamestar[.]de"
+  "regExp": "([a-z0-9-]+[.])*gamestar[.]de\/"
 }

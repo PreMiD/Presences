@@ -14,5 +14,5 @@
   "color": "#f68a1a",
   "tags": ["nsfw", "webcam", "live-streaming"],
   "category": "videos",
-  "regExp": "((([a-z0-9]+)[.])?(([a-z0-9]+)[.]))?chaturbate[.]([a-z0-9]+)([.]([a-z0-9]+))?"
+  "regExp": "([a-z0-9-]+[.])*chaturbate([.][a-z]+)+\/"
 }

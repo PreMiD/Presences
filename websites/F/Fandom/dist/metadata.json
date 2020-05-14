@@ -14,5 +14,5 @@
     "en": "The entertainment site where fans come first. Your daily source for all things TV, movies, and games, including Star Wars, Fallout, Marvel, DC and more. This presence works on the editoral side of Fandom (www.fandom.com) and the wiki side of fandom (formerly Wikia)."
   },
   "category": "other",
-  "regExp": "[a-zA-Z-]+\\.fandom\\.com"
+  "regExp": "([a-z0-9-]+[.])*fandom[.]com\/"
 }

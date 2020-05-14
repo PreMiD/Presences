@@ -14,5 +14,5 @@
   "color": "#BFFF00",
   "tags": ["wiki", "life-hacks", "tutorial", "how-to"],
   "category": "other",
-  "regExp": "([a-z0-9|-]+[.])*wikihow+[.]com+"
+  "regExp": "([a-z0-9|-]+[.])*wikihow[.]com\/"
 }

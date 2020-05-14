@@ -20,5 +20,5 @@
     "shopping"
   ],
   "category": "other",
-  "regExp": "([a-z0-9]+)[.](amazon)[.]([a-z0-9]+)([.]([a-z0-9]+))?\/(?!(-\/([a-z0-9]+)\/)?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp\/video))"
+  "regExp": "([a-z0-9-]+[.])*amazon([.][a-z]+)+\/(?!(-\/([a-z0-9]+)\/)?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp\/video))"
 }

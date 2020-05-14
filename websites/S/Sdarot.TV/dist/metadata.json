@@ -16,5 +16,5 @@
   "color": "#f5d80b",
   "tags": ["israel", "videos"],
   "category": "videos",
-  "regExp": "(([a-z0-9]+)[.])?sdarot[.]([a-z0-9]+)"
+  "regExp": "([a-z0-9-]+[.])*sdarot([.][a-z]+)+\/"
 }

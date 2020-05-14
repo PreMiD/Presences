@@ -15,5 +15,5 @@
   "color": "#ffffff",
   "tags": ["tv", "live"],
   "category": "videos",
-  "regExp": "(([a-z0-9]+)[.])?pluto[.]tv"
+  "regExp": "([a-z0-9-]+[.])*pluto[.]tv\/"
 }

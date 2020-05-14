@@ -15,5 +15,5 @@
   "color": "#f16725",
   "tags": ["mods", "plugins", "curseforge"],
   "category": "games",
-  "regExp": "([a-z0-9]+)[.]curseforge[.]com"
+  "regExp": "([a-z0-9-]+[.])*curseforge[.]com\/"
 }

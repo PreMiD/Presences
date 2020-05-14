@@ -16,5 +16,5 @@
   "color": "#f47127",
   "tags": ["shop", "fashion"],
   "category": "other",
-  "regExp": "(([a-z0-9]+)[.])?zalando[.]([a-z0-9]+)"
+  "regExp": "([a-z0-9-]+[.])*zalando[.]([.][a-z]+)+\/"
 }

@@ -15,5 +15,5 @@
   "color": "#f05f00",
   "tags": ["codes", "steam"],
   "category": "games",
-  "regExp": "([a-z0-9]+)[.]g2a[.]com"
+  "regExp": "([a-z0-9-]+[.])*g2a[.]com\/"
 }

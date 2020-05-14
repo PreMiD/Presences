@@ -15,5 +15,5 @@
   "color": "#308574",
   "tags": ["google", "meet", "video"],
   "category": "socials",
-  "regExp": "meet[.]google[.]([a-z0-9]+)"
+  "regExp": "meet[.]google([.][a-z]+)+\/"
 }

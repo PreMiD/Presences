@@ -15,5 +15,5 @@
   "color": "#f003fc",
   "tags": ["developing", "hosting", "community"],
   "category": "other",
-  "regExp": "(([a-z0-9]+)[.])?glitch[.]([a-z0-9]+)"
+  "regExp": "([a-z0-9-]+[.])*glitch([.][a-z]+)+\/"
 }

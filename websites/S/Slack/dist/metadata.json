@@ -15,5 +15,5 @@
   "color": "#611f69",
   "tags": ["projects", "chat", "card", "work", "management"],
   "category": "socials",
-  "regExp": "([a-z0-9]+)[.]slack[.]com"
+  "regExp": "([a-z0-9-]+[.])*slack[.]com\/"
 }

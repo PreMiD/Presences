@@ -17,5 +17,5 @@
   "tags": ["animesaturn", "anime", "videos"],
   "iframe": true,
   "category": "anime",
-  "regExp": "(([a-z0-9]+)[.])?animesaturn[.]([a-z0-9]+)"
+  "regExp": "([a-z0-9-]+[.])*animesaturn([.][a-z]+)+\/"
 }

@@ -16,5 +16,5 @@
   "color": "#0055ab",
   "tags": ["rocket-league", "cars", "soccer"],
   "category": "games",
-  "regExp": "([a-z0-9]+)[.]rocketleague[.]com"
+  "regExp": "([a-z0-9-]+[.])*rocketleague[.]com\/"
 }

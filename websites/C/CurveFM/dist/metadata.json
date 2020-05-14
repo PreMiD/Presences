@@ -23,5 +23,5 @@
     "curveradio"
   ],
   "category": "music",
-  "regExp": "(([a-z0-9])+[.])?curvefm[.]com"
+  "regExp": "([a-z0-9-]+[.])*curvefm[.]com\/"
 }

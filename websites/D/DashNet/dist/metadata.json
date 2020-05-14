@@ -14,5 +14,5 @@
   "color": "#042B48",
   "tags": ["cookie", "clicker"],
   "category": "games",
-  "regExp": "(([a-z0-9]+)[.])?dashnet[.]org"
+  "regExp": "([a-z0-9-]+[.])*dashnet[.]org\/"
 }

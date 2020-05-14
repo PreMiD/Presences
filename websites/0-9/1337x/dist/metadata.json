@@ -26,5 +26,5 @@
   "color": "#d63600",
   "tags": ["torrents", "shows"],
   "category": "other",
-  "regExp": "(([a-z0-9]+)[.])?(1337x|x1337x)[.]([a-z0-9]+)"
+  "regExp": "([a-z0-9-]+[.])*x?1337x([.][a-z]+)+\/"
 }

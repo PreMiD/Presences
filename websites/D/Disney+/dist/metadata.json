@@ -13,7 +13,7 @@
     "es": "El servicio de streaming de Disney, Pixar, Marvel, Star Wars y National Geographic."
   },
   "url": "www.disneyplus.com",
-  "regExp": "(?:www[.])?disneyplus[.]com",
+  "regExp": "([a-z0-9-]+[.])*disneyplus[.]com\/",
   "version": "1.3.1",
   "logo": "https://i.imgur.com/zuUeb2A.png",
   "thumbnail": "https://i.imgur.com/NA7FWJN.png",

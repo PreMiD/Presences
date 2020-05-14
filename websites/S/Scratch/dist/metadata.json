@@ -14,5 +14,5 @@
   "color": "#fc8c03",
   "tags": ["creations", "design", "community"],
   "category": "other",
-  "regExp": "(([a-z0-9]+)[.])?(scratch|scratchfoundation|scratch-wiki|donationpay|scratched[.]gse[.]harvard|scratchjr)[.](mit[.]edu|org|info|edu)"
+  "regExp": "([a-z0-9-]+[.])*(scratch|scratchfoundation|scratch-wiki|donationpay|scratched[.]gse[.]harvard|scratchjr)[.](mit[.]edu|org|info|edu)\/"
 }

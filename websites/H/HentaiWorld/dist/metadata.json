@@ -23,5 +23,5 @@
   "tags": ["anime", "videos", "nsfw", "hentaiworld"],
   "iframe": true,
   "category": "anime",
-  "regExp": "(([a-z0-9]+)[.])?hentaiworld[.]([a-z0-9]+)"
+  "regExp": "([a-z0-9-]+[.])*hentaiworld([.][a-z]+)+\/"
 }

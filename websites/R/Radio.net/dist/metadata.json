@@ -10,7 +10,7 @@
     "zh_CN": "Radio.net汇集了30,000多个广播电台和播客。 它在全球每月有400万用户，已被下载超过2000万次。"
   },
   "url": "www.radio.net",
-  "regExp": "((www|br|mx|co).radio.net|www.radio.(de|at|fr|se|dk|pt|es|it|pl))",
+  "regExp": "((www|br|mx|co).radio.net|www.radio.(de|at|fr|se|dk|pt|es|it|pl))\/",
   "version": "3.0.0",
   "logo": "https://i.imgur.com/3IBLlpc.png",
   "thumbnail": "https://i.imgur.com/pYZzRDV.png",

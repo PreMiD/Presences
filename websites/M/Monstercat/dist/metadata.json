@@ -15,5 +15,5 @@
   "color": "#000000",
   "tags": ["monstercat", "music"],
   "category": "music",
-  "regExp": "([a-z0-9]+)[.]monstercat[.]com"
+  "regExp": "([a-z0-9-]+[.])*monstercat[.]com\/"
 }

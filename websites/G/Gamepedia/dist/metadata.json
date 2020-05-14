@@ -14,5 +14,5 @@
     "en": "Gamepedia is the largest video game wiki platform on the web, featuring thousands of community-driven wiki projects.\nOwned and operated by FANDOM, Gamepedia is home to everything from indie title wikis to some of the best-known gaming wikis such as the Official Minecraft Wiki, Leaguepedia, and the Official ARK Wiki."
   },
   "category": "other",
-  "regExp": "[a-zA-Z-]+\\.gamepedia\\.com"
+  "regExp": "([a-z0-9-]+[.])*gamepedia[.]com\/"
 }

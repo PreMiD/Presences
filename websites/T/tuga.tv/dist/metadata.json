@@ -16,5 +16,5 @@
   "tags": ["movies", "videos", "series"],
   "category": "videos",
   "iframe": true,
-  "regExp": "(.+[.])?tuga.tv"
+  "regExp": "([a-z0-9-]+[.])*tuga[.]tv\/"
 }

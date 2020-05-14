@@ -15,5 +15,5 @@
   "color": "#ff0000",
   "tags": ["vtc", "ets2", "ats", "minecraft", "fivem", "gtav"],
   "category": "games",
-  "regExp": "(([a-z0-9]+)[.])?valtoxgaminggroup[.]com"
+  "regExp": "([a-z0-9-]+[.])*valtoxgaminggroup[.]com\/"
 }

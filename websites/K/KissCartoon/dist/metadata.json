@@ -14,7 +14,7 @@
   "thumbnail": "https://i.imgur.com/48Y2kFC.png",
   "color": "#f5d80b",
   "tags": ["cartoon", "kiss"],
-  "regExp": "(([a-z0-9]+)[.])?kisscartoon[.]([a-z0-9]+)",
+  "regExp": "([a-z0-9-]+[.])*kisscartoon([.][a-z]+)+\/",
   "category": "videos",
   "iframe": true
 }

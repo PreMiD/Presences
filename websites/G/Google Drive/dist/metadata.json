@@ -23,5 +23,5 @@
   "color": "#3aa154",
   "tags": ["drive", "google"],
   "category": "other",
-  "regExp": "drive[.]google[.]([a-z0-9]+)"
+  "regExp": "drive[.]google([.][a-z]+)+\/"
 }
