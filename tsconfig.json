@@ -6,6 +6,7 @@
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
+    "newLine": "lf",
     "noUnusedParameters": true,
     "inlineSourceMap": true,
     "typeRoots": ["@types"],
