@@ -2,21 +2,21 @@ var presence = new Presence({
     clientId: "708779444541849640"
 });
 
-function Timestamps(videoTime, videoDuration) {
+function Timestamps(videoTime, videoDuration): any {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
 }
 
-let nomeObraAnime: any= document.querySelector("#weds > div > div.pageAnime > div > div > div.right > div.animeFirstContainer > h1");
-let filtroObraAnime: any = document.querySelector("#weds > div > div.pageAnime > div > div > div.right > a > button");
-let nomeEpisodio: any  = document.querySelector("#weds > div > div.headerEP > div > h1");
-let numeroEpisodio: any  = document.querySelector("#weds > div > div.headerEP > div > div.controlesEP > div:nth-child(2) > h2");
-let statusLista: any  = document.querySelector("#ani_status");
-let generolista: any  = document.querySelector("#ani_genero");
-let paginaAtual: any  = document.querySelector("#weds > div > div.ultAnis.mwidth > div.paginacao > span.page-numbers.current");
-let ultimaPagina: any  = document.querySelector("#weds > div > div.ultAnis.mwidth > div.paginacao > a:nth-child(5)");
-let pesquisaTitulo: any  = document.querySelector("body > div > div.SectionBusca.mwidth > div.tituloSection");
+const nomeObraAnime: any= document.querySelector("#weds > div > div.pageAnime > div > div > div.right > div.animeFirstContainer > h1");
+const filtroObraAnime: any = document.querySelector("#weds > div > div.pageAnime > div > div > div.right > a > button");
+const nomeEpisodio: any  = document.querySelector("#weds > div > div.headerEP > div > h1");
+const numeroEpisodio: any  = document.querySelector("#weds > div > div.headerEP > div > div.controlesEP > div:nth-child(2) > h2");
+const statusLista: any  = document.querySelector("#ani_status");
+const generolista: any  = document.querySelector("#ani_genero");
+const paginaAtual: any  = document.querySelector("#weds > div > div.ultAnis.mwidth > div.paginacao > span.page-numbers.current");
+const ultimaPagina: any  = document.querySelector("#weds > div > div.ultAnis.mwidth > div.paginacao > a:nth-child(5)");
+const pesquisaTitulo: any  = document.querySelector("body > div > div.SectionBusca.mwidth > div.tituloSection");
 
 presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
@@ -69,13 +69,9 @@ presence.on("UpdateData", async () => {
         } else if (generolista[generolista.selectedIndex].innerText != 'Selecione o Gênero') {
             presenceData.state = generolista[generolista.selectedIndex].innerText;
         }
-    } else if (presenceData.details = null) {
-        presence.setTrayTitle();
-        presence.setActivity();
     } else {
         presenceData.details = 'Navegando... ';
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-    };
-    
+    }
     presence.setActivity(presenceData);
 });
