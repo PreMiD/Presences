@@ -2,18 +2,18 @@ var presence = new Presence({
     clientId: "703965572186243152"
 });
 
-let projetosTipo: any = document.querySelector('ol.breadcrumb li.active');
-let mangaTitulo: any = document.querySelector('div.col-md-8 h1.media-heading');
-let mangaStatus: any = document.querySelector("#blog > div > div > div > div.col-md-8 > ul > li:nth-child(1) > span");
-let mangaAno: any = document.querySelector("#blog > div > div > div > div.col-md-8 > ul > li:nth-child(2)");
-let tituloNoticia: any = document.querySelector("#blog > div > div > div > div.blog-item > div > div.col-xs-12.col-sm-10.blog-content > h2 > a");
+const projetosTipo: any = document.querySelector('ol.breadcrumb li.active');
+const mangaTitulo: any = document.querySelector('div.col-md-8 h1.media-heading');
+const mangaStatus: any = document.querySelector("#blog > div > div > div > div.col-md-8 > ul > li:nth-child(1) > span");
+const mangaAno: any = document.querySelector("#blog > div > div > div > div.col-md-8 > ul > li:nth-child(2)");
+const tituloNoticia: any = document.querySelector("#blog > div > div > div > div.blog-item > div > div.col-xs-12.col-sm-10.blog-content > h2 > a");
 
 presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
         largeImageKey: "logo"
     };
 
-    let path = document.location.pathname;
+    const path = document.location.pathname;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     if (path == '/') {
         presenceData.details = 'Página inicial';
