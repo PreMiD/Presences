@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "NMW03",
+    "id": "534099893979971584"
+  },
+  "url": "downdetector.com",
+  "description": {
+    "en": "Real-time problem & outage monitoring"
+  },
+  "service": "Downdetector",
+  "version": "1.2.1",
+  "logo": "https://i.imgur.com/STs8Nfw.png",
+  "thumbnail": "https://i.imgur.com/Qy1lbXE.png",
+  "color": "#FF160A",
+  "tags": [
+    "status",
+    "monitoring"
+  ],
+  "category": "other"
+}

@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "EGGSY",
+    "id": "162969778699501569"
+  },
+  "service": "DiziBOX",
+  "description": {
+    "en": "DiziBOX is one of the biggest Turkish foreign TV show providers on internet.",
+    "tr": "DiziBOX, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir."
+  },
+  "url": "www.dizibox.pw",
+  "version": "1.1.2",
+  "logo": "https://premid.is-inside.me/uaevXdjW.png",
+  "thumbnail": "https://premid.is-inside.me/ssPNQITL.png",
+  "color": "#212426",
+  "tags": [
+    "video",
+    "tvshows",
+    "turkish"
+  ],
+  "iframe": true,
+  "category": "videos"
+}
