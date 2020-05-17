@@ -1,10 +1,10 @@
-name: QA
+name: SE
 on:
   schedule:
-    - cron: 0 1 * * *
+    - cron: 0 0 */3 * *
 jobs:
   qa:
-    name: Quality Assurance
+    name: Syntax Enforcer
     runs-on: ubuntu-latest
     if: github.repository_owner == 'PreMiD'
     steps:
@@ -22,12 +22,12 @@ jobs:
       - name: Install Deps
         run: yarn
       - name: Compile Script
-        run: yarn qa:compile
-      - name: Start QA
+        run: yarn se:compile
+      - name: Start SE
         run: |
           git config --global core.quotePath false
           git config --global core.precomposeunicode true
-          yarn qa
+          yarn se
       - name: Commit any changes
         if: always()
         run: |
@@ -43,7 +43,7 @@ jobs:
             git config --local user.name "${GITHUB_USER}";
             git checkout -b semid/qa/`date +%F-%H-%M`;
             git commit -sam "♻️ Refactoring";
-            hub pull-request -p -m "🤖 Daily QA" -m "*beep boop* I've prettified and refactored some Presences...";
+            hub pull-request -p -m "🤖 Daily SE" -m "*beep boop* I've prettified and refactored some Presences...";
           fi
         env:
           GITHUB_USER: SeMiD

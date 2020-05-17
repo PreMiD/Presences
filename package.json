@@ -5,8 +5,8 @@
   "license": "MPL-2.0",
   "scripts": {
     "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
-    "qa": "node ./qualityAssurance.js",
-    "qa:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./qualityAssurance.ts",
+    "se": "node ./syntaxEnforcer.js",
+    "se:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./syntaxEnforcer.ts",
     "pu": "node ./presenceUpdater.js",
     "pu:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./presenceUpdater.ts"
   },
