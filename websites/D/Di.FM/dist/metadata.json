@@ -18,5 +18,5 @@
     "radio"
   ],
   "category": "music",
-  "regExp": "([a-z0-9-]+[.])*di[.]fm/"
+  "regExp": "([a-z0-9-]+[.])*di[.]fm[/]"
 }

@@ -20,6 +20,6 @@
     "streaming"
   ],
   "category": "anime",
-  "regExp": "([a-z0-9-]+[.])*9anime([.][a-z]+)+/",
+  "regExp": "([a-z0-9-]+[.])*9anime([.][a-z]+)+[/]",
   "iframe": true
 }

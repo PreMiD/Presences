@@ -19,5 +19,5 @@
     "video"
   ],
   "category": "socials",
-  "regExp": "meet[.]google([.][a-z]+)+/"
+  "regExp": "meet[.]google([.][a-z]+)+[/]"
 }

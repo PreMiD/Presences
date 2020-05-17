@@ -19,5 +19,5 @@
     "music"
   ],
   "category": "videos",
-  "regExp": "([a-z0-9-]+[.])*plex[.]tv/)|( */web/index[.]html#)"
+  "regExp": "([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)"
 }

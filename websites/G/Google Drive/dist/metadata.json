@@ -26,5 +26,5 @@
     "google"
   ],
   "category": "other",
-  "regExp": "drive[.]google([.][a-z]+)+/"
+  "regExp": "drive[.]google([.][a-z]+)+[/]"
 }

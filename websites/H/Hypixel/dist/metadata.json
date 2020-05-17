@@ -18,5 +18,5 @@
     "hypixel"
   ],
   "category": "games",
-  "regExp": "([a-z0-9-]+[.])*hypixel[.]net/"
+  "regExp": "([a-z0-9-]+[.])*hypixel[.]net[/]"
 }

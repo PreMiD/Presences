@@ -20,5 +20,5 @@
     "pics"
   ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*9gag[.]com/"
+  "regExp": "([a-z0-9-]+[.])*9gag[.]com[/]"
 }

@@ -28,5 +28,5 @@
     "fun"
   ],
   "category": "games",
-  "regExp": "([a-z0-9-]+[.])*akinator[.]com/"
+  "regExp": "([a-z0-9-]+[.])*akinator[.]com[/]"
 }

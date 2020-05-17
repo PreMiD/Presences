@@ -20,5 +20,5 @@
   ],
   "category": "videos",
   "iframe": true,
-  "regExp": "([a-z0-9-]+[.])*tuga[.]tv/"
+  "regExp": "([a-z0-9-]+[.])*tuga[.]tv[/]"
 }

@@ -18,5 +18,5 @@
     "labymod"
   ],
   "category": "games",
-  "regExp": "([a-z0-9-]+[.])*labymod[.]net/"
+  "regExp": "([a-z0-9-]+[.])*labymod[.]net[/]"
 }

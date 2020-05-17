@@ -22,5 +22,5 @@
     "expressradio"
   ],
   "category": "music",
-  "regExp": "([a-z0-9-]+[.])*expressradio[.]co/"
+  "regExp": "([a-z0-9-]+[.])*expressradio[.]co[/]"
 }

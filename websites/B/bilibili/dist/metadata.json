@@ -39,6 +39,6 @@
     "anime"
   ],
   "category": "anime",
-  "regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com/",
+  "regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com[/]",
   "iframe": true
 }

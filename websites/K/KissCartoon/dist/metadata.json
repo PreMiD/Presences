@@ -17,7 +17,7 @@
     "cartoon",
     "kiss"
   ],
-  "regExp": "([a-z0-9-]+[.])*kisscartoon([.][a-z]+)+/",
+  "regExp": "([a-z0-9-]+[.])*kisscartoon([.][a-z]+)+[/]",
   "category": "videos",
   "iframe": true
 }

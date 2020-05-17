@@ -29,5 +29,5 @@
   ],
   "iframe": true,
   "category": "anime",
-  "regExp": "([a-z0-9-]+[.])*animeworld([.][a-z]+)+/"
+  "regExp": "([a-z0-9-]+[.])*animeworld([.][a-z]+)+[/]"
 }

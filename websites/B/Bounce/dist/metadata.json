@@ -27,5 +27,5 @@
     "bounceradio"
   ],
   "category": "music",
-  "regExp": "([a-z0-9-]+[.])*(wearebounce[.]net|boun[.]cc)/"
+  "regExp": "([a-z0-9-]+[.])*(wearebounce[.]net|boun[.]cc)[/]"
 }

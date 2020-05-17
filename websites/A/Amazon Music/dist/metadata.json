@@ -21,5 +21,5 @@
     "media"
   ],
   "category": "music",
-  "regExp": "music[.]amazon([.][a-z]+)+/"
+  "regExp": "music[.]amazon([.][a-z]+)+[/]"
 }

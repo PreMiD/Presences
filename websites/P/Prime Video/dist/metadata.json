@@ -26,5 +26,5 @@
     "prime"
   ],
   "category": "videos",
-  "regExp": "([a-z0-9-]+[.])*amazon([.][a-z]+)+/(-/([a-z0-9]+)/)?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp/video))|([a-z0-9-]+[.])*primevideo([.][a-z]+)+/"
+  "regExp": "([a-z0-9-]+[.])*amazon([.][a-z]+)+[/](-[/]([a-z0-9]+)[/])?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp[/]video))|([a-z0-9-]+[.])*primevideo([.][a-z]+)+[/]"
 }

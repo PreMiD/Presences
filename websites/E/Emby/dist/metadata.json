@@ -26,5 +26,5 @@
     "tv",
     "media"
   ],
-  "regExp": ".*/web/index[.]html"
+  "regExp": ".*[/]web[/]index[.]html"
 }

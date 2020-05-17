@@ -18,5 +18,5 @@
     "pics"
   ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*tumblr[.]com/"
+  "regExp": "([a-z0-9-]+[.])*tumblr[.]com[/]"
 }

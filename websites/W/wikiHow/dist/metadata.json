@@ -19,5 +19,5 @@
     "how-to"
   ],
   "category": "other",
-  "regExp": "([a-z0-9|-]+[.])*wikihow[.]com/"
+  "regExp": "([a-z0-9|-]+[.])*wikihow[.]com[/]"
 }

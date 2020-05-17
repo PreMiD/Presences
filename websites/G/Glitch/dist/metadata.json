@@ -23,5 +23,5 @@
     "community"
   ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*glitch([.][a-z]+)+/"
+  "regExp": "([a-z0-9-]+[.])*glitch([.][a-z]+)+[/]"
 }

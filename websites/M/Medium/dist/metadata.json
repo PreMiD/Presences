@@ -19,5 +19,5 @@
     "stories"
   ],
   "category": "socials",
-  "regExp": "([a-z0-9|-]+[.])*medium[.]com/"
+  "regExp": "([a-z0-9|-]+[.])*medium[.]com[/]"
 }

@@ -19,5 +19,5 @@
     "fashion"
   ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*zalando[.]([.][a-z]+)+/"
+  "regExp": "([a-z0-9-]+[.])*zalando([.][a-z]+)+[/]"
 }

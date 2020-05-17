@@ -20,5 +20,5 @@
     "google"
   ],
   "category": "other",
-  "regExp": "docs[.]google([.][a-z]+)+/"
+  "regExp": "docs[.]google([.][a-z]+)+[/]"
 }

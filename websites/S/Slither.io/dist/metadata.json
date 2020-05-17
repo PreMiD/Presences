@@ -20,5 +20,5 @@
     "ranks"
   ],
   "category": "games",
-  "regExp": "([a-z0-9-]+[.])*slither[.]io/"
+  "regExp": "([a-z0-9-]+[.])*slither[.]io[/]"
 }

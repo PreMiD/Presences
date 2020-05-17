@@ -17,5 +17,5 @@
     "pinterest"
   ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*pinterest([.][a-z]+)+/"
+  "regExp": "([a-z0-9-]+[.])*pinterest([.][a-z]+)+[/]"
 }

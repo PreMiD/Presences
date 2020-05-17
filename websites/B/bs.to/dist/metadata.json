@@ -19,5 +19,5 @@
     "videos"
   ],
   "category": "videos",
-  "regExp": "([a-z0-9-]+[.])*bs[.]to/"
+  "regExp": "([a-z0-9-]+[.])*bs[.]to[/]"
 }

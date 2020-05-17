@@ -9,7 +9,7 @@
     "tr": "eggsy.codes, EGGSY'nin PreMiD ile ve bir çok başka projesiyle alakalı işlerini sergilediği internet sitesidir!"
   },
   "url": "eggsy.codes",
-  "regExp": "eggsy[.]codes(?!/projects/premid/custom-status)",
+  "regExp": "eggsy[.]codes(?![/]projects[/]premid[/]custom-status)",
   "version": "1.2.1",
   "logo": "https://premid.is-inside.me/L7cXeX83.jpg",
   "thumbnail": "https://premid.is-inside.me/pTbIrxn7.png",

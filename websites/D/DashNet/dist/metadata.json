@@ -17,5 +17,5 @@
     "clicker"
   ],
   "category": "games",
-  "regExp": "([a-z0-9-]+[.])*dashnet[.]org/"
+  "regExp": "([a-z0-9-]+[.])*dashnet[.]org[/]"
 }

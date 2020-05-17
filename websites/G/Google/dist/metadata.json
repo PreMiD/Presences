@@ -19,5 +19,5 @@
     "popular"
   ],
   "category": "other",
-  "regExp": "www[.]google([.][a-z]+)+/"
+  "regExp": "www[.]google([.][a-z]+)+[/]"
 }

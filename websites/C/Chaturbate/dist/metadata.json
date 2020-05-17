@@ -18,5 +18,5 @@
     "live-streaming"
   ],
   "category": "videos",
-  "regExp": "([a-z0-9-]+[.])*chaturbate([.][a-z]+)+/"
+  "regExp": "([a-z0-9-]+[.])*chaturbate([.][a-z]+)+[/]"
 }
