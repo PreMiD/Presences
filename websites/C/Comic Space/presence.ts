@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
                 (categoria1.innerText.includes('Categoria') ? presenceData.state = categoria1.innerText : presenceData.state = categoriasObra.innerText)
             );
     } else if (path.includes('/news/')) {
-        presenceData.details = 'Nóticias'
+        presenceData.details = 'Nóticias';
         presenceData.state = noticiaTitulo.innerText;
     } else {
         presenceData.details = 'Navegando...';
