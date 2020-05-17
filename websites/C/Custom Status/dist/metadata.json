@@ -9,12 +9,17 @@
     "tr": "Custom Status, Discord'un kendi özelliği gibi isteğinize göre ayarlanabilen bir oynuyor kısmıdır. Bu servis ile PreMiD kullanarak istediğiniz resmi seçme olanağı dışında bir RPC ile yapabileceğiniz her şeyi yapabilirsiniz. Servisin çalışması için servisi ekleyip, [buradaki](https://eggsy.codes/projects/premid/custom-status) sayfaya gitmelisiniz."
   },
   "url": "eggsy.codes",
-  "regExp": "eggsy[.]codes\/projects\/premid\/custom-status",
-  "version": "1.2.0",
+  "regExp": "eggsy[.]codes/projects/premid/custom-status",
+  "version": "1.2.1",
   "logo": "https://premid.is-inside.me/PsLr519L.PNG",
   "thumbnail": "https://premid.is-inside.me/rWy3ggow.png",
   "color": "#212121",
-  "tags": ["eggsy", "premid", "custom", "status"],
+  "tags": [
+    "eggsy",
+    "premid",
+    "custom",
+    "status"
+  ],
   "warning": true,
   "category": "other"
 }

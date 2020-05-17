@@ -10,11 +10,15 @@
     "zh_CN": "yabancıdizi 是土耳其最大国外电视节目秀提供商之一"
   },
   "url": "yabancidizi.vip",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://premid.is-inside.me/zi1WNlTV.png",
   "thumbnail": "https://premid.is-inside.me/dEtgRixU.png",
   "color": "#14161d",
-  "tags": ["video", "tvshows", "turkish"],
+  "tags": [
+    "video",
+    "tvshows",
+    "turkish"
+  ],
   "iframe": true,
   "category": "videos"
 }

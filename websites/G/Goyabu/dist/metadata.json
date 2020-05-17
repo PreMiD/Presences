@@ -9,10 +9,14 @@
     "pt_BR": "Assista anime online em HD, legendado ou dublado, no seu celular ou computador aqui na Goyabu, seu portal de animes online!"
   },
   "url": "goyabu.com",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/poILuXD.png",
   "thumbnail": "https://i.imgur.com/Ah8prCg.png",
   "color": "#e53838",
-  "tags": ["anime", "video", "media"],
+  "tags": [
+    "anime",
+    "video",
+    "media"
+  ],
   "category": "anime"
 }

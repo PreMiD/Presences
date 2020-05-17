@@ -20,11 +20,14 @@
     "x1337x.se",
     "1337x.is"
   ],
-  "version": "1.5.2",
+  "version": "1.5.3",
   "logo": "https://i.imgur.com/zc7kuDN.png",
   "thumbnail": "https://i.imgur.com/Ut7qqHx.png",
   "color": "#d63600",
-  "tags": ["torrents", "shows"],
+  "tags": [
+    "torrents",
+    "shows"
+  ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*x?1337x([.][a-z]+)+\/"
+  "regExp": "([a-z0-9-]+[.])*x?1337x([.][a-z]+)+/"
 }

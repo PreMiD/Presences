@@ -10,12 +10,22 @@
     "nl": "Bounce Radio is een 24/7 internationaal hitmuziekstation dat iedereen hitmuziek biedt. Gemaakt door gamers voor gamers.",
     "ga_IE": "Is stáisiún ceoil idirnáisiúnta buailte é Bounce Radio a chuireann ceol buailte ar fáil do gach duine. Déanta ag gamers do gamers."
   },
-  "url": ["wearebounce.net", "www.wearebounce.net"],
-  "version": "2.4.0",
+  "url": [
+    "wearebounce.net",
+    "www.wearebounce.net"
+  ],
+  "version": "2.4.1",
   "logo": "https://i.imgur.com/KHn11HE.png",
   "thumbnail": "https://i.imgur.com/XmJTiZY.png",
   "color": "#32a852",
-  "tags": ["music", "radio", "gamers", "community", "bounce", "bounceradio"],
+  "tags": [
+    "music",
+    "radio",
+    "gamers",
+    "community",
+    "bounce",
+    "bounceradio"
+  ],
   "category": "music",
-  "regExp": "([a-z0-9-]+[.])*(wearebounce[.]net|boun[.]cc)\/"
+  "regExp": "([a-z0-9-]+[.])*(wearebounce[.]net|boun[.]cc)/"
 }

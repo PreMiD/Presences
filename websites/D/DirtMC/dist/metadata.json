@@ -8,11 +8,17 @@
     "en": "Home to MrCrainer, DirtMC is a skyblock server packed with unique features.",
     "nl": "DirtMC is de thuisbasis van MrCrainer en is een skyblock-server boordevol unieke functies."
   },
-  "url": ["dirtmc.net", "buy.dirtmc.net"],
-  "version": "1.2.1",
+  "url": [
+    "dirtmc.net",
+    "buy.dirtmc.net"
+  ],
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/hevy5Kg.png",
   "thumbnail": "https://i.imgur.com/uJxqhBB.png",
   "color": "#eb2025",
-  "tags": ["minecraft", "dirtmc"],
+  "tags": [
+    "minecraft",
+    "dirtmc"
+  ],
   "category": "games"
 }

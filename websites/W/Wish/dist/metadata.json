@@ -9,11 +9,14 @@
     "de": "Kaufe viele Produkte mit 80% Rabatt."
   },
   "url": "www.wish.com",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "logo": "https://i.imgur.com/XsZ2IOn.jpg",
   "thumbnail": "https://i.imgur.com/R7AkWiP.png",
   "color": "#48c0eb",
-  "tags": ["shopping", "shop"],
+  "tags": [
+    "shopping",
+    "shop"
+  ],
   "category": "other",
   "settings": [
     {
@@ -27,7 +30,10 @@
       "title": "Language",
       "icon": "fas fa-language",
       "value": 0,
-      "values": ["English", "German"]
+      "values": [
+        "English",
+        "German"
+      ]
     }
   ]
 }

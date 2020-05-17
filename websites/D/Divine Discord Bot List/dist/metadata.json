@@ -8,10 +8,13 @@
     "en": "A small list of Discord bots for your servers"
   },
   "url": "divinediscordbots.com",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/UqSU82Q.jpg",
   "thumbnail": "https://i.imgur.com/jPruBUE.png",
   "color": "#0594ff",
-  "tags": ["bots", "discord"],
+  "tags": [
+    "bots",
+    "discord"
+  ],
   "category": "other"
 }

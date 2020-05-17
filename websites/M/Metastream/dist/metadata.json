@@ -7,11 +7,17 @@
   "description": {
     "en": "Watch and listen to your favorite content with friends."
   },
-  "url": ["getmetastream.com", "app.getmetastream.com"],
-  "version": "1.2.1",
+  "url": [
+    "getmetastream.com",
+    "app.getmetastream.com"
+  ],
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/vAozqPN.png",
   "thumbnail": "https://i.imgur.com/CGjj2MG.png",
   "color": "#DAAFB9",
-  "tags": ["streaming", "video"],
+  "tags": [
+    "streaming",
+    "video"
+  ],
   "category": "videos"
 }

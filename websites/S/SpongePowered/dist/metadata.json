@@ -15,10 +15,13 @@
     "docs.spongepowered.org",
     "forums.spongepowered.org"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/7uYnBAN.png",
   "thumbnail": "https://i.imgur.com/Kne85nE.png",
   "color": "#f6ce16",
-  "tags": ["minecraft", "sponge"],
+  "tags": [
+    "minecraft",
+    "sponge"
+  ],
   "category": "games"
 }

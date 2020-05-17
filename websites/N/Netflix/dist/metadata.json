@@ -26,11 +26,18 @@
     "zh_CN": "Netflix是全球领先的网络视频点播服务网站，在190多个国家/地区拥有1.39亿付费会员，他们收看各种类型和语言的电视连续剧，纪录片和故事片以及电影。",
     "zh_TW": "Netflix是全球領先的網路隨選串流影片服務網站，在190多個國家/地區擁有1.39億付費會員，他們收看各種類型和語言的電視連續劇，紀錄片和故事片以及電影。"
   },
-  "url": ["www.netflix.com", "netflix.com"],
-  "version": "3.6.1",
+  "url": [
+    "www.netflix.com",
+    "netflix.com"
+  ],
+  "version": "3.6.2",
   "logo": "https://i.gyazo.com/2161fe603eec5196905176f5b8dcc325.png",
   "thumbnail": "https://i.gyazo.com/28e3c4caccda67a4a299588c8058da50.jpg",
   "color": "#db0000",
-  "tags": ["netflix", "video", "media"],
+  "tags": [
+    "netflix",
+    "video",
+    "media"
+  ],
   "category": "videos"
 }

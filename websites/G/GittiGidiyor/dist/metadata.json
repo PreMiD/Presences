@@ -8,11 +8,19 @@
     "en": "GittiGidiyor is a popular shopping website in Turkey. It is the sub organization of eBay in Turkey.",
     "tr": "GittiGidiyor, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir. Ayrıca eBay'in de Türkiye'de faaliyet gösteren markasıdır."
   },
-  "url": ["www.gittigidiyor.com", "urun.gittigidiyor.com", "gittigidiyor.com"],
-  "version": "1.1.2",
+  "url": [
+    "www.gittigidiyor.com",
+    "urun.gittigidiyor.com",
+    "gittigidiyor.com"
+  ],
+  "version": "1.1.3",
   "logo": "https://premid.is-inside.me/503lev8R.png",
   "thumbnail": "https://premid.is-inside.me/RqUQ2C2R.png",
   "color": "#2a6bb0",
-  "tags": ["gittigidiyor", "shopping", "turkish"],
+  "tags": [
+    "gittigidiyor",
+    "shopping",
+    "turkish"
+  ],
   "category": "other"
 }

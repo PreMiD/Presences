@@ -21,10 +21,13 @@
     "www.animefestival.de",
     "www.animetickets.de"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/9q7Vuqr.png",
   "thumbnail": "https://i.imgur.com/nBe7Cfw.jpg",
   "color": "#ccf5fd",
-  "tags": ["anime", "german"],
+  "tags": [
+    "anime",
+    "german"
+  ],
   "category": "anime"
 }

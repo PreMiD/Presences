@@ -7,11 +7,17 @@
   "description": {
     "en": "Video game music radio from the Sitting on Clouds Soundtrack Collection"
   },
-  "url": ["squid-radio.net", "www.squid-radio.net"],
-  "version": "1.1.1",
+  "url": [
+    "squid-radio.net",
+    "www.squid-radio.net"
+  ],
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/pAEVAX8.png",
   "thumbnail": "https://i.imgur.com/a73vtbs.png",
   "color": "#67bdff",
-  "tags": ["music", "radio"],
+  "tags": [
+    "music",
+    "radio"
+  ],
   "category": "music"
 }

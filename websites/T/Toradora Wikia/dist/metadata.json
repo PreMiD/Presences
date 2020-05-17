@@ -8,11 +8,18 @@
     "en": "Presence for the english & german wikias of the anime Toradora!",
     "de": "Präsenz für die englischen & deutschen Wikias über den Anime Toradora!"
   },
-  "url": ["tora-dora.fandom.com", "toradora.fandom.com"],
-  "version": "1.1.1",
+  "url": [
+    "tora-dora.fandom.com",
+    "toradora.fandom.com"
+  ],
+  "version": "1.1.2",
   "logo": "https://crugg.de/premid/tapilogo.png",
   "thumbnail": "https://crugg.de/premid/tapibanner.png",
   "color": "#F9304B",
-  "tags": ["anime", "toradora", "wikia"],
+  "tags": [
+    "anime",
+    "toradora",
+    "wikia"
+  ],
   "category": "anime"
 }

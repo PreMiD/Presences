@@ -14,10 +14,13 @@
     "dev.bukkit.org",
     "bukkit.gamepedia.com"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/X785snB.png",
   "thumbnail": "https://i.imgur.com/LTkN2jF.png",
   "color": "#2096e1",
-  "tags": ["minecraft", "bukkit"],
+  "tags": [
+    "minecraft",
+    "bukkit"
+  ],
   "category": "games"
 }

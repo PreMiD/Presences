@@ -16,11 +16,19 @@
     "it": "Scopri il sito Aranzulla.it per leggere guide e tutorial in lingua Italiana.",
     "zh_CN": "以意大利语来阅读各种指南与教程。"
   },
-  "url": ["www.aranzulla.it", "aranzulla.it"],
-  "version": "1.2.0",
+  "url": [
+    "www.aranzulla.it",
+    "aranzulla.it"
+  ],
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/P47inut.png",
   "thumbnail": "https://i.imgur.com/gZ1Vwml.png",
   "color": "#EE701B",
-  "tags": ["aranzulla", "salvatore-aranzulla", "tutorial", "guide"],
+  "tags": [
+    "aranzulla",
+    "salvatore-aranzulla",
+    "tutorial",
+    "guide"
+  ],
   "category": "other"
 }

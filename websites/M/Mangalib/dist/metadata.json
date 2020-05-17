@@ -9,10 +9,15 @@
     "en": "Website for reading manga"
   },
   "url": "mangalib.me",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/n5XgMkt.png",
   "thumbnail": "https://i.imgur.com/6tzn5Gc.png",
   "color": "#E48F13",
-  "tags": ["manga", "mangalib", "read", "anime"],
+  "tags": [
+    "manga",
+    "mangalib",
+    "read",
+    "anime"
+  ],
   "category": "other"
 }

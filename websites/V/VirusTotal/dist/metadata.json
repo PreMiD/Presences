@@ -9,10 +9,13 @@
     "de": "Überprüfe deine Dateien für deine Sicherheit"
   },
   "url": "www.virustotal.com",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "logo": "https://i.imgur.com/QPKWLTc.png",
   "thumbnail": "https://i.imgur.com/HE2xzdF.png",
   "color": "#397eff",
-  "tags": ["safety", "virus-check"],
+  "tags": [
+    "safety",
+    "virus-check"
+  ],
   "category": "other"
 }

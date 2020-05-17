@@ -12,11 +12,17 @@
     "uk_UA": "Ця присутність призначена для теми WIMS за замовчуванням. WIMS - це багатоцільовий серверний проект, призначений для математичних вправ. Поставте це прямо зараз, щоб показати людям, як ви наполегливо працюєте над своїми завданнями.",
     "nl": "Deze presence is alleen voor WIMS' standaard thema. WIMS is een multifunctioneel server-project ontworpen voor wiskundige oefeningen. Download het nu om mensen te laten zien hoe hard je aan je opdrachten werkt."
   },
-  "url": ["wims-schaersvoorde.nl", "85.148.206.56"],
-  "version": "2.3.2",
+  "url": [
+    "wims-schaersvoorde.nl",
+    "85.148.206.56"
+  ],
+  "version": "2.3.3",
   "logo": "https://i.imgur.com/E9FdAjM.png",
   "thumbnail": "https://i.imgur.com/OLvrsMo.png",
   "color": "#f4f8d7",
-  "tags": ["general", "school"],
+  "tags": [
+    "general",
+    "school"
+  ],
   "category": "other"
 }

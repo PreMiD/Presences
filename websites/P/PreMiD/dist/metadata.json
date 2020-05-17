@@ -35,11 +35,15 @@
     "beta.premid.app",
     "status.premid.app"
   ],
-  "version": "2.2.1",
+  "version": "2.2.2",
   "logo": "https://crugg.de/premid/premid2.png",
   "thumbnail": "https://crugg.de/premid/premid3.png",
   "color": "#7289DA",
-  "tags": ["discord", "web-service", "inception"],
+  "tags": [
+    "discord",
+    "web-service",
+    "inception"
+  ],
   "category": "other",
   "button": false
 }

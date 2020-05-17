@@ -22,10 +22,14 @@
     "zh_TW": "有關動漫，漫畫，輕小說以及與宅男世界相關的一切的新聞報導都在這裡！"
   },
   "url": "www.aninews.live",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "logo": "https://menma.is-inside.me/wofwbK2x.png",
   "thumbnail": "https://menma.is-inside.me/M6AvnGvt.png",
   "color": "#0c8a2e",
-  "tags": ["anime", "manga", "news"],
+  "tags": [
+    "anime",
+    "manga",
+    "news"
+  ],
   "category": "other"
 }

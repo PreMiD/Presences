@@ -8,11 +8,17 @@
     "en": "Simonektv is a website where you can admire the beauty of Orbazzo.",
     "it": "Simonektv è un sito in cui potrete ammirare la bellezza del Fiero Orbazzo."
   },
-  "url": ["simonektv.com", "www.simonektv.com"],
-  "version": "1.2.0",
+  "url": [
+    "simonektv.com",
+    "www.simonektv.com"
+  ],
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/5XQGTQQ.png",
   "thumbnail": "https://i.imgur.com/yW7ZCmO.jpg",
   "color": "#147DB4",
-  "tags": ["simonektv", "orbazzo"],
+  "tags": [
+    "simonektv",
+    "orbazzo"
+  ],
   "category": "other"
 }

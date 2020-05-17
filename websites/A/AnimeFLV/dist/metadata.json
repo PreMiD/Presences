@@ -8,12 +8,20 @@
     "en": "AnimeFLV is a streaming website where you can watch anime with Spanish subtitles.",
     "zh_CN": "AnimeFLV是一个视频网站，您可以在其中观看带有西班牙语字幕的动漫。"
   },
-  "url": ["animeflv.ru", "animeflv.net", "www5.animeflv.cc"],
-  "version": "1.1.1",
+  "url": [
+    "animeflv.ru",
+    "animeflv.net",
+    "www5.animeflv.cc"
+  ],
+  "version": "1.1.2",
   "logo": "https://i.ibb.co/k1x0mXZ/descarga.png",
   "thumbnail": "https://i.ibb.co/HFKzffL/05212f589cb42f3d29073ce164a66eaa.jpg",
   "color": "#694ba1",
-  "tags": ["animeflv", "streaming", "embedded-links"],
+  "tags": [
+    "animeflv",
+    "streaming",
+    "embedded-links"
+  ],
   "category": "anime",
   "iframe": true
 }

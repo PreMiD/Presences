@@ -15,10 +15,14 @@
     "guesswhat.sparklinlabs.com",
     "frenzy.sparklinlabs.com"
   ],
-  "version": "1.1.2",
+  "version": "1.1.3",
   "logo": "https://i.gyazo.com/1f549053490f65ab07f01b1a18b26553.png",
   "thumbnail": "https://i.gyazo.com/0bb0f58b072488bb0ffff43cd64b0d82.png",
   "color": "#01E0FF",
-  "tags": ["sparkinlabs", "games", "gaming"],
+  "tags": [
+    "sparkinlabs",
+    "games",
+    "gaming"
+  ],
   "category": "games"
 }

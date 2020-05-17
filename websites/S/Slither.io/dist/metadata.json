@@ -9,11 +9,16 @@
     "ga_IE": "Is cluiche físe il-imreora é Slither.io atá ar fáil do iOS, Android, agus brabhsálaithe gréasáin, arna fhorbairt ag Steve Howse. Rialaíonn Rannpháirtithe avatar atá cosúil le péist, a ídíonn millíní ildaite, ó imreoirí eile agus cinn a sceitheann go nádúrtha ar an léarscáil sa chluiche, le fás i méid."
   },
   "url": "slither.io",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "logo": "https://i.imgur.com/1afZuaP.png",
   "thumbnail": "https://downbeat.is-inside.me/c7UNKqPH.png",
   "color": "#319c2c",
-  "tags": ["io-game", "games", "snake", "ranks"],
+  "tags": [
+    "io-game",
+    "games",
+    "snake",
+    "ranks"
+  ],
   "category": "games",
-  "regExp": "([a-z0-9-]+[.])*slither[.]io\/"
+  "regExp": "([a-z0-9-]+[.])*slither[.]io/"
 }

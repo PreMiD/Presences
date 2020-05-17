@@ -9,11 +9,15 @@
     "nl": "UpBeat is een advertentievrije, community aangedreven online radio."
   },
   "url": "upbeatradio.net",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "logo": "https://i.imgur.com/xFz6AU3.png",
   "thumbnail": "https://i.imgur.com/CvdIcM8.png",
   "color": "#212121",
-  "tags": ["upbeat", "radio", "upbeatradio"],
+  "tags": [
+    "upbeat",
+    "radio",
+    "upbeatradio"
+  ],
   "category": "music",
   "settings": [
     {

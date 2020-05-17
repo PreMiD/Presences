@@ -9,10 +9,13 @@
     "nl": "Muziek in je oren!"
   },
   "url": "itspower.net",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/71euN7x.png",
   "thumbnail": "https://i.imgur.com/vyO6DRc.png",
   "color": "#331a46",
-  "tags": ["radio", "music"],
+  "tags": [
+    "radio",
+    "music"
+  ],
   "category": "music"
 }

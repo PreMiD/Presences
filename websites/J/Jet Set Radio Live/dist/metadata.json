@@ -8,10 +8,13 @@
     "en": "Yo! You've heard about Jet Set Radio, right? It's only the hottest radio station straight outta Tokyo-to! Tune in. Turn on. Jet Set Radiooo!!!"
   },
   "url": "jetsetradio.live",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://sks316.s-ul.eu/cF9P7Gyh.png",
   "thumbnail": "https://sks316.s-ul.eu/RVyvtEdm.jpg",
   "color": "#FFE222",
-  "tags": ["music", "radio"],
+  "tags": [
+    "music",
+    "radio"
+  ],
   "category": "music"
 }

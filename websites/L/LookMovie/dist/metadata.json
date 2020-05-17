@@ -7,11 +7,18 @@
   "description": {
     "en": "Watch all new and old movies on line in FHD quality and subtitles for free."
   },
-  "url": ["lookmovie.ag", "www.lookmovie.ag"],
-  "version": "1.2.1",
+  "url": [
+    "lookmovie.ag",
+    "www.lookmovie.ag"
+  ],
+  "version": "1.2.2",
   "logo": "https://doomlord.s-ul.eu/TtkUyBkp",
   "thumbnail": "https://doomlord.s-ul.eu/q4gLfTIv",
   "color": "#ffcc00",
-  "tags": ["dedicated-server", "lookmovie", "streaming"],
+  "tags": [
+    "dedicated-server",
+    "lookmovie",
+    "streaming"
+  ],
   "category": "videos"
 }

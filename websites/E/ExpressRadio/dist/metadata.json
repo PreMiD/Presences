@@ -9,11 +9,18 @@
     "ga_IE": "Is stáisiún raidió neamhbhrabúsach é Express Radio a sholáthraíonn na amas is déanaí agus is fearr duit."
   },
   "url": "expressradio.co",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/LUJdDO9.png",
   "thumbnail": "https://i.imgur.com/AabDDeg.png",
   "color": "#4a9aa8",
-  "tags": ["music", "radio", "gamers", "community", "express", "expressradio"],
+  "tags": [
+    "music",
+    "radio",
+    "gamers",
+    "community",
+    "express",
+    "expressradio"
+  ],
   "category": "music",
-  "regExp": "([a-z0-9-]+[.])*expressradio[.]co\/"
+  "regExp": "([a-z0-9-]+[.])*expressradio[.]co/"
 }

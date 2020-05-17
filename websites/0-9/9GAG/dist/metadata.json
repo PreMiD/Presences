@@ -11,11 +11,14 @@
     "zh_TW": "9GAG是一個社交媒體網站。使用者們在此上傳並分享「用戶自創」的圖像與影片。"
   },
   "url": "9gag.com",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/t2BG2Fj.png",
   "thumbnail": "https://i.imgur.com/CmOz6oG.png",
   "color": "#ffffff",
-  "tags": ["gifs", "pics"],
+  "tags": [
+    "gifs",
+    "pics"
+  ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*9gag[.]com\/"
+  "regExp": "([a-z0-9-]+[.])*9gag[.]com/"
 }

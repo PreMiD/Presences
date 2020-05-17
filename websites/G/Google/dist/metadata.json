@@ -10,11 +10,14 @@
     "zh_CN": "Google是一个搜索引擎，可用于查找各种信息，例如网站，图片，地图。"
   },
   "url": "www.google.com",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "logo": "https://i.imgur.com/ZZvx6Dq.png",
   "thumbnail": "https://i.imgur.com/8Ayu4Re.png",
   "color": "#ffffff",
-  "tags": ["search", "popular"],
+  "tags": [
+    "search",
+    "popular"
+  ],
   "category": "other",
-  "regExp": "www[.]google([.][a-z]+)+\/"
+  "regExp": "www[.]google([.][a-z]+)+/"
 }

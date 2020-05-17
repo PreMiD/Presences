@@ -13,10 +13,14 @@
     "nl": "Giphy is een GIF-zoek- en creatiesysteem."
   },
   "url": "giphy.com",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/VHG3gfC.png",
   "thumbnail": "https://i.imgur.com/Vtg6NxY.png",
   "color": "#00FF00",
-  "tags": ["gif", "editor", "creator"],
+  "tags": [
+    "gif",
+    "editor",
+    "creator"
+  ],
   "category": "other"
 }

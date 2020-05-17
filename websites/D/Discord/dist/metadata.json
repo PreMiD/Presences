@@ -25,10 +25,14 @@
     "merch.discordapp.com",
     "discord.gg"
   ],
-  "version": "2.1.2",
+  "version": "2.1.3",
   "logo": "https://i.imgur.com/FkQDwnv.png",
   "thumbnail": "https://i.imgur.com/0v13nHT.png",
   "color": "#7289DA",
-  "tags": ["chat", "gaming", "voice"],
+  "tags": [
+    "chat",
+    "gaming",
+    "voice"
+  ],
   "category": "socials"
 }

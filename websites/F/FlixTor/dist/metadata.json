@@ -9,10 +9,13 @@
     "ro": "FlixTor este un motor de căutare automat pentru videoclipuri."
   },
   "url": "flixtor.to",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "logo": "https://i.imgur.com/FIXyNZo.png",
   "thumbnail": "https://i.imgur.com/iaHbvZ7.png",
   "color": "#1d3343",
-  "tags": ["video", "media"],
+  "tags": [
+    "video",
+    "media"
+  ],
   "category": "videos"
 }

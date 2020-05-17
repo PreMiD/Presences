@@ -8,10 +8,13 @@
     "en": "A fully customizable server moderation Discord bot for your Discord server that features a simple and intuitive web dashboard. Server management just got a whole lot easier."
   },
   "service": "Skyra",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/vUk6eWg.png",
   "thumbnail": "https://i.imgur.com/4C39tqP.png",
   "color": "#7087D8",
-  "tags": ["bot", "discord"],
+  "tags": [
+    "bot",
+    "discord"
+  ],
   "category": "other"
 }

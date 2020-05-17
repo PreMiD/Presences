@@ -14,10 +14,14 @@
     "nl": "Mixer is een live-streamingplatform van de volgende generatie waarmee kijkers zelf kunnen deelnemen aan de gameplay."
   },
   "url": "mixer.com",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "logo": "https://i.imgur.com/G358RGW.jpg",
   "thumbnail": "https://i.imgur.com/K28BAra.jpg",
   "color": "#1FBAED",
-  "tags": ["mixer", "video", "streaming"],
+  "tags": [
+    "mixer",
+    "video",
+    "streaming"
+  ],
   "category": "videos"
 }

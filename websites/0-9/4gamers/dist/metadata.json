@@ -11,10 +11,14 @@
     "ga_IE": "Cuideachta chomhtháite chun ríomh-spórt a phleanáil, a fhorghníomhú, a mhargú agus a chraoladh sa Téaváin."
   },
   "url": "www.4gamers.com.tw",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "logo": "https://i.imgur.com/zjbM0Um.png",
   "thumbnail": "https://i.imgur.com/rJR3o2n.png",
   "color": "#2E93A5",
-  "tags": ["baha", "games", "anime"],
+  "tags": [
+    "baha",
+    "games",
+    "anime"
+  ],
   "category": "socials"
 }

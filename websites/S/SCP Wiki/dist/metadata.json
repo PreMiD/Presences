@@ -26,10 +26,15 @@
     "scpexplained.wikidot.com",
     "scp-sandbox-3.wikidot.com"
   ],
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/S00mP8l.png",
   "thumbnail": "https://i.imgur.com/el9c68A.png",
   "color": "#BB0011",
-  "tags": ["fiction", "horror", "reading", "wiki"],
+  "tags": [
+    "fiction",
+    "horror",
+    "reading",
+    "wiki"
+  ],
   "category": "other"
 }

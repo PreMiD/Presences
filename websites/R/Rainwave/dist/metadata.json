@@ -9,10 +9,13 @@
     "zh_CN": "电子游戏音乐在线广播，包括混音和原声带！ 为您想听的歌曲投票！"
   },
   "url": "rainwave.cc",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "logo": "https://sks316.s-ul.eu/9WjgnZ6W.png",
   "thumbnail": "https://sks316.s-ul.eu/ScXsp0ui.png",
   "color": "#D17C2B",
-  "tags": ["music", "radio"],
+  "tags": [
+    "music",
+    "radio"
+  ],
   "category": "music"
 }

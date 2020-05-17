@@ -8,10 +8,14 @@
     "en": "LabyDesigns creates a free Bandana/Cape design according to your wishes for LabyMod!"
   },
   "url": "www.labysigns.com",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/RSfSMLM.png",
   "thumbnail": "https://i.imgur.com/RuYcGnT.png",
   "color": "#757575",
-  "tags": ["labymod", "labydesigns", "minecraft"],
+  "tags": [
+    "labymod",
+    "labydesigns",
+    "minecraft"
+  ],
   "category": "games"
 }

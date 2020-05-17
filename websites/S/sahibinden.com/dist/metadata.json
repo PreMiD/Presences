@@ -13,10 +13,14 @@
     "secure.sahibinden.com",
     "banaozel.sahibinden.com"
   ],
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://premid.is-inside.me/HaZkV37U.png",
   "thumbnail": "https://premid.is-inside.me/tMlRFq7w.png",
   "color": "#ffe800",
-  "tags": ["sahibinden", "shopping", "turkish"],
+  "tags": [
+    "sahibinden",
+    "shopping",
+    "turkish"
+  ],
   "category": "other"
 }

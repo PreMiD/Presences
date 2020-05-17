@@ -19,10 +19,13 @@
     "investors.spotify.com",
     "support.spotify.com"
   ],
-  "version": "1.3.1",
+  "version": "1.3.2",
   "logo": "https://i.imgur.com/q3tKDRA.png",
   "thumbnail": "https://i.imgur.com/AzNhQ4j.png",
   "color": "#1ed760",
-  "tags": ["audio", "podcast"],
+  "tags": [
+    "audio",
+    "podcast"
+  ],
   "category": "music"
 }

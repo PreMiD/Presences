@@ -10,12 +10,16 @@
     "zh_TW": "9anime是一個動漫視頻網站，您可以用英語配音來觀看各種動漫。"
   },
   "url": "9anime.to",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://doomlord.s-ul.eu/bMa7Rrbf",
   "thumbnail": "https://doomlord.s-ul.eu/PS3e421E",
   "color": "#694ba1",
-  "tags": ["embedded-links", "9anime", "streaming"],
+  "tags": [
+    "embedded-links",
+    "9anime",
+    "streaming"
+  ],
   "category": "anime",
-  "regExp": "([a-z0-9-]+[.])*9anime([.][a-z]+)+\/",
+  "regExp": "([a-z0-9-]+[.])*9anime([.][a-z]+)+/",
   "iframe": true
 }

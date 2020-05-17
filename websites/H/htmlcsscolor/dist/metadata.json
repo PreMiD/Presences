@@ -8,10 +8,13 @@
     "en": "The ultimate color collection!"
   },
   "url": "www.htmlcsscolor.com",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/Kk099mM.png",
   "thumbnail": "https://i.imgur.com/qCP9Sxb.png",
   "color": "#93C54B",
-  "tags": ["colors", "editor"],
+  "tags": [
+    "colors",
+    "editor"
+  ],
   "category": "other"
 }

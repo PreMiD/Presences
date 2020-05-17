@@ -14,10 +14,15 @@
     "en": "FanFiction | unleash your imagination"
   },
   "url": "www.fanfiction.net",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/bKSkTgk.png",
   "thumbnail": "https://i.imgur.com/5dQGIS1.png",
   "color": "#0000FF",
-  "tags": ["fanfics", "story", "entertainment", "reading"],
+  "tags": [
+    "fanfics",
+    "story",
+    "entertainment",
+    "reading"
+  ],
   "category": "other"
 }

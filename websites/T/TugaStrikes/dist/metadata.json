@@ -8,10 +8,15 @@
     "en": "TugaStrikes is a Gaming Community Founded in 2017 focusing on CS:GO"
   },
   "url": "tugastrikes.com",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/nDCQmhr.png",
   "thumbnail": "https://i.imgur.com/fgUUaYV.png",
   "color": "#00ecec",
-  "tags": ["community", "csgo", "gaming", "tugastrikes"],
+  "tags": [
+    "community",
+    "csgo",
+    "gaming",
+    "tugastrikes"
+  ],
   "category": "games"
 }

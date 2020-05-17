@@ -9,10 +9,13 @@
     "de": "Deutscher Radiosender mit vielen Kanälen wie Charts, Sommer, 90er, House und viel mehr"
   },
   "url": "www.sunshine-live.de",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://crugg.de/premid/ssllogo.png",
   "thumbnail": "https://crugg.de/premid/sslbanner.png",
   "color": "#F47216",
-  "tags": ["music", "radio"],
+  "tags": [
+    "music",
+    "radio"
+  ],
   "category": "music"
 }

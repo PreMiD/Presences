@@ -7,11 +7,19 @@
   "description": {
     "en": "Honeygain is a crowdsourced network company which enables other businesses to conduct web intelligence, market research and content delivery."
   },
-  "url": ["www.honeygain.com", "dashboard.honeygain.com"],
-  "version": "1.1.0",
+  "url": [
+    "www.honeygain.com",
+    "dashboard.honeygain.com"
+  ],
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/fjaT2cF.jpg",
   "thumbnail": "https://i.imgur.com/pThjE43.png",
   "color": "#fad63a",
-  "tags": ["money", "passive", "bearmoney", "free"],
+  "tags": [
+    "money",
+    "passive",
+    "bearmoney",
+    "free"
+  ],
   "category": "other"
 }

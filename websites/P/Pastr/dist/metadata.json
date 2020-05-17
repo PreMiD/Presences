@@ -7,11 +7,18 @@
   "description": {
     "en": "pastr.io is a pasting service that includes multiple features and simple ways to create your own paste."
   },
-  "url": ["pastr.io", "www.pastr.io"],
-  "version": "1.2.0",
+  "url": [
+    "pastr.io",
+    "www.pastr.io"
+  ],
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/vHvJe1O.png",
   "thumbnail": "https://i.imgur.com/eNVKJVd.png",
   "color": "#008EFF",
-  "tags": ["pastr", "paste", "paster"],
+  "tags": [
+    "pastr",
+    "paste",
+    "paster"
+  ],
   "category": "other"
 }

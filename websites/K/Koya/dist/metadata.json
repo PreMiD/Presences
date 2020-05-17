@@ -3,16 +3,22 @@
     "name": "Deleted 7.12i",
     "id": "591702135310385157"
   },
-  "url": ["koyamie.com", "www.koyamie.com"],
+  "url": [
+    "koyamie.com",
+    "www.koyamie.com"
+  ],
   "description": {
     "fr": "Un puissant bot Discord multifonctionnel et configurable.",
     "en": "A powerful multi-function and configurable Discord bot."
   },
   "service": "Koya",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/WeKgGeX.png",
   "thumbnail": "https://i.imgur.com/zQ7KPjZ.png",
   "color": "#7289da",
-  "tags": ["bot", "discord"],
+  "tags": [
+    "bot",
+    "discord"
+  ],
   "category": "other"
 }

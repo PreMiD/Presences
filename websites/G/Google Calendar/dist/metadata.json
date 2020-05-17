@@ -14,11 +14,20 @@
     "en": "Google Calendar is a time-management and scheduling calendar service developed by Google.",
     "it": "Google Calendar è un sistema di calendari concepito da Google."
   },
-  "url": ["calendar.google.com", "www.calendar.google.com"],
-  "version": "1.2.0",
+  "url": [
+    "calendar.google.com",
+    "www.calendar.google.com"
+  ],
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/AxEDCqw.png",
   "thumbnail": "https://i.imgur.com/yaq6y1d.png",
   "color": "#4689F4",
-  "tags": ["calendar", "schedule", "google", "organization", "popular"],
+  "tags": [
+    "calendar",
+    "schedule",
+    "google",
+    "organization",
+    "popular"
+  ],
   "category": "other"
 }

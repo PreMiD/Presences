@@ -9,10 +9,15 @@
     "en": " Apple Inc. is an American multinational company that aims to design and market consumer electronics, computer software and personal computers."
   },
   "service": "Apple",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/rBAusA5.png",
   "thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
   "color": "#606C80",
-  "tags": ["apple", "iphone", "eletronics", "store"],
+  "tags": [
+    "apple",
+    "iphone",
+    "eletronics",
+    "store"
+  ],
   "category": "other"
 }

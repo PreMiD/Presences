@@ -8,10 +8,16 @@
     "en": "Fast and easy video streaming for bloggers and publishers."
   },
   "url": "streamable.com",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/D38h5SR.png",
   "thumbnail": "https://i.imgur.com/ErpMpF3.png",
   "color": "#0f90fa",
-  "tags": ["streamable", "video", "upload", "host", "streaming"],
+  "tags": [
+    "streamable",
+    "video",
+    "upload",
+    "host",
+    "streaming"
+  ],
   "category": "videos"
 }

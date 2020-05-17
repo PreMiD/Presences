@@ -11,7 +11,7 @@
     "zh_TW": "全球最大的網際網路線上零售商。"
   },
   "url": "www.amazon.com",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "logo": "https://i.imgur.com/qPBCqNA.png",
   "thumbnail": "https://i.imgur.com/Y6njoa3.png",
   "color": "#ff9900",
@@ -20,5 +20,5 @@
     "shopping"
   ],
   "category": "other",
-  "regExp": "([a-z0-9-]+[.])*amazon([.][a-z]+)+\/(?!(-\/([a-z0-9]+)\/)?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp\/video))"
+  "regExp": "([a-z0-9-]+[.])*amazon([.][a-z]+)+/(?!(-/([a-z0-9]+)/)?(Prime-Video|Prime-Instant-Video|Amazon-Video|gp/video))"
 }

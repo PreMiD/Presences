@@ -10,10 +10,13 @@
     "zh_CN": "免费的在线高清动漫视频网站。"
   },
   "url": "www.animesonline.cz",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/IcaSbEw.png",
   "thumbnail": "https://i.imgur.com/JsYwXRb.png",
   "color": "#008000",
-  "tags": ["anime", "online"],
+  "tags": [
+    "anime",
+    "online"
+  ],
   "category": "anime"
 }

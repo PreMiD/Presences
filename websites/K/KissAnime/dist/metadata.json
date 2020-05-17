@@ -13,11 +13,14 @@
     "pt_BR": "KissAnime é um site de anime russo. ATENÇÃO: Servidores suportados: RapidVideo, MP4Upload, Beta, Beta2."
   },
   "url": "kissanime.ru",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "logo": "https://i.imgur.com/tFIQhTE.jpg",
   "thumbnail": "https://i.imgur.com/sgnvfWx.png",
   "color": "#75ae07",
-  "tags": ["video", "anime"],
+  "tags": [
+    "video",
+    "anime"
+  ],
   "iframe": true,
   "category": "anime"
 }

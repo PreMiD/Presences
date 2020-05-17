@@ -17,10 +17,12 @@
     "status.ripple.moe",
     "blog.ripple.moe"
   ],
-  "version": "1.3.2",
+  "version": "1.3.3",
   "logo": "https://i.imgur.com/mWU4B5Y.png",
   "thumbnail": "https://i.imgur.com/00lpqgv.png",
   "color": "#FF66AA",
-  "tags": ["games"],
+  "tags": [
+    "games"
+  ],
   "category": "games"
 }

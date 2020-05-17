@@ -25,11 +25,17 @@
     "zh_CN": "享受你喜欢的视频和音乐，上传原创内容，并在YouTube上与朋友、家人和世界分享。",
     "zh_TW": "欣賞您喜歡的影片和音樂，上傳原始內容，並在YouTube上與朋友，家人和世界分享。"
   },
-  "url": ["www.youtube.com", "studio.youtube.com"],
-  "version": "4.2.3",
+  "url": [
+    "www.youtube.com",
+    "studio.youtube.com"
+  ],
+  "version": "4.2.4",
   "logo": "https://i.imgur.com/C9ZEmge.png",
   "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
   "color": "#E40813",
-  "tags": ["video", "media"],
+  "tags": [
+    "video",
+    "media"
+  ],
   "category": "videos"
 }

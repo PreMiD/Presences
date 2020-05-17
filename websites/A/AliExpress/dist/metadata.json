@@ -43,10 +43,13 @@
     "star.aliexpress.com",
     "home.aliexpress.com"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/2LONg2Y.png",
   "thumbnail": "https://i.imgur.com/UrX3fAS.png",
   "color": "#e62e04",
-  "tags": ["store", "shopping"],
+  "tags": [
+    "store",
+    "shopping"
+  ],
   "category": "other"
 }

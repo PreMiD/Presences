@@ -8,7 +8,7 @@
     "en": "Complex Radio provides quality music to its listeners, we also always have applications open for new presenters!"
   },
   "url": "complexr.pw",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/r633Sz0.png",
   "thumbnail": "https://i.imgur.com/1Iey1co.png",
   "color": "#4a9aa8",
@@ -21,5 +21,5 @@
     "complexradio"
   ],
   "category": "music",
-  "regExp": "([a-z0-9-]+[.])*complexr[.]pw\/"
+  "regExp": "([a-z0-9-]+[.])*complexr[.]pw/"
 }

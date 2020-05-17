@@ -10,10 +10,13 @@
     "zh_CN": "100% Rock Internet Radio, 在线收听最多样化的摇滚音乐."
   },
   "url": "www.rockradio.com",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/fEecbHy.png",
   "thumbnail": "https://i.imgur.com/z9ZapJ5.png",
   "color": "#fce53f",
-  "tags": ["radio", "rock"],
+  "tags": [
+    "radio",
+    "rock"
+  ],
   "category": "music"
 }

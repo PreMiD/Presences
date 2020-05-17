@@ -7,11 +7,18 @@
   "description": {
     "en": "A new looping app by the creator of vine."
   },
-  "url": ["byte.co", "community.byte.co", "help.byte.co"],
-  "version": "1.1.1",
+  "url": [
+    "byte.co",
+    "community.byte.co",
+    "help.byte.co"
+  ],
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/Ijm00A7.png",
   "thumbnail": "https://i.imgur.com/MaC2lww.png",
   "color": "#6001E5",
-  "tags": ["video", "entertainment"],
+  "tags": [
+    "video",
+    "entertainment"
+  ],
   "category": "videos"
 }

@@ -8,10 +8,13 @@
     "en": "A multi-purpose bot featuring server management, leveling, economy, administration tools, fun commands, and more with an intuitive dashboard!"
   },
   "url": "maki.gg",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/xzx4dEZ.gif",
   "thumbnail": "https://i.imgur.com/6CnKHu1.png",
   "color": "#F24443",
-  "tags": ["bot", "discord"],
+  "tags": [
+    "bot",
+    "discord"
+  ],
   "category": "other"
 }

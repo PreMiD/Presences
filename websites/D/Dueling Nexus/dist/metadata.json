@@ -19,10 +19,14 @@
     "nl": "duelingnexus.com is een gratis online Yu-Gi-Oh-simulator voor browsers"
   },
   "url": "duelingnexus.com",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "logo": "https://i.imgur.com/JFzVAdh.png",
   "thumbnail": "https://i.imgur.com/7NXj9ih.jpg",
   "color": "#FF4500",
-  "tags": ["game", "yu-gi-oh", "browser"],
+  "tags": [
+    "game",
+    "yu-gi-oh",
+    "browser"
+  ],
   "category": "games"
 }

@@ -9,10 +9,16 @@
     "pt_BR": "Champion.gg fornece estatísticas, guias, builds, runas, masteries, ordens de habilidade e counters de campeões em League of Legends por função - incluindo Win Rate, Ban Rate..."
   },
   "service": "Championgg",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/4vqpAue.jpg",
   "thumbnail": "https://i.imgur.com/td3BVmm.png",
   "color": "#02442F",
-  "tags": ["champion", "champion-gg", "league-of-legends", "league", "lol"],
+  "tags": [
+    "champion",
+    "champion-gg",
+    "league-of-legends",
+    "league",
+    "lol"
+  ],
   "category": "games"
 }

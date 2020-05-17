@@ -16,10 +16,14 @@
     "nl": "Lees romans en manga's."
   },
   "url": "www.animexnovel.com",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/uyPh5yD.png",
   "thumbnail": "https://i.imgur.com/umMu8Jc.png",
   "color": "#00a896",
-  "tags": ["anime", "manga", "novel"],
+  "tags": [
+    "anime",
+    "manga",
+    "novel"
+  ],
   "category": "anime"
 }

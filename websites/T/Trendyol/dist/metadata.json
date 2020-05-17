@@ -9,10 +9,14 @@
     "tr": "Trendyol, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir."
   },
   "url": "www.trendyol.com",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://premid.is-inside.me/O4qxMe6g.png",
   "thumbnail": "https://premid.is-inside.me/hglcrAjh.png",
   "color": "#f28232",
-  "tags": ["trendyol", "shopping", "turkish"],
+  "tags": [
+    "trendyol",
+    "shopping",
+    "turkish"
+  ],
   "category": "other"
 }

@@ -8,10 +8,12 @@
     "en": "Picarto is the world’s leading live streaming platform for creative minds. Come join us and watch artists from all over the world during their creative process!"
   },
   "url": "picarto.tv",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "logo": "https://i.imgur.com/Oljre0e.png",
   "thumbnail": "https://i.imgur.com/DSNnMk5.png",
   "color": "#FF0000",
-  "tags": ["video"],
+  "tags": [
+    "video"
+  ],
   "category": "videos"
 }

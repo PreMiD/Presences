@@ -30,12 +30,15 @@
     "account.bilibili.com",
     "biligame.com"
   ],
-  "version": "2.1.1",
+  "version": "2.1.2",
   "logo": "https://i.imgur.com/w7q6IS0.png",
   "thumbnail": "https://i.imgur.com/wKnEEei.jpg",
   "color": "#05acff",
-  "tags": ["video", "anime"],
+  "tags": [
+    "video",
+    "anime"
+  ],
   "category": "anime",
-  "regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com\/",
+  "regExp": "([a-z0-9-]+[.])*(bilibili|biligame)[.]com/",
   "iframe": true
 }

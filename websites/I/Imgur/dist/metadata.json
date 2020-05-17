@@ -18,10 +18,14 @@
     "apidocs.imgur.com",
     "community.imgur.com"
   ],
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/eZf3wsO.png",
   "thumbnail": "https://i.imgur.com/vTLBJYm.jpg",
   "color": "#89c624",
-  "tags": ["images", "memes", "gif"],
+  "tags": [
+    "images",
+    "memes",
+    "gif"
+  ],
   "category": "other"
 }

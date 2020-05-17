@@ -10,10 +10,13 @@
     "it": "VVVVID e' la tua TV online personalizzata completamente gratuita."
   },
   "url": "www.vvvvid.it",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/XwEUxO4.png",
   "thumbnail": "https://i.imgur.com/2sLyOmP.png",
   "color": "#ffffff",
-  "tags": ["videos", "anime"],
+  "tags": [
+    "videos",
+    "anime"
+  ],
   "category": "videos"
 }

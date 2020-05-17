@@ -9,11 +9,14 @@
     "nl": "Online kopen en verkopen: pc-games, software, cadeaubonnen en meer op G2A.COM"
   },
   "url": "www.g2a.com",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/TJO23bI.png",
   "thumbnail": "https://i.imgur.com/z6IBeG6.png",
   "color": "#f05f00",
-  "tags": ["codes", "steam"],
+  "tags": [
+    "codes",
+    "steam"
+  ],
   "category": "games",
-  "regExp": "([a-z0-9-]+[.])*g2a[.]com\/"
+  "regExp": "([a-z0-9-]+[.])*g2a[.]com/"
 }

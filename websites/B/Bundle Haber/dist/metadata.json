@@ -9,10 +9,13 @@
     "en": "The fastest way to reach news."
   },
   "url": "www.bundlehaber.com",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "logo": "https://imgur.com/fshr89j.png",
   "thumbnail": "https://imgur.com/ntbbC9T.png",
   "color": "#BBBBBB",
-  "tags": ["news", "turkish"],
+  "tags": [
+    "news",
+    "turkish"
+  ],
   "category": "other"
 }

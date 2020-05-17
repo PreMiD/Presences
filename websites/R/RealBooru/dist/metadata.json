@@ -9,10 +9,16 @@
     "de": "NSFW Porn Image board running on Gelbooru"
   },
   "url": "realbooru.com",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/g09SOs0.png",
   "thumbnail": "https://i.imgur.com/m41BGlq.png",
   "color": "#171717",
-  "tags": ["nsfw", "porn", "gelbooru", "imageboard", "images"],
+  "tags": [
+    "nsfw",
+    "porn",
+    "gelbooru",
+    "imageboard",
+    "images"
+  ],
   "category": "other"
 }
