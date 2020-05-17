@@ -2,9 +2,9 @@ var presence = new Presence({
     clientId: "708779444541849640"
 });
 
-function Timestamps(videoTime, videoDuration): any {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+function Timestamps(videoTime, videoDuration): Array<number> {
+    const startTime = Date.now();
+    const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
 }
 
