@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = 'Vendo a página de login';
     } else if (path.includes('/manga')) {
         presenceData.details = mangaTitulo.innerText; 
-        presenceData.state = mangaStatus.innerText + ' | ' + mangaAno.innerText
+        presenceData.state = mangaStatus.innerText + ' | ' + mangaAno.innerText;
     } else if (path.includes('noticia')) {
         presenceData.details = tituloNoticia.innerText;
     } else {
