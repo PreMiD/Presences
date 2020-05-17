@@ -84,7 +84,7 @@ function getURLParam(urlParam: string): string {
 
 		For future developers:
 
-		These domains are supported. 
+		These domains are supported.
 		- www.deviantart.com
 		- about.deviantart.com
 		- chat.deviantart.com
@@ -234,9 +234,9 @@ function getURLParam(urlParam: string): string {
           } else if (currentPath[0] === "daily-deviations") {
             presenceData.details = "Viewing daily deviations";
             if (websiteTheme === "eclipse")
-              presenceData.state = document.querySelector(
+              presenceData.state = (document.querySelector(
                 "#daily-deviation-picker"
-              ).value;
+              ) as HTMLInputElement).value;
             else
               presenceData.state = document
                 .querySelector(".dailyDevCurDate")
