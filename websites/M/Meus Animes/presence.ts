@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "logo"
     };
 
-    let path = document.location.pathname;
+    const path = document.location.pathname;
     
     if (path == '/') {
         if (pesquisaTitulo != null) {
