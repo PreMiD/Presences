@@ -50,8 +50,8 @@ presence.on("UpdateData", async () => {
             presenceData.details = 'Lista de vídeos';
             presenceData.startTimestamp = Math.floor(Date.now() / 1000);
         } else {
-            let video: any = document.querySelector('video');
-            let timestamps: any = Timestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+            const video: any = document.querySelector('video');
+            const timestamps: any = Timestamps(Math.floor(video.currentTime), Math.floor(video.duration));
             presenceData.details = nomeEpisodio.innerText;
             presenceData.state = numeroEpisodio.innerText;
             if (!video.paused) {    
