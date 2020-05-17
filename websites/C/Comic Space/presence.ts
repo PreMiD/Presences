@@ -3,23 +3,22 @@ var presence = new Presence({
 });
 
 let paginaAtual: any, ultimaPagina: any;
-let nomeObra: any = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.pst-block-head-manga > h2");
-let categoriasObra: any = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(3)");
-let noticiaTitulo: any = document.querySelector("body > main > div > div:nth-child(1) > div > h2");
-let nomeObraLeitor: any = document.querySelector("#navbar-collapse-1 > ul > li:nth-child(1) > a");
-let leitorCapitulo: any = document.querySelector("#chapter-list > ul > li.active > a");
-let modoLeitor: any = document.querySelector("#all");
-let categoria1: any = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(4)");
+const nomeObra: any = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.pst-block-head-manga > h2");
+const categoriasObra: any = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(3)");
+const noticiaTitulo: any = document.querySelector("body > main > div > div:nth-child(1) > div > h2");
+const nomeObraLeitor: any = document.querySelector("#navbar-collapse-1 > ul > li:nth-child(1) > a");
+const leitorCapitulo: any = document.querySelector("#chapter-list > ul > li.active > a");
+const categoria1: any = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(4)");
 presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
         largeImageKey: "logo"
     };
-    let path: any = document.location.pathname;
+    const path: any = document.location.pathname;
     
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
     if (path == '/') {
-        presenceData.details = 'Início'
+        presenceData.details = 'Início';
     } else if (path == '/manga-list') {
         paginaAtual = document.querySelector("body > main > div > div.row.row-branca > div > div > div.type-content > div.row > div > div.row > div > ul > li.active > span");
         ultimaPagina = document.querySelector("body > main > div > div.row.row-branca > div > div > div.type-content > div.row > div > div.row > div > ul > li:nth-child(6) > a");
