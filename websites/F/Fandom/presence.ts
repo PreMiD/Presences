@@ -92,7 +92,7 @@ function getTimestamps(
               .querySelector(".jw-icon-playback")
               .getAttribute("aria-label") === "Pause"
           ) {
-            const video = document.querySelector(".jw-video");
+            const video: HTMLVideoElement = document.querySelector(".jw-video");
             const timestamps = getTimestamps(
               Math.floor(video.currentTime),
               Math.floor(video.duration)
@@ -158,8 +158,9 @@ function getTimestamps(
     }
 
     try {
-      sitename = document.querySelector("meta[property='og:site_name']")
-        .content;
+      sitename = (document.querySelector(
+        "meta[property='og:site_name']"
+      ) as HTMLMetaElement).content;
     } catch (e) {
       sitename = null;
     }
@@ -190,7 +191,9 @@ function getTimestamps(
     };
 
     if (title === "Home") {
-      sitename = document.querySelector("meta[property='og:title']").content;
+      sitename = (document.querySelector(
+        "meta[property='og:title']"
+      ) as HTMLMetaElement).content;
       presenceData.state = "Home";
       delete presenceData.details;
     } else if (actionResult == "history") {
@@ -226,9 +229,10 @@ function getTimestamps(
     // Chapter 3
     // This one is for the discussion parts on each wikis.
     //
-    const sitename = document
-      .querySelector("meta[property='og:title']")
-      .content.substring(25)
+    const sitename = (document.querySelector(
+      "meta[property='og:title']"
+    ) as HTMLMetaElement).content
+      .substring(25)
       .replace(" | Fandom", "");
     updateCallback.function = (): void => {
       if (!currentPath[1]) {
