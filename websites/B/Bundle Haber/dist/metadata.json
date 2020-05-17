@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "Eren",
+    "id": "478937019758673931"
+  },
+  "service": "Bundle Haber",
+  "description": {
+    "tr": "Tüm haberlerin toplandığı website.",
+    "en": "The fastest way to reach news."
+  },
+  "url": "www.bundlehaber.com",
+  "version": "1.4.1",
+  "logo": "https://imgur.com/fshr89j.png",
+  "thumbnail": "https://imgur.com/ntbbC9T.png",
+  "color": "#BBBBBB",
+  "tags": [
+    "news",
+    "turkish"
+  ],
+  "category": "other"
+}
