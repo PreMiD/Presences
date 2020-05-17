@@ -56,7 +56,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
   } else if (url.includes("/title/")) {
     let tokens = document.title.split(" - ");
-    tokens = [...new Set(tokens)];
     const title = tokens[0];
     presenceData.details = title;
     if (tokens[1].trim() == "IMDb") {
