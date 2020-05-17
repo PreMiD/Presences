@@ -1,0 +1,27 @@
+{
+  "author": {
+    "name": "Bas950",
+    "id": "241278257335500811"
+  },
+  "service": "V LIVE",
+  "description": {
+    "en": "V LIVE is a global entertainment platform that connects Korean stars and their fans.",
+    "nl": "V LIVE is een wereldwijd entertainmentplatform dat Koreaanse sterren en hun fans met elkaar verbindt."
+  },
+  "url": [
+    "www.vlive.tv",
+    "channels.vlive.tv",
+    "vtoday.vlive.tv"
+  ],
+  "version": "1.4.2",
+  "logo": "https://i.imgur.com/p3yyD3k.png",
+  "thumbnail": "https://i.imgur.com/dLde4Ko.png",
+  "color": "#54f7ff",
+  "tags": [
+    "video",
+    "media",
+    "streaming",
+    "kpop"
+  ],
+  "category": "videos"
+}

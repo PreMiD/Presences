@@ -5,9 +5,7 @@ on:
       - master
     paths:
       - "**.ts"
-      - "**.js"
       - "**.json"
-      - "**.yml"
 jobs:
   UpdatePresences:
     runs-on: ubuntu-18.04
