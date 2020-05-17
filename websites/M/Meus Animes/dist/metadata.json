@@ -1,0 +1,19 @@
+{
+    "author": {
+       "name": "Nanashin",
+       "id": "330030557457022986"
+     },
+     "service": "Meus Animes",
+     "description": {
+       "en": "",
+       "pt": "",
+       "pt_BR": ""
+     },
+     "url": "meusanimes.com",
+     "version": "1.0.0",
+     "logo": "https://i.imgur.com/IJ9ufN3.png",
+     "thumbnail": "https://i.imgur.com/qzN7gbO.png",
+     "color": "#816bab",
+     "tags": ["anime", "animes", "meus animes"],
+     "category": "others"
+   }
