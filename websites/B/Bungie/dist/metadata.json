@@ -1,0 +1,17 @@
+{
+  "author": {
+    "name": "RedBird16.com",
+    "id": "444872133504663552"
+  },
+  "service": "Bungie",
+  "description": {
+    "en": "Bungie.net is the home for all your Destiny/Destiny Two needs!"
+  },
+  "url": ["www.bungie.net", "bungie.net", "comics.bungie.net", "bungiestore.com"],
+  "version": "1.5.1",
+  "logo": "https://redbird16.com/wp-content/uploads/2020/05/external-content.duckduckgo.com_.jpg",
+  "thumbnail": "https://redbird16.com/wp-content/uploads/2020/05/Angry-Birds-Website-Presence1.png",
+  "color": "#12171C",
+  "tags": ["Games", "Socials" ,"Other"],
+  "category": "games"
+}
