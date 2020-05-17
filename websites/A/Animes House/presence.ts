@@ -4,14 +4,14 @@ var presence = new Presence ({
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
-function getTimestamps(videoTime, videoDuration) {
+function getTimestamps(videoTime, videoDuration): any {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime]; 
 }
 
 let currentTime: any, duration: any, paused: any, played: any, timestamps: any;
-const pesquisaText: any = document.querySelector("#s"), paginaText: any = document.querySelector("#contenedor > div.module > div.content > div.pagination > span:nth-child(1)"), nomeObraText: any = document.querySelector("#single > div.content > div.sheader > div.data > h1"), episodioText: any = document.querySelector("#info"), lancamentoText: any = document.querySelector("#single > div.content > div.sheader > div.data > div.extra > span.date"), generoText: any = document.querySelector("#contenedor > div.module > div.content > header > h1"), nomeObraEpisodioText: any = document.querySelector("#info > h1"), episodioEpisodioText: any = document.querySelector("#info > div > h3"), filmeNomeText: any = document.querySelector("#single > div.content > div.sheader > div.data > h1"), novoPedidoText: any = document.querySelector("#contenedor > div > nav > ul.requests_menu_filter > li > a.active"), contaText: any = document.querySelector("#contenedor > div > nav > ul > li > a.selected");
+const pesquisaText: any = document.querySelector("#s"), paginaText: any = document.querySelector("#contenedor > div.module > div.content > div.pagination > span:nth-child(1)"), nomeObraText: any = document.querySelector("#single > div.content > div.sheader > div.data > h1"), lancamentoText: any = document.querySelector("#single > div.content > div.sheader > div.data > div.extra > span.date"), generoText: any = document.querySelector("#contenedor > div.module > div.content > header > h1"), nomeObraEpisodioText: any = document.querySelector("#info > h1"), episodioEpisodioText: any = document.querySelector("#info > div > h3"), filmeNomeText: any = document.querySelector("#single > div.content > div.sheader > div.data > h1"), contaText: any = document.querySelector("#contenedor > div > nav > ul > li > a.selected");
 
 presence.on("iFrameData", (data) => {
     currentTime = data.currentTime;
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
                 presenceData.smallImageKey = 'pause',
                 presenceData.smallImageText = 'Pausado'
             );
-        }; 
+        }
     } else if (path.includes('filme')) {
         if ((path.split('/').length - 1) == 2 || (path.split('/').length - 1) == 4) {
             presenceData.details = 'Lista de filmes';
