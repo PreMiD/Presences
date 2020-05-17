@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "CRUGG",
+    "id": "228965621478588416"
+  },
+  "service": "NPM Package Registry",
+  "description": {
+    "en": "The Node Package Manager is a package manager for the JavaScript runtime environment node.js.",
+    "de": "Der Node Package Manager ist ein Paketmanager für die JavaScript-Laufzeitumgebung node.js."
+  },
+  "url": "www.npmjs.com",
+  "version": "1.1.2",
+  "logo": "https://i.imgur.com/XaosIBS.png",
+  "thumbnail": "https://crugg.de/premid/npmbanner.png",
+  "color": "#C12127",
+  "tags": [
+    "programming"
+  ],
+  "category": "other"
+}
