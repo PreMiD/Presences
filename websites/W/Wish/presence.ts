@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   const itemsetting = await presence.getSetting("items");
   const languagesetting = await presence.getSetting("language");
   var itemsite = null;
-  let itemdesc:string;
+  let itemdesc;
 
   // _________________________________________________________________________________________________________________________ Product item
   if (
