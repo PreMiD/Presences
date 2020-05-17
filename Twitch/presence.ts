@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
       videoTime = elapsed;
       videoDuration = undefined;
     } else if (type === "video") {
-      let pretty = elements.video.title.textContent.split("•");
+      const pretty = elements.video.title.textContent.split("•");
       pretty.pop();
 
       title = pretty.join("•");
