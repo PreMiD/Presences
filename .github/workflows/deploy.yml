@@ -25,10 +25,7 @@ jobs:
       - name: Install Deps
         run: yarn
       - name: Compile Script
-        run: |
-          git config --global core.quotePath false
-          git config --global core.precomposeunicode true
-          yarn pu:compile
+        run: yarn pu:compile
       - name: Update Presences
         env:
           MONGO_IP: ${{ secrets.MONGO_IP }}
