@@ -31,10 +31,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = mangaStatus.innerText + ' | ' + mangaAno.innerText
     } else if (path.includes('noticia')) {
         presenceData.details = tituloNoticia.innerText;
-    } 
-    else if (presenceData.details == null) {
-        presence.setTrayTitle();
-        presence.setActivity();
     } else {
         presenceData.details = 'Navegando... ';
     }
