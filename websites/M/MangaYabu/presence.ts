@@ -2,24 +2,20 @@ var presence = new Presence ({
     clientId: "704006227276857385"
 });
 
-let browsingStamp: any = Math.floor(Date.now() / 1000);
-let pesquisaTexto: any = document.querySelector('h1.loop-heading');
-let capituloetitulo: any = document.querySelector('div.video-under.col-md-8.col-xs-12 div.oboxed.odet.mtop10 div.row.vibe-interactions h1');
-let nomeObraLeitor: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-reader > h1");
-let nomeObraLeitor2: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-reader > h1");
-let paginas: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.yabu-list-content > div > div.container.mt-5 > div.mt-3.text-muted > p");
-let genero: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.yabu-list-content > div > div.container.mt-5 > div.mt-3.text-muted > p");
-let nomeObra: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-title > h1");
-let generosObra: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-genres");
-let pesquisa: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.features > h3");
-let tagTexto: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.features > h3");
+const browsingStamp: any = Math.floor(Date.now() / 1000);
+const nomeObraLeitor: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-reader > h1");
+const nomeObraLeitor2: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-reader > h1");
+const paginas: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.yabu-list-content > div > div.container.mt-5 > div.mt-3.text-muted > p");
+const nomeObra: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-title > h1");
+const generosObra: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-genres");
+const tagTexto: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.features > h3");
 
 presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
         largeImageKey: "logo"
     };
 
-    let path = document.location.pathname;
+    const path = document.location.pathname;
     presenceData.startTimestamp = browsingStamp;
 
     if (path == '/') {
@@ -50,10 +46,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = generosObra.innerText;
     } else if (path.includes('/tag/')) {
         presenceData.details = 'Página de Tag';
-        presenceData.state = tagTexto.innerText.slice(1)
+        presenceData.state = tagTexto.innerText.slice(1);
     } else {
         presenceData.details = 'Navegando...';
-    };
-    
+    }    
     presence.setActivity(presenceData);
-})
+});
