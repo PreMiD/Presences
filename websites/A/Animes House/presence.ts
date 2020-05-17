@@ -1,10 +1,10 @@
-var presence = new Presence ({
+const presence = new Presence ({
     clientId: "711685584573169686"
 });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
-function getTimestamps(videoTime, videoDuration): any {
+function getTimestamps(videoTime, videoDuration): Array<number> {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime]; 
