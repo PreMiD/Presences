@@ -2,13 +2,13 @@ const presence = new Presence ({
     clientId: "704006227276857385"
 });
 
-const browsingStamp: any = Math.floor(Date.now() / 1000);
-const nomeObraLeitor: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-reader > h1");
-const nomeObraLeitor2: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-reader > h1");
-const paginas: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.yabu-list-content > div > div.container.mt-5 > div.mt-3.text-muted > p");
-const nomeObra: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-title > h1");
-const generosObra: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-genres");
-const tagTexto: any = document.querySelector("#app > div.theme-container.no-sidebar > main > div.features > h3");
+const browsingStamp = Math.floor(Date.now() / 1000);
+const nomeObraLeitor: HTMLElement= document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-reader > h1");
+const nomeObraLeitor2: HTMLElement = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-reader > h1");
+const paginas: HTMLElement = document.querySelector("#app > div.theme-container.no-sidebar > main > div.yabu-list-content > div > div.container.mt-5 > div.mt-3.text-muted > p");
+const nomeObra: HTMLElement = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-title > h1");
+const generosObra: HTMLElement = document.querySelector("#app > div.theme-container.no-sidebar > main > div.manga-single-list > div.manga-info > div.manga-genres");
+const tagTexto: HTMLElement = document.querySelector("#app > div.theme-container.no-sidebar > main > div.features > h3");
 
 presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
