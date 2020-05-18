@@ -5,13 +5,13 @@ const presence = new Presence ({
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 function getTimestamps(videoTime, videoDuration): Array<number> {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    const startTime = Date.now();
+    const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime]; 
 }
 
-let currentTime: any, duration: any, paused: any, played: any, timestamps: any;
-const pesquisaText: any = document.querySelector("#s"), paginaText: any = document.querySelector("#contenedor > div.module > div.content > div.pagination > span:nth-child(1)"), nomeObraText: any = document.querySelector("#single > div.content > div.sheader > div.data > h1"), lancamentoText: any = document.querySelector("#single > div.content > div.sheader > div.data > div.extra > span.date"), generoText: any = document.querySelector("#contenedor > div.module > div.content > header > h1"), nomeObraEpisodioText: any = document.querySelector("#info > h1"), episodioEpisodioText: any = document.querySelector("#info > div > h3"), filmeNomeText: any = document.querySelector("#single > div.content > div.sheader > div.data > h1"), contaText: any = document.querySelector("#contenedor > div > nav > ul > li > a.selected");
+let currentTime, duration, paused, played, timestamps;
+const pesquisaText: HTMLElement = document.querySelector("#s"), paginaText: HTMLElement = document.querySelector("#contenedor > div.module > div.content > div.pagination > span:nth-child(1)"), nomeObraText: HTMLElement = document.querySelector("#single > div.content > div.sheader > div.data > h1"), lancamentoText: HTMLElement = document.querySelector("#single > div.content > div.sheader > div.data > div.extra > span.date"), generoText: HTMLElement = document.querySelector("#contenedor > div.module > div.content > header > h1"), nomeObraEpisodioText: HTMLElement = document.querySelector("#info > h1"), episodioEpisodioText: HTMLElement = document.querySelector("#info > div > h3"), filmeNomeText: HTMLElement = document.querySelector("#single > div.content > div.sheader > div.data > h1"), contaText: HTMLElement = document.querySelector("#contenedor > div > nav > ul > li > a.selected");
 
 presence.on("iFrameData", (data) => {
     currentTime = data.currentTime;
