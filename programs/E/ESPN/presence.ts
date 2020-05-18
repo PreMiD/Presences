@@ -1,11 +1,5 @@
 var presence = new Presence({
     clientId: "707379503881650258" //The client ID of the Application created at https://discordapp.com/developers/applications
-}),
-
-strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-    //You can use this to get translated strings
 });
 
 /*
@@ -22,12 +16,6 @@ setInterval(10000, myOutsideHeavyLiftingFunction);
 //Run the function seperate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
 
 */
-var search: string,
-  title: string,
-  director: string,
-  video: any,
-  timestamps: any[];
-let Name: any;
 function getTimestamps(videoTime: number, videoDuration: number): any {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
@@ -44,7 +32,7 @@ presence.on("UpdateData", async () => {
     It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.*/
 
     var presenceData: presenceData = {
-        largeImageKey: "espnapp_logo", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
+        largeImageKey: "espnapp_logo" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
     }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
     if (document.location.pathname == "/"){
         presenceData.startTimestamp = browsingStamp;
@@ -89,13 +77,13 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes ("/watch/player/")){
         var name = document.querySelector("#fittPageContainer > div.WatchListingsVideo.WatchListingsVideo--VideoContainer > div.WatchVideoPlayer__Metadata > div.WatchVideoPlayer__Metadata--title").textContent;
         var channel = document.querySelector("#fittPageContainer > div.WatchListingsVideo.WatchListingsVideo--VideoContainer > div.WatchVideoPlayer__Metadata > div.WatchVideoPlayer__Metadata--subtitle").textContent;
-        var video = (<HTMLVideoElement>document.querySelector("#vjs_video_3_html5_api"));
+        var video = (document.querySelector("#vjs_video_3_html5_api")as HTMLVideoElement);
         if (video == null){
             presenceData.details = name;
             presenceData.state = channel;
             presenceData.startTimestamp = browsingStamp;
         }
-        else if (video != null){
+        else if (video){
             var timestamps = getTimestamps(video.currentTime,video.duration);
             presenceData.details = name;
             presenceData.state = channel;
@@ -120,7 +108,7 @@ presence.on("UpdateData", async () => {
         }
     }
     else if (document.location.pathname.includes("/search/")){
-        var search = (<HTMLInputElement>document.querySelector("#fittPageContainer > div.page-container.cf > div > div > div.SearchBar.ml4.mr4 > form > input")).value;
+        var search = (document.querySelector("#fittPageContainer > div.page-container.cf > div > div > div.SearchBar.ml4.mr4 > form > input")as HTMLInputElement).value;
         presenceData.details = "searching";
         presenceData.state = search;
         presenceData.smallImageKey = "search";
