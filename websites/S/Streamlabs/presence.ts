@@ -8,7 +8,7 @@ let rewardString;
 let titleSiteCreator;
 let titleDashboard = "Dashboard";
 var browsingStamp = Math.floor(Date.now() / 1000);
-let userType = ["Viewing the ", "Viewing their ", "Modifying their ", "Creating their "];
+const userType = ["Viewing the ", "Viewing their ", "Modifying their ", "Creating their "];
 
 presence.on("UpdateData", async () => {
     strings = await presence.getStrings({
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
                 case "#/streamlabs-rewards":
                     titleDashboard = userType[1] + "Rewards";
                     rewardString = document.querySelector("#sl__dashboard > div > div.content > div.dashboard-content > div.dashboard-body > div > div > div:nth-child(1) > div:nth-child(1) > span").innerHTML;
-                    presenceData.state = rewardString.charAt(0).toUpperCase() + rewardString.slice(1);;
+                    presenceData.state = rewardString.charAt(0).toUpperCase() + rewardString.slice(1);
                     //Streamlabs rewards does not captilise first string of the teir.
                     break;
             }
@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = titleDashboard;
         }
         else if (document.location.pathname.includes("/editor")) {
-            titleSiteCreator = userType[3] + "Site"
+            titleSiteCreator = userType[3] + "Site";
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = titleSiteCreator;
         }
