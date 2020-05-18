@@ -1,7 +1,7 @@
 var presence = new Presence({
     clientId: "707379503881650258" //The client ID of the Application created at https://discordapp.com/developers/applications
 });
-
+var stats;
 /*
 
 function myOutsideHeavyLiftingFunction(){
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
             teamname = document.querySelector("#fittPageContainer > div.StickyContainer > div:nth-child(1) > div > div > div > div > h1 > div").textContent;
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = teamname;
-            var stats = document.querySelector("#fittPageContainer > div.StickyContainer > div.page-container.cf > div.layout.is-9-3 > div > section > div > div.flex.justify-between.mt3.mb3.items-center > h1").textContent;
+            stats = document.querySelector("#fittPageContainer > div.StickyContainer > div.page-container.cf > div.layout.is-9-3 > div > section > div > div.flex.justify-between.mt3.mb3.items-center > h1").textContent;
             stats = stats.replace(/[^\d-]/g,``);
             presenceData.state = "Stats " + stats;
             console.log("Stats Page");
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
             teamname = document.querySelector("#fittPageContainer > div.StickyContainer > div:nth-child(1) > div > div > div > div > h1 > div").textContent;
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = teamname;
-            var stats = document.querySelector("#fittPageContainer > div.StickyContainer > div.page-container.cf > div.layout.is-9-3 > div > section > div > div.flex.justify-between.mt3.mb3.items-center > h1").textContent;
+            stats = document.querySelector("#fittPageContainer > div.StickyContainer > div.page-container.cf > div.layout.is-9-3 > div > section > div > div.flex.justify-between.mt3.mb3.items-center > h1").textContent;
             stats = stats.replace(/[^\d-]/g,``);
             presenceData.state = "Stats " + stats;
             console.log("Stats Page");
