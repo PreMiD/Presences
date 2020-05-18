@@ -2,11 +2,11 @@ const presence = new Presence({
     clientId: "703965572186243152"
 });
 
-const projetosTipo: any = document.querySelector('ol.breadcrumb li.active');
-const mangaTitulo: any = document.querySelector('div.col-md-8 h1.media-heading');
-const mangaStatus: any = document.querySelector("#blog > div > div > div > div.col-md-8 > ul > li:nth-child(1) > span");
-const mangaAno: any = document.querySelector("#blog > div > div > div > div.col-md-8 > ul > li:nth-child(2)");
-const tituloNoticia: any = document.querySelector("#blog > div > div > div > div.blog-item > div > div.col-xs-12.col-sm-10.blog-content > h2 > a");
+const projetosTipo: HTMLElement = document.querySelector('ol.breadcrumb li.active');
+const mangaTitulo: HTMLElement = document.querySelector('div.col-md-8 h1.media-heading');
+const mangaStatus: HTMLElement = document.querySelector("#blog > div > div > div > div.col-md-8 > ul > li:nth-child(1) > span");
+const mangaAno: HTMLElement = document.querySelector("#blog > div > div > div > div.col-md-8 > ul > li:nth-child(2)");
+const tituloNoticia: HTMLElement = document.querySelector("#blog > div > div > div > div.blog-item > div > div.col-xs-12.col-sm-10.blog-content > h2 > a");
 
 presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
