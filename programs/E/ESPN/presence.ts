@@ -1,21 +1,8 @@
 var presence = new Presence({
-    clientId: "707379503881650258" //The client ID of the Application created at https://discordapp.com/developers/applications
+    clientId: "707379503881650258"
 });
 var stats;
-/*
 
-function myOutsideHeavyLiftingFunction(){
-    //Grab and process all your data here
-
-    // element grabs //
-    // api calls //
-    // variable sets //
-}
-
-setInterval(10000, myOutsideHeavyLiftingFunction);
-//Run the function seperate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
-
-*/
 function getTimestamps(videoTime: number, videoDuration: number): any {
     var startTime = Date.now();
     var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
@@ -27,13 +14,10 @@ function getTimestamps(videoTime: number, videoDuration: number): any {
 var browsingStamp = Math.floor(Date.now() / 1000);
 var teamname;
 presence.on("UpdateData", async () => {
-    /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
-
-    It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.*/
 
     var presenceData: presenceData = {
-        largeImageKey: "espnapp_logo" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-    }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
+        largeImageKey: "espnapp_logo"
+    };
     if (document.location.pathname == "/"){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing home page";
@@ -46,7 +30,6 @@ presence.on("UpdateData", async () => {
             stats = document.querySelector("#fittPageContainer > div.StickyContainer > div.page-container.cf > div.layout.is-9-3 > div > section > div > div.flex.justify-between.mt3.mb3.items-center > h1").textContent;
             stats = stats.replace(/[^\d-]/g,``);
             presenceData.state = "Stats " + stats;
-            console.log("Stats Page");
         }
         else {
             teamname = document.querySelector("#clubhouse-header > div > div > div > h1 > div").textContent;
@@ -64,14 +47,12 @@ presence.on("UpdateData", async () => {
             stats = document.querySelector("#fittPageContainer > div.StickyContainer > div.page-container.cf > div.layout.is-9-3 > div > section > div > div.flex.justify-between.mt3.mb3.items-center > h1").textContent;
             stats = stats.replace(/[^\d-]/g,``);
             presenceData.state = "Stats " + stats;
-            console.log("Stats Page");
         }
         else {
             teamname = document.querySelector("#clubhouse-header > div > div > div > h1 > div").textContent;
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = teamname;
-            presenceData.state = "Home Page";
-            console.log("teampage"); 
+            presenceData.state = "Home Page"; 
         }  
     }
     else if (document.location.pathname.includes ("/watch/player/")){
@@ -116,15 +97,10 @@ presence.on("UpdateData", async () => {
         console.log (search);
     } 
     if (presenceData.details == null) {
-        //This will fire if you do not set presence details
-        presence.setTrayTitle(); //Clears the tray title for mac users
-        presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
+        presence.setTrayTitle();
+        presence.setActivity();
     } else {
-        //This will fire if you set presence details
-        presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
+
+        presence.setActivity(presenceData); 
     }
 });
-
-//document.querySelector("#fittPageContainer > div.WatchListingsVideo.WatchListingsVideo--VideoContainer > div.WatchVideoPlayer__Metadata > div.WatchVideoPlayer__Metadata--title").textContent
-
-//document.querySelector("#vjs_video_3")

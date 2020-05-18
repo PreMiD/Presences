@@ -4,18 +4,18 @@
     "id": "315487546362560513"
   },
   "contributors": [{
-    "name": "𝐃 𝐘 𝐋 𝐀 𝐍",
-    "id": "315487546362560513"
+    "name": "",
+    "id": ""
   }],
   "service": "ESPN",
   "description": {
     "en": "Worldwide leader in sports forever"
   },
   "url": "www.espn.com",
-  "version": "1.0",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/k7urXfW.png",
   "thumbnail": "https://i.imgur.com/TgsuZOb.jpg",
   "color": "#D61E26",
-  "tags": ["SPORTS", "ESPN"],
-  "category": "Other"
+  "tags": ["sports", "espn"],
+  "category": "other"
 }
