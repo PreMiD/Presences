@@ -2,13 +2,13 @@ const presence = new Presence({
     clientId: "710514125675036763"
 });
 
-let paginaAtual: any, ultimaPagina: any;
-const nomeObra: any = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.pst-block-head-manga > h2");
-const categoriasObra: any = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(3)");
-const noticiaTitulo: any = document.querySelector("body > main > div > div:nth-child(1) > div > h2");
-const nomeObraLeitor: any = document.querySelector("#navbar-collapse-1 > ul > li:nth-child(1) > a");
-const leitorCapitulo: any = document.querySelector("#chapter-list > ul > li.active > a");
-const categoria1: any = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(4)");
+let paginaAtual: HTMLElement, ultimaPagina: HTMLElement;
+const nomeObra: HTMLElement = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.pst-block-head-manga > h2");
+const categoriasObra: HTMLElement = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(3)");
+const noticiaTitulo: HTMLElement = document.querySelector("body > main > div > div:nth-child(1) > div > h2");
+const nomeObraLeitor: HTMLElement = document.querySelector("#navbar-collapse-1 > ul > li:nth-child(1) > a");
+const leitorCapitulo: HTMLElement = document.querySelector("#chapter-list > ul > li.active > a");
+const categoria1: HTMLElement = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(4)");
 presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
         largeImageKey: "logo"
