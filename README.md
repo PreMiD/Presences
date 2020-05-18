@@ -25,10 +25,12 @@ You can see it [**here**](https://docs.premid.app/dev/presence).
 ## Folder structure
 
 ```bash
-presence
-├── dist
-│   ├── metadata.json
-│   └── presence.js
-├── presence.ts
-└── tsconfig.json
+websites
+└── {type}
+    └── presence
+        ├── dist
+        │   ├── metadata.json
+        │   └── presence.js (For testing, must not be pushed)
+        ├── presence.ts
+        └── tsconfig.json
 ```
