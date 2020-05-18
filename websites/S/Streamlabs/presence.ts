@@ -7,7 +7,7 @@ let clipTitle;
 let rewardString;
 let titleSiteCreator;
 let titleDashboard = "Dashboard";
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 const userType = ["Viewing the ", "Viewing their ", "Modifying their ", "Creating their "];
 
 presence.on("UpdateData", async () => {
