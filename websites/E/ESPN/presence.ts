@@ -1,21 +1,21 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "707379503881650258"
 });
-var stats;
+let stats;
 
-function getTimestamps(videoTime: number, videoDuration: number): any {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+function getTimestamps(videoTime: number, videoDuration: number): Array<number>{
+    let startTime = Date.now();
+    let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000),Math.floor(endTime)];
   }
 
 
-  
-var browsingStamp = Math.floor(Date.now() / 1000);
-var teamname;
+
+let browsingStamp = Math.floor(Date.now() / 1000);
+let teamname;
 presence.on("UpdateData", async () => {
 
-    var presenceData: presenceData = {
+    const presenceData: presenceData = {
         largeImageKey: "espnapp_logo"
     };
     if (document.location.pathname == "/"){
@@ -36,7 +36,6 @@ presence.on("UpdateData", async () => {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = teamname;
             presenceData.state = "Home Page";
-            console.log("teampage"); 
         }  
     }
     else if(document.location.pathname.includes("/nfl/team/")){
@@ -80,7 +79,6 @@ presence.on("UpdateData", async () => {
                 presenceData.smallImageKey = "pause";
                 presenceData.smallImageText = "paused";
             }
-            console.log(timestamps);
         }
         else {
             presenceData.startTimestamp = browsingStamp;
@@ -94,7 +92,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = search;
         presenceData.smallImageKey = "search";
         presenceData.smallImageText = "searching";
-        console.log (search);
     } 
     if (presenceData.details == null) {
         presence.setTrayTitle();
