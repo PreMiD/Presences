@@ -7,7 +7,6 @@ presence.on("UpdateData", async () => { // You had it like {} and forgot to put 
   const presenceData: presenceData = {
     largeImageKey: "logo"
   };
-  //Test
   //This one is for posts that are made in the /news section of Bungie.net
   //This one is for the title of forum posts on Bungie.net
   //This one is for posts that are on the featured section of the homepage on Bungie.net. 
