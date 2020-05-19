@@ -73,18 +73,28 @@ presence.on("UpdateData", async () => {
       label: document.querySelector(
         ".video-player .tw-channel-status-text-indicator"
       ),
-      title: document.querySelector(".tw-ellipsis.tw-font-size-5.tw-word-break-word"),
-      streamer: document.querySelector(".tw-c-text-base.tw-line-height-heading.tw-strong"),
+      title: document.querySelector(
+        ".tw-ellipsis.tw-font-size-5.tw-word-break-word"
+      ),
+      streamer: document.querySelector(
+        ".tw-c-text-base.tw-line-height-heading.tw-strong"
+      ),
       host: document.querySelector("p.tw-c-text-base.tw-font-size-4")
     },
     moderator: {
-      title: document.querySelector(".tw-ellipsis.tw-font-size-5.tw-line-clamp-2"),
-      streamer: document.querySelector(".tw-ellipsis.tw-font-size-5.tw-line-height-heading"),
+      title: document.querySelector(
+        ".tw-ellipsis.tw-font-size-5.tw-line-clamp-2"
+      ),
+      streamer: document.querySelector(
+        ".tw-ellipsis.tw-font-size-5.tw-line-height-heading"
+      ),
       live: document.querySelector(".tw-font-size-6.tw-semibold.tw-upcase")
     },
     video: {
       title: document.querySelector(".tw-font-size-4.tw-strong"),
-      streamer: document.querySelector(".tw-c-text-base.tw-line-height-heading.tw-strong"),
+      streamer: document.querySelector(
+        ".tw-c-text-base.tw-line-height-heading.tw-strong"
+      ),
       time: document.querySelector(".vod-seekbar-time-labels > p:nth-child(1)"),
       duration: document.querySelector(
         ".vod-seekbar-time-labels > p:nth-child(2)"
@@ -92,7 +102,9 @@ presence.on("UpdateData", async () => {
     },
     clip: {
       title: document.querySelector(".tw-font-size-4.tw-strong"),
-      streamer: document.querySelector(".tw-c-text-base.tw-line-height-heading.tw-strong")
+      streamer: document.querySelector(
+        ".tw-c-text-base.tw-line-height-heading.tw-strong"
+      )
     }
   };
 
