@@ -274,19 +274,18 @@ presence.on("UpdateData", async () => {
     }
     //dynamic
   } else if (document.location.hostname == "t.bilibili.com") {
-    user = document.querySelector(
-      "#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a"
-    );
+    user = document.querySelector("#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a");
     if (user !== null) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Reading " + user.innerText + "'s dynamic";
+      presenceData.details = "Viewing dynamic";
+      presenceData.state = "of: " + user.innerText;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/topic")) {
       title = document.querySelector(
         "#app > div.page-container.p-rel > div.top-header.p-rel > div.tag-title-content.fs-28.ls-0 > div.tag-title.d-i-block"
       );
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Dynamic";
+      presenceData.details = "Viewing dynamic";
       presenceData.state = "Tag: " + title.innerText;
     } else {
       presenceData.startTimestamp = browsingStamp;
