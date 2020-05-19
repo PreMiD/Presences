@@ -150,7 +150,10 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.innerText
         .replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili", "")
         .replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~ - bilibili", "")
-        .replace(" - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili", "");
+        .replace(
+          " - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili",
+          ""
+        );
       //番剧
     } else if (document.location.pathname.includes("/bangumi/")) {
       video = document.querySelector(
@@ -253,14 +256,26 @@ presence.on("UpdateData", async () => {
       //Subcategory
       //Subcategory	      //Subcategory
       //动画
-    } else if (document.location.pathname == "/v/" || "/anime/" || "/guochuang/" || "/audio/" || "/cinema/" || "/documentary/" || "/movie/" || "/tv/") {	
+    } else if (
+      document.location.pathname == "/v/" ||
+      "/anime/" ||
+      "/guochuang/" ||
+      "/audio/" ||
+      "/cinema/" ||
+      "/documentary/" ||
+      "/movie/" ||
+      "/tv/"
+    ) {
       title = document.querySelector("head > title");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing for subcategory";
-      if (title.innerText == "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili"){
-      presenceData.state = "资讯";
+      if (title.innerText == "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili") {
+        presenceData.state = "资讯";
       } else {
-      presenceData.state = title.innerText.replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili", "");
+        presenceData.state = title.innerText.replace(
+          " - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
+          ""
+        );
       }
       //专栏
     } else if (document.location.pathname.includes("/read/")) {
@@ -282,7 +297,9 @@ presence.on("UpdateData", async () => {
     }
     //dynamic
   } else if (document.location.hostname == "t.bilibili.com") {
-    user = document.querySelector("#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a");
+    user = document.querySelector(
+      "#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a"
+    );
     if (user !== null) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing dynamic";
