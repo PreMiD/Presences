@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       }
     }
     //presenceData.state = "Lurking on LautFM"; break;
-    //default : PresenceData.state = "ZZzzzZZ";
+    //default : presenceData.state = "ZZzzzZZ";
   }
 
   if (presenceData.details == null) {
