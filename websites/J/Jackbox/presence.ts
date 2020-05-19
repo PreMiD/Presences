@@ -80,98 +80,98 @@ presence.on("UpdateData", async () => {
   // PP6
   if (document.getElementsByClassName("Ridictionary").length > 0) {
     presenceData.details = "Playing Dictionarium";
-    layout = "dict"
+    layout = "dict";
   } else if (document.getElementsByClassName("TriviaDeath2").length > 0) {
     presenceData.details = "Playing Trivia Murder Party 2";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("RoleModels").length > 0) {
     presenceData.details = "Playing Role Models";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("Jokeboat").length > 0) {
     presenceData.details = "Playing Joke Boat";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("Push The Button").length > 0) {
     presenceData.details = "Playing Push The Button";
-    layout = "new"
+    layout = "new";
 
     // PP5
   } else if (document.getElementsByClassName("YDKJ2018").length > 0) {
     presenceData.details = "Playing You Don't Know Jack: Full Stream";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("RapBattle").length > 0) {
     presenceData.details = "Playing Mad Verse City";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("PatentlyStupid").length > 0) {
     presenceData.details = "Playing Patently Stupid";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("SlingShoot").length > 0) {
     presenceData.details = "Playing Zeeple Dome";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("SplitTheRoom").length > 0) {
     presenceData.details = "Playing Split The Room";
-    layout = "new"
+    layout = "new";
 
     // PP4
   } else if (document.getElementsByClassName("Fibbage3").length > 0) {
     presenceData.details = "Playing Fibbage 3";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("SurviveTheInternet").length > 0) {
     presenceData.details = "Playing Survive The Internet";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("MonsterMingle").length > 0) {
     presenceData.details = "Playing Monster Seeking Monster";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("bracketeering").length > 0) {
     presenceData.details = "Playing Bracketeering";
-    layout = "new"
+    layout = "new";
   } else if (document.getElementsByClassName("Overdrawn").length > 0) {
     presenceData.details = "Playing Civic Doodle";
-    layout = "new"
+    layout = "new";
 
     // PP3
   } else if (document.getElementById("page-quiplash")) {
     presenceData.details = "Playing Quiplash 1/XL/2";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-triviadeath")) {
     presenceData.details = "Playing Trivia Murder Party";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-pollposition")) {
     presenceData.details = "Playing Guesspionage";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-fakinit")) {
     presenceData.details = "Playing Fakin' It";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-awshirt")) {
     presenceData.details = "Playing Tee K.O.";
-    layout = "legacy"
+    layout = "legacy";
 
     // PP2
   } else if (document.getElementById("page-fibbage")) {
     presenceData.details = "Playing Fibbage XL/2";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-earwax")) {
     presenceData.details = "Playing Earwax";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-auction")) {
     presenceData.details = "Playing Bidiots";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-bombintern")) {
     presenceData.details = "Playing Bomb Corp";
-    layout = "legacy"
+    layout = "legacy";
 
     // PP1
   } else if (document.getElementById("page-ydkj2015")) {
     presenceData.details = "Playing You Don't Know Jack 2015";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-drawful")) {
     presenceData.details = "Playing Drawful 1/2";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-wordspud")) {
     presenceData.details = "Playing Word Spud";
-    layout = "legacy"
+    layout = "legacy";
   } else if (document.getElementById("page-lieswatter")) {
     presenceData.details = "Playing Lie Swatter";
-    layout = "legacy"
+    layout = "legacy";
 
     // Other
   } else if (window.location.href.includes("games.jackbox.tv")) {
