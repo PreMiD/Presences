@@ -92,6 +92,37 @@ declare class Presence {
    */
   showSetting(settings: string | Array<string>): Promise<void>;
   /**
+   * Similar to `getTimestamps` but takes in a media element and returns snowflake timestamps.
+   * @param media Media object
+   */
+  getTimestampsfromMedia(media: HTMLMediaElement);
+  /**
+   * Converts time and duration integers into snowflake timestamps.
+   * @param {Number} elementTime Current element time seconds
+   * @param {Number} elementDuration Element duration seconds
+   */
+  getTimestamps(elementTime: number, elementDuration: number);
+  /**
+   * Converts a string with format `HH:MM:SS` or `MM:SS` or `SS` into an integer. (Does not return snowflake timestamp)
+   * @param format The formatted string
+   */
+  timestampFromFormat(format: string);
+  /**
+   * Console logs with an info message.
+   * @param message The log message
+   */
+  info(message: string);
+  /**
+   * Console logs with a success message.
+   * @param message The log message
+   */
+  success(message: string);
+  /**
+   * Console logs with an error message.
+   * @param message The log message
+   */
+  error(message: string);
+  /**
    * Sends data back to application
    * @param data Data to send back to application
    */
