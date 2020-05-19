@@ -1,9 +1,6 @@
 const presence = new Presence({
     clientId: "647443051819565076"
-  }),
-  presenceData: PresenceData = {
-    largeImageKey: "icon"
-  };
+  });
 
 presence.on("UpdateData", async () => {
   const path = window.location.hash.substr(1);
