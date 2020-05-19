@@ -5,7 +5,7 @@
   },
   "service": "GitLab",
   "description": {
-    "en": "GitLub is a project management and code versioning system as well as a social network platform made for developers."
+    "en": "GitLab is a project management and code versioning system as well as a social network platform made for developers."
   },
   "url": "gitlab.com",
   "version": "1.0.0",
