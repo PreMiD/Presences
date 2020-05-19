@@ -4,7 +4,7 @@ const presence = new Presence({
 const browsingStamp = Math.floor(Date.now() / 1000);
 let owner, title;
 presence.on("UpdateData", async() => {
-    var presenceData: presenceData = {
+    const presenceData: presenceData = {
         largeImageKey: "logo"
     };
     if(window.location.hostname == "gitlab.com"){
