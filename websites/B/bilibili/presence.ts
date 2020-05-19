@@ -18,11 +18,19 @@ const presence = new Presence({ clientId: "639591760791732224" }),
     pause: "presence.playback.paused"
   });
 const browsingStamp = Math.floor(Date.now() / 1000);
-let user: HTMLElement, title: HTMLElement, inread_title: HTMLElement, UID: HTMLElement, page: HTMLElement;
-let video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any, videoPaused: any;
+let user: HTMLElement,
+  title: HTMLElement,
+  inread_title: HTMLElement,
+  page: HTMLElement;
+let video: HTMLVideoElement,
+  videoDuration: any,
+  videoCurrentTime: any,
+  videoPaused: any;
 const huodong_title = document.querySelector("#viewbox_report > h1 > a"),
   hudong_title = document.querySelector("#viewbox_report > h1 > span.activity"),
-  multi_user = document.querySelector("#app > div > div.r-con > div.members-info");
+  multi_user = document.querySelector(
+    "#app > div > div.r-con > div.members-info"
+  );
 let currentTime: any,
   duration: any,
   paused: any,
@@ -104,10 +112,14 @@ presence.on("UpdateData", async () => {
       } else {
         title = document.querySelector("#viewbox_report > h1");
       }
-      if (multi_user != null){
-      user = document.querySelector("#member-container > div:nth-child(1) > div.panel > div > a");
+      if (multi_user != null) {
+        user = document.querySelector(
+          "#member-container > div:nth-child(1) > div.panel > div > a"
+        );
       } else {
-      user = document.querySelector("#v_upinfo > div.u-info > div > a.username");
+        user = document.querySelector(
+          "#v_upinfo > div.u-info > div > a.username"
+        );
       }
       presenceData.details = title.innerText;
       presenceData.state = user.innerText;
@@ -400,7 +412,7 @@ presence.on("UpdateData", async () => {
     title = document.querySelector(
       "#head-info-vm > div > div > div.room-info-upper-row.p-relative > div.normal-mode > div:nth-child(1) > h1 > span.title-length-limit.live-skin-main-text.v-middle.dp-i-block.small-title"
     );
-    if (user !== null && UID !== null) {
+    if (user !== null) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = title.innerText;
       presenceData.state = user.innerText;
