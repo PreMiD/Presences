@@ -54,12 +54,16 @@ let elapsed: number = Math.round((new Date()). getTime() / 1000);;
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
-    largeImageKey: "jackbox",
-    startTimestamp: elapsed
+    largeImageKey: "jackbox"
   };
 
   // Check for presence setting
   let useName: boolean = await presence.getSetting("useName")
+  let useTime: boolean = await presence.getSetting("useTime")
+
+  if(useTime){
+    presenceData.startTimestamp = elapsed
+  }
 
   if(useName && layout == "new"){
     presenceData.state = "as " + document.getElementById("playername").innerHTML;

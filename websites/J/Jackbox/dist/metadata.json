@@ -18,10 +18,16 @@
   "category": "games",
   "settings": [
     {
-        "id": "useName",
-        "title": "Display selected username",
-        "icon": "fas fa-user",
-        "value": true
+      "id": "useName",
+      "title": "Show selected username",
+      "icon": "fas fa-user",
+      "value": true
+    },
+    {
+      "id": "useTime",
+      "title": "Show time elapsed",
+      "icon": "fas fa-stopwatch",
+      "value": true
     }
   ]
 }
