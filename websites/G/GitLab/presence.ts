@@ -110,6 +110,12 @@ presence.on("UpdateData", async() => {
                 presenceData.details = owner.innerText;
                 presenceData.state = "My Respository";
             }
+            else if(title == null && owner == null){
+                owner = document.querySelector("#content-body > div.user-profile > div.cover-block.user-cover-block > div.profile-header > div.user-info > div.cover-title");
+                presenceData.details = "Viewing:";
+                presenceData.state = owner.innerText;
+                presenceData.startTimestamp = browsingStamp;
+            }
             else{
                 presenceData.startTimestamp = browsingStamp;
                 presenceData.details = "Viewing Unknown";
