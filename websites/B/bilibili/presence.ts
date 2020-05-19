@@ -256,7 +256,16 @@ presence.on("UpdateData", async () => {
       //Subcategory
       //Subcategory	      //Subcategory
       //动画
-    } else if (document.location.pathname == "/v/" || "/anime/" || "/guochuang/" || "/audio/" || "/cinema/" || "/documentary/" || "/movie/" || "/tv/") {
+    } else if (
+      document.location.pathname.includes("/cinema/") ||
+      document.location.pathname.includes("/anime/") ||
+      document.location.pathname.includes("/guochuang/") ||
+      document.location.pathname.includes("/audio/") ||
+      document.location.pathname.includes("/v/") ||
+      document.location.pathname.includes("/documentary/") ||
+      document.location.pathname.includes("/movie/") ||
+      document.location.pathname.includes("/tv/")
+    ) {
       title = document.querySelector("head > title");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing for subcategory";
