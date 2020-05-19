@@ -93,7 +93,7 @@ presence.on("UpdateData", async() => {
             title = document.querySelector("#dashboard_search");
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Searching";
-            presenceData.state = title.type;
+            presenceData.state = title.value;
             presenceData.smallImageKey = "search";
             presenceData.smallImageText = "Searching";
         }
@@ -111,7 +111,7 @@ presence.on("UpdateData", async() => {
                 presenceData.state = "My Respository";
             }
             else if(title == null && owner == null){
-                owner = document.querySelector("#content-body > div.user-profile > div.cover-block.user-cover-block > div.profile-header > div.user-info > div.cover-title");
+                owner = document.querySelector("#content-body > div.user-profile > div.cover-block.user-cover-block > div.profile-header > div.user-info > p > span:nth-child(1)");
                 presenceData.details = "Viewing:";
                 presenceData.state = owner.innerText;
                 presenceData.startTimestamp = browsingStamp;
