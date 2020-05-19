@@ -1,0 +1,35 @@
+{
+  "author": {
+    "name": "CRUGG",
+    "id": "228965621478588416"
+  },
+  "service": "taiga Bot",
+  "description": {
+    "en": "taiga is a Discord Bot with many features like Virtual Trading Cards, an economy system and in the future even a Plugin Marketplace",
+    "de": "taiga ist ein Discord Bot mit vielen Funktionen wie virtuellen Sammelkarten, ein Wirtschaftssystem und in der Zukunft ein Pluginmarktplatz"
+  },
+  "url": [
+    "taigabot.net",
+    "anigifs.taigabot.net",
+    "api.taigabot.net",
+    "beta.taigabot.net",
+    "cdn.taigabot.net",
+    "cdnadmin.taigabot.net",
+    "community.taigabot.net",
+    "git.taigabot.net",
+    "labs.taigabot.net",
+    "legal.taigabot.net",
+    "taipl.taigabot.net",
+    "telegram.taigabot.net",
+    "translate.taigabot.net"
+  ],
+  "version": "1.2.2",
+  "logo": "https://cdn.taigabot.net/assets/branding/taiga/premid_logo.png",
+  "thumbnail": "https://cdn.taigabot.net/assets/branding/taiga/premid_banner.png",
+  "color": "#ff006d",
+  "tags": [
+    "discord",
+    "bot"
+  ],
+  "category": "other"
+}
