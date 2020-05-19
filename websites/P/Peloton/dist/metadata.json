@@ -1,0 +1,25 @@
+{
+    "author": {
+        "name": "The Gamerzs",
+        "id": "712294190339588209"
+    },
+    "url": [
+        "www.onepeloton.com"
+    ],
+    "description": {
+        "en": "Peloton is attractive, addictive, and seriously whips you into shape."
+    },
+    "regExp": "([a-z0-9-]+[.])*onepeloton([.][a-z]|[co.uk])",
+    "service": "Peloton",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/DatvHIg.png",
+    "thumbnail": "https://i.imgur.com/Uioxasy.jpg",
+    "color": "#f5f7f9",
+    "tags": [
+        "goals",
+        "classes",
+        "exercise",
+        "training"
+    ],
+    "category": "other"
+}
