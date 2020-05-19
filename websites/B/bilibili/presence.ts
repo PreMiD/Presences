@@ -18,10 +18,11 @@ const presence = new Presence({ clientId: "639591760791732224" }),
     pause: "presence.playback.paused"
   });
 const browsingStamp = Math.floor(Date.now() / 1000);
-let user: any, title: any, inread_title: any, UID: any, page: any;
-let video: any, videoDuration: any, videoCurrentTime: any, videoPaused: any;
+let user: HTMLElement, title: HTMLElement, inread_title: HTMLElement, UID: HTMLElement, page: HTMLElement;
+let video: HTMLVideoElement, videoDuration: any, videoCurrentTime: any, videoPaused: any;
 const huodong_title = document.querySelector("#viewbox_report > h1 > a"),
-  hudong_title = document.querySelector("#viewbox_report > h1 > span.activity");
+  hudong_title = document.querySelector("#viewbox_report > h1 > span.activity"),
+  multi_user = document.querySelector("#app > div > div.r-con > div.members-info");
 let currentTime: any,
   duration: any,
   paused: any,
@@ -103,9 +104,11 @@ presence.on("UpdateData", async () => {
       } else {
         title = document.querySelector("#viewbox_report > h1");
       }
-      user = document.querySelector(
-        "#v_upinfo > div.u-info > div > a.username"
-      );
+      if (multi_user != null){
+      user = document.querySelector("#member-container > div:nth-child(1) > div.panel > div > a");
+      } else {
+      user = document.querySelector("#v_upinfo > div.u-info > div > a.username");
+      }
       presenceData.details = title.innerText;
       presenceData.state = user.innerText;
 
@@ -218,6 +221,27 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname == "/ranking") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Ranking";
+    } else if (document.location.pathname.includes("/ranking/all/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Ranking";
+      presenceData.state = "All";
+    } else if (document.location.pathname.includes("/ranking/origin/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Ranking";
+      presenceData.state = "Origin";
+    } else if (document.location.pathname.includes("/ranking/bangumi/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Ranking";
+      presenceData.state = "Bangumi";
+    } else if (document.location.pathname.includes("/ranking/cinema/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Ranking";
+      presenceData.state = "Cinema";
+    } else if (document.location.pathname.includes("/ranking/rookie/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Ranking";
+      presenceData.state = "Newbie";
+      //Subcategory
       //专栏
     } else if (document.location.pathname.includes("/read/")) {
       user = document.querySelector(
@@ -250,11 +274,11 @@ presence.on("UpdateData", async () => {
         "#app > div.page-container.p-rel > div.top-header.p-rel > div.tag-title-content.fs-28.ls-0 > div.tag-title.d-i-block"
       );
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing dynamic";
+      presenceData.details = "Dynamic";
       presenceData.state = "Tag: " + title.innerText;
     } else {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing for dynamic";
+      presenceData.details = "Their dynamic";
     }
     //shortfilm
   } else if (document.location.hostname == "vc.bilibili.com") {
