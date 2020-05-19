@@ -14,5 +14,5 @@
   "color": "#ff4400",
   "tags": ["programming", "sharing", "coding", "gitlab"],
   "category": "other",
-  "regExp": " *.gitlab.com"
+  "regExp": ".*"
 }
