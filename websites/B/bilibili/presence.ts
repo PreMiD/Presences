@@ -127,7 +127,7 @@ presence.on("UpdateData", async () => {
       //播放历史
     } else if (document.location.pathname == "/account/history") {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their history";
+      presenceData.details = "Viewing their history";
       //活动
     } else if (document.location.pathname.includes("/blackboard/")) {
       const timestamps = getTimestamps(
@@ -290,7 +290,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Tag: " + title.innerText;
     } else {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their dynamic";
+      presenceData.details = "Browsing for dynamic";
     }
     //shortfilm
   } else if (document.location.hostname == "vc.bilibili.com") {
@@ -340,13 +340,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "account.bilibili.com") {
     if (document.location.pathname.includes("/")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their account settings";
+      presenceData.details = "Viewing their settings";
     }
     //创作中心
   } else if (document.location.hostname == "member.bilibili.com") {
     if (document.location.pathname.includes("/")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their dashboard";
+      presenceData.details = "Viewing their dashboard";
     }
     //会员购
   } else if (document.location.hostname == "show.bilibili.com") {
@@ -422,11 +422,11 @@ presence.on("UpdateData", async () => {
         "body > div.app-ctnr > div.wrapper > div > header > h2"
       );
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing live channel";
+      presenceData.details = "Viewing live channels";
       presenceData.state = title.innerText;
     } else {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing live channel";
+      presenceData.details = "Viewing live channels";
     }
   } else if (document.location.hostname == "search.bilibili.com") {
     if (document.location.pathname.includes("/")) {
@@ -442,31 +442,31 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "message.bilibili.com") {
     if (document.URL.includes("/#/reply")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their message";
+      presenceData.details = "Their notifications";
       presenceData.state = "Reply";
     } else if (document.URL.includes("/#/at")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their message";
+      presenceData.details = "Their notifications";
       presenceData.state = "At";
     } else if (document.URL.includes("/#/love")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their message";
+      presenceData.details = "Their notifications";
       presenceData.state = "Love";
     } else if (document.URL.includes("/#/system")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their message";
+      presenceData.details = "Their notifications";
       presenceData.state = "System message";
     } else if (document.URL.includes("/#/whisper")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their message";
+      presenceData.details = "Their notifications";
       presenceData.state = "Private message";
     } else if (document.URL.includes("/#/archive")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their message";
+      presenceData.details = "Their notifications";
       presenceData.state = "PM archive";
     } else if (document.URL.includes("/#/config")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Their message";
+      presenceData.details = "Their notifications";
       presenceData.state = "Message setting";
     }
   }
