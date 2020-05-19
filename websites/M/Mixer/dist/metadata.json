@@ -13,15 +13,25 @@
     "uk_UA": "Mixer - це стрімінгова платформа для геймерів нового покоління, яка дозволяє глядачам брати участь у самому геймплеї.",
     "nl": "Mixer is een live-streamingplatform van de volgende generatie waarmee kijkers zelf kunnen deelnemen aan de gameplay."
   },
-  "url": "mixer.com",
-  "version": "1.3.3",
-  "logo": "https://i.imgur.com/G358RGW.jpg",
-  "thumbnail": "https://i.imgur.com/K28BAra.jpg",
-  "color": "#1FBAED",
-  "tags": [
-    "mixer",
-    "video",
-    "streaming"
+  "settings": [
+    {
+      "id": "browse",
+      "title": "Display Browsing Info",
+      "icon": "fas fa-book-open",
+      "value": true
+    },
+    {
+      "id": "video",
+      "title": "Display Video Info",
+      "icon": "fas fa-video",
+      "value": true
+    }
   ],
+  "url": "mixer.com",
+  "version": "2.0.0",
+  "logo": "https://i.imgur.com/G358RGW.jpg",
+  "thumbnail": "https://i.imgur.com/obvpOO1.png",
+  "color": "#1FBAED",
+  "tags": ["video", "streaming"],
   "category": "videos"
 }
