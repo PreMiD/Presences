@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "709526684428271687"
 });
 const browsingStamp = Math.floor(Date.now() / 1000);
-let project, finishedProject, owner, path, title;
+let owner, title;
 presence.on("UpdateData", async() => {
     var presenceData: presenceData = {
         largeImageKey: "logo"
