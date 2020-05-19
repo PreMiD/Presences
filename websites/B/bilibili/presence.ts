@@ -150,10 +150,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.innerText
         .replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili", "")
         .replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~ - bilibili", "")
-        .replace(
-          " - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili",
-          ""
-        );
+        .replace(" - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili", "");
       //番剧
     } else if (document.location.pathname.includes("/bangumi/")) {
       video = document.querySelector(
@@ -254,6 +251,17 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Ranking";
       presenceData.state = "Newbie";
       //Subcategory
+      //Subcategory	      //Subcategory
+      //动画
+    } else if (document.location.pathname == "/v/" || "/anime/" || "/guochuang/" || "/audio/" || "/cinema/" || "/documentary/" || "/movie/" || "/tv/") {	
+      title = document.querySelector("head > title");
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing for subcategory";
+      if (title.innerText == "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili"){
+      presenceData.state = "资讯";
+      } else {
+      presenceData.state = title.innerText.replace(" - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili", "");
+      }
       //专栏
     } else if (document.location.pathname.includes("/read/")) {
       user = document.querySelector(
