@@ -50,7 +50,7 @@ const presence = new Presence({
 // [x] Quiplash
 
 let layout: string;
-let elapsed: number = Math.round((new Date()). getTime() / 1000);;
+const elapsed: number = Math.round((new Date()). getTime() / 1000);;
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
@@ -58,8 +58,8 @@ presence.on("UpdateData", async () => {
   };
 
   // Check for presence setting
-  let useName: boolean = await presence.getSetting("useName")
-  let useTime: boolean = await presence.getSetting("useTime")
+  let useName: boolean = await presence.getSetting("useName");
+  let useTime: boolean = await presence.getSetting("useTime");
 
   if(useTime){
     presenceData.startTimestamp = elapsed
