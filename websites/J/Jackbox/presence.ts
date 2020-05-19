@@ -58,11 +58,11 @@ presence.on("UpdateData", async () => {
   };
 
   // Check for presence setting
-  let useName: boolean = await presence.getSetting("useName");
-  let useTime: boolean = await presence.getSetting("useTime");
+  const useName: boolean = await presence.getSetting("useName");
+  const useTime: boolean = await presence.getSetting("useTime");
 
   if(useTime){
-    presenceData.startTimestamp = elapsed
+    presenceData.startTimestamp = elapsed;
   }
 
   if(useName && layout == "new"){
