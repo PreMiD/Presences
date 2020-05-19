@@ -50,25 +50,26 @@ const presence = new Presence({
 // [x] Quiplash
 
 let layout: string;
+let elapsed: number = Math.round((new Date()). getTime() / 1000);;
 
 presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
-    largeImageKey: "jackbox"
+    largeImageKey: "jackbox",
+    startTimestamp: elapsed
   };
 
   // Check for presence setting
+  let useName: boolean = await presence.getSetting("useName")
 
-  console.log(layout)
-
-  if(presence.getSetting("useName") && layout == "new"){
+  if(useName && layout == "new"){
     presenceData.state = "as " + document.getElementById("playername").innerHTML;
   }
 
-  if(presence.getSetting("useName") && layout == "legacy"){
+  if(useName && layout == "legacy"){
     presenceData.state = "as " + document.getElementById("player").children[0].innerHTML;
   }
 
-  if(presence.getSetting("useName") && layout == "dict"){
+  if(useName && layout == "dict"){
     presenceData.state = "as " + document.getElementById("playericon").className.split("_")[1] + document.getElementById("playername").innerHTML.toLowerCase();
   }
 
