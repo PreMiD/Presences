@@ -17,7 +17,7 @@ function PMD_error(message): void {
 
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo-512"
   };
   presenceData.startTimestamp = browsingStamp;

@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
     document.querySelector(".footer") &&
     document.querySelector(".footer").textContent.includes("VLC")
   ) {
-    var data: presenceData = {
+    var data: PresenceData = {
       largeImageKey: "vlc"
     };
 

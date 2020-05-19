@@ -25,7 +25,7 @@ var elapsed = Math.floor(Date.now() / 1000);
 var subtitle;
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "starz-logo"
   };
 

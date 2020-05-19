@@ -34,7 +34,7 @@ function PMD_info(message): void {
 }
 
 let presence, ApiClient, ApiClientt;
-const presenceData: presenceData = {
+const presenceData: PresenceData = {
   largeImageKey: PRESENCE_ART_ASSETS.logo
 };
 

@@ -35,7 +35,7 @@ lastState = null;
 oldTitle = null;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "plutotv"
   };
 

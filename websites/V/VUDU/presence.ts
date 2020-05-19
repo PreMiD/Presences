@@ -16,7 +16,7 @@ let videoState = "paused"; // Default
 let metadata;
 
 // Set the default presence data for when the video is loading
-let presenceData: presenceData = {
+let presenceData: PresenceData = {
   largeImageKey:
     "vudularge" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
   details: "Browsing VUDU"

@@ -15,7 +15,7 @@ newStats();
 
 const stamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "curvelogo",
     details: `${sdj} • ${slisteners || "Loading statistics"}`,
     state: `${ssong || "Loading song"}`,

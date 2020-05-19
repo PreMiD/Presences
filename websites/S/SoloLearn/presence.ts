@@ -15,7 +15,7 @@ const getElement = (selector: string): string => {
 
 var oldUrl, elapsed;
 
-var data: presenceData = {
+var data: PresenceData = {
   largeImageKey: "sololearn"
 };
 

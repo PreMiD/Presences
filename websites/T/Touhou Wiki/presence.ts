@@ -8,7 +8,7 @@ const actionURL = new URL(document.location.href);
 const title2URL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
   const currentParty = document.querySelector("#currentParty").textContent;
   const status = document.querySelector("#statuslabel").textContent;
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "cprlogo"
   };
 

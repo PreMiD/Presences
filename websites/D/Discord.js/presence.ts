@@ -7,7 +7,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   let route = document.location.hash.split("/");
 
-  let data: presenceData = {
+  let data: PresenceData = {
     largeImageKey: "djs"
   };
 

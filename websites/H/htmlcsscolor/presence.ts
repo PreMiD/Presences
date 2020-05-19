@@ -3,7 +3,7 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const Data: presenceData = {
+  const Data: PresenceData = {
     largeImageKey: "htmlcsscolor"
   };
 

@@ -19,7 +19,7 @@ const ultimaPagina: HTMLElement  = document.querySelector("#weds > div > div.ult
 const pesquisaTitulo: HTMLElement  = document.querySelector("body > div > div.SectionBusca.mwidth > div.tituloSection");
 
 presence.on("UpdateData", async () => {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "logo"
     };
 

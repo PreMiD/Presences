@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     .getElementsByClassName("btn playbutton")[0]
     .getAttributeNode("data-trackingaction").value;
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       }
     }
     //presenceData.state = "Lurking on LautFM"; break;
-    //default : presenceData.state = "ZZzzzZZ";
+    //default : PresenceData.state = "ZZzzzZZ";
   }
 
   if (presenceData.details == null) {

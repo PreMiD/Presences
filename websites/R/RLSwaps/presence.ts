@@ -7,7 +7,7 @@ var user: any;
 var title: any;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "rlswaps"
   };
 

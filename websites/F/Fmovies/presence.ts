@@ -32,7 +32,7 @@ presence.on("iFrameData", (data) => {
 });
 
 presence.on("UpdateData", async () => {
-  var data: presenceData = {
+  var data: PresenceData = {
     largeImageKey: "fml"
   };
 

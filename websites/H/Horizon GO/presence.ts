@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "647443051819565076"
   }),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     largeImageKey: "icon"
   };
 
@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
     const titledetailes = document.querySelector(
       "div.player-linear-bottom-bar__channelstrip:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)"
     );
-    const pageData: presenceData = {
+    const pageData: PresenceData = {
       state: "Channel: " + channelstate,
       details: "Watching: " + titledetailes.textContent,
       largeImageKey: "icon"
@@ -26,14 +26,14 @@ presence.on("UpdateData", async () => {
     const statedetails = document.querySelector(
       ".player-ui-bottom-bar-controls__main-info"
     );
-    const movieVideo: presenceData = {
+    const movieVideo: PresenceData = {
       state: "Video: " + document.title,
       details: "Watching: " + statedetails.textContent,
       largeImageKey: "icon"
     };
     presence.setActivity(movieVideo);
   } else {
-    const homepage: presenceData = {
+    const homepage: PresenceData = {
       details: "Browsing homepage.",
       largeImageKey: "icon"
     };

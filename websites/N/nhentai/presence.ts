@@ -30,7 +30,7 @@ if (lastPlaybackState != reading) {
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg"
   };
 
@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
 
   /*
 
-		let presenceData: presenceData = {
+		let presenceData: PresenceData = {
 			largeImageKey: "lg"
 		}
 

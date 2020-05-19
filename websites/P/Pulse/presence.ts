@@ -24,7 +24,7 @@ setInterval(newStats, 6000);
 newStats();
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
   };

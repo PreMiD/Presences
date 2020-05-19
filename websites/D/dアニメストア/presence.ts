@@ -20,7 +20,7 @@
       const isPlaying = !video.paused;
       const elapsedSec = Math.floor(video.currentTime);
 
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: `${title} - ${episode}`,
         state: epName,
         largeImageKey: "danime",
