@@ -65,18 +65,6 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = elapsed;
   }
 
-  if(useName && layout == "new"){
-    presenceData.state = "as " + document.getElementById("playername").innerHTML;
-  }
-
-  if(useName && layout == "legacy"){
-    presenceData.state = "as " + document.getElementById("player").children[0].innerHTML;
-  }
-
-  if(useName && layout == "dict"){
-    presenceData.state = "as " + document.getElementById("playericon").className.split("_")[1] + document.getElementById("playername").innerHTML.toLowerCase();
-  }
-
   // PP6
   if (document.getElementsByClassName("Ridictionary").length > 0) {
     presenceData.details = "Playing Dictionarium";
@@ -178,6 +166,18 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Looking at a past game";
   } else {
     presenceData.details = "Idle";
+  }
+  
+  if(useName && layout == "new"){
+    presenceData.state = "as " + document.getElementById("playername").innerHTML;
+  }
+
+  if(useName && layout == "legacy"){
+    presenceData.state = "as " + document.getElementById("player").children[0].innerHTML;
+  }
+
+  if(useName && layout == "dict"){
+    presenceData.state = "as " + document.getElementById("playericon").className.split("_")[1] + document.getElementById("playername").innerHTML.toLowerCase();
   }
 
   if (presenceData.details == null) {
