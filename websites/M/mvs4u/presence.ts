@@ -1,16 +1,16 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "663356502240788490"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-  }),
-  video = {
-    duration: 0,
-    currentTime: 0,
-    paused: true
-  };
+  });
+let video = {
+  duration: 0,
+  currentTime: 0,
+  paused: true
+};
 
 /**
  * Get Timestamps
@@ -21,22 +21,25 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-presence.on("iFrameData", (data) => {
-  video = data;
-});
+presence.on(
+  "iFrameData",
+  (data: { duration: number; currentTime: number; paused: boolean }) => {
+    video = data;
+  }
+);
 
 presence.on("UpdateData", async () => {
-  var data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "m4"
   };
 
   if (video != null && !isNaN(video.duration) && video.duration > 0) {
-    var timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );

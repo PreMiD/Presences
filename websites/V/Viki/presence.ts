@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
   playback = video ? true : false;
 
   if (!playback) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "viki"
     };
 
@@ -526,7 +526,7 @@ presence.on("UpdateData", async () => {
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "",
       state: "",
       largeImageKey: "viki",

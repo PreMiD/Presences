@@ -26,7 +26,7 @@ let title: string;
 let subtitle: string;
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "disneyplus-logo"
   };
 

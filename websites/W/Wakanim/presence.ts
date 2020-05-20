@@ -18,7 +18,7 @@ function capitalize(str: string): string {
 }
 
 presence.on("UpdateData", async () => {
-  var presenceData: presenceData = { largeImageKey: "wakanim" };
+  var presenceData: PresenceData = { largeImageKey: "wakanim" };
   var path = document.location.pathname;
   var video = document.querySelector("video");
   var title = document.querySelector(".episode_title");

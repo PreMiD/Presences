@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
     state = title.replace(" | WIRED", "");
   }
 
-  var data: presenceData = {
+  var data: PresenceData = {
     details: details,
     state: state,
     largeImageKey: "wired",

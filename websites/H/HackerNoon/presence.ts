@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
       "#searchbox > div > form > input"
     );
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "hn-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

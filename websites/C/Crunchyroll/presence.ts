@@ -44,7 +44,7 @@ presence.on("iFrameData", (data) => {
 });
 
 presence.on("UpdateData", async () => {
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "lg"
   };
 

@@ -12,7 +12,7 @@ var typeURL = new URL(document.location.href);
 var typeResult = typeURL.searchParams.get("type");
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "pix"
   };
 

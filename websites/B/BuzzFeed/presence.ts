@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "body > main > div > div > div > div.user-info.xs-px2.sm-p0.xs-mb3.md-mb4 > div > div.xs-ml2.xs-flex.xs-flex-column > div > h1"
     );
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };
