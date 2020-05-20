@@ -6,6 +6,7 @@ let path;
 let strings;
 let clipTitle;
 let clipAuthor;
+let clipTimeLeft: any;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -93,12 +94,13 @@ presence.on("UpdateData", async () => {
         //Class categories
         if(window.location.pathname == "/classes"){
             presenceData.startTimestamp = browsingStamp;
-            return presenceData.details = "Browsing classes";
+            presenceData.details = "Browsing classes";
         }
+        
 
         //Class category
-        if(window.location.pathname.includes("/classes/")){
-            path = window.location.pathname.replace("/classes", "");
+        else if(window.location.pathname.includes("/classes/")){
+            path = window.location.pathname.replace("/classes/", "");
             switch(path){
                 case "strength":
                     presenceData.startTimestamp = browsingStamp;
@@ -140,6 +142,9 @@ presence.on("UpdateData", async () => {
                     presenceData.startTimestamp = browsingStamp;
                     presenceData.details = "Browsing bootcamp classes";
                     break;
+                default:
+                    presenceData.startTimestamp = browsingStamp;
+                    presenceData.details = "Browsing classes";
             }
 
             //Video
@@ -157,11 +162,11 @@ presence.on("UpdateData", async () => {
                     case false:
                         presenceData.smallImageKey = 'pause';
                         presenceData.smallImageText = strings.pause;
-                        presenceData.endTimestamp = null;
+                        presenceData.endTimestamp = new Date(Date.now() + (video.duration - video.currentTime) * 1000).getTime();
                         break;
                 }
-                presenceData.details = clipTitle;
-                presenceData.state = clipAuthor[0];
+                presenceData.details = clipTitle.replace("&amp;", "&");
+                presenceData.state = clipAuthor;
             }
         }
 
@@ -170,11 +175,13 @@ presence.on("UpdateData", async () => {
             const video: HTMLVideoElement = document.querySelector(".jw-video");
             clipTitle = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > h1").textContent;
             clipAuthor = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > p").textContent;
+            clipTimeLeft = document.querySelector(".player-overlay-wrapper > div:nth-child(3) > button > div:nth-child(2) > div > div > p").textContent.split(":");
             
             switch(!video.paused){
                 case true:
                     presenceData.smallImageKey = 'live';
-                    presenceData.smallImageText = strings.live;                   
+                    presenceData.smallImageText = strings.live;
+                    presenceData.endTimestamp = new Date(Date.now() + ((clipTimeLeft[0]*1) + clipTimeLeft[1]*1) * 10).getTime();     
                     break;
                 case false:
                     presenceData.smallImageKey = 'live';
@@ -285,8 +292,6 @@ presence.on("UpdateData", async () => {
         }
 
         
-    } else {
-        presenceData.details = "Browsing Peloton";
     }
 
     if (presenceData.details == null) {
