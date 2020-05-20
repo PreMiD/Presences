@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
         }
 
         if (document.location.pathname.includes("/clips/watch")) {
-            var video: HTMLVideoElement = document.querySelector(".video-js > video");
+            const video: HTMLVideoElement = document.querySelector(".video-js > video");
             clipTitle = (document.querySelector(".clip__action-info > div:nth-child(1)").innerHTML).split(" ");
             switch(!video.paused){
                 case true:
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
     }
 
     if (document.location.pathname.includes("/clips/watch")) {
-      video = document.querySelector(".video-js > video");
+      const video: HTMLVideoElement = document.querySelector(".video-js > video");
       clipTitle = document
         .querySelector(".clip__action-info > div:nth-child(1)")
         .innerHTML.split(" ");
