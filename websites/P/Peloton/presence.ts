@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
         play: "presence.playback.playing",
         pause:  "presence.playback.paused"
     });
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "peloton"
     };
 
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
 
         //Class category
         if(window.location.pathname.includes("/classes/")){
-            path = window.location.pathname.replace("/classes/", "");
+            path = window.location.pathname.replace("/classes", "");
             switch(path){
                 case "strength":
                     presenceData.startTimestamp = browsingStamp;
@@ -181,7 +181,7 @@ presence.on("UpdateData", async () => {
                     presenceData.smallImageText = strings.live;
                     break;
             }
-            presenceData.details = clipTitle.textContent.replace("&amp;", "&");
+            presenceData.details = clipTitle.replace("&amp;", "&");
             presenceData.state = clipAuthor;
         }
 
