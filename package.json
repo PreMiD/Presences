@@ -11,7 +11,9 @@
     "pu:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./presenceUpdater.ts"
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.112",
     "@types/glob": "^7.1.1",
+    "@types/mongodb": "^3.5.18",
     "@types/node": "^14.0.1",
     "@types/prettier": "^2.0.0",
     "@types/semver": "^7.2.0",
@@ -26,9 +28,5 @@
     "semver": "^7.3.2",
     "source-map-support": "^0.5.19",
     "typescript": "^3.9.2"
-  },
-  "dependencies": {
-    "@types/chrome": "^0.0.112",
-    "@types/mongodb": "^3.5.17"
   }
 }
