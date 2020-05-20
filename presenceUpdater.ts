@@ -104,7 +104,7 @@ async function run(MongoClient: MongoClient): Promise<void> {
   console.log("\nFETCHING...\n");
 
   const presenceFolders = glob("./{websites,programs}/*/*/"),
-    db = MongoClient.db("PreMiD-DEV").collection("presences"),
+    db = MongoClient.db("PreMiD").collection("presences"),
     dbPresences: Array<DBdata> = await db
       .find({}, { projection: { _id: 0, name: 1, "metadata.version": 1 } })
       .toArray(),
@@ -148,7 +148,7 @@ async function run(MongoClient: MongoClient): Promise<void> {
     dP: Promise<DeleteWriteOpResultObject>[] = [],
     oP: Promise<UpdateWriteOpResult>[] = [];
 
-  const compiledPresences = await Promise.all(
+  let compiledPresences = await Promise.all(
     dbDiff.map(async (file) => {
       let metadata = file[0];
       const path = file[1],
@@ -220,6 +220,11 @@ async function run(MongoClient: MongoClient): Promise<void> {
 
   console.log("\nUPDATING...\n");
 
+  if (compiledPresences.length > 50) {
+    compiledPresences = compiledPresences.slice(0, 50);
+    console.log("Limiting to 50 presences for the current run.\n");
+  }
+
   const bulkNp = compiledPresences.filter((e) =>
       newPresences.some((p) => e && e.name === p[0].service)
     ),
@@ -256,7 +261,7 @@ async function run(MongoClient: MongoClient): Promise<void> {
 }
 
 connect(
-  `mongodb://engineer:46HCEdbDUZAcmAAxsnGcajEQzVFpNYYyjEgrZad4XsqW9HqCpf5Tff5Hvk5XD2Ci@premid.app:27017`,
+  `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
   {
     appname: "PreMiD-PresenceUpdater",
     useUnifiedTopology: true
