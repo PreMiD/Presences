@@ -16,8 +16,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -26,10 +26,10 @@ presence.on("UpdateData", async () => {
     largeImageKey: "lm"
   };
 
-  var video: HTMLVideoElement = document.querySelectorAll("video")[0];
+  const video: HTMLVideoElement = document.querySelectorAll("video")[0];
 
   if (video != null && !isNaN(video.duration)) {
-    var timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );

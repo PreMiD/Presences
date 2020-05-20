@@ -1,16 +1,13 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "633681675792023572"
   }),
-  prev,
-  elapsed: number,
-  path: string,
-  gender: string,
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing",
     live: "presence.activity.live"
   });
+let prev: string, elapsed: number, path: string, gender: string;
 
 /**
  * Get Timestamps
@@ -21,8 +18,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -33,7 +30,7 @@ presence.on("UpdateData", async () => {
 
   path = document.location.pathname;
 
-  var video: HTMLVideoElement = document.querySelector(
+  const video: HTMLVideoElement = document.querySelector(
     "video[id$='_html5_api']"
   );
 
@@ -199,7 +196,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "search";
       data.smallImageText = (await strings).browsing;
     } else if (video && path.includes("/photo_videos/photo/")) {
-      var timestamps = getTimestamps(
+      const timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
