@@ -6,6 +6,9 @@ presence.on("UpdateData", async () => {
     const presenceData = {
         largeImageKey: "logo"
     };
+   
+    //This is just here so that I can have "changes"  to push to GitHub
+
     let path = document.location.pathname;
     if (window.location.hostname == "bungie.net" || window.location.hostname == "www.bungie.net") {
         presenceData.startTimestamp = browsingStamp;
