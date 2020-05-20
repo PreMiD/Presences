@@ -360,17 +360,17 @@ const getStatus = setLoop(function () {
 }, (navigator.userAgent.toLowerCase().indexOf("firefox") > -1 ? 5 : 2) * 1000); // if you lower it, you may as well fry the CPU
 
 interface MediaObj {
-  time: string;
-  length: string;
-  state: string;
-  loop: string;
-  repeat: string;
-  filename: string;
-  title: string;
-  album: string;
-  artist: string;
-  track_number: string;
-  showName: string;
-  seasonNumber: string;
-  episodeNumber: string;
+  time?: string;
+  length?: string;
+  state?: string;
+  loop?: string;
+  repeat?: string;
+  filename?: string;
+  title?: string;
+  album?: string;
+  artist?: string;
+  track_number?: string;
+  showName?: string;
+  seasonNumber?: string;
+  episodeNumber?: string;
 }
