@@ -6,6 +6,7 @@ let path;
 let strings;
 let clipTitle;
 let clipAuthor;
+let video: HTMLVideoElement;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -144,7 +145,7 @@ presence.on("UpdateData", async () => {
 
             //Video
             if(path.includes("player/")){
-                var video: HTMLVideoElement = document.querySelector(".jw-video");
+                let video: HTMLVideoElement = document.querySelector(".jw-video");
                 clipTitle = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > h1").textContent.replace("&amp;", "&");
                 clipAuthor = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > p").textContent.split("<");
                 
@@ -167,11 +168,9 @@ presence.on("UpdateData", async () => {
 
         //Live
         if(window.location.pathname.includes("/player/live")){
-            var video: HTMLVideoElement = document.querySelector(".jw-video");
-            if(clipTitle = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > h1")){}
-            else{clipTitle = null;}
-            if(clipAuthor = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > p").textContent.split("<")){}
-            else{clipAuthor = null;}
+            video = document.querySelector(".jw-video");
+            clipTitle = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > h1").textContent;
+            clipAuthor = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > p").textContent;
             
             switch(!video.paused){
                 case true:
@@ -184,7 +183,7 @@ presence.on("UpdateData", async () => {
                     break;
             }
             presenceData.details = clipTitle.textContent.replace("&amp;", "&");
-            presenceData.state = clipAuthor[0];
+            presenceData.state = clipAuthor;
         }
 
         //schedule
