@@ -43,7 +43,7 @@ function getTimestamps(
 }
 
 function setLoop(f: Function, ms: number): number {
-  f();
+  f()
   return setInterval(f, ms);
 }
 
@@ -355,7 +355,7 @@ const getStatus = setLoop(function () {
         "/requests/status.xml",
       true
     );
-    req.send();
+    req.send()
   }
 }, (navigator.userAgent.toLowerCase().indexOf("firefox") > -1 ? 5 : 2) * 1000); // if you lower it, you may as well fry the CPU
 
