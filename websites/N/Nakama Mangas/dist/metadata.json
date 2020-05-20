@@ -10,10 +10,14 @@
     "pt_BR": "Uma scanlator brasileira com um ótimo conteudo e site."
   },
   "url": "nakamamangas.com",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/QDPO5Yr.gif",
   "thumbnail": "https://i.imgur.com/4ZbadYl.png",
   "color": "#c52d2f",
-  "tags": ["manga", "mangas", "nakama"],
+  "tags": [
+    "manga",
+    "mangas",
+    "nakama"
+  ],
   "category": "other"
 }
