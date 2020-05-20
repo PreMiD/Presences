@@ -6,7 +6,7 @@ let path;
 let strings;
 let clipTitle;
 let clipAuthor;
-let clipTimeLeft: string | number;
+let clipTimeLeft;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -175,7 +175,7 @@ presence.on("UpdateData", async () => {
             const video: HTMLVideoElement = document.querySelector(".jw-video");
             clipTitle = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > h1").textContent;
             clipAuthor = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > p").textContent;
-            clipTimeLeft = document.querySelector(".player-overlay-wrapper > div:nth-child(3) > button > div:nth-child(2) > div > div > p").textContent.split(":");
+            clipTimeLeft = document.querySelector(".player-overlay-wrapper > div:nth-child(3) > button > div:nth-child(2) > div > div > p").textContent.split(":").map(Number);
             
             switch(!video.paused){
                 case true:
