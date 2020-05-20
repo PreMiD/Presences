@@ -1,7 +1,12 @@
 import "source-map-support/register";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { connect, MongoClient } from "mongodb";
+import {
+  connect,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  MongoClient,
+  DeleteWriteOpResultObject,
+  UpdateWriteOpResult
+} from "mongodb";
 import { existsSync, readFileSync } from "fs";
 import { sync as glob } from "glob";
 import {
@@ -99,11 +104,11 @@ async function run(MongoClient: MongoClient): Promise<void> {
   console.log("\nFETCHING...\n");
 
   const presenceFolders = glob("./{websites,programs}/*/*/"),
-    db = MongoClient.db("PreMiD").collection("presences"),
-    dbPresences = await db
+    db = MongoClient.db("PreMiD-DEV").collection("presences"),
+    dbPresences: Array<DBdata> = await db
       .find({}, { projection: { _id: 0, name: 1, "metadata.version": 1 } })
       .toArray(),
-    presences = presenceFolders
+    presences: Array<[Metadata, string]> = presenceFolders
       .filter((pF) => existsSync(`${pF}/dist/metadata.json`))
       .map((pF) => {
         const file = readFile(`${pF}/dist/metadata.json`);
@@ -140,8 +145,8 @@ async function run(MongoClient: MongoClient): Promise<void> {
   if (dbDiff.length > 0) console.log("\nCOMPILING...\n");
 
   let nP,
-    dP = [],
-    oP = [];
+    dP: Promise<DeleteWriteOpResultObject>[] = [],
+    oP: Promise<UpdateWriteOpResult>[] = [];
 
   const compiledPresences = await Promise.all(
     dbDiff.map(async (file) => {
@@ -184,7 +189,7 @@ async function run(MongoClient: MongoClient): Promise<void> {
         return null;
       }
 
-      const resJson: any = {
+      const resJson: DBdata = {
         name: metadata.service,
         url: `https://api.premid.app/v2/presences/${encodeURIComponent(
           metadata.service
@@ -251,7 +256,7 @@ async function run(MongoClient: MongoClient): Promise<void> {
 }
 
 connect(
-  `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
+  `mongodb://engineer:46HCEdbDUZAcmAAxsnGcajEQzVFpNYYyjEgrZad4XsqW9HqCpf5Tff5Hvk5XD2Ci@premid.app:27017`,
   {
     appname: "PreMiD-PresenceUpdater",
     useUnifiedTopology: true
@@ -284,4 +289,12 @@ interface Metadata {
     value?: string | number | boolean;
     values?: Array<string | number | boolean>;
   }>;
+}
+
+interface DBdata {
+  name: string;
+  url: string;
+  metadata: Metadata;
+  presenceJs: string;
+  iframeJs?: string;
 }
