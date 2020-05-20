@@ -11,7 +11,7 @@
     },
     "regExp": "([a-z0-9-]+[.])*onepeloton([.][a-z]|[co.uk])",
     "service": "Peloton",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "logo": "https://i.imgur.com/DatvHIg.png",
     "thumbnail": "https://i.imgur.com/Uioxasy.jpg",
     "color": "#f5f7f9",
