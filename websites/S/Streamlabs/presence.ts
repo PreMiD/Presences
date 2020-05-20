@@ -12,7 +12,6 @@ const userType = ["Viewing the ", "Viewing their ", "Modifying their ", "Creatin
 
 presence.on("UpdateData", async () => {
     strings = await presence.getStrings({
-        live: "presence.activity.live",
         play: "presence.playback.playing",
         pause:  "presence.playback.paused"
     });
@@ -71,11 +70,7 @@ presence.on("UpdateData", async () => {
                 case false:
                     presenceData.smallImageKey = 'pause';
                     presenceData.smallImageText = strings.pause;
-                    presenceData.endTimestamp = new Date(Date.now() + (video.duration - video.currentTime) * 1000).getTime();
-                    break;
-                default:
-                    presenceData.smallImageKey = null;
-                    presenceData.smallImageText = null;
+                    presenceData.endTimestamp = null;
                     break;
             }
             presenceData.details = "Watching " + clipTitle[0] + " to";
