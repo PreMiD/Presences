@@ -12,7 +12,7 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "itv_logo",
     startTimestamp: new Date().getTime()
   };

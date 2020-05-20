@@ -11,7 +11,7 @@ const generosObra: HTMLElement = document.querySelector("#app > div.theme-contai
 const tagTexto: HTMLElement = document.querySelector("#app > div.theme-container.no-sidebar > main > div.features > h3");
 
 presence.on("UpdateData", async () => {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "logo"
     };
 

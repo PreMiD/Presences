@@ -9,7 +9,7 @@ const mangaAno: HTMLElement = document.querySelector("#blog > div > div > div > 
 const tituloNoticia: HTMLElement = document.querySelector("#blog > div > div > div > div.blog-item > div > div.col-xs-12.col-sm-10.blog-content > h2 > a");
 
 presence.on("UpdateData", async () => {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "logo"
     };
 

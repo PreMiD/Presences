@@ -5,7 +5,7 @@ const presence = new Presence({
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo",
     smallImageKey: "reading",
     smallImageText: "Reading Node.js Doc's",

@@ -8,14 +8,14 @@ presence.on("UpdateData", async () => {
   const charParam = urlParams.get("char");
   if (typeParam == "original") {
     if (charParam.toLowerCase() == "taiga") {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: "Looking at screenshots",
         state: "Taiga Aisaka",
         largeImageKey: "lg-tapi"
       };
       presence.setActivity(presenceData);
     } else {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: "Looking at screenshots",
         largeImageKey: "lg-tapi"
       };
@@ -23,21 +23,21 @@ presence.on("UpdateData", async () => {
     }
   } else if (typeParam == "fanart") {
     if (charParam.toLowerCase() == "taiga") {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: "Looking at fanart",
         state: "Taiga Aisaka",
         largeImageKey: "lg-tapi"
       };
       presence.setActivity(presenceData);
     } else {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: "Looking at fanart",
         largeImageKey: "lg-tapi"
       };
       presence.setActivity(presenceData);
     }
   } else {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "lg-tapi"
     };
     presence.setActivity(presenceData);

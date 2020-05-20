@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "684627733145452555"
 });
 
-let presenceData: presenceData;
+let presenceData: PresenceData;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 function PerfilStatus(detail, state): void {

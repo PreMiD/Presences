@@ -13,7 +13,7 @@ var browsingStamp = 0; //Timestamp when started listening to a radio station
 
 presence.on("UpdateData", async () => {
   const path = window.location.pathname.split("/").slice(1);
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: "Radio.net",
     largeImageKey: "logo_big"
   };

@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  var data: presenceData = {
+  var data: PresenceData = {
     details: title,
     state: info,
     largeImageKey: image,

@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 let tag, nickname;
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "astriologo",
     smallImageKey: "transparent"
   };

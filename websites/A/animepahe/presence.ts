@@ -52,7 +52,7 @@ presence.on("iFrameData", (data) => {
 
 presence.on("UpdateData", async () => {
   const path = document.location.pathname;
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "animepahe",
     details: "loading",
     state: "animepahe"

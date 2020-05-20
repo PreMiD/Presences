@@ -3,7 +3,7 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     details: "Viewing the homepage...",
     largeImageKey: "lg-gb"
   };

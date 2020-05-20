@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
     var profileCurrentTab = profileURL.searchParams.get("tab");
   }
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
   };

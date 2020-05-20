@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       .querySelector(".page-jump.text-center")
       .getAttribute("value");
 
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: a.innerText,
       state: b.innerText + " [Page: " + page + "]",
       largeImageKey: "lg"
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData, true);
   } else {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "lg"
     };
 
