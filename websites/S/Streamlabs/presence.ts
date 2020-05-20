@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
     }
 
     if (document.location.pathname.includes("/clips/watch")) {
-      var video: HTMLVideoElement = document.querySelector(".video-js > video");
+      video = document.querySelector(".video-js > video");
       clipTitle = document
         .querySelector(".clip__action-info > div:nth-child(1)")
         .innerHTML.split(" ");
@@ -189,7 +189,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = titleSiteCreator;
     }
-  }
+
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
