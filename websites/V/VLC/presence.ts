@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "654399399316684802"
   }),
   strings = presence.getStrings({
@@ -6,12 +6,7 @@ var presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
   }),
-  isShow = false,
-  isSong = false,
-  prev: string,
-  elapsed: number,
-  i: number,
-  media = {
+  media: MediaObj = {
     // anyone is welcome to suggest more metadata via GH issues
     time: null,
     length: null,
@@ -27,6 +22,11 @@ var presence = new Presence({
     seasonNumber: null,
     episodeNumber: null
   };
+let isShow = false,
+  isSong = false,
+  prev: string,
+  elapsed: number,
+  i: number;
 
 /**
  * Get Timestamps
@@ -37,24 +37,27 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-function setLoop(f: Function, ms: number): any {
+function setLoop(f: Function, ms: number): number {
   f();
   return setInterval(f, ms);
 }
 
-function decodeReq(entity: Element): any {
+function decodeReq(entity: Element): string {
   // decoding HTML entities the stackoverflow way
-  var txt = document.createElement("textarea");
+  const txt = document.createElement("textarea");
   txt.innerHTML = entity.textContent;
   return txt.value;
 }
 
-function getTag(collection: any[], tagName: string): any {
+function getTag(
+  collection: HTMLCollectionOf<Element>,
+  tagName: string
+): Element {
   for (const tag of collection) {
     if (tag.getAttribute("name") === tagName) return tag;
   }
@@ -65,11 +68,11 @@ presence.on("UpdateData", async () => {
     document.querySelector(".footer") &&
     document.querySelector(".footer").textContent.includes("VLC")
   ) {
-    var data: PresenceData = {
+    const data: PresenceData = {
       largeImageKey: "vlc"
     };
 
-    var timestamps = getTimestamps(Number(media.time), Number(media.length));
+    const timestamps = getTimestamps(Number(media.time), Number(media.length));
 
     if (media.state !== prev) {
       prev = media.state;
@@ -166,7 +169,7 @@ presence.on("UpdateData", async () => {
   }
 });
 
-var getStatus = setLoop(function () {
+const getStatus = setLoop(function () {
   if (
     document.querySelector(".footer") &&
     document.querySelector(".footer").textContent.includes("VLC")
@@ -207,9 +210,7 @@ var getStatus = setLoop(function () {
           }
 
           if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
-            const collection = (req.responseXML.getElementsByTagName(
-              "info"
-            ) as unknown) as any[];
+            const collection = req.responseXML.getElementsByTagName("info");
 
             // basically the same thing but with a Firefox workaround because it's annoying
 
@@ -357,3 +358,19 @@ var getStatus = setLoop(function () {
     req.send();
   }
 }, (navigator.userAgent.toLowerCase().indexOf("firefox") > -1 ? 5 : 2) * 1000); // if you lower it, you may as well fry the CPU
+
+interface MediaObj {
+  time: string;
+  length: string;
+  state: string;
+  loop: string;
+  repeat: string;
+  filename: string;
+  title: string;
+  album: string;
+  artist: string;
+  track_number: string;
+  showName: string;
+  seasonNumber: string;
+  episodeNumber: string;
+}

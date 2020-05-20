@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640289470855380992"
   }),
   strings = presence.getStrings({
@@ -8,42 +8,45 @@ var presence = new Presence({
   });
 
 function getTime(list: string[]): number {
-  var ret = 0;
+  let ret = 0;
   for (let index = list.length - 1; index >= 0; index--) {
     ret += parseInt(list[index]) * 60 ** index;
   }
   return ret;
 }
 
-function getTimestamps(audioTime: any, audioDuration: any): Array<number> {
-  audioTime = getTime(audioTime.split(":").reverse());
-  audioDuration = getTime(audioDuration.split(":").reverse());
+function getTimestamps(
+  audioTime: string,
+  audioDuration: string
+): Array<number> {
+  const aT = getTime(audioTime.split(":").reverse()),
+    aD = getTime(audioDuration.split(":").reverse());
 
-  var endTime = Math.floor(Date.now() / 1000) - audioTime + audioDuration;
+  const endTime = Math.floor(Date.now() / 1000) - aT + aD;
 
   return [Math.floor(Date.now() / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
-  var data: PresenceData = {
+  const data: PresenceData = {
     largeImageKey: "anlg"
   };
 
-  var playback: boolean = document.querySelector("anghami-player") != null;
+  const playback: boolean = document.querySelector("anghami-player") != null;
 
   if (playback) {
-    var selectors: NodeListOf<Node> = document.querySelectorAll(
+    const selectors: NodeListOf<Node> = document.querySelectorAll(
       ".duration-text"
     );
-    var current: string =
-      (selectors[0] && selectors[0].textContent.trim()) || "0:0";
-    var length: string =
-      (selectors[1] && selectors[1].textContent.trim()) || "0:0";
-    var timestamps = getTimestamps(current, length);
+    const current: string =
+        (selectors[0] && selectors[0].textContent.trim()) || "0:0",
+      length: string =
+        (selectors[1] && selectors[1].textContent.trim()) || "0:0",
+      timestamps = getTimestamps(current, length);
 
-    var playing: boolean =
+    const playing: boolean =
       document.querySelector("anghami-player anghami-icon.icon.pause") != null;
-    var selector: Node = document.querySelector(
+    let selector: Node = document.querySelector(
       "anghami-player .action-title .trim"
     );
     data.details = (selector && selector.textContent) || null;
