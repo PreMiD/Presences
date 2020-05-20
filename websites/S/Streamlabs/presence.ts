@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
         play: "presence.playback.playing",
         pause:  "presence.playback.paused"
     });
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "logo"
     };
 
