@@ -2,14 +2,14 @@ const presence = new Presence({
   clientId: "708981544487878738"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
-let title: String;
-let author: String;
-let playbackStatus: String;
+let title: string;
+let author: string;
+let playbackStatus: string;
 
-function getStatus() :String{
-  let playPauseBtn = document.querySelector("#play-button");
+function getStatus():string{
+  const playPauseBtn = document.querySelector("#play-button");
   if(playPauseBtn.className === "fas fa-play"){
     return "Paused";
   }
@@ -31,10 +31,10 @@ presence.on("UpdateData", async () => {
       playbackStatus = getStatus();
       if(playbackStatus === "Paused"){
         presenceData.smallImageKey = "no-cast";
-      };
+      }
       if(playbackStatus === "Playing"){
         presenceData.smallImageKey = "transparent";
-      };
+      }
       presenceData.state = title.innerText;
       presenceData.details = author.innerText;
       presenceData.smallImageText = playbackStatus;
