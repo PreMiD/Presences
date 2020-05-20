@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
       break;
   }
 
-  var data: presenceData = {
+  var data: PresenceData = {
     details: title,
     state: artist,
     largeImageKey: "pandora",

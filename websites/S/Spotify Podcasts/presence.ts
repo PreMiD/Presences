@@ -45,7 +45,7 @@ const browsingStamp = Math.floor(Date.now() / 1000);
 let playback: boolean;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "spotify"
   };
 

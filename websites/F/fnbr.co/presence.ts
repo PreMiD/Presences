@@ -3,7 +3,7 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "logo"
   };
   var path = document.location.pathname;

@@ -287,7 +287,7 @@ presence.on("UpdateData", async () => {
     console.error(err);
   }
 
-  var data: presenceData = {
+  var data: PresenceData = {
     details: title,
     state: streamer,
     largeImageKey: largeImage,

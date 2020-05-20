@@ -7,7 +7,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 var title: Element;
 
 presence.on("UpdateData", async () => {
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "skyra"
   };
 

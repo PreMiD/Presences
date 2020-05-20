@@ -53,7 +53,7 @@ let layout: string;
 const elapsed: number = Math.round((new Date()). getTime() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "jackbox"
   };
 

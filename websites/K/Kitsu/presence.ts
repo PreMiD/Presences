@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "629413852391669791"
 });
-const presenceData: presenceData = {
+const presenceData: PresenceData = {
   largeImageKey: "kitsu_lg"
 };
 

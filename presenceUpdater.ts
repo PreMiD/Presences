@@ -1,7 +1,12 @@
 import "source-map-support/register";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { connect, MongoClient } from "mongodb";
+import {
+  connect,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  MongoClient,
+  DeleteWriteOpResultObject,
+  UpdateWriteOpResult
+} from "mongodb";
 import { existsSync, readFileSync } from "fs";
 import { sync as glob } from "glob";
 import {
@@ -100,10 +105,10 @@ async function run(MongoClient: MongoClient): Promise<void> {
 
   const presenceFolders = glob("./{websites,programs}/*/*/"),
     db = MongoClient.db("PreMiD").collection("presences"),
-    dbPresences = await db
+    dbPresences: Array<DBdata> = await db
       .find({}, { projection: { _id: 0, name: 1, "metadata.version": 1 } })
       .toArray(),
-    presences = presenceFolders
+    presences: Array<[Metadata, string]> = presenceFolders
       .filter((pF) => existsSync(`${pF}/dist/metadata.json`))
       .map((pF) => {
         const file = readFile(`${pF}/dist/metadata.json`);
@@ -140,10 +145,10 @@ async function run(MongoClient: MongoClient): Promise<void> {
   if (dbDiff.length > 0) console.log("\nCOMPILING...\n");
 
   let nP,
-    dP = [],
-    oP = [];
+    dP: Promise<DeleteWriteOpResultObject>[] = [],
+    oP: Promise<UpdateWriteOpResult>[] = [];
 
-  const compiledPresences = await Promise.all(
+  let compiledPresences = await Promise.all(
     dbDiff.map(async (file) => {
       let metadata = file[0];
       const path = file[1],
@@ -184,7 +189,7 @@ async function run(MongoClient: MongoClient): Promise<void> {
         return null;
       }
 
-      const resJson: any = {
+      const resJson: DBdata = {
         name: metadata.service,
         url: `https://api.premid.app/v2/presences/${encodeURIComponent(
           metadata.service
@@ -214,6 +219,11 @@ async function run(MongoClient: MongoClient): Promise<void> {
   );
 
   console.log("\nUPDATING...\n");
+
+  if (compiledPresences.length > 50) {
+    compiledPresences = compiledPresences.slice(0, 50);
+    console.log("Limiting to 50 presences for the current run.\n");
+  }
 
   const bulkNp = compiledPresences.filter((e) =>
       newPresences.some((p) => e && e.name === p[0].service)
@@ -284,4 +294,12 @@ interface Metadata {
     value?: string | number | boolean;
     values?: Array<string | number | boolean>;
   }>;
+}
+
+interface DBdata {
+  name: string;
+  url: string;
+  metadata: Metadata;
+  presenceJs: string;
+  iframeJs?: string;
 }

@@ -25,7 +25,7 @@ function getTimestamps(audioTime: any, audioDuration: any): Array<number> {
 }
 
 presence.on("UpdateData", async () => {
-  var data: presenceData = {
+  var data: PresenceData = {
     largeImageKey: "anlg"
   };
 

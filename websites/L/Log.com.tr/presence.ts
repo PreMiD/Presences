@@ -4,7 +4,7 @@ const presence = new Presence({
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
-const presenceData: presenceData = {
+const presenceData: PresenceData = {
   largeImageKey: "log-logo",
   startTimestamp: browsingStamp
 };

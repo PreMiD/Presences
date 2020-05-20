@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "dafont",
       startTimestamp: Math.floor(Date.now() / 1000)
     },

@@ -35,7 +35,7 @@ function getTimeLeft(Time: string[]): Array<number> {
 }
 
 presence.on("UpdateData", async () => {
-  const Data: presenceData = {
+  const Data: PresenceData = {
     largeImageKey: "musescore"
   };
 

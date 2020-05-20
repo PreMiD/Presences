@@ -33,7 +33,7 @@ function getTimestamps(audioTime: any, audioDuration: string): Array<number> {
 }
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "wf"
   };
 

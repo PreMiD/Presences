@@ -23,7 +23,7 @@
     "telegram.taigabot.net",
     "translate.taigabot.net"
   ],
-  "version": "1.2.2",
+  "version": "1.2.3",
   "logo": "https://cdn.taigabot.net/assets/branding/taiga/premid_logo.png",
   "thumbnail": "https://cdn.taigabot.net/assets/branding/taiga/premid_banner.png",
   "color": "#ff006d",

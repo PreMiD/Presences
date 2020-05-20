@@ -5,7 +5,7 @@ var presence = new Presence({
 let cpuUsage: any, contributingProject: any;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
   if (document.location.hostname == "client.foldingathome.org") {

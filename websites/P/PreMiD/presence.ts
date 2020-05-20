@@ -16,7 +16,7 @@ function pathIncludes(string: string): boolean {
 }
 
 presence.on("UpdateData", async () => {
-  var data: presenceData = {
+  var data: PresenceData = {
     largeImageKey: "lg",
     startTimestamp: timestamp
   };
