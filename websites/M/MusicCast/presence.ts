@@ -8,7 +8,7 @@ let title: string;
 let author: string;
 let playbackStatus: string;
 
-function getStatus():string{
+function getStatus(): string{
   const playPauseBtn = document.querySelector("#play-button");
   if(playPauseBtn.className === "fas fa-play"){
     return "Paused";
