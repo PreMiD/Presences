@@ -6,7 +6,6 @@ let path;
 let strings;
 let clipTitle;
 let clipAuthor;
-let video: HTMLVideoElement;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -94,7 +93,7 @@ presence.on("UpdateData", async () => {
         //Class categories
         if(window.location.pathname == "/classes"){
             presenceData.startTimestamp = browsingStamp;
-            return presenceData.details = "Browsing classes";;
+            return presenceData.details = "Browsing classes";
         }
 
         //Class category
@@ -135,19 +134,19 @@ presence.on("UpdateData", async () => {
                     break;
                 case "walking":
                     presenceData.startTimestamp = browsingStamp;
-                    presenceData.details = "Browsing walking classes";;
+                    presenceData.details = "Browsing walking classes";
                     break;
                 case "bootcamp":
                     presenceData.startTimestamp = browsingStamp;
-                    presenceData.details = "Browsing bootcamp classes";;
+                    presenceData.details = "Browsing bootcamp classes";
                     break;
             }
 
             //Video
             if(path.includes("player/")){
-                let video: HTMLVideoElement = document.querySelector(".jw-video");
-                clipTitle = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > h1").textContent.replace("&amp;", "&");
-                clipAuthor = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > p").textContent.split("<");
+                const video: HTMLVideoElement = document.querySelector(".jw-video");
+                clipTitle = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > h1").textContent;
+                clipAuthor = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > p").textContent;
                 
                 switch(!video.paused){
                     case true:
@@ -168,7 +167,7 @@ presence.on("UpdateData", async () => {
 
         //Live
         if(window.location.pathname.includes("/player/live")){
-            video = document.querySelector(".jw-video");
+            const video: HTMLVideoElement = document.querySelector(".jw-video");
             clipTitle = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > h1").textContent;
             clipAuthor = document.querySelector(".jw-controlbar > div:nth-child(3) > div > div > div > p").textContent;
             
@@ -188,7 +187,7 @@ presence.on("UpdateData", async () => {
 
         //schedule
         if(window.location.pathname.includes("/schedule/")){
-            path = window.location.pathname.replace("/schedule/", "")
+            path = window.location.pathname.replace("/schedule/", "");
             switch(path){
                 case "strength":
                     presenceData.startTimestamp = browsingStamp;
