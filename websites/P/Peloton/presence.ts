@@ -6,7 +6,7 @@ let path;
 let strings;
 let clipTitle;
 let clipAuthor;
-let clipTimeLeft: any;
+let clipTimeLeft: string | number;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
