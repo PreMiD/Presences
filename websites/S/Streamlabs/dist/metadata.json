@@ -1,28 +1,28 @@
 {
-    "author": {
-        "name": "The Gamerzs",
-        "id": "181835340330303497"
-    },
-    "url": [
-        "streamlabs.com",
-        "dev.streamlabs.com",
-        "howto.streamlabs.com",
-        "ideas.streamlabs.com",
-        "support.streamlabs.com"
-    ],
-    "description": {
-        "en": "Streamlabs makes the best streaming software tools."
-    },
-    "service": "Streamlabs",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/a2NN4ax.png",
-    "thumbnail": "https://i.imgur.com/IuULwTC.png",
-    "color": "#80F5D2",
-    "tags": [
-        "games",
-        "social",
-        "videos",
-        "streaming"
-    ],
-    "category": "videos"
+  "author": {
+    "name": "The Gamerzs",
+    "id": "181835340330303497"
+  },
+  "url": [
+    "streamlabs.com",
+    "dev.streamlabs.com",
+    "howto.streamlabs.com",
+    "ideas.streamlabs.com",
+    "support.streamlabs.com"
+  ],
+  "description": {
+    "en": "Streamlabs makes the best streaming software tools."
+  },
+  "service": "Streamlabs",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/a2NN4ax.png",
+  "thumbnail": "https://i.imgur.com/IuULwTC.png",
+  "color": "#80F5D2",
+  "tags": [
+    "games",
+    "social",
+    "videos",
+    "streaming"
+  ],
+  "category": "videos"
 }

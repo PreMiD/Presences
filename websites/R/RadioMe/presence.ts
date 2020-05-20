@@ -50,7 +50,7 @@ switch (language) {
 presence.on("UpdateData", async () => {
   const host = window.location.hostname.replace("www.", "");
   const path = window.location.pathname.split("/").slice(1);
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: "RadioMe",
     largeImageKey: "logo_big"
   };

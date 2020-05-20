@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       : false;
 
   if (!playback) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "lg"
     };
 
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      presenceData: presenceData = {
+      presenceData: PresenceData = {
         details: videoTitle.innerText,
         state: episode.innerText,
         largeImageKey: "lg",

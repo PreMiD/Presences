@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     } else {
       pageText = page.textContent;
     }
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing a page...",
       state: pageText,
       largeImageKey: "logo"

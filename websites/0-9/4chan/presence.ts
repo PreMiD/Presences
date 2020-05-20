@@ -38,7 +38,7 @@ presence.on("UpdateData", () => {
     if (query3) title += ` - ${query4}/${query3}`;
     return title;
   };
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: getTitle(),
     largeImageKey: "logo",
     startTimestamp: browsingStamp

@@ -1,7 +1,7 @@
 var presence = new Presence({
     clientId: "651406405093425152"
   }),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

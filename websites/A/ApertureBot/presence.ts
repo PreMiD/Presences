@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     "#page-wrapper > div > div > div > div > div.panel-heading"
   );
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "ap-logo_new",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

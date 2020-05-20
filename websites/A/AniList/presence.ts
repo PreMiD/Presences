@@ -8,7 +8,7 @@ const presence: Presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "anilist_lg",
     startTimestamp
   };
