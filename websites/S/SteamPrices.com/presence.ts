@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "712660244383399946"
+    clientId: "712891558491324452"
   }),
   startBrowse = Date.now(),
   presenceData: PresenceData = {
@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.split('/').slice(-1)[0] == "" && document.location.search == "") {
     presenceData.details = "Viewing the homepage";
-  } else if ((document.location.href.indexOf("/search/") > -1)) {
+  } else if ((document.location.href.indexOf("/search") > -1)) {
     if (queryparams.get('preset') == "discount") {
       presenceData.details = "Searching for a discounted game";
     } else if (queryparams.get('preset') == "unfair") {

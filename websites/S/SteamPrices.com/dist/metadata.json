@@ -8,7 +8,7 @@
     "en": "SteamPrices.com is a website that enables anyone to compare prices between regions, such as the US, UK, and many more."
   },
   "service": "SteamPrices.com",
-  "version": "1.0",
+  "version": "1.0.0",
   "logo": "https://img.ezz.moe/0521/12-46-13.png",
   "thumbnail": "https://img.ezz.moe/0520/20-43-29.png",
   "color": "#4277BC",
