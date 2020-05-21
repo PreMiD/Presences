@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
     };
 
   if (path.startsWith("/dizi/")) {
-    let showTitle = document.querySelector(
+    const showTitle = document.querySelector(
       "div.content > div > div.top-sticky-content div > h1 > a"
     );
 
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(object);
   } else if (path.startsWith("/oyuncular/")) {
-    let actorName = document.querySelector(
+    const actorName = document.querySelector(
       "div.content > div > div.top-sticky-content div > span"
     );
 
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(object);
   } else if (path.startsWith("/dizi-turu/")) {
-    let genre = document.querySelector(
+    const genre = document.querySelector(
       "div.content > div > div.top-sticky-content div > h1"
     );
 
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(object);
   } else if (path.startsWith("/kanal/")) {
-    let title: string = document.title.slice(
+    const title: string = document.title.slice(
       0,
       document.title.indexOf("arşivleri")
     );
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(object);
   } else if (path.startsWith("/arsiv/")) {
-    let url: URL = new URL(document.location.href),
+    const url: URL = new URL(document.location.href),
       query = url.searchParams.get("q");
 
     object.startTimestamp = Date.now();
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
     showName?.innerText &&
     episode?.textContent
   ) {
-    let timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video?.currentTime),
       Math.floor(video?.duration)
     );
