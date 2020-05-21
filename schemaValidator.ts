@@ -25,7 +25,7 @@ const metaFiles = glob('./websites/*/*/dist/metadata.json', {
     absolute: true
 });
 
-(async (): void => {
+(async (): Promise<void> => {
     console.log(blue('Getting latest schema...'));
 
     const schema = (await axios.get(latestMetadataSchema)).data;
