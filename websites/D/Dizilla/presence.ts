@@ -88,6 +88,8 @@ presence.on("UpdateData", async () => {
     let url: URL = new URL(document.location.href),
       query = url.searchParams.get("q");
 
+    object.startTimestamp = Date.now();
+
     if (query) {
       object.details = "Bir şey arıyor:";
       object.state = query[0].toUpperCase() + query.slice(1).toLowerCase();
@@ -95,7 +97,6 @@ presence.on("UpdateData", async () => {
     } else {
       object.details = "Bir sayfaya göz atıyor:";
       object.state = "Arşiv";
-      object.startTimestamp = Date.now();
     }
 
     presence.setActivity(object);
