@@ -13,7 +13,6 @@
     "pu:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./presenceUpdater.ts"
   },
   "devDependencies": {
-    "@actions/core": "^1.2.4",
     "@types/chrome": "^0.0.112",
     "@types/glob": "^7.1.1",
     "@types/mongodb": "^3.5.18",

@@ -2,7 +2,6 @@ import 'source-map-support/register';
 
 import axios from 'axios';
 import { green, yellow, red, blue } from 'chalk';
-import * as core from '@actions/core';
 import * as fs from 'fs';
 import { sync as glob } from 'glob';
 import { validate } from 'jsonschema';
@@ -17,7 +16,7 @@ const stats = {
 
 const validated = (service: string) => { console.log(green(`✔ ${service}`)); stats.validated++; };
 const validatedWithWarnings = (service: string, warning: string) => { console.log(yellow(`✔ ${service} (${warning})`)); stats.validatedWithWarnings++; };
-const failedToValidate = (service: string, error: string) => { console.log(red(`✘ ${service} (${error})`)); core.error(`${service} (${error}`); stats.failedToValidate++; };
+const failedToValidate = (service: string, error: string) => { console.log(red(`✘ ${service} (${error})`)); stats.failedToValidate++; };
 
 const loadMetadata = (path: string) => JSON.parse(fs.readFileSync(path, 'utf-8'));
 
