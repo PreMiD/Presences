@@ -18,6 +18,7 @@ const validated = (service: string): void => { console.log(green(`✔ ${service}
 const validatedWithWarnings = (service: string, warning: string): void => { console.log(yellow(`✔ ${service} (${warning})`)); stats.validatedWithWarnings++ };
 const failedToValidate = (service: string, error: string): void => { console.log(red(`✘ ${service} (${error})`)); stats.failedToValidate++ };
 
+// @ts-ignore
 const loadMetadata = (path: string): any => JSON.parse(fs.readFileSync(path, 'utf-8'));
 
 const metaFiles = glob('./websites/*/*/dist/metadata.json', {
