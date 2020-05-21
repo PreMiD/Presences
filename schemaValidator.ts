@@ -2,7 +2,7 @@ import 'source-map-support/register';
 
 import axios from 'axios';
 import { green, yellow, red, blue } from 'chalk';
-import core from '@actions/core';
+import * as core from '@actions/core';
 import * as fs from 'fs';
 import { sync as glob } from 'glob';
 import { validate } from 'jsonschema';
