@@ -14,18 +14,18 @@ const stats = {
     failedToValidate: 0
 };
 
-const validated = (service: string) => { console.log(green(`✔ ${service}`)); stats.validated++; };
-const validatedWithWarnings = (service: string, warning: string) => { console.log(yellow(`✔ ${service} (${warning})`)); stats.validatedWithWarnings++; };
-const failedToValidate = (service: string, error: string) => { console.log(red(`✘ ${service} (${error})`)); stats.failedToValidate++; };
+const validated = (service: string): void => { console.log(green(`✔ ${service}`)); stats.validated++ };
+const validatedWithWarnings = (service: string, warning: string): void => { console.log(yellow(`✔ ${service} (${warning})`)); stats.validatedWithWarnings++ };
+const failedToValidate = (service: string, error: string): void => { console.log(red(`✘ ${service} (${error})`)); stats.failedToValidate++ };
 
-const loadMetadata = (path: string) => JSON.parse(fs.readFileSync(path, 'utf-8'));
+const loadMetadata = (path: string): any => JSON.parse(fs.readFileSync(path, 'utf-8'));
 
 const metaFiles = glob('./websites/*/*/dist/metadata.json', {
     ignore: ['**/node_modules/**', '**/@types/**'],
     absolute: true
 });
 
-(async () => {
+(async (): void => {
     console.log(blue('Getting latest schema...'));
 
     const schema = (await axios.get(latestMetadataSchema)).data;
