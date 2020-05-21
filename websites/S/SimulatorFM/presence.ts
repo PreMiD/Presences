@@ -28,7 +28,7 @@ getSongData();
 const currentTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "sfmlogo"
   };
   if (document.location.hostname == "simulator.fm") {

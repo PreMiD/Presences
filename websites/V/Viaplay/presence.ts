@@ -33,7 +33,7 @@ function capitalise(splitStr): string {
 }
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {
+  let presenceData: PresenceData = {
     largeImageKey: "large_img",
     startTimestamp
   };

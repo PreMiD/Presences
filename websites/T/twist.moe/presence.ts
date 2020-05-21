@@ -32,7 +32,7 @@ if (lastPlaybackState != playback) {
 presence.on("UpdateData", async () => {
   playback = document.querySelector(".AT-player video") !== null ? true : false;
 
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "lg"
   };
 

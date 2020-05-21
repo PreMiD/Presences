@@ -14,7 +14,7 @@ let subReddit: string,
   rpanTitle: string;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "reddit_lg",
     startTimestamp
   };

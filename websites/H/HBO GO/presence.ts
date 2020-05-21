@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
     "#hbo-sdk--controller-container #hbo-sdk--controller-osd #hbo-sdk--vid #hbo-sdk--vid_Clpp_html5_mse_smooth_api"
   );
 
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "lg"
   };
   if (!playback || (video.paused && video[0] == null)) {

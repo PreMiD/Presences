@@ -3,7 +3,7 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  var presenceData = await presence.getPageLetiable("PreMiD_PresenceData");
+  var presenceData = await presence.getPageletiable("PreMiD_PresenceData");
 
   if (presenceData === null) presence.setActivity();
   else presence.setActivity(presenceData.data);

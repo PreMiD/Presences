@@ -5,7 +5,7 @@ const browsingStamp = Math.floor(Date.now() / 1000);
 let priceEls;
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

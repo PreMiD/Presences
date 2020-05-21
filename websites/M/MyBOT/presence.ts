@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
     path = doc.pathname,
     hash = doc.hash,
     owo = path.split("/"),
-    presenceData: presenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "maisbos_1_"
     };
   if (path === "/") {

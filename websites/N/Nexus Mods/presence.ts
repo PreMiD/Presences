@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "683438933841018928"
 });
 
-let presenceData: presenceData;
+let presenceData: PresenceData;
 
 /**
  * Checks whether the provided name is a valid game against a list of pathname
@@ -941,7 +941,7 @@ function getCategorizedPresenceData(
   typeUrl,
   typeSingle,
   typePlural
-): presenceData {
+): PresenceData {
   if (
     path.length > 3 &&
     path[0] !== "" &&

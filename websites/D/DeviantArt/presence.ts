@@ -5,7 +5,7 @@ var presence = new Presence({
 var currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.slice(1).split("/"),
   browsingStamp = Math.floor(Date.now() / 1000),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
     startTimestamp: browsingStamp
@@ -84,7 +84,7 @@ function getURLParam(urlParam: string): string {
 
 		For future developers:
 
-		These domains are supported. 
+		These domains are supported.
 		- www.deviantart.com
 		- about.deviantart.com
 		- chat.deviantart.com
@@ -106,7 +106,7 @@ function getURLParam(urlParam: string): string {
   if (currentURL.hostname === "www.deviantart.com") {
     let loadedPath: string,
       forceUpdate = false,
-      presenceDataPlaced: presenceData = {},
+      presenceDataPlaced: PresenceData = {},
       retries = 0,
       profileType: string,
       websiteTheme: string;
@@ -234,9 +234,9 @@ function getURLParam(urlParam: string): string {
           } else if (currentPath[0] === "daily-deviations") {
             presenceData.details = "Viewing daily deviations";
             if (websiteTheme === "eclipse")
-              presenceData.state = document.querySelector(
+              presenceData.state = (document.querySelector(
                 "#daily-deviation-picker"
-              ).value;
+              ) as HTMLInputElement).value;
             else
               presenceData.state = document
                 .querySelector(".dailyDevCurDate")
@@ -563,7 +563,7 @@ function getURLParam(urlParam: string): string {
         // Disabled for privacy reasons. Might be enabled if settings is a thing.
 
         // var channel = () => document.querySelector(".damnc-tabbar strong").textContent,
-        // 	loadedChannel = "", forceUpdate = false, presenceDataPlaced: presenceData = {}, retries = 0
+        // 	loadedChannel = "", forceUpdate = false, presenceDataPlaced: PresenceData = {}, retries = 0
 
         // updateCallback.function = () => {
 
@@ -640,7 +640,7 @@ function getURLParam(urlParam: string): string {
     }
   } else if (currentURL.hostname === "www.deviantartsupport.com") {
     let currentTitle = "",
-      presenceDataPlaced: presenceData = {};
+      presenceDataPlaced: PresenceData = {};
 
     updateCallback.function = (): void => {
       if (currentTitle !== document.title.split(" - ")[0]) {
@@ -659,7 +659,7 @@ function getURLParam(urlParam: string): string {
   } else if (currentURL.hostname === "sta.sh") {
     let loadedPath: string,
       forceUpdate = false,
-      presenceDataPlaced: presenceData = {},
+      presenceDataPlaced: PresenceData = {},
       retries = 0;
 
     updateCallback.function = (): void => {

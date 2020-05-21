@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      presenceData: presenceData = {
+      presenceData: PresenceData = {
         details: title ? title.innerText : "Title not found...",
         state: uploader ? uploader.textContent : "Uploader not found...",
         largeImageKey: "lg",

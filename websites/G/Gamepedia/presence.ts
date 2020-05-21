@@ -5,7 +5,7 @@ var presence = new Presence({
 var currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.slice(1).split("/"),
   browsingStamp = Math.floor(Date.now() / 1000),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
     startTimestamp: browsingStamp
@@ -94,14 +94,17 @@ function resetData(): void {
       };
 
     try {
-      title = document.querySelector("meta[property='og:title']").content;
+      title = (document.querySelector(
+        "meta[property='og:title']"
+      ) as HTMLMetaElement).content;
     } catch (e) {
       title = titleFromURL();
     }
 
     try {
-      sitename = document.querySelector("meta[property='og:site_name']")
-        .content;
+      sitename = (document.querySelector(
+        "meta[property='og:site_name']"
+      ) as HTMLMetaElement).content;
     } catch (e) {
       sitename = null;
     }

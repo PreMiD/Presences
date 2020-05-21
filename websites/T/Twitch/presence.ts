@@ -45,6 +45,10 @@ function getElementTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
+function getElement(query: string): HTMLElement {
+  return document.querySelector(query);
+}
+
 var title,
   streamer,
   largeImage = "twitch",
@@ -60,7 +64,7 @@ var title,
 presence.on("UpdateData", async () => {
   var elements = {
     squad: {
-      users: document.querySelector(
+      users: getElement(
         ".tw-align-items-center.tw-flex.tw-mg-l-1:nth-child(2)"
       ),
       user: (index): Element => {
@@ -70,31 +74,53 @@ presence.on("UpdateData", async () => {
       }
     },
     live: {
-      label: document.querySelector(
-        ".video-player .tw-channel-status-text-indicator"
-      ),
-      title: document.querySelector(".tw-font-size-4.tw-line-height-body"),
-      streamer: document.querySelector(".tw-font-size-5.tw-white-space-nowrap"),
-      host: document.querySelector(".tw-c-text-overlay.tw-strong")
+      label: getElement(".video-player .tw-channel-status-text-indicator"),
+      title:
+        getElement(".tw-ellipsis.tw-font-size-5.tw-word-break-word") ||
+        getElement(
+          ".channel-info-bar__content-container .tw-font-size-4.tw-line-height-body"
+        ),
+      streamer:
+        getElement(".tw-c-text-base.tw-line-height-heading.tw-strong") ||
+        getElement(
+          ".channel-header-user-tab__user-content .tw-font-size-5.tw-white-space-nowrap"
+        ),
+      host: getElement(".video-player-hosting-ui__header .tw-c-text-overlay")
     },
     moderator: {
-      title: document.querySelector(".tw-c-text-overlay.tw-font-size-5"),
-      streamer: document.querySelector(
-        "p > a.tw-interactive.tw-link.tw-link--button.tw-link--overlay"
-      ),
-      live: document.querySelector(".tw-font-size-6.tw-semibold.tw-upcase")
+      title:
+        getElement(".tw-ellipsis.tw-font-size-5.tw-line-clamp-2") ||
+        getElement(".tw-c-text-overlay.tw-font-size-5"),
+      streamer:
+        getElement(".tw-ellipsis.tw-font-size-5.tw-line-height-heading") ||
+        getElement(
+          "p > a.tw-interactive.tw-link.tw-link--button.tw-link--overlay"
+        ),
+      live:
+        getElement(".tw-font-size-6.tw-semibold.tw-upcase") ||
+        getElement(".tw-font-size-6.tw-semibold.tw-upcase")
     },
     video: {
-      title: document.querySelector(".tw-font-size-4.tw-strong"),
-      streamer: document.querySelector(".tw-font-size-5.tw-white-space-nowrap"),
-      time: document.querySelector(".vod-seekbar-time-labels > p:nth-child(1)"),
-      duration: document.querySelector(
-        ".vod-seekbar-time-labels > p:nth-child(2)"
-      )
+      title: getElement(
+        ".channel-root__player-container .tw-font-size-4.tw-strong > span"
+      ),
+      streamer:
+        getElement(".tw-c-text-base.tw-line-height-heading.tw-strong") ||
+        getElement(
+          ".channel-header-user-tab__user-content .tw-font-size-5.tw-white-space-nowrap"
+        ),
+      time: getElement(".vod-seekbar-time-labels > p:nth-child(1)"),
+      duration: getElement(".vod-seekbar-time-labels > p:nth-child(2)")
     },
     clip: {
-      title: document.querySelector(".tw-font-size-4.tw-strong"),
-      streamer: document.querySelector(".tw-font-size-5.tw-white-space-nowrap")
+      title: getElement(
+        ".channel-root__player-container .tw-font-size-4.tw-strong > span"
+      ),
+      streamer:
+        getElement(".tw-c-text-base.tw-line-height-heading.tw-strong") ||
+        getElement(
+          ".channel-header-user-tab__user-content .tw-font-size-5.tw-white-space-nowrap"
+        )
     }
   };
 
@@ -105,17 +131,17 @@ presence.on("UpdateData", async () => {
 
   var video: HTMLVideoElement = document.querySelector("video");
 
-  var squad = document.querySelector(".squad-stream-top-bar__container");
+  var squad = getElement(".squad-stream-top-bar__container");
 
   if (squad) {
     type = "squad";
-  } else if (elements.moderator.title && elements.moderator.streamer) {
-    type = "moderator";
   } else if (
     (elements.live.title && elements.live.streamer && elements.live.label) ||
     elements.live.host
   ) {
     type = "live";
+  } else if (elements.moderator.title && elements.moderator.streamer) {
+    type = "moderator";
   } else if (
     elements.video.title &&
     elements.video.streamer &&
@@ -156,10 +182,10 @@ presence.on("UpdateData", async () => {
       if (type !== "moderator") {
         title = elements.live.title
           ? elements.live.title.textContent
-          : `Hosting ${elements.live.host.textContent}`;
+          : elements.live.host.textContent;
         streamer = elements.live.streamer.textContent;
       }
-      if (window.location.pathname.match("/moderator")) {
+      if (window.location.pathname.includes("/moderator")) {
         title = elements.moderator.title.textContent;
         streamer = `Moderating ${elements.moderator.streamer.textContent}`;
       }
@@ -198,7 +224,7 @@ presence.on("UpdateData", async () => {
     } else if (type === "browsing") {
       var location = window.location.pathname;
 
-      title = "Browsing";
+      title = "Browsing...";
       streamer = undefined;
       smallImageKey = undefined;
       smallImageText = undefined;
@@ -206,57 +232,62 @@ presence.on("UpdateData", async () => {
       videoDuration = undefined;
 
       var user = location.match("/(\\S*)/(\\S*)");
-      var user_header = document.querySelector(".tw-bold.tw-font-size-2");
+      var user_header = getElement(".tw-bold.tw-font-size-2");
 
       if (elements.live.streamer && user && user_header) {
         streamer = elements.live.streamer.textContent + "'s " + user[2];
       }
 
-      if (location.match("/directory")) {
+      if (location.includes("/directory")) {
         streamer = "Categories";
       }
 
-      if (location.match("/directory/all")) {
+      if (location.includes("/directory/all")) {
         streamer = "Live";
       }
 
-      if (location.match("/directory/following")) {
+      if (location.includes("/directory/following")) {
         title = "Browsing Following";
         streamer = "Overview";
       }
 
-      if (location.match("/directory/following/live")) {
+      if (location.includes("/directory/following/live")) {
         streamer = "Live";
       }
 
-      if (location.match("/directory/following/videos")) {
+      if (location.includes("/directory/following/videos")) {
         streamer = "Videos";
       }
 
-      if (location.match("/directory/following/hosts")) {
+      if (location.includes("/directory/following/hosts")) {
         streamer = "Hosts";
       }
 
-      if (location.match("/directory/following/games")) {
+      if (location.includes("/directory/following/games")) {
         streamer = "Categories";
       }
 
-      if (location.match("/directory/following/channels")) {
+      if (location.includes("/directory/following/channels")) {
         streamer = "Channels";
       }
 
-      if (location.match("/directory/game")) {
+      if (location.includes("/directory/esports")) {
+        streamer = "Esports";
+      }
+
+      if (location.includes("/directory/game")) {
         title = "Browsing Game";
         streamer = document.querySelector(
-          ".tw-c-text-base.tw-font-size-2.tw-strong"
+          ".tw-flex.tw-justify-content-between.tw-relative > h1"
         ).textContent;
       }
     }
   } catch (err) {
     console.log("Error! Please contact dev of this presence.");
+    console.error(err);
   }
 
-  var data: presenceData = {
+  var data: PresenceData = {
     details: title,
     state: streamer,
     largeImageKey: largeImage,

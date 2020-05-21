@@ -19,7 +19,7 @@ const obra = document.querySelector("h2.post-title.entry-title").textContent;
 const noticia = document.querySelector("h2.post-title.entry-title").textContent;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "axn-logo"
   };
 
