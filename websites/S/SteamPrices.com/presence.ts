@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "712891558491324452"
   }),
-  startBrowse = Date.now(),
-  presenceData: PresenceData = {
+  startBrowse = Date.now();
+var presenceData: PresenceData = {
     startTimestamp: startBrowse,
     largeImageKey: "logo"
   };
@@ -37,10 +37,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.getElementById("entriesfound").innerText.match(/"(.*?)"/)[0].replace(/"/g,"");
   } else if (document.location.href.indexOf("/app/") > -1) {
     presenceData.details = "Looking at a game";
-    presenceData.state = (<HTMLElement>document.querySelector("h1.title")).innerText.match(/[^\s*].*[^\s*]/)[0];
+    presenceData.state = (document.querySelector("h1.title") as HTMLElement).innerText.match(/[^\s*].*[^\s*]/)[0];
   } else if (document.location.href.indexOf("/bundle/") > -1) {
     presenceData.details = "Looking at a bundle";
-    presenceData.state = (<HTMLElement>document.querySelector("h1.title")).innerText.match(/[^\s*].*[^\s*]/)[0];
+    presenceData.state = (document.querySelector("h1.title") as HTMLElement).innerText.match(/[^\s*].*[^\s*]/)[0];
   } else if (document.location.href.indexOf("/tracker") > -1) {
     presenceData.details = "Tracking game prices";
   } else if (document.location.href.indexOf("/publishers") > -1) {
@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.href.indexOf("/blog") > -1) {
     presenceData.details = "Looking at the blog";
-    if ((<HTMLElement>document.querySelector("h3.block_title.no_margintop")).innerText == "BLOG POST") {
-      presenceData.state = (<HTMLElement>document.querySelector("h4.title")).innerText;
+    if ((document.querySelector("h3.block_title.no_margintop") as HTMLElement).innerText == "BLOG POST") {
+      presenceData.state = (document.querySelector("h4.title") as HTMLElement).innerText;
     }
   } else if (document.location.href.indexOf("/faq") > -1) {
     presenceData.details = "Reading the FAQ";
