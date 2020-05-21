@@ -22,4 +22,4 @@ jobs:
       - name: Compile Script
         run: yarn sv:compile
       - name: Start SV
-        run: yarn sv
+        run: yarn sv --colors
