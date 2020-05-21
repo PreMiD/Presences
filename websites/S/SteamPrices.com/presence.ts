@@ -1,8 +1,8 @@
 const presence = new Presence({
     clientId: "712891558491324452"
   }),
-  startBrowse = Date.now();
-let presenceData: PresenceData = {
+  startBrowse = Date.now(),
+  presenceData: PresenceData = {
     startTimestamp: startBrowse,
     largeImageKey: "logo"
   };
