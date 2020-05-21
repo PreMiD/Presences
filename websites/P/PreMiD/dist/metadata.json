@@ -19,6 +19,10 @@
     {
       "name": "Callum",
       "id": "506899274748133376"
+    },
+    {
+      "name": "Slowftw",
+      "id": "325046217904226306"
     }
   ],
   "service": "PreMiD",
@@ -35,7 +39,7 @@
     "beta.premid.app",
     "status.premid.app"
   ],
-  "version": "2.2.4",
+  "version": "2.2.5",
   "logo": "https://crugg.de/premid/premid2.png",
   "thumbnail": "https://crugg.de/premid/premid3.png",
   "color": "#7289DA",
