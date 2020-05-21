@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
    
     //This is just here so that I can have "changes"  to push to GitHub
 
-    let path = document.location.pathname;
+    const path = document.location.pathname;
     if (window.location.hostname == "bungie.net" || window.location.hostname == "www.bungie.net") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = ("Viewing the Bungie.net Homepage");
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
     }
     else if (path.includes("/en/Forums/Post/")) {
         const titleFourteen = document.querySelector("#topicPost > div > div.threadMeta > div > div > div.authorMeta > a");
-        const titleFTwo = document.querySelector("#topicPost > div > div.threadMeta > div > h1");
+        const titleTwo = document.querySelector("#topicPost > div > div.threadMeta > div > h1");
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = ("Looking at: " + titleTwo.innerHTML + "By: " + titleFourteen.innerHTML);
     }
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
     else if (path.includes("/en/Groups/Chat")) {
         const titleTen = document.querySelector("#groupName");
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = ("Interested/Joined group " + titleFTen.innerHTML);
+        presenceData.details = ("Interested/Joined group " + titleTen.innerHTML);
     }
     else if (path.includes("/en/Community/Creations")) {
         presenceData.startTimestamp = browsingStamp;
