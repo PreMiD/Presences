@@ -19,7 +19,7 @@ console.stdlog("Code injected by PreMiD!")
 let repeatTimer = setInterval(function() {
   if (typeof console.logs == "object") {
     var filteredLogs = console.logs.filter(function(logEntry) {
-      return logEntry[0] == "onJoinRoom" || logEntry[0] == "AS3-BootLoader:" || logEntry[0] == "AS3-GameLoader:" || (logEntry[0] == "received shell error" && logEntry[1].includes("No world with the id of")) || logEntry[0] == "_global[net]" || (typeof logEntry[0]=="string" && logEntry[0].includes("clientManager	: new party"));
+      return logEntry[0] == "onJoinRoom" || logEntry[0] == "AS3-BootLoader:" || (typeof logEntry[0] == "object" && "gameID" in logEntry[0]) || (logEntry[0] == "received shell error" && logEntry[1].includes("No world with the id of")) || logEntry[0] == "_global[net]" || (typeof logEntry[0]=="string" && logEntry[0].includes("clientManager	: new party"));
     });
     var lastLog = filteredLogs.slice(-1).pop();
     if (typeof lastLog !== "undefined") {
@@ -37,10 +37,8 @@ let repeatTimer = setInterval(function() {
         else if (lastLog[0] == "AS3-BootLoader:" && lastLog[1].includes("game")) {
           statuslabel.textContent = lastLog[1].split("game ")[1].replace(" is meant to be high fps, not changing", "").replace(" is over, reset fps", "");
         }
-        else if (lastLog[0] == "AS3-GameLoader:") {
-          if (lastLog[1].includes("isStampEarned")) {
-            statuslabel.textContent = "pufflescape";
-          }
+        else if ((typeof lastLog[0] == "object" && "gameID" in lastLog[0])) {
+          statuslabel.textContent = lastLog[0].gameID;
         }
         else if (lastLog[0] == "_global[net]") {
           statuslabel.textContent = "queued";
@@ -74,9 +72,9 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = elapsed;
 
-  if (document.URL.includes("/#/") == false) {
+  if (document.URL.includes("/#/") == false && document.URL.includes("play.cprewritten.net")) {
     presenceData.largeImageKey = "idlepuffle";
-    presenceData.details = "Viewing Homepage";
+    presenceData.details = "Viewing Main Menu";
   } else if (document.URL.includes("/#/")) {
     if (status == "") {
       if (document.URL.includes("/#/login")) {
@@ -311,7 +309,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "PSA Mission 10";
     } else if (status == "926") {
       presenceData.details = "Online";
-      presenceData.state = " DJ3K";
+      presenceData.state = "DJ3K";
     } else if (status == "927") {
       presenceData.details = "Online";
       presenceData.state = "PSA Mission 11";
@@ -336,9 +334,12 @@ presence.on("UpdateData", async () => {
     } else if (status == "999") {
       presenceData.details = "Online";
       presenceData.state = "Sled Racing";
-    } else if (status == "pufflescape") {
+    } else if (status == "957") {
       presenceData.details = "Online";
       presenceData.state = " Pufflescape";
+    } else if (status == "959") {
+      presenceData.details = "Online";
+      presenceData.state = "Smoothie Smash"
     } else if (status == "941") {
       presenceData.details = "Online";
       presenceData.state = " Puffle Soaker";
@@ -363,12 +364,12 @@ presence.on("UpdateData", async () => {
     } else if (status == "948") {
       presenceData.details = "Online";
       presenceData.state = " Spin to Win";
-    } else if (status.length > 3 && !isNaN(parseInt(status))) {
+    } else if (parseInt(status) > 1003) { // Penguins with a playerID less than 1004 will be reported as being in a room due to igloos reporting the playerID of the owner.
       presenceData.details = "Online";
       presenceData.state = "In an Igloo";
-    } else if (status.length < 4 && !isNaN(parseInt(status))) {
+    } else if (parseInt(status) < 1004) {
       let room = "In a Party Room";
-      // Party room IDs are 851-873 and 899.
+      // Party room IDs are 851-873, 899, and 1000-1003.
       if (status == "854") {
         if (currentParty == "penguinawards") {
           room = "Limo";
@@ -381,7 +382,75 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Online";
       presenceData.state = room;
     }
-  }
+  } else if (document.location.host == "community.cprewritten.net") {
+      if (document.location.pathname == "legal-disclaimer") {
+        presenceData.largeImageKey = "moderator";
+        presenceData.details = "Viewing Legal Disclaimer"
+      } else if (document.location.pathname == "/") {
+        presenceData.largeImageKey = "newspaper";
+        presenceData.details = "Viewing Communtiy Homepage";
+      } else if (document.location.pathname.includes("blog") || document.location.pathname.includes("author") || document.location.pathname.includes("category")) {
+        presenceData.largeImageKey = "newspaper";
+        presenceData.details = "Viewing \"What's New\" Blog";
+        if (document.location.pathname.includes("author")) {
+          let author = document.location.pathname.replace("/author/","").replace("/","");
+          presenceData.state = "Filtering for Articles By" + author.charAt(0).toUpperCase()+author.slice(1);
+        } else if (document.location.pathname.includes("category")) {
+          let s = document.location.pathname.replace("/category/","").replace("/","");
+          function d(s:String) {
+            if (s == "videos") {
+              return "Videos";
+            } else if (s == "news") {
+              return "News";
+            } else if (s == "sneak-peeks") {
+              return "Sneak Peeks";
+            } else if (s == "reviewed-by-you") {
+              return "Reviewed by You";
+            } else if (s == "potw") {
+              return "Penguin of the Week";
+            }
+          } presenceData.state = 'Filtering for "' + d(s) + '"';
+        }
+      } else {
+        presenceData.largeImageKey = "newspaper";
+        presenceData.details = "Reading a Community Post";
+        presenceData.state = document.querySelector(".blog_head h4").textContent + " (" + document.querySelector(".blog_head").textContent.split(" |")[0].replace(document.querySelector(".blog_head h4").textContent, "").replace("\n","").replace("\n","") + ")";
+      }
+    } else if (document.location.host == "cprewritten.net") {
+      if (document.location.pathname == "/") {
+        presenceData.details = "Viewing Homepage";
+      } else if (document.location.pathname.includes("/help/")) {
+        presenceData.details = "Getting Help";
+        if (document.location.pathname == "/help/articles/your_penguin.html") {
+          presenceData.state = "Your Penguin";
+        } else if (document.location.pathname == "/help/articles/mini_games.html") {
+          presenceData.state = "Mini Games";
+        } else if (document.location.pathname == "/help/articles/navigation.html") {
+          presenceData.state = "Navigation";
+        } else if (document.location.pathname == "/help/articles/your_igloo.html") {
+          presenceData.state = "Your Igloo";
+        } else if (document.location.pathname == "/help/articles/penguin_coins.html") {
+          presenceData.state = "Penguin Coins";
+        } else if (document.location.pathname == "/help/articles/newspaper.html") {
+          presenceData.state = "Newspaper";
+        } else if (document.location.pathname == "/help/articles/characters.html") {
+          presenceData.state = "Characters";
+        } else if (document.location.pathname == "/help/articles/special_roles.html") {
+          presenceData.state = "Special Roles";
+        } else if (document.location.pathname == "/help/articles/secrets.html") {
+          presenceData.state = "Secrets";
+        } else if (document.location.pathname == "/help/articles/safety.html") {
+          presenceData.state = "Safety";
+        } else if (document.location.pathname == "/help/articles/other_penguins.html") {
+          presenceData.state = "Other Penguins";
+        } else if (document.location.pathname == "/help/articles/puffles.html") {
+          presenceData.state = "Puffles";
+        } else if (document.location.pathname == "/help/articles/communicating.html") {
+          presenceData.state = "Communicating";
+        }
+      }
+    }
+
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
