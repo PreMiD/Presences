@@ -394,7 +394,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing \"What's New\" Blog";
         if (document.location.pathname.includes("author")) {
           let author = document.location.pathname.replace("/author/","").replace("/","");
-          presenceData.state = "Filtering for Articles By" + author.charAt(0).toUpperCase()+author.slice(1);
+          presenceData.state = "Filtering for Articles By " + author.charAt(0).toUpperCase()+author.slice(1);
         } else if (document.location.pathname.includes("category")) {
           let s = document.location.pathname.replace("/category/","").replace("/","");
           function d(s:String) {
