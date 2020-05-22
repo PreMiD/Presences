@@ -447,6 +447,8 @@ presence.on("UpdateData", async () => {
           presenceData.state = "Puffles";
         } else if (document.location.pathname == "/help/articles/communicating.html") {
           presenceData.state = "Communicating";
+        } else if (document.location.pathname == "/help/articles/tutorial.html") {
+          presenceData.state = "Tutorial";
         }
       }
     }
