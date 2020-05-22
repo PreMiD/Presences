@@ -339,7 +339,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = " Pufflescape";
     } else if (status == "959") {
       presenceData.details = "Online";
-      presenceData.state = "Smoothie Smash"
+      presenceData.state = "Smoothie Smash";
     } else if (status == "941") {
       presenceData.details = "Online";
       presenceData.state = " Puffle Soaker";
@@ -385,7 +385,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.host == "community.cprewritten.net") {
       if (document.location.pathname == "/legal-disclaimer/") {
         presenceData.largeImageKey = "moderator";
-        presenceData.details = "Viewing Legal Disclaimer"
+        presenceData.details = "Viewing Legal Disclaimer";
       } else if (document.location.pathname == "/") {
         presenceData.largeImageKey = "newspaper";
         presenceData.details = "Viewing Communtiy Homepage";
@@ -393,23 +393,22 @@ presence.on("UpdateData", async () => {
         presenceData.largeImageKey = "newspaper";
         presenceData.details = "Viewing \"What's New\" Blog";
         if (document.location.pathname.includes("author")) {
-          let author = document.location.pathname.replace("/author/","").replace("/","");
+          const author = document.location.pathname.replace("/author/","").replace("/","");
           presenceData.state = "Filtering for Articles By " + author.charAt(0).toUpperCase()+author.slice(1);
         } else if (document.location.pathname.includes("category")) {
-          let s = document.location.pathname.replace("/category/","").replace("/","");
-          function d(s:String) {
-            if (s == "videos") {
-              return "Videos";
-            } else if (s == "news") {
-              return "News";
-            } else if (s == "sneak-peeks") {
-              return "Sneak Peeks";
-            } else if (s == "reviewed-by-you") {
-              return "Reviewed by You";
-            } else if (s == "potw") {
-              return "Penguin of the Week";
-            }
-          } presenceData.state = 'Filtering for "' + d(s) + '"';
+          const s = document.location.pathname.replace("/category/","").replace("/","");
+          let n = "";
+          if (s == "videos") {
+            n = "Videos";
+          } else if (s == "news") {
+            n = "News";
+          } else if (s == "sneak-peeks") {
+            n = "Sneak Peeks";
+          } else if (s == "reviewed-by-you") {
+            n = "Reviewed by You";
+          } else if (s == "potw") {
+            n = "Penguin of the Week";
+          } presenceData.state = 'Filtering for "' + n + '"';
         }
       } else {
         presenceData.largeImageKey = "newspaper";
