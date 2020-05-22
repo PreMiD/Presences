@@ -50,7 +50,7 @@ const presence = new Presence({
 // [x] Quiplash
 
 let layout: string;
-const elapsed: number = Math.round((new Date()). getTime() / 1000);
+const elapsed: number = Math.round(new Date().getTime() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
   const useName: boolean = await presence.getSetting("useName");
   const useTime: boolean = await presence.getSetting("useTime");
 
-  if(useTime){
+  if (useTime) {
     presenceData.startTimestamp = elapsed;
   }
 
@@ -167,17 +167,22 @@ presence.on("UpdateData", async () => {
   } else {
     presenceData.details = "Idle";
   }
-  
-  if(useName && layout == "new"){
-    presenceData.state = "as " + document.getElementById("playername").innerHTML;
+
+  if (useName && layout == "new") {
+    presenceData.state =
+      "as " + document.getElementById("playername").innerHTML;
   }
 
-  if(useName && layout == "legacy"){
-    presenceData.state = "as " + document.getElementById("player").children[0].innerHTML;
+  if (useName && layout == "legacy") {
+    presenceData.state =
+      "as " + document.getElementById("player").children[0].innerHTML;
   }
 
-  if(useName && layout == "dict"){
-    presenceData.state = "as " + document.getElementById("playericon").className.split("_")[1] + document.getElementById("playername").innerHTML.toLowerCase();
+  if (useName && layout == "dict") {
+    presenceData.state =
+      "as " +
+      document.getElementById("playericon").className.split("_")[1] +
+      document.getElementById("playername").innerHTML.toLowerCase();
   }
 
   if (presenceData.details == null) {
