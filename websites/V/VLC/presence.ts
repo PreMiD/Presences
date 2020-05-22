@@ -64,6 +64,8 @@ function getTag(
 }
 
 presence.on("UpdateData", async () => {
+  // there's no meme
+
   if (
     document.querySelector(".footer") &&
     document.querySelector(".footer").textContent.includes("VLC")
