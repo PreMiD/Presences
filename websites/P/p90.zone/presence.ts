@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
   if (video !== null) {
     const timestamps = getTimestamps(video.currentTime, video.duration);
 
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       state: document.querySelector("body > div.menu.main > div > h2")
         .textContent,
       largeImageKey: "logo",

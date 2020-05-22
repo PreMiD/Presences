@@ -21,7 +21,7 @@ homepageImage = document.querySelector("#hplogo");
 var imgInput: any = document.querySelector("#REsRA");
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg"
   };
 

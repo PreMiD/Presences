@@ -14,7 +14,7 @@ const categories: Record<string, any> = {
 };
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg"
   };
   if (document.location.pathname == "/") {

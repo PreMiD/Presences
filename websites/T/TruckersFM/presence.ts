@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
   const liveTill = document.querySelector(".live-time").textContent;
   const pageName = document.title.slice(13);
   const liveTime = liveTill.slice(6);
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "tfmlogo",
     smallImageKey: "smalltfmlogo",
     smallImageText: `Viewing: ${pageName}`

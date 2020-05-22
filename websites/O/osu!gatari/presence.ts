@@ -1,7 +1,7 @@
 var presence = new Presence({
     clientId: "642393312392904705"
   }),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     largeImageKey: "logo"
   },
   customData = false;
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     if (title != null && act != null) {
       customData = true;
 
-      const beatmapData: presenceData = {
+      const beatmapData: PresenceData = {
         details: "Looking at the beatmap:",
         state:
           (act as HTMLElement).innerText +
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     if (title != null && act != null) {
       customData = true;
 
-      const beatmapData: presenceData = {
+      const beatmapData: PresenceData = {
         details: "Looking at the beatmap:",
         state:
           (act as HTMLElement).innerText +
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
     if (title != null && act != null) {
       customData = true;
 
-      const beatmapData: presenceData = {
+      const beatmapData: PresenceData = {
         details: "Looking at the beatmap:",
         state:
           (act as HTMLElement).innerText +
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
     if (doc != null && title != null) {
       customData = true;
 
-      const beatmapData: presenceData = {
+      const beatmapData: PresenceData = {
         details: "Browsing " + (doc as HTMLElement).innerText,
         state: (title as HTMLElement).innerText,
         largeImageKey: "logo"
@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
     const name: string = (document.querySelector(".user-name") as HTMLElement)
       .innerText;
     customData = true;
-    const profileData: presenceData = {
+    const profileData: PresenceData = {
       details: "Looking at " + name + "'s Profile",
       state:
         "Performance: " +

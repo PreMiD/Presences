@@ -26,7 +26,7 @@ var getCustomVideoTime = function (video: any, number: number): string {
 };
 const browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "dalogo",
     startTimestamp: browsingStamp
   };

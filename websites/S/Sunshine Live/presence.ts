@@ -13,7 +13,7 @@ presence.on("UpdateData", () => {
     }
   }
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg",
     smallImageKey: paused ? "pause" : "play",
     smallImageText: paused ? "Pausiert" : "Spielt",

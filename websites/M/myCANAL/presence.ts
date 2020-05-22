@@ -25,7 +25,7 @@ var elapsed = Math.floor(Date.now() / 1000);
 var title;
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "mycanal-logo"
   };
 

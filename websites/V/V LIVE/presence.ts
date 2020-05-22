@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
   playback = video ? true : false;
 
   if (!playback) {
-    const pdata: presenceData = {
+    const pdata: PresenceData = {
       largeImageKey: "vlive2"
     };
 
@@ -427,7 +427,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      pdata: presenceData = {
+      pdata: PresenceData = {
         details: "",
         state: "",
         largeImageKey: "vlive2",

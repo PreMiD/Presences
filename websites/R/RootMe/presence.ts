@@ -28,7 +28,7 @@ console.log(
 );
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

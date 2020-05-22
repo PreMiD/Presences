@@ -7,7 +7,7 @@ var user: any;
 var typing: any;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {};
+  const presenceData: PresenceData = {};
 
   if (document.location.pathname.includes("/videocall/")) {
     presenceData.largeImageKey = "messenger";

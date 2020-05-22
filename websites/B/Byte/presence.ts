@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
   const host = location.host;
   const path = location.pathname.replace(/\/?$/, "/");
 
-  var data: presenceData = {
+  var data: PresenceData = {
     details: undefined,
     state: undefined,
     largeImageKey: "byte",

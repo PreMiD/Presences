@@ -1,7 +1,7 @@
 var presence = new Presence({
     clientId: "609774216430092298"
   }),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     largeImageKey: "logo"
   },
   customData = false;
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
     if (title != null && diff != null) {
       customData = true;
 
-      var beatmapData: presenceData = {
+      var beatmapData: PresenceData = {
         details: "Looking at the beatmap:",
         state:
           (title as HTMLElement).innerText +
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
       ".profile-info__name .u-ellipsis-overflow"
     ) as HTMLElement).innerText;
     customData = true;
-    var profileData: presenceData = {
+    var profileData: PresenceData = {
       details: "Looking at " + name + "'s Profile",
       state:
         "Rank: " +
