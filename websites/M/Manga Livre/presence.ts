@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "ml"
   };
 
-  if (document.location.hostname == "mangalivre.com") {
+  if (document.location.hostname == "mangalivre.net") {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing...";
