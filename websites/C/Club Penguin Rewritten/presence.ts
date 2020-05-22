@@ -383,7 +383,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = room;
     }
   } else if (document.location.host == "community.cprewritten.net") {
-      if (document.location.pathname == "legal-disclaimer") {
+      if (document.location.pathname == "/legal-disclaimer/") {
         presenceData.largeImageKey = "moderator";
         presenceData.details = "Viewing Legal Disclaimer"
       } else if (document.location.pathname == "/") {
