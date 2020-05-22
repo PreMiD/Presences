@@ -73,7 +73,6 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = elapsed;
 
   if (document.URL.includes("/#/") == false && document.URL.includes("play.cprewritten.net")) {
-    presenceData.largeImageKey = "idlepuffle";
     presenceData.details = "Viewing Main Menu";
   } else if (document.URL.includes("/#/")) {
     if (status == "") {
