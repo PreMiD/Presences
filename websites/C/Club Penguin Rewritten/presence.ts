@@ -18,10 +18,10 @@ console.warn = function() {
 console.stdlog("Code injected by PreMiD!")
 let repeatTimer = setInterval(function() {
   if (typeof console.logs == "object") {
-    var filteredLogs = console.logs.filter(function(logEntry) {
+    let filteredLogs = console.logs.filter(function(logEntry) {
       return logEntry[0] == "onJoinRoom" || logEntry[0] == "AS3-BootLoader:" || (typeof logEntry[0] == "object" && "gameID" in logEntry[0]) || (logEntry[0] == "received shell error" && logEntry[1].includes("No world with the id of")) || logEntry[0] == "_global[net]" || (typeof logEntry[0]=="string" && logEntry[0].includes("clientManager	: new party"));
     });
-    var lastLog = filteredLogs.slice(-1).pop();
+    let lastLog = filteredLogs.slice(-1).pop();
     if (typeof lastLog !== "undefined") {
       if (typeof lastLog[0] !== "undefined") {
        if (lastLog[0] == "received shell error") {
@@ -393,7 +393,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing \"What's New\" Blog";
         if (document.location.pathname.includes("author")) {
           const author = document.location.pathname.replace("/author/","").replace("/","");
-          presenceData.state = "Filtering for Articles By " + author.charAt(0).toUpperCase()+author.slice(1);
+          presenceData.state = "Filtering for Articles By " + author.charAt(0).toUpperCase() + author.slice(1);
         } else if (document.location.pathname.includes("category")) {
           const s = document.location.pathname.replace("/category/","").replace("/","");
           let n = "";
@@ -419,34 +419,17 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Homepage";
       } else if (document.location.pathname.includes("/help/")) {
         presenceData.details = "Getting Help";
-        if (document.location.pathname == "/help/articles/your_penguin.html") {
-          presenceData.state = "Your Penguin";
-        } else if (document.location.pathname == "/help/articles/mini_games.html") {
-          presenceData.state = "Mini Games";
-        } else if (document.location.pathname == "/help/articles/navigation.html") {
-          presenceData.state = "Navigation";
-        } else if (document.location.pathname == "/help/articles/your_igloo.html") {
-          presenceData.state = "Your Igloo";
-        } else if (document.location.pathname == "/help/articles/penguin_coins.html") {
-          presenceData.state = "Penguin Coins";
-        } else if (document.location.pathname == "/help/articles/newspaper.html") {
-          presenceData.state = "Newspaper";
-        } else if (document.location.pathname == "/help/articles/characters.html") {
-          presenceData.state = "Characters";
-        } else if (document.location.pathname == "/help/articles/special_roles.html") {
-          presenceData.state = "Special Roles";
-        } else if (document.location.pathname == "/help/articles/secrets.html") {
-          presenceData.state = "Secrets";
-        } else if (document.location.pathname == "/help/articles/safety.html") {
-          presenceData.state = "Safety";
-        } else if (document.location.pathname == "/help/articles/other_penguins.html") {
-          presenceData.state = "Other Penguins";
-        } else if (document.location.pathname == "/help/articles/puffles.html") {
-          presenceData.state = "Puffles";
-        } else if (document.location.pathname == "/help/articles/communicating.html") {
-          presenceData.state = "Communicating";
-        } else if (document.location.pathname == "/help/articles/tutorial.html") {
-          presenceData.state = "Tutorial";
+        if (document.location.pathname.includes(".html")) {
+          const uncaptializedState = document.location.pathname.replace("/help/articles/", "").replace(".html", "");
+          let state = "";
+          const words = uncaptializedState.split("_");
+          for (let i = 0; i < words.length; i++) {
+            if (i == 0) {
+              state = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+            } else {
+              state = state + " " + words[i].charAt(0).toUpperCase() + words[i].slice(1);
+            }
+          } presenceData.state = state;
         }
       }
     }
