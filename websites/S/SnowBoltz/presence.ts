@@ -2,12 +2,12 @@ const presence = new Presence({
   clientId: "666246771785334784"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var params = new URL(document.location.href).toString(); 
-var uid = document.querySelector(
+const browsingStamp = Math.floor(Date.now() / 1000);
+const params = new URL(document.location.href).toString(); 
+const uid = document.querySelector(
   "#navbar_global > ul.navbar-nav.align-items-lg-center.ml-lg-auto > li.nav-item.d-none.d-lg-block.ml-lg-4.dropdown > div > a:nth-child(3)"
 );
-var uid1 = uid.textContent
+const uid1 = uid.textContent;
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
