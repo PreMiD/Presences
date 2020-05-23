@@ -1,4 +1,4 @@
-var presence = new Presence({
+let presence = new Presence({
     clientId: "621819308481445934"
   }),
   strings = presence.getStrings({
@@ -7,7 +7,7 @@ var presence = new Presence({
   });
 
 function getTime(list: string[]): number {
-  var ret = 0;
+  let ret = 0;
   for (let index = list.length - 1; index >= 0; index--) {
     ret += parseInt(list[index]) * 60 ** index;
   }
@@ -15,12 +15,12 @@ function getTime(list: string[]): number {
 }
 
 function getTimestamps(audioDuration: string): Array<number> {
-  var splitAudioDuration = audioDuration.split(":").reverse();
+  let splitAudioDuration = audioDuration.split(":").reverse();
 
-  var parsedAudioDuration = getTime(splitAudioDuration);
+  let parsedAudioDuration = getTime(splitAudioDuration);
 
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
+  let startTime = Date.now();
+  let endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -29,25 +29,25 @@ presence.on("UpdateData", async () => {
     largeImageKey: "applemusic-logo"
   };
 
-  var playerCheck = document.querySelector(
+  let playerCheck = document.querySelector(
     ".web-chrome-playback-controls__playback-btn[disabled]"
   )
     ? false
     : true;
   if (playerCheck) {
-    var title = document
+    let title = document
       .querySelector(
         ".web-chrome-playback-lcd__song-name-scroll"
       )
       .textContent.trim();
-    var author = document
+    let author = document
       .querySelector(".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper")
       .textContent.split("—")[0];
-    var audioTime = document.querySelector(
+    let audioTime = document.querySelector(
       ".web-chrome-playback-lcd__time-end"
     ).textContent;
-    var timestamps = getTimestamps(audioTime);
-    var paused = document.querySelector(
+    let timestamps = getTimestamps(audioTime);
+    let paused = document.querySelector(
       ".web-chrome-playback-controls__playback-btn[aria-label='Play']"
     )
       ? true
