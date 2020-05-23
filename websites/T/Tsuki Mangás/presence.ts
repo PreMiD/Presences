@@ -22,7 +22,7 @@ function getPagination(): number[] {
 }
 var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
-  var pathName = window.location.pathname,
+  const pathName = window.location.pathname,
     notfound =
       window.location.pathname == "/404" ||
       document.getElementsByClassName("notfound").length != 0,
@@ -45,7 +45,7 @@ presence.on("UpdateData", () => {
     data.details = `Lista de Mangás - Página ${getPagination()[0]}/${
       getPagination()[1]
     }`;
-    var Generos = "";
+    let Generos = "";
     const GenerosN = document.querySelectorAll(
       "#app > div.manga > div > div.multiselect.boxgenman > div.multiselect__tags > div.multiselect__tags-wrap > span > span"
     );
@@ -112,24 +112,24 @@ presence.on("UpdateData", () => {
     browsingStamp = Math.floor(Date.now() / 1000);
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/leitor/") && !notfound) {
-    let manga: any = document.querySelector("b.f20");
-    let chapter: any = document.querySelector("b.f14c");
-    manga ? (manga = manga.textContent) : (manga = "...");
-    chapter ? (chapter = chapter.textContent) : (chapter = "...");
-    let page: any = document.querySelector("select.backgsla.frightrr");
-    if (page) {
-      page = (page as HTMLInputElement).value;
+    const qmanga = document.querySelector("b.f20");
+    const qchapter = document.querySelector("b.f14c");
+    const qpage = document.querySelector("select.backgsla.frightrr");
+    let manga = qmanga ? qmanga.textContent : "...";
+    let chapter = qchapter ? qchapter.textContent : "...";
+    let page = "...";
+    if (qpage) {
+      page = (qpage as HTMLInputElement).value;
       isNaN(parseInt(page))
         ? (page = " - Páginas abertas")
         : (page = " - Página " + page);
-    } else page = "...";
+    }
     data.smallImageKey = "reading_dark";
     data.smallImageText = "Lendo...";
     data.details = manga.trim() ? manga : "...";
     if (chapter.trim() && chapter.includes("-")) {
       chapter = chapter.replace(/^\s+|\s+$/g, "");
-      chapter = chapter.split(" - ");
-      chapter = `${chapter[0]} - "${chapter[1]}"`;
+      chapter = `${chapter.split(" - ")[0]} - "${chapter.split(" - ")[1]}"`;
     }
     data.state = chapter + page;
     if (document.querySelector("#app > div.manga > div.trasm")) {
