@@ -6,7 +6,7 @@
   "service": "SnowBoltz",
   "description": {
     "en": "SnowBoltz The best shop for buying R$ in Thailand Easy Fast Secure",
-    "th_TH": "SnowBoltz ร้านรับเติม ROBUX (R$, โรบัค) ในเกม ROBLOX ที่ใช้ง่าย บริการจัดส่งอัตโนมัติรวดเร็วทันใจ เรทสุดคุ้ม 4 - 6 เเบบกลุ่มเเละ ID - Pass เรท 5 - 8"
+    "th": "SnowBoltz ร้านรับเติม ROBUX (R$, โรบัค) ในเกม ROBLOX ที่ใช้ง่าย บริการจัดส่งอัตโนมัติรวดเร็วทันใจ เรทสุดคุ้ม 4 - 6 เเบบกลุ่มเเละ ID - Pass เรท 5 - 8"
   },
   "url": "snowboltz.net",
   "version": "1.0.0",
@@ -14,10 +14,10 @@
   "thumbnail": "https://i.imgur.com/yYdlVDA.png",
   "color": "#00ccff",
   "tags": [
-    "Shop",
-    "R$",
-    "Thai",
-    "Thailand"
+    "shop",
+    "r$",
+    "thai",
+    "thailand"
   ],
   "category": "other",
   "regExp": "([a-z0-9-]+[.])*snowboltz[.]net[/]"
