@@ -37,14 +37,14 @@ presence.on("UpdateData", async () => {
   if (playerCheck) {
     var title = document
       .querySelector(
-        ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
+        ".web-chrome-playback-lcd__song-name-scroll"
       )
       .textContent.trim();
     var author = document
-      .querySelector(".web-chrome-playback-lcd__sub-copy-scroll")
+      .querySelector(".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper")
       .textContent.split("—")[0];
     var audioTime = document.querySelector(
-      ".web-chrome-playback-lcd__time-remaining"
+      ".web-chrome-playback-lcd__time-end"
     ).textContent;
     var timestamps = getTimestamps(audioTime);
     var paused = document.querySelector(
