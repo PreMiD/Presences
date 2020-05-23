@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "712898966760587275"
 });
 function getPagination(): number[] {
-  let pagination = document.getElementsByClassName("pagination")[0];
+  const pagination = document.getElementsByClassName("pagination")[0];
   let current = 1;
   let max = 1;
   if (pagination) {
@@ -20,7 +20,7 @@ function getPagination(): number[] {
   }
   return [current, max];
 }
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   const pathName = window.location.pathname,
     notfound =
@@ -85,14 +85,14 @@ presence.on("UpdateData", () => {
     const MangaDefaultName = document.querySelector(
       "#app > div.manga.mtopmanga > div.all > div.rigt > div.tity > h2 > b"
     );
-    let MangaAltNames: any = document.querySelector(
+    const qMangaAltNames = document.querySelector(
       "#app > div.manga.mtopmanga > div.all > div.lef > div.altt"
     );
+    let MangaAltNames = "";
     let MangaName = "...";
-    if (MangaDefaultName != null && MangaDefaultName.textContent.trim()) {
-      MangaAltNames == null || !MangaAltNames.textContent.trim()
-        ? (MangaAltNames = "")
-        : (MangaAltNames = " (" + MangaAltNames.textContent + ")");
+    if (MangaDefaultName && MangaDefaultName.textContent.trim()) {
+      if (qMangaAltNames && qMangaAltNames.textContent.trim())
+        MangaAltNames = " (" + qMangaAltNames.textContent + ")";
       MangaName = MangaDefaultName.textContent + MangaAltNames;
     }
     data.details = "Visualizando Mangá:";
@@ -115,7 +115,7 @@ presence.on("UpdateData", () => {
     const qmanga = document.querySelector("b.f20");
     const qchapter = document.querySelector("b.f14c");
     const qpage = document.querySelector("select.backgsla.frightrr");
-    let manga = qmanga ? qmanga.textContent : "...";
+    const manga = qmanga ? qmanga.textContent : "...";
     let chapter = qchapter ? qchapter.textContent : "...";
     let page = "...";
     if (qpage) {
@@ -145,11 +145,12 @@ presence.on("UpdateData", () => {
     const scanName = document.querySelector(
       "#app > div.scan > div.contentscan > div > h2"
     );
-    let scanMembers: any = document.querySelectorAll(
+    const qscanMembers = document.querySelectorAll(
       "#app > div.scan > div.contentscan > div > div.membrosscan > b"
     ).length;
-    scanMembers > 0
-      ? (scanMembers = ` - ${scanMembers.toString()} Membros`)
+    let scanMembers;
+    qscanMembers > 0
+      ? (scanMembers = ` - ${qscanMembers.toString()} Membros`)
       : (scanMembers = " - 0 Membros");
     data.details = "Visualizando Grupo:";
     data.state =
