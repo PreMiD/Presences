@@ -7,7 +7,7 @@ var title = document
   .textContent.replace(document.querySelector("#content h1 i").textContent, "")
   .trim();
 presence.on("UpdateData", async () => {
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

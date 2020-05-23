@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   if (topic && topic.textContent != "") {
     const author = document.querySelector("#expert_coauthor > a"),
       date = document.querySelector("#expert_coauthor > p"),
-      presenceData: presenceData = {
+      presenceData: PresenceData = {
         details: topic.textContent,
         state: `by ${
           author && author.textContent != "" ? author.textContent : "unknown"
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (category && category.textContent != "") {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing a category:",
       state: category.textContent,
       largeImageKey: "banner",
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
     const newTopic = document.getElementsByClassName("firstHeading")[0]
         ? document.getElementsByClassName("firstHeading")[0].textContent
         : null,
-      presenceData: presenceData = {
+      presenceData: PresenceData = {
         details: "Editing/Writing How to",
         state: `Topic: ${newTopic ? newTopic : "Unknown."} `,
         largeImageKey: "banner",
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (path == "/wikiHowTo") {
     const searching = document.location.search.replace("?search=", ""),
-      presenceData: presenceData = {
+      presenceData: PresenceData = {
         details: `Searching for:`,
         state: `${
           searching[0].toUpperCase() + searching.slice(1).toLowerCase()
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing a page:",
       state: "Homepage",
       largeImageKey: "banner",

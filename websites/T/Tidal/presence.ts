@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
         Math.floor(videoCurrent),
         Math.floor(videoFull)
       ),
-      presenceData: presenceData = {
+      presenceData: PresenceData = {
         details: playingfrom ? `${title} (From: ${playingfrom})` : title,
         state: getAuthorString(),
         largeImageKey: "tidal-logo",

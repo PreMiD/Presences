@@ -4,13 +4,13 @@ var presence = new Presence({
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Looking at nekos",
       largeImageKey: "lg-nekos"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/lewd") {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Looking at lewd nekos",
       largeImageKey: "lg-nekos"
     };

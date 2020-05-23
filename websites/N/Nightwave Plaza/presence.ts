@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
     .textContent.substring(8, 13)
     .split(":")
     .map((n) => Number(n));
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     state: document.getElementById("player-title").textContent,
     details: document.getElementById("player-artist").textContent,
     startTimestamp: Date.now() - (ts[0] * 60 + ts[1]) * 1000,

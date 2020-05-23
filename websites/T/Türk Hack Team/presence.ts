@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
     "body > div:nth-child(5) > form > table > tbody > tr:nth-child(1) > td"
   );
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "tht-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

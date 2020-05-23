@@ -9,7 +9,7 @@ var dj: any;
 var listeners: any;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "tsfm"
   };
   //presenceData.startTimestamp = browsingStamp;

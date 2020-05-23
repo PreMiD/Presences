@@ -8,7 +8,7 @@ var actionURL = new URL(document.location.href);
 var title2URL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
   };

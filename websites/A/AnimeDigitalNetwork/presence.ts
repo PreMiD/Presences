@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    const data: presenceData = {
+    const data: PresenceData = {
       details: title,
       state: subtitle,
       largeImageKey: "adn-logo",
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data, !video.paused);
     }
   } else {
-    const browsingPresence: presenceData = {
+    const browsingPresence: PresenceData = {
       details: "Browsing...",
       largeImageKey: "adn-logo"
     };

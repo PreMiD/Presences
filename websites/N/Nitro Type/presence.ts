@@ -17,7 +17,7 @@ presence.on("UpdateData", () => {
     const username = loggedIn
       ? document.querySelector(".dropdown--account span").textContent
       : "Racing as a guest";
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "nt",
       smallImageKey: loggedIn ? "user" : "guest",
       smallImageText: username

@@ -6,7 +6,7 @@ let title: any;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "v2ex-logo",
     startTimestamp: browsingStamp
   };

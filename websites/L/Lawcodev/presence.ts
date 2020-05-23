@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
     path = doc.pathname,
     route = path.split("/"),
     browsingStamp = Math.floor(Date.now() / 1000),
-    presenceData: presenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "lawco",
       startTimestamp: browsingStamp
     };

@@ -47,17 +47,20 @@ presence.on("UpdateData", async () => {
       var author = document.querySelector(".playbackSoundBadge__lightLink")
         .textContent;
       var audioTime = document.querySelector(
-        "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div > div > div > div.playbackTimeline__timePassed > span:nth-child(2)"
+        ".playbackTimeline__timePassed > span:nth-child(2)"
       ).textContent;
       var audioDuration = document.querySelector(
-        "#app > div.playControls.g-z-index-control-bar.m-visible > section > div > div > div > div > div.playbackTimeline__duration > span:nth-child(2)"
+        ".playbackTimeline__duration > span:nth-child(2)"
       ).textContent;
       var timestamps = getTimestamps(audioTime, audioDuration);
     } catch (err) {
-      console.log("Contact dev of this presence");
+      console.log(
+        "An unusual error occured. Please contact the developer of this presence and screenshot the following error:"
+      );
+      console.error(err);
     }
 
-    var data: presenceData = {
+    var data: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "soundcloud",

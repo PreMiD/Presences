@@ -4,7 +4,7 @@ var presence = new Presence({
 });
 presence.on("UpdateData", () => {
   var urlParams = new URLSearchParams(window.location.search);
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "lg"
   };
   if (document.location.pathname == "/") {

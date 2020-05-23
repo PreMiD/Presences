@@ -5,7 +5,7 @@ const strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused"
 });
-let presenceData: presenceData = {
+let presenceData: PresenceData = {
   largeImageKey: "logo"
 };
 let timestamp: number;

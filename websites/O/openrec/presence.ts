@@ -6,7 +6,7 @@ var presence = new Presence({
     pause: "presence.playback.paused",
     live: "presence.activity.live"
   }),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, !video.paused);
     }
   } else {
-    var pageData: presenceData = {
+    var pageData: PresenceData = {
       details: "Browsing..",
       largeImageKey: "logo"
     };

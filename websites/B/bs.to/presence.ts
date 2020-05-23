@@ -9,7 +9,7 @@ var title: any;
 var search: any;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "bs"
   };
 
