@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
         case "/p/disclaimer.html":
             presenceData.details = "Lendo o Disclaimer";
         break;
-    };
+    }
   } else if (document.getElementsByClassName("label-info breadcrumbs")[0]) {
       presenceData.details = "Vendo uma postagem";
       const name = document.getElementsByClassName("post-title entry-title")[0].textContent;
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       const url = document.location.href.split("#")[1];
       const text = url.split("=")[1];
       presenceData.state = `Página ${text}`;
-  };
+  }
 
   presence.setActivity(presenceData);
 });
