@@ -39,7 +39,7 @@ var presence = new Presence({
     clientId: "706574162331697163"
 });
 presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, function () {
-    var presenceData;
+    const presenceData;
     return __generator(this, function (_a) {
         presenceData = {
             largeImageKey: "logo"
@@ -67,12 +67,12 @@ presence.on("UpdateData", function () { return __awaiter(_this, void 0, void 0, 
             }
         } else if (document.getElementsByClassName("label-info breadcrumbs")[0]) {
             presenceData.details = "Vendo uma postagem";
-            let name = document.getElementsByClassName("post-title entry-title")[0].textContent;
+            const name = document.getElementsByClassName("post-title entry-title")[0].textContent;
             presenceData.state = name;
         } else { 
             presenceData.details = ("Navegando no site");
-            var url = document.location.href.split("#")[1];
-            var text = url.split("=")[1];
+            const url = document.location.href.split("#")[1];
+            const text = url.split("=")[1];
             presenceData.state = `Página ${text}`
         }
         
