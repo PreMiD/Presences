@@ -1,26 +1,29 @@
-const presence = new Presence({
+var presence = new Presence({
   clientId: "712269360206708766"
 });
 
-presence.on("UpdateData", () => {
+var browsingStamp = Math.floor(Date.now() / 1000);
+
+presence.on("UpdateData", async () => {
   const presenceData: presenceData = {
     largeImageKey: "logo"
   };
 
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  const page = window.location.pathname;
-
-  presenceData.startTimestamp = browsingStamp;
-
-  if(page.endsWith("/lounge") || page.endsWith("/lounge/")) {
-    presenceData.details = "Looking for a room";
-    presenceData.state = "Username: " + document.querySelector(".name").textContent;;
-  } else if(page.endsWith("/room/")) {
-    presenceData.details = "In a room: " + document.querySelector(".room-title-name").textContent;;
-    presenceData.state = "Members: " + document.querySelector(".room-title-capacity").textContent;;
-  } else if (page.endsWith("/create_room") || page.endsWith("/create_room/")) {
-    presenceData.details = "Creating a room";
+  if (document.location.hostname == "drrr.com") {
+    presenceData.startTimestamp = browsingStamp;
+    if (document.location.pathname.includes("/lounge")) {
+      presenceData.details = "Searching for a room";
+      presenceData.state = "Username: " + document.querySelector(".name").textContent;;
+      presenceData.smallImageKey = "search";
+    } else if (document.location.pathname.includes("/create_room")) {
+      presenceData.details = "Creating a room";
+    } else if (document.location.pathname.includes("/room/")) {
+      presenceData.details = "In a room: " + document.querySelector(".room-title-name").textContent;;
+      presenceData.state = "Members: " + document.querySelector(".room-title-capacity").textContent;;
+      presenceData.smallImageKey = "chat";
+    }
   }
+
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
