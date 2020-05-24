@@ -67,8 +67,8 @@ presence.on("UpdateData", () => {
     }
   } else if (path.includes("/schedule")) {
     presenceData.details = "Viewing Schedule";
-    for (var x in document.getElementsByClassName("schedule-day")) {
-      var scheduleDay=document.getElementsByClassName("schedule-day")[x]
+    for (let x in document.getElementsByClassName("schedule-day")) {
+      let scheduleDay=document.getElementsByClassName("schedule-day")[x];
       var position = scheduleDay.getBoundingClientRect();
       if (position.top < window.innerHeight && position.bottom >= 0) {
         presenceData.state = scheduleDay
