@@ -40,7 +40,7 @@ if (presenceData.details == null) {
   presence.setActivity();
 } else {
   presence.setActivity(presenceData);
-  console.log(presenceData);
+  //console.log(presenceData);
 }
 });
 
