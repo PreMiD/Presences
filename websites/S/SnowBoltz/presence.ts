@@ -7,7 +7,7 @@ const params = new URL(document.location.href).toString();
 const uid = document.querySelector(
   "#navbar_global > ul.navbar-nav.align-items-lg-center.ml-lg-auto > li.nav-item.d-none.d-lg-block.ml-lg-4.dropdown > div > a:nth-child(3)"
 );
-const uid1 = uid.textContent;
+const uid1 = uid?.textContent ?? "ยังไม่เข้าสู่ระบบ";
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
