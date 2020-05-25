@@ -1,5 +1,15 @@
 name: SV
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "**/metadata.json"
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "**/metadata.json"
 jobs:
   validate:
     name: Schema Validation Check
@@ -17,9 +27,13 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
-      - name: Install Deps
-        run: yarn
-      - name: Compile Script
-        run: yarn sv:compile
+      - name: Prep SV
+        run: |
+          yarn
+          yarn sv:compile
+      - name: Find Changed Files
+        run: |
+          git config core.quotepath off # fixes escape sequence issue
+          git diff-tree --no-commit-id --name-only -r ${{ github.sha }} --output file_changes.txt
       - name: Start SV
         run: yarn sv --colors
