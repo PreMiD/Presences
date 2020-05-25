@@ -39,9 +39,7 @@ const metaFiles = glob('./websites/*/*/dist/metadata.json', {
         const result = validate(meta, schema);
 
         if (result.valid) {
-            if (!meta.schema) {
-                validatedWithWarnings(service, 'No $schema');
-            } else if (meta.schema !== latestMetadataSchema) {
+            if (meta.schema && meta.schema !== latestMetadataSchema) {
                 validatedWithWarnings(service, 'Using out of date schema');
             } else {
                 validated(service);
