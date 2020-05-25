@@ -21,7 +21,7 @@ function prepareArray(item: any): string {
 }
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "remdb"
   };
 

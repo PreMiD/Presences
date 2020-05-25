@@ -31,7 +31,7 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "audiomack-logo"
   };
 

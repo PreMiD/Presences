@@ -5,7 +5,7 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

@@ -30,7 +30,7 @@ presence.on("iFrameData", (data) => {
 });
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "pokemonlogo" // Bas has been here
   };
 

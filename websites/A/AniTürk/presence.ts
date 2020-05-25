@@ -27,7 +27,7 @@ presence.on("iFrameData", async (msg) => {
 });
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "aniturk"
   };
 

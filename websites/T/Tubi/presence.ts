@@ -23,7 +23,7 @@ function getTimestamps(
 var subtitle;
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "tubi-logo"
   };
 

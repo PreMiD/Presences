@@ -2,7 +2,7 @@ var presence = new Presence({
     clientId: "656826806061498368" //The client ID of the Application created at https://discordapp.com/developers/applications
     //Enable use and detection of media key presses
   }),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     largeImageKey: "icon"
   },
   customData = false;
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
     if (title != null) {
       customData = true;
 
-      var roomData: presenceData = {
+      var roomData: PresenceData = {
         details: "Completing room:",
         state: (title as HTMLElement).innerText,
         largeImageKey: "icon",

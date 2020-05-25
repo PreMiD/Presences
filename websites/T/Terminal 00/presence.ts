@@ -5,7 +5,7 @@ const presence = new Presence({
 const elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "irentae",
     startTimestamp: elapsed,
     details: location.href.split(location.host)[1]

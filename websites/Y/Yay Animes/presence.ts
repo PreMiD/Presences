@@ -8,7 +8,7 @@ const presence: Presence = new Presence({
     playing: "presence.playback.playing",
     paused: "presence.playback.paused"
   }),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     largeImageKey: "yay_lg",
     startTimestamp: startedBrowsing
   };

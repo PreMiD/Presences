@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "658192386899312651"
 });
-let presenceData: presenceData;
+let presenceData: PresenceData;
 
 function makeRPC(title, category): void {
   if (category == "kategori") {

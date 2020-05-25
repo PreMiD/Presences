@@ -17,7 +17,7 @@ const presenceLabs = new Presence({
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
 });
 
 presenceGit.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
@@ -285,7 +285,7 @@ presenceGit.on("UpdateData", async () => {
 });
 
 presenceCommunity.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
@@ -296,7 +296,7 @@ presenceCommunity.on("UpdateData", async () => {
 });
 
 presenceAnigifs.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
@@ -320,7 +320,7 @@ presenceAnigifs.on("UpdateData", async () => {
 });
 
 presenceLabs.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };

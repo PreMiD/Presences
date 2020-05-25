@@ -10,7 +10,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const host = window.location.hostname.replace("www.", "");
   const path = window.location.pathname.split("/").slice(1);
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: "IFTTT",
     largeImageKey: "logo_big"
   };
