@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     category = document.querySelector("#article > div.wh_block > h1");
   
   if (topic && topic.textContent != "") {
-    const author = document.querySelector("#sp_expert_name") || document.querySelector("#sp_expert_team"), date = document.querySelector("#expert_coauthor > p")
+    const author = document.querySelector("#sp_expert_name") || document.querySelector("#sp_expert_team"), date = document.querySelector("#expert_coauthor > p");
 
     return presence.setActivity({
       details: topic.textContent,
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
 
   if (path == "/index.php") {
     // Note that I (EGGSY) didn't work on this part, I don't know if it's working on the main site but I'm sure it doesn't work on Spanish version.
-    const newTopic = document.getElementsByClassName("firstHeading")[0] ? document.getElementsByClassName("firstHeading")[0].textContent : null
+    const newTopic = document.getElementsByClassName("firstHeading")[0] ? document.getElementsByClassName("firstHeading")[0].textContent : null;
 
     return presence.setActivity({
       details: "Editing/Writing How to",
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
   }
 
   if (path == "/wikiHowTo") {
-    const searching = document.location.search.replace("?search=", "").split('+').join(' ')
+    const searching = document.location.search.replace("?search=", "").split('+').join(' ');
 
     return presence.setActivity({
       details: `Searching for:`,
