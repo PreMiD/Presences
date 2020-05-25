@@ -146,7 +146,7 @@ if (path.hostname == "pantip.com" || path.hostname.includes ("([a-z0-9-]+[.])*")
       presenceData.details = "กล่องข้อความ ";
     } else if (path.href) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "อยูในสนทนา ";
+      presenceData.details = "อยู่ในสนทนา ";
       presenceData.state = message1;
     }
   } else if (path.pathname.includes("club")) {
