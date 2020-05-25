@@ -24,7 +24,7 @@ let extendedRun = false,
 function isValidJSON(text: string): boolean {
   try {
     const data = JSON.parse(text);
-    data['$schema'] = undefined
+    data['$schema'] = undefined;
     return true;
   } catch {
     return false;
