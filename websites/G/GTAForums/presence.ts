@@ -22,23 +22,23 @@ presence.on("UpdateData", async () => {
       case "/settings/email/":
         presenceData.state = "Email Address";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break
+      break;
       case "/settings/password/":
         presenceData.state = "Password";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break
+      break;
       case "/settings/account-security/":
         presenceData.state = "Account Security";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break
+      break;
       case "/settings/devices/":
         presenceData.state = "Recently Used Devices";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break
+      break;
       case "/settings/username/":
         presenceData.state = "Username";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break
+      break;
     }
   } else if (document.location.pathname.startsWith("/profile/")){
     delete presenceData.details;
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.details;
       delete presenceData.state;
       presenceData.details = "Starting a new topic...";
-    }
+    };
   } else if (document.location.pathname.startsWith("/topic/")){
     delete presenceData.details;
     presenceData.details = "Browsing a topic...";
@@ -72,41 +72,41 @@ presence.on("UpdateData", async () => {
       case "/followed/":
         presenceData.details = "Managing Followed Content.";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break
+      break;
       case "/notifications/":
         presenceData.details = "Viewing your notifications...";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break 
+      break;
       case "/messenger/":
         presenceData.details = "Viewing your inbox...";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break 
+      break;
       case "/ignore/":
         presenceData.details = "Managing your ignored users.";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break 
+      break;
       case "/privacy/":
         presenceData.details = "Reading privace policy...";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break 
+      break;
       case "/register/":
         presenceData.details = "Just registering...";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break
+      break;
       case "/login/":
         presenceData.details = "Just logging...";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break
+      break;
       case "/discover/unread/":
         presenceData.details = "Viewing Unread Content...";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break 
+      break;
       case "/discover/":
         presenceData.details = "Viewing All Activity...";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break 
-    } 
-  }
+      break;
+    };
+  };
   
   presence.setActivity(presenceData);
 });
