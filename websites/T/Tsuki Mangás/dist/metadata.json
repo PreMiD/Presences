@@ -27,43 +27,43 @@
   "settings": [
     {
       "id": "showHistory",
-      "title": "[Global] Mostrar Histórico",
+      "title": "Mostrar Histórico",
       "icon": "fa fa-history",
       "value": true
     },
     {
       "id": "showUserName",
-      "title": "[Global] Mostrar Username",
+      "title": "Mostrar Username",
       "icon": "fa fa-eye",
       "value": true
     },
     {
       "id": "showComment",
-      "title": "[/leitor] Mostrar Comentário",
+      "title": "Mostrar Comentário",
       "icon": "fa fa-comment",
       "value": true
     },
     {
       "id": "showReport",
-      "title": "[/leitor] Mostrar Report",
+      "title": "Mostrar Report",
       "icon": "fa fa-exclamation-triangle",
       "value": true
     },
     {
       "id": "resetTimestamp",
-      "title": "[Global] Reiniciar Timestamp",
+      "title": "Reiniciar Timestamp",
       "icon": "fa fa-hourglass",
       "value": false
     },
     {
       "id": "darkResource",
-      "title": "[Global] Dark Resources",
+      "title": "Dark Resources",
       "icon": "fa fa-coffee",
       "value": false
     },
     {
       "id": "logo",
-      "title": "[Global] Logo",
+      "title": "Logo",
       "icon": "fa fa-bookmark",
       "value": 0,
       "values": [
