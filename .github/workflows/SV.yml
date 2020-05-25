@@ -1,14 +1,14 @@
 name: SV
 on:
   push:
-    branches: 
+    branches:
       - master
     paths:
       - "**/metadata.json"
   pull_request:
-    branches: 
+    branches:
       - master
-    paths: 
+    paths:
       - "**/metadata.json"
 jobs:
   validate:
@@ -31,5 +31,7 @@ jobs:
         run: yarn
       - name: Compile Script
         run: yarn sv:compile
+      - name: Find Changed Meta
+        run: git diff-tree --no-commit-id --name-only -r ${{ github.sha }} --output file_changes.txt
       - name: Start SV
         run: yarn sv --colors
