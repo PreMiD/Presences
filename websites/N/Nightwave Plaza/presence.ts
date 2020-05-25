@@ -3,29 +3,28 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  if (document.getElementById("player-time").textContent == "Welcome back")
-    return;
-  const ts = document
-    .getElementById("player-time")
-    .textContent.substring(0, 5)
-    .split(":")
-    .map((n) => Number(n));
-  const te = document
-    .getElementById("player-time")
-    .textContent.substring(8, 13)
-    .split(":")
-    .map((n) => Number(n));
+  const playerTime = document.getElementById("player-time").textContent
+  if (playerTime == "Welcome back") return;
+
+  const playBackStatus = document.querySelector(".player-play").textContent == "Stop" ? "play" : "pause"
   const presenceData: presenceData = {
     state: document.querySelector(".player-title").textContent,
     details: document.querySelector(".player-artist").textContent,
-    startTimestamp: Date.now() - (ts[0] * 60 + ts[1]) * 1000,
-    endTimestamp:
-      Date.now() - (ts[0] * 60 + ts[1]) * 1000 + (te[0] * 60 + te[1]) * 1000,
     largeImageKey: "icon",
-    smallImageKey:
-      document.querySelector(".player-play").textContent == "Stop"
-        ? "play"
-        : "pause"
+    smallImageKey: playBackStatus
   };
+
+  console.log(playBackStatus)
+  if (playBackStatus == "play") {
+    const ts = playerTime.substring(0, 5).split(":").map((n) => Number(n));
+    const te = playerTime.substring(8, 13).split(":").map((n) => Number(n));
+
+    presenceData.startTimestamp = Date.now() - (ts[0] * 60 + ts[1]) * 1000;
+    presenceData.endTimestamp = Date.now() - (ts[0] * 60 + ts[1]) * 1000 + (te[0] * 60 + te[1]) * 1000;
+  } else {
+    delete presenceData.startTimestamp;
+    delete presenceData.endTimestamp;
+  }
+
   presence.setActivity(presenceData);
 });
