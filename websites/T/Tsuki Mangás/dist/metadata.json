@@ -15,7 +15,7 @@
     "pt_BR": "Tsuki Mangás é um leitor de mangás brasileiro; leia seus mangás favoritos no seu smartphone, tablet, computador ou qualquer outro dispositivo. Salve seus personagens favoritos e siga os últimos lançamentos."
   },
   "service": "Tsuki Mangás",
-  "version": "1.3.4",
+  "version": "1.4.0",
   "logo": "https://menma.is-inside.me/V5Ay5LwN.png",
   "thumbnail": "https://menma.is-inside.me/48rF9MaF.png",
   "color": "#161616",
@@ -23,5 +23,53 @@
     "manga",
     "reading"
   ],
-  "category": "anime"
+  "category": "anime",
+  "settings": [
+    {
+      "id": "showHistory",
+      "title": "[Global] Mostrar Histórico",
+      "icon": "fa fa-history",
+      "value": true
+    },
+    {
+      "id": "showUserName",
+      "title": "[Global] Mostrar Username",
+      "icon": "fa fa-eye",
+      "value": true
+    },
+    {
+      "id": "showComment",
+      "title": "[/leitor] Mostrar Comentário",
+      "icon": "fa fa-comment",
+      "value": true
+    },
+    {
+      "id": "showReport",
+      "title": "[/leitor] Mostrar Report",
+      "icon": "fa fa-exclamation-triangle",
+      "value": true
+    },
+    {
+      "id": "resetTimestamp",
+      "title": "[Global] Reiniciar Timestamp",
+      "icon": "fa fa-hourglass",
+      "value": false
+    },
+    {
+      "id": "darkResource",
+      "title": "[Global] Dark Resources",
+      "icon": "fa fa-coffee",
+      "value": false
+    },
+    {
+      "id": "logo",
+      "title": "[Global] Logo",
+      "icon": "fa fa-bookmark",
+      "value": 0,
+      "values": [
+        "Nuvem",
+        "Livro"
+      ]
+    }
+  ]
 }
