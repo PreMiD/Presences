@@ -1,8 +1,25 @@
 const presence = new Presence({
-  clientId: "712898966760587275"
+  clientId: "714001239351885904"
 });
-function getPagination(): number[] {
-  const pagination = document.getElementsByClassName("pagination")[0];
+enum ResourceNames {
+  logo = "logo",
+  reading = "reading",
+  search = "search",
+  writing = "writing",
+  history = "history",
+  info = "info"
+}
+async function Resource(ResourceSelected: ResourceNames): Promise<string> {
+  let value = ResourceSelected.toString();
+  const logo: number = await presence.getSetting("logo");
+  const darkmode: boolean = await presence.getSetting("darkResource");
+  if (ResourceSelected == ResourceNames.logo)
+    logo != 0 ? (value += "_book") : (value += "_cloud");
+  if (darkmode) value += "_dark";
+  return value;
+}
+function getPagination(pagN: number): number[] {
+  const pagination = document.getElementsByClassName("pagination")[pagN];
   let current = 1;
   let max = 1;
   if (pagination) {
@@ -21,33 +38,44 @@ function getPagination(): number[] {
   return [current, max];
 }
 let browsingStamp = Math.floor(Date.now() / 1000);
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const pathName = window.location.pathname,
     notfound =
       window.location.pathname == "/404" ||
       document.getElementsByClassName("notfound").length != 0,
     data: PresenceData = {
-      largeImageKey: "logo_dark"
+      largeImageKey: await Resource(ResourceNames.logo)
     };
-  if (pathName == "/") {
-    data.details = "Início";
+  if (await presence.getSetting("resetTimestamp"))
     browsingStamp = Math.floor(Date.now() / 1000);
+  if (pathName == "/") {
+    let lancamentos = "...";
+    const qlancamentos = document.querySelectorAll("div.leflist > div");
+    if (qlancamentos.length > 0) {
+      qlancamentos.forEach((item) => {
+        if (item.className.includes("activedlanca"))
+          lancamentos = item.textContent;
+      });
+    }
+    data.details = "Início";
+    new URL((document.querySelector("#menu>li>ul>a") as HTMLLinkElement).href)
+      .pathname == "/login"
+      ? (data.state = "Lançamentos: [Login Necessário]")
+      : (data.state = `Lançamentos: ${lancamentos}`);
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/login") && !notfound) {
     data.details = "Logando...";
-    browsingStamp = Math.floor(Date.now() / 1000);
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/registrar") && !notfound) {
     data.details = "Registrando...";
-    browsingStamp = Math.floor(Date.now() / 1000);
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/lista-mangas") && !notfound) {
-    data.details = `Lista de Mangás - Página ${getPagination()[0]}/${
-      getPagination()[1]
+    data.details = `Lista de Mangás - Página ${getPagination(0)[0]}/${
+      getPagination(0)[1]
     }`;
     let Generos = "";
     const GenerosN = document.querySelectorAll(
-      "#app > div.manga > div > div.multiselect.boxgenman > div.multiselect__tags > div.multiselect__tags-wrap > span > span"
+      "div.multiselect>div>div>span>span"
     );
     if (GenerosN.length > 0)
       GenerosN.forEach((item) => {
@@ -57,29 +85,45 @@ presence.on("UpdateData", () => {
     data.state = `Gêneros: ${!Generos.trim() ? "Todos" : Generos}`;
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/perfil/") && !notfound) {
-    const name = document.querySelector("#capapl > b");
-    if (pathName.split("/").slice(-1)[0] != "editar") {
-      data.details = "Visualizando Perfil:";
-      data.state = name
-        ? name.textContent.trim()
-          ? name.textContent
-          : "..."
-        : "...";
-    } else if (pathName.split("/").length == 4) {
-      const user = (document.querySelector(
-        "#app > header > div.wrap > nav#menu > li.drop.mbl > ul.drop_menu > a"
-      ) as HTMLLinkElement).href
-        .split("/")
-        .slice(-1)[0];
-      if (user == pathName.split("/").slice(-2)[0]) {
-        data.details = "Editando Perfil";
-        data.state = user;
-      } else {
-        data.details = "Visualizando Perfil:";
-        data.state = pathName.split("/").slice(-2)[0];
-      }
+    const username = document.querySelector("#capapl > b");
+    const sessionUsername = (document.querySelector(
+      "#menu>li>ul>a"
+    ) as HTMLLinkElement).href
+      .split("/")
+      .slice(-1)[0];
+    const usernameValue = [0, "...", true];
+    if (!(await presence.getSetting("showUserName"))) {
+      usernameValue[1] = "👁‍🗨👁‍🗨";
+      usernameValue[3] = false;
+    } else usernameValue[3] = true;
+    if (
+      username &&
+      username.textContent.trim() &&
+      pathName.split("/").slice(-1)[0] != "editar"
+    ) {
+      usernameValue[0] = 0;
+      if (usernameValue[3]) usernameValue[1] = username.textContent;
+    } else if (
+      pathName.split("/").length == 4 &&
+      sessionUsername &&
+      sessionUsername.trim() &&
+      sessionUsername == pathName.split("/").slice(-2)[0]
+    ) {
+      usernameValue[0] = 1;
+      if (usernameValue[3]) usernameValue[1] = sessionUsername;
+    } else if (
+      pathName.split("/").length == 4 &&
+      sessionUsername &&
+      sessionUsername.trim() &&
+      pathName.split("/").slice(-1)[0] == "editar" &&
+      sessionUsername != pathName.split("/").slice(-2)[0]
+    ) {
+      usernameValue[0] = 0;
+      if (usernameValue[3]) usernameValue[1] = pathName.split("/").slice(-2)[0];
     }
-    browsingStamp = Math.floor(Date.now() / 1000);
+    data.details =
+      usernameValue[0] == 0 ? "Vizualizando Perfil:" : "Editando Perfil:";
+    data.state = usernameValue[1].toString();
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/manga/") && !notfound) {
     const MangaDefaultName = document.querySelector(
@@ -106,12 +150,14 @@ presence.on("UpdateData", () => {
         gender += item.textContent.replace(/^\s+|\s+$/g, "");
       });
     if (gender != "") {
-      data.smallImageKey = "search_dark";
+      data.smallImageKey = await Resource(ResourceNames.search);
       data.smallImageText = gender;
     }
-    browsingStamp = Math.floor(Date.now() / 1000);
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/leitor/") && !notfound) {
+    const overlay = document.querySelector(
+      "#app > div.manga > div.v--modal-overlay"
+    );
     const qmanga = document.querySelector("b.f20");
     const qchapter = document.querySelector("b.f14c");
     const qpage = document.querySelector("select.backgsla.frightrr");
@@ -121,10 +167,12 @@ presence.on("UpdateData", () => {
     if (qpage) {
       page = (qpage as HTMLInputElement).value;
       isNaN(parseInt(page))
-        ? (page = " - Páginas abertas")
+        ? page.trim()
+          ? (page = " - Páginas abertas")
+          : (page = "...")
         : (page = " - Página " + page);
     }
-    data.smallImageKey = "reading_dark";
+    data.smallImageKey = await Resource(ResourceNames.reading);
     data.smallImageText = "Lendo...";
     data.details = manga.trim() ? manga : "...";
     if (chapter.trim() && chapter.includes("-")) {
@@ -132,9 +180,20 @@ presence.on("UpdateData", () => {
       chapter = `${chapter.split(" - ")[0]} - "${chapter.split(" - ")[1]}"`;
     }
     data.state = chapter + page;
-    if (document.querySelector("#app > div.manga > div.trasm")) {
-      data.smallImageKey = "writing_dark";
+    if (
+      (await presence.getSetting("showComment")) &&
+      overlay &&
+      overlay.getAttribute("data-modal").includes("comentarios")
+    ) {
+      data.smallImageKey = await Resource(ResourceNames.writing);
       data.smallImageText = "Comentando...";
+    } else if (
+      (await presence.getSetting("showReport")) &&
+      overlay &&
+      overlay.getAttribute("data-modal").includes("report")
+    ) {
+      data.smallImageKey = await Resource(ResourceNames.info);
+      data.smallImageText = "Reportando...";
     }
     data.startTimestamp = browsingStamp;
   } else if (
@@ -158,11 +217,45 @@ presence.on("UpdateData", () => {
         ? scanName.textContent
         : "...") +
       scanMembers +
-      ` - Página ${getPagination()[0]}/${getPagination()[1]}`;
+      ` - Página ${getPagination(0)[0]}/${getPagination(0)[1]}`;
     data.startTimestamp = browsingStamp;
+  }
+  if (
+    (await presence.getSetting("showHistory")) &&
+    document.getElementsByClassName("historicob").length != 0
+  ) {
+    if (
+      parseInt(
+        document
+          .getElementsByClassName("historicob")[0]
+          .parentElement.style.width.replace("%", "")
+      ) != 0
+    ) {
+      const hCategory = document
+        .getElementsByClassName("activmancap")[0]
+        .textContent.replace(/^\s+|\s+$/g, "");
+      let hSession;
+      document.querySelectorAll("div.selecths").forEach((item) => {
+        if (item.classList[item.classList.length - 1].includes("selecths"))
+          hSession = `${item.childNodes[0].textContent} ${item.childNodes[1].textContent}`;
+      });
+      const qUser = document.querySelector("#menu>li>ul>a");
+      let user = qUser
+        ? (qUser as HTMLLinkElement).href.split("/").slice(-1)[0]
+        : "...";
+      data.details = "Vizualizando Histórico:";
+      data.state = `${hCategory} - ${hSession} - Página ${
+        getPagination(0)[0]
+      }/${getPagination(0)[1]}`;
+      if (!(await presence.getSetting("showUserName"))) user = "👁‍🗨👁‍🗨";
+      data.smallImageKey = await Resource(ResourceNames.history);
+      data.smallImageText = "Username: " + user;
+    }
   }
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else presence.setActivity(data);
+  } else {
+    presence.setActivity(data);
+  }
 });
