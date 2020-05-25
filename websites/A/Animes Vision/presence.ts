@@ -23,7 +23,7 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "anvlogo",
       details: (await strings).browsing,
       startTimestamp: Math.floor(Date.now() / 1000)

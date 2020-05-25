@@ -82,7 +82,7 @@
         "#player-bar-play-pause.playing"
       );
 
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: title,
         state: `${artist} - ${album}`,
         largeImageKey: "gpm",

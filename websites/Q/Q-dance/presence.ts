@@ -8,7 +8,7 @@ var presence = new Presence({
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "qdance-logo"
   };
 

@@ -9,7 +9,7 @@ var replace: any;
 var playing: any;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "rock"
   };
 

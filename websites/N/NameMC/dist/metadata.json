@@ -53,10 +53,10 @@
     "iw.namemc.com",
     "zh-tw.namemc.com"
   ],
-  "version": "1.2.2",
+  "version": "1.2.4",
   "logo": "https://i.gyazo.com/c29c5b9e440f37979823e96a597089fc.jpg",
   "thumbnail": "https://i.gyazo.com/a57949ce7bd6e6a2b80d86675deb074f.png",
-  "color": "#00000",
+  "color": "#000000",
   "tags": [
     "namemc",
     "minecraft",

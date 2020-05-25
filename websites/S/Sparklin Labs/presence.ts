@@ -6,7 +6,7 @@ var elapsed = Math.floor(Date.now() / 1000);
 var channel;
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "sparklin-logo"
   };
 

@@ -116,7 +116,7 @@ function getVKTrackLength(): Record<string, any> {
 var browsingTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "vk_logo"
   };
 
