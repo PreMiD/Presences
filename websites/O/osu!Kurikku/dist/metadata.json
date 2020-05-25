@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "Moe Kotoki",
     "id": "276627005280092162"
@@ -17,8 +18,7 @@
   "thumbnail": "https://i.imgur.com/Oa9jhmt.png",
   "color": "#FF66AA",
   "tags": [
-    "games",
-    "osu!"
+    "games"
   ],
   "category": "games"
 }
