@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.details;
       delete presenceData.state;
       presenceData.details = "Starting a new topic...";
-    };
+    }
   } else if (document.location.pathname.startsWith("/topic/")){
     delete presenceData.details;
     presenceData.details = "Browsing a topic...";
@@ -105,8 +105,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing All Activity...";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       break;
-    };
-  };
+    }
+  }
   
   presence.setActivity(presenceData);
 });
