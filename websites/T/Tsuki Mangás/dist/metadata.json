@@ -27,44 +27,44 @@
   "settings": [
     {
       "id": "showHistory",
-      "title": "Mostrar Histórico",
-      "icon": "fa fa-history",
+      "title": "[Global] Mostrar Histórico",
+      "icon": "fas fa-history",
       "value": true
     },
     {
       "id": "showUserName",
-      "title": "Mostrar Username",
-      "icon": "fa fa-eye",
+      "title": "[Global] Mostrar Username",
+      "icon": "fas fa-eye",
       "value": true
     },
     {
       "id": "showComment",
-      "title": "Mostrar Comentário",
-      "icon": "fa fa-comment",
+      "title": "[/leitor] Mostrar Comentário",
+      "icon": "fas fa-comment",
       "value": true
     },
     {
       "id": "showReport",
-      "title": "Mostrar Report",
-      "icon": "fa fa-exclamation-triangle",
+      "title": "[/leitor] Mostrar Report",
+      "icon": "fas fa-exclamation-triangle",
       "value": true
     },
     {
       "id": "resetTimestamp",
-      "title": "Reiniciar Timestamp",
-      "icon": "fa fa-hourglass",
+      "title": "[Global] Reiniciar Timestamp",
+      "icon": "fas fa-hourglass",
       "value": false
     },
     {
       "id": "darkResource",
-      "title": "Dark Resources",
-      "icon": "fa fa-coffee",
+      "title": "[Global] Dark Resources",
+      "icon": "fas fa-coffee",
       "value": false
     },
     {
       "id": "logo",
-      "title": "Logo",
-      "icon": "fa fa-bookmark",
+      "title": "[Global] Logo",
+      "icon": "fas fa-bookmark",
       "value": 0,
       "values": [
         "Nuvem",
