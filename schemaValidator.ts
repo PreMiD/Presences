@@ -16,7 +16,7 @@ const stats = {
 
 const validated = (service: string): void => { console.log(green(`✔ ${service}`)); stats.validated++ };
 const validatedWithWarnings = (service: string, warning: string): void => { console.log(yellow(`✔ ${service} (${warning})`)); stats.validatedWithWarnings++ };
-const failedToValidate = (service: string, error: string): void => { console.log(red(`✘ ${service} (${error})`)); stats.failedToValidate++ };
+const failedToValidate = (service: string, errors: string[]): void => { console.log(red(`✘ ${service} ${errors.map(e => `  -> ${e}`).join('\n');}`)); stats.failedToValidate++ };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const loadMetadata = (path: string): any => JSON.parse(fs.readFileSync(path, 'utf-8'));
@@ -45,8 +45,11 @@ const metaFiles = glob('./websites/*/*/dist/metadata.json', {
                 validated(service);
             }
         } else {
-            const firstError = result.errors[0];
-            failedToValidate(service, `${firstError.message} @ ${firstError.property}`);
+            const errors: string[] = [];
+            for (const error of result.errors)
+                errors.push(`${error.message} @ ${error.property}`);
+
+            failedToValidate(service, errors);
         }
     }
 
