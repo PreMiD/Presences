@@ -5,7 +5,7 @@ var deck;
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Browsing Decks..",
       state: "at Homepage",
       //largeImageKey: "banner",
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
       .firstElementChild.children[1].ENTITY_NODE;
     var deckurl = (document.getElementById("deck_lists").lastElementChild
       .firstElementChild.children[2].firstElementChild as HTMLLinkElement).href;
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Looking at Decklists",
       state: `Page: ${pagenumber} top: ${no1} by ${auth}`,
       //largeImageKey: "banner",
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
         "Most Used Cards",
         ""
       );
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Looking at Top decks",
       state: `Current Meta: ${top}`,
       //largeImageKey: "banner",
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
       .firstElementChild.children[2].textContent;
     var price = document.getElementsByClassName("sortable")[0].children[1]
       .firstElementChild.children[4].textContent;
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Looking at Top Cards",
       state: `Top Card: ${top} Price: ${price}`,
       //largeImageKey: "banner",
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname == "/new_deck") {
     deck = (document.getElementsByName("deck_name")[0] as HTMLInputElement)
       .value;
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Building Deck",
       state: `Editing: ${deck}`,
       //largeImageKey: "banner",
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
         .children[1].textContent.replace("\n", ":")
         .split(":")[1];
 
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: `Viewing deck: ${deck} (archetype: ${archetype})`,
         state: `by: ${by}, price: ${value}`,
         //largeImageKey: "banner",

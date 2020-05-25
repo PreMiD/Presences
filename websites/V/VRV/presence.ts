@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
       Math.floor(currentTime),
       Math.floor(duration)
     ),
-    presenceData: presenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "vrv"
     };
 

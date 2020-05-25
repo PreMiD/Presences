@@ -150,7 +150,7 @@ if (!loggedout) {
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: Classname + Worksheet,
     state: Exercise,
     startTimestamp: timestamp,

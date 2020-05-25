@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "622163652207706122"
 });
 
-const presenceData: presenceData = {
+const presenceData: PresenceData = {
   largeImageKey: "logo",
   startTimestamp: new Date().getTime()
 };

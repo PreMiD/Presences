@@ -13,8 +13,8 @@ package-lock.json
 *.log
 
 # local VSCode files
-.vscode/*
-.history
+**/.vscode/*
+**/.history
 
 # Exception for extension recommendations
-!.vscode/extensions.json
+!**/.vscode/extensions.json

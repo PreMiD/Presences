@@ -41,7 +41,7 @@ presence.on("iFrameData", async (msg) => {
 presence.on("UpdateData", async () => {
   const path = document.location.pathname;
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "blutv"
   };
 

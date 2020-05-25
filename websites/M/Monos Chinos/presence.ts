@@ -44,10 +44,10 @@ presence.on("iFrameData", async (context) => {
 });
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "logo"
   };
-  const browsingData: presenceData = {
+  const browsingData: PresenceData = {
     largeImageKey: "logo",
     details: (await strings).browsing,
     smallImageKey: "browsing",
@@ -142,7 +142,7 @@ presence.on("UpdateData", async () => {
     Object.assign(data, {
       smallImageKey: video.paused ? "paused" : "playing",
       smallImageText: (await strings)[video.paused ? "paused" : "playing"]
-    } as presenceData);
+    } as PresenceData);
 
     if (!video.paused) {
       Object.assign(data, {
@@ -162,7 +162,7 @@ presence.on("UpdateData", async () => {
       details: action.text,
       smallImageKey: action.icon,
       smallImageText: action.text
-    } as presenceData);
+    } as PresenceData);
   }
 
   presence.setActivity(data);

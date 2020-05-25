@@ -185,7 +185,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  var data: presenceData = {
+  var data: PresenceData = {
     details: details,
     state: state,
     largeImageKey: "hulu",

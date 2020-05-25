@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     browsing: "presence.activity.browsing"
   });
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "animedao_lg"
   };
   if (hostname === `animedao26.stream` || hostname === `animedao28.stream`) {

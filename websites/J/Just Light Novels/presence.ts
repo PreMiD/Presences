@@ -10,7 +10,7 @@ const elapsed = Math.floor(Date.now() / 1000);
 var stext;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

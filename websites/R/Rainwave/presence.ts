@@ -6,19 +6,19 @@ const timeElapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname.startsWith("/pages/playback_history")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Looking at playback history...",
       largeImageKey: "rainwv"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/forums")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Browsing the forums...",
       largeImageKey: "rainwv"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/api4")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Looking at the API...",
       largeImageKey: "rainwv"
     };
@@ -37,14 +37,14 @@ presence.on("UpdateData", async () => {
         "div#r4_audio_player.unselectable.playing"
       );
     if (playCheck == null) {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: "Not listening.",
         largeImageKey: "rainwv",
         smallImageKey: "pause"
       };
       presence.setActivity(presenceData);
     } else {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: songName.innerText + " by " + artistName.innerText,
         state: "Listening on " + stationName.textContent,
         largeImageKey: "rainwv",

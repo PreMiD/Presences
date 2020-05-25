@@ -46,7 +46,7 @@ presence.on("iFrameData", (data) => {
 
 presence.on("UpdateData", async () => {
   var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
-    presenceData: presenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "ak"
     };
 

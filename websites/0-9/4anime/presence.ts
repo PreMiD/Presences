@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
       document.querySelector(".jw-text-elapsed")) !== null
       ? true
       : false;
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "logo"
   };
   if (!playback) {

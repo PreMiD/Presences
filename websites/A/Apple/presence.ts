@@ -3,7 +3,7 @@ var presence = new Presence({
 });
 var time = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
   var path = document.location.pathname.toLowerCase();

@@ -44,7 +44,7 @@ presence.on("UpdateData", () => {
     state = exercise.textContent.match("[0-9](.*)[0-9]")[0];
   }
 
-  var data: presenceData = {
+  var data: PresenceData = {
     details: details,
     state: state,
     largeImageKey: "w3schools",

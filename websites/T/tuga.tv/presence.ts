@@ -33,7 +33,7 @@ presence.on("iFrameData", (data) => {
 });
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "tuga_lg",
     details: (await strings).browsing,
     startTimestamp
