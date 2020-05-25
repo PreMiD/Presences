@@ -4,14 +4,13 @@ let title: HTMLElement,
   user: HTMLElement,
   pp: HTMLElement,
   rank: HTMLElement,
-  countryrank: HTMLElement,
   country: HTMLElement,
   tag: HTMLElement,
   url: URL,
   mode: number;
 
 presence.on("UpdateData", () => {
-  let presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
   };
