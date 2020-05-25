@@ -6,7 +6,7 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 var username;
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "mangadex-logo"
   };
 

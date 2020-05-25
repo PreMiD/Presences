@@ -16,7 +16,7 @@ const PRESENCE_ART_ASSETS = {
   write: "writing"
 };
 
-const presenceData: presenceData = {
+const presenceData: PresenceData = {
   largeImageKey: PRESENCE_ART_ASSETS.logo
 };
 

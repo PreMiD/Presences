@@ -25,7 +25,7 @@ presence.on("iFrameData", (data) => {
   }
 });
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "hwnew"
   };
 

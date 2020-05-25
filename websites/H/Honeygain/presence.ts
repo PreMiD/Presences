@@ -6,7 +6,7 @@ const elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const path = window.location.pathname;
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "honeygain",
     details: "Browsing Honeygain",
     startTimestamp: elapsed

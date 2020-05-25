@@ -86,7 +86,7 @@ presence.on("UpdateData", () => {
     anime = anime.slice(0, anime.length - 2);
     state = formatAnime(anime) + ": " + upperCaseFirstChar(episode);
   }
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "logo",
     details: detail,
     state: state

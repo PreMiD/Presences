@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
   const showBrowseInfo = await presence.getSetting("browse");
   const showVideoInfo = await presence.getSetting("video");
 
-  var data: presenceData = {
+  var data: PresenceData = {
     details: undefined,
     state: undefined,
     largeImageKey: "anontpp",

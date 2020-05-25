@@ -9,7 +9,7 @@
   },
   "url": "www.sololearn.com",
   "regExp": "([a-z0-9-]+[.])*sololearn[.]com[/]",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/MPEOcif.png",
   "thumbnail": "https://i.imgur.com/k7Mi8zh.png",
   "color": "#1ABC9C",

@@ -25,14 +25,14 @@ presence.on("UpdateData", async () => {
       "html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3#mane_onair.ng-binding"
     );
     if (listeningCheck == "No") {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: stationStatus,
         largeImageKey: "pvfm",
         smallImageKey: "pause"
       };
       presence.setActivity(presenceData);
     } else {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: stationStatus,
         state: "On air: " + onAir.innerText,
         largeImageKey: "pvfm",
@@ -60,14 +60,14 @@ presence.on("UpdateData", async () => {
       "html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3"
     );
     if (listeningCheck == "No") {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: stationStatus,
         largeImageKey: "pvfm",
         smallImageKey: "pause"
       };
       presence.setActivity(presenceData);
     } else {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: stationStatus,
         state: "On air: " + onAir.innerText,
         largeImageKey: "pvfm",
@@ -95,14 +95,14 @@ presence.on("UpdateData", async () => {
       "html > body > div#playerContent.content > div#about.container.ng-scope > div.row > div.col-sm-12 > h3"
     );
     if (listeningCheck == "No") {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: stationStatus,
         largeImageKey: "pvfm",
         smallImageKey: "pause"
       };
       presence.setActivity(presenceData);
     } else {
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: stationStatus,
         state: "On air: " + onAir.innerText,
         largeImageKey: "pvfm",

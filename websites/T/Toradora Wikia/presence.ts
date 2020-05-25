@@ -28,7 +28,7 @@ englishPresence.on("UpdateData", async () => {
             err
         );
       }
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: "Viewing a page...",
         state: page,
         largeImageKey: "lg-twiki"
@@ -54,7 +54,7 @@ englishPresence.on("UpdateData", async () => {
               err
           );
         }
-        const presenceData: presenceData = {
+        const presenceData: PresenceData = {
           details: "Schaut eine Seite an...",
           state: page,
           largeImageKey: "lg-twiki"

@@ -11,7 +11,7 @@ let animeName;
 let timeRemaining;
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "amq"
   };
   if (!navigator.language.includes("it-IT")) {

@@ -2,7 +2,7 @@ var presence = new Presence({
     clientId: "707632555612045413"
   }),
   startBrowse = Date.now(),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     startTimestamp: startBrowse,
     largeImageKey: "logo"
   };

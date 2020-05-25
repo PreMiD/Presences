@@ -4,7 +4,7 @@ const presence = new Presence({
 
 const time = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "meetlogo"
     },
     path = document.location.pathname.toLowerCase();

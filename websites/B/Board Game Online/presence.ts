@@ -68,7 +68,7 @@ const queries = {
 };
 
 presence.on("UpdateData", async () => {
-  let data: presenceData = {
+  let data: PresenceData = {
     largeImageKey: "boardgameonline"
   };
 
