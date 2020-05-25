@@ -3,10 +3,10 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const playerTime = document.getElementById("player-time").textContent
+  const playerTime = document.getElementById("player-time").textContent;
   if (playerTime == "Welcome back") return;
 
-  const playBackStatus = document.querySelector(".player-play").textContent == "Stop" ? "play" : "pause"
+  const playBackStatus = document.querySelector(".player-play").textContent == "Stop" ? "play" : "pause";
   const presenceData: presenceData = {
     state: document.querySelector(".player-title").textContent,
     details: document.querySelector(".player-artist").textContent,
