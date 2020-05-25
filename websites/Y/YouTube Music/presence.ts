@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
   const repeatMode = document.querySelector("ytmusic-player-bar[slot=\"player-bar\"]").getAttribute('repeat-Mode_');
 
   if (title !== "" && !isNaN(video.duration)) {
-    var timestamps = getTimestamps(
+    const timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
