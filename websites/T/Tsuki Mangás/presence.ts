@@ -58,10 +58,7 @@ presence.on("UpdateData", async () => {
       });
     }
     data.details = "Início";
-    new URL((document.querySelector("#menu>li>ul>a") as HTMLLinkElement).href)
-      .pathname == "/login"
-      ? (data.state = "Lançamentos: [Login Necessário]")
-      : (data.state = `Lançamentos: ${lancamentos}`);
+    data.state = `Lançamentos: ${lancamentos}`;
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/login") && !notfound) {
     data.details = "Logando...";
