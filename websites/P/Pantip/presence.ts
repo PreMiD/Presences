@@ -4,7 +4,7 @@ const presence = new Presence({
 
 // Const thing
 const browsingStamp = Math.floor(Date.now() / 1000);
-const tag = document.querySelector("#__next > div > div > div.container > div:nth-child(1) > div > div > div > h3");
+const tag = document.querySelector("#__next > div > div > div:nth-child(4) > div > div > nav > div > a:nth-child(2)");
 const forum = document.querySelector("#__next > div > div > div:nth-child(4) > div > div > nav > div > a");
 const topic = document.querySelector("head > title");
 const message = document.querySelector("#main-body-content > div.content > div.container-outer.container-liquid > div.display-post-wrapper.main-post.main-post-msg > div > div:nth-child(1) > h2");
