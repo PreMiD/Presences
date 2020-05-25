@@ -9,38 +9,50 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const queryparams = new URLSearchParams(document.location.search);
-  const vowelmatch = '^[aieouAIEOU].*';
+  const vowelmatch = "^[aieouAIEOU].*";
 
-  if (document.location.pathname.split('/').slice(-1)[0] == "" && document.location.search == "") {
+  if (
+    document.location.pathname.split("/").slice(-1)[0] == "" &&
+    document.location.search == ""
+  ) {
     presenceData.details = "Viewing the homepage";
-  } else if ((document.location.href.indexOf("/search") > -1)) {
-    if (queryparams.get('preset') == "discount") {
+  } else if (document.location.href.indexOf("/search") > -1) {
+    if (queryparams.get("preset") == "discount") {
       presenceData.details = "Searching for a discounted game";
-    } else if (queryparams.get('preset') == "unfair") {
+    } else if (queryparams.get("preset") == "unfair") {
       presenceData.details = "Searching for an unfair priced game";
-    } else if (queryparams.has('preset')) {
-      if (queryparams.get('preset').match(vowelmatch)) {
-        presenceData.details = "Searching for an " + queryparams.get('preset') + " game";
+    } else if (queryparams.has("preset")) {
+      if (queryparams.get("preset").match(vowelmatch)) {
+        presenceData.details =
+          "Searching for an " + queryparams.get("preset") + " game";
       } else {
-        presenceData.details = "Searching for a " + queryparams.get('preset') + " game";
+        presenceData.details =
+          "Searching for a " + queryparams.get("preset") + " game";
       }
     } else {
       presenceData.details = "Searching for a game";
-      if (queryparams.has('q')) {
-        presenceData.state = queryparams.get('q').replace(/\+/g, " ");
+      if (queryparams.has("q")) {
+        presenceData.state = queryparams.get("q").replace(/\+/g, " ");
       }
     }
   } else if (document.location.href.indexOf("/search/") > -1) {
     presenceData.details = "Searching for a game";
   } else if (document.location.href.indexOf("/s/") > -1) {
     presenceData.details = "Searching for a game";
-    presenceData.state = document.getElementById("entriesfound").innerText.match(/"(.*?)"/)[0].replace(/"/g,"");
+    presenceData.state = document
+      .getElementById("entriesfound")
+      .innerText.match(/"(.*?)"/)[0]
+      .replace(/"/g, "");
   } else if (document.location.href.indexOf("/app/") > -1) {
     presenceData.details = "Looking at a game";
-    presenceData.state = (document.querySelector("h1.title") as HTMLElement).innerText.match(/[^\s*].*[^\s*]/)[0];
+    presenceData.state = (document.querySelector(
+      "h1.title"
+    ) as HTMLElement).innerText.match(/[^\s*].*[^\s*]/)[0];
   } else if (document.location.href.indexOf("/bundle/") > -1) {
     presenceData.details = "Looking at a bundle";
-    presenceData.state = (document.querySelector("h1.title") as HTMLElement).innerText.match(/[^\s*].*[^\s*]/)[0];
+    presenceData.state = (document.querySelector(
+      "h1.title"
+    ) as HTMLElement).innerText.match(/[^\s*].*[^\s*]/)[0];
   } else if (document.location.href.indexOf("/tracker") > -1) {
     presenceData.details = "Tracking game prices";
   } else if (document.location.href.indexOf("/publishers") > -1) {
@@ -57,8 +69,13 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.href.indexOf("/blog") > -1) {
     presenceData.details = "Looking at the blog";
-    if ((document.querySelector("h3.block_title.no_margintop") as HTMLElement).innerText == "BLOG POST") {
-      presenceData.state = (document.querySelector("h4.title") as HTMLElement).innerText;
+    if (
+      (document.querySelector("h3.block_title.no_margintop") as HTMLElement)
+        .innerText == "BLOG POST"
+    ) {
+      presenceData.state = (document.querySelector(
+        "h4.title"
+      ) as HTMLElement).innerText;
     }
   } else if (document.location.href.indexOf("/faq") > -1) {
     presenceData.details = "Reading the FAQ";
