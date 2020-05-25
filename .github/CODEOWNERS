@@ -8,4 +8,5 @@ yarn.lock @Timeraa @Fruxh @TheDropX
 presenceUpdater.ts @Timeraa
 syntaxEnforcer.ts @SeMiD
 qualityAssurance.ts @SeMiD
+schemaValidator.ts @LewisTehMinerz
 .gitignore @Timeraa @Fruxh
