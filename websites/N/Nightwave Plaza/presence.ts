@@ -16,14 +16,14 @@ presence.on("UpdateData", async () => {
     .split(":")
     .map((n) => Number(n));
   const presenceData: presenceData = {
-    state: document.getElementById("player-title").textContent,
-    details: document.getElementById("player-artist").textContent,
+    state: document.querySelector(".player-title").textContent,
+    details: document.querySelector(".player-artist").textContent,
     startTimestamp: Date.now() - (ts[0] * 60 + ts[1]) * 1000,
     endTimestamp:
       Date.now() - (ts[0] * 60 + ts[1]) * 1000 + (te[0] * 60 + te[1]) * 1000,
     largeImageKey: "icon",
     smallImageKey:
-      document.getElementById("player-play").textContent == "Stop"
+      document.querySelector(".player-play").textContent == "Stop"
         ? "play"
         : "pause"
   };
