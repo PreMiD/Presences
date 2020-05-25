@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
   const path = window.location.pathname;
   var video;
   var live;
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "roosterteeth",
     details: "Browsing Rooster Teeth",
     startTimestamp: elapsed

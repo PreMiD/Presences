@@ -22,7 +22,7 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = { largeImageKey: "pvid" };
+  const presenceData: PresenceData = { largeImageKey: "pvid" };
   presenceData.startTimestamp = browsingStamp;
   if (document.location.pathname.includes("/home/")) {
     presenceData.details = "Browsing...";

@@ -229,7 +229,7 @@ const browsingStamp: number = Math.floor(Date.now() / 1000);
 let type, from, to, typet;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "gt"
   };
 

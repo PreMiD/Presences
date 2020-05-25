@@ -38,7 +38,7 @@ if (document.location.pathname.includes(".html")) {
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "ksow123stack"
   };
 

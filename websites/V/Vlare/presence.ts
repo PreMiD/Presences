@@ -28,42 +28,42 @@ presence.on("UpdateData", async () => {
   const browsingStamp = Math.floor(Date.now() / 1000);
 
   if (document.location.pathname == "/") {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing home page",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/trending")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing Trending tab",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/featured")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing Featured tab",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/videos")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing All Videos",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/trending_channels")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing Trending Channels",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/channels")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing All Channels",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
     var blogPost = document.querySelector(
       "body > main > section > div > div.vc > div:nth-child(2) > section:nth-child(1) > div:nth-child(1) > span"
     ).textContent;
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Reading a blog post",
       state: blogPost,
       largeImageKey: "logo",
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname === "/blogs") {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing Channel Blogs",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
     var groupName = document.querySelector(
       "body > main > section > div.group_stats > div:nth-child(3) > div:nth-child(1)"
     ).textContent;
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing an group",
       state: groupName,
       largeImageKey: "logo",
@@ -99,56 +99,56 @@ presence.on("UpdateData", async () => {
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/groups")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing Groups",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/statistics")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your statistics",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/history/video_comments")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your Video Comments",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/history/channel_comments")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your Channel Comments",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/history/search")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your Search Queries",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/history/rated")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your Rated Videos",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/history")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your Watched Videos",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/quicklist")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your Quicklist",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/my_privacy") ||
     document.location.pathname.includes("/my_emails")
   ) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your Settings",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/search/")) {
     var search = (document.querySelector("#search_area") as HTMLInputElement)
       .value;
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Searching for:",
       state: search,
       largeImageKey: "logo",
@@ -181,7 +181,7 @@ presence.on("UpdateData", async () => {
     var channelName = document.querySelector(
       "body > main > section > div.channel_right > div.channel_top.dragscroll > div.c_link.channel_link > div:nth-child(1)"
     ).textContent;
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing a channel",
       state: channelName,
       largeImageKey: "logo",
@@ -189,7 +189,7 @@ presence.on("UpdateData", async () => {
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/upload")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Uploading a video",
       largeImageKey: "logo",
       smallImageKey: "upload",
@@ -203,14 +203,14 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/my_community") ||
     document.location.pathname.includes("/my_account")
   ) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your dashboard",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/analytics")) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing your analytics",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
@@ -220,7 +220,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/following") ||
     document.location.pathname.includes("/following/")
   ) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Viewing my follows",
       largeImageKey: "logo",
       startTimestamp: browsingStamp
@@ -236,7 +236,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: title,
         state: uploader,
         largeImageKey: "logo",

@@ -5,16 +5,20 @@
   },
   "service": "MangaYabu",
   "description": {
-    "en": "Manga version website of goyabu.com",
-    "pt_BR": "Site versão mangá do famoso goyabu.com"
+    "en": "MangaYabu allow to user read various type of mangas with a comfort and without advertising that hinder to read.",
+    "pt": "MangaYabu permite ao usuario ler vários tipos de mangás com conforto e sem nenhum anúncio atrapalhando sua leitura.",
+    "pt_BR": "MangaYabu permite ao usuario ler vários tipos de mangás com conforto e sem nenhum anúncio atrapalhando sua leitura."
   },
   "url": "mangayabu.com",
-  "version": "1.1.1",
-  "logo": "https://i.imgur.com/KLEcCEy.png",
-  "thumbnail": "https://i.imgur.com/GrAK5YP.png",
+  "version": "1.1.5",
+  "logo": "https://i.imgur.com/hJfEWAm.png",
+  "thumbnail": "https://i.imgur.com/yiwM0IG.png",
   "color": "#3887ec",
   "tags": [
-    "manga"
+    "manga",
+    "mangas",
+    "mangás",
+    "yabu"
   ],
   "category": "other"
 }

@@ -14,7 +14,7 @@ var user: any,
   lastStamp: any;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "discordwhite"
   };
   connected = document.querySelector(

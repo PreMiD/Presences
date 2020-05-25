@@ -5,7 +5,7 @@ var presence = new Presence({
 var currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.slice(1).split("/"),
   browsingStamp = Math.floor(Date.now() / 1000),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
     startTimestamp: browsingStamp
@@ -38,7 +38,7 @@ function resetData(): void {
 
 ((): void => {
   let loadedPath = [],
-    presenceDataPlaced: presenceData = {};
+    presenceDataPlaced: PresenceData = {};
 
   updateCallback.function = (): void => {
     if (loadedPath !== currentPath) {

@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     "body > main > div > form > div > div.head"
   );
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo_beyaz",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

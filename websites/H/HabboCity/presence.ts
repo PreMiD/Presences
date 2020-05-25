@@ -5,7 +5,7 @@ const presence = new Presence({
 const browsingTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "hclogo"
   };
   presenceData.startTimestamp = browsingTime;
@@ -183,7 +183,10 @@ presence.on("UpdateData", () => {
       !window.location.pathname.toLowerCase().startsWith("/forum/categorie")
     ) {
       const page = window.location.pathname.toLowerCase().split("/");
-      const nbpage = page[3];
+      let nbpage = page[3];
+      if(nbpage === undefined) {
+        nbpage = "1";
+      }
       presenceData.details = "Forum - Sujet";
       presenceData.state =
         "Lit le sujet : " +

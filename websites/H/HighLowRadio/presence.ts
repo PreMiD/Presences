@@ -39,7 +39,7 @@ let lastTitle;
 let lastTimeStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", function () {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "hlr"
   };
 

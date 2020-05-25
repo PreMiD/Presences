@@ -32,7 +32,7 @@ presence.on("iFrameData", async (msg) => {
 });
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "turkanime"
   };
 

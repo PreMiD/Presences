@@ -6,7 +6,7 @@ const presence: Presence = new Presence({
     pause: "presence.playback.paused",
     live: "presence.activity.live"
   }),
-  presenceData: presenceData = {
+  presenceData: PresenceData = {
     largeImageKey: "listen_moe_lg"
   },
   audio: HTMLAudioElement = document.querySelector("audio");

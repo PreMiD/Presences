@@ -7,7 +7,7 @@ var group: any, typing: any, chat: any, user: any, search: any;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "slack"
   };
 

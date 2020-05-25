@@ -5,7 +5,7 @@ iframe.on("UpdateData", async () => {
     document.querySelector("video") != null ||
     document.querySelector("div.jw-media.jw-reset > video") != null
   ) {
-    var video: HTMLVideoElement =
+    const video: HTMLVideoElement =
       document.querySelector("video") != null
         ? document.querySelector("video")
         : document.querySelector("div.jw-media.jw-reset > video");

@@ -22,7 +22,7 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "large_img",
     startTimestamp
   };
@@ -55,8 +55,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching...";
     presenceData.smallImageKey = "search";
   } else if (url.includes("/title/")) {
-    let tokens = document.title.split(" - ");
-    tokens = [...new Set(tokens)];
+    const tokens = document.title.split(" - ");
     const title = tokens[0];
     presenceData.details = title;
     if (tokens[1].trim() == "IMDb") {

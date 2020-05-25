@@ -5,7 +5,7 @@ var presence = new Presence({
 var pageTitle;
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "hepboat"
   };
 

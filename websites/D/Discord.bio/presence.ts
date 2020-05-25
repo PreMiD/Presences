@@ -7,7 +7,7 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   playback;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

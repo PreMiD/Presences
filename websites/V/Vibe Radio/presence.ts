@@ -34,7 +34,7 @@ setInterval(newStats, 1000);
 newStats();
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "vibe"
   };
 

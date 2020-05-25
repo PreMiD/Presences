@@ -59,7 +59,7 @@ var currentUser: any, albumName: any, currentArtist: any;
 var playback = false;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
   };

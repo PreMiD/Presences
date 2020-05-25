@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
       ? false
       : true;
 
-    var data: presenceData = {
+    var data: PresenceData = {
       details: title,
       state: artist,
       largeImageKey: "amazonmusic-logo",

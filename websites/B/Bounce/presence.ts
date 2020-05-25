@@ -16,7 +16,7 @@ newStats();
 
 const stamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "bouncelogo",
     details: `Streaming to ${slisteners} listeners`,
     state: `${strack || "Loading"} - ${sartist || "Loading"}`,
