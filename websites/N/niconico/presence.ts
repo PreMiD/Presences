@@ -88,7 +88,7 @@
           );
           const elapsedSec = Math.floor(video.currentTime);
 
-          const presenceData: presenceData = {
+          const presenceData: PresenceData = {
             details: title,
             state: `${owner} - ${videoId}`,
             largeImageKey: "niconico",
@@ -125,7 +125,7 @@
             "span[class^='___elapsed-time___'] span"
           ).textContent;
 
-          const presenceData: presenceData = {
+          const presenceData: PresenceData = {
             details: title,
             state: `${owner} - ${liveId}`,
             largeImageKey: "niconico",
@@ -150,7 +150,7 @@
           ).textContent;
           const [seigaId] = location.pathname.match(/im\d+/);
 
-          const presenceData: presenceData = {
+          const presenceData: PresenceData = {
             details: title,
             state: `${owner} - ${seigaId}`,
             largeImageKey: "niconico"
@@ -162,7 +162,7 @@
           const owner = document.querySelector(".author_name").textContent;
           const [mangaId] = location.pathname.match(/mg\d+/);
 
-          const presenceData: presenceData = {
+          const presenceData: PresenceData = {
             details: title,
             state: `${owner} - ${mangaId}`,
             largeImageKey: "niconico"

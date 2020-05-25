@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
       timestamps = [elapsed, undefined];
     }
 
-    var data: presenceData = {
+    var data: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "deezer",

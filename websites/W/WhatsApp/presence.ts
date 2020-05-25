@@ -23,7 +23,7 @@ presence.on("UpdateData", () => {
   )
     contactName = name.innerText;
 
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "waweb-logo",
     details: `Texting with ${contactName ? contactName : "someone"}`,
     state: `${

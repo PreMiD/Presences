@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     console.log("Elapsed is on");
   }
   var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "logo"
   };
   if (videoTime) {

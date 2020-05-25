@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
@@ -24,9 +24,11 @@ presence.on("UpdateData", async () => {
 
   if (itemsetting == true && itemsite == true) {
     // Ask for Settings
+    // ------- important line -------
     itemdesc = document.querySelector(
-      "#related-products-scroll-container > div > div > div.ProductContainer__ProductMainSection-sc-1vbd28u-1.eUuuzm > div.ProductContainer__RightColumn-sc-1vbd28u-3.hivhfu > div > div.PurchaseContainer__UpperWrapper-sc-1qlezk8-1.jEnuPa > h1"
+      "#related-products-scroll-container > div > div > div.ProductContainer__ProductMainSection-sc-1vbd28u-1.dXQSMR > div.ProductContainer__RightColumn-sc-1vbd28u-3.cgensx > div > div.PurchaseContainer__UpperWrapper-sc-1qlezk8-1.gwTXit > h1"
     ).textContent;
+    // ------------------------------
     itemdesc = itemdesc.substring(0, itemdesc.length / 2) + "...";
   } else {
     if (languagesetting == "0") {

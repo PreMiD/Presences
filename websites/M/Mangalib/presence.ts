@@ -43,7 +43,7 @@ const locales = {
   messages: "Проверяет сообщения"
 };
 
-const presenceData: presenceData = {
+const presenceData: PresenceData = {
   largeImageKey: "mangalib_large",
   startTimestamp: startDate,
   smallImageKey: "reading"

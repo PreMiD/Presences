@@ -28,7 +28,7 @@ presence.on("UpdateData", () => {
     Math.floor(duration)
   );
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

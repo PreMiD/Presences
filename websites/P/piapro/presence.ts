@@ -24,7 +24,7 @@ var min2: number, sec2: number, time2: number;
 var paused: any, timestamps: any;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "pia"
   };
 

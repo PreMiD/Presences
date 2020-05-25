@@ -27,7 +27,7 @@ presence.on("iFrameData", async (msg) => {
 });
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "aniturk"
   };
 
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
     video = null;
   }
   //Episode part
-  if (title && episode) { 
+  if (title && episode) {
     data.details = title.textContent;
     data.state = episode.textContent.replace(
       title.textContent.split(" ").slice(1).join(" "),
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
     );
   }
   //Home page part
-  else { 
+  else {
     data.details = (await strings).browsing;
     data.startTimestamp = startTimestamp;
   }

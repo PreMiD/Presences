@@ -13,14 +13,14 @@ presence.on("UpdateData", async () => {
     "html > body > font#dateTextField.objectSettings.touchableOff"
   );
   if (songName.innerText.length < 1) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Not tuned in.",
       largeImageKey: "jsrl",
       smallImageKey: "pause"
     };
     presence.setActivity(presenceData);
   } else {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: songName.firstChild.textContent,
       state: presenceState.innerText,
       largeImageKey: "jsrl",

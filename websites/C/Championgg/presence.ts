@@ -5,7 +5,7 @@ var presence = new Presence({
 var time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: presenceData = {
+  var presenceData: PresenceData = {
     largeImageKey: "championgg"
   };
   var path = document.location.pathname.toLowerCase();

@@ -8,7 +8,7 @@ let chapternumber;
 let pagenumber;
 
 presence.on("UpdateData", async () => {
-  const data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "mwnew"
   };
 

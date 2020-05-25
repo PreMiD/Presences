@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     .getElementsByClassName("btn playbutton")[0]
     .getAttributeNode("data-trackingaction").value;
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

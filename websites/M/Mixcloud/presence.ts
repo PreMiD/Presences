@@ -29,7 +29,7 @@
 
       const isPlaying = player.querySelector(".pause-state") ? true : false;
 
-      const presenceData: presenceData = {
+      const presenceData: PresenceData = {
         details: title,
         state: author,
         largeImageKey: "mixcloud",

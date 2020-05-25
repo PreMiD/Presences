@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
     page: string,
     tab: string;
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: "Unknown page", // Left here as a clue to find missing possible states
     largeImageKey: "logo"
   };

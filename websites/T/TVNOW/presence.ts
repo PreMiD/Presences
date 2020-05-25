@@ -27,7 +27,7 @@ var currentTime: any, video: HTMLVideoElement, duration: any, paused: any;
 
 presence.on("UpdateData", async () => {
   var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
-    presenceData: presenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "tv"
     };
 

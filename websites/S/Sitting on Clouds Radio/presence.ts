@@ -12,14 +12,14 @@ presence.on("UpdateData", async () => {
   albumName = document.querySelector("p#cardAlbum.playerText.truncate");
   artistName = document.querySelector("p#cardArtist.playerText.truncate");
   if (albumName.innerText == "Press the Play button to start the radio") {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: "Not tuned in.",
       largeImageKey: "clouds",
       smallImageKey: "pause"
     };
     presence.setActivity(presenceData);
   } else {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: songName.innerText,
       state: artistName.innerText + " - " + albumName.innerText,
       largeImageKey: "clouds",

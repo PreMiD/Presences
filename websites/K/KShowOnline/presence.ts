@@ -49,7 +49,7 @@ if (document.location.pathname.includes("/kshow/")) {
 presence.on("UpdateData", async () => {
   // Get the video
   var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
-    presenceData: presenceData = {
+    presenceData: PresenceData = {
       largeImageKey: "kshowonline",
       smallImageKey: paused ? "pause" : "play",
       smallImageText: paused ? (await strings).pause : (await strings).play,

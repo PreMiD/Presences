@@ -5,11 +5,11 @@ var presence = new Presence({
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "ml"
   };
 
-  if (document.location.hostname == "mangalivre.com") {
+  if (document.location.hostname == "mangalivre.net") {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing...";

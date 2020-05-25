@@ -8,7 +8,7 @@ var presence = new Presence({
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/translator") {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: document.getElementsByClassName("translate_from")[0].parentNode
         .textContent,
       state: document.getElementsByClassName("translate_to")[0].parentNode
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
     };
     presence.setActivity(presenceData);
   } else {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "lg-deepl"
     };
     presence.setActivity(presenceData);
