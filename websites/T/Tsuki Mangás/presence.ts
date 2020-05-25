@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
       });
     }
     data.details = "Início";
-    data.state = `Lançamentos: ${lancamentos}`;
+    data.state = "Lançamentos: " + lancamentos;
     data.startTimestamp = browsingStamp;
   } else if (pathName.startsWith("/login") && !notfound) {
     data.details = "Logando...";
