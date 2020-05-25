@@ -14,7 +14,6 @@ presence.on("UpdateData", async () => {
     smallImageKey: playBackStatus
   };
 
-  console.log(playBackStatus)
   if (playBackStatus == "play") {
     const ts = playerTime.substring(0, 5).split(":").map((n) => Number(n));
     const te = playerTime.substring(8, 13).split(":").map((n) => Number(n));
