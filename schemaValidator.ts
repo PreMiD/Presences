@@ -3,7 +3,6 @@ import 'source-map-support/register';
 import axios from 'axios';
 import { green, yellow, red, blue } from 'chalk';
 import * as fs from 'fs';
-import { sync as glob } from 'glob';
 import { validate } from 'jsonschema';
 
 const latestMetadataSchema = 'https://schemas.premid.app/metadata/1.0';
@@ -21,10 +20,10 @@ const failedToValidate = (service: string, errors: string[]): void => { console.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const loadMetadata = (path: string): any => JSON.parse(fs.readFileSync(path, 'utf-8'));
 
-const metaFiles = glob('./websites/*/*/dist/metadata.json', {
-    ignore: ['**/node_modules/**', '**/@types/**'],
-    absolute: true
-});
+// parse file changes from git
+const changedFiles = fs.readFileSync('./file_changes.txt', 'utf-8').trim().split('\n');
+
+const metaFiles = changedFiles.filter((f: string) => f.endsWith('metadata.json'));
 
 (async (): Promise<void> => {
     console.log(blue('Getting latest schema...'));
