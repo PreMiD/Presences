@@ -1,5 +1,15 @@
 name: SV
-on: [push, pull_request]
+on:
+  push:
+    branches: 
+      - master
+    paths:
+      - "**/metadata.json"
+  pull_request:
+    branches: 
+      - master
+    paths: 
+      - "**/metadata.json"
 jobs:
   validate:
     name: Schema Validation Check
