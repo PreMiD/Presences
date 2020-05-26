@@ -3,14 +3,14 @@ const presence = new Presence({
 });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-const params = document.location.search
+const params = document.location.search;
 const uid = document.querySelector("#navbar_global > ul.navbar-nav.align-items-lg-center.ml-lg-auto > li.nav-item.d-none.d-lg-block.ml-lg-4.dropdown > div > a:nth-child(3)");
 const gruid = document.querySelector("body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(6) > b");
 const trfuid = document.querySelector("body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(3) > b");
 const uid1 = uid?.textContent ?? "ยังไม่เข้าสู่ระบบ";
-const gruid1 = gruid?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก"
-const trfuid1 = trfuid?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก"
-const idpasuid1 = "รออัพเดท"
+const gruid1 = gruid?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก";
+const trfuid1 = trfuid?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก";
+const idpasuid1 = "รออัพเดท";
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
