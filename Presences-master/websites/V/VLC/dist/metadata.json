@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "DooMLorD",
+    "id": "465105167751315471"
+  },
+  "service": "VLC",
+  "description": {
+    "en": "VLC presence for PreMiD! Please read [this page](https://github.com/PreMiD/Presences/blob/master/VLC/readme.md) to get started!"
+  },
+  "url": [
+    "localhost",
+    "127.0.0.1"
+  ],
+  "version": "1.4.7",
+  "logo": "https://doomlord.s-ul.eu/MHqVX7v0",
+  "thumbnail": "https://doomlord.s-ul.eu/LOCgKTnx",
+  "color": "#ff7c00",
+  "tags": [
+    "videolan",
+    "media-player"
+  ],
+  "warning": true,
+  "category": "videos"
+}

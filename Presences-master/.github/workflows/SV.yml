@@ -1,0 +1,39 @@
+name: SV
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "**/metadata.json"
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "**/metadata.json"
+jobs:
+  validate:
+    name: Schema Validation Check
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'PreMiD'
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v2
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Restore CI Cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
+      - name: Prep SV
+        run: |
+          yarn
+          yarn sv:compile
+      - name: Find Changed Files
+        run: |
+          git config core.quotepath off # fixes escape sequence issue
+          git diff-tree --no-commit-id --name-only -r ${{ github.sha }} --output file_changes.txt
+      - name: Start SV
+        run: yarn sv --colors

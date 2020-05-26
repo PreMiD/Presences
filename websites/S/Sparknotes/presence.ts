@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "logo"
     };
-    function subjectCondition(subject:string){
+    function subjectCondition(subject: string): String{
             title = document.querySelector("body > header.TitleHeader_header.TitleHeader_header--studyGuide > div > div > h1");
             if(path == "/" + subject + "/"){
                 presenceData.startTimestamp = browsingStamp;
@@ -23,6 +23,7 @@ presence.on("UpdateData", async () => {
                     presenceData.state = chapter.textContent;
                 }
             }
+            return;
     }
     title = document.querySelector("body > header.TitleHeader_header.TitleHeader_header--studyGuide > div > div > h1");
     if(path == "/"){
@@ -31,11 +32,11 @@ presence.on("UpdateData", async () => {
     }
     else if(path == "/shakespeare/"){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing Shakespheare Literature"
+        presenceData.details = "Viewing Shakespheare Literature";
     }
     else if(path == "/lit/"){
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing All Literature"
+        presenceData.details = "Viewing All Literature";
     }
     else if(path.includes("/blog/")){
         title = document.querySelector("head > title");
