@@ -1,6 +1,6 @@
-let presence = new Presence({ clientId: "714636053235105832" });
+const presence = new Presence({ clientId: "714636053235105832" });
 
-let strings = presence.getStrings({
+const strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused"
 });
@@ -17,7 +17,7 @@ function getTimestamps(
   audioTime: string,
   audioDuration: string
 ): Array<number> {
-  let splitAudioTime = audioTime.split(":").reverse(),
+  const splitAudioTime = audioTime.split(":").reverse(),
     splitAudioDuration = audioDuration.split(":").reverse(),
     parsedAudioTime = getTime(splitAudioTime),
     parsedAudioDuration = getTime(splitAudioDuration),
@@ -35,13 +35,13 @@ let title: string,
   player_button: HTMLButtonElement;
 
 presence.on("UpdateData", async () => {
-  let player = document.querySelector("#g_player");
+  const player = document.querySelector("#g_player");
 
   if (player) {
     player_button = document.querySelector(
       "#g_player > div.btns > a.ply.j-flag"
     );
-    let paused = player_button.classList.contains("pas") === false;
+    const paused = player_button.classList.contains("pas") === false;
     audioTimeLeft = document.querySelector(
       "#g_player > div.play > div.m-pbar > span"
     ).textContent;
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
 
     const timestamps = getTimestamps(audioTime, audioDuration);
 
-    let data: PresenceData = {
+    const data: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "logo",
