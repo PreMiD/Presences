@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Na página inicial...";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     presenceData.smallImageKey = "logo";
-    presenceData.smallImageText = "www.mixmods.com.br"
+    presenceData.smallImageText = "www.mixmods.com.br";
   } else if (document.location.pathname.match("/search/label")) {
     const url = document.location.href.split("/label/")[1].split("?&max")[0];
     const test = url.split("?&max")[0];
