@@ -23,8 +23,7 @@ let extendedRun = false,
 
 function isValidJSON(text: string): boolean {
   try {
-    const data = JSON.parse(text);
-    data['$schema'] = undefined;
+    JSON.parse(text);
     return true;
   } catch {
     return false;
@@ -125,7 +124,9 @@ const main = async (): Promise<void> => {
       .map((pF) => {
         const file = readFile(`${pF}/dist/metadata.json`);
         if (isValidJSON(file)) {
-          return [JSON.parse(file), pF];
+          const data = JSON.parse(file);
+          delete data['$schema'];
+          return [data, pF];
         } else {
           console.error(
             `Error. Folder ${pF} does not include a valid metadata file, skipping...`
