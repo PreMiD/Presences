@@ -1,11 +1,12 @@
-var presence = new Presence({ clientId: "714636053235105832" });
-var strings = presence.getStrings({
+let presence = new Presence({ clientId: "714636053235105832" });
+
+let strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused"
 });
 
 function getTime(list: string[]): number {
-  var ret = 0;
+  let ret = 0;
   for (let index = list.length - 1; index >= 0; index--) {
     ret += parseInt(list[index]) * 60 ** index;
   }
@@ -16,47 +17,48 @@ function getTimestamps(
   audioTime: string,
   audioDuration: string
 ): Array<number> {
-  var splitAudioTime = audioTime.split(":").reverse();
-  var splitAudioDuration = audioDuration.split(":").reverse();
-  var parsedAudioTime = getTime(splitAudioTime);
-  var parsedAudioDuration = getTime(splitAudioDuration);
-  var startTime = Date.now();
-  var endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  let splitAudioTime = audioTime.split(":").reverse(),
+    splitAudioDuration = audioDuration.split(":").reverse(),
+    parsedAudioTime = getTime(splitAudioTime),
+    parsedAudioDuration = getTime(splitAudioDuration),
+    startTime = Date.now(),
+    endTime =
+      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
+let title: string,
+  author: string,
+  audioTime: string,
+  audioDuration: string,
+  audioTimeLeft: string,
+  player_button: HTMLButtonElement;
+
 presence.on("UpdateData", async () => {
-  var player = document.querySelector("#g_player");
+  let player = document.querySelector("#g_player");
 
   if (player) {
-    var player_button: HTMLButtonElement = document.querySelector(
+    player_button = document.querySelector(
       "#g_player > div.btns > a.ply.j-flag"
     );
-    var paused = player_button.classList.contains("pas") === false;
-    var audioTimeLeft = document.querySelector(
+    let paused = player_button.classList.contains("pas") === false;
+    audioTimeLeft = document.querySelector(
       "#g_player > div.play > div.m-pbar > span"
     ).textContent;
+    title = document.querySelector(
+      "#g_player > div.play > div.j-flag.words > a"
+    ).textContent;
+    author = document.querySelector(
+      "#g_player > div.play > div.j-flag.words > span > span"
+    ).textContent;
+    audioTime = document.querySelector(
+      "#g_player > div.play > div.m-pbar > span > em"
+    ).textContent;
+    audioDuration = audioTimeLeft.replace(/(.*)(?=\/)/, "").replace("/ ", "");
 
-    try {
-      var title = document.querySelector(
-        "#g_player > div.play > div.j-flag.words > a"
-      ).textContent;
-      var author = document.querySelector(
-        "#g_player > div.play > div.j-flag.words > span > span"
-      ).textContent;
-      var audioTime = document.querySelector(
-        "#g_player > div.play > div.m-pbar > span > em"
-      ).textContent;
-      var audioDuration = audioTimeLeft
-        .replace(/(.*)(?=\/)/, "")
-        .replace("/ ", "");
-      var timestamps = getTimestamps(audioTime, audioDuration);
-    } catch (err) {
-      console.error(err);
-    }
+    const timestamps = getTimestamps(audioTime, audioDuration);
 
-    var data: PresenceData = {
+    let data: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "logo",
