@@ -36,12 +36,12 @@ presence.on("UpdateData", async () => {
     : true;
   if (playerCheck) {
     const title = document
-      .querySelector(
-        ".web-chrome-playback-lcd__song-name-scroll"
-      )
+      .querySelector(".web-chrome-playback-lcd__song-name-scroll")
       .textContent.trim();
     const author = document
-      .querySelector(".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper")
+      .querySelector(
+        ".web-chrome-playback-lcd__sub-copy-scroll-inner-text-wrapper"
+      )
       .textContent.split("—")[0];
     const audioTime = document.querySelector(
       ".web-chrome-playback-lcd__time-end"
