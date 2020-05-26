@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "logo"
     };
-    function subjectCondition(subject: string): String{
+    function subjectCondition(subject: string): string{
             title = document.querySelector("body > header.TitleHeader_header.TitleHeader_header--studyGuide > div > div > h1");
             if(path == "/" + subject + "/"){
                 presenceData.startTimestamp = browsingStamp;
