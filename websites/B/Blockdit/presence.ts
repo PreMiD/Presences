@@ -43,7 +43,7 @@ if (path.hostname == "blockdit.com" || path.hostname.includes ("www.")) {
       const titlen = document.querySelector("head > title").textContent ?? "Unknow page";
       presenceData.details = "Reading | Articles";
       presenceData.state = titlen + " | Articles";
-      presenceData.smallImageKey = "reading"
+      presenceData.smallImageKey = "reading";
     } // Videos
   } else if (path.pathname.includes ("videos")) {
     presenceData.startTimestamp = browsingStamp;
@@ -67,7 +67,7 @@ if (path.hostname == "blockdit.com" || path.hostname.includes ("www.")) {
       const titlen = document.querySelector("head > title").textContent ?? "Unknow page";
       presenceData.details = "Viewing on page";
       presenceData.state = titlen + " | Videos";
-      presenceData.smallImageKey = "playing"
+      presenceData.smallImageKey = "playing";
     } // Podcast
   } else if (path.pathname.includes ("podcasts")) {
     presenceData.startTimestamp = browsingStamp;
@@ -91,7 +91,7 @@ if (path.hostname == "blockdit.com" || path.hostname.includes ("www.")) {
       const titlen = document.querySelector("head > title").textContent ?? "Unknow page";
       presenceData.details = "Viewing on page";
       presenceData.state = titlen;
-      presenceData.smallImageKey = "playing"
+      presenceData.smallImageKey = "playing";
     } //Series
   } else if (path.pathname.includes ("series")) {
     presenceData.startTimestamp = browsingStamp;
@@ -228,14 +228,14 @@ if (path.hostname == "blockdit.com" || path.hostname.includes ("www.")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Searching for:";
     presenceData.state = searchres;
-    presenceData.smallImageKey = "search"
+    presenceData.smallImageKey = "search";
   } else if (path.pathname.includes ("bookmark")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing on bookmark";
   } else if (path.pathname.includes ("popular")) {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing on popular page"
-    presenceData.state = "Trending"
+    presenceData.details = "Viewing on popular page";
+    presenceData.state = "Trending";
   }
   else {
     const titlen = document.querySelector("head > title").textContent ?? "Unknow page";
