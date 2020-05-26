@@ -3,7 +3,6 @@ import 'source-map-support/register';
 import axios from 'axios';
 import { green, yellow, red, blue } from 'chalk';
 import * as fs from 'fs';
-import { sync as glob } from 'glob';
 import { validate } from 'jsonschema';
 
 const latestMetadataSchema = 'https://schemas.premid.app/metadata/1.0';
@@ -16,15 +15,15 @@ const stats = {
 
 const validated = (service: string): void => { console.log(green(`✔ ${service}`)); stats.validated++ };
 const validatedWithWarnings = (service: string, warning: string): void => { console.log(yellow(`✔ ${service} (${warning})`)); stats.validatedWithWarnings++ };
-const failedToValidate = (service: string, error: string): void => { console.log(red(`✘ ${service} (${error})`)); stats.failedToValidate++ };
+const failedToValidate = (service: string, errors: string[]): void => { console.log(red(`✘ ${service} ${errors.map(e => `  -> ${e}`).join('\n')}`)); stats.failedToValidate++ };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const loadMetadata = (path: string): any => JSON.parse(fs.readFileSync(path, 'utf-8'));
 
-const metaFiles = glob('./websites/*/*/dist/metadata.json', {
-    ignore: ['**/node_modules/**', '**/@types/**'],
-    absolute: true
-});
+// parse file changes from git
+const changedFiles = fs.readFileSync('./file_changes.txt', 'utf-8').trim().split('\n');
+
+const metaFiles = changedFiles.filter((f: string) => f.endsWith('metadata.json'));
 
 (async (): Promise<void> => {
     console.log(blue('Getting latest schema...'));
@@ -39,16 +38,17 @@ const metaFiles = glob('./websites/*/*/dist/metadata.json', {
         const result = validate(meta, schema);
 
         if (result.valid) {
-            if (!meta.schema) {
-                validatedWithWarnings(service, 'No $schema');
-            } else if (meta.schema !== latestMetadataSchema) {
+            if (meta.schema && meta.schema !== latestMetadataSchema) {
                 validatedWithWarnings(service, 'Using out of date schema');
             } else {
                 validated(service);
             }
         } else {
-            const firstError = result.errors[0];
-            failedToValidate(service, `${firstError.message} @ ${firstError.property}`);
+            const errors: string[] = [];
+            for (const error of result.errors)
+                errors.push(`${error.message} @ ${error.property}`);
+
+            failedToValidate(service, errors);
         }
     }
 

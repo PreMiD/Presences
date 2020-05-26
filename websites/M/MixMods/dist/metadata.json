@@ -1,22 +1,22 @@
 {
-    "author": {
-      "name": "Pequeno",
-      "id": "323577179814494209"
-    },
-    "service": "MixMods",
-    "description": {
-      "en": "MixMods is a website of mods for GTA San Andreas and another games. Created by Junior_Djjr, is the biggest website of mods of America Latina",
-      "pt": "MixMods é um site de mods para GTA San Andreas e outros jogos. Criado por Junior_Djjr, é o maior site de mods da America Latina."
-    }, 
-    "url": "www.mixmods.com.br",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/7YvTrtD.png",
-    "thumbnail": "https://i.imgur.com/x17ShNm.png",
-    "color": "#640aa1",
-    "tags": [
-      "mods",
-      "gta",
-      "gaming"
-    ],
-    "category": "games"
-  }
+  "author": {
+    "name": "Pequeno",
+    "id": "323577179814494209"
+  },
+  "service": "MixMods",
+  "description": {
+    "en": "MixMods is a website of mods for GTA San Andreas and another games. Created by Junior_Djjr, is the biggest website of mods of America Latina",
+    "pt": "MixMods é um site de mods para GTA San Andreas e outros jogos. Criado por Junior_Djjr, é o maior site de mods da America Latina."
+  },
+  "url": "www.mixmods.com.br",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/7YvTrtD.png",
+  "thumbnail": "https://i.imgur.com/x17ShNm.png",
+  "color": "#640aa1",
+  "tags": [
+    "mods",
+    "gta",
+    "gaming"
+  ],
+  "category": "games"
+}
