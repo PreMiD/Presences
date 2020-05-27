@@ -33,18 +33,11 @@ presence.on("UpdateData", async () => {
 
     const paused = player.includes("pause") === false;
 
-    try {
-      var title = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > b > a").textContent;
-      var author = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > span").textContent;
-      var audioTime = document.querySelector("#currentTime").textContent;
-      var audioDuration = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq").textContent;
-      var timestamps = getTimestamps(audioTime, audioDuration);
-    } catch (err) {
-      console.log(
-        "Oof error?!:"
-      );
-      console.error(err);
-    }
+    let title = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > b > a").textContent;
+    let author = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > span").textContent;
+    let audioTime = document.querySelector("#currentTime").textContent;
+    let audioDuration = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq").textContent;
+    let timestamps = getTimestamps(audioTime, audioDuration);
 
     const data: PresenceData = {
       details: title,
@@ -55,15 +48,6 @@ presence.on("UpdateData", async () => {
       startTimestamp: timestamps[0],
       endTimestamp: timestamps[1]
     };
-
-    //if (player.includes("radio")) {
-    // data.details = title;
-    //  data.state = author;
-    //  data.largeImageKey = "icon";
-    //  data.smallImageKey = "playing";
-    //  data.smallImageText = "Radio";
-    //  presence.setActivity(data);
-    //}
 
     if (paused) {
       delete data.startTimestamp;
