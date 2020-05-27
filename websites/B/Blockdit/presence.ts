@@ -41,7 +41,7 @@ if (path.hostname == "blockdit.com" || path.hostname.includes ("www.")) {
       presenceData.state = page + " | Articles";
     } else {
       const titlen = document.querySelector("head > title").textContent ?? "Unknow page";
-      presenceData.details = "Reading | Articles";
+      presenceData.details = "Reading on articles";
       presenceData.state = titlen + " | Articles";
       presenceData.smallImageKey = "reading";
     } // Videos
