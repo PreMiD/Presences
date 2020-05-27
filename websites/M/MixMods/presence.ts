@@ -3,41 +3,57 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
+
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
   if (document.location.pathname == "/") {
-    presenceData.details = "Na página principal...";
+    presenceData.details = "Na página inicial...";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+    presenceData.smallImageKey = "logo";
+    presenceData.smallImageText = "www.mixmods.com.br";
   } else if (document.location.pathname.match("/search/label")) {
-    presenceData.details = "Vendo alguma categoria...";
+    const url = document.location.href.split("/label/")[1].split("?&max")[0];
+    const test = url.split("?&max")[0];
+    presenceData.details = "Visualizando categoria:";
+    presenceData.state = decodeURI(test);
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-  } else if (document.location.pathname.startsWith("/p")) {
-    switch (document.location.pathname) {
+  } else if (document.location.pathname.startsWith("/p")){
+    switch(document.location.pathname){
       case "/p/about.html":
-        presenceData.details = "Lendo o Sobre Nós";
-        break;
+	presenceData.details = "Visualizando:";
+        presenceData.state = "Sobre Nós";
+        presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+      break;
       case "/p/lista-de-crash-e-solucoes.html":
-        presenceData.details = "Lendo a Lista de Crash e Soluções";
-        break;
+	presenceData.details = "Visualizando:";
+        presenceData.state = "Lista de Crash";
+        presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+      break;
       case "/p/recomendados.html":
-        presenceData.details = "Vendo os Recomendados";
-        break;
+	presenceData.details = "Visualizando:";
+        presenceData.state = "Recomendados";
+        presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+      break;
       case "/p/disclaimer.html":
-        presenceData.details = "Lendo o Disclaimer";
-        break;
+	presenceData.details = "Visualizando:";
+        presenceData.state = "Disclaimer";
+        presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+      break;
     }
   } else if (document.getElementsByClassName("label-info breadcrumbs")[0]) {
-    presenceData.details = "Vendo uma postagem";
-    const name = document.getElementsByClassName("post-title entry-title")[0]
-      .textContent;
-    presenceData.state = name;
-  } else {
-    presenceData.details = "Navegando no site";
-    const url = document.location.href.split("#")[1];
-    const text = url.split("=")[1];
-    presenceData.state = `Página ${text}`;
+      presenceData.details = "Visualizando um post:";
+      presenceData.state = document.getElementsByClassName("post-title entry-title")[0].textContent;
+      presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+      presenceData.smallImageKey = "user";
+      presenceData.smallImageText = "Postado por Junior_Djjr em " + document.querySelector('[itemprop=datePublished]').textContent;
+  } else { 
+      presenceData.details = ("Navegando no site");
+      const url = document.location.href.split("#")[1];
+      const text = url.split("=")[1];
+      presenceData.state = `Página ${text}`;
+      presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 
   presence.setActivity(presenceData);
