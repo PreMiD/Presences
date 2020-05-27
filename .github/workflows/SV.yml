@@ -45,6 +45,8 @@ jobs:
         uses: DamianReeves/write-file-action@v1.0
         with:
           path: file_changes.txt
-          contents: ${{ join(steps.changed_files.outputs.files_created, '\n') + '\n' + join(steps.changed_files.outputs.files_updated, '\n') }}
+          contents: |
+            ${{ join(steps.changed_files.outputs.files_created, '\n') }}
+            ${{ join(steps.changed_files.outputs.files_updated, '\n') }}
       - name: Start SV
         run: yarn sv --colors
