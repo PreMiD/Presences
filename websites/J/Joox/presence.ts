@@ -33,11 +33,11 @@ presence.on("UpdateData", async () => {
 
     const paused = player.includes("pause") === false;
 
-    let title = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > b > a").textContent;
-    let author = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > span").textContent;
-    let audioTime = document.querySelector("#currentTime").textContent;
-    let audioDuration = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq").textContent;
-    let timestamps = getTimestamps(audioTime, audioDuration);
+    const title = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > b > a").textContent;
+    const author = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > span").textContent;
+    const audioTime = document.querySelector("#currentTime").textContent;
+    const audioDuration = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq").textContent;
+    const timestamps = getTimestamps(audioTime, audioDuration);
 
     const data: PresenceData = {
       details: title,
