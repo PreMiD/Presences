@@ -3,10 +3,7 @@ const presence = new Presence({
 });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let login, register, target: string, bullsEye: string, user, playing, action;
-const path = document.location.pathname;
-const play = document.querySelector("#root > div > div > div > div > div:nth-child(3) > div > div:nth-child(2) > div > div > div > div.css-1dbjc4n.r-1awozwy.r-1niwhzg.r-1p0dtai.r-18u37iz.r-12vffkv.r-u8s1d.r-zchlnj.r-ipm5af > div:nth-child(1) > div");
-const menu = document.querySelector("#root > div > div > div > div > div:nth-child(3) > div > div:nth-child(2) > div > div > div > div.css-1dbjc4n.r-1awozwy.r-1niwhzg.r-1p0dtai.r-18u37iz.r-1d2f490.r-12vffkv.r-u8s1d.r-ipm5af > div:nth-child(1) > div");
+let login, register, target: string, bullsEye: string, playing, action;
 
 const check = window.addEventListener("click", function(event) {
     target = (event.target as HTMLTextAreaElement).innerText;
@@ -200,7 +197,6 @@ presence.on("UpdateData", async () => {
                             else if(action.getAttribute("aria-label") == "Say"){
                                 presenceData.state = "Saying: " + playing.textContent;
                             } 
-                            // @ts-ignore
                             else if(action.getAttribute("aria-label") == "Story"){
                                 presenceData.state = "Story is: " + playing.textContent;
                             }
