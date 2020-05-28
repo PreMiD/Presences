@@ -8,11 +8,20 @@
   "description": {
     "en": "Bungie.net is the home for all your Destiny/Destiny Two needs!"
   },
-  "url": ["www.bungie.net", "bungie.net", "comics.bungie.net", "bungiestore.com"],
-  "version": "1.0.0",
-"logo": "https://i.imgur.com/7N4tOFk.jpg",
-"thumbnail": "https://i.imgur.com/ivK2Uww.png",
-"color": "#12171C",
-"tags": ["games", "socials", "other"],
-"category": "games"
+  "url": [
+    "www.bungie.net",
+    "bungie.net",
+    "comics.bungie.net",
+    "bungiestore.com"
+  ],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/7N4tOFk.jpg",
+  "thumbnail": "https://i.imgur.com/ivK2Uww.png",
+  "color": "#12171C",
+  "tags": [
+    "games",
+    "socials",
+    "other"
+  ],
+  "category": "games"
 }

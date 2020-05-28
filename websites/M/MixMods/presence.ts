@@ -3,7 +3,6 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
@@ -19,41 +18,45 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Visualizando categoria:";
     presenceData.state = decodeURI(test);
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-  } else if (document.location.pathname.startsWith("/p")){
-    switch(document.location.pathname){
+  } else if (document.location.pathname.startsWith("/p")) {
+    switch (document.location.pathname) {
       case "/p/about.html":
-	presenceData.details = "Visualizando:";
+        presenceData.details = "Visualizando:";
         presenceData.state = "Sobre Nós";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break;
+        break;
       case "/p/lista-de-crash-e-solucoes.html":
-	presenceData.details = "Visualizando:";
+        presenceData.details = "Visualizando:";
         presenceData.state = "Lista de Crash";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break;
+        break;
       case "/p/recomendados.html":
-	presenceData.details = "Visualizando:";
+        presenceData.details = "Visualizando:";
         presenceData.state = "Recomendados";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break;
+        break;
       case "/p/disclaimer.html":
-	presenceData.details = "Visualizando:";
+        presenceData.details = "Visualizando:";
         presenceData.state = "Disclaimer";
         presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      break;
+        break;
     }
   } else if (document.getElementsByClassName("label-info breadcrumbs")[0]) {
-      presenceData.details = "Visualizando um post:";
-      presenceData.state = document.getElementsByClassName("post-title entry-title")[0].textContent;
-      presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-      presenceData.smallImageKey = "user";
-      presenceData.smallImageText = "Postado por Junior_Djjr em " + document.querySelector('[itemprop=datePublished]').textContent;
-  } else { 
-      presenceData.details = ("Navegando no site");
-      const url = document.location.href.split("#")[1];
-      const text = url.split("=")[1];
-      presenceData.state = `Página ${text}`;
-      presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+    presenceData.details = "Visualizando um post:";
+    presenceData.state = document.getElementsByClassName(
+      "post-title entry-title"
+    )[0].textContent;
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+    presenceData.smallImageKey = "user";
+    presenceData.smallImageText =
+      "Postado por Junior_Djjr em " +
+      document.querySelector("[itemprop=datePublished]").textContent;
+  } else {
+    presenceData.details = "Navegando no site";
+    const url = document.location.href.split("#")[1];
+    const text = url.split("=")[1];
+    presenceData.state = `Página ${text}`;
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 
   presence.setActivity(presenceData);
