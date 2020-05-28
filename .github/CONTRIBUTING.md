@@ -171,6 +171,7 @@ A list of fields and their rules are listed below:
 - Always make sure the version number follows [semantic versioning standards](https://semver.org), which translates to
   the following scheme: `<NEW-FEATURE>.<HUGE-BUGFIX>.<SMALL-BUGFIX-OR-METADATA-CHANGES>`. Anything else like `1.0.0.1`,
   `1.0`, `1`, `1.0.0-BETA` or changing `1.0.0` to `2.0.0` on a bug fix/small change is **not** permitted.
+- The version **must** always start at `1.0.0` unless told otherwise, other versions will **not** be permitted.
 
 ### **`logo`**
 
