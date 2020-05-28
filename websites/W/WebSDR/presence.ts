@@ -1,4 +1,4 @@
-var presence = new Presence({
+let presence = new Presence({
     clientId: "715344422039977994"
 }),
 
@@ -10,16 +10,16 @@ strings = {
 	read: "Reading"
 };
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 const modes = ["CW", "LSB", "USB", "AM", "FM", "AMsync"];
 
-var frequency: String;
-var mode: number = 2;
-var intHandle: number;
+let frequency: string;
+let mode = 2;
+let intHandle: number;
 
 function updateMode() {
-	var i = 0;
+	let i = 0;
 	Array.from(document.querySelector("div.ctl > form > div.buttonrow").children).forEach(node => {
 		if ((node as HTMLElement).style.background != "") {
 			mode = i;
@@ -30,7 +30,7 @@ function updateMode() {
 }
 
 presence.on("UpdateData", async () => {
-    var presenceData: PresenceData = {
+    let presenceData: PresenceData = {
         largeImageKey: "favicon",
         //smallImageKey: "key",
 		smallImageText: "University of Twente SDR",
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     };
 	
 	if (document.location.pathname === '/') {
-		if (intHandle == undefined || intHandle == null)
+		if (intHandle == undefined)
 			intHandle = setInterval(updateMode, 1000);
 		
 		frequency = (document.querySelector("div.ctl > form > span > input") as HTMLInputElement).value;
