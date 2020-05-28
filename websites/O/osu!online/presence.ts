@@ -13,13 +13,13 @@ presence.on("UpdateData", () => {
         pauseMenu = document.querySelector("#pause-menu");
         const pausedHidden = pauseMenu.getAttribute("hidden");
         if (gameArea != null) {
-            presenceData.details = "Clicking circles"
+            presenceData.details = "Clicking circles";
             if (pausedHidden == null) {
-            presenceData.details = "Clicking circles"
-            presenceData.state = "Paused menu"
+            presenceData.details = "Clicking circles";
+            presenceData.state = "Paused menu";
             }
         } else {
-            let pageHome = document.getElementsByClassName("title")[0];
+            const pageHome = document.getElementsByClassName("title")[0];
             let pageText1;
             if (pageHome == null) {
                 pageText1 = "Browsing...";
@@ -30,7 +30,7 @@ presence.on("UpdateData", () => {
             presenceData.state = pageText1
         }
     } else if (document.location.pathname.startsWith("/index")) {
-        let pageHome = document.getElementsByClassName("title")[0];
+        const pageHome = document.getElementsByClassName("title")[0];
         let pageText1;
         if (pageHome == null) {
                 pageText1 = "Browsing...";
@@ -38,9 +38,9 @@ presence.on("UpdateData", () => {
                 pageText1 = "Listening: " + pageHome.textContent;
             }
                 presenceData.details = "Viewing the homepage",
-                presenceData.state = pageText1
+                presenceData.state = pageText1;
         } else if (document.location.pathname.startsWith("/new")) {
-            let pageNew = document.getElementsByClassName("title")[0];
+            const pageNew = document.getElementsByClassName("title")[0];
             let pageText2;
             if (pageNew == null) {
                 pageText2 = "Browsing...";
@@ -48,9 +48,9 @@ presence.on("UpdateData", () => {
                 pageText2 = "Listening: " + pageNew.textContent;
             }
             presenceData.details = "Viewing new beatmaps",
-            presenceData.state = pageText2
+            presenceData.state = pageText2;
         } else if (document.location.pathname.startsWith("/hot")) {
-            let pageHot = document.getElementsByClassName("title")[0];
+            const pageHot = document.getElementsByClassName("title")[0];
             let pageText3;
             if (pageHot == null) {
                 pageText3 = "Browsing...";
@@ -58,24 +58,24 @@ presence.on("UpdateData", () => {
                 pageText3 = "Listening: " + pageHot.textContent;
             }
             presenceData.details = "Viewing hot beatmaps",
-            presenceData.state = pageText3
+            presenceData.state = pageText3;
         } else if (document.location.pathname.startsWith("/genre")) {
-            let pageGen1 = document.getElementsByClassName("title")[2];
-            let pageGen2 = document.getElementsByClassName("title")[0];
-            let pageGen3 = document.getElementsByClassName("title")[1];
-            let pageGen4 = document.getElementsByClassName("selitem active")[0];
-            let pageGen5 = document.getElementsByClassName("selitem active")[1];
+            const pageGen1 = document.getElementsByClassName("title")[2];
+            const pageGen2 = document.getElementsByClassName("title")[0];
+            const pageGen3 = document.getElementsByClassName("title")[1];
+            const pageGen4 = document.getElementsByClassName("selitem active")[0];
+            const pageGen5 = document.getElementsByClassName("selitem active")[1];
             if (pageGen1 != null) {
                 let pageText4;
                 pageText4 = "Listening: " + pageGen1.textContent;
                 presenceData.details = "Searching by categories",
-                presenceData.state = pageText4
+                presenceData.state = pageText4;
             } else {
                 let pageText5;
                 pageText5 = pageGen2.textContent + ": " + pageGen4.textContent + " " + pageGen3.textContent + ": " + pageGen5.textContent;
 
                 presenceData.details = "Searching by categories",
-                presenceData.state = pageText5
+                presenceData.state = pageText5;
             };
         } else if (document.location.pathname.startsWith("/search")) {
             let pageSch1 = document.getElementsByClassName("title")[0];
@@ -85,7 +85,7 @@ presence.on("UpdateData", () => {
             if (pageSch1 != null) {
                 pageText6 = "Listening: " + pageSch1.textContent;
                 presenceData.details = "Searching for beatmaps",
-                presenceData.state = pageText6
+                presenceData.state = pageText6;
             } else {
             if ((pageSch2 as HTMLInputElement).value == "") {
                 pageText7 = "Browsing...";
@@ -93,7 +93,7 @@ presence.on("UpdateData", () => {
                 pageText7 = "Keyword: " + (pageSch2 as HTMLInputElement).value;
             }
             presenceData.details = "Searching for beatmaps",
-            presenceData.state = pageText7
+            presenceData.state = pageText7;
             };
 
         } else if (document.location.pathname.startsWith("/local")) {
@@ -105,7 +105,7 @@ presence.on("UpdateData", () => {
                 pageText7 = "Listening: " + pageFav.textContent;
             }
                 presenceData.details = "Viewing my favourites",
-                presenceData.state = pageText7
+                presenceData.state = pageText7;
 
         } else if (document.location.pathname.startsWith("/history")) {
             presenceData.details = "Viewing playing history",
