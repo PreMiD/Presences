@@ -3,6 +3,7 @@ const presence = new Presence({
 });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
+
 const params = document.location.search;
 const uid = document.querySelector("#navbar_global > ul.navbar-nav.align-items-lg-center.ml-lg-auto > li.nav-item.d-none.d-lg-block.ml-lg-4.dropdown > div > a:nth-child(3)");
 const gruid = document.querySelector("body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(6) > b");
@@ -13,10 +14,9 @@ const trfuid1 = trfuid?.textContent.replace("สมาชิกหมายเ�
 const idpasuid1 = "รออัพเดท";
 
 presence.on("UpdateData", async () => {
-const presenceData: PresenceData = {
-  largeImageKey: "icon"
-};
-
+  const presenceData: PresenceData = {
+    largeImageKey: "icon"
+  };
 
 if (document.location.hostname == "snowboltz.net") {
   if (params.includes("home")) {
@@ -131,11 +131,10 @@ if (document.location.hostname == "snowboltz.net") {
   }
 }
 
-if (presenceData.details == null) {
-  presence.setTrayTitle();
-  presence.setActivity();
-} else {
-  presence.setActivity(presenceData);
-}
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
 });
-

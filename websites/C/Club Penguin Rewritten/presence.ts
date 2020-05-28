@@ -72,7 +72,10 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = elapsed;
 
-  if (document.URL.includes("/#/") == false && document.URL.includes("play.cprewritten.net")) {
+  if (
+    document.URL.includes("/#/") == false &&
+    document.URL.includes("play.cprewritten.net")
+  ) {
     presenceData.details = "Viewing Main Menu";
   } else if (document.URL.includes("/#/")) {
     if (status == "") {
@@ -363,7 +366,8 @@ presence.on("UpdateData", async () => {
     } else if (status == "948") {
       presenceData.details = "Online";
       presenceData.state = " Spin to Win";
-    } else if (parseInt(status) > 1003) { // Penguins with a playerID less than 1004 will be reported as being in a room due to igloos reporting the playerID of the owner.
+    } else if (parseInt(status) > 1003) {
+      // Penguins with a playerID less than 1004 will be reported as being in a room due to igloos reporting the playerID of the owner.
       presenceData.details = "Online";
       presenceData.state = "In an Igloo";
     } else if (parseInt(status) < 1004) {
@@ -382,58 +386,85 @@ presence.on("UpdateData", async () => {
       presenceData.state = room;
     }
   } else if (document.location.host == "community.cprewritten.net") {
-      if (document.location.pathname == "/legal-disclaimer/") {
-        presenceData.largeImageKey = "moderator";
-        presenceData.details = "Viewing Legal Disclaimer";
-      } else if (document.location.pathname == "/") {
-        presenceData.largeImageKey = "newspaper";
-        presenceData.details = "Viewing Communtiy Homepage";
-      } else if (document.location.pathname.includes("blog") || document.location.pathname.includes("author") || document.location.pathname.includes("category")) {
-        presenceData.largeImageKey = "newspaper";
-        presenceData.details = "Viewing \"What's New\" Blog";
-        if (document.location.pathname.includes("author")) {
-          const author = document.location.pathname.replace("/author/","").replace("/","");
-          presenceData.state = "Filtering for Articles By " + author.charAt(0).toUpperCase() + author.slice(1);
-        } else if (document.location.pathname.includes("category")) {
-          const s = document.location.pathname.replace("/category/","").replace("/","");
-          let n = "";
-          if (s == "videos") {
-            n = "Videos";
-          } else if (s == "news") {
-            n = "News";
-          } else if (s == "sneak-peeks") {
-            n = "Sneak Peeks";
-          } else if (s == "reviewed-by-you") {
-            n = "Reviewed by You";
-          } else if (s == "potw") {
-            n = "Penguin of the Week";
-          } presenceData.state = 'Filtering for "' + n + '"';
+    if (document.location.pathname == "/legal-disclaimer/") {
+      presenceData.largeImageKey = "moderator";
+      presenceData.details = "Viewing Legal Disclaimer";
+    } else if (document.location.pathname == "/") {
+      presenceData.largeImageKey = "newspaper";
+      presenceData.details = "Viewing Communtiy Homepage";
+    } else if (
+      document.location.pathname.includes("blog") ||
+      document.location.pathname.includes("author") ||
+      document.location.pathname.includes("category")
+    ) {
+      presenceData.largeImageKey = "newspaper";
+      presenceData.details = 'Viewing "What\'s New" Blog';
+      if (document.location.pathname.includes("author")) {
+        const author = document.location.pathname
+          .replace("/author/", "")
+          .replace("/", "");
+        presenceData.state =
+          "Filtering for Articles By " +
+          author.charAt(0).toUpperCase() +
+          author.slice(1);
+      } else if (document.location.pathname.includes("category")) {
+        const s = document.location.pathname
+          .replace("/category/", "")
+          .replace("/", "");
+        let n = "";
+        if (s == "videos") {
+          n = "Videos";
+        } else if (s == "news") {
+          n = "News";
+        } else if (s == "sneak-peeks") {
+          n = "Sneak Peeks";
+        } else if (s == "reviewed-by-you") {
+          n = "Reviewed by You";
+        } else if (s == "potw") {
+          n = "Penguin of the Week";
         }
-      } else {
-        presenceData.largeImageKey = "newspaper";
-        presenceData.details = "Reading a Community Post";
-        presenceData.state = document.querySelector(".blog_head h4").textContent + " (" + document.querySelector(".blog_head").textContent.split(" |")[0].replace(document.querySelector(".blog_head h4").textContent, "").replace("\n","").replace("\n","") + ")";
+        presenceData.state = 'Filtering for "' + n + '"';
       }
-    } else if (document.location.host == "cprewritten.net") {
-      if (document.location.pathname == "/") {
-        presenceData.details = "Viewing Homepage";
-      } else if (document.location.pathname.includes("/help/")) {
-        presenceData.details = "Getting Help";
-        if (document.location.pathname.includes(".html")) {
-          const uncaptializedState = document.location.pathname.replace("/help/articles/", "").replace(".html", "");
-          let state = "";
-          const words = uncaptializedState.split("_");
-          for (let i = 0; i < words.length; i++) {
-            if (i == 0) {
-              state = words[i].charAt(0).toUpperCase() + words[i].slice(1);
-            } else {
-              state = state + " " + words[i].charAt(0).toUpperCase() + words[i].slice(1);
-            }
-          } presenceData.state = state;
+    } else {
+      presenceData.largeImageKey = "newspaper";
+      presenceData.details = "Reading a Community Post";
+      presenceData.state =
+        document.querySelector(".blog_head h4").textContent +
+        " (" +
+        document
+          .querySelector(".blog_head")
+          .textContent.split(" |")[0]
+          .replace(document.querySelector(".blog_head h4").textContent, "")
+          .replace("\n", "")
+          .replace("\n", "") +
+        ")";
+    }
+  } else if (document.location.host == "cprewritten.net") {
+    if (document.location.pathname == "/") {
+      presenceData.details = "Viewing Homepage";
+    } else if (document.location.pathname.includes("/help/")) {
+      presenceData.details = "Getting Help";
+      if (document.location.pathname.includes(".html")) {
+        const uncaptializedState = document.location.pathname
+          .replace("/help/articles/", "")
+          .replace(".html", "");
+        let state = "";
+        const words = uncaptializedState.split("_");
+        for (let i = 0; i < words.length; i++) {
+          if (i == 0) {
+            state = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+          } else {
+            state =
+              state +
+              " " +
+              words[i].charAt(0).toUpperCase() +
+              words[i].slice(1);
+          }
         }
+        presenceData.state = state;
       }
     }
-
+  }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();

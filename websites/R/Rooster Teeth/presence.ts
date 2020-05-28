@@ -67,11 +67,14 @@ presence.on("UpdateData", () => {
     }
   } else if (path.includes("/schedule")) {
     presenceData.details = "Viewing Schedule";
-    for (var scheduleDay of document.getElementsByClassName("schedule-day")) {
-      var position = scheduleDay.getBoundingClientRect();
+    for (const x in document.getElementsByClassName("schedule-day")) {
+      const position = document
+        .getElementsByClassName("schedule-day")
+        [x].getBoundingClientRect();
       if (position.top < window.innerHeight && position.bottom >= 0) {
-        presenceData.state = scheduleDay
-          .querySelector(".schedule-day__heading")
+        presenceData.state = document
+          .getElementsByClassName("schedule-day")
+          [x].querySelector(".schedule-day__heading")
           .textContent.toLowerCase();
         presenceData.state =
           presenceData.state.substr(0, 1).toUpperCase() +
