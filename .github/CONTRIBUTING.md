@@ -16,7 +16,7 @@ The general rules of presence development are as follows:
 
 - Presences **must** be related to the website of choice.
 - Presences **cannot** be made for illegal websites. ( for e.g., stressors, drug marketing, child pornography, etc. )
-- The file structure must be clean and managed, do not include files which arenot specified. ( for e.g., vscode and git
+- The file structure must be clean and managed, do not include files which are not specified. ( for e.g., vscode and git
   folders, image and text files, etc. )
 - You need to have a proper file structure, drafts are **not** allowed.
 - Presences for websites with ( `.onion` TLDs ) or websites with free domains/hosts ( for e.g., `.TK` [all free Freenom
@@ -164,7 +164,7 @@ A list of fields and their rules are listed below:
 - The url **must** be a string if the website only uses one domain. If the website uses multiple, make this an array and
   specify each one.
 - Do **not** include protocols in the url ( for e.g., `http` or `https` ), and do not include query parameters in the
-  url ( for e.g., `www.google.com/search?gws_rd=ssl` which should be `www.google.com/search`)
+  url ( for e.g., `www.google.com/search?gws_rd=ssl` which should be `www.google.com/`)
 
 ### **`version`**
 
