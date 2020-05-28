@@ -8,7 +8,7 @@
     "en": "7plus is a video on demand, catch-up TV service run by the Seven Network. 7plus also offers online live streaming of Channel Seven, 7TWO, 7mate, 7flix, and Racing.com."
   },
   "service": "7plus",
-  "version": "1.0",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/ZY2K3CC.png",
   "thumbnail": "https://i.imgur.com/A50n9nx.png",
   "color": "#FF0000",
