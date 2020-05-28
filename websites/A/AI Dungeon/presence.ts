@@ -3,8 +3,8 @@ const presence = new Presence({
 });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let login, register, target: string, bullsEye: string, playing, action;
-
+let login, register, target: string, bullsEye: string, playing, action, textArray, home;
+const path = document.location.pathname;
 const check = window.addEventListener("click", function(event) {
     target = (event.target as HTMLTextAreaElement).innerText;
     if(target != undefined){
@@ -59,42 +59,51 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "ailogo"
     };
-    // Due to unfortunate errors regarding regExp the main site aidungeon.io is pushed back to a later date.
-    // if(window.location.hostname == "aidungeon.io"){
-    //     console.log("Online");
-    //     if(path == "/" || path == ""){
-    //         presenceData.startTimestamp = browsingStamp;
-    //         presenceData.details = "Home";
-    //         home = document.querySelector("body > main > div > div.elementor.elementor-12 > div > div > section.elementor-element.elementor-element-57749c3.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default.elementor-section.elementor-top-section > div > div > div > div > div > div > div > h3 > span.elementor-headline-plain-text.elementor-headline-text-wrapper");
-    //         textArray = document.getElementsByClassName("elementor-headline-dynamic-letter elementor-headline-animation-in");
-    //         if(textArray){
-    //             if(textArray[0].textContent == "s"){
-    //                 presenceData.state = "Create your own Story";
-    //             }
-    //             else if(textArray[0].textContent == "a"){
-    //                 presenceData.state = "Create your own Adventure";
-    //             }
-    //             else if(textArray[0].textContent == "f"){
-    //                 presenceData.state = "Create your own Fantasy";
-    //             }
-    //             else if(textArray[0].textContent == "m"){
-    //                 presenceData.state = "Create your own Mystery";
-    //             }
-    //             else if(textArray[0].textContent == "r"){
-    //                 presenceData.state = "Create your own Romance";
-    //             }
-    //             else if(textArray[0].textContent == "d"){
-    //                 presenceData.state = "Create your own Dream";
-    //             }
-    //             else if(textArray[0].textContent == "w"){
-    //                 presenceData.state = "Create your own World";
-    //             }
-    //         }
-    //     }
-    //     else if(path == "/play-ai-dungeon/"){
-    //         presenceData.details = "Selecting Platform to play On";
-    //     }
-    // }
+    if(window.location.hostname == "aidungeon.io"){
+        console.log("Online");
+        if(path == "/" || path == ""){
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Home";
+            home = document.querySelector("body > main > div > div.elementor.elementor-12 > div > div > section.elementor-element.elementor-element-57749c3.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default.elementor-section.elementor-top-section > div > div > div > div > div > div > div > h3 > span.elementor-headline-plain-text.elementor-headline-text-wrapper");
+            textArray = document.getElementsByClassName("elementor-headline-dynamic-letter elementor-headline-animation-in");
+            if(textArray){
+                if(textArray[0].textContent == "s"){
+                presenceData.state = "Create your own Story";
+                }
+                else if(textArray[0].textContent == "a"){
+                presenceData.state = "Create your own Adventure";
+                }
+            else if(textArray[0].textContent == "f"){
+                presenceData.state = "Create your own Fantasy";
+                }
+            else if(textArray[0].textContent == "m"){
+                presenceData.state = "Create your own Mystery";
+                }
+            else if(textArray[0].textContent == "r"){
+                presenceData.state = "Create your own Romance";
+                }
+            else if(textArray[0].textContent == "d"){
+                    presenceData.state = "Create your own Dream";
+                }
+                else if(textArray[0].textContent == "w"){
+                    presenceData.state = "Create your own World";
+                }
+        }
+    }
+    else if(path == "/play-ai-dungeon/"){
+        presenceData.details = "Selecting Platform to play on";
+        presenceData.startTimestamp = browsingStamp;
+    }
+    else if(path == "/terms-of-service/"){
+        presenceData.details = "Reading Terms of Service";
+        presenceData.startTimestamp = browsingStamp;
+    }
+    else if(path == "/privacy-policy/"){
+        presenceData.details = "Reading Privacy Policy";
+        presenceData.startTimestamp = browsingStamp;
+    }
+
+}
     if(window.location.hostname == "play.aidungeon.io"){
         login = document.querySelector("#root > div > div > div > div > div:nth-child(2) > div > div.css-1dbjc4n.r-13awgt0 > div > div > div > div.css-1dbjc4n.r-18u37iz.r-1wtj0ep.r-15d164r.r-156q2ks.r-13qz1uu > div:nth-child(1)");
         register = document.querySelector("#root > div > div > div > div > div:nth-child(2) > div > div.css-1dbjc4n.r-13awgt0 > div > div > div > div.css-1dbjc4n.r-18u37iz.r-1wtj0ep.r-15d164r.r-156q2ks.r-13qz1uu > div:nth-child(2)");
@@ -161,6 +170,7 @@ presence.on("UpdateData", async () => {
                         presenceData.state = "Reading";
                         presenceData.smallImageKey = "read";
                         presenceData.smallImageText = "Reading Current Message";
+                        presenceData.startTimestamp = browsingStamp;
                     }
                     else{
                         presenceData.details = "Playing";
@@ -168,12 +178,15 @@ presence.on("UpdateData", async () => {
                         presenceData.smallImageText = "Playing a Game";
                         if(action.getAttribute("aria-label") == "Do"){
                             presenceData.state = "Doing: " + playing.textContent;
+                            delete presenceData.startTimestamp;
                         } 
                         else if(action.getAttribute("aria-label") == "Say"){
                             presenceData.state = "Saying: " + playing.textContent;
+                            delete presenceData.startTimestamp;
                         } 
                         else if(action.getAttribute("aria-label") == "Story"){
                             presenceData.state = "Story is: " + playing.textContent;
+                            delete presenceData.startTimestamp;
                         }
                     }
                 }
@@ -185,6 +198,7 @@ presence.on("UpdateData", async () => {
                             presenceData.state = "Reading";
                             presenceData.smallImageKey = "read";
                             presenceData.smallImageText = "Reading Current Message";
+                            presenceData.startTimestamp = browsingStamp;
                         }
                         else{
                             presenceData.details = "Playing";
@@ -193,12 +207,15 @@ presence.on("UpdateData", async () => {
                             action = document.querySelector("#root > div > div > div > div > div:nth-child(4) > div > div.css-1dbjc4n.r-13awgt0 > div > div:nth-child(2) > div.css-1dbjc4n.r-18u37iz.r-13qz1uu > div.css-1dbjc4n.r-13awgt0.r-18u37iz > div > div");
                             if(action.getAttribute("aria-label") == "Do"){
                                 presenceData.state = "Doing: " + playing.textContent;
+                                delete presenceData.startTimestamp;
                             } 
                             else if(action.getAttribute("aria-label") == "Say"){
                                 presenceData.state = "Saying: " + playing.textContent;
+                                delete presenceData.startTimestamp;
                             } 
                             else if(action.getAttribute("aria-label") == "Story"){
                                 presenceData.state = "Story is: " + playing.textContent;
+                                delete presenceData.startTimestamp;
                             }
                         }
                     }
