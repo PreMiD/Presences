@@ -234,6 +234,7 @@ Here is a list of rules you must follow when writing your `presence.ts` file:
   anything unrelated to PreMiD.
 - You are **not** allowed to access `localStorage`.
 - When accessing cookies for stored data, please prefix the key with `PMD_`.
+- Making requests to external domains is **not** allowed unless you can specify why you are needing to do so.
 
 ## [**tsconfig.json**](https://docs.premid.app/en/dev/presence/tsconfig)
 
