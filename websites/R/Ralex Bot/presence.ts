@@ -2,16 +2,13 @@ const presence = new Presence({
     clientId: "715289275977039987"
   });
   
-  const browsingStamp = Math.floor(Date.now() / 1000);
-
-    console.log()
-
+  const browsedTimestamp = Math.floor(Date.now() / 1000);
   presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "ralexlogo"
     };
     if(document.location.hostname == "bot.ralex.xyz") {
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.startTimestamp = browsedTimestamp;
       if(document.location.pathname == "/") {
         presenceData.details = "Ana sayfayı inceliyor.";
       } else if (document.location.pathname.includes("/komutlar")) {
@@ -58,13 +55,13 @@ const presence = new Presence({
         presenceData.details = "Gezdiğin sayfayı";
         presenceData.state = "Ralex evreninde bulamadım ツ";
       }
-    };
+    }
     
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
     } else {
       presence.setActivity(presenceData);
-    };
+    }
   });
   
