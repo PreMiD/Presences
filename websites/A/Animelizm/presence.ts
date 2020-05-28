@@ -7,7 +7,7 @@ strings = presence.getStrings({
     browsing: "presence.activity.browsing"
 });
 
-var video = {
+let video = {
     current: 0,
     duration: 0,
     paused: true
@@ -32,7 +32,7 @@ presence.on("iFrameData", (data: { current: number; duration: number; paused: bo
 });
 
 presence.on("UpdateData", async () => {
-    var presenceData: PresenceData = {
+    let presenceData: PresenceData = {
         largeImageKey: "logo"
     };
 
@@ -43,8 +43,8 @@ presence.on("UpdateData", async () => {
     }
 
     const timestamps = getTimestamps(Math.floor(video.current), Math.floor(video.duration));
-    var Info = document.querySelector(".ez-detail-title").textContent;
-    var episode;
+    const Info = document.querySelector(".ez-detail-title").textContent;
+    let episode;
 
     if (Info.includes('ตอนที่')) {
         var info = Info.split("ตอนที่");
@@ -65,8 +65,6 @@ presence.on("UpdateData", async () => {
     
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
 
     if (!video.paused) {
         presenceData.startTimestamp = timestamps[0];
