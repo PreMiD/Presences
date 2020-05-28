@@ -6,7 +6,7 @@ const presence = new Presence({
 
     console.log()
 
-  presence.on("UpdateData", () => {
+  presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "ralexlogo"
     };
