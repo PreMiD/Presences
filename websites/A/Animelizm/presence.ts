@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
     let episode;
 
     if (Info.includes('ตอนที่')) {
-        let info = Info.split("ตอนที่");
+        const info = Info.split("ตอนที่");
         episode = info.pop();
 
         if (episode.includes('ซับไทย')) {
