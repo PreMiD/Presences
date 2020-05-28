@@ -7,8 +7,11 @@
   "description": {
     "en": "A tool that allows anyone on the web to listen to shortwave and longwave radio without spending any money on radio equipment."
   },
-  "url": "websdr.ewi.utwente.nl",
-  "version": "1.0.0",
+  "url": [
+    "websdr.ewi.utwente.nl",
+    "etgd1.ewi.utwente.nl"
+  ],
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/duTGqD6.png",
   "thumbnail": "https://i.imgur.com/zaZSyjD.png",
   "color": "#1f38de",
