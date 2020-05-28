@@ -40,6 +40,8 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: futuratrepadeira/changed-files@v3
         id: changed_files
+        with:
+          repo-token: ${{ github.token }} 
       - name: Write Changed Files (pull request)
         if: github.event_name == 'pull_request'
         uses: DamianReeves/write-file-action@v1.0
