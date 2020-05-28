@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
                 pageText1 = "Listening: " + pageHome.textContent;
             }
             presenceData.details = "Viewing the homepage",
-            presenceData.state = pageText1
+            presenceData.state = pageText1;
         }
     } else if (document.location.pathname.startsWith("/index")) {
         const pageHome = document.getElementsByClassName("title")[0];
@@ -66,20 +66,18 @@ presence.on("UpdateData", () => {
             const pageGen4 = document.getElementsByClassName("selitem active")[0];
             const pageGen5 = document.getElementsByClassName("selitem active")[1];
             if (pageGen1 != null) {
-                let pageText4;
-                pageText4 = "Listening: " + pageGen1.textContent;
+                const pageText4 = "Listening: " + pageGen1.textContent;
                 presenceData.details = "Searching by categories",
                 presenceData.state = pageText4;
             } else {
-                let pageText5;
-                pageText5 = pageGen2.textContent + ": " + pageGen4.textContent + " " + pageGen3.textContent + ": " + pageGen5.textContent;
+                const pageText5 = pageGen2.textContent + ": " + pageGen4.textContent + " " + pageGen3.textContent + ": " + pageGen5.textContent;
 
                 presenceData.details = "Searching by categories",
                 presenceData.state = pageText5;
-            };
+            }
         } else if (document.location.pathname.startsWith("/search")) {
-            let pageSch1 = document.getElementsByClassName("title")[0];
-            let pageSch2 = document.getElementsByName("q")[0];
+            const pageSch1 = document.getElementsByClassName("title")[0];
+            const pageSch2 = document.getElementsByName("q")[0];
             let pageText6;
             let pageText7;
             if (pageSch1 != null) {
@@ -94,10 +92,9 @@ presence.on("UpdateData", () => {
             }
             presenceData.details = "Searching for beatmaps",
             presenceData.state = pageText7;
-            };
-
+            }
         } else if (document.location.pathname.startsWith("/local")) {
-            let pageFav = document.getElementsByClassName("title")[0];
+            const pageFav = document.getElementsByClassName("title")[0];
             let pageText7;
             if (pageFav == null) {
                 pageText7 = "Browsing...";
@@ -109,13 +106,13 @@ presence.on("UpdateData", () => {
 
         } else if (document.location.pathname.startsWith("/history")) {
             presenceData.details = "Viewing playing history",
-            presenceData.state = "Browsing..."
+            presenceData.state = "Browsing...";
         } else if (document.location.pathname.startsWith("/faq")) {
             presenceData.details = "Viewing FAQ",
-            presenceData.state = "Getting some information"
+            presenceData.state = "Getting some information";
         } else if (document.location.pathname.startsWith("/settings")) {
             presenceData.details = "Viewing settings",
-            presenceData.state = "Changing..."
+            presenceData.state = "Changing...";
         }
     if (presenceData.details == null) {
         presence.setTrayTitle();
