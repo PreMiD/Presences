@@ -1,7 +1,7 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "713114770584109150"
 });
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 let gameName: HTMLElement;
 let storeName: HTMLElement;
 let gamePrice: HTMLElement;

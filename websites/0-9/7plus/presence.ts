@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "704212795666726941"
 });
 
