@@ -1,7 +1,7 @@
 <div align="center">
     <img src="https://i.imgur.com/oo3wi3q.png" width="128px" style="max-width:100%;">
-    <h2 style="font-size: 2rem; margin-bottom: 0">Presence Guidelines</h2>
-    <h3 style="margin-top: 0">Revision 2</h3>
+    <h3 style="font-size: 2rem; margin-bottom: 0">Presence Guidelines</h2>
+    <h4 style="margin-top: 0">Revision 2</h3>
     <br />
 </div>
 
