@@ -18,7 +18,7 @@ let frequency: string;
 let mode = 2;
 let intHandle: number;
 
-function updateMode() {
+function updateMode(): void {
 	let i = 0;
 	Array.from(document.querySelector("div.ctl > form > div.buttonrow").children).forEach(node => {
 		if ((node as HTMLElement).style.background != "") {
@@ -27,6 +27,7 @@ function updateMode() {
 		}
 		i++;
 	});
+	return;
 }
 
 presence.on("UpdateData", async () => {
