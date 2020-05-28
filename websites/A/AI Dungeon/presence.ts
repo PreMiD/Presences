@@ -3,13 +3,13 @@ const presence = new Presence({
 });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let home, login, register, e, target: string, bullsEye: string, user, playing, action, textArray;
+let login, register, target: string, bullsEye: string, user, playing, action;
 const path = document.location.pathname;
 const play = document.querySelector("#root > div > div > div > div > div:nth-child(3) > div > div:nth-child(2) > div > div > div > div.css-1dbjc4n.r-1awozwy.r-1niwhzg.r-1p0dtai.r-18u37iz.r-12vffkv.r-u8s1d.r-zchlnj.r-ipm5af > div:nth-child(1) > div");
 const menu = document.querySelector("#root > div > div > div > div > div:nth-child(3) > div > div:nth-child(2) > div > div > div > div.css-1dbjc4n.r-1awozwy.r-1niwhzg.r-1p0dtai.r-18u37iz.r-1d2f490.r-12vffkv.r-u8s1d.r-ipm5af > div:nth-child(1) > div");
 
-const check = window.addEventListener("click", function(event:any) {
-    target = event.target.innerText;
+const check = window.addEventListener("click", function(event) {
+    target = (event.target as HTMLTextAreaElement).innerText;
     if(target != undefined){
         if(target.includes("Home")){
             bullsEye = target;
@@ -51,7 +51,7 @@ const check = window.addEventListener("click", function(event:any) {
             return bullsEye = "NEW SINGLEPLAYER GAME";
         }
         else{
-            return;
+            return bullsEye;
         }
     }
     else{
@@ -101,21 +101,15 @@ presence.on("UpdateData", async () => {
     if(window.location.hostname == "play.aidungeon.io"){
         login = document.querySelector("#root > div > div > div > div > div:nth-child(2) > div > div.css-1dbjc4n.r-13awgt0 > div > div > div > div.css-1dbjc4n.r-18u37iz.r-1wtj0ep.r-15d164r.r-156q2ks.r-13qz1uu > div:nth-child(1)");
         register = document.querySelector("#root > div > div > div > div > div:nth-child(2) > div > div.css-1dbjc4n.r-13awgt0 > div > div > div > div.css-1dbjc4n.r-18u37iz.r-1wtj0ep.r-15d164r.r-156q2ks.r-13qz1uu > div:nth-child(2)");
-        
-        home = document.querySelector("#root > div > div > div > div > div > div > div:nth-child(2) > div > div > div > div:nth-child(1) > div > div");
-        user = document.querySelector("#root > div > div > div > div > div.css-1dbjc4n.r-1niwhzg.r-1p0dtai.r-1d2f490.r-105ug2t.r-u8s1d.r-zchlnj.r-ipm5af > div > div.css-1dbjc4n.r-13awgt0 > div > div > div.css-1dbjc4n.r-1awozwy > div > div.css-1dbjc4n.r-eqz5dr > div");
-        
         playing = document.querySelector("#root > div > div > div > div > div:nth-child(2) > div > div.css-1dbjc4n.r-13awgt0 > div > div:nth-child(2) > div.css-1dbjc4n.r-18u37iz.r-13qz1uu > div.css-1dbjc4n.r-13awgt0.r-18u37iz > textarea");
         action = document.querySelector("#root > div > div > div > div > div:nth-child(2) > div > div.css-1dbjc4n.r-13awgt0 > div > div:nth-child(2) > div.css-1dbjc4n.r-18u37iz.r-13qz1uu > div.css-1dbjc4n.r-13awgt0.r-18u37iz > div > div");
         
         if(login != null){
-            // @ts-ignore
-            if((login).ariaLabel == "Login (selected)"){
+            if(login.getAttribute("aria-label") == "Login (selected)"){
                 presenceData.details = "Logging in";
                 presenceData.startTimestamp = browsingStamp;
             }
-            // @ts-ignore
-            else if(register.ariaLabel == "Register (selected)"){
+            else if(register.getAttribute("aria-label") == "Register (selected)"){
                 presenceData.details = "Registering";
                 presenceData.startTimestamp = browsingStamp;
             }
@@ -175,16 +169,13 @@ presence.on("UpdateData", async () => {
                         presenceData.details = "Playing";
                         presenceData.smallImageKey = "play";
                         presenceData.smallImageText = "Playing a Game";
-                        // @ts-ignore
-                        if(action.ariaLabel == "Do"){
+                        if(action.getAttribute("aria-label") == "Do"){
                             presenceData.state = "Doing: " + playing.textContent;
                         } 
-                        // @ts-ignore
-                        else if(action.ariaLabel == "Say"){
+                        else if(action.getAttribute("aria-label") == "Say"){
                             presenceData.state = "Saying: " + playing.textContent;
                         } 
-                        // @ts-ignore
-                        else if(action.ariaLabel == "Story"){
+                        else if(action.getAttribute("aria-label") == "Story"){
                             presenceData.state = "Story is: " + playing.textContent;
                         }
                     }
@@ -203,21 +194,22 @@ presence.on("UpdateData", async () => {
                             presenceData.smallImageKey = "play";
                             presenceData.smallImageText = "Playing a Game";
                             action = document.querySelector("#root > div > div > div > div > div:nth-child(4) > div > div.css-1dbjc4n.r-13awgt0 > div > div:nth-child(2) > div.css-1dbjc4n.r-18u37iz.r-13qz1uu > div.css-1dbjc4n.r-13awgt0.r-18u37iz > div > div");
-                            // @ts-ignore
-                            if(action.ariaLabel == "Do"){
+                            if(action.getAttribute("aria-label") == "Do"){
                                 presenceData.state = "Doing: " + playing.textContent;
                             } 
-                            // @ts-ignore
-                            else if(action.ariaLabel == "Say"){
+                            else if(action.getAttribute("aria-label") == "Say"){
                                 presenceData.state = "Saying: " + playing.textContent;
                             } 
                             // @ts-ignore
-                            else if(action.ariaLabel == "Story"){
+                            else if(action.getAttribute("aria-label") == "Story"){
                                 presenceData.state = "Story is: " + playing.textContent;
                             }
                         }
                     }
-                
+                    else{
+                        presenceData.details = "Viewing Home";
+                        presenceData.startTimestamp = browsingStamp;
+                    }
                 }
             }
             else{
