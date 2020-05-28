@@ -32,7 +32,7 @@ presence.on("iFrameData", (data: { current: number; duration: number; paused: bo
 });
 
 presence.on("UpdateData", async () => {
-    let presenceData: PresenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "logo"
     };
 
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
     let episode;
 
     if (Info.includes('ตอนที่')) {
-        var info = Info.split("ตอนที่");
+        let info = Info.split("ตอนที่");
         episode = info.pop();
 
         if (episode.includes('ซับไทย')) {
