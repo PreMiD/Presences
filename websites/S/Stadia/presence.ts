@@ -1,7 +1,7 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "713114770584109150"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000);
 let gameName: any;
 let storeName: any;
 let gamePrice: any;
@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname == "/home") {
     presenceData.details = "Viewing Stadia Home";
     userName = document.querySelector("span.VY8blf.fSorq");
-    (presenceData.smallImageText = userName.innerText)
+    (presenceData.smallImageText = userName.innerText);
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/player")) {
     gameName = document.querySelector("div.HDKZKb.LiQ6Hb");
@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
     storeName = document.querySelector("div.UG7HXc");
     gamePrice = document.querySelector("span.rdAlw");
     presenceData.details = "Viewing " + storeName.innerText;
-    presenceData.state = gamePrice.innerText + " on the Stadia Store"
+    presenceData.state = gamePrice.innerText + " on the Stadia Store";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/store")) {
     presenceData.details = "Viewing Stadia Store";

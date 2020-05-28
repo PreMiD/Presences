@@ -1,10 +1,8 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "704212795666726941"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title;
-let showName: any, channelName: any;
+let showName: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -27,14 +25,12 @@ presence.on("UpdateData", async () => {
     showName = document.querySelector(
       "h2.h3§3Lep4.fw700§1YAxq.truncate2§d57BK.truncateMobile§1Yywu"
     );
-    channelName = document.querySelector("img.logo§FWTCG");
     presenceData.details = "Tuned Into 7plus Live!";
     presenceData.state = "Watching: " + showName.innerText;
   } else if (document.location.pathname == "/watch-live-tv") {
     showName = document.querySelector(
       "h2.h3§3Lep4.fw700§1YAxq.truncate2§d57BK.truncateMobile§1Yywu"
     );
-    channelName = document.querySelector("img.logo§FWTCG");
     presenceData.details = "Tuned Into 7plus Live!";
     presenceData.state = "Watching: " + showName.innerText;
   } else if (document.location.pathname == "/query") {
