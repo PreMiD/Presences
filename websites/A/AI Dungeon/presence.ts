@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let login, register, target: string, bullsEye: string, playing, action, textArray, home;
+let login, register, target: string, bullsEye: string, playing, action, textArray;
 const path = document.location.pathname;
 const check = window.addEventListener("click", function(event) {
     target = (event.target as HTMLTextAreaElement).innerText;
@@ -64,27 +64,26 @@ presence.on("UpdateData", async () => {
         if(path == "/" || path == ""){
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Home";
-            home = document.querySelector("body > main > div > div.elementor.elementor-12 > div > div > section.elementor-element.elementor-element-57749c3.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default.elementor-section.elementor-top-section > div > div > div > div > div > div > div > h3 > span.elementor-headline-plain-text.elementor-headline-text-wrapper");
             textArray = document.getElementsByClassName("elementor-headline-dynamic-letter elementor-headline-animation-in");
             if(textArray){
                 if(textArray[0].textContent == "s"){
-                presenceData.state = "Create your own Story";
+                    presenceData.state = "Create your own Story";
                 }
                 else if(textArray[0].textContent == "a"){
-                presenceData.state = "Create your own Adventure";
+                    presenceData.state = "Create your own Adventure";
                 }
-            else if(textArray[0].textContent == "f"){
-                presenceData.state = "Create your own Fantasy";
-                }
-            else if(textArray[0].textContent == "m"){
-                presenceData.state = "Create your own Mystery";
-                }
-            else if(textArray[0].textContent == "r"){
-                presenceData.state = "Create your own Romance";
-                }
-            else if(textArray[0].textContent == "d"){
-                    presenceData.state = "Create your own Dream";
-                }
+                else if(textArray[0].textContent == "f"){
+                    presenceData.state = "Create your own Fantasy";
+                    }
+                else if(textArray[0].textContent == "m"){
+                    presenceData.state = "Create your own Mystery";
+                    }
+                else if(textArray[0].textContent == "r"){
+                    presenceData.state = "Create your own Romance";
+                    }
+                else if(textArray[0].textContent == "d"){
+                        presenceData.state = "Create your own Dream";
+                    }
                 else if(textArray[0].textContent == "w"){
                     presenceData.state = "Create your own World";
                 }
