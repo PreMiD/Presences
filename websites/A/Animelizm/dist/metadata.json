@@ -1,0 +1,20 @@
+{
+    "author": {
+        "name": "Holfz",
+        "id": "405397046691102740"
+    },
+    "service": "Animelizm",
+    "description": {
+        "en": "Watch Thai subbed/dubbed Animes Online for free."
+    },
+    "url": "www.animelizm.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/zgNeFww.png",
+    "thumbnail": "https://i.imgur.com/DosCQw9.png",
+    "color": "#0F62E0",
+    "tags": [
+        "anime"
+    ],
+    "iframe": true,
+    "category": "anime"
+}
