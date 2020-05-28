@@ -2,7 +2,7 @@ var presence = new Presence({
   clientId: "704585837949747330"
 });
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

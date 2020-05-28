@@ -162,6 +162,12 @@ declare class Presence {
    */
   setTrayTitle(trayTitle?: string): void;
   /**
+   * Get the current
+   * @param strings
+   * @since 2.0-BETA3
+   */
+  getActivity(): PresenceData;
+  /**
    * Get translations from the extension
    * @param strings String object with keys being the key for string, keyValue is the string value
    * @param language Language

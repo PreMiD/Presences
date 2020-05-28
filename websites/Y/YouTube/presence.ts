@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
           .querySelector("#playlist-actions .yt-icon-button#button")
           .getAttribute("aria-pressed") === "true";
 
-    var presenceData: presenceData = {
+    var presenceData: PresenceData = {
       details:
         title == null || title.textContent.replace(/\s+/g, "") == ""
           ? document.querySelector("div.ytp-title-text > a").textContent
@@ -226,7 +226,7 @@ presence.on("UpdateData", async () => {
     document.location.hostname == "www.youtube.com" ||
     document.location.hostname == "youtube.com"
   ) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "yt_lg"
     };
 
@@ -394,7 +394,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     }
   } else if (document.location.hostname == "studio.youtube.com") {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "yt_lg",
       smallImageKey: "studio",
       smallImageText: "Youtube Studio"

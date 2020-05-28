@@ -5,7 +5,7 @@ const presence = new Presence({
 let login;
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 

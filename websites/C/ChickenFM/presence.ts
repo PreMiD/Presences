@@ -26,7 +26,7 @@ function getData(): void {
 setInterval(getData, 1000);
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "default"
   };
   presenceData.details = trackArtist + " - " + trackTitle;

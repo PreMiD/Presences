@@ -10,7 +10,7 @@ const nomeObraLeitor: HTMLElement = document.querySelector("#navbar-collapse-1 >
 const leitorCapitulo: HTMLElement = document.querySelector("#chapter-list > ul > li.active > a");
 const categoria1: HTMLElement = document.querySelector("body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(4)");
 presence.on("UpdateData", async () => {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "logo"
     };
     const path: any = document.location.pathname;

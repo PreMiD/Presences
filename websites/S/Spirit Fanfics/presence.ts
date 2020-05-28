@@ -9,7 +9,7 @@ const { pathname } = window.location,
   });
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "spirit_lg",
       startTimestamp: Math.floor(Date.now() / 1000),
       details: (await strings).browsing

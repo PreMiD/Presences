@@ -18,7 +18,7 @@ newStats();
 
 presence.on("UpdateData", async () => {
   var stamp = Math.floor(Date.now());
-  const info: presenceData = {
+  const info: PresenceData = {
     largeImageKey: "complexlogo",
     details: `${spresenter} • ${slisteners || "Loading statistics"}`,
     state: `${ssong || "Loading song"}`,

@@ -7,7 +7,7 @@ var strings = presence.getStrings({
 
 var oldUrl, elapsed;
 
-var data: presenceData = {
+var data: PresenceData = {
   largeImageKey: "pmg"
 };
 

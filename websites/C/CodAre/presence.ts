@@ -6,7 +6,7 @@ const browsingStamp = Math.floor(Date.now() / 1000);
 let user;
 
 presence.on("UpdateData", () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
   if (document.location.hostname == "codare.org") {

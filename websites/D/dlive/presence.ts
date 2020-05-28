@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
       : false;
 
   if (!playback) {
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "lg"
     };
 
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
       "div.channel-header span.dlive-name span.overflow-ellipsis"
     );
 
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "lg",
       smallImageKey: "live"
     };

@@ -10,7 +10,7 @@ var search: any;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: presenceData = {};
+  let presenceData: PresenceData = {};
   var theme = getCookie("nuxt-theme");
 
   if (!theme) {

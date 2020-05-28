@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
       "#news-content > div.content-column.xs-mt2.lg-mt0.md-mb4 > h1 > span"
     );
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "bfnews-logo",
     startTimestamp: Math.floor(Date.now() / 1000)
   };

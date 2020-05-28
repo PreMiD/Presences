@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     const elapsed = Math.floor(Date.now() / 1000);
     //var container = document.querySelector(".channel-list")
     //console.log(document.querySelector("div.mod-active").innerText)
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
       details: `${document.querySelector("div.mod-active").textContent}`,
       state: `${document.querySelector(".location-info-location").textContent}`,
       largeImageKey: "bigglobe",

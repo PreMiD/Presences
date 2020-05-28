@@ -9,7 +9,7 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     details: "Home",
     largeImageKey: "main"
   };

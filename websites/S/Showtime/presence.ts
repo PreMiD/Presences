@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
     }
 
-    var data: presenceData = {
+    var data: PresenceData = {
       details: title,
       state: currentState,
       largeImageKey: "showtime-logo",
@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data, !video.paused);
     }
   } else {
-    const browsingPresence: presenceData = {
+    const browsingPresence: PresenceData = {
       details: "Browsing...",
       largeImageKey: "showtime-logo"
     };

@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   const info = await presence.getSetting("eSI");
   const classInfo = await presence.getSetting("eCI");
 
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
   if (info) {
