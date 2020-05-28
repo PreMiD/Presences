@@ -2,7 +2,7 @@ let presence = new Presence({
   clientId: "704212795666726941"
 });
 
-let showName: any;
+let showName: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
