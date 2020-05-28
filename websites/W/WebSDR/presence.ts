@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "715344422039977994"
 }),
 
@@ -30,7 +30,7 @@ function updateMode() {
 }
 
 presence.on("UpdateData", async () => {
-    let presenceData: PresenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "favicon",
         //smallImageKey: "key",
 		smallImageText: "University of Twente SDR",
