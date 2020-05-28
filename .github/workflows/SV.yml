@@ -46,7 +46,7 @@ jobs:
         with:
           path: file_changes.txt
           contents: |
-            ${{ join(steps.changed_files.outputs.files_created, '\n') }}
-            ${{ join(steps.changed_files.outputs.files_updated, '\n') }}
+            ${{ steps.changed_files.outputs.files_created }}
+            ${{ steps.changed_files.outputs.files_updated }}
       - name: Start SV
         run: yarn sv --colors
