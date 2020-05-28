@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://i.imgur.com/oo3wi3q.png" width="128px" style="max-width:100%;">
+    <img src="https://github.com/Alanexei.png?size=2048" width="128px" style="max-width:100%;">
     <h3 style="font-size: 2rem; margin-bottom: 0">Presence Guidelines</h2>
     <h4 style="margin-top: 0">Revision 2</h3>
     <br />
@@ -58,7 +58,7 @@ presence
 ## [**metadata.json**](https://docs.premid.app/en/dev/presence/metadata)
 
 > For the convenience of our presence developers, we have provided a schema which you can use to validate the integrity
-> of your `metadata` file. This is entirely optional and is not required during the [review process](##Verification).
+> of your `metadata` file. This is entirely optional and is not required during the review process.
 
 > It is highly recommended that you organize your `metadata` file in the format shown below, and you must have
 > grammatically correct service names, descriptions, tags, and setting fields. Anything not organized to specifications
@@ -301,9 +301,8 @@ your presence is suitable for deployment.
 - `DeepScan` is a bot that checks for code quality. If you ever receive errors for new issues, you are **required** to
   fix them.
 - `Schema Validation` will scan your `metadata.json` file for any errors ( for e.g., missing fields, invalid value
-  types, etc. ). If you ever see any new issues, you are also **required** to fix those. Adding a
-  [schema field](###$schema) to your `metadata.json` file will allow your text editor ( if supported ) to show you these
-  errors during development.
+  types, etc. ). If you ever see any new issues, you are also **required** to fix those. Adding a schema field to your
+  `metadata.json` file will allow your text editor ( if supported ) to show you these errors during development.
 
 ## `Additional Rules`
 
