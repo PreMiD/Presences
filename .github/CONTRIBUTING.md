@@ -235,7 +235,7 @@ Here is a list of rules you must follow when writing your `presence.ts` file:
 ## [**tsconfig.json**](https://docs.premid.app/en/dev/presence/tsconfig)
 
 > Do **not** write your own `tsconfig.json` file, use what has been provided on
-> [documentation](https://docs.premid.app/en/dev/presence/tsconfig)
+> [documentation](https://docs.premid.app/en/dev/presence/tsconfig).
 
 ## Modification
 
