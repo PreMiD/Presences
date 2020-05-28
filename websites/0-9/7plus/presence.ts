@@ -7,7 +7,7 @@ var title;
 let showName: any, channelName: any;
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
@@ -18,11 +18,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname == "/") {
     presenceData.details = "Viewing 7plus Home";
   } else if (document.location.pathname == "/shows-a-z") {
-    presenceData.details = "Viewing 7plus Shows!";
+    presenceData.details = "Viewing 7plus Shows";
   } else if (document.location.pathname == "/sport") {
-    presenceData.details = "Viewing 7plus Sports!";
+    presenceData.details = "Viewing 7plus Sports";
   } else if (document.location.pathname == "/search") {
-    presenceData.details = "Searching 7plus!";
+    presenceData.details = "Searching 7plus";
   } else if (document.location.pathname == "/live-tv") {
     showName = document.querySelector(
       "h2.h3§3Lep4.fw700§1YAxq.truncate2§d57BK.truncateMobile§1Yywu"
