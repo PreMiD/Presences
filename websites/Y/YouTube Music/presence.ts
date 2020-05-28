@@ -13,7 +13,7 @@ function getAuthorString(): string {
     ) as NodeListOf<HTMLAnchorElement>,
     authorsArray: Array<HTMLAnchorElement>,
     authorString: string;
-  
+
   //* Author tags more than one => YouTube Music Song listing with release year etc.
   if (authors.length > 1) {
     //* Get release year of song
@@ -63,7 +63,9 @@ presence.on("UpdateData", async () => {
     video = document.querySelector(".video-stream") as HTMLVideoElement;
 
   //* Get Repeat mode
-  const repeatMode = document.querySelector("ytmusic-player-bar[slot=\"player-bar\"]").getAttribute('repeat-Mode_');
+  const repeatMode = document
+    .querySelector('ytmusic-player-bar[slot="player-bar"]')
+    .getAttribute("repeat-Mode_");
 
   if (title !== "" && !isNaN(video.duration)) {
     const timestamps = getTimestamps(
@@ -74,20 +76,20 @@ presence.on("UpdateData", async () => {
         details: title,
         state: getAuthorString(),
         largeImageKey: "ytm_lg",
-        smallImageKey: video.paused 
-        ? "pause" 
-        : repeatMode == "ONE" 
-        ? "repeat-one"
-        : repeatMode == "ALL" 
-        ? "repeat"
-        : "play",
-        smallImageText: video.paused 
-        ? (await strings).pause 
-        : repeatMode == "ONE" 
-        ? "On loop"
-        : repeatMode == "ALL" 
-        ? "Playlist on loop"
-        : (await strings).play,
+        smallImageKey: video.paused
+          ? "pause"
+          : repeatMode == "ONE"
+          ? "repeat-one"
+          : repeatMode == "ALL"
+          ? "repeat"
+          : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : repeatMode == "ONE"
+          ? "On loop"
+          : repeatMode == "ALL"
+          ? "Playlist on loop"
+          : (await strings).play,
         startTimestamp: timestamps[0],
         endTimestamp: timestamps[1]
       };
