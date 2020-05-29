@@ -1,32 +1,32 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "715602476249776239"
 });
 
-var currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/"),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  presenceData: presenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
+let currentURL = new URL(document.location.href),
+  currentPath = currentURL.pathname.slice(1).split("/");
+const browsingStamp = Math.floor(Date.now() / 1000);
+let presenceData: presenceData = {
+  details: "Viewing an unsupported page",
+  largeImageKey: "lg",
+  startTimestamp: browsingStamp
+};
+const updateCallback = {
+  _function: null as Function,
+  get function(): Function {
+    return this._function;
   },
-  updateCallback = {
-    _function: null as Function,
-    get function(): Function {
-      return this._function;
-    },
-    set function(parameter) {
-      this._function = parameter;
-    },
-    get present(): boolean {
-      return this._function !== null;
-    }
-  };
+  set function(parameter) {
+    this._function = parameter;
+  },
+  get present(): boolean {
+    return this._function !== null;
+  }
+};
 
 /**
  * Initialize/reset presenceData.
  */
-function resetData(): void {
+const resetData = (): void => {
   currentURL = new URL(document.location.href);
   currentPath = currentURL.pathname.slice(1).split("/");
   presenceData = {
@@ -34,7 +34,7 @@ function resetData(): void {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
-}
+};
 
 ((): void => {
   if (document.querySelector("outline-not-found")) {
