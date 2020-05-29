@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  let video: HTMLVideoElement =
+  const video: HTMLVideoElement =
     document.querySelector("#videoo1_html5_api") ||
     document.querySelector(".jw-video");
 
