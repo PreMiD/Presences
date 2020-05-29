@@ -117,7 +117,7 @@ if (document.location.hostname == "snowboltz.net") {
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
     } else if (path.includes("history")) {
-      presenceData.details = "ประวัติการเงิน"
+      presenceData.details = "ประวัติการเงิน";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "reading";
