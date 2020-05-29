@@ -44,76 +44,76 @@ if (document.location.hostname == "snowboltz.net") {
     presenceData.details = "กำลังเลือกวิธีเติม..";
     presenceData.state = uid;
     if (path.includes("topup_tmn")) {
-      presenceData.details = "กำลังเติมผ่านบัตรเงินสด.."
+      presenceData.details = "กำลังเติมผ่านบัตรเงินสด..";
       presenceData.state = uid;
       presenceData.startTimestamp = browsingStamp;
     } else if (path.includes("topu_wallet")) {
-      presenceData.details = "กำลังเติมผ่านวอเลท.."
+      presenceData.details = "กำลังเติมผ่านวอเลท..";
       presenceData.state = uid;
       presenceData.startTimestamp = browsingStamp;
     } 
   } else if (path.includes("admin")) {
-    presenceData.details = "อยู่ที่หน้าเเอดมิน"
+    presenceData.details = "อยู่ที่หน้าเเอดมิน";
     presenceData.state = "หน้าหลัก";
     presenceData.startTimestamp = browsingStamp;
     if (path.includes("queue_group")) {
-      presenceData.details = "ตรวจสอบการเติมเเบบโอน"
+      presenceData.details = "ตรวจสอบการเติมเเบบโอน";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       if (path.includes("id")) {
-        presenceData.details = "ตรวจสอบการเติมเเบบโอน"
+        presenceData.details = "ตรวจสอบการเติมเเบบโอน";
         presenceData.state = id;
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
       }
     } else if (path.includes("queue_idpass")) {
-      presenceData.details = "ตรวจสอบการเติมเเบบหรัส"
+      presenceData.details = "ตรวจสอบการเติมเเบบหรัส";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       if (path.includes("id")) {
-        presenceData.details = "ตรวจสอบการเติมเเบบโอน"
+        presenceData.details = "ตรวจสอบการเติมเเบบโอน";
         presenceData.state = id;
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
       }
     } else if (path.includes("queue_wallet")) {
-      presenceData.details = "ตรวจสอบการโอนเงิน"
+      presenceData.details = "ตรวจสอบการโอนเงิน";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       if (path.includes("id")) {
-        presenceData.details = "ตรวจสอบการโอนเงิน"
+        presenceData.details = "ตรวจสอบการโอนเงิน";
         presenceData.state = id;
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
       }
     } else if (path.includes("man_user")) {
-      presenceData.details = "จัดการสมาชิก"
+      presenceData.details = "จัดการสมาชิก";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       if (path.includes("id")) {
-        presenceData.details = "จัดการสมาชิก"
+        presenceData.details = "จัดการสมาชิก";
         presenceData.state = maid;
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
       }
     } else if (path.includes("man_random")) {
-      presenceData.details = "จัดการวงล้อ"
+      presenceData.details = "จัดการวงล้อ";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
     } else if (path.includes("man_coupon")) {
-      presenceData.details = "จัดการคูปอง"
+      presenceData.details = "จัดการคูปอง";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
     } else if (path.includes("cfg_topup")) {
-      presenceData.details = "จัดการการเติมเงิน"
+      presenceData.details = "จัดการการเติมเงิน";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
     } else if (path.includes("cfg_group")) {
-      presenceData.details = "จัดการการเติมเเบบกลุ่ม"
+      presenceData.details = "จัดการการเติมเเบบกลุ่ม";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
     } else if (path.includes("cfg_idpass")) {
-      presenceData.details = "จัดการการเติมเเบบหรัส"
+      presenceData.details = "จัดการการเติมเเบบหรัส";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
     } else if (path.includes("history")) {
@@ -123,26 +123,26 @@ if (document.location.hostname == "snowboltz.net") {
       presenceData.smallImageKey = "reading";
     } 
   } else if (path.includes("queue")) {
-    presenceData.details = "ตรวจสอบคิว"
+    presenceData.details = "ตรวจสอบคิว";
     presenceData.state = uid;
     presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "reading";
   } else if (path.includes("history")) {
-    presenceData.details = "ตรวจสอบการใช้จ่าย"
+    presenceData.details = "ตรวจสอบการใช้จ่าย";
     presenceData.state = uid;
     presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "reading";
   } else if (path.includes("profile")) {
-    presenceData.details = "หน้าโปรไฟล์"
+    presenceData.details = "หน้าโปรไฟล์";
     presenceData.state = uid;
     presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "reading";
   } else if (path.includes("login")) {
-    presenceData.details = "กำลังล็อกอิน.."
+    presenceData.details = "กำลังล็อกอิน..";
     presenceData.state = uid;
     presenceData.startTimestamp = browsingStamp;
   } else if (path.includes("register")) {
-    presenceData.details = "กำลังสมัครใช้งาน.."
+    presenceData.details = "กำลังสมัครใช้งาน..";
     presenceData.state = uid;
     presenceData.startTimestamp = browsingStamp;
   } else {
