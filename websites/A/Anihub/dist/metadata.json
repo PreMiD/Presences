@@ -14,7 +14,7 @@
     "nl": "Anihub is een braziliaanse website die een plek bied om gratis anime te bekijken, zowel online als offline en zonder misbruik van advertenties."
   },
   "url": "anihub.tv",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "logo": "https://i.imgur.com/HClem6o.png",
   "thumbnail": "https://i.imgur.com/ehkk7qZ.png",
   "color": "#1997C6",
@@ -24,35 +24,169 @@
     "anime"
   ],
   "category": "anime",
-  "settings": [
+  "settings": [{
+      "id": "customPaths",
+      "title": "Outros Caminhos Ativados",
+      "icon": "fas fa-exclamation-triangle",
+      "value": "'/login', '/registro', '/', '/changelogs', '/loja', '/caixa-da-sorte', '/politica', '/equipe-membros', '/conquistas', '/animes'",
+      "placeholder": "Exemplo: '/caminho' | '' para desativar todos"
+    },
     {
-      "id": "showUsername",
-      "title": "[/perfil] Mostrar Username",
-      "icon": "fas fa-eye",
+      "id": "showVideos",
+      "title": "/videos",
+      "icon": "fas fa-play",
       "value": true
     },
     {
-      "id": "showComment",
-      "title": "[/videos] Mostrar Comentário",
+      "if": {
+        "showVideos": true
+      },
+      "id": "showVideosName",
+      "title": "├─ Nome",
+      "value": true
+    },
+    {
+      "if": {
+        "showVideos": true
+      },
+      "id": "showVideosEpisode",
+      "title": "├─ Episódio",
+      "value": true
+    },
+    {
+      "if": {
+        "showVideos": true
+      },
+      "id": "showVideosLTime",
+      "title": "├─ Tempo Restante",
+      "value": true
+    },
+    {
+      "if": {
+        "showVideos": true
+      },
+      "id": "showVideosComment",
+      "title": "├─ Comentário",
+      "value": true
+    },
+    {
+      "if": {
+        "showVideos": true
+      },
+      "id": "showVidoesReport",
+      "title": "└─ Report",
+      "value": true
+    },
+    {
+      "id": "showAnime",
+      "title": "/anime",
+      "icon": "fas fa-bookmark",
+      "value": true
+    },
+    {
+      "if": {
+        "showAnime": true
+      },
+      "id": "showAnimeName",
+      "title": "├─ Nome",
+      "value": true
+    },
+    {
+      "if": {
+        "showAnime": true
+      },
+      "id": "showAnimeReview",
+      "title": "├─ Resenha",
+      "value": true
+    },
+    {
+      "if": {
+        "showAnime": true
+      },
+      "id": "showAnimeTrailer",
+      "title": "├─ Trailer",
+      "value": true
+    },
+    {
+      "if": {
+        "showAnime": true
+      },
+      "id": "showAnimeSelection",
+      "title": "└─ Seleção",
+      "value": true
+    },
+    {
+      "id": "showForum",
+      "title": "/forum",
+      "icon": "fas fa-book",
+      "value": true
+    },
+    {
+      "if": {
+        "showForum": true
+      },
+      "id": "showForumTitle",
+      "title": "├─ Thread Título",
+      "value": true
+    },
+    {
+      "if": {
+        "showForum": true
+      },
+      "id": "showForumCategory",
+      "title": "├─ Categoria",
+      "value": true
+    },
+    {
+      "if": {
+        "showForum": true
+      },
+      "id": "showForumNewTopic",
+      "title": "├─ Novo Tópico",
+      "value": true
+    },
+    {
+      "if": {
+        "showForum": true
+      },
+      "id": "showForumReply",
+      "title": "└─ Resposta",
+      "value": true
+    },
+    {
+      "id": "showProfile",
+      "title": "/perfil",
+      "icon": "fas fa-user-circle",
+      "value": true
+    },
+    {
+      "if": {
+        "showProfile": true
+      },
+      "id": "showProfileUsername",
+      "title": "├─ Username",
+      "value": true
+    },
+    {
+      "if": {
+        "showProfile": true
+      },
+      "id": "showProfileSelection",
+      "title": "└─ Seleção",
+      "value": true
+    },
+    {
+      "id": "showSocial",
+      "title": "/postagens",
       "icon": "fas fa-comment",
       "value": true
     },
     {
-      "id": "showReport",
-      "title": "[/videos] Mostrar Report",
-      "icon": "fas fa-exclamation-triangle",
-      "value": true
-    },
-    {
-      "id": "showFTime",
-      "title": "[/videos] Mostrar Tempo Formatado",
-      "icon": "fas fa-hourglass-start",
-      "value": true
-    },
-    {
-      "id": "showLTime",
-      "title": "[/videos] Mostrar Tempo Restante",
-      "icon": "fas fa-hourglass-end",
+      "if": {
+        "showSocial": true
+      },
+      "id": "showSocialTitle",
+      "title": "└─ Título",
       "value": true
     }
   ]
