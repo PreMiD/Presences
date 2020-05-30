@@ -5,7 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async() => {
     const presenceData = {
         largeImageKey: "logo"
-    }
+    };
 
     if(document.location.pathname.includes("/permissions.html")) {
         presenceData.details = "Discord Permissions Calculator";
@@ -24,4 +24,4 @@ presence.on("UpdateData", async() => {
     } else {
         presence.setActivity(presenceData);
     }
-})
+});
