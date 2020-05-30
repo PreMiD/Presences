@@ -1,9 +1,6 @@
 const presence = new Presence({
     clientId: "716332018224595044"
   });
-  const strings = presence.getStrings({
-    browsing: "presence.playback.browsing"
-  })
   const browsingElapsedTimestamp = Math.floor(Date.now() / 1000);
 
   presence.on("UpdateData", async () => {
@@ -19,7 +16,7 @@ const presence = new Presence({
         if (!results) return null;
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
-      };
+      }
       presenceData.startTimestamp = browsingElapsedTimestamp;
       if (document.location.pathname === "/" && !getParameterByName("s", window.location.href)) {
         presenceData.details = "Ana sayfaya göz atıyor...";
@@ -56,16 +53,16 @@ const presence = new Presence({
           presenceData.details = document.getElementsByClassName("black-title")[0].innerHTML + " izliyor";
           if (document.getElementsByClassName("episode-name")) {
             presenceData.state = document.querySelector(`body > div#body-wrapper > div#content > div.section > section > div.section-title > h1 > a > mark`).innerHTML.split('<span class="episode-name">')[0];
-          };
-        };
-      };
-    };
+          }
+        }
+      }
+    }
     
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();
     } else {
       presence.setActivity(presenceData);
-    };
+    }
   });
   
