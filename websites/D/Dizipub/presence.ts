@@ -27,7 +27,7 @@ const presence = new Presence({
         presenceData.details = "Bir diziye göz atıyor:";
         presenceData.state = document.querySelector(`body > div#body-wrapper > section > div.section > div#details > article > h1`).innerHTML;
       } else if (document.location.pathname.includes("/animeler")) {
-        presenceData.details = "Aniemelere göz atıyor...";
+        presenceData.details = "Animelere göz atıyor...";
       } else if (document.location.pathname.includes("/asya-dizileri")) {
         presenceData.details = "Asya dizilerine göz atıyor...";
       } else if (document.location.pathname.includes("/diziler")) {
