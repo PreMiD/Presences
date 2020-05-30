@@ -1,9 +1,9 @@
 const presence = new Presence({
   clientId: "715045665796915250"
 });
-function getTimestamps(videoTime: number, videoDuration: number): number[] {
+function MediaTimestamps(mediaTimes: number, mediaDuration: number): number[] {
   const startTime = Math.floor(Date.now() / 1000);
-  const endTime = Math.floor(startTime - videoTime + videoDuration);
+  const endTime = Math.floor(startTime - mediaTimes + mediaDuration);
   return [startTime, endTime];
 }
 function NotFound(): boolean {
@@ -13,30 +13,42 @@ function NotFound(): boolean {
   return false;
 }
 enum PathNames {
-  login = "/login",
-  register = "/registro",
-  home = "/",
   watch = "/videos",
   profile = "/perfil",
   anime_info = "/anime",
-  anime_list = "/animes",
   social = "/postagens",
   forum = "/forum",
-  staff_list = "/equipe-membros",
-  achievements = "/conquistas",
   history = "/minha-lista",
-  shop = "/loja",
-  lucky_box = "/caixa-da-sorte",
-  policy = "/politica",
   newTopic = "/novo-topico"
 }
 enum SettingsId {
-  showUsername = "showUsername",
-  showComment = "showComment",
-  showReport = "showReport",
-  showFTime = "showFTime",
-  showLTime = "showLTime",
-  showHistory = "showHistory"
+  /* PathNames.profile */
+  showProfile = "showProfile",
+  showProfileUsername = "showProfileUsername",
+  showProfileSelection = "showProfileSelection",
+  /* PathNames.watch */
+  showVideos = "showVideos",
+  showVideosName = "showVideosName",
+  showVideosEpisode = "showVideosEpisode",
+  showVideosLTime = "showVideosLTime",
+  showVideosFTime = "showVideosFTime",
+  showVideosComment = "showVideosComment",
+  showVideosReport = "showVidoesReport",
+  /* PathNames.forum */
+  showForum = "showForum",
+  showForumTitle = "showForumTitle",
+  showForumCategory = "showForumCategory",
+  showForumNewTopic = "showForumNewTopic",
+  showForumReply = "showForumReply",
+  /* PathNames.social */
+  showSocial = "showSocial",
+  showSocialTitle = "showSocialTitle",
+  /* PathNames.anime_info */
+  showAnime = "showAnime",
+  showAnimeReview = "showAnimeReview",
+  showAnimeTrailer = "showAnimeTrailer",
+  showAnimeSelection = "showAnimeSelection",
+  showAnimeName = "showAnimeName"
 }
 enum ResourceNames {
   logo = "logo_shadow",
@@ -54,14 +66,20 @@ presence.on("UpdateData", async () => {
       largeImageKey: ResourceNames.logo,
       startTimestamp: browsingStamp
     },
-    pathName = document.location.pathname,
+    pathName = window.location.pathname,
     video = document.querySelector("video");
-  if (pathName == PathNames.login) data.details = "Logando...";
-  else if (pathName == PathNames.register) data.details = "Registrando...";
-  else if (pathName == PathNames.home) data.details = "Início";
-  else if (pathName.startsWith(PathNames.watch) && !NotFound()) {
+  function DefaultPresence(): void {
+    if (data.details == null) {
+      presence.setTrayTitle();
+      presence.setActivity();
+    } else presence.setActivity(data);
+  }
+  if (
+    pathName.startsWith(PathNames.watch) &&
+    (await presence.getSetting(SettingsId.showVideos)) &&
+    !NotFound()
+  ) {
     const title = ["...", "Epsódio ..."];
-    const aniplayerTime = document.getElementsByClassName("aniplayer-time")[0];
     const animeName = document.querySelector("div.autofill.p1 > a > h4");
     const episode = pathName.split("/").slice(-1)[0];
     const comment = document.querySelector("textarea");
@@ -71,29 +89,38 @@ presence.on("UpdateData", async () => {
     if (animeName) title[0] = animeName.textContent;
     title[1] = `Episódio ${episode}`;
     if (video && !isNaN(video.duration)) {
-      timestamps = getTimestamps(video.currentTime, video.duration);
-      if (
-        aniplayerTime.children[0].textContent !=
-        aniplayerTime.children[1].textContent
-      ) {
-        if (await presence.getSetting(SettingsId.showFTime))
-          title[1] += ` - ${aniplayerTime.children[0].textContent}/${aniplayerTime.children[1].textContent}`;
-      } else title[1] += " ✔";
-      if (!video.paused && video.readyState >= 1) {
-        if (await presence.getSetting(SettingsId.showLTime)) {
+      timestamps = MediaTimestamps(video.currentTime, video.duration);
+      if (await presence.getSetting(SettingsId.showVideosLTime)) {
+        if (!video.paused && video.readyState >= 1) {
           data.startTimestamp = timestamps[0];
           data.endTimestamp = timestamps[1];
-        }
-        data.smallImageKey = ResourceNames.play;
-      } else if (video.readyState >= 1)
-        data.smallImageKey = ResourceNames.pause;
-    } else data.smallImageKey = ResourceNames.stop;
+          data.smallImageKey = ResourceNames.play;
+        } else if (video.readyState >= 1)
+          data.smallImageKey = ResourceNames.pause;
+      }
+    } else if (await presence.getSetting(SettingsId.showVideosLTime))
+      data.smallImageKey = ResourceNames.stop;
     data.details = title[0];
     data.state = title[1];
-    if (genders && !genders.textContent.includes("Carregando"))
+    if (genders && !genders.textContent.toLowerCase().includes("carregando"))
       data.smallImageText = genders.textContent;
+    if (!(await presence.getSetting(SettingsId.showVideosName))) {
+      data.details = "Assistindo Anime:";
+      delete data.smallImageText;
+    }
+    if (!(await presence.getSetting(SettingsId.showVideosEpisode))) {
+      delete data.state;
+      data.details = data.details.replace(":", "");
+    }
     if (
-      (await presence.getSetting(SettingsId.showComment)) &&
+      (await presence.getSetting(SettingsId.showVideosReport)) &&
+      report &&
+      report.textContent.toLowerCase().includes("relatando")
+    ) {
+      data.smallImageKey = ResourceNames.info;
+      data.smallImageText = "Reportando...";
+    } else if (
+      (await presence.getSetting(SettingsId.showVideosComment)) &&
       comment &&
       comment.textLength > 0
     ) {
@@ -101,15 +128,19 @@ presence.on("UpdateData", async () => {
       data.smallImageText = "Comentando...";
     }
     if (
-      (await presence.getSetting(SettingsId.showReport)) &&
-      report &&
-      report.textContent.toLowerCase().includes("relatando")
+      !data.state &&
+      (await presence.getSetting(SettingsId.showVideosName)) &&
+      !(await presence.getSetting(SettingsId.showVideosEpisode))
     ) {
-      data.smallImageKey = ResourceNames.info;
-      data.smallImageText = "Reportando...";
+      data.details = "Assistindo Anime:";
+      data.state = animeName.textContent;
     }
-  } else if (pathName.startsWith(PathNames.profile) && !NotFound()) {
-    const title = ["Vizualizando Perfil:", "..."];
+  } else if (
+    pathName.startsWith(PathNames.profile) &&
+    (await presence.getSetting(SettingsId.showProfile)) &&
+    !NotFound()
+  ) {
+    const title = ["Visualizando Perfil", "..."];
     const username = document.querySelector("h1>b>font");
     const selected = document.querySelector(
       "#main > div.black.flexContent.subNav.p1 > a.btn.router-link-active"
@@ -124,76 +155,109 @@ presence.on("UpdateData", async () => {
       pathName.includes("/editar") &&
       username.textContent.toLowerCase() == selfUsername
     )
-      title[0] = "Editando Perfil:";
-    (await presence.getSetting(SettingsId.showUsername))
-      ? (title[1] = username.textContent)
-      : (title[1] = "🕵️‍♂️");
-    if (selected) title[1] += ` - ${selected.childNodes[1].textContent.trim()}`;
+      title[0] = "Editando Perfil";
+    title[1] = username.textContent;
+    if (
+      selected &&
+      (await presence.getSetting(SettingsId.showProfileSelection))
+    )
+      title[0] += ` - ${selected.childNodes[1].textContent.trim()}`;
     data.details = title[0];
     data.state = title[1];
-  } else if (pathName.startsWith(PathNames.anime_list) && !NotFound())
-    data.details = "Lista de Animes";
-  else if (pathName.startsWith(PathNames.forum) && !NotFound()) {
+    if (!(await presence.getSetting(SettingsId.showProfileUsername))) {
+      delete data.state;
+      data.details = title[0].replace(":", "");
+    } else data.details += ":";
+  } else if (
+    pathName.startsWith(PathNames.forum) &&
+    (await presence.getSetting(SettingsId.showForum)) &&
+    !NotFound()
+  ) {
     const Thread = document.getElementsByClassName("thread")[0];
     const ThreadTitle = document
       .querySelector("head>title")
       .textContent.replace(" - Tópico", "");
     const NonThread = document.querySelector("#main>article>div>h1>b");
-    const value = ["...", "...", ""];
     if (pathName.split("/").join("") == PathNames.forum.split("/").join("")) {
-      value[0] = "Fórum";
-      value[1] = "Categorias";
-      value[2] = ResourceNames.search;
+      data.details = "Fórum";
+      if (await presence.getSetting(SettingsId.showForumCategory)) {
+        data.state = "Categorias";
+        data.smallImageKey = ResourceNames.search;
+      }
     } else if (Thread) {
-      value[0] = `Fórum - [${
-        Thread.parentElement.firstChild.textContent.match(/(?<=\[).*(?=\])/g)[0]
-      }]`;
+      data.details = (await presence.getSetting(SettingsId.showForumCategory))
+        ? `Fórum - ${
+            Thread.parentElement.firstChild.textContent.match(/\[(.*?\])/)[0]
+          }`
+        : "Fórum";
       const ThreadAuthor = document.querySelector(
         "div.flexContent.thread>div>div>a"
       ).textContent;
-      value[1] = `${ThreadAuthor}: ${ThreadTitle}`;
-      value[2] = ResourceNames.reading;
+      const textarea = document.querySelector("div.chill.fill");
+      if (await presence.getSetting(SettingsId.showForumTitle)) {
+        data.state = `${ThreadAuthor}: ${ThreadTitle}`;
+        data.smallImageKey = ResourceNames.reading;
+        data.smallImageText = `Thread Id: ${Thread.getAttribute("id").replace(
+          "t",
+          ""
+        )}`;
+      }
+      if (
+        textarea &&
+        textarea.textContent.length > 0 &&
+        (await presence.getSetting(SettingsId.showForumReply))
+      ) {
+        data.smallImageKey = ResourceNames.writing;
+        data.smallImageText = "Respondendo...";
+      }
+    } else if (!pathName.endsWith(PathNames.newTopic)) {
+      data.details = "Fórum";
+      if (await presence.getSetting(SettingsId.showForumCategory)) {
+        data.state = `Categoria: ${NonThread.childNodes[
+          NonThread.childNodes.length - 1
+        ].textContent.replace(/^\s+|\s+$/g, "")}`;
+        data.smallImageKey = ResourceNames.search;
+      }
     } else {
-      value[0] = "Fórum";
-      value[1] = `Categoria: ${NonThread.childNodes[
-        NonThread.childNodes.length - 1
-      ].textContent.replace(/^\s+|\s+$/g, "")}`;
-      value[2] = ResourceNames.search;
+      data.details = "Fórum";
+      if (await presence.getSetting(SettingsId.showForumNewTopic)) {
+        data.details += " - [Novo Tópico]";
+        const category = document.querySelector("select");
+        const selectedCategory =
+          category.options[category.selectedIndex].textContent;
+        if (await presence.getSetting(SettingsId.showForumCategory))
+          data.state = `Categoria: ${
+            isNaN(parseInt(selectedCategory)) ? selectedCategory : "..."
+          }`;
+        data.smallImageKey = ResourceNames.writing;
+      }
     }
-    if (pathName.endsWith(PathNames.newTopic)) {
-      value[0] = "Fórum - [Novo Tópico]";
-      const category = document.querySelector("select");
-      const selectedCategory =
-        category.options[category.selectedIndex].textContent;
-      value[1] = `Categoria: ${
-        isNaN(parseInt(selectedCategory)) ? selectedCategory : "..."
-      }`;
-      value[2] = ResourceNames.writing;
-    }
-    data.details = value[0];
-    data.state = value[1];
-    data.smallImageKey = value[2];
-    if (Thread)
-      data.smallImageText = `Thread Id: ${Thread.getAttribute("id").replace(
-        "t",
-        ""
-      )}`;
-  } else if (pathName.startsWith(PathNames.staff_list) && !NotFound()) {
-    data.details = "Membros da Equipe";
-  } else if (pathName.startsWith(PathNames.achievements) && !NotFound()) {
-    data.details = "Lista de Conquistas";
-  } else if (pathName.startsWith(PathNames.social) && !NotFound()) {
+  } else if (
+    pathName.startsWith(PathNames.social) &&
+    (await presence.getSetting(SettingsId.showSocial)) &&
+    !NotFound()
+  ) {
     const title = document.querySelector("head>title").textContent;
     data.details = isNaN(parseInt(pathName.split("/").slice(-1)[0]))
-      ? "Vizualizando Postagens"
-      : "Vizualizando Postagem:";
-    if (!isNaN(parseInt(pathName.split("/").slice(-1)[0]))) data.state = title;
-    data.smallImageKey = ResourceNames.reading;
-    if (!isNaN(parseInt(pathName.split("/").slice(-1)[0])))
+      ? "Visualizando Publicações"
+      : "Visualizando Postagem";
+    if (
+      !isNaN(parseInt(pathName.split("/").slice(-1)[0])) &&
+      (await presence.getSetting(SettingsId.showSocialTitle))
+    ) {
+      data.details += ":";
+      data.state = title;
       data.smallImageText = `Post Id: ${pathName.split("/").slice(-1)[0]}`;
-  } else if (pathName.startsWith(PathNames.anime_info) && !NotFound()) {
+    }
+    data.smallImageKey = ResourceNames.reading;
+  } else if (
+    pathName.startsWith(PathNames.anime_info) &&
+    !pathName.startsWith(PathNames.anime_info + "s") &&
+    (await presence.getSetting(SettingsId.showAnime)) &&
+    !NotFound()
+  ) {
     const animeName = document.querySelector("h1>b").textContent;
-    const resenha = document.querySelector("div.modal-mask");
+    const modal = document.querySelector("div.modal-header>h1");
     const selected = document.querySelector(
       "a.p1.din.router-link-exact-active"
     );
@@ -203,20 +267,59 @@ presence.on("UpdateData", async () => {
         data.smallImageText = item.textContent;
       }
     });
-    data.details = resenha
-      ? "Escrevendo Resenha:"
-      : selected
-      ? `Vizualizando Anime - ${selected.textContent}:`
-      : `Vizualizando Anime:`;
-    data.state = animeName;
-  } else if (pathName.startsWith(PathNames.shop) && !NotFound())
-    data.details = "Loja";
-  else if (pathName.startsWith(PathNames.lucky_box) && !NotFound())
-    data.details = "Caixas da Sorte";
-  else if (pathName.startsWith(PathNames.policy) && !NotFound())
-    data.details = "Politicas do Site";
-  if (data.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else presence.setActivity(data);
+
+    if (await presence.getSetting(SettingsId.showAnimeReview)) {
+      if (modal && modal.textContent.toLowerCase().includes("resenha"))
+        selected && (await presence.getSetting(SettingsId.showAnimeSelection))
+          ? (data.details = `Criando Resenha - ${selected.textContent}:`)
+          : (data.details = `Criando Resenha:`);
+    }
+    if (await presence.getSetting(SettingsId.showAnimeTrailer)) {
+      if (modal && modal.textContent.toLowerCase().includes("trailer"))
+        selected && (await presence.getSetting(SettingsId.showAnimeSelection))
+          ? (data.details = `Assistindo Trailer - ${selected.textContent}:`)
+          : (data.details = `Assistindo Trailer:`);
+    }
+    if (!data.details)
+      selected && (await presence.getSetting(SettingsId.showAnimeSelection))
+        ? (data.details = `Visualizando Anime - ${selected.textContent}:`)
+        : (data.details = `Visualizando Anime:`);
+    if (await presence.getSetting(SettingsId.showAnimeName))
+      data.state = animeName;
+    else {
+      data.details = data.details.replace(":", "");
+      delete data.smallImageText;
+    }
+  } else if (!NotFound()) {
+    try {
+      const pathsAndStrings = [
+        "/login=Logando",
+        "/registro=Registrando...",
+        "/changelogs=Changelogs",
+        "/loja=Loja",
+        "/caixa-da-sorte",
+        "/politica=Políticas do Site",
+        "/equipe-membros=Membros da Equipe",
+        "/conquistas=Lista de Conquistas",
+        "/animes=Lista de Animes"
+      ];
+      const customPaths: string = await presence.getSetting("customPaths");
+      const pathsFromCustom = eval(
+        `[${customPaths.toLowerCase().replace(/[\s\n]+/g, "")}]`
+      );
+      pathsAndStrings.forEach((item: string) => {
+        const splitItem = item.split("=");
+        if (
+          pathName.startsWith(splitItem[0]) &&
+          pathsFromCustom.indexOf(splitItem[0]) != -1
+        )
+          data.details = splitItem[1];
+        if (pathName == "/" && pathsFromCustom.indexOf("/") != -1)
+          data.details = "Início";
+      });
+    } finally {
+      DefaultPresence();
+    }
+  }
+  DefaultPresence();
 });
