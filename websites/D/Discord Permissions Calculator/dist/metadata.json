@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Limerio",
+    "id": "491841063057620995"
+  },
+  "service": "Discord Permissions Calculator",
+  "description": {
+    "en": "Calculator permissions of your bot and convert in link for your bot and add on your server.",
+    "fr": "Calculer les permissions de votre bot et convertisser le lien pour votre bot et ajouter le pour votre serveur."
+  },
+  "url": "discordapi.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/u329vSV.png",
+  "color": "#7289DA",
+  "tags": ["discord", "permission calculated"],
+  "category": "other"
+}
