@@ -11,10 +11,9 @@
   },
   "url": "discordapi.com",
   "version": "1.0.0",
-  "regExp": "^[^A-Z\\s!\"#$%&'()*+,./:;<=>?@\\[\\\\\\]^_`{|}~]+$",
   "logo": "https://i.imgur.com/17fUHDQ.png",
   "thumbnail": "https://i.imgur.com/u329vSV.png",
   "color": "#7289DA",
-  "tags": ["discord", "permission calculated"],
+  "tags": ["discord", "permission-calculated"],
   "category": "other"
 }
