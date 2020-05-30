@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async() => {
-    let presenceData = {
+    const presenceData = {
         largeImageKey: "logo"
     }
 
@@ -11,7 +11,7 @@ presence.on("UpdateData", async() => {
         presenceData.details = "Discord Permissions Calculator";
     }
 
-    let route = document.location.hash.split("/permissions.html");
+    const route = document.location.hash.split("/permissions.html");
 
     if(route[0]) {
         presenceData.details = "Settings the permissions of her bot.";
