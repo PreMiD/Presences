@@ -134,7 +134,7 @@ if (document.location.hostname == "snowboltz.net") {
   } else if (path.includes("register")) {
     presenceData.details = "กำลังสมัครใช้งาน..";
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname = "/") {
+  } else if (document.location.pathname == "/") {
     presenceData.details = "กำลังดูที่หน้าหลัก..";
     presenceData.startTimestamp = browsingStamp;
   }else {
