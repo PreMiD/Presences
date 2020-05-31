@@ -5,7 +5,7 @@ const browsingElapsedTimestamp = Math.floor(Date.now() / 1000);
 
 function getParameterByName(name: string, url: string): string {
   if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, '\\$&');
+  name = name.replace(/[[\]]/g, '\\$&');
   const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
       results = regex.exec(url);
   if (!results) return null;
