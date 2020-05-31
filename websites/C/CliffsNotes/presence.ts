@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
         }
     }
     else if(path.includes("/discover-")){
-        title = (document.querySelector("#mainTag > section > div:nth-child(1) > div > div > h1") as HTMLTextAreaElement)
+        title = (document.querySelector("#mainTag > section > div:nth-child(1) > div > div > h1") as HTMLTextAreaElement);
         presenceData.details = "Viewing " + title.innerText;
         presenceData.startTimestamp = browsingStamp;
     }
