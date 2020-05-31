@@ -38,5 +38,5 @@ presence.on("UpdateData", () => {
         presence.setActivity();
     } else {
         presence.setActivity(presenceData);
-    };
+    }
 });
