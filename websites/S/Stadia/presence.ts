@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname == "/home") {
     presenceData.details = "Viewing Stadia Home";
     userName = document.querySelector("span.VY8blf.fSorq");
-    (presenceData.smallImageText = userName.innerText);
+    presenceData.smallImageText = userName.innerText;
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/player")) {
     gameName = document.querySelector("div.HDKZKb.LiQ6Hb");
@@ -31,8 +31,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/store")) {
     presenceData.details = "Viewing Stadia Store";
     presenceData.startTimestamp = browsingStamp;
-  } 
-  else {
+  } else {
     presenceData.details = "Can't read page";
   }
 
