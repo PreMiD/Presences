@@ -31,7 +31,7 @@ presence.on("UpdateData", () => {
             presenceData.smallImageKey = "search";
             presenceData.details = "Viewing documents...";
         }
-    };
+    }
 
     if (presenceData.details == null) {
         presence.setTrayTitle();
