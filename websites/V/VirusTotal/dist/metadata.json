@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "MauriceX",
+    "id": "268768664411439115"
+  },
+  "service": "VirusTotal",
+  "description": {
+    "en": "Check every Software for your safety",
+    "de": "Überprüfe deine Dateien für deine Sicherheit"
+  },
+  "url": "www.virustotal.com",
+  "version": "1.4.3",
+  "logo": "https://i.imgur.com/QPKWLTc.png",
+  "thumbnail": "https://i.imgur.com/HE2xzdF.png",
+  "color": "#397eff",
+  "tags": [
+    "safety",
+    "virus-check"
+  ],
+  "category": "other"
+}

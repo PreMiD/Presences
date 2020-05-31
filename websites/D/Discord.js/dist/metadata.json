@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Deivid",
+    "id": "406184197405802497"
+  },
+  "service": "Discord.js",
+  "description": {
+    "en": "Discord.js is a powerful node.js module that allows you to interact with the Discord API very easily."
+  },
+  "url": "discord.js.org",
+  "version": "1.2.3",
+  "logo": "https://i.imgur.com/v4Qb6IT.png",
+  "thumbnail": "https://i.imgur.com/lXDvidg.png",
+  "color": "#8dd6f1",
+  "tags": [
+    "other",
+    "development",
+    "discord-js",
+    "d-js",
+    "programming"
+  ],
+  "category": "other"
+}
