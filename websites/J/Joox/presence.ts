@@ -27,16 +27,25 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", async () => {
-  const player = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-EHOje.kLlKoV > div.sc-gzVnrw.jgaZgQ > button.sc-htpNat.jEJMuB > i").getAttribute("class");
+  const player = document
+    .querySelector(
+      "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-EHOje.kLlKoV > div.sc-gzVnrw.jgaZgQ > button.sc-htpNat.jEJMuB > i"
+    )
+    .getAttribute("class");
 
   if (player) {
-
     const paused = player.includes("pause") === false;
 
-    const title = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > b > a").textContent;
-    const author = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > span").textContent;
+    const title = document.querySelector(
+      "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > b > a"
+    ).textContent;
+    const author = document.querySelector(
+      "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > div.sc-dnqmqq.hGsYSo > div > div.sc-cJSrbW.hSnhBW > span"
+    ).textContent;
     const audioTime = document.querySelector("#currentTime").textContent;
-    const audioDuration = document.querySelector("#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq").textContent;
+    const audioDuration = document.querySelector(
+      "#__next > div.sc-bdVaJa.izSScG > div.sc-bwzfXH.kIpMXu > div.sc-htoDjs.frIPNj > small.sc-iwsKbI.sc-gqjmRU.GeFxq"
+    ).textContent;
     const timestamps = getTimestamps(audioTime, audioDuration);
 
     const data: PresenceData = {
