@@ -16,8 +16,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -32,19 +32,13 @@ presence.on("UpdateData", async () => {
       video = document.querySelector("video:nth-child(2)");
     }
     const title: HTMLElement = document.querySelector(
-      "div.center > div > div.title"
+      ".webPlayerUIContainer > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div"
     );
     const subtitle: HTMLElement = document.querySelector(
-      "div.center > div > div.subtitle"
+      ".webPlayerUIContainer > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2)"
     );
 
-    if (
-      video !== null &&
-      title &&
-      (document.querySelector(
-        ".loadingSpinner.whiteSpinner"
-      ) as HTMLButtonElement).style.cssText !== "display: inline;"
-    ) {
+    if (video !== null && title) {
       presenceData.details = title.textContent;
       if (
         subtitle &&
@@ -71,7 +65,7 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.details = "Viewing:";
       presenceData.state = document.querySelector(
-        ".dv-node-dp-title"
+        ".av-detail-section > div > h1"
       ).textContent;
     }
   } else if (document.location.pathname.includes("/tv/")) {
