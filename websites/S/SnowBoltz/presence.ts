@@ -4,11 +4,6 @@ const presence = new Presence({
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 const path = document.location.search;
-const id1 = document.querySelector("body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(6) > b");
-const maid1 = document.querySelector("body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > div > h4");
-const id = id1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก";
-const maid = maid1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก";
-
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
@@ -17,7 +12,7 @@ const presenceData: PresenceData = {
 
 
 if (document.location.hostname == "snowboltz.net") {
-  if (path.includes("home")) {
+   if (path.includes("home")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "กำลังดูที่หน้าหลัก..";
   } else if (path.includes("robux_group")) {
@@ -55,6 +50,8 @@ if (document.location.hostname == "snowboltz.net") {
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       if (path.includes("id")) {
+        const id1 = document.querySelector("body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(3) > b");
+        const id = id1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก";
         presenceData.details = "ตรวจสอบการเติมเเบบโอน";
         presenceData.state = id;
         presenceData.startTimestamp = browsingStamp;
@@ -65,7 +62,9 @@ if (document.location.hostname == "snowboltz.net") {
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       if (path.includes("id")) {
-        presenceData.details = "ตรวจสอบการเติมเเบบโอน";
+        const id1 = document.querySelector("body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(7) > b");
+        const id = id1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก";
+        presenceData.details = "ตรวจสอบการเติมเเบบหรัส";
         presenceData.state = id;
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
@@ -75,6 +74,8 @@ if (document.location.hostname == "snowboltz.net") {
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       if (path.includes("id")) {
+        const id1 = document.querySelector("body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(3) > b");
+        const id = id1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก";
         presenceData.details = "ตรวจสอบการโอนเงิน";
         presenceData.state = id;
         presenceData.startTimestamp = browsingStamp;
@@ -85,6 +86,8 @@ if (document.location.hostname == "snowboltz.net") {
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       if (path.includes("id")) {
+        const maid1 = document.querySelector("body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > div > h4");
+        const maid = maid1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ?? "ไม่ทราบสมาชิก";
         presenceData.details = "จัดการสมาชิก";
         presenceData.state = maid;
         presenceData.startTimestamp = browsingStamp;
@@ -134,10 +137,7 @@ if (document.location.hostname == "snowboltz.net") {
   } else if (path.includes("register")) {
     presenceData.details = "กำลังสมัครใช้งาน..";
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname == "/") {
-    presenceData.details = "กำลังดูที่หน้าหลัก..";
-    presenceData.startTimestamp = browsingStamp;
-  }else {
+  } else {
     presenceData.details = "หน้าที่ไม่ทราบ";
     presenceData.startTimestamp = browsingStamp;
   }
