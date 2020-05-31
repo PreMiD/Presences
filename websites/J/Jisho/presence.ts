@@ -31,6 +31,10 @@ presence.on("UpdateData", async () => {
 				console.log(kanji + " - " + meaning);
 			}
 		}
+		else if (document.location.pathname.startsWith("/word")) {
+			presenceData.details = "Viewing a word:";
+			presenceData.state = decodeURIComponent(document.location.pathname.substr(6));
+		}
 		else if (document.location.pathname.startsWith("/forum")) {
 			if (document.location.pathname.length < 8) {
 				presenceData.details = "Viewing a page:";
