@@ -17,16 +17,15 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Home";
 		}
 		else if (document.location.pathname.startsWith("/search")) {
-			var kanjiDiv = document.querySelector("#result_area > div.kanji > div");
-			if (kanjiDiv == null) {
+			if (document.querySelector("#result_area > div.kanji > div") == null) {
 				presenceData.details = "Searching:";
 				presenceData.state = decodeURIComponent(document.location.pathname.substr(8));
 				console.log("searching");
 			}
 			else {
 				presenceData.details = "Viewing a kanji:";
-				let kanji = document.querySelector("#result_area > div.kanji > div > div > div > div > h1.character").innerHTML;
-				let meaning = document.querySelector("#result_area > div.kanji > div > div > div > div > div.kanji-details__main-meanings").innerHTML.trim();
+				const kanji = document.querySelector("#result_area > div.kanji > div > div > div > div > h1.character").innerHTML;
+				const meaning = document.querySelector("#result_area > div.kanji > div > div > div > div > div.kanji-details__main-meanings").innerHTML.trim();
 				presenceData.state = kanji + " - " + meaning;
 				console.log(kanji + " - " + meaning);
 			}
