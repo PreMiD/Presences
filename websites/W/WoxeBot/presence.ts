@@ -20,7 +20,7 @@ const presence = new Presence({
           presenceData.details = "Bir sunucusunu yönetiyor...";
         } else if (document.location.pathname.includes("profile")) {
           presenceData.details = "Profilini inceliyor...";
-        };
+        }
     }
 
     if (presenceData.details == null) {
