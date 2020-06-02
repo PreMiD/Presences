@@ -18,7 +18,7 @@ client.on("UpdateData", () => {
     let templateName: string | null = document.querySelector(
         "section > div > div > h1"
       )?.textContent,
-      string: string = "Viewing a template:";
+      string = "Viewing a template:";
 
     if (path.includes("/edit")) {
       string = "Editing a template:";
