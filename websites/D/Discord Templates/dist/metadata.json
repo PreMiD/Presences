@@ -11,12 +11,13 @@
   },
   "service": "Discord Templates",
   "version": "1.0.0",
-  "logo": "https://discordtemplates.com/assets/images/logo-no-particles.png",
+  "logo": "https://i.imgur.com/wb8RyMf.png",
   "thumbnail": "https://i.imgur.com/QU2NHDW.png",
   "color": "#0F6BFD",
   "tags": [
     "discord",
     "templates"
   ],
-  "category": "videos"
+  "category": "videos",
+  "button": false
 }
