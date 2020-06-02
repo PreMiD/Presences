@@ -27,7 +27,7 @@
     "execa": "^4.0.2",
     "glob": "^7.1.6",
     "jsonschema": "^1.2.6",
-    "mongodb": "^3.5.7",
+    "mongodb": "^3.5.8",
     "prettier": "^2.0.5",
     "semver": "^7.3.2",
     "source-map-support": "^0.5.19",
