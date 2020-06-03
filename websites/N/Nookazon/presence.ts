@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
 
   const urlVars = new URLSearchParams(document.location.search);
 
-  let department:string, category:string, tag:string, diy:boolean, filter:string;
+  let department: string, category: string, tag: string, diy: boolean, filter: string;
 
   switch (document.location.pathname.replace("/", "").split("/")[0]) {
     case "":
