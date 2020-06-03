@@ -24,12 +24,12 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-function getTimesFromMs(ms): Record<string, number> {
+function getTimesFromMs(ms: number): Record<string, number> {
   const floor = Math.floor(ms % 60);
   const sec = floor < 10 ? 0 + floor : floor,
     min = floor / 60 <= 0 ? 0 : floor / 60,
@@ -41,14 +41,17 @@ function getTimesFromMs(ms): Record<string, number> {
   };
 }
 
-function getTimestamp(time): string {
+function getTimestamp(time: number): string {
   const { sec, min, hrs } = getTimesFromMs(time);
   return hrs > 0 ? hrs + ":" + min + ":" + sec : min + ":" + sec;
 }
 
-presence.on("iFrameData", (data) => {
-  iframe_response = data;
-});
+presence.on(
+  "iFrameData",
+  (data: { paused: boolean; duration: number; current_time: number }) => {
+    iframe_response = data;
+  }
+);
 
 presence.on("UpdateData", async () => {
   const path = document.location.pathname;
@@ -72,8 +75,8 @@ presence.on("UpdateData", async () => {
   } else if (!path.split("anime/")[1].includes("/")) {
     let type: string;
 
-    for (const info of (document.querySelector("div.col-sm-4.anime-info")
-      .children as unknown) as any[]) {
+    for (const info of document.querySelector("div.col-sm-4.anime-info")
+      .children) {
       // Not uniform info order... ugh
       if (info.children[0].textContent == "Type:")
         info.children[1].textContent == "TV"

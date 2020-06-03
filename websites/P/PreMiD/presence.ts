@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
         data.details = document.querySelector("h1.presence-name")
           ? document
               .querySelector("h1.presence-name")
-              .textContent.replace(/[\s\n]+/gi, "")
+              .textContent.replace(/^\s+|\s+$/g, "")
           : "Store";
         data.state = "Presence page";
         break;

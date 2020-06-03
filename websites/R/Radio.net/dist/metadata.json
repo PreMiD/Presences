@@ -11,7 +11,7 @@
   },
   "url": "www.radio.net",
   "regExp": "((www|br|mx|co)[.]radio[.]net|www[.]radio[.](de|at|fr|se|dk|pt|es|it|pl))[/]",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "logo": "https://i.imgur.com/3IBLlpc.png",
   "thumbnail": "https://i.imgur.com/pYZzRDV.png",
   "color": "#67e350",

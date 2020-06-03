@@ -62,8 +62,13 @@ presence.on("UpdateData", async () => {
     ) as HTMLElement).innerText,
     video = document.querySelector(".video-stream") as HTMLVideoElement;
 
+  //* Get Repeat mode
+  const repeatMode = document
+    .querySelector('ytmusic-player-bar[slot="player-bar"]')
+    .getAttribute("repeat-Mode_");
+
   if (title !== "" && !isNaN(video.duration)) {
-    var timestamps = getTimestamps(
+    const timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
@@ -71,9 +76,19 @@ presence.on("UpdateData", async () => {
         details: title,
         state: getAuthorString(),
         largeImageKey: "ytm_lg",
-        smallImageKey: video.paused ? "pause" : "play",
+        smallImageKey: video.paused
+          ? "pause"
+          : repeatMode == "ONE"
+          ? "repeat-one"
+          : repeatMode == "ALL"
+          ? "repeat"
+          : "play",
         smallImageText: video.paused
           ? (await strings).pause
+          : repeatMode == "ONE"
+          ? "On loop"
+          : repeatMode == "ALL"
+          ? "Playlist on loop"
           : (await strings).play,
         startTimestamp: timestamps[0],
         endTimestamp: timestamps[1]

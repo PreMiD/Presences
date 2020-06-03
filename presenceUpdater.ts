@@ -1,8 +1,6 @@
 import "source-map-support/register";
 
 import {
-  connect,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   MongoClient,
   DeleteWriteOpResultObject,
   UpdateWriteOpResult
@@ -18,7 +16,10 @@ import {
 import { valid } from "semver";
 import { join, normalize, resolve, sep } from "path";
 
-let exitCode = 0;
+const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
+  dbname = "PreMiD";
+let extendedRun = false,
+  exitCode = 0;
 
 function isValidJSON(text: string): boolean {
   try {
@@ -28,6 +29,11 @@ function isValidJSON(text: string): boolean {
     return false;
   }
 }
+
+let client = new MongoClient(url, {
+  appname: "PreMiD-PresenceUpdater",
+  useUnifiedTopology: true
+});
 
 const readFile = (path: string): string =>
   readFileSync(path, { encoding: "utf8" });
@@ -90,12 +96,11 @@ const compile = async (filesToCompile: string[]): Promise<void> => {
       types: ["node"]
     };
 
-    console.log(fileToCompile);
     compileFile([fileToCompile, premidTypings], tsConfig);
   }
 };
 
-async function run(MongoClient: MongoClient): Promise<void> {
+const main = async (): Promise<void> => {
   if (!process.env.GITHUB_ACTIONS)
     console.log(
       "\nPlease note that this script is ONLY supposed to run on a CI environment"
@@ -103,19 +108,27 @@ async function run(MongoClient: MongoClient): Promise<void> {
 
   console.log("\nFETCHING...\n");
 
-  const presenceFolders = glob("./{websites,programs}/*/*/"),
-    db = MongoClient.db("PreMiD").collection("presences"),
-    dbPresences: Array<DBdata> = await db
+  try {
+    await client.connect();
+  } catch (err) {
+    console.error(err.stack || err);
+    process.exit(1);
+  }
+
+  let database = client.db(dbname).collection("presences");
+  const dbPresences: Array<DBdata> = await database
       .find({}, { projection: { _id: 0, name: 1, "metadata.version": 1 } })
       .toArray(),
-    presences: Array<[Metadata, string]> = presenceFolders
+    presences: Array<[Metadata, string]> = glob("./{websites,programs}/*/*/")
       .filter((pF) => existsSync(`${pF}/dist/metadata.json`))
       .map((pF) => {
         const file = readFile(`${pF}/dist/metadata.json`);
         if (isValidJSON(file)) {
-          return [JSON.parse(file), pF];
+          const data = JSON.parse(file);
+          delete data['$schema'];
+          return [data, pF];
         } else {
-          console.log(
+          console.error(
             `Error. Folder ${pF} does not include a valid metadata file, skipping...`
           );
           exitCode = 1;
@@ -138,17 +151,23 @@ async function run(MongoClient: MongoClient): Promise<void> {
       .map((dP) => presences.find((p) => p[0].service === dP.name)),
     dbDiff = outdatedPresences.concat(newPresences);
 
+  if (dbDiff.length > 5) {
+    extendedRun = true;
+    await client.close();
+  }
+
   console.log(`New additions: ${newPresences.length}`);
   console.log(`To be updated: ${outdatedPresences.length}`);
   console.log(`To be deleted: ${deletedPresences.length}`);
 
   if (dbDiff.length > 0) console.log("\nCOMPILING...\n");
+  if (extendedRun) console.log("This will take some time...");
 
   let nP,
     dP: Promise<DeleteWriteOpResultObject>[] = [],
     oP: Promise<UpdateWriteOpResult>[] = [];
 
-  let compiledPresences = await Promise.all(
+  const compiledPresences = await Promise.all(
     dbDiff.map(async (file) => {
       let metadata = file[0];
       const path = file[1],
@@ -156,7 +175,7 @@ async function run(MongoClient: MongoClient): Promise<void> {
         metadataFile = readJson<Metadata>(`${path}dist/metadata.json`);
 
       if (!metadata && !metadataFile) {
-        console.log(`Error. No metadata was found for ${path}, skipping...`);
+        console.error(`Error. No metadata was found for ${path}, skipping...`);
         exitCode = 1;
         return null;
       } else if (!metadata && metadataFile) metadata = metadataFile;
@@ -173,7 +192,7 @@ async function run(MongoClient: MongoClient): Promise<void> {
             : metadata && metadata.service
             ? metadata.service
             : path;
-        console.log(
+        console.error(
           `Error. ${meta} does not include a valid metadata file/version, skipping...`
         );
         exitCode = 1;
@@ -184,7 +203,7 @@ async function run(MongoClient: MongoClient): Promise<void> {
 
       if (!existsSync(`${path}dist/presence.js`)) {
         const meta = metadataFile.service ? metadataFile.service : path;
-        console.log(`Error. ${meta} did not compile, skipping...`);
+        console.error(`Error. ${meta} did not compile, skipping...`);
         exitCode = 1;
         return null;
       }
@@ -201,13 +220,13 @@ async function run(MongoClient: MongoClient): Promise<void> {
       if (metadata.iframe && existsSync(`${path}dist/iframe.js`))
         resJson.iframeJs = readFileSync(`${path}dist/iframe.js`, "utf-8");
       else if (metadata.iframe && !existsSync(`${path}dist/iframe.js`)) {
-        console.log(
+        console.error(
           `Error. ${metadata.service} explicitly includes iframe but no such file was found, skipping...`
         );
         exitCode = 1;
         return null;
       } else if (!metadata.iframe && existsSync(`${path}dist/iframe.js`)) {
-        console.log(
+        console.error(
           `Error. ${metadata.service} contains an iframe file but does not include it in the metadata, skipping...`
         );
         exitCode = 1;
@@ -220,53 +239,66 @@ async function run(MongoClient: MongoClient): Promise<void> {
 
   console.log("\nUPDATING...\n");
 
-  if (compiledPresences.length > 50) {
-    compiledPresences = compiledPresences.slice(0, 50);
-    console.log("Limiting to 50 presences for the current run.\n");
-  }
+  try {
+    if (extendedRun || !client.isConnected) {
+      client = new MongoClient(url, {
+        appname: "PreMiD-PresenceUpdater",
+        useUnifiedTopology: true
+      });
+      await client.connect();
+      database = client.db(dbname).collection("presences");
+    }
 
-  const bulkNp = compiledPresences.filter((e) =>
-      newPresences.some((p) => e && e.name === p[0].service)
-    ),
-    bulkOp = compiledPresences.filter((e) =>
-      outdatedPresences.some((p) => e && e.name === p[0].service)
+    const bulkNp = compiledPresences.filter((e) =>
+        newPresences.some((p) => e && e.name === p[0].service)
+      ),
+      bulkOp = compiledPresences.filter((e) =>
+        outdatedPresences.some((p) => e && e.name === p[0].service)
+      );
+
+    if (bulkNp.length > 0) {
+      nP = database.insertMany(bulkNp);
+      for (const presence of bulkNp) {
+        console.log(`ADD - "${presence.name}" @ ${presence.metadata.version}`);
+      }
+    }
+
+    if (deletedPresences.length > 0) {
+      dP = deletedPresences.map((p) => database.deleteOne({ name: p.name }));
+      for (const presence of deletedPresences) {
+        if (!presence || !presence.name) continue;
+        console.log(`DEL - "${presence.name}" @ ${presence.metadata.version}`);
+      }
+    }
+
+    if (bulkOp.length > 0) {
+      oP = bulkOp.map((p) => database.updateOne({ name: p.name }, { $set: p }));
+      for (const presence of bulkOp) {
+        console.log(`UPD - "${presence.name}" => ${presence.metadata.version}`);
+      }
+    }
+
+    //TODO: Webhook to Discord in case of failure ( exitCode 1 )
+    Promise.all([nP, ...dP, ...oP]).then(() =>
+      client.close().then(() => process.exit(exitCode))
     );
-
-  if (bulkNp.length > 0) {
-    nP = db.insertMany(bulkNp);
-    for (const presence of bulkNp) {
-      console.log(`ADD - "${presence.name}" @ ${presence.metadata.version}`);
-    }
+  } catch (err) {
+    console.error(err.stack || err);
+    process.exit(1);
   }
+};
 
-  if (deletedPresences.length > 0) {
-    dP = deletedPresences.map((p) => db.deleteOne({ name: p.name }));
-    for (const presence of deletedPresences) {
-      if (!presence || !presence.name) continue;
-      console.log(`DEL - "${presence.name}" @ ${presence.metadata.version}`);
-    }
-  }
+main();
 
-  if (bulkOp.length > 0) {
-    oP = bulkOp.map((p) => db.updateOne({ name: p.name }, { $set: p }));
-    for (const presence of bulkOp) {
-      console.log(`UPD - "${presence.name}" => ${presence.metadata.version}`);
-    }
-  }
+process.on("unhandledRejection", (rejection) => {
+  console.error(rejection);
+  process.exit(1);
+});
 
-  //TODO: Webhook to Discord in case of failure ( exitCode 1 )
-  Promise.all([nP, ...dP, ...oP]).then(() =>
-    MongoClient.close().then(() => process.exit(exitCode))
-  );
-}
-
-connect(
-  `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
-  {
-    appname: "PreMiD-PresenceUpdater",
-    useUnifiedTopology: true
-  }
-).then(run);
+process.on("uncaughtException", (err) => {
+  console.error(err.stack || err);
+  process.exit(1);
+});
 
 interface Metadata {
   author: { name: string; id: string };
