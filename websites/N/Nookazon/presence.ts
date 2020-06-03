@@ -32,6 +32,8 @@ presence.on("UpdateData", async () => {
 
   const urlVars = new URLSearchParams(document.location.search);
 
+  let department:string, category:string, tag:string, diy:boolean, filter:string;
+
   switch (document.location.pathname.replace("/", "").split("/")[0]) {
     case "":
       presenceData.details = "Homepage";
@@ -61,7 +63,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "User Reporting Guide";
       break;
     case "products":
-      let department, category, tag, diy;
       try {
         department = document.querySelector(".nav-bottom .selected").textContent;
       }
@@ -87,7 +88,7 @@ presence.on("UpdateData", async () => {
       catch {
         diy = false;
       }
-      let filter = "None";
+      filter = "None";
       if (category !== "") {
         filter = category;
       }
