@@ -8,7 +8,7 @@ interface String {
   capitalize(): string;
 }
 
-String.prototype.capitalize = function(d = /[ -]/) {
+String.prototype.capitalize = function(d = /[ -]/): string {
   let r = "";
   const a = this.toString().split(d);
   for (let i = 0; i < a.length; i++) {
@@ -19,7 +19,7 @@ String.prototype.capitalize = function(d = /[ -]/) {
     }
   }
   return r;
-}
+};
 
 presence.on("UpdateData", async () => {
 
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Frequently Asked Questions";
       break;
     case "trading-guide":
-      presenceData.details = "Trading Guide";
+      presenceData.details = "Safe Trading Guide";
       break;
     case "signup":
       presenceData.details = "Signing Up";
@@ -61,30 +61,31 @@ presence.on("UpdateData", async () => {
       presenceData.details = "User Reporting Guide";
       break;
     case "products":
+      let department, category, tag, diy;
       try {
-        var department = document.querySelector(".nav-bottom .selected").textContent;
+        department = document.querySelector(".nav-bottom .selected").textContent;
       }
       catch {
-        var department = "All Products";
+        department = "All Products";
       }
       try {
-        var category = document.querySelector(".items-category-active").textContent.capitalize();
+        category = document.querySelector(".items-category-active").textContent.capitalize();
       }
       catch {
-        var category = "";
+        category = "";
       }
       try {
-        var tag = urlVars.get("tag").capitalize();
+        tag = urlVars.get("tag").capitalize();
       }
       catch {
-        var tag = "";
+        tag = "";
       }
       try {
-        const element = <HTMLInputElement>document.querySelector(".search-diy-filter");
-        var diy = element.checked;
+        const element = document.querySelector(".search-diy-filter") as HTMLInputElement;
+        diy = element.checked;
       }
       catch {
-        var diy = false;
+        diy = false;
       }
       let filter = "None";
       if (category !== "") {
