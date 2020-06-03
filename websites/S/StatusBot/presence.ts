@@ -1,6 +1,6 @@
 // Register presence with our client id
 var presence = new Presence({
-    clientId: "705288244849410090"
+    clientId: "697994764800360468"
 });
 
 // Prefix all cookies with PMD according to requirements
