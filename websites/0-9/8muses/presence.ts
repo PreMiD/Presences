@@ -11,12 +11,12 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  try {
     if (new URLSearchParams(window.location.search).has("s")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for:";
       presenceData.state = document.title.split(' -').shift();
       presenceData.smallImageKey = "search";
+      presenceData.smallImageText = (await strings).search;
     } else if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = 'Browsing Homepage';
@@ -48,8 +48,4 @@ presence.on("UpdateData", async () => {
     } else {
       presence.setActivity(presenceData);
     }
-  }
-catch(err) {
-  console.error(err)
-}
 });
