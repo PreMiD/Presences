@@ -5,7 +5,7 @@ const presence = new Presence({
 browsingStamp = Math.floor(Date.now() / 1000),
 
 // This is better than having a lot of (almost) empty switch cases
-// Assigning details to type any made ESLint scream, and setting it to type string made the compiler
+// Assigning details to type any made ESLint scream, and setting it to type string made the compiler scream
 details: {[k: string]: string} = {
   "/stories/": "Searching for an adventure",
   // This is just error handling because /random/ redirects you
