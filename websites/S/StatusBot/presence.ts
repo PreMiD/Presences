@@ -1,5 +1,5 @@
 // Register presence with our client id
-var presence = new Presence({
+const presence = new Presence({
     clientId: "697994764800360468"
 });
 
@@ -13,7 +13,7 @@ function getSubdomain(): string {
  * @see {@link https://www.w3schools.com/js/js_cookies.asp}
  */
 function setCookie(cname: string, cvalue: string, exdays = 1): void {
-    let d = new Date();
+    const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     const expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
     const idleStart: Date | null = (idleStartVal !== "" && idleStartVal !== "null") ? new Date(parseInt(idleStartVal)) : null;
 
     // Create presence data
-    let presenceData: PresenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "logo_main" // Default Logo
     };
 
@@ -137,4 +137,4 @@ presence.on("UpdateData", async () => {
         presence.setTrayTitle(); // Clear tray
         presence.setActivity(); // Clear activity
     } else presence.setActivity(presenceData);
-})
+});
