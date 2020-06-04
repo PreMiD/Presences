@@ -32,7 +32,6 @@ enum SettingsId {
   showVideosName = "showVideosName",
   showVideosEpisode = "showVideosEpisode",
   showVideosLTime = "showVideosLTime",
-  showVideosFTime = "showVideosFTime",
   showVideosComment = "showVideosComment",
   showVideosReport = "showVidoesReport",
   /* PathNames.forum */
@@ -87,15 +86,22 @@ presence.on("UpdateData", async () => {
     (await presence.getSetting(SettingsId.showVideos)) &&
     !NotFound()
   ) {
-    const title = ["...", "Epsódio ..."];
-    const animeName = document.querySelector("div.autofill.p1 > a > h4");
-    const episode = pathName.split("/").slice(-1)[0];
+    const value = ["...", "..."];
+    const animeNameEP = document.querySelector("#main>article>h1");
     const comment = document.querySelector("textarea");
     const report = document.querySelector("div.modal-header>h1");
     const genders = document.querySelectorAll("div.autofill>span")[1];
     let timestamps: number[] = [];
-    if (animeName) title[0] = animeName.textContent;
-    title[1] = `Episódio ${episode}`;
+    if (animeNameEP) {
+      value[0] = animeNameEP.textContent.replace(
+        animeNameEP.textContent.match(/ - \d+/g).slice(-1)[0],
+        ""
+      );
+      value[1] = animeNameEP.textContent
+        .match(/ - \d+/g)
+        .slice(-1)[0]
+        .match(/\d+/g)[0];
+    }
     if (video && !isNaN(video.duration)) {
       timestamps = MediaTimestamps(video.currentTime, video.duration);
       if (await presence.getSetting(SettingsId.showVideosLTime)) {
@@ -108,8 +114,8 @@ presence.on("UpdateData", async () => {
       }
     } else if (await presence.getSetting(SettingsId.showVideosLTime))
       data.smallImageKey = ResourceNames.stop;
-    data.details = title[0];
-    data.state = title[1];
+    data.details = value[0];
+    data.state = `Episódio ${value[1]}`;
     if (genders && !genders.textContent.toLowerCase().includes("carregando"))
       data.smallImageText = genders.textContent;
     if (!(await presence.getSetting(SettingsId.showVideosName))) {
@@ -141,7 +147,16 @@ presence.on("UpdateData", async () => {
       !(await presence.getSetting(SettingsId.showVideosEpisode))
     ) {
       data.details = "Assistindo Anime:";
-      data.state = animeName.textContent;
+      data.state = value[0];
+    }
+    if (
+      (await presence.getSetting(SettingsId.showVideosLTime)) &&
+      video &&
+      !isNaN(video.duration) &&
+      timestamps[0] == timestamps[1]
+    ) {
+      data.details = data.details.replace(/^/, "✔ ");
+      data.smallImageKey = ResourceNames.stop;
     }
   } else if (
     pathName.startsWith(PathNames.profile) &&
@@ -308,13 +323,13 @@ presence.on("UpdateData", async () => {
     const value = ["...", "..."];
     if (animeNameEP) {
       value[0] = animeNameEP.textContent.replace(
-        animeNameEP.textContent.match(/ - \d*/g).slice(-1)[0],
+        animeNameEP.textContent.match(/ - \d+/g).slice(-1)[0],
         ""
       );
       value[1] = animeNameEP.textContent
-        .match(/ - \d*/g)
+        .match(/ - \d+/g)
         .slice(-1)[0]
-        .match(/(?<= - ).*/g)[0];
+        .match(/\d+/g)[0];
     }
     data.details = !(await presence.getSetting(SettingsId.showRoomName))
       ? "Assistindo em Grupo:"
