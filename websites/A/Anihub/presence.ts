@@ -19,7 +19,8 @@ enum PathNames {
   social = "/postagens",
   forum = "/forum",
   history = "/minha-lista",
-  newTopic = "/novo-topico"
+  newTopic = "/novo-topico",
+  room = "/sala"
 }
 enum SettingsId {
   /* PathNames.profile */
@@ -48,7 +49,13 @@ enum SettingsId {
   showAnimeReview = "showAnimeReview",
   showAnimeTrailer = "showAnimeTrailer",
   showAnimeSelection = "showAnimeSelection",
-  showAnimeName = "showAnimeName"
+  showAnimeName = "showAnimeName",
+  /* PathNames.room */
+  showRoom = "showRoom",
+  showRoomEpisode = "showRoomEpisode",
+  showRoomName = "showRoomName",
+  showRoomUsers = "showRoomUsers",
+  showRoomLTime = "showRoomLTime"
 }
 enum ResourceNames {
   logo = "logo_shadow",
@@ -58,7 +65,8 @@ enum ResourceNames {
   search = "search",
   writing = "writing",
   reading = "reading",
-  info = "info"
+  info = "info",
+  group = "group"
 }
 const browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
@@ -145,18 +153,18 @@ presence.on("UpdateData", async () => {
     const selected = document.querySelector(
       "#main > div.black.flexContent.subNav.p1 > a.btn.router-link-active"
     );
-    const selfUsername = document
-      .querySelector("#menu-links>ul>li>div>div>li>a")
-      .getAttribute("href")
-      .split("/")
-      .slice(-1)[0];
+    const selfUsername = document.querySelector(
+      "#menu-links>ul>li>div>div>li>a"
+    );
     if (
       pathName.startsWith(PathNames.profile) &&
       pathName.includes("/editar") &&
-      username.textContent.toLowerCase() == selfUsername
+      selfUsername &&
+      username.textContent.toLowerCase() ==
+        selfUsername.getAttribute("href").split("/").slice(-1)[0].toLowerCase()
     )
       title[0] = "Editando Perfil";
-    title[1] = username.textContent;
+    title[1] = username ? username.textContent : "...";
     if (
       selected &&
       (await presence.getSetting(SettingsId.showProfileSelection))
@@ -256,7 +264,7 @@ presence.on("UpdateData", async () => {
     (await presence.getSetting(SettingsId.showAnime)) &&
     !NotFound()
   ) {
-    const animeName = document.querySelector("h1>b").textContent;
+    const animeName = document.querySelector("h1>b");
     const modal = document.querySelector("div.modal-header>h1");
     const selected = document.querySelector(
       "a.p1.din.router-link-exact-active"
@@ -285,10 +293,65 @@ presence.on("UpdateData", async () => {
         ? (data.details = `Visualizando Anime - ${selected.textContent}:`)
         : (data.details = `Visualizando Anime:`);
     if (await presence.getSetting(SettingsId.showAnimeName))
-      data.state = animeName;
+      data.state = animeName ? animeName.textContent : "...";
     else {
       data.details = data.details.replace(":", "");
       delete data.smallImageText;
+    }
+  } else if (
+    pathName.startsWith(PathNames.room) &&
+    (await presence.getSetting(SettingsId.showRoom))
+  ) {
+    const usersCount = document.querySelector("#main>article>div>div>b");
+    const animeNameEP = document.querySelector("#main>article>h1");
+    let timestamps: number[] = [];
+    const value = ["...", "..."];
+    if (animeNameEP) {
+      value[0] = animeNameEP.textContent.replace(
+        animeNameEP.textContent.match(/ - \d*/g).slice(-1)[0],
+        ""
+      );
+      value[1] = animeNameEP.textContent
+        .match(/ - \d*/g)
+        .slice(-1)[0]
+        .match(/(?<= - ).*/g)[0];
+    }
+    data.details = !(await presence.getSetting(SettingsId.showRoomName))
+      ? "Assistindo em Grupo:"
+      : value[0];
+    data.state = `Episódio ${value[1]}`;
+    data.smallImageKey = ResourceNames.group;
+    if (usersCount && (await presence.getSetting(SettingsId.showRoomUsers)))
+      data.smallImageText =
+        usersCount.textContent.split(" ")[0] == "1"
+          ? "Assistindo sozinho(a)"
+          : `Assistindo com ${
+              parseInt(usersCount.textContent.split(" ")[0]) - 1
+            } usuário(s)`;
+    else if (
+      !(await presence.getSetting(SettingsId.showRoomUsers)) &&
+      (await presence.getSetting(SettingsId.showRoomName))
+    )
+      data.smallImageText = "Assistindo em Grupo";
+    if (
+      video &&
+      !isNaN(video.duration) &&
+      (await presence.getSetting(SettingsId.showRoomLTime))
+    ) {
+      timestamps = MediaTimestamps(video.currentTime, video.duration);
+      if (!video.paused && video.readyState >= 1) {
+        data.startTimestamp = timestamps[0];
+        data.endTimestamp = timestamps[1];
+      }
+    }
+    if (!(await presence.getSetting(SettingsId.showRoomEpisode)))
+      delete data.state;
+    if (
+      !(await presence.getSetting(SettingsId.showRoomEpisode)) &&
+      !(await presence.getSetting(SettingsId.showRoomName))
+    ) {
+      delete data.state;
+      data.details = data.details.replace(":", "");
     }
   } else if (!NotFound()) {
     try {
