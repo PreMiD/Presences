@@ -32,6 +32,8 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = comicName + " - " + issueName;
         presenceData.state = issueNumber;
+        presenceData.smallImageKey = "reading";
+        
       }
       else {
         presenceData.startTimestamp = browsingStamp;
