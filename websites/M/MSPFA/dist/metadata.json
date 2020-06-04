@@ -4,11 +4,11 @@
 		"name": "Yhvr",
 		"id": "255757013122809856"
 	},
-	"url": "mspfa.com",
+	"service": "MSPFA",
 	"description": {
 		"en": "MSPFA is a website used for hosting webcomics mostly in the style of the comics found on microsoftpaintadventures.com, although not exclusively."
 	},
-	"service": "MSPFA",
+	"url": "mspfa.com",
 	"version": "1.0.0",
 	"logo": "https://i.imgur.com/GWzbcj0.png",
 	"thumbnail": "https://i.imgur.com/UhTbTSy.png",
