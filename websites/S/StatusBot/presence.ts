@@ -3,6 +3,53 @@ var presence = new Presence({
     clientId: "697994764800360468"
 });
 
+// Filter hostname to get subdomain
+function getSubdomain(): string {
+    return window.location.hostname.split(".").splice(window.location.hostname.split(".").length - 2, 2).join(".");
+}
+
+/**
+ * Set cookie function
+ * @see {@link https://www.w3schools.com/js/js_cookies.asp}
+ */
+function setCookie(cname: string, cvalue: string, exdays = 1): void {
+    let d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    const expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+/**
+ * Get cookie function
+ * @see {@link https://www.w3schools.com/js/js_cookies.asp}
+ */
+function getCookie(cname: string): string {
+    const name = cname + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+
+// Idle checker function - Checks and updates cookies accordinglu
+function idleChecker(lastActivity: string, activity: string, idleStart: Date | null): void {
+    /* If the last activity is the current activity and idleStart isnt set
+    *  Set the idle start cookie else reset idle start cookie and set last activity to current activity*/
+    if (lastActivity == activity && !idleStart) setCookie("PMD_IDLE_START", `${new Date().getTime()}`);
+    else if (lastActivity !== activity) { 
+        setCookie("PMD_IDLE_START", "null");
+        setCookie("PMD_LAST_ACTIVITY", activity);
+    }
+}
+
 // Prefix all cookies with PMD according to requirements
 // Reset cookies in case they exist on script initialization
 setCookie("PMD_IDLE_START", "null"); // "Idle Start" cookie
@@ -11,20 +58,20 @@ setCookie("PMD_LAST_ACTIVITY", "null"); // "Last activity" cookie
 // UpdateData event
 presence.on("UpdateData", async () => {
     // Get cookies for processing
-    let lastActivity: string = getCookie("PMD_LAST_ACTIVITY");
-    let idleStartVal: string = getCookie("PMD_IDLE_START");
+    const lastActivity: string = getCookie("PMD_LAST_ACTIVITY");
+    const idleStartVal: string = getCookie("PMD_IDLE_START");
 
     // Get date, if the date cookie is null set date to null
-    let idleStart: Date | null = (idleStartVal !== "" && idleStartVal !== "null") ? new Date(parseInt(idleStartVal)) : null;
+    const idleStart: Date | null = (idleStartVal !== "" && idleStartVal !== "null") ? new Date(parseInt(idleStartVal)) : null;
 
     // Create presence data
-    var presenceData: PresenceData = {
+    let presenceData: PresenceData = {
         largeImageKey: "logo_main" // Default Logo
     };
 
     // Get subdomain and path from window.location
-    let subdomain = getSubdomain();
-    let path = window.location.pathname;
+    const subdomain = getSubdomain();
+    const path = window.location.pathname;
 
     // Set presence data up depending on site/paths
     if (subdomain == "beta") {
@@ -56,7 +103,7 @@ presence.on("UpdateData", async () => {
             // Idle checker
             idleChecker(lastActivity, "modules", idleStart);
         } else if (path.includes("profile")) { // Profile pages
-            presenceData.details = "Managing Profile" // Profile details
+            presenceData.details = "Managing Profile"; // Profile details
             presenceData.state = "Viewing"; // Profiles state
 
             // Idle checker
@@ -90,54 +137,4 @@ presence.on("UpdateData", async () => {
         presence.setTrayTitle(); // Clear tray
         presence.setActivity(); // Clear activity
     } else presence.setActivity(presenceData);
-});
-
-// Filter hostname to get subdomain
-function getSubdomain() : string {
-    let subdomain: Array<String> = window.location.hostname.split(".");
-    subdomain.pop();
-    subdomain.pop();
-    return subdomain.join(".");
-}
-
-/**
- * Set cookie function
- * @see {@link https://www.w3schools.com/js/js_cookies.asp}
- */
-function setCookie(cname: string, cvalue: string, exdays: number = 1) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-/**
- * Get cookie function
- * @see {@link https://www.w3schools.com/js/js_cookies.asp}
- */
-function getCookie(cname: string) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-}
-
-// Idle checker function - Checks and updates cookies accordinglu
-function idleChecker(lastActivity: string, activity: string, idleStart: Date | null) {
-    /* If the last activity is the current activity and idleStart isnt set
-    *  Set the idle start cookie else reset idle start cookie and set last activity to current activity*/
-    if (lastActivity == activity && !idleStart) setCookie("PMD_IDLE_START", `${new Date().getTime()}`);
-    else if (lastActivity !== activity) { 
-        setCookie("PMD_IDLE_START", "null");
-        setCookie("PMD_LAST_ACTIVITY", activity);
-    }
-}
+})
