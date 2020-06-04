@@ -9,12 +9,18 @@
   },
   "url": [
     "jisho.org",
-	"classic.jisho.org"
+    "classic.jisho.org"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/nAtEXHe.png",
   "thumbnail": "https://i.imgur.com/Kk2NUkd.png",
   "color": "#0bba17",
-  "tags": ["japanese", "english", "dictionary", "translator", "language"],
+  "tags": [
+    "japanese",
+    "english",
+    "dictionary",
+    "translator",
+    "language"
+  ],
   "category": "other"
 }
