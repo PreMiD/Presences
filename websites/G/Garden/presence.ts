@@ -159,28 +159,28 @@ presence.on("UpdateData", async () => {
     details: "Consulte la boite à idée"
   };
   presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Bugs.7/") {
+  } else if (document.location.pathname.includes ("/forum/Bugs.7/")) {
   const presenceData: PresenceData = {
     largeImageKey: "gardenpresence",
     state: "Bugs",
     details: "Consulte la section Bug"
   };
   presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Demande-de-Debannissement-.15/") {
+  } else if (document.location.pathname.includes ("/forum/Demande-de-Debannissement-.15/")) {
   const presenceData: PresenceData = {
     largeImageKey: "gardenpresence",
     state: "Demande deban",
     details: "Consulte la section unban"
   };
   presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Aide.10/") {
+  } else if (document.location.pathname.includes ("/forum/Aide.10/")) {
   const presenceData: PresenceData = {
     largeImageKey: "gardenpresence",
     state: "Aides",
     details: "Consulte la section aide"
   };
   presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Créations.11/") {
+  } else if (document.location.pathname.includes ("/forum/Créations.11/")) {
   const presenceData: PresenceData = {
     largeImageKey: "gardenpresence",
     state: "Créations",
