@@ -21,12 +21,7 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let title: HTMLElement | HTMLInputElement,
-  uploader: HTMLElement,
-  search: HTMLInputElement,
-  episode: HTMLElement,
-  episodefinish: HTMLElement,
-  rating: HTMLElement;
+let title: HTMLElement | HTMLInputElement;
 
 // the video variable is a html video element
 let video: HTMLVideoElement;
@@ -134,7 +129,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > div.page-wrapper > div.main-container > div > div.row > div.col.s12.m12.l8 > div.card.card-highlight > div > h2"
       );
-      search = document.querySelector(
+      const search = document.querySelector(
         "body > div.page-wrapper > div.main-container > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1"
       );
 
@@ -144,7 +139,7 @@ presence.on("UpdateData", async () => {
       if (title !== null) {
         presenceData.state = title.innerText;
       } else {
-        presenceData.state = search.innerText;
+        presenceData.state = search.textContent;
       }
 
       presence.setActivity(presenceData);
