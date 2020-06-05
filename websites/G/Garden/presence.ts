@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       details: "En train de Voter",
       state: "Vote",
-      largeImageKey: "gardenpresence",
+      largeImageKey: "gardenpresence"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/message") {
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       details: "Consulte le forum",
       state: "Forum",
-      largeImageKey: "gardenpresence",
+      largeImageKey: "gardenpresence"
     };
   presence.setActivity(presenceData);
   } else if (document.location.pathname == "/forum/Informations.4/") {
@@ -149,7 +149,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     details: "Lit un topic",
     state: "Topic",
-    largeImageKey: "gardenpresence",
+    largeImageKey: "gardenpresence"
   };
   presence.setActivity(presenceData);
   } else if (document.location.pathname.includes ("/forum/Boite")) {
