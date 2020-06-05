@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
   };
   //Candidatures
   presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Candidatures.5/") {
+  } else if (document.location.pathname.includes ("/forum/Candidatures.5/")) {
   const presenceData: PresenceData = {
     details: "Parcourt les candidatures",
     state: "Candidatures",
