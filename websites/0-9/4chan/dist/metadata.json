@@ -14,7 +14,7 @@
     "ga_IE": "Is clár fógraí simplí íomhá-bhunaithe é 4chan inar féidir le duine ar bith tráchtanna a phostáil agus íomhánna a roinnt. Tá cláir ann atá tiomnaithe d’ábhair éagsúla, ó bheochan agus chultúr na Seapáine go fístéipeanna, ceol agus grianghrafadóireacht. Ní gá d’úsáideoirí cuntas a chlárú sula nglacann siad páirt sa phobal. Ná bíodh leisce ort cliceáil ar chlár thíos a bhfuil spéis agat ann agus léim isteach ceart!"
   },
   "service": "4chan",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/W76cGCQ.png",
   "thumbnail": "https://i.imgur.com/uXsy666.png",
   "color": "#3C7E57",
