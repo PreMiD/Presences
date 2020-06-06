@@ -1,0 +1,23 @@
+{
+    "author": {
+      "name": "Uhevela",
+    "id": "616969786718683167"
+    },
+    "url": "gardenmc.fr",
+    "description": {
+    "en": "Garden is a french minecraft server managed by passionate players."
+    },
+    "service": "Garden",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/XjpOAvU.png",
+    "thumbnail": "https://i.imgur.com/3L4UHk9.png",
+    "color": "#0f7e49",
+    "tags": [
+    "garden",
+    "minecraft",
+    "survival",
+    "french"
+    ],
+    "category": "games"
+}
+  
