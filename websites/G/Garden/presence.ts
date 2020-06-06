@@ -180,7 +180,7 @@ presence.on("UpdateData", async () => {
     details: "Consulte la section aide"
   };
   presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes ("/forum/Créations.11/")) {
+  } else if (document.location.pathname.includes ("/forum/Cr")) {
   const presenceData: PresenceData = {
     largeImageKey: "gardenpresence",
     state: "Créations",
