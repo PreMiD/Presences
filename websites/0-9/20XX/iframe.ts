@@ -20,12 +20,12 @@ interface Main20XX {
     ui: {
       score: {
         scores: Array<Score20XX>;
-      }
-    }
-  },
+      };
+    };
+  };
   stats?: {
     rank: number;
-  },
+  };
   net: {
     guest?: boolean;
     type?: number;
@@ -46,13 +46,7 @@ interface Map20XX {
     x: number;
     y: number;
   };
-  spawns: Array<{
-    type: string;
-    pos: {
-      x: number;
-      y: number;
-    };
-  }>;
+  spawns: Array<Spawn20XX>;
   doodads: Array<object>;
 }
 
@@ -62,6 +56,14 @@ interface Score20XX {
   name: string;
   objective: number;
   team: number;
+}
+
+interface Spawn20XX {
+  type: string;
+  pos: {
+    x: number;
+    y: number;
+  };
 }
 
 // Since maps don't have IDs in the game object, we can infer
@@ -87,7 +89,7 @@ const guessKeys: ItemMap = {
 
 // Guesses the map via the map object
 function guessMap (map: Map20XX): string {
-  const camera = map.spawns.find((spawn: any) => spawn.type === 'camera');
+  const camera = map.spawns.find((spawn: Spawn20XX) => spawn.type === 'camera');
   const cameraKey = camera ? `${camera.pos.x}:${camera.pos.y}` : 'n';
   const guessKey = `${map.size.x}:${map.size.y}:${cameraKey}:${map.spawns.length}:${map.doodads.length}`;
   return guessKeys[guessKey] || null;
