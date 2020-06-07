@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "gardenpresence"
   };
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/vote") {
+  } else if (document.location.pathname.includes ("/vote")) {
     const presenceData: PresenceData = {
       details: "En train de Voter",
       state: "Vote",
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "gardenpresence"
     };
   presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/forum/Informations.4/") {
+  } else if document.location.pathname.includes ("/forum/Informations.4/")) {
   const presenceData: PresenceData = {
     details: "Consulte les infos",
     state: "Informations",
