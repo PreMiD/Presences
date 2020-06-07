@@ -1,0 +1,21 @@
+
+{
+     "$schema": "https://schemas.premid.app/metadata/1.0",
+     "author": {
+        "name": "zenery",
+        "id": "286893840902914048"
+    },
+      "url": "lability.cc",
+      "description": {
+        "en": "Lability.cc is a private forum based on cheating in games. We're using superior software & hardware (such as the enterprise DDoS mitigation, licensed software and much more!) Our forum is providing many categories with hvh content, downloadable software or adult content!"
+    },
+      "service": "Lability.cc",
+      "version": "1.0.0",
+      "logo": "https://lability.cc/logo.png",
+      "thumbnail": "https://lability.cc/logo.png",
+      "color": "#AB1592",
+      "tags": [
+        "forum"
+    ],
+      "category": "other"
+}
