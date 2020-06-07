@@ -1,14 +1,14 @@
 const presence = new Presence({
   clientId: "714194261679276094"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
     const presenceData: PresenceData = {
       details: "play.gardenmc.fr",
       state: "https://gardenmc.fr",
-      largeImageKey: "gardenpresence",
+      largeImageKey: "gardenpresence"
     };
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
