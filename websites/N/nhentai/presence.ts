@@ -11,16 +11,17 @@ var title: any,
   currentPage: any,
   pageNumber: any,
   tabTitle: any,
-  homeCurrentPage: any;
+  homeCurrentPage: any,
+  favoriteCurrentPage: any;
 
 var pattern = "- Page";
 
-var character: any, parody: any;
+var character: any, parody: any, group: any, user: any;
 
 var searchURL = new URL(document.location.href);
 var searchResult = searchURL.searchParams.get("q");
 
-var truncateAfter = function (str, pattern): string {
+var truncateAfter = function (str: string, pattern: any) {
   return str.slice(0, str.indexOf(pattern));
 };
 
@@ -113,6 +114,13 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
+  } else if (document.location.pathname.includes("/favorites/")) {
+    favoriteCurrentPage = document.querySelector("#content > section.pagination > a.page.current");
+    presenceData.details = "Favorites";
+
+    presenceData.state = "Page: " + favoriteCurrentPage.innerText;
+
+    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/search/")) {
     presenceData.details = "Searching for: ";
 
@@ -133,6 +141,22 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching by parody: ";
 
     presenceData.state = parody.innerText;
+
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/group/")) {
+    group = document.querySelector("#content > h1 > span:nth-child(2)");
+
+    presenceData.details = "Searching by group: ";
+
+    presenceData.state = group.innerText;
+
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/users/")) {
+    user = document.querySelector("#user-container > div.user-info > h1");
+
+    presenceData.details = "Viewing an user: ";
+
+    presenceData.state = user.innerText; 
 
     presenceData.startTimestamp = browsingStamp;
   } else {
