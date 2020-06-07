@@ -36,6 +36,7 @@ interface Data20XX {
     };
     map?: string;
   };
+  nav: string;
 }
 
 let data20XX: Data20XX = null;
@@ -83,7 +84,25 @@ presence.on("UpdateData", async () => {
   };
 
   if (data20XX) {
-    data.details = "Main Menu";
+    switch (data20XX.nav) {
+      case "setgame":
+        data.details = "Changing Game Settings";
+        break;
+      case "setgraphic":
+        data.details = "Changing Graphic Settings";
+        break;
+      case "stat":
+        data.details = "Looking at Player Stats";
+        break;
+      case "unlock":
+        data.details = "Looking at Unlocks";
+        break;
+      case "lobby":
+        data.details = "In Lobby Select";
+        break;
+      default:
+        data.details = "Main Menu";
+    }
 
     if (data20XX.user) {
       data.state = `${data20XX.user.displayName} (${data20XX.user.isGuest ? 'guest' : `rank ${data20XX.user.rank}`})`;
@@ -109,6 +128,13 @@ presence.on("UpdateData", async () => {
 
       data.startTimestamp = gameStartTimestamp;
     } else gameStartTimestamp = null;
+  } else {
+    if (location.pathname.endsWith('/help.html'))
+      data.details = "Reading the Help Document";
+    else if (location.pathname.endsWith('/rules.html'))
+      data.details = "Reading the Rules";
+    else if (location.pathname.endsWith('/tos.html'))
+      data.details = "Reading the Terms of Service";
   }
 
   // If data doesn't exist clear else set activity to the presence data

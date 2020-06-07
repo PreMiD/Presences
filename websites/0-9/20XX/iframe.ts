@@ -39,6 +39,9 @@ interface Main20XX {
       };
     };
   };
+  menu: {
+    lastNav: string;
+  };
 }
 
 interface Map20XX {
@@ -117,7 +120,8 @@ iframe.on("UpdateData", async () => {
       },
       score: main.game.ui.score.scores.find((score: Score20XX) => score.name.replace('γ', '') === main.net.display),
       map: guessMap(main.game.map)
-    } : null
+    } : null,
+    nav: main.menu.lastNav
   };
 
   iframe.send(data);
