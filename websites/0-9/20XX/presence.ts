@@ -52,7 +52,7 @@ const characterNameMap: ItemMap = {
   vox: 'Voxel',
   blk: 'Block',
   crg: 'Cargo',
-  inf: 'Plus',
+  inf: 'Plus'
 };
 
 // A map of map IDs with their names.
@@ -71,7 +71,7 @@ const mapNameMap: ItemMap = {
   war: 'War Ground',
   dig: 'Dig',
   unearth: 'Unearth',
-  excavate: 'Excavate',
+  excavate: 'Excavate'
 };
 
 // The timestamp of the first time a game was detected.
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
     if (data20XX.user) {
       data.state = `${data20XX.user.displayName} (${data20XX.user.isGuest ? 'guest' : `rank ${data20XX.user.rank}`})`;
       if (data20XX.serverInfo)
-        data.state += ` in ${data20XX.serverInfo.location}`
+        data.state += ` in ${data20XX.serverInfo.location}`;
     }
 
     if (data20XX.game) {
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
 
       // Map
       if (data20XX.game.map) {
-        data.largeImageKey = data20XX.game.map ? 'map_' + data20XX.game.map : '20xx';
+        data.largeImageKey = 'map_' + data20XX.game.map;
         data.smallImageText = `${mapNameMap[data20XX.game.map]} - ${data.smallImageText}`;
       }
 

@@ -1,5 +1,69 @@
 const iframe = new iFrame();
 
+interface Window20XX {
+  main?: Main20XX;
+}
+
+interface Main20XX {
+  game?: {
+    map: Map20XX;
+    charSelect: string;
+    gameOver: boolean;
+    settings: {
+      gametype: string;
+      maxplayers: number;
+      name: string;
+      objective: number;
+      scoreToWin: number;
+      teams: number;
+    };
+    ui: {
+      score: {
+        scores: Array<Score20XX>;
+      }
+    }
+  },
+  stats?: {
+    rank: number;
+  },
+  net: {
+    guest?: boolean;
+    type?: number;
+    user?: string;
+    display?: string;
+    game: {
+      info?: {
+        name: string;
+        location: string;
+        description: string;
+      };
+    };
+  };
+}
+
+interface Map20XX {
+  size: {
+    x: number;
+    y: number;
+  };
+  spawns: Array<{
+    type: string;
+    pos: {
+      x: number;
+      y: number;
+    };
+  }>;
+  doodads: Array<object>;
+}
+
+interface Score20XX {
+  death: number;
+  kill: number;
+  name: string;
+  objective: number;
+  team: number;
+}
+
 // Since maps don't have IDs in the game object, we can infer
 // what map is being played by it's data.
 const guessKeys: ItemMap = {
@@ -18,11 +82,11 @@ const guessKeys: ItemMap = {
   '32:32:n:33:163': 'dig',
   '48:48:23.5:23.5:44:101': 'war',
   '32:32:15.5:15.25:46:72': 'unearth',
-  '48:48:23:23:46:492': 'excavate',
-}
+  '48:48:23:23:46:492': 'excavate'
+};
 
 // Guesses the map via the map object
-function guessMap (map: any) {
+function guessMap (map: Map20XX): string {
   const camera = map.spawns.find((spawn: any) => spawn.type === 'camera');
   const cameraKey = camera ? `${camera.pos.x}:${camera.pos.y}` : 'n';
   const guessKey = `${map.size.x}:${map.size.y}:${cameraKey}:${map.spawns.length}:${map.doodads.length}`;
@@ -30,7 +94,7 @@ function guessMap (map: any) {
 }
 
 iframe.on("UpdateData", async () => {
-  const main = (<any>window)['main'];
+  const main = (window as Window20XX)['main'];
   if (!main) return;
 
   const data = {
@@ -49,7 +113,7 @@ iframe.on("UpdateData", async () => {
         ...main.game.settings,
         players: main.game.ui.score.scores.length
       },
-      score: main.game.ui.score.scores.find((score: any) => score.name.replace('γ', '') === main.net.display),
+      score: main.game.ui.score.scores.find((score: Score20XX) => score.name.replace('γ', '') === main.net.display),
       map: guessMap(main.game.map)
     } : null
   };
