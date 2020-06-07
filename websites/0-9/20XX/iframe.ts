@@ -29,14 +29,6 @@ function guessMap (map: any) {
   return guessKeys[guessKey] || null;
 }
 
-// Creates a guess key
-async function getGuessKey(mapName: string) {
-  const map = await fetch('https://20xx.io/nxg/map/' + mapName).then(r => r.json());
-  const camera = map.spawns.find((spawn: any) => spawn.type === 'camera');
-  const cameraKey = camera ? `${camera.pos.x}:${camera.pos.y}` : 'n';
-  return `${map.bounds.join(':')}:${cameraKey}:${map.spawns.length}:${map.doodads.length}`;
-};
-
 iframe.on("UpdateData", async () => {
   const main = (<any>window)['main'];
   if (!main) return;
@@ -61,8 +53,6 @@ iframe.on("UpdateData", async () => {
       map: guessMap(main.game.map)
     } : null
   };
-
-  (<any>window)['premid_data20xx'] = data;
 
   iframe.send(data);
 });
