@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.0",
+	"author": {
+		"name": "killative",
+		"id": "254650098951127052"
+	},
+	"service": "Yandex.Music",
+	"description": {
+		"en": "The streaming service of Yandex, where you can listen to music, albums, collections of music tracks and receive personalized recommendations.",
+		"ru": "Стриминговый сервис компании «Яндекс», позволяющий прослушивать музыкальные композиции, альбомы, подборки музыкальных треков и получать персональные рекомендации."
+	},
+	"url": "music.yandex.ru",
+	"version": "1.0.0",
+	"logo": "https://i.snipboard.io/6cVAzg.jpg",
+	"thumbnail": "https://i.snipboard.io/6cVAzg.jpg",
+	"tabs": ["music"],
+	"category": "music",
+	"color": "#fa6843"
+}
