@@ -50,10 +50,10 @@ presence.on("UpdateData", async () => {
         } else data.details = "Home";
         break;
       case "music":
+        data.smallImageKey = "music";
+        data.smallImageText = "Qwant Music";
         if (location.pathname === "/music/search") {
           query = new URLSearchParams(location.search);
-          data.smallImageKey = "music";
-          data.smallImageText = "Qwant Music";
           if (query.has('q')) {
             data.details = searchMusicTypeMap[query.get('t')];
             data.state = query.get('q');
@@ -77,6 +77,8 @@ presence.on("UpdateData", async () => {
         } else data.details = "Junior Home";
         break;
       case "/news":
+        data.smallImageKey = "news";
+        data.smallImageText = "Qwant Junior News";
         if (query.has('q')) {
           data.details = "Searching the news on Qwant Junior";
           data.state = query.get('q');
