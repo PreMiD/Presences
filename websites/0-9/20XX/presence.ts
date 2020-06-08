@@ -137,6 +137,9 @@ presence.on("UpdateData", async () => {
       data.details = "Reading the Terms of Service";
   }
 
+  if (!await presence.getSetting("showName"))
+    delete data.state;
+
   // If data doesn't exist clear else set activity to the presence data
   if (data.details == null) {
     presence.setTrayTitle(); // Clear tray

@@ -21,5 +21,13 @@
     "browser"
   ],
   "category": "games",
-  "iframe": true
+  "iframe": true,
+  "settings": [
+    {
+      "id": "showName",
+      "title": "Show username",
+      "icon": "fas fa-user",
+      "value": true
+    }
+  ]
 }
