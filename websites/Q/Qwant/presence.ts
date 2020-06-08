@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "719331723560878091"
 });
 
@@ -15,21 +15,21 @@ const searchTypeMap: ItemMap = {
   videos: 'Searching videos',
   social: 'Searching social media',
   shopping: 'Searching for products'
-}
+};
 
 const searchMusicTypeMap: ItemMap = {
   overview: 'Searching music',
   albums: 'Searching music albums',
   artists: 'Searching music artists',
   songs: 'Searching songs'
-}
+};
 
 const searchJuniorTypeMap: ItemMap = {
   web: 'Searching on the web',
   images: 'Searching images',
   videos: 'Searching videos',
-  education: 'Searching educational content',
-}
+  education: 'Searching educational content'
+};
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
