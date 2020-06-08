@@ -4,7 +4,7 @@ var presence = new Presence({
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-var guides: any = {
+const guides: object = {
   mybot: "MyBOT",
   heroku: "Heroku",
   glitch: "Glitch",
@@ -15,20 +15,29 @@ var guides: any = {
 };
 
 presence.on("UpdateData", () => {
-  let route = document.location.pathname.split("/");
+  const route = document.location.pathname.split("/");
 
-  let data: PresenceData = {
+  const data: PresenceData = {
     largeImageKey: "mybot",
     startTimestamp: browsingStamp
   };
 
-  if (!route[1] || route[1] === "") {
+  if (!route[1]) {
     data.details = "Viendo la página principal";
   } else if (route[1] === "guias") {
     data.details = "Viendo las guías";
   } else if (route[1] === "guia") {
     data.details = "Viendo la guía:";
-    data.state = guides[route[2]];
+    if (route[2] === "mybot") {
+      data.state = "MyBOT";
+    } else if (route[2] === "sqlite") {
+      data.state = "SQLite";
+    } else if (route[2] === "mybot-op") {
+      data.state = "MyBOT OP";
+    } else {
+      data.state =
+        route[2].replace(/-/g, "").replace(/^[a-z]/i, (c) => c.toUpperCase());
+    }
   } else if (route[1] === "tools") {
     data.details = "Viendo las herramientas";
     data.state = "de desarrollo";
@@ -41,7 +50,7 @@ presence.on("UpdateData", () => {
     data.state =
       document.querySelector(".card-title.text-bold.mb-2").innerHTML;
   } else if (route[1] === "team") {
-    if (!route[2] || route[2] === "") {
+    if (!route[2]) {
       data.details = "Viendo al equipo";
     } else if (route[2] === "roles") {
       data.details = "Viendo los roles";
@@ -56,10 +65,10 @@ presence.on("UpdateData", () => {
     data.details = "Viendo acciones para";
     data.state = "conseguir puntos";
   } else if (route[1] === "mybotlist") {
-    if (!route[2] || route[2] === "") {
+    if (!route[2]) {
       data.details = "Viendo MyBOT List";
     } else if (route[2] === "bot") {
-      if (!route[3] || route[3] === "") {
+      if (!route[3]) {
         data.details = "Viendo el bot:";
         data.state = document.querySelector(".card-title").innerHTML;
       } else if (route[3] === "add") {
@@ -87,7 +96,7 @@ presence.on("UpdateData", () => {
   } else if (route[1] === "publicidad") {
     data.details = "Añadiendo publicidad";
   } else if (route[1] === "perfil") {
-    if (!route[2] || route[2] === "") {
+    if (!route[2]) {
       data.details = "Viendo su perfil";
     } else if (route[2] === "editar-perfil") { 
       data.details = "Editando su perfil";
