@@ -1,18 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "719604498389270599"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-const guides: object = {
-  mybot: "MyBOT",
-  heroku: "Heroku",
-  glitch: "Glitch",
-  sqlite: "SQLite",
-  "mybot-op": "MyBOT OP",
-  "events-bot": "Events bot",
-  "music-bot": "Music bot"
-};
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const route = document.location.pathname.split("/");
