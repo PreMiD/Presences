@@ -40,9 +40,24 @@ presence.on("UpdateData", async () => {
       presenceData.details = "ค้นหา ";
       presenceData.state = title1;
     } else if (path.pathname.includes("play")) {
+      let episode
+      if (title1.includes("ตอนที่")) {
+        const info = title1.split("ตอนที่");
+        episode = info.pop();
+    
+        if (episode.includes("ซับไทย")) {
+          episode = episode.replace("ซับไทย", "").trim();
+        } else if (episode.includes("พากย์ไทย")) {
+          episode = episode.replace("พากย์ไทย", "").trim();
+        }
+    
+        episode = "ตอนที่ " + episode;
+        presenceData.state = info[0];
+        presenceData.details = episode;
+        presenceData.smallImageText = "กำลังรับชม";
+        presenceData.smallImageKey = "playing";
+      } 
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "กำลังรับชม ";
-      presenceData.state = title1;
     } else if (path.href) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "เลือกตอน ";
