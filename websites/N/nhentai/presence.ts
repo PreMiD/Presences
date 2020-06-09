@@ -21,7 +21,7 @@ let character: any, parody: any, group: HTMLElement, user: HTMLElement, tag: HTM
 const searchURL = new URL(document.location.href);
 const searchResult = searchURL.searchParams.get("q");
 
-const truncateAfter = function (str: string, pattern: string) {
+const truncateAfter = function (str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern));
 };
 
