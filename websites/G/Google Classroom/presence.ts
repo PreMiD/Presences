@@ -13,13 +13,10 @@ presence.on("UpdateData", async () => {
   }
   if (path[0] === "h") {
     presenceData.details = "Home Page";
-    presenceData.startTimestamp = Date.now();
   } else if (path[0] === "calendar") {
     presenceData.details = "Viewing the calendar";
-    presenceData.startTimestamp = Date.now();
   } else if (path[0] === "a") {
     presenceData.details = "Viewing to-do list";
-    presenceData.startTimestamp = Date.now();
   } else if (path[0] === "c") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
@@ -34,7 +31,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing class:";
     }
     presenceData.state = classroom;
-    presenceData.startTimestamp = Date.now();
   } else if (path[0] === "w") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
@@ -45,7 +41,6 @@ presence.on("UpdateData", async () => {
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     presenceData.details = "Viewing classworks of:";
     presenceData.state = classroom;
-    presenceData.startTimestamp = Date.now();
   } else if (path[0] === "r") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
@@ -56,10 +51,8 @@ presence.on("UpdateData", async () => {
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     presenceData.details = "Viewing members of:";
     presenceData.state = classroom;
-    presenceData.startTimestamp = Date.now();
   } else if (path[0] === "s") {
-    presenceData.details = "Settings";
-    presenceData.startTimestamp = Date.now();
+    presenceData.details = "Configuring settings";
   }
   presence.setActivity(presenceData);
   presenceData = {
