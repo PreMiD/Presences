@@ -152,7 +152,7 @@ presence.on("UpdateData", async () => {
             }
         }
         else if(path.includes("/watch/")){
-            video = (document.querySelector("#os-video5247132_html5_api") as HTMLVideoElement);
+            video = (document.getElementsByClassName("vjs-tech")[0] as HTMLVideoElement);
             title = (document.querySelector("div > h2 > a") as HTMLTextAreaElement);
             chapter = (document.querySelector("div > h2 > span") as HTMLTextAreaElement);
             if(video && title && chapter){
@@ -169,6 +169,7 @@ presence.on("UpdateData", async () => {
                     else{
                         delete presenceData.startTimestamp;
                         delete presenceData.endTimestamp;
+                        presenceData.details = "Paused";
                         presenceData.state = title.innerText + " " + chapter.innerText;
                     }
                 }
