@@ -1,12 +1,12 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "612653415419609088"
 });
 
-var lastPlaybackState = null;
-var reading;
-var browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState = null;
+let reading;
+let browsingStamp = Math.floor(Date.now() / 1000);
 
-var title: any,
+let title: any,
   title2: any,
   currentPage: any,
   pageNumber: any,
@@ -14,14 +14,14 @@ var title: any,
   homeCurrentPage: any,
   favoriteCurrentPage: any;
 
-var pattern = "- Page";
+let pattern = "- Page";
 
-var character: any, parody: any, group: any, user: any, tag: any, artist: any;
+let character: any, parody: any, group: any, user: any, tag: any, artist: any;
 
-var searchURL = new URL(document.location.href);
-var searchResult = searchURL.searchParams.get("q");
+let searchURL = new URL(document.location.href);
+let searchResult = searchURL.searchParams.get("q");
 
-var truncateAfter = function (str: string, pattern: any) {
+let truncateAfter = function (str: string, pattern: any) {
   return str.slice(0, str.indexOf(pattern));
 };
 
