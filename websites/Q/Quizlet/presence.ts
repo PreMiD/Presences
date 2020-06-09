@@ -12,7 +12,7 @@ interface QuizletData {
   };
   searchLayer?: {
     search_term: string;
-  }
+  };
 }
 
 let qzData: QuizletData = null;
