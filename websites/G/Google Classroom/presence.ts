@@ -28,7 +28,6 @@ presence.on("UpdateData", async () => {
           document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
         }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
-    presenceData.smallImageKey = "reading";
     presenceData.details = "Viewing class:";
     presenceData.state = classroom;
     presenceData.startTimestamp = Date.now();
