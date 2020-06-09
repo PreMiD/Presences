@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
     }
   } else {
     data.smallImageKey = "reading";
-    data.smallImageText = "Reading";
+    data.smallImageText = "Viewing";
 
     const docName = document.querySelector("[class*='logoText-'] span");
     const pageName = document.querySelector("[class*=--navButtonOpened-] span");
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
     if (!actionTimestamp)
       actionTimestamp = Date.now();
     if (docName)
-      data.details = `Reading ${docName.textContent}`;
+      data.details = `Viewing ${docName.textContent}`;
     if (pageName)
       data.state = `on ${pageName.textContent}`;
     data.startTimestamp = actionTimestamp;
