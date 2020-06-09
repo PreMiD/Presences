@@ -130,6 +130,7 @@ presence.on("UpdateData", async () => {
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
     }
+    data.startTimestamp = actionTimestamp;
   }
 
   // If data doesn't exist clear else set activity to the presence data
