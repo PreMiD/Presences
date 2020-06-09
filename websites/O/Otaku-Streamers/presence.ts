@@ -4,13 +4,13 @@ const presence = new Presence({
 const path = window.location.pathname;
 const browsingStamp = Math.floor(Date.now() / 1000);
 let title, video, timestamps, chapter, blog;
-function getTimestamps(videoTime: number, videoDuration: number): any {
-    var startTime = Date.now();
-    var endTime = Math.floor(Math.floor(startTime / 1000) - videoTime + videoDuration);
+function getTimestamps(videoTime: number, videoDuration: number): Array<number> {
+    const startTime = Date.now();
+    const endTime = Math.floor(Math.floor(startTime / 1000) - videoTime + videoDuration);
     return [Math.floor(startTime / 1000), endTime];
   }
 presence.on("UpdateData", async () => {
-    let presenceData: PresenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "logo"
     };
     if(window.location.hostname == "otaku-streamers.com"){
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
             chapter = (document.querySelector("#video_episode") as HTMLTextAreaElement);
             if(video){
                 timestamps = getTimestamps(video.currentTime, video.duration);
-                if(video.paused && title && !(video.currentTime == 0)){
+                if(video.paused && title && video.currentTime != 0){
                     presenceData.details = "Paused";
                     presenceData.smallImageKey = "pause";
                     presenceData.smallImageText = "Paused";
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
                     delete presenceData.endTimestamp;
                     presenceData.state = title.innerText + " " + chapter.innerText;
                 }
-                else if(!video.paused && title && !(video.currentTime == 0)){
+                else if(!video.paused && title && video.currentTime != 0){
                     presenceData.details = "Playing";
                     presenceData.smallImageKey = "play";
                     presenceData.smallImageText = "Playing";
@@ -173,7 +173,7 @@ presence.on("UpdateData", async () => {
                         presenceData.state = title.innerText + " " + chapter.innerText;
                     }
                 }
-                else if (video.currentTime == 0){
+                else if (video.currentTime){
                     presenceData.startTimestamp = browsingStamp;
                     presenceData.details = "Viewing";
                     presenceData.state = title.innerText + " " + chapter.innerText;
