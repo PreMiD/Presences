@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "ค้นหา ";
       presenceData.state = title1;
     } else if (path.pathname.includes("play")) {
-      let episode
+      let episode;
       if (title1.includes("ตอนที่")) {
         const info = title1.split("ตอนที่");
         episode = info.pop();
