@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "612653415419609088"
 });
 
@@ -14,14 +14,14 @@ let title: any,
   homeCurrentPage: any,
   favoriteCurrentPage: any;
 
-let pattern = "- Page";
+const pattern = "- Page";
 
 let character: any, parody: any, group: any, user: any, tag: any, artist: any;
 
-let searchURL = new URL(document.location.href);
-let searchResult = searchURL.searchParams.get("q");
+const searchURL = new URL(document.location.href);
+const searchResult = searchURL.searchParams.get("q");
 
-let truncateAfter = function (str: string, pattern: any) {
+const truncateAfter = function (str: string, pattern: any) {
   return str.slice(0, str.indexOf(pattern));
 };
 
