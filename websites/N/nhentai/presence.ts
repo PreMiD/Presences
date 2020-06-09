@@ -16,7 +16,7 @@ var title: any,
 
 var pattern = "- Page";
 
-var character: any, parody: any, group: any, user: any;
+var character: any, parody: any, group: any, user: any, tag: any, artist: any;
 
 var searchURL = new URL(document.location.href);
 var searchResult = searchURL.searchParams.get("q");
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
 
   tabTitle = document.title;
 
-  title = document.querySelector("#info > h1");
+  title = document.querySelector("#info > h1 > span.pretty");
 
   if (document.location.pathname == "/" || !document.location.pathname) {
     homeCurrentPage = document.querySelector(
@@ -52,11 +52,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/g/")) {
     if (tabTitle.includes("Page")) {
       currentPage = document.querySelector(
-        "#pagination-page-top > button > span.current"
+        "#content > section.reader-bar > div.reader-pagination > button > span.current"
       );
 
       pageNumber = document.querySelector(
-        "#pagination-page-top > button > span.num-pages"
+        "#content > section.reader-bar > div.reader-pagination > button > span.num-pages"
       );
 
       title2 = truncateAfter(tabTitle, pattern);
@@ -128,15 +128,31 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/character/")) {
-    character = document.querySelector("#content > h1 > span:nth-child(2)");
+    character = document.querySelector("#content > h1 > a > span.name");
 
     presenceData.details = "Searching by character: ";
 
     presenceData.state = character.innerText;
 
     presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/tag/")) {
+    tag = document.querySelector("#content > h1 > a > span.name");
+
+    presenceData.details = "Searching by tag: ";
+
+    presenceData.state = tag.textContent;
+
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/artist/")) {
+    artist = document.querySelector("#content > h1 > a > span.name");
+
+    presenceData.details = "Searching by artist:";
+
+    presenceData.state = artist.textContent;
+
+    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/parody/")) {
-    parody = document.querySelector("#content > h1 > span:nth-child(2)");
+    parody = document.querySelector("#content > h1 > a > span.name");
 
     presenceData.details = "Searching by parody: ";
 
@@ -144,7 +160,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/group/")) {
-    group = document.querySelector("#content > h1 > span:nth-child(2)");
+    group = document.querySelector("#content > h1 > a > span.name");
 
     presenceData.details = "Searching by group: ";
 
