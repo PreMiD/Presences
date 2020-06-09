@@ -6,7 +6,6 @@ interface AgarWindow {
       $options: {
         components: {
           Home: {
-            data(): Object;
             components: {
               mainmenu: {
                 components: {
