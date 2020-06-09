@@ -28,12 +28,14 @@ presence.on("UpdateData", async () => {
         if (document.getElementsByClassName("question-title")) {
             presenceData.state = document.getElementsByClassName("question-title")[0].textContent;
         }
+    } else if (document.location.pathname.startsWith("/contest")) {
+        presenceData.details = "In a Contest";
     } else if (document.location.pathname.startsWith("/articles")) {
         presenceData.details = "Reading Solutions";
     } else if (document.location.pathname.startsWith("/discuss")) {
         presenceData.details = "Browsing Forums";
     } else if (document.location.pathname.startsWith("/interview")) {
-        presenceData.details = "Mock Interviewing...";
+        presenceData.details = "Mock Interviewing";
     }
 
     presence.setActivity(presenceData);
