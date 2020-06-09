@@ -13,10 +13,11 @@
     "version": "1.0.0",
     "logo": "https://i.imgur.com/v6f2jQA.png",
     "thumbnail": "https://i.imgur.com/LHKxFlb.png",
-    "color": "#HEX000",
+    "color": "#f1a21a",
     "tags": [
         "technology",
-        "education"
+        "education",
+        "developer"
     ],
-    "category": "CATEGORY"
+    "category": "other"
 }

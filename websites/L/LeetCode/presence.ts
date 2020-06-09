@@ -1,99 +1,72 @@
 var presence = new Presence({
-    clientId: "719373053028728894" //The client ID of the Application created at https://discordapp.com/developers/applications
+    // The client ID of the Application created at https://discordapp.com/developers/applications
+    clientId: "719373053028728894"
 }),
 
+    // contains strings for our presence
     strings = presence.getStrings({
         play: "presence.playback.playing",
         pause: "presence.playback.paused"
-        //You can use this to get translated strings
     });
 
-/*
-
-function myOutsideHeavyLiftingFunction(){
-    //Grab and process all your data here
-
-    // element grabs //
-    // api calls //
-    // variable sets //
-}
-
-setInterval(10000, myOutsideHeavyLiftingFunction);
-//Run the function seperate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
-
-*/
-
-
 presence.on("UpdateData", async () => {
-    /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
-
-    It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.*/
-
-    var presenceData: presenceData = {
-        largeImageKey: "key", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-        smallImageKey: "key", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-        smallImageText: "Some hover text", //The text which is displayed when hovering over the small image
-        details: "Browsing Page Name", //The upper section of the presence text
-        state: "Reading section A", //The lower section of the presence text
+    var example: PresenceData = {
+        largeImageKey: "logo", // metadata key of the large image on the presence
+        smallImageText: "Some hover text", // the text which is displayed when hovering over the small image
+        details: questionTitle, // The upper section of the presence text
+        state: "Reading section A", // The lower section of the presence text
         startTimestamp: 1577232000, //The unix epoch timestamp for when to start counting from
-        endTimestamp: 1577151472000 //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
-    }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
+    };
 
-    if (presenceData.details == null) {
-        //This will fire if you do not set presence details
-        presence.setTrayTitle(); //Clears the tray title for mac users
-        presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
+    if (document.location.pathname == "/") {
+        const homepagePresence: PresenceData = {
+            details: "Homepage",
+            largeImageKey: "logo"
+        };
+        presence.setActivity(homepagePresence);
+    } else if (document.location.pathname.startsWith("/problemset")) {
+        const presenceData: PresenceData = {
+            details: "Viewing Problems",
+            largeImageKey: "logo"
+        };
+        presence.setActivity(presenceData);
+    } else if (document.location.pathname.startsWith("/problems")) {
+        var questionTitle: string = document.getElementsByClassName("css-v3d350")[0].innerHTML
+        const presenceData: PresenceData = {
+            details: questionTitle,
+            state: "#Question Number, Difficulty",
+            largeImageKey: "logo"
+        };
+        presence.setActivity(presenceData);
+    } else if (document.location.pathname.startsWith("/explore")) {
+        const presenceData: PresenceData = {
+            details: "Explore",
+            state: "Visiting Explore Modules",
+            largeImageKey: "logo"
+        };
+        presence.setActivity(presenceData);
+    } else if (document.location.pathname.startsWith("/articles")) {
+        const presenceData: PresenceData = {
+            details: "Reading Solutions",
+            largeImageKey: "logo"
+        };
+        presence.setActivity(presenceData);
+    } else if (document.location.pathname.startsWith("/discuss")) {
+        const presenceData: PresenceData = {
+            details: "Browsing Forums",
+            largeImageKey: "logo"
+        };
+        presence.setActivity(presenceData);
+    } else if (document.location.pathname.startsWith("/interview")) {
+        const presenceData: PresenceData = {
+            details: "Mock Interviewing...",
+            largeImageKey: "logo"
+        };
+        presence.setActivity(presenceData);
     } else {
-        //This will fire if you set presence details
-        presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
-    }
-}); var presence = new Presence({
-    clientId: "719373053028728894" //The client ID of the Application created at https://discordapp.com/developers/applications
-}),
-
-    strings = presence.getStrings({
-        play: "presence.playback.playing",
-        pause: "presence.playback.paused"
-        //You can use this to get translated strings
-    });
-
-/*
-
-function myOutsideHeavyLiftingFunction(){
-    //Grab and process all your data here
-
-    // element grabs //
-    // api calls //
-    // variable sets //
-}
-
-setInterval(10000, myOutsideHeavyLiftingFunction);
-//Run the function seperate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
-
-*/
-
-
-presence.on("UpdateData", async () => {
-    /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
-
-    It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.*/
-
-    var presenceData: presenceData = {
-        largeImageKey: "key", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-        smallImageKey: "key", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-        smallImageText: "Some hover text", //The text which is displayed when hovering over the small image
-        details: "Browsing Page Name", //The upper section of the presence text
-        state: "Reading section A", //The lower section of the presence text
-        startTimestamp: 1577232000, //The unix epoch timestamp for when to start counting from
-        endTimestamp: 1577151472000 //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
-    }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
-
-    if (presenceData.details == null) {
-        //This will fire if you do not set presence details
-        presence.setTrayTitle(); //Clears the tray title for mac users
-        presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
-    } else {
-        //This will fire if you set presence details
-        presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
+        const presenceData: PresenceData = {
+            details: document.title
+        };
+        presence.setActivity(presenceData);
     }
 });
