@@ -38,7 +38,7 @@ jobs:
           git diff-tree --no-commit-id --name-only -r ${{ github.sha }} --output file_changes.txt
       - name: Find Changed Files (pull request)
         if: github.event_name == 'pull_request'
-        uses: futuratrepadeira/changed-files@v3
+        uses: PreMiD/changed-files@v3
         id: changed_files
       - name: Write Changed Files (pull request)
         if: github.event_name == 'pull_request'
@@ -46,7 +46,7 @@ jobs:
         with:
           path: file_changes.txt
           contents: |
-            ${{ join(steps.changed_files.outputs.files_created, '\n') }}
-            ${{ join(steps.changed_files.outputs.files_updated, '\n') }}
+            ${{ steps.changed_files.outputs.files_created }}
+            ${{ steps.changed_files.outputs.files_updated }}
       - name: Start SV
         run: yarn sv --colors
