@@ -28,7 +28,11 @@ presence.on("UpdateData", async () => {
           document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
         }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
-    presenceData.details = "Viewing class:";
+    if (path[2] && path[2] === "a") {
+      presenceData.details = "Viewing an assignment in:";
+    } else {
+      presenceData.details = "Viewing class:";
+    }
     presenceData.state = classroom;
     presenceData.startTimestamp = Date.now();
   } else if (path[0] === "w") {
