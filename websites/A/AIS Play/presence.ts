@@ -28,7 +28,7 @@ let video = {
     isLive: false
 };
 
-presence.on("iFrameData", (data: { current: number; duration: number; paused: boolean, isLive: boolean }) => {
+presence.on("iFrameData", (data: { current: number; duration: number; paused: boolean; isLive: boolean }) => {
     video = data;
 });
 
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
         return presence.setActivity({
             details: `Browsing for :`,
             state: document.querySelector(".default-title").textContent || "",
-            largeImageKey: "logo",
+            largeImageKey: "logo"
         });
     }
     
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = Info.textContent;
     }
   
-    presenceData.smallImageKey = video.paused ? "pause" : video.isLive ? "live" : "play"
+    presenceData.smallImageKey = video.paused ? "pause" : video.isLive ? "live" : "play";
     presenceData.smallImageText = video.paused ? (await strings).pause : video.isLive ? (await strings).live : (await strings).play;
   
     if (!video.paused && !video.isLive) {

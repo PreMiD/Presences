@@ -1,7 +1,7 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-    let video: HTMLVideoElement = document.querySelector("#vimmi_video_player_html5_api");
+    const video: HTMLVideoElement = document.querySelector("#vimmi_video_player_html5_api");
     
     if (video != undefined && !isNaN(video.duration)) {
         iframe.send({
