@@ -48,15 +48,28 @@ presence.on("UpdateData", async () => {
         if (episode.includes("ซับไทย")) {
           episode = episode.replace("ซับไทย", "").trim();
         } else if (episode.includes("พากย์ไทย")) {
-          episode = episode.replace("พากย์ไทย", "").trim();
-        }
+          episode = episode.replace("พากย์ไทย",  "").trim();
+        } 
     
         episode = "ตอนที่ " + episode;
         presenceData.state = info[0];
         presenceData.details = episode;
         presenceData.smallImageText = "กำลังรับชม";
         presenceData.smallImageKey = "playing";
+      } else { 
+        let info;
+        if (title1.includes("ซับไทย")) {
+          info = title1.replace("ซับไทย", "").trim();
+        } else if (title1.includes("พากย์ไทย")) {
+          info = title1.replace("พากย์ไทย",  "").trim();
+        }
+        episode = "Movie";
+        presenceData.state = info;
+        presenceData.details = episode;
+        presenceData.smallImageText = "กำลังรับชม";
+        presenceData.smallImageKey = "playing";
       } 
+
       presenceData.startTimestamp = browsingStamp;
     } else if (path.href) {
       presenceData.startTimestamp = browsingStamp;
