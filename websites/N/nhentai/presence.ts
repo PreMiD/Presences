@@ -140,7 +140,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Searching by tag: ";
 
-    presenceData.state = tag.textContent;
+    presenceData.state = tag.innerText;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/artist/")) {
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Searching by artist:";
 
-    presenceData.state = artist.textContent;
+    presenceData.state = artist.innerText;
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/parody/")) {
