@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "614387676467953674"
   }),
   strings = presence.getStrings({
@@ -16,24 +16,19 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var title: any,
-  uploader: any,
-  search: any,
-  episode: any,
-  episodefinish: any,
-  rating: any;
+let title: HTMLElement | HTMLInputElement;
 
 // the video variable is a html video element
-var video: HTMLVideoElement;
+let video: HTMLVideoElement;
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
-var playback: boolean;
+let playback: boolean;
 
 presence.on("UpdateData", async () => {
   // Get the video
@@ -134,7 +129,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > div.page-wrapper > div.main-container > div > div.row > div.col.s12.m12.l8 > div.card.card-highlight > div > h2"
       );
-      search = document.querySelector(
+      const search = document.querySelector(
         "body > div.page-wrapper > div.main-container > div > div.card.billboard > div > div.col.s12.l4.m4.billboard-meta > h1"
       );
 
@@ -144,7 +139,7 @@ presence.on("UpdateData", async () => {
       if (title !== null) {
         presenceData.state = title.innerText;
       } else {
-        presenceData.state = search.innerText;
+        presenceData.state = search.textContent;
       }
 
       presence.setActivity(presenceData);
@@ -455,7 +450,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Searching for:";
       presenceData.smallImageKey = "search";
-      presenceData.state = title.value;
+      presenceData.state = (title as HTMLInputElement).value;
 
       presence.setActivity(presenceData);
     } else if (
@@ -522,7 +517,7 @@ presence.on("UpdateData", async () => {
 
   // Check if it can find the video
   if (video !== null && !isNaN(video.duration)) {
-    var timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
@@ -530,45 +525,26 @@ presence.on("UpdateData", async () => {
       details: "",
       state: "",
       largeImageKey: "viki",
-      smallImageKey: video.paused ? "pause" : "play", // if the video is paused, show the pause icon else the play button
+      smallImageKey: video.paused ? "pause" : "play",
       smallImageText: video.paused
-        ? (await strings).pause // paused text when you hover the pause icon on discord
+        ? (await strings).pause
         : (await strings).play,
       startTimestamp: timestamps[0],
       endTimestamp: timestamps[1]
     };
-    episode = document.querySelector(
-      "body > div.page-wrapper > div.main-container > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(1) > div.video-meta.col.s8.m8.l8 > h1 > a"
-    );
-    episodefinish = episode.innerText.replace(": " + title.innerText, "");
-    // Get the views number
-    rating = document.querySelector(
-      "body > div.page-wrapper > div.main-container > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(5) > span.strong"
-    );
 
-    // Set presence details to the title (innerText - gets the text from the <strong> tag in this case)
     presenceData.details = document.querySelector(
-      "body > div.page-wrapper > div.main-container > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(4) > div.container-meta.col.s6.m8.l8 > h2 > a"
+      ".vkp-pos-container-title"
     ).textContent;
+    presenceData.state = document.title
+      .split(document.querySelector(".vkp-pos-container-title").textContent)[1]
+      .replace(" - ", "");
 
-    // Set presence state to views value
-    presenceData.state =
-      episodefinish + " (Rating: " + rating.innerText + "/10)";
-
-    //* Remove timestamps if paused
     if (video.paused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
 
-    //* If tags are not "null"
-    if (
-      document.querySelector(
-        "body > div.page-wrapper > div.main-container > div > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(4) > div.container-meta.col.s6.m8.l8 > h2 > a"
-      ) !== null &&
-      uploader !== null
-    ) {
-      presence.setActivity(presenceData, !video.paused);
-    }
+    presence.setActivity(presenceData, !video.paused);
   }
 });
