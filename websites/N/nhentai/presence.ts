@@ -12,16 +12,16 @@ let title: any,
   pageNumber: any,
   tabTitle: any,
   homeCurrentPage: any,
-  favoriteCurrentPage: any;
+  favoriteCurrentPage: HTMLElement;
 
 const pattern = "- Page";
 
-let character: any, parody: any, group: any, user: any, tag: any, artist: any;
+let character: any, parody: any, group: HTMLElement, user: HTMLElement, tag: HTMLElement, artist: HTMLElement;
 
 const searchURL = new URL(document.location.href);
 const searchResult = searchURL.searchParams.get("q");
 
-const truncateAfter = function (str: string, pattern: any) {
+const truncateAfter = function (str: string, pattern: string) {
   return str.slice(0, str.indexOf(pattern));
 };
 
