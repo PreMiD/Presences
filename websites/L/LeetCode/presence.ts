@@ -4,7 +4,7 @@ const presence = new Presence({
 });
 
 // time spent on current URL
-var timeElapsed :number = new Date().getTime()
+const timeElapsed: number = new Date().getTime();
 
 presence.on("UpdateData", async () => {
     // default settings
