@@ -411,7 +411,7 @@ function getUserId(): string {
 
 // cache the requested media
 // const media: Array<MediaInfo> = [];
-const media: Record<string, string|MediaInfo> = {};
+const media: Record<string, string | MediaInfo> = {};
 
 /**
  * obtainMediaInfo - obtain the metadata of the given id
@@ -419,7 +419,7 @@ const media: Record<string, string|MediaInfo> = {};
  * @param  {string} itemId id of the item to get metadata of
  * @return {object}        metadata of the item
  */
-async function obtainMediaInfo(itemId: string): Promise<string|MediaInfo> {
+async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   if (media[itemId]) {
     if (media[itemId] !== "pending") {
       return media[itemId];
@@ -467,7 +467,7 @@ async function handleVideoPlayback(): Promise<void> {
   const osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle");
 
   // media metadata
-  let mediaInfo: string|MediaInfo;
+  let mediaInfo: string | MediaInfo;
 
   const videoPlayerContainerElem = document.body.getElementsByClassName(
     "videoPlayerContainer"
@@ -528,7 +528,6 @@ async function handleVideoPlayback(): Promise<void> {
       delete presenceData.endTimestamp;
     }
   }
-
 
   presenceData.details = title;
   presenceData.state = subtitle;
