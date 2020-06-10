@@ -20,6 +20,7 @@
     "free",
     "thai"
   ],
+  "iframe": true,
   "category": "anime",
   "regExp": "([a-z0-9-]+[.])*anime-sugoi[.]com[/]"
 }
