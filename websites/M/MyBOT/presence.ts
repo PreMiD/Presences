@@ -25,8 +25,9 @@ presence.on("UpdateData", () => {
     } else if (route[2] === "mybot-op") {
       data.state = "MyBOT OP";
     } else {
-      data.state =
-        route[2].replace(/-/g, "").replace(/^[a-z]/i, (c) => c.toUpperCase());
+      data.state = route[2]
+        .replace(/-/g, "")
+        .replace(/^[a-z]/i, (c) => c.toUpperCase());
     }
   } else if (route[1] === "tools") {
     data.details = "Viendo las herramientas";
@@ -37,8 +38,7 @@ presence.on("UpdateData", () => {
     data.details = "Viendo los logros";
   } else if (route[1] === "logro") {
     data.details = "Viendo el logro:";
-    data.state =
-      document.querySelector(".card-title.text-bold.mb-2").innerHTML;
+    data.state = document.querySelector(".card-title.text-bold.mb-2").innerHTML;
   } else if (route[1] === "team") {
     if (!route[2]) {
       data.details = "Viendo al equipo";
@@ -66,8 +66,9 @@ presence.on("UpdateData", () => {
       }
     } else if (route[2].startsWith("tag")) {
       data.details = "Viendo bots de:";
-      data.state =
-        route[2].split("?c=")[1].replace(/^[a-z]/i, (c) => c.toUpperCase());
+      data.state = route[2]
+        .split("?c=")[1]
+        .replace(/^[a-z]/i, (c) => c.toUpperCase());
     } else if (route[2] === "me") {
       data.details = "Viendo su perfil";
     } else if (route[2] === "edit") {
@@ -88,7 +89,7 @@ presence.on("UpdateData", () => {
   } else if (route[1] === "perfil") {
     if (!route[2]) {
       data.details = "Viendo su perfil";
-    } else if (route[2] === "editar-perfil") { 
+    } else if (route[2] === "editar-perfil") {
       data.details = "Editando su perfil";
     }
   } else if (route[1] === "u") {
