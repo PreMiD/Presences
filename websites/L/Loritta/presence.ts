@@ -14,7 +14,7 @@ const presenceData: PresenceData = {
       if (path === '/br' || path === '/us' || path === '/br/' || path === '/us/') {
         presenceData.details = "Home";
       } else if(path.includes('dashboard')) {
-        const category = document.querySelector('.server-name').textContent
+        const category = document.querySelector('.server-name').textContent;
         const item = document.querySelector('.selected-item').textContent;
         presenceData.details = category;
         presenceData.state = item;
@@ -26,7 +26,7 @@ const presenceData: PresenceData = {
         const artist = document.querySelector('.name');
         if(artist) {
           presenceData.details = 'FanArts';
-          presenceData.state = artist.textContent
+          presenceData.state = artist.textContent;
         } else {
           presenceData.details = 'FanArts';
         }
@@ -52,7 +52,7 @@ const presenceData: PresenceData = {
     if(host.includes('cluster')) {
       if(path.includes('dashboard') || path.includes('guild')) {
         const category = document.querySelector('.server-name').textContent;
-        const item = document.querySelector('.selected-item').textContent
+        const item = document.querySelector('.selected-item').textContent;
         presenceData.details = category;
         presenceData.state = item;
       } else if(path.endsWith('/guidelines')) {
@@ -74,7 +74,7 @@ const presenceData: PresenceData = {
       } else if(path.includes('extras')) {
         const category = document.querySelector('.server-name').textContent;
         const item = document.querySelector('.selected-item').textContent;
-        presenceData.details = category
+        presenceData.details = category;
         presenceData.state = item;
       } else if(path.includes('blog')) {
           const title = document.querySelector('h1');
