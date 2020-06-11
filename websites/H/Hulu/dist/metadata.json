@@ -1,9 +1,14 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "GURRMAN375D",
+    "id": "446528923535278082"
   },
   "contributors": [
+    {
+      "name": "Alanexei ✓",
+      "id": "163319338403627008"
+    },
     {
       "name": "DooMLorD",
       "id": "465105167751315471"
