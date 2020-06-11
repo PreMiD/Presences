@@ -14,75 +14,75 @@ const presenceData: PresenceData = {
       if (path === '/br' || path === '/us' || path === '/br/' || path === '/us/') {
         presenceData.details = "Home";
       } else if(path.includes('dashboard')) {
-        let category = document.querySelector('.server-name').textContent
-        let item = document.querySelector('.selected-item').textContent
+        const category = document.querySelector('.server-name').textContent
+        const item = document.querySelector('.selected-item').textContent
         presenceData.details = category
-        presenceData.state = item
+        presenceData.state = item;
       } else if(path.endsWith('/guidelines')) {
-        presenceData.details = 'Guidelines'
+        presenceData.details = 'Guidelines';
       } else if(path.endsWith('/support')) {
-        presenceData.details = 'Support'
+        presenceData.details = 'Support';
       } else if(path.includes('fanarts')) {
-        let artist = document.querySelector('.name')
+        const artist = document.querySelector('.name')
         if(artist) {
           presenceData.details = 'FanArts'
-          presenceData.state = artist.textContent
+          presenceData.state = artist.textContent;
         } else {
-          presenceData.details = 'FanArts'
+          presenceData.details = 'FanArts';
         }
       } else if(path.endsWith('/donate')) {
-        presenceData.details = 'Donate'
+        presenceData.details = 'Donate';
       } else if(path.includes('extras')) {
-        let category = document.querySelector('.server-name').textContent
-        let item = document.querySelector('.selected-item').textContent
+        const category = document.querySelector('.server-name').textContent
+        const item = document.querySelector('.selected-item').textContent
         presenceData.details = category
-        presenceData.state = item
+        presenceData.state = item;
       } else if(path.includes('blog')) {
-          let title = document.querySelector('h1')
+          const title = document.querySelector('h1');
           if(title) {
             presenceData.details = 'Blog'
             presenceData.state = title.textContent
           } else {
-            presenceData.details = 'Blog'
+            presenceData.details = 'Blog';
           }
       } else if(path.endsWith('/daily')) {
-        presenceData.details = 'Daily'
+        presenceData.details = 'Daily';
       } 
     }
     if(host.includes('cluster')) {
       if(path.includes('dashboard') || path.includes('guild')) {
-        let category = document.querySelector('.server-name').textContent
-        let item = document.querySelector('.selected-item').textContent
+        const category = document.querySelector('.server-name').textContent
+        const item = document.querySelector('.selected-item').textContent
         presenceData.details = category
         presenceData.state = item
       } else if(path.endsWith('/guidelines')) {
-        presenceData.details = 'Guidelines'
+        presenceData.details = 'Guidelines';
       } else if(path.endsWith('/daily')) {
-        presenceData.state = 'Daily'
+        presenceData.state = 'Daily';
       } else if(path.endsWith('/support')) {
-        presenceData.details = 'Support'
+        presenceData.details = 'Support';
       } else if(path.includes('fanarts')) {
-        let artist = document.querySelector('.name')
+        const artist = document.querySelector('.name')
         if(artist) {
           presenceData.details = 'FanArts'
           presenceData.state = artist.textContent
         } else {
-          presenceData.details = 'FanArts'
+          presenceData.details = 'FanArts';
         }
       } else if(path.endsWith('/donate')) {
-        presenceData.details = 'Donate'
+        presenceData.details = 'Donate';
       } else if(path.includes('extras')) {
-        let category = document.querySelector('.server-name').textContent
-        let item = document.querySelector('.selected-item').textContent
+        const category = document.querySelector('.server-name').textContent
+        const item = document.querySelector('.selected-item').textContent
         presenceData.details = category
         presenceData.state = item
       } else if(path.includes('blog')) {
-          let title = document.querySelector('h1')
+          const title = document.querySelector('h1')
           if(title) {
             presenceData.details = 'Blog'
             presenceData.state = title.textContent
           } else {
-            presenceData.details = 'Blog'
+            presenceData.details = 'Blog';
           }
       }
     }
