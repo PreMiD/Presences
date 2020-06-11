@@ -15,33 +15,33 @@ const presenceData: PresenceData = {
         presenceData.details = "Home";
       } else if(path.includes('dashboard')) {
         const category = document.querySelector('.server-name').textContent
-        const item = document.querySelector('.selected-item').textContent
-        presenceData.details = category
+        const item = document.querySelector('.selected-item').textContent;
+        presenceData.details = category;
         presenceData.state = item;
       } else if(path.endsWith('/guidelines')) {
         presenceData.details = 'Guidelines';
       } else if(path.endsWith('/support')) {
         presenceData.details = 'Support';
       } else if(path.includes('fanarts')) {
-        const artist = document.querySelector('.name')
+        const artist = document.querySelector('.name');
         if(artist) {
-          presenceData.details = 'FanArts'
-          presenceData.state = artist.textContent;
+          presenceData.details = 'FanArts';
+          presenceData.state = artist.textContent
         } else {
           presenceData.details = 'FanArts';
         }
       } else if(path.endsWith('/donate')) {
         presenceData.details = 'Donate';
       } else if(path.includes('extras')) {
-        const category = document.querySelector('.server-name').textContent
-        const item = document.querySelector('.selected-item').textContent
-        presenceData.details = category
+        const category = document.querySelector('.server-name').textContent;
+        const item = document.querySelector('.selected-item').textContent;
+        presenceData.details = category;
         presenceData.state = item;
       } else if(path.includes('blog')) {
           const title = document.querySelector('h1');
           if(title) {
-            presenceData.details = 'Blog'
-            presenceData.state = title.textContent
+            presenceData.details = 'Blog';
+            presenceData.state = title.textContent;
           } else {
             presenceData.details = 'Blog';
           }
@@ -51,10 +51,10 @@ const presenceData: PresenceData = {
     }
     if(host.includes('cluster')) {
       if(path.includes('dashboard') || path.includes('guild')) {
-        const category = document.querySelector('.server-name').textContent
+        const category = document.querySelector('.server-name').textContent;
         const item = document.querySelector('.selected-item').textContent
-        presenceData.details = category
-        presenceData.state = item
+        presenceData.details = category;
+        presenceData.state = item;
       } else if(path.endsWith('/guidelines')) {
         presenceData.details = 'Guidelines';
       } else if(path.endsWith('/daily')) {
@@ -62,25 +62,25 @@ const presenceData: PresenceData = {
       } else if(path.endsWith('/support')) {
         presenceData.details = 'Support';
       } else if(path.includes('fanarts')) {
-        const artist = document.querySelector('.name')
+        const artist = document.querySelector('.name');
         if(artist) {
-          presenceData.details = 'FanArts'
-          presenceData.state = artist.textContent
+          presenceData.details = 'FanArts';
+          presenceData.state = artist.textContent;
         } else {
           presenceData.details = 'FanArts';
         }
       } else if(path.endsWith('/donate')) {
         presenceData.details = 'Donate';
       } else if(path.includes('extras')) {
-        const category = document.querySelector('.server-name').textContent
-        const item = document.querySelector('.selected-item').textContent
+        const category = document.querySelector('.server-name').textContent;
+        const item = document.querySelector('.selected-item').textContent;
         presenceData.details = category
-        presenceData.state = item
+        presenceData.state = item;
       } else if(path.includes('blog')) {
-          const title = document.querySelector('h1')
+          const title = document.querySelector('h1');
           if(title) {
-            presenceData.details = 'Blog'
-            presenceData.state = title.textContent
+            presenceData.details = 'Blog';
+            presenceData.state = title.textContent;
           } else {
             presenceData.details = 'Blog';
           }
