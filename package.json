@@ -16,7 +16,7 @@
     "@types/chrome": "^0.0.114",
     "@types/glob": "^7.1.1",
     "@types/mongodb": "^3.5.20",
-    "@types/node": "^14.0.6",
+    "@types/node": "^14.0.13",
     "@types/prettier": "^2.0.1",
     "@types/semver": "^7.2.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
