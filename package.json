@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.114",
-    "@types/glob": "^7.1.1",
+    "@types/glob": "^7.1.2",
     "@types/mongodb": "^3.5.20",
     "@types/node": "^14.0.6",
     "@types/prettier": "^2.0.1",
