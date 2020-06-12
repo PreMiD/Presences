@@ -1,0 +1,29 @@
+{
+  "author": {
+    "name": "Nono ._.",
+    "id": "640235175007223814"
+  },
+  "contributors": [{
+    "name": "Nono ._.",
+    "id": "640235175007223814"
+  }],
+  "service": "Peely",
+  "description": {
+    "en": "Peely is a Discord Bot for Fortnite Stuff.",
+    "de": "Peely ist ein Discord Bot für Fortnite Sachen."
+  },
+  "url": "peely.de",
+  "version": "1",
+  "logo": "https://i.imgur.com/ZWigH3q.png",
+  "thumbnail": "https://i.imgur.com/nnY8JTp.png",
+  "color": "#FFFF00",
+  "tags": [
+    "peely",
+    "peely bot",
+    "peely discord bot",
+    "discord bot",
+    "fortnite",
+    "fortnite bot"
+  ],
+  "category": "other"
+}
