@@ -156,7 +156,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("/watch")) {
     video = document.querySelector(".video-player");
-    // details = "Viewing Watch History";
+    details = "Viewing Watch History";
     if (video) {
       title = document.querySelector(".metadata-area__second-line");
       const content = document.querySelector(".metadata-area__third-line");
