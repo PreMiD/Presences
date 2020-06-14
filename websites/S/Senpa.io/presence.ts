@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname === "/") {
       presenceData.details = "Home";
     } else if (document.location.pathname.includes("/web/")) {
-      var profile = JSON.parse(localStorage.getItem("senpaio:profiles"));
+      let profile = JSON.parse(localStorage.getItem("senpaio:profiles"));
       presenceData.details = `Playing on server : ${
         localStorage.getItem("senpaio:region")
       } ${
