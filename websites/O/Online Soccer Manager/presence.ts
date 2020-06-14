@@ -230,7 +230,7 @@ presence.on("UpdateData", () => {
 
         default:
             presenceData.details = "Viewing:";
-            presenceData.state = "";
+            presenceData.state = "Not Found";
             break;
     }
 
