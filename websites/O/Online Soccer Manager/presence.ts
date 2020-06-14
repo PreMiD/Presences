@@ -1,16 +1,16 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "721473663987220500"
 });
 
 let browseTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-    var presenceData: PresenceData = {
+    let presenceData: PresenceData = {
         largeImageKey: "osm",
         startTimestamp: browseTimestamp
     };
 
-    let pathname = document.location.pathname;
+    const pathname = document.location.pathname;
 
     if(pathname == "/Register"){
         presenceData.details = "Browsing:"
@@ -27,10 +27,10 @@ presence.on("UpdateData", () => {
         presenceData.state = "Choosing a league"
     }
 
-    let teamPath = pathname.slice(11);
+    const teamPath = pathname.slice(11);
 
     if(pathname == "/ChooseTeam" + teamPath){
-        let teamName = document.querySelector("#selected-league-name > h2 > span")
+        const teamName = document.querySelector("#selected-league-name > h2 > span")
         if(!teamName) return;
         presenceData.details = "Choosing club in:";
         presenceData.state = teamName.textContent;
@@ -131,10 +131,10 @@ presence.on("UpdateData", () => {
         presenceData.state = "League Calendar";
     }
 
-    let weeksPath = pathname.slice(14)
+    const weeksPath = pathname.slice(14)
 
     if(pathname == "/League/Weeks/" + weeksPath){
-        let matchday = document.querySelector("#round-container > div > div > div.col-xs-12.col-h-xs-12.font-lg.semi-bold.center > div > span:nth-child(2)")
+        const matchday = document.querySelector("#round-container > div > div > div.col-xs-12.col-h-xs-12.font-lg.semi-bold.center > div > span:nth-child(2)")
         if(!matchday) return;
         presenceData.details = "Viewing:";
         presenceData.state = "Matchday " + matchday.textContent;
@@ -200,30 +200,30 @@ presence.on("UpdateData", () => {
         presenceData.state = "Friends";
     }
 
-    let squadPath = pathname.slice(7)
+    const squadPath = pathname.slice(7)
 
     if(pathname == "/Squad/" + squadPath){
-        let squadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2")
+        const squadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2")
         presenceData.details = "Viewing squad:";
         presenceData.state = squadName.textContent;
     }
 
     if(pathname == "/Squad"){
-        let squadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2")
+        const squadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2")
         presenceData.details = "Viewing squad:";
         presenceData.state = squadName.textContent;
     }
 
-    let userPath = pathname.slice(7)
+    const userPath = pathname.slice(7)
 
     if(pathname == "/Users/" + userPath){
-        let userName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div")
+        const userName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div")
         presenceData.details = "Viewing profile:";
         presenceData.state = userName.textContent;
     }
 
     if(pathname == "/User/Profile"){
-        let userName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div")
+        const userName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div")
         presenceData.details = "Viewing profile:";
         presenceData.state = userName.textContent;
     }
