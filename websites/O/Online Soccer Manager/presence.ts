@@ -193,7 +193,7 @@ presence.on("UpdateData", () => {
     if(pathname == "/SimulationStatus"){
         presenceData.details = "Viewing:";
         presenceData.state = "Simulation Status";
-    };
+    }
 
     if(pathname == "/Friends"){
         presenceData.details = "Viewing:";
@@ -233,5 +233,5 @@ presence.on("UpdateData", () => {
         presence.setActivity();
     }else{
         presence.setActivity(presenceData);
-    };
+    }
 });
