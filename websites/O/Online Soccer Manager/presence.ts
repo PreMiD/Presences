@@ -12,220 +12,219 @@ presence.on("UpdateData", () => {
 
     const pathname = document.location.pathname;
 
-    if(pathname == "/Register"){
-        presenceData.details = "Browsing:";
-        presenceData.state = "Register";
-    }
-
-    if(pathname == "/Login"){
-        presenceData.details = "Browsing:";
-        presenceData.state = "Login";
-    }
-
-    if(pathname == "/ChooseLeague"){
-        presenceData.details = "Playing:";
-        presenceData.state = "Choosing a league";
-    }
-
+    // Custom paths
     const teamPath = pathname.slice(11);
-
-    if(pathname == "/ChooseTeam" + teamPath){
-        const teamName = document.querySelector("#selected-league-name > h2 > span");
-        if(!teamName) return;
-        presenceData.details = "Choosing club in:";
-        presenceData.state = teamName.textContent;
-    }
-
-    if(pathname == "/Lineup"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Lineup";
-    }
-
-    if(pathname == "/Tactics"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Tactics";
-    }
-
-    if(pathname == "/League/Friendlies"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "League Friendlies";
-    }
-
-    if(pathname == "/Training"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Training";
-    }
-
-    if(pathname == "/Dashboard"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Home Page";
-    }
-
-    if(pathname == "/Sponsors"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Sponsors";
-    }
-
-    if(pathname == "/Stadium"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Stadium";
-    }
-
-    if(pathname == "/User/Profile/Edit"){
-        presenceData.details = "Editing:";
-        presenceData.state = "Profile";
-    }
-
-    if(pathname == "/User/Achievements"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Achievements";
-    }
-
-    if(pathname == "/Specialists"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Specialists";
-    }
-
-    if(pathname == "/Transferlist"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Transfer List";
-    }
-
-    if(pathname == "/Offers"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Offers";
-    }
-
-    if(pathname == "/Secret"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Secret Training";
-    }
-
-    if(pathname == "/Camp"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Training Camp";
-    }
-
-    if(pathname == "/League/Standings"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "League Standings";
-    }
-
-    if(pathname == "/League/Standings"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "League Standings";
-    }
-
-    if(pathname == "/League/Fixtures"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "League Fixtures";
-    }
-
-    if(pathname == "/DataAnalist"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Data Analyst";
-    }
-
-    if(pathname == "/League/Calendar"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "League Calendar";
-    }
-
     const weeksPath = pathname.slice(14);
-
-    if(pathname == "/League/Weeks/" + weeksPath){
-        const matchday = document.querySelector("#round-container > div > div > div.col-xs-12.col-h-xs-12.font-lg.semi-bold.center > div > span:nth-child(2)");
-        if(!matchday) return;
-        presenceData.details = "Viewing:";
-        presenceData.state = "Matchday " + matchday.textContent;
-    }
-
-    if(pathname == "/League/Cup"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "League Cup";
-    }
-
-    if(pathname == "/Newsfeed"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Press Room";
-    }
-
-    if(pathname == "/Board"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Board";
-    }
-
-    if(pathname == "/BusinessClub"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Business Club";
-    }
-
-    if(pathname == "/Scout"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Scout";
-    }
-
-    if(pathname == "/Doctor"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Doctor";
-    }
-
-    if(pathname == "/Lawyer"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Lawyer";
-    }
-
-    if(pathname == "/Rankings"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Rankings";
-    }
-
-    if(pathname == "/LeagueTypes"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "League Overview";
-    }
-
-    if(pathname == "/ActiveLeagues"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Active Leagues";
-    }
-
-    if(pathname == "/SimulationStatus"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Simulation Status";
-    }
-
-    if(pathname == "/Friends"){
-        presenceData.details = "Viewing:";
-        presenceData.state = "Friends";
-    }
-
     const squadPath = pathname.slice(7);
-
-    if(pathname == "/Squad/" + squadPath){
-        const squadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2");
-        presenceData.details = "Viewing squad:";
-        presenceData.state = squadName.textContent;
-    }
-
-    if(pathname == "/Squad"){
-        const squadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2");
-        presenceData.details = "Viewing squad:";
-        presenceData.state = squadName.textContent;
-    }
-
     const userPath = pathname.slice(7);
 
-    if(pathname == "/Users/" + userPath){
-        const userName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div");
-        presenceData.details = "Viewing profile:";
-        presenceData.state = userName.textContent;
-    }
+    switch(pathname){
+        case "/Register":
+            presenceData.details = "Browsing:";
+            presenceData.state = "Register";
+            break;
 
-    if(pathname == "/User/Profile"){
-        const userName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div");
-        presenceData.details = "Viewing profile:";
-        presenceData.state = userName.textContent;
+        case "/Login":
+            presenceData.details = "Browsing:";
+            presenceData.state = "Login";
+            break;
+
+        case "/ChooseLeague":
+            presenceData.details = "Playing:";
+            presenceData.state = "Choosing a league";
+            break;
+        
+        case "/ChooseTeam" + teamPath:
+            const teamName = document.querySelector("#selected-league-name > h2 > span");
+            if(!teamName) return;
+            presenceData.details = "Choosing club in:";
+            presenceData.state = teamName.textContent;
+            break;
+
+        case "/Lineup":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Lineup";
+            break;
+        
+        case "/Tactics":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Tactics";
+            break;
+            
+        case "/League/Friendlies":
+            presenceData.details = "Viewing:";
+            presenceData.state = "League Friendlies";
+            break;
+
+        case "/Training":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Training";
+            break;
+
+        case "/Dashboard":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Home Page";
+            break;
+
+        case "/Sponsors":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Sponsors";
+            break;
+
+        case "/Stadium":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Stadium";
+            break;
+
+        case "/User/Profile/Edit":
+            presenceData.details = "Editing:";
+            presenceData.state = "Profile";
+            break;
+
+        case "/User/Achievements":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Achievements";
+            break;
+
+        case "/Specialists":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Specialists";
+            break;
+
+        case "/Transferlist":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Transfer List";
+            break;
+
+        case "/Offers":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Offers";
+            break;
+
+        case "/Secret":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Secret Training";
+            break;
+
+        case "/Camp":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Training Camp";
+            break;
+
+        case "/League/Standings":
+            presenceData.details = "Viewing:";
+            presenceData.state = "League Standings";
+            break;
+
+        case "/League/Fixtures":
+            presenceData.details = "Viewing:";
+            presenceData.state = "League Fixtures";
+            break;
+
+        case "/DataAnalist":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Data Analyst";
+            break;
+
+        case "/League/Calendar":
+            presenceData.details = "Viewing:";
+            presenceData.state = "League Calendar";
+            break;
+
+        case "/League/Weeks/" + weeksPath:
+            const matchday = document.querySelector("#round-container > div > div > div.col-xs-12.col-h-xs-12.font-lg.semi-bold.center > div > span:nth-child(2)");
+            if(!matchday) return;
+            presenceData.details = "Viewing:";
+            presenceData.state = "Matchday " + matchday.textContent;
+            break;
+
+        case "/League/Cup":
+            presenceData.details = "Viewing:";
+            presenceData.state = "League Cup";
+            break;
+
+        case "/Newsfeed":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Press Room";
+            break;
+
+        case "/Board":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Board";
+            break;
+
+        case "BusinessClub":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Business Club";
+            break;
+
+        case "/Scout":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Scout";
+            break;
+
+        case "/Doctor":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Doctor";
+            break;
+
+        case "/Lawyer":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Lawyer";
+            break;
+
+        case "/Rankings":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Rankings";
+            break;
+
+        case "/LeagueTypes":
+            presenceData.details = "Viewing:";
+            presenceData.state = "League Overview";
+            break;
+
+        case "/ActiveLeagues":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Active Leagues";
+            break;
+
+        case "/SimulationStatus":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Simulation Status";
+            break;
+
+        case "/Friends":
+            presenceData.details = "Viewing:";
+            presenceData.state = "Friends";
+            break;
+
+        case "/Squad/" + squadPath:
+            const squadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2");
+            presenceData.details = "Viewing squad:";
+            presenceData.state = squadName.textContent;
+            break;
+        
+        case "/Squad":
+            const selfSquadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2");
+            presenceData.details = "Viewing squad:";
+            presenceData.state = selfSquadName.textContent;
+            break;
+
+        case "/Users/" + userPath:
+            const userName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div");
+            presenceData.details = "Viewing profile:";
+            presenceData.state = userName.textContent;
+            break;
+
+        case "/User/Profile":
+            const SelfuserName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div");
+            presenceData.details = "Viewing profile:";
+            presenceData.state = SelfuserName.textContent;
+            break;
+
+        default:
+            presenceData.details = "Viewing:";
+            presenceData.state = ""
     }
 
     if(presenceData.details == null){
