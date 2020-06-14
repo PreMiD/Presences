@@ -34,12 +34,13 @@ presence.on("UpdateData", () => {
             presenceData.state = "Choosing a league";
             break;
         
-        case "/ChooseTeam" + teamPath:
+        case "/ChooseTeam" + teamPath: {
             const teamName = document.querySelector("#selected-league-name > h2 > span");
             if(!teamName) return;
             presenceData.details = "Choosing club in:";
             presenceData.state = teamName.textContent;
             break;
+        }
 
         case "/Lineup":
             presenceData.details = "Viewing:";
@@ -131,12 +132,13 @@ presence.on("UpdateData", () => {
             presenceData.state = "League Calendar";
             break;
 
-        case "/League/Weeks/" + weeksPath:
+        case "/League/Weeks/" + weeksPath: {
             const matchday = document.querySelector("#round-container > div > div > div.col-xs-12.col-h-xs-12.font-lg.semi-bold.center > div > span:nth-child(2)");
             if(!matchday) return;
             presenceData.details = "Viewing:";
             presenceData.state = "Matchday " + matchday.textContent;
             break;
+        }
 
         case "/League/Cup":
             presenceData.details = "Viewing:";
@@ -198,29 +200,33 @@ presence.on("UpdateData", () => {
             presenceData.state = "Friends";
             break;
 
-        case "/Squad/" + squadPath:
+        case "/Squad/" + squadPath: {
             const squadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2");
             presenceData.details = "Viewing squad:";
             presenceData.state = squadName.textContent;
             break;
+        }
         
-        case "/Squad":
+        case "/Squad": {
             const selfSquadName = document.querySelector("#team-squad-panel > div > div > div:nth-child(2) > div > div > h2");
             presenceData.details = "Viewing squad:";
             presenceData.state = selfSquadName.textContent;
             break;
+        }
 
-        case "/Users/" + userPath:
+        case "/Users/" + userPath:{
             const userName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div");
             presenceData.details = "Viewing profile:";
             presenceData.state = userName.textContent;
             break;
+        }
 
-        case "/User/Profile":
+        case "/User/Profile": {
             const SelfuserName = document.querySelector("#user-profile-name-container > div:nth-child(2) > div");
             presenceData.details = "Viewing profile:";
             presenceData.state = SelfuserName.textContent;
             break;
+        }
 
         default:
             presenceData.details = "Viewing:";
