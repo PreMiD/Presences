@@ -5,7 +5,8 @@
   },
   "service": "Spiderum",
   "description": {
-    "en": "Nền tảng chia sẻ - thảo luận dành cho người Việt. Nơi tập trung những nội dung thú vị và hữu ích nhất do người dùng đóng góp và bình chọn."
+    "en": "Vietnamese writing community",
+    "vi": "Nền tảng chia sẻ - thảo luận dành cho người Việt. Nơi tập trung những nội dung thú vị và hữu ích nhất do người dùng đóng góp và bình chọn."
   },
   "url": "spiderum.com",
   "version": "1.0.0",
