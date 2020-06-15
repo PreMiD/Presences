@@ -161,7 +161,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "กำลังอ่าน";
     } else {
       presenceData.details = "SnowBoltz - snowboltz.net";
-      presenceData.state = "ร้านเติมโรบัคราคาถูกเรทสูง"
+      presenceData.state = "ร้านเติมโรบัคราคาถูกเรทสูง";
       presenceData.startTimestamp = browsingStamp;
     }
   }
