@@ -156,7 +156,6 @@ presence.on("UpdateData", async () => {
     }
   } else if (path.includes("/watch")) {
     video = document.querySelector(".video-player");
-    details = "Viewing Watch History";
     if (video) {
       title = document.querySelector(".metadata-area__second-line");
       const content = document.querySelector(".metadata-area__third-line");
@@ -183,6 +182,38 @@ presence.on("UpdateData", async () => {
       if (video.paused) {
         startTimestamp = undefined;
         endTimestamp = undefined;
+      }
+    }
+    else{
+      video = document.querySelector("video#content-video-player");
+      details = "Viewing Watch History";
+      if (video) {
+        title = document.querySelector("#web-player-app div.PlayerMetadata__titleText");
+        const content = document.querySelector("#web-player-app div.PlayerMetadata__subTitle");
+        const timestamps = getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
+        const live = timestamps[1] === Infinity;
+        details = "Watching";
+        if (title) {
+          details = title.textContent;
+        }
+        if (content && content.textContent.length > 0) {
+          state = content.textContent;
+        }
+        smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+        smallImageText = live
+          ? (await strings).live
+          : video.paused
+          ? (await strings).pause
+          : (await strings).play;
+        startTimestamp = live ? elapsed : timestamps[0];
+        endTimestamp = live ? undefined : timestamps[1];
+        if (video.paused) {
+          startTimestamp = undefined;
+          endTimestamp = undefined;
+        }
       }
     }
   }
