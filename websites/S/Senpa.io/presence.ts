@@ -2,6 +2,8 @@ const presence = new Presence({
   clientId: "691669470057594940"
 });
 
+const browsingStamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
@@ -30,7 +32,7 @@ presence.on("UpdateData", async () => {
             ? "no nick"
             : profile.list[profile.selected].nick
         }` + ` | ${document.querySelector("#stats-hud").textContent}`;
-      presenceData.startTimestamp = Date.now();
+      presenceData.startTimestamp = browsingStamp;
     } else {
       presenceData.details = document.querySelector("title").textContent.split("-")[1];
       presenceData.smallImageKey = "reading";
