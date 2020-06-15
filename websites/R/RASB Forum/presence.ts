@@ -1,13 +1,13 @@
 const presence = new Presence({
     clientId: "721784733582753813"
-})
+});
 
-const browsingStamp = Math.floor(Date.now() / 1000)
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
     const presenceData: PresenceData = {
         largeImageKey: "rasb",
-        startTimestamp: browsingStamp,
+        startTimestamp: browsingStamp
     };
 
     const pathname = document.location.pathname;
@@ -52,7 +52,7 @@ presence.on("UpdateData", () => {
         case "/t/" + splitter: {
             const postName = document.getElementsByClassName("fancy-title")[0];
             if(!postName) return;
-            presenceData.details = "Reading:"
+            presenceData.details = "Reading:";
             presenceData.state = postName.textContent;
             break;
         }
