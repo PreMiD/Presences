@@ -26,7 +26,6 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/p")) {
     const presenceData: PresenceData = {
       details: "Viewing a post",
-      state: "NAME-HERE",
       largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
