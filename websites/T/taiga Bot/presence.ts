@@ -28,53 +28,53 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Viewing the Frontpage...";
         break;
       }
-      case("/features"): {
+      case("/features/"): {
         presenceData.state = "Viewing the Features Overview...";
         break;
       }
-      case("/commands"): {
+      case("/commands/"): {
         presenceData.state = "Viewing the Commands List...";
         break;
       }
-      case("/plugins"): {
+      case("/plugins/"): {
         presenceData.state = "Reading about Plugins";
         break;
       }
-      case("/tradingcards"): {
+      case("/tradingcards/"): {
         presenceData.state = "Reading about Trading Cards";
         break;
       }
-      case("/economy"): {
+      case("/economy/"): {
         presenceData.state = "Reading about Economy";
         break;
       }
-      case("/localization"): {
+      case("/localization/"): {
         presenceData.state = "Reading about Localization";
         break;
       }
-      case("/squads"): {
+      case("/squads/"): {
         presenceData.state = "Reading about Squads";
         break;
       }
-      case("/pro"):
-      case("/premium"):
-      case("/subscriptions"): {
+      case("/pro/"):
+      case("/premium/"):
+      case("/subscriptions/"): {
         presenceData.state = "Reading about Subscriptions...";
         break;
       }
-      case("/team"): {
+      case("/team/"): {
         presenceData.state = "Viewing the Team Page...";
         break;
       }
-      case("/partners"): {
+      case("/partners/"): {
         presenceData.state = "Viewing the Partners Page...";
         break;
       }
-      case("/jobs"): {
+      case("/jobs/"): {
         presenceData.state = "Viewing the Jobs Page...";
         break;
       }
-      case("/help"): {
+      case("/help/"): {
         presenceData.state = "Viewing the Help Page...";
         break;
       }
