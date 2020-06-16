@@ -16,7 +16,12 @@ let title: any,
 
 const pattern = "- Page";
 
-let character: any, parody: any, group: HTMLElement, user: HTMLElement, tag: HTMLElement, artist: HTMLElement;
+let character: any,
+  parody: any,
+  group: HTMLElement,
+  user: HTMLElement,
+  tag: HTMLElement,
+  artist: HTMLElement;
 
 const searchURL = new URL(document.location.href);
 const searchResult = searchURL.searchParams.get("q");
@@ -115,7 +120,9 @@ presence.on("UpdateData", async () => {
 
     delete presenceData.state;
   } else if (document.location.pathname.includes("/favorites/")) {
-    favoriteCurrentPage = document.querySelector("#content > section.pagination > a.page.current");
+    favoriteCurrentPage = document.querySelector(
+      "#content > section.pagination > a.page.current"
+    );
     presenceData.details = "Favorites";
 
     presenceData.state = "Page: " + favoriteCurrentPage.innerText;
@@ -172,7 +179,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = "Viewing an user: ";
 
-    presenceData.state = user.innerText; 
+    presenceData.state = user.innerText;
 
     presenceData.startTimestamp = browsingStamp;
   } else {

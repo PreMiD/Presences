@@ -1,11 +1,11 @@
 const presence = new Presence({
-  clientId: "709308577701036074"
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  browsing: "presence.activity.browsing"
-});
+    clientId: "709308577701036074"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browsing: "presence.activity.browsing"
+  });
 
 let video = {
   current: 0,
@@ -46,7 +46,6 @@ presence.on(
   }
 );
 
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "icon"
@@ -81,36 +80,36 @@ presence.on("UpdateData", async () => {
       if (title1.includes("ตอนที่")) {
         const info = title1.split("ตอนที่");
         episode = info.pop();
-    
+
         if (episode.includes("ซับไทย")) {
           episode = episode.replace("ซับไทย", "").trim();
         } else if (episode.includes("พากย์ไทย")) {
-          episode = episode.replace("พากย์ไทย",  "").trim();
-        } 
-    
+          episode = episode.replace("พากย์ไทย", "").trim();
+        }
+
         episode = "ตอนที่ " + episode;
         presenceData.state = info[0];
         presenceData.details = episode;
-      } else { 
+      } else {
         let info;
         if (title1.includes("ซับไทย")) {
           info = title1.replace("ซับไทย", "").trim();
         } else if (title1.includes("พากย์ไทย")) {
-          info = title1.replace("พากย์ไทย",  "").trim();
+          info = title1.replace("พากย์ไทย", "").trim();
         }
         episode = "Movie";
         presenceData.state = info;
         presenceData.details = episode;
-      } 
+      }
 
       presenceData.smallImageKey = video.paused ? "pause" : "playing";
       presenceData.smallImageText = video.paused
-      ? (await strings).pause
-      : (await strings).play;
-        if (!video.paused) {
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
-        } 
+        ? (await strings).pause
+        : (await strings).play;
+      if (!video.paused) {
+        presenceData.startTimestamp = timestamps[0];
+        presenceData.endTimestamp = timestamps[1];
+      }
     } else if (path.href) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "เลือกตอน ";
