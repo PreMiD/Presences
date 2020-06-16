@@ -1,17 +1,11 @@
 const presence = new Presence({
   clientId: "682593223948238849"
 });
-const presenceGit = new Presence({
-  clientId: "682593596301508662"
-});
 const presenceCommunity = new Presence({
   clientId: "682593903656173569"
 });
 const presenceAnigifs = new Presence({
   clientId: "682594082274410511"
-});
-const presenceLabs = new Presence({
-  clientId: "682595885880049668"
 });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
