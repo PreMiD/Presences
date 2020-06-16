@@ -36,7 +36,9 @@ presence.on("UpdateData", async () => {
     : true;
   if (playerCheck) {
     const title = document
-      .querySelector(".web-chrome-playback-lcd__song-name-scroll")
+      .querySelector(
+        ".web-chrome-playback-lcd__song-name-scroll-inner-text-wrapper"
+      )
       .textContent.trim();
     const author = document
       .querySelector(
