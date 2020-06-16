@@ -7,8 +7,8 @@ interface InfoXXWindow {
       $data: {
         server: {
           location: string;
-        }
-      }
+        };
+      };
     };
   };
 }
