@@ -12,16 +12,12 @@
     "taigabot.net",
     "anigifs.taigabot.net",
     "api.taigabot.net",
-    "beta.taigabot.net",
     "cdn.taigabot.net",
     "cdnadmin.taigabot.net",
     "community.taigabot.net",
-    "git.taigabot.net",
     "labs.taigabot.net",
-    "legal.taigabot.net",
     "taipl.taigabot.net",
-    "telegram.taigabot.net",
-    "translate.taigabot.net"
+    "telegram.taigabot.net"
   ],
   "version": "1.2.4",
   "logo": "https://cdn.taigabot.net/assets/branding/taiga/premid_logo.png",
