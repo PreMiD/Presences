@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Hans5958",
+    "id": "279855717203050496"
+  },
+  "service": "TrackMania Exchange",
+  "url": [
+    "tm-exchange.com",
+    "www.tm-exchange.com",
+    "united.tm-exchange.com",
+    "tmnforever.tm-exchange.com",
+    "nations.tm-exchange.com",
+    "sunrise.tm-exchange.com",
+    "original.tm-exchange.com",
+    "blog.tm-exchange.com"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/9OFSS6T.png",
+  "thumbnail": "https://i.imgur.com/CKJ2Wqm.png",
+  "color": "#c8c8c8",
+  "tags": [
+    "cars",
+    "racing",
+    "tm",
+    "tmnf",
+    "tmuf",
+    "trackmania-nations-eswc",
+    "trackmania-nations-forever",
+    "trackmania-nations",
+    "trackmania-original",
+    "trackmania-sunrise",
+    "trackmania-united-forever",
+    "trackmania"
+  ],
+  "description": {
+    "en": "TrackMania Exchange (TMX) is the biggest and best TrackMania track-swapping website in the world."
+  },
+  "category": "games"
+}
