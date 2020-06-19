@@ -40,7 +40,10 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
-  } else if(document.location.pathname.startsWith("/direct/inbox") || document.location.pathname.startsWith("/direct/t")) {
+  } else if (
+    document.location.pathname.startsWith("/direct/inbox") ||
+    document.location.pathname.startsWith("/direct/t")
+  ) {
     const presenceData: PresenceData = {
       details: "Direct Messages",
       largeImageKey: "logo"

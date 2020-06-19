@@ -20,7 +20,7 @@
     "taipl.taigabot.net",
     "telegram.taigabot.net"
   ],
-  "version": "2.0.0",
+  "version": "2.0.1",
   "logo": "https://cdn.taigabot.net/assets/branding/taiga/premid_logo.png",
   "thumbnail": "https://cdn.taigabot.net/assets/branding/taiga/premid_banner2.png",
   "color": "#ff006d",
