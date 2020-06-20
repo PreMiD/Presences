@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "Nanashin",
+    "id": "330030557457022986"
+  },
+  "service": "Super Animes",
+  "description": {
+    "en": "",
+    "pt_BR": "",
+    "pt": ""
+  },
+  "url": "www.superanimes.org",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/NgFsXaO.png",
+  "thumbnail": "https://i.imgur.com/n4MzJR0.png",
+  "iframe": true,
+  "color": "#b39c00",
+  "tags": ["manga", "fansub", "Neox"],
+  "category": "others"
+}
