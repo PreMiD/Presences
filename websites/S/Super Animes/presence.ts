@@ -71,8 +71,8 @@ presence.on('UpdateData', async() => {
             presenceData.details = titulo.slice(0, titulo.search('- Super Animes'));
             presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
             presenceData.startTimestamp = tempo;
-        } else if (nome != null) {
-            if (nome.textContent.includes('anime') || nome.textContent.includes('ova') || nome.textContent.includes('filme') || nome.textContent.includes('Filme')) {
+        } else {
+            if ((path.split('/').length - 1) == 3) {
                 if (nome.textContent.includes('Episódio')) {presenceData.details = nome.textContent.slice(0, nome.textContent.search('Episódio')); presenceData.state = nome.textContent.slice(nome.textContent.search('Episódio'))}
                 if (nome.textContent.includes('filme')) {presenceData.details = nome.textContent.slice(0, nome.textContent.search('filme')); presenceData.state = 'F' + nome.textContent.slice(nome.textContent.search('filme')).slice(1)}
                 if (nome.textContent.includes('ova')) {presenceData.details = nome.textContent.slice(0, nome.textContent.search('ova')); presenceData.state = 'O' + nome.textContent.slice(nome.textContent.search('ova')).slice(1)}
@@ -88,7 +88,7 @@ presence.on('UpdateData', async() => {
                         presenceData.smallImageText = 'Pausado'
                     );
                 }
-            } else {
+            } else if ((path.split('/').length - 1) == 2) {
                 presenceData.details = nome.textContent;
                 generosObra.innerText != 'Desconhecido' ? (
                     presenceData.state =  'Gêneros: '+ generosObra.textContent.split(' ').join(', ').slice(1).slice(0, -2)
