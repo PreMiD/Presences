@@ -22,7 +22,6 @@ presence.on('UpdateData', async() => {
     const presenceData: presenceData = {
         largeImageKey: "logo"
     };
-    //Gerais
     const tempo = Math.floor(Date.now() / 1000);
     const path = document.location.pathname;
     const titulo = document.title;
@@ -32,22 +31,14 @@ presence.on('UpdateData', async() => {
     const infoDivTitulo: HTMLElement = document.querySelector("#menuH > div.js_viewCliente > div > p");
     const divPesquisa: HTMLElement = document.querySelector("body > div.search-box");
     const buscador: HTMLInputElement = document.querySelector("#buscador");
-    //Elementos: Página de busca
     const barraPesquisa: HTMLInputElement = document.querySelector("#corpo > div.conteudoBox > div:nth-child(2) > div > input");
-    //Elementos: Paginação
     const paginacao: HTMLSelectElement = document.querySelector("#corpo > div.paginacao > div:nth-child(2) > select");
-    //Elementos: Obras
     const generosObra: HTMLElement = document.querySelector("#corpo > div:nth-child(1) > div:nth-child(2) > div.boxAnime > ul > li:nth-child(1) > span");
-    //Elementos: Lancamentos
     const lancamentosCategorizar: HTMLElement = document.querySelector("#corpo > div:nth-child(2) > div.test > div > a.buttonLink.active");
-    //Elementos: TOP
     const topCategorizar: HTMLElement = document.querySelector("#corpo > div.conteudoBox > div:nth-child(5) > a.buttonLink.active");
-    //Elementos: Hunter
     const selectHunter: HTMLSelectElement = document.querySelector("#corpo > div:nth-child(1) > div.box_content > div > select");
-    //Elementos : Indicacao de Conteúdo
     const indicacaoTipo: HTMLSelectElement = document.querySelector("#conteudoSelect");
     const indicacaoGenero: HTMLSelectElement = document.querySelector("#generoSelect");
-    //Elementos: Perfil
     const nomePerfil: HTMLElement = document.querySelector("#corpo > header > div.perfil_header_photos > div.perfil_box_photo > h1");
     const descricaoPerfil: HTMLElement = document.querySelector("#menu-link-perfil-sobre > ul:nth-child(2) > li.sizeFull");
     const nomeidentificadorPerfilAmigos: HTMLElement = document.querySelector("#corpo > div.conteudoBoxHome > h2");
@@ -150,7 +141,6 @@ presence.on('UpdateData', async() => {
         } else if (nomeidentificadorPerfilAmigos != null && nomeidentificadorPerfilAmigos.textContent.includes('Lista de Amigos')) {
             presenceData.state = 'Amigos';
         }
-        //presenceData.details = 'Perfil de usuário';
         presenceData.startTimestamp = tempo;
     } else if (path.includes('/lancamento')) {
         presenceData.details = 'Página de Lançamentos';
