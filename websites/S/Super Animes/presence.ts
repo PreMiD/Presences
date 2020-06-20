@@ -63,19 +63,19 @@ presence.on('UpdateData', async() => {
         presenceData.startTimestamp = tempo;
     } else if (path.includes('/lista')) {
         presenceData.details = 'Lista de conteúdo';
-        presenceData.state = presenceData.state = presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
+        presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
         presenceData.startTimestamp = tempo;
     } else if (path.includes('/anime') || path.includes('/cartoon') || path.includes('/tokusatsu') || path.includes('/donghua') || path.includes('live-action') || path.includes('ova')) {
         
         if (nome.textContent.includes('- Super Animes')) { 
             presenceData.details = titulo.slice(0, titulo.search('- Super Animes'));
-            presenceData.state = presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
+            presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
             presenceData.startTimestamp = tempo;
         } else if (nome != null) {
             if (nome.textContent.includes('anime') || nome.textContent.includes('ova') || nome.textContent.includes('filme') || nome.textContent.includes('Filme')) {
-                if (nome.textContent.includes('Episódio')) {presenceData.details = nome.textContent.slice(0, nome.textContent.search('Episódio')); presenceData.state = nome.textContent.slice(nome.textContent.search('Episódio'));}
-                if (nome.textContent.includes('filme')) {presenceData.details = nome.textContent.slice(0, nome.textContent.search('filme')); presenceData.state = 'F' + nome.textContent.slice(nome.textContent.search('filme')).slice(1);}
-                if (nome.textContent.includes('ova')) {presenceData.details = nome.textContent.slice(0, nome.textContent.search('ova')); presenceData.state = 'O' + nome.textContent.slice(nome.textContent.search('ova')).slice(1);}
+                if (nome.textContent.includes('Episódio')) {presenceData.details = nome.textContent.slice(0, nome.textContent.search('Episódio')); presenceData.state = nome.textContent.slice(nome.textContent.search('Episódio'))}
+                if (nome.textContent.includes('filme')) {presenceData.details = nome.textContent.slice(0, nome.textContent.search('filme')); presenceData.state = 'F' + nome.textContent.slice(nome.textContent.search('filme')).slice(1)}
+                if (nome.textContent.includes('ova')) {presenceData.details = nome.textContent.slice(0, nome.textContent.search('ova')); presenceData.state = 'O' + nome.textContent.slice(nome.textContent.search('ova')).slice(1)}
                 if (played) {
                     (!paused) ? (
                         timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
@@ -86,7 +86,7 @@ presence.on('UpdateData', async() => {
                     ) : (
                         presenceData.smallImageKey = 'pausado',
                         presenceData.smallImageText = 'Pausado'
-                    )
+                    );
                 }
             } else {
                 presenceData.details = nome.textContent;
@@ -106,7 +106,7 @@ presence.on('UpdateData', async() => {
             presenceData.details = 'Jogando Jogo da Forca';
             presenceData.state = 'Sala: '+ nome.textContent.slice(14);
         } else if (titulo == 'Jogo da Forca - Super Animes') {
-            presenceData.state = 'Escolhendo uma partida...' 
+            presenceData.state = 'Escolhendo uma partida...';
         }
     } else if (path.includes('/perfil')) {
         presenceData.details =  'Perfil: ' + nomePerfil.innerText;
@@ -194,7 +194,7 @@ presence.on('UpdateData', async() => {
         presenceData.startTimestamp = tempo;
     } else if (path == '/faq') {
         presenceData.details = 'Página do FAQ';
-        presenceData.state = 'Página de perguntas frequentes.'
+        presenceData.state = 'Página de perguntas frequentes.';
         presenceData.startTimestamp = tempo;
     } else if (path == '/sugestao') {
         presenceData.details = 'Pagina de sugestões';
@@ -251,7 +251,7 @@ presence.on('UpdateData', async() => {
                 if (infoDivTitulo.textContent.includes('Conteúdo(s) marcado(s) como Favorito.')) {
                     presenceData.state = 'Em menu de favoritos';
                 } else if (infoDivTitulo.textContent.includes('Você tem') && infoDivTitulo.textContent.includes('notificações!')) {
-                    presenceData.state = 'Em menu de notificações'
+                    presenceData.state = 'Em menu de notificações';
                 } else if (infoDivTitulo.textContent.includes('Perfil/Perfis com conteúdos a serem visto')) {
                     presenceData.state = 'Em menu de conteúdos a serem visto';
                 } else if (infoDivTitulo.textContent.includes('Conteúdo(s) marcado(s) como Já Visto.')) {
@@ -259,7 +259,7 @@ presence.on('UpdateData', async() => {
                 } else if (infoDivTitulo.textContent.includes('Conteúdo(s) marcado(s) como Seguindo.')) {
                     presenceData.state = 'Em menu de conteúdos sendo acompanhados';
                 } else if (infoDivTitulo.textContent.includes('Conteúdo(s) marcado(s) como Ver Depois.')) {
-                    presenceData.state = 'Em menu de assistir depois'
+                    presenceData.state = 'Em menu de assistir depois';
                 } else if (infoDivTitulo.textContent.includes('Conteúdo(s) marcado(s) como Pausado.')) {
                     presenceData.state = 'Em menu de pausados';
                 } else if (infoDivTitulo.textContent.includes('Conteúdo(s) marcado(s) como Dropado/Arquivado.')) {
@@ -274,4 +274,4 @@ presence.on('UpdateData', async() => {
         }
     }
     presence.setActivity(presenceData);
-})
+});
