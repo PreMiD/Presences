@@ -7,29 +7,14 @@ let playback;
 let browsingStamp = Math.floor(Date.now() / 1000);
 
 /**
- * Get Formatted Time In Seconds
- * @param {string} formattedTime Time formatted as HH:MM:SS or MM:SS
- */
-function formattedTimeToSeconds(formattedTime: string): number {
-  const b: Array<string> = formattedTime.split(":");
-  if (b.length === 3) {
-    return +b[0] * 60 * 60 + +b[1] * 60 + +b[2];
-  } else {
-    return +b[0] * 60 + +b[1];
-  }
-}
-
-/**
  * Get Timestamps
- * @param {string} videoTimeFormatted Current video time formatted as HH:MM:SS or MM:SS
- * @param {string} videoDurationFormatted Video duration formatted as HH:MM:SS or MM:SS
+ * @param {number} videoTime Current video time in seconds
+ * @param {number} videoDurationFormatted Video duration in seconds
  */
 function getTimestamps(
-  videoTimeFormatted: string,
-  videoDurationFormatted: string
+  videoTime: number,
+  videoDuration: number
 ): Array<number> {
-  const videoTime = formattedTimeToSeconds(videoTimeFormatted);
-  const videoDuration = formattedTimeToSeconds(videoDurationFormatted);
   const startTime = Date.now();
   const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
@@ -41,7 +26,7 @@ if (lastPlaybackState != playback) {
 }
 
 presence.on("UpdateData", async () => {
-  const re = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
+  const re: RegExp = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
   playback = re.exec(window.location.href) !== null ? true : false;
   const presenceData: PresenceData = {
     largeImageKey: "animex"
@@ -54,40 +39,32 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
     presence.setActivity(presenceData, true);
   } else {
-    const paused =
-      document.querySelector("#animeme").classList[2] !== "jw-state-playing";
+    const video: HTMLVideoElement = document
+      .evaluate("//video[@class='jw-video jw-reset']", document)
+      .iterateNext() as HTMLVideoElement;
     const videoTitle: Node = document
       .evaluate("//body//h1[1]", document)
       .iterateNext();
     const episode: Array<string> = videoTitle.textContent.split(" - Episode ");
-    const currentTime: string = document
-      .evaluate(
-        "//div[@class='jw-icon jw-icon-inline jw-text jw-reset jw-text-elapsed']",
-        document
-      )
-      .iterateNext().textContent;
-    const duration: string = document
-      .evaluate(
-        "//div[@class='jw-icon jw-icon-inline jw-text jw-reset jw-text-duration']",
-        document
-      )
-      .iterateNext().textContent;
-    if (!paused) {
-      const timestamps: Array<number> = getTimestamps(currentTime, duration);
+    if (!video.paused) {
+      const timestamps: Array<number> = getTimestamps(
+        video.currentTime,
+        video.duration
+      );
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
     } else {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-    presenceData.smallImageKey = paused ? "paused" : "playing";
-    presenceData.smallImageText = paused ? "Paused" : "Playing";
+    presenceData.smallImageKey = video.paused ? "paused" : "playing";
+    presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
     presenceData.details =
       episode[0] !== null ? episode[0] : "Title not found...";
     presenceData.state =
       episode[1] !== null ? "Episode " + episode[1] : "Episode not found...";
 
-    presence.setActivity(presenceData, !paused);
+    presence.setActivity(presenceData, !video.paused);
   }
 });
