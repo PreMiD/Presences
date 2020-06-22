@@ -1,4 +1,4 @@
-var presence = new Presence({clientId: "704186478410072065"});
+let presence = new Presence({clientId: "704186478410072065"});
 
 let channelName: HTMLElement,
     channelNumber: HTMLElement,
