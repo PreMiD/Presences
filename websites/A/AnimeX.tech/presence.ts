@@ -1,9 +1,10 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "663821800014348300"
 });
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
+
+let lastPlaybackState = null;
+let playback;
+let browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -11,11 +12,14 @@ if (lastPlaybackState != playback) {
 }
 
 presence.on("UpdateData", async () => {
-  var re = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
+  let re = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
 
-  playback = re.exec((<any>window).location.href) !== null ? true : false;
-
-  var presenceData: PresenceData = {
+  playback = re.exec(window.location.href) !== null ? true : false;
+  let state =
+    document.querySelector("#animeme").classList[2] === "jw-state-playing"
+      ? "Playing"
+      : "Paused";
+  let presenceData: PresenceData = {
     largeImageKey: "animex"
   };
 
@@ -26,20 +30,15 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
     presence.setActivity(presenceData, true);
   } else {
-    var videoTitle: any;
-    var episode: any;
-    var state =
-      document.querySelector("#animeme").classList[2] === "jw-state-playing"
-        ? "Playing"
-        : "Paused";
+    let videoTitle: any;
+    let episode: any;
+
     videoTitle = document.evaluate("//body//h1[1]", document).iterateNext();
     episode = videoTitle.innerText.split(" - Episode ");
 
     presenceData.smallImageKey = state.toLowerCase();
     presenceData.smallImageText = state;
-
     presence.setTrayTitle(videoTitle.innerText);
-
     presenceData.details =
       episode[0] !== null ? episode[0] : "Title not found...";
     presenceData.state =
@@ -47,31 +46,21 @@ presence.on("UpdateData", async () => {
         ? "Episode " +
           episode[1] +
           " - " +
-          (<any>(
-            document
-              .evaluate(
-                "//div[@class='jw-icon jw-icon-inline jw-text jw-reset jw-text-elapsed']",
-                document
-              )
-              .iterateNext()
-          )).textContent +
+          document
+            .evaluate(
+              "//div[@class='jw-icon jw-icon-inline jw-text jw-reset jw-text-elapsed']",
+              document
+            )
+            .iterateNext().textContent +
           "/" +
-          (<any>(
-            document
-              .evaluate(
-                "//div[@class='jw-icon jw-icon-inline jw-text jw-reset jw-text-duration']",
-                document
-              )
-              .iterateNext()
-          )).textContent
+          document
+            .evaluate(
+              "//div[@class='jw-icon jw-icon-inline jw-text jw-reset jw-text-duration']",
+              document
+            )
+            .iterateNext().textContent
         : "Episode not found...";
-    if (true) {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
-    }
 
-    if (videoTitle !== null) {
-      presence.setActivity(presenceData, true);
-    }
+    presence.setActivity(presenceData, true);
   }
 });
