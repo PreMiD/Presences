@@ -1,0 +1,25 @@
+{
+  "author": {
+    "name": "NotMarek",
+    "id": "206299359007080450"
+  },
+  "service": "AnimeX",
+  "description": {
+    "en": "AnimeX is a free anime streaming site.",
+    "ro": "AnimeX este un site de streaming gratuit pentru anime.",
+    "pt_BR": "AnimeX é um site de streaming de animes gratuito.",
+    "fr": "AnimeX est un site de streaming d'animés gratuit.",
+    "uk_UA": "AnimeX - безкоштовний веб-сайт для стрімінгу аніме.",
+    "nl": "AnimeX is een gratis anime streaming-site."
+  },
+  "url": "animex.tech",
+  "version": "1.0.0",
+  "logo": "https://i.kawaii.sh/63~NXHP.png",
+  "thumbnail": "https://i.kawaii.sh/HIkfJC8.png",
+  "color": "#FC0036",
+  "tags": [
+    "video",
+    "anime"
+  ],
+  "category": "anime"
+}
