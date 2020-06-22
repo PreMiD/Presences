@@ -12,14 +12,14 @@ if (lastPlaybackState != playback) {
 }
 
 presence.on("UpdateData", async () => {
-  let re = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
+  const re = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
 
   playback = re.exec(window.location.href) !== null ? true : false;
-  let state =
+  const state =
     document.querySelector("#animeme").classList[2] === "jw-state-playing"
       ? "Playing"
       : "Paused";
-  let presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "animex"
   };
 
@@ -30,15 +30,14 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
     presence.setActivity(presenceData, true);
   } else {
-    let videoTitle: any;
-    let episode: any;
-
-    videoTitle = document.evaluate("//body//h1[1]", document).iterateNext();
-    episode = videoTitle.innerText.split(" - Episode ");
+    const videoTitle: Node = document
+      .evaluate("//body//h1[1]", document)
+      .iterateNext();
+    const episode: Array<string> = videoTitle.textContent.split(" - Episode ");
 
     presenceData.smallImageKey = state.toLowerCase();
     presenceData.smallImageText = state;
-    presence.setTrayTitle(videoTitle.innerText);
+    presence.setTrayTitle(videoTitle.textContent);
     presenceData.details =
       episode[0] !== null ? episode[0] : "Title not found...";
     presenceData.state =
