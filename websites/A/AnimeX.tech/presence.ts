@@ -48,8 +48,8 @@ presence.on("UpdateData", async () => {
     const episode: Array<string> = videoTitle.textContent.split(" - Episode ");
     if (!video.paused) {
       const timestamps: Array<number> = getTimestamps(
-        video.currentTime,
-        video.duration
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
       );
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
