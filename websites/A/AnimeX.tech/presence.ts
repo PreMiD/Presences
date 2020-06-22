@@ -26,7 +26,7 @@ if (lastPlaybackState != playback) {
 }
 
 presence.on("UpdateData", async () => {
-  const re: RegExp = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
+  const re = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
   playback = re.exec(window.location.href) !== null ? true : false;
   const presenceData: PresenceData = {
     largeImageKey: "animex"
