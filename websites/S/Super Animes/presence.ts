@@ -29,8 +29,6 @@ presence.on('UpdateData', async() => {
         nome: HTMLElement = document.querySelector("div.boxBarraInfo > h1"),
         infoDiv: HTMLElement = document.querySelector("#menuH > div.js_viewCliente"),
         infoDivTitulo: HTMLElement = document.querySelector("#menuH > div.js_viewCliente > div > p"),
-        divPesquisa: HTMLElement = document.querySelector("body > div.search-box"),
-        buscador: HTMLInputElement = document.querySelector("#buscador"),
         barraPesquisa: HTMLInputElement = document.querySelector("#corpo > div.conteudoBox > div:nth-child(2) > div > input"),
         paginacao: HTMLSelectElement = document.querySelector("#corpo > div.paginacao > div:nth-child(2) > select"),
         generosObra: HTMLElement = document.querySelector("#corpo > div:nth-child(1) > div:nth-child(2) > div.boxAnime > ul > li:nth-child(1) > span"),
@@ -232,15 +230,10 @@ presence.on('UpdateData', async() => {
     
     if (presenceData.details == null) {
         presenceData.details = 'Navegando...';
-    }
-
-    if (presenceData.startTimestamp == null) {
         presenceData.startTimestamp = tempo;
     }
 
-    if (divPesquisa != null && infoDiv.style.display != 'none' && document.querySelector('body').classList.contains('noScroll')) {
-        presenceData.state = 'Pesquisando: ' + buscador.value;
-    }
+
     if (infoDiv != null && infoDiv.style.display != 'none') {
         if (infoDivTitulo != null) {
             if (infoDivTitulo.textContent.includes('Você precisa esta logado para visualizar suas Notificações!') || 
