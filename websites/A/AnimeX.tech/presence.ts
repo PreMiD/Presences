@@ -11,7 +11,7 @@ let browsingStamp = Math.floor(Date.now() / 1000);
  * @param {string} formattedTime Time formatted as HH:MM:SS or MM:SS
  */
 function formattedTimeToSeconds(formattedTime: string): number {
-  var b = formattedTime.split(":");
+  const b: Array<string> = formattedTime.split(":");
   if (b.length === 3) {
     return +b[0] * 60 * 60 + +b[1] * 60 + +b[2];
   } else {
@@ -28,10 +28,10 @@ function getTimestamps(
   videoTimeFormatted: string,
   videoDurationFormatted: string
 ): Array<number> {
-  var videoTime = formattedTimeToSeconds(videoTimeFormatted);
-  var videoDuration = formattedTimeToSeconds(videoDurationFormatted);
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const videoTime = formattedTimeToSeconds(videoTimeFormatted);
+  const videoDuration = formattedTimeToSeconds(videoDurationFormatted);
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
       )
       .iterateNext().textContent;
     if (!paused) {
-      let timestamps: Array<number> = getTimestamps(currentTime, duration);
+      const timestamps: Array<number> = getTimestamps(currentTime, duration);
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
     } else {
