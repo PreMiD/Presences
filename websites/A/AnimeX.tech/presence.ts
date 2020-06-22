@@ -13,23 +13,22 @@ if (lastPlaybackState != playback) {
 
 presence.on("UpdateData", async () => {
   const re = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
-
   playback = re.exec(window.location.href) !== null ? true : false;
-  const state =
-    document.querySelector("#animeme").classList[2] === "jw-state-playing"
-      ? "Playing"
-      : "Paused";
   const presenceData: PresenceData = {
     largeImageKey: "animex"
   };
 
-  if (!playback) {
+  if (playback === false) {
     presenceData.details = "Browsing...";
     presenceData.startTimestamp = browsingStamp;
     delete presenceData.state;
     delete presenceData.smallImageKey;
     presence.setActivity(presenceData, true);
   } else {
+    const state =
+      document.querySelector("#animeme").classList[2] === "jw-state-playing"
+        ? "Playing"
+        : "Paused";
     const videoTitle: Node = document
       .evaluate("//body//h1[1]", document)
       .iterateNext();
