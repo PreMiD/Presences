@@ -1,4 +1,4 @@
-let presence = new Presence({clientId: "704186478410072065"});
+let const = new Presence({clientId: "704186478410072065"});
 
 let channelName: HTMLElement,
     channelNumber: HTMLElement,
