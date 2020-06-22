@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "659516842691395585"
+    clientId: "721747730774491187"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -44,17 +44,22 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    if (document.querySelector("#content h1 > a")) {
-      data.details = document.querySelector("#content h1 > a").textContent;
+    data.details = document.querySelector(
+      "body div.summary-block > p > a"
+    ).textContent;
+    if (
+      document
+        .querySelector("body div.summary-block > p")
+        ?.firstChild?.textContent.includes("حلقة")
+    )
       data.state = document
-        .querySelector("#content h1")
-        .textContent.substr(
+        .querySelector("body div.summary-block > p")
+        .firstChild.textContent.substr(
           0,
-          document.querySelector("#content h1").textContent.indexOf("من")
+          document
+            .querySelector("body div.summary-block > p")
+            .firstChild.textContent.indexOf("من")
         );
-    } else {
-      data.details = document.querySelector("#content h3").textContent;
-    }
 
     data.smallImageKey = video.paused ? "pause" : "play";
     data.smallImageText = video.paused

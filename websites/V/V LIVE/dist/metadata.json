@@ -4,6 +4,7 @@
     "id": "241278257335500811"
   },
   "service": "V LIVE",
+  "altnames": ["VLIVE"],
   "description": {
     "en": "V LIVE is a global entertainment platform that connects Korean stars and their fans.",
     "nl": "V LIVE is een wereldwijd entertainmentplatform dat Koreaanse sterren en hun fans met elkaar verbindt."
@@ -13,8 +14,8 @@
     "channels.vlive.tv",
     "vtoday.vlive.tv"
   ],
-  "version": "1.4.4",
-  "logo": "https://i.imgur.com/p3yyD3k.png",
+  "version": "1.4.6",
+  "logo": "https://i.imgur.com/K6z2UeE.png",
   "thumbnail": "https://i.imgur.com/dLde4Ko.png",
   "color": "#54f7ff",
   "tags": [

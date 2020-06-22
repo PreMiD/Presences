@@ -5,7 +5,7 @@ import { green, yellow, red, blue } from 'chalk';
 import * as fs from 'fs';
 import { validate } from 'jsonschema';
 
-const latestMetadataSchema = 'https://schemas.premid.app/metadata/1.0';
+const latestMetadataSchema = 'https://schemas.premid.app/metadata/1.1';
 
 const stats = {
     validated: 0,
@@ -15,7 +15,7 @@ const stats = {
 
 const validated = (service: string): void => { console.log(green(`✔ ${service}`)); stats.validated++ };
 const validatedWithWarnings = (service: string, warning: string): void => { console.log(yellow(`✔ ${service} (${warning})`)); stats.validatedWithWarnings++ };
-const failedToValidate = (service: string, errors: string[]): void => { console.log(red(`✘ ${service} ${errors.map(e => `  -> ${e}`).join('\n')}`)); stats.failedToValidate++ };
+const failedToValidate = (service: string, errors: string[]): void => { console.log(red(`✘ ${service}\n${errors.map(e => `  -> ${e}`).join('\n')}`)); stats.failedToValidate++ };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const loadMetadata = (path: string): any => JSON.parse(fs.readFileSync(path, 'utf-8'));
