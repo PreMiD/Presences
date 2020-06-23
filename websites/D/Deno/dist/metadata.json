@@ -8,7 +8,7 @@
     "en": "Deno is a runtime for JavaScript and TypeScript that is based on the V8 JavaScript engine and the Rust programming language. It was created by Ryan Dahl, original creator of Node.js, and is focused on productivity."
   },
   "url": ["deno.land", "doc.deno.land"],
-  "version": "1.0.1",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/a/XjH9TPG.png",
   "thumbnail": "https://i.imgur.com/a/LInQbj5.png",
   "color": "#f9f9f9",
