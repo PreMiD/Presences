@@ -4,9 +4,6 @@ const presence = new Presence({
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 let moduleName: HTMLElement;
-let host: string;
-
-const host = document.location.hostname;
 
 // checkmate javascript
 function pathIncludes(string: string): boolean {
@@ -61,7 +58,7 @@ presence.on("UpdateData", async () => {
       default:
         presenceData.details = "Home";
     }
-  } else if (host === "doc.deno.land") {
+  } else if (document.location.hostname === "doc.deno.land") {
     presenceData.state = "Viewing Deno API";
 
     presenceData.startTimestamp = browsingStamp;
