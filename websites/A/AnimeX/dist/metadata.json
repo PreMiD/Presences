@@ -6,7 +6,7 @@
   "service": "AnimeX",
   "description": {
     "en": "AnimeX is a free anime streaming site without ads.",
-    "cs": "AnimeX je bezplatná stránka pro streamování anime bez reklam."
+    "cs_CZ": "AnimeX je bezplatná stránka pro streamování anime bez reklam."
   },
   "url": "animex.tech",
   "version": "1.0.0",
