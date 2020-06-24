@@ -7,7 +7,6 @@ presence.on("UpdateData", async () => {
   };
   const path: any = document.location.pathname;
   let PesquisaTexto: any,
-    UsuarioTexto: any,
     OrdenarTexto: any,
     OrdenarTextoObra: any,
     GeneroTexto: any, 
@@ -39,12 +38,12 @@ presence.on("UpdateData", async () => {
       }
     } else if (path.includes("/projects/")) {
       presenceData.details = "Todos os Projetos";
-      OrdenarTexto = document.querySelector("body > div.wrap > div > div > div.c-page-content.style-1 > div > div > div > div > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active")
+      OrdenarTexto = document.querySelector("body > div.wrap > div > div > div.c-page-content.style-1 > div > div > div > div > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active");
       if (OrdenarTexto != null) {
         presenceData.state = "Ordenar por: " + OrdenarTexto.innerText;
       }
     } else if (path.includes("/manga-genre/")) {
-      OrdenarTextoObra = document.querySelector("body > div.wrap > div > div > div.c-page-content.style-1 > div > div > div > div > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active")
+      OrdenarTextoObra = document.querySelector("body > div.wrap > div > div > div.c-page-content.style-1 > div > div > div > div > div.main-col-inner > div > div.c-page__content > div.tab-wrap > div > div.c-nav-tabs > ul > li.active");
       GeneroTexto = document.querySelector("body > div.wrap > div > div > div.c-page-content.style-1 > div > div > div > div > div.main-col-inner > div > div.entry-header > div > div > h1");  
       presenceData.details = "Gênero: " + GeneroTexto.innerText;
       if (OrdenarTextoObra != null) {
@@ -151,7 +150,7 @@ presence.on("UpdateData", async () => {
       );
       const dataPostagem: HTMLElement = document.querySelector("#post-497 > div.entry-header > div > div.entry-meta > div.post-on > div > span.posted-on > a");
       if (postagemData.innerText.includes("postado em")) {
-        presenceData.details = "Postagem | " + dataPostagem.textContent;;
+        presenceData.details = "Postagem | " + dataPostagem.textContent;
         presenceData.state = document.title.slice(0, document.title.search("-") - 15);
       }
     } else if (path.split("/").length - 1 == 2) {
@@ -171,12 +170,12 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = 'logo';
   }
 
-  UsuarioTexto = document.querySelector(
+  const UsuarioTexto = document.querySelector(
     "body > div.wrap > div > header > div.c-sub-header-nav.with-border.hide-sticky-menu > div > div > div.c-modal_item > div > span"
   );
   if (UsuarioTexto != null && PesquisaTexto == null) {
     presenceData.smallImageKey = 'user';
-    presenceData.smallImageText = UsuarioTexto.innerText.slice(UsuarioTexto.innerText.search(",") + 1)
+    presenceData.smallImageText = UsuarioTexto.innerText.slice(UsuarioTexto.innerText.search(",") + 1);
   }
   presence.setActivity(presenceData);
 });
