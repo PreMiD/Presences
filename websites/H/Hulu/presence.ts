@@ -183,13 +183,16 @@ presence.on("UpdateData", async () => {
         startTimestamp = undefined;
         endTimestamp = undefined;
       }
-    }
-    else{
+    } else {
       video = document.querySelector("video#content-video-player");
       details = "Viewing Watch History";
       if (video) {
-        title = document.querySelector("#web-player-app div.PlayerMetadata__titleText");
-        const content = document.querySelector("#web-player-app div.PlayerMetadata__subTitle");
+        title = document.querySelector(
+          "#web-player-app div.PlayerMetadata__titleText"
+        );
+        const content = document.querySelector(
+          "#web-player-app div.PlayerMetadata__subTitle"
+        );
         const timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)

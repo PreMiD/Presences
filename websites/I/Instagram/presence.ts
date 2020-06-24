@@ -26,7 +26,6 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/p")) {
     const presenceData: PresenceData = {
       details: "Viewing a post",
-      state: "NAME-HERE",
       largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
@@ -38,6 +37,15 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/nametag")) {
     const presenceData: PresenceData = {
+      largeImageKey: "logo"
+    };
+    presence.setActivity(presenceData);
+  } else if (
+    document.location.pathname.startsWith("/direct/inbox") ||
+    document.location.pathname.startsWith("/direct/t")
+  ) {
+    const presenceData: PresenceData = {
+      details: "Direct Messages",
       largeImageKey: "logo"
     };
     presence.setActivity(presenceData);

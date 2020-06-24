@@ -5,7 +5,7 @@ import { green, yellow, red, blue } from 'chalk';
 import * as fs from 'fs';
 import { validate } from 'jsonschema';
 
-const latestMetadataSchema = 'https://schemas.premid.app/metadata/1.0';
+const latestMetadataSchema = 'https://schemas.premid.app/metadata/1.1';
 
 const stats = {
     validated: 0,
