@@ -9,26 +9,26 @@ interface ItemMap {
 const browsingTimestamp = Math.floor(Date.now() / 1000);
 
 const searchTypeMap: ItemMap = {
-  web: 'Searching on the web',
-  news: 'Searching the news',
-  images: 'Searching images',
-  videos: 'Searching videos',
-  social: 'Searching social media',
-  shopping: 'Searching for products'
+  web: "Searching on the web",
+  news: "Searching the news",
+  images: "Searching images",
+  videos: "Searching videos",
+  social: "Searching social media",
+  shopping: "Searching for products"
 };
 
 const searchMusicTypeMap: ItemMap = {
-  overview: 'Searching music',
-  albums: 'Searching music albums',
-  artists: 'Searching music artists',
-  songs: 'Searching songs'
+  overview: "Searching music",
+  albums: "Searching music albums",
+  artists: "Searching music artists",
+  songs: "Searching songs"
 };
 
 const searchJuniorTypeMap: ItemMap = {
-  web: 'Searching on the web',
-  images: 'Searching images',
-  videos: 'Searching videos',
-  education: 'Searching educational content'
+  web: "Searching on the web",
+  images: "Searching images",
+  videos: "Searching videos",
+  education: "Searching educational content"
 };
 
 presence.on("UpdateData", async () => {
@@ -40,13 +40,13 @@ presence.on("UpdateData", async () => {
   let query: URLSearchParams = null;
 
   if (location.hostname === "www.qwant.com") {
-    const firstPath = location.pathname.split('/')[1];
+    const firstPath = location.pathname.split("/")[1];
     switch (firstPath) {
       case "":
         query = new URLSearchParams(location.search);
-        if (query.has('q')) {
-          data.details = searchTypeMap[query.get('t')];
-          data.state = query.get('q');
+        if (query.has("q")) {
+          data.details = searchTypeMap[query.get("t")];
+          data.state = query.get("q");
         } else data.details = "Home";
         break;
       case "music":
@@ -54,9 +54,9 @@ presence.on("UpdateData", async () => {
         data.smallImageText = "Qwant Music";
         if (location.pathname === "/music/search") {
           query = new URLSearchParams(location.search);
-          if (query.has('q')) {
-            data.details = searchMusicTypeMap[query.get('t')];
-            data.state = query.get('q');
+          if (query.has("q")) {
+            data.details = searchMusicTypeMap[query.get("t")];
+            data.state = query.get("q");
           }
         } else data.details = "Music Home";
         break;
@@ -71,17 +71,18 @@ presence.on("UpdateData", async () => {
     query = new URLSearchParams(location.search);
     switch (location.pathname) {
       case "/":
-        if (query.has('q')) {
-          data.details = searchJuniorTypeMap[query.get('type')] + " in Qwant Junior";
-          data.state = query.get('q');
+        if (query.has("q")) {
+          data.details =
+            searchJuniorTypeMap[query.get("type")] + " in Qwant Junior";
+          data.state = query.get("q");
         } else data.details = "Junior Home";
         break;
       case "/news":
         data.smallImageKey = "news";
         data.smallImageText = "Qwant Junior News";
-        if (query.has('q')) {
+        if (query.has("q")) {
           data.details = "Searching the news on Qwant Junior";
-          data.state = query.get('q');
+          data.state = query.get("q");
         } else data.details = "Junior News Home";
         break;
     }

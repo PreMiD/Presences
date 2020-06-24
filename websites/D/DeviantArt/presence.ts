@@ -1,32 +1,32 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "664057766809436161"
 });
 
-var currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/"),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  presenceData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
+let currentURL = new URL(document.location.href),
+  currentPath = currentURL.pathname.slice(1).split("/");
+const browsingStamp = Math.floor(Date.now() / 1000);
+let presenceData: PresenceData = {
+  details: "Viewing an unsupported page",
+  largeImageKey: "lg",
+  startTimestamp: browsingStamp
+};
+const updateCallback = {
+  _function: null as Function,
+  get function(): Function {
+    return this._function;
   },
-  updateCallback = {
-    _function: null as Function,
-    get function(): Function {
-      return this._function;
-    },
-    set function(parameter) {
-      this._function = parameter;
-    },
-    get present(): boolean {
-      return this._function !== null;
-    }
-  };
+  set function(parameter) {
+    this._function = parameter;
+  },
+  get present(): boolean {
+    return this._function !== null;
+  }
+};
 
 /**
  * Initialize/reset presenceData.
  */
-function resetData(): void {
+const resetData = (): void => {
   currentURL = new URL(document.location.href);
   currentPath = currentURL.pathname.slice(1).split("/");
   presenceData = {
@@ -34,12 +34,12 @@ function resetData(): void {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
-}
+};
 
 /**
  * Function definitions for logging-related things.
  */
-var logHandler = {
+const logHandler = {
   /**
    * Handles not supported pages.
    * @param isCritical If the URL is essential to the operation, this should be true, so it will output an error, not a warning.
@@ -75,52 +75,52 @@ var logHandler = {
  * Search for URL parameters.
  * @param urlParam The parameter that you want to know about the value.
  */
-function getURLParam(urlParam: string): string {
+const getURLParam = (urlParam: string): string => {
   return currentURL.searchParams.get(urlParam);
-}
+};
 
 ((): void => {
   /*
 
-		For future developers:
+	For future developers:
 
-		These domains are supported.
-		- www.deviantart.com
-		- about.deviantart.com
-		- chat.deviantart.com
-		- forum.deviantart.com
-		- groups.deviantart.com
-		- portfolio.deviantart.com
-		- shop.deviantart.com
-		- www.deviantartsupport.com
-		- www.eclipsefeedback.com
-		- deviantartads.com
-		- sta.sh
-		- wallpaper.deviantart.com (redirects to https://www.deviantart.com/customization/wallpaper/)
+	These domains are supported. 
+	- www.deviantart.com
+	- about.deviantart.com
+	- chat.deviantart.com
+	- forum.deviantart.com
+	- groups.deviantart.com
+	- portfolio.deviantart.com
+	- shop.deviantart.com
+	- www.deviantartsupport.com
+	- www.eclipsefeedback.com
+	- deviantartads.com
+	- sta.sh
+	- wallpaper.deviantart.com (redirects to https://www.deviantart.com/customization/wallpaper/)
 
-		These domains will be supported in the future.
-		- *.daportfolio.com
+	These domains will be supported in the future.
+	- *.daportfolio.com
 
 	*/
 
   if (currentURL.hostname === "www.deviantart.com") {
-    let loadedPath: string,
+    let loadedPath: Array<string> = [],
       forceUpdate = false,
       presenceDataPlaced: PresenceData = {},
       retries = 0,
       profileType: string,
       websiteTheme: string;
 
-    // This one decides if the current theme is the old one or the new one, also known as Eclipse.
+    /* This one decides if the current theme is the old one or the new one, also known as Eclipse. */
     if (document.querySelector("table#overhead") === null)
       websiteTheme = "eclipse";
     else websiteTheme = "old";
 
-    // This one decides if the current page belongs to an user or a group
+    /* This one decides if the current page belongs to an user or a group */
     if (document.querySelector("#group")) profileType = "group";
     else profileType = "user";
 
-    const lastItem = (array: NodeList | Array<any>): any => {
+    const lastItem = (array: NodeList | Array<unknown>): unknown => {
       return array[array.length - 1];
     };
 
@@ -138,8 +138,9 @@ function getURLParam(urlParam: string): string {
           }
         } else {
           try {
-            return lastItem(document.querySelectorAll("h1 .author .u .u"))
-              .textContent;
+            return (lastItem(
+              document.querySelectorAll("h1 .author .u .u")
+            ) as Element).textContent;
           } catch {
             return document.querySelector("h1 .u .u").textContent;
           }
@@ -169,17 +170,21 @@ function getURLParam(urlParam: string): string {
     };
 
     updateCallback.function = (): void => {
-      if (loadedPath !== currentPath.join("/") || forceUpdate) {
-        loadedPath = currentPath.join("/");
-        try {
-          //
-          // Section 1
-          // This section includes the homepage and similar pages.
-          //
+      if (loadedPath !== currentPath || forceUpdate) {
+        loadedPath = currentPath;
 
-          // This needs to be on the top since the 404 errors has no fixed URL.
+        try {
+          /*
+
+					Section 1
+					This section includes the homepage and similar pages.
+
+					*/
+
           if (currentPath[0] === "") {
             presenceData.details = "Viewing the home page";
+
+            /* This needs to be on the top since the 404 errors has no fixed URL. */
           } else if (
             document.querySelector(".error-400") ||
             document.querySelector(".error-401") ||
@@ -218,7 +223,7 @@ function getURLParam(urlParam: string): string {
           ) {
             presenceData.details = "On a non-existent page";
 
-            // The functions below is only valid on the Eclipse theme.
+            /* The functions below is only valid on the Eclipse theme. */
           } else if (currentPath[0] === "deviations") {
             presenceData.details = "Viewing deviations";
             presenceData.state = currentPath
@@ -236,7 +241,7 @@ function getURLParam(urlParam: string): string {
             if (websiteTheme === "eclipse")
               presenceData.state = (document.querySelector(
                 "#daily-deviation-picker"
-              ) as HTMLInputElement).value;
+              ) as HTMLSelectElement).value;
             else
               presenceData.state = document
                 .querySelector(".dailyDevCurDate")
@@ -258,7 +263,7 @@ function getURLParam(urlParam: string): string {
           } else if (currentPath[0] === "commissions") {
             presenceData.details = "Viewing commissions";
 
-            // The function below is valid on the Eclipse theme and the old theme.
+            /* The functions below is valid on the Eclipse theme and the old theme. */
           } else if (currentPath[0] === "tag") {
             presenceData.details = "Viewing a tag";
             presenceData.state = `#${currentPath[1]}`;
@@ -266,21 +271,21 @@ function getURLParam(urlParam: string): string {
             presenceData.details = "Searching something";
             presenceData.state = getURLParam("q");
           } else if (currentPath[0] === "notifications") {
+            /* Detailed infos, such as what section does the user sees, might be implemented but disabled by default. */
             if (currentPath[1] === "notes")
               presenceData.details = "Reading notes";
             if (currentPath[1] === "watch")
               presenceData.details = "Viewing the watch list";
             else presenceData.details = "Reading notifications";
-            // Detailed infos, such as what section does the user sees, might be implemented but disabled by default.
           } else if (currentPath[0] === "settings") {
+            /* Detailed infos might be disabled by default. */
             presenceData.details = "Doing some settings";
-            // Detailed infos might be disabled by default.
           } else if (currentPath[0] === "account") {
+            /* This might expose some stuff, because the page shows orders, points, and earnings. Additional infos might be disabled by default. */
             presenceData.details = "Viewing the account pages";
-            // This might expose some stuff, because the page shows orders, points, and earnings. Additional infos might be disabled by default.
           } else if (currentPath[0] === "checkout") {
+            /* This might be disabled by default. */
             presenceData.details = "On the checkout";
-            // This might be disabled by default.
           } else if (currentPath[0] === "wishlist") {
             presenceData.details = "Viewing their wishlist";
           } else if (currentPath[0] === "core-membership") {
@@ -292,7 +297,7 @@ function getURLParam(urlParam: string): string {
           } else if (currentPath[0] === "makeagroup") {
             presenceData.details = "Making a group";
 
-            // The function below is only valid on the old theme.
+            /* The function below is only valid on the old theme. */
           } else if (
             websiteTheme === "old" &&
             document.querySelector(".newbrowse") &&
@@ -335,12 +340,14 @@ function getURLParam(urlParam: string): string {
           } else if (currentPath[0] === "critiques") {
             presenceData.details = "Viewing critiques";
 
-            //
-            // Section 2
-            // This section includes all pages below the user/group's directory. (eq. deviantart.com/team/art/..)
-            //
+            /*
 
-            // The functions below are vaild for users only.
+					Section 2
+					This section includes all pages below the user/group's directory. (eq. deviantart.com/team/art/..)
+					
+					*/
+
+            /* The function below is vaild for users only. */
           } else if (currentPath[1] === "art") {
             presenceData.details = document
               .querySelector("title")
@@ -352,7 +359,7 @@ function getURLParam(urlParam: string): string {
               .textContent.split(" by ")
               .pop()
               .split(" ")[0];
-            // I actually wanted to get it using the visible elements, but well, it's complicated.
+            /* I actually wanted to get it using the visible elements, but well, it's complicated. */
             if (
               presenceData.details === presenceDataPlaced.details &&
               presenceData.state === presenceDataPlaced.state
@@ -363,7 +370,7 @@ function getURLParam(urlParam: string): string {
                 "No art title detected and user is from the homepage."
               );
 
-            // The function below are valid for users and groups.
+            /* The functions below are valid for users and groups. */
           } else if (
             currentPath[1] === "gallery" ||
             currentPath[1] === "favourites"
@@ -398,7 +405,7 @@ function getURLParam(urlParam: string): string {
               }
             }
 
-            // The functions below are vaild for users only.
+            /* The functions below are vaild for users only. */
           } else if (currentPath[1] === "print") {
             presenceData.details = document.querySelector(
               "h1 .title"
@@ -408,7 +415,7 @@ function getURLParam(urlParam: string): string {
             presenceData.details = `Viewing a user's prints`;
             presenceData.state = getName();
           } else if (currentPath[1] === "posts") {
-            // This part is only valid on the Eclipse theme.
+            /* This part is only valid on the Eclipse theme. */
             const details = {
               All: "Viewing a user's posts",
               Journals: "Viewing a user's journals",
@@ -425,7 +432,7 @@ function getURLParam(urlParam: string): string {
                   "._2-k1X"
                 ).textContent;
               } else {
-                // This part is only valid on the old theme.
+                /* This part is only valid on the old theme. */
                 if (currentPath[2] === "poll")
                   document
                     .querySelector("h2")
@@ -440,7 +447,7 @@ function getURLParam(urlParam: string): string {
               }
               presenceData.state = `${getName()} (journal)`;
             } else {
-              // This part is only valid on the old theme.
+              /* This part is only valid on the old theme. */
               presenceData.details = `Viewing a user's journals`;
               presenceData.state = getName();
             }
@@ -483,7 +490,7 @@ function getURLParam(urlParam: string): string {
             presenceData.details = "Viewing a user's daily deviations";
             presenceData.state = getName();
           } else if (currentPath[1] === "badges") {
-            // This part is only valid on the old theme. (not quite sure)
+            /* This part is only valid on the old theme. (not quite sure) */
             if (currentPath[2]) {
               presenceData.details = "Viewing a badge";
               presenceData.state = `${
@@ -494,7 +501,7 @@ function getURLParam(urlParam: string): string {
               presenceData.state = getName(true);
             }
 
-            // The functions below are valid for groups only.
+            /* The functions below are valid for groups only. */
           } else if (currentPath[1] === "aboutus") {
             presenceData.details = "Viewing a group's about page";
             presenceData.state = getName(true);
@@ -502,13 +509,13 @@ function getURLParam(urlParam: string): string {
             presenceData.details = "Viewing a group's blog";
             presenceData.state = getName(true);
 
-            // The function below are valid for users and groups.
+            /* The function below are valid for users and groups. */
           } else if (currentPath[0] && !currentPath[1] && getName()) {
             presenceData.details = `Viewing a ${profileType}'s profile`;
             if (profileType === "group") presenceData.state = getName(true);
             else presenceData.state = getName();
 
-            // Whoops.
+            /* The page is not supported. Whoops. */
           } else {
             logHandler.pageNotSupported(true);
           }
@@ -557,13 +564,14 @@ function getURLParam(urlParam: string): string {
       case "":
         presenceData.details = "Viewing the chat room list";
         break;
+
       case "chat":
         presenceData.details = "On a chat room";
 
-        // Disabled for privacy reasons. Might be enabled if settings is a thing.
+        /* Disabled for privacy reasons. Might be enabled if settings is a thing. */
 
         // var channel = () => document.querySelector(".damnc-tabbar strong").textContent,
-        // 	loadedChannel = "", forceUpdate = false, presenceDataPlaced: PresenceData = {}, retries = 0
+        // 	loadedChannel = "", forceUpdate = false, presenceDataPlaced: presenceData = {}, retries = 0
 
         // updateCallback.function = () => {
 
@@ -618,11 +626,11 @@ function getURLParam(urlParam: string): string {
     }
   } else if (currentURL.hostname === "groups.deviantart.com") {
     presenceData.details = "Looking for a group";
-    // There might be a way to implement the filters, but finding it is a story for another time.
+    /* There might be a way to implement the filters, but finding it is a story for another time. */
   } else if (currentURL.hostname === "portfolio.deviantart.com") {
     presenceData.details = "Creating a portfolio";
-    // } else if (loc.hostname === "*.daportfolio.com") {
-    // Trying to avoid using regex, for this time.
+
+    // } else if (currentURL.hostname === "*.daportfolio.com") { /* Trying to avoid using regex, for this time. */
   } else if (currentURL.hostname === "shop.deviantart.com") {
     if (getURLParam("q")) {
       presenceData.details = "Searching something on the shop";
@@ -657,14 +665,14 @@ function getURLParam(urlParam: string): string {
   } else if (currentURL.hostname === "deviantartads.com") {
     presenceData.details = "Viewing the media kit";
   } else if (currentURL.hostname === "sta.sh") {
-    let loadedPath: string,
+    let loadedPath: Array<string> = [],
       forceUpdate = false,
       presenceDataPlaced: PresenceData = {},
       retries = 0;
 
     updateCallback.function = (): void => {
-      if (loadedPath !== currentPath.join("/") || forceUpdate) {
-        loadedPath = currentPath.join("/");
+      if (loadedPath !== currentPath || forceUpdate) {
+        loadedPath = currentPath;
 
         try {
           switch (currentPath[0]) {
@@ -672,6 +680,7 @@ function getURLParam(urlParam: string): string {
               presenceData.details = "On Sta.sh";
               presenceData.state = "Index";
               break;
+
             case "my":
               if (currentPath[1] === "settings") {
                 presenceData.details = "On Sta.sh";
@@ -680,14 +689,17 @@ function getURLParam(urlParam: string): string {
                 logHandler.pageNotSupported(true);
               }
               break;
+
             case "writer":
               presenceData.details = "On Sta.sh";
               presenceData.state = "Sta.sh Writer";
               break;
+
             case "muro":
               presenceData.details = "On Sta.sh";
               presenceData.state = "DeviantArt muro";
               break;
+
             default:
               presenceData.details = document
                 .querySelector("title")

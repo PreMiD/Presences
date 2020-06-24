@@ -1,19 +1,8 @@
-// same as fmovies and 9anime, any update here must be added in the other presence too
-
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-  if (
-    document.querySelector("video[id$='_html5_api']") != null ||
-    document.querySelector("div.jw-media.jw-reset > video") != null ||
-    document.querySelector("video") != null
-  ) {
-    const video: HTMLVideoElement =
-      document.querySelector("video[id$='_html5_api']") != null
-        ? document.querySelector("video[id$='_html5_api']")
-        : document.querySelector("div.jw-media.jw-reset > video")
-        ? document.querySelector("div.jw-media.jw-reset > video")
-        : document.querySelector("video");
+  if (document.querySelector("video")) {
+    const video: HTMLVideoElement = document.querySelector("video");
     if (video != null && !isNaN(video.duration)) {
       iframe.send({
         duration: video.duration,

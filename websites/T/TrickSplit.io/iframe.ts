@@ -15,7 +15,7 @@ interface TrickSplitWindow {
 }
 
 iframe.on("UpdateData", async () => {
-  const ts = (window as TrickSplitWindow);
+  const ts = window as TrickSplitWindow;
   if (!ts.game || !ts.menuHandler) return;
 
   const data = {
@@ -28,4 +28,4 @@ iframe.on("UpdateData", async () => {
   };
 
   iframe.send(data);
-}); 
+});
