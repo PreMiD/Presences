@@ -26,7 +26,7 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", (data: any) => {
   video = data;
 });
 
@@ -38,14 +38,14 @@ presence.on("UpdateData", async () => {
   if (
     video != null &&
     !isNaN(video.duration) &&
-    document.location.pathname.includes("/watch")
+    document.location.pathname.includes("/ver")
   ) {
     var timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
 
-    data.details = document.querySelector("#XpndCn .title").textContent;
+    data.details = document.querySelector("#XpndCn .Title, .CapiCnt .Title").textContent;
     (data.smallImageKey = video.paused ? "pause" : "play"),
       (data.smallImageText = video.paused
         ? (await strings).pause
