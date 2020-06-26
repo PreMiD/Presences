@@ -4,7 +4,7 @@ const presence = new Presence ({
 
 presence.on('UpdateData', async() => {
     const tempo = Math.floor(Date.now() / 1000);
-    const presenceData: presenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "logo",
         startTimestamp: tempo
     };
@@ -47,23 +47,23 @@ presence.on('UpdateData', async() => {
         
     } else if (path.includes('/lista')) {
         presenceData.details = 'Lista de conteúdo';
-        presenceData.state = presenceData.state = presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
+        presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
     } else if (path.includes('/manga') || path.includes('/manhwa') || path.includes('/manhua') || path.includes('/light-novel')) {
-        if ((path.split('/').length - 1) == 2 && nome != null) {
-            presenceData.details = nome.innerText + ' | ' + formatoObra.childNodes[1].textContent.slice(1);
-            presenceData.state = 'Gêneros: ' + generosObra.textContent.split(' ').join(', ').slice(1).slice(0, -2);
-        }
-        if (nome.textContent.includes('Manhua') || nome.textContent.includes('Manhwa') || nome.textContent.includes('Manga') || nome.textContent.includes('light-novel')) { 
+        if (titulo == 'Manhua' || titulo == 'Manhwa' || titulo== 'Manga' || titulo == 'light-novel') { 
             presenceData.details = titulo;
             presenceData.state = presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
-        } else if (nome != null) {
-            if (nome.textContent.includes('Capitulo')) {
+        } else {
+            if ((path.split('/').length - 1) == 3) {
                 if (nome.textContent.includes('Capitulo')) {
                     presenceData.details = nome.textContent.slice(0, nome.textContent.search('Capitulo'));
                     presenceData.state = nome.textContent.slice(nome.textContent.search('Capitulo')).replace('Capitulo', 'Capítulo') + ' |' + paginaCapitulo[paginaCapitulo.selectedIndex].innerText.split('Pag').join("") + ' de ' + paginaCapitulo.lastElementChild.textContent.split('Pag').join('');
                 }
+            } else if ((path.split('/').length - 1) == 2) {
+                presenceData.details = nome.innerText + ' | ' + formatoObra.childNodes[1].textContent.slice(1);
+                presenceData.state = 'Gêneros: ' + generosObra.textContent.split(' ').join(', ').slice(1).slice(0, -2);
             }
         }
+    
     } else if (path.includes('/perfil')) {
         presenceData.details =  'Perfil: ' + nomePerfil.innerText;
         if (nome != null && nome.textContent.includes('Lista de Todos os Marcados')) {
