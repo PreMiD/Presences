@@ -51,7 +51,7 @@ presence.on('UpdateData', async() => {
     } else if (path.includes('/manga') || path.includes('/manhwa') || path.includes('/manhua') || path.includes('/light-novel')) {
         if (titulo == 'Manhua' || titulo == 'Manhwa' || titulo== 'Manga' || titulo == 'light-novel') { 
             presenceData.details = titulo;
-            presenceData.state = presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
+            presenceData.state = 'Página ' + paginacao.value + ' de ' + paginacao.lastElementChild.textContent.slice(paginacao.lastElementChild.textContent.search('Página') + 6);
         } else {
             if ((path.split('/').length - 1) == 3) {
                 if (nome.textContent.includes('Capitulo')) {
