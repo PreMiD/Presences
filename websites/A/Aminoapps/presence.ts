@@ -3,56 +3,56 @@ var presence = new Presence({
 });
 
 function pathStarts(string: string): boolean {
-    return document.location.pathname.startsWith(string)
+    return document.location.pathname.startsWith(string);
 }
 function isHome(string: string): boolean {
     if(string === '/') {
         if(document.location.pathname === '/') {
-            return true
+            return true;
         }
     }
-    return false
-}
+    return false;
+};
 function pathIncludes(string: string): boolean {
-    return document.location.pathname.includes(string)
-}
+    return document.location.pathname.includes(string);
+};
 function pathEnds(string: string): boolean {
-    return document.location.pathname.endsWith(string)
-}
+    return document.location.pathname.endsWith(string);
+};
 function getGuildTitle(): string {
-    let guildtitle = document.querySelector("body > section > aside.community-sidebar > div.content.community-sidebar-container > section.sidebar-card.community-info.sidebar-section.user-canopy.user-loggedin.compose-enabled > h1 > a").textContent
-    return guildtitle
-}
+    const guildtitle = document.querySelector("body > section > aside.community-sidebar > div.content.community-sidebar-container > section.sidebar-card.community-info.sidebar-section.user-canopy.user-loggedin.compose-enabled > h1 > a").textContent;
+    return guildtitle;
+};
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "aminoapps",
         startTimestamp: new Date().getTime()
     };
-    let host = document.location.hostname
+    let host = document.location.hostname;
     if(host === 'aminoapps.com') {
     switch(true) {
         case isHome('/'):
             presenceData.details = "Home"
         break;
         case pathStarts('/u'):
-            let username = document.querySelector("#app > div > div.container > div > div.profileHeader > div.content > h1 > span.NvNickname").textContent
+            const username = document.querySelector("#app > div > div.container > div > div.profileHeader > div.content > h1 > span.NvNickname").textContent;
             presenceData.details = 'Viewing a User...'
             presenceData.state = username
         break;
         case pathIncludes('blog'):
-            let posttitle = document.querySelector("body > section > section > section > div > article.post.main-post.hide-blocker > header > h1").textContent
+            const posttitle = document.querySelector("body > section > section > section > div > article.post.main-post.hide-blocker > header > h1").textContent;
             presenceData.details = 'Viewing a Post...'
             presenceData.state = posttitle
-            presenceData.smallImageKey = 'reading'
-            presenceData.smallImageText = 'Reading'
+            presenceData.smallImageKey = 'reading';
+            presenceData.smallImageText = 'Reading';
         break;
         case pathEnds('/recent/'):
             presenceData.details = `Viewing ${getGuildTitle()}...`
             presenceData.state = 'Recents'
         break;
         case pathIncludes('item-category'):
-            let itemtitle = document.querySelector("body > section > section > section > div > section > section > div > a:nth-child(2)").textContent
+            const itemtitle = document.querySelector("body > section > section > section > div > section > section > div > a:nth-child(2)").textContent
             presenceData.details = 'Viewing Wiki...'
             presenceData.state = itemtitle
             presenceData.smallImageKey = 'reading'
@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
         break;
         case pathEnds('/polls/'):
             presenceData.details = `Viewing ${getGuildTitle()}...`
-            presenceData.state = 'Polls'
+            presenceData.state = 'Polls';
         break;
         case pathEnds('/quizzes/'):
             presenceData.details = `Viewing ${getGuildTitle()}...`
@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = 'Explore'
         break;
         case pathStarts('/search'):
-            let term = document.querySelector("#app > div > div.container > header > h1").textContent.replace('Search results for: ', '')
+            const term = document.querySelector("#app > div > div.container > header > h1").textContent.replace('Search results for: ', '')
             presenceData.details = 'Searching...'
             presenceData.state = term
         break;
