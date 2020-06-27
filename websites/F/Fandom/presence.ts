@@ -1,32 +1,32 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "644400074008297512"
 });
 
-var currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/"),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  presenceData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
+let currentURL = new URL(document.location.href),
+  currentPath = currentURL.pathname.slice(1).split("/");
+const browsingStamp = Math.floor(Date.now() / 1000);
+let presenceData: PresenceData = {
+  details: "Viewing an unsupported page",
+  largeImageKey: "lg",
+  startTimestamp: browsingStamp
+};
+const updateCallback = {
+  _function: null as Function,
+  get function(): Function {
+    return this._function;
   },
-  updateCallback = {
-    _function: null as Function,
-    get function(): Function {
-      return this._function;
-    },
-    set function(parameter) {
-      this._function = parameter;
-    },
-    get present(): boolean {
-      return this._function !== null;
-    }
-  };
+  set function(parameter) {
+    this._function = parameter;
+  },
+  get present(): boolean {
+    return this._function !== null;
+  }
+};
 
 /**
  * Initialize/reset presenceData.
  */
-function resetData(): void {
+const resetData = (): void => {
   currentURL = new URL(document.location.href);
   currentPath = currentURL.pathname.slice(1).split("/");
   presenceData = {
@@ -34,36 +34,39 @@ function resetData(): void {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
-}
+};
 
 /**
  * Search for URL parameters.
  * @param urlParam The parameter that you want to know about the value.
  */
-function getURLParam(urlParam: string): string {
+const getURLParam = (urlParam: string): string => {
   return currentURL.searchParams.get(urlParam);
-}
+};
 
 /**
  * Get timestamps based on the video element.
  * @param {Number} videoTime Current video time seconds.
  * @param {Number} videoDuration Video duration seconds.
  */
-function getTimestamps(
+const getTimestamps = (
   videoTime: number,
   videoDuration: number
-): Array<number> {
+): Array<number> => {
   const startTime = Date.now();
   const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
-}
+};
 
 ((): void => {
   if (currentURL.host === "www.fandom.com") {
-    //
-    // Chapter 1
-    // This one is for the editorial part of Fandom.
-    //
+    /*
+
+		Chapter 1
+		This one is for the editorial part of Fandom.
+		
+		*/
+
     if (currentPath[0] === "") {
       presenceData.details = "Index";
     } else if (currentPath[0] === "signin") {
@@ -132,10 +135,13 @@ function getTimestamps(
         presenceData.state = "Local Sitemap";
     }
   } else if (currentPath.includes("wiki")) {
-    //
-    // Chapter 2
-    // This one is for the wiki part on the Fandom, which was Wikia a while ago.
-    //
+    /*
+
+		Chapter 2
+		This one is for the wiki part on the Fandom, which was Wikia a while ago.
+		
+		*/
+
     let title: string, sitename: string;
     const actionResult = getURLParam("action") || getURLParam("veaction");
     const titleFromURL = (): string => {
@@ -225,15 +231,19 @@ function getTimestamps(
     presenceData.startTimestamp = browsingStamp;
     presenceData.state += " | " + sitename;
   } else if (currentPath[0] === "f") {
-    //
-    // Chapter 3
-    // This one is for the discussion parts on each wikis.
-    //
+    /*
+		
+		Chapter 3
+		This one is for the discussion parts on each wikis.
+		
+		*/
+
     const sitename = (document.querySelector(
       "meta[property='og:title']"
     ) as HTMLMetaElement).content
       .substring(25)
       .replace(" | Fandom", "");
+
     updateCallback.function = (): void => {
       if (!currentPath[1]) {
         presenceData.details = "Viewing the discussion page";

@@ -66,7 +66,7 @@ presence.on("UpdateData", () => {
 
     case "/Dashboard":
       presenceData.details = "Viewing:";
-      presenceData.state = "Home Page";
+      presenceData.state = "Team Dashboard";
       break;
 
     case "/Sponsors":
@@ -77,6 +77,11 @@ presence.on("UpdateData", () => {
     case "/Stadium":
       presenceData.details = "Viewing:";
       presenceData.state = "Stadium";
+      break;
+
+    case "/Career":
+      presenceData.details = "Viewing:";
+      presenceData.state = "Career";
       break;
 
     case "/User/Profile/Edit":
