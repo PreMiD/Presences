@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
   };
   
   const browsingStamp = Math.floor(Date.now() / 1000);
-  const page = window.location.pathname
+  const page = window.location.pathname;
 
   if (page.startsWith("/settings.html")) {
     presenceData.details = "Viewing a page:";
@@ -38,8 +38,8 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = browsingStamp;
   } else if (page.startsWith("/serverRankings/")) {
     const yArraabeni = document.querySelector("#top > div.jumbotron > div > div > div.col-md-10 > p").textContent;
-    const sgoc = "Besto Rankings @"
-    const ahmetabibanimiac = yArraabeni.replace(sgoc, "")
+    const sgoc = "Besto Rankings @";
+    const ahmetabibanimiac = yArraabeni.replace(sgoc, "");
     presenceData.details = "Viewing " + ahmetabibanimiac + "'s leaderboard";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.startsWith("/guild/")) {
