@@ -1,12 +1,12 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "634081860972052490"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-  }),
-  video = {
+  });
+let video = {
     duration: 0,
     currentTime: 0,
     paused: true
@@ -21,8 +21,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -31,7 +31,7 @@ presence.on("iFrameData", (data: { duration: number; currentTime: number; paused
 });
 
 presence.on("UpdateData", async () => {
-  let data: PresenceData = {
+  const data: PresenceData = {
     largeImageKey: "animeflv"
   };
 
@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
     !isNaN(video.duration) &&
     document.location.pathname.includes("/ver")
   ) {
-    let timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
