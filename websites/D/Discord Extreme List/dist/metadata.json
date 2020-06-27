@@ -1,0 +1,48 @@
+{
+    "author": {
+      "name": "Cairo",
+      "id": "208105877838888960"
+    },
+    "url": [
+      "discordextremelist.xyz",
+      "staging.discordextremelist.xyz"
+    ],
+    "description": {
+      "en": "Discord's unbiased list, giving bots and servers of all sizes a big chance!",
+      "es": "¡Lista imparcial de Discord, que ofrece a los bots y servidores de todos los tamaños una gran oportunidad!",
+      "pt": "Lista de discord imparcial, dá a bots e servidores de todos os tamanhos uma grande chance!",
+      "he": "הרשימה הבלתי משוחדת של דיסקורד, נותנת לבוטים ושרתים בכל הגדלים סיכוי גדול!",
+      "hu": "Discord-nak elfogulatlan listája, megadja a botoknak és a szervereknek a nagy lehetőséget!",
+      "de": "Discord's unbefangene Liste, gibt Bots und Server aller grössen eine grosse Chance!",
+      "nl": "Discord's onbevooroordeelde lijst, die bots en servers van elke omvang een grote kans geeft!",
+      "sv": "Discords opartiska lista, ger alla bots och servrar en stor chans!",
+      "tr": "Discord'un tarafsız Bot Listesi , Botunuz ve sizin için oldukça büyük bir şans!"
+    },
+    "service": "Discord Extreme List",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/tMrrgGu.png",
+    "thumbnail": "https://i.imgur.com/ewofSNN.png",
+    "color": "#b114ff",
+    "tags": [
+      "discord",
+      "discord bot list",
+      "discord bots",
+      "discord servers",
+      "discord templates"
+    ],
+    "category": "other",
+    "settings": [
+        {
+            "id": "incognito",
+            "title": "Hide Presence",
+            "icon": "fas fa-user-secret",
+            "value": false
+        },
+        {
+            "id": "showTimestamp",
+            "title": "Display Timestamp",
+            "icon": "fas fa-stopwatch",
+            "value": true
+        }
+    ]
+}
