@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
         }
         case pathIncludes('blog'): {
             const posttitle = document.querySelector("body > section > section > section > div > article.post.main-post.hide-blocker > header > h1").textContent;
-            presenceData.details = 'Viewing a Post...'
+            presenceData.details = 'Viewing a Post...';
             presenceData.state = posttitle;
             presenceData.smallImageKey = 'reading';
             presenceData.smallImageText = 'Reading';
