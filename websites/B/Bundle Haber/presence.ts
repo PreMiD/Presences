@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
     largeImageKey: "bundle"
   };
 
-  const page = window.location.pathname
+  const page = window.location.pathname;
   const browsingStamp = Math.floor(Date.now() / 1000);
 
 
