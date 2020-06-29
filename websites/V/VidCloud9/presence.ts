@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "697552926876368917"
   }),
   strings = presence.getStrings({
@@ -6,13 +6,13 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-var iFrameVideo, currentTime, duration, paused;
-var video;
-var lastPlaybackState = null;
-var playback;
-var title;
+let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean;
+let video: any;
+let lastPlaybackState: void;
+let playback: boolean;
+let title;
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", (data: { iframe_video: { duration: number; iFrameVideo: any; currTime: number; dur: number; paused: any; }; }) => {
   video = data;
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
@@ -23,9 +23,9 @@ presence.on("iFrameData", (data) => {
   }
 });
 
-function getTimestamps(videoTime, videoDuration): any {
+function getTimestamps(videoTime: number, videoDuration: number): Array<number> {
   var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  var endTime = Math.floor(Math.floor(startTime / 1000) - videoTime + videoDuration);
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -44,8 +44,8 @@ presence.on("UpdateData", async () => {
   };
   if (videoTime) {
     console.log("IS ON");
-    if (lastPlaybackState != playback) {
-      lastPlaybackState = playback;
+    if (playback == true) {
+      // lastPlaybackState = playback;
       browsingStamp = Math.floor(Date.now() / 1000);
     }
   } else {
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
         "#main_bg > div:nth-child(5) > div > div.video-info-left > h1"
       );
       if (title != null) {
-        presenceData.state = title.innerText;
+        presenceData.state = (title as HTMLTextAreaElement).innerText;
         if (
           iFrameVideo == true &&
           !isNaN(duration) &&
@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
           }
         } else if (iFrameVideo == null && isNaN(duration) && title != null) {
           presenceData.details = "Viewing:";
-          presenceData.state = title.innerText;
+          presenceData.state = (title as HTMLTextAreaElement).innerText;
           presenceData.startTimestamp = browsingStamp;
         } else {
           presenceData.details = "Error 03: Watching unknown show/movie.";
@@ -121,8 +121,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
     }
   } else {
-    presence.setActivity(presenceData);
-    return;
+    presenceData.details = null;
   }
 
   if (presenceData.details == null) {
