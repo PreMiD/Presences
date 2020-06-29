@@ -19,7 +19,7 @@ let video: {
 let playback: boolean;
 let title;
 
-presence.on("iFrameData", (data:{
+presence.on("iFrameData", (data: {
     iframe_video: {
       duration: number; iFrameVideo: boolean; currTime: number; dur: number; paused: boolean;
     };
