@@ -78,7 +78,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing:";
       presenceData.state = "Stadium";
       break;
-      
+
     case "/Career":
       presenceData.details = "Viewing:";
       presenceData.state = "Career";
