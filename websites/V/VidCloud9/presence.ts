@@ -7,7 +7,7 @@ const presence = new Presence({
   });
 
 let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean;
-let video:{
+let video: {
   iframe_video: {
     duration: number,
     iFrameVideo: boolean,
@@ -16,7 +16,6 @@ let video:{
     paused: boolean,
   }
 }
-let lastPlaybackState: void;
 let playback: boolean;
 let title;
 
@@ -61,7 +60,7 @@ presence.on("UpdateData", async () => {
       browsingStamp = Math.floor(Date.now() / 1000);
     }
   } else {
-    lastPlaybackState = console.log("Video time is off");
+    console.log("Video time is off");
   }
   if (info) {
     if (document.location.pathname == "/") {
