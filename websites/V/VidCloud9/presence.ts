@@ -7,7 +7,7 @@ const presence = new Presence({
   });
 
 let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean;
-let video:{ iframe_video:{ duration: number; iFrameVideo: boolean; currTime: number; dur: number; paused: boolean;}}
+let video:{ iframe_video: { duration: number; iFrameVideo: boolean; currTime: number; dur: number; paused: boolean;}}
 let lastPlaybackState: void;
 let playback: boolean;
 let title;
