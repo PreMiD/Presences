@@ -7,12 +7,12 @@ const presence = new Presence({
   });
 
 let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean;
-let video: any;
+let video: { iframe_video: { duration: number; iFrameVideo: boolean; currTime: number; dur: number; paused: boolean; };};
 let lastPlaybackState: void;
 let playback: boolean;
 let title;
 
-presence.on("iFrameData", (data: { iframe_video: { duration: number; iFrameVideo: any; currTime: number; dur: number; paused: any; }; }) => {
+presence.on("iFrameData", (data: { iframe_video: { duration: number; iFrameVideo: boolean; currTime: number; dur: number; paused: boolean; };}) => {
   video = data;
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
@@ -24,8 +24,8 @@ presence.on("iFrameData", (data: { iframe_video: { duration: number; iFrameVideo
 });
 
 function getTimestamps(videoTime: number, videoDuration: number): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(Math.floor(startTime / 1000) - videoTime + videoDuration);
+  const startTime = Date.now();
+  const endTime = Math.floor(Math.floor(startTime / 1000) - videoTime + videoDuration);
   return [Math.floor(startTime / 1000), endTime];
 }
 
