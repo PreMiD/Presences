@@ -9,20 +9,20 @@ const presence = new Presence({
 let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean;
 let video: {
   iframe_video: {
-    duration: number,
-    iFrameVideo: boolean,
-    currTime: number,
-    dur: number,
-    paused: boolean,
-  }
-}
+    duration: number;
+    iFrameVideo: boolean;
+    currTime: number;
+    dur: number;
+    paused: boolean;
+  };
+};
 let playback: boolean;
 let title;
 
 presence.on("iFrameData", (data:{
     iframe_video: {
-      duration: number, iFrameVideo: boolean, currTime: number, dur: number, paused: boolean
-    }
+      duration: number; iFrameVideo: boolean; currTime: number; dur: number; paused: boolean;
+    };
   }) => {
   video = data;
   playback = data.iframe_video.duration !== null ? true : false;
