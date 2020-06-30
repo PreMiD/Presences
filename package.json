@@ -14,15 +14,15 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.114",
-    "@types/glob": "^7.1.1",
+    "@types/glob": "^7.1.2",
     "@types/mongodb": "^3.5.20",
-    "@types/node": "^14.0.6",
+    "@types/node": "^14.0.13",
     "@types/prettier": "^2.0.1",
     "@types/semver": "^7.2.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "axios": "^0.19.2",
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "eslint": "^6.0.0",
     "execa": "^4.0.2",
     "glob": "^7.1.6",
@@ -31,6 +31,6 @@
     "prettier": "^2.0.5",
     "semver": "^7.3.2",
     "source-map-support": "^0.5.19",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.5"
   }
 }

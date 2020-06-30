@@ -1,6 +1,7 @@
 const presence = new Presence({
   clientId: "714194261679276094"
 });
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
@@ -9,6 +10,7 @@ presence.on("UpdateData", async () => {
       state: "https://gardenmc.fr",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/p/rules") {
     const presenceData: PresenceData = {
@@ -16,6 +18,7 @@ presence.on("UpdateData", async () => {
       details: "Lit les règles",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/blog")) {
     const presenceData: PresenceData = {
@@ -23,6 +26,7 @@ presence.on("UpdateData", async () => {
       details: "Lit les news",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/user")) {
     const presenceData: PresenceData = {
@@ -30,12 +34,14 @@ presence.on("UpdateData", async () => {
       state: "Profil",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/topic/add/")) {
     const presenceData: PresenceData = {
       details: "Écrit un nouveau topic",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/vote") {
     const presenceData: PresenceData = {
@@ -43,6 +49,7 @@ presence.on("UpdateData", async () => {
       state: "Vote",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/message") {
     const presenceData: PresenceData = {
@@ -50,6 +57,7 @@ presence.on("UpdateData", async () => {
       state: "MP",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/support") {
     const presenceData: PresenceData = {
@@ -64,6 +72,7 @@ presence.on("UpdateData", async () => {
       state: "Support",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/message/new") {
     const presenceData: PresenceData = {
@@ -71,6 +80,7 @@ presence.on("UpdateData", async () => {
       state: "MP",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/list") {
     const presenceData: PresenceData = {
@@ -78,6 +88,7 @@ presence.on("UpdateData", async () => {
       state: "List",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/stats") {
     const presenceData: PresenceData = {
@@ -85,6 +96,7 @@ presence.on("UpdateData", async () => {
       state: "Statistiques",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/profile") {
     const presenceData: PresenceData = {
@@ -92,6 +104,7 @@ presence.on("UpdateData", async () => {
       state: "Profil",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/shop") {
     const presenceData: PresenceData = {
@@ -99,6 +112,7 @@ presence.on("UpdateData", async () => {
       state: "Shop",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/faq") {
     const presenceData: PresenceData = {
@@ -107,6 +121,7 @@ presence.on("UpdateData", async () => {
       details: "Consulte la F.A.Q"
     };
     //Forum
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/forum") {
     const presenceData: PresenceData = {
@@ -114,6 +129,7 @@ presence.on("UpdateData", async () => {
       state: "Forum",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/forum/Informations.4/") {
     const presenceData: PresenceData = {
@@ -122,6 +138,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "gardenpresence"
     };
     //Candidatures
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/forum/Candidatures.5/")) {
     const presenceData: PresenceData = {
@@ -129,6 +146,7 @@ presence.on("UpdateData", async () => {
       state: "Candidatures",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/topic/Candi")) {
     const presenceData: PresenceData = {
@@ -136,6 +154,7 @@ presence.on("UpdateData", async () => {
       state: "Candidatures",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/topic/candi")) {
     const presenceData: PresenceData = {
@@ -144,6 +163,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "gardenpresence"
     };
     // Fin Candidatures
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/topic")) {
     const presenceData: PresenceData = {
@@ -151,6 +171,7 @@ presence.on("UpdateData", async () => {
       state: "Topic",
       largeImageKey: "gardenpresence"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/forum/Boite")) {
     const presenceData: PresenceData = {
@@ -158,6 +179,7 @@ presence.on("UpdateData", async () => {
       state: "Boite à idées",
       details: "Consulte la boite à idée"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/forum/Bugs.7/")) {
     const presenceData: PresenceData = {
@@ -165,6 +187,7 @@ presence.on("UpdateData", async () => {
       state: "Bugs",
       details: "Consulte la section Bug"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.includes("/forum/Demande-de-Debannissement-.15/")
@@ -174,6 +197,7 @@ presence.on("UpdateData", async () => {
       state: "Demande deban",
       details: "Consulte la section unban"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/forum/Aide.10/")) {
     const presenceData: PresenceData = {
@@ -181,13 +205,15 @@ presence.on("UpdateData", async () => {
       state: "Aides",
       details: "Consulte la section aide"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/forum/Créations.11/")) {
+  } else if (document.location.pathname.includes("/forum/Cr")) {
     const presenceData: PresenceData = {
       largeImageKey: "gardenpresence",
       state: "Créations",
       details: "Consulte les projets"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/forum/Taverne.12/") {
     const presenceData: PresenceData = {
@@ -195,6 +221,7 @@ presence.on("UpdateData", async () => {
       state: "Taverne",
       details: "Boit un verre"
     };
+    presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else {
     const presenceData: PresenceData = {
