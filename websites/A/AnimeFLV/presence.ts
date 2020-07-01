@@ -7,10 +7,10 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 let video = {
-    duration: 0,
-    currentTime: 0,
-    paused: true
-  };
+  duration: 0,
+  currentTime: 0,
+  paused: true
+};
 
 /**
  * Get Timestamps
@@ -26,9 +26,12 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-presence.on("iFrameData", (data: { duration: number; currentTime: number; paused: boolean}) => {
-  video = data;
-});
+presence.on(
+  "iFrameData",
+  (data: { duration: number; currentTime: number; paused: boolean }) => {
+    video = data;
+  }
+);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -45,7 +48,9 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    data.details = document.querySelector("#XpndCn .Title, .CapiCnt .Title").textContent;
+    data.details = document.querySelector(
+      "#XpndCn .Title, .CapiCnt .Title"
+    ).textContent;
     (data.smallImageKey = video.paused ? "pause" : "play"),
       (data.smallImageText = video.paused
         ? (await strings).pause

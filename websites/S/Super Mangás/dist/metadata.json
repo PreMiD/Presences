@@ -10,10 +10,14 @@
     "pt": "Leia mangás no Super Mangás facilmente em qualquer plataforma, mobile ou não."
   },
   "url": "www.supermangas.site",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/uGXva29.png",
   "thumbnail": "https://i.imgur.com/5b91CwJ.png",
   "color": "#00b09f",
-  "tags": ["manga", "super", "agregador"],
+  "tags": [
+    "manga",
+    "super",
+    "agregador"
+  ],
   "category": "other"
 }

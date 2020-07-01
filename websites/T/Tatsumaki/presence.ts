@@ -6,7 +6,7 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  
+
   const browsingStamp = Math.floor(Date.now() / 1000);
   const page = window.location.pathname;
 
@@ -37,16 +37,19 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing/editing their profile";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.startsWith("/serverRankings/")) {
-    const yArraabeni = document.querySelector("#top > div.jumbotron > div > div > div.col-md-10 > p").textContent;
+    const yArraabeni = document.querySelector(
+      "#top > div.jumbotron > div > div > div.col-md-10 > p"
+    ).textContent;
     const sgoc = "Besto Rankings @";
     const ahmetabibanimiac = yArraabeni.replace(sgoc, "");
     presenceData.details = "Viewing " + ahmetabibanimiac + "'s leaderboard";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.startsWith("/guild/")) {
     presenceData.details = "Managing a server";
-    presenceData.state = document.querySelector("#top > div.jumbotron > div > div > div.col-md-10 > h1").textContent;
+    presenceData.state = document.querySelector(
+      "#top > div.jumbotron > div > div > div.col-md-10 > h1"
+    ).textContent;
   }
-
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
