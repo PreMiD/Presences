@@ -14,7 +14,7 @@
     "nl": "Anihub is een braziliaanse website die een plek bied om gratis anime te bekijken, zowel online als offline en zonder misbruik van advertenties."
   },
   "url": "anihub.tv",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "logo": "https://i.imgur.com/HClem6o.png",
   "thumbnail": "https://i.imgur.com/ehkk7qZ.png",
   "color": "#1997C6",
@@ -187,6 +187,44 @@
       },
       "id": "showSocialTitle",
       "title": "└─ Título",
+      "value": true
+    },
+    {
+      "id": "showRoom",
+      "title": "/sala",
+      "icon": "fas fa-users",
+      "value": true
+    },
+    {
+      "if": {
+        "showRoom": true
+      },
+      "id": "showRoomEpisode",
+      "title": "├─ Episódio",
+      "value": true
+    },
+    {
+      "if": {
+        "showRoom": true
+      },
+      "id": "showRoomName",
+      "title": "├─ Nome",
+      "value": true
+    },
+    {
+      "if": {
+        "showRoom": true
+      },
+      "id": "showRoomUsers",
+      "title": "├─ Usuários",
+      "value": true
+    },
+    {
+      "if": {
+        "showRoom": true
+      },
+      "id": "showRoomLTime",
+      "title": "└─ Tempo Restante",
       "value": true
     }
   ]

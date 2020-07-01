@@ -5,12 +5,12 @@ const browsingElapsedTimestamp = Math.floor(Date.now() / 1000);
 
 function getParameterByName(name: string, url: string): string {
   if (!url) url = window.location.href;
-  name = name.replace(/[[\]]/g, '\\$&');
-  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-      results = regex.exec(url);
+  name = name.replace(/[[\]]/g, "\\$&");
+  const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
   if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  if (!results[2]) return "";
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 presence.on("UpdateData", async () => {
@@ -19,11 +19,16 @@ presence.on("UpdateData", async () => {
   };
   if (document.location.hostname == "dizipub.net") {
     presenceData.startTimestamp = browsingElapsedTimestamp;
-    if (document.location.pathname === "/" && !getParameterByName("s", window.location.href)) {
+    if (
+      document.location.pathname === "/" &&
+      !getParameterByName("s", window.location.href)
+    ) {
       presenceData.details = "Ana sayfaya göz atıyor...";
     } else if (document.location.pathname.includes("dizi/")) {
       presenceData.details = "Bir diziye göz atıyor:";
-      presenceData.state = document.querySelector(`body > div#body-wrapper > section > div.section > div#details > article > h1`).innerHTML;
+      presenceData.state = document.querySelector(
+        `body > div#body-wrapper > section > div.section > div#details > article > h1`
+      ).innerHTML;
     } else if (document.location.pathname.includes("/animeler")) {
       presenceData.details = "Animelere göz atıyor...";
     } else if (document.location.pathname.includes("/asya-dizileri")) {
@@ -40,25 +45,35 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/kayit-ol")) {
       presenceData.details = "Siteye kayıt oluyor...";
     } else if (document.location.pathname.includes("/anime/")) {
-      const name = document.querySelector("body > div#body-wrapper > section > div.tabs > div#details > article > h1").innerHTML;
+      const name = document.querySelector(
+        "body > div#body-wrapper > section > div.tabs > div#details > article > h1"
+      ).innerHTML;
       presenceData.details = "Bir animeye göz atıyor:";
       presenceData.state = name;
     } else if (document.location.pathname.includes("/dizi/")) {
-      const name = document.querySelector("body > div#body-wrapper > section > div.tabs > div#details > article > h1").innerHTML;
+      const name = document.querySelector(
+        "body > div#body-wrapper > section > div.tabs > div#details > article > h1"
+      ).innerHTML;
       presenceData.details = "Bir diziye göz atıyor:";
       presenceData.state = name;
     } else if (document.location.pathname.includes("/iletisim")) {
       presenceData.details = "İletişim sayfasına göz atıyor...";
     } else {
       if (document.getElementsByClassName("black-title")) {
-        presenceData.details = document.getElementsByClassName("black-title")[0].innerHTML + " izliyor";
+        presenceData.details =
+          document.getElementsByClassName("black-title")[0].innerHTML +
+          " izliyor";
         if (document.getElementsByClassName("episode-name")) {
-          presenceData.state = document.querySelector(`body > div#body-wrapper > div#content > div.section > section > div.section-title > h1 > a > mark`).innerHTML.split('<span class="episode-name">')[0];
+          presenceData.state = document
+            .querySelector(
+              `body > div#body-wrapper > div#content > div.section > section > div.section-title > h1 > a > mark`
+            )
+            .innerHTML.split('<span class="episode-name">')[0];
         }
       }
     }
   }
-  
+
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
