@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
     case "p": {
       //Podcast
       if (path[1] != lastPath || browsingStamp == 0)
-        browsingStamp = Date.now() / 1000;
+        browsingStamp = Math.round(Date.now() / 1000);
       const playerIcon = document.querySelector(
         ".player__animate-icon"
       ) as HTMLElement;
