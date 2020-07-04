@@ -149,24 +149,24 @@ presence.on("UpdateData", async () => {
       if(document.URL.includes("?project=website")) {
 	    lang = document.URL.replace("https://translate.labymod.net/translate/?project=website&lang=", "");
 		if(document.URL.includes("#")) {
-	      lang = lang.split("#");
-		  lang = lang[0];
+          lang = lang.split("#");
+          lang = lang[0];
         }
         presenceData.smallImageKey = lang.toLowerCase();
         presenceData.state = "Translating Website";
       } else if(document.URL.includes("?project=notification")) {
         lang = document.URL.replace("https://translate.labymod.net/translate/?project=website&lang=", "");
 		if(document.URL.includes("#")) {
-	      lang = lang.split("#");
-		  lang = lang[0];
+          lang = lang.split("#");
+          lang = lang[0];
         }
         presenceData.smallImageKey = lang.toLowerCase();
         presenceData.state = "Translating Notification";
       } else if(document.URL.includes("?project=client")) {
         lang = document.URL.replace("https://translate.labymod.net/translate/?project=website&lang=", "");
 		if(document.URL.includes("#")) {
-	      lang = lang.split("#");
-		  lang = lang[0];
+          lang = lang.split("#");
+          lang = lang[0];
         }
         presenceData.smallImageKey = lang.toLowerCase();
         presenceData.state = "Translating Client";
