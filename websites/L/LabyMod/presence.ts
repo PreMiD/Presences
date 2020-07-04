@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "629072489238233111" // CLIENT ID FOR YOUR PRESENCE
+  clientId: "729035228324298852" // CLIENT ID FOR YOUR PRESENCE
 });
 
 var item: any, user: any, title: any;
@@ -132,6 +132,39 @@ presence.on("UpdateData", async () => {
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
+  } else if (document.location.hostname == "translate.labymod.net") {
+	presenceData.details = "Translate site";
+	delete presenceData.startTimestamp;
+    if (document.location.pathname.includes("/users.php")) {
+      presenceData.state = "Watching Users";
+	  delete presenceData.smallImageKey;
+	} else if (document.location.pathname.includes("/log.php")) {
+	  presenceData.state = "Watching Log";
+	  delete presenceData.smallImageKey;
+	} else if (document.location.pathname.includes("/errors.php")) {
+	  presenceData.state = "Watching Errors";
+	  delete presenceData.smallImageKey;
+	} else if (document.location.pathname.includes("/translate/")) {
+	  let lang = "";
+	  if((document.location.pathname+document.location.search).substr(1).includes("?project=website")) {
+	    lang = (document.location.pathname+document.location.search).substr(1).replace("translate/?project=website&lang=", "");
+	    presenceData.smallImageKey = lang.toLowerCase();
+		presenceData.state = "Translating Website";
+	  } else if((document.location.pathname+document.location.search).substr(1).includes("?project=notification")) {
+	    lang = (document.location.pathname+document.location.search).substr(1).replace("translate/?project=notifications&lang=", "");
+	    presenceData.smallImageKey = lang.toLowerCase();
+		presenceData.state = "Translating Notification";
+	  } else if((document.location.pathname+document.location.search).substr(1).includes("?project=client")) {
+	    lang = (document.location.pathname+document.location.search).substr(1).replace("translate/?project=client&lang=", "");
+	    presenceData.smallImageKey = lang.toLowerCase();
+		presenceData.state = "Translating Client";
+	  }
+	} else {
+	  presenceData.state = "On the Main page";
+	  delete presenceData.smallImageKey;
+	}
+	console.log(presenceData)
+	presence.setActivity(presenceData);
   } else {
     presence.setActivity();
     presence.setTrayTitle();
