@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/translate/")) {
       let lang = null;
       if(document.URL.includes("?project=website")) {
-	    lang = document.URL.replace("https://translate.labymod.net/translate/?project=website&lang=", "");
+        lang = document.URL.replace("https://translate.labymod.net/translate/?project=website&lang=", "");
 		if(document.URL.includes("#")) {
           lang = lang.split("#");
           lang = lang[0];
