@@ -1,4 +1,4 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "729035228324298852" // CLIENT ID FOR YOUR PRESENCE
 });
 
@@ -163,7 +163,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = "On the Main page";
       delete presenceData.smallImageKey;
     }
-    console.log(presenceData)
     presence.setActivity(presenceData);
   } else {
     presence.setActivity();
