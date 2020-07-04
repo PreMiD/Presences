@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "701157425318854756"
 });
 
-let sname, sartist, keylisteners, keyislive, keypresenter, keyduration, keyelasped, timestamp;
+let sname, sartist, keylisteners, keyislive, keyelasped;
 
 function metadataListener(): void {
       const data = JSON.parse(this.responseText);
@@ -21,7 +21,7 @@ function updateMetaData(): void {
 }
 
 setInterval(updateMetaData, 10000);
-window.onload = function() {console.log("Updated Meta"); updateMetaData();};
+window.onload = function() {console.log("Updated Meta"); updateMetaData()};
 
 let lastTitle;
 let lastTimeStart = Math.floor(Date.now() / 1000);
@@ -29,13 +29,13 @@ let lastTimeStart = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "keyfm",
-    smallImageKey: "keyfm-play",
+    smallImageKey: "keyfm-play"
   };
 
-  var toggleelaspe = await presence.getSetting("toggleelapse");
-  var changedetails = await presence.getSetting("changedetails");
-  var changestate = await presence.getSetting("changestate");
-  var changesmalltext = await presence.getSetting("changesmalltext");
+  let toggleelaspe = await presence.getSetting("toggleelapse");
+  let changedetails = await presence.getSetting("changedetails");
+  let changestate = await presence.getSetting("changestate");
+  let changesmalltext = await presence.getSetting("changesmalltext");
 
   if (toggleelaspe) {
     if (lastTitle != sname) {
@@ -50,13 +50,13 @@ presence.on("UpdateData", async () => {
 
     if (!sname) {
       lastTitle = "Loading...";
-      sname = "Loading..."
+      sname = "Loading...";
     } else if (!sartist) {
-      sartist = "Loading..."
+      sartist = "Loading...";
     } else if (!keypresenter) {
-      keypresenter = "Loading..." 
+      keypresenter = "Loading...";
     } else if (!keylisteners) {
-      keylisteners = "Loading..."
+      keylisteners = "Loading...";
     }
 
   if (!keyislive) {
@@ -88,8 +88,6 @@ presence.on("UpdateData", async () => {
   } else {
     presenceData.smallImageText = "Listeners: " + keylisteners;
   }
-
-    const data: PresenceData = {};
 
     presence.setActivity(presenceData, true);
     presence.setTrayTitle();
