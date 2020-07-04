@@ -3,12 +3,12 @@ let sartist, strack, slisteners, sdj;
 
 async function newStats(): Promise<void> {
   const data = await window
-    .fetch("https://panelapi.boun.cc/v1/premidStats")
+    .fetch("https://stats.boun.cc")
     .then((res) => res.json());
   strack = data.song.track;
   sartist = data.song.artist;
-  sdj = data.presenter.name;
-  slisteners = data.listeners.unique;
+  sdj = data.presenter.name.replace("Bounce", "AutoDJ");
+  slisteners = data.listeners;
 }
 
 setInterval(newStats, 10000);
