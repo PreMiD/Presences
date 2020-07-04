@@ -134,7 +134,6 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (document.location.hostname == "translate.labymod.net") {
     presenceData.details = "Translate site";
-    delete presenceData.startTimestamp;
     if (document.location.pathname.includes("/users.php")) {
       presenceData.state = "Watching Users";
       delete presenceData.smallImageKey;
