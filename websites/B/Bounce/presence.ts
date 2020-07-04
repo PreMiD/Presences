@@ -1,4 +1,4 @@
-const presence = new Presence({ clientId: "545248528750870530" });
+const presence = new Presence({ clientId: "729087463452049559" });
 let sartist, strack, slisteners, sdj;
 
 async function newStats(): Promise<void> {
