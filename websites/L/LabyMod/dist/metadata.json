@@ -3,6 +3,12 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Itz_Hoffe",
+      "id": "175324549263523840"
+    }
+  ],
   "service": "LabyMod",
   "description": {
     "en": "An all in one Minecraft PvP Modification to increase your ingame experience.",
