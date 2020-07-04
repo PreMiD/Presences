@@ -12,8 +12,8 @@ presence.on("UpdateData", async () => {
   if (window.location.href.includes("gdbrowser.com")) {
     // Levels
     if (
-      window.location.pathname.toLowerCase() !== "/" &&
-      window.location.pathname.toLowerCase() === "/daily" ||
+      (window.location.pathname.toLowerCase() !== "/" &&
+        window.location.pathname.toLowerCase() === "/daily") ||
       window.location.pathname.toLowerCase() === "/weekly"
     ) {
       const downloads = document.getElementsByClassName(
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
           case "followed":
             presenceData.state = "💙 Viewing followed levels";
             break;
-          default: 
+          default:
             switch (q.get("diff")) {
               case "1":
                 presenceData.state = "😄 Viewing Easy levels";
@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
                   document.getElementById("header").innerHTML
                 }`;
                 break;
-          }
+            }
         }
 
         // Diffs (Also with 101% more switch statement)
