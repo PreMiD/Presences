@@ -90,5 +90,4 @@ presence.on("UpdateData", async () => {
   }
 
     presence.setActivity(presenceData, true);
-    presence.setTrayTitle();
 });
