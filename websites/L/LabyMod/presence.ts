@@ -145,17 +145,29 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Watching Errors";
       delete presenceData.smallImageKey;
     } else if (document.location.pathname.includes("/translate/")) {
-      let lang = "";
-      if((document.location.pathname+document.location.search).substr(1).includes("?project=website")) {
-        lang = (document.location.pathname+document.location.search).substr(1).replace("translate/?project=website&lang=", "");
+      let lang = null;
+      if(document.URL.includes("?project=website")) {
+	    lang = document.URL.replace("https://translate.labymod.net/translate/?project=website&lang=", "");
+		if(document.URL.includes("#")) {
+	      lang = lang.split("#");
+		  lang = lang[0];
+        }
         presenceData.smallImageKey = lang.toLowerCase();
         presenceData.state = "Translating Website";
-      } else if((document.location.pathname+document.location.search).substr(1).includes("?project=notification")) {
-        lang = (document.location.pathname+document.location.search).substr(1).replace("translate/?project=notifications&lang=", "");
+      } else if(document.URL.includes("?project=notification")) {
+        lang = document.URL.replace("https://translate.labymod.net/translate/?project=website&lang=", "");
+		if(document.URL.includes("#")) {
+	      lang = lang.split("#");
+		  lang = lang[0];
+        }
         presenceData.smallImageKey = lang.toLowerCase();
         presenceData.state = "Translating Notification";
-      } else if((document.location.pathname+document.location.search).substr(1).includes("?project=client")) {
-        lang = (document.location.pathname+document.location.search).substr(1).replace("translate/?project=client&lang=", "");
+      } else if(document.URL.includes("?project=client")) {
+        lang = document.URL.replace("https://translate.labymod.net/translate/?project=website&lang=", "");
+		if(document.URL.includes("#")) {
+	      lang = lang.split("#");
+		  lang = lang[0];
+        }
         presenceData.smallImageKey = lang.toLowerCase();
         presenceData.state = "Translating Client";
       }
