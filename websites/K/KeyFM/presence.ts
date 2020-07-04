@@ -21,7 +21,7 @@ function updateMetaData(): void {
 }
 
 setInterval(updateMetaData, 10000);
-window.onload = function(): void {console.log("Updated Meta"); updateMetaData()};
+window.onload = function(): void {updateMetaData()};
 
 let lastTitle;
 let lastTimeStart = Math.floor(Date.now() / 1000);
