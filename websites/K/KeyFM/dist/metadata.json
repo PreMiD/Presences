@@ -36,8 +36,8 @@
       "id": "changedetails",
       "title": "Change Line #1 (Song Details)",
       "icon": "fas fa-music",
-      "value": "🎵 | %song% - %artist%",
-      "placeholder": "🎵 | %song% - %artist%"
+      "value": "🎵 | %artist% - %song%",
+      "placeholder": "🎵 | %artist% - %song%" 
     },
     {
       "id": "changestate",

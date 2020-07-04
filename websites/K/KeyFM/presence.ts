@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
     if (changedetails) {
       presenceData.details = changedetails.replace('%song%', sname).replace('%artist%', sartist);
     } else {
-      presenceData.details = "🎵 | " + sname + " - " + sartist;
+      presenceData.details = "🎵 | " + sartist + " - " + sname;
     }
     if (changestate) {
       presenceData.state = changestate.replace('%presenter%', keypresenter);
@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
     if (changedetails) {
       presenceData.details = changedetails.replace('%song%', sname).replace('%artist%', sartist);
     } else {
-      presenceData.details = "🎵 | " + sname + " - " + sartist;
+      presenceData.details = "🎵 | " + sartist + " - " + sname;
     }
     if (changestate) {
       presenceData.state = changestate.replace('%presenter%', "AutoDJ");
