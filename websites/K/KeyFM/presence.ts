@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "701157425318854756"
 });
 
-let sname, sartist, keylisteners, keyislive, keyelasped;
+let sname, sartist, keylisteners, keyislive, keypresenter;
 
 function metadataListener(): void {
       const data = JSON.parse(this.responseText);
@@ -21,7 +21,7 @@ function updateMetaData(): void {
 }
 
 setInterval(updateMetaData, 10000);
-window.onload = function() {console.log("Updated Meta"); updateMetaData()};
+window.onload = function() {console.log("Updated Meta"); updateMetaData(); return};
 
 let lastTitle;
 let lastTimeStart = Math.floor(Date.now() / 1000);
@@ -32,10 +32,10 @@ presence.on("UpdateData", async () => {
     smallImageKey: "keyfm-play"
   };
 
-  let toggleelaspe = await presence.getSetting("toggleelapse");
-  let changedetails = await presence.getSetting("changedetails");
-  let changestate = await presence.getSetting("changestate");
-  let changesmalltext = await presence.getSetting("changesmalltext");
+  const toggleelaspe = await presence.getSetting("toggleelapse");
+  const changedetails = await presence.getSetting("changedetails");
+  const changestate = await presence.getSetting("changestate");
+  const changesmalltext = await presence.getSetting("changesmalltext");
 
   if (toggleelaspe) {
     if (lastTitle != sname) {
