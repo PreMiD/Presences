@@ -7,9 +7,7 @@
   "description": {
     "en": "KeyFM.net is a non-profit radio community providing music around the globe, all day - every day."
   },
-  "url": [
-    "keyfm.net"
-  ],
+  "url": "keyfm.net",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/0JYJS9v.png",
   "thumbnail": "https://i.imgur.com/Atd3RzK.png",
