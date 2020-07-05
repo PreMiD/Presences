@@ -76,19 +76,21 @@ presence.on("UpdateData", async () => {
     }
     // document.querySelector("#dashboard_search")
     else if (document.location.pathname == "/search") {
-      title = (document.querySelector("#dashboard_search")as HTMLTextAreaElement);
+      title = document.querySelector(
+        "#dashboard_search"
+      ) as HTMLTextAreaElement;
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching";
       presenceData.state = title.value;
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
     } else {
-      title = (document.querySelector(
+      title = document.querySelector(
         "body > div.layout-page.page-with-contextual-sidebar > div.content-wrapper > div.alert-wrapper > nav > div > div > ul > li:nth-child(2) > a > span"
-      ) as HTMLTextAreaElement);
-      owner = (document.querySelector(
+      ) as HTMLTextAreaElement;
+      owner = document.querySelector(
         "body > div.layout-page.page-with-contextual-sidebar > div.content-wrapper > div.alert-wrapper > nav > div > div > ul > li:nth-child(1) > a"
-      ) as HTMLTextAreaElement);
+      ) as HTMLTextAreaElement;
       if (title && owner) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = title.innerText;
@@ -98,9 +100,9 @@ presence.on("UpdateData", async () => {
         presenceData.details = owner.innerText;
         presenceData.state = "My Respository";
       } else if (title == null && owner == null) {
-        owner = (document.querySelector(
+        owner = document.querySelector(
           "#content-body > div.user-profile > div.cover-block.user-cover-block > div.profile-header > div.user-info > p > span:nth-child(1)"
-        ) as HTMLTextAreaElement);
+        ) as HTMLTextAreaElement;
         presenceData.details = "Viewing:";
         presenceData.state = owner.innerText;
         presenceData.startTimestamp = browsingStamp;
