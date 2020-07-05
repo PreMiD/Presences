@@ -1,14 +1,16 @@
 const presence = new Presence({ clientId: "729087463452049559" });
 let sartist, strack, slisteners, sdj;
 
-async function newStats(): Promise<void> {
-  const data = await window
+function newStats(): Promise<void> {
+  window
     .fetch("https://stats.boun.cc")
-    .then((res) => res.json());
-  strack = data.song.track;
-  sartist = data.song.artist;
-  sdj = data.presenter.name.replace("Bounce", "AutoDJ");
-  slisteners = data.listeners;
+    .then((res) => res.json())
+    .then((data) => {
+      strack = data.song.track;
+      sartist = data.song.artist;
+      sdj = data.presenter.name.replace("Bounce", "AutoDJ");
+      slisteners = data.listeners; 
+    });
 }
 
 setInterval(newStats, 10000);
@@ -18,9 +20,9 @@ const stamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "bouncelogo",
-    details: `Streaming to ${slisteners} listeners`,
-    state: `${strack || "Loading"} - ${sartist || "Loading"}`,
-    smallImageText: `${sdj || "Loading"} is live!`,
+    details: `Streaming to ${slisteners || 0} listeners`,
+    state: `${strack || "Title"} - ${sartist || "Artist"}`,
+    smallImageText: `${sdj || "AutoDJ"} is live!`,
     startTimestamp: stamp
   };
   if (sdj !== "AutoDJ") {
