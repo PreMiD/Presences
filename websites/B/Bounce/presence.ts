@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "729087463452049559" });
 let sartist, strack, slisteners, sdj;
 
 function newStats(): Promise<void> {
-  const data = window
+  window
     .fetch("https://stats.boun.cc")
     .then((res) => res.json())
     .then((data) => {
@@ -11,7 +11,7 @@ function newStats(): Promise<void> {
       sdj = data.presenter.name.replace("Bounce", "AutoDJ");
       slisteners = data.listeners; 
     });
-};
+}
 
 setInterval(newStats, 10000);
 newStats();
