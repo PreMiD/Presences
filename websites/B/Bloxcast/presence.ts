@@ -1,6 +1,6 @@
 const presence = new Presence({
     clientId: "729241422179467315"
-})
+});
 
 const startTime = Math.floor(Date.now() / 1000);
 
