@@ -5,14 +5,13 @@ function newStats(): Promise<void> {
   const data = window
     .fetch("https://stats.boun.cc")
     .then((res) => res.json())
-    .then((json) => {
+    .then((data) => {
       strack = data.song.track;
       sartist = data.song.artist;
       sdj = data.presenter.name.replace("Bounce", "AutoDJ");
       slisteners = data.listeners; 
-    })
-
-}
+    });
+};
 
 setInterval(newStats, 10000);
 newStats();
