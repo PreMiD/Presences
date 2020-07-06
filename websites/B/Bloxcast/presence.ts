@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
     };
 
     title = document.querySelector("#title").innerHTML;
-    artist = document.querySelector("#")
+    artist = document.querySelector("#artist").innerHTML;
     DJ = document.querySelector("#dj").innerHTML;
     playbackStatus = getStatus();
     if(playbackStatus === "Paused"){
