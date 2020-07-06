@@ -1,7 +1,7 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "607754656453623843"
 });
-var strings = presence.getStrings({
+const strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
   live: "presence.activity.live",
@@ -123,13 +123,13 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  for (let [k, v] of Object.entries(statics)) {
+  for (const [k, v] of Object.entries(statics)) {
     if (path.match(k)) {
       data = { ...data, ...v };
     }
   }
 
-  const parseVideo = async (video: HTMLVideoElement) => {
+  const parseVideo = async (video: HTMLVideoElement): Promise<void> => {
     if (video.duration >= 1073741824) {
       // Live
       data.details = getElement(".channel-info-content h2"); // Title
@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
   if (path.includes("/squad/")) {
     const squad = document.querySelectorAll(".squad-stream-channel-card a");
 
-    let squadNames: string[] = new Array();
+    const squadNames: string[] = [];
     squad.forEach((squadUser) => {
       squadNames.push(squadUser.textContent);
     });
@@ -246,7 +246,7 @@ presence.on("UpdateData", async () => {
   }
 
   if (path.includes("/directory/game/")) {
-    let category = getElement(".directory-header-new__banner-cover h1");
+    const category = getElement(".directory-header-new__banner-cover h1");
     const tab = getElement(".tw-c-text-link");
 
     data.details = "Viewing Category...";
