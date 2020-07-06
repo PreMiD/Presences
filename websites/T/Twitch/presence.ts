@@ -108,6 +108,10 @@ const statics = {
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/");
 
+  const showBrowsing = await presence.getSetting("browse");
+  const showLive = await presence.getSetting("live");
+  const showVideo = await presence.getSetting("video");
+
   let data: PresenceData = {
     details: undefined,
     state: undefined,
@@ -123,21 +127,21 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  for (const [k, v] of Object.entries(statics)) {
-    if (path.match(k)) {
-      data = { ...data, ...v };
-    }
-  }
-
   const parseVideo = async (video: HTMLVideoElement): Promise<void> => {
-    if (video.duration >= 1073741824) {
+    const live = video.duration >= 1073741824;
+
+    if (showLive && live) {
       // Live
+
       data.details = getElement(".channel-info-content h2"); // Title
       data.state = getElement(".channel-info-content .tw-c-text-base"); // Streamer
       data.smallImageKey = "live";
       data.smallImageText = (await strings).live;
-    } else {
-      // Video or Clip
+    }
+
+    if (showVideo && !live) {
+      // Video or Clips
+
       data.details = getElement(".channel-info-content h2")?.split("•").shift();
       data.state = getElement(".channel-info-content .tw-c-text-base"); //Streamer
       data.smallImageKey = "play";
@@ -148,7 +152,7 @@ presence.on("UpdateData", async () => {
       data.endTimestamp = timestamps[1];
     }
 
-    if (video.paused) {
+    if (((showLive && live) || (showVideo && !live)) && video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
       data.smallImageKey = "pause";
@@ -156,31 +160,100 @@ presence.on("UpdateData", async () => {
     }
   };
 
-  if (path === "/") {
-    data.details = "Browsing...";
-    data.state = "Home";
-  }
+  if (showBrowsing) {
+    for (const [k, v] of Object.entries(statics)) {
+      if (path.match(k)) {
+        data = { ...data, ...v };
+      }
+    }
 
-  let user = getElement(".home-header-sticky .tw-title");
-  if (user) {
-    const tab = getElement(".tw-c-text-link");
-    user += tab ? ` (${tab})` : "";
+    if (path === "/") {
+      data.details = "Browsing...";
+      data.state = "Home";
+    }
 
-    data.details = "Viewing Profile...";
-    data.state = user;
-  }
+    let user = getElement(".home-header-sticky .tw-title");
+    if (user) {
+      const tab = getElement(".tw-c-text-link");
+      user += tab ? ` (${tab})` : "";
 
-  if (path.includes("/team/")) {
-    let teamName = document.location.pathname.split("/").pop();
-    teamName = teamName
-      .split("_")
-      .map((word) => {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-      })
-      .join(" ");
+      data.details = "Viewing Profile...";
+      data.state = user;
+    }
 
-    data.details = "Viewing Team...";
-    data.state = teamName;
+    if (path.includes("/team/")) {
+      let teamName = document.location.pathname.split("/").pop();
+      teamName = teamName
+        .split("_")
+        .map((word) => {
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(" ");
+
+      data.details = "Viewing Team...";
+      data.state = teamName;
+    }
+
+    if (path.includes("/settings/")) {
+      data.details = "Viewing Settings...";
+      data.state = getElement(".tw-tab__link--active");
+    }
+
+    if (path.includes("/friends/")) {
+      const tab = getElement(".tw-tab__link--active");
+
+      data.details = "Viewing Friends...";
+      data.state = tab;
+    }
+
+    if (path.includes("/subscriptions/")) {
+      const tab = getElement(".tw-tab__link--active");
+
+      data.details = "Viewing Subscriptions...";
+      data.state = !tab.includes("Your")
+        ? tab.replace("Subscriptions", "")
+        : undefined;
+    }
+
+    if (path.includes("/wallet/")) {
+      const tab = getElement(".tw-c-text-link");
+
+      data.details = "Viewing Wallet...";
+      data.state = !tab.includes("Wallet") ? tab : undefined;
+    }
+
+    if (path.includes("/directory/")) {
+      const tab = getElement(".tw-c-text-link");
+
+      data.details = "Browsing...";
+      data.state = tab;
+    }
+
+    if (path.includes("/directory/game/")) {
+      const category = getElement(".directory-header-new__banner-cover h1");
+      const tab = getElement(".tw-c-text-link");
+
+      data.details = "Viewing Category...";
+      data.state = category && category + ` (${tab})`;
+    }
+
+    if (path.includes("/directory/esports/")) {
+      const game = getElement(
+        ".esports-directory-single-category-header__info p"
+      );
+
+      data.details = "Viewing Esports...";
+      data.state = game;
+
+      console.log(data.details);
+    }
+
+    if (path.includes("/directory/following/")) {
+      const tab = getElement(".tw-c-text-link");
+
+      data.details = "Viewing People I Follow...";
+      data.state = !tab.includes("Overview") ? tab : undefined;
+    }
   }
 
   if (path.includes("/squad/")) {
@@ -208,67 +281,6 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "live";
       data.smallImageText = (await strings).live;
     }
-  }
-
-  if (path.includes("/settings/")) {
-    data.details = "Viewing Settings...";
-    data.state = getElement(".tw-tab__link--active");
-  }
-
-  if (path.includes("/friends/")) {
-    const tab = getElement(".tw-tab__link--active");
-
-    data.details = "Viewing Friends...";
-    data.state = tab;
-  }
-
-  if (path.includes("/subscriptions/")) {
-    const tab = getElement(".tw-tab__link--active");
-
-    data.details = "Viewing Subscriptions...";
-    data.state = !tab.includes("Your")
-      ? tab.replace("Subscriptions", "")
-      : undefined;
-  }
-
-  if (path.includes("/wallet/")) {
-    const tab = getElement(".tw-c-text-link");
-
-    data.details = "Viewing Wallet...";
-    data.state = !tab.includes("Wallet") ? tab : undefined;
-  }
-
-  if (path.includes("/directory/")) {
-    const tab = getElement(".tw-c-text-link");
-
-    data.details = "Browsing...";
-    data.state = tab;
-  }
-
-  if (path.includes("/directory/game/")) {
-    const category = getElement(".directory-header-new__banner-cover h1");
-    const tab = getElement(".tw-c-text-link");
-
-    data.details = "Viewing Category...";
-    data.state = category && category + ` (${tab})`;
-  }
-
-  if (path.includes("/directory/esports/")) {
-    const game = getElement(
-      ".esports-directory-single-category-header__info p"
-    );
-
-    data.details = "Viewing Esports...";
-    data.state = game;
-
-    console.log(data.details);
-  }
-
-  if (path.includes("/directory/following/")) {
-    const tab = getElement(".tw-c-text-link");
-
-    data.details = "Viewing People I Follow...";
-    data.state = !tab.includes("Overview") ? tab : undefined;
   }
 
   const homeCarousel: HTMLDivElement = document.querySelector(

@@ -21,5 +21,25 @@
   "thumbnail": "https://i.imgur.com/OAcBmwW.png",
   "color": "#9146FF",
   "tags": ["video", "streaming", "entertainment"],
-  "category": "videos"
+  "category": "videos",
+  "settings": [
+    {
+      "id": "browse",
+      "title": "Show Browsing Status",
+      "icon": "fas fa-book-reader",
+      "value": true
+    },
+    {
+      "id": "live",
+      "title": "Show Livestreams",
+      "icon": "fas fa-podcast",
+      "value": true
+    },
+    {
+      "id": "video",
+      "title": "Show Videos and Clips",
+      "icon": "fas fa-video",
+      "value": true
+    }
+  ]
 }
