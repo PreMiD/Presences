@@ -98,6 +98,10 @@ const statics = {
   "/p/(\\w*)/giftcard/": {
     details: "Viewing Info...",
     state: "Giftcards"
+  },
+  "/p/(\\w*)/artists/": {
+    details: "Viewing Info...",
+    state: "Artists"
   }
 };
 
