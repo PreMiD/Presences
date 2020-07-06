@@ -16,13 +16,14 @@
     "zh_TW": "Twitch是面向遊戲玩家和各種事物的全球領先的實時串流平台。快來與來自世界各地的數百萬粉絲一起觀看和聊天。"
   },
   "url": "www.twitch.tv",
-  "version": "1.9.11",
+  "version": "2.0",
   "logo": "https://i.imgur.com/So7h3G0.png",
   "thumbnail": "https://i.imgur.com/OAcBmwW.png",
   "color": "#9146FF",
   "tags": [
     "video",
-    "streaming"
+    "streaming",
+    "entertainment"
   ],
   "category": "videos"
 }
