@@ -5,7 +5,8 @@ const presence = new Presence({
 const startTime = Math.floor(Date.now() / 1000);
 
 let title: string;
-let author: string;
+let DJ: string;
+let artist: string;
 let playbackStatus: string;
 
 function getStatus(): string {
@@ -26,7 +27,8 @@ presence.on("UpdateData", async () => {
     };
 
     title = document.querySelector("#title").innerHTML;
-    author = document.querySelector("#artist").innerHTML;
+    artist = document.querySelector("#")
+    DJ = document.querySelector("#dj").innerHTML;
     playbackStatus = getStatus();
     if(playbackStatus === "Paused"){
         presenceData.smallImageKey = "stop";
@@ -34,8 +36,8 @@ presence.on("UpdateData", async () => {
     if(playbackStatus === "Playing"){
         presenceData.smallImageKey = "play";
     }
-    presenceData.state = title;
-    presenceData.details = author;
+    presenceData.state = "🎙️ | " + DJ;
+    presenceData.details = "🎵 | " + artist + " - " + title;
     presenceData.smallImageText = playbackStatus;
 
     if(presenceData.details == null){
