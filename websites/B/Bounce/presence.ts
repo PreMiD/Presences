@@ -9,7 +9,7 @@ function newStats(): Promise<void> {
       strack = data.song.track;
       sartist = data.song.artist;
       sdj = data.presenter.name.replace("Bounce", "AutoDJ");
-      slisteners = data.listeners; 
+      slisteners = data.listeners;
     });
 }
 

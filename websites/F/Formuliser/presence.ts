@@ -10,9 +10,11 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  formula = document.getElementById('formula') as HTMLInputElement;
+  formula = document.getElementById("formula") as HTMLInputElement;
 
-  formulaName = document.querySelector('span#elements-body > details > summary') ?? document.querySelector('span#elements-body');
+  formulaName =
+    document.querySelector("span#elements-body > details > summary") ??
+    document.querySelector("span#elements-body");
 
   presenceData.details = formula.value;
   presenceData.state = formulaName.innerText;
