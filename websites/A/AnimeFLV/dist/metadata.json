@@ -3,6 +3,12 @@
     "name": "Zerlingg",
     "id": "156481332652802048"
   },
+  "contributors": [
+    {
+      "name": "Non Serviam",
+      "id": "154651965022928896"
+    }
+  ],
   "service": "AnimeFLV",
   "description": {
     "en": "AnimeFLV is a streaming website where you can watch anime with Spanish subtitles.",
@@ -10,10 +16,9 @@
   },
   "url": [
     "animeflv.ru",
-    "animeflv.net",
-    "www5.animeflv.cc"
+    "animeflv.net"
   ],
-  "version": "1.1.4",
+  "version": "1.1.6",
   "logo": "https://i.ibb.co/k1x0mXZ/descarga.png",
   "thumbnail": "https://i.ibb.co/HFKzffL/05212f589cb42f3d29073ce164a66eaa.jpg",
   "color": "#694ba1",
