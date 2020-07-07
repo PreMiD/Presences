@@ -1,7 +1,7 @@
 {
   "author": {
     "name": "The Gamerzs",
-    "id": "181835340330303497"
+    "id": "730142125181894657"
   },
   "url": [
     "streamlabs.com",
@@ -18,11 +18,6 @@
   "logo": "https://i.imgur.com/a2NN4ax.png",
   "thumbnail": "https://i.imgur.com/IuULwTC.png",
   "color": "#80F5D2",
-  "tags": [
-    "games",
-    "social",
-    "videos",
-    "streaming"
-  ],
+  "tags": ["games", "social", "videos", "streaming"],
   "category": "videos"
 }
