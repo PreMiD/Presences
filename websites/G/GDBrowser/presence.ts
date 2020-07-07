@@ -12,8 +12,8 @@ presence.on("UpdateData", async () => {
   if (window.location.href.includes("gdbrowser.com")) {
     // Levels
     if (
-      window.location.pathname.toLowerCase() !== "/" ||
-      window.location.pathname.toLowerCase() === "/daily" ||
+      (window.location.pathname.toLowerCase() !== "/" &&
+        window.location.pathname.toLowerCase() === "/daily") ||
       window.location.pathname.toLowerCase() === "/weekly"
     ) {
       const downloads = document.getElementsByClassName(
@@ -87,52 +87,54 @@ presence.on("UpdateData", async () => {
           case "followed":
             presenceData.state = "💙 Viewing followed levels";
             break;
+          default:
+            switch (q.get("diff")) {
+              case "1":
+                presenceData.state = "😄 Viewing Easy levels";
+                break;
+              case "2":
+                presenceData.state = "😃 Viewing Normal levels";
+                break;
+              case "3":
+                presenceData.state = "😅 Viewing Hard levels";
+                break;
+              case "4":
+                presenceData.state = "😐 Viewing Harder levels";
+                break;
+              case "5":
+                presenceData.state = "🙁 Viewing Insane levels";
+                break;
+              case "-1":
+                presenceData.state = "😶 Viewing Unrated levels";
+                break;
+              case "-2":
+                switch (q.get("demonFilter")) {
+                  case "1":
+                    presenceData.state = "😠 Viewing Easy Demons";
+                    break;
+                  case "2":
+                    presenceData.state = "😡 Viewing Medium Demons";
+                    break;
+                  case "3":
+                    presenceData.state = "🤬 Viewing Hard Demons";
+                    break;
+                  case "4":
+                    presenceData.state = "😈 Viewing Insane Demons";
+                    break;
+                  case "5":
+                    presenceData.state = "👿 Viewing Extreme Demons";
+                    break;
+                }
+                break;
+              default:
+                presenceData.state = `Searching for ${
+                  document.getElementById("header").innerHTML
+                }`;
+                break;
+            }
         }
 
         // Diffs (Also with 101% more switch statement)
-        switch (q.get("diff")) {
-          case "1":
-            presenceData.state = "😄 Viewing Easy levels";
-            break;
-          case "2":
-            presenceData.state = "😃 Viewing Normal levels";
-            break;
-          case "3":
-            presenceData.state = "😅 Viewing Hard levels";
-            break;
-          case "4":
-            presenceData.state = "😐 Viewing Harder levels";
-            break;
-          case "5":
-            presenceData.state = "🙁 Viewing Insane levels";
-            break;
-          case "-1":
-            presenceData.state = "😶 Viewing Unrated levels";
-            break;
-          case "-2":
-            switch (q.get("demonFilter")) {
-              case "1":
-                presenceData.state = "😠 Viewing Easy Demons";
-                break;
-              case "2":
-                presenceData.state = "😡 Viewing Medium Demons";
-                break;
-              case "3":
-                presenceData.state = "🤬 Viewing Hard Demons";
-                break;
-              case "4":
-                presenceData.state = "😈 Viewing Insane Demons";
-                break;
-              case "5":
-                presenceData.state = "👿 Viewing Extreme Demons";
-                break;
-            }
-            break;
-          default:
-            presenceData.state = `Searching for ${
-              document.getElementById("header").innerHTML
-            }`;
-        }
       }
     }
 
