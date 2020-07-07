@@ -5,12 +5,12 @@ const presence = new Presence({
 let sname, sartist, keylisteners, keyislive, keypresenter;
 
 function metadataListener(): void {
-      const data = JSON.parse(this.responseText);
-      sname = data.playing.song;
-      sartist = data.playing.artist;
-      keylisteners = data.listeners.current;
-      keyislive = data.currentDJ.autoDJ;
-      keypresenter = data.currentDJ.username;
+  const data = JSON.parse(this.responseText);
+  sname = data.playing.song;
+  sartist = data.playing.artist;
+  keylisteners = data.listeners.current;
+  keyislive = data.currentDJ.autoDJ;
+  keypresenter = data.currentDJ.username;
 }
 
 function updateMetaData(): void {
@@ -21,7 +21,9 @@ function updateMetaData(): void {
 }
 
 setInterval(updateMetaData, 10000);
-window.onload = function(): void {updateMetaData()};
+window.onload = function (): void {
+  updateMetaData();
+};
 
 let lastTitle;
 let lastTimeStart = Math.floor(Date.now() / 1000);
@@ -48,47 +50,54 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = false;
   }
 
-    if (!sname) {
-      lastTitle = "Loading...";
-      sname = "Loading...";
-    } else if (!sartist) {
-      sartist = "Loading...";
-    } else if (!keypresenter) {
-      keypresenter = "Loading...";
-    } else if (!keylisteners) {
-      keylisteners = "Loading...";
-    }
+  if (!sname) {
+    lastTitle = "Loading...";
+    sname = "Loading...";
+  } else if (!sartist) {
+    sartist = "Loading...";
+  } else if (!keypresenter) {
+    keypresenter = "Loading...";
+  } else if (!keylisteners) {
+    keylisteners = "Loading...";
+  }
 
   if (!keyislive) {
     if (changedetails) {
-      presenceData.details = changedetails.replace('%song%', sname).replace('%artist%', sartist);
+      presenceData.details = changedetails
+        .replace("%song%", sname)
+        .replace("%artist%", sartist);
     } else {
       presenceData.details = "🎵 | " + sartist + " - " + sname;
     }
     if (changestate) {
-      presenceData.state = changestate.replace('%presenter%', keypresenter);
+      presenceData.state = changestate.replace("%presenter%", keypresenter);
     } else {
       presenceData.state = "🎙️ | " + keypresenter;
     }
   } else {
     if (changedetails) {
-      presenceData.details = changedetails.replace('%song%', sname).replace('%artist%', sartist);
+      presenceData.details = changedetails
+        .replace("%song%", sname)
+        .replace("%artist%", sartist);
     } else {
       presenceData.details = "🎵 | " + sartist + " - " + sname;
     }
     if (changestate) {
-      presenceData.state = changestate.replace('%presenter%', "AutoDJ");
+      presenceData.state = changestate.replace("%presenter%", "AutoDJ");
     } else {
       presenceData.state = "🎙️ | " + "AutoDJ";
     }
   }
 
   if (changesmalltext) {
-    presenceData.smallImageText = changesmalltext.replace('%listeners%', keylisteners);
+    presenceData.smallImageText = changesmalltext.replace(
+      "%listeners%",
+      keylisteners
+    );
   } else {
     presenceData.smallImageText = "Listeners: " + keylisteners;
   }
 
-    presence.setActivity(presenceData, true);
-    presence.setTrayTitle();
+  presence.setActivity(presenceData, true);
+  presence.setTrayTitle();
 });
