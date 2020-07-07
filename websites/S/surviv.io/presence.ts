@@ -15,7 +15,7 @@ let place: string;
 let browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let data: PresenceData = {
+  const data: PresenceData = {
     largeImageKey: "logo"
   };
   const broadcasttc = await presence.getSetting("broadcasttc");
@@ -32,25 +32,25 @@ presence.on("UpdateData", async () => {
     if (window.getComputedStyle(document.querySelector("#team-menu")).display == "block"){ // If the player made a team
       gametypequery = gametypequery.replace('"]', '-team"]');
       gamemodequery = gamemodequery.replace('"]', '-team"]');
-    };
+    }
 
     gametype = document.querySelector(gametypequery).textContent;
     gamemode = document.querySelector(gamemodequery).textContent;
     data.details = "In the menus...";
     data.startTimestamp = browsingStamp;
   } else if (active) { // Player is in-game    
-    data.smallImageKey = gametype.toLowerCase()
-    data.smallImageText = "Playing " + gametype + "s"
+    data.smallImageKey = gametype.toLowerCase();
+    data.smallImageText = "Playing " + gametype + "s";
     if (broadcasttc && (gametype == "Duo" || gametype == "Squad") && document.querySelector("#team-code")){
       data.smallImageText += " - " + document.querySelector("#team-code").textContent;
-    };
+    }
     alivecount = document.querySelector(".ui-players-alive").textContent;
     killcount = document.querySelector(".ui-player-kills").textContent;
 
     data.startTimestamp = browsingStamp;
     data.details = `${killcount} kill${parseInt(killcount) > 1 ? "s" : ""} with ${alivecount} alive`;
     data.state = `${gamemode != "50v50" ? gametype + " - " : ""}${gamemode}`;
-  };
+  }
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
