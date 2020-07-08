@@ -1,0 +1,19 @@
+{
+    "author": {
+      "name": "tom",
+      "id": "266024212978728963"
+    },
+    "service": "FreeCodeCamp",
+    "description": {
+      "en": "Want to learn code? Well freecodecamp has 11 languages you can choose from"
+    },
+    "url": "www.freecodecamp.org",
+    "version": "1.3.0",
+    "logo": "https://i.imgur.com/asmbZdS.png",
+    "thumbnail": "https://i.imgur.com/3jskcBw.png",
+    "color": "#00008B",
+    "tags": [
+      "coding"
+    ],
+    "category": "other"
+  }
