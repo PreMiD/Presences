@@ -1,6 +1,6 @@
 const presence = new Presence({
   clientId: "729995077111250966"
-})
+});
 
 const timeStamp = Math.floor(Date.now() / 1000);
 
@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
   }
   else if (page.startsWith("/news/")){
     presenceData.details = "Viewing Page:";
-    presenceData.state = "Reading the news"
+    presenceData.state = "Reading the news";
   }
   else if (page.startsWith("/learn")){
     presenceData.details = "Deciding:";
