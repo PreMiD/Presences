@@ -12,7 +12,7 @@ iframe.on("UpdateData", async () => {
 				duration: video.duration,
 				currentTime: video.currentTime,
 				paused: video.paused
-			})
+			});
 		}
 	}
 });
