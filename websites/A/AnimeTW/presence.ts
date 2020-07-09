@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "523553075680772106",
     mediaKeys: false
 }),
@@ -20,13 +20,13 @@ presence.on("iFrameData", data => {
 
 presence.on("UpdateData", async () => {
 
-    var data: presenceData = {
+    const data: presenceData = {
         largeImageKey: "animetw"
     };
 
     if(video != null && !isNaN(video.duration) && document.location.pathname.includes("/watch")) {
 
-      	var timestamps = getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
+      	const timestamps = getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
 
         data.details = document.querySelector("head > title").textContent;
 
@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 });
 
 function getTimestamps(videoTime: number, videoDuration: number) {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
