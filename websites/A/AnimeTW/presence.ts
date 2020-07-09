@@ -7,7 +7,7 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
 }),
-    tv: any
+    tv: any;
     video = {
         duration: 0,
         currentTime: 0,
@@ -33,7 +33,7 @@ const timestamps = getTimestamps(Math.floor(video.currentTime),Math.floor(video.
         data.smallImageKey = video.paused ? "pause" : "play",
         data.smallImageText = video.paused ? (await strings).pause : (await strings).play,
         data.startTimestamp = timestamps[0],
-        data.endTimestamp = timestamps[1]
+        data.endTimestamp = timestamps[1];
 
 if (video.paused) {
             delete data.startTimestamp;
