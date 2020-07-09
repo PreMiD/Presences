@@ -16,7 +16,7 @@ var presence = new Presence({
 
 presence.on("iFrameData", data => {
     video = data;
-})
+});
 
 presence.on("UpdateData", async () => {
 
