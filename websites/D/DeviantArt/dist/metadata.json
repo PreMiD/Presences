@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Hans5958",
+    "id": "279855717203050496"
+  },
+  "service": "DeviantArt",
+  "url": [
+    "www.deviantart.com",
+    "about.deviantart.com",
+    "chat.deviantart.com",
+    "forum.deviantart.com",
+    "groups.deviantart.com",
+    "portfolio.deviantart.com",
+    "shop.deviantart.com",
+    "www.deviantartsupport.com",
+    "www.eclipsefeedback.com",
+    "deviantartads.com",
+    "sta.sh"
+  ],
+  "version": "1.1.6",
+  "logo": "https://i.imgur.com/6ZCPjDK.png",
+  "thumbnail": "https://i.imgur.com/zW8OMC7.png",
+  "color": "#05cc47",
+  "tags": ["art", "fandom", "drawing", "creative", "literature", "deviation"],
+  "description": {
+    "en": "Founded in August 2000, DeviantArt is the largest online social network for artists and art enthusiasts, and a platform for emerging and established artists to exhibit, promote, and share their works with an enthusiastic, art-centric community."
+  },
+  "category": "other"
+}

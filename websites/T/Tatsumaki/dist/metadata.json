@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Eren",
+    "id": "478937019758673931"
+  },
+  "service": "Tatsumaki",
+  "description": {
+    "tr": "Tatsumaki, en büyük botlardan biri olmakla birlikte içine; eğlence, para vb. komutları bulunduruyor.",
+    "en": "Tatsumaki is providing social aspects including member profiles, levels, fun stuff & simple moderation."
+  },
+  "url": "tatsu.gg",
+  "version": "1.2.7",
+  "logo": "https://i.imgur.com/di7LB5b.png",
+  "thumbnail": "https://imgur.com/MG4Uj0j.png",
+  "color": "#3FA549",
+  "tags": [
+    "bot",
+    "turkish",
+    "tatsumaki"
+  ],
+  "category": "other"
+}

@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "GURRMAN375D",
+    "id": "446528923535278082"
+  },
+  "service": "VidCloud9",
+  "description": {
+    "en": "VidCloud9 is a great place to find shows you missed or movies you are dying to see."
+  },
+  "url": "vidcloud9.com",
+  "version": "2.0.4",
+  "logo": "https://i.imgur.com/AEOuBRB.png",
+  "thumbnail": "https://i.imgur.com/IeqotZd.png",
+  "color": "#00050C",
+  "tags": [
+    "watch-movies",
+    "vidcloud9"
+  ],
+  "category": "videos",
+  "iframe": true,
+  "settings": [
+    {
+      "id": "sSI",
+      "title": "Show Site Info",
+      "icon": "fas fa-info",
+      "value": true
+    },
+    {
+      "id": "sTE",
+      "title": "Show Time Elapsed",
+      "icon": "fas fa-clock",
+      "value": true
+    },
+    {
+      "id": "sVT",
+      "title": "Show Video Time",
+      "icon": "fas fa-clock",
+      "value": true
+    }
+  ]
+}
