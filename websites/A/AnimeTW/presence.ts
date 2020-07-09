@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
    		data.smallImageKey = "search";
    		data.smallImageText = (await strings).browsing;
    		presence.setActivity(data);
-   	}
+  	}
 });
 
 function getTimestamps(videoTime: number, videoDuration: number) {
