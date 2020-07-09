@@ -110,6 +110,6 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
-    //console.log(presenceData);
+
   }
 });
