@@ -42,8 +42,7 @@ if (video.paused) {
 
         presence.setActivity(data, !video.paused);
     }
-
-   	else {
+	else {
 		data.details = (await strings).browsing;
 		data.smallImageKey = "search";
 		data.smallImageText = (await strings).browsing;
