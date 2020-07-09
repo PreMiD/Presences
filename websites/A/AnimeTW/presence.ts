@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
    		data.details = (await strings).browsing;
    		data.smallImageKey = "search";
    		data.smallImageText = (await strings).browsing;
-   		presence.setActivity(data);
+		presence.setActivity(data);
   	}
 });
 
