@@ -1,0 +1,18 @@
+{
+  "author": {
+    "name": "Giingu",
+    "id": "156481332652802048"
+  },
+  "service": "animetw",
+  "description": {
+    "en": "AnimeTW is a streaming website where you can watch anime with Spanish subtitles."
+  },
+  "url": ["animetw.net"],
+  "version": "1.0",
+  "logo": "https://i.ibb.co/2nk4xJS/Sin-t-tulo.jpg",
+  "thumbnail": "https://i.ibb.co/TqmncHy/image.png",
+  "color": "#694ba1",
+  "tags": ["animetw", "streaming", "embedded-links"],
+  "category": "anime",
+  "iframe": true
+}
