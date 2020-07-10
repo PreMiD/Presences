@@ -28,6 +28,6 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname == "/pricing/") {
       presenceData.details = "Looking price",
       presenceData.state = "Shop";
-    };
+    }
   }
 });
