@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
       video.duration
     );
     console.log("The current time is " + timestamps[0] + "and the durration is " + timestamps[1]);
-    console.log("The video is " + video.paused)
+    console.log("The video is " + video.paused);
     const title = document.querySelector(
         "#reproductor-box > div.video-header > h1"
       ).textContent;
