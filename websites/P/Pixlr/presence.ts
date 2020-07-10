@@ -29,5 +29,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Looking price",
       presenceData.state = "Shop";
     }
+      presence.setActivity(presenceData);
   }
 });
