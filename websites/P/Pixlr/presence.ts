@@ -26,13 +26,8 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname == "/pricing/") {
-      presenceData.details = "Looking price";
-
-    } else {
-      const presenceData: PresenceData = {
-        largeImageKey: "pixlr"
-      };
-      presence.setActivity(presenceData);
-    }
+      presenceData.details = "Looking price",
+      presenceData.state = "Shop";
+    };
   }
 });
