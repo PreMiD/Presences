@@ -24,7 +24,7 @@ let videoEpisode;
 let fullName: string;
 let timestamps: number[];
 
-presence.on("iFrameData", (data: { iframe_video: { duration: number; iFrameVideo: boolean; currTime: number; paused: boolean; } }) => {
+presence.on("iFrameData", (data: { iframe_video: { duration: number; iFrameVideo: boolean; currTime: number; paused: boolean } }) => {
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
     iFrameVideo = data.iframe_video.iFrameVideo;
