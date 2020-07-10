@@ -17,14 +17,14 @@ function getTimestamps(
 }
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let iFrameVideo: boolean, currentTime: number, duration: number, paused: any, playback;
+let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean, playback;
 let pageNumber;
 let videoName;
 let videoEpisode;
 let fullName: string;
 let timestamps: number[];
 
-presence.on("iFrameData", (data: { iframe_video: { duration: any; iFrameVideo: any; currTime: any; paused: any; }; }) => {
+presence.on("iFrameData", (data: { iframe_video: { duration: number; iFrameVideo: boolean; currTime: number; paused: boolean; } }) => {
   playback = data.iframe_video.duration !== null ? true : false;
   if (playback) {
     iFrameVideo = data.iframe_video.iFrameVideo;
@@ -205,7 +205,8 @@ presence.on("UpdateData", async () => {
     }
     if (iFrameVideo === true) {
       timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-    } if (document.location.href.endsWith("=alt")) {
+    }
+    if (document.location.href.endsWith("=alt")) {
       // Alternative
       if (fullName.includes(" Special")) {
         if (fullName.includes(" Specials Episodio ")) {
