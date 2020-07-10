@@ -1,0 +1,19 @@
+{
+  "author": {
+    "name": "Giingu",
+    "id": "156481332652802048"
+  },
+  "service": "JKAnime",
+  "description": {
+    "en": "AnimeFenix is a Spanish streaming website where you can watch anime with Spanish subtitles.",
+    "zh_CN": "AnimeFenix是一个视频网站，您可以在其中观看带有西班牙语字幕的动漫。"
+  },
+  "url": "jkanime.net",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/C4WQSai.png",
+  "thumbnail": "https://i.imgur.com/3hJHEtg.png",
+  "color": "#00468b",
+  "tags": ["animefenix", "streaming", "embedded-links", "anime"],
+  "category": "anime",
+  "iframe": true
+}
