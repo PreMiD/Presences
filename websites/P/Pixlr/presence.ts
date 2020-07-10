@@ -17,14 +17,22 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (document.location.pathname == "/e/") {
       presenceData.details = "Edits an image",
-      presenceData.state = "Advanced editor"
+      presenceData.state = "Advanced editor";
       
       presence.setActivity(presenceData);
     } else if (document.location.pathname == "/x/") {
       presenceData.details = "Edits an image",
       presenceData.state = "Playful editor";
 
+      presence.setActivity(presenceData);
+    } else if (document.location.pathname == "/pricing/") {
+      presenceData.details = "Looking price";
 
+    } else {
+      const presenceData: PresenceData = {
+        largeImageKey: "pixlr"
+      };
+      presence.setActivity(presenceData);
     }
   }
-});  
+});
