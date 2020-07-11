@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Hans5958",
+    "id": "279855717203050496"
+  },
+  "service": "ManiaExchange",
+  "url": [
+    "mania-exchange.com",
+    "mania.exchange",
+    "www.mania-exchange.com",
+    "www.mania.exchange",
+    "tm.mania-exchange.com",
+    "tm.mania.exchange",
+    "sm.mania-exchange.com",
+    "sm.mania.exchange",
+    "item.mania-exchange.com",
+    "item.mania.exchange",
+    "item.exchange",
+    "accounts.mania-exchange.com",
+    "accounts.mania.exchange",
+    "tmtube.mania-exchange.com",
+    "tmtube.mania.exchange",
+    "api.mania-exchange.com",
+    "api.mania.exchange"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/KPcs9y1.png",
+  "thumbnail": "https://i.imgur.com/NYitprM.png",
+  "color": "#7ad5ff",
+  "tags": [
+    "trackmania",
+    "trackmania-2",
+    "shootmania",
+    "questmania",
+    "gaming",
+    "cars",
+    "trackmania2",
+    "maniaplanet",
+    "tm",
+    "tm2",
+    "mania-exchange"
+  ],
+  "description": {
+    "en": "The content network for Trackmania and Shootmania - driven by the community."
+  },
+  "category": "games"
+}
