@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
     const data: PresenceData = {};
-    const path = document.location.pathname;
+    let path = document.location.pathname;
 
     if (path === "/") {
         data.largeImageKey = "skindb";
