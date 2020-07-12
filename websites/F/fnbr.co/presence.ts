@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "632047673754648586"
 });
 
@@ -6,14 +6,14 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
   };
-  var path = document.location.pathname;
+  const path = document.location.pathname;
 
   if (path === "/") {
     data.details = "Viewing homepage";
   } else if (path === "/manage") {
     data.details = "Adding item";
   } else if (path.startsWith("/manage/edit/")) {
-    var editData = document.querySelector(".card-body h2 .cosmetic-name");
+    const editData = document.querySelector(".card-body h2 .cosmetic-name");
     data.details = "Editing item";
     data.state = editData.textContent;
   } else if (path === "/manage/sets") {
@@ -38,8 +38,8 @@ presence.on("UpdateData", async () => {
     path.startsWith("/umbrella") ||
     path.startsWith("/wrap")
   ) {
-    var itemTitle = document.querySelector(".col-md-10.col-s12.item-full h3");
-    var itemInfo = document.querySelector(".col-md-10.col-s12.item-full h4");
+    const itemTitle = document.querySelector(".col-md-10.col-s12.item-full h3");
+    const itemInfo = document.querySelector(".col-md-10.col-s12.item-full h4");
     data.details = "Viewing " + itemTitle.firstChild.textContent;
     data.state = itemInfo.textContent;
   } else if (path === "/upcoming") {
@@ -47,8 +47,8 @@ presence.on("UpdateData", async () => {
   } else if (path === "/list") {
     data.details = "Viewing cosmetics list";
   } else if (path.startsWith("/sets/")) {
-    var setName = document.querySelector(".col-md-12 h2");
-    var setInfo = document.querySelector(".col-md-12 p");
+    const setName = document.querySelector(".col-md-12 h2");
+    const setInfo = document.querySelector(".col-md-12 p");
     data.details = "Viewing " + setName.textContent;
     data.state = setInfo.textContent;
   } else if (path === "/sets") {
@@ -62,11 +62,11 @@ presence.on("UpdateData", async () => {
   } else if (path === "/history") {
     data.details = "Viewing shop history";
   } else if (path.startsWith("/shop/")) {
-    var shopHistoryData = document.querySelector(".col-md-12 h2 .you");
+    const shopHistoryData = document.querySelector(".col-md-12 h2 .you");
     data.details = "Viewing item shop";
     data.state = shopHistoryData.textContent;
   } else if (path === "/shop") {
-    var shopData = document.querySelector(".col-m.col-12.primary h2 .you");
+    const shopData = document.querySelector(".col-m.col-12.primary h2 .you");
     data.details = "Viewing item shop";
     data.state = shopData.textContent;
   } else if (path === "/modes") {

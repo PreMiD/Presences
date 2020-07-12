@@ -1,10 +1,10 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "731659541904621708"
 });
 
 presence.on("UpdateData", async () => {
     const data: PresenceData = {};
-    var path = document.location.pathname;
+    const path = document.location.pathname;
 
     if (path === "/") {
         data.largeImageKey = "skindb";
@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
             data.details = "Viewing homepage";
             data.state = "Fortnite";
         } else if (path === "/shop") {
-            var shopDate = document.querySelector(".shop-date-small");
+            const shopDate = document.querySelector(".shop-date-small");
             data.details = "Viewing item shop";
             data.state = shopDate.textContent;
         } else if (path === "/cosmetics") {
@@ -39,8 +39,8 @@ presence.on("UpdateData", async () => {
             path.startsWith("/umbrella") ||
             path.startsWith("/wrap")
           ) {
-            var itemTitle = document.querySelector(".item-title");
-            var itemType = document.querySelector(".type-rarity-string");
+            const itemTitle = document.querySelector(".item-title");
+            const itemType = document.querySelector(".type-rarity-string");
             data.details = "Viewing " + itemType.firstChild.textContent;
             data.state = itemTitle.textContent;
           } else if (path === "/upcoming") {
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
         } else if (path === "/sets") {
             data.details = "Viewing item sets";
         } else if (path.startsWith("/sets/")) {
-            var setName = document.querySelector(".item-title");
+            const setName = document.querySelector(".item-title");
             data.details = "Viewing item set";
             data.state = setName.textContent;
         } else {
@@ -65,13 +65,13 @@ presence.on("UpdateData", async () => {
         } else if (path === "/weapons") {
             data.details = "Viewing weapons";
         } else if (path.startsWith("/weapons/")) {
-            var title = document.querySelector(".weapon-detail h1");
+            const title = document.querySelector(".weapon-detail h1");
             data.details = "Viewing weapon";
             data.state = title.textContent.replace(" Skins", "");
         } else if (path === "/collections") {
             data.details = "Viewing collections";
         } else if (path.startsWith("/collections/")) {
-            var collectionName = document.querySelector(".item-title");
+            const collectionName = document.querySelector(".item-title");
             data.details = "Viewing collection";
             data.state = collectionName.textContent;
         } else if (
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
             path.startsWith("/shotgun/") ||
             path.startsWith("/sidearm/")
         ) {
-            var skinName = document.querySelector(".skin-detail h1");
+            const skinName = document.querySelector(".skin-detail h1");
             data.details = "Viewing skin";
             data.state = skinName.textContent;
         } else {
