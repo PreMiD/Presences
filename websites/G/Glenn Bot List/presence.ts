@@ -10,7 +10,7 @@ strings = presence.getStrings({
 // Const thing
 const browsingStamp = Math.floor(Date.now() / 1000);
 const path = document.location;
-const title = document.querySelector("head > title").textContent.replace("| Glenn Bot List", " ").replace("- Glenn Bot List API", " ") ?? "Glenn Bot List!"
+const title = document.querySelector("head > title").textContent.replace("| Glenn Bot List", " ").replace("- Glenn Bot List API", " ") ?? "Glenn Bot List!";
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Filling up the form";
     } else if (path.pathname.includes("me")) {
       if (path.pathname.includes("stats")) {
-        const user = document.querySelector("body > main > div.justify-content-center.mt-5 > div > h4").textContent ?? "UnknowUser#0000"
-        const karma = document.querySelector("body > main > div.justify-content-center.mt-5 > div > ul > li:nth-child(3) > span").textContent.replace("Total Karma", " Total Karma") ?? "0 Total Karma"
+        const user = document.querySelector("body > main > div.justify-content-center.mt-5 > div > h4").textContent ?? "UnknowUser#0000";
+        const karma = document.querySelector("body > main > div.justify-content-center.mt-5 > div > ul > li:nth-child(3) > span").textContent.replace("Total Karma", " Total Karma") ?? "0 Total Karma";
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = user + "'s Profile";
         presenceData.state = karma + " Karma";
@@ -67,15 +67,15 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Profile";
         presenceData.state = "Editing Bio...";
       } else {
-        const user = document.querySelector("body > main > div.justify-content-center.mt-5 > div > h4").textContent ?? "UnknowUser#0000"
-        const karma = document.querySelector("body > main > div.justify-content-center.mt-5 > div > ul > li:nth-child(3) > span").textContent.replace("Total Karma", " Total Karma")
+        const user = document.querySelector("body > main > div.justify-content-center.mt-5 > div > h4").textContent ?? "UnknowUser#0000";
+        const karma = document.querySelector("body > main > div.justify-content-center.mt-5 > div > ul > li:nth-child(3) > span").textContent.replace("Total Karma", " Total Karma") ?? "0 Total Karma";
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = user + "'s Profile";
         presenceData.state = karma + " Karma";
       }
     } else if (path.href.includes("/u/")) {
-      const user = document.querySelector("body > main > div.justify-content-center.mt-5 > div > h4").textContent ?? "UnknowUser#0000"
-      const krama = document.querySelector("body > main > div.justify-content-center.mt-5 > div > ul > li:nth-child(3) > span").textContent.replace("Total Karma", " Total Karma") ?? "0 Total Karma"
+      const user = document.querySelector("body > main > div.justify-content-center.mt-5 > div > h4").textContent ?? "UnknowUser#0000";
+      const krama = document.querySelector("body > main > div.justify-content-center.mt-5 > div > ul > li:nth-child(3) > span").textContent.replace("Total Karma", " Total Karma") ?? "0 Total Karma";
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = user + "'s Profile";
       presenceData.state = krama + " Karma";
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = title;
-      presenceData.state = "Viewing..."
+      presenceData.state = "Viewing...";
     }
   }
 
@@ -111,6 +111,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
-    //console.log(presenceData);
   }
 });
