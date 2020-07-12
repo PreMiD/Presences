@@ -92,6 +92,10 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = title;
         presenceData.state = "Confirming...";
+      } else if (path.pathname.includes("vote")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = title;
+        presenceData.state = "Voting...";
       } else {
       const vote = document.querySelector("body > main > div > div:nth-child(1) > div.col-md-3.text-center.bot-page-card.bot-page-card-small.shadow-2 > div:nth-child(7) > span:nth-child(2)");
       const decs = document.querySelector("body > main > div > div:nth-child(1) > div.col-md-6.text-center.bot-page-card.bot-page-card-large.shadow-2 > div > div:nth-child(1) > div > div:nth-child(1) > p");
