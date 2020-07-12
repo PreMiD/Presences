@@ -6,10 +6,7 @@ presence.on("UpdateData", async () => {
     const data: PresenceData = {};
     let path = document.location.pathname;
 
-    if (path === "/") {
-        data.largeImageKey = "skindb";
-        data.details = "Viewing homepage";
-    } else if (path.startsWith("/fortnite")) {
+    if (path.startsWith("/fortnite")) {
         data.largeImageKey = "fortnite";
         path = path.substring(9);
         if (path.length === 0) {
@@ -91,7 +88,12 @@ presence.on("UpdateData", async () => {
             data.details = "Viewing " + path.substring(1);
         }
     } else {
-        data.details = "Viewing " + path.substring(1);
+        data.largeImageKey = "skindb";
+        if (path === "/") {
+            data.details = "Viewing homepage";
+        } else {
+            data.details = "Viewing " + path.substring(1);
+        }
     }
 
     data.startTimestamp = Date.now();
