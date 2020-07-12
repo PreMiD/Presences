@@ -21,7 +21,7 @@
     {
       "id": "broadcasttc",
       "title": "Broadcast Team Code",
-      "icon": "fa fa-bullhorn",
+      "icon": "fas fa-bullhorn",
       "value": false 
     }
   ]
