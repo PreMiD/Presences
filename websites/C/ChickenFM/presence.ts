@@ -2,9 +2,6 @@ const presence = new Presence({
   clientId: "614154889206956043"
 });
 const loadTimeStamp = Math.floor(Date.now() / 1000);
-let trackTitle: string,
-    trackArtist: string,
-    stationName: string;
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
