@@ -440,11 +440,9 @@ if (updateCallback.present) {
   presence.on("UpdateData", async () => {
     resetData();
     updateCallback.function();
-    console.log(JSON.stringify(presenceData));
     presence.setActivity(presenceData);
   });
 } else {
-  console.log(presenceData);
   presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   });
