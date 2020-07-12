@@ -70,8 +70,6 @@ const resetData = (): void => {
     presenceData.details = "Reading a wiki page";
     presenceData.state = title;
   }
-
-  console.log(presenceData);
 })();
 
 if (updateCallback.present) {
