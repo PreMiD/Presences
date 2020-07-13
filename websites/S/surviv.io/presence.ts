@@ -19,17 +19,25 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
   const broadcasttc = await presence.getSetting("broadcasttc");
-  active = window.getComputedStyle(document.getElementById("start-menu-wrapper")).display == "none";
+  active =
+    window.getComputedStyle(document.getElementById("start-menu-wrapper"))
+      .display == "none";
   end = document.querySelector(".ui-stats-current") !== null;
-  
-  if (end) { // Player is looking at match results, this needs to be before checking if active due to the way the active variable is set up  
-    place = document.querySelector(".ui-stats-current .ui-stats-player-rank").textContent;
+
+  if (end) {
+    // Player is looking at match results, this needs to be before checking if active due to the way the active variable is set up
+    place = document.querySelector(".ui-stats-current .ui-stats-player-rank")
+      .textContent;
     data.details = "Placed " + place;
     data.startTimestamp = browsingStamp;
   } else if (!active) {
     gametypequery = 'div[id="index-play-type-selected"]';
     gamemodequery = 'div[id="index-play-mode-selected"]';
-    if (window.getComputedStyle(document.querySelector("#team-menu")).display == "block"){ // If the player made a team
+    if (
+      window.getComputedStyle(document.querySelector("#team-menu")).display ==
+      "block"
+    ) {
+      // If the player made a team
       gametypequery = gametypequery.replace('"]', '-team"]');
       gamemodequery = gamemodequery.replace('"]', '-team"]');
     }
@@ -38,17 +46,25 @@ presence.on("UpdateData", async () => {
     gamemode = document.querySelector(gamemodequery).textContent;
     data.details = "In the menus...";
     data.startTimestamp = browsingStamp;
-  } else if (active) { // Player is in-game    
+  } else if (active) {
+    // Player is in-game
     data.smallImageKey = gametype.toLowerCase();
     data.smallImageText = "Playing " + gametype + "s";
-    if (broadcasttc && (gametype == "Duo" || gametype == "Squad") && document.querySelector("#team-code")){
-      data.smallImageText += " - " + document.querySelector("#team-code").textContent;
+    if (
+      broadcasttc &&
+      (gametype == "Duo" || gametype == "Squad") &&
+      document.querySelector("#team-code")
+    ) {
+      data.smallImageText +=
+        " - " + document.querySelector("#team-code").textContent;
     }
     alivecount = document.querySelector(".ui-players-alive").textContent;
     killcount = document.querySelector(".ui-player-kills").textContent;
 
     data.startTimestamp = browsingStamp;
-    data.details = `${killcount} kill${parseInt(killcount) > 1 ? "s" : ""} with ${alivecount} alive`;
+    data.details = `${killcount} kill${
+      parseInt(killcount) > 1 ? "s" : ""
+    } with ${alivecount} alive`;
     data.state = `${gamemode != "50v50" ? gametype + " - " : ""}${gamemode}`;
   }
   if (data.details == null) {
@@ -56,5 +72,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   } else {
     presence.setActivity(data);
-  }  
+  }
 });
