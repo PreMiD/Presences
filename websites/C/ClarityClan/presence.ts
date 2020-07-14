@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "732636451933782047" 
 });
 
-function getPointsString():string {
+function getPointsString(): string {
     const x = document.getElementsByClassName("elementor-shortcode");
     return x[0].textContent;
 }
