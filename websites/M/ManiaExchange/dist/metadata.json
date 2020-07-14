@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.1",
   "author": {
     "name": "Hans5958",
     "id": "279855717203050496"
@@ -22,27 +22,31 @@
     "tmtube.mania-exchange.com",
     "tmtube.mania.exchange",
     "api.mania-exchange.com",
-    "api.mania.exchange"
+    "api.mania.exchange",
+    "trackmania.exchange"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/KPcs9y1.png",
   "thumbnail": "https://i.imgur.com/NYitprM.png",
   "color": "#7ad5ff",
   "tags": [
-    "trackmania",
-    "trackmania-2",
-    "shootmania",
-    "questmania",
-    "gaming",
     "cars",
-    "trackmania2",
+    "gaming",
+    "mania-exchange",
     "maniaplanet",
+    "questmania",
+    "shootmania",
     "tm",
     "tm2",
-    "mania-exchange"
+    "tmx",
+    "trackmania-2",
+    "trackmania-exchange",
+    "trackmaniaexchange",
+    "trackmania",
+    "trackmania2"
   ],
   "description": {
-    "en": "The content network for Trackmania and Shootmania - driven by the community."
+    "en": "The content network for Trackmania and Shootmania - driven by the community. This one supports the newer, TrackmaniaExchange, which is for the 2020 Trackmania. For the older one, uses the TrackMania Exchange presence."
   },
   "category": "games"
 }
