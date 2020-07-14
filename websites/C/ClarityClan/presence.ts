@@ -1,20 +1,20 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "732636451933782047" 
 });
 
 function getPointsString() {
-    var x = document.getElementsByClassName("elementor-shortcode");
+    let x = document.getElementsByClassName("elementor-shortcode");
     return x[0].textContent;
     
 }
 
 presence.on('UpdateData', async() =>{
-    var presenceData: PresenceData = {
+    let presenceData: PresenceData = {
         largeImageKey: "clarity", 
         smallImageKey: "mcc", 
         smallImageText: "mc-central.net",
         details: getPointsString(), 
-        state: "clarityclan.team", 
+        state: "clarityclan.team" 
     }; 
 
     if (presenceData.details == null) {
