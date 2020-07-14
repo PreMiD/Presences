@@ -160,11 +160,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "ฐานความรู้";
       const head =
         document
-          ?.querySelector(
-            "head > title"
-          )
-          .textContent.replace("SnowBoltz - Knowledgebase", "หน้าหลัก").replace(" - SnowBoltz", " ") ??
-        "ไม่ทราบหน้า";
+          ?.querySelector("head > title")
+          .textContent.replace("SnowBoltz - Knowledgebase", "หน้าหลัก")
+          .replace(" - SnowBoltz", " ") ?? "ไม่ทราบหน้า";
       presenceData.state = head + " - SnowBoltz Knowledgebase";
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "reading";

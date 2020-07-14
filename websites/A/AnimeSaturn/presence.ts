@@ -17,22 +17,36 @@ function getTimestamps(
 }
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean, playback;
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  playback;
 let pageNumber;
 let videoName;
 let videoEpisode;
 let fullName: string;
 let timestamps: number[];
 
-presence.on("iFrameData", (data: { iframe_video: { duration: number; iFrameVideo: boolean; currTime: number; paused: boolean } }) => {
-  playback = data.iframe_video.duration !== null ? true : false;
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.duration;
-    paused = data.iframe_video.paused;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      duration: number;
+      iFrameVideo: boolean;
+      currTime: number;
+      paused: boolean;
+    };
+  }) => {
+    playback = data.iframe_video.duration !== null ? true : false;
+    if (playback) {
+      iFrameVideo = data.iframe_video.iFrameVideo;
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.duration;
+      paused = data.iframe_video.paused;
+    }
   }
-});
+);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -124,7 +138,9 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/anime")) {
-    videoName = document.title.split("AnimeSaturn - ")[1].split(" Streaming ")[0];
+    videoName = document.title
+      .split("AnimeSaturn - ")[1]
+      .split(" Streaming ")[0];
     if (videoName.includes(" (ITA)")) {
       videoName = videoName.replace(" (ITA)", "");
     }
@@ -135,11 +151,15 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/ep/")) {
-    videoName = document.title.split("AnimeSaturn - ")[1].split(" Episodio ")[0];
+    videoName = document.title
+      .split("AnimeSaturn - ")[1]
+      .split(" Episodio ")[0];
     if (videoName.includes(" (ITA)")) {
       videoName = videoName.replace(" (ITA)", "");
     }
-    videoEpisode = document.title.split(" Episodio ")[1].split(" Streaming ")[0];
+    videoEpisode = document.title
+      .split(" Episodio ")[1]
+      .split(" Streaming ")[0];
     data.smallImageKey = "watching";
     data.smallImageText = "Sta per guardare: " + videoName;
     data.details = "Sta per guardare:\n" + videoName;
@@ -197,11 +217,33 @@ presence.on("UpdateData", async () => {
       data.endTimestamp = paused ? null : timestamps[1];
     }
     if (document.location.href.endsWith("&extra=1")) {
-      fullName = document.querySelector("#wtf > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div").textContent.trim().replace("Server 1", "").replace("Server 2", "");
-    } else if (document.querySelector("body > center > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div")) {
-      fullName = document.querySelector("body > center > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div").textContent.trim().replace("Server 1", "").replace("Server 2", "");
+      fullName = document
+        .querySelector(
+          "#wtf > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div"
+        )
+        .textContent.trim()
+        .replace("Server 1", "")
+        .replace("Server 2", "");
+    } else if (
+      document.querySelector(
+        "body > center > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div"
+      )
+    ) {
+      fullName = document
+        .querySelector(
+          "body > center > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div"
+        )
+        .textContent.trim()
+        .replace("Server 1", "")
+        .replace("Server 2", "");
     } else {
-      fullName = document.querySelector("#wtf > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div").textContent.trim().replace("Server 1", "").replace("Server 2", "");
+      fullName = document
+        .querySelector(
+          "#wtf > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div"
+        )
+        .textContent.trim()
+        .replace("Server 1", "")
+        .replace("Server 2", "");
     }
     if (iFrameVideo === true) {
       timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
