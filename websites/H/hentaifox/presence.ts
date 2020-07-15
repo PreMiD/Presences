@@ -7,8 +7,9 @@ let reading;
 let browsingStamp = Math.floor(Date.now() / 1000);
 
 let title: HTMLElement,
-  title2: any,
-  tabTitle: any,
+  title2: string,
+  tabTitle: string,
+  pathname: boolean,
   pageNumber: HTMLElement,
   parody: HTMLElement,
   language: HTMLElement,
@@ -45,9 +46,9 @@ presence.on("UpdateData", async () => {
   title = document.querySelector("div.gallery_right > div.info > h1");
 
   if(document.location.pathname.includes("/parodies/") || document.location.pathname.includes("/tags/") || document.location.pathname.includes("/characters/") || document.location.pathname.includes("/artists/") || document.location.pathname.includes("/groups/")){
-    var pathname = false;
+    pathname = false;
   } else if(document.location.pathname.includes("/pag/")) {
-    var pathname = true;
+    pathname = true;
   }
 
   if (document.location.pathname == "/" || pathname == true || !document.location.pathname) {
