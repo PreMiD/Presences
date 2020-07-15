@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Bas1C",
+    "id": "303603391941050370"
+  },
+  "service": "hentaifox",
+  "description": {
+    "tr": "Hentai manga okuma sitesidir.",
+    "en": "Hentai is manga reading site."
+  },
+  "url": "hentaifox.com",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/OcUEF3h.png",
+  "thumbnail": "https://i.imgur.com/a2zJ6cD.png",
+  "color": "#ff9f08",
+  "tags": [
+    "hentai",
+    "nsfw",
+    "manga",
+    "hentaifox"
+  ],
+  "category": "other"
+}
