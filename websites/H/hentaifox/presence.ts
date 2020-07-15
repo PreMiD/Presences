@@ -198,7 +198,7 @@ presence.on("UpdateData", async () => {
 
     data.details = "Viewing an profile:";
 
-    let ret = profile.innerText.replace('Welcome,','');
+    const ret = profile.innerText.replace('Welcome,','');
 
     data.state = ret;
 
