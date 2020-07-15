@@ -31,6 +31,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Erisly's Fan Art Collection";
     } else if (document.location.pathname.includes("/team")) {
       presenceData.details = "Meeting Erisly's Team";
+    } else if (document.location.pathname == "/") {
+      presenceData.details = "Viewing the home page";
     }
   } else if (document.location.hostname == "giveaways.erisly.com") {
     presenceData.details = "Entering a Giveaway";
