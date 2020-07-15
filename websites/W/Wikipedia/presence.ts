@@ -47,77 +47,82 @@ const getURLParam = (urlParam: string): string => {
 };
 
 ((): void => {
+  console.log("test");
+
   if (currentURL.hostname === "www.wikipedia.org") {
     presenceData.details = "On the home page";
   } else {
-    let title: string;
-    const actionResult = getURLParam("action"),
-      lang = currentURL.hostname.split(".")[0];
-
-    const titleFromURL = (): string => {
-      const raw =
-        currentPath[1] === "index.php"
-          ? getURLParam("title")
-          : currentPath.slice(1).join("/");
-      return decodeURI(raw.replace(/_/g, " "));
-    };
-
     try {
-      title = document.querySelector("h1").textContent;
-    } catch (e) {
-      title = titleFromURL();
-    }
+      let title: string;
+      const actionResult = getURLParam("action"),
+        lang = currentURL.hostname.split(".")[0];
 
-    /**
-     * Returns details based on the namespace.
-     * @link https://en.wikipedia.org/wiki/Wikipedia:Namespace
-     */
-    const namespaceDetails = (): string => {
-      const details = {
-        "-2": "Viewing a media",
-        "-1": "Viewing a special page",
-        0: "Reading an article",
-        1: "Viewing a talk page",
-        2: "Viewing a user page",
-        3: "Viewing a user talk page",
-        4: "Viewing a project page",
-        5: "Viewing a project talk page",
-        6: "Viewing a file",
-        7: "Viewing a file talk page",
-        8: "Viewing an interface page",
-        9: "Viewing an interface talk page",
-        10: "Viewing a template",
-        11: "Viewing a template talk page",
-        12: "Viewing a help page",
-        13: "Viewing a help talk page",
-        14: "Viewing a category",
-        15: "Viewing a category talk page",
-        100: "Viewing a portal",
-        101: "Viewing a portal talk page",
-        118: "Viewing a draft",
-        119: "Viewing a draft talk page",
-        710: "Viewing a media's subtitles",
-        711: "Viewing a media's subtitles talk page",
-        828: "Viewing a module",
-        829: "Viewing a module talk page",
-        108: "Viewing a Wikipedia book",
-        109: "Viewing a Wikipedia book talk page",
-        446: "Viewing an Education Program page",
-        447: "Viewing an Education Program talk page",
-        2300: "Viewing a gadget",
-        2301: "Viewing a gadget talk page",
-        2302: "Viewing a gadget definition page",
-        2303: "Viewing a gadget definition talk page"
+      const titleFromURL = (): string => {
+        const raw =
+          currentPath[1] === "index.php"
+            ? getURLParam("title")
+            : currentPath.slice(1).join("/");
+        return decodeURI(raw.replace(/_/g, " "));
       };
-      return (
-        details[
-          [...document.querySelector("body").classList]
-            .filter((v) => /ns--?\d/.test(v))[0]
-            .slice(3)
-        ] || "Viewing a page"
-      );
-    };
-    /*
+
+      try {
+        title = document.querySelector("h1").textContent;
+      } catch (e) {
+        title = titleFromURL();
+      }
+
+      console.log(title);
+
+      /**
+       * Returns details based on the namespace.
+       * @link https://en.wikipedia.org/wiki/Wikipedia:Namespace
+       */
+      const namespaceDetails = (): string => {
+        const details = {
+          "-2": "Viewing a media",
+          "-1": "Viewing a special page",
+          0: "Reading an article",
+          1: "Viewing a talk page",
+          2: "Viewing a user page",
+          3: "Viewing a user talk page",
+          4: "Viewing a project page",
+          5: "Viewing a project talk page",
+          6: "Viewing a file",
+          7: "Viewing a file talk page",
+          8: "Viewing an interface page",
+          9: "Viewing an interface talk page",
+          10: "Viewing a template",
+          11: "Viewing a template talk page",
+          12: "Viewing a help page",
+          13: "Viewing a help talk page",
+          14: "Viewing a category",
+          15: "Viewing a category talk page",
+          100: "Viewing a portal",
+          101: "Viewing a portal talk page",
+          118: "Viewing a draft",
+          119: "Viewing a draft talk page",
+          710: "Viewing a media's subtitles",
+          711: "Viewing a media's subtitles talk page",
+          828: "Viewing a module",
+          829: "Viewing a module talk page",
+          108: "Viewing a Wikipedia book",
+          109: "Viewing a Wikipedia book talk page",
+          446: "Viewing an Education Program page",
+          447: "Viewing an Education Program talk page",
+          2300: "Viewing a gadget",
+          2301: "Viewing a gadget talk page",
+          2302: "Viewing a gadget definition page",
+          2303: "Viewing a gadget definition talk page"
+        };
+        return (
+          details[
+            [...document.querySelector("body").classList]
+              .filter((v) => /ns--?\d/.test(v))[0]
+              .slice(3)
+          ] || "Viewing a page"
+        );
+      };
+      /*
 		
 		Important note:
 
@@ -127,38 +132,44 @@ const getURLParam = (urlParam: string): string => {
 
 		*/
 
-    if (
-      (document.querySelector(".mw-wiki-logo") as HTMLAnchorElement).href ===
-      currentURL.href
-    ) {
-      presenceData.details = "On the main page";
-    } else if (actionResult == "history") {
-      presenceData.details = "Viewing revision history";
-      presenceData.state = title;
-    } else if (actionResult == "edit") {
-      presenceData.details = "Editing a page";
-      presenceData.state = title;
-    } else if (document.querySelector("#wpLoginAttempt")) {
-      presenceData.details = "Logging in";
-    } else if (document.querySelector("#wpCreateaccount")) {
-      presenceData.details = "Creating an account";
-    } else if (document.querySelector(".searchresults")) {
-      presenceData.details = "Searching for a page";
-      presenceData.state = (document.querySelector(
-        "input[type=search]"
-      ) as HTMLInputElement).value;
-    } else {
-      presenceData.details = namespaceDetails();
-      presenceData.state = `${
-        title.toLowerCase() === titleFromURL().toLowerCase()
-          ? `${title}`
-          : `${title} (${titleFromURL()})`
-      }`;
-    }
+      if (
+        ((document.querySelector("#n-mainpage a") ||
+          document.querySelector("#p-navigation a")) as HTMLAnchorElement)
+          .href === currentURL.href
+      ) {
+        presenceData.details = "On the main page";
+      } else if (actionResult == "history") {
+        presenceData.details = "Viewing revision history";
+        presenceData.state = title;
+      } else if (actionResult == "edit") {
+        presenceData.details = "Editing a page";
+        presenceData.state = title;
+      } else if (document.querySelector("#wpLoginAttempt")) {
+        presenceData.details = "Logging in";
+      } else if (document.querySelector("#wpCreateaccount")) {
+        presenceData.details = "Creating an account";
+      } else if (document.querySelector(".searchresults")) {
+        presenceData.details = "Searching for a page";
+        presenceData.state = (document.querySelector(
+          "input[type=search]"
+        ) as HTMLInputElement).value;
+      } else {
+        presenceData.details = namespaceDetails();
+        presenceData.state = `${
+          title.toLowerCase() === titleFromURL().toLowerCase()
+            ? `${title}`
+            : `${title} (${titleFromURL()})`
+        }`;
+      }
 
-    if (lang !== "en") {
-      if (presenceData.state) presenceData.state += ` (${lang})`;
-      else presenceData.details += ` (${lang})`;
+      if (lang !== "en") {
+        if (presenceData.state) presenceData.state += ` (${lang})`;
+        else presenceData.details += ` (${lang})`;
+      }
+
+      console.log("end");
+    } catch (e) {
+      console.log(e);
     }
   }
 })();
