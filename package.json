@@ -21,6 +21,7 @@
     "@types/semver": "^7.3.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
+    "axios": "^0.19.2",
     "chalk": "^4.1.0",
     "eslint": "^6.0.0",
     "execa": "^4.0.2",
@@ -31,6 +32,5 @@
     "semver": "^7.3.2",
     "source-map-support": "^0.5.19",
     "typescript": "^3.9.5"
-  },
-  "dependencies": {}
+  }
 }
