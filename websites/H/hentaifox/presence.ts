@@ -6,30 +6,22 @@ let lastPlaybackState = null;
 let reading;
 let browsingStamp = Math.floor(Date.now() / 1000);
 
-let title: any,
+let title: HTMLElement,
   title2: any,
-  currentPage: any,
-  pageNumber: any,
   tabTitle: any,
-  homeCurrentPage: any,
-  tags: any,
-  bartist: any,
-  bcharacter: any,
-  parodies: any,
-  groups: any,
-  language: any,
-  category: any,
-  profile: any,
-  parodie1: any,
-  parodie: any;
+  pageNumber: HTMLElement,
+  parody: HTMLElement,
+  language: HTMLElement,
+  character: HTMLElement,
+  tags: HTMLElement,
+  category: HTMLElement,
+  currentPage: HTMLElement,
+  profile: HTMLElement,
+  groups: HTMLElement,
+  homeCurrentPage: HTMLElement,
+  artist: HTMLElement;
 
 const pattern = "- Page";
-
-let character: any,
-  parody: any,
-  group: HTMLElement,
-  tag: HTMLElement,
-  artist: HTMLElement;
 
 const searchURL = new URL(document.location.href);
 const searchResult = searchURL.searchParams.get("q");
@@ -107,30 +99,30 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/artist/")) {
     data.details = "Browsing artists...";
 
-    bartist = document.querySelector(
+    artist = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Artist: " + bartist.innerText;
+    data.state = "Artist: " + artist.innerText;
 
     data.startTimestamp = browsingStamp;
   
   } else if (document.location.pathname.includes("/character/")) {
     data.details = "Browsing characters...";
 
-    bcharacter = document.querySelector(
+    character = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Character: " + bcharacter.innerText;
+    data.state = "Character: " + character.innerText;
 
     data.startTimestamp = browsingStamp;
 
   } else if (document.location.pathname.includes("/parody/")) {
     data.details = "Browsing parodies...";
 
-    parodies = document.querySelector(
+    parody = document.querySelector(
       "div.galleries_overview.g_center > h1.tag_info > span.skey"
     );
-    data.state = "Parody: " + parodies.innerText;
+    data.state = "Parody: " + parody.innerText;
 
     data.startTimestamp = browsingStamp;
 
@@ -206,7 +198,7 @@ presence.on("UpdateData", async () => {
 
     data.details = "Viewing an profile:";
 
-    var ret = profile.innerText.replace('Welcome,','');
+    let ret = profile.innerText.replace('Welcome,','');
 
     data.state = ret;
 
