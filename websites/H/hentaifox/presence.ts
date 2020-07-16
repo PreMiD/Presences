@@ -45,10 +45,10 @@ presence.on("UpdateData", async () => {
 
   title = document.querySelector("div.gallery_right > div.info > h1");
 
-  if(document.location.pathname.includes("/parodies/") || document.location.pathname.includes("/tags/") || document.location.pathname.includes("/characters/") || document.location.pathname.includes("/artists/") || document.location.pathname.includes("/groups/")){
+  if(document.location.pathname.includes("/parody/") || document.location.pathname.includes("/parodies/") || document.location.pathname.includes("/tag/") || document.location.pathname.includes("/tags/") || document.location.pathname.includes("/character/") || document.location.pathname.includes("/characters/") || document.location.pathname.includes("/artist/") || document.location.pathname.includes("/artists/") || document.location.pathname.includes("/group/") || document.location.pathname.includes("/groups/")){
     pathname = false;
   } else if(document.location.pathname.includes("/pag/")) {
-    pathname = true;
+    pathname = false;
   }
 
   if (document.location.pathname == "/" || pathname == true || !document.location.pathname) {
