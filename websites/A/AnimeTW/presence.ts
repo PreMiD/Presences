@@ -48,9 +48,7 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    data.details = document.querySelector(
-      "#head > title"
-    ).textContent;
+    data.details = document.querySelector("#head > title").textContent;
     (data.smallImageKey = video.paused ? "pause" : "play"),
       (data.smallImageText = video.paused
         ? (await strings).pause

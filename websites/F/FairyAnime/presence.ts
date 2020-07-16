@@ -1,11 +1,11 @@
 const presence = new Presence({
-  clientId: "724289548015763578"
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  browsing: "presence.activity.browsing"
-});
+    clientId: "724289548015763578"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browsing: "presence.activity.browsing"
+  });
 
 let video = {
   current: 0,
@@ -38,7 +38,6 @@ presence.on(
   }
 );
 
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "icon"
@@ -50,7 +49,10 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = (await strings).browsing;
     } else if (path.pathname.includes("watch")) {
-      const title = document.querySelector("#section-opt > div > div > div > div > div.movie-heading.overflow-hidden > span").textContent ?? "ไม่ทราบเรื่อง";
+      const title =
+        document.querySelector(
+          "#section-opt > div > div > div > div > div.movie-heading.overflow-hidden > span"
+        ).textContent ?? "ไม่ทราบเรื่อง";
       let episode;
       const timestamps = getTimestamps(
         Math.floor(video.current),
@@ -59,48 +61,57 @@ presence.on("UpdateData", async () => {
       if (title.includes("ตอนที่")) {
         const info = title.split("ตอนที่");
         episode = info.pop();
-    
+
         if (episode.includes("ซับไทย")) {
           episode = episode.replace("ซับไทย", "").trim();
         } else if (episode.includes("พากย์ไทย")) {
-          episode = episode.replace("พากย์ไทย",  "").trim();
-        } 
-    
+          episode = episode.replace("พากย์ไทย", "").trim();
+        }
+
         episode = "ตอนที่ " + episode;
         presenceData.state = info[0];
         presenceData.details = episode;
-      } else { 
+      } else {
         let info;
         if (title.includes("ซับไทย")) {
           info = title.replace("ซับไทย", "").trim();
         } else if (title.includes("พากย์ไทย")) {
-          info = title.replace("พากย์ไทย",  "").trim();
+          info = title.replace("พากย์ไทย", "").trim();
         }
         episode = "Movie";
         presenceData.state = info;
         presenceData.details = episode;
-      } 
+      }
 
       presenceData.smallImageKey = video.paused ? "pause" : "playing";
       presenceData.smallImageText = video.paused
-      ? (await strings).pause
-      : (await strings).play;
-        if (!video.paused) {
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
-        } else {
-          delete presenceData.startTimestamp;
-          delete presenceData.endTimestamp;
-        }
+        ? (await strings).pause
+        : (await strings).play;
+      if (!video.paused) {
+        presenceData.startTimestamp = timestamps[0];
+        presenceData.endTimestamp = timestamps[1];
+      } else {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
     } else {
-      const ep = document.querySelector("#section-opt > div > div > div > div > div.movie-heading.overflow-hidden > span");
+      const ep = document.querySelector(
+        "#section-opt > div > div > div > div > div.movie-heading.overflow-hidden > span"
+      );
       const rate = document.querySelector("#home > p > span");
       if (!rate || !ep) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = (await strings).browsing;
-      } else {presenceData.startTimestamp = browsingStamp;
+      } else {
+        presenceData.startTimestamp = browsingStamp;
         presenceData.details = "เลือกตอน ";
-        presenceData.state = rate.textContent + "⭐ -" + ep.textContent.replace("ตอนของ", " ").replace('"', ' ').replace('"', ' ');
+        presenceData.state =
+          rate.textContent +
+          "⭐ -" +
+          ep.textContent
+            .replace("ตอนของ", " ")
+            .replace('"', " ")
+            .replace('"', " ");
       }
     }
   }
@@ -110,6 +121,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
-
   }
 });
