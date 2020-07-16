@@ -117,15 +117,14 @@ const getURLParam = (urlParam: string): string => {
         ] || "Viewing a page"
       );
     };
-    /*
-		
-		Important note:
 
-		When checking for the current location, avoid using the URL.
-		The URL is going to be different in other languages.
-		Use the elements on the page instead.
-
-		*/
+    //
+    // Important note:
+    //
+    // When checking for the current location, avoid using the URL.
+    // The URL is going to be different in other languages.
+    // Use the elements on the page instead.
+    //
 
     if (
       ((document.querySelector("#n-mainpage a") ||
