@@ -3,7 +3,7 @@ var presence = new Presence({
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
+var title: any, editsection: any;
 var actionURL = new URL(document.location.href);
 var title2URL = new URL(document.location.href);
 
@@ -13,6 +13,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "lg"
   };
 
+  editsection = document.querySelector("#firstHeading > span");
   title = document.querySelector("h1#firstHeading");
 
   var actionResult = actionURL.searchParams.get("action");
@@ -27,8 +28,11 @@ presence.on("UpdateData", async () => {
   } else if (title && document.location.pathname.includes("/wiki/")) {
     presenceData.details = "Reading about:";
 
-    presenceData.state = title.innerText;
-
+    if (editsection == null) {
+      presenceData.state = title.innerText;
+    } else {
+      presenceData.state = title.innerText.replace(editsection.innerText, "");
+    }
     presenceData.startTimestamp = browsingStamp;
   } else if (
     actionResult == "history" &&
