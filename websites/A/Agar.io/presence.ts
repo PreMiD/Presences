@@ -45,8 +45,7 @@ presence.on("UpdateData", async () => {
           break;
         case 1:
           data.details = `Playing as ${agarData.nick}`;
-          if (!gameStartTimestamp)
-            gameStartTimestamp = Date.now();
+          if (!gameStartTimestamp) gameStartTimestamp = Date.now();
           break;
         case 2:
           data.details = "Game Over";
@@ -69,4 +68,4 @@ presence.on("UpdateData", async () => {
   } else presence.setActivity(data);
 });
 
-presence.on("iFrameData", (data: AgarData) => agarData = data);
+presence.on("iFrameData", (data: AgarData) => (agarData = data));

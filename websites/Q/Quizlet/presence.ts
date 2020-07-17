@@ -6,7 +6,7 @@ interface QuizletData {
   layer?: {
     path?: string;
     event: string;
-  
+
     studyableTitle?: string;
     studyableType?: string;
   };
@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (qzData && qzData.layer) {
-    const pathSplits = qzData.layer.path.split('/');
+    const pathSplits = qzData.layer.path.split("/");
     switch (pathSplits[0]) {
       case "StudyFeed":
         data.details = "Dashboard";
@@ -36,12 +36,14 @@ presence.on("UpdateData", async () => {
         break;
       case "Profile":
         data.details = "Viewing profile";
-        data.state = document.querySelector('.ProfileHeader-username').textContent;
+        data.state = document.querySelector(
+          ".ProfileHeader-username"
+        ).textContent;
         actionTimestamp = null;
         break;
       case "Topic":
         data.details = "Browsing sets on";
-        data.state = document.querySelector('h1').textContent;
+        data.state = document.querySelector("h1").textContent;
         actionTimestamp = null;
         break;
       case "Search":
@@ -54,8 +56,7 @@ presence.on("UpdateData", async () => {
       case "Sets":
         switch (pathSplits[1]) {
           case "show":
-            if (!actionTimestamp)
-              actionTimestamp = Date.now();
+            if (!actionTimestamp) actionTimestamp = Date.now();
             data.details = "Viewing a set";
             data.state = qzData.layer.studyableTitle;
             break;
@@ -66,64 +67,56 @@ presence.on("UpdateData", async () => {
         }
         break;
       case "Gravity": // Set > Gravity
-        if (!actionTimestamp)
-          actionTimestamp = Date.now();
+        if (!actionTimestamp) actionTimestamp = Date.now();
         data.smallImageKey = "gravity";
         data.smallImageText = "Gravity";
         data.details = "Playing Gravity";
         data.state = `with "${qzData.layer.studyableTitle}" set`;
         break;
       case "Match": // Set > Match
-        if (!actionTimestamp)
-          actionTimestamp = Date.now();
+        if (!actionTimestamp) actionTimestamp = Date.now();
         data.smallImageKey = "match";
         data.smallImageText = "Match";
         data.details = "Playing Match";
         data.state = `with "${qzData.layer.studyableTitle}" set`;
         break;
       case "LiveGame": // Set > Live
-        if (!actionTimestamp)
-          actionTimestamp = Date.now();
+        if (!actionTimestamp) actionTimestamp = Date.now();
         data.smallImageKey = "live";
         data.smallImageText = "Quizlet Live";
         data.details = "Hosting a live game";
         data.state = `with "${qzData.layer.studyableTitle}" set`;
         break;
       case "Assistant": // Set > Learn
-        if (!actionTimestamp)
-          actionTimestamp = Date.now();
+        if (!actionTimestamp) actionTimestamp = Date.now();
         data.smallImageKey = "learn";
         data.smallImageText = "Learn";
         data.details = "Learning set";
         data.state = qzData.layer.studyableTitle;
         break;
       case "Cards": // Set > Flashcards
-        if (!actionTimestamp)
-          actionTimestamp = Date.now();
+        if (!actionTimestamp) actionTimestamp = Date.now();
         data.smallImageKey = "flashcards";
         data.smallImageText = "Flashcards";
         data.details = "Reviewing flashcards";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
       case "Test": // Set > Test
-        if (!actionTimestamp)
-          actionTimestamp = Date.now();
+        if (!actionTimestamp) actionTimestamp = Date.now();
         data.smallImageKey = "test";
         data.smallImageText = "Test";
         data.details = "Testing";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
       case "Learn": // Set > Write
-        if (!actionTimestamp)
-          actionTimestamp = Date.now();
+        if (!actionTimestamp) actionTimestamp = Date.now();
         data.smallImageKey = "write";
         data.smallImageText = "Writing";
         data.details = "Writing";
         data.state = `on ${qzData.layer.studyableTitle}`;
         break;
       case "Spell": // Set > Spell
-        if (!actionTimestamp)
-          actionTimestamp = Date.now();
+        if (!actionTimestamp) actionTimestamp = Date.now();
         data.smallImageKey = "spell";
         data.smallImageText = "Spell";
         data.details = "Spelling";
@@ -140,4 +133,4 @@ presence.on("UpdateData", async () => {
   } else presence.setActivity(data);
 });
 
-presence.on("iFrameData", (data: QuizletData) => qzData = data);
+presence.on("iFrameData", (data: QuizletData) => (qzData = data));

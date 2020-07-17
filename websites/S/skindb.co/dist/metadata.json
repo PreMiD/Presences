@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "Officer",
+    "id": "373913699943186432"
+  },
+  "service": "skindb.co",
+  "description": {
+    "en": "skindb.co is a database for fortnite and valorant skins/items."
+  },
+  "url": "skindb.co",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/F6LKEIl.jpg",
+  "thumbnail": "https://i.imgur.com/827Dew7.png",
+  "color": "#60ACFF",
+  "tags": [
+    "skindb",
+    "fortnite",
+    "valorant"
+  ],
+  "category": "games"
+}
