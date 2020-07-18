@@ -73,7 +73,7 @@ const getURLParam = (urlParam: string): string => {
      * @link https://en.wikipedia.org/wiki/Wikipedia:Namespace
      */
     const namespaceDetails = (): string => {
-      const details = {
+      const details: { [index: string]: string } = {
         "-2": "Viewing a media",
         "-1": "Viewing a special page",
         0: "Reading an article",
@@ -134,10 +134,10 @@ const getURLParam = (urlParam: string): string => {
       presenceData.details = "On the main page";
     } else if (actionResult == "history") {
       presenceData.details = "Viewing revision history";
-      presenceData.state = title;
+      presenceData.state = titleFromURL();
     } else if (actionResult == "edit") {
       presenceData.details = "Editing a page";
-      presenceData.state = title;
+      presenceData.state = titleFromURL();
     } else if (document.querySelector("#wpLoginAttempt")) {
       presenceData.details = "Logging in";
     } else if (document.querySelector("#wpCreateaccount")) {
