@@ -139,7 +139,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData);
   } else if (document.location.pathname == "/airing") {
-    presenceData.details = "Viewing the calander";
+    presenceData.details = "Viewing the calendar";
     delete presenceData.state;
     delete presenceData.endTimestamp;
     presenceData.startTimestamp = browsingStamp;
