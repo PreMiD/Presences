@@ -176,6 +176,7 @@ A list of fields and their rules are listed below:
 ### **`category`**
 
 - The category **must** be one of the following listed on the [documentation](https://docs.premid.app/en/dev/presence/metadata#presence-categories).
+- The presence must use a category that matches the content of the website. (for e.g., don't use `anime` when the website isn't related to anime).
 
 ### **`*regExp`** <br /> **`*iFrameRegExp`**
 
