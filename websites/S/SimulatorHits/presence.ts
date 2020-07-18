@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "701623299460825108"
 });
 
-var dSong: any, dArtist: any, dListeners: any, dStart: any, dFinish: any, dDJ: any;
+let dSong: string, dArtist: string, dListeners: number, dDJ: string;
 
 function getSongData(): void {
   const xhttp = new XMLHttpRequest();
@@ -12,8 +12,6 @@ function getSongData(): void {
       dSong = data.song.name;
       dArtist = data.song.artist;
       dListeners = data.listeners;
-      dStart = data.time.start;
-      dFinish = data.time.finish;
       dDJ = data.presenter.name;
     }
   };
