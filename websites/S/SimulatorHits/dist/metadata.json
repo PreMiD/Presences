@@ -12,7 +12,7 @@
     "en": "Your Number 1 Hit Simulation Radio"
   },
   "service": "SimulatorHits",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://panel.simulatorhits.com/img/SH_Logo.jpg",
   "thumbnail": "https://simulatorhits.com/assets/img/front-page.png",
   "color": "#D4426E",
