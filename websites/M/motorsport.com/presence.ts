@@ -50,6 +50,7 @@ presence.on("UpdateData", () => {
     // categories
     if (document.location.pathname.startsWith("/category/")) {
       presenceData.details = "Viewing a Category";
+      checkSubPage();
       if (document.location.pathname.startsWith("/category/motogp/")) {
         presenceData.state = "Moto GP Series";
       } else if (document.location.pathname.startsWith("/category/nascar/")) {
