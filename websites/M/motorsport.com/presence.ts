@@ -75,207 +75,207 @@ presence.on("UpdateData", () => {
     }
 
     // MotoGP series
-    if (document.location.pathname.startsWith("/motogp/")) {
+    if (document.location.pathname.includes("/motogp/")) {
       presenceData.state = "Moto GP";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/wsbk/")) {
+    } else if (document.location.pathname.includes("/wsbk/")) {
       presenceData.state = "World Superbike";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/moto2/")) {
+    } else if (document.location.pathname.includes("/moto2/")) {
       presenceData.state = "Moto 2";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/moto3/")) {
+    } else if (document.location.pathname.includes("/moto3/")) {
       presenceData.state = "Moto 3";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/motoe/")) {
+    } else if (document.location.pathname.includes("/motoe/")) {
       presenceData.state = "Moto E";
       checkSubPage();
       articleCheck();
     }
 
     // NASCAR series
-    if (document.location.pathname.startsWith("/nascar-cup/")) {
+    if (document.location.pathname.includes("/nascar-cup/")) {
       presenceData.state = "NASCAR Cup";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/nascar-xs/")) {
+    } else if (document.location.pathname.includes("/nascar-xs/")) {
       presenceData.state = "NASCAR XFINITY";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/nascar-truck/")) {
+    } else if (document.location.pathname.includes("/nascar-truck/")) {
       presenceData.state = "NASCAR Truck";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/nascar-cdm/")) {
+    } else if (document.location.pathname.includes("/nascar-cdm/")) {
       presenceData.state = "NASCAR Canada";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/nascar-euro/")) {
+    } else if (document.location.pathname.includes("/nascar-euro/")) {
       presenceData.state = "NASCAR Euro";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/nascar-mexico/")) {
+    } else if (document.location.pathname.includes("/nascar-mexico/")) {
       presenceData.state = "NASCAR Mexico";
       checkSubPage();
       articleCheck();
     }
 
     // Openwheel series
-    if (document.location.pathname.startsWith("/indycar/")) {
+    if (document.location.pathname.includes("/indycar/")) {
       presenceData.state = "IndyCar";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/indylights/")) {
+    } else if (document.location.pathname.includes("/indylights/")) {
       presenceData.state = "Indy Lights";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/fia-f2/")) {
+    } else if (document.location.pathname.includes("/fia-f2/")) {
       presenceData.state = "FIA Formula 2";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/fia-f3/")) {
+    } else if (document.location.pathname.includes("/fia-f3/")) {
       presenceData.state = "FIA Formula 3";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/super-formula/")) {
+    } else if (document.location.pathname.includes("/super-formula/")) {
       presenceData.state = "Super Formula";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/w-series/")) {
+    } else if (document.location.pathname.includes("/w-series/")) {
       presenceData.state = "W Series";
       checkSubPage();
       articleCheck();
     }
 
     // Sportscar series
-    if (document.location.pathname.startsWith("/imsa/")) {
+    if (document.location.pathname.includes("/imsa/")) {
       presenceData.state = "IMSA";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/elms/")) {
+    } else if (document.location.pathname.includes("/elms/")) {
       presenceData.state = "European Le Mans";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/aslms/")) {
+    } else if (document.location.pathname.includes("/aslms/")) {
       presenceData.state = "Asian Le Mans";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/sro-anerica/")) {
+    } else if (document.location.pathname.includes("/sro-anerica/")) {
       presenceData.state = "SRO America";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/gtwce-endurance/")) {
+    } else if (document.location.pathname.includes("/gtwce-endurance/")) {
       presenceData.state = "GT World Challenge Europe Endurance";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/gtwce-sprint/")) {
+    } else if (document.location.pathname.includes("/gtwce-sprint/")) {
       presenceData.state = "GT World Challenge Europe Sprint";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/supergt/")) {
+    } else if (document.location.pathname.includes("/supergt/")) {
       presenceData.state = "Super GT";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/endurance/")) {
+    } else if (document.location.pathname.includes("/endurance/")) {
       presenceData.state = "Endurance";
       checkSubPage();
       articleCheck();
     }
 
     // Touring series
-    if (document.location.pathname.startsWith("/wtcr/")) {
+    if (document.location.pathname.includes("/wtcr/")) {
       presenceData.state = "WTCR";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/tcr/")) {
+    } else if (document.location.pathname.includes("/tcr/")) {
       presenceData.state = "tcr";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/dtm/")) {
+    } else if (document.location.pathname.includes("/dtm/")) {
       presenceData.state = "DTM";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/v8supercars/")) {
+    } else if (document.location.pathname.includes("/v8supercars/")) {
       presenceData.state = "V8 Supercars";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/btcc/")) {
+    } else if (document.location.pathname.includes("/btcc/")) {
       presenceData.state = "BTCC";
       checkSubPage();
       articleCheck();
     }
 
     // Rally series
-    if (document.location.pathname.startsWith("/wrc/")) {
+    if (document.location.pathname.includes("/wrc/")) {
       presenceData.state = "WRC";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/world-rx/")) {
+    } else if (document.location.pathname.includes("/world-rx/")) {
       presenceData.state = 'World Rallycross';
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/dakar/")) {
+    } else if (document.location.pathname.includes("/dakar/")) {
       presenceData.state = "Dakar";
       checkSubPage();
       articleCheck();
     }
 
     // more categories
-    if (document.location.pathname.startsWith("/general/")) {
+    if (document.location.pathname.includes("/general/")) {
       presenceData.state = "General";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/kart/")) {
+    } else if (document.location.pathname.includes("/kart/")) {
       presenceData.state = "Karting";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith('/nhra/')) {
+    } else if (document.location.pathname.includes('/nhra/')) {
       presenceData.state = "NHRA";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/vintage/")) {
+    } else if (document.location.pathname.includes("/vintage/")) {
       presenceData.state = "Vintage";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/ferrari/")) {
+    } else if (document.location.pathname.includes("/ferrari/")) {
       presenceData.state = "Ferrari";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.startsWith("/roadracing/")) {
+    } else if (document.location.pathname.includes("/roadracing/")) {
       presenceData.state = "Road Racing";
       checkSubPage();
       articleCheck();
     }
 
-    if (document.location.pathname.startsWith("/f1/")) {
+    if (document.location.pathname.includes("/f1/")) {
       presenceData.state = "Formula 1";
       checkSubPage();
       articleCheck();
     }
 
-    if (document.location.pathname.startsWith("/wec/")) {
+    if (document.location.pathname.includes("/wec/")) {
       presenceData.state = "World Endurance Championship";
       checkSubPage();
       articleCheck();
     }
 
-    if (document.location.pathname.startsWith("/gaming/")) {
+    if (document.location.pathname.includes("/gaming/")) {
       presenceData.state = "Esports";
       checkSubPage();
       articleCheck();
     }
 
-    if (document.location.pathname.startsWith("/formula-e/")) {
+    if (document.location.pathname.includes("/formula-e/")) {
       presenceData.state = "Formula E";
       checkSubPage();
       articleCheck();
     }
 
-    if (document.location.pathname.startsWith("/collection/giorgio-piola/")) {
+    if (document.location.pathname.includes("/collection/giorgio-piola/")) {
       presenceData.details = "Collection";
       presenceData.state = "Giorgio Piola";
     }
