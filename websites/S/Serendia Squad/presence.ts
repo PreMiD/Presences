@@ -47,11 +47,11 @@ presence.on("UpdateData", () => {
   presenceData.startTimestamp = browsingStamp;
   } else if(page.startsWith("/code/edit")) {
   presenceData.details = "Bir kod düzenliyor:";
-  presenceData.state = window.location.search.slice(8) + ' ' + 'numaralı kodu düzenliyor!'
+  presenceData.state = window.location.search.slice(8) + ' ' + 'numaralı kodu düzenliyor!';
   presenceData.startTimestamp = browsingStamp;
   } else if(page.startsWith("/code/incele")) {
   presenceData.details = "Bir kod inceliyor:";
-  presenceData.state = window.location.search.slice(8) + ' ' + 'numaralı kodu inceliyor!'
+  presenceData.state = window.location.search.slice(8) + ' ' + 'numaralı kodu inceliyor!';
   presenceData.startTimestamp = browsingStamp;
   } else if(page.toLowerCase() === "/codepanel") {
   presenceData.details = "Bir sayfaya görüntülüyor:";
@@ -59,11 +59,11 @@ presence.on("UpdateData", () => {
   presenceData.startTimestamp = browsingStamp;
   } else if(page.startsWith("/code")) {
   presenceData.details = "Bir kod görüntülüyor:";
-  presenceData.state = document.querySelector('body > center > div > a:nth-child(6)').textContent + ' ' + 'adlı kodu görüntülüyor!'
+  presenceData.state = document.querySelector('body > center > div > a:nth-child(6)').textContent + ' ' + 'adlı kodu görüntülüyor!';
   presenceData.startTimestamp = browsingStamp;
   } else if(page.startsWith("/profil")) {
   presenceData.details = "Bir profil görüntülüyor:";
-  presenceData.state = document.querySelector('body > div.jumbotron.jumbotron-x > div > center > h2').textContent + ' ' + 'adlı kullanıcının profilini görüntülüyor!'
+  presenceData.state = document.querySelector('body > div.jumbotron.jumbotron-x > div > center > h2').textContent + ' ' + 'adlı kullanıcının profilini görüntülüyor!';
   presenceData.startTimestamp = browsingStamp;
   } else if(page.toLowerCase() === "/addcode") {
   presenceData.details = "Bir sayfaya görüntülüyor:";
