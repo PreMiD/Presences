@@ -17,11 +17,14 @@ presence.on("UpdateData", () => {
       presenceData.details = "Reading the news";
     } else if (document.location.pathname.includes("/photos/")) {
       presenceData.details = "Looking at photos";
+      presenceData.smallImageKey = "photo";
+      presenceData.smallImageText = "";
     } else if (document.location.pathname.includes("/videos")) {
       presenceData.details = "Searching for videos";
     } else if (document.location.pathname.includes("/video/")) {
       presenceData.details = "Watching a video";
       presenceData.smallImageKey = "play-icon";
+      presenceData.smallImageText = "Watching";
     } else if (document.location.pathname.includes("/schedule")) {
       presenceData.details = "Looking at schedules";
     } else if (document.location.pathname.includes("/results")) {
