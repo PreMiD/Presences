@@ -38,6 +38,7 @@ presence.on("UpdateData", () => {
   function articleCheck() {
     if (document.location.pathname.includes("/news/") && !document.location.pathname.endsWith("/news/")) {
       let articleTitle = document.querySelector(".ms-entity-detail-header_title");
+      presenceData.details = "Reading an article";
       presenceData.state = articleTitle.textContent;
     }
   }
