@@ -26,16 +26,15 @@ getSongData();
 const currentTime = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  
+
   presenceData.smallImageText = dListeners + " Listeners";
-  presenceData.startTimestamp = currentTime;  
+  presenceData.startTimestamp = currentTime;
 
   if (document.location.hostname == "simulatorhits.com") {
-    if(document.getElementById('artwork').classList.contains('rotateImg')){
+    if (document.getElementById("artwork").classList.contains("rotateImg")) {
       presenceData.smallImageKey = "play";
     } else {
       presenceData.smallImageKey = "pause";
@@ -45,14 +44,15 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing the Staff Team";
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/profile")) {
-      presenceData.details = document.getElementById('name').innerText + '\'s Profile';
-      presenceData.state = document.getElementById('position').innerText;
+      presenceData.details =
+        document.getElementById("name").innerText + "'s Profile";
+      presenceData.state = document.getElementById("position").innerText;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/timetable")) {
-      presenceData.details = 'Viewing Schedule';
+      presenceData.details = "Viewing Schedule";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/terms")) {
-      presenceData.details = 'Viewing Terms of Service';
+      presenceData.details = "Viewing Terms of Service";
       presenceData.smallImageKey = "reading";
     } else {
       presenceData.details = dSong + " - " + dArtist;
@@ -63,16 +63,16 @@ presence.on("UpdateData", () => {
       presenceData.details = "Staff Dashboard";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/timetable")) {
-      presenceData.details = 'Staff Timetable';
-      if(document.getElementById('book-modal').classList.contains('show')){
-        presenceData.state = 'Booking a Slot';
+      presenceData.details = "Staff Timetable";
+      if (document.getElementById("book-modal").classList.contains("show")) {
+        presenceData.state = "Booking a Slot";
       } else {
-        presenceData.state = 'Viewing';
+        presenceData.state = "Viewing";
       }
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/admin")) {
-      presenceData.details = 'Admin Area';
-      presenceData.state = 'Doing Secret Things';
+      presenceData.details = "Admin Area";
+      presenceData.state = "Doing Secret Things";
       presenceData.smallImageKey = "reading";
     } else {
       presenceData.details = dSong + " - " + dArtist;
