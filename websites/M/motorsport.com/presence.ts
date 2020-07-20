@@ -5,14 +5,14 @@ const presence = new Presence({
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  const presenceData: PresenceData = {
+  let presenceData: PresenceData = {
     largeImageKey: "logo",
     smallImageKey: "reading",
     smallImageText: "Reading",
     startTimestamp: browsingStamp
   };
 
-  function checkSubPage() {
+  function checkSubPage():void {
     if (document.location.pathname.endsWith("/news/")) {
       presenceData.details = "Reading the news";
     } else if (document.location.pathname.includes("/photos/")) {
@@ -33,25 +33,16 @@ presence.on("UpdateData", () => {
       presenceData.details = "Looking at the Standings";
     } else if (document.location.pathname.includes("/drivers/")) {
       presenceData.details = "Looking at Drivers";
-    } else if (document.location.pathname.includes("/driver/")) {
-      presenceData.details = "Looking at a driver";
-      presenceData.state = document.querySelector(".ms-entity-header_title").textContent
     } else if (document.location.pathname.includes("/teams/")) {
       presenceData.details = "Looking at teams";
-    } else if (document.location.pathname.includes("/team/")) {
-      presenceData.details = "Looking at a team";
-      presenceData.state = document.querySelector(".ms-entity-header_title").textContent;
-    }
-    return;
   }
 
-  function articleCheck() {
+  function articleCheck():void {
     if (document.location.pathname.includes("/news/") && !document.location.pathname.endsWith("/news/")) {
       const articleTitle = document.querySelector(".ms-entity-detail-header_title").textContent;
       presenceData.details = "Reading an article";
       presenceData.state = articleTitle;
     }
-    return;
   }
 
   if (document.location.hostname == "www.motorsport.com") {
@@ -286,6 +277,14 @@ presence.on("UpdateData", () => {
       articleCheck();
     }
 
+    else if (document.location.pathname.includes("/driver/")) {
+      presenceData.details = "Looking at a driver";
+      presenceData.state = document.querySelector(".ms-entity-header_title").textContent;
+    } else if (document.location.pathname.includes("/team/")) {
+      presenceData.details = "Looking at a team";
+      presenceData.state = document.querySelector(".ms-entity-header_title").textContent;
+    }
+
     if (document.location.pathname.includes("/collection/giorgio-piola/")) {
       presenceData.details = "Collection";
       presenceData.state = "Giorgio Piola";
@@ -299,5 +298,5 @@ presence.on("UpdateData", () => {
   } else {
     presence.setActivity(presenceData);
   }
-
+  
 });
