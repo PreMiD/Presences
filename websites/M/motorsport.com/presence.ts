@@ -5,14 +5,14 @@ const presence = new Presence({
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  let presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo",
     smallImageKey: "reading",
     smallImageText: "Reading",
     startTimestamp: browsingStamp
   };
 
-  function checkSubPage():void {
+  function checkSubPage(): void {
     if (document.location.pathname.endsWith("/news/")) {
       presenceData.details = "Reading the news";
     } else if (document.location.pathname.includes("/photos/")) {
@@ -38,7 +38,7 @@ presence.on("UpdateData", () => {
     }
   }
 
-  function articleCheck():void {
+  function articleCheck(): void {
     if (document.location.pathname.includes("/news/") && !document.location.pathname.endsWith("/news/")) {
       const articleTitle = document.querySelector(".ms-entity-detail-header_title").textContent;
       presenceData.details = "Reading an article";
