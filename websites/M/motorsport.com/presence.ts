@@ -35,6 +35,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Looking at Drivers";
     } else if (document.location.pathname.includes("/teams/")) {
       presenceData.details = "Looking at teams";
+    }
   }
 
   function articleCheck():void {
@@ -298,5 +299,5 @@ presence.on("UpdateData", () => {
   } else {
     presence.setActivity(presenceData);
   }
-  
+
 });
