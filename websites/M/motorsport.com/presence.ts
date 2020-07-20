@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "728904519055966228"
 });
 
@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
     smallImageKey: "reading",
     smallImageText: "Reading",
     startTimestamp: browsingStamp
-  }
+  };
 
   function checkSubPage() {
     if (document.location.pathname.endsWith("/news/")) {
@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/photos/")) {
       presenceData.details = "Looking at photos";
       presenceData.smallImageKey = "photo";
-      presenceData.smallImageText = "";
+      presenceData.smallImageText = "Photos";
     } else if (document.location.pathname.includes("/videos")) {
       presenceData.details = "Searching for videos";
     } else if (document.location.pathname.includes("/video/")) {
@@ -30,20 +30,28 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/results")) {
       presenceData.details = "Looking at results";
     } else if (document.location.pathname.includes("/standings/")) {
-      presenceData.details = "Looking at Standings";
+      presenceData.details = "Looking at the Standings";
     } else if (document.location.pathname.includes("/drivers/")) {
       presenceData.details = "Looking at Drivers";
+    } else if (document.location.pathname.includes("/driver/")) {
+      presenceData.details = "Looking at a driver";
+      presenceData.state = document.querySelector(".ms-entity-header_title").textContent
     } else if (document.location.pathname.includes("/teams/")) {
-      presenceData.details = "Looking at Teams";
+      presenceData.details = "Looking at teams";
+    } else if (document.location.pathname.includes("/team/")) {
+      presenceData.details = "Looking at a team";
+      presenceData.state = document.querySelector(".ms-entity-header_title").textContent;
     }
+    return;
   }
 
   function articleCheck() {
     if (document.location.pathname.includes("/news/") && !document.location.pathname.endsWith("/news/")) {
-      let articleTitle = document.querySelector(".ms-entity-detail-header_title");
+      const articleTitle = document.querySelector(".ms-entity-detail-header_title").textContent;
       presenceData.details = "Reading an article";
-      presenceData.state = articleTitle.textContent;
+      presenceData.state = articleTitle;
     }
+    return;
   }
 
   if (document.location.hostname == "www.motorsport.com") {
