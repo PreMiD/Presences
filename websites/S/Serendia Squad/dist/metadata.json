@@ -6,10 +6,8 @@
   },
   "url": "serendiasquad.com",
   "description": {
-    "tr": "The Serendia Squad's code sharing website.",
-	"az": "Serendia Squad'ın kod paylaşım saytı.",
-    "en": "Serendia Squad'ın kod paylaşım sitesi.",
-	"fr": "Site de partage de code de Serendia Squad's."
+    "tr": "Serendia Squad'ın kod paylaşım sitesi.",
+    "en": "Serendia Squad's code sharing website.",
   },
   "service": "Serendia Squad",
   "version": "1.0.0",

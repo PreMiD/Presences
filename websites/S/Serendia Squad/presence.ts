@@ -70,12 +70,10 @@ presence.on("UpdateData", () => {
   presenceData.state = "Kod Ekle";
   presenceData.startTimestamp = browsingStamp;
   }
-  
-    if (presenceData.details == null) {
+  if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
-  }
-  
+  } 
 });
