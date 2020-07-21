@@ -10,7 +10,7 @@ presence.on("UpdateData", () => {
   const browsingStamp = Math.floor(Date.now() / 1000);
   const page = window.location.pathname;
   presenceData.startTimestamp = browsingStamp;
-  
+
   if (page.startsWith("/settings.html")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Settings";
@@ -36,7 +36,8 @@ presence.on("UpdateData", () => {
     ).textContent;
     const sgoc = "Besto Rankings @";
     const ahmetabibanimiactioley = yArraabeni.replace(sgoc, "");
-    presenceData.details = "Viewing " + ahmetabibanimiactioley + "'s leaderboard";
+    presenceData.details =
+      "Viewing " + ahmetabibanimiactioley + "'s leaderboard";
   } else if (page.startsWith("/guild/")) {
     presenceData.details = "Managing a server";
     presenceData.state = document.querySelector(
