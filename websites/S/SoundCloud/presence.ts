@@ -266,8 +266,8 @@ presence.on("UpdateData", async () => {
       data.smallImageText = "Uploading..."; // no string available
     }
     if (!showTimestamps || (!playing && !showBrowsing)) {
-      data.startTimestamp = undefined;
-      data.endTimestamp = undefined;
+      delete data.startTimestamp;
+      delete data.endTimestamp;
     }
 
     presence.setActivity(data);

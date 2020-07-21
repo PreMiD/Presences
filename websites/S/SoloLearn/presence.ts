@@ -156,8 +156,8 @@ presence.on("UpdateData", async () => {
       data.smallImageText = (await strings).browse;
     }
     if (!showTimestamps) {
-      data.startTimestamp = undefined;
-      data.endTimestamp = undefined;
+      delete data.startTimestamp;
+      delete data.endTimestamp;
     }
 
     presence.setActivity(data);
