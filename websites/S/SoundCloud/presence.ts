@@ -9,7 +9,7 @@ const strings = presence.getStrings({
 });
 
 const getTime = (list: string[]): number => {
-  var ret = 0;
+  let ret = 0;
   for (let index = list.length - 1; index >= 0; index--) {
     ret += parseInt(list[index]) * 60 ** index;
   }
