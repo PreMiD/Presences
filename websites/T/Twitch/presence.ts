@@ -21,12 +21,6 @@ const getTimestamps = (
   return [Math.floor(startTime / 1000), endTime];
 };
 
-const debug = false;
-debug &&
-  setInterval(() => {
-    console.log(`-- Twitch Presence --\n\n• Path: ${location.pathname}`);
-  }, 5000);
-
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href;
 
@@ -111,6 +105,7 @@ presence.on("UpdateData", async () => {
   const showBrowsing = await presence.getSetting("browse");
   const showLive = await presence.getSetting("live");
   const showVideo = await presence.getSetting("video");
+  const showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
     details: undefined,
@@ -296,6 +291,10 @@ presence.on("UpdateData", async () => {
     if (data.details.match("(Browsing|Viewing)")) {
       data.smallImageKey = "reading";
       data.smallImageText = (await strings).browse;
+    }
+    if (!showTimestamps) {
+      delete data.startTimestamp;
+      delete data.endTimestamp;
     }
 
     presence.setActivity(data);

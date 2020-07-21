@@ -9,7 +9,7 @@
   },
   "url": "www.sololearn.com",
   "regExp": "([a-z0-9-]+[.])*sololearn[.]com[/]",
-  "version": "1.1.4",
+  "version": "2.0.0",
   "logo": "https://i.imgur.com/MPEOcif.png",
   "thumbnail": "https://i.imgur.com/k7Mi8zh.png",
   "color": "#1ABC9C",
@@ -17,5 +17,31 @@
     "learning",
     "coding"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "browse",
+      "title": "Show Browsing Status",
+      "icon": "fas fa-book-reader",
+      "value": true
+    },
+    {
+      "id": "course",
+      "title": "Show Courses",
+      "icon": "fas fa-book",
+      "value": true
+    },
+    {
+      "id": "code",
+      "title": "Show Codes",
+      "icon": "fas fa-code",
+      "value": true
+    },
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fas fa-clock",
+      "value": true
+    }
+  ]
 }
