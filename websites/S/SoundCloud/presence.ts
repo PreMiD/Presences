@@ -47,7 +47,7 @@ const getElement = (query: string): string | undefined => {
   return text.trimStart().trimEnd();
 };
 
-const capitalize = (text: string) => {
+const capitalize = (text: string): string => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
@@ -153,7 +153,8 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  const playing = document.querySelector(".playControls__play.playing")!!;
+  const playButton = document.querySelector(".playControls__play.playing");
+  const playing = playButton ? true : false;
 
   if ((playing || (!playing && !showBrowsing)) && showSong) {
     data.details = getElement(
