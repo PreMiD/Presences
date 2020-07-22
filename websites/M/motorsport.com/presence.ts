@@ -39,8 +39,13 @@ presence.on("UpdateData", () => {
   }
 
   function articleCheck(): void {
-    if (document.location.pathname.includes("/news/") && !document.location.pathname.endsWith("/news/")) {
-      const articleTitle = document.querySelector(".ms-entity-detail-header_title").textContent;
+    if (
+      document.location.pathname.includes("/news/") &&
+      !document.location.pathname.endsWith("/news/")
+    ) {
+      const articleTitle = document.querySelector(
+        ".ms-entity-detail-header_title"
+      ).textContent;
       presenceData.details = "Reading an article";
       presenceData.state = articleTitle;
     }
@@ -58,7 +63,9 @@ presence.on("UpdateData", () => {
         presenceData.state = "Moto GP Series";
       } else if (document.location.pathname.startsWith("/category/nascar/")) {
         presenceData.state = "NASCAR Series";
-      } else if (document.location.pathname.startsWith("/category/openwheel/")) {
+      } else if (
+        document.location.pathname.startsWith("/category/openwheel/")
+      ) {
         presenceData.state = "Openwheel Series";
       } else if (document.location.pathname.startsWith("/category/sportcar/")) {
         presenceData.state = "Sportscar Series";
@@ -218,7 +225,7 @@ presence.on("UpdateData", () => {
       checkSubPage();
       articleCheck();
     } else if (document.location.pathname.includes("/world-rx/")) {
-      presenceData.state = 'World Rallycross';
+      presenceData.state = "World Rallycross";
       checkSubPage();
       articleCheck();
     } else if (document.location.pathname.includes("/dakar/")) {
@@ -236,7 +243,7 @@ presence.on("UpdateData", () => {
       presenceData.state = "Karting";
       checkSubPage();
       articleCheck();
-    } else if (document.location.pathname.includes('/nhra/')) {
+    } else if (document.location.pathname.includes("/nhra/")) {
       presenceData.state = "NHRA";
       checkSubPage();
       articleCheck();
@@ -276,21 +283,22 @@ presence.on("UpdateData", () => {
       presenceData.state = "Formula E";
       checkSubPage();
       articleCheck();
-    }
-
-    else if (document.location.pathname.includes("/driver/")) {
+    } else if (document.location.pathname.includes("/driver/")) {
       presenceData.details = "Looking at a driver";
-      presenceData.state = document.querySelector(".ms-entity-header_title").textContent;
+      presenceData.state = document.querySelector(
+        ".ms-entity-header_title"
+      ).textContent;
     } else if (document.location.pathname.includes("/team/")) {
       presenceData.details = "Looking at a team";
-      presenceData.state = document.querySelector(".ms-entity-header_title").textContent;
+      presenceData.state = document.querySelector(
+        ".ms-entity-header_title"
+      ).textContent;
     }
 
     if (document.location.pathname.includes("/collection/giorgio-piola/")) {
       presenceData.details = "Collection";
       presenceData.state = "Giorgio Piola";
     }
-
   }
 
   if (presenceData.details == null) {
@@ -299,5 +307,4 @@ presence.on("UpdateData", () => {
   } else {
     presence.setActivity(presenceData);
   }
-
 });
