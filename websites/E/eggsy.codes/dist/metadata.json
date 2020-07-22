@@ -10,7 +10,7 @@
   },
   "url": "eggsy.xyz",
   "regExp": "eggsy[.]xyz(?![/]projects[/]premid[/]custom-status)",
-  "version": "1.2.5",
+  "version": "1.2.4",
   "logo": "https://premid.is-inside.me/L7cXeX83.jpg",
   "thumbnail": "https://premid.is-inside.me/GWRfi8VK.png",
   "color": "#212121",
