@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
   if (path.includes("/Compare/")) {
     data.details = `Comparing ${getElement(".fastinslowout.active")}s...`;
 
-    const parseComparison = (text: string, date: string) => {
+    const parseComparison = (text: string, date: string): string => {
       return date ? text : "Unspecified";
     };
 
