@@ -5,12 +5,12 @@
   },
   "service": "Custom Status",
   "description": {
-    "en": "Custom Status is a way to set custom statuses using PreMiD. You can customize everything but using custom images. You have to visit [this page](https://eggsy.codes/projects/premid/custom-status) to start using!",
-    "tr": "Custom Status, Discord'un kendi özelliği gibi isteğinize göre ayarlanabilen bir oynuyor kısmıdır. Bu servis ile PreMiD kullanarak istediğiniz resmi seçme olanağı dışında bir RPC ile yapabileceğiniz her şeyi yapabilirsiniz. Servisin çalışması için servisi ekleyip, [buradaki](https://eggsy.codes/projects/premid/custom-status) sayfaya gitmelisiniz."
+    "en": "Custom Status is a way to set custom statuses using PreMiD. You can customize everything but using custom images. You have to visit [this page](https://eggsy.xyz/projects/premid/custom-status) to start using!",
+    "tr": "Custom Status, Discord'un kendi özelliği gibi isteğinize göre ayarlanabilen bir oynuyor kısmıdır. Bu servis ile PreMiD kullanarak istediğiniz resmi seçme olanağı dışında bir RPC ile yapabileceğiniz her şeyi yapabilirsiniz. Servisin çalışması için servisi ekleyip, [buradaki](https://eggsy.xyz/projects/premid/custom-status) sayfaya gitmelisiniz."
   },
-  "url": "eggsy.codes",
-  "regExp": "eggsy[.]codes[/]projects[/]premid[/]custom-status",
-  "version": "1.2.3",
+  "url": "eggsy.xyz",
+  "regExp": "eggsy[.]xyz[/]projects[/]premid[/]custom-status",
+  "version": "1.2.5",
   "logo": "https://premid.is-inside.me/PsLr519L.PNG",
   "thumbnail": "https://premid.is-inside.me/rWy3ggow.png",
   "color": "#212121",
