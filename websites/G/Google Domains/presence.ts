@@ -52,12 +52,12 @@ presence.on("UpdateData", async () => {
     const domainName = getElement(".domain-header-title > span");
     data.details = domainName ? "Browsing Domain..." : "Browsing...";
 
-    const tab =
+    let tab =
       getElement(".dreg-ogb-menu-item-selected") ||
       getElement(".partner-header") ||
       getElement(".gb_bd");
     data.state =
-      domainName && showDomain ? `${domainName} (${tab})` : tab && `${tab} Tab`;
+      domainName && showDomain ? `${domainName} (${tab})` : tab && `${tab} tab`;
   }
 
   if (path.includes("/m/registrar/cart/")) {
