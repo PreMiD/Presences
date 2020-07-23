@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
     const domainName = getElement(".domain-header-title > span");
     data.details = domainName ? "Browsing Domain..." : "Browsing...";
 
-    let tab =
+    const tab =
       getElement(".dreg-ogb-menu-item-selected") ||
       getElement(".partner-header") ||
       getElement(".gb_bd");
