@@ -13,10 +13,10 @@ presence.on("UpdateData", async () => {
 
     /* Update Presence */
     if (path.hostname === "takeb1nzyto.space") {
-        let song = document.querySelector(
+        const song = document.querySelector(
             "#song"
         ).textContent;
-        let ratelimited = document.querySelector(
+        const ratelimited = document.querySelector(
             "#ratelimited-time"
         ).textContent;
 
