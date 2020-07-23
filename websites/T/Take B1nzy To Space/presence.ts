@@ -15,14 +15,14 @@ presence.on("UpdateData", async () => {
     if (path.hostname === "takeb1nzyto.space") {
         var song = document.querySelector(
             "#song"
-        ).textContent
+        ).textContent;
         var ratelimited = document.querySelector(
             "#ratelimited-time"
-        ).textContent
+        ).textContent;
 
-        presenceData.startTimestamp = browsingStamp
-        presenceData.details = "Playing " + song
-        presenceData.state = "Ratelimited for " + ratelimited + "s"
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Playing " + song;
+        presenceData.state = "Ratelimited for " + ratelimited + "s";
         presence.setActivity(presenceData);
     }
 });
