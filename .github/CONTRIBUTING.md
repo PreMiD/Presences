@@ -132,6 +132,7 @@ A list of fields and their rules are listed below:
 ### **`service`**
 
 - The service name **must** be the name of the presence directory. For example, if the presence is located at `/websites/Y/YouTube/`, the service name must be `YouTube`.
+- You **cannot** use the url as the service name unless the website uses the url as its official name. If the name is not descriptive and can be considered vague, using the url is **required**. (for e.g., `YouTube` is permitted because that is the official name and is descriptive, while `youtube.com` is not. `Top` is a non-descriptive name, so using the url `top.gg` is **required**.)
 
 ### **`*altnames`**
 
@@ -200,6 +201,7 @@ Here is a list of rules you must follow when writing your `presence.ts` file:
 - You are **not** allowed to access `localStorage`.
 - When accessing cookies for stored data, please prefix the key with `PMD_`.
 - You many only make HTTP/HTTPS requests to `premid.app` or the presence website API. If you are using external domains, you will be required to explain why it is necessary.
+- Do **not** set fields in the presence data object to undefined after it has been declared, use the `delete` keyword instead. (for e.g., use `delete data.startTimestamp` instead of `data.startTimestamp = undefined`)
 
 ## [**tsconfig.json**](https://docs.premid.app/en/dev/presence/tsconfig)
 
