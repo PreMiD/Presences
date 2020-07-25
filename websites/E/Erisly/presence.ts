@@ -39,7 +39,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Helping Erisly";
     presenceData.state = "learn a language";
   } else if (document.location.hostname == "wiki.erisly.com") {
-    let firstHeading = document.querySelector("#firstHeading").textContent;
+    let firstHeading =
+      document.querySelector("#firstHeading") !== null
+        ? document.querySelector("#firstHeading").textContent
+        : document.querySelector(".page-heading").textContent;
     const firstHeadingSplit = firstHeading.split(" "),
       firstHeadingVerb = firstHeadingSplit.shift();
 
