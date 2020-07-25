@@ -39,6 +39,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "translate.erisly.com") {
     presenceData.details = "Helping Erisly";
     presenceData.state = "learn a language";
+  } else if (document.location.hostname == "wiki.erisly.com") {
+    presenceData.details = "Wiki - Viewing page:";
+    presenceData.state = document.querySelector("#firstHeading").textContent;
   }
 
   if (presenceData.details == null) {
