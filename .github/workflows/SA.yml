@@ -15,3 +15,4 @@ jobs:
           reporter: github-pr-review
           filter_mode: file
           fail_on_error: true
+          eslint_flags: "--ext .ts"
