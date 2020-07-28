@@ -10,7 +10,7 @@ const presence = new Presence({
     // anyone is welcome to suggest more metadata via GH issues
     time: null,
     length: null,
-    state: "stopped",
+    state: "paused",
     loop: null,
     repeat: null,
     filename: null,
