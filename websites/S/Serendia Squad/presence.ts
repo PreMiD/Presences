@@ -10,15 +10,15 @@ presence.on("UpdateData", () => {
   const browsingStamp = Math.floor(Date.now() / 1000);
   const page = window.location.pathname;
   if (page.toLowerCase() === "/") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Anasayfa";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.toLowerCase() === "/bilgilendirme") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Bilgilendirme";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.toLowerCase() === "/basvuru") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Yetkili başvurusu";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.startsWith("/hata")) {
@@ -26,23 +26,23 @@ presence.on("UpdateData", () => {
     presenceData.state = `Hata kodu` + " : " + window.location.search.slice(5);
     presenceData.startTimestamp = browsingStamp;
   } else if (page.toLowerCase() === "/normal") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Normal Kodlar";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.toLowerCase() === "/altin") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Altın Kodlar";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.toLowerCase() === "/elmas") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Elmas Kodlar";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.toLowerCase() === "/hazir") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Hazır Sistemler";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.toLowerCase() === "/topluluk") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Topluluk Kodları";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.startsWith("/code/edit")) {
@@ -56,7 +56,7 @@ presence.on("UpdateData", () => {
       window.location.search.slice(8) + " " + "numaralı kodu inceliyor!";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.toLowerCase() === "/codepanel") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Kod Paneli";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.startsWith("/code")) {
@@ -77,7 +77,7 @@ presence.on("UpdateData", () => {
       "adlı kullanıcının profilini görüntülüyor!";
     presenceData.startTimestamp = browsingStamp;
   } else if (page.toLowerCase() === "/addcode") {
-    presenceData.details = "Bir sayfaya görüntülüyor:";
+    presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Kod Ekle";
     presenceData.startTimestamp = browsingStamp;
   }
