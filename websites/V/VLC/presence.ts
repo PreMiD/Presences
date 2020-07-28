@@ -44,7 +44,7 @@ function getTimestamps(
 
 function setLoop(f: Function, ms: number): number {
   f();
-  return setInterval(f, ms);
+  return setInterval(f, ms)
 }
 
 function decodeReq(entity: Element): string {
