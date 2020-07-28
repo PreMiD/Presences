@@ -43,7 +43,7 @@ function getTimestamps(
 }
 
 function setLoop(f: Function, ms: number): number {
-  f();
+  f()
   return setInterval(f, ms)
 }
 
