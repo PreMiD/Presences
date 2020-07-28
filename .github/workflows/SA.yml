@@ -2,7 +2,7 @@ name: SA
 on: [pull_request]
 jobs:
   analysis:
-    name: All code
+    name: Files check
     runs-on: ubuntu-latest
     if: github.repository_owner == 'PreMiD'
     steps:
@@ -15,10 +15,9 @@ jobs:
           reporter: github-pr-check
           filter_mode: file
           fail_on_error: true
-          workdir: "."
-          eslint_flags: "--ext .ts"
+          eslint_flags: ". --ext .ts"
   review:
-    name: Modified code
+    name: Diff review
     runs-on: ubuntu-latest
     if: github.repository_owner == 'PreMiD'
     steps:
@@ -31,5 +30,4 @@ jobs:
           reporter: github-pr-review
           filter_mode: added
           fail_on_error: true
-          workdir: "."
-          eslint_flags: "--ext .ts"
+          eslint_flags: ". --ext .ts"
