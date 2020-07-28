@@ -37,7 +37,7 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now()
+  const startTime = Date.now();
   const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
@@ -49,7 +49,7 @@ function setLoop(f: Function, ms: number): number {
 
 function decodeReq(entity: Element): string {
   // decoding HTML entities the stackoverflow way
-  const txt = document.createElement("textarea");
+  const txt = document.createElement("textarea")
   txt.innerHTML = entity.textContent;
   return txt.value;
 }
