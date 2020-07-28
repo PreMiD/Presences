@@ -1,0 +1,17 @@
+name: SA
+on: [pull_request]
+jobs:
+  eslint:
+    name: Syntax Analysis
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'PreMiD'
+    steps:
+      - uses: actions/checkout@v1
+      - name: eslint
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.AUTOMERGE }}
+          level: error
+          reporter: github-pr-review
+          filter_mode: file
+          fail_on_error: true
