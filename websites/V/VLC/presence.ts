@@ -49,8 +49,8 @@ function setLoop(f: Function, ms: number): number {
 
 function decodeReq(entity: Element): string {
   // decoding HTML entities the stackoverflow way
-  const txt = document.createElement("textarea")
-  txt.innerHTML = entity.textContent
+  const txt = document.createElement("textarea");
+  txt.innerHTML = entity.textContent;
   return txt.value;
 }
 
