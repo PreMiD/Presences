@@ -1,8 +1,24 @@
 name: SA
 on: [pull_request]
 jobs:
-  eslint:
-    name: Syntax Analysis
+  analysis:
+    name: All code
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'PreMiD'
+    steps:
+      - uses: actions/checkout@v1
+      - name: eslint
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.AUTOMERGE }}
+          level: error
+          reporter: github-pr-check
+          filter_mode: file
+          fail_on_error: true
+          workdir: "."
+          eslint_flags: "--ext .ts"
+  review:
+    name: Modified code
     runs-on: ubuntu-latest
     if: github.repository_owner == 'PreMiD'
     steps:
@@ -13,7 +29,7 @@ jobs:
           github_token: ${{ secrets.AUTOMERGE }}
           level: error
           reporter: github-pr-review
-          filter_mode: file
+          filter_mode: added
           fail_on_error: true
           workdir: "."
           eslint_flags: "--ext .ts"
