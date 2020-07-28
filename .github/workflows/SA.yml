@@ -28,6 +28,6 @@ jobs:
           github_token: ${{ secrets.AUTOMERGE }}
           level: error
           reporter: github-pr-review
-          filter_mode: added
+          filter_mode: diff_context
           fail_on_error: true
           eslint_flags: ". --ext .ts"
