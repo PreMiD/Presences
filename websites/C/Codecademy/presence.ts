@@ -38,19 +38,19 @@ presence.on("UpdateData", async () => {
           break;
         case 2:
           presenceData.details = "Looking at a course";
-          presenceData.state = `"${document.querySelector(".header__3igq9n5NOQDb0BZuWlYoJL h1").textContent}"`;
-          presenceData.smallImageKey = document.querySelector(".header__3igq9n5NOQDb0BZuWlYoJL h1").textContent.split(" ").slice(1).join(" ").toLowerCase().replace(" ", "_").replace("+", "plus").replace("#", "sharp")
-          presenceData.smallImageText = document.querySelector(".header__3igq9n5NOQDb0BZuWlYoJL h1").textContent.split(" ").slice(1).join(" ")
+          presenceData.state = `"${document.querySelector("#course-landing-page h1").textContent}"`;
+          presenceData.smallImageKey = document.querySelector("#course-landing-page h1").textContent.split(" ").slice(1).join(" ").toLowerCase().replace(" ", "_").replace("+", "plus").replace("#", "sharp")
+          presenceData.smallImageText = document.querySelector("#course-landing-page h1").textContent.split(" ").slice(1).join(" ")
           break;
         case 3:
           presenceData.details = "Looking at a path";
-          presenceData.state = `"${document.querySelector(".heading__2X5Zo7G1JUo6H9EbL5j-mP") ? document.querySelector(".heading__2X5Zo7G1JUo6H9EbL5j-mP").textContent : document.querySelector(".title__1PSKSbrA1yvrVuIID5Q55I").textContent.slice(document.querySelector(".goalHeader__TL76KAVVWuNlGIJiHpkyD").textContent.length)}"`;
+          presenceData.state = `"${document.querySelector("[class^=goalHeader__]") ? document.querySelector("main h1").textContent.slice(document.querySelector("[class^=goalHeader__]").textContent.length) : document.querySelector("main h1").textContent}"`;
           break;
       }
       break;
     case "courses":
     case "paths":
-      const heading = document.querySelector(".headerTitle__1-qJDRbp_-WCVeSVokJFqA").textContent;
+      const heading = document.querySelector("[class^=headerTitle__]").textContent;
       if (pathArray[0] === "courses") {
         if (heading.startsWith("Learn ")) {
           presenceData.smallImageKey = heading.split(" ").slice(1).join(" ").toLowerCase().replace(" ", "_").replace("+", "plus").replace("#", "sharp")
@@ -65,14 +65,14 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = videoPaused ? (await strings).pause : (await strings).play
         if (videoDuration && !videoPaused) presenceData.endTimestamp = Date.now() + ((videoDuration - videoCurrentTime) * 1000)
       } else {
-        const bodyHeading = document.querySelector(".bodyHeading__3ycV35eqrePgy3HT_yK-i4")
-        const articleTitle = document.querySelector(".articleTitle__1QAq5lbh9QdTOHlJiW8tde")
+		presenceData.startTimestamp = start;
+        const bodyHeading = document.querySelector("[class^=bodyHeading__]")
+        const articleTitle = document.querySelector("[class^=articleTitle_]")
         if (bodyHeading) presenceData.state = bodyHeading.textContent
         if (articleTitle) {
           presenceData.details = "Reading an article"
           presenceData.state = articleTitle.textContent
         }
-        presenceData.startTimestamp = start;
       }
       presenceData.state = `"${presenceData.state}"`
       break;
@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
     case "articles":
       if (pathArray[1]) {
         presenceData.details = "Reading an article"
-        presenceData.state = `"${document.querySelector(".articleHeader__3_GpcCcJGMQQ3O0_uAxz5u").textContent}"`
+        presenceData.state = `"${document.querySelector("[class^=articleHeader__]").textContent}"`
       } else {
         presenceData.details = "Browsing articles"
       }
