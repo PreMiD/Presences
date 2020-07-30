@@ -9,10 +9,11 @@
     "en": "Learn the technical skills you need for the job you want. As leaders in online education and learning to code, we’ve taught over 45 million people using a tested curriculum and an interactive learning environment. Start with HTML, CSS, JavaScript, SQL, Python, Data Science, and more."
   },
   "service": "Codecademy",
-  "version": "1.0",
+  "version": "1.1",
   "logo": "https://i.imgur.com/TnKcxoz.jpg",
   "thumbnail": "https://i.imgur.com/5rpD3o0.png",
   "color": "#152B39",
   "tags": ["coding", "programming", "computer", "learn"],
-  "category": "other"
+  "category": "other",
+  "iframe": true
 }
