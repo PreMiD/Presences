@@ -20,6 +20,11 @@ presence.on("UpdateData", async () => {
   connected = document.querySelector(
     "#app-mount > div > div > div > div > div > div > div > div > section > div > div > div > div > a > div"
   );
+  if (connected == null) {
+    connected = document.querySelector(
+      "#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div"
+    );
+  }
   apptitle = document.querySelector(
     ".appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi"
   );
@@ -115,6 +120,11 @@ presence.on("UpdateData", async () => {
       typing = document.querySelector(
         "#app-mount > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(2) > div > main > form > div > div > div > div > div:nth-child(3) > div"
       );
+      if (typing == null) {
+        typing = document.querySelector(
+          "#app-mount > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > main > form > div > div > div > div > div:nth-child(3) > div"
+        );
+      }
       if (typing.className.toLowerCase().includes("placeholder")) {
         typing = false;
       } else {
