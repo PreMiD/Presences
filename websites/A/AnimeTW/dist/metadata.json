@@ -9,11 +9,16 @@
     "zh_CN": "AnimeTW是一个视频网站，您可以在其中观看带有西班牙语字幕的动漫。"
   },
   "url": "animetw.net",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/L1fhc3r.jpg",
   "thumbnail": "https://i.imgur.com/soODdkD.png",
   "color": "#00468b",
-  "tags": ["animetw", "streaming", "embedded-links", "anime"],
+  "tags": [
+    "animetw",
+    "streaming",
+    "embedded-links",
+    "anime"
+  ],
   "category": "anime",
   "iframe": true
 }
