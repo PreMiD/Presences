@@ -265,7 +265,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "uploading";
       data.smallImageText = "Uploading..."; // no string available
     }
-    if (!showTimestamps || (!playing && !showBrowsing)) {
+    if (!showTimestamps || (!playing && !showBrowsing)) { // deepscan-disable-line
       delete data.startTimestamp;
       delete data.endTimestamp;
     }
