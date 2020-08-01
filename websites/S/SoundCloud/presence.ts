@@ -134,9 +134,9 @@ const statics = {
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/");
 
-  const showBrowsing = await presence.getSetting("browse");
-  const showSong = await presence.getSetting("song");
-  const showTimestamps = await presence.getSetting("timestamp");
+  const showBrowsing = true;
+  const showSong = true;
+  const showTimestamps = true;
 
   let data: PresenceData = {
     details: undefined,
@@ -156,7 +156,7 @@ presence.on("UpdateData", async () => {
   const playButton = document.querySelector(".playControls__play.playing");
   const playing = playButton ? true : false;
 
-  if ((playing || (!playing && !showBrowsing)) && showSong) {
+  if ((playing || (!playing && !showBrowsing)) && showSong) { // deepscan-disable-line
     data.details = getElement(
       ".playbackSoundBadge__titleLink > span:nth-child(2)"
     );
@@ -174,7 +174,7 @@ presence.on("UpdateData", async () => {
     data.smallImageText = (await strings)[playing ? "play" : "pause"];
   }
 
-  if ((!playing || !showSong) && showBrowsing) {
+  if ((!playing || !showSong) && showBrowsing) { // deepscan-disable-line
     for (const [k, v] of Object.entries(statics)) {
       if (path.match(k)) {
         data = { ...data, ...v };
