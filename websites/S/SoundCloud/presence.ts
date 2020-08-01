@@ -152,8 +152,8 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  const playButton = document.querySelector(".playControls__play.playing");
-  const playing = playButton ? true : false;
+  const playButton = document.querySelector(".playControls__play.playing"),
+        playing = playButton ? true : false;
 
   if ((playing || (!playing && !showBrowsing)) && showSong) { // deepscan-disable-line
     data.details = getElement(
