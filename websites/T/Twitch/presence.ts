@@ -102,10 +102,10 @@ const statics = {
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/");
 
-  const showBrowsing = true;
-  const showLive = true;
-  const showVideo = true;
-  const showTimestamps = true;
+  const showBrowsing = true,
+        showLive = true,
+        showVideo = true,
+        showTimestamps = true;
 
   let data: PresenceData = {
     details: undefined,
