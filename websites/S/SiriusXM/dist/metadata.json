@@ -3,7 +3,8 @@
     "name": "Alexx",
     "id": "604182077088202784"
   },
-  "url": "player.siriusxm.com",
+  "url": ["player.siriusxm.com",
+          "player.sirusxm.ca"],
   "description": {
     "en": "SiriusXM is like nothing you've ever heard before — it's a whole new world of radio. Imagine channels and channels of anything you want to listen to."
   },
