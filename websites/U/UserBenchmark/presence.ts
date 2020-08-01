@@ -54,8 +54,8 @@ presence.on("UpdateData", async () => {
   const host = location.host;
   const path = location.pathname.replace(/\/?$/, "/");
 
-  const showSearch = await presence.getSetting("search");
-  const showTimestamps = await presence.getSetting("timestamp");
+  const showSearch = true;
+  const showTimestamps = true;
 
   let data: PresenceData = {
     details: undefined,

@@ -56,10 +56,10 @@ presence.on("UpdateData", async () => {
   const host = location.host;
   const path = location.pathname.replace(/\/?$/, "/");
 
-  const showBrowsing = await presence.getSetting("browse");
-  const showCourses = await presence.getSetting("course");
-  const showCodes = await presence.getSetting("code");
-  const showTimestamps = await presence.getSetting("timestamp");
+  const showBrowsing = true;
+  const showCourses = true;
+  const showCodes = true;
+  const showTimestamps = true;
 
   let data: PresenceData = {
     details: undefined,
