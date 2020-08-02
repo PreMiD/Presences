@@ -1,0 +1,27 @@
+{
+  "author": {
+    "name": "Arda",
+    "id": "403225819222245377"
+  },
+  "url": [
+    "www.glynet.com",
+    "glynet.com"
+  ],
+  "description": {
+    "tr": "Glynet, yeni açılmış bir sosyal medya sitesi. Küçük bir müzik kütüphanesi de bulunmakta.",
+    "en": "Glynet is a social media website that launched newly. Includes a music library as well."
+  },
+  "service": "Glynet",
+  "version": "1.2.3",
+  "logo": "https://crisis.is-inside.me/wBPHX8LP.png",
+  "thumbnail": "https://crisis.is-inside.me/q3aOVabM.png",
+  "color": "#FFFFFF",
+  "tags": [
+    "social-media",
+    "music",
+    "turkish",
+    "glynet",
+    "news"
+  ],
+  "category": "socials"
+}
