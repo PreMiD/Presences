@@ -3,10 +3,10 @@ const iframe = new iFrame();
 iframe.on("UpdateData", async () => {
   const { hostname } = window.location;
   if (
-    hostname === `animeproxy.info` ||
-    hostname === `rapidvid.to` ||
-    hostname === `openload.co`
+    hostname === `gounlimited.to` ||
+    hostname === `vcdn.space`
   ) {
+    console.log(hostname);
     const video = document.querySelector(`video`);
     if (video != null) {
       const played = video.duration != 0;
