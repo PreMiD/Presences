@@ -20,21 +20,33 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-function getTimesFromMs(ms: number): Record<string, number> {
-  const floor = Math.floor(ms % 60),
-    sec = floor < 10 ? 0 + floor : floor,
-    min = floor / 60 <= 0 ? 0 : floor / 60,
-    hrs = floor / 60 / 60;
+function getTimes(time: number): Record<string, number> {
+  let seconds = Math.round(time),
+    minutes = Math.floor(seconds / 60);
+
+  seconds -= minutes * 60;
+
+  const hours = Math.floor(minutes / 60);
+
+  minutes -= hours * 60;
+
   return {
-    hrs: hrs,
-    sec: sec,
-    min: min
+    sec: seconds,
+    min: minutes,
+    hrs: hours
   };
 }
 
+function lessTen(digit: number): string {
+  return digit < 10 ? "0" : "";
+}
+
 function getTimestamp(time: number): string {
-  const { sec, min, hrs } = getTimesFromMs(time);
-  return hrs > 0 ? hrs + ":" + min + ":" + sec : min + ":" + sec;
+  const { sec, min, hrs } = getTimes(time);
+
+  return hrs > 0
+    ? hrs + ":" + lessTen(min) + min + ":" + lessTen(sec) + sec
+    : min + ":" + lessTen(sec) + sec;
 }
 
 interface Match {
