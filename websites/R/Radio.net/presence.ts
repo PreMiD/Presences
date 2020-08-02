@@ -19,19 +19,20 @@ presence.on("UpdateData", async () => {
   };
 
   switch (path[0]) {
-    case "s": //Radio
+    //Radio
+    case "s":
+    //Podcast
     case "p": {
-      //Podcast
-      if (path[1] != lastPath || browsingStamp == 0)
+      if (path[1] != lastPath || browsingStamp == 0) {
         browsingStamp = Math.round(Date.now() / 1000);
+        lastPath = path[1];
+      }
       const playerIcon = document.querySelector(
         ".player__animate-icon"
       ) as HTMLElement;
       const name = document.querySelector("h1") as HTMLElement; //Current Radio / Podcast
       const info = document.querySelector("div.player__song") as HTMLElement; //Current Song / Episode
-      const status = document.querySelector(
-        ".player__info-wrap"
-      ) as HTMLElement; //Player Status
+      const status = document.querySelector(".player__info-wrap") as HTMLElement; //Player Status
 
       if (playerIcon.style.display != "none") {
         //Playing
@@ -42,39 +43,36 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "play";
 
         presenceData.startTimestamp = browsingStamp;
-        if (path[0] == "p") {
-          const start = (document.querySelector(
-            ".player__timing-wrap > span:nth-child(1)"
-          ) as HTMLElement).innerText
-            .split(":")
-            .reverse();
-          const end = (document.querySelector(
-            ".player__timing-wrap > span:nth-child(3)"
-          ) as HTMLElement).innerText
-            .split(":")
-            .reverse();
 
-          //Create a timestamp when the podcast started playing
+        //Get the podcast play position
+        if (path[0] == "p") {
+          presenceData.endTimestamp = browsingStamp;
+
+          //Get the start / current position
+          const [start, end] = (document.querySelector(
+              ".player__timing-wrap"
+          ) as HTMLElement).textContent.split("|").map(e => e.split(":").reverse());
+
+          //Add the amount of time the podcast has been playing
           if (start.length > 0) {
-            presenceData.startTimestamp -= parseInt(start[0]) * 60;
+            presenceData.startTimestamp += parseInt(start[0]);
           }
           if (start.length > 1) {
-            presenceData.startTimestamp -= parseInt(start[0]) * 60 * 60;
+            presenceData.startTimestamp += parseInt(start[1]) * 60;
           }
           if (start.length > 2) {
-            presenceData.startTimestamp -= parseInt(start[0]) * 60 * 60 * 24;
+            presenceData.startTimestamp += parseInt(start[2]) * 60 * 24;
           }
 
-          //Add the length of the podcast in seconds to the timestamp
-          presenceData.endTimestamp = presenceData.startTimestamp;
+          //Add the length of the podcast
           if (end.length > 0) {
-            presenceData.endTimestamp += parseInt(start[0]) * 60;
+            presenceData.endTimestamp += parseInt(end[0]);
           }
           if (end.length > 1) {
-            presenceData.endTimestamp += parseInt(start[0]) * 60 * 60;
+            presenceData.endTimestamp += parseInt(end[1]) * 60;
           }
           if (end.length > 2) {
-            presenceData.endTimestamp += parseInt(start[0]) * 60 * 60 * 24;
+            presenceData.endTimestamp += parseInt(end[2]) * 60 * 24;
           }
         }
       } else {
@@ -87,6 +85,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "pause";
 
         if (status.style.display != "none") {
+          //Player status is being displayed (example: BUFFERING)
           const adlength = status.innerText.match(/\d+/g)
             ? parseInt(status.innerText.match(/\d+/g)[0])
             : 0;
@@ -99,11 +98,15 @@ presence.on("UpdateData", async () => {
           } else {
             presenceData.state = status.innerText;
           }
+        } else {
+          //Player is inactive (no status is being displayed)
+          const tags = (document.querySelector(".z7kxsz-11") as HTMLElement).textContent;
+          presenceData.state = tags;
         }
       }
       break;
-      //Search
     }
+    //Search
     case "search": {
       browsingStamp = 0;
       const results = document.querySelector("h1").innerText.match(/\d+/g)[0];
@@ -116,12 +119,14 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = (await strings).search;
       break;
-      //Genre / Topic
     }
+    //Genre / Topic
     case "genre":
-    case "topic": //Country / City
+    //Country / City
+    case "topic":
     case "country":
-    case "city": //Local Stations / Top 100 Stations
+    //Local Stations / Top 100 Stations
+    case "city":
     case "local-stations":
     case "top-stations":
       browsingStamp = 0;
@@ -135,6 +140,11 @@ presence.on("UpdateData", async () => {
     case "profile":
     case "recents":
     case "favorites":
+    //Terms and Conditions / Privacy Policy / Imprint / Contact
+    case "terms-and-conditions":
+    case "privacy-policy":
+    case "imprint":
+    case "contact":
       browsingStamp = 0;
 
       presenceData.details = document.title;
@@ -155,5 +165,6 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       return;
   }
+  
   presence.setActivity(presenceData);
 });
