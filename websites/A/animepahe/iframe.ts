@@ -1,11 +1,26 @@
 // Note: Alternate hosts (openload, streammango) are currently disabled on the site (can't switch to them),
 //       if this changes or they switch their main host, this will need to be updated.
 
-const iframe = new iFrame(),
-  video: HTMLVideoElement = document.querySelector("#kwikPlayer");
+const iframe = new iFrame();
 
-iframe.send({
-  current_time: video.currentTime,
-  duration: video.duration,
-  paused: video.paused
+let sendback: {
+  current_time: number;
+  duration: number;
+  paused: boolean;
+};
+
+function send(): void {
+  iframe.send(sendback);
+}
+
+iframe.on("UpdateData", () => {
+  if (document.querySelector("#kwikPlayer")) {
+    const video: HTMLVideoElement = document.querySelector("#kwikPlayer");
+    sendback = {
+      current_time: video.currentTime,
+      duration: video.duration,
+      paused: video.paused
+    };
+    send();
+  }
 });
