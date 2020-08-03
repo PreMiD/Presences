@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "MauricePascal#3009",
+      "id": "622784776234991626"
+    },
+    "url": ["discord-botlist.eu", "www.discord-botlist.eu", "status.discord-botlist.eu"],
+    "description": {
+      "en": "Your free Botlist"
+    },
+    "service": "discord-botlist",
+    "version": "1.0",
+    "logo": "https://discord-botlist.eu/pics/logo.jpg",
+    "thumbnail": "https://discord-botlist.eu/pics/logo.jpg",
+    "color": "#001FFF",
+    "tags": [
+      "discord",
+      "discord bot list",
+      "discord bot",
+      "bot"
+    ],
+    "category": "other"
+  }
