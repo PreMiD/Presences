@@ -8,51 +8,48 @@ strings = presence.getStrings({
 });
 
 presence.on("UpdateData", async () => {
-    var needState = false
-    var whichState = 0
-    var browsingStamp = Math.floor(Date.now() / 1000);
+    const linkArray = document.URL.replace("https://", "").split("/")
 
     const titleArray = document.title.split("|")
-    var titlenName = ""
-    if(titleArray[1] == " Your Discord Bot List") {
-        titlenName = "main page"
-    } else if(titleArray[0] == "Partner") {
-        titlenName = "partner page"
-    } else if(titleArray[0] == "Login ") {
-        titlenName = "login page"
-    } else if(titleArray[0] == "Submit your Bot") {
-        titlenName = "submit page"
-    } else if(titleArray[1] == " All Bots") {
-        titlenName = "all bots"
-    } else if(titleArray[1] == " LPTP1.de") {
-        titlenName = "status page"
-    } else if(document.title.split("-")[1]) {
-        const botTitleArray = document.title.split("-")
-        titlenName = botTitleArray[0]
-        needState = true
-        whichState = 1 //1 = Botpage
-    } else if(titleArray[1] == " Vote") {
-        needState = true
-        titlenName = titleArray[0]
-        whichState = 2 //2 = Votepage
-    } else {
-        titlenName = "a page"
-    }
+    const botTitleArray = document.title.split("-")
 
     var presenceData: PresenceData = {
-        largeImageKey: "dbl_eu-logo", 
-        details: "Viewing "+titlenName,
-        startTimestamp: browsingStamp, 
+        largeImageKey: "dbl_eu-logo"
     };
 
-    if(needState) {
-        if(whichState == 1) {
-            presenceData.state = "Botpage";
-        } else if(whichState == 2) {
-            presenceData.state = "Votepage";
+    if(!linkArray[1]) {
+        presenceData.details = "Viewing a page:"
+        presenceData.state = "Home page"
+        if(titleArray[1] == "LPTP1.de") {
+            presenceData.details = "Viewing a page:"
+            presenceData.state = "Statuspage"
         }
+    } else if(linkArray[1] == "users") {
+        presenceData.details = "Viewing user profile:"
+        presenceData.state = botTitleArray[0]
+    } else if(linkArray[1] == "bots") {
+        if(linkArray[2] == "all") {
+            presenceData.details = "Viewing a page:"
+            presenceData.state = "All Bots"
+        } else if(linkArray[2] == "new") {
+            presenceData.details = "Viewing a page:"
+            presenceData.state = "Submit a bot"
+        } else {
+            if(linkArray[3] == "vote") {
+                presenceData.details = "Voting for bot:"
+                presenceData.state = titleArray[0]
+            } else {
+                presenceData.details = "Viewing bot page:"
+                presenceData.state = botTitleArray[0]
+            }
+        }
+    } else if(linkArray[1] == "login_err") {
+        presenceData.details = "Viewing a page:"
+        presenceData.state = "Login"
+    } else if(linkArray[1] == "partner") {
+        presenceData.details = "Viewing a page:"
+        presenceData.state = "Partners"
     }
-
     if (presenceData.details == null) {
         presence.setTrayTitle(); 
         presence.setActivity();
