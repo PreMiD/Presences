@@ -35,20 +35,14 @@ presence.on("UpdateData", async () => {
         titlenName = "a page"
     }
 
-    if(!needState) {
-        var presenceData: PresenceData = {
-            largeImageKey: "dbl_eu-logo",
-            details: "Viewing "+titlenName,
-            startTimestamp: browsingStamp, 
-        }; 
-    
-    } else {
-        var presenceData: PresenceData = {
-            largeImageKey: "dbl_eu-logo", 
-            details: "Viewing "+titlenName,
-            state: "Vote",
-            startTimestamp: browsingStamp, 
-        }; 
+    var presenceData: PresenceData = {
+        largeImageKey: "dbl_eu-logo", 
+        details: "Viewing "+titlenName,
+        startTimestamp: browsingStamp, 
+    };
+
+    if(needState) {
+        presenceData.state = "Vote";
     }
 
     if (presenceData.details == null) {
