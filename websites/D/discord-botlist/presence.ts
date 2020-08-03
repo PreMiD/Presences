@@ -8,8 +8,6 @@ strings = presence.getStrings({
     //You can use this to get translated strings
 });
 
-console.log("NO u")
-
 /*
 
 function myOutsideHeavyLiftingFunction(){
