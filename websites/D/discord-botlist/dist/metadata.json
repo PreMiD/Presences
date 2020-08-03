@@ -1,23 +1,18 @@
 {
     "$schema": "https://schemas.premid.app/metadata/1.0",
     "author": {
-      "name": "MauricePascal#3009",
+      "name": "MauricePascal",
       "id": "622784776234991626"
     },
     "url": ["discord-botlist.eu", "www.discord-botlist.eu", "status.discord-botlist.eu"],
     "description": {
-      "en": "Your free Botlist"
+      "en": "Your Discord Bot List! We give you the avaibillity to apply your bot and give your bot a page on our website."
     },
     "service": "discord-botlist",
-    "version": "1.0",
-    "logo": "https://discord-botlist.eu/pics/logo.jpg",
-    "thumbnail": "https://discord-botlist.eu/pics/logo.jpg",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/GqUUpuX",
+    "thumbnail": "https://i.imgur.com/GqUUpuX",
     "color": "#001FFF",
-    "tags": [
-      "discord",
-      "discord bot list",
-      "discord bot",
-      "bot"
-    ],
+    "tags": ["discord", "discord bot list", "discord bot", "bot"],
     "category": "other"
   }
