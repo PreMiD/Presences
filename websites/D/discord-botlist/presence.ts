@@ -7,25 +7,6 @@ strings = presence.getStrings({
     pause: "presence.playback.paused"
 });
 
-<<<<<<< HEAD
-=======
-/*
-
-function myOutsideHeavyLiftingFunction(){
-    //Grab and process all your data here
-
-    // element grabs //
-    // api calls //
-    // variable sets //
-}
-
-setInterval(myOutsideHeavyLiftingFunction, 10000);
-//Run the function separate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
-
-*/
-
-
->>>>>>> 137eba5fc6e64f5e78aaa22b444bdf54409a8d10
 presence.on("UpdateData", async () => {
     var needState = false
     var browsingStamp = Math.floor(Date.now() / 1000);
