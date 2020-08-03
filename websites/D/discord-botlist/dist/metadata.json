@@ -6,7 +6,7 @@
     },
     "url": ["discord-botlist.eu", "www.discord-botlist.eu", "status.discord-botlist.eu"],
     "description": {
-      "en": "Your Discord Bot List! We give you the avaibillity to apply your bot and give your bot a page on our website."
+      "en": "Your Discord Bot List! We give you the ability to apply your bot and give your bot a page on our website."
     },
     "service": "discord-botlist",
     "version": "1.0.0",
