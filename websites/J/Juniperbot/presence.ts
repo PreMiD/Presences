@@ -10,8 +10,12 @@ var presence = new Presence({
     const presenceData: PresenceData = {
       largeImageKey: "logo"
     };
-  
+    const juniper: boolean = await presence.getSetting("juniper");
+    const docs: boolean = await presence.getSetting("docs");
+    const fback: boolean = await presence.getSetting("fback");
+
     if (document.location.hostname == "juniper.bot") {
+      if(juniper){
       presenceData.startTimestamp = browsingStamp;
       if (document.location.pathname.includes("/ranking")) {
         presenceData.details = "Смотрит таблицу лидеров сервера:";
@@ -37,16 +41,24 @@ var presence = new Presence({
       } else if (document.location.pathname == "/user/card"){
         presenceData.details = "Меняет карточку рейтинга"
       }
-    } else if (document.location.hostname == "docs.juniper.bot") {
+      }
+      } if(docs){
+      if (document.location.hostname == "docs.juniper.bot") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = document.title;
       presenceData.state = "docs.juniper.bot"
-      presenceData.smallImageKey = "list";
-} else if (document.location.hostname == "feedback.juniper.bot"){
+      presenceData.smallImageKey = "list"; 
+      }
+      } if(fback){
+      if (document.location.hostname == "feedback.juniper.bot"){
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = `${document.querySelector("root post-header")}`;
       presenceData.state = "feedback.juniper.bot";  
-}  
+      if (document.location.pathname == "/") {
+      presenceData.details = "Главная страница";
+      } else if (document.location.pathname.includes("/posts")) {
+        presenceData.details = `Читает: ${document.querySelector(".post-header h1").innerHTML}`
+      }
+}}
     if (presenceData.details == null) {
       presence.setTrayTitle();
       presence.setActivity();

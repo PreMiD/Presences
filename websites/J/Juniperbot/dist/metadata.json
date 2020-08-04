@@ -24,5 +24,25 @@
     "juniper",
     "juniperbot"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "juniper",
+      "title": "Отображать в статусе действия на juniper.bot",
+      "icon":"fas fa-lightbulb",
+      "value": true
+    },
+    {
+      "id": "docs",
+      "title": "Отображать в статусе действия на docs.juniper.bot",
+      "icon":"fas fa-lightbulb",
+      "value": true
+    },
+    {
+      "id": "fback",
+      "title": "Отображать в статусе действия на feedback.juniper.bot",
+      "icon":"fas fa-lightbulb",
+      "value": true
+    }
+  ]
 }
