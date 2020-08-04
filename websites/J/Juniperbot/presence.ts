@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "list";
     } else if (document.location.pathname.includes("/dashboard/")) {
       presenceData.details = "В панели управления";
-      presenceData.state = `Сервер: ${document.querySelector(".guild--info h1.font-weight-thin.display-2").innerHTML}`
+      presenceData.state = `Сервер: ${document.querySelector(".guild--info h1.font-weight-thin.display-2").innerHTML}`;
     } else if (document.location.pathname.includes("/donate")) {
       presenceData.details = "Читает информацию об пожертвовании";
       presenceData.smallImageKey = "donate";
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Смотрит статистику бота";
       presenceData.smallImageKey = "stats";
     } else if (document.location.pathname == "/user/card"){
-      presenceData.details = "Меняет карточку рейтинга"
+      presenceData.details = "Меняет карточку рейтинга";
     }
     }
     }
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
     if (document.location.hostname == "docs.juniper.bot") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = document.title;
-    presenceData.state = "docs.juniper.bot"
+    presenceData.state = "docs.juniper.bot";
     presenceData.smallImageKey = "list"; 
     }
     }
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname == "/") {
     presenceData.details = "Главная страница";
     } else if (document.location.pathname.includes("/posts")) {
-      presenceData.details = `Читает: ${document.querySelector(".post-header h1").innerHTML}`
+      presenceData.details = `Читает: ${document.querySelector(".post-header h1").innerHTML}`;
     }
 }}
   if (presenceData.details == null) {
