@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "zenternal",
+    "id": "165170547192233985"
+  },
+  "service": "Disboard",
+  "description": {
+    "en": "DISBOARD is the public Discord server listing community"
+  },
+  "url": "disboard.org",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/d7ko9rn.png",
+  "thumbnail": "https://i.imgur.com/d7ko9rn.png",
+  "color": "#7289DA",
+  "tags": [
+    "discord",
+    "discord-server-list"
+  ],
+  "category": "other"
+}
