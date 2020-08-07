@@ -15,19 +15,24 @@ presence.on("UpdateData", async () => {
   let query = document.location.search;
 
   // Main
-  if (route === "/") {
-    if (query === "?section=all-updates") {
+  if (route === "/") 
+  {
+    if (query === "?section=all-updates") 
+    {
       // All Updates
       data.details = "Обновления манги";
       data.startTimestamp = 0;
-    } else {
+    } 
+    else 
+    {
       // Main
       data.details = "Главная страница";
       data.startTimestamp = 0;
     }
   }
   // Manga list
-  else if (route === "/manga-list") {
+  else if (route === "/manga-list") 
+  {
     data.smallImageText = "Ищет";
     data.smallImageKey = "search";
     data.startTimestamp = 0;
@@ -61,45 +66,106 @@ presence.on("UpdateData", async () => {
     }
   }
   // Bookmarks
-  else if (route.startsWith("/user/")) {
-    const userRoute = document.location.href.split("/").slice(5)[0];
-    let username = <HTMLElement>(
-      document.querySelector(".profile-user .profile-user__username span")
-    );
+  else if (route.startsWith("/user/")) 
+  {
+    const userPage = document.location.href.split("/").slice(4)[0];
+    console.log(userPage)
+    // Content Page
+    if (userPage === 'content') 
+    {
+      data.details = `Мои добавления`;
+      data.smallImageText = "Пишет";
+      data.smallImageKey = "writing";
+      data.startTimestamp = 0;
 
-    // User Bookmarks
-    if (!userRoute) {
-      let bookmarkSize = <HTMLElement>(
-        document.querySelector(
-          ".bookmark-sidebar .menu.bookmark-menu .menu__item .bookmark-menu__label"
-        )
-      );
+      const typeList = [
+        {id: 1, name: 'moderation'},
+        {id: 2, name: 'rejected'},
+        {id: 3, name: 'chapters'}
+      ]
 
-      data.details = `Закладки ${username.innerText}`;
-      data.state = `Всего: ${bookmarkSize.innerText.trim()}`;
-      data.smallImageText = "Читает";
-      data.smallImageKey = "reading";
-      data.startTimestamp = 0;
+      let type: any = typeList.find(i => i.name === document.location.href.split("/").slice(5)[0]);
+      if (!type) type = 0
+      if (type) type = type.id
+      
+      const categories = Array.from(document.querySelectorAll(".menu.menu_page .menu__item .menu__text"))
+      const currentCategory = <HTMLElement>(categories.find((item, index) => index === type))
+
+      if (currentCategory) 
+      {
+        data.state = currentCategory.innerText
+      }
     }
-    // User Comments
-    else if (userRoute === "comment") {
-      data.details = `Профиль ${username.innerText}`;
-      data.state = "Комментарии";
-      data.smallImageText = "Читает";
-      data.smallImageKey = "reading";
+    else if (userPage.match('edit')) 
+    {
+      data.details = `Мои настройки`;
+      data.smallImageText = "Настраивает";
+      data.smallImageKey = "writing";
       data.startTimestamp = 0;
+
+      let section: any = query.split('=')[1]
+      const sections = [
+        { id: 0, name: 'info' },
+        { id: 1, name: 'site-settings' },
+        { id: 2, name: 'notifications' },
+        { id: 3, name: 'password' }
+      ]
+      section = sections.find(s => s.name === section).id
+
+      const categories = Array.from(document.querySelectorAll(".menu.menu_page .menu__item"))
+      const currentCategory = <HTMLElement>(categories.find((item, index) => index === parseInt(section)));
+
+      if (currentCategory) {
+        data.state = currentCategory.innerText
+      }
     }
-    // User Friends
-    else if (userRoute === "following") {
-      data.details = `Профиль ${username.innerText}`;
-      data.state = "Cписок друзей";
-      data.smallImageText = "Читает";
-      data.smallImageKey = "reading";
-      data.startTimestamp = 0;
+    else 
+    {
+      const userRoute = document.location.href.split("/").slice(5)[0];
+      let username = <HTMLElement>(document.querySelector(".profile-user .profile-user__username span"));
+
+      // User Bookmarks
+      if (!userRoute) 
+      {
+        let bookmarkSize = <HTMLElement>(document.querySelector(".bookmark-sidebar .menu.bookmark-menu .menu__item .bookmark-menu__label"));
+
+        data.details = `Закладки ${username.innerText}`;
+        data.state = `Всего: ${bookmarkSize.innerText.trim()}`;
+        data.smallImageText = "Читает";
+        data.smallImageKey = "reading";
+        data.startTimestamp = 0;
+      }
+      // User Comments
+      else if (userRoute === "comment") 
+      {
+        data.details = `Профиль ${username.innerText}`;
+        data.state = "Комментарии";
+        data.smallImageText = "Читает";
+        data.smallImageKey = "reading";
+        data.startTimestamp = 0;
+      }
+      // User Friends
+      else if (userRoute === "following") 
+      {
+        data.details = `Профиль ${username.innerText}`;
+        data.state = "Cписок друзей";
+        data.smallImageText = "Читает";
+        data.smallImageKey = "reading";
+        data.startTimestamp = 0;
+      }
+      else if (userRoute === 'ban')
+      {
+        data.details = `Профиль ${username.innerText}`;
+        data.state = "Список банов";
+        data.smallImageText = "Смотрит";
+        data.smallImageKey = "reading";
+        data.startTimestamp = 0;
+      }
     }
   }
   // Forum
-  else if (route.startsWith("/forum")) {
+  else if (route.startsWith("/forum")) 
+  {
     const queryCategory = query.split("&").find((q) => q.match("category"));
     let categoryValue = queryCategory ? queryCategory.split("=")[1] : null;
     if (categoryValue === "all") categoryValue = "0";
@@ -108,69 +174,192 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Читает";
     data.smallImageKey = "reading";
 
-    const categories = Array.from(
-      document.querySelectorAll(".f-categories__items .f-category")
-    ).splice(2);
-    const currentCategory = <HTMLElement>(
-      categories.find((item, index) => index === parseInt(categoryValue))
-    );
-    if (currentCategory) {
-      data.state = currentCategory.innerText;
-    }
+    const categories = Array.from(document.querySelectorAll(".f-categories__items .f-category")).splice(2);
+    const currentCategory = <HTMLElement>(categories.find((item, index) => index === parseInt(categoryValue)));
+    if (currentCategory) {data.state = currentCategory.innerText}
 
     const forumRoute = document.location.href.split("/").slice(4)[0];
     // Discussion
-    if (forumRoute === "discussion") {
-      const title = <HTMLElement>(
-        document.querySelector(".discussion .discussion__title")
-      );
+    if (forumRoute === "discussion") 
+    {
+      const title = <HTMLElement>(document.querySelector(".discussion .discussion__title"));
       data.state = title.innerText;
     }
   }
   // Private Messages
-  else if (route.startsWith("/messages")) {
+  else if (route.startsWith("/messages"))
+  {
     data.details = "Сообщения";
     data.smallImageText = "Пишет";
     data.smallImageKey = "writing";
   }
-  // Edit Manga
-  else if (route.startsWith("/manga")) {
+  // People
+  else if (route.startsWith('/people')) 
+  {
     let arr = route.split("/");
     const action = arr[arr.length - 1];
 
-    if (action === "edit") {
+    if (action === 'create')
+    {
+      data.details = "Добавляет автора";
+      data.smallImageText = "Добавляет автора";
+      data.smallImageKey = "writing";
+
+      let title = <HTMLInputElement>document.getElementById('name')
+      if (title.value.length > 1) 
+      {
+        data.state = title.value
+      }
+      else 
+      {
+        data.state = 'Имя команды не задано'
+      }
+    }
+  }
+  // Team
+  else if (route.startsWith('/team')) 
+  {
+    let arr = route.split("/");
+    const action = arr[arr.length - 1];
+
+    if (action === 'create')
+    {
+      data.details = "Добавляет команду";
+      data.smallImageText = "Добавляет команду";
+      data.smallImageKey = "writing";
+
+      let title = <HTMLInputElement>document.getElementById('name')
+      if (title.value.length > 1) 
+      {
+        data.state = title.value
+      }
+      else 
+      {
+        data.state = 'Имя команды не задано'
+      }
+    }
+  }
+  // Edit Manga
+  else if (route.startsWith("/manga")) 
+  {
+    let arr = route.split("/");
+    const action = arr[arr.length - 1];
+
+    if (action === "edit") 
+    {
       data.details = "Редактирует мангу";
       data.smallImageText = "Редактирует";
       data.smallImageKey = "writing";
-    } else if (action === "bulk-create") {
+    } 
+    else if (action === "bulk-create") 
+    {
       data.details = "Добавляет главы";
       data.smallImageText = "Добавляет";
       data.smallImageKey = "uploading";
-    } else if (action === "add-chapter") {
+    } 
+    else if (action === "add-chapter") 
+    {
       data.details = "Добавляет главу";
       data.smallImageText = "Добавляет";
       data.smallImageKey = "uploading";
-    } else if (action === "create") {
+    } 
+    else if (action === "create") 
+    {
       data.details = "Добавляет мангу";
       data.smallImageText = "Пишет";
       data.smallImageKey = "writing";
+
+      let title = <HTMLInputElement>document.getElementById('rus_name')
+      if (title.value.length > 1) 
+      {
+        data.state = title.value
+      }
+      else 
+      {
+        data.state = 'Имя тайтла не задано'
+      }
+    } 
+    else 
+    {
+      data.details = "Редактировать главу";
+      data.smallImageText = "Пишет";
+      data.smallImageKey = "writing";
+
+      const title = <HTMLElement>document.querySelector('.section__header .breadcrumb a')
+      if (title) {
+        data.state = title.innerText
+      }
     }
-  } else {
+
+  } 
+  else if (route.startsWith('/faq')) 
+  {
+    const querySection = query.split('&')[0]
+    const section = querySection.slice((querySection.length - 1))
+    const categories = Array.from(document.querySelectorAll(".faq-category-list .faq-category-item"))
+    const currentCategory = <HTMLElement>(categories.find((item, index) => index === parseInt(section) - 1));
+
+    data.details = "Faq";
+    data.smallImageText = "Читает";
+    data.smallImageKey = "reading";
+
+    if (currentCategory) 
+    {
+      data.state = currentCategory.innerText
+    }
+
+  // News
+  } 
+  else if (route.startsWith('/news')) 
+  {
+    const newsRoute = document.location.href.split("/").slice(4)[0];
+    if (newsRoute) 
+    {
+      // Current News Page
+      let newsTitle = <HTMLElement>(document.querySelector(".news__title"))
+      data.details = "Новости";
+      data.smallImageText = "Читает";
+      data.smallImageKey = "reading";
+
+      if (newsTitle) 
+      {
+        data.state = newsTitle.innerText
+      }
+    } else 
+    {
+      // News List Page
+      data.details = "Новости";
+      data.smallImageText = "Читает";
+      data.smallImageKey = "reading";
+      data.state = 'Список новостей'
+    }
+  } 
+  // Contact-US Page
+  else if (route.startsWith('/contact')) 
+  {
+    data.details = "Контакты";
+    data.smallImageText = "Пишет";
+    data.smallImageKey = "writing";
+    data.state = 'Свяжитесь с нами'
+  }
+  else 
+  {
     let isReader = <HTMLElement>document.querySelector(".reader");
 
     // Reader mode
-    if (isReader) {
+    if (isReader) 
+    {
       const titleArray: Array<string> = document.title.split(" ");
       const mangaName = titleArray.slice(2, -4).join(" ");
-      //const chapter = titleArray.reverse().splice(2, 1)[0]
-      //const page = parseInt(titleArray.shift())
 
       data.details = "Читает тайтл";
       data.state = mangaName;
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
       data.startTimestamp = browsingStamp;
-    } else {
+    } 
+    else 
+    {
       const title: string = document.title;
       const mangaName: string = title
         .split("/")[0]
