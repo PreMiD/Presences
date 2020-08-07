@@ -6,18 +6,13 @@
   "service": "Mangalib",
   "description": {
     "ru": "Сайт для прочтения манги на русском языке.",
-    "en": "Website for reading manga"
+    "en": "Website for reading manga on russian language"
   },
   "url": "mangalib.me",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/n5XgMkt.png",
-  "thumbnail": "https://i.imgur.com/6tzn5Gc.png",
-  "color": "#E48F13",
-    "tags": [
-    "manga",
-    "mangalib",
-    "read",
-    "anime"
-  ],
+  "version": "1.2.0",
+  "logo": "https://mangalib.me/icons/android-icon-144x144.png",
+  "thumbnail": "https://i.imgur.com/1XM68Kn.png",
+  "color": "#ff8c00",
+  "tags": ["manga", "mangalib", "read", "anime"],
   "category": "other"
 }
