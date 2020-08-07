@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "SinecKers /Yasar",
+    "id": "380411952666640385"
+  },
+  "url": [
+    "listen.tidal.com",
+    "tidal.com"
+  ],
+  "description": {
+    "tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir",
+    "en": "Tidal is a music stream service with very high sound quality"
+  },
+  "service": "Tidal",
+  "version": "1.0.4",
+  "logo": "https://who.is-inside.me/pXP8PRGK.jpg",
+  "thumbnail": "https://who.is-inside.me/5IJ3K6fe.png",
+  "color": "#000000",
+  "tags": [
+    "tidal",
+    "music"
+  ],
+  "category": "music"
+}

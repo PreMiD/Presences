@@ -3,14 +3,14 @@ name: Service request
 about: Suggest Rich Presence support for a website
 ---
 
-**Prerequisites and essential questions** <!--- Required, please answer the following questions as honestly as possible by changing the "[ ]" to "[x]" or by marking it after creating the issue (easier), not checking a question counts as "No". -->
-* [ ] Is it a popular site?
-* [ ] Is the website older than 2 months? <!--- It is necessary for the website to be older than 2 months. -->
-* [ ] Is the site locked to a specific country/region?
-* [ ] Is the site a paid service? (e.g. Netflix, Hulu)
-* [ ] Does the website feature NSFW content? (e.g. porn, etc...)
-* [ ] Are you a donator/patron?
-* [ ] Do you acknowledge that coding presences is completely voluntary and may take time for your service to be added regardless of priority?
+**Prerequisites and essential questions** <!--- Required, please answer the following questions as honestly as possible by changing the "[ ]" to "[x]" or by marking it after creating the issue (easier), not marking a question counts as "No". -->
+- [x] Is it a popular site?
+- [x] Is the website older than 2 months? <!--- It is necessary for the website to be older than 2 months. -->
+- [ ] Is the site locked to a specific country/region?
+- [ ] Is the site a paid service? (e.g. Netflix, Hulu)
+- [ ] Does the website feature NSFW content? (e.g. porn, etc...)
+- [ ] Are you a donator/patron?
+- [x] Do you acknowledge that coding presences is completely voluntary and may take time for your service to be added regardless of priority?
 
 **What's your Discord username?** <!--- Optional, unless you are a donator/patron. Ex. Clyde#0000 -->
 

@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "DooMLorD",
+    "id": "654398152513945611"
+  },
+  "service": "Chaturbate",
+  "description": {
+    "en": "Chaturbate is a popular webcam site which launched in 2011 where amateurs livestream erotic or pornographic performances."
+  },
+  "url": "chaturbate.com",
+  "version": "1.2.5",
+  "logo": "https://doomlord.s-ul.eu/gClZtSMk",
+  "thumbnail": "https://doomlord.s-ul.eu/OxaIs2w8",
+  "color": "#f68a1a",
+  "tags": [
+    "nsfw",
+    "webcam",
+    "live-streaming"
+  ],
+  "category": "videos",
+  "regExp": "([a-z0-9-]+[.])*chaturbate([.][a-z]+)+[/]"
+}
