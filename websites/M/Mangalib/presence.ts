@@ -65,11 +65,49 @@ presence.on("UpdateData", async () => {
         break;
     }
   }
+  // Notififcation
+  else if (route.startsWith("/notification")) 
+  {
+    data.details = `Уведомления`;
+    data.smallImageText = "Читает";
+    data.smallImageKey = "reading";
+    data.startTimestamp = 0;
+
+    const typeList = [
+      {id: 0, name: 'all'},
+      {id: 1, name: 'chapter'},
+      {id: 2, name: 'comments'},
+      {id: 3, name: 'message'},
+      {id: 4, name: 'friend'},
+      {id: 5, name: 'other'}
+    ]
+
+    let pageQuery = query.split("&")[1]
+    if (!pageQuery) 
+    {
+      pageQuery = 'all'
+    }
+    else 
+    {
+      pageQuery = pageQuery.split('=')[1]
+    }
+
+    let type: any = typeList.find(i => i.name === pageQuery);
+    if (!type) type = 0
+    if (type) type = type.id
+
+    const categories = Array.from(document.querySelectorAll(".menu.menu_page .menu__item"))
+    const currentCategory = <HTMLElement>(categories.find((item, index) => index === type))
+    
+    if (currentCategory) 
+    {
+      data.state = currentCategory.innerText
+    } 
+  }
   // Bookmarks
   else if (route.startsWith("/user/")) 
   {
     const userPage = document.location.href.split("/").slice(4)[0];
-    console.log(userPage)
     // Content Page
     if (userPage === 'content') 
     {
