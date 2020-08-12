@@ -193,7 +193,7 @@ presence.on("UpdateData", async () => {
       }
       else if (userRoute === 'ban')
       {
-        data.details = `Профиль ${username.innerText}`;
+        data.details = `Профиль`;
         data.state = "Список банов";
         data.smallImageText = "Смотрит";
         data.smallImageKey = "reading";
