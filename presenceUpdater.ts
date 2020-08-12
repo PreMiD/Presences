@@ -264,11 +264,12 @@ const readFile = (path: string): string =>
           return null;
         }
 
-        appCode === 1 && metadata.service && metadata.service.length > 0
-          ? console.log(`❌ ${metadata.service}`)
-          : console.log(`❌ ${path}`);
-
-        if (exitCode === 0 && appCode === 1) exitCode = 1;
+        if (appCode === 1) {
+          if (exitCode === 0) exitCode = 1;
+          metadata.service && metadata.service.length > 0
+            ? console.log(`❌ ${metadata.service}`)
+            : console.log(`❌ ${path}`);
+        }
 
         return resJson;
       })
