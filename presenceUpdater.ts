@@ -78,7 +78,8 @@ const readFile = (path: string): string =>
         passes: 2
       }
     });
-    if (result?.code?.length > 0) writeJS(file, result.code);
+    if (result && result.code && result.code.length > 0)
+      writeJS(file, result.code);
     else {
       console.error(`Error. File ${file} was not minified, skipping...`);
       exitCode = 1;
@@ -88,7 +89,7 @@ const readFile = (path: string): string =>
     const result = await transform(file, {
       presets: [["@babel/preset-env", { exclude: ["transform-regenerator"] }]]
     });
-    if (result?.code?.length > 0) {
+    if (result && result.code && result.code.length > 0) {
       writeJS(file, result.code);
       await minify(file);
     } else {
@@ -262,7 +263,7 @@ const readFile = (path: string): string =>
 
         exitCode === 0
           ? console.log(`✔️ ${metadata.service}`)
-          : metadata.service?.length > 0
+          : metadata.service && metadata.service.length > 0
           ? console.log(`❌ ${metadata.service}`)
           : console.log(`❌ ${path}`);
 
