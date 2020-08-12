@@ -46,7 +46,7 @@
     {
       "id": "changesmalltext",
       "title": "Change Small Image Hover Text",
-      "icon": "far fa-edit",
+      "icon": "fas fa-edit",
       "value": "Listeners: %listeners%",
       "placeholder": "Listeners: %listeners%"
     }
