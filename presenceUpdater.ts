@@ -193,7 +193,7 @@ const readFile = (path: string): string =>
       dbDiff.map(async (file) => {
         let metadata = file[0];
         const path = file[1],
-          sources = glob(`${file[1]}**.ts`),
+          sources = glob(`${path}*.ts`),
           metadataFile = readJson<Metadata>(`${path}dist/metadata.json`);
 
         appCode = 0;

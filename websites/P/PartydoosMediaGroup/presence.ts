@@ -13,7 +13,7 @@ var data: PresenceData = {
 
 presence.on("UpdateData", async () => {
   var string = (await strings).browsing;
-  const static = {
+  const _stc = {
     "": {
       details: "Browsing"
     },
@@ -35,8 +35,8 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = elapsed;
   }
 
-  if (path in static) {
-    data = { ...data, ...static[path] };
+  if (path in _stc) {
+    data = { ...data, ..._stc[path] };
   }
 
   if (data.details !== undefined) {
