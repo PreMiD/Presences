@@ -54,7 +54,5 @@
       }
     }
   ],
-  "reportUnusedDisableDirectives": true,
-  "noInlineConfig": true,
   "plugins": ["@typescript-eslint"]
 }
