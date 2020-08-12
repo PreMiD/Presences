@@ -21,7 +21,8 @@ import { minify as terser } from "terser";
 const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
   dbname = "PreMiD";
 let extendedRun = false,
-  exitCode = 0;
+  exitCode = 0,
+  appCode = 0;
 
 function isValidJSON(text: string): boolean {
   try {
@@ -69,7 +70,7 @@ const readFile = (path: string): string =>
       }
     });
 
-    if (emitResult.emitSkipped) exitCode = 1;
+    if (emitResult.emitSkipped) appCode = 1;
   },
   minify = async (file: string): Promise<void> => {
     const result = await terser(readFile(file), {
@@ -82,7 +83,7 @@ const readFile = (path: string): string =>
       writeJS(file, result.code);
     else {
       console.error(`Error. File ${file} was not minified, skipping...`);
-      exitCode = 1;
+      appCode = 1;
     }
   },
   polyfill = async (file: string): Promise<void> => {
@@ -94,7 +95,7 @@ const readFile = (path: string): string =>
       await minify(file);
     } else {
       console.error(`Error. File ${file} was not polyfilled, skipping...`);
-      exitCode = 1;
+      appCode = 1;
     }
   },
   compile = async (filesToCompile: string[]): Promise<void> => {
@@ -195,11 +196,13 @@ const readFile = (path: string): string =>
           sources = glob(`${file[1]}**.ts`),
           metadataFile = readJson<Metadata>(`${path}dist/metadata.json`);
 
+        appCode = 0;
+
         if (!metadata && !metadataFile) {
           console.error(
             `Error. No metadata was found for ${path}, skipping...`
           );
-          exitCode = 1;
+          appCode = 1;
           return null;
         } else if (!metadata && metadataFile) metadata = metadataFile;
 
@@ -218,13 +221,13 @@ const readFile = (path: string): string =>
           console.error(
             `Error. ${meta} does not include a valid metadata file/version, skipping...`
           );
-          exitCode = 1;
+          appCode = 1;
           return null;
         }
 
         await compile(sources);
 
-        const jsFiles = glob("./{websites,programs}/*/*/*/*.js");
+        const jsFiles = glob(`${path}dist/*.js`);
         for (const file of jsFiles) {
           await polyfill(file);
         }
@@ -232,7 +235,7 @@ const readFile = (path: string): string =>
         if (!existsSync(`${path}dist/presence.js`)) {
           const meta = metadataFile.service ? metadataFile.service : path;
           console.error(`Error. ${meta} did not compile, skipping...`);
-          exitCode = 1;
+          appCode = 1;
           return null;
         }
 
@@ -251,21 +254,21 @@ const readFile = (path: string): string =>
           console.error(
             `Error. ${metadata.service} explicitly includes iframe but no such file was found, skipping...`
           );
-          exitCode = 1;
+          appCode = 1;
           return null;
         } else if (!metadata.iframe && existsSync(`${path}dist/iframe.js`)) {
           console.error(
             `Error. ${metadata.service} contains an iframe file but does not include it in the metadata, skipping...`
           );
-          exitCode = 1;
+          appCode = 1;
           return null;
         }
 
-        exitCode === 0
-          ? console.log(`✔️ ${metadata.service}`)
-          : metadata.service && metadata.service.length > 0
+        appCode === 1 && metadata.service && metadata.service.length > 0
           ? console.log(`❌ ${metadata.service}`)
           : console.log(`❌ ${path}`);
+
+        if (exitCode === 0 && appCode === 1) exitCode = 1;
 
         return resJson;
       })
