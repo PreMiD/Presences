@@ -72,7 +72,6 @@ presence.on("UpdateData", async () => {
         : (await strings).playing;
     }
   } else if (hostname === `animedao.com`) {
-    console.log('aaaaaaaa');
     presenceData.startTimestamp = startTimestamp;
     if (pathname === `/`) {
       presenceData.details = (await strings).browsing;
