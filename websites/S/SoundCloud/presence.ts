@@ -134,9 +134,9 @@ const statics = {
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/");
 
-  const showBrowsing = await presence.getSetting("browse");
-  const showSong = await presence.getSetting("song");
-  const showTimestamps = await presence.getSetting("timestamp");
+  const showBrowsing = await presence.getSetting("browse") || true;
+  const showSong = await presence.getSetting("song") || true;
+  const showTimestamps = await presence.getSetting("timestamp") || true;
 
   let data: PresenceData = {
     details: undefined,
