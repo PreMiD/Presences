@@ -9,7 +9,7 @@
     "de": "Gitea ist eine Open-Source Git Plattform, welche sehr stark an GitHub angelehnt ist"
   },
   "url": "gitea.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://crugg.de/premid/gitealogo.png",
   "thumbnail": "https://crugg.de/premid/giteabanner.png",
   "color": "#5aa509",

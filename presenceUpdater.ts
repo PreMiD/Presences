@@ -5,7 +5,7 @@ import {
   DeleteWriteOpResultObject,
   UpdateWriteOpResult
 } from "mongodb";
-import { existsSync, readFileSync } from "fs";
+import { existsSync, readFileSync, writeFileSync } from "fs";
 import { sync as glob } from "glob";
 import {
   CompilerOptions,
@@ -14,7 +14,9 @@ import {
   getPreEmitDiagnostics
 } from "typescript";
 import { valid } from "semver";
-import { join, normalize, resolve, sep } from "path";
+import { join, normalize, resolve as rslv, sep } from "path";
+import { transformFileAsync as transform } from "@babel/core";
+import { minify as terser } from "terser";
 
 const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
   dbname = "PreMiD";
@@ -37,6 +39,8 @@ let client = new MongoClient(url, {
 
 const readFile = (path: string): string =>
     readFileSync(path, { encoding: "utf8" }),
+  writeJS = (path: string, code: string): void =>
+    writeFileSync(path, code, { encoding: "utf8", flag: "w" }),
   readJson = <T>(jsonPath: string): T => JSON.parse(readFile(jsonPath)) as T,
   compileFile = async (
     fileNames: string[],
@@ -67,11 +71,36 @@ const readFile = (path: string): string =>
 
     if (emitResult.emitSkipped) exitCode = 1;
   },
+  minify = async (file: string): Promise<void> => {
+    const result = await terser(readFile(file), {
+      ecma: 5,
+      compress: {
+        passes: 2
+      }
+    });
+    if (result?.code?.length > 0) writeJS(file, result.code);
+    else {
+      console.error(`Error. File ${file} was not minified, skipping...`);
+      exitCode = 1;
+    }
+  },
+  polyfill = async (file: string): Promise<void> => {
+    const result = await transform(file, {
+      presets: [["@babel/preset-env", { exclude: ["transform-regenerator"] }]]
+    });
+    if (result?.code?.length > 0) {
+      writeJS(file, result.code);
+      await minify(file);
+    } else {
+      console.error(`Error. File ${file} was not polyfilled, skipping...`);
+      exitCode = 1;
+    }
+  },
   compile = async (filesToCompile: string[]): Promise<void> => {
     const premidTypings = join(__dirname, "@types", "premid", "index.d.ts"),
       { compilerOptions: baseTsConfig } = readJson<{
         compilerOptions: CompilerOptions;
-      }>(resolve(__dirname, "tsconfig.json"));
+      }>(rslv(__dirname, "tsconfig.json"));
 
     for (const fileToCompile of filesToCompile) {
       const normalizedPath = normalize(fileToCompile).split(sep);
@@ -79,11 +108,11 @@ const readFile = (path: string): string =>
 
       const { compilerOptions: presenceConfig } = readJson<{
           compilerOptions: CompilerOptions;
-        }>(resolve(normalizedPath.join(sep), "tsconfig.json")),
+        }>(rslv(normalizedPath.join(sep), "tsconfig.json")),
         tsConfig: CompilerOptions = {
           ...baseTsConfig,
           ...presenceConfig,
-          outDir: resolve(normalizedPath.join(sep), "dist"),
+          outDir: rslv(normalizedPath.join(sep), "dist"),
           noEmitOnError: false,
           types: ["node"]
         };
@@ -194,6 +223,11 @@ const readFile = (path: string): string =>
 
         await compile(sources);
 
+        const jsFiles = glob("./{websites,programs}/*/*/*/*.js");
+        for (const file of jsFiles) {
+          await polyfill(file);
+        }
+
         if (!existsSync(`${path}dist/presence.js`)) {
           const meta = metadataFile.service ? metadataFile.service : path;
           console.error(`Error. ${meta} did not compile, skipping...`);
@@ -225,6 +259,12 @@ const readFile = (path: string): string =>
           exitCode = 1;
           return null;
         }
+
+        exitCode === 0
+          ? console.log(`✔️ ${metadata.service}`)
+          : metadata.service?.length > 0
+          ? console.log(`❌ ${metadata.service}`)
+          : console.log(`❌ ${path}`);
 
         return resJson;
       })
@@ -303,31 +343,9 @@ process.on("uncaughtException", (err) => {
 
 interface Metadata {
   schema: string;
-  author: { name: string; id: string };
-  contributors?: Array<{ name: string; id: string }>;
   service: string;
-  description: Record<string, string>;
-  url: string;
   version: string;
-  logo: string;
-  thumbnail: string;
-  color: string;
-  tags: string | Array<string>;
-  category: string;
   iframe?: boolean;
-  regExp?: RegExp;
-  iframeRegExp?: RegExp;
-  button?: boolean;
-  warning?: boolean;
-  settings?: Array<{
-    id: string;
-    title: string;
-    icon: string;
-    if?: Record<string, string>;
-    placeholder?: string;
-    value?: string | number | boolean;
-    values?: Array<string | number | boolean>;
-  }>;
 }
 
 interface DBdata {
