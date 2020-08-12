@@ -66,11 +66,11 @@ function getTranslation(stringName: string): string {
     case "WebShows":
       switch (language) {
         case "nl":
-          return "Bladeren door alle shows";
+          return "Bladeren door alle web shows";
         case "de":
-          return "Sieht sich Shows an";
+          return "Sieht sich Web-Shows an";
         default:
-          return "Browsing shows";
+          return "Browsing web shows";
       }
     case "Podcasts":
       switch (language) {
@@ -261,15 +261,48 @@ presence.on("UpdateData", async () => {
     } else if (document.URL.includes("/tv.plex.provider.webshows")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("WebShows");
+      const title =
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div > a"
+        );
+      if (title !== null) {
+        presenceData.details = "Viewing webshow:";
+        presenceData.state = title.textContent;
+      }
     } else if (document.URL.includes("/tv.plex.provider.news")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("News");
     } else if (document.URL.includes("/tv.plex.provider.podcasts")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Podcasts");
+      const title =
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div"
+        );
+      if (title !== null) {
+        presenceData.details = "Viewing podcast:";
+        presenceData.state = title.textContent;
+      }
     } else if (document.URL.includes("/tv.plex.provider.music")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Music");
+      const title =
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div"
+        );
+      if (title !== null) {
+        presenceData.details = "Viewing album:";
+        presenceData.state = title.textContent;
+      }
     } else if (document.URL.includes("/search")) {
       search = document.querySelector(
         "#content > div > div > div:nth-child(2) > div > div:nth-child(2) > span"
@@ -310,9 +343,20 @@ presence.on("UpdateData", async () => {
     } else if (document.URL.includes("/server/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Vod");
-      presenceData.state = document.querySelector(
-        "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > span"
-      ).textContent;
+      const title =
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div > a"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div"
+        );
+      presenceData.state = title.textContent;
     } else if (
       document.URL == "https://app.plex.tv/" ||
       document.URL == "https://app.plex.tv/desktop" ||
