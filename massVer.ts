@@ -46,7 +46,7 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
         }
       });
 
-    if (missingMetadata?.length > 0)
+    if (missingMetadata && missingMetadata.length > 0)
       console.log(
         `\nThe following presence${
           missingMetadata.length > 1 ? "s don't" : "doesn't"
@@ -62,7 +62,7 @@ const read = (path: string): string => readFile(path, { encoding: "utf8" }),
         } else {
           console.log(
             `Error. ${
-              metadata[0].service?.length > 0
+              metadata[0].service && metadata[0].service.length > 0
                 ? metadata[0].service
                 : metadata[1]
             } does not include a valid metadata version, trying to overwrite...\n`
