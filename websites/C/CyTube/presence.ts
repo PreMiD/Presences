@@ -15,38 +15,26 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-function getTimes(time: number): Record<string, number> {
-  let seconds = Math.round(time),
-    minutes = Math.floor(seconds / 60);
-
-  seconds -= minutes * 60;
-
-  const hours = Math.floor(minutes / 60);
-
-  minutes -= hours * 60;
-
+function getTimesFromMs(ms): Record<string, number> {
+  const floor = Math.floor(ms % 60);
+  const sec = floor < 10 ? 0 + floor : floor,
+    min = floor / 60 <= 0 ? 0 : floor / 60,
+    hrs = floor / 60 / 60;
   return {
-    sec: seconds,
-    min: minutes,
-    hrs: hours
+    hrs: hrs,
+    sec: sec,
+    min: min
   };
 }
 
-function lessTen(digit: number): string {
-  return digit < 10 ? "0" : "";
-}
-
-function getTimestamp(time: number): string {
-  const { sec, min, hrs } = getTimes(time);
-
-  return hrs > 0
-    ? hrs + ":" + lessTen(min) + min + ":" + lessTen(sec) + sec
-    : min + ":" + lessTen(sec) + sec;
+function getTimestamp(time): string {
+  const { sec, min, hrs } = getTimesFromMs(time);
+  return hrs > 0 ? hrs + ":" + min + ":" + sec : min + ":" + sec;
 }
 
 interface Match {
@@ -59,27 +47,50 @@ interface MatchList {
 }
 
 const matches: MatchList = {
-  youtube: { display: "YouTube", image_key: "cytube_service_yt" },
-  googlevideo: { display: "YouTube", image_key: "cytube_service_yt" },
-
-  "docs.google": { display: "Google Drive", image_key: "cytube_service_gd" },
+  youtube: {
+    display: "YouTube",
+    image_key: "cytube_service_yt"
+  },
+  googlevideo: {
+    display: "YouTube",
+    image_key: "cytube_service_yt"
+  },
+  "docs.google": {
+    display: "Google Drive",
+    image_key: "cytube_service_gd"
+  },
   googleusercontent: {
     display: "Google Drive",
     image_key: "cytube_service_gd"
   },
-
-  appspot: { display: "Google Cloud", image_key: "cytube_service_gc" },
-  blogspot: { display: "Google Cloud", image_key: "cytube_service_gc" },
-
-  dropbox: { display: "Dropbox", image_key: "cytube_service_dbx" },
-
-  amazonaws: { display: "Amazon AWS", image_key: "cytube_service_aws" },
-
-  soundcloud: { display: "Soundcloud", image_key: "cytube_service_sc" },
-
-  discordapp: { display: "Discord", image_key: "cytube_service_dc" },
-
-  "vimeo-prod-": { display: "Vimeo", image_key: "cytube_service_ve" }
+  appspot: {
+    display: "Google Cloud",
+    image_key: "cytube_service_gc"
+  },
+  blogspot: {
+    display: "Google Cloud",
+    image_key: "cytube_service_gc"
+  },
+  dropbox: {
+    display: "Dropbox",
+    image_key: "cytube_service_dbx"
+  },
+  amazonaws: {
+    display: "Amazon AWS",
+    image_key: "cytube_service_aws"
+  },
+  soundcloud: {
+    display: "Soundcloud",
+    image_key: "cytube_service_sc"
+  },
+  discordapp: {
+    display: "Discord",
+    image_key: "cytube_service_dc"
+  },
+  "vimeo-prod-": {
+    display: "Vimeo",
+    image_key: "cytube_service_ve"
+  }
 };
 
 function service(service: string): Match {
@@ -89,37 +100,37 @@ function service(service: string): Match {
   };
 
   Object.keys(matches).forEach((key) => {
-    service.includes(key) && (return_match = matches[key]);
+    if (service.includes(key)) return_match = matches[key];
   });
 
   return return_match;
 }
-
 class VideoData {
   audio = false;
   paused = true;
   duration = 0;
   current_time = 0;
-  site: string = undefined;
+  site = undefined;
 }
 
 let iframe_response = new VideoData();
 
-presence.on("iFrameData", (data: VideoData) => {
+presence.on("iFrameData", (data) => {
   iframe_response = data;
 });
 
 presence.on("UpdateData", async () => {
-  const path = document.location.pathname,
-    presenceData: PresenceData = {
-      largeImageKey: "cytube_logo",
-      details: "loading",
-      state: "CyTube"
-    },
-    translate = {
-      pause: (await strings).pause,
-      play: (await strings).play
-    };
+  const path = document.location.pathname;
+  const presenceData: PresenceData = {
+    largeImageKey: "cytube_logo",
+    details: "loading",
+    state: "CyTube"
+  };
+
+  const translate = {
+    pause: (await strings).pause,
+    play: (await strings).play
+  };
 
   async function set_video(data: VideoData): Promise<any> {
     const current_service: Match = service(data.site);
@@ -152,12 +163,12 @@ presence.on("UpdateData", async () => {
 
   if (path.includes("/r/")) {
     const container = !(
-        document.body.className.includes("chatOnly") ||
-        !document.getElementById("videowrap")
-      ),
-      active_content: boolean = iframe_response.site != undefined,
-      room: string = path.split("r/")[1],
-      motd: string = document.getElementById("motd").textContent;
+      document.body.className.includes("chatOnly") ||
+      !document.getElementById("videowrap")
+    );
+    const active_content: boolean = iframe_response.site;
+    const room: string = path.split("r/")[1];
+    const motd: string = document.getElementById("motd").textContent;
 
     presenceData.state = `${motd} - /r/${room}`;
     if (!container) {
@@ -175,7 +186,6 @@ presence.on("UpdateData", async () => {
         const video = document
           .getElementById("videowrap")
           .querySelector("video");
-
         set_video({
           audio: false,
           current_time: video.currentTime,

@@ -27,9 +27,16 @@
     "comma-dangle": ["warn", "never"],
     "one-var": ["warn", "consecutive"],
     "linebreak-style": ["warn", "unix"],
-    "no-console": "off",
+    "no-console": "error",
     "no-var": "error",
     "no-undef": "off",
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "TSEnumDeclaration[const=true]",
+        "message": "Usage of const enums is forbidden."
+      }
+    ],
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-explicit-any": "error"
   },
@@ -42,11 +49,10 @@
       },
       "files": ["./*.ts"],
       "rules": {
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "no-console": "off"
       }
     }
   ],
-  "reportUnusedDisableDirectives": true,
-  "noInlineConfig": true,
   "plugins": ["@typescript-eslint"]
 }
