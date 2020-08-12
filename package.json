@@ -5,6 +5,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
+    "inc": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
     "se": "node ./syntaxEnforcer.js",
     "se:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./syntaxEnforcer.ts",
     "sv": "node ./schemaValidator.js",
@@ -13,24 +14,28 @@
     "pu:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./presenceUpdater.ts"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.114",
-    "@types/glob": "^7.1.2",
-    "@types/mongodb": "^3.5.20",
-    "@types/node": "^14.0.13",
-    "@types/prettier": "^2.0.1",
-    "@types/semver": "^7.2.0",
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@types/babel__core": "^7.1.9",
+    "@types/chrome": "^0.0.122",
+    "@types/glob": "^7.1.3",
+    "@types/mongodb": "^3.5.25",
+    "@types/node": "^14.0.27",
+    "@types/prettier": "^2.0.2",
+    "@types/semver": "^7.3.1",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
     "axios": "^0.19.2",
     "chalk": "^4.1.0",
-    "eslint": "^6.0.0",
-    "execa": "^4.0.2",
+    "eslint": "^7.6.0",
+    "execa": "^4.0.3",
     "glob": "^7.1.6",
     "jsonschema": "^1.2.6",
-    "mongodb": "^3.5.8",
+    "mongodb": "^3.6.0",
     "prettier": "^2.0.5",
     "semver": "^7.3.2",
     "source-map-support": "^0.5.19",
-    "typescript": "^3.9.5"
+    "terser": "git://github.com/terser/terser.git#ff851d2",
+    "typescript": "^3.9.7"
   }
 }

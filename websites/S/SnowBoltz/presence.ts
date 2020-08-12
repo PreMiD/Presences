@@ -160,11 +160,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "ฐานความรู้";
       const head =
         document
-          ?.querySelector(
-            "#__GITBOOK__ROOT__CLIENT__ > div.reset-3c756112--body-68cac36c > div.reset-3c756112--bodyContent-2f98451b > div > div.reset-3c756112--wholeContentBody-554be184 > div.reset-3c756112--wholeContentPage-6c3f1fc5 > div > div.reset-3c756112--pageContainer-3ec6d8d0 > div.reset-3c756112 > div.reset-3c756112--pageHeader-15724735 > div > div > div.reset-3c756112--horizontalFlex-5a0077e0 > div.reset-3c756112--pageHeaderIntro-0c1463da > h1 > span"
-          )
-          .textContent.replace("SnowBoltz - Knowledgebase", "หน้าหลัก") ??
-        "ไม่ทราบหน้า";
+          ?.querySelector("head > title")
+          .textContent.replace("SnowBoltz - Knowledgebase", "หน้าหลัก")
+          .replace(" - SnowBoltz", " ") ?? "ไม่ทราบหน้า";
       presenceData.state = head + " - SnowBoltz Knowledgebase";
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "reading";

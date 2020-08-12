@@ -1,32 +1,37 @@
-var presence = new Presence({
-  clientId: "616940877042155531" // CLIENT ID FOR YOUR PRESENCE
+const presence = new Presence({
+  clientId: "616940877042155531"
 });
 
-var user: any,
-  group: any,
-  typing: any,
-  typingicon: any,
-  card: any,
-  connected: any,
-  apptitle: any,
-  lastData: any,
-  thisData: any,
-  lastStamp: any;
+let user: string | HTMLElement | Element | Array<string>,
+  group: string | HTMLElement | Element | Array<string>,
+  typing: boolean | Element,
+  typingicon: string,
+  card: HTMLElement,
+  connected: HTMLElement,
+  apptitle: string | HTMLElement | Element,
+  lastData: string,
+  thisData: string,
+  lastStamp: number;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "discordwhite"
   };
   connected = document.querySelector(
-    "#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div"
+    "#app-mount > div > div > div > div > div > div > div > div > section > div > div > div > div > a > div"
   );
+  if (connected == null) {
+    connected = document.querySelector(
+      "#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div"
+    );
+  }
   apptitle = document.querySelector(
     ".appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi"
   );
   typingicon = "﻿";
 
   function getTimeStamp(): number {
-    var browsingStamp: any;
+    let browsingStamp: number;
     thisData = presenceData.details;
     if (lastData == thisData) {
       browsingStamp = lastStamp;
@@ -115,6 +120,11 @@ presence.on("UpdateData", async () => {
       typing = document.querySelector(
         "#app-mount > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(2) > div > main > form > div > div > div > div > div:nth-child(3) > div"
       );
+      if (typing == null) {
+        typing = document.querySelector(
+          "#app-mount > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > main > form > div > div > div > div > div:nth-child(3) > div"
+        );
+      }
       if (typing.className.toLowerCase().includes("placeholder")) {
         typing = false;
       } else {

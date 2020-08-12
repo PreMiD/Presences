@@ -9,7 +9,6 @@
     "newLine": "lf",
     "noImplicitAny": true,
     "noUnusedParameters": true,
-    "inlineSourceMap": true,
     "typeRoots": ["@types"],
     "esModuleInterop": true
   }

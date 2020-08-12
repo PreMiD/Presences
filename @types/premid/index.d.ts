@@ -86,7 +86,7 @@ declare class Presence {
    */
   hideSetting(settings: string | Array<string>): Promise<void>;
   /**
-   * Hide a setting
+   * Unhide a setting
    * @param setting Id of setting / Array of setting Id's
    * @since 2.1
    */
