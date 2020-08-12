@@ -18,10 +18,8 @@ import { join, normalize, resolve as rslv, sep } from "path";
 import { transformFileAsync as transform } from "@babel/core";
 import { minify as terser } from "terser";
 
-const url = `mongodb://engineer:46HCEdbDUZAcmAAxsnGcajEQzVFpNYYyjEgrZad4XsqW9HqCpf5Tff5Hvk5XD2Ci@premid.app:27017`,
-  dbname = "PreMiD-DEV";
-/*const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
-  dbname = "PreMiD";*/
+const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
+  dbname = "PreMiD";
 let extendedRun = false,
   exitCode = 0;
 
