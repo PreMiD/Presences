@@ -14,8 +14,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Math.floor(Date.now()/1000);
-  var endTime = startTime - videoTime + videoDuration;
+  const startTime = Math.floor(Date.now()/1000);
+  const endTime = startTime - videoTime + videoDuration;
   return [startTime, endTime];
 }
 
@@ -25,7 +25,7 @@ let episode,
   paused: boolean,
   played: boolean;
 
-presence.on("iFrameData", (data: any) => {
+presence.on("iFrameData", (data: { current: number; duration: number; paused: boolean; played: boolean; }) => {
   current = data.current;
   duration = data.duration;
   paused = data.paused;

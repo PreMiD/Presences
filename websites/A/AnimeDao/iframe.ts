@@ -6,7 +6,6 @@ iframe.on("UpdateData", async () => {
     hostname === `gounlimited.to` ||
     hostname === `vcdn.space`
   ) {
-    console.log(hostname);
     const video = document.querySelector(`video`);
     if (video != null) {
       const played = video.duration != 0;
