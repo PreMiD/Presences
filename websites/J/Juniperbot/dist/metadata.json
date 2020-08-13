@@ -28,19 +28,19 @@
   "settings": [
     {
       "id": "juniper",
-      "title": "Отображать в статусе действия на juniper.bot",
+      "title": "To display the status of actions on juniper.bot",
       "icon":"fas fa-lightbulb",
       "value": true
     },
     {
       "id": "docs",
-      "title": "Отображать в статусе действия на docs.juniper.bot",
+      "title": "To display the status of actions on docs.juniper.bot",
       "icon":"fas fa-lightbulb",
       "value": true
     },
     {
       "id": "fback",
-      "title": "Отображать в статусе действия на feedback.juniper.bot",
+      "title": "To display the status of actions on feedback.juniper.bot",
       "icon":"fas fa-lightbulb",
       "value": true
     }
