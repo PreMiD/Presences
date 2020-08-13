@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "MrLivixx",
+    "id": "502948927809781763"
+  },
+  "url": [
+    "docs.juniper.bot",
+    "feedback.juniper.bot",
+    "juniper.bot"
+  ],
+  "description": {
+    "ru": "Многофункциональный, полностью настраиваемый бот для платформы Discord, с панелью управления.",
+    "en": "Fluffy Discord Bot (Music, Ranking, Reminder, Vk Community bridge, WikiFur)"
+  },
+  "service": "juniperbot",
+  "version": "1.0.0",
+  "logo": "https://cdn.discordapp.com/avatars/310848622642069504/1f027527f6cdaffac086c80f8e0ffce1.png?size=1024",
+  "thumbnail": "https://cdn.discordapp.com/banners/350338493588963328/e42cbb7613eba200fb7c493a9b2fb723.png?size=512",
+  "color": "#C27C0E",
+  "tags": [
+    "bot",
+    "discord",
+    "juniper",
+    "juniperbot"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "juniper",
+      "title": "Отображать в статусе действия на juniper.bot",
+      "icon":"fas fa-lightbulb",
+      "value": true
+    },
+    {
+      "id": "docs",
+      "title": "Отображать в статусе действия на docs.juniper.bot",
+      "icon":"fas fa-lightbulb",
+      "value": true
+    },
+    {
+      "id": "fback",
+      "title": "Отображать в статусе действия на feedback.juniper.bot",
+      "icon":"fas fa-lightbulb",
+      "value": true
+    }
+  ]
+}
