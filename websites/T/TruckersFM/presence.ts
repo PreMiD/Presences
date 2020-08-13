@@ -7,7 +7,8 @@ presence.on("UpdateData", () => {
     document.querySelector(".player-artist-text").textContent
   } - ${document.querySelector(".player-title-text").textContent} `;
   const dj = document.querySelector(".live-name").textContent;
-  const liveTill = document.querySelector(".live-time").textContent;
+  let liveTill = null;
+  liveTill = document.querySelector(".live-time").textContent;
   const pageName = document.title.slice(13);
   const liveTime = liveTill.slice(6);
   const presenceData: PresenceData = {
@@ -17,7 +18,7 @@ presence.on("UpdateData", () => {
   };
 
   let stateText = "";
-    if(liveTill !== null) {
+    if(liveTill) {
        stateText = `${dj} till ${liveTime}`;
     } else {
        stateText = `${dj}`;
