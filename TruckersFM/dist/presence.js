@@ -18,9 +18,16 @@ presence.on("UpdateData", () => {
         smallImageKey: "smalltfmlogo",
         smallImageText: `Viewing: ${pageName}`,
     }    
+    
+    let stateText = "";
+    if(liveTill !== null) {
+       stateText = `${dj} till ${liveTime}`;
+    } else {
+       stateText = `${dj}`;
+    }
 	
     presenceData.details = `${title}`;
-    presenceData.state = `${dj} till ${liveTime}`;
+    presenceData.state = `${stateText}`;
 	  
       presence.setActivity(presenceData);
       presence.setTrayTitle();
