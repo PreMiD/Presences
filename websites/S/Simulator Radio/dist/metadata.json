@@ -1,0 +1,32 @@
+{
+  "author": {
+    "name": "Pokey",
+    "id": "312269489850941450"
+  },
+  "contributors": [
+    {
+      "name": "Bas950",
+      "id": "241278257335500811"
+    }
+  ],
+  "service": "Simulator Radio",
+  "description": {
+    "en": "Simulator Radio | Your #1 Simulation Station"
+  },
+  "url": "simulatorradio.com",
+  "version": "1.4.4",
+  "logo": "https://i.imgur.com/5wpjeAM.png",
+  "thumbnail": "https://i.imgur.com/7OIweId.png",
+  "color": "#FB352A",
+  "tags": [
+    "radio",
+    "simulation",
+    "gaming",
+    "ets2",
+    "ats",
+    "farmsim",
+    "farming",
+    "gold-rush"
+  ],
+  "category": "music"
+}

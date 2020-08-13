@@ -4,7 +4,7 @@
 </div>
 
 This repository contains the source code of all presences that are available in PreMiD Store.  
-If you would like to <strong>publish</strong> your presence, please feel free to open a <a href="https://github.com/PreMiD/Presences/pulls">pull request</a>.  
+If you would like to <strong>publish</strong> your presence, please feel free to open a <a href="https://github.com/PreMiD/Presences/pulls">pull request</a>.
 
 <div align="left">
     <a href="https://discord.gg/WvfVZ8T" title="Join our Discord!" rel="nofollow">
@@ -12,18 +12,23 @@ If you would like to <strong>publish</strong> your presence, please feel free to
     </a>
 </div>
 
-# Requirements to create a presence
-- Have latest LTS **Node** version installed on your PC.
-- Have TypeScript Compiler installed.
-- Basic knowlege of JavaScript or TypeScript.
+## Requirements to create a presence
 
-# Getting started
+- You must have the [latest TypeScript compiler](https://www.typescriptlang.org/#download-links) version installed
+- Basic knowlege of TypeScript
+
+## Getting started
+
 We made a documentation to make your development process a little bit better and faster.  
-You can see it [**here**](https://docs.premid.app/en/dev/presence).
+You can see it [**here**](https://docs.premid.app/dev/presence).
 
-# Folder structure
-```
-/presences 
-└─ /(presence)
-   └─ /dist (contains code that will be used in store, must have `metadata.json` and `presence.js` in it.)
+## Folder structure
+
+```bash
+presence
+├── dist
+│   ├── metadata.json
+│   └── presence.js
+├── presence.ts
+└── tsconfig.json
 ```

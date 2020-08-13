@@ -1,0 +1,29 @@
+{
+  "author": {
+    "name": "Bas950",
+    "id": "241278257335500811"
+  },
+  "service": "Trello",
+  "description": {
+    "en": "Trello keeps track of everything, from the big picture to the minute details.",
+    "nl": "Trello houdt alles bij, van het grote geheel tot de kleine details."
+  },
+  "url": [
+    "trello.com",
+    "help.trello.com",
+    "blog.trello.com",
+    "developers.trello.com"
+  ],
+  "version": "2.1.5",
+  "logo": "https://i.imgur.com/5IK6wjd.png",
+  "thumbnail": "https://i.imgur.com/6V8VR6S.png",
+  "color": "#0080cb",
+  "tags": [
+    "projects",
+    "board",
+    "card",
+    "list",
+    "management"
+  ],
+  "category": "other"
+}

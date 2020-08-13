@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Leafage",
+    "id": "631499344863821877"
+  },
+  "contributors": [
+    {
+      "name": "Not Officer",
+      "id": "373913699943186432"
+    }
+  ],
+  "service": "Fortnite-API",
+  "description": {
+    "en": "Fortnite-API.com is an unofficial API for Fortnite."
+  },
+  "url": "fortnite-api.com",
+  "version": "5.4.4",
+  "logo": "https://i.imgur.com/KTfOOq2.png",
+  "thumbnail": "https://i.imgur.com/xno9CLs.png",
+  "color": "#FF91E0",
+  "tags": [
+    "fortnite",
+    "fortnite-api"
+  ],
+  "category": "other"
+}
