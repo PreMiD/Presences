@@ -11,7 +11,7 @@
   },
   "url": "animedao.com",
   "regExp":"animedao[0-9]{0,2}[.](stream|com)",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://viruz.s-ul.eu/p6OJmHM3",
   "thumbnail": "https://viruz.s-ul.eu/99mNuO8S",
   "color": "#0ab4fc",
