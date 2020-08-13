@@ -1,8 +1,7 @@
 {
   "root": true,
   "env": {
-    "browser": true,
-    "es2020": true
+    "browser": true
   },
   "extends": [
     "eslint:recommended",
@@ -44,8 +43,7 @@
     {
       "env": {
         "node": true,
-        "mongo": true,
-        "es2020": true
+        "mongo": true
       },
       "files": ["./*.ts"],
       "rules": {
