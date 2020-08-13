@@ -10,35 +10,6 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-var localeStrings = {
-  en: {
-    Main: "На главной",
-    Eco: "Смотрит таблицу лидеров сервера",
-    Browsing: "Browsing",
-    BrowsingFeed: "Browsing feed..."
-  },
-  ru: {
-    Chatting: "Смотрит сообщения...",
-    Watching: "Смотрит",
-    Browsing: "Просматривает",
-    BrowsingFeed: "Смотрит ленту..."
-  }
-};
-  function getLocale(): string {
-    return window.navigator.language.replace("-", "_").toLowerCase();
-  }
-  
-  function getLocalizedString(stringPath): string {
-    if (
-      localeStrings[getLocale()] !== undefined &&
-      localeStrings[getLocale()][stringPath] !== undefined
-    ) {
-      return result;
-    } else {
-      console.warn(`Language for [${stringPath}] was not found!`);
-      return localeStrings["en"][stringPath];
-    }
-  }
   const juniper: boolean = await presence.getSetting("juniper");
   const docs: boolean = await presence.getSetting("docs");
   const fback: boolean = await presence.getSetting("fback");
