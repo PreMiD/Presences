@@ -1,12 +1,11 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "645028677033132033"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-var language = window.navigator.language; //Make this change-able with presence settings
+  }),
+  language = window.navigator.language; //Make this change-able with presence settings
 //en = English
 //nl = Nederlands
 //Language list can be found here: https://api.premid.app/v2/langFile/list
@@ -20,12 +19,12 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
+const genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
 
 /**
  * Send PreMiD error message in console of browser
@@ -50,133 +49,106 @@ function getTranslation(stringName: string): string {
       switch (language) {
         case "nl":
           return "Bekijkt de startpagina";
-          break;
         case "de":
           return "Ist auf der Startseite";
-          break;
         default:
           return "Viewing home page";
-          break;
       }
-      break;
     case "News":
       switch (language) {
         case "nl":
           return "Bladeren door het niews";
-          break;
         case "de":
           return "Sieht sich News an";
-          break;
         default:
           return "Browsing news";
-          break;
       }
-      break;
     case "WebShows":
       switch (language) {
         case "nl":
-          return "Bladeren door alle shows";
-          break;
+          return "Bladeren door alle web shows";
         case "de":
-          return "Sieht sich Shows an";
-          break;
+          return "Sieht sich Web-Shows an";
         default:
-          return "Browsing shows";
-          break;
+          return "Browsing web shows";
       }
-      break;
     case "Podcasts":
       switch (language) {
         case "nl":
           return "Bladeren door podcasts";
-          break;
         case "de":
           return "Sieht sich Podcasts an";
-          break;
         default:
           return "Browsing podcasts";
-          break;
       }
-      break;
     case "Music":
       switch (language) {
         case "nl":
           return "Bladeren door muziek";
-          break;
         case "de":
           return "Sieht sich Musik an";
-          break;
         default:
           return "Browsing music";
-          break;
       }
-      break;
     case "Search":
       switch (language) {
         case "nl":
           return "Zoekt naar:";
-          break;
         case "de":
           return "Sucht nach:";
-          break;
         default:
           return "Searching for:";
-          break;
       }
-      break;
     case "Library":
       switch (language) {
         case "nl":
           return "Bekijkt bibliotheek:";
-          break;
         case "de":
           return "Ist in der Bibliothek:";
-          break;
         default:
           return "Viewing library:";
-          break;
       }
       break;
     case "Collection":
       switch (language) {
         case "nl":
           return "Bekijkt collectie:";
-          break;
         case "de":
           return "Ist in der Kollektion";
-          break;
+
         default:
           return "Viewing collection:";
-          break;
       }
-      break;
+
     case "Playlist":
       switch (language) {
         case "nl":
           return "Bekijkt afspeellijst:";
-          break;
         case "de":
           return "Ist in der Playlist";
-          break;
         default:
           return "Viewing playlist:";
-          break;
       }
-      break;
+    case "Vod":
+      switch (language) {
+        case "nl":
+          return "Bekijkt Film/TV Show/VOD:";
+        case "de":
+          return "Schaut Film/TV-Sendung/VOD:";
+        default:
+          return "Viewing Movie/TV Show/VOD:";
+      }
     default:
       PMD_error(
         "Unknown StringName please contact the Developer of this presence!\nYou can contact him/her in the PreMiD Discord (discord.gg/premid)"
       );
       return "Unknown stringName";
-      break;
   }
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
-var user: any;
-var title: any;
-var search: any;
+let user, title, search;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -190,20 +162,20 @@ presence.on("UpdateData", async () => {
       document.querySelector("#plex > div:nth-child(7) > div > div > audio") !==
         null
     ) {
-      var currentTime: any,
-        duration: any,
-        paused: any,
-        timestamps: any,
-        video: HTMLVideoElement;
-      video =
-        document.querySelector(
-          "#plex > div:nth-child(7) > div > div > video"
-        ) ||
-        document.querySelector("#plex > div:nth-child(7) > div > div > audio");
-      currentTime = video.currentTime;
-      duration = video.duration;
-      paused = video.paused;
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+      const video: HTMLVideoElement =
+          document.querySelector(
+            "#plex > div:nth-child(7) > div > div > video"
+          ) ||
+          document.querySelector(
+            "#plex > div:nth-child(7) > div > div > audio"
+          ),
+        currentTime = video.currentTime,
+        duration = video.duration,
+        paused = video.paused,
+        timestamps = getTimestamps(
+          Math.floor(currentTime),
+          Math.floor(duration)
+        );
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
@@ -277,7 +249,7 @@ presence.on("UpdateData", async () => {
         title = (title.textContent || "").split("—");
         presenceData.state = title[1] || title[0];
         if (title.length > 1) {
-          var chapterNumber: string = title[0].replace("·", "-");
+          const chapterNumber: string = title[0].replace("·", "-");
           presenceData.state = `${chapterNumber} - ${presenceData.state}`;
         }
       }
@@ -289,15 +261,48 @@ presence.on("UpdateData", async () => {
     } else if (document.URL.includes("/tv.plex.provider.webshows")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("WebShows");
+      const title =
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div > a"
+        );
+      if (title !== null) {
+        presenceData.details = "Viewing webshow:";
+        presenceData.state = title.textContent;
+      }
     } else if (document.URL.includes("/tv.plex.provider.news")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("News");
     } else if (document.URL.includes("/tv.plex.provider.podcasts")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Podcasts");
+      const title =
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div"
+        );
+      if (title !== null) {
+        presenceData.details = "Viewing podcast:";
+        presenceData.state = title.textContent;
+      }
     } else if (document.URL.includes("/tv.plex.provider.music")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Music");
+      const title =
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div"
+        );
+      if (title !== null) {
+        presenceData.details = "Viewing album:";
+        presenceData.state = title.textContent;
+      }
     } else if (document.URL.includes("/search")) {
       search = document.querySelector(
         "#content > div > div > div:nth-child(2) > div > div:nth-child(2) > span"
@@ -329,6 +334,29 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(
         "#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span"
       ).textContent;
+    } else if (document.URL.includes("tv.plex.provider.vod")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = getTranslation("Vod");
+      presenceData.state = document.querySelector(
+        "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div"
+      ).textContent;
+    } else if (document.URL.includes("/server/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = getTranslation("Vod");
+      const title =
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div > a"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > span"
+        ) ||
+        document.querySelector(
+          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div"
+        );
+      presenceData.state = title.textContent;
     } else if (
       document.URL == "https://app.plex.tv/" ||
       document.URL == "https://app.plex.tv/desktop" ||
