@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "684124119146692619",
+  clientId: "743239699992281160",
   mediaKeys: false,
 });
 
@@ -8,7 +8,7 @@ var browsingStamp: number = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   // Presence Data
   let data: presenceData = {
-    largeImageKey: "mangalib_large",
+    largeImageKey: "hentailib_large",
   };
 
   let route = document.location.pathname;

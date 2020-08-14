@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "684124119146692619",
+  clientId: "743233111097081886",
   mediaKeys: false,
 });
 
@@ -8,7 +8,7 @@ var browsingStamp: number = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   // Presence Data
   let data: presenceData = {
-    largeImageKey: "mangalib_large",
+    largeImageKey: "ranobelib_large",
   };
 
   let route = document.location.pathname;
@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     if (query === "?section=all-updates") 
     {
       // All Updates
-      data.details = "Обновления манги";
+      data.details = "Обновления ранобэ";
       data.startTimestamp = 0;
     } 
     else 
@@ -36,32 +36,32 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Ищет";
     data.smallImageKey = "search";
     data.startTimestamp = 0;
-    data.details = "Каталог";
+    data.details = "Каталог ранобэ";
 
     const queryType = query.split("&").find((q) => q.match("types"));
     const typeNumber = queryType ? queryType.split("=")[1] : null;
 
     switch (typeNumber) {
-      case "1":
-        data.state = `Ищу мангу`;
+      case "10":
+        data.state = `Ищу японское ранобэ`;
         break;
-      case "4":
-        data.state = `Ищу OEL-мангу`;
+      case "11":
+        data.state = `Ищу корейское ранобэ`;
         break;
-      case "5":
-        data.state = `Ищу манхву`;
+      case "12":
+        data.state = `Ищу китайское ранобэ`;
         break;
-      case "6":
-        data.state = `Ищу маньхуа`;
+      case "13":
+        data.state = `Ищу английское ранобэ`;
         break;
-      case "8":
-        data.state = `Ищу румангу`;
+      case "14":
+        data.state = `Ищу авторские`;
         break;
       case "9":
-        data.state = `Ищу западный комикс`;
+        data.state = `Ищу фанфики`;
         break;
       default:
-        data.state = `Ищу мангу`;
+        data.state = `Ищу ранобэ`;
         break;
     }
   }
@@ -285,7 +285,7 @@ presence.on("UpdateData", async () => {
 
     if (action === "edit") 
     {
-      data.details = "Редактирует мангу";
+      data.details = "Редактирует ранобэ";
       data.smallImageText = "Редактирует";
       data.smallImageKey = "writing";
     } 
@@ -303,7 +303,7 @@ presence.on("UpdateData", async () => {
     } 
     else if (action === "create") 
     {
-      data.details = "Добавляет мангу";
+      data.details = "Добавляет ранобэ";
       data.smallImageText = "Пишет";
       data.smallImageKey = "writing";
 
@@ -314,7 +314,7 @@ presence.on("UpdateData", async () => {
       }
       else 
       {
-        data.state = 'Имя тайтла не задано'
+        data.state = 'Имя новеллы не задано'
       }
     } 
     else 
@@ -390,7 +390,7 @@ presence.on("UpdateData", async () => {
       const titleArray: Array<string> = document.title.split(" ");
       const mangaName = titleArray.slice(2, -4).join(" ");
 
-      data.details = "Читает тайтл";
+      data.details = "Читает новеллу";
       data.state = mangaName;
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
@@ -405,7 +405,7 @@ presence.on("UpdateData", async () => {
         .slice(1)
         .join(" ");
 
-      data.details = "Смотрит на тайтл";
+      data.details = "Смотрит на новеллу";
       data.state = mangaName;
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
