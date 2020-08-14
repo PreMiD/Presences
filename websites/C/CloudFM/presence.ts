@@ -1,8 +1,7 @@
 const presence = new Presence({
   clientId: "743793403753660426"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let title, artist, dj, playbackStatus: string;
 
