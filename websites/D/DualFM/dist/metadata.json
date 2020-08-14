@@ -24,12 +24,6 @@
   "category": "music",
   "settings": [
     {
-      "id": "toggleelapse",
-      "title": "Toggle Elapse Status",
-      "icon": "fas fa-history",
-      "value": true
-    },
-    {
       "id": "changedetails",
       "title": "Change Line #1 (Song Details)",
       "icon": "fas fa-music",

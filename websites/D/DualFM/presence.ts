@@ -31,22 +31,16 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo",
     smallImageKey: "dualfm-play-v2"
   };
-
-  const toggleelaspe = await presence.getSetting("toggleelapse");
   const changedetails = await presence.getSetting("changedetails");
   const changestate = await presence.getSetting("changestate");
   const changesmalltext = await presence.getSetting("changesmalltext");
 
-  if (toggleelaspe) {
     if (lastTitle != sname) {
       lastTitle = sname;
       lastTimeStart = Math.floor(Date.now() / 1000);
     }
 
     presenceData.startTimestamp = lastTimeStart;
-  } else {
-    presenceData.startTimestamp = false;
-  }
 
     if (!sname) {
       lastTitle = "Loading...";
