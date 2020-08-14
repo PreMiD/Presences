@@ -33,9 +33,9 @@ presence.on("UpdateData", async () => {
   };
 
   const toggleelaspe = await presence.getSetting("toggleelapse") || true;
-  const changedetails = await presence.getSetting("changedetails");
-  const changestate = await presence.getSetting("changestate");
-  const changesmalltext = await presence.getSetting("changesmalltext");
+  const changedetails = await presence.getSetting("changedetails" || false);
+  const changestate = await presence.getSetting("changestate") || false;
+  const changesmalltext = await presence.getSetting("changesmalltext") || false;
 
   if (toggleelaspe) {
     if (lastTitle != sname) {
