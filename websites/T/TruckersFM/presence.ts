@@ -7,8 +7,7 @@ presence.on("UpdateData", () => {
     document.querySelector(".player-artist-text").textContent
   } - ${document.querySelector(".player-title-text").textContent} `;
   const dj = document.querySelector(".live-name").textContent;
-  let liveTill = null;
-  liveTill = document.querySelector(".live-time").textContent;
+  const liveTill = document.querySelector(".live-time").textContent;
   const pageName = document.title.slice(13);
   const liveTime = liveTill.slice(6);
   const presenceData: PresenceData = {
