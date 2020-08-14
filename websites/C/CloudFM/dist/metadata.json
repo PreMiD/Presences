@@ -15,8 +15,8 @@
     },
     "service": "CloudFM",
     "version": "1.0.0",
-    "logo": "https://imgur.com/RhJ2JvW.png",
-    "thumbnail": "https://imgur.com/2qAS8bw.png",
+    "logo": "https://i.imgur.com/RhJ2JvW.png",
+    "thumbnail": "https://i.imgur.com/2qAS8bw.png",
     "color": "#0049db",
     "tags": ["radio", "fun", "music", "entertainment"],
     "category": "music"
