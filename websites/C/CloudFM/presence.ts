@@ -4,10 +4,7 @@ const presence = new Presence({
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
-let title: string;
-let artist: string;
-let dj: string;
-let playbackStatus: string;
+let title, artist, dj, playbackStatus: string;
 
 function getStatus(): string {
   const playPauseBtn = document.querySelector("#play");
@@ -20,7 +17,7 @@ function getStatus(): string {
 }
 
 presence.on("UpdateData", async () => {
-  let presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
