@@ -19,11 +19,9 @@ presence.on("UpdateData", async () => {
   };
 
   //Document title
-  const title = document.title;
+  const title = document.title,
   //Document header
-  const header = document.querySelector(
-    "h1"
-  ) as HTMLElement;
+  header = document.querySelector("h1") as HTMLElement;
 
   switch (path[0]) {
     //Radio
@@ -38,13 +36,13 @@ presence.on("UpdateData", async () => {
       //Player State
       const playerIcon = document.querySelector(
         ".player__animate-icon"
-      ) as HTMLElement;
+      ) as HTMLElement,
       //Current Song / Episode
-      const info = document.querySelector(
+      info = document.querySelector(
         "div.player__song"
-      ) as HTMLElement;
+      ) as HTMLElement,
       //Player Status
-      const status = document.querySelector(
+      status = document.querySelector(
         ".player__info-wrap"
       ) as HTMLElement;
 
