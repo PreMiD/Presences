@@ -19,8 +19,10 @@ presence.on("UpdateData", async () => {
   };
 
   switch (path[0]) {
-    case "s": //Radio
-    case "p": //Podcast
+    //Radio
+    //Podcast
+    case "s":
+    case "p": {
       if (path[1] != lastPath || browsingStamp == 0) {
         browsingStamp = Math.round(Date.now() / 1000);
         lastPath = path[1];
@@ -31,13 +33,9 @@ presence.on("UpdateData", async () => {
         ".player__animate-icon"
       ) as HTMLElement;
       //Current Radio / Podcast
-      const name = document.querySelector(
-        "h1"
-      ) as HTMLElement;
+      const name = document.querySelector("h1") as HTMLElement;
       //Current Song / Episode
-      const info = document.querySelector(
-        "div.player__song"
-      ) as HTMLElement;
+      const info = document.querySelector("div.player__song") as HTMLElement;
       //Player Status
       const status = document.querySelector(
         ".player__info-wrap"
@@ -111,12 +109,16 @@ presence.on("UpdateData", async () => {
           }
         } else {
           //Player is inactive (no status is being displayed)
-          const tags = (document.querySelector(".z7kxsz-11") as HTMLElement).textContent;
+          const tags = (document.querySelector(
+            ".z7kxsz-11"
+          ) as HTMLElement).textContent;
           presenceData.state = tags;
         }
       }
       break;
-    case "search": //Search
+    }
+    //Search
+    case "search": {
       browsingStamp = 0;
       const results = document.querySelector("h1").innerText.match(/\d+/g)[0];
 
@@ -126,12 +128,19 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = (await strings).search;
       break;
-    case "genre": //Genre
-    case "topic": //Topic
-    case "country": //Country
-    case "city": //City
-    case "local-stations": //Local Stations
-    case "top-stations": //Top 100 Stations
+    }
+    //Genre
+    //Topic
+    //Country
+    //City
+    //Local Stations
+    //Top 100 Stations
+    case "genre":
+    case "topic":
+    case "country":
+    case "city":
+    case "local-stations":
+    case "top-stations": {
       browsingStamp = 0;
 
       presenceData.details = document.querySelector("h1").innerText;
@@ -139,30 +148,47 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = (await strings).browsing;
       break;
-    case "profile": //My Profile
-    case "recents": //Recently Played
-    case "favorites": //My Favorites
-    case "terms-and-conditions": //Terms and Conditions
-    case "privacy-policy": //Privacy Policy
-    case "imprint": //Imprint
-    case "contact": //Contact
+    }
+    //My Profile
+    //Recently Played
+    //My Favorites
+    //Terms and Conditions
+    //Privacy Policy
+    //Imprint
+    //Contact
+    case "profile":
+    case "recents":
+    case "favorites":
+    case "terms-and-conditions":
+    case "privacy-policy":
+    case "imprint":
+    case "contact": {
       browsingStamp = 0;
 
       presenceData.details = document.title;
       break;
-    case "iphone": //iPhone App
-    case "ipad": //iPad App
-    case "android": //Android App
-    case "windowsphone": //Windows App
-    case "blackberry": //Blackberry App
+    }
+    //iPhone App
+    //iPad App
+    //Android App
+    //Windows App
+    //Blackberry App
+    case "iphone":
+    case "ipad":
+    case "android":
+    case "windowsphone":
+    case "blackberry": {
       browsingStamp = 0;
 
       presenceData.details = document.title;
       break;
-    default: //Unknown
+    }
+    //Unknown
+    default: {
       presence.setTrayTitle();
       presence.setActivity();
       return;
+    }
   }
 
   presence.setActivity(presenceData);
