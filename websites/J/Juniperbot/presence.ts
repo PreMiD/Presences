@@ -2,14 +2,13 @@ let presence = new Presence({
   clientId: "739908991274057870"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
-let search: any;
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  const 
+  let 
     juniper: boolean = await presence.getSetting("juniper"),
     docs: boolean = await presence.getSetting("docs"),
     fback: boolean = await presence.getSetting("fback")
