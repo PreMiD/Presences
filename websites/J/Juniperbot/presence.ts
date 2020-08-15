@@ -3,10 +3,7 @@ const
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-  const 
+  const presenceData: PresenceData = {largeImageKey: "logo"},
     juniper: boolean = await presence.getSetting("juniper"),
     docs: boolean = await presence.getSetting("docs"),
     fback: boolean = await presence.getSetting("fback");
