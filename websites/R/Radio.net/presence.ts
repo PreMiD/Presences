@@ -12,14 +12,15 @@ var lastPath = ""; //Last played radio station or podcast
 var browsingStamp = 0; //Timestamp when started listening to a radio station
 
 presence.on("UpdateData", async () => {
-  const path = window.location.pathname.split("/").slice(1);
-  const presenceData: PresenceData = {
+  //Current path
+  const path = window.location.pathname.split("/").slice(1),
+  //Presence data
+  presenceData: PresenceData = {
     details: "Radio.net",
     largeImageKey: "logo_big"
-  };
-
+  },
   //Document title
-  const title = document.title,
+  title = document.title,
   //Document header
   header = document.querySelector("h1") as HTMLElement;
 
