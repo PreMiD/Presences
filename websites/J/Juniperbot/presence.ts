@@ -1,8 +1,6 @@
-const presence = new Presence({
-  clientId: "739908991274057870"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+const 
+  presence = new Presence({clientId: "739908991274057870"}),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -11,7 +9,7 @@ presence.on("UpdateData", async () => {
   const 
     juniper: boolean = await presence.getSetting("juniper"),
     docs: boolean = await presence.getSetting("docs"),
-    fback: boolean = await presence.getSetting("fback")
+    fback: boolean = await presence.getSetting("fback");
 
   if (document.location.hostname == "juniper.bot") {
     if(juniper){
