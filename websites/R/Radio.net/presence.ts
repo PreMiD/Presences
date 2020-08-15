@@ -19,20 +19,29 @@ presence.on("UpdateData", async () => {
   };
 
   switch (path[0]) {
-    //Radio
-    case "s":
-    //Podcast
-    case "p": {
+    case "s": //Radio
+    case "p": //Podcast
       if (path[1] != lastPath || browsingStamp == 0) {
         browsingStamp = Math.round(Date.now() / 1000);
         lastPath = path[1];
       }
+
+      //Player State
       const playerIcon = document.querySelector(
         ".player__animate-icon"
       ) as HTMLElement;
-      const name = document.querySelector("h1") as HTMLElement; //Current Radio / Podcast
-      const info = document.querySelector("div.player__song") as HTMLElement; //Current Song / Episode
-      const status = document.querySelector(".player__info-wrap") as HTMLElement; //Player Status
+      //Current Radio / Podcast
+      const name = document.querySelector(
+        "h1"
+      ) as HTMLElement;
+      //Current Song / Episode
+      const info = document.querySelector(
+        "div.player__song"
+      ) as HTMLElement;
+      //Player Status
+      const status = document.querySelector(
+        ".player__info-wrap"
+      ) as HTMLElement;
 
       if (playerIcon.style.display != "none") {
         //Playing
@@ -50,8 +59,10 @@ presence.on("UpdateData", async () => {
 
           //Get the start / current position
           const [start, end] = (document.querySelector(
-              ".player__timing-wrap"
-          ) as HTMLElement).textContent.split("|").map(e => e.split(":").reverse());
+            ".player__timing-wrap"
+          ) as HTMLElement).textContent
+            .split("|")
+            .map((e) => e.split(":").reverse());
 
           //Add the amount of time the podcast has been playing
           if (start.length > 0) {
@@ -105,30 +116,22 @@ presence.on("UpdateData", async () => {
         }
       }
       break;
-    }
-    //Search
-    case "search": {
+    case "search": //Search
       browsingStamp = 0;
       const results = document.querySelector("h1").innerText.match(/\d+/g)[0];
 
-      presenceData.details = new URLSearchParams(window.location.search).get(
-        "q"
-      );
+      presenceData.details = new URLSearchParams(window.location.search).get("q");
       presenceData.state = `${results} results`;
 
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = (await strings).search;
       break;
-    }
-    //Genre / Topic
-    case "genre":
-    //Country / City
-    case "topic":
-    case "country":
-    //Local Stations / Top 100 Stations
-    case "city":
-    case "local-stations":
-    case "top-stations":
+    case "genre": //Genre
+    case "topic": //Topic
+    case "country": //Country
+    case "city": //City
+    case "local-stations": //Local Stations
+    case "top-stations": //Top 100 Stations
       browsingStamp = 0;
 
       presenceData.details = document.querySelector("h1").innerText;
@@ -136,35 +139,31 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = (await strings).browsing;
       break;
-    //My Profile / Recently Played / My Favorites
-    case "profile":
-    case "recents":
-    case "favorites":
-    //Terms and Conditions / Privacy Policy / Imprint / Contact
-    case "terms-and-conditions":
-    case "privacy-policy":
-    case "imprint":
-    case "contact":
+    case "profile": //My Profile
+    case "recents": //Recently Played
+    case "favorites": //My Favorites
+    case "terms-and-conditions": //Terms and Conditions
+    case "privacy-policy": //Privacy Policy
+    case "imprint": //Imprint
+    case "contact": //Contact
       browsingStamp = 0;
 
       presenceData.details = document.title;
       break;
-    //Smartphone Apps
-    case "iphone":
-    case "ipad":
-    case "android":
-    case "windowsphone":
-    case "blackberry":
+    case "iphone": //iPhone App
+    case "ipad": //iPad App
+    case "android": //Android App
+    case "windowsphone": //Windows App
+    case "blackberry": //Blackberry App
       browsingStamp = 0;
 
       presenceData.details = document.title;
       break;
-    //Unknown
-    default:
+    default: //Unknown
       presence.setTrayTitle();
       presence.setActivity();
       return;
   }
-  
+
   presence.setActivity(presenceData);
 });
