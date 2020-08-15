@@ -1,18 +1,18 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "739908991274057870"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-var search: any;
+let browsingStamp = Math.floor(Date.now() / 1000);
+let search: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  const juniper: boolean = await presence.getSetting("juniper");
-  const docs: boolean = await presence.getSetting("docs");
-  const fback: boolean = await presence.getSetting("fback");
+  const 
+    juniper: boolean = await presence.getSetting("juniper"),
+    docs: boolean = await presence.getSetting("docs"),
+    fback: boolean = await presence.getSetting("fback")
 
   if (document.location.hostname == "juniper.bot") {
     if(juniper){
