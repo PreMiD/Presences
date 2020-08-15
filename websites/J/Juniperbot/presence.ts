@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "739908991274057870"
 });
 
@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  let 
+  const 
     juniper: boolean = await presence.getSetting("juniper"),
     docs: boolean = await presence.getSetting("docs"),
     fback: boolean = await presence.getSetting("fback")
