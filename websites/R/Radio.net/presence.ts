@@ -18,6 +18,13 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo_big"
   };
 
+  //Document title
+  const title = document.title;
+  //Document header
+  const header = document.querySelector(
+    "h1"
+  ) as HTMLElement;
+
   switch (path[0]) {
     //Radio
     //Podcast
@@ -32,10 +39,10 @@ presence.on("UpdateData", async () => {
       const playerIcon = document.querySelector(
         ".player__animate-icon"
       ) as HTMLElement;
-      //Current Radio / Podcast
-      const name = document.querySelector("h1") as HTMLElement;
       //Current Song / Episode
-      const info = document.querySelector("div.player__song") as HTMLElement;
+      const info = document.querySelector(
+        "div.player__song"
+      ) as HTMLElement;
       //Player Status
       const status = document.querySelector(
         ".player__info-wrap"
@@ -43,7 +50,7 @@ presence.on("UpdateData", async () => {
 
       if (playerIcon.style.display != "none") {
         //Playing
-        presenceData.details = name.innerText;
+        presenceData.details = header.innerText;
         presenceData.state = info.innerText;
 
         presenceData.smallImageText = (await strings).play;
@@ -88,7 +95,7 @@ presence.on("UpdateData", async () => {
         //Paused
         browsingStamp = 0;
 
-        presenceData.details = name.innerText;
+        presenceData.details = header.innerText;
 
         presenceData.smallImageText = (await strings).pause;
         presenceData.smallImageKey = "pause";
@@ -120,7 +127,7 @@ presence.on("UpdateData", async () => {
     //Search
     case "search": {
       browsingStamp = 0;
-      const results = document.querySelector("h1").innerText.match(/\d+/g)[0];
+      const results = header.innerText.match(/\d+/g)[0];
 
       presenceData.details = new URLSearchParams(window.location.search).get("q");
       presenceData.state = `${results} results`;
@@ -143,7 +150,7 @@ presence.on("UpdateData", async () => {
     case "top-stations": {
       browsingStamp = 0;
 
-      presenceData.details = document.querySelector("h1").innerText;
+      presenceData.details = header.innerText;
 
       presenceData.smallImageKey = "reading";
       presenceData.smallImageText = (await strings).browsing;
@@ -165,7 +172,7 @@ presence.on("UpdateData", async () => {
     case "contact": {
       browsingStamp = 0;
 
-      presenceData.details = document.title;
+      presenceData.details = title;
       break;
     }
     //iPhone App
@@ -180,7 +187,7 @@ presence.on("UpdateData", async () => {
     case "blackberry": {
       browsingStamp = 0;
 
-      presenceData.details = document.title;
+      presenceData.details = title;
       break;
     }
     //Unknown
