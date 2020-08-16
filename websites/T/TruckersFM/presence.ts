@@ -2,13 +2,15 @@ const presence = new Presence({
   clientId: "640914619082211338"
 });
 
+var title: any, dj: any, liveTill: any, pageName: any, stateText: any, time: any; 
+
 presence.on("UpdateData", () => {
-  const title = `${
+  title = `${
     document.querySelector(".player-artist-text").textContent
   } - ${document.querySelector(".player-title-text").textContent} `;
-  const dj = document.querySelector(".live-name").textContent;
-  const liveTill = document.querySelector(".live-time");
-  const pageName = document.title.slice(13);
+  dj = document.querySelector(".live-name").textContent;
+  liveTill = document.querySelector(".live-time");
+  pageName = document.title.slice(13);
   const presenceData: PresenceData = {
     largeImageKey: "tfmlogo",
     smallImageKey: "smalltfmlogo",
@@ -17,7 +19,7 @@ presence.on("UpdateData", () => {
 
   let stateText = "";
     if(liveTill) {
-        const time = liveTill.textContent;
+        time = liveTill.textContent;
        stateText = `${dj} till ${time.slice(6)}`;
     } else {
        stateText = `${dj}`;
