@@ -14,15 +14,15 @@ var browsingStamp = 0; //Timestamp when started listening to a radio station
 presence.on("UpdateData", async () => {
   //Current path
   const path = window.location.pathname.split("/").slice(1),
-  //Presence data
-  presenceData: PresenceData = {
-    details: "Radio.net",
-    largeImageKey: "logo_big"
-  },
-  //Document title
-  title = document.title,
-  //Document header
-  header = document.querySelector("h1") as HTMLElement;
+    //Presence data
+    presenceData: PresenceData = {
+      details: "Radio.net",
+      largeImageKey: "logo_big"
+    },
+    //Document title
+    title = document.title,
+    //Document header
+    header = document.querySelector("h1") as HTMLElement;
 
   switch (path[0]) {
     //Radio
@@ -36,16 +36,12 @@ presence.on("UpdateData", async () => {
 
       //Player State
       const playerIcon = document.querySelector(
-        ".player__animate-icon"
-      ) as HTMLElement,
-      //Current Song / Episode
-      info = document.querySelector(
-        "div.player__song"
-      ) as HTMLElement,
-      //Player Status
-      status = document.querySelector(
-        ".player__info-wrap"
-      ) as HTMLElement;
+          ".player__animate-icon"
+        ) as HTMLElement,
+        //Current Song / Episode
+        info = document.querySelector("div.player__song") as HTMLElement,
+        //Player Status
+        status = document.querySelector(".player__info-wrap") as HTMLElement;
 
       if (playerIcon.style.display != "none") {
         //Playing
@@ -115,9 +111,8 @@ presence.on("UpdateData", async () => {
           }
         } else {
           //Player is inactive (no status is being displayed)
-          const tags = (document.querySelector(
-            ".z7kxsz-11"
-          ) as HTMLElement).textContent;
+          const tags = (document.querySelector(".z7kxsz-11") as HTMLElement)
+            .textContent;
           presenceData.state = tags;
         }
       }
@@ -128,7 +123,9 @@ presence.on("UpdateData", async () => {
       browsingStamp = 0;
       const results = header.innerText.match(/\d+/g)[0];
 
-      presenceData.details = new URLSearchParams(window.location.search).get("q");
+      presenceData.details = new URLSearchParams(window.location.search).get(
+        "q"
+      );
       presenceData.state = `${results} results`;
 
       presenceData.smallImageKey = "search";
