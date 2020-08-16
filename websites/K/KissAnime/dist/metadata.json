@@ -12,8 +12,11 @@
     "nl": "KissAnime is een Russische anime-hostingwebsite. LET OP: Ondersteunde servers: RapidVideo, MP4Upload, Beta, Beta2.",
     "pt_BR": "KissAnime é um site de anime russo. ATENÇÃO: Servidores suportados: RapidVideo, MP4Upload, Beta, Beta2."
   },
-  "url": ["kissanime.ru", "www.kiss-anime.ws"],
-  "version": "2.3.6",
+  "url": [
+    "kissanime.ru",
+    "www.kiss-anime.ws"
+  ],
+  "version": "2.3.7",
   "logo": "https://i.imgur.com/tFIQhTE.jpg",
   "thumbnail": "https://i.imgur.com/sgnvfWx.png",
   "color": "#75ae07",
