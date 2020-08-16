@@ -7,9 +7,8 @@ presence.on("UpdateData", () => {
     document.querySelector(".player-artist-text").textContent
   } - ${document.querySelector(".player-title-text").textContent} `;
   const dj = document.querySelector(".live-name").textContent;
-  const liveTill = document.querySelector(".live-time").textContent;
+  const liveTill = document.querySelector(".live-time");
   const pageName = document.title.slice(13);
-  const liveTime = liveTill.slice(6);
   const presenceData: PresenceData = {
     largeImageKey: "tfmlogo",
     smallImageKey: "smalltfmlogo",
@@ -18,7 +17,8 @@ presence.on("UpdateData", () => {
 
   let stateText = "";
     if(liveTill) {
-       stateText = `${dj} till ${liveTime}`;
+        const time = liveTill.textContent;
+       stateText = `${dj} till ${time.slice(6)}`;
     } else {
        stateText = `${dj}`;
     }
