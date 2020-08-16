@@ -1,6 +1,6 @@
 var presence = new Presence({
   clientId: "743239699992281160",
-  mediaKeys: false,
+  mediaKeys: false
 });
 
 var browsingStamp: number = Math.floor(Date.now() / 1000);
@@ -8,31 +8,26 @@ var browsingStamp: number = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   // Presence Data
   let data: presenceData = {
-    largeImageKey: "hentailib_large",
+    largeImageKey: "hentailib_large"
   };
 
   let route = document.location.pathname;
   let query = document.location.search;
 
   // Main
-  if (route === "/") 
-  {
-    if (query === "?section=all-updates") 
-    {
+  if (route === "/") {
+    if (query === "?section=all-updates") {
       // All Updates
       data.details = "Обновления манги";
       data.startTimestamp = 0;
-    } 
-    else 
-    {
+    } else {
       // Main
       data.details = "Главная страница";
       data.startTimestamp = 0;
     }
   }
   // Manga list
-  else if (route === "/manga-list") 
-  {
+  else if (route === "/manga-list") {
     data.smallImageText = "Ищет";
     data.smallImageKey = "search";
     data.startTimestamp = 0;
@@ -66,106 +61,113 @@ presence.on("UpdateData", async () => {
     }
   }
   // Notififcation
-  else if (route.startsWith("/notification")) 
-  {
+  else if (route.startsWith("/notification")) {
     data.details = `Уведомления`;
     data.smallImageText = "Читает";
     data.smallImageKey = "reading";
     data.startTimestamp = 0;
 
     const typeList = [
-      {id: 0, name: 'all'},
-      {id: 1, name: 'chapter'},
-      {id: 2, name: 'comments'},
-      {id: 3, name: 'message'},
-      {id: 4, name: 'friend'},
-      {id: 5, name: 'other'}
-    ]
+      { id: 0, name: "all" },
+      { id: 1, name: "chapter" },
+      { id: 2, name: "comments" },
+      { id: 3, name: "message" },
+      { id: 4, name: "friend" },
+      { id: 5, name: "other" }
+    ];
 
-    let pageQuery = query.split("&")[1]
-    if (!pageQuery) 
-    {
-      pageQuery = 'all'
-    }
-    else 
-    {
-      pageQuery = pageQuery.split('=')[1]
+    let pageQuery = query.split("&")[1];
+    if (!pageQuery) {
+      pageQuery = "all";
+    } else {
+      pageQuery = pageQuery.split("=")[1];
     }
 
-    let type: any = typeList.find(i => i.name === pageQuery);
-    if (!type) type = 0
-    if (type) type = type.id
+    let type: any = typeList.find((i) => i.name === pageQuery);
+    if (!type) type = 0;
+    if (type) type = type.id;
 
-    const categories = Array.from(document.querySelectorAll(".menu.menu_page .menu__item"))
-    const currentCategory = <HTMLElement>(categories.find((item, index) => index === type))
-    
-    if (currentCategory) 
-    {
-      data.state = currentCategory.innerText
-    } 
+    const categories = Array.from(
+      document.querySelectorAll(".menu.menu_page .menu__item")
+    );
+    const currentCategory = <HTMLElement>(
+      categories.find((item, index) => index === type)
+    );
+
+    if (currentCategory) {
+      data.state = currentCategory.innerText;
+    }
   }
   // Bookmarks
-  else if (route.startsWith("/user/")) 
-  {
+  else if (route.startsWith("/user/")) {
     const userPage = document.location.href.split("/").slice(4)[0];
     // Content Page
-    if (userPage === 'content') 
-    {
+    if (userPage === "content") {
       data.details = `Мои добавления`;
       data.smallImageText = "Пишет";
       data.smallImageKey = "writing";
       data.startTimestamp = 0;
 
       const typeList = [
-        {id: 1, name: 'moderation'},
-        {id: 2, name: 'rejected'},
-        {id: 3, name: 'chapters'}
-      ]
+        { id: 1, name: "moderation" },
+        { id: 2, name: "rejected" },
+        { id: 3, name: "chapters" }
+      ];
 
-      let type: any = typeList.find(i => i.name === document.location.href.split("/").slice(5)[0]);
-      if (!type) type = 0
-      if (type) type = type.id
-      
-      const categories = Array.from(document.querySelectorAll(".menu.menu_page .menu__item .menu__text"))
-      const currentCategory = <HTMLElement>(categories.find((item, index) => index === type))
+      let type: any = typeList.find(
+        (i) => i.name === document.location.href.split("/").slice(5)[0]
+      );
+      if (!type) type = 0;
+      if (type) type = type.id;
 
-      if (currentCategory) 
-      {
-        data.state = currentCategory.innerText
+      const categories = Array.from(
+        document.querySelectorAll(".menu.menu_page .menu__item .menu__text")
+      );
+      const currentCategory = <HTMLElement>(
+        categories.find((item, index) => index === type)
+      );
+
+      if (currentCategory) {
+        data.state = currentCategory.innerText;
       }
-    }
-    else if (userPage.match('edit')) 
-    {
+    } else if (userPage.match("edit")) {
       data.details = `Мои настройки`;
       data.smallImageText = "Настраивает";
       data.smallImageKey = "writing";
       data.startTimestamp = 0;
 
-      let section: any = query.split('=')[1]
+      let section: any = query.split("=")[1];
       const sections = [
-        { id: 0, name: 'info' },
-        { id: 1, name: 'site-settings' },
-        { id: 2, name: 'notifications' },
-        { id: 3, name: 'password' }
-      ]
-      section = sections.find(s => s.name === section).id
+        { id: 0, name: "info" },
+        { id: 1, name: "site-settings" },
+        { id: 2, name: "notifications" },
+        { id: 3, name: "password" }
+      ];
+      section = sections.find((s) => s.name === section).id;
 
-      const categories = Array.from(document.querySelectorAll(".menu.menu_page .menu__item"))
-      const currentCategory = <HTMLElement>(categories.find((item, index) => index === parseInt(section)));
+      const categories = Array.from(
+        document.querySelectorAll(".menu.menu_page .menu__item")
+      );
+      const currentCategory = <HTMLElement>(
+        categories.find((item, index) => index === parseInt(section))
+      );
 
       if (currentCategory) {
-        data.state = currentCategory.innerText
+        data.state = currentCategory.innerText;
       }
-    }
-    else 
-    {
+    } else {
       const userRoute = document.location.href.split("/").slice(5)[0];
-      let username = <HTMLElement>(document.querySelector(".profile-user .profile-user__username span"));
+      let username = <HTMLElement>(
+        document.querySelector(".profile-user .profile-user__username span")
+      );
 
       // User Bookmarks
-      if (!userRoute) 
-      {
-        let bookmarkSize = <HTMLElement>(document.querySelector(".bookmark-sidebar .menu.bookmark-menu .menu__item .bookmark-menu__label"));
+      if (!userRoute) {
+        let bookmarkSize = <HTMLElement>(
+          document.querySelector(
+            ".bookmark-sidebar .menu.bookmark-menu .menu__item .bookmark-menu__label"
+          )
+        );
 
         data.details = `Закладки ${username.innerText}`;
         data.state = `Всего: ${bookmarkSize.innerText.trim()}`;
@@ -174,8 +176,7 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = 0;
       }
       // User Comments
-      else if (userRoute === "comment") 
-      {
+      else if (userRoute === "comment") {
         data.details = `Профиль ${username.innerText}`;
         data.state = "Комментарии";
         data.smallImageText = "Читает";
@@ -183,16 +184,13 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = 0;
       }
       // User Friends
-      else if (userRoute === "following") 
-      {
+      else if (userRoute === "following") {
         data.details = `Профиль ${username.innerText}`;
         data.state = "Cписок друзей";
         data.smallImageText = "Читает";
         data.smallImageKey = "reading";
         data.startTimestamp = 0;
-      }
-      else if (userRoute === 'ban')
-      {
+      } else if (userRoute === "ban") {
         data.details = `Профиль`;
         data.state = "Список банов";
         data.smallImageText = "Смотрит";
@@ -202,8 +200,7 @@ presence.on("UpdateData", async () => {
     }
   }
   // Forum
-  else if (route.startsWith("/forum")) 
-  {
+  else if (route.startsWith("/forum")) {
     const queryCategory = query.split("&").find((q) => q.match("category"));
     let categoryValue = queryCategory ? queryCategory.split("=")[1] : null;
     if (categoryValue === "all") categoryValue = "0";
@@ -212,181 +209,157 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Читает";
     data.smallImageKey = "reading";
 
-    const categories = Array.from(document.querySelectorAll(".f-categories__items .f-category")).splice(2);
-    const currentCategory = <HTMLElement>(categories.find((item, index) => index === parseInt(categoryValue)));
-    if (currentCategory) {data.state = currentCategory.innerText}
+    const categories = Array.from(
+      document.querySelectorAll(".f-categories__items .f-category")
+    ).splice(2);
+    const currentCategory = <HTMLElement>(
+      categories.find((item, index) => index === parseInt(categoryValue))
+    );
+    if (currentCategory) {
+      data.state = currentCategory.innerText;
+    }
 
     const forumRoute = document.location.href.split("/").slice(4)[0];
     // Discussion
-    if (forumRoute === "discussion") 
-    {
-      const title = <HTMLElement>(document.querySelector(".discussion .discussion__title"));
+    if (forumRoute === "discussion") {
+      const title = <HTMLElement>(
+        document.querySelector(".discussion .discussion__title")
+      );
       data.state = title.innerText;
     }
   }
   // Private Messages
-  else if (route.startsWith("/messages"))
-  {
+  else if (route.startsWith("/messages")) {
     data.details = "Сообщения";
     data.smallImageText = "Пишет";
     data.smallImageKey = "writing";
   }
   // People
-  else if (route.startsWith('/people')) 
-  {
+  else if (route.startsWith("/people")) {
     let arr = route.split("/");
     const action = arr[arr.length - 1];
 
-    if (action === 'create')
-    {
+    if (action === "create") {
       data.details = "Добавляет автора";
       data.smallImageText = "Добавляет автора";
       data.smallImageKey = "writing";
 
-      let title = <HTMLInputElement>document.getElementById('name')
-      if (title.value.length > 1) 
-      {
-        data.state = title.value
-      }
-      else 
-      {
-        data.state = 'Имя команды не задано'
+      let title = <HTMLInputElement>document.getElementById("name");
+      if (title.value.length > 1) {
+        data.state = title.value;
+      } else {
+        data.state = "Имя команды не задано";
       }
     }
   }
   // Team
-  else if (route.startsWith('/team')) 
-  {
+  else if (route.startsWith("/team")) {
     let arr = route.split("/");
     const action = arr[arr.length - 1];
 
-    if (action === 'create')
-    {
+    if (action === "create") {
       data.details = "Добавляет команду";
       data.smallImageText = "Добавляет команду";
       data.smallImageKey = "writing";
 
-      let title = <HTMLInputElement>document.getElementById('name')
-      if (title.value.length > 1) 
-      {
-        data.state = title.value
-      }
-      else 
-      {
-        data.state = 'Имя команды не задано'
+      let title = <HTMLInputElement>document.getElementById("name");
+      if (title.value.length > 1) {
+        data.state = title.value;
+      } else {
+        data.state = "Имя команды не задано";
       }
     }
   }
   // Edit Manga
-  else if (route.startsWith("/manga")) 
-  {
+  else if (route.startsWith("/manga")) {
     let arr = route.split("/");
     const action = arr[arr.length - 1];
 
-    if (action === "edit") 
-    {
+    if (action === "edit") {
       data.details = "Редактирует мангу";
       data.smallImageText = "Редактирует";
       data.smallImageKey = "writing";
-    } 
-    else if (action === "bulk-create") 
-    {
+    } else if (action === "bulk-create") {
       data.details = "Добавляет главы";
       data.smallImageText = "Добавляет";
       data.smallImageKey = "uploading";
-    } 
-    else if (action === "add-chapter") 
-    {
+    } else if (action === "add-chapter") {
       data.details = "Добавляет главу";
       data.smallImageText = "Добавляет";
       data.smallImageKey = "uploading";
-    } 
-    else if (action === "create") 
-    {
+    } else if (action === "create") {
       data.details = "Добавляет мангу";
       data.smallImageText = "Пишет";
       data.smallImageKey = "writing";
 
-      let title = <HTMLInputElement>document.getElementById('rus_name')
-      if (title.value.length > 1) 
-      {
-        data.state = title.value
+      let title = <HTMLInputElement>document.getElementById("rus_name");
+      if (title.value.length > 1) {
+        data.state = title.value;
+      } else {
+        data.state = "Имя тайтла не задано";
       }
-      else 
-      {
-        data.state = 'Имя тайтла не задано'
-      }
-    } 
-    else 
-    {
+    } else {
       data.details = "Редактировать главу";
       data.smallImageText = "Пишет";
       data.smallImageKey = "writing";
 
-      const title = <HTMLElement>document.querySelector('.section__header .breadcrumb a')
+      const title = <HTMLElement>(
+        document.querySelector(".section__header .breadcrumb a")
+      );
       if (title) {
-        data.state = title.innerText
+        data.state = title.innerText;
       }
     }
-
-  } 
-  else if (route.startsWith('/faq')) 
-  {
-    const querySection = query.split('&')[0]
-    const section = querySection.slice((querySection.length - 1))
-    const categories = Array.from(document.querySelectorAll(".faq-category-list .faq-category-item"))
-    const currentCategory = <HTMLElement>(categories.find((item, index) => index === parseInt(section) - 1));
+  } else if (route.startsWith("/faq")) {
+    const querySection = query.split("&")[0];
+    const section = querySection.slice(querySection.length - 1);
+    const categories = Array.from(
+      document.querySelectorAll(".faq-category-list .faq-category-item")
+    );
+    const currentCategory = <HTMLElement>(
+      categories.find((item, index) => index === parseInt(section) - 1)
+    );
 
     data.details = "Faq";
     data.smallImageText = "Читает";
     data.smallImageKey = "reading";
 
-    if (currentCategory) 
-    {
-      data.state = currentCategory.innerText
+    if (currentCategory) {
+      data.state = currentCategory.innerText;
     }
 
-  // News
-  } 
-  else if (route.startsWith('/news')) 
-  {
+    // News
+  } else if (route.startsWith("/news")) {
     const newsRoute = document.location.href.split("/").slice(4)[0];
-    if (newsRoute) 
-    {
+    if (newsRoute) {
       // Current News Page
-      let newsTitle = <HTMLElement>(document.querySelector(".news__title"))
+      let newsTitle = <HTMLElement>document.querySelector(".news__title");
       data.details = "Новости";
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
 
-      if (newsTitle) 
-      {
-        data.state = newsTitle.innerText
+      if (newsTitle) {
+        data.state = newsTitle.innerText;
       }
-    } else 
-    {
+    } else {
       // News List Page
       data.details = "Новости";
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
-      data.state = 'Список новостей'
+      data.state = "Список новостей";
     }
-  } 
+  }
   // Contact-US Page
-  else if (route.startsWith('/contact')) 
-  {
+  else if (route.startsWith("/contact")) {
     data.details = "Контакты";
     data.smallImageText = "Пишет";
     data.smallImageKey = "writing";
-    data.state = 'Свяжитесь с нами'
-  }
-  else 
-  {
+    data.state = "Свяжитесь с нами";
+  } else {
     let isReader = <HTMLElement>document.querySelector(".reader");
 
     // Reader mode
-    if (isReader) 
-    {
+    if (isReader) {
       const titleArray: Array<string> = document.title.split(" ");
       const mangaName = titleArray.slice(2, -4).join(" ");
 
@@ -395,9 +368,7 @@ presence.on("UpdateData", async () => {
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
       data.startTimestamp = browsingStamp;
-    } 
-    else 
-    {
+    } else {
       const title: string = document.title;
       const mangaName: string = title
         .split("/")[0]
