@@ -42,9 +42,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = document.title;
     presenceData.state = "docs.juniper.bot";
     presenceData.smallImageKey = "list"; 
-    }
-    }
-    else if(fback){
+}
+    } else if(fback){
     if (document.location.hostname == "feedback.juniper.bot"){
     presenceData.startTimestamp = browsingStamp;
     presenceData.state = "feedback.juniper.bot";  
