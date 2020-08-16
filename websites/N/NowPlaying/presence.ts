@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo-gradient-norounded",
     smallImageText: "Some hover text",
     details: document.getElementById('name').textContent,
-    state: document.getElementById('artists').textContent,
+    state: document.getElementById('artists').textContent
   };
 
   if (presenceData.details == null) {
