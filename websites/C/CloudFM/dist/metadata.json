@@ -1,23 +1,31 @@
 {
-    "author": {
-        "name": "Marino",
-        "id": "598953747963707409"
-    },
-    "contributors": [
-        {
-            "name": "lightzkin",
-            "id": "709735329321582593"
-        }
-    ],
-    "url": ["cloudfm.xyz", "www.cloudfm.xyz"],
-    "description": {
-        "en": "Welcome to CloudFM! We play the latest music in various categories."
-    },
-    "service": "CloudFM",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/RhJ2JvW.png",
-    "thumbnail": "https://i.imgur.com/2qAS8bw.png",
-    "color": "#0049db",
-    "tags": ["radio", "fun", "music", "entertainment"],
-    "category": "music"
+  "author": {
+    "name": "Marino",
+    "id": "598953747963707409"
+  },
+  "contributors": [
+    {
+      "name": "lightzkin",
+      "id": "709735329321582593"
+    }
+  ],
+  "url": [
+    "cloudfm.xyz",
+    "www.cloudfm.xyz"
+  ],
+  "description": {
+    "en": "Welcome to CloudFM! We play the latest music in various categories."
+  },
+  "service": "CloudFM",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/RhJ2JvW.png",
+  "thumbnail": "https://i.imgur.com/2qAS8bw.png",
+  "color": "#0049db",
+  "tags": [
+    "radio",
+    "fun",
+    "music",
+    "entertainment"
+  ],
+  "category": "music"
 }
