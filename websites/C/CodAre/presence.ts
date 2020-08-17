@@ -7,8 +7,8 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo"
   };
 
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  const page = window.location.pathname;
+  const browsingStamp = Math.floor(Date.now() / 1000),
+  page = window.location.pathname;
   if (page.toLowerCase() === "/") {
     presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Anasayfa";
