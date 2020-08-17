@@ -9,11 +9,15 @@
     "en": "Read webnovels anywhere and anytime.",
     "pt_BR": "Leia webnovels a qualquer momento e a qualquer hora."
   },
-  "url": "secret.novelmania.com.br",
-  "version": "1.0.0",
+  "url": "novelmania.com.br",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/qAjg3Ws.png",
   "thumbnail": "https://i.imgur.com/lxuE4zN.jpg",
   "color": "#008cff",
-  "tags": ["novel", "mania", "translator"],
+  "tags": [
+    "novel",
+    "mania",
+    "translator"
+  ],
   "category": "other"
 }
