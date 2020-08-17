@@ -72,7 +72,7 @@ presence.on("UpdateData", () => {
     presenceData.state = "Returns data of the current creative news";
   } else {
     presenceData.details = "Browsing";
-    presenceData.state = path.substring(1)
+    presenceData.state = path.substring(1);
   }
 
   presence.setActivity(presenceData);
