@@ -16,8 +16,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -25,11 +25,14 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "pvid" };
   presenceData.startTimestamp = browsingStamp;
   const title: HTMLElement = document.querySelector(
-    ".webPlayerUIContainer > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div"
-  );
+      ".webPlayerUIContainer > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div"
+    ),
+    title2: HTMLElement = document.querySelector(
+      ".av-detail-section > div > h1"
+    );
   if (document.location.pathname.includes("/home/")) {
     presenceData.details = "Browsing...";
-  } else if (title !== null) {
+  } else if (title !== null || title2 !== null) {
     let video: HTMLVideoElement = document.querySelector("video");
     if (isNaN(video.duration)) {
       video = document.querySelector("video:nth-child(2)");
@@ -62,11 +65,25 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "playing";
         presenceData.smallImageText = (await strings).playing;
       }
+    } else if (video !== null) {
+      presenceData.details = title2.textContent;
+      if (video.paused) {
+        presenceData.smallImageKey = "paused";
+        presenceData.smallImageText = (await strings).paused;
+        delete presenceData.startTimestamp;
+      } else {
+        const timestamps = getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
+        presenceData.startTimestamp = timestamps[0];
+        presenceData.endTimestamp = timestamps[1];
+        presenceData.smallImageKey = "playing";
+        presenceData.smallImageText = (await strings).playing;
+      }
     } else {
       presenceData.details = "Viewing:";
-      presenceData.state = document.querySelector(
-        ".av-detail-section > div > h1"
-      ).textContent;
+      presenceData.state = title2.textContent;
     }
   } else if (document.location.pathname.includes("/tv/")) {
     presenceData.details = "Browsing TV-Series";

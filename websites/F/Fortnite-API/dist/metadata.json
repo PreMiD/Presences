@@ -7,28 +7,20 @@
     {
       "name": "Not Officer",
       "id": "373913699943186432"
-    },
-    {
-      "name": "XxMirayxX21",
-      "id": "325605285731500033"
     }
   ],
   "service": "Fortnite-API",
   "description": {
-    "en": "A powerful API containing data of all cosmetics, daily shop, news and more!"
+    "en": "Fortnite-API.com is an unofficial API for Fortnite."
   },
-  "url": [
-    "dash.fortnite-api.com",
-    "fortnite-api.com"
-  ],
-  "version": "5.5.0",
-  "logo": "https://i.imgur.com/uhKW8e0.png",
-  "thumbnail": "https://i.imgur.com/VnUZjuQ.png",
-  "color": "#8A96E9",
+  "url": "fortnite-api.com",
+  "version": "5.4.4",
+  "logo": "https://i.imgur.com/KTfOOq2.png",
+  "thumbnail": "https://i.imgur.com/xno9CLs.png",
+  "color": "#FF91E0",
   "tags": [
     "fortnite",
-    "fortnite-api",
-    "fortniteapi"
+    "fortnite-api"
   ],
   "category": "other"
 }
