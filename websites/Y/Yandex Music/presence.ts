@@ -7,6 +7,8 @@ strings = presence.getStrings({
   pause: "presence.playback.paused"
 });
 
+let presenceData: PresenceData
+
 function getMillisecondsFromString(timeString: string) {
   const parsedText = timeString.split(":");
   return ((Number(parsedText[0]) * 60) + Number(parsedText[1])) * 1000;
@@ -16,7 +18,7 @@ function isPodcast() {
   return document.getElementsByClassName("track__podcast")[0] !== undefined
 }
 
-presence.on("UpdateData", async () => {
+let getData = () => {
   let title = (document.getElementsByClassName("track__title")[0] as HTMLElement).innerText,
     progress = (document.getElementsByClassName("progress__left")[0] as HTMLElement).innerText,
     trackLength = (document.getElementsByClassName("progress__right")[0] as HTMLElement).innerText,
@@ -31,21 +33,31 @@ presence.on("UpdateData", async () => {
     artists = (document.getElementsByClassName("track__artists")[0] as HTMLElement).innerText
   }
 
-  let presenceData: PresenceData = {
-      largeImageKey: "og-image",
-      smallImageKey: playing ? 'play' : 'pause',
-      smallImageText: playing ? (await strings).playing : (await strings).pause,
-      details: title,
-      state: artists,
-      startTimestamp: startedAt,
-      endTimestamp: endAt
+  presenceData = {
+    largeImageKey: "og-image",
+    smallImageKey: playing ? 'play' : 'pause',
+    //smallImageText: playing ? (await strings).playing : (await strings).pause,
+    details: title,
+    state: artists,
+    startTimestamp: startedAt,
+    endTimestamp: endAt
   };
 
-  if (title == "") {
-      presence.setTrayTitle(); //Clears the tray title for mac users
-      presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
+  if(!playing) {
+    delete presenceData.startTimestamp
+    delete presenceData.endTimestamp
+  }
+}
+
+setInterval(getData, 1000)
+
+presence.on("UpdateData", () => {
+  let title = document.getElementsByClassName("track__title")
+
+  if (title.length != 0) {
+    presence.setActivity(presenceData)
   } else {
-      //This will fire if you set presence details
-      presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
+    presence.setTrayTitle(); //Clears the tray title for mac users
+    presence.setActivity();
   }
 });
