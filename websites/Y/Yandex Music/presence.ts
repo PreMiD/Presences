@@ -7,36 +7,36 @@ strings = presence.getStrings({
   pause: "presence.playback.paused"
 });
 
-let presenceData: PresenceData
+let presenceData: PresenceData;
 
-function getMillisecondsFromString(timeString: string) {
+function getMillisecondsFromString(timeString: string): number {
   const parsedText = timeString.split(":");
   return ((Number(parsedText[0]) * 60) + Number(parsedText[1])) * 1000;
 }
 
-function isPodcast() {
+function isPodcast(): boolean {
   return document.getElementsByClassName("track__podcast")[0] !== undefined
 }
 
-let getData = () => {
-  let title = (document.getElementsByClassName("track__title")[0] as HTMLElement).innerText,
+const getData = async (): Promise<void> => {
+  const title = (document.getElementsByClassName("track__title")[0] as HTMLElement).innerText,
     progress = (document.getElementsByClassName("progress__left")[0] as HTMLElement).innerText,
     trackLength = (document.getElementsByClassName("progress__right")[0] as HTMLElement).innerText,
     startedAt = Date.now() - getMillisecondsFromString(progress),
     endAt = startedAt + getMillisecondsFromString(trackLength),
-    playing = document.getElementsByClassName("player-controls__btn_pause").length == 2,
-    artists
+    playing = document.getElementsByClassName("player-controls__btn_pause").length == 2;
 
+  let artists;
   if(isPodcast()) {
-    artists = (document.getElementsByClassName("track__podcast")[0] as HTMLElement).innerText
+    artists = (document.getElementsByClassName("track__podcast")[0] as HTMLElement).innerText;
   } else {
-    artists = (document.getElementsByClassName("track__artists")[0] as HTMLElement).innerText
+    artists = (document.getElementsByClassName("track__artists")[0] as HTMLElement).innerText;
   }
 
   presenceData = {
     largeImageKey: "og-image",
     smallImageKey: playing ? 'play' : 'pause',
-    //smallImageText: playing ? (await strings).playing : (await strings).pause,
+    smallImageText: playing ? (await strings).playing : (await strings).pause,
     details: title,
     state: artists,
     startTimestamp: startedAt,
@@ -44,20 +44,20 @@ let getData = () => {
   };
 
   if(!playing) {
-    delete presenceData.startTimestamp
-    delete presenceData.endTimestamp
+    delete presenceData.startTimestamp;
+    delete presenceData.endTimestamp;
   }
 }
 
-setInterval(getData, 1000)
+setInterval(getData, 1000);
 
 presence.on("UpdateData", () => {
-  let title = document.getElementsByClassName("track__title")
+  const title = document.getElementsByClassName("track__title");
 
   if (title.length != 0) {
-    presence.setActivity(presenceData)
+    presence.setActivity(presenceData);
   } else {
-    presence.setTrayTitle(); //Clears the tray title for mac users
+    presence.setTrayTitle();
     presence.setActivity();
   }
 });

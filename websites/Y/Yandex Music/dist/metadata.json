@@ -10,6 +10,7 @@
     "en":"Yandex streaming service that allows you to listen to music tracks, albums, and collections of music tracks and get personal recommendations."
   },
   "service":"Yandex Music",
+  "version": "1.0.0",
   "logo":"https://music.yandex.ru/blocks/meta/i/og-image.png",
   "thumbnail":"https://music.yandex.com/pages/main/i/og/home_com.png",
   "color":"#FDCD01",
