@@ -15,7 +15,7 @@ function getMillisecondsFromString(timeString: string): number {
 }
 
 function isPodcast(): boolean {
-  return document.getElementsByClassName("track__podcast")[0] !== undefined
+  return document.getElementsByClassName("track__podcast")[0] !== undefined;
 }
 
 const getData = async (): Promise<void> => {
@@ -47,7 +47,7 @@ const getData = async (): Promise<void> => {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }
-}
+};
 
 setInterval(getData, 1000);
 
