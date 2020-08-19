@@ -2,17 +2,14 @@ const presence = new Presence({
   clientId: "745570917823807519"
 });
 
-function translate(is_male: boolean) {
-  const refferGender = (arr: Array<string>) => (is_male ? arr[0] : arr[1]);
-  const reporting: string = refferGender(["מדווח", "מדווחת"]);
-  const removingQuestion: string = refferGender(["מוחק שאלה", "מוחקת שאלה"]);
-  const removingPenfriends: string = refferGender([
-    "מוחק מסר בחברים לעט",
-    "מוחקת מסר בחברים לעט"
-  ]);
-  const removingAnswer: string = refferGender(["מוחק תשובה", "מוחקת תשובה"]);
-  const editingQuestion: string = refferGender(["עורך שאלה", "עורכת שאלה"]);
-  const editingAnswer: string = refferGender(["עורך תשובה", "עורכת תשובה"]);
+function translate(is_male: boolean): object {
+  const refferGender = (arr: Array<string>): string => (is_male ? arr[0] : arr[1]),
+    reporting: string = refferGender(["מדווח", "מדווחת"]),
+    removingQuestion: string = refferGender(["מוחק שאלה", "מוחקת שאלה"]),
+    removingPenfriends: string = refferGender(["מוחק מסר בחברים לעט", "מוחקת מסר בחברים לעט"]),
+    removingAnswer: string = refferGender(["מוחק תשובה", "מוחקת תשובה"]),
+    editingQuestion: string = refferGender(["עורך שאלה", "עורכת שאלה"]),
+    editingAnswer: string = refferGender(["עורך תשובה", "עורכת תשובה"]);
 
   return {
     default: refferGender(["גולש בסטיפס", "גולשת בסטיפס"]),
@@ -102,16 +99,14 @@ function translate(is_male: boolean) {
   };
 }
 
-function elemExists(query: string) {
+function elemExists(query: string): boolean {
   return document.querySelector(query) ? true : false;
 }
 
 
 
-var elapsed: number, oldUrl: string, lastAction: string, action: string;
-var is_male = true;
+let elapsed: number, oldUrl: string, lastAction: string, action: string, is_male = true;
 const has_dark: boolean = elemExists('#darkmode');
-var data: PresenceData;
 
 // get gender
 fetch("https://stips.co.il/api?name=user.get_app_user").then((resp) =>
@@ -123,16 +118,26 @@ fetch("https://stips.co.il/api?name=user.get_app_user").then((resp) =>
 
 // main loop
 presence.on("UpdateData", () => {
-  var details = undefined, state = undefined;
-  var Path = window.location.pathname;
-  var PathMain: string = Path.split('/')[1];
-  var PathSecond: string = Path.split('/')[2];
-  var isReport = false,
+  let Path = window.location.pathname,
+    PathMain: string = Path.split('/')[1],
+    PathSecond: string = Path.split('/')[2],
+    state = undefined,
+    details = undefined,
+    isReport = false,
     isDelete = false,
     isAns = true,
     isEdit = false,
     isWrite = false;
-  var askObj, xplrObj, cnlObj, msgObj, pflObj, repObj, tpcObj, pstObj, penfObj;
+  let askObj,
+    xplrObj,
+    cnlObj,
+    msgObj,
+    pflObj,
+    repObj,
+    tpcObj,
+    pstObj,
+    penfObj;
+  
   if (PathMain === "") PathMain = "/";
   if (!PathSecond) PathSecond = "/";
 
@@ -192,7 +197,7 @@ presence.on("UpdateData", () => {
             case 'me': details = xplrObj.me.main; break;
             default: details = xplrObj.unknown;
           }
-        };
+        }
       }
 
       action = `${Path} & ${details}`;
@@ -233,7 +238,7 @@ presence.on("UpdateData", () => {
       isEdit = elemExists(".edit-view");
 
       if (isDelete) {
-        var _ans = 'תשובה';  // looks weird on the editor if hebrew on the same line
+        let _ans = 'תשובה';  // looks weird on the editor if hebrew on the same line
         isAns = document.querySelector("app-item-editor-delete .text-title").textContent.indexOf(_ans) !== -1;
       } 
       if (isEdit) isAns = elemExists(".edit-view + mat-card.item-type-ans");
@@ -252,7 +257,7 @@ presence.on("UpdateData", () => {
     case "settings":
       details = translate(is_male).settings.main;
       action = Path;
-      break
+      break;
     case "topic":
       isReport = elemExists("app-report-send");
       isDelete = elemExists("app-item-editor-delete");
@@ -299,7 +304,7 @@ presence.on("UpdateData", () => {
       }
 
       action = `${Path} & ${details}`;
-      break
+      break;
     case "post":
       pstObj = translate(is_male).post;
       if (PathSecond === 'ask') {
@@ -309,10 +314,9 @@ presence.on("UpdateData", () => {
       break;
     }
 
-  var smallImageText = location.host + decodeURI(location.pathname.split('/').length === 4 ? location.pathname.replace('/'+location.pathname.split('/').pop(), '') : (location.pathname === '/' ? "" : location.pathname));
+  let smallImageText = location.host + decodeURI(location.pathname.split('/').length === 4 ? location.pathname.replace('/'+location.pathname.split('/').pop(), '') : (location.pathname === '/' ? "" : location.pathname));
 
-
-  data = {
+  let data: PresenceData = {
     details: details || translate(is_male).default,
     state: state,
     largeImageKey: "stips",
