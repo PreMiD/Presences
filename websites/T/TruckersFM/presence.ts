@@ -17,11 +17,11 @@ presence.on("UpdateData", () => {
   };
 
   let stateText = "";
-    if(liveTill) {
-       stateText = `${dj} till ${liveTime}`;
-    } else {
-       stateText = `${dj}`;
-    }
+  if (liveTill) {
+    stateText = `${dj} till ${liveTime}`;
+  } else {
+    stateText = `${dj}`;
+  }
 
   presenceData.details = `${title}`;
   presenceData.state = `${stateText}`;
