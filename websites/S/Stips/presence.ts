@@ -310,9 +310,8 @@ presence.on("UpdateData", () => {
       break;
     }
 
-  const smallImageText = location.host + decodeURI(location.pathname.split('/').length === 4 ? location.pathname.replace('/'+location.pathname.split('/').pop(), '') : (location.pathname === '/' ? "" : location.pathname));
-
-  const data: PresenceData = {
+  const smallImageText = location.host + decodeURI(location.pathname.split('/').length === 4 ? location.pathname.replace('/'+location.pathname.split('/').pop(), '') : (location.pathname === '/' ? "" : location.pathname)),
+    data: PresenceData = {
       details: details || translate(is_male).default,
       state: undefined,
       largeImageKey: "stips",
