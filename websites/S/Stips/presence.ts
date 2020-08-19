@@ -103,8 +103,6 @@ function elemExists(query: string): boolean {
   return document.querySelector(query) ? true : false;
 }
 
-
-
 let elapsed: number, oldUrl: string, lastAction: string, action: string, is_male = true;
 const has_dark: boolean = elemExists('#darkmode');
 
@@ -118,17 +116,16 @@ fetch("https://stips.co.il/api?name=user.get_app_user").then((resp) =>
 
 // main loop
 presence.on("UpdateData", () => {
-  let Path = window.location.pathname,
-    PathMain: string = Path.split('/')[1],
+  const Path = window.location.pathname;
+  let PathMain: string = Path.split('/')[1],
     PathSecond: string = Path.split('/')[2],
-    state = undefined,
     details = undefined,
     isReport = false,
     isDelete = false,
     isAns = true,
     isEdit = false,
-    isWrite = false;
-  let askObj,
+    isWrite = false,
+    askObj,
     xplrObj,
     cnlObj,
     msgObj,
@@ -238,8 +235,7 @@ presence.on("UpdateData", () => {
       isEdit = elemExists(".edit-view");
 
       if (isDelete) {
-        let _ans = 'תשובה';  // looks weird on the editor if hebrew on the same line
-        isAns = document.querySelector("app-item-editor-delete .text-title").textContent.indexOf(_ans) !== -1;
+        isAns = document.querySelector("app-item-editor-delete .text-title").textContent.indexOf('תשובה') !== -1;
       } 
       if (isEdit) isAns = elemExists(".edit-view + mat-card.item-type-ans");
 
@@ -314,16 +310,16 @@ presence.on("UpdateData", () => {
       break;
     }
 
-  let smallImageText = location.host + decodeURI(location.pathname.split('/').length === 4 ? location.pathname.replace('/'+location.pathname.split('/').pop(), '') : (location.pathname === '/' ? "" : location.pathname));
+  const smallImageText = location.host + decodeURI(location.pathname.split('/').length === 4 ? location.pathname.replace('/'+location.pathname.split('/').pop(), '') : (location.pathname === '/' ? "" : location.pathname));
 
-  let data: PresenceData = {
-    details: details || translate(is_male).default,
-    state: state,
-    largeImageKey: "stips",
-    smallImageKey: has_dark ? "stipspin_dark" : "stipspin_light",
-    startTimestamp: elapsed,
-    smallImageText: smallImageText
-  };
+  const data: PresenceData = {
+      details: details || translate(is_male).default,
+      state: undefined,
+      largeImageKey: "stips",
+      smallImageKey: has_dark ? "stipspin_dark" : "stipspin_light",
+      startTimestamp: elapsed,
+      smallImageText: smallImageText
+    };
 
   presence.setActivity(data);
 });
