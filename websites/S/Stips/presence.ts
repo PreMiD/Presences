@@ -3,8 +3,6 @@ const presence = new Presence({
 });
 
 function translate(is_male: boolean) {
-  // TODO: make refferGender automatic
-
   const refferGender = (arr: Array<string>) => (is_male ? arr[0] : arr[1]);
   const reporting: string = refferGender(["מדווח", "מדווחת"]);
   const removingQuestion: string = refferGender(["מוחק שאלה", "מוחקת שאלה"]);
@@ -111,8 +109,9 @@ function elemExists(query: string) {
 
 
 var elapsed: number, oldUrl: string, lastAction: string, action: string;
-var is_male: boolean = true;
-var has_dark: boolean = elemExists('#darkmode');
+var is_male = true;
+const has_dark: boolean = elemExists('#darkmode');
+var data: PresenceData;
 
 // get gender
 fetch("https://stips.co.il/api?name=user.get_app_user").then((resp) =>
@@ -133,6 +132,7 @@ presence.on("UpdateData", () => {
     isAns = true,
     isEdit = false,
     isWrite = false;
+  var askObj, xplrObj, cnlObj, msgObj, pflObj, repObj, tpcObj, pstObj, penfObj;
   if (PathMain === "") PathMain = "/";
   if (!PathSecond) PathSecond = "/";
 
@@ -147,7 +147,7 @@ presence.on("UpdateData", () => {
     case "/":
       details = translate(is_male)["/"].main;
       action = `${Path} & ${details}`;
-      break
+      break;
     case "ask":
       // get elements info
       isReport = elemExists("app-report-send");
@@ -158,7 +158,7 @@ presence.on("UpdateData", () => {
       if (isEdit) isAns = elemExists(".list-single-item .edit-view");
 
       // set state text
-      var askObj = translate(is_male).ask;
+      askObj = translate(is_male).ask;
       if (isReport) details = askObj.report;
       if (isDelete) details = isAns ? askObj.removeAns : askObj.removeAsk;
       if (isEdit) details = isAns ? askObj.editAns : askObj.editAsk;
@@ -169,13 +169,13 @@ presence.on("UpdateData", () => {
       }
       
       action = `${Path} & ${details}`;
-      break
+      break;
     case "explore":
       isReport = elemExists("app-report-send");
       isDelete = elemExists("app-item-editor-delete");
       isEdit = elemExists(".edit-view");
 
-      var xplrObj = translate(is_male).explore;
+      xplrObj = translate(is_male).explore;
 
       // if any of the bools apply, we don't care about the second path
       if (isReport) details = xplrObj["/"].report;
@@ -196,13 +196,13 @@ presence.on("UpdateData", () => {
       }
 
       action = `${Path} & ${details}`;
-      break
+      break;
     case "channel":
       isReport = elemExists("app-report-send");
       isDelete = elemExists("app-item-editor-delete");
       isEdit = elemExists(".edit-view");
 
-      var cnlObj = translate(is_male).channel
+      cnlObj = translate(is_male).channel;
       
       if (isReport) details = cnlObj.report;
       if (isDelete) details = cnlObj.remove;
@@ -215,31 +215,31 @@ presence.on("UpdateData", () => {
       }
 
       action = `${Path} & ${details}`;
-      break
+      break;
     case "pen-friends":
       isDelete = elemExists("app-item-editor-delete");
       isWrite = elemExists(".active app-add-item-form");
 
-      var penfObj = translate(is_male)["pen-friends"];
+      penfObj = translate(is_male)["pen-friends"];
       if (isDelete) details = penfObj.remove;
       if (isWrite) details = penfObj.write;
       if (!details) details = penfObj.main;
 
       action = `${Path} & ${details}`;
-      break
+      break;
     case "reports":
       // get elements info
       isDelete = elemExists("app-item-editor-delete");
       isEdit = elemExists(".edit-view");
 
       if (isDelete) {
-        var _ans = 'תשובה'  // looks weird on the editor if hebrew on the same line
+        var _ans = 'תשובה';  // looks weird on the editor if hebrew on the same line
         isAns = document.querySelector("app-item-editor-delete .text-title").textContent.indexOf(_ans) !== -1;
       } 
       if (isEdit) isAns = elemExists(".edit-view + mat-card.item-type-ans");
 
       // set state text
-      var repObj = translate(is_male).reports;
+      repObj = translate(is_male).reports;
       if (isDelete) details = isAns ? repObj.removeAns : repObj.removeAsk;
       if (isEdit) details = isAns ? repObj.editAns : repObj.editAsk;
 
@@ -248,7 +248,7 @@ presence.on("UpdateData", () => {
       }
 
       action = `${Path} & ${details}`;
-      break
+      break;
     case "settings":
       details = translate(is_male).settings.main;
       action = Path;
@@ -258,7 +258,7 @@ presence.on("UpdateData", () => {
       isDelete = elemExists("app-item-editor-delete");
       isEdit = elemExists(".edit-view");
 
-      var tpcObj = translate(is_male).topic
+      tpcObj = translate(is_male).topic;
       
       if (isReport) details = tpcObj.report;
       if (isDelete) details = tpcObj.remove;
@@ -269,11 +269,11 @@ presence.on("UpdateData", () => {
       }
 
       action = `${Path} & ${details}`;
-      break
+      break;
     case "profile":
       isDelete = elemExists("app-item-editor-delete");
 
-      var pflObj = translate(is_male).profile
+      pflObj = translate(is_male).profile;
 
       if (isDelete) details = pflObj.remove;
       
@@ -282,40 +282,39 @@ presence.on("UpdateData", () => {
       }
 
       action = `${Path} & ${details}`;
-      break
+      break;
     case "notifications":
       details = translate(is_male).notifications.main;
       action = Path;
-      break
+      break;
     case "messages":
-      var msgObj = translate(is_male).messages;
+      msgObj = translate(is_male).messages;
 
       if (PathSecond === '/') {
         details = elemExists('app-contacts') ? msgObj["/"].additionalPage: msgObj["/"].main;
       } else {
           details = elemExists('.user-nickname') ?
            msgObj.any.main.replace('%nickname%', document.querySelector('.user-nickname').textContent) :
-            msgObj["/"].main  // invalid <user-id> in path
+            msgObj["/"].main;  // invalid <user-id> in path
       }
 
       action = `${Path} & ${details}`;
       break
     case "post":
-      var pstObj = translate(is_male).post;
+      pstObj = translate(is_male).post;
       if (PathSecond === 'ask') {
         details = pstObj.ask.main;
       }
       action = `${Path} & ${details}`;
-      break
+      break;
     }
 
-  // uh.. well.. it works.. (╯°□°）╯︵ ┻━┻
   var smallImageText = location.host + decodeURI(location.pathname.split('/').length === 4 ? location.pathname.replace('/'+location.pathname.split('/').pop(), '') : (location.pathname === '/' ? "" : location.pathname));
 
 
-  var data: PresenceData = {
+  data = {
     details: details || translate(is_male).default,
-    state: state || Path,
+    state: state,
     largeImageKey: "stips",
     smallImageKey: has_dark ? "stipspin_dark" : "stipspin_light",
     startTimestamp: elapsed,
