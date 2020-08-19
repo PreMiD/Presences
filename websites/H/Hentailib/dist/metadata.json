@@ -9,10 +9,17 @@
     "en": "Website for reading hentai manga in Russian"
   },
   "url": "hentailib.me",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/LrbkRvj.png",
   "thumbnail": "https://i.imgur.com/1lXZCVd.png",
   "color": "#ff0048",
-  "tags": ["manga", "hentai", "nsfw", "hentailib", "read", "anime"],
+  "tags": [
+    "manga",
+    "hentai",
+    "nsfw",
+    "hentailib",
+    "read",
+    "anime"
+  ],
   "category": "other"
 }
