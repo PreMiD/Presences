@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "738522217221980222"
-});
+}),
+  time = Math.floor(Date.now() / 1000);
 
-let time = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "nm",
@@ -15,9 +15,9 @@ presence.on("UpdateData", async () => {
     ChapNumber: HTMLElement = document.querySelector("#chapter-content > h2"),
     notice: HTMLElement = document.querySelector("body > div:nth-child(2) > main > section > div.novel-head.pt-3 > div > div > div.col-md-12.text-center > div > h1"),
     PagTitle: HTMLElement = document.querySelector("body > div > main > section.navbar-novel > div > div > div > div > h2"),
-    favoritar:any = document.querySelector("body > div:nth-child(2) > main > section > div.novel-head.pt-3 > div > div > div.col-md-8 > div > div.w-100 > a") || document.querySelector("body > div:nth-child(2) > main > section > div.novel-head.pt-3 > div > div > div.col-md-8 > div > div.w-100 > a.btn.btn-dark.mb-2"),
-    trad_orig: any = document.querySelector("#translate-tab.active") || document.querySelector("#original-cap.active.show");
-    
+    favoritar: HTMLElement = document.querySelector("body > div:nth-child(2) > main > section > div.novel-head.pt-3 > div > div > div.col-md-8 > div > div.w-100 > a") || document.querySelector("body > div:nth-child(2) > main > section > div.novel-head.pt-3 > div > div > div.col-md-8 > div > div.w-100 > a.btn.btn-dark.mb-2"),
+    trad_orig: HTMLElement = document.querySelector("#translate-tab.active") || document.querySelector("#original-cap.active.show");
+
   if (path == "/" || !path) {
     if (document.body.contains(trad_orig)) {
       presenceData.details = "Na página inicial"; /* Home */
@@ -42,10 +42,9 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = time;
       }
   } else if (path.indexOf("/u/") === 0) {
-    const perf: any = document.querySelector("body > div > main > section.profile-top > div > div > div > div.col-sm-8.col-md-9.d-flex.align-items-center > div > ul > li.admin-name > h5"),
-          lv: any = document.querySelector("body > div > main > section.profile-top > div > div > div > div.col-sm-8.col-md-9.d-flex.align-items-center > div > ul > li.admin-name > h5 > span");
-    presenceData.details = "Vendo o perfil de:"; /* reading */
-    presenceData.state = perf.innerText + " usuário " + lv.innerText;
+    const perf: HTMLElement = document.querySelector("body > div > main > section.profile-top > div > div > div > div.col-sm-8.col-md-9.d-flex.align-items-center > div > ul > li.admin-name > h5");
+    presenceData.details = "Vendo o perfil de:"; /* Seeing the * user profile */
+    presenceData.state = perf.innerText;
     presenceData.startTimestamp = time;
   } else if (
     path.includes("/editoria") ||
