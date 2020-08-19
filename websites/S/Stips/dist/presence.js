@@ -2,7 +2,6 @@ var presence = new Presence({
     clientId: "745570917823807519"
 });
 function translate(is_male) {
-    // TODO: make refferGender automatic
     var refferGender = function (arr) { return (is_male ? arr[0] : arr[1]); };
     var reporting = refferGender(["מדווח", "מדווחת"]);
     var removingQuestion = refferGender(["מוחק שאלה", "מוחקת שאלה"]);
@@ -106,6 +105,7 @@ function elemExists(query) {
 var elapsed, oldUrl, lastAction, action;
 var is_male = true;
 var has_dark = elemExists('#darkmode');
+var data;
 // get gender
 fetch("https://stips.co.il/api?name=user.get_app_user").then(function (resp) {
     return resp.json().then(function (json) {
@@ -123,6 +123,7 @@ presence.on("UpdateData", function () {
     var PathMain = Path.split('/')[1];
     var PathSecond = Path.split('/')[2];
     var isReport = false, isDelete = false, isAns = true, isEdit = false, isWrite = false;
+    var askObj, xplrObj, cnlObj, msgObj, pflObj, repObj, tpcObj, pstObj, penfObj;
     if (PathMain === "")
         PathMain = "/";
     if (!PathSecond)
@@ -149,7 +150,7 @@ presence.on("UpdateData", function () {
             if (isEdit)
                 isAns = elemExists(".list-single-item .edit-view");
             // set state text
-            var askObj = translate(is_male).ask;
+            askObj = translate(is_male).ask;
             if (isReport)
                 details = askObj.report;
             if (isDelete)
@@ -167,7 +168,7 @@ presence.on("UpdateData", function () {
             isReport = elemExists("app-report-send");
             isDelete = elemExists("app-item-editor-delete");
             isEdit = elemExists(".edit-view");
-            var xplrObj = translate(is_male).explore;
+            xplrObj = translate(is_male).explore;
             // if any of the bools apply, we don't care about the second path
             if (isReport)
                 details = xplrObj["/"].report;
@@ -200,7 +201,7 @@ presence.on("UpdateData", function () {
             isReport = elemExists("app-report-send");
             isDelete = elemExists("app-item-editor-delete");
             isEdit = elemExists(".edit-view");
-            var cnlObj = translate(is_male).channel;
+            cnlObj = translate(is_male).channel;
             if (isReport)
                 details = cnlObj.report;
             if (isDelete)
@@ -217,7 +218,7 @@ presence.on("UpdateData", function () {
         case "pen-friends":
             isDelete = elemExists("app-item-editor-delete");
             isWrite = elemExists(".active app-add-item-form");
-            var penfObj = translate(is_male)["pen-friends"];
+            penfObj = translate(is_male)["pen-friends"];
             if (isDelete)
                 details = penfObj.remove;
             if (isWrite)
@@ -237,7 +238,7 @@ presence.on("UpdateData", function () {
             if (isEdit)
                 isAns = elemExists(".edit-view + mat-card.item-type-ans");
             // set state text
-            var repObj = translate(is_male).reports;
+            repObj = translate(is_male).reports;
             if (isDelete)
                 details = isAns ? repObj.removeAns : repObj.removeAsk;
             if (isEdit)
@@ -255,7 +256,7 @@ presence.on("UpdateData", function () {
             isReport = elemExists("app-report-send");
             isDelete = elemExists("app-item-editor-delete");
             isEdit = elemExists(".edit-view");
-            var tpcObj = translate(is_male).topic;
+            tpcObj = translate(is_male).topic;
             if (isReport)
                 details = tpcObj.report;
             if (isDelete)
@@ -269,7 +270,7 @@ presence.on("UpdateData", function () {
             break;
         case "profile":
             isDelete = elemExists("app-item-editor-delete");
-            var pflObj = translate(is_male).profile;
+            pflObj = translate(is_male).profile;
             if (isDelete)
                 details = pflObj.remove;
             if (!details) {
@@ -282,7 +283,7 @@ presence.on("UpdateData", function () {
             action = Path;
             break;
         case "messages":
-            var msgObj = translate(is_male).messages;
+            msgObj = translate(is_male).messages;
             if (PathSecond === '/') {
                 details = elemExists('app-contacts') ? msgObj["/"].additionalPage : msgObj["/"].main;
             }
@@ -294,16 +295,15 @@ presence.on("UpdateData", function () {
             action = Path + " & " + details;
             break;
         case "post":
-            var pstObj = translate(is_male).post;
+            pstObj = translate(is_male).post;
             if (PathSecond === 'ask') {
                 details = pstObj.ask.main;
             }
             action = Path + " & " + details;
             break;
     }
-    // uh.. well.. it works.. (╯°□°）╯︵ ┻━┻
     var smallImageText = location.host + decodeURI(location.pathname.split('/').length === 4 ? location.pathname.replace('/' + location.pathname.split('/').pop(), '') : (location.pathname === '/' ? "" : location.pathname));
-    var data = {
+    data = {
         details: details || translate(is_male)["default"],
         state: state,
         largeImageKey: "stips",
