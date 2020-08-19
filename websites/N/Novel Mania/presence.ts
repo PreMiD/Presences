@@ -17,7 +17,6 @@ presence.on("UpdateData", async () => {
     PagTitle: HTMLElement = document.querySelector("body > div > main > section.navbar-novel > div > div > div > div > h2"),
     favoritar: HTMLElement = document.querySelector("body > div:nth-child(2) > main > section > div.novel-head.pt-3 > div > div > div.col-md-8 > div > div.w-100 > a") || document.querySelector("body > div:nth-child(2) > main > section > div.novel-head.pt-3 > div > div > div.col-md-8 > div > div.w-100 > a.btn.btn-dark.mb-2"),
     trad_orig: HTMLElement = document.querySelector("#translate-tab.active") || document.querySelector("#original-cap.active.show");
-
   if (path == "/" || !path) {
     if (document.body.contains(trad_orig)) {
       presenceData.details = "Na página inicial"; /* Home */
