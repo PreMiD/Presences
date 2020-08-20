@@ -31,9 +31,9 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo",
     smallImageKey: "dualfm-play-v2"
   };
-  const changedetails = await presence.getSetting("changedetails");
-  const changestate = await presence.getSetting("changestate");
-  const changesmalltext = await presence.getSetting("changesmalltext");
+  const changedetails = await presence.getSetting("changedetails"),
+  		changestate = await presence.getSetting("changestate"),
+  		changesmalltext = await presence.getSetting("changesmalltext");
 
     if (lastTitle != sname) {
       lastTitle = sname;
