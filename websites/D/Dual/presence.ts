@@ -23,8 +23,8 @@ function updateMetaData(): void {
 setInterval(updateMetaData, 10000);
 window.onload = function(): void {updateMetaData()};
 
-let lastTitle;
-let lastTimeStart = Math.floor(Date.now() / 1000);
+let lastTitle,
+	lastTimeStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
