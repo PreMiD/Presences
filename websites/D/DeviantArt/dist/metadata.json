@@ -18,11 +18,18 @@
     "deviantartads.com",
     "sta.sh"
   ],
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/6ZCPjDK.png",
   "thumbnail": "https://i.imgur.com/zW8OMC7.png",
   "color": "#05cc47",
-  "tags": ["art", "fandom", "drawing", "creative", "literature", "deviation"],
+  "tags": [
+    "art",
+    "fandom",
+    "drawing",
+    "creative",
+    "literature",
+    "deviation"
+  ],
   "description": {
     "en": "Founded in August 2000, DeviantArt is the largest online social network for artists and art enthusiasts, and a platform for emerging and established artists to exhibit, promote, and share their works with an enthusiastic, art-centric community."
   },
