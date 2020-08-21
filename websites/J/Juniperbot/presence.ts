@@ -4,9 +4,9 @@ const
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {largeImageKey: "logo"},
-    juniper: boolean = await presence.getSetting("juniper"),
-    docs: boolean = await presence.getSetting("docs"),
-    fback: boolean = await presence.getSetting("fback");
+    juniper: boolean = await presence.getSetting("juniper") || true,
+    docs: boolean = await presence.getSetting("docs") || true,
+    fback: boolean = await presence.getSetting("fback") || true;
 
   if (document.location.hostname == "juniper.bot") {
     if(juniper){
