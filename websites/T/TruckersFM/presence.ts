@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "640914619082211338"
 });
 
-var title: any, dj: any, liveTill: any, pageName: any, stateText: any, time: any; 
+let title: any, dj: any, liveTill: any, pageName: any, stateText: any, time: any; 
 
 presence.on("UpdateData", () => {
   title = `${
