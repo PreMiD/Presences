@@ -7,9 +7,9 @@ let elapsed: number, oldUrl: string;
 
 // main loop
 presence.on("UpdateData", () => {
-  let Location: string = window.location.href,
-    Path: string = window.location.pathname,
-    details: string,
+  const Location: string = window.location.href,
+    Path: string = window.location.pathname;
+  let details: string,
     state: string,
     smallImageKey: string;
 
@@ -61,7 +61,6 @@ presence.on("UpdateData", () => {
     }
   }
   
-
   const data: PresenceData = {
     details: details,
     state: state,
