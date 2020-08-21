@@ -2,7 +2,6 @@ const presence = new Presence({
   clientId: "746268475718238328"
 });
 
-
 let elapsed: number, oldUrl: string;
 
 // main loop
