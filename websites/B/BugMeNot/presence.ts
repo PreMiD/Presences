@@ -7,13 +7,13 @@ let elapsed: number, oldUrl: string;
 
 // main loop
 presence.on("UpdateData", () => {
-  // detect url changes
   let Location: string = window.location.href,
     Path: string = window.location.pathname,
     details: string,
     state: string,
     smallImageKey: string;
 
+  // detect url changes
   if (Location !== oldUrl) {
     oldUrl = window.location.href;
     elapsed = Math.floor(Date.now() / 1000);
