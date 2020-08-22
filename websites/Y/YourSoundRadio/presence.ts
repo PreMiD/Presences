@@ -7,7 +7,6 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo",
     details: 'Give your Station an Identity'
   };
-  
   if (document.location.pathname.includes("/index.php/submit-ticket/")) {
     presenceData.state = "Creating Ticket";
     presenceData.smallImageKey = "writing";
@@ -20,10 +19,7 @@ presence.on("UpdateData", async () => {
   } else {
     presenceData.state = "Browsing the homepage";
     presenceData.smallImageKey = "reading";
-
   }
-    
-
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
