@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "736516965748834336"
-}),
+    clientId: "736516965748834336"
+  }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
@@ -45,7 +45,16 @@ presence.on("UpdateData", async () => {
           break;
         case 3:
           presenceData.details = "Looking at a path";
-          presenceData.state = `"${document.querySelector("[class^=goalHeader__]") ? document.querySelector("main h1").textContent.slice(document.querySelector("[class^=goalHeader__]").textContent.length) : document.querySelector("main h1").textContent}"`;
+          presenceData.state = `"${
+            document.querySelector("[class^=goalHeader__]")
+              ? document
+                  .querySelector("main h1")
+                  .textContent.slice(
+                    document.querySelector("[class^=goalHeader__]").textContent
+                      .length
+                  )
+              : document.querySelector("main h1").textContent
+          }"`;
           break;
         case 4:
           presenceData.details = "Looking at a course module";
@@ -59,7 +68,14 @@ presence.on("UpdateData", async () => {
       heading = heading.textContent;
       if (pathArray[0] === "courses") {
         if (heading.startsWith("Learn ")) {
-          presenceData.smallImageKey = heading.split(" ").slice(1).join(" ").toLowerCase().replace(" ", "_").replace("+", "plus").replace("#", "sharp");
+          presenceData.smallImageKey = heading
+            .split(" ")
+            .slice(1)
+            .join(" ")
+            .toLowerCase()
+            .replace(" ", "_")
+            .replace("+", "plus")
+            .replace("#", "sharp");
           presenceData.smallImageText = heading.split(" ").slice(1).join(" ");
         }
       }
@@ -68,8 +84,12 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Watching a video";
         presenceData.state = videoTitle;
         presenceData.smallImageKey = videoPaused ? "pause" : "play";
-        presenceData.smallImageText = videoPaused ? (await strings).pause : (await strings).play;
-        if (videoDuration && !videoPaused) presenceData.endTimestamp = Date.now() + ((videoDuration - videoCurrentTime) * 1000);
+        presenceData.smallImageText = videoPaused
+          ? (await strings).pause
+          : (await strings).play;
+        if (videoDuration && !videoPaused)
+          presenceData.endTimestamp =
+            Date.now() + (videoDuration - videoCurrentTime) * 1000;
       } else {
         presenceData.startTimestamp = start;
         const bodyHeading = document.querySelector("[class^=contentItemTitle__]"),
@@ -94,13 +114,24 @@ presence.on("UpdateData", async () => {
       break;
     case "catalog":
       if (pathArray[1] === "language") {
-        presenceData.details = `Looking at ${document.querySelector("#catalog-heading").textContent}`;
+        presenceData.details = `Looking at ${
+          document.querySelector("#catalog-heading").textContent
+        }`;
         presenceData.state = "in the catalog";
-        presenceData.smallImageKey = document.querySelector("#catalog-heading").textContent.toLowerCase().replace(" ", "_").replace("+", "plus").replace("#", "sharp");
-        presenceData.smallImageText = document.querySelector("#catalog-heading").textContent;
+        presenceData.smallImageKey = document
+          .querySelector("#catalog-heading")
+          .textContent.toLowerCase()
+          .replace(" ", "_")
+          .replace("+", "plus")
+          .replace("#", "sharp");
+        presenceData.smallImageText = document.querySelector(
+          "#catalog-heading"
+        ).textContent;
       } else if (pathArray[1] === "subject") {
         presenceData.details = "Looking at a subject";
-        presenceData.state = `"${document.querySelector("#catalog-heading").textContent}"`;
+        presenceData.state = `"${
+          document.querySelector("#catalog-heading").textContent
+        }"`;
       } else {
         presenceData.details = "Browsing the catalog";
         presenceData.state = "of available languages";
@@ -131,7 +162,9 @@ presence.on("UpdateData", async () => {
     case "articles":
       if (pathArray[1]) {
         presenceData.details = "Reading an article";
-        presenceData.state = `"${document.querySelector("[class^=articleHeader__]").textContent}"`;
+        presenceData.state = `"${
+          document.querySelector("[class^=articleHeader__]").textContent
+        }"`;
       } else {
         presenceData.details = "Browsing articles";
       }
@@ -139,7 +172,9 @@ presence.on("UpdateData", async () => {
     default:
       if (window.location.hostname === "news.codecademy.com") {
         presenceData.details = "Reading an article";
-        presenceData.state = `"${document.querySelector(".post-full-title").textContent}"`;
+        presenceData.state = `"${
+          document.querySelector(".post-full-title").textContent
+        }"`;
       } else presenceData.details = "Idle";
       break;
   }
@@ -149,5 +184,4 @@ presence.on("UpdateData", async () => {
   } else {
     presence.setActivity(presenceData);
   }
-
 });
