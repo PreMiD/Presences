@@ -11,52 +11,49 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as Function,
-  get function(): Function {
-    return this._function;
+    _function: null as Function,
+    get function(): Function {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
-  set function(parameter) {
-    this._function = parameter;
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
   },
-  get present(): boolean {
-    return this._function !== null;
-  }
-},
-
-/**
- * Initialize/reset presenceData.
- */
- resetData = (
-  defaultData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  }
-): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-  presenceData = { ...defaultData };
-},
-
-/**
- * Search for URL parameters.
- * @param urlParam The parameter that you want to know about the value.
- */
- getURLParam = (urlParam: string): string => {
-  return currentURL.searchParams.get(urlParam);
-};
+  /**
+   * Search for URL parameters.
+   * @param urlParam The parameter that you want to know about the value.
+   */
+  getURLParam = (urlParam: string): string => {
+    return currentURL.searchParams.get(urlParam);
+  };
 
 ((): void => {
   let title: string;
   const actionResult = getURLParam("action") || getURLParam("veaction"),
-
-   titleFromURL = (): string => {
-    const raw =
-      currentPath[1] === "index.php"
-        ? getURLParam("title")
-        : currentPath.slice(1).join("/");
-    return decodeURI(raw.replace(/_/g, " "));
-  };
+    titleFromURL = (): string => {
+      const raw =
+        currentPath[1] === "index.php"
+          ? getURLParam("title")
+          : currentPath.slice(1).join("/");
+      return decodeURI(raw.replace(/_/g, " "));
+    };
 
   try {
     title = document.querySelector("h1").textContent;

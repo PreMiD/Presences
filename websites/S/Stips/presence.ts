@@ -3,10 +3,14 @@ const presence = new Presence({
 });
 
 function translate(is_male: boolean): object {
-  const refferGender = (arr: Array<string>): string => (is_male ? arr[0] : arr[1]),
+  const refferGender = (arr: Array<string>): string =>
+      is_male ? arr[0] : arr[1],
     reporting: string = refferGender(["מדווח", "מדווחת"]),
     removingQuestion: string = refferGender(["מוחק שאלה", "מוחקת שאלה"]),
-    removingPenfriends: string = refferGender(["מוחק מסר בחברים לעט", "מוחקת מסר בחברים לעט"]),
+    removingPenfriends: string = refferGender([
+      "מוחק מסר בחברים לעט",
+      "מוחקת מסר בחברים לעט"
+    ]),
     removingAnswer: string = refferGender(["מוחק תשובה", "מוחקת תשובה"]),
     editingQuestion: string = refferGender(["עורך שאלה", "עורכת שאלה"]),
     editingAnswer: string = refferGender(["עורך תשובה", "עורכת תשובה"]);
@@ -33,19 +37,19 @@ function translate(is_male: boolean): object {
         remove: removingQuestion,
         edit: editingQuestion
       },
-      "hot": {
+      hot: {
         main: "צופה בשאלות החמות",
         report: reporting,
         remove: removingQuestion,
         edit: editingQuestion
       },
-      "me": {
+      me: {
         main: refferGender(["צופה בשאלות ששאל", "צופה בשאלות ששאלה"]),
         report: reporting,
         remove: removingQuestion,
         edit: editingQuestion
       },
-      "unknown": "צופה בשאלות"
+      unknown: "צופה בשאלות"
     },
     channel: {
       main: "צופה בשאלות בחדר %channel%",
@@ -87,7 +91,8 @@ function translate(is_male: boolean): object {
         main: "במסרים",
         additionalPage: refferGender(["מסתכל באנשי הקשר", "מסתכלת באנשי הקשר"])
       },
-      "any": {  // /messages/<user_id> //
+      any: {
+        // /messages/<user_id> //
         main: "בשיחה עם %nickname%"
       }
     },
@@ -103,8 +108,12 @@ function elemExists(query: string): boolean {
   return document.querySelector(query) ? true : false;
 }
 
-let elapsed: number, oldUrl: string, lastAction: string, action: string, is_male = true;
-const has_dark: boolean = elemExists('#darkmode');
+let elapsed: number,
+  oldUrl: string,
+  lastAction: string,
+  action: string,
+  is_male = true;
+const has_dark: boolean = elemExists("#darkmode");
 
 // get gender
 fetch("https://stips.co.il/api?name=user.get_app_user").then((resp) =>
@@ -117,8 +126,8 @@ fetch("https://stips.co.il/api?name=user.get_app_user").then((resp) =>
 // main loop
 presence.on("UpdateData", () => {
   const Path = window.location.pathname;
-  let PathMain: string = Path.split('/')[1],
-    PathSecond: string = Path.split('/')[2],
+  let PathMain: string = Path.split("/")[1],
+    PathSecond: string = Path.split("/")[2],
     details = undefined,
     isReport = false,
     isDelete = false,
@@ -134,7 +143,7 @@ presence.on("UpdateData", () => {
     tpcObj,
     pstObj,
     penfObj;
-  
+
   if (PathMain === "") PathMain = "/";
   if (!PathSecond) PathSecond = "/";
 
@@ -169,7 +178,7 @@ presence.on("UpdateData", () => {
       if (!details) {
         details = askObj.main;
       }
-      
+
       action = `${Path} & ${details}`;
       break;
     case "explore":
@@ -183,16 +192,23 @@ presence.on("UpdateData", () => {
       if (isReport) details = xplrObj["/"].report;
       if (isDelete) details = xplrObj["/"].remove;
       if (isEdit) details = xplrObj["/"].edit;
-  
+
       if (!details) {
         if (xplrObj.hasOwnProperty(PathSecond)) {
           // seems like xplrObj[PathSecond] won't work
           // let's do it manually then >'-'<
           switch (PathSecond) {
-            case '/': details = xplrObj['/'].main; break;
-            case 'hot': details = xplrObj.hot.main; break;
-            case 'me': details = xplrObj.me.main; break;
-            default: details = xplrObj.unknown;
+            case "/":
+              details = xplrObj["/"].main;
+              break;
+            case "hot":
+              details = xplrObj.hot.main;
+              break;
+            case "me":
+              details = xplrObj.me.main;
+              break;
+            default:
+              details = xplrObj.unknown;
           }
         }
       }
@@ -205,15 +221,15 @@ presence.on("UpdateData", () => {
       isEdit = elemExists(".edit-view");
 
       cnlObj = translate(is_male).channel;
-      
+
       if (isReport) details = cnlObj.report;
       if (isDelete) details = cnlObj.remove;
       if (isEdit) details = cnlObj.edit;
 
       if (!details) {
         details = cnlObj.main
-        .replace('%channel%', decodeURI(location.pathname.split('/')[2]))  // %D7%90%D7%91%D7%92 => אבג
-        .replace('-', ' '); // סדרות-וסרטים => סדרות וסרטים
+          .replace("%channel%", decodeURI(location.pathname.split("/")[2])) // %D7%90%D7%91%D7%92 => אבג
+          .replace("-", " "); // סדרות-וסרטים => סדרות וסרטים
       }
 
       action = `${Path} & ${details}`;
@@ -235,8 +251,11 @@ presence.on("UpdateData", () => {
       isEdit = elemExists(".edit-view");
 
       if (isDelete) {
-        isAns = document.querySelector("app-item-editor-delete .text-title").textContent.indexOf('תשובה') !== -1;
-      } 
+        isAns =
+          document
+            .querySelector("app-item-editor-delete .text-title")
+            .textContent.indexOf("תשובה") !== -1;
+      }
       if (isEdit) isAns = elemExists(".edit-view + mat-card.item-type-ans");
 
       // set state text
@@ -260,13 +279,16 @@ presence.on("UpdateData", () => {
       isEdit = elemExists(".edit-view");
 
       tpcObj = translate(is_male).topic;
-      
+
       if (isReport) details = tpcObj.report;
       if (isDelete) details = tpcObj.remove;
       if (isEdit) details = tpcObj.edit;
 
       if (!details) {
-        details = tpcObj.main.replace('%topic%', decodeURI(location.pathname.split('/')[2]));
+        details = tpcObj.main.replace(
+          "%topic%",
+          decodeURI(location.pathname.split("/")[2])
+        );
       }
 
       action = `${Path} & ${details}`;
@@ -277,9 +299,13 @@ presence.on("UpdateData", () => {
       pflObj = translate(is_male).profile;
 
       if (isDelete) details = pflObj.remove;
-      
+
       if (!details) {
-        details = pflObj.main.replace('%nickname%', document.querySelector('app-user-profile .nickname')?.textContent || 'טוען...');
+        details = pflObj.main.replace(
+          "%nickname%",
+          document.querySelector("app-user-profile .nickname")?.textContent ||
+            "טוען..."
+        );
       }
 
       action = `${Path} & ${details}`;
@@ -291,26 +317,42 @@ presence.on("UpdateData", () => {
     case "messages":
       msgObj = translate(is_male).messages;
 
-      if (PathSecond === '/') {
-        details = elemExists('app-contacts') ? msgObj["/"].additionalPage: msgObj["/"].main;
+      if (PathSecond === "/") {
+        details = elemExists("app-contacts")
+          ? msgObj["/"].additionalPage
+          : msgObj["/"].main;
       } else {
-          details = elemExists('.user-nickname') ?
-           msgObj.any.main.replace('%nickname%', document.querySelector('.user-nickname').textContent) :
-            msgObj["/"].main;  // invalid <user-id> in path
+        details = elemExists(".user-nickname")
+          ? msgObj.any.main.replace(
+              "%nickname%",
+              document.querySelector(".user-nickname").textContent
+            )
+          : msgObj["/"].main; // invalid <user-id> in path
       }
 
       action = `${Path} & ${details}`;
       break;
     case "post":
       pstObj = translate(is_male).post;
-      if (PathSecond === 'ask') {
+      if (PathSecond === "ask") {
         details = pstObj.ask.main;
       }
       action = `${Path} & ${details}`;
       break;
-    }
+  }
 
-  const smallImageText = location.host + decodeURI(location.pathname.split('/').length === 4 ? location.pathname.replace('/'+location.pathname.split('/').pop(), '') : (location.pathname === '/' ? "" : location.pathname)),
+  const smallImageText =
+      location.host +
+      decodeURI(
+        location.pathname.split("/").length === 4
+          ? location.pathname.replace(
+              "/" + location.pathname.split("/").pop(),
+              ""
+            )
+          : location.pathname === "/"
+          ? ""
+          : location.pathname
+      ),
     data: PresenceData = {
       details: details || translate(is_male).default,
       state: undefined,
