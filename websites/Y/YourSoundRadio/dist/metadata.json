@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "HuckinB",
+    "id": "228575716214702080"
+  },
+  "url": "www.yoursoundradio.com",
+  "description": {
+    "en": "Give your Station an Identity"
+  },
+  "service": "YourSoundRadio",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/v085ygA.png",
+  "thumbnail": "https://i.imgur.com/TWyvcxr.png",
+  "color": "#FF0061",
+  "tags": [
+    "Radio",
+    "voiceover",
+    "imaging"
+  ],
+  "category": "Music"
+}
