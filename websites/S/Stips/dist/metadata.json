@@ -8,8 +8,12 @@
     "en": "Come share your knowledge and ideas with the world, meet new people and opinions",
     "he": "בואו לשתף את הידע והרעיונות שלכם עם העולם, להכיר אנשים חדשים ודעות חדשות"
   },
-  "url": ["stips.co.il", "www.stips.co.il", "stipscdn-stips.netdna-ssl.com"],
-  "version": "1.0.0",
+  "url": [
+    "stips.co.il",
+    "www.stips.co.il",
+    "stipscdn-stips.netdna-ssl.com"
+  ],
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/xARdqan.png",
   "thumbnail": "https://i.imgur.com/JwKSAnv.png",
   "color": "#04d09d",

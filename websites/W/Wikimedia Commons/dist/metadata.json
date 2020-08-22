@@ -12,8 +12,11 @@
     "fr": "Wikimedia Commons est la plus grande médiathèque d’illustrations, photographies, dessins, vidéos et musiques libres de droits.",
     "es": "Wikimedia Commons, la biblioteca de ilustraciones, fotografías, dibujos videos y música más grande del mundo."
   },
-  "url": ["commons.wikimedia.org", "test-commons.wikimedia.org"],
-  "version": "1.0.0",
+  "url": [
+    "commons.wikimedia.org",
+    "test-commons.wikimedia.org"
+  ],
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/5Ko07gf.png",
   "thumbnail": "https://i.imgur.com/SRU3R9d.png",
   "color": "#f9f9f9",
