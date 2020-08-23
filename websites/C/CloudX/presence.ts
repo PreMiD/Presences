@@ -3,7 +3,10 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let title, artist, dj, playbackStatus: string;
+let title: string;
+let artist: string;
+let dj: string;
+let playbackStatus: string;
 
 function listener(): void {
   const json = JSON.parse(this.responseText);
@@ -21,14 +24,15 @@ function getData(): void {
 
 function getStatus(): string {
   const playPauseBtn = document.querySelector("#play");
-  if (playPauseBtn.className === "fas fa-play fa-lg") {
+  if (playPauseBtn.className === "fas fa-play") {
     return "Paused";
-  } else if (playPauseBtn.className === "fas fa-pause fa-lg") {
+  } else if (playPauseBtn.className === "fas fa-pause") {
     return "Playing";
   }
   return "Playing";
 }
 
+getData();
 setInterval(getData, 5000);
 
 presence.on("UpdateData", async () => {
