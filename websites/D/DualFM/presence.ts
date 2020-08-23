@@ -1,103 +1,66 @@
 const presence = new Presence({
-  clientId: "741011161079873713"
-});
+    clientId: "743793403753660426"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-let sname, sartist, duallisteners, dualislive, dualpresenter;
+let title: string;
+let artist: string;
+let dj: string;
+let playbackStatus: string;
 
-function metadataListener(): void {
-  const data = JSON.parse(this.responseText);
-  sname = data.now.song;
-  sartist = data.now.artist;
-  duallisteners = data.listeners.current;
-  dualislive = data.presenter.autoDJ;
-  dualpresenter = data.presenter.username;
+function listener(): void {
+  const json = JSON.parse(this.responseText);
+  title = json.song.title;
+  artist = json.song.artist;
+  dj = json.dj.username;
 }
 
-function updateMetaData(): void {
-  const xhttp = new XMLHttpRequest();
-  xhttp.addEventListener("load", metadataListener);
-  xhttp.open("GET", "https://api.dualfm.net/stats", true);
-  xhttp.send();
+function getData(): void {
+  const req = new XMLHttpRequest();
+  req.addEventListener("load", listener);
+  req.open("GET", "https://api.thisiscloudx.com/stats");
+  req.send();
 }
 
-setInterval(updateMetaData, 10000);
-window.onload = function (): void {
-  updateMetaData();
-};
+function getStatus(): string {
+  const playPauseBtn = document.querySelector("#play");
+  if (playPauseBtn.className === "fas fa-play") {
+    return "Paused";
+  } else if (playPauseBtn.className === "fas fa-pause") {
+    return "Playing";
+  }
+  return "Playing";
+}
 
-let lastTitle;
-let lastTimeStart = Math.floor(Date.now() / 1000);
+getData();
+setInterval(getData, 5000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    smallImageKey: "dualfm-play-v2"
+    largeImageKey: "logo"
   };
 
-  const toggleelaspe = await presence.getSetting("toggleelapse");
-  const changedetails = await presence.getSetting("changedetails");
-  const changestate = await presence.getSetting("changestate");
-  const changesmalltext = await presence.getSetting("changesmalltext");
-
-  if (toggleelaspe) {
-    if (lastTitle != sname) {
-      lastTitle = sname;
-      lastTimeStart = Math.floor(Date.now() / 1000);
+  if (
+    document.location.hostname === "www.thisiscloudx.com" ||
+    document.location.hostname === "thisiscloudx.com"
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    playbackStatus = getStatus();
+    if (playbackStatus === "Paused") {
+      presenceData.smallImageKey = "pause";
+    } else if (playbackStatus === "Playing") {
+      presenceData.smallImageKey = "play";
     }
 
-    presenceData.startTimestamp = lastTimeStart;
+    presenceData.details = `🎵 | ${artist} - ${title}`;
+    presenceData.state = `🎙️ | ${dj}`;
+    presenceData.smallImageText = playbackStatus;
+  }
+
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
   } else {
-    presenceData.startTimestamp = false;
+    presence.setActivity(presenceData);
   }
-
-  if (!sname) {
-    lastTitle = "Loading...";
-    sname = "Loading...";
-  } else if (!sartist) {
-    sartist = "Loading...";
-  } else if (!dualpresenter) {
-    dualpresenter = "Loading...";
-  } else if (!duallisteners) {
-    duallisteners = "Loading...";
-  }
-
-  if (!dualislive) {
-    if (changedetails) {
-      presenceData.details = changedetails
-        .replace("%song%", sname)
-        .replace("%artist%", sartist);
-    } else {
-      presenceData.details = "🎵 | " + sartist + " - " + sname;
-    }
-    if (changestate) {
-      presenceData.state = changestate.replace("%presenter%", dualpresenter);
-    } else {
-      presenceData.state = "🎙️ | " + dualpresenter;
-    }
-  } else {
-    if (changedetails) {
-      presenceData.details = changedetails
-        .replace("%song%", sname)
-        .replace("%artist%", sartist);
-    } else {
-      presenceData.details = "🎵 | " + sartist + " - " + sname;
-    }
-    if (changestate) {
-      presenceData.state = changestate.replace("%presenter%", "AutoDJ");
-    } else {
-      presenceData.state = "🎙️ | " + "AutoDJ";
-    }
-  }
-
-  if (changesmalltext) {
-    presenceData.smallImageText = changesmalltext.replace(
-      "%listeners%",
-      duallisteners
-    );
-  } else {
-    presenceData.smallImageText = "Listeners: " + duallisteners;
-  }
-
-  presence.setActivity(presenceData, true);
-  presence.setTrayTitle();
 });
