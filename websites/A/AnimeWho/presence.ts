@@ -26,7 +26,7 @@ const startTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement;
 
-presence.on("iFrameData", async (msg) => {
+presence.on("iFrameData", async (msg: "any") => {
   if (!msg) return;
   video = msg;
 });
