@@ -3,10 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let title: string;
-let artist: string;
-let dj: string;
-let playbackStatus: string;
+let title, artist, dj, playbackStatus: string;
 
 function listener(): void {
   const json = JSON.parse(this.responseText);
