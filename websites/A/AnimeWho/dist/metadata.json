@@ -13,7 +13,7 @@
     "en": "AnimeWho? is a site where you can watch Turkish subtitle anime & read manga."
   },
   "url": ["www.animewho.com", "animewho.com"],
-  "version": "0.1.0",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/y0RA8SX.jpg",
   "thumbnail": "https://i.imgur.com/HmLMCzv.png",
   "color": "#fc0043",
