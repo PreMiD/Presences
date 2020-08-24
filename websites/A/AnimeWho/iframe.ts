@@ -1,6 +1,6 @@
-var iframe = new iFrame();
+let i_frame = new iFrame();
 
-iframe.on("UpdateData", async () => {
+i_frame.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector("video");
 
   if (video) {
