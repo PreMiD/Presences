@@ -1,8 +1,7 @@
 const presence = new Presence({
   clientId: "747190301676011550"
-});
-
-const strings = presence.getStrings({
+}),
+strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
@@ -17,7 +16,7 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now(),
+  const startTime = Date.now(),
   endTime =  Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
@@ -26,7 +25,7 @@ const startTimestamp = Math.floor(Date.now() / 1000);
 
 let video: HTMLVideoElement;
 
-presence.on("iFrameData", async (msg: any) => {
+presence.on("iFrameData", async (msg: HTMLVideoElement) => {
   if (!msg) return;
   video = msg;
 });
@@ -40,21 +39,6 @@ presence.on("UpdateData", async () => {
   title = document.querySelector(
     "head > title"  
   );
-
-  if (!title) {
-    video = null;
-  }
-
-  // Anime
-
-  if (title) {
-    presenceData.details = title.textContent;
-  }
-
-  // Arama
-  else {
-    presenceData.details = (await strings).browsing;
-  }
   
 	const anime = title.textContent.replace("Türkçe İzle - AnimeWho? Anime", "").replace("Türkçe Oku - AnimeWho? Manga", "").replace("AnimeWho?", "").replace(" Türkçe İzle ve İndir", "");
 	presenceData.details = anime;
@@ -65,14 +49,13 @@ presence.on("UpdateData", async () => {
 		const bolum = document.querySelector("div.MuiBox-root > button.MuiButton-outlinedSecondary > span.MuiButton-label");
 		presenceData.state = bolum.innerHTML + "'ü İzliyor";
 	}else if ((new RegExp('oku/[0-9]+/[0-9]+')).test(document.location.pathname)){
-		const read_type = document.querySelector("#scroll-node > div > section > div > div:nth-child(2) > div > div.jss80 > button > span.MuiButton-label"),
+		const read_type = document.querySelector("div.MuiGrid-root > div.MuiBox-root > button.MuiButtonBase-root > span.MuiButton-label"),
 		arr = document.location.pathname.split("/");
 		presenceData.state = `${arr[5]}.Bölüm`;
 		if (read_type && read_type.innerHTML.includes("Webtoon")){
 			presenceData.state = `${arr[5]}.Bölüm ${arr[6]}.Sayfa`;
 		}
 	}else if (document.location.pathname.includes("/izle") || document.location.pathname.includes("/oku")){
-		presenceData.details = anime;
 		presenceData.state = "Bölüm Seçiyor";
 	}else if ((new RegExp('ceviriler/anime')).test(document.location.pathname)){
 		presenceData.state = "Göz Gezdiriyor";
@@ -86,9 +69,13 @@ presence.on("UpdateData", async () => {
 		}else{
 			presenceData.state = "Ne Okusam Diye Bakıyor";
 		}
+	}else if(document.location.pathname.includes("/destek-ol")){
+		presenceData.details = "Destek Ol";
+		presenceData.state = "Acaba? Bir İhtimal?";
+	}else if(document.location.pathname.includes("/sss")){
+		presenceData.details = "Sıkça Sorulan Sorular";
+		presenceData.state = "Sorunlarına Çözüm Arıyor";
 	}
-
-	
 	
   if (video) {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
