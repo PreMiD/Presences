@@ -1,8 +1,8 @@
-const presence = new Presence({
+let presence = new Presence({
   clientId: "747190301676011550"
 });
 
-const strings = presence.getStrings({
+const strings = await presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
@@ -13,6 +13,7 @@ const strings = presence.getStrings({
  * @param {Number} videoTime Current video time seconds
  * @param {Number} videoDuration Video duration seconds
  */
+
 function getTimestamps(
   videoTime: number,
   videoDuration: number
