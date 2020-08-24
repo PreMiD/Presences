@@ -38,9 +38,8 @@ presence.on("UpdateData", async () => {
   },
   title = document.querySelector(
     "head > title"  
-  );
-  
-	const anime = title.textContent.replace("Türkçe İzle - AnimeWho? Anime", "").replace("Türkçe Oku - AnimeWho? Manga", "").replace("AnimeWho?", "").replace(" Türkçe İzle ve İndir", "");
+  ),
+  anime = title.textContent.replace("Türkçe İzle - AnimeWho? Anime", "").replace("Türkçe Oku - AnimeWho? Manga", "").replace("AnimeWho?", "").replace(" Türkçe İzle ve İndir", "");
 	presenceData.details = anime;
 	if (document.location.pathname == "/"){
 		presenceData.details = "Ana Sayfada";
