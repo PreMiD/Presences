@@ -21,12 +21,12 @@ const updateCallback = {
   get present(): boolean {
     return this._function !== null;
   }
-};
+},
 
 /**
  * Initialize/reset presenceData.
  */
-const resetData = (
+ resetData = (
   defaultData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
@@ -36,13 +36,13 @@ const resetData = (
   currentURL = new URL(document.location.href);
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
   presenceData = { ...defaultData };
-};
+},
 
 /**
  * Search for URL parameters.
  * @param urlParam The parameter that you want to know about the value.
  */
-const getURLParam = (urlParam: string): string => {
+ getURLParam = (urlParam: string): string => {
   return currentURL.searchParams.get(urlParam);
 };
 
@@ -51,10 +51,10 @@ const getURLParam = (urlParam: string): string => {
     presenceData.details = "On the home page";
   } else {
     let title: string;
-    const actionResult = getURLParam("action"),
-      lang = currentURL.hostname.split(".")[0];
+    const actionResult = getURLParam("action") || getURLParam("veaction"),
+      lang = currentURL.hostname.split(".")[0],
 
-    const titleFromURL = (): string => {
+     titleFromURL = (): string => {
       const raw =
         currentPath[1] === "index.php"
           ? getURLParam("title")
@@ -107,7 +107,8 @@ const getURLParam = (urlParam: string): string => {
         2300: "Viewing a gadget",
         2301: "Viewing a gadget talk page",
         2302: "Viewing a gadget definition page",
-        2303: "Viewing a gadget definition talk page"
+        2303: "Viewing a gadget definition talk page",
+        2600: "Viewing a topic"
       };
       return (
         details[
@@ -128,16 +129,11 @@ const getURLParam = (urlParam: string): string => {
 
     if (
       ((document.querySelector("#n-mainpage a") ||
-        document.querySelector("#p-navigation a")) as HTMLAnchorElement)
-        .href === currentURL.href
+        document.querySelector("#p-navigation a") ||
+        document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement).href ===
+      currentURL.href
     ) {
       presenceData.details = "On the main page";
-    } else if (actionResult == "history") {
-      presenceData.details = "Viewing revision history";
-      presenceData.state = titleFromURL();
-    } else if (actionResult == "edit") {
-      presenceData.details = "Editing a page";
-      presenceData.state = titleFromURL();
     } else if (document.querySelector("#wpLoginAttempt")) {
       presenceData.details = "Logging in";
     } else if (document.querySelector("#wpCreateaccount")) {
@@ -147,13 +143,43 @@ const getURLParam = (urlParam: string): string => {
       presenceData.state = (document.querySelector(
         "input[type=search]"
       ) as HTMLInputElement).value;
-    } else {
-      presenceData.details = namespaceDetails();
+    } else if (actionResult == "history") {
+      presenceData.details = "Viewing revision history";
+      presenceData.state = titleFromURL();
+    } else if (getURLParam("diff")) {
+      presenceData.details = "Viewing difference between revisions";
+      presenceData.state = titleFromURL();
+    } else if (getURLParam("oldid")) {
+      presenceData.details = "Viewing an old revision of a page";
+      presenceData.state = titleFromURL();
+    } else if (
+      document.querySelector("#pt-logout") ||
+      getURLParam("veaction")
+    ) {
       presenceData.state = `${
         title.toLowerCase() === titleFromURL().toLowerCase()
           ? `${title}`
           : `${title} (${titleFromURL()})`
       }`;
+      updateCallback.function = (): void => {
+        if (actionResult == "edit" || actionResult == "editsource") {
+          presenceData.details = "Editing a page";
+        } else {
+          presenceData.details = namespaceDetails();
+        }
+      };
+    } else {
+      if (actionResult == "edit") {
+        presenceData.details = "Editing a page";
+        presenceData.state = titleFromURL();
+      } else {
+        presenceData.details = namespaceDetails();
+        presenceData.state = `${
+          title.toLowerCase() === titleFromURL().toLowerCase()
+            ? `${title}`
+            : `${title} (${titleFromURL()})`
+        }`;
+      }
     }
 
     if (lang !== "en") {
