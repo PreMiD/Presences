@@ -25,8 +25,10 @@ presence.on("UpdateData", async () => {
   profileNickname = document.querySelector(".vcard-names .p-nickname");
 
   repositoryAuthor = document.querySelector(".author a");
-  repositoryName = document.querySelector(".public strong a");
-  repositoryLocation = document.querySelectorAll(".breadcrumb.mb-2");
+  repositoryName = document.querySelector(
+    "body > div.application-main > div > main > div.bg-gray-light.pt-3.hide-full-screen.mb-5 > div > div > h1 > strong > a"
+  );
+  repositoryLocation = document.querySelector("#branch-select-menu > summary > span.css-truncate-target");
   repositoryLocation2 = document.querySelectorAll("#blob-path");
 
   pullRequestTitle = issueTitle = document.querySelector(
@@ -35,9 +37,8 @@ presence.on("UpdateData", async () => {
   pullRequestAuthor = issueAuthor = document.querySelectorAll(
     "div div.timeline-comment-header.clearfix h3 strong a"
   );
-  pullRequestID = issueID = document.querySelector(
-    "div.gh-header-show h1 span.gh-header-number"
-  );
+  pullRequestID = issueID = document.querySelector("#span.f1-light.text-gray-light")
+  console.log(pullRequestID)
 
   if (profileName) {
     var profileTabs = "/" + profileNickname.innerText + "?tab=";
@@ -161,13 +162,12 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   }
-
   if (repositoryAuthor && repositoryName) {
     if (
       repositoryAuthor.innerText.length > 0 &&
       repositoryName.innerText.length > 0 &&
-      document.location.pathname ==
-        "/" + repositoryAuthor.innerText + "/" + repositoryName.innerText
+      document.location.pathname.toLowerCase() ==
+        "/" + repositoryAuthor.innerText.toLowerCase() + "/" + repositoryName.innerText.toLowerCase()
     ) {
       presenceData.details = "Browsing a repository...";
 
@@ -179,14 +179,10 @@ presence.on("UpdateData", async () => {
       repositoryAuthor.innerText.length > 0 &&
       repositoryName.innerText.length > 0 &&
       document.location.pathname.includes("/tree/") &&
-      repositoryLocation.length > 0
+      repositoryLocation.innerText.length > 0
     ) {
-      var repLoc: any;
-
-      repositoryLocation.forEach((item) => {
-        repLoc = item.innerText;
-      });
-
+      var repLoc = repositoryLocation.innerText;
+      
       presenceData.details =
         "Browsing " +
         repositoryAuthor.innerText +
@@ -204,10 +200,10 @@ presence.on("UpdateData", async () => {
     ) {
       var repLoc2: any;
 
-      repositoryLocation2.forEach((item) => {
+      repositoryLocation2.forEach((item: any) => {
         repLoc2 = item.innerText;
       });
-
+      console.log(repositoryAuthor.innerText, repositoryName.innerText)
       presenceData.details =
         "Looking at a file from " +
         repositoryAuthor.innerText +
@@ -217,12 +213,13 @@ presence.on("UpdateData", async () => {
       presenceData.state = repLoc2;
 
       presenceData.startTimestamp = browsingStamp;
+      console.log(presenceData)
     } else if (
-      document.location.pathname ==
+      document.location.pathname.toLowerCase() ==
       "/" +
-        repositoryAuthor.innerText +
+        repositoryAuthor.innerText.toLowerCase() +
         "/" +
-        repositoryName.innerText +
+        repositoryName.innerText.toLowerCase() +
         "/issues/"
     ) {
       presenceData.details = "Browsing issues from:";
@@ -243,11 +240,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (
-      document.location.pathname.includes(
+      document.location.pathname.toLowerCase().includes(
         "/" +
-          repositoryAuthor.innerText +
+          repositoryAuthor.innerText.toLowerCase() +
           "/" +
-          repositoryName.innerText +
+          repositoryName.innerText.toLowerCase() +
           "/pull/"
       )
     ) {
@@ -259,11 +256,11 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (
-      document.location.pathname.includes(
+      document.location.pathname.toLowerCase().includes(
         "/" +
-          repositoryAuthor.innerText +
+          repositoryAuthor.innerText.toLowerCase() +
           "/" +
-          repositoryName.innerText +
+          repositoryName.innerText.toLowerCase() +
           "/issues/"
       )
     ) {
