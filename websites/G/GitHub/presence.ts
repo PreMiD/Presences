@@ -199,7 +199,7 @@ presence.on("UpdateData", async () => {
     ) {
       var repLoc2: any;
 
-      repositoryLocation2.forEach((item: any) => {
+      repositoryLocation2.forEach((item: HTMLElement) => {
         repLoc2 = item.innerText;
       });
       presenceData.details =
@@ -278,7 +278,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/network") ||
       document.location.pathname.includes("/network/members")
     ) {
-      var insightsTab: any = document.querySelector(
+      const insightsTab: any = document.querySelector(
         "nav a.js-selected-navigation-item.selected.menu-item"
       );
 
