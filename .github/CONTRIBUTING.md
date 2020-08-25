@@ -1,7 +1,7 @@
 <div align="center">
     <img src="https://github.com/PreMiD.png?size=2048" width="128px" style="max-width:100%;">
-    <h3 style="font-size: 2rem; margin-bottom: 0">Presence Guidelines</h2>
-    <h4 style="margin-top: 0">Revision 2</h3>
+    <h3 style="font-size: 2rem; margin-bottom: 0">Presence Guidelines</h3>
+    <h4 style="margin-top: 0">Revision 2</h4>
     <br />
 </div>
 
@@ -202,6 +202,7 @@ Here is a list of rules you must follow when writing your `presence.ts` file:
 - When accessing cookies for stored data, please prefix the key with `PMD_`.
 - You many only make HTTP/HTTPS requests to `premid.app` or the presence website API. If you are using external domains, you will be required to explain why it is necessary.
 - Do **not** set fields in the presence data object to undefined after it has been declared, use the `delete` keyword instead. (for e.g., use `delete data.startTimestamp` instead of `data.startTimestamp = undefined`)
+- You are **not** allowed to write presences that change the functionality of a given website. This includes the addition, deletion, or modification of DOM elements.
 
 ## [**tsconfig.json**](https://docs.premid.app/en/dev/presence/tsconfig)
 
