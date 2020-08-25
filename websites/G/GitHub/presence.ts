@@ -1,25 +1,25 @@
 const presence = new Presence({
   clientId: "607587875122446359"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
-
-const search = "/search?q=";
-const searchURL = new URL(document.location.href);
-const searchResult = searchURL.searchParams.get("q");
-const profileURL = new URL(document.location.href);
+}),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  search = "/search?q=",
+  searchURL = new URL(document.location.href),
+  searchResult = searchURL.searchParams.get("q"),
+  profileURL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
-  let profileName: any, profileNickname: any;
-
-  let repositoryAuthor: any,
+  let profileName: any, 
+    profileNickname: any,
+    repositoryAuthor: any,
     repositoryName: any,
     repositoryLocation: any,
-    repositoryLocation2: any;
-
-  let pullRequestTitle: any, pullRequestAuthor: any, pullRequestID: any;
-
-  let issueTitle: any, issueAuthor: any, issueID: any;
+    repositoryLocation2: any,
+    pullRequestTitle: any, 
+    pullRequestAuthor: any, 
+    pullRequestID: any,
+    issueTitle: any,
+    issueAuthor: any, 
+    issueID: any;
 
   profileName = document.querySelector(".vcard-names .p-name");
   profileNickname = document.querySelector(".vcard-names .p-nickname");
