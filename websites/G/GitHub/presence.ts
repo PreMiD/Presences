@@ -37,8 +37,7 @@ presence.on("UpdateData", async () => {
   pullRequestAuthor = issueAuthor = document.querySelectorAll(
     "div div.timeline-comment-header.clearfix h3 strong a"
   );
-  pullRequestID = issueID = document.querySelector("#span.f1-light.text-gray-light")
-  console.log(pullRequestID)
+  pullRequestID = issueID = document.querySelector("#span.f1-light.text-gray-light");
 
   if (profileName) {
     var profileTabs = "/" + profileNickname.innerText + "?tab=";
@@ -203,7 +202,6 @@ presence.on("UpdateData", async () => {
       repositoryLocation2.forEach((item: any) => {
         repLoc2 = item.innerText;
       });
-      console.log(repositoryAuthor.innerText, repositoryName.innerText)
       presenceData.details =
         "Looking at a file from " +
         repositoryAuthor.innerText +
@@ -213,7 +211,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = repLoc2;
 
       presenceData.startTimestamp = browsingStamp;
-      console.log(presenceData)
     } else if (
       document.location.pathname.toLowerCase() ==
       "/" +
