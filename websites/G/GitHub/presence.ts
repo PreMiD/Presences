@@ -8,18 +8,18 @@ const presence = new Presence({
   profileURL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
-  let profileName: any, 
-    profileNickname: any,
-    repositoryAuthor: any,
-    repositoryName: any,
-    repositoryLocation: any,
-    repositoryLocation2: any,
-    pullRequestTitle: any, 
-    pullRequestAuthor: any, 
-    pullRequestID: any,
-    issueTitle: any,
-    issueAuthor: any, 
-    issueID: any;
+  let profileName: HTMLElement = null, 
+    profileNickname: HTMLElement = null,
+    repositoryAuthor: HTMLElement = null, 
+    repositoryName: HTMLElement = null,
+    repositoryLocation: HTMLElement = null,
+    repositoryLocation2: NodeListOf<HTMLElement> = null,
+    pullRequestTitle: HTMLElement = null, 
+    pullRequestAuthor: NodeListOf<HTMLElement> = null, 
+    pullRequestID: HTMLElement = null,
+    issueTitle: HTMLElement = null,
+    issueAuthor: NodeListOf<HTMLElement> = null,
+    issueID: HTMLElement = null;
 
   profileName = document.querySelector(".vcard-names .p-name");
   profileNickname = document.querySelector(".vcard-names .p-nickname");
@@ -199,7 +199,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/blob/") &&
       repositoryLocation2.length > 0
     ) {
-      let repLoc2: any;
+      let repLoc2: string;
 
       repositoryLocation2.forEach((item: HTMLElement) => {
         repLoc2 = item.innerText;
@@ -280,7 +280,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/network") ||
       document.location.pathname.includes("/network/members")
     ) {
-      const insightsTab: any = document.querySelector(
+      const insightsTab: HTMLElement = document.querySelector(
         "nav a.js-selected-navigation-item.selected.menu-item"
       );
 
