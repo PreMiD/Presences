@@ -223,7 +223,7 @@ In some situations, presences may behave unexpectedly or could use some minor ch
 
 > If you need to contact someone, please use our official Discord server. All reviewers will have the `Reviewer` role on their profile.
 
-> Please keep in mind that the reviewers do this voluntarily and work across multiple repositories, your pull request may not get reviewed until hours or even days after it has been created.
+> Please keep in mind that the reviewers work voluntarily and manage other repositories in addition to this one, your pull request may not get reviewed until hours or even days after it has been created.
 
 > **All** code contributed to the store will be licensed under the `Mozilla Public License 2.0`.
 
