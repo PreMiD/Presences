@@ -1,25 +1,25 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "607587875122446359"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
-var search = "/search?q=";
-var searchURL = new URL(document.location.href);
-var searchResult = searchURL.searchParams.get("q");
-var profileURL = new URL(document.location.href);
+const search = "/search?q=";
+const searchURL = new URL(document.location.href);
+const searchResult = searchURL.searchParams.get("q");
+const profileURL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
-  var profileName: any, profileNickname: any;
+  let profileName: any, profileNickname: any;
 
-  var repositoryAuthor: any,
+  let repositoryAuthor: any,
     repositoryName: any,
     repositoryLocation: any,
     repositoryLocation2: any;
 
-  var pullRequestTitle: any, pullRequestAuthor: any, pullRequestID: any;
+  let pullRequestTitle: any, pullRequestAuthor: any, pullRequestID: any;
 
-  var issueTitle: any, issueAuthor: any, issueID: any;
+  let issueTitle: any, issueAuthor: any, issueID: any;
 
   profileName = document.querySelector(".vcard-names .p-name");
   profileNickname = document.querySelector(".vcard-names .p-nickname");
@@ -39,9 +39,11 @@ presence.on("UpdateData", async () => {
   );
   pullRequestID = issueID = document.querySelector("#span.f1-light.text-gray-light");
 
+  let profileTabs: string, profileCurrentTab: string;
+
   if (profileName) {
-    var profileTabs = "/" + profileNickname.innerText + "?tab=";
-    var profileCurrentTab = profileURL.searchParams.get("tab");
+    profileTabs = "/" + profileNickname.innerText + "?tab=";
+    profileCurrentTab = profileURL.searchParams.get("tab");
   }
 
   const presenceData: PresenceData = {
@@ -180,7 +182,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/tree/") &&
       repositoryLocation.innerText.length > 0
     ) {
-      var repLoc = repositoryLocation.innerText;
+      const repLoc = repositoryLocation.innerText;
       
       presenceData.details =
         "Browsing " +
@@ -197,7 +199,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/blob/") &&
       repositoryLocation2.length > 0
     ) {
-      var repLoc2: any;
+      let repLoc2: any;
 
       repositoryLocation2.forEach((item: HTMLElement) => {
         repLoc2 = item.innerText;
