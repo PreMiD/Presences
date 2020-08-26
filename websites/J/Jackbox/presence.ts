@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
     layout = "legacy";
   } else if (document.getElementById("page-pollposition")) {
     presenceData.details = "Playing Guesspionage";
-    layout = "legacy";
+    layout = "guessp";
   } else if (document.getElementById("page-fakinit")) {
     presenceData.details = "Playing Fakin' It";
     layout = "legacy";
@@ -183,6 +183,11 @@ presence.on("UpdateData", async () => {
       "as " +
       document.getElementById("playericon").className.split("_")[1] +
       document.getElementById("playername").innerHTML.toLowerCase();
+  }
+
+  if (useName && layout == "guessp") {
+    presenceData.state =
+      "as " + document.getElementById("player").children[1].innerHTML;
   }
 
   if (presenceData.details == null) {

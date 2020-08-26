@@ -9,15 +9,11 @@
     "pt_BR": "Google Meet é uma plataforma de comunicação, desenvolvida pela Google, que inclui mensagens instantâneas, chat de vídeo, SMS e VOIP."
   },
   "service": "Google Meet",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/OFbN8Uu.png",
   "thumbnail": "https://i.imgur.com/6BRZ63d.png",
   "color": "#308574",
-  "tags": [
-    "google",
-    "meet",
-    "video"
-  ],
+  "tags": ["google", "meet", "video"],
   "category": "socials",
   "regExp": "meet[.]google([.][a-z]+)+[/]"
 }

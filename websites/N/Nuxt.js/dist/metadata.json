@@ -22,7 +22,7 @@
     "id": "Tanggal 25 Oktober 2016, tim di belakang zeit.co, mengumumkan Next.js, sebuah kerangka kerja untuk aplikasi Bereaksi yang diberikan server. Beberapa jam setelah pengumuman, gagasan untuk membuat aplikasi Vue.js yang dibuat server dengan cara yang sama seperti Next.js sudah jelas: Nuxt.js lahir."
   },
   "service": "Nuxt.js",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/XSYIbbu.png",
   "thumbnail": "https://i.imgur.com/mlwpfWK.png",
   "color": "#00c58e",

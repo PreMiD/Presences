@@ -17,22 +17,36 @@ function getTimestamps(
 }
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let iFrameVideo, currentTime, duration, paused, playback;
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  playback;
 let pageNumber;
 let videoName;
 let videoEpisode;
-let fullName;
-let timestamps;
+let fullName: string;
+let timestamps: number[];
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.duration;
-    paused = data.iframe_video.paused;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      duration: number;
+      iFrameVideo: boolean;
+      currTime: number;
+      paused: boolean;
+    };
+  }) => {
+    playback = data.iframe_video.duration !== null ? true : false;
+    if (playback) {
+      iFrameVideo = data.iframe_video.iFrameVideo;
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.duration;
+      paused = data.iframe_video.paused;
+    }
   }
-});
+);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -198,11 +212,39 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/watch")) {
-    fullName = document
-      .querySelector(
+    if (timestamps) {
+      data.startTimestamp = paused ? null : timestamps[0];
+      data.endTimestamp = paused ? null : timestamps[1];
+    }
+    if (document.location.href.endsWith("&extra=1")) {
+      fullName = document
+        .querySelector(
+          "#wtf > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div"
+        )
+        .textContent.trim()
+        .replace("Server 1", "")
+        .replace("Server 2", "");
+    } else if (
+      document.querySelector(
         "body > center > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div"
       )
-      .textContent.trim();
+    ) {
+      fullName = document
+        .querySelector(
+          "body > center > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div"
+        )
+        .textContent.trim()
+        .replace("Server 1", "")
+        .replace("Server 2", "");
+    } else {
+      fullName = document
+        .querySelector(
+          "#wtf > footer > div.container.rounded.bg-dark-as-box.text-white.mt-1.mb-1.p-2 > h4 > div"
+        )
+        .textContent.trim()
+        .replace("Server 1", "")
+        .replace("Server 2", "");
+    }
     if (iFrameVideo === true) {
       timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
     }
@@ -224,8 +266,6 @@ presence.on("UpdateData", async () => {
           data.state = paused
             ? videoEpisode + "° Special｜In pausa"
             : videoEpisode + "° Special｜In riproduzione";
-          data.startTimestamp = paused ? "" : timestamps[0];
-          data.endTimestamp = paused ? "" : timestamps[1];
           presence.setActivity(data);
         } else {
           // Specials NEW
@@ -245,8 +285,6 @@ presence.on("UpdateData", async () => {
           data.state = paused
             ? videoEpisode + "° Special｜In pausa"
             : videoEpisode + "° Special｜In riproduzione";
-          data.startTimestamp = paused ? "" : timestamps[0];
-          data.endTimestamp = paused ? "" : timestamps[1];
           presence.setActivity(data);
         }
       } else if (fullName.includes(" Movie ")) {
@@ -264,8 +302,6 @@ presence.on("UpdateData", async () => {
         data.smallImageText = paused ? "SA｜In pausa" : "SA｜In riproduzione";
         data.details = "Guarda: " + videoName;
         data.state = paused ? "Film｜In pausa" : "Film｜In riproduzione";
-        data.startTimestamp = paused ? "" : timestamps[0];
-        data.endTimestamp = paused ? "" : timestamps[1];
         presence.setActivity(data);
       } else if (fullName.includes(" OVA ")) {
         //OVA
@@ -285,8 +321,6 @@ presence.on("UpdateData", async () => {
         data.state = paused
           ? videoEpisode + "° OVA｜In pausa"
           : videoEpisode + "° OVA｜In riproduzione";
-        data.startTimestamp = paused ? "" : timestamps[0];
-        data.endTimestamp = paused ? "" : timestamps[1];
         presence.setActivity(data);
       } else {
         // Anime
@@ -303,8 +337,6 @@ presence.on("UpdateData", async () => {
         data.state = paused
           ? "Ep. " + videoEpisode + "｜In pausa"
           : "Ep. " + videoEpisode + "｜In riproduzione";
-        data.startTimestamp = paused ? "" : timestamps[0];
-        data.endTimestamp = paused ? "" : timestamps[1];
         presence.setActivity(data);
       }
     } else {
@@ -325,8 +357,6 @@ presence.on("UpdateData", async () => {
           data.state = paused
             ? videoEpisode + "° Special｜In pausa"
             : videoEpisode + "° Special｜In riproduzione";
-          data.startTimestamp = paused ? "" : timestamps[0];
-          data.endTimestamp = paused ? "" : timestamps[1];
           presence.setActivity(data);
         } else {
           // Specials NEW
@@ -346,8 +376,6 @@ presence.on("UpdateData", async () => {
           data.state = paused
             ? videoEpisode + "° Special｜In pausa"
             : videoEpisode + "° Special｜In riproduzione";
-          data.startTimestamp = paused ? "" : timestamps[0];
-          data.endTimestamp = paused ? "" : timestamps[1];
           presence.setActivity(data);
         }
       } else if (fullName.includes(" Movie ")) {
@@ -365,8 +393,6 @@ presence.on("UpdateData", async () => {
         data.smallImageText = paused ? "SO｜In pausa" : "SO｜In riproduzione";
         data.details = "Guarda: " + videoName;
         data.state = paused ? "Film｜In pausa" : "Film｜In riproduzione";
-        data.startTimestamp = paused ? "" : timestamps[0];
-        data.endTimestamp = paused ? "" : timestamps[1];
         presence.setActivity(data);
       } else if (fullName.includes(" OVA ")) {
         //OVA
@@ -386,8 +412,6 @@ presence.on("UpdateData", async () => {
         data.state = paused
           ? videoEpisode + "° OVA｜In pausa"
           : videoEpisode + "° OVA｜In riproduzione";
-        data.startTimestamp = paused ? "" : timestamps[0];
-        data.endTimestamp = paused ? "" : timestamps[1];
         presence.setActivity(data);
       } else {
         // Anime
@@ -404,8 +428,6 @@ presence.on("UpdateData", async () => {
         data.state = paused
           ? "Ep. " + videoEpisode + "｜In pausa"
           : "Ep. " + videoEpisode + "｜In riproduzione";
-        data.startTimestamp = paused ? "" : timestamps[0];
-        data.endTimestamp = paused ? "" : timestamps[1];
         presence.setActivity(data);
       }
     }

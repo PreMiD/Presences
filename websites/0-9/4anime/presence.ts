@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
   }
 
   const video: HTMLVideoElement =
-    document.querySelector("#videoo1_html5_api") ||
+    document.querySelector("#example_video_1_html5_api") ||
     document.querySelector(".jw-video");
 
   if (video !== null && !isNaN(video.duration)) {
@@ -76,7 +76,7 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle(video.paused ? "" : videoTitle);
 
     presenceData.details = videoTitle;
-    presenceData.state = seasonepisode.innerText;
+    presenceData.state = seasonepisode.textContent;
 
     if (video.paused) {
       delete presenceData.startTimestamp;

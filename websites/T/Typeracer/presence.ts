@@ -1,32 +1,32 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "655247212728811530"
 });
 
-var currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/"),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  presenceData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
+let currentURL = new URL(document.location.href),
+  currentPath = currentURL.pathname.slice(1).split("/");
+const browsingStamp = Math.floor(Date.now() / 1000);
+let presenceData: PresenceData = {
+  details: "Viewing an unsupported page",
+  largeImageKey: "lg",
+  startTimestamp: browsingStamp
+};
+const updateCallback = {
+  _function: null as Function,
+  get function(): Function {
+    return this._function;
   },
-  updateCallback = {
-    _function: null as Function,
-    get function(): Function {
-      return this._function;
-    },
-    set function(parameter) {
-      this._function = parameter;
-    },
-    get present(): boolean {
-      return this._function !== null;
-    }
-  };
+  set function(parameter) {
+    this._function = parameter;
+  },
+  get present(): boolean {
+    return this._function !== null;
+  }
+};
 
 /**
  * Initialize/reset presenceData.
  */
-function resetData(): void {
+const resetData = (): void => {
   currentURL = new URL(document.location.href);
   currentPath = currentURL.pathname.slice(1).split("/");
   presenceData = {
@@ -34,16 +34,19 @@ function resetData(): void {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
-}
+};
 
 ((): void => {
-  var raceStamp = null;
+  let raceStamp: number = null;
 
   if (currentURL.hostname === "play.typeracer.com") {
-    //
-    //		Part 1
-    //		play.typeracer.com (game page)
-    //
+    /*
+
+		Part 1
+		play.typeracer.com (game page)
+		
+		*/
+
     updateCallback.function = (): void => {
       if (document.querySelector(".gameView")) {
         presenceData.details = "Playing a race";
@@ -116,10 +119,13 @@ function resetData(): void {
       }
     };
   } else if (currentURL.hostname === "data.typeracer.com") {
-    //
-    //		Part 2
-    //		data.typeracer.com (pit stop and misc. pages)
-    //
+    /*
+		
+		Part 2
+		data.typeracer.com (pit stop and misc. pages)
+		
+		*/
+
     if (currentPath[0] === "pit") {
       if (currentPath[1] === "profile") {
         presenceData.details = "Viewing a racer profile";
