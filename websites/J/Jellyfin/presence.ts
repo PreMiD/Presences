@@ -264,27 +264,28 @@ interface MediaInfo {
   Height: number;
 }
 
-// official website
-const JELLYFIN_URL = "jellyfin.org";
+const
+  // official website
+  JELLYFIN_URL = "jellyfin.org",
 
-// web client app name
-const APP_NAME = "Jellyfin Web";
+  // web client app name
+  APP_NAME = "Jellyfin Web",
 
-// all the presence art assets uploaded to discord
-const PRESENCE_ART_ASSETS = {
-  download: "downloading",
-  live: "live",
-  logo: "banner-icon",
-  pause: "pause",
-  play: "play",
-  read: "reading",
-  search: "search",
-  write: "writing"
-};
+  // all the presence art assets uploaded to discord
+  PRESENCE_ART_ASSETS = {
+    download: "downloading",
+    live: "live",
+    logo: "banner-icon",
+    pause: "pause",
+    play: "play",
+    read: "reading",
+    search: "search",
+    write: "writing"
+  },
 
-const presenceData: PresenceData = {
-  largeImageKey: PRESENCE_ART_ASSETS.logo
-};
+  presenceData: PresenceData = {
+    largeImageKey: PRESENCE_ART_ASSETS.logo
+  };
 
 let ApiClient: ApiClient;
 
@@ -313,15 +314,17 @@ let presence: Presence;
 function handleAudioPlayback(): void {
   // sometimes the buttons are not created fast enough
   try {
-    const audioElem = document.getElementsByTagName("audio")[0];
-    const infoContainer = document.getElementsByClassName("nowPlayingBar")[0];
-    const buttons = infoContainer.querySelectorAll("button.itemAction");
+    const
+      audioElem = document.getElementsByTagName("audio")[0],
+      infoContainer = document.getElementsByClassName("nowPlayingBar")[0],
+      title: HTMLAnchorElement = infoContainer.getElementsByClassName("nowPlayingBarText")[0].querySelector("a"),
+      artist: HTMLDivElement = infoContainer.getElementsByClassName("nowPlayingBarSecondaryText")[0] as HTMLDivElement;
 
     presenceData.details = `Listening to: ${
-      buttons.length >= 1 ? buttons[0].textContent : "unknown title"
+      title ? title.innerText : "unknown title"
     }`;
     presenceData.state = `By: ${
-      buttons.length >= 2 ? buttons[1].textContent : "unknown artist"
+      artist ? artist.innerText : "unknown artist"
     }`;
 
     // playing
@@ -430,17 +433,18 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
 
   media[itemId] = "pending";
 
-  fetch(`/Users/${getUserId()}/Items/${itemId}`, {
-    credentials: "include",
-    headers: {
-      "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
-    }
-  })
-    .then((resp) => resp.json())
-    .then((json) => {
-      media[itemId] = json;
-      return media[itemId];
-    });
+  const
+    res = await fetch(`/Users/${getUserId()}/Items/${itemId}`, {
+      credentials: "include",
+      headers: {
+        "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
+      }
+    }),
+
+    json = await res.json();
+
+  media[itemId] = json;
+  return media[itemId];
 }
 
 /**
@@ -457,30 +461,25 @@ async function handleVideoPlayback(): Promise<void> {
   const videoPlayerElem = document.getElementsByTagName("video")[0];
 
   // this variables content will be replaced in details and status properties on presenceData
-  let title;
-  let subtitle;
+  let
+    title,
+    subtitle;
 
-  // title on the header
-  const headerTitleElem = document.querySelector("h3.pageTitle");
+  const
+    // title on the header
+    headerTitleElem = document.querySelector("h3.pageTitle") as HTMLElement,
 
-  // title on the osdControls
-  const osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle");
+    // title on the osdControls
+    osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle") as HTMLElement;
 
   // media metadata
   let mediaInfo: string | MediaInfo;
 
-  const videoPlayerContainerElem = document.body.getElementsByClassName(
-    "videoPlayerContainer"
-  )[0];
-
   // no background image, we're playing live tv
-  if ((videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage) {
-    // with this url we can obtain the id of the item we are playing back
-    const backgroundImageUrl = (videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage
-      .split('"')[1]
-      .replace(ApiClient["_serverAddress"], "");
+  if ((videoPlayerElem as HTMLVideoElement).getAttribute("poster")) {
+    const backgroundImageUrl = (videoPlayerElem as HTMLVideoElement).getAttribute("poster");
 
-    mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[2]);
+    mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[4]);
   }
 
   // display generic info
@@ -493,15 +492,15 @@ async function handleVideoPlayback(): Promise<void> {
     switch (mediaInfo.Type) {
       case "Movie":
         title = "Watching a Movie";
-        subtitle = osdTitleElem.textContent;
+        subtitle = osdTitleElem.innerText;
         break;
       case "Series":
-        title = `Watching ${headerTitleElem.textContent}`;
-        subtitle = osdTitleElem.textContent;
+        title = `Watching ${headerTitleElem.innerText}`;
+        subtitle = osdTitleElem.innerText;
         break;
       case "TvChannel":
         title = "Watching Live Tv";
-        subtitle = osdTitleElem.textContent;
+        subtitle = osdTitleElem.innerText;
         break;
       default:
         title = `Watching ${mediaInfo.Type}`;
@@ -637,7 +636,7 @@ async function handleWebClient(): Promise<void> {
     case "myprofile.html": // profile
     case "mypreferencesdisplay.html": // display
     case "mypreferenceshome.html": // home
-    case "mypreferenceslanguages.html": // languages
+    case "mypreferencesplayback.html": // playback
     case "mypreferencessubtitles.html": // subtitles
       presenceData.state = "On user preferences";
       break;
@@ -647,15 +646,22 @@ async function handleWebClient(): Promise<void> {
     case "dashboardgeneral.html": // general
     case "userprofiles.html": // user profiles
     case "useredit.html": // editing user profile
+    case "userlibraryaccess.html": // editing user profile > library access
+    case "userparentalcontrol.html": // editing user profile > parental control
+    case "userpassword.html": // editing user profile > password
     case "library.html": // managing library
     case "librarydisplay.html": // library display settings
     case "metadataimages.html": // library metadata settings
     case "metadatanfo.html": // library NFO settings
-    case "encodingsettings.html": // encoding settings // devices section
+    case "encodingsettings.html": // encoding settings > transcoding
+    case "playbackconfiguration.html": // encoding settings > resume
+    case "streamingsettings.html": // encoding settings > streaming
     case "devices.html": // devices
     case "device.html": // editing device
     case "serveractivity.html": // server activity
-    case "dlnasettings.html": // dlna settings // live tv section
+    case "dlnasettings.html": // dlna settings > settings
+    case "dlnaprofiles.html": // dlna settings > profiles
+    case "dlnaprofile.html": // dlna settings > add profile
     case "livetvstatus.html": // manage live tv
     case "livetvtuner.html": // add/manage tv tuner
     case "livetvguideprovider.html": // add/manage tv guide provider
@@ -691,7 +697,7 @@ async function handleWebClient(): Promise<void> {
       presenceData.state = "Editing media metadata";
       break;
 
-    case "itemdetails.html":
+    case "details":
       await handleItemDetails();
       break;
 
