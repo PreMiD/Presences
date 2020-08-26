@@ -4,13 +4,13 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const host = window.location.hostname.replace("www.", ""),
-  path = window.location.pathname.split("/").slice(1);
-  const presenceData: PresenceData = {
+  path = window.location.pathname.split("/").slice(1),
+  presenceData: PresenceData = {
     details: "Rustlabs",
     largeImageKey: "logo_big"
   };
 
-  const browsingStamp = Math.floor(Date.now() / 1000);
+  browsingStamp = Math.floor(Date.now() / 1000);
 
   switch (host) {
     //Homepage
