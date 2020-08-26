@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   presenceData: PresenceData = {
     details: "Rustlabs",
     largeImageKey: "logo_big"
-  };
+  },
 
   browsingStamp = Math.floor(Date.now() / 1000);
 
