@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "614200757989670934"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "614200757989670934"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let translatePageTitle: HTMLElement,
   translatingFile: HTMLElement,
