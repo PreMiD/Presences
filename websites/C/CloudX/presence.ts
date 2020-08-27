@@ -5,15 +5,32 @@ const presence = new Presence({
 
 let title, artist, dj, playbackStatus: string;
 
+function listener(): void {
+  const json = JSON.parse(this.responseText);
+  title = json.song.title;
+  artist = json.song.artist;
+  dj = json.dj.username;
+}
+
+function getData(): void {
+  const req = new XMLHttpRequest();
+  req.addEventListener("load", listener);
+  req.open("GET", "https://api.thisiscloudx.com/stats");
+  req.send();
+}
+
 function getStatus(): string {
   const playPauseBtn = document.querySelector("#play");
-  if (playPauseBtn.className === "fas fa-play fa-lg") {
+  if (playPauseBtn.className === "fas fa-play") {
     return "Paused";
-  } else if (playPauseBtn.className === "fas fa-pause fa-lg") {
+  } else if (playPauseBtn.className === "fas fa-pause") {
     return "Playing";
   }
   return "Playing";
 }
+
+getData();
+setInterval(getData, 5000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -21,13 +38,10 @@ presence.on("UpdateData", async () => {
   };
 
   if (
-    document.location.hostname === "www.cloudfm.xyz" ||
-    document.location.hostname === "cloudfm.xyz"
+    document.location.hostname === "www.thisiscloudx.com" ||
+    document.location.hostname === "thisiscloudx.com"
   ) {
     presenceData.startTimestamp = browsingStamp;
-    title = document.querySelector("#title").textContent;
-    artist = document.querySelector("#artist").textContent;
-    dj = document.querySelector("#dj").textContent;
     playbackStatus = getStatus();
     if (playbackStatus === "Paused") {
       presenceData.smallImageKey = "pause";
