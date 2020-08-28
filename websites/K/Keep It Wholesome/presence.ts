@@ -1,11 +1,10 @@
 const presence = new Presence({
-  clientId: "748255086286733442"
-}),
-
- browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "748255086286733442"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-   const presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     details: "Keep It Wholesome",
     largeImageKey: "lg"
   };
@@ -40,15 +39,13 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.details;
-  } else if (
-    document.location.pathname.startsWith("/collections")
-  ) {
+  } else if (document.location.pathname.startsWith("/collections")) {
     presenceData.state = "Collections";
 
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.details;
-  } 
+  }
 
   presence.setActivity(presenceData);
 });
