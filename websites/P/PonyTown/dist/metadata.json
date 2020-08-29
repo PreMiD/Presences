@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "CyberPon3",
+    "id": "163300806769115136"
+  },
+  "service": "PonyTown",
+  "description": {
+    "en": "A game of ponies building a town."
+  },
+  "url": ["pony.town", "event.pony.town"],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/muadn0x.png",
+  "thumbnail": "https://i.imgur.com/PweXoSs.png",
+  "color": "#ddbb74",
+  "tags": ["pony", "town", "mlp", "game"],
+  "category": "games"
+}
