@@ -1,0 +1,29 @@
+{
+  "author": {
+    "name": "Callum",
+    "id": "506899274748133376"
+  },
+  "service": "Repeat",
+  "description": {
+    "en": "Repeating your favourite tunes daily."
+  },
+  "url": [
+    "www.repeatradio.net",
+    "repeatradio.net",
+    "repeat.pw"
+  ],
+  "version": "2.5.3",
+  "logo": "https://repeatradio.net/staff/avatars/default.png",
+  "thumbnail": "https://repeatradio.net/staff/covers/presets/1.png",
+  "color": "#32a852",
+  "tags": [
+    "music",
+    "radio",
+    "gamers",
+    "community",
+    "repeat",
+    "repeatradio"
+  ],
+  "category": "music",
+  "regExp": "([a-z0-9-]+[.])*(repeatradio[.]net|repeat[.]pw)[/]"
+}
