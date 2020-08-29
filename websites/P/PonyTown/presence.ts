@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "748780200006778892"
 });
 
@@ -17,10 +17,12 @@ enum PlayingState {
   IN_GAME
 }
 
-let lastSeenCharacterName = "New Character";
-let lastSeenServerName = "Unknown Server";
-let lastSeenState = PlayingState.UNKNOWN;
-let lastStateTime = Date.now();
+const lastState = {
+  state: PlayingState.UNKNOWN,
+  characterName: "New Character",
+  serverName: "Unknown Server",
+  time: Date.now()
+}
 
 // On presence update request
 presence.on("UpdateData", async () => {
@@ -30,29 +32,29 @@ presence.on("UpdateData", async () => {
   if (gameElement && gameElement instanceof HTMLElement && !gameElement.hidden) {
 
     // Update the last seen state
-    if (lastSeenState != PlayingState.IN_GAME) {
-      lastSeenState = PlayingState.IN_GAME;
-      lastStateTime = Date.now();
+    if (lastState.state != PlayingState.IN_GAME) {
+      lastState.state = PlayingState.IN_GAME;
+      lastState.time = Date.now();
     }
 
     // Try to find what server they're on
     const serverSpan = document.querySelector(selectors.IN_GAME_SERVER_NAME);
     if(serverSpan) {
-      lastSeenServerName = serverSpan.textContent;
+      lastState.serverName = serverSpan.textContent;
     }
 
     // Try to find what character they're playing
     const charSpan = document.querySelector(selectors.IN_GAME_CHARACTER_NAME);
     if (charSpan) {
-      lastSeenCharacterName = charSpan.textContent;
+      lastState.characterName = charSpan.textContent;
     }
 
     // Update presence
     presence.setActivity({
       largeImageKey: "main-icon",
-      details: `Playing as ${lastSeenCharacterName}`,
-      state: lastSeenServerName,
-      startTimestamp: lastStateTime
+      details: `Playing as ${lastState.characterName}`,
+      state: lastState.serverName,
+      startTimestamp: lastState.time
     });
 
   }
@@ -60,28 +62,28 @@ presence.on("UpdateData", async () => {
   else if (document.querySelector(selectors.CHARACTER_CREATOR)) {
 
     // Update the last seen state
-    if (lastSeenState != PlayingState.CHARACTER_CREATOR) {
-      lastSeenState = PlayingState.CHARACTER_CREATOR;
-      lastStateTime = Date.now();
+    if (lastState.state != PlayingState.CHARACTER_CREATOR) {
+      lastState.state = PlayingState.CHARACTER_CREATOR;
+      lastState.time = Date.now();
     }
 
     // Try to find what server is selected
     const serverSpan = document.querySelector(selectors.SERVER_NAME);
     if(serverSpan) {
-      lastSeenServerName = serverSpan.textContent;
+      lastState.serverName = serverSpan.textContent;
     }
 
     // Try to find what character they're editing
     const charSelector = document.querySelector(selectors.CHARACTER_NAME);
     if (charSelector && charSelector instanceof HTMLInputElement) {
-      lastSeenCharacterName = charSelector.value || "New Character";
+      lastState.characterName = charSelector.value || "New Character";
     }
 
     // Update presence
     presence.setActivity({
       largeImageKey: "main-icon",
-      details: `Editing ${lastSeenCharacterName}`,
-      startTimestamp: lastStateTime
+      details: `Editing ${lastState.characterName}`,
+      startTimestamp: lastState.time
     });
 
   }
@@ -89,21 +91,21 @@ presence.on("UpdateData", async () => {
   else {
 
     // Update the last seen state
-    if (lastSeenState != PlayingState.UNKNOWN) {
-      lastSeenState = PlayingState.UNKNOWN;
-      lastStateTime = Date.now();
+    if (lastState.state != PlayingState.UNKNOWN) {
+      lastState.state = PlayingState.UNKNOWN;
+      lastState.time = Date.now();
     }
 
     // Try to find what server is selected
     const serverSpan = document.querySelector(selectors.SERVER_NAME);
     if(serverSpan) {
-      lastSeenServerName = serverSpan.textContent;
+      lastState.serverName = serverSpan.textContent;
     }
 
     // Try to find what character is selected
     const charSelector = document.querySelector(selectors.CHARACTER_NAME);
     if (charSelector && charSelector instanceof HTMLInputElement) {
-      lastSeenCharacterName = charSelector.value;
+      lastState.characterName = charSelector.value;
     }
 
     // Update presence
