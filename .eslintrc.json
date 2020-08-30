@@ -20,7 +20,6 @@
   "rules": {
     "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
     "no-multiple-empty-lines": ["warn", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
-    "template-curly-spacing" : "off",
     "quotes": "off",
     "indent": "off",
     "camelcase": "off",
@@ -53,5 +52,7 @@
       }
     }
   ],
+  "reportUnusedDisableDirectives": true,	
+  "noInlineConfig": true,
   "plugins": ["@typescript-eslint"]
 }
