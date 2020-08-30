@@ -16,6 +16,7 @@ function pathIncludes(string: string): boolean {
 }
 
 presence.on("UpdateData", async () => {
+  // eslint-disable-next-line no-var
   var data: PresenceData = {
     largeImageKey: "lg",
     startTimestamp: timestamp
