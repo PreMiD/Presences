@@ -20,30 +20,38 @@ presence.on("UpdateData", async () => {
           ".board-header-btn.board-header-btn-org-name.js-open-org-menu"
         ) !== null
       ) {
-        if(document.querySelector("#permission-level > span.board-header-btn-text").textContent === "Private"){
-          presenceData.details = "Viewing private board";
-        }else {
-          presenceData.details =
-          "Viewing board: " +
+        if (
           document.querySelector(
-            ".js-board-editing-target.board-header-btn-text"
-          ).textContent;
-        presenceData.state =
-          "By team: " +
-          document
-            .querySelector(
-              ".board-header-btn.board-header-btn-org-name.js-open-org-menu"
-            )
-            .textContent.replace(
-              document.querySelector(".org-label").textContent,
-              ""
-            );
+            "#permission-level > span.board-header-btn-text"
+          ).textContent === "Private"
+        ) {
+          presenceData.details = "Viewing private board";
+        } else {
+          presenceData.details =
+            "Viewing board: " +
+            document.querySelector(
+              ".js-board-editing-target.board-header-btn-text"
+            ).textContent;
+          presenceData.state =
+            "By team: " +
+            document
+              .querySelector(
+                ".board-header-btn.board-header-btn-org-name.js-open-org-menu"
+              )
+              .textContent.replace(
+                document.querySelector(".org-label").textContent,
+                ""
+              );
         }
       } else {
         presenceData.details = "Viewing board:";
-        if(document.querySelector("#permission-level > span.board-header-btn-text").textContent === "Private"){
+        if (
+          document.querySelector(
+            "#permission-level > span.board-header-btn-text"
+          ).textContent === "Private"
+        ) {
           presenceData.details = "Viewing private board";
-        }else {
+        } else {
           presenceData.state = document.querySelector(
             ".js-board-editing-target.board-header-btn-text"
           ).textContent;
@@ -51,16 +59,21 @@ presence.on("UpdateData", async () => {
       }
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/c/")) {
-      if(document.querySelector("#permission-level > span.board-header-btn-text").textContent === "Private"){
+      if (
+        document.querySelector("#permission-level > span.board-header-btn-text")
+          .textContent === "Private"
+      ) {
         presenceData.details = "Viewing private card";
         presenceData.state = "Private Board";
-      }else {
+      } else {
         presenceData.details =
-          "Viewing card: " + document.querySelector(".window-title").textContent;
+          "Viewing card: " +
+          document.querySelector(".window-title").textContent;
         presenceData.state =
           "Board: " +
-          document.querySelector(".js-board-editing-target.board-header-btn-text")
-            .textContent;
+          document.querySelector(
+            ".js-board-editing-target.board-header-btn-text"
+          ).textContent;
         presenceData.smallImageKey = "reading";
       }
     } else if (document.location.pathname.includes("/activity")) {
