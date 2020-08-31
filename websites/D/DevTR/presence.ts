@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
     },
      page = window.location.pathname,
     browsingStamp = Math.floor(Date.now() / 1000);
-  
+  //a
     presenceData.startTimestamp = browsingStamp;
     if (page.startsWith("/kullanici/")) {
         presenceData.details = "Bir kullanıcının profilini görüntülüyor:";
