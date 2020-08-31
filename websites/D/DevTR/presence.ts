@@ -9,7 +9,6 @@ presence.on("UpdateData", () => {
     browsingStamp = Math.floor(Date.now() / 1000);
   
     presenceData.startTimestamp = browsingStamp;
-    //idk how to combine/merge consts in ts, so i just replaced pages to "page" shame on me :( and ik, its pathetic
     if (page.startsWith("/kullanici/")) {
         presenceData.details = "Bir kullanıcının profilini görüntülüyor:";
         presenceData.state = document.querySelector("body > div:nth-child(6) > div > h3").textContent;
