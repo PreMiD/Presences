@@ -17,6 +17,7 @@ setInterval(newStats, 10000);
 newStats();
 
 const stamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "repeatlogo",
@@ -25,10 +26,9 @@ presence.on("UpdateData", () => {
     smallImageText: `${sdj || "AutoDJ"} is live!`,
     startTimestamp: stamp
   };
-  if (sdj !== "AutoDJ") {
-    presenceData.smallImageKey = "bouncelive";
-  } else {
-    delete presenceData.smallImageText;
-  }
+  
+  if (sdj !== "AutoDJ") presenceData.smallImageKey = "bouncelive";
+  else delete presenceData.smallImageText;
+  
   presence.setActivity(presenceData);
 });
