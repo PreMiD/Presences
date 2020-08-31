@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Eren",
+    "id": "478937019758673931"
+  },
+  "service": "Discord Bot List",
+  "description": {
+    "en": "Discord Bot List is listing discord bots.",
+    "tr": "Discord Bot List bir bot listesidir."
+  },
+  "url": "discordbotlist.com",
+  "version": "1.2.6",
+  "logo": "https://imgur.com/JDKasKl.png",
+  "thumbnail": "https://i.imgur.com/p7BC1B5.png",
+  "color": "#10C0E7",
+  "tags": [
+    "discord",
+    "bot",
+    "discord-bot-list"
+  ],
+  "category": "other"
+}

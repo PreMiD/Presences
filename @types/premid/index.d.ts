@@ -1,7 +1,7 @@
 /**
  * @link https://docs.premid.app/presence-development/coding/presence-class#getpageletiable-string
  */
-interface presenceData {
+interface PresenceData {
   state?: string;
   details?: string;
   startTimestamp?: number;
@@ -35,7 +35,7 @@ declare class Presence {
    * @param playback Is presence playing
    * @link https://docs.premid.app/presence-development/coding/presence-class#setactivity-presencedata-boolean
    */
-  setActivity(presenceData?: presenceData, playback?: boolean): void;
+  setActivity(presenceData?: PresenceData, playback?: boolean): void;
   /**
    * Clears the activity shown in discord as well as the Tray and keybinds
    * @link https://docs.premid.app/presence-development/coding/presence-class#clearactivity
@@ -52,7 +52,7 @@ declare class Presence {
    * @param strings
    * @since 2.0-BETA3
    */
-  getActivity(): presenceData;
+  getActivity(): PresenceData;
   /**
    * Get translations from the extension
    * @param strings String object with keys being the key for string, keyValue is the string value
@@ -86,7 +86,7 @@ declare class Presence {
    */
   hideSetting(settings: string | Array<string>): Promise<void>;
   /**
-   * Hide a setting
+   * Unhide a setting
    * @param setting Id of setting / Array of setting Id's
    * @since 2.1
    */
