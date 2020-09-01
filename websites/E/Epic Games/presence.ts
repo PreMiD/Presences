@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Help Page";
       }
 
-      if(pathname.startsWith("/help/"))){
+      if(pathname.startsWith("/help/")){
         const helpHeading = document.querySelector("#epicGamesReactWrapper > div > div.eg-content > div > div.sspgrid-container > div.Layout2Cols__wrapper.LayoutCol7Col4__wrapper > div > div.Layout2Cols__body-col--main.sspgrid-col-lg-7 > div.Article__wrapper > h1");
         if(helpHeading === null){
           presenceData.details = null;
