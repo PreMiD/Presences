@@ -2,9 +2,9 @@ const presence = new Presence({
   clientId: "730897382937591848"
 });
 
-let browsingTimestamp = Math.floor(Date.now() / 1000);
+let browsingTimestamp = Math.floor(Date.now() / 1000),
+  debugMode = true;
 
-let debugMode = true;
 if(debugMode){
     console.log("FiveM Presence | Debug Mode Loaded!")
     console.log("Hostname: " + document.location.hostname + " | Pathname: " + document.location.pathname);
@@ -14,10 +14,9 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
       largeImageKey: "fivem",
       startTimestamp: browsingTimestamp        
-  };
-
-  const pathname = document.location.pathname
-  const hostname = document.location.hostname;
+  },
+    pathname = document.location.pathname,
+    hostname = document.location.hostname;
 
   if(
   hostname === "fivem.net" || hostname === "www.fivem.net"
