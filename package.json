@@ -36,6 +36,6 @@
     "semver": "^7.3.2",
     "source-map-support": "^0.5.19",
     "terser": "git://github.com/terser/terser.git#ff851d2",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
   }
 }
