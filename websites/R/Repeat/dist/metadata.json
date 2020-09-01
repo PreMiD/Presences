@@ -22,7 +22,8 @@
     "gamers",
     "community",
     "repeat",
-    "repeatradio"
+    "repeatradio",
+    "online-radio"
   ],
   "category": "music",
   "regExp": "([a-z0-9-]+[.])*(repeatradio[.]net|repeat[.]pw)[/]"
