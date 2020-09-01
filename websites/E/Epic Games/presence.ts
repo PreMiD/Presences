@@ -7,10 +7,9 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp,
-  };
-
-  const pathname = document.location.pathname;
-  const hostname = document.location.hostname;
+  },
+    pathname = document.location.pathname,
+    hostname = document.location.hostname;
 
   if(
     hostname === "epicgames.com" || hostname === "www.epicgames.com"
