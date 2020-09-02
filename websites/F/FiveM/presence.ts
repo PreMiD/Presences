@@ -2,13 +2,7 @@ const presence = new Presence({
   clientId: "730897382937591848"
 });
 
-let browsingTimestamp = Math.floor(Date.now() / 1000),
-  debugMode = true;
-
-if(debugMode){
-    console.log("FiveM Presence | Debug Mode Loaded!")
-    console.log("Hostname: " + document.location.hostname + " | Pathname: " + document.location.pathname);
-}
+const browsingTimestamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -21,9 +15,9 @@ presence.on("UpdateData", () => {
   if(
   hostname === "fivem.net" || hostname === "www.fivem.net"
   ){
-      presenceData.details = "Viewing:"
+      presenceData.details = "Viewing:";
       if(pathname === "/"){
-        presenceData.state = "Home Page"
+        presenceData.state = "Home Page";
       }
   }else if(
     hostname === "docs.fivem.net" || hostname === "www.docs.fivem.net"
@@ -41,7 +35,7 @@ presence.on("UpdateData", () => {
     }else if(pathname === "/servers"){
       presenceData.details = "Seaching for a server";
     }
-  };
+  }
 
   if(presenceData.details == null){
       presence.setTrayTitle();
