@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Cenap",
+    "id": "471783967167741964"
+  },
+  "service": "Discord Bot List",
+  "description": {
+    "en": "We give you the availability to apply your bot and give your bot a page on our website.",
+    "tr": "Botunuzu uygulamanız ve botunuza web sitemizde bir sayfa vermeniz için size uygunluk veriyoruz."
+  },
+  "url": "https://discord.gg/dx2HsWf",
+  "version": "0.0.1",
+  "logo": "https://cdn.discordapp.com/attachments/749247002986020875/749523564692111410/logo.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/749247002986020875/749523564692111410/logo.png",
+  "color": "#6574cd",
+  "tags": [
+    "discord",
+    "bots",
+    "list"
+  ],
+  "category": "other"
+}
