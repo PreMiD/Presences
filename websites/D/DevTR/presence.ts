@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
     } else if (page.startsWith("/javascript")) {
         presenceData.details = "Bir sayfayı görüntülüyor:";
         presenceData.state = "JS Komutlar";
-        presenceData.smallImageKey = "js"
+        presenceData.smallImageKey = "js";
     } else if (page.startsWith("/kod")) {
         presenceData.details = "Bir kodu görüntülüyor:";
         presenceData.state = document.querySelector("body > div.post.post-single > div.post-thumbnail > center > h1").textContent;
