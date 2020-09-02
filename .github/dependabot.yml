@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directoy: "/"
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "TheDropX"
+    commit-message:
+      prefix: "🔼"
+      prefix-development: "🔼"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 15
