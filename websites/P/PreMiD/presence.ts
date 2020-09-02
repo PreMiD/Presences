@@ -18,7 +18,7 @@ function pathIncludes(string: string): boolean {
 presence.on("UpdateData", async () => {
   var data: PresenceData = {
     largeImageKey: "lg",
-    startTimestamp: timestamp
+    startTimestamp: timestamp,
   };
 
   host = document.location.hostname;
