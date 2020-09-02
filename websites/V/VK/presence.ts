@@ -13,7 +13,7 @@ var localeStrings = {
     Chatting: "Смотрит сообщения...",
     Watching: "Смотрит",
     Browsing: "Просматривает",
-    BrowsingFeed: "Смотрит ленту..."
+    BrowsingFeed: "Смотрит ленту...",
   }
 };
 
