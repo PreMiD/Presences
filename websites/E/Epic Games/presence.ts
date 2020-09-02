@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   },
     pathname = document.location.pathname,
     hostname = document.location.hostname;
@@ -68,8 +68,8 @@ presence.on("UpdateData", async () => {
       // Epic Games account management & more
 
       if(pathname.startsWith("/account/")){
-        const nav = document.querySelector(".navigation-section");
-        const activeSetting = nav.querySelector(".active").textContent;
+        const nav = document.querySelector(".navigation-section"),
+          activeSetting = nav.querySelector(".active").textContent;
         presenceData.details = "Changing account details:";
         presenceData.state = activeSetting;
       }
