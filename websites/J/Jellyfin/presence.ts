@@ -264,13 +264,10 @@ interface MediaInfo {
   Height: number;
 }
 
-const
-  // official website
+const // official website
   JELLYFIN_URL = "jellyfin.org",
-
   // web client app name
   APP_NAME = "Jellyfin Web",
-
   // all the presence art assets uploaded to discord
   PRESENCE_ART_ASSETS = {
     download: "downloading",
@@ -282,7 +279,6 @@ const
     search: "search",
     write: "writing"
   },
-
   presenceData: PresenceData = {
     largeImageKey: PRESENCE_ART_ASSETS.logo
   };
@@ -314,18 +310,19 @@ let presence: Presence;
 function handleAudioPlayback(): void {
   // sometimes the buttons are not created fast enough
   try {
-    const
-      audioElem = document.getElementsByTagName("audio")[0],
+    const audioElem = document.getElementsByTagName("audio")[0],
       infoContainer = document.getElementsByClassName("nowPlayingBar")[0],
-      title: HTMLAnchorElement = infoContainer.getElementsByClassName("nowPlayingBarText")[0].querySelector("a"),
-      artist: HTMLDivElement = infoContainer.getElementsByClassName("nowPlayingBarSecondaryText")[0] as HTMLDivElement;
+      title: HTMLAnchorElement = infoContainer
+        .getElementsByClassName("nowPlayingBarText")[0]
+        .querySelector("a"),
+      artist: HTMLDivElement = infoContainer.getElementsByClassName(
+        "nowPlayingBarSecondaryText"
+      )[0] as HTMLDivElement;
 
     presenceData.details = `Listening to: ${
       title ? title.innerText : "unknown title"
     }`;
-    presenceData.state = `By: ${
-      artist ? artist.innerText : "unknown artist"
-    }`;
+    presenceData.state = `By: ${artist ? artist.innerText : "unknown artist"}`;
 
     // playing
     if (!audioElem.paused) {
@@ -433,14 +430,12 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
 
   media[itemId] = "pending";
 
-  const
-    res = await fetch(`/Users/${getUserId()}/Items/${itemId}`, {
+  const res = await fetch(`/Users/${getUserId()}/Items/${itemId}`, {
       credentials: "include",
       headers: {
         "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
       }
     }),
-
     json = await res.json();
 
   media[itemId] = json;
@@ -461,14 +456,10 @@ async function handleVideoPlayback(): Promise<void> {
   const videoPlayerElem = document.getElementsByTagName("video")[0];
 
   // this variables content will be replaced in details and status properties on presenceData
-  let
-    title,
-    subtitle;
+  let title, subtitle;
 
-  const
-    // title on the header
+  const // title on the header
     headerTitleElem = document.querySelector("h3.pageTitle") as HTMLElement,
-
     // title on the osdControls
     osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle") as HTMLElement;
 
@@ -477,7 +468,9 @@ async function handleVideoPlayback(): Promise<void> {
 
   // no background image, we're playing live tv
   if ((videoPlayerElem as HTMLVideoElement).getAttribute("poster")) {
-    const backgroundImageUrl = (videoPlayerElem as HTMLVideoElement).getAttribute("poster");
+    const backgroundImageUrl = (videoPlayerElem as HTMLVideoElement).getAttribute(
+      "poster"
+    );
 
     mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[4]);
   }
