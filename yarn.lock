@@ -2095,9 +2095,10 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-"terser@git://github.com/terser/terser.git#ff851d2":
-  version "5.0.0"
-  resolved "git://github.com/terser/terser.git#ff851d2507487a283acb35993f37e6c1d9a7d1c4"
+terser@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.2.1.tgz#40b971b8d28b4fe98c9e8c0d073ab48e7bb96cd8"
+  integrity sha512-/AOtjRtAMNGO0fIF6m8HfcvXTw/2AKpsOzDn36tA5RfhRdeXyb4RvHxJ5Pah7iL6dFkLk+gOnCaNHGwJPl6TrQ==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
