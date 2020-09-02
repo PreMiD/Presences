@@ -20,7 +20,7 @@ const presence = new Presence({
     track_number: null,
     showName: null,
     seasonNumber: null,
-    episodeNumber: null
+    episodeNumber: null,
   };
 let isShow = false,
   isSong = false,
