@@ -18,23 +18,21 @@ presence.on("UpdateData", async () => {
     largeImageKey: "tricksplit"
   };
 
-
   if (tsData && tsData.connected) {
     data.state = `${tsData.gameMode} on ${tsData.region}`;
 
     // In game?
     if (!document.querySelector(".end[style*=flex],.menu:not([style*=none])")) {
       // Spectating?
-      if (tsData.cellCount === 0)
-        data.details = "Spectating";
+      if (tsData.cellCount === 0) data.details = "Spectating";
       else {
-        data.details = `Playing as ${localStorage.getItem('nick') || 'TrickSplit.io'} (#${tsData.pos})`;
+        data.details = `Playing as ${
+          localStorage.getItem("nick") || "TrickSplit.io"
+        } (#${tsData.pos})`;
         data.startTimestamp = tsData.aliveTime;
       }
-    } else
-      data.details = "Main Menu";
-  } else
-    data.details = "Connecting...";
+    } else data.details = "Main Menu";
+  } else data.details = "Connecting...";
 
   // If data doesn't exist clear else set activity to the presence data
   if (data.details == null) {
@@ -43,4 +41,4 @@ presence.on("UpdateData", async () => {
   } else presence.setActivity(data);
 });
 
-presence.on("iFrameData", (data: TrickSplitData) => tsData = data); 
+presence.on("iFrameData", (data: TrickSplitData) => (tsData = data));

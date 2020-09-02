@@ -47,32 +47,33 @@ interface ItemMap {
 
 // A map of character prefixes with their names.
 const characterNameMap: ItemMap = {
-  box: 'Box',
-  crt: 'Crate',
-  qua: 'Quad',
-  vox: 'Voxel',
-  blk: 'Block',
-  crg: 'Cargo',
-  inf: 'Plus'
+  box: "Box",
+  crt: "Crate",
+  qua: "Quad",
+  vox: "Voxel",
+  blk: "Block",
+  crg: "Cargo",
+  inf: "Plus",
+  cub: "Cube"
 };
 
 // A map of map IDs with their names.
 const mapNameMap: ItemMap = {
-  attack: 'Attack Area',
-  battle: 'Battle Field',
-  big: 'Big Place',
-  area: '404',
-  combat: 'Combat Zone',
-  final: 'Final Destination',
-  location: 'Last Location',
-  platform: 'Penultimate Platform',
-  point: 'Prerequisite Point',
-  position: 'Primary Position',
-  vector: 'Veritable Vector',
-  war: 'War Ground',
-  dig: 'Dig',
-  unearth: 'Unearth',
-  excavate: 'Excavate'
+  attack: "Attack Area",
+  battle: "Battle Field",
+  big: "Big Place",
+  area: "404",
+  combat: "Combat Zone",
+  final: "Final Destination",
+  location: "Last Location",
+  platform: "Penultimate Platform",
+  point: "Prerequisite Point",
+  position: "Primary Position",
+  vector: "Veritable Vector",
+  war: "War Ground",
+  dig: "Dig",
+  unearth: "Unearth",
+  excavate: "Excavate"
 };
 
 // The timestamp of the first time a game was detected.
@@ -105,7 +106,9 @@ presence.on("UpdateData", async () => {
     }
 
     if (data20XX.user) {
-      data.state = `${data20XX.user.displayName} (${data20XX.user.isGuest ? 'guest' : `rank ${data20XX.user.rank}`})`;
+      data.state = `${data20XX.user.displayName} (${
+        data20XX.user.isGuest ? "guest" : `rank ${data20XX.user.rank}`
+      })`;
       if (data20XX.serverInfo)
         data.state += ` in ${data20XX.serverInfo.location}`;
     }
@@ -113,32 +116,33 @@ presence.on("UpdateData", async () => {
     if (data20XX.game) {
       data.details = `In-Game - ${data20XX.game.info.gametype} (${data20XX.game.info.players}/${data20XX.game.info.maxplayers})`;
 
-      if (!gameStartTimestamp)
-        gameStartTimestamp = Date.now();
-      
+      if (!gameStartTimestamp) gameStartTimestamp = Date.now();
+
       // Character
-      data.smallImageKey = 'char_' + data20XX.game.character.split('_')[0];
-      data.smallImageText = characterNameMap[data20XX.game.character.split('_')[0]];
+      data.smallImageKey = "char_" + data20XX.game.character.split("_")[0];
+      data.smallImageText =
+        characterNameMap[data20XX.game.character.split("_")[0]];
 
       // Map
       if (data20XX.game.map) {
-        data.largeImageKey = 'map_' + data20XX.game.map;
-        data.smallImageText = `${mapNameMap[data20XX.game.map]} - ${data.smallImageText}`;
+        data.largeImageKey = "map_" + data20XX.game.map;
+        data.smallImageText = `${mapNameMap[data20XX.game.map]} - ${
+          data.smallImageText
+        }`;
       }
 
       data.startTimestamp = gameStartTimestamp;
     } else gameStartTimestamp = null;
   } else {
-    if (location.pathname.endsWith('/help.html'))
+    if (location.pathname.endsWith("/help.html"))
       data.details = "Reading the Help Document";
-    else if (location.pathname.endsWith('/rules.html'))
+    else if (location.pathname.endsWith("/rules.html"))
       data.details = "Reading the Rules";
-    else if (location.pathname.endsWith('/tos.html'))
+    else if (location.pathname.endsWith("/tos.html"))
       data.details = "Reading the Terms of Service";
   }
 
-  if (!await presence.getSetting("showName"))
-    delete data.state;
+  if (!(await presence.getSetting("showName"))) delete data.state;
 
   // If data doesn't exist clear else set activity to the presence data
   if (data.details == null) {
@@ -147,4 +151,4 @@ presence.on("UpdateData", async () => {
   } else presence.setActivity(data);
 });
 
-presence.on("iFrameData", (data: Data20XX) => data20XX = data);
+presence.on("iFrameData", (data: Data20XX) => (data20XX = data));

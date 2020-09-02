@@ -6,40 +6,43 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
+
   const browsingStamp = Math.floor(Date.now() / 1000);
-  if (window.location.pathname.endsWith("about")) {
-    presenceData.details = "Hakkında kısmına göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("settings.html")) {
-    presenceData.details = "Sunucu ayarları sekmesine göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("commands.html")) {
-    presenceData.details = "Tüm komutlara göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("faq.html")) {
-    presenceData.details = "Sıkça sorulan sorulara göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("globalRankings")) {
-    presenceData.details = "Küresel sıralamaya göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("dashboard")) {
-    presenceData.details = "Dashboard'da bir şeyleri kontrol ediyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("profile")) {
-    presenceData.details = "Profilini düzenliyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.startsWith("/serverRankings/")) {
-    presenceData.details = "Bir sunucunun level sıralamasına bakıyor...";
-    presenceData.state = document.querySelector(
+  const page = window.location.pathname;
+  presenceData.startTimestamp = browsingStamp;
+
+  if (page.startsWith("/settings.html")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Settings";
+  } else if (page.startsWith("/commands.html")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Commands";
+  } else if (page.startsWith("/faq.html")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "FAQ & Guides";
+  } else if (page.startsWith("/about")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "About Tatsumaki";
+  } else if (page.startsWith("/globalRankings")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Global Rankings";
+  } else if (page.startsWith("/dashboard")) {
+    presenceData.details = "Viewing dashboard";
+  } else if (page.startsWith("/profile")) {
+    presenceData.details = "Viewing/editing their profile";
+  } else if (page.startsWith("/serverRankings/")) {
+    const yArraabeni = document.querySelector(
       "#top > div.jumbotron > div > div > div.col-md-10 > p"
     ).textContent;
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.startsWith("/guild/")) {
-    presenceData.details = "Bir sunucunun ayarlarını düzenliyor:";
+    const sgoc = "Besto Rankings @";
+    const ahmetabibanimiactioley = yArraabeni.replace(sgoc, "");
+    presenceData.details =
+      "Viewing " + ahmetabibanimiactioley + "'s leaderboard";
+  } else if (page.startsWith("/guild/")) {
+    presenceData.details = "Managing a server";
     presenceData.state = document.querySelector(
       "#top > div.jumbotron > div > div > div.col-md-10 > h1"
     ).textContent;
-    presenceData.startTimestamp = browsingStamp;
   }
 
   if (presenceData.details == null) {

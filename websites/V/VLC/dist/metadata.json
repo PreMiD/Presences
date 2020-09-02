@@ -1,7 +1,7 @@
 {
   "author": {
     "name": "DooMLorD",
-    "id": "465105167751315471"
+    "id": "654398152513945611"
   },
   "service": "VLC",
   "description": {
@@ -11,7 +11,7 @@
     "localhost",
     "127.0.0.1"
   ],
-  "version": "1.4.8",
+  "version": "1.4.10",
   "logo": "https://doomlord.s-ul.eu/MHqVX7v0",
   "thumbnail": "https://doomlord.s-ul.eu/LOCgKTnx",
   "color": "#ff7c00",

@@ -1,32 +1,32 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "652880245371699222"
 });
 
-var currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/"),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  presenceData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
+let currentURL = new URL(document.location.href),
+  currentPath = currentURL.pathname.slice(1).split("/");
+const browsingStamp = Math.floor(Date.now() / 1000);
+let presenceData: PresenceData = {
+  details: "Viewing an unsupported page",
+  largeImageKey: "lg",
+  startTimestamp: browsingStamp
+};
+const updateCallback = {
+  _function: null as Function,
+  get function(): Function {
+    return this._function;
   },
-  updateCallback = {
-    _function: null as Function,
-    get function(): Function {
-      return this._function;
-    },
-    set function(parameter) {
-      this._function = parameter;
-    },
-    get present(): boolean {
-      return this._function !== null;
-    }
-  };
+  set function(parameter) {
+    this._function = parameter;
+  },
+  get present(): boolean {
+    return this._function !== null;
+  }
+};
 
 /**
  * Initialize/reset presenceData.
  */
-function resetData(): void {
+const resetData = (): void => {
   currentURL = new URL(document.location.href);
   currentPath = currentURL.pathname.slice(1).split("/");
   presenceData = {
@@ -34,14 +34,17 @@ function resetData(): void {
     largeImageKey: "lg",
     startTimestamp: browsingStamp
   };
-}
+};
 
 ((): void => {
   if (currentURL.hostname === "www.gamepedia.com") {
-    //
-    // Chapter 1
-    // This part is for the editorial part of Gamepedia.
-    //
+    /*
+
+		Chapter 1
+		This part is for the editorial part of Gamepedia.
+		
+		*/
+
     if (currentPath[0] === "") {
       presenceData.state = "Index";
       presenceData.startTimestamp = browsingStamp;
@@ -77,21 +80,23 @@ function resetData(): void {
       presenceData.startTimestamp = browsingStamp;
     }
   } else {
-    //
-    // Chapter 2
-    // This part is for the wiki part of Gamepedia.
-    //
-    var title: string,
-      sitename: string,
-      actionResult = currentURL.searchParams.get("action"),
-      titleFromURL = (): string => {
-        var raw: string;
-        if (currentURL.pathname.startsWith("/index.php"))
-          raw = currentURL.searchParams.get("title");
-        else raw = currentURL.pathname.slice(1);
-        if (raw.includes("_")) return raw.replace(/_/g, " ");
-        else return raw;
-      };
+    /*
+
+		Chapter 2
+		This part is for the wiki part of Gamepedia.
+		
+		*/
+
+    let title: string, sitename: string;
+    const actionResult = currentURL.searchParams.get("action");
+    const titleFromURL = (): string => {
+      let raw: string;
+      if (currentURL.pathname.startsWith("/index.php"))
+        raw = currentURL.searchParams.get("title");
+      else raw = currentURL.pathname.slice(1);
+      if (raw.includes("_")) return raw.replace(/_/g, " ");
+      else return raw;
+    };
 
     try {
       title = (document.querySelector(
@@ -131,7 +136,6 @@ function resetData(): void {
 
     if (title === sitename) {
       presenceData.state = "Home";
-      delete presenceData.details;
     } else if (actionResult == "history") {
       presenceData.details = "Viewing revision history";
       presenceData.state = title;

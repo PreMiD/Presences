@@ -1,8 +1,14 @@
 // Note: Domain not restricted because cytube allows custom urls and a boatload of supported services
 
-var iframe = new iFrame();
+const iframe = new iFrame();
 
-let sendback;
+let sendback: {
+  audio: boolean;
+  current_time: number;
+  duration: number;
+  paused: boolean;
+  site: string;
+};
 
 function send(): void {
   iframe.send(sendback);
@@ -23,27 +29,3 @@ iframe.on("UpdateData", () => {
   }
   send();
 });
-
-/*if (document.getElementsByTagName('video')[0]) {
-} else if (document.getElementsByTagName('audio')[0]) {
-    let audio: HTMLAudioElement = document.getElementsByTagName('audio')[0];
-    audio.ondurationchange = () => {
-        iframe.send({
-            audio: true,
-            current_time: audio.currentTime,
-            duration: audio.duration,
-            paused: audio.paused,
-            site: link
-        })
-    }
-
-    audio.ontimeupdate = () => {
-        iframe.send({
-            audio: true,
-            current_time: audio.currentTime,
-            duration: audio.duration,
-            paused: audio.paused,
-            site: link
-        })
-    }
-}*/

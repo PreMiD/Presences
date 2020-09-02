@@ -10,7 +10,11 @@ presence.on("UpdateData", async () => {
     largeImageKey: "icon"
   };
 
-  if (document.location.hostname == "snowboltz.net") {
+  if (
+    document.location.hostname.includes("shop.") ||
+    document.location.hostname.includes("docs.") ||
+    document.location.hostname == "snowboltz.net"
+  ) {
     if (path.includes("home")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "กำลังดูที่หน้าหลัก..";
@@ -152,8 +156,20 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("register")) {
       presenceData.details = "กำลังสมัครใช้งาน..";
       presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.hostname.includes("docs.")) {
+      presenceData.details = "ฐานความรู้";
+      const head =
+        document
+          ?.querySelector("head > title")
+          .textContent.replace("SnowBoltz - Knowledgebase", "หน้าหลัก")
+          .replace(" - SnowBoltz", " ") ?? "ไม่ทราบหน้า";
+      presenceData.state = head + " - SnowBoltz Knowledgebase";
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.smallImageKey = "reading";
+      presenceData.smallImageText = "กำลังอ่าน";
     } else {
-      presenceData.details = "หน้าที่ไม่ทราบ";
+      presenceData.details = "SnowBoltz - snowboltz.net";
+      presenceData.state = "ร้านเติมโรบัคราคาถูกเรทสูง";
       presenceData.startTimestamp = browsingStamp;
     }
   }

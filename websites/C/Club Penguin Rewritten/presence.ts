@@ -373,7 +373,19 @@ presence.on("UpdateData", async () => {
     } else if (parseInt(status) < 1004) {
       let room = "In a Party Room";
       // Party room IDs are 851-873, 899, and 1000-1003.
-      if (status == "854") {
+      if (status == "851") {
+        if (currentParty == "musicjam") {
+          room = "Music Maker 3000";
+        }
+      } else if (status == "852") {
+        if (currentParty == "musicjam") {
+          room = "Nightclub Rooftop";
+        }
+      } else if (status == "853") {
+        if (currentParty == "musicjam") {
+          room = "Casa Fiesta";
+        }
+      } else if (status == "854") {
         if (currentParty == "penguinawards") {
           room = "Limo";
         }

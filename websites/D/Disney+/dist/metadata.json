@@ -13,8 +13,8 @@
     "es": "El servicio de streaming de Disney, Pixar, Marvel, Star Wars y National Geographic."
   },
   "url": "www.disneyplus.com",
-  "regExp": "([a-z0-9-]+[.])*disneyplus[.]com[/]",
-  "version": "1.3.4",
+  "regExp": "([a-z0-9-]+[.])*disneyplus[.]com[/]|([a-z0-9-]+[.])*hotstar[.]com[/]",
+  "version": "1.3.6",
   "logo": "https://i.imgur.com/zuUeb2A.png",
   "thumbnail": "https://i.imgur.com/NA7FWJN.png",
   "color": "#233778",
@@ -27,7 +27,9 @@
     "video",
     "media",
     "streaming",
-    "streaming-service"
+    "streaming-service",
+    "hotstar",
+    "disney-plus-hotstar"
   ],
   "category": "videos"
 }
