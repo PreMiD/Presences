@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "cenap",
+    "id": "471783967167741964"
+  },
+  "contributors": [{
+    "name": "Alfonzo",
+    "id": "689169122604744833"
+  }],
+  "service": "Discord Bot List",
+  "description": {
+    "en": "We give you the availability to apply your bot and give your bot a page on our website.",
+    "tr": "Botunuzu uygulamanız ve botunuza web sitemizde bir sayfa vermeniz için size uygunluk veriyoruz."
+  },
+  "url": "https://dis.cordbots.cf/",
+  "version": "0.0.1",
+  "logo": "https://cdn.discordapp.com/attachments/750377090217410671/751065889977401415/logo.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/750377090217410671/751066900431110154/logo-sp.png",
+  "color": "#7289DA",
+  "tags": ["discord", "bot", "list", "botlist"],
+  "category": "other",
+  "iframe": false
+}
