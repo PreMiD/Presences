@@ -36,8 +36,8 @@ presence.on("UpdateData", async () => {
       path.startsWith("/umbrella") ||
       path.startsWith("/wrap")
     ) {
-      const itemTitle = document.querySelector(".item-title");
-      const itemType = document.querySelector(".type-rarity-string");
+      const itemTitle = document.querySelector(".item-title"),
+        itemType = document.querySelector(".type-rarity-string");
       data.details = "Viewing " + itemTitle.textContent;
       data.state = itemType.childNodes[1].textContent + " " + itemType.firstChild.textContent;
     } else if (path === "/upcoming") {
@@ -106,9 +106,9 @@ presence.on("UpdateData", async () => {
       path.startsWith("/colour") ||
       path.startsWith("/celebration")
     ) {
-      const skinName = document.querySelector(".skin-name");
-      const skinType = document.querySelector(".skin-type-string");
-      const skinRarity = document.querySelector(".skin-rarity-string > .rarity-label");
+      const skinName = document.querySelector(".skin-name"),
+        skinType = document.querySelector(".skin-type-string"),
+        skinRarity = document.querySelector(".skin-rarity-string > .rarity-label");
       data.details = "Viewing " + skinName.textContent;
       data.state = skinRarity.textContent + " " + skinType.textContent;
     }
