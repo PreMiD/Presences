@@ -6,6 +6,7 @@ const presenceData: PresenceData = {
 };
 
 const paths = {
+  ":": "Home Page",
   go: "Login Page",
   account: "Account Settings",
   server: "Panel - Server",
@@ -25,12 +26,10 @@ presence.on("UpdateData", async () => {
   if (document.location.hostname === "aternos.org") {
     presenceData.startTimestamp = Date.now();
     let path = document.location.pathname.replace(/\//g, "");
-    if (path.startsWith("software")) path = "software";
-    if (path.startsWith("players")) path = "players";
-    if (path.startsWith("addons")) path = "addons";
+    const matchedPath = path.match(/:|software|players|addons/);
+    if (matchedPath && !matchedPath.index) path = matchedPath[0];
     // @ts-ignore
     const page = paths[path];
-    if (path.startsWith(":")) presenceData.details = "Home Page";
     if (page) presenceData.details = page;
   } else {
     const page = document.location.hostname.split(".")[0];
