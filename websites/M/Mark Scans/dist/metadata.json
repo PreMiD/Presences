@@ -1,0 +1,24 @@
+  
+{
+    "author": {
+      "name": "Markinhoz",
+      "id": "284884813108871168"
+    },
+    "service": "Mark Scan",
+    "description": {
+      "en": "We are a brazilian scanlator make webttons and mangas",
+      "pt_BR": "Somos uma scan brasileira fazendo webtoons e mangás",
+      "pt": "Somos uma scan brasileira fazendo webtoons e mangás"
+    },
+    "url": "markscans.online",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/jBlCITq.png",
+    "thumbnail": "https://i.imgur.com/QEdn2iJ.png",
+    "tags": [
+      "scan", 
+      "scanlator",
+       "mark"
+      ],
+    "color": "#0090ed",
+    "category": "other"
+}
