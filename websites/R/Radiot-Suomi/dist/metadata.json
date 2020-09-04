@@ -1,0 +1,23 @@
+{
+    "author": {
+        "name": "TehRamsus",
+        "id": "199455497533784064"
+    },
+    "service": "Radiot Suomi",
+    "description": {
+        "fi": "Radiot Suomi"
+    },
+    "url": [
+        "www.radio-suomi.com"
+    ],
+    "version": "1.2.3",
+    "logo": "http://www.radio-suomi.com/static/icons/App_512x512/fi.png",
+    "thumbnail": "https://i.imgur.com/POhcIvd.png",
+    "color": "#455A64",
+    "tags": [
+        "radio",
+        "music",
+        "stream"
+    ],
+    "category": "music"
+}
