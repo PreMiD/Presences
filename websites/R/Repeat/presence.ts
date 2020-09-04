@@ -26,9 +26,9 @@ presence.on("UpdateData", () => {
     smallImageText: `${sdj || "AutoDJ"} is live!`,
     startTimestamp: stamp
   };
-  
+
   if (sdj !== "AutoDJ") presenceData.smallImageKey = "bouncelive";
   else delete presenceData.smallImageText;
-  
+
   presence.setActivity(presenceData);
 });
