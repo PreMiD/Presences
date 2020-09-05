@@ -1,9 +1,10 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "Munn",
     "id": "379616881272946688"
   },
-  "contributor": [
+  "contributors": [
     {
       "name": "Krauchelli",
       "id": "229334514084741120"
@@ -11,14 +12,14 @@
   ],
   "service": "Radiko",
   "description": {
-    "en": "Isi di sini"
+    "en": "Japanese's radio broadcast platform."
   },
   "url": "radiko.jp",
   "regExp": "(radiko[.]jp)[/]",
   "version": "1.0.0",
-  "logo": "https://i.imgur.com/3IBLlpc.png",
-  "thumbnail": "https://i.imgur.com/pYZzRDV.png",
-  "color": "#67e350",
+  "logo": "http://pbs.twimg.com/profile_images/1107926821301936128/nQM6f4bM_normal.png",
+  "thumbnail": "http://radiko.jp/apps/images/img_playerarea_blue_01.png",
+  "color": "#0064FF",
   "tags": [
     "radio",
     "podcast",
