@@ -1,0 +1,29 @@
+{
+  "author": {
+    "name": "Munn",
+    "id": "379616881272946688"
+  },
+  "contributor": [
+    {
+      "name": "Krauchelli",
+      "id": "229334514084741120"
+    }
+  ],
+  "service": "Radiko",
+  "description": {
+    "en": "Isi di sini"
+  },
+  "url": "radiko.jp",
+  "regExp": "(radiko[.]jp)[/]",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/3IBLlpc.png",
+  "thumbnail": "https://i.imgur.com/pYZzRDV.png",
+  "color": "#67e350",
+  "tags": [
+    "radio",
+    "podcast",
+    "japan",
+    "stream"
+  ],
+  "category": "stream"
+}
