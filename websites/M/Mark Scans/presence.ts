@@ -1,9 +1,11 @@
 const presence = new Presence ({
     clientId: "751285675277680811"
 });
-presence.on('UpdateData', async () =>
-{
-    const presenceData: PresenceData = {startTimestamp: Math.floor(Date.now() / 1000), largeImageKey: 'logo'},
+presence.on('UpdateData', async () => {
+    const presenceData: PresenceData = {
+        startTimestamp: Math.floor(Date.now() / 1000),
+        largeImageKey: 'logo'
+    },
     path = document.location.pathname,
     title: HTMLElement = document.querySelector('head title'),
     tituloobra: HTMLElement = document.querySelector("body > div.wrap > div > div > div > div.profile-manga > div > div > div > div.post-title > h1"),
@@ -15,36 +17,26 @@ presence.on('UpdateData', async () =>
     selecaoLeitura: HTMLSelectElement = document.querySelector("#manga-reading-nav-head > div > div.select-view > div.c-selectpicker.selectpicker_load > label > select"),
     paginacao: HTMLSelectElement = document.querySelector("#single-pager"),
     usuarioNome: HTMLSpanElement = document.querySelector("body > div.wrap > div > header > div.c-sub-header-nav.hide-sticky-menu > div > div > div.c-modal_item > div > span");
-    if (usuarioNome !== null)
-    {
+    if (usuarioNome !== null) {
         presenceData.smallImageKey = 'user';
         presenceData.smallImageText = usuarioNome.innerText.slice(11);
     }
-    if (path == '/') 
-    {
-        if (pesquisatexto == null)
-        {
+    if (path == '/') {
+        if (pesquisatexto == null) {
             presenceData.details = 'Página inicial';
-        } else
-        {
+        } else {
             presenceData.details = 'Pesquisando';
             presenceData.state = pesquisatexto.value;
         }
-    } else if (path.includes('/generos/')) 
-    {
+    } else if (path.includes('/generos/')) {
         presenceData.details = `Categoria: ${title.innerText.slice(0, title.innerText.indexOf('Mark') - 2)}`;
-        
-        if (filtroprojetos !== null)
-        {
+        if (filtroprojetos !== null) {
             presenceData.state = `Filtro: ${filtroprojetos.innerText}`;
-        } else
-        {
+        } else {
             presenceData.state = 'Filtro: Nenhum';
         }
-    } else if (path.includes('/manga/'))
-    {
-        const opcoes: any =
-        {
+    } else if (path.includes('/manga/')) {
+        const opcoes = {
             0: function()
             {
                 presenceData.state = `${title.innerText.slice(title.innerText.indexOf('- Capítulo') + 2, title.innerText.indexOf('- Mark') - 1)}`;
@@ -55,23 +47,19 @@ presence.on('UpdateData', async () =>
             }
         }
         if ((tituloobra != null) && !tituloobra.textContent.includes('Privado:') || !title.innerText.includes('Privado:')) {
-            if ((path.split('/').length - 1) != 3)
-            {
+            if ((path.split('/').length - 1) != 3) {
                 presenceData.details = title.innerText.slice(0, title.innerText.indexOf('- Capítulo') - 1);
                 opcoes[selecaoLeitura.selectedIndex]();
-                
             } else {
                 presenceData.details = tituloobra.textContent;
                 presenceData.state = `${tipoobra.textContent} | ${primeirogeneroobra.textContent}`;
             } 
         }
 
-    } else if (path.includes('/mangas/'))
-    {
+    } else if (path.includes('/mangas/')) {
         presenceData.details = 'Todos os projetos';
         
-    } else if (path.includes('/meu-perfil/'))
-    {
+    } else if (path.includes('/meu-perfil/')) {
         presenceData.details = 'Meu perfil';
         presenceData.state = paginaLogin.innerText;
     } else { 
