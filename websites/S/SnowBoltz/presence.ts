@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
         "body > main > div > section > div.container.shape-container.d-flex.align-items-center.py-lg > div > div > div:nth-child(1) > div > div > div > b:nth-child(1) > span"
       ); 
       const stock = 
-        stock1?.textContent ?? "0 R$"
+        stock1?.textContent ?? "0 R$";
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "กำลังซื้อสินค้า";
       presenceData.state = "เเบบกลุ่ม - " + stock + " R$";
