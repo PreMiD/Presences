@@ -3,7 +3,7 @@ const presence = new Presence({
 });
   
 const browsingStamp = Math.floor(Date.now() / 1000);
-const path = document.location.pathname; //document.location.search;
+const path = document.location.pathname;
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
