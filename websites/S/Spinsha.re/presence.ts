@@ -1,7 +1,7 @@
-var presence = new Presence({
+let presence = new Presence({
     clientId: "752151960743837817"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     };
     
     if (document.location.hostname == "spinsha.re") {
-        let pathname = document.location.pathname;
+        const pathname = document.location.pathname;
         switch (pathname) {
             case "/":
                 presenceData.startTimestamp = browsingStamp;
@@ -38,8 +38,10 @@ presence.on("UpdateData", async () => {
                 presenceData.state = "Pls Donate Lol";
                 break;
             default:
+                //Idle
                 presenceData.startTimestamp = browsingStamp;
-                presenceData.details = "Doing... Something?";
+                presenceData.details = "Idling";
+                presenceData.state = "Doing... Something?";
                 break;
         }
         if (pathname.startsWith("/song")) {
