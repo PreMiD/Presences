@@ -7,16 +7,16 @@
       document.querySelector(".artist").textContent
     } - ${document.querySelector(".title").textContent} `;
     const radio = document.querySelector(".stream-name").textContent;
-    let logo = 'logo_onlyhit';
-    let status = 'play';
+    var logo = 'logo_onlyhit';
+    const status = 'play';
     if (document.querySelector(".stream-name").textContent == 'OnlyHit Gold') {
-      logo = 'logo_gold'
+      logo = 'logo_gold';
     }
     if (document.querySelector(".stream-name").textContent == 'OnlyHit J-Music') {
-      logo = 'logo_j-music'
+      logo = 'logo_j-music';
     }
     if (document.querySelector(".stream-name").textContent == 'OnlyHit K-Pop') {
-      logo = 'onlyhit_k-pop'
+      logo = 'onlyhit_k-pop';
     }
     const pageName = document.title.slice(13);
     const presenceData: PresenceData = {
@@ -28,7 +28,7 @@
     presenceData.details = `${title}`;
     presenceData.state = `${radio} on OnlyHit.us`;
 
-    var lastTimeStart = Math.floor(Date.now() / 1000);
+    let lastTimeStart = Math.floor(Date.now() / 1000);
     lastTimeStart = Math.floor(Date.now() / 1000);
     presenceData.startTimestamp = lastTimeStart;
   
