@@ -5,8 +5,8 @@
     },
     "service": "Radiot Suomi",
     "description": {
-        "fi": "Radiot Suomi",
-        "en": "Radiot Suomi"
+        "fi": "Voit kuunnella suomalaisia radiokanavia internetissä!",
+        "en": "You can listen to Finnish radio channels on the Internet!"
     },
     "url": [
         "www.radio-suomi.com"
