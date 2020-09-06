@@ -1,19 +1,17 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.0",
     "author": {
-      "name": "ayanamy.jy126",
+      "name": "ayanamyjy126",
       "id": "243279723487035393"
     },
-    "url": "spinsha.re",
+    "service": "Spinsha.re",
     "description": {
-      "en": "Spinsha.re"
+      "en": "Spinsha.re is a map sharing service for Spin Rhythm XD."
     },
-    "service": "Spinshare",
+    "url": "spinsha.re",
     "version": "1.0.0",
     "logo": "https://spinshare.b-cdn.net/assets/img/favicon.png",
     "thumbnail": "https://spinshare.b-cdn.net/assets/img/clientScreenshots/newsongs.png",
     "color": "#FF0000",
     "tags": ["help"],
-    "category": "music",
-    "regExp": "([a-z0-9-]+[.])*spinsha[.]re[/]"
+    "category": "music"
 }
