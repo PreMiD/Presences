@@ -41,7 +41,7 @@ presence.on('UpdateData', async () => {
   
       state.details = `Listening to ${radioStation} channel.`;
       state.state = showTitle;
-      state.smallImageKey = 'largeimage';
+      state.smallImageKey = 'spiriteplay';
       state.smallImageText = preStrings.play;
       state.startTimestamp = startTimeStamp;
     }
@@ -54,14 +54,14 @@ presence.on('UpdateData', async () => {
 
       state.details = 'Paused.';
       state.state = `${codeChannel} channel.`;
-      state.smallImageKey = 'largeimage';
+      state.smallImageKey = 'spiritepause';
       state.smallImageText = preStrings.pause;
     }
   }
   // Idling state
   else {
     state.details = 'Idling';
-    state.smallImageKey = 'largeimage';
+    state.smallImageKey = 'spiriteidling';
     state.smallImageText = preStrings.browsing;
   }
 
