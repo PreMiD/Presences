@@ -7,40 +7,62 @@ const presence = new Presence({
     browsing: 'presence.activity.browsing'
   });
 
+// Pre-declare variable
+let radioStation = '',
+  startTimeStamp = new Date().getTime();
+
 presence.on('UpdateData', async () => {
   // code
   const preStrings = await _preStrings,
     streamPlayer = document.getElementById('stream-player') as HTMLElement,
     whenPlayerIsOn = streamPlayer.style.display,
     state: PresenceData = {
-      // details: 'Radiko',
-      // state: 'Searching radio.',
-      // smallImageKey: 'largeimage',
-      // smallImageText: preStrings.browsing
       largeImageKey: 'largeimage'
     };
 
-  // console.log(whenPlayerIsOn);
-  // Apabila idling
-  if (!whenPlayerIsOn || whenPlayerIsOn === 'none') {
-    state.details = 'Idling';
-    state.smallImageKey = 'largeimage';
-    state.smallImageText = preStrings.browsing;
-  }
-  // Apabila lagi putar lagu
-  else if (whenPlayerIsOn === 'block') {
+  // In Radio
+  if (whenPlayerIsOn === 'block') {
     const _showTitle = document.querySelector(
       'a.slick-slide:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)'
     ) as HTMLElement,
       showTitle = _showTitle.textContent,
-      defURL = document.querySelector('a.slick-slide:nth-child(1)').getAttribute('href')
-        .split('/').slice(-1)[0]
+      codeChannel = document.querySelector('a.slick-slide:nth-child(1)').getAttribute('href')
+        .split('/').slice(-1)[0],
+      ifPlayed = document.querySelector('.icon--play-02').classList.contains('on')
       ;
 
-    state.details = 'Listening to radio.';
-    state.state = `${defURL} | ${showTitle}`;
+    // If play
+    if (ifPlayed) {
+      // This logic make timestamp can't changed.
+      if (codeChannel !== radioStation) {
+        radioStation = codeChannel;
+        startTimeStamp = new Date().getTime();
+      }
+  
+      state.details = `Listening to ${radioStation} channel.`;
+      state.state = showTitle;
+      state.smallImageKey = 'largeimage';
+      state.smallImageText = preStrings.play;
+      state.startTimestamp = startTimeStamp;
+    }
+    // If pause
+    else {
+      if (codeChannel !== '___PAUSED___') {
+        radioStation = '___PAUSED___';
+        startTimeStamp = new Date().getTime();
+      }
+
+      state.details = 'Paused.';
+      state.state = `${codeChannel} channel.`;
+      state.smallImageKey = 'largeimage';
+      state.smallImageText = preStrings.pause;
+    }
+  }
+  // Idling state
+  else {
+    state.details = 'Idling';
     state.smallImageKey = 'largeimage';
-    state.smallImageText = preStrings.play;
+    state.smallImageText = preStrings.browsing;
   }
 
   presence.setActivity(state);
