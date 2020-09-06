@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "ayanamy.jy126",
+      "id": "243279723487035393"
+    },
+    "url": "spinsha.re/",
+    "description": {
+      "en": "Spinsha.re"
+    },
+    "service": "Spinsha.re",
+    "version": "1.0",
+    "logo": "https://spinshare.b-cdn.net/assets/img/favicon.png",
+    "thumbnail": "https://spinshare.b-cdn.net/assets/img/clientScreenshots/newsongs.png",
+    "color": "#FF0000",
+    "tags": ["help"],
+    "category": "music"
+  }
