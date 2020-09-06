@@ -1,22 +1,7 @@
 var presence = new Presence({
-    clientId: "752151960743837817" //The client ID of the Application created at https://discordapp.com/developers/applications
+    clientId: "752151960743837817"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
-/*
-
-function myOutsideHeavyLiftingFunction(){
-    //Grab and process all your data here
-
-    // element grabs //
-    // api calls //
-    // variable sets //
-}
-
-setInterval(myOutsideHeavyLiftingFunction, 10000);
-//Run the function separate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
-
-*/
-
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -42,6 +27,16 @@ presence.on("UpdateData", async () => {
                 presenceData.startTimestamp = browsingStamp;
                 presenceData.details = "Viewing Popular Charts";
                 break;
+            case "/legal":
+                presenceData.startTimestamp = browsingStamp;
+                presenceData.details = "Browsing Legal Information...";
+                presenceData.state = "Why?";
+                break;
+            case "/support":
+                presenceData.startTimestamp = browsingStamp;
+                presenceData.details = "Browsing Support Information...";
+                presenceData.state = "Pls Donate Lol";
+                break;
             default:
                 presenceData.startTimestamp = browsingStamp;
                 presenceData.details = "Doing... Something?";
@@ -50,6 +45,17 @@ presence.on("UpdateData", async () => {
         if (pathname.startsWith("/song")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = document.querySelector(".song-title").innerHTML;
+            presenceData.state = document.querySelector(".song-artist").innerHTML;
+        }
+        else if (pathname.startsWith("/user")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Browsing User Profile:";
+            presenceData.state = document.querySelector(".user-name").innerHTML;
+        }
+        else if (pathname.startsWith("/report")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Reporting Something...";
+            presenceData.state = "🔨";
         }
     }
 
