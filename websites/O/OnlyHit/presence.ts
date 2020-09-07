@@ -3,10 +3,8 @@
   });
   
   presence.on("UpdateData", () => {
-    const title = `${
-      document.querySelector(".artist").textContent
-    } - ${document.querySelector(".title").textContent} `;
-    const radio = document.querySelector(".stream-name").textContent;
+    const title = `${document.querySelector(".artist").textContent} - ${document.querySelector(".title").textContent} `,
+          radio = document.querySelector(".stream-name").textContent;
     let logo = 'logo_onlyhit';
     const status = 'play';
     if (document.querySelector(".stream-name").textContent == 'OnlyHit Gold') {
@@ -18,8 +16,8 @@
     if (document.querySelector(".stream-name").textContent == 'OnlyHit K-Pop') {
       logo = 'onlyhit_k-pop';
     }
-    const pageName = document.title.slice(13);
-    const presenceData: PresenceData = {
+    const pageName = document.title.slice(13),
+          presenceData: PresenceData = {
       largeImageKey: `${logo}`,
       smallImageKey: `${status}`,
       smallImageText: `Viewing: ${pageName}`
