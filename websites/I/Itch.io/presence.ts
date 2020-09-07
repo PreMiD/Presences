@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
                     presenceData.smallImageKey = "play";
                 }
                 if (pathname.split('/')[2] == "devlog") {
-                    presenceData.state = devName + "'s Devlog"
+                    presenceData.state = devName + "'s Devlog";
                 }
             }                
         }
