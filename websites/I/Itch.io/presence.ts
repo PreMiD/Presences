@@ -5,22 +5,29 @@ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
-        largeImageKey: "bigdefault"
+        largeImageKey: "logo"
     };
-    
-    if (document.location.hostname == "itch.io") {
+    if (document.location.hostname.includes("itch.io")) {
+        const hostname = document.location.hostname;
         const pathname = document.location.pathname;
-        switch (pathname) {
-            case "/":
+        
+        if ((hostname.split("."))[0] != "itch") {
+            if (pathname == "/") {
                 presenceData.startTimestamp = browsingStamp;
-                presenceData.details = "Viewing Frontpage";
-                break;
-            default:
-                //Idle
-                presenceData.startTimestamp = browsingStamp;
-                presenceData.details = "Idling";
-                presenceData.state = "Doing... Something?";
-                break;
+                presenceData.details = "Viewing Developer Profile";
+                presenceData.state = document.title.replace(' - itch.io','');
+            }
+            else {
+                const documentTitle = document.title.split(' by '),
+                    gameName = documentTitle[0],
+                    devName = documentTitle[1];
+                presenceData.details = gameName;
+                presenceData.state = devName;
+                if (document.querySelector(".game_loaded")) {
+                    presenceData.startTimestamp = browsingStamp;
+                    presenceData.smallImageKey = "play";
+                }
+            }
         }
     }
 
