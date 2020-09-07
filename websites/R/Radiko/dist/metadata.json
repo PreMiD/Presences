@@ -15,10 +15,9 @@
     "en": "Japanese's radio broadcast platform."
   },
   "url": "radiko.jp",
-  "regExp": "(radiko[.]jp)[/]",
   "version": "1.0.0",
-  "logo": "http://pbs.twimg.com/profile_images/1107926821301936128/nQM6f4bM_normal.png",
-  "thumbnail": "http://radiko.jp/apps/images/img_playerarea_blue_01.png",
+  "logo": "https://i.imgur.com/tkuXU04.png",
+  "thumbnail": "https://i.imgur.com/FQ4vUVs.png",
   "color": "#0064FF",
   "tags": [
     "radio",
