@@ -39,7 +39,10 @@ presence.on("UpdateData", async () => {
       const itemTitle = document.querySelector(".item-title"),
         itemType = document.querySelector(".type-rarity-string");
       data.details = "Viewing " + itemTitle.textContent;
-      data.state = itemType.childNodes[1].textContent + " " + itemType.firstChild.textContent;
+      data.state =
+        itemType.childNodes[1].textContent +
+        " " +
+        itemType.firstChild.textContent;
     } else if (path === "/upcoming") {
       data.details = "Viewing upcoming cosmetics";
     } else if (path === "/sets") {
@@ -108,7 +111,9 @@ presence.on("UpdateData", async () => {
     ) {
       const skinName = document.querySelector(".skin-name"),
         skinType = document.querySelector(".skin-type-string"),
-        skinRarity = document.querySelector(".skin-rarity-string > .rarity-label");
+        skinRarity = document.querySelector(
+          ".skin-rarity-string > .rarity-label"
+        );
       data.details = "Viewing " + skinName.textContent;
       data.state = skinRarity.textContent + " " + skinType.textContent;
     }

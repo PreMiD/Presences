@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
     if (path.includes("home")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "กำลังดูที่หน้าหลัก..";
-    }  else if (path.includes("admin")) {
+    } else if (path.includes("admin")) {
       presenceData.details = "อยู่ที่หน้าเเอดมิน";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
@@ -114,9 +114,8 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("robux_group")) {
       const stock1 = document.querySelector(
         "body > main > div > section > div.container.shape-container.d-flex.align-items-center.py-lg > div > div > div:nth-child(1) > div > div > div > b:nth-child(1) > span"
-      ); 
-      const stock = 
-        stock1?.textContent ?? "0 R$";
+      );
+      const stock = stock1?.textContent ?? "0 R$";
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "กำลังซื้อสินค้า";
       presenceData.state = "เเบบกลุ่ม - " + stock + " R$";
@@ -133,7 +132,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("topup")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "กำลังเติมเงิน";
-      presenceData.state = "กำลังเลือกช่องทาง"
+      presenceData.state = "กำลังเลือกช่องทาง";
       if (path.includes("topup_tmn")) {
         presenceData.details = "กำลังเติมเงิน";
         presenceData.state = "ผ่านบัตรเงินสด";
