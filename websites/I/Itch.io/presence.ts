@@ -7,9 +7,10 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "logo"
     };
+
     if (document.location.hostname.includes("itch.io")) {
-        const hostname = document.location.hostname;
-        const pathname = document.location.pathname;
+        const hostname = document.location.hostname,
+            pathname = document.location.pathname;
         
         if ((hostname.split("."))[0] != "itch") {
             if (pathname == "/") {
@@ -27,6 +28,53 @@ presence.on("UpdateData", async () => {
                     presenceData.startTimestamp = browsingStamp;
                     presenceData.smallImageKey = "play";
                 }
+                if (pathname.split('/')[2] == "devlog") {
+                    presenceData.state = devName + "'s Devlog"
+                }
+            }                
+        }
+        else if (pathname.startsWith("/board") || pathname.startsWith("/community") ) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "In Community Discussion";
+        }
+        else if (pathname.startsWith("/jam") && pathname.split('/')[2] && document.querySelector(".jam_header_widget")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = document.querySelector(".jam_title_header").children[0].innerHTML;
+            presenceData.state = "Jam " + (document.querySelector('.jam_host_header') as HTMLElement).innerText;
+        }
+        else {
+            presenceData.startTimestamp = browsingStamp;
+            switch (pathname) {
+                //Games
+                case "/games":
+                presenceData.details = "Browsing Games";
+                    break;
+                //Devlogs
+                case "/devlogs":
+                presenceData.details = "Browsing Devlogs";
+                    break;
+                //Jams
+                case "/jams":
+                presenceData.details = "Browsing Jams";
+                    break;
+                //Dashboard 
+                case "/dashboard":
+                presenceData.details = "Dashboard";
+                    break;
+                //Feed
+                case "/my-feed":
+                presenceData.details = "Browsing My Feed";
+                    break;
+                case "/featured-games-feed":
+                presenceData.details = "Browsing Featured Games Feed";
+                    break;
+                case "/feed":
+                presenceData.details = "Browsing Global Feed";
+                    break;
+                //Default Idle    
+                default:
+                presenceData.details = "Idling";
+                    break;
             }
         }
     }

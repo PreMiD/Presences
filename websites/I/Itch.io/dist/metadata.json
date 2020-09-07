@@ -9,7 +9,6 @@
       "en": "Itch.io is an indie game distribution platform."
     },
     "url": "itch.io",
-    "regExp": "([a-z0-9-]+[.])*itch[.]io[/]",
     "version": "1.0.0",
     "logo": "https://i.imgur.com/Sv0IpMI.png",
     "thumbnail": "https://i.imgur.com/f3PK8Y5.png",
