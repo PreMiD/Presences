@@ -48,11 +48,19 @@ presence.on("UpdateData", async () => {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = document.querySelector(".song-title").innerHTML;
             presenceData.state = document.querySelector(".song-artist").innerHTML;
+            if (document.querySelector(".player-active")) {
+                presenceData.smallImageKey = "play";
+            }
         }
         else if (pathname.startsWith("/user")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Browsing User Profile:";
             presenceData.state = document.querySelector(".user-name").innerHTML;
+        }
+        else if (pathname.startsWith("/search")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "Searching";
+            presenceData.state = "🔍";
         }
         else if (pathname.startsWith("/report")) {
             presenceData.startTimestamp = browsingStamp;
