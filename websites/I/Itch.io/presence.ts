@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
         }
         else if (pathname.startsWith("/jam") && pathname.split('/')[2] && document.querySelector(".jam_header_widget")) {
             presenceData.startTimestamp = browsingStamp;
-            presenceData.details = document.querySelector(".jam_title_header").children[0].innerHTML;
+            presenceData.details = (document.querySelector('.jam_title_header') as HTMLElement).innerText;
             presenceData.state = "Jam " + (document.querySelector('.jam_host_header') as HTMLElement).innerText;
         }
         else {
