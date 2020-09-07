@@ -27,6 +27,7 @@ presence.on("UpdateData", async () => {
                 if (document.querySelector(".game_loaded")) {
                     presenceData.startTimestamp = browsingStamp;
                     presenceData.smallImageKey = "play";
+                    presenceData.smallImageText = "Playing";
                 }
                 if (pathname.split('/')[2] == "devlog") {
                     presenceData.state = devName + "'s Devlog";
