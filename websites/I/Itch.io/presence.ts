@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
         largeImageKey: "bigdefault"
     };
     
-    if (document.location.hostname == "spinsha.re") {
+    if (document.location.hostname == "itch.io") {
         const pathname = document.location.pathname;
         switch (pathname) {
             case "/":
