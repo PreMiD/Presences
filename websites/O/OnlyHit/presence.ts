@@ -7,7 +7,7 @@
       document.querySelector(".artist").textContent
     } - ${document.querySelector(".title").textContent} `;
     const radio = document.querySelector(".stream-name").textContent;
-    var logo = 'logo_onlyhit';
+    let logo = 'logo_onlyhit';
     const status = 'play';
     if (document.querySelector(".stream-name").textContent == 'OnlyHit Gold') {
       logo = 'logo_gold';
