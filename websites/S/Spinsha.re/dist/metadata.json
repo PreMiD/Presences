@@ -9,7 +9,6 @@
       "en": "SpinShare is a chart sharing service for Spin Rhythm XD."
     },
     "url": "spinsha.re",
-    "regExp": "(spinsha[.]re)[/]",
     "version": "1.1.0",
     "logo": "https://spinshare.b-cdn.net/assets/img/favicon.png",
     "thumbnail": "https://spinshare.b-cdn.net/assets/img/clientScreenshots/newsongs.png",
