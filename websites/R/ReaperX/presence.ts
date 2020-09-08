@@ -14,6 +14,7 @@ presence.on("UpdateData", async () => {
         if (path.includes("/home")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "หน้าหลัก";
+            presenceData.smallImageKey = "music";
         } else if (path.includes("/group")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "กําลังซื้อ R$";
@@ -34,6 +35,9 @@ presence.on("UpdateData", async () => {
         } else if (path.includes("/login")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "กําลังลงชื่อเข้าใช้";
+        } else if (path.includes("/backend")) {
+            presenceData.startTimestamp = browsingStamp;
+            presenceData.details = "เบื้องหลัง/เเอดมิน";
         } else {
             presenceData.details = "ReaperX - บริการเติม R$";
             presenceData.state = "ร้านเติมโรบัคราคาถูก";
