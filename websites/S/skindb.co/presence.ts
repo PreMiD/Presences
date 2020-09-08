@@ -97,6 +97,10 @@ presence.on("UpdateData", async () => {
       data.details = "Viewing all skins";
     } else if (path === "/unreleased") {
       data.details = "Viewing unreleased skins";
+    } else if (path === "/shop") {
+      const shopDate = document.querySelector(".shop-date-small");
+      data.details = "Viewing item shop";
+      data.state = shopDate.textContent;
     } else if (
       path.startsWith("/top/") ||
       path.startsWith("/bottom") ||
