@@ -1,9 +1,6 @@
-const presence = new Presence({
-    clientId: "751384892570468404"
-});
-  
-const browsingStamp = Math.floor(Date.now() / 1000);
-const path = document.location.pathname;
+const presence = new Presence({clientId: "751384892570468404"}),
+browsingStamp = Math.floor(Date.now() / 1000),
+path = document.location.pathname;
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
