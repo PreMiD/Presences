@@ -3,10 +3,7 @@
   });
   
   presence.on("UpdateData", () => {
-    const title = `${document.querySelector(".artist").textContent} - ${document.querySelector(".title").textContent} `,
-          radio = document.querySelector(".stream-name").textContent;
     let logo = 'logo_onlyhit';
-    const status = 'play';
     if (document.querySelector(".stream-name").textContent == 'OnlyHit Gold') {
       logo = 'logo_gold';
     }
@@ -21,7 +18,9 @@
       largeImageKey: `${logo}`,
       smallImageKey: `${status}`,
       smallImageText: `Viewing: ${pageName}`
-    };
+    },
+          title = `${document.querySelector(".artist").textContent} - ${document.querySelector(".title").textContent} `,
+          radio = document.querySelector(".stream-name").textContent;
   
     presenceData.details = `${title}`;
     presenceData.state = `${radio} on OnlyHit.us`;
@@ -31,5 +30,4 @@
     presenceData.startTimestamp = lastTimeStart;
   
     presence.setActivity(presenceData);
-    presence.setTrayTitle();
   });
