@@ -12,7 +12,7 @@
   ],
   "service": "Radiko",
   "description": {
-    "en": "Japanese's radio broadcast platform.",
+    "en": "Radiko is Japanese website that provide radio livestream in real time.",
     "jp": "ラジコは、あなたが今いるエリアで放送しているラジオ局をパソコンやスマートフォンで聴くことのできるサービスです。"
   },
   "url": "radiko.jp",
