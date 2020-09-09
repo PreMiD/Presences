@@ -12,7 +12,8 @@
   ],
   "service": "Radiko",
   "description": {
-    "en": "Japanese's radio broadcast platform."
+    "en": "Japanese's radio broadcast platform.",
+    "jp": "ラジコは、あなたが今いるエリアで放送しているラジオ局をパソコンやスマートフォンで聴くことのできるサービスです。"
   },
   "url": "radiko.jp",
   "version": "1.0.0",
