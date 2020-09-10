@@ -2,8 +2,8 @@ const presence = new Presence({
     clientId: "751816190653104168"
 });
 
-let item;
-let item2;
+let item,
+    item2;
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -39,8 +39,8 @@ presence.on("UpdateData", async () => {
                 "body > div > main > div.container > div > div.col-md-8 > div.card > div > h3"
             ) as HTMLElement;
 
-            const type = item2.innerText;
-            const firstWord = type.replace(/ .*/,'');
+            const type = item2.innerText,
+                  firstWord = type.replace(/ .*/,'');
 
             if(item == null || item.innerText == "xClose"){
                 item = document.querySelector(
