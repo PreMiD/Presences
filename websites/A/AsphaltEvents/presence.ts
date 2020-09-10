@@ -2,13 +2,8 @@ const presence = new Presence({
     clientId: "751816190653104168"
 });
 
-let item: any,
-  user: any,
-  item2: any,
-  item3: any,
-  advert: any,
-  attendance: any,
-  output: any;
+let item;
+let item2;
 
 let browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -24,45 +19,37 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Browsing";
             presenceData.state ="Upcoming Convoys & Events";
       
-            delete presenceData.smallImageKey;
-      
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/about")) {
             presenceData.details = "Viewing";
             presenceData.state ="About Us";
       
-            delete presenceData.smallImageKey;
-      
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/event/create")) {
             presenceData.details = "Creating";
             presenceData.state ="Convoy or Event";
-      
-            delete presenceData.smallImageKey;
-      
+         
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/event/")) {
             item = document.querySelector(
               "body > div > main > div.container > div > div.col-md-8 > div > div > h1 > strong"
-            );
+            ) as HTMLElement;
 
             item2 = document.querySelector(
                 "body > div > main > div.container > div > div.col-md-8 > div.card > div > h3"
-            );
+            ) as HTMLElement;
 
             let type = item2.innerText;
             let firstWord = type.replace(/ .*/,'');
 
-            if(item == "xClose" || item == null){
+            if(item == null || item.innerText == "xClose"){
                 item = document.querySelector(
                     "body > div > main > div.container > div > div.col-md-8 > div.card-header > h3"
-                  );
+                  ) as HTMLElement;
             }
 
             presenceData.details = "Viewing "+firstWord+':';
             presenceData.state = item.innerText;
-      
-            delete presenceData.smallImageKey;
       
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/event")) {
@@ -74,25 +61,19 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Viewing";
             presenceData.state ="Their Profile";
       
-            delete presenceData.smallImageKey;
-      
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/user/")) {
             item = document.querySelector(
                 "body > div > main > div.container > div > div.row > div.col-md-9 > div > div > div > div > h1"
-              );
+              ) as HTMLElement;
 
             presenceData.details = "Viewing ";
             presenceData.state = item.innerText+"'s Profile";
-      
-            delete presenceData.smallImageKey;
       
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/knowledge-base")) {
             presenceData.details = "Browsing";
             presenceData.state ="The Knowledge Base";
-
-            delete presenceData.smallImageKey;
       
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/languages")) {
@@ -101,7 +82,7 @@ presence.on("UpdateData", async () => {
 
             item = document.querySelector(
                 "body > div > form > div > div > div > div:nth-child(2) > select > option:checked"
-              );
+              ) as HTMLElement;
 
 
               if(item != null){
@@ -110,14 +91,10 @@ presence.on("UpdateData", async () => {
                 presenceData.details = "Translation Center";
               }
       
-            delete presenceData.smallImageKey;
-      
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/team")) {
             presenceData.details = "Viewing";
             presenceData.state = "The Team Page";
-      
-            delete presenceData.smallImageKey;
       
             presence.setActivity(presenceData);
         } else {
