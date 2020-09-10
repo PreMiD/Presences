@@ -1,11 +1,11 @@
 const presence = new Presence({
     clientId: "751816190653104168"
-});
+}),
+browsingStamp = Math.floor(Date.now() / 1000);
+
 
 let item,
     item2;
-
-const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -78,7 +78,6 @@ presence.on("UpdateData", async () => {
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/languages")) {
             presenceData.details = "Translating The Website";
-            delete presenceData.state;
 
             item = document.querySelector(
                 "body > div > form > div > div > div > div:nth-child(2) > select > option:checked"
@@ -87,7 +86,7 @@ presence.on("UpdateData", async () => {
               if(item != null){
                 presenceData.state = item.innerText;
               }else{
-                presenceData.details = "Translation Center";
+                presenceData.state = "Translation Center";
               }
       
             presence.setActivity(presenceData);

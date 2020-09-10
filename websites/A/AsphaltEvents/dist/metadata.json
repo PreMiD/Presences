@@ -17,15 +17,15 @@
     },
     "service": "Asphalt Events",
     "version": "1.0.0",
-    "logo": "https://imgur.com/a/F5Ega8b",
-    "thumbnail": "https://imgur.com/a/F5Ega8b",
+    "logo": "https://i.imgur.com/MXhf8fA.png",
+    "thumbnail": "https://i.imgur.com/MXhf8fA.png",
     "color": "#3490DC",
     "tags": [
-      "ETS2",
-      "ATS",
-      "TruckersMP",
-      "AsphaltEvents",
-      "Events",
+      "ets2",
+      "ats",
+      "truckersmp",
+      "asphaltevents",
+      "events",
       "convoys"
     ],
     "category": "games"
