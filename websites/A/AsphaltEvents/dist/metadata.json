@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "Senka Wolf",
+      "id": "170854083840704512"
+    },
+    "contributors": {
+      "name": "DubStepMad",
+      "id": "118810952530395136"
+    },
+    "url": [
+      "asphalt.events",
+      "asphaltevents.com"
+    ],
+    "description": {
+      "en": "Modern and feature-packed convoy/event advertising service for TruckersMP."
+    },
+    "service": "Asphalt Events",
+    "version": "1.0.0",
+    "logo": "https://asphalt.events/images/branding/Asphalt-Events-Trans.png",
+    "thumbnail": "https://asphalt.events/images/branding/Asphalt-Events-Trans.png",
+    "color": "#3490DC",
+    "tags": [
+      "ETS2",
+      "ATS",
+      "TruckersMP",
+      "Asphalt Events",
+      "Events",
+      "conovys"
+    ],
+    "category": "games"
+  }
