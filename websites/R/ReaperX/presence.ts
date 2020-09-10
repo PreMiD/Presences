@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
             presenceData.state = "ร้านเติมโรบัคราคาถูก";
             presenceData.startTimestamp = browsingStamp;
         }
-    };
+    }
 
     if (presenceData.details == null) {
         presence.setTrayTitle();
