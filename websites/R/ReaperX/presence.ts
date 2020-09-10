@@ -6,7 +6,6 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "icon"
     };
-
     if (document.location.hostname == "reaperx.in.th") {
         if (path.includes("/home")) {
             presenceData.startTimestamp = browsingStamp;
@@ -40,7 +39,7 @@ presence.on("UpdateData", async () => {
             presenceData.state = "ร้านเติมโรบัคราคาถูก";
             presenceData.startTimestamp = browsingStamp;
         }
-    }
+    };
 
     if (presenceData.details == null) {
         presence.setTrayTitle();
