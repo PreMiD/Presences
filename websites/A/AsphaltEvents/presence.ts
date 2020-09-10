@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "751816190653104168"
 });
 
-var item: any,
+let item: any,
   user: any,
   item2: any,
   item3: any,
@@ -10,7 +10,7 @@ var item: any,
   attendance: any,
   output: any;
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -50,8 +50,8 @@ presence.on("UpdateData", async () => {
                 "body > div > main > div.container > div > div.col-md-8 > div.card > div > h3"
             );
 
-            var type = item2.innerText;
-            var firstWord = type.replace(/ .*/,'');
+            let type = item2.innerText;
+            let firstWord = type.replace(/ .*/,'');
 
             if(item == "xClose" || item == null){
                 item = document.querySelector(
