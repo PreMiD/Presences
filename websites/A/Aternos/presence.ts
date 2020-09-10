@@ -1,32 +1,36 @@
 const presence = new Presence({
-  clientId: "631166262881550359"
-}),
- presenceData: PresenceData = {
-  largeImageKey: "logo"
-},
- paths = {
-  ":": "Home Page",
-  go: "Login Page",
-  account: "Account Settings",
-  server: "Panel - Server",
-  console: "Panel - Console",
-  log: "Panel - Log",
-  options: "Panel - Options",
-  software: "Panel - Software",
-  players: "Panel - Players",
-  files: "Panel - Files",
-  addons: "Panel - Plugins",
-  worlds: "Panel - Worlds",
-  backups: "Panel - Backups",
-  access: "Panel - Access"
-};
+    clientId: "631166262881550359"
+  }),
+  presenceData: PresenceData = {
+    largeImageKey: "logo"
+  },
+  paths = {
+    ":": "Home Page",
+    go: "Login Page",
+    account: "Account Settings",
+    server: "Panel - Server",
+    console: "Panel - Console",
+    log: "Panel - Log",
+    options: "Panel - Options",
+    software: "Panel - Software",
+    players: "Panel - Players",
+    files: "Panel - Files",
+    addons: "Panel - Plugins",
+    worlds: "Panel - Worlds",
+    backups: "Panel - Backups",
+    access: "Panel - Access"
+  };
 
 presence.on("UpdateData", async () => {
   if (document.location.hostname === "aternos.org") {
     presenceData.startTimestamp = Date.now();
-    let path = document.location.pathname.replace(/\//g, "") as keyof typeof paths;
+    let path = document.location.pathname.replace(
+      /\//g,
+      ""
+    ) as keyof typeof paths;
     const matchedPath = path.match(/:|software|players|addons/);
-    if (matchedPath && !matchedPath.index) path = matchedPath[0] as keyof typeof paths;
+    if (matchedPath && !matchedPath.index)
+      path = matchedPath[0] as keyof typeof paths;
     const page = paths[path];
     if (page) presenceData.details = page;
   } else {
