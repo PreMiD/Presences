@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
       
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/languages")) {
-            presenceData.details = "Translating the site into";
+            presenceData.details = "Translating The Website";
             delete presenceData.state;
 
             item = document.querySelector(
@@ -106,6 +106,8 @@ presence.on("UpdateData", async () => {
 
               if(item != null){
                 presenceData.state = item.innerText;
+              }else{
+                presenceData.details = "Translation Center";
               }
               console.log(item);
       
@@ -115,13 +117,6 @@ presence.on("UpdateData", async () => {
         } else if (document.location.pathname.includes("/team")) {
             presenceData.details = "Viewing";
             presenceData.state = "The Team Page";
-      
-            delete presenceData.smallImageKey;
-      
-            presence.setActivity(presenceData);
-        } else if (document.location.pathname.includes("/staff/") || document.location.pathname.includes("/log-viewer")) {
-            presenceData.details = "Staff Area";
-            delete presenceData.state;
       
             delete presenceData.smallImageKey;
       
