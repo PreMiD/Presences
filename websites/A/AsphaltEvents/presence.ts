@@ -84,7 +84,6 @@ presence.on("UpdateData", async () => {
                 "body > div > form > div > div > div > div:nth-child(2) > select > option:checked"
               ) as HTMLElement;
 
-
               if(item != null){
                 presenceData.state = item.innerText;
               }else{
