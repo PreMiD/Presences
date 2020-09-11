@@ -16,7 +16,7 @@
     const pageName = document.title.slice(13),
           presenceData: PresenceData = {
       largeImageKey: `${logo}`,
-      smallImageKey: `${status}`,
+      smallImageKey: "play",
       smallImageText: `Viewing: ${pageName}`
     },
           title = `${document.querySelector(".artist").textContent} - ${document.querySelector(".title").textContent} `,
