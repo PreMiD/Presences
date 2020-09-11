@@ -24,10 +24,10 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Lançamentos";
       }
       if(pathname.startsWith("/scans")){      
-        let pathsplitted = pathname.split('/').slice(-1)[0];
+        const pathsplitted = pathname.split('/').slice(-1)[0];
         if (!pathsplitted.includes("scans"))
         {
-          let scanName = document.querySelector("h1").textContent;
+          const scanName = document.querySelector("h1").textContent;
           presenceData.details = "Vendo Scan:";
           presenceData.state = scanName;  
         }
@@ -44,14 +44,14 @@ presence.on("UpdateData", async () => {
       }
 
       if(pathname.startsWith("/profile")){
-        let username = document.querySelector("h1").textContent;
+        const username = document.querySelector("h1").textContent;
         presenceData.details = "Vendo Perfil:";
         presenceData.state = username;
       }
 
       if(pathname.startsWith("/find"))
       {
-        let pathsplitted = pathname.split('/').slice(-1)[0];
+        const pathsplitted = pathname.split('/').slice(-1)[0];
         presenceData.details = "Pesquisando por:";
         presenceData.state = pathsplitted;
       }
@@ -62,10 +62,10 @@ presence.on("UpdateData", async () => {
       }
       
       if(pathname.startsWith("/mangas")){
-        let pathsplitted = pathname.split('/').slice(-1)[0];
+        const pathsplitted = pathname.split('/').slice(-1)[0];
         if (!pathsplitted.startsWith("mangas"))
         {
-          let information = pathsplitted
+          const information = pathsplitted
             .replace("-", " ")
             .replace(/(\w)(\w*)/g,
               function(_,g1,g2){return g1.toUpperCase() + g2.toLowerCase();
@@ -86,17 +86,17 @@ presence.on("UpdateData", async () => {
       }
 
       if(pathname.startsWith("/manga/") && pathname.includes("-mh")){
-        let pathsplitted = pathname.split('/').slice(-1)[0];
+        const pathsplitted = pathname.split('/').slice(-1)[0];
         if (!pathsplitted.includes("-mh"))
         {
-          let mangaName = document.querySelector("h1 a").textContent;
-          let chapterNumber = pathsplitted[0];
+          const mangaName = document.querySelector("h1 a").textContent;
+          const chapterNumber = pathsplitted[0];
 
-          var e = (document.getElementById("capitulos-3")) as HTMLSelectElement;
-          var sel = e.selectedIndex;
-          var opt = e.options[sel];
-          var CurText = (<HTMLOptionElement>opt).text;
-          let pageNumber = CurText;
+          const e = (document.getElementById("capitulos-3")) as HTMLSelectElement;
+          const sel = e.selectedIndex;
+          const opt = e.options[sel];
+          const CurText = (<HTMLOptionElement>opt).text;
+          const pageNumber = CurText;
 
           presenceData.details = mangaName;
           presenceData.state = "Capítulo " + chapterNumber + " - Pg " + pageNumber;
