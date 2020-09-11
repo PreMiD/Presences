@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "749977202275123362",
+    clientId: "749977202275123362"
 });
 browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "🌐 Etusivulla";
         }
-        else if (presenceData.details = document.querySelector(".song-name")) {
+        else if (presenceData.details == document.querySelector(".song-name")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = `📻 ${document.querySelector(".mdc-typography--display1").textContent}`;
             presenceData.state = `🎵 ${document.querySelector(".song-name").textContent}`;
