@@ -1,8 +1,9 @@
-let presence = new Presence({
-    clientId: "727550263786995792"
+const presence = new Presence({
+    clientId: "749977202275123362",
 });
-let browsingStamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
+    const browsingStamp = Math.floor(Date.now() / 1000);
     const presenceData = {
         largeImageKey: "radiot"
     };
@@ -16,8 +17,9 @@ presence.on("UpdateData", async () => {
             presenceData.details = `📻 ${document.querySelector(".mdc-typography--display1").textContent}`;
             presenceData.state = `🎵 ${document.querySelector(".song-name").textContent}`;
         } else {
+            presenceData.startTimestamp = browsingStamp;
             presenceData.details = `📻 ${document.querySelector(".mdc-typography--display1").textContent}`;
-            presenceData.state = `🎵 Not Available`;
+            presenceData.state = `🎵 Ei saatavilla`;
         }
     }
     if (presenceData.details == null) {
