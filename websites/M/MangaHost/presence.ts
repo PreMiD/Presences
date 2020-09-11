@@ -89,14 +89,13 @@ presence.on("UpdateData", async () => {
         const pathsplitted = pathname.split('/').slice(-1)[0];
         if (!pathsplitted.includes("-mh"))
         {
-          const mangaName = document.querySelector("h1 a").textContent;
-          const chapterNumber = pathsplitted[0];
-
-          const e = (document.getElementById("capitulos-3")) as HTMLSelectElement;
-          const sel = e.selectedIndex;
-          const opt = e.options[sel];
-          const CurText = (<HTMLOptionElement>opt).text;
-          const pageNumber = CurText;
+          const mangaName = document.querySelector("h1 a").textContent,
+                chapterNumber = pathsplitted[0],
+                e = (document.getElementById("capitulos-3")) as HTMLSelectElement,
+                sel = e.selectedIndex,
+                opt = e.options[sel],
+                curText = (<HTMLOptionElement>opt).text,
+                pageNumber = curText;
 
           presenceData.details = mangaName;
           presenceData.state = "Capítulo " + chapterNumber + " - Pg " + pageNumber;
