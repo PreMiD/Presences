@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-    const browsingStamp = Math.floor(Date.now() / 1000);
+    browsingStamp = Math.floor(Date.now() / 1000);
     const presenceData = {
         largeImageKey: "radiot"
     };
