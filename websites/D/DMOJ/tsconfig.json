@@ -1,9 +1,6 @@
 {
     "extends": "../../../tsconfig.json",
     "compilerOptions": {
-        "outDir": "./dist/",
-        "lib": [
-            "dom",
-            "es7"
+        "outDir": "./dist/"
         }
     }
