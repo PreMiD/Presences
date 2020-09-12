@@ -8,14 +8,14 @@
   });
 
   presence.on("UpdateData", async () => {
-    const player = document.querySelector(".player");
+    const player = document.querySelector(".playerQueue__PlayerWrapper-sc-1t5b3u2-0");
     if (player) {
-      const title = player.querySelector(".player-cloudcast-title").textContent;
-      const author = player.querySelector(".player-cloudcast-author-link")
+      const title = player.querySelector(".PlayerControls__ShowTitle-vo7mt3-0").textContent;
+      const author = player.querySelector(".PlayerControls__ShowOwnerName-vo7mt3-2")
         .textContent;
 
       const elapsed = player
-        .querySelector(".player-time")
+        .querySelector(".PlayerSliderComponent__StartTime-z3gy2f-1")
         .textContent.split(":");
       let elapsedSec;
       if (elapsed.length === 3) {
@@ -27,7 +27,7 @@
         elapsedSec = parseInt(elapsed[0]) * 60 + parseInt(elapsed[1]);
       }
 
-      const isPlaying = player.querySelector(".pause-state") ? true : false;
+      const isPlaying = player.querySelector(".PlayButton__PlayButtonIcon-rvh8d9-2") ? true : false;
 
       const presenceData: PresenceData = {
         details: title,
