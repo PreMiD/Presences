@@ -1,54 +1,69 @@
-{
-  const presence = new Presence({
-    clientId: "610102236374368267"
-  });
-  const strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+var presence = new Presence({
+  clientId: "610102236374368267"
+});
+var strings = presence.getStrings({
+  play: "presence.playback.playing",
+  pause: "presence.playback.paused",
+  live: "presence.activity.live"
+});
 
-  presence.on("UpdateData", async () => {
-    const player = document.querySelector(".playerQueue__PlayerWrapper-sc-1t5b3u2-0");
-    if (player) {
-      const title = player.querySelector(".PlayerControls__ShowTitle-vo7mt3-0").textContent;
-      const author = player.querySelector(".PlayerControls__ShowOwnerName-vo7mt3-2")
-        .textContent;
+var live, prevLive: boolean, author: string, title: string;
 
-      const elapsed = player
-        .querySelector(".PlayerSliderComponent__StartTime-z3gy2f-1")
-        .textContent.split(":");
-      let elapsedSec;
-      if (elapsed.length === 3) {
-        elapsedSec =
-          parseInt(elapsed[0]) * 60 * 60 +
-          parseInt(elapsed[1]) * 60 +
-          parseInt(elapsed[2]);
-      } else {
-        elapsedSec = parseInt(elapsed[0]) * 60 + parseInt(elapsed[1]);
+presence.on("UpdateData", async () => {
+  var player = document.querySelector(".PlayerControls__PlayerContainer-vo7mt3-4");
+
+  if (player) {
+    var paused =
+      document.querySelector(
+        ".PlayButton__PlayerControl-rvh8d9-1"
+      ) === null;
+
+    var on_air = document.querySelector(".LiveStreamPage__LiveStreamPageHeader-hwzri8-1");
+
+    if (on_air) {
+      live = true;
+      if (prevLive !== live) {
+        prevLive = live;
       }
-
-      const isPlaying = player.querySelector(".PlayButton__PlayButtonIcon-rvh8d9-2") ? true : false;
-
-      const presenceData: PresenceData = {
-        details: title,
-        state: author,
-        largeImageKey: "mixcloud",
-        smallImageKey: isPlaying ? "play" : "pause",
-        smallImageText: isPlaying
-          ? (await strings).play
-          : (await strings).pause,
-        startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
-      };
-
-      if (isPlaying) {
-        presence.setTrayTitle(title);
-      } else {
-        delete presenceData.startTimestamp;
-      }
-
-      presence.setActivity(presenceData);
     } else {
-      presence.clearActivity();
+      live = false;
     }
-  });
-}
+
+    if (!live) {
+      title = document.querySelector(".shared__ShowDetails-gqlx6k-1 > a:nth-child(1)").textContent;
+      author = document.querySelector("p.Typography__BodyExtraSmall-sc-1swbs0s-16:nth-child(2) > a:nth-child(1)").textContent;
+    } else {
+      title = document.querySelector(".Typography__Headline1Small-sc-1swbs0s-8").textContent;
+      author = "Mixcloud Live";
+    }
+
+    var data: PresenceData = {
+      details: title,
+      state: author,
+      largeImageKey: "mixcloud",
+      smallImageKey: paused ? "pause" : "play",
+      smallImageText: paused ? (await strings).pause : (await strings).play,
+    };
+
+    if (live) {
+      data.smallImageKey = "live";
+      data.smallImageText = (await strings).live;
+    }
+
+    if (paused) {
+      delete data.startTimestamp;
+      delete data.endTimestamp;
+    }
+    
+    presence.setActivity(
+      {
+        details: data.details,
+        state: data.state,
+        largeImageKey: "mixcloud"
+      },
+      true
+    );
+   } else if (title !== null && author !== null) {
+     presence.setActivity(data, !paused);
+   };
+});
