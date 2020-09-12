@@ -1,16 +1,16 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "610102236374368267"
 });
-var strings = presence.getStrings({
+const strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
   live: "presence.activity.live"
 });
 
-var live, prevLive: boolean, author: string, title: string;
+let live, prevLive, author: string, title: string;
 
 presence.on("UpdateData", async () => {
-  var player = document.querySelector(".PlayerControls__PlayerContainer-vo7mt3-4");
+  const player = document.querySelector(".PlayerControls__PlayerContainer-vo7mt3-4");
 
   if (player) {
     var paused =
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
         ".PlayButton__PlayerControl-rvh8d9-1"
       ) === null;
 
-    var on_air = document.querySelector(".LiveStreamPage__LiveStreamPageHeader-hwzri8-1");
+    const on_air = document.querySelector(".LiveStreamPage__LiveStreamPageHeader-hwzri8-1");
 
     if (on_air) {
       live = true;
@@ -37,12 +37,12 @@ presence.on("UpdateData", async () => {
       author = "Mixcloud Live";
     }
 
-    var data: PresenceData = {
+    let data: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "mixcloud",
       smallImageKey: paused ? "pause" : "play",
-      smallImageText: paused ? (await strings).pause : (await strings).play,
+      smallImageText: paused ? (await strings).pause : (await strings).play
     };
 
     if (live) {
@@ -65,5 +65,5 @@ presence.on("UpdateData", async () => {
     );
    } else if (title !== null && author !== null) {
      presence.setActivity(data, !paused);
-   };
+   }
 });
