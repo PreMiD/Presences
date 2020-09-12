@@ -31,9 +31,9 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {};
 
   if (isHostDP) {
-    data.largeImageKey = "disneyplus-logo"
+    data.largeImageKey = "disneyplus-logo";
   } else if (isHostHS) {
-    data.largeImageKey = "disneyplus-hotstar-logo"
+    data.largeImageKey = "disneyplus-hotstar-logo";
   }
 
   // Disney+ video
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 
       if (title) presence.setActivity(data, !video.paused);
     }
-  // Disney+ Hotstar video
+    // Disney+ Hotstar video
   } else if (isHostHS && /\/(tv|movies)\//.test(location.pathname)) {
     const video: HTMLVideoElement = document.querySelector(
       ".player-base video"
