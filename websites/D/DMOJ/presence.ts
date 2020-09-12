@@ -1,8 +1,7 @@
 const presence = new Presence({
-    clientId: "754070047193956492",
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+        clientId: "754070047193956492",
+    }),
+    browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -15,6 +14,12 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/problems")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Browsing problems";
+    } else if (document.location.pathname.includes("/post/")) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Viewing post:";
+        presenceData.state = document.querySelector(
+            "body > div > main > h2"
+        ).textContent;
     } else if (
         document.location.pathname.includes("/problem/") &&
         document.location.pathname.includes("/submit")
@@ -93,6 +98,15 @@ presence.on("UpdateData", async () => {
             document.querySelectorAll("body > div > main > h2 > a")[1]
                 .textContent
         }`;
+    } else if (
+        document.location.pathname.includes("/organization/") &&
+        document.location.pathname.includes("/users")
+    ) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Viewing members in organization:";
+        presenceData.state = document
+            .querySelector("body > div > main > h2")
+            .textContent.split(" Members")[0];
     } else if (document.location.pathname.includes("/users")) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Browsing leaderboard";
