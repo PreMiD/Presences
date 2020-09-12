@@ -11,15 +11,21 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
-  } else if (document.location.pathname.includes("/problems")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Browsing problems";
+    presenceData.smallImageKey = "home";
+    presenceData.smallImageText = "Home Page";
   } else if (document.location.pathname.includes("/post/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing post:";
     presenceData.state = document.querySelector(
       "body > div > main > h2"
     ).textContent;
+    presenceData.smallImageKey = "home";
+    presenceData.smallImageText = "Home Page";
+  } else if (document.location.pathname.includes("/problems")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing problems";
+    presenceData.smallImageKey = "problem";
+    presenceData.smallImageText = "Problem";
   } else if (
     document.location.pathname.includes("/problem/") &&
     document.location.pathname.includes("/submit")
@@ -29,6 +35,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "body > div > main > h2 > a"
     ).textContent;
+    presenceData.smallImageKey = "submit";
+    presenceData.smallImageText = "Submission";
   } else if (
     document.location.pathname.includes("/problem/") &&
     document.location.pathname.includes("/submissions")
@@ -38,6 +46,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelectorAll(
       "body > div > main > div > div > h2 > a"
     )[-1].textContent;
+    presenceData.smallImageKey = "submit";
+    presenceData.smallImageText = "Submission";
   } else if (
     document.location.pathname.includes("/problem/") &&
     document.location.pathname.includes("/rank")
@@ -47,6 +57,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "body > div > main > div > div > h2 > a"
     ).textContent;
+    presenceData.smallImageKey = "submit";
+    presenceData.smallImageText = "Submission";
   } else if (
     document.location.pathname.includes("/problem/") &&
     document.location.pathname.includes("/tickets/new")
@@ -56,12 +68,16 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "body > div > main > h2 > a"
     ).textContent;
+    presenceData.smallImageKey = "report";
+    presenceData.smallImageText = "Report";
   } else if (document.location.pathname.includes("/problem/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing problem:";
     presenceData.state = document.querySelector(
       "body > div > main > div > h2"
     ).textContent;
+    presenceData.smallImageKey = "problem";
+    presenceData.smallImageText = "Problem";
   } else if (document.location.pathname.includes("/submissions/user")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing submissions by user:";
@@ -77,9 +93,13 @@ presence.on("UpdateData", async () => {
         "body > nav > div > span > ul > li > a > span > span > b"
       ).textContent;
     }
+    presenceData.smallImageKey = "user";
+    presenceData.smallImageText = "User";
   } else if (document.location.pathname.includes("/submissions")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing submissions";
+    presenceData.smallImageKey = "submit";
+    presenceData.smallImageText = "Submission";
   } else if (document.location.pathname.includes("/submission/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = `Viewing submission of problem: ${
@@ -88,6 +108,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = `By user: ${
       document.querySelectorAll("body > div > main > h2 > a")[1].textContent
     }`;
+    presenceData.smallImageKey = "user";
+    presenceData.smallImageText = "User";
   } else if (document.location.pathname.includes("/src/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = `Viewing submission source of problem: ${
@@ -96,6 +118,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = `By user: ${
       document.querySelectorAll("body > div > main > h2 > a")[1].textContent
     }`;
+    presenceData.smallImageKey = "user";
+    presenceData.smallImageText = "User";
   } else if (
     document.location.pathname.includes("/organization/") &&
     document.location.pathname.includes("/users")
@@ -105,9 +129,13 @@ presence.on("UpdateData", async () => {
     presenceData.state = document
       .querySelector("body > div > main > h2")
       .textContent.split(" Members")[0];
+    presenceData.smallImageKey = "organization";
+    presenceData.smallImageText = "Organization";
   } else if (document.location.pathname.includes("/users")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing leaderboard";
+    presenceData.smallImageKey = "user";
+    presenceData.smallImageText = "User";
   } else if (
     document.location.pathname.includes("/user/") &&
     document.location.pathname.includes("/solved")
@@ -123,7 +151,9 @@ presence.on("UpdateData", async () => {
         "body > nav > div > span > ul > li > a > span > span > b"
       ).textContent;
     }
-  } else if (document.location.pathname.includes("/user/")) {
+    presenceData.smallImageKey = "user";
+    presenceData.smallImageText = "User";
+  } else if (document.location.pathname.includes("/user")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing user:";
     if (document.querySelector(".tabs > h2").textContent != "My account") {
@@ -135,21 +165,31 @@ presence.on("UpdateData", async () => {
         "body > nav > div > span > ul > li > a > span > span > b"
       ).textContent;
     }
+    presenceData.smallImageKey = "user";
+    presenceData.smallImageText = "User";
   } else if (document.location.pathname.includes("/edit/profile")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Editing profile";
+    presenceData.smallImageKey = "user";
+    presenceData.smallImageText = "User";
   } else if (document.location.pathname.includes("/organizations")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing organizations";
+    presenceData.smallImageKey = "organization";
+    presenceData.smallImageText = "Organization";
   } else if (document.location.pathname.includes("/organization/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing organization:";
     presenceData.state = document.querySelector(
       "body > div > main > h2"
     ).textContent;
+    presenceData.smallImageKey = "organization";
+    presenceData.smallImageText = "Organization";
   } else if (document.location.pathname.includes("/contests")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing contests";
+    presenceData.smallImageKey = "contest";
+    presenceData.smallImageText = "Contest";
   } else if (
     document.location.pathname.includes("/contest/") &&
     document.location.pathname.includes("/stats")
@@ -157,6 +197,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing statistics of contest:";
     presenceData.state = document.querySelector(".tabs > h2").textContent;
+    presenceData.smallImageKey = "contest";
+    presenceData.smallImageText = "Contest";
   } else if (
     document.location.pathname.includes("/contest/") &&
     document.location.pathname.includes("/ranking")
@@ -164,6 +206,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing rankings of contest:";
     presenceData.state = document.querySelector(".tabs > h2").textContent;
+    presenceData.smallImageKey = "contest";
+    presenceData.smallImageText = "Contest";
   } else if (
     document.location.pathname.includes("/contest/") &&
     document.location.pathname.includes("/participations")
@@ -171,28 +215,44 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing participation of contest:";
     presenceData.state = document.querySelector(".tabs > h2").textContent;
+    presenceData.smallImageKey = "contest";
+    presenceData.smallImageText = "Contest";
   } else if (document.location.pathname.includes("/contest/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing contest:";
     presenceData.state = document.querySelector(".tabs > h2").textContent;
+    presenceData.smallImageKey = "contest";
+    presenceData.smallImageText = "Contest";
   } else if (document.location.pathname.includes("/about")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing about page";
+    presenceData.smallImageKey = "about";
+    presenceData.smallImageText = "About";
   } else if (document.location.pathname.includes("/status")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing status";
+    presenceData.smallImageKey = "about";
+    presenceData.smallImageText = "About";
   } else if (document.location.pathname.includes("/runtimes/matrix/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing version matrix";
+    presenceData.smallImageKey = "about";
+    presenceData.smallImageText = "About";
   } else if (document.location.pathname.includes("/runtimes")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing runtimes";
+    presenceData.smallImageKey = "about";
+    presenceData.smallImageText = "About";
   } else if (document.location.pathname.includes("/tips")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing tips";
+    presenceData.smallImageKey = "about";
+    presenceData.smallImageText = "About";
   } else if (document.location.pathname.includes("/api")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing API";
+    presenceData.smallImageKey = "about";
+    presenceData.smallImageText = "About";
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();
