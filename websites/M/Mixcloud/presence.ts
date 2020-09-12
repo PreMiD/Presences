@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
   const player = document.querySelector(".PlayerControls__PlayerContainer-vo7mt3-4");
 
   if (player) {
-    var paused =
+    const paused =
       document.querySelector(
         ".PlayButton__PlayerControl-rvh8d9-1"
       ) === null;
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       author = "Mixcloud Live";
     }
 
-    let data: PresenceData = {
+    const data: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "mixcloud",
