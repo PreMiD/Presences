@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
         else if (pathname.startsWith("/user")) {
             presenceData.startTimestamp = browsingStamp;
             presenceData.details = "Browsing User Profile:";
-            presenceData.state = document.querySelector(".user-name").innerHTML;
+            presenceData.state = (<HTMLElement> document.querySelector(".user-name")).innerText;
         }
         else if (pathname.startsWith("/search")) {
             presenceData.startTimestamp = browsingStamp;
