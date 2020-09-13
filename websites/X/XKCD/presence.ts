@@ -18,12 +18,15 @@ presence.on("UpdateData", () => {
     elapsed = Math.round(Date.now() / 1000);
   }
 
-  if(!isNaN(Number(location.pathname.replace(/\//g,"")))){
+  if(!document.body.textContent.includes("404 Not Found\nnginx") && !isNaN(Number(location.pathname.replace(/\//g,"")))){
     title = document.getElementById("ctitle").textContent;
     alt = document.querySelector("#comic > img").getAttribute("title");
     comicNumber = document.querySelector("[property=\"og:url\"]").getAttribute("content").split("xkcd.com/")[1].split("/")[0];
     details = `Reading #${comicNumber}`;
     state = title;
+  }else{
+    details = "Browsing XKCD";
+    state = undefined;
   }
 
   const data : PresenceData = {
@@ -35,11 +38,6 @@ presence.on("UpdateData", () => {
     startTimestamp: elapsed
   };
 
-  if(data.details == null){
-    presence.setTrayTitle();
-    presence.setActivity();
-  }else{
-    presence.setActivity(data);
-  }
+  presence.setActivity(data);
 
 });
