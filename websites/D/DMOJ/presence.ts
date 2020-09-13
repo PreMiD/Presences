@@ -89,8 +89,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${
         document.querySelector("body > div > main > div > h2").textContent
       } (${
-        document.querySelector(".pi-value").textContent.split("\n", 2)[1]
-      }points)`;
+        document
+          .querySelector(".pi-value")
+          .textContent.split("\n", 2)[1]
+          .split(" ", 2)[0]
+      } points)`;
     }
 
     presenceData.smallImageKey = "problem";
