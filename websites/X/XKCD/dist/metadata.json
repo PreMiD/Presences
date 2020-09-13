@@ -12,9 +12,9 @@
     "en": "XKCD is a webcomic of romance, sarcasm, math, and language."
   },
   "service": "XKCD",
-  "version": "0.0.1",
-  "logo": "https://cdn.discordapp.com/attachments/710280407777673277/754584949452963882/xkcd_illustration_x4.jpg",
-  "thumbnail": "https://cdn.discordapp.com/attachments/710280407777673277/754552040545583302/Screen_Shot_2020-09-12_at_8.59.55_PM.png",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/cpOto6I.jpg",
+  "thumbnail": "https://i.imgur.com/sdVsYvZ.png",
   "color": "#FFFFFF",
   "tags": [
     "xkcd",
