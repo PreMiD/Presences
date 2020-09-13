@@ -8,6 +8,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "dmoj"
   };
 
+  // HOME
   if (document.location.pathname == "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
@@ -21,7 +22,10 @@ presence.on("UpdateData", async () => {
     ).textContent;
     presenceData.smallImageKey = "home";
     presenceData.smallImageText = "Home Page";
-  } else if (document.location.pathname.includes("/problems")) {
+  }
+
+  // PROBLEM
+  else if (document.location.pathname.includes("/problems")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing problems";
     presenceData.smallImageKey = "problem";
@@ -50,7 +54,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Submission";
   } else if (
     document.location.pathname.includes("/problem/") &&
-    document.location.pathname.includes("/rank")
+    document.location.pathname.includes("/rank/")
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing best submissions to problem:";
@@ -207,7 +211,10 @@ presence.on("UpdateData", async () => {
     ).textContent;
     presenceData.smallImageKey = "organization";
     presenceData.smallImageText = "Organization";
-  } else if (document.location.pathname.includes("/contests")) {
+  }
+
+  // CONTESTS
+  else if (document.location.pathname.includes("/contests")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing contests";
     presenceData.smallImageKey = "contest";
@@ -239,13 +246,27 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(".tabs > h2").textContent;
     presenceData.smallImageKey = "contest";
     presenceData.smallImageText = "Contest";
+  } else if (
+    document.location.pathname.includes("/contest/") &&
+    document.location.pathname.includes("/rank/")
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing best submissions to problem:";
+    presenceData.state = document.querySelector(
+      "body > div > main > div > div > h2 > a"
+    ).textContent;
+    presenceData.smallImageKey = "submit";
+    presenceData.smallImageText = "Submission";
   } else if (document.location.pathname.includes("/contest/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing contest:";
     presenceData.state = document.querySelector(".tabs > h2").textContent;
     presenceData.smallImageKey = "contest";
     presenceData.smallImageText = "Contest";
-  } else if (document.location.pathname.includes("/about")) {
+  }
+
+  // ABOUT
+  else if (document.location.pathname.includes("/about")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing about page";
     presenceData.smallImageKey = "about";
