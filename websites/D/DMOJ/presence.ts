@@ -43,6 +43,28 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Submission";
   } else if (
     document.location.pathname.includes("/problem/") &&
+    document.location.pathname.includes("/resubmit")
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Submitting to problem:";
+    presenceData.state = document.querySelector(
+      "body > div > main > h2 > a"
+    ).textContent;
+    presenceData.smallImageKey = "submit";
+    presenceData.smallImageText = "Submission";
+  } else if (
+    document.location.pathname.includes("/problem/") &&
+    document.location.pathname.includes("/editorial")
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing editorial for problem:";
+    presenceData.state = document.querySelector(
+      "body > div > main > h2 > a"
+    ).textContent;
+    presenceData.smallImageKey = "problem";
+    presenceData.smallImageText = "Problem";
+  } else if (
+    document.location.pathname.includes("/problem/") &&
     document.location.pathname.includes("/submissions")
   ) {
     presenceData.startTimestamp = browsingStamp;
