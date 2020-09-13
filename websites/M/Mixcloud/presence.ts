@@ -13,12 +13,7 @@ presence.on("UpdateData", async () => {
   const player = document.querySelector(".PlayerControls__PlayerContainer-vo7mt3-4");
 
   if (player) {
-    const paused, on_air;
-
-    paused = document.querySelector(
-        ".PlayButton__PlayerControl-rvh8d9-1"
-      ) === null;
-
+    const paused = document.querySelector(".PlayButton__PlayerControl-rvh8d9-1") === null,
     on_air = document.querySelector(".LiveStreamPage__LiveStreamPageHeader-hwzri8-1");
 
     if (on_air) {
