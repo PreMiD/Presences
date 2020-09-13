@@ -77,11 +77,22 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/problem/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing problem:";
-    presenceData.state = `${
-      document.querySelector("body > div > main > div > h2").textContent
-    } (${
-      document.querySelector(".pi-value").textContent.split("\n", 2)[1]
-    }points)`;
+    if (
+      document.querySelector(".pi-value").textContent.split("\n", 2)[1] == "1 "
+    ) {
+      presenceData.state = `${
+        document.querySelector("body > div > main > div > h2").textContent
+      } (${
+        document.querySelector(".pi-value").textContent.split("\n", 2)[1]
+      }point)`;
+    } else {
+      presenceData.state = `${
+        document.querySelector("body > div > main > div > h2").textContent
+      } (${
+        document.querySelector(".pi-value").textContent.split("\n", 2)[1]
+      }points)`;
+    }
+
     presenceData.smallImageKey = "problem";
     presenceData.smallImageText = "Problem";
   } else if (document.location.pathname.includes("/submissions/user")) {
