@@ -2,15 +2,13 @@ const presence = new Presence({
   clientId: "753723629413335261"
 });
 
-let title: string,
-  artist: string,
-  dj: string,
-  listeners: number;
+let title: string, artist: string, dj: string, listeners: number;
 
 function getData(): void {
-  window.fetch("https://azura.defectiveness.ml/api/nowplaying/15")
-    .then(res => res.json())
-    .then(res => {
+  window
+    .fetch("https://azura.defectiveness.ml/api/nowplaying/15")
+    .then((res) => res.json())
+    .then((res) => {
       title = res.now_playing.song.title || "Loading..";
       artist = res.now_playing.song.artist || "Loading..";
       dj = res.live.streamer_name || "AutoDJ";
@@ -27,19 +25,19 @@ presence.on("UpdateData", async () => {
     smallImageKey: "live"
   };
 
-  if(
+  if (
     document.location.hostname === "www.beastfm.pw" ||
     document.location.hostname === "beastfm.pw"
-  ){
+  ) {
     presenceData.details = `🎵 | ${title} - ${artist}`;
     presenceData.state = `🎙️ | ${dj}`;
     presenceData.smallImageText = `Listeners: ${listeners}`;
   }
 
-  if(presenceData.details == null){
+  if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  }else {
+  } else {
     presence.setActivity(presenceData);
   }
 });

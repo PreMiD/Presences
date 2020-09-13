@@ -266,7 +266,7 @@ A few things you should know after opening a pull request:
 
 ## `Checks`
 
-![Checks](https://i.imgur.com/bk0A1iY.png)
+![Checks](https://i.imgur.com/BCDZQe9.png)
 
 Currently, a presence goes through 2 separate stages of checks. All of these checks help the reviewers determine whether your presence is suitable for deployment.
 
