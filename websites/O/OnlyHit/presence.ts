@@ -10,17 +10,21 @@ const presence = new Presence({
 //! Songs timestamp will reset on new song (see further below)
 let songTimestamp = Math.floor(Date.now() / 1000),
   currentTitle = "",
-  lastTitle = "";
+  lastTitle = "",
+  format1,
+  format2,
+  info,
+  showElapsed;
 
 presence.on("UpdateData", async () => {
   //* Get customizable settings
-  let format1 = await presence.getSetting("sFormat1"),
-    format2 = await presence.getSetting("sFormat2"),
-    info = await presence.getSetting("sInfo"),
+  try {
+    format1 = await presence.getSetting("sFormat1");
+    format2 = await presence.getSetting("sFormat2");
+    info = await presence.getSetting("sInfo");
     showElapsed = await presence.getSetting("tElapsed");
-
-  //! Only needed due to a bug PreMiD has atm
-  if (info == undefined) {
+  } catch (err) {
+    //! Only needed due to a bug PreMiD has atm
     format1 = '"%song%"';
     format2 = "by %artist%";
     info = true;
