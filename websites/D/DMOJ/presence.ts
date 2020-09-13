@@ -73,9 +73,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/problem/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing problem:";
-    presenceData.state = document.querySelector(
-      "body > div > main > div > h2"
-    ).textContent;
+    presenceData.state = `${
+      document.querySelector("body > div > main > div > h2").textContent
+    } (${
+      document.querySelector(".pi-value").textContent.split("\n", 2)[1]
+    }points)`;
     presenceData.smallImageKey = "problem";
     presenceData.smallImageText = "Problem";
   } else if (document.location.pathname.includes("/submissions/user")) {
@@ -143,13 +145,23 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing problems solved by user:";
     if (document.querySelector(".tabs > h2").textContent != "My account") {
-      presenceData.state = document
-        .querySelector(".tabs > h2")
-        .textContent.split(" ")[1];
+      presenceData.state = `${
+        document.querySelector(".tabs > h2").textContent.split(" ")[1]
+      } (Rank #${
+        document
+          .querySelectorAll(".user-sidebar > div")[2]
+          .textContent.split("#", 2)[1]
+      })`;
     } else {
-      presenceData.state = document.querySelector(
-        "body > nav > div > span > ul > li > a > span > span > b"
-      ).textContent;
+      presenceData.state = `${
+        document.querySelector(
+          "body > nav > div > span > ul > li > a > span > span > b"
+        ).textContent
+      } (Rank #${
+        document
+          .querySelectorAll(".user-sidebar > div")[2]
+          .textContent.split("#", 2)[1]
+      })`;
     }
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "User";
@@ -157,13 +169,23 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing user:";
     if (document.querySelector(".tabs > h2").textContent != "My account") {
-      presenceData.state = document
-        .querySelector(".tabs > h2")
-        .textContent.split(" ")[1];
+      presenceData.state = `${
+        document.querySelector(".tabs > h2").textContent.split(" ")[1]
+      } (Rank #${
+        document
+          .querySelectorAll(".user-sidebar > div")[2]
+          .textContent.split("#", 2)[1]
+      })`;
     } else {
-      presenceData.state = document.querySelector(
-        "body > nav > div > span > ul > li > a > span > span > b"
-      ).textContent;
+      presenceData.state = `${
+        document.querySelector(
+          "body > nav > div > span > ul > li > a > span > span > b"
+        ).textContent
+      } (Rank #${
+        document
+          .querySelectorAll(".user-sidebar > div")[2]
+          .textContent.split("#", 2)[1]
+      })`;
     }
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "User";
