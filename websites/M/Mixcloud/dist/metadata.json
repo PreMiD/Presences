@@ -3,10 +3,10 @@
     "name": "Eai",
     "id": "132779412771962880"
   },
-  "contributors": {
+  "contributors": [{
     "name": "LaneSh4d0w",
     "id": "391596266087251969"
-  },
+  }],
   "service": "Mixcloud",
   "description": {
     "en": "Listen to the best DJs and radio presenters in the world for free.",
