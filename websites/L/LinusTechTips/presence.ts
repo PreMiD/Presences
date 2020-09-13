@@ -3,8 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let item,
-  item2;
+let item;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
