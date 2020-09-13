@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
     presenceData.smallImageKey = "home";
-    presenceData.smallImageText = "Home Page";
+    presenceData.smallImageText = "Home";
   } else if (document.location.pathname.includes("/post/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing post:";
@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
       "body > div > main > h2"
     ).textContent;
     presenceData.smallImageKey = "home";
-    presenceData.smallImageText = "Home Page";
+    presenceData.smallImageText = "Home";
   }
 
   // PROBLEM
