@@ -13,7 +13,7 @@
     "nl": "OnlyHot is jouw online muziek radiostation, gemaakt om je de beste hits 24/7 af te spelen en om je als eerste de toekomstige hits te laten ontdekken."
   },
   "service": "OnlyHit",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/vyiCjQz.png",
   "thumbnail": "https://i.imgur.com/x5Jpq7I.png",
   "color": "#C1272D",
@@ -51,5 +51,6 @@
       "value": "by %artist%",
       "placeholder": "use %song% or %artist%"
     }
-  ]
+  ],
+  "button": false
 }
