@@ -19,9 +19,9 @@ document.body.append(output);
 // Overwrites console.log to get data from Town of Salem
 // This is because the game information is not global and everything is rendered on a canvas.
 // However, it seems that every event is logged to the console.
-const s = document.createElement("script"),
-script = ()=>{
-  const mainObject : GameState = {
+const s = document.createElement("script");
+s.innerHTML = `(()=>{
+  const mainObject = {
     page: "Login",
     day: 1,
     type: "Classic",
@@ -34,7 +34,7 @@ script = ()=>{
    * @param  {string} hex The hex string
    * @returns {string} The utf8 string
    */
-  function decodeHex(hex : string){
+  function decodeHex(hex){
     const input = hex.split(" ");
     let out = "";
     for(let i = 0;i<input.length;i++){
@@ -48,10 +48,10 @@ script = ()=>{
     return out;
   }
 
-  const output = document.getElementById("PreMiD_Salem_Out") as HTMLTextAreaElement;
+  const output = document.getElementById("PreMiD_Salem_Out");
   output.value = JSON.stringify(mainObject);
   // messages that can be ignored by this program
-  const ignoreRegex = /(Submitting chat)|(SocketSend\.)|(Message received)|(> Potion ID)|(Number of)|(Adding game type)|(Clearing any)|(Initializing)|(Entering)|(Unloading)|(Preloading)|(Login Scene)|\[ApplicationController]|\[UnityCache]|\[Subsystems]|\[CachedXMLHttpRequest]/gm,
+  const ignoreRegex = /(Submitting chat)|(SocketSend\\.)|(Message received)|(> Potion ID)|(Number of)|(Adding game type)|(Clearing any)|(Initializing)|(Entering)|(Unloading)|(Preloading)|(Login Scene)|\\[ApplicationController]|\\[UnityCache]|\\[Subsystems]|\\[CachedXMLHttpRequest]/gm,
     oldLog = console.log;
 
   console.log = function(...args){
@@ -59,14 +59,19 @@ script = ()=>{
       if(args[0].search(ignoreRegex) !== -1){
         // return;
       }else if(args[0].search(/^Switched to /gm) === 0){
-        const page = args[0].split(" \n")[0].split("Switched to ")[1];
+        const page = args[0].split(" \\n")[0].split("Switched to ")[1];
         mainObject.page = page;
+        if(page === "BigHome Scene"){
+          mainObject.day = 1;
+          mainObject.state = 1;
+          mainObject.type = "Classic";
+        }
         output.value = JSON.stringify(mainObject);
       }else if(args[0].search(/^Creating lobby:/gm) === 0){
         const type = args[0].split(" |")[0].split(": ")[1];
         mainObject.type = type;
         output.value = JSON.stringify(mainObject);
-      }else if(args[0].search(/\[Network]/gm) !== -1 && args[0].search(/Bytes:/gm) !== -1){
+      }else if(args[0].search(/\\[Network]/gm) !== -1 && args[0].search(/Bytes:/gm) !== -1){
         const hex = args[0].split("Bytes: ")[1].split("</color>")[0],
           out = decodeHex(hex);
         // console.warn("Network Log: " + out);
@@ -111,8 +116,7 @@ script = ()=>{
     // Log original message
     oldLog(...args);
   };
-};
-s.innerHTML = `(${script.toString()})();`;
+})();`;
 document.body.append(s);
 
 let elapsed = Math.round(Date.now() / 1000),
