@@ -27,21 +27,10 @@ presence.on("UpdateData", async () => {
                 presenceData.startTimestamp = browsingStamp;
                 presenceData.details = "Viewing Popular Charts";
                 break;
-            case "/legal":
-                presenceData.startTimestamp = browsingStamp;
-                presenceData.details = "Browsing Legal Information...";
-                presenceData.state = "Why?";
-                break;
-            case "/support":
-                presenceData.startTimestamp = browsingStamp;
-                presenceData.details = "Browsing Support Information...";
-                presenceData.state = "Pls Donate Lol";
-                break;
             default:
                 //Idle
                 presenceData.startTimestamp = browsingStamp;
                 presenceData.details = "Idling";
-                presenceData.state = "Doing... Something?";
                 break;
         }
         if (pathname.startsWith("/song")) {
