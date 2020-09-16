@@ -1,0 +1,23 @@
+{
+    "author": {
+      "name": "파랑이",
+      "id": "628595345798201355"
+    },
+    "contributors": [],
+    "service": "Laftel",
+    "description": {
+      "en": "Anime streaming service in korea."
+    },
+    "url": [
+      "laftel.net"
+    ],
+    "version": "0.0.1",
+    "logo": "",
+    "thumbnail": "",
+    "color": "#bd34eb",
+    "tags": [
+      "video",
+      "media"
+    ],
+    "category": "anime"
+  }
