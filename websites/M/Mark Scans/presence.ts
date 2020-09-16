@@ -34,7 +34,8 @@ presence.on('UpdateData', async () => {
             presenceData.details = 'Pesquisando';
             presenceData.state = pesquisatexto.value;
         }
-    } else if (path.includes('/generos/')) {
+    } else if (path.includes('/generos/')) 
+    {
         presenceData.details = `Categoria: ${title.innerText.slice(0, title.innerText.indexOf('Mark') - 2)}`;
         if (filtroprojetos !== null)
         {
@@ -43,7 +44,8 @@ presence.on('UpdateData', async () => {
         {
             presenceData.state = 'Filtro: Nenhum';
         }
-    } else if (path.includes('/manga/')) {
+    } else if (path.includes('/manga/')) 
+    {
         const opcoes = 
         {
             0: function()
@@ -56,7 +58,8 @@ presence.on('UpdateData', async () => {
             }
         }
 
-        if ((tituloobra != null) && !tituloobra.textContent.includes('Privado:') || !title.innerText.includes('Privado:')) {
+        if ((tituloobra != null) && !tituloobra.textContent.includes('Privado:') || !title.innerText.includes('Privado:')) 
+        {
             if ((path.split('/').length - 1) != 3) 
             {
                 presenceData.details = title.innerText.slice(0, title.innerText.indexOf('- Capítulo') - 1);
