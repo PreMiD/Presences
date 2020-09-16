@@ -4,15 +4,20 @@ var presence = new Presence({
 
 var prev = ''
 
-presence.on("UpdateData", async () => {
-  console.log(presence.getActivity())
+function getQuery() {
   var search = location.search.substring(1);
   var query = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+  return query
+}
+
+presence.on("UpdateData", async () => {
+  console.log(presence.getActivity())
   var presenceData: PresenceData = {}
 
   if (window.location.pathname === '/') {
     presenceData.details = '메인'
   } else if (window.location.pathname.startsWith('/search')) {
+    var query = getQuery()
     presenceData.details = '검색'
     presenceData.state = query.keyword
   }
