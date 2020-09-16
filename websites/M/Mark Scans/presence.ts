@@ -17,10 +17,12 @@ presence.on('UpdateData', async () => {
     selecaoLeitura: HTMLSelectElement = document.querySelector("#manga-reading-nav-head > div > div.select-view > div.c-selectpicker.selectpicker_load > label > select"),
     paginacao: HTMLSelectElement = document.querySelector("#single-pager"),
     usuarioNome: HTMLSpanElement = document.querySelector("body > div.wrap > div > header > div.c-sub-header-nav.hide-sticky-menu > div > div > div.c-modal_item > div > span");
+
     if (usuarioNome !== null) {
         presenceData.smallImageKey = 'user';
         presenceData.smallImageText = usuarioNome.innerText.slice(11);
     }
+    
     if (path == '/') {
         if (pesquisatexto == null) {
             presenceData.details = 'Página inicial';
