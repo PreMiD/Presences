@@ -26,7 +26,7 @@ type Episode = {
 let lastEpisode: Episode = {};
 
 function getQuery() {
-  const search = location.search.substring(1), query = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
+  const search = location.search.substring(1), query = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
   return query;
 }
 
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {};
 
   if (window.location.pathname === '/') {
-    presenceData.details = '메인'
+    presenceData.details = '메인';
   } else if (window.location.pathname.startsWith('/search')) {
     const query = getQuery();
     presenceData.details = '검색';
