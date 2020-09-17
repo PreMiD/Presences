@@ -8,11 +8,12 @@ presence.on("UpdateData", async () => {
     largeImageKey: "dmoj"
   };
 
+  // HOME
   if (document.location.pathname == "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
     presenceData.smallImageKey = "home";
-    presenceData.smallImageText = "Home Page";
+    presenceData.smallImageText = "Home";
   } else if (document.location.pathname.includes("/post/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing post:";
@@ -20,8 +21,11 @@ presence.on("UpdateData", async () => {
       "body > div > main > h2"
     ).textContent;
     presenceData.smallImageKey = "home";
-    presenceData.smallImageText = "Home Page";
-  } else if (document.location.pathname.includes("/problems")) {
+    presenceData.smallImageText = "Home";
+  }
+
+  // PROBLEM
+  else if (document.location.pathname.includes("/problems")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing problems";
     presenceData.smallImageKey = "problem";
@@ -39,6 +43,28 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Submission";
   } else if (
     document.location.pathname.includes("/problem/") &&
+    document.location.pathname.includes("/resubmit")
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Submitting to problem:";
+    presenceData.state = document.querySelector(
+      "body > div > main > h2 > a"
+    ).textContent;
+    presenceData.smallImageKey = "submit";
+    presenceData.smallImageText = "Submission";
+  } else if (
+    document.location.pathname.includes("/problem/") &&
+    document.location.pathname.includes("/editorial")
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing editorial for problem:";
+    presenceData.state = document.querySelector(
+      "body > div > main > h2 > a"
+    ).textContent;
+    presenceData.smallImageKey = "problem";
+    presenceData.smallImageText = "Problem";
+  } else if (
+    document.location.pathname.includes("/problem/") &&
     document.location.pathname.includes("/submissions")
   ) {
     presenceData.startTimestamp = browsingStamp;
@@ -50,7 +76,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Submission";
   } else if (
     document.location.pathname.includes("/problem/") &&
-    document.location.pathname.includes("/rank")
+    document.location.pathname.includes("/rank/")
   ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing best submissions to problem:";
@@ -73,9 +99,25 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/problem/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing problem:";
-    presenceData.state = document.querySelector(
-      "body > div > main > div > h2"
-    ).textContent;
+    if (
+      document.querySelector(".pi-value").textContent.split("\n", 2)[1] == "1 "
+    ) {
+      presenceData.state = `${
+        document.querySelector("body > div > main > div > h2").textContent
+      } (${
+        document.querySelector(".pi-value").textContent.split("\n", 2)[1]
+      }point)`;
+    } else {
+      presenceData.state = `${
+        document.querySelector("body > div > main > div > h2").textContent
+      } (${
+        document
+          .querySelector(".pi-value")
+          .textContent.split("\n", 2)[1]
+          .split(" ", 2)[0]
+      } points)`;
+    }
+
     presenceData.smallImageKey = "problem";
     presenceData.smallImageText = "Problem";
   } else if (document.location.pathname.includes("/submissions/user")) {
@@ -143,13 +185,23 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing problems solved by user:";
     if (document.querySelector(".tabs > h2").textContent != "My account") {
-      presenceData.state = document
-        .querySelector(".tabs > h2")
-        .textContent.split(" ")[1];
+      presenceData.state = `${
+        document.querySelector(".tabs > h2").textContent.split(" ")[1]
+      } (Rank #${
+        document
+          .querySelectorAll(".user-sidebar > div")[2]
+          .textContent.split("#", 2)[1]
+      })`;
     } else {
-      presenceData.state = document.querySelector(
-        "body > nav > div > span > ul > li > a > span > span > b"
-      ).textContent;
+      presenceData.state = `${
+        document.querySelector(
+          "body > nav > div > span > ul > li > a > span > span > b"
+        ).textContent
+      } (Rank #${
+        document
+          .querySelectorAll(".user-sidebar > div")[2]
+          .textContent.split("#", 2)[1]
+      })`;
     }
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "User";
@@ -157,13 +209,23 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing user:";
     if (document.querySelector(".tabs > h2").textContent != "My account") {
-      presenceData.state = document
-        .querySelector(".tabs > h2")
-        .textContent.split(" ")[1];
+      presenceData.state = `${
+        document.querySelector(".tabs > h2").textContent.split(" ")[1]
+      } (Rank #${
+        document
+          .querySelectorAll(".user-sidebar > div")[2]
+          .textContent.split("#", 2)[1]
+      })`;
     } else {
-      presenceData.state = document.querySelector(
-        "body > nav > div > span > ul > li > a > span > span > b"
-      ).textContent;
+      presenceData.state = `${
+        document.querySelector(
+          "body > nav > div > span > ul > li > a > span > span > b"
+        ).textContent
+      } (Rank #${
+        document
+          .querySelectorAll(".user-sidebar > div")[2]
+          .textContent.split("#", 2)[1]
+      })`;
     }
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "User";
@@ -185,7 +247,10 @@ presence.on("UpdateData", async () => {
     ).textContent;
     presenceData.smallImageKey = "organization";
     presenceData.smallImageText = "Organization";
-  } else if (document.location.pathname.includes("/contests")) {
+  }
+
+  // CONTESTS
+  else if (document.location.pathname.includes("/contests")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing contests";
     presenceData.smallImageKey = "contest";
@@ -217,13 +282,27 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(".tabs > h2").textContent;
     presenceData.smallImageKey = "contest";
     presenceData.smallImageText = "Contest";
+  } else if (
+    document.location.pathname.includes("/contest/") &&
+    document.location.pathname.includes("/rank/")
+  ) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Viewing best submissions to problem:";
+    presenceData.state = document.querySelector(
+      "body > div > main > div > div > h2 > a"
+    ).textContent;
+    presenceData.smallImageKey = "submit";
+    presenceData.smallImageText = "Submission";
   } else if (document.location.pathname.includes("/contest/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing contest:";
     presenceData.state = document.querySelector(".tabs > h2").textContent;
     presenceData.smallImageKey = "contest";
     presenceData.smallImageText = "Contest";
-  } else if (document.location.pathname.includes("/about")) {
+  }
+
+  // ABOUT
+  else if (document.location.pathname.includes("/about")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing about page";
     presenceData.smallImageKey = "about";
