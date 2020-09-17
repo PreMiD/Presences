@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {};
 
   if (window.location.pathname === '/') {
-    presenceData.details = '메인''
+    presenceData.details = '메인'
   } else if (window.location.pathname.startsWith('/search')) {
     const query = getQuery();
     presenceData.details = '검색';
