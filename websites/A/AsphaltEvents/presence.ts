@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
       ) as HTMLElement;
 
       const type = item2.innerText,
-        firstWord = type.replace(/ .*/, '');
+        firstWord = type.replace(/ .*/, "");
 
       if (item == null || item.innerText == "xClose") {
         item = document.querySelector(
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
         ) as HTMLElement;
       }
 
-      presenceData.details = "Viewing " + firstWord + ':';
+      presenceData.details = "Viewing " + firstWord + ":";
       presenceData.state = item.innerText;
       delete presenceData.smallImageKey;
 
