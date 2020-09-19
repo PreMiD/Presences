@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "754771926857285782"
 });
 
-interface GameState{
+interface GameState {
   page: string;
   day: number;
   type: string;
@@ -120,33 +120,34 @@ s.innerHTML = `(()=>{
 document.body.append(s);
 
 let elapsed = Math.round(Date.now() / 1000),
-oldState : GameState = {
-  page: "Login",
-  day: 1,
-  type: "Classic",
-  state: 1
-};
+  oldState: GameState = {
+    page: "Login",
+    day: 1,
+    type: "Classic",
+    state: 1
+  };
 
-presence.on("UpdateData",()=>{
-
+presence.on("UpdateData", () => {
   let data = {} as PresenceData;
 
-  if(window.location.pathname !== "/TownOfSalem/"){
+  if (window.location.pathname !== "/TownOfSalem/") {
     data = {
       details: "Browsing BlankMediaGames",
       state: document.title,
       startTimestamp: elapsed,
       largeImageKey: "regular"
     };
-  }else{
-    try{
-      const e = document.getElementById("PreMiD_Salem_Out") as HTMLTextAreaElement,
+  } else {
+    try {
+      const e = document.getElementById(
+          "PreMiD_Salem_Out"
+        ) as HTMLTextAreaElement,
         info = JSON.parse(e.value);
-      if(oldState.page != info.page){
+      if (oldState.page != info.page) {
         elapsed = Math.round(Date.now() / 1000);
       }
       let key = "regular";
-      if(info.type.search(/Coven/g) !== -1){
+      if (info.type.search(/Coven/g) !== -1) {
         key = "coven";
       }
       let gameType = "Classic";
@@ -155,7 +156,7 @@ presence.on("UpdateData",()=>{
           gameType = "Town Traitor";
           break;
         }
-        case "RankedPractice":{
+        case "RankedPractice": {
           gameType = "Ranked Practice";
           break;
         }
@@ -195,13 +196,13 @@ presence.on("UpdateData",()=>{
           gameType = "Coven Classic";
           break;
         }
-        default:{
+        default: {
           gameType = info.type;
           break;
         }
       }
       switch (info.page) {
-        case "Login":{
+        case "Login": {
           data = {
             details: "Logging in",
             largeImageKey: "regular",
@@ -210,8 +211,8 @@ presence.on("UpdateData",()=>{
           };
           break;
         }
-        case "BigHome Scene":{
-          if(info.type === "Ranked"){
+        case "BigHome Scene": {
+          if (info.type === "Ranked") {
             data = {
               details: "In a Ranked match",
               state: "Waiting in queue",
@@ -219,7 +220,7 @@ presence.on("UpdateData",()=>{
               smallImageKey: "idle",
               startTimestamp: elapsed
             };
-          }else{
+          } else {
             data = {
               details: "Browsing Home Screen",
               largeImageKey: "regular",
@@ -230,7 +231,7 @@ presence.on("UpdateData",()=>{
           break;
         }
         case "BigLobby Scene": {
-          Object.assign(data,{
+          Object.assign(data, {
             details: `In a ${gameType} match`,
             state: "Waiting in lobby",
             elapsed,
@@ -239,29 +240,29 @@ presence.on("UpdateData",()=>{
           });
           break;
         }
-        case "BigPreGame Scene":{
-          Object.assign(data,{
+        case "BigPreGame Scene": {
+          Object.assign(data, {
             details: `In a ${gameType} match`,
             largeImageKey: key,
             startTimestamp: elapsed
           });
           switch (info.state) {
-            case 0:{
+            case 0: {
               data.state = "Night " + info.day;
               data.smallImageKey = "night";
               break;
             }
-            case 1:{
+            case 1: {
               data.state = "Day " + info.day;
               data.smallImageKey = "day";
               break;
             }
-            case 2:{
+            case 2: {
               data.state = "Day " + info.day + " | Judgement";
               data.smallImageKey = "voting";
               break;
             }
-            case 3:{
+            case 3: {
               data.state = "Day " + info.day + " | Game End";
               data.smallImageKey = "idle";
               break;
@@ -269,8 +270,8 @@ presence.on("UpdateData",()=>{
           }
           break;
         }
-        case "BigEndGame Scene":{
-          Object.assign(data,{
+        case "BigEndGame Scene": {
+          Object.assign(data, {
             details: "Browsing End-Game Screen",
             largeImageKey: key,
             smallImageKey: "idle",
@@ -278,14 +279,14 @@ presence.on("UpdateData",()=>{
           });
           break;
         }
-        default:{
+        default: {
           throw "";
           break;
         }
       }
       oldState = info;
-    }catch(e){
-      Object.assign(data,{
+    } catch (e) {
+      Object.assign(data, {
         details: "Logging in.",
         largeImageKey: "regular",
         smallImageKey: "idle",
@@ -295,5 +296,4 @@ presence.on("UpdateData",()=>{
   }
 
   presence.setActivity(data);
-
 });
