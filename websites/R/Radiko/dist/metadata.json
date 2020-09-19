@@ -16,7 +16,7 @@
     "ja_JP": "ラジコは、あなたが今いるエリアで放送しているラジオ局をパソコンやスマートフォンで聴くことのできるサービスです。"
   },
   "url": "radiko.jp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/2jmN74S.png",
   "thumbnail": "https://i.imgur.com/FQ4vUVs.png",
   "color": "#0064FF",

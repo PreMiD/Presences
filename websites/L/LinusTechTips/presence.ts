@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing Thread";
       presenceData.state = item.innerText;
-        
+
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/main/profile/")) {
@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = "Viewing Profile";
       presenceData.state = item.innerText;
-        
+
       presence.setActivity(presenceData);
     } else {
       presence.setActivity();
