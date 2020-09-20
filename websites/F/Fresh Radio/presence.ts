@@ -13,8 +13,8 @@ function newStats() {
     .then((data) => {
       strack = data.song.title;
       sartist = data.song.artist;
-    })
-};
+    });
+}
 
 function slotData() {
     fetch('https://api.radiopanel.co/api/v1/slots/live', {
