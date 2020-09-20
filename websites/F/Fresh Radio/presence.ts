@@ -29,7 +29,7 @@ function slotData() {
 setInterval(slotData, 5000);
 slotData();
 
-setInterval(newStats, 50000);
+setInterval(newStats, 5000);
 newStats();
 
 const stamp = Math.floor(Date.now() / 1000);
