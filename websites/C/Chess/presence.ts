@@ -15,8 +15,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -157,7 +157,7 @@ presence.on("UpdateData", async () => {
     const video: HTMLVideoElement = document.querySelector("video");
 
     if (video !== null && !isNaN(video.duration)) {
-      let timestamps: any;
+      let timestamps: Array<number>;
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
