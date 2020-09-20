@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "699204548664885279"
 }),
   strings = presence.getStrings({
@@ -15,15 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  let startTime = Date.now();
+  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
+  let presenceData: PresenceData = {
     largeImageKey: "chess"
   };
 
@@ -154,10 +154,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Watching Computer Chess Championship";
     presenceData.state = document.title.substring(0, document.title.indexOf("-"));
   } else if (document.location.pathname.indexOf("/video/player/") == 0) {
-    var video: HTMLVideoElement = document.querySelector("video");
+    let video: HTMLVideoElement = document.querySelector("video");
 
     if (video !== null && !isNaN(video.duration)) {
-      var timestamps: any;
+      let timestamps: any;
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
