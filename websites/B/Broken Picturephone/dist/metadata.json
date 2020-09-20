@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "luis ⍋",
+    "id": "403648338286870529"
+  },
+  "url": "www.brokenpicturephone.com",
+  "description": {
+    "en": "Presence to show that you're playing Broken Picturephone with details.",
+    "pt_br": "Presence que mostra que você está jogando Broken Picturephone com detalhes."
+  },
+  "service": "Broken Picturephone",
+  "version": "1.0",
+  "logo": "https://i.ibb.co/tMb7RCz/logo.png",
+  "thumbnail": "https://i.ibb.co/xq2c38y/thumbnail.png",
+  "color": "#FC6807",
+  "tags": [
+    "games",
+    "game",
+    "phone",
+    "broken",
+    "broken picturephone",
+    "picturephone",
+    "telefone sem fio",
+    "telefone",
+    "sem",
+    "fio"
+  ],
+  "category": "games"
+}
