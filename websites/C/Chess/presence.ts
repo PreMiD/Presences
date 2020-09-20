@@ -1,4 +1,4 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "699204548664885279"
 }),
   strings = presence.getStrings({
