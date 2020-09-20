@@ -15,15 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "chess"
   };
 
@@ -154,7 +154,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Watching Computer Chess Championship";
     presenceData.state = document.title.substring(0, document.title.indexOf("-"));
   } else if (document.location.pathname.indexOf("/video/player/") == 0) {
-    let video: HTMLVideoElement = document.querySelector("video");
+    const video: HTMLVideoElement = document.querySelector("video");
 
     if (video !== null && !isNaN(video.duration)) {
       let timestamps: any;
