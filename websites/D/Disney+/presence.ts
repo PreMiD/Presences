@@ -26,11 +26,18 @@ let title: string;
 let subtitle: string;
 
 presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "disneyplus-logo"
-  };
+  const isHostDP = /(www\.)?disneyplus\.com/.test(location.hostname);
+  const isHostHS = /(www\.)?hotstar\.com/.test(location.hostname);
+  const data: PresenceData = {};
 
-  if (document.location.pathname.includes("/video")) {
+  if (isHostDP) {
+    data.largeImageKey = "disneyplus-logo";
+  } else if (isHostHS) {
+    data.largeImageKey = "disneyplus-hotstar-logo";
+  }
+
+  // Disney+ video
+  if (isHostDP && location.pathname.includes("/video")) {
     const video: HTMLVideoElement = document.querySelector(
       ".btm-media-clients video"
     );
@@ -47,6 +54,45 @@ presence.on("UpdateData", async () => {
       title = titleField ? titleField.textContent : null;
       const subtitleField: HTMLDivElement = document.querySelector(
         ".btm-media-overlays-container .subtitle-field"
+      );
+      subtitle = subtitleField ? subtitleField.textContent : null;
+
+      // subtitleField is episode for series, empty for movies
+      data.details = title;
+      data.state = subtitle ? subtitle : "Movie";
+
+      data.smallImageKey = video.paused ? "pause" : "play";
+      data.smallImageText = video.paused
+        ? (await strings).pause
+        : (await strings).play;
+      data.startTimestamp = timestamps[0];
+      data.endTimestamp = timestamps[1];
+
+      if (video.paused) {
+        delete data.startTimestamp;
+        delete data.endTimestamp;
+      }
+
+      if (title) presence.setActivity(data, !video.paused);
+    }
+    // Disney+ Hotstar video
+  } else if (isHostHS && /\/(tv|movies)\//.test(location.pathname)) {
+    const video: HTMLVideoElement = document.querySelector(
+      ".player-base video"
+    );
+
+    if (video && !isNaN(video.duration)) {
+      const timestamps: number[] = getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
+
+      const titleField: HTMLDivElement = document.querySelector(
+        ".controls-overlay .primary-title"
+      );
+      title = titleField ? titleField.textContent : null;
+      const subtitleField: HTMLDivElement = document.querySelector(
+        ".controls-overlay .show-title"
       );
       subtitle = subtitleField ? subtitleField.textContent : null;
 

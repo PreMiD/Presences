@@ -12,9 +12,9 @@
     "en": "Manage your favorite football team in Online Soccer Manager (OSM)! This free-to-play game contains all real and authentic football leagues, clubs and players in the world."
   },
   "service": "Online Soccer Manager",
-  "version": "1.0.4",
-  "logo": "https://cdn.marinosite.xyz/18pq1dkv.jpg",
-  "thumbnail": "https://cdn.marinosite.xyz/a8pjtsm0.PNG",
+  "version": "1.0.5",
+  "logo": "https://i.imgur.com/SZFDa07.png",
+  "thumbnail": "https://i.imgur.com/G9nRkaR.png",
   "color": "#FF971B",
   "regExp": "([a-z0-9-]+[.])*onlinesoccermanager[.](com|nl)[/]",
   "tags": [

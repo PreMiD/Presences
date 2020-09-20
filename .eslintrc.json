@@ -1,8 +1,7 @@
 {
   "root": true,
   "env": {
-    "browser": true,
-    "es2020": true
+    "browser": true
   },
   "extends": [
     "eslint:recommended",
@@ -38,14 +37,14 @@
       }
     ],
     "@typescript-eslint/camelcase": "off",
-    "@typescript-eslint/no-explicit-any": "error"
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/indent": "off"
   },
   "overrides": [
     {
       "env": {
         "node": true,
-        "mongo": true,
-        "es2020": true
+        "mongo": true
       },
       "files": ["./*.ts"],
       "rules": {
@@ -54,7 +53,7 @@
       }
     }
   ],
-  "reportUnusedDisableDirectives": true,
+  "reportUnusedDisableDirectives": true,	
   "noInlineConfig": true,
   "plugins": ["@typescript-eslint"]
 }
