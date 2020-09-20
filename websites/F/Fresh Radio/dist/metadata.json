@@ -1,0 +1,24 @@
+{
+    "author": {
+      "name": "Bailey",
+      "id": "577918497795866634"
+    },
+    "url": "freshradio.pw",
+    "description": {
+      "en": "Fresh is a thriving internet station playing the latest and greatest hits. It was started originally in early 2019 by Bailey, but we have recently reopened in 2020. Fresh aims to be an accepting community which plays all genres of music for you to enjoy. With staff from everywhere across the world, all with different music tastes, there is always something at Fresh that fits your taste.. - Developed by Zoey#1708"
+    },
+    "service": "Fresh Radio",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/5XFsWOI.png",
+    "thumbnail": "https://i.imgur.com/XLrPIQ1.png",
+    "color": "#800080",
+    "tags": [
+      "music",
+      "radio",
+      "community",
+      "discord",
+      "24-7",
+      "world-wide"
+    ],
+    "category": "music"
+}
