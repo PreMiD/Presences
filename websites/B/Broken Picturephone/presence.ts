@@ -1,13 +1,13 @@
-var presence = new Presence({
+let presence = new Presence({
     clientId: "756196794727399617"
 });
 
 presence.on("UpdateData", async () => {
 
-    var browsingStamp = Math.floor(Date.now() / 1000);
+    let browsingStamp = Math.floor(Date.now() / 1000);
 
-    var button = document.getElementsByTagName('button');
-    var valor = button.length;
+    let button = document.getElementsByTagName('button');
+    let valor = button.length;
     const players = document.getElementsByClassName('userActive');
     const nump = `(${players.length} of 6 players)`;
 
