@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "BBQ",
+    "id": "298888568279924746"
+  },
+  "url": "codare.fun",
+  "description": {
+    "tr": "CodAre'ın kod paylaşım sitesi.",
+    "en": "CodAre's code sharing website."
+  },
+  "service": "CodAre",
+  "version": "1.0.0",
+  "logo": "https://barbecue.is-pretty.cool/88A9JqM.png",
+  "thumbnail": "https://barbecue.is-pretty.cool/5vWBXSv.png",
+  "color": "#3b1b8a",
+  "tags": [
+    "discord",
+    "coding",
+    "development",
+    "turkish"
+  ],
+  "category": "other"
+}
