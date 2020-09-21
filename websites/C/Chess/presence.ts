@@ -1,6 +1,6 @@
-var presence = new Presence({
-    clientId: "699204548664885279"
-  }),
+const presence = new Presence({
+  clientId: "699204548664885279"
+}),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
@@ -15,15 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "chess"
   };
 
@@ -58,6 +58,16 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/4-player-chess")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing 4 player chess";
+  } else if (document.location.pathname == "/variants") {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing through Chess Variants";
+  } else if (document.location.pathname.indexOf("/variants/variant/game/") == 0) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Playing Chess Variant";
+    presenceData.state = document.title.substring(0, document.title.indexOf("-"));
+  } else if (document.location.pathname.includes("/automate")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Playing Automate chess";
   } else if (document.location.pathname == "/puzzles/rated") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Solving puzzles";
@@ -132,15 +142,22 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/tv")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing ChessTV";
-  } else if (document.location.pathname.includes("/games")) {
+  } else if (document.location.pathname == "/games") {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing master games";
-    presenceData.state = document.title;
+    presenceData.details = "Browsing through master games";
+  } else if (document.location.pathname.indexOf("/games/view/") == 0) {
+    presenceData.startTimestamp == browsingStamp;
+    presenceData.details = "Watching a master game";
+    presenceData.state = document.title.substring(0, document.title.indexOf(")") + 1);
+  } else if (document.location.pathname.includes("/computer-chess-championship")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Watching Computer Chess Championship";
+    presenceData.state = document.title.substring(0, document.title.indexOf("-"));
   } else if (document.location.pathname.indexOf("/video/player/") == 0) {
-    var video: HTMLVideoElement = document.querySelector("video");
+    const video: HTMLVideoElement = document.querySelector("video");
 
     if (video !== null && !isNaN(video.duration)) {
-      var timestamps: any;
+      let timestamps: Array<number>;
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
