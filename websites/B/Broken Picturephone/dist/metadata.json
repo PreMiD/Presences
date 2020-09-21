@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "luis ⍋",
+    "id": "403648338286870529"
+  },
+  "url": "www.brokenpicturephone.com",
+  "description": {
+    "en": "A online game that you can draw, guess and send words to your friends guess.",
+    "pt_br": "Um jogo online que você pode desenhar, adivinhar e enviar palavras para os seus amigos adivinharem."
+  },
+  "service": "Broken Picturephone",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/FYPmxU3.png",
+  "thumbnail": "https://i.imgur.com/kzYyxMn.png",
+  "color": "#FC6807",
+  "tags": [
+    "games",
+    "game",
+    "phone",
+    "broken",
+    "picturephone",
+    "telefone",
+    "sem",
+    "fio"
+  ],
+  "category": "games"
+}
