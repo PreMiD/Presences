@@ -5,9 +5,8 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
-
-  const browsingStamp = Math.floor(Date.now() / 1000),
+  },
+  browsingStamp = Math.floor(Date.now() / 1000),
   page = window.location.pathname;
   if (page.toLowerCase() === "/") {
     presenceData.details = "Bir sayfa görüntülüyor:";
