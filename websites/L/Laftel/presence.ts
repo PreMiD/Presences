@@ -31,7 +31,9 @@ function getQuery() {
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {};
+  const presenceData: PresenceData = {
+    largeImageKey: 'logo'
+  };
 
   if (window.location.pathname === '/') {
     presenceData.details = '메인';
@@ -73,18 +75,15 @@ presence.on("UpdateData", async () => {
   
         presenceData.startTimestamp = timestamps[0];
         presenceData.endTimestamp = timestamps[1];
+        presenceData.smallImageKey = 'play';
       } else {
         presenceData.startTimestamp = null;
         presenceData.endTimestamp = null;
         presenceData.state = '일시 정지됨';
+        presenceData.smallImageKey = 'pause';
       }
     }
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  presence.setActivity(presenceData);
 });
