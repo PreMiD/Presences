@@ -4,16 +4,15 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 
-    const browsingStamp = Math.floor(Date.now() / 1000);
-
-    const button = document.getElementsByTagName('button');
-    const valor = button.length;
-    const players = document.getElementsByClassName('userActive');
-    const nump = `(${players.length} of 6 players)`;
+    const browsingStamp = Math.floor(Date.now() / 1000), 
+          button = document.getElementsByTagName('button'), 
+          valor = button.length, 
+          players = document.getElementsByClassName('userActive'), 
+          nump = `(${players.length} of 6 players)`; 
 
         const data: PresenceData = {
             largeImageKey: "large_image",
-            startTimestamp: browsingStamp;
+            startTimestamp: browsingStamp
                 };
 
         if (valor == 1) {
