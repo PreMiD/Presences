@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "699204548664885279"
-}),
+    clientId: "699204548664885279"
+  }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
@@ -61,10 +61,15 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname == "/variants") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing through Chess Variants";
-  } else if (document.location.pathname.indexOf("/variants/variant/game/") == 0) {
+  } else if (
+    document.location.pathname.indexOf("/variants/variant/game/") == 0
+  ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing Chess Variant";
-    presenceData.state = document.title.substring(0, document.title.indexOf("-"));
+    presenceData.state = document.title.substring(
+      0,
+      document.title.indexOf("-")
+    );
   } else if (document.location.pathname.includes("/automate")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing Automate chess";
@@ -148,11 +153,19 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.indexOf("/games/view/") == 0) {
     presenceData.startTimestamp == browsingStamp;
     presenceData.details = "Watching a master game";
-    presenceData.state = document.title.substring(0, document.title.indexOf(")") + 1);
-  } else if (document.location.pathname.includes("/computer-chess-championship")) {
+    presenceData.state = document.title.substring(
+      0,
+      document.title.indexOf(")") + 1
+    );
+  } else if (
+    document.location.pathname.includes("/computer-chess-championship")
+  ) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Watching Computer Chess Championship";
-    presenceData.state = document.title.substring(0, document.title.indexOf("-"));
+    presenceData.state = document.title.substring(
+      0,
+      document.title.indexOf("-")
+    );
   } else if (document.location.pathname.indexOf("/video/player/") == 0) {
     const video: HTMLVideoElement = document.querySelector("video");
 

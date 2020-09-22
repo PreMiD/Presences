@@ -12,7 +12,11 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.pathname == "/" || document.location.pathname.includes("/shop/") && document.location.pathname.length <= 25) {
+  if (
+    document.location.pathname == "/" ||
+    (document.location.pathname.includes("/shop/") &&
+      document.location.pathname.length <= 25)
+  ) {
     item = document.querySelector(
       "body > div:nth-child(2) > header > nav > div > div > ul > li.selected"
     ) as HTMLElement;
@@ -22,7 +26,10 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "search";
 
     presence.setActivity(presenceData);
-  } else if(document.location.pathname.includes("/shop/") && document.location.pathname.length >= 26) {
+  } else if (
+    document.location.pathname.includes("/shop/") &&
+    document.location.pathname.length >= 26
+  ) {
     item = document.querySelector(
       "body > div:nth-child(2) > div.main > div:nth-child(5) > div > div:nth-child(2) > div:nth-child(2) > div > h1"
     ) as HTMLElement;
