@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
             data.state = nump;
             data.smallImageKey = "playing";
             data.smallImageText = "On game";
-            data.startTimestamp = browsingStamp
+            data.startTimestamp = browsingStamp;
         }
         if (players.length > 6) {
             data.state = "(6 of 6 players)";
