@@ -8,9 +8,8 @@ presence.on("UpdateData", async () => {
           button = document.getElementsByTagName('button'), 
           valor = button.length, 
           players = document.getElementsByClassName('userActive'), 
-          nump = `(${players.length} of 6 players)`; 
-
-        const data: PresenceData = {
+          nump = `(${players.length} of 6 players)`,
+          data: PresenceData = {
             largeImageKey: "large_image",
             startTimestamp: browsingStamp
                 };
