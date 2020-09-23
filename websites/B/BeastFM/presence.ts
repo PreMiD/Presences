@@ -6,7 +6,7 @@ let title: string, artist: string, dj: string, listeners: number;
 
 function getData(): void {
   window
-    .fetch("https://azura.defectiveness.ml/api/nowplaying/15")
+    .fetch("http://azura.beastfm.pw/api/nowplaying/1")
     .then((res) => res.json())
     .then((res) => {
       title = res.now_playing.song.title || "Loading..";
