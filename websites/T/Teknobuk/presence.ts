@@ -1,7 +1,13 @@
 const presence = new Presence({
   clientId: "658192386899312651"
 });
-let presenceData: PresenceData;
+
+const browsingStamp = Math.floor(Date.now() / 1000);
+
+const presenceData: PresenceData = {
+  largeImageKey: "buk-logo",
+  startTimestamp: browsingStamp
+};
 
 function makeRPC(title:string, category:string): void {
   if (category == "kategori") {
@@ -18,11 +24,6 @@ function makeRPC(title:string, category:string): void {
 
 presence.on("UpdateData", () => {
   const page = document.location.pathname;
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  presenceData = {
-    largeImageKey: "buk-logo",
-    startTimestamp: browsingStamp
-  };
 
   // Homepage
   if (page.length <= 1 || page.startsWith("/page")) {
@@ -33,7 +34,7 @@ presence.on("UpdateData", () => {
   // Reading an article
   if (document.querySelector("#content > div:nth-child(2) > article > div > h1")?.textContent) {
     presenceData.details = 'Bir haber okuyor...';
-    presenceData.state = document.querySelector("#content > div:nth-child(2) > article > div > h1").textContent
+    presenceData.state = document.querySelector("#content > div:nth-child(2) > article > div > h1").textContent;
   }
 
   if (page.startsWith("/kategori") && page !== "/kategori") {
