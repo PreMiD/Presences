@@ -2,12 +2,7 @@ const presence = new Presence({
   clientId: "655480486046466098"
 });
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-
-const presenceData: PresenceData = {
-  largeImageKey: "gly-logo",
-  startTimestamp: browsingStamp
-};
+const browsingStamp = Math.floor(Date.now() / 1000), presenceData: PresenceData = { largeImageKey: "gly-logo", startTimestamp: browsingStamp };
 
 presence.on("UpdateData", () => {
   const page = document.location.pathname;
@@ -20,7 +15,7 @@ presence.on("UpdateData", () => {
   // Explore
   if (page.startsWith("/explore")) {
     presenceData.details = 'Keşfet bölümünde...';
-  };
+  }
 
   // Hashtags
   if (page.startsWith('/hashtag-')) {
