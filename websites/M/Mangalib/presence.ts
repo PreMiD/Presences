@@ -6,8 +6,7 @@ var browsingStamp: number = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   // Presence Data
-  presence
-  let data: PresenceData = {
+  const data: PresenceData = {
     largeImageKey: "mangalib_large"
   };
 
@@ -372,9 +371,9 @@ presence.on("UpdateData", async () => {
   } 
   // Moderation block
   else if (route.startsWith("/moderation")) {
-    let arr = route.split("/");
-    const parent = arr[arr.length - 2];
-    const lastRoute = arr[arr.length - 1];
+    const arr = route.split("/"),
+      parent = arr[arr.length - 2],
+      lastRoute = arr[arr.length - 1];
 
     data.details = "Модерация";
 
@@ -400,23 +399,23 @@ presence.on("UpdateData", async () => {
     } else if (lastRoute === 'manga-edit ') {
       data.smallImageText = "Проверяет";
       data.smallImageKey = "reading";
-      data.state = 'Проверка правок манги'
+      data.state = 'Проверка правок манги';
     } else if (lastRoute === 'author') {
       data.smallImageText = "Проверяет";
       data.smallImageKey = "reading";
-      data.state = 'Проверка авторов'
+      data.state = 'Проверка авторов';
     } else if (lastRoute === 'publisher') {
       data.smallImageText = "Проверяет";
       data.smallImageKey = "reading";
-      data.state = 'Проверка издателей'
+      data.state = 'Проверка издателей';
     } else if (lastRoute === 'comments') {
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
-      data.state = 'Жалобы на комментарии'
+      data.state = 'Жалобы на комментарии';
     } else if (lastRoute === 'forum-posts') {
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
-      data.state = 'Жалобы на форуме'
+      data.state = 'Жалобы на форуме';
     } else {
       data.smallImageText = "Редактирует";
       data.smallImageKey = "writing";
