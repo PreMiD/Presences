@@ -1,13 +1,9 @@
-const presence = new Presence({
-  clientId: "658192386899312651"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
-
-const presenceData: PresenceData = {
-  largeImageKey: "buk-logo",
-  startTimestamp: browsingStamp
-};
+const presence = new Presence({ clientId: "658192386899312651" }),
+      browsingStamp = Math.floor(Date.now() / 1000),
+      presenceData: PresenceData = {
+        largeImageKey: "buk-logo",
+        startTimestamp: browsingStamp
+      };
 
 function makeRPC(title:string, category:string): void {
   if (category == "kategori") {

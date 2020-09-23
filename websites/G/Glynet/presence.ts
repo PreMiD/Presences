@@ -1,8 +1,6 @@
-const presence = new Presence({
-  clientId: "655480486046466098"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000), presenceData: PresenceData = { largeImageKey: "gly-logo", startTimestamp: browsingStamp };
+const presence = new Presence({ clientId: "655480486046466098" }), 
+      browsingStamp = Math.floor(Date.now() / 1000), 
+      presenceData: PresenceData = { largeImageKey: "gly-logo", startTimestamp: browsingStamp };
 
 presence.on("UpdateData", () => {
   const page = document.location.pathname;
@@ -21,7 +19,7 @@ presence.on("UpdateData", () => {
   if (page.startsWith('/hashtag-')) {
     presenceData.details = 'Bir etikete bakıyor...';
     presenceData.state = document.querySelector("#content > div > div:nth-child(2) > div.eksigimneanlamiyorum > div > a")?.textContent;
-  };
+  }
 
   if (page.startsWith('/news')) presenceData.details = 'Haberlere göz atıyor...';
 
@@ -30,7 +28,7 @@ presence.on("UpdateData", () => {
     const profile = document.querySelector("#profiletop_username")?.textContent;
     presenceData.details = 'Bir profile göz atıyor...';
     presenceData.state = profile;
-  };
+  }
 
 
   // Server Errors
@@ -38,7 +36,7 @@ presence.on("UpdateData", () => {
   if (page.startsWith("/404")) {
      presenceData.details = "Server Error: 404";
      presenceData.state = "Sayfa bulunamadı.";
-  };
+  }
 
   if (page.startsWith("/403")) {
      presenceData.details = "Server Error: 403";
@@ -51,7 +49,7 @@ presence.on("UpdateData", () => {
   if (page.startsWith("/400")) {
      presenceData.details = "Server Error: 400";
      presenceData.state = "Geçersiz istek.";
-  };
+  }
   if ((typeof presenceData.details) === 'string') {
     presence.setActivity(presenceData);
   } else presence.setActivity({ details: 'Bilinmeyen bir sayfada...', startTimestamp: browsingStamp, largeImageKey: 'gly-logo' });
