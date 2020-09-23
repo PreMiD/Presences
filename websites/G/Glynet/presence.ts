@@ -45,7 +45,7 @@ presence.on("UpdateData", () => {
   if (page.startsWith("/503") || page.startsWith("/500")) {
      presenceData.details = "Server Error: " + page.substring(1);
      presenceData.state = "Sunucuya şu anda ulaşılamıyor.";
-  };
+  }
   if (page.startsWith("/400")) {
      presenceData.details = "Server Error: 400";
      presenceData.state = "Geçersiz istek.";
