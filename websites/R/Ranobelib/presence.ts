@@ -405,7 +405,7 @@ presence.on("UpdateData", async () => {
     } else if (lastRoute === 'publisher') {
       data.smallImageText = "Проверяет";
       data.smallImageKey = "reading";
-      data.state = 'Проверка издателей'
+      data.state = 'Проверка издателей';
     } else if (lastRoute === 'comments') {
       data.smallImageText = "Читает";
       data.smallImageKey = "reading";
