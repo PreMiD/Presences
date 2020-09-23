@@ -2,11 +2,10 @@ const presence = new Presence({
   clientId: "655480486046466098"
 });
 
-const browsingStamp = Math.floor(Date.now() / 1000);
 const presenceData : PresenceData = {
-  startTimestamp: browsingStamp,
+  startTimestamp: Math.floor(Date.now() / 1000),
   largeImageKey: "gly-logo"
-}
+};
 
 presence.on("UpdateData", () => {
   const page = document.location.pathname;
@@ -18,61 +17,45 @@ presence.on("UpdateData", () => {
 
   // Explore
   if (page.startsWith("/explore")) {
-    presenceData.details = 'Keşfet bölümünde...'
-  }
+    presenceData.details = 'Keşfet bölümünde...';
+  };
 
   // Hashtags
   if (page.startsWith('/hashtag-')) {
     presenceData.details = 'Bir etikete bakıyor...';
     presenceData.state = document.querySelector("#content > div > div:nth-child(2) > div.eksigimneanlamiyorum > div > a")?.textContent
-  }
+  };
 
-  if (page.startsWith('/news')) presenceData.details = 'Haberlere göz atıyor...'
+  if (page.startsWith('/news')) presenceData.details = 'Haberlere göz atıyor...';
 
   // Users
   if (page.startsWith("/@")) {
-    let profile = document.querySelector("#profiletop_username")?.textContent;
+    const profile = document.querySelector("#profiletop_username")?.textContent;
     presenceData.details = 'Bir profile göz atıyor...';
     presenceData.state = profile;
-  }
+  };
 
 
   // Server Errors
 
   if (page.startsWith("/404")) {
-    presence.setActivity({
-      largeImageKey: "gly-logo",
-      details: "Server Error: 404",
-      state: "Sayfa bulunamadı.",
-      startTimestamp: browsingStamp
-    });
-  }
+     presenceData.details = "Server Error: 404";
+     presenceData.state = "Sayfa bulunamadı.";
+  };
   if (page.startsWith("/403")) {
-    presence.setActivity({
-      largeImageKey: "gly-logo",
-      details: "Server Error: 403",
-      state: "Yasaklı bölge!",
-      startTimestamp: browsingStamp
+     presenceData.details = "Server Error: 403";
+     presenceData.state = "Yasaklı Bölge!";
     });
-  }
+  };
   if (page.startsWith("/503") || page.startsWith("/500")) {
-    presence.setActivity({
-      largeImageKey: "gly-logo",
-      details: "Server Error: " + page.substring(1),
-      state: "Sunucuya şu anda ulaşılamıyor.",
-      startTimestamp: browsingStamp
-    });
-  }
+     presenceData.details = "Server Error: " + page.substring(1);
+     presenceData.state = "Sunucuya şu anda ulaşılamıyor.";
+  };
   if (page.startsWith("/400")) {
-    presence.setActivity({
-      largeImageKey: "gly-logo",
-      details: "Server Error: 400",
-      state: "Geçersiz istek.",
-      startTimestamp: browsingStamp
-    });
-  }
-
+     presenceData.details = "Server Error: 400";
+     presenceData.state = "Geçersiz istek.";
+  };
   if ((typeof presenceData.details) === 'string') {
     presence.setActivity(presenceData);
-  } else presence.setActivity({ details: 'Bilinmeyen bir sayfada...', startTimestamp: browsingStamp, largeImageKey: 'gly-logo' });
+  } else presence.setActivity({ details: 'Bilinmeyen bir sayfada...', startTimestamp: Math.floor(Date.now() / 1000), largeImageKey: 'gly-logo' });
 });
