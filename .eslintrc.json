@@ -37,7 +37,8 @@
       }
     ],
     "@typescript-eslint/camelcase": "off",
-    "@typescript-eslint/no-explicit-any": "error"
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/indent": "off"
   },
   "overrides": [
     {
@@ -52,5 +53,7 @@
       }
     }
   ],
+  "reportUnusedDisableDirectives": true,	
+  "noInlineConfig": true,
   "plugins": ["@typescript-eslint"]
 }
