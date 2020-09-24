@@ -206,7 +206,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/blob/") &&
       repositoryLocation2.length > 0
     ) {
-      let filePath: HTMLElement = document.querySelector("#blob-path");
+      const filePath: HTMLElement = document.querySelector("#blob-path");
 
       presenceData.details =
         "Looking at a file from " +
@@ -214,14 +214,13 @@ presence.on("UpdateData", async () => {
         "/" +
         repositoryName.innerText;
 
-      filePath.querySelector("details");
-
-      presenceData.state = filePath.querySelector("details")
-        ? filePath.textContent
-            .replace(filePath.querySelector("details").textContent, "")
-            .trim()
-            .slice(0, -1)
-        : filePath.textContent.trim();
+      presenceData.state =
+        filePath.querySelector("details") !== null
+          ? filePath.textContent
+              .replace(filePath.querySelector("details").textContent, "")
+              .trim()
+              .slice(0, -1)
+          : filePath.textContent.trim();
 
       presenceData.startTimestamp = browsingStamp;
     } else if (
