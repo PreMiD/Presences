@@ -12,6 +12,6 @@ setInterval(function () {
         paused: video.paused
       });
     } else {
-      iframe.send({ error: true });
+      iframe.send({ error: true })
     }
 }, 100);
