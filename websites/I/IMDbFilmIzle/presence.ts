@@ -42,7 +42,7 @@ interface IFrameData {
   currentTime: number,
   duration: number,
   paused: boolean
-};
+}
 
 presence.on("iFrameData", (data:IFrameData) => {
   if (!data.error) {
