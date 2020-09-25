@@ -12,6 +12,7 @@ browsingStamp = Math.floor(Date.now() / 1000),
 pages:{ [page: string] : string } = {
   "/": "Ana Sayfa",
   "/turkce-altyazili-film-izle": "Türkçe Altyazılı Filmler",
+  "/turkce-dublaj-film-izle": "Türkçe Dublaj Filmler",
   "/en-cok-goruntulenen-filmler": "En Çok Görüntülenen Filmler",
   "/imdb-7-filmler": "IMDb 7+ Filmler",
   "/arama-robotu": "Tavsiye Robotu",
