@@ -6,8 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
 		largeImageKey: "icon"
-	};
-          
+	};      
   
 	if (document.location.hostname == "milkandcookies.games") {
 		if (document.location.pathname == "/") {
