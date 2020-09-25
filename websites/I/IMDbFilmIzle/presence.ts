@@ -30,14 +30,21 @@ pages:{ [page: string] : string } = {
 * @param {Number} videoDuration Video duration seconds
 */
 function getTimestamps(videoTime: number, videoDuration: number): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-const video: { [k: string]: any } = {};
+const video: { [k: string]: string|boolean|number } = {};
 
-presence.on("iFrameData", (data:any) => {
+interface IFrameData {
+  error: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean
+};
+
+presence.on("iFrameData", (data:IFrameData) => {
   if (!data.error) {
     video.dataAvailable = true;
     video.currentTime = data.currentTime;
@@ -45,7 +52,6 @@ presence.on("iFrameData", (data:any) => {
     video.paused = data.paused;
   }
 });
-
 
 presence.on("UpdateData", async () => {
   const page : string = document.location.pathname,
@@ -93,7 +99,7 @@ presence.on("UpdateData", async () => {
 
   // Movies & Series
   if (document.querySelector("#t1 > li > div.ssag > h1")?.textContent && video?.currentTime && isVideoData) {
-    let timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+    const timestamps = getTimestamps(Math.floor(Number(video.currentTime)), Math.floor(Number(video.duration)));
 
     if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
       presenceData.startTimestamp = timestamps[0];
