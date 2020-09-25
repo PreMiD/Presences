@@ -5,9 +5,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
 		largeImageKey: "icon"
-	};
-  browsingStamp = Math.floor(Date.now() / 1000);
-    
+	},
+          browsingStamp = Math.floor(Date.now() / 1000);
+  
 	if (document.location.hostname == "milkandcookies.games") {
 		if (document.location.pathname == "/") {
 			presenceData.startTimestamp = browsingStamp;
