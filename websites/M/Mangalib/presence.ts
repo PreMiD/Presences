@@ -173,9 +173,9 @@ presence.on("UpdateData", async () => {
           )
         ), 
         BookmarkName = CurrentMark.innerText.split('').map((l, i) => {
-          if (i !== 0) return l
-          return l.toUpperCase()
-        }).join('')
+          if (i !== 0) return l;
+          return l.toUpperCase();
+        }).join('');
 
 
         data.details = `Закладки ${username.innerText}`;
