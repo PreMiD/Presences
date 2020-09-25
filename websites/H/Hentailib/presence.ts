@@ -162,14 +162,26 @@ presence.on("UpdateData", async () => {
 
       // User Bookmarks
       if (!userRoute) {
-        let bookmarkSize = <HTMLElement>(
+        let CurrentSize = <HTMLElement>(
           document.querySelector(
-            ".bookmark-sidebar .menu.bookmark-menu .menu__item .bookmark-menu__label"
+            ".bookmark-sidebar .bookmark-menu .menu__item.is-active .bookmark-menu__label"
           )
         );
 
+        let CurrentMark = <HTMLElement>(
+          document.querySelector(
+            ".bookmark-sidebar .bookmark-menu .menu__item.is-active .bookmark-menu__name"
+          )
+        );
+
+        let BookmarkName = CurrentMark.innerText.split('').map((l, i) => {
+          if (i !== 0) return l
+          return l.toUpperCase()
+        }).join('')
+
+
         data.details = `Закладки ${username.innerText}`;
-        data.state = `Всего: ${bookmarkSize.innerText.trim()}`;
+        data.state = `${BookmarkName}: ${CurrentSize.innerText.trim()}`;
         data.smallImageText = "Читает";
         data.smallImageKey = "reading";
         data.startTimestamp = 0;
