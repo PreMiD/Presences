@@ -1,0 +1,33 @@
+{
+  "author": {
+    "name": "Serhan",
+    "id": "748616368672473220"
+  },
+  "contributors": [
+    {
+      "name": "Arda",
+      "id": "403225819222245377"
+    }
+  ],
+  "url": [
+    "imdbfilmizle.com",
+    "www.imdbfilmizle.com"
+  ],
+  "description": {
+    "tr": "asdasd",
+    "en": "asdasd"
+  },
+  "service": "IMDbFilmizle",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/rDIoqZb.png",
+  "thumbnail": "https://i.imgur.com/RdOXsqx.png",
+  "color": "#FFDB4C",
+  "tags": [
+    "filmler",
+    "film izle",
+    "dizi",
+    "dizi izle"
+  ],
+  "category": "videos",
+  "iframe": true
+}
