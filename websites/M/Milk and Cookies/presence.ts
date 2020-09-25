@@ -1,12 +1,13 @@
 const presence = new Presence({ 
   clientId: "758753662079729764" 
-});
+}),
+      browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
 		largeImageKey: "icon"
-	},
-          browsingStamp = Math.floor(Date.now() / 1000);
+	};
+          
   
 	if (document.location.hostname == "milkandcookies.games") {
 		if (document.location.pathname == "/") {
