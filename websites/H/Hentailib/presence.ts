@@ -162,19 +162,17 @@ presence.on("UpdateData", async () => {
 
       // User Bookmarks
       if (!userRoute) {
-        let CurrentSize = <HTMLElement>(
+        const CurrentSize = <HTMLElement>(
           document.querySelector(
             ".bookmark-sidebar .bookmark-menu .menu__item.is-active .bookmark-menu__label"
           )
-        );
-
-        let CurrentMark = <HTMLElement>(
+        ),
+        CurrentMark = <HTMLElement>(
           document.querySelector(
             ".bookmark-sidebar .bookmark-menu .menu__item.is-active .bookmark-menu__name"
           )
-        );
-
-        let BookmarkName = CurrentMark.innerText.split('').map((l, i) => {
+        ), 
+        BookmarkName = CurrentMark.innerText.split('').map((l, i) => {
           if (i !== 0) return l
           return l.toUpperCase()
         }).join('')
