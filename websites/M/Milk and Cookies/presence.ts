@@ -1,6 +1,4 @@
-let presence = new Presence({
-    clientId: "758753662079729764"
-});
+const presence = new Presence({ clientId: "758753662079729764" });
 
 let browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -16,11 +14,11 @@ presence.on("UpdateData", async () => {
 		}
 		else if (document.location.pathname.includes("/awards")) {
 			presenceData.startTimestamp = browsingStamp;
-			presenceData.details = "Viendo la sección de Awards"
+			presenceData.details = "Viendo la sección de Awards";
 		}
 		else if (document.location.pathname.includes("/postulaciones")) {
 			presenceData.startTimestamp = browsingStamp;
-			presenceData.details = "Viendo la sección de Postulaciones"
+			presenceData.details = "Viendo la sección de Postulaciones";
 		}
 	}
 	if (presenceData.details == null) {
