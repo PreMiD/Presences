@@ -1,13 +1,12 @@
 var presence = new Presence({
-  clientId: "684124119146692619",
-  mediaKeys: false
+  clientId: "684124119146692619"
 });
 
 var browsingStamp: number = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   // Presence Data
-  let data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "mangalib_large"
   };
 
@@ -163,14 +162,24 @@ presence.on("UpdateData", async () => {
 
       // User Bookmarks
       if (!userRoute) {
-        let bookmarkSize = <HTMLElement>(
+        const CurrentSize = <HTMLElement>(
           document.querySelector(
-            ".bookmark-sidebar .menu.bookmark-menu .menu__item .bookmark-menu__label"
+            ".bookmark-sidebar .bookmark-menu .menu__item.is-active .bookmark-menu__label"
           )
-        );
+        ),
+        CurrentMark = <HTMLElement>(
+          document.querySelector(
+            ".bookmark-sidebar .bookmark-menu .menu__item.is-active .bookmark-menu__name"
+          )
+        ), 
+        BookmarkName = CurrentMark.innerText.split('').map((l, i) => {
+          if (i !== 0) return l;
+          return l.toUpperCase();
+        }).join('');
+
 
         data.details = `Закладки ${username.innerText}`;
-        data.state = `Всего: ${bookmarkSize.innerText.trim()}`;
+        data.state = `${BookmarkName}: ${CurrentSize.innerText.trim()}`;
         data.smallImageText = "Читает";
         data.smallImageKey = "reading";
         data.startTimestamp = 0;
@@ -274,7 +283,7 @@ presence.on("UpdateData", async () => {
   else if (route.startsWith("/manga")) {
     let arr = route.split("/");
     const action = arr[arr.length - 1];
-
+    
     if (action === "edit") {
       data.details = "Редактирует мангу";
       data.smallImageText = "Редактирует";
@@ -311,23 +320,37 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (route.startsWith("/faq")) {
-    const querySection = query.split("&")[0];
-    const section = querySection.slice(querySection.length - 1);
-    const categories = Array.from(
-      document.querySelectorAll(".faq-category-list .faq-category-item")
-    );
-    const currentCategory = <HTMLElement>(
-      categories.find((item, index) => index === parseInt(section) - 1)
-    );
+    const FaqRoute = document.location.href.split("/").slice(5)[0];
 
-    data.details = "Faq";
-    data.smallImageText = "Читает";
-    data.smallImageKey = "reading";
+    if (FaqRoute) {
+      if (FaqRoute === "article") {
+        data.details = "Faq";
+        data.smallImageText = "Редактирует";
+        data.smallImageKey = "writing";
+        data.state = "Редактирует";
+      }
 
-    if (currentCategory) {
-      data.state = currentCategory.innerText;
+    } else {
+      const querySection = query.split("&")[0];
+      const section = querySection.slice(querySection.length - 1);
+
+      const categories = Array.from(
+        document.querySelectorAll(".faq-category-list .faq-category-item")
+      );
+
+      const currentCategory = <HTMLElement>(
+        categories.find((item, index) => index === parseInt(section) - 1)
+      );
+
+      data.details = "Faq";
+      data.smallImageText = "Читает";
+      data.smallImageKey = "reading";
+
+      if (currentCategory) {
+        data.state = currentCategory.innerText;
+      }  
     }
-
+    
     // News
   } else if (route.startsWith("/news")) {
     const newsRoute = document.location.href.split("/").slice(4)[0];
@@ -355,6 +378,59 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Пишет";
     data.smallImageKey = "writing";
     data.state = "Свяжитесь с нами";
+  } 
+  // Moderation block
+  else if (route.startsWith("/moderation")) {
+    const arr = route.split("/"),
+      parent = arr[arr.length - 2],
+      lastRoute = arr[arr.length - 1];
+
+    data.details = "Модерация";
+
+    if (arr.includes('manga')) {
+      
+      if (parent === 'manga') {
+        
+        if (lastRoute === 'rejected') {
+          data.smallImageText = "Проверяет";
+          data.smallImageKey = "reading";
+          data.state = 'Отклоненные манги';
+        } else {
+          data.smallImageText = "Проверяет";
+          data.smallImageKey = "reading";
+          data.state = 'Проверка манги';
+        }
+
+      } else {
+        data.smallImageText = "Проверяет";
+        data.smallImageKey = "reading";
+        data.state = 'Проверка новой манги';
+      }
+    } else if (lastRoute === 'manga-edit ') {
+      data.smallImageText = "Проверяет";
+      data.smallImageKey = "reading";
+      data.state = 'Проверка правок манги';
+    } else if (lastRoute === 'author') {
+      data.smallImageText = "Проверяет";
+      data.smallImageKey = "reading";
+      data.state = 'Проверка авторов';
+    } else if (lastRoute === 'publisher') {
+      data.smallImageText = "Проверяет";
+      data.smallImageKey = "reading";
+      data.state = 'Проверка издателей';
+    } else if (lastRoute === 'comments') {
+      data.smallImageText = "Читает";
+      data.smallImageKey = "reading";
+      data.state = 'Жалобы на комментарии';
+    } else if (lastRoute === 'forum-posts') {
+      data.smallImageText = "Читает";
+      data.smallImageKey = "reading";
+      data.state = 'Жалобы на форуме';
+    } else {
+      data.smallImageText = "Редактирует";
+      data.smallImageKey = "writing";
+    }
+
   } else {
     let isReader = <HTMLElement>document.querySelector(".reader");
 

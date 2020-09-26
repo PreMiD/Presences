@@ -1,13 +1,12 @@
 var presence = new Presence({
-  clientId: "743239699992281160",
-  mediaKeys: false
+  clientId: "743239699992281160"
 });
 
 var browsingStamp: number = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   // Presence Data
-  let data: presenceData = {
+  const data: PresenceData = {
     largeImageKey: "hentailib_large"
   };
 
@@ -163,14 +162,24 @@ presence.on("UpdateData", async () => {
 
       // User Bookmarks
       if (!userRoute) {
-        let bookmarkSize = <HTMLElement>(
+        const CurrentSize = <HTMLElement>(
           document.querySelector(
-            ".bookmark-sidebar .menu.bookmark-menu .menu__item .bookmark-menu__label"
+            ".bookmark-sidebar .bookmark-menu .menu__item.is-active .bookmark-menu__label"
           )
-        );
+        ),
+        CurrentMark = <HTMLElement>(
+          document.querySelector(
+            ".bookmark-sidebar .bookmark-menu .menu__item.is-active .bookmark-menu__name"
+          )
+        ), 
+        BookmarkName = CurrentMark.innerText.split('').map((l, i) => {
+          if (i !== 0) return l;
+          return l.toUpperCase();
+        }).join('');
+
 
         data.details = `Закладки ${username.innerText}`;
-        data.state = `Всего: ${bookmarkSize.innerText.trim()}`;
+        data.state = `${BookmarkName}: ${CurrentSize.innerText.trim()}`;
         data.smallImageText = "Читает";
         data.smallImageKey = "reading";
         data.startTimestamp = 0;
@@ -311,21 +320,33 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (route.startsWith("/faq")) {
-    const querySection = query.split("&")[0];
-    const section = querySection.slice(querySection.length - 1);
-    const categories = Array.from(
-      document.querySelectorAll(".faq-category-list .faq-category-item")
-    );
-    const currentCategory = <HTMLElement>(
-      categories.find((item, index) => index === parseInt(section) - 1)
-    );
+    const FaqRoute = document.location.href.split("/").slice(5)[0];
 
-    data.details = "Faq";
-    data.smallImageText = "Читает";
-    data.smallImageKey = "reading";
+    if (FaqRoute) {
+      if (FaqRoute === "article") {
+        data.details = "Faq";
+        data.smallImageText = "Редактирует";
+        data.smallImageKey = "writing";
+        data.state = "Редактирует";
+      }
 
-    if (currentCategory) {
-      data.state = currentCategory.innerText;
+    } else {
+      const querySection = query.split("&")[0];
+      const section = querySection.slice(querySection.length - 1);
+      const categories = Array.from(
+        document.querySelectorAll(".faq-category-list .faq-category-item")
+      );
+      const currentCategory = <HTMLElement>(
+        categories.find((item, index) => index === parseInt(section) - 1)
+      );
+
+      data.details = "Faq";
+      data.smallImageText = "Читает";
+      data.smallImageKey = "reading";
+
+      if (currentCategory) {
+        data.state = currentCategory.innerText;
+      }
     }
 
     // News
@@ -355,6 +376,58 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Пишет";
     data.smallImageKey = "writing";
     data.state = "Свяжитесь с нами";
+  } 
+  // Moderation block
+  else if (route.startsWith("/moderation")) {
+    const arr = route.split("/"),
+      parent = arr[arr.length - 2],
+      lastRoute = arr[arr.length - 1];
+
+    data.details = "Модерация";
+
+    if (arr.includes('manga')) {
+      
+      if (parent === 'manga') {
+        
+        if (lastRoute === 'rejected') {
+          data.smallImageText = "Проверяет";
+          data.smallImageKey = "reading";
+          data.state = 'Отклоненный хентай';
+        } else {
+          data.smallImageText = "Проверяет";
+          data.smallImageKey = "reading";
+          data.state = 'Проверка хентая';
+        }
+
+      } else {
+        data.smallImageText = "Проверяет";
+        data.smallImageKey = "reading";
+        data.state = 'Проверка нового хентая';
+      }
+    } else if (lastRoute === 'manga-edit ') {
+      data.smallImageText = "Проверяет";
+      data.smallImageKey = "reading";
+      data.state = 'Проверка правок хентая';
+    } else if (lastRoute === 'author') {
+      data.smallImageText = "Проверяет";
+      data.smallImageKey = "reading";
+      data.state = 'Проверка авторов';
+    } else if (lastRoute === 'publisher') {
+      data.smallImageText = "Проверяет";
+      data.smallImageKey = "reading";
+      data.state = 'Проверка издателей';
+    } else if (lastRoute === 'comments') {
+      data.smallImageText = "Читает";
+      data.smallImageKey = "reading";
+      data.state = 'Жалобы на комментарии';
+    } else if (lastRoute === 'forum-posts') {
+      data.smallImageText = "Читает";
+      data.smallImageKey = "reading";
+      data.state = 'Жалобы на форуме';
+    } else {
+      data.smallImageText = "Редактирует";
+      data.smallImageKey = "writing";
+    }
   } else {
     let isReader = <HTMLElement>document.querySelector(".reader");
 
