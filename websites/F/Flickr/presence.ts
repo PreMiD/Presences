@@ -2,9 +2,9 @@ const presence = new Presence({
   clientId: "758864138897850368"
 });
 //compile with npm install && npx tsc -w
-let author: any, title: any;
+let author: any, title: any, language: any, searchQuery: any;
 var startTimeStamp = Math.round(Date.now());
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "flickr_logo",
       startTimestamp: startTimeStamp,
@@ -42,7 +42,29 @@ presence.on("UpdateData", () => {
         presenceData.details = "Viewing the Flickr Data Processing Addendum";
        } else if (document.location.pathname == "/explore"){
         presenceData.details = "Exploring cool images";
-       }
+       } else if (document.location.pathname == "/photos/tags"){
+        presenceData.details = "Exploring popular tags";
+       } else if (document.location.pathname == "/events"){
+         presenceData.details = "Viewing Flickr events";
+       } else if (document.location.pathname == "/commons"){
+         presenceData.details = "Viewing the Flickr Commons";
+       } else if (document.location.pathname.startsWith("/help/forum/")){
+        language = document.location.pathname.split("/")[4];
+        presenceData.details = "Viewing the Flickr Help Forums in: " + language;
+        if (document.location.pathname.split("/").length == 6){
+          title = document.querySelector("head > title");
+          title = title.innerText;
+          title = title.split(":");
+          title = title[2];
+          //Flickr automatically adds a space in front of the colon
+          presenceData.state = "Viewing:" + title;
+        }
+       } else if (document.location.pathname.startsWith("/search/")){
+        searchQuery = document.querySelector("title").innerText;
+        searchQuery = searchQuery.split(":")[1];
+        searchQuery = searchQuery.split("|")[0]
+        presenceData.details = "Searching:" + searchQuery;
+      }
   }
   if (presenceData.details == null) {
       presence.setTrayTitle();
