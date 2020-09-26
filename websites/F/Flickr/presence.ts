@@ -34,9 +34,9 @@ presence.on("UpdateData", () => {
           presenceData.details = "Viewing the Flickr Terms & Conditions of Use";
       } else if (document.location.pathname == "/help/privacy"){
           presenceData.details = "Viewing the Flickr Privacy Policy";
-      }else if (document.location.pathname.endsWith("/help/api")){
+      }else if (document.location.pathname == "/help/api"){
           presenceData.details = "Viewing the Flickr APIs Terms of Use";
-      } else if (document.location.pathname.endsWith("/help/cookies")){
+      } else if (document.location.pathname == "/help/cookies"){
           presenceData.details = "Viewing the Flickr Policy on Cookies";
        } else if (document.location.pathname == "/help/dpa"){
         presenceData.details = "Viewing the Flickr Data Processing Addendum";
