@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "758864138897850368"
 });
 //compile with npm install && npx tsc -w
-let author: any, title: any, language: any, searchQuery: any;
+let author: any, title: any, language: any, searchQuery: any, username :any;
 var startTimeStamp = Math.round(Date.now());
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -15,12 +15,20 @@ presence.on("UpdateData", async () => {
       if (document.location.pathname == "/" || document.location.pathname == "/new/") {
           presenceData.details = "Viewing home page";
       } else if (document.location.pathname.includes("/photos/")) {
+        if (document.location.pathname.split("/").length == 4||5 ){
+          username = document.location.pathname.split("/")[2];
+          presenceData.details = "Viewing user: " + username;
+          if (document.location.pathname.split("/")[3].length != 0){
+            presenceData.state = "Viewing their: " + document.location.pathname.split("/")[3];
+          }
+          return;
+        }
           title = document.querySelector("title");
           title = title.innerText;
           title = title.split("|");
           author = title[1];
           title = title[0];
-          presenceData.details = "Viewing" + title;
+          presenceData.details = "Viewing: " + title;
           presenceData.state = "From: " + author;
       } else if (document.location.pathname == "/about"){
         presenceData.details = "Viewing what Flickr is about";
@@ -64,7 +72,9 @@ presence.on("UpdateData", async () => {
         searchQuery = searchQuery.split(":")[1];
         searchQuery = searchQuery.split("|")[0]
         presenceData.details = "Searching:" + searchQuery;
-      }
+      } else if (document.location.pathname == "/map"){
+        presenceData.state = "Viewing Flickr's worldmap";
+      } 
   }
   if (presenceData.details == null) {
       presence.setTrayTitle();
