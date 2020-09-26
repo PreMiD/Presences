@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "640266769218666502"
   }),
   strings = presence.getStrings({
@@ -15,37 +15,51 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var title: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
-
-var lastPlaybackState = null;
-var playback;
+let title,
+  iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  lastPlaybackState = null,
+  playback,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+    };
+  }) => {
+    playback = data.iframe_video.dur !== null ? true : false;
 
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    if (playback) {
+      iFrameVideo = data.iframe_video.iFrameVideo;
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.dur;
+      paused = data.iframe_video.paused;
+    }
   }
-});
+);
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "cc"
     };
