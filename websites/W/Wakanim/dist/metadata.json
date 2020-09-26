@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "Spinne",
+    "id": "363790841636192259"
+  },
+  "service": "Wakanim",
+  "description": {
+    "en": "Wakanim is the best place to stream all your favorite Anime such as Sword Art Online, Attack on Titan, Tokyo Ghoul:re and many others! Much more than a streaming platform! More than just an awesome place to watch Anime, Wakanim is a community, an event organizer and a fervent supporter of Japanese Animation.",
+    "de": "Wakanim ist der führende legale Streaming-Dienst für Anime in Europa. Unser Ziel ist es, Nutzern sowohl eine fantastische Streaming-Plattform als auch qualitativ hochwertige Anime-Inhalte anzubieten. Wakanim ist der beste Ort, um alle deine Lieblings-Animes wie Sword Art Online, One Piece, Fate/Zero und viele andere mehr zu streamen."
+  },
+  "url": "www.wakanim.tv",
+  "version": "1.2.5",
+  "logo": "https://i.imgur.com/XZM7Eqr.png",
+  "thumbnail": "https://i.imgur.com/EfWn94W.jpg",
+  "color": "#171717",
+  "tags": [
+    "video",
+    "anime"
+  ],
+  "category": "anime"
+}

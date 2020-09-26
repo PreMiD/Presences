@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Holfz",
+    "id": "405397046691102740"
+  },
+  "service": "AIS Play",
+  "description": {
+    "en": "AIS Play is a thailand streaming service offered to a series, television providers, anime, much more"
+  },
+  "url": "aisplay.ais.co.th",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/HQs4uPj.png",
+  "thumbnail": "https://i.imgur.com/ZYS9jRi.png",
+  "color": "#B0B72A",
+  "tags": [
+    "video",
+    "media"
+  ],
+  "iframe": true,
+  "category": "videos"
+}

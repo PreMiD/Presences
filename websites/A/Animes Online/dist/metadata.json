@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Bas950",
+    "id": "241278257335500811"
+  },
+  "service": "Animes Online",
+  "description": {
+    "en": "Watch Animes Online for free in HD.",
+    "nl": "Bekijk Animes Online gratis in HD.",
+    "zh_CN": "免费的在线高清动漫视频网站。"
+  },
+  "url": "www.animesonline.cz",
+  "version": "1.2.5",
+  "logo": "https://i.imgur.com/IcaSbEw.png",
+  "thumbnail": "https://i.imgur.com/JsYwXRb.png",
+  "color": "#008000",
+  "tags": [
+    "anime",
+    "online"
+  ],
+  "category": "anime"
+}

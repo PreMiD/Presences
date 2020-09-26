@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name": "Bryan",
+    "id": "293775922757238784"
+  },
+  "contributors": [
+    {
+      "name": "Aya",
+      "id": "256422547556401152"
+    }
+  ],
+  "service": "MangaDex",
+  "description": {
+    "en": "Read manga online for free at MangaDex with no ads, high quality images and support scanlation groups!"
+  },
+  "url": [
+    "mangadex.org",
+    "www.mangadex.org",
+    "mangadex.cc",
+    "www.mangadex.cc"
+  ],
+  "version": "1.3.6",
+  "logo": "https://i.gyazo.com/3c8e4b08707f7b8dc2a3d1ef447e7b9d.png",
+  "thumbnail": "https://i.gyazo.com/ebb5c92c5b72a7ec50f7a3ec31eec278.png",
+  "color": "#F18F1E",
+  "tags": [
+    "mangadex",
+    "reading"
+  ],
+  "category": "anime"
+}

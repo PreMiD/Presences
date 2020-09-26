@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "DooMLorD",
+    "id": "654398152513945611"
+  },
+  "service": "Anghami",
+  "description": {
+    "en": "All the music you love, all the freedom you need. Arabic and International in one place",
+    "ar_SA": "كل الموسيقى التي تحبها ، كل الحرية التي تحتاجها. العربية والدولية في مكان واحد",
+    "zh_CN": "您喜欢的音乐，以及您需要的所有。阿拉伯和国际合而为一！",
+    "zh_TW": "您喜歡的音樂，以及您需要的所有。阿拉伯與國際合而為一！"
+  },
+  "url": "play.anghami.com",
+  "version": "1.2.6",
+  "logo": "https://doomlord.s-ul.eu/DwfvcxPf",
+  "thumbnail": "https://doomlord.s-ul.eu/EF2PBAQ9",
+  "color": "#d3369f",
+  "tags": [
+    "subscription-based",
+    "music",
+    "region-restricted"
+  ],
+  "category": "music"
+}
