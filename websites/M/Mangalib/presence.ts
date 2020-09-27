@@ -56,7 +56,11 @@ presence.on("UpdateData", async () => {
     // List of mangas
     data.smallImageText = "reading";
     data.smallImageKey = "search";
-    data.details = 'Каталог';
+    data.details = 'Каталог манги';
+
+    if (!Array.isArray(Queries.types)) {
+      Queries.types = [Queries.types];
+    }
 
     // Search Types
     if (Queries.types && Queries.types.length === 1) {
@@ -84,6 +88,7 @@ presence.on("UpdateData", async () => {
     } else if (Queries.types && Queries.types.length > 1) {
       // Types size > 1
       const mangas: string[] = [];
+
       
       Queries.types.sort().forEach((item: any) => {
         switch (item) {
