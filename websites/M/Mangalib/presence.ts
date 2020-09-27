@@ -28,8 +28,8 @@ presence.on("UpdateData", async () => {
   // Setup Routes & Query
   Routes = document.location.href.replace(document.location.search, '').split("/").splice(3);
   Queries = Object.fromEntries(document.location.search.slice(1).split("&").map((k, i, a) => {
-    const item: any = k.replace(/\[(.*?)\]+/g, '').split('=');
-    const Keys = a.map(i => i.replace(/\[(.*?)\]+/g, '').split('=')).filter(i => i[0] === item[0]),
+    const item: string[] = k.replace(/\[(.*?)\]+/g, '').split('='),
+      Keys = a.map(i => i.replace(/\[(.*?)\]+/g, '').split('=')).filter(i => i[0] === item[0]),
       Values = Keys.map(i => i[1]);
 
     if (Keys.length === 1) return item;
