@@ -4,30 +4,54 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 
+
     const browsingStamp = Math.floor(Date.now() / 1000), 
           button = document.getElementsByTagName('button'), 
-          valor = button.length, 
+          valor = button.length,
           players = document.getElementsByClassName('userActive'), 
-          nump = `(${players.length} of 6 players)`,
           data: PresenceData = {
             largeImageKey: "large_image",
             startTimestamp: browsingStamp
                 };
 
         if (valor == 1) {
-            data.details = "Creating a Room";
+            data.details = "Creating a room";
             data.smallImageKey = "home";
             data.smallImageText = "On homepage";
         }
         if (valor >= 6) {
-            data.details = "Playing";
-            data.state = nump;
+            const limitPlayers = document.querySelector(".line b").textContent,
+            numLimit = parseFloat(limitPlayers),
+            nump = `(${players.length} of ${numLimit})`;
+            data.details = "Waiting";
+            data.state = `Playing ${nump}`;
             data.smallImageKey = "playing";
             data.smallImageText = "On game";
-            data.startTimestamp = browsingStamp;
+
+            if (players.length > numLimit) {
+            data.state = `(${numLimit} of ${numLimit} players)`;
         }
-        if (players.length > 6) {
-            data.state = "(6 of 6 players)";
+        }
+        
+        const typing = document.getElementById('writeEntryundefined'),
+        drawing = document.getElementsByClassName('ptro-crp-el'),
+        valueDraw = drawing.length,
+        presenting = document.getElementsByClassName('presentationSection'),
+        presentingValue = presenting.length,
+        waitlist = document.getElementsByClassName('waitingSet rounded'),
+        waitValue = waitlist.length;
+
+        if (typing) {
+            data.details = "Typing...";
+        }
+        if (valueDraw >= 1) {
+            data.details = "Drawing";
+        }
+        if (presentingValue >= 1) {
+            data.details = "Viewing the presentation";
+        }
+        if (waitValue >= 1) {
+            data.details = "On waitlist";
         }
         if (data.details == null) {
             presence.setTrayTitle();
