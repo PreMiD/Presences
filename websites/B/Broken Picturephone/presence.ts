@@ -4,7 +4,6 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 
-
     const browsingStamp = Math.floor(Date.now() / 1000), 
           button = document.getElementsByTagName('button'), 
           valor = button.length,
