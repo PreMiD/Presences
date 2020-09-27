@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "758864138897850368"
 });
 //compile with npm install && npx tsc -w
-let author: string, title: string, language: any, searchQuery: any, username :any;
+let author: string, title: string, language: string, searchQuery: string, username : string;
 const startTimeStamp = Math.round(Date.now());
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
         language = document.location.pathname.split("/")[4];
         presenceData.details = "Viewing the Flickr Help Forums in: " + language;
         if (document.location.pathname.split("/").length == 6){
-          title = document.querySelector("head > title").innerText;
+          title = document.querySelector("title").innerText;
           title = title.split(":")[2];
           //Flickr automatically adds a space in front of the colon
           presenceData.state = "Viewing:" + title;
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
        } else if (document.location.pathname.startsWith("/search/")){
         searchQuery = document.querySelector("title").innerText;
         searchQuery = searchQuery.split(":")[1];
-        searchQuery = searchQuery.split("|")[0]
+        searchQuery = searchQuery.split("|")[0];
         presenceData.details = "Searching:" + searchQuery;
       } else if (document.location.pathname == "/map"){
         presenceData.state = "Viewing Flickr's worldmap";
