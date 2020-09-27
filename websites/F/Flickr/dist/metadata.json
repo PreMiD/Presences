@@ -8,7 +8,7 @@
   "description": {
     "en": "Flickr is an American image hosting and video hosting service, as well as an online community. It was created by Ludicorp in 2004 and has been popular with hosting high resolution photos by amateur and professional photographers. It has changed ownership several times and has been owned by SmugMug since April 20, 2018. As of March 20, 2013, Flickr had a total of 87 million registered members and more than 3.5 million new images uploaded daily, as reported by The Verge. On August 5, 2011, the site reported that it was hosting more than 6 billion images. Photos and videos can be accessed from Flickr without the need to register an account, but an account must be made to upload content to the site. Registering an account also allows users to create a profile page containing photos and videos that the user has uploaded and also grants the ability to add another Flickr user as a contact. (Wikipédia: https://en.wikipedia.org/wiki/Flickr)"
   },
-  "url": ["www.flickr.com", "blog.flickr.com"],
+  "url": "www.flickr.com",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/ZSCbG9X.png",
   "thumbnail": "https://i.imgur.com/g3hrWth.png",
