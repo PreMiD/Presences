@@ -103,6 +103,11 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing the";
       presenceData.state = "recently played songs";
       presenceData.smallImageKey = "reading";
+    } else if(document.location.pathname.includes("Radio.SongProfile")) {
+      const SongProfileArtist = document.querySelector("#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.artist");
+      const SongProfileTitle = document.querySelector("#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.song");
+      presenceData.details = "Viewing song";
+      presenceData.state = `${SongProfileTitle} by ${SongProfileTitle}`;
     } else if (document.location.pathname.includes("/UpBeat.AboutUs")) {
       presenceData.details = "Reading about UpBeat";
       presenceData.smallImageKey = "reading";
