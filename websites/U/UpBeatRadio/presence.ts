@@ -104,8 +104,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "recently played songs";
       presenceData.smallImageKey = "reading";
     } else if(document.location.pathname.includes("Radio.SongProfile")) {
-      const SongProfileArtist = document.querySelector("#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.artist");
-      const SongProfileTitle = document.querySelector("#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.song");
+      const SongProfileArtist = document.querySelector("#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.artist").textContent;
+      const SongProfileTitle = document.querySelector("#mainContent > div > div:nth-child(1) > div > div.row.equal.p-md.d-flex > div.col-md-9 > div.infoContainer > div > div.song").textContent;
       presenceData.details = "Viewing song";
       presenceData.state = `${SongProfileTitle} by ${SongProfileArtist}`;
     } else if (document.location.pathname.includes("/UpBeat.AboutUs")) {
