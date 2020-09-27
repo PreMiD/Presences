@@ -2,14 +2,14 @@ const presence = new Presence({
   clientId: "758864138897850368"
 });
 //compile with npm install && npx tsc -w
-let author: any, title: any, language: any, searchQuery: any, username :any;
-var startTimeStamp = Math.round(Date.now());
+let author: string, title: string, language: any, searchQuery: any, username :any;
+const startTimeStamp = Math.round(Date.now());
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "flickr_logo",
       startTimestamp: startTimeStamp,
       smallImageKey: "flickr_logo",
-      smallImageText: "Viewing Images or videos on Flickr",
+      smallImageText: "Viewing Images or videos on Flickr"
   };
   if (document.location.hostname == "www.flickr.com") {
       if (document.location.pathname == "/" || document.location.pathname == "/new/") {
@@ -23,11 +23,9 @@ presence.on("UpdateData", async () => {
           }
           return;
         }
-          title = document.querySelector("title");
-          title = title.innerText;
-          title = title.split("|");
-          author = title[1];
-          title = title[0];
+          title = document.querySelector("title").innerText;
+          title = title.split("|")[1];
+          author = document.querySelector("title").innerText[1];
           presenceData.details = "Viewing: " + title;
           presenceData.state = "From: " + author;
       } else if (document.location.pathname == "/about"){
@@ -60,10 +58,8 @@ presence.on("UpdateData", async () => {
         language = document.location.pathname.split("/")[4];
         presenceData.details = "Viewing the Flickr Help Forums in: " + language;
         if (document.location.pathname.split("/").length == 6){
-          title = document.querySelector("head > title");
-          title = title.innerText;
-          title = title.split(":");
-          title = title[2];
+          title = document.querySelector("head > title").innerText;
+          title = title.split(":")[2];
           //Flickr automatically adds a space in front of the colon
           presenceData.state = "Viewing:" + title;
         }
