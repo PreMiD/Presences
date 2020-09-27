@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "DooMLorD",
-    "id": "654398152513945611"
+    "name": "PreMiD",
+    "id": "503557087041683458"
   },
   "service": "LookMovie",
   "description": {
@@ -12,8 +12,8 @@
     "www.lookmovie.ag"
   ],
   "version": "1.2.6",
-  "logo": "https://doomlord.s-ul.eu/TtkUyBkp",
-  "thumbnail": "https://doomlord.s-ul.eu/q4gLfTIv",
+  "logo": "https://i.imgur.com/vlSumUl.png",
+  "thumbnail": "https://i.imgur.com/nseTbMZ.png",
   "color": "#ffcc00",
   "tags": [
     "dedicated-server",
