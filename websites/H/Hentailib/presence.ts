@@ -17,8 +17,7 @@ let Routes: string[],
   TeamName: string,
   UserName: string,
   BookmarkType: string,
-  BookmarkSize: string,
-  MangaName: string;
+  BookmarkSize: string;
 
 presence.on("UpdateData", async () => {
   // Presence Data
@@ -29,7 +28,7 @@ presence.on("UpdateData", async () => {
   // Setup Routes & Query
   Routes = document.location.href.replace(document.location.search, '').split("/").splice(3);
   Queries = Object.fromEntries(document.location.search.slice(1).split("&").map((k, i, a) => {
-    let item: any = k.replace(/\[(.*?)\]+/g, '').split('=');
+    const item: any = k.replace(/\[(.*?)\]+/g, '').split('=');
     const Keys = a.map(i => i.replace(/\[(.*?)\]+/g, '').split('=')).filter(i => i[0] === item[0]),
       Values = Keys.map(i => i[1]);
 
@@ -92,7 +91,7 @@ presence.on("UpdateData", async () => {
       // Types size > 1
       const mangas: string[] = [];
 
-      Queries.types.sort().forEach((item: any) => {
+      Queries.types.sort().forEach((item: string) => {
         switch (item) {
           case "1":
             mangas.push(`Манги`);
@@ -116,7 +115,7 @@ presence.on("UpdateData", async () => {
             mangas.push(`Хентай`);
             break;
         }
-      })
+      });
 
       data.state = 'Ищет: ' + mangas.join(', ');
     } else {
@@ -297,7 +296,7 @@ presence.on("UpdateData", async () => {
     data.details = "Личные сообщения";
     data.smallImageText = "Пишет";
     data.smallImageKey = "writing";
-    data.startTimestamp = getTimeStamp()
+    data.startTimestamp = getTimeStamp();
     
   } else if (Routes[0] === "people") {
     // Authors (Moderation) page
@@ -426,13 +425,13 @@ presence.on("UpdateData", async () => {
       data.startTimestamp = 0;
   
       if (!Routes[2]) {
-        data.state = 'Добавленные тайтлы'
+        data.state = 'Добавленные тайтлы';
       } else if (Routes[2] === 'moderation') {
-        data.state = 'Тайтлы на модерации'
+        data.state = 'Тайтлы на модерации';
       } else if (Routes[2] === 'rejected') {
-        data.state = 'Тайтлы не прошедшие модерацию'
+        data.state = 'Тайтлы не прошедшие модерацию';
       } else if (Routes[2] === 'chapters') {
-        data.state = 'Главы на модерации'
+        data.state = 'Главы на модерации';
       }
     } else if (Routes[1] === 'edit') {
       data.details = `Мои настройки`;
@@ -470,29 +469,29 @@ presence.on("UpdateData", async () => {
         let comment_type;
   
         if (Queries.comment_type === 'manga') {
-          comment_type = 'Комментарии к хентаю'
+          comment_type = 'Комментарии к хентаю';
         } else if (Queries.comment_type === 'chapter') {
-          comment_type = 'Комментарии к главам'
+          comment_type = 'Комментарии к главам';
         } else if (Queries.comment_type === 'post') {
-          comment_type = 'Комментарии к новостям'
+          comment_type = 'Комментарии к новостям';
         } else {
-          comment_type = 'Все комментарии'
+          comment_type = 'Все комментарии';
         }
   
         data.state = comment_type;
         
       } else if (Routes[2] === 'following') {
         data.details = `Профиль: ${UserName}`;
-        data.state = 'Список друзей'
+        data.state = 'Список друзей';
       } else if (Routes[2] === 'mutual-friends') {
         data.details = `Профиль: ${UserName}`;
-        data.state = 'Общие друзья'
+        data.state = 'Общие друзья';
       } else if (Routes[2] === 'ignore') {
         data.details = `Профиль: ${UserName}`;
-        data.state = 'Игнор-лист'
+        data.state = 'Игнор-лист';
       } else if (Routes[2] === 'ban') {
         data.details = `Мой профиль`;
-        data.state = 'История банов'
+        data.state = 'История банов';
       }
     }
 
@@ -522,7 +521,7 @@ presence.on("UpdateData", async () => {
   
         const title = document.querySelector(".section__header .breadcrumb a");
   
-        data.details = title.textContent
+        data.details = title.textContent;
   
         switch(Queries.section) {
           case 'media-edit': data.state = 'Редактирование';
@@ -535,7 +534,7 @@ presence.on("UpdateData", async () => {
   
       } else if (Routes[2] === "bulk-create") {
         // bulk create
-        data.details = "Добавляет главы"
+        data.details = "Добавляет главы";
         data.smallImageText = "Добавляет";
         data.smallImageKey = "uploading";
 
