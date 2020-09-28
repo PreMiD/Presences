@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "mmatt",
+    "id": "308000668181069824"
+  },
+  "url": [
+    "www.destiny.gg",
+    "destiny.gg"
+  ],
+  "description": {
+    "en": "Streaming website for the streamer Steven \"Destiny\" Bonnell II"
+  },
+  "service": "Destiny.gg",
+  "version": "1.0.0",
+  "logo": "https://static-cdn.jtvnw.net/badges/v1/41f43a1b-004c-43d0-b223-c20f6d83ef13/2",
+  "thumbnail": "https://static-cdn.jtvnw.net/jtv_user_pictures/destiny-profile_image-951fd53950bc2f8b-300x300.png",
+  "color": "#568FCA",
+  "tags": [
+    "english",
+    "streamer",
+    "streaming",
+    "twitch",
+    "youtube",
+    "live"
+  ],
+  "category": "socials"
+}
