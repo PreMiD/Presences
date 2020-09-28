@@ -2,7 +2,6 @@ const presence = new Presence({
   clientId: "760186916213227520"
 });
 
-
 // Variables
 let Routes: string[],
   Queries;
