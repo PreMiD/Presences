@@ -205,8 +205,12 @@ presence.on("UpdateData", async () => {
 
   } else if (Routes[0] === 'friends') {
     // Friends page - useless page
+    data.details = 'Friends'
+
   } else if (Routes[0] === 'account') {
     // Account page - wotk in progress
+    data.details = 'My account'
+
   } else if (Routes[0] === 'search') {
     // Search page
     data.details = 'Search: ' + Queries.q.replace(/\W\d+/g, ' ');
@@ -241,7 +245,7 @@ presence.on("UpdateData", async () => {
       if (!Routes[2]) {
         data.state = 'Hot coubs';
   
-      } else if (Routes[2] === 'views') {
+      } else if (Routes[2] === 'rising') {
         data.state = 'Rising coubs';
   
       } else if (Routes[2] === 'fresh') {
