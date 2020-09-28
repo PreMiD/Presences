@@ -7,7 +7,7 @@ function getTimeStamp() {
   return Math.floor(Date.now() / 1000);
 }
 
-// Variables 
+// Variables
 let Server: string,
   Region: string,
   Nickname: string,
@@ -16,14 +16,14 @@ let Server: string,
 presence.on("UpdateData", async () => {
   // Presence Data
   const data: PresenceData = { largeImageKey: "vanis_image" },
-    massElement = document.querySelector('#hud .stats div:nth-child(3)'),
-    overlay = <HTMLElement>document.querySelector('#overlay');
+    massElement = document.querySelector("#hud .stats div:nth-child(3)"),
+    overlay = <HTMLElement>document.querySelector("#overlay");
     
-  if (overlay.style.display !== 'none') {
+  if (overlay.style.display !== "none") {
     // Game not Ready
-    const RegionElement = document.querySelector('#tab-menu .tabs .tab.active'),
-      ServerElement = document.querySelector('#tab-menu .server-list .active .server-name'),
-      NicknameElement = <HTMLInputElement>document.querySelector('#player-data #nickname');
+    const RegionElement = document.querySelector("#tab-menu .tabs .tab.active"),
+      ServerElement = document.querySelector("#tab-menu .server-list .active .server-name"),
+      NicknameElement = <HTMLInputElement>document.querySelector("#player-data #nickname");
 
     // Data Update
     Region = RegionElement && RegionElement.textContent.trim();
@@ -36,8 +36,8 @@ presence.on("UpdateData", async () => {
     Mass = massElement && massElement.innerHTML.split(":")[1].trim();
   }
 
-  if (overlay.style.display !== 'none' && Mass.startsWith("0")) {
-    data.details = `Main menu`;
+  if (overlay.style.display !== "none" && Mass.startsWith("0")) {
+    data.details = "Main menu";
     data.startTimestamp = getTimeStamp();
   } else {
     data.details = `Playing on server: ${Region} | ${Server}`;
