@@ -157,17 +157,17 @@ presence.on("UpdateData", async () => {
 
   if (document.querySelector("#plex") !== null) {
     if (
-      document.querySelector("#plex > div:nth-child(7) > div > div > video") !==
+      document.querySelector("#plex > div:nth-child(6) > div > div > video") !==
         null ||
-      document.querySelector("#plex > div:nth-child(7) > div > div > audio") !==
+      document.querySelector("#plex > div:nth-child(6) > div > div > audio") !==
         null
     ) {
       const video: HTMLVideoElement =
           document.querySelector(
-            "#plex > div:nth-child(7) > div > div > video"
+            "#plex > div:nth-child(6) > div > div > video"
           ) ||
           document.querySelector(
-            "#plex > div:nth-child(7) > div > div > audio"
+            "#plex > div:nth-child(6) > div > div > audio"
           ),
         currentTime = video.currentTime,
         duration = video.duration,
@@ -184,65 +184,17 @@ presence.on("UpdateData", async () => {
       presenceData.endTimestamp = timestamps[1];
       user =
         document.querySelector(
-          "#plex > div:nth-child(7) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) > a"
+          "#plex > div:nth-child(6) > div > div:nth-child(4) > div > div > div:nth-child(2) > div > div > a"
         ) ||
         document.querySelector(
-          "#plex > div:nth-child(7) > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > div > div > a"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH.AudioVideoFullPlayer-hideControls-3B1pWE > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > a"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > a"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > a"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH.AudioVideoFullPlayer-hideControls-3B1pWE > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div.ControlsContainer-controlsContainer-1Wn7vp > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span:nth-child(1)"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH.AudioVideoFullPlayer-hideControls-3B1pWE > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > a"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > a"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div:nth-child(2) > div > div > div.PlayerControls-controls-e59abb.PlayerControls-hasLandscapePoster-23Gat5 > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div.PlayerControlsMetadata-container-2wqMfv > a"
-        ) ||
-        document.querySelector(
-          "#plex > div > div > div > div > div > div > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > a"
+          "#plex > div:nth-child(6) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) > a"
         );
       title =
         document.querySelector(
-          "#plex > div:nth-child(7) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) > span > a"
+          "#plex > div:nth-child(6) > div > div:nth-child(4) > div > div > div:nth-child(2) > div > div > span"
         ) ||
         document.querySelector(
-          "#plex > div:nth-child(7) > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > div > div > span"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH.AudioVideoFullPlayer-hideControls-3B1pWE > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH.AudioVideoFullPlayer-hideControls-3B1pWE > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div.AudioVideoInfoBar-container-2ewFys > div:nth-child(1)"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH.AudioVideoFullPlayer-hideControls-3B1pWE > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div.AudioVideoFullPlayer-fullPlayer-3bJyOR.AudioVideoFullPlayer-isVideo-1aASwH > div.AudioVideoFullPlayer-bottomBar-2yixi6.AudioVideoFullPlayer-bar-dDYeoN > div > div > div.PlayerControls-controls-e59abb > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span"
-        ) ||
-        document.querySelector(
-          "#plex > div.AudioVideoPlayerView-container-kWiFsz > div > div:nth-child(2) > div > div > div.PlayerControls-controls-e59abb.PlayerControls-hasLandscapePoster-23Gat5 > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div.PlayerControlsMetadata-container-2wqMfv > span"
-        ) ||
-        document.querySelector(
-          "#plex > div > div > div > div > div > div > div.PlayerControls-buttonGroupLeft-3vLk-g.PlayerControls-buttonGroup-4L6Pw- > div > span"
+          "#plex > div:nth-child(6) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) > span"
         );
       presenceData.details = user.textContent;
       if (title) {
@@ -261,13 +213,9 @@ presence.on("UpdateData", async () => {
     } else if (document.URL.includes("/tv.plex.provider.webshows")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("WebShows");
-      const title =
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > span"
-        ) ||
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div > a"
-        );
+      const title = document.querySelector(
+        "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > div > span"
+      );
       if (title !== null) {
         presenceData.details = "Viewing webshow:";
         presenceData.state = title.textContent;
@@ -278,13 +226,9 @@ presence.on("UpdateData", async () => {
     } else if (document.URL.includes("/tv.plex.provider.podcasts")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Podcasts");
-      const title =
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > span"
-        ) ||
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div"
-        );
+      const title = document.querySelector(
+        "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > div > span"
+      );
       if (title !== null) {
         presenceData.details = "Viewing podcast:";
         presenceData.state = title.textContent;
@@ -292,13 +236,9 @@ presence.on("UpdateData", async () => {
     } else if (document.URL.includes("/tv.plex.provider.music")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Music");
-      const title =
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > span"
-        ) ||
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div"
-        );
+      const title = document.querySelector(
+        "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > div > div > span"
+      );
       if (title !== null) {
         presenceData.details = "Viewing album:";
         presenceData.state = title.textContent;
@@ -338,24 +278,14 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Vod");
       presenceData.state = document.querySelector(
-        "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div"
+        "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > div > div > span"
       ).textContent;
     } else if (document.URL.includes("/server/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = getTranslation("Vod");
-      const title =
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div > div > div:nth-child(3) > span"
-        ) ||
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > div > div > a"
-        ) ||
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > span"
-        ) ||
-        document.querySelector(
-          "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div > div:nth-child(2) > div > div > div"
-        );
+      const title = document.querySelector(
+        "#content > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > div > div > span"
+      );
       presenceData.state = title.textContent;
     } else if (
       document.URL == "https://app.plex.tv/" ||
