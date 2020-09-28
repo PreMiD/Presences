@@ -4,9 +4,6 @@
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-var title: any;
-var search: any;
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "destiny",
