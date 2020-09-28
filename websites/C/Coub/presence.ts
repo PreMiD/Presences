@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 
   } else if (Routes[0] === 'promote') {
     data.details = 'Promoted Coubs';
-    data.state = 'Spent: ' + document.querySelector('.promoted-coubs__summary div:nth-child(5) span').textContent 
+    data.state = 'Spent: ' + document.querySelector('.promoted-coubs__summary div:nth-child(5) span').textContent
       + ' | Views: ' + document.querySelector('.promoted-coubs__summary div:nth-child(1) span').textContent;
   
   } else if (Routes[0] === 'chat') {
@@ -205,11 +205,11 @@ presence.on("UpdateData", async () => {
 
   } else if (Routes[0] === 'friends') {
     // Friends page - useless page
-    data.details = 'Friends'
+    data.details = 'Friends';
 
   } else if (Routes[0] === 'account') {
     // Account page - wotk in progress
-    data.details = 'My account'
+    data.details = 'My account';
 
   } else if (Routes[0] === 'search') {
     // Search page
