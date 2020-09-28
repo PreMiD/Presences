@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
       const pathsplitted = pathname.split("/").slice(-1)[0];
       if (!pathsplitted.includes("-mh")) {
         const mangaName = document.querySelector("h1 a").textContent,
-          chapterNumber = pathsplitted[0],
+          chapterNumber = pathsplitted.split('#')[0],
           e = document.getElementById("capitulos-3") as HTMLSelectElement,
           sel = e.selectedIndex,
           opt = e.options[sel],
