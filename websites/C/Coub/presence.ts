@@ -1,11 +1,7 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "760186916213227520"
 });
 
-// Timestamp
-function getTimeStamp() {
-  return Math.floor(Date.now() / 1000);
-}
 
 // Variables
 let Routes: string[],
