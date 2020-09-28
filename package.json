@@ -16,7 +16,7 @@
   "devDependencies": {
     "@babel/core": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
-    "@types/babel__core": "^7.1.9",
+    "@types/babel__core": "^7.1.10",
     "@types/chrome": "^0.0.123",
     "@types/glob": "^7.1.3",
     "@types/mongodb": "3.5.25",
