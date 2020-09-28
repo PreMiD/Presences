@@ -17,7 +17,7 @@ function getTimestamps(
   videoDuration: number
 ): Array<number> {
   const startTime = Date.now(),
-          endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -26,12 +26,11 @@ presence.on("UpdateData", async () => {
     largeImageKey: "cp"
   };
   if (document.location.pathname.includes("/watch")) {
-    const video: HTMLVideoElement = document.querySelector(
-      ".player-box video"
-    );
+    const video: HTMLVideoElement = document.querySelector(".player-box video");
     if (video && !isNaN(video.duration)) {
       if (document.querySelector(".CPplayer-header-subtitle")) {
-        data.state = " " + document.querySelector(".CPplayer-header-subtitle").textContent;
+        data.state =
+          " " + document.querySelector(".CPplayer-header-subtitle").textContent;
       } else {
         data.state = "Movie";
       }
@@ -39,8 +38,8 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      data.details = " " +
-        document.querySelector(".CPplayer-header-title span").textContent;
+      data.details =
+        " " + document.querySelector(".CPplayer-header-title span").textContent;
       (data.smallImageKey = video.paused ? "pause" : "play"),
         (data.smallImageText = video.paused
           ? (await strings).pause

@@ -4,10 +4,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  },
-  browsingStamp = Math.floor(Date.now() / 1000),
-  page = window.location.pathname;
+      largeImageKey: "logo"
+    },
+    browsingStamp = Math.floor(Date.now() / 1000),
+    page = window.location.pathname;
   if (page.toLowerCase() === "/") {
     presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Anasayfa";
@@ -26,17 +26,18 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = browsingStamp;
   } else if (page.startsWith("/kod")) {
     presenceData.details = "Bir kod görüntülüyor:";
-    presenceData.state = 
-     document.querySelector("#\\32  > div > div > div > div > h3")
+    presenceData.state =
+      document.querySelector("#\\32  > div > div > div > div > h3")
         .textContent +
       " " +
       "adlı kodu görüntülüyor!";
     presenceData.startTimestamp = browsingStamp;
-  }  else if (page.startsWith("/users")) {
+  } else if (page.startsWith("/users")) {
     presenceData.details = "Bir profil görüntülüyor:";
-    presenceData.state = 
-      document.querySelector("body > div > center > div > div > div.topSectionNormal-2-vo2m > header > div.headerInfo-30uryT > div.nameTag-2IFDfL.userSelectText-1o1dQ7.nameTag-m8r81H > span")
-        .textContent +
+    presenceData.state =
+      document.querySelector(
+        "body > div > center > div > div > div.topSectionNormal-2-vo2m > header > div.headerInfo-30uryT > div.nameTag-2IFDfL.userSelectText-1o1dQ7.nameTag-m8r81H > span"
+      ).textContent +
       " " +
       "adlı kullanıcının profilini görüntülüyor!";
     presenceData.startTimestamp = browsingStamp;
