@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
       if (document.location.pathname == "/" || document.location.pathname == "/new/") {
           presenceData.details = "Viewing home page";
       } else if (document.location.pathname.includes("/photos/")) {
-        if (document.location.pathname.split("/").length == 4||5 ){
+        if (document.location.pathname.split("/").length == 4||document.location.pathname.split("/").length == 5){
           username = document.location.pathname.split("/")[2];
           presenceData.details = "Viewing user: " + username;
           if (document.location.pathname.split("/")[3].length != 0){
