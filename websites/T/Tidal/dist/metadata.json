@@ -18,7 +18,7 @@
     "en": "Tidal is a music stream service with very high sound quality"
   },
   "service": "Tidal",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/clJrylu.jpg",
   "thumbnail": "https://i.imgur.com/UXbP7qG.png",
   "color": "#000000",
