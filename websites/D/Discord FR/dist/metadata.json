@@ -8,6 +8,14 @@
       {
         "name": "Derrios",
         "id": "264320223182585858"
+      },
+      {
+        "name": "Zallom",
+        "id": "268108606027726849"
+      },
+      {
+        "name": "Ichii",
+        "id": "530061924130488351"
       }
     ],
     "url": "discord.fr",
@@ -23,13 +31,11 @@
     "tags": [
       "discord",
       "fr",
-      "discord fr",
-      "discord.fr",
-      "discordapp.fr",
-      "discord support fr",
-      "discord-support.fr",
-      "discord france",
-      "dsc fr"
+      "discordfr",
+      "discordappfr",
+      "discordsupportfr",
+      "discordfrance",
+      "dscfr"
     ],
     "category": "other",
     "regExp": "([a-z0-9]+)[.]discord.fr"
