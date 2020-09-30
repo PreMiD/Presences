@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "760981805695762441"
 });
 
@@ -13,9 +13,10 @@ let isPadlet: boolean,
 
 presence.on("UpdateData", async () => {
   // Presence Data
-  const data: PresenceData = {
-    largeImageKey: "padlet_image"
-  };
+  const PadletElement = document.querySelector('#surface-header .surface-title .title-heading'),
+    data: PresenceData = {
+      largeImageKey: "padlet_image"
+    };
 
   // Setup Routes & Query (For Features)
   // Routes = document.location.href.replace(document.location.search, '').split("/").splice(3);
@@ -27,10 +28,8 @@ presence.on("UpdateData", async () => {
   //   else return [item[0], Values];
   // }));
 
-  const PadletElement = document.querySelector('#surface-header .surface-title .title-heading');
-
   PadletTitle = PadletElement && PadletElement.textContent;
-  isPadlet = !!PadletTitle;
+  isPadlet = !!PadletElement;
 
   if (isPadlet) {
     data.details = PadletTitle;
