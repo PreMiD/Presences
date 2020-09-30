@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Mirax",
+    "id": "223355525826347018"
+  },
+  "service": "Padlet",
+  "description": {
+    "en": "Padlet is a web app that lets users post notes on a digital wall."
+  },
+  "url": "padlet.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/TUdPGRK.png",
+  "thumbnail": "https://i.imgur.com/HJYMqXo.jpg",
+  "color": "#ff4181",
+  "tags": [
+    "projects",
+    "board",
+    "list",
+    "card",
+    "management"
+  ],
+  "category": "other"
+}
