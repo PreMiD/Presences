@@ -16,8 +16,15 @@ presence.on("UpdateData", () => {
     smallImageText: `Viewing: ${pageName}`
   };
 
+  let stateText = "";
+  if (liveTill) {
+    stateText = `${dj} till ${liveTime}`;
+  } else {
+    stateText = `${dj}`;
+  }
+
   presenceData.details = `${title}`;
-  presenceData.state = `${dj} till ${liveTime}`;
+  presenceData.state = `${stateText}`;
 
   presence.setActivity(presenceData);
   presence.setTrayTitle();
