@@ -19,9 +19,9 @@ function getAuthorString(): string {
 
     //* Build output string
     authorString = `${authorsArray
-      .slice(0, authorsArray.length - 1)
+      .slice(0, authorsArray.length)
       .map((a) => a.innerText)
-      .join(", ")} - ${authorsArray[authorsArray.length - 1].innerText}`;
+      .join(", ")}`;
   } else
     authorString = (document.querySelector(
       "#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.leftColumn--5B2JF > div.dragItem--3WWiC > div.mediaInformation--1dAUh > div.mediaArtists--3UIyd > a"
@@ -54,8 +54,8 @@ presence.on("UpdateData", async () => {
     fulltime = (document.querySelector(
       "#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.rightColumn--ZsskN > div:nth-child(2) > time.duration--3f3-B"
     ) as HTMLElement).innerText,
-    playingfrom = (document.querySelector(
-      "#nowPlaying > div.scrollWrapper--3Is01 > div > div.leftColumn--27Pj1 > div.row--2NAD4.rowMediaInformation--2fF1n > div.mediaInformation--tovqc > div > a > span"
+    albumTitle = (document.querySelector(
+      "#nowPlaying > div.scrollWrapper--3Is01 > div > div.leftColumn--27Pj1 > div:nth-child(6) > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > a"
     ) as HTMLElement).innerText,
     playingbutton = (document.querySelector(
       "#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.centerColumn--1MAnN > div > button.playback-controls__button--white-icon.playbackToggle--1eQO2"
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
         Math.floor(videoFull)
       ),
       presenceData: PresenceData = {
-        details: playingfrom ? `${title} (From: ${playingfrom})` : title,
+        details: albumTitle ? `${title} (Album: ${albumTitle})` : title,
         state: getAuthorString(),
         largeImageKey: "tidal-logo",
         smallImageKey: "play",
