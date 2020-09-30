@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "Notix",
+      "id": "552550090796171265"
+    },
+    "contributors": [
+      {
+        "name": "Derrios",
+        "id": "264320223182585858"
+      }
+    ],
+    "url": "discord.fr",
+    "description": {
+      "en": "Network bringing together the francophone Discord community. Wiki, blog, and tutorials in French. Active, attentive, and experienced staff, ready to help you configure your accounts, servers, and bots. Dive into an entirely francophone world and bring your French to the next level!",
+      "fr": "Réseau regroupant la communauté Discord francophone. Wiki, blog et tutoriels en français. Un staff actif, attentif et expérimenté, prêt à vous aider pour configurer vos comptes, serveurs et bots. Rencontre la première communauté française bénévole d'entraide en france !"
+    },
+    "service": "Discord FR",
+    "version": "1.0.0",
+    "logo": "https://i.discord.fr/Kd3.jpg",
+    "thumbnail": "https://i.discord.fr/nmj.jpg",
+    "color": "#4D91FF",
+    "tags": [
+      "discord",
+      "fr",
+      "discord fr",
+      "discord.fr",
+      "discordapp.fr",
+      "discord support fr",
+      "discord-support.fr",
+      "discord france",
+      "dsc fr"
+    ],
+    "category": "other",
+    "regExp": "([a-z0-9]+)[.]discord.fr"
+  }
