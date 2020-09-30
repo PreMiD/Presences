@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "xuply",
+      largeImageKey: "xuply"
     },
     browsingStamp = Math.floor(Date.now() / 1000),
     page = window.location.pathname;
