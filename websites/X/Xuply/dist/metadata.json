@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "BBQ",
+    "id": "298888568279924746"
+  },
+  "url": "xuply.dev",
+  "description": {
+    "tr": "Xuply discord botları ve daha fazlası için basit bir kod paylaşım platformudur.",
+    "en": "Xuply is a simple code sharing platform for discord bots and more."
+  },
+  "service": "Xuply",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/fMUpAe0.png",
+  "thumbnail": "http://i.imgur.com/a/AiGDoAD.png",
+  "color": "#3b1b8a",
+  "tags": [
+    "discord",
+    "coding",
+    "development",
+    "turkish"
+  ],
+  "category": "other"
+}
