@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "web",
+    "id": "526087204674600966"
+  },
+  "service": "EA Origin",
+  "description": {
+    "en": "Play great PC games and connect with your friends, all in one place."
+  },
+  "url": "origin.com",
+  "version": "10.4.74-2461",
+  "logo": "https://i.imgur.com/M5aQ6b2.png",
+  "thumbnail": "https://i.imgur.com/M5aQ6b2.png",
+  "color": "#F56C2D",
+  "tags": [
+    "games",
+    "social"
+  ],
+  "category": "games"
+}
