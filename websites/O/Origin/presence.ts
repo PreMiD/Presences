@@ -30,6 +30,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("profile/wishlist")) {
     presenceData.details = "Viewing their wishlist";
   } else if (document.location.pathname.startsWith("profile/friends")) {
+    presenceData.details = "Viewing a friend's profile";
     };
     presence.setActivity(PresenceData);
 });
