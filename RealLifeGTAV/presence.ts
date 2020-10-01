@@ -1,9 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "760863245224640555"
 }), browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", function () {
-    var presenceData = {
+    const presenceData = {
         largeImageKey: "reallifegtav"
     };
     presenceData.startTimestamp = browsingStamp;
