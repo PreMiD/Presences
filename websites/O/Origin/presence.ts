@@ -28,6 +28,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing their wishlist";
   } else if (document.location.pathname.startsWith("profile/friends")) {
     presenceData.details = "Viewing their friends list";
+  };
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
