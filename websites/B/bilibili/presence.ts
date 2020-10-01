@@ -36,15 +36,20 @@ let currentTime: any,
   paused: any,
   playback: any,
   iFramePaused: any;
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: { duration: any; currTime: any; dur: any; test: any };
+  }) => {
+    playback = data.iframe_video.duration !== null ? true : false;
 
-  if (playback) {
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    iFramePaused = data.iframe_video.test;
+    if (playback) {
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.dur;
+      iFramePaused = data.iframe_video.test;
+    }
   }
-});
+);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
