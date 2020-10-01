@@ -8,16 +8,16 @@ presence.on("UpdateData", async () => {
       largeImageKey: "bigdefault"
   };
   
-      const pathname = document.location.pathname.split("/").splice(1);
+      const pathname = document.location.pathname.split("/").splice(1),
+        queryString = document.location.search.substring(1);
       presenceData.startTimestamp = browsingStamp;
       switch (pathname[0]) {
           //Play Modes
           case "":
-              const queryString = document.location.search.substring(1);
               presenceData.smallImageKey = "play";
               presenceData.smallImageText = "Ingame...";
               if (queryString) {
-                const queryObj = parseQuery(document.location.search.substring(1));
+                const queryObj = parseQuery(queryString);
                 switch (queryObj.play) {
                   case "1":
                     presenceData.details = "Sprint";
