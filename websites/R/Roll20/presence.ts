@@ -1,21 +1,16 @@
-var websiteLoadTimestamp = Math.floor(Date.now() / 1000);
-
-var presence = new Presence({
+const presence = new Presence({
   clientId: "761236386724446238"
-}),
-
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
 });
 
+const websiteLoadTimestamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
+  let presenceData: PresenceData = {
       largeImageKey: "roll20_logo",
-      startTimestamp: websiteLoadTimestamp,
+      startTimestamp: websiteLoadTimestamp
   };
 
-  var hideDetails = await presence.getSetting('hideDetails');
+  const hideDetails = await presence.getSetting('hideDetails');
 
   if(document.location.pathname.endsWith('roll20.net') || document.location.pathname.includes('/welcome')) {
     presenceData.details = "Viewing home page";
@@ -77,7 +72,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading Compendium";
   }
   else if(document.location.hostname.includes('wiki.roll20.net')) {
-    presenceData.details = "Reading Wiki"
+    presenceData.details = "Reading Wiki";
     // don't include state for wiki creation discussion etc.
     if(document.getElementById('page-title') != undefined && !document.location.pathname.includes('index.php') && !hideDetails) {
       presenceData.state = document.getElementById('page-title').textContent;
