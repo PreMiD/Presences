@@ -14,47 +14,47 @@ presence.on("UpdateData", async () => {
       switch (pathname[0]) {
           //Play Modes
           case "":
-              const queryString = document.location.search.substring(1)
+              const queryString = document.location.search.substring(1);
               presenceData.smallImageKey = "play";
               presenceData.smallImageText = "Ingame...";
               if (queryString) {
                 const queryObj = parseQuery(document.location.search.substring(1));
                 switch (queryObj.play) {
                   case "1":
-                    presenceData.details = "Sprint"
+                    presenceData.details = "Sprint";
                     if(queryObj.rule) {
-                      presenceData.state = "Special Ruleset"
+                      presenceData.state = "Special Ruleset";
                     }
                     else {
                       presenceData.state = sprintLineMode(queryObj.mode);
                     }
                     break;
                   case "2":
-                    presenceData.details = "Practise"
+                    presenceData.details = "Practise";
                     break;
                   case "3":
-                    presenceData.details = "Cheese Race"
+                    presenceData.details = "Cheese Race";
                     break;
                   case "4":
-                    presenceData.details = "Survival"
+                    presenceData.details = "Survival";
                     break;
                   case "5":
-                    presenceData.details = "Ultra"
+                    presenceData.details = "Ultra";
                     break;
                   case "6":
-                    presenceData.details = "Playing Custom Map"
+                    presenceData.details = "Playing Custom Map";
                     presenceData.state = "Map ID: " + queryObj.map;
                     break;
                   case "7":
-                    presenceData.details = "20TSD"
+                    presenceData.details = "20TSD";
                     break;
                   case "8":
-                    presenceData.details = "PC Mode"
+                    presenceData.details = "PC Mode";
                     break;
                 }
               }
               else {
-                presenceData.details = "Live"
+                presenceData.details = "Live";
               }
               break;
           //Leaderboards
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
             break;
           case "map": 
             presenceData.details = "Viewing Map: " + document.querySelector("h1").innerText;
-            presenceData.state = "Map ID: " + pathname[1]
+            presenceData.state = "Map ID: " + pathname[1];
             break;
           //User
           case "u": 
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
 
 function parseQuery(search : string) {
   return JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) });
-};
+}
 function leaderboardText(innerText : string) {
   return "Browsing "+innerText+" Leaderboards";
 };
