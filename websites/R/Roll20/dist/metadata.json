@@ -1,0 +1,29 @@
+{
+   "$schema": "https://schemas.premid.app/metadata/1.0",
+   "author": {
+      "name": "MrBartusek",
+      "id": "212988300137463809"
+   },
+   "service": "Roll20",
+   "description": {
+     "en": "Play games anywhere. Share them with anyone. With Roll20 as your virtual tabletop, your adventures are limitless.",
+     "pl": "Graj tam gdzie chcesz. Graj z kim chcesz. Z wirtualnym stołem Roll20, możesz prowadzić prowadzić swoje przygody bez żadnych limitów."
+   },
+   "url": [
+     "roll20.net",
+     "app.roll20.net",
+     "marketplace.roll20.net",
+     "blog.roll20.net",
+     "wiki.roll20.net"
+   ],
+   "version": "1.0.0",
+   "logo": "https://s3.amazonaws.com/files.d20.io/marketplace/527279/nvsTfqKL38EeMpudZyiUeg/med.png?1526331193298",
+   "thumbnail": "https://i.imgur.com/NfgSJAF.png",
+   "color": "#af1f8e",
+   "tags": [ 
+    "dungeons",
+    "dragons", 
+    "dnd"
+  ],
+   "category": "games"
+}
