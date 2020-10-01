@@ -4,31 +4,22 @@
     "name": "N0chteil ^^",
     "id": "495901098926669825"
   },
-  "contributors": [
-    {
-      "name": "N0chteil",
-      "id": "495901098926669825"
-    }
-  ],
-  "url": [
-    "reallifegtav.de",
-    "www.reallifegtav.de"
-  ],
+  "service": "RealLifeGTAV",
   "description": {
     "en": "Real Life GTAV is a german FiveM roleplay server with custom scripts and more!",
-	  "de": "Real Life GTAV ist ein deutscher FiveM Roleplay Server mit eigenen Scripts und mehr!"
+    "de": "Real Life GTAV ist ein deutscher FiveM Roleplay Server mit eigenen Scripts und mehr!"
   },
-  "service": "Real Life GTAV",
+  "url": [
+    "reallifegtav.de"
+  ],
   "version": "1.0.0",
   "logo": "https://i.imgur.com/MR2jPYB.png",
   "thumbnail": "https://i.imgur.com/QjWhm3D.png",
-  "color": "#000000",
+  "color": "#000",
   "tags": [
-    "gta",
-    "gtav",
     "fivem",
-    "roleplay",
-    "reallifegtav"
+    "reallifegtav",
+    "gtav"
   ],
   "category": "games"
 }
