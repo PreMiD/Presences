@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "760611329588985886"
   }),
   presenceData: PresenceData = {
@@ -31,6 +31,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing their wishlist";
   } else if (document.location.pathname.startsWith("profile/friends")) {
     };
-    presence.setActivity(profileData);
-  };
+    presence.setActivity(PresenceData);
+});
+
 
