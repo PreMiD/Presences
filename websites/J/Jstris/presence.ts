@@ -8,7 +8,6 @@ presence.on("UpdateData", async () => {
       largeImageKey: "bigdefault"
   };
   
-  if (document.location.hostname == "jstris.jezevec10.com") {
       const pathname = document.location.pathname.split("/").splice(1);
       presenceData.startTimestamp = browsingStamp;
       switch (pathname[0]) {
@@ -94,7 +93,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Idling";
             break;
       }
-  }
+
 
   if (presenceData.details == null) {
       presence.setTrayTitle();
@@ -109,7 +108,7 @@ function parseQuery(search : string) {
 }
 function leaderboardText(innerText : string) {
   return "Browsing "+innerText+" Leaderboards";
-};
+}
 function sprintLineMode(mode : string) {
   switch (mode) {
     case "1":
