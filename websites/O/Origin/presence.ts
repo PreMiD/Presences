@@ -15,6 +15,10 @@ presence.on("UpdateData", async () => {
     };
     if (document.location.pathname.startsWith("/store")) {
     presenceData.details = "Browsing for a game";
+  } else if (document.location.pathname.startsWith("/profile/achievements")) {
+    presenceData.details = "Viewing their achievement progress";
+  } else if (document.location.pathname.startsWith("/eaAccounts")) {
+    presenceData.details = "Editing their settings";
   } else if (document.location.pathname.startsWith("/game-library")) {
     presenceData.details = "Browsing their game library";
   } else if (document.location.pathname.startsWith("/search")) {
