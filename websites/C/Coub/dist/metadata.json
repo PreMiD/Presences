@@ -9,7 +9,7 @@
     "en": "Coub is a video sharing website. It allows users to create and share looping videos up to ten seconds long, using existing video from YouTube, Vimeo, or their own files"
   },
   "url": "coub.com",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/aZwjjLI.png",
   "thumbnail": "https://i.imgur.com/fcUbUgZ.png",
   "color": "#0084FF",
