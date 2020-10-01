@@ -1,16 +1,14 @@
 const presence = new Presence({
   clientId: "761236386724446238"
-});
-
-const websiteLoadTimestamp = Math.floor(Date.now() / 1000);
+}),
+websiteLoadTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "roll20_logo",
       startTimestamp: websiteLoadTimestamp
-  };
-
-  const hideDetails = await presence.getSetting('hideDetails');
+  },
+  hideDetails = await presence.getSetting('hideDetails');
 
   if(document.location.pathname.endsWith('roll20.net') || document.location.pathname.includes('/welcome')) {
     presenceData.details = "Viewing home page";
