@@ -25,5 +25,13 @@
     "dragons", 
     "dnd"
   ],
-   "category": "games"
+   "category": "games",
+   "settings": [
+    {
+        "id": "hideDetails",
+        "title": "Hide Details",
+        "icon": "fas fa-eye",
+        "value": false
+    }
+   ]
 }

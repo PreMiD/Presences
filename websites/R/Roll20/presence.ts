@@ -15,18 +15,22 @@ presence.on("UpdateData", async () => {
       startTimestamp: websiteLoadTimestamp,
   };
 
+  var hideDetails = await presence.getSetting('hideDetails');
+
   if(document.location.pathname.endsWith('roll20.net') || document.location.pathname.includes('/welcome')) {
     presenceData.details = "Viewing home page";
   }
   else if(document.location.pathname.includes('/editor')) {
     presenceData.details = "Playing campaign";
-    if(document.title) {
+    if(document.title && !hideDetails) {
       presenceData.state = document.title.replace(' | Roll20', '');
     }
   }
   else if(document.location.pathname.includes('/campaigns/details')) {
     presenceData.details = "Viewing game details";
-    presenceData.state = document.getElementsByClassName('campaignname')[0].textContent;
+    if(document.getElementsByClassName('campaignname').length > 0 && !hideDetails) {
+      presenceData.state = document.getElementsByClassName('campaignname')[0].textContent;
+    }
   }
   else if(document.location.pathname.includes('/lfg')) {
     presenceData.details = "Finding games to join";
@@ -51,7 +55,7 @@ presence.on("UpdateData", async () => {
   }
   else if(document.location.pathname.includes('/user')) {
     presenceData.details = "Viewing player profile";
-    if(document.getElementsByTagName('h1').length > 0) {
+    if(document.getElementsByTagName('h1').length > 0 && !hideDetails) {
       if(document.getElementsByTagName('h1')[0].classList.contains('editable'))
       {
         presenceData.details = "Viewing own profile";
@@ -75,18 +79,18 @@ presence.on("UpdateData", async () => {
   else if(document.location.hostname.includes('wiki.roll20.net')) {
     presenceData.details = "Reading Wiki"
     // don't include state for wiki creation discussion etc.
-    if(document.getElementById('page-title') != undefined && !document.location.pathname.includes('index.php')) {
+    if(document.getElementById('page-title') != undefined && !document.location.pathname.includes('index.php') && !hideDetails) {
       presenceData.state = document.getElementById('page-title').textContent;
     }
   }
   else if(document.location.pathname.includes('/forum')) {
-    if(document.location.pathname.includes('/post')) {
+    if(document.location.pathname.includes('/post') && !hideDetails) {
       presenceData.details = "Reading Forum Post";
       if(document.getElementsByClassName('posttitle').length > 0) {
         presenceData.state = document.getElementsByClassName('posttitle')[0].textContent;
       }
     }
-    else if(document.location.pathname.includes('/category')) {
+    else if(document.location.pathname.includes('/category') && !hideDetails) {
       presenceData.details = "Browsing Forum Category";
       if(document.getElementsByTagName('h1').length > 0) {
         presenceData.state = document.getElementsByTagName('h1')[0].textContent;
@@ -99,7 +103,7 @@ presence.on("UpdateData", async () => {
   else if(document.location.hostname.includes('blog.roll20.net')) {
     if(document.location.pathname.includes('/post')) {
       presenceData.details = "Reading Blog Post";
-      if(document.getElementsByTagName('h1').length > 0) {
+      if(document.getElementsByTagName('h1').length > 0 && !hideDetails) {
         presenceData.state = document.getElementsByTagName('h1')[0].textContent;
       }
     }
