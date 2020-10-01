@@ -24,13 +24,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/search")) {
     presenceData.details = "Searching the store";
   } else if (document.location.pathname.startsWith("/profile")) {
-    presenceData.details = "Viewing a friend's profile";
+    presenceData.details = "Viewing a profile";
   } else if (document.location.pathname.startsWith("/profile")) {
     presenceData.details = "Looking through their friends list.";
   } else if (document.location.pathname.startsWith("profile/wishlist")) {
     presenceData.details = "Viewing their wishlist";
   } else if (document.location.pathname.startsWith("profile/friends")) {
-    presenceData.details = "Viewing a friend's profile";
+    presenceData.details = "Viewing their friends list";
     };
     presence.setActivity(PresenceData);
 });
