@@ -3,16 +3,13 @@ const presence = new Presence({
   }),
   presenceData: PresenceData = {
     largeImageKey: "icon"
-  },
-  customData = false;
+  };
 
 presence.on("UpdateData", async () => {
-
   if (document.location.pathname == "/my-home") {
     presenceData.details = "Browsing the homepage";
   } else if (document.location.pathname.startsWith("/store/download")) {
     presenceData.details = "Installing the Origin launcher";
-    };
     if (document.location.pathname.startsWith("/store")) {
     presenceData.details = "Browsing for a game";
   } else if (document.location.pathname.startsWith("/profile/achievements")) {
@@ -31,8 +28,13 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing their wishlist";
   } else if (document.location.pathname.startsWith("profile/friends")) {
     presenceData.details = "Viewing their friends list";
-    };
-    presence.setActivity(PresenceData);
+
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
 });
 
 
