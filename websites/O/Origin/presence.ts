@@ -32,7 +32,5 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("profile/friends")) {
     };
     presence.setActivity(profileData);
-  } else {
-    presenceData.details = "404 Page Not Found...";
   };
 
