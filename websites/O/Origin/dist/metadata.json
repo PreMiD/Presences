@@ -3,11 +3,11 @@
     "name": "web",
     "id": "526087204674600966"
   },
-  "service": "EA Origin",
+  "service": "Origin",
   "description": {
     "en": "Play great PC games and connect with your friends, all in one place."
   },
-  "url": "origin.com",
+  "url": "www.origin.com",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/M5aQ6b2.png",
   "thumbnail": "https://i.imgur.com/Ov7QVpj.jpg",
