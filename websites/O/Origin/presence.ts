@@ -7,32 +7,24 @@ var presence = new Presence({
   customData = false;
 
 presence.on("UpdateData", async () => {
-  customData = false;
 
-  if (document.location.pathname == "en-us/my-home") {
+  if (document.location.pathname == "/my-home") {
     presenceData.details = "Browsing the homepage";
-  } else if (document.location.pathname.startsWith("/en-us/store/download")) {
+  } else if (document.location.pathname.startsWith("/store/download")) {
     presenceData.details = "Installing the Origin launcher";
     };
-    if (document.location.pathname.startsWith("en-us/store")) {
+    if (document.location.pathname.startsWith("/store")) {
     presenceData.details = "Browsing for a game";
-  } else if (document.location.pathname.startsWith("/en-us/search")) {
+  } else if (document.location.pathname.startsWith("/search")) {
     presenceData.details = "Searching the store";
-  } else if (document.location.pathname.startsWith("/en-us/profile/")) {
-    presenceData.details = "Viewing a user's profile";
-  } else if (document.location.pathname.startsWith("/en-us/profile")) {
+  } else if (document.location.pathname.startsWith("/profile/")) {
+    presenceData.details = "Viewing a friend's profile";
+  } else if (document.location.pathname.startsWith("/profile")) {
     presenceData.details = "Looking through their friends list.";
-  } else if (document.location.pathname.startsWith("en-us/friends")) {
+  } else if (document.location.pathname.startsWith("profile/friends")) {
     };
     presence.setActivity(profileData);
   } else {
     presenceData.details = "404 Page Not Found...";
-  }
-  if (!customData) {
-    presence.setActivity(presenceData);
-  }
-});
+  };
 
-presence.on("iFrameData", function (data) {
-  console.log(data);
-});
