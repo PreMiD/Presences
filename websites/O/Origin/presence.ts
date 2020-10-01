@@ -29,6 +29,15 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("profile/friends")) {
     presenceData.details = "Viewing their friends list";
   };
+  var profileData: PresenceData = {
+      details: "Viewing " + name + "'s Profile",
+      largeImageKey: "logo"
+    };
+    
+  var storeData: PresenceData = {
+      details: "Viewing " + game ,
+      largeImageKey: "logo"
+    };
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
