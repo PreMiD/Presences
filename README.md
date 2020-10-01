@@ -16,9 +16,8 @@ please feel free to open a
 
 ## Requirements to create a presence
 
-- You must have the
-  [latest TypeScript compiler](https://www.typescriptlang.org/#download-links)
-  version installed
+- You must have the [latest TypeScript compiler]
+  (https://www.typescriptlang.org/#download-links) version installed
 - Basic knowlege of TypeScript
 
 ## Getting started
