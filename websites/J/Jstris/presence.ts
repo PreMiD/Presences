@@ -6,11 +6,10 @@ browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "bigdefault"
-  };
-  
-    const pathname = document.location.pathname.split("/").splice(1),
-      queryString = document.location.search.substring(1);
-    presenceData.startTimestamp = browsingStamp;
+  },
+    pathname = document.location.pathname.split("/").splice(1),
+    queryString = document.location.search.substring(1);
+  presenceData.startTimestamp = browsingStamp;
     switch (pathname[0]) {
         //Play Modes
         case "":
