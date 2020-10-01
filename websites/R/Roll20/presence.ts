@@ -5,7 +5,7 @@ const presence = new Presence({
 const websiteLoadTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  let presenceData: PresenceData = {
+  const presenceData: PresenceData = {
       largeImageKey: "roll20_logo",
       startTimestamp: websiteLoadTimestamp
   };
