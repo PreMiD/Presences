@@ -9,14 +9,13 @@
     "en": "BeastFM is a US radio station with the #1 hits 24/7"
   },
   "service": "BeastFM",
-  "version": "1.0.3",
-  "logo": "https://i.imgur.com/l6meesB.png",
-  "thumbnail": "https://i.imgur.com/tWSpYUK.png",
-  "color": "#ff8300",
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/UtOgutm.png",
+  "thumbnail": "https://i.imgur.com/hLHoPD4.png",
+  "color": "#685884",
   "tags": [
     "radio",
     "music",
-    "entertainment"
   ],
   "category": "music"
 }
