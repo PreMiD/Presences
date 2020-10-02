@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing the homepage";
   } else if (document.location.pathname.startsWith("/store/download")) {
     presenceData.details = "Installing the Origin launcher";
-    if (document.location.pathname.startsWith("/store")) {
+  }  if (document.location.pathname.startsWith("/store")) {
     presenceData.details = "Browsing for a game";
   } else if (document.location.pathname.startsWith("/profile/achievements")) {
     presenceData.details = "Viewing their achievement progress";
