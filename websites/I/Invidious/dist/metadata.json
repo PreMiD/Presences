@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "ry",
+    "id": "421371986824921109"
+  },
+  "service": "Invidious",
+  "description": {
+    "en": "Invidious is an alternative front-end to YouTube.",
+    "de": "Invidious ist eine alternative Oberfläche für YouTube."
+  },
+  "url": [
+    "invidiou.site",
+    "invidious.fdn.fr",
+    "invidious.gcc-project.de",
+    "invidious.glie.town",
+    "invidious.site",
+    "invidious.snopyta.org",
+    "invidious.toot.koeln",
+    "invidious.tube",
+    "invidious.xyz",
+    "vid.mint.lgbt",
+    "yewtu.be"
+  ],
+  "version": "1.0.0",
+  "logo": "https://invidio.us/static/img/invidious-logo-dark.svg",
+  "thumbnail": "https://i.imgur.com/qBOgRqU.jpg",
+  "color": "#00B6F0",
+  "tags": [
+    "video",
+    "media"
+  ],
+  "category": "videos"
+}
