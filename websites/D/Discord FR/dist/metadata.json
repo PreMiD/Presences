@@ -45,5 +45,5 @@
       "dscfr"
     ],
     "category": "other",
-    "regExp": "([a-z0-9]+)[.]discord.fr"
+    "regExp": "(([a-z0-9]+)[.])*discord.fr"
   }
