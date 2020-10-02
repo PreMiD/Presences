@@ -1,9 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "761617743593209869"
-})
+});
 
 function getTime() {
-  var time = document
+  const time = document
     .getElementsByClassName("vjs-current-time-display")[0]
     .textContent.split(":")
     .map((n) => Number(n));
@@ -11,11 +11,11 @@ function getTime() {
     return Date.now() - (time[0] * 3600 + time[1] * 60 + time[2]) * 1000;
   } else {
     return Date.now() - (time[0] * 60 + time[1]) * 1000;
-  };
+  }
 };
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "icon",
     smallImageKey: document.getElementsByClassName("vjs-playing")[0] ? "play" : "pause",
     details: document.getElementsByTagName("h1")[0].textContent.trim(),
