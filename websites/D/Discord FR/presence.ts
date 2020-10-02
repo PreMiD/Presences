@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   };
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.hostname == "") {
+  if (document.location.hostname == "discord.fr") {
     if (document.location.pathname == "/") {
       presenceData.details = "Wiki, blog et tutoriels en français";
       presenceData.state = "discord.fr";
