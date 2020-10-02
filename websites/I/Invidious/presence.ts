@@ -12,7 +12,7 @@ function getTime() {
   } else {
     return Date.now() - (time[0] * 60 + time[1]) * 1000;
   }
-};
+}
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
