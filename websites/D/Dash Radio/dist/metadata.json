@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "apprehends",
+    "id": "202236922217758721"
+  },
+  "service": "Dash Radio",
+  "description": {
+    "en": "Rich presence for Dash Radio (IN ORDER FOR THIS TO WORK, TEXT MUST BE STATIC NOT SCROLLING)"
+  },
+  "url": "dashradio.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/o4Ea2f9.png",
+  "thumbnail": "https://i.imgur.com/o4Ea2f9.png",
+  "color": "#55effa",
+  "tags": [
+    "radio",
+    "music"
+  ],
+  "category": "music"
+}
