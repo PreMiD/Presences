@@ -19,6 +19,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "icon",
     smallImageKey: "more"
   };
+  let clear = false;
 
   switch (document.location.pathname.replace("/feed", "").split("/")[1]) {
     case "":
@@ -72,10 +73,14 @@ presence.on("UpdateData", async () => {
       break;
 
     default:
-      presence.setTrayTitle();
-      presenceData = undefined;
+      clear = true;
       break;
   }
 
-  presence.setActivity(presenceData);
+  if (clear) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
 });
