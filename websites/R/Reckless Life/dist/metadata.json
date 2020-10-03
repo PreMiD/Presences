@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "apprehends",
+      "id": "202236922217758721"
+    },
+    "service": "Reckless Life",
+    "description": {
+      "en": "Rich presence for the Foster website that operates under the name Reckless Life"
+    },
+    "url": "reckless.life",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/SnK6byp.png",
+    "thumbnail": "https://i.imgur.com/SnK6byp.png",
+    "color": "#d61515",
+    "tags": [
+      "discord",
+      "bot",
+      "moderation"
+    ],
+    "category": "other"
+}
