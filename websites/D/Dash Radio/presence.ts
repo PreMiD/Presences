@@ -10,10 +10,9 @@ let songName: HTMLElement,
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  }, page = window.location.pathname;
+  };
 
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-  if (page.includes("home")) {
       songName = document.querySelector(
         "header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Title-Text"
       );
@@ -37,7 +36,6 @@ presence.on("UpdateData", () => {
 
     presenceData.details = songNameS;
     presenceData.state = songArtistS;
-  }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
