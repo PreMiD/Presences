@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
     largeImageKey: "icon",
     smallImageKey: "more"
-  }
+  };
 
   switch (document.location.pathname.replace("/feed", "").split("/")[1]) {
     case "":
