@@ -15,7 +15,7 @@ function getTime() {
 }
 
 presence.on("UpdateData", async () => {
-  let presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "icon",
     smallImageKey: "more"
   };
