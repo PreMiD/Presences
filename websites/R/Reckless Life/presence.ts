@@ -2,15 +2,11 @@ const presence = new Presence({
     clientId: "644079842312192020"
   });
 
-var username: HTMLElement,
+let username: HTMLElement,
     guildName: HTMLElement,
     usernameString: string;
 
-const defaults = {
-  guildName: Element.toString(),
-  ignoreRestArgs: false,
-};
-  
+
   presence.on("UpdateData", () => {
     const presenceData: PresenceData = {
       largeImageKey: "logo"
