@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   };
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.hostname == "discord.fr") { // Page d'acceuil
+  if (document.location.hostname === "discord.fr") { // Page d'acceuil
     if (document.location.pathname == "/") {
       presenceData.details = "Wiki, blog et tutoriels en français";
       presenceData.state = "discord.fr";
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Page d'acceuil";
 
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/serveur/") { // Page Serveur
+    } else if (document.location.pathname.includes("/serveur")) { // Page Serveur
       presenceData.details = "Serveur d'entraide français.";
       presenceData.state = "discord.gg/fr";
 
@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "discord.fr/serveur";
 
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/blog/") { // Blog
+    } else if (document.location.pathname.includes("/blog")) { // Blog
       presenceData.details = "Consulte le Blog";
 
       presenceData.largeImageKey = "blog";
@@ -35,15 +35,18 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "discord.fr/blog";
 
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/wiki/") { // Wiki
+    } else if (document.location.pathname.includes("/wiki")) { // Wiki
       presenceData.details = "Consulte le wiki";
 
       presenceData.largeImageKey = "wiki";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/wiki";
 
+      const wiki = document.location.pathname.split("/");
+      if (wiki[2] !== undefined) presenceData.smallImageText = `discord.fr/wiki/${wiki.splice(2).join("/")}`;
+
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/recrutement/") { // Recrutement
+    } else if (document.location.pathname.includes("/recrutement")) { // Recrutement
       presenceData.details = "Consulte la page de recrutement";
 
       presenceData.largeImageKey = "recrutement";
@@ -51,7 +54,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "discord.fr/recrutement";
 
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/partenariat/") { // Partenariat
+    } else if (document.location.pathname.includes("/partenariat")) { // Partenariat
       presenceData.details = "Consulte la page de partenariat";
 
       presenceData.largeImageKey = "partenariat";
@@ -63,7 +66,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "i.discord.fr") { // Image i.discord.fr
+  } else if (document.location.hostname === "i.discord.fr") { // Image i.discord.fr
     presenceData.details = "Consulte une image";
     presenceData.state = "i.discord.fr";
 
@@ -72,7 +75,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "i.discord.fr";
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "support.discord.fr") { // Support Discord FR
+  } else if (document.location.hostname === "support.discord.fr") { // Support Discord FR
     if (document.location.pathname == "/") {
       presenceData.details = "Team Support";
       presenceData.state = "via ModMail";
@@ -82,7 +85,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "support.discord.fr";
 
       presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/logs/") { // Support Discord FR - Ticket
+    } else if (document.location.pathname.includes("/logs/")) { // Support Discord FR - Ticket
       const codelogs = document.location.pathname.split("/");
       presenceData.details = "Consulte une archive de ticket";
       presenceData.state = codelogs[2];
@@ -96,8 +99,8 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "mc.discord.fr") { // Dynmap Discord FR
-    if (document.location.pathname == "/") {
+  } else if (document.location.hostname === "mc.discord.fr") { // Dynmap Discord FR
+    if (document.location.pathname === "/") {
       presenceData.details = "Serveur Minecraft de Discord.FR";
       presenceData.state = "mc.discord.fr (Minecraft 1.16.3)";
 
@@ -110,7 +113,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "giveaways.discord.fr") { // Giveaways Page
+  } else if (document.location.hostname === "giveaways.discord.fr") { // Giveaways Page
     if (document.location.pathname == "/") {
       presenceData.details = "Dashboard d'inscription";
       presenceData.state = "Giveaways sur discord.gg/fr";
