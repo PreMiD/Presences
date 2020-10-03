@@ -23,7 +23,6 @@ presence.on("UpdateData", () => {
         songNameS = songName.innerText;
       }
 
-
     songArtist = document.querySelector(
       "header.MuiAppBar-root > div.music-dataview-container > span.App-Player-Song-Artist-Text"
     );
