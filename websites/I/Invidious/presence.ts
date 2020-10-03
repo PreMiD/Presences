@@ -15,20 +15,67 @@ function getTime() {
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
+  let presenceData: PresenceData = {
     largeImageKey: "icon",
-    smallImageKey: document.getElementsByClassName("vjs-playing")[0] ? "play" : "pause",
-    details: document.getElementsByTagName("h1")[0].textContent.trim(),
-    state: document.getElementById("channel-name").textContent
-  };
-
-  if (presenceData.smallImageKey === "play")
-    presenceData.startTimestamp = getTime();
-
-  if (document.location.pathname !== "/watch") {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
+    smallImageKey: "more"
   }
+
+  switch (document.location.pathname.replace("/feed", "").split("/")[1]) {
+    case "":
+    case "popular":
+      presenceData.details = "Browsing popular videos";
+      break;
+
+    case "trending":
+      presenceData.details = "Browsing trending videos";
+      break;
+
+    case "subscriptions":
+    case "subscription_manager":
+      presenceData.details = "Browsing subscriptions";
+      break;
+
+    case "view_all_playlists":
+      presenceData.details = "Browsing playlists";
+      break;
+
+    case "history":
+      presenceData.details = "Browsing watch history";
+      break;
+
+    case "change_password":
+    case "clear_watch_history":
+    case "data_control":
+    case "delete_account":
+    case "licenses":
+    case "preferences":
+    case "privacy":
+    case "token_manager":
+      presenceData.details = "Managing preferences";
+      break;
+
+    case "watch":
+      presenceData.smallImageKey = document.getElementsByClassName("vjs-playing")[0] ? "play" : "pause";
+      presenceData.details = document.getElementsByTagName("h1")[0].textContent.trim();
+      presenceData.state = document.getElementById("channel-name").textContent;
+      presenceData.startTimestamp = document.getElementsByClassName("vjs-playing")[0] ? getTime() : undefined;
+      break;
+
+    case "playlist":
+      presenceData.details = "Viewing playlist";
+      presenceData.state = document.getElementsByTagName("h3")[0].textContent;
+      break;
+
+    case "channel":
+      presenceData.details = "Viewing channel";
+      presenceData.state = document.getElementsByClassName("channel-profile")[0].textContent.trim();
+      break;
+
+    default:
+      presence.setTrayTitle();
+      presenceData = undefined;
+      break;
+  }
+
+  presence.setActivity(presenceData);
 });
