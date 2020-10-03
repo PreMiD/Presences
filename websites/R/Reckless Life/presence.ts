@@ -6,7 +6,6 @@ let username: HTMLElement,
     guildName: HTMLElement,
     usernameString: string;
 
-
   presence.on("UpdateData", () => {
     const presenceData: PresenceData = {
       largeImageKey: "logo"
