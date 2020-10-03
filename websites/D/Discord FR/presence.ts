@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname == "giveaways.discord.fr") { // Giveaways
+  } else if (document.location.hostname == "giveaways.discord.fr") { // Giveaways Page
     if (document.location.pathname == "/") {
       presenceData.details = "Dashboard d'inscription";
       presenceData.state = "Giveaways sur discord.gg/fr";
