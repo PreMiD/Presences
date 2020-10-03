@@ -10,13 +10,10 @@ var guildName: any,
     const presenceData: PresenceData = {
       largeImageKey: "logo"
     };
-  
-    const browsingStamp = Math.floor(Date.now() / 1000);
+    
     const page = window.location.pathname;
   
-    presenceData.startTimestamp = browsingStamp;
-
-    console.log(page);
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     
     if(page == "/") {
       presenceData.details = "Home Page";
@@ -52,4 +49,3 @@ var guildName: any,
       presence.setActivity(presenceData);
     }
   });
-  
