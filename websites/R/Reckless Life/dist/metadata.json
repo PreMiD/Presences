@@ -3,14 +3,14 @@
       "name": "apprehends",
       "id": "202236922217758721"
     },
-    "service": "Reckless Life",
+    "service": "Foster",
     "description": {
-      "en": "Rich presence for the Foster website that operates under the name Reckless Life"
+      "en": "Foster discord bot website (operates under reckless.life domain)"
     },
     "url": "reckless.life",
     "version": "1.0.0",
     "logo": "https://i.imgur.com/SnK6byp.png",
-    "thumbnail": "https://i.imgur.com/SnK6byp.png",
+    "thumbnail": "https://i.imgur.com/K0eOJUw.png",
     "color": "#d61515",
     "tags": [
       "discord",
