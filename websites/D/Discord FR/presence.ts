@@ -29,14 +29,19 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/blog")) { // Blog
       presenceData.details = "Consulte le Blog";
+      presenceData.state = "";
 
       presenceData.largeImageKey = "blog";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/blog";
 
+      const blog = document.location.pathname.split("/");
+      if (blog[2] !== undefined) presenceData.smallImageText = `discord.fr/blog/${blog.splice(2).join("/")}`;
+
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/wiki")) { // Wiki
       presenceData.details = "Consulte le wiki";
+      presenceData.state = "";
 
       presenceData.largeImageKey = "wiki";
       presenceData.smallImageKey = "dfr";
@@ -85,14 +90,16 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "support.discord.fr";
 
       presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/logs/")) { // Support Discord FR - Ticket
-      const codelogs = document.location.pathname.split("/");
+    } else if (document.location.pathname.includes("/logs")) { // Support Discord FR - Ticket
       presenceData.details = "Consulte une archive de ticket";
-      presenceData.state = codelogs[2];
+      presenceData.state = "";
 
       presenceData.largeImageKey = "logs";
       presenceData.smallImageKey = "dfr";
-      presenceData.smallImageText = "support.discord.fr/logs/" + codelogs[2]; 
+      presenceData.smallImageText = ""; 
+
+      const support = document.location.pathname.split("/");
+      if (support[2] !== undefined) presenceData.smallImageText = `support.discord.fr/logs/${support.splice(2).join("/")}`;
 
       presence.setActivity(presenceData);
     } else {
