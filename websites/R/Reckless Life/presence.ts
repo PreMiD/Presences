@@ -36,6 +36,8 @@ let username: HTMLElement,
 
       presenceData.smallImageKey = "admin";
       presenceData.smallImageText = usernameString;
+    } else {
+      presenceData.details = "Unknown Page";
     }
   
     if (presenceData.details == null) {
