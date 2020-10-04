@@ -22,10 +22,10 @@
     "pl": "Niezależna lista Discord, która daje dużą szansę botom i serwerom każdej wielkości!",
     "pt": "Lista de discord imparcial, dá a bots e servidores de todos os tamanhos uma grande chance!",
     "sv_SE": "Discords opartiska lista, ger alla bots och servrar en stor chans!",
-    "tr": "Discord'un tarafsız Bot Listesi , Botunuz ve sizin için oldukça büyük bir şans!"
+    "tr": "Discord'un tarafsız bot listesi, büyüklüğü ne olursa olsun bütün botlara ve sunuculara büyük bir şans veriyor!"
   },
   "service": "Discord Extreme List",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/ewofSNN.png",
   "thumbnail": "https://i.imgur.com/tMrrgGu.png",
   "color": "#b114ff",

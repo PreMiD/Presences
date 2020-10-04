@@ -1,7 +1,7 @@
-const presence = new Presence({clientId: "751384892570468404"}),
-browsingStamp = Math.floor(Date.now() / 1000),
-path = document.location.pathname,
-path2 = document.location.search;
+const presence = new Presence({ clientId: "751384892570468404" }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  path = document.location.pathname,
+  path2 = document.location.search;
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -50,7 +50,5 @@ presence.on("UpdateData", async () => {
     if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
-    } else {
-        presence.setActivity(presenceData);
     }
-});
+}

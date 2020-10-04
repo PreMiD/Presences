@@ -6,7 +6,7 @@ let title: string, artist: string, dj: string, listeners: number;
 
 function getData(): void {
   window
-    .fetch("https://azura.defectiveness.ml/api/nowplaying/15")
+    .fetch("https://azura.beastfm.pw/api/nowplaying/1")
     .then((res) => res.json())
     .then((res) => {
       title = res.now_playing.song.title || "Loading..";
@@ -25,10 +25,7 @@ presence.on("UpdateData", async () => {
     smallImageKey: "live"
   };
 
-  if (
-    document.location.hostname === "www.beastfm.pw" ||
-    document.location.hostname === "beastfm.pw"
-  ) {
+  if (document.location.hostname === "beastfm.pw") {
     presenceData.details = `🎵 | ${title} - ${artist}`;
     presenceData.state = `🎙️ | ${dj}`;
     presenceData.smallImageText = `Listeners: ${listeners}`;
