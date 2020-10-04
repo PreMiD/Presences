@@ -5,12 +5,12 @@
   },
   "service": "Dash Radio",
   "description": {
-    "en": "Dash Radio is a premium radio website without the ads. Available on over 50 platforms. (IN ORDER FOR THIS TO WORK, TEXT MUST BE STATIC NOT SCROLLING)"
+    "en": "100% Free Music. More Variety. Zero Commercials. The Best DJ's & Stations. No BS"
   },
   "url": "dashradio.com",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/o4Ea2f9.png",
-  "thumbnail": "https://i.imgur.com/o4Ea2f9.png",
+  "thumbnail": "https://i.imgur.com/8612XSi.png",
   "color": "#55effa",
   "tags": [
     "radio",
