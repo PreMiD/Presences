@@ -38,8 +38,6 @@ presence.on("UpdateData", async () => {
   else if (songArtist != null) {
       songArtistS = songArtist.innerText, songArtistS = songArtistS.replace("&amp;", "&");
   }
-
-  console.log(songNameS + " - " + songArtistS);
   
   if(songNameS == "None" && songArtistS == "None" || songArtistS == "") {
       presenceData.smallImageKey = "paused";
