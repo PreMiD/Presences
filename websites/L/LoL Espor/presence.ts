@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Viewing mathces.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/live/") ){
-    let liveqs = document.querySelector("div.teams").textContent;
+    const liveqs = document.querySelector("div.teams").textContent;
     presenceData.details = "Live!";
     presenceData.state = liveqs.replace("VS", " vs ") + " is watching.";
     presenceData.startTimestamp = time;
@@ -33,9 +33,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Looking match histories.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/vod/")){
-    let test = document.querySelector("div.teams").textContent;
+    const teams = document.querySelector("div.teams").textContent;
     presenceData.details = "Watching repeats";
-    presenceData.state = test.replace("VS", " vs ") + " watching the match replay." 
+    presenceData.state = teams.replace("VS", " vs ") + " watching the match replay." 
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/standings/")){
     presenceData.details = "Standings";
