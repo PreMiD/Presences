@@ -1,14 +1,14 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "759897044323794985"
 });
 
-var time = Math.floor(Date.now() / 1000);
+const time = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  var path = window.location.pathname;
+  const path = window.location.pathname;
   if (path === "/") {
     presenceData.details = "Anasayfa";
     presenceData.state = "Hiçbir şey yapmıyor.";
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Maç karşılaşmalarına bakıyor.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/live/") ){
-    var test = document.querySelector("div.teams").textContent;
+    const test = document.querySelector("div.teams").textContent;
       presenceData.details = "Canlı Yayın";
     presenceData.state = test.replace("VS", " vs ") + " izliyor.";
     presenceData.startTimestamp = time;
