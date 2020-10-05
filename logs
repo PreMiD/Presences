@@ -1,0 +1,468 @@
+[33mcommit 547af0fc4143dac47624cf0f284600f7d395e1a4[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: mertkaraca34 <38283518+mertkaraca34@users.noreply.github.com>
+Date:   Tue Oct 6 00:24:56 2020 +0900
+
+    Update presence.ts
+
+[33mcommit 32565073c5810934beb76eccd2292a80322235a7[m
+Author: mertkaraca34 <38283518+mertkaraca34@users.noreply.github.com>
+Date:   Tue Oct 6 00:18:56 2020 +0900
+
+    Update presence.ts
+
+[33mcommit e313da4cfa7c75df029352904aee62d2ed0990f4[m
+Author: mertkaraca34 <38283518+mertkaraca34@users.noreply.github.com>
+Date:   Tue Oct 6 00:18:28 2020 +0900
+
+    Update presence.ts
+
+[33mcommit 2233dba7195ca1346fc49bc6c2aa66f1df4f84cb[m
+Author: mertkaraca34 <38283518+mertkaraca34@users.noreply.github.com>
+Date:   Tue Oct 6 00:13:26 2020 +0900
+
+    Update metadata.json
+
+[33mcommit babb61384304ec121aecca4581d8ab030e9f4f14[m
+Author: mertkaraca34 <38283518+mertkaraca34@users.noreply.github.com>
+Date:   Tue Oct 6 00:12:32 2020 +0900
+
+    Update presence.ts
+
+[33mcommit e372f6c8951ee6c3f20fd157515107ae4fe095a8[m
+Author: mertkaraca34 <38283518+mertkaraca34@users.noreply.github.com>
+Date:   Tue Oct 6 00:11:57 2020 +0900
+
+    Update metadata.json
+
+[33mcommit 22690ab357594c97ab3914ae325ba0793ae2aeb4[m
+Author: mertkaraca34 <38283518+mertkaraca34@users.noreply.github.com>
+Date:   Tue Oct 6 00:09:08 2020 +0900
+
+    Update presence.ts
+
+[33mcommit 010284c408afc66c435e050f44e19ead37c4b0ca[m
+Author: mertkaraca34 <38283518+mertkaraca34@users.noreply.github.com>
+Date:   Tue Oct 6 00:08:36 2020 +0900
+
+    Update presence.ts
+
+[33mcommit 9f28d727652b8b8083c72c8d7fb2f1fe2c2a321a[m
+Author: mertkaraca34 <38283518+mertkaraca34@users.noreply.github.com>
+Date:   Mon Oct 5 23:54:25 2020 +0900
+
+    Add files via upload
+
+[33mcommit 70460a12fa808dc64af07acc1fa57a9b6edd5009[m
+Author: Alanexei <cpowers619@gmail.com>
+Date:   Mon Oct 5 08:18:14 2020 -0500
+
+    Update Presence Reviewers
+
+[33mcommit 630ed276dad89eedc72c53df623bf0e7067cca0b[m
+Merge: 19fbea31 fdc33353
+Author: TheDrop <35700745+TheDropX@users.noreply.github.com>
+Date:   Mon Oct 5 16:12:39 2020 +0300
+
+    Merge pull request #2279 from PreMiD/dependabot/npm_and_yarn/terser-5.3.4
+    
+    🔼 Bump terser from 5.3.2 to 5.3.4
+
+[33mcommit 19fbea31cf0716a2ebbf30a788cc296a7df376fb[m
+Merge: e658d089 ad53887f
+Author: TheDrop <35700745+TheDropX@users.noreply.github.com>
+Date:   Mon Oct 5 16:12:20 2020 +0300
+
+    Merge pull request #2278 from PreMiD/dependabot/npm_and_yarn/jsonschema-1.2.8
+    
+    🔼 Bump jsonschema from 1.2.7 to 1.2.8
+
+[33mcommit e658d089428155522d1a0e59ffe38c187b6cb7ef[m
+Merge: 20565d6a 3baea66e
+Author: TheDrop <35700745+TheDropX@users.noreply.github.com>
+Date:   Mon Oct 5 16:11:59 2020 +0300
+
+    Merge pull request #2277 from PreMiD/dependabot/npm_and_yarn/typescript-eslint/parser-4.3.0
+    
+    🔼 Bump @typescript-eslint/parser from 4.2.0 to 4.3.0
+
+[33mcommit fdc33353bb1bb97c7d8d0f744c41d6ee6790bdae[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Oct 5 06:16:16 2020 +0000
+
+    🔼 Bump terser from 5.3.2 to 5.3.4
+    
+    Bumps [terser](https://github.com/terser/terser) from 5.3.2 to 5.3.4.
+    - [Release notes](https://github.com/terser/terser/releases)
+    - [Changelog](https://github.com/terser/terser/blob/master/CHANGELOG.md)
+    - [Commits](https://github.com/terser/terser/compare/v5.3.2...v5.3.4)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit ad53887f589a91a9d5651d41b80d6dbd122e3cb2[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Oct 5 06:15:58 2020 +0000
+
+    🔼 Bump jsonschema from 1.2.7 to 1.2.8
+    
+    Bumps [jsonschema](https://github.com/tdegrunt/jsonschema) from 1.2.7 to 1.2.8.
+    - [Release notes](https://github.com/tdegrunt/jsonschema/releases)
+    - [Commits](https://github.com/tdegrunt/jsonschema/compare/v1.2.7...v1.2.8)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 3baea66e8fdbde70913d54a38569d484df6168d8[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Oct 5 06:15:40 2020 +0000
+
+    🔼 Bump @typescript-eslint/parser from 4.2.0 to 4.3.0
+    
+    Bumps [@typescript-eslint/parser](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/parser) from 4.2.0 to 4.3.0.
+    - [Release notes](https://github.com/typescript-eslint/typescript-eslint/releases)
+    - [Changelog](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/parser/CHANGELOG.md)
+    - [Commits](https://github.com/typescript-eslint/typescript-eslint/commits/v4.3.0/packages/parser)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 20565d6a1f70958f20bc11277cfbb5cb6e4ca0d5[m
+Author: Bas950 <me@bas950.com>
+Date:   Sun Oct 4 20:16:24 2020 +0200
+
+    Update CODEOWNERS
+
+[33mcommit d9ff10c9ba97f8d9d2c036ed54d9edfd4872e5da[m
+Merge: ad0dc2e5 6573c391
+Author: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>
+Date:   Sun Oct 4 17:26:34 2020 +0000
+
+    Merge pull request #2264 from MrBartusek/roll20
+    
+    New Presence: Roll20
+
+[33mcommit ad0dc2e52e36e61990b2a2b99c8cbc21f6c6e439[m
+Author: Florian Metz <me@timeraa.dev>
+Date:   Sun Oct 4 19:13:16 2020 +0200
+
+    Update CODEOWNERS
+
+[33mcommit 6573c3919427bc1d32c2d9f047993e87d6f9e467[m
+Author: MrBartusek <bartusekcraft@gmail.com>
+Date:   Thu Oct 1 23:39:36 2020 +0200
+
+    Upload logo to imgur
+
+[33mcommit 6e20915d62d680691ed2322562a4ff0c76b4ed98[m
+Merge: 542b31da 92ea9702
+Author: Bas950 <me@bas950.com>
+Date:   Thu Oct 1 23:12:39 2020 +0200
+
+    Merge pull request #2265 from TheGamerzs/master
+    
+    Update Discord Invite
+
+[33mcommit 368f0386e621b64a5de1768da6ac3a991e12a870[m
+Author: MrBartusek <bartusekcraft@gmail.com>
+Date:   Thu Oct 1 22:36:22 2020 +0200
+
+    Fix last codacy issue
+
+[33mcommit 92ea9702d3471fc44890fd5751247dac9e0bbe87[m
+Author: TheGamerzs <44209534+TheGamerzs@users.noreply.github.com>
+Date:   Thu Oct 1 21:32:14 2020 +0100
+
+    Update README.md
+
+[33mcommit b5a51211b68d66b094e9a3d76241dbb52dc43d3d[m
+Author: TheGamerzs <44209534+TheGamerzs@users.noreply.github.com>
+Date:   Thu Oct 1 21:30:37 2020 +0100
+
+    Update README.md
+
+[33mcommit b011b94776d1ea14e5d8b78c8b2bc38870ea760f[m
+Author: TheGamerzs <44209534+TheGamerzs@users.noreply.github.com>
+Date:   Thu Oct 1 21:27:10 2020 +0100
+
+    Update README.md
+    
+    Discord Invite Link
+
+[33mcommit 95d8e560634e56b15df7ce20918fc38ab8d03756[m
+Author: MrBartusek <bartusekcraft@gmail.com>
+Date:   Thu Oct 1 19:03:00 2020 +0200
+
+     Fix codacy issues
+
+[33mcommit 70effe6d052c3f9dd3d5546da96caa91bbe5c0f1[m
+Author: MrBartusek <bartusekcraft@gmail.com>
+Date:   Thu Oct 1 18:58:54 2020 +0200
+
+    Fix codacy issues
+
+[33mcommit 3cfa2460e72af3963858979b6379a7b069e94cd6[m
+Author: MrBartusek <bartusekcraft@gmail.com>
+Date:   Thu Oct 1 18:49:46 2020 +0200
+
+    Add ability to hide details
+
+[33mcommit 6addb9976183bf8163c9f4ecc5598eed2a322199[m
+Author: MrBartusek <bartusekcraft@gmail.com>
+Date:   Thu Oct 1 18:26:48 2020 +0200
+
+    New Presence: Roll20
+
+[33mcommit 542b31da60aa44b330720e20878f52f925667d79[m
+Merge: c9a81a69 c1e6cbdc
+Author: Bas950 <me@bas950.com>
+Date:   Thu Oct 1 02:46:28 2020 +0200
+
+    Merge pull request #2260 from PreMiD/semid/qa/2020-10-01-00-41
+    
+    🤖 Semi-weekly SE
+
+[33mcommit c1e6cbdc01ba7f8a2fdf1eb396b095eb71948fd4[m
+Author: SeMiD <contact@premid.app>
+Date:   Thu Oct 1 00:41:53 2020 +0000
+
+    ♻️ Refactoring
+    
+    Signed-off-by: SeMiD <contact@premid.app>
+
+[33mcommit c9a81a69a76d61bf56fd1e50237c89f69a8589b9[m
+Merge: 2bfb0649 624c942f
+Author: Alanexei <cpowers619@gmail.com>
+Date:   Tue Sep 29 11:22:52 2020 -0500
+
+    Merge pull request #2230 from PreMiD/Migrate-Presences
+    
+    Migrate Presences
+
+[33mcommit 624c942ff5466e9addfd9c85a93bbdb4cef61a45[m
+Author: Alanexei <cpowers619@gmail.com>
+Date:   Tue Sep 29 11:22:33 2020 -0500
+
+    Transfer HBO Max
+
+[33mcommit 2bfb06496e173250323a90394eedfa55efd3a2fa[m
+Merge: 810262db 92957dd0
+Author: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>
+Date:   Tue Sep 29 13:15:25 2020 +0000
+
+    Merge pull request #2241 from igorquintaes/iq/fix-mangahost-chnumber
+    
+    Fix chapter number exibition on MangaHost
+
+[33mcommit 810262db12936412407a54dcf6eded29fa9d6467[m
+Merge: beec9380 c10be9db
+Author: Alanexei <cpowers619@gmail.com>
+Date:   Tue Sep 29 08:14:47 2020 -0500
+
+    Merge pull request #2242 from eren885/patch-1
+    
+    Fixed typos in Turkish description.
+
+[33mcommit beec9380ca219e4b70d0f44358bf01a99209b550[m
+Merge: f98ef2d6 80f6728e
+Author: mergify[bot] <37929162+mergify[bot]@users.noreply.github.com>
+Date:   Tue Sep 29 13:14:07 2020 +0000
+
+    Merge pull request #2243 from MySixSenses/master
+    
+    Add Flickr support.
+
+[33mcommit f98ef2d664a901ad7b993dbd214f84c0804ecad7[m
+Merge: 88ded370 b1369ac8
+Author: Alanexei <cpowers619@gmail.com>
+Date:   Tue Sep 29 08:13:04 2020 -0500
+
+    Merge pull request #2245 from Mirazex/master
+    
+    New Presence: Coub
+
+[33mcommit b1369ac8f9d91ab97a8b777d5fe2e9ca3744f7ab[m
+Author: Mirazex <mirax.developer@gmail.com>
+Date:   Tue Sep 29 01:12:09 2020 +0300
+
+    Update presence.ts
+
+[33mcommit 35199033f00fd0b2db9d9fb8f21740ec971ebeff[m
+Author: Mirazex <mirax.developer@gmail.com>
+Date:   Tue Sep 29 01:07:02 2020 +0300
+
+    Update presence.ts
+
+[33mcommit caf7d11042fe7890f94b08950d596686e3650a0f[m
+Author: Mirazex <mirax.developer@gmail.com>
+Date:   Tue Sep 29 00:43:23 2020 +0300
+
+    Update presence.ts
+
+[33mcommit efcfec8673b26fb56aed8932c100bb71a4e4fe20[m
+Author: Mirazex <mirax.developer@gmail.com>
+Date:   Tue Sep 29 00:30:35 2020 +0300
+
+    Update presence.ts
+
+[33mcommit d548a987668c1ab1bd24e0eaf2e9574f3a99c8bd[m
+Author: Mirazex <mirax.developer@gmail.com>
+Date:   Mon Sep 28 23:45:31 2020 +0300
+
+    New Presence: Coub
+
+[33mcommit 88ded370c3db7549718acfda489d68f035e9f581[m
+Merge: 16332b6f 0cb360de
+Author: TheDrop <35700745+TheDropX@users.noreply.github.com>
+Date:   Mon Sep 28 21:11:10 2020 +0300
+
+    Merge pull request #2244 from PreMiD/dependabot/npm_and_yarn/typescript-eslint/eslint-plugin-4.3.0
+    
+    🔼 Bump @typescript-eslint/eslint-plugin from 4.1.1 to 4.3.0
+
+[33mcommit 16332b6f69ce0e9014011ef8fc08d04b57c13b22[m
+Merge: cbd70296 63695f6b
+Author: TheDrop <35700745+TheDropX@users.noreply.github.com>
+Date:   Mon Sep 28 21:10:47 2020 +0300
+
+    Merge pull request #2239 from PreMiD/dependabot/npm_and_yarn/types/chrome-0.0.124
+    
+    🔼 Bump @types/chrome from 0.0.123 to 0.0.124
+
+[33mcommit 0cb360def9f2dede027b64a0891115d8daf0f39c[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Sep 28 18:10:28 2020 +0000
+
+    🔼 Bump @typescript-eslint/eslint-plugin from 4.1.1 to 4.3.0
+    
+    Bumps [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin) from 4.1.1 to 4.3.0.
+    - [Release notes](https://github.com/typescript-eslint/typescript-eslint/releases)
+    - [Changelog](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/CHANGELOG.md)
+    - [Commits](https://github.com/typescript-eslint/typescript-eslint/commits/v4.3.0/packages/eslint-plugin)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 63695f6bc3ea4953620c3bec9afe77afbb6c0af5[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Sep 28 18:10:21 2020 +0000
+
+    🔼 Bump @types/chrome from 0.0.123 to 0.0.124
+    
+    Bumps [@types/chrome](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/chrome) from 0.0.123 to 0.0.124.
+    - [Release notes](https://github.com/DefinitelyTyped/DefinitelyTyped/releases)
+    - [Commits](https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/chrome)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit cbd70296bea3c15c34185957f334851e6733ec9b[m
+Merge: 2ad5372b e8c85feb
+Author: TheDrop <35700745+TheDropX@users.noreply.github.com>
+Date:   Mon Sep 28 21:08:16 2020 +0300
+
+    Merge pull request #2237 from PreMiD/dependabot/npm_and_yarn/eslint-7.10.0
+    
+    🔼 Bump eslint from 7.6.0 to 7.10.0
+
+[33mcommit 2ad5372bb25c45029deafd65d15ef65242c53072[m
+Merge: 24af384b 34194003
+Author: TheDrop <35700745+TheDropX@users.noreply.github.com>
+Date:   Mon Sep 28 21:07:23 2020 +0300
+
+    Merge pull request #2236 from PreMiD/dependabot/npm_and_yarn/types/babel__core-7.1.10
+    
+    🔼 Bump @types/babel__core from 7.1.9 to 7.1.10
+
+[33mcommit 24af384bbd810eeaee8127f9b85aac9f2793171d[m
+Merge: ceb12988 2defd7fe
+Author: TheDrop <35700745+TheDropX@users.noreply.github.com>
+Date:   Mon Sep 28 21:07:09 2020 +0300
+
+    Merge pull request #2235 from PreMiD/dependabot/npm_and_yarn/typescript-eslint/parser-4.2.0
+    
+    🔼 Bump @typescript-eslint/parser from 4.1.1 to 4.2.0
+
+[33mcommit ceb129888fdd01f4d435e0df127a7bf6797f3fd5[m
+Merge: 8e48d79a f8237f7d
+Author: TheDrop <35700745+TheDropX@users.noreply.github.com>
+Date:   Mon Sep 28 21:06:53 2020 +0300
+
+    Merge pull request #2240 from PreMiD/dependabot/npm_and_yarn/jsonschema-1.2.7
+    
+    🔼 Bump jsonschema from 1.2.6 to 1.2.7
+
+[33mcommit 80f6728efac170d1b85df0bc7c74f004d2c82dc2[m
+Author: MySixSenses <ryannotryan1190@gmail.com>
+Date:   Mon Sep 28 09:16:21 2020 -0700
+
+    Update presence.ts
+    
+    Fixed accidental constant condition
+
+[33mcommit 92957dd0e19ac9845bfb138f10def0a767167d57[m
+Author: Igor Quintaes <igor.quintaes@lambda3.com.br>
+Date:   Mon Sep 28 12:58:18 2020 -0300
+
+    update metadata
+
+[33mcommit c10be9dbc35cc841c0a18060f4d8f2a0638df896[m
+Author: Eren <58482989+eren885@users.noreply.github.com>
+Date:   Mon Sep 28 18:24:48 2020 +0300
+
+    Fixed typos in Turkish description.
+
+[33mcommit a9f343bdadd65b1c4777ef5b4a7fd799fc1cb034[m
+Author: Igor Quintaes <igor.quintaes@lambda3.com.br>
+Date:   Mon Sep 28 11:57:37 2020 -0300
+
+    Fixes mangahost's chapter number
+
+[33mcommit 8e48d79aac94a4efb896b72d62d75fd9431887a0[m
+Merge: feb52a17 350a4ccf
+Author: Alanexei <cpowers619@gmail.com>
+Date:   Mon Sep 28 09:44:42 2020 -0500
+
+    Merge pull request #2234 from Mirazex/master
+    
+    New Presence: Vanis.io
+
+[33mcommit 93a493420f4241b3ddab649bca6d6737c9e4283d[m
+Merge: 65761778 feb52a17
+Author: igorquintaes <igor.quintaes@fatec.sp.gov.br>
+Date:   Mon Sep 28 11:42:06 2020 -0300
+
+    Merge pull request #1 from PreMiD/master
+    
+    Updating Fork
+
+[33mcommit f8237f7d5b339c9491dbaf6a525828549fc5b0eb[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Sep 28 06:16:11 2020 +0000
+
+    🔼 Bump jsonschema from 1.2.6 to 1.2.7
+    
+    Bumps [jsonschema](https://github.com/tdegrunt/jsonschema) from 1.2.6 to 1.2.7.
+    - [Release notes](https://github.com/tdegrunt/jsonschema/releases)
+    - [Commits](https://github.com/tdegrunt/jsonschema/compare/v1.2.6...v1.2.7)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit e8c85feb8534c1fc4b5ba2d0b4209a83e529312b[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Sep 28 06:15:24 2020 +0000
+
+    🔼 Bump eslint from 7.6.0 to 7.10.0
+    
+    Bumps [eslint](https://github.com/eslint/eslint) from 7.6.0 to 7.10.0.
+    - [Release notes](https://github.com/eslint/eslint/releases)
+    - [Changelog](https://github.com/eslint/eslint/blob/master/CHANGELOG.md)
+    - [Commits](https://github.com/eslint/eslint/compare/v7.6.0...v7.10.0)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
+
+[33mcommit 341940030f587e0c31421cc855b7838086e401eb[m
+Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Date:   Mon Sep 28 06:14:59 2020 +0000
+
+    🔼 Bump @types/babel__core from 7.1.9 to 7.1.10
+    
+    Bumps [@types/babel__core](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/babel__core) from 7.1.9 to 7.1.10.
+    - [Release notes](https://github.com/DefinitelyTyped/DefinitelyTyped/releases)
+    - [Commits](https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/babel__core)
+    
+    Signed-off-by: dependabot[bot] <support@github.com>
