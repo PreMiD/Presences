@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "mertkaraca.mp4",
+    "id": "749681979741569052"
+  },
+  "service": "LoL Espor",
+  "description": {
+    "tr":"League of legends oyununun Espor karşılaşmalarını canlı olarak izleyebileceğiniz platform.",
+    "en": "The platform where you can watch the Esports matches of the League of Legends game live."
+  },
+  "url": "lolesports.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/CFlhiDo.jpg",
+  "thumbnail": "https://i.imgur.com/tmhf2Cm.jpg",
+  "color": "#3b1b8a",
+  "tags": ["lol", "leagueoflegends","espor","turkish","development","coding"],
+  "category": "videos"
+}
