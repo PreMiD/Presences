@@ -20,9 +20,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Viewing mathces.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/live/") ){
-    let tt = document.querySelector("div.teams").textContent;
+    let liveqs = document.querySelector("div.teams").textContent;
     presenceData.details = "Live!";
-    presenceData.state = tt.replace("VS", " vs ") + " is watching.";
+    presenceData.state = liveqs.replace("VS", " vs ") + " is watching.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/article/")){
     presenceData.details = "Reading news";
