@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
   }else if(path.startsWith("/vod/")){
     const teams = document.querySelector("div.teams").textContent;
     presenceData.details = "Watching repeats";
-    presenceData.state = teams.replace("VS", " vs ") + " watching the match replay." 
+    presenceData.state = teams.replace("VS", " vs ") + " watching the match replay.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/standings/")){
     presenceData.details = "Standings";
