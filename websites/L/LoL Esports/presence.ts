@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/vods/")){
     presenceData.details = "Repeats";
-    presenceData.state = "Looking match histories.";
+    presenceData.state = "Looking at match histories.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/vod/")){
     const teams = document.querySelector("div.teams").textContent;
