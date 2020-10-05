@@ -25,8 +25,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = liveqs.replace("VS", " vs ") + " is watching.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/article/")){
-    presenceData.details = "Reading news";
-    presenceData.state = "News: " + document.querySelector("div.title").textContent;
+    presenceData.details = "Reading news article:";
+    presenceData.state = document.querySelector("div.title").textContent;
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/vods/")){
     presenceData.details = "Repeats";
