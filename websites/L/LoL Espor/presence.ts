@@ -3,7 +3,6 @@ const presence = new Presence({
 }),
 time = Math.floor(Date.now() / 1000),
 path = window.location.pathname;
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
@@ -21,12 +20,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Viewing mathces.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/live/") ){
-    const test = document.querySelector("div.teams").textContent;
-      presenceData.details = "Live!";
-    presenceData.state = test.replace("VS", " vs ") + " is watching.";
+    let tt = document.querySelector("div.teams").textContent;
+    presenceData.details = "Live!";
+    presenceData.state = tt.replace("VS", " vs ") + " is watching.";
     presenceData.startTimestamp = time;
-
-
   }else if(path.startsWith("/article/")){
     presenceData.details = "Reading news";
     presenceData.state = "News: " + document.querySelector("div.title").textContent;
