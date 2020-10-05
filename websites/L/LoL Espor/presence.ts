@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = time;
   } else if (path.startsWith("/schedule")) {
     presenceData.details = "Schedule";
-    presenceData.state = "Viewing mathces.";
+    presenceData.state = "Viewing match.";
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/live/") ){
     const liveqs = document.querySelector("div.teams").textContent;
