@@ -8,8 +8,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
   if (path === "/") {
-    presenceData.details = "Home";
-    presenceData.state = "Nothing is done.";
+    presenceData.details = "Viewing the homepage.";
     presenceData.startTimestamp = time;
   } else if (path === "/news") {
     presenceData.details = "News";
