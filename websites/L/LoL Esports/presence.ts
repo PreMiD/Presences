@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = time;
   }else if(path.startsWith("/standings/")){
     presenceData.details = "Standings";
-    presenceData.state = "Looking at standings.";
+    presenceData.state = "Looking at the standings.";
     presenceData.startTimestamp = time;
   }
   if (presenceData.details == null) {
