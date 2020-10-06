@@ -1,5 +1,5 @@
-const presence = new Presence({ clientId: "760624576550928455" });
-const presenceData: PresenceData  = { largeImageKey: "logo-512" };
+const presence = new Presence({ clientId: "760624576550928455" }),
+      presenceData: PresenceData  = { largeImageKey: "logo-512" };
 
 let showBrowsingArt: boolean,
     showBrowsingCategory: boolean,
@@ -18,8 +18,8 @@ function checkCurrentPage() {
             presenceData.details = "Viewing home page";
         }
         else if (document.location.pathname.includes("/view/") && showBrowsingArt) {
-            const title = document.querySelector('.submission-title>h2>p').innerHTML;
-            const user = document.querySelector('.submission-id-sub-container a[href*="user"] strong').innerHTML;
+            const title = document.querySelector('.submission-title>h2>p').innerHTML,
+                  user = document.querySelector('.submission-id-sub-container a[href*="user"] strong').innerHTML;
             presenceData.details = "Viewing Art: '" + title + "' by " + user;
         }
         else if (document.location.pathname.includes("/msg/submissions") && showBrowsingSubmissions) {
