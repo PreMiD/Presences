@@ -1,7 +1,4 @@
-var presence = new Presence({ clientId: "760624576550928455" }), strings = presence.getStrings({
-    browsing: "presence.activity.browsing"
-});
-
+const presence = new Presence({ clientId: "760624576550928455" });
 const presenceData: PresenceData  = { largeImageKey: "logo-512" };
 
 let showBrowsingArt: boolean,
@@ -11,8 +8,9 @@ let showBrowsingArt: boolean,
     showCreateJournal: boolean,
     showBrowsingAccount: boolean,
     showBrowsingNotes: boolean,
-    showBrowsingSearch: boolean,
-    browsingStamp = Math.floor(Date.now() / 1000);
+    showBrowsingSearch: boolean;
+
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 function checkCurrentPage() {
     if (document.location.hostname == "www.furaffinity.net") {
@@ -20,41 +18,41 @@ function checkCurrentPage() {
             presenceData.details = "Viewing home page";
         }
         else if (document.location.pathname.includes("/view/") && showBrowsingArt) {
-            let title = document.querySelector('.submission-title>h2>p').innerHTML;
-            let user = document.querySelector('.submission-id-sub-container a[href*="user"] strong').innerHTML;
+            const title = document.querySelector('.submission-title>h2>p').innerHTML;
+            const user = document.querySelector('.submission-id-sub-container a[href*="user"] strong').innerHTML;
             presenceData.details = "Viewing Art: '" + title + "' by " + user;
         }
         else if (document.location.pathname.includes("/msg/submissions") && showBrowsingSubmissions) {
-            let submissionCount = parseInt(document.querySelector('.notification-container.inline[href*="submissions"]').innerHTML);
+            const submissionCount = parseInt(document.querySelector('.notification-container.inline[href*="submissions"]').innerHTML);
             presenceData.details = "Viewing latest submissions";
             presenceData.state = submissionCount + " Submissions";
         }
         else if (document.location.pathname.includes("/browse") && showBrowsingCategory) {
-            let category = document.querySelector('select[name=cat] option[selected]').innerHTML, searchPage = parseInt(document.querySelector('.page-number strong').innerHTML.replace("Browse Page #", ''));
+            const category = document.querySelector('select[name=cat] option[selected]').innerHTML, searchPage = parseInt(document.querySelector('.page-number strong').innerHTML.replace("Browse Page #", ''));
             presenceData.details = "Browsing through FA";
             presenceData.state = "Page " + searchPage;
             if (category != 'All')
                 presenceData.state += ' in category "' + category + '"';
         }
         else if (document.location.pathname.includes("/user/") && showBrowsingProfile) {
-            let user = document.querySelector('.username h2 span').innerHTML.replace(/~/, '').trim();
+            const user = document.querySelector('.username h2 span').innerHTML.replace(/~/, '').trim();
             presenceData.details = "Viewing user: ";
             presenceData.state = "@" + user;
         }
         else if (document.location.pathname.includes("/gallery/") && showBrowsingProfile) {
-            let user = document.querySelector('.username h2 span').innerHTML.replace(/~/, '').trim();
+            const user = document.querySelector('.username h2 span').innerHTML.replace(/~/, '').trim();
             presenceData.details = "Viewing gallery of user: ";
             presenceData.state = "@" + user;
         }
         else if (document.location.pathname.includes("/search/") && showBrowsingSearch) {
-            let searchTerm = document.location.search.replace("?q=", ""), searchResults = parseInt(document.querySelector('#query-stats>div span:nth-child(2)').innerHTML), searchPage = parseInt(document.querySelector('.pagination strong').innerHTML.replace("Search Result Page #", ''));
+            const searchTerm = document.location.search.replace("?q=", ""), searchResults = parseInt(document.querySelector('#query-stats>div span:nth-child(2)').innerHTML), searchPage = parseInt(document.querySelector('.pagination strong').innerHTML.replace("Search Result Page #", ''));
             if (searchTerm == "")
                 searchTerm = document.querySelector('.search_string_input').getAttribute('value');
             presenceData.details = 'Searching for: "' + searchTerm + '"';
             presenceData.state = searchResults + " results on page " + searchPage;
         }
         else if (document.location.pathname.includes("/controls/journal") && showCreateJournal && showBrowsingAccount) {
-            let journalName = document.querySelector('form input[name*="subject"').getAttribute("value");
+            const journalName = document.querySelector('form input[name*="subject"').getAttribute("value");
             if (journalName == "") {
                 presenceData.details = "Creates a Journal";
             }
