@@ -6,13 +6,13 @@ let title: string, artist: string, dj: string, listeners: number;
 
 function getData(): void {
   window
-    .fetch("https://azura.beastfm.pw/api/nowplaying/1")
+    .fetch("https://api.beastfm.pw/stats")
     .then((res) => res.json())
     .then((res) => {
-      title = res.now_playing.song.title || "Loading..";
-      artist = res.now_playing.song.artist || "Loading..";
-      dj = res.live.streamer_name || "AutoDJ";
-      listeners = res.listeners.unique || 0;
+      title = res.now.title || "Loading..";
+      artist = res.now.artist || "Loading..";
+      dj = res.live.liveDJ || "AutoDJ";
+      listeners = res.listeners.current || 0;
     });
 }
 
