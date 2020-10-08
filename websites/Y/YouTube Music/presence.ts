@@ -36,7 +36,13 @@ function getAuthorString(): string {
   else
     authorString = (document.querySelector(
       "span yt-formatted-string.ytmusic-player-bar a"
-    ) as HTMLAnchorElement).innerText;
+    ) as HTMLAnchorElement)
+      ? (document.querySelector(
+          "span yt-formatted-string.ytmusic-player-bar a"
+        ) as HTMLAnchorElement).innerText
+      : (document.querySelector(
+          "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
+        ) as HTMLAnchorElement).innerText;
 
   return authorString;
 }
