@@ -1,24 +1,23 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "463151177836658699"
   }),
-  strings: any = presence.getStrings({
+  strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
 
 function getAuthorString(): string {
   //* Get authors
-  var authors = document.querySelectorAll(
-      "span yt-formatted-string.ytmusic-player-bar a"
-    ) as NodeListOf<HTMLAnchorElement>,
-    authorsArray: Array<HTMLAnchorElement>,
-    authorString: string;
+  const authors = document.querySelectorAll(
+    "span yt-formatted-string.ytmusic-player-bar a"
+  ) as NodeListOf<HTMLAnchorElement>;
+  let authorsArray: Array<HTMLAnchorElement>, authorString: string;
 
   //* Author tags more than one => YouTube Music Song listing with release year etc.
   if (authors.length > 1) {
     //* Get release year of song
-    var year = document.querySelector(
-      "span yt-formatted-string.ytmusic-player-bar "
+    let year = document.querySelector(
+      "span yt-formatted-string.ytmusic-player-bar"
     ).textContent;
     year = year.slice(year.length - 4, year.length);
 
@@ -36,7 +35,7 @@ function getAuthorString(): string {
   //* If from default YouTube music return Uploader
   else
     authorString = (document.querySelector(
-      "span yt-formatted-string.ytmusic-player-bar"
+      "span yt-formatted-string.ytmusic-player-bar a"
     ) as HTMLAnchorElement).innerText;
 
   return authorString;
@@ -51,21 +50,19 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
-  var title = (document.querySelector(
+  const title = (document.querySelector(
       ".ytmusic-player-bar.title"
     ) as HTMLElement).innerText,
-    video = document.querySelector(".video-stream") as HTMLVideoElement;
-
-  //* Get Repeat mode
-  const repeatMode = document
-    .querySelector('ytmusic-player-bar[slot="player-bar"]')
-    .getAttribute("repeat-Mode_");
+    video = document.querySelector(".video-stream") as HTMLVideoElement,
+    repeatMode = document
+      .querySelector('ytmusic-player-bar[slot="player-bar"]')
+      .getAttribute("repeat-Mode_");
 
   if (title !== "" && !isNaN(video.duration)) {
     const timestamps = getTimestamps(
