@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname === "beastfm.pw") {
-    presenceData.details = `🎵 | ${title} - ${artist}`;
+    presenceData.details = `🎵 | ${title} • ${artist}`;
     presenceData.state = `🎙️ | ${dj}`;
     presenceData.smallImageText = `Listeners: ${listeners}`;
   }
