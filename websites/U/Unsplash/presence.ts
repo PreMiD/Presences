@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
     }
   }
   else if(document.location.pathname.startsWith('/photos')) {
-    presenceData.details = "Viewing photo"
+    presenceData.details = "Viewing photo";
     if(document.getElementsByClassName('_3XzpS _1ByhS _4kjHg _1O9Y0 _3l__V _1CBrG xLon9').length > 0) {
       presenceData.state = 'by ' + document.getElementsByClassName('_3XzpS _1ByhS _4kjHg _1O9Y0 _3l__V _1CBrG xLon9')[0].textContent;
     }
