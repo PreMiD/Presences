@@ -56,10 +56,20 @@ presence.on("UpdateData", async () => {
       break;
 
     case "watch":
-      presenceData.smallImageKey = document.getElementsByClassName("vjs-playing")[0] ? "play" : "pause";
-      presenceData.details = document.getElementsByTagName("h1")[0].textContent.trim();
+      presenceData.smallImageKey = document.getElementsByClassName(
+        "vjs-playing"
+      )[0]
+        ? "play"
+        : "pause";
+      presenceData.details = document
+        .getElementsByTagName("h1")[0]
+        .textContent.trim();
       presenceData.state = document.getElementById("channel-name").textContent;
-      presenceData.startTimestamp = document.getElementsByClassName("vjs-playing")[0] ? getTime() : undefined;
+      presenceData.startTimestamp = document.getElementsByClassName(
+        "vjs-playing"
+      )[0]
+        ? getTime()
+        : undefined;
       break;
 
     case "playlist":
@@ -69,7 +79,9 @@ presence.on("UpdateData", async () => {
 
     case "channel":
       presenceData.details = "Viewing channel";
-      presenceData.state = document.getElementsByClassName("channel-profile")[0].textContent.trim();
+      presenceData.state = document
+        .getElementsByClassName("channel-profile")[0]
+        .textContent.trim();
       break;
 
     default:
