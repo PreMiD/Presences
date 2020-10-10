@@ -10,11 +10,14 @@
     "de": "FurAffinity ist eine Furry Community, auf der man sein eigenes Profil erstellen kann und Bilder, sowie Medien aller Art, mit tausenden anderen Benutzern teilen, liken und kommentieren kann."
   },
   "url": "www.furaffinity.net",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/AYTzoMo.png",
   "thumbnail": "https://i.imgur.com/qoVAM68.jpg",
   "color": "#353b45",
-  "tags": ["furry", "nsfw"],
+  "tags": [
+    "furry",
+    "nsfw"
+  ],
   "category": "socials",
   "settings": [
     {
