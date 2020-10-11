@@ -33,7 +33,8 @@ presence.on("UpdateData", async () => {
     smallImageKey = undefined,
     smallImageText = undefined,
     startTimestamp = undefined,
-    endTimestamp = undefined;
+    endTimestamp = undefined,
+    extra = "...";
 
   const href = window.location.href,
     path = window.location.pathname;
@@ -43,7 +44,24 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  details = "Browsing...";
+  if(path.includes("/browse/my-tv")) {
+    extra = ' "My TV"';
+  } else if(path.includes("/browse/guide")) {
+    extra = ' "Guide"';
+  } else if(path.includes("/browse/dynamic/shows")) {
+    extra = ' "On Demand"';
+  } else if(path.includes("/browse/dynamic/sports")) {
+    extra = ' "Sports"';
+  } else if(path.includes("/browse/movie-rentals")) {
+    extra = ' "Rentals"';
+  }
+
+  details = `Browsing${extra}`;
+
+  if(path.includes("/browse/search")) {
+    details = `Searching...`;
+  }
+
   state = undefined;
   startTimestamp = elapsed;
 
