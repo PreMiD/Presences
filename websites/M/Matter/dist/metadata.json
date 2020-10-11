@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "luv",
+    "id": "636710792955428881"
+  },
+  "service": "Matter",
+  "description": {
+    "en": "Next generation music streaming platform",
+    "de": "Musik-Streaming-Plattform der nächsten Generation",
+    "pt_BR": "Plataforma de streaming de música de última geração",
+    "uk_UA": "Платформа потокового передавання музики наступного покоління",
+    "nl": "Muziekstreamingplatform van de volgende generatie"
+  },
+  "url": "www.matter.online",
+  "version": "1.0.0",
+  "logo": "https://app.matter.online/android-chrome-512x512.png",
+  "thumbnail": "https://i.imgur.com/xfrh513.png",
+  "color": "#8b6afb",
+  "tags": [
+    "music"
+  ],
+  "category": "music"
+}
