@@ -1,17 +1,12 @@
 const presence = new Presence({
   clientId: "764916517895798796"
-});
-const strings = presence.getStrings({
+}),
+strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
   live: "presence.activity.live",
   search: "presence.activity.searching"
 });
-
-function capitalize(text: string): string {
-  text = text.toLowerCase();
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
 
 /**
  * Get Timestamps
@@ -22,16 +17,14 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 let elapsed: number = undefined,
   oldUrl: string = undefined,
-  header,
-  title,
-  item;
+  title;
 
 presence.on("UpdateData", async () => {
   let video: HTMLVideoElement = null,
@@ -42,8 +35,8 @@ presence.on("UpdateData", async () => {
     startTimestamp = undefined,
     endTimestamp = undefined;
 
-  const href = window.location.href;
-  const path = window.location.pathname;
+  const href = window.location.href,
+    path = window.location.pathname;
 
   if (href !== oldUrl) {
     oldUrl = href;
@@ -61,8 +54,8 @@ presence.on("UpdateData", async () => {
       const timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      );
-      const live = timestamps[1] === Infinity;
+      ),
+        live = timestamps[1] === Infinity;
       details = "Watching";
       if (title) {
         details = title.textContent;
