@@ -9,7 +9,7 @@ strings = presence.getStrings({
 });
 
 /**
- * Get Timestamps
+ * Get timestamps
  * @param {Number} videoTime Current video time seconds
  * @param {Number} videoDuration Video duration seconds
  */
@@ -20,6 +20,15 @@ function getTimestamps(
   const startTime = Date.now(),
     endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
+}
+
+/**
+ * Get the current state text
+ * @param {boolean} paused Is the video paused
+ * @param {boolean} live Is it a live video
+ */
+function getStateText(paused: boolean, live: boolean) {
+  return live ? "Live" : paused ? "Paused" : "Watching";
 }
 
 let elapsed: number = undefined,
@@ -74,9 +83,13 @@ presence.on("UpdateData", async () => {
         Math.floor(video.duration)
       ),
         live = timestamps[1] === Infinity;
-      details = "Watching";
+        
+      details = getStateText(video.paused, live);
       if (title) {
-        details = title.textContent;
+        details = title.textContent
+          .replace(/^Watching\s/i, "")
+          .replace("| Sling TV", "");
+        state = getStateText(video.paused, live);
       }
       smallImageKey = live ? "live" : video.paused ? "pause" : "play";
       smallImageText = live
