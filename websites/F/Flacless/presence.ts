@@ -17,8 +17,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching";
     presenceData.state = title;
   } else if (document.location.pathname.includes("/track")) {
-    const title = document.title.split(" by ")[0].trim();
-    const artist = document.querySelector("meta[property='article:tag']").getAttribute('content');
+    const title = document.title.split(" by ")[0].trim(),
+    artist = document.querySelector("meta[property='article:tag']").getAttribute('content');
     presenceData.details = title;
     presenceData.state = 'by ' + artist;
   }
