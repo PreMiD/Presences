@@ -24,7 +24,7 @@
     "@types/prettier": "^2.1.1",
     "@types/semver": "^7.3.4",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
-    "@typescript-eslint/parser": "^4.3.0",
+    "@typescript-eslint/parser": "^4.4.0",
     "axios": "^0.20.0",
     "chalk": "^4.1.0",
     "eslint": "^7.10.0",
