@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Minyeong",
+    "id": "604700559181611008"
+  },
+  "url": [
+    "dcinside.com",
+    "gall.dcinside.com",
+    "gallog.dcinside.com"
+  ],
+  "description": {
+    "en": "The community portal dcInside is a representative community of Korea and has been an axis of Korean Internet culture until now. Currently, the company provides various services such as gallery, minor gallery, gallog, and dcwiki through PC and mobile, and it has established itself as one of the best community sites in Korea.",
+    "ko": "커뮤니티 포털 디시인사이드는 대한민국 대표 커뮤니티로서 지금까지 인터넷 문화의 한 축을 담당해 왔습니다. 현재 PC와 모바일을 통해 갤러리, 마이너 갤러리, 갤로그, 디시위키 등 다양한 서비스를 제공하고 있으며, 국내 최고 커뮤니티 사이트로 자리매김하고 있습니다."
+  },
+  "service": "dcinside",
+  "version": "1.0.0",
+  "logo": "https://w.namu.la/s/6cf2ed3395ab4e5a4f8871a2e8fc6f8997208ca189cb59165ea261f07f2f4fb2487e39a260a7100dee25ad5cc2a4c28b2db28af2a9ae4c636704d3614c503121e762ddff242c479cf6601a5df87246475adbd4feeebba70d3ec4d0f445d2475a",
+  "thumbnail": "https://w.namu.la/s/6cf2ed3395ab4e5a4f8871a2e8fc6f8997208ca189cb59165ea261f07f2f4fb2487e39a260a7100dee25ad5cc2a4c28b2db28af2a9ae4c636704d3614c503121e762ddff242c479cf6601a5df87246475adbd4feeebba70d3ec4d0f445d2475a",
+  "color": "#1F2023",
+  "tags": [
+    "social",
+    "memes",
+    "images"
+  ],
+  "category": "socials"
+}
