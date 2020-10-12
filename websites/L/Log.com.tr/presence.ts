@@ -26,12 +26,16 @@ presence.on("UpdateData", () => {
     // Reading an article
     const title = document.getElementsByClassName("entry-title")[0];
     presenceData.details = "Bir haber okuyor...";
-    presenceData.state = title ? title.textContent.replace('[İzle]', '') : "Bilinmeyen";
+    presenceData.state = title
+      ? title.textContent.replace("[İzle]", "")
+      : "Bilinmeyen";
   }
 
-  if (page.startsWith('/author')) {
-    presenceData.details = 'Bir yazara göz atıyor...';
-    presenceData.state = document.querySelector("body > div.container > div.grid12.first.breadcrumbs.borderTop.borderBottom.marginBottom.padding > h1")?.textContent;
+  if (page.startsWith("/author")) {
+    presenceData.details = "Bir yazara göz atıyor...";
+    presenceData.state = document.querySelector(
+      "body > div.container > div.grid12.first.breadcrumbs.borderTop.borderBottom.marginBottom.padding > h1"
+    )?.textContent;
   }
 
   if (page.includes("/page")) {

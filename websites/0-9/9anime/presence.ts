@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "721735386598080592"
+    clientId: "760581243686748232"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -22,8 +22,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -45,10 +45,9 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/watch")
   ) {
     tv =
-      document.querySelector("#servers-container .episodes a.active") != null &&
+      document.querySelector("#episodes .episodes a.active") != null &&
       /\d/.test(
-        document.querySelector("#servers-container .episodes a.active")
-          .textContent
+        document.querySelector("#episodes .episodes a.active").textContent
       )
         ? true
         : false;
@@ -58,15 +57,16 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    data.details = document.querySelector("#main .title").textContent;
+    data.details = document.querySelector("#info .title").textContent;
     data.state = tv
-      ? document.querySelector("#main div dl:nth-child(1) > dd:nth-child(2)")
-          .textContent +
+      ? document.querySelector(
+          ".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
+        ).textContent +
         " • E" +
-        document.querySelector("#servers-container .episodes a.active")
-          .textContent
-      : document.querySelector("#main div dl:nth-child(1) > dd:nth-child(2)")
-          .textContent;
+        document.querySelector("#episodes .episodes a.active").textContent
+      : document.querySelector(
+          ".meta .col1 > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)"
+        ).textContent;
     data.smallImageKey = video.paused ? "pause" : "play";
     data.smallImageText = video.paused
       ? (await strings).pause
