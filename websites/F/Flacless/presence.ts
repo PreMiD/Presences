@@ -1,11 +1,11 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "765137283661692948"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "flacless"
   };
 
@@ -14,12 +14,12 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
     presenceData.details = "Starting Flacless";
   } else if (document.location.pathname.includes("/search")) {
-    var title = document.title.split(" | ")[0].replace('on Flacless', '').trim();
+    let title = document.title.split(" | ")[0].replace('on Flacless', '').trim();
     presenceData.details = "Searching";
     presenceData.state = title;
   } else if (document.location.pathname.includes("/track")) {
-    var title = document.title.split(" by ")[0].trim();
-    var artist = document.querySelector("meta[property='article:tag']").getAttribute('content')
+    let title = document.title.split(" by ")[0].trim();
+    let artist = document.querySelector("meta[property='article:tag']").getAttribute('content');
     presenceData.details = title;
     presenceData.state = 'by ' + artist;
   }
