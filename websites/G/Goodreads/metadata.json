@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "charmines",
+    "id": "588110067656687740"
+  },
+  "url": [
+    "goodreads.com",
+    "www.goodreads.com"
+  ],
+  "description": {
+    "en": "Goodreads PreMid Presence"
+  },
+  "service": "Goodreads",
+  "version": "1.0.0",
+  "logo": "https://www.goodreads.com/favicon.ico",
+  "thumbnail": "https://www.goodreads.com/favicon.ico",
+  "color": "#3CFF00FF",
+  "tags": [
+    "Reading",
+    "Goodreads",
+    "Book",
+    "Stories"
+  ],
+  "category": "other"
+}
