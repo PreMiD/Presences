@@ -3,7 +3,6 @@
 })
   const browsingStamp = Math.floor(Date.now() / 1000);
 
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "destiny",
@@ -34,7 +33,11 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/profile")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Editing D.gg profile.";
-    presenceData.smallImageKey = "profile_icon";
+    presenceData.smallImageKey = "profile_icon"; }
+  else if (document.location.pathname.includes("/embed/chat")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Chatting";
+    presenceData.smallImageKey = "chat_icon"; 
   }
 
   if (presenceData.details == null) {
