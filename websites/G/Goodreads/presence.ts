@@ -1,16 +1,14 @@
 const presence = new Presence({
   clientId: "765622778317373440"
-});
-
-const elapsed = Math.floor(Date.now() / 1000);
+}),
+elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo-1"
-  };
-
-  const path = window.location.href.replace(window.location.origin, '');
-  const urlParamshere = new URLSearchParams(window.location.search);
+  },
+  path = window.location.href.replace(window.location.origin, ''),
+  urlParamshere = new URLSearchParams(window.location.search);
   
   if(path === '/'){
 	  presenceData.details = "Browsing Home";
