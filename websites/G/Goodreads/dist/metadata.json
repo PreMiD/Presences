@@ -9,18 +9,18 @@
     "www.goodreads.com"
   ],
   "description": {
-    "en": "Goodreads PreMid Presence"
+    "en": "Goodreads reading webpage to buy and browse online books"
   },
   "service": "Goodreads",
   "version": "1.0.0",
-  "logo": "https://www.goodreads.com/favicon.ico",
-  "thumbnail": "https://www.goodreads.com/favicon.ico",
-  "color": "#3CFF00FF",
+  "logo": "https://i.imgur.com/FBlZvAu.png",
+  "thumbnail": "https://i.imgur.com/SQFmz8m.png",
+  "color": "#3CFF00",
   "tags": [
-    "Reading",
-    "Goodreads",
-    "Book",
-    "Stories"
+    "reading",
+    "goodreads",
+    "book",
+    "stories"
   ],
   "category": "other"
 }
