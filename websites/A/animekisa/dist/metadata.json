@@ -15,8 +15,8 @@
     "url": "animekisa.tv",
     "version": "1.0.0",
     "iframe": true,
-    "logo": "https://imgur.com/f8yqEdO",
-    "thumbnail": "https://imgur.com/f8yqEdO",
+    "logo": "https://i.imgur.com/f8yqEdO.png",
+    "thumbnail": "https://i.imgur.com/f8yqEdO.png",
     "color": "#FF0000",
     "tags": ["anime", "animekisa"],
     "category": "anime"
