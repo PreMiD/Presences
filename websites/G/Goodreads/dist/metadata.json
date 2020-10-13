@@ -5,30 +5,22 @@
     "id": "588110067656687740"
   },
   "url": [
-    "charmines.ml",
-    "www.charmines.ml"
+    "goodreads.com",
+    "www.goodreads.com"
   ],
   "description": {
-    "en": "Premid presence for charmines.ml page"
+    "en": "Goodreads PreMid Presence"
   },
-  "service": "charmines.ml",
+  "service": "Goodreads",
   "version": "1.0.0",
-  "logo": "http://charmines.ml/favicon.ico",
-  "thumbnail": "http://charmines.ml/body.png",
-  "color": "#0FBEE7",
+  "logo": "https://www.goodreads.com/favicon.ico",
+  "thumbnail": "https://www.goodreads.com/favicon.ico",
+  "color": "#3CFF00FF",
   "tags": [
-    "webpage",
-    "website",
-    "charmines",
-    "charmines.ml"
-  ],
-  "settings": [
-    {
-      "id": "showPath",
-      "title": "Show Webpage Path",
-      "icon": "presence-logo",
-      "value": true
-    }
+    "Reading",
+    "Goodreads",
+    "Book",
+    "Stories"
   ],
   "category": "other"
 }
