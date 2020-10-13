@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "charmines",
+    "id": "588110067656687740"
+  },
+  "url": [
+    "charmines.ml",
+    "www.charmines.ml"
+  ],
+  "description": {
+    "en": "Premid presence for charmines.ml page"
+  },
+  "service": "charmines.ml",
+  "version": "1.0.0",
+  "logo": "http://charmines.ml/favicon.ico",
+  "thumbnail": "http://charmines.ml/body.png",
+  "color": "#0FBEE7",
+  "tags": [
+    "webpage",
+    "website",
+    "charmines",
+    "charmines.ml"
+  ],
+  "settings": [
+    {
+      "id": "showPath",
+      "title": "Show Webpage Path",
+      "icon": "presence-logo",
+      "value": true
+    }
+  ],
+  "category": "other"
+}
