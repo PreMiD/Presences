@@ -11,6 +11,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "trello"
   };
 
+  const displayPrivateBoards = await presence.getSetting("displayPrivateBoards");
   presenceData.startTimestamp = browsingStamp;
 
   if (document.location.hostname == "trello.com") {
@@ -23,7 +24,7 @@ presence.on("UpdateData", async () => {
         if (
           document.querySelector(
             "#permission-level > span.board-header-btn-icon"
-          ).classList.contains('icon-private')
+          ).classList.contains('icon-private') && !displayPrivateBoards
         ) {
           presenceData.details = "Viewing private board";
         } else {
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
         if (
           document.querySelector(
             "#permission-level > span.board-header-btn-icon"
-          ).classList.contains('icon-private')
+          ).classList.contains('icon-private') && !displayPrivateBoards
         ) {
           presenceData.details = "Viewing private board";
         } else {
@@ -62,7 +63,7 @@ presence.on("UpdateData", async () => {
       if (
         document.querySelector(
           "#permission-level > span.board-header-btn-icon"
-        ).classList.contains('icon-private')
+        ).classList.contains('icon-private') && !displayPrivateBoards
       ) {
         presenceData.details = "Viewing private card";
         presenceData.state = "Private Board";

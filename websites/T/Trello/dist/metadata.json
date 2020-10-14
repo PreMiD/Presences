@@ -25,5 +25,13 @@
     "list",
     "management"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "displayPrivateBoards",
+      "title": "Display Private Boards",
+      "icon": "fas fa-lock",
+      "value": false
+    }
+  ]
 }
