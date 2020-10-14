@@ -9,9 +9,9 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "trello"
-  };
-
-  const displayPrivateBoards = await presence.getSetting("displayPrivateBoards");
+  },
+  displayPrivateBoards = await presence.getSetting("displayPrivateBoards");
+  
   presenceData.startTimestamp = browsingStamp;
 
   if (document.location.hostname == "trello.com") {
