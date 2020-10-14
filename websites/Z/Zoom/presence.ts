@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
   else if(document.location.pathname.includes('webinar')) {
     presenceData.details = "Viewing webinars";
   }
-  else if(document.location.pathname.includes('webinar')) {
+  else if(document.location.pathname.includes('recording')) {
     presenceData.details = "Viewing recordings";
   }
   else if(document.location.pathname.includes('settings')) {
@@ -44,11 +44,11 @@ presence.on("UpdateData", async () => {
     }
     else {
       if(videoEnabled()) {
-        presenceData.details = "In video meeting"
+        presenceData.details = "In video meeting";
         presenceData.smallImageKey = "vcall";
       }
       else {
-        presenceData.details = "In meeting"
+        presenceData.details = "In meeting";
         presenceData.smallImageKey = "call";
       }
       presenceData.startTimestamp = websiteLoadTimestamp;
@@ -67,5 +67,5 @@ function videoEnabled()
 {
   return document.querySelector(".send-video-container > button") &&
     document.querySelector(".send-video-container > button").getAttribute("aria-label") &&
-    document.querySelector(".send-video-container > button").getAttribute("aria-label") != "start sending my video"
+    document.querySelector(".send-video-container > button").getAttribute("aria-label") != "start sending my video";
 }
