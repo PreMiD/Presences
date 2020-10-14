@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "721745360888004700"
+    clientId: "760588725494218844"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -16,17 +16,16 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "lm"
-  };
-
-  const video: HTMLVideoElement = document.querySelectorAll("video")[0];
+      largeImageKey: "lm"
+    },
+    video: HTMLVideoElement = document.querySelectorAll("video")[0];
 
   if (video != null && !isNaN(video.duration)) {
     const timestamps = getTimestamps(
