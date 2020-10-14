@@ -1775,10 +1775,10 @@ json5@^2.1.2:
   dependencies:
     minimist "^1.2.5"
 
-jsonschema@^1.2.8:
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.2.8.tgz#76efb90aa6062f9bd24ba4414965089b948e35ce"
-  integrity sha512-HZrVvnv9Ri3WK3t53Anu55eS+IYiQm+UcGE23oBEYi3gD1qODW+I7y4R28q2FyVhzGTDhxAEqTjbe5+jNkqmeQ==
+jsonschema@^1.2.11:
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.2.11.tgz#7a799cc2aa5a285d893203e8dc81f5becbfb0e91"
+  integrity sha512-XNZHs3N1IOa3lPKm//npxMhOdaoPw+MvEV0NIgxcER83GTJcG13rehtWmpBCfEt8DrtYwIkMTs8bdXoYs4fvnQ==
 
 leven@^3.1.0:
   version "3.1.0"
