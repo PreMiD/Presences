@@ -9,171 +9,43 @@ interface Channel {
 }
 
 const presence = new Presence({
-    clientId: "748660637021896835"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  channels: Channel[] = [
-    {
-      id: "1",
-      name: "original",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "2",
-      name: "nightlife",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "3",
-      name: "raproyal",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "4",
-      name: "usrap",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "5",
-      name: "hitsonly",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "6",
-      name: "gaming",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "7",
-      name: "houseparty",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "8",
-      name: "chillout",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "9",
-      name: "exclusive",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "12",
-      name: "oldschool",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "13",
-      name: "mashup",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "14",
-      name: "charts",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "16",
-      name: "lo-fi",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "17",
-      name: "partyhard",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    },
-    {
-      id: "18",
-      name: "bass",
-      track: "",
-      artist: "",
-      listeners: 0,
-      timeStart: "",
-      timeEnd: ""
-    }
-  ];
-let totalListeners: number;
+  clientId: "748660637021896835"
+}),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-function newStats(channels: Channel[]): void {
-  for (let i = 0; i < channels.length; i++) {
-    const channel = channels[i],
-      xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function (): void {
-      if (this.readyState == 4 && this.status == 200) {
-        const data = JSON.parse(this.responseText);
-        totalListeners = data.all_listeners;
-        channel.listeners = data.channel.listeners;
-        channel.track = data.channel.now.title;
-        channel.artist = data.channel.now.artist;
-        channel.timeStart = data.channel.now.time.start;
-        channel.timeEnd = data.channel.now.time.end;
-      }
-    };
-    xhttp.open(
-      "GET",
-      "https://api.reyfm.de/v4/channel?chn=" + channel.id,
-      true
-    );
-    xhttp.withCredentials = true;
-    xhttp.send();
-  }
+let totalListeners: number, channels: Channel[] = [];
+
+function newStats(): void {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function (): void {
+    if (this.readyState == 4 && this.status == 200) {
+      const data = JSON.parse(this.responseText);
+
+      totalListeners = data.all_listeners;
+      const channelList: Array<string> = data.sequence,
+        channelArray: Channel[] = [];
+      channelList.forEach(channel => {
+        channelArray.push({ id: channel, name: "", track: "", artist: "", listeners: 0, timeStart: "", timeEnd: "" });
+      });
+      channelArray.forEach(channel => {
+        const channelData = data.channels[`${channel.id}`];
+        channel.name = channelData.name;
+        channel.listeners = channelData.listeners;
+        channel.track = channelData.now.title;
+        channel.artist = channelData.now.artist;
+        channel.timeStart = channelData.now.time.start;
+        channel.timeEnd = channelData.now.time.end;
+      });
+      channels = channelArray;
+    }
+  };
+  xhttp.open(
+    "GET",
+    "https://api.reyfm.de/v4?voting=true",
+    true
+  );
+  xhttp.withCredentials = false;
+  xhttp.send();
 }
 
 function findChannel(): string {
@@ -195,9 +67,9 @@ function findChannel(): string {
   }
 }
 
-newStats(channels);
+newStats();
 setInterval(() => {
-  newStats(channels);
+  newStats();
 }, 10000);
 
 presence.on("UpdateData", async () => {
