@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Editing their settings";
   }
   else if(document.location.pathname.includes('meeting/schedule')) {
-    presenceData.details = "Scheduling and meeting";
+    presenceData.details = "Scheduling a meeting";
   }
   else if(document.location.pathname.includes('meetings')) {
     presenceData.details = "Viewing meetings page";
