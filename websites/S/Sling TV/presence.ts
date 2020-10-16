@@ -1,12 +1,12 @@
 const presence = new Presence({
-  clientId: "764916517895798796"
-}),
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  live: "presence.activity.live",
-  search: "presence.activity.searching"
-});
+    clientId: "764916517895798796"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    live: "presence.activity.live",
+    search: "presence.activity.searching"
+  });
 
 /**
  * Get timestamps
@@ -53,21 +53,21 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if(path.includes("/browse/my-tv")) {
+  if (path.includes("/browse/my-tv")) {
     extra = ' "My TV"';
-  } else if(path.includes("/browse/guide")) {
+  } else if (path.includes("/browse/guide")) {
     extra = ' "Guide"';
-  } else if(path.includes("/browse/dynamic/shows")) {
+  } else if (path.includes("/browse/dynamic/shows")) {
     extra = ' "On Demand"';
-  } else if(path.includes("/browse/dynamic/sports")) {
+  } else if (path.includes("/browse/dynamic/sports")) {
     extra = ' "Sports"';
-  } else if(path.includes("/browse/movie-rentals")) {
+  } else if (path.includes("/browse/movie-rentals")) {
     extra = ' "Rentals"';
   }
 
   details = `Browsing${extra}`;
 
-  if(path.includes("/browse/search")) {
+  if (path.includes("/browse/search")) {
     details = `Searching...`;
   }
 
@@ -79,11 +79,11 @@ presence.on("UpdateData", async () => {
     if (video) {
       title = document.querySelector("title");
       const timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      ),
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        ),
         live = timestamps[1] === Infinity;
-        
+
       details = getStateText(video.paused, live);
       if (title) {
         details = title.textContent

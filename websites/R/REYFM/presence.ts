@@ -9,11 +9,12 @@ interface Channel {
 }
 
 const presence = new Presence({
-  clientId: "748660637021896835"
-}),
+    clientId: "748660637021896835"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let totalListeners: number, channels: Channel[] = [];
+let totalListeners: number,
+  channels: Channel[] = [];
 
 function newStats(): void {
   const xhttp = new XMLHttpRequest();
@@ -24,10 +25,18 @@ function newStats(): void {
       totalListeners = data.all_listeners;
       const channelList: Array<string> = data.sequence,
         channelArray: Channel[] = [];
-      channelList.forEach(channel => {
-        channelArray.push({ id: channel, name: "", track: "", artist: "", listeners: 0, timeStart: "", timeEnd: "" });
+      channelList.forEach((channel) => {
+        channelArray.push({
+          id: channel,
+          name: "",
+          track: "",
+          artist: "",
+          listeners: 0,
+          timeStart: "",
+          timeEnd: ""
+        });
       });
-      channelArray.forEach(channel => {
+      channelArray.forEach((channel) => {
         const channelData = data.channels[`${channel.id}`];
         channel.name = channelData.name;
         channel.listeners = channelData.listeners;
@@ -39,11 +48,7 @@ function newStats(): void {
       channels = channelArray;
     }
   };
-  xhttp.open(
-    "GET",
-    "https://api.reyfm.de/v4?voting=true",
-    true
-  );
+  xhttp.open("GET", "https://api.reyfm.de/v4?voting=true", true);
   xhttp.withCredentials = false;
   xhttp.send();
 }

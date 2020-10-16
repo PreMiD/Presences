@@ -1,7 +1,7 @@
 const presence = new Presence({
-  clientId: "765137283661692948"
-}),
-browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "765137283661692948"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,16 +13,21 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
     presenceData.details = "Starting Flacless";
   } else if (document.location.pathname.includes("/search")) {
-    const title = document.title.split(" | ")[0].replace('on Flacless', '').trim();
+    const title = document.title
+      .split(" | ")[0]
+      .replace("on Flacless", "")
+      .trim();
     presenceData.details = "Searching";
     presenceData.state = title;
   } else if (document.location.pathname.includes("/track")) {
     const title = document.title.split(" by ")[0].trim(),
-    artist = document.querySelector("meta[property='article:tag']").getAttribute('content');
+      artist = document
+        .querySelector("meta[property='article:tag']")
+        .getAttribute("content");
     presenceData.details = title;
-    presenceData.state = 'by ' + artist;
+    presenceData.state = "by " + artist;
   }
-  
+
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
