@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
       state = capitalize(item.textContent);
     }
   } else if (path.includes("/watch")) {
-    video = document.querySelector(".video-player");
+    video = document.querySelector(".content-video-player");
     if (video) {
       title = document.querySelector(".metadata-area__second-line");
       const content = document.querySelector(".metadata-area__third-line");
