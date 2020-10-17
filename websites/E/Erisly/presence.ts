@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "732586216272429126"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "732586216272429126"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -39,6 +38,24 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "translate.erisly.com") {
     presenceData.details = "Helping Erisly";
     presenceData.state = "learn a language";
+  } else if (document.location.hostname == "wiki.erisly.com") {
+    let firstHeading =
+      document.querySelector("#firstHeading") !== null
+        ? document.querySelector("#firstHeading").textContent
+        : document.querySelector(".page-heading").textContent;
+    const firstHeadingSplit = firstHeading.split(" "),
+      firstHeadingVerb = firstHeadingSplit.shift();
+
+    if (
+      document.location.pathname == "/w/index.php" &&
+      firstHeadingVerb.endsWith("ing")
+    ) {
+      firstHeading = firstHeadingSplit.join(" ");
+      presenceData.details = "Wiki - " + firstHeadingVerb + ":";
+    } else {
+      presenceData.details = "Wiki - Viewing page:";
+    }
+    presenceData.state = firstHeading;
   }
 
   if (presenceData.details == null) {

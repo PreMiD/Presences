@@ -53,7 +53,8 @@ const characterNameMap: ItemMap = {
   vox: "Voxel",
   blk: "Block",
   crg: "Cargo",
-  inf: "Plus"
+  inf: "Plus",
+  cub: "Cube"
 };
 
 // A map of map IDs with their names.

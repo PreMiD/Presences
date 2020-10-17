@@ -1,60 +1,75 @@
 const presence = new Presence({
-  clientId: "655044555632148518"
+  clientId: "737633529738952765"
 });
-
-const browsingStamp = Math.floor(Date.now() / 1000);
-let user;
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-  if (document.location.hostname == "codare.org") {
+      largeImageKey: "logo"
+    },
+    browsingStamp = Math.floor(Date.now() / 1000),
+    page = window.location.pathname;
+  if (page.toLowerCase() === "/") {
+    presenceData.details = "Bir sayfa görüntülüyor:";
+    presenceData.state = "Anasayfa";
     presenceData.startTimestamp = browsingStamp;
-    if (document.location.pathname.includes("/u/")) {
-      presenceData.details = "Bir kullanıcının profiline";
-      if (
-        document.querySelector(
-          "#content > div > div.UserCard.Hero.UserHero > div > div > div > h2 > a > span"
-        )
-      ) {
-        user = document.querySelector(
-          "#content > div > div.UserCard.Hero.UserHero > div > div > div > h2 > a > span"
-        ).innerHTML;
-      } else if (
-        document.querySelector(
-          "#content > div > div.UserCard.Hero.UserHero > div > div > div > h2 > span"
-        )
-      ) {
-        user = document.querySelector(
-          "#content > div > div.UserCard.Hero.UserHero > div > div > div > h2 > span"
-        ).textContent;
-      }
-      presenceData.state = "bakıyor: " + user;
-    } else if (document.location.pathname.includes("/d/")) {
-      presenceData.details = "Bir konuyu okuyor:";
-      const title = document.querySelector(
-        "#content > div > div.DiscussionPage-discussion > header > div > ul > li.item-title > h2"
-      ).textContent;
-      presenceData.state = title;
-      presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/settings")) {
-      presenceData.details = "Ayarlarda düzenleme";
-      presenceData.state = "yapıyor";
-    } else if (document.location.pathname.includes("/tags")) {
-      presenceData.details = "Etiketlere bakıyor";
-    } else if (document.location.pathname.includes("/t/")) {
-      presenceData.details = "Bir etikete göz atıyor:";
-      const name = document.querySelector(
-        "#content > div > header > div > div > h2"
-      ).textContent;
-      presenceData.state = name;
-    } else if (document.location.pathname.includes("/following")) {
-      presenceData.details = "Takip edilen etiketlere";
-      presenceData.state = "bakıyor";
-    }
+  } else if (page.toLowerCase() === "/sss") {
+    presenceData.details = "Bir sayfa görüntülüyor:";
+    presenceData.state = "Sıkça Sorulan Sorular";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.toLowerCase() === "/yetkililer") {
+    presenceData.details = "Bir sayfa görüntülüyor:";
+    presenceData.state = "Yetkililer";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.toLowerCase() === "/paylas") {
+    presenceData.details = "Bir sayfa görüntülüyor:";
+    presenceData.state = "Kod Paylaş";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.startsWith("/kod")) {
+    presenceData.details = "Bir kod görüntülüyor:";
+    presenceData.state =
+      document.querySelector("#\\32  > div > div > div > div > h3")
+        .textContent +
+      " " +
+      "adlı kodu görüntülüyor!";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.startsWith("/users")) {
+    presenceData.details = "Bir profil görüntülüyor:";
+    presenceData.state =
+      document.querySelector(
+        "body > div > center > div > div > div.topSectionNormal-2-vo2m > header > div.headerInfo-30uryT > div.nameTag-2IFDfL.userSelectText-1o1dQ7.nameTag-m8r81H > span"
+      ).textContent +
+      " " +
+      "adlı kullanıcının profilini görüntülüyor!";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.toLowerCase() === "/kategori/js") {
+    presenceData.details = "Bir kategori görüntülüyor:";
+    presenceData.state = "Javascript";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.toLowerCase() === "/kategori/html") {
+    presenceData.details = "Bir kategori görüntülüyor:";
+    presenceData.state = "HTML";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.toLowerCase() === "/kategori/py") {
+    presenceData.details = "Bir kategori görüntülüyor:";
+    presenceData.state = "Python";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.toLowerCase() === "/kategori/diger") {
+    presenceData.details = "Bir kategori görüntülüyor:";
+    presenceData.state = "Diğer";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.toLowerCase() === "/kategori/jsplus") {
+    presenceData.details = "Bir kategori görüntülüyor:";
+    presenceData.state = "Javascript+";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.toLowerCase() === "/kategori/altyapi") {
+    presenceData.details = "Bir kategori görüntülüyor:";
+    presenceData.state = "Altyapılar";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (page.toLowerCase() === "/kategori/booster") {
+    presenceData.details = "Bir kategori görüntülüyor:";
+    presenceData.state = "Booster";
+    presenceData.startTimestamp = browsingStamp;
   }
-
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();

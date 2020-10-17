@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "DooMLorD",
-    "id": "654398152513945611"
+    "name": "ririxi",
+    "id": "192490421308489731"
   },
   "service": "LookMovie",
   "description": {
@@ -11,9 +11,9 @@
     "lookmovie.ag",
     "www.lookmovie.ag"
   ],
-  "version": "1.2.5",
-  "logo": "https://doomlord.s-ul.eu/TtkUyBkp",
-  "thumbnail": "https://doomlord.s-ul.eu/q4gLfTIv",
+  "version": "1.2.8",
+  "logo": "https://i.imgur.com/vlSumUl.png",
+  "thumbnail": "https://i.imgur.com/nseTbMZ.png",
   "color": "#ffcc00",
   "tags": [
     "dedicated-server",
