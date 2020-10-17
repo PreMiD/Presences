@@ -6,12 +6,11 @@
   },
   "url": "scradio.pw",
   "description": {
-    "html": "SCR Presence"
+    "html": "HTML"
   },
-  "service": "scradio.pw",
-  "version": "V1",
+  "service": "Simulation Community Radio",
   "logo": "https://scradio.pw/logo.png",
-  "thumbnail": "https://imgur.com/PidINaT",
+  "thumbnail": "https://scradio.pw/logo.png",
   "color": "#FF0000",
   "tags": [],
   "category": "music"
