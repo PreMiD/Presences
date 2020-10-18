@@ -22,15 +22,6 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-/**
- * Get the current state text
- * @param {boolean} paused Is the video paused
- * @param {boolean} live Is it a live video
- */
-function getStateText(paused: boolean, live: boolean) {
-  return live ? "Live" : paused ? "Paused" : "Watching";
-}
-
 let elapsed: number = undefined,
   oldUrl: string = undefined,
   title;
@@ -84,7 +75,7 @@ presence.on("UpdateData", async () => {
         ),
         live = timestamps[1] === Infinity;
 
-      var desc = document.querySelector(".playback-metadata__container-episode-metadata-info") || 
+      const desc = document.querySelector(".playback-metadata__container-episode-metadata-info") || 
       document.querySelector(".playback-metadata__container-description");
 
       state = desc.textContent;
@@ -107,13 +98,15 @@ presence.on("UpdateData", async () => {
 
   const data: PresenceData = {
     details: details,
-    state: state,
     largeImageKey: "peacock",
     smallImageKey: smallImageKey,
     smallImageText: smallImageText,
     startTimestamp: startTimestamp,
     endTimestamp: endTimestamp
   };
+  if(state !== undefined) {
+    data.state = state;
+  }
   presence.setActivity(data, video ? !video.paused : true);
   presence.setTrayTitle(details);
 });
