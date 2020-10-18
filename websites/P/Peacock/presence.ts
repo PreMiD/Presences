@@ -73,9 +73,8 @@ presence.on("UpdateData", async () => {
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
-        live = timestamps[1] === Infinity;
-
-      const desc = document.querySelector(".playback-metadata__container-episode-metadata-info") || 
+        live = timestamps[1] === Infinity,
+        desc = document.querySelector(".playback-metadata__container-episode-metadata-info") || 
       document.querySelector(".playback-metadata__container-description");
 
       state = desc.textContent;
