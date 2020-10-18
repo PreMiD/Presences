@@ -13,13 +13,13 @@ presence.on("UpdateData", async () => {
 	if(path === '/'){
 		presenceData.details = "Browsing Home";
 	}else if(path.startsWith('/book/show/')){
-		bookname = Document.getElementById("bookTitle").innerHTML;
+		bookname = document.getElementById("bookTitle").innerHTML;
 		presenceData.details = "Browsing " + bookname;
 	}else if(path.startsWith('/search')){
-		const searchTerm = <HTMLInputElement>Document.getElementById("search_query_main").value;
+		const searchTerm = <HTMLInputElement>document.getElementById("search_query_main").value;
 		presenceData.details = "Searching for: " + searchTerm;
 	}else if(path.startsWith('/author/show/')){
-		author = Document.querySelector("h1.authorName span[itemprop=\"name\"]").innerHTML;
+		author = document.querySelector("h1.authorName span[itemprop=\"name\"]").innerHTML;
 		presenceData.details = "Viewing " + author + "'s profile";
 	}else{
 		presenceData.details = "Browsing a goodreads page";
