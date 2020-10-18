@@ -62,23 +62,30 @@ presence.on("UpdateData", async () => {
     details = `Searching...`;
   }
 
-  state = undefined;
   startTimestamp = elapsed;
 
   if (path.includes("/watch/playback") || path.includes("/watch/asset")) {
     video = document.querySelector(".video-player-component video");
     if (video) {
-      title = document.querySelector(".playback-header__title");
+      title = document.querySelector(".playback-header__title") || document.querySelector('.playback-metadata__container-title');
       const timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
         live = timestamps[1] === Infinity,
         desc = document.querySelector(".playback-metadata__container-episode-metadata-info") || 
-      document.querySelector(".playback-metadata__container-description");
+          document.querySelector(".playback-metadata__container-description") || 
+          document.querySelector(".swiper-slide-active .playlist-item-overlay__container-title");
 
-      state = desc.textContent;
-      details = title.textContent;
+      if(desc) {
+        state = desc.textContent;
+      }
+      if(title) {
+        details = title.textContent;
+        if(path.includes("/watch/playback/playlist")) {
+          details = details + ' Playlist';
+        }
+      }
 
       smallImageKey = live ? "live" : video.paused ? "pause" : "play";
       smallImageText = live
@@ -96,16 +103,28 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    details: details,
     largeImageKey: "peacock",
-    smallImageKey: smallImageKey,
-    smallImageText: smallImageText,
-    startTimestamp: startTimestamp,
-    endTimestamp: endTimestamp
   };
+
   if(state !== undefined) {
     data.state = state;
   }
+  if(details !== undefined) {
+    data.details = details;
+  }
+  if(smallImageKey !== undefined) {
+    data.smallImageKey = smallImageKey;
+  }
+  if(smallImageText !== undefined) {
+    data.smallImageText = smallImageText;
+  }
+  if(startTimestamp !== undefined) {
+    data.startTimestamp = startTimestamp
+  }
+  if(endTimestamp !== undefined) {
+    data.endTimestamp = endTimestamp;
+  }
+
   presence.setActivity(data, video ? !video.paused : true);
   presence.setTrayTitle(details);
 });
