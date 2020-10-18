@@ -11,53 +11,57 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-    _function: null as Function,
-    get function(): Function {
-      return this._function;
-    },
-    set function(parameter) {
-      this._function = parameter;
-    },
-    get present(): boolean {
-      return this._function !== null;
-    }
+  _function: null as () => void,
+  get function(): () => void {
+    return this._function;
   },
-  /**
-   * Initialize/reset presenceData.
-   */
-  resetData = (
-    defaultData: PresenceData = {
-      details: "Viewing an unsupported page",
-      largeImageKey: "lg",
-      startTimestamp: browsingStamp
-    }
-  ): void => {
-    currentURL = new URL(document.location.href);
-    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-    presenceData = { ...defaultData };
+  set function(parameter) {
+    this._function = parameter;
   },
-  /**
-   * Search for URL parameters.
-   * @param urlParam The parameter that you want to know about the value.
-   */
-  getURLParam = (urlParam: string): string => {
-    return currentURL.searchParams.get(urlParam);
-  };
+  get present(): boolean {
+    return this._function !== null;
+  }
+},
+
+/**
+ * Initialize/reset presenceData.
+ */
+ resetData = (
+  defaultData: PresenceData = {
+    details: "Viewing an unsupported page",
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
+  }
+): void => {
+  currentURL = new URL(document.location.href);
+  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+  presenceData = { ...defaultData };
+},
+
+/**
+ * Search for URL parameters.
+ * @param urlParam The parameter that you want to know about the value.
+ */
+ getURLParam = (urlParam: string): string => {
+  return currentURL.searchParams.get(urlParam);
+};
 
 ((): void => {
   if (currentURL.hostname === "www.wikibooks.org") {
     presenceData.details = "On the home page";
   } else {
     let title: string;
-    const actionResult = getURLParam("action") || getURLParam("veaction"),
+    const actionResult = (): string =>
+        getURLParam("action") || getURLParam("veaction"),
       lang = currentURL.hostname.split(".")[0],
-      titleFromURL = (): string => {
-        const raw =
-          currentPath[1] === "index.php"
-            ? getURLParam("title")
-            : currentPath.slice(1).join("/");
-        return decodeURI(raw.replace(/_/g, " "));
-      };
+
+     titleFromURL = (): string => {
+      const raw =
+        currentPath[1] === "index.php"
+          ? getURLParam("title")
+          : currentPath.slice(1).join("/");
+      return decodeURI(raw.replace(/_/g, " "));
+    };
 
     try {
       title = document.querySelector("h1").textContent;
@@ -136,6 +140,9 @@ const updateCallback = {
       presenceData.state = (document.querySelector(
         "input[type=search]"
       ) as HTMLInputElement).value;
+    } else if (actionResult() === "history") {
+      presenceData.details = "Viewing revision history";
+      presenceData.state = titleFromURL();
     } else if (getURLParam("diff")) {
       presenceData.details = "Viewing difference between revisions";
       presenceData.state = titleFromURL();
@@ -143,7 +150,7 @@ const updateCallback = {
       presenceData.details = "Viewing an old revision of a page";
       presenceData.state = titleFromURL();
     } else if (
-      document.querySelector("#pt-logout") ||
+      document.querySelector("#ca-ve-edit") ||
       getURLParam("veaction")
     ) {
       presenceData.state = `${
@@ -152,15 +159,17 @@ const updateCallback = {
           : `${title} (${titleFromURL()})`
       }`;
       updateCallback.function = (): void => {
-        if (actionResult == "edit" || actionResult == "editsource") {
+        if (actionResult() === "edit" || actionResult() === "editsource") {
           presenceData.details = "Editing a page";
         } else {
           presenceData.details = namespaceDetails();
         }
       };
     } else {
-      if (actionResult == "edit") {
-        presenceData.details = "Editing a page";
+      if (actionResult() === "edit") {
+        presenceData.details = document.querySelector("#ca-edit")
+          ? "Editing a page"
+          : "Viewing source";
         presenceData.state = titleFromURL();
       } else {
         presenceData.details = namespaceDetails();
