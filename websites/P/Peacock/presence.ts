@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    largeImageKey: "peacock",
+    largeImageKey: "peacock"
   };
 
   if(state !== undefined) {
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
     data.smallImageText = smallImageText;
   }
   if(startTimestamp !== undefined) {
-    data.startTimestamp = startTimestamp
+    data.startTimestamp = startTimestamp;
   }
   if(endTimestamp !== undefined) {
     data.endTimestamp = endTimestamp;
