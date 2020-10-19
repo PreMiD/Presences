@@ -35,7 +35,7 @@
     "prettier": "^2.1.2",
     "semver": "^7.3.2",
     "source-map-support": "^0.5.19",
-    "terser": "^5.3.4",
+    "terser": "^5.3.5",
     "typescript": "^3.9.7"
   }
 }
