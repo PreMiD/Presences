@@ -5,41 +5,49 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "zoom_logo"
-  };
+      largeImageKey: "zoom_logo"
+    };
 
-  if (document.location.pathname == "/") {
+  if(document.location.pathname == '/') {
     presenceData.details = "Viewing home page";
-  } else if (document.location.pathname.includes("profile")) {
+  }
+  else if(document.location.pathname.includes('profile')) {
     presenceData.details = "Viewing their profile";
-  } else if (document.location.pathname.includes("webinar")) {
+  }
+  else if(document.location.pathname.includes('webinar')) {
     presenceData.details = "Viewing webinars";
-  } else if (document.location.pathname.includes("recording")) {
+  }
+  else if(document.location.pathname.includes('recording')) {
     presenceData.details = "Viewing recordings";
-  } else if (document.location.pathname.includes("settings")) {
+  }
+  else if(document.location.pathname.includes('settings')) {
     presenceData.details = "Editing their settings";
-  } else if (document.location.pathname.includes("meeting/schedule")) {
+  }
+  else if(document.location.pathname.includes('meeting/schedule')) {
     presenceData.details = "Scheduling a meeting";
-  } else if (document.location.pathname.includes("meetings")) {
+  }
+  else if(document.location.pathname.includes('meetings')) {
     presenceData.details = "Viewing meetings page";
-  } else if (document.location.pathname.includes("meeting")) {
+  }
+  else if(document.location.pathname.includes('meeting')) {
     presenceData.details = "Viewing their meetings";
-  } else if (document.location.pathname.includes("join")) {
+  }
+  else if(document.location.pathname.includes('join')) {
     presenceData.details = "Joining a meeting";
-  } else if (document.location.pathname.startsWith("/s/")) {
+  }
+  else if(document.location.pathname.startsWith('/s/')) {
     presenceData.details = "Joining a meeting";
-  } else if (document.location.pathname.startsWith("/wc/")) {
-    if (
-      document.querySelector("#prompt > h4") &&
-      document.querySelector("#prompt > h4").textContent ==
-        "You are already in another meeting"
-    ) {
+  }
+  else if(document.location.pathname.startsWith('/wc/')) {
+    if(document.querySelector("#prompt > h4") && document.querySelector("#prompt > h4").textContent == "You are already in another meeting") {
       presenceData.details = "Joining a meeting";
-    } else {
-      if (videoEnabled()) {
+    }
+    else {
+      if(videoEnabled()) {
         presenceData.details = "In video meeting";
         presenceData.smallImageKey = "vcall";
-      } else {
+      }
+      else {
         presenceData.details = "In meeting";
         presenceData.smallImageKey = "call";
       }
@@ -55,14 +63,9 @@ presence.on("UpdateData", async () => {
   }
 });
 
-function videoEnabled() {
-  return (
-    document.querySelector(".send-video-container > button") &&
-    document
-      .querySelector(".send-video-container > button")
-      .getAttribute("aria-label") &&
-    document
-      .querySelector(".send-video-container > button")
-      .getAttribute("aria-label") != "start sending my video"
-  );
+function videoEnabled()
+{
+  return document.querySelector(".send-video-container > button") &&
+    document.querySelector(".send-video-container > button").getAttribute("aria-label") &&
+    document.querySelector(".send-video-container > button").getAttribute("aria-label") != "start sending my video";
 }
