@@ -3,7 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000),
   dj = document.querySelector(
-    "#root > div:nth-child(3) > div > div:nth-child(2) > div > h4"
+    "#presenter-name"
   ) as HTMLElement;
 
 let title: HTMLElement, artist: HTMLElement, player: HTMLAudioElement;
@@ -11,10 +11,10 @@ let title: HTMLElement, artist: HTMLElement, player: HTMLAudioElement;
 presence.on("UpdateData", async () => {
   player = document.querySelector(".uil-pause");
   title = document.querySelector(
-    "#root > div:nth-child(3) > div > div > div > h2"
+    "#song-title"
   );
   artist = document.querySelector(
-    "#root > div:nth-child(3) > div > div > div > h4"
+    "#song-artist"
   );
 
   const presenceData: PresenceData = {
