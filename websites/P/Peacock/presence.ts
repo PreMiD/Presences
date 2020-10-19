@@ -56,6 +56,7 @@ presence.on("UpdateData", async () => {
     extra = ' Latino';
   }
 
+  // By default, details will be "Browsing..."
   details = `Browsing${extra}`;
 
   if (path.includes("/watch/search")) {
@@ -103,14 +104,12 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    largeImageKey: "peacock"
+    largeImageKey: "peacock", 
+    details
   };
 
   if(state !== undefined) {
     data.state = state;
-  }
-  if(details !== undefined) {
-    data.details = details;
   }
   if(smallImageKey !== undefined) {
     data.smallImageKey = smallImageKey;
