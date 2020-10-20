@@ -71,12 +71,12 @@ presence.on("UpdateData", async () => {
     "animedao34.stream",
     "animedao35.stream",
     "animedao36.stream"
-  ]
+  ];
   
   const MainSiteUrls = [
     "animedao.com",
     "animedao.to"
-  ]
+  ];
   
   if (StreamUrls.includes(hostname)) {
     const title = document.querySelector("h2").textContent.trim();
