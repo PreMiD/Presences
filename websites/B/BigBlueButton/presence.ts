@@ -99,16 +99,15 @@ presence.on("UpdateData", async () => {
                     : userState == "microphone" ? "Speaking..."
                         : userState == "muted" ? "Muted"
                             : userState == "headphones" ? "Listening..."
-                                : "Disconnected";
-
-    const presenceData = {
-        largeImageKey: "logo",
-        smallImageKey: (inCall ? userState : "logo"),
-        smallImageText: (inCall ? userStateText : userState),
-        details: (roomName ? roomName : userState),
-        state: (inCall ? `${userCount} users` : roomName ? userState : null),
-        startTimestamp: (joinedRoomTimestamp ? joinedRoomTimestamp : new Date().getTime())
-    };
+                                : "Disconnected",
+        presenceData = {
+            largeImageKey: "logo",
+            smallImageKey: (inCall ? userState : "logo"),
+            smallImageText: (inCall ? userStateText : userState),
+            details: (roomName ? roomName : userState),
+            state: (inCall ? `${userCount} users` : roomName ? userState : null),
+            startTimestamp: (joinedRoomTimestamp ? joinedRoomTimestamp : new Date().getTime())
+        };
 
     if (!presenceData.details)
         delete presenceData.details;
