@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+        "name": "Oranż Metylowy",
+        "id": "359982590972788737"
+    },
+    "url": "demo.bigbluebutton.org",
+    "regExp": "\\/b\\/[\\w]{3}-[\\d\\w]{3}-[\\d\\w]{3}|html5client\\/join\\?",
+    "description": {
+        "en": "BigBlueButton online learning platform"
+    },
+    "service": "BigBlueButton",
+    "version": "1.0.0",
+    "logo": "https://raw.githubusercontent.com/bigbluebutton/greenlight/master/app/assets/images/bbb_logo.png",
+    "thumbnail": "https://raw.githubusercontent.com/bigbluebutton/greenlight/master/app/assets/images/logo_with_text.png",
+    "color": "#0F70D7",
+    "tags": ["bbb", "education", "learning", "voicecall"],
+    "category": "socials"
+}
