@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "621854422737354763"
   }),
   strings = presence.getStrings({
@@ -16,8 +16,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -37,9 +37,8 @@ let elapsed: number = undefined,
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "starz-logo"
-  };
-
-  const href = window.location.href,
+  }, 
+    href = window.location.href,
     path = window.location.pathname;
 
   if (href !== oldUrl) {
@@ -50,10 +49,10 @@ presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector(".bitmovinplayer-container video");
  
   if (video && !isNaN(video.duration)) {
-    const title = document.querySelector("title").textContent;
-    const timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
+    const title = document.querySelector("title").textContent,
+      timestamps = getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
     ),
     live = timestamps[1] === Infinity;
 
