@@ -21,57 +21,78 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var elapsed = Math.floor(Date.now() / 1000);
-var subtitle;
+/**
+ * Get the current state text
+ * @param {boolean} paused Is the video paused
+ * @param {boolean} live Is it a live video
+ */
+function getStateText(paused: boolean, live: boolean) {
+  return live ? "Live Broadcast" : paused ? "Paused" : "Watching";
+}
+
+let elapsed: number = undefined,
+  oldUrl: string = undefined,
+  title;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "starz-logo"
   };
 
-  var video: HTMLVideoElement = document.querySelector(".player-object  video");
-  if (document.location.pathname.startsWith("/livetv")) {
-    data.details = "Watching LiveTV";
-    (data.smallImageKey = "live"), (data.smallImageText = (await strings).live);
-    if (elapsed == null) {
-      elapsed = Math.floor(Date.now() / 1000);
-    }
-    data.startTimestamp = elapsed;
-    presence.setActivity(data);
-  } else if (video && !isNaN(video.duration)) {
-    var title = document.querySelector(".wrapper h2").textContent;
-    var timestamps = getTimestamps(
+  const href = window.location.href,
+    path = window.location.pathname;
+
+  if (href !== oldUrl) {
+    oldUrl = href;
+    elapsed = Math.floor(Date.now() / 1000);
+  }
+
+  const video: HTMLVideoElement = document.querySelector(".bitmovinplayer-container video");
+ 
+  if (video && !isNaN(video.duration)) {
+    const title = document.querySelector("title").textContent;
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
-    );
-    var subtitleCheck = document.querySelector("h3.slide-title") ? false : true;
+    ),
+    live = timestamps[1] === Infinity;
 
-    if (subtitleCheck) {
-      subtitle = "Movie";
-    } else {
-      subtitle = document.querySelector("h3.slide-title").textContent;
-    }
-
-    (data.details = title), (data.state = subtitle);
-    (data.smallImageKey = video.paused ? "pause" : "play"),
-      (data.smallImageText = video.paused
+    (data.details = title), (data.state = getStateText(video.paused, live));
+    (data.smallImageKey = live ? "live" : video.paused ? "pause" : "play"),
+      (data.smallImageText = live
+        ? (await strings).live
+        : video.paused
         ? (await strings).pause
         : (await strings).play),
-      (data.startTimestamp = timestamps[0]),
-      (data.endTimestamp = timestamps[1]);
+      (data.startTimestamp = live ? elapsed : timestamps[0]),
+      (data.endTimestamp = live ? undefined : timestamps[1]);
 
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
     }
 
-    if (title !== null && subtitle !== null) {
+    if (title !== null) {
       presence.setActivity(data, !video.paused);
     }
-    elapsed = null;
   } else {
     data.details = "Browsing...";
+    if(path.includes('/series')) {
+      data.details = "Browsing Series";
+    }
+    if(path.includes('/movies')) {
+      data.details = "Browsing Movies";
+    }    
+    if(path.includes('/playlist')) {
+      data.details = "Browsing Playlist";
+    }    
+    if(path.includes('/schedule')) {
+      data.details = "Browsing Schedule";
+    }    
+    if(path.includes('/search')) {
+      data.details = "Searching...";
+    }    
+    data.startTimestamp = elapsed;
     presence.setActivity(data);
-    elapsed = null;
   }
 });
