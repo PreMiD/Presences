@@ -31,8 +31,7 @@ function getStateText(paused: boolean, live: boolean) {
 }
 
 let elapsed: number = undefined,
-  oldUrl: string = undefined,
-  title;
+  oldUrl: string = undefined;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -49,7 +48,7 @@ presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector(".bitmovinplayer-container video");
  
   if (video) {
-    const title = document.querySelector("title").textContent,
+    const title = document.querySelector("title")?.textContent,
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
