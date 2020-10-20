@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
 
   const video: HTMLVideoElement = document.querySelector(".bitmovinplayer-container video");
  
-  if (video && !isNaN(video.duration)) {
+  if (video) {
     const title = document.querySelector("title").textContent,
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
