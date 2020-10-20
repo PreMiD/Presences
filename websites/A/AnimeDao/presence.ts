@@ -73,11 +73,6 @@ presence.on("UpdateData", async () => {
     "animedao36.stream"
   ];
   
-  const MainSiteUrls = [
-    "animedao.com",
-    "animedao.to"
-  ];
-  
   if (StreamUrls.includes(hostname)) {
     const title = document.querySelector("h2").textContent.trim();
     if ((episode = title.match(/\WEpisode\W\d{1,3}/)) != null) {
@@ -99,7 +94,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).paused
         : (await strings).playing;
     }
-  } else if (MainSiteUrls.includes(hostname)) {
+  } else if (hostname === 'animedao.com' || hostname === 'animedao.to') {
     presenceData.startTimestamp = startTimestamp;
     if (pathname === `/`) {
       presenceData.details = (await strings).browsing;
