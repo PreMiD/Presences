@@ -42,7 +42,43 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "animedao_lg"
   };
-  if (hostname === `animedao26.stream` || hostname === `animedao28.stream`) {
+  
+  const StreamUrls = [
+    "animedao10.stream",
+    "animedao11.stream",
+    "animedao12.stream",
+    "animedao13.stream",
+    "animedao14.stream",
+    "animedao15.stream",
+    "animedao16.stream",
+    "animedao17.stream",
+    "animedao18.stream",
+    "animedao19.stream",
+    "animedao20.stream",
+    "animedao21.stream",
+    "animedao22.stream",
+    "animedao23.stream",
+    "animedao24.stream",
+    "animedao25.stream",
+    "animedao26.stream",
+    "animedao27.stream",
+    "animedao28.stream",
+    "animedao29.stream",
+    "animedao30.stream",
+    "animedao31.stream",
+    "animedao32.stream",
+    "animedao33.stream",
+    "animedao34.stream",
+    "animedao35.stream",
+    "animedao36.stream"
+  ]
+  
+  const MainSiteUrls = [
+    "animedao.com",
+    "animedao.to"
+  ]
+  
+  if (StreamUrls.includes(hostname)) {
     const title = document.querySelector("h2").textContent.trim();
     if ((episode = title.match(/\WEpisode\W\d{1,3}/)) != null) {
       presenceData.details = title.replace(episode[0], "");
@@ -63,7 +99,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).paused
         : (await strings).playing;
     }
-  } else if (hostname === `animedao.com`) {
+  } else if (MainSiteUrls.includes(hostname)) {
     presenceData.startTimestamp = startTimestamp;
     if (pathname === `/`) {
       presenceData.details = (await strings).browsing;
