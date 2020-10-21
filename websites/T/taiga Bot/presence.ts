@@ -3,14 +3,14 @@ const presence = new Presence({
 });
 
 function getRow(row: number) {
-  let metas = document.getElementsByTagName("meta");
+  const metas = document.getElementsByTagName("meta");
   for (let i = 0; i < metas.length; i++) {
     if (metas[i].getAttribute("property") === "premid:row" + row) {
-      let content = metas[i].getAttribute("content")
+      const content = metas[i].getAttribute("content");
       return content === "" ? undefined : content;
     }
   }
-  return "";
+  return undefined;
 }
 
 const browsingStamp = Math.floor(Date.now() / 1000);
