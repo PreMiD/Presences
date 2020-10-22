@@ -8,7 +8,7 @@
         "demo.bigbluebutton.org",
         "demo2.bigbluebutton.org"
     ],
-    "regExp": "\\/(b|gl)\\/[\\w]{3}-[\\d\\w]{3}-[\\d\\w]{3}|html5client\\/join\\?|client\\/guest-wait.html",
+    "regExp": "[/](b|gl)[/][\\w]{3}-[\\d\\w]{3}-[\\d\\w]{3}|html5client[/]join[?]|client[/]guest-wait[.]html",
     "description": {
         "en": "BigBlueButton online learning platform"
     },
