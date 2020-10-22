@@ -23,10 +23,10 @@ presence.on("UpdateData", async () => {
   if (document.location.hostname == "taigabot.net") {
     presenceData.details = getRow(1);
     presenceData.state = getRow(2);
-    
+
     if (presenceData.details === undefined) delete presenceData.details;
     if (presenceData.state === undefined) delete presenceData.state;
-    
+
     presence.setActivity(presenceData);
   }
 });

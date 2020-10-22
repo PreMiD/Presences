@@ -45,15 +45,15 @@ presence.on("UpdateData", async () => {
   }
 
   if (path.includes("/movies/highlights")) {
-    extra = ' Movies';
+    extra = " Movies";
   } else if (path.includes("/watch/tv/highlights")) {
-    extra = ' TV Shows';
+    extra = " TV Shows";
   } else if (path.includes("/watch/kids/highlights")) {
-    extra = ' Kids';
+    extra = " Kids";
   } else if (path.includes("/watch/sports/highlights")) {
-    extra = ' Sports';
+    extra = " Sports";
   } else if (path.includes("/watch/latino/highlights")) {
-    extra = ' Latino';
+    extra = " Latino";
   }
 
   // By default, details will be "Browsing..."
@@ -68,23 +68,30 @@ presence.on("UpdateData", async () => {
   if (path.includes("/watch/playback") || path.includes("/watch/asset")) {
     video = document.querySelector(".video-player-component video");
     if (video) {
-      title = document.querySelector(".playback-header__title") || document.querySelector('.playback-metadata__container-title');
+      title =
+        document.querySelector(".playback-header__title") ||
+        document.querySelector(".playback-metadata__container-title");
       const timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
         live = timestamps[1] === Infinity,
-        desc = document.querySelector(".playback-metadata__container-episode-metadata-info") || 
-          document.querySelector(".playback-metadata__container-description") || 
-          document.querySelector(".swiper-slide-active .playlist-item-overlay__container-title");
+        desc =
+          document.querySelector(
+            ".playback-metadata__container-episode-metadata-info"
+          ) ||
+          document.querySelector(".playback-metadata__container-description") ||
+          document.querySelector(
+            ".swiper-slide-active .playlist-item-overlay__container-title"
+          );
 
-      if(desc) {
+      if (desc) {
         state = desc.textContent;
       }
-      if(title) {
+      if (title) {
         details = title.textContent;
-        if(path.includes("/watch/playback/playlist")) {
-          details = details + ' Playlist';
+        if (path.includes("/watch/playback/playlist")) {
+          details = details + " Playlist";
         }
       }
 
@@ -104,23 +111,23 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    largeImageKey: "peacock", 
+    largeImageKey: "peacock",
     details
   };
 
-  if(state !== undefined) {
+  if (state !== undefined) {
     data.state = state;
   }
-  if(smallImageKey !== undefined) {
+  if (smallImageKey !== undefined) {
     data.smallImageKey = smallImageKey;
   }
-  if(smallImageText !== undefined) {
+  if (smallImageText !== undefined) {
     data.smallImageText = smallImageText;
   }
-  if(startTimestamp !== undefined) {
+  if (startTimestamp !== undefined) {
     data.startTimestamp = startTimestamp;
   }
-  if(endTimestamp !== undefined) {
+  if (endTimestamp !== undefined) {
     data.endTimestamp = endTimestamp;
   }
 
