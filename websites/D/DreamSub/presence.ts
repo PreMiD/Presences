@@ -296,7 +296,7 @@ presence.on("UpdateData", async () => {
 
     if (iFrameVideo === true && !isNaN(duration)) {
       
-    let newname = document.title.split(": Episodio")[0];
+    const newname = document.title.split(": Episodio")[0];
     
       if (currentTime == duration) {
         presenceData.smallImageKey = "pause";
