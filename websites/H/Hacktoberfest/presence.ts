@@ -18,8 +18,8 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing Page:";
       presenceData.state = "Checking Profile";
     } else if (document.location.pathname.includes("/details")) {
-      presenceData.details = `Reading Page:`;
-      presenceData.state = `Resources`;
+      presenceData.details = "Reading Page:";
+      presenceData.state = "Resources";
     } else if (document.location.pathname.includes("/events")) {
       presenceData.details = "Viewing Page:";
       presenceData.state = "All events";
