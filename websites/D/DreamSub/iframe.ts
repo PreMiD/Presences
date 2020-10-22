@@ -5,7 +5,7 @@ iframe.on("UpdateData", async () => {
   videos = document.getElementsByTagName("video");
   
   if (videos.length > 0) {
-    let video: HTMLVideoElement = videos[0];
+    const video: HTMLVideoElement = videos[0];
 
     if (!isNaN(video.duration)) {
       iframe.send({
