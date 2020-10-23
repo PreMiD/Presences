@@ -1,20 +1,27 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "Callum",
     "id": "506899274748133376"
   },
+  "contributors": [
+    {
+      "name": "Ben",
+      "id": "200636868621107200"
+    }
+  ],
   "url": "itspulse.net",
   "description": {
     "en": "Pulse is an internet radio community originally started in 2019, after much disrespect and un-professional antics across the radio community; we decided to make our own project that gives people the chance and opportunity to take control of how they want a community."
   },
   "service": "Pulse",
   "version": "2.0.0",
-  "logo": "https://itspulse.net/assets/images/logo.png",
-  "thumbnail": "https://itspulse.net/assets/images/logo.png",
-  "color": "#EE0B0B",
+  "logo": "https://i.imgur.com/IPlZPxB.png",
+  "thumbnail": "https://i.imgur.com/IPlZPxB.png",
+  "color": "#FF0000",
   "tags": [
-    "radio",
     "music",
+    "radio",
     "online",
     "community"
   ],
