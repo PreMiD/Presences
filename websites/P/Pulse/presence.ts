@@ -1,10 +1,7 @@
 const presence = new Presence({
   clientId: "680160273474388014"
 });
-
-
 let sartist, strack, slisteners, sdj;
-
 function newStats(): void {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function (): void {
@@ -19,19 +16,14 @@ function newStats(): void {
   xhttp.open("GET", "https://api.itspulse.net/stats", true);
   xhttp.send();
 }
-
 setInterval(newStats, 6000);
 newStats();
-
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    
-    
-  };
-        presenceData.state = (strack || "Loading...") + (" - " + sartist);
-        presenceData.details =
-          (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners";
-        
+     presenceData.state = (strack || "Loading...") + (" - " + sartist);
+     presenceData.details =
+     (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners";
+  };   
   presence.setActivity(presenceData);
 });
