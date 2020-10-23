@@ -2,8 +2,8 @@ const presence = new Presence({
   clientId: "680160273474388014"
 });
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-let sartist, strack, slisteners, sdj, play;
+
+let sartist, strack, slisteners, sdj;
 
 function newStats(): void {
   const xhttp = new XMLHttpRequest();
@@ -26,30 +26,12 @@ newStats();
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp
+    smallImageKey: "logo"
+    
   };
-  if (document.location.pathname.startsWith("/")) {
-    play = document.querySelector(
-      "body > div > i"
-    );
-    play = play.className;
-    switch (play) {
-      case "fa fa-play":
-        // Music Paused
-        presenceData.smallImageKey = "pause";
         presenceData.state = (strack || "Loading...") + (" - " + sartist);
         presenceData.details =
           (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners";
-        presenceData.smallImageText = "https://itspulse.net";
-        break;
-      case "fa fa-pause":
-        // Music Playing
-        presenceData.smallImageKey = "play";
-        presenceData.state = (strack || "Loading...") + (" - " + sartist);
-        presenceData.details =
-          (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners";
-        presenceData.smallImageText = "https://itspulse.net";
-    }
-  }
+        
   presence.setActivity(presenceData);
 });
