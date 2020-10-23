@@ -26,7 +26,7 @@ newStats();
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    smallImageKey: "logo"
+    
     
   };
         presenceData.state = (strack || "Loading...") + (" - " + sartist);
