@@ -21,8 +21,8 @@ newStats();
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    state = (strack || "Loading...") + (" - " + sartist);
-    details = (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners";
+    state: (strack || "Loading...") + (" - " + sartist);
+    details: (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners";
   };   
   presence.setActivity(presenceData);
 });
