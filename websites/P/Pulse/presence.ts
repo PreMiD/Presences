@@ -10,13 +10,13 @@ function newStats(): void {
   xhttp.onreadystatechange = function (): void {
     if (this.readyState == 4 && this.status == 200) {
       const data = JSON.parse(this.responseText);
-      strack = data.now_playing.song.title;
-      sartist = data.now_playing.song.artist;
-      sdj = data.live.is_live ? "DJ " + data.live.streamer_name : "AutoDJ";
-      slisteners = " • " + data.listeners.unique;
+      strack = data.song.title;
+      sartist = data.song.artist;
+      sdj = data.dj.livedj;
+      slisteners = " • " + data.listeners.current;
     }
   };
-  xhttp.open("GET", "https://radio.itspulse.net/api/nowplaying/1", true);
+  xhttp.open("GET", "https://api.itspulse.net/stats", true);
   xhttp.send();
 }
 
@@ -28,9 +28,9 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
   };
-  if (document.location.pathname.startsWith("/lite")) {
+  if (document.location.pathname.startsWith("/")) {
     play = document.querySelector(
-      "body > div > div > div > div > div > div > i"
+      "body > div > i"
     );
     play = play.className;
     switch (play) {
