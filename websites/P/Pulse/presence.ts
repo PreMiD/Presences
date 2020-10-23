@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "680160273474388014"
 });
-let sartist, strack, slisteners, sdj;
+let sartist: string, strack: any, slisteners: string, sdj: any;
 function newStats(): void {
   const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function (): void {
