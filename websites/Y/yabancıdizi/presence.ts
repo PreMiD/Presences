@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  pages = {
+  pages: { [k: string]: string } = {
     "/": "Ana Sayfa",
     "/vip": "Ana Sayfa",
     "/kesfet": "Keşfet",
@@ -28,21 +28,34 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-const video: { [k: string]: any } = {};
+const video: {
+  dataAvailable?: boolean;
+  currentTime?: number;
+  duration?: number;
+  paused?: boolean;
+} = {};
 
-presence.on("iFrameData", (data) => {
-  if (!data.error) {
-    video.dataAvailable = true;
-    video.currentTime = data.currentTime;
-    video.duration = data.duration;
-    video.paused = data.paused;
+presence.on(
+  "iFrameData",
+  (data: {
+    error?: boolean;
+    currentTime: number;
+    duration: number;
+    paused: boolean;
+  }) => {
+    if (!data.error) {
+      video.dataAvailable = true;
+      video.currentTime = data.currentTime;
+      video.duration = data.duration;
+      video.paused = data.paused;
+    }
   }
-});
+);
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
@@ -156,19 +169,18 @@ presence.on("UpdateData", async () => {
 
     if (page.includes("/film") && movieTitle && movieTitle.textContent != "") {
       const timestamps = getTimestamps(
-        Math.floor(_video.currentTime),
-        Math.floor(_video.duration)
-      );
-
-      const data: { [k: string]: any } = {
-        largeImageKey: "yd-logo",
-        details: "Bir film izliyor:",
-        state: movieTitle.textContent,
-        smallImageKey: _video.paused ? "pause" : "play",
-        smallImageText: _video.paused
-          ? (await strings).pause
-          : (await strings).play
-      };
+          Math.floor(_video.currentTime),
+          Math.floor(_video.duration)
+        ),
+        data: PresenceData = {
+          largeImageKey: "yd-logo",
+          details: "Bir film izliyor:",
+          state: movieTitle.textContent,
+          smallImageKey: _video.paused ? "pause" : "play",
+          smallImageText: _video.paused
+            ? (await strings).pause
+            : (await strings).play
+        };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
         data.startTimestamp = timestamps[0];
@@ -189,19 +201,18 @@ presence.on("UpdateData", async () => {
       episode.textContent != ""
     ) {
       const timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
-
-      const data: { [k: string]: any } = {
-        largeImageKey: "yd-logo",
-        details: "Bir film izliyor:",
-        state: title.textContent,
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play
-      };
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        ),
+        data: PresenceData = {
+          largeImageKey: "yd-logo",
+          details: "Bir film izliyor:",
+          state: title.textContent,
+          smallImageKey: video.paused ? "pause" : "play",
+          smallImageText: video.paused
+            ? (await strings).pause
+            : (await strings).play
+        };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
         data.startTimestamp = timestamps[0];
@@ -227,19 +238,18 @@ presence.on("UpdateData", async () => {
 
     if (page.includes("/film/") && movieTitle && movieTitle.textContent != "") {
       const timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
-
-      const data: { [k: string]: any } = {
-        largeImageKey: "yd-logo",
-        details: "Bir film izliyor:",
-        state: movieTitle.textContent,
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play
-      };
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        ),
+        data: PresenceData = {
+          largeImageKey: "yd-logo",
+          details: "Bir film izliyor:",
+          state: movieTitle.textContent,
+          smallImageKey: video.paused ? "pause" : "play",
+          smallImageText: video.paused
+            ? (await strings).pause
+            : (await strings).play
+        };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
         data.startTimestamp = timestamps[0];
@@ -260,19 +270,18 @@ presence.on("UpdateData", async () => {
       episode.textContent != ""
     ) {
       const timestamps = getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
-      );
-
-      const data: { [k: string]: any } = {
-        largeImageKey: "yd-logo",
-        details: showName2.textContent,
-        state: episode.textContent,
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play
-      };
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        ),
+        data: PresenceData = {
+          largeImageKey: "yd-logo",
+          details: showName2.textContent,
+          state: episode.textContent,
+          smallImageKey: video.paused ? "pause" : "play",
+          smallImageText: video.paused
+            ? (await strings).pause
+            : (await strings).play
+        };
 
       if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
         data.startTimestamp = timestamps[0];
