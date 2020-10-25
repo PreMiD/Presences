@@ -23,6 +23,6 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo",
     state: (strack || "Loading...") + (" - " + sartist),
     details: (sdj || "Loading...") + (slisteners || "Loading...") + " Listeners"
-  };   
+  };
   presence.setActivity(presenceData);
 });
