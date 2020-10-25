@@ -14,23 +14,14 @@
     "ar_SA": "أنمي بالكوم - موقع عربي متخصص لمشاهدة وتحميل الانمي المترجم باللغة العربية ومعرفة آخر أخبار ومستجدات عالم الأنمي."
   },
   "service": "Blkom",
-  "version": "1.0",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/XW4ouq1.png",
-  "thumbnail": "https://i.imgur.com/UBqcoIN.png",
+  "thumbnail": "https://i.imgur.com/skws0oS.png",
   "color": "#FF6161",
   "tags": [
-    "بلكوم",
-    "بالكوم",
-    "انمي بالكوم",
-    "انمي بلكوم",
-    "انمي",
-    "انيمي",
-    "انيمي بلكوم",
-    "انيمي بالكوم",
-    "Anime",
-    "Anime Blkom",
-    "Blkom Anime",
-    "Blkom"
+    "embedded-links",
+    "blkom",
+    "streaming"
   ],
   "category": "anime",
   "iframe": true
