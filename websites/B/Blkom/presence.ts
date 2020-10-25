@@ -29,7 +29,7 @@ const data: PresenceData = {
   largeImageKey: "logo"
 };
 
-if (video != null && !isNaN(video.duration) && video.duration > 0) {
+if (location.pathname.startsWith('/watch')) {
   const timestamps = getTimestamps(
     Math.floor(video.currentTime),
     Math.floor(video.duration)
