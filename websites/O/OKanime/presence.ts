@@ -66,9 +66,12 @@ presence.on("UpdateData", async () => {
       ? (await strings).pause
       : (await strings).play;
     data.startTimestamp = timestamps[0];
+    console.log(timestamps[0])
     data.endTimestamp = timestamps[1];
+    console.log('->', timestamps[1])
 
     if (video.paused) {
+      console.log('Debugger')
       delete data.startTimestamp;
       delete data.endTimestamp;
     }
