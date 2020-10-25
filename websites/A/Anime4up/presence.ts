@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
         : "Nothing"
     }`;
     presence.setActivity(data);
-  } else if ("/anime/") {
+  } else if (location.pathname.startsWith("/anime/")) {
     data.smallImageKey = "location";
     data.smallImageText = "Viewing";
     data.details = document.querySelector(".anime-details-title").textContent;
