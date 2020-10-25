@@ -5,6 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
   });
+
 let video = {
   duration: 0,
   currentTime: 0,
