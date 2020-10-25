@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "768437292486361129"
-}),
-
- browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "768437292486361129"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -26,12 +25,10 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/eventkit")) {
       presenceData.details = "Viewing Page:";
       presenceData.state = "Event Organizer Kit";
-    }
-    else if (document.location.pathname.includes("/updates")) {
+    } else if (document.location.pathname.includes("/updates")) {
       presenceData.details = "Reading Page:";
       presenceData.state = "Hacktoberfest Update";
-    }
-    else if (document.location.pathname.includes("/login")) {
+    } else if (document.location.pathname.includes("/login")) {
       presenceData.details = "Viewing Page:";
       presenceData.state = "Login";
     }

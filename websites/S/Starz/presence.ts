@@ -35,8 +35,8 @@ let elapsed: number = undefined,
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "starz-logo"
-  }, 
+      largeImageKey: "starz-logo"
+    },
     href = window.location.href,
     path = window.location.pathname;
 
@@ -45,15 +45,17 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  const video: HTMLVideoElement = document.querySelector(".bitmovinplayer-container video");
- 
+  const video: HTMLVideoElement = document.querySelector(
+    ".bitmovinplayer-container video"
+  );
+
   if (video) {
     const title = document.querySelector("title")?.textContent,
       timestamps = getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-    ),
-    live = timestamps[1] === Infinity;
+      ),
+      live = timestamps[1] === Infinity;
 
     (data.details = title), (data.state = getStateText(video.paused, live));
     (data.smallImageKey = live ? "live" : video.paused ? "pause" : "play"),
@@ -75,21 +77,21 @@ presence.on("UpdateData", async () => {
     }
   } else {
     data.details = "Browsing...";
-    if(path.includes('/series')) {
+    if (path.includes("/series")) {
       data.details = "Browsing Series";
     }
-    if(path.includes('/movies')) {
+    if (path.includes("/movies")) {
       data.details = "Browsing Movies";
-    }    
-    if(path.includes('/playlist')) {
+    }
+    if (path.includes("/playlist")) {
       data.details = "Browsing Playlist";
-    }    
-    if(path.includes('/schedule')) {
+    }
+    if (path.includes("/schedule")) {
       data.details = "Browsing Schedule";
-    }    
-    if(path.includes('/search')) {
+    }
+    if (path.includes("/search")) {
       data.details = "Searching...";
-    }    
+    }
     data.startTimestamp = elapsed;
     presence.setActivity(data);
   }
