@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Feed";
 
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname == "/games/" && gameName == null) {
+  } else if (document.location.pathname == "/games" && gameName == null) {
     presenceData.details = "Browsing games...";
 
     presenceData.startTimestamp = browsingStamp;
@@ -146,7 +146,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Tab: " + gameTab.innerText;
 
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes("/catalog/")) {
+  } else if (document.location.pathname.includes("/catalog")) {
     const searchURL = new URL(document.location.href);
 
     const searchResult = searchURL.searchParams.get("Keyword");
