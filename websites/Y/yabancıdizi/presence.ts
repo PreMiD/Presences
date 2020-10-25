@@ -1,7 +1,7 @@
-const presence = new Presence({
+const yabancidizi = new Presence({
     clientId: "643593006821408778"
   }),
-  strings = presence.getStrings({
+  strings = yabancidizi.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
@@ -40,7 +40,7 @@ const video: {
   paused?: boolean;
 } = {};
 
-presence.on(
+yabancidizi.on(
   "iFrameData",
   (data: {
     error?: boolean;
@@ -57,7 +57,7 @@ presence.on(
   }
 );
 
-presence.on("UpdateData", async () => {
+yabancidizi.on("UpdateData", async () => {
   const page = document.location.pathname,
     _video = document.querySelector("video") as HTMLVideoElement,
     isVideoData = Object.keys(video).length > 0 ? true : false,
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
 
   if (!isVideoData && !_video) {
     if (page.includes("/kesfet")) {
-      presence.setActivity({
+      yabancidizi.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir sayfaya göz atıyor:",
         state: "Keşfet",
@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
         "#router-view > div > div.profile-header > div.heading-user-title > h1"
       );
 
-      presence.setActivity({
+      yabancidizi.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir aktöre göz atıyor:",
         state: actorName ? actorName.textContent.trim() : "Belirsiz",
@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
       categoryTitle &&
       categoryTitle.textContent != ""
     ) {
-      presence.setActivity({
+      yabancidizi.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir kategoriye göz atıyor:",
         state: categoryTitle.textContent,
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
       categoryTitle &&
       categoryTitle.textContent != ""
     ) {
-      presence.setActivity({
+      yabancidizi.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir kategoriye göz atıyor:",
         state: categoryTitle.textContent,
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
       categoryTitle2 &&
       categoryTitle2.textContent != ""
     ) {
-      presence.setActivity({
+      yabancidizi.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir kategoriye göz atıyor:",
         state: categoryTitle2.textContent,
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
       showName &&
       showName.textContent != ""
     ) {
-      presence.setActivity({
+      yabancidizi.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir diziye göz atıyor:",
         state: showName.textContent,
@@ -145,14 +145,14 @@ presence.on("UpdateData", async () => {
       userName &&
       userName.textContent != ""
     ) {
-      presence.setActivity({
+      yabancidizi.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir profile göz atıyor:",
         state: userName.textContent,
         startTimestamp: Math.floor(Date.now() / 1000)
       });
     } else if (pages[page] || pages[page.slice(0, -1)]) {
-      presence.setActivity({
+      yabancidizi.setActivity({
         largeImageKey: "yd-logo",
         details: "Bir sayfaya göz atıyor:",
         state: pages[page] || pages[page.slice(0, -1)],
@@ -191,8 +191,8 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
 
-      presence.setTrayTitle(video.paused ? "" : `${movieTitle.textContent}`);
-      presence.setActivity(data);
+      yabancidizi.setTrayTitle(video.paused ? "" : `${movieTitle.textContent}`);
+      yabancidizi.setActivity(data);
     } else if (
       page.includes("/dizi/") &&
       title &&
@@ -223,10 +223,10 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
 
-      presence.setTrayTitle(
+      yabancidizi.setTrayTitle(
         video.paused ? "" : `${title.textContent} - ${episode.textContent}`
       );
-      presence.setActivity(data);
+      yabancidizi.setActivity(data);
     }
   } else if (isVideoData && video && !isNaN(video.duration)) {
     const showName2 = document.querySelector(
@@ -260,8 +260,8 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
 
-      presence.setTrayTitle(video.paused ? "" : `${movieTitle.textContent}`);
-      presence.setActivity(data);
+      yabancidizi.setTrayTitle(video.paused ? "" : `${movieTitle.textContent}`);
+      yabancidizi.setActivity(data);
     } else if (
       page.includes("/dizi/") &&
       showName2 &&
@@ -292,17 +292,16 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
 
-      presence.setTrayTitle(
+      yabancidizi.setTrayTitle(
         video.paused ? "" : `${showName2.textContent} - ${episode.textContent}`
       );
-      presence.setActivity(data);
+      yabancidizi.setActivity(data);
     }
-  } else {
-    presence.setActivity({
+  } else
+    yabancidizi.setActivity({
       largeImageKey: "yd-logo",
       details: "Bir sayfaya göz atıyor:",
       state: "Bilinmeyen Sayfa",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  }
 });
