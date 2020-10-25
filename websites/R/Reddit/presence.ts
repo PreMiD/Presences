@@ -12,7 +12,7 @@ let subReddit: string,
   username: string,
   nickname: string,
   rpanTitle: string;
-
+  
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "reddit_lg",

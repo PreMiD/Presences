@@ -4,7 +4,6 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing"
   });
 let video = {
   duration: 0,
@@ -75,10 +74,7 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data, !video.paused);
   } else {
-    data.details = (await strings).browsing;
-    data.smallImageKey = "search";
-    data.smallImageText = (await strings).browsing;
-
+    data.details = "On Homepage";
     presence.setActivity(data);
   }
 });
