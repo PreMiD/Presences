@@ -26,7 +26,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
 
   if (location.pathname.startsWith("/episode")) {
@@ -83,9 +84,7 @@ presence.on("UpdateData", async () => {
     location.pathname.startsWith(
       "/%d9%82%d8%a7%d8%a6%d9%85%d8%a9-%d8%a7%d9%84%d8%a7%d9%86%d9%85%d9%8a"
     ) ||
-    location.pathname.startsWith("/anime-") ||
-    location.pathname.startsWith("/en-anime-letter") ||
-    location.pathname.startsWith("/ar-anime-letter")
+    location.pathname.includes("/anime-")
   ) {
     data.smallImageKey = "discovery";
     data.smallImageText = "Browsing";

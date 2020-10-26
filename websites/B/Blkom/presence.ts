@@ -13,7 +13,7 @@ function getTimestamps(
   videoDuration: number
 ): Array<number> {
   const startTime = Date.now(),
-  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -26,7 +26,8 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
 
   if (location.pathname.startsWith("/watch")) {
@@ -37,8 +38,9 @@ presence.on("UpdateData", async () => {
 
     data.details = document.querySelector(".anime-name").textContent.trim();
 
-    data.state = `Episode: ${document.querySelector(".episode-number").lastChild.textContent
-      }`;
+    data.state = `Episode: ${
+      document.querySelector(".episode-number").lastChild.textContent
+    }`;
 
     data.smallImageKey = video.paused ? "pause" : "play";
     data.smallImageText = video.paused ? "Paused" : "Played";
@@ -60,9 +62,10 @@ presence.on("UpdateData", async () => {
       document.querySelectorAll(".content").length &&
       document.querySelectorAll(".page-item").length
     )
-      data.state = `Results: ${document.querySelectorAll(".content").length *
+      data.state = `Results: ${
+        document.querySelectorAll(".content").length *
         (document.querySelectorAll(".page-item").length - 3)
-        } and More..`;
+      } and More..`;
     else if (document.querySelectorAll(".content").length)
       data.state = `Results: ${document.querySelectorAll(".content").length}`;
     else data.state = `Results: Nothing`;
