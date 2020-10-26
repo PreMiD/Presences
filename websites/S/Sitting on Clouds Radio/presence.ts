@@ -6,11 +6,9 @@ const timeElapsed = Math.floor(Date.now() / 1000);
 let songName, albumName, artistName;
 
 presence.on("UpdateData", async () => {
-  songName = document.querySelector(
-    "span#cardTitle.card-title.playerText.truncate"
-  );
-  albumName = document.querySelector("p#cardAlbum.playerText.truncate");
-  artistName = document.querySelector("p#cardArtist.playerText.truncate");
+  songName = document.getElementById("premidTitle");
+  albumName = document.getElementById("premidAlbum");
+  artistName = document.getElementById("premidArtist");
   if (albumName.innerText == "Press the Play button to start the radio") {
     const presenceData: PresenceData = {
       details: "Not tuned in.",
