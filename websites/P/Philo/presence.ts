@@ -83,7 +83,6 @@ presence.on("UpdateData", async () => {
       data.details = "Searching...";
     }
     data.startTimestamp = elapsed;
-    console.log(data);
     presence.setActivity(data);
   }
 });
