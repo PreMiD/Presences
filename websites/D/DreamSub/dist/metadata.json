@@ -27,5 +27,5 @@
     ],
     "iframe": true,
     "category": "anime",
-    "iFrameRegExp": "^https:\/\/cdn.dreamsub.stream\/vl\/"
+    "iFrameRegExp": "^https://cdn[1-9]?.dreamsub.stream/vl/"
 }
