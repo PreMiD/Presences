@@ -13,7 +13,10 @@
   "logo": "https://i.imgur.com/qwOsx7u.png",
   "thumbnail": "https://i.imgur.com/FfzRGF1.png",
   "color": "#38b5eb",
-  "tags": ["embedded-links", "anime4up", "streaming"],
+  "tags": [
+    "anime",
+    "streaming"
+  ],
   "category": "anime",
   "iframe": true
 }
