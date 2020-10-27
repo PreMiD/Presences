@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
-    if (title !== null) {
+    if (title) {
       presence.setActivity(data, !video.paused);
     }
   } else {
