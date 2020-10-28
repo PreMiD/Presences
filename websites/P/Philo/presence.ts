@@ -47,10 +47,10 @@ presence.on("UpdateData", async () => {
       seriesEp = document.querySelector(".season-episode-format"),
       subtitle = document.querySelector(".player-controls-subtitle-text"),
       live = document.querySelector(".flag.flag-live"),
-      state = live
-        ? "Watching Live"
-        : seriesEp
+      state = seriesEp
         ? `${seriesEp.textContent} ${subtitle.textContent}`
+        : live
+        ? "Watching Live"
         : "Movie";
 
     (data.details = title), (data.state = state);
