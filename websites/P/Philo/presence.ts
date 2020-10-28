@@ -47,11 +47,14 @@ presence.on("UpdateData", async () => {
       seriesEp = document.querySelector(".season-episode-format"),
       subtitle = document.querySelector(".player-controls-subtitle-text"),
       live = document.querySelector(".flag.flag-live"),
-      state = live
-        ? "Watching Live"
-        : seriesEp
+      state = seriesEp
         ? `${seriesEp.textContent} ${subtitle.textContent}`
-        : "Movie";
+        : live
+        ? "Watching Live"
+        : "Watching",
+      channel: HTMLImageElement = document.querySelector(
+        ".player-controls-subtitle img"
+      );
 
     (data.details = title), (data.state = state);
     (data.smallImageKey = live ? "live" : video.paused ? "pause" : "play"),
@@ -68,7 +71,14 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
+    if (!data.endTimestamp) {
+      delete data.endTimestamp;
+    }
+
     if (data.details && data.state.trim()) {
+      if (channel && channel.getAttribute("alt")) {
+        data.state += " on " + channel.getAttribute("alt");
+      }
       presence.setActivity(data, !video.paused);
     }
   } else {
