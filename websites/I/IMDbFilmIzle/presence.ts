@@ -58,7 +58,7 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
   const page: string = document.location.pathname,
-    movieTitle = document.querySelector("#sayfa > div.tam.pb0 > div.m_name > h1")?.textContent?.replace(/(( +)| )izle \| hd|izle|hd/gi, ''),
+    movieTitle = document.querySelector('h1[itemprop="name"]')?.textContent?.replace(/(( +)| )izle \| hd|izle|hd/gi, ''),
     isVideoData = Object.keys(video).length > 0 ? true : false;
 
   // Search Results
@@ -112,7 +112,7 @@ presence.on("UpdateData", async () => {
 
   // Movies & Series
   if (
-    document.querySelector("#sayfa > div.tam.pb0 > div.m_name > h1")?.textContent &&
+    document.querySelector('h1[itemprop="name"]')?.textContent &&
     video?.currentTime &&
     isVideoData
   ) {
@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
   } else if (
-    document.querySelector("#sayfa > div.tam.pb0 > div.m_name > h1")?.textContent &&
+    document.querySelector('h1[itemprop="name"]')?.textContent &&
     isVideoData
   ) {
     if (movieTitle.includes("Sezon") && movieTitle.includes("Bölüm"))
