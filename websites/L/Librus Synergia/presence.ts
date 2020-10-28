@@ -2,26 +2,25 @@ var presence = new Presence({
     clientId: "770999998082842634" //The client ID of the Application created at https://discordapp.com/developers/applications
 });
 
-let currentURL = new URL(document.location.href),
+const currentURL = new URL(document.location.href),
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
 const browsingStamp = Math.floor(Date.now() / 1000);
 let tresc = '';
 
 presence.on("UpdateData", async () => {
 
-    let currentURLString = currentURL.toString();
-    let currentPATHString = currentPath.toString();
+    const currentURLString = currentURL.toString();
+    const currentPATHString = currentPath.toString();
 
     if(currentURLString.startsWith('https://portal.librus.pl/rodzina')) {
         if(currentPATHString.endsWith('synergia,loguj')) tresc = 'Loguje się do e-dziennika'; else 
         if(currentURLString == 'https://portal.librus.pl/rodzina') tresc = 'Przegląda stronę główną'; else { 
             if (document.readyState === 'complete') {
-                let h1tytul = document.getElementsByClassName('content__title')[0].textContent;
-                tresc = 'Czyta artykuł: '+h1tytul;
+                const h1title = document.getElementsByClassName('content__title')[0].textContent;
+                tresc = 'Czyta artykuł: '+h1title;
             }
         }
     } else if(currentURLString.startsWith('https://synergia.librus.pl')) {
-        console.log(currentPATHString);
         if(currentPATHString.endsWith('uczen,index')) tresc = 'Jest na stronie głownej'; else 
         if(currentPATHString.endsWith('przegladaj_oceny,uczen')) tresc = 'Sprawdza oceny'; else 
         if(currentPATHString.endsWith('przegladaj_nb,uczen')) tresc = 'Sprawdza frekwencje'; else
@@ -46,7 +45,7 @@ presence.on("UpdateData", async () => {
         tresc = "Przegląda nieobsługiwaną stronę";
     }
 
-    let presenceData: PresenceData = {
+    const presenceData: PresenceData = {
         details: tresc,
         largeImageKey: "RQJE11m",
         startTimestamp: browsingStamp
