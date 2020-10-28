@@ -24,7 +24,6 @@ presence.on("UpdateData", async () => {
         if(currentPATHString.endsWith('uczen,index')) tresc = 'Jest na stronie głownej'; else 
         if(currentPATHString.endsWith('przegladaj_oceny,uczen')) tresc = 'Sprawdza oceny'; else 
         if(currentPATHString.endsWith('przegladaj_nb,uczen')) tresc = 'Sprawdza frekwencje'; else
-        if(currentPATHString.endsWith('wiadomosci')) tresc = 'Przegląda wiadomości'; else
         if(currentPATHString.endsWith('ogloszenia')) tresc = 'Przegląda ogłoszenia'; else
         if(currentPATHString.endsWith('terminarz')) tresc = 'Przegląda terminarz'; else
         if(currentPATHString.endsWith('moje_zadania')) tresc = 'Przegląda zadania domowe'; else
@@ -40,7 +39,8 @@ presence.on("UpdateData", async () => {
         if(currentPATHString.endsWith('ustawienia,konto')) tresc = 'Zmienia ustawienia konta'; else
         if(currentPATHString.endsWith('ustawienia,ogolne')) tresc = 'Zmienia ustawienia motywu'; else
         if(currentPATHString.endsWith('aplikacje')) tresc = 'Sprawdza autoryzowane aplikacje'; else
-        if(currentPATHString.endsWith('help,D251')) tresc = 'Sprawdza instrukcje'; else tresc = "Sprawdza e-dziennik";
+        if(currentPATHString.includes('help')) tresc = 'Sprawdza instrukcje'; else 
+        if(currentPATHString.includes('wiadomosci')) tresc = 'Przegląda wiadomości'; else tresc = "Sprawdza e-dziennik";
     } else {
         tresc = "Przegląda nieobsługiwaną stronę";
     }
