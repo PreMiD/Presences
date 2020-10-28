@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "inakeiizapas",
+      "id": "645001455778136100"
+    },
+    "service": "Librus Synergia",
+    "altnames": "Librus e-dziennik",
+    "description": {
+      "en": "One of the largest systems for schools in Poland",
+      "pl": "Jeden z największych systemów dla szkół w Polsce"
+    },
+    "url": [
+        "portal.librus.pl",
+        "synergia.librus.pl"
+      ],
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/RQJE11m.png",
+    "thumbnail": "https://i.imgur.com/d4VkZHc.png",
+    "color": "#C74087",
+    "tags": ["liburs", "e-dziennik", "edziennik"],
+    "category": "other",
+    "regExp": "([a-z0-9-]+[.])+librus[.]pl[/]",
+    "iframe": false
+  } 
