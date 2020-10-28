@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
         ? `${seriesEp.textContent} ${subtitle.textContent}`
         : live
         ? "Watching Live"
-        : "Movie",
+        : "Watching",
       channel: HTMLImageElement = document.querySelector(
         ".player-controls-subtitle img"
       );
