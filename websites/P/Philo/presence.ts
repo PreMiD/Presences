@@ -71,7 +71,12 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
+    if (!data.endTimestamp) {
+      delete data.endTimestamp;
+    }
+
     if (data.details && data.state.trim()) {
+      console.log(data);
       if (channel && channel.getAttribute("alt")) {
         data.state += " on " + channel.getAttribute("alt");
       }
