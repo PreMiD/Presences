@@ -51,7 +51,10 @@ presence.on("UpdateData", async () => {
         ? `${seriesEp.textContent} ${subtitle.textContent}`
         : live
         ? "Watching Live"
-        : "Movie";
+        : "Movie",
+      channel: HTMLImageElement = document.querySelector(
+        ".player-controls-subtitle img"
+      );
 
     (data.details = title), (data.state = state);
     (data.smallImageKey = live ? "live" : video.paused ? "pause" : "play"),
@@ -69,6 +72,9 @@ presence.on("UpdateData", async () => {
     }
 
     if (data.details && data.state.trim()) {
+      if (channel && channel.getAttribute("alt")) {
+        data.state += " on " + channel.getAttribute("alt");
+      }
       presence.setActivity(data, !video.paused);
     }
   } else {
