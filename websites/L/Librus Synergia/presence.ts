@@ -3,24 +3,15 @@ const presence = new Presence({
 });
 
 const currentURL = new URL(document.location.href),
-<<<<<<< HEAD
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
-=======
     currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
     browsingStamp = Math.floor(Date.now() / 1000);
->>>>>>> 2f05713d... 	modified:   presence.ts
+
 let tresc = '';
 
 presence.on("UpdateData", async () => {
 
-<<<<<<< HEAD
-    const currentURLString = currentURL.toString();
-    const currentPATHString = currentPath.toString();
-=======
     const currentURLString = currentURL.toString(),
         currentPATHString = currentPath.toString();
->>>>>>> 2f05713d... 	modified:   presence.ts
 
     if(currentURLString.startsWith('https://portal.librus.pl/rodzina')) {
         if(currentPATHString.endsWith('synergia,loguj')) tresc = 'Loguje się do e-dziennika'; else 
