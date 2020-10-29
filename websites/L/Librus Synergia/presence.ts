@@ -6,7 +6,8 @@ const currentURL = new URL(document.location.href),
     currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/"),
     browsingStamp = Math.floor(Date.now() / 1000);
 
-let tresc = '';
+let tresc = '',
+    logo = 'lg_portal';
 
 presence.on("UpdateData", async () => {
 
@@ -14,6 +15,7 @@ presence.on("UpdateData", async () => {
         currentPATHString = currentPath.toString();
 
     if(currentURLString.startsWith('https://portal.librus.pl/rodzina')) {
+        logo = 'lg_portal';
         if(currentPATHString.endsWith('synergia,loguj')) tresc = 'Loguje się do e-dziennika'; else 
         if(currentURLString == 'https://portal.librus.pl/rodzina') tresc = 'Przegląda stronę główną'; else { 
             if (document.readyState === 'complete') {
@@ -22,6 +24,7 @@ presence.on("UpdateData", async () => {
             }
         }
     } else if(currentURLString.startsWith('https://synergia.librus.pl')) {
+        logo = 'lg_synergia';
         if(currentPATHString.endsWith('uczen,index')) tresc = 'Jest na stronie głownej'; else 
         if(currentPATHString.endsWith('przegladaj_oceny,uczen')) tresc = 'Sprawdza oceny'; else 
         if(currentPATHString.endsWith('przegladaj_nb,uczen')) tresc = 'Sprawdza frekwencje'; else
@@ -43,12 +46,13 @@ presence.on("UpdateData", async () => {
         if(currentPATHString.includes('help')) tresc = 'Sprawdza instrukcje'; else 
         if(currentPATHString.includes('wiadomosci')) tresc = 'Przegląda wiadomości'; else tresc = "Sprawdza e-dziennik";
     } else {
+        logo = 'lg_portal';
         tresc = "Przegląda nieobsługiwaną stronę";
     }
 
     const presenceData: PresenceData = {
         details: tresc,
-        largeImageKey: "RQJE11m",
+        largeImageKey: logo,
         startTimestamp: browsingStamp
       };
 
