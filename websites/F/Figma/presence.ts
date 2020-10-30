@@ -1,8 +1,6 @@
 const presence = new Presence({
   clientId: "768942376403075073" //Discord Client ID
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+}), browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -431,4 +429,4 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 
-})
+});
