@@ -45,31 +45,31 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "list";
         presenceData.smallImageText = 'juniper.bot'
       } else if (document.location.pathname.includes("/dashboard/")) {
-        presenceData.details = locales[userLang].dashone;
-        presenceData.state = `${locales[userLang].dashtwo} ${
+        presenceData.details = locales[lang].dashone;
+        presenceData.state = `${locales[lang].dashtwo} ${
           document.querySelector(".guild--info h1.font-weight-thin.display-2")
             .innerHTML
         }`;
       } else if (document.location.pathname.includes("/donate")) {
-        presenceData.details = locales[userLang].donate;
+        presenceData.details = locales[lang].donate;
         presenceData.smallImageKey = "donate";
         presenceData.smallImageText = 'juniper.bot'
       } else if (document.location.pathname == "/") {
-        presenceData.details = locales[userLang].mainpage;
+        presenceData.details = locales[lang].mainpage;
       } else if (document.location.pathname == "/servers") {
-        presenceData.details = locales[userLang].servers;
+        presenceData.details = locales[lang].servers;
         presenceData.smallImageKey = "list";
         presenceData.smallImageText = 'juniper.bot'
       } else if (document.location.pathname == "/commands") {
-        presenceData.details = locales[userLang].cmds;
+        presenceData.details = locales[lang].cmds;
         presenceData.smallImageKey = "list";
         presenceData.smallImageText = 'juniper.bot'
       } else if (document.location.pathname == "/status") {
-        presenceData.details = locales[userLang].stats;
+        presenceData.details = locales[lang].stats;
         presenceData.smallImageKey = "stats";
         presenceData.smallImageText = 'juniper.bot'
       } else if (document.location.pathname == "/user/card") {
-        presenceData.details = locales[userLang].rank;
+        presenceData.details = locales[lang].rank;
       }
     }
     if (document.location.hostname == "docs.juniper.bot") {
@@ -83,9 +83,9 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.state = "feedback.juniper.bot";
       if (document.location.pathname == "/") {
-        presenceData.details = locales[userLang].mainpage;
+        presenceData.details = locales[lang].mainpage;
       } else if (document.location.pathname.includes("/posts")) {
-        presenceData.details = `${locales[userLang].fbackread}: ${
+        presenceData.details = `${locales[lang].fbackread}: ${
           document.querySelector(".post-header h1").innerHTML
         }`;
       }
