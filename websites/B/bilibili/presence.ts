@@ -40,7 +40,12 @@ let currentTime: number,
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: { duration: number; currTime: number; dur: number; test: boolean };
+    iframe_video: {
+      duration: number;
+      currTime: number;
+      dur: number;
+      test: boolean;
+    };
   }) => {
     playback = data.iframe_video.duration !== null ? true : false;
 
