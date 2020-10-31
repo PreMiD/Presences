@@ -58,11 +58,16 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
   const page: string = document.location.pathname,
-    movieTitle = document.querySelector('h1[itemprop="name"]')?.textContent?.replace(/(( +)| )izle \| hd|izle|hd/gi, ''),
+    movieTitle = document
+      .querySelector('h1[itemprop="name"]')
+      ?.textContent?.replace(/(( +)| )izle \| hd|izle|hd/gi, ""),
     isVideoData = Object.keys(video).length > 0 ? true : false;
 
   // Search Results
-  if (page.includes("/?s") && (new URLSearchParams(document.location.search).get("s"))) {
+  if (
+    page.includes("/?s") &&
+    new URLSearchParams(document.location.search).get("s")
+  ) {
     presenceData.details = "Arama sonuçları:";
     presenceData.state = new URLSearchParams(document.location.search).get("s");
   }
@@ -81,9 +86,9 @@ presence.on("UpdateData", async () => {
       "#sayfa > div.sayfa-sol > div.t-baslik"
     )?.textContent;
     presenceData.startTimestamp = browsingStamp;
-  } else if (page.startsWith('/diziler/') && document.title.includes(' | ')) {
+  } else if (page.startsWith("/diziler/") && document.title.includes(" | ")) {
     presenceData.details = "Bir kategoriye göz atıyor:";
-    presenceData.state = document.title.split(' | ')[0];
+    presenceData.state = document.title.split(" | ")[0];
   }
 
   // Members
