@@ -106,20 +106,6 @@ presence.on("UpdateData", async () => {
       presence.setActivity();
       presence.setTrayTitle();
     }
-  } else if (document.location.hostname === "mc.discord.fr") { // Dynmap Discord FR
-    if (document.location.pathname === "/") {
-      presenceData.details = "Serveur Minecraft de Discord.FR";
-      presenceData.state = "mc.discord.fr (Minecraft 1.16.3)";
-
-      presenceData.largeImageKey = "minecraft";
-      presenceData.smallImageKey = "dfr";
-      presenceData.smallImageText = "mc.discord.fr";
-
-      presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
   } else if (document.location.hostname === "giveaways.discord.fr") { // Giveaways Page
     if (document.location.pathname == "/") {
       presenceData.details = "Dashboard d'inscription";
