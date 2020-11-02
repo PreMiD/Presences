@@ -26,19 +26,18 @@ async function getProfileDetails() {
   if (settings.timertoggle) {
     presenceData.startTimestamp = browsingStamp;
   }
-  const btnfriendcheck = document.querySelector(
-    "div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary"
-  ).textContent;
-  const viewingprofilename = document.querySelector("div.col-md-12 > h2")
-    .textContent;
+  const viewingdata = {
+    btnfriendcheck: document.querySelector("div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary").textContent,
+    viewingprofilename: document.querySelector("div.col-md-12 > h2").textContent
+  }
   if (settings.privacymode === false) {
-    if (btnfriendcheck.includes("Unfriend")) {
+    if (viewingdata.btnfriendcheck.includes("Unfriend")) {
       presenceData.details = "Viewing Friend:";
-      presenceData.state = viewingprofilename;
+      presenceData.state = viewingdata.viewingprofilename;
       presence.setActivity(presenceData);
     } else {
       presenceData.details = "Viewing User:";
-      presenceData.state = viewingprofilename;
+      presenceData.state = viewingdata.viewingprofilename;
       presence.setActivity(presenceData);
     }
   } else {
