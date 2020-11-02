@@ -1,6 +1,6 @@
 /* Global variables */
 const presence = new Presence({
-  clientId: "772597423188082729",
+  clientId: "772597423188082729"
 });
 let profile: string;
 
@@ -15,14 +15,9 @@ function getUserName(): void {
 async function getProfileDetails() {
   // Gets profile from the user you're viewing.
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     },
-    privacymode = await presence.getSetting("privacy");
-  const btnfriendcheck = document.querySelector(
-      "div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary"
-    ).textContent,
-    viewingprofilename = document.querySelector("div.col-md-12 > h2")
-      .textContent;
+    privacymode = await presence.getSetting("privacy"), btnfriendcheck = document.querySelector("div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary").textContent,viewingprofilename = document.querySelector("div.col-md-12 > h2").textContent;
   if (privacymode === false) {
     if (btnfriendcheck.includes("Unfriend")) {
       presenceData.details = "Viewing Friend:";
@@ -41,7 +36,7 @@ async function getProfileDetails() {
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     },
     privacymode = await presence.getSetting("privacy");
 
