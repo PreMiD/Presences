@@ -1,9 +1,8 @@
 /* Global variables */
 const presence = new Presence({
-  clientId: "772597423188082729",
+  clientId: "772597423188082729"
 });
-var profile: any;
-const browsingStamp = Math.floor(Date.now() / 1000);
+let profile: string;
 
 function getUserName(): void {
   // Get your own username
@@ -23,13 +22,13 @@ async function getProfileDetails() {
     timertoggle: await presence.getSetting("timer"),
   };
 
-  if (settings.timertoggle) {
-    presenceData.startTimestamp = browsingStamp;
-  }
   const viewingdata = {
-    btnfriendcheck: document.querySelector("div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary").textContent,
-    viewingprofilename: document.querySelector("div.col-md-12 > h2").textContent
-  }
+    btnfriendcheck: document.querySelector(
+      "div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary"
+    ).textContent,
+    viewingprofilename: document.querySelector("div.col-md-12 > h2")
+      .textContent,
+  };
   if (settings.privacymode === false) {
     if (viewingdata.btnfriendcheck.includes("Unfriend")) {
       presenceData.details = "Viewing Friend:";
@@ -48,17 +47,13 @@ async function getProfileDetails() {
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
-
   const settings = {
     privacymode: await presence.getSetting("privacy"),
-    timertoggle: await presence.getSetting("timer"),
+    timertoggle: await presence.getSetting("timer")
   };
 
-  if (settings.privacymode) {
-    presenceData.startTimestamp = browsingStamp;
-  }
   if (document.location.hostname == "hello.vrchat.com") {
     /* Home Page */
     if (document.location.pathname == "/") {

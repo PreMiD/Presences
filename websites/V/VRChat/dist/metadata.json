@@ -31,12 +31,6 @@
         "title": "Privacy Mode",
         "icon": "fas fa-user-secret",
         "value": false
-      },
-      {
-        "id": "timer",
-        "title": "Show Timer",
-        "icon": "fas fa-clock",
-        "value": true
       }
     ]
   }
