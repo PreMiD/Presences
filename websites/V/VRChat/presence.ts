@@ -1,6 +1,6 @@
 /* Global variables */
 const presence = new Presence({
-  clientId: "772597423188082729"
+  clientId: "772597423188082729",
 });
 let profile: string;
 
@@ -15,28 +15,22 @@ function getUserName(): void {
 async function getProfileDetails() {
   // Gets profile from the user you're viewing.
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-  const settings = {
-    privacymode: await presence.getSetting("privacy"),
-
-  };
-
-  const viewingdata = {
-    btnfriendcheck: document.querySelector(
+      largeImageKey: "logo",
+    },
+    privacymode = await presence.getSetting("privacy");
+  const btnfriendcheck = document.querySelector(
       "div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary"
     ).textContent,
-    viewingprofilename: document.querySelector("div.col-md-12 > h2")
-      .textContent,
-  };
-  if (settings.privacymode === false) {
-    if (viewingdata.btnfriendcheck.includes("Unfriend")) {
+    viewingprofilename = document.querySelector("div.col-md-12 > h2")
+      .textContent;
+  if (privacymode === false) {
+    if (btnfriendcheck.includes("Unfriend")) {
       presenceData.details = "Viewing Friend:";
-      presenceData.state = viewingdata.viewingprofilename;
+      presenceData.state = viewingprofilename;
       presence.setActivity(presenceData);
     } else {
       presenceData.details = "Viewing User:";
-      presenceData.state = viewingdata.viewingprofilename;
+      presenceData.state = viewingprofilename;
       presence.setActivity(presenceData);
     }
   } else {
@@ -47,8 +41,9 @@ async function getProfileDetails() {
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  }, privacymode = await presence.getSetting("privacy");
+      largeImageKey: "logo",
+    },
+    privacymode = await presence.getSetting("privacy");
 
   if (document.location.hostname == "hello.vrchat.com") {
     /* Home Page */
@@ -148,11 +143,14 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       } else if (document.location.pathname.includes("/avatar")) {
         /* Viewing a specific avatar*/
-        const avatarname = document.querySelector("div.col-12 > h3").textContent, avatarpublicstatus = document.querySelector("div.col-12.col-md-8 > h4 > span > small").textContent;
+        const avatarname = document.querySelector("div.col-12 > h3")
+            .textContent,
+          avatarpublicstatus = document.querySelector(
+            "div.col-12.col-md-8 > h4 > span > small"
+          ).textContent;
         presenceData.details = "Viewing Avatar:";
         if (privacymode === false) {
-          presenceData.state =
-            avatarname + " " + avatarpublicstatus;
+          presenceData.state = avatarname + " " + avatarpublicstatus;
         } else {
           presenceData.details = "Viewing an avatar";
         }
