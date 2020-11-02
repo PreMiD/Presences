@@ -18,7 +18,8 @@ async function getProfileDetails() {
     largeImageKey: "logo"
   };
   const settings = {
-    privacymode: await presence.getSetting("privacy")
+    privacymode: await presence.getSetting("privacy"),
+
   };
 
   const viewingdata = {
@@ -47,10 +48,7 @@ async function getProfileDetails() {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
-  const settings = {
-    privacymode: await presence.getSetting("privacy"),
-  };
+  }, privacymode = await presence.getSetting("privacy");
 
   if (document.location.hostname == "hello.vrchat.com") {
     /* Home Page */
@@ -106,7 +104,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname == "vrchat.com") {
     /* Portal */
-    if (settings.privacymode === false) {
+    if (privacymode === false) {
       getUserName();
       presenceData.state = "User: " + profile;
     }
@@ -119,7 +117,7 @@ presence.on("UpdateData", async () => {
         /* Viewing a specific world*/
         const worldname = document.querySelector(".col-md-12 > h3").textContent;
         presenceData.details = "Viewing World:";
-        if (settings.privacymode === false) {
+        if (privacymode === false) {
           presenceData.state = worldname;
         } else {
           presenceData.details = "Viewing a world";
@@ -150,16 +148,11 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
       } else if (document.location.pathname.includes("/avatar")) {
         /* Viewing a specific avatar*/
-        const avatardetails = {
-          avatarname: document.querySelector("div.col-12 > h3").textContent,
-          avatarpublicstatus: document.querySelector(
-            "div.col-12.col-md-8 > h4 > span > small"
-          ).textContent,
-        };
+        const avatarname = document.querySelector("div.col-12 > h3").textContent, avatarpublicstatus = document.querySelector("div.col-12.col-md-8 > h4 > span > small").textContent;
         presenceData.details = "Viewing Avatar:";
-        if (settings.privacymode === false) {
+        if (privacymode === false) {
           presenceData.state =
-            avatardetails.avatarname + " " + avatardetails.avatarpublicstatus;
+            avatarname + " " + avatarpublicstatus;
         } else {
           presenceData.details = "Viewing an avatar";
         }
