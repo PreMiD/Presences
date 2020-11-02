@@ -15,11 +15,10 @@ function getUserName(): void {
 async function getProfileDetails() {
   // Gets profile from the user you're viewing.
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   };
   const settings = {
-    privacymode: await presence.getSetting("privacy"),
-    timertoggle: await presence.getSetting("timer"),
+    privacymode: await presence.getSetting("privacy")
   };
 
   const viewingdata = {
@@ -51,7 +50,6 @@ presence.on("UpdateData", async () => {
   };
   const settings = {
     privacymode: await presence.getSetting("privacy"),
-    timertoggle: await presence.getSetting("timer")
   };
 
   if (document.location.hostname == "hello.vrchat.com") {
