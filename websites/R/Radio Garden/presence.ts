@@ -9,8 +9,8 @@ presence.on("UpdateData", async () => {
 	if(!document.title.includes("Explore live radio by rotating")){
 		details = document.querySelector(".ChannelTitle_title__2QQj5");
 		state = document.querySelector(".ChannelTitle_subtitle__DZ_ZQ");
-		const elapsed =  Math.floor(Date.now() / 1000);
-		let presenceData: PresenceData = {
+		const elapsed =  Math.floor(Date.now() / 1000),
+		presenceData: PresenceData = {
 			details: details.innerText,
 			state: state.innerText,
 			largeImageKey: "bigglobe",
