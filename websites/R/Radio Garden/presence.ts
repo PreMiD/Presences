@@ -1,13 +1,13 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "687070418804408445" //The client ID of the Application created at https://discordapp.com/developers/applications
 });
 
-var details: any;
-var state: any;
+let details: HTMLInputElement;
+let state: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	if(!document.title.includes("Explore live radio by rotating")){
-		const elapsed =  Math.floor(Date.now() / 1000)
+		const elapsed =  Math.floor(Date.now() / 1000);
 		const presenceData: PresenceData = {
 //			details: `${document.querySelector(".ChannelTitle_title__2QQj5").innerText}`,
 //			state: `${document.querySelector(".ChannelTitle_subtitle__DZ_ZQ").innerText}`,
@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.state;
 			presenceData.details = "Stopped";
 			delete presenceData.startTimestamp;
-		};
+		}
 //		This could work with some tweaks. It detects when youre not tuned into anything, but trips if radio youre tuned into is not in view...
 //		else {
 //			presenceData.smallImageKey = "statusstop";
@@ -45,5 +45,5 @@ presence.on("UpdateData", async () => {
 //			delete presenceData.startTimestamp;
 //			console.log("broke")
 //		};
-		presence.setActivity(presenceData)
+		presence.setActivity(presenceData);
 }});
