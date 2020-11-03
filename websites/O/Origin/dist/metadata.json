@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "mmatt",
+    "id": "308000668181069824"
+  },
+  "url": [
+    "www.origin.com",
+    "origin.com"
+  ],
+  "description": {
+    "en": "EA's Webstore for buying EA Games."
+  },
+  "service": "Origin",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/KXWzOsC.png",
+  "thumbnail": "https://i.imgur.com/ouRWcio.jpg",
+  "color": "#f56c2d",
+  "tags": [
+    "ea",
+    "games",
+    "store",
+    "webstore",
+    "eagames"
+  ],
+  "category": "games"
+}
