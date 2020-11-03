@@ -2,8 +2,8 @@ const presence = new Presence({
   clientId: "687070418804408445" //The client ID of the Application created at https://discordapp.com/developers/applications
 });
 
-let details: HTMLInputElement;
-let state: HTMLInputElement;
+let details: HTMLInputElement,
+state: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	if(!document.title.includes("Explore live radio by rotating")){
