@@ -7,15 +7,15 @@ state: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
 	if(!document.title.includes("Explore live radio by rotating")){
+		details = document.querySelector(".ChannelTitle_title__2QQj5");
+		state = document.querySelector(".ChannelTitle_subtitle__DZ_ZQ");
 		const elapsed =  Math.floor(Date.now() / 1000);
-		const presenceData: PresenceData = {
-//			details: `${document.querySelector(".ChannelTitle_title__2QQj5").innerText}`,
-//			state: `${document.querySelector(".ChannelTitle_subtitle__DZ_ZQ").innerText}`,
+		let presenceData: PresenceData = {
+			details: details.innerText,
+			state: state.innerText,
 			largeImageKey: "bigglobe",
 			startTimestamp: elapsed
 		};
-		details = document.querySelector(".ChannelTitle_title__2QQj5");
-		state = document.querySelector(".ChannelTitle_subtitle__DZ_ZQ");
 		if(document.getElementsByClassName('ListItem_isPlaying__E3wWB').length == 1){
 			presenceData.smallImageKey = "statusplay";
 			presenceData.smallImageText = "Playing";
