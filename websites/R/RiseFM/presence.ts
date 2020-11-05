@@ -3,12 +3,12 @@ const presence = new Presence({
 });
 
 function metadataListener(): void {
-  const data = JSON.parse(this.responseText);
-  const rname = data.now.title;
-  const rartist = data.now.artist;
-  const listeners = data.listeners.current;
-  const islive = data.live.autoDJ;
-  const presenter = data.live.userrname;
+  const data = JSON.parse(this.responseText),
+  rname = data.now.title,
+  rartist = data.now.artist,
+  listeners = data.listeners.current,
+  islive = data.live.autoDJ,
+  presenter = data.live.userrname;
 }
 
 function doMeta(): void {
@@ -26,9 +26,8 @@ presence.on("UpdateData", async () => {
 const toggleelapse = await presence.getSetting("elapse"),
 details = await presence.getSetting("details"),
 state = await presence.getSetting("state"),
-small = await presence.getSetting("changesmalltext");
-
-  const presenceData: PresenceData = {
+small = await presence.getSetting("changesmalltext"), 
+presenceData: PresenceData = {
     largeImageKey: "rise",
     smallImageKey: "rplay",
     startTimestamp: toggleelapse ? ltStart : null
