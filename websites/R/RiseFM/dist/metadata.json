@@ -1,0 +1,53 @@
+{
+  "author": {
+    "name": "DawsonCodes",
+    "id": "752492154160414762"
+  },
+  "service": "RiseFM",
+  "description": {
+    "en": "RiseFM is an online radio station aimed at providing the freshest music all the time."
+  },
+  "url": ["risefm.pw", "risefm.stream"],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/hQ4f7UV.png",
+  "thumbnail": "https://i.imgur.com/pLFxKVu.png",
+  "color": "#FFA500",
+  "tags": [
+    "radio",
+    "rise",
+    "pop",
+    "audio",
+    "music",
+    "community"
+  ],
+  "category": "music",
+  "settings": [
+    {
+      "id": "elapse",
+      "title": "Enable Elapse Status",
+      "icon": "fas fa-history",
+      "value": true
+    },
+    {
+      "id": "details",
+      "title": "Edit Line #1 (Song Info)",
+      "icon": "fas fa-music",
+      "value": "🎵 %artist% - %song%",
+      "placeholder": "🎵 %artist% - %song%"
+    },
+    {
+      "id": "state",
+      "title": "Edit Line #2 (Presenter Info)",
+      "icon": "fas fa-headphones",
+      "value": "🎤 %presenter%",
+      "placeholder": "🎤 %presenter%"
+    },
+    {
+      "id": "changesmalltext",
+      "title": "Change Small Hover Text",
+      "icon": "fas fa-edit",
+      "value": "Listeners: %listeners%",
+      "placeholder": "Listeners: %listeners%"
+    }
+  ]
+}
