@@ -2,12 +2,14 @@ const presence = new Presence({
   clientId: "773701779434897419"
 });
 
+let rname: string, rartist: string, listeners: string, islive: string, presenter: string, lTitle: string, yes: boolean = false;
+
 function metadataListener(): void {
-  const data = JSON.parse(this.responseText),
-  rname = data.now.title,
-  rartist = data.now.artist,
-  listeners = data.listeners.current,
-  islive = data.live.autoDJ,
+  const data = JSON.parse(this.responseText);
+  rname = data.now.title;
+  rartist = data.now.artist;
+  listeners = data.listeners.current;
+  islive = data.live.autoDJ;
   presenter = data.live.userrname;
 }
 
@@ -19,20 +21,20 @@ function doMeta(): void {
 }
 
 setInterval(doMeta, 10000);
-const ltStart = Math.floor(Date.now() / 1000);
+let ltStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 
 const toggleelapse = await presence.getSetting("elapse"),
 details = await presence.getSetting("details"),
 state = await presence.getSetting("state"),
-small = await presence.getSetting("changesmalltext"), 
-presenceData: PresenceData = {
+small = await presence.getSetting("changesmalltext");
+
+  const presenceData: PresenceData = {
     largeImageKey: "rise",
     smallImageKey: "rplay",
     startTimestamp: toggleelapse ? ltStart : null
   };
-
 
   if (!rname) {
     lTitle = "Loading!";
@@ -40,7 +42,6 @@ presenceData: PresenceData = {
   } else if (!rartist) rartist = "Loading!";
   else if (!presenter) presenter = "Loading!";
   else if (!listeners) listeners = "Loading!";
-
 
   if (!islive) {
     if (details) presenceData.details = details.replace("%song%", rname).replace("%artist%", rartist);
