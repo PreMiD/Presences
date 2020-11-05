@@ -2,16 +2,13 @@ const presence = new Presence({
   clientId: "773701779434897419"
 });
 
-
-let rname: string, rartist: string, listeners: string, islive: string, presenter: string, lTitle: string, yes: boolean = false;
-
 function metadataListener(): void {
   const data = JSON.parse(this.responseText);
-  rname = data.now.title;
-  rartist = data.now.artist;
-  listeners = data.listeners.current;
-  islive = data.live.autoDJ;
-  presenter = data.live.userrname;
+  const rname = data.now.title;
+  const rartist = data.now.artist;
+  const listeners = data.listeners.current;
+  const islive = data.live.autoDJ;
+  const presenter = data.live.userrname;
 }
 
 function doMeta(): void {
