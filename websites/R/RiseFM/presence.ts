@@ -19,7 +19,7 @@ function doMeta(): void {
 }
 
 setInterval(doMeta, 10000);
-let ltStart = Math.floor(Date.now() / 1000);
+const ltStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 
