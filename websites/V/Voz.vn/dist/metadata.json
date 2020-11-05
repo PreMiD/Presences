@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "U+0110",
+    "id": "773624839268597820"
+  },
+  "service": "Voz.vn",
+  "description": {
+    "en": "Vietnam surrenders to forum technology :|",
+    "vi_VN": "Việt Nam đầu hàng công nghệ diễn đàn :|"
+  },
+  "url": "voz.vn",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/CSIuu87.jpg",
+  "thumbnail": "https://i.imgur.com/TPHjavm.jpg",
+  "color": "#404040",
+  "tags": [
+    "socials",
+    "forum",
+    "community"
+  ],
+  "category": "socials"
+}
