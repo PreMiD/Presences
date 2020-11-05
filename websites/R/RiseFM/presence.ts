@@ -5,11 +5,11 @@ const presence = new Presence({
 let rname: string, rartist: string, listeners: string, islive: string, presenter: string, lTitle: string;
 
 function metadataListener(): void {
-  const data = JSON.parse(this.responseText),
-  rname = data.now.title,
-  rartist = data.now.artist,
-  listeners = data.listeners.current,
-  islive = data.live.autoDJ,
+  const data = JSON.parse(this.responseText);
+  rname = data.now.title;
+  rartist = data.now.artist;
+  listeners = data.listeners.current;
+  islive = data.live.autoDJ;
   presenter = data.live.userrname;
 }
 
