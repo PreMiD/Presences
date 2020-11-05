@@ -28,9 +28,8 @@ presence.on("UpdateData", async () => {
 const toggleelapse = await presence.getSetting("elapse"),
 details = await presence.getSetting("details"),
 state = await presence.getSetting("state"),
-small = await presence.getSetting("changesmalltext");
-
-  const presenceData: PresenceData = {
+small = await presence.getSetting("changesmalltext").
+presenceData: PresenceData = {
     largeImageKey: "rise",
     smallImageKey: "rplay",
     startTimestamp: toggleelapse ? ltStart : null
