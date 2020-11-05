@@ -23,10 +23,10 @@ let ltStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 
-const toggleelapse = await presence.getSetting("elapse");
-const details = await presence.getSetting("details");
-const state = await presence.getSetting("state");
-const small = await presence.getSetting("changesmalltext");
+const toggleelapse = await presence.getSetting("elapse"),
+details = await presence.getSetting("details"),
+state = await presence.getSetting("state"),
+small = await presence.getSetting("changesmalltext");
 
   const presenceData: PresenceData = {
     largeImageKey: "rise",
