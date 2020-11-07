@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "xxdjbobbyxx",
+    "id": "456601190671843328"
+  },
+  "url": "symphonyradio.tk",
+  "description": {
+    "en": "Bringing you the Symphony to your ears, this is SymphonyRadio"
+  },
+  "service": "Symphony",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/l6meesB.png",
+  "thumbnail": "https://i.imgur.com/tWSpYUK.png",
+  "color": "#ff8300",
+  "tags": [
+    "radio",
+    "music",
+    "entertainment"
+  ],
+  "category": "music"
+}
