@@ -17,7 +17,12 @@ async function getProfileDetails() {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    privacymode = await presence.getSetting("privacy"), btnfriendcheck = document.querySelector("div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary").textContent,viewingprofilename = document.querySelector("div.col-md-12 > h2").textContent;
+    privacymode = await presence.getSetting("privacy"),
+    btnfriendcheck = document.querySelector(
+      "div.w-100.btn-group-lg.btn-group-vertical > button.btn.btn-primary"
+    ).textContent,
+    viewingprofilename = document.querySelector("div.col-md-12 > h2")
+      .textContent;
   if (privacymode === false) {
     if (btnfriendcheck.includes("Unfriend")) {
       presenceData.details = "Viewing Friend:";
