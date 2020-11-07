@@ -6,11 +6,11 @@ let sname, sartist, duallisteners, dualislive, dualpresenter;
 
 function metadataListener(): void {
   const data = JSON.parse(this.responseText);
-  sname = data.now.song;
-  sartist = data.now.artist;
+  sname = data.song.title;
+  sartist = data.song.artist;
   duallisteners = data.listeners.current;
-  dualislive = data.presenter.autoDJ;
-  dualpresenter = data.presenter.username;
+  dualislive = data.dj.autoDJ;
+  dualpresenter = data.dj.livedj;
 }
 
 function updateMetaData(): void {
