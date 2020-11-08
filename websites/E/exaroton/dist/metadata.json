@@ -1,0 +1,26 @@
+  
+{
+  "author": {
+    "name": "Bluewy",
+    "id": "698080201158033409"
+  },
+  "service": "exaroton",
+  "description": {
+    "en": "Only pay to play. With our high-end on demand game servers.",
+    "nl": "Betaal alleen wanneer je speelt. Met onze high-end on demand game servers."
+  },
+  "url": [
+    "exaroton.com",
+    "support.exaroton.com",
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/uFAyLCK.png",
+  "thumbnail": "https://i.imgur.com/B70FffU.png",
+  "color": "#19ba19",
+  "tags": [
+    "exaroton",
+    "games",
+    "minecraft"
+  ],
+  "category": "games"
+}
