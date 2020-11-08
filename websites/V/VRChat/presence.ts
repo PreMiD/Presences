@@ -188,7 +188,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/p/")) {
       /* Viewing a post */
       const postname = document.querySelector("div.postTitle").textContent;
-      presenceData.details = "Browsing feedback post...";
+      presenceData.details = "Viewing feedback post:";
       presenceData.state = postname;
       presence.setActivity(presenceData);
     } else if (document.location.pathname == "/") {
