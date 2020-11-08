@@ -1,127 +1,133 @@
-const presence = new Presence({
-  clientId: "563836644579606528" // CLIENT DISCORD FR
+let presence = new Presence({
+  clientId: "563836644579606528" // DFR CLIENT ID
 }),
-browsingStamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "discordfr",
-    smallImageKey: "rooster"
-  };
-  presenceData.startTimestamp = browsingStamp;
+strings = presence.getStrings({
+  play: "presence.playback.playing",
+  pause: "presence.playback.paused"
+});
 
-  if (document.location.hostname === "discord.fr") { // Page d'acceuil
+let timestamp = Math.floor(Date.now() / 1000);
+
+let presenceData: PresenceData = {
+  largeImageKey: "discordfr",
+  smallImageKey: "rooster",
+  details: "Chargement de la page...",
+  state: "Discord FR",
+  startTimestamp: timestamp
+};
+
+function updatePresenceData(){
+  
+  if (document.location.hostname == "discord.fr") {
+    // Accueil
     if (document.location.pathname == "/") {
       presenceData.details = "Wiki, blog et tutoriels en français";
       presenceData.state = "discord.fr";
-
-      presenceData.smallImageText = "Page d'acceuil";
-
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/serveur")) { // Page Serveur
-      presenceData.details = "Serveur d'entraide français.";
+      presenceData.smallImageText = "Page d'accueil";
+    }
+    // Page serveur
+    else if (document.location.pathname == "/serveur/") {
+      presenceData.details = "Serveur d'entraide Français";
       presenceData.state = "discord.gg/fr";
-
       presenceData.largeImageKey = "serveur";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/serveur";
-
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/blog")) { // Blog
+    }
+    // Blog 
+    else if (document.location.pathname.includes("/blog/")) {
       presenceData.details = "Consulte le Blog";
       presenceData.state = "";
-
       presenceData.largeImageKey = "blog";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/blog";
-
-      const blog = document.location.pathname.split("/");
-      if (blog[2] !== undefined) presenceData.smallImageText = `discord.fr/blog/${blog.splice(2).join("/")}`;
-
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/wiki")) { // Wiki
+    }
+    // Wiki
+    else if (document.location.pathname.includes("/wiki/")) {
       presenceData.details = "Consulte le wiki";
       presenceData.state = "";
-
       presenceData.largeImageKey = "wiki";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/wiki";
-
-      const wiki = document.location.pathname.split("/");
-      if (wiki[2] !== undefined) presenceData.smallImageText = `discord.fr/wiki/${wiki.splice(2).join("/")}`;
-
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/recrutement")) { // Recrutement
+    }
+    // Recrutement
+    else if (document.location.pathname.includes("/recrutement/")) {
       presenceData.details = "Consulte la page de recrutement";
-
+      presenceData.state = "discord.gg/fr";
       presenceData.largeImageKey = "recrutement";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/recrutement";
-
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/partenariat")) { // Partenariat
+    }
+    // Partenariat
+    else if (document.location.pathname.includes("/partenariat/")) {
       presenceData.details = "Consulte la page de partenariat";
-
+      presenceData.state = "discord.gg/fr";
       presenceData.largeImageKey = "partenariat";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/partenariat";
-
-      presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
     }
-  } else if (document.location.hostname === "i.discord.fr") { // Image i.discord.fr
-    presenceData.details = "Consulte une image";
-    presenceData.state = "i.discord.fr";
+    else {
+      presenceData.details = "Erreur lors du chargement";
+      presenceData.state = "discord.fr";
+    }
 
-    presenceData.largeImageKey = "image";
+  }
+
+// Image Discord.FR (i.discord.fr)
+  else if (document.location.hostname == "i.discord.fr") {
+    if (document.location.pathname == "/") {
+      presenceData.details = "Consulte une image";
+      presenceData.state = "i.discord.fr";
+      presenceData.largeImageKey = "image";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "i.discord.fr";
+    }
+    else {
+      presenceData.details = "Erreur lors du chargement";
+      presenceData.state = "i.discord.fr";
+    }
+
+  }
+
+// Support Discord FR (support.discord.fr)
+else if (document.location.hostname == "support.discord.fr") {
+  if (document.location.pathname == "/") {
+    presenceData.details = "Team Support";
+    presenceData.state = "via ModMail";
+    presenceData.largeImageKey = "support";
     presenceData.smallImageKey = "dfr";
-    presenceData.smallImageText = "i.discord.fr";
+    presenceData.smallImageText = "support.discord.fr";
+  }
+  // Ticket
+  else if (document.location.pathname.includes("/logs/")) {
+    presenceData.details = "Consulte l'archive d'un ticket";
+    presenceData.state = "";
+    presenceData.largeImageKey = "logs";
+    presenceData.smallImageKey = "dfr";
+    presenceData.smallImageText = ""; 
+  }
+  else {
+    presenceData.details = "Erreur lors du chargement";
+    presenceData.state = "support.discord.fr";
+  }
 
-    presence.setActivity(presenceData);
-  } else if (document.location.hostname === "support.discord.fr") { // Support Discord FR
-    if (document.location.pathname == "/") {
-      presenceData.details = "Team Support";
-      presenceData.state = "via ModMail";
+}
 
-      presenceData.largeImageKey = "support";
-      presenceData.smallImageKey = "dfr";
-      presenceData.smallImageText = "support.discord.fr";
+}
 
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/logs")) { // Support Discord FR - Ticket
-      presenceData.details = "Consulte une archive de ticket";
-      presenceData.state = "";
+updatePresenceData();
+setInterval(updatePresenceData, 10000);
 
-      presenceData.largeImageKey = "logs";
-      presenceData.smallImageKey = "dfr";
-      presenceData.smallImageText = ""; 
+presence.on("UpdateData", async () => {
+  /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
+  It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.*/
 
-      const support = document.location.pathname.split("/");
-      if (support[2] !== undefined) presenceData.smallImageText = `support.discord.fr/logs/${support.splice(2).join("/")}`;
-
-      presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
-  } else if (document.location.hostname === "giveaways.discord.fr") { // Giveaways Page
-    if (document.location.pathname == "/") {
-      presenceData.details = "Dashboard d'inscription";
-      presenceData.state = "Giveaways sur discord.gg/fr";
-
-      presenceData.largeImageKey = "giveaways";
-      presenceData.smallImageKey = "dfr";
-      presenceData.smallImageText = "giveaways.discord.fr";
-
-      presence.setActivity(presenceData);
-    } else {
-      presence.setActivity();
-      presence.setTrayTitle();
-    }
+  if (presenceData.details == null) {
+      //This will fire if the presence details are not set
+      presence.setTrayTitle(); //Clears the tray title for mac users
+      presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
   } else {
-    presence.setActivity();
-    presence.setTrayTitle();
+      //This will fire when the presence details are set
+      presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
   }
 });
