@@ -46,56 +46,51 @@ presence.on("UpdateData", async () => {
     privacymode = await presence.getSetting("privacy");
 
   if (document.location.hostname == "hello.vrchat.com") {
+    presenceData.details = "Landing Page:";
     /* Home Page */
-    if (document.location.pathname == "/") {
-      presenceData.details = "Landing Page:";
-      presenceData.state = "Main Page";
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/community-guidelines") {
-      /* Viewing Guidelines*/
-      presenceData.details = "Landing Page:";
-      presenceData.state = "Community Guidelines";
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/events") {
-      /* Viewing Events Calender*/
-      presenceData.details = "Landing Page:";
-      presenceData.state = "Events Calendar";
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/legal") {
-      /* Viewing ToU*/
-      presenceData.details = "Landing Page:";
-      presenceData.state = "EULA";
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/privacy") {
-      /* Viewing Privacy*/
-      presenceData.details = "Landing Page:";
-      presenceData.state = "Privacy Policy";
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/community-faq") {
-      /* Viewing FAQ*/
-      presenceData.details = "Landing Page:";
-      presenceData.state = "Community FAQ";
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/developer-faq") {
-      /* Viewing DEV FAQ*/
-      presenceData.details = "Landing Page:";
-      presenceData.state = "Developer FAQ";
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/careers") {
-      /* Viewing Careers*/
-      presenceData.details = "Landing Page:";
-      presenceData.state = "Careers";
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/press") {
-      /* Viewing Press*/
-      presenceData.details = "Landing Page:";
-      presenceData.state = "Press";
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/contact") {
-      /* Viewing Contact*/
-      presenceData.details = "Landing Page:";
-      presenceData.state = "Contact";
-      presence.setActivity(presenceData);
+    switch (document.location.pathname) {
+      case "/":
+        presenceData.state = "Main Page";
+        presence.setActivity(presenceData);
+        break;
+      case "/community-guidelines":
+        presenceData.state = "Community Guidelines";
+        presence.setActivity(presenceData);
+        break;
+      case "/events":
+        presenceData.state = "Events Calendar";
+        presence.setActivity(presenceData);
+        break;
+      case "/legal":
+        /* Viewing ToU*/
+        presenceData.state = "EULA";
+        presence.setActivity(presenceData);
+        break;
+      case "/privacy":
+        /* Viewing Privacy*/
+        presenceData.state = "Privacy Policy";
+        presence.setActivity(presenceData);
+        break;
+      case "/community-faq":
+        presenceData.state = "Community FAQ";
+        presence.setActivity(presenceData);
+        break;
+      case "/developer-faq":
+        presenceData.state = "Developer FAQ";
+        presence.setActivity(presenceData);
+        break;
+      case "/careers":
+        presenceData.state = "Careers";
+        presence.setActivity(presenceData);
+        break;
+      case "/press":
+        presenceData.state = "Press";
+        presence.setActivity(presenceData);
+        break;
+      case "/contact":
+        presenceData.state = "Contact";
+        presence.setActivity(presenceData);
+        break;
     }
   } else if (document.location.hostname == "vrchat.com") {
     /* Portal */
@@ -188,6 +183,24 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Home Page";
         presence.setActivity(presenceData);
       }
+    }
+  } else if (document.location.hostname == "feedback.vrchat.com") {
+    if (document.location.pathname.includes("/p/")) {
+      /* Viewing a post */
+      const postname = document.querySelector("div.postTitle").textContent;
+      presenceData.details = "Browsing feedback post...";
+      presenceData.state = postname;
+      presence.setActivity(presenceData);
+    } else if (document.location.pathname == "/") {
+      presenceData.details = "Browsing feedback...";
+      presence.setActivity(presenceData);
+    } else {
+      /* Not viewing a post, display category */
+      const category = document.querySelector("div.optionContent > div")
+        .textContent;
+      presenceData.details = "Browsing feedback...";
+      presenceData.state = category;
+      presence.setActivity(presenceData);
     }
   }
 });
