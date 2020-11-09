@@ -34,7 +34,6 @@ presence.on("UpdateData", async () => {
       document.location.href.includes("/#raid") ||
       document.location.href.includes("/#raid_multi")
     ) {
-      data.details = "In a battle";
       boss = document.getElementsByClassName("name")[0].innerHTML;
       data.details = boss;
     } else if (document.location.href.includes("/#party/index/0/npc/0")) {
