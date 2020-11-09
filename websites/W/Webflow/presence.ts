@@ -1,16 +1,15 @@
 const presence = new Presence({
     clientId: "775333674563403838"
-  }),
-  websiteLoadTimestamp = Math.floor(Date.now() / 1000);
+  });
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "webflow_logo"
-    }
-  
+  };
+
   if(document.location.hostname.includes("preview.webflow.com"))
   {
-    presenceData.details = "Viewing project preview"
+    presenceData.details = "Viewing project preview";
     presenceData.state = document.title.replace('Webflow - ', '');
   }
   else if(document.location.hostname.includes("university.webflow.com"))
@@ -43,7 +42,7 @@ presence.on("UpdateData", async () => {
   }
   else if(document.location.pathname.includes('dashboard')) 
   {
-    presenceData.details = "Viewing Dashboard"
+    presenceData.details = "Viewing Dashboard";
   }
   if(document.location.pathname.includes('dashboard/welcome/templates') || document.location.pathname.includes('dashboard/sites/new')) 
   {
@@ -52,26 +51,26 @@ presence.on("UpdateData", async () => {
   else if(document.location.pathname.includes('dashboard/sites')) 
   {
     presenceData.details = "Editing project settings";
-    const projectName = document.title.replace(' - Webflow', '')
-    presenceData.state = projectName ? projectName: "Unknown Project"
+    const projectName = document.title.replace(' - Webflow', '');
+    presenceData.state = projectName ? projectName: "Unknown Project";
   }
   else if(document.location.pathname.includes('designers'))
   {
     presenceData.details = "Browsing Designers";
     if(document.location.pathname.includes('popular')) 
     {
-      presenceData.state = "Popular Designers"
+      presenceData.state = "Popular Designers";
     }
     else if(document.location.pathname.includes('hire')) 
     {
-      presenceData.state = "Designers for hire"
+      presenceData.state = "Designers for hire";
     }
   }
   else if(document.location.pathname.includes('design'))
   {
     presenceData.details = document.title.replace('Webflow - ', '');
     const pageTitle = document.querySelector('.bem-TopBar_Body_ContextLens_Name_Value');
-    presenceData.state = pageTitle ? "Editing: " + pageTitle.innerHTML : "Editing Unknown Page"
+    presenceData.state = pageTitle ? "Editing: " + pageTitle.innerHTML : "Editing Unknown Page";
     
   }
   else if(document.location.pathname.includes('discover')) 
@@ -83,15 +82,15 @@ presence.on("UpdateData", async () => {
     }
     else if(document.location.pathname.includes('following')) 
     {
-      presenceData.state = "Followed Creators"
+      presenceData.state = "Followed Creators";
     }
     else if(document.location.pathname.includes('recent')) 
     {
-      presenceData.state = "Recent Projects"
+      presenceData.state = "Recent Projects";
     }
     else if(document.location.pathname.includes('cloneable')) 
     {
-      presenceData.state = "Cloneable Projects"
+      presenceData.state = "Cloneable Projects";
     }
   }
   else if(document.location.pathname.includes('pricing')) 
@@ -135,14 +134,6 @@ presence.on("UpdateData", async () => {
   else if(document.location.pathname.includes('customers')) 
   {
     presenceData.details = "Browsing Webflow Customers";
-  }
-  else if(document.location.pathname.includes('x')) 
-  {
-    presenceData.details = "x";
-  }
-  else if(document.location.pathname.includes('x')) 
-  {
-    presenceData.details = "x";
   }
   else if(document.location.pathname.includes('dashboard/account')) 
   {
