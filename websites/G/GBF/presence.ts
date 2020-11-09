@@ -8,7 +8,8 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
   };
-
+  
+  var boss;
   data.startTimestamp = browsingStamp;
 
   if (document.location.hostname == "game.granbluefantasy.jp") {
@@ -34,6 +35,8 @@ presence.on("UpdateData", async () => {
       document.location.href.includes("/#raid_multi")
     ) {
       data.details = "In a battle";
+      boss = document.getElementsByClassName("name")[0].innerHTML;
+      data.details = boss;
     } else if (document.location.href.includes("/#party/index/0/npc/0")) {
       data.details = "Viewing party";
     } else if (document.location.href.includes("/#enhancement")) {
