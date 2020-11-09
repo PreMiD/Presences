@@ -1,9 +1,9 @@
 const presence = new Presence({
-  clientId: "775372570563182592"
-}),
-strings = presence.getStrings({
-  browsing: "presence.activity.browsing"
-});
+    clientId: "775372570563182592"
+  }),
+  strings = presence.getStrings({
+    browsing: "presence.activity.browsing"
+  });
 
 function getTimeStamp() {
   return Math.floor(Date.now() / 1000);
