@@ -37,16 +37,15 @@ presence.on("UpdateData", async () => {
   } else if (window.location.pathname.includes("/news")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "News";
-    if (window.location.pathname.includes("/news/")) {
-      try {
-        const news_title_origin = document.querySelector("head > title")
-          .textContent;
-        const news_title = news_title_origin.replace(" - Xero", "");
-        presenceData.details = "Reading news:";
-        presenceData.state = `${news_title}`;
-      } catch {
-        //Catch nothing
-      }
+    try {
+      const news_title_origin = document.querySelector(
+        "#uniteddb-content > div.container.news-container > div.news-heading.with-button"
+      ).textContent;
+      const news_title = news_title_origin.split(" — ")[0];
+      presenceData.details = "Reading news:";
+      presenceData.state = `${news_title}`;
+    } catch {
+      //Catch nothing
     }
   } else if (window.location.pathname.includes("/clan")) {
     const clan_name = document.querySelector(
