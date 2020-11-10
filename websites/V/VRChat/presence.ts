@@ -94,21 +94,22 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname == "vrchat.com") {
     if (document.location.pathname.includes("/home")) {
-      if(document.location.pathname.includes("/launch")) {
+      if (document.location.pathname.includes("/launch")) {
         presenceData.details = "Launching world instance";
         presence.setActivity(presenceData);
       } else {
         /* Portal */
         if (privacymode === false) {
-        getUserName();
-        presenceData.state = "User: " + profile;
+          getUserName();
+          presenceData.state = "User: " + profile;
         }
         if (document.location.pathname.includes("/worlds")) {
           presenceData.details = "Browsing Worlds";
           presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/world")) {
           /* Viewing a specific world*/
-          const worldname = document.querySelector(".col-md-12 > h3").textContent;
+          const worldname = document.querySelector(".col-md-12 > h3")
+            .textContent;
           presenceData.details = "Viewing World:";
           if (privacymode === false) {
             presenceData.state = worldname;
@@ -186,8 +187,8 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Home Page";
           presence.setActivity(presenceData);
         }
+      }
     }
-  }
   } else if (document.location.hostname == "feedback.vrchat.com") {
     if (document.location.pathname.includes("/p/")) {
       /* Viewing a post */
