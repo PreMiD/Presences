@@ -2,7 +2,11 @@ const presence = new Presence({
   clientId: "741011161079873713"
 });
 
-let sname: string, sartist: string, duallisteners: string, dualislive: string, dualpresenter: string;
+let sname: string,
+  sartist: string,
+  duallisteners: string,
+  dualislive: string,
+  dualpresenter: string;
 
 function metadataListener(): void {
   const data = JSON.parse(this.responseText);
