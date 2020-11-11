@@ -14,9 +14,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "xero"
   };
 
-  const path = document.location.pathname;
   presenceData.startTimestamp = getTimeStamp();
-  if (path.includes("/player/")) {
+  if (document.location.pathname.includes("/player/")) {
     const player_nickname = document.querySelector(
       "#player-profile-header-heading > div:nth-child(2) > div > div > div.medium.normal-color-name"
     ).textContent;
@@ -29,14 +28,14 @@ presence.on("UpdateData", async () => {
     } catch {
       //Catch nothing
     }
-    if (path.includes("/matches")) {
+    if (document.location.pathname.includes("/matches")) {
       presenceData.state = "Viewing Match History";
-    } else if (path.includes("/characters")) {
+    } else if (document.location.pathname.includes("/characters")) {
       presenceData.state = "Viewing Characters";
-    } else if (path.includes("/inventory")) {
+    } else if (document.location.pathname.includes("/inventory")) {
       presenceData.state = "Viewing Inventory";
     }
-  } else if (path.includes("/news")) {
+  } else if (document.location.pathname.includes("/news")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "News";
     try {
@@ -50,7 +49,7 @@ presence.on("UpdateData", async () => {
     } catch {
       //Catch nothing
     }
-  } else if (path.includes("/clan")) {
+  } else if (document.location.pathname.includes("/clan")) {
     const claninfo = [
       document.querySelector(
         "#player-profile-header-heading > div.medium.normal-color-name"
@@ -64,74 +63,74 @@ presence.on("UpdateData", async () => {
     ];
     presenceData.details = `Clan: ${claninfo[0]}`;
     presenceData.state = `Leader: ${claninfo[2]}, ${claninfo[1]}`;
-  } else if (path.includes("/leaderboards")) {
+  } else if (document.location.pathname.includes("/leaderboards")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Leaderboards";
-  } else if (path.includes("/support")) {
+  } else if (document.location.pathname.includes("/support")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Support";
-    if (path.includes("/ticket/new")) {
+    if (document.location.pathname.includes("/ticket/new")) {
       presenceData.details = "Support";
       presenceData.state = "Writing a ticket...";
-    } else if (path.includes("/ticket/")) {
+    } else if (document.location.pathname.includes("/ticket/")) {
       presenceData.details = "Support";
       presenceData.state = "Viewing a ticket";
     }
-  } else if (path.includes("/careers")) {
+  } else if (document.location.pathname.includes("/careers")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Careers";
-    if (path.includes("/careers/position/")) {
+    if (document.location.pathname.includes("/careers/position/")) {
       const careers_position = document.querySelector(
         "#uniteddb-content > div.container.news-container > div.news-heading.with-button"
       ).textContent;
       presenceData.details = "Careers";
       presenceData.state = `Viewing ${careers_position}`;
-    } else if (path.includes("/careers/application/")) {
+    } else if (document.location.pathname.includes("/careers/application/")) {
       presenceData.details = "Careers";
       presenceData.state = "Viewing applications";
     }
-  } else if (path.includes("/download")) {
+  } else if (document.location.pathname.includes("/download")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Download";
-  } else if (path.includes("/notifications")) {
+  } else if (document.location.pathname.includes("/notifications")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Notifications";
-  } else if (path.includes("/chat")) {
+  } else if (document.location.pathname.includes("/chat")) {
     const chat_opponent = document.querySelector(
       "#s4db-chat-content-header-name > a"
     ).textContent;
     presenceData.details = "Chatting with";
     presenceData.state = chat_opponent;
-  } else if (path.includes("/settings")) {
+  } else if (document.location.pathname.includes("/settings")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Settings";
-    if (path.includes("/overview")) {
+    if (document.location.pathname.includes("/overview")) {
       presenceData.details = "Settings";
       presenceData.state = "Overview";
-    } else if (path.includes("/security")) {
+    } else if (document.location.pathname.includes("/security")) {
       presenceData.details = "Settings";
       presenceData.state = "Security";
-    } else if (path.includes("/clan")) {
+    } else if (document.location.pathname.includes("/clan")) {
       presenceData.details = "Settings";
       presenceData.state = "Clan";
-    } else if (path.includes("/transactions")) {
+    } else if (document.location.pathname.includes("/transactions")) {
       presenceData.details = "Settings";
       presenceData.state = "Transaction History";
     }
-  } else if (path.includes("/signin")) {
+  } else if (document.location.pathname.includes("/signin")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Sign In";
-    if (path.includes("/setup")) {
+    if (document.location.pathname.includes("/setup")) {
       presenceData.details = "Sign Up";
       presenceData.state = "Choosing a nickname...";
     }
-  } else if (path.includes("/signup")) {
+  } else if (document.location.pathname.includes("/signup")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Sign Up";
-  } else if (path.includes("/recover")) {
+  } else if (document.location.pathname.includes("/recover")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Account recover";
-  } else if (path.endsWith("/terms")) {
+  } else if (document.location.pathname.endsWith("/terms")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Terms of Service";
   } else {
