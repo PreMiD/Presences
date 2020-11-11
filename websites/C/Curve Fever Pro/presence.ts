@@ -73,7 +73,7 @@ function RefreshData()
 	else if (state_Page == "in_lobby_ready")
 	{
 		const groupTitle = document.getElementsByClassName('group-name__title')[0],
-	    userRows = document.getElementsByClassName('group-players-list__row'),
+		userRows = document.getElementsByClassName('group-players-list__row'),
 		lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 		let playerCount = 0;
 		for (let i = 0; i < userRows.length; i++)
