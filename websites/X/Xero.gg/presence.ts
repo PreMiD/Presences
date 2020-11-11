@@ -14,29 +14,20 @@ presence.on("UpdateData", async () => {
     largeImageKey: "xero"
   };
 
-  let player_nickname: string,
-    player_clan: string,
-    news_title: string,
-    clan_name: string,
-    clan_members: string,
-    clan_leader: string,
-    careers_position: string,
-    chat_opponent: string;
-
   const path = document.location.pathname;
   presenceData.startTimestamp = getTimeStamp();
   if (path.includes("/player/")) {
-    player_nickname = document.querySelector(
+    const player_nickname = document.querySelector(
       "#player-profile-header-heading > div:nth-child(2) > div > div > div.medium.normal-color-name"
     ).textContent;
     presenceData.details = `Player: ${player_nickname}`;
     presenceData.state = "Viewing Statistics";
     try {
-      player_clan = document.querySelector("#s4db-player-view-clan > a")
+      const player_clan = document.querySelector("#s4db-player-view-clan > a")
         .textContent;
       presenceData.details += `(${player_clan})`;
     } catch {
-      //catch nothing
+      //Catch nothing
     }
     if (path.includes("/matches")) {
       presenceData.state = "Viewing Match History";
@@ -49,7 +40,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "News";
     try {
-      news_title = document
+      const news_title = document
         .querySelector(
           "#uniteddb-content > div.container.news-container > div.news-heading.with-button"
         )
@@ -60,17 +51,19 @@ presence.on("UpdateData", async () => {
       //Catch nothing
     }
   } else if (path.includes("/clan")) {
-    clan_name = document.querySelector(
-      "#player-profile-header-heading > div.medium.normal-color-name"
-    ).textContent;
-    clan_members = document.querySelector(
-      "#clan-data-container > div > div.col-sm-3 > div > div.xero-pane-body > ul > li"
-    ).lastChild.textContent;
-    clan_leader = document.querySelector(
-      "#clan-data-container > div > div.col-sm-9 > div:nth-child(2) > div > div > a > div.media-body.ml-2 > div.bold"
-    ).textContent;
-    presenceData.details = `Clan: ${clan_name}`;
-    presenceData.state = `Leader: ${clan_leader}, ${clan_members}`;
+    const claninfo = [
+      document.querySelector(
+        "#player-profile-header-heading > div.medium.normal-color-name"
+      ).textContent,
+      document.querySelector(
+        "#clan-data-container > div > div.col-sm-3 > div > div.xero-pane-body > ul > li"
+      ).lastChild.textContent,
+      document.querySelector(
+        "#clan-data-container > div > div.col-sm-9 > div:nth-child(2) > div > div > a > div.media-body.ml-2 > div.bold"
+      ).textContent
+    ];
+    presenceData.details = `Clan: ${claninfo[0]}`;
+    presenceData.state = `Leader: ${claninfo[2]}, ${claninfo[1]}`;
   } else if (path.includes("/leaderboards")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Leaderboards";
@@ -88,7 +81,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Careers";
     if (path.includes("/careers/position/")) {
-      careers_position = document.querySelector(
+      const careers_position = document.querySelector(
         "#uniteddb-content > div.container.news-container > div.news-heading.with-button"
       ).textContent;
       presenceData.details = "Careers";
@@ -104,8 +97,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Notifications";
   } else if (path.includes("/chat")) {
-    chat_opponent = document.querySelector("#s4db-chat-content-header-name > a")
-      .textContent;
+    const chat_opponent = document.querySelector(
+      "#s4db-chat-content-header-name > a"
+    ).textContent;
     presenceData.details = "Chatting with";
     presenceData.state = chat_opponent;
   } else if (path.includes("/settings")) {
