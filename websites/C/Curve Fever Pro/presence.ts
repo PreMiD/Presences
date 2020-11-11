@@ -1,4 +1,4 @@
-let presence = new Presence(
+const presence = new Presence(
 {
 clientId: "775356824240128021"
 });
@@ -27,8 +27,7 @@ skinNames.set("Ice-Cream", "ice-cream");
 skinNames.set("Pineapple", "pineapple");
 skinNames.set("Rasta", "rasta");
 
-let lastlobbyName = "";
-let lastName = "Unnamed";
+let lastlobbyName = "", lastName = "Unnamed";
 
 const data: PresenceData = {
 	largeImageKey: "index",
@@ -52,15 +51,15 @@ presence.on("UpdateData", async() =>
 
 function RefreshData()
 {
-	let state_Page = getActualGamePage();
+	const state_Page = getActualGamePage();
 	if (state_Page == "in_lobby_picking_powers")
 	{
-		let skinSlot = document.getElementsByClassName('skin-slot skin-slot--0')[0];
+		const skinSlot = document.getElementsByClassName('skin-slot skin-slot--0')[0];
 		let groupTitle = document.getElementsByClassName('group-name__title')[0];
-		let userRows = document.getElementsByClassName('c-user c-user--small');
+		const userRows = document.getElementsByClassName('c-user c-user--small');
 
-		let skinName = skinSlot ? skinSlot.children[0].getAttribute("title") : "skin_unknown";
-		let lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
+		const skinName = skinSlot ? skinSlot.children[0].getAttribute("title") : "skin_unknown";
+		const lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 
 		data.details = "Picking Powers";
 		data.state = "In Lobby, " + lobbyName + " (" + userRows.length + "/6)";
@@ -76,9 +75,9 @@ function RefreshData()
 	else if (state_Page == "in_lobby_ready")
 	{
 		let groupTitle = document.getElementsByClassName('group-name__title')[0];
-		let userRows = document.getElementsByClassName('group-players-list__row');
+		const userRows = document.getElementsByClassName('group-players-list__row');
 
-		var lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
+		const lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 		let playerCount = 0;
 		for (let i = 0; i < userRows.length; i++)
 			if (!userRows[i].className.includes("group-players-list__row--empty")) playerCount++;
@@ -99,7 +98,7 @@ function RefreshData()
 	}
 	else
 	{
-		let nickElement = document.getElementsByClassName('c-user__name')[0];
+		const nickElement = document.getElementsByClassName('c-user__name')[0];
 		lastName = nickElement ? nickElement.textContent : "Unnamed";
 		data.state = lastName;
 	}
@@ -129,7 +128,7 @@ function getActualGamePage()
 	}
 	else if (document.getElementsByClassName('popup-header')[0])
 	{
-		let popup_Caption = document.getElementsByClassName('popup-header')[0].textContent;
+		const popup_Caption = document.getElementsByClassName('popup-header')[0].textContent;
 		if (popup_Caption == "Room settings") return "creating_match";
 		else if (popup_Caption == "Crates") return "opening_crates";
 		else if (popup_Caption == "XP progression") return "in_progress";
