@@ -38,10 +38,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "News";
     try {
-      const news_title_origin = document.querySelector(
+      const news_title = document.querySelector(
         "#uniteddb-content > div.container.news-container > div.news-heading.with-button"
-      ).textContent;
-      const news_title = news_title_origin.split(" — ")[0];
+      ).textContent.split(" — ")[0];
       presenceData.details = "Reading news:";
       presenceData.state = `${news_title}`;
     } catch {
