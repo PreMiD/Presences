@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Robin",
+    "id": "284370397535666188"
+  },
+  "url": "curvefever.pro",
+  "description": {
+    "english": "The smash hit Curve Fever is back with a new multiplayer browser game: Curve Fever Pro. Cut off opponents, squeeze through tiny holes and unlock new powers."
+  },
+  "service": "Curve Fever Pro",
+  "logo": "https://robinko.eu/premid%20assets/cfprologo.png",
+  "thumbnail": "https://robinko.eu/premid%20assets/cfprothumbnail.png",
+  "color": "#1f3559",
+  "tags": [
+    "CurveFever"
+  ],
+  "category": "games"
+}
