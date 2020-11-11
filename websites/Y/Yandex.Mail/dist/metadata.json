@@ -1,0 +1,24 @@
+{
+    "author": {
+      "name": "Mevroxa",
+      "id": "775899950759542794"
+    },
+    "service": "Yandex.Mail",
+    "description": {
+      "en": "Yandex.Mail is a free email service developed by Yandex.",
+      "tr": "Yandex.Mail, Yandex tarafından geliştirilmiş ücretsiz bir e-posta servisidir."
+    },
+    "url": "mail.yandex.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/nYFgE5U.png",
+    "thumbnail": "https://i.imgur.com/0eTyIlD.png",
+    "color": "#FFCC02",
+    "tags": [
+      "yandexmail",
+      "yandex.mail",
+      "yandex mail",
+      "email",
+      "other"
+    ],
+    "category": "other"
+}
