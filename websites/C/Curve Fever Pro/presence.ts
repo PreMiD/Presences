@@ -74,7 +74,7 @@ function RefreshData()
 	}
 	else if (state_Page == "in_lobby_ready")
 	{
-		let groupTitle = document.getElementsByClassName('group-name__title')[0];
+		const groupTitle = document.getElementsByClassName('group-name__title')[0];
 		const userRows = document.getElementsByClassName('group-players-list__row');
 
 		const lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
