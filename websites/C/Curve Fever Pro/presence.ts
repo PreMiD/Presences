@@ -1,9 +1,9 @@
-var presence = new Presence(
+let presence = new Presence(
 {
 clientId: "775356824240128021"
 });
 
-let skinNames = new Map <string, string> ();
+const skinNames = new Map <string, string> ();
 skinNames.set("Angel", "angel");
 skinNames.set("Blue Racer", "blue_racer");
 skinNames.set("Bumble Bee", "bumble_bee");
@@ -27,8 +27,8 @@ skinNames.set("Ice-Cream", "ice-cream");
 skinNames.set("Pineapple", "pineapple");
 skinNames.set("Rasta", "rasta");
 
-var lastlobbyName = "";
-var lastName = "Unnamed";
+let lastlobbyName = "";
+let lastName = "Unnamed";
 
 const data: PresenceData = {
 	largeImageKey: "index",
@@ -52,15 +52,15 @@ presence.on("UpdateData", async() =>
 
 function RefreshData()
 {
-	var state_Page = getActualGamePage();
+	let state_Page = getActualGamePage();
 	if (state_Page == "in_lobby_picking_powers")
 	{
-		var skinSlot = document.getElementsByClassName('skin-slot skin-slot--0')[0];
-		var groupTitle = document.getElementsByClassName('group-name__title')[0];
-		var userRows = document.getElementsByClassName('c-user c-user--small');
+		let skinSlot = document.getElementsByClassName('skin-slot skin-slot--0')[0];
+		let groupTitle = document.getElementsByClassName('group-name__title')[0];
+		let userRows = document.getElementsByClassName('c-user c-user--small');
 
-		var skinName = skinSlot ? skinSlot.children[0].getAttribute("title") : "skin_unknown";
-		var lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
+		let skinName = skinSlot ? skinSlot.children[0].getAttribute("title") : "skin_unknown";
+		let lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 
 		data.details = "Picking Powers";
 		data.state = "In Lobby, " + lobbyName + " (" + userRows.length + "/6)";
@@ -75,12 +75,12 @@ function RefreshData()
 	}
 	else if (state_Page == "in_lobby_ready")
 	{
-		var groupTitle = document.getElementsByClassName('group-name__title')[0];
-		var userRows = document.getElementsByClassName('group-players-list__row');
+		let groupTitle = document.getElementsByClassName('group-name__title')[0];
+		let userRows = document.getElementsByClassName('group-players-list__row');
 
 		var lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
-		var playerCount = 0;
-		for (var i = 0; i < userRows.length; i++)
+		let playerCount = 0;
+		for (let i = 0; i < userRows.length; i++)
 			if (!userRows[i].className.includes("group-players-list__row--empty")) playerCount++;
 
 		data.details = "Ready In Lobby";
@@ -99,7 +99,7 @@ function RefreshData()
 	}
 	else
 	{
-		var nickElement = document.getElementsByClassName('c-user__name')[0];
+		let nickElement = document.getElementsByClassName('c-user__name')[0];
 		lastName = nickElement ? nickElement.textContent : "Unnamed";
 		data.state = lastName;
 	}
@@ -129,7 +129,7 @@ function getActualGamePage()
 	}
 	else if (document.getElementsByClassName('popup-header')[0])
 	{
-		var popup_Caption = document.getElementsByClassName('popup-header')[0].textContent;
+		let popup_Caption = document.getElementsByClassName('popup-header')[0].textContent;
 		if (popup_Caption == "Room settings") return "creating_match";
 		else if (popup_Caption == "Crates") return "opening_crates";
 		else if (popup_Caption == "XP progression") return "in_progress";
