@@ -1,9 +1,8 @@
 const presence = new Presence(
 {
 clientId: "775356824240128021"
-});
-
-const skinNames = new Map <string, string> ();
+}), 
+skinNames = new Map <string, string> ();
 skinNames.set("Angel", "angel");
 skinNames.set("Blue Racer", "blue_racer");
 skinNames.set("Bumble Bee", "bumble_bee");
@@ -54,12 +53,11 @@ function RefreshData()
 	const state_Page = getActualGamePage();
 	if (state_Page == "in_lobby_picking_powers")
 	{
-		const skinSlot = document.getElementsByClassName('skin-slot skin-slot--0')[0];
-		const groupTitle = document.getElementsByClassName('group-name__title')[0];
-		const userRows = document.getElementsByClassName('c-user c-user--small');
-
-		const skinName = skinSlot ? skinSlot.children[0].getAttribute("title") : "skin_unknown";
-		const lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
+		const skinSlot = document.getElementsByClassName('skin-slot skin-slot--0')[0],
+		groupTitle = document.getElementsByClassName('group-name__title')[0],
+		userRows = document.getElementsByClassName('c-user c-user--small'),
+		skinName = skinSlot ? skinSlot.children[0].getAttribute("title") : "skin_unknown",
+		lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 
 		data.details = "Picking Powers";
 		data.state = "In Lobby, " + lobbyName + " (" + userRows.length + "/6)";
@@ -74,10 +72,9 @@ function RefreshData()
 	}
 	else if (state_Page == "in_lobby_ready")
 	{
-		const groupTitle = document.getElementsByClassName('group-name__title')[0];
-		const userRows = document.getElementsByClassName('group-players-list__row');
-
-		const lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
+		const groupTitle = document.getElementsByClassName('group-name__title')[0],
+	    userRows = document.getElementsByClassName('group-players-list__row'),
+		lobbyName = groupTitle ? groupTitle.textContent : "Unknown lobby";
 		let playerCount = 0;
 		for (let i = 0; i < userRows.length; i++)
 			if (!userRows[i].className.includes("group-players-list__row--empty")) playerCount++;
