@@ -55,7 +55,7 @@ function RefreshData()
 	if (state_Page == "in_lobby_picking_powers")
 	{
 		const skinSlot = document.getElementsByClassName('skin-slot skin-slot--0')[0];
-		let groupTitle = document.getElementsByClassName('group-name__title')[0];
+		const groupTitle = document.getElementsByClassName('group-name__title')[0];
 		const userRows = document.getElementsByClassName('c-user c-user--small');
 
 		const skinName = skinSlot ? skinSlot.children[0].getAttribute("title") : "skin_unknown";
