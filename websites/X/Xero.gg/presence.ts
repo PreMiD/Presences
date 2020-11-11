@@ -50,19 +50,17 @@ presence.on("UpdateData", async () => {
       //Catch nothing
     }
   } else if (document.location.pathname.includes("/clan")) {
-    const claninfo = [
-      document.querySelector(
+    const clan_name = document.querySelector(
         "#player-profile-header-heading > div.medium.normal-color-name"
       ).textContent,
-      document.querySelector(
+      clan_members = document.querySelector(
         "#clan-data-container > div > div.col-sm-3 > div > div.xero-pane-body > ul > li"
       ).lastChild.textContent,
-      document.querySelector(
+      clan_leader = document.querySelector(
         "#clan-data-container > div > div.col-sm-9 > div:nth-child(2) > div > div > a > div.media-body.ml-2 > div.bold"
-      ).textContent
-    ];
-    presenceData.details = `Clan: ${claninfo[0]}`;
-    presenceData.state = `Leader: ${claninfo[2]}, ${claninfo[1]}`;
+      ).textContent;
+    presenceData.details = `Clan: ${clan_name}`;
+    presenceData.state = `Leader: ${clan_leader}, ${clan_members}`;
   } else if (document.location.pathname.includes("/leaderboards")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Leaderboards";
