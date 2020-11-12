@@ -11,10 +11,9 @@ function getTimeStamp() {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "xero"
-  };
-
-  const showChat = await presence.getSetting("showchat"),
+      largeImageKey: "xero"
+    },
+    showChat = await presence.getSetting("showchat"),
     showProfile = await presence.getSetting("showprofile");
 
   presenceData.startTimestamp = getTimeStamp();
