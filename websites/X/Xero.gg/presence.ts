@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
   };
 
   const showChat = await presence.getSetting("showchat"),
-  showProfile = await presence.getSetting("showprofile");
+    showProfile = await presence.getSetting("showprofile");
 
   presenceData.startTimestamp = getTimeStamp();
   if (document.location.pathname.includes("/player/")) {
