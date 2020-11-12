@@ -78,7 +78,7 @@ function RefreshData()
 
             for (let i = 0; i < urlPieces.length; i++)
             {
-                let urlPiece = urlPieces[i];
+                const urlPiece = urlPieces[i];
                 if (urlPiece.includes("strana_"))
                 {
                     extraPageNumber = parseInt(urlPiece.replace("strana_", "")) || 0;
@@ -96,5 +96,3 @@ function RefreshData()
 }
 
 setInterval(RefreshData, 1000);
-
-
