@@ -9,8 +9,8 @@
     "en": "DiziBOX is one of the biggest Turkish foreign TV show providers on internet.",
     "tr": "DiziBOX, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir."
   },
-  "url": "diziboxx.com",
-  "version": "1.1.6",
+  "url": ["dizibox.vip", "www.dizibox.vip"],
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/OAkypjp.png",
   "thumbnail": "https://i.imgur.com/xovoUp8.png",
   "color": "#212426",
