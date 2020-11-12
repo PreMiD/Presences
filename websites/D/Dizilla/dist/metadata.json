@@ -4,13 +4,13 @@
     "name": "EGGSY",
     "id": "162969778699501569"
   },
-  "url": "dizilla.org",
+  "url": "dizilla.net",
   "description": {
     "en": "Dizilla is one of the most beautiful and populer Turkish TV series website.",
     "tr": "Dizilla, Türkiye'de hizmet veren yerel bir dizi yayın platformudur."
   },
   "service": "Dizilla",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/EqxZ0d3.png",
   "thumbnail": "https://i.imgur.com/aqrhBjE.png",
   "color": "#d32028",
