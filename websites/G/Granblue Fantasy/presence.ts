@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
   };
-  
+
   data.startTimestamp = browsingStamp;
 
   if (document.location.hostname == "game.granbluefantasy.jp") {
