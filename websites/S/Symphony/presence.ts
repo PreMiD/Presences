@@ -6,12 +6,13 @@ let title: string, artist: string, dj: string, listeners: number;
 
 function getData(): void {
   window
-    .fetch("http://api.symphonyradio.tk/symphony")
+    .fetch("https://api.symphonyradio.tk/")
     .then((res) => res.json())
     .then((res) => {
-      title = res.song.title || "Loading..";
-      dj = res.dj.name;
-      listeners = res.listeners.unique || 0;
+      title = res.onair.song.title || "Loading..";
+      dj = res.onair.dj.name || "Loading..";
+      console.log(dj)
+      console.log(title)
     });
 }
 
@@ -20,14 +21,12 @@ setInterval(getData, 5000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "premid",
-    smallImageKey: "live"
+    largeImageKey: "premid"
   };
 
   if (document.location.hostname === "symphonyradio.tk") {
     presenceData.details = `🎵 | ${title}`;
     presenceData.state = `🎙️ | ${dj}`;
-    presenceData.smallImageText = `Listeners: ${listeners}`;
   }
 
   if (presenceData.details == null) {
