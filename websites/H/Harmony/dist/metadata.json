@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "xxdjbobbyxx",
+    "id": "456601190671843328"
+  },
+  "url": "harmonyradio.pw",
+  "description": {
+    "en": "Harmony Radio is a online radio station bringing you music 24/7"
+  },
+  "service": "Harmony",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/I8s5X6q.jpg",
+  "thumbnail": "https://i.imgur.com/CAMa2EI.png",
+  "color": "#46356e",
+  "tags": [
+    "radio",
+    "music",
+    "entertainment"
+  ],
+  "category": "music"
+}
