@@ -42,7 +42,7 @@ if (document.location.hostname == "blob-project.com") {
     presenceData.state = "Vertigo - Acceptable Use";
   } else if (document.location.pathname.includes("/vertigo/warranty")) {
     presenceData.details = "Reading Page:";
-    presenceData.state = "Vertigo - Warranty Policy"
+    presenceData.state = "Vertigo - Warranty Policy";
   }
 }
 
