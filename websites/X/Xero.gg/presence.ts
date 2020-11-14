@@ -11,23 +11,29 @@ function getTimeStamp() {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "xero"
-  };
+      largeImageKey: "xero"
+    },
+    showChat = await presence.getSetting("showchat"),
+    showProfile = await presence.getSetting("showprofile");
 
   presenceData.startTimestamp = getTimeStamp();
   if (document.location.pathname.includes("/player/")) {
     const player_nickname = document.querySelector(
       "#player-profile-header-heading > div:nth-child(2) > div > div > div.medium.normal-color-name"
     ).textContent;
-    presenceData.details = `Player: ${player_nickname}`;
-    presenceData.state = "Viewing Statistics";
-    try {
-      const player_clan = document.querySelector("#s4db-player-view-clan > a")
-        .textContent;
-      presenceData.details += `(${player_clan})`;
-    } catch {
-      //Catch nothing
+    if (showProfile) {
+      presenceData.details = `Player: ${player_nickname}`;
+      try {
+        const player_clan = document.querySelector("#s4db-player-view-clan > a")
+          .textContent;
+        presenceData.details += `(${player_clan})`;
+      } catch {
+        //Catch nothing
+      }
+    } else {
+      presenceData.details = `Viewing a profile`;
     }
+    presenceData.state = "Viewing Statistics";
     if (document.location.pathname.includes("/matches")) {
       presenceData.state = "Viewing Match History";
     } else if (document.location.pathname.includes("/characters")) {
@@ -94,11 +100,21 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Notifications";
   } else if (document.location.pathname.includes("/chat")) {
-    const chat_opponent = document.querySelector(
-      "#s4db-chat-content-header-name > a"
-    ).textContent;
-    presenceData.details = "Chatting with";
-    presenceData.state = chat_opponent;
+    if (showChat) {
+      try {
+        const chat_opponent = document.querySelector(
+          "#s4db-chat-content-header-name > a"
+        ).textContent;
+        presenceData.details = "Chatting with";
+        presenceData.state = chat_opponent;
+      } catch {
+        presenceData.details = "Chatting in";
+        presenceData.state = "a group chat";
+      }
+    } else {
+      presenceData.details = "Chatting with";
+      presenceData.state = "Anonymous";
+    }
   } else if (document.location.pathname.includes("/settings")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Settings";
