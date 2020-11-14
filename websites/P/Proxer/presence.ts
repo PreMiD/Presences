@@ -26,11 +26,11 @@ presence.on("UpdateData", () => {
 
   if (path.startsWith("/watch")) {
     const name = getByXpath("//*[@id='wContainer']//*[@class='wName']", e => e.textContent) || "Unknown Anime",
-       ep = getByXpath("//*[@id='wContainer']//*[@class='wEp']", e => e.textContent),
-     maxEp = getByXpath("//*[@id='wContainer']//*[@class='wEp']", e => e.nextSibling.textContent.substr(1).trim()),
-     lang = getByXpath("//*[@id='wContainer']//*[@class='wLanguage']", e => e.textContent),
-     missing = getByXpath("//*[@id='wContainer']//*[@class='wStream']/div/@style", e => e.textContent.includes("/images/misc/streamfehlt.png")),
-     now = Date.now() / 1000;
+      ep = getByXpath("//*[@id='wContainer']//*[@class='wEp']", e => e.textContent),
+      maxEp = getByXpath("//*[@id='wContainer']//*[@class='wEp']", e => e.nextSibling.textContent.substr(1).trim()),
+      lang = getByXpath("//*[@id='wContainer']//*[@class='wLanguage']", e => e.textContent),
+      missing = getByXpath("//*[@id='wContainer']//*[@class='wStream']/div/@style", e => e.textContent.includes("/images/misc/streamfehlt.png")),
+      now = Date.now() / 1000;
 
     if (videoData) {
       if (!videoData.paused) {
