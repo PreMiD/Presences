@@ -6,16 +6,16 @@
   },
   "service": "Pocket",
   "description": {
-    "en": "Pocket"
+    "en": "When you find something you want to view later, put it in Pocket."
   },
   "url": [
     "www.getpocket.com",
     "getpocket.com",
     "app.getpocket.com"
   ],
-  "version": "16",
-  "logo": "https://i.imgur.com/7N4tOFk.jpg",
-  "thumbnail": "https://i.imgur.com/ivK2Uww.png",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/7Qre9TD.png",
+  "thumbnail": "https://i.imgur.com/7Qre9TD.png",
   "color": "#12171C",
   "tags": [
     "news",
