@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "google_podcast_logo"
     };
 
-  const podcastTitle = document.getElementsByClassName('Ut8Gr').length > 0 && document.getElementsByClassName('Ut8Gr')[1].innerHTML;
+  const podcastTitle = false; //document.getElementsByClassName('Ut8Gr').length > 0 && document.getElementsByClassName('Ut8Gr')[1].innerHTML;
   if(podcastTitle)
   {
     presenceData.details = (document.querySelector('.GmW3rb > .BhVIWc') as HTMLImageElement).alt
