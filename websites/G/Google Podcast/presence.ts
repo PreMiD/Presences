@@ -5,24 +5,24 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "google_podcast_logo"
-    };
+    },
+  podcastTitle = document.getElementsByClassName('Ut8Gr').length > 0 && document.getElementsByClassName('Ut8Gr')[1].innerHTML;
 
-  const podcastTitle = false; //document.getElementsByClassName('Ut8Gr').length > 0 && document.getElementsByClassName('Ut8Gr')[1].innerHTML;
   if(podcastTitle)
   {
-    presenceData.details = (document.querySelector('.GmW3rb > .BhVIWc') as HTMLImageElement).alt
+    presenceData.details = (document.querySelector('.GmW3rb > .BhVIWc') as HTMLImageElement).alt;
     presenceData.state = podcastTitle;
 
     const isPaused = (document.querySelector('.DPvwYc.ERYGad') as HTMLSpanElement).style.display != "none";
-    presenceData.smallImageKey = isPaused ? "pause" : "play;"
+    presenceData.smallImageKey = isPaused ? "pause" : "play";
     if(!isPaused)
     {
       presenceData.smallImageKey = "play";
-      const ts = Math.round((new Date()).getTime() / 1000);
-      const elapsedSeconds = parseLength(document.querySelector('.oG0wpe').children[0].innerHTML);
-      const totalSeconds = parseLength(document.querySelector('.oG0wpe').children[1].innerHTML);
-      presenceData.startTimestamp = ts - elapsedSeconds
-      presenceData.endTimestamp = ts + totalSeconds - elapsedSeconds
+      const ts = Math.round((new Date()).getTime() / 1000),
+      elapsedSeconds = parseLength(document.querySelector('.oG0wpe').children[0].innerHTML),
+      totalSeconds = parseLength(document.querySelector('.oG0wpe').children[1].innerHTML);
+      presenceData.startTimestamp = ts - elapsedSeconds;
+      presenceData.endTimestamp = ts + totalSeconds - elapsedSeconds;
     }
   }
   else if(document.location.pathname == "/")
@@ -31,12 +31,12 @@ presence.on("UpdateData", async () => {
   }
   else if(document.location.pathname.includes('feed/'))
   {
-    presenceData.details = "Viewing Podcast"
+    presenceData.details = "Viewing Podcast";
     // It's quite tricky to locate the right podcast title because
     // website makes new element for each of them
     for(const element of document.getElementsByClassName('dbCu3e'))
     {
-      if(element.children[0].innerHTML = document.title)
+      if(element.children[0].innerHTML == document.title)
       {
         presenceData.state = document.title + " by " + element.children[1].innerHTML;
       }
@@ -44,11 +44,11 @@ presence.on("UpdateData", async () => {
   }
   else if(document.location.pathname.includes('/subscriptions'))
   {
-    presenceData.details = "Browsing Subscriptions"
+    presenceData.details = "Browsing Subscriptions";
   }
   else if(document.location.pathname.includes('search/'))
   {
-    presenceData.details = "Searching for podcast"
+    presenceData.details = "Searching for podcast";
     presenceData.state = document.location.pathname.replace('/search/', '');
   }
 
