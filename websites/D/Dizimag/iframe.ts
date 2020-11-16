@@ -9,5 +9,4 @@ iframe.on("UpdateData", () => {
       paused: vidyo.paused
     })
   }
-
-})
+});
