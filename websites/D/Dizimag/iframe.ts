@@ -7,6 +7,6 @@ iframe.on("UpdateData", () => {
       duration: vidyo.duration,
       currentTime: vidyo.currentTime,
       paused: vidyo.paused
-    })
-  }
+    });
+  };
 });
