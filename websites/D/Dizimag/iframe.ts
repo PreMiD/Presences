@@ -8,5 +8,5 @@ iframe.on("UpdateData", () => {
       currentTime: vidyo.currentTime,
       paused: vidyo.paused
     });
-  };
+  }
 });
