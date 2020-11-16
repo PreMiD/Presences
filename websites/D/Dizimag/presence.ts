@@ -15,15 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
-  const path: string = document.location.pathname;
-  const ayrac: string[] = path.split("/");
-  const test: PresenceData = {
+  const path: string = document.location.pathname,
+  ayrac: string[] = path.split("/"),
+  test: PresenceData = {
       largeImageKey: "dizimag"
   };
     if(path.startsWith("/uye-ol")){
@@ -63,27 +63,27 @@ presence.on("UpdateData", async () => {
       test.startTimestamp = Date.now();
 
     }else if(path.startsWith("/uye")){
-      let name: string = document.querySelector("span.text-white").textContent
+      const name: string = document.querySelector("span.text-white").textContent;
       test.details = "Bir profile bakıyor:";
       test.state = name;
       test.startTimestamp = Date.now();
 
     }else if(path.startsWith("/oyuncu")){
 
-      let name: string = document.querySelector("div.text-orange > div.pull-left").textContent
+      const name: string = document.querySelector("div.text-orange > div.pull-left").textContent;
       test.details = "Bir oyuncuya bakıyor:";
       test.state = name || "Bulunamadı";
       test.startTimestamp = Date.now();
 
     }else if(path.startsWith("/dizi") && ayrac[3] == ""){
-        let name: string = document.querySelector("h1.text-nowrap").textContent;
+        const name: string = document.querySelector("h1.text-nowrap").textContent;
         test.details = "Bir diziye bakıyor:";
-        test.state = name || "Bulunamadı"
+        test.state = name || "Bulunamadı";
         test.startTimestamp = Date.now();
 
     }else if(!isNaN(stream.duration) && !isNaN(stream.currentTime) && typeof stream.paused == "boolean"){
 
-      let name: string[] = document.querySelector("h1.text-sans > a").textContent.split("-")
+      const name: string[] = document.querySelector("h1.text-sans > a").textContent.split("-");
         // let name1: string = document.querySelector("span.text-orange").textContent;
         test.details = name[0] || "Bulunamadı";
         test.state = name[1] || "Bulunamadı";
@@ -96,7 +96,7 @@ presence.on("UpdateData", async () => {
         delete test.endTimestamp;
 
       }else{
-        let timestamps = getTimestamps(
+        const timestamps = getTimestamps(
           Math.floor(stream?.currentTime),
           Math.floor(stream?.duration)
         );
