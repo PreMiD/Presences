@@ -1,52 +1,45 @@
 const presence = new Presence({
-  clientId: '778092541836656712'
-});
+    clientId: '778092541836656712'
+  }),
+  menuIDs = [
+    // Login/Guest
+    'guestOrAccountContainer',
+    'guestContainer',
+    'accountContainer',
+    'autoLoginContainer',
 
-// An array of menu IDs
-const menuIDs = [
-  // Login/Guest
-  'guestOrAccountContainer',
-  'guestContainer',
-  'accountContainer',
-  'autoLoginContainer',
+    // Lobby
+    'newbonklobby',
+    'mapeditorcontainer',
 
-  // Lobby
-  'newbonklobby',
-  'mapeditorcontainer',
+    // MainMenu
+    'classic_mid',
+    'friendsContainer',
+    'skinmanager',
+    'skineditorcontainer',
+    'quickPlayWindow',
+    'roomListContainer',
 
-  // MainMenu
-  'classic_mid',
-  'friendsContainer',
-  'skinmanager',
-  'skineditorcontainer',
-  'quickPlayWindow',
-  'roomListContainer',
+    // Game Canvas
+    'sm_connectingContainer',
+    'gamerenderer',
+  ],
+  modePair: { [key: string]: string; } = {
+    'Arrows': 'arrows2',
+    'Death Arrows': 'arrows2',
+    'Grapple': 'grapple2',
+  },
+  selector = menuIDs.map(
+    id => ('#' + id + '[style*="visibility: inherit"]') + ',' + ('#' + id + '[style*="display: block"]')).join(',');
 
-  // Game Canvas
-  'sm_connectingContainer',
-  'gamerenderer',
-];
-
-const modePair: { [key: string]: string; } = {
-  'Arrows': 'arrows2',
-  'Death Arrows': 'arrows2',
-  'Grapple': 'grapple2',
-}
-
-const selector = menuIDs.map(
-  id => ('#' + id + '[style*="visibility: inherit"]') + ',' + ('#' + id + '[style*="display: block"]')).join(',');
-
-// The timestamp of the first time a game was detected.
-let gameStartTimestamp: number = null;
-
-let lastGameMode: string = null;
+let gameStartTimestamp: number = null,
+  lastGameMode: string = null;
 
 presence.on('UpdateData', async () => {
   const data: PresenceData = {
-    largeImageKey: 'bonk'
-  };
-
-  const element = document.querySelector(selector);
+      largeImageKey: 'bonk'
+    },
+    element = document.querySelector(selector);
 
   if (element) {
     const playerCount = document.querySelectorAll('.newbonklobby_playerentry').length,
