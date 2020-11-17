@@ -8,13 +8,13 @@
     "glynet.com"
   ],
   "description": {
-    "tr": "Glynet, yeni açılmış bir sosyal medya sitesi. Küçük bir müzik kütüphanesi de bulunmakta.",
-    "en": "Glynet is a social media website that launched newly. Includes a music library as well."
+    "tr": "Glynet, yeni açılmış bir sosyal medya sitesi.",
+    "en": "Glynet is a social media website that launched newly."
   },
   "service": "Glynet",
-  "version": "1.2.4",
-  "logo": "https://crisis.is-inside.me/wBPHX8LP.png",
-  "thumbnail": "https://crisis.is-inside.me/q3aOVabM.png",
+  "version": "1.2.6",
+  "logo": "https://i.imgur.com/IOeHPUb.png",
+  "thumbnail": "https://i.imgur.com/cu1nhUj.png",
   "color": "#FFFFFF",
   "tags": [
     "social-media",
