@@ -22,12 +22,12 @@ const presence = new Presence({
 
     // Game Canvas
     'sm_connectingContainer',
-    'gamerenderer',
+    'gamerenderer'
   ],
   modePair: { [key: string]: string; } = {
     'Arrows': 'arrows2',
     'Death Arrows': 'arrows2',
-    'Grapple': 'grapple2',
+    'Grapple': 'grapple2'
   },
   selector = menuIDs.map(
     id => ('#' + id + '[style*="visibility: inherit"]') + ',' + ('#' + id + '[style*="display: block"]')).join(',');
