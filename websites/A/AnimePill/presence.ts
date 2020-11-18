@@ -97,7 +97,6 @@ const initialize = async () => {
     if (data && data.video) {
       currentVideo = data;
       lastIframeData = new Date();
-      console.log('[AnimePill, IFrame]', data);
     } else if (!lastIframeData || (Date.now() - lastIframeData.getTime()) / 1000 / 60 > 10) {
       currentVideo = null;
     }
