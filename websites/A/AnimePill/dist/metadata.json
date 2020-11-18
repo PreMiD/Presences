@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "Cascade",
     "id": "442612628104151040"
@@ -8,17 +9,15 @@
     "en": "Watch the latest anime hits. AnimePill - your daily dose of anime & manga."
   },
   "url": "animepill.com",
-  "version": "1.0.0",
-  "logo": "https://i.mavis.moe/f/dAZRMiK08B/unbewhmi-400x400jpg.jpg",
+  "version": "1.0.1",
+  "logo": "https://i.mavis.moe/f/wfFcEQf0Of/unbewhmi-waifu2x-art-noise1-scale-tta-1-benutzerdefiniert-png.png",
   "thumbnail": "https://i.mavis.moe/f/vpOrz4JxUA/2020-11-18-18-14-01png.png",
   "color": "#F36C00",
   "iframe": true,
   "tags": [
     "anime",
     "manga",
-    "animepill",
-    "cascade",
-    "venipa"
+    "animepill"
   ],
   "category": "anime"
 }
