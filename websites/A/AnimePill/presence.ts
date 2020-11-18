@@ -1,9 +1,9 @@
 interface PageContext {
-  middleware: (ref: Window, ...args: any[]) => boolean;
+  middleware: (ref: Window, ...args: unknown[]) => boolean;
   exec: (
     context: Presence,
     data: PresenceData,
-    options: { [key: string]: any }
+    options: { [key: string]: unknown }
   ) => Promise<PresenceData> | PresenceData;
 }
 interface VideoContext {
@@ -20,8 +20,6 @@ function getTimestamps(
     endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
-
-const browsingStamp = Math.floor(Date.now() / 1000);
 
 const pages: PageContext[] = [
   {
@@ -41,7 +39,7 @@ const pages: PageContext[] = [
   },
   {
     // watch page
-    middleware: (ref, []) =>
+    middleware: (ref) =>
       !!ref.location.pathname.match(/^\/(.*)-episode-(\d+)/gi),
     exec: (
       context,
@@ -87,8 +85,8 @@ const pages: PageContext[] = [
       return data;
     }
   }
-];
-const presence = new Presence({
+],
+ presence = new Presence({
   clientId: "778672856347312129"
 });
 
@@ -101,7 +99,7 @@ const initialize = async () => {
     browsing: "presence.activity.browsing"
   });
   let lastIframeData: Date = null;
-  presence.on("iFrameData", (data: any) => {
+  presence.on("iFrameData", (data: VideoContext) => {
     if (data && data.video) {
       currentVideo = data;
       lastIframeData = new Date();
