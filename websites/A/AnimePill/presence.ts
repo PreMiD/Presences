@@ -43,7 +43,9 @@ const pages: PageContext[] = [
     // watch page
     middleware: (ref, []) =>
       !!ref.location.pathname.match(/^\/(.*)-episode-(\d+)/gi),
-    exec: (context, data, // @ts-ignore
+    exec: (
+      context,
+      data,
       {
         strings,
         video
@@ -51,7 +53,10 @@ const pages: PageContext[] = [
     ) => {
       if (!context) return null;
       if (video && video.video) {
-        const [start, end] = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+        const [start, end] = getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        );
         if (!video.paused) {
           data.state = strings.play;
           data.startTimestamp = start;
@@ -63,6 +68,8 @@ const pages: PageContext[] = [
         }
       } else {
         data.state = strings.browsing;
+        if (data.startTimestamp) delete data.startTimestamp;
+        if (data.endTimestamp) delete data.endTimestamp;
       }
       data.details = document.title;
       return data;
@@ -98,7 +105,10 @@ const initialize = async () => {
     if (data && data.video) {
       currentVideo = data;
       lastIframeData = new Date();
-    } else if (!lastIframeData || (Date.now() - lastIframeData.getTime()) / 1000 / 60 > 10) {
+    } else if (
+      !lastIframeData ||
+      (Date.now() - lastIframeData.getTime()) / 1000 / 60 > 10
+    ) {
       currentVideo = null;
     }
   });
@@ -123,6 +133,7 @@ const initialize = async () => {
           if (data) presence.setActivity(data);
           else presence.setActivity();
         }
+        return data;
       });
     }
 
