@@ -1,0 +1,25 @@
+{
+  "author": {
+    "name": "Cascade#0001",
+    "id": "442612628104151040"
+  },
+  "service": "AnimePill",
+  "description": {
+    "en": "Watch the latest anime hits. AnimePill - your daily dose of anime & manga."
+  },
+  "url": "animepill.com",
+  "version": "1.0.0",
+  "logo": "https://i.mavis.moe/f/dAZRMiK08B/unbewhmi-400x400jpg.jpg",
+  "thumbnail": "https://i.mavis.moe/f/vpOrz4JxUA/2020-11-18-18-14-01png.png",
+  "color": "#F36C00",
+  "iframe": true,
+  "tags": [
+    "anime",
+    "manga",
+    "animepill.com",
+    "animepill",
+    "cascade",
+    "venipa"
+  ],
+  "category": "anime"
+}
