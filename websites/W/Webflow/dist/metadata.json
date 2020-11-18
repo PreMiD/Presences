@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "MrBartusek",
+    "id": "212988300137463809"
+  },
+  "service": "Webflow",
+  "description": {
+    "en": "Webflow empowers designers to build professional, custom websites in a completely visual canvas."
+  },
+  "url": [
+    "webflow.com",
+    "preview.webflow.com",
+    "university.webflow.com",
+    "ebooks.webflow.com",
+    "wishlist.webflow.com",
+    "status.webflow.com",
+    "experts.webflow.com",
+    "forum.webflow.com"
+  ],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/tU15qL1.png",
+  "thumbnail": "https://i.imgur.com/fCSFzpr.png",
+  "color": "#4353FF",
+  "tags": [
+    "website",
+    "development"
+  ],
+  "category": "other"
+}
