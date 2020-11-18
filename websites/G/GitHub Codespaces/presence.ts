@@ -566,7 +566,7 @@ presence.on('UpdateData', async () => {
             if (!match) return false;
             const regex = new RegExp(match[1], match[2]);
             return regex.test(filename);
-          })!
+          })
         ] ??
         (syntaxMode in langMap ? langMap[syntaxMode] : null);
 
