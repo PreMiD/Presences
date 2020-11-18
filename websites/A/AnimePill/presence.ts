@@ -33,6 +33,7 @@ const pages: PageContext[] = [
       data,
       { strings }: { strings: { [key: string]: string } }
     ) => {
+      if (!context) return null;
       data.state = strings.browsing;
       data.details = document.title;
       return data;
@@ -42,14 +43,13 @@ const pages: PageContext[] = [
     // watch page
     middleware: (ref, []) =>
       !!ref.location.pathname.match(/^\/(.*)-episode-(\d+)/gi),
-    exec: (
-      context,
-      data,
+    exec: (context, data, // @ts-ignore
       {
         strings,
         video
       }: { strings: { [key: string]: string }; video?: VideoContext }
     ) => {
+      if (!context) return null;
       if (video && video.video) {
         const [start, end] = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
         if (!video.paused) {
@@ -69,12 +69,13 @@ const pages: PageContext[] = [
     }
   },
   {
-    middleware: (ref, [video]) => !video,
+    middleware: (ref, [video]) => ref && !video,
     exec: (
       context,
       data,
       { strings }: { strings: { [key: string]: string } }
     ) => {
+      if (!context) return null;
       data.details = strings.browsing;
       return data;
     }
@@ -84,7 +85,7 @@ const presence = new Presence({
   clientId: "778672856347312129"
 });
 
-let currentVideo: iFrame;
+let currentVideo: VideoContext;
 
 const initialize = async () => {
   const strings: { [key: string]: string } = await presence.getStrings({
