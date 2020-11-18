@@ -69,7 +69,7 @@ const pages: PageContext[] = [
     }
   },
   {
-    middleware: (ref, [video]) => true && !video,
+    middleware: (ref, [video]) => !video,
     exec: (
       context,
       data,
