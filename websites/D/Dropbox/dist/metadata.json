@@ -21,5 +21,13 @@
     "drive",
     "storage"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "showFileNames",
+      "title": "Show File Names",
+      "icon": "fas fa-file",
+      "value": true
+    }
+  ]
 }

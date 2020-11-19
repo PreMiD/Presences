@@ -2,10 +2,12 @@ const presence = new Presence({
   clientId: "777578842172162068"
 });
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "dropbox_logo"
-    };
+    },
+    websiteLoadTimestamp = Math.floor(Date.now() / 1000),
+    showFileNames = await presence.getSetting("showFileNames");
 
   if (document.location.pathname == '/') {
     presenceData.details = "Viewing homepage";
@@ -21,17 +23,26 @@ presence.on("UpdateData", () => {
   else if(document.location.search.startsWith('?preview'))
   {
     presenceData.details = "Previewing a file";
-    presenceData.state = document.querySelector('.filename--text').innerHTML;
+    if(showFileNames)
+    {
+      presenceData.state = document.querySelector('.filename--text').innerHTML;
+    }
   }
   else if(document.location.pathname.startsWith('/h') || document.location.pathname.startsWith('/home'))
   {
-    presenceData.details = "Browsing files";
-    presenceData.state = "All files";
     const currentFolder = document.querySelector('.page-header-text > h2');
     if(currentFolder)
     {
       presenceData.details = "Viewing folder";
-      presenceData.state = currentFolder.innerHTML;
+      if(showFileNames)
+      {
+        presenceData.state = currentFolder.innerHTML;
+      }
+    }
+    else
+    {
+      presenceData.details = "Browsing files";
+      presenceData.state = "All files";
     }
   }
   else if(document.location.pathname.startsWith('/share'))
@@ -64,7 +75,11 @@ presence.on("UpdateData", () => {
   else if(document.location.pathname.startsWith('/scl'))
   {
     presenceData.details = "Working on paper";
-    presenceData.state = document.title;
+    presenceData.startTimestamp = websiteLoadTimestamp;
+    if(showFileNames)
+    {
+      presenceData.state = document.title;
+    }
   }
   else if(document.location.pathname.startsWith('/landing/hellosign'))
   {
