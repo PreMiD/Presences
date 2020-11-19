@@ -22,83 +22,77 @@ function getTimestamps(
 }
 
 const pages: PageContext[] = [
-  {
-    // anime info page
-    middleware: (ref, [video]) =>
-      !!ref.location.pathname.match(/\/anime\/(.*)/gi) && !video,
-    exec: (
-      context,
-      data,
-      { strings }: { strings: { [key: string]: string } }
-    ) => {
-      if (!context) return null;
-      data.state = strings.browsing;
-      data.details = document.title;
-      return data;
-    }
-  },
-  {
-    // watch page
-    middleware: (ref) =>
-      !!ref.location.pathname.match(/^\/(.*)-episode-(\d+)/gi),
-    exec: (
-      context,
-      data,
-      {
-        strings,
-        video
-      }: { strings: { [key: string]: string }; video?: VideoContext }
-    ) => {
-      if (!context) return null;
-      if (video && video.video) {
-        const [start, end] = getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        );
-        if (!video.paused) {
-          data.state = strings.play;
-          data.startTimestamp = start;
-          data.endTimestamp = end;
-        } else {
-          data.state = strings.pause;
-          delete data.startTimestamp;
-          delete data.endTimestamp;
-        }
-      } else {
+    {
+      // anime info page
+      middleware: (ref, [video]) =>
+        !!ref.location.pathname.match(/\/anime\/(.*)/gi) && !video,
+      exec: (
+        context,
+        data,
+        { strings }: { strings: { [key: string]: string } }
+      ) => {
+        if (!context) return null;
         data.state = strings.browsing;
-        if (data.startTimestamp) delete data.startTimestamp;
-        if (data.endTimestamp) delete data.endTimestamp;
+        data.details = document.title;
+        return data;
       }
-      data.details = document.title;
-      return data;
+    },
+    {
+      // watch page
+      middleware: (ref) =>
+        !!ref.location.pathname.match(/^\/(.*)-episode-(\d+)/gi),
+      exec: (
+        context,
+        data,
+        {
+          strings,
+          video
+        }: { strings: { [key: string]: string }; video?: VideoContext }
+      ) => {
+        if (!context) return null;
+        if (video && video.video) {
+          const [start, end] = getTimestamps(
+            Math.floor(video.currentTime),
+            Math.floor(video.duration)
+          );
+          if (!video.paused) {
+            data.state = strings.play;
+            data.startTimestamp = start;
+            data.endTimestamp = end;
+          } else {
+            data.state = strings.pause;
+            delete data.startTimestamp;
+            delete data.endTimestamp;
+          }
+        } else {
+          data.state = strings.browsing;
+          if (data.startTimestamp) delete data.startTimestamp;
+          if (data.endTimestamp) delete data.endTimestamp;
+        }
+        data.details = document.title;
+        return data;
+      }
+    },
+    {
+      middleware: (ref, [video]) => ref && !video,
+      exec: (
+        context,
+        data,
+        { strings }: { strings: { [key: string]: string } }
+      ) => {
+        if (!context) return null;
+        data.details = strings.browsing;
+        return data;
+      }
     }
-  },
-  {
-    middleware: (ref, [video]) => ref && !video,
-    exec: (
-      context,
-      data,
-      { strings }: { strings: { [key: string]: string } }
-    ) => {
-      if (!context) return null;
-      data.details = strings.browsing;
-      return data;
-    }
-  }
-],
- presence = new Presence({
-  clientId: "778672856347312129"
-});
-
-let currentVideo: VideoContext;
-
-const initialize = async () => {
-  const strings: { [key: string]: string } = await presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing"
+  ],
+  presence = new Presence({
+    clientId: "778672856347312129"
   });
-  let lastIframeData: Date = null;
+
+(function () {
+  let currentVideo: VideoContext,
+   lastIframeData: Date = null;
   presence.on("iFrameData", (data: VideoContext) => {
     if (data && data.video) {
       currentVideo = data;
@@ -115,9 +109,13 @@ const initialize = async () => {
       largeImageKey: "logo",
       largeImageText: "AnimePill"
     } as PresenceData;
-
     if (document.location.hostname == "animepill.com") {
-      const context = pages.find((x) => x.middleware(window, [currentVideo]));
+      const strings: { [key: string]: string } = await presence.getStrings({
+          play: "presence.playback.playing",
+          pause: "presence.playback.paused",
+          browsing: "presence.activity.browsing"
+        }),
+        context = pages.find((x) => x.middleware(window, [currentVideo]));
       if (!context) return false;
       const result = Promise.resolve(
         context.exec(presence, presenceData, { strings, video: currentVideo })
@@ -142,6 +140,4 @@ const initialize = async () => {
       presence.setActivity(presenceData);
     }
   });
-};
-
-initialize();
+})();
