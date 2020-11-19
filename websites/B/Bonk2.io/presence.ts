@@ -95,7 +95,7 @@ presence.on('UpdateData', async () => {
 
     if (element.id === 'gamerenderer' && !gameStartTimestamp)
       gameStartTimestamp = Date.now();
-    else gameStartTimestamp = null;
+    else if (element.id !== 'gamerenderer') gameStartTimestamp = null;
   
     if(gameStartTimestamp) data.startTimestamp = gameStartTimestamp;
   }
