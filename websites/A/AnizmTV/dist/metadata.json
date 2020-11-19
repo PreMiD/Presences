@@ -5,8 +5,8 @@
   },
   "service": "AnizmTV",
   "description": {
-    "tr": "AnizmTV online anime izleme sitesidir.",
-    "en": "AnizmTV is an online anime viewing site."
+    "tr": "AnizmTV türkçe altyazılı animeyi kaliteli ve güncel izleyebileceğiniz sitedir.",
+    "en": "AnizmTV is a website which enables you to watch subtitled anime with high quality broadcasting and up-to-date episodes."
   },
   "url": [
     "www.anizm.tv",
@@ -14,8 +14,8 @@
   ],
   "version": "1.0.5",
   "logo": "https://i.imgur.com/TZZcyOQ.png",
-  "thumbnail": "https://i.imgur.com/0VdI8Mq.png",
-  "color": "#ff31cb",
+  "thumbnail": "https://i.imgur.com/o4P1a0J.png",
+  "color": "#fc9003",
   "tags": [
     "anime",
     "türk",
