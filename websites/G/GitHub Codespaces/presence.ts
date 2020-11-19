@@ -581,12 +581,14 @@ presence.on('UpdateData', async () => {
       .replace(/%file%/g, filename)
       .replace(/%path%/g, filepath)
       .replace(/%folder%/g, filepath.split('/').reverse()[1])
+      .replace(/%ext%/g, (largeImageKey ? largeImageKey.image : 'txt').toUpperCase())
       .replace(/%workspace%/g, scmTab && scmTab.hasAttribute('title') ? scmTab.getAttribute('title').split(' (Git)')[0] : 'N/A')
       .replace(/%workspaceOrFolder%/g, scmTab && scmTab.hasAttribute('title') ? scmTab.getAttribute('title').split(' (Git)')[0] : filepath.split('/').reverse()[1]);
     data.state = (await presence.getSetting('state'))
       .replace(/%file%/g, filename)
       .replace(/%path%/g, filepath)
       .replace(/%folder%/g, filepath.split('/').reverse()[1])
+      .replace(/%ext%/g, (largeImageKey ? largeImageKey.image : 'txt').toUpperCase())
       .replace(/%workspace%/g, scmTab && scmTab.hasAttribute('title') ? scmTab.getAttribute('title').split(' (Git)')[0] : 'N/A')
       .replace(/%workspaceOrFolder%/g, scmTab && scmTab.hasAttribute('title') ? scmTab.getAttribute('title').split(' (Git)')[0] : filepath.split('/').reverse()[1]);
   } else if (!editorMode) {
