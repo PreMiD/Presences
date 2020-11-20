@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "778715860638367804"
 });
 
-const strings = presence.getStrings({
+var strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
@@ -12,8 +12,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  let startTime = Date.now();
+  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -33,10 +33,10 @@ presence.on("UpdateData", async () => {
     largeImageKey: "anizm"
   };
 
-  const title = document.querySelector(
+  var title = document.querySelector(
     "html > body > font > main > #pageContent > div > h2 > a"
   );
-  const episode = document.querySelector(
+  var episode = document.querySelector(
     "html > body > font > main > #pageContent > div > h2 > span"
   );
     
@@ -82,17 +82,14 @@ presence.on("UpdateData", async () => {
       } else if(document.location.pathname.includes("/uyeol")){
         data.details = "Üye oluyor...";
       } else if(window.location.href.indexOf("?sayfa=") > 1){
-        var pageNum = document.URL.split('?sayfa=')[1].split("#episodes").slice(0).join(" ");
+        let pageNum = document.URL.split('?sayfa=')[1].split("#episodes").slice(0).join(" ");
         data.details = (await strings).browsing;
         data.state = "Sayfa: " + pageNum;
       }
   //Episode part
   if (title && episode) {
     data.details = title.textContent;
-    data.state = episode.textContent.replace(
-      title.textContent.split(" ").slice(1).join(" "),
-      ""
-    ).split("/ ").slice(1).join(" ")
+    data.state = episode.textContent.split("/ ").slice(1).join(" ");
   }
   //Home page part
   else if(document.location.pathname.includes("/SeriEkle") || 
@@ -109,7 +106,9 @@ presence.on("UpdateData", async () => {
   document.location.pathname.includes("/arama") ||
   document.location.pathname.includes("/girisyap") ||
   document.location.pathname.includes("/uyeol") ||
-  window.location.href.indexOf("?sayfa=") > 1){ data.startTimestamp = startTimestamp; }
+  window.location.href.indexOf("?sayfa=") > 1) { 
+    data.startTimestamp = startTimestamp; 
+  }
   else {
     data.details = (await strings).browsing;
     data.startTimestamp = startTimestamp;
