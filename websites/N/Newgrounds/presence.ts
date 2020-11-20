@@ -1,10 +1,6 @@
 const presence = new Presence({
   clientId: '779342189884997633'
   }),
-  strings = presence.getStrings({
-    play: 'presence.playback.playing',
-    pause: 'presence.playback.paused'
-  }),
   getTime = (list: string[]): number => {
     let ret = 0;
     for (let index = list.length - 1; index >= 0; index--) {
@@ -16,15 +12,12 @@ const presence = new Presence({
     audioTime: string,
     audioDuration: string
   ): Array<number> => {
-    const splitAudioTime = audioTime.split(':').reverse();
-    const splitAudioDuration = audioDuration.split(':').reverse();
-  
-    const parsedAudioTime = getTime(splitAudioTime);
-    const parsedAudioDuration = getTime(splitAudioDuration);
-  
-    const startTime = Date.now();
-    const endTime =
-      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+    const splitAudioTime = audioTime.split(':').reverse(),
+      splitAudioDuration = audioDuration.split(':').reverse(),
+      parsedAudioTime = getTime(splitAudioTime),
+      parsedAudioDuration = getTime(splitAudioDuration),
+      startTime = Date.now(),
+      endTime = Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
     return [Math.floor(startTime / 1000), endTime];
   };
 
@@ -207,7 +200,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = 'Viewing the rankings';
     } else if (document.location.pathname.startsWith('/wiki')) {
       const itemName = document.querySelector('.column.wide .pod-head h2').textContent,
-        [ , ...subNameSplit ] = itemName.split(': ')
+        [ , ...subNameSplit ] = itemName.split(': ');
       presenceData.details = 'in Newgrounds Wiki';
       presenceData.state = subNameSplit.join(': ');
     } else if (document.location.pathname.startsWith('/search')) {
