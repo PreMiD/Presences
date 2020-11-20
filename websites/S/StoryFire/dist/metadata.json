@@ -18,13 +18,13 @@
     "videos",
     "social"
   ],
-	"category": "socials",
-	"settings": [
-		{
+  "category": "socials",
+  "settings": [
+    {
       "id": "showsearchterm",
       "title": "Show Search Query",
       "icon": "fas fa-search",
       "value": true
     }
-	]
+  ]
 }
