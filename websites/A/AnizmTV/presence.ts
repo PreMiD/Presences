@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "778715860638367804"
 });
 
-var strings = presence.getStrings({
+const strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
@@ -12,8 +12,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -33,10 +33,10 @@ presence.on("UpdateData", async () => {
     largeImageKey: "anizm"
   };
 
-  var title = document.querySelector(
+  const title = document.querySelector(
     "html > body > font > main > #pageContent > div > h2 > a"
   );
-  var episode = document.querySelector(
+  const episode = document.querySelector(
     "html > body > font > main > #pageContent > div > h2 > span"
   );
     
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
       } else if(document.location.pathname.includes("/uyeol")){
         data.details = "Üye oluyor...";
       } else if(window.location.href.indexOf("?sayfa=") > 1){
-        let pageNum = document.URL.split('?sayfa=')[1].split("#episodes").slice(0).join(" ");
+        const pageNum = document.URL.split('?sayfa=')[1].split("#episodes").slice(0).join(" ");
         data.details = (await strings).browsing;
         data.state = "Sayfa: " + pageNum;
       }
