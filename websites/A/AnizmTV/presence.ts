@@ -1,8 +1,7 @@
 const presence = new Presence({
   clientId: "778715860638367804"
-});
-
-const strings = presence.getStrings({
+}),
+strings = presence.getStrings({
   playing: "presence.playback.playing",
   paused: "presence.playback.paused",
   browsing: "presence.activity.browsing"
@@ -12,8 +11,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -31,12 +30,11 @@ presence.on("UpdateData", async () => {
   
   const data: PresenceData = {
     largeImageKey: "anizm"
-  };
-
-  const title = document.querySelector(
+  },
+  title = document.querySelector(
     "html > body > font > main > #pageContent > div > h2 > a"
-  );
-  const episode = document.querySelector(
+  ),
+  episode = document.querySelector(
     "html > body > font > main > #pageContent > div > h2 > span"
   );
     
