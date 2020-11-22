@@ -72,34 +72,41 @@ presence.on("UpdateData", async () => {
       .querySelector("#botlistitle")
       .textContent.split("-")[0]
       .trim();
-  }  else if (window.location.pathname.startsWith("/user/") ||
-        window.location.pathname == "/me") {
-        presenceData.details = "Viewing a profile:";
-        presenceData.state = document.querySelector("#home-page > div.container.is-widescreen.profile__container > div.flex > div.flex.center-vertical > div > div.flex > h2").textContent;
-    }
-    else if (window.location.pathname.startsWith("/api/docs")) {
-        presenceData.state = "Discord Bot List API Documentation";
-    }
+  } else if (
+    window.location.pathname.startsWith("/user/") ||
+    window.location.pathname == "/me"
+  ) {
+    presenceData.details = "Viewing a profile:";
+    presenceData.state = document.querySelector(
+      "#home-page > div.container.is-widescreen.profile__container > div.flex > div.flex.center-vertical > div > div.flex > h2"
+    ).textContent;
+  } else if (window.location.pathname.startsWith("/api/docs")) {
+    presenceData.state = "Discord Bot List API Documentation";
+  }
 
   //Discord Server List
-   else if (window.location.pathname.startsWith("/servers")) {
-        presenceData.largeImageKey = "dslregular";
-        if (window.location.pathname.startsWith("/servers/list/") ||
-            window.location.pathname.startsWith("/servers/tag/")) {
-            presenceData.details = "Viewing:";
-            presenceData.state = document.querySelector("#botlistitle").textContent;
-        }
-        else if (document.querySelector("#bot-info > p.is-flex.nameAndVoteThing > span")) {
-          if (document.querySelector("#createdby > span")) {
-            presenceData.details = "Viewing a Discord Server | Server isn't published yet.";
-            presenceData.state = document
-            .querySelector("#bot-info > p.is-flex.nameAndVoteThing > span")
-            .textContent.trim();
-          } else presenceData.details = "Viewing a Discord Server:";
-            presenceData.state = document
-                .querySelector("#bot-info > p.is-flex.nameAndVoteThing > span")
-                .textContent.trim();
-        } else if (window.location.pathname.endsWith("/edit")) {
+  else if (window.location.pathname.startsWith("/servers")) {
+    presenceData.largeImageKey = "dslregular";
+    if (
+      window.location.pathname.startsWith("/servers/list/") ||
+      window.location.pathname.startsWith("/servers/tag/")
+    ) {
+      presenceData.details = "Viewing:";
+      presenceData.state = document.querySelector("#botlistitle").textContent;
+    } else if (
+      document.querySelector("#bot-info > p.is-flex.nameAndVoteThing > span")
+    ) {
+      if (document.querySelector("#createdby > span")) {
+        presenceData.details =
+          "Viewing a Discord Server | Server isn't published yet.";
+        presenceData.state = document
+          .querySelector("#bot-info > p.is-flex.nameAndVoteThing > span")
+          .textContent.trim();
+      } else presenceData.details = "Viewing a Discord Server:";
+      presenceData.state = document
+        .querySelector("#bot-info > p.is-flex.nameAndVoteThing > span")
+        .textContent.trim();
+    } else if (window.location.pathname.endsWith("/edit")) {
       presenceData.details = "Editing a Discord Server:";
       presenceData.state = document
         .querySelector("#botlistitle")
