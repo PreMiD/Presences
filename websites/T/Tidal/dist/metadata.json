@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "SinecKers /Yasar",
+    "name": "SinecKers",
     "id": "380411952666640385"
   },
+  "contributors": [
+    {
+      "name": "ririxi",
+      "id": "192490421308489731"
+    }
+  ],
   "url": [
     "listen.tidal.com",
     "tidal.com"
@@ -12,9 +18,9 @@
     "en": "Tidal is a music stream service with very high sound quality"
   },
   "service": "Tidal",
-  "version": "1.0.5",
-  "logo": "https://who.is-inside.me/pXP8PRGK.jpg",
-  "thumbnail": "https://who.is-inside.me/5IJ3K6fe.png",
+  "version": "1.0.7",
+  "logo": "https://i.imgur.com/clJrylu.jpg",
+  "thumbnail": "https://i.imgur.com/UXbP7qG.png",
   "color": "#000000",
   "tags": [
     "tidal",

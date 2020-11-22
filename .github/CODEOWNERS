@@ -1,12 +1,10 @@
-* @Alanexei @frozaum @Bas950 @doomlerd
+* @Timeraa @Bas950 @ririxidev
 
 @types/* @Timeraa
 LICENSE @Fruxh
-CONTRIBUTING.md @Alanexei
 package.json @Timeraa @Fruxh @TheDropX
 yarn.lock @Timeraa @Fruxh @TheDropX
 presenceUpdater.ts @Timeraa
 syntaxEnforcer.ts @SeMiD
 qualityAssurance.ts @SeMiD
-schemaValidator.ts @LewisTehMinerz
 .gitignore @Timeraa @Fruxh

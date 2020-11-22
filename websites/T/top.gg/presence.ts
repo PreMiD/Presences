@@ -78,16 +78,15 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = "Viewing a profile:";
     presenceData.state = document.querySelector(
-      "#banner > div.nametag > div"
+      "#home-page > div.container.is-widescreen.profile__container > div.flex > div.flex.center-vertical > div > div.flex > h2"
     ).textContent;
-  } else if (window.location.pathname.startsWith("/api/")) {
+  } else if (window.location.pathname.startsWith("/api/docs")) {
     presenceData.state = "Discord Bot List API Documentation";
   }
 
   //Discord Server List
   else if (window.location.pathname.startsWith("/servers")) {
     presenceData.largeImageKey = "dslregular";
-
     if (
       window.location.pathname.startsWith("/servers/list/") ||
       window.location.pathname.startsWith("/servers/tag/")
@@ -97,7 +96,13 @@ presence.on("UpdateData", async () => {
     } else if (
       document.querySelector("#bot-info > p.is-flex.nameAndVoteThing > span")
     ) {
-      presenceData.details = "Viewing a Discord Server:";
+      if (document.querySelector("#createdby > span")) {
+        presenceData.details =
+          "Viewing a Discord Server | Server isn't published yet.";
+        presenceData.state = document
+          .querySelector("#bot-info > p.is-flex.nameAndVoteThing > span")
+          .textContent.trim();
+      } else presenceData.details = "Viewing a Discord Server:";
       presenceData.state = document
         .querySelector("#bot-info > p.is-flex.nameAndVoteThing > span")
         .textContent.trim();

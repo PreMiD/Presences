@@ -1,32 +1,36 @@
-var presence = new Presence({
-  clientId: "607587875122446359"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var search = "/search?q=";
-var searchURL = new URL(document.location.href);
-var searchResult = searchURL.searchParams.get("q");
-var profileURL = new URL(document.location.href);
+const presence = new Presence({
+    clientId: "607587875122446359"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  search = "/search?q=",
+  searchURL = new URL(document.location.href),
+  searchResult = searchURL.searchParams.get("q"),
+  profileURL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
-  var profileName: any, profileNickname: any;
-
-  var repositoryAuthor: any,
-    repositoryName: any,
-    repositoryLocation: any,
-    repositoryLocation2: any;
-
-  var pullRequestTitle: any, pullRequestAuthor: any, pullRequestID: any;
-
-  var issueTitle: any, issueAuthor: any, issueID: any;
+  let profileName: HTMLElement = null,
+    profileNickname: HTMLElement = null,
+    repositoryAuthor: HTMLElement = null,
+    repositoryName: HTMLElement = null,
+    repositoryLocation: HTMLElement = null,
+    repositoryLocation2: NodeListOf<HTMLElement> = null,
+    pullRequestTitle: HTMLElement = null,
+    pullRequestAuthor: NodeListOf<HTMLElement> = null,
+    pullRequestID: HTMLElement = null,
+    issueTitle: HTMLElement = null,
+    issueAuthor: NodeListOf<HTMLElement> = null,
+    issueID: HTMLElement = null;
 
   profileName = document.querySelector(".vcard-names .p-name");
   profileNickname = document.querySelector(".vcard-names .p-nickname");
 
   repositoryAuthor = document.querySelector(".author a");
-  repositoryName = document.querySelector(".public strong a");
-  repositoryLocation = document.querySelectorAll(".breadcrumb.mb-2");
+  repositoryName = document.querySelector(
+    "body > div.application-main > div > main > div.bg-gray-light.pt-3.hide-full-screen.mb-5 > div > div > h1 > strong > a"
+  );
+  repositoryLocation = document.querySelector(
+    "#branch-select-menu > summary > span.css-truncate-target"
+  );
   repositoryLocation2 = document.querySelectorAll("#blob-path");
 
   pullRequestTitle = issueTitle = document.querySelector(
@@ -36,12 +40,14 @@ presence.on("UpdateData", async () => {
     "div div.timeline-comment-header.clearfix h3 strong a"
   );
   pullRequestID = issueID = document.querySelector(
-    "div.gh-header-show h1 span.gh-header-number"
+    "#span.f1-light.text-gray-light"
   );
 
+  let profileTabs: string, profileCurrentTab: string;
+
   if (profileName) {
-    var profileTabs = "/" + profileNickname.innerText + "?tab=";
-    var profileCurrentTab = profileURL.searchParams.get("tab");
+    profileTabs = "/" + profileNickname.innerText + "?tab=";
+    profileCurrentTab = profileURL.searchParams.get("tab");
   }
 
   const presenceData: PresenceData = {
@@ -154,6 +160,12 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.details;
+  } else if (document.location.pathname.startsWith("/codespaces")) {
+    presenceData.state = "Browsing codespaces...";
+
+    presenceData.startTimestamp = browsingStamp;
+
+    delete presenceData.details;
   } else if (document.location.pathname.indexOf(search)) {
     presenceData.details = "Searching for: ";
 
@@ -161,13 +173,15 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   }
-
   if (repositoryAuthor && repositoryName) {
     if (
       repositoryAuthor.innerText.length > 0 &&
       repositoryName.innerText.length > 0 &&
-      document.location.pathname ==
-        "/" + repositoryAuthor.innerText + "/" + repositoryName.innerText
+      document.location.pathname.toLowerCase() ==
+        "/" +
+          repositoryAuthor.innerText.toLowerCase() +
+          "/" +
+          repositoryName.innerText.toLowerCase()
     ) {
       presenceData.details = "Browsing a repository...";
 
@@ -179,13 +193,9 @@ presence.on("UpdateData", async () => {
       repositoryAuthor.innerText.length > 0 &&
       repositoryName.innerText.length > 0 &&
       document.location.pathname.includes("/tree/") &&
-      repositoryLocation.length > 0
+      repositoryLocation.innerText.length > 0
     ) {
-      var repLoc: any;
-
-      repositoryLocation.forEach((item) => {
-        repLoc = item.innerText;
-      });
+      const repLoc = repositoryLocation.innerText;
 
       presenceData.details =
         "Browsing " +
@@ -202,11 +212,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/blob/") &&
       repositoryLocation2.length > 0
     ) {
-      var repLoc2: any;
-
-      repositoryLocation2.forEach((item) => {
-        repLoc2 = item.innerText;
-      });
+      const filePath: HTMLElement = document.querySelector("#blob-path");
 
       presenceData.details =
         "Looking at a file from " +
@@ -214,15 +220,21 @@ presence.on("UpdateData", async () => {
         "/" +
         repositoryName.innerText;
 
-      presenceData.state = repLoc2;
+      presenceData.state =
+        filePath.querySelector("details") !== null
+          ? filePath.textContent
+              .replace(filePath.querySelector("details").textContent, "")
+              .trim()
+              .slice(0, -1)
+          : filePath.textContent.trim();
 
       presenceData.startTimestamp = browsingStamp;
     } else if (
-      document.location.pathname ==
+      document.location.pathname.toLowerCase() ==
       "/" +
-        repositoryAuthor.innerText +
+        repositoryAuthor.innerText.toLowerCase() +
         "/" +
-        repositoryName.innerText +
+        repositoryName.innerText.toLowerCase() +
         "/issues/"
     ) {
       presenceData.details = "Browsing issues from:";
@@ -243,13 +255,15 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (
-      document.location.pathname.includes(
-        "/" +
-          repositoryAuthor.innerText +
+      document.location.pathname
+        .toLowerCase()
+        .includes(
           "/" +
-          repositoryName.innerText +
-          "/pull/"
-      )
+            repositoryAuthor.innerText.toLowerCase() +
+            "/" +
+            repositoryName.innerText.toLowerCase() +
+            "/pull/"
+        )
     ) {
       presenceData.details =
         "Looking on pull request " + pullRequestID.innerText;
@@ -259,13 +273,15 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (
-      document.location.pathname.includes(
-        "/" +
-          repositoryAuthor.innerText +
+      document.location.pathname
+        .toLowerCase()
+        .includes(
           "/" +
-          repositoryName.innerText +
-          "/issues/"
-      )
+            repositoryAuthor.innerText.toLowerCase() +
+            "/" +
+            repositoryName.innerText.toLowerCase() +
+            "/issues/"
+        )
     ) {
       presenceData.details = "Looking on issue " + issueID.innerText;
 
@@ -284,7 +300,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/network") ||
       document.location.pathname.includes("/network/members")
     ) {
-      var insightsTab: any = document.querySelector(
+      const insightsTab: HTMLElement = document.querySelector(
         "nav a.js-selected-navigation-item.selected.menu-item"
       );
 
