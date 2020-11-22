@@ -14,8 +14,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Math.floor(Date.now()/1000);
-  const endTime = Math.floor(startTime - videoTime + videoDuration);
+  const startTime = Math.floor(Date.now()/1000),
+  endTime = Math.floor(startTime - videoTime + videoDuration);
   return [startTime, endTime];
 }
 
