@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
         }
       } else if (isNaN(duration)) {
         presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Looing at:";
+        presenceData.details = "Looikng at:";
         presenceData.state = user;
       }
     } else if (document.location.pathname.includes("/Drama/")) {
