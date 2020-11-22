@@ -1,6 +1,14 @@
 const presence = new Presence({
-  clientId: "719974375188725770"
-});
+    clientId: '719974375188725770'
+  }),
+  gameModeMap: ItemMap = {
+    ':battleroyale': 'Battle Royale',
+    ':experimental': 'Experimental',
+    ':ffa': 'Free-For-All',
+    ':party': 'Party',
+    ':teamrush': 'Team Rush',
+    ':teams': 'Teams'
+  };
 
 interface AgarData {
   state: number;
@@ -9,50 +17,40 @@ interface AgarData {
   connecting: boolean;
 }
 
-let agarData: AgarData = null;
-
 interface ItemMap {
   [key: string]: string;
 }
 
-// A map of game mode IDs with their names.
-const gameModeMap: ItemMap = {
-  ":battleroyale": "Battle Royale",
-  ":experimental": "Experimental",
-  ":ffa": "Free-For-All",
-  ":party": "Party",
-  ":teamrush": "Team Rush",
-  ":teams": "Teams"
-};
+let gameStartTimestamp: number = null,
+  agarData: AgarData = null;
 
-// The timestamp of the first time a game was detected.
-let gameStartTimestamp: number = null;
-
-presence.on("UpdateData", async () => {
+presence.on('UpdateData', async () => {
   const data: PresenceData = {
-    largeImageKey: "agar"
+    largeImageKey: 'agar'
   };
 
   if (agarData) {
     if (agarData.connecting) {
-      data.details = "Connecting...";
+      data.details = 'Connecting...';
       gameStartTimestamp = null;
     } else {
       switch (agarData.state) {
         case 0:
-          data.details = "Main Menu";
+          data.details = 'Main Menu';
           gameStartTimestamp = null;
           break;
         case 1:
-          data.details = `Playing as ${agarData.nick}`;
+          if (await presence.getSetting('showName'))
+            data.details = `Playing as ${agarData.nick}`;
+          else data.details = 'Playing';
           if (!gameStartTimestamp) gameStartTimestamp = Date.now();
           break;
         case 2:
-          data.details = "Game Over";
+          data.details = 'Game Over';
           gameStartTimestamp = null;
           break;
         case 3:
-          data.details = "Spectating";
+          data.details = 'Spectating';
           gameStartTimestamp = null;
           break;
       }
@@ -68,4 +66,4 @@ presence.on("UpdateData", async () => {
   } else presence.setActivity(data);
 });
 
-presence.on("iFrameData", (data: AgarData) => (agarData = data));
+presence.on('iFrameData', (data: AgarData) => (agarData = data));
