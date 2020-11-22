@@ -15,7 +15,7 @@ function getTimestamps(
   videoDuration: number
 ): Array<number> {
   const startTime = Math.floor(Date.now()/1000);
-  const endTime = startTime - videoTime + videoDuration;
+  const endTime = Math.floor(startTime - videoTime + videoDuration);
   return [startTime, endTime];
 }
 
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "animedao_lg"
   };
-  if (hostname.match(/animedao\d{0,2}\.stream/)) {
+  if (pathname.startsWith(`/view/`)) {
     const title : string = document.querySelector("h2").textContent.trim();
     if ((episode = title.match(/\WEpisode\W\d{1,3}/)) != null) {
       presenceData.details = title.replace(episode[0], "");
@@ -54,11 +54,10 @@ presence.on("UpdateData", async () => {
     }
     const video : HTMLVideoElement = document.querySelector(`video`);
     if (video != null) {
-      played = video.duration != 0;
+      played = video.currentTime != 0;
       duration = video.duration;
       current = video.currentTime;
       paused = video.paused;
-
     }
     if (played) {
       if (!paused) {
@@ -71,7 +70,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).paused
         : (await strings).playing;
     }
-  } else if (hostname === `animedao.com`) {
+  } else if (hostname === `animedao.to`) {
     presenceData.startTimestamp = startTimestamp;
     if (pathname === `/`) {
       presenceData.details = (await strings).browsing;
