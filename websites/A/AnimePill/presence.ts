@@ -92,7 +92,7 @@ const pages: PageContext[] = [
 
 (function () {
   let currentVideo: VideoContext,
-   lastIframeData: Date = null;
+    lastIframeData: Date = null;
   presence.on("iFrameData", (data: VideoContext) => {
     if (data && data.video) {
       currentVideo = data;

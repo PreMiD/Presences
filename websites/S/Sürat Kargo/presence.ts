@@ -4,82 +4,81 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const path: string = document.location.pathname,
-  ayrac: string[] = path.split("/"),
-  presenceData: PresenceData = {
+    ayrac: string[] = path.split("/"),
+    presenceData: PresenceData = {
       largeImageKey: "suratkargo"
-  };
+    };
   // Hizmetlerimiz
-  if(path.startsWith("/Hizmetlerimiz")){
-
+  if (path.startsWith("/Hizmetlerimiz")) {
     presenceData.details = "Ürün ve Hizmetler:";
-    if(ayrac[2] == "SuratGlobal"){
+    if (ayrac[2] == "SuratGlobal") {
       presenceData.state = "Sürat Global";
       presenceData.startTimestamp = Date.now();
-    }else if(ayrac[2] == "SuratGonderAl"){
+    } else if (ayrac[2] == "SuratGonderAl") {
       presenceData.state = "Sürat Gönder-Al";
       presenceData.startTimestamp = Date.now();
-    }else if(ayrac[2] == "SuratTahsilatli"){
+    } else if (ayrac[2] == "SuratTahsilatli") {
       presenceData.state = "Sürat Tahsilatlı";
       presenceData.startTimestamp = Date.now();
-    }else if(ayrac[2] == "SuratKrediliKargo"){
+    } else if (ayrac[2] == "SuratKrediliKargo") {
       presenceData.state = "Sürat Kredili Kargo";
       presenceData.startTimestamp = Date.now();
-    }else if(ayrac[2] == "SuratBilgilendirme"){
+    } else if (ayrac[2] == "SuratBilgilendirme") {
       presenceData.state = "Sürat Bilgilendirme";
       presenceData.startTimestamp = Date.now();
-    }else if(ayrac[2] == "SuratAmbalaj"){
+    } else if (ayrac[2] == "SuratAmbalaj") {
       presenceData.state = "Sürat Ambalaj";
       presenceData.startTimestamp = Date.now();
     }
     // Bilgi Hizmetleri
-  }else if(path.startsWith("/BilgiHizmetleri")){
+  } else if (path.startsWith("/BilgiHizmetleri")) {
     presenceData.details = "Bilgi Hizmetleri:";
-    if(ayrac[2] == "EFaturaSorgulama"){
+    if (ayrac[2] == "EFaturaSorgulama") {
       presenceData.state = "E-Fatura Sorgulama";
       presenceData.startTimestamp = Date.now();
-    }else if(ayrac[2] == "BilgiGuvenligi"){
+    } else if (ayrac[2] == "BilgiGuvenligi") {
       presenceData.state = "Bilgi Güvenliği";
       presenceData.startTimestamp = Date.now();
-    }else if(ayrac[2] == "BilgiToplumuHizmetleri"){
+    } else if (ayrac[2] == "BilgiToplumuHizmetleri") {
       presenceData.state = "Bilgi Toplumu Hizmetleri";
       presenceData.startTimestamp = Date.now();
-    }else if(ayrac[2] == "BilgiToplumuHizmetleri"){
+    } else if (ayrac[2] == "BilgiToplumuHizmetleri") {
       presenceData.state = "Fiyatlandirma";
       presenceData.startTimestamp = Date.now();
     }
-      // Kampanyalar
-    }else if(path.startsWith("/Kampanyalar")){
-      presenceData.details = "Kampanyalar";
-      presenceData.startTimestamp = Date.now();
-    }else if(path.startsWith("/BizeUlasin")){
-      presenceData.details = "Bize Ulaşın:";
-      presenceData.state = ayrac[2]
-      presenceData.startTimestamp = Date.now();
-    }else if(path.startsWith("/Basvurular")){
-      presenceData.details = "Başvuru yapıyor:";
-      presenceData.state = ayrac[2]
-      presenceData.startTimestamp = Date.now();
-    }else if(path.startsWith("/BasinKiti")){
+    // Kampanyalar
+  } else if (path.startsWith("/Kampanyalar")) {
+    presenceData.details = "Kampanyalar";
+    presenceData.startTimestamp = Date.now();
+  } else if (path.startsWith("/BizeUlasin")) {
+    presenceData.details = "Bize Ulaşın:";
+    presenceData.state = ayrac[2];
+    presenceData.startTimestamp = Date.now();
+  } else if (path.startsWith("/Basvurular")) {
+    presenceData.details = "Başvuru yapıyor:";
+    presenceData.state = ayrac[2];
+    presenceData.startTimestamp = Date.now();
+  } else if (path.startsWith("/BasinKiti")) {
     presenceData.details = "Basın Kiti";
     presenceData.startTimestamp = Date.now();
-  }else if(path.startsWith("/Haberler")){
+  } else if (path.startsWith("/Haberler")) {
     presenceData.details = "Haber";
     presenceData.startTimestamp = Date.now();
-  }else if(path.startsWith("/Hakkimizda")){
+  } else if (path.startsWith("/Hakkimizda")) {
     presenceData.details = "Hakkımızda";
     presenceData.startTimestamp = Date.now();
-  }else if(path.startsWith("/Felsefemiz")){
+  } else if (path.startsWith("/Felsefemiz")) {
     presenceData.details = "Misyonumuz & Vizyonumuz ";
     presenceData.startTimestamp = Date.now();
-  }else if(path.startsWith("/InsanKaynaklariPolitikamiz")){
+  } else if (path.startsWith("/InsanKaynaklariPolitikamiz")) {
     presenceData.details = "İnsan Kaynakları Politikamız";
     presenceData.startTimestamp = Date.now();
-  }else if(path.startsWith("/SosyalSorumlulukCalismalarimiz")){
+  } else if (path.startsWith("/SosyalSorumlulukCalismalarimiz")) {
     presenceData.details = "Sosyal Sorumluluk Çalışmalarımız";
     presenceData.startTimestamp = Date.now();
-  }else if(path == "/"){
+  } else if (path == "/") {
     presenceData.details = "Ana Sayfa";
     presenceData.startTimestamp = Date.now();
   }
   presence.setActivity(presenceData);
-})
+});
