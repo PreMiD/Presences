@@ -3,7 +3,9 @@ const iframe = new iFrame();
 iframe.on("UpdateData", async () => {
   const { hostname } = window.location;
   if (
-    hostname === `vcdn.space`
+    hostname === `vcdn.space` ||
+    hostname === `streamtape.com` ||
+    hostname ==  `mixdrop.to`
   ) {
     const video = document.querySelector(`video`);
     if (video != null) {
