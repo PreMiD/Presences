@@ -13,14 +13,14 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = browsingStamp;
 
   if (document.location.hostname == "linustechtips.com") {
-    if (document.location.pathname == "/main/") {
+    if (document.location.pathname == "/") {
       presenceData.details = "Browsing";
       presenceData.state = "Categories";
 
       presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/main/forum/")) {
+    } else if (document.location.pathname.includes("/forum/")) {
       item = document.querySelector(
-        "body > main > div > div > div > div > header > h1"
+        "h1"
       ) as HTMLElement;
 
       presenceData.details = "Browsing Category";
@@ -28,9 +28,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.smallImageKey = "search";
       presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/main/topic/")) {
+    } else if (document.location.pathname.includes("/topic/")) {
       item = document.querySelector(
-        "body > main > div > div > div > div > div.ipsPhotoPanel > div > h1"
+        "h1.ipsType_pageTitle"
       ) as HTMLElement;
 
       presenceData.details = "Viewing Thread";
@@ -38,9 +38,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.smallImageKey = "reading";
       presence.setActivity(presenceData);
-    } else if (document.location.pathname.includes("/main/profile/")) {
+    } else if (document.location.pathname.includes("/profile/")) {
       item = document.querySelector(
-        "body > main > div > div > div > div > header > div > div.ipsColumns > div.ipsColumn_fluid > div > h1"
+        "div.ipsColumns div.ipsColumn_fluid h1"
       ) as HTMLElement;
 
       presenceData.details = "Viewing Profile";
