@@ -27,6 +27,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Certification Queue";
     } else if (window.location.pathname == "/moderation/reports") {
       presenceData.state = "Reports Queue";
+    } else if (window.location.pathname == "/moderation/reviews") {
+      presenceData.state = "Reviews Dashboard";
     } else if (window.location.pathname.startsWith("/moderation/decline")) {
       presenceData.state = document.querySelector("#botlistitle").textContent;
     }
