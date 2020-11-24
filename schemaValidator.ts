@@ -57,7 +57,7 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.2",
       if (index == -1) invalidLangs.push(lang);
     });
 
-    if (result.valid || !invalidLangs.length) {
+    if (result.valid && !invalidLangs.length) {
       if (meta.schema && meta.schema !== latestMetadataSchema) {
         validatedWithWarnings(service, "Using out of date schema");
       } else {
