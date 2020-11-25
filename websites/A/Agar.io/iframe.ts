@@ -33,7 +33,7 @@ interface AgarWindow {
   };
 }
 
-iframe.on('UpdateData', async () => {
+iframe.on("UpdateData", async () => {
   const agar = (window as AgarWindow).agarApp;
   if (!agar) return;
 

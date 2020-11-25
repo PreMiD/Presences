@@ -5,7 +5,7 @@ iframe.on("UpdateData", async () => {
   if (
     hostname === `vcdn.space` ||
     hostname === `streamtape.com` ||
-    hostname ==  `mixdrop.to`
+    hostname == `mixdrop.to`
   ) {
     const video = document.querySelector(`video`);
     if (video != null) {
