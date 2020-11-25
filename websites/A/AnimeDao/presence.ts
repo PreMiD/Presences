@@ -14,8 +14,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Math.floor(Date.now()/1000),
-  endTime = Math.floor(startTime - videoTime + videoDuration);
+  const startTime = Math.floor(Date.now() / 1000),
+    endTime = Math.floor(startTime - videoTime + videoDuration);
   return [startTime, endTime];
 }
 
@@ -25,12 +25,20 @@ let episode,
   paused: boolean,
   played: boolean;
 
-presence.on("iFrameData", (data: { current: number; duration: number; paused: boolean; played: boolean; }) => {
-  current = data.current;
-  duration = data.duration;
-  paused = data.paused;
-  played = data.played;
-});
+presence.on(
+  "iFrameData",
+  (data: {
+    current: number;
+    duration: number;
+    paused: boolean;
+    played: boolean;
+  }) => {
+    current = data.current;
+    duration = data.duration;
+    paused = data.paused;
+    played = data.played;
+  }
+);
 
 presence.on("UpdateData", async () => {
   const strings = await presence.getStrings({
@@ -43,7 +51,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "animedao_lg"
   };
   if (pathname.startsWith(`/view/`)) {
-    const title : string = document.querySelector("h2").textContent.trim();
+    const title: string = document.querySelector("h2").textContent.trim();
     if ((episode = title.match(/\WEpisode\W\d{1,3}/)) != null) {
       presenceData.details = title.replace(episode[0], "");
       presenceData.state = `${episode[0]} - ${
@@ -52,7 +60,7 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.details = title;
     }
-    const video : HTMLVideoElement = document.querySelector(`video`);
+    const video: HTMLVideoElement = document.querySelector(`video`);
     if (video != null) {
       played = video.currentTime != 0;
       duration = video.duration;
@@ -77,7 +85,7 @@ presence.on("UpdateData", async () => {
     } else if (pathname.startsWith(`/animelist`)) {
       presenceData.details = `Viewing the Animelist`;
     } else if (pathname.startsWith(`/genre`)) {
-      const genre : string = document.querySelector(`h2`).textContent.trim();
+      const genre: string = document.querySelector(`h2`).textContent.trim();
       presenceData.details = `Viewing genres`;
       if (pathname !== `/genre`) {
         presenceData.state = `${genre.replace(

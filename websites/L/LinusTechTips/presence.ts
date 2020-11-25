@@ -19,9 +19,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/forum/")) {
-      item = document.querySelector(
-        "h1"
-      ) as HTMLElement;
+      item = document.querySelector("h1") as HTMLElement;
 
       presenceData.details = "Browsing Category";
       presenceData.state = item.innerText;
@@ -29,9 +27,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/topic/")) {
-      item = document.querySelector(
-        "h1.ipsType_pageTitle"
-      ) as HTMLElement;
+      item = document.querySelector("h1.ipsType_pageTitle") as HTMLElement;
 
       presenceData.details = "Viewing Thread";
       presenceData.state = item.innerText;
