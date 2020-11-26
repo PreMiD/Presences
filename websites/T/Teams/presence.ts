@@ -11,7 +11,6 @@ presence.on("UpdateData", async () => {
   function setTimestamp(): number {
     return Math.floor(Date.now() / 1000);
   }
- 
 
   if (
     document.URL === "https://teams.microsoft.com/" ||
