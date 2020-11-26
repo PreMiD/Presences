@@ -3,7 +3,7 @@ let sartist, strack, slisteners, sdj;
 
 function newStats(): Promise<void> {
   window
-    .fetch("https://repeat.bozzy.online/api/nowplaying/1")
+    .fetch("https://repeatradio.net/api/v1/stats")
     .then((res) => res.json())
     .then((data) => {
       strack = data.song.track;
