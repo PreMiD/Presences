@@ -1,6 +1,4 @@
-const presence = new Presence({
-  clientId: "412593783696261121"
-});
+const presence = new Presence({ clientId: "412593783696261121" });
 
 const presenceData: PresenceData = {
   state: "Página Inicial",
@@ -13,13 +11,13 @@ const presenceData: PresenceData = {
 
 const polices = [
   { name: "terms", title: "de Termos de Uso" },
-  { name: "partners", title: "para Parceiros" },
-  { name: "privacy", title: "de Privacidade" }
+  { name: "privacy", title: "de Privacidade" },
+  { name: "partners", title: "para Parceiros" }
 ];
 const dashCategories = [
-  { name: "vanity", title: "do sistema de vip" },
-  { name: "general", title: "gerais" },
-  { name: "welcome", title: "de boas vindas" }
+  { name: "general", title: "geral" },
+  { name: "welcome", title: "de boas vindas" },
+  { name: "vanity", title: "do sistema de vip" }
 ];
 
 const POLICES_REGEX = /polices\?p=([a-zA-Z]+)$/;
@@ -47,9 +45,12 @@ presence.on("UpdateData", () => {
     if (DASH_CATEGORIES_REGEX.test(path)) {
       presenceData.state = `Selecionando uma categoria no servidor ${serverName}`;
     }
+
     if (DASH_CATEGORY_REGEX.test(path)) {
-      const [, , category] = DASH_CATEGORY_REGEX.exec(path);
-      const categorySearch = dashCategories.find((p) => p.name === category);
+      const [, , category = ""] = DASH_CATEGORY_REGEX.exec(path);
+      const categorySearch = dashCategories.find(
+        ({ name }) => name === category
+      );
 
       presenceData.smallImageKey = "editing_black_icon";
       presenceData.state = `Editando informações ${
@@ -60,18 +61,19 @@ presence.on("UpdateData", () => {
     if (path === "/") presenceData.state = "Página Inicial";
     if (/commands\/?$/.test(path)) presenceData.state = "Visualizando Comandos";
     if (/polices\/?$/.test(path)) presenceData.state = "Visualizando Politicas";
-    if (COMMANDS_REGEX.test(path)) {
-      presenceData.state = `Visualizando os comandos da categoria ${
-        COMMANDS_REGEX.exec(path)[2]
-      }`;
-    }
-    if (POLICES_REGEX.test(path)) {
-      const [, police] = POLICES_REGEX.exec(path);
-      const policeSearch = polices.find((p) => p.name === police);
 
-      presenceData.state = `Visualizando a política ${
-        policeSearch ? policeSearch.title : police
-      }`;
+    if (COMMANDS_REGEX.test(path)) {
+      const [, commandCategory = "general"] = COMMANDS_REGEX.exec(path);
+
+      presenceData.state = `Visualizando os comandos da categoria ${commandCategory}`;
+    }
+
+    if (POLICES_REGEX.test(path)) {
+      const [, police = "não definida"] = POLICES_REGEX.exec(path);
+      const policeSearch = polices.find(({ name }) => name === police);
+      const policeViewing = policeSearch ? policeSearch.title : police;
+
+      presenceData.state = `Visualizando a política ${policeViewing}`;
     }
   }
 
