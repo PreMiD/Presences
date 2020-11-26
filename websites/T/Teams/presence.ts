@@ -7,9 +7,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "icon"
   };
-  /**
-   * Sets the timestamp.
-   */
+   
   function setTimestamp(): number {
     return Math.floor(Date.now() / 1000);
   }
