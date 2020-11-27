@@ -3,8 +3,8 @@ const browsingStamp = Math.floor(Date.now() / 1000);
 var presence = new Presence({
     clientId: "781944209770151997" //The client ID of the Application created at https://discordapp.com/developers/applications
 }),
-presenceData: PresenceData = {
-};
+presenceData: PresenceData;
+
 
 presence.on("UpdateData", async () => {
 	
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 	
 	//Starts With
 	if (document.location.pathname.startsWith("/mlpol/")) {
-		presenceData.details = "/mlpol/ - My Little Politics"
+		presenceData.details = "/mlpol/ - My Little Politics";
 	}
 	if (document.location.pathname.startsWith("/qa/")) {
 		presenceData.details = "/qa/ - Questions and Answers";
