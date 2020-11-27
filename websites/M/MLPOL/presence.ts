@@ -4,7 +4,7 @@ const browsingStamp = Math.floor(Date.now() / 1000), presence = new Presence({
 
 presence.on("UpdateData", async () => {
 
-	var presenceData: PresenceData;
+	let presenceData: PresenceData;
 
 	//I was gonna do a bunch of DOM manipulation but I give up on life so I'm just gonna do the most spaghetti way of doing this humanly possible.
 
