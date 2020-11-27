@@ -85,10 +85,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = (document.querySelector(
       ".layout--narrow h1"
     ) as HTMLElement).innerText;
-  } else if (document.location.pathname == "/tagging") {
-    presenceData.details = "Browsing through tagging discussions";
-  } else if (document.location.pathname.startsWith("/tagging/")) {
-    presenceData.details = "Reading the tagging discussion:";
     presenceData.state = (document.querySelector(
       ".layout--narrow h1"
     ) as HTMLElement).innerText;
@@ -149,6 +145,6 @@ presence.on("UpdateData", async () => {
   presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", function (data) {
+/*&presence.on("iFrameData", function (data) {
   console.log(data);
-});
+});*/
