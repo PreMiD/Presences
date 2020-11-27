@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "StrangeUniverseArtist",
+    "id": "727029933255163946"
+  },
+  "service": "Ponerpics",
+  "description": {
+    "en": "Ponerpics.org is an image booru hosting pictures for the My Little Pony fandom with a particular emphasis on freedom for its users. Rules are minimal: the only existing rules are that images fall within legality, are relevant to ponies, and that no forum posts, comments or images are spammed."
+  },
+  "url": "ponerpics.org",
+  "version": "1.0.0",
+  "logo": "https://i.ibb.co/5LLrPRz/ponerpics.png",
+  "thumbnail": "https://i.ibb.co/rH17jh1/thumbnail.png",
+  "color": "#CD861E",
+  "tags": [
+    "pictures",
+    "nsfw"
+  ],
+  "category": "other"
+}

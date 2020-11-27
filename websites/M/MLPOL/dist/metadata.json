@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "StrangeUniverseArtist",
+    "id": "727029933255163946"
+  },
+  "url": "mlpol.net",
+  "description": {
+    "en": "Welcome to the Mongolian political horsewhispering forum, also known as /mlpol/"
+  },
+  "service": "mlpol",
+  "version": "1.0.0",
+  "logo": "https://i.ibb.co/Hq6PWGv/mlpol.png",
+  "thumbnail": "https://i.ibb.co/rZJ31w7/thumbnail2.png",
+  "color": "#FF0000",
+  "tags": [
+    "nsfw"
+  ],
+  "category": "other"
+}
