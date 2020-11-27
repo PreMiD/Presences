@@ -1,10 +1,9 @@
 const browsingStamp = Math.floor(Date.now() / 1000);
 
-var presence = new Presence({
+let presence = new Presence({
     clientId: "781944209770151997" //The client ID of the Application created at https://discordapp.com/developers/applications
 }),
 presenceData: PresenceData;
-
 
 presence.on("UpdateData", async () => {
 	
