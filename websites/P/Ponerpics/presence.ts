@@ -105,8 +105,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching something";
   } else if (document.location.pathname.startsWith("/filters")) {
     presenceData.details = "Changing their filter settings";
-  } else if (document.location.pathname.startsWith("/settings")) {
-    presenceData.details = "Changing their settings";
   } else if (document.location.pathname.startsWith("/pages/rules")) {
     presenceData.details = "Reading the rules";
   } else if (document.location.pathname.startsWith("/pages/privacy")) {
