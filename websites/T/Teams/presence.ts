@@ -3,11 +3,10 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-	
   const presenceData: PresenceData = {
     largeImageKey: "icon"
   };
-   
+
   function setTimestamp(): number {
     return Math.floor(Date.now() / 1000);
   }
@@ -20,26 +19,34 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/calendar")) {
     presenceData.details = await presence.getSetting("calendarMessage");
-    presenceData.startTimestamp = setTimestamp();		
+    presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/my/file")) {
     presenceData.details = await presence.getSetting("filesMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/conversations/")) {
     presenceData.details = await presence.getSetting("conversationsMessage");
     presenceData.startTimestamp = setTimestamp();
-  } else if (document.location.href.includes("/apps/66aeee93-507d-479a-a3ef-8f494af43945")) {
+  } else if (
+    document.location.href.includes(
+      "/apps/66aeee93-507d-479a-a3ef-8f494af43945"
+    )
+  ) {
     presenceData.details = await presence.getSetting("homeworkMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/analytics/")) {
     presenceData.details = await presence.getSetting("analyticsMessage");
-    presenceData.startTimestamp = setTimestamp(); 
+    presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/manageteams/")) {
     presenceData.details = await presence.getSetting("manageMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/gradebook/")) {
     presenceData.details = await presence.getSetting("gradesMessage");
     presenceData.startTimestamp = setTimestamp();
-  } else if (document.location.href.includes("/tab::6f9be796-2b0f-441f-a79a-800563081010/")) {
+  } else if (
+    document.location.href.includes(
+      "/tab::6f9be796-2b0f-441f-a79a-800563081010/"
+    )
+  ) {
     presenceData.details = await presence.getSetting("notesMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("/school/classroom/")) {
@@ -63,7 +70,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.href.includes("/apps")) {
     presenceData.details = await presence.getSetting("appsMessage");
     presenceData.startTimestamp = setTimestamp();
-  } else if (document.location.href.includes("/tab::18efb661-92b3-4a04-9c27-024c8c7bf70a")) {
+  } else if (
+    document.location.href.includes(
+      "/tab::18efb661-92b3-4a04-9c27-024c8c7bf70a"
+    )
+  ) {
     presenceData.details = await presence.getSetting("testMessage");
     presenceData.startTimestamp = setTimestamp();
   } else if (document.location.href.includes("calling/")) {
@@ -74,7 +85,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = setTimestamp();
   }
   if (presenceData.details === null) {
-    presence.setTrayTitle(); 
+    presence.setTrayTitle();
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
