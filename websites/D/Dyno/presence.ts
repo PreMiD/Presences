@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/status")) {
       presenceData.details = "Viewing the status";
-    } else if (document.location.pathname.includes("/upgrade")) {
+    } else if (document.location.pathname.includes("/premium")) {
       presenceData.details = "Viewing Dyno Premium Plans";
     }
   }
