@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "782358522628145153" //Presence Application on Discord Developers ID.
+  clientId: "782358522628145153" //Presence Application ID on Discord Developers.
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
@@ -13,12 +13,12 @@ presence.on("UpdateData", async () => {
 
   const path = document.location.pathname;
 
-  if (document.location.hostname.match(/([a-z0-9]+)[.]atlassian[.]net/)) {
-    //Check if user is creating a new issue.
+  if (document.location.hostname.match(/[a-z0-9]+[.]atlassian[.]net/)) {
+    //If user is not creating a new issue.
     if (document.title != "Create issue - Jira") {
       //Projects homepage section.
       if (path == "/projects" || path == "/secure/BrowseProjects.jspa") {
-        presenceData.details = "Browsing projects.";
+        presenceData.details = "Browsing Projects.";
         presenceData.startTimestamp = browsingStamp;
       }
       //Project sections.
@@ -30,7 +30,7 @@ presence.on("UpdateData", async () => {
 
         //Project Board section.
         if (path.match(/\/[a-zA-Z0-9]+\/boards\/[0-9]$/)) {
-          let boardNumber: String = document.querySelector(
+          let boardNumber = document.querySelector(
             '#jira-frontend > #helpPanelContainer > div:first-child > div > div[data-testid="Content"] > div:first-child > div:first-child > div:first-child > div > div:nth-child(2) > div:first-child > div:first-child > div > h1'
           ).innerHTML;
 
@@ -40,29 +40,18 @@ presence.on("UpdateData", async () => {
         }
         //Project Report section.
         else if (path.includes("/reports")) {
-          presenceData.startTimestamp = browsingStamp;
-          switch (path.split("/").pop()) {
-            case "burnup":
-              presenceData.details = "Analyzing Burnup report.";
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            case "burndown":
-              presenceData.details = "Analyzing Burndown report.";
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            case "velocity":
-              presenceData.details = "Analyzing Velocity report.";
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            case "cumulative":
-              presenceData.details = "Analyzing Cumulative report.";
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            default:
-              presenceData.details = "Analyzing Reports.";
-              presenceData.state = `Project: ${projectName}`;
-              break;
+          enum reportType {
+            burnup = "Analyzing Burnup report.",
+            burndown = "Analyzing Burndown report.",
+            velocity = "Analyzing Velocity report.",
+            cumulative = "Analyzing Cumulative report."
           }
+
+          presenceData.details =
+            reportType[path.split("/").pop() as keyof typeof reportType] ||
+            "Analyzing Reports.";
+          presenceData.state = `Project: ${projectName}`;
+          presenceData.startTimestamp = browsingStamp;
         }
         //Project Issues section.
         else if (path.includes("/issues/")) {
@@ -85,36 +74,31 @@ presence.on("UpdateData", async () => {
           );
 
           presenceData.startTimestamp = browsingStamp;
+          //If user set showSettingsSection = True
           if (showSettingsSections) {
             //Settings sections with no sub-links.
             if (!path.includes("/issuetypes") && !path.includes("/apps")) {
-              switch (path.split("/").pop()) {
-                case "details":
-                  presenceData.details = `Editing Details settings.`;
-                  presenceData.state = `Project: ${projectName}`;
-                  break;
-                case "access":
-                  presenceData.details = `Editing Access settings.`;
-                  presenceData.state = `Project: ${projectName}`;
-                  break;
-                case "notifications":
-                  presenceData.details = `Editing Notifications settings.`;
-                  presenceData.state = `Project: ${projectName}`;
-                  break;
-                case "features":
-                  presenceData.details = `Editing Features settings.`;
-                  presenceData.state = `Project: ${projectName}`;
-                  break;
+              enum settingsSection {
+                details = "Editing Details settings.",
+                access = "Editing Access settings.",
+                notifications = "Editing Notifications settings.",
+                features = "Editing Features settings."
               }
+
+              presenceData.details =
+                settingsSection[
+                  path.split("/").pop() as keyof typeof settingsSection
+                ];
+              presenceData.state = `Project: ${projectName}`;
             }
             //Settings sections with sub-links.
             else {
               if (path.includes("/apps/")) {
                 if (path.includes("/app-fields")) {
-                  presenceData.details = `Editing Apps settings - App fields.`;
+                  presenceData.details = `Editing Apps settings: App fields.`;
                   presenceData.state = `Project: ${projectName}`;
                 } else {
-                  presenceData.details = `Editing Apps settings - Project automation`;
+                  presenceData.details = `Editing Apps settings: Project automation.`;
                   presenceData.state = `Project: ${projectName}`;
                 }
               } else {
@@ -122,36 +106,32 @@ presence.on("UpdateData", async () => {
                   '#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div:first-child > div > div:nth-child(2) > div > div > div:first-child > div:nth-child(3) > div > div > div:first-child > div > form > div > div > div > h1'
                 ).innerHTML;
 
-                presenceData.details = `Editing Issue types - ${issueType}.`;
+                presenceData.details = `Editing Issue type: ${issueType}.`;
                 presenceData.state = `Project: ${projectName}`;
               }
             }
-          } else {
+          }
+          //If user set showSettingsSection = False
+          else {
             presenceData.details = "Editing Settings.";
             presenceData.state = `Project: ${projectName}`;
           }
         }
         //Project sections with no sub-links.
         else {
-          presenceData.startTimestamp = browsingStamp;
-          switch (path.split("/").pop()) {
-            case "roadmap":
-              presenceData.details = "Viewing Roadmap.";
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            case "backlog":
-              presenceData.details = "Viewing Backlog.";
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            case "code":
-              presenceData.details = "Reviewing Code.";
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            case "pages":
-              presenceData.details = "Viewing Pages.";
-              presenceData.state = `Project: ${projectName}`;
-              break;
+          enum projectSections {
+            roadmap = "Viewing Roadmap.",
+            backlog = "Viewing Backlog.",
+            code = "Reviewing Code.",
+            pages = "Viewing Pages."
           }
+
+          presenceData.details =
+            projectSections[
+              path.split("/").pop() as keyof typeof projectSections
+            ];
+          presenceData.state = `Project: ${projectName}`;
+          presenceData.startTimestamp = browsingStamp;
         }
       }
       //Project Releases section, the only one with a different path.
@@ -169,53 +149,29 @@ presence.on("UpdateData", async () => {
       }
       //Browsing Issue section.
       else if (path.includes("/browse/")) {
-        let issueName = path.split("/").pop();
-
-        presenceData.details = `Viewing Issue ${issueName}`;
+        presenceData.details = `Viewing Issue ${path.split("/").pop()}`;
         presenceData.startTimestamp = browsingStamp;
       }
       //Advanced Issues section.
       else if (path == "/issues/") {
-        const queryID = document.location.search
-          .split("=", 2)
-          .pop()
-          .substr(0, 2);
-        console.log(queryID);
+        enum issuesSection {
+          "My open issues." = -1,
+          "Reported by me." = -2,
+          "Viewed recently." = -3,
+          "All issues." = -4,
+          "Open issues." = -5,
+          "Created recently." = -6,
+          "Resolved recently." = -7,
+          "Updated recently." = -8,
+          "Done issues." = -9
+        }
 
         presenceData.details = "Tracking global Issues:";
+        presenceData.state =
+          issuesSection[
+            parseInt(document.location.search.split("=", 2).pop().substr(0, 2))
+          ] || "Searching for an issue.";
         presenceData.startTimestamp = browsingStamp;
-        switch (queryID) {
-          case "-1":
-            presenceData.state = "My open issues.";
-            break;
-          case "-2":
-            presenceData.state = "Reported by me.";
-            break;
-          case "-3":
-            presenceData.state = "Viewed recently.";
-            break;
-          case "-4":
-            presenceData.state = "All issues.";
-            break;
-          case "-5":
-            presenceData.state = "Open issues.";
-            break;
-          case "-6":
-            presenceData.state = "Created recently.";
-            break;
-          case "-7":
-            presenceData.state = "Resolved recently.";
-            break;
-          case "-8":
-            presenceData.state = "Updated recently.";
-            break;
-          case "-9":
-            presenceData.state = "Done issues.";
-            break;
-          default:
-            presenceData.state = "Searching for an issue.";
-            break;
-        }
       }
       //Filters section.
       else if (path == "/secure/ManageFilters.jspa") {
@@ -224,7 +180,7 @@ presence.on("UpdateData", async () => {
       }
       //Dashboards homepage section.
       else if (path == "/jira/dashboards") {
-        presenceData.details = "Browsing dashboards.";
+        presenceData.details = "Browsing Dashboards.";
         presenceData.startTimestamp = browsingStamp;
       }
       //Dashboard section.
@@ -239,7 +195,7 @@ presence.on("UpdateData", async () => {
       }
       //People homepage section. (yeah, path is correct, don't ask me why there is a "search", ~isladot)
       else if (path == "/jira/people/search") {
-        presenceData.details = "Browsing users.";
+        presenceData.details = "Browsing Users.";
         presenceData.startTimestamp = browsingStamp;
       }
       //User profile page section.
@@ -267,7 +223,9 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Editing Personal settings.";
         presenceData.startTimestamp = browsingStamp;
       }
-    } else {
+    }
+    //If user is creating a new issue.
+    else {
       presenceData.details = "Creating an Issue.";
       presenceData.startTimestamp = browsingStamp;
     }

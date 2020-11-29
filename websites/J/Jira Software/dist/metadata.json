@@ -18,14 +18,16 @@
       "projects",
       "board",
       "software",
-      "management"
+      "management",
+      "issues",
+      "tasks"
     ],
     "category": "other",
-    "regExp": "([a-z0-9]+)[.]atlassian[.]net",
+    "regExp": "[a-z0-9]+[.]atlassian[.]net",
     "settings": [
       {
         "id": "showSettingsSections",
-        "title": "Show Settings sections",
+        "title": "Show Settings sub-sections.",
         "icon": "fas fa-cogs",
         "value": true
       }
