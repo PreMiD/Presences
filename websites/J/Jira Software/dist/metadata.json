@@ -10,7 +10,7 @@
       "it": "Jira Software è creato apposta per ogni membro del tuo team di sviluppo software, per pianificare, tenere traccia e rilasciare software fantastici."
     },
     "service": "Jira Software",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "logo": "https://i.imgur.com/gW4Nc8U.png",
     "thumbnail": "https://i.imgur.com/lRV5RQt.png",
     "color": "#2684FF",
@@ -21,5 +21,13 @@
       "management"
     ],
     "category": "other",
-    "regExp": "([a-z0-9]+)[.]atlassian[.]net"
+    "regExp": "([a-z0-9]+)[.]atlassian[.]net",
+    "settings": [
+      {
+        "id": "showSettingsSections",
+        "title": "Show Settings sections",
+        "icon": "fas fa-cogs",
+        "value": true
+      }
+    ]
   }

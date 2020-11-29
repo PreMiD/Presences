@@ -79,48 +79,57 @@ presence.on("UpdateData", async () => {
       }
       //Project Settings section.
       else if (path.includes("/settings/")) {
-        presenceData.startTimestamp = browsingStamp;
-        //Settings sections with no sub-links.
-        if (!path.includes("/issuetypes") && !path.includes("/apps")) {
-          var settingsSection: String = path.split("/").pop();
+        //Getting user preference for showSettingsSections.
+        var showSettingsSections: Boolean = await presence.getSetting(
+          "showSettingsSections"
+        );
 
-          switch (settingsSection) {
-            case "details":
-              presenceData.details = `Modifying Details Settings.`;
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            case "access":
-              presenceData.details = `Modifying Access Settings.`;
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            case "notifications":
-              presenceData.details = `Modifying Notifications Settings.`;
-              presenceData.state = `Project: ${projectName}`;
-              break;
-            case "features":
-              presenceData.details = `Modifying Features Settings.`;
-              presenceData.state = `Project: ${projectName}`;
-              break;
+        presenceData.startTimestamp = browsingStamp;
+        if (showSettingsSections) {
+          //Settings sections with no sub-links.
+          if (!path.includes("/issuetypes") && !path.includes("/apps")) {
+            var settingsSection: String = path.split("/").pop();
+
+            switch (settingsSection) {
+              case "details":
+                presenceData.details = `Modifying Details settings.`;
+                presenceData.state = `Project: ${projectName}`;
+                break;
+              case "access":
+                presenceData.details = `Modifying Access settings.`;
+                presenceData.state = `Project: ${projectName}`;
+                break;
+              case "notifications":
+                presenceData.details = `Modifying Notifications settings.`;
+                presenceData.state = `Project: ${projectName}`;
+                break;
+              case "features":
+                presenceData.details = `Modifying Features settings.`;
+                presenceData.state = `Project: ${projectName}`;
+                break;
+            }
           }
-        }
-        //Settings sections with sub-links.
-        else {
-          presenceData.startTimestamp = browsingStamp;
-          if (path.includes("/apps/")) {
-            if (path.includes("/app-fields")) {
-              presenceData.details = `Modifying Apps Settings - App Fields.`;
-              presenceData.state = `Project: ${projectName}`;
+          //Settings sections with sub-links.
+          else {
+            if (path.includes("/apps/")) {
+              if (path.includes("/app-fields")) {
+                presenceData.details = `Modifying Apps settings - App fields.`;
+                presenceData.state = `Project: ${projectName}`;
+              } else {
+                presenceData.details = `Modifying Apps settings - Project automation`;
+                presenceData.state = `Project: ${projectName}`;
+              }
             } else {
-              presenceData.details = `Modifying Apps Settings - Project Automation`;
+              var issueType: String = document.querySelector(
+                '#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div:first-child > div > div:nth-child(2) > div > div > div:first-child > div:nth-child(3) > div > div > div:first-child > div > form > div > div > div > h1'
+              ).innerHTML;
+              presenceData.details = `Modifying Issue types - ${issueType}.`;
               presenceData.state = `Project: ${projectName}`;
             }
-          } else {
-            var issueType: String = document.querySelector(
-              '#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div:first-child > div > div:nth-child(2) > div > div > div:first-child > div:nth-child(3) > div > div > div:first-child > div > form > div > div > div > h1'
-            ).innerHTML;
-            presenceData.details = `Modifying Issue types - ${issueType}.`;
-            presenceData.state = `Project: ${projectName}`;
           }
+        } else {
+          presenceData.details = "Modifying Settings.";
+          presenceData.state = `Project: ${projectName}`;
         }
       }
       //Project sections with no sub-links.
