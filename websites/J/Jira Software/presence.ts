@@ -1,17 +1,14 @@
-var presence = new Presence({
-  clientId: "782358522628145153" //Presence Application ID on Discord Developers.
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var projectName: any;
+let presence = new Presence({
+    clientId: "782358522628145153" //Presence Application ID on Discord Developers.
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  projectName: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "jira_logo"
-  };
-
-  const path = document.location.pathname;
+      largeImageKey: "jira_logo"
+    },
+    path = document.location.pathname;
 
   if (document.location.hostname.match(/[a-z0-9]+[.]atlassian[.]net/)) {
     //If user is not creating a new issue.
@@ -30,7 +27,7 @@ presence.on("UpdateData", async () => {
 
         //Project Board section.
         if (path.match(/\/[a-zA-Z0-9]+\/boards\/[0-9]$/)) {
-          let boardNumber = document.querySelector(
+          const boardNumber = document.querySelector(
             '#jira-frontend > #helpPanelContainer > div:first-child > div > div[data-testid="Content"] > div:first-child > div:first-child > div:first-child > div > div:nth-child(2) > div:first-child > div:first-child > div > h1'
           ).innerHTML;
 
@@ -55,7 +52,7 @@ presence.on("UpdateData", async () => {
         }
         //Project Issues section.
         else if (path.includes("/issues/")) {
-          let issueName = path.split("/").pop();
+          const issueName = path.split("/").pop();
 
           presenceData.startTimestamp = browsingStamp;
           if (issueName == "") {
@@ -69,7 +66,7 @@ presence.on("UpdateData", async () => {
         //Project Settings section.
         else if (path.includes("/settings/")) {
           //Getting user preference for showSettingsSections.
-          let showSettingsSections = await presence.getSetting(
+          const showSettingsSections = await presence.getSetting(
             "showSettingsSections"
           );
 
@@ -102,7 +99,7 @@ presence.on("UpdateData", async () => {
                   presenceData.state = `Project: ${projectName}`;
                 }
               } else {
-                let issueType = document.querySelector(
+                const issueType = document.querySelector(
                   '#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div:first-child > div > div:nth-child(2) > div > div > div:first-child > div:nth-child(3) > div > div > div:first-child > div > form > div > div > div > h1'
                 ).innerHTML;
 
@@ -185,7 +182,7 @@ presence.on("UpdateData", async () => {
       }
       //Dashboard section.
       else if (path == "/secure/Dashboard.jspa") {
-        let dashboardName = document.querySelector(
+        const dashboardName = document.querySelector(
           "#dashboard-content > div:first-child > div > div:first-child > h1"
         ).innerHTML;
 
@@ -200,7 +197,7 @@ presence.on("UpdateData", async () => {
       }
       //User profile page section.
       else if (path.match(/\/jira\/people\/[a-z0-9]+$/)) {
-        let userName = document.querySelector(
+        const userName = document.querySelector(
           '#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:nth-child(2) > h2'
         ).innerHTML;
 
@@ -210,7 +207,7 @@ presence.on("UpdateData", async () => {
       }
       //Team profile page section.
       else if (path.match(/\/jira\/people\/team\/[a-z0-9-]+$/)) {
-        let teamName = document.querySelector(
+        const teamName = document.querySelector(
           '#helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:first-child > form > div > div > div > div'
         ).innerHTML;
 
