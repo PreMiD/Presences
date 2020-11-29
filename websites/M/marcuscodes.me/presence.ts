@@ -3,13 +3,14 @@ const presence = new Presence({
 });
 
 const timeStamp = Math.floor(Date.now() / 1000);
+const page = window.location.href;
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "circlegrad",
     startTimestamp: timeStamp
   };
-  const page = window.location.href;
+
   if (page == "https://marcuscodes.me/") {
     presenceData.details = "Home";
   } else if (page == "https://marcuscodes.me/inkthought-legacy") {
