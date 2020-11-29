@@ -90,19 +90,19 @@ presence.on("UpdateData", async () => {
             if (!path.includes("/issuetypes") && !path.includes("/apps")) {
               switch (path.split("/").pop()) {
                 case "details":
-                  presenceData.details = `Modifying Details settings.`;
+                  presenceData.details = `Editing Details settings.`;
                   presenceData.state = `Project: ${projectName}`;
                   break;
                 case "access":
-                  presenceData.details = `Modifying Access settings.`;
+                  presenceData.details = `Editing Access settings.`;
                   presenceData.state = `Project: ${projectName}`;
                   break;
                 case "notifications":
-                  presenceData.details = `Modifying Notifications settings.`;
+                  presenceData.details = `Editing Notifications settings.`;
                   presenceData.state = `Project: ${projectName}`;
                   break;
                 case "features":
-                  presenceData.details = `Modifying Features settings.`;
+                  presenceData.details = `Editing Features settings.`;
                   presenceData.state = `Project: ${projectName}`;
                   break;
               }
@@ -111,10 +111,10 @@ presence.on("UpdateData", async () => {
             else {
               if (path.includes("/apps/")) {
                 if (path.includes("/app-fields")) {
-                  presenceData.details = `Modifying Apps settings - App fields.`;
+                  presenceData.details = `Editing Apps settings - App fields.`;
                   presenceData.state = `Project: ${projectName}`;
                 } else {
-                  presenceData.details = `Modifying Apps settings - Project automation`;
+                  presenceData.details = `Editing Apps settings - Project automation`;
                   presenceData.state = `Project: ${projectName}`;
                 }
               } else {
@@ -122,12 +122,12 @@ presence.on("UpdateData", async () => {
                   '#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div:first-child > div > div:nth-child(2) > div > div > div:first-child > div:nth-child(3) > div > div > div:first-child > div > form > div > div > div > h1'
                 ).innerHTML;
 
-                presenceData.details = `Modifying Issue types - ${issueType}.`;
+                presenceData.details = `Editing Issue types - ${issueType}.`;
                 presenceData.state = `Project: ${projectName}`;
               }
             }
           } else {
-            presenceData.details = "Modifying Settings.";
+            presenceData.details = "Editing Settings.";
             presenceData.state = `Project: ${projectName}`;
           }
         }
@@ -167,16 +167,11 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing personal Issues.";
         presenceData.startTimestamp = browsingStamp;
       }
-      //Browsing specific issue section.
+      //Browsing Issue section.
       else if (path.includes("/browse/")) {
         let issueName = path.split("/").pop();
 
         presenceData.details = `Viewing Issue ${issueName}`;
-        presenceData.startTimestamp = browsingStamp;
-      }
-      //Filters section.
-      else if (path == "/secure/ManageFilters.jspa") {
-        presenceData.details = "Managing Filters.";
         presenceData.startTimestamp = browsingStamp;
       }
       //Advanced Issues section.
@@ -222,6 +217,11 @@ presence.on("UpdateData", async () => {
             break;
         }
       }
+      //Filters section.
+      else if (path == "/secure/ManageFilters.jspa") {
+        presenceData.details = "Managing Filters.";
+        presenceData.startTimestamp = browsingStamp;
+      }
       //Dashboards homepage section.
       else if (path == "/jira/dashboards") {
         presenceData.details = "Browsing dashboards.";
@@ -242,7 +242,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Browsing users.";
         presenceData.startTimestamp = browsingStamp;
       }
-      //User specific section.
+      //User profile page section.
       else if (path.match(/\/jira\/people\/[a-z0-9]+$/)) {
         let userName = document.querySelector(
           '#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:nth-child(2) > h2'
@@ -252,7 +252,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = userName;
         presenceData.startTimestamp = browsingStamp;
       }
-      //Team specific section.
+      //Team profile page section.
       else if (path.match(/\/jira\/people\/team\/[a-z0-9-]+$/)) {
         let teamName = document.querySelector(
           '#helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:first-child > form > div > div > div > div'
@@ -260,6 +260,11 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = "Viewing a Team:";
         presenceData.state = teamName;
+        presenceData.startTimestamp = browsingStamp;
+      }
+      //Personal settings section.
+      else if (path == "/secure/ViewPersonalSettings.jspa") {
+        presenceData.details = "Editing Personal settings.";
         presenceData.startTimestamp = browsingStamp;
       }
     } else {
