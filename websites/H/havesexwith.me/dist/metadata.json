@@ -18,18 +18,18 @@
     "getscammed.lol"
   ],
   "description": {
-    "en": "Extension for havesexwith.me sites and tools"
+    "en": "Cool tools and emails that use the domains in the havesexwith.me family! Domain list at havesexwith.me/domains"
   },
   "service": "havesexwith.me",
   "version": "1.0.0",
-  "logo": "https://imgur.com/a/6bSfmtP",
-  "thumbnail": "https://imgur.com/a/TBoJZxW",
+  "logo": "https://i.imgur.com/WfU1OW5.png",
+  "thumbnail": "https://i.imgur.com/tl6qrvg.png",
   "color": "#FF0000",
   "tags": [
     "site",
     "fun",
     "funny",
-    "website"
+    "nsfw"
   ],
-  "category": "nsfw"
+  "category": "other"
 }
