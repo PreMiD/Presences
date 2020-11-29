@@ -232,6 +232,31 @@ presence.on("UpdateData", async () => {
       presenceData.state = dashboardName;
       presenceData.startTimestamp = browsingStamp;
     }
+    //People homepage section. (yeah, path is correct, don't ask me why there is a "search", ~isladot)
+    else if (path == "/jira/people/search") {
+      presenceData.details = "Browsing users.";
+      presenceData.startTimestamp = browsingStamp;
+    }
+    //User specific section.
+    else if (path.match(/\/jira\/people\/[a-z0-9]+$/)) {
+      let userName = document.querySelector(
+        '#jira-frontend > #helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:nth-child(2) > h2'
+      ).innerHTML;
+
+      presenceData.details = "Viewing a User:";
+      presenceData.state = userName;
+      presenceData.startTimestamp = browsingStamp;
+    }
+    //Team specific section.
+    else if (path.match(/\/jira\/people\/team\/[a-z0-9-]+$/)) {
+      let teamName = document.querySelector(
+        '#helpPanelContainer > div > div > div[data-testid="Content"] > div:first-child > div > div > div > div:nth-child(2) > aside > div:first-child > div > div:first-child > form > div > div > div > div'
+      ).innerHTML;
+
+      presenceData.details = "Viewing a Team:";
+      presenceData.state = teamName;
+      presenceData.startTimestamp = browsingStamp;
+    }
   }
 
   if (presenceData.details == null) {
