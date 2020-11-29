@@ -17,6 +17,21 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing projects";
     } else if (
+      document.location.pathname.match(
+        /\/jira\/software\/projects\/[a-zA-Z0-9]+\/boards\/[0-9]/
+      )
+    ) {
+      //Project Board page.
+      projectName = document.location.pathname
+        .replace("/jira/software/projects/", "")
+        .split("/")
+        .shift();
+      var boardNumber: String = document.querySelector(
+        '#jira-frontend > #helpPanelContainer > div:first-child > div > div[data-testid="Content"] > div:first-child > div:first-child > div:first-child > div > div:nth-child(2) > div:first-child > div:first-child > div > h1'
+      ).innerHTML;
+      presenceData.details = `Viewing ${boardNumber}`;
+      presenceData.state = `Project: ${projectName}`;
+    } else if (
       document.location.pathname.includes("/jira/software/projects/")
     ) {
       //Project related pages with no sub-links.
