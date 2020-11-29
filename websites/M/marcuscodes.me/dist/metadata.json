@@ -1,0 +1,19 @@
+{
+  "author": {
+    "name": "geneva",
+    "id": "457805013474082817"
+  },
+  "service": "marcuscodes.me",
+  "description": {
+    "en": "The personal website of geneva/marcus."
+  },
+  "url": "marcuscodes.me",
+  "version": "1.0.2",
+  "logo": "https://cdn.discordapp.com/attachments/740930314121117716/782533306481639424/unknown.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/740930314121117716/782533306481639424/unknown.png",
+  "color": "#00008B",
+  "tags": [
+    "geneva", "marcus", "personal website"
+  ],
+  "category": "other"
+}
