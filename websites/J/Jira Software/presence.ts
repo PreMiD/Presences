@@ -1,8 +1,9 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "782358522628145153" //Presence Application ID on Discord Developers.
   }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  projectName: string;
+  browsingStamp = Math.floor(Date.now() / 1000);
+
+let projectName: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
