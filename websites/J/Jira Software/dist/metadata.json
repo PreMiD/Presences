@@ -6,8 +6,8 @@
     },
     "url": "www.atlassian.com",
     "description": {
-      "en": "Jira Software is built for every member of your software team to plan, track, and release great software.",
-      "it": "Jira Software è creato apposta per ogni membro del tuo team di sviluppo software, per pianificare, tenere traccia e rilasciare software fantastici."
+      "en": "Jira Software is built for every member of your software team to plan, track, and release great software. WARN: For now, only projects hosted on atlassian domains are supported.",
+      "it": "Jira Software è creato apposta per ogni membro del tuo team di sviluppo software, per pianificare, tenere traccia e rilasciare software fantastici. WARN: Per il momento, sono supportati solo i progetti hostati sui domini atlassian."
     },
     "service": "Jira Software",
     "version": "1.0.0",
