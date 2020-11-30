@@ -1,9 +1,10 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "776522940517974016"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
-let currencyList = [
+const browsingStamp = Math.floor(Date.now() / 1000);
+let currencyTitle: string;
+const currencyList = [
   "usd",
   "eur",
   "gbp",
@@ -74,10 +75,10 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Exchange: Pro";
     } else if (window.location.pathname.includes("/trade")) {
-      let currencyTitle = document.querySelector(
+      currencyTitle = document.querySelector(
         "#app > div > div.sc-hBMVcZ.sc-jtiWoB.bhYWmy.iLgwSY > div > div.sc-dmdFIE.dFnCCE > div > div.sc-hBMVcZ.sc-krBkXf.bhYWmy.dAuExH > div.sc-eGJXgd.NEmKz > div:nth-child(1) > span.sc-1ryi78w-0.bkDxTg.sc-dlMBXb.jyCgbx"
-      );
-      presenceData.state = currencyTitle.textContent;
+      ).textContent;
+      presenceData.state = currencyTitle;
       presenceData.details = "Exchange: Trade";
     } else if (window.location.pathname.includes("/affiliate")) {
       presenceData.startTimestamp = browsingStamp;
@@ -103,11 +104,11 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Airdrops";
     } else if (currencyList.includes(window.location.hash.split("/")[1])) {
-      let CurrencyTitle = document.querySelector(
+      currencyTitle = document.querySelector(
         "#app > div > div.sc-eTpRJs.chWNvr > div.sc-iomxrj.kkzpGP > div > div > div > div > div.sc-jZRpAH.cBnkKE > div.sc-cNfOsU.hJFgdt > div.sc-eWciec.hrSHFN > div"
-      );
+      ).textContent;
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = CurrencyTitle.textContent;
+      presenceData.details = currencyTitle;
     } else {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Profile";
