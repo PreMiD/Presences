@@ -21,42 +21,39 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-
+  console.log(window.location.host === "www.blockchain.com");
   if (window.location.host === "www.blockchain.com") {
-    if (window.location.pathname.includes("/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Home";
-    } else if (window.location.hash.includes("/careers")) {
+    if (window.location.pathname.includes("/careers")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Careers";
-    } else if (window.location.hash.includes("/learning-portal")) {
+    } else if (window.location.pathname.includes("/learning-portal")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Learning Portal";
-    } else if (window.location.hash.includes("/explorer")) {
+    } else if (window.location.pathname.includes("/explorer")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Explorer";
-    } else if (window.location.hash.includes("/ventures")) {
+    } else if (window.location.pathname.includes("/ventures")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Ventures";
-    } else if (window.location.hash.includes("/press")) {
+    } else if (window.location.pathname.includes("/press")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Press";
-    } else if (window.location.hash.includes("/team")) {
+    } else if (window.location.pathname.includes("/team")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Team";
-    } else if (window.location.hash.includes("/research")) {
+    } else if (window.location.pathname.includes("/research")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Research";
-    } else if (window.location.hash.includes("/legal")) {
+    } else if (window.location.pathname.includes("/legal")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Legal";
-    } else if (window.location.hash.includes("/legal")) {
+    } else if (window.location.pathname.includes("/legal")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Legal";
-    } else if (window.location.hash.includes("/charts")) {
+    } else if (window.location.pathname.includes("/charts")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Charts";
-    } else if (window.location.hash.includes("/prices")) {
+    } else if (window.location.pathname.includes("/prices")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Prices";
     } else {
