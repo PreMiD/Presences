@@ -1,9 +1,9 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "776522940517974016"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var currencyList = [
+let browsingStamp = Math.floor(Date.now() / 1000);
+let currencyList = [
   "usd",
   "eur",
   "gbp",
@@ -44,9 +44,6 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.includes("/research")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Research";
-    } else if (window.location.pathname.includes("/legal")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Legal";
     } else if (window.location.pathname.includes("/legal")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Legal";
@@ -106,7 +103,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Airdrops";
     } else if (currencyList.includes(window.location.hash.split("/")[1])) {
-      var CurrencyTitle = document.querySelector(
+      let CurrencyTitle = document.querySelector(
         "#app > div > div.sc-eTpRJs.chWNvr > div.sc-iomxrj.kkzpGP > div > div > div > div > div.sc-jZRpAH.cBnkKE > div.sc-cNfOsU.hJFgdt > div.sc-eWciec.hrSHFN > div"
       );
       presenceData.startTimestamp = browsingStamp;
@@ -119,7 +116,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Support";
   } else if (window.location.host === "www.blockchain-status.com") {
-    var PageStatus = document.querySelector(
+    let PageStatus = document.querySelector(
       "body > div.layout-content.status.status-index.premium > div.container > div.page-status.status-none > span.status.font-large"
     );
     presenceData.details = "Status Page";
