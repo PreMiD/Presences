@@ -4,6 +4,7 @@ const presence = new Presence({
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 let currencyTitle: string;
+let pageStatus: string;
 const currencyList = [
   "usd",
   "eur",
@@ -117,11 +118,11 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Support";
   } else if (window.location.host === "www.blockchain-status.com") {
-    let PageStatus = document.querySelector(
+    pageStatus = document.querySelector(
       "body > div.layout-content.status.status-index.premium > div.container > div.page-status.status-none > span.status.font-large"
-    );
+    ).textContent;
     presenceData.details = "Status Page";
-    presenceData.state = PageStatus.textContent;
+    presenceData.state = pageStatus;
   }
 
   if (presenceData.details == null) {
