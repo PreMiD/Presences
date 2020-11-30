@@ -15,7 +15,6 @@ presence.on("UpdateData", async () => {
     document.URL === "https://wiki.facepunch.com/" ||
     document.URL === "https://wiki.facepunch.com"
   ) {
-    console.log(document.URL)
     presenceData.details = await presence.getSetting("homepageMessage");
     presenceData.startTimestamp = setTimestamp();
   } else {
