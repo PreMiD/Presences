@@ -1,15 +1,21 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
-    "name": "Cem",
-    "id": "708680386980479036"
+    "name": "Snazzah",
+    "id": "158049329150427136"
   },
+  "contributors": [
+    {
+      "name": "Cem",
+      "id": "708680386980479036"
+    }
+  ],
   "url": "pylon.bot",
   "description": {
     "en": "Build and deploy Discord bots in minutes using our simple online studio."
   },
   "service": "Pylon",
-  "version": "1.0.2",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/VrYlcrQ.png",
   "thumbnail": "https://i.imgur.com/hPkh9Br.png",
   "color": "#3961DD",
@@ -17,5 +23,33 @@
     "bot",
     "discord"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "docname",
+      "title": "Show Doc Name on SDK Reference",
+      "icon": "fas fa-book-reader",
+      "value": true
+    },
+    {
+      "id": "studioguildname",
+      "title": "Show Server Name in Studio",
+      "icon": "fas fa-address-card",
+      "value": true
+    },
+    {
+      "id": "details",
+      "title": "Studio Editor Details Template",
+      "icon": "fas fa-info",
+      "value": "Editing %file%",
+      "placeholder": "can use %file%, %guild%, %ext%"
+    },
+    {
+      "id": "state",
+      "title": "Studio Editor State Template",
+      "icon": "fas fa-bars",
+      "value": "Guild: %guild%",
+      "placeholder": "can use %file%, %guild%, %ext%"
+    }
+  ]
 }

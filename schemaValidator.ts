@@ -1,11 +1,13 @@
 import "source-map-support/register";
 
-import axios from "axios";
-import { green, yellow, red, blue } from "chalk";
 import * as fs from "fs";
+
+import { blue, green, red, yellow } from "chalk";
+
+import axios from "axios";
 import { validate } from "jsonschema";
 
-const latestMetadataSchema = "https://schemas.premid.app/metadata/1.1",
+const latestMetadataSchema = "https://schemas.premid.app/metadata/1.2",
   stats = {
     validated: 0,
     validatedWithWarnings: 0,
@@ -45,9 +47,17 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.1",
   for (const metaFile of metaFiles) {
     const meta = loadMetadata(metaFile),
       service = meta.service,
-      result = validate(meta, schema);
+      result = validate(meta, schema),
+      validLangs = (await axios.get("https://api.premid.app/v2/langFile/list"))
+        .data,
+      invalidLangs: string[] = [];
 
-    if (result.valid) {
+    Object.keys(meta.description).forEach((lang) => {
+      const index = validLangs.findIndex((l: string) => l == lang);
+      if (index == -1) invalidLangs.push(lang);
+    });
+
+    if (result.valid && !invalidLangs.length) {
       if (meta.schema && meta.schema !== latestMetadataSchema) {
         validatedWithWarnings(service, "Using out of date schema");
       } else {
@@ -57,6 +67,11 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.1",
       const errors: string[] = [];
       for (const error of result.errors)
         errors.push(`${error.message} @ ${error.property}`);
+
+      for (const invalidLang of invalidLangs)
+        errors.push(
+          `"${invalidLang}" is not a valid language! Valid languages can be found here: https://api.premid.app/v2/langFile/list`
+        );
 
       failedToValidate(service, errors);
     }
