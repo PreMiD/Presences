@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "MatStef132",
+    "id": "269787765120565248"
+  },
+  "url": "wiki.facepunch.com",
+  "description": {
+    "en": "A wiki for facepunch games, which includes s&box, Garry's Mod and Rust"
+  },
+  "service": "Facepunch Wiki",
+  "version": "1.0.0",
+  "logo": "https://imgur.com/7J6xKBQ.png",
+  "thumbnail": "https://imgur.com/dkTbScQ.png",
+  "color": "#EB1C23",
+  "tags": [
+    "Wiki",
+    "Programming",
+    "Facepunch",
+    "Garry's Mod",
+    "Rust",
+    "s&box"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "homepageMessage",
+      "title": "Main page",
+      "icon": "fas fa-home",
+      "value": "Viewing the main page",
+      "placeholder": "Viewing the main page"
+    },
+    {
+      "id": "viewingMessage",
+      "title": "Viewing a page",
+      "icon": "fas fa-eye",
+      "value": "Viewing",
+      "placeholder": "Viewing"
+    }
+  ]
+}
