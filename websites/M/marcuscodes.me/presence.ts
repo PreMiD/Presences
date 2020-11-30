@@ -1,6 +1,5 @@
-const presence = new Presence({
-  clientId: "782532120047779850"
-});
+const presence = new Presence({ clientId: "782532120047779850" });
+
 const timeStamp = Math.floor(Date.now() / 1000);
 const page = window.location.href;
 
