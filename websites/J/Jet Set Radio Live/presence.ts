@@ -1,60 +1,63 @@
 const presence = new Presence({
-  clientId: '782853565550034954'
+    clientId: "782853565550034954"
   }),
   strings = presence.getStrings({
-    play: 'presence.playback.playing',
-    pause: 'presence.playback.paused'
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused"
   }),
-  getTimestamps = (
-    videoTime: number,
-    videoDuration: number
-  ): Array<number> => {
+  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
     const startTime = Date.now(),
       endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
   },
-  stationIDMap: { [key: string]: string; } = {
-    classic: 'Classic',
-    future: 'Future',
-    ultraremixes: 'Ultra Remixes',
-    ggs: 'GG\'s',
-    noisetanks: 'Noise Tanks',
-    poisonjam: 'Poison Jam',
-    rapid99: 'Rapid 99',
-    loveshockers: 'Love Shockers',
-    immortals: 'The Immortals',
-    doomriders: 'Doom Riders',
-    goldenrhinos: 'Golden Rhinos',
-    ganjah: 'Ganjah',
-    lofi: 'Lo-Fi',
-    siivagunner: 'SilvaGunner x JSR',
-    silvagunner: 'SilvaGunner x JSR',
-    futuregeneration: 'Future Generation',
-    jetmashradio: 'Jet Mash Radio',
-    djchidow: 'DJ Chidow',
-    hover: 'Hover',
-    butterflies: 'Butterflies',
-    toejamandearl: 'Toe Jam & Earl',
-    ollieking: 'Ollie King',
-    crazytaxi: 'Crazy Taxi',
-    revolution: 'Revolution',
-    endofdays: 'End of Days'
+  stationIDMap: { [key: string]: string } = {
+    classic: "Classic",
+    future: "Future",
+    ultraremixes: "Ultra Remixes",
+    ggs: "GG's",
+    noisetanks: "Noise Tanks",
+    poisonjam: "Poison Jam",
+    rapid99: "Rapid 99",
+    loveshockers: "Love Shockers",
+    immortals: "The Immortals",
+    doomriders: "Doom Riders",
+    goldenrhinos: "Golden Rhinos",
+    ganjah: "Ganjah",
+    lofi: "Lo-Fi",
+    siivagunner: "SilvaGunner x JSR",
+    silvagunner: "SilvaGunner x JSR",
+    futuregeneration: "Future Generation",
+    jetmashradio: "Jet Mash Radio",
+    djchidow: "DJ Chidow",
+    hover: "Hover",
+    butterflies: "Butterflies",
+    toejamandearl: "Toe Jam & Earl",
+    ollieking: "Ollie King",
+    crazytaxi: "Crazy Taxi",
+    revolution: "Revolution",
+    endofdays: "End of Days"
   };
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: 'jsrl'
+      largeImageKey: "jsrl"
     },
-    audio: HTMLAudioElement = document.querySelector('#audioPlayer'),
-    songName = document.querySelector('#programInformationText.objectSettings.touchableOff'),
-    loadingSong = document.querySelector('#loadingTrackCircle:not([style*="hidden"])');
+    audio: HTMLAudioElement = document.querySelector("#audioPlayer"),
+    songName = document.querySelector(
+      "#programInformationText.objectSettings.touchableOff"
+    ),
+    loadingSong = document.querySelector(
+      '#loadingTrackCircle:not([style*="hidden"])'
+    );
 
   if (songName.textContent.length < 1 || !audio) {
-    presenceData.details = 'Not tuned in.';
-    presenceData.smallImageKey = 'pause';
+    presenceData.details = "Not tuned in.";
+    presenceData.smallImageKey = "pause";
     presenceData.smallImageText = (await strings).pause;
   } else {
-    const stationID = (<HTMLImageElement>document.querySelector('#graffitiSoul')).src.split('/')[5],
+    const stationID = (<HTMLImageElement>(
+        document.querySelector("#graffitiSoul")
+      )).src.split("/")[5],
       timestamps = getTimestamps(
         Math.floor(audio.currentTime),
         Math.floor(audio.duration)
@@ -62,17 +65,17 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = stationID;
     presenceData.state = stationIDMap[stationID];
     if (!audio.paused && !loadingSong) {
-      if (await presence.getSetting('song'))
+      if (await presence.getSetting("song"))
         presenceData.details = songName.textContent;
-      if (await presence.getSetting('timestamp')) {
+      if (await presence.getSetting("timestamp")) {
         presenceData.startTimestamp = timestamps[0];
         presenceData.endTimestamp = timestamps[1];
       }
-      presenceData.smallImageKey = 'play';
+      presenceData.smallImageKey = "play";
       presenceData.smallImageText = (await strings).play;
     } else {
-      presenceData.details = 'Paused';
-      presenceData.smallImageKey = 'pause';
+      presenceData.details = "Paused";
+      presenceData.smallImageKey = "pause";
       presenceData.smallImageText = (await strings).pause;
     }
   }
