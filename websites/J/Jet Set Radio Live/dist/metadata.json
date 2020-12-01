@@ -4,16 +4,18 @@
     "name": "Snazzah",
     "id": "158049329150427136"
   },
-  "contributors": [{
-    "name": "sks316",
-    "id": "226098403304538122"
-  }],
+  "contributors": [
+    {
+      "name": "sks316",
+      "id": "226098403304538122"
+    }
+  ],
   "service": "Jet Set Radio Live",
   "description": {
     "en": "Yo! You've heard about Jet Set Radio, right? It's only the hottest radio station straight outta Tokyo-to! Tune in. Turn on. Jet Set Radiooo!!!"
   },
   "url": "jetsetradio.live",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/ZiIN6t9.png",
   "thumbnail": "https://i.imgur.com/TmgNbn4.jpeg",
   "color": "#FFE222",
