@@ -1,10 +1,10 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "783325015860838452"
 });
 
 presence.on("UpdateData", async () => {
 
-    var data: PresenceData = {
+    const data: PresenceData = {
         largeImageKey: "vector"
         
     };
@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
 
         else {
             data.state = document.querySelector(
-                "head > title").textContent.replace("SomethingCP - ", "")
+                "head > title").textContent.replace("SomethingCP - ", "");
         }
     }
         presence.setActivity(data);
