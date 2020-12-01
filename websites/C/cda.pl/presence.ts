@@ -1,16 +1,12 @@
 const presence = new Presence({
     clientId: "783068812635013180"
   }),
-  browsingStamp = Math.floor(Date.now() / 1000);
-
-const getTimestamps = (
-  videoTime: number,
-  videoDuration: number
-): Array<number> => {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-};
+  browsingStamp = Math.floor(Date.now() / 1000),
+  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
+    const startTime = Date.now(),
+      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    return [Math.floor(startTime / 1000), endTime];
+  };
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
