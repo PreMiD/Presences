@@ -1,29 +1,28 @@
 const presence = new Presence({
-  clientId: "776522940517974016"
-});
+    clientId: "776522940517974016"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  currencyList = [
+    "usd",
+    "eur",
+    "gbp",
+    "btc",
+    "eth",
+    "bch",
+    "xlm",
+    "wdgld",
+    "algo",
+    "usd-d",
+    "usdt"
+  ];
 
-const browsingStamp = Math.floor(Date.now() / 1000);
-let currencyTitle: string;
-let pageStatus: string;
-const currencyList = [
-  "usd",
-  "eur",
-  "gbp",
-  "btc",
-  "eth",
-  "bch",
-  "xlm",
-  "wdgld",
-  "algo",
-  "usd-d",
-  "usdt"
-];
+let currencyTitle: string, pageStatus: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  console.log(window.location.host === "www.blockchain.com");
+
   if (window.location.host === "www.blockchain.com") {
     if (window.location.pathname.includes("/careers")) {
       presenceData.startTimestamp = browsingStamp;
