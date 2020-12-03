@@ -7,12 +7,11 @@
   "description": {
     "en": "WoolyPooly is one of the most profitable pools with our focus on minimal commission fees for PPLNS & SOLO reward systems."
   },
-  "url":
-    "woolypooly.com",
+  "url": "woolypooly.com",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/X2sf9rc.png",
   "thumbnail": "https://i.imgur.com/RVtEVMf.png",
   "color": "#3d89f5",
-  "tags": ["other"],
+  "tags": ["crypto", "mining", "blockchain", "network", "exchange"],
   "category": "other"
 }
