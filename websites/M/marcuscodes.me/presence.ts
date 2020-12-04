@@ -4,7 +4,7 @@ const presence = new Presence({ clientId: "782532120047779850" }),
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "circlegrad",
+    largeImageKey: "gen",
     startTimestamp: timeStamp
   };
 
