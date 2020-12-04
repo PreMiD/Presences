@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "Nekolen",
     "id": "270125856679002113"
@@ -13,7 +14,7 @@
     "nl": "Giphy is een GIF-zoek- en creatiesysteem."
   },
   "url": "giphy.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/VHG3gfC.png",
   "thumbnail": "https://i.imgur.com/Vtg6NxY.png",
   "color": "#00FF00",
