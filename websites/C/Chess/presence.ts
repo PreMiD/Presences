@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing 4 Player Chess";
     presenceData.smallImageKey = "4pc";
-    presenceData.smallImageText = "4 Player Chess"
+    presenceData.smallImageText = "4 Player Chess";
   } else if (document.location.pathname == "/variants") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing through Chess Variants";
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing 3 Check";
     presenceData.smallImageKey = "3+check";
-    presenceData.smallImageText = "3 Check"
+    presenceData.smallImageText = "3 Check";
   } else if (
     document.location.pathname.indexOf("/variants/giveaway/game/") == 0
   ) {
@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing Sideway Pawns";
     presenceData.smallImageKey = "sideways";
-    presenceData.smallImageText = "Sideways Pawns"
+    presenceData.smallImageText = "Sideways Pawns";
   } else if (
     document.location.pathname.indexOf("/variants/chaturanga/game/") == 0
   ) {
@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Solving Daily Puzzle";
     presenceData.smallImageKey = "puzzleoftheday";
-    presenceData.smallImageText = "Daily Puzzle"
+    presenceData.smallImageText = "Daily Puzzle";
   } else if (document.location.pathname.includes("/solo-chess")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing Solo Chess";
