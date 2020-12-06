@@ -19,11 +19,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/package/")) {
     let state: string;
     if (document.location.pathname.split("/").length == 4) {
-      let user: string = document.location.pathname.split("/")[2];
-      let package: string = document.location.pathname.split("/")[3];
-      state = user + "/" + package
+      const user: string = document.location.pathname.split("/")[2];
+      const package: string = document.location.pathname.split("/")[3];
+      state = user + "/" + package;
     } else {
-      state = document.location.pathname.split("/")[2]
+      state = document.location.pathname.split("/")[2];
     }
     const presenceData: PresenceData = {
       details: "Viewing a package",
