@@ -8,7 +8,7 @@ presence.on("UpdateData", () => {
    },
   searchURL = new URL(document.location.href),
   searchResult = searchURL.searchParams.get("q"),
-  searchCategory = searchURL.searchParams.get("k");;
+  searchCategory = searchURL.searchParams.get("k");
 
 	
    if (window.location.pathname.toLowerCase() === "/") {
