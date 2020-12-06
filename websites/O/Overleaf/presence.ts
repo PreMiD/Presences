@@ -1,39 +1,36 @@
 const presence = new Presence({
     clientId: "784954155747377162"
-});
+}),
 
-const elapsed = Math.floor(Date.now() / 1000);
-
+elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 
-    var presenceData: PresenceData = {
+    const presenceData: PresenceData = {
         largeImageKey: "latex",
         smallImageKey: "whitelogo",
-        smallImageText: "Overleaf",
-    };
-
-
-    let pth = window.location.pathname.toLowerCase();;
-
+        smallImageText: "Overleaf"
+    },
+    
+    pth = window.location.pathname.toLowerCase();
 
     //Projects page (hub)
     if (pth === "/project" || pth === "/project/") {
         presenceData.details = "Browsing Projects";
         //Selecting lateral menu
-        let menu = document.getElementsByClassName("project-list-sidebar");
+        const menu = document.getElementsByClassName("project-list-sidebar"),
         //Selcting active section
-        let actif = menu[0].getElementsByClassName("active");
+        actif = menu[0].getElementsByClassName("active"),
         //Take care of custom folders
-        let maybecustom = actif[0].getElementsByClassName("name ng-binding");
+        maybecustom = actif[0].getElementsByClassName("name ng-binding");
         if (maybecustom.length != 0) {
             presenceData.state = maybecustom[0].textContent;
         }
         //Take care of (i) logo
         else {
-            var fnl = actif[0].getElementsByTagName("a");
+            const fnl = actif[0].getElementsByTagName("a");
             presenceData.state = fnl[0].textContent;
-        };
+        }
         presenceData.startTimestamp = elapsed;
     }
 
@@ -41,15 +38,14 @@ presence.on("UpdateData", async () => {
     else if (pth.includes("/project")) {
         presenceData.details = document.title.replace("- Online LaTeX Editor Overleaf", "");
         //Isolating lateral menu
-        let menu = document.getElementsByClassName("file-tree-list");
+        const menu = document.getElementsByClassName("file-tree-list"),
         //Selecting selected element
-        let actif = menu[0].getElementsByClassName("selected");
+        actif = menu[0].getElementsByClassName("selected"),
         //Selecting current file name
-        let filename = actif[0].getElementsByTagName("span")[0].textContent
+        filename = actif[0].getElementsByTagName("span")[0].textContent;
         presenceData.state = filename;
         presenceData.startTimestamp = elapsed;
     }
-
 
     //Documentation
     else if (pth.includes("/learn")) {
@@ -62,7 +58,6 @@ presence.on("UpdateData", async () => {
         };
         presenceData.startTimestamp = elapsed;
     }
-
 
     //Random other pages
     else {
