@@ -3,7 +3,7 @@
     "name": "Roxza",
     "id": "716706383780904961"
   },
-  "service": "Bots Base",
+  "service": "BotsBase",
   "description": {
     "tr": "Discord botlarını keşfedebileceğiniz ve botlarınızı paylaşabileceğiniz bir evren!",
     "en": "A universe where you can discover Discord bots and share your bots!"
@@ -17,10 +17,10 @@
     "botlist",
     "trlist",
     "turkish",
-	"discord",
-	"bot",
-	"discord-bot",
-	"discord-bot-list"
+    "discord",
+    "bot",
+    "discord-bot",
+    "discord-bot-list"
   ],
   "category": "other"
 }
