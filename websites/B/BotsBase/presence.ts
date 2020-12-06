@@ -27,14 +27,14 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "404 Error Page";
     } else if (document.location.pathname.includes("/vote")) {
-      const priceEls = document.getElementsByClassName("premid vote_name");
+      priceEls = document.getElementsByClassName("premid vote_name");
       for (let i = 0; i < priceEls.length; i++) {
         const botname = priceEls[i].textContent;
         presenceData.details = "Voting for the Bot";
         presenceData.state = botname;
       }
     } else if (document.location.pathname.includes("/user/")) {
-      const priceEls = document.getElementsByClassName("premid user");
+      priceEls = document.getElementsByClassName("premid user");
       for (let i = 0; i < priceEls.length; i++) {
         const profilename = priceEls[i].textContent;
         presenceData.details = "Viewing a profile:";
@@ -45,7 +45,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Add bots page";
     } else if (document.location.pathname.includes("/tag")) {
-      const priceEls = document.getElementsByClassName("font-semibold text-2xl text-white");
+      priceEls = document.getElementsByClassName("font-semibold text-2xl text-white");
       for (let i = 0; i < priceEls.length; i++) {
         const tag = priceEls[i].textContent;
         presenceData.details = "Viewing a Page:";
@@ -56,7 +56,7 @@ presence.on("UpdateData", () => {
       presenceData.state = "Admin Panel";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/bot/")) {
-      const priceEls = document.getElementsByClassName("premid bot_name");
+      priceEls = document.getElementsByClassName("premid bot_name");
       for (let i = 0; i < priceEls.length; i++) {
         const botname = priceEls[i].textContent;
         presenceData.details = "Viewing a bot:";
