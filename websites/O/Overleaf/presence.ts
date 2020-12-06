@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
         }
         else {
             presenceData.state = document.title.replace("- Overleaf, Online LaTeX Editor", "");
-        };
+        }
         presenceData.startTimestamp = elapsed;
     }
 
