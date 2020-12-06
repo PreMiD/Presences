@@ -9,7 +9,7 @@
     "de": "Der Node Package Manager ist ein Paketmanager für die JavaScript-Laufzeitumgebung node.js."
   },
   "url": "www.npmjs.com",
-  "version": "1.2.0",
+  "version": "1.1.6",
   "logo": "https://i.imgur.com/XaosIBS.png",
   "thumbnail": "https://crugg.de/premid/npmbanner.png",
   "color": "#C12127",
