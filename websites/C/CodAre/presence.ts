@@ -58,6 +58,11 @@ presence.on("UpdateData", () => {
   } else if (window.location.pathname.toLowerCase().includes("/uptime")) {
     presenceData.details = "Bir sayfa görüntülüyor:";
     presenceData.state = "Uptime";
+  } else if (window.location.pathname.toLowerCase().includes("/kod")) {
+    presenceData.details = "Bir kod görüntülüyor:";
+    presenceData.state = document.querySelector(
+      "#page-top > div.container-fluid > div > div > div.card.shadow.mb-4 > div.card-header > center > h4"
+    ).innerHTML;
   } else if (window.location.pathname.toLowerCase() === "/admin/paylas") {
     presenceData.details = "Bir admin sayfası görüntülüyor:";
     presenceData.state = "Paylaş";
