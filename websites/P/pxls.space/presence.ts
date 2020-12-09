@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "785958064192749600"
   });
 
-var startTimestamp = Math.floor(Date.now() / 1000);
+const startTimestamp = Math.floor(Date.now() / 1000);
 
 
 
