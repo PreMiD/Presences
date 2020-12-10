@@ -6,12 +6,13 @@
     },
     "url": "developer.mozilla.org",
     "description": {
+      "es": "Muestra lo que estas viendo el los docs de JS",
       "en": "Show the things that are you seeing in the JS docs"
     },
     "service": "JavaScript",
     "version": "1.0.0",
-    "logo": "https://i.imgur.com/cpLEEoE.png",
-    "thumbnail": "https://i.imgur.com/LJSmruI.png",
+    "logo": "https://i.imgur.com/xBEjjUJ.png",
+    "thumbnail": "https://i.imgur.com/3i9ZI8B.png",
     "color": "#F3E20F",
     "tags": [
       "javascript",

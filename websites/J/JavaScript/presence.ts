@@ -15,11 +15,7 @@ presence.on("UpdateData", async () => {
         data.details = `Looking the main page...`;
     } else {
         data.details = `Looking at ${paths[4]}`;
-        paths.splice(0, 1);
-        paths.splice(0, 1);
-        paths.splice(0, 1);
-        paths.splice(0, 1);
-        paths.splice(0, 1);
+        paths.splice(0, 4);
         if(paths[0]){
             data.state = `Topic: ${paths.join(', ')}`;
         }
