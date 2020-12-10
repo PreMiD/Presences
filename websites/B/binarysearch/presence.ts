@@ -25,7 +25,7 @@ presence.on("UpdateData", async() => {
     presenceData.state = document.title.split("|")[0].trim(); //room name
   } else if (document.location.pathname == "/leaderboards") {
     presenceData.details = "Viewing leaderboards";
-    let params = new URLSearchParams(document.location.search);
+    const params = new URLSearchParams(document.location.search);
     if(params.has("category"))
     {
       if(params.get("category") == "streaks") {
