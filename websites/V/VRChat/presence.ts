@@ -141,10 +141,10 @@ presence.on("UpdateData", async () => {
           const searchresult = window.location
             .toString()
             .substr(window.location.toString().lastIndexOf("/") + 1);
-          if(!privacymode) {
-          presenceData.details = "Searching:";
-          presenceData.state = searchresult;
-          presence.setActivity(presenceData);
+          if (!privacymode) {
+            presenceData.details = "Searching:";
+            presenceData.state = searchresult;
+            presence.setActivity(presenceData);
           } else {
             presenceData.details = "Searching";
             presence.setActivity(presenceData);
@@ -199,7 +199,7 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.hostname == "feedback.vrchat.com") {
-    if(!privacymode) {
+    if (!privacymode) {
       if (document.location.pathname.includes("/p/")) {
         /* Viewing a post */
         const postname = document.querySelector("div.postTitle").textContent;
@@ -221,5 +221,5 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing feedback...";
       presence.setActivity(presenceData);
     }
-}
+  }
 });

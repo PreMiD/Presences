@@ -8,8 +8,8 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "botsbase"
   };
-	
-	presenceData.startTimestamp = browsingStamp;
+
+  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.hostname == "botsbase.net") {
     presenceData.details = "Viewing a page:";
@@ -45,7 +45,9 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Add bots page";
     } else if (document.location.pathname.includes("/tag")) {
-      priceEls = document.getElementsByClassName("font-semibold text-2xl text-white");
+      priceEls = document.getElementsByClassName(
+        "font-semibold text-2xl text-white"
+      );
       for (let i = 0; i < priceEls.length; i++) {
         const tag = priceEls[i].textContent;
         presenceData.details = "Viewing a Page:";
