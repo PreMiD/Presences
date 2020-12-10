@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "Vyrek",
+      "id": "538421122920742942"
+    },
+    "url": "developer.mozilla.org",
+    "description": {
+      "es": "Pone en tu presencia lo que estas viendo en los docs JS",
+      "en": "Show the things that are you seeing in the JS docs"
+    },
+    "service": "JavaScript | MDN",
+    "version": "1.0.0",
+    "logo": "https://vyrekxd.is-inside.me/jNHWfjeY.png",
+    "thumbnail": "https://vyrekxd.is-inside.me/hkWnnOcf.png",
+    "color": "#F3E20F",
+    "tags": [
+      "javascript",
+      "javascript-docs",
+      "js"
+    ],
+    "category": "other"
+  }
