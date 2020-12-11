@@ -8,9 +8,9 @@ timeElapsed: number = new Date().getTime();
 presence.on("UpdateData", async() => {
   //default data
   const presenceData: PresenceData = {
-    largeImageKey: "logo", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-    details: document.title, //The upper section of the presence text
-    startTimestamp: timeElapsed //The unix epoch timestamp for when to start counting from
+    largeImageKey: "logo", 
+    details: document.title,
+    startTimestamp: timeElapsed 
   }; 
 
   if (document.location.pathname == "/") {
