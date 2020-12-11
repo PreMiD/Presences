@@ -9,7 +9,7 @@
     "en": "NativShark is an online language learning platform for Japanese."
   },
   "url": ["nativshark.com", "www.nativshark.com"],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://www.nativshark.com/static/icons/icon-512x512.png",
   "thumbnail": "https://i.imgur.com/fvIL7w3.png",
   "color": "#591897",

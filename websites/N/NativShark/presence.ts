@@ -32,14 +32,20 @@ presence.on("UpdateData", async () => {
 
   // Viewing the dashboard
   if (pathname.startsWith("/my-journey")) {
-    let [unitText, unitStatus] = document
+    const unitInfo = document
       .querySelector<HTMLElement>("[class*='SubNavigationDropdown__SNButton']")
       .innerText.split("\n");
-    if (unitText === "All Units") {
-      unitText = "Today's units";
+
+    if (unitInfo.length === 2) {
+      let unitText = unitInfo[0];
+      const unitStatus = unitInfo[1];
+
+      if (unitText === "All Units") {
+        unitText = "Today's units";
+      }
+      presenceData.details = "Viewing the dashboard";
+      presenceData.state = `${unitText}: ${unitStatus}`;
     }
-    presenceData.details = "Viewing the dashboard";
-    presenceData.state = `${unitText}: ${unitStatus}`;
 
     // Reading a lesson
   } else if (pathname.startsWith("/lessons/")) {
