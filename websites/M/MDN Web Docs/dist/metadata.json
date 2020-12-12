@@ -6,8 +6,8 @@
     },
     "url": "developer.mozilla.org",
     "description": {
-      "en": "Shows the things that you are seeing at developer.mozilla.org",
-      "es": "Muestra lo que estas viendo en developer.mozilla.org"
+      "en": "The web docs of MDN, here you can found JS docs and more...",
+      "es": "La documentacion web de MDN, puedes encontrar documentacion de JS y mas..."
     },
     "service": "MDN Web Docs",
     "version": "1.0.0",
