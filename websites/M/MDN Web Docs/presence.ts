@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "786770326234464256"
 })
 
-let stamp = Math.floor(Date.now() / 1000);
+const stamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const data: PresenceData = {
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
     } else {
         data.largeImageKey = 'homepage';
 
-        let tech = paths[3];
+        const tech = paths[3];
 
         if(paths[4]){
             paths.splice(0, 4);
@@ -88,4 +88,4 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(data);
-})
+});
