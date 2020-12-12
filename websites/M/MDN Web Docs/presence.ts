@@ -65,7 +65,20 @@ presence.on("UpdateData", async () => {
         } else {
             data.details = `Looking at MathML Technologie`;
         }
-    } else if(!paths[3]){
+    } else if(paths[4] === 'WebExtensions'){
+        data.largeImageKey = 'extension';
+        
+        if(paths[4]){
+            paths.splice(0, 5);
+            data.details = `Web Extensions: Looking at ${paths[0]}`;
+            if(paths[1]){
+                paths.splice(0, 1);
+                data.state = `Topic: ${paths.join(', ')}`;
+            }
+        } else {
+            data.details = `Looking at Web Extensions Technologies`;
+        }
+    }else if(!paths[3]){
         data.largeImageKey = 'homepage';
         data.details = `Looking at Web Technologies`;
     } else {
