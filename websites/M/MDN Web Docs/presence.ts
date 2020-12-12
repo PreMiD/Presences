@@ -1,8 +1,6 @@
 const presence = new Presence({
     clientId: "786770326234464256"
-})
-
-const stamp = Math.floor(Date.now() / 1000);
+}), stamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const data: PresenceData = {
@@ -45,7 +43,7 @@ presence.on("UpdateData", async () => {
         data.largeImageKey = 'css';
 
         if(paths[4]){
-            paths.splice(0, 4)
+            paths.splice(0, 4);
             data.details = `CSS: Looking at ${paths[0]}`;
             if(paths[1]){
                 paths.splice(0, 1);
