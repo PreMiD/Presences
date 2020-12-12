@@ -2,7 +2,6 @@ const presence = new Presence({
     clientId: "770342692462526465"
 
 });
-const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {    
     const data: PresenceData = {
@@ -23,6 +22,7 @@ presence.on("UpdateData", async () => {
 
         } else if (document.location.pathname.includes("/read/")) {
             const chapter = document.querySelector("body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > button").textContent,
+            browsingStamp = Math.floor(Date.now() / 1000),
             manganame = document.querySelector("head > title").textContent.split("- Kapitel ")[0],
             seite = document.querySelector("body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.page-dropdown > button > span.page-text").textContent;
             data.details = manganame;
