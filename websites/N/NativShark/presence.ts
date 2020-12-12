@@ -1,34 +1,31 @@
 const presence: Presence = new Presence({
-  clientId: "787034842084016158"
-});
-
-const startTimestamp: number = Math.floor(Date.now() / 1000);
-
-const pathDescriptors = [
-  ["/tools/flashcards/review", "Reviewing flashcards"],
-  ["/tools/flashcards/learn/vocabulary", "Learning new vocabulary"],
-  ["/tools/flashcards/learn/kanji", "Learning new kanji"],
-  ["/tools/flashcards/browse", "Browsing flashcard decks"],
-  ["/tools/shadow_loops", "Browsing shadow loop decks"],
-  ["/tools/pitch", "Studying the pitch of sentences"],
-  ["/tools/conjugator", "Practicing conjugations"],
-  ["/tools/quizzes/", "Doing a quiz"],
-  ["/tools/quizzes", "Browsing quizzes"],
-  ["/tools/stats", "Viewing their stats"],
-  ["/tools/extra-credit", "Earning some extra credits"],
-  ["/tools/using-nativshark", "Reading 'Using NativShark'"],
-  ["/learn/hiragana", "Learning the Hiragana"],
-  ["/learn/katakana", "Learning the Katakana"],
-  ["/faq", "Reading the FAQ"]
-];
+    clientId: "787034842084016158"
+  }),
+  startTimestamp: number = Math.floor(Date.now() / 1000),
+  pathDescriptors = [
+    ["/tools/flashcards/review", "Reviewing flashcards"],
+    ["/tools/flashcards/learn/vocabulary", "Learning new vocabulary"],
+    ["/tools/flashcards/learn/kanji", "Learning new kanji"],
+    ["/tools/flashcards/browse", "Browsing flashcard decks"],
+    ["/tools/shadow_loops", "Browsing shadow loop decks"],
+    ["/tools/pitch", "Studying the pitch of sentences"],
+    ["/tools/conjugator", "Practicing conjugations"],
+    ["/tools/quizzes/", "Doing a quiz"],
+    ["/tools/quizzes", "Browsing quizzes"],
+    ["/tools/stats", "Viewing their stats"],
+    ["/tools/extra-credit", "Earning some extra credits"],
+    ["/tools/using-nativshark", "Reading 'Using NativShark'"],
+    ["/learn/hiragana", "Learning the Hiragana"],
+    ["/learn/katakana", "Learning the Katakana"],
+    ["/faq", "Reading the FAQ"]
+  ];
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "nativshark_logo_lg",
-    startTimestamp
-  };
-
-  const { pathname } = window.location;
+      largeImageKey: "nativshark_logo_lg",
+      startTimestamp
+    },
+    { pathname } = window.location;
 
   // Viewing the dashboard
   if (pathname.startsWith("/my-journey")) {
