@@ -64,9 +64,13 @@ presence.on("UpdateData", async () => {
           timestamps: any,
           video: HTMLVideoElement;
         
-        const iframe = document.getElementById("iframeplayer"),
-          video = iframe.contentWindow.document.getElementsByTagName("video")[0],
-          title = document.querySelector("#aligncenter > span.animetitle").textContent;
+        const iframe = document.getElementById("iframeplayer");
+        if (iframe) {
+          video = iframe.contentWindow.document.getElementsByTagName("video")[0];
+        } else {
+          video = document.querySelector("#playercontainer > div > div.plyr__video-wrapper > video");
+        }
+        title = document.querySelector("#aligncenter > span.animetitle").textContent;
 
         const currentTime = video.currentTime,
           duration = video.duration,
