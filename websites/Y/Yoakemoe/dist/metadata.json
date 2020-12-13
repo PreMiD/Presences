@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "kinue",
+    "id": "634246091293851649"
+  },
+  "service": "Yoake",
+  "description": {
+    "en": "Watching your favorite anime online with vietnamese subtitle!"
+  },
+  "url": "yoake.moe",
+  "version": "1.0.0",
+  "logo": "https://omg.pls-dont-arrest.me/i/wjkw3iz5.png",
+  "thumbnail": "https://omg.pls-dont-arrest.me/i/x2z9gg2i.jpg",
+  "color": "#ffb6c1",
+  "tags": [
+    "anime",
+    "videos",
+	"streaming",
+	"yoake"
+  ],
+  "category": "anime"
+}
