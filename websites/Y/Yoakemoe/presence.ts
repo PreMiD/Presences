@@ -12,23 +12,27 @@ function getTimestamps(videoTime: number, videoDuration: number): Array<number> 
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var lastPlaybackState = null;
-var playback;
+var lastPlaybackState : boolean;
+var lastPath : string;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
-if (lastPlaybackState != playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
-}
 presence.on("UpdateData", async () => {
-  playback = document.getElementById("title") !== null || (document.getElementsByTagName('video').length !== 0 && document.getElementsByTagName('video')[0].className !== "previewVideo") ? true : false;
+  const playback = document.getElementById("title") !== null || (document.getElementsByTagName('video').length !== 0 && document.getElementsByTagName('video')[0].className !== "previewVideo");
+  const curPath = document.location.pathname;
   var presenceData: PresenceData = {
     largeImageKey: "logo"
   };
+  
+  if (lastPath != curPath || lastPlaybackState != playback) {
+	lastPath = curPath;
+	lastPlaybackState = playback;
+	browsingStamp = Math.floor(Date.now() / 1000);
+  }
   if (!playback) {
-	var curPath = document.location.pathname;
-	if (curPath.startsWith("/entity.php"))
-		presenceData.details = "Đang chọn tập...";
+	if (curPath.startsWith("/entity.php")) {
+		presenceData.details = document.getElementById("entityTitle").innerHTML;
+		presenceData.state = "Đang chọn tập...";
+	}
 	else if (curPath.startsWith("/profile.php"))
 		presenceData.details = "Đang xem profile...";
 	else if (curPath.startsWith("/search.php"))
@@ -37,7 +41,7 @@ presence.on("UpdateData", async () => {
 		presenceData.details = "Đang xem trang chủ...";
     presenceData.startTimestamp = browsingStamp;
 
-    delete presenceData.state;
+    if (!curPath.startsWith("/entity.php")) delete presenceData.state;
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData, true);
