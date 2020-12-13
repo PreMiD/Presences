@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "787739407720513596"
 }),
 
@@ -17,14 +17,14 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
-let browsingTimer = Math.floor(Date.now() / 1000);
+const browsingTimer = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-    var presenceData: presenceData = {
+    const presenceData: presenceData = {
         largeImageKey: "logo-v2"
     };
 
@@ -65,12 +65,12 @@ presence.on("UpdateData", async () => {
           video: HTMLVideoElement;
         
         iframe = document.getElementById("iframeplayer");
-        video = iframe.contentWindow.document.getElementsByTagName("video")[0];
+        const video = iframe.contentWindow.document.getElementsByTagName("video")[0];
         title = document.querySelector("#aligncenter > span.animetitle").textContent;
 
-        currentTime = video.currentTime;
-        duration = video.duration;
-        paused = video.paused;
+        const currentTime = video.currentTime;
+        const duration = video.duration;
+        const paused = video.paused;
 
         const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
 
