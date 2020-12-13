@@ -17,8 +17,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 const browsingTimer = Math.floor(Date.now() / 1000);
@@ -64,15 +64,14 @@ presence.on("UpdateData", async () => {
           timestamps: any,
           video: HTMLVideoElement;
         
-        iframe = document.getElementById("iframeplayer");
-        const video = iframe.contentWindow.document.getElementsByTagName("video")[0];
-        title = document.querySelector("#aligncenter > span.animetitle").textContent;
+        const iframe = document.getElementById("iframeplayer"),
+          video = iframe.contentWindow.document.getElementsByTagName("video")[0],
+          title = document.querySelector("#aligncenter > span.animetitle").textContent;
 
-        const currentTime = video.currentTime;
-        const duration = video.duration;
-        const paused = video.paused;
-
-        const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+        const currentTime = video.currentTime,
+          duration = video.duration,
+          paused = video.paused,
+          timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
 
         if (!isNaN(duration)) {
           presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
