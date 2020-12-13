@@ -15,12 +15,7 @@
   "logo": "https://i.imgur.com/xHFV3Ny.png",
   "thumbnail": "https://i.imgur.com/YvsIbp9.jpeg",
   "color": "#6c82cf",
-  "tags": [
-    "eggsy",
-    "premid",
-    "custom",
-    "status"
-  ],
+  "tags": ["eggsy", "premid", "custom", "status"],
   "warning": true,
   "category": "other"
 }
