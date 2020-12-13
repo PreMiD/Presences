@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/question/")) {
-    let question = document.querySelector("meta[property='og:title']").getAttribute("content").replace('-', '').replace('Brainly.com', '').replace('Brainly.in', '')
+    const question = document.querySelector("meta[property='og:title']").getAttribute("content").replace('-', '').replace('Brainly.com', '').replace('Brainly.in', '');
     const presenceData: PresenceData = {
       details: "Viewing a question",
       largeImageKey: "logo",
