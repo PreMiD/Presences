@@ -1,0 +1,26 @@
+{
+    "author": {
+        "name": "kyoyo",
+        "id": "649452442253000704"
+    },
+    "service": "Brainly",
+    "description": {
+        "en": "Need Help Learning the tough subject? Post or Click Snap of your Homework question on Brainly or and receive help from other students within minutes."
+    },
+    "url": [
+        "brainly.com",
+        "brainly.in"
+    ],
+    "version": "1.0.0",
+    "logo": "https://user-images.githubusercontent.com/68751594/92149841-f0719480-edf4-11ea-950b-78b5305aec5e.png",
+    "thumbnail": "https://kyoyo.reeee.ee/q1hIXA.png",
+    "color": "#d9f0ff",
+    "tags": [
+        "learning",
+        "exam",
+        "community",
+        "help",
+        "school"
+    ],
+    "category": "other"
+}
