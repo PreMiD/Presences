@@ -17,15 +17,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  let startTime = Date.now();
+  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
-var browsingTimer = Math.floor(Date.now() / 1000);
+let browsingTimer = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     var presenceData: presenceData = {
-        largeImageKey: "logo-v2",
+        largeImageKey: "logo-v2"
     };
 
     if (document.location.hostname == "animixplay.to") {
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageText = (await strings).browsing;
         }
       } else if (document.location.pathname.includes("/v4/") || document.location.pathname.includes("/v1/") || document.location.pathname.includes("/v7/")) {
-        var currentTime: any,
+        let currentTime: any,
           duration: any,
           paused: any,
           timestamps: any,
