@@ -1,17 +1,16 @@
 //Application ID on Discord
 const presence = new Presence({
-  clientId: "784650203172438026"
-}),
+    clientId: "784650203172438026"
+  }),
+  timeElapsed: number = new Date().getTime();
 
-timeElapsed: number = new Date().getTime();
-
-presence.on("UpdateData", async() => {
+presence.on("UpdateData", async () => {
   //default data
   const presenceData: PresenceData = {
-    largeImageKey: "logo", 
+    largeImageKey: "logo",
     details: document.title,
-    startTimestamp: timeElapsed 
-  }; 
+    startTimestamp: timeElapsed
+  };
 
   if (document.location.pathname == "/") {
     presenceData.details = "Home";
@@ -26,9 +25,8 @@ presence.on("UpdateData", async() => {
   } else if (document.location.pathname == "/leaderboards") {
     presenceData.details = "Viewing leaderboards";
     const params = new URLSearchParams(document.location.search);
-    if(params.has("category"))
-    {
-      if(params.get("category") == "streaks") {
+    if (params.has("category")) {
+      if (params.get("category") == "streaks") {
         presenceData.state = "Streak";
       } else if (params.get("category") == "solved_today") {
         presenceData.state = "Solved Today";
@@ -38,7 +36,7 @@ presence.on("UpdateData", async() => {
         presenceData.state = "Contributors";
       }
     } else {
-        presenceData.state = "Contest";
+      presenceData.state = "Contest";
     }
   } else if (document.location.pathname == "/contest") {
     presenceData.details = "Checking out contests";

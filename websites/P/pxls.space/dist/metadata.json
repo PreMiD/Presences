@@ -1,24 +1,24 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.0",
-    "author": {
-      "name": "Morrays",
-      "id": "156190372354064384"
-    },
-    "service": "pxls.space",
-    "description": {
-      "en": "Pxls.space is a clone of the r/place social experiment performed by the social platform Reddit on the 1st of April 2017. (April Fools Day) After several weeks, the canvas resets and takes on a new shape. "
-    },
-    "url": "pxls.space",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/XEH4agn.jpeg",
-    "thumbnail": "https://i.imgur.com/Lvi2tue.png",
-    "color": "#F00",
-    "tags": [
-      "pxls-space",
-      "game",
-      "art",
-      "pixelart",
-      "community"
-    ],
-    "category": "games"
-  }
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Morrays",
+    "id": "156190372354064384"
+  },
+  "service": "pxls.space",
+  "description": {
+    "en": "Pxls.space is a clone of the r/place social experiment performed by the social platform Reddit on the 1st of April 2017. (April Fools Day) After several weeks, the canvas resets and takes on a new shape. "
+  },
+  "url": "pxls.space",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/XEH4agn.jpeg",
+  "thumbnail": "https://i.imgur.com/Lvi2tue.png",
+  "color": "#F00",
+  "tags": [
+    "pxls-space",
+    "game",
+    "art",
+    "pixelart",
+    "community"
+  ],
+  "category": "games"
+}
