@@ -1,18 +1,17 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "787715073007026187"
 }), strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
 });
 function getTimestamps(videoTime, videoDuration) {
-    let startTime = Date.now(), endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    const startTime = Date.now(), endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
 }
-let lastPlaybackState;
-let lastPath, browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState, lastPath, browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
     const playback = document.getElementById("title") !== null || (document.getElementsByTagName('video').length !== 0 && document.getElementsByTagName('video')[0].className !== "previewVideo"), curPath = document.location.pathname;
-    let presenceData = {
+    const presenceData = {
         largeImageKey: "logo"
     };
     if (lastPath != curPath || lastPlaybackState != playback) {
@@ -29,6 +28,12 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Đang xem profile...";
         else if (curPath.startsWith("/search.php"))
             presenceData.details = "Đang tìm kiếm...";
+        else if (curPath.startsWith("/login.php"))
+            presenceData.details = "Đang đăng nhập...";
+        else if (curPath.startsWith("/register.php"))
+            presenceData.details = "Đang đăng ký...";
+        else if (curPath.startsWith("/reset-password"))
+            presenceData.details = "Đang đặt lại mật khẩu...";
         else
             presenceData.details = "Đang xem trang chủ...";
         presenceData.startTimestamp = browsingStamp;
@@ -40,7 +45,7 @@ presence.on("UpdateData", async () => {
     }
     const video = document.getElementsByTagName('video')[0];
     if (video !== null && !isNaN(video.duration)) {
-        let titleArr = (document.getElementById("title") !== null ? document.getElementById("title").innerHTML : "Không thấy tên phim!... - Tập ?").split(' - '), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+        const titleArr = (document.getElementById("title") !== null ? document.getElementById("title").innerHTML : "Không thấy tên phim!... - Tập ?").split(' - '), timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
         presenceData.startTimestamp = timestamps[0];
