@@ -6,96 +6,105 @@ presence.on("UpdateData", async () => {
     const data: PresenceData = {
         startTimestamp: stamp
     }, paths = document.location.pathname.split('/');
-    paths.splice(0, 1);
 
-    if(!paths[1] || paths[1] === ""){
+    if(!paths[2] || paths[2] === ""){
         data.largeImageKey = 'homepage';
         data.details = `Looking at the main page...`;
 
-    } else if(paths[3] === 'JavaScript'){
-        data.largeImageKey = 'javascript';
-
-        if(paths[4]){
-            paths.splice(0, 4);
-            data.details = `JavaScript: Looking at ${paths[0]}`;
-            if(paths[1]){
-                paths.splice(0, 1);
-                data.state = `Topic: ${paths.join(', ')}`;
-            }
-        } else {
-            data.details = `Looking at JavaScript Technologie`;
-        }
-
-    } else if(paths[3] === 'HTML'){
-        data.largeImageKey = 'html';
-
-        if(paths[4]){
-            paths.splice(0, 4);
-            data.details = `HTML: Looking at ${paths[0]}`;
-            if(paths[1]){
-                paths.splice(0, 1);
-                data.state = `Topic: ${paths.join(', ')}`;
-            }
-        } else {
-            data.details = `Looking at HTML Technologie`;
-        }
-    } else if(paths[3] === 'CSS'){
-        data.largeImageKey = 'css';
-
-        if(paths[4]){
-            paths.splice(0, 4);
-            data.details = `CSS: Looking at ${paths[0]}`;
-            if(paths[1]){
-                paths.splice(0, 1);
-                data.state = `Topic: ${paths.join(', ')}`;
-            }
-        } else {
-            data.details = `Looking at CSS Technologie`;
-        }
-    } else if(paths[3] === 'MathML'){ 
-        data.largeImageKey = 'mathml';
-        
-        if(paths[4]){
-            paths.splice(0, 4);
-            data.details = `MathML: Looking at ${paths[0]}`;
-            if(paths[1]){
-                paths.splice(0, 1);
-                data.state = `Topic: ${paths.join(', ')}`;
-            }
-        } else {
-            data.details = `Looking at MathML Technologie`;
-        }
-    } else if(paths[4] === 'WebExtensions'){
-        data.largeImageKey = 'extension';
-        
-        if(paths[4]){
-            paths.splice(0, 5);
-            data.details = `Web Extensions: Looking at ${paths[0]}`;
-            if(paths[1]){
-                paths.splice(0, 1);
-                data.state = `Topic: ${paths.join(', ')}`;
-            }
-        } else {
-            data.details = `Looking at Web Extensions Technologies`;
-        }
-    }else if(!paths[3]){
+    } else if(!paths[3]){
         data.largeImageKey = 'homepage';
         data.details = `Looking at Web Technologies`;
     } else {
-        data.largeImageKey = 'homepage';
 
-        const tech = paths[3];
+        switch (paths[4]) {
+            case 'JavaScript':
+                data.largeImageKey = 'javascript';
 
-        if(paths[4]){
-            paths.splice(0, 4);
-            data.details = `${tech}: Looking at ${paths[0]}`;
-            if(paths[1]){
-                paths.splice(0, 1);
-                data.state = `Topic: ${paths.join(', ')}`;
-            }
-        } else {
-            data.details = `Looking at ${tech}`;
-        }
+                if(paths[5]){
+                    paths.splice(0, 5);
+                    data.details = `JavaScript: Looking at ${paths[0]}`;
+                    if(paths[1]){
+                        paths.splice(0, 1);
+                        data.state = `Topic: ${paths.join(', ')}`;
+                    }
+                } else {
+                    data.details = `Looking at JavaScript Technologie`;
+                }
+                break;
+
+            case 'HTML':
+                data.largeImageKey = 'html';
+
+                if(paths[5]){
+                    paths.splice(0, 4);
+                    data.details = `HTML: Looking at ${paths[0]}`;
+                    if(paths[1]){
+                        paths.splice(0, 1);
+                        data.state = `Topic: ${paths.join(', ')}`;
+                    }
+                } else {
+                    data.details = `Looking at HTML Technologie`;
+                }
+                break;
+            case 'CSS':
+                data.largeImageKey = 'css';
+
+                if(paths[5]){
+                    paths.splice(0, 4);
+                    data.details = `CSS: Looking at ${paths[0]}`;
+                    if(paths[1]){
+                        paths.splice(0, 1);
+                        data.state = `Topic: ${paths.join(', ')}`;
+                    }
+                } else {
+                    data.details = `Looking at CSS Technologie`;
+                }
+                break;
+            case 'MathML':
+                data.largeImageKey = 'mathml';
+        
+                if(paths[5]){
+                    paths.splice(0, 4);
+                    data.details = `MathML: Looking at ${paths[0]}`;
+                    if(paths[1]){
+                        paths.splice(0, 1);
+                        data.state = `Topic: ${paths.join(', ')}`;
+                    }
+                } else {
+                    data.details = `Looking at MathML Technologie`;
+                }
+                break;
+            case 'WebExtensions':
+                data.largeImageKey = 'extension';
+        
+                if(paths[4]){
+                    paths.splice(0, 5);
+                    data.details = `Web Extensions: Looking at ${paths[0]}`;
+                    if(paths[1]){
+                        paths.splice(0, 1);
+                        data.state = `Topic: ${paths.join(', ')}`;
+                    }
+                } else {
+                    data.details = `Looking at Web Extensions Technologies`;
+                }
+                break;
+            default:
+                data.largeImageKey = 'homepage';
+
+                const tech = paths[4];
+        
+                if(paths[5]){
+                    paths.splice(0, 4);
+                    data.details = `${tech}: Looking at ${paths[0]}`;
+                    if(paths[1]){
+                        paths.splice(0, 1);
+                        data.state = `Topic: ${paths.join(', ')}`;
+                    }
+                } else {
+                    data.details = `Looking at ${tech}`;
+                }
+                break;
+        };
     }
 
     presence.setActivity(data);
