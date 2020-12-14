@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "Kazaii",
+      "id": "308054416538206217"
+    },
+    "service": "Grailed",
+    "description": {
+      "en": "Grailed is the one-stop destination for buying, selling and exploring menswear."
+    },
+    "url": "www.grailed.com",
+    "version": "1.0.0",
+    "logo": "https://process.fs.grailed.com/9uidziLNQ32OGQlk8G0w",
+    "thumbnail": "https://cdn.alleywatch.com/wp-content/uploads/2018/10/grailed-home-page.jpg",
+    "color": "#666666",
+    "tags": ["shopping", "clothing"],
+    "category": "other"
+  }
