@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
     } else {
 
         switch (paths[4]) {
-            case 'JavaScript':
+            case 'JavaScript':{
                 data.largeImageKey = 'javascript';
 
                 if(paths[5]){
@@ -31,8 +31,8 @@ presence.on("UpdateData", async () => {
                     data.details = `Looking at JavaScript Technologie`;
                 }
                 break;
-
-            case 'HTML':
+            }
+            case 'HTML':{
                 data.largeImageKey = 'html';
 
                 if(paths[5]){
@@ -46,7 +46,8 @@ presence.on("UpdateData", async () => {
                     data.details = `Looking at HTML Technologie`;
                 }
                 break;
-            case 'CSS':
+            }
+            case 'CSS':{
                 data.largeImageKey = 'css';
 
                 if(paths[5]){
@@ -60,7 +61,8 @@ presence.on("UpdateData", async () => {
                     data.details = `Looking at CSS Technologie`;
                 }
                 break;
-            case 'MathML':
+            }
+            case 'MathML':{
                 data.largeImageKey = 'mathml';
         
                 if(paths[5]){
@@ -74,7 +76,8 @@ presence.on("UpdateData", async () => {
                     data.details = `Looking at MathML Technologie`;
                 }
                 break;
-            case 'WebExtensions':
+            }
+            case 'WebExtensions':{
                 data.largeImageKey = 'extension';
         
                 if(paths[4]){
@@ -88,7 +91,8 @@ presence.on("UpdateData", async () => {
                     data.details = `Looking at Web Extensions Technologies`;
                 }
                 break;
-            default:
+            }
+            default:{
                 data.largeImageKey = 'homepage';
 
                 const tech = paths[4];
@@ -104,7 +108,8 @@ presence.on("UpdateData", async () => {
                     data.details = `Looking at ${tech}`;
                 }
                 break;
-        };
+            }
+        }
     }
 
     presence.setActivity(data);
