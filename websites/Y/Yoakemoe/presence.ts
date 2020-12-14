@@ -18,10 +18,10 @@ let lastPlaybackState: boolean,
 
 presence.on("UpdateData", async () => {
   const playback = document.getElementById("title") !== null || (document.getElementsByTagName('video').length !== 0 && document.getElementsByTagName('video')[0].className !== "previewVideo"),
-    curPath = document.location.pathname;
-  const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+    curPath = document.location.pathname,
+    presenceData: PresenceData = {
+      largeImageKey: "logo"
+    };
 
   if (lastPath != curPath || lastPlaybackState != playback) {
     lastPath = curPath;

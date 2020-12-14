@@ -10,8 +10,7 @@ function getTimestamps(videoTime, videoDuration) {
 }
 let lastPlaybackState, lastPath, browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-    const playback = document.getElementById("title") !== null || (document.getElementsByTagName('video').length !== 0 && document.getElementsByTagName('video')[0].className !== "previewVideo"), curPath = document.location.pathname;
-    const presenceData = {
+    const playback = document.getElementById("title") !== null || (document.getElementsByTagName('video').length !== 0 && document.getElementsByTagName('video')[0].className !== "previewVideo"), curPath = document.location.pathname, presenceData = {
         largeImageKey: "logo"
     };
     if (lastPath != curPath || lastPlaybackState != playback) {
