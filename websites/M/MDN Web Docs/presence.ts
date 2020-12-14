@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
                 data.largeImageKey = 'html';
 
                 if(paths[5]){
-                    paths.splice(0, 4);
+                    paths.splice(0, 5);
                     data.details = `HTML: Looking at ${paths[0]}`;
                     if(paths[1]){
                         paths.splice(0, 1);
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
                 data.largeImageKey = 'css';
 
                 if(paths[5]){
-                    paths.splice(0, 4);
+                    paths.splice(0, 5);
                     data.details = `CSS: Looking at ${paths[0]}`;
                     if(paths[1]){
                         paths.splice(0, 1);
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
                 data.largeImageKey = 'mathml';
         
                 if(paths[5]){
-                    paths.splice(0, 4);
+                    paths.splice(0, 5);
                     data.details = `MathML: Looking at ${paths[0]}`;
                     if(paths[1]){
                         paths.splice(0, 1);
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
                 const tech = paths[4];
         
                 if(paths[5]){
-                    paths.splice(0, 4);
+                    paths.splice(0, 5);
                     data.details = `${tech}: Looking at ${paths[0]}`;
                     if(paths[1]){
                         paths.splice(0, 1);
