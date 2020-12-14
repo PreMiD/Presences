@@ -7,6 +7,10 @@
     {
       "name": "Bas950",
       "id": "241278257335500811"
+    },
+    {
+      "name": "MrZillaGold",
+      "id": "342146975065702400"
     }
   ],
   "service": "VK",
@@ -21,9 +25,9 @@
   },
   "url": "vk.com",
   "version": "2.2.9",
-  "logo": "https://i.imgur.com/VB6AuBG.png",
-  "thumbnail": "https://i.imgur.com/lKGTJ26.jpg",
-  "color": "#4680C2",
+  "logo": "https://i.imgur.com/Zd8iMck.png",
+  "thumbnail": "https://i.imgur.com/P4TGBga.png",
+  "color": "#2787F5",
   "tags": [
     "social",
     "music",
