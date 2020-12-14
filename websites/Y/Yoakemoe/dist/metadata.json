@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "kinue",
+    "id": "634246091293851649"
+  },
+  "service": "Yoake",
+  "description": {
+    "en": "Watching your favorite anime online with vietnamese subtitle!"
+  },
+  "url": "yoake.moe",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/eL8ARU0.png",
+  "thumbnail": "https://i.imgur.com/un3I1sl.jpeg",
+  "color": "#ffb6c1",
+  "tags": [
+    "anime",
+    "videos",
+	"streaming",
+	"yoake"
+  ],
+  "category": "anime"
+}
