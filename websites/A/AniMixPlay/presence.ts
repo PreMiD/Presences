@@ -8,11 +8,6 @@ strings = presence.getStrings({
     browsing: "presence.activity.browsing"
 });
 
-/**
- * Get Timestamps (Credit to Bas950)
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
 function getTimestamps(
   videoTime: number,
   videoDuration: number
