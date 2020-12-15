@@ -53,9 +53,9 @@ presence.on("UpdateData", async () => {
   else if (curPath.startsWith("/nhom-dich")) {
     const name = document.querySelector(".page-name");
     if (name !== null)
-      presenceData.details = `Đang xem nhóm dịch: ${name.innerHTML.substring(40)}`
+      presenceData.details = `Đang xem nhóm dịch: ${name.innerHTML.substring(40)}`;
     else
-      presenceData.details = "Đang xem danh sách nhóm dịch..."
+      presenceData.details = "Đang xem danh sách nhóm dịch...";
   } else if (truyen || sangTac || convert) {
     const name = document.querySelector(".series-name-group>.series-name>a"),
       title = document.querySelector(".rd_sidebar-name>h5>a"),
