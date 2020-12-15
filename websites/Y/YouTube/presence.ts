@@ -23,8 +23,21 @@ function getTimestamps(
 
 // YouTube TV separator pattern
 const pattern = "•";
+
 function truncateAfter(str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern));
+}
+
+function simping(str: string) {
+  if (str.toLowerCase().includes("ch.") || str.toLowerCase().includes("ch。"))
+    return "Simping " + str.split(new RegExp("Ch[.|。]", 'ig'))[0];
+  switch (str) {
+    case "Mio Channel 大神ミオ":
+      return "Simping Mio";
+    case "Suisei Channel":
+      return "Simping Suisei";
+  }
+  return str;
 }
 
 presence.on("UpdateData", async () => {
@@ -56,12 +69,12 @@ presence.on("UpdateData", async () => {
       : oldYouTube && document.location.pathname.includes("/watch")
       ? (title = document.querySelector(".watch-title"))
       : YouTubeTV
-      ? (title = document.querySelector(".player-video-title"))
-      : !document.location.pathname.includes("/watch")
-      ? (title = document.querySelector(".ytd-miniplayer .title"))
-      : (title = document.querySelector(
-          "h1 yt-formatted-string.ytd-video-primary-info-renderer"
-        ));
+        ? (title = document.querySelector(".player-video-title"))
+        : !document.location.pathname.includes("/watch")
+          ? (title = document.querySelector(".ytd-miniplayer .title"))
+          : (title = document.querySelector(
+            "h1 yt-formatted-string.ytd-video-primary-info-renderer"
+          ));
 
     var uploaderTV: any,
       uploaderMiniPlayer: any,
@@ -99,20 +112,19 @@ presence.on("UpdateData", async () => {
         : uploader2 !== null && uploader2.textContent.length > 0
         ? uploader2
         : document.querySelector(
-            "#upload-info yt-formatted-string.ytd-channel-name a"
-          ) !== null
-        ? document.querySelector(
+          "#upload-info yt-formatted-string.ytd-channel-name a"
+        ) !== null
+          ? document.querySelector(
             "#upload-info yt-formatted-string.ytd-channel-name a"
           )
-        : uploaderEmbed !== null &&
+          : uploaderEmbed !== null &&
           YouTubeEmbed &&
           uploaderEmbed.textContent.length > 0
-        ? uploaderEmbed
-        : (uploaderTV = truncateAfter(
-            uploaderTV.textContent.replace(/\s+/g, ""),
-            pattern
-          ));
-
+            ? uploaderEmbed
+            : (uploaderTV = truncateAfter(
+              uploaderTV.textContent.replace(/\s+/g, ""),
+              pattern
+            ));
     var timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
@@ -138,26 +150,26 @@ presence.on("UpdateData", async () => {
           ? document.querySelector("div.ytp-title-text > a").textContent
           : title.textContent,
       state:
-        edited == true
+        simping(edited == true
           ? uploaderMiniPlayer.getAttribute("premid-value")
           : uploaderTV !== null
-          ? uploaderTV.textContent
-          : uploader.textContent,
+            ? uploaderTV.textContent
+            : uploader.textContent),
       largeImageKey: "yt_lg",
       smallImageKey: video.paused
         ? "pause"
         : video.loop
-        ? "repeat-one"
-        : isPlaylistLoop
-        ? "repeat"
-        : "play", //general.playing general.paused
+          ? "repeat-one"
+          : isPlaylistLoop
+            ? "repeat"
+            : "play", //general.playing general.paused
       smallImageText: video.paused
         ? (await strings).pause
         : video.loop
-        ? "On loop"
-        : isPlaylistLoop
-        ? "Playlist on loop"
-        : (await strings).play,
+          ? "On loop"
+          : isPlaylistLoop
+            ? "Playlist on loop"
+            : (await strings).play,
       startTimestamp: timestamps[0],
       endTimestamp: timestamps[1]
     };
@@ -167,8 +179,8 @@ presence.on("UpdateData", async () => {
         ? ""
         : title == null
         ? document.querySelector(
-            ".title.style-scope.ytd-video-primary-info-renderer"
-          ).textContent
+          ".title.style-scope.ytd-video-primary-info-renderer"
+        ).textContent
         : title.textContent
     );
 
