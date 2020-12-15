@@ -152,10 +152,11 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Browsing a Product:";
 
             item = document.querySelector("#ProductPage > div.ProductPageHeader > div.-info > h1.-product-name")
-            if (item.innerText.length > 128) {
-                presenceData.state = item.innerText.substring(0, 125) + "...";
+            item2 = document.querySelector("#ProductPage > div.ProductPageHeader > div.-info > h1.-designers-names")
+            if (item.innerText.length > 108) {
+                presenceData.state = item2.textContent + ": " + item.textContent.substring(0, 105) + "...";
             } else {
-                presenceData.state = item.innerText;
+                presenceData.state = item2.textContent + ": " + item.textContent;
             } 
 
             delete presenceData.smallImageKey;
@@ -168,17 +169,19 @@ presence.on("UpdateData", async () => {
             
             if (document.location.href.includes("www.grailed.com/drycleanonly/")) {
                 item = document.querySelector("#blog > div.article-wrapper > div > div.article-top-section > h1 > p")
-                item2 = document.querySelector("body > div.heatwave-app > div.Heatwave--Page > div.Editorial--CampaignPageHeroModule._Heatwave > div > div.--title")
+                item2 = document.querySelector("div.heatwave-app > div.Heatwave--Page > div.Editorial--CampaignPageHeroModule._Heatwave > div > div.--title")
                 presenceData.details = "Reading:";
                 
-                if (item.innerText.length > 1) {
+                
+
+                if (item != null) {
                     if (item.innerText.length > 128) {
                         presenceData.state = item.innerText.substring(0, 125) + "...";
                     } else {
                         presenceData.state = item.innerText;
                     }
                 } 
-                else if (item2.innerText.length > 1) {
+                else if (item2 != null) {
                     if (item2.innerText.length > 128) {
                         presenceData.state = item2.innerText.substring(0, 125) + "...";
                     } else {
