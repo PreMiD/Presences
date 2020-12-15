@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
 
     if (document.location.hostname == "www.grailed.com") {
 
-        if (document.location.pathname.includes("/listings/")) {
+        if (document.location.href.includes("www.grailed.com/listings/")) {
             item = document.querySelector("body > div.container > div > div.show-listing > div.listing-details-wrapper > div.-listing-details-and-likes-wrapper > div.-listing-designer-title-size > h1");
             
             presenceData.details = "Viewing a listing:";
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         
-        } else if (document.location.pathname.includes("mygrails")) {
+        } else if (document.location.href.includes("www.grailed.com/mygrails/")) {
             
             presenceData.details = "Browsing:";
             presenceData.state = "My Grails";
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
-        } else if (document.location.pathname.includes("foryou")) {
+        } else if (document.location.href.includes("www.grailed.com/foryou")) {
             
             presenceData.details = "Viewing:";
             presenceData.state = "For You";
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
-        } else if (document.location.pathname.includes("collaborations")) {
+        } else if (document.location.href.includes("www.grailed.com/collaborations/")) {
           
           item = document.querySelector("#designer-collaboration > div.designer-profile-container > div.designer-profile-info-container > div > h1")
           presenceData.details = "Viewing a collaboration:";
@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
             delete presenceData.smallImageKey;     
             presence.setActivity(presenceData);
 
-        }  else if (document.location.pathname.includes("/drycleanonly")) {
+        }  else if (document.location.href.includes("www.grailed.com/drycleanonly")) {
             
             if (document.location.href.includes("www.grailed.com/drycleanonly/")) {
                 item = document.querySelector("#blog > div.article-wrapper > div > div.article-top-section > h1 > p");
@@ -171,7 +171,7 @@ presence.on("UpdateData", async () => {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
-        } else if (document.location.href.includes("grailed.com/shop")) {
+        } else if (document.location.href.includes("www.grailed.com/shop")) {
             
             if (document.location.href.includes("grailed.com/shop/staff-picks")) {
 
