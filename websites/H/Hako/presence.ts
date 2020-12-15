@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
       chap = document.querySelector(".title-top>h4");
     if (name !== null || title !== null) {
       presenceData.details = name !== null ? "Đang chọn chap..." : "Đang đọc truyện: " + title.innerHTML;
-      presenceData.state = name !== null ? name.innerHTML : `Chap: ${chap.innerHTML}`;
+      presenceData.state = name !== null ? name.innerHTML : chap.innerHTML;
     } else
       presenceData.details = "Đang tìm " + (truyen ? "truyện" : sangTac ? "sáng tác" : "convert") + " ...";
   } else if (curPath.startsWith("/thao-luan")) {
