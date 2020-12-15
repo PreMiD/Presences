@@ -5,7 +5,8 @@
   },
   "service": "Hako",
   "description": {
-    "en": "Reading vietnamese translated light/web novels."
+    "en": "Read vietnamese translated light/web novels online.",
+	"vi": "Đọc light/web novels đã đươc dịch online"
   },
   "url": [
     "docln.net",
