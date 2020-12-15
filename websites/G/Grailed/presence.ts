@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "786739998011293717"
 });
 
-let item: any,
+var item: any,
 item2: any;
 
 const browsingStamp = Math.floor(Date.now() / 1000);
