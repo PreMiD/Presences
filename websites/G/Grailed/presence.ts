@@ -2,8 +2,8 @@ const presence = new Presence({
     clientId: "786739998011293717"
 });
 
-let item: Element,
-item2: Element;
+let item: HTMLElement,
+item2: HTMLElement;
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
 
         } else if (document.location.href.includes("www.grailed.com/collaborations/")) {
           
-          item = document.querySelector("#designer-collaboration > div.designer-profile-container > div.designer-profile-info-container > div > h1")
+          item = document.querySelector("#designer-collaboration > div.designer-profile-container > div.designer-profile-info-container > div > h1");
           presenceData.details = "Viewing a collaboration:";
           if (item.innerHTML.length > 128) {
             presenceData.state = item.innerHTML.substring(0, 125) + "...";
@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
-        } else if (document.location.href.includes("grailed.com/categories/")) {   
+        } else if (document.location.href.includes("www.grailed.com/categories/")) {   
 
             presenceData.details = "Browsing:";
 
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
             delete presenceData.smallImageKey;     
             presence.setActivity(presenceData);
             
-        } else if (document.location.href.includes(".com/drycleanonly/categories/")) {
+        } else if (document.location.href.includes("www.grailed.com/drycleanonly/categories/")) {
             
             presenceData.details = "Reading:";
 
