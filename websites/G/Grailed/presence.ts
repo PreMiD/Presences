@@ -44,7 +44,20 @@ presence.on("UpdateData", async () => {
             delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
-        } else if (document.location.href.includes("www.grailed.com/collections")) {
+        } else if (document.location.pathname.includes("collaborations")) {
+          
+          item = document.querySelector("#designer-collaboration > div.designer-profile-container > div.designer-profile-info-container > div > h1")
+          presenceData.details = "Viewing a collaboration:";
+          if (item.innerHTML.length > 128) {
+            presenceData.state = item.innerHTML.substring(0, 125) + "...";
+        } else {
+            presenceData.state = item.innerHTML;
+        }
+          
+          delete presenceData.smallImageKey;
+          presence.setActivity(presenceData);
+
+      } else if (document.location.href.includes("www.grailed.com/collections")) {
             
             if (document.location.href.includes("www.grailed.com/collections/")) {
                 presenceData.details = "Browsing a Collection:";
