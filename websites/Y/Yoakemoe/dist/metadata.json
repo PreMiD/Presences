@@ -8,15 +8,15 @@
     "en": "Watching your favorite anime online with vietnamese subtitle!"
   },
   "url": "yoake.moe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/eL8ARU0.png",
   "thumbnail": "https://i.imgur.com/un3I1sl.jpeg",
   "color": "#ffb6c1",
   "tags": [
     "anime",
     "videos",
-	"streaming",
-	"yoake"
+    "streaming",
+    "yoake"
   ],
   "category": "anime"
 }
