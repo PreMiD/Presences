@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "788064233882910750"
   }),
   strings = presence.getStrings({
@@ -15,14 +15,15 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var lastPlaybackState = null;
-var playback;
-var browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState = null;
+let playback;
+let browsingStamp = Math.floor(Date.now() / 1000);
+const urlRegex = /watch\/.*?\/(\d+)\/(\d+)/;
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -32,7 +33,8 @@ if (lastPlaybackState != playback) {
 presence.on("UpdateData", async () => {
   playback = document.querySelector("div.plyr__video-wrapper > video") !== null ? true : false;
 
-  var presenceData: PresenceData = {
+  const video: HTMLVideoElement = document.querySelector("div.plyr__video-wrapper > video");
+  const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
@@ -46,19 +48,14 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  var video: HTMLVideoElement = document.querySelector("div.plyr__video-wrapper > video");
 
   if (video !== null && !isNaN(video.duration)) {
-    var videoTitle: any;
 
-    videoTitle = document.querySelector("div#watch-page-main")
-
-    var urlRegex = /watch\/.*?\/(\d+)\/(\d+)/;
-    var matched = location.href.match(urlRegex);
-    var seasonNumber = matched ? matched[1] : null;
-    var episodeNumber = matched ? matched[2] : null;
-
-    var timestamps = getTimestamps(
+    const videoTitle = document.querySelector("div#watch-page-main") as HTMLElement;
+    const matched = location.href.match(urlRegex);
+    const seasonNumber = matched ? matched[1] : null;
+    const episodeNumber = matched ? matched[2] : null;
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
