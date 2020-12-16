@@ -1,0 +1,37 @@
+{
+  "author": {
+    "name": "Dominik",
+    "id": "594491170248458250"
+  },
+  "service": "gog",
+  "description": {
+    "en": "Download the best classic and new games on Windows, Mac & Linux. A vast selection of titles, DRM-free, with free goodies and 30-day money-back guarantee."
+  },
+  "url": [
+    "gog.com",
+    "www.gog.com"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/zBN90ek.png",
+  "thumbnail": "https://i.imgur.com/HdKNcBK.png",
+  "color": "#FFFFFF",
+  "tags": [
+    "lancher",
+    "games"
+  ],
+  "category": "games",
+  "settings": [
+    {
+        "id": "money",
+        "title": "Display Total Money At Checkout",
+        "icon": "fas fa-money-bill-wave",
+        "value": true
+    },
+    {
+      "id": "profiles",
+      "title": "Show Profile Stuff",
+      "icon": "fas fa-users",
+      "value": true
+  }
+]
+}
