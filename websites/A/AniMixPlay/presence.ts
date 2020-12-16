@@ -18,6 +18,32 @@ function getTimestamps(
 }
 const browsingTimer = Math.floor(Date.now() / 1000);
 
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  playback;
+
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      duration: number;
+      iFrameVideo: boolean;
+      currTime: number;
+      paused: boolean;
+    };
+  }) => {
+    playback = data.iframe_video.duration !== null ? true : false;
+    if (playback) {
+      iFrameVideo = data.iframe_video.iFrameVideo;
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.duration;
+      paused = data.iframe_video.paused;
+    }
+  }
+);
+
 presence.on("UpdateData", async () => {
     const presenceData: presenceData = {
         largeImageKey: "logo-v2"
@@ -53,24 +79,19 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageText = (await strings).browsing;
         }
       } else if (new RegExp("^\/v.\/[^\/]").test(document.location.pathname)) {
-        let currentTime: any,
-          duration: any,
-          paused: any,
-          timestamps: any,
-          video: HTMLVideoElement;
+        let video: HTMLVideoElement;
         
         const iframe = document.getElementById("iframeplayer");
-        if (iframe) {
-          video = iframe.contentWindow.document.getElementsByTagName("video")[0];
+        if (iFrameVideo === true) {
+          const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
         } else {
           video = document.querySelector("#playercontainer > div > div.plyr__video-wrapper > video");
-        }
-        title = document.querySelector("#aligncenter > span.animetitle").textContent;
-
-        const currentTime = video.currentTime,
+          const currentTime = video.currentTime,
           duration = video.duration,
           paused = video.paused,
           timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+        }
+        title = document.querySelector("#aligncenter > span.animetitle").textContent;
 
         if (!isNaN(duration)) {
           presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
@@ -89,9 +110,9 @@ presence.on("UpdateData", async () => {
         }
       } else if (document.location.pathname.includes("/anime/")) {
         animepagetitle = document.querySelector("#animepagetitle").textContent;
-        animatepagetype = document.querySelector("#addInfo").textContent.split(" ")[5].trim(-1);
+        animepagetype = document.querySelector("#addInfo").textContent.split(" ")[5].trim(-1);
         presenceData.details = "Currently reading...";
-        presenceData.state =  animepagetitle + " (" + animatepagetype + ")";
+        presenceData.state =  animepagetitle + " (" + animepagetype + ")";
         presenceData.smallImageKey = "reading-v1";
         presenceData.smallImageText = "Reading...";
       }

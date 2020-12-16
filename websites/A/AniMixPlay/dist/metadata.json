@@ -17,5 +17,6 @@
     "animixplay",
     "videos"
   ],
+  "iframe": true,
   "category": "anime"
 }
