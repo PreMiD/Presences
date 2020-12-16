@@ -78,11 +78,10 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "browsing-v1";
             presenceData.smallImageText = (await strings).browsing;
         }
-      } else if (new RegExp("^\/v.\/[^\/]").test(document.location.pathname)) {
+      } else if (new RegExp("^\/v.\/").test(document.location.pathname)) {
         let video: HTMLVideoElement;
-        
-        const iframe = document.getElementById("iframeplayer");
-        if (iFrameVideo === true) {
+
+        if (iFrameVideo) {
           const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
         } else {
           video = document.querySelector("#playercontainer > div > div.plyr__video-wrapper > video");
