@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
   const showmoney = await presence.getSetting("money");
   const showprofile = await presence.getSetting("profiles");
 
-  if (document.location.hostname == "gog.com" || "www.gog.com") {
+  if (document.location.hostname == "www.gog.com") {
     if(document.querySelector("body > div.wrapper.cf._prices-in-gbp._price-currency-symbol-before > div > div:nth-child(3) > div")) {
       presenceData.details = "Looking At:"
       presenceData.state = "Main Page"
