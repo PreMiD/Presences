@@ -18,6 +18,9 @@ function getTimestamps(
 }
 const browsingTimer = Math.floor(Date.now() / 1000);
 
+let timestamps,
+  video;
+
 let iFrameVideo: boolean,
   currentTime: number,
   duration: number,
@@ -82,10 +85,10 @@ presence.on("UpdateData", async () => {
         let video: HTMLVideoElement;
 
         if (iFrameVideo) {
-          const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+          timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
         } else {
           video = document.querySelector("#playercontainer > div > div.plyr__video-wrapper > video");
-          const currentTime = video.currentTime,
+          currentTime = video.currentTime,
           duration = video.duration,
           paused = video.paused,
           timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
