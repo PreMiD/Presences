@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "browsing-v1";
             presenceData.smallImageText = (await strings).browsing;
         }
-      } else if (document.location.pathname.includes("/v4/") || document.location.pathname.includes("/v1/") || document.location.pathname.includes("/v7/")) {
+      } else if (new RegExp("^\/v.\/[^\/]").test(document.location.pathname)) {
         let currentTime: any,
           duration: any,
           paused: any,
