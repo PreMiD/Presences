@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "browsing-v1";
             presenceData.smallImageText = (await strings).browsing;
         }
-      } else if (new RegExp("^\/v.").test(document.location.pathname)) {
+      } else if (new RegExp("^v.").test(document.location.pathname)) {
         if (iFrameVideo) {
           timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
         } else {
