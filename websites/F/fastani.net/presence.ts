@@ -6,11 +6,6 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
 function getTimestamps(
   videoTime: number,
   videoDuration: number
