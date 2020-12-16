@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "751981945881231430" //The client ID of the Application created at https://discordapp.com/developers/applications
 });
 
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
 
     It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.*/
 
-    var PresenceData: PresenceData = {
+    const PresenceData: PresenceData = {
         largeImageKey: "bubblez-logo", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
         smallImageKey: "rebrand", /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
         smallImageText: "Bubblez.app", //The text which is displayed when hovering over the small image

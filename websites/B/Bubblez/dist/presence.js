@@ -1,8 +1,8 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "751981945881231430"
 });
 presence.on("UpdateData", async () => {
-    var PresenceData = {
+    const PresenceData = {
         largeImageKey: "bubblez-logo",
         smallImageKey: "rebrand",
         smallImageText: "Bubblez.app",
