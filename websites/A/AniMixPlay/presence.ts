@@ -19,9 +19,8 @@ function getTimestamps(
 const browsingTimer = Math.floor(Date.now() / 1000);
 
 let timestamps,
-  video;
-
-let iFrameVideo: boolean,
+  video,
+  iFrameVideo: boolean,
   currentTime: number,
   duration: number,
   paused: boolean,
@@ -81,9 +80,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "browsing-v1";
             presenceData.smallImageText = (await strings).browsing;
         }
-      } else if (new RegExp("^\/v.\/").test(document.location.pathname)) {
-        let video: HTMLVideoElement;
-
+      } else if (new RegExp("^\/v.").test(document.location.pathname)) {
         if (iFrameVideo) {
           timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
         } else {
