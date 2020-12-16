@@ -1,28 +1,18 @@
 const presence = new Presence({
-    clientId: "751981945881231430" //The client ID of the Application created at https://discordapp.com/developers/applications
+    clientId: "751981945881231430"
 });
-
-const capitalize = (text: string): string => {
-  var texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
-  return texts
-    .map((str) => {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    })
-    .join(" ");
-};
 
 
 presence.on("UpdateData", async () => {
-    var state,
-		details,
-		smallImageText = "Bubblez.app | v1.1.6",
-		smallImageKey = "rebrand",
-		largeImageKey = "bubblez-logo",
-		dreading = "Reading...";
+    let state,
+	details,
+	smallImageText = "Bubblez.app | v1.0.0",
+	smallImageKey = "rebrand",
+	largeImageKey = "bubblez-logo",
+	dreading = "Reading...";
 
     const path = window.location.pathname;
 	const queryString = window.location.search;
-	
 	const urlParams = new URLSearchParams(queryString);
 	
 	state = "Reading some posts.";
@@ -92,12 +82,11 @@ presence.on("UpdateData", async () => {
 	
 	
 	const PresenceData: PresenceData = {
-        largeImageKey: largeImageKey, /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-        smallImageKey: smallImageKey, /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/
-        smallImageText: smallImageText, //The text which is displayed when hovering over the small image
-        details: details, //The upper section of the presence text
-		state: state //"Reading some posts" //The lower section of the presence text
-
+        largeImageKey: largeImageKey,
+        smallImageKey: smallImageKey,
+        smallImageText: smallImageText,
+        details: details,
+		state: state
     };
-		presence.setActivity(PresenceData); //Update the presence with all the values from the presenceData object
+	presence.setActivity(PresenceData);
 });

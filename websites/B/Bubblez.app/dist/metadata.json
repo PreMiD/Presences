@@ -4,16 +4,6 @@
     "name": "DarkMatter",
     "id": "200612445373464576"
   },
-  "contributors": [
-    {
-      "name": "embed",
-      "id": "476641014841475084"
-    },
-    {
-      "name": "bob5918",
-      "id": "316673724990488577"
-    }
-  ],
   "url": [
     "bubblez.app",
 	"canary.bubblez.app"
@@ -22,14 +12,13 @@
     "en": "The best upcoming Social Media site."
   },
   "service": "Bubblez.app",
-  "version": "1.1.6",
-  "logo": "https://cdn.bubblez.app/official/reBrand-test.png",
-  "thumbnail": "https://cdn.bubblez.app/official/reBrand-test.png",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/02vqe4Q.png",
+  "thumbnail": "https://i.imgur.com/d4qK0dA.png",
   "color": "#00CC99",
   "tags": [
     "Social",
-    "Media",
-    "Social Media"
+    "Media"
   ],
   "category": "socials"
 }
