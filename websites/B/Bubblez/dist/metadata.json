@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "DarkMatter",
+    "id": "200612445373464576"
+  },
+  "contributors": [
+    {
+      "name": "embed",
+      "id": "476641014841475084"
+    },
+    {
+      "name": "bob5918",
+      "id": "316673724990488577"
+    }
+  ],
+  "url": [
+    "bubblez.app",
+	"canary.bubblez.app"
+  ],
+  "description": {
+    "en": "The best upcoming Social Media site."
+  },
+  "service": "Bubblez.app",
+  "version": "1.0.2",
+  "logo": "https://cdn.bubblez.app/official/reBrand-test.png",
+  "thumbnail": "https://cdn.bubblez.app/official/reBrand-test.png",
+  "color": "#00CC99",
+  "tags": [
+    "Social",
+    "Media",
+    "Social Media"
+  ],
+  "category": "socials"
+}
