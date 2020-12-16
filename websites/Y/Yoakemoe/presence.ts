@@ -6,7 +6,10 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-function getTimestamps(videoTime: number, videoDuration: number): Array<number> {
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
   const startTime = Date.now(),
     endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
@@ -17,7 +20,10 @@ let lastPlaybackState: boolean,
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const playback = document.getElementById("title") !== null || (document.getElementsByTagName('video').length !== 0 && document.getElementsByTagName('video')[0].className !== "previewVideo"),
+  const playback =
+      document.getElementById("title") !== null ||
+      (document.getElementsByTagName("video").length !== 0 &&
+        document.getElementsByTagName("video")[0].className !== "previewVideo"),
     curPath = document.location.pathname,
     presenceData: PresenceData = {
       largeImageKey: "logo"
@@ -42,8 +48,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Đang đăng ký...";
     else if (curPath.startsWith("/reset-password"))
       presenceData.details = "Đang đặt lại mật khẩu...";
-    else
-      presenceData.details = "Đang xem trang chủ...";
+    else presenceData.details = "Đang xem trang chủ...";
     presenceData.startTimestamp = browsingStamp;
 
     if (!curPath.startsWith("/entity.php")) delete presenceData.state;
@@ -53,13 +58,21 @@ presence.on("UpdateData", async () => {
     return;
   }
 
-  const video = document.getElementsByTagName('video')[0];
+  const video = document.getElementsByTagName("video")[0];
 
   if (video !== null && !isNaN(video.duration)) {
-    const titleArr = (document.getElementById("title") !== null ? document.getElementById("title").innerHTML : "Không thấy tên phim!... - Tập ?").split(' - '),
-      timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
+    const titleArr = (document.getElementById("title") !== null
+        ? document.getElementById("title").innerHTML
+        : "Không thấy tên phim!... - Tập ?"
+      ).split(" - "),
+      timestamps = getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
     presenceData.smallImageKey = video.paused ? "pause" : "play";
-    presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+    presenceData.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play;
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
 
