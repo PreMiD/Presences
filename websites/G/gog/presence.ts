@@ -35,8 +35,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Reading Gog Work Application";
   } else if (document.location.pathname.startsWith("/forum")) {
     presenceData.details = "Looking Arround Forum";
-  } else if (document.location.pathname.startsWith("/wishlist")) {
-    presenceData.details = "Looking At Community Whitelist";
   } else if (document.location.pathname.startsWith("/checkout/")) {
     presenceData.details = "Looking At Checkout";
     if(showmoney) {
