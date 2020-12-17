@@ -9,7 +9,6 @@ function pathIncludes(string: string): boolean {
 
 
 presence.on("UpdateData", async () => {
-	//const details = "..." ? "Logged in as " + document.querySelector("b.user-data").textContent.replace(/[\s\n]+/gi, "") : "...",
     let detailsraw = "";
 	
 	if (document.querySelector("b.user-data").textContent.replace(/[\s\n]+/gi, "") == "Login") {
@@ -41,7 +40,7 @@ presence.on("UpdateData", async () => {
 			Data.state = "A post.";
 		break;
 		case pathIncludes("/p"):
-			let trimstring = urlParams.toString().substring(0, urlParams.toString().length - 1)
+			const trimstring = urlParams.toString().substring(0, urlParams.toString().length - 1)
 			Data.state = trimstring + "'s profile.";
 		break;
 		case pathIncludes("/register"):
