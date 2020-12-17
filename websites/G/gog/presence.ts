@@ -1,16 +1,15 @@
 const presence = new Presence({
   clientId: "788755903838027776"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
-  const showmoney = await presence.getSetting("money");
-  const showprofile = await presence.getSetting("profiles");
+  const showmoney = await presence.getSetting("money"),
+  showprofile = await presence.getSetting("profiles");
 
   if (document.location.hostname == "www.gog.com") {
     if(document.querySelector("body > div.wrapper.cf._prices-in-gbp._price-currency-symbol-before > div > div:nth-child(3) > div")) {
