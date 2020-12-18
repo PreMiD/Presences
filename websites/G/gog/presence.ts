@@ -5,9 +5,8 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
-
-  const showmoney = await presence.getSetting("money"),
+  },
+  showmoney = await presence.getSetting("money"),
   showprofile = await presence.getSetting("profiles");
 
   if (document.location.hostname == "www.gog.com") {
