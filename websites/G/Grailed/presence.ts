@@ -25,23 +25,18 @@ presence.on("UpdateData", async () => {
             } else {
                 presenceData.state = item.innerHTML;
             } 
-            delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         
         } else if (document.location.href.includes("www.grailed.com/mygrails/")) {
             
             presenceData.details = "Browsing:";
             presenceData.state = "My Grails";
-            
-            delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
         } else if (document.location.href.endsWith("www.grailed.com/foryou")) {
             
             presenceData.details = "Viewing:";
             presenceData.state = "For You";
-            
-            delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
         } else if (document.location.href.includes("www.grailed.com/collaborations/")) {
@@ -53,16 +48,12 @@ presence.on("UpdateData", async () => {
         } else {
             presenceData.state = item.innerHTML;
         }
-          
-          delete presenceData.smallImageKey;
           presence.setActivity(presenceData);
 
       } else if (document.location.href.endsWith("www.grailed.com/collections")) {
 
             presenceData.details = "Browsing:";
             presenceData.state = "Collections";
-
-            delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
       } else if (document.location.href.includes("www.grailed.com/collections/")) {
@@ -100,8 +91,7 @@ presence.on("UpdateData", async () => {
             } else if (document.location.href.endsWith("www.grailed.com/designers")) {
                 presenceData.details = "Browsing:";
                 presenceData.state = "Designers";
-            }  
-            delete presenceData.smallImageKey;
+            }
             presence.setActivity(presenceData);
 
         } else if (document.location.href.includes("www.grailed.com/categories/")) {   
@@ -113,8 +103,7 @@ presence.on("UpdateData", async () => {
                 presenceData.state = item.innerHTML.substring(0, 125) + "...";
             } else {
                 presenceData.state = item.innerHTML;
-            } 
-            delete presenceData.smallImageKey;     
+            }     
             presence.setActivity(presenceData);
             
         } else if (document.location.href.includes("www.grailed.com/drycleanonly/categories/")) {
@@ -126,8 +115,7 @@ presence.on("UpdateData", async () => {
                 presenceData.state = item.innerHTML.substring(0, 125) + "...";
             } else {
                 presenceData.state = item.innerHTML;
-            } 
-            delete presenceData.smallImageKey;     
+            }    
             presence.setActivity(presenceData);
 
         } else if (document.location.href.includes("www.grailed.com/products/")) {
@@ -140,8 +128,7 @@ presence.on("UpdateData", async () => {
                 presenceData.state = item2.textContent + ": " + item.textContent.substring(0, 105) + "...";
             } else {
                 presenceData.state = item2.textContent + ": " + item.textContent;
-            } 
-            delete presenceData.smallImageKey;     
+            }   
             presence.setActivity(presenceData);
 
         }  else if (document.location.href.includes("www.grailed.com/drycleanonly")) {
@@ -168,7 +155,6 @@ presence.on("UpdateData", async () => {
                 presenceData.details = "Reading:";
                 presenceData.state = "Dry Clean Only";
             } 
-            delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
         } else if (document.location.href.includes("www.grailed.com/shop")) {
@@ -191,15 +177,12 @@ presence.on("UpdateData", async () => {
                     presenceData.state = "The Feed";  
                 }
             }
-            delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
             
         } else if (document.location.href.endsWith("grailed.com/")) {
             
             presenceData.details = "Viewing:";
             presenceData.state = "The Main Page";
-        
-            delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
 
         } 
@@ -211,8 +194,6 @@ presence.on("UpdateData", async () => {
             } else {
                 presenceData.state = userName.innerHTML;
             } 
-        
-            delete presenceData.smallImageKey;
             presence.setActivity(presenceData);
         } else {
             presence.setActivity();
