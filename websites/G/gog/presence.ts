@@ -18,9 +18,8 @@ presence.on("UpdateData", async () => {
     if(!document.querySelector("body > div.layout.ng-scope > div:nth-child(8) > div.product-actions.hide-when-content-is-expanded.ng-scope > div.product-actions-price.product-actions-price--discounted > span.product-actions-price__discount.ng-binding")) {
     presenceData.state = document.querySelector("body > div.layout.ng-scope > div:nth-child(8) > div.productcard-basics.hide-when-content-is-expanded > h1").innerHTML;
     } else {
-    presenceData.state = document.querySelector("body > div.layout.ng-scope > div:nth-child(8) > div.productcard-basics.hide-when-content-is-expanded > h1").innerHTML +" ("+ document.querySelector("body > div.layout.ng-scope > div:nth-child(8) > div.product-actions.hide-when-content-is-expanded.ng-scope > div.product-actions-price.product-actions-price--discounted > span.product-actions-price__discount.ng-binding").innerHTML +")"  
-    }
-  } else if (document.location.pathname.startsWith("/news/")) {
+    presenceData.state = document.querySelector("body > div.layout.ng-scope > div:nth-child(8) > div.productcard-basics.hide-when-content-is-expanded > h1").innerHTML +" ("+ document.querySelector("body > div.layout.ng-scope > div:nth-child(8) > div.product-actions.hide-when-content-is-expanded.ng-scope > div.product-actions-price.product-actions-price--discounted > span.product-actions-price__discount.ng-binding").innerHTML +")";
+   } else if (document.location.pathname.startsWith("/news/")) {
     presenceData.details = "Reading:";
     presenceData.state = document.querySelector("body > div.universe > div.wrapper.cf > div > article > h1 > b").textContent;
   } else if (document.location.pathname.startsWith("/games")) {
