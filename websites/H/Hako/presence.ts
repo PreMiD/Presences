@@ -39,7 +39,9 @@ presence.on("UpdateData", async () => {
   else if (curPath.startsWith("/register"))
     presenceData.details = "Đang đăng ký...";
   else if (curPath.startsWith("/thanh-vien"))
-    presenceData.details = "Đang xem tường của: " + document.querySelector(".profile-intro>.profile-intro_name").innerHTML;
+    presenceData.details =
+      "Đang xem tường của: " +
+      document.querySelector(".profile-intro>.profile-intro_name").innerHTML;
   else if (curPath.startsWith("/xuat-ban")) {
     const title = document.querySelector(".volume-title>a"),
       author = document.querySelector(".info-value>a"),
@@ -53,28 +55,33 @@ presence.on("UpdateData", async () => {
   else if (curPath.startsWith("/nhom-dich")) {
     const name = document.querySelector(".page-name");
     if (name !== null)
-      presenceData.details = `Đang xem nhóm dịch: ${name.innerHTML.substring(40)}`;
-    else
-      presenceData.details = "Đang xem danh sách nhóm dịch...";
+      presenceData.details = `Đang xem nhóm dịch: ${name.innerHTML.substring(
+        40
+      )}`;
+    else presenceData.details = "Đang xem danh sách nhóm dịch...";
   } else if (truyen || sangTac || convert) {
     const name = document.querySelector(".series-name-group>.series-name>a"),
       title = document.querySelector(".rd_sidebar-name>h5>a"),
       chap = document.querySelector(".title-top>h4");
     if (name !== null || title !== null) {
-      presenceData.details = name !== null ? "Đang chọn chap..." : "Đang đọc truyện: " + title.innerHTML;
+      presenceData.details =
+        name !== null
+          ? "Đang chọn chap..."
+          : "Đang đọc truyện: " + title.innerHTML;
       presenceData.state = name !== null ? name.innerHTML : chap.innerHTML;
     } else
-      presenceData.details = "Đang tìm " + (truyen ? "truyện" : sangTac ? "sáng tác" : "convert") + " ...";
+      presenceData.details =
+        "Đang tìm " +
+        (truyen ? "truyện" : sangTac ? "sáng tác" : "convert") +
+        " ...";
   } else if (curPath.startsWith("/thao-luan")) {
     const title = document.querySelector(".sect-title>a"),
       author = document.querySelector(".author_name>a");
     if (title !== null) {
       presenceData.details = "Đang đọc: " + title.innerHTML;
       presenceData.state = "Tác giả: " + author.innerHTML;
-    } else
-      presenceData.details = "Đang xem danh sách thảo luận...";
-  } else
-    presenceData.details = "Đang xem trang chủ...";
+    } else presenceData.details = "Đang xem danh sách thảo luận...";
+  } else presenceData.details = "Đang xem trang chủ...";
 
   presenceData.startTimestamp = browsingStamp;
   presence.setActivity(presenceData);
