@@ -1,12 +1,11 @@
 const presence = new Presence({
     clientId: "787739407720513596"
-}),
-
-strings = presence.getStrings({
+  }),
+  strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-});
+  });
 
 function getTimestamps(
   videoTime: number,
@@ -47,80 +46,99 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-    const presenceData: presenceData = {
-        largeImageKey: "logo-v2"
-    };
+  const presenceData: presenceData = {
+    largeImageKey: "logo-v2"
+  };
 
-    if (document.location.hostname == "animixplay.to") {
-      if (document.location.pathname == "/") {
+  if (document.location.hostname == "animixplay.to") {
+    if (document.location.pathname == "/") {
+      urlParams = new URLSearchParams(window.location.search);
 
-        urlParams = new URLSearchParams(window.location.search);
-
-        if (urlParams.get("q")) {
-          presenceData.startTimestamp = browsingTimer;
-          presenceData.details = "Currently searching for...";
-          presenceData.state = '"' + urlParams.get("q") + '"';
-          presenceData.smallImageKey = "browsing-v1";
-          presenceData.smallImageText = (await strings).browsing;
-        } else if (urlParams.get("genre")) {
-            presenceData.startTimestamp = browsingTimer;
-            presenceData.details = "Currently exploring...";
-            presenceData.state = "" + urlParams.get("genre").toLowerCase().replaceAll(",", " + ") + " related anime";
-            presenceData.smallImageKey = "browsing-v1";
-            presenceData.smallImageText = "Exploring...";
-        } else if (urlParams.get("season") && urlParams.get("year")) {
-            presenceData.startTimestamp = browsingTimer;
-            presenceData.details = "Currently exploring...";
-            presenceData.state = "" + urlParams.get("season").toLowerCase() + " " + urlParams.get("year").toLowerCase() + " anime";
-            presenceData.smallImageKey = "browsing-v1";
-            presenceData.smallImageText = "Exploring...";
-        } else {
-            presenceData.startTimestamp = browsingTimer;
-            presenceData.details = "Currently browsing...";
-            presenceData.smallImageKey = "browsing-v1";
-            presenceData.smallImageText = (await strings).browsing;
-        }
-      } else if (new RegExp("^/v.").test(document.location.pathname)) {
-        if (iFrameVideo) {
-          timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-        } else {
-          video = document.querySelector("#playercontainer > div > div.plyr__video-wrapper > video");
-          currentTime = video.currentTime,
-          duration = video.duration,
-          paused = video.paused,
-          timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-        }
-        title = document.querySelector("#aligncenter > span.animetitle").textContent;
-
-        if (!isNaN(duration)) {
-          presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
-          presenceData.smallImageText = paused
-            ? (await strings).pause
-            : (await strings).play;
-          presenceData.startTimestamp = timestamps[0];
-          presenceData.endTimestamp = timestamps[1];
-          presenceData.details = "Currently watching...";
-          presenceData.state = title;
-
-          if (paused) {
-            delete presenceData.startTimestamp;
-            delete presenceData.endTimestamp;
-          }
-        }
-      } else if (document.location.pathname.includes("/anime/")) {
-        animepagetitle = document.querySelector("#animepagetitle").textContent;
-        animepagetype = document.querySelector("#addInfo").textContent.split(" ")[5].trim(-1);
-        presenceData.details = "Currently reading...";
-        presenceData.state =  animepagetitle + " (" + animepagetype + ")";
-        presenceData.smallImageKey = "reading-v1";
-        presenceData.smallImageText = "Reading...";
+      if (urlParams.get("q")) {
+        presenceData.startTimestamp = browsingTimer;
+        presenceData.details = "Currently searching for...";
+        presenceData.state = '"' + urlParams.get("q") + '"';
+        presenceData.smallImageKey = "browsing-v1";
+        presenceData.smallImageText = (await strings).browsing;
+      } else if (urlParams.get("genre")) {
+        presenceData.startTimestamp = browsingTimer;
+        presenceData.details = "Currently exploring...";
+        presenceData.state =
+          "" +
+          urlParams.get("genre").toLowerCase().replaceAll(",", " + ") +
+          " related anime";
+        presenceData.smallImageKey = "browsing-v1";
+        presenceData.smallImageText = "Exploring...";
+      } else if (urlParams.get("season") && urlParams.get("year")) {
+        presenceData.startTimestamp = browsingTimer;
+        presenceData.details = "Currently exploring...";
+        presenceData.state =
+          "" +
+          urlParams.get("season").toLowerCase() +
+          " " +
+          urlParams.get("year").toLowerCase() +
+          " anime";
+        presenceData.smallImageKey = "browsing-v1";
+        presenceData.smallImageText = "Exploring...";
+      } else {
+        presenceData.startTimestamp = browsingTimer;
+        presenceData.details = "Currently browsing...";
+        presenceData.smallImageKey = "browsing-v1";
+        presenceData.smallImageText = (await strings).browsing;
       }
-    }
+    } else if (new RegExp("^/v.").test(document.location.pathname)) {
+      if (iFrameVideo) {
+        timestamps = getTimestamps(
+          Math.floor(currentTime),
+          Math.floor(duration)
+        );
+      } else {
+        video = document.querySelector(
+          "#playercontainer > div > div.plyr__video-wrapper > video"
+        );
+        (currentTime = video.currentTime),
+          (duration = video.duration),
+          (paused = video.paused),
+          (timestamps = getTimestamps(
+            Math.floor(currentTime),
+            Math.floor(duration)
+          ));
+      }
+      title = document.querySelector("#aligncenter > span.animetitle")
+        .textContent;
 
-    if (presenceData.details == null) {
-        presence.setTrayTitle();
-        presence.setActivity();
-    } else {
-        presence.setActivity(presenceData);
+      if (!isNaN(duration)) {
+        presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
+        presenceData.smallImageText = paused
+          ? (await strings).pause
+          : (await strings).play;
+        presenceData.startTimestamp = timestamps[0];
+        presenceData.endTimestamp = timestamps[1];
+        presenceData.details = "Currently watching...";
+        presenceData.state = title;
+
+        if (paused) {
+          delete presenceData.startTimestamp;
+          delete presenceData.endTimestamp;
+        }
+      }
+    } else if (document.location.pathname.includes("/anime/")) {
+      animepagetitle = document.querySelector("#animepagetitle").textContent;
+      animepagetype = document
+        .querySelector("#addInfo")
+        .textContent.split(" ")[5]
+        .trim(-1);
+      presenceData.details = "Currently reading...";
+      presenceData.state = animepagetitle + " (" + animepagetype + ")";
+      presenceData.smallImageKey = "reading-v1";
+      presenceData.smallImageText = "Reading...";
     }
+  }
+
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
 });

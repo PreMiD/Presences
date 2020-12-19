@@ -1,25 +1,25 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.0",
-    "author": {
-      "name": "Vyrek",
-      "id": "538421122920742942"
-    },
-    "url": "developer.mozilla.org",
-    "description": {
-      "en": "The web docs of MDN, here you can found JS docs and more...",
-      "es": "La documentacion web de MDN, puedes encontrar documentacion de JS y mas..."
-    },
-    "service": "MDN Web Docs",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/SmC65Yu.png",
-    "thumbnail": "https://i.imgur.com/TkKC4bK.png",
-    "color": "#84d4f4",
-    "tags": [
-      "dev",
-      "javascript",
-      "mozilla",
-      "css",
-      "html"
-    ],
-    "category": "other"
-  }
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Vyrek",
+    "id": "538421122920742942"
+  },
+  "url": "developer.mozilla.org",
+  "description": {
+    "en": "The web docs of MDN, here you can found JS docs and more...",
+    "es": "La documentacion web de MDN, puedes encontrar documentacion de JS y mas..."
+  },
+  "service": "MDN Web Docs",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/SmC65Yu.png",
+  "thumbnail": "https://i.imgur.com/TkKC4bK.png",
+  "color": "#84d4f4",
+  "tags": [
+    "dev",
+    "javascript",
+    "mozilla",
+    "css",
+    "html"
+  ],
+  "category": "other"
+}
