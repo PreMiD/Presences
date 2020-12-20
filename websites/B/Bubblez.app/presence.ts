@@ -2,11 +2,9 @@ const presence = new Presence({
     clientId: "751981945881231430"
 });
 
-
 function pathIncludes(string: string): boolean {
   return document.location.pathname.toLowerCase().includes(string);
 }
-
 
 presence.on("UpdateData", async () => {
     let detailsraw = "";
@@ -22,53 +20,52 @@ presence.on("UpdateData", async () => {
         largeImageKey: "bubblez-logo",
         smallImageKey: "rebrand",
         smallImageText: "Bubblez.app | v1.0.0",
-		details: detailsraw
-    };
-
-    const path = window.location.pathname;
-	const queryString = window.location.search;
-	const urlParams = new URLSearchParams(queryString);
+        details: detailsraw
+  },
+  path = window.location.pathname,
+	queryString = window.location.search,
+  urlParams = new URLSearchParams(queryString),
+  trimString = urlParams.toString().substring(0, urlParams.toString().length - 1);
 	
 	switch (true) {
 		case pathIncludes("/home"):
-			Data.state = "Some posts.";
+			Data.state = "Reading some posts.";
 		break;
 		case pathIncludes("/postedit"):
 			Data.state = "Editing a post.";
 		break;
 		case pathIncludes("/post"):
-			Data.state = "A post.";
+			Data.state = "Looking at a post.";
 		break;
 		case pathIncludes("/p"):
-			const trimstring = urlParams.toString().substring(0, urlParams.toString().length - 1)
-			Data.state = trimstring + "'s profile.";
+			Data.state = trimString + "'s profile.";
 		break;
 		case pathIncludes("/register"):
-			Data.details = "User Register.";
+			Data.details = "User register.";
 		break;
 		case pathIncludes("/login"):
-			Data.details = "User Login.";
+			Data.details = "User login.";
 		break;
 		case pathIncludes("/likedby"):
-			Data.state = "Likes.";
+			Data.state = "Looking at likes.";
 		break;
 		case pathIncludes("/settings/"):
-			Data.state = "Settings " + path.split("/")[2] + ".";
+			Data.state = "Looking at settings | " + path.split("/")[2] + ".";
 		break;
 		case pathIncludes("/following"):
-			Data.state = "Following list.";
+			Data.state = "Reading the following list.";
 		break;
 		case pathIncludes("/followers"):
-			Data.state = "Followers list.";
+			Data.state = "Reading the followers list.";
 		break;
 		case pathIncludes("/leaderboard"):
-			Data.state = "Leaderboard.";
+			Data.state = "Reading leaderboards.";
 		break;
 		case pathIncludes("/blogs"):
-			Data.state = "Devlogs.";
+			Data.state = "Reading devlogs.";
 		break;
 		case pathIncludes("/tos"):
-			Data.state = "TOS.";
+			Data.state = "Reading TOS.";
 		break;
 		case pathIncludes("/adminpanel/"):
 			Data.state = "Browsing Adminpanel";
@@ -77,7 +74,7 @@ presence.on("UpdateData", async () => {
 			Data.state = "Found a Secret";
 		break;
 		default:
-			Data.state = "Reading some posts.";
+			Data.state = "Error 404";
 	}
 	
 	presence.setActivity(Data);
