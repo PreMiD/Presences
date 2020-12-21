@@ -1,8 +1,9 @@
 const presence = new Presence({
-  clientId: "790535819009064970"
-});
+  clientId: "790535819009064970",
 
-const time = Math.floor(Date.now() / 1000);
+}), time = Math.floor(Date.now() / 1000);
+
+
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
       largeImageKey: "monkeytype"
