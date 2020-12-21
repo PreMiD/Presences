@@ -1,7 +1,6 @@
 const presence = new Presence({
     clientId: "786739998011293717"
-}),
-browsingStamp = Math.floor(Date.now() / 1000);
+}), browsingStamp = Math.floor(Date.now() / 1000);
 
 let item: HTMLElement,
 item2: HTMLElement;
@@ -47,7 +46,7 @@ presence.on("UpdateData", async () => {
         } else {
             presenceData.state = item.innerHTML;
         }
-          presence.setActivity(presenceData);
+        presence.setActivity(presenceData);
 
       } else if (document.location.href.endsWith("www.grailed.com/collections")) {
 
@@ -63,6 +62,7 @@ presence.on("UpdateData", async () => {
           } else {
               presenceData.state = item.innerHTML;
           } 
+          presence.setActivity(presenceData);
 
       } else if (document.location.href.includes("www.grailed.com/designers")) {
         
@@ -198,5 +198,5 @@ presence.on("UpdateData", async () => {
             presence.setActivity();
             presence.setTrayTitle();
         }
-    } 
+    }
 });
