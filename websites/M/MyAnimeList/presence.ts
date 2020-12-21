@@ -32,6 +32,9 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/forum")) {
     const presenceData: PresenceData = {
       details: "Viewing the forums",
+      state: document
+        .querySelector("meta[property='og:title']")
+        .getAttribute("content"),
       largeImageKey: "lg-mal"
     };
     presence.setActivity(presenceData);

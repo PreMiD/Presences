@@ -20,10 +20,10 @@
     "nl": "Deze presence zal dingen weergeven die je gewoonlijk in VK doet. Het toont muziekinfo (als je op de Muziek-pagina bent), video-info (wanneer je videos bekijkt) en info als je een community- of gebruikersprofiel bekijkt."
   },
   "url": "vk.com",
-  "version": "2.2.9",
-  "logo": "https://i.imgur.com/VB6AuBG.png",
-  "thumbnail": "https://i.imgur.com/lKGTJ26.jpg",
-  "color": "#4680C2",
+  "version": "2.2.10",
+  "logo": "https://i.imgur.com/Zd8iMck.png",
+  "thumbnail": "https://i.imgur.com/P4TGBga.png",
+  "color": "#2787F5",
   "tags": [
     "social",
     "music",
