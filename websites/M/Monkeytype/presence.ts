@@ -20,7 +20,7 @@ presence.on("UpdateData", () => {
     presence.setActivity(presenceData);
   } else if (path === "/settings") {
     presenceData.details = "Settings page";
-    presenceData.state = "Changing settigns";
+    presenceData.state = "Changing settings";
     presenceData.startTimestamp = time;
     presence.setActivity(presenceData);
   } else if (path === "/login") {
