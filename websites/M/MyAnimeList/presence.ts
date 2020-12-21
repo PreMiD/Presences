@@ -38,13 +38,97 @@ presence.on("UpdateData", async () => {
       largeImageKey: "lg-mal"
     };
     presence.setActivity(presenceData);
+  } else if (document.location.pathname.startsWith("/clubs.php")) {
+    if (document.getElementsByClassName("normal_header")[1]) {
+      const presenceData: PresenceData = {
+        details: "Viewing an club",
+        state: document.getElementsByClassName("h1")[0].innerHTML,
+        largeImageKey: "lg-mal"
+      };
+      presence.setActivity(presenceData);
+    } else if (document.getElementsByClassName("h1-title")[0].innerHTML === 'Invitations') {
+      const presenceData: PresenceData = {
+        details: "Viewing club Invitations",
+        largeImageKey: "lg-mal"
+      };
+      presence.setActivity(presenceData);
+    } else if(document.getElementsByClassName("h1-title")[0].innerHTML === 'My Clubs') {
+      const presenceData: PresenceData = {
+        details: "Viewing my clubs",
+        largeImageKey: "lg-mal"
+      };
+      presence.setActivity(presenceData);
+    } else {
+      const presenceData: PresenceData = {
+        details: "Looking for clubs",
+        largeImageKey: "lg-mal"
+      };
+      presence.setActivity(presenceData);
+    }
+  } else if (document.location.pathname.startsWith("/blog.php")) {
+    const presenceData: PresenceData = {
+      details: "Viewing the blogs",
+      largeImageKey: "lg-mal"
+    };
+    presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/users.php")) {
     const presenceData: PresenceData = {
       details: "Searching for users",
       largeImageKey: "lg-mal"
     };
     presence.setActivity(presenceData);
-  } else if (document.location.pathname.startsWith("/profile")) {
+  } else if (document.location.pathname.startsWith("/news")) {
+      const presenceData: PresenceData = {
+        details: "Viewing the news",
+        largeImageKey: "lg-mal"
+      };
+      presence.setActivity(presenceData);
+  } else if (document.location.pathname.startsWith("/featured")) {
+    if (document.getElementsByClassName('mb16')[0].innerHTML === 'Related Articles') {
+      const presenceData: PresenceData = {
+        details: "Viewing an article",
+        state: document.getElementsByClassName("title")[0].innerHTML,
+        largeImageKey: "lg-mal"
+      };
+      presence.setActivity(presenceData);
+    } else {
+      const presenceData: PresenceData = {
+        details: "Viewing featured articles",
+        largeImageKey: "lg-mal"
+      };
+      presence.setActivity(presenceData);
+    }
+} else if (document.location.pathname.startsWith("/people")) {
+  if(document.getElementsByClassName('h1')[0].innerHTML === 'People') {
+    const presenceData: PresenceData = {
+      details: "Viewing peoples",
+      largeImageKey: "lg-mal"
+    };
+    presence.setActivity(presenceData);
+  } else {
+    const presenceData: PresenceData = {
+      details: "Viewing a person",
+      state: document.getElementsByClassName('title-name')[0].innerHTML.replace(/(<([^>]+)>)/ig, ''),
+      largeImageKey: "lg-mal"
+    };
+    presence.setActivity(presenceData);
+  }
+} else if (document.location.pathname.startsWith("/character")) {
+  if (document.getElementsByClassName('h1')[0].innerHTML === 'Characters') {
+    const presenceData: PresenceData = {
+      details: "Looking for characters",
+      largeImageKey: "lg-mal"
+    };
+    presence.setActivity(presenceData);
+  } else {
+    const presenceData: PresenceData = {
+      details: "Viewing an character",
+      state: document.getElementsByClassName('normal_header')[2].innerHTML.replace(/(<([^>]+)>)/ig, ''),
+      largeImageKey: "lg-mal"
+    };
+    presence.setActivity(presenceData);
+  }
+} else if (document.location.pathname.startsWith("/profile")) {
     const presenceData: PresenceData = {
       details: "Viewing a profile",
       state: document.location.pathname.split("/")[2],
