@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     pathname = document.location.pathname,
     hostname = document.location.hostname;
 
-  if (hostname === "mangahost2.com" || hostname === "www.mangahost2.com") {
+  if (hostname === "mangahosted.com" || hostname === "www.mangahosted.com") {
     if (pathname.startsWith("/")) {
       presenceData.details = "Vendo:";
       presenceData.state = "Website MangaHost";

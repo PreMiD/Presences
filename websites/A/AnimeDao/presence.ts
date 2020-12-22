@@ -14,9 +14,9 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
+  const startTime = Math.floor(Date.now() / 1000),
+    endTime = Math.floor(startTime - videoTime + videoDuration);
+  return [startTime, endTime];
 }
 
 let episode,
@@ -25,12 +25,20 @@ let episode,
   paused: boolean,
   played: boolean;
 
-presence.on("iFrameData", (data) => {
-  current = data.current;
-  duration = data.duration;
-  paused = data.paused;
-  played = data.played;
-});
+presence.on(
+  "iFrameData",
+  (data: {
+    current: number;
+    duration: number;
+    paused: boolean;
+    played: boolean;
+  }) => {
+    current = data.current;
+    duration = data.duration;
+    paused = data.paused;
+    played = data.played;
+  }
+);
 
 presence.on("UpdateData", async () => {
   const strings = await presence.getStrings({
@@ -42,8 +50,8 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "animedao_lg"
   };
-  if (hostname === `animedao26.stream` || hostname === `animedao28.stream`) {
-    const title = document.querySelector("h2").textContent.trim();
+  if (pathname.startsWith(`/view/`)) {
+    const title: string = document.querySelector("h2").textContent.trim();
     if ((episode = title.match(/\WEpisode\W\d{1,3}/)) != null) {
       presenceData.details = title.replace(episode[0], "");
       presenceData.state = `${episode[0]} - ${
@@ -51,6 +59,13 @@ presence.on("UpdateData", async () => {
       }`;
     } else {
       presenceData.details = title;
+    }
+    const video: HTMLVideoElement = document.querySelector(`video`);
+    if (video != null) {
+      played = video.currentTime != 0;
+      duration = video.duration;
+      current = video.currentTime;
+      paused = video.paused;
     }
     if (played) {
       if (!paused) {
@@ -63,14 +78,14 @@ presence.on("UpdateData", async () => {
         ? (await strings).paused
         : (await strings).playing;
     }
-  } else if (hostname === `animedao.com`) {
+  } else if (hostname === `animedao.to`) {
     presenceData.startTimestamp = startTimestamp;
     if (pathname === `/`) {
       presenceData.details = (await strings).browsing;
     } else if (pathname.startsWith(`/animelist`)) {
       presenceData.details = `Viewing the Animelist`;
     } else if (pathname.startsWith(`/genre`)) {
-      const genre = document.querySelector(`h2`).textContent.trim();
+      const genre: string = document.querySelector(`h2`).textContent.trim();
       presenceData.details = `Viewing genres`;
       if (pathname !== `/genre`) {
         presenceData.state = `${genre.replace(
