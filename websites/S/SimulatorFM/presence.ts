@@ -3,16 +3,11 @@ const presence = new Presence({
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
 
-let dj: HTMLElement,
-  title: HTMLElement,
-  artist: HTMLElement,
-  player: HTMLAudioElement;
-
 presence.on("UpdateData", async () => {
-  dj = document.querySelector(".m-player__presenter-name");
-  player = document.querySelector(".fa-pause");
-  title = document.querySelector(".m-player__title");
-  artist = document.querySelector(".m-player__artist");
+  const dj = document.querySelector(".m-player__presenter-name") as HTMLElement,
+  player = document.querySelector(".fa-pause") as HTMLElement,
+  title = document.querySelector(".m-player__title") as HTMLElement,
+  artist = document.querySelector(".m-player__artist") as HTMLElement;
 
   const presenceData: PresenceData = {
     largeImageKey: "largelogo"
