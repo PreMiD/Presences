@@ -22,7 +22,7 @@ Needed for the VLC presence to work.
 
 ![image](https://doomlord.s-ul.eu/LR9MZk2P)
 
-### Go to http://localhost:8080 **( THE PORT MUST BE 8080! )** and enter the password you've set before **( leave the username field blank )**
+### Restart VLC, then go to http://localhost:8080 **( THE PORT MUST BE 8080! )** and enter the password you've set before **( leave the username field blank )**
 
 ![image](https://doomlord.s-ul.eu/GKzMdZAl)
 
