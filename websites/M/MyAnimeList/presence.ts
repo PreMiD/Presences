@@ -84,16 +84,16 @@ presence.on("UpdateData", async () => {
       };
       presence.setActivity(presenceData);
   } else if (document.location.pathname.startsWith("/featured")) {
-    if (document.getElementsByClassName('mb16')[0].innerHTML === 'Related Articles') {
+    if (document.querySelector("meta[property='og:title']").getAttribute("content").includes('Featured Articles')) {
       const presenceData: PresenceData = {
-        details: "Viewing an article",
-        state: document.getElementsByClassName("title")[0].innerHTML,
+        details: "Viewing featured articles",
         largeImageKey: "lg-mal"
       };
       presence.setActivity(presenceData);
     } else {
       const presenceData: PresenceData = {
-        details: "Viewing featured articles",
+        details: "Viewing an article",
+        state: document.getElementsByClassName("title")[0].innerHTML,
         largeImageKey: "lg-mal"
       };
       presence.setActivity(presenceData);
