@@ -51,9 +51,7 @@ presence.on("UpdateData", async () => {
     } else if (document.querySelector(".entity-queue-message__indicator")) {
       presenceData.details =
         "Viewing a Discord bot: " +
-        document
-          .querySelector(".entity-header__name")
-          .textContent.trim();
+        document.querySelector(".entity-header__name").textContent.trim();
       presenceData.largeImageKey = "dblstaff";
       presenceData.state = "Bot isn't approved yet";
     } else {
@@ -79,9 +77,7 @@ presence.on("UpdateData", async () => {
     window.location.pathname == "/me"
   ) {
     presenceData.details = "Viewing a profile:";
-    presenceData.state = document.querySelector(
-      ".header"
-    ).textContent;
+    presenceData.state = document.querySelector(".header").textContent;
   } else if (window.location.pathname.startsWith("/api/docs")) {
     presenceData.state = "Discord Bot List API Documentation";
   }
@@ -95,9 +91,7 @@ presence.on("UpdateData", async () => {
     ) {
       presenceData.details = "Viewing:";
       presenceData.state = document.querySelector("#botlistitle").textContent;
-    } else if (
-      document.querySelector(".entity-header__name")
-    ) {
+    } else if (document.querySelector(".entity-header__name")) {
       if (document.querySelectorAll(".entity-header__button").length < 2) {
         presenceData.details =
           "Viewing a Discord Server | Server isn't published yet.";
