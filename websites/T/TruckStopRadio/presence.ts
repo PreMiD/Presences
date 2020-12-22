@@ -2,20 +2,14 @@ const presence = new Presence({
     clientId: "765735268421468190"
   }),
   browsingStamp = Math.floor(Date.now() / 1000),
-  dj = document.querySelector(
-    "#root > div:nth-child(3) > div > div:nth-child(2) > div > h4"
-  ) as HTMLElement;
+  dj = document.querySelector("#presenter-name") as HTMLElement;
 
 let title: HTMLElement, artist: HTMLElement, player: HTMLAudioElement;
 
 presence.on("UpdateData", async () => {
   player = document.querySelector(".uil-pause");
-  title = document.querySelector(
-    "#root > div:nth-child(3) > div > div > div > h2"
-  );
-  artist = document.querySelector(
-    "#root > div:nth-child(3) > div > div > div > h4"
-  );
+  title = document.querySelector("#song-title");
+  artist = document.querySelector("#song-artist");
 
   const presenceData: PresenceData = {
     largeImageKey: "largelogo"

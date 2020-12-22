@@ -14,11 +14,12 @@
     "tidal.com"
   ],
   "description": {
-    "tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir",
-    "en": "Tidal is a music stream service with very high sound quality"
+    "tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir.",
+    "en": "Tidal is a music stream service with very high sound quality.",
+    "pl": "Tidal to strona do streamingowania muzyki z bardzo wysoką jakością audio."
   },
   "service": "Tidal",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/clJrylu.jpg",
   "thumbnail": "https://i.imgur.com/UXbP7qG.png",
   "color": "#000000",

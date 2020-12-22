@@ -8,7 +8,7 @@ const presence = new Presence({
 
 function getAuthorString(): string {
   const authors = document.querySelectorAll(
-    "#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.leftColumn--5B2JF > div.dragItem--3WWiC > div.mediaInformation--1dAUh > div.mediaArtists--3UIyd > a"
+    "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > div.mediaArtists--2pRii > a"
   ) as NodeListOf<HTMLAnchorElement>;
   let authorsArray: Array<HTMLAnchorElement>, authorString: string;
 
@@ -24,7 +24,7 @@ function getAuthorString(): string {
       .join(", ")}`;
   } else
     authorString = (document.querySelector(
-      "#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.leftColumn--5B2JF > div.dragItem--3WWiC > div.mediaInformation--1dAUh > div.mediaArtists--3UIyd > a"
+      "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > div.mediaArtists--2pRii > a"
     ) as HTMLAnchorElement).innerText;
 
   return authorString;
@@ -46,19 +46,19 @@ function getTimestamps(
 
 presence.on("UpdateData", async () => {
   const title = (document.querySelector(
-      "#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.leftColumn--5B2JF > div.dragItem--3WWiC > div.mediaInformation--1dAUh > span > a"
+      "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > span > a"
     ) as HTMLElement).innerText,
     current = (document.querySelector(
-      "#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.rightColumn--ZsskN > div:nth-child(2) > time.currentTime--2fCqA"
+      "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.currentTime--3UDrQ"
     ) as HTMLElement).innerText,
     fulltime = (document.querySelector(
-      "#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.rightColumn--ZsskN > div:nth-child(2) > time.duration--3f3-B"
+      "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.duration--21kXU"
     ) as HTMLElement).innerText,
     albumTitle = (document.querySelector(
-      "#nowPlaying > div.scrollWrapper--3Is01 > div > div.leftColumn--27Pj1 > div:nth-child(6) > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > a"
+      "#nowPlaying > div.scrollWrapper--2Hy7_ > div > div.leftColumn--3OQ30 > div:nth-child(6) > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > a"
     ) as HTMLElement).innerText,
     playingbutton = (document.querySelector(
-      "#wimp > div > div > div > div.footerPlayer--2d1-L > div.bottomRow--25xS1 > div.centerColumn--1MAnN > div > button.playback-controls__button--white-icon.playbackToggle--1eQO2"
+      "#footerPlayer > div.centerColumn--3fkzm > div > button.playback-controls__button--white-icon.playbackToggle--3B2S9"
     ) as HTMLElement).getAttribute("data-type");
 
   if (title !== "" && current) {
