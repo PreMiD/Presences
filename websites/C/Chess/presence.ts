@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "699204548664885279"
-}),
+    clientId: "699204548664885279"
+  }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
@@ -83,9 +83,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Playing Fog of War";
     presenceData.smallImageKey = "fog";
     presenceData.smallImageText = "Fog of War";
-  } else if (
-    document.location.pathname.indexOf("/variants/horde/game/") == 0
-  ) {
+  } else if (document.location.pathname.indexOf("/variants/horde/game/") == 0) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Playing Horde";
     presenceData.smallImageKey = "horde";
