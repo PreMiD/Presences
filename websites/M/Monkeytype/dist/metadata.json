@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "Drull",
+      "id": "244953147154366464"
+    },
+    "url": "www.monkeytype.com",
+    "description": {
+      "en": "Monkeytype is a minimalistic typing test, featuring many test modes, an account and user configurable features."
+    },
+    "service": "Monkeytype",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/OnkMhFB.png",
+    "thumbnail": "https://i.imgur.com/HH1UVqD.png",
+    "color": "#383200",
+    "tags": [
+      "typing",
+      "game",
+      "test",
+      "keyboard"
+    ],
+    "category": "games"
+  }
