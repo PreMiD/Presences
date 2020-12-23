@@ -1,9 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "791258115622305813"
-});
+}),
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var viewing: any;
+ browsingStamp = Math.floor(Date.now() / 1000);
+let viewing: unknown;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -74,13 +74,16 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/hentai")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Hentai Images";
-    } else if (document.location.pathname.includes("/GIF/")) {
+    } else if (document.location.pathname.includes("/gif/" || "/GIF/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing Gifs";
       viewing = document.querySelector(
         "body > div#page-wrapper > div#page > div#main-wrapper.clearfix > div#main.clearfix > div#content.column > div.section > h1#page-title.title"
       );
       presenceData.state = "Watching: " + viewing.innerText;
+    } else if (document.location.pathname.includes("/GIF" || "/gif")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing Gifs";
     } else if (document.location.pathname.includes("/rule_63/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing Rule 63 Images";
