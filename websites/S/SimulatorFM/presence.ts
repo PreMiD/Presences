@@ -7,9 +7,8 @@ presence.on("UpdateData", async () => {
   const dj = document.querySelector(".m-player__presenter-name") as HTMLElement,
   player = document.querySelector(".fa-pause") as HTMLElement,
   title = document.querySelector(".m-player__title") as HTMLElement,
-  artist = document.querySelector(".m-player__artist") as HTMLElement;
-
-  const presenceData: PresenceData = {
+  artist = document.querySelector(".m-player__artist") as HTMLElement,
+  presenceData: PresenceData = {
     largeImageKey: "largelogo"
   };
 
