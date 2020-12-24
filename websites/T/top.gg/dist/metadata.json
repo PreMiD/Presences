@@ -7,6 +7,10 @@
     {
       "name": "Eren",
       "id": "478937019758673931"
+    },
+    {
+      "name": "Aurel",
+      "id": "669452973755072524"
     }
   ],
   "service": "top.gg",
@@ -16,7 +20,7 @@
     "de": "Rich Presence für top.gg - Die größte Discord Bot Liste und mehr"
   },
   "url": "top.gg",
-  "version": "1.3.9",
+  "version": "1.4.1",
   "logo": "https://i.imgur.com/fu207UB.png",
   "thumbnail": "https://i.imgur.com/6RKANLa.png",
   "color": "#7289DA",
@@ -25,5 +29,64 @@
     "bot",
     "gaming"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy",
+      "icon": "fas fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "server",
+      "if": {
+        "privacy": true
+      },
+      "title": "Show server",
+      "icon": "fas fa-server",
+      "value": true
+    },
+    {
+      "id": "bots",
+      "if": {
+        "privacy": true
+      },
+      "title": "Show bot",
+      "icon": "fas fa-robot",
+      "value": true
+    },
+    {
+      "id": "profiles",
+      "if": {
+        "privacy": true
+      },
+      "title": "Show profile",
+      "icon": "fas fa-user",
+      "value": true
+    },
+    {
+      "id": "staffsection",
+      "title": "Staff Section",
+      "icon": "fas fa-address-card",
+      "value": true
+    },
+    {
+      "id": "reviewedcount",
+      "if": {
+        "staffsection": true
+      },
+      "title": "Show review count",
+      "icon": "fas fa-walking",
+      "value": true
+    },
+    {
+      "id": "decline",
+      "if": {
+        "staffsection": true
+      },
+      "title": "Show declining",
+      "icon": "fas fa-times-circle",
+      "value": true
+    }
+  ]
 }
