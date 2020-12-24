@@ -2,7 +2,6 @@ const presence = new Presence({
   clientId: "629380028576301093"
 });
 
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "dblregular"
