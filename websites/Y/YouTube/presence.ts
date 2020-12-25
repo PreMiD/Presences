@@ -359,7 +359,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/user")
     ) {
       //Sometimes causes problems
-      let user;
+      let user: string;
       if (
         document.querySelector("#text.ytd-channel-name") &&
         document.title
@@ -449,7 +449,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/playlist")) {
       presenceData.details = (await strings).viewPlaylist;
 
-      let title = document.querySelector("#text-displayed");
+      let title: HTMLElement | null = document.querySelector("#text-displayed");
       if (title == null) {
         title = document.querySelector("#title > yt-formatted-string > a");
       }
@@ -535,7 +535,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = (await strings).studioVid;
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/video")) {
-      const title = document.querySelector("#entity-name");
+      const title: HTMLElement = document.querySelector("#entity-name");
       presenceData.startTimestamp = browsingStamp;
       if (document.location.pathname.includes("/edit")) {
         presenceData.details = (await strings).studioEdit;
