@@ -22,7 +22,6 @@ presence.on("UpdateData", async () => {
       "#player-profile-header-heading > div:nth-child(2) > div > div > div.medium.normal-color-name"
     ).textContent;
     if (showProfile) {
-      document.querySelector("#main > div.mixed-content > h1");
       presenceData.details = `Player: ${player_nickname}`;
       try {
         const player_clan = document.querySelector("#s4db-player-view-clan > a")
