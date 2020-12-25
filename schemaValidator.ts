@@ -7,7 +7,7 @@ import { blue, green, red, yellow } from "chalk";
 import axios from "axios";
 import { validate } from "jsonschema";
 
-const latestMetadataSchema = "https://schemas.premid.app/metadata/1.2",
+const latestMetadataSchema = "https://schemas.premid.app/metadata/1.3",
   stats = {
     validated: 0,
     validatedWithWarnings: 0,
