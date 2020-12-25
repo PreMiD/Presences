@@ -1,11 +1,11 @@
 const presence = new Presence({
-  clientId: "791258115622305813"
-}),
+    clientId: "791258115622305813"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "mplogo"
-  },
+      largeImageKey: "mplogo"
+    },
     title = document.querySelector(
       "body > div#page-wrapper > div#page > div#main-wrapper.clearfix > div#main.clearfix > div#content.column > div.section > h1#page-title.title"
     );
@@ -96,7 +96,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/random")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Random Comics";
-    } else if (document.location.pathname.includes("/search")) {    //TODO Show Searches
+    } else if (document.location.pathname.includes("/search")) {
+      //TODO Show Searches
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for Comics";
     }
