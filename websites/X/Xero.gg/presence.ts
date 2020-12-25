@@ -22,6 +22,7 @@ presence.on("UpdateData", async () => {
       "#player-profile-header-heading > div:nth-child(2) > div > div > div.medium.normal-color-name"
     ).textContent;
     if (showProfile) {
+      document.querySelector("#main > div.mixed-content > h1");
       presenceData.details = `Player: ${player_nickname}`;
       try {
         const player_clan = document.querySelector("#s4db-player-view-clan > a")
@@ -96,6 +97,17 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/download")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Download";
+  } else if (document.location.pathname.includes("/challenge")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Challenges";
+    try {
+      const challenges_title = document.querySelector(
+        "#settings-data-container > div.xero-header-standalone"
+      ).textContent;
+      presenceData.state += ` (${challenges_title})`;
+    } catch {
+      //Catch nothing
+    }
   } else if (document.location.pathname.includes("/notifications")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Notifications";
