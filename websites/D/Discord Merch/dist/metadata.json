@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "author": {
+        "name": "Scypter",
+        "id": "782251080179253250"
+    },
+    "contributors": [
+        {
+        "name": "MaXfAa",
+        "id": "448518859184406529"
+        }
+    ],
+    "service": "Discord Merch",
+    "description": {
+        "en": "Are you looking for a new wumpus themed santa hat? Then this is the site for you! The official discord merch store.",
+        "nl": "Ben je opzoek naar een nieuwe wumpus kerstman muts? Dan is dit de site voor jou! De officiële discord merch winkel.",
+        "fr": "Vous cherchez un nouveau chapeau de père Noël sur le thème de Wumpus ? Alors ce site est fait pour vous ! Le magasin officiel de la discorde.",
+        "de": "Sind Sie auf der Suche nach einem neuen Wumpus themed santa Hut? Dann ist dies die richtige Seite für Sie! Der offizielle Discord-Merch-Store."
+    },
+    "url": "discordmerch.com",
+    "version": "1.0.0",
+    "logo": "https://cdn.shopify.com/s/files/1/1033/1885/files/logo-transparent_185x.png?v=1603867104",
+    "thumbnail": "https://i.imgur.com/BC2bVa6.png",
+    "color": "#7289DA",
+    "tags": ["clothing", "discord", "shopping"],
+    "category": "other",
+    "regExp": "discordmerch[.]com[/]"
+}
