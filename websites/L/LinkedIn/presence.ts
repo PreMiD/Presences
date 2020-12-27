@@ -15,6 +15,18 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing Feed.";
       presenceData.startTimestamp = browsingStamp;
     }
+    //Feed subsections.
+    else if (path.includes("/feed/")) {
+      enum followSection {
+        "follow/" = "Browsing suggestions.",
+        "following/" = "Viewing Following.",
+        "followers/" = "Viewing Followers."
+      }
+
+      presenceData.details =
+        followSection[path.split("/feed/").pop() as keyof typeof followSection];
+      presenceData.startTimestamp = browsingStamp;
+    }
   }
 
   if (presenceData.details == null) {
