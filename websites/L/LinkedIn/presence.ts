@@ -43,6 +43,46 @@ presence.on("UpdateData", async () => {
       }
       presenceData.startTimestamp = browsingStamp;
     }
+    //My Network section & subsections.
+    else if (path.includes("/mynetwork/")) {
+      presenceData.details = "Managing Network:";
+      presenceData.startTimestamp = browsingStamp;
+
+      //Invitations subsection.
+      if (path.includes("/invitation-manager/")) {
+        presenceData.state = "Viewing Invitations.";
+      }
+      //Contacts subsections.
+      else if (path.includes("/import-contacts/")) {
+        //Contacts homepage.
+        if (path.endsWith("saved-contacts/")) {
+          presenceData.state = "Browsing Contacts.";
+        }
+        //Adding contacts.
+        else {
+          presenceData.state = "Adding Contacts.";
+        }
+      }
+      //Teammates subsection.
+      else if (path.includes("/colleagues/")) {
+        presenceData.state = "Browsing Colleagues.";
+      }
+      //My Network subsections with same link path structure.
+      else {
+        enum networkSubSection {
+          "connections/" = "Browsing Connections.",
+          "events/" = "Browsing Events.",
+          "newsletters/" = "Reading Newsletters."
+        }
+
+        presenceData.state =
+          networkSubSection[
+            path
+              .split(/\/[a-z]+-[a-z]+\//)
+              .pop() as keyof typeof networkSubSection
+          ] || "Homepage.";
+      }
+    }
   }
 
   if (presenceData.details == null) {
