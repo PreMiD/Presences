@@ -32,8 +32,7 @@ presence.on("UpdateData", async () => {
       const start = numBans.indexOf("of ") + 3, end = numBans.indexOf(" entries");
       numBans = numBans.substr(start, end).replace(" entries", "");
       presenceData.details = "Viewing " + numBans + " bans";
-      const currentPage = document.querySelector("#bans_paginate > ul > li.paginate_button.active > a");
-      const lastPage = document.querySelector("#bans_paginate > ul > li:nth-child(8) > a");
+      const currentPage = document.querySelector("#bans_paginate > ul > li.paginate_button.active > a"), lastPage = document.querySelector("#bans_paginate > ul > li:nth-child(8) > a");
       presenceData.state = "(" + currentPage.textContent + "/" +  lastPage.textContent + ")";
       presenceData.startTimestamp = currentTime;
     }
