@@ -17,5 +17,13 @@
   "tags": [
     "jobs"
   ],
-  "category": "socials"
+  "category": "socials",
+  "settings": [
+    {
+      "id": "showJobsQuery",
+      "title": "Show Jobs searching query.",
+      "icon": "fas fa-briefcase",
+      "value": false
+    }
+  ]
 }

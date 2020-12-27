@@ -34,6 +34,7 @@ presence.on("UpdateData", async () => {
         ];
 
       presenceData.details = subSection;
+      //If the user is on following/ subsection, show the selected filter.
       if (subSection == feedSubSection["following/"]) {
         presenceData.state = `Filtering by ${
           filterType[
@@ -82,6 +83,58 @@ presence.on("UpdateData", async () => {
               .pop() as keyof typeof networkSubSection
           ] || "Homepage.";
       }
+    }
+    //Jobs section.
+    else if (path.includes("/jobs/") || path == "/my-items/saved-jobs/") {
+      presenceData.startTimestamp = browsingStamp;
+
+      //Application settings subsection.
+      if (path.endsWith("application-settings/")) {
+        presenceData.details = "Editing settings:";
+        presenceData.state = "Application.";
+      }
+      //Others subsections.
+      else {
+        presenceData.details = "Browsing Jobs:";
+
+        //Saved Jobs subsection.
+        if (path == "/my-items/saved-jobs/") {
+          presenceData.state = "Saved Jobs.";
+        }
+        //Searching for a Job subsection.
+        else if (path == "/jobs/search/") {
+          //Getting user preference for showJobsQuery.
+          const showJobsQuery = await presence.getSetting("showJobsQuery");
+
+          if (showJobsQuery) {
+            const jobsQuery = decodeURI(
+              document.location.search
+                .split("keywords=")
+                .pop()
+                .split("&")
+                .shift()
+            );
+
+            presenceData.state = `Searching for a "${jobsQuery}" position.`;
+          } else {
+            presenceData.state = "Searching for a job.";
+          }
+        }
+        //Homepage.
+        else {
+          presenceData.state = "Homepage.";
+        }
+      }
+    }
+    //Interview prep section (Jobs related section with a different path).
+    else if (path.includes("/interview-prep/")) {
+      const interviewPrepArg = document.querySelector(
+        "div.application-outlet > div.authentication-outlet > main > div > section > #ember50 > header > div > div.mr1 > h2"
+      ).innerHTML;
+
+      presenceData.details = "Taking an Interview Prep:";
+      presenceData.state = `${interviewPrepArg}.`;
+      presenceData.startTimestamp = browsingStamp;
     }
   }
 
