@@ -64,6 +64,8 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Help Center";
         }
         break;
+      default:
+        presenceData.details = "Browsing...";
     }
   }
   presence.setActivity(presenceData);
