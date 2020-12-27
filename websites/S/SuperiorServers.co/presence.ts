@@ -2,10 +2,8 @@ const presence = new Presence({
     clientId: "792094839414980639"
 });
 
-const currentTime = Math.floor(Date.now() / 1000);
-
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
+  const currentTime = Math.floor(Date.now() / 1000), presenceData: PresenceData = {
     largeImageKey: "main",
     startTimestamp: currentTime
   };
@@ -30,11 +28,8 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = currentTime;
     }
     if (document.location.pathname.includes("/bans")){
-      let numBans;
-      const start, end;
-      numBans = document.querySelector("div.dataTables_info").textContent;
-      start = numBans.indexOf("of ") + 3;
-      end = numBans.indexOf(" entries");
+      let numBans = document.querySelector("div.dataTables_info").textContent;
+      const start = numBans.indexOf("of ") + 3, end = numBans.indexOf(" entries");
       numBans = numBans.substr(start, end).replace(" entries", "");
       presenceData.details = "Viewing " + numBans + " bans";
       const currentPage = document.querySelector("#bans_paginate > ul > li.paginate_button.active > a");
