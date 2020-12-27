@@ -17,14 +17,30 @@ presence.on("UpdateData", async () => {
     }
     //Feed subsections.
     else if (path.includes("/feed/")) {
-      enum followSection {
+      enum feedSubSection {
         "follow/" = "Browsing suggestions.",
-        "following/" = "Viewing Following.",
+        "following/" = "Viewing Following:",
         "followers/" = "Viewing Followers."
       }
+      enum filterType {
+        connection = "Connections.",
+        member = "Members.",
+        company = "Companies.",
+        channel = "Hashtags."
+      }
+      const subSection =
+        feedSubSection[
+          path.split("/feed/").pop() as keyof typeof feedSubSection
+        ];
 
-      presenceData.details =
-        followSection[path.split("/feed/").pop() as keyof typeof followSection];
+      presenceData.details = subSection;
+      if (subSection == feedSubSection["following/"]) {
+        presenceData.state = `Filtering by ${
+          filterType[
+            document.location.search.split("=").pop() as keyof typeof filterType
+          ] || "All."
+        }`;
+      }
       presenceData.startTimestamp = browsingStamp;
     }
   }
