@@ -66,6 +66,7 @@ presence.on("UpdateData", async () => {
         break;
       default:
         presenceData.details = "Browsing...";
+        break;
     }
   }
   presence.setActivity(presenceData);
