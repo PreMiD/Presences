@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "792094839414980639" //The client ID of the Application created at https://discordapp.com/developers/applications
+    clientId: "792094839414980639"
 });
 
 var currentTime = Math.floor(Date.now() / 1000);
