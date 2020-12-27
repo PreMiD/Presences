@@ -2,9 +2,9 @@ const presence = new Presence({
     clientId: "792094839414980639"
 });
 
-var currentTime = Math.floor(Date.now() / 1000);
+let currentTime = Math.floor(Date.now() / 1000);
 
-var homeURL = new URL(document.location.href);
+let homeURL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -18,28 +18,28 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = currentTime;
     }
     if (document.location.pathname.includes("/staff")){
-      var DRPStaff = document.querySelector("#RP_info").textContent;
+      let DRPStaff = document.querySelector("#RP_info").textContent;
       DRPStaff = DRPStaff.substr((DRPStaff.indexOf(" of") + 3), DRPStaff.indexOf(" entries")).replace(" entries", "");
-      var SWRPStaff = document.querySelector("#SWRP_info").textContent;
+      let SWRPStaff = document.querySelector("#SWRP_info").textContent;
       SWRPStaff = SWRPStaff.substr((SWRPStaff.indexOf(" of") + 3), SWRPStaff.indexOf(" entries")).replace(" entries", "");
-      var MilRPStaff = document.querySelector("#MilRP_info").textContent;
+      let MilRPStaff = document.querySelector("#MilRP_info").textContent;
       MilRPStaff = MilRPStaff.substr((MilRPStaff.indexOf(" of") + 3), MilRPStaff.indexOf(" entries")).replace(" entries", "");
-      var AllServersStaff = document.querySelector("#NO_ID_info").textContent;
+      let AllServersStaff = document.querySelector("#NO_ID_info").textContent;
       AllServersStaff = AllServersStaff.substr((AllServersStaff.indexOf(" of") + 3), AllServersStaff.indexOf(" entries")).replace(" entries", "");
-      var totalStaff = (parseInt(DRPStaff) + parseInt(SWRPStaff) + parseInt(MilRPStaff) + parseInt(AllServersStaff)).toString();
+      let totalStaff = (parseInt(DRPStaff) + parseInt(SWRPStaff) + parseInt(MilRPStaff) + parseInt(AllServersStaff)).toString();
       presenceData.details = "Viewing the Staff list";
       presenceData.state = totalStaff + " total members";
       presenceData.startTimestamp = currentTime;
     }
     if (document.location.pathname.includes("/bans")){
-      var numBans = document.querySelector("div.dataTables_info").textContent;
-      var start, end;
+      let numBans = document.querySelector("div.dataTables_info").textContent;
+      let start, end;
       start = numBans.indexOf("of ") + 3;
       end = numBans.indexOf(" entries");
       numBans = numBans.substr(start, end).replace(" entries", "")
       presenceData.details = "Viewing " + numBans + " bans";
-      var currentPage = document.querySelector("#bans_paginate > ul > li.paginate_button.active > a");
-      var lastPage = document.querySelector("#bans_paginate > ul > li:nth-child(8) > a");
+      let currentPage = document.querySelector("#bans_paginate > ul > li.paginate_button.active > a");
+      let lastPage = document.querySelector("#bans_paginate > ul > li:nth-child(8) > a");
       presenceData.state = "(" + currentPage.textContent + "/" +  lastPage.textContent + ")";
       presenceData.startTimestamp = currentTime;
     }
@@ -115,12 +115,12 @@ presence.on("UpdateData", async () => {
         presenceData.state = "(DarkRP)";
       } else if (document.location.pathname.includes("/milrp")){
         presenceData.details = "Viewing MilRP GMs";
-        var GMs = document.querySelector("#gamemasters_info").textContent;
+        let GMs = document.querySelector("#gamemasters_info").textContent;
         GMs = GMs.substr((GMs.indexOf(" of") + 3), GMs.indexOf(" entries")).replace(" entries", "");
         presenceData.state = GMs + " total members";
       } else if (document.location.pathname.includes("/cwrp")){
         presenceData.details = "Viewing CWRP GMs";
-        var GMs = document.querySelector("#gamemasters_info").textContent;
+        let GMs = document.querySelector("#gamemasters_info").textContent;
         GMs = GMs.substr((GMs.indexOf(" of") + 3), GMs.indexOf(" entries")).replace(" entries", "");
         presenceData.state = GMs + " total members";
       }
@@ -154,8 +154,8 @@ presence.on("UpdateData", async () => {
     }
     if (document.location.pathname.includes("/profile/")){
       presenceData.details = "Viewing " + document.querySelector("#app > div:nth-child(2) > div > div.panel.panel-default > div.panel-body > div > div:nth-child(1) > span").textContent + "'s profile";
-      var steamID32;
-      var steamID64 = BigInt(document.location.pathname.substr(document.location.pathname.indexOf('/', 2)).replace("/", "").replace("/", ""));
+      let steamID32;
+      let steamID64 = BigInt(document.location.pathname.substr(document.location.pathname.indexOf('/', 2)).replace("/", "").replace("/", ""));
       if ((steamID64 % 2n) == 0n){
         steamID32 = "STEAM_0:0:" + (((steamID64 - 76561197960265728n) / 2n)).toString();
       }
