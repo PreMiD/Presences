@@ -1,6 +1,8 @@
 const presence = new Presence({
     clientId: "786739998011293717"
-}), browsingStamp = Math.floor(Date.now() / 1000);
+}), 
+browsingStamp = Math.floor(Date.now() / 1000),
+userName = document.querySelector("#wardrobe > div > div.UserInfo > div.--header > div.--info > div.--user-container > div.--user-info > div.--username-container > span");
 
 let item: HTMLElement,
 item2: HTMLElement;
@@ -102,7 +104,7 @@ presence.on("UpdateData", async () => {
                 presenceData.state = item.innerHTML.substring(0, 125) + "...";
             } else {
                 presenceData.state = item.innerHTML;
-            }     
+            }
             presence.setActivity(presenceData);
             
         } else if (document.location.href.includes("www.grailed.com/drycleanonly/categories/")) {
@@ -114,7 +116,7 @@ presence.on("UpdateData", async () => {
                 presenceData.state = item.innerHTML.substring(0, 125) + "...";
             } else {
                 presenceData.state = item.innerHTML;
-            }    
+            }
             presence.setActivity(presenceData);
 
         } else if (document.location.href.includes("www.grailed.com/products/")) {
@@ -127,7 +129,7 @@ presence.on("UpdateData", async () => {
                 presenceData.state = item2.textContent + ": " + item.textContent.substring(0, 105) + "...";
             } else {
                 presenceData.state = item2.textContent + ": " + item.textContent;
-            }   
+            }
             presence.setActivity(presenceData);
 
         }  else if (document.location.href.includes("www.grailed.com/drycleanonly")) {
@@ -153,7 +155,7 @@ presence.on("UpdateData", async () => {
             } else {
                 presenceData.details = "Reading:";
                 presenceData.state = "Dry Clean Only";
-            } 
+            }
             presence.setActivity(presenceData);
 
         } else if (document.location.href.includes("www.grailed.com/shop")) {
@@ -184,15 +186,13 @@ presence.on("UpdateData", async () => {
             presenceData.state = "The Main Page";
             presence.setActivity(presenceData);
 
-        } 
-        const userName = document.querySelector("#wardrobe > div > div.UserInfo > div.--header > div.--info > div.--user-container > div.--user-info > div.--username-container > span");
-        if (userName != null) {
+        } else if (userName != null) {
             presenceData.details = "Viewing a User:";
             if (userName.innerHTML.length > 128) {
                 presenceData.state = userName.innerHTML.substring(0, 125) + "...";
             } else {
                 presenceData.state = userName.innerHTML;
-            } 
+            }
             presence.setActivity(presenceData);
         } else {
             presence.setActivity();
