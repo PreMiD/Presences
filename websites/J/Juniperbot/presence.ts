@@ -72,7 +72,7 @@ switch (true) {
     break;
   case pathIncludes("/dashboard/"):
     presenceData.details = (await strings).serverdash;
-    presenceData.state = (await strings).serverdashname.replace('{name}',
+    presenceData.state = (await strings).serverdashname.replace('{0}',
      document.querySelector(
        ".guild--info h1.font-weight-thin.display-2"
      ).innerHTML);
