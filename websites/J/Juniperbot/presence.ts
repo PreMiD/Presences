@@ -25,7 +25,7 @@ interface LangStrings {
 async function getStrings(): Promise<LangStrings> {
   return presence.getStrings(
     {
-      reading: "general.browsing",
+      reading: "general.readingAbout",
       leaderboard: "juniperbot.leaderboard",
       viewMainPage: "juniperbot.mainpage",
       serverdash: "juniperbot.serverdash",
@@ -35,8 +35,8 @@ async function getStrings(): Promise<LangStrings> {
       commands: "juniperbot.commands",
       stats: "juniperbot.stats",
       usercard: "juniperbot.usercard",
-      terms: "juniperbot.terms",
-      privacy: "juniperbot.privacy",
+      terms: "general.terms",
+      privacy: "general.privacy",
       cookies: "juniperbot.cookies"
 
     },
@@ -97,15 +97,15 @@ switch (true) {
    presenceData.details = (await strings).usercard;
     break;
   case pathIncludes('/terms'):
-    presenceData.details = (await strings).terms;
+    presenceData.details = (await strings).reading + (await strings).terms;
     presenceData.smallImageKey = "list";
     break;
   case pathIncludes('/cookie'):
-    presenceData.details = (await strings).cookies;
+    presenceData.details = (await strings).reading + (await strings).cookies;
     presenceData.smallImageKey = 'list';
     break;
   case pathIncludes('/privacy'):
-    presenceData.details = (await strings).privacy;
+    presenceData.details = (await strings).reading + (await strings).privacy;
     presenceData.smallImageKey = 'list';
     break;
   default:
@@ -124,9 +124,8 @@ switch (true) {
       presenceData.state = "feedback.juniper.bot";
       switch (true) {
         case pathIncludes('/posts/'):
-          presenceData.details = `${(await strings).reading}: ${
-            document.querySelector(".post-header h1").innerHTML
-          }`;
+          presenceData.details = (await strings).reading +
+            document.querySelector(".post-header h1").innerHTML;
           break;
         default:
          presenceData.details = (await strings).viewMainPage;
