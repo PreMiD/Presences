@@ -27,22 +27,8 @@
   "category": "other",
   "settings": [
     {
-      "id": "juniper",
-      "title": "To display the status of actions on juniper.bot",
-      "icon": "fas fa-lightbulb",
-      "value": true
-    },
-    {
-      "id": "docs",
-      "title": "To display the status of actions on docs.juniper.bot",
-      "icon": "fas fa-lightbulb",
-      "value": true
-    },
-    {
-      "id": "fback",
-      "title": "To display the status of actions on feedback.juniper.bot",
-      "icon": "fas fa-lightbulb",
-      "value": true
+      "id": "lang",
+      "multiLanguage": true
     }
   ]
 }
