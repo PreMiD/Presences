@@ -172,6 +172,18 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Notifications.";
       presenceData.startTimestamp = browsingStamp;
     }
+    //Profile page section.
+    else if (path.match(/\/in\/[A-z0-9-]+\/$/)) {
+      const username = document
+        .querySelector(
+          "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div:nth-child(2) > main > div > section > div:nth-child(2) > div:nth-child(2) > div:first-child > ul:first-child > li:first-child"
+        )
+        .innerHTML.trim();
+
+      presenceData.details = "Viewing a Profile:";
+      presenceData.state = `${username}.`;
+      presenceData.startTimestamp = browsingStamp;
+    }
   }
 
   if (presenceData.details == null) {
