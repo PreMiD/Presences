@@ -173,15 +173,27 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     }
     //Profile page section.
-    else if (path.match(/\/in\/[A-z0-9-]+\/$/)) {
-      const username = document
+    else if (path.match(/\/in\/[A-z0-9-]+\//)) {
+      const userName = document
         .querySelector(
           "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div:nth-child(2) > main > div > section > div:nth-child(2) > div:nth-child(2) > div:first-child > ul:first-child > li:first-child"
         )
         .innerHTML.trim();
 
       presenceData.details = "Viewing a Profile:";
-      presenceData.state = `${username}.`;
+      presenceData.state = `${userName}.`;
+      presenceData.startTimestamp = browsingStamp;
+    }
+    //Company page section.
+    else if (path.match(/\/company\/[A-z0-9-]+\//)) {
+      const companyName = document
+        .querySelector(
+          "div.application-outlet > div.authentication-outlet > div > div:nth-child(3) > div:first-child > section > div > div > div:nth-child(2) > div:first-child > div:first-child > div:nth-child(2) > div > h1 > span"
+        )
+        .innerHTML.trim();
+
+      presenceData.details = "Viewing a Company:";
+      presenceData.state = `${companyName}.`;
       presenceData.startTimestamp = browsingStamp;
     }
   }
