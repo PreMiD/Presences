@@ -196,6 +196,18 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${companyName}.`;
       presenceData.startTimestamp = browsingStamp;
     }
+    //School page section.
+    else if (path.match(/\/school\/[A-z0-9-]+\//)) {
+      const schoolName = document
+        .querySelector(
+          "div.application-outlet > div.authentication-outlet > div > div:nth-child(3) > div:first-child > section > div > div > div:nth-child(2) > div:first-child > div:first-child > div:nth-child(2) > div > h1 > span"
+        )
+        .innerHTML.trim();
+
+      presenceData.details = "Viewing a School:";
+      presenceData.state = `${schoolName}.`;
+      presenceData.startTimestamp = browsingStamp;
+    }
   }
 
   if (presenceData.details == null) {
