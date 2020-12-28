@@ -3,9 +3,11 @@ const presence: Presence = new Presence({
   }),
   startTimestamp: number = Math.floor(Date.now() / 1000),
   pathDescriptors = [
+    ["/learn/vocabulary", "Learning new vocabulary"],
+    ["/learn/kanji", "Learning new kanji"],
+    ["/learn/hiragana", "Learning the Hiragana"],
+    ["/learn/katakana", "Learning the Katakana"],
     ["/tools/flashcards/review", "Reviewing flashcards"],
-    ["/tools/flashcards/learn/vocabulary", "Learning new vocabulary"],
-    ["/tools/flashcards/learn/kanji", "Learning new kanji"],
     ["/tools/flashcards/browse", "Browsing flashcard decks"],
     ["/tools/shadow_loops", "Browsing shadow loop decks"],
     ["/tools/pitch", "Studying the pitch of sentences"],
@@ -15,8 +17,6 @@ const presence: Presence = new Presence({
     ["/tools/stats", "Viewing their stats"],
     ["/tools/extra-credit", "Earning some extra credits"],
     ["/tools/using-nativshark", "Reading 'Using NativShark'"],
-    ["/learn/hiragana", "Learning the Hiragana"],
-    ["/learn/katakana", "Learning the Katakana"],
     ["/faq", "Reading the FAQ"]
   ];
 

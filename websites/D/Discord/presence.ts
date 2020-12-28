@@ -334,7 +334,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "discord.gg") {
     presenceData.details = "Viewing an invite";
     presenceData.startTimestamp = getTimeStamp();
-  }  else if (document.location.hostname == "discordmerch.com") {
+  } else if (document.location.hostname == "discordmerch.com") {
     if (document.location.pathname == "/") {
       presenceData.details = "Browsing the homepage of the merch store";
       presenceData.startTimestamp = getTimeStamp();
@@ -342,7 +342,9 @@ presence.on("UpdateData", async () => {
       if (document.location.pathname.split("/")[2] == "all") {
         if (document.location.pathname.split("/")[3] == "products") {
           presenceData.details = "Viewing a merch product";
-          presenceData.state = document.getElementsByClassName("product-single__title")[0].textContent;
+          presenceData.state = document.getElementsByClassName(
+            "product-single__title"
+          )[0].textContent;
           presenceData.startTimestamp = getTimeStamp();
         } else {
           presenceData.details = "Browsing all merch products";
@@ -351,16 +353,22 @@ presence.on("UpdateData", async () => {
       } else if (document.location.pathname.split("/")[2] == "cool-kids") {
         if (document.location.pathname.split("/")[3] == "products") {
           presenceData.details = "Viewing a merch product";
-          presenceData.state = document.getElementsByClassName("product-single__title")[0].textContent;
+          presenceData.state = document.getElementsByClassName(
+            "product-single__title"
+          )[0].textContent;
           presenceData.startTimestamp = getTimeStamp();
         } else {
           presenceData.details = "Viewing the Dark Theme merch collection";
           presenceData.startTimestamp = getTimeStamp();
         }
-      } else if (document.location.pathname.split("/")[2] == "snowsgiving-2020") {
+      } else if (
+        document.location.pathname.split("/")[2] == "snowsgiving-2020"
+      ) {
         if (document.location.pathname.split("/")[3] == "products") {
           presenceData.details = "Viewing a merch product";
-          presenceData.state = document.getElementsByClassName("product-single__title")[0].textContent;
+          presenceData.state = document.getElementsByClassName(
+            "product-single__title"
+          )[0].textContent;
           presenceData.startTimestamp = getTimeStamp();
         } else {
           presenceData.details = "Viewing the snowsgiving merch collection";
@@ -373,7 +381,9 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.split("/")[1] == "products") {
       if (document.location.pathname.split("/")[2]) {
         presenceData.details = "Viewing a merch product";
-        presenceData.state = document.getElementsByClassName("product-single__title")[0].textContent;
+        presenceData.state = document.getElementsByClassName(
+          "product-single__title"
+        )[0].textContent;
         presenceData.startTimestamp = getTimeStamp();
       } else {
         presenceData.details = "Browsing the merch catalog";
@@ -383,7 +393,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing their cart in the merch store";
       presenceData.startTimestamp = getTimeStamp();
     } else if (document.location.pathname.split("/")[1] == "pages") {
-      if(document.location.pathname.split("/")[2] == "contact") {
+      if (document.location.pathname.split("/")[2] == "contact") {
         presenceData.details = "Viewing the contact us page in the merch store";
         presenceData.startTimestamp = getTimeStamp();
       } else if (document.location.pathname.split("/")[2] == "faq") {
