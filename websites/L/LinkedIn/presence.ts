@@ -136,6 +136,37 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${interviewPrepArg}.`;
       presenceData.startTimestamp = browsingStamp;
     }
+    //Messaging section.
+    else if (path.includes("/messaging/")) {
+      presenceData.details = "Messaging:";
+      presenceData.startTimestamp = browsingStamp;
+
+      //New message subsection.
+      if (path == "/messaging/thread/new/") {
+        presenceData.state = "Writing a new message.";
+      }
+      //New group subsection.
+      else if (path == "/messaging/compose-group/") {
+        presenceData.state = "Creating a new group.";
+      }
+      //Chats subsection.
+      else {
+        //Getting user preference for showChatUsername.
+        const showChatUsername = await presence.getSetting("showChatUsername");
+
+        if (showChatUsername) {
+          const charUsername = document
+            .querySelector(
+              "div.application-outlet > div.authentication-outlet > #messaging > div > div > div:nth-child(2) > div:first-child > div > a > div > div > dl > dt > #thread-detail-jump-target"
+            )
+            .innerHTML.trim();
+
+          presenceData.state = `Chatting with ${charUsername}`;
+        } else {
+          presenceData.state = "Chatting with someone.";
+        }
+      }
+    }
   }
 
   if (presenceData.details == null) {

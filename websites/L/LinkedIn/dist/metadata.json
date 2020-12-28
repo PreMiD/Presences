@@ -21,8 +21,14 @@
   "settings": [
     {
       "id": "showJobsQuery",
-      "title": "Show Jobs searching query.",
+      "title": "Show jobs searching query.",
       "icon": "fas fa-briefcase",
+      "value": false
+    },
+    {
+      "id": "showChatUsername",
+      "title": "Show profile name while messaging.",
+      "icon": "fas fa-user",
       "value": false
     }
   ]
