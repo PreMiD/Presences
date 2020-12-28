@@ -10,12 +10,24 @@ presence.on("UpdateData", async () => {
     path = document.location.pathname;
 
   if (document.location.hostname == "www.linkedin.com") {
-    //Feed section.
+    //Homepage.
     if (path == "/feed/") {
       presenceData.details = "Browsing Feed.";
       presenceData.startTimestamp = browsingStamp;
     }
-    //Feed subsections.
+    //Feed hashtag subsection.
+    else if (path.includes("/feed/hashtag/")) {
+      const hashtagName = document
+        .querySelector(
+          "div.application-outlet > div.authentication-outlet > div > div > div > div > section > div > div:first-child > div > h3 > span > span:last-child"
+        )
+        .innerHTML.trim();
+
+      presenceData.details = "Browsing Feed:";
+      presenceData.state = `#${hashtagName}.`;
+      presenceData.startTimestamp = browsingStamp;
+    }
+    //Feed follow subsections.
     else if (path.includes("/feed/")) {
       enum feedSubSection {
         "follow/" = "Browsing suggestions.",
