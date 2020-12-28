@@ -77,37 +77,46 @@ switch (true) {
        ".guild--info h1.font-weight-thin.display-2"
      ).innerHTML);
     break;
+
   case pathIncludes("/donate"):
    presenceData.details = (await strings).donate;
     presenceData.smallImageKey = "donate";
     break;
+
   case pathIncludes("/servers"):
     presenceData.details = (await strings).servers;
     presenceData.smallImageKey = "list";
     break;
+
   case pathIncludes("/commands"):
     presenceData.details = (await strings).commands;
     presenceData.smallImageKey = "list";
     break;
+
   case pathIncludes('/status'):
     presenceData.details = (await strings).stats;
     presenceData.smallImageKey = 'stats';
     break;
+
   case pathIncludes('/user/card'):
    presenceData.details = (await strings).usercard;
     break;
+
   case pathIncludes('/terms'):
-    presenceData.details = (await strings).reading + (await strings).terms;
+    presenceData.details = (await strings).reading + " " + (await strings).terms;
     presenceData.smallImageKey = "list";
     break;
+
   case pathIncludes('/cookie'):
-    presenceData.details = (await strings).reading + (await strings).cookies;
+    presenceData.details = (await strings).reading + " " + (await strings).cookies;
     presenceData.smallImageKey = 'list';
     break;
+
   case pathIncludes('/privacy'):
-    presenceData.details = (await strings).reading + (await strings).privacy;
+    presenceData.details = (await strings).reading + " " + (await strings).privacy;
     presenceData.smallImageKey = 'list';
     break;
+
   default:
     presenceData.details = "Main page";
     break;
@@ -124,7 +133,7 @@ switch (true) {
       presenceData.state = "feedback.juniper.bot";
       switch (true) {
         case pathIncludes('/posts/'):
-          presenceData.details = (await strings).reading +
+          presenceData.details = (await strings).reading + " " +
             document.querySelector(".post-header h1").innerHTML;
           break;
         default:
