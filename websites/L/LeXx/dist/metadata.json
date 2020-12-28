@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "Tim",
+      "id": "277043432063631360"
+    },
+    "url": [
+      "www.lexx.app",
+      "lexx.app",
+      "beta.lexx.app",
+      "status.lexx.app",
+      "dev.lexx.app",
+      "alpha.lexx.app"
+    ],
+    "description": {
+      "de": "LeXx bietet einen Discord Bot mit vielen Funktionen und Anwendungsmöglichkeiten",
+      "en": "LeXx offers a discord bot with awesome features"
+    },
+    "service": "LeXx",
+    "version": "1.0.3",
+    "logo": "https://lexx.app/favicon/favicon-96x96.png",
+    "thumbnail": "https://lexx.app/favicon/banner.png",
+    "color": "#FF7D00",
+    "tags": [
+      "lexx",
+      "bot",
+      "discord"
+    ],
+    "category": "other"
+  }
