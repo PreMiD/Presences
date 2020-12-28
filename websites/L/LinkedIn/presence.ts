@@ -167,6 +167,11 @@ presence.on("UpdateData", async () => {
         }
       }
     }
+    //Notifications section.
+    else if (path == "/notifications/") {
+      presenceData.details = "Viewing Notifications.";
+      presenceData.startTimestamp = browsingStamp;
+    }
   }
 
   if (presenceData.details == null) {
