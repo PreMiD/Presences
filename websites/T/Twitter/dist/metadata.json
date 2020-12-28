@@ -3,6 +3,12 @@
     "name": "Alanexei ✔",
     "id": "163319338403627008"
   },
+  "contributors": [
+    {
+      "name": "Bas950",
+      "id": "241278257335500811"
+    }
+  ],
   "service": "Twitter",
   "description": {
     "en": "From breaking news and entertainment to sports and politics, from big events to everyday interests. If it's happening anywhere, it's happening on Twitter.",
@@ -14,7 +20,7 @@
     "twitter.com",
     "tweetdeck.twitter.com"
   ],
-  "version": "1.5.5",
+  "version": "2.0.0",
   "logo": "https://i.imgur.com/sm7Qccu.png",
   "thumbnail": "https://i.imgur.com/0RULzdw.png",
   "color": "#48C0EB",
@@ -22,5 +28,23 @@
     "social",
     "media"
   ],
-  "category": "socials"
+  "category": "socials",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "time",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
 }
