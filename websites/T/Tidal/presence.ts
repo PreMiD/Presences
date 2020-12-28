@@ -12,8 +12,8 @@ interface langStrings {
 const getLanguages = async () => {
     return presence.getStrings(
       {
-        play: "presence.playback.playing",
-        pause: "presence.playback.paused",
+        play: "general.playing",
+        pause: "general.paused",
         browsing: "general.browsing",
         listening: "general.listeningMusic"
       },
