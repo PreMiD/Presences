@@ -220,6 +220,29 @@ presence.on("UpdateData", async () => {
       presenceData.state = `${schoolName}.`;
       presenceData.startTimestamp = browsingStamp;
     }
+    //Groups section.
+    else if (path.startsWith("/groups/")) {
+      //Group page subsection.
+      if (path.match(/\/groups\/[0-9]+\//)) {
+        const groupName = document.title.replace(" | Groups | LinkedIn", "");
+
+        presenceData.details = "Viewing a Group:";
+        presenceData.state = `${groupName}.`;
+        presenceData.startTimestamp = browsingStamp;
+      } else {
+        presenceData.details = "Browsing Groups:";
+        presenceData.startTimestamp = browsingStamp;
+
+        //Requested groups subsection.
+        if (path == "/groups/requests/") {
+          presenceData.state = "Requested groups.";
+        }
+        //Homepage.
+        else {
+          presenceData.state = "Your groups.";
+        }
+      }
+    }
   }
 
   if (presenceData.details == null) {
