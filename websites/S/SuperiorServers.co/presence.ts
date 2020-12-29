@@ -14,10 +14,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = currentTime;
     }
     if (document.location.pathname.includes("/staff")){
-      let DRPStaff = document.querySelector("#RP_info").textContent.substr((document.querySelector("#RP_info").textContent.indexOf(" of") + 3), document.querySelector("#RP_info").textContent.indexOf(" entries")).replace(" entries", "");
-      let SWRPStaff = document.querySelector("#SWRP_info").textContent.substr((document.querySelector("#SWRP_info").textContent.indexOf(" of") + 3), document.querySelector("#SWRP_info").textContent.indexOf(" entries")).replace(" entries", "");
-      let MilRPStaff = document.querySelector("#MilRP_info").textContent.substr((document.querySelector("#MilRP_info").textContent.indexOf(" of") + 3), document.querySelector("#MilRP_info").textContent.indexOf(" entries")).replace(" entries", "");
-      let AllServersStaff = document.querySelector("#NO_ID_info").textContent.substr((document.querySelector("#NO_ID_info").textContent.indexOf(" of") + 3), document.querySelector("#NO_ID_info").textContent.indexOf(" entries")).replace(" entries", "");
+      const DRPStaff = document.querySelector("#RP_info").textContent.substr((document.querySelector("#RP_info").textContent.indexOf(" of") + 3), document.querySelector("#RP_info").textContent.indexOf(" entries")).replace(" entries", ""), AllServersStaff = document.querySelector("#NO_ID_info").textContent.substr((document.querySelector("#NO_ID_info").textContent.indexOf(" of") + 3), document.querySelector("#NO_ID_info").textContent.indexOf(" entries")).replace(" entries", ""), MilRPStaff = document.querySelector("#MilRP_info").textContent.substr((document.querySelector("#MilRP_info").textContent.indexOf(" of") + 3), document.querySelector("#MilRP_info").textContent.indexOf(" entries")).replace(" entries", ""), SWRPStaff = document.querySelector("#SWRP_info").textContent.substr((document.querySelector("#SWRP_info").textContent.indexOf(" of") + 3), document.querySelector("#SWRP_info").textContent.indexOf(" entries")).replace(" entries", "");
       const totalStaff = (parseInt(DRPStaff) + parseInt(SWRPStaff) + parseInt(MilRPStaff) + parseInt(AllServersStaff)).toString();
       presenceData.details = "Viewing the Staff list";
       presenceData.state = totalStaff + " total members";
@@ -102,11 +99,11 @@ presence.on("UpdateData", async () => {
         presenceData.state = "(DarkRP)";
       } else if (document.location.pathname.includes("/milrp")){
         presenceData.details = "Viewing MilRP GMs";
-        let GMs = document.querySelector("#gamemasters_info").textContent.substr((document.querySelector("#gamemasters_info").textContent.indexOf(" of") + 3), document.querySelector("#gamemasters_info").textContent.indexOf(" entries")).replace(" entries", "");
+        const GMs = document.querySelector("#gamemasters_info").textContent.substr((document.querySelector("#gamemasters_info").textContent.indexOf(" of") + 3), document.querySelector("#gamemasters_info").textContent.indexOf(" entries")).replace(" entries", "");
         presenceData.state = GMs + " total members";
       } else if (document.location.pathname.includes("/cwrp")){
         presenceData.details = "Viewing CWRP GMs";
-        let GMs = document.querySelector("#gamemasters_info").textContent.substr((document.querySelector("#gamemasters_info").textContent.indexOf(" of") + 3), document.querySelector("#gamemasters_info").textContent.indexOf(" entries")).replace(" entries", "");
+        const GMs = document.querySelector("#gamemasters_info").textContent.substr((document.querySelector("#gamemasters_info").textContent.indexOf(" of") + 3), document.querySelector("#gamemasters_info").textContent.indexOf(" entries")).replace(" entries", "");
         presenceData.state = GMs + " total members";
       }
     }
