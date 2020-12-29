@@ -8,8 +8,11 @@
     "en": "SnowBoltz The best shop for buying R$ in Thailand Easy Fast Secure",
     "th": "SnowBoltz ร้านรับเติม ROBUX (R$, โรบัค) ในเกม ROBLOX ที่ใช้ง่าย บริการจัดส่งอัตโนมัติรวดเร็วทันใจ เรทสุดคุ้ม 4 - 6 เเบบกลุ่มเเละ ID - Pass เรท 5 - 8"
   },
-  "url": "snowboltz.net",
-  "version": "1.0.6",
+  "url": [
+    "snowboltz.net",
+    "shop.snowboltz.net"
+  ],
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/xMeXqcE.png",
   "thumbnail": "https://i.imgur.com/yYdlVDA.png",
   "color": "#00ccff",

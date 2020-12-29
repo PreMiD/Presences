@@ -1,32 +1,37 @@
-var presence = new Presence({
-  clientId: "616940877042155531" // CLIENT ID FOR YOUR PRESENCE
+const presence = new Presence({
+  clientId: "616940877042155531"
 });
 
-var user: any,
-  group: any,
-  typing: any,
-  typingicon: any,
-  card: any,
-  connected: any,
-  apptitle: any,
-  lastData: any,
-  thisData: any,
-  lastStamp: any;
+let user: string | HTMLElement | Element | Array<string>,
+  group: string | HTMLElement | Element | Array<string>,
+  typing: boolean | Element,
+  typingicon: string,
+  card: HTMLElement,
+  connected: HTMLElement,
+  apptitle: string | HTMLElement | Element,
+  lastData: string,
+  thisData: string,
+  lastStamp: number;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "discordwhite"
   };
   connected = document.querySelector(
-    "#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div"
+    "#app-mount > div > div > div > div > div > div > div > div > section > div > div > div > div > a > div"
   );
+  if (connected == null) {
+    connected = document.querySelector(
+      "#app-mount > div > div > div > div > div > div > div > div > div > div > div > div > div > a > div"
+    );
+  }
   apptitle = document.querySelector(
     ".appDetails-28RJ80.medium-zmzTW-.size16-1__VVI.height20-13xN5Z.primary-jw0I4K.weightMedium-3xlxJi"
   );
   typingicon = "﻿";
 
   function getTimeStamp(): number {
-    var browsingStamp: any;
+    let browsingStamp: number;
     thisData = presenceData.details;
     if (lastData == thisData) {
       browsingStamp = lastStamp;
@@ -115,6 +120,11 @@ presence.on("UpdateData", async () => {
       typing = document.querySelector(
         "#app-mount > div > div > div:nth-child(2) > div > div > div > div:nth-child(2) > div:nth-child(2) > div > main > form > div > div > div > div > div:nth-child(3) > div"
       );
+      if (typing == null) {
+        typing = document.querySelector(
+          "#app-mount > div > div > div:nth-child(2) > div > div > div > div > div:nth-child(2) > div > main > form > div > div > div > div > div:nth-child(3) > div"
+        );
+      }
       if (typing.className.toLowerCase().includes("placeholder")) {
         typing = false;
       } else {
@@ -324,6 +334,73 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "discord.gg") {
     presenceData.details = "Viewing an invite";
     presenceData.startTimestamp = getTimeStamp();
+  } else if (document.location.hostname == "discordmerch.com") {
+    if (document.location.pathname == "/") {
+      presenceData.details = "Browsing the homepage of the merch store";
+      presenceData.startTimestamp = getTimeStamp();
+    } else if (document.location.pathname.split("/")[1] == "collections") {
+      if (document.location.pathname.split("/")[2] == "all") {
+        if (document.location.pathname.split("/")[3] == "products") {
+          presenceData.details = "Viewing a merch product";
+          presenceData.state = document.getElementsByClassName(
+            "product-single__title"
+          )[0].textContent;
+          presenceData.startTimestamp = getTimeStamp();
+        } else {
+          presenceData.details = "Browsing all merch products";
+          presenceData.startTimestamp = getTimeStamp();
+        }
+      } else if (document.location.pathname.split("/")[2] == "cool-kids") {
+        if (document.location.pathname.split("/")[3] == "products") {
+          presenceData.details = "Viewing a merch product";
+          presenceData.state = document.getElementsByClassName(
+            "product-single__title"
+          )[0].textContent;
+          presenceData.startTimestamp = getTimeStamp();
+        } else {
+          presenceData.details = "Viewing the Dark Theme merch collection";
+          presenceData.startTimestamp = getTimeStamp();
+        }
+      } else if (
+        document.location.pathname.split("/")[2] == "snowsgiving-2020"
+      ) {
+        if (document.location.pathname.split("/")[3] == "products") {
+          presenceData.details = "Viewing a merch product";
+          presenceData.state = document.getElementsByClassName(
+            "product-single__title"
+          )[0].textContent;
+          presenceData.startTimestamp = getTimeStamp();
+        } else {
+          presenceData.details = "Viewing the snowsgiving merch collection";
+          presenceData.startTimestamp = getTimeStamp();
+        }
+      } else {
+        presenceData.details = "Browsing the merch catalog";
+        presenceData.startTimestamp = getTimeStamp();
+      }
+    } else if (document.location.pathname.split("/")[1] == "products") {
+      if (document.location.pathname.split("/")[2]) {
+        presenceData.details = "Viewing a merch product";
+        presenceData.state = document.getElementsByClassName(
+          "product-single__title"
+        )[0].textContent;
+        presenceData.startTimestamp = getTimeStamp();
+      } else {
+        presenceData.details = "Browsing the merch catalog";
+        presenceData.startTimestamp = getTimeStamp();
+      }
+    } else if (document.location.pathname.split("/")[1] == "cart") {
+      presenceData.details = "Viewing their cart in the merch store";
+      presenceData.startTimestamp = getTimeStamp();
+    } else if (document.location.pathname.split("/")[1] == "pages") {
+      if (document.location.pathname.split("/")[2] == "contact") {
+        presenceData.details = "Viewing the contact us page in the merch store";
+        presenceData.startTimestamp = getTimeStamp();
+      } else if (document.location.pathname.split("/")[2] == "faq") {
+        presenceData.details = "Reading the FAQ in the merch store";
+        presenceData.startTimestamp = getTimeStamp();
+      }
+    }
   }
 
   if (presenceData.details == null) {

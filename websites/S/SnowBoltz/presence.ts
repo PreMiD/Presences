@@ -10,68 +10,45 @@ presence.on("UpdateData", async () => {
     largeImageKey: "icon"
   };
 
-  if (document.location.hostname == "snowboltz.net") {
+  if (
+    document.location.hostname.includes("shop.") ||
+    document.location.hostname == "snowboltz.net"
+  ) {
     if (path.includes("home")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "กำลังดูที่หน้าหลัก..";
-    } else if (path.includes("robux_group")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "กำลังซื้อสินค้า";
-      presenceData.state = "เเบบกลุ่ม";
-    } else if (path.includes("robux_idpass")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "กำลังซื้อสินค้า";
-      presenceData.state = "เเบบหรัส";
-    } else if (path.includes("luckybox")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "กำลังสุ่มวงล้อ..";
-    } else if (path.includes("coupon")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "กำลังรอใส่คูปอง..";
-    } else if (path.includes("topup")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "กำลังเติมเงิน";
-      if (path.includes("topup_tmn")) {
-        presenceData.details = "กำลังเติมเงิน";
-        presenceData.state = "ผ่านบัตรเงินสด";
-        presenceData.startTimestamp = browsingStamp;
-      } else if (path.includes("topu_wallet")) {
-        presenceData.details = "กำลังเติมเงิน";
-        presenceData.state = "ผ่านวอเลท";
-        presenceData.startTimestamp = browsingStamp;
-      }
     } else if (path.includes("admin")) {
       presenceData.details = "อยู่ที่หน้าเเอดมิน";
       presenceData.state = "หน้าหลัก";
       presenceData.startTimestamp = browsingStamp;
       if (path.includes("queue_group")) {
-        presenceData.details = "ตรวจสอบการเติมเเบบโอน";
+        presenceData.details = "การเติมเเบบโอน";
         presenceData.state = "หน้าหลัก";
         presenceData.startTimestamp = browsingStamp;
         if (path.includes("id")) {
           const id1 = document.querySelector(
-            "body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(3) > b"
+            "body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(6) > b"
           );
           const id =
             id1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
             "ไม่ทราบสมาชิก";
-          presenceData.details = "ตรวจสอบการเติมเเบบโอน";
+          presenceData.details = "การเติมเเบบโอน";
           presenceData.state = id;
           presenceData.startTimestamp = browsingStamp;
           presenceData.smallImageKey = "reading";
         }
       } else if (path.includes("queue_idpass")) {
-        presenceData.details = "ตรวจสอบการเติมเเบบหรัส";
+        presenceData.details = "การเติมเเบบหรัส";
         presenceData.state = "หน้าหลัก";
         presenceData.startTimestamp = browsingStamp;
-        if (path.includes("id")) {
+        if (path.includes("&id=")) {
           const id1 = document.querySelector(
             "body > main > div > section > div.container.shape-container.py-md-md > div > div.col-12.col-md-9.pl-md-0 > div > div.card-body > p:nth-child(7) > b"
           );
           const id =
             id1?.textContent.replace("สมาชิกหมายเลข", "ของหมายเลข ") ??
             "ไม่ทราบสมาชิก";
-          presenceData.details = "ตรวจสอบการเติมเเบบหรัส";
+          presenceData.details = "การเติมเเบบหรัส";
           presenceData.state = id;
           presenceData.startTimestamp = browsingStamp;
           presenceData.smallImageKey = "reading";
@@ -134,6 +111,37 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "reading";
       }
+    } else if (path.includes("robux_group")) {
+      const stock1 = document.querySelector(
+        "body > main > div > section > div.container.shape-container.d-flex.align-items-center.py-lg > div > div > div:nth-child(1) > div > div > div > b:nth-child(1) > span"
+      );
+      const stock = stock1?.textContent ?? "0 R$";
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "กำลังซื้อสินค้า";
+      presenceData.state = "เเบบกลุ่ม - " + stock + " R$";
+    } else if (path.includes("robux_idpass")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "กำลังซื้อสินค้า";
+      presenceData.state = "เเบบหรัส";
+    } else if (path.includes("luckybox")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "กำลังสุ่มวงล้อ..";
+    } else if (path.includes("coupon")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "กำลังรอใส่คูปอง..";
+    } else if (path.includes("topup")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "กำลังเติมเงิน";
+      presenceData.state = "กำลังเลือกช่องทาง";
+      if (path.includes("topup_tmn")) {
+        presenceData.details = "กำลังเติมเงิน";
+        presenceData.state = "ผ่านบัตรเงินสด";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (path.includes("topup_wallet")) {
+        presenceData.details = "กำลังเติมเงิน";
+        presenceData.state = "ผ่านวอเลท";
+        presenceData.startTimestamp = browsingStamp;
+      }
     } else if (path.includes("queue")) {
       presenceData.details = "ตรวจสอบคิว";
       presenceData.startTimestamp = browsingStamp;
@@ -153,7 +161,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "กำลังสมัครใช้งาน..";
       presenceData.startTimestamp = browsingStamp;
     } else {
-      presenceData.details = "หน้าที่ไม่ทราบ";
+      presenceData.details = "SnowBoltz - ร้านเติมโรบัค";
+      presenceData.state = "ซื้อโรบัคราคาถูกเรทสูงง่ายๆ";
       presenceData.startTimestamp = browsingStamp;
     }
   }

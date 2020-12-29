@@ -1,54 +1,75 @@
-{
-  const presence = new Presence({
+const presence = new Presence({
     clientId: "610102236374368267"
-  });
-  const strings = presence.getStrings({
+  }),
+  strings = presence.getStrings({
     play: "presence.playback.playing",
-    pause: "presence.playback.paused"
+    pause: "presence.playback.paused",
+    live: "presence.activity.live"
   });
 
-  presence.on("UpdateData", async () => {
-    const player = document.querySelector(".player");
-    if (player) {
-      const title = player.querySelector(".player-cloudcast-title").textContent;
-      const author = player.querySelector(".player-cloudcast-author-link")
-        .textContent;
+let live, prevLive, author: string, title: string;
 
-      const elapsed = player
-        .querySelector(".player-time")
-        .textContent.split(":");
-      let elapsedSec;
-      if (elapsed.length === 3) {
-        elapsedSec =
-          parseInt(elapsed[0]) * 60 * 60 +
-          parseInt(elapsed[1]) * 60 +
-          parseInt(elapsed[2]);
-      } else {
-        elapsedSec = parseInt(elapsed[0]) * 60 + parseInt(elapsed[1]);
+presence.on("UpdateData", async () => {
+  const player = document.querySelector(
+    ".PlayerControls__PlayerContainer-vo7mt3-4"
+  );
+
+  if (player) {
+    const paused =
+        document.querySelector(".PlayButton__PlayerControl-rvh8d9-1") === null,
+      on_air = document.querySelector(
+        ".LiveStreamPage__LiveStreamPageHeader-hwzri8-1"
+      );
+
+    if (on_air) {
+      live = true;
+      if (prevLive !== live) {
+        prevLive = live;
       }
-
-      const isPlaying = player.querySelector(".pause-state") ? true : false;
-
-      const presenceData: PresenceData = {
-        details: title,
-        state: author,
-        largeImageKey: "mixcloud",
-        smallImageKey: isPlaying ? "play" : "pause",
-        smallImageText: isPlaying
-          ? (await strings).play
-          : (await strings).pause,
-        startTimestamp: Math.floor(Date.now() / 1000) - elapsedSec
-      };
-
-      if (isPlaying) {
-        presence.setTrayTitle(title);
-      } else {
-        delete presenceData.startTimestamp;
-      }
-
-      presence.setActivity(presenceData);
     } else {
-      presence.clearActivity();
+      live = false;
     }
-  });
-}
+
+    if (!live) {
+      title = document.querySelector(
+        ".shared__ShowDetails-gqlx6k-1 > a:nth-child(1)"
+      ).textContent;
+      author = document.querySelector(
+        "p.Typography__BodyExtraSmall-sc-1swbs0s-16:nth-child(2) > a:nth-child(1)"
+      ).textContent;
+    } else {
+      title = document.querySelector(".Typography__Headline1Small-sc-1swbs0s-8")
+        .textContent;
+      author = "Mixcloud Live";
+    }
+
+    const data: PresenceData = {
+      details: title,
+      state: author,
+      largeImageKey: "mixcloud",
+      smallImageKey: paused ? "pause" : "play",
+      smallImageText: paused ? (await strings).pause : (await strings).play
+    };
+
+    if (live) {
+      data.smallImageKey = "live";
+      data.smallImageText = (await strings).live;
+    }
+
+    if (paused) {
+      delete data.startTimestamp;
+      delete data.endTimestamp;
+    }
+
+    presence.setActivity(
+      {
+        details: data.details,
+        state: data.state,
+        largeImageKey: "mixcloud"
+      },
+      true
+    );
+  } else if (title !== null && author !== null) {
+    presence.setActivity(data, !paused);
+  }
+});

@@ -1,8 +1,7 @@
 {
   "root": true,
   "env": {
-    "browser": true,
-    "es6": true
+    "browser": true
   },
   "extends": [
     "eslint:recommended",
@@ -20,16 +19,41 @@
   },
   "rules": {
     "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
+    "no-multiple-empty-lines": ["warn", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
     "quotes": "off",
     "indent": "off",
     "camelcase": "off",
     "comma-dangle": ["warn", "never"],
-    "linebreak-style": "off",
-    "no-console": "off",
+    "one-var": ["warn", "consecutive"],
+    "linebreak-style": ["warn", "unix"],
+    "no-console": "error",
     "no-var": "error",
     "no-undef": "off",
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "TSEnumDeclaration[const=true]",
+        "message": "Usage of const enums is forbidden."
+      }
+    ],
     "@typescript-eslint/camelcase": "off",
-    "@typescript-eslint/no-explicit-any": "error"
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/indent": "off"
   },
+  "overrides": [
+    {
+      "env": {
+        "node": true,
+        "mongo": true
+      },
+      "files": ["./*.ts"],
+      "rules": {
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "no-console": "off"
+      }
+    }
+  ],
+  "reportUnusedDisableDirectives": true,	
+  "noInlineConfig": true,
   "plugins": ["@typescript-eslint"]
 }

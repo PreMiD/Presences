@@ -1,20 +1,24 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
-    "name": "NMW03",
-    "id": "534099893979971584"
+    "name": "BBQ",
+    "id": "298888568279924746"
+  },
+  "url": "codare.fun",
+  "description": {
+    "tr": "CodAre discord botları ve daha fazlası için basit bir kod paylaşım platformudur.",
+    "en": "CodAre is a simple code sharing platform for discord bots and more."
   },
   "service": "CodAre",
-  "description": {
-    "en": "CodAre is a turkish developer platform"
-  },
-  "url": "codare.org",
-  "version": "1.2.3",
-  "logo": "https://i.imgur.com/fPSuw9R.png",
-  "thumbnail": "https://i.imgur.com/By9oxtj.png",
-  "color": "#ffa500",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/f2U2Zd9.png",
+  "thumbnail": "https://i.imgur.com/YZAHqu7.png",
+  "color": "#3b1b8a",
   "tags": [
     "discord",
-    "socials"
+    "coding",
+    "development",
+    "turkish"
   ],
   "category": "other"
 }

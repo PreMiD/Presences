@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "705033229719175179"
 });
 
@@ -226,7 +226,7 @@ function languageCode(language: string): string {
 }
 
 const browsingStamp: number = Math.floor(Date.now() / 1000);
-let type, from, to, typet;
+let type: string, from: string, to: string, typet: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
