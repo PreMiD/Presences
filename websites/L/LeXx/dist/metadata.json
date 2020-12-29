@@ -4,6 +4,7 @@
       "id": "277043432063631360"
     },
     "url": "lexx.app",
+    "regExp": "([a-z0-9-]+[.])*lexx[.]app[/]",
     "description": {
       "de": "LeXx bietet einen Discord Bot mit vielen Funktionen und Anwendungsmöglichkeiten",
       "en": "LeXx offers a Discord Bot with many functions and uses"
