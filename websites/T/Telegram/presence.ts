@@ -3,11 +3,9 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const path = document.location.href;
-
-  const showName = await presence.getSetting("name");
-
-  const presenceData: PresenceData = {
+  const path = document.location.href,
+  showName = await presence.getSetting("name"),
+  presenceData: PresenceData = {
     largeImageKey: "telegram"
   };
 
