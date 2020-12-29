@@ -14,16 +14,14 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = currentTime;
     }
     if (document.location.pathname.includes("/staff")){
-      const DRPStaff = document.querySelector("#RP_info").textContent.substr((document.querySelector("#RP_info").textContent.indexOf(" of") + 3), document.querySelector("#RP_info").textContent.indexOf(" entries")).replace(" entries", ""), AllServersStaff = document.querySelector("#NO_ID_info").textContent.substr((document.querySelector("#NO_ID_info").textContent.indexOf(" of") + 3), document.querySelector("#NO_ID_info").textContent.indexOf(" entries")).replace(" entries", ""), MilRPStaff = document.querySelector("#MilRP_info").textContent.substr((document.querySelector("#MilRP_info").textContent.indexOf(" of") + 3), document.querySelector("#MilRP_info").textContent.indexOf(" entries")).replace(" entries", ""), SWRPStaff = document.querySelector("#SWRP_info").textContent.substr((document.querySelector("#SWRP_info").textContent.indexOf(" of") + 3), document.querySelector("#SWRP_info").textContent.indexOf(" entries")).replace(" entries", "");
-      const totalStaff = (parseInt(DRPStaff) + parseInt(SWRPStaff) + parseInt(MilRPStaff) + parseInt(AllServersStaff)).toString();
+      const DRPStaff = document.querySelector("#RP_info").textContent.substr((document.querySelector("#RP_info").textContent.indexOf(" of") + 3), document.querySelector("#RP_info").textContent.indexOf(" entries")).replace(" entries", ""), AllServersStaff = document.querySelector("#NO_ID_info").textContent.substr((document.querySelector("#NO_ID_info").textContent.indexOf(" of") + 3), document.querySelector("#NO_ID_info").textContent.indexOf(" entries")).replace(" entries", ""), MilRPStaff = document.querySelector("#MilRP_info").textContent.substr((document.querySelector("#MilRP_info").textContent.indexOf(" of") + 3), document.querySelector("#MilRP_info").textContent.indexOf(" entries")).replace(" entries", ""), SWRPStaff = document.querySelector("#SWRP_info").textContent.substr((document.querySelector("#SWRP_info").textContent.indexOf(" of") + 3), document.querySelector("#SWRP_info").textContent.indexOf(" entries")).replace(" entries", ""), totalStaff = (parseInt(DRPStaff) + parseInt(SWRPStaff) + parseInt(MilRPStaff) + parseInt(AllServersStaff)).toString();
       presenceData.details = "Viewing the Staff list";
       presenceData.state = totalStaff + " total members";
       presenceData.startTimestamp = currentTime;
     }
     if (document.location.pathname.includes("/bans")){
-      let numBans = document.querySelector("div.dataTables_info").textContent.substr(document.querySelector("div.dataTables_info").textContent.indexOf("of ") + 3, document.querySelector("div.dataTables_info").textContent.indexOf(" entries")).replace(" entries", "");
+      const numBans = document.querySelector("div.dataTables_info").textContent.substr(document.querySelector("div.dataTables_info").textContent.indexOf("of ") + 3, document.querySelector("div.dataTables_info").textContent.indexOf(" entries")).replace(" entries", ""), currentPage = document.querySelector("#bans_paginate > ul > li.paginate_button.active > a"), lastPage = document.querySelector("#bans_paginate > ul > li:nth-child(8) > a");
       presenceData.details = "Viewing " + numBans + " bans";
-      const currentPage = document.querySelector("#bans_paginate > ul > li.paginate_button.active > a"), lastPage = document.querySelector("#bans_paginate > ul > li:nth-child(8) > a");
       presenceData.state = "(" + currentPage.textContent + "/" +  lastPage.textContent + ")";
       presenceData.startTimestamp = currentTime;
     }
