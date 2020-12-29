@@ -1,31 +1,37 @@
 {
   "author": {
-    "name": "SinecKers",
-    "id": "380411952666640385"
+    "name": "ririxi",
+    "id": "192490421308489731"
   },
   "contributors": [
     {
-      "name": "ririxi",
-      "id": "192490421308489731"
+      "name": "SinecKers",
+      "id": "380411952666640385"
     }
   ],
-  "url": [
-    "listen.tidal.com",
-    "tidal.com"
-  ],
+  "url": ["listen.tidal.com", "tidal.com"],
   "description": {
     "tr": "Tidal yüksek ses kalitesi ve ucuz fiyatlarla hizmet sağlayan bir müzik sitesidir.",
     "en": "Tidal is a music stream service with very high sound quality.",
     "pl": "Tidal to strona do streamingowania muzyki z bardzo wysoką jakością audio."
   },
   "service": "Tidal",
-  "version": "1.0.8",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/clJrylu.jpg",
   "thumbnail": "https://i.imgur.com/UXbP7qG.png",
   "color": "#000000",
-  "tags": [
-    "tidal",
-    "music"
-  ],
-  "category": "music"
+  "tags": ["tidal", "music"],
+  "category": "music",
+  "settings": [
+    {
+      "id": "language",
+      "multiLanguage": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
+  ]
 }
