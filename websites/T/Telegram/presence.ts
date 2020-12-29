@@ -3,9 +3,9 @@ var presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const path = document.location.href;
-
-  const presenceData: PresenceData = {
+  const path = document.location.href,
+  showName = await presence.getSetting("name"),
+  presenceData: PresenceData = {
     largeImageKey: "telegram"
   };
 
@@ -19,11 +19,17 @@ presence.on("UpdateData", async () => {
     );
     const messages: NodeList = document.querySelectorAll("div.im_message_body");
 
-    presenceData.details =
-      "Talking this " +
-      (path.includes("p=@") || path.includes("p=u") ? "user" : "group") +
-      ":";
-    presenceData.state = title.textContent;
+    if (showName) {
+      presenceData.details =
+        "Talking to this " +
+        (path.includes("p=@") || path.includes("p=u") ? "user" : "group") +
+        ":";
+      presenceData.state = title.textContent;
+    }
+    else {
+      presenceData.details =
+        "Talking to someone";
+      }
 
     presenceData.smallImageKey =
       textArea.value.length >= 1 ? "writing" : "reading";
