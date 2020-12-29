@@ -3,6 +3,12 @@
     "name": "CRUGG",
     "id": "228965621478588416"
   },
+  "contributors": [
+    {
+      "name": "Kyoyo",
+      "id": "649452442253000704"
+    }
+  ],
   "service": "MyAnimeList",
   "description": {
     "en": "The world's most active online anime and manga community and database. Join the online community, create your anime and manga list and so much more!",
@@ -15,9 +21,9 @@
     "zh_CN": "世界上最活跃的在线动漫和漫画社区。加入在线社区，创建属于您的动漫和漫画列表！"
   },
   "url": "myanimelist.net",
-  "version": "1.1.5",
-  "logo": "https://crugg.de/premid/mallogo.png",
-  "thumbnail": "https://crugg.de/premid/malbanner.png",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/AoF1JnY.png",
+  "thumbnail": "https://i.imgur.com/VyAAcEN.png",
   "color": "#2e51a2",
   "tags": [
     "anime",
