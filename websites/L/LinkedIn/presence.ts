@@ -35,10 +35,10 @@ presence.on("UpdateData", async () => {
         "followers/" = "Viewing Followers."
       }
       enum filterType {
-        connection = "Connections.",
-        member = "Members.",
-        company = "Companies.",
-        channel = "Hashtags."
+        connection = "Connections",
+        member = "Members",
+        company = "Companies",
+        channel = "Hashtags"
       }
       const subSection =
         feedSubSection[
@@ -50,9 +50,13 @@ presence.on("UpdateData", async () => {
       if (subSection == feedSubSection["following/"]) {
         presenceData.state = `Filtering by ${
           filterType[
-            document.location.search.split("=").pop() as keyof typeof filterType
-          ] || "All."
-        }`;
+            document.location.search
+              .split("?filterType=")
+              .pop()
+              .split("&")
+              .shift() as keyof typeof filterType
+          ] || "All"
+        }.`;
       }
       presenceData.startTimestamp = browsingStamp;
     }
@@ -239,7 +243,7 @@ presence.on("UpdateData", async () => {
         }
         //Homepage.
         else {
-          presenceData.state = "Your groups.";
+          presenceData.state = "My groups.";
         }
       }
     }
