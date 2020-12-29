@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
     //Rewrite;
         } else if (document.location.pathname.startsWith("/series/")) {  
             const name = document.querySelector(".series-title").textContent;
-            data.details = "| Serie"
+            data.details = "| Serie";
             data.state = name;
 
         } else if (document.location.pathname.startsWith("/series")) {  
@@ -89,7 +89,6 @@ presence.on("UpdateData", async () => {
             data.details = "| Profil";
             data.state = "Bearbteiten";
         
-        
         } else if (document.location.pathname.startsWith("/profile/")) {
             const profile = document.querySelector("b").textContent,
             level = document.querySelector("#user_level").textContent;
@@ -110,7 +109,7 @@ presence.on("UpdateData", async () => {
     
     //Login
         } else if (document.location.pathname.startsWith("/login")) {
-            data.details = "| Login"
+            data.details = "| Login";
 
         }
 
