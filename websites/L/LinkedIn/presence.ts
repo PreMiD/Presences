@@ -364,6 +364,16 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Writing a New Post.";
       presenceData.startTimestamp = browsingStamp;
     }
+    //Searching for something section.
+    else if (path.includes("/search/results/")) {
+      presenceData.details = "Searching for something.";
+      presenceData.startTimestamp = browsingStamp;
+    }
+    //Others sections in "Work" category not supported atm.
+    else {
+      presenceData.details = "Doing stuffs.";
+      presenceData.startTimestamp = browsingStamp;
+    }
   }
 
   if (presenceData.details == null) {
