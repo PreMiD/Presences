@@ -145,10 +145,11 @@ presence.on("UpdateData", async () => {
       presenceData.largeImageKey = "tvglobo";
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/transmissoes/")) {
-      const programTitle = document.querySelector(
+      let programTitle, programMetadata;
+      programTitle = document.querySelector(
         "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-name"
       );
-      const programMetadata = document.querySelector(
+      programMetadata = document.querySelector(
         "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-metadata"
       );
       if (document.location.pathname.includes("/7339131/")) {
