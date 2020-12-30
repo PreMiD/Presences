@@ -3,6 +3,12 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
+function unescapeHTML(string: string): string {
+  const textarea = document.createElement("textarea");
+  textarea.innerHTML = string;
+  return textarea.value;
+}
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "linkedin_logo"
@@ -24,7 +30,7 @@ presence.on("UpdateData", async () => {
         .innerHTML.trim();
 
       presenceData.details = "Browsing Feed:";
-      presenceData.state = `#${hashtagName}.`;
+      presenceData.state = `#${unescapeHTML(hashtagName)}.`;
       presenceData.startTimestamp = browsingStamp;
     }
     //Feed follow subsections.
@@ -149,7 +155,7 @@ presence.on("UpdateData", async () => {
       ).innerHTML;
 
       presenceData.details = "Taking an Interview Prep:";
-      presenceData.state = `${interviewPrepArg}.`;
+      presenceData.state = `${unescapeHTML(interviewPrepArg)}.`;
       presenceData.startTimestamp = browsingStamp;
     }
     //Messaging section.
@@ -177,7 +183,7 @@ presence.on("UpdateData", async () => {
             )
             .innerHTML.trim();
 
-          presenceData.state = `Chatting with ${charUsername}`;
+          presenceData.state = `Chatting with ${unescapeHTML(charUsername)}`;
         } else {
           presenceData.state = "Chatting with someone.";
         }
@@ -241,7 +247,7 @@ presence.on("UpdateData", async () => {
         //Actually detail subsections.
         else {
           presenceData.details = "Viewing user details:";
-          presenceData.state = `${userName}'s ${
+          presenceData.state = `${unescapeHTML(userName)}'s ${
             detailSubSection[subsection as keyof typeof detailSubSection]
           }.`;
         }
@@ -291,7 +297,7 @@ presence.on("UpdateData", async () => {
         .innerHTML.trim();
 
       presenceData.details = "Viewing a company:";
-      presenceData.state = `${companyName}.`;
+      presenceData.state = `${unescapeHTML(companyName)}.`;
       presenceData.startTimestamp = browsingStamp;
     }
     //School page section.
@@ -303,17 +309,22 @@ presence.on("UpdateData", async () => {
         .innerHTML.trim();
 
       presenceData.details = "Viewing a school:";
-      presenceData.state = `${schoolName}.`;
+      presenceData.state = `${unescapeHTML(schoolName)}.`;
       presenceData.startTimestamp = browsingStamp;
     }
     //Groups section.
     else if (path.startsWith("/groups/")) {
       //Group page subsection.
       if (path.match(/\/groups\/[0-9]+\//)) {
-        const groupName = document.title.replace(" | Groups | LinkedIn", "");
+        const groupName = document
+          .querySelector(
+            "div.application-outlet > div.authentication-outlet > div > div:nth-child(2) > main > div:first-child > section > div > h1 > span"
+          )
+          .innerHTML.trim()
+          .replace(/<!---->/g, "");
 
         presenceData.details = "Viewing a group:";
-        presenceData.state = `${groupName}.`;
+        presenceData.state = `${unescapeHTML(groupName)}.`;
         presenceData.startTimestamp = browsingStamp;
       } else {
         presenceData.details = "Browsing Groups:";
@@ -329,7 +340,7 @@ presence.on("UpdateData", async () => {
         }
       }
     }
-    //Settigns section.
+    //Settings section.
     else if (path.includes("/psettings/")) {
       presenceData.details = "Editing settings.";
       presenceData.startTimestamp = browsingStamp;
