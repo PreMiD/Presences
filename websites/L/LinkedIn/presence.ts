@@ -76,10 +76,17 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Viewing Invitations.";
       }
       //Contacts subsections.
-      else if (path.includes("/import-contacts/")) {
+      else if (
+        path.includes("/import-contacts/") ||
+        path == "/mynetwork/contacts/"
+      ) {
         //Contacts homepage.
-        if (path.endsWith("saved-contacts/")) {
+        if (path == "/mynetwork/contacts/") {
           presenceData.state = "Browsing Contacts.";
+        }
+        //Saved contacts.
+        else if (path.endsWith("saved-contacts/")) {
+          presenceData.state = "Browsing Saved contacts.";
         }
         //Adding contacts.
         else {
@@ -150,9 +157,11 @@ presence.on("UpdateData", async () => {
     }
     //Interview prep section (Jobs related section with a different path).
     else if (path.includes("/interview-prep/")) {
-      const interviewPrepArg = document.querySelector(
-        "div.application-outlet > div.authentication-outlet > main > div > section > #ember50 > header > div > div.mr1 > h2"
-      ).innerHTML;
+      const interviewPrepArg = document
+        .querySelector(
+          "div.application-outlet > div.authentication-outlet > main > div > section > section > header > div > div:first-child > h2"
+        )
+        .innerHTML.trim();
 
       presenceData.details = "Taking an Interview Prep:";
       presenceData.state = `${unescapeHTML(interviewPrepArg)}.`;
@@ -183,7 +192,7 @@ presence.on("UpdateData", async () => {
             )
             .innerHTML.trim();
 
-          presenceData.state = `Chatting with ${unescapeHTML(charUsername)}`;
+          presenceData.state = `Chatting with ${unescapeHTML(charUsername)}.`;
         } else {
           presenceData.state = "Chatting with someone.";
         }
@@ -343,6 +352,16 @@ presence.on("UpdateData", async () => {
     //Settings section.
     else if (path.includes("/psettings/")) {
       presenceData.details = "Editing settings.";
+      presenceData.startTimestamp = browsingStamp;
+    }
+    //My Items section.
+    else if (path == "/my-items/") {
+      presenceData.details = "Browsing My Items.";
+      presenceData.startTimestamp = browsingStamp;
+    }
+    //New Post section.
+    else if (path == "/post/new/") {
+      presenceData.details = "Writing a New Post.";
       presenceData.startTimestamp = browsingStamp;
     }
   }
