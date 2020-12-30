@@ -190,7 +190,11 @@ presence.on("UpdateData", async () => {
     }
     //Profile page section.
     else if (path.match(/\/in\/[A-z0-9-]+\/$/)) {
-      const userName = document.title.replace(" | LinkedIn", "");
+      const userName = document
+        .querySelector(
+          "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div:nth-child(2) > main > div > section > div:nth-child(2) > div:nth-child(2) > div:first-child > ul:first-child > li:first-child"
+        )
+        .innerHTML.trim();
 
       presenceData.details = "Viewing a profile:";
       presenceData.state = `${userName}.`;
@@ -198,7 +202,19 @@ presence.on("UpdateData", async () => {
     }
     //Profile subsections.
     else if (path.match(/\/in\/[A-z0-9-]+\//)) {
-      const userName = document.title.replace(" | LinkedIn", "");
+      const userName =
+        path != "/in/luca-biagetti/detail/recent-activity/"
+          ? document
+              .querySelector(
+                "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div:nth-child(2) > main > div > section > div:nth-child(2) > div:nth-child(2) > div:first-child > ul:first-child > li:first-child"
+              )
+              .innerHTML.trim()
+          : document
+              .querySelector(
+                "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div > div:first-child > header > h1"
+              )
+              .innerHTML.trim()
+              .replace("’s Activity", "");
 
       presenceData.startTimestamp = browsingStamp;
 
@@ -312,6 +328,11 @@ presence.on("UpdateData", async () => {
           presenceData.state = "My groups.";
         }
       }
+    }
+    //Settigns section.
+    else if (path.includes("/psettings/")) {
+      presenceData.details = "Editing settings.";
+      presenceData.startTimestamp = browsingStamp;
     }
   }
 
