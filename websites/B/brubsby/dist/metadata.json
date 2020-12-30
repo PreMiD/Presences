@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "brubsby",
+    "id": "163145773964328960"
+  },
+  "url": [
+    "brubsby.com",
+    "brubsby.com/cozyvec",
+    "brubsby.com/randomsiiva",
+    "brubsby.com/ripmixnames"
+  ],
+  "description": {
+    "en": "english"
+  },
+  "service": "brubsby.com",
+  "version": "0.1",
+  "logo": "https://brubsby.com/assets/favicon.png",
+  "thumbnail": "https://brubsby.com/assets/favicon.png",
+  "color": "#FFFFFF",
+  "tags": ["brubsby"],
+  "category": "other"
+}
