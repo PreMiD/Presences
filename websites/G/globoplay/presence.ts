@@ -144,11 +144,19 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "tvglobo";
       presenceData.startTimestamp = browsingStamp;
+<<<<<<< HEAD
     } else if (document.location.pathname.includes("/transmissoes/")) 
       let programTitle = document.querySelector(
         "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-name"
       );
       let programMetadata = document.querySelector(
+=======
+    } else if (document.location.pathname.includes("/transmissoes/")) {
+      const programTitle = document.querySelector(
+        "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-name"
+      );
+      const programMetadata = document.querySelector(
+>>>>>>> parent of ce7d1722... por favor, pare......
         "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-metadata"
       );
       if (document.location.pathname.includes("/7339131/")) {
