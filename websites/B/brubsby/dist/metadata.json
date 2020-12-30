@@ -5,16 +5,13 @@
     "id": "163145773964328960"
   },
   "url": [
-    "brubsby.com",
-    "brubsby.com/cozyvec",
-    "brubsby.com/randomsiiva",
-    "brubsby.com/ripmixnames"
+    "brubsby.com"
   ],
   "description": {
     "en": "english"
   },
   "service": "brubsby.com",
-  "version": "0.1",
+  "version": "1.0.0",
   "logo": "https://brubsby.com/assets/favicon.png",
   "thumbnail": "https://brubsby.com/assets/favicon.png",
   "color": "#FFFFFF",
