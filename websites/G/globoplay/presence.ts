@@ -36,11 +36,28 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Página inicial";
     } else if (document.location.pathname.includes("/categorias/")) {
-      presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector("div.highlight__header > p");
-      presenceData.details = "Vendo a categoria:";
-      presenceData.state = user.textContent;
-      presenceData.smallImageKey = "reading";
+      if (document.querySelector("div.highlight__header > p")) {
+        presenceData.startTimestamp = browsingStamp;
+        user = document.querySelector("div.highlight__header > p");
+        presenceData.details = "Vendo a categoria:";
+        presenceData.state = user.textContent;
+        presenceData.smallImageKey = "reading";
+      } else if (
+        document.querySelector(
+          "div.application-controller__view > span > div > div > div > h1"
+        )
+      ) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Vendo a categoria:";
+        user = document.querySelector(
+          "div.application-controller__view > span > div > div > div > h1"
+        );
+        presenceData.state = user.textContent;
+        presenceData.smallImageKey = "reading";
+      } else {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Categorias";
+      }
     } else if (document.location.pathname.includes("/busca")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Se preparando para";
@@ -49,10 +66,18 @@ presence.on("UpdateData", async () => {
       if (search.value.length > 2) {
         presenceData.details = "Pesquisando por:";
         presenceData.state = search.value;
+        presenceData.smallImageKey = "search";
       }
     } else if (document.location.pathname.includes("/programacao")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Programação";
+    } else if (document.location.pathname.includes("/programas-locais")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Programas Locais";
+    } else if (document.location.pathname.includes("/regiao/")) {
+      user = document.querySelector("h1.view-title");
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Vendo programas locais de " + user.textContent;
     } else if (document.location.pathname.includes("/configuracoes")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Configurações";
