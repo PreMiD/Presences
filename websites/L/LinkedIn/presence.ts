@@ -211,24 +211,32 @@ presence.on("UpdateData", async () => {
           "contact-info" = "Contact Info"
         }
 
-        presenceData.details = "Viewing user details:";
-        presenceData.state = `${userName}'s ${
-          detailSubSection[
-            path
-              .split(/\/in\/[A-z0-9-]+\/detail\//)
-              .pop()
-              .split("/")
-              .shift() as keyof typeof detailSubSection
-          ]
-        }.`;
+        const subsection: string = path
+          .split(/\/in\/[A-z0-9-]+\/detail\//)
+          .pop()
+          .split("/")
+          .shift() as keyof typeof detailSubSection;
+
+        //If the user is editing skills (the only edit related subsection with "detail" path).
+        if (path == "/in/luca-biagetti/detail/skills/add/") {
+          presenceData.details = "Editing profile:";
+          presenceData.state = "Skills.";
+        }
+        //Actually detail subsections.
+        else {
+          presenceData.details = "Viewing user details:";
+          presenceData.state = `${userName}'s ${
+            detailSubSection[subsection as keyof typeof detailSubSection]
+          }.`;
+        }
       }
       //Profile edit subsection.
       else if (path.includes("/edit/")) {
         enum editSubSection {
-          intro = "Intro",
+          intro = "Intro.",
           about = "About.",
-          "add-feed-post" = "Posts",
-          "add-article" = "Articles",
+          "add-feed-post" = "Posts.",
+          "add-article" = "Articles.",
           "add-link" = "Links.",
           position = "Experiences.",
           education = "Education.",
@@ -242,10 +250,11 @@ presence.on("UpdateData", async () => {
           "test-score" = "Test scores.",
           language = "Languages.",
           organization = "Organizations.",
-          "secondary-language" = "Secondary language."
+          "secondary-language" = "Secondary language.",
+          "contact-info" = "Contact info."
         }
 
-        let subsection: string = path
+        const subsection: string = path
           .split(/\/in\/[A-z0-9-]+\/edit\//)
           .pop()
           .replace("forms/", "")
