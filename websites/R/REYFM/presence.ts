@@ -17,11 +17,9 @@ let totalListeners: number,
   channels: Channel[] = [];
 
 function newStats(): void {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function (): void {
-    if (this.readyState == 4 && this.status == 200) {
-      const data = JSON.parse(this.responseText);
-
+  fetch("https://api.reyfm.de/v4?voting=true")
+    .then((response) => response.json())
+    .then((data) => {
       totalListeners = data.all_listeners;
       const channelList: Array<string> = data.sequence,
         channelArray: Channel[] = [];
@@ -46,11 +44,7 @@ function newStats(): void {
         channel.timeEnd = channelData.now.time.end;
       });
       channels = channelArray;
-    }
-  };
-  xhttp.open("GET", "https://api.reyfm.de/v4?voting=true", true);
-  xhttp.withCredentials = false;
-  xhttp.send();
+    });
 }
 
 function findChannel(): string {
@@ -59,6 +53,7 @@ function findChannel(): string {
       .children) {
       for (const channel of rows.children) {
         if (
+          !channel.className.includes("desktop") &&
           (channel.firstElementChild.children[2]
             .firstElementChild as HTMLImageElement).src.includes("stop.png")
         ) {
