@@ -4,9 +4,8 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 
@@ -24,7 +23,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing rip statistics";
   } else if (document.location.pathname.includes("randomsiiva")) {
-    let currentChannel = document.querySelector("#author").textContent || 'SiIvaGunner',
+    const currentChannel = document.querySelector("#author").textContent || 'SiIvaGunner',
     currentTitle = document.querySelector("#nowplaying").textContent || null,
     timeOver = Math.floor(parseInt(document.querySelector("#timeover").textContent)) || null;
     presenceData.state = "Random " + currentChannel + " rip";
