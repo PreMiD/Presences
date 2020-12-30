@@ -189,16 +189,73 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     }
     //Profile page section.
-    else if (path.match(/\/in\/[A-z0-9-]+\//)) {
-      const userName = document
-        .querySelector(
-          "div.application-outlet > div.authentication-outlet > #profile-content > div > div > div > div:nth-child(2) > main > div > section > div:nth-child(2) > div:nth-child(2) > div:first-child > ul:first-child > li:first-child"
-        )
-        .innerHTML.trim();
+    else if (path.match(/\/in\/[A-z0-9-]+\/$/)) {
+      const userName = document.title.replace(" | LinkedIn", "");
 
-      presenceData.details = "Viewing a Profile:";
+      presenceData.details = "Viewing a profile:";
       presenceData.state = `${userName}.`;
       presenceData.startTimestamp = browsingStamp;
+    }
+    //Profile subsections.
+    else if (path.match(/\/in\/[A-z0-9-]+\//)) {
+      const userName = document.title.replace(" | LinkedIn", "");
+
+      presenceData.startTimestamp = browsingStamp;
+
+      //Profile detail subsection.
+      if (path.includes("/detail/")) {
+        enum detailSubSection {
+          "recent-activity" = "Activities",
+          skills = "Skills",
+          interests = "Interests",
+          "contact-info" = "Contact Info"
+        }
+
+        presenceData.details = "Viewing user details:";
+        presenceData.state = `${userName}'s ${
+          detailSubSection[
+            path
+              .split(/\/in\/[A-z0-9-]+\/detail\//)
+              .pop()
+              .split("/")
+              .shift() as keyof typeof detailSubSection
+          ]
+        }.`;
+      }
+      //Profile edit subsection.
+      else if (path.includes("/edit/")) {
+        enum editSubSection {
+          intro = "Intro",
+          about = "About.",
+          "add-feed-post" = "Posts",
+          "add-article" = "Articles",
+          "add-link" = "Links.",
+          position = "Experiences.",
+          education = "Education.",
+          certification = "Certifications.",
+          "volunteer-experience" = "Volunteer experiences.",
+          publication = "Publications.",
+          patent = "Patents.",
+          course = "Courses.",
+          project = "Projects.",
+          honor = "Honors & Awards.",
+          "test-score" = "Test scores.",
+          language = "Languages.",
+          organization = "Organizations.",
+          "secondary-language" = "Secondary language."
+        }
+
+        let subsection: string = path
+          .split(/\/in\/[A-z0-9-]+\/edit\//)
+          .pop()
+          .replace("forms/", "")
+          .split("/")
+          .shift();
+
+        presenceData.details = "Editing profile:";
+        presenceData.state =
+          editSubSection[subsection as keyof typeof editSubSection];
+      }
     }
     //Company page section.
     else if (path.match(/\/company\/[A-z0-9-]+\//)) {
@@ -208,7 +265,7 @@ presence.on("UpdateData", async () => {
         )
         .innerHTML.trim();
 
-      presenceData.details = "Viewing a Company:";
+      presenceData.details = "Viewing a company:";
       presenceData.state = `${companyName}.`;
       presenceData.startTimestamp = browsingStamp;
     }
@@ -220,7 +277,7 @@ presence.on("UpdateData", async () => {
         )
         .innerHTML.trim();
 
-      presenceData.details = "Viewing a School:";
+      presenceData.details = "Viewing a school:";
       presenceData.state = `${schoolName}.`;
       presenceData.startTimestamp = browsingStamp;
     }
@@ -230,7 +287,7 @@ presence.on("UpdateData", async () => {
       if (path.match(/\/groups\/[0-9]+\//)) {
         const groupName = document.title.replace(" | Groups | LinkedIn", "");
 
-        presenceData.details = "Viewing a Group:";
+        presenceData.details = "Viewing a group:";
         presenceData.state = `${groupName}.`;
         presenceData.startTimestamp = browsingStamp;
       } else {
