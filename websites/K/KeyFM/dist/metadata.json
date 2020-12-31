@@ -32,15 +32,15 @@
       "id": "changedetails",
       "title": "Change Line #1 (Song Details)",
       "icon": "fas fa-music",
-      "value": "🎵 | %artist% - %song%",
-      "placeholder": "🎵 | %artist% - %song%"
+      "value": "%artist% - %song%",
+      "placeholder": "%artist% - %song%"
     },
     {
       "id": "changestate",
       "title": "Change Line #2 (Presenter Details)",
       "icon": "fas fa-microphone",
-      "value": "🎙️ | %presenter%",
-      "placeholder": "🎙️ | %presenter%"
+      "value": "%presenter%",
+      "placeholder": "%presenter%"
     },
     {
       "id": "changesmalltext",
