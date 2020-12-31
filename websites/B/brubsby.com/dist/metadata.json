@@ -6,13 +6,13 @@
   },
   "url": "brubsby.com",
   "description": {
-    "en": "english"
+    "en": "brubsby.com hosts the random siivagunner rip player, pen plotter tool cozyvec, and other personal projects from brubsby"
   },
   "service": "brubsby.com",
   "version": "1.0.0",
-  "logo": "https://brubsby.com/assets/favicon.png",
-  "thumbnail": "https://brubsby.com/assets/favicon.png",
+  "logo": "https://imgur.com/Miem17T.png",
+  "thumbnail": "https://imgur.com/Miem17T.png",
   "color": "#FFFFFF",
-  "tags": ["brubsby"],
+  "tags": ["brubsby", "cozyvec", "siivagunner"],
   "category": "other"
 }
