@@ -9,19 +9,6 @@ const strings = presence.getStrings({
     episode: "presence.media.info.episode"
 });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-    videoTime: number,
-    videoDuration: number
-): Array<number> {
-    var startTime = Date.now();
-    var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-    return [Math.floor(startTime / 1000), endTime];
-}
 const startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -34,7 +21,7 @@ presence.on("UpdateData", async () => {
         const episode = episodeName.split('.Bölüm')[0].split(' ')[episodeName.split('.Bölüm')[0].split(' ').length - 1];
         data.details = episodeName.replace(`${episode}.Bölüm`, '').replace(`Episode ${episode}`, '');
         data.state = (await strings).episode.replace('{0}', episode);
-        const timestamps = getTimestamps(video.currentTime, video.duration);
+        const timestamps = presence.getTimestamps(video.currentTime, video.duration);
         if (!video.paused) {
             data.smallImageKey = "playing";
             data.smallImageText = (await strings).playing;
