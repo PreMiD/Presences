@@ -1,25 +1,25 @@
-const presence = new Presence({
-  clientId: "630480553694593025"
-});
+var presence = new Presence({
+    clientId: "630480553694593025"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browsing: "presence.activity.browsing"
+  });
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  browsing: string;
+/**
+ * Get Timestamps
+ * @param {Number} videoTime Current video time seconds
+ * @param {Number} videoDuration Video duration seconds
+ */
+function getTimestamps(
+  videoTime: number,
+  videoDuration: number
+): Array<number> {
+  var startTime = Date.now();
+  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  return [Math.floor(startTime / 1000), endTime];
 }
-
-async function getStrings(): Promise<LangStrings> {
-  return presence.getStrings(
-    {
-      play: "presence.playback.playing",
-      pause: "presence.playback.paused",
-      browsing: "presence.activity.browsing"
-    },
-    await presence.getSetting("lang")
-  );
-}
-
-const strings: Promise<LangStrings> = getStrings();
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -27,20 +27,19 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname.includes("/watch")) {
-    const video: HTMLVideoElement = document.querySelector(
+    var video: HTMLVideoElement = document.querySelector(
       ".VideoContainer video"
     );
-
     if (video && !isNaN(video.duration)) {
-      const showCheck = document.querySelector(
-          "[class$='title'] .ellipsize-text span"
-        )
-          ? true
-          : false,
-        timestamps = presence.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        );
+      var showCheck = document.querySelector(
+        "[class$='title'] .ellipsize-text span"
+      )
+        ? true
+        : false;
+      var timestamps = getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
       if (showCheck) {
         data.details =
@@ -69,12 +68,9 @@ presence.on("UpdateData", async () => {
         }
       } else {
         // if not a show
-        let regExp: any;
-
-        const title = document.querySelector(
-          "[class$='title'] h4.ellipsize-text"
-        ).textContent;
-
+        var regExp: any,
+          title = document.querySelector("[class$='title'] h4.ellipsize-text")
+            .textContent;
         if (/\(([^)]+)\)/.test(title.toLowerCase())) {
           // if is an extra, trailer, teaser or something else
           regExp = /\(([^)]+)\)/.exec(title);

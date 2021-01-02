@@ -1,5 +1,4 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "Timeraa",
     "id": "223238938716798978"
@@ -12,10 +11,6 @@
     {
       "name": "DooMLorD",
       "id": "465105167751315471"
-    },
-    {
-      "name": "EGGSY",
-      "id": "162969778699501569"
     }
   ],
   "service": "Netflix",
@@ -35,20 +30,14 @@
     "www.netflix.com",
     "netflix.com"
   ],
-  "version": "3.6.6",
-  "logo": "https://i.imgur.com/bYbfe0x.png",
-  "thumbnail": "https://i.imgur.com/MKtnNWz.jpg",
+  "version": "3.6.5",
+  "logo": "https://i.gyazo.com/2161fe603eec5196905176f5b8dcc325.png",
+  "thumbnail": "https://i.gyazo.com/28e3c4caccda67a4a299588c8058da50.jpg",
   "color": "#db0000",
   "tags": [
     "netflix",
     "video",
     "media"
-  ],
-  "settings": [
-    {
-      "id": "lang",
-      "multiLanguage": true
-    }
   ],
   "category": "videos"
 }
