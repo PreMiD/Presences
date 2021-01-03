@@ -6,13 +6,13 @@
   },
   "url": "astral.cool",
   "description": {
-    "english": "RCP for astral.cool"
+    "en": "Astral, a powerful and simple file hosting platform."
   },
   "service": "Astral",
   "version": "5",
-  "logo": "https://imgur.com/7BOEPb9.png",
-  "thumbnail": "https://imgur.com/vGJofqZ.png",
+  "logo": "https://i.imgur.com/7BOEPb9.png",
+  "thumbnail": "https://i.imgur.com/vGJofqZ.png",
   "color": "#FF0000",
-  "tags": [],
+  "tags": ["astral"],
   "category": "other"
 }
