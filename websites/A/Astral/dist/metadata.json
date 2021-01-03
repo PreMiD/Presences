@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "aspect",
+    "id": "659140496895115287"
+  },
+  "url": "astral.cool",
+  "description": {
+    "english": "RCP for astral.cool"
+  },
+  "service": "Astral",
+  "version": "5",
+  "logo": "https://imgur.com/7BOEPb9.png",
+  "thumbnail": "https://imgur.com/vGJofqZ.png",
+  "color": "#FF0000",
+  "tags": [],
+  "category": "other"
+}
