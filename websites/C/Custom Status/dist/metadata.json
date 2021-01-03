@@ -6,14 +6,14 @@
   },
   "service": "Custom Status",
   "description": {
-    "en": "Custom Status is a way to set custom statuses using PreMiD. You can customize everything but using custom images. You have to visit [this page](https://eggsy.xyz/projects/premid/custom-status) to start using (also please take a look at [this page](https://eggsy-tailwind.netlify.app/projects/premid/custom-status) and try the new look out, don't forget that this page will be removed once I'm done all other pages too)!",
-    "tr": "Custom Status, Discord'un kendi özelliği gibi isteğinize göre ayarlanabilen bir oynuyor kısmıdır. Bu servis ile PreMiD kullanarak istediğiniz resmi seçme olanağı dışında bir RPC ile yapabileceğiniz her şeyi yapabilirsiniz. Servisin çalışması için servisi ekleyip, [buradaki](https://eggsy.xyz/projects/premid/custom-status) sayfaya gitmelisiniz (eğer bu sayfanın yeni görünümünün nasıl olacağını görmek ve denemek isterseniz ayrıca [buradaki](https://eggsy-tailwind.netlify.app/projects/premid/custom-status) sayfaya da gidebilirsiniz, unutmayın, bu sayfa diğer sayfalar yenilendikten sonra kaldırılacaktır)."
+    "en": "Custom Status is a way to set custom statuses using PreMiD. You can customize everything but using custom images. You have to visit [this page](https://eggsy.xyz/projects/premid/custom-status) to start using (also please take a look at [this page](https://new.eggsy.xyz/projects/premid/custom-status) and try the new look out, don't forget that this page will be removed once I'm done all other pages too)!",
+    "tr": "Custom Status, Discord'un kendi özelliği gibi isteğinize göre ayarlanabilen bir oynuyor kısmıdır. Bu servis ile PreMiD kullanarak istediğiniz resmi seçme olanağı dışında bir RPC ile yapabileceğiniz her şeyi yapabilirsiniz. Servisin çalışması için servisi ekleyip, [buradaki](https://eggsy.xyz/projects/premid/custom-status) sayfaya gitmelisiniz (eğer bu sayfanın yeni görünümünün nasıl olacağını görmek ve denemek isterseniz ayrıca [buradaki](https://new.eggsy.xyz/projects/premid/custom-status) sayfaya da gidebilirsiniz, unutmayın, bu sayfa diğer sayfalar yenilendikten sonra kaldırılacaktır)."
   },
-  "url": ["eggsy.xyz", "eggsy-tailwind.netlify.app"],
-  "regExp": "eggsy[.]xyz[/]projects[/]premid[/]custom-status|eggsy-tailwind[.]netlify[.]app[/]projects[/]premid[/]custom-status",
-  "version": "1.3.0",
+  "url": ["eggsy.xyz", "new.eggsy.xyz", "eggsy-tailwind.netlify.app"],
+  "regExp": "(new[.]eggsy[.]xyz|eggsy[.]xyz|eggsy-tailwind[.]netlify[.]app)[/]projects[/]premid[/]custom-status",
+  "version": "1.3.1",
   "logo": "https://i.imgur.com/xHFV3Ny.png",
-  "thumbnail": "https://i.imgur.com/YvsIbp9.jpeg",
+  "thumbnail": "https://i.imgur.com/hZGhGbg.jpg",
   "color": "#6c82cf",
   "tags": ["eggsy", "premid", "custom", "status"],
   "warning": true,
