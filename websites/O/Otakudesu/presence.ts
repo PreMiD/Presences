@@ -5,7 +5,7 @@ presenceData: PresenceData = {
     largeImageKey: "logo"
 };
 
-let video: Record<"currentTime"|"duration"|"paused", boolean|number> | void = undefined;
+// let video: Record<"currentTime"|"duration"|"paused", boolean|number> | void = undefined;
 
 interface iFrameData {
   currentTime: number;
@@ -56,18 +56,18 @@ presence.on("UpdateData", async () => {
             presenceData.state = document.querySelector(".jdlrx > h1").textContent.replace(/Subtitle Indonesia/gi, "");
           }
           const mirrorStream = document.querySelector(".mirrorstream");
-          if (mirrorStream && video) {
-              if (video.paused) {
-                  presenceData.smallImageText = "Paused playback";
-                  presenceData.smallImageKey = "pause";
-              }
-              else {
-                  presenceData.smallImageText = "Resumed playback";
-                  presenceData.smallImageKey = "play";
-              }
-              presenceData.details = "Watching anime";
-              presenceData.state = document.querySelector(".posttl").textContent.replace(/Subtitle Indonesia/gi, "");
-          } else if (mirrorStream && !video) {
+          // if (mirrorStream && video) {
+          //     if (video.paused) {
+          //         presenceData.smallImageText = "Paused playback";
+          //         presenceData.smallImageKey = "pause";
+          //     }
+          //     else {
+          //         presenceData.smallImageText = "Resumed playback";
+          //         presenceData.smallImageKey = "play";
+          //     }
+          //     presenceData.details = "Watching anime";
+          //     presenceData.state = document.querySelector(".posttl").textContent.replace(/Subtitle Indonesia/gi, "");
+          /* } else*/ if (mirrorStream /*&& !video*/) {
             presenceData.details = "Watching anime";
             presenceData.state = document.querySelector(".posttl").textContent.replace(/Subtitle Indonesia/gi, "");
           }
@@ -77,6 +77,6 @@ presence.on("UpdateData", async () => {
   presence.setActivity(presenceData);
 });
 
-presence.on("iFrameData", (data: iFrameData) => {
-  video = data;
-});
+// presence.on("iFrameData", (data: iFrameData) => {
+//   video = data;
+// });
