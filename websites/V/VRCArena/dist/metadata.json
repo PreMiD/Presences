@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "KnuffelBeestje",
+    "id": "219155156569161731"
+  },
+  "url":
+    "www.vrcarena.com",
+  "description": {
+    "en": "VRCArena is a website created to provide VRChat assets like avatars, accessoires etc",
+    "nl": "VRCArena is een website dat ontwikkeld is om VRChat assets zoals avatars, accessoires etc een thuis te geven"
+  },
+  "service": "VRCArena",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/Kio1VbP.jpg",
+  "thumbnail": "https://i.imgur.com/F7iayRw.png",
+  "color": "#5f3d8a",
+  "tags": [
+    "vrchat",
+    "vr",
+    "games"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fas fa-user-secret",
+      "value": false
+    }
+  ]
+}
