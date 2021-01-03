@@ -1,12 +1,12 @@
 /* Global variables */
 const presence = new Presence({
-  clientId: "795235371029233684",
+  clientId: "795235371029233684"
 });
 
 /* Main eventHandler */
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     },
     privacymode = await presence.getSetting("privacy");
 
