@@ -7,11 +7,11 @@ presenceData: PresenceData = {
 
 // let video: Record<"currentTime"|"duration"|"paused", boolean|number> | void = undefined;
 
-interface iFrameData {
-  currentTime: number;
-  duration: number;
-  paused: boolean;
-}
+// interface iFrameData {
+//   currentTime: number;
+//   duration: number;
+//   paused: boolean;
+// }
 
 // function getTimestamps(
 //   videoTime: number,
