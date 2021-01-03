@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
         const currentKanji = document.querySelector("#current-kanji");
         if (currentKanji != null) {
             const challenge = document.querySelector("#challenge").textContent.match(/reading|meaning/)[0];
-            presenceData.state = `${currentKanji.textContent} ${challenge.charAt(0).toUpperCase() + challenge.slice(1)}`;
+            presenceData.state = `${challenge.charAt(0).toUpperCase() + challenge.slice(1)} of ${currentKanji.textContent}`;
         } else {
             delete presenceData.state;
         }
@@ -106,7 +106,21 @@ presence.on("UpdateData", async () => {
         const kanji = document.querySelector("#current-kanji"),
             progress = document.querySelector("#progress-bar-wrapper");
         if (kanji != null && progress != null) {
-            presenceData.state = `${kanji.textContent} ・ ${progress.getAttribute("progress")}%`;
+            presenceData.state = `${kanji.textContent} ・ ${Math.round((parseFloat(progress.getAttribute("progress")) + Number.EPSILON) * 100) / 100}%`;
+        } else {
+            delete presenceData.state;
+        }
+    } else if (pathname.startsWith("/summary")) {
+        presenceData.details = "Viewing review results";
+        const statsList = document.querySelectorAll("#summary-stats li");
+        if (statsList != null) {
+            const totalLi = statsList[0],
+                correctLi = statsList[1];
+            if (totalLi != null && correctLi != null) {
+                presenceData.state = `${correctLi.querySelector("p").textContent}/${totalLi.querySelector("p").textContent} correct`;
+            } else {
+                delete presenceData.state;
+            }
         } else {
             delete presenceData.state;
         }
@@ -119,3 +133,4 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
     }
 });
+// document.querySelectorAll("#summary-stats li")[2].querySelector("p").textContent;
