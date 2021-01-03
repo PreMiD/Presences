@@ -5,23 +5,6 @@ presenceData: PresenceData = {
     largeImageKey: "logo"
 };
 
-// let video: Record<"currentTime"|"duration"|"paused", boolean|number> | void = undefined;
-
-// interface iFrameData {
-//   currentTime: number;
-//   duration: number;
-//   paused: boolean;
-// }
-
-// function getTimestamps(
-//   videoTime: number,
-//   videoDuration: number
-// ): Array<number> {
-//   const startTime = Date.now(),
-//   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-//   return [Math.floor(startTime / 1000), endTime];
-// }
-
 presence.on("UpdateData", async () => {
   const startTimestamp = Date.now();
   presenceData.startTimestamp = startTimestamp;
@@ -56,18 +39,7 @@ presence.on("UpdateData", async () => {
             presenceData.state = document.querySelector(".jdlrx > h1").textContent.replace(/Subtitle Indonesia/gi, "");
           }
           const mirrorStream = document.querySelector(".mirrorstream");
-          // if (mirrorStream && video) {
-          //     if (video.paused) {
-          //         presenceData.smallImageText = "Paused playback";
-          //         presenceData.smallImageKey = "pause";
-          //     }
-          //     else {
-          //         presenceData.smallImageText = "Resumed playback";
-          //         presenceData.smallImageKey = "play";
-          //     }
-          //     presenceData.details = "Watching anime";
-          //     presenceData.state = document.querySelector(".posttl").textContent.replace(/Subtitle Indonesia/gi, "");
-          /* } else*/ if (mirrorStream /*&& !video*/) {
+          if (mirrorStream) {
             presenceData.details = "Watching anime";
             presenceData.state = document.querySelector(".posttl").textContent.replace(/Subtitle Indonesia/gi, "");
           }
@@ -76,7 +48,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData);
 });
-
-// presence.on("iFrameData", (data: iFrameData) => {
-//   video = data;
-// });
