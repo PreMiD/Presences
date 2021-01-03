@@ -23,15 +23,12 @@ presence.on("UpdateData", async () => {
     domainPicker = document.getElementsByClassName("ant-select-open")[0];
 
    if (embedEditor && embedEditor.parentElement.style.display !== "none") {
-       presenceData.details = "";
        presenceData.state = "Editing their embed";
        presenceData.startTimestamp = Date.now();
    } else if (domainPicker) {
-       presenceData.details = "";
        presenceData.state = "Choosing a domain";
        presenceData.startTimestamp = Date.now();
    } else if (intervalEditor && intervalEditor.style.display !== "none") {
-       presenceData.details = "";
        presenceData.state = "Editing their auto-wipe interval";
        presenceData.startTimestamp = Date.now();
    } else {
@@ -53,7 +50,6 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing their account";
     presenceData.startTimestamp = Date.now();
   } else if (!isNaN(parseInt(path.charAt(path.length - 1)))) {
-    presenceData.details = "";
     presenceData.state = `Viewing ${document.getElementsByClassName("title___aqmzM")[0].innerHTML}'s profile`;
     presenceData.startTimestamp = Date.now();
   }
