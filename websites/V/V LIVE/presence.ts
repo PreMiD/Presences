@@ -491,7 +491,6 @@ presence.on("UpdateData", async () => {
   }
 
   if (presenceData.details) {
-    console.log(presenceData, privacy);
     if (!showTimestamps) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
