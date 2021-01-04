@@ -149,7 +149,6 @@ presence.on("UpdateData", async () => {
         "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-name"
       );
       const programMetadata = document.querySelector(
-
         "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-metadata"
       );
       if (document.location.pathname.includes("/7339131/")) {
