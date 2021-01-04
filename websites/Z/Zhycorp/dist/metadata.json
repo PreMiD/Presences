@@ -1,0 +1,24 @@
+{
+    "author": {
+      "name": "Zen",
+      "id": "725331428962992131"
+    },
+    "service": "Zhycorp",
+    "description": {
+      "en": "Zhycorp is a fairly active and growing community, filled with imaginative members, which might make this community even more interesting."
+    },
+    "url": [
+        "zhycorp.com",
+        "bin.zhycorp.com"
+    ],
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/YR1SNzp.png",
+    "thumbnail": "https://i.imgur.com/CxO5lUg.png",
+    "color": "#ffffff",
+    "tags": [
+      "zhycorp",
+      "botlist",
+      "other"
+    ],
+    "category": "other"
+  }
