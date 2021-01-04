@@ -133,4 +133,3 @@ presence.on("UpdateData", async () => {
         presence.setActivity(presenceData);
     }
 });
-// document.querySelectorAll("#summary-stats li")[2].querySelector("p").textContent;
