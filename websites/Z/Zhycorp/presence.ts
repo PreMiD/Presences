@@ -8,8 +8,15 @@ presenceData: PresenceData = {
 presence.on("UpdateData", async () => {
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   if (document.location.hostname.startsWith("bin")) {
-    presenceData.details = "Viewing zhycorp's hastebin";
     presenceData.largeImageKey = "hastebin";
+    if (document.location.pathname.endsWith("/") && document.location.pathname.length > 1 ? document.location.pathname.slice(0, document.location.pathname.length - 1) : document.location.pathname === "/") {
+      if (document.querySelector("textarea").value !== "") {
+        presenceData.details = "Writing something..";
+      } else presenceData.details = "Viewing zhycorp's hastebin";
+    } else {
+      presenceData.details = "Reading a hastebin";
+      presenceData.smallImageKey = "reading";
+    }
   } else {
     switch (document.location.pathname.endsWith("/") &&
         document.location.pathname.length > 1
