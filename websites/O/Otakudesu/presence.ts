@@ -6,8 +6,7 @@ presenceData: PresenceData = {
 };
 
 presence.on("UpdateData", async () => {
-  const startTimestamp = Date.now();
-  presenceData.startTimestamp = startTimestamp;
+  presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   switch (document.location.pathname.endsWith("/") &&
       document.location.pathname.length > 1
       ? document.location.pathname.slice(0, document.location.pathname.length - 1)
