@@ -45,7 +45,3 @@ presence.on("UpdateData", async () => {
   }
   presence.setActivity(presenceData);
 });
-
-function toTitleCase(string: string) {
-  return string.split(" ").map(x => x.charAt(0).toUpperCase() + x.slice(1)).join(" ");
-}
