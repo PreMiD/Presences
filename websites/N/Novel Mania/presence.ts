@@ -12,17 +12,17 @@ presence.on("UpdateData", async () => {
     porcent: HTMLElement = document.querySelector(
       "#settings-section > div > ul > li:nth-child(1) > div > div"
       ),
-    currentChapTitle: any = document.querySelector(
+    currentChapTitle: HTMLElement = document.querySelector(
       "body > div:nth-child(4) > main > section.landing.novel-single > div.novel-head.pt-3 > div > div > div:nth-child(1) > nav > ol > li.breadcrumb-item.active"
       ),
     novelName: HTMLElement = document.querySelector("h1"),
     VolNumb: HTMLElement = document.querySelector(
       "#chapter-content > h3"
       ),
-    NovelTitle: any = document.querySelector(
+    NovelTitle: HTMLElement = document.querySelector(
       "body > div:nth-child(4) > main > section.landing.novel-single > div.novel-head.pt-3 > div > div > div:nth-child(2) > div > h1 > a"
     ),
-    PagTitle: any = document.querySelector("h2"),
+    PagTitle: HTMLElement = document.querySelector("h2"),
     favoritar: HTMLElement = document.querySelector("#myTab"
     );
   if (path == "/" || !path) {
