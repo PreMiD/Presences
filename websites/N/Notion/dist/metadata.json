@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "DecadeDecaf",
+    "id": "234109055554158593"
+  },
+  "url": [
+    "www.notion.so",
+    "notion.so"
+  ],
+  "description": {
+    "en": "Notion is the all-in-one workspace for your notes, tasks, wikis, and databases."
+  },
+  "service": "Notion",
+  "version": "1.0.0",
+  "logo": "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png",
+  "thumbnail": "https://www.notion.so/images/meta/default.png",
+  "color": "#FF0000",
+  "tags": [
+    "productivity",
+    "management",
+    "notes"
+  ],
+  "color": "#FFFFFF",
+  "category": "other"
+}
