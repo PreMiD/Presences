@@ -2,11 +2,11 @@ const presence = new Presence({
   clientId: "795564487910227968"
 }),
 presenceData: PresenceData = {
-  largeImageKey: "vidio"
+  largeImageKey: "vidio",
+  startTimestamp: Math.floor(Date.now() / 1000)
 };
 
 presence.on("UpdateData", async () => {
-  presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   switch (document.location.pathname.endsWith("/") &&
       document.location.pathname.length > 1
       ? document.location.pathname.slice(0, document.location.pathname.length - 1)
