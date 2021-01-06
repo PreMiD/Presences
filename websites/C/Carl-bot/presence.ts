@@ -27,8 +27,8 @@ presence.on("UpdateData", () => {
   }
 
   if (document.location.hostname === "docs.carl.gg") {
-    presenceData.smallImageKey = "reading",
-    presenceData.details = "Documentation"
+    presenceData.smallImageKey = "reading";
+    presenceData.details = "Documentation";
 
     presenceData.state = document.querySelector("h1").textContent;
   }
