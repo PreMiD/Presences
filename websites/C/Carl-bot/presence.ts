@@ -26,10 +26,13 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
+  if (document.location.hostname === "docs.carl.gg") {
+    presenceData.smallImageKey = "reading",
+    presenceData.details = "Documentation"
+
+    presenceData.state = document.querySelector("h1").textContent;
   }
+
+  presence.setActivity(presenceData);
+
 });
