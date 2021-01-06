@@ -11,8 +11,6 @@ presence.on("UpdateData", () => {
   };
 
   if (document.location.hostname == "carl.gg") {
-    console.log("aaaa");
-    
     if (document.location.pathname.startsWith("/dashboard/")) {
       const title = document.querySelector(
         "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
