@@ -11,10 +11,12 @@ presence.on("UpdateData", () => {
   };
 
   if (document.location.hostname == "carl.gg") {
+    console.log("aaaa");
+    
     if (document.location.pathname.startsWith("/dashboard/")) {
       const title = document.querySelector(
         "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
-      ).textContent;
+      ).textContent.split("Jump to")[0].trim();
       presenceData.details = "Managing the settings of:";
       presenceData.state = title;
     } else if (document.location.pathname.startsWith("/servers")) {
