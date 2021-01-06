@@ -41,8 +41,8 @@ interface LangStrings {
 async function getStrings(): Promise<LangStrings> {
   return presence.getStrings(
     {
-      play: "general.paused",
-      pause: "general.playing",
+      play: "general.playing",
+      pause: "general.paused",
       featured: "spotify.featured",
       bestPodcasts: "spotify.bestPodcasts",
       charts: "spotify.charts",
