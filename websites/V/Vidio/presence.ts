@@ -49,6 +49,8 @@ presence.on("UpdateData", async () => {
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
             if (video.paused) {
+              delete presenceData.startTimestamp;
+              delete presenceData.endTimestamp;
               presenceData.smallImageKey = "pause";
               presenceData.smallImageText = "Video Paused";
             } else {
