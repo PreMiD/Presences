@@ -46,16 +46,20 @@ presence.on("UpdateData", async () => {
       // Asset pages
     } else if (document.location.pathname.includes("/assets")) {
       // User is viewing an asset.
-      if (privacymode === false) {
-        const assetName = document.querySelector("h1.MuiTypography-root > a")
-            .textContent,
-          parentforinfo = document.querySelector("h1.MuiTypography-root")
-            .parentNode,
-          otherinfo = parentforinfo.querySelector("div > div").textContent;
-        presenceData.details = assetName;
-        presenceData.state = otherinfo;
+      if (document.location.pathname.includes("/create")) {
+        presenceData.details = "Creating an asset";
       } else {
-        presenceData.details = "Viewing an asset";
+        if (privacymode === false) {
+          const assetName = document.querySelector("h1.MuiTypography-root > a")
+              .textContent,
+            parentforinfo = document.querySelector("h1.MuiTypography-root")
+              .parentNode,
+            otherinfo = parentforinfo.querySelector("div > div").textContent;
+          presenceData.details = assetName;
+          presenceData.state = otherinfo;
+        } else {
+          presenceData.details = "Looking at an asset";
+        }
       }
       presence.setActivity(presenceData);
       // User pages
@@ -96,7 +100,13 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Browsing authors";
           break;
         case "/about":
-          presenceData.details = "About page";
+          presenceData.details = "Browsing about page";
+          break;
+        case "/requests":
+          presenceData.details = "Browsing requests";
+          break;
+        case "/requests/create":
+          presenceData.details = "Creating a request";
           break;
         case "/patreon":
           presenceData.details = "Browsing patrons";
