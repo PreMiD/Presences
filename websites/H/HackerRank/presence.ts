@@ -6,9 +6,9 @@ presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: Math.floor(Date.now() / 1000)
-  };
-  const path = (text: string) => { return document.location.pathname.includes(text) },
-   title = document.querySelector("h1").textContent;
+  },
+    path = (text: string) => { return document.location.pathname.includes(text) },
+    title = document.querySelector("h1").textContent;
 
   if (path("/dashboard")) {
     presenceData.details = "In dashboard";
@@ -32,7 +32,7 @@ presence.on("UpdateData", () => {
     // profiles
     const username = document.querySelector("#content p.profile-username-heading").textContent;
     presenceData.details = "Viewing profile of:";
-    presenceData.state = `${title} (${username})`
+    presenceData.state = `${title} (${username})`;
   } else if (document.location.pathname.match(/\/companies\/.*?\/jobs/g) && title !== "Find Your Dream Job") {
     presenceData.details = "Viewing a job:";
     presenceData.state = title;
@@ -48,4 +48,4 @@ presence.on("UpdateData", () => {
     presenceData.state = name;
   }
   presence.setActivity(presenceData);
-})
+});
