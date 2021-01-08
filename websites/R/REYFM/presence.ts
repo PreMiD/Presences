@@ -73,15 +73,27 @@ setInterval(() => {
 }, 10000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "rey",
-      smallImageKey: "reading"
-    },
-    info = await presence.getSetting("sInfo"),
+  const info = await presence.getSetting("sInfo"),
     elapsed = await presence.getSetting("tElapsed"),
     format1 = await presence.getSetting("sFormat1"),
     format2 = await presence.getSetting("sFormat2"),
-    format3 = await presence.getSetting("sListeners");
+    format3 = await presence.getSetting("sListeners"),
+    logo: number = await presence.getSetting("logo"),
+    logoArr = [
+      "reywhitebacksmall",
+      "reyblackbacksmall",
+      "reycolorbacksmall",
+      "reywhiteback",
+      "reyblackback",
+      "reycolorback",
+      "reywhite",
+      "reyblack",
+      "rey"
+    ],
+    presenceData: PresenceData = {
+      largeImageKey: logoArr[logo] || "reywhitebacksmall",
+      smallImageKey: "reading"
+    };
 
   let showFormat3 = false;
 
