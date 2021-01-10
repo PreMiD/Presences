@@ -1,14 +1,16 @@
 const presence = new Presence({
-  clientId: "655534149871992845"
-}),
+    clientId: "655534149871992845"
+  }),
   startTimestamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp
-  },
-    path = (text: string) => { return document.location.pathname.includes(text) },
+      largeImageKey: "logo",
+      startTimestamp
+    },
+    path = (text: string) => {
+      return document.location.pathname.includes(text);
+    },
     title = document.querySelector("h1").textContent;
 
   if (path("/dashboard")) {
@@ -21,7 +23,8 @@ presence.on("UpdateData", () => {
     presenceData.state = title;
   } else if (path("/skills-verification")) {
     presenceData.details = "Skills Certification";
-    if (title !== "Get Your Skills Certified") presenceData.state = title.split("Skills Certification Test")[0].trim();
+    if (title !== "Get Your Skills Certified")
+      presenceData.state = title.split("Skills Certification Test")[0].trim();
   } else if (path("/competitions")) {
     presenceData.details = "Viewing a competition:";
     presenceData.state = title;
@@ -29,12 +32,21 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing inbox";
   } else if (path("/notifications")) {
     presenceData.details = "Viewing notifications";
-  } else if (document.querySelector("#content button.ui-btn.ui-btn-normal.ui-btn-primary.profile-btn-follow.ui-btn-styled")) {
+  } else if (
+    document.querySelector(
+      "#content button.ui-btn.ui-btn-normal.ui-btn-primary.profile-btn-follow.ui-btn-styled"
+    )
+  ) {
     // profiles
-    const username = document.querySelector("#content p.profile-username-heading").textContent;
+    const username = document.querySelector(
+      "#content p.profile-username-heading"
+    ).textContent;
     presenceData.details = "Viewing profile of:";
     presenceData.state = `${title} (${username})`;
-  } else if (document.location.pathname.match(/\/companies\/.*?\/jobs/g) && title !== "Find Your Dream Job") {
+  } else if (
+    document.location.pathname.match(/\/companies\/.*?\/jobs/g) &&
+    title !== "Find Your Dream Job"
+  ) {
     presenceData.details = "Viewing a job:";
     presenceData.state = title;
   } else if (path("/jobs/")) {

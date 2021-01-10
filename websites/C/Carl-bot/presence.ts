@@ -12,9 +12,12 @@ presence.on("UpdateData", () => {
 
   if (document.location.hostname == "carl.gg") {
     if (document.location.pathname.startsWith("/dashboard/")) {
-      const title = document.querySelector(
-        "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
-      ).textContent.split("Jump to")[0].trim();
+      const title = document
+        .querySelector(
+          "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
+        )
+        .textContent.split("Jump to")[0]
+        .trim();
       presenceData.details = "Managing the settings of:";
       presenceData.state = title;
     } else if (document.location.pathname.startsWith("/servers")) {
@@ -34,5 +37,4 @@ presence.on("UpdateData", () => {
   }
 
   presence.setActivity(presenceData);
-
 });
