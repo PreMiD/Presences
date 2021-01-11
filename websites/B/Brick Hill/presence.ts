@@ -2,7 +2,6 @@ const presence = new Presence({
   clientId: "797879854343127040"
 });
 
-let title: any;
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -54,9 +53,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Changing profile settings...";
   } else if (document.location.pathname.includes("/thread/")) {
     presenceData.startTimestamp = browsingStamp;
-    title = document.querySelector(".top");
+    const title = document.querySelector(".top");
     presenceData.details = "Viewing Thread:";
-    presenceData.state = title.innerText;
+    presenceData.state = title.textContent;
   }
 
   if (presenceData.details == null) {
