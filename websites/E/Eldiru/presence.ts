@@ -1,4 +1,4 @@
-let eldiru = new Presence({
+const eldiru = new Presence({
     clientId: "798139973240225812"
   }), browsingStamp = Math.floor(Date.now() / 1000);
   
