@@ -17,9 +17,6 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/play/")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing games...";
-  } else if (document.location.pathname == "/shop/") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Browsing the catalog...";
   } else if (document.location.pathname.includes("/clans/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing clans...";
@@ -54,7 +51,17 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     const title = document.querySelector(".top");
     presenceData.details = "Viewing Thread:";
-    presenceData.state = title.textContent;
+    presenceData.state = title.textContent; 
+  } else if (document.location.pathname.includes("/shop/")) {
+    if (document.location.pathname == "/shop/") {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing catalog...";
+    } else {
+      presenceData.startTimestamp = browsingStamp;
+      const itemName = document.querySelector(".medium-text");
+      presenceData.details = "Viewing Item:";
+      presenceData.state = itemName.textContent;
+    }
   }
 
   if (presenceData.details == null) {
