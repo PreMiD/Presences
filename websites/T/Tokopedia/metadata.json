@@ -1,0 +1,64 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "author": {
+        "name": "WilloIzCitron#8360",
+        "id": "735410445409845251"
+    },
+    "contributors": [
+        {
+            "name": "WilloIzCitron#8360",
+            "id": "735410445409845251"
+        }
+    ],
+    "service": "Tokopedia",
+    "description": {
+        "en": "Rich presence for Tokopedia - The indonesian E-commentre"
+    },
+    "url": "URL",
+    "version": "VERSION",
+    "logo": "URL",
+    "thumbnail": "URL",
+    "color": "#HEX000",
+    "tags": [
+        "TAG1",
+        "TAG2"
+    ],
+    "category": "Shopping",
+    "regExp": "REGEXP",
+    "iFrameRegExp": "REGEXP",
+    "iframe": false,
+    "readLogs": false,
+    "settings": [
+        {
+            "id": "ID",
+            "multiLanguage": true
+        },
+        {
+            "id": "ID",
+            "title": "DISPLAY TITLE",
+            "icon": "FONTAWESOME ICON",
+            "value": true
+        },
+        {
+            "id": "ID",
+            "if": {
+                "ID": true
+            },
+            "title": "DISPLAY TITLE",
+            "icon": "FONTAWESOME ICON",
+            "value": "\"%song%\" by %artist%",
+            "placeholder": "use %song% or %artist%"
+        },
+        {
+            "id": "ID",
+            "title": "DISPLAY TITLE",
+            "icon": "FONTAWESOME ICON",
+            "value": 0,
+            "values": [
+                "1",
+                "2",
+                "etc."
+            ]
+        }
+    ]
+}
