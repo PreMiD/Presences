@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
  
   
   var path = document.location.pathname;
-  if(path.includes("/p"){
+  if(path.includes("/p")){
      presenceData.details="Viewing Product List....";
      }
 });
