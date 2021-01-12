@@ -1,9 +1,8 @@
 const presence = new Presence({
-    clientId: "798368817318330400" //The client ID of the Application created at https://discordapp.com/developers/applications
+    clientId: "798368817318330400"
   }),
   strings = presence.getStrings({
     search: "presence.playback.search",
-    //You can use this to get translated strings in their browser language
   });
 
 presence.on("UpdateData", async () => {
