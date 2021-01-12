@@ -14,51 +14,14 @@
     "description": {
         "en": "Rich presence for Tokopedia - The Indonesian E-Commerce Site"
     },
-    "url": "URL",
-    "version": "VERSION",
+    "url": "www.tokopedia.com",
+    "version": "1.0",
     "logo": "URL",
     "thumbnail": "URL",
     "color": "#HEX000",
     "tags": [
-        "TAG1",
-        "TAG2"
+        "e-commerce",
+        "shopping"
     ],
-    "category": "Shopping",
-    "regExp": "REGEXP",
-    "iFrameRegExp": "REGEXP",
-    "iframe": false,
-    "readLogs": false,
-    "settings": [
-        {
-            "id": "ID",
-            "multiLanguage": true
-        },
-        {
-            "id": "ID",
-            "title": "DISPLAY TITLE",
-            "icon": "FONTAWESOME ICON",
-            "value": true
-        },
-        {
-            "id": "ID",
-            "if": {
-                "ID": true
-            },
-            "title": "DISPLAY TITLE",
-            "icon": "FONTAWESOME ICON",
-            "value": "\"%song%\" by %artist%",
-            "placeholder": "use %song% or %artist%"
-        },
-        {
-            "id": "ID",
-            "title": "DISPLAY TITLE",
-            "icon": "FONTAWESOME ICON",
-            "value": 0,
-            "values": [
-                "1",
-                "2",
-                "etc."
-            ]
-        }
-    ]
+    "category": "other",
 }
