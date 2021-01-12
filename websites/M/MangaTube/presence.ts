@@ -8,55 +8,42 @@ presence.on("UpdateData", async () => {
   };
 
   //Startseite
-
   if (document.location.pathname == "/") {
     data.details = "| Startseite";
 
     //Serien
-  } else if (document.location.pathname.includes("/search/")) {
-    const search = document.querySelector("#in_title > span.text").textContent;
+  } else if (document.location.pathname.includes("/search")) {
     data.details = "| Erweiterte Suche";
-    data.state = search;
   } else if (document.location.pathname.includes("/read/")) {
-    const chapter = document.querySelector(
-        "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > button"
-      ).textContent,
-      browsingStamp = Math.floor(Date.now() / 1000),
+    const chapter = document
+        .querySelector(
+          "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.chapter-dropdown > ul > li.active > a"
+        )
+        .textContent.replace("Seite", "Kapitel"),
       manganame = document
         .querySelector("head > title")
         .textContent.split("- Kapitel ")[0],
-      seite = document.querySelector(
-        "body > div.blur-content > div > div.reader-navigation > div.container > div.pages-control > div.dropdown.page-dropdown > button > span.page-text"
-      ).textContent;
+      seite = document.querySelector(".page-text").textContent;
     data.details = manganame;
     data.state = chapter + " | " + seite;
-    data.startTimestamp = browsingStamp;
     data.smallImageKey = "manga";
-  } else if (
-    document.location.pathname == "/series" ||
-    document.location.pathname == "/series/"
-  ) {
-    const filter = document.querySelector(
-      "#series_list > div.panel-body > div.col-md-12 > div:nth-child(3) > a"
-    ).textContent;
-    data.details = "| Serien";
-    data.state = filter;
   } else if (document.location.pathname.startsWith("/series/")) {
-    const manga = document.querySelector(
-        "body > div.blur-content > div.wraper > div > div > div.content-container > div.row > div.col-md-8.series-detailed > h1"
-      ).textContent,
-      form = document
-        .querySelector(
-          "body > div.blur-content > div.wraper > div > div > div.content-container > div.row > div.col-md-8.series-detailed > div.row > div.col-md-8.col-sm-8.col-offest-xs-2.col-xs-12 > ul > li:nth-child(5) > a"
-        )
-        .textContent.split("(japanische Comics)")[0];
-    data.details = "| " + form;
-    data.state = manga;
+    const name = document.querySelector(".series-title").textContent;
+    data.details = "| Serie";
+    data.state = name;
+  } else if (document.location.pathname.startsWith("/series")) {
+    data.details = "| Serien";
+  } else if (document.location.pathname.includes("/serieslist")) {
+    const serieslist = document
+      .querySelector("head > title")
+      .textContent.split("- Manga-Tube")[0];
+    data.details = "| Serienliste";
+    data.state = serieslist;
 
     //Community
-  } else if (document.location.pathname.startsWith("/team")) {
+  } else if (document.location.pathname.includes("/team")) {
     data.details = "| Team";
-  } else if (document.location.pathname.endsWith("/partner")) {
+  } else if (document.location.pathname.startsWith("/partner")) {
     data.details = "| Partner";
   } else if (document.location.pathname.startsWith("/gewinnspiel")) {
     const giveaway = document
@@ -64,9 +51,9 @@ presence.on("UpdateData", async () => {
       .textContent.split(" - Manga-Tube")[0];
     data.details = "| Gewinnspiel";
     data.state = giveaway;
-  } else if (document.location.pathname.endsWith("/join")) {
-    data.details = "| Bewerbungsformular";
-  } else if (document.location.pathname.endsWith("/faq")) {
+  } else if (document.location.pathname.startsWith("/join")) {
+    data.details = "| Bewerben";
+  } else if (document.location.pathname.startsWith("/faq")) {
     data.details = "| FAQ";
 
     //Profilbar
@@ -78,32 +65,41 @@ presence.on("UpdateData", async () => {
       data.details = "| Umfrage";
       data.state = poll;
     }
-  } else if (document.location.pathname.includes("/inbox/")) {
+  } else if (document.location.pathname.includes("/write/")) {
     data.details = "| Postfach";
-  } else if (document.location.pathname.includes("/edit/")) {
-    data.details = "| Profil bearbeiten";
+    data.state = "Nachricht Verfassen";
+  } else if (document.location.pathname.includes("/inbox")) {
+    if (document.location.pathname.includes("/message/")) {
+      data.details = "| Postfach";
+      data.state = "Nachricht";
+    } else {
+      data.details = "| Postfach";
+      data.state = "Übersicht";
+    }
+  } else if (document.location.pathname.includes("/edit")) {
+    data.details = "| Profil";
+    data.state = "Bearbteiten";
   } else if (document.location.pathname.startsWith("/profile/")) {
-    const profile = document.querySelector(
-        "#profile > div.profile-header.hide-md > div > div.profile-header-content > div.col-md-10.col-xs-8 > h4.profile-username.pull-left > b"
-      ).textContent,
+    const profile = document.querySelector("b").textContent,
       level = document.querySelector("#user_level").textContent;
     data.details = "| Profil";
     data.state = profile + " | " + level;
-  } else if (document.location.pathname.startsWith("/blog/")) {
-    const blog = document.querySelector(
-      "body > div.blur-content > div.wraper > div > div.content-container > div.row > div.col-md-12 > h3"
-    ).textContent;
+  } else if (document.location.pathname.includes("/blog/")) {
+    const blog = document.querySelector("h3").textContent;
     data.details = "| Blog";
     data.state = blog;
 
     //Datenschutz & Impressum
-  } else if (document.location.pathname.endsWith("/impressum")) {
+  } else if (document.location.pathname.startsWith("/impressum")) {
     data.details = "| Impressum";
-  } else if (document.location.pathname.endsWith("/datenschutz")) {
-    data.details = "| Datenschutzerklärung";
+  } else if (document.location.pathname.startsWith("/datenschutz")) {
+    data.details = "| Datenschutz";
+
+    //Login
+  } else if (document.location.pathname.startsWith("/login")) {
+    data.details = "| Login";
   }
 
   //setActivity
-
   presence.setActivity(data);
 });

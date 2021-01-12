@@ -4,10 +4,10 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const dj = document.querySelector(".m-player__presenter-name") as HTMLElement,
+  const dj = document.querySelector("#dj_name") as HTMLElement,
     player = document.querySelector(".fa-pause") as HTMLElement,
-    title = document.querySelector(".m-player__title") as HTMLElement,
-    artist = document.querySelector(".m-player__artist") as HTMLElement,
+    title = document.querySelector("#songName") as HTMLElement,
+    artist = document.querySelector("#songArtist") as HTMLElement,
     presenceData: PresenceData = {
       largeImageKey: "largelogo"
     };
@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
       "Listening to " + title.textContent + " by " + artist.textContent;
     presenceData.state = "Presented by " + dj.innerText;
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/home") {
+  } else if (document.location.pathname == "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing";
     presenceData.state = "Recently Played";
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Apply to become a presenter";
     presenceData.smallImageKey = "reading";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/contact") {
+  } else if (document.location.pathname == "/contact-us") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing";
     presenceData.state = "Contact Page";
