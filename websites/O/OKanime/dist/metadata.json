@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "DooMLorD",
-    "id": "654398152513945611"
+    "name": "ririxi",
+    "id": "192490421308489731"
   },
   "service": "OKanime",
   "description": {
@@ -9,12 +9,12 @@
     "ar_SA": "موقع اوك انمي لمشاهدة و تحميل جميع حلقات الانمي و أفلام الانمي و اخر اخبار الانمي و أفضل الانميات مترجمة على ميقا و دريف"
   },
   "url": [
-    "okanime.com",
-    "www.okanime.com"
+    "okanime.tv",
+    "www.okanime.tv"
   ],
-  "version": "1.1.6",
-  "logo": "https://doomlord.s-ul.eu/lUNHPZMs",
-  "thumbnail": "https://doomlord.s-ul.eu/OepzczZT",
+  "version": "1.1.9",
+  "logo": "https://i.imgur.com/mhjMnnU.png",
+  "thumbnail": "https://i.imgur.com/NAiM77y.png",
   "color": "#a5173b",
   "tags": [
     "embedded-links",

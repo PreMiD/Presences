@@ -1,39 +1,30 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "613393646330576931"
 });
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "lg-npm"
+  };
   if (document.location.pathname == "/") {
-    const presenceData: PresenceData = {
-      details: "Viewing the homepage",
-      largeImageKey: "lg-npm"
-    };
-    presence.setActivity(presenceData);
+    presenceData.details = "Viewing the homepage";
   } else if (document.location.pathname.startsWith("/search")) {
-    const presenceData: PresenceData = {
-      details: "Searching...",
-      state: document.location.search.substr(3),
-      largeImageKey: "lg-npm"
-    };
-    presence.setActivity(presenceData);
+    presenceData.details = "Searching...";
+    presenceData.state = document.location.search.substr(3);
   } else if (document.location.pathname.startsWith("/package/")) {
-    const presenceData: PresenceData = {
-      details: "Viewing a package",
-      state: document.location.pathname.split("/")[2],
-      largeImageKey: "lg-npm"
-    };
-    presence.setActivity(presenceData);
+    presenceData.details = "Viewing a package";
+    presenceData.state = "Fetching...";
+    if (document.location.pathname.split("/").length == 4) {
+      presenceData.state =
+        document.location.pathname.split("/")[2] +
+        "/" +
+        document.location.pathname.split("/")[3];
+    } else {
+      presenceData.state = document.location.pathname.split("/")[2];
+    }
   } else if (document.location.pathname.startsWith("/~")) {
-    const presenceData: PresenceData = {
-      details: "Viewing a profile",
-      state: document.location.pathname.substr(3),
-      largeImageKey: "lg-npm"
-    };
-    presence.setActivity(presenceData);
-  } else {
-    const presenceData: PresenceData = {
-      largeImageKey: "lg-npm"
-    };
-    presence.setActivity(presenceData);
+    presenceData.details = "Viewing a profile...";
+    presenceData.state = document.location.pathname.substr(3);
   }
+  presence.setActivity(presenceData);
 });

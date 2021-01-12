@@ -3,6 +3,12 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Scypter",
+      "id": "782251080179253250"
+    }
+  ],
   "service": "Discord",
   "description": {
     "en": "All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.",
@@ -23,9 +29,10 @@
     "status.discordapp.com",
     "blog.discordapp.com",
     "merch.discordapp.com",
-    "discord.gg"
+    "discord.gg",
+    "discordmerch.com"
   ],
-  "version": "2.1.8",
+  "version": "2.2.1",
   "logo": "https://i.imgur.com/FkQDwnv.png",
   "thumbnail": "https://i.imgur.com/0v13nHT.png",
   "color": "#7289DA",

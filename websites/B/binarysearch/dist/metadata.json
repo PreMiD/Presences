@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "sylvesteryue",
+    "id": "246138990674051073"
+  },
+  "service": "binarysearch",
+  "description": {
+    "en": "binarysearch is a free site where one can work on coding and algorithms problems with friends."
+  },
+  "url": [
+    "binarysearch.com",
+    "binarysearch.io",
+    "www.binarysearch.com",
+    "www.binarysearch.io"
+  ],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/0HotbTy.png",
+  "thumbnail": "https://i.imgur.com/Q59B8YD.png",
+  "color": "#384252",
+  "tags": [
+    "technology",
+    "programming",
+    "coding",
+    "education",
+    "developer"
+  ],
+  "category": "other"
+}
