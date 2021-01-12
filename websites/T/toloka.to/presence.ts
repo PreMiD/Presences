@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
   }
   else if (RegExp("\\/f\\d+", "g").test(document.location.pathname)) {
     title = document.querySelector(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > table > tbody > tr > td > h1 > a.maintitle"
+      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > table:nth-child(1) > tbody > tr > td > h1 > a.maintitle"
     );
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю категорію:";
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
   }
   else if (RegExp("\\/u\\d+", "g").test(document.location.pathname)) {
     title = document.querySelector(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > table.forumline > tbody > tr > td.row1 > table > tbody > tr > td > span.genmed > a.genmed > b"
+      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > table.forumline:nth-child(2) > tbody > tr:nth-child(3) > td.row1:nth-child(2) > table > tbody > tr:nth-child(3) > td:nth-child(2) > span.genmed:nth-child(5) > a.genmed > b"
     );
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю профіль:";
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
   }
   else if (RegExp("\\/t\\d+", "g").test(document.location.pathname)) {
     title = document.querySelector(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > table > tbody > tr > td > h1 > a.maintitle"
+      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > table:nth-child(1) > tbody > tr:nth-child(1) > td:nth-child(1) > h1 > a.maintitle"
     );
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю тему:";
@@ -116,7 +116,7 @@ presence.on("UpdateData", async () => {
   }
   else if (document.location.pathname.includes("/tracker.php")) {
     title = document.querySelector(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > form#form > table.forumline > tbody > tr > td.row4 > table > tbody > tr > td.row4 > div > fieldset.fieldset > div > input.post"
+      "body > div.maxwidth > table > tbody > tr > td.bodyline > form#form > table.forumline:nth-child(18) > tbody > tr:nth-child(2) > td.row4 > table:nth-child(3) > tbody > tr > td.row4:nth-child(3) > div > fieldset.fieldset > div > input.post"
     );
     presenceData.startTimestamp = browsingStamp;
     if (title.value == "" || !showSearchQuery) {
@@ -134,9 +134,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = "релізи";
   }
   else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=inbox&mode=read")) {
-    title = document.querySelectorAll(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > form > table.forumline > tbody > tr > td.row2 > span.genmed"
-    )[1];
+    title = document.querySelector(
+      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(2) > td.row2:nth-child(2) > span.genmed"
+    );
     presenceData.startTimestamp = browsingStamp;
     if (showUseramePM) {
       presenceData.details = "Читаю ПП від:";
@@ -148,9 +148,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "ПП";
   }
   else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=sentbox&mode=read")) {
-    title = document.querySelectorAll(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > form > table.forumline > tbody > tr > td.row2 > span.genmed"
-    )[3];
+    title = document.querySelector(
+      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
+    );
     presenceData.startTimestamp = browsingStamp;
     if (showUseramePM) {
       presenceData.details = "Читаю ПП для:";
@@ -162,9 +162,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "ПП";
   }
   else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=outbox&mode=read")) {
-    title = document.querySelectorAll(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > form > table.forumline > tbody > tr > td.row2 > span.genmed"
-    )[3];
+    title = document.querySelector(
+      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
+    );
     presenceData.startTimestamp = browsingStamp;
     if (showUseramePM) {
       presenceData.details = "Читаю ПП для:";
@@ -176,9 +176,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "ПП";
   }
   else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=savebox&mode=read")) {
-    title = document.querySelectorAll(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > form > table.forumline > tbody > tr > td.row2 > span.genmed"
-    )[3];
+    title = document.querySelector(
+      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
+    );
     presenceData.startTimestamp = browsingStamp;
     if (showUseramePM) {
       presenceData.details = "Читаю збережене ПП";
@@ -290,6 +290,36 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/posting.php") && document.location.search.includes("?mode=reply")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Відповідаю на тему";
+  }
+  else if (document.location.pathname.includes("/helptoseed.php")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Переглядаю роздачі";
+    presenceData.state = "яким можна допомогти";
+  }
+  else if (document.location.pathname.includes("/googlesearch.php")) {
+    title = document.querySelector(
+      "body > div.maxwidth > table > tbody > tr > td.bodyline > table.forumline > tbody > tr > td.row1 > div#___gcse_0 > div.gsc-control-cse.gsc-control-cse-uk > div.gsc-control-wrapper-cse > form.gsc-search-box.gsc-search-box-tools > table.gsc-search-box > tbody > tr > td.gsc-input > div#gsc-iw-id1.gsc-input-box > table#gs_id50.gstl_50.gsc-input > tbody > tr > td#gs_tti50.gsib_a > input#gsc-i-id1.gsc-input"
+    );
+    presenceData.startTimestamp = browsingStamp;
+    if (title.value == "" || !showSearchQuery) {
+      presenceData.details = "Щось шукаю";
+    } else {
+      presenceData.details = "Шукаю:";
+      presenceData.state = title.value;
+    }
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Пошук";
+  }
+  else if (document.location.pathname.includes("/release.php")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Додаю торрент";
+    if (document.location.search.includes("?what=")) {
+      title = document.querySelector(
+        "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(2) > td.row2 > b"
+      );
+      presenceData.details += " в:";
+      presenceData.state = title.innerText;
+    }
   }
 
   if (presenceData.details == null) {
