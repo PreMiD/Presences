@@ -17,6 +17,18 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Viewing Product List....";
             presenceData.startTimestamp = elapsed;
             presence.setActivity(presenceData)
+        }else if (path.includes("/mitra")) {
+            presenceData.details = "Viewing a Tokopedia Partner....";
+            presenceData.startTimestamp = elapsed;
+            presence.setActivity(presenceData)
+        }else if (path.includes("/promo")) {
+            presenceData.details = "Viewing a Promo....";
+            presenceData.startTimestamp = elapsed;
+            presence.setActivity(presenceData)
+        }else if (path.includes("/edu")) {
+            presenceData.details = "Viewing on Seller Education Center....";
+            presenceData.startTimestamp = elapsed;
+            presence.setActivity(presenceData)
         } else {
             presenceData.details = "Viewing a Homepage";
             presenceData.startTimestamp = elapsed;
