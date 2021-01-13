@@ -1,6 +1,9 @@
 const presence = new Presence({
   clientId: "760863245224640555"
-}), browsingStamp = Math.floor(Date.now() / 1000);
+});
+
+const browsingStamp = Math.floor(Date.now() / 1000);
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
