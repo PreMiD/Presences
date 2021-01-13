@@ -13,26 +13,23 @@ presence.on("UpdateData", async () => {
 
     if (document.location.hostname == "www.tokopedia.com") {
         var path = document.location.pathname;
-        if (path.includes("/p")) {
+        if (path.includes("/p?nref=")) {
             presenceData.details = "Viewing Product List....";
             presenceData.startTimestamp = elapsed;
-            presence.setActivity(presenceData)
-        }else if (path.includes("/mitra")) {
+        } else if (path.includes("/mitra")) {
             presenceData.details = "Viewing a Tokopedia Partner....";
             presenceData.startTimestamp = elapsed;
-            presence.setActivity(presenceData)
-        }else if (path.includes("/promo")) {
+        } else if (path.includes("/promo")) {
             presenceData.details = "Viewing a Promo....";
             presenceData.startTimestamp = elapsed;
-            presence.setActivity(presenceData)
-        }else if (path.includes("/edu")) {
+        } else if (path.includes("/edu")) {
             presenceData.details = "Viewing on Seller Education Center....";
             presenceData.startTimestamp = elapsed;
-            presence.setActivity(presenceData)
         } else {
             presenceData.details = "Viewing a Homepage";
             presenceData.startTimestamp = elapsed;
-            presence.setActivity(presenceData)
         }
     }
+
+    presence.setActivity(presenceData);
 });
