@@ -5,22 +5,22 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 presence.on("UpdateData", async function () {
-  var presenceData = {
+  const presenceData = {
       largeImageKey: "logo-sommer"
   };
-  var set_showUsername = await presence.getSetting("showUsername");
-  var set_timeElapsed = await presence.getSetting("timeElapsed");
-  var urlpath = window.location.pathname.split("/");
+  const set_showUsername = await presence.getSetting("showUsername");
+        set_timeElapsed = await presence.getSetting("timeElapsed");
+        urlpath = window.location.pathname.split("/");
   function ifSettingEnabled(setting, string) {
       if(setting) {
-          return string
+          return string;
       } else {
-          return ""
+          return "";
       }
   }
   if (document.location.hostname == "reallifegtav.de" || document.location.hostname == "rlv.link") {
       if(set_timeElapsed) {
-          presenceData.startTimestamp = browsingStamp
+          presenceData.startTimestamp = browsingStamp;
       }
       if ((urlpath[1] == '' || document.location.pathname.includes("/home")) && urlpath[2] != '') {
           presenceData.smallImageKey = "downloading";
@@ -67,9 +67,9 @@ presence.on("UpdateData", async function () {
           presenceData.smallImageKey = "reading";
       }
       else if (document.location.pathname.includes("/transactions") && window.location.search.substr(1)) {
-          var inputfield = document.querySelector('input[name="transfer_to"]').value;
+          let inputfield = document.querySelector('input[name="transfer_to"]').value;
           if(!inputfield) {
-              inputfield = '...'
+              inputfield = '...';
           }
           presenceData.details = "Überweisung an " + inputfield;
           presenceData.smallImageKey = "writing";
@@ -90,7 +90,7 @@ presence.on("UpdateData", async function () {
       }
   } else if (document.location.hostname == "forum.reallifegtav.de" || document.location.hostname == "forum.rlv.link") {
       if(set_timeElapsed) {
-          presenceData.startTimestamp = browsingStamp
+          presenceData.startTimestamp = browsingStamp;
       }
       if (urlpath[1] == '' || document.location.pathname.includes("/categories")) {
           presenceData.smallImageKey = "reading";
