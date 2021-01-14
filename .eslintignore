@@ -4,8 +4,5 @@ node_modules
 .npmrc
 .github
 
-codequality.ts
-presenceUpdater.ts
-
 *.js
 *.d.ts
