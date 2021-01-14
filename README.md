@@ -7,17 +7,15 @@ This repository contains the source code of all presences that are available in 
 If you would like to <strong>publish</strong> your presence, please feel free to open a <a href="https://github.com/PreMiD/Presences/pulls">pull request</a>.
 
 <div align="left">
-    <a href="https://discord.gg/WvfVZ8T" title="Join our Discord!" rel="nofollow">
-    <img src="https://camo.githubusercontent.com/987903b512adb37c953df3e83f1921dc29140493/68747470733a2f2f646973636f72646170702e636f6d2f6170692f6775696c64732f3439333133303733303534393830353035372f7769646765742e706e673f7374796c653d62616e6e657232" height="76px" alt="Join our Discord!" data-canonical-src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" style="max-width:100%;">
+    <a target="_blank" href="https://discord.premid.app/" title="Join our Discord!">
+        <img  src="https://discordapp.com/api/guilds/493130730549805057/widget.png?style=banner2" height="76px" draggable="false" alt="Join our Discord!">
     </a>
 </div>
 
 ## Requirements to create a presence
 
-- If coding with TypeScript, you must have the [latest TypeScript compiler](https://www.typescriptlang.org/#download-links) version installed
-- Basic knowlege of JavaScript or TypeScript
-
-_Note: If you code your presence with TypeScript, you must first compile `presence.ts` to `presence.js` and put the `js` file along with `metadata.json` in `/dist`_
+- You must have the [latest TypeScript compiler](https://www.typescriptlang.org/#download-links) version installed
+- Basic knowlege of TypeScript
 
 ## Getting started
 
@@ -26,8 +24,11 @@ You can see it [**here**](https://docs.premid.app/dev/presence).
 
 ## Folder structure
 
-```
-/presences
-└─ /(presence - If coded with TypeScript, make sure to include `presence.ts`, and `tsconfig.json`)
-   └─ /dist (contains code that will be used in store, must have `metadata.json` and `presence.js` in it.)
+```bash
+presence
+├── dist
+│   ├── metadata.json
+│   └── presence.js
+├── presence.ts
+└── tsconfig.json
 ```

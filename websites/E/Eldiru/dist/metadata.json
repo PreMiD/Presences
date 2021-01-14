@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "rippledwater",
+    "id": "752720971089182752"
+  },
+  "url": "eldiru.unsoed.ac.id",
+  "description": {
+    "en": "Moodle-based e-learning site for Jenderal Soedirman University students",
+    "id": "Situs pembelajaran daring berbasis Moodle untuk mahasiswa Universitas Jenderal Soedirman"
+  },
+  "service": "Eldiru",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/yQiWgOw.png",
+  "thumbnail": "https://i.imgur.com/7afQb5o.png",
+  "color": "#FFEE00",
+  "tags": [
+    "education",
+    "learning",
+    "college"
+  ],
+  "category": "other"
+}
