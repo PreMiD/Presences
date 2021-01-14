@@ -14,7 +14,10 @@
     "description": {
         "en": "Rich presence for Tokopedia - The Indonesian E-Commerce Site"
     },
-    "url": "www.tokopedia.com",
+    "url": [
+        "www.tokopedia.com",
+        "seller.tokopedia.com"
+    ],
     "version": "1.0.0",
     "logo": "https://i.imgur.com/SS97GWA.png",
     "thumbnail": "https://i.imgur.com/ixO23A2.png",
