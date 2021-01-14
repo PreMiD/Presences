@@ -12,24 +12,36 @@ presence.on("UpdateData", async () => {
     };
 
     if (document.location.hostname == "www.tokopedia.com") {
-        var path = document.location.pathname;
-        if (path.includes("/p?nref=")) {
+        if (document.location.pathname.includes("/p?nref=")) {
             presenceData.details = "Viewing Product List....";
             presenceData.startTimestamp = elapsed;
-        } else if (path.includes("/mitra")) {
+            presence.setActivity(presenceData);
+        } else if (document.location.pathname.includes("/mitra")) {
             presenceData.details = "Viewing a Tokopedia Partner....";
             presenceData.startTimestamp = elapsed;
-        } else if (path.includes("/promo")) {
+            presence.setActivity(presenceData);
+        } else if (document.location.pathname.includes("/promo")) {
             presenceData.details = "Viewing a Promo....";
             presenceData.startTimestamp = elapsed;
-        } else if (path.includes("/edu")) {
-            presenceData.details = "Viewing on Seller Education Center....";
+            presence.setActivity(presenceData);
+        } else if (document.location.pathname.includes("/edu")) {
+            presenceData.details = "Viewing on EduMart....";
             presenceData.startTimestamp = elapsed;
+            presence.setActivity(presenceData);
         } else {
             presenceData.details = "Viewing a Homepage";
             presenceData.startTimestamp = elapsed;
+            presence.setActivity(presenceData);
+        }
+    } else if (document.location.hostname == "seller.tokopedia.com") {
+        if (document.location.pathname.includes("/edu")) {
+            presenceData.details = "Viewing a Seller Education Center...."
+            presenceData.startTimestamp = elapsed;
+            presence.setActivity(presenceData);
+        } else if (document.location.pathname.includes("/home")) {
+            presenceData.details = "Viewing a Seller Homepage"
+            presenceData.startTimestamp = elapsed;
+            presence.setActivity(presenceData);
         }
     }
-
-    presence.setActivity(presenceData);
 });
