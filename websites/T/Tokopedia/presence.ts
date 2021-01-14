@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "tokopedia"
     };
-    var elapsed = Math.floor(Date.now() / 1000);
+    const elapsed = Math.floor(Date.now() / 1000);
     if (document.location.hostname == "www.tokopedia.com") {
         if (document.location.pathname.includes("/p?nref=")) {
             presenceData.details = "Viewing Product List....";
