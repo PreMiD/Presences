@@ -1,16 +1,13 @@
 const presence = new Presence({
     clientId: "798368817318330400"
 }),
-    strings = presence.getStrings({
-        search: "presence.playback.search",
-    });
+      
 
-var elapsed = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "tokopedia"
     };
-
+    var elapsed = Math.floor(Date.now() / 1000);
     if (document.location.hostname == "www.tokopedia.com") {
         if (document.location.pathname.includes("/p?nref=")) {
             presenceData.details = "Viewing Product List....";
@@ -35,11 +32,11 @@ presence.on("UpdateData", async () => {
         }
     } else if (document.location.hostname == "seller.tokopedia.com") {
         if (document.location.pathname.includes("/edu")) {
-            presenceData.details = "Viewing a Seller Education Center...."
+            presenceData.details = "Viewing a Seller Education Center....";
             presenceData.startTimestamp = elapsed;
             presence.setActivity(presenceData);
         } else if (document.location.pathname.includes("/home")) {
-            presenceData.details = "Viewing a Seller Homepage"
+            presenceData.details = "Viewing a Seller Homepage";
             presenceData.startTimestamp = elapsed;
             presence.setActivity(presenceData);
         }
