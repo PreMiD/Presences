@@ -1,7 +1,7 @@
 const presence = new Presence({
-  clientId: "797879854343127040"
-}),
- browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "797879854343127040"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -21,35 +21,35 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing the catalog...";
   } else if (document.location.pathname.includes("/clans/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing clans...";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing clans...";
   } else if (document.location.pathname.includes("/search/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Searching for a user...";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Searching for a user...";
   } else if (document.location.pathname == "/forum/") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing the forums...";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing the forums...";
   } else if (document.location.pathname.includes("/membership/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Looking at membership options...";
-  } else if (document.location.pathname.includes("/customize/")) {  
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Customizing Avatar";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Looking at membership options...";
+  } else if (document.location.pathname.includes("/customize/")) {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Customizing Avatar";
   } else if (document.location.pathname.includes("/client/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Downloading the client...";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Downloading the client...";
   } else if (document.location.pathname.includes("/trades/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Looking at trades...";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Looking at trades...";
   } else if (document.location.pathname.includes("/sets/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "My Sets";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "My Sets";
   } else if (document.location.pathname.includes("/currency/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing currency...";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Browsing currency...";
   } else if (document.location.pathname.includes("/settings/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Changing profile settings...";
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Changing profile settings...";
   } else if (document.location.pathname.includes("/thread/")) {
     presenceData.startTimestamp = browsingStamp;
     const title = document.querySelector(".top");
