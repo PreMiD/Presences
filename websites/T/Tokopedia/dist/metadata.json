@@ -4,15 +4,9 @@
         "name": "WilloIzCitron",
         "id": "735410445409845251"
     },
-    "contributors": [
-        {
-            "name": "WilloIzCitron",
-            "id": "735410445409845251"
-        }
-    ],
     "service": "Tokopedia",
     "description": {
-        "en": "Rich presence for Tokopedia - The Indonesian E-Commerce Site"
+        "en": "Tokopedia - The Indonesian E-Commerce Site"
     },
     "url": [
         "www.tokopedia.com",
