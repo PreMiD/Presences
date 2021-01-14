@@ -8,9 +8,9 @@ presence.on("UpdateData", async function () {
   const presenceData = {
       largeImageKey: "logo-sommer"
   };
-  const set_showUsername = await presence.getSetting("showUsername");
-        set_timeElapsed = await presence.getSetting("timeElapsed");
-        urlpath = window.location.pathname.split("/");
+  set_showUsername = await presence.getSetting("showUsername");
+  set_timeElapsed = await presence.getSetting("timeElapsed");
+  urlpath = window.location.pathname.split("/");
   function ifSettingEnabled(setting, string) {
       if(setting) {
           return string;
