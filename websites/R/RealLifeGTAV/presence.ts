@@ -7,7 +7,7 @@ function capitalizeFirstLetter(string) {
 presence.on("UpdateData", async function () {
   const presenceData = {
       largeImageKey: "logo-sommer"
-  };
+  },
   set_showUsername = await presence.getSetting("showUsername");
   set_timeElapsed = await presence.getSetting("timeElapsed");
   urlpath = window.location.pathname.split("/");
