@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
           details = "Testing...";
           state = "Number Memory";
         } else {
-          details = "Viewing Results (Number Memoory)";
+          details = "Viewing Results (Number Memory)";
           state = `${document.querySelector(".level > span").innerHTML} ${document.querySelector(".level > .number").innerHTML}`;
         }
       }
