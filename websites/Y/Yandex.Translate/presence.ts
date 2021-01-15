@@ -1,9 +1,8 @@
 const presence = new Presence({
     clientId: "799583813582848041"
-})
+}), browsingStamp: number = Math.floor(Date.now() / 1000);
 
-const browsingStamp: number = Math.floor(Date.now() / 1000);
-let type: string, from: string, to: string, typet: string;
+let from: string, to: string, typet: string;
 
 presence.on("UpdateData", async () => {
 
@@ -12,15 +11,15 @@ presence.on("UpdateData", async () => {
       };
     
       if (document.location.pathname == "/") {
-        typet = "Text"
+        typet = "Text";
         from = document.querySelector("#srcLangButton").innerHTML;
         to = document.querySelector("#dstLangButton").innerHTML;
       } else if (document.location.pathname == "/translate" || document.location.pathname == "/doc" ) {
         typet = document.location.pathname == "/translate" ? "Website" : "Document";
-        from = document.querySelector("#srcLangButton > #sourceLangText").innerHTML
-        to = document.querySelector("#dstLangButton > #targetLangText").innerHTML
+        from = document.querySelector("#srcLangButton > #sourceLangText").innerHTML;
+        to = document.querySelector("#dstLangButton > #targetLangText").innerHTML;
       } else if (document.location.pathname == "/ocr") {
-        typet = "Image"
+        typet = "Image";
         from = document.querySelector("#sourceLangButton").innerHTML;
         to = document.querySelector("#targetLangButton").innerHTML;
       } else {
