@@ -1,9 +1,6 @@
 const presence = new Presence({
     clientId: "799629862620758046"
-  }), browsingStamp = Math.floor(Date.now() / 1000);
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  });
   presence.on("UpdateData", async function () {
     const presenceData = {
         largeImageKey: "logo"
@@ -11,13 +8,6 @@ const presence = new Presence({
     set_timeRemaining = await presence.getSetting("timeRemaining"),
     urlpath = window.location.pathname.split("/"),
     video = document.querySelector('div video');
-    function ifSettingEnabled(setting, string) {
-        if(setting) {
-            return string;
-        } else {
-            return "";
-        }
-    }
     if (document.location.hostname == "www.joyn.de" || document.location.hostname == "joyn.de") {
         if ((urlpath[1] == '' || document.location.pathname.includes("/#home")) && urlpath[2] != '') {
             presenceData.details = "Durchstöbert";
@@ -31,8 +21,10 @@ const presence = new Presence({
             presenceData.details = document.title.replace('streamen | Joyn','');
             presenceData.state = 'Film';
             if(!video.paused) {
-                presenceData.startTimestamp = video_startTime;
-                presenceData.endTimestamp = video_endTime;
+                if(set_timeRemaining) {
+                    presenceData.startTimestamp = video_startTime;
+                    presenceData.endTimestamp = video_endTime;
+                }
                 presenceData.smallImageKey = "play";
                 presenceData.smallImageText = 'Wiedergabe';
             } else {
