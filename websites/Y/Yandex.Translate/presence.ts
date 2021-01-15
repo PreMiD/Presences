@@ -228,8 +228,8 @@ presence.on("UpdateData", async () => {
         to = document.querySelector("#dstLangButton > #targetLangText").innerHTML
       } else if (document.location.pathname == "/ocr") {
         typet = "Image"
-        from = document.querySelector("#srcLangButton").innerHTML;
-        to = document.querySelector("#dstLangButton").innerHTML;
+        from = document.querySelector("#sourceLangButton").innerHTML;
+        to = document.querySelector("#targetLangButton").innerHTML;
       } else {
         typet = "Text";
         from = "Choosing...";
