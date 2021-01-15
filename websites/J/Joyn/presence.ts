@@ -54,7 +54,6 @@ const presence = new Presence({
                 presenceData.smallImageKey = "pause";
                 presenceData.smallImageText = 'Pausiert';
             }
-            console.log(new Date(video.duration)/1000);
         }
     }
     if (presenceData.details == null) {
