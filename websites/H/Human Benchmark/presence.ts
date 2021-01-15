@@ -95,7 +95,7 @@ presence.on("UpdateData", async () => {
           details = "Testing...";
           state = "Hearing";
         } else {
-          details = "Viewing Results (Number Memoory)";
+          details = "Viewing Results (Hearing)";
           state = `Heard the frequency at: ${document.querySelector(".css-0").innerHTML}`;
         }
       }
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
           details = "Testing...";
           state = "Typing";
         } else {
-          details = "Viewing Results (Number Memoory)";
+          details = "Viewing Results (Typing)";
           state = `WPM: ${document.querySelector(".css-0").innerHTML.split("wpm")[0]}`;
         }
       }
