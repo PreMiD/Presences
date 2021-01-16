@@ -21,12 +21,20 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Request/Report";
   } else if (/\/game\/(.)+/g.test(path)) {
     presenceData.details = `Browsing a Game`;
-    presenceData.state = `Downloading the Game ${path
+
+    const ttl = path
       .split("/")[2]
       .split("-")
       .slice(0, 2)
       .join(" ")
-      .toUpperCase()}`;
+      .toUpperCase();
+    presenceData.state = `Downloading the Game ${ttl}`;
+    presenceData.smallImageText = path
+      .split("/")[2]
+      .split("-")
+      .slice(0, 3)
+      .join(" ")
+      .toUpperCase();
   } else if (path === "/stack") {
     presenceData.details = "Cheking out the tech stack";
     presenceData.state = "Stack Share";
