@@ -1,37 +1,37 @@
 const undercards = new Presence({
     clientId: "799885664538853417"
 }), browsingStamp = Math.floor(Date.now() / 1000);
-let URLMap: {[index: string]:any} = {};
-URLMap["SignUp"] = ['"Registering an account"', '""'];
-URLMap["AccountValidation"] = ['"Activating account"', '""'];
-URLMap["SignIn"] = ['"Signing in"', '""'];
-URLMap["Tutorial"] = ['"Playing tutorial"', '""'];
-URLMap["gameUpdates.jsp"] = ['"Reading the patch note"', '""'];
-URLMap["Disconnect"] = ['"Disconnected"', '""'];
-URLMap["Profile"] = ['"Viewing profile"', 'getText(".mainContent > h2:nth-child(2)") + "(" + getText(".mainContent > p:nth-child(3) > span:nth-child(1)") + ")"'];
-URLMap["History"] = ['"Viewing history"', '""'];
-URLMap["Avatars"] = ['"Customizing avatar"', '""'];
-URLMap["CardSkins"] = ['"Customizing card skins"', '""'];
-URLMap["ProfileSkins"] = ['"Customizing profile skin"', '""'];
-URLMap["FrameSkins"] = ['"Customizing frame skin"', '""'];
-URLMap["Settings"] = ['"Viewing settings"', '""'];
-URLMap["Staff"] = ['"Viewing staff"', '""'];
-URLMap["Quests"] = ['"Viewing quests"', '""'];
-URLMap["Bundle"] = ['"Viewing bundle"', '""'];
-URLMap["CardSkinsShop"] = ['"Browsing card skins shop"', '""'];
-URLMap["CosmeticsShop"] = ['"Browsing cosmetics shop"', '""'];
-URLMap["Artifacts"] = ['"Browsing artifacts shop"', '""'];
-URLMap["Packs"] = ['"Browsing packs shop"', '""'];
-URLMap["Shop"] = ['"Browsing UCP shop"', '""'];
-URLMap["Decks"] = ['"Building decks"', '""'];
-URLMap["Crafting"] = ['"Crafting cards"', '""'];
-URLMap["Hub"] = ['"Viewing hub"', '""'];
-URLMap["Friendship"] = ['"Viewing friendship"', '""'];
-URLMap["GamesList"] = ['"Viewing games list"', '""'];
-URLMap["Play"] = ['"Finding a game..."'];
-URLMap["Game"] = ['"Playing a game"', '"vs "+ getText("#enemyUsername")'];
-URLMap["Spectate"] = ['"Spectating a game"', '(getText("#yourUsername") || "Loading...") + " vs " + (getText("#enemyUsername") || "Loading...")'];
-
+let URLMap: {[index: string]:Array<string>} = {
+"SignUp" : ['"Registering an account"', '""'],
+"AccountValidation" : ['"Activating account"', '""'],
+"SignIn" : ['"Signing in"', '""'],
+"Tutorial" : ['"Playing tutorial"', '""'],
+"gameUpdates.jsp:" : ['"Reading the patch note"', '""'],
+"Disconnect" : ['"Disconnected"', '""'],
+"Profile" : ['"Viewing profile"', 'getText(".mainContent > h2:nth-child(2)") + "(" + getText(".mainContent > p:nth-child(3) > span:nth-child(1)") + ")"'],
+"History" : ['"Viewing history"', '""'],
+"Avatars" : ['"Customizing avatar"', '""'],
+"CardSkins" : ['"Customizing card skins"', '""'],
+"ProfileSkins" : ['"Customizing profile skin"', '""'],
+"FrameSkins" : ['"Customizing frame skin"', '""'],
+"Settings" : ['"Viewing settings"', '""'],
+"Staff" : ['"Viewing staff"', '""'],
+"Quests" : ['"Viewing quests"', '""'],
+"Bundle" : ['"Viewing bundle"', '""'],
+"CardSkinsShop" : ['"Browsing card skins shop"', '""'],
+"CosmeticsShop" : ['"Browsing cosmetics shop"', '""'],
+"Artifacts" : ['"Browsing artifacts shop"', '""'],
+"Packs" : ['"Browsing packs shop"', '""'],
+"Shop" : ['"Browsing UCP shop"', '""'],
+"Decks" : ['"Building decks"', '""'],
+"Crafting" : ['"Crafting cards"', '""'],
+"Hub" : ['"Viewing hub"', '""'],
+"Friendship" : ['"Viewing friendship"', '""'],
+"GamesList" : ['"Viewing games list"', '""'],
+"Play" : ['"Finding a game..."'],
+"Game" : ['"Playing a game"', '"vs "+ getText("#enemyUsername")'],
+"Spectate" : ['"Spectating a game"', '(getText("#yourUsername") || "Loading...") + " vs " + (getText("#enemyUsername") || "Loading...")'],
+}
 function getText(selector:string){
     return document.querySelector(selector).textContent;
 }
@@ -44,7 +44,8 @@ undercards.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing homepage";
     } else {
-      const path = document.location.pathname.match(/^\/([a-zA-Z\.]+)/)[1];
+      const re = new RegExp('^/([a-zA-Z\.]+)')
+      const path = document.location.pathname.match(re)[1];
       if (URLMap.hasOwnProperty(path)) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = eval(URLMap[path][0]);
