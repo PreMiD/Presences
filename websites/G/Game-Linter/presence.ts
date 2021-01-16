@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "backimage",
+      largeImageKey: "logoalso",
       smallImageKey: "logoalso"
     },
     browsingStamp = Math.floor(Date.now() / 1000);
