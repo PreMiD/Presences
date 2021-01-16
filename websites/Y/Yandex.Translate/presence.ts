@@ -28,12 +28,10 @@ presence.on("UpdateData", async () => {
         to = "Choosing...";
       }
     
-      const showTime: boolean = await presence.getSetting("stamp");
+      const showTime: boolean = await presence.getSetting("stamp"), showType: boolean = await presence.getSetting("type");
     
       presenceData.startTimestamp = showTime ? browsingStamp : null;
       if (presenceData.startTimestamp == null) delete presenceData.startTimestamp;
-    
-      const showType: boolean = await presence.getSetting("type");
     
       if (showType) {
         presenceData.details = `Translating: ${typet}`;
