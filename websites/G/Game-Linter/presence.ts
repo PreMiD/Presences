@@ -4,15 +4,16 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "backimage",
+      smallImageKey: "logoalso"
     },
     browsingStamp = Math.floor(Date.now() / 1000);
 
   presenceData.startTimestamp = browsingStamp;
 
-  const path = window.location.pathname;
+  const path = document.location.pathname;
 
-  if (path === "/") {
+  if (/(^\/$)/g.test(path)) {
     presenceData.details = "Browsing For Games";
     presenceData.state = "All Games 🎮";
   } else if (path === "/request") {
@@ -29,6 +30,12 @@ presence.on("UpdateData", async () => {
   } else if (path === "/stack") {
     presenceData.details = "Cheking out the tech stack";
     presenceData.state = "Stack Share";
+  } else if (path === "/donation") {
+    presenceData.details = "Considering Donating";
+    presenceData.state = "Donations";
+  } else {
+    presenceData.details = "Just surfing";
+    presenceData.state = "Boring";
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();
