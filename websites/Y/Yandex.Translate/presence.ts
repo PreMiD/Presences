@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = `Translating: ${typet}`;
         presenceData.state = `From: ${from} - To: ${to}`;
       } else {
-        presenceData.details = `Translating from:  ${from}`;
+        presenceData.details = `Translating from: ${from}`;
         presenceData.state = `To: ${to}`;
       }
     
