@@ -29,7 +29,7 @@ const undercards = new Presence({
 "GamesList" : ['"Viewing games list"', '""'],
 "Play" : ['"Finding a game..."'],
 "Game" : ['"Playing a game"', '"vs "+ getText("#enemyUsername")'],
-"Spectate" : ['"Spectating a game"', '(getText("#yourUsername") || "Loading...") + " vs " + (getText("#enemyUsername") || "Loading...")'],
+"Spectate" : ['"Spectating a game"', '(getText("#yourUsername") || "Loading...") + " vs " + (getText("#enemyUsername") || "Loading...")']
 };
 function getText(selector:string){
     return document.querySelector(selector).textContent;
