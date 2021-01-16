@@ -19,5 +19,5 @@
       "sharing"
     ],
     "category": "other",
-    "regExp": "(.*).?game-linter.com"
+    "regExp": "(.*).?game-linter.com(.*)"
   }
