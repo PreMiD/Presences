@@ -1,7 +1,6 @@
 const undercards = new Presence({
     clientId: "799885664538853417"
-}), browsingStamp = Math.floor(Date.now() / 1000);
-let URLMap: {[index: string]:Array<string>} = {
+}), browsingStamp = Math.floor(Date.now() / 1000), URLMap: {[index: string]:Array<string>} = {
 "SignUp" : ['"Registering an account"', '""'],
 "AccountValidation" : ['"Activating account"', '""'],
 "SignIn" : ['"Signing in"', '""'],
@@ -31,7 +30,7 @@ let URLMap: {[index: string]:Array<string>} = {
 "Play" : ['"Finding a game..."'],
 "Game" : ['"Playing a game"', '"vs "+ getText("#enemyUsername")'],
 "Spectate" : ['"Spectating a game"', '(getText("#yourUsername") || "Loading...") + " vs " + (getText("#enemyUsername") || "Loading...")'],
-}
+};
 function getText(selector:string){
     return document.querySelector(selector).textContent;
 }
@@ -44,9 +43,8 @@ undercards.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing homepage";
     } else {
-      const re = new RegExp('^/([a-zA-Z\.]+)')
-      const path = document.location.pathname.match(re)[1];
-      if (URLMap.hasOwnProperty(path)) {
+      const re = new RegExp('^/([a-zA-Z.]+)'), path = document.location.pathname.match(re)[1];
+      if (Object.prototype.hasOwnProperty.call(URLMap, path)) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = eval(URLMap[path][0]);
         presenceData.state = eval(URLMap[path][1]);
