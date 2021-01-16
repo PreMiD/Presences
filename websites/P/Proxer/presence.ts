@@ -18,25 +18,42 @@ const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "proxer_icon",
-    details: "Idle",
-    state: "Browsing Proxer.me"
-  },
+      largeImageKey: "proxer_icon",
+      details: "Idle",
+      state: "Browsing Proxer.me"
+    },
     path = document.location.pathname;
 
   if (path.startsWith("/watch")) {
-    const name = getByXpath("//*[@id='wContainer']//*[@class='wName']", e => e.textContent) || "Unknown Anime",
-      ep = getByXpath("//*[@id='wContainer']//*[@class='wEp']", e => e.textContent),
-      maxEp = getByXpath("//*[@id='wContainer']//*[@class='wEp']", e => e.nextSibling.textContent.substr(1).trim()),
-      lang = getByXpath("//*[@id='wContainer']//*[@class='wLanguage']", e => e.textContent),
-      missing = getByXpath("//*[@id='wContainer']//*[@class='wStream']/div/@style", e => e.textContent.includes("/images/misc/streamfehlt.png")),
+    const name =
+        getByXpath(
+          "//*[@id='wContainer']//*[@class='wName']",
+          (e) => e.textContent
+        ) || "Unknown Anime",
+      ep = getByXpath(
+        "//*[@id='wContainer']//*[@class='wEp']",
+        (e) => e.textContent
+      ),
+      maxEp = getByXpath("//*[@id='wContainer']//*[@class='wEp']", (e) =>
+        e.nextSibling.textContent.substr(1).trim()
+      ),
+      lang = getByXpath(
+        "//*[@id='wContainer']//*[@class='wLanguage']",
+        (e) => e.textContent
+      ),
+      missing = getByXpath(
+        "//*[@id='wContainer']//*[@class='wStream']/div/@style",
+        (e) => e.textContent.includes("/images/misc/streamfehlt.png")
+      ),
       now = Date.now() / 1000;
 
     if (videoData) {
       if (!videoData.paused) {
         presenceData.details = "Watching";
         presenceData.startTimestamp = Math.floor(now - videoData.time);
-        presenceData.endTimestamp = Math.floor(now + videoData.duration - videoData.time);
+        presenceData.endTimestamp = Math.floor(
+          now + videoData.duration - videoData.time
+        );
       } else {
         presenceData.details = "Paused";
       }
@@ -93,9 +110,17 @@ presence.on("UpdateData", () => {
 });
 
 function getByXpath<T>(xpath: string, extractor?: (e: Node) => T): T | Node {
-  const transformer = extractor || function (e: Node) { return e };
+  const transformer =
+    extractor ||
+    function (e: Node) {
+      return e;
+    };
   try {
-    return transformer(document.evaluate(xpath, document, null, XPathResult.ANY_TYPE,null).iterateNext());
+    return transformer(
+      document
+        .evaluate(xpath, document, null, XPathResult.ANY_TYPE, null)
+        .iterateNext()
+    );
   } catch (e) {
     return null;
   }
