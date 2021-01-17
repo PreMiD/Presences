@@ -18,8 +18,8 @@ function capitalize(string: string) {
  */
 
 presence.on("UpdateData", () => {
-    const {hostname, pathname} = window.location,
-      data: PresenceData = {};
+  const {hostname, pathname} = window.location,
+    data: PresenceData = {};
 
   let details: string,
     state: string,
