@@ -163,6 +163,45 @@ presence.on("UpdateData", async () => {
           : undefined,
         smallImageKey: "reading"
       },
+      "/my/": {
+        details: (await strings).viewTheir,
+        state: (await strings).profile,
+        smallImageKey: "reading"
+      },
+      "/my/profile/": {
+        details: (await strings).profileEdit.includes("{0}")
+          ? (await strings).profileEdit.split("{0}")[0]
+          : (await strings).profileEdit,
+        state: (await strings).profileEdit.includes("{0}")
+          ? (await strings).profileEdit.split("{0}")[1]
+          : undefined,
+        smallImageKey: "search"
+      },
+      "/my/watched/": {
+        details: (await strings).viewTheir,
+        state: (await strings).watched,
+        smallImageKey: "reading"
+      },
+      "/my/purchased/": {
+        details: (await strings).viewTheir,
+        state: (await strings).purchases,
+        smallImageKey: "reading"
+      },
+      "/my/coin/": {
+        details: (await strings).viewTheir,
+        state: (await strings).coins,
+        smallImageKey: "reading"
+      },
+      "/my/devices/": {
+        details: (await strings).viewTheir,
+        state: (await strings).devices,
+        smallImageKey: "reading"
+      },
+      "/my/channels/": {
+        details: (await strings).viewTheir,
+        state: (await strings).followed,
+        smallImageKey: "reading"
+      },
       "/upcoming/": {
         details: (await strings).browseThrough,
         state: (await strings).upcoming,
@@ -214,45 +253,6 @@ presence.on("UpdateData", async () => {
       "/product/(\\w*\\d*)/": {
         details: (await strings).product.replace("{0}", productPageChannel),
         state: productPageTitle,
-        smallImageKey: "reading"
-      },
-      "/my/": {
-        details: (await strings).viewTheir,
-        state: (await strings).profile,
-        smallImageKey: "reading"
-      },
-      "/my/profile/": {
-        details: (await strings).profileEdit.includes("{0}")
-          ? (await strings).profileEdit.split("{0}")[0]
-          : (await strings).profileEdit,
-        state: (await strings).profileEdit.includes("{0}")
-          ? (await strings).profileEdit.split("{0}")[1]
-          : undefined,
-        smallImageKey: "search"
-      },
-      "/my/watched/": {
-        details: (await strings).viewTheir,
-        state: (await strings).watched,
-        smallImageKey: "reading"
-      },
-      "/my/purchased/": {
-        details: (await strings).viewTheir,
-        state: (await strings).purchases,
-        smallImageKey: "reading"
-      },
-      "/my/coin/": {
-        details: (await strings).viewTheir,
-        state: (await strings).coins,
-        smallImageKey: "reading"
-      },
-      "/my/devices/": {
-        details: (await strings).viewTheir,
-        state: (await strings).devices,
-        smallImageKey: "reading"
-      },
-      "/my/channels/": {
-        details: (await strings).viewTheir,
-        state: (await strings).followed,
         smallImageKey: "reading"
       },
       "/search/": {

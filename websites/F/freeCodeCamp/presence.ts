@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "729995077111250966"
+  clientId: "797749214175035412"
 });
 
 const timeStamp = Math.floor(Date.now() / 1000);
