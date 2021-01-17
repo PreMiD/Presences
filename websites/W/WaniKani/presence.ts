@@ -1,7 +1,7 @@
 const presence: Presence = new Presence({
-  clientId: "800166344023867443"
-}),
-  largeImageKey = "logo";;
+    clientId: "800166344023867443"
+  }),
+  largeImageKey = "logo";
 
 let elapsed = 0,
   eventType = -1;
