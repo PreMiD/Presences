@@ -19,9 +19,15 @@ presence.on("UpdateData", async () => {
         from = document.querySelector("#srcLangButton > #sourceLangText").innerHTML;
         to = document.querySelector("#dstLangButton > #targetLangText").innerHTML;
       } else if (document.location.pathname == "/ocr") {
+<<<<<<< HEAD
         typet = "Image";
         from = document.querySelector("#sourceLangButton").innerHTML;
         to = document.querySelector("#targetLangButton").innerHTML;
+=======
+        typet = "Image"
+        from = document.querySelector("#srcLangButton").innerHTML;
+        to = document.querySelector("#dstLangButton").innerHTML;
+>>>>>>> parent of 2058579... Fixed bug with showing translating image
       } else {
         typet = "Text";
         from = "Choosing...";
