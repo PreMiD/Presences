@@ -1,9 +1,10 @@
 const presence: Presence = new Presence({
   clientId: "800166344023867443"
-});
+}),
+  largeImageKey = "logo";;
 
-let elapsed: number = 0,
-  eventType: number = -1;
+let elapsed = 0,
+  eventType = -1;
 
 function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -23,8 +24,7 @@ presence.on("UpdateData", () => {
   let details: string,
     state: string,
     smallImageKey: string,
-    smallImageText: string,
-    largeImageKey: string = "logo";
+    smallImageText: string;
 
   switch (hostname) {
     case "wanikani.com":
@@ -55,7 +55,7 @@ presence.on("UpdateData", () => {
               } else if (lessons < 250) {
                 smallImageKey = "lessons-100";
               } else if (lessons < 500) {
-                smallImageKey = "lessons-250"
+                smallImageKey = "lessons-250";
               } else {
                 smallImageKey = "lessons-500";
               }
