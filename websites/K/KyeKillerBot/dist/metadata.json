@@ -1,0 +1,20 @@
+{
+    "author": {
+      "name": "KyeKiller",
+      "id": "303278996932526084"
+    },
+    "service": "Kyekillerbot.xyz",
+    "description": {
+      "en": "KyeKillerBot is an multi-purpose bot that is easy to use and it can be customized to your liking."
+    },
+    "url": "kyekillerbot.xyz",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/CtUvkzU.png",
+    "thumbnail": "https://i.imgur.com/mRUP2Ht.png",
+    "color": "#D600FFFF",
+    "tags": [
+      "bot",
+      "discord"
+    ],
+    "category": "other"
+  }
