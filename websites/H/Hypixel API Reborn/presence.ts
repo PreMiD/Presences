@@ -3,9 +3,8 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-  const route = document.location.hash.split("/");
-
-  const data: PresenceData = {
+  const route = document.location.hash.split("/"),
+  data: PresenceData = {
     largeImageKey: "logo"
   };
 
@@ -14,7 +13,6 @@ presence.on("UpdateData", () => {
   } else if (route[1] === "docs") {
     data.smallImageKey = route[2];
     data.smallImageText = `${route[2].replace(/^[a-z]/i, (c) => c.toUpperCase())} - ${Number(route[3][0]) ? `v${route[3]}` : `${route[3]}`}`;
-
     if (route[4].startsWith("search?q=")) {
       data.details = "Searching for:";
       data.state = route[4].slice(9);
