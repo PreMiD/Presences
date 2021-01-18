@@ -1,12 +1,12 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "800651916345999360"
 });
 
 presence.on("UpdateData", () => {
-  let route = document.location.hash.split("/");
+  const route = document.location.hash.split("/");
 
-  let data: PresenceData = {
-    largeImageKey: "logo",
+  const data: PresenceData = {
+    largeImageKey: "logo"
   };
 
   if (route.length === 1 || route[1] === "") {
