@@ -14,6 +14,5 @@
   "thumbnail": "https://i.imgur.com/ISdHrQA.png",
   "color": "#30ACCE",
   "tags": ["gaming", "filesharing", "coding", "sharing"],
-  "category": "other",
-  "regExp": "(.*).?game-linter.com(.*)"
+  "category": "other"
 }
