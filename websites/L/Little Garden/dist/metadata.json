@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "author": {
+      "name": "BananeChocolat",
+      "id": "293463332781031434"
+    },
+    "service": "Little Garden",
+    "altnames": ["littlexgarden"],
+    "description": {
+      "en": "mangas scans",
+      "fr": "scans de mangas"
+    },
+    "url": "littlexgarden.com",
+    "version": "1.0",
+    "logo": "https://i.imgur.com/VvfSbxY.png",
+    "thumbnail": "https://i.imgur.com/dtAZLjt.png",
+    "color": "#42E17D",
+    "tags": ["little", "garden", "scan", "manga"]
+  }
