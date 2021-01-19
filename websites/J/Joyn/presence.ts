@@ -17,7 +17,7 @@ const presence = new Presence({
             presenceData.details = "Durchstöbert";
         }
         else if (urlpath[1] != 'play' && (document.location.pathname.includes("/serien") || document.location.pathname.includes("/filme") || document.location.pathname.includes("/sport"))) {
-                presenceData.details = "Durchstöbert";
+            presenceData.details = "Durchstöbert";
         }
         else if (urlpath[1] == 'channels') {
             presenceData.details = 'Durchstöbert';
