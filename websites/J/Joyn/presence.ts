@@ -1,9 +1,9 @@
 const presence = new Presence({
-    clientId: "799629862620758046"
-  });
-  presence.on("UpdateData", async function () {
-    const presenceData = {
-        largeImageKey: "logo"
+  clientId: "799629862620758046"
+});
+presence.on("UpdateData", async function () {
+  const presenceData = {
+      largeImageKey: "logo"
     },
     set_timeRemaining = await presence.getSetting("timeRemaining"),
     urlpath = window.location.pathname.split("/"),
@@ -123,8 +123,5 @@ const presence = new Presence({
     if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
-    }
-    else {
-        presence.setActivity(presenceData);
     }
   });
