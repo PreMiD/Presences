@@ -24,5 +24,12 @@
 		"image",
 		"host"
 	],
-	"category": "other"
+	"category": "other",
+	"settings": [
+		{
+			"id": "usernameHidden",
+			"title": "Hidden Username",
+			"value": false
+		}
+	]
 }

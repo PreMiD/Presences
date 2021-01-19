@@ -11,7 +11,7 @@ function displayPresence(presenceData: PresenceData) {
   }
 }
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: new Date().getTime()
@@ -92,13 +92,17 @@ presence.on("UpdateData", () => {
         presenceData.details += ` (${siteVersion})`;
     }
 
-    const welcomeMessageElement = document.getElementsByClassName("welcomeText")[0];
+    const hiddenUsernameSetting = await presence.getSetting("usernameHidden");
 
-    if (welcomeMessageElement) {
-      const welcomeMessage = welcomeMessageElement.textContent,
-        username = welcomeMessage.replace("Welcome, ", "");
-      presenceData.smallImageKey = "user";
-      presenceData.smallImageText = `Logged in as ${username}`;
+    if (!hiddenUsernameSetting) {
+      const welcomeMessageElement = document.getElementsByClassName("welcomeText")[0];
+
+      if (welcomeMessageElement) {
+        const welcomeMessage = welcomeMessageElement.textContent,
+          username = welcomeMessage.replace("Welcome, ", "");
+        presenceData.smallImageKey = "user";
+        presenceData.smallImageText = `Logged in as ${username}`;
+      }
     }
 
     switch (path) {
