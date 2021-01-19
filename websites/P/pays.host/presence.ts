@@ -20,11 +20,11 @@ presence.on("UpdateData", () => {
 
 	// prod site
 	if (document.location.hostname === "pays.host") {
-		let siteVersion = document.getElementById("footer-version").innerText;
+		let siteVersionElement = document.getElementById("footer-version");
 		presenceData.details = "Browsing pays.host";
 
-		if (siteVersion)
-			presenceData.details += ` (${siteVersion})`;
+		if (siteVersionElement)
+			presenceData.details += ` (${siteVersionElement.innerText})`;
 
 		switch (path) {
 			case "/": {
