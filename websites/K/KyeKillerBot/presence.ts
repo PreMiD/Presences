@@ -3,7 +3,6 @@ var presence = new Presence({
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
 
 presence.on("UpdateData", async () => {
 
@@ -15,15 +14,15 @@ const presenceData: PresenceData = {
 if (document.location.hostname == "kyekillerbot.xyz") {
   presenceData.startTimestamp = browsingStamp;
   if (document.location.pathname.includes("/")) {
-    presenceData.details = "Veiwing Homepage";
+    presenceData.details = "Viewing  Homepage";
   } else if (document.location.pathname.includes("/plans")) {
-    presenceData.details = "Veiwing Plans";
+    presenceData.details = "Viewing  Plans";
   } else if (document.location.pathname.includes("/team")) {
-    presenceData.details = " Veiwing Team";
+    presenceData.details = " Viewing  Team";
   } else if (document.location.pathname.includes("/dashboard")) {
-    presenceData.details = "Veiwing Dashboard";
+    presenceData.details = "Viewing  Dashboard";
   } else if (document.location.pathname.includes("/404")) {
-    presenceData.details = "Veiwing Error 404";
+    presenceData.details = "Viewing  Error 404";
   }
 }
 

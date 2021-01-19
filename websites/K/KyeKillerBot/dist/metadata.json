@@ -1,9 +1,10 @@
 {
+   "$schema": "https://schemas.premid.app/metadata/1.3",
     "author": {
       "name": "KyeKiller",
       "id": "303278996932526084"
     },
-    "service": "Kyekillerbot.xyz",
+    "service": "KyeKillerBot",
     "description": {
       "en": "KyeKillerBot is an multi-purpose bot that is easy to use and it can be customized to your liking."
     },
@@ -11,7 +12,7 @@
     "version": "1.0.0",
     "logo": "https://i.imgur.com/xIgBWF5.png",
     "thumbnail": "https://i.imgur.com/mRUP2Ht.png",
-    "color": "#7E00FFFF",
+    "color": "#7E00FF",
     "tags": [
       "bot",
       "discord"
