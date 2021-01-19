@@ -22,41 +22,41 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     largeImageKey: "at_lg"
-  },tempo = Math.floor(Date.now() / 1000),
+  },
+    tempo = Math.floor(Date.now() / 1000),
     path = document.location.pathname,
     titulo = document.title
 
-  
   if (titulo.includes("Resultados da pesquisa")) {
     let result = document.querySelector("body > div.pagAniTitulo > div > h1").textContent
     presenceData.details = "Página de Busca";
     presenceData.state = "Pesquisando: " + result.replace("Você pesquisou por:", "");
     presenceData.startTimestamp = tempo;
   }
-  if (path == "/lista-de-animes-online/"){
+  else if (path == "/lista-de-animes-online/"){
     presenceData.details = "Animes Legendados";
     presenceData.startTimestamp = tempo;
   }
-  if (path == "/lista-de-animes-dublados-online/"){
+  else if (path == "/lista-de-animes-dublados-online/"){
     presenceData.details = "Animes Dublados";
     presenceData.startTimestamp = tempo;
   }
-  if (path == "/lista-de-generos-online/"){
+  else if (path == "/lista-de-generos-online/"){
     presenceData.details = "Gêneros";
     presenceData.startTimestamp = tempo;
   }
-  if (path == "/calendario/"){
+  else if (path == "/calendario/"){
     presenceData.details = "Calendário de Animes";
     presenceData.startTimestamp = tempo;
   }
-  if (titulo.includes("Todos os Epi")) {
+  else if (titulo.includes("Todos os Epi")) {
     let nameAni = document.querySelector("body > div.pagAniTitulo > div > h1").textContent,
         genrAni = document.querySelector("#anime > div.animeFlexContainer > div.right > div > div:nth-child(2)").textContent
     presenceData.details = nameAni.replace(" – Todos os Episódios", "");
     presenceData.state = genrAni
     presenceData.startTimestamp = tempo;
   }
-  if(titulo.includes(" – Episód")){
+  else if(titulo.includes(" – Episód")){
     const AniN = document.querySelector("body > div.pagEpiTitulo > div > h1").textContent.split(" ")
         .join(" ")
         .replace(" HD", "")
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
       ? true
       : false;
 
-  const video: HTMLVideoElement = document.querySelector(".jw-video");
+    const video: HTMLVideoElement = document.querySelector(".jw-video");
 
     if (video !== null && !isNaN(video.duration)) {
       let videoTitle,
@@ -106,11 +106,12 @@ presence.on("UpdateData", async () => {
       }
     }
   }
+
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
-  //presence.setActivity(presenceData);
+  
 });
