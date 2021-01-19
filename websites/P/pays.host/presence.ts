@@ -12,15 +12,14 @@ function displayPresence(presenceData: PresenceData) {
 }
 
 presence.on("UpdateData", () => {
-	let presenceData: PresenceData = {
+	const presenceData: PresenceData = {
 		largeImageKey: "logo",
 		startTimestamp: new Date().getTime()
-	};
-	let path = document.location.pathname;
+	}, path = document.location.pathname;
 
 	// prod site
 	if (document.location.hostname === "pays.host") {
-		let siteVersionElement = document.getElementById("footer-version");
+		const siteVersionElement = document.getElementById("footer-version");
 		presenceData.details = "Browsing pays.host";
 
 		if (siteVersionElement)
@@ -43,7 +42,7 @@ presence.on("UpdateData", () => {
 			}
 
 			case "/domains": {
-				let domainCount = document.getElementById("domain-count").innerText;
+				const domainCount = document.getElementById("domain-count").innerText;
 				presenceData.state = "";
 
 				if (domainCount)
@@ -60,13 +59,13 @@ presence.on("UpdateData", () => {
 			}
 
 			case "/profile": {
-				let username = document.getElementById("username").innerText;
+				const username = document.getElementById("username").innerText;
 				presenceData.state = `Viewing ${username}'s profile`;
 				break;
 			}
 
 			case "/gallery": {
-				let uploadCount = document.getElementById("total-max").innerText;
+				const uploadCount = document.getElementById("total-max").innerText;
 				presenceData.state = `Viewing gallery (${uploadCount} uploads)`;
 				break;
 			}
@@ -76,28 +75,28 @@ presence.on("UpdateData", () => {
 			if (path.startsWith("/admin")) {
 				presenceData.state = "Viewing an admin page";
 			} else if (/[a-zA-Z0-9]{8}/.test(path)) {
-				let imageOwner = document.getElementById("image-owner").innerText;
+				const imageOwner = document.getElementById("image-owner").innerText;
 				presenceData.state = `Viewing an upload by ${imageOwner}`;
 			}
 		}
 	}
 	// beta site
 	else if (document.location.hostname === "beta.pays.host") {
-		let siteVersionElement = document.querySelector("body div.row div.sidebar-header a")
+		const siteVersionElement = document.querySelector("body div.row div.sidebar-header a");
 		presenceData.details = "Browsing pays.host beta";
 
 		if(siteVersionElement) {
-			let siteVersionString = siteVersionElement.textContent;
-			let [, siteVersion] = /\((.*?)\)/.exec(siteVersionString);
+			const siteVersionString = siteVersionElement.textContent,
+        [, siteVersion] = /\((.*?)\)/.exec(siteVersionString);
 			if (siteVersion)
 				presenceData.details += ` (${siteVersion})`;
 		}
 
-		let welcomeMessageElement = document.getElementsByClassName("welcomeText")[0];
+		const welcomeMessageElement = document.getElementsByClassName("welcomeText")[0];
 
 		if (welcomeMessageElement) {
-			let welcomeMessage = welcomeMessageElement.textContent;
-			let username = welcomeMessage.replace("Welcome, ", "");
+			const welcomeMessage = welcomeMessageElement.textContent,
+        username = welcomeMessage.replace("Welcome, ", "");
 			presenceData.smallImageKey = "user";
 			presenceData.smallImageText = `Logged in as ${username}`;
 		}
@@ -114,8 +113,8 @@ presence.on("UpdateData", () => {
 			}
 
 			case "/domains": {
-				let domainCountString = document.querySelector("main div p:nth-child(3)").textContent;
-				let [domainCount] = /\d+/.exec(domainCountString);
+				const domainCountString = document.querySelector("main div p:nth-child(3)").textContent,
+          [domainCount] = /\d+/.exec(domainCountString);
 				presenceData.state = "";
 
 				if (domainCount)
@@ -127,7 +126,7 @@ presence.on("UpdateData", () => {
 			}
 
 			case "/domains/donate": {
-				presenceData.state = "Donating a domain"
+				presenceData.state = "Donating a domain";
 				break;
 			}
 
@@ -137,7 +136,7 @@ presence.on("UpdateData", () => {
 			}
 
 			case "/user": {
-				let username = document.querySelector("main h2").textContent;
+				const username = document.querySelector("main h2").textContent;
 				presenceData.state = `Viewing ${username}'s profile`;
 				break;
 			}
@@ -163,7 +162,7 @@ presence.on("UpdateData", () => {
 			}
 
 			case "/gallery": {
-				let uploadCount = document.getElementById("totalCount").innerText;
+				const uploadCount = document.getElementById("totalCount").innerText;
 				presenceData.state = "Viewing gallery";
 
 				if (uploadCount)
@@ -210,22 +209,22 @@ presence.on("UpdateData", () => {
 
 		if (!presenceData.state) {
 			// Decode URI path without leading /
-			let decodedPath = decodeURIComponent(path.substr(1));
+			const decodedPath = decodeURIComponent(path.substr(1)),
 			// Test if the path uses invisible chars
-			let invisiblePath = /[\u200B\u200C]+/.test(decodeURIComponent(decodedPath));
+			  invisiblePath = /[\u200B\u200C]+/.test(decodeURIComponent(decodedPath));
 
 			if (path.startsWith("/admin")) {
 				presenceData.state = "Viewing an admin page";
 			} else if (path.startsWith("/changelog/")) {
-				let changelogVersion = path.replace("/changelog/", "");
+				const changelogVersion = path.replace("/changelog/", "");
 				presenceData.state = `Viewing ${changelogVersion} changelog`;
 			}
 			// User pages follow format of "/user/UID"
 			else if (path.startsWith("/user/") && /\d+\/?$/.test(path.replace("/user/", ""))) {
-				let usernameElement = document.querySelector("main h2")
+				const usernameElement = document.querySelector("main h2");
 
 				if (usernameElement) {
-					let username = usernameElement.textContent;
+					const username = usernameElement.textContent;
 					presenceData.state = `Viewing ${username}'s profile`;
 				} else {
 					presenceData.state = "Page not found";
@@ -234,10 +233,10 @@ presence.on("UpdateData", () => {
 			}
 			// User admin pages follow format of "/user/UID/admin"
 			else if (path.startsWith("/user/") && /\d+\/admin\/?/.test(path.replace("/user/", ""))) {
-				let usernameElement = document.querySelector("main h2")
+				const usernameElement = document.querySelector("main h2");
 
 				if (usernameElement) {
-					let username = usernameElement.textContent;
+					const username = usernameElement.textContent;
 					presenceData.state = `Viewing ${username}'s profile as admin`;
 				} else {
 					presenceData.state = "Page not found";
@@ -248,8 +247,9 @@ presence.on("UpdateData", () => {
 			else if (/\b[a-zA-Z0-9]{8}\b/.test(path) || invisiblePath) {
 				if (invisiblePath) {
 					let id;
-					let binaryString = decodedPath.replace(/\u200b/g, "0").replace(/\u200c/g, "1");
-					let bytes = binaryString.match(/.{8}/g);
+          const binaryString = decodedPath.replace(/\u200b/g, "0").replace(/\u200c/g, "1"),
+            bytes = binaryString.match(/.{8}/g);
+
 					if (bytes)
 						id = bytes.map(bin => String.fromCharCode(parseInt(bin, 2))).join("");
 
@@ -260,12 +260,12 @@ presence.on("UpdateData", () => {
 					}
 				}
 
-				let imageOwnerElement = document.querySelector("h5 span.text-muted");
+				const imageOwnerElement = document.querySelector("h5 span.text-muted");
 
 				if (!imageOwnerElement)
 					presenceData.state = "Page not found";
 				else {
-					let imageOwner = imageOwnerElement.textContent;
+					const imageOwner = imageOwnerElement.textContent;
 					presenceData.state = `Viewing an upload by ${imageOwner}`;
 				}
 			} else {
