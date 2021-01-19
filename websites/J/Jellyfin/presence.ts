@@ -283,26 +283,8 @@ const // official website
     largeImageKey: PRESENCE_ART_ASSETS.logo
   };
 
-let ApiClient: ApiClient;
-
-// generic log style for PMD_[info|error|success] calls
-const GENERIC_LOG_STYLE = "font-weight: 800; padding: 2px 5px; color: white;";
-
-/**
- * PMD_info - log into the user console info messages
- *
- * @param  {string} txt text to log into the console
- */
-function PMD_info(message: string): void {
-  console.log(
-    "%cPreMiD%cINFO%c " + message,
-    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
-    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-let presence: Presence;
+let ApiClient: ApiClient,
+  presence: Presence;
 
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
@@ -781,12 +763,13 @@ async function updateData(): Promise<void> {
  * init - check if the presence should be initialized, if so start doing the magic
  */
 async function init(): Promise<void> {
-  let validPage = false;
+  let validPage = false,
+    infoMessage;
 
   // jellyfin website
   if (location.host === JELLYFIN_URL) {
     validPage = true;
-    PMD_info("Jellyfin website detected");
+    infoMessage = "Jellyfin website detected";
 
     // web client
   } else {
@@ -800,7 +783,7 @@ async function init(): Promise<void> {
           30 * 1000
         ) {
           validPage = true;
-          PMD_info("Jellyfin web client detected");
+          infoMessage = "Jellyfin web client detected";
         }
       }
     } catch (e) {
@@ -813,6 +796,7 @@ async function init(): Promise<void> {
       clientId: "669359568391766018"
     });
 
+    presence.info(infoMessage);
     presence.on("UpdateData", updateData);
   }
 }
