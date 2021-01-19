@@ -190,10 +190,12 @@ presence.on("UpdateData", async () => {
         );
         if (item.innerHTML.includes("Available listings related to")) {
           presenceData.details = "Searching for:";
-          presenceData.state = item.innerHTML.replace(/amp;/g, '').substring(29, 125);
+          presenceData.state = item.innerHTML
+            .replace(/amp;/g, "")
+            .substring(29, 125);
         } else if (item.innerHTML.endsWith("Listings")) {
           presenceData.details = "Searching for:";
-          presenceData.state = item.innerHTML.replace(/amp;|Listings/g, '');
+          presenceData.state = item.innerHTML.replace(/amp;|Listings/g, "");
         } else {
           presenceData.details = "Browsing:";
           presenceData.state = "The Feed";
