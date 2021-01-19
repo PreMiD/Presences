@@ -411,8 +411,14 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   }
 
   media[itemId] = "pending";
-
-  const res = await fetch(`/Users/${getUserId()}/Items/${itemId}`, {
+  const basePath = location.pathname.replace(
+    location.pathname
+      .split("/")
+      .slice(-2)
+      .join("/")
+    ,
+    ""),
+    res = await fetch(`${basePath}Users/${getUserId()}/Items/${itemId}`, {
       credentials: "include",
       headers: {
         "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
