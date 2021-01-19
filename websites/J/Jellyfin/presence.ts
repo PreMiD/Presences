@@ -289,7 +289,7 @@ let ApiClient: ApiClient,
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
-function handleAudioPlayback(): void {
+async function handleAudioPlayback(): Promise<void> {
   // sometimes the buttons are not created fast enough
   try {
     const audioElem = document.getElementsByTagName("audio")[0],
@@ -310,15 +310,15 @@ function handleAudioPlayback(): void {
     if (!audioElem.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
-      presenceData.endTimestamp = new Date(
-        Date.now() + (audioElem.duration - audioElem.currentTime) * 1000
-      ).getTime();
+
+      if (await presence.getSetting("showMediaTimestamps")) {
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(audioElem)[1];
+      }
 
       // paused
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
-      delete presenceData.endTimestamp;
     }
   } catch (e) {
     // do nothing
@@ -496,16 +496,15 @@ async function handleVideoPlayback(): Promise<void> {
     } else if (!videoPlayerElem.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
-      presenceData.endTimestamp = new Date(
-        Date.now() +
-          (videoPlayerElem.duration - videoPlayerElem.currentTime) * 1000
-      ).getTime();
+
+      if (await presence.getSetting("showMediaTimestamps")) {
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(videoPlayerElem)[1];
+      }
 
       // paused
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
-      delete presenceData.endTimestamp;
     }
   }
 
@@ -590,7 +589,7 @@ async function handleWebClient(): Promise<void> {
     audioElems[0].classList.contains("mediaPlayerAudio") &&
     audioElems[0].src
   ) {
-    handleAudioPlayback();
+    await handleAudioPlayback();
     return;
   }
 
@@ -693,9 +692,9 @@ async function handleWebClient(): Promise<void> {
 }
 
 /**
- * setDefaultsToPresence - set defaul values to the presenceData object
+ * setDefaultsToPresence - set default values to the presenceData object
  */
-function setDefaultsToPresence(): void {
+async function setDefaultsToPresence(): Promise<void> {
   if (presenceData.smallImageKey) {
     delete presenceData.smallImageKey;
   }
@@ -709,7 +708,9 @@ function setDefaultsToPresence(): void {
     delete presenceData.endTimestamp;
   }
 
-  presenceData.startTimestamp = Date.now();
+  if (await presence.getSetting("showTimestamps")) {
+    presenceData.startTimestamp = Date.now();
+  }
 }
 
 /**
@@ -736,7 +737,7 @@ async function isJellyfinWebClient(): Promise<boolean> {
  * updateData - tick function, this is called several times a second by UpdateData event
  */
 async function updateData(): Promise<void> {
-  setDefaultsToPresence();
+  await setDefaultsToPresence();
 
   let showPresence = false;
 
@@ -751,9 +752,10 @@ async function updateData(): Promise<void> {
     await handleWebClient();
   }
 
-  // do not show any times when media is paused
-  if (presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause) {
-    delete presenceData.endTimestamp;
+  // hide start timestamp on media playback
+  if (
+    presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
+    presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause) {
     delete presenceData.startTimestamp;
   }
 
