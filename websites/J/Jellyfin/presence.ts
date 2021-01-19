@@ -708,6 +708,8 @@ function setDefaultsToPresence(): void {
   if (presenceData.endTimestamp) {
     delete presenceData.endTimestamp;
   }
+
+  presenceData.startTimestamp = Date.now();
 }
 
 /**
@@ -749,9 +751,10 @@ async function updateData(): Promise<void> {
     await handleWebClient();
   }
 
-  // force the display of some counter
-  if (!presenceData.startTimestamp || !presenceData.endTimestamp) {
-    presenceData.startTimestamp = Date.now();
+  // do not show any times when media is paused
+  if (presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause) {
+    delete presenceData.endTimestamp;
+    delete presenceData.startTimestamp;
   }
 
   // if jellyfin is detected init/update the presence status
