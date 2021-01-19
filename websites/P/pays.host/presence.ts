@@ -2,6 +2,15 @@ const presence = new Presence({
 	clientId: "801051549790765108"
 });
 
+function displayPresence(presenceData: PresenceData) {
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
+}
+
 presence.on("UpdateData", () => {
 	let presenceData: PresenceData = {
 		largeImageKey: "logo",
@@ -220,7 +229,7 @@ presence.on("UpdateData", () => {
 					presenceData.state = `Viewing ${username}'s profile`;
 				} else {
 					presenceData.state = "Page not found";
-					return displayPresence();
+					return displayPresence(presenceData);
 				}
 			}
 			// User admin pages follow format of "/user/UID/admin"
@@ -232,7 +241,7 @@ presence.on("UpdateData", () => {
 					presenceData.state = `Viewing ${username}'s profile as admin`;
 				} else {
 					presenceData.state = "Page not found";
-					return displayPresence();
+          return displayPresence(presenceData);
 				}
 			}
 			// Image path IDs are alphanumeric and 8 characters in length, or uses invisible characters
@@ -247,7 +256,7 @@ presence.on("UpdateData", () => {
 					// Check the decoded invisible path does not follow valid image ID format
 					if(!/\b[a-zA-Z0-9]{8}\b/.test(id)) {
 						presenceData.state = "Page not found";
-						return displayPresence();
+            return displayPresence(presenceData);
 					}
 				}
 
@@ -270,14 +279,5 @@ presence.on("UpdateData", () => {
 		presenceData.state = document.getElementsByClassName("statusbar-text")[0].textContent;
 	}
 
-	displayPresence();
-
-	function displayPresence() {
-		if (presenceData.details == null) {
-			presence.setTrayTitle();
-			presence.setActivity();
-		} else {
-			presence.setActivity(presenceData);
-		}
-	}
+  return displayPresence(presenceData);
 });
