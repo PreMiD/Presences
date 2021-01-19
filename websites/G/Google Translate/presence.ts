@@ -233,10 +233,10 @@ presence.on("UpdateData", async () => {
     largeImageKey: "gt"
   };
 
-  if (document.location.hash.includes("sl=")) {
-    type = document.location.hash.split("&")[1];
-    from = document.location.hash.split("&")[2].replace("sl=", "");
-    to = document.location.hash.split("&")[3].replace("tl=", "");
+  if (document.location.search.includes("sl=")) {
+    type = document.location.search.split("&")[3];
+    from = document.location.search.split("&")[0].replace("?sl=", "");
+    to = document.location.search.split("&")[1].replace("tl=", "");
     if (type.replace("op=", "") === "translate") {
       typet = "Text";
     }
