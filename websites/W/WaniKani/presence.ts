@@ -18,7 +18,7 @@ function capitalize(string: string) {
  */
 
 presence.on("UpdateData", () => {
-  const {hostname, pathname} = window.location,
+  const { hostname, pathname } = window.location,
     data: PresenceData = {};
 
   let details: string,
@@ -33,15 +33,15 @@ presence.on("UpdateData", () => {
         case "/":
         case "/dashboard":
         case "/login": {
-          const buttons = document.querySelectorAll(".lessons-and-reviews__button"),
-            level: HTMLAnchorElement = document.querySelector(".user-summary__attribute > a");
+          const buttons = document.querySelectorAll(
+              ".lessons-and-reviews__button"
+            ),
+            level: HTMLAnchorElement = document.querySelector(
+              ".user-summary__attribute > a"
+            );
           if (buttons.length === 2) {
-            const lessons: number = +buttons[0]
-                .querySelector("span")
-                .innerText,
-              reviews: number = +buttons[1]
-                .querySelector("span")
-                .innerText;
+            const lessons: number = +buttons[0].querySelector("span").innerText,
+              reviews: number = +buttons[1].querySelector("span").innerText;
             details = "Viewing Dashboard";
             state = `${lessons} lessons | ${reviews} reviews`;
             smallImageText = level.innerHTML;
@@ -93,7 +93,10 @@ presence.on("UpdateData", () => {
         case "/review":
         case "/lesson": {
           details = "Browsing...";
-          state = pathname === "/lesson" ? "Viewing Lesson Summary" : "Viewing Reviews Summary";
+          state =
+            pathname === "/lesson"
+              ? "Viewing Lesson Summary"
+              : "Viewing Reviews Summary";
           if (eventType !== 0) {
             elapsed = Math.round(Date.now() / 1000);
             eventType = 0;
@@ -101,15 +104,26 @@ presence.on("UpdateData", () => {
           break;
         }
         case "/review/session": {
-          const available: number = +((document.querySelector("#available-count") as HTMLElement).innerText),
-            completed: number = +((document.querySelector("#completed-count") as HTMLElement).innerText),
-            correctRate: number = +((document.querySelector("#correct-rate") as HTMLElement).innerText),
-            characterElement: HTMLDivElement = document.querySelector("#character"),
+          const available: number = +(document.querySelector(
+              "#available-count"
+            ) as HTMLElement).innerText,
+            completed: number = +(document.querySelector(
+              "#completed-count"
+            ) as HTMLElement).innerText,
+            correctRate: number = +(document.querySelector(
+              "#correct-rate"
+            ) as HTMLElement).innerText,
+            characterElement: HTMLDivElement = document.querySelector(
+              "#character"
+            ),
             characterText: string = characterElement.innerText,
             characterType: string = characterElement.className,
-            questionType: string = document.querySelector("#question-type").className;
+            questionType: string = document.querySelector("#question-type")
+              .className;
           details = "Doing Reviews";
-          state = `${characterText} | ${capitalize(characterType)} ${capitalize(questionType)}`;
+          state = `${characterText} | ${capitalize(characterType)} ${capitalize(
+            questionType
+          )}`;
           smallImageText = `${completed} complete, ${available} remaining. (${correctRate}%)`;
           smallImageKey = characterType;
           if (eventType !== 2) {
@@ -120,11 +134,15 @@ presence.on("UpdateData", () => {
         }
         case "/lesson/session": {
           try {
-            const characterText: string = document.querySelector("#character").textContent,
-              characterMeaning: string = document.querySelector("#meaning").textContent,
-              completed: number = +document.querySelector("#completed-count").textContent,
+            const characterText: string = document.querySelector("#character")
+                .textContent,
+              characterMeaning: string = document.querySelector("#meaning")
+                .textContent,
+              completed: number = +document.querySelector("#completed-count")
+                .textContent,
               totalStats: NodeList = document.querySelectorAll("#stats .kanji"),
-              characterType: string = document.querySelector("#main-info").className;
+              characterType: string = document.querySelector("#main-info")
+                .className;
             details = "Learning Lessons";
             state = `${characterText} - ${characterMeaning}`;
             smallImageKey = characterType;
@@ -135,33 +153,43 @@ presence.on("UpdateData", () => {
             }
           } catch (err) {
             // Likely practicing
-            const characterText: string = document.querySelector("#character").textContent,
-              characterType: string = document.querySelector("#main-info").className,
-              questionType: string = document.querySelector("#question-type").className,
-              completed: number = +document.querySelector("#completed-count").textContent,
+            const characterText: string = document.querySelector("#character")
+                .textContent,
+              characterType: string = document.querySelector("#main-info")
+                .className,
+              questionType: string = document.querySelector("#question-type")
+                .className,
+              completed: number = +document.querySelector("#completed-count")
+                .textContent,
               totalStats: NodeList = document.querySelectorAll("#stats .kanji");
             details = "Practicing Lessons";
-            state = `${characterText} | ${capitalize(characterType)} ${capitalize(questionType)}`;
+            state = `${characterText} | ${capitalize(
+              characterType
+            )} ${capitalize(questionType)}`;
             smallImageKey = characterType;
             smallImageText = `${totalStats[0].textContent} radicals | ${totalStats[1].textContent} kanji | ${totalStats[2].textContent} vocab | ${completed} complete`;
           }
           break;
         }
-        case (pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/) || {}).input: {
+        case (pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/) || {})
+          .input: {
           const type: string = pathname.split("/")[1],
-            text: string = (document.querySelector(`.${type.replace(/s$/,"")}-icon`) as HTMLElement).innerText,
-            textName: string = (document.querySelector(`.${type.replace(/s$/,"")}-icon`)
-              .parentNode
-              .childNodes[4]
-              .textContent);
-          let textDescription: string = (document.querySelector(".mnemonic-content") as HTMLElement).innerText;
+            text: string = (document.querySelector(
+              `.${type.replace(/s$/, "")}-icon`
+            ) as HTMLElement).innerText,
+            textName: string = document.querySelector(
+              `.${type.replace(/s$/, "")}-icon`
+            ).parentNode.childNodes[4].textContent;
+          let textDescription: string = (document.querySelector(
+            ".mnemonic-content"
+          ) as HTMLElement).innerText;
           if (textDescription.length >= 50) {
-            textDescription = textDescription.substr(0,50) + "...";
+            textDescription = textDescription.substr(0, 50) + "...";
           }
           details = "Browsing " + capitalize(type);
           state = `${text} | ${textName}`;
           smallImageText = textDescription;
-          smallImageKey = type.replace(/s$/,"");
+          smallImageKey = type.replace(/s$/, "");
           break;
         }
         case (pathname.match(/^\/users\/.+$/) || {}).input: {
@@ -199,7 +227,7 @@ presence.on("UpdateData", () => {
         elapsed = Math.round(Date.now() / 1000);
         eventType = 0;
       }
-      if(/^\/u\/.+$/.test(pathname)){
+      if (/^\/u\/.+$/.test(pathname)) {
         details = "Viewing User Profile";
         smallImageKey = "avatar";
         state = document.querySelector(".username").textContent;
