@@ -2,12 +2,12 @@ const presence = new Presence({
   clientId: "800773457129635852"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000);
 
-var user: any;
-var title: any;
-var replace: any;
-var search: any;
+let user: any;
+let title: any;
+let replace: any;
+let search: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
