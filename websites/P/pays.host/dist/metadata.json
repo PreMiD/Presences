@@ -24,7 +24,5 @@
 		"image",
 		"host"
 	],
-	"category": "other",
-	"iframe": false,
-	"readLogs": false
+	"category": "other"
 }
