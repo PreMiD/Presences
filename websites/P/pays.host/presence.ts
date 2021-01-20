@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 
       case "/domains": {
         const domainCount = document.getElementById("domain-count").innerText;
-        presenceData.state = "";
+        delete presenceData.state;
 
         if (domainCount)
           presenceData.state = `Viewing ${domainCount} domains`;
@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
       case "/domains": {
         const domainCountString = document.querySelector("main div p:nth-child(3)").textContent,
           [domainCount] = /\d+/.exec(domainCountString);
-        presenceData.state = "";
+        delete presenceData.state;
 
         if (domainCount)
           presenceData.state = `Viewing ${domainCount} domains`;
