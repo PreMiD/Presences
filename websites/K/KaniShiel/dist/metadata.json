@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "fantomitechno 🦊#8888",
+      "id": "563749920683720709"
+    },
+    "url": "kanishiel.com",
+    "description": {
+      "en": "KaniShiel is a discord bot that can host multiple games on an indefinite number of simultaneous servers.",
+      "fr": "KaniShiel est un bot de jeu qui peut animer de multiple jeu sur un nombre indéfini de serveur simultané."
+    },
+    "service": "KaniShiel",
+    "version": "1.0",
+    "logo": "https://cdn.discordapp.com/emojis/794941387128569886.png?v=1",
+    "thumbnail": "https://cdn.discordapp.com/emojis/794690157340131348.png?v=1",
+    "color": "#FF0000",
+    "tags": [
+      "bot",
+      "kanishiel",
+      "discord",
+      "game-bot"
+    ],
+    "category": "other"
+  }
