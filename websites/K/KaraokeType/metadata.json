@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "memetrollsXD",
+    "id": "231774635476254721"
+  },
+  "url": "memetrolls.net",
+  "description": {
+    "en": "A simple rythm game where you type in sync with the lyrics on the screen and the singer"
+  },
+  "service": "KaraokeType",
+  "version": "1.0.0",
+  "logo": "https://memetrolls.net/etc/KaraokeType/karaoketype.png",
+  "thumbnail": "https://memetrolls.net/etc/KaraokeType/karaoketype.png",
+  "color": "#4A4A4A",
+  "tags": [
+    "typing",
+    "songs",
+    "karaoke",
+    "game",
+    "music"
+  ],
+  "category": "games"
+}
