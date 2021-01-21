@@ -8,12 +8,12 @@ presence.on("UpdateData", async () => {
     largeImageKey: "at_lg"
   };
 
-  let tempo = Math.floor(Date.now() / 1000),
+  const tempo = Math.floor(Date.now() / 1000),
       path = document.location.pathname,
       titulo = document.title;
 
   if (titulo.includes("Resultados da pesquisa")) {
-    let const = document.querySelector("body > div.pagAniTitulo > div > h1").textContent
+    const = document.querySelector("body > div.pagAniTitulo > div > h1").textContent
     presenceData.details = "Página de Busca";
     presenceData.state = "Pesquisando: " + result.replace("Você pesquisou por:", "");
     presenceData.startTimestamp = tempo;
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "pause";
     presenceData.smallImageText = "Pausado";
 
-    let playback =
+    const playback =
     (document.querySelector(".vjs-current-time-display") ||
       document.querySelector(".jw-text-elapsed")) !== null
       ? true
