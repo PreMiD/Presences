@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "fantomitechno 🦊#8888",
+      "id": "563749920683720709"
+    },
+    "url": "gunivers.net",
+    "description": {
+      "en": "Gunivers est une communauté autour de minecraft d'origine française, mais à destination d'un public français ou international selon les projets.",
+      "fr": "Gunivers is a minecraft community of French origin, but intended for a french or international audience depending of the project."
+    },
+    "service": "Gunivers",
+    "version": "1.0",
+    "logo": "https://cdn.discordapp.com/emojis/767693611516821524.png?v=1",
+    "thumbnail": "https://cdn.discordapp.com/emojis/801804688302276628.png?v=1",
+    "color": "#FF0000",
+    "tags": [
+      "community ",
+      "gunivers",
+      "minecraft"
+    ],
+    "category": "games"
+  }
