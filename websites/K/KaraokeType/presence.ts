@@ -10,18 +10,6 @@ let presenceData: PresenceData = {
   largeImageKey: "kt_logo",
   startTimestamp: browsingStamp
 };
-const updateCallback = {
-  _function: null as Function,
-  get function(): Function {
-    return this._function;
-  },
-  set function(parameter) {
-    this._function = parameter;
-  },
-  get present(): boolean {
-    return this._function !== null;
-  }
-};
 
 /**
  * Initialize/reset presenceData.
@@ -39,7 +27,6 @@ const resetData = (): void => {
 ((): void => {
 
   if (currentURL.hostname === "memetrolls.net") {
-    updateCallback.function = (): void => {
       if (currentPath[0] === "play") {
         presenceData.details = "Playing" + document.title;
 
@@ -47,16 +34,9 @@ const resetData = (): void => {
       presenceData.details = "Choosing a song";
     }
   }
-}})
+})
 
-if (updateCallback.present) {
   presence.on("UpdateData", async () => {
     resetData();
-    updateCallback.function();
     presence.setActivity(presenceData);
   });
-} else {
-  presence.on("UpdateData", async () => {
-    presence.setActivity(presenceData);
-  });
-}
