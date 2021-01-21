@@ -29,7 +29,7 @@ presence.on("UpdateData", () => {
     presenceData.state = "Choosing a server";
   } else if (window.location.pathname.startsWith("/dashboard")) {
     presenceData.details = "Using the dashboard of :";
-    presenceData.state = 'test'
+    presenceData.state = document.getElementById('563749920683720709').textContent;
   }
 
   if (presenceData.details == null) {
