@@ -47,9 +47,6 @@ presence.on("UpdateData", () => {
       str = str.charAt(0).toUpperCase() + str.slice(1)
       presenceData.state = str
     }
-  } else if (document.location.hostname == "status.gunivers.net") {
-    presenceData.details = "Checking Status of:";
-    presenceData.state = "Gunivers Network";
   } else if (document.location.hostname == "project.gunivers.net") {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Gunivers Workspace";
