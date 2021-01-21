@@ -56,8 +56,8 @@ presence.on("UpdateData", () => {
     } else if (window.location.pathname.startsWith("/projects/")) {
       presenceData.details = "Reading a project:";
       let str = window.location.pathname.split('/')[2].replace(/-/g,' ');
-      str = str.charAt(0).toUpperCase() + str.slice(1)
-      presenceData.state = str
+      str = str.charAt(0).toUpperCase() + str.slice(1);
+      presenceData.state = str;
     } else if (window.location.pathname.startsWith("/users/")) {
       presenceData.details = "Looking for an user:";
       presenceData.state = document.querySelector(
