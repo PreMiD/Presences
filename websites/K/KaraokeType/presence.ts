@@ -34,7 +34,7 @@ const resetData = (): void => {
       presenceData.details = "Choosing a song";
     }
   }
-})
+});
 
   presence.on("UpdateData", async () => {
     resetData();
