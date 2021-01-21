@@ -22,7 +22,7 @@ presence.on("UpdateData", () => {
       }
     } else if (window.location.pathname.startsWith("/chronique-mensuelle-")) {
       presenceData.details = "Reading a chronicle";
-      presenceData.state = window.location.pathname.replace("/chronique-mensuelle-",'').replace('/','').replace('-','/')
+      presenceData.state = window.location.pathname.replace("/chronique-mensuelle-",'').replace('/','').replace('-','/');
     } else if (window.location.pathname.endsWith("/a-propos/") || window.location.pathname.endsWith("/about-us/")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "About us";
@@ -44,8 +44,8 @@ presence.on("UpdateData", () => {
     } else if (window.location.pathname.startsWith("/")) {
       presenceData.details = "Reading an article:";
       let str = window.location.pathname.replace('-2/','').split('/').slice(1).join(' ').replace(/-/g,' ');
-      str = str.charAt(0).toUpperCase() + str.slice(1)
-      presenceData.state = str
+      str = str.charAt(0).toUpperCase() + str.slice(1);
+      presenceData.state = str;
     }
   } else if (document.location.hostname == "project.gunivers.net") {
     presenceData.details = "Viewing a page:";
