@@ -1,11 +1,10 @@
 const presence = new Presence({
-  clientId: "801765062997180437"
-});
+  clientId: "801765062997180437"}),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/");
-const browsingStamp = Math.floor(Date.now() / 1000);
-let presenceData: PresenceData = {
+  currentPath = currentURL.pathname.slice(1).split("/"),
+  presenceData: PresenceData = {
   details: "Viewing an unsupported page",
   largeImageKey: "kt_logo",
   startTimestamp: browsingStamp
