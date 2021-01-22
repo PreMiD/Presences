@@ -283,8 +283,7 @@ const // official website
     largeImageKey: PRESENCE_ART_ASSETS.logo
   };
 
-let ApiClient: ApiClient,
-  presence: Presence;
+let ApiClient: ApiClient, presence: Presence;
 
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
@@ -312,7 +311,9 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp = presence.getTimestampsfromMedia(audioElem)[1];
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(
+          audioElem
+        )[1];
       }
 
       // paused
@@ -412,12 +413,9 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
 
   media[itemId] = "pending";
   const basePath = location.pathname.replace(
-    location.pathname
-      .split("/")
-      .slice(-2)
-      .join("/")
-    ,
-    ""),
+      location.pathname.split("/").slice(-2).join("/"),
+      ""
+    ),
     res = await fetch(`${basePath}Users/${getUserId()}/Items/${itemId}`, {
       credentials: "include",
       headers: {
@@ -498,7 +496,9 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp = presence.getTimestampsfromMedia(videoPlayerElem)[1];
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(
+          videoPlayerElem
+        )[1];
       }
 
       // paused
@@ -755,7 +755,8 @@ async function updateData(): Promise<void> {
   // hide start timestamp on media playback
   if (
     presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
-    presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause) {
+    presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause
+  ) {
     delete presenceData.startTimestamp;
   }
 
