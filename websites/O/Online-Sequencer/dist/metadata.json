@@ -5,11 +5,13 @@
     "id": "300929818231308288"
   },
   "url": "onlinesequencer.net",
-  "description": {},
+  "description": {
+    "en": "Make tunes in your browser and share them with friends!"
+  },
   "service": "Online Sequencer",
-  "version": "1.0",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/E4dzY6x.png",
-  "thumbnail": "blob:https://imgur.com/1ebe8221-447e-4ef7-a420-0de47c7e6d53",
+  "thumbnail": "https://i.imgur.com/PmxYsRT.png",
   "color": "#2C5AA1",
   "tags": [
     "online sequencer",

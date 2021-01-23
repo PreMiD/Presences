@@ -1,11 +1,11 @@
 const presence = new Presence({
     clientId: "802379096122196050" //The client ID of the Application created at https://discordapp.com/developers/applications
-  }),
-  strings = presence.getStrings({
+})
+  /*strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
     //You can use this to get translated strings in their browser language
-  });
+  });*/
 
 /*
 
@@ -21,13 +21,17 @@ setInterval(myOutsideHeavyLiftingFunction, 10000);
 //Run the function separate from the UpdateData event every 10 seconds to get and set the variables which UpdateData picks up
 
 */
+let timestart = Math.round((new Date()).getTime() / 1000);
+
+function refreshTime(){
+  timestart = Math.round((new Date()).getTime() / 1000);
+}
 
 presence.on("UpdateData", async () => {
   /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
 
     It is recommended to set up another function outside of this event function which will change variable values and do the heavy lifting if you call data from an API.*/
-    var upperText="";
-    var lowerText="";
+    let upperText="", lowerText="", refreshtime=true;
     if (document.getElementsByClassName("fas fa-stop")[0]!=undefined){
       upperText="Listening to a sequence";
       lowerText="Title: "+(<HTMLInputElement>document.getElementById("title")).value;
@@ -36,12 +40,14 @@ presence.on("UpdateData", async () => {
       lowerText="Title: "+(<HTMLInputElement>document.getElementById("title")).value;
     } else if (document.location.pathname=="/sequences"){
       upperText="Browsing sequences";
-      if (document.getElementsByTagName("input")[3].value!=""){
-        lowerText="Searching: "+(<HTMLInputElement>document.getElementsByTagName("input")[3]).value;
+      if (document.getElementsByTagName("input")[2].value!=""){
+        refreshtime=false;
+        lowerText="Searching: "+(<HTMLInputElement>document.getElementsByTagName("input")[2]).value;
       }
     } else if (document.location.pathname=="/memberlist"){
       upperText="Viewing members";
       if (document.getElementsByTagName("input")[2].value!=""){
+        refreshtime=false;
         lowerText="Searching: "+(<HTMLInputElement>document.getElementsByTagName("input")[2]).value;
       }
     } else if (document.location.pathname.startsWith("/members/")){
@@ -78,7 +84,12 @@ presence.on("UpdateData", async () => {
     }
 
     if (document.getElementById("chatbox")!=null){
-      upperText="Viewing Chat"
+      refreshtime=true;
+      upperText="Viewing Chat";
+    }
+
+    if (refreshtime){
+      refreshTime();
     }
     
   const presenceData: PresenceData = {
@@ -87,7 +98,7 @@ presence.on("UpdateData", async () => {
     smallImageText: "", //The text which is displayed when hovering over the small image
     details: upperText, //The upper section of the presence text
     state: lowerText, //The lower section of the presence text
-    startTimestamp: Math.round((new Date()).getTime() / 1000), //The unix epoch timestamp for when to start counting from
+    startTimestamp: timestart //The unix epoch timestamp for when to start counting from
     //endTimestamp: 0 //If you want to show Time Left instead of Elapsed, this is the unix epoch timestamp at which the timer ends
   };
 
