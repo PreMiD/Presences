@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
       upperText="Importing MIDI file";
     } else if (document.location.pathname.startsWith("/forum/showthread")){
       upperText="Viewing Forum Thread:";
-      let threadtitle = (<HTMLElement>document.getElementsByClassName("thead")[0]).innerText;
+      const threadtitle = (<HTMLElement>document.getElementsByClassName("thead")[0]).innerText;
       if (threadtitle.includes("Thread Modes")){
         lowerText=threadtitle.substr(13);
       } else {
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
       } else {
         upperText="Editing a sequence";
       }
-      let str = (<HTMLElement>document.getElementsByClassName("text")[1]).innerHTML.trim();
+      const str = (<HTMLElement>document.getElementsByClassName("text")[1]).innerHTML.trim();
       lowerText="Title: "+str.substring(0, str.indexOf('by <a'));
     }
 
