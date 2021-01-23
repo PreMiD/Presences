@@ -1,11 +1,12 @@
 const presence = new Presence({
   clientId: "802246778010730548" //The client ID of the Application created at https://discordapp.com/developers/applications
 }),
-  URLMap: { [index: string]: string } = {
+  SelectorMap: { [index: string]: string } = {
     Red: 'div#sbettors1 > span.redtext > strong',
     Blue: 'div#sbettors2 > span.bluetext > strong',
     estatus: '#betstatus',
-    betview: 'span#lastbet.dynamic-view',
+    tmode: 'span#tournament-note',
+    emode: 'div#footer-alert',
     betRed: 'span#lastbet.dynamic-view > span.redtext',
     betBlue: 'span#lastbet.dynamic-view > span.bluetext',
     prize: 'span#lastbet.dynamic-view > span.greentext',
@@ -15,32 +16,46 @@ const presence = new Presence({
   }, browsingStamp = Math.floor(Date.now() / 1000);
 
 function getText(selector: string) {
-  return document.querySelector(selector).textContent;
+  if (document.querySelector(selector) !== null)
+    return document.querySelector(selector).textContent;
+  else
+    return null;
 }
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "salty",
-    smallImageKey: "salero"
-  };
+    startTimestamp: browsingStamp
+  },
+    tmode = getText(SelectorMap['tmode']),
+    emode = getText(SelectorMap['emode']);
 
-  presenceData.startTimestamp = browsingStamp;
+  if (tmode !== null || emode.includes("bracket!") || emode.includes("FINAL")) {
+    presenceData.smallImageKey = "trofeo";
+    presenceData.smallImageText = "Tournament Mode";
+  } else if (emode.includes("exhibition") || emode.includes("Exhibition")){
+    presenceData.smallImageKey = "saltgirl";
+    presenceData.smallImageText = "Exhibition Mode";
+  } else {
+    presenceData.smallImageKey = "salero";
+    presenceData.smallImageText = "Matchmaking Mode";
+  }
 
-  presenceData.details = getText(URLMap['Red']) + " vs " + getText(URLMap['Blue']);
+  presenceData.details = getText(SelectorMap['Red']) + " VS " + getText(SelectorMap['Blue']);
 
-  if (!getText(URLMap['estatus']).includes("OPEN!")) {
-    if(!getText(URLMap['estatus']).includes("Payouts")) {
-      if ((getText(URLMap['betRed']) + getText(URLMap['betBlue'])).includes("$")) {
-        if (getText(URLMap['betRed']).includes('$'))
-          presenceData.state = getText(URLMap['betRed']) + "(Red) → " + getText(URLMap['prize']) + " | " + getText(URLMap['oddsRed']) + ":" + getText(URLMap['oddsBlue']);
+  if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
+    if(!getText(SelectorMap['estatus']).includes("Payouts")) {
+      if ((getText(SelectorMap['betRed']) + getText(SelectorMap['betBlue'])).includes("$")) {
+        if (getText(SelectorMap['betRed']).includes('$'))
+          presenceData.state = getText(SelectorMap['betRed']) + "(Red) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
         else
-          presenceData.state = getText(URLMap['betBlue']) + "(Blue) → " + getText(URLMap['prize']) + " | " + getText(URLMap['oddsRed']) + ":" + getText(URLMap['oddsBlue']);
+          presenceData.state = getText(SelectorMap['betBlue']) + "(Blue) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
       } else
-        presenceData.state = "Odds: " + getText(URLMap['oddsRed']) + ":" + getText(URLMap['oddsBlue']);
+        presenceData.state = "Odds: " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
     } else
-      presenceData.state = getText(URLMap['estatus']);
+      presenceData.state = getText(SelectorMap['estatus']);
   } else
-    presenceData.state = getText(URLMap['estatus']);
+    presenceData.state = getText(SelectorMap['estatus']);
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
