@@ -1,6 +1,6 @@
 const presence = new Presence({
     clientId: "802379096122196050" //The client ID of the Application created at https://discordapp.com/developers/applications
-})
+});
   /*strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
       upperText="Importing MIDI file";
     } else if (document.location.pathname.startsWith("/forum/showthread")){
       upperText="Viewing Forum Thread:";
-      var threadtitle = (<HTMLElement>document.getElementsByClassName("thead")[0]).innerText;
+      let threadtitle = (<HTMLElement>document.getElementsByClassName("thead")[0]).innerText;
       if (threadtitle.includes("Thread Modes")){
         lowerText=threadtitle.substr(13);
       } else {
@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
       } else {
         upperText="Editing a sequence";
       }
-      var str = (<HTMLElement>document.getElementsByClassName("text")[1]).innerHTML.trim();
+      let str = (<HTMLElement>document.getElementsByClassName("text")[1]).innerHTML.trim();
       lowerText="Title: "+str.substring(0, str.indexOf('by <a'));
     }
 
