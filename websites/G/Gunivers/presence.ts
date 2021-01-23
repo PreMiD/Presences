@@ -41,10 +41,10 @@ presence.on("UpdateData", () => {
     } else if (window.location.pathname.endsWith("/partners/") || window.location.pathname.endsWith("/partenaires/")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Our partners";
-    } else if (window.location.pathname.startsWith("/") && document.title != 'Gunivers - Creative community' && document.title != 'Home | Gunivers') {
+    } else if (window.location.pathname.startsWith("/") && window.location.pathname.length != 1 && !window.location.pathname.startsWith("/home")) {
       presenceData.details = "Reading an article:";
       presenceData.state = document.title.replace(' | Gunivers','');
-    } else if (document.title === 'Gunivers - Creative community' || document.title === 'Home | Gunivers') {
+    } else if (window.location.pathname.length === 1 || window.location.pathname.startsWith("/home")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Home";
     }
