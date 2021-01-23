@@ -52,17 +52,18 @@ presence.on("UpdateData", () => {
 
   presenceData.details = red.innerText + " vs " + blue.innerText;
 
-  if(betView.innerText.length > 1) {
-    if((betRed.innerText+betBlue.innerText).includes("$")) {
-      if (betRed.innerText.includes('$'))
-        presenceData.state = betRed.innerText + "(Red) → " + prize.innerText + " | " + oddsRed.innerText + ":" + oddsBlue.innerText;
-      else
-        presenceData.state = betBlue.innerText + "(Blue) → " + prize.innerText + " | " + oddsRed.innerText + ":" + oddsBlue.innerText;
-    }
-    else
-      presenceData.state = oddsRed.innerText + ":" + oddsBlue.innerText;
-  }
-  else
+  if (betView.innerText.length > 1) {
+    if(!estatus.innerText.includes("Payouts")) {
+      if ((betRed.innerText + betBlue.innerText).includes("$")) {
+        if (betRed.innerText.includes('$'))
+          presenceData.state = betRed.innerText + "(Red) → " + prize.innerText + " | " + oddsRed.innerText + ":" + oddsBlue.innerText;
+        else
+          presenceData.state = betBlue.innerText + "(Blue) → " + prize.innerText + " | " + oddsRed.innerText + ":" + oddsBlue.innerText;
+      } else
+        presenceData.state = "Odds: " + oddsRed.innerText + ":" + oddsBlue.innerText;
+    } else
+      presenceData.state = estatus.innerText;
+  } else
     presenceData.state = estatus.innerText;
 
   if (presenceData.details == null) {
