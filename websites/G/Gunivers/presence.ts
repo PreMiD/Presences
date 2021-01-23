@@ -56,7 +56,7 @@ presence.on("UpdateData", () => {
       presenceData.state = "on Gunivers Workspace";
     } else if (window.location.pathname.startsWith("/projects/")) {
       presenceData.details = "Reading a project:";
-      presenceData.state = document.title.split(' - ')[1]
+      presenceData.state = document.title.split(' - ')[1];
     } else if (window.location.pathname.startsWith("/users/")) {
       presenceData.details = "Looking for an user:";
       presenceData.state = document.querySelector(
