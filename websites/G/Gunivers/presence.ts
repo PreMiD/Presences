@@ -15,14 +15,14 @@ presence.on("UpdateData", () => {
       presenceData.state = "Activities";
     } else if (window.location.pathname.startsWith("/category/")) {
       presenceData.details = "Searching an article:";
-      presenceData.state = "in category " +window.location.pathname.split('/').slice(2).join('/').replace(/fr_/g, "").replace(/en_/g, "");
+      presenceData.state = "in category " +document.title.replace(' | Gunivers','');
       if (window.location.pathname.endsWith("category/chronique/")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Chronicles";
       }
     } else if (window.location.pathname.startsWith("/chronique-mensuelle-")) {
       presenceData.details = "Reading a chronicle";
-      presenceData.state = window.location.pathname.replace("/chronique-mensuelle-",'').replace('/','').replace('-','/');
+      presenceData.state = document.title.replace(' | Gunivers','').replace('Chronique Mensuelle - ','');
     } else if (window.location.pathname.endsWith("/a-propos/") || window.location.pathname.endsWith("/about-us/")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "About us";
@@ -41,11 +41,12 @@ presence.on("UpdateData", () => {
     } else if (window.location.pathname.endsWith("/partners/") || window.location.pathname.endsWith("/partenaires/")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Our partners";
-    } else if (window.location.pathname.startsWith("/")) {
+    } else if (window.location.pathname.startsWith("/") && document.title != 'Gunivers - Creative community' && document.title != 'Home | Gunivers') {
       presenceData.details = "Reading an article:";
-      let str = window.location.pathname.replace('-2/','').split('/').slice(1).join(' ').replace(/-/g,' ');
-      str = str.charAt(0).toUpperCase() + str.slice(1);
-      presenceData.state = str;
+      presenceData.state = document.title.replace(' | Gunivers','');
+    } else if (document.title === 'Gunivers - Creative community' || document.title === 'Home | Gunivers') {
+      presenceData.details = "Viewing a page:";
+      presenceData.state = "Home";
     }
   } else if (document.location.hostname == "project.gunivers.net") {
     presenceData.details = "Viewing a page:";
@@ -55,9 +56,7 @@ presence.on("UpdateData", () => {
       presenceData.state = "on Gunivers Workspace";
     } else if (window.location.pathname.startsWith("/projects/")) {
       presenceData.details = "Reading a project:";
-      let str = window.location.pathname.split('/')[2].replace(/-/g,' ');
-      str = str.charAt(0).toUpperCase() + str.slice(1);
-      presenceData.state = str;
+      presenceData.state = document.title.split(' - ')[1]
     } else if (window.location.pathname.startsWith("/users/")) {
       presenceData.details = "Looking for an user:";
       presenceData.state = document.querySelector(
