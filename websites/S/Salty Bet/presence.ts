@@ -60,7 +60,7 @@ presence.on("UpdateData", () => {
         presenceData.state = betBlue.innerText + "(Blue) → " + prize.innerText + " | " + oddsRed.innerText + ":" + oddsBlue.innerText;
     }
     else
-      presenceData.state = "O: " + oddsRed.innerText + ":" + oddsBlue.innerText;
+      presenceData.state = oddsRed.innerText + ":" + oddsBlue.innerText;
   }
   else
     presenceData.state = estatus.innerText;
