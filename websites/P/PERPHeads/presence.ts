@@ -3,7 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-var user: any, search: any, title: any;
+let user: HTMLElement, search: HTMLElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -27,9 +27,8 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      title = title.innerText.replace(search.inner);
+      presenceData.state  = title.innerText.replace(search.innerText, "").replace("»", "");
       presenceData.details = "Forums, viewing thread:";
-      presenceData.state = title;
 
       delete presenceData.smallImageKey;
       presence.setActivity(presenceData);
@@ -50,9 +49,8 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      title = title.innerText.replace(search.inner);
+      presenceData.state  = title.innerText.replace(search.innerText, "").replace("»", "");
       presenceData.details = "Forums, viewing category:";
-      presenceData.state = title;
 
       delete presenceData.smallImageKey;
       presence.setActivity(presenceData);
@@ -75,7 +73,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/whats-new/") &&
     document.location.pathname.includes("/posts/")
   ) {
-    presenceData.details = "Forums, Viewing the list of";
+    presenceData.details = "Forums, viewing the list of";
     presenceData.state = "latest posts";
 
     delete presenceData.smallImageKey;
@@ -138,13 +136,10 @@ presence.on("UpdateData", async () => {
       search = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      title = title.innerText.replace(search.innerText, "").replace("»", "");
-      presenceData.details = "Forums, Reading DM:";
-      if (title.length > 128) {
-        presenceData.state = title.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title;
-      }
+      presenceData.state  = title.innerText.replace(search.innerText, "").replace("»", "");
+      presenceData.details = "Forums, Reading a DM";
+      presenceData.state = title + "...";
+      
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
