@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "802246778010730548" //The client ID of the Application created at https://discordapp.com/developers/applications
+  clientId: "802246778010730548"
 }),
   SelectorMap: { [index: string]: string } = {
     Red: 'div#sbettors1 > span.redtext > strong',
