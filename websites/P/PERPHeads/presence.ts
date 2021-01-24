@@ -1,10 +1,9 @@
 const presence = new Presence({
-  clientId: "798312419260104705"
-});
+    clientId: "798312419260104705"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let user: any, search: any, title: any;
-
-const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -40,8 +39,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.smallImageKey;
       presence.setActivity(presenceData);
     }
-  }  
-  else if (document.location.pathname.includes("/forums/")) {
+  } else if (document.location.pathname.includes("/forums/")) {
     title = document.querySelector(
       "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
     );
