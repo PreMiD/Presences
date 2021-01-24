@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "612437291574755349"
+    clientId: "802958757909889054"
   }),
   capitalize = (text: string): string => {
     const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");

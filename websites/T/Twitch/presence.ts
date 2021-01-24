@@ -89,7 +89,7 @@ interface LangStrings {
 }
 
 const presence = new Presence({
-    clientId: "607754656453623843"
+    clientId: "802958789555781663"
   }),
   getElement = (query: string): string | undefined => {
     return document.querySelector(query)
