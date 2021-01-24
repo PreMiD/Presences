@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "798312419260104705" // CLIENT ID FOR YOUR PRESENCE
+  clientId: "798312419260104705"
 });
 
 let user: any, search: any, title: any;
