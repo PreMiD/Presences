@@ -1,17 +1,10 @@
 const presence = new Presence({
     clientId: "803366782722244638"
 });
-  
-  let path;
-  let strings;
+
   const browsingStamp = Math.floor(Date.now() / 1000);
   
   presence.on("UpdateData", async () => {
-    strings = await presence.getStrings({
-      live: "presence.activity.live",
-      play: "presence.playback.playing",
-      pause: "presence.playback.paused"
-    });
     const presenceData: PresenceData = {
       largeImageKey: "glogo"
     };
@@ -48,4 +41,3 @@ const presence = new Presence({
       presence.setActivity(presenceData);
     }
   });
-  
