@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "AcidEpicice",
+    "id": "249992970235936768"
+  },
+  "url": "www.ryouflashcards.com",
+  "description": {
+    "en": "Ryou Flashcards is a web app for learning Japanese and studying kanji and vocabulary words."
+  },
+  "service": "Ryou Flashcards",
+  "version": "1.1.1",
+  "logo": "https://i.imgur.com/snEsbAL.png",
+  "thumbnail": "https://i.imgur.com/tWNhZxF.png",
+  "color": "#4C8FFB",
+  "tags": [
+    "japanese",
+    "language",
+    "learning",
+    "education"
+  ],
+  "category": "other"
+}

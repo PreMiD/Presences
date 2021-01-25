@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
   const dj = document.querySelector(".live-name").textContent;
   const liveTill = document.querySelector(".live-time") ? document.querySelector(".live-time").textContent : false;
   const presenceData: PresenceData = {
-    largeImageKey: "tfmlogo",
+    largeImageKey: "tfmlogo"
   };
 
   let stateText = "";

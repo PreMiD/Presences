@@ -334,6 +334,73 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname == "discord.gg") {
     presenceData.details = "Viewing an invite";
     presenceData.startTimestamp = getTimeStamp();
+  } else if (document.location.hostname == "discordmerch.com") {
+    if (document.location.pathname == "/") {
+      presenceData.details = "Browsing the homepage of the merch store";
+      presenceData.startTimestamp = getTimeStamp();
+    } else if (document.location.pathname.split("/")[1] == "collections") {
+      if (document.location.pathname.split("/")[2] == "all") {
+        if (document.location.pathname.split("/")[3] == "products") {
+          presenceData.details = "Viewing a merch product";
+          presenceData.state = document.getElementsByClassName(
+            "product-single__title"
+          )[0].textContent;
+          presenceData.startTimestamp = getTimeStamp();
+        } else {
+          presenceData.details = "Browsing all merch products";
+          presenceData.startTimestamp = getTimeStamp();
+        }
+      } else if (document.location.pathname.split("/")[2] == "cool-kids") {
+        if (document.location.pathname.split("/")[3] == "products") {
+          presenceData.details = "Viewing a merch product";
+          presenceData.state = document.getElementsByClassName(
+            "product-single__title"
+          )[0].textContent;
+          presenceData.startTimestamp = getTimeStamp();
+        } else {
+          presenceData.details = "Viewing the Dark Theme merch collection";
+          presenceData.startTimestamp = getTimeStamp();
+        }
+      } else if (
+        document.location.pathname.split("/")[2] == "snowsgiving-2020"
+      ) {
+        if (document.location.pathname.split("/")[3] == "products") {
+          presenceData.details = "Viewing a merch product";
+          presenceData.state = document.getElementsByClassName(
+            "product-single__title"
+          )[0].textContent;
+          presenceData.startTimestamp = getTimeStamp();
+        } else {
+          presenceData.details = "Viewing the snowsgiving merch collection";
+          presenceData.startTimestamp = getTimeStamp();
+        }
+      } else {
+        presenceData.details = "Browsing the merch catalog";
+        presenceData.startTimestamp = getTimeStamp();
+      }
+    } else if (document.location.pathname.split("/")[1] == "products") {
+      if (document.location.pathname.split("/")[2]) {
+        presenceData.details = "Viewing a merch product";
+        presenceData.state = document.getElementsByClassName(
+          "product-single__title"
+        )[0].textContent;
+        presenceData.startTimestamp = getTimeStamp();
+      } else {
+        presenceData.details = "Browsing the merch catalog";
+        presenceData.startTimestamp = getTimeStamp();
+      }
+    } else if (document.location.pathname.split("/")[1] == "cart") {
+      presenceData.details = "Viewing their cart in the merch store";
+      presenceData.startTimestamp = getTimeStamp();
+    } else if (document.location.pathname.split("/")[1] == "pages") {
+      if (document.location.pathname.split("/")[2] == "contact") {
+        presenceData.details = "Viewing the contact us page in the merch store";
+        presenceData.startTimestamp = getTimeStamp();
+      } else if (document.location.pathname.split("/")[2] == "faq") {
+        presenceData.details = "Reading the FAQ in the merch store";
+        presenceData.startTimestamp = getTimeStamp();
+      }
+    }
   }
 
   if (presenceData.details == null) {

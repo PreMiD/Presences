@@ -4,30 +4,30 @@ Needed for the VLC presence to work.
 
 ### Open VLC and go to `Tools->Preferences`
 
-![image](https://doomlord.s-ul.eu/Hqf0JbyH)
+![image](https://i.imgur.com/HIb5MJj.png)
 
 ### Show `All` settings
 
-![image](https://doomlord.s-ul.eu/k4ZnNFFa)
+![image](https://i.imgur.com/yYPWg8Q.png)
 
 ### Select `Main interfaces` on the left, and tick the `Web` checkbox on the right
 
-![image](https://doomlord.s-ul.eu/LdodKcFh)
+![image](https://i.imgur.com/d17K5d5.png)
 
 ### Search for `lua` in VLC preferences dialog
 
-![image](https://doomlord.s-ul.eu/0NBN15Sb)
+![image](https://i.imgur.com/KPShZWi.png)
 
 ### Set a password for `Lua HTTP` there (remember it)
 
-![image](https://doomlord.s-ul.eu/LR9MZk2P)
+![image](https://i.imgur.com/Z8GrIiw.png)
 
-### Go to http://localhost:8080 **( THE PORT MUST BE 8080! )** and enter the password you've set before **( leave the username field blank )**
+### Restart VLC, then go to http://localhost:8080 **( THE PORT MUST BE 8080! )** and enter the password you've set before **( leave the username field blank )**
 
-![image](https://doomlord.s-ul.eu/GKzMdZAl)
+![image](https://i.imgur.com/P6gHWxG.png)
 
 ### Done, don't forget to keep the page open (better pin it too)
 
-![image](https://doomlord.s-ul.eu/iHuiBr8x)
+![image](https://i.imgur.com/TWeLbfD.png)
 
 _This MD file is an edit of [another one](https://github.com/azrafe7/vlc4youtube/blob/master/instructions/how-to-enable-vlc-web-interface.md) originally meant for a different purpose, but was slightly modified to work for PreMiD. Thanks to them though_

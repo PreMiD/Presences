@@ -1,8 +1,7 @@
 const presence = new Presence({
     clientId: "767140375785111562"
   }),
-  time = Math.floor(Date.now() / 1000),
-  path = document.location.pathname;
+  time = Math.floor(Date.now() / 1000);
 
 let currentTime: number, duration: number, paused: boolean;
 
@@ -38,8 +37,9 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "lolesports"
-  };
+      largeImageKey: "lolesports"
+    },
+    path = document.location.pathname;
 
   if (path == "/") {
     presenceData.details = "Browsing...";

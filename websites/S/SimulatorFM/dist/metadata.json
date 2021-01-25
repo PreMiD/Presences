@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "DubStepMad",
+    "id": "118810952530395136"
+  },
+  "service": "SimulatorFM",
+  "description": {
+    "en": "Simulator FM, a new but popular radio station for Euro Truck Simulator and American Truck Simulator."
+  },
+  "url": [
+    "simulator.fm",
+    "panel.simulator.fm"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/yKFc2V1.png",
+  "thumbnail": "https://i.imgur.com/71zEPjv.png",
+  "color": "#65B6FF",
+  "tags": [
+    "sfm",
+    "ets2",
+    "ats",
+    "tmp",
+    "truckersmp",
+    "fs19",
+    "asphalt",
+    "asphaltevents"
+  ],
+  "category": "music"
+}
