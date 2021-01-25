@@ -1,13 +1,9 @@
-console.log('yes')
 const presence = new Presence({
     clientId: "803366782722244638"
-  });
+});
   
   let path;
   let strings;
-  let clipTitle;
-  let clipAuthor;
-  let clipTimeLeft;
   const browsingStamp = Math.floor(Date.now() / 1000);
   
   presence.on("UpdateData", async () => {
@@ -40,7 +36,6 @@ const presence = new Presence({
       else if (window.location.pathname.endsWith('book')){
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Look at the album";
-
       } else {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Browsing the home page";
