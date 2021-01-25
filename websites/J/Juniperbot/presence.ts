@@ -38,7 +38,6 @@ async function getStrings(): Promise<LangStrings> {
       terms: "general.terms",
       privacy: "general.privacy",
       cookies: "juniperbot.cookies"
-
     },
     await presence.getSetting("lang")
   );
@@ -49,97 +48,102 @@ let strings: Promise<LangStrings> = getStrings(),
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "logo" },
-  newLang = await presence.getSetting("lang");
+    newLang = await presence.getSetting("lang");
 
   if (!oldLang) {
     oldLang = newLang;
   } else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
- }
+  }
 
-if(host == "juniper.bot") {
-  presenceData.startTimestamp = browsingStamp;
+  if (host == "juniper.bot") {
+    presenceData.startTimestamp = browsingStamp;
 
-switch (true) {
+    switch (true) {
+      case pathIncludes("/ranking/"):
+        presenceData.details = (await strings).leaderboard;
+        presenceData.state = document.querySelector(
+          ".guild--info h1.font-weight-thin.display-2"
+        ).innerHTML;
+        presenceData.smallImageKey = "list";
+        break;
+      case pathIncludes("/dashboard/"):
+        presenceData.details = (await strings).serverdash;
+        presenceData.state = (await strings).serverdashname.replace(
+          "{0}",
+          document.querySelector(".guild--info h1.font-weight-thin.display-2")
+            .innerHTML
+        );
+        break;
 
-  case pathIncludes("/ranking/"):
-    presenceData.details = (await strings).leaderboard;
-    presenceData.state = document.querySelector(
-      ".guild--info h1.font-weight-thin.display-2"
-    ).innerHTML;
-    presenceData.smallImageKey = "list";
-    break;
-  case pathIncludes("/dashboard/"):
-    presenceData.details = (await strings).serverdash;
-    presenceData.state = (await strings).serverdashname.replace('{0}',
-     document.querySelector(
-       ".guild--info h1.font-weight-thin.display-2"
-     ).innerHTML);
-    break;
+      case pathIncludes("/donate"):
+        presenceData.details = (await strings).donate;
+        presenceData.smallImageKey = "donate";
+        break;
 
-  case pathIncludes("/donate"):
-   presenceData.details = (await strings).donate;
-    presenceData.smallImageKey = "donate";
-    break;
+      case pathIncludes("/servers"):
+        presenceData.details = (await strings).servers;
+        presenceData.smallImageKey = "list";
+        break;
 
-  case pathIncludes("/servers"):
-    presenceData.details = (await strings).servers;
-    presenceData.smallImageKey = "list";
-    break;
+      case pathIncludes("/commands"):
+        presenceData.details = (await strings).commands;
+        presenceData.smallImageKey = "list";
+        break;
 
-  case pathIncludes("/commands"):
-    presenceData.details = (await strings).commands;
-    presenceData.smallImageKey = "list";
-    break;
+      case pathIncludes("/status"):
+        presenceData.details = (await strings).stats;
+        presenceData.smallImageKey = "stats";
+        break;
 
-  case pathIncludes('/status'):
-    presenceData.details = (await strings).stats;
-    presenceData.smallImageKey = 'stats';
-    break;
+      case pathIncludes("/user/card"):
+        presenceData.details = (await strings).usercard;
+        break;
 
-  case pathIncludes('/user/card'):
-   presenceData.details = (await strings).usercard;
-    break;
+      case pathIncludes("/terms"):
+        presenceData.details =
+          (await strings).reading + " " + (await strings).terms;
+        presenceData.smallImageKey = "list";
+        break;
 
-  case pathIncludes('/terms'):
-    presenceData.details = (await strings).reading + " " + (await strings).terms;
-    presenceData.smallImageKey = "list";
-    break;
+      case pathIncludes("/cookie"):
+        presenceData.details =
+          (await strings).reading + " " + (await strings).cookies;
+        presenceData.smallImageKey = "list";
+        break;
 
-  case pathIncludes('/cookie'):
-    presenceData.details = (await strings).reading + " " + (await strings).cookies;
-    presenceData.smallImageKey = 'list';
-    break;
+      case pathIncludes("/privacy"):
+        presenceData.details =
+          (await strings).reading + " " + (await strings).privacy;
+        presenceData.smallImageKey = "list";
+        break;
 
-  case pathIncludes('/privacy'):
-    presenceData.details = (await strings).reading + " " + (await strings).privacy;
-    presenceData.smallImageKey = 'list';
-    break;
-
-  default:
-    presenceData.details = "Main page";
-    break;
-}
+      default:
+        presenceData.details = "Main page";
+        break;
     }
-    if (host == "docs.juniper.bot") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = document.title;
-      presenceData.state = "docs.juniper.bot";
-      presenceData.smallImageKey = "list";
+  }
+  if (host == "docs.juniper.bot") {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = document.title;
+    presenceData.state = "docs.juniper.bot";
+    presenceData.smallImageKey = "list";
+  }
+  if (host == "feedback.juniper.bot") {
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.state = "feedback.juniper.bot";
+    switch (true) {
+      case pathIncludes("/posts/"):
+        presenceData.details =
+          (await strings).reading +
+          " " +
+          document.querySelector(".post-header h1").innerHTML;
+        break;
+      default:
+        presenceData.details = (await strings).viewMainPage;
+        break;
     }
-    if (host == "feedback.juniper.bot") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.state = "feedback.juniper.bot";
-      switch (true) {
-        case pathIncludes('/posts/'):
-          presenceData.details = (await strings).reading + " " +
-            document.querySelector(".post-header h1").innerHTML;
-          break;
-        default:
-         presenceData.details = (await strings).viewMainPage;
-          break;
-      }
   }
   if (!presenceData.details) {
     presence.setTrayTitle();

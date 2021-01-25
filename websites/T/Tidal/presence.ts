@@ -7,6 +7,8 @@ interface langStrings {
   pause: string;
   browsing: string;
   listening: string;
+  repeat: string;
+  repeatAll: string;
 }
 
 const getLanguages = async () => {
@@ -15,7 +17,9 @@ const getLanguages = async () => {
         play: "general.playing",
         pause: "general.paused",
         browsing: "general.browsing",
-        listening: "general.listeningMusic"
+        listening: "general.listeningMusic",
+        repeat: "general.repeat",
+        repeatAll: "general.repeatAll"
       },
       await presence.getSetting("language")
     );
@@ -109,6 +113,9 @@ presence.on("UpdateData", async () => {
                 "#nowPlaying > div.scrollWrapper--2Hy7_ > div > div.leftColumn--3OQ30 > div:nth-child(6) > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > a"
               ) as HTMLElement).textContent
             : null,
+          repeatOn: string = (document.querySelector(
+            "#footerPlayer > div.centerColumn--3fkzm > div > button.repeatButton--ONfa5"
+          ) as HTMLElement).getAttribute("data-type"),
           timestamps: Array<number> = presence.getTimestamps(
             ~~songCurrentTimestamp[0] * 60 + songCurrentTimestamp[1],
             ~~songEndTimestamp[0] * 60 + songEndTimestamp[1]
@@ -118,8 +125,18 @@ presence.on("UpdateData", async () => {
 
         switch (playingButton) {
           case "button__play":
-            presenceData.smallImageKey = "play";
-            presenceData.smallImageText = (await strings).play;
+            presenceData.smallImageKey =
+              repeatOn === "button__repeatAll"
+                ? "repeat-all"
+                : repeatOn === "button__repeatSingle"
+                ? "repeat"
+                : "play";
+            presenceData.smallImageText =
+              repeatOn === "button__repeatAll"
+                ? (await strings).repeatAll
+                : repeatOn === "button__repeatSingle"
+                ? (await strings).repeat
+                : (await strings).play;
             delete presenceData.endTimestamp;
             presenceData.endTimestamp = timestamps[1];
             presence.setTrayTitle(songTitle);
@@ -144,6 +161,9 @@ presence.on("UpdateData", async () => {
           playingButton: string = (document.querySelector(
             "#footerPlayer > div.centerColumn--3fkzm > div > button.playback-controls__button--white-icon.playbackToggle--3B2S9"
           ) as HTMLElement).getAttribute("data-type"),
+          repeatOn: string = (document.querySelector(
+            "#footerPlayer > div.centerColumn--3fkzm > div > button.repeatButton--ONfa5"
+          ) as HTMLElement).getAttribute("data-type"),
           timestamps: Array<number> = presence.getTimestamps(
             ~~videoCurrentTimestamp[0] * 60 + videoCurrentTimestamp[1],
             ~~videoEndTimestamp[0] * 60 + videoEndTimestamp[1]
@@ -153,8 +173,18 @@ presence.on("UpdateData", async () => {
 
         switch (playingButton) {
           case "button__play":
-            presenceData.smallImageKey = "play";
-            presenceData.smallImageText = (await strings).play;
+            presenceData.smallImageKey =
+              repeatOn === "button__repeatAll"
+                ? "repeat-all"
+                : repeatOn === "button__repeatSingle"
+                ? "repeat"
+                : "play";
+            presenceData.smallImageText =
+              repeatOn === "button__repeatAll"
+                ? (await strings).repeatAll
+                : repeatOn === "button__repeatSingle"
+                ? (await strings).repeat
+                : (await strings).play;
             delete presenceData.endTimestamp;
             presenceData.endTimestamp = timestamps[1];
             presence.setTrayTitle(songTitle);
