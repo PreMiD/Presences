@@ -144,12 +144,12 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "tvglobo";
       presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/transmissoes/")) {
+    } else if (document.location.pathname.includes("/ao-vivo/")) {
       const programTitle = document.querySelector(
-        "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-name"
+        "span.playkit-channels-navigation__program-name"
       );
       const programMetadata = document.querySelector(
-        "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-metadata"
+        "span.playkit-channels-navigation__program-metadata"
       );
       if (document.location.pathname.includes("/7339131/")) {
         presenceData.details = "Multishow - " + programTitle.textContent;
@@ -270,6 +270,18 @@ presence.on("UpdateData", async () => {
         presenceData.state = programMetadata.textContent;
         presenceData.smallImageKey = "live";
         presenceData.largeImageKey = "combate";
+        presenceData.startTimestamp = browsingStamp;
+      }
+      else if (document.location.pathname.includes("/9182156/")) {
+        presenceData.details = "CBN São Paulo"
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "cbn";
+        presenceData.startTimestamp = browsingStamp;
+      }
+      else if (document.location.pathname.includes("/9182126/")) {
+        presenceData.details = "CBN Rio de Janeiro"
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "cbn";
         presenceData.startTimestamp = browsingStamp;
       }
     } else if (document.location.pathname.includes("/canais/")) {
