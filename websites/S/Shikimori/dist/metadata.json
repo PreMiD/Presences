@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "fsLelush",
+    "id": "383521789562716160"
+  },
+  "contributors": [
+    {
+      "name": "rippledwater",
+      "id": "752720971089182752"
+    }
+  ],
+  "url": "shikimori.one",
+  "description": {
+    "ru": "Шикимори - онлайн энциклопедия аниме и манги",
+    "en": "Shikimori - online anime and manga encyclopedia"
+  },
+  "service": "Shikimori",
+  "version": "1.0",
+  "logo": "https://imgur.com/egFwRrx.png",
+  "thumbnail": "https://imgur.com/TBAQ5Hi.png",
+  "color": "#EF638D",
+  "tags": [
+    "anime",
+    "manga",
+    "community",
+    "encyclopedia"
+  ],
+  "category": "anime"
+}
