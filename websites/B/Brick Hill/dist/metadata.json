@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Dragonism",
+    "id": "694943372720341045"
+  },
+  "url": "www.brick-hill.com",
+  "description": {
+    "en": "Brick Hill is the ultimate building block game, allowing you to push the limits of digital bricks and make your own games."
+  },
+  "service": "Brick Hill",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/zeeZUb0.png",
+  "thumbnail": "https://i.imgur.com/Gy5U4QK.png",
+  "color": "#00A9FE",
+  "tags": [
+    "game",
+    "community",
+    "gaming"
+  ],
+  "category": "games"
+}

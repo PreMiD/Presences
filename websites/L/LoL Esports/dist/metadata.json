@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Kazo",
+    "id": "393071912189952011"
+  },
+  "service": "LoL Esports",
+  "description": {
+    "en": "The best place to watch League of Legends Esports and earn rewards!"
+  },
+  "url": "lolesports.com",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/BGc0jtj.jpg",
+  "thumbnail": "https://i.imgur.com/R1psydE.jpg",
+  "color": "#061A25",
+  "tags": ["lol", "leagueoflegends", "esport"],
+  "category": "videos",
+  "iframe": true
+}

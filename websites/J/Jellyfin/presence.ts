@@ -283,31 +283,12 @@ const // official website
     largeImageKey: PRESENCE_ART_ASSETS.logo
   };
 
-let ApiClient: ApiClient;
-
-// generic log style for PMD_[info|error|success] calls
-const GENERIC_LOG_STYLE = "font-weight: 800; padding: 2px 5px; color: white;";
-
-/**
- * PMD_info - log into the user console info messages
- *
- * @param  {string} txt text to log into the console
- */
-function PMD_info(message: string): void {
-  console.log(
-    "%cPreMiD%cINFO%c " + message,
-    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
-    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-let presence: Presence;
+let ApiClient: ApiClient, presence: Presence;
 
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
-function handleAudioPlayback(): void {
+async function handleAudioPlayback(): Promise<void> {
   // sometimes the buttons are not created fast enough
   try {
     const audioElem = document.getElementsByTagName("audio")[0],
@@ -328,15 +309,17 @@ function handleAudioPlayback(): void {
     if (!audioElem.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
-      presenceData.endTimestamp = new Date(
-        Date.now() + (audioElem.duration - audioElem.currentTime) * 1000
-      ).getTime();
+
+      if (await presence.getSetting("showMediaTimestamps")) {
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(
+          audioElem
+        )[1];
+      }
 
       // paused
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
-      delete presenceData.endTimestamp;
     }
   } catch (e) {
     // do nothing
@@ -429,8 +412,11 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   }
 
   media[itemId] = "pending";
-
-  const res = await fetch(`/Users/${getUserId()}/Items/${itemId}`, {
+  const basePath = location.pathname.replace(
+      location.pathname.split("/").slice(-2).join("/"),
+      ""
+    ),
+    res = await fetch(`${basePath}Users/${getUserId()}/Items/${itemId}`, {
       credentials: "include",
       headers: {
         "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
@@ -508,16 +494,17 @@ async function handleVideoPlayback(): Promise<void> {
     } else if (!videoPlayerElem.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
-      presenceData.endTimestamp = new Date(
-        Date.now() +
-          (videoPlayerElem.duration - videoPlayerElem.currentTime) * 1000
-      ).getTime();
+
+      if (await presence.getSetting("showMediaTimestamps")) {
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(
+          videoPlayerElem
+        )[1];
+      }
 
       // paused
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
-      delete presenceData.endTimestamp;
     }
   }
 
@@ -602,7 +589,7 @@ async function handleWebClient(): Promise<void> {
     audioElems[0].classList.contains("mediaPlayerAudio") &&
     audioElems[0].src
   ) {
-    handleAudioPlayback();
+    await handleAudioPlayback();
     return;
   }
 
@@ -705,9 +692,9 @@ async function handleWebClient(): Promise<void> {
 }
 
 /**
- * setDefaultsToPresence - set defaul values to the presenceData object
+ * setDefaultsToPresence - set default values to the presenceData object
  */
-function setDefaultsToPresence(): void {
+async function setDefaultsToPresence(): Promise<void> {
   if (presenceData.smallImageKey) {
     delete presenceData.smallImageKey;
   }
@@ -719,6 +706,10 @@ function setDefaultsToPresence(): void {
   }
   if (presenceData.endTimestamp) {
     delete presenceData.endTimestamp;
+  }
+
+  if (await presence.getSetting("showTimestamps")) {
+    presenceData.startTimestamp = Date.now();
   }
 }
 
@@ -746,7 +737,7 @@ async function isJellyfinWebClient(): Promise<boolean> {
  * updateData - tick function, this is called several times a second by UpdateData event
  */
 async function updateData(): Promise<void> {
-  setDefaultsToPresence();
+  await setDefaultsToPresence();
 
   let showPresence = false;
 
@@ -761,9 +752,12 @@ async function updateData(): Promise<void> {
     await handleWebClient();
   }
 
-  // force the display of some counter
-  if (!presenceData.startTimestamp || !presenceData.endTimestamp) {
-    presenceData.startTimestamp = Date.now();
+  // hide start timestamp on media playback
+  if (
+    presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
+    presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause
+  ) {
+    delete presenceData.startTimestamp;
   }
 
   // if jellyfin is detected init/update the presence status
@@ -781,12 +775,13 @@ async function updateData(): Promise<void> {
  * init - check if the presence should be initialized, if so start doing the magic
  */
 async function init(): Promise<void> {
-  let validPage = false;
+  let validPage = false,
+    infoMessage;
 
   // jellyfin website
   if (location.host === JELLYFIN_URL) {
     validPage = true;
-    PMD_info("Jellyfin website detected");
+    infoMessage = "Jellyfin website detected";
 
     // web client
   } else {
@@ -800,7 +795,7 @@ async function init(): Promise<void> {
           30 * 1000
         ) {
           validPage = true;
-          PMD_info("Jellyfin web client detected");
+          infoMessage = "Jellyfin web client detected";
         }
       }
     } catch (e) {
@@ -813,6 +808,7 @@ async function init(): Promise<void> {
       clientId: "669359568391766018"
     });
 
+    presence.info(infoMessage);
     presence.on("UpdateData", updateData);
   }
 }
