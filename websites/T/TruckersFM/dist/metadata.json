@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "Ninja",
     "id": "150987570715688960"
@@ -9,11 +10,11 @@
       "id": "156560379089125376"
     }
   ],
-  "service": "TruckersFM",
+  "url": "truckers.fm",
   "description": {
     "en": "Truckers.FM is the No.1 Hit Music Station as voted by the TruckersMP Community 5 years, providing round the clock entertainment broadcasting a variety of shows, ranging from the Top 40 to the biggest throwbacks."
   },
-  "url": "truckers.fm",
+  "service": "TruckersFM",
   "version": "1.2.7",
   "logo": "https://i.imgur.com/O6EaBmv.png",
   "thumbnail": "https://i.imgur.com/vMj6Rcz.png",
