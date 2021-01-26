@@ -3,24 +3,17 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-  const title = `${
-    document.querySelector(".player-artist-text").textContent
-  } - ${document.querySelector(".player-title-text").textContent} `;
-  const dj = document.querySelector(".live-name").textContent;
-  const liveTill = document.querySelector(".live-time") ? document.querySelector(".live-time").textContent.slice(6) : false;
+  let title = `${document.querySelector(".player-artist-text").textContent} - ${document.querySelector(".player-title-text").textContent}`;
+  let presenter = document.querySelector(".live-time") 
+		? `${document.querySelector(".live-name").textContent} till ${document.querySelector(".live-time").textContent.slice(6)}` 
+		: `${document.querySelector(".live-name").textContent}`;
+		
   const presenceData: PresenceData = {
     largeImageKey: "tfmlogo"
   };
 
-  let stateText = "";
-  if (liveTill) { 
-    stateText = `${dj} till ${liveTill}`;
-  } else {
-    stateText = `${dj}`;
-  }
-
   presenceData.details = `${title}`;
-  presenceData.state = `${stateText}`;
+  presenceData.state = `${presenter}`;
 
   presence.setActivity(presenceData);
   presence.setTrayTitle();
