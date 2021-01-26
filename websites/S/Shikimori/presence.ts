@@ -169,8 +169,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith("/achievements/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Views Achievements:",
       state: title,
       largeImageKey: "logo"
@@ -178,8 +178,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith("/common/")) {
-    const title = document.title.split("/")[0];;
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Views Achievements:",
       state: title,
       largeImageKey: "logo"
@@ -187,8 +187,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith("/genre/")) {
-    const title = document.title.split("/")[0];;
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Views Achievements:",
       state: title,
       largeImageKey: "logo"
@@ -196,8 +196,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith("/franchise/")) {
-    const title = document.title.split("/")[0];;
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Views Achievements:",
       state: title,
       largeImageKey: "logo"
@@ -205,8 +205,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith("/author/")) {
-    const title = document.title.split("/")[0];;
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Views Achievements:",
       state: title,
       largeImageKey: "logo"
@@ -214,8 +214,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if(
     document.querySelector("#profiles_show")) {
-    const name = document.location.pathname.replace("/", "");
-    const presenceData: PresenceData = {
+    const name = document.location.pathname.replace("/", ""),
+    presenceData: PresenceData = {
       details: "Viewing a profile:",
       state: name,
       largeImageKey: "logo"
@@ -223,8 +223,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.includes("/achievements")) {
-    const name =  document.location.pathname.split("/")[1];
-    const presenceData: PresenceData = {
+    const name =  document.location.pathname.split("/")[1],
+    presenceData: PresenceData = {
       details: "Viewing achievements",
       state: name,
       largeImageKey: "logo"
@@ -239,8 +239,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/animes/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing an anime:",
       state: title,
       largeImageKey: "logo"
@@ -248,8 +248,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/mangas/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing an manga:",
       state: title,
       largeImageKey: "logo"
@@ -257,8 +257,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/ranobe/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing an ranobe:",
       state: title,
       largeImageKey: "logo"
@@ -266,8 +266,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/characters/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing an character:",
       state: title,
       largeImageKey: "logo"
@@ -275,8 +275,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/people/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing an people:",
       state: title,
       largeImageKey: "logo"
@@ -284,8 +284,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.includes("forum/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Reads a discussion:",
       state: title,
       largeImageKey: "logo"
@@ -293,8 +293,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/clubs/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing an club:",
       state: title,
       largeImageKey: "logo"
@@ -302,8 +302,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/collections/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing an collection:",
       state: title,
       largeImageKey: "logo"
@@ -311,8 +311,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/articles/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing an article:",
       state: title,
       largeImageKey: "logo"
@@ -320,8 +320,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.includes("/rounds/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Participates in voting:",
       state: title,
       largeImageKey: "logo"
@@ -361,8 +361,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.includes("/list/anime")) {
-    const name =  document.location.pathname.split("/")[1];
-    const presenceData: PresenceData = {
+    const name =  document.location.pathname.split("/")[1],
+    presenceData: PresenceData = {
       details: "Viewing an anime list",
       state: name,
       largeImageKey: "logo"
@@ -370,16 +370,16 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.includes("/list/manga")) {
-    const name =  document.location.pathname.split("/")[1];
-    const presenceData: PresenceData = {
+    const name =  document.location.pathname.split("/")[1],
+    presenceData: PresenceData = {
         details: "Viewing an manga list",
         state: name,
         largeImageKey: "logo"
     };
     presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/history")) {
-    const name =  document.location.pathname.split("/")[1];
-    const presenceData: PresenceData = {
+    const name =  document.location.pathname.split("/")[1],
+    presenceData: PresenceData = {
         details: "Viewing an history",
         state: name,
         largeImageKey: "logo"
