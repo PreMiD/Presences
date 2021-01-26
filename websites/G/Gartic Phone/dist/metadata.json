@@ -18,5 +18,20 @@
     "gartic",
     "phone"
   ],
-  "category": "games"
+  "category": "games",
+  "settings": [
+
+    {
+      "id": "privacyDraw",
+      "title": "Hide drawing details",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "privacyAlbum",
+      "title": "Hide album usernames",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
+  ]
 }
