@@ -2,14 +2,17 @@ const presence = new Presence({
     clientId: "801742167608787015"
   });
   
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
     browsingStamp = Math.floor(Date.now() / 1000);
-
+  const privacy = await presence.getSetting("privacy");
+  const sprivacy = await presence.getSetting("super-privacy");
   presenceData.startTimestamp = browsingStamp;
-  if (window.location.pathname.endsWith("commandes")) {
+  if (sprivacy) {
+    presenceData.details = "Browsing";
+  } else if (window.location.pathname.endsWith("commandes")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Commands";
   } else if (window.location.pathname.endsWith("informations")) {
@@ -28,8 +31,16 @@ presence.on("UpdateData", () => {
     presenceData.details = "Using the dashboard:";
     presenceData.state = "Choosing a server";
   } else if (window.location.pathname.startsWith("/dashboard")) {
-    presenceData.details = "Using the dashboard of :";
-    presenceData.state = document.getElementById('563749920683720709').textContent;
+    if (privacy) {
+      presenceData.details = "Editing a server";
+      presenceData.state = 'with the dashboard'
+    } else {
+      presenceData.details = "Using the dashboard of :";
+      presenceData.state = document.getElementById('563749920683720709').textContent;
+    }
+  } else {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Home";
   }
 
   if (presenceData.details == null) {

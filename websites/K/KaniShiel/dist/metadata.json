@@ -20,5 +20,19 @@
       "discord",
       "game-bot"
     ],
-    "category": "other"
+    "category": "other",
+    "settings": [
+      {
+        "id": "privacy",
+        "title": "Hide server",
+        "icon": "fad fa-user-secret",
+        "value": false
+      },
+      {
+        "id": "super-privacy",
+        "title": "Privacy mode",
+        "icon": "fad fa-user-secret",
+        "value": false
+      }
+    ]
   }

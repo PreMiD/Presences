@@ -6,7 +6,6 @@
     },
     "url": [
       "gunivers.net",
-      "status.gunivers.net",
       "project.gunivers.net"
     ],
     "description": {
@@ -23,5 +22,13 @@
       "gunivers",
       "minecraft"
     ],
-    "category": "games"
+    "category": "games",
+    "settings": [
+      {
+        "id": "privacy",
+        "title": "Privacy Mode",
+        "icon": "fad fa-user-secret",
+        "value": false
+      }
+    ]
   }

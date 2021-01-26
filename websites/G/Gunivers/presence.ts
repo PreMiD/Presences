@@ -2,14 +2,17 @@ const presence = new Presence({
     clientId: "723474173208297532"
   });
   
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
     browsingStamp = Math.floor(Date.now() / 1000);
 
   presenceData.startTimestamp = browsingStamp;
-  if (document.location.hostname == "gunivers.net") {
+  const privacy = await presence.getSetting("privacy");
+  if (privacy) {
+    presenceData.details = "Browsing";
+  } else if (document.location.hostname == "gunivers.net") {
     if (window.location.pathname.startsWith("/articles")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Activities";
@@ -44,6 +47,10 @@ presence.on("UpdateData", () => {
     } else if (window.location.pathname.startsWith("/") && window.location.pathname.length != 1 && !window.location.pathname.startsWith("/home")) {
       presenceData.details = "Reading an article:";
       presenceData.state = document.title.replace(' | Gunivers','');
+      if (window.location.pathname.includes('/author/')) {
+        presenceData.details = "Looking for an user:";
+        presenceData.state = document.title.replace(' | Gunivers','');
+      }
     } else if (window.location.pathname.length === 1 || window.location.pathname.startsWith("/home")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Home";
