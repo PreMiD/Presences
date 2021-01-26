@@ -30,6 +30,10 @@ interface PresenceData {
    * tooltip for the smallImageKey
    */
   smallImageText?: string;
+  /**
+   * Array of buttons, max 2, label is the button text, and url is the link
+   */
+  buttons?: { label: string; url: string }[];
 }
 /**
  * Options that change the behavior of the presence
