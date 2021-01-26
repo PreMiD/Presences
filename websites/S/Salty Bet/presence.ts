@@ -1,6 +1,4 @@
-const presence = new Presence({
-    clientId: "802246778010730548"
-  }),
+const presence = new Presence({ clientId: "802246778010730548" }),
   SelectorMap: { [index: string]: string } = {
     Red: 'div#sbettors1 > span.redtext > strong',
     Blue: 'div#sbettors2 > span.bluetext > strong',
@@ -27,17 +25,13 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "salty"
   };
-
   if (document.location.pathname == "/" || document.location.pathname == "/index") {
     if(redCheck == getText(SelectorMap['Red']) || blueCheck == getText(SelectorMap['Blue'])) {
       blueCheck = getText(SelectorMap['Blue']) + "‎";
       redCheck = getText(SelectorMap['Red']) + "‎";
     }
-
     presenceData.startTimestamp = browsingStamp;
-
     const tmode = getText(SelectorMap['tmode']), emode = getText(SelectorMap['emode']);
-
     if (tmode !== null || emode.includes("bracket!") || emode.includes("FINAL")) {
       presenceData.smallImageKey = "trofeo";
       presenceData.smallImageText = "Tournament Mode";
@@ -48,9 +42,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "salero";
       presenceData.smallImageText = "Matchmaking Mode";
     }
-
     presenceData.details = redCheck + " VS " + blueCheck;
-
     if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
       if (!getText(SelectorMap['estatus']).includes("Payouts")) {
         if ((getText(SelectorMap['betRed']) + getText(SelectorMap['betBlue'])).includes("$")) {
@@ -64,6 +56,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = getText(SelectorMap['estatus']);
     } else
       presenceData.state = getText(SelectorMap['estatus']);
+    presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/authenticate")) {
     presenceData.details = "Signing in...";
     delete presenceData.startTimestamp;
