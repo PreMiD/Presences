@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "802246778010730548"
-}),
+    clientId: "802246778010730548"
+  }),
   SelectorMap: { [index: string]: string } = {
     Red: 'div#sbettors1 > span.redtext > strong',
     Blue: 'div#sbettors2 > span.bluetext > strong',
@@ -64,7 +64,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = getText(SelectorMap['estatus']);
     } else
       presenceData.state = getText(SelectorMap['estatus']);
-    presence.setActivity(presenceData);
   } else if (document.location.pathname.includes("/authenticate")) {
     presenceData.details = "Signing in...";
     delete presenceData.startTimestamp;
