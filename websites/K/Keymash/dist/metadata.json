@@ -8,13 +8,14 @@
   "description": {
     "en": "Take your typing to the next level! An online multiplayer typing game where you can go head to head versus players around the world."
   },
-  "service": "KEYMA.SH",
-  "version": "0.0.1",
+  "service": "Keymash",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/vDGvohb.png",
   "thumbnail": "https://i.imgur.com/ZHE29sF.png",
   "color": "#FB923C",
   "tags": [
-    "typing"
+    "typing",
+    "game"
   ],
   "category": "games"
 }
