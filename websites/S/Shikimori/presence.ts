@@ -119,7 +119,7 @@ presence.on("UpdateData", async () => {
   } else if (
     document.location.pathname.includes("forum/reviews/")) {
     const title = document.title.split("/")[0],
-    const presenceData: PresenceData = {
+      presenceData: PresenceData = {
       details: "Reads a review:",
       state: title,
       largeImageKey: "logo"
@@ -329,8 +329,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/contests/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing an contest:",
       state: title,
       largeImageKey: "logo"
@@ -338,8 +338,8 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith ("/dialogs/")) {
-    const title = document.title.split("/")[0];
-    const presenceData: PresenceData = {
+    const title = document.title.split("/")[0],
+    presenceData: PresenceData = {
       details: "Viewing with:",
       state: title,
       largeImageKey: "logo"
