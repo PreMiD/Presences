@@ -6,9 +6,9 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    browsingStamp = Math.floor(Date.now() / 1000);
-  const privacy = await presence.getSetting("privacy");
-  const sprivacy = await presence.getSetting("super-privacy");
+    browsingStamp = Math.floor(Date.now() / 1000), 
+    privacy = await presence.getSetting("privacy"), 
+    sprivacy = await presence.getSetting("super-privacy");
   presenceData.startTimestamp = browsingStamp;
   if (sprivacy) {
     presenceData.details = "Browsing";
