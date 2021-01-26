@@ -12,8 +12,9 @@ const presence = new Presence({
     prize: 'span#lastbet.dynamic-view > span.greentext',
     oddsRed: 'span#lastbet.dynamic-view > span.redtext:nth-last-child(2)',
     oddsBlue: 'span#lastbet.dynamic-view > span.bluetext:nth-last-child(1)'
-
   }, browsingStamp = Math.floor(Date.now() / 1000);
+
+let blueCheck = "", redCheck = "";
 
 function getText(selector: string) {
   if (document.querySelector(selector) !== null)
@@ -22,45 +23,60 @@ function getText(selector: string) {
     return null;
 }
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "salty",
-    startTimestamp: browsingStamp
-  },
-    tmode = getText(SelectorMap['tmode']),
-    emode = getText(SelectorMap['emode']);
+    largeImageKey: "salty"
+  };
 
-  if (tmode !== null || emode.includes("bracket!") || emode.includes("FINAL")) {
-    presenceData.smallImageKey = "trofeo";
-    presenceData.smallImageText = "Tournament Mode";
-  } else if (emode.includes("exhibition") || emode.includes("Exhibition")){
-    presenceData.smallImageKey = "saltgirl";
-    presenceData.smallImageText = "Exhibition Mode";
-  } else {
-    presenceData.smallImageKey = "salero";
-    presenceData.smallImageText = "Matchmaking Mode";
-  }
+  if (document.location.pathname == "/" || document.location.pathname == "/index") {
+    if(redCheck == getText(SelectorMap['Red']) || blueCheck == getText(SelectorMap['Blue'])) {
+      blueCheck = getText(SelectorMap['Blue']) + "‎";
+      redCheck = getText(SelectorMap['Red']) + "‎";
+    }
 
-  presenceData.details = getText(SelectorMap['Red']) + " VS " + getText(SelectorMap['Blue']);
+    presenceData.startTimestamp = browsingStamp;
 
-  if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
-    if(!getText(SelectorMap['estatus']).includes("Payouts")) {
-      if ((getText(SelectorMap['betRed']) + getText(SelectorMap['betBlue'])).includes("$")) {
-        if (getText(SelectorMap['betRed']).includes('$'))
-          presenceData.state = getText(SelectorMap['betRed']) + "(Red) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
-        else
-          presenceData.state = getText(SelectorMap['betBlue']) + "(Blue) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
+    const tmode = getText(SelectorMap['tmode']), emode = getText(SelectorMap['emode']);
+
+    if (tmode !== null || emode.includes("bracket!") || emode.includes("FINAL")) {
+      presenceData.smallImageKey = "trofeo";
+      presenceData.smallImageText = "Tournament Mode";
+    } else if (emode.includes("exhibition") || emode.includes("Exhibition")) {
+      presenceData.smallImageKey = "saltgirl";
+      presenceData.smallImageText = "Exhibition Mode";
+    } else {
+      presenceData.smallImageKey = "salero";
+      presenceData.smallImageText = "Matchmaking Mode";
+    }
+
+    presenceData.details = redCheck + " VS " + blueCheck;
+
+    if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
+      if (!getText(SelectorMap['estatus']).includes("Payouts")) {
+        if ((getText(SelectorMap['betRed']) + getText(SelectorMap['betBlue'])).includes("$")) {
+          if (getText(SelectorMap['betRed']).includes('$'))
+            presenceData.state = getText(SelectorMap['betRed']) + "(Red) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
+          else
+            presenceData.state = getText(SelectorMap['betBlue']) + "(Blue) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
+        } else
+          presenceData.state = "Odds: " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
       } else
-        presenceData.state = "Odds: " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
+        presenceData.state = getText(SelectorMap['estatus']);
     } else
       presenceData.state = getText(SelectorMap['estatus']);
-  } else
-    presenceData.state = getText(SelectorMap['estatus']);
-
+    presence.setActivity(presenceData);
+  } else if (document.location.pathname.includes("/authenticate")) {
+    presenceData.details = "Signing in...";
+    delete presenceData.startTimestamp;
+  }
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
+    if (document.location.pathname == "/" || document.location.pathname == "/index") {
+      blueCheck = getText(SelectorMap['Blue']);
+      redCheck = getText(SelectorMap['Red']);
+    }
   }
 });
