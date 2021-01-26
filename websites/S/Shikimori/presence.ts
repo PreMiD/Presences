@@ -169,7 +169,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.startsWith("/achievements/")) {
-    const title = document.title.split("/")[0];;
+    const title = document.title.split("/")[0];
     const presenceData: PresenceData = {
       details: "Views Achievements:",
       state: title,
@@ -219,7 +219,7 @@ presence.on("UpdateData", async () => {
       details: "Viewing a profile:",
       state: name,
       largeImageKey: "logo"
-    }
+    };
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.includes("/achievements")) {
