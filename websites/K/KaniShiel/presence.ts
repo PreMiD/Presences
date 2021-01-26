@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "dashboard";
     if (privacy) {
       presenceData.details = "Editing a server";
-      presenceData.state = 'with the dashboard'
+      presenceData.state = 'with the dashboard';
     } else {
       presenceData.details = "Using the dashboard of :";
       presenceData.state = document.getElementById('563749920683720709').textContent;
