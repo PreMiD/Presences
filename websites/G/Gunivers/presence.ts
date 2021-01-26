@@ -6,10 +6,10 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    browsingStamp = Math.floor(Date.now() / 1000);
+    browsingStamp = Math.floor(Date.now() / 1000),
+    privacy = await presence.getSetting("privacy"); 
 
   presenceData.startTimestamp = browsingStamp;
-  const privacy = await presence.getSetting("privacy");
   if (privacy) {
     presenceData.details = "Browsing";
   } else if (document.location.hostname == "gunivers.net") {
