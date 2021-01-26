@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
         (paused = video.paused);
 
       if (document.location.pathname.includes("/programa/")) {
-        title = document.querySelector(".video-info__data-program").textContent;
+        title = document.querySelector(".video-info__data-program, .playkit-video-info__link-text").textContent;
         presenceData.state = document.querySelector(
           ".video-info__data-title"
         ).textContent;
