@@ -19,6 +19,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Informations";
   } else if (window.location.pathname.endsWith("roles")) {
+    presenceData.smallImageKey = "roles";
     presenceData.details = "Viewing a page:";
     presenceData.state = "Werewolf roles";
   } else if (window.location.pathname.endsWith("credits_kani")) {
@@ -27,10 +28,15 @@ presence.on("UpdateData", async () => {
   } else if (window.location.pathname.endsWith("maintenance")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Maintenance";
+  } else if (window.location.pathname.endsWith("contact_kani")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Contact";
   } else if (window.location.pathname.endsWith("choix_serv")) {
+    presenceData.smallImageKey = "dashboard";
     presenceData.details = "Using the dashboard:";
     presenceData.state = "Choosing a server";
   } else if (window.location.pathname.startsWith("/dashboard")) {
+    presenceData.smallImageKey = "dashboard";
     if (privacy) {
       presenceData.details = "Editing a server";
       presenceData.state = 'with the dashboard'
