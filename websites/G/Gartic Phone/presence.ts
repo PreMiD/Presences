@@ -2,7 +2,7 @@ const presence = new Presence({
     clientId: "803366782722244638"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing the home page";
-      presenceData.endTimestamp; // Reset timestamp if not in game
+      presenceData.endTimestamp;
     }
   }
   if (presenceData.details == null) {
