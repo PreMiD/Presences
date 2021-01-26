@@ -118,7 +118,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   } else if (
     document.location.pathname.includes("forum/reviews/")) {
-    const title = document.title.split("/")[0];
+    const title = document.title.split("/")[0],
     const presenceData: PresenceData = {
       details: "Reads a review:",
       state: title,
