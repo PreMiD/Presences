@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "796446671617130567"
 }),
-timeS = Math.floor(Date.now() / 1000)
+timeS = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -9,23 +9,23 @@ presence.on("UpdateData", async () => {
         smallImageText: "OpenClassrooms"
     },
     webpath = window.location.pathname.toLowerCase();
-  
+
     // Home page
     if(webpath === "/fr/" || webpath === "/en/") {
         presenceData.details = "Home page";
     }
-  
+
     // Dashboard
     else if(webpath.includes("/fr/dashboard") || webpath.includes("/en/dashboard")) {
         // Courses or paths
         if(webpath.includes("/fr/dashboard/courses") || webpath.includes("/en/dashboard/courses")) {
             const smenu = document.getElementsByClassName("Mui-selected"),
-            selected = smenu[0].getElementsByTagName("span")[0].textContent
+            selected = smenu[0].getElementsByTagName("span")[0].textContent;
             presenceData.details = "Dashboard";
             presenceData.state = "Browsing: " + selected;
             presenceData.largeImageKey = "favicon";
         } else if(webpath === "/fr/dashboard/paths" || webpath === "/en/dashboard/paths") {
-            const pathn = document.getElementsByClassName("jss326")[1].textContent
+            const pathn = document.getElementsByClassName("jss326")[1].textContent;
             presenceData.details = "Dashboard";
             presenceData.state = "Browsing: " + pathn;
             presenceData.largeImageKey = "favicon";
@@ -38,18 +38,18 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Looking for a course";
         presenceData.largeImageKey = "favicon";
     } 
-    
+
     // Paths page
     else if(webpath === '/en/paths' || webpath === '/fr/paths') {
         presenceData.details = "Paths main page";
         presenceData.state = "Looking for a path";
         presenceData.largeImageKey = "favicon";
-    
+
     } 
-  
+
     // Main page of a selected path
     else if(webpath.includes('/fr/paths') || webpath.includes('/en/paths')) {
-        const pathName = document.title.replace(" - OpenClassrooms", "")
+        const pathName = document.title.replace(" - OpenClassrooms", "");
         presenceData.details = "Looking for a path";
         presenceData.state = 'Looking at ' + pathName;
         presenceData.largeImageKey = "favicon";
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
             presenceData.largeImageKey = "favicon";
         }
     presenceData.largeImageKey = 'favicon';
-      
+
     } else {
         presenceData.details = "Browsing:";
         presenceData.state = document.title.replace(" - OpenClassrooms", "");
