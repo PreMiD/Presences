@@ -3,11 +3,11 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-  const title, presenter  = `${document.querySelector(".player-artist-text").textContent} - ${document.querySelector(".player-title-text").textContent}`,
-							document.querySelector(".live-time") ? `${document.querySelector(".live-name").textContent} till ${document.querySelector(".live-time").textContent.slice(6)}` : `${document.querySelector(".live-name").textContent}`;;		
-  const presenceData: PresenceData = {
-    largeImageKey: "tfmlogo"
-  };
+  const title, presenter, presenceData: PresenceData  = `${document.querySelector(".player-artist-text").textContent} - ${document.querySelector(".player-title-text").textContent}`,
+							document.querySelector(".live-time") ? `${document.querySelector(".live-name").textContent} till ${document.querySelector(".live-time").textContent.slice(6)}` : `${document.querySelector(".live-name").textContent}`,
+							{
+							    largeImageKey: "tfmlogo"
+						    };
 
   presenceData.details = `${title}`;
   presenceData.state = `${presenter}`;
