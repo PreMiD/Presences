@@ -14,7 +14,7 @@ presence.on("UpdateData", () => {
 
   let stateText = "";
   if (liveTill) { 
-    stateText = `${dj} till ${liveTime}`;
+    stateText = `${dj} till ${liveTill}`;
   } else {
     stateText = `${dj}`;
   }
