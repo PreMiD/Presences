@@ -3,8 +3,8 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", () => {
-  let title = `${document.querySelector(".player-artist-text").textContent} - ${document.querySelector(".player-title-text").textContent}`;
-  let presenter = document.querySelector(".live-time") 
+  const title = `${document.querySelector(".player-artist-text").textContent} - ${document.querySelector(".player-title-text").textContent}`;
+  const presenter = document.querySelector(".live-time") 
 		? `${document.querySelector(".live-name").textContent} till ${document.querySelector(".live-time").textContent.slice(6)}` 
 		: `${document.querySelector(".live-name").textContent}`;
 		
