@@ -24,10 +24,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      search = document.querySelector(
-        "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
-      );
-      presenceData.state  = title.innerText.replace(search.innerText, "").replace("»", "");
+      presenceData.state  = title.innerText;
       presenceData.details = "Forums, viewing thread:";
 
       delete presenceData.smallImageKey;
@@ -46,10 +43,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      search = document.querySelector(
-        "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
-      );
-      presenceData.state  = title.innerText.replace(search.innerText, "").replace("»", "");
+      presenceData.state  = title.innerText;
       presenceData.details = "Forums, viewing category:";
 
       delete presenceData.smallImageKey;
@@ -133,10 +127,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      search = document.querySelector(
-        "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
-      );
-      presenceData.state  = title.innerText.replace(search.innerText, "").replace("»", "");
+      presenceData.state  = title.innerText;
       presenceData.details = "Forums, Reading a DM";
       presenceData.state = title + "...";
       
@@ -145,7 +136,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     } else {
       presenceData.details = "Forums, Browsing";
-      presenceData.state = "through their DMs";
+      presenceData.state = "through DMs";
 
       delete presenceData.smallImageKey;
 
