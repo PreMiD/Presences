@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.pathname.includes("members/")) {
+  } else if (document.location.pathname.includes("/members/")) {
     user = document.querySelector(
       "div.p-body-content > div.block > div.block-container > div.block-body > div.memberHeader > div.memberProfileBanner > div.memberHeader-mainContent > div.memberHeader-content > h1 > span > span > span > span"
     );
