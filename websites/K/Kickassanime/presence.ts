@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = 'Looking at:';
     presenceData.state = 'Watch History';
     presenceData.smallImageKey = "searching";
-  } else if (document.location.pathname.includes("/")) {
+  } else if (document.location.pathname == ("/")) {
     presenceData.details = 'Looking at:';
     presenceData.state = 'Home Page';
     presenceData.smallImageKey = "searching";
