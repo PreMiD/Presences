@@ -30,15 +30,19 @@ presence.on("UpdateData", async () => {
 
   if (host === "www.saltybet.com") {
     if (document.location.pathname == "/" || document.location.pathname ==  "/index") {
-      if (redCheck == getText(SelectorMap['Red']) || blueCheck == getText(SelectorMap['Blue'])) {
-        blueCheck = getText(SelectorMap['Blue']) + "‎";
-        redCheck = getText(SelectorMap['Red']) + "‎";
-      }
-
-      presenceData.startTimestamp = browsingStamp;
 
       const tmode: string = getText(SelectorMap['tmode']),
         emode: string = getText(SelectorMap['emode']);
+      presenceData.startTimestamp = browsingStamp;
+
+      if (redCheck == getText(SelectorMap['Red']) || blueCheck == getText(SelectorMap['Blue'])) {
+        blueCheck = getText(SelectorMap['Blue']) + "‎";
+        redCheck = getText(SelectorMap['Red']) + "‎";
+        presenceData.details = redCheck + " VS " + blueCheck;
+      } else if (getText(SelectorMap['Red']) == null || getText(SelectorMap['Blue']) == null){
+        presenceData.details = "Loading Fighters...";
+      } else
+        presenceData.details = redCheck + " VS " + blueCheck;
 
       if (tmode !== null || emode.includes("bracket!") || emode.includes("FINAL")) {
         presenceData.smallImageKey = "trofeo";
@@ -50,7 +54,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "salero";
         presenceData.smallImageText = "Matchmaking Mode";
       }
-      presenceData.details = redCheck + " VS " + blueCheck;
+
       if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
         if (!getText(SelectorMap['estatus']).includes("Payouts")) {
           if ((getText(SelectorMap['betRed']) + getText(SelectorMap['betBlue'])).includes("$")) {
@@ -65,6 +69,8 @@ presence.on("UpdateData", async () => {
       } else
         presenceData.state = getText(SelectorMap['estatus']);
       presence.setActivity(presenceData);
+      blueCheck = getText(SelectorMap['Blue']);
+      redCheck = getText(SelectorMap['Red']);
     } else if (document.location.pathname == "/authenticate") {
       presenceData.details = "Signing in...";
       delete presenceData.startTimestamp;
@@ -81,9 +87,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
-    if (document.location.pathname == "/" || document.location.pathname == "/index") {
-      blueCheck = getText(SelectorMap['Blue']);
-      redCheck = getText(SelectorMap['Red']);
-    }
   }
 });
