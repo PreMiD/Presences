@@ -1,8 +1,8 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
-    "name": "GURRMAN375D",
-    "id": "446528923535278082"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
   "contributors": [
     {
@@ -12,6 +12,10 @@
     {
       "name": "DooMLorD",
       "id": "465105167751315471"
+    },
+    {
+      "name": "GURRMAN375D",
+      "id": "446528923535278082"
     }
   ],
   "service": "Hulu",
