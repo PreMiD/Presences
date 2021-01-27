@@ -10,6 +10,7 @@
     }
   ],
   "service": "Twitch",
+  "altnames": ["تويتش", "توییچ", "ٹویچ ڈاٹ ٹی وی", "트위치"],
   "description": {
     "en": "Twitch is the world's leading live streaming platform for gamers and the things we love. Watch and chat now with millions of other fans from around the world.",
     "tr": "Twitch, oyuncular ve sevdiğimiz şeyler için dünyanın önde gelen canlı yayın platformudur.",
@@ -33,7 +34,7 @@
     "devstatus.twitch.tv",
     "status.twitch.tv"
   ],
-  "version": "3.0.0",
+  "version": "3.0.1",
   "logo": "https://i.imgur.com/So7h3G0.png",
   "thumbnail": "https://i.imgur.com/OAcBmwW.png",
   "color": "#9146FF",

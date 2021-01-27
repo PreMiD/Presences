@@ -229,7 +229,6 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("special") ||
     document.location.pathname.includes("ona")
   ) {
-
     //Visualizzazione anime
     const type = document.querySelector(
         "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(1)"
@@ -283,39 +282,40 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.pathname.includes("movie")) {
-
     //Visualizzazione film
     const type = document.querySelector(
-      "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(1)"
-    ).textContent,
-    episodes = document.querySelector(
-      "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(2)"
-    ).textContent,
-    releaseDate = document.querySelector(
-      "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
-    ).textContent,
-    vote = document.querySelector("#vote_percent").textContent,
-    timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
-    animepreviewname = document.querySelector(
-      "#animeDetails > div > div > div.dc-info > h1 > a > strong"
-    ).textContent;
+        "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(1)"
+      ).textContent,
+      episodes = document.querySelector(
+        "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(2)"
+      ).textContent,
+      releaseDate = document.querySelector(
+        "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
+      ).textContent,
+      vote = document.querySelector("#vote_percent").textContent,
+      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+      animepreviewname = document.querySelector(
+        "#animeDetails > div > div > div.dc-info > h1 > a > strong"
+      ).textContent;
 
-  presenceData.smallImageKey = "prewatch";
-  presenceData.smallImageText = animepreviewname;
-  presenceData.details = "Sta per guardare:\n" + animepreviewname;
-  presenceData.state =
-    "Per più informazioni 🎦\n" +
-    type +
-    "\n" +
-    episodes +
-    "\n" +
-    releaseDate +
-    "\n" +
-    "Voto: " +
-    vote;
+    presenceData.smallImageKey = "prewatch";
+    presenceData.smallImageText = animepreviewname;
+    presenceData.details = "Sta per guardare:\n" + animepreviewname;
+    presenceData.state =
+      "Per più informazioni 🎦\n" +
+      type +
+      "\n" +
+      episodes +
+      "\n" +
+      releaseDate +
+      "\n" +
+      "Voto: " +
+      vote;
 
     if (iFrameVideo === true && !isNaN(duration)) {
-      const newname = document.querySelector("#main-content > div.goblock.play-anime > div.gobread > ol > li.active > h1 > a").textContent;
+      const newname = document.querySelector(
+        "#main-content > div.goblock.play-anime > div.gobread > ol > li.active > h1 > a"
+      ).textContent;
 
       if (currentTime == duration) {
         presenceData.smallImageKey = "pause";

@@ -1,9 +1,16 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Bas950",
+    "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "SoundCloud",
+  "altnames": ["ساؤنڈ کلاؤڈ", "سائونڊ ڪلائوڊ", "ساوند كلاود", "ساوندکلاود", "সাউন্ডক্লাউড", "ซาวด์คลาวด์", "사운드클라우드"],
   "description": {
     "en": "SoundCloud is a music and podcast streaming platform that lets you listen to millions of songs from around the world, or upload your own.",
     "ro": "SoundCloud este o platformă pentru streaming de muzică și podcast-uri, care te lasă să asculți milioane de melodii din toată lumea, sau încarc-o pe a ta.",
@@ -15,7 +22,7 @@
     "zh_TW": "SoundCloud是一個線上音樂分享平臺，它允許人們合作、交流和分享原創音樂錄音。"
   },
   "url": "soundcloud.com",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/KgOkfIz.png",
   "thumbnail": "https://i.imgur.com/eZyrvbS.jpg",
   "color": "#FF7E30",
