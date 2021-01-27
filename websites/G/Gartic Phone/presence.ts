@@ -5,8 +5,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "glogo"
-  };
-  const privacyDraw = await presence.getSetting("privacyDraw"), privacyAlbum = await presence.getSetting("privacyAlbum");
+  }, privacyDraw = await presence.getSetting("privacyDraw"), privacyAlbum = await presence.getSetting("privacyAlbum");
 
   if (window.location.hostname.includes("garticphone")) {
     if (window.location.pathname.endsWith('lobby')){
