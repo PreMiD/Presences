@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "Kahoot",
   "description": {
     "en": "Kahoot! is a game-based platform that makes learning awesome for millions of people all over the world."
