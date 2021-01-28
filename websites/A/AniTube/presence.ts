@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
       titulo = document.title;
 
   if (titulo.includes("Resultados da pesquisa")) {
-    const = document.querySelector("body > div.pagAniTitulo > div > h1").textContent;
+    const result = document.querySelector("body > div.pagAniTitulo > div > h1").textContent;
     presenceData.details = "Página de Busca";
     presenceData.state = "Pesquisando: " + result.replace("Você pesquisou por:", "");
     presenceData.startTimestamp = tempo;
