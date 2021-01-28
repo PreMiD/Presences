@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      presenceData.state  = title.innerText;
+      presenceData.state = title.innerText;
       presenceData.details = "Forums, viewing thread:";
 
       delete presenceData.smallImageKey;
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      presenceData.state  = title.innerText;
+      presenceData.state = title.innerText;
       presenceData.details = "Forums, viewing category:";
 
       delete presenceData.smallImageKey;
@@ -127,10 +127,10 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      presenceData.state  = title.innerText;
+      presenceData.state = title.innerText;
       presenceData.details = "Forums, Reading a DM";
       presenceData.state = title + "...";
-      
+
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
