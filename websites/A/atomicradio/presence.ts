@@ -34,20 +34,16 @@ function clearPresenceData() {
 }
 
 presence.on('UpdateData', async () => {
-    let playBar, playerButtonState, channelName, channel, playerOpen;
-    playerOpen = false;
-    playBar = document.getElementById("PlayBar");
+    const playBar = document.getElementById("PlayBar"), playerButtonState = document.getElementById("Player_Play_Button_State"), channel = String(document.getElementById("Player_Station_Name").innerText).split(".")[1];
+    let playerOpen = false;
     if(playBar.style.display == "block") {
         playerOpen = true;
-        playerButtonState = document.getElementById("Player_Play_Button_State");
         if(playerButtonState.className.includes('fa-play')) {
             playerOpen = false;
         }
     }
 
     if(playerOpen) {
-        channelName = document.getElementById("Player_Station_Name");
-        channel = String(channelName.innerText).split(".")[1];
         getStationData(channel);
     } else {
         clearPresenceData();
