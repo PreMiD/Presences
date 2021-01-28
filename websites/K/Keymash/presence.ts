@@ -5,7 +5,6 @@ const presence = new Presence({
 presence.on("UpdateData", () => {
   const
     presenceData: PresenceData = {
-      details: "Here",
       largeImageKey: "logo"
     },
     path = document.location.pathname.split('/')[1],
