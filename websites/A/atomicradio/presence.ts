@@ -2,17 +2,17 @@ const presence = new Presence({
     clientId: "777954584013963265"
 });
 
+const browsingTimestamp = Date.now();
 let channelInfo = {name: "", artist: "", title: "", end: 0};
-let browsingTimestamp = Date.now();
-var presenceData: PresenceData = {
+let presenceData: PresenceData = {
     largeImageKey: "atr-logo",
     smallImageKey: "play-button"
 };
 
 async function getStationData(channel: string) {
-    if(channelInfo.name != channel) {
+    if(channelInfo.name != channel || Date.now() >= presenceData.endTimestamp * 1000) {
         channelInfo.name = channel;
-        var data = await window.fetch("https://api.atomicradio.eu/channels/" + channelInfo.name).then((res) => res.json());
+        const data = await window.fetch("https://api.atomicradio.eu/channels/" + channelInfo.name).then((res) => res.json());
         presenceData.state = data.song.artist;
         presenceData.details = data.song.title;
         presenceData.startTimestamp = data.song.start_at;
@@ -21,17 +21,6 @@ async function getStationData(channel: string) {
         presenceData.smallImageKey = "play-button";
         presence.setActivity(presenceData, true);
         return;
-    }
-
-    if (Date.now() >= presenceData.endTimestamp * 1000) {
-        var data = await window.fetch("https://api.atomicradio.eu/channels/" + channelInfo.name).then((res) => res.json());
-        presenceData.state = data.song.artist;
-        presenceData.details = data.song.title;
-        presenceData.startTimestamp = data.song.start_at;
-        presenceData.endTimestamp = data.song.end_at;
-        presenceData.smallImageText = `ATR.${channelInfo.name} • ${data.listeners} listeners`;
-        presenceData.smallImageKey = "play-button";
-        presence.setActivity(presenceData, true);
     }
 }
 
@@ -47,18 +36,18 @@ function clearPresenceData() {
 
 presence.on('UpdateData', async () => {
     let playerOpen = false;
-    let playBar = document.getElementById("PlayBar");
+    const playBar = document.getElementById("PlayBar");
     if(playBar.style.display == "block") {
         playerOpen = true;
-        let playerButtonState = document.getElementById("Player_Play_Button_State");
+        const playerButtonState = document.getElementById("Player_Play_Button_State");
         if(playerButtonState.className.includes('fa-play')) {
             playerOpen = false;
         }
     }
 
     if(playerOpen) {
-        let channelName = document.getElementById("Player_Station_Name");
-        let channel = String(channelName.innerText).split(".")[1];
+        const channelName = document.getElementById("Player_Station_Name");
+        const channel = String(channelName.innerText).split(".")[1];
         getStationData(channel);
     } else {
         clearPresenceData();
