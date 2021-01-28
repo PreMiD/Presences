@@ -4,7 +4,6 @@
         "name": "VocalZero",
         "id": "223891083724193792"
     },
-    "contributors": [],
     "service": "atomicradio",
     "description": {
         "en": "Experience the best of the music world and show your friends what you're listening to!"
@@ -20,6 +19,5 @@
 		"radio",
 		"webradio"
     ],
-    "iframe": false,
     "category": "music"
 }
