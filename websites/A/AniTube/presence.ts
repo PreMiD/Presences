@@ -6,7 +6,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  let tempo = Math.floor(Date.now() / 1000),
+  const tempo = Math.floor(Date.now() / 1000),
       path = document.location.pathname,
       titulo = document.title;
 
@@ -52,32 +52,22 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "pause";
     presenceData.smallImageText = "Pausado";
 
-    let playback =
-    (document.querySelector(".vjs-current-time-display") ||
-      document.querySelector(".jw-text-elapsed")) !== null
-      ? true
-      : false;
-
     const video: HTMLVideoElement = document.querySelector(".jw-video");
 
     if (video !== null && !isNaN(video.duration)) {
-
       const videoTitle = AniN,
             seasonepisode = AniEp.replace("– ", "").replace(" [SEM CENSURA]", ""),
             timestamps = presence.getTimestamps(
               Math.floor(video.currentTime),
               Math.floor(video.duration)
-            );
-            
+            ); 
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? "Pausado"
         : "Assistindo";
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
-
       presence.setTrayTitle(video.paused ? "" : videoTitle);
-
       presenceData.details = videoTitle;
       presenceData.state = seasonepisode;
 
