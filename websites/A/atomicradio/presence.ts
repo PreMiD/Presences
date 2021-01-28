@@ -1,13 +1,12 @@
 const presence = new Presence({
     clientId: "777954584013963265"
-});
-
-const browsingTimestamp = Date.now();
-let channelInfo = {name: "", artist: "", title: "", end: 0};
-let presenceData: PresenceData = {
+}),
+browsingTimestamp = Date.now(),
+presenceData: PresenceData = {
     largeImageKey: "atr-logo",
     smallImageKey: "play-button"
 };
+let channelInfo = {name: "", artist: "", title: "", end: 0};
 
 async function getStationData(channel: string) {
     if(channelInfo.name != channel || Date.now() >= presenceData.endTimestamp * 1000) {
@@ -35,19 +34,20 @@ function clearPresenceData() {
 }
 
 presence.on('UpdateData', async () => {
-    let playerOpen = false;
-    const playBar = document.getElementById("PlayBar");
+    let playBar, playerButtonState, channelName, channel, playerOpen;
+    playerOpen = false;
+    playBar = document.getElementById("PlayBar");
     if(playBar.style.display == "block") {
         playerOpen = true;
-        const playerButtonState = document.getElementById("Player_Play_Button_State");
+        playerButtonState = document.getElementById("Player_Play_Button_State");
         if(playerButtonState.className.includes('fa-play')) {
             playerOpen = false;
         }
     }
 
     if(playerOpen) {
-        const channelName = document.getElementById("Player_Station_Name");
-        const channel = String(channelName.innerText).split(".")[1];
+        channelName = document.getElementById("Player_Station_Name");
+        channel = String(channelName.innerText).split(".")[1];
         getStationData(channel);
     } else {
         clearPresenceData();
