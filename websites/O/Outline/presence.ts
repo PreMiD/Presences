@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 let currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/");
+  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
 const browsingStamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
@@ -11,8 +11,8 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as Function,
-  get function(): Function {
+  _function: null as () => void,
+  get function(): () => void {
     return this._function;
   },
   set function(parameter) {
@@ -21,19 +21,21 @@ const updateCallback = {
   get present(): boolean {
     return this._function !== null;
   }
-};
+},
 
 /**
  * Initialize/reset presenceData.
  */
-const resetData = (): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.slice(1).split("/");
-  presenceData = {
+ resetData = (
+  defaultData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
     startTimestamp: browsingStamp
-  };
+  }
+): void => {
+  currentURL = new URL(document.location.href);
+  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+  presenceData = { ...defaultData };
 };
 
 ((): void => {
@@ -48,12 +50,12 @@ const resetData = (): void => {
   } else if (currentPath[0] === "report.html") {
     presenceData.details = "Reporting an article";
   } else {
-    let loadedPath: Array<string> = [],
+    let loadedPath: string,
       forceUpdate = false,
       presenceDataPlaced: PresenceData = {};
     updateCallback.function = (): void => {
-      if (loadedPath !== currentPath || forceUpdate) {
-        loadedPath = currentPath;
+      if (loadedPath !== currentURL.pathname || forceUpdate) {
+        loadedPath = currentURL.pathname;
         try {
           if (document.querySelector("outline-not-found")) {
             presenceData.details = "On a non-existent page";
@@ -81,8 +83,9 @@ const resetData = (): void => {
 })();
 
 if (updateCallback.present) {
+  const defaultData = { ...presenceData };
   presence.on("UpdateData", async () => {
-    resetData();
+    resetData(defaultData);
     updateCallback.function();
     presence.setActivity(presenceData);
   });
