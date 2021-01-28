@@ -23,12 +23,6 @@ const presence = new Presence({
     currentAnimeTitle: string,
     currentAnimeEpisode: string,
     isMovie: boolean = null;
-  
-  /**
-   * Get Timestamps
-   * @param {Number} videoTime Current video time seconds
-   * @param {Number} videoDuration Video duration seconds
-   */
 
   function checkIfMovie() {
     nextEpisodeElement == null && previousEpisodeElement == null 
