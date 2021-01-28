@@ -4,11 +4,9 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
-
-  const tempo = Math.floor(Date.now() / 1000),
-      path = document.location.pathname,
-      titulo = document.title;
+  }, tempo = Math.floor(Date.now() / 1000),
+     path = document.location.pathname,
+     titulo = document.title;
 
   if (titulo.includes("Resultados da pesquisa")) {
     const result = document.querySelector("body > div.pagAniTitulo > div > h1").textContent;
