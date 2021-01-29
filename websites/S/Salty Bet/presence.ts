@@ -2,7 +2,7 @@ const presence = new Presence({ clientId: "802246778010730548" }),
   SelectorMap: { [index: string]: string } = {
     Red: 'div#sbettors1 > span.redtext > strong',
     Blue: 'div#sbettors2 > span.bluetext > strong',
-    estatus: '#betstatus',
+    estatus: 'div#status > span#betstatus',
     tmode: 'span#tournament-note',
     emode: 'div#footer-alert',
     betRed: 'span#lastbet.dynamic-view > span.redtext',
@@ -13,12 +13,10 @@ const presence = new Presence({ clientId: "802246778010730548" }),
     betsView: 'span#lastbet.dynamic-view'
   };
 
-let browsingStamp = Math.floor(Date.now() / 1000),
-  blueCheck: string,
-  redCheck: string;
+let browsingStamp = Math.floor(Date.now() / 1000);
 
 function getText(selector: string) {
-  if (document.querySelector(selector) !== null)
+  if (document.querySelector(selector) !== null && document.querySelector(selector) !== undefined)
     return document.querySelector(selector).textContent;
   else
     return null;
@@ -31,23 +29,17 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "www.saltybet.com") {
     if (document.location.pathname == "/" || document.location.pathname ==  "/index") {
+      document.querySelector(`div#status > span#betstatus`).innerHTML += `‎`;
 
-      const tmode: string = getText(SelectorMap['tmode']),
-        emode: string = getText(SelectorMap['emode']);
+      if(getText(SelectorMap['Red']) !== null && getText(SelectorMap['Blue']) !== null)
+        presenceData.details = getText(SelectorMap['Red']) + " VS " + getText(SelectorMap['Blue']);
+      else
+        presenceData.details = "Loading...";
 
-      if (getText(SelectorMap['Red']) == null || getText(SelectorMap['Blue']) == null) {
-        presenceData.details = "Loading Fighters...";
-      } else if (redCheck == getText(SelectorMap['Red']) || blueCheck == getText(SelectorMap['Blue']) ){
-        blueCheck = getText(SelectorMap['Blue']) + "‎";
-        redCheck = getText(SelectorMap['Red']) + "‎";
-        presenceData.details = redCheck + " VS " + blueCheck;
-      } else
-        presenceData.details = redCheck + " VS " + blueCheck;
-
-      if (tmode !== null || emode.includes("bracket!") || emode.includes("FINAL")) {
+      if (getText(SelectorMap['tmode']) !== null || getText(SelectorMap['emode']).includes("bracket!") || getText(SelectorMap['emode']).includes("FINAL")) {
         presenceData.smallImageKey = "trofeo";
         presenceData.smallImageText = "Tournament Mode";
-      } else if (emode.includes("exhibition") || emode.includes("Exhibition")) {
+      } else if (getText(SelectorMap['emode']).includes("exhibition") || getText(SelectorMap['emode']).includes("Exhibition")) {
         presenceData.smallImageKey = "saltgirl";
         presenceData.smallImageText = "Exhibition Mode";
       } else {
@@ -66,19 +58,16 @@ presence.on("UpdateData", async () => {
               presenceData.state = getText(SelectorMap['betBlue']) + "(Blue) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
           } else {
             presenceData.startTimestamp = browsingStamp;
-            if(getText(SelectorMap['oddsRed']) !== null)
+            if(getText(SelectorMap['oddsRed']) !== null && getText(SelectorMap['oddsBlue']) !== null)
               presenceData.state = "Odds: " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
-            else {
+            else
               presenceData.state = "Loading...";
-            }
           }
         } else
           presenceData.state = getText(SelectorMap['estatus']);
       } else
         presenceData.state = getText(SelectorMap['estatus']);
-      presence.setActivity(presenceData);
-      blueCheck = getText(SelectorMap['Blue']);
-      redCheck = getText(SelectorMap['Red']);
+      document.querySelector(`div#status > span#betstatus`).innerHTML = document.querySelector(`div#status > span#betstatus`).textContent.replace(`‎`,``);
     } else if (document.location.pathname == "/authenticate") {
       presenceData.details = "Signing in...";
       delete presenceData.startTimestamp;
