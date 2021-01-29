@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
       if(getText(SelectorMap['Red']) !== null && getText(SelectorMap['Blue']) !== null)
         presenceData.details = getText(SelectorMap['Red']) + " VS " + getText(SelectorMap['Blue']);
       else
-        presenceData.details = "Loading...";
+        presenceData.details = "Loading Fighters...";
 
       if (getText(SelectorMap['tmode']) !== null || getText(SelectorMap['emode']).includes("bracket!") || getText(SelectorMap['emode']).includes("FINAL")) {
         presenceData.smallImageKey = "trofeo";
