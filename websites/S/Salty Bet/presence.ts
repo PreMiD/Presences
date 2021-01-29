@@ -27,56 +27,51 @@ presence.on("UpdateData", async () => {
     largeImageKey: "salty"
   };
 
-  if (document.location.hostname === "www.saltybet.com") {
-    if (document.location.pathname == "/" || document.location.pathname ==  "/index") {
-      document.querySelector(`div#status > span#betstatus`).innerHTML += `‎`;
+  if (document.location.pathname == "/" || document.location.pathname ==  "/index") {
+    if (getText(SelectorMap['tmode']) !== null || getText(SelectorMap['emode']).includes("bracket!") || getText(SelectorMap['emode']).includes("FINAL")) {
+      presenceData.smallImageKey = "trofeo";
+      presenceData.smallImageText = "Tournament Mode";
+    } else if (getText(SelectorMap['emode']).includes("exhibition") || getText(SelectorMap['emode']).includes("Exhibition")) {
+      presenceData.smallImageKey = "saltgirl";
+      presenceData.smallImageText = "Exhibition Mode";
+    } else {
+      presenceData.smallImageKey = "salero";
+      presenceData.smallImageText = "Matchmaking Mode";
+    }
 
-      if(getText(SelectorMap['Red']) !== null && getText(SelectorMap['Blue']) !== null)
-        presenceData.details = getText(SelectorMap['Red']) + " VS " + getText(SelectorMap['Blue']);
-      else
-        presenceData.details = "Loading Fighters...";
+    if(getText(SelectorMap['Red']) !== null && getText(SelectorMap['Blue']) !== null)
+      presenceData.details = getText(SelectorMap['Red']) + " VS " + getText(SelectorMap['Blue']);
+    else
+      presenceData.details = "Loading Fighters...";
 
-      if (getText(SelectorMap['tmode']) !== null || getText(SelectorMap['emode']).includes("bracket!") || getText(SelectorMap['emode']).includes("FINAL")) {
-        presenceData.smallImageKey = "trofeo";
-        presenceData.smallImageText = "Tournament Mode";
-      } else if (getText(SelectorMap['emode']).includes("exhibition") || getText(SelectorMap['emode']).includes("Exhibition")) {
-        presenceData.smallImageKey = "saltgirl";
-        presenceData.smallImageText = "Exhibition Mode";
-      } else {
-        presenceData.smallImageKey = "salero";
-        presenceData.smallImageText = "Matchmaking Mode";
-      }
-
-      if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
-        browsingStamp = Math.floor(Date.now() / 1000);
-        if (!getText(SelectorMap['estatus']).includes("Payouts")) {
-          if ((getText(SelectorMap['betsView'])).includes("|")) {
-            presenceData.startTimestamp = browsingStamp;
-            if (getText(SelectorMap['betRed']).includes('$'))
-              presenceData.state = getText(SelectorMap['betRed']) + "(Red) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
-            else
-              presenceData.state = getText(SelectorMap['betBlue']) + "(Blue) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
-          } else {
-            presenceData.startTimestamp = browsingStamp;
-            if(getText(SelectorMap['oddsRed']) !== null && getText(SelectorMap['oddsBlue']) !== null)
-              presenceData.state = "Odds: " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
-            else
-              presenceData.state = "Loading...";
-          }
-        } else
-          presenceData.state = getText(SelectorMap['estatus']);
+    if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
+      browsingStamp = Math.floor(Date.now() / 1000);
+      if (!getText(SelectorMap['estatus']).includes("Payouts")) {
+        if ((getText(SelectorMap['betsView'])).includes("|")) {
+          presenceData.startTimestamp = browsingStamp;
+          if (getText(SelectorMap['betRed']).includes('$'))
+            presenceData.state = getText(SelectorMap['betRed']) + "(Red) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
+          else
+            presenceData.state = getText(SelectorMap['betBlue']) + "(Blue) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
+        } else {
+          presenceData.startTimestamp = browsingStamp;
+          if(getText(SelectorMap['oddsRed']) !== null && getText(SelectorMap['oddsBlue']) !== null)
+            presenceData.state = "Odds: " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
+          else
+            presenceData.state = "Loading...";
+        }
       } else
         presenceData.state = getText(SelectorMap['estatus']);
-      document.querySelector(`div#status > span#betstatus`).innerHTML = document.querySelector(`div#status > span#betstatus`).textContent.replace(`‎`,``);
-    } else if (document.location.pathname == "/authenticate") {
-      presenceData.details = "Signing in...";
-      delete presenceData.startTimestamp;
-    } else if (document.location.pathname == "/bank") {
-      presenceData.details = "Checking Bank";
-      delete presenceData.startTimestamp;
-    } else {
-      presenceData.details = null;
-    }
+    } else
+      presenceData.state = getText(SelectorMap['estatus']);
+  } else if (document.location.pathname == "/authenticate") {
+    presenceData.details = "Signing in...";
+    delete presenceData.startTimestamp;
+  } else if (document.location.pathname == "/bank") {
+    presenceData.details = "Checking Bank";
+    delete presenceData.startTimestamp;
+  } else {
+    presenceData.details = null;
   }
 
   if (presenceData.details == null) {
