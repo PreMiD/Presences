@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
       const tmode: string = getText(SelectorMap['tmode']),
         emode: string = getText(SelectorMap['emode']);
 
-      if (getText(SelectorMap['Red']) == null || getText(SelectorMap['Blue']) == null || redCheck == null || blueCheck == null ) {
+      if (getText(SelectorMap['Red']) == null || getText(SelectorMap['Blue']) == null) {
         presenceData.details = "Loading Fighters...";
       } else if (redCheck == getText(SelectorMap['Red']) || blueCheck == getText(SelectorMap['Blue']) ){
         blueCheck = getText(SelectorMap['Blue']) + "‎";
@@ -65,10 +65,12 @@ presence.on("UpdateData", async () => {
             else
               presenceData.state = getText(SelectorMap['betBlue']) + "(Blue) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
           } else {
+            presenceData.startTimestamp = browsingStamp;
             if(getText(SelectorMap['oddsRed']) !== null)
               presenceData.state = "Odds: " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
-            else
+            else {
               presenceData.state = "Loading...";
+            }
           }
         } else
           presenceData.state = getText(SelectorMap['estatus']);
