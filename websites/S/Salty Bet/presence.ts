@@ -13,7 +13,8 @@ const presence = new Presence({ clientId: "802246778010730548" }),
     betsView: 'span#lastbet.dynamic-view'
   };
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
+    fightersCheck: string;
 
 function getText(selector: string) {
   if (document.querySelector(selector) !== null && document.querySelector(selector) !== undefined)
@@ -22,27 +23,41 @@ function getText(selector: string) {
     return null;
 }
 
+function getModeImageKey():string[] {
+  if (getText(SelectorMap['tmode']) !== null || getText(SelectorMap['emode']).includes("bracket!") || getText(SelectorMap['emode']).includes("FINAL")) {
+    return ["trofeo","Tournament Mode"];
+  } else if (getText(SelectorMap['emode']).includes("exhibition") || getText(SelectorMap['emode']).includes("Exhibition")) {
+    return ["saltgirl","Exhibition Mode"];
+  } else {
+    return ["salero","Matchmaking Mode"];
+  }
+}
+
+function getFighters():string {
+  if(getText(SelectorMap['Red']) !== null && getText(SelectorMap['Blue']) !== null)
+    return getText(SelectorMap['Red']) + " VS " + getText(SelectorMap['Blue']);
+  else
+    return "Loading Fighters...";
+}
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "salty"
   };
-
   if (document.location.pathname == "/" || document.location.pathname ==  "/index") {
-    if (getText(SelectorMap['tmode']) !== null || getText(SelectorMap['emode']).includes("bracket!") || getText(SelectorMap['emode']).includes("FINAL")) {
-      presenceData.smallImageKey = "trofeo";
-      presenceData.smallImageText = "Tournament Mode";
-    } else if (getText(SelectorMap['emode']).includes("exhibition") || getText(SelectorMap['emode']).includes("Exhibition")) {
-      presenceData.smallImageKey = "saltgirl";
-      presenceData.smallImageText = "Exhibition Mode";
-    } else {
-      presenceData.smallImageKey = "salero";
-      presenceData.smallImageText = "Matchmaking Mode";
-    }
 
-    if(getText(SelectorMap['Red']) !== null && getText(SelectorMap['Blue']) !== null)
-      presenceData.details = getText(SelectorMap['Red']) + " VS " + getText(SelectorMap['Blue']);
-    else
-      presenceData.details = "Loading Fighters...";
+    const mode = getModeImageKey();
+    presenceData.smallImageKey = mode[0];
+    presenceData.smallImageText = mode[1];
+
+    if(fightersCheck !== getFighters()) {
+      presenceData.details = getFighters();
+      fightersCheck = getFighters();
+    }
+    else {
+      presenceData.details = getFighters() + "‎";
+      fightersCheck = getFighters() + "‎";
+    }
 
     if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
       browsingStamp = Math.floor(Date.now() / 1000);
