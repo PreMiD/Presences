@@ -13,8 +13,8 @@ const presence = new Presence({ clientId: "802246778010730548" }),
     betsView: 'span#lastbet.dynamic-view'
   };
 
-let browsingStamp = Math.floor(Date.now() / 1000),
-    fightersCheck: string;
+let fightersCheck: string,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 function getText(selector: string) {
   if (document.querySelector(selector) !== null && document.querySelector(selector) !== undefined)
@@ -60,7 +60,6 @@ presence.on("UpdateData", async () => {
     }
 
     if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
-      browsingStamp = Math.floor(Date.now() / 1000);
       if (!getText(SelectorMap['estatus']).includes("Payouts")) {
         if ((getText(SelectorMap['betsView'])).includes("|")) {
           presenceData.startTimestamp = browsingStamp;
@@ -77,8 +76,10 @@ presence.on("UpdateData", async () => {
         }
       } else
         presenceData.state = getText(SelectorMap['estatus']);
-    } else
+    } else {
       presenceData.state = getText(SelectorMap['estatus']);
+      browsingStamp = Math.floor(Date.now() / 1000);
+    }
   } else if (document.location.pathname == "/authenticate") {
     presenceData.details = "Signing in...";
     delete presenceData.startTimestamp;
