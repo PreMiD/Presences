@@ -23,7 +23,7 @@ presence.on("UpdateData", () => {
     const artist = document.querySelector("#site h2 > span > a").textContent;
     presenceData.details = name
     presenceData.state = artist;
-    presenceData.smallImageKey = "reading"
+    presenceData.smallImageKey = "reading";
   } else if (path("/community")) {
     presenceData.details = "Viewing community";
   } else if (path("/profile/")) {
