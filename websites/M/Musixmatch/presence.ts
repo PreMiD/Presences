@@ -12,12 +12,18 @@ presence.on("UpdateData", () => {
       return document.location.pathname.includes(text);
     };
 
-  if (path("/explore")) {
+  if (path("/explore/genre/")) {
+    const genre = document.querySelector("#content > div > div.explore-panel > h1 > div").textContent.replace("lyrics", "").trim();
+    presenceData.details = "Viewing a genre";
+    presenceData.state = genre;
+  } else if (path("/explore")) {
     presenceData.details = "Exploring lyrics";
   } else if (path("/lyrics/")) {
     const name = document.querySelector("#site h1").textContent.replace("Lyrics", "");
-    presenceData.details = "Viewing lyrics:";
-    presenceData.state = name;
+    const artist = document.querySelector("#site h2 > span > a").textContent;
+    presenceData.details = name
+    presenceData.state = artist;
+    presenceData.smallImageKey = "reading"
   } else if (path("/community")) {
     presenceData.details = "Viewing community";
   } else if (path("/profile/")) {
