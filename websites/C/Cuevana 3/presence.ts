@@ -13,15 +13,6 @@ let video = {
   paused: true
 };
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on(
   "iFrameData",
   (data: { duration: number; currentTime: number; paused: boolean }) => {
@@ -38,7 +29,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.match("^/[0-9]") ||
       document.location.pathname.includes("/episodio")) {
 
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ), titulo = document.querySelector(`h1.Title`).textContent,
