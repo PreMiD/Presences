@@ -143,8 +143,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "The Rules";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/Main_Page")) {
-      presenceData.details = "Reading...";
-      presenceData.state = "The Wiki";
+      presenceData.details = "Browsing...";
+      presenceData.state = "The Wiki (Main Page)";
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/Help_Centre")) {
       presenceData.details = "Looking at...";
@@ -153,6 +153,10 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/People")) {
       presenceData.details = "Looking at...";
       presenceData.state = "The osu! team";
+    } else {
+      presenceData.details = "Reading...";
+      presenceData.state = "Somewhere in The Wiki";
+      presenceData.smallImageKey = "reading";
     }
   } else if (document.location.pathname.startsWith("/home/changelog")) {
     presenceData.details = "Looking at...";
