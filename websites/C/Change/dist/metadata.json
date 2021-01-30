@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "TheSlowly",
-    "id": "505071508851523599"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "TheSlowly",
+      "id": "505071508851523599"
+    }
+  ],
   "service": "Change",
   "description": {
     "en": "Change the world",
