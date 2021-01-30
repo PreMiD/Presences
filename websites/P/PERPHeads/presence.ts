@@ -24,10 +24,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      search = document.querySelector(
-        "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
-      );
-      presenceData.state  = title.innerText.replace(search.innerText, "").replace("»", "");
+      presenceData.state = title.innerText;
       presenceData.details = "Forums, viewing thread:";
 
       delete presenceData.smallImageKey;
@@ -46,10 +43,7 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      search = document.querySelector(
-        "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
-      );
-      presenceData.state  = title.innerText.replace(search.innerText, "").replace("»", "");
+      presenceData.state = title.innerText;
       presenceData.details = "Forums, viewing category:";
 
       delete presenceData.smallImageKey;
@@ -91,7 +85,7 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     }
-  } else if (document.location.pathname.includes("members/")) {
+  } else if (document.location.pathname.includes("/members/")) {
     user = document.querySelector(
       "div.p-body-content > div.block > div.block-container > div.block-body > div.memberHeader > div.memberProfileBanner > div.memberHeader-mainContent > div.memberHeader-content > h1 > span > span > span > span"
     );
@@ -133,19 +127,16 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
       );
-      search = document.querySelector(
-        "div.p-body > div.p-body-inner > div.p-body-header > div.p-title > h1"
-      );
-      presenceData.state  = title.innerText.replace(search.innerText, "").replace("»", "");
+      presenceData.state = title.innerText;
       presenceData.details = "Forums, Reading a DM";
       presenceData.state = title + "...";
-      
+
       delete presenceData.smallImageKey;
 
       presence.setActivity(presenceData);
     } else {
       presenceData.details = "Forums, Browsing";
-      presenceData.state = "through their DMs";
+      presenceData.state = "through DMs";
 
       delete presenceData.smallImageKey;
 
