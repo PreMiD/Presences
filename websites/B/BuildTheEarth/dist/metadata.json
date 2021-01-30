@@ -10,14 +10,14 @@
     },
     "service": "BuildTheEarth",
     "version": "1.0.0",
-    "logo": "https://i.imgur.com/Xf1xXxd.gif",
+    "logo": "https://i.imgur.com/XvapvDX.png",
     "thumbnail": "https://i.imgur.com/YzqC7ju.png",
     "color": "#104D92",
     "tags": [
       "minecraft",
       "buildtheearth"
     ],
-    "category": "other",
+    "category": "games",
     "settings": [
       {
         "id": "privacy",
