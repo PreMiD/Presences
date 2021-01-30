@@ -4,9 +4,11 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  }, tempo = Math.floor(Date.now() / 1000),
-     path = document.location.pathname,
-     titulo = document.title;
+  };
+
+  const tempo = Math.floor(Date.now() / 1000),
+      path = document.location.pathname,
+      titulo = document.title;
 
   if (titulo.includes("Resultados da pesquisa")) {
     const result = document.querySelector("body > div.pagAniTitulo > div > h1").textContent;
@@ -14,7 +16,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Pesquisando: " + result.replace("Você pesquisou por:", "");
     presenceData.startTimestamp = tempo;
   }
-  else if (path == "/lista-de-animes-online/"){
+  else if (path == "/lista-de-animes-legendados-online/"){
     presenceData.details = "Animes Legendados";
     presenceData.startTimestamp = tempo;
   }
@@ -38,36 +40,41 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = tempo;
   }
   else if(titulo.includes(" – Episód")){
-    const AniN = document.querySelector("body > div.pagEpiTitulo > div > h1").textContent.split(" ")
+    const AniN = document.querySelector("body > div.pagEpiTitulo > div > h1").textContent
+                .split(" ")
                 .join(" ")
                 .replace(" HD", "")
                 .replace(" [SEM CENSURA]", "")
                 .slice(0, -2)
                 .replace(" – Episódio", ""),
-          AniEp = document.querySelector("body > div.pagEpiTitulo > div > h1").textContent.replace(AniN, "");
-    presenceData.details = AniN;
-    presenceData.state = AniEp.replace(" – Episódio", "Episódio: ");
+          AniEp = document.querySelector("body > div.pagEpiTitulo > div > h1").textContent;
+
+    presenceData.details = AniN.split(/\d+/, 1);
+    presenceData.state = "Episódio: " + AniEp.match(/(\d+)/)[0];
     presenceData.smallImageKey = "pause";
     presenceData.smallImageText = "Pausado";
 
-    const video: HTMLVideoElement = document.querySelector(".jw-video");
+    let playback =
+    (document.querySelector(".vjs-current-time-display") ||
+      document.querySelector(".jw-text-elapsed")) !== null
+      ? true
+      : false;
 
+    const video: HTMLVideoElement = document.querySelector(".jw-video")
     if (video !== null && !isNaN(video.duration)) {
-      const videoTitle = AniN,
-            seasonepisode = AniEp.replace("– ", "").replace(" [SEM CENSURA]", ""),
-            timestamps = presence.getTimestamps(
+
+      const timestamps = presence.getTimestamps(
               Math.floor(video.currentTime),
               Math.floor(video.duration)
-            ); 
+            );
+            
       presenceData.smallImageKey = video.paused ? "pause" : "play";
       presenceData.smallImageText = video.paused
         ? "Pausado"
         : "Assistindo";
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
-      presence.setTrayTitle(video.paused ? "" : videoTitle);
-      presenceData.details = videoTitle;
-      presenceData.state = seasonepisode;
+
 
       if (video.paused) {
         delete presenceData.startTimestamp;
