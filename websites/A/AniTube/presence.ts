@@ -4,11 +4,10 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
-
-  const tempo = Math.floor(Date.now() / 1000),
-      path = document.location.pathname,
-      titulo = document.title;
+  },
+  tempo = Math.floor(Date.now() / 1000),
+  path = document.location.pathname,
+  titulo = document.title;
 
   if (titulo.includes("Resultados da pesquisa")) {
     const result = document.querySelector("body > div.pagAniTitulo > div > h1").textContent;
@@ -54,13 +53,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "pause";
     presenceData.smallImageText = "Pausado";
 
-    let playback =
-    (document.querySelector(".vjs-current-time-display") ||
-      document.querySelector(".jw-text-elapsed")) !== null
-      ? true
-      : false;
-
-    const video: HTMLVideoElement = document.querySelector(".jw-video")
+    const video: HTMLVideoElement = document.querySelector(".jw-video");
     if (video !== null && !isNaN(video.duration)) {
 
       const timestamps = presence.getTimestamps(
