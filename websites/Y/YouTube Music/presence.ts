@@ -18,8 +18,9 @@ function getAuthorString(): string {
     //* Convert to js array for .map function
     authorsArray = Array.from(authors);
 
-    //* If song is from a channel
-    if (document.querySelector('span yt-formatted-string.ytmusic-player-bar a[href*="channel/"]')) {
+    //* If song is from a channel and not a video
+    if (document.querySelector('span yt-formatted-string.ytmusic-player-bar a[href*="channel/"]') &&
+        !document.querySelector("ytmusic-player-page[video-mode_]")) {
       //* Get release year of song
       let year = document.querySelector(
         "span yt-formatted-string.ytmusic-player-bar"
