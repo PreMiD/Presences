@@ -39,6 +39,7 @@ presenceApp.on("UpdateData", () => {
     presenceApp.setActivity();
   } else {
     presenceApp.setActivity(presenceData);
-  };
+  }
+  
 });
 
