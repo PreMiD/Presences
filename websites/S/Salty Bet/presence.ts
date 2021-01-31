@@ -2,84 +2,92 @@ const presence = new Presence({ clientId: "802246778010730548" }),
   SelectorMap: { [index: string]: string } = {
     Red: 'div#sbettors1 > span.redtext > strong',
     Blue: 'div#sbettors2 > span.bluetext > strong',
-    estatus: '#betstatus',
+    estatus: 'div#status > span#betstatus',
     tmode: 'span#tournament-note',
     emode: 'div#footer-alert',
     betRed: 'span#lastbet.dynamic-view > span.redtext',
     betBlue: 'span#lastbet.dynamic-view > span.bluetext',
     prize: 'span#lastbet.dynamic-view > span.greentext',
     oddsRed: 'span#lastbet.dynamic-view > span.redtext:nth-last-child(2)',
-    oddsBlue: 'span#lastbet.dynamic-view > span.bluetext:nth-last-child(1)'
-  }, browsingStamp = Math.floor(Date.now() / 1000);
+    oddsBlue: 'span#lastbet.dynamic-view > span.bluetext:nth-last-child(1)',
+    betsView: 'span#lastbet.dynamic-view'
+  };
 
-let blueCheck: string, redCheck: string, host: string;
+let fightersCheck: string,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 function getText(selector: string) {
-  if (document.querySelector(selector) !== null)
+  if (document.querySelector(selector) !== null && document.querySelector(selector) !== undefined)
     return document.querySelector(selector).textContent;
   else
     return null;
+}
+
+function getModeImageKey():string[] {
+  if (getText(SelectorMap['tmode']) !== null || getText(SelectorMap['emode']).includes("bracket!") || getText(SelectorMap['emode']).includes("FINAL")) {
+    return ["trofeo","Tournament Mode"];
+  } else if (getText(SelectorMap['emode']).includes("exhibition") || getText(SelectorMap['emode']).includes("Exhibition")) {
+    return ["saltgirl","Exhibition Mode"];
+  } else {
+    return ["salero","Matchmaking Mode"];
+  }
+}
+
+function getFighters():string {
+  if(getText(SelectorMap['Red']) !== null && getText(SelectorMap['Blue']) !== null)
+    return getText(SelectorMap['Red']) + " VS " + getText(SelectorMap['Blue']);
+  else
+    return "Loading Fighters...";
 }
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "salty"
   };
+  if (document.location.pathname == "/" || document.location.pathname ==  "/index") {
 
-  host = document.location.hostname;
+    const mode = getModeImageKey();
+    presenceData.smallImageKey = mode[0];
+    presenceData.smallImageText = mode[1];
 
-  if (host === "www.saltybet.com") {
-    if (document.location.pathname == "/" || document.location.pathname ==  "/index") {
+    if(fightersCheck !== getFighters()) {
+      presenceData.details = getFighters();
+      fightersCheck = getFighters();
+    }
+    else {
+      presenceData.details = getFighters() + "‎";
+      fightersCheck = getFighters() + "‎";
+    }
 
-      const tmode: string = getText(SelectorMap['tmode']),
-        emode: string = getText(SelectorMap['emode']);
-      presenceData.startTimestamp = browsingStamp;
-
-      if (redCheck == getText(SelectorMap['Red']) || blueCheck == getText(SelectorMap['Blue'])) {
-        blueCheck = getText(SelectorMap['Blue']) + "‎";
-        redCheck = getText(SelectorMap['Red']) + "‎";
-        presenceData.details = redCheck + " VS " + blueCheck;
-      } else if (getText(SelectorMap['Red']) == null || getText(SelectorMap['Blue']) == null){
-        presenceData.details = "Loading Fighters...";
-      } else
-        presenceData.details = redCheck + " VS " + blueCheck;
-
-      if (tmode !== null || emode.includes("bracket!") || emode.includes("FINAL")) {
-        presenceData.smallImageKey = "trofeo";
-        presenceData.smallImageText = "Tournament Mode";
-      } else if (emode.includes("exhibition") || emode.includes("Exhibition")) {
-        presenceData.smallImageKey = "saltgirl";
-        presenceData.smallImageText = "Exhibition Mode";
-      } else {
-        presenceData.smallImageKey = "salero";
-        presenceData.smallImageText = "Matchmaking Mode";
-      }
-
-      if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
-        if (!getText(SelectorMap['estatus']).includes("Payouts")) {
-          if ((getText(SelectorMap['betRed']) + getText(SelectorMap['betBlue'])).includes("$")) {
-            if (getText(SelectorMap['betRed']).includes('$'))
-              presenceData.state = getText(SelectorMap['betRed']) + "(Red) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
-            else
-              presenceData.state = getText(SelectorMap['betBlue']) + "(Blue) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
-          } else
+    if (!getText(SelectorMap['estatus']).includes("OPEN!")) {
+      if (!getText(SelectorMap['estatus']).includes("Payouts")) {
+        if ((getText(SelectorMap['betsView'])).includes("|")) {
+          presenceData.startTimestamp = browsingStamp;
+          if (getText(SelectorMap['betRed']).includes('$'))
+            presenceData.state = getText(SelectorMap['betRed']) + "(Red) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
+          else
+            presenceData.state = getText(SelectorMap['betBlue']) + "(Blue) → " + getText(SelectorMap['prize']) + " | " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
+        } else {
+          presenceData.startTimestamp = browsingStamp;
+          if(getText(SelectorMap['oddsRed']) !== null && getText(SelectorMap['oddsBlue']) !== null)
             presenceData.state = "Odds: " + getText(SelectorMap['oddsRed']) + ":" + getText(SelectorMap['oddsBlue']);
-        } else
-          presenceData.state = getText(SelectorMap['estatus']);
+          else
+            presenceData.state = "Loading...";
+        }
       } else
         presenceData.state = getText(SelectorMap['estatus']);
-      presence.setActivity(presenceData);
-      blueCheck = getText(SelectorMap['Blue']);
-      redCheck = getText(SelectorMap['Red']);
-    } else if (document.location.pathname == "/authenticate") {
-      presenceData.details = "Signing in...";
-      delete presenceData.startTimestamp;
-    } else if (document.location.pathname == "/bank") {
-      presenceData.details = "Checking Bank";
-      delete presenceData.startTimestamp;
     } else {
-      presenceData.details = null;
+      presenceData.state = getText(SelectorMap['estatus']);
+      browsingStamp = Math.floor(Date.now() / 1000);
     }
+  } else if (document.location.pathname == "/authenticate") {
+    presenceData.details = "Signing in...";
+    delete presenceData.startTimestamp;
+  } else if (document.location.pathname == "/bank") {
+    presenceData.details = "Checking Bank";
+    delete presenceData.startTimestamp;
+  } else {
+    presenceData.details = null;
   }
 
   if (presenceData.details == null) {
