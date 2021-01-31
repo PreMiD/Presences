@@ -54,6 +54,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Pausado";
 
     const video: HTMLVideoElement = document.querySelector(".jw-video");
+    
     if (video !== null && !isNaN(video.duration)) {
 
       const timestamps = presence.getTimestamps(
