@@ -1,11 +1,6 @@
 const presence = new Presence({
     clientId: "805721235819462687"
-  }),
-  strings = presence.getStrings({
-    account: "general.viewAccount",
-    dashboard: "youtube.studio.dashboard",
-    browsing: "general.browsing"
-  });
+});
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -13,42 +8,42 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname.startsWith("/account/login")) {
-    presenceData.details = "Logging in";
+    presenceData.details = "Meldt zich aan";
   } else if (document.location.pathname.startsWith("/magister/#/vandaag")) {
-    presenceData.details = (await strings).dashboard;
+    presenceData.details = "Bekijkt het dashboard";
   } else if (document.location.pathname.startsWith("/magister/#/agenda")) {
-    presenceData.details = "Viewing their agenda";
+    presenceData.details = "Bekijkt agenda";
   } else if (document.location.pathname.startsWith("/magister/#/afwezigheid")) {
-    presenceData.details = "Viewing their absences";
+    presenceData.details = "Bekijkt afwezigheid";
   } else if (document.location.pathname.startsWith("/magister/#/cijfers/cijferoverzicht")) {
-    presenceData.details = "Viewing their grades";
+    presenceData.details = "Bekijkt cijferoverzicht";
   } else if (document.location.pathname.startsWith("/magister/#/cijfers")) {
-    presenceData.details = "Viewing their recent grades";
+    presenceData.details = "Bekijkt laatste cijfers";
   } else if (document.location.pathname.startsWith("/magister/#/lvs")) {
-    presenceData.details = "Viewing their logs";
+    presenceData.details = "Bekijkt logboeken";
   } else if (document.location.pathname.startsWith("/magister/#/elo/bronnen")) {
-    presenceData.details = "Viewing sources";
+    presenceData.details = "Bekijkt bronnen";
   } else if (document.location.pathname.startsWith("/magister/#/elo/studiewijzer/")) {
-    presenceData.details = "Viewing a study guide";
+    presenceData.details = "Bekijkt een studiewijzer";
   } else if (document.location.pathname.startsWith("/magister/#/elo/studiewijzer")) {
-    presenceData.details = "Viewing study guides";
+    presenceData.details = "Bekijkt studiewijzers";
   } else if (document.location.pathname.startsWith("/magister/#/elo/opdrachten/")) {
-    presenceData.details = "Viewing an assignment";
+    presenceData.details = "Bekijkt een opdracht";
   } else if (document.location.pathname.startsWith("/magister/#/elo/opdrachten")) {
-    presenceData.details = "Viewing assignments";
+    presenceData.details = "Bekijkt opdrachten";
   } else if (document.location.pathname.startsWith("/magister/#/elo/activiteiten")) {
-    presenceData.details = "Viewing activities";
+    presenceData.details = "Bekijkt activiteiten";
   } else if (document.location.pathname.startsWith("/magister/#/elo")) {
-    presenceData.details = "Viewing their digital studying environment";
+    presenceData.details = "Bekijkt elektronische leeromgeving";
   } else if (document.location.pathname.startsWith("/magister/#/leermiddelen")) {
-    presenceData.details = "Viewing their books";
+    presenceData.details = "Bekijkt leermiddelen";
   } else if (document.location.pathname.startsWith("/magister/#/berichten")) {
-    presenceData.details = "Viewing their messages";
+    presenceData.details = "Bekijkt berichten";
   } else if (document.location.pathname.startsWith("/magister/#/mijn-instellingen")) {
-    presenceData.details = (await strings).account;
+    presenceData.details = "Bekijkt instellingen";
   } else if (document.location.pathname.startsWith("/magister")) {
-    presenceData.details = (await strings).browsing;
-    presenceData.state = `On page '${document.location.pathname.replace("/magister", "").replace("/#/", "").replace("/#", "").replace("-", "")}'`
+    presenceData.details = "Bladert";
+    presenceData.state = `Op pagina '${document.location.pathname.replace("/magister", "").replace("/#/", "").replace("/#", "").replace("-", "")}'`
   }
 
   if (presenceData.details == null) {
