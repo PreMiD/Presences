@@ -28,6 +28,8 @@ presenceApp.on("UpdateData", () => {
     presenceData.details = document.querySelector("body.sidebar-noneoverflow > div.main-container p").innerHTML.split("#")[0]+" adlı kullanıcının profilini görüntülüyor";
   } else if(window.location.pathname == "/code/new/user"){
     presenceData.details = "Bir kod paylaşıyor";
+  } else if(window.location.pathname == "/404"){
+    presenceData.details = "Hata sayfasını görüntülüyor";
   }
   if (presenceData.details == null) {
     presenceApp.setTrayTitle();
