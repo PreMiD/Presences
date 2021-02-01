@@ -11,8 +11,8 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as Function,
-  get function(): Function {
+  _function: null as () => void,
+  get function(): () => void {
     return this._function;
   },
   set function(parameter) {
@@ -21,12 +21,12 @@ const updateCallback = {
   get present(): boolean {
     return this._function !== null;
   }
-};
+},
 
 /**
  * Initialize/reset presenceData.
  */
-const resetData = (
+ resetData = (
   defaultData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
@@ -36,13 +36,13 @@ const resetData = (
   currentURL = new URL(document.location.href);
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
   presenceData = { ...defaultData };
-};
+},
 
 /**
  * Search for URL parameters.
  * @param urlParam The parameter that you want to know about the value.
  */
-const getURLParam = (urlParam: string): string => {
+ getURLParam = (urlParam: string): string => {
   return currentURL.searchParams.get(urlParam);
 };
 
@@ -87,7 +87,7 @@ const getURLParam = (urlParam: string): string => {
       );
       pageType = getURLParam("action");
     } else {
-      const locationType = {
+      const locationType: { [index: string]: string } = {
         Home: "home",
         Login: "login", // action guessed
         Registration: "register", // action guessed
