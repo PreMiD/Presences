@@ -41,14 +41,6 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
   
-      presence.setTrayTitle(
-        paused
-          ? ""
-          : videoTitle !== null
-          ? videoTitle.textContent
-          : "Title not found"
-      );
-  
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
