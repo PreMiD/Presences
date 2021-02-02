@@ -1,7 +1,7 @@
 {
   "author": {
     "name": "Ghaith M. AlHallak",
-    "id": "414473055327354880"
+    "id": "448318357540962314"
   },
   "url": "ww.anime4up.com",
   "description": {
@@ -9,7 +9,7 @@
     "ar_SA": "انمي فور أب - موقع عربي متخصص لمشاهدة وتحميل الانمي المترجم باللغة العربية بسيرفرات متعددة."
   },
   "service": "Anime4up",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/qwOsx7u.png",
   "thumbnail": "https://i.imgur.com/FfzRGF1.png",
   "color": "#38b5eb",
