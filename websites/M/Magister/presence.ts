@@ -7,7 +7,6 @@ presence.on("UpdateData", async () => {
     largeImageKey: "app"
   };
 
-  console.log(document.location.href)
   if (document.location.href.includes("account/login")) {
     presenceData.details = "Meldt zich aan";
   } else if (document.location.href.includes("Logout")) {
@@ -56,7 +55,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Ziet een foutmelding";
   } else if (document.location.href.includes("magister")) {
     presenceData.details = "Bladert";
-    presenceData.state = `Op pagina '${document.location.pathname.replace("/magister", "").replace("/#/", "").replace("/#", "").replace("-", "").replace("/", "")}'`
+    presenceData.state = `Op pagina '${document.location.pathname.replace("/magister", "").replace("/#/", "").replace("/#", "").replace("-", "").replace("/", "")}'`;
   }
 
   if (presenceData.details == null) {
