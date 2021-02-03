@@ -18,6 +18,8 @@ let presenceData: PresenceData = {
 };
 
 var title: any;
+const ticket = document.location.pathname.split("/");
+const search = document.location.pathname.split("/?q=");
 
 function updatePresenceData(){
   
@@ -32,10 +34,10 @@ function updatePresenceData(){
     }
     // Page serveur
     else if (document.location.pathname == "/serveur/") {
-      presenceData.details = "Serveur d'entraide Français";
+      presenceData.details = "Slash FR - Serveur communautaire Français";
       presenceData.state = "discord.gg/fr";
       presenceData.largeImageKey = "serveur";
-      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageKey = "rooster";
       presenceData.smallImageText = "discord.fr/serveur";
     }
     // Mentions légales
@@ -48,14 +50,62 @@ function updatePresenceData(){
     }
     // Recherche
     else if (document.location.pathname == "/search/") {
-      presenceData.details = "Recherche:";
-      presenceData.state = "";
+      presenceData.details = "Recherche un";
+      presenceData.state = "élément sur le site";
       presenceData.largeImageKey = "search";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/search";
     }
-    // Blog 
-    else if (document.location.pathname.includes("/blog/")) {
+    // Blog Nav Gen
+    else if (document.location.pathname == "/blog/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Toutes les catégories";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog";
+    }
+    // Blog Nav Actu
+    else if (document.location.pathname == "/blog/categories/actualite/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Actualité";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/actualite";
+    }
+    // Blog Nav Bot
+    else if (document.location.pathname == "/blog/categories/bot/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Bot";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/bot";
+    }
+    // Blog Nav Dev
+    else if (document.location.pathname == "/blog/categories/developpement/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Développement";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/developpement";
+    }
+    // Blog Nav Guide
+    else if (document.location.pathname == "/blog/categories/guide/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Guide";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/guide";
+    }
+    // Blog Nav Serveur
+    else if (document.location.pathname == "/blog/categories/serveur/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Serveur";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/serveur";
+    }
+    // Blog Article
+    else if (document.location.pathname.includes("/blog/2")) {
       title = document.querySelector("#__docusaurus > div > div > div > main > article > header > h1");
       presenceData.details = "Consulte le Blog";
       presenceData.state = title.innerText.replace("", "");
@@ -77,7 +127,7 @@ function updatePresenceData(){
       presenceData.details = "Consulte le formulaire";
       presenceData.state = "de recrutement";
       presenceData.largeImageKey = "recrutement";
-      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageKey = "rooster";
       presenceData.smallImageText = "discord.fr/recrutement";
     }
     // Partenariat
@@ -85,7 +135,7 @@ function updatePresenceData(){
       presenceData.details = "Consulte le formulaire";
       presenceData.state = "de partenariat";
       presenceData.largeImageKey = "partenariat";
-      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageKey = "rooster";
       presenceData.smallImageText = "discord.fr/partenariat";
     }
     // Unban
@@ -93,7 +143,7 @@ function updatePresenceData(){
       presenceData.details = "Consulte le formulaire";
       presenceData.state = "d'appel";
       presenceData.largeImageKey = "unban";
-      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageKey = "rooster";
       presenceData.smallImageText = "discord.fr/unban";
     }
     else {
@@ -105,43 +155,54 @@ function updatePresenceData(){
 
 // Image Discord.FR (i.discord.fr)
   else if (document.location.hostname == "i.discord.fr") {
-    if (document.location.pathname == "/") {
       presenceData.details = "Consulte une image";
       presenceData.state = "i.discord.fr";
       presenceData.largeImageKey = "image";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "i.discord.fr";
     }
+
+// Status
+  else if (document.location.hostname == "status.discord.fr") {
+      presenceData.details = "Consulte l'état des services";
+      presenceData.state = "status.discord.fr";
+      presenceData.largeImageKey = "status";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "status.discord.fr";
+    }
+
+// Staff
+  else if (document.location.hostname == "staff.discord.fr") {
+    presenceData.details = "Consulte la";
+    presenceData.state = "documentation staff";
+    presenceData.largeImageKey = "staff";
+    presenceData.smallImageKey = "rooster";
+    presenceData.smallImageText = "staff.discord.fr";
+    }
+
+// Support Discord FR (support.discord.fr)
+  else if (document.location.hostname == "support.discord.fr") {
+    if (document.location.pathname == "/") {
+      presenceData.details = "Team Support";
+      presenceData.state = "via ModMail";
+      presenceData.largeImageKey = "support";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "support.discord.fr";
+    }
+    // Ticket
+    else if (document.location.pathname.includes("/logs/")) {
+      presenceData.details = "Consulte une archive";
+      presenceData.state = "d'un ticket support";
+      presenceData.largeImageKey = "logs";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = ""; 
+    }
     else {
       presenceData.details = "Erreur lors du chargement";
-      presenceData.state = "i.discord.fr";
+      presenceData.state = "support.discord.fr";
     }
 
   }
-
-// Support Discord FR (support.discord.fr)
-else if (document.location.hostname == "support.discord.fr") {
-  if (document.location.pathname == "/") {
-    presenceData.details = "Team Support";
-    presenceData.state = "via ModMail";
-    presenceData.largeImageKey = "support";
-    presenceData.smallImageKey = "dfr";
-    presenceData.smallImageText = "support.discord.fr";
-  }
-  // Ticket
-  else if (document.location.pathname.includes("/logs/")) {
-    presenceData.details = "Consulte l'archive d'un ticket";
-    presenceData.state = "";
-    presenceData.largeImageKey = "logs";
-    presenceData.smallImageKey = "dfr";
-    presenceData.smallImageText = ""; 
-  }
-  else {
-    presenceData.details = "Erreur lors du chargement";
-    presenceData.state = "support.discord.fr";
-  }
-
-}
 
 }
 
