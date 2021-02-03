@@ -17,13 +17,17 @@ let presenceData: PresenceData = {
   startTimestamp: timestamp
 };
 
+var title: any;
+
 function updatePresenceData(){
   
   if (document.location.hostname == "discord.fr") {
     // Accueil
     if (document.location.pathname == "/") {
-      presenceData.details = "Wiki, blog et tutoriels en français";
-      presenceData.state = "discord.fr";
+      presenceData.details = "Wiki, blog et tutoriels";
+      presenceData.state = "en français";
+      presenceData.largeImageKey = "discordfr";
+      presenceData.smallImageKey = "rooster";
       presenceData.smallImageText = "Page d'accueil";
     }
     // Page serveur
@@ -34,21 +38,39 @@ function updatePresenceData(){
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/serveur";
     }
+    // Mentions légales
+    else if (document.location.pathname == "/mentions-legales/") {
+      presenceData.details = "Consulte les";
+      presenceData.state = "Mentions légales";
+      presenceData.largeImageKey = "terms";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/mentions-legales";
+    }
+    // Recherche
+    else if (document.location.pathname == "/search/") {
+      presenceData.details = "Recherche:";
+      presenceData.state = "";
+      presenceData.largeImageKey = "search";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/search";
+    }
     // Blog 
     else if (document.location.pathname.includes("/blog/")) {
+      title = document.querySelector("#__docusaurus > div > div > div > main > article > header > h1");
       presenceData.details = "Consulte le Blog";
-      presenceData.state = "";
+      presenceData.state = title.innerText.replace("", "");
       presenceData.largeImageKey = "blog";
       presenceData.smallImageKey = "dfr";
-      presenceData.smallImageText = "discord.fr/blog";
+      presenceData.smallImageText = "discord.fr/blog/";
     }
     // Wiki
     else if (document.location.pathname.includes("/wiki/")) {
+      title = document.querySelector("#__docusaurus > div > div > main > div > div > div.col.docItemCol_U38p > div > article > header > h1");
       presenceData.details = "Consulte le wiki";
-      presenceData.state = "";
+      presenceData.state = title.innerText.replace("", "");
       presenceData.largeImageKey = "wiki";
       presenceData.smallImageKey = "dfr";
-      presenceData.smallImageText = "discord.fr/wiki";
+      presenceData.smallImageText = "discord.fr/wiki/";
     }
     // Recrutement
     else if (document.location.pathname.includes("/recrutement/")) {
