@@ -1,5 +1,5 @@
 ---
-name: Service request
+name: Service/Presence request
 about: Suggest Rich Presence support for a website
 ---
 

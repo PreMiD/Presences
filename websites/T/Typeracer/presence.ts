@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 let currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/");
+  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
 const browsingStamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
@@ -11,8 +11,8 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as Function,
-  get function(): Function {
+  _function: null as () => void,
+  get function(): () => void {
     return this._function;
   },
   set function(parameter) {
@@ -21,19 +21,21 @@ const updateCallback = {
   get present(): boolean {
     return this._function !== null;
   }
-};
+},
 
 /**
  * Initialize/reset presenceData.
  */
-const resetData = (): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.slice(1).split("/");
-  presenceData = {
+ resetData = (
+  defaultData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
     startTimestamp: browsingStamp
-  };
+  }
+): void => {
+  currentURL = new URL(document.location.href);
+  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+  presenceData = { ...defaultData };
 };
 
 ((): void => {
@@ -73,8 +75,8 @@ const resetData = (): void => {
         ) {
           const textBox = document.querySelector(
             "table.gameView > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div > div"
-          );
-          const lettersTotal = textBox.textContent.length;
+          ),
+           lettersTotal = textBox.textContent.length;
           let lettersTyped = 0;
           for (const i in textBox.children) {
             if (
@@ -90,8 +92,8 @@ const resetData = (): void => {
             }
           }
           const percentage =
-            Math.round((lettersTyped / lettersTotal) * 10000) / 100;
-          const wpm = document
+            Math.round((lettersTyped / lettersTotal) * 10000) / 100,
+           wpm = document
             .querySelector(".rankPanelWpm-self")
             .textContent.toUpperCase();
           presenceData.state = `${percentage}%, ${wpm}`;
@@ -104,11 +106,11 @@ const resetData = (): void => {
           presenceData.details = "Just finished with a race";
           const wpm = document
             .querySelector(".rankPanelWpm-self")
-            .textContent.toUpperCase();
-          const accuracy = document.querySelector(
+            .textContent.toUpperCase(),
+           accuracy = document.querySelector(
             ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)"
-          ).textContent;
-          const time = document.querySelector(
+          ).textContent,
+           time = document.querySelector(
             ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(2)"
           ).textContent;
           presenceData.state = `${wpm}, ${accuracy} acc., ${time}`;
@@ -148,8 +150,8 @@ const resetData = (): void => {
         presenceData.details = "Viewing the competition result";
         const option = document
           .querySelector("option[selected]")
-          .textContent.trim();
-        const strong = document
+          .textContent.trim(),
+         strong = document
           .querySelector("div.themeContent > div:nth-child(5) > strong")
           .textContent.trim()
           .slice(0, -1)
@@ -163,7 +165,7 @@ const resetData = (): void => {
       } else if (currentPath[1] === "login") {
         presenceData.details = "Logging in";
       } else {
-        const pageNames = {
+        const pageNames: { [index: string]: string } = {
           upgrade_account: "Upgrade your account",
           tos: "Terms of Service",
           privacy_poicy: "Privacy Policy"
@@ -183,8 +185,9 @@ const resetData = (): void => {
 })();
 
 if (updateCallback.present) {
+  const defaultData = { ...presenceData };
   presence.on("UpdateData", async () => {
-    resetData();
+    resetData(defaultData);
     updateCallback.function();
     presence.setActivity(presenceData);
   });

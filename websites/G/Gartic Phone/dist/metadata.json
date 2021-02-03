@@ -9,7 +9,7 @@
     "en": "The Telephone Game"
   },
   "service": "Gartic Phone",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/zLBvs9k.png",
   "thumbnail": "https://i.imgur.com/f2oSx2u.png",
   "color": "#7424D9",
@@ -20,7 +20,6 @@
   ],
   "category": "games",
   "settings": [
-
     {
       "id": "privacyDraw",
       "title": "Hide drawing details",

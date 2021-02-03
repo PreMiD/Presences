@@ -11,8 +11,8 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as Function,
-  get function(): Function {
+  _function: null as () => void,
+  get function(): () => void {
     return this._function;
   },
   set function(parameter) {
@@ -21,12 +21,12 @@ const updateCallback = {
   get present(): boolean {
     return this._function !== null;
   }
-};
+},
 
 /**
  * Initialize/reset presenceData.
  */
-const resetData = (
+ resetData = (
   defaultData: PresenceData = {
     details: "Viewing an unsupported page",
     largeImageKey: "lg",
@@ -36,27 +36,27 @@ const resetData = (
   currentURL = new URL(document.location.href);
   currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
   presenceData = { ...defaultData };
-};
+},
 
 /**
  * Search for URL parameters.
  * @param urlParam The parameter that you want to know about the value.
  */
-const getURLParam = (urlParam: string): string => {
+ getURLParam = (urlParam: string): string => {
   return currentURL.searchParams.get(urlParam);
-};
+},
 
 /**
  * Get timestamps based on the video element.
  * @param {Number} videoTime Current video time seconds.
  * @param {Number} videoDuration Video duration seconds.
  */
-const getTimestamps = (
+ getTimestamps = (
   videoTime: number,
   videoDuration: number
 ): Array<number> => {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 };
 
@@ -120,10 +120,10 @@ const getTimestamps = (
       presenceData.details = "Logging in";
     } else if (currentPath[0] === "tracks" || currentPath[0] === "maps") {
       presenceData.details = document
-        .querySelector(".WindowText td:nth-of-type(2)")
+        .querySelector(".panelbox-heading h1")
         .textContent.trim();
       presenceData.state = document
-        .querySelector(".WindowText:nth-of-type(2) td:nth-of-type(2)")
+        .querySelector(".panelbox-stats a[id^='user-']")
         .textContent.trim();
     } else if (
       currentPath[0] === "tracksearch2" ||
@@ -247,8 +247,8 @@ const getTimestamps = (
           .querySelector(".windowv2-textcontainer")
           .textContent.trim()
           .split(" ...")[0]
-          .slice(15);
-        const usernameSearched = (document.querySelector(
+          .slice(15),
+         usernameSearched = (document.querySelector(
           "#UserUsername"
         ) as HTMLInputElement).value;
         presenceData.details = "Searching for a user";
@@ -414,8 +414,8 @@ const getTimestamps = (
               .querySelector(".mejs__playpause-button button")
               .getAttribute("aria-label") === "Pause"
           ) {
-            const video: HTMLVideoElement = document.querySelector("video");
-            const timestamps = getTimestamps(
+            const video: HTMLVideoElement = document.querySelector("video"),
+             timestamps = getTimestamps(
               Math.floor(video.currentTime),
               Math.floor(video.duration)
             );
