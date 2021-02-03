@@ -52,19 +52,27 @@ function updatePresenceData(){
     }
     // Recrutement
     else if (document.location.pathname.includes("/recrutement/")) {
-      presenceData.details = "Consulte la page de recrutement";
-      presenceData.state = "discord.gg/fr";
+      presenceData.details = "Consulte le formulaire";
+      presenceData.state = "de recrutement";
       presenceData.largeImageKey = "recrutement";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/recrutement";
     }
     // Partenariat
     else if (document.location.pathname.includes("/partenariat/")) {
-      presenceData.details = "Consulte la page de partenariat";
-      presenceData.state = "discord.gg/fr";
+      presenceData.details = "Consulte le formulaire";
+      presenceData.state = "de partenariat";
       presenceData.largeImageKey = "partenariat";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/partenariat";
+    }
+    // Unban
+    else if (document.location.pathname.includes("/unban/")) {
+      presenceData.details = "Consulte le formulaire";
+      presenceData.state = "d'appel";
+      presenceData.largeImageKey = "unban";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/unban";
     }
     else {
       presenceData.details = "Erreur lors du chargement";
