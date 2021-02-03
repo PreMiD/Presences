@@ -13,6 +13,6 @@
   "logo": "https://media.discordapp.net/attachments/751582535540015164/801886036547600404/New-AniWatchList.png?width=754&height=754",
   "thumbnail": "https://media.discordapp.net/attachments/751582535540015164/801886036547600404/New-AniWatchList.png?width=754&height=754",
   "color": "#FF0000",
-  "tags": [],
+  "tags": ["anime", "aniwatchlist", "anilist"],
   "category": "anime"
 }
