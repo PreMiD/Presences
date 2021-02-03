@@ -17,9 +17,7 @@ setInterval(myOutsideHeavyLiftingFunction, 10000);
 
 */
 
-let title: string;
-let cutTitle: string;
-let cutTitleArray: string[];
+let title: string, cutTitle: string, cutTitleArray: string[];
 
 presence.on("UpdateData", async () => {
   /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
