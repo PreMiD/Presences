@@ -1,11 +1,6 @@
 const presence = new Presence({
   clientId: "806351411607896085" //The client ID of the Application created at https://discordapp.com/developers/applications
-}),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-    //You can use this to get translated strings in their browser language
-  });
+});
 
 /*
 
@@ -22,9 +17,9 @@ setInterval(myOutsideHeavyLiftingFunction, 10000);
 
 */
 
-var title: any;
-var cutTitle: any;
-var cutTitleArray: any;
+let title: String;
+let cutTitle: String;
+let cutTitleArray: String[];
 
 presence.on("UpdateData", async () => {
   /*UpdateData is always firing, and therefore should be used as your refresh cycle, or `tick`. This is called several times a second where possible.
@@ -34,13 +29,12 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey:
       "aniwatchlist_logo_grey_bg" /*The key (file name) of the Large Image on the presence. These are uploaded and named in the Rich Presence section of your application, called Art Assets*/,
-    details: "Viewing the Home Page", //The upper section of the presence text
+    details: "Viewing the Home Page" //The upper section of the presence text
   }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
 
   if(title.includes("Watchlist")) {
     cutTitle = title.slice(15);
     cutTitleArray = cutTitle.split(" ");
-    console.log(cutTitle);
     presenceData.details = "Viewing " + cutTitleArray[0] + " Watchlist";
   }
 
