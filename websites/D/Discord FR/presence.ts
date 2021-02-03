@@ -67,6 +67,14 @@ function updatePresenceData(){
     // Blog Nav Actu
     else if (document.location.pathname == "/blog/categories/actualite/") {
       presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Toutes les catégories";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/";
+    }
+    // Blog Nav Categories
+    else if (document.location.pathname == "/blog/categories/") {
+      presenceData.details = "Navigue sur le Blog";
       presenceData.state = "Catégorie: Actualité";
       presenceData.largeImageKey = "blog";
       presenceData.smallImageKey = "dfr";
