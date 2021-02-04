@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
   var video: HTMLVideoElement = document.querySelector(
     ".mhp1138_videoWrapper video"
   );
-  if (video[0] !== null && !isNaN(video.duration)) {
+  if (video !== null && !isNaN(video.duration)) {
     //* Get required tags
     var title: any;
     title = document.querySelector(".video-wrapper .title-container .title");
