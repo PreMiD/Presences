@@ -4,20 +4,6 @@
       "name": "Notix",
       "id": "552550090796171265"
     },
-    "contributors": [
-      {
-        "name": "Derrios",
-        "id": "264320223182585858"
-      },
-      {
-        "name": "Zallom",
-        "id": "268108606027726849"
-      },
-      {
-        "name": "Ichii",
-        "id": "530061924130488351"
-      }
-    ],
   "url": [
     "www.discord.fr",
     "discord.fr",
@@ -34,8 +20,8 @@
     },
     "service": "Discord FR",
     "version": "1.0.0",
-    "logo": "https://i.discord.fr/Kd3.jpg",
-    "thumbnail": "https://i.discord.fr/nmj.jpg",
+    "logo": "https://i.imgur.com/h4XlEoC.jpg",
+    "thumbnail": "https://i.imgur.com/4G0aJzW.jpg",
     "color": "#4D91FF",
     "tags": [
       "discord",
