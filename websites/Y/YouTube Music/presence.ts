@@ -19,8 +19,12 @@ function getAuthorString(): string {
     authorsArray = Array.from(authors);
 
     //* If song is from a channel and not a video
-    if (document.querySelector('span yt-formatted-string.ytmusic-player-bar a[href*="channel/"]') &&
-        !document.querySelector("ytmusic-player-page[video-mode_]")) {
+    if (
+      document.querySelector(
+        'span yt-formatted-string.ytmusic-player-bar a[href*="channel/"]'
+      ) &&
+      !document.querySelector("ytmusic-player-page[video-mode_]")
+    ) {
       //* Get release year of song
       let year = document.querySelector(
         "span yt-formatted-string.ytmusic-player-bar"
@@ -34,16 +38,14 @@ function getAuthorString(): string {
         .join(", ")} - ${
         authorsArray[authorsArray.length - 1].innerText
       } (${year})`;
-    } 
+    }
     //* Else, the song is a user upload
     else {
       //* Build output string
       authorString = `${authorsArray
         .slice(0, authorsArray.length - 1)
         .map((a) => a.innerText)
-        .join(", ")} - ${
-        authorsArray[authorsArray.length - 1].innerText
-      }`;
+        .join(", ")} - ${authorsArray[authorsArray.length - 1].innerText}`;
     }
   }
   //* If from default YouTube music return Uploader

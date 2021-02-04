@@ -11,40 +11,38 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as () => void,
-  get function(): () => void {
-    return this._function;
+    _function: null as () => void,
+    get function(): () => void {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
-  set function(parameter) {
-    this._function = parameter;
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
   },
-  get present(): boolean {
-    return this._function !== null;
-  }
-},
-
-/**
- * Initialize/reset presenceData.
- */
- resetData = (
-  defaultData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  }
-): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-  presenceData = { ...defaultData };
-},
-
-/**
- * Search for URL parameters.
- * @param urlParam The parameter that you want to know about the value.
- */
- getURLParam = (urlParam: string): string => {
-  return currentURL.searchParams.get(urlParam);
-};
+  /**
+   * Search for URL parameters.
+   * @param urlParam The parameter that you want to know about the value.
+   */
+  getURLParam = (urlParam: string): string => {
+    return currentURL.searchParams.get(urlParam);
+  };
 
 ((): void => {
   if (currentURL.hostname === "www.gamepedia.com") {
@@ -91,15 +89,14 @@ const updateCallback = {
 
     let title: string, sitename: string;
     const actionResult = (): string =>
-      getURLParam("action") || getURLParam("veaction"),
-
-     titleFromURL = (): string => {
-      const raw =
-        currentPath[0] === "index.php"
-          ? getURLParam("title")
-          : currentPath.join("/");
-      return decodeURI(raw.replace(/_/g, " "));
-    };
+        getURLParam("action") || getURLParam("veaction"),
+      titleFromURL = (): string => {
+        const raw =
+          currentPath[0] === "index.php"
+            ? getURLParam("title")
+            : currentPath.join("/");
+        return decodeURI(raw.replace(/_/g, " "));
+      };
 
     try {
       title = document.querySelector("h1").textContent;
@@ -113,11 +110,11 @@ const updateCallback = {
       ) as HTMLMetaElement).content;
     } catch (e) {
       const mainPageHref = ((document.querySelector(
-        "#n-mainpage-description a"
-      ) ||
-        document.querySelector("#p-navigation a") ||
-        document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement).href,
-       mainPageURL = new URL(mainPageHref);
+          "#n-mainpage-description a"
+        ) ||
+          document.querySelector("#p-navigation a") ||
+          document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement).href,
+        mainPageURL = new URL(mainPageHref);
       sitename = decodeURI(
         mainPageURL.pathname.replace(/^\/|\/$/g, "").replace(/_/g, " ")
       );

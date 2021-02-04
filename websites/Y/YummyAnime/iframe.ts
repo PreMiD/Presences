@@ -1,6 +1,6 @@
-var iframe = new iFrame();
+const iframe = new iFrame();
 iframe.on("UpdateData", async () => {
-  var video: HTMLVideoElement;
+  let video: HTMLVideoElement;
   if (document.querySelector("#dogevideo_html5_api") !== null) {
     video = document.querySelector("#dogevideo_html5_api");
 
