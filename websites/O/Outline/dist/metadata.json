@@ -5,8 +5,11 @@
     "id": "279855717203050496"
   },
   "service": "Outline",
-  "url": ["www.outline.com", "outline.com"],
-  "version": "1.0.3",
+  "url": [
+    "www.outline.com",
+    "outline.com"
+  ],
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/Mvhpsh0.png",
   "thumbnail": "https://i.imgur.com/0DB2tk4.png",
   "color": "#ffffff",
