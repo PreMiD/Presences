@@ -1,10 +1,5 @@
 const presence = new Presence({
   clientId: "563836644579606528"
-}),
-
-strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
 });
 
 const timestamp = Math.floor(Date.now() / 1000);
@@ -17,7 +12,7 @@ const presenceData: PresenceData = {
   startTimestamp: timestamp
 };
 
-var title: any;
+let title: any;
 
 function updatePresenceData(){
   
@@ -192,4 +187,5 @@ function updatePresenceData(){
     presence.setTrayTitle();
   }
 
+  updatePresenceData();
 }
