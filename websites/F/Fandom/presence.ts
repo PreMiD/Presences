@@ -11,40 +11,38 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as () => void,
-  get function(): () => void {
-    return this._function;
+    _function: null as () => void,
+    get function(): () => void {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
-  set function(parameter) {
-    this._function = parameter;
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
   },
-  get present(): boolean {
-    return this._function !== null;
-  }
-},
-
-/**
- * Initialize/reset presenceData.
- */
- resetData = (
-  defaultData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  }
-): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-  presenceData = { ...defaultData };
-},
-
-/**
- * Search for URL parameters.
- * @param urlParam The parameter that you want to know about the value.
- */
- getURLParam = (urlParam: string): string => {
-  return currentURL.searchParams.get(urlParam);
-};
+  /**
+   * Search for URL parameters.
+   * @param urlParam The parameter that you want to know about the value.
+   */
+  getURLParam = (urlParam: string): string => {
+    return currentURL.searchParams.get(urlParam);
+  };
 
 ((): void => {
   if (currentURL.host === "www.fandom.com") {
@@ -84,7 +82,7 @@ const updateCallback = {
               .getAttribute("aria-label") === "Pause"
           ) {
             const video: HTMLVideoElement = document.querySelector(".jw-video"),
-             timestamps = presence.getTimestampsfromMedia(video);
+              timestamps = presence.getTimestampsfromMedia(video);
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
           } else {
@@ -129,17 +127,17 @@ const updateCallback = {
 
     let title: string, sitename: string;
     const actionResult = (): string =>
-      getURLParam("action") || getURLParam("veaction"),
-     titleFromURL = (): string => {
-      const raw: string =
-        currentPath[0] === "index.php"
-          ? getURLParam("title")
-          : currentPath[0] === "wiki"
-          ? currentPath.slice(1).join("/")
-          : currentPath.slice(2).join("/");
-      //let lang: string = currentPath[0]
-      return raw.replace(/_/g, " ");
-    };
+        getURLParam("action") || getURLParam("veaction"),
+      titleFromURL = (): string => {
+        const raw: string =
+          currentPath[0] === "index.php"
+            ? getURLParam("title")
+            : currentPath[0] === "wiki"
+            ? currentPath.slice(1).join("/")
+            : currentPath.slice(2).join("/");
+        //let lang: string = currentPath[0]
+        return raw.replace(/_/g, " ");
+      };
 
     try {
       title = document.querySelector(".page-header__title").innerHTML;

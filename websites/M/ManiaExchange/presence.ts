@@ -11,54 +11,48 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as () => void,
-  get function(): () => void {
-    return this._function;
+    _function: null as () => void,
+    get function(): () => void {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
-  set function(parameter) {
-    this._function = parameter;
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
   },
-  get present(): boolean {
-    return this._function !== null;
-  }
-},
-
-/**
- * Initialize/reset presenceData.
- */
- resetData = (
-  defaultData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  }
-): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-  presenceData = { ...defaultData };
-},
-
-/**
- * Search for URL parameters.
- * @param urlParam The parameter that you want to know about the value.
- */
- getURLParam = (urlParam: string): string => {
-  return currentURL.searchParams.get(urlParam);
-},
-
-/**
- * Get timestamps based on the video element.
- * @param {Number} videoTime Current video time seconds.
- * @param {Number} videoDuration Video duration seconds.
- */
- getTimestamps = (
-  videoTime: number,
-  videoDuration: number
-): Array<number> => {
-  const startTime = Date.now(),
-   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-};
+  /**
+   * Search for URL parameters.
+   * @param urlParam The parameter that you want to know about the value.
+   */
+  getURLParam = (urlParam: string): string => {
+    return currentURL.searchParams.get(urlParam);
+  },
+  /**
+   * Get timestamps based on the video element.
+   * @param {Number} videoTime Current video time seconds.
+   * @param {Number} videoDuration Video duration seconds.
+   */
+  getTimestamps = (videoTime: number, videoDuration: number): Array<number> => {
+    const startTime = Date.now(),
+      endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    return [Math.floor(startTime / 1000), endTime];
+  };
 
 ((): void => {
   if (
@@ -244,13 +238,13 @@ const updateCallback = {
     } else if (currentPath[0] === "user") {
       if (currentPath[1] === "search") {
         const searchSummary = document
-          .querySelector(".windowv2-textcontainer")
-          .textContent.trim()
-          .split(" ...")[0]
-          .slice(15),
-         usernameSearched = (document.querySelector(
-          "#UserUsername"
-        ) as HTMLInputElement).value;
+            .querySelector(".windowv2-textcontainer")
+            .textContent.trim()
+            .split(" ...")[0]
+            .slice(15),
+          usernameSearched = (document.querySelector(
+            "#UserUsername"
+          ) as HTMLInputElement).value;
         presenceData.details = "Searching for a user";
         if (usernameSearched)
           presenceData.state = `${usernameSearched}, ${searchSummary.slice(
@@ -415,10 +409,10 @@ const updateCallback = {
               .getAttribute("aria-label") === "Pause"
           ) {
             const video: HTMLVideoElement = document.querySelector("video"),
-             timestamps = getTimestamps(
-              Math.floor(video.currentTime),
-              Math.floor(video.duration)
-            );
+              timestamps = getTimestamps(
+                Math.floor(video.currentTime),
+                Math.floor(video.duration)
+              );
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
           } else {
