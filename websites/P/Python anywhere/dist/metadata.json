@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "[๖̶̶̶ζ͜͡Põƪøiπ_¾]",
+    "id": "466286240283492374"
+  },
+  "url": [
+    "pythonanywhere.com",
+    "www.pythonanywhere.com"
+  ],
+  "description": {
+    "en": "Host, run, and code Python in the cloud: PythonAnywhere.",
+    "fr": "Héberge, and code du Python sur le web: Pythonanywhere"
+  },
+  "service": "Python anywhere",
+  "version": "1.1",
+  "logo": "https://www.pythonanywhere.com/static/anywhere/images/PA-logo-small.png",
+  "thumbnail": "https://www.pythonanywhere.com/static/anywhere/images/PA-screenshot-1-large.png",
+  "color": "#17A0D8",
+  "tags": [
+    "Python",
+    "Pythonanywhere",
+    "Py",
+    "pyanywhere"
+  ],
+  "category": "other"
+}
