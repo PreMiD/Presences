@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "GNiK",
+    "id": "83888634339528704"
+  },
+  "url": "keyma.sh",
+  "description": {
+    "en": "Take your typing to the next level! An online multiplayer typing game where you can go head to head versus players around the world."
+  },
+  "service": "Keymash",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/vDGvohb.png",
+  "thumbnail": "https://i.imgur.com/ZHE29sF.png",
+  "color": "#FB923C",
+  "tags": [
+    "typing",
+    "game"
+  ],
+  "category": "games"
+}

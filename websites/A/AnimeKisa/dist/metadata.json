@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Aesthetic",
+    "id": "268914030528299008"
+  },
+  "contributors": [
+    {
+      "name": "Bas950",
+      "id": "241278257335500811"
+    }
+  ],
+  "service": "AnimeKisa",
+  "description": {
+    "en": "Unlike many other websites AnimeKisa has a tiny amount of ads. Find streamable servers and watch the anime you love, subbed or dubbed in HD."
+  },
+  "url": "animekisa.tv",
+  "version": "1.0.1",
+  "iframe": true,
+  "logo": "https://i.imgur.com/ac0KCKY.png",
+  "thumbnail": "https://i.imgur.com/mgcsfhc.png",
+  "color": "#FF0000",
+  "tags": [
+    "anime",
+    "animekisa"
+  ],
+  "category": "anime"
+}

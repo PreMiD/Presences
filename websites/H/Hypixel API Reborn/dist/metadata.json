@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "StavZDev",
+    "id": "291568379423096832"
+  },
+  "service": "Hypixel API Reborn",
+  "description": {
+    "en": "Hypixel API • Reborn is the only Hypixel API wrapper for Node.js/Typescript with intellisense support.",
+    "ru": "Hypixel API • Reborn - единственный парсер Hypixel API для Node.js/Typescript с поддержкой intellisense."
+  },
+  "url": "hypixel.stavzdev.xyz",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/eQzO2nG.png",
+  "thumbnail": "https://i.imgur.com/9BpoEmx.png",
+  "color": "#ff8c00",
+  "tags": [
+    "development",
+    "other",
+    "hypixel-api-reborn",
+    "programming",
+    "hypixel",
+    "api"
+  ],
+  "category": "other"
+}

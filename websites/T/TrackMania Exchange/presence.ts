@@ -3,7 +3,7 @@ const presence = new Presence({
 });
 
 let currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/");
+  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
 const browsingStamp = Math.floor(Date.now() / 1000);
 let presenceData: PresenceData = {
   details: "Viewing an unsupported page",
@@ -11,38 +11,38 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as Function,
-  get function(): Function {
-    return this._function;
+    _function: null as () => void,
+    get function(): () => void {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
-  set function(parameter) {
-    this._function = parameter;
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
   },
-  get present(): boolean {
-    return this._function !== null;
-  }
-};
-
-/**
- * Initialize/reset presenceData.
- */
-const resetData = (): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.slice(1).split("/");
-  presenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
+  /**
+   * Search for URL parameters.
+   * @param urlParam The parameter that you want to know about the value.
+   */
+  getURLParam = (urlParam: string): string => {
+    return currentURL.searchParams.get(urlParam);
   };
-};
-
-/**
- * Search for URL parameters.
- * @param urlParam The parameter that you want to know about the value.
- */
-const getURLParam = (urlParam: string): string => {
-  return currentURL.searchParams.get(urlParam);
-};
 
 ((): void => {
   if (
@@ -85,7 +85,7 @@ const getURLParam = (urlParam: string): string => {
       );
       pageType = getURLParam("action");
     } else {
-      const locationType = {
+      const locationType: { [index: string]: string } = {
         Home: "home",
         Login: "login", // action guessed
         Registration: "register", // action guessed
@@ -108,7 +108,9 @@ const getURLParam = (urlParam: string): string => {
         "User Info": "usershow",
         "User Packs": "userpacks", // action guessed
         "Your Account": "usershow",
-        "Send Private Message": "postupdate"
+        "Send Private Message": "postupdate",
+        "Edit Post": "postedit",
+        "Report Problem": "reportproblem"
       };
       try {
         pageType =
@@ -121,11 +123,7 @@ const getURLParam = (urlParam: string): string => {
     if (document.querySelector(".NavigatorCell b").textContent === "Login")
       pageType = "login";
 
-    /*
-	
-		This parts gives suffix to the top text of the activity (aka details), to differentiate the different sites on the network.
-	
-		*/
+    /* This parts gives suffix to the top text of the activity (aka details), to differentiate the different sites on the network. */
 
     switch (currentURL.host) {
       case "united.tm-exchange.com":
@@ -151,20 +149,18 @@ const getURLParam = (urlParam: string): string => {
         break;
     }
 
-    /*
-	
-		This part sets the details to be given to PreMID.
-	
-		*/
+    /* This part sets the details to be given to PreMID. */
 
-    if (pageType === "home") {
+    if (currentPath[0] === "error") {
+      presenceData.details = "On a non-existent page";
+    } else if (pageType === "home") {
       presenceData.details = "On the home page";
     } else if (pageType === "login") {
-      presenceData.details = "Signing in";
+      presenceData.details = "Logging in";
     } else if (pageType === "register") {
       presenceData.details = "Registering an account";
     } else if (pageType === "forget") {
-      presenceData.details = "Figuring out his password";
+      presenceData.details = "Figuring out the password";
     } else if (pageType === "trackshow") {
       presenceData.details = document.querySelector(
         `#${idPrefix}_ShowTrackName`
@@ -202,7 +198,7 @@ const getURLParam = (urlParam: string): string => {
     } else if (pageType === "userrecords") {
       const searchSummary = document
         .querySelector(`#${idPrefix}_ShowSummary`)
-        .textContent.slice(27, this.length - 4);
+        .textContent.slice(17, this.length - 4);
       presenceData.details = "Viewing the leaderboards";
       if (
         (document.querySelector(`#${idPrefix}_GetUser`) as HTMLInputElement)
@@ -222,7 +218,7 @@ const getURLParam = (urlParam: string): string => {
           .querySelector(".WindowTitle")
           .textContent.trim();
     } else if (pageType === "threadshow") {
-      presenceData.details = "Viewing a topic";
+      presenceData.details = "Viewing a thread";
       presenceData.state = document.querySelector(
         `#${idPrefix}_ShowSubject`
       ).textContent;
@@ -262,7 +258,7 @@ const getURLParam = (urlParam: string): string => {
         presenceData.state =
           searchSummary[0].toUpperCase() + searchSummary.slice(1);
     } else if (pageType === "postupdate") {
-      presenceData.details = "Sending a private message";
+      presenceData.details = "Writing a private message";
     } else if (pageType === "trackpackshow") {
       presenceData.details = "Viewing a track pack";
       presenceData.state = `${
@@ -272,13 +268,18 @@ const getURLParam = (urlParam: string): string => {
           "#Table7 > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > a:nth-child(3)"
         ).textContent
       }`;
+    } else if (pageType === "postedit") {
+      presenceData.details = "Editing a post";
+    } else if (pageType === "reportproblem") {
+      presenceData.details = "Reporting something";
     }
   }
 })();
 
 if (updateCallback.present) {
+  const defaultData = { ...presenceData };
   presence.on("UpdateData", async () => {
-    resetData();
+    resetData(defaultData);
     updateCallback.function();
     presence.setActivity(presenceData);
   });

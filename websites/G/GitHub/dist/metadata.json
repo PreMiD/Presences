@@ -14,10 +14,11 @@
     "uk_UA": "GitHub — це система управління проектами та версіями коду, а також платформа соціальної мережі, створена для розробників.",
     "nl": "GitHub is een systeem voor projectbeheer en codeversie systeem, evenals een sociaal netwerkplatform gemaakt voor ontwikkelaars.",
     "zh_CN": "GitHub是通过Git进行版本控制的软件源代码托管服务平台。",
-    "zh_TW": "GitHub是透過Git進行版本控制的軟體原始碼代管服務平台。"
+    "zh_TW": "GitHub是透過Git進行版本控制的軟體原始碼代管服務平台。",
+    "pl": "GitHub to system do zarządzania projektami i wersjonowania kodu, a także platforma społecznościowa stworzona dla programistów."
   },
   "url": "github.com",
-  "version": "2.6.4",
+  "version": "2.7.3",
   "logo": "https://i.imgur.com/mGxuWWu.png",
   "thumbnail": "https://i.imgur.com/G816tlo.png",
   "color": "#000000",

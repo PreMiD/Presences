@@ -1,6 +1,6 @@
 {
   "author": {
-    "name": "Not Officer",
+    "name": "Officer",
     "id": "373913699943186432"
   },
   "service": "fnbr.co",
@@ -8,7 +8,7 @@
     "en": "fnbr.co was created to serve as a directory for Fortnite Cosmetics and help spread community awareness of items within Fortnite Battle Royale."
   },
   "url": "fnbr.co",
-  "version": "1.3.4",
+  "version": "1.4.2",
   "logo": "https://i.imgur.com/pI3mGWH.png",
   "thumbnail": "https://i.imgur.com/hT57Bkm.png",
   "color": "#761FA1",

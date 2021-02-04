@@ -8,8 +8,9 @@ var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "trello"
-  };
+      largeImageKey: "trello"
+    },
+    displayPrivateBoards = await presence.getSetting("displayPrivateBoards");
 
   presenceData.startTimestamp = browsingStamp;
 
@@ -20,36 +21,66 @@ presence.on("UpdateData", async () => {
           ".board-header-btn.board-header-btn-org-name.js-open-org-menu"
         ) !== null
       ) {
-        presenceData.details =
-          "Viewing board: " +
-          document.querySelector(
-            ".js-board-editing-target.board-header-btn-text"
-          ).textContent;
-        presenceData.state =
-          "By team: " +
+        if (
           document
-            .querySelector(
-              ".board-header-btn.board-header-btn-org-name.js-open-org-menu"
-            )
-            .textContent.replace(
-              document.querySelector(".org-label").textContent,
-              ""
-            );
+            .querySelector("#permission-level > span.board-header-btn-icon")
+            .classList.contains("icon-private") &&
+          !displayPrivateBoards
+        ) {
+          presenceData.details = "Viewing private board";
+        } else {
+          presenceData.details =
+            "Viewing board: " +
+            document.querySelector(
+              ".js-board-editing-target.board-header-btn-text"
+            ).textContent;
+          presenceData.state =
+            "By team: " +
+            document
+              .querySelector(
+                ".board-header-btn.board-header-btn-org-name.js-open-org-menu"
+              )
+              .textContent.replace(
+                document.querySelector(".org-label").textContent,
+                ""
+              );
+        }
       } else {
         presenceData.details = "Viewing board:";
-        presenceData.state = document.querySelector(
-          ".js-board-editing-target.board-header-btn-text"
-        ).textContent;
+        if (
+          document
+            .querySelector("#permission-level > span.board-header-btn-icon")
+            .classList.contains("icon-private") &&
+          !displayPrivateBoards
+        ) {
+          presenceData.details = "Viewing private board";
+        } else {
+          presenceData.state = document.querySelector(
+            ".js-board-editing-target.board-header-btn-text"
+          ).textContent;
+        }
       }
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/c/")) {
-      presenceData.details =
-        "Viewing card: " + document.querySelector(".window-title").textContent;
-      presenceData.state =
-        "Board: " +
-        document.querySelector(".js-board-editing-target.board-header-btn-text")
-          .textContent;
-      presenceData.smallImageKey = "reading";
+      if (
+        document
+          .querySelector("#permission-level > span.board-header-btn-icon")
+          .classList.contains("icon-private") &&
+        !displayPrivateBoards
+      ) {
+        presenceData.details = "Viewing private card";
+        presenceData.state = "Private Board";
+      } else {
+        presenceData.details =
+          "Viewing card: " +
+          document.querySelector(".window-title").textContent;
+        presenceData.state =
+          "Board: " +
+          document.querySelector(
+            ".js-board-editing-target.board-header-btn-text"
+          ).textContent;
+        presenceData.smallImageKey = "reading";
+      }
     } else if (document.location.pathname.includes("/activity")) {
       profile = document.location.pathname.split("/", 3);
       presenceData.details = "Viewing @" + profile[1] + "'s";
