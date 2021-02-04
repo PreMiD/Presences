@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name": "Bas950",
+    "id": "241278257335500811"
+  },
+  "service": "Poeditor",
+  "altnames": [
+  ],
+  "description": {
+    "en": "Poeditor what can i say Poeditor itself is just translate platform.",
+  },
+  "url": "www.poeditor.com",
+  "version": "1.0",
+  "logo": "",
+  "thumbnail": "",
+  "color": "#ffcb05",
+  "tags": [
+    "poeditor",
+    "pokémontv"
+  ],
+  "category": "utility",
+  "regExp": "Poeditor",
+  "settings": [
+    {
+      "id": "",
+      "title": "Poeditor",
+      "icon": "",
+      "value": true
+    }
+  ]
+}
