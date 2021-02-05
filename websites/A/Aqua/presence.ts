@@ -5,7 +5,6 @@ const presence = new Presence({
 let sname: string,
   sartist: string,
   aqualisteners: string,
-  aquaislive: string,
   aquapresenter: string;
 
 function metadataListener(): void {
