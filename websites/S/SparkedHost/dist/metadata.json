@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "harrydev",
+      "id": "428450288668508160"
+    },
+    "url": [
+      "sparkedhost.com",
+      "billing.sparkedhost.com",
+      "control.sparkedhost.us",
+      "jars.sparkedhost.com",
+      "status.sparkedhost.com"
+    ],
+    "description": {
+      "en": "Sparking your ideas to life by providing the most powerful, most reliable, and highest quality hosting at the most affordable price since 2017."
+    },
+    "service": "SparkedHost",
+    "version": "1.0.0",
+    "logo": "https://sparkedhost.com/assets/img/icon.png",
+    "thumbnail": "https://ss.harrydev.me/i/mgck2axa40.png",
+    "color": "#FF9F00",
+    "tags": [
+      "minecraft",
+      "server",
+      "hosting"
+    ],
+    "category": "games"
+  }
