@@ -22,7 +22,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Extreme Packages";
     }
 
-
     else if (document.location.pathname.includes("/game-hosting")) {
         presenceData.details = "Game Hosting";
         presenceData.state = "Exploring Packages";
@@ -152,11 +151,6 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("subdomains")) {
         presenceData.details = "Managing Servers";
         presenceData.state = "Subdomains";
-    }
-
-    else if (document.location.pathname.includes("files")) {
-        presenceData.details = "Managing Servers";
-        presenceData.state = "File Manager";
     }
 
     else if (document.location.pathname.includes("network")) {
