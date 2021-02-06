@@ -27,7 +27,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Exploring Packages";
     }
 
-
     else if (document.location.pathname.includes("/budget-vps")) {
         presenceData.details = "VPS Hosting";
         presenceData.state = "Budget Packages";
@@ -37,24 +36,20 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Premium Packages";
     }
 
-
     else if (document.location.pathname.includes("/discord-hosting")) {
         presenceData.details = "Discord Bot Hosting";
         presenceData.state = "Exploring Packages";
     }
-
 
     else if (document.location.pathname.includes("/web-hosting")) {
         presenceData.details = "Web Hosting";
         presenceData.state = "Exploring Packages";
     }
 
-
     else if (document.location.pathname.includes("/giftcards")) {
         presenceData.details = "Giftcards";
         presenceData.state = "Treat a friend";
     }
-
 
     else if (document.location.pathname.includes("/about-us")) {
         presenceData.details = "About Us";
