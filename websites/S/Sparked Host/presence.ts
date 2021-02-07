@@ -196,8 +196,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Changing information";
     }
 
-
-
   }
 
   else if (document.location.hostname == "jars.sparkedhost.us") {
