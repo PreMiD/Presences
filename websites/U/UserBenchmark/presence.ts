@@ -1,12 +1,12 @@
 const presence = new Presence({
   clientId: "735229766701154357"
-});
-const strings = presence.getStrings({
+}),
+ strings = presence.getStrings({
   browse: "presence.activity.browsing",
   search: "presence.activity.searching"
-});
+}),
 
-const getElement = (query: string): string | undefined => {
+ getElement = (query: string): string | undefined => {
   return document.querySelector(query)?.textContent;
 };
 
@@ -51,11 +51,11 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const host = location.host;
-  const path = location.pathname.replace(/\/?$/, "/");
+  const host = location.host,
+   path = location.pathname.replace(/\/?$/, "/"),
 
-  const showSearch = await presence.getSetting("search");
-  const showTimestamps = await presence.getSetting("timestamp");
+   showSearch = await presence.getSetting("search"),
+   showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
     details: undefined,
@@ -88,13 +88,13 @@ presence.on("UpdateData", async () => {
 
     const parseComparison = (text: string, date: string): string => {
       return date ? text : "Unspecified";
-    };
+    },
 
-    const comp1 = getElement("#select2-chosen-1");
-    const comp2 = getElement("#select2-chosen-2");
+     comp1 = getElement("#select2-chosen-1"),
+     comp2 = getElement("#select2-chosen-2"),
 
-    const compDate1 = getElement(".cmp-cpt-l");
-    const compDate2 = getElement(".cmp-cpt-r");
+     compDate1 = getElement(".cmp-cpt-l"),
+     compDate2 = getElement(".cmp-cpt-r");
 
     data.state = `${parseComparison(comp1, compDate1)} vs ${parseComparison(
       comp2,
@@ -111,12 +111,12 @@ presence.on("UpdateData", async () => {
       "Overwatch",
       "PlayerUnknown's Battlegrounds",
       "Fortnite"
-    ];
+    ],
 
-    const activeBtn = document.querySelector(
+     activeBtn = document.querySelector(
       ".btn-group-justified > .btn.btn-default.active"
-    );
-    const btnId = Array.from(activeBtn.parentNode.children).indexOf(activeBtn);
+    ),
+     btnId = Array.from(activeBtn.parentNode.children).indexOf(activeBtn);
 
     data.state = games[btnId];
   }
