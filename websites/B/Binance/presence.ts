@@ -1,11 +1,11 @@
 const presence = new Presence({
   clientId: "807591728759570453"
 }),
-  browsingStamp = Math.floor(Date.now() / 1000)
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 function getLastPath(path: string) {
-  const vals = path.split("/")
-  return vals[vals.length - 1]
+  const vals = path.split("/");
+  return vals[vals.length - 1];
 }
 
 presence.on("UpdateData", async () => {
