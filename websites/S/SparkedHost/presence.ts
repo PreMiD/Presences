@@ -1,8 +1,6 @@
 const presence = new Presence({
     clientId: "807949437922050069"
-  });
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+  }), browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -69,7 +67,7 @@ presence.on("UpdateData", async () => {
 
     else if (document.location.pathname.includes("/partners")) {
         presenceData.details = "Partners";
-        presenceData.state = "johnny bad";
+        presenceData.state = "The cool kids";
     }
 
     else if (document.location.pathname.includes("/help-center")) {
