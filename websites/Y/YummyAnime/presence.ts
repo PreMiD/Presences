@@ -7,33 +7,46 @@ const presence = new Presence({
   });
 
 let browsingStamp = Math.floor(Date.now() / 1000),
-  title: Element, 
+  title: Element,
   air: Element,
-  iFrameVideo: boolean, 
-  currentTime: number, 
-  duration: number, 
+  iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
   paused: boolean,
   lastPlaybackState: boolean = null,
   playback,
   search: Element;
 
-presence.on("iFrameData", (data: {iframe_video : { iFrameVideo: boolean; currTime: number; dur: number; paused: boolean;}}) => {
-  playback = data.iframe_video.dur !== null ? true : false;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+    };
+  }) => {
+    playback = data.iframe_video.dur !== null ? true : false;
 
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    if (playback) {
+      iFrameVideo = data.iframe_video.iFrameVideo;
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.dur;
+      paused = data.iframe_video.paused;
+    }
+    if (lastPlaybackState != playback) {
+      lastPlaybackState = playback;
+      browsingStamp = Math.floor(Date.now() / 1000);
+    }
   }
-  if (lastPlaybackState != playback) {
-    lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
-  }
-});
+);
 
 presence.on("UpdateData", async () => {
-  const timestamps = presence.getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "ya"
     };
@@ -49,7 +62,7 @@ presence.on("UpdateData", async () => {
 
       title = document.querySelector(
         "body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
-        );
+      );
       presenceData.details = title.textContent;
 
       air = document.querySelector(
@@ -81,7 +94,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Looking at: ";
       title = document.querySelector(
         "body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
-        );
+      );
       presenceData.state = title.textContent;
       presenceData.smallImageKey = "reading";
     }
