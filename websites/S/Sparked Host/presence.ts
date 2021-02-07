@@ -119,9 +119,16 @@ presence.on("UpdateData", async () => {
 
   else if (document.location.hostname == "control.sparkedhost.us") {
     presenceData.smallImageKey = "pterodactyl";
+    presenceData.smallImageText = "Pterodactyl";
     if (document.location.pathname == "/") {
         presenceData.details = "Viewing Servers";
         presenceData.state = "Lookin' at the glory.";
+    }
+
+    else if (document.location.pathname.includes("admin")) {
+        const pageAdmin = document.title.split(" - ");
+        presenceData.details = "Admin Area";
+        presenceData.state = pageAdmin[1];
     }
 
     else if (document.location.pathname.includes("files")) {
@@ -189,19 +196,20 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Changing information";
     }
 
-    else if (document.location.pathname.includes("admin")) {
-        presenceData.details = "Admin Area";
-        presenceData.state = "*secret stuff*";
-    }
+
 
   }
 
   else if (document.location.hostname == "jars.sparkedhost.us") {
+    presenceData.smallImageKey = "bukkit";
+    presenceData.smallImageText = "Minecraft Server";
     presenceData.details = "Server Jars";
     presenceData.state = "Downloading Files";
   }
 
   else if (document.location.hostname == "status.sparkedhost.com") {
+    presenceData.smallImageKey = "hetrix";
+    presenceData.smallImageText = "HetrixTools";
     presenceData.details = "Server Status";
     presenceData.state = "Who broke it?";
   }
