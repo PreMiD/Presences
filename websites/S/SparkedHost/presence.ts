@@ -10,7 +10,6 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname == "sparkedhost.com") {
-
     if (document.location.pathname.includes("/budget-minecraft")) {
         presenceData.details = "Minecraft Hosting";
         presenceData.state = "Budget Packages";
@@ -82,8 +81,15 @@ presence.on("UpdateData", async () => {
   else if (document.location.hostname == "billing.sparkedhost.com") {
 
     if (document.location.pathname.includes("knowledgebase")) {
+        const article = document.title.split(" - ");
+        if (article[0] == "Knowledgebase") {
+            presenceData.state = "Browsing Articles";
+        }
+        else {
+        presenceData.state = article[0];
+        }
         presenceData.details = "Knowledgebase";
-        presenceData.state = "Guides & Tutorials";
+
     }
 
     else if (document.location.pathname.includes("clientarea")) {
@@ -114,7 +120,7 @@ presence.on("UpdateData", async () => {
   }
 
   else if (document.location.hostname == "control.sparkedhost.us") {
-
+    presenceData.smallImageKey = "pterodactyl";
     if (document.location.pathname == "/") {
         presenceData.details = "Viewing Servers";
         presenceData.state = "Lookin' at the glory.";
@@ -200,6 +206,11 @@ presence.on("UpdateData", async () => {
   else if (document.location.hostname == "status.sparkedhost.com") {
     presenceData.details = "Server Status";
     presenceData.state = "Who broke it?";
+  }
+
+  else if (document.location.hostname == "altaruk2.sparkedhost.us" || document.location.hostname == "altaruk1.sparkedhost.us" || document.location.hostname == "altar52.sparkedhost.us" || document.location.hostname == "altar57.sparkedhost.us" || document.location.hostname == "web-01.sparkedhost.us" ) {
+    presenceData.details = "Web Hosting";
+    presenceData.state = "Managing cPanel";
   }
 
   if (presenceData.details == null) {
