@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "611668948131512321"
   }),
   strings = presence.getStrings({
@@ -9,31 +9,15 @@ var presence = new Presence({
     largeImageKey: "logo"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector("#dmp_Video");
+  const video: HTMLVideoElement = document.querySelector("#dmp_Video");
   if (video !== null && !isNaN(video.duration)) {
-    var title: any, uploader: any, timestamps: any;
-
-    title = document.querySelector(".VideoInfoTitle__videoTitle___3WLlw");
-    uploader = document.querySelector(".ChannelLine__channelName___3JE1B");
-    timestamps = getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+    const title = document.querySelector(".VideoInfoTitle__videoTitle___3WLlw"),
+      uploader = document.querySelector(".ChannelLine__channelName___3JE1B"),
+      timestamps = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
     presenceData.details =
       title !== null ? (title as HTMLElement).innerText : "Title not found...";
     presenceData.state =
@@ -48,7 +32,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
 
-    presence.setTrayTitle(video.paused ? "" : title.innerText);
+    presence.setTrayTitle(video.paused ? "" : title.textContent);
 
     if (video.paused) {
       delete presenceData.startTimestamp;
@@ -59,7 +43,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, !video.paused);
     }
   } else {
-    var pageData: PresenceData = {
+    const pageData: PresenceData = {
       details: "Browsing..",
       largeImageKey: "logo"
     };
