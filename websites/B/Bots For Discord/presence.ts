@@ -12,8 +12,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing page:";
         if (document.querySelector('head > title').innerHTML.split("|")[0].trim().startsWith('Error')) {
             presenceData.state = document.querySelector('#errortitle').innerHTML.trim() + ' (' + document.querySelector('#errorsubtitle').innerHTML.trim() + ')';
-        }
-        if (window.location.pathname.toLowerCase() == "/") {
+        } else if (window.location.pathname.toLowerCase() == "/") {
             presenceData.state = "Homepage";
         } else if (window.location.pathname.toLowerCase() == '/bots') {
             presenceData.state = "Discord bots";
@@ -49,7 +48,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = 'Viewing a bot:';
             presenceData.state = document.querySelectorAll("div.container #highlight")[0].innerHTML.split("<a")[0].trim();
         }
-    } if (window.location.hostname == 'docs.botsfordiscord.com') {
+    } else if (window.location.hostname == 'docs.botsfordiscord.com') {
         if (window.location.pathname.startsWith("/")) {
             presenceData.details = "API Docs | Viewing page:";
             presenceData.state = document.querySelector("h1 span").innerHTML.trim();
