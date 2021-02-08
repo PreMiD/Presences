@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "in category " +document.title.replace(' | Altearn','');
       if (window.location.pathname.endsWith("category/ag/")) {
         presenceData.details = "Viewing a page:";
-        presenceData.state = "Chronicles";
+        presenceData.state = "General Assembly";
       }
     } else if (window.location.pathname.startsWith("/assemblee-generale-")) {
       presenceData.details = "Viewing an General Assembly";
