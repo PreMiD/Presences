@@ -3,9 +3,9 @@
     "name": "bris",
     "id": "656165298818514946"
   },
-  "service": "BotsForDiscord",
+  "service": "Bots For Discord",
   "description": {
-    "en": "A bot list page where you can share your bots!"
+    "en": "Bots for Discord a page listing the bots for Discord!"
   },
   "url": [
     "docs.botsfordiscord.com",
