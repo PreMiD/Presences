@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
   } else {
     presenceData.details = "Viewing a page:";
     presenceData.state = document.title.replace(' - BuildTheEarth','');
-    if (window.location.pathname.length != 1) presenceData.details = "Viewing a BuildTeams:";
+    if (window.location.pathname.length != 1) presenceData.details = "Viewing a BuildTeam:";
   } 
 
   if (presenceData.details == null) {
