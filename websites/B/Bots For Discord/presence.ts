@@ -47,6 +47,8 @@ presence.on("UpdateData", async () => {
         } else if (window.location.pathname.startsWith("/bot/")) {
             presenceData.details = 'Viewing a bot:';
             presenceData.state = document.querySelectorAll("div.container #highlight")[0].innerHTML.split("<a")[0].trim();
+        } else if (window.location.pathname.startsWith('/bots/search/')) {
+            presenceData.state = "Search results ("+window.location.pathname.split('/search/')[1].trim() || ""+")";
         }
     } else if (window.location.hostname == 'docs.botsfordiscord.com') {
         if (window.location.pathname.startsWith("/")) {
