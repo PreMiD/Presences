@@ -83,6 +83,9 @@ presence.on("UpdateData", async () => {
 		}else if (document.location.pathname.includes("playlist-")) {
 			presenceData.details = "Viewing Page";
 			presenceData.state = document.querySelector("h1.headerContainer__info__title").textContent;
+		}else if (document.location.pathname.includes("collection-")) {
+			presenceData.details = "Viewing Collection";
+			presenceData.state = document.querySelector("h1.c-headingtitle").textContent;
 		}
 	}
 	if (presenceData.details == null) {
