@@ -9,7 +9,8 @@
 	"www.viu.com"
   ],
   "description": {
-    "id": "Over-the-top video services"
+    "id": "Layanan video over-the-top",
+	"en": "Over-the-top video services"
   },
   "service": "Viu",
   "version": "1.0.0",
