@@ -1,19 +1,14 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "612793327510749210"
 });
 
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-
 function logError(name: string, message: string): void {
-  console.log(
-    `%c${name}%cINFO%c ${message}`,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
-    "color: unset;"
+  presence.info(
+    `%c${name}%cINFO%c ${message}`
   );
 }
 
-function stripText(element: HTMLElement, id = "None", log = true): any {
+function stripText(element: HTMLElement, id = "None", log = true) {
   if (element && element.firstChild) {
     return element.firstChild.textContent;
   } else {
@@ -28,13 +23,13 @@ function stripText(element: HTMLElement, id = "None", log = true): any {
   }
 }
 
-var oldUrl, elapsed, state, gameName, gameScore, gamePlace, gameQuestions;
+let oldUrl: string, elapsed: number, state, gameName: string, gameScore: string, gamePlace: string, gameQuestions: string;
 
 presence.on("UpdateData", async () => {
-  var title, info;
+  let title, info;
 
-  const href = window.location.href;
-  const path = window.location.pathname;
+  const href = window.location.href,
+   path = window.location.pathname;
 
   if (oldUrl !== href) {
     oldUrl = href;
@@ -52,15 +47,15 @@ presence.on("UpdateData", async () => {
         document.querySelector(".question-top-bar__Username-sc-1pwisow-1"),
         "Player Name",
         false
-      );
+      ),
 
-      const playerScore = stripText(
+       playerScore = stripText(
         document.querySelector(".question-top-bar__Score-sc-1pwisow-4"),
         "Player Score",
         false
-      );
+      ),
 
-      const playerPlace = stripText(
+       playerPlace = stripText(
         document.querySelector(".rank-text__Rank-sc-1smelag-0 > span"),
         "Player Place",
         false
@@ -191,7 +186,7 @@ presence.on("UpdateData", async () => {
       break;
   }
 
-  var data: PresenceData = {
+  const data: PresenceData = {
     details: title,
     state: info,
     largeImageKey: "kahoot",

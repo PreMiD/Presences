@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "607719679011848220"
-});
-const strings = presence.getStrings({
+}),
+ strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
   live: "presence.activity.live",
@@ -11,20 +11,6 @@ const strings = presence.getStrings({
 function capitalize(text: string): string {
   text = text.toLowerCase();
   return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
 }
 
 let elapsed: number = undefined,
@@ -42,8 +28,8 @@ presence.on("UpdateData", async () => {
     startTimestamp = undefined,
     endTimestamp = undefined;
 
-  const href = window.location.href;
-  const path = window.location.pathname;
+  const href = window.location.href,
+   path = window.location.pathname;
 
   if (href !== oldUrl) {
     oldUrl = href;
@@ -158,12 +144,12 @@ presence.on("UpdateData", async () => {
     video = document.querySelector(".content-video-player");
     if (video) {
       title = document.querySelector(".metadata-area__second-line");
-      const content = document.querySelector(".metadata-area__third-line");
-      const timestamps = getTimestamps(
+      const content = document.querySelector(".metadata-area__third-line"),
+       timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      );
-      const live = timestamps[1] === Infinity;
+      ),
+       live = timestamps[1] === Infinity;
       details = "Watching";
       if (title) {
         details = title.textContent;
@@ -192,12 +178,12 @@ presence.on("UpdateData", async () => {
         );
         const content = document.querySelector(
           "#web-player-app div.PlayerMetadata__subTitle"
-        );
-        const timestamps = getTimestamps(
+        ),
+         timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
-        );
-        const live = timestamps[1] === Infinity;
+        ),
+         live = timestamps[1] === Infinity;
         details = "Watching";
         if (title) {
           details = title.textContent;

@@ -1,61 +1,86 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "671199009674756146"
-});
-var strings = presence.getStrings({
+}),
+ strings = presence.getStrings({
   browse: "presence.activity.browsing",
   search: "presence.activity.searching"
-});
+}),
 
-const getElement = (query: string): string => {
+ getElement = (query: string): string => {
   const element = document.querySelector(query);
   if (element) {
     return element.textContent.replace(/^\s+|\s+$/g, "");
   } else return undefined;
 };
 
-var oldUrl, elapsed;
+let oldUrl: string, elapsed: number;
 
-const statics = {
-  "/": {
-    details: "Browsing"
-  },
-  "/about/": {
-    details: "Viewing",
-    state: "About"
-  },
-  "/faq/": {
-    details: "Viewing",
-    state: "Frequently Asked Questions"
-  },
-  "/terms/": {
-    details: "Viewing",
-    state: "Terms of Service"
-  },
-  "/tos/": {
-    details: "Viewing",
-    state: "Terms of Service"
-  },
-  "/privacy/": {
-    details: "Viewing",
-    state: "Privacy"
-  },
-  "/guidelines/": {
-    details: "Viewing",
-    state: "Guidelines"
-  },
-  "/contact/": {
-    details: "Viewing",
-    state: "Contact"
+function setObject(path: string) {
+  switch (path) {
+    case "/": {
+      return {
+        details: "Browsing"
+      };
+    }
+    
+    case "/about/": {
+      return {
+        details: "Viewing",
+        state: "About"
+      };
+    }
+
+    case "/faq/": {
+      return {
+        details: "Viewing",
+        state: "Frequently Asked Questions"
+      };
+    }
+
+    case "/terms/": {
+      return {
+        details: "Viewing",
+        state: "Terms of Service"
+      };
+    }
+
+    case "/tos/": {
+      return {
+        details: "Viewing",
+        state: "Terms of Service"
+      };
+    }
+    
+    case "/privacy/": {
+      return {
+        details: "Viewing",
+        state: "Privacy"
+      };
+    }
+
+    case "/guidelines/": {
+      return {
+        details: "Viewing",
+        state: "Guidelines"
+      };
+    }
+
+    case "/contact/": {
+      return {
+        details: "Viewing",
+        state: "Contact"
+      };
+    }
   }
-};
+}
 
 presence.on("UpdateData", async () => {
-  const host = location.host;
-  const path = location.pathname.replace(/\/?$/, "/");
-
-  var data: PresenceData = {
-    details: undefined,
-    state: undefined,
+  const host = location.host,
+   path = location.pathname.replace(/\/?$/, "/"),
+   detailsObj = setObject(path),
+   data: PresenceData = {
+    details: detailsObj.details,
+    state: detailsObj.state,
     largeImageKey: "byte",
     smallImageKey: undefined,
     smallImageText: undefined,
@@ -66,10 +91,6 @@ presence.on("UpdateData", async () => {
   if (oldUrl !== path) {
     oldUrl = path;
     elapsed = Math.floor(Date.now() / 1000);
-  }
-
-  if (path in statics) {
-    data = { ...data, ...statics[path] };
   }
 
   if (elapsed) {
