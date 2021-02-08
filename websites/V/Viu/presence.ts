@@ -5,7 +5,7 @@ strings = presence.getStrings({
 	play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-}), browsingStamp = Math.floor(Date.now() / 1000);
+});
 function getTimestamps(
   videoTime: number,
   videoDuration: number
@@ -52,6 +52,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 	}else{
+		var browsingStamp = Math.floor(Date.now() / 1000);
 		presenceData.startTimestamp = browsingStamp;
 		if (document.location.pathname.endsWith("viu_originals")) {
 			presenceData.state = "Viu Originals";
