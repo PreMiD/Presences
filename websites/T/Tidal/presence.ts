@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
         }
       } else if (videoTitle && videoCurrentTime) {
         const videoEndTime: string = (document.querySelector(
-            "#nowPlaying > div.scrollWrapper--2Hy7_ > div > div.leftColumn--3OQ30 > div:nth-child(4) > div > time.css-165d6xj"
+            "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.css-165d6xj"
           ) as HTMLElement).textContent,
           videoCurrentTimestamp: Array<number> = videoCurrentTime
             .split(":")
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
             .split(":")
             .map(Number),
           playingButton: string = (document.querySelector(
-            "#nowPlaying > div.scrollWrapper--2Hy7_ > div > div.leftColumn--3OQ30 > div.row--3oQhD.rowMediaControls--2ERj6 > div:nth-child(2) > div > button.playback-controls__button--white-icon.playbackToggle--3B2S9"
+            "#footerPlayer > div.centerColumn--3fkzm > div > button.playback-controls__button--white-icon.playbackToggle--3B2S9"
           ) as HTMLElement).getAttribute("data-type"),
           repeatOn: string = (document.querySelector(
             "#nowPlaying > div.scrollWrapper--2Hy7_ > div > div.leftColumn--3OQ30 > div.row--3oQhD.rowMediaControls--2ERj6 > div:nth-child(2) > div > button.repeatButton--ONfa5"
