@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "theusaf",
+    "id": "193714715631812608"
+  },
+  "url": [
+    "wanikani.com",
+    "www.wanikani.com",
+    "community.wanikani.com",
+    "knowledge.wanikani.com"
+  ],
+  "description": {
+    "en": "WaniKani is a kanji learning application by Tofugu. 2,000 kanji. 6,000 vocabulary words. In just over a year."
+  },
+  "service": "WaniKani",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/NdlB8M5.png",
+  "thumbnail": "https://i.imgur.com/8OKXkxY.png",
+  "color": "#1BA0ED",
+  "tags": [
+    "education",
+    "japanese",
+    "kanji",
+    "srs",
+    "vocabulary",
+    "language"
+  ],
+  "category": "other"
+}

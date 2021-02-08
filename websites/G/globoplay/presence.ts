@@ -102,7 +102,9 @@ presence.on("UpdateData", async () => {
         (paused = video.paused);
 
       if (document.location.pathname.includes("/programa/")) {
-        title = document.querySelector(".video-info__data-program").textContent;
+        title = document.querySelector(
+          ".video-info__data-program, .playkit-video-info__link-text"
+        ).textContent;
         presenceData.state = document.querySelector(
           ".video-info__data-title"
         ).textContent;
@@ -144,12 +146,12 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "live";
       presenceData.largeImageKey = "tvglobo";
       presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/transmissoes/")) {
+    } else if (document.location.pathname.includes("/ao-vivo/")) {
       const programTitle = document.querySelector(
-        "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-name"
+        "span.playkit-channels-navigation__program-name"
       );
       const programMetadata = document.querySelector(
-        "div.playkit-channels-navigation__program-info.playkit-channels-navigation__current-program > span.playkit-channels-navigation__program-metadata"
+        "span.playkit-channels-navigation__program-metadata"
       );
       if (document.location.pathname.includes("/7339131/")) {
         presenceData.details = "Multishow - " + programTitle.textContent;
@@ -270,6 +272,82 @@ presence.on("UpdateData", async () => {
         presenceData.state = programMetadata.textContent;
         presenceData.smallImageKey = "live";
         presenceData.largeImageKey = "combate";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/9182156/")) {
+        presenceData.details = "CBN São Paulo";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "cbn";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/9182126/")) {
+        presenceData.details = "CBN Rio de Janeiro";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "cbn";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/244881/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Acompanhe a Casa";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/772202/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Acompanhe a Casa 2";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/2255000/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Acompanhe a Casa Extra";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/244890/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Cozinha VIP/Xepa";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/6349747/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Quarto Cordel";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/2254997/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Quarto Colorido";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/244889/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Sala de Estar";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/244887/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Sala da Casa Extra";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/2254996/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Piscina";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/2254993/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Jardim";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
+        presenceData.startTimestamp = browsingStamp;
+      } else if (document.location.pathname.includes("/772205/")) {
+        presenceData.details = "Big Brother Brasil";
+        presenceData.state = "Confessionário";
+        presenceData.smallImageKey = "live";
+        presenceData.largeImageKey = "bbb";
         presenceData.startTimestamp = browsingStamp;
       }
     } else if (document.location.pathname.includes("/canais/")) {

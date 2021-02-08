@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "612437291574755349"
+    clientId: "802958757909889054"
   }),
   capitalize = (text: string): string => {
     const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
@@ -16,7 +16,7 @@ function stripText(element: HTMLElement, id = "None", log = true): string {
   } else {
     if (log)
       presence.error(
-        "An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
+        "An error occurred while stripping data off the page. Please contact Bas950 on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
           id
       );
     return null;
@@ -214,13 +214,13 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     details: title,
     state: info,
     largeImageKey: image
   };
 
-  if (time) data.startTimestamp = elapsed;
+  if (time) presenceData.startTimestamp = elapsed;
 
-  presence.setActivity(data, true);
+  presence.setActivity(presenceData, true);
 });

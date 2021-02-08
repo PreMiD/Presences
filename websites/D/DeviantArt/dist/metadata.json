@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.3",
   "author": {
     "name": "Hans5958",
     "id": "279855717203050496"
@@ -7,9 +7,7 @@
   "service": "DeviantArt",
   "url": [
     "www.deviantart.com",
-    "about.deviantart.com",
     "chat.deviantart.com",
-    "forum.deviantart.com",
     "groups.deviantart.com",
     "portfolio.deviantart.com",
     "shop.deviantart.com",
@@ -18,7 +16,7 @@
     "deviantartads.com",
     "sta.sh"
   ],
-  "version": "1.1.7",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/6ZCPjDK.png",
   "thumbnail": "https://i.imgur.com/zW8OMC7.png",
   "color": "#05cc47",
@@ -33,5 +31,19 @@
   "description": {
     "en": "Founded in August 2000, DeviantArt is the largest online social network for artists and art enthusiasts, and a platform for emerging and established artists to exhibit, promote, and share their works with an enthusiastic, art-centric community."
   },
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "chatChannelNames",
+      "title": "Show chat channel names",
+      "icon": "fas fa-comments",
+      "value": true
+    },
+    {
+      "id": "detailedSettings",
+      "title": "Show detailed settings pages info",
+      "icon": "fas fa-wrench",
+      "value": true
+    }
+  ]
 }

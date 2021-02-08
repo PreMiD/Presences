@@ -14,10 +14,10 @@
     "support.blockchain.com",
     "www.blockchain-status.com"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/rmmWPPP.png",
   "thumbnail": "https://i.imgur.com/1W01XgV.png",
   "color": "#3d89f5",
-  "tags": ["other"],
+  "tags": ["crypto", "mining", "blockchain", "network", "exchange"],
   "category": "other"
 }

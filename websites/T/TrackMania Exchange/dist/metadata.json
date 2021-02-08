@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.1",
+  "$schema": "https://schemas.premid.app/metadata/1.3",
   "author": {
     "name": "Hans5958",
     "id": "279855717203050496"
@@ -18,7 +18,7 @@
     "original.tm-exchange.com",
     "blog.tm-exchange.com"
   ],
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/9OFSS6T.png",
   "thumbnail": "https://i.imgur.com/CKJ2Wqm.png",
   "color": "#c8c8c8",

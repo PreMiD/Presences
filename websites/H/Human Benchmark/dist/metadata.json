@@ -1,0 +1,30 @@
+{
+  "author": {
+    "name": "Striker",
+    "id": "215509157837537280"
+  },
+  "url": "humanbenchmark.com",
+  "description": {
+    "en": "Measure your abilities with brain games and congitive tests."
+  },
+  "service": "Human Benchmark",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/vTQeYvH.png",
+  "thumbnail": "https://i.imgur.com/jDQRXXN.jpg",
+  "color": "#FFA600",
+  "tags": [
+    "games",
+    "tests",
+    "brain",
+    "cognitive"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "stamp",
+      "title": "Show time elapsed",
+      "icon": "fas fa-stopwatch",
+      "value": true
+    }
+  ]
+}

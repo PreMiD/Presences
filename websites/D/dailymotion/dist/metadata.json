@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "TheSlowly",
-    "id": "505071508851523599"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "TheSlowly",
+      "id": "505071508851523599"
+    }
+  ],
   "service": "dailymotion",
   "description": {
     "en": "On dailymotion, you can discover and watch new music, news, sports, and trailers from dailymotion's best creators, brands, and channels",
@@ -11,7 +17,7 @@
     "pt_BR": "No dailymotion, você pode descobrir e assistir novas músicas, noticías, esportes, e trailers dos melhores criadores do dailymotion, marcas e canais"
   },
   "url": "www.dailymotion.com",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/3qXaosP.png",
   "thumbnail": "https://i.imgur.com/9xKEAPt.png",
   "color": "#005CCC",
