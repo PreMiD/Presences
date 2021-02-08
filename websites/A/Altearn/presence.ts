@@ -12,8 +12,37 @@ presence.on("UpdateData", async () => {
   if (privacy) {
     presenceData.details = "Browsing";
   } else {
-    presenceData.details = "Viewing a page:";
-    presenceData.state = document.title.replace(' | Altearn', '');
+    if (window.location.pathname.startsWith("/articles")) {
+      presenceData.details = "Viewing a page:";
+      presenceData.state = "Activities";
+    } else if (window.location.pathname.startsWith("/category/")) {
+      presenceData.details = "Searching an article:";
+      presenceData.state = "in category " +document.title.replace(' | Altearn','');
+      if (window.location.pathname.endsWith("category/ag/")) {
+        presenceData.details = "Viewing a page:";
+        presenceData.state = "Chronicles";
+      }
+    } else if (window.location.pathname.startsWith("/assemblee-generale-")) {
+      presenceData.details = "Viewing an General Assembly";
+      presenceData.state = document.title.replace(' | Altearn','').replace('Assemblée Générale - ','');
+    } else if (window.location.pathname.endsWith("/notre-organisation/")) {
+      presenceData.details = "Viewing a page:";
+      presenceData.state = "Our organisation";
+    } else if (window.location.pathname.startsWith("/") && window.location.pathname.length != 1) {
+      presenceData.details = "Reading an article:";
+      presenceData.state = document.title.replace(' | Altearn','');
+      if (window.location.pathname.includes('/author/')) {
+        presenceData.details = "Looking for an user:";
+        presenceData.state = document.title.replace(' | Altearn','');
+      }
+      if (document.title.includes('Fiche de poste:')) {
+        presenceData.details = "Viewing a place as";
+        presenceData.state = document.title.replace(' | Altearn','').replace('Fiche de poste:','');
+      }
+    } else if (window.location.pathname.length === 1) {
+      presenceData.details = "Viewing a page:";
+      presenceData.state = "Home";
+    }
   }
 
   if (presenceData.details == null) {
