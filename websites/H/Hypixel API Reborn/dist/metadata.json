@@ -10,7 +10,7 @@
     "ru": "Hypixel API • Reborn - единственный парсер Hypixel API для Node.js/Typescript с поддержкой intellisense."
   },
   "url": "hypixel.stavzdev.xyz",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "logo": "https://i.imgur.com/eQzO2nG.png",
   "thumbnail": "https://i.imgur.com/9BpoEmx.png",
   "color": "#ff8c00",
@@ -22,5 +22,16 @@
     "hypixel",
     "api"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "showTimestamps",
+      "title": "Show timestamps",
+      "value": false
+    }
+  ]
 }
