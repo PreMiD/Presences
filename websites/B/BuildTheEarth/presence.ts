@@ -24,8 +24,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     if (sprivacy) presenceData.state = "Map";
     else {
-      let XO = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[0])*10)/10;
-      let OX = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[1])*10)/10;
+      const XO = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[0])*10)/10,
+      OX = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[1])*10)/10;
       presenceData.state = `Map : ${XO} | ${OX}`;
     }
   } else if (window.location.pathname.endsWith("buildteams")) {
