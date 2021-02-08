@@ -10,7 +10,7 @@
   ],
   "description": {
     "id": "Layanan video over-the-top",
-	"en": "Over-the-top video services"
+    "en": "Over-the-top video services"
   },
   "service": "Viu",
   "version": "1.0.0",
