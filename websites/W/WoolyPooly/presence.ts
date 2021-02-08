@@ -3,10 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let currencyTitle: string;
-let currencyEffort: string;
-let effortType: string;
-let wallet24Revenue: string;
+let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
