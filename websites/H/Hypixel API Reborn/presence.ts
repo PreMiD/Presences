@@ -24,9 +24,8 @@ const presence = new Presence({
       await presence.getSetting('lang')
     );
   },
-  browsingStamp = Math.floor(Date.now() / 1000);
-
-const strings: Promise<LangString> = getStrings();
+  browsingStamp = Math.floor(Date.now() / 1000),
+  strings: Promise<LangString> = getStrings();
 presence.on("UpdateData", async () => {
   const route = document.location.hash.split("/"),
     showTimestamps = await presence.getSetting('showTimestamps'),
