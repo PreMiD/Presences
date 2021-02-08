@@ -22,8 +22,12 @@ presence.on("UpdateData", async () => {
   } else if (window.location.pathname.endsWith("map")) {
     presenceData.smallImageKey = "map";
     presenceData.details = "Viewing a page:";
-    presenceData.state = "Map : "+Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[0])*10)/10+' | '+Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[1])*10)/10;
     if (sprivacy) presenceData.state = "Map";
+    else {
+      let XO = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[0])*10)/10;
+      let OX = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[1])*10)/10;
+      presenceData.state = `Map : ${XO} | ${OX}`;
+    }
   } else if (window.location.pathname.endsWith("buildteams")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "BuildTeams";
