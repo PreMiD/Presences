@@ -22,11 +22,11 @@ const presence = new Presence({
         typedef: "hypixelapireborn.typedef"
       },
       await presence.getSetting('lang')
-    )
+    );
   },
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let strings: Promise<LangString> = getStrings();
+const strings: Promise<LangString> = getStrings();
 presence.on("UpdateData", async () => {
   const route = document.location.hash.split("/"),
     showTimestamps = await presence.getSetting('showTimestamps'),
