@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+        "name": "Encrypted",
+        "id": "564434085708038144"
+    },
+    "url": ["tailwindcss.com", "play.tailwindcss.com", "tailwindui.com"],
+    "description": {
+        "en": "A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup."
+    },
+    "service": "Tailwind CSS",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/YGd7RPn.png",
+    "thumbnail": "https://i.imgur.com/zXlg2pe.png",
+    "color": "#06B6D4",
+    "tags": [
+        "website-development",
+        "css"
+    ],
+    "category": "other"
+}
