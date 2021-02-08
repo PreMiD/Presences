@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "VocalZero",
+    "id": "223891083724193792"
+  },
+  "service": "atomicradio",
+  "description": {
+    "en": "Experience the best of the music world and show your friends what you're listening to!"
+  },
+  "url": "atomicradio.eu",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/aNN2w0z.png",
+  "thumbnail": "https://i.imgur.com/DHcDFc7.png",
+  "color": "#954fb4",
+  "tags": [
+    "atomicradio",
+    "music",
+    "radio",
+    "webradio"
+  ],
+  "category": "music"
+}

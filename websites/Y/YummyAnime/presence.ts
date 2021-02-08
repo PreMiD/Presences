@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "639578071338582021"
   }),
   strings = presence.getStrings({
@@ -6,47 +6,47 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000),
+  title: Element,
+  air: Element,
+  iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  lastPlaybackState: boolean = null,
+  playback,
+  search: Element;
 
-var title: any, air: any;
-var iFrameVideo: boolean, currentTime: any, duration: any, paused: any;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+    };
+  }) => {
+    playback = data.iframe_video.dur !== null ? true : false;
 
-var lastPlaybackState = null;
-var playback;
-
-var search: any;
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
-
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    if (playback) {
+      iFrameVideo = data.iframe_video.iFrameVideo;
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.dur;
+      paused = data.iframe_video.paused;
+    }
+    if (lastPlaybackState != playback) {
+      lastPlaybackState = playback;
+      browsingStamp = Math.floor(Date.now() / 1000);
+    }
   }
-  if (lastPlaybackState != playback) {
-    lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
-  }
-});
+);
 
 presence.on("UpdateData", async () => {
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+  const timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
     presenceData: PresenceData = {
       largeImageKey: "ya"
     };
@@ -61,9 +61,9 @@ presence.on("UpdateData", async () => {
       presenceData.endTimestamp = timestamps[1];
 
       title = document.querySelector(
-        "body > div.content-block.container.clearfix > div.content > div > h1"
+        "body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
       );
-      presenceData.details = title.innerText;
+      presenceData.details = title.textContent;
 
       air = document.querySelector(
         "body > div.content-block.container.clearfix > div.content > div > ul.content-main-info > li:nth-child(3) > font > font"
@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 
       if (air !== null) {
         presenceData.state =
-          "Aired on: " + air.innerText.replace("AIRED :", "");
+          "Aired on: " + air.textContent.replace("AIRED :", "");
       }
 
       if (paused) {
@@ -93,9 +93,9 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector(
-        "body > div.content-block.container.clearfix > div.content > div > h1"
+        "body > div#main-page > div.content-block.container.clearfix > div.content > div > div.content-page.anime-page > h1"
       );
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       presenceData.smallImageKey = "reading";
     }
   } else if (document.location.pathname.includes("/movie")) {
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
       "body > div.content-block.container.clearfix > div.search-block-wrapper.main-search.clearfix > form > input.search"
     );
     presenceData.details = "Searching for:";
-    presenceData.state = search.value;
+    presenceData.state = search.textContent;
     presenceData.smallImageKey = "search";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/ongoing")) {
@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
         "body > div.content-block.container.clearfix > div.content > div > div.post-title"
       );
     }
-    presenceData.state = title.innerText;
+    presenceData.state = title.textContent;
     presenceData.smallImageKey = "reading";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/post")) {

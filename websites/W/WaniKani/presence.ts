@@ -140,7 +140,9 @@ presence.on("UpdateData", () => {
                 .textContent,
               completed: number = +document.querySelector("#completed-count")
                 .textContent,
-              totalStats: NodeList = document.querySelectorAll("#stats .kanji"),
+              totalStats: NodeList = document.querySelectorAll(
+                "#stats li > span"
+              ),
               characterType: string = document.querySelector("#main-info")
                 .className;
             details = "Learning Lessons";
@@ -161,7 +163,9 @@ presence.on("UpdateData", () => {
                 .className,
               completed: number = +document.querySelector("#completed-count")
                 .textContent,
-              totalStats: NodeList = document.querySelectorAll("#stats .kanji");
+              totalStats: NodeList = document.querySelectorAll(
+                "#stats li > span"
+              );
             details = "Practicing Lessons";
             state = `${characterText} | ${capitalize(
               characterType

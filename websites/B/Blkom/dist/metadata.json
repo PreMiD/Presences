@@ -1,7 +1,7 @@
 {
   "author": {
     "name": "Ghaith M. AlHallak",
-    "id": "414473055327354880"
+    "id": "448318357540962314"
   },
   "url": ["blkom.com", "animeblkom.net", "www.blkom.com", "www.animeblkom.net"],
   "description": {
@@ -9,7 +9,7 @@
     "ar_SA": "أنمي بالكوم - موقع عربي متخصص لمشاهدة وتحميل الانمي المترجم باللغة العربية ومعرفة آخر أخبار ومستجدات عالم الأنمي."
   },
   "service": "Blkom",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/XW4ouq1.png",
   "thumbnail": "https://i.imgur.com/skws0oS.png",
   "color": "#FF6161",
