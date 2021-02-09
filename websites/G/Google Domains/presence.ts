@@ -1,12 +1,12 @@
 const presence = new Presence({
   clientId: "735878480318955660"
-});
-const strings = presence.getStrings({
+}),
+ strings = presence.getStrings({
   browse: "presence.activity.browsing",
   search: "presence.activity.searching"
-});
+}),
 
-const getElement = (query: string): string | undefined => {
+ getElement = (query: string): string | undefined => {
   return document.querySelector(query)?.textContent.trim();
 };
 
@@ -21,11 +21,11 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const path = location.pathname.replace(/\/?$/, "/");
+  const path = location.pathname.replace(/\/?$/, "/"),
 
-  const showDomain = await presence.getSetting("domain");
-  const showSearch = await presence.getSetting("search");
-  const showTimestamps = await presence.getSetting("timestamp");
+   showDomain = await presence.getSetting("domain"),
+   showSearch = await presence.getSetting("search"),
+   showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
     details: undefined,
