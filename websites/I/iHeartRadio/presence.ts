@@ -110,6 +110,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data);
     }
   } else {
-    presence.clearActivity();
+    data.details = "Browsing..."
+    presence.setActivity(data);
   }
 });
