@@ -1,9 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "619455837198483459"
-});
+}),
+ browsingStamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var username;
+let username: string;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     data.details = "Browsing Featured Manga";
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/manga")) {
-    var randomManga = document.querySelector(".card-header span.mx-1")
+    const randomManga = document.querySelector(".card-header span.mx-1")
       .textContent;
     data.details = "Viewing a Random Manga";
     data.state = randomManga;
@@ -59,14 +59,14 @@ presence.on("UpdateData", async () => {
       data.details = "Browsing Manga";
       data.startTimestamp = browsingStamp;
     } else {
-      var manga = document.querySelector(".card-header span.mx-1").textContent;
+      const manga = document.querySelector(".card-header span.mx-1").textContent;
       data.details = "Viewing a Manga:";
       data.state = manga;
       data.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/chapter")) {
-    var title = document.querySelector(".manga-link").textContent;
-    var chapter = (document.querySelector(
+    const title = document.querySelector(".manga-link").textContent,
+     chapter = (document.querySelector(
       "head > title"
     ) as HTMLElement).innerText
       .replace(title + " -", "")
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
     data.state = chapter;
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.startsWith("/genre")) {
-    var genre = document.querySelector(".card-header").textContent.trim();
+    const genre = document.querySelector(".card-header").textContent.trim();
     data.details = "Viewing Genre (" + genre + ")";
     data.startTimestamp = browsingStamp;
   } else if (document.location.pathname.endsWith("/history")) {
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.startsWith("/forum")) {
     if (document.location.pathname.includes("/forum/")) {
-      var forum = document.querySelector(".breadcrumb-item:last-child")
+      const forum = document.querySelector(".breadcrumb-item:last-child")
         .textContent;
       data.details = "Viewing a Forum";
       data.state = forum;
@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
       data.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/thread")) {
-    var thread = document.querySelector(".breadcrumb-item:last-child")
+    const thread = document.querySelector(".breadcrumb-item:last-child")
       .textContent;
     data.details = "Viewing a thread";
     data.state = thread;
