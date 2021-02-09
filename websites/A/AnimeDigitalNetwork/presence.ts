@@ -45,9 +45,9 @@ presence.on("UpdateData", async () => {
         data: PresenceData = {
           details: "Browsing...",
           state: title,
-          largeImageKey: "logo",
+          largeImageKey: "logo"
         };
-      presence.setActivity(data)
+      presence.setActivity(data);
   } else {
       const browsingPresence: PresenceData = {
         details: "Browsing...",
