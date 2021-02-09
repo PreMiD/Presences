@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     },
     browsingStamp = Math.floor(Date.now() / 1000), 
     privacy = await presence.getSetting("privacy"),
-    sprivacy = await presence.getSetting("sprivacy");
+    pmap = await presence.getSetting("pmap");
     
   presenceData.startTimestamp = browsingStamp;
   if (privacy) {
@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
   } else if (window.location.pathname.endsWith("map")) {
     presenceData.smallImageKey = "map";
     presenceData.details = "Viewing a page:";
-    if (sprivacy) presenceData.state = "Map";
+    if (pmap) presenceData.state = "Map";
     else {
       const XO = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[0])*10)/10,
       OX = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[1])*10)/10;
