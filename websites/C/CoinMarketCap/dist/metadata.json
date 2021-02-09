@@ -1,0 +1,23 @@
+{
+    "author": {
+      "name": "Jonathan",
+      "id": "389388300302942208"
+    },
+    "url": [
+      "coinmarketcap.com",
+      "www.coinmarketcap.com"
+    ],
+    "description": {
+      "en": "Discord Rich Presence for the crypto montering site CoinMarketCap."
+    },
+    "service": "CoinMarketCap",
+    "version": "1.0",
+    "logo": "https://i2.wp.com/blog.coinmarketcap.com/wp-content/uploads/2019/06/wp-favicon.png",
+    "thumbnail": "https://s2.coinmarketcap.com/static/cloud/img/splash_600x315_1.png",
+    "color": "#1A4AB6",
+    "category": "other",
+    "tags": [
+        "Cryptocurrency",
+        "Price montering"
+    ]
+}
