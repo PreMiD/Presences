@@ -8,7 +8,7 @@
       "www.coinmarketcap.com"
     ],
     "description": {
-      "en": "Discord Rich Presence for the crypto montering site CoinMarketCap."
+      "en": "Discord Rich Presence for the crypto monitoring site CoinMarketCap."
     },
     "service": "CoinMarketCap",
     "version": "1.0",

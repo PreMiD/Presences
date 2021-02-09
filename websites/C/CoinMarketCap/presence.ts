@@ -1,23 +1,31 @@
 const presence = new Presence({
     clientId: "808621217648738325"
   });
-  
+
+  function getLastPath(path: string) {
+    const vals = path.split("/");
+    return vals[vals.length - 2];
+  }
+
   presence.on("UpdateData", () => {
     const presenceData: PresenceData = {
       largeImageKey: "logo",
       smallImageKey: "logo-outline",
       smallImageText: "CoinMarketCap",
-      details: "Montering",
-      state: "Cryptocurrencies"
-    }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
+      details: "Monitoring",
+      state: "Crytocurrencies"
+    }
+
+    if (window.location.pathname.includes("/currencies")) {
+      presenceData.details = "Monitoring";
+      presenceData.state = getLastPath(window.location.pathname).toUpperCase();
+    }
 
     if (presenceData.details == null) {
-      //This will fire if you do not set presence details
-      presence.setTrayTitle(); //Clears the tray title for mac users
-      presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
+      presence.setTrayTitle();
+      presence.setActivity();
     } else {
-      //This will fire if you set presence details
-      presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
+      presence.setActivity(presenceData);
     }
 
 });
