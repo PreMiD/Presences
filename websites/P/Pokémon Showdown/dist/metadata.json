@@ -16,7 +16,10 @@
   "description": {
     "en": "Pokémon Showdown is a Pokémon battle simulator. Play Pokémon battles online! Play with randomly generated teams, or build your own! Fully animated!"
   },
-  "url": "play.pokemonshowdown.com",
+  "url": [
+    "pokemonshowdown.com",
+    "play.pokemonshowdown.com"
+  ],
   "version": "1.1.7",
   "logo": "https://i.imgur.com/p3ZpoFY.png",
   "thumbnail": "https://i.imgur.com/q4nY8bG.png",
