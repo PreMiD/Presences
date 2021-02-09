@@ -26,7 +26,7 @@
         "value": false
       },
       {
-        "id": "sprivacy",
+        "id": "pmap",
         "title": "Hide map position",
         "icon": "fad fa-user-secret",
         "value": false
