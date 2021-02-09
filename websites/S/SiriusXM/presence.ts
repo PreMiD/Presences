@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = channelName.innerText + " - Xtra Channel";
   } else if (
     document.querySelector("p.now-playing-info-label__text").textContent ===
-    "On Demand Episode"
+    "Episode"
   ) {
     songName = document.querySelector("p.track-name");
     songArtist = document.querySelector("p.show-title");
