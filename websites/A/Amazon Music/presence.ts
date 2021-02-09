@@ -58,6 +58,10 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data, !paused);
     }
   } else {
-    presence.clearActivity();
+    const data: PresenceData = {
+      details: "Browsing...",
+      largeImageKey: "logo"
+    };
+    presence.setActivity(data);
   }
 });
