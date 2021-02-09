@@ -1,24 +1,10 @@
 const presence = new Presence({
-    clientId: "620432609847148544"
+    clientId: "808762696023146578"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 presence.on("UpdateData", async () => {
   const video: HTMLVideoElement = document.querySelector(
@@ -26,14 +12,14 @@ presence.on("UpdateData", async () => {
   );
 
   if (video && !isNaN(video.duration)) {
-    var title = document.querySelector("._1fHNK").textContent;
-    var uploader = document.querySelector(".js-user_link").textContent;
-    var timestamps = getTimestamps(
+    const title = document.querySelector("._1fHNK").textContent,
+     uploader = document.querySelector(".js-user_link").textContent,
+     timestamps = presence.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
-    );
+    ),
 
-    const data: PresenceData = {
+     data: PresenceData = {
       details: title,
       state: uploader,
       largeImageKey: "vimeo-logo",
@@ -56,7 +42,7 @@ presence.on("UpdateData", async () => {
   } else {
     const browsingPresence: PresenceData = {
       details: "Browsing...",
-      largeImageKey: "vimeo-logo"
+      largeImageKey: "logo"
     };
     presence.setActivity(browsingPresence);
   }
