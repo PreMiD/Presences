@@ -1,12 +1,16 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
   "contributors": [
     {
       "name": "Aya",
       "id": "256422547556401152"
+    },
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
     }
   ],
   "service": "MangaDex",
