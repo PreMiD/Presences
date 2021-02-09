@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
     else presenceData.details = await getStringFromSettings(presence, "viewing_docs", {name: name});
 
     if (loc.match(/search/g)) { // if searching on docs
-      let term = loc.replace(/([a-z0-9-/:]+)[.]readthedocs[.](io|org)\/.+\/.+\/search.*\?q\=([^&]+).*/g, "$3"); // get search term
+      let term = loc.replace(/([a-z0-9-/:]+)[.]readthedocs[.](io|org)\/.+\/.+\/search.*\?q=([^&]+).*/g, "$3"); // get search term
 
       if (term.endsWith("#")) term = term.slice(0, -1); // remove trailing hashtag
       if (!loc.endsWith("/search") && !loc.endsWith("/search.html")) presenceData.state = await getStringFromSettings(presence, "searching_for", {term: term});
