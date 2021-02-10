@@ -84,11 +84,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname === "/legal") {
     presenceData.details = "Viewing the";
     presenceData.state = "Legal Information";
-    presenceData.smallImageKey = "reading"
+    presenceData.smallImageKey = "reading";
   } else if (document.location.pathname === "/corporate-governance") {
     presenceData.details = "Reading about";
     presenceData.state = "Corporate Governance";
-    presenceData.smallImageKey = "reading"
+    presenceData.smallImageKey = "reading";
   } else if (document.location.pathname === "/supersecretpage") {
     presenceData.details = "Viewing a";
     presenceData.state = "Super Secret Page";
