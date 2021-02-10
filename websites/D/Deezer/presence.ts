@@ -1,39 +1,45 @@
 const presence = new Presence({
-  clientId: "607651992567021580"
-}), strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  live: "presence.activity.live"
-});
+    clientId: "607651992567021580"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    live: "presence.activity.live"
+  });
 
-function parseAudioTimestamps(audioTime: string, audioDuration: string): Array<number> {
+function parseAudioTimestamps(
+  audioTime: string,
+  audioDuration: string
+): Array<number> {
   const splitAudioTime = audioTime.split(":"),
     splitAudioDuration = audioDuration.split(":"),
-    parsedAudioTime = parseInt(splitAudioTime[0]) * 60 + parseInt(splitAudioTime[1]),
-    parsedAudioDuration = parseInt(splitAudioDuration[0]) * 60 + parseInt(splitAudioDuration[1]),
+    parsedAudioTime =
+      parseInt(splitAudioTime[0]) * 60 + parseInt(splitAudioTime[1]),
+    parsedAudioDuration =
+      parseInt(splitAudioDuration[0]) * 60 + parseInt(splitAudioDuration[1]),
     startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+    endTime =
+      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 let live: boolean,
- prevLive: boolean, 
- elapsed: number, 
- author: string, 
- title: string, 
- timestamps: number[],
- parsedTimestamps: Array<number>;
+  prevLive: boolean,
+  elapsed: number,
+  author: string,
+  title: string,
+  timestamps: number[],
+  parsedTimestamps: Array<number>;
 
 presence.on("UpdateData", async () => {
   const player = document.querySelector(".page-player");
 
   if (player) {
     const paused =
-      document.querySelector(
-        ".svg-icon-group-item:nth-child(3) .svg-icon-pause"
-      ) === null,
-
-     on_air = document.querySelector(".track-label");
+        document.querySelector(
+          ".svg-icon-group-item:nth-child(3) .svg-icon-pause"
+        ) === null,
+      on_air = document.querySelector(".track-label");
 
     if (on_air && on_air.textContent == "ON AIR") {
       live = true;
@@ -49,11 +55,14 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(".track-link:nth-child(1)").textContent;
       author = document.querySelector(".track-link:nth-child(2)").textContent;
       const audioTime = document.querySelector(".slider-counter-current")
-        .textContent,
-       audioDuration = document.querySelector(".slider-counter-max")
-        .textContent;
+          .textContent,
+        audioDuration = document.querySelector(".slider-counter-max")
+          .textContent;
       parsedTimestamps = parseAudioTimestamps(audioTime, audioDuration);
-      timestamps = presence.getTimestamps(parsedTimestamps[0], parsedTimestamps[1]);
+      timestamps = presence.getTimestamps(
+        parsedTimestamps[0],
+        parsedTimestamps[1]
+      );
     } else {
       title = document.querySelector(".marquee-content").textContent;
       author = "On Air";
@@ -82,7 +91,7 @@ presence.on("UpdateData", async () => {
 
     if (timestamps[0] === timestamps[1]) {
       let details = "Browsing...",
-       state = undefined;
+        state = undefined;
 
       const header = document.querySelector("div.header-infos.ellipsis > h1"),
         playlist = document.querySelector("#page_naboo_playlist");

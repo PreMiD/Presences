@@ -1,15 +1,14 @@
 const presence = new Presence({
-  clientId: "735588731637203080"
-}),
- strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  browse: "presence.activity.browsing"
-}),
-
- getElement = (query: string): string | undefined => {
-  return document.querySelector(query)?.textContent;
-};
+    clientId: "735588731637203080"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browse: "presence.activity.browsing"
+  }),
+  getElement = (query: string): string | undefined => {
+    return document.querySelector(query)?.textContent;
+  };
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href;
@@ -43,12 +42,10 @@ const statics = {
 
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
-
-   showSong = await presence.getSetting("song"),
-   showTimestamps = await presence.getSetting("timestamp"),
-
-   song: HTMLVideoElement = document.querySelector("#audioctrl"),
-   songPlaying = song ? !song.paused : false;
+    showSong = await presence.getSetting("song"),
+    showTimestamps = await presence.getSetting("timestamp"),
+    song: HTMLVideoElement = document.querySelector("#audioctrl"),
+    songPlaying = song ? !song.paused : false;
 
   let data: PresenceData = {
     details: undefined,

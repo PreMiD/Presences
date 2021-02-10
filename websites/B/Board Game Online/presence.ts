@@ -1,15 +1,15 @@
 const presence = new Presence({
-  clientId: "684570342085099546"
-}),
- strings = presence.getStrings({
-  browse: "presence.activity.browsing"
-}),
- getElement = (query: string): string => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return undefined;
-};
+    clientId: "684570342085099546"
+  }),
+  strings = presence.getStrings({
+    browse: "presence.activity.browsing"
+  }),
+  getElement = (query: string): string => {
+    const element = document.querySelector(query);
+    if (element) {
+      return element.textContent.replace(/^\s+|\s+$/g, "");
+    } else return undefined;
+  };
 
 function setObject(path: string) {
   switch (path) {
@@ -18,7 +18,7 @@ function setObject(path: string) {
         details: "Browsing"
       };
     }
-    
+
     case "forgot_login": {
       return {
         details: "Forgot Login"
@@ -85,10 +85,10 @@ function setObject(path: string) {
         details: "Viewing",
         state: "Privacy Policy"
       };
-    } 
+    }
 
     case "contact": {
-      return  {
+      return {
         details: "Viewing",
         state: "Contact"
       };
@@ -105,16 +105,17 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "boardgameonline"
-  },
-   host = location.host,
-   path = location.pathname,
-   query = location.search,
-   queryString = query && query.split("page=")[1].split("&")[0],
-   detailsObj = setObject(path);
-  
+      largeImageKey: "boardgameonline"
+    },
+    host = location.host,
+    path = location.pathname,
+    query = location.search,
+    queryString = query && query.split("page=")[1].split("&")[0],
+    detailsObj = setObject(path);
+
   if (host === "www.boardgame-online.com") {
-    if (path || queryString) data.details = detailsObj.details, data.state = detailsObj.state;
+    if (path || queryString)
+      (data.details = detailsObj.details), (data.state = detailsObj.state);
 
     const header = getElement(".page_wrapper.show > .page_content > h2");
     if (header !== undefined) {
