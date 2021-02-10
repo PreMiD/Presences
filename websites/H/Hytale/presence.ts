@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Video";
     } else if (document.location.hash.includes("#clips")) {
       presenceData.state = "Clip";
-    };
+    }
   } else if (document.location.pathname === "/game") {
     presenceData.details = "Learning more about";
     presenceData.state = "the game";
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.hash === "#press") {
       presenceData.details = "Viewing the";
       presenceData.state = "Press information";
-    };
+    }
   } else if (document.location.pathname === "/cookie-policy") {
     presenceData.details = "Reading the Cookie Policy";
     presenceData.smallImageKey = "reading";
@@ -76,28 +76,31 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Policy updates";
     } else if (document.location.hash === "#contact-us") {
       presenceData.state = "Contact us";
-    };
+    }
   } else if (document.location.pathname === "/privacy") {
     presenceData.details = "Viewing the";
     presenceData.state = "Privacy Policy";
+    presenceData.smallImageKey = "reading"
   } else if (document.location.pathname === "/legal") {
     presenceData.details = "Viewing the";
     presenceData.state = "Legal Information";
+    presenceData.smallImageKey = "reading"
   } else if (document.location.pathname === "/corporate-governance") {
     presenceData.details = "Reading about";
     presenceData.state = "Corporate Governance";
+    presenceData.smallImageKey = "reading"
   } else if (document.location.pathname === "/supersecretpage") {
     presenceData.details = "Viewing a";
     presenceData.state = "Super Secret Page";
   } else {
     presenceData.details = "Viewing an";
     presenceData.state = "Unknown page";
-  };
+  }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
-  };
+  }
 });
