@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname === "/privacy") {
     presenceData.details = "Viewing the";
     presenceData.state = "Privacy Policy";
-    presenceData.smallImageKey = "reading"
+    presenceData.smallImageKey = "reading";
   } else if (document.location.pathname === "/legal") {
     presenceData.details = "Viewing the";
     presenceData.state = "Legal Information";
