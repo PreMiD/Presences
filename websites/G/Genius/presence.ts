@@ -11,6 +11,7 @@ interface LangStrings {
   viewLyrics: string;
   home: string;
   viewAlbum: string;
+  buttonAlbum: string;
 }
 
 const presence = new Presence({
@@ -31,7 +32,8 @@ const presence = new Presence({
         lyrics: "genius.lyrics",
         viewLyrics: "genius.viewLyrics",
         home: "genius.viewHome",
-        viewAlbum: "genius.viewAlbum"
+        viewAlbum: "genius.viewAlbum",
+        buttonAlbum: "general.buttonViewAlbum"
       },
       await presence.getSetting("lang")
     );
@@ -78,6 +80,13 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "h1.header_with_cover_art-primary_info-title"
     ).textContent;
+    if (buttons)
+      presenceData.buttons = [
+        {
+          label: (await strings).buttonAlbum,
+          url: document.URL
+        }
+      ];
   } else if (document.querySelector(".song_body-lyrics") !== null) {
     const song = document
         .querySelector("h1.header_with_cover_art-primary_info-title")
