@@ -12,26 +12,28 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const live: boolean =
-    document.querySelector(".MovieTitle__Title-s181dg2v-4") != null,
-   video: HTMLVideoElement = document.querySelector(
-    live ? ".openrec-video" : "#capture-play"
-  );
+      document.querySelector(".MovieTitle__Title-s181dg2v-4") != null,
+    video: HTMLVideoElement = document.querySelector(
+      live ? ".openrec-video" : "#capture-play"
+    );
   if (video !== null && !isNaN(video.duration)) {
     const title = document.querySelector(
-      live
-        ? ".MovieTitle__Title-s181dg2v-4"
-        : ".Component__CaptureTitle-s1nip9ch-16"
-    ),
-    game = document.querySelector(
-      live ? ".TagButton__Button-otjf40-0" : ".text-hover"
-    ),
-    timestamps = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+        live
+          ? ".MovieTitle__Title-s181dg2v-4"
+          : ".Component__CaptureTitle-s1nip9ch-16"
+      ),
+      game = document.querySelector(
+        live ? ".TagButton__Button-otjf40-0" : ".text-hover"
+      ),
+      timestamps = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
     presenceData.details =
-      title !== null ? (title as HTMLElement).textContent : "Title not found...";
+      title !== null
+        ? (title as HTMLElement).textContent
+        : "Title not found...";
     presenceData.state =
       game !== null ? (game as HTMLElement).textContent : "Game not found...";
     presenceData.largeImageKey = "logo";
