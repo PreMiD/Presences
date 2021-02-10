@@ -1,11 +1,6 @@
 const presence = new Presence({
   clientId: "809083630117978123"
 }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-    //You can use this to get translated strings in their browser language
-  }),
   browsingStamp = Math.round(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -18,15 +13,13 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the main page";
   } else if (document.location.pathname === "/news") {
     presenceData.details = "Browsing Blog Posts";
-    // details: "Browsing Page Name", //The upper section of the presence text
-    // state: "Reading section A", //The lower section of the presence text
   } else if (document.location.pathname.includes("/news/archive/")) {
     presenceData.details = "Browsing Blog Archives";
     presenceData.state = `From ${document.querySelector(".subHeading").textContent}`;
   } else if (document.location.pathname.includes("/news/")) {
     presenceData.details = "Reading Blog Post";
     presenceData.state = document.querySelector(".post__heading").textContent;
-    presenceData.smallImageKey = "reading"
+    presenceData.smallImageKey = "reading";
   } else if (document.location.pathname === "/media") {
     presenceData.details = "Browsing Hytale media";
     if (document.location.hash.includes("#screenshots")) {
@@ -47,7 +40,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "the game";
   } else if (document.location.pathname === "/community") {
     presenceData.details = "Viewing the";
-    presenceData.state = "Community page"
+    presenceData.state = "Community page";
   } else if (document.location.pathname === "/jobs") {
     presenceData.details = "Viewing Job Openings";
   } else if (document.location.pathname.includes("/jobs/")) {
@@ -65,7 +58,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.hash === "#press") {
       presenceData.details = "Viewing the";
       presenceData.state = "Press information";
-    }
+    };
   } else if (document.location.pathname === "/cookie-policy") {
     presenceData.details = "Reading the Cookie Policy";
     presenceData.smallImageKey = "reading";
@@ -82,29 +75,29 @@ presence.on("UpdateData", async () => {
     } else if (document.location.hash === "#policy-updates") {
       presenceData.state = "Policy updates";
     } else if (document.location.hash === "#contact-us") {
-      presenceData.state = "Contact us"
-    }
+      presenceData.state = "Contact us";
+    };
   } else if (document.location.pathname === "/privacy") {
     presenceData.details = "Viewing the";
-    presenceData.state = "Privacy Policy"
+    presenceData.state = "Privacy Policy";
   } else if (document.location.pathname === "/legal") {
     presenceData.details = "Viewing the";
-    presenceData.state = "Legal Information"
+    presenceData.state = "Legal Information";
   } else if (document.location.pathname === "/corporate-governance") {
     presenceData.details = "Reading about";
     presenceData.state = "Corporate Governance";
   } else if (document.location.pathname === "/supersecretpage") {
     presenceData.details = "Viewing a";
-    presenceData.state = "Super Secret Page"
+    presenceData.state = "Super Secret Page";
   } else {
     presenceData.details = "Viewing an";
     presenceData.state = "Unknown page";
-  }
+  };
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
-  }
+  };
 });
