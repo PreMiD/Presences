@@ -54,7 +54,7 @@ const presence = new Presence({
         privacy: "general.privacy",
         search: "general.searchFor",
         buttonViewServer: "namemc.buttonViewServer",
-        buttonViewProfile: "namemc.buttonViewProfile",
+        buttonViewProfile: "general.buttonViewProfile",
         viewSkin: "namemc.viewSkin"
       },
       await presence.getSetting("lang")
