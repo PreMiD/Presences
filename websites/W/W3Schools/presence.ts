@@ -1,15 +1,15 @@
 const presence = new Presence({
-  clientId: "630239297521319953"
-}),
- capitalize = (text: string): string => {
-  const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
-  return texts
-    .map((str) => {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    })
-    .join(" ");
-},
- whitelist = ["HTML", "CSS", "SQL", "PHP", "W3.CSS", "JQUERY", "XML"];
+    clientId: "630239297521319953"
+  }),
+  capitalize = (text: string): string => {
+    const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
+    return texts
+      .map((str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      })
+      .join(" ");
+  },
+  whitelist = ["HTML", "CSS", "SQL", "PHP", "W3.CSS", "JQUERY", "XML"];
 
 let elapsed: number, oldUrl: string;
 
@@ -23,8 +23,8 @@ presence.on("UpdateData", () => {
   }
 
   const language = document.querySelector(".w3-bar-item.w3-button.active"),
-   lesson = document.querySelector("#main > h1"),
-   exercise = document.querySelector("#completedExercisesNo");
+    lesson = document.querySelector("#main > h1"),
+    exercise = document.querySelector("#completedExercisesNo");
 
   if (language) {
     details = "Learning " + capitalize(language.textContent.toLowerCase());

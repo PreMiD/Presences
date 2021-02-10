@@ -3,9 +3,7 @@ const presence = new Presence({
 });
 
 function logError(name: string, message: string): void {
-  presence.info(
-    `%c${name}%cINFO%c ${message}`
-  );
+  presence.info(`%c${name}%cINFO%c ${message}`);
 }
 
 function stripText(element: HTMLElement, id = "None", log = true) {
@@ -23,13 +21,19 @@ function stripText(element: HTMLElement, id = "None", log = true) {
   }
 }
 
-let oldUrl: string, elapsed: number, state, gameName: string, gameScore: string, gamePlace: string, gameQuestions: string;
+let oldUrl: string,
+  elapsed: number,
+  state,
+  gameName: string,
+  gameScore: string,
+  gamePlace: string,
+  gameQuestions: string;
 
 presence.on("UpdateData", async () => {
   let title, info;
 
   const href = window.location.href,
-   path = window.location.pathname;
+    path = window.location.pathname;
 
   if (oldUrl !== href) {
     oldUrl = href;
@@ -44,22 +48,20 @@ presence.on("UpdateData", async () => {
       info = "Idling";
 
       const playerName = stripText(
-        document.querySelector(".question-top-bar__Username-sc-1pwisow-1"),
-        "Player Name",
-        false
-      ),
-
-       playerScore = stripText(
-        document.querySelector(".question-top-bar__Score-sc-1pwisow-4"),
-        "Player Score",
-        false
-      ),
-
-       playerPlace = stripText(
-        document.querySelector(".rank-text__Rank-sc-1smelag-0 > span"),
-        "Player Place",
-        false
-      );
+          document.querySelector(".question-top-bar__Username-sc-1pwisow-1"),
+          "Player Name",
+          false
+        ),
+        playerScore = stripText(
+          document.querySelector(".question-top-bar__Score-sc-1pwisow-4"),
+          "Player Score",
+          false
+        ),
+        playerPlace = stripText(
+          document.querySelector(".rank-text__Rank-sc-1smelag-0 > span"),
+          "Player Place",
+          false
+        );
 
       if (playerName) {
         gameName = playerName;

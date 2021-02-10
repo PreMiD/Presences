@@ -8,18 +8,18 @@ enum PageType {
 }
 
 const capitalize = (text: Array<string>): string => {
-  return text
-    .map((str) => {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    })
-    .join(" ");
-},
- parse = (path: string): Array<string> => {
-  path = path.replace("/", "");
-  const split: Array<string> = path.split("-");
+    return text
+      .map((str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      })
+      .join(" ");
+  },
+  parse = (path: string): Array<string> => {
+    path = path.replace("/", "");
+    const split: Array<string> = path.split("-");
 
-  return [split[0], capitalize(split.slice(1))];
-};
+    return [split[0], capitalize(split.slice(1))];
+  };
 
 let elapsed: number, oldUrl: string;
 
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
     state = undefined;
 
   const startTimestamp = elapsed,
-   path = window.location.pathname;
+    path = window.location.pathname;
 
   if (path === "/") {
     details = "Browsing...";
@@ -54,11 +54,11 @@ presence.on("UpdateData", async () => {
     }
   } else {
     const playlists = document.querySelector(".playlists-queue-wrapper"),
-     breadcrumb = document.querySelector(".pane-content > .breadcrumb > ol"),
-     breadcrumb_last = document.querySelector(
-      ".pane-content > .breadcrumb > ol > li:last-child > span"
-    ),
-     difficulty = document.querySelector("a.active");
+      breadcrumb = document.querySelector(".pane-content > .breadcrumb > ol"),
+      breadcrumb_last = document.querySelector(
+        ".pane-content > .breadcrumb > ol > li:last-child > span"
+      ),
+      difficulty = document.querySelector("a.active");
     if (breadcrumb && breadcrumb_last && difficulty) {
       details = "Viewing Jigsaw Puzzle";
       state = `${breadcrumb_last.textContent} (${difficulty.textContent})`;
@@ -70,8 +70,8 @@ presence.on("UpdateData", async () => {
       state = "Jigsaw Puzzles";
     } else {
       const parsedData = parse(path),
-       type = parseInt(parsedData[0]),
-       name = parsedData[1];
+        type = parseInt(parsedData[0]),
+        name = parsedData[1];
 
       switch (type) {
         case PageType.Category:
