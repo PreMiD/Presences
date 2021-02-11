@@ -30,9 +30,7 @@ presence.on("UpdateData", async () => {
 			presenceData.state = "Movie";
 		}
 		(presenceData.smallImageKey = video.paused ? "pause" : "play"),
-			(presenceData.smallImageText = video.paused
-			  ? (await strings).pause
-			  : (await strings).play),
+			(presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play),
 			(presenceData.startTimestamp = timestamps[0]),
 			(presenceData.endTimestamp = timestamps[1]);
 		if (video.paused) {
