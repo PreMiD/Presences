@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+        "name": "xMuffionex",
+        "id": "410888510044897281"
+    },
+    "url": [
+        "boomfinity.xyz",
+        "boomfinity.xyz/manage/servers"
+    ],
+    "description": {
+        "pl": "Rich Presence dla najlepszego, polskiego bota Discord - Boomfinity",
+        "en": "Rich presence for best, polish Discord Bot - boomfinity"
+    },
+    "service": "Boomfinity",
+    "version": "3.0",
+    "logo": "https://boomfinity.xyz/public/img/boomfinity.png",
+    "thumbnail": "https://hyperek.is-terrible.com/KyrWTh.png",
+    "color": "#007FFF",
+    "tags": [
+        "discord",
+        "discord bot",
+        "bot",
+        "boomfinity",
+        "boomfinity.xyz",
+        "boomfinity presence",
+        "presence"
+    ],
+    "category": "other"
+}
