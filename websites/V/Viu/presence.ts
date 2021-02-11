@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
 			delete presenceData.endTimestamp;
 		}
 	}else{
-		var browsingStamp = Math.floor(Date.now() / 1000);
+		const browsingStamp = Math.floor(Date.now() / 1000);
 		presenceData.startTimestamp = browsingStamp;
 		if (document.location.pathname.endsWith("viu_originals")) {
 			presenceData.state = "Viu Originals";
