@@ -3,8 +3,8 @@ const presence = new Presence({
 }),
 strings = presence.getStrings({
 	play: "presence.playback.playing",
-    pause: "presence.playback.paused",
-    browsing: "presence.activity.browsing"
+	pause: "presence.playback.paused",
+	browsing: "presence.activity.browsing"
 }),
 video: HTMLVideoElement = document.querySelector("video#bitmovinplayer-video-vplayer"),
 timestamps = presence.getTimestamps(video.currentTime, video.duration);
@@ -12,13 +12,13 @@ presence.on("UpdateData", async () => {
 	const presenceData: PresenceData = {
 		largeImageKey: "viu-logo"
 	};
-	if (document.location.pathname.includes("video-")) {
+	if (document.location.pathname.includes("video-")){
 		presenceData.startTimestamp = timestamps[0];
 		presenceData.endTimestamp = timestamps[1];
 		if (document.location.pathname.includes("_episode_")){
 			presenceData.details = document.querySelector("h1.ep_title").textContent.split("-")[0].replace(/\s*$/,'');
 			presenceData.state = document.querySelector("h1.ep_title").textContent.split("-")[1].replace(/^\s+|\s+$/g, "");
-		}else if(document.location.pathname.includes("trailer")){
+		}else if (document.location.pathname.includes("trailer")){
 			if (document.querySelector("h1.ep_title").textContent.includes('\'')){
 				presenceData.details = document.querySelector("h1.ep_title").textContent.match(/'(.*?)'|"(.*?)"/)[1];
 			}else{
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 		presence.setTrayTitle();
 		presenceData.details = (await strings).browsing;
 		presence.setActivity(presenceData);
-	} else {
+	}else{
 		presence.setActivity(presenceData);
 	}
 });
