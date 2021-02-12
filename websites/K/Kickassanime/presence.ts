@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
         .querySelector("a.ka-url-wrapper:nth-child(1)")
         .textContent.replace("Previous ", "")
         .split("Episode ")[1];
-      if (isMovie == false) {
+      if (!isMovie) {
         if (currentAnimeEpisode.includes("0")) {
           episodeNumber = (
             parseInt(
@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
         .querySelector("a.ka-url-wrapper:nth-child(1)")
         .textContent.replace("Previous ", "")
         .split("Episode ")[1];
-      if (isMovie == false) {
+      if (!isMovie) {
         if (currentAnimeEpisode.includes("0")) {
           episodeNumber = (
             parseInt(
