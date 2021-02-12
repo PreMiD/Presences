@@ -29,10 +29,10 @@ presence.on("UpdateData", async () => {
 			presenceData.details = document.querySelector("h1.ep_title").textContent;
 			presenceData.state = "Movie";
 		}
-		(presenceData.smallImageKey = video.paused ? "pause" : "play"),
-			(presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play),
-			(presenceData.startTimestamp = timestamps[0]),
-			(presenceData.endTimestamp = timestamps[1]);
+		presenceData.smallImageKey = video.paused ? "pause" : "play";
+		presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+		presenceData.startTimestamp = timestamps[0];
+		presenceData.endTimestamp = timestamps[1];
 		if (video.paused) {
 			delete presenceData.startTimestamp;
 			delete presenceData.endTimestamp;
