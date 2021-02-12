@@ -1,26 +1,24 @@
 const presence = new Presence({
-  clientId: "741011161079873713"
+  clientId: "806984559308046336"
 });
 
 let sname: string,
   sartist: string,
-  duallisteners: string,
-  dualislive: string,
-  dualpresenter: string;
+  aqualisteners: string,
+  aquapresenter: string;
 
 function metadataListener(): void {
   const data = JSON.parse(this.responseText);
-  sname = data.song.title;
-  sartist = data.song.artist;
-  duallisteners = data.listeners.current;
-  dualislive = data.dj.autoDJ;
-  dualpresenter = data.dj.livedj;
+  sname = data.nowplaying.title;
+  sartist = data.nowplaying.artist;
+  aqualisteners = data.listeners.total;
+  aquapresenter = data.presenter.name;
 }
 
 function updateMetaData(): void {
   const xhttp = new XMLHttpRequest();
   xhttp.addEventListener("load", metadataListener);
-  xhttp.open("GET", "https://api.dual.pw/stats", true);
+  xhttp.open("GET", "https://api.itsaqua.net/stats", true);
   xhttp.send();
 }
 
@@ -29,13 +27,12 @@ window.onload = function (): void {
   updateMetaData();
 };
 
-let lastTitle,
+let lastTitle: string,
   lastTimeStart = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
-      smallImageKey: "dualfm-play-v2"
+      largeImageKey: "logo"
     },
     changedetails = await presence.getSetting("changedetails"),
     changestate = await presence.getSetting("changestate"),
@@ -53,13 +50,13 @@ presence.on("UpdateData", async () => {
     sname = "Loading...";
   } else if (!sartist) {
     sartist = "Loading...";
-  } else if (!dualpresenter) {
-    dualpresenter = "Loading...";
-  } else if (!duallisteners) {
-    duallisteners = "Loading...";
+  } else if (!aquapresenter) {
+    aquapresenter = "Loading...";
+  } else if (!aqualisteners) {
+    aqualisteners = "Loading...";
   }
 
-  if (!dualislive) {
+  if (aquapresenter !== "AutoDJ") {
     if (changedetails) {
       presenceData.details = changedetails
         .replace("%song%", sname)
@@ -68,9 +65,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "🎵 | " + sartist + " - " + sname;
     }
     if (changestate) {
-      presenceData.state = changestate.replace("%presenter%", dualpresenter);
+      presenceData.state = changestate.replace("%presenter%", aquapresenter);
     } else {
-      presenceData.state = "🎙️ | " + dualpresenter;
+      presenceData.state = "🎙️ | " + aquapresenter;
     }
   } else {
     if (changedetails) {
@@ -90,10 +87,10 @@ presence.on("UpdateData", async () => {
   if (changesmalltext) {
     presenceData.smallImageText = changesmalltext.replace(
       "%listeners%",
-      duallisteners
+      aqualisteners
     );
   } else {
-    presenceData.smallImageText = "Listeners: " + duallisteners;
+    presenceData.smallImageText = "Listeners: " + aqualisteners;
   }
 
   presence.setActivity(presenceData, true);

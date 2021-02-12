@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "807591728759570453"
-}),
+    clientId: "807591728759570453"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 function getLastPath(path: string) {
@@ -21,7 +21,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Main Wallet";
     } else if (window.location.pathname.includes("/my/wallet/account/margin")) {
       presenceData.details = "Margin Wallet";
-    } else if (window.location.pathname.includes("/my/wallet/account/futures")) {
+    } else if (
+      window.location.pathname.includes("/my/wallet/account/futures")
+    ) {
       presenceData.details = "Futures Wallet";
     } else if (window.location.pathname.includes("/my/wallet/account/c2c")) {
       presenceData.details = "P2P Wallet";
@@ -37,19 +39,27 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Binance Support";
     } else if (window.location.pathname.includes("/multipleChart")) {
       presenceData.details = "Charts";
-    } else if (window.location.pathname.includes("/futuresng-activity/battle")) {
+    } else if (
+      window.location.pathname.includes("/futuresng-activity/battle")
+    ) {
       presenceData.details = "Futures Battle";
-    } else if (window.location.pathname.includes("/futuresng-activity/leaderboard")) {
+    } else if (
+      window.location.pathname.includes("/futuresng-activity/leaderboard")
+    ) {
       presenceData.details = "Futures Leaderboard";
     } else if (window.location.pathname.includes("/trade")) {
       presenceData.details = "Trading";
       if (getLastPath(window.location.pathname).includes("_")) {
-        presenceData.state = "Exchange: " + getLastPath(window.location.pathname).replace("_", "/").toUpperCase();
+        presenceData.state =
+          "Exchange: " +
+          getLastPath(window.location.pathname).replace("_", "/").toUpperCase();
       }
     } else if (window.location.pathname.includes("/futures")) {
       presenceData.details = "Futures Trading";
       if (getLastPath(window.location.pathname).includes("_")) {
-        presenceData.state = "Exchange: " + getLastPath(window.location.pathname).replace("_", "/").toUpperCase();
+        presenceData.state =
+          "Exchange: " +
+          getLastPath(window.location.pathname).replace("_", "/").toUpperCase();
       }
     } else {
       presenceData.details = "Browsing...";
