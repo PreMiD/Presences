@@ -84,30 +84,14 @@ presence.on("UpdateData", async () => {
       presenceData.endTimestamp = timestamps[1];
       currentAnimeTitle = document.querySelector("a.ka-url-wrapper")
         .textContent;
-      currentAnimeEpisode = document
-        .querySelector("a.ka-url-wrapper:nth-child(1)")
-        .textContent.replace("Previous ", "")
-        .split("Episode ")[1];
+      currentAnimeEpisode = document.location.pathname
+        .split("/")[3]
+        .split("-")[1];
       if (!isMovie) {
-        if (currentAnimeEpisode.includes("0")) {
-          episodeNumber = (
-            parseInt(
-              document
-                .querySelector("a.ka-url-wrapper:nth-child(1)")
-                .textContent.replace("Previous ", "")
-                .split("Episode ")[1]
-                .replace("0", "")
-            ) + 1
-          ).toString();
+        if (currentAnimeEpisode[0] == "0") {
+          episodeNumber = currentAnimeEpisode.replace("0", "");
         } else {
-          episodeNumber = (
-            parseInt(
-              document
-                .querySelector("a.ka-url-wrapper:nth-child(1)")
-                .textContent.replace("Previous ", "")
-                .split("Episode ")[1]
-            ) + 1
-          ).toString();
+          episodeNumber = currentAnimeEpisode;
         }
         currentAnimeEpisode = `Episode ${episodeNumber}`;
       } else {
@@ -124,30 +108,14 @@ presence.on("UpdateData", async () => {
     } else {
       currentAnimeTitle = document.querySelector("a.ka-url-wrapper")
         .textContent;
-      currentAnimeEpisode = document
-        .querySelector("a.ka-url-wrapper:nth-child(1)")
-        .textContent.replace("Previous ", "")
-        .split("Episode ")[1];
+      currentAnimeEpisode = document.location.pathname
+        .split("/")[3]
+        .split("-")[1];
       if (!isMovie) {
-        if (currentAnimeEpisode.includes("0")) {
-          episodeNumber = (
-            parseInt(
-              document
-                .querySelector("a.ka-url-wrapper:nth-child(1)")
-                .textContent.replace("Previous ", "")
-                .split("Episode ")[1]
-                .replace("0", "")
-            ) + 1
-          ).toString();
+        if (currentAnimeEpisode[0] == "0") {
+          episodeNumber = currentAnimeEpisode.replace("0", "");
         } else {
-          episodeNumber = (
-            parseInt(
-              document
-                .querySelector("a.ka-url-wrapper:nth-child(1)")
-                .textContent.replace("Previous ", "")
-                .split("Episode ")[1]
-            ) + 1
-          ).toString();
+          episodeNumber = currentAnimeEpisode;
         }
         currentAnimeEpisode = `Episode ${episodeNumber}`;
       } else {
