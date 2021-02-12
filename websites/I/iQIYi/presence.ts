@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
           startTimestamp: browsingStamp
       };
 
-    if (document.location.pathname.includes('/play') || document.location.pathname.includes('/v_')){
+    if (document.location.pathname.includes('/play')){
 
         const data = {
             title: document.querySelector('h1 a').textContent,
