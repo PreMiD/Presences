@@ -10,11 +10,11 @@ presence.on("UpdateData", async () => {
     if (document.location.href !== prevUrl){
         prevUrl = document.location.href;
         browsingStamp = Math.floor(Date.now() / 1000);
-    };
+    }
 
     const presenceData: PresenceData = {  
           largeImageKey: "iqiyi_logo",
-          details: "Browsering...",
+          details: "Browsing...",
           smallImageKey: "search",
           startTimestamp: browsingStamp
       };
