@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.includes("/broker")) {
       presenceData.details = "Broker";
     } else if (window.location.pathname.includes("/about")) {
-      presenceData.details = "About Binance";
+      presenceData.details = "About";
     } else if (window.location.pathname.includes("/career")) {
       presenceData.details = "Binance Careers";
     } else if (window.location.pathname.includes("/press")) {
@@ -54,9 +54,9 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.includes("/support")) {
       presenceData.details = "Binance Support";
     } else if (window.location.pathname.includes("/terms")) {
-      presenceData.details = "Binance Terms of Use";
+      presenceData.details = "Terms of Use";
     } else if (window.location.pathname.includes("/privacy")) {
-      presenceData.details = "Binance Privacy Policy";
+      presenceData.details = "Privacy Policy";
     } else if (window.location.pathname.includes("/convert")) {
       presenceData.details = "Convert";
     } else if (window.location.pathname.includes("/leveraged-tokens")) {
