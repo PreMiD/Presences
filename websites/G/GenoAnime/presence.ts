@@ -1,18 +1,13 @@
 const presence = new Presence({
   clientId: "810203651317432351"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
-
-
+}),
+browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "Genoanime"
-  };
-
-  const title = document.title; //title of the page
-
+  },
+title = document.title; //title of the page
   if (
     document.location.pathname == "/" 
   ) {
