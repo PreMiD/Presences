@@ -4,9 +4,7 @@ let presence = new Presence({
 
 let browsingStamp = Math.floor(Date.now() / 1000);
 
-let title: any;
-let titleName: any;
-let search: any;
+let title = "";
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
