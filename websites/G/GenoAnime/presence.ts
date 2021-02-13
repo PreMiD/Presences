@@ -1,17 +1,17 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "810203651317432351"
 });
 
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
-let title = "";
+
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "Genoanime"
   };
 
-  title = document.title; //title of the page
+  const title = document.title; //title of the page
 
   if (
     document.location.pathname == "/" 
