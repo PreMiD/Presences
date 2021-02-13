@@ -238,18 +238,23 @@ presence.on("UpdateData", async () => {
         if (showLive && live) {
           //* Live
           const title = getElement(".channel-info-content h2"),
-            streamer = getElement(".channel-info-content .tw-c-text-base");
+            streamer = getElement(".channel-info-content .tw-c-text-base"),
+            game =
+              document.querySelector("a[data-a-target='stream-game-link']")
+                ?.textContent || "Just Chatting";
           presenceData.details =
             title && streamer
               ? streamDetail
                   .replace("%title%", title)
                   .replace("%streamer%", streamer)
+                  .replace("%game%", game)
               : undefined;
           presenceData.state =
             title && streamer
               ? streamState
                   .replace("%title%", title)
                   .replace("%streamer%", streamer)
+                  .replace("%game%", game)
               : undefined;
           presenceData.smallImageKey = "live";
           presenceData.smallImageText = (await strings).live;
@@ -260,18 +265,23 @@ presence.on("UpdateData", async () => {
           const title = getElement(".channel-info-content h2")
               .split("•")
               .shift(),
-            uploader = getElement(".channel-info-content .tw-c-text-base");
+            uploader = getElement(".channel-info-content .tw-c-text-base"),
+            game = document.querySelector(
+              "a[data-a-target='stream-game-link']"
+            );
           presenceData.details =
             title && uploader
               ? vidDetail
                   .replace("%title%", title)
                   .replace("%uploader%", uploader)
+                  .replace("%game%", game)
               : undefined;
           presenceData.state =
             title && uploader
               ? vidState
                   .replace("%title%", title)
                   .replace("%uploader%", uploader)
+                  .replace("%game%", game)
               : undefined;
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = (await strings).play;
