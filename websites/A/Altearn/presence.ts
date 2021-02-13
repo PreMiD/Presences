@@ -1,12 +1,12 @@
 const presence = new Presence({
-    clientId: "805098006625517599"
-  });
-  
+  clientId: "805098006625517599"
+});
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    browsingStamp = Math.floor(Date.now() / 1000), 
+    browsingStamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy");
   presenceData.startTimestamp = browsingStamp;
   if (privacy) {
@@ -17,27 +17,35 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Activities";
     } else if (window.location.pathname.startsWith("/category/")) {
       presenceData.details = "Searching an article:";
-      presenceData.state = "in category " +document.title.replace(' | Altearn','');
+      presenceData.state =
+        "in category " + document.title.replace(" | Altearn", "");
       if (window.location.pathname.endsWith("category/ag/")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "General Assembly";
       }
     } else if (window.location.pathname.startsWith("/assemblee-generale-")) {
       presenceData.details = "Viewing an General Assembly";
-      presenceData.state = document.title.replace(' | Altearn','').replace('Assemblée Générale - ','');
+      presenceData.state = document.title
+        .replace(" | Altearn", "")
+        .replace("Assemblée Générale - ", "");
     } else if (window.location.pathname.endsWith("/notre-organisation/")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Our organisation";
-    } else if (window.location.pathname.startsWith("/") && window.location.pathname.length != 1) {
+    } else if (
+      window.location.pathname.startsWith("/") &&
+      window.location.pathname.length != 1
+    ) {
       presenceData.details = "Reading an article:";
-      presenceData.state = document.title.replace(' | Altearn','');
-      if (window.location.pathname.includes('/author/')) {
+      presenceData.state = document.title.replace(" | Altearn", "");
+      if (window.location.pathname.includes("/author/")) {
         presenceData.details = "Looking for an user:";
-        presenceData.state = document.title.replace(' | Altearn','');
+        presenceData.state = document.title.replace(" | Altearn", "");
       }
-      if (document.title.includes('Fiche de poste:')) {
+      if (document.title.includes("Fiche de poste:")) {
         presenceData.details = "Viewing a place as";
-        presenceData.state = document.title.replace(' | Altearn','').replace('Fiche de poste:','');
+        presenceData.state = document.title
+          .replace(" | Altearn", "")
+          .replace("Fiche de poste:", "");
       }
     } else if (window.location.pathname.length === 1) {
       presenceData.details = "Viewing a page:";
