@@ -1,8 +1,7 @@
 const presence = new Presence({
     clientId: "809898713996066827"
 }),
-
-const tmb = Math.floor(Date.now() / 1000);
+tmb = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -60,5 +59,5 @@ presence.on("UpdateData", async () => {
         presence.setActivity();
       } else {
         presence.setActivity(presenceData);
-    };
+    }
 });
