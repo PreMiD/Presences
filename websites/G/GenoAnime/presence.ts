@@ -1,12 +1,12 @@
-var presence = new Presence({
+let presence = new Presence({
   clientId: "810203651317432351"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
+let browsingStamp = Math.floor(Date.now() / 1000);
 
-var title: any;
-var titleName: any;
-var search: any;
+let title: any;
+let titleName: any;
+let search: any;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -15,8 +15,6 @@ presence.on("UpdateData", async () => {
 
   title = document.title; //title of the page
 
-  // titleName = title.split("Watching - ")[1]; 
-   
   if (
     document.location.pathname == "/" 
   ) {
