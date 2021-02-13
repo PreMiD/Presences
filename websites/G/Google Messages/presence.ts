@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
         if(!showcon) {
             presenceData.state = "Hidden (adjustable in Presence settings)";
         } else {
-        let itl = document.getElementsByClassName("title-container")[0].querySelector("h2 > span > span").textContent;
+        const itl = document.getElementsByClassName("title-container")[0].querySelector("h2 > span > span").textContent;
         presenceData.state = itl;
         }
         presenceData.details = "Reading messages from:";
