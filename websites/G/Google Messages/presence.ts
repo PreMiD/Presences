@@ -1,8 +1,8 @@
 const presence = new Presence({
     clientId: "809898713996066827"
-});
+}),
 
-var tmb = Math.floor(Date.now() / 1000);
+const tmb = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
         if(!showcon) {
             presenceData.state = "Hidden (adjustable in Presence settings)";
         } else {
-        var itl = document.getElementsByClassName("title-container")[0].querySelector("h2 > span > span").textContent;
+        let itl = document.getElementsByClassName("title-container")[0].querySelector("h2 > span > span").textContent;
         presenceData.state = itl;
         }
         presenceData.details = "Reading messages from:";
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
         presenceData.largeImageKey = "icon";
         presenceData.details = "Browsing on Google Messages";
         presenceData.startTimestamp = tmb;
-    };
+    }
     if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
