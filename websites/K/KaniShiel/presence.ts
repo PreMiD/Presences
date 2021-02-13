@@ -1,13 +1,13 @@
 const presence = new Presence({
-    clientId: "801742167608787015"
-  });
-  
+  clientId: "801742167608787015"
+});
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    browsingStamp = Math.floor(Date.now() / 1000), 
-    privacy = await presence.getSetting("privacy"), 
+    browsingStamp = Math.floor(Date.now() / 1000),
+    privacy = await presence.getSetting("privacy"),
     sprivacy = await presence.getSetting("super-privacy");
   presenceData.startTimestamp = browsingStamp;
   if (sprivacy) {
@@ -39,10 +39,12 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "dashboard";
     if (privacy) {
       presenceData.details = "Editing a server";
-      presenceData.state = 'with the dashboard';
+      presenceData.state = "with the dashboard";
     } else {
       presenceData.details = "Using the dashboard of :";
-      presenceData.state = document.getElementById('563749920683720709').textContent;
+      presenceData.state = document.getElementById(
+        "563749920683720709"
+      ).textContent;
     }
   } else {
     presenceData.details = "Viewing a page:";

@@ -62,10 +62,10 @@ presence.on("UpdateData", async () => {
         ) as HTMLElement).textContent
       : null,
     songCurrentTime: string | null = (document.querySelector(
-      "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.currentTime--3UDrQ"
+      "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.css-ozow3x"
     ) as HTMLElement)
       ? (document.querySelector(
-          "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.currentTime--3UDrQ"
+          "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.css-ozow3x"
         ) as HTMLElement).textContent
       : null,
     videoTitle: string | null = (document.querySelector(
@@ -76,10 +76,10 @@ presence.on("UpdateData", async () => {
         ) as HTMLElement).textContent
       : null,
     videoCurrentTime: string | null = (document.querySelector(
-      "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.currentTime--3UDrQ"
+      "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.css-ozow3x"
     ) as HTMLElement)
       ? (document.querySelector(
-          "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.currentTime--3UDrQ"
+          "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.css-ozow3x"
         ) as HTMLElement).textContent
       : null,
     presenceData: PresenceData = {
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
     if (!privacy) {
       if (songTitle && songCurrentTime) {
         const songEndTime: string | null = (document.querySelector(
-            "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.duration--21kXU"
+            "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.css-165d6xj"
           ) as HTMLElement).textContent,
           songCurrentTimestamp: Array<number> = songCurrentTime
             .split(":")
@@ -107,10 +107,10 @@ presence.on("UpdateData", async () => {
             "#footerPlayer > div.centerColumn--3fkzm > div > button.playback-controls__button--white-icon.playbackToggle--3B2S9"
           ) as HTMLElement).getAttribute("data-type"),
           albumTitle: string | null = (document.querySelector(
-            "#nowPlaying > div.scrollWrapper--2Hy7_ > div > div.leftColumn--3OQ30 > div:nth-child(6) > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > a"
+            "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > div.container--20aEj.playingFrom--3H6Cu > a > span"
           ) as HTMLElement)
             ? (document.querySelector(
-                "#nowPlaying > div.scrollWrapper--2Hy7_ > div > div.leftColumn--3OQ30 > div:nth-child(6) > div > table > tbody > tr:nth-child(3) > td:nth-child(2) > a"
+                "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > div.container--20aEj.playingFrom--3H6Cu > a > span"
               ) as HTMLElement).textContent
             : null,
           repeatOn: string = (document.querySelector(
@@ -150,7 +150,7 @@ presence.on("UpdateData", async () => {
         }
       } else if (videoTitle && videoCurrentTime) {
         const videoEndTime: string = (document.querySelector(
-            "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.duration--21kXU"
+            "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.css-165d6xj"
           ) as HTMLElement).textContent,
           videoCurrentTimestamp: Array<number> = videoCurrentTime
             .split(":")
@@ -162,7 +162,7 @@ presence.on("UpdateData", async () => {
             "#footerPlayer > div.centerColumn--3fkzm > div > button.playback-controls__button--white-icon.playbackToggle--3B2S9"
           ) as HTMLElement).getAttribute("data-type"),
           repeatOn: string = (document.querySelector(
-            "#footerPlayer > div.centerColumn--3fkzm > div > button.repeatButton--ONfa5"
+            "#nowPlaying > div.scrollWrapper--2Hy7_ > div > div.leftColumn--3OQ30 > div.row--3oQhD.rowMediaControls--2ERj6 > div:nth-child(2) > div > button.repeatButton--ONfa5"
           ) as HTMLElement).getAttribute("data-type"),
           timestamps: Array<number> = presence.getTimestamps(
             ~~videoCurrentTimestamp[0] * 60 + videoCurrentTimestamp[1],
