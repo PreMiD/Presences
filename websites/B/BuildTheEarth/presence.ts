@@ -1,15 +1,15 @@
 const presence = new Presence({
-    clientId: "805070274847440916"
-  });
-  
+  clientId: "805070274847440916"
+});
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
-    browsingStamp = Math.floor(Date.now() / 1000), 
+    browsingStamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
     pmap = await presence.getSetting("pmap");
-    
+
   presenceData.startTimestamp = browsingStamp;
   if (privacy) {
     presenceData.details = "Browsing";
@@ -24,8 +24,24 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing a page:";
     if (pmap) presenceData.state = "Map";
     else {
-      const XO = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[0])*10)/10,
-      OX = Math.floor(Number(document.getElementById('map_tpll_command').textContent.replace('/tpll ','').split(' ')[1])*10)/10;
+      const XO =
+          Math.floor(
+            Number(
+              document
+                .getElementById("map_tpll_command")
+                .textContent.replace("/tpll ", "")
+                .split(" ")[0]
+            ) * 10
+          ) / 10,
+        OX =
+          Math.floor(
+            Number(
+              document
+                .getElementById("map_tpll_command")
+                .textContent.replace("/tpll ", "")
+                .split(" ")[1]
+            ) * 10
+          ) / 10;
       presenceData.state = `Map : ${XO} | ${OX}`;
     }
   } else if (window.location.pathname.endsWith("buildteams")) {
@@ -39,9 +55,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Upload your world";
   } else {
     presenceData.details = "Viewing a page:";
-    presenceData.state = document.title.replace(' - BuildTheEarth','');
-    if (window.location.pathname.length != 1) presenceData.details = "Viewing a BuildTeam:";
-  } 
+    presenceData.state = document.title.replace(" - BuildTheEarth", "");
+    if (window.location.pathname.length != 1)
+      presenceData.details = "Viewing a BuildTeam:";
+  }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
