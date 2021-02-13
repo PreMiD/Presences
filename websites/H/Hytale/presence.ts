@@ -1,6 +1,6 @@
 const presence = new Presence({
-    clientId: "809083630117978123"
-  }),
+  clientId: "809083630117978123"
+}),
   browsingStamp = Math.round(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -15,9 +15,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing Blog Posts";
   } else if (document.location.pathname.includes("/news/archive/")) {
     presenceData.details = "Browsing Blog Archives";
-    presenceData.state = `From ${
-      document.querySelector(".subHeading").textContent
-    }`;
+    presenceData.state = `From ${document.querySelector(".subHeading").textContent}`;
   } else if (document.location.pathname.includes("/news/")) {
     presenceData.details = "Reading Blog Post";
     presenceData.state = document.querySelector(".post__heading").textContent;
