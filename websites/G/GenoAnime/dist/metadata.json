@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "DayAndNight",
+    "id": "424072110647017482"
+  },
+  "url": "genoanime.com",
+  "description": {
+    "en": "Enjoy the our website, view any anime episode and movie"
+  },
+  "service": "GenoAnime",
+  "version": "1.0.0",
+  "logo": "https://genoanime.com/premid/geno.jpg",
+  "thumbnail": "https://genoanime.com/premid/thumb.png",
+  "color": "#2E83FA",
+  "tags": [
+    "anime",
+    "entertainment",
+    "genoanime"
+  ],
+  "category": "anime"
+}
