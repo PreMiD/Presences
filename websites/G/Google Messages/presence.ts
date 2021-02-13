@@ -6,7 +6,8 @@ tmb = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         smallImageKey: "google",
-        smallImageText: "Google"
+        smallImageText: "Google",
+        presenceData.startTimestamp = tmb;
     },
     path = document.location.pathname.toLowerCase(),
     showcon = await presence.getSetting("showContact");
@@ -14,18 +15,15 @@ presence.on("UpdateData", async () => {
     if(path === "/" || path.includes("/intl/")) {
         presenceData.largeImageKey = "icon";
         presenceData.details = "Home page";
-        presenceData.startTimestamp = tmb;
     } 
     // Auth page
     else if(path === "/web/authentication") {
         presenceData.largeImageKey = "icon";
         presenceData.details = "Authentication page";
-        presenceData.startTimestamp = tmb;
     }
     else if(path ==="/web/conversations") {
         presenceData.details = "Browsing conversations";
         presenceData.largeImageKey = "icon";
-        presenceData.startTimestamp = tmb;
     }
     else if(path.includes("/web/conversations/") && path !== "/web/conversations/new") {
         // checking parameters
@@ -37,22 +35,18 @@ presence.on("UpdateData", async () => {
         }
         presenceData.details = "Reading messages from:";
         presenceData.largeImageKey = "icon";
-        presenceData.startTimestamp = tmb;
     }
     else if(path === "/web/conversations/new") {
         presenceData.largeImageKey = "icon";
         presenceData.details = "New conversation page";
-        presenceData.startTimestamp = tmb;
     }
     else if(path === "/web/settings") {
         presenceData.largeImageKey = "icon";
         presenceData.details = "Browsing settings";
-        presenceData.startTimestamp = tmb;
     }
     else {
         presenceData.largeImageKey = "icon";
         presenceData.details = "Browsing on Google Messages";
-        presenceData.startTimestamp = tmb;
     }
     if (presenceData.details == null) {
         presence.setTrayTitle();
