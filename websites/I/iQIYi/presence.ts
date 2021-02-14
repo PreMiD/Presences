@@ -20,7 +20,7 @@ const presence = new Presence({
 let browsingStamp = Math.floor(Date.now() / 1000),
     prevUrl = document.location.href,
     strings: Promise<LangStrings> = getStrings(),
-    oldLang: string = null 
+    oldLang: string = null;
 
 presence.on("UpdateData", async () => {
 
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
                 presenceData.buttons = [{
                     label: "Watch",
                     url: document.URL.split("&")[0]
-                }]
+                }];
             } else delete presenceData.buttons;
 
             if (video.paused){
@@ -99,17 +99,17 @@ presence.on("UpdateData", async () => {
             presenceData.startTimestamp = browsingStamp;
         };
         
-    };
+    }
 
     if (document.location.pathname.includes('/search')){
 
-        let searchQuery_ = decodeURI(document.location.search.replace('?query=', ''));
+        const searchQuery_ = decodeURI(document.location.search.replace('?query=', ''));
 
         presenceData.details = `${(await strings).searchFor} ${searchQuery ? searchQuery_  : "( Hidden )"}`;
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "search";
 
-        let result = document.querySelector('div.has-result')?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
+        const result = document.querySelector('div.has-result')?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
         presenceData.state = result ? `${result} matching ${parseInt(result) > 1 ? "results" : "result"}` : "No matching result";
     };
 
