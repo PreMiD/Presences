@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
           smallImageText: (await strings).browse,
           startTimestamp: browsingStamp,
           buttons: []
-      }
+      };
 
     const newLang = await presence.getSetting('lang'),
     showButtons: boolean = await presence.getSetting('buttons'),
