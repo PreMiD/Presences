@@ -1,15 +1,15 @@
-var presence = new Presence({
-  clientId: "619984959247220750"
+const presence = new Presence({
+  clientId: "808762003476709406"
 });
 
-var elapsed = Math.floor(Date.now() / 1000);
+let elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "showdown-logo"
-  };
+    largeImageKey: "logo"
+  },
 
-  var path = document.location.pathname;
+   path = document.location.pathname;
   if (path == "/") {
     data.details = "Viewing Homepage";
     elapsed = null;
@@ -20,8 +20,8 @@ presence.on("UpdateData", async () => {
     data.details = "Viewing a Ladder";
     elapsed = null;
   } else if (path.includes("battle")) {
-    var title = document.querySelector("a.roomtab i.text").textContent;
-    var users = document.querySelector("a.roomtab.button.cur span").textContent;
+    const title = document.querySelector("a.roomtab i.text").textContent,
+     users = document.querySelector("a.roomtab.button.cur span").textContent;
     data.details = title;
     data.state = users;
     if (elapsed == null) {
