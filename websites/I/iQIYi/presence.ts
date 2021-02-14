@@ -30,7 +30,6 @@ presence.on("UpdateData", async () => {
           smallImageKey: "search",
           smallImageText: (await strings).browse,
           startTimestamp: browsingStamp,
-          buttons: []
       },
 
     newLang = await presence.getSetting('lang'),
@@ -40,13 +39,6 @@ presence.on("UpdateData", async () => {
     if (document.location.href !== prevUrl){
         prevUrl = document.location.href;
         browsingStamp = Math.floor(Date.now() / 1000);
-    
-        delete presenceData.largeImageKey;
-        delete presenceData.details;
-        delete smallImageKey;
-        delere smallImageText;
-        delete startTimestamp;
-        delete presenceData.buttons;
     }
 
     if (!oldLang){
