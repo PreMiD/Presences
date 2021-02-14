@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
                 delete presenceData.startTimestamp;
                 delete presenceData.endTimestamp;
             }
-        };
+        }
 
         if (isNaN(video.duration)){
             presenceData.details = "Looking at:";
@@ -102,7 +102,6 @@ presence.on("UpdateData", async () => {
     }
 
     if (document.location.pathname.includes('/search')){
-
         const searchQuery_ = decodeURI(document.location.search.replace('?query=', ''));
 
         presenceData.details = `${(await strings).searchFor} ${searchQuery ? searchQuery_  : "( Hidden )"}`;
