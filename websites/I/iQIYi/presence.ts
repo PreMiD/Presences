@@ -14,7 +14,7 @@ const presence = new Presence({
         pause: "general.paused",
         browse: "general.browsing",
         episode: "general.episode",
-	searchFor: "general.searchFor",
+	      searchFor: "general.searchFor",
     }, await presence.getSetting('lang'))
 
 let browsingStamp = Math.floor(Date.now() / 1000),
@@ -75,10 +75,10 @@ presence.on("UpdateData", async () => {
                 presenceData.state = data.ep;
 
                 presenceData.smallImageKey = video.paused ? "pause" : "play";
-		presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+		            presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
 
-            	presenceData.startTimestamp = timestamps[0];
-            	presenceData.endTimestamp = timestamps[1];
+            	  presenceData.startTimestamp = timestamps[0];
+            	  presenceData.endTimestamp = timestamps[1];
 
                 if (showButtons){
                     presenceData.buttons = [{
