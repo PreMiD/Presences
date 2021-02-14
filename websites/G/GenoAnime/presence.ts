@@ -5,7 +5,7 @@ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "Genoanime"
+    largeImageKey: "genoanime_2-lanczos3"
   },
 title = document.title; //title of the page
   if (
