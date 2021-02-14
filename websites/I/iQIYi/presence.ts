@@ -14,7 +14,7 @@ const presence = new Presence({
         pause: "general.paused",
         browse: "general.browsing",
         episode: "general.episode",
-	      searchFor: "general.searchFor",
+        searchFor: "general.searchFor",
     }, await presence.getSetting('lang'))
 
 let browsingStamp = Math.floor(Date.now() / 1000),
@@ -57,14 +57,14 @@ presence.on("UpdateData", async () => {
 
         video: HTMLVideoElement = document.querySelector('video'),
         timestamps: number[] = presence.getTimestampsfromMedia(video),
-	      isMovie = document.location.href.includes('movie'),
-	      isVShow = document.location.href.includes('variety-show');
+        isMovie = document.location.href.includes('movie'),
+        isVShow = document.location.href.includes('variety-show');
     
         if (document.querySelector('.iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip')?.textContent) data.ep = "Trial Watching";
         
         if (!data.ep && !isVShow) data.ep = "Movie";
         if (isVShow) data.ep = "Variety Show";
-        if (!data.ep.includes('/') && !["Variety Show", "Movie", "Trial Watching"].includes(data.ep)) data.ep = `${(await strings).episode} ${data.ep.match(/[1-9]?[0-9]?[0-9]/g)[0]}`;
+        if (!data.ep.includes('/') && !["Variety Show", "Movie", "Trial Watching"].includes(data.ep)) data.ep = `${(await strings).episode} ${data.ep.match(/[1-9]?[0-9]?[0-9]/)[0]}`;
 
         if (video && !isNaN(video.duration)){
 
