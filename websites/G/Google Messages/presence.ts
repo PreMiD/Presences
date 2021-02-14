@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         smallImageKey: "google",
         smallImageText: "Google",
-        presenceData.startTimestamp = tmb;
+        startTimestamp: tmb
     },
     path = document.location.pathname.toLowerCase(),
     showcon = await presence.getSetting("showContact");
