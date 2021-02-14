@@ -119,9 +119,9 @@ presence.on("UpdateData", async () => {
         const result = document.querySelector('div.has-result')?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
 
         if (result){
-          presenceData.state = `${result} matching ${parseInt(result) > 1 ? "results" : "result"}`
+          presenceData.state = `${result} matching ${parseInt(result) > 1 ? "results" : "result"}`;
         } else {
-          presenceData.state = `No matching result`
+          presenceData.state = `No matching result`;
         }
     }
 
