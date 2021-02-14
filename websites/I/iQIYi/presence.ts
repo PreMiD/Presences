@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Looking at:";
             presenceData.state = data.title;
             presenceData.startTimestamp = browsingStamp;
-        };
+        }
         
     }
 
