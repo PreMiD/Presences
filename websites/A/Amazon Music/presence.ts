@@ -1,5 +1,5 @@
-var presence = new Presence({
-    clientId: "619041735795802112"
+const presence = new Presence({
+    clientId: "808756700022702120"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -7,7 +7,7 @@ var presence = new Presence({
   });
 
 function getTime(list: string[]): number {
-  var ret = 0;
+  let ret = 0;
   for (let index = list.length - 1; index >= 0; index--) {
     ret += parseInt(list[index]) * 60 ** index;
   }
@@ -15,34 +15,34 @@ function getTime(list: string[]): number {
 }
 
 function getTimestamps(audioDuration: string): Array<number> {
-  var splitAudioDuration = audioDuration.split(":").reverse();
+  const splitAudioDuration = audioDuration.split(":").reverse(),
 
-  var parsedAudioDuration = getTime(splitAudioDuration);
+   parsedAudioDuration = getTime(splitAudioDuration),
 
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
+   startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
-  var player = document.querySelector(".playbackActive");
+  const player = document.querySelector(".playbackActive");
   if (player) {
-    var title = document.querySelector(".trackTitle span").textContent;
-    var artist = document.querySelector(".trackArtist span").textContent;
-    var durationTime = document.querySelector(
+    const title = document.querySelector(".trackTitle span").textContent,
+     artist = document.querySelector(".trackArtist span").textContent,
+     durationTime = document.querySelector(
       ".listViewDurationContextButton .listViewDuration"
-    ).textContent;
-    var timestamps = getTimestamps(durationTime.replace("-", ""));
-    const paused = document.querySelector(
+    ).textContent,
+     timestamps = getTimestamps(durationTime.replace("-", "")),
+     paused = document.querySelector(
       ".playbackControls span.playerIconPause"
     )
       ? false
-      : true;
+      : true,
 
-    var data: PresenceData = {
+     data: PresenceData = {
       details: title,
       state: artist,
-      largeImageKey: "amazonmusic-logo",
+      largeImageKey: "logo",
       smallImageKey: paused ? "pause" : "play",
       smallImageText: paused ? (await strings).pause : (await strings).play,
       startTimestamp: timestamps[0],
@@ -58,6 +58,10 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data, !paused);
     }
   } else {
-    presence.clearActivity();
+    const data: PresenceData = {
+      details: "Browsing...",
+      largeImageKey: "logo"
+    };
+    presence.setActivity(data);
   }
 });
