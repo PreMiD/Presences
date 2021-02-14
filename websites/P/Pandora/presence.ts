@@ -1,10 +1,10 @@
 const presence = new Presence({
-  clientId: "608109837657702566"
-}),
- strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+    clientId: "608109837657702566"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused"
+  });
 
 function stripText(element: HTMLElement, id = "None", log = true) {
   if (element && element.firstChild) {
@@ -13,7 +13,7 @@ function stripText(element: HTMLElement, id = "None", log = true) {
     if (log)
       presence.info(
         "%cPandora%cERROR%c An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
-        id
+          id
       );
     return null;
   }
@@ -22,11 +22,16 @@ function stripText(element: HTMLElement, id = "None", log = true) {
 let state;
 
 presence.on("UpdateData", async () => {
-  let title: HTMLElement, artist: HTMLElement, smallImageKey, smallImageText, audioTime, audioDuration, details, timestamps, status,
-
-  audioElement: HTMLAudioElement = document.querySelector(
-    "audio:last-child"
-  );
+  let title: HTMLElement,
+    artist: HTMLElement,
+    smallImageKey,
+    smallImageText,
+    audioTime,
+    audioDuration,
+    details,
+    timestamps,
+    status,
+    audioElement: HTMLAudioElement = document.querySelector("audio:last-child");
   audioElement === null
     ? (audioElement = document.querySelector("audio"))
     : null;

@@ -1,9 +1,9 @@
 const presence = new Presence({
-  clientId: "671918505267822594"
-}),
- strings = presence.getStrings({
-  browsing: "presence.activity.browsing"
-});
+    clientId: "671918505267822594"
+  }),
+  strings = presence.getStrings({
+    browsing: "presence.activity.browsing"
+  });
 
 let oldUrl: string, elapsed: number;
 
@@ -30,9 +30,9 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
   const string = (await strings).browsing,
-   host = location.host,
-   path = location.pathname.replace(/\/$/, ""),
-   detailsObj = setObject(path);
+    host = location.host,
+    path = location.pathname.replace(/\/$/, ""),
+    detailsObj = setObject(path);
 
   if (oldUrl !== host) {
     oldUrl = host;

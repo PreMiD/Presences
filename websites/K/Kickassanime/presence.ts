@@ -23,10 +23,10 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   paused = true,
   lastPlaybackState: boolean = null,
   playback: boolean,
-  currentAnimeWatching: Array<string>,
   currentAnimeTitle: string,
   currentAnimeEpisode: string,
-  isMovie: boolean = null;
+  isMovie: boolean = null,
+  episodeNumber;
 
 function checkIfMovie() {
   nextEpisodeElement == null && previousEpisodeElement == null
@@ -82,16 +82,21 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
-      (currentAnimeWatching = document
-        .querySelector("h1.title")
-        .textContent.split("-")),
-        (currentAnimeEpisode =
-          isMovie == true
-            ? "Movie"
-            : currentAnimeWatching[1].substring(
-                1,
-                currentAnimeWatching[1].length
-              ));
+      currentAnimeTitle = document.querySelector("a.ka-url-wrapper")
+        .textContent;
+      currentAnimeEpisode = document.location.pathname
+        .split("/")[3]
+        .split("-")[1];
+      if (!isMovie) {
+        if (currentAnimeEpisode[0] == "0") {
+          episodeNumber = currentAnimeEpisode.replace("0", "");
+        } else {
+          episodeNumber = currentAnimeEpisode;
+        }
+        currentAnimeEpisode = `Episode ${episodeNumber}`;
+      } else {
+        currentAnimeEpisode = "Movie";
+      }
 
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
@@ -101,20 +106,21 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else {
-      (currentAnimeWatching = document
-        .querySelector("h1.title")
-        .textContent.split("-")),
-        (currentAnimeTitle = currentAnimeWatching[0].substring(
-          0,
-          currentAnimeWatching[0].length - 1
-        )),
-        (currentAnimeEpisode =
-          isMovie == true
-            ? "Movie"
-            : currentAnimeWatching[1].substring(
-                1,
-                currentAnimeWatching[1].length
-              ));
+      currentAnimeTitle = document.querySelector("a.ka-url-wrapper")
+        .textContent;
+      currentAnimeEpisode = document.location.pathname
+        .split("/")[3]
+        .split("-")[1];
+      if (!isMovie) {
+        if (currentAnimeEpisode[0] == "0") {
+          episodeNumber = currentAnimeEpisode.replace("0", "");
+        } else {
+          episodeNumber = currentAnimeEpisode;
+        }
+        currentAnimeEpisode = `Episode ${episodeNumber}`;
+      } else {
+        currentAnimeEpisode = "Movie";
+      }
 
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
