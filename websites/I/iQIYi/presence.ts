@@ -71,17 +71,17 @@ presence.on("UpdateData", async () => {
             if (video.duration < 70 && !isVShow && !isMovie) data.ep = `${data.ep} preview`;
             if (video.duration > 70 && video.duration < 200 && !document.location.href.includes('variety-show')) data.ep = "Highlight";
 
-                presenceData.details = data.title;
-                presenceData.state = data.ep;
+            presenceData.details = data.title;
+            presenceData.state = data.ep;
 
-                presenceData.smallImageKey = video.paused ? "pause" : "play";
-		            presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+            presenceData.smallImageKey = video.paused ? "pause" : "play";
+		        presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
 
-            	  presenceData.startTimestamp = timestamps[0];
-            	  presenceData.endTimestamp = timestamps[1];
+            presenceData.startTimestamp = timestamps[0];
+            presenceData.endTimestamp = timestamps[1];
 
-                if (showButtons){
-                    presenceData.buttons = [{
+            if (showButtons){
+                presenceData.buttons = [{
                     label: "Watch",
                     url: document.URL.split("&")[0]
                 }]
