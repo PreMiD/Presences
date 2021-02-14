@@ -57,8 +57,8 @@ presence.on("UpdateData", async () => {
 
         video: HTMLVideoElement = document.querySelector('video'),
         timestamps: number[] = presence.getTimestampsfromMedia(video),
-	isMovie = document.location.href.includes('movie'),
-	isVShow = document.location.href.includes('variety-show');
+	      isMovie = document.location.href.includes('movie'),
+	      isVShow = document.location.href.includes('variety-show');
     
         if (document.querySelector('.iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip')?.textContent) data.ep = "Trial Watching";
         
