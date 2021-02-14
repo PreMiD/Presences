@@ -14,8 +14,8 @@ const presence = new Presence({
         pause: "general.paused",
         browse: "general.browsing",
         episode: "general.episode",
-        searchFor: "general.searchFor",
-    }, await presence.getSetting('lang'))
+        searchFor: "general.searchFor"
+    }, await presence.getSetting('lang'));
 
 let browsingStamp = Math.floor(Date.now() / 1000),
     prevUrl = document.location.href,
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
             presenceData.state = data.ep;
 
             presenceData.smallImageKey = video.paused ? "pause" : "play";
-		        presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+            presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
 
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
@@ -83,14 +83,14 @@ presence.on("UpdateData", async () => {
             if (showButtons){
                 presenceData.buttons = [{
                     label: "Watch",
-                    url: `https:\/\/www.iq.com\/play\/${document.URL.split("?")[0].split("/")[4]}`
+                    url: `https://www.iq.com/play/${document.URL.split("?")[0].split("/")[4]}`
                 }];
             } else delete presenceData.buttons;
 
             if (video.paused){
                 delete presenceData.startTimestamp;
                 delete presenceData.endTimestamp;
-            };
+            }
         };
 
         if (isNaN(video.duration)){
@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
 
         const result = document.querySelector('div.has-result')?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
         presenceData.state = result ? `${result} matching ${parseInt(result) > 1 ? "results" : "result"}` : "No matching result";
-    };
+    }
 
     presence.setActivity(presenceData);
 });
