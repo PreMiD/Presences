@@ -24,22 +24,32 @@ let browsingStamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 
-    if (document.location.href !== prevUrl){
-        prevUrl = document.location.href;
-        browsingStamp = Math.floor(Date.now() / 1000);
-    }
-
     const presenceData: PresenceData = {  
           largeImageKey: "iqiyi_logo",
           details: (await strings).browse,
           smallImageKey: "search",
           smallImageText: (await strings).browse,
-          startTimestamp: browsingStamp
+          startTimestamp: browsingStamp,
+          buttons: []
       },
 
     newLang = await presence.getSetting('lang'),
     showButtons: boolean = await presence.getSetting('buttons'),
     searchQuery: boolean = await presence.getSetting('searchQuery');
+  
+    if (document.location.href !== prevUrl){
+        prevUrl = document.location.href;
+        browsingStamp = Math.floor(Date.now() / 1000);
+      
+        presenceData = {  
+          largeImageKey: "iqiyi_logo",
+          details: (await strings).browse,
+          smallImageKey: "search",
+          smallImageText: (await strings).browse,
+          startTimestamp: browsingStamp,
+          buttons: []
+      };
+    }
 
     if (!oldLang){
         oldLang = newLang;
@@ -99,9 +109,7 @@ presence.on("UpdateData", async () => {
             presenceData.startTimestamp = browsingStamp;
         }
         
-    }
-
-    if (document.location.pathname.includes('/search')){
+    } else if (document.location.pathname.includes('/search')){
         const searchQuery_ = decodeURI(document.location.search.replace('?query=', ''));
 
         presenceData.details = `${(await strings).searchFor} ${searchQuery ? searchQuery_  : "( Hidden )"}`;
@@ -109,7 +117,12 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "search";
 
         const result = document.querySelector('div.has-result')?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
-        presenceData.state = result ? `${result} matching ${parseInt(result) > 1 ? "results" : "result"}` : "No matching result";
+
+        if (result){
+          presenceData.state = `${result} matching ${parseInt(result) > 1 ? "results" : "result"}`
+        } else {
+          presenceData.state = `No matching result`
+        }
     }
 
     presence.setActivity(presenceData);
