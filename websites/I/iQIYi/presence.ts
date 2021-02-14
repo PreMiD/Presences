@@ -24,7 +24,7 @@ let browsingStamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 
-    const presenceData: PresenceData = {  
+    let presenceData: PresenceData = {  
           largeImageKey: "iqiyi_logo",
           details: (await strings).browse,
           smallImageKey: "search",
