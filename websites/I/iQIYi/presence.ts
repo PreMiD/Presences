@@ -24,31 +24,29 @@ let browsingStamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 
-    let presenceData: PresenceData = {  
+    const presenceData: PresenceData = {  
           largeImageKey: "iqiyi_logo",
           details: (await strings).browse,
           smallImageKey: "search",
           smallImageText: (await strings).browse,
           startTimestamp: browsingStamp,
           buttons: []
-      };
+      },
 
-    const newLang = await presence.getSetting('lang'),
+    newLang = await presence.getSetting('lang'),
     showButtons: boolean = await presence.getSetting('buttons'),
     searchQuery: boolean = await presence.getSetting('searchQuery');
   
     if (document.location.href !== prevUrl){
         prevUrl = document.location.href;
         browsingStamp = Math.floor(Date.now() / 1000);
-      
-        presenceData = {  
-          largeImageKey: "iqiyi_logo",
-          details: (await strings).browse,
-          smallImageKey: "search",
-          smallImageText: (await strings).browse,
-          startTimestamp: browsingStamp,
-          buttons: []
-      };
+    
+        delete presenceData.largeImageKey;
+        delete presenceData.details;
+        delete smallImageKey;
+        delere smallImageText;
+        delete startTimestamp;
+        delete presenceData.buttons;
     }
 
     if (!oldLang){
