@@ -24,7 +24,7 @@ let browsingStamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 
-    let presenceData: PresenceData = {  
+    const presenceData: PresenceData = {  
           largeImageKey: "iqiyi_logo",
           details: (await strings).browse,
           smallImageKey: "search",
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
 
         if (video && !isNaN(video.duration)){
 
-            if (isPreview && !isMovie && !isVShow) data.ep = `${data.ep} preview`
+            if (isPreview && !isMovie && !isVShow) data.ep = `${data.ep} preview`;
             else if (video.duration < 270 && !isMovie && !isPreview) data.ep = "Highlight";
 
             presenceData.details = data.title;
