@@ -24,13 +24,12 @@ let browsingStamp = Math.floor(Date.now() / 1000),
 
 presence.on("UpdateData", async () => {
 
-    const presenceData: PresenceData = {  
+    let presenceData: PresenceData = {  
           largeImageKey: "iqiyi_logo",
           details: (await strings).browse,
           smallImageKey: "search",
           smallImageText: (await strings).browse,
           startTimestamp: browsingStamp,
-          buttons: []
       },
 
     newLang = await presence.getSetting('lang'),
@@ -40,15 +39,6 @@ presence.on("UpdateData", async () => {
     if (document.location.href !== prevUrl){
         prevUrl = document.location.href;
         browsingStamp = Math.floor(Date.now() / 1000);
-      
-        presenceData = {  
-          largeImageKey: "iqiyi_logo",
-          details: (await strings).browse,
-          smallImageKey: "search",
-          smallImageText: (await strings).browse,
-          startTimestamp: browsingStamp,
-          buttons: []
-      };
     }
 
     if (!oldLang){
@@ -68,18 +58,22 @@ presence.on("UpdateData", async () => {
         video: HTMLVideoElement = document.querySelector('video'),
         timestamps: number[] = presence.getTimestampsfromMedia(video),
         isMovie = document.location.href.includes('movie'),
-        isVShow = document.location.href.includes('variety-show');
+        isVShow = document.location.href.includes('variety-show'),
+        isTrial = document.querySelector('.iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip')?.textContent !== undefined,
+        lastestEp: string[] = document.querySelector('div.broken-line').nextSibling.nextSibling.nextSibling?.textContent.match(/[1-9]?[0-9]?[0-9]/g),
+        contentEp: string[] = data.ep.match(/[1-9]?[0-9]?[0-9]/g),
+        isPreview = (lastestEp && contentEp) ? parseInt(contentEp[0]) > parseInt(lastestEp[0]) : false;
     
-        if (document.querySelector('.iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip')?.textContent) data.ep = "Trial Watching";
+        if (isTrial) data.ep = "Trial Watching";
         
-        if (!data.ep && !isVShow) data.ep = "Movie";
+        if (!data.ep && !isVShow && isMovie) data.ep = "Movie";
         if (isVShow) data.ep = "Variety Show";
-        if (!data.ep.includes('/') && !["Variety Show", "Movie", "Trial Watching"].includes(data.ep)) data.ep = `${(await strings).episode} ${data.ep.match(/[1-9]?[0-9]?[0-9]/)[0]}`;
+        if (!data.ep.includes('/') && !isVShow && !isTrial && !isMovie) data.ep = `${(await strings).episode} ${contentEp[0]}`;
 
         if (video && !isNaN(video.duration)){
 
-            if (video.duration < 70 && !isVShow && !isMovie) data.ep = `${data.ep} preview`;
-            if (video.duration > 70 && video.duration < 200 && !document.location.href.includes('variety-show')) data.ep = "Highlight";
+            if (isPreview && !isMovie && !isVShow) data.ep = `${data.ep} preview`
+            else if (video.duration < 270 && !isMovie && !isPreview) data.ep = "Highlight";
 
             presenceData.details = data.title;
             presenceData.state = data.ep;
