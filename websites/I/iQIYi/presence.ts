@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
           details: (await strings).browse,
           smallImageKey: "search",
           smallImageText: (await strings).browse,
-          startTimestamp: browsingStamp,
+          startTimestamp: browsingStamp
       },
 
     newLang = await presence.getSetting('lang'),
