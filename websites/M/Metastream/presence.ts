@@ -1,11 +1,11 @@
 const presence = new Presence({
-  clientId: "630462023003799583"
-}),
- strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  live: "presence.activity.live"
-});
+    clientId: "630462023003799583"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    live: "presence.activity.live"
+  });
 
 function getTime(list: string[]): number {
   let ret = 0;
@@ -20,14 +20,12 @@ function getTimestamps(
   audioDuration: string
 ): Array<number> {
   const splitAudioTime = audioTime.split(":").reverse(),
-   splitAudioDuration = audioDuration.split(":").reverse(),
-
-   parsedAudioTime = getTime(splitAudioTime),
-   parsedAudioDuration = getTime(splitAudioDuration),
-
-   startTime = Date.now(),
-   endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+    splitAudioDuration = audioDuration.split(":").reverse(),
+    parsedAudioTime = getTime(splitAudioTime),
+    parsedAudioDuration = getTime(splitAudioDuration),
+    startTime = Date.now(),
+    endTime =
+      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -47,7 +45,7 @@ presence.on("UpdateData", async () => {
     endTimestamp = undefined,
     playing = true;
 
-   const host = window.location.hostname,
+  const host = window.location.hostname,
     path = window.location.pathname;
 
   try {
@@ -72,13 +70,13 @@ presence.on("UpdateData", async () => {
       }
       if (path.match("/join")) {
         const connection_info = document.querySelector(".Connect__info__3Vwlv"),
-         disconnection_info = document.querySelector(
-          ".Disconnect__info__3Uejx"
-        ),
-         disconnection_label = document.querySelector(
-          ".Disconnect__info__3Uejx > span"
-        ),
-         menu_header = document.querySelector(".MenuHeader__header__1SYq0");
+          disconnection_info = document.querySelector(
+            ".Disconnect__info__3Uejx"
+          ),
+          disconnection_label = document.querySelector(
+            ".Disconnect__info__3Uejx > span"
+          ),
+          menu_header = document.querySelector(".MenuHeader__header__1SYq0");
 
         if (connection_info) {
           details = "Connecting...";
@@ -95,9 +93,9 @@ presence.on("UpdateData", async () => {
           smallImageText = (await strings).live;
 
           const users =
-            document.querySelector(".ListOverlay__list__1epFe") ||
-            document.createElement("HTMLDivElement"),
-           user_button = document.querySelector(".UserItem__menuBtn__1ST9k");
+              document.querySelector(".ListOverlay__list__1epFe") ||
+              document.createElement("HTMLDivElement"),
+            user_button = document.querySelector(".UserItem__menuBtn__1ST9k");
 
           if (users.childElementCount === 1 || user_button !== null) {
             details = `Hosting (${users.childElementCount} Users)`;
@@ -110,11 +108,11 @@ presence.on("UpdateData", async () => {
             state = title.textContent;
 
             const current = document.querySelector(
-              ".Timeline__time__gcvG5:nth-child(1)"
-            ),
-             duration = document.querySelector(
-              ".Timeline__time__gcvG5:nth-child(3)"
-            );
+                ".Timeline__time__gcvG5:nth-child(1)"
+              ),
+              duration = document.querySelector(
+                ".Timeline__time__gcvG5:nth-child(3)"
+              );
             if (current && duration) {
               const timestamps = getTimestamps(
                 current.textContent,
