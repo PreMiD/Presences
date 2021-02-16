@@ -6,12 +6,12 @@ let elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo"
-  },
-   inGame =
-    document.querySelector("#containerGamePlayers").textContent === ""
-      ? false
-      : true;
+      largeImageKey: "logo"
+    },
+    inGame =
+      document.querySelector("#containerGamePlayers").textContent === ""
+        ? false
+        : true;
   if (inGame) {
     const round = document.querySelector("#round").textContent;
     data.details = round;
