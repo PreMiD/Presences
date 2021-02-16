@@ -27,7 +27,7 @@
     "@typescript-eslint/parser": "^4.14.1",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
-    "eslint": "^7.18.0",
+    "eslint": "^7.20.0",
     "execa": "^5.0.0",
     "glob": "^7.1.6",
     "jsonschema": "^1.4.0",
