@@ -52,23 +52,24 @@ presence.on("UpdateData", async () => {
 
         const data = {
             title: document.querySelector('h1 a').textContent,
-            ep: document.querySelector('h1').textContent.replace(document.querySelector('h1 a').textContent, '')
+            ep: document.querySelector('h1').textContent.replace(document.querySelector('h1 a').textContent, ''), 
         },
 
+        URLItem: string = JSON['parse'](document.querySelectorAll('script[type="application/ld+json"]')[1].innerHTML)[0].itemListElement[0].item,
         video: HTMLVideoElement = document.querySelector('video'),
         timestamps: number[] = presence.getTimestampsfromMedia(video),
-        isMovie = document.location.href.includes('movie'),
-        isVShow = document.location.href.includes('variety-show'),
+        isMovie = URLItem.includes('movie'),
+        isVShow = URLItem.includes('variety-show'),
         isTrial = document.querySelector('.iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip')?.textContent !== undefined,
         lastestEp: string[] = document.querySelector('div.broken-line').nextSibling.nextSibling.nextSibling?.textContent.match(/[1-9]?[0-9]?[0-9]/g),
         contentEp: string[] = data.ep.match(/[1-9]?[0-9]?[0-9]/g),
         isPreview = (lastestEp && contentEp) ? parseInt(contentEp[0]) > parseInt(lastestEp[0]) : false;
     
-        if (isTrial) data.ep = "Trial Watching";
-        
         if (!data.ep && !isVShow && isMovie) data.ep = "Movie";
-        if (isVShow) data.ep = "Variety Show";
-        if (!data.ep.includes('/') && !isVShow && !isTrial && !isMovie) data.ep = `${(await strings).episode} ${contentEp[0]}`;
+        if (isVShow) data.ep = "Variety show";
+        if (!isVShow && !isMovie) data.ep = `${(await strings).episode} ${contentEp[0]}`;
+
+        if (isTrial) data.ep = `${data.ep} (Trial)`;
 
         if (video && !isNaN(video.duration)){
 
