@@ -4,10 +4,10 @@
     "id": "215509157837537280"
   },
   "contributors": [
-      {
-        "name": "Bryan",
-        "id": "293775922757238784"
-      }
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
   ],
   "service": "Amazon Music",
   "description": {
@@ -16,7 +16,7 @@
     "zh_TW": "Amazon Music是由Amazon.com經營的音樂串流平台和在線音樂商店。"
   },
   "url": "music.amazon.com",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/AUKbzxX.png",
   "thumbnail": "https://i.imgur.com/htSGR6k.png",
   "color": "#21293C",
