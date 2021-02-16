@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
 
         const data = {
             title: document.querySelector('h1 a').textContent,
-            ep: document.querySelector('h1').textContent.replace(document.querySelector('h1 a').textContent, ''), 
+            ep: document.querySelector('h1').textContent.replace(document.querySelector('h1 a').textContent, '')
         },
 
         URLItem: string = JSON['parse'](document.querySelectorAll('script[type="application/ld+json"]')[1].innerHTML)[0].itemListElement[0].item,
