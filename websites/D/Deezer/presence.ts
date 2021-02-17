@@ -87,84 +87,43 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data, !paused);
     }
   } else {
-    const pathname = document.location.pathname;
-
+    const pathname = document.location.pathname,
+      data: PresenceData = {
+        largeImageKey: "deezer"
+      };
     if (pathname.includes("shows")) {
-      const data: PresenceData = {
-        details: "Browsing...",
-        state: "Shows",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Browsing...",
+      data.state = "Shows";
     } else if (pathname.includes("channels")) {
-      const data: PresenceData = {
-        details: "Browsing...",
-        state: "Channels",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Browsing...",
+      data.state = "Channels";
     } else if (pathname.includes("loved")) {
-      const data: PresenceData = {
-        details: "Browsing...",
-        state: "User's Loved",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Browsing...",
+      data.state = "User's Loved";
     } else if (pathname.includes("playlists")) {
-      const data: PresenceData = {
-        details: "Browsing...",
-        state: "User's Playlists",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Browsing...",
+      data.state = "User's Playlists";
     } else if (pathname.includes("albums")) {
-      const data: PresenceData = {
-        details: "Browsing...",
-        state: "User's Albums",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Browsing...",
+      data.state = "User's Albums";
     } else if (pathname.includes("artists")) {
-      const data: PresenceData = {
-        details: "Browsing...",
-        state: "User's Artists",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Browsing...",
+      data.state = "User's Artists";
     } else if (pathname.includes("podcasts")) {
-      const data: PresenceData = {
-        details: "Browsing...",
-        state: "User's Podcasts",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Browsing...",
+      data.state = "User's Podcasts";
     } else if (pathname.includes("playlist")) {
-      const data: PresenceData = {
-        details: "Looking at...",
-        state: "A Playlist",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Looking at...",
+      data.state = "A Playlist";
     } else if (pathname.includes("album")) {
-      const data: PresenceData = {
-        details: "Looking at...",
-        state: "An Album",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Looking at...",
+      data.state = "An Album";
     } else if (pathname.includes("artist")) {
-      const data: PresenceData = {
-        details: "Looking at...",
-        state: "An Artist",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Looking at...",
+      data.state = "An Artist";
     } else {
-      const data: PresenceData = {
-        details: "Browsing...",
-        largeImageKey: "deezer"
-      };
-      presence.setActivity(data);
+      data.details = "Browsing...";
     }
+    presence.setActivity(data);
   }
 });
