@@ -47,18 +47,18 @@ presence.on("UpdateData", async () => {
         pausedIcon = document
           .querySelector("music-button.hydrated:nth-child(4)")
           .shadowRoot.querySelector("button > div > music-icon");
-      paused = pausedIcon.attributes[1].value == "pause" ? false : true,
-      currentTime = document.querySelector(
-        "div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(1)"
-      ).textContent;
+      (paused = pausedIcon.attributes[1].value == "pause" ? false : true),
+        (currentTime = document.querySelector(
+          "div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(1)"
+        ).textContent);
       timeLeft = document
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(2)")
         .textContent.replace(" - ", "");
 
-        timestamps = presence.getTimestamps(
-          convertToSeconds(currentTime),
-          getDuration(currentTime, timeLeft)
-        );
+      timestamps = presence.getTimestamps(
+        convertToSeconds(currentTime),
+        getDuration(currentTime, timeLeft)
+      );
 
       const data: PresenceData = {
         details: title,
@@ -98,17 +98,17 @@ presence.on("UpdateData", async () => {
         pausedIcon = document
           .querySelector("music-button.hydrated:nth-child(4)")
           .shadowRoot.querySelector("button > div > music-icon");
-      paused = pausedIcon.attributes[1].value == "pause" ? false : true,
-      currentTime = document
+      (paused = pausedIcon.attributes[1].value == "pause" ? false : true),
+        (currentTime = document
+          .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
+          .textContent.split(" - ")[0]);
+      (timeLeft = document
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
-        .textContent.split(" - ")[0];
-      timeLeft = document
-        .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
-        .textContent.split(" - ")[1],
-        timestamps = presence.getTimestamps(
+        .textContent.split(" - ")[1]),
+        (timestamps = presence.getTimestamps(
           convertToSeconds(currentTime),
           getDuration(currentTime, timeLeft)
-        );
+        ));
 
       const data: PresenceData = {
         details: title,
