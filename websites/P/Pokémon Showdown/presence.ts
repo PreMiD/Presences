@@ -6,10 +6,9 @@ let elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo"
-  },
-
-   path = document.location.pathname;
+      largeImageKey: "logo"
+    },
+    path = document.location.pathname;
   if (path == "/") {
     data.details = "Viewing Homepage";
     elapsed = null;
@@ -21,7 +20,7 @@ presence.on("UpdateData", async () => {
     elapsed = null;
   } else if (path.includes("battle")) {
     const title = document.querySelector("a.roomtab i.text").textContent,
-     users = document.querySelector("a.roomtab.button.cur span").textContent;
+      users = document.querySelector("a.roomtab.button.cur span").textContent;
     data.details = title;
     data.state = users;
     if (elapsed == null) {
