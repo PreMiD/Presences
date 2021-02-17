@@ -1,21 +1,20 @@
 {
   "author": {
-    "name": "Jack Hansen",
-    "id": "140590672657776641"
+    "name": "Ben",
+    "id": "781285747058933790"
   },
-  "service": "Dual",
+  "service": "Aqua",
   "description": {
-    "en": "Let Dual power your ears with the latest and greatest music from around the world."
+    "en": "An online radio station made by the community for the community."
   },
-  "url": "dual.pw",
-  "version": "1.0.7",
-  "logo": "https://i.imgur.com/JQ1t9N5.png",
-  "thumbnail": "https://i.imgur.com/zIFABSa.png",
-  "color": "#D08CCF",
+  "url": "itsaqua.net",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/dBqeZ3q.png",
+  "thumbnail": "https://i.imgur.com/y1Uot2b.png",
+  "color": "#2980b9",
   "tags": [
     "radio",
-    "dualfm",
-    "dual",
+    "aqua",
     "audio",
     "stream",
     "music",
