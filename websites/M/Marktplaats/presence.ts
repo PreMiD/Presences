@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     if (host == "www.marktplaats.nl") {
     if (page.includes("/c/")) {
-      let numberPat = '[0-9]+',
+      const numberPat = '[0-9]+',
       r = new RegExp("/c" + numberPat),
       r2 = new RegExp("/c" + numberPat + "/");
       if (r2.test(page)) {
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
           title.innerText = title.innerText.replace("Alle categorieën in", "");
         }
         presenceData.details = "Viewing Category:";
-        presenceData.state = title.innerText
+        presenceData.state = title.innerText;
       } else if (r.test(page)) {
         title = document.querySelector("#content > h1");
         presenceData.details = "Viewing Category:";
@@ -101,13 +101,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing the homepage";
     }
   } else if (host == "help.marktplaats.nl") {
-    search = document.querySelector("#\\31 37\\:0")
+    search = document.querySelector("#\\31 37\\:0");
     title = document.querySelector("head > title");
     if (page == "/s/") {
       if (search.value != "") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Helpdesk searching for:";
-        presenceData.state = search.value
+        presenceData.state = search.value;
         presenceData.smallImageKey = "searching";
       } else {
         presenceData.startTimestamp = browsingStamp;
