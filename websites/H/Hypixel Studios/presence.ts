@@ -6,7 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "hypixel_studios_logo",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
 
   if (document.location.pathname === "/") {
@@ -23,11 +23,11 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Job Openings";
     presenceData.smallImageKey = "reading";
     if (document.location.hash === "#our-process") {
-      presenceData.state = "Our process"
+      presenceData.state = "Our process";
     } else if (document.location.hash === "#current-openings") {
-      presenceData.state = "Current job openings"
+      presenceData.state = "Current job openings";
     } else if (document.location.hash === "#from-the-team") {
-      presenceData.state = "Messages from the team"
+      presenceData.state = "Messages from the team";
     }
   } else if (document.location.pathname === "/jobs/data-protection-statement") {
     presenceData.details = "Reading the";
