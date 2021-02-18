@@ -4,17 +4,17 @@
     "id": "215509157837537280"
   },
   "contributors": [
-      {
-        "name": "Bryan",
-        "id": "293775922757238784"
-      }
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
   ],
   "service": "Wattpad",
   "description": {
     "en": "Wattpad is an Internet community for readers and writers to publish new user-generated stories in different genres, including classics, general fiction, historical fiction, non-fiction, poetry, fan-fiction, spiritual, humor, and teen fiction."
   },
   "url": "www.wattpad.com",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/cSNcCFV.png",
   "thumbnail": "https://i.imgur.com/gJmOvDd.png",
   "color": "#FF6612",
