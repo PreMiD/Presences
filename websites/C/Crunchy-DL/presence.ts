@@ -49,15 +49,14 @@ function handlePresenceData(presenceData: PresenceData) {
       const getTime = (str: string) => {
         const parts = str.split(":").map(e => parseInt(e));
         return parts[0] * 60 + parts[1];
-      };
-      
-      const timeElapsed = document.querySelector(".jw-text-elapsed").textContent,
-            timeDuration = document.querySelector(".jw-text-duration").textContent,
-            videoInfo = document.querySelector(".video-name") as HTMLElement,
-            videoName = (videoInfo.innerText.split(" -")[0]).toUpperCase(),
-            collectionNumber = path.split("/").slice(-4, -3)[0].padStart(2, "0"),
-            episodeNumber = path.split("/").slice(-2, -1)[0].padStart(2, "0"),
-            mountedEpi = `COL ${collectionNumber} - EPI ${episodeNumber}`;
+      },
+      timeElapsed = document.querySelector(".jw-text-elapsed").textContent,
+      timeDuration = document.querySelector(".jw-text-duration").textContent,
+      videoInfo = document.querySelector(".video-name") as HTMLElement,
+      videoName = (videoInfo.innerText.split(" -")[0]).toUpperCase(),
+      collectionNumber = path.split("/").slice(-4, -3)[0].padStart(2, "0"),
+      episodeNumber = path.split("/").slice(-2, -1)[0].padStart(2, "0"),
+      mountedEpi = `COL ${collectionNumber} - EPI ${episodeNumber}`;
 
       presenceData.endTimestamp = new Date().getTime() + (getTime(timeDuration) - getTime(timeElapsed)) * 1000;
       
