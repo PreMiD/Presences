@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Job Openings";
     presenceData.smallImageKey = "reading";
     if (document.location.hash === "#our-process") {
-      presenceData.state = "The process"
+      presenceData.state = "Our process"
     } else if (document.location.hash === "#current-openings") {
       presenceData.state = "Current job openings"
     } else if (document.location.hash === "#from-the-team") {
@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the";
     presenceData.state = "Press information";
   } else if (document.location.pathname.includes("/docs/")) {
-    const docName = document.location.pathname.split("/").pop().replace(".pdf", "").replace("press-release-", "").split("-")
+    const docName = document.location.pathname.split("/").pop().replace(".pdf", "").replace("press-release-", "").split("-");
     for (let i = 0; i < docName.length; i++) docName[i] = docName[i].charAt(0).toUpperCase() + docName[i].slice(1);
     presenceData.details = "Reading the document";
     presenceData.state = docName.join(" ");
