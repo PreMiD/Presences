@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Mediafire Mobile Apps";
     }
     if (page == "/about" || page == "/about/") {
-      title = document.querySelector("#titlebar > div > h1")
+      title = document.querySelector("#titlebar > div > h1");
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
     } else if (page.includes("/about/contact_us")) {
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
     if (page == "/advertising" || page == "/advertising/") {
       title = document.querySelector("#content > h2");
       presenceData.details = "Viewing:";
-      presenceData.state = title.textContent
+      presenceData.state = title.textContent;
     } else if (page.includes("/advertising/")) {
       title = document.querySelector("#content > h2");
       if (!title) {
@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
       }
     }
     if (page == "/press" || page == "/press/") {
-      title = document.querySelector("#content > h2.h2.mb-4")
+      title = document.querySelector("#content > h2.h2.mb-4");
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
     } else if (page.includes("/press/inquiries")) {
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
   }
   if (host == "mediafire.zendesk.com") {
     if (page.includes("/articles/")) {
-      title = document.querySelector("body > main > article > header > h1")
+      title = document.querySelector("body > main > article > header > h1");
       presenceData.details = "Viewing Help Article About:";
       presenceData.state = title.textContent
     } else {
@@ -166,7 +166,7 @@ presence.on("UpdateData", async () => {
   }
   if (host == "blog.mediafire.com") {
   if (page == "/") {
-   title = document.querySelector("#fl-post-3434 > header > h2 > a")
+   title = document.querySelector("#fl-post-3434 > header > h2 > a");
    presenceData.details = "Viewing Blog Post About:";
    presenceData.state = title.textContent;
   } else {
