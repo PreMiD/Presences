@@ -35,12 +35,15 @@ function handlePresenceData(presenceData: PresenceData) {
     if(path == "/perfil/") {
       presenceData.state = "Meu Perfil";
     } else {
-      presenceData.state = "Perfil - " + document.querySelector(".profile-username").textContent;
+      const activeSubmenu = document.querySelector(".profile-menu li.active") as HTMLElement;
+      presenceData.details = "Perfil:" + document.querySelector(".profile-username").textContent;
+      presenceData.state = activeSubmenu.innerText.trim();
     }
 
   } else if(path.includes("/anime") && !path.includes("/colecao")) {
 
-    presenceData.details = "Visualizando Anime:";
+    const prependFavorite = document.querySelector(".fa-star").classList.contains("active") ? "⭐" : "";
+    presenceData.details = "Visualizando Anime " + prependFavorite;
     presenceData.state = document.querySelector(".anime-name").textContent;
 
   } else if(path.includes("/episodio")) {
