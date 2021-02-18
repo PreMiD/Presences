@@ -6,13 +6,14 @@
   },
   "service": "Crunchy-DL",
   "description": {
-    "pt": "Assista e organize seus desenhos chineses favoritos aqui, seja Naruto, One Piece, AOT. Temos todos !"
+    "pt": "Assista e organize seus animes favoritos aqui, seja Naruto, One Piece, AOT. Temos todos !",
+    "en": "Watch and organize your favorite animes, be it Naruto, One Piece, AOT. We have all of them !"
   },
   "url": ["crunchy-dl.com", "www.crunchy-dl.com"],
-  "version": "0.1",
+  "version": "1.0",
   "logo": "https://i.imgur.com/aHPnm77.png",
   "thumbnail": "https://i.imgur.com/NUXQPhL.png",
   "color": "#EE5C2C",
   "tags": ["anime", "crdl", "crunchy-dl"],
-  "category": "Anime"
+  "category": "anime"
 }
