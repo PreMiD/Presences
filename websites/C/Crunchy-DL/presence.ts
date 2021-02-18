@@ -3,19 +3,16 @@ const presence = new Presence({
 });
 
 function handlePresenceData(presenceData: PresenceData) {
-  const viewingRoutes = ["/", "/perfil", "/categoria"];
-  const path = location.pathname;
-
-  const capitalize = (str: String) => {
-    // joke below. ignore it
-
-    return str.split(" ").map((e) => {
-      return e.split("").map((ee, ii) => {
-          return ii == 0 ? ee.toUpperCase() : ee.toLowerCase();
-      }).join("");
-    }).join(" ");
-
-  }
+  const viewingRoutes = ["/", "/perfil", "/categoria"],
+        path = location.pathname,
+        capitalize = (str: string) => {
+          // lols below.. ignore it
+          return str.split(" ").map((e) => {
+            return e.split("").map((ee, ii) => {
+                return ii == 0 ? ee.toUpperCase() : ee.toLowerCase();
+            }).join("");
+          }).join(" ");
+        };
 
   if(viewingRoutes.includes("/" + path.split("/")[1])) {
     presenceData.details = "Visualizando:";
@@ -49,18 +46,18 @@ function handlePresenceData(presenceData: PresenceData) {
   } else if(path.includes("/episodio")) {
     
     try {
-      const getTime = (str: String) => {
+      const getTime = (str: string) => {
         const parts = str.split(":").map(e => parseInt(e));
         return parts[0] * 60 + parts[1];
-      }
+      };
       
-      const timeElapsed = document.querySelector(".jw-text-elapsed").textContent;
-      const timeDuration = document.querySelector(".jw-text-duration").textContent;
-      const videoInfo = document.querySelector(".video-name") as HTMLElement;
-      const videoName = (videoInfo.innerText.split(" -")[0]).toUpperCase();
-      const collectionNumber = path.split("/").slice(-4, -3)[0].padStart(2, "0");
-      const episodeNumber = path.split("/").slice(-2, -1)[0].padStart(2, "0");
-      const mountedEpi = `COL ${collectionNumber} - EPI ${episodeNumber}`;
+      const timeElapsed = document.querySelector(".jw-text-elapsed").textContent,
+            timeDuration = document.querySelector(".jw-text-duration").textContent,
+            videoInfo = document.querySelector(".video-name") as HTMLElement,
+            videoName = (videoInfo.innerText.split(" -")[0]).toUpperCase(),
+            collectionNumber = path.split("/").slice(-4, -3)[0].padStart(2, "0"),
+            episodeNumber = path.split("/").slice(-2, -1)[0].padStart(2, "0"),
+            mountedEpi = `COL ${collectionNumber} - EPI ${episodeNumber}`;
 
       presenceData.endTimestamp = new Date().getTime() + (getTime(timeDuration) - getTime(timeElapsed)) * 1000;
       
@@ -86,7 +83,7 @@ presence.on("UpdateData", async () => {
     smallImageKey: "funi",
     smallImageText: "CR-DL",
     details: ".",
-    state: ".",
+    state: "."
    };
 
   if (presenceData.details == null) {
