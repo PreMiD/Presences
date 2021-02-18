@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing task";
   } else if (document.location.href.includes("homeworks")) {
     presenceData.details = "Viewing task";
-  } else if (document.location.href.includes("login")) {
+  } else if (document.location.href.includes("login?userType=student")) {
     presenceData.details = "Logging in";
   } else if (document.location.href.includes("todo")) {
     presenceData.details = "Viewing task list";
