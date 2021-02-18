@@ -6,8 +6,7 @@ const presence = new Presence({
         play: "presence.playback.playing",
         pause: "presence.playback.paused",
         search: "presence.activity.searching",
-        read: "presence.activity.reading",
-        write: "Pisanie"
+        read: "presence.activity.reading"
     });
     
     const browsingStamp = Math.floor(Date.now() / 1000);
@@ -107,39 +106,39 @@ const presence = new Presence({
     }
     else if (pathname.includes("/page/terms"))
     {
-        data.state = "REGULAMIN KORZYSTANIA Z SERWISU WOW";
+        data.state = "Regulamin korzystania z serwisu WOW";
         data.smallImageKey = "question";
         data.smallImageText = (await strings).read;
     } 
     else if (pathname.includes("/page/policy"))
     {
-        data.state = "POLITYKA PRYWATNOŚCI WORLDWIDE OTT PLATFORM SP. Z O.O.";
+        data.state = "Polityka prywatności Worldwide Ott Platform Sp. z o.o.";
         data.smallImageKey = "question";
         data.smallImageText = (await strings).read;
     } 
     else if (pathname.includes("/page/cookie"))
     {
-        data.state = "POLITYKA COOKIES";
+        data.state = "Polityka cookies";
         data.smallImageKey = "question";
         data.smallImageText = (await strings).read;
     } 
     else if (pathname.includes("/login") || pathname.includes("/subscriber/password/reset"))
     {
-        data.details = "Loguje się!";
+        data.details = "Loguje się";
         data.smallImageKey = "pen";
-        data.smallImageText = (await strings).write;
+        data.smallImageText = "Pisanie";
     } 
     else if (pathname.includes("/register"))
     {
-        data.details = "Tworzy konto!";
+        data.details = "Tworzy konto";
         data.smallImageKey = "pen";
-        data.smallImageText = (await strings).write;
+        data.smallImageText = "Pisanie";
     }
     else if (pathname.includes("/contact"))
     {
-        data.details = "Zgłasza problem!";
+        data.details = "Zgłasza problem";
         data.smallImageKey = "pen";
-        data.smallImageText = (await strings).write;
+        data.smallImageText = "Pisanie";
     } 
 
     if (!data.details) 
