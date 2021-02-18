@@ -7,10 +7,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "eyyv17uu4aq4ri0"
   };
 
-
-
-
-  if (document.location.href.includes("calendar/personal")) {
+   if (document.location.href.includes("calendar/personal")) {
     presenceData.details = "Viewing timetable";
   } else if (document.location.href.includes("behaviour")) {
     presenceData.details = "Viweing behaviour Dashboard";
