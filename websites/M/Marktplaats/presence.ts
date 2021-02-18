@@ -13,6 +13,9 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
     if (host == "www.marktplaats.nl") {
+    if (page == "/") {
+        presenceData.details = "Viewing the homepage";
+      }
     if (page.includes("/c/")) {
       const numberPat = '[0-9]+',
       r = new RegExp("/c" + numberPat),
@@ -96,9 +99,6 @@ presence.on("UpdateData", async () => {
     } else if (page.includes("/profile/")) {
       presenceData.details = "Viewing:";
       presenceData.state = "My Profile";
-    }
-     if (page == "/") {
-      presenceData.details = "Viewing the homepage";
     }
   } else if (host == "help.marktplaats.nl") {
     search = document.querySelector("#\\31 37\\:0");
