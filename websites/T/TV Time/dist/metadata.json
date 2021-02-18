@@ -1,16 +1,22 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Alexx",
+    "id": "604182077088202784"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ], 
   "service": "TV Time",
   "description": {
     "en": "TV Time is an online service centered exclusively on television series. It enables users to get information and comment on the shows they follow, featuring various segments of information related to them, such as new episodes release dates, and various options based on user reaction."
   },
   "url": "www.tvtime.com",
-  "version": "1.2.5",
-  "logo": "https://i.gyazo.com/02694b977eeb514613a3fc13edbc74a9.png",
-  "thumbnail": "https://i.gyazo.com/a7b3b0063570cfadce31d2f64c5a69a2.png",
+  "version": "1.2.6",
+  "logo": "https://i.imgur.com/KuPkyx2.png",
+  "thumbnail": "https://i.imgur.com/9Uc9myA.png",
   "color": "#FDDF39",
   "tags": [
     "tvtime",
