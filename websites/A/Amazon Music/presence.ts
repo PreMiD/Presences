@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
 
       timestamps = presence.getTimestamps(
         presence.timestampFromFormat(currentTime),
-        presence.timestampFromFormat(timeLeft)
+        (presence.timestampFromFormat(timeLeft) + presence.timestampFromFormat(currentTime))
       );
 
       const data: PresenceData = {
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
         .textContent.split(" - ")[1]),
         (timestamps = presence.getTimestamps(
           presence.timestampFromFormat(currentTime),
-          presence.timestampFromFormat(timeLeft)
+          (presence.timestampFromFormat(timeLeft) + presence.timestampFromFormat(currentTime))
         ));
 
       const data: PresenceData = {
