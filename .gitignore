@@ -18,3 +18,4 @@ package-lock.json
 
 # Exception for extension recommendations
 !**/.vscode/extensions.json
+/.vs
