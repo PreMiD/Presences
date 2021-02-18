@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
     if (window.location.pathname.startsWith('/forum')) {
       presenceData.smallImageKey = "forum";
       if (window.location.pathname.startsWith('/forum/forum-') || window.location.pathname.startsWith('/forum/topic-') || window.location.pathname.startsWith('/forum/viewforum.php') || window.location.pathname.startsWith('/forum/message-')){
-        presenceData.details = 'Viewing a topic in the forum:'
+        presenceData.details = 'Viewing a topic in the forum:';
         presenceData.state = document.querySelector('.crumbs').textContent.replace('Accueil','').replace('»','');
       } else if (window.location.pathname.startsWith('/forum/index.php') || window.location.pathname === '/forum/') {
         presenceData.details = "Viewing a page:";
