@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "811572600294735902"
 }), browsingStamp = Math.floor(Date.now() / 1000);
-let search: any,
-title: any;
+let search: HTMLInputElement,
+title: Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -19,29 +19,29 @@ presence.on("UpdateData", async () => {
       r2 = new RegExp("/c" + numberPat + "/");
       if (r2.test(page)) {
         title = document.querySelector("div.bucket-page.active > h2.bucket-title.heading.heading-3");
-        if (title.innerText.includes("Alle categorieën in")) {
-          title.innerText = title.innerText.replace("Alle categorieën in", "");
+        if (title.textContent.includes("Alle categorieën in")) {
+          title.textContent = title.textContent.replace("Alle categorieën in", "");
         }
         presenceData.details = "Viewing Category:";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
       } else if (r.test(page)) {
         title = document.querySelector("#content > h1");
         presenceData.details = "Viewing Category:";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
       }
     } else if (page.includes("/a/")) {
       title = document.querySelector("#title");
       presenceData.details = "Viewing Item:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
     } else if (page.includes("/u/")) {
       title = document.querySelector("#content > section > div > div.mp-TopSection > div > div");
       presenceData.details = "Viewing User:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
     }
     if (page.includes("/veilig-en-succesvol/")) {
        title = document.querySelector("#hero-top > section > div > div.column > div > div:nth-child(1) > h1");
        presenceData.details = "Reading about:";
-       presenceData.state = title.innerText;
+       presenceData.state = title.textContent;
     } 
     if (page == "/i/help/contact/") {
       presenceData.details = "Reading about:";
@@ -59,11 +59,11 @@ presence.on("UpdateData", async () => {
           }
         }
         presenceData.details = "Reading about:";
-        presenceData.state = title.innerText;
+        presenceData.state = title.textContent;
       } else {
       title = document.querySelector("#page-wrapper > div > div.content > main > div > h3");
       presenceData.details = "Reading about:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       }
     }
     if (page == "/messages") {
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
     } else if (page.includes("/messages/")) {
       title = document.querySelector("div.AdvertisementSnippetMolecule-title");
       presenceData.details = "Viewing messages about:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
     }
     if (page == "/notifications") {
       presenceData.details = "Viewing:";
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
     if (page.includes("/topic/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Helpdesk viewing:";
-      presenceData.state = title.innerText.replace(" | Helpdesk", "");
+      presenceData.state = title.textContent.replace(" | Helpdesk", "");
       presenceData.smallImageKey = "reading";
     }
   }
