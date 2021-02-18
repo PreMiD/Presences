@@ -10,19 +10,19 @@ presence.on("UpdateData", async () => {
   if (document.location.href.includes("calendar/personal")) {
     presenceData.details = "Viewing timetable";
   } else if (document.location.href.includes("behaviour")) {
-    presenceData.details = "Viweing behaviour Dashboard";
+    presenceData.details = "Viewing behaviour Dashboard";
   } else if (document.location.href.includes("gradebook")) {
-    presenceData.details = "Viweing Grades";
+    presenceData.details = "Viewing Grades";
   } else if (document.location.href.includes("calendar/school")) {
-    presenceData.details = "Viweing whole school calendar";
+    presenceData.details = "Viewing whole school calendar";
   } else if (document.location.href.includes("classwork")) {
-    presenceData.details = "Viweing task";
+    presenceData.details = "Viewing task";
   } else if (document.location.href.includes("homeworks")) {
-    presenceData.details = "Viweing task";
+    presenceData.details = "Viewing task";
   } else if (document.location.href.includes("login")) {
     presenceData.details = "Logging in";
   } else if (document.location.href.includes("todo")) {
-    presenceData.details = "Task list";
+    presenceData.details = "Viewing task list";
   }
 
   if (presenceData.details == null) {
