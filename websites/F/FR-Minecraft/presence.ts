@@ -23,7 +23,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Forum";
       } else if (window.location.pathname.startsWith('/forum/profile.php')) {
         presenceData.details = "Viewing a user:";
-        presenceData.state = document.title.replace('Profil de','').replace('/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.','')+ ' (by the forum)';
+        if (document.title.replace('Profil de','').replace('/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.','') === 'Principal / Profil ') presenceData.state = document.querySelector('.blockform > h2 > span').textContent.replace(' - Principal','') + ' (by the forum)';
+        else presenceData.state = document.title.replace('Profil de','').replace('/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.','')+ ' (by the forum)';
       } else if (window.location.pathname.startsWith('/forum/userlist.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Userlist (Forum)";
