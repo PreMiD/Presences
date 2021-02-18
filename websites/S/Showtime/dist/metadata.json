@@ -1,16 +1,22 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Alexx",
+    "id": "604182077088202784"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Showtime",
   "description": {
     "en": "Showtime is an American premium television network that serves as the flagship service of the Showtime Networks subsidiary of CBS Corporation, which also owns sister services The Movie Channel and Flix."
   },
-  "url": "www.showtime.com",
-  "version": "1.2.6",
-  "logo": "https://i.gyazo.com/5c9731e9f29c7aa030b66dc93f73a2b7.png",
-  "thumbnail": "https://i.gyazo.com/2f6a8aa960baff4d27babf14c5fe806f.png",
+  "url": "www.sho.com",
+  "version": "1.2.7",
+  "logo": "https://i.imgur.com/NF61OBJ.png",
+  "thumbnail": "https://i.imgur.com/PrH5IJL.png",
   "color": "#B20000",
   "tags": [
     "video",
