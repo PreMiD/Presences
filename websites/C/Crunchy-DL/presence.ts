@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "811867948721504268" //The client ID of the Application created at https://discordapp.com/developers/applications
+  clientId: "811867948721504268"
 });
 
 function handlePresenceData(presenceData: PresenceData) {
@@ -21,14 +21,12 @@ function handlePresenceData(presenceData: PresenceData) {
     presenceData.details = "Visualizando:";
   }
 
-  console.log();
-
   if(path == "/") {
 
     presenceData.state = "Página Inicial";
 
   } else if(path.includes("/categoria")) {
-
+    
     const category = capitalize(document.querySelector(".category > h1").textContent);
     presenceData.state = category;
 
@@ -46,7 +44,6 @@ function handlePresenceData(presenceData: PresenceData) {
     presenceData.state = document.querySelector(".anime-name").textContent;
 
   } else if(path.includes("/episodio")) {
-    
     
     try {
       const getTime = (str: String) => {
@@ -69,11 +66,12 @@ function handlePresenceData(presenceData: PresenceData) {
     } catch(e) {
       void(0);
     }
-
     
   } else if(path.includes("/sala")) {
+
     presenceData.details = "Em uma sala";
     presenceData.state = "Assistindo com amigo";
+
   }
 
   presence.setActivity(presenceData);
