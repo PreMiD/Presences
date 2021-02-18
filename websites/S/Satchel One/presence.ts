@@ -10,9 +10,9 @@ presence.on("UpdateData", async () => {
   if (document.location.href.includes("calendar/personal")) {
     presenceData.details = "Viewing timetable";
   } else if (document.location.href.includes("behaviour")) {
-    presenceData.details = "Viewing behaviour Dashboard";
+    presenceData.details = "Viewing behaviour dashboard";
   } else if (document.location.href.includes("gradebook")) {
-    presenceData.details = "Viewing Grades";
+    presenceData.details = "Viewing grades";
   } else if (document.location.href.includes("calendar/school")) {
     presenceData.details = "Viewing whole school calendar";
   } else if (document.location.href.includes("classwork")) {
