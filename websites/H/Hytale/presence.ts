@@ -45,6 +45,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Community page";
   } else if (document.location.pathname === "/jobs") {
     presenceData.details = "Viewing Job Openings";
+  } else if (document.location.pathname === "/jobs/data-protection-statement") {
+    presenceData.details = "Reading the";
+    presenceData.state = "Data protection statement"
   } else if (document.location.pathname.includes("/jobs/")) {
     presenceData.details = "Viewing Job";
     presenceData.state = document.querySelector(".pageHeading").textContent;
