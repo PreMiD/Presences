@@ -13,19 +13,6 @@ let fullscreen: boolean,
   timeLeft,
   timestamps;
 
-function getDuration(time1: string, time2: string) {
-  return (
-    parseInt(time1.split(":")[0]) * 60 +
-    parseInt(time1.split(":")[1]) +
-    parseInt(time2.split(":")[0]) * 60 +
-    parseInt(time2.split(":")[1])
-  );
-}
-
-function convertToSeconds(time: string) {
-  return parseInt(time.split(":")[0]) * 60 + parseInt(time.split(":")[1]);
-}
-
 presence.on("UpdateData", async () => {
   player =
     document.querySelector(
@@ -56,8 +43,8 @@ presence.on("UpdateData", async () => {
         .textContent.replace(" - ", "");
 
       timestamps = presence.getTimestamps(
-        convertToSeconds(currentTime),
-        getDuration(currentTime, timeLeft)
+        presence.timestampFromFormat(currentTime),
+        presence.timestampFromFormat(timeLeft)
       );
 
       const data: PresenceData = {
@@ -106,8 +93,8 @@ presence.on("UpdateData", async () => {
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
         .textContent.split(" - ")[1]),
         (timestamps = presence.getTimestamps(
-          convertToSeconds(currentTime),
-          getDuration(currentTime, timeLeft)
+          presence.timestampFromFormat(currentTime),
+          presence.timestampFromFormat(timeLeft)
         ));
 
       const data: PresenceData = {
