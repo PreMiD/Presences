@@ -7,11 +7,7 @@ const presence = new Presence({
     live: "presence.activity.live"
   });
 
-function parseTimestamp(time: string) {
-  return parseInt(time.split(":")[0]) * 60 + parseInt(time.split(":")[1]);
-}
-
-let currentTime, duration, parsedTimestamps, title, author, episode;
+let currentTime, duration, title, author, episode;
 
 presence.on("UpdateData", async () => {
   const player = document.querySelector(".page-player");
@@ -26,19 +22,16 @@ presence.on("UpdateData", async () => {
     ).textContent),
       (duration = document.querySelector(
         "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
-      ).textContent),
-      (parsedTimestamps = [
-        parseTimestamp(currentTime),
-        parseTimestamp(duration)
-      ]);
+      ).textContent);
 
     const timestamps = presence.getTimestamps(
-        parsedTimestamps[0],
-        parsedTimestamps[1]
+        presence.timestampFromFormat(currentTime),
+        presence.timestampFromFormat(duration)
       ),
-      show = document.querySelector(".track-link:nth-child(2)") === null
-        ? true
-        : false;
+      show =
+        document.querySelector(".track-link:nth-child(2)") === null
+          ? true
+          : false;
 
     if (!show) {
       (title = document.querySelector(".track-link:nth-child(1)").textContent),
@@ -92,35 +85,25 @@ presence.on("UpdateData", async () => {
         largeImageKey: "deezer"
       };
     if (pathname.includes("shows")) {
-      data.details = "Browsing...",
-      data.state = "Shows";
+      (data.details = "Browsing..."), (data.state = "Shows");
     } else if (pathname.includes("channels")) {
-      data.details = "Browsing...",
-      data.state = "Channels";
+      (data.details = "Browsing..."), (data.state = "Channels");
     } else if (pathname.includes("loved")) {
-      data.details = "Browsing...",
-      data.state = "User's Loved";
+      (data.details = "Browsing..."), (data.state = "User's Loved");
     } else if (pathname.includes("playlists")) {
-      data.details = "Browsing...",
-      data.state = "User's Playlists";
+      (data.details = "Browsing..."), (data.state = "User's Playlists");
     } else if (pathname.includes("albums")) {
-      data.details = "Browsing...",
-      data.state = "User's Albums";
+      (data.details = "Browsing..."), (data.state = "User's Albums");
     } else if (pathname.includes("artists")) {
-      data.details = "Browsing...",
-      data.state = "User's Artists";
+      (data.details = "Browsing..."), (data.state = "User's Artists");
     } else if (pathname.includes("podcasts")) {
-      data.details = "Browsing...",
-      data.state = "User's Podcasts";
+      (data.details = "Browsing..."), (data.state = "User's Podcasts");
     } else if (pathname.includes("playlist")) {
-      data.details = "Looking at...",
-      data.state = "A Playlist";
+      (data.details = "Looking at..."), (data.state = "A Playlist");
     } else if (pathname.includes("album")) {
-      data.details = "Looking at...",
-      data.state = "An Album";
+      (data.details = "Looking at..."), (data.state = "An Album");
     } else if (pathname.includes("artist")) {
-      data.details = "Looking at...",
-      data.state = "An Artist";
+      (data.details = "Looking at..."), (data.state = "An Artist");
     } else {
       data.details = "Browsing...";
     }
