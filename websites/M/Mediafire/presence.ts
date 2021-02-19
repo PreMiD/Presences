@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
     if (page.includes("/articles/")) {
       title = document.querySelector("body > main > article > header > h1");
       presenceData.details = "Viewing Help Article About:";
-      presenceData.state = title.textContent
+      presenceData.state = title.textContent;
     } else {
     search = document.querySelector("#query");
     if (search.value != "") {
