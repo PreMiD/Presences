@@ -78,11 +78,7 @@ function handlePresenceData(presenceData: PresenceData) {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "large",
-    smallImageKey: "funi",
-    smallImageText: "CR-DL",
-    details: ".",
-    state: "."
+    largeImageKey: "large"
    };
 
   if (presenceData.details == null) {
