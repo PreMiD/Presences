@@ -32,7 +32,7 @@ let lastTitle: string,
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo",
+      largeImageKey: "logo"
     },
     changedetails = await presence.getSetting("changedetails"),
     changestate = await presence.getSetting("changestate"),

@@ -1,21 +1,39 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Bas950",
+    "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Genius",
   "description": {
-    "en": "Genius is an American digital media company. Originally founded in August 2009 by Tom Lehman, Ilan Zechory, and Mahbod Moghadam, the site allows users to provide annotations and interpretation of song lyrics, news stories, sources, poetry, and documents."
+    "en": "Genius is the world’s biggest collection of song lyrics and musical knowledge."
   },
   "url": "genius.com",
-  "version": "1.2.6",
-  "logo": "https://i.gyazo.com/357a0d4aaf1cedfa41dfb38bf3acb961.png",
-  "thumbnail": "https://i.gyazo.com/b731765a33a4395e361782abfeb650d5.png",
+  "version": "2.0.0",
+  "logo": "https://i.imgur.com/C2J5rrN.png",
+  "thumbnail": "https://i.imgur.com/mxOLBAC.png",
   "color": "#FFFF64",
   "tags": [
     "genius",
     "lyrics",
     "music"
   ],
-  "category": "music"
+  "category": "music",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }

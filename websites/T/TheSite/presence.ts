@@ -1,21 +1,21 @@
 const presence = new Presence({
-  clientId: "702668334990098523"
-}),
- strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  browse: "presence.activity.browsing",
-  search: "presence.activity.searching"
-}),
- getElement = (query: string): string => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return "Loading...";
-},
- videoStatus = (video: HTMLVideoElement): string => {
-  return video.paused ? "pause" : "play";
-};
+    clientId: "702668334990098523"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browse: "presence.activity.browsing",
+    search: "presence.activity.searching"
+  }),
+  getElement = (query: string): string => {
+    const element = document.querySelector(query);
+    if (element) {
+      return element.textContent.replace(/^\s+|\s+$/g, "");
+    } else return "Loading...";
+  },
+  videoStatus = (video: HTMLVideoElement): string => {
+    return video.paused ? "pause" : "play";
+  };
 
 let oldUrl: string,
   elapsed: number,
@@ -173,7 +173,7 @@ function setObject(path: string) {
     }
   }
 }
-  
+
 presence.on("UpdateData", async () => {
   const path = location.pathname.replace(/\/?$/, "/"),
     video: HTMLVideoElement = document.querySelector("video"),
@@ -182,14 +182,14 @@ presence.on("UpdateData", async () => {
     showBrowseInfo = await presence.getSetting("browse"),
     showVideoInfo = await presence.getSetting("video"),
     data: PresenceData = {
-    details: undefined,
-    state: undefined,
-    largeImageKey: "thesite",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: undefined,
-    endTimestamp: undefined
-  };
+      details: undefined,
+      state: undefined,
+      largeImageKey: "thesite",
+      smallImageKey: undefined,
+      smallImageText: undefined,
+      startTimestamp: undefined,
+      endTimestamp: undefined
+    };
 
   if (oldUrl !== path) {
     oldUrl = path;
@@ -205,7 +205,10 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = status;
     data.smallImageText = (await strings)[status];
     if (status === "play") {
-      const timestamps = presence.getTimestamps(video.currentTime, video.duration);
+      const timestamps = presence.getTimestamps(
+        video.currentTime,
+        video.duration
+      );
       data.startTimestamp = timestamps[0];
       data.endTimestamp = timestamps[1];
     }
@@ -266,8 +269,8 @@ presence.on("UpdateData", async () => {
     if (path.includes("/shows")) {
       const menu: HTMLElement = document.querySelector(".mv-movie-info"),
         regex: RegExpMatchArray = getElement(
-        ".mv-movie-title > span > span > strong"
-      ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/),
+          ".mv-movie-title > span > span > strong"
+        ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/),
         setting = await presence.getSetting("show-format"),
         title: string = getElement(".mv-movie-title > span > a");
       if (title !== "Loading...") {

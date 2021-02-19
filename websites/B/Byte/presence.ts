@@ -1,17 +1,16 @@
 const presence = new Presence({
-  clientId: "671199009674756146"
-}),
- strings = presence.getStrings({
-  browse: "presence.activity.browsing",
-  search: "presence.activity.searching"
-}),
-
- getElement = (query: string): string => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return undefined;
-};
+    clientId: "671199009674756146"
+  }),
+  strings = presence.getStrings({
+    browse: "presence.activity.browsing",
+    search: "presence.activity.searching"
+  }),
+  getElement = (query: string): string => {
+    const element = document.querySelector(query);
+    if (element) {
+      return element.textContent.replace(/^\s+|\s+$/g, "");
+    } else return undefined;
+  };
 
 let oldUrl: string, elapsed: number;
 
@@ -22,7 +21,7 @@ function setObject(path: string) {
         details: "Browsing"
       };
     }
-    
+
     case "/about/": {
       return {
         details: "Viewing",
@@ -50,7 +49,7 @@ function setObject(path: string) {
         state: "Terms of Service"
       };
     }
-    
+
     case "/privacy/": {
       return {
         details: "Viewing",
@@ -76,17 +75,17 @@ function setObject(path: string) {
 
 presence.on("UpdateData", async () => {
   const host = location.host,
-   path = location.pathname.replace(/\/?$/, "/"),
-   detailsObj = setObject(path),
-   data: PresenceData = {
-    details: detailsObj.details,
-    state: detailsObj.state,
-    largeImageKey: "byte",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: undefined,
-    endTimestamp: undefined
-  };
+    path = location.pathname.replace(/\/?$/, "/"),
+    detailsObj = setObject(path),
+    data: PresenceData = {
+      details: detailsObj.details,
+      state: detailsObj.state,
+      largeImageKey: "byte",
+      smallImageKey: undefined,
+      smallImageText: undefined,
+      startTimestamp: undefined,
+      endTimestamp: undefined
+    };
 
   if (oldUrl !== path) {
     oldUrl = path;

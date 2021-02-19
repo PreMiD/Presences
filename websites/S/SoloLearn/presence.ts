@@ -1,17 +1,19 @@
 const presence = new Presence({
-  clientId: "668173626775830529"
-}),
- strings = presence.getStrings({
-  browsing: "presence.activity.browsing"
-}),
-
- getElement = (query: string): string | undefined => {
-  const element = document.querySelector(query);
-  return element?.textContent.trimStart().trimEnd();
-},
- stripCourse = (course: string | undefined): string | undefined => {
-  return course?.replace("Tutorial", "").replace("Fundamentals", "").trimEnd();
-};
+    clientId: "668173626775830529"
+  }),
+  strings = presence.getStrings({
+    browsing: "presence.activity.browsing"
+  }),
+  getElement = (query: string): string | undefined => {
+    const element = document.querySelector(query);
+    return element?.textContent.trimStart().trimEnd();
+  },
+  stripCourse = (course: string | undefined): string | undefined => {
+    return course
+      ?.replace("Tutorial", "")
+      .replace("Fundamentals", "")
+      .trimEnd();
+  };
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href;
@@ -53,12 +55,11 @@ const statics = {
 
 presence.on("UpdateData", async () => {
   const host = location.host,
-   path = location.pathname.replace(/\/?$/, "/"),
-
-   showBrowsing = await presence.getSetting("browse"),
-   showCourses = await presence.getSetting("course"),
-   showCodes = await presence.getSetting("code"),
-   showTimestamps = await presence.getSetting("timestamp");
+    path = location.pathname.replace(/\/?$/, "/"),
+    showBrowsing = await presence.getSetting("browse"),
+    showCourses = await presence.getSetting("course"),
+    showCodes = await presence.getSetting("code"),
+    showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
     details: undefined,

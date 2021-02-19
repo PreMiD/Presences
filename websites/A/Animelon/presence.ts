@@ -59,9 +59,11 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
-      currentAnimeWatching = document.title.replace(" - Animelon", "").split(" Episode ");
+      currentAnimeWatching = document.title
+        .replace(" - Animelon", "")
+        .split(" Episode ");
       currentAnimeTitle = currentAnimeWatching[0];
-      currentAnimeEpisode = "Episode "+currentAnimeWatching[1];
+      currentAnimeEpisode = "Episode " + currentAnimeWatching[1];
 
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
@@ -71,9 +73,11 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else {
-      currentAnimeWatching = document.title.replace(" - Animelon", "").split(" Episode ");
+      currentAnimeWatching = document.title
+        .replace(" - Animelon", "")
+        .split(" Episode ");
       currentAnimeTitle = currentAnimeWatching[0];
-      currentAnimeEpisode = "Episode "+currentAnimeWatching[1];
+      currentAnimeEpisode = "Episode " + currentAnimeWatching[1];
 
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
