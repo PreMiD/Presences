@@ -1,16 +1,14 @@
 const presence = new Presence({
-  clientId: "808667100319186964"
-}),
-
- elapsed = Math.floor(Date.now() / 1000);
+    clientId: "808667100319186964"
+  }),
+  elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  },
-
-   path = window.location.href,
-   emailCheck = window.location.href.split("/").length == 7 ? false : true;
+      largeImageKey: "logo"
+    },
+    path = window.location.href,
+    emailCheck = window.location.href.split("/").length == 7 ? false : true;
 
   if (emailCheck) {
     if (path.endsWith("#category/social")) {

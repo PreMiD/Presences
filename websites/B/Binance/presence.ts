@@ -92,7 +92,9 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.includes("/delivery")) {
       presenceData.details = "Delivery Trading";
       if (getLastPath(window.location.pathname).includes("_")) {
-        presenceData.state = getLastPath(window.location.pathname).replace("_", "/").toUpperCase();
+        presenceData.state = getLastPath(window.location.pathname)
+          .replace("_", "/")
+          .toUpperCase();
       }
     } else {
       presenceData.details = "Browsing...";
