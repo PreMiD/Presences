@@ -1,16 +1,22 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Alexx",
+    "id": "604182077088202784"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ], 
   "service": "TuneIn",
   "description": {
     "en": "TuneIn In is an American audio streaming service delivering live news, radio, sports, music, and podcasts to over 60 million monthly active users. As of 2019, TuneIn has more than 75 million monthly active users. TuneIn is operated by company TuneIn Inc which is based in San Francisco, California."
   },
   "url": "tunein.com",
-  "version": "1.1.6",
-  "logo": "https://i.gyazo.com/ee5e1c5b58462507a5f9fc2a4a88c298.png",
-  "thumbnail": "https://i.gyazo.com/b245c3b75577dfd18720ff346fcdfbcb.png",
+  "version": "1.1.7",
+  "logo": "https://i.imgur.com/mcwhb4p.png",
+  "thumbnail": "https://i.imgur.com/lewvpKU.png",
   "color": "#33B6A8",
   "tags": [
     "tunein",
