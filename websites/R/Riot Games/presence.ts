@@ -137,7 +137,10 @@ presence.on("UpdateData", async () => {
         },
         "/agents/": {
           details: "Looking at:",
-          state: "Agents - VALORANT" //ENTER HEADER
+          state:
+            document.querySelector(
+              ".slick-slide.slick-active.slick-center.slick-current > div > div > h2"
+            )?.textContent + " - VALORANT" //ENTER HEADER
         },
         "/media/": {
           details: "Browsing Media",
