@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     if (host == "www.marktplaats.nl") {
     if (page == "/") {
-      search = document.querySelector("#header-root > header > div.mp-Header > div.mp-Header-searchBar > div > form > div.mp-SearchFieldset-standard > div > div > input")
+      search = document.querySelector("#header-root > header > div.mp-Header > div.mp-Header-searchBar > div > form > div.mp-SearchFieldset-standard > div > div > input");
       if (search.value != "") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Searching For:";
