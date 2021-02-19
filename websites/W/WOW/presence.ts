@@ -8,16 +8,14 @@ const presence = new Presence({
         search: "presence.activity.searching",
         read: "presence.activity.reading"
     });
-    
-    const browsingStamp = Math.floor(Date.now() / 1000);
 
     presence.on("UpdateData", async () => {
     const data: PresenceData = {
         largeImageKey: "icon",
-        startTimestamp: browsingStamp,
+        startTimestamp: Math.floor(Date.now() / 1000),
         details: "Przegląda:"
-    };
-    const pathname: string = document.location.pathname;
+    },
+    pathname = document.location.pathname;
 
     if (pathname === "/") 
     {
