@@ -6,7 +6,8 @@
   },
   "service": "LoL Esports",
   "description": {
-    "en": "The best place to watch League of Legends Esports and earn rewards!"
+    "en": "The best place to watch League of Legends esports and earn rewards!",
+    "de": "Der beste Ort um League of Legends esports zu schauen und belohnungen zu erhalten!"
   },
   "url": "lolesports.com",
   "version": "1.0.1",
