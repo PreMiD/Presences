@@ -4,14 +4,17 @@
     "name": "Dark_Ville",
     "id": "638080361179512853"
   },
-  "url": ["www.marktplaats.nl", "help.marktplaats.nl"],
+  "url": [
+    "www.marktplaats.nl",
+    "help.marktplaats.nl"
+  ],
   "regExp": "([a-z0-9-]+[.])*marktplaats[.]nl[/]",
   "description": {
     "nl": "Geniet van tweede hands producten kopen & verkopen op marktplaats!",
     "en": "Enjoy buying & selling second hand products on marktplaats!"
   },
   "service": "Marktplaats",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/K0yeNeC.png",
   "thumbnail": "https://i.imgur.com/xOUBejy.jpg",
   "color": "#FF0000",
