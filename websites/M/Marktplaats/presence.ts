@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
     if (page.includes("/c/")) {
       if (page.includes("/auto-s/")) {
         presenceData.details = "Viewing Category:";
-        presenceData.state = "Auto's"
+        presenceData.state = "Auto's";
       } else {
         const numberPat = '[0-9]+',
         r = new RegExp("/c" + numberPat),
