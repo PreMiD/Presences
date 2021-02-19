@@ -15,6 +15,7 @@ const presence = new Presence({
         startTimestamp: Math.floor(Date.now() / 1000),
         details: "Przegląda:"
     },
+
     pathname = document.location.pathname;
 
     if (pathname === "/") 
@@ -26,6 +27,12 @@ const presence = new Presence({
         const searchData = document.location.search.split("=")[1];
         data.details = "Szuka:";
         data.state = searchData;
+        data.smallImageKey = "search";
+        data.smallImageText = (await strings).search;
+    }
+    else if(pathname.includes("/my-list"))
+    {
+        data.state = "Moja lista";
         data.smallImageKey = "search";
         data.smallImageText = (await strings).search;
     }
@@ -120,6 +127,12 @@ const presence = new Presence({
         data.smallImageKey = "question";
         data.smallImageText = (await strings).read;
     } 
+    else if(pathname.includes("/page/register"))
+    {
+        data.state = "Informacja o przetwarzaniu twoich danych osobowych";
+        data.smallImageKey = "question";
+        data.smallImageText = (await strings).read;
+    }
     else if (pathname.includes("/login") || pathname.includes("/subscriber/password/reset"))
     {
         data.details = "Loguje się";
@@ -137,7 +150,27 @@ const presence = new Presence({
         data.details = "Zgłasza problem";
         data.smallImageKey = "pen";
         data.smallImageText = "Pisanie";
-    } 
+    }
+    else if (pathname.includes("/manage-profiles"))
+    {
+        data.state = "Profile";
+        data.smallImageKey = "pen";
+        data.smallImageText = "Pisanie";
+    }
+    else if(pathname.includes("/my-account"))
+    {
+        data.state = "Moje konto";
+        data.smallImageKey = "pen";
+        data.smallImageText = "Pisanie";
+    }
+    else if(pathname.includes("/compatibility-test"))
+    {
+        data.state = "Test zgodności z urządzeniem";
+    }
+    else
+    {
+        data.state = "Nie ma takiej strony...";
+    }
 
     if (!data.details) 
     {
