@@ -1,70 +1,54 @@
 const presence = new Presence({
-    clientId: "809083630117978123"
-  }),
+  clientId: "812069625067077662"
+}),
   browsingStamp = Math.round(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "hytale_logo",
+    largeImageKey: "hypixel_studios_logo",
     startTimestamp: browsingStamp
   };
 
   if (document.location.pathname === "/") {
     presenceData.details = "Viewing the main page";
-  } else if (document.location.pathname === "/news") {
-    presenceData.details = "Browsing Blog Posts";
-  } else if (document.location.pathname.includes("/news/archive/")) {
-    presenceData.details = "Browsing Blog Archives";
-    presenceData.state = `From ${
-      document.querySelector(".subHeading").textContent
-    }`;
-  } else if (document.location.pathname.includes("/news/")) {
-    presenceData.details = "Reading Blog Post";
-    presenceData.state = document.querySelector(".post__heading").textContent;
-    presenceData.smallImageKey = "reading";
-  } else if (document.location.pathname === "/media") {
-    presenceData.details = "Browsing Hytale media";
-    if (document.location.hash.includes("#screenshots")) {
-      presenceData.state = "Screenshot";
-    } else if (document.location.hash.includes("#desktopWallpapers")) {
-      presenceData.state = "Desktop Wallpaper";
-    } else if (document.location.hash.includes("#mobileWallpapers")) {
-      presenceData.state = "Mobile Wallpaper";
-    } else if (document.location.hash.includes("#conceptArt")) {
-      presenceData.state = "Concept Art";
-    } else if (document.location.hash.includes("#videos")) {
-      presenceData.state = "Video";
-    } else if (document.location.hash.includes("#clips")) {
-      presenceData.state = "Clip";
-    }
-  } else if (document.location.pathname === "/game") {
+  } else if (document.location.pathname === "/who-we-are") {
     presenceData.details = "Learning more about";
-    presenceData.state = "the game";
-  } else if (document.location.pathname === "/community") {
-    presenceData.details = "Viewing the";
-    presenceData.state = "Community page";
+    presenceData.state = "Who they are";
+    presenceData.smallImageKey = "reading";
+  } else if (document.location.pathname === "/hytale") {
+    presenceData.details = "Learning more about";
+    presenceData.state = "Hytale";
+    presenceData.smallImageKey = "reading";
   } else if (document.location.pathname === "/jobs") {
     presenceData.details = "Viewing Job Openings";
+    presenceData.smallImageKey = "reading";
+    if (document.location.hash === "#our-process") {
+      presenceData.state = "Our process";
+    } else if (document.location.hash === "#current-openings") {
+      presenceData.state = "Current job openings";
+    } else if (document.location.hash === "#from-the-team") {
+      presenceData.state = "Messages from the team";
+    }
   } else if (document.location.pathname === "/jobs/data-protection-statement") {
     presenceData.details = "Reading the";
     presenceData.state = "Data protection statement";
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/jobs/")) {
     presenceData.details = "Viewing Job";
-    presenceData.state = document.querySelector(".pageHeading").textContent;
-  } else if (document.location.pathname === "/signup") {
-    presenceData.details = "Signing up for the beta";
-    presenceData.smallImageKey = "writing";
-  } else if (document.location.pathname === "/about") {
-    presenceData.details = "Learning more about";
-    presenceData.state = "Hypixel Studios";
-    if (document.location.hash === "#contact") {
-      presenceData.details = "Viewing the";
-      presenceData.state = "Contact information";
-    } else if (document.location.hash === "#press") {
-      presenceData.details = "Viewing the";
-      presenceData.state = "Press information";
-    }
+    presenceData.state = document.querySelector(".hy-title.job__title.hy-pad-t-2.hy-mar-t-6").textContent.trim();
+    presenceData.smallImageKey = "reading";
+  } else if (document.location.pathname === "/contact") {
+    presenceData.details = "Viewing the";
+    presenceData.state = "Contact information";
+  } else if (document.location.pathname === "/press") {
+    presenceData.details = "Viewing the";
+    presenceData.state = "Press information";
+  } else if (document.location.pathname.includes("/docs/")) {
+    const docName = document.location.pathname.split("/").pop().replace(".pdf", "").replace("press-release-", "").split("-");
+    for (let i = 0; i < docName.length; i++) docName[i] = docName[i].charAt(0).toUpperCase() + docName[i].slice(1);
+    presenceData.details = "Reading the document";
+    presenceData.state = docName.join(" ");
+    presenceData.smallImageKey = "reading";
   } else if (document.location.pathname === "/cookie-policy") {
     presenceData.details = "Reading the Cookie Policy";
     presenceData.smallImageKey = "reading";
@@ -90,14 +74,10 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname === "/legal") {
     presenceData.details = "Viewing the";
     presenceData.state = "Legal Information";
-    presenceData.smallImageKey = "reading";
   } else if (document.location.pathname === "/corporate-governance") {
     presenceData.details = "Reading about";
     presenceData.state = "Corporate Governance";
     presenceData.smallImageKey = "reading";
-  } else if (document.location.pathname === "/supersecretpage") {
-    presenceData.details = "Viewing a";
-    presenceData.state = "Super Secret Page";
   } else {
     presenceData.details = "Viewing an";
     presenceData.state = "Unknown page";
