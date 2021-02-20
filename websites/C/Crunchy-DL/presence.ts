@@ -2,8 +2,16 @@ const presence = new Presence({
   clientId: "811867948721504268"
 });
 
-function handlePresenceData(presenceData: PresenceData) {
-  const viewingRoutes = ["/", "/perfil", "/categoria"],
+presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "large"
+   };
+
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    const viewingRoutes = ["/", "/perfil", "/categoria"],
         path = location.pathname,
         capitalize = (str: string) => {
           // lols below.. ignore it
@@ -43,9 +51,7 @@ function handlePresenceData(presenceData: PresenceData) {
     presenceData.details = "Visualizando Anime " + prependFavorite;
     presenceData.state = document.querySelector(".anime-name").textContent;
 
-  } else if(path.includes("/episodio")) {
-    
-    try {
+  } else if(path.includes("/episodio") && document.querySelector("video")) {
       const getTime = (str: string) => {
         const parts = str.split(":").map(e => parseInt(e));
         return parts[0] * 60 + parts[1];
@@ -62,29 +68,17 @@ function handlePresenceData(presenceData: PresenceData) {
       
       presenceData.details = videoName;
       presenceData.state = mountedEpi;
-    } catch(e) {
-      void(0);
-    }
     
   } else if(path.includes("/sala")) {
 
     presenceData.details = "Em uma sala";
     presenceData.state = "Assistindo com amigo";
 
+  } else {
+    presenceData.details = "IDLE";
+    presenceData.state = "IDLE";
   }
 
   presence.setActivity(presenceData);
-}
-
-presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "large"
-   };
-
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    handlePresenceData(presenceData);
-  }
+  } // /else
 });
