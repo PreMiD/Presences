@@ -1,7 +1,6 @@
-interface Settings {
-    songDetails: string,
-    songState: string,
-    newLang: string
+interface LangStrings {
+    play: string,
+    pause: string
 }
 
 const presence = new Presence({
