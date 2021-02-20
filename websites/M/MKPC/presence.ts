@@ -1,8 +1,7 @@
-let presence = new Presence({
+const presence = new Presence({
   clientId: "812176837748457483"
-});
-
-let browsingStamp = Math.floor(Date.now() / 1000);
+}),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let user;
 
@@ -24,11 +23,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname == "index.php") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
-  }  const elt = document.querySelector("#compteur0 > div") as HTMLElement;
-    if (elt) {
+  } const elt = document.querySelector("#compteur0 > div") as HTMLElement;
+  if (elt) {
     const lap = elt.innerText.replace(/.+? /g, "");
-    presenceData.details = "Currently play: Lap " + lap;
-}  else if (document.location.pathname.includes("/profil.php")) {
+    presenceData.details = "Currently playing: Lap " + lap;
+  } else if (document.location.pathname.includes("/profil.php")) {
     presenceData.startTimestamp = browsingStamp;
     user = document.querySelector(
       "html > body > main > h1"
