@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Mystik",
+    "id": "590172271415525377"
+  },
+  "url": ["www.poq.gg", "prizes.poq.gg", "creators.poq.gg"],
+  "description": {
+    "en": "POQ is a platform designed for creators to host and share tournaments! Players can join tournaments and be rewarded in Quarters which they can then spend in the prize store on gaming accessories.",
+    "es": "¡POQ es una plataforma diseñada para que los creadores organicen y compartan torneos! Los jugadores pueden unirse a torneos y ser recompensados en cuartos, que luego pueden gastar en la tienda de premios en accesorios de juego."
+  },
+  "service": "POQ",
+  "version": "1.0.0",
+  "logo": "https://pbs.twimg.com/profile_images/1303313694546423808/PAaYFaSK_400x400.jpg",
+  "thumbnail": "https://pbs.twimg.com/profile_images/1303313694546423808/PAaYFaSK_400x400.jpg",
+  "color": "#FDE21F",
+  "tags": ["gaming", "fortnite", "tournaments", "poq", "esports"],
+  "category": "games",
+  "settings": [
+    {
+      "id": "prize",
+      "title": "Show what item you're viewing in the prize store.",
+      "icon": "fas fa-shopping-cart",
+      "value": true
+    }
+  ]
+}
