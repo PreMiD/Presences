@@ -8,9 +8,9 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.querySelector("span[class*=eC-title]")) {
-    presenceData.details = document.querySelector("span[class*=eC-title]").innerHTML.replace("De ", "de ").replace("Het ", "het ").replace("&amp;", "&")
+    presenceData.details = document.querySelector("span[class*=eC-title]").innerHTML.replace("De ", "de ").replace("Het ", "het ").replace("&amp;", "&");
     if (document.querySelector("span[class*=eC-subtitle]")) {
-      presenceData.state = document.querySelector("span[class*=eC-subtitle]").innerHTML.replace("De ", "de ").replace("Het ", "het ").replace("&amp;", "&")
+      presenceData.state = document.querySelector("span[class*=eC-subtitle]").innerHTML.replace("De ", "de ").replace("Het ", "het ").replace("&amp;", "&");
     }
   }
 
@@ -20,14 +20,14 @@ presence.on("UpdateData", async () => {
   }
 
   if (document.querySelector("rect")) {
-    presenceData.smallImageKey = "playing"
-    presenceData.smallImageText = "Wordt afgespeeld"
+    presenceData.smallImageKey = "playing";
+    presenceData.smallImageText = "Wordt afgespeeld";
   } else if (document.querySelector("[class*=spinner]")) {
-    presenceData.smallImageKey = "waiting"
-    presenceData.smallImageText = "Wordt geladen"
+    presenceData.smallImageKey = "waiting";
+    presenceData.smallImageText = "Wordt geladen";
   } else if (document.querySelector("polygon")) {
-    presenceData.smallImageKey = "paused"
-    presenceData.smallImageText = "Gepauzeerd"
+    presenceData.smallImageKey = "paused";
+    presenceData.smallImageText = "Gepauzeerd";
   }
 
   if (presenceData.details == null) {
