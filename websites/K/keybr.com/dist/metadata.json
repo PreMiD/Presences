@@ -9,7 +9,7 @@
         "en": "Teaching the world to type at the speed of thought! Typing lessons that work."
     },
     "service": "keybr.com",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "logo": "https://i.imgur.com/5ZUdx7o.png",
     "thumbnail": "https://i.imgur.com/D6gTvpU.png",
     "color": "#F5F0F0",
@@ -24,15 +24,15 @@
             "id": "changedetails",
             "title": "Change top line",
             "icon": "fas fa-trophy",
-            "value": "Current Key: %currentkey%",
-            "placeholder": "Current Key: %currentkey%"
+            "value": "Current Key: {currentkey}",
+            "placeholder": "Current Key: {currentkey}"
         },
         {
             "id": "changestate",
             "title": "Change second line",
             "icon": "fas fa-info",
-            "value": "WPM: %speed.wpm% | Score: %score%",
-            "placeholder": "WPM: %speed.wpm% | Score: %score%"
+            "value": "WPM: {speed.wpm} | Score: {score}",
+            "placeholder": "WPM: {speed.wpm} | Score: {score}"
         }
     ]
 }
