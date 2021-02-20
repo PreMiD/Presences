@@ -69,12 +69,12 @@ presence.on("UpdateData", async () => {
         if (isVShow) data.ep = "Variety show";
         if (!isVShow && !isMovie) data.ep = `${(await strings).episode} ${contentEp[0]}`;
 
-        if (isTrial) data.ep = `${data.ep} (Trial)`;
+        if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
         if (video && !isNaN(video.duration)){
 
             if (isPreview && !isMovie && !isVShow) data.ep = `${data.ep} preview`;
-            else if (video.duration < 270 && !isMovie && !isPreview) data.ep = "Highlight";
+            else if (video.duration < 270 && !isMovie && !isPreview && !isTrial) data.ep = "Highlight";
 
             presenceData.details = data.title;
             presenceData.state = data.ep;
