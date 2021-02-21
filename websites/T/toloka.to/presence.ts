@@ -245,10 +245,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Переглядаю теми";
       presenceData.state = "без відповідей";
     }
-    else if (document.location.search.includes("?search_id=unanswered")) {
-      presenceData.details = "Переглядаю теми";
-      presenceData.state = "без відповідей";
-    }
   }
   else if (document.location.pathname.includes("/posting.php")) {
     presenceData.startTimestamp = browsingStamp;
