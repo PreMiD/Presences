@@ -22,7 +22,6 @@ presence.on("UpdateData", async () => {
       largeImageKey: "bonk"
     };
 
-
   if (ifd?.id) {
     data.state = ifd.state;
     switch (ifd.id) {

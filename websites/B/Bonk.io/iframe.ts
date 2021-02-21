@@ -45,17 +45,11 @@ document
 document
   .querySelector("#quickPlayWindow_GrappleButton")
   .addEventListener("click", () => lastGameMode = "Grapple");
-/*
-document
-  .querySelector("#quickPlayWindow_SimpleButton")
-  .addEventListener("click", () => iframe.send("Simple"));
-*/
 
 document.querySelector("#roomlistjoinbutton").addEventListener("click", () => {
   const selectedMode = document.querySelector("tr.SELECTED > td:nth-child(3)");
   if (selectedMode) lastGameMode = selectedMode.textContent;
 });
-
 
 iframe.on("UpdateData", async () => {
   const element = document.querySelector(selector),
@@ -69,5 +63,5 @@ iframe.on("UpdateData", async () => {
   if (element?.id === "newbonklobby")
     lastGameMode = lobbyGameMode;
   
-  iframe.send({ lastGameMode, id: element?.id, state, playerCount })
+  iframe.send({ lastGameMode, id: element?.id, state, playerCount });
 });
