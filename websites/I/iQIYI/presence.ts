@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
             const timestamps = presence.getTimestampsfromMedia(video);
 
             presenceData.details = title;
-            presenceData.state = "Variety show"
+            presenceData.state = "Variety show";
 
             presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
