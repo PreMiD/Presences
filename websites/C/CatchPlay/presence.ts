@@ -27,7 +27,6 @@ presence.on("UpdateData", async () => {
   },
   buttons = await presence.getSetting("buttons");
 
-
   if (document.location.pathname.includes("/watch")) {
     const video: HTMLVideoElement = document.querySelector(".player-box video");
     if (buttons) data.buttons = [{
