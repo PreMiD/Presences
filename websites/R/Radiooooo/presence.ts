@@ -3,24 +3,17 @@ interface LangStrings {
     pause: string
 }
 
-interface Settings {
-    songDetails: string,
-    songState: string,
-    newLang: string
-}
-
 const presence = new Presence({
     clientId: "812656134120931330"
-}), 
+}),
     getStrings = async () => presence.getStrings({
         play: "general.playing",
-        pause: "general.paused",
+        pause: "general.paused"
     }, await presence.getSetting('lang')),
     browsingStamp = Math.floor(Date.now() / 1000);
 
 let oldLang: string = null,
     strings: Promise<LangStrings> = getStrings();
-
 
 presence.on("UpdateData", async () => {
 
@@ -74,7 +67,4 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(presenceData);
-})
-
-
-
+});
