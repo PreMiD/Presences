@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
             if (showButtons){
                 presenceData.buttons = [{
                     label: (await strings).watchVideo,
-                    url: document.URL
+                    url: `https://www.iq.com/play/${document.URL.split("?")[0].split("/")[4]}`
                 }];
             } else delete presenceData.buttons;
 
