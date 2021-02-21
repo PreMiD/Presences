@@ -10,9 +10,28 @@ presence.on("UpdateData", async () => {
   };
 
   if (window.location.pathname.includes('/leaderboards')) {
-    presenceData.details = "Leaderboards";
-  } else if (window.location.pathname.includes('/compare')) {
-    presenceData.details = "Comparing Players...";
+    presenceData.details = "Viewing Leaderboard:";
+
+    const selects = document.querySelectorAll("select");
+    const labels = [];
+
+    if (selects[0].selectedIndex == 0) {
+      labels.push("General");
+      labels.push(selects[2].options[selects[2].selectedIndex].label); // Stat Type
+      labels.push(selects[1].options[selects[1].selectedIndex].label); // Platform
+    } else {
+      labels.push("Seasonal");
+      labels.push(selects[4].options[selects[4].selectedIndex].label); // Stat Type
+      labels.push(selects[2].options[selects[2].selectedIndex].label); // Platform
+    }
+
+    presenceData.state = labels.join(" | ");
+    presenceData.buttons = [
+      {
+        label: "View Leaderboard",
+        url: document.location.href
+      }
+    ];
   } else if (window.location.pathname.includes('/search')) {
     presenceData.details = "Searching Player:";
     presenceData.state = document.querySelector(
@@ -23,10 +42,24 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "#__layout > div > div.layout-default__content > div.container__wrapper--content > div > main > div > div.player-header > div.player-header__about > div.player-header__about__meta > div.player-header__about__meta--player > div > span.player-info__player__username"
     ).textContent.trim();
+    presenceData.buttons = [
+      {
+        label: "View Stats",
+        url: document.URL
+          .replace("/operators", "")
+          .replace("/seasons", "")
+          .replace("/weapons", "")
+      }
+    ];
+  } else if (window.location.pathname.includes('/compare')) {
+    presenceData.details = "Viewing Page:";
+    presenceData.state = "Compare Players";
   } else if (window.location.pathname.includes('/account')) {
-    presenceData.details = "Personal Account";
+    presenceData.details = "Viewing Page:";
+    presenceData.state = "Personal Account";
   } else if (window.location.pathname.includes('/privacy-policy')) {
-    presenceData.details = "Privacy Policy";
+    presenceData.details = "Viewing Page:";
+    presenceData.state = "Privacy Policy";
   } else {
     presenceData.details = "Browsing...";
   }
