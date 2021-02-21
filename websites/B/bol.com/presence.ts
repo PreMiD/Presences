@@ -11,10 +11,10 @@ presence.on("UpdateData", async () => {
   if (document.querySelector("span[class*=h-boxed][data-test*=title]")) {
     presenceData.details = `Bekijkt '${document.querySelector("span[class*=h-boxed][data-test*=title]").innerHTML}'`;
     presenceData.state = `In ${document.querySelector("ul[class*=breadcrumbs][data-test*=breadcrumb]").lastElementChild.querySelector("span[class*=breadcrumbs][data-test*=breadcrumb-name]").innerHTML}`;
-    presenceData.buttons = [{ label: "Naar bol.com", url: "https://www.bol.com" }, { label: "Product bekijken", url: document.location.href }]
+    presenceData.buttons = [{ label: "Naar bol.com", url: "https://www.bol.com" }, { label: "Product bekijken", url: document.location.href }];
   } else if (document.querySelector("h1[class*=bol_header][data-test*=page-title]")) {
     presenceData.details = `Bekijkt ${document.querySelector("h1[class*=bol_header][data-test*=page-title]").innerHTML}`;
-    presenceData.buttons = [{ label: "Naar bol.com", url: "https://www.bol.com" }, { label: "Categorie bekijken", url: document.location.href }]
+    presenceData.buttons = [{ label: "Naar bol.com", url: "https://www.bol.com" }, { label: "Categorie bekijken", url: document.location.href }];
   }
 
   if (document.location.pathname.toLowerCase().includes("order")) { presenceData.details = "Bestelt iets"; }
