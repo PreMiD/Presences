@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
   if (window.location.pathname.includes('/leaderboards')) {
     presenceData.details = "Leaderboards";
   } else if (window.location.pathname.includes('/compare')) {
-    presenceData.details = "Compare Players";
+    presenceData.details = "Comparing Players...";
   } else if (window.location.pathname.includes('/search')) {
     presenceData.details = "Searching Player:";
     presenceData.state = document.querySelector(
@@ -24,9 +24,7 @@ presence.on("UpdateData", async () => {
       "#__layout > div > div.layout-default__content > div.container__wrapper--content > div > main > div > div.player-header > div.player-header__about > div.player-header__about__meta > div.player-header__about__meta--player > div > span.player-info__player__username"
     ).textContent.trim();
   } else if (window.location.pathname.includes('/account')) {
-    presenceData.details = "Account";
-  } else if (window.location.pathname.includes('/delete-profile')) {
-    presenceData.details = "Delete R6Stats Profile";
+    presenceData.details = "Personal Account";
   } else if (window.location.pathname.includes('/privacy-policy')) {
     presenceData.details = "Privacy Policy";
   } else {
