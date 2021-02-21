@@ -25,7 +25,8 @@ presence.on("UpdateData", async () => {
   } const elt = document.querySelector("#compteur0 > div") as HTMLElement;
   if (elt) {
     const lap = elt.innerText.replace(/.+? /g, "");
-    presenceData.details = "Currently playing: Lap " + lap;
+    presenceData.details = "On: Lap " + lap;
+    presenceData.buttons = [{ label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" }];
   } else if (document.location.pathname == "/mariokart.php") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "browsing map's";
@@ -35,21 +36,21 @@ presence.on("UpdateData", async () => {
     user = document.querySelector(
       "html > body > main > h1"
     );
-    presenceData.details = "Viewing the following category: " + user.innerText;
+    presenceData.details = "Viewing the following category: " + user.innerHTML;
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "/topic.php") {
     presenceData.startTimestamp = browsingStamp;
     user = document.querySelector(
       "html > body > main > h1"
     );
-    presenceData.details = "Viewing: " + user.innerText;
+    presenceData.details = "Viewing: " + user.innerHTML;
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "/profil.php") {
     presenceData.startTimestamp = browsingStamp;
     user = document.querySelector(
       "html > body > main > h1"
     );
-    presenceData.details = "Viewing: " + user.innerText;
+    presenceData.details = "Viewing: " + user.innerHTML;
     presenceData.smallImageKey = "search";
     } if (presenceData.details == null) {
     presence.setTrayTitle();
