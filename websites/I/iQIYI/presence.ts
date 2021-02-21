@@ -4,6 +4,9 @@ interface LangStrings {
     episode: string
     browse: string
     searchFor: string	
+    watchVideo: string
+    watchEpisode: string
+    watchMovie: string
 }
 
 const presence = new Presence({
@@ -14,7 +17,10 @@ const presence = new Presence({
         pause: "general.paused",
         browse: "general.browsing",
         episode: "general.episode",
-        searchFor: "general.searchFor"
+        searchFor: "general.searchFor",
+        watchVideo: "general.buttonWatchVideo",
+        watchMovie: "general.buttonViewMovie",
+        watchEpisode: "general.buttonViewEpisode"
     }, await presence.getSetting('lang'));
 
 let browsingStamp = Math.floor(Date.now() / 1000),
@@ -87,8 +93,8 @@ presence.on("UpdateData", async () => {
 
             if (showButtons){
                 presenceData.buttons = [{
-                    label: "Watch",
-                    url: `https://www.iq.com/play/${document.URL.split("?")[0].split("/")[4]}`
+                    label: isVShow ? (await strings).watchVideo : isMovie ? (await strings).watchMovie : (await strings).watchEpisode,
+                    url: document.URL
                 }];
             } else delete presenceData.buttons;
 
@@ -118,6 +124,39 @@ presence.on("UpdateData", async () => {
         } else {
           presenceData.state = `No matching result`;
         }
+    } else if (document.location.pathname.includes("/intl-common")){
+        const video = document.querySelector("video"),
+        title = document.title;
+
+        if (video){
+            const timestamps = presence.getTimestampsfromMedia(video);
+
+            presenceData.details = title;
+            presenceData.state = "Variety show"
+
+            presenceData.startTimestamp = timestamps[0];
+            presenceData.endTimestamp = timestamps[1];
+
+            presenceData.smallImageKey = video.paused ? "pause" : "play";
+            presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+
+            if (showButtons){
+                presenceData.buttons = [{
+                    label: (await strings).watchVideo,
+                    url: document.URL
+                }];
+            } else delete presenceData.buttons;
+
+            if (video.paused){
+                delete presenceData.startTimestamp;
+                delete presenceData.endTimestamp;
+            }
+        } else {
+            presenceData.details = "Looking at:";
+            presenceData.state = title;
+        }
+
+        
     }
 
     presence.setActivity(presenceData);
