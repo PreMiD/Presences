@@ -11,6 +11,14 @@ presence.on("UpdateData", async () => {
     privacymode = await presence.getSetting("privacy");
 
   if (document.location.hostname == "www.vrcarena.com") {
+    if(!privacymode) {
+    presenceData.buttons = [
+      {
+        label: "Visit VRCArena",
+        url: "https://www.vrcarena.com"
+      }
+    ];
+  }
     // Categories
     if (document.location.pathname.includes("/category")) {
       switch (document.location.pathname) {
@@ -57,6 +65,16 @@ presence.on("UpdateData", async () => {
             otherinfo = parentforinfo.querySelector("div > div").textContent;
           presenceData.details = assetName;
           presenceData.state = otherinfo;
+            presenceData.buttons = [
+              {
+                label: "Visit VRCArena",
+                url: "https://www.vrcarena.com"
+              },
+              {
+                label: "View Asset",
+                url: document.URL.split("?")[0]
+              }
+            ];
         } else {
           presenceData.details = "Looking at an asset";
         }
