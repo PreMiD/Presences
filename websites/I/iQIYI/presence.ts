@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
             if (showButtons){
                 presenceData.buttons = [{
                     label: isVShow ? (await strings).watchVideo : isMovie ? (await strings).watchMovie : (await strings).watchEpisode,
-                    url: document.URL
+                    url: `https://www.iq.com/play/${document.URL.split("?")[0].split("/")[4]}`
                 }];
             } else delete presenceData.buttons;
 
@@ -111,13 +111,12 @@ presence.on("UpdateData", async () => {
         }
         
     } else if (document.location.pathname.includes('/search')){
-        const searchQuery_ = decodeURI(document.location.search.replace('?query=', ''));
+        const searchQuery_ = decodeURI(document.location.search.replace('?query=', '')),
+        result = document.querySelector('div.has-result')?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
 
         presenceData.details = `${(await strings).searchFor} ${searchQuery ? searchQuery_  : "( Hidden )"}`;
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "search";
-
-        const result = document.querySelector('div.has-result')?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
 
         if (result){
           presenceData.state = `${result} matching ${parseInt(result) > 1 ? "results" : "result"}`;
@@ -126,12 +125,12 @@ presence.on("UpdateData", async () => {
         }
     } else if (document.location.pathname.includes("/intl-common")){
         const video = document.querySelector("video"),
-        title = document.title;
+        title = document.querySelector("title").textContent.match(/.+?(?=[1-9]|-|  )/)[0];
 
         if (video){
             const timestamps = presence.getTimestampsfromMedia(video);
 
-            presenceData.details = title;
+            presenceData.details = `${title} ${document.title.match(/[1-9]/)}`;
             presenceData.state = "Variety show";
 
             presenceData.startTimestamp = timestamps[0];
