@@ -62,11 +62,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
     }
-    // if (page.includes("/software")) {
-    //   title = document.querySelector("#titlebar > div > h1")
-    //   presenceData.details = "Viewing:";
-    //   presenceData.state = title.textContent
-    // }
     if (page.includes("/policies/")) {
       title = document.querySelector("#content > div > div > h1 > strong");
       if (!title) {
@@ -111,22 +106,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing:";
       presenceData.state = "Upgrade Plans";
     }
-    // if (page.includes("/c/")) {
-    //   const numberPat = '[0-9]+',
-    //   r = new RegExp("/c" + numberPat),
-    //   r2 = new RegExp("/c" + numberPat + "/");
-    //   if (r2.test(page)) {
-    //     title = document.querySelector("div.bucket-page.active > h2.bucket-title.heading.heading-3");
-    //     if (title.textContent.includes("Alle categorieën in")) {
-    //       title.textContent = title.textContent.replace("Alle categorieën in", "");
-    //     }
-    //     presenceData.details = "Viewing Category:";
-    //     presenceData.state = title.textContent;
-    //   } else if (r.test(page)) {
-    //     title = document.querySelector("#content > h1");
-    //     presenceData.details = "Viewing Category:";
-    //     presenceData.state = title.textContent;
-    //   }
   }
   if (host == "app.mediafire.com") {
     if (page.includes("/myfiles")) {
@@ -150,7 +129,7 @@ presence.on("UpdateData", async () => {
     if (page.includes("/articles/")) {
       title = document.querySelector("body > main > article > header > h1");
       presenceData.details = "Viewing Help Article About:";
-      presenceData.state = title.textContent
+      presenceData.state = title.textContent;
     } else {
     search = document.querySelector("#query");
     if (search.value != "") {
