@@ -82,7 +82,7 @@ presence.on("UpdateData", async () => {
 
     if (buttons) presenceData.buttons = [{
       label: 'Tune In',
-      url: document.URL,
+      url: document.URL
     }];
   }
 

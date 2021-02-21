@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
         if (code) data.buttons = [{
           label: 'Join Party',
           url: document.URL
-        }]
+        }];
       }
     }
   }

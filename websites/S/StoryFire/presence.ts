@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
 
     if (buttons) presenceData.buttons = [{
       label: 'Watch',
-      url: document.URL,
+      url: document.URL
     }];
   } else if (document.location.pathname.startsWith("/forgot-password")) {
     presenceData.details = "Forgot Password";

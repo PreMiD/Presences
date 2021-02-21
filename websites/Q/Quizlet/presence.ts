@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
         ).textContent;
         if (buttons) data.buttons = [{
           label: 'View Profile',
-          url: document.URL,
+          url: document.URL
         }];
         actionTimestamp = null;
         break;
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
             data.state = qzData.layer.studyableTitle;
             if (buttons) data.buttons = [{
               label: 'View Set',
-              url: document.URL,
+              url: document.URL
             }];
             break;
           case "new":
