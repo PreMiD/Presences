@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
             if (showButtons){
                 presenceData.buttons = [{
                     label: isVShow ? (await strings).watchVideo : isMovie ? (await strings).watchMovie : (await strings).watchEpisode,
-                    url: document.URL
+                    url: `https://www.iq.com/play/${document.URL.split("?")[0].split("/")[4]}`
                 }];
             } else delete presenceData.buttons;
 
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
             if (showButtons){
                 presenceData.buttons = [{
                     label: (await strings).watchVideo,
-                    url: `https://www.iq.com/play/${document.URL.split("?")[0].split("/")[4]}`
+                    url: document.URL
                 }];
             } else delete presenceData.buttons;
 
