@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
         }
     } else if (document.location.pathname.includes("/intl-common")){
         const video = document.querySelector("video"),
-        title = document.querySelector("title").textContent.match(/.+?(?=[1-9]|-|{2})/)[0];
+        title = document.querySelector("title").textContent.match(/.+?(?=[1-9]|-)/)[0];
 
         if (video){
             const timestamps = presence.getTimestampsfromMedia(video);
