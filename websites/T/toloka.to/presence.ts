@@ -2,8 +2,7 @@ const presence = new Presence({
   clientId: "798502531847421962"
 }), browsingStamp = Math.floor(Date.now() / 1000);
 
-let title: any;
-let search: any;
+let title: Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -131,163 +130,135 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Переглядаю авторські";
     presenceData.state = "релізи";
   }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=inbox&mode=read")) {
-    title = document.querySelector(
-      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(2) > td.row2:nth-child(2) > span.genmed"
-    );
+  else if (document.location.pathname.includes("/privmsg.php")) {
     presenceData.startTimestamp = browsingStamp;
-    if (showUseramePM) {
-      presenceData.details = "Читаю ПП від:";
-      presenceData.state = title.innerText;
-    } else {
-      presenceData.details = "Читаю ПП";
+    presenceData.smallImageKey = "sms";
+    presenceData.smallImageText = "ПП";
+    if (document.location.search.includes("?folder=inbox&mode=read")) {
+      title = document.querySelector(
+        "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(2) > td.row2:nth-child(2) > span.genmed"
+      );
+      if (showUseramePM) {
+        presenceData.details = "Читаю ПП від:";
+        presenceData.state = title.innerText;
+      } else {
+        presenceData.details = "Читаю ПП";
+      }
     }
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=sentbox&mode=read")) {
-    title = document.querySelector(
-      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    if (showUseramePM) {
-      presenceData.details = "Читаю ПП для:";
-      presenceData.state = title.innerText;
-    } else {
-      presenceData.details = "Читаю ПП";
+    else if (document.location.search.includes("?folder=sentbox&mode=read")) {
+      title = document.querySelector(
+        "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
+      );
+      if (showUseramePM) {
+        presenceData.details = "Читаю ПП для:";
+        presenceData.state = title.innerText;
+      } else {
+        presenceData.details = "Читаю ПП";
+      }
     }
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=outbox&mode=read")) {
-    title = document.querySelector(
-      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    if (showUseramePM) {
-      presenceData.details = "Читаю ПП для:";
-      presenceData.state = title.innerText;
-    } else {
-      presenceData.details = "Читаю ПП";
+    else if (document.location.search.includes("?folder=outbox&mode=read")) {
+      title = document.querySelector(
+        "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
+      );
+      if (showUseramePM) {
+        presenceData.details = "Читаю ПП для:";
+        presenceData.state = title.innerText;
+      } else {
+        presenceData.details = "Читаю ПП";
+      }
     }
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=savebox&mode=read")) {
-    title = document.querySelector(
-      "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    if (showUseramePM) {
-      presenceData.details = "Читаю збережене ПП";
-      presenceData.state = "від:" + title.innerText;
-    } else {
-      presenceData.details = "Читаю ПП";
+    else if (document.location.search.includes("?folder=savebox&mode=read")) {
+      title = document.querySelector(
+        "body > div.maxwidth > table:nth-child(3) > tbody > tr > td.bodyline > form > table.forumline > tbody > tr:nth-child(3) > td.row2:nth-child(2) > span.genmed"
+      );
+      if (showUseramePM) {
+        presenceData.details = "Читаю збережене ПП";
+        presenceData.state = "від:" + title.innerText;
+      } else {
+        presenceData.details = "Читаю ПП";
+      }
     }
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=inbox")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Переглядаю";
-    presenceData.state = "вхідні ПП";
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=sentbox")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Переглядаю";
-    presenceData.state = "відіслані ПП";
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=outbox")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Переглядаю";
-    presenceData.state = "вихідні ПП";
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?folder=savebox")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Переглядаю";
-    presenceData.state = "збережені ПП";
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?mode=reply")) {
-    title = document.querySelector(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > form > table.forumline > tbody > tr > td.row2 > span.genmed > input.post"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    if (showUseramePM) {
-      presenceData.details = "Відповідаю на ПП від:";
-      presenceData.state = title.innerText;
-    } else {
-      presenceData.details = "Відповідаю на ПП";
+    else if (document.location.search.includes("?folder=inbox")) {
+      presenceData.details = "Переглядаю";
+      presenceData.state = "вхідні ПП";
     }
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?mode=quote")) {
-    title = document.querySelector(
-      "body > div.maxwidth > table > tbody > tr > td.bodyline > form > table.forumline > tbody > tr > td.row2 > span.genmed > input.post"
-    );
-    presenceData.startTimestamp = browsingStamp;
-    if (showUseramePM) {
-      presenceData.details = "Цитую ПП від:";
-      presenceData.state = title.innerText;
-    } else {
-      presenceData.details = "Цитую ПП";
+    else if (document.location.search.includes("?folder=sentbox")) {
+      presenceData.details = "Переглядаю";
+      presenceData.state = "відіслані ПП";
     }
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
+    else if (document.location.search.includes("?folder=outbox")) {
+      presenceData.details = "Переглядаю";
+      presenceData.state = "вихідні ПП";
+    }
+    else if (document.location.search.includes("?folder=savebox")) {
+      presenceData.details = "Переглядаю";
+      presenceData.state = "збережені ПП";
+    }
+    else if (document.location.search.includes("?mode=reply")) {
+      title = document.querySelector(
+        "body > div.maxwidth > table > tbody > tr > td.bodyline > form > table.forumline > tbody > tr > td.row2 > span.genmed > input.post"
+      );
+      if (showUseramePM) {
+        presenceData.details = "Відповідаю на ПП від:";
+        presenceData.state = title.innerText;
+      } else {
+        presenceData.details = "Відповідаю на ПП";
+      }
+    }
+    else if (document.location.search.includes("?mode=quote")) {
+      title = document.querySelector(
+        "body > div.maxwidth > table > tbody > tr > td.bodyline > form > table.forumline > tbody > tr > td.row2 > span.genmed > input.post"
+      );
+      if (showUseramePM) {
+        presenceData.details = "Цитую ПП від:";
+        presenceData.state = title.innerText;
+      } else {
+        presenceData.details = "Цитую ПП";
+      }
+    }
+    else if (document.location.search.includes("?mode=post")) {
+      presenceData.details = "Пишу нове ПП";
+    }
   }
-  else if (document.location.pathname.includes("/privmsg.php") && document.location.search.includes("?mode=post")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Пишу нове ПП";
-    presenceData.smallImageKey = "sms";
-    presenceData.smallImageText = "ПП";
-  }
-  else if (document.location.pathname.includes("/search.php") && document.location.search.includes("?mode=searchuser")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Шукаю співрозмовника";
-    presenceData.smallImageKey = "search";
-    presenceData.smallImageText = "Пошук";
-  }
-  else if (document.location.pathname.includes("/search.php") && document.location.search.includes("?search_id=newposts")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Переглядаю нові";
-    presenceData.state = "повідомлення";
-  }
-  else if (document.location.pathname.includes("/search.php") && document.location.search.includes("?search_id=egosearch")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Переглядаю свої";
-    presenceData.state = "повідомлення";
-  }
+
   else if (document.location.pathname.includes("/watched_topics.php")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю";
     presenceData.state = "відстежуввні теми";
   }
-  else if (document.location.pathname.includes("/search.php") && document.location.search.includes("?search_id=unanswered")) {
+  else if (document.location.pathname.includes("/search.php")) {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Переглядаю теми";
-    presenceData.state = "без відповідей";
+    if (document.location.search.includes("?mode=searchuser")) {
+      presenceData.details = "Шукаю співрозмовника";
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = "Пошук";
+    }
+    else if (document.location.search.includes("?search_id=newposts")) {
+      presenceData.details = "Переглядаю нові";
+      presenceData.state = "повідомлення";
+    }
+    else if (document.location.search.includes("?search_id=egosearch")) {
+      presenceData.details = "Переглядаю свої";
+      presenceData.state = "повідомлення";
+    }
+    else if (document.location.search.includes("?search_id=unanswered")) {
+      presenceData.details = "Переглядаю теми";
+      presenceData.state = "без відповідей";
+    }
+    else if (document.location.search.includes("?search_id=unanswered")) {
+      presenceData.details = "Переглядаю теми";
+      presenceData.state = "без відповідей";
+    }
   }
-  else if (document.location.pathname.includes("/search.php") && document.location.search.includes("?search_id=unanswered")) {
+  else if (document.location.pathname.includes("/posting.php")) {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Переглядаю теми";
-    presenceData.state = "без відповідей";
-  }
-  else if (document.location.pathname.includes("/posting.php") && document.location.search.includes("?mode=newtopic")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Створюю нову";
-    presenceData.state = "тему";
-  }
-  else if (document.location.pathname.includes("/posting.php") && document.location.search.includes("?mode=reply")) {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Відповідаю на тему";
+    if (document.location.search.includes("?mode=newtopic")) {
+      presenceData.details = "Створюю нову";
+      presenceData.state = "тему";
+    }
+    else if (document.location.search.includes("?mode=reply")) {
+      presenceData.details = "Відповідаю на тему";
+    }
   }
   else if (document.location.pathname.includes("/helptoseed.php")) {
     presenceData.startTimestamp = browsingStamp;
