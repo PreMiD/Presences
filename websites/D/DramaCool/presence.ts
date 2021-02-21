@@ -26,8 +26,7 @@ let strings: Promise<LangStrings> = getStrings(),
     oldLang: string = null;
 
 presence.on("iFrameData", (data: Data) => {
-    console.info(data)
-    ShowData.playback = data.iframe_video.duration !== null ? true : false;
+    ShowData.playback = data.iframe_video.duration ? true : false;
 
     if (ShowData.playback){
         ShowData.currentTime = data.iframe_video.currTime;
