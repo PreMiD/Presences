@@ -4,7 +4,6 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let user;
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
@@ -27,17 +26,10 @@ presence.on("UpdateData", async () => {
   if (elt) {
     const lap = elt.innerText.replace(/.+? /g, "");
     presenceData.details = "Currently playing: Lap " + lap;
-  } else if (document.location.pathname.includes("/profil.php")) {
-    presenceData.startTimestamp = browsingStamp;
-    user = document.querySelector(
-      "html > body > main > h1"
-    );
-    presenceData.details = "Viewing: " + user.innerText;
-    presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "/mariokart.php") {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Playing the core game";
-    presenceData.smallImageKey = "wheel";
+    presenceData.details = "browsing map's";
+    presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "/category.php") {
     presenceData.startTimestamp = browsingStamp;
     user = document.querySelector(
@@ -52,8 +44,14 @@ presence.on("UpdateData", async () => {
     );
     presenceData.details = "Viewing: " + user.innerText;
     presenceData.smallImageKey = "search";
-  }
-  if (presenceData.details == null) {
+  } else if (document.location.pathname == "/profil.php") {
+    presenceData.startTimestamp = browsingStamp;
+    user = document.querySelector(
+      "html > body > main > h1"
+    );
+    presenceData.details = "Viewing: " + user.innerText;
+    presenceData.smallImageKey = "search";
+    } if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
