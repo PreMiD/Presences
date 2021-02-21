@@ -55,11 +55,11 @@ presence.on("UpdateData", async () => {
 
     presenceData.buttons = [
       {
-        label: "Episode",
+        label: "Watch Episode",
         url: document.baseURI
       },
       {
-        label: "Series",
+        label: "View Series",
         url: series.getAttribute("href")
       }
     ];
