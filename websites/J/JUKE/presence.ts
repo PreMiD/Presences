@@ -4,7 +4,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "juke-crown"
+    largeImageKey: "juke-crown",
+    buttons: [{ label: "Radio luisteren", url: document.location.href }]
   };
 
   if (document.querySelector("span[class*=eC-title]")) {
@@ -22,6 +23,7 @@ presence.on("UpdateData", async () => {
   if (document.querySelector("rect")) {
     presenceData.smallImageKey = "playing";
     presenceData.smallImageText = "Wordt afgespeeld";
+    presenceData.buttons = [{ label: "Ook radio luisteren", url: document.location.href }];
   } else if (document.querySelector("[class*=spinner]")) {
     presenceData.smallImageKey = "waiting";
     presenceData.smallImageText = "Wordt geladen";
