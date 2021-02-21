@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Alexx",
+    "id": "604182077088202784"
   },
   "service": "Apple Music",
   "description": {
@@ -10,9 +10,9 @@
     "zh_CN": "Apple Music是苹果推出的流行音乐界又一位新成员。"
   },
   "url": "music.apple.com",
-  "version": "1.2.10",
-  "logo": "https://i.gyazo.com/953a27f5dc6ec95ccb792957b699e3de.png",
-  "thumbnail": "https://i.gyazo.com/a85cbd963a42138975b16436b3cfb3fe.png",
+  "version": "1.3.1",
+  "logo": "https://i.imgur.com/tUY4nNt.png",
+  "thumbnail": "https://i.imgur.com/dOYmE1u.png",
   "color": "#fff",
   "tags": [
     "apple-music",

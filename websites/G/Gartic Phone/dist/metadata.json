@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Nevylish",
+    "id": "343847696483745794"
+  },
+  "url": "garticphone.com",
+  "description": {
+    "en": "The Telephone Game"
+  },
+  "service": "Gartic Phone",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/zLBvs9k.png",
+  "thumbnail": "https://i.imgur.com/f2oSx2u.png",
+  "color": "#7424D9",
+  "tags": [
+    "game",
+    "gartic",
+    "phone"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "privacyDraw",
+      "title": "Hide drawing details",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "privacyAlbum",
+      "title": "Hide album usernames",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
+  ]
+}

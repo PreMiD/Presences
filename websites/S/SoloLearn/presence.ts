@@ -1,18 +1,19 @@
 const presence = new Presence({
-  clientId: "668173626775830529"
-});
-var strings = presence.getStrings({
-  browsing: "presence.activity.browsing"
-});
-
-const getElement = (query: string): string | undefined => {
-  const element = document.querySelector(query);
-  return element?.textContent.trimStart().trimEnd();
-};
-
-const stripCourse = (course: string | undefined): string | undefined => {
-  return course?.replace("Tutorial", "").replace("Fundamentals", "").trimEnd();
-};
+    clientId: "668173626775830529"
+  }),
+  strings = presence.getStrings({
+    browsing: "presence.activity.browsing"
+  }),
+  getElement = (query: string): string | undefined => {
+    const element = document.querySelector(query);
+    return element?.textContent.trimStart().trimEnd();
+  },
+  stripCourse = (course: string | undefined): string | undefined => {
+    return course
+      ?.replace("Tutorial", "")
+      .replace("Fundamentals", "")
+      .trimEnd();
+  };
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href;
@@ -53,13 +54,12 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const host = location.host;
-  const path = location.pathname.replace(/\/?$/, "/");
-
-  const showBrowsing = await presence.getSetting("browse");
-  const showCourses = await presence.getSetting("course");
-  const showCodes = await presence.getSetting("code");
-  const showTimestamps = await presence.getSetting("timestamp");
+  const host = location.host,
+    path = location.pathname.replace(/\/?$/, "/"),
+    showBrowsing = await presence.getSetting("browse"),
+    showCourses = await presence.getSetting("course"),
+    showCodes = await presence.getSetting("code"),
+    showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
     details: undefined,
@@ -163,6 +163,5 @@ presence.on("UpdateData", async () => {
     presence.setActivity(data);
   } else {
     presence.setActivity();
-    presence.setTrayTitle();
   }
 });

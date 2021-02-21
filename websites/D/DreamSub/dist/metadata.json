@@ -1,31 +1,31 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.0",
-    "author": {
-        "name": "diskxo_",
-        "id": "299940314137886730"
-    },
-    "url": [
-        "dreamsub.stream",
-        "www.dreamsub.stream"
-    ],
-    "description": {
-        "en": "Watch all the series thanks to our archive of Anime in Streaming Sub ITA HD / FULL HD and Free Download. Find the best series ever completely free.",
-        "it": "Guarda tutte le serie grazie al nostro archivio di Anime in Streaming Sub ITA HD/FULL HD e Download gratis. Trova le migliori serie di sempre completamente gratuite."
-    },
-    "service": "DreamSub",
-    "version": "1.0.2",
-    "logo": "https://i.imgur.com/vCJqRBO.png",
-    "thumbnail": "https://i.imgur.com/MYEWI2L.png",
-    "color": "#4281bb",
-    "tags": [
-        "dreamsub",
-        "dub-ita",
-        "sub-ita",
-        "anime",
-        "videos",
-        "streaming"
-    ],
-    "iframe": true,
-    "category": "anime",
-    "iFrameRegExp": "^https://cdn[1-9]?.dreamsub.stream/vl/"
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "diskxo_",
+    "id": "299940314137886730"
+  },
+  "url": [
+    "dreamsub.cc",
+    "www.dreamsub.cc"
+  ],
+  "description": {
+    "en": "Watch all the series thanks to our archive of Anime in Streaming Sub ITA HD / FULL HD and Free Download. Find the best series ever completely free.",
+    "it": "Guarda tutte le serie grazie al nostro archivio di Anime in Streaming Sub ITA HD/FULL HD e Download gratis. Trova le migliori serie di sempre completamente gratuite."
+  },
+  "service": "DreamSub",
+  "version": "1.0.5",
+  "logo": "https://i.imgur.com/vCJqRBO.png",
+  "thumbnail": "https://i.imgur.com/MYEWI2L.png",
+  "color": "#4281bb",
+  "tags": [
+    "dreamsub",
+    "dub-ita",
+    "sub-ita",
+    "anime",
+    "videos",
+    "streaming"
+  ],
+  "iframe": true,
+  "category": "anime",
+  "iFrameRegExp": "^https://cdn[1-9]?.dreamsub.cc/vl/"
 }
