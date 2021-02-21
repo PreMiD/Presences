@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "Rodry",
+    "id": "240875059953139714"
+  },
+  "url": "hytale.com",
+  "description": {
+    "en": "Embark on a journey of adventure and creativity! Hytale combines the scope of a sandbox with the depth of a roleplaying game, immersing players in a procedurally generated world where teetering towers and deep dungeons promise rich rewards.",
+    "pt": "Embarca numa jornada de aventura e criatividade! O Hytale combina as possibilidades de um jogo sandbox com a profundidade de um jogo de roleplay, imergindo os jogadores num mundo automaticamente gerado onde torres oscilantes e masmorras profundas prometem recompensas enormes."
+  },
+  "service": "Hytale",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/ue65nDd.png",
+  "thumbnail": "https://i.imgur.com/mvDxqep.png",
+  "color": "#15243A",
+  "tags": [
+    "forum",
+    "hytale",
+    "riot",
+    "games",
+    "hypixel"
+  ],
+  "category": "games"
+}

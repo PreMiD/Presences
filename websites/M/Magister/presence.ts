@@ -23,7 +23,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Bekijkt afsprakenlijst";
   } else if (document.location.href.includes("magister/#/afwezigheid")) {
     presenceData.details = "Bekijkt afwezigheid";
-  } else if (document.location.href.includes("magister/#/cijfers/cijferoverzicht")) {
+  } else if (
+    document.location.href.includes("magister/#/cijfers/cijferoverzicht")
+  ) {
     presenceData.details = "Bekijkt cijferoverzicht";
   } else if (document.location.href.includes("magister/#/cijfers")) {
     presenceData.details = "Bekijkt laatste cijfers";
@@ -55,7 +57,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Ziet een foutmelding";
   } else if (document.location.href.includes("magister")) {
     presenceData.details = "Bladert";
-    presenceData.state = `Op pagina '${document.location.pathname.replace("/magister", "").replace("/#/", "").replace("/#", "").replace("-", "").replace("/", "")}'`;
+    presenceData.state = `Op pagina '${document.location.pathname
+      .replace("/magister", "")
+      .replace("/#/", "")
+      .replace("/#", "")
+      .replace("-", "")
+      .replace("/", "")}'`;
   }
 
   if (presenceData.details == null) {

@@ -1,16 +1,22 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Wattpad",
   "description": {
     "en": "Wattpad is an Internet community for readers and writers to publish new user-generated stories in different genres, including classics, general fiction, historical fiction, non-fiction, poetry, fan-fiction, spiritual, humor, and teen fiction."
   },
   "url": "www.wattpad.com",
-  "version": "1.2.6",
-  "logo": "https://i.gyazo.com/b82c454c177d04c66a13c13cff05b539.png",
-  "thumbnail": "https://i.gyazo.com/4721e89edf717fba4a3fbd32d9ac0b80.png",
+  "version": "1.2.8",
+  "logo": "https://i.imgur.com/cSNcCFV.png",
+  "thumbnail": "https://i.imgur.com/gJmOvDd.png",
   "color": "#FF6612",
   "tags": [
     "wattpad",
