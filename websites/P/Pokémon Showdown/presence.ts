@@ -10,12 +10,15 @@ presence.on("UpdateData", async () => {
     },
     path = document.location.pathname;
   if (path == "/") {
+    delete data.buttons;
     data.details = "Viewing Homepage";
     elapsed = null;
   } else if (path.startsWith("/teambuilder")) {
+    delete data.buttons;
     data.details = "Building a Team";
     elapsed = null;
   } else if (path.startsWith("/ladder")) {
+    delete data.buttons;
     data.details = "Viewing a Ladder";
     elapsed = null;
   } else if (path.includes("battle")) {
@@ -23,11 +26,18 @@ presence.on("UpdateData", async () => {
       users = document.querySelector("a.roomtab.button.cur span").textContent;
     data.details = title;
     data.state = users;
+    data.buttons = [
+      {
+              label: "Spectate",
+              url: document.baseURI
+          }
+      ];
     if (elapsed == null) {
       elapsed = Math.floor(Date.now() / 1000);
     }
     data.startTimestamp = elapsed;
   } else {
+    delete data.buttons;
     data.details = "Somewhere on-site";
     elapsed = null;
   }
