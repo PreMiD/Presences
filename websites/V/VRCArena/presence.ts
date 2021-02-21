@@ -12,12 +12,12 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname == "www.vrcarena.com") {
     if(!privacymode) {
-    presenceData.buttons = [
-      {
-        label: "Visit VRCArena",
-        url: "https://www.vrcarena.com"
-      }
-    ];
+      presenceData.buttons = [
+        {
+          label: "View on VRCArena",
+          url: document.URL.split("?")[0]
+        }
+      ];
   }
     // Categories
     if (document.location.pathname.includes("/category")) {
@@ -65,16 +65,6 @@ presence.on("UpdateData", async () => {
             otherinfo = parentforinfo.querySelector("div > div").textContent;
           presenceData.details = assetName;
           presenceData.state = otherinfo;
-            presenceData.buttons = [
-              {
-                label: "Visit VRCArena",
-                url: "https://www.vrcarena.com"
-              },
-              {
-                label: "View Asset",
-                url: document.URL.split("?")[0]
-              }
-            ];
         } else {
           presenceData.details = "Looking at an asset";
         }
