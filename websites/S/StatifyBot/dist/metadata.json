@@ -21,6 +21,6 @@
     "logo": "https://visionvenue.de/PicsVV/StatifyBotV3.png",
     "thumbnail": "https://visionvenue.de/PicsVV/StatifyBanner.png",
     "color": "#2a2755",
-    "tags": ["Statify", "Discord", "Statify Bot", "StatifyBot"],
-    "category": "other"
+    "tags": ["statify", "discord", "web", "utility","status"],
+        "category": "other"
   }
