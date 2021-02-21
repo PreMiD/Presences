@@ -156,7 +156,6 @@ presence.on("UpdateData", async () => {
             presenceData.state = title;
         }
 
-        
     }
 
     presence.setActivity(presenceData);
