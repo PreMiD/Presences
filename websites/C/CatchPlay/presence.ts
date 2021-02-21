@@ -23,7 +23,7 @@ function getTimestamps(
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "cp",
+    largeImageKey: "cp"
   },
   buttons = await presence.getSetting("buttons");
 
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
     const video: HTMLVideoElement = document.querySelector(".player-box video");
     if (buttons) data.buttons = [{
       label: 'Watch',
-      url: document.URL,
+      url: document.URL
     }];
     if (video && !isNaN(video.duration)) {
       if (document.querySelector(".CPplayer-header-subtitle")) {
