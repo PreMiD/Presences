@@ -12,8 +12,8 @@ presence.on("UpdateData", async () => {
   if (window.location.pathname.includes('/leaderboards')) {
     presenceData.details = "Viewing Leaderboard:";
 
-    const selects = document.querySelectorAll("select");
-    const labels = [];
+    const selects = document.querySelectorAll("select"),
+      labels = [];
 
     if (selects[0].selectedIndex == 0) {
       labels.push("General");
