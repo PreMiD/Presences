@@ -4,6 +4,9 @@ interface LangStrings {
     episode: string
     browse: string
     searchFor: string	
+    watchVideo: string
+    watchEpisode: string
+    watchMovie: string
 }
 
 const presence = new Presence({
@@ -14,7 +17,10 @@ const presence = new Presence({
         pause: "general.paused",
         browse: "general.browsing",
         episode: "general.episode",
-        searchFor: "general.searchFor"
+        searchFor: "general.searchFor",
+        watchVideo: "general.buttonWatchVideo",
+        watchMovie: "general.buttonViewMovie",
+        watchEpisode: "general.buttonViewEpisode"
     }, await presence.getSetting('lang'));
 
 let browsingStamp = Math.floor(Date.now() / 1000),
@@ -69,12 +75,12 @@ presence.on("UpdateData", async () => {
         if (isVShow) data.ep = "Variety show";
         if (!isVShow && !isMovie) data.ep = `${(await strings).episode} ${contentEp[0]}`;
 
-        if (isTrial) data.ep = `${data.ep} (Trial)`;
+        if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
         if (video && !isNaN(video.duration)){
 
             if (isPreview && !isMovie && !isVShow) data.ep = `${data.ep} preview`;
-            else if (video.duration < 270 && !isMovie && !isPreview) data.ep = "Highlight";
+            else if (video.duration < 270 && !isMovie && !isPreview && !isTrial) data.ep = "Highlight";
 
             presenceData.details = data.title;
             presenceData.state = data.ep;
@@ -87,7 +93,7 @@ presence.on("UpdateData", async () => {
 
             if (showButtons){
                 presenceData.buttons = [{
-                    label: "Watch",
+                    label: isVShow ? (await strings).watchVideo : isMovie ? (await strings).watchMovie : (await strings).watchEpisode,
                     url: `https://www.iq.com/play/${document.URL.split("?")[0].split("/")[4]}`
                 }];
             } else delete presenceData.buttons;
@@ -105,19 +111,50 @@ presence.on("UpdateData", async () => {
         }
         
     } else if (document.location.pathname.includes('/search')){
-        const searchQuery_ = decodeURI(document.location.search.replace('?query=', ''));
+        const searchQuery_ = decodeURI(document.location.search.replace('?query=', '')),
+        result = document.querySelector('div.has-result')?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
 
         presenceData.details = `${(await strings).searchFor} ${searchQuery ? searchQuery_  : "( Hidden )"}`;
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "search";
-
-        const result = document.querySelector('div.has-result')?.textContent.match(/[0-9]?[0-9]?[0-9]?[0-9]/)[0];
 
         if (result){
           presenceData.state = `${result} matching ${parseInt(result) > 1 ? "results" : "result"}`;
         } else {
           presenceData.state = `No matching result`;
         }
+    } else if (document.location.pathname.includes("/intl-common")){
+        const video = document.querySelector("video"),
+        title = document.querySelector("title").textContent.match(/.+?(?=[1-9]|-)/)[0];
+
+        if (video){
+            const timestamps = presence.getTimestampsfromMedia(video);
+
+            presenceData.details = `${title} ${document.title.match(/[1-9]/)}`;
+            presenceData.state = "Variety show";
+
+            presenceData.startTimestamp = timestamps[0];
+            presenceData.endTimestamp = timestamps[1];
+
+            presenceData.smallImageKey = video.paused ? "pause" : "play";
+            presenceData.smallImageText = video.paused ? (await strings).pause : (await strings).play;
+
+            if (showButtons){
+                presenceData.buttons = [{
+                    label: (await strings).watchVideo,
+                    url: document.URL
+                }];
+            } else delete presenceData.buttons;
+
+            if (video.paused){
+                delete presenceData.startTimestamp;
+                delete presenceData.endTimestamp;
+            }
+        } else {
+            presenceData.details = "Looking at:";
+            presenceData.state = title;
+        }
+
     }
 
     presence.setActivity(presenceData);
