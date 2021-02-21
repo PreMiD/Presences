@@ -5,7 +5,15 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "icon"
+    largeImageKey: "icon",
+    buttons: [{
+        label: "Website",
+        url: "https://sparkedhost.com"
+    },
+    {
+        label: "Discord",
+        url: "https://discord.gg/sparked"
+    }]
   };
 
   if (document.location.hostname == "sparkedhost.com") {
