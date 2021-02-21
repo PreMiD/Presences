@@ -1,7 +1,7 @@
 const presence = new Presence({
-  clientId: "619455837198483459"
-}),
- browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "619455837198483459"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 let username: string;
 
@@ -59,18 +59,19 @@ presence.on("UpdateData", async () => {
       data.details = "Browsing Manga";
       data.startTimestamp = browsingStamp;
     } else {
-      const manga = document.querySelector(".card-header span.mx-1").textContent;
+      const manga = document.querySelector(".card-header span.mx-1")
+        .textContent;
       data.details = "Viewing a Manga:";
       data.state = manga;
       data.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/chapter")) {
     const title = document.querySelector(".manga-link").textContent,
-     chapter = (document.querySelector(
-      "head > title"
-    ) as HTMLElement).innerText
-      .replace(title + " -", "")
-      .replace(" - MangaDex", "");
+      chapter = (document.querySelector(
+        "head > title"
+      ) as HTMLElement).innerText
+        .replace(title + " -", "")
+        .replace(" - MangaDex", "");
     data.details = title;
     data.state = chapter;
     data.startTimestamp = browsingStamp;

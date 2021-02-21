@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "808753360152559716"
-}),
-
- browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "808753360152559716"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -11,9 +10,9 @@ presence.on("UpdateData", async () => {
 
   let story;
   const path = document.location.pathname,
-   storyCheck = document.location.pathname.split("/")[1].match(/^\d/)
-    ? true
-    : false;
+    storyCheck = document.location.pathname.split("/")[1].match(/^\d/)
+      ? true
+      : false;
   if (path == "/home") {
     data.details = "Viewing Homepage";
     data.startTimestamp = browsingStamp;

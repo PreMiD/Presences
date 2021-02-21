@@ -86,6 +86,8 @@ interface LangStrings {
   forums: string;
   thread: string;
   user: string;
+  watchStream: string;
+  watchVideo: string;
 }
 
 const presence = new Presence({
@@ -185,7 +187,9 @@ const presence = new Presence({
         uptime: "general.uptimeHistory",
         forums: "general.forums",
         thread: "general.readingThread",
-        user: "general.viewUser"
+        user: "general.viewUser",
+        watchStream: "general.buttonWatchStream",
+        watchVideo: "general.buttonWatchVideo"
       },
       await presence.getSetting("lang")
     );
@@ -211,7 +215,8 @@ presence.on("UpdateData", async () => {
     logo: number = await presence.getSetting("logo"),
     logoArr = ["twitch", "black-ops", "white", "purple", "pride"],
     devLogo: number = await presence.getSetting("devLogo"),
-    devLogoArr = ["dev-main", "dev-white", "dev-purple"];
+    devLogoArr = ["dev-main", "dev-white", "dev-purple"],
+    buttons = await presence.getSetting("buttons");
 
   if (!oldLang) {
     oldLang = newLang;
@@ -258,6 +263,14 @@ presence.on("UpdateData", async () => {
               : undefined;
           presenceData.smallImageKey = "live";
           presenceData.smallImageText = (await strings).live;
+          if (buttons) {
+            presenceData.buttons = [
+              {
+                label: (await strings).watchStream,
+                url: document.URL.split("?")[0]
+              }
+            ];
+          }
         }
 
         if (showVideo && !live) {
@@ -289,6 +302,15 @@ presence.on("UpdateData", async () => {
           const timestamps = presence.getTimestampsfromMedia(video);
           presenceData.startTimestamp = timestamps[0];
           presenceData.endTimestamp = timestamps[1];
+
+          if (buttons) {
+            presenceData.buttons = [
+              {
+                label: (await strings).watchVideo,
+                url: document.URL.split("?")[0]
+              }
+            ];
+          }
         }
 
         if (((showLive && live) || (showVideo && !live)) && video.paused) {
