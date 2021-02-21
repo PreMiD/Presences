@@ -33,7 +33,7 @@ presence.on("iFrameData", (data: Data) => {
         ShowData.duration = data.iframe_video.dur;
         ShowData.paused = data.iframe_video.paused;
     }
-})
+});
 
 presence.on("UpdateData", async () => {
 
