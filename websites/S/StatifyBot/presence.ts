@@ -82,10 +82,21 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing...";
     presenceData.state = "Features of Statify Premium";
     presenceData.smallImageKey = "giveaway";
-  } else if (path.startsWith("/features")) {
+  } else if (path.startsWith("/commands")) {
+    var url_string = window.location.toString()
+    var url = new URL(url_string);
+    if(url.searchParams.get("search")){
+      presenceData.details = "Searching...";
+    presenceData.state = "for the "+ url.searchParams.get("search") + " Command";
+    } else
+    if(url.searchParams.get("cat")){
+      presenceData.details = "Viewing...";
+     presenceData.state = "the Commands of the " + url.searchParams.get("cat") + " Category";
+    } else {
     presenceData.details = "Viewing...";
-    presenceData.state = "the Features of Statify";
+    presenceData.state = "the Commands of Statify";
     presenceData.smallImageKey = "file";
+    }
   } else if (path.startsWith("/imprint")) {
     presenceData.details = "Reading through...";
     presenceData.state = "Imprint";
@@ -117,7 +128,18 @@ presence.on("UpdateData", async () => {
     presenceData.state += " | On Dev Page"
   }
   presenceData.smallImageText = presenceData.details.replace("...", " the") + " " + presenceData.state;
+  presenceData.buttons = [
+    {
+      label: "Visit Website",
+      url: "https://statifybot.net" + path 
+    },
+    {
+      label: "Invite Statify",
+      url: "https://statifybot.net/invite"
+    }
+  ]  
 
+  
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
