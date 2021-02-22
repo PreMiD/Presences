@@ -109,7 +109,7 @@ presence.on("UpdateData", async () => {
     }
 
     presence.setActivity(presenceData);
-})
+});
 
 interface Data {
     iframe_video: {
