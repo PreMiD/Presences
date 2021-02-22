@@ -18,7 +18,7 @@ const presence = new Presence({
             presenceData.details = "Durchstöbert";
         }
         else if (urlpath[1] == 'compilation') {
-            var compilation = document.querySelector('.artLogo');
+            let compilation = document.querySelector('.artLogo');
             presenceData.details = "Betrachtet Compilation:";
             if(compilation) presenceData.state = compilation.alt;
             if(!compilation) presenceData.state = document.querySelector('.hXdaOG').textContent;
@@ -33,7 +33,7 @@ const presence = new Presence({
             }
         }
         else if (urlpath[1] == 'filme') {
-            var film = document.querySelector('.artLogo');
+            let film = document.querySelector('.artLogo');
             presenceData.details = "Betrachtet Film:";
             if(film) presenceData.state = film.alt;
             if(!film) presenceData.state = document.querySelector('.hXdaOG').textContent;
@@ -48,7 +48,7 @@ const presence = new Presence({
             }
         }
         else if (urlpath[1] == 'serien') {
-            var serie = document.querySelector('.artLogo');
+            let serie = document.querySelector('.artLogo');
             presenceData.details = "Betrachtet Serie:";
             if(serie) presenceData.state = serie.alt;
             if(!serie) presenceData.state = document.querySelector('.hXdaOG').textContent;
@@ -150,15 +150,6 @@ const presence = new Presence({
                     url: window.location.href
                     }
                 ];
-            }
-        }
-        else if (urlpath[1] == 'mein-account') {
-            if (urlpath[2] == 'details') {
-                presenceData.details = 'Mein Account';
-                presenceData.state = 'Details';
-            }
-            else {
-                presenceData.details = 'Mein Account';
             }
         }
         else if (urlpath[1] == 'play' && urlpath[2] == 'compilation') {
