@@ -21,7 +21,7 @@
   "settings": [
     {
       "id": "button",
-      "title": "Enable Read Along Button",
+      "title": "Enable Button",
       "icon": "fas fa-info",
       "value": false
     }
