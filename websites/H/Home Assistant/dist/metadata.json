@@ -9,17 +9,17 @@
       "en": "Open source home automation that puts local control and privacy first. Powered by a worldwide community of tinkerers and DIY enthusiasts. Perfect to run on a Raspberry Pi or a local server.",
       "it": "Domotica open source che mette al primo posto il controllo locale e la privacy. Alimentato da una comunità mondiale di armeggiatori e appassionati di fai da te. Perfetto per funzionare su un Raspberry Pi o un server locale."
   },
-  "service": "Home_Assistant",
+  "service": "Home Assistant",
   "version": "1.0.0",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Home_Assistant_Logo.svg",
-  "thumbnail": "https://www.home-assistant.io/images/default-social.png",
+  "logo": "https://i.imgur.com/xu04hZl.png",
+  "thumbnail": "https://i.imgur.com/iHi1SL9.png",
   "color": "#3DB4EB",
   "tags": [
-      "IOT",
-      "HomeAssistant",
-      "Raspberry",
-      "HomeAutomation",
-      "Home"
+      "iot",
+      "homeassistant",
+      "raspberry",
+      "homeautomation",
+      "home"
   ],
   "category": "other"
 }
