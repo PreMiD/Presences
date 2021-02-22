@@ -18,7 +18,7 @@ const presence = new Presence({
             presenceData.details = "Durchstöbert";
         }
         else if (urlpath[1] == 'compilation') {
-            let compilation = document.querySelector('.artLogo');
+            const compilation = document.querySelector('.artLogo');
             presenceData.details = "Betrachtet Compilation:";
             if(compilation) presenceData.state = compilation.alt;
             if(!compilation) presenceData.state = document.querySelector('.hXdaOG').textContent;
@@ -33,7 +33,7 @@ const presence = new Presence({
             }
         }
         else if (urlpath[1] == 'filme') {
-            let film = document.querySelector('.artLogo');
+            const film = document.querySelector('.artLogo');
             presenceData.details = "Betrachtet Film:";
             if(film) presenceData.state = film.alt;
             if(!film) presenceData.state = document.querySelector('.hXdaOG').textContent;
@@ -48,7 +48,7 @@ const presence = new Presence({
             }
         }
         else if (urlpath[1] == 'serien') {
-            let serie = document.querySelector('.artLogo');
+            const serie = document.querySelector('.artLogo');
             presenceData.details = "Betrachtet Serie:";
             if(serie) presenceData.state = serie.alt;
             if(!serie) presenceData.state = document.querySelector('.hXdaOG').textContent;
