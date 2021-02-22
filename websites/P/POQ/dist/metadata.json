@@ -22,6 +22,12 @@
       "title": "Show what item you're viewing in the prize store.",
       "icon": "fas fa-shopping-cart",
       "value": true
+    },
+    { 
+      "id": "pass",
+      "title": "Show when you're editing you account info",
+      "icon": "fas fa-lock",
+      "value": true
     }
   ]
 }
