@@ -3,8 +3,8 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-  const button = await presence.getSetting("button");
-  const presenceData: PresenceData = {
+  const button = await presence.getSetting("button"),
+  presenceData: PresenceData = {
       largeImageKey: "mplogo"
     },
     title = document.querySelector(
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
   }
 
   if (button) {
-    presenceData.buttons = [{label: "Read Along", url: document.location.href}]
+    presenceData.buttons = [{label: "Read Along", url: document.location.href}];
   }
 
   if (presenceData.details == null) {
