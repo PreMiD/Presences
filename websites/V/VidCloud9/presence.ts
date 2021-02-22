@@ -7,14 +7,14 @@ strings = presence.getStrings({
 });
 
 let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean;
-let video: {
-iframe_video: {
-  duration: number;
-  iFrameVideo: boolean;
-  currTime: number;
-  dur: number;
-  paused: boolean;
-};
+  let video: {
+    iframe_video: {
+      duration: number;
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+  };
 };
 let playback: boolean;
 let title;
@@ -107,6 +107,7 @@ if (info) {
           delete presenceData.endTimestamp;
           presenceData.details = "Paused:";
           presenceData.smallImageKey = "pause";
+          presenceData.smallImageText = (await strings).pause;
         }
       } else if (iFrameVideo == null && isNaN(duration) && title != null) {
         presenceData.details = "Viewing:";
