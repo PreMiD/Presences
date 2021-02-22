@@ -13,6 +13,12 @@ presence.on("UpdateData", async () => {
   if (privacy) {
     presenceData.details = "Browsing";
   } else if (document.location.hostname == "gunivers.net") {
+    presenceData.buttons = [
+      {
+        label: "Visite Website",
+        url: "https://gunivers.net/"
+      }
+    ]
     if (window.location.pathname.startsWith("/articles")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Activities";
@@ -87,12 +93,24 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "workspace";
     presenceData.details = "Viewing a page:";
     presenceData.state = "Gunivers Workspace";
+    presenceData.buttons = [
+      {
+        label: "Visit Website",
+        url: "https://project.gunivers.net/"
+      }
+    ]
     if (window.location.pathname.endsWith("/projects")) {
       presenceData.details = "Searching a project:";
       presenceData.state = "on Gunivers Workspace";
     } else if (window.location.pathname.startsWith("/projects/")) {
       presenceData.details = "Reading a project:";
       presenceData.state = document.title.split(" - ")[1];
+      presenceData.buttons = [
+        {
+          label: "View project",
+          url: document.URL
+        }
+      ]
     } else if (window.location.pathname.startsWith("/users/")) {
       presenceData.details = "Looking for an user:";
       presenceData.state = document.querySelector("#content > h2").textContent;
