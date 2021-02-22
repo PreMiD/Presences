@@ -12,6 +12,12 @@ presence.on("UpdateData", async () => {
   if (privacy) {
     presenceData.details = "Browsing";
   } else {
+    presenceData.buttons = [
+      {
+        label: "Visite Website",
+        url: "https://altearn.xyz/"
+      }
+    ]
     if (window.location.pathname.startsWith("/articles")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Activities";
