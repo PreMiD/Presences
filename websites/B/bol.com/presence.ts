@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
 
   presenceData.details = "Bladert op bol.com";
   presenceData.state = `Pagina '${document.title.replace("| ", "|").replace(" |", "|").split("|")[1]}'`;
-  if (document.location.pathname === "/" || document.location.pathname === "/nl/") { presenceData.state = "Startpagina"; }
+  if (document.location.pathname === "/" || document.location.pathname === "/nl/") presenceData.state = "Startpagina";
 
   if (document.querySelector("span[class*=h-boxed][data-test*=title]")) {
     presenceData.details = `Bekijkt '${document.querySelector("span[class*=h-boxed][data-test*=title]").innerHTML}'`;
