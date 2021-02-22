@@ -17,5 +17,13 @@
     "multporn"
   ],
   "category": "other",
-  "regExp": "multporn[.]net"
+  "regExp": "multporn[.]net",
+  "settings": [
+    {
+      "id": "button",
+      "title": "Enable Read Along Button",
+      "icon": "fas fa-info",
+      "value": false
+    }
+  ]
 }

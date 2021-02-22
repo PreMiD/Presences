@@ -3,9 +3,9 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
+  const button = await presence.getSetting("button");
   const presenceData: PresenceData = {
-      largeImageKey: "mplogo",
-      buttons: [{ label: "Read Along", url: document.location.href}]
+      largeImageKey: "mplogo"
     },
     title = document.querySelector(
       "body > div#page-wrapper > div#page > div#main-wrapper.clearfix > div#main.clearfix > div#content.column > div.section > h1#page-title.title"
@@ -102,6 +102,10 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Searching for Comics";
     }
+  }
+
+  if (button) {
+    presenceData.buttons = [{label: "Read Along", url: document.location.href}]
   }
 
   if (presenceData.details == null) {
