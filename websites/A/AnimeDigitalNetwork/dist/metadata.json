@@ -1,17 +1,23 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "AnimeDigitalNetwork",
   "description": {
     "en": "Anime Digital Network is the best of the live animated Japan! See all Naruto Shippuden, Fairy Tail, Hunter x Hunter, Blue Exorcist, Code Geass, Vampire Knight, and more.",
     "zh_CN": "AnimeDigitalNetwork是最棒的日本在线动漫网站。"
   },
   "url": "animedigitalnetwork.fr",
-  "version": "1.2.5",
-  "logo": "https://i.gyazo.com/e9fb770cd960ee72ea6e1c58c08113d7.png",
-  "thumbnail": "https://i.gyazo.com/7f6b1357233ab82c23de500417281a15.png",
+  "version": "1.2.7",
+  "logo": "https://i.imgur.com/JnLqL7n.png",
+  "thumbnail": "https://i.imgur.com/1idATDN.png",
   "color": "#0096FF",
   "tags": [
     "anime-digital-network",

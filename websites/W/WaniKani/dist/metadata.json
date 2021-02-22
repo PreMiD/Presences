@@ -14,7 +14,7 @@
     "en": "WaniKani is a kanji learning application by Tofugu. 2,000 kanji. 6,000 vocabulary words. In just over a year."
   },
   "service": "WaniKani",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/NdlB8M5.png",
   "thumbnail": "https://i.imgur.com/8OKXkxY.png",
   "color": "#1BA0ED",

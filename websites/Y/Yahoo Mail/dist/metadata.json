@@ -1,17 +1,23 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Alexx",
+    "id": "604182077088202784"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ], 
   "service": "Yahoo Mail",
   "description": {
     "en": "Yahoo! Mail is an email service launched in 1997 through the American parent company Yahoo!. Yahoo Mail provides four different email plans: three for personal use and another for businesses. By December 2011, Yahoo! Mail had 281 million users, making it the third largest web-based email service in the world.",
     "zh_CN": "雅虎邮箱是由雅虎营运的一款网络电子邮件（Webmail）服务，于1997年10月8日激活。雅虎邮箱是互联网上最大的网络电子邮件服务，有超过2.6亿的用户。"
   },
   "url": "mail.yahoo.com",
-  "version": "1.1.5",
-  "logo": "https://i.gyazo.com/62d5125f69ed0035a0a9a8138a86802b.png",
-  "thumbnail": "https://i.gyazo.com/f37109486cc794d85f7ee317eb7fdc81.png",
+  "version": "1.1.6",
+  "logo": "https://i.imgur.com/1uePEgT.png",
+  "thumbnail": "https://i.imgur.com/l3hHxP9.png",
   "color": "#6923D1",
   "tags": [
     "yahoo-mail",

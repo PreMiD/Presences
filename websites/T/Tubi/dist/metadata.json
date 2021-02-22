@@ -1,16 +1,22 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Alexx",
+    "id": "604182077088202784"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ], 
   "service": "Tubi",
   "description": {
     "en": "Tubi is an American streaming service based in San Francisco, California, United States, that launched in 2014. It is a free, ad-supported service, with advertisements shown during commercial breaks in between programming. It is the largest independently-owned video service in the United States."
   },
   "url": "tubitv.com",
-  "version": "1.1.6",
-  "logo": "https://i.gyazo.com/0df36f576ca9f03f7bbc578a5861848f.png",
-  "thumbnail": "https://i.gyazo.com/78fff884c4f14f752c32540d37c22e7e.png",
+  "version": "1.1.7",
+  "logo": "https://i.imgur.com/PfRmgZm.png",
+  "thumbnail": "https://i.imgur.com/44Esu8y.png",
   "color": "#F12C7B",
   "tags": [
     "tubi",

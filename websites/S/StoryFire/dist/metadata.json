@@ -9,7 +9,7 @@
     "en": "Join the StoryFire rebellion! Watch and create the stories and videos that you want while growing a massive fanbase!"
   },
   "service": "StoryFire",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/1RGQMmt.png",
   "thumbnail": "https://i.imgur.com/voBWTFb.png",
   "color": "#fc9000",
@@ -24,6 +24,12 @@
       "id": "showsearchterm",
       "title": "Show Search Query",
       "icon": "fas fa-search",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Presence Buttons",
+      "icon": "fas fa-th-large",
       "value": true
     }
   ]

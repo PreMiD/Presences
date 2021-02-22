@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Amazon Music",
   "description": {
     "en": "Amazon Music is a music streaming platform and online music store operated by Amazon.com. Launched in public beta on September 25, 2007, in January 2008 it became the first music store to sell music without digital rights management from the four major music labels, as well as many independents.",
@@ -10,9 +16,9 @@
     "zh_TW": "Amazon Music是由Amazon.com經營的音樂串流平台和在線音樂商店。"
   },
   "url": "music.amazon.com",
-  "version": "1.2.5",
-  "logo": "https://i.gyazo.com/16875e5712ac33890f17235d0e46f3be.png",
-  "thumbnail": "https://i.gyazo.com/7f39c3c0b18337d8e6f3bcd0cf962a01.png",
+  "version": "2.0.1",
+  "logo": "https://i.imgur.com/AUKbzxX.png",
+  "thumbnail": "https://i.imgur.com/htSGR6k.png",
   "color": "#21293C",
   "tags": [
     "amazon-music",

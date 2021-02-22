@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Liechtenstein",
+    "id": "471586634899652611"
+  },
+  "contributors": [
+    {
+      "name": "Wagor",
+      "id": "310546454693281794"
+    }
+  ],
+  "url": "mkpc.malahieude.net",
+  "description": {
+    "en": "You might know Mario Kart, the most fun racing game series of all time! Mario Kart PC uses the same base as the original games but is playable on your browser, and for free.  Most of the modes from Mario Kart have been included: Grand Prix, VS, Battle mode, Time Trials, and more! There's also a brand new mode: the track builder! Place straight lines and turns, add items, boost panels and more! Everything is customizable! The only limit is your own imagination! You can share your tracks, and try other people's tracks thanks to the sharing tool. Thousands of custom tracks are already available!  Finally, you can face players from the whole world thanks to the multiplayer online mode! Climb the rankings and become world champion!",
+    "fr": "Vous connaissez certainement Mario Kart, le jeu de course le plus fun de tous les temps ! Mario Kart PC reprend les mêmes principes que le jeu original mais il est jouable sur navigateur, et gratuitement.  La plupart des modes issus de Mario Kart ont été repris : Grand Prix, courses VS, batailles de ballons, contre-la-montre... Et un dernier mode inédit : l'éditeur de circuits ! Placez les lignes droites et les virages, ajoutez les objets, insérez des accélérateurs... Tout est personnalisable ! Votre imagination est la seule limite ! Vous pouvez également partager vos créations et essayer celles des autres grâce à l'outil de partage. Plusieurs milliers de circuits ont déjà été partagés !  Enfin, il est possible d'affronter les joueurs du monde entier grâce au mode multijoueurs en ligne ! Grimpez dans le classement et devenez champion du monde !"
+  },
+  "service": "MKPC",
+  "version": "1.0.1",
+  "logo": "https://imgur.com/T2WTLEM.jpeg",
+  "thumbnail": "https://imgur.com/LZwSRDe.jpeg",
+  "color": "#FF001B",
+  "tags": [
+    "game",
+    "mario",
+    "kart",
+    "retro"
+  ],
+  "category": "games"
+}

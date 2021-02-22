@@ -86,10 +86,12 @@ interface LangStrings {
   forums: string;
   thread: string;
   user: string;
+  watchStream: string;
+  watchVideo: string;
 }
 
 const presence = new Presence({
-    clientId: "607754656453623843"
+    clientId: "802958789555781663"
   }),
   getElement = (query: string): string | undefined => {
     return document.querySelector(query)
@@ -185,7 +187,9 @@ const presence = new Presence({
         uptime: "general.uptimeHistory",
         forums: "general.forums",
         thread: "general.readingThread",
-        user: "general.viewUser"
+        user: "general.viewUser",
+        watchStream: "general.buttonWatchStream",
+        watchVideo: "general.buttonWatchVideo"
       },
       await presence.getSetting("lang")
     );
@@ -211,7 +215,8 @@ presence.on("UpdateData", async () => {
     logo: number = await presence.getSetting("logo"),
     logoArr = ["twitch", "black-ops", "white", "purple", "pride"],
     devLogo: number = await presence.getSetting("devLogo"),
-    devLogoArr = ["dev-main", "dev-white", "dev-purple"];
+    devLogoArr = ["dev-main", "dev-white", "dev-purple"],
+    buttons = await presence.getSetting("buttons");
 
   if (!oldLang) {
     oldLang = newLang;
@@ -238,21 +243,34 @@ presence.on("UpdateData", async () => {
         if (showLive && live) {
           //* Live
           const title = getElement(".channel-info-content h2"),
-            streamer = getElement(".channel-info-content .tw-c-text-base");
+            streamer = getElement(".channel-info-content .tw-c-text-base"),
+            game =
+              document.querySelector("a[data-a-target='stream-game-link']")
+                ?.textContent || "Just Chatting";
           presenceData.details =
             title && streamer
               ? streamDetail
                   .replace("%title%", title)
                   .replace("%streamer%", streamer)
+                  .replace("%game%", game)
               : undefined;
           presenceData.state =
             title && streamer
               ? streamState
                   .replace("%title%", title)
                   .replace("%streamer%", streamer)
+                  .replace("%game%", game)
               : undefined;
           presenceData.smallImageKey = "live";
           presenceData.smallImageText = (await strings).live;
+          if (buttons) {
+            presenceData.buttons = [
+              {
+                label: (await strings).watchStream,
+                url: document.URL.split("?")[0]
+              }
+            ];
+          }
         }
 
         if (showVideo && !live) {
@@ -260,18 +278,23 @@ presence.on("UpdateData", async () => {
           const title = getElement(".channel-info-content h2")
               .split("•")
               .shift(),
-            uploader = getElement(".channel-info-content .tw-c-text-base");
+            uploader = getElement(".channel-info-content .tw-c-text-base"),
+            game = document.querySelector(
+              "a[data-a-target='stream-game-link']"
+            );
           presenceData.details =
             title && uploader
               ? vidDetail
                   .replace("%title%", title)
                   .replace("%uploader%", uploader)
+                  .replace("%game%", game)
               : undefined;
           presenceData.state =
             title && uploader
               ? vidState
                   .replace("%title%", title)
                   .replace("%uploader%", uploader)
+                  .replace("%game%", game)
               : undefined;
           presenceData.smallImageKey = "play";
           presenceData.smallImageText = (await strings).play;
@@ -279,6 +302,15 @@ presence.on("UpdateData", async () => {
           const timestamps = presence.getTimestampsfromMedia(video);
           presenceData.startTimestamp = timestamps[0];
           presenceData.endTimestamp = timestamps[1];
+
+          if (buttons) {
+            presenceData.buttons = [
+              {
+                label: (await strings).watchVideo,
+                url: document.URL.split("?")[0]
+              }
+            ];
+          }
         }
 
         if (((showLive && live) || (showVideo && !live)) && video.paused) {

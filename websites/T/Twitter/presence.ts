@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "612437291574755349"
+    clientId: "802958757909889054"
   }),
   capitalize = (text: string): string => {
     const texts = text.replace(/[[{(_)}\]]/g, " ").split(" ");
@@ -16,7 +16,7 @@ function stripText(element: HTMLElement, id = "None", log = true): string {
   } else {
     if (log)
       presence.error(
-        "An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
+        "An error occurred while stripping data off the page. Please contact Bas950 on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
           id
       );
     return null;
@@ -140,15 +140,15 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  const objHeader: HTMLElement = document.querySelector(
-    "span.css-901oao.css-16my406.css-bfa6kz.r-jwli3a.r-1qd0xha.r-1vr29t4.r-ad9z0x.r-bcqeeo.r-3s2u2q.r-qvutc0 > span > span"
-  );
+  const objHeader = document.querySelector(
+    `a[href='/${document.location.pathname.split("/")[1]}/header_photo']`
+  )?.parentElement.children[1]?.children[1] as HTMLElement;
 
   if (objHeader) {
     title = (await strings).viewTweets;
-    info = `${stripText(objHeader, "Object Header")} // ${capitalize(
-      path.split("/")[1]
-    )}`;
+    info = `${
+      stripText(objHeader, "Object Header").split("@")[0]
+    } // ${capitalize(path.split("/")[1])}`;
 
     if (path.match("/with_replies")) {
       title = (await strings).viewTweetsWithReplies;
@@ -163,14 +163,14 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (objHeader === null && path.match("/status/")) {
+  if (objHeader === undefined && path.match("/status/")) {
     title = (await strings).readTweet;
     info = stripText(
-      document.querySelector(
-        "div.css-901oao.css-16my406.r-1qd0xha.r-ad9z0x.r-bcqeeo.r-qvutc0"
-      ),
+      document.querySelectorAll(
+        `a[href='/${path.split("/")[1]}']`
+      )[1] as HTMLElement,
       "Tweet"
-    );
+    ).split("@")[0];
   }
 
   if (path.match("/messages") && objHeader) {
@@ -179,9 +179,9 @@ presence.on("UpdateData", async () => {
     if (privacy) info = null;
   }
 
-  const etcHeader: HTMLElement = document.querySelector(
-    "div.css-1dbjc4n.r-16y2uox.r-1wbh5a2.r-1pi2tsx.r-1777fci > div > h2 > span"
-  );
+  const etcHeader: HTMLElement = Array.from(
+    document.querySelectorAll("h2")
+  ).find((c) => c.parentElement.children[1]?.textContent.includes("@"));
 
   if (path.match("/moments") && etcHeader) {
     title = "Browsing Moments...";
@@ -214,13 +214,13 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  const data: PresenceData = {
+  const presenceData: PresenceData = {
     details: title,
     state: info,
     largeImageKey: image
   };
 
-  if (time) data.startTimestamp = elapsed;
+  if (time) presenceData.startTimestamp = elapsed;
 
-  presence.setActivity(data, true);
+  presence.setActivity(presenceData, true);
 });

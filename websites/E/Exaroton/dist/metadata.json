@@ -3,16 +3,16 @@
     "name": "AyamDobhal",
     "id": "379269487532310530"
   },
-  "service": "Exaroton",
+  "service": "exaroton",
   "description": {
-    "en": "Don't pay when you eat. Only pay to play. With high-end on demand game servers by Aternos."
+    "en": "Don't pay when you eat. Only pay to play. With high-end on demand game servers by exaroton."
   },
   "url": [
     "exaroton.com",
     "support.exaroton.com"
   ],
   "version": "1.0.0",
-  "logo": "https://i.imgur.com/uexkJD4.png",
+  "logo": "https://i.imgur.com/uFAyLCK.png",
   "thumbnail": "https://i.imgur.com/QYQLbKx.png",
   "color": "#17f013",
   "tags": [

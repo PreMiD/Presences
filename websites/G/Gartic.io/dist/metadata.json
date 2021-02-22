@@ -1,16 +1,22 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Gartic.io",
   "description": {
     "en": "Play Gartic.io online and for free. Draw and guess the words as fastest as you can! Join on worldwide rooms or create your own."
   },
   "url": "gartic.io",
-  "version": "1.3.5",
-  "logo": "https://i.gyazo.com/8cd791f55fe08e6588c3acfd83d1188f.jpg",
-  "thumbnail": "https://i.gyazo.com/9cfbac7387f7001b11d5554644c452f6.png",
+  "version": "1.3.7",
+  "logo": "https://i.imgur.com/JkOc5Vo.png",
+  "thumbnail": "https://i.imgur.com/n7XRf46.png",
   "color": "#FBD981",
   "tags": [
     "gartic-io",
