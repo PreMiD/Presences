@@ -57,6 +57,14 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
     }
 
+    const animeURL = document
+      .querySelector(".anime-page-link")
+      .querySelector("a")
+      .getAttribute("href");
+    data.buttons = [
+      { label: "Watch Episode", url: location.href },
+      { label: "Anime Page", url: animeURL }
+    ];
     presence.setActivity(data, !video.paused);
   } else if (
     location.href.startsWith("https://ww.anime4up.com/?search_param=animes&s=")
