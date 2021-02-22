@@ -1,26 +1,26 @@
 const presence = new Presence({
-  clientId: "811965557184135179"
-}), browsingStamp = Math.floor(Date.now() / 1000);
-let search: HTMLInputElement,
-title: Element;
+    clientId: "811965557184135179"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let search: HTMLInputElement, title: Element;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  },
-  page = window.location.pathname,
-  host = document.location.hostname; 
+      largeImageKey: "logo"
+    },
+    page = window.location.pathname,
+    host = document.location.hostname;
 
-    presenceData.startTimestamp = browsingStamp;
-    if (host == "www.mediafire.com") {
+  presenceData.startTimestamp = browsingStamp;
+  if (host == "www.mediafire.com") {
     if (page == "/") {
-        presenceData.details = "Viewing the homepage";
-      }
-      if (page.includes("/file/")) {
-        title = document.querySelector("div.dl-btn-label");
-        presenceData.details = "Viewing:";
-        presenceData.state = title.textContent;
-      }
+      presenceData.details = "Viewing the homepage";
+    }
+    if (page.includes("/file/")) {
+      title = document.querySelector("div.dl-btn-label");
+      presenceData.details = "Viewing:";
+      presenceData.state = title.textContent;
+    }
     if (page == "/software/mobile/" || page == "/software/mobile") {
       presenceData.details = "Viewing:";
       presenceData.state = "Mediafire Mobile Apps";
@@ -49,8 +49,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing:";
         presenceData.state = title.textContent;
       } else {
-      presenceData.details = "Viewing:";
-      presenceData.state = title.textContent;
+        presenceData.details = "Viewing:";
+        presenceData.state = title.textContent;
       }
     }
     if (page == "/press" || page == "/press/") {
@@ -72,7 +72,6 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing:";
         presenceData.state = title.textContent;
       }
-
     }
     if (page.includes("/policy_violation/")) {
       title = document.querySelector("#content > h2:nth-child(1)");
@@ -81,24 +80,24 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing:";
         presenceData.state = title.textContent;
       } else {
-      presenceData.details = "Viewing:";
-      presenceData.state = title.textContent;
+        presenceData.details = "Viewing:";
+        presenceData.state = title.textContent;
       }
     }
-   if (page.includes("/subscriptions")) {
-    title = document.querySelector("#content > h2");
-    presenceData.details = "Viewing:";
-    presenceData.state = title.textContent;
-   }
-   if (page.includes("/credits/")) {
-    title = document.querySelector("#content > h2");
-    presenceData.details = "Viewing:";
-    presenceData.state = title.textContent;
-   }
-   if (page.includes("/help/")) {
-    presenceData.details = "Viewing:";
-    presenceData.state = "Help";
-   }
+    if (page.includes("/subscriptions")) {
+      title = document.querySelector("#content > h2");
+      presenceData.details = "Viewing:";
+      presenceData.state = title.textContent;
+    }
+    if (page.includes("/credits/")) {
+      title = document.querySelector("#content > h2");
+      presenceData.details = "Viewing:";
+      presenceData.state = title.textContent;
+    }
+    if (page.includes("/help/")) {
+      presenceData.details = "Viewing:";
+      presenceData.state = "Help";
+    }
     if (page.includes("/login/")) {
       presenceData.details = "Logging in";
     }
@@ -111,7 +110,7 @@ presence.on("UpdateData", async () => {
     if (page.includes("/myfiles")) {
       presenceData.details = "Viewing:";
       presenceData.state = "My Files";
-    } else if(page.includes("/recent")) {
+    } else if (page.includes("/recent")) {
       presenceData.details = "Viewing:";
       presenceData.state = "My Recent Files";
     } else if (page.includes("/following")) {
@@ -131,27 +130,27 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Help Article About:";
       presenceData.state = title.textContent;
     } else {
-    search = document.querySelector("#query");
-    if (search.value != "") {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Helpdesk searching for:";
-      presenceData.state = search.value;
-      presenceData.smallImageKey = "searching";
-    } else {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Checking out the helpdesk";
+      search = document.querySelector("#query");
+      if (search.value != "") {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Helpdesk searching for:";
+        presenceData.state = search.value;
+        presenceData.smallImageKey = "searching";
+      } else {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Checking out the helpdesk";
+      }
     }
   }
-  }
   if (host == "blog.mediafire.com") {
-  if (page == "/") {
-   title = document.querySelector("#fl-post-3434 > header > h2 > a");
-   presenceData.details = "Viewing Blog Post About:";
-   presenceData.state = title.textContent;
-  } else {
-    presenceData.details = "Viewing:";
-    presenceData.state = "Oops- We don't know this location.";
-  }
+    if (page == "/") {
+      title = document.querySelector("#fl-post-3434 > header > h2 > a");
+      presenceData.details = "Viewing Blog Post About:";
+      presenceData.state = title.textContent;
+    } else {
+      presenceData.details = "Viewing:";
+      presenceData.state = "Oops- We don't know this location.";
+    }
   }
 
   if (presenceData.details == null) {

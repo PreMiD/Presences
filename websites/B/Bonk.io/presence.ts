@@ -8,7 +8,7 @@ const presence = new Presence({
   };
 
 interface IFrameData {
-  lastGameMode?: string,
+  lastGameMode?: string;
   id?: string;
   state: string;
   playerCount: number;
@@ -19,8 +19,8 @@ let gameStartTimestamp: number = null,
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-      largeImageKey: "bonk"
-    };
+    largeImageKey: "bonk"
+  };
 
   if (ifd?.id) {
     data.state = ifd.state;
@@ -51,9 +51,9 @@ presence.on("UpdateData", async () => {
         data.details = "Viewing Room List";
         break;
       case "newbonklobby":
-        data.details = `In a lobby - ${ifd.lastGameMode} (${ifd.playerCount} player${
-          ifd.playerCount === 1 ? "" : "s"
-        })`;
+        data.details = `In a lobby - ${ifd.lastGameMode} (${
+          ifd.playerCount
+        } player${ifd.playerCount === 1 ? "" : "s"})`;
         data.smallImageKey = modePair[ifd.lastGameMode] || "classic2";
         data.smallImageText = ifd.lastGameMode;
         break;

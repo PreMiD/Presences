@@ -41,10 +41,13 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).pause;
     }
 
-    if (buttons) presenceData.buttons = [{
-      label: 'Watch',
-      url: document.URL
-    }];
+    if (buttons)
+      presenceData.buttons = [
+        {
+          label: "Watch",
+          url: document.URL
+        }
+      ];
   } else if (document.location.pathname.startsWith("/forgot-password")) {
     presenceData.details = "Forgot Password";
   } else if (document.location.pathname.startsWith("/social")) {

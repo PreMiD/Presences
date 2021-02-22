@@ -94,8 +94,7 @@ presence.on("UpdateData", async () => {
       data.details = "Browsing...";
       data.state = "User's Loved";
     } else if (pathname.includes("playlists")) {
-      data.details = "Browsing...", 
-      data.state = "User's Playlists";
+      (data.details = "Browsing..."), (data.state = "User's Playlists");
     } else if (pathname.includes("albums")) {
       data.details = "Browsing...";
       data.state = "User's Albums";

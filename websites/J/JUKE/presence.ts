@@ -9,21 +9,37 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.querySelector("span[class*=eC-title]")) {
-    presenceData.details = document.querySelector("span[class*=eC-title]").innerHTML.replace("De ", "de ").replace("Het ", "het ").replace("&amp;", "&");
+    presenceData.details = document
+      .querySelector("span[class*=eC-title]")
+      .innerHTML.replace("De ", "de ")
+      .replace("Het ", "het ")
+      .replace("&amp;", "&");
     if (document.querySelector("span[class*=eC-subtitle]")) {
-      presenceData.state = document.querySelector("span[class*=eC-subtitle]").innerHTML.replace("De ", "de ").replace("Het ", "het ").replace("&amp;", "&");
+      presenceData.state = document
+        .querySelector("span[class*=eC-subtitle]")
+        .innerHTML.replace("De ", "de ")
+        .replace("Het ", "het ")
+        .replace("&amp;", "&");
     }
   }
 
   if (!presenceData.details) {
     presenceData.details = "Bladert op JUKE.nl";
-    presenceData.state = `Pagina '${document.title.replace(" |", "|").split("|")[0].replace("JUKE - Luister nu jouw favoriete radiozenders, non-stop muziek en podcasts!", "Home")}'`;
+    presenceData.state = `Pagina '${document.title
+      .replace(" |", "|")
+      .split("|")[0]
+      .replace(
+        "JUKE - Luister nu jouw favoriete radiozenders, non-stop muziek en podcasts!",
+        "Home"
+      )}'`;
   }
 
   if (document.querySelector("rect")) {
     presenceData.smallImageKey = "playing";
     presenceData.smallImageText = "Wordt afgespeeld";
-    presenceData.buttons = [{ label: "Ook radio luisteren", url: document.location.href }];
+    presenceData.buttons = [
+      { label: "Ook radio luisteren", url: document.location.href }
+    ];
   } else if (document.querySelector("[class*=spinner]")) {
     presenceData.smallImageKey = "waiting";
     presenceData.smallImageText = "Wordt geladen";
