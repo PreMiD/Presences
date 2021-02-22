@@ -14,7 +14,7 @@
     "pu:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./presenceUpdater.ts"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
+    "@babel/core": "^7.12.17",
     "@babel/preset-env": "^7.12.11",
     "@types/babel__core": "^7.1.12",
     "@types/chrome": "^0.0.130",
