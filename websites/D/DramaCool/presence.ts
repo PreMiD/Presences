@@ -45,7 +45,8 @@ presence.on("UpdateData", async () => {
         startTimestamp: startsTime
     },
         newLang = await presence.getSetting('lang'),
-        showButtons = await presence.getSetting("buttons");
+        showButtons = await presence.getSetting("buttons"),
+        pathname = document.location.pathname;
 
     if (!oldLang){
         oldLang = newLang;
@@ -54,7 +55,7 @@ presence.on("UpdateData", async () => {
         strings = getStrings();
     }
 
-    if (document.location.pathname.includes('/drama-detail')){
+    if (pathname.includes('/drama-detail')){
         ShowData.title = document.querySelector('h1').textContent;
 
         presenceData.smallImageKey = "reading";
@@ -62,7 +63,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.details = (await strings).viewPage;
         presenceData.state = ShowData.title;
-    } else if (document.location.pathname.includes("/search")) {
+    } else if (pathname.includes("/search")) {
         const searchType = document.location.search.includes("movies") ? "Movies" : "Stars";
 
         presenceData.details = (await strings).searchFor;
@@ -70,13 +71,14 @@ presence.on("UpdateData", async () => {
 
         presenceData.smallImageKey = 'search';
         presenceData.smallImageText = (await strings).searching;
-
-    } else if (document.location.pathname.includes("/")){
+    } else if (pathname.includes("/")){
         ShowData.title = document.querySelector('div.category > a')?.textContent;
 
         if (ShowData.playback){
             const timestamps = presence.getTimestamps(ShowData.currentTime, ShowData.duration);
             ShowData.ep = document.URL.match(/episode-?([1-9]?[0-9]?[0-9])/g)[0].replace("episode-", "");
+
+            if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";
 
             presenceData.smallImageKey = ShowData.paused ? "pause" : "play";
             presenceData.smallImageText = ShowData.paused ? (await strings).paused : (await strings).play;
