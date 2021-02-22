@@ -6,8 +6,7 @@ strings = presence.getStrings({
   pause: "presence.playback.paused"
 });
 
-let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean;
-  let video: {
+let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean, video: {
     iframe_video: {
       duration: number;
       iFrameVideo: boolean;
@@ -15,8 +14,7 @@ let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean
       dur: number;
       paused: boolean;
   };
-};
-let playback: boolean, title:HTMLTextAreaElement, browsingStamp:number;
+}, playback: boolean, title:HTMLTextAreaElement, browsingStamp:number;
 
 presence.on("iFrameData", (data:{
   iframe_video: {
@@ -39,9 +37,7 @@ function getTimestamps(videoTime: number, videoDuration: number): Array<number> 
 }
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sSI");
-  const elapsed = await presence.getSetting("sTE");
-  const videoTime = await presence.getSetting("sVT");
+  const info = await presence.getSetting("sSI"), elapsed = await presence.getSetting("sTE"), videoTime = await presence.getSetting("sVT");
 
   if (elapsed) {
     browsingStamp = Math.floor(Date.now() / 1000);
@@ -49,10 +45,9 @@ presence.on("UpdateData", async () => {
     } 
   else  {
     browsingStamp = null;
-    presence.info("Elapsed Off")
+    presence.info("Elapsed Off");
   }
-  const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-  const presenceData: PresenceData = {
+  const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)), presenceData: PresenceData = {
   largeImageKey: "logo"
 };
 if (videoTime) {
@@ -66,7 +61,7 @@ if (videoTime) {
 }
 if (info) {
   
-  presence.info("Info is On.")
+  presence.info("Info is On.");
   if (document.location.pathname == "/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
@@ -123,25 +118,25 @@ if (info) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.smallImageKey = "search";
         presenceData.smallImageText = "Error 3";
-        presence.error("Can't tell what you are watching. Fix a variable or line of code.")
+        presence.error("Can't tell what you are watching. Fix a variable or line of code.");
       }
     } else {
       //Can't get the basic site information
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Error 02: Watching unknown show/movie.";
       presenceData.smallImageKey = "search";
-      presence.error("Can't read page.")
+      presence.error("Can't read page.");
     }
   } //If it can't get the page it will output an error
   else {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Error 01: Can't Read Page";
     presenceData.smallImageKey = "search";
-    presence.error("Can't read page. Set up a conditional.")
+    presence.error("Can't read page. Set up a conditional.");
   }
 } else {
   presenceData.details = null;
-  presence.info("Info is off.")
+  presence.info("Info is off.");
 }
 
 if (presenceData.details == null) {
