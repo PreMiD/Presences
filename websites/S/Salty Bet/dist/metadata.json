@@ -11,7 +11,7 @@
   "service": "Salty Bet",
   "version": "2.0.0",
   "logo": "https://i.imgur.com/0GEzMXM.png",
-  "thumbnail": "https://i.imgur.com/gnu0OWE.png",
+  "thumbnail": "https://i.imgur.com/thkngQH.png",
   "color": "#00adef",
   "tags": [
     "games",
@@ -22,13 +22,5 @@
     "streaming",
     "mugen"
   ],
-  "category": "games",
-  "settings": [
-    {
-      "id": "balance",
-      "title": "Show balance",
-      "icon": "fad fa-dollar-sign",
-      "value": true
-    }
-  ]
+  "category": "games"
 }

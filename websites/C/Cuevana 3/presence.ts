@@ -62,9 +62,6 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       { label: "Ver Película",
         url: window.location.href
-      },
-      { label: "Visitar Cuevana3.io",
-        url: "https://cuevana3.io"
       }
     ];
 
@@ -76,9 +73,6 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       { label: "Ver Episodio",
         url: window.location.href
-      },
-      { label: "Visitar Cuevana3.io",
-        url: "https://cuevana3.io"
       }
     ];
     presence.setActivity(presenceData);

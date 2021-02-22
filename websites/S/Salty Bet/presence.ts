@@ -4,7 +4,7 @@ const presence = new Presence({ clientId: "802246778010730548" }),
     Blue: "div#sbettors2 > span.bluetext > strong",
     estatus: "div#status > span#betstatus",
     tmode: "span#tournament-note",
-    emode: "div#footer-alert",
+    footer: "div#footer-alert",
     betRed: "span#lastbet.dynamic-view > span.redtext",
     betBlue: "span#lastbet.dynamic-view > span.bluetext",
     prize: "span#lastbet.dynamic-view > span.greentext",
@@ -29,13 +29,13 @@ function getText(selector: string) {
 function getModeImageKey(): string[] {
   if (
     getText(SelectorMap["tmode"]) !== null ||
-    getText(SelectorMap["emode"]).includes("bracket!") ||
-    getText(SelectorMap["emode"]).includes("FINAL")
+    getText(SelectorMap["footer"]).includes("bracket!") ||
+    getText(SelectorMap["footer"]).includes("FINAL")
   ) {
     return ["trofeo", "Tournament Mode"];
   } else if (
-    getText(SelectorMap["emode"]).includes("exhibition") ||
-    getText(SelectorMap["emode"]).includes("Exhibition")
+    getText(SelectorMap["footer"]).includes("exhibition") ||
+    getText(SelectorMap["footer"]).includes("Exhibition")
   ) {
     return ["saltgirl", "Exhibition Mode"];
   } else {
@@ -52,14 +52,6 @@ function getFighters(): string {
   else return "Loading Fighters...";
 }
 
-function getBalance(): string {
-  if (
-    getText(SelectorMap["balance"]) !== null
-  )
-    return "Balance: " + "$" + getText(SelectorMap["balance"]);
-  else return "Loading Balance...";
-}
-
 function isBetOpen(): boolean {
   return getText(SelectorMap["estatus"]).includes("OPEN!");
 }
@@ -70,17 +62,17 @@ function getBetStatus(): string {
       if (getText(SelectorMap["betsView"]).includes("|")) {
         if (getText(SelectorMap["betRed"]).includes("$"))
           return ((+getText(SelectorMap["betRed"]).replace("$","") < 1000) ? getText(SelectorMap["betRed"]) : "$" + abbrNum(+getText(SelectorMap["betRed"]).replace("$",""),1)) +
-            "(Red)→" +
+            "(Red) → " +
             ((+getText(SelectorMap["prize"]).replace("+$","") < 1000) ? getText(SelectorMap["prize"]) : "+$" + abbrNum(+getText(SelectorMap["prize"]).replace("+$",""),1)) +
-            "|" +
+            " | " +
             getText(SelectorMap["oddsRed"]) +
             ":" +
             getText(SelectorMap["oddsBlue"]);
         else
           return ((+getText(SelectorMap["betBlue"]).replace("$","") < 1000) ? getText(SelectorMap["betBlue"]) : "$" + abbrNum(+getText(SelectorMap["betBlue"]).replace("$",""),1)) +
-            "(Blue)→" +
+            "(Blue) → " +
             ((+getText(SelectorMap["prize"]).replace("+$","") < 1000) ? getText(SelectorMap["prize"]) : "+$" + abbrNum(+getText(SelectorMap["prize"]).replace("+$",""),1)) +
-            "|" +
+            " | " +
             getText(SelectorMap["oddsRed"]) +
             ":" +
             getText(SelectorMap["oddsBlue"]);
@@ -132,17 +124,14 @@ function abbrNum(number : number, decPlaces : number) : string {
 }
 
 presence.on("UpdateData", async () => {
-  const balance = await presence.getSetting("balance"),
-    presenceData: PresenceData = {
-      largeImageKey: "salty"
-    };
+  const presenceData: PresenceData = {
+    largeImageKey: "salty"
+  };
   if (
     document.location.pathname == "/" ||
     document.location.pathname == "/index"
   ) {
     const mode = getModeImageKey();
-    presenceData.smallImageKey = mode[0];
-    presenceData.smallImageText = mode[1];
 
     if (fightersCheck !== getFighters()) {
       presenceData.details = getFighters();
@@ -152,33 +141,60 @@ presence.on("UpdateData", async () => {
       fightersCheck = getFighters() + "‎";
     }
 
+    presenceData.state = getBetStatus();
+
+    presenceData.smallImageKey = mode[0];
+    presenceData.smallImageText = mode[1];
+
     (isBetOpen()) ? browsingStamp = Math.floor(Date.now() / 1000) : presenceData.startTimestamp = browsingStamp;
 
-    presenceData.state = mode[1];
-    if(balance && ! getBalance().includes("$0"))
-      presenceData.buttons = [
-        { label: getBetStatus(),
-          url: "https://www.saltybet.com"
-        },
-        { label: getBalance(),
-          url: "https://www.saltybet.com"
-        }
-      ];
-    else
-      presenceData.buttons = [
-        { label: getBetStatus(),
-          url: "https://www.saltybet.com"
-        },
-        { label: "Visit SaltyBet.com",
-          url: "https://www.saltybet.com"
-        }
-      ];
+    switch(mode[0]){
+      case "trofeo":
+        presenceData.buttons = [
+          { label: "Tournament Bracket",
+            url: "https://www.saltybet.com/shaker?bracket=1"
+          },
+          { label: "Visit SaltyBet.com",
+            url: "https://www.saltybet.com"
+          }
+        ];
+        break;
+      case "saltgirl":
+        presenceData.buttons = [
+          { label: "Exhibition Queue",
+            url: "https://www.saltybet.com/shaker?activerequests=1"
+          },
+          { label: "Visit SaltyBet.com",
+            url: "https://www.saltybet.com"
+          }
+        ];
+        break;
+      case "salero":
+        presenceData.buttons = [
+          { label: "Visit SaltyBet.com",
+            url: "https://www.saltybet.com"
+          }
+        ];
+        break;
+      default:
+        presenceData.buttons = [
+          { label: "Visit SaltyBet.com",
+            url: "https://www.saltybet.com"
+          }
+        ];
+    }
   } else if (document.location.pathname == "/authenticate") {
     presenceData.details = "Signing in...";
-    delete presenceData.startTimestamp;
+    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname == "/bank") {
     presenceData.details = "Checking Bank";
-    delete presenceData.startTimestamp;
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.URL == "https://www.saltybet.com/shaker?bracket=1") {
+    presenceData.details = "Checking Tournament Bracket";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.URL == "https://www.saltybet.com/shaker?activerequests=1") {
+    presenceData.details = "Checking Exhibition Queue";
+    presenceData.startTimestamp = browsingStamp;
   } else {
     presenceData.details = null;
   }
