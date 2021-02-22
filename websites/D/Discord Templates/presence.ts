@@ -8,78 +8,118 @@ const client = new Presence({
     "/partners": "Partners",
     "/legal/terms": "Terms of Service",
     "/legal/guidelines": "Guidelines",
+    "/legal/privacy": "Privacy Policy",
     "/about": "About Us"
-  };
+  },
+  startTimestamp = Math.floor(Date.now() / 1000);
 
-client.on("UpdateData", () => {
-  const path: string = document.location.pathname;
+client.on("UpdateData", async () => {
+  const path: string = document.location.pathname,
+    commonValues = {
+      largeImageKey: "dcst-logo",
+      startTimestamp
+    },
+    showButtons = await client.getSetting("showButtons"),
+    showSensitive = await client.getSetting("privacy");
 
   if (path.includes("/templates/") && !path.includes("templates/top")) {
-    let templateName: string | null = document.querySelector(
-        "section > div > div > h1"
-      )?.textContent,
-      string = "Viewing a template:";
+    let templateName: string | null = document
+        .querySelector(".title-container > h1")
+        ?.textContent?.trim(),
+      string = "Viewing Template",
+      buttons = [
+        {
+          label: "View Template",
+          url: `https://discordtemplates.com${path}`
+        }
+      ];
 
     if (path.includes("/edit")) {
       string = "Editing a template:";
-      templateName = document.querySelector("section > div > div > h2")
-        ?.textContent;
+      templateName = document
+        .querySelector("section > div > div > h2")
+        ?.textContent?.trim();
+
+      buttons = [
+        {
+          label: "View Template",
+          url: `https://discordtemplates.com${path.replace("/edit", "")}`
+        }
+      ];
     } else if (path.includes("/new")) {
-      string = "Creating new template:";
+      string = "Creating New Template";
       templateName = document.querySelector(
-        "div.preview-card.template.card > div.card-content > div.media > div.media-content > p"
+        ".template.card > div.card-content > div.media > div.media-content > p"
       )?.textContent;
+
+      buttons = [];
     }
 
-    client.setActivity({
-      largeImageKey: "dcst-logo",
-      startTimestamp: Date.now(),
+    const object = {
+      ...commonValues,
       details: string,
-      state: templateName || "Unknown"
-    });
-  } else if (path.includes("/user/")) {
-    const userName: string | null = document.querySelector(
-      "section > div > div > h1"
-    )?.textContent;
+      state: templateName || "Unknown",
+      buttons
+    };
 
-    client.setActivity({
-      largeImageKey: "dcst-logo",
-      startTimestamp: Date.now(),
-      details: "Viewing a user:",
-      state: userName
-    });
+    if (showSensitive === false) delete object["state"];
+    if (showButtons === false || showSensitive === false)
+      delete object["buttons"];
+
+    client.setActivity(object);
+  } else if (path.includes("/users/")) {
+    const userName: string | null = document
+        .querySelector("section > div > div > h1")
+        ?.textContent?.trim(),
+      object: PresenceData = {
+        ...commonValues,
+        details: "Viewing User",
+        state: userName,
+        buttons: [
+          {
+            label: "View User",
+            url: `https://discordtemplates.com${path}`
+          }
+        ]
+      };
+
+    if (showSensitive === false) delete object["state"];
+    if (showButtons === false || showSensitive === false)
+      delete object["buttons"];
+
+    client.setActivity(object);
   } else if (path.includes("/tag/")) {
-    let tag: string = document.location.href.replace(
-      "https://discordtemplates.com/tag/",
-      ""
-    );
-    tag = tag[0].toUpperCase() + tag.slice(1, tag.length).toLowerCase();
+    const tag: string = document
+        .querySelector(".hero-body > .column.is-two-thirds > .is-active")
+        ?.textContent?.trim(),
+      object = {
+        ...commonValues,
+        smallImageKey: "search",
+        details: "Searching by Tag",
+        state: tag
+      };
 
-    client.setActivity({
-      largeImageKey: "dcst-logo",
-      smallImageKey: "search",
-      startTimestamp: Date.now(),
-      details: "Searching by tag:",
-      state: tag
-    });
+    if (showSensitive === false) delete object["state"];
+    client.setActivity(object);
   } else if (path.includes("/search/")) {
-    const query: string = decodeURIComponent(
-      document.location.href.replace("https://discordtemplates.com/search/", "")
-    );
+    const query: string = decodeURIComponent(path.replace("/search/", "")),
+      object = {
+        ...commonValues,
+        smallImageKey: "search",
+        details: "Searching for",
+        state: query
+      };
 
-    client.setActivity({
-      largeImageKey: "dcst-logo",
-      smallImageKey: "search",
-      startTimestamp: Date.now(),
-      details: "Searching for:",
-      state: query
-    });
-  } else if (locations[path] || locations[path.slice(0, -1)])
-    client.setActivity({
-      largeImageKey: "dcst-logo",
-      startTimestamp: Date.now(),
-      details: "Viewing page:",
+    if (showSensitive === false) delete object["state"];
+    client.setActivity(object);
+  } else if (locations[path] || locations[path.slice(0, -1)]) {
+    const object = {
+      ...commonValues,
+      details: "Viewing Page",
       state: locations[path] || locations[path.slice(0, -1)] || "Unknown"
-    });
-  else return client.setActivity();
+    };
+
+    if (showSensitive === false) delete object["state"];
+    client.setActivity(object);
+  } else return client.setActivity();
 });
