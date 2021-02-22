@@ -18,15 +18,15 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [{ label: "Product bekijken", url: document.location.href }];
   } else if (document.querySelector("h1[class*=bol_header][data-test*=page-title]")) {
     presenceData.details = `Bekijkt ${document.querySelector("h1[class*=bol_header][data-test*=page-title]").innerHTML}`;
-    presenceData.state = null
+    presenceData.state = null;
     presenceData.buttons = [{ label: "Categorie bekijken", url: document.location.href }];
   }
 
-  if (document.location.pathname.toLowerCase().includes("order")) { presenceData.details = "Bestelt iets"; }
-  if (document.location.pathname.toLowerCase().includes("basket")) { presenceData.details = "Bekijkt winkelwagentje"; }
-  if (document.location.pathname.toLowerCase().includes("account")) { presenceData.details = "Beheert account"; }
-  if (document.location.pathname.toLowerCase().includes("bestellingen")) { presenceData.details = "Bekijkt bestellingen"; }
-  if (document.location.pathname.toLowerCase().includes("lijstje")) { presenceData.details = "Bekijkt verlanglijstje"; }
+  if (document.location.pathname.toLowerCase().includes("order")) presenceData.details = "Bestelt iets";
+  if (document.location.pathname.toLowerCase().includes("basket")) presenceData.details = "Bekijkt winkelwagentje";
+  if (document.location.pathname.toLowerCase().includes("account")) presenceData.details = "Beheert account";
+  if (document.location.pathname.toLowerCase().includes("bestellingen")) presenceData.details = "Bekijkt bestellingen";
+  if (document.location.pathname.toLowerCase().includes("lijstje")) presenceData.details = "Bekijkt verlanglijstje";
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
