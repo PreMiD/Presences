@@ -87,6 +87,18 @@ presence.on("UpdateData", async () => {
     data.smallImageText = "Viewing";
     data.details = document.querySelector(".anime-details-title").textContent;
     data.state = "Viewing an Anime";
+
+    const lastEpisode = document.querySelectorAll(".episodes-card");
+    data.buttons = [
+      { label: "View Anime", url: location.href },
+      {
+        label: "Last Episode",
+        url: lastEpisode[lastEpisode.length - 1]
+          .querySelector("a")
+          .getAttribute("href")
+      }
+    ];
+
     presence.setActivity(data);
   } else if (
     location.pathname.startsWith(
@@ -97,6 +109,7 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "discovery";
     data.smallImageText = "Browsing";
     data.details = "Browsing for Anime";
+
     presence.setActivity(data);
   } else if (
     location.pathname.startsWith(
