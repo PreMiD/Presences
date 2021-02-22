@@ -7,7 +7,8 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     },
     browsingStamp = Math.floor(Date.now() / 1000),
-    privacy = await presence.getSetting("privacy");
+    privacy = await presence.getSetting("privacy"),
+    button = await presence.getSetting("button");
 
   presenceData.startTimestamp = browsingStamp;
   if (privacy) {
@@ -15,7 +16,7 @@ presence.on("UpdateData", async () => {
   } else {
     if (window.location.pathname.startsWith('/forum')) {
       presenceData.smallImageKey = "forum";
-      presenceData.buttons = [
+    if(button) presenceData.buttons = [
         {
           label: "Visite Forum",
           url: "https://fr-minecraft.net/forum/"
@@ -24,7 +25,7 @@ presence.on("UpdateData", async () => {
       if (window.location.pathname.startsWith('/forum/forum-') || window.location.pathname.startsWith('/forum/topic-') || window.location.pathname.startsWith('/forum/viewforum.php') || window.location.pathname.startsWith('/forum/message-')){
         presenceData.details = 'Viewing a topic in the forum:';
         presenceData.state = document.querySelector('.crumbs').textContent.replace('Accueil','').replace('»','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View topic",
             url: document.URL
@@ -48,7 +49,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "on the forum";
       }
     } else {
-      presenceData.buttons = [
+    if(button) presenceData.buttons = [
         {
           label: "Visite Website",
           url: "https://fr-minecraft.net/"
@@ -66,7 +67,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("news-minecraft-")) {
         presenceData.details = "Reading a minecraft news:";
         presenceData.state = document.title.replace('FR-Minecraft','').replace('.','').replace('Minecraft','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View news",
             url: document.URL
@@ -89,7 +90,7 @@ presence.on("UpdateData", async () => {
           type = "item"
         }
         presenceData.state = document.title.replace('Minecraft','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View "+type,
             url: document.URL
@@ -104,7 +105,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("mob-")) {
         presenceData.details = "Viewing a minecraft mob:";
         presenceData.state = document.title.replace('Minecraft','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View mob",
             url: document.URL
@@ -116,7 +117,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("potion-")) {
         presenceData.details = "Viewing a minecraft potion:";
         presenceData.state = document.title.replace('Minecraft','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View potion",
             url: document.URL
@@ -128,7 +129,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("enchantement-")) {
         presenceData.details = "Viewing a minecraft enchantement:";
         presenceData.state = document.title.replace('Minecraft Enchantement ','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View enchantement",
             url: document.URL
@@ -140,7 +141,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("biome-")) {
         presenceData.details = "Viewing a minecraft biome:";
         presenceData.state = document.title.replace('Minecraft Biome','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View biome",
             url: document.URL
@@ -152,7 +153,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("advancement-")) {
         presenceData.details = "Viewing a minecraft advancement:";
         presenceData.state = document.title.replace('Minecraft Progrès','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View advancement",
             url: document.URL
@@ -164,7 +165,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("effet-")) {
         presenceData.details = "Viewing a minecraft effect:";
         presenceData.state = document.title.replace('Minecraft Effet','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View effect",
             url: document.URL
@@ -176,7 +177,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("astuce-minecraft-")) {
         presenceData.details = "Viewing a minecraft tip:";
         presenceData.state = document.title.replace('Minecraft','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View tip",
             url: document.URL
@@ -188,7 +189,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("seed-minecraft-")) {
         presenceData.details = "Viewing a minecraft seed:";
         presenceData.state = document.title.replace('Minecraft Seed Minecraft :','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View seed",
             url: document.URL
@@ -200,7 +201,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("commande-")) {
         presenceData.details = "Viewing a minecraft command:";
         presenceData.state = document.title.replace('Minecraft Commande','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View command",
             url: document.URL
@@ -212,7 +213,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("tag-")) {
         presenceData.details = "Viewing a minecraft tag:";
         presenceData.state = document.title.replace('Minecraft Tag','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View tag",
             url: document.URL
@@ -224,7 +225,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("skin-minecraft-")) {
         presenceData.details = "Viewing a skin:";
         presenceData.state = document.title.replace('Minecraft Skin Minecraft :','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View skin",
             url: document.URL
@@ -236,7 +237,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("texture-minecraft-")) {
         presenceData.details = "Viewing a ressource pack:";
         presenceData.state = document.title.replace('Minecraft Texture Minecraft :','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View ressource pack",
             url: document.URL
@@ -248,7 +249,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("mod-minecraft-")) {
         presenceData.details = "Viewing a mod:";
         presenceData.state = document.title.replace('Minecraft Mod Minecraft :','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View mod",
             url: document.URL
@@ -260,7 +261,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("map-minecraft-")) {
         presenceData.details = "Viewing a map:";
         presenceData.state = document.title.replace('Minecraft Map Minecraft :','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View map",
             url: document.URL
@@ -272,7 +273,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("datapack-minecraft-")) {
         presenceData.details = "Viewing a datapack:";
         presenceData.state = document.title.replace('Minecraft Datapack Minecraft :','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View datapack",
             url: document.URL
@@ -284,7 +285,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("structure-minecraft-")) {
         presenceData.details = "Viewing a structure:";
         presenceData.state = document.title.replace('Minecraft Structure Minecraft :','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View structure",
             url: document.URL
@@ -295,7 +296,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Wallpapers";
       } else if (window.location.pathname.includes("wallpaper-minecraft-")) {
         presenceData.details = "Viewing a wallpaper";
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View wallpaper",
             url: document.URL
@@ -307,7 +308,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes("video-minecraft-")) {
         presenceData.details = "Viewing a video:";
         presenceData.state = document.title.replace('Minecraft Vidéo Minecraft','');
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View video",
             url: document.URL
@@ -325,7 +326,7 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.includes('launcher-fr-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "FR-Minecraft launcher";
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View FRM Launcher",
             url: document.URL

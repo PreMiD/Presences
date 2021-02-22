@@ -8,6 +8,7 @@ presence.on("UpdateData", async () => {
     },
     browsingStamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
+    button = await presence.getSetting("button"),
     sprivacy = await presence.getSetting("super-privacy");
   presenceData.startTimestamp = browsingStamp;
   if (sprivacy) {
@@ -51,7 +52,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Home";
     }
-    presenceData.buttons = [
+  if(button) presenceData.buttons = [
       {
         label: "Visite Website",
         url: "https://kanishiel.com/"

@@ -8,13 +8,14 @@ presence.on("UpdateData", async () => {
     },
     browsingStamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
+    button = await presence.getSetting("button"),
     pmap = await presence.getSetting("pmap");
 
   presenceData.startTimestamp = browsingStamp;
   if (privacy) {
     presenceData.details = "Browsing";
   } else {
-    presenceData.buttons = [
+  if(button) presenceData.buttons = [
       {
         label: "Visite Website",
         url: "https://buildtheearth.net/"
@@ -65,7 +66,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.title.replace(" - BuildTheEarth", "");
       if (window.location.pathname.length != 1) {
         presenceData.details = "Viewing a BuildTeam:";
-        presenceData.buttons = [
+      if(button) presenceData.buttons = [
           {
             label: "View the team",
             url: document.URL

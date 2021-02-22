@@ -7,13 +7,14 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     },
     browsingStamp = Math.floor(Date.now() / 1000),
-    privacy = await presence.getSetting("privacy");
+    privacy = await presence.getSetting("privacy"),
+    button = await presence.getSetting("button");
 
   presenceData.startTimestamp = browsingStamp;
   if (privacy) {
     presenceData.details = "Browsing";
   } else if (document.location.hostname == "gunivers.net") {
-    presenceData.buttons = [
+  if(button) presenceData.buttons = [
       {
         label: "Visite Website",
         url: "https://gunivers.net/"
@@ -93,7 +94,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "workspace";
     presenceData.details = "Viewing a page:";
     presenceData.state = "Gunivers Workspace";
-    presenceData.buttons = [
+  if(button) presenceData.buttons = [
       {
         label: "Visit Website",
         url: "https://project.gunivers.net/"
@@ -105,7 +106,7 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.startsWith("/projects/")) {
       presenceData.details = "Reading a project:";
       presenceData.state = document.title.split(" - ")[1];
-      presenceData.buttons = [
+    if(button) presenceData.buttons = [
         {
           label: "View project",
           url: document.URL

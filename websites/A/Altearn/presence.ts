@@ -7,12 +7,13 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     },
     browsingStamp = Math.floor(Date.now() / 1000),
-    privacy = await presence.getSetting("privacy");
+    privacy = await presence.getSetting("privacy"),
+    button = await presence.getSetting("button");
   presenceData.startTimestamp = browsingStamp;
   if (privacy) {
     presenceData.details = "Browsing";
   } else {
-    presenceData.buttons = [
+  if(button) presenceData.buttons = [
       {
         label: "Visite Website",
         url: "https://altearn.xyz/"
