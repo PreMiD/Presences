@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
   if (privacy) {
     presenceData.details = "Browsing";
   } else {
-    if (window.location.pathname.startsWith('/forum')) {
+    if (window.location.pathname.startsWith("/forum")) {
       presenceData.smallImageKey = "forum";
     if(button) presenceData.buttons = [
         {
@@ -34,17 +34,35 @@ presence.on("UpdateData", async () => {
       } else if (window.location.pathname.startsWith('/forum/index.php') || window.location.pathname === '/forum/') {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Forum";
-      } else if (window.location.pathname.startsWith('/forum/profile.php')) {
+      } else if (window.location.pathname.startsWith("/forum/profile.php")) {
         presenceData.details = "Viewing a user:";
-        if (document.title.replace('Profil de','').replace('/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.','') === 'Principal / Profil ') presenceData.state = document.querySelector('.blockform > h2 > span').textContent.replace(' - Principal','') + ' (by the forum)';
-        else presenceData.state = document.title.replace('Profil de','').replace('/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.','')+ ' (by the forum)';
-      } else if (window.location.pathname.startsWith('/forum/userlist.php')) {
+        if (
+          document.title
+            .replace("Profil de", "")
+            .replace(
+              "/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.",
+              ""
+            ) === "Principal / Profil "
+        )
+          presenceData.state =
+            document
+              .querySelector(".blockform > h2 > span")
+              .textContent.replace(" - Principal", "") + " (by the forum)";
+        else
+          presenceData.state =
+            document.title
+              .replace("Profil de", "")
+              .replace(
+                "/ Forum francais Minecraft. Serveur de jeu FR-Minecraft et astuces pour Minecraft.",
+                ""
+              ) + " (by the forum)";
+      } else if (window.location.pathname.startsWith("/forum/userlist.php")) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Userlist (Forum)";
-      } else if (window.location.pathname.startsWith('/forum/search.php')) {
+      } else if (window.location.pathname.startsWith("/forum/search.php")) {
         presenceData.details = "Searching something";
         presenceData.state = "on the forum";
-      } else if (window.location.pathname.startsWith('/forum/pmsnew.php')) {
+      } else if (window.location.pathname.startsWith("/forum/pmsnew.php")) {
         presenceData.details = "Looking his DM";
         presenceData.state = "on the forum";
       }
