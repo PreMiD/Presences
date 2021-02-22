@@ -74,11 +74,10 @@ presence.on("UpdateData", async () => {
     } else if (pathname.includes("/")){
         ShowData.title = document.querySelector('div.category > a')?.textContent;
 
+        if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";
         if (ShowData.playback){
             const timestamps = presence.getTimestamps(ShowData.currentTime, ShowData.duration);
             ShowData.ep = document.URL.match(/episode-?([1-9]?[0-9]?[0-9])/g)[0].replace("episode-", "");
-
-            if (pathname.includes("running-man")) presenceData.largeImageKey = "rm";
 
             presenceData.smallImageKey = ShowData.paused ? "pause" : "play";
             presenceData.smallImageText = ShowData.paused ? (await strings).paused : (await strings).play;
