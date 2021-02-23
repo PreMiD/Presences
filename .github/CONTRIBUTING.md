@@ -195,7 +195,7 @@ A list of fields and their rules are listed below:
 ### **`readLogs`**
 
 - Must be `boolean` value (e.g. `true` or `false`).
-- Enables logs for your presence.
+- Enables reading logs provided by logging functions from Presence class (`presence.getLogs()`).
 
 ### **`warning`**
 
