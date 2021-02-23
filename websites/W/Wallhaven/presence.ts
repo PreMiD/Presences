@@ -40,7 +40,7 @@ function getQuery() {
         ).innerText as string)?.trim();
         data.state = strings.browsing;
         data.details = `${pageType}, Page ${query?.page || 1}`;
-
+        data.buttons = [];
         return data;
       }
     },
@@ -67,7 +67,7 @@ function getQuery() {
         if (!pageTitle) return;
         data.state = strings.reading;
         data.details = `${pageTitle}`;
-
+        data.buttons = [];
         return data;
       }
     },
@@ -127,6 +127,8 @@ function getQuery() {
               url: document.URL
             }
           ];
+        } else {
+          data.buttons = [];
         }
 
         return data;
