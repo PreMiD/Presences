@@ -18,56 +18,56 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "home";
     presenceData.smallImageText = "Головна";
   }
-  else if (document.location.pathname == ("/" + encodeURIComponent("новини.html"))) {
+  else if (document.location.pathname === ("/" + encodeURIComponent("новини.html"))) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
     presenceData.state = "Загальне";
     presenceData.smallImageKey = "home";
     presenceData.smallImageText = "Загальне";
   }
-  else if (document.location.pathname == ("/" + encodeURIComponent("відео-гуртом.html"))) {
+  else if (document.location.pathname === ("/" + encodeURIComponent("відео-гуртом.html"))) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
     presenceData.state = "Проект Відео Гуртом";
     presenceData.smallImageKey = "video";
     presenceData.smallImageText = "Відео Гуртом";
   }
-  else if (document.location.pathname == ("/" + encodeURIComponent("фільми-українською.html"))) {
+  else if (document.location.pathname === ("/" + encodeURIComponent("фільми-українською.html"))) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
     presenceData.state = "Фільми українською";
     presenceData.smallImageKey = "film";
     presenceData.smallImageText = "Фільми";
   }
-  else if (document.location.pathname == ("/" + encodeURIComponent("українська-музика.html"))) {
+  else if (document.location.pathname === ("/" + encodeURIComponent("українська-музика.html"))) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
     presenceData.state = "Українська музика";
     presenceData.smallImageKey = "music";
     presenceData.smallImageText = "Музика";
   }
-  else if (document.location.pathname == ("/" + encodeURIComponent("література-українською.html"))) {
+  else if (document.location.pathname === ("/" + encodeURIComponent("література-українською.html"))) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
     presenceData.state = "Література українською";
     presenceData.smallImageKey = "book";
     presenceData.smallImageText = "Література";
   }
-  else if (document.location.pathname == ("/" + encodeURIComponent("програми-українською.html"))) {
+  else if (document.location.pathname === ("/" + encodeURIComponent("програми-українською.html"))) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
     presenceData.state = "Програми українською";
     presenceData.smallImageKey = "desktop";
     presenceData.smallImageText = "Програми";
   }
-  else if (document.location.pathname == ("/" + encodeURIComponent("ігри-українською.html"))) {
+  else if (document.location.pathname === ("/" + encodeURIComponent("ігри-українською.html"))) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
     presenceData.state = "Ігри українською";
     presenceData.smallImageKey = "gamepad";
     presenceData.smallImageText = "Ігри";
   }
-  else if (document.location.pathname == ("/" + encodeURIComponent("архів.html"))) {
+  else if (document.location.pathname === ("/" + encodeURIComponent("архів.html"))) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Переглядаю розділ:";
     presenceData.state = "Архів та смітник";
