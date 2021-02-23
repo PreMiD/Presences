@@ -14,12 +14,6 @@ presence.on("UpdateData", async () => {
   if (privacy) {
     presenceData.details = "Browsing";
   } else if (document.location.hostname == "gunivers.net") {
-  if(button) presenceData.buttons = [
-      {
-        label: "Visite Website",
-        url: "https://gunivers.net/"
-      }
-    ]
     if (window.location.pathname.startsWith("/articles")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Activities";
@@ -36,6 +30,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.title
         .replace(" | Gunivers", "")
         .replace("Chronique Mensuelle - ", "");
+        if(button) presenceData.buttons = [
+          {
+            label: "View chronicle",
+            url: document.URL
+          }
+        ]
     } else if (
       window.location.pathname.endsWith("/a-propos/") ||
       window.location.pathname.endsWith("/about-us/")
@@ -79,9 +79,21 @@ presence.on("UpdateData", async () => {
     ) {
       presenceData.details = "Reading an article:";
       presenceData.state = document.title.replace(" | Gunivers", "");
+      if(button) presenceData.buttons = [
+        {
+          label: "View article",
+          url: document.URL
+        }
+      ]
       if (window.location.pathname.includes("/author/")) {
         presenceData.details = "Looking for an user:";
         presenceData.state = document.title.replace(" | Gunivers", "");
+        if(button) presenceData.buttons = [
+          {
+            label: "View user",
+            url: document.URL
+          }
+        ]
       }
     } else if (
       window.location.pathname.length === 1 ||
@@ -94,12 +106,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "workspace";
     presenceData.details = "Viewing a page:";
     presenceData.state = "Gunivers Workspace";
-  if(button) presenceData.buttons = [
-      {
-        label: "Visit Website",
-        url: "https://project.gunivers.net/"
-      }
-    ]
     if (window.location.pathname.endsWith("/projects")) {
       presenceData.details = "Searching a project:";
       presenceData.state = "on Gunivers Workspace";
@@ -115,6 +121,12 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.startsWith("/users/")) {
       presenceData.details = "Looking for an user:";
       presenceData.state = document.querySelector("#content > h2").textContent;
+      if(button) presenceData.buttons = [
+        {
+          label: "View user",
+          url: document.URL
+        }
+      ]
     }
   }
 

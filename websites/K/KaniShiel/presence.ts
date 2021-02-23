@@ -52,12 +52,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Home";
     }
-  if(button) presenceData.buttons = [
-      {
-        label: "Visite Website",
-        url: "https://kanishiel.com/"
-      }
-    ]
   }
 
   if (presenceData.details == null) {

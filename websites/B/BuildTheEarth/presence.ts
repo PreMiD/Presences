@@ -15,12 +15,6 @@ presence.on("UpdateData", async () => {
   if (privacy) {
     presenceData.details = "Browsing";
   } else {
-  if(button) presenceData.buttons = [
-      {
-        label: "Visite Website",
-        url: "https://buildtheearth.net/"
-      }
-    ]
     if (window.location.pathname.endsWith("me")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Profil";

@@ -13,12 +13,6 @@ presence.on("UpdateData", async () => {
   if (privacy) {
     presenceData.details = "Browsing";
   } else {
-  if(button) presenceData.buttons = [
-      {
-        label: "Visite Website",
-        url: "https://altearn.xyz/"
-      }
-    ]
     if (window.location.pathname.startsWith("/articles")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Activities";
@@ -35,6 +29,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.title
         .replace(" | Altearn", "")
         .replace("Assemblée Générale - ", "");
+        if(button) presenceData.buttons = [
+          {
+            label: "View General Assembly",
+            url: document.URL
+          }
+        ]
     } else if (window.location.pathname.endsWith("/notre-organisation/")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Our organisation";
@@ -44,15 +44,33 @@ presence.on("UpdateData", async () => {
     ) {
       presenceData.details = "Reading an article:";
       presenceData.state = document.title.replace(" | Altearn", "");
+      if(button) presenceData.buttons = [
+        {
+          label: "View article",
+          url: document.URL
+        }
+      ]
       if (window.location.pathname.includes("/author/")) {
         presenceData.details = "Looking for an user:";
         presenceData.state = document.title.replace(" | Altearn", "");
+        if(button) presenceData.buttons = [
+          {
+            label: "View user",
+            url: document.URL
+          }
+        ]
       }
       if (document.title.includes("Fiche de poste:")) {
         presenceData.details = "Viewing a place as";
         presenceData.state = document.title
           .replace(" | Altearn", "")
           .replace("Fiche de poste:", "");
+          if(button) presenceData.buttons = [
+            {
+              label: "View place",
+              url: document.URL
+            }
+          ]
       }
     } else if (window.location.pathname.length === 1) {
       presenceData.details = "Viewing a page:";

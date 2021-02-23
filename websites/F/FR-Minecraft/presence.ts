@@ -16,12 +16,6 @@ presence.on("UpdateData", async () => {
   } else {
     if (window.location.pathname.startsWith("/forum")) {
       presenceData.smallImageKey = "forum";
-    if(button) presenceData.buttons = [
-        {
-          label: "Visite Forum",
-          url: "https://fr-minecraft.net/forum/"
-        }
-      ]
       if (window.location.pathname.startsWith('/forum/forum-') || window.location.pathname.startsWith('/forum/topic-') || window.location.pathname.startsWith('/forum/viewforum.php') || window.location.pathname.startsWith('/forum/message-')){
         presenceData.details = 'Viewing a topic in the forum:';
         presenceData.state = document.querySelector('.crumbs').textContent.replace('Accueil','').replace('»','');
@@ -67,15 +61,15 @@ presence.on("UpdateData", async () => {
         presenceData.state = "on the forum";
       }
     } else {
-    if(button) presenceData.buttons = [
-        {
-          label: "Visite Website",
-          url: "https://fr-minecraft.net/"
-        }
-      ]
       if (window.location.pathname.includes('profil-')) {
         presenceData.details = "Viewing a user:";
         presenceData.state = document.querySelector(".bloc-content > h1").textContent.replace('Profil de ','');
+        if(button) presenceData.buttons = [
+          {
+            label: "View user",
+            url: document.URL
+          }
+        ]
       } else if (window.location.pathname.length === 1) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Home";
