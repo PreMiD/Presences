@@ -35,7 +35,7 @@ presence.on("UpdateData", async () => {
             label: "View chronicle",
             url: document.URL
           }
-        ]
+        ];
     } else if (
       window.location.pathname.endsWith("/a-propos/") ||
       window.location.pathname.endsWith("/about-us/")
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
           label: "View article",
           url: document.URL
         }
-      ]
+      ];
       if (window.location.pathname.includes("/author/")) {
         presenceData.details = "Looking for an user:";
         presenceData.state = document.title.replace(" | Gunivers", "");
@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
             label: "View user",
             url: document.URL
           }
-        ]
+        ];
       }
     } else if (
       window.location.pathname.length === 1 ||
@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
           label: "View project",
           url: document.URL
         }
-      ]
+      ];
     } else if (window.location.pathname.startsWith("/users/")) {
       presenceData.details = "Looking for an user:";
       presenceData.state = document.querySelector("#content > h2").textContent;
@@ -126,7 +126,7 @@ presence.on("UpdateData", async () => {
           label: "View user",
           url: document.URL
         }
-      ]
+      ];
     }
   }
 

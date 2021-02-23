@@ -65,7 +65,7 @@ presence.on("UpdateData", async () => {
             label: "View the team",
             url: document.URL
           }
-        ]
+        ];
       }
     }
   }

@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
             label: "View topic",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.startsWith('/forum/index.php') || window.location.pathname === '/forum/') {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Forum";
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
             label: "View user",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.length === 1) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Home";
@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
             label: "View news",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('differents-blocs-jeu.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Blocks";
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
             label: "View "+type,
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('aide-crafting-sur-minecraft.php')) {//creatures-mobs-animaux-sur-minecraft.php
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Crafting";
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
             label: "View mob",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('recettes-potions-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Potions";
@@ -134,7 +134,7 @@ presence.on("UpdateData", async () => {
             label: "View potion",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('enchantements-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Enchantements";
@@ -146,7 +146,7 @@ presence.on("UpdateData", async () => {
             label: "View enchantement",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('biomes-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Biomes";
@@ -158,7 +158,7 @@ presence.on("UpdateData", async () => {
             label: "View biome",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('advancements-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Advancements";
@@ -170,7 +170,7 @@ presence.on("UpdateData", async () => {
             label: "View advancement",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('effets-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Potions Effects";
@@ -182,7 +182,7 @@ presence.on("UpdateData", async () => {
             label: "View effect",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('astuces.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Tips";
@@ -194,7 +194,7 @@ presence.on("UpdateData", async () => {
             label: "View tip",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('seeds.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Seeds";
@@ -206,7 +206,7 @@ presence.on("UpdateData", async () => {
             label: "View seed",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('guide-des-commandes-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Commands";
@@ -218,7 +218,7 @@ presence.on("UpdateData", async () => {
             label: "View command",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('tags-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Minecraft Tags";
@@ -230,7 +230,7 @@ presence.on("UpdateData", async () => {
             label: "View tag",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('skin-habillage-personnage-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Skin";
@@ -242,7 +242,7 @@ presence.on("UpdateData", async () => {
             label: "View skin",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('textures.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Ressource Packs";
@@ -254,7 +254,7 @@ presence.on("UpdateData", async () => {
             label: "View ressource pack",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('telecharger-mods-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Mods";
@@ -266,7 +266,7 @@ presence.on("UpdateData", async () => {
             label: "View mod",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('telecharger-maps-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Maps";
@@ -278,7 +278,7 @@ presence.on("UpdateData", async () => {
             label: "View map",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('telecharger-datapack-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Datapacks";
@@ -290,7 +290,7 @@ presence.on("UpdateData", async () => {
             label: "View datapack",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('telecharger-structure-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Structures";
@@ -302,7 +302,7 @@ presence.on("UpdateData", async () => {
             label: "View structure",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('fonds-ecran-minecraft-gratuit.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Wallpapers";
@@ -313,7 +313,7 @@ presence.on("UpdateData", async () => {
             label: "View wallpaper",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('videos-minecraft.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Videos";
@@ -325,7 +325,7 @@ presence.on("UpdateData", async () => {
             label: "View video",
             url: document.URL
           }
-        ]
+        ];
       } else if (window.location.pathname.includes('minecraft-papercraft-ou-creation-de-blocs-minecraft-en-papier.php')) {
         presenceData.details = "Viewing a page:";
         presenceData.state = "Papercraft";
@@ -343,7 +343,7 @@ presence.on("UpdateData", async () => {
             label: "View FRM Launcher",
             url: document.URL
           }
-        ]
+        ];
       }
     }
   }

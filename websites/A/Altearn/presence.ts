@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
             label: "View General Assembly",
             url: document.URL
           }
-        ]
+        ];
     } else if (window.location.pathname.endsWith("/notre-organisation/")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Our organisation";
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
           label: "View article",
           url: document.URL
         }
-      ]
+      ];
       if (window.location.pathname.includes("/author/")) {
         presenceData.details = "Looking for an user:";
         presenceData.state = document.title.replace(" | Altearn", "");
@@ -58,7 +58,7 @@ presence.on("UpdateData", async () => {
             label: "View user",
             url: document.URL
           }
-        ]
+        ];
       }
       if (document.title.includes("Fiche de poste:")) {
         presenceData.details = "Viewing a place as";
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
               label: "View place",
               url: document.URL
             }
-          ]
+          ];
       }
     } else if (window.location.pathname.length === 1) {
       presenceData.details = "Viewing a page:";
