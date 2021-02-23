@@ -1,3 +1,9 @@
+interface Video {
+  paused: boolean;
+  duration: number;
+  currentTime: number;
+}
+
 const presence = new Presence({
     clientId: "664350968585912350"
   }),
@@ -7,10 +13,10 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   }),
   startTimestamp = Math.floor(Date.now() / 1000);
-  
-let video: HTMLVideoElement;
 
-presence.on("iFrameData", async (msg: HTMLVideoElement) => {
+let video: Video;
+
+presence.on("iFrameData", async (msg: Video) => {
   if (!msg) return;
   video = msg;
 });
@@ -70,7 +76,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused ? (await strings).paused : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      const timestamps = presence.getTimestampsfromMedia(video);
+      const timestamps = presence.getTimestamps(video.currentTime, video.duration);
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
     }
