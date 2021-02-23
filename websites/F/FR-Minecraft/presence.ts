@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
         }
         else {
           presenceData.details = "Viewing a minecraft item:";
-          type = "item"
+          type = "item";
         }
         presenceData.state = document.title.replace('Minecraft','');
       if(button) presenceData.buttons = [
