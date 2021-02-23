@@ -31,10 +31,7 @@ presence.on("iFrameData", (data:{
   }
 });
 
-function getTimestamps(videoTime: number, videoDuration: number): Array<number> {
-  const startTime = Date.now(), endTime = Math.floor(Math.floor(startTime / 1000) - videoTime + videoDuration);
-  return [Math.floor(startTime / 1000), endTime];
-}
+
 
 presence.on("UpdateData", async () => {
   const info = await presence.getSetting("sSI"), elapsed = await presence.getSetting("sTE"), videoTime = await presence.getSetting("sVT");
@@ -47,7 +44,7 @@ presence.on("UpdateData", async () => {
     browsingStamp = null;
     presence.info("Elapsed Off");
   }
-  const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)), presenceData: PresenceData = {
+  const timestamps = presence.getTimestamps(Math.floor(currentTime), Math.floor(duration)), presenceData: PresenceData = {
   largeImageKey: "logo"
 };
 if (videoTime) {
