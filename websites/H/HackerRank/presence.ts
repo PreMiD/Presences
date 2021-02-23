@@ -32,6 +32,9 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing inbox";
   } else if (path("/notifications")) {
     presenceData.details = "Viewing notifications";
+  } else if (path("/contests")) {
+    presenceData.details = "Viewing contests";
+  }
   } else if (
     document.querySelector(
       "#content button.ui-btn.ui-btn-normal.ui-btn-primary.profile-btn-follow.ui-btn-styled"
