@@ -31,8 +31,6 @@ presence.on("iFrameData", (data:{
   }
 });
 
-
-
 presence.on("UpdateData", async () => {
   const info = await presence.getSetting("sSI"), elapsed = await presence.getSetting("sTE"), videoTime = await presence.getSetting("sVT");
 
