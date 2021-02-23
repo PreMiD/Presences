@@ -153,9 +153,6 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           { label: "Tournament Bracket",
             url: "https://www.saltybet.com/shaker?bracket=1"
-          },
-          { label: "Visit SaltyBet.com",
-            url: "https://www.saltybet.com"
           }
         ];
         break;
@@ -163,25 +160,9 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           { label: "Exhibition Queue",
             url: "https://www.saltybet.com/shaker?activerequests=1"
-          },
-          { label: "Visit SaltyBet.com",
-            url: "https://www.saltybet.com"
           }
         ];
         break;
-      case "salero":
-        presenceData.buttons = [
-          { label: "Visit SaltyBet.com",
-            url: "https://www.saltybet.com"
-          }
-        ];
-        break;
-      default:
-        presenceData.buttons = [
-          { label: "Visit SaltyBet.com",
-            url: "https://www.saltybet.com"
-          }
-        ];
     }
   } else if (document.location.pathname == "/authenticate") {
     presenceData.details = "Signing in...";
