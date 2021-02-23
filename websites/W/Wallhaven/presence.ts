@@ -6,12 +6,6 @@ interface PageContext {
     options?: { [key: string]: any }
   ) => Promise<PresenceData> | PresenceData;
 }
-interface VideoContext {
-  video: boolean;
-  duration: number;
-  currentTime: number;
-  paused: boolean;
-}
 function getQuery() {
   let queryString = location.search.split("?", 2);
   let query =
