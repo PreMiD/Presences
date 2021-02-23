@@ -1,15 +1,21 @@
 {
   "author": {
-    "name": "TheSlowly",
-    "id": "505071508851523599"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "TheSlowly",
+      "id": "505071508851523599"
+    }
+  ],
   "service": "openrec",
   "description": {
     "en": "openrec is a japanese streaming platform similar to Twitch and also contains videos",
     "de": "openrec ist eine Japanische Streaming Plattform ähnlich wie Twitch und beinhaltet auch Videos"
   },
   "url": "www.openrec.tv",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/60hrnT3.jpg",
   "thumbnail": "https://i.imgur.com/wQiURMm.png",
   "color": "#FF0000",

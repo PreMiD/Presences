@@ -1,40 +1,153 @@
-var presence = new Presence({
-  clientId: "621881103380381716"
-});
+interface LangStrings {
+  browse: string;
+  forYou: string;
+  following: string;
+  buttonViewProfile: string;
+  viewProfile: string;
+  viewTikTok: string;
+  buttonViewTikTok: string;
+}
 
-var elapsed = Math.floor(Date.now() / 1000);
-var user;
-
-presence.on("UpdateData", async () => {
-  const data: PresenceData = {
-    largeImageKey: "tiktok-logo"
+const presence = new Presence({
+    clientId: "809093093600133165"
+  }),
+  getStrings = async (): Promise<LangStrings> => {
+    return presence.getStrings(
+      {
+        browse: "general.browsing",
+        forYou: "tiktok.forYou",
+        following: "tiktok.following",
+        buttonViewProfile: "general.buttonViewProfile",
+        viewProfile: "general.viewProfile",
+        viewTikTok: "tiktok.viewing",
+        buttonViewTikTok: "tiktok.buttonViewTikTok"
+      },
+      await presence.getSetting("lang")
+    );
   };
 
-  var path = document.location.pathname;
-  if (path.includes("/trending")) {
-    data.details = "Viewing Trending";
-    data.startTimestamp = elapsed;
-  } else if (path.includes("/tag")) {
-    var tag = document.querySelector("._challenge_header_title").textContent;
-    data.details = "Viewing a tag";
-    data.state = tag;
-    data.startTimestamp = elapsed;
-  } else if (path.startsWith("/@")) {
-    if (path.includes("/video/")) {
-      user = document.querySelector("._video_card_big_user_info_handle")
-        .textContent;
-      data.details = "Viewing a TikTok";
-      data.state = user;
-      data.startTimestamp = elapsed;
-    } else {
-      user = document.querySelector("._user_header_uniqueId").textContent;
-      data.details = "Viewing a Profile";
-      data.state = user;
-      data.startTimestamp = elapsed;
-    }
-  } else {
-    data.details = "Viewing the Homepage";
-    data.startTimestamp = elapsed;
+let browsingStamp = Math.floor(Date.now() / 1000),
+  prevUrl = document.URL,
+  strings: Promise<LangStrings> = getStrings(),
+  oldLang: string = null;
+
+presence.on("UpdateData", async () => {
+  const newLang = await presence.getSetting("lang"),
+    buttons = await presence.getSetting("buttons");
+
+  if (document.URL !== prevUrl) {
+    prevUrl = document.location.href;
+    browsingStamp = Math.floor(Date.now() / 1000);
   }
-  presence.setActivity(data);
+
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
+
+  let presenceData: PresenceData = {
+    largeImageKey: "tiktok",
+    startTimestamp: browsingStamp
+  };
+
+  const path = location.href
+      .replace(/\/?$/, "/")
+      .replace("https://" + location.hostname, "")
+      .replace("?", "/")
+      .replace("@", "@/")
+      .replace("#", ""),
+    statics: {
+      [name: string]: PresenceData;
+    } = {
+      "/": {
+        details: (await strings).forYou.split("{0}")[0],
+        state: (await strings).forYou.split("{0}")[1],
+        smallImageText: (await strings).browse,
+        smallImageKey: "reading"
+      },
+      "/following/": {
+        details: (await strings).following.split("{0}")[0],
+        state: (await strings).following.split("{0}")[1],
+        smallImageText: (await strings).browse,
+        smallImageKey: "reading"
+      },
+      "/@/": {
+        details: (await strings).viewProfile,
+        state: `${document
+          .querySelector(".share-sub-title")
+          ?.textContent.trim()} (@${document
+          .querySelector(".share-title")
+          ?.textContent.trim()})`,
+        buttons: [
+          {
+            label: (await strings).buttonViewProfile,
+            url: document.URL.split("?")[0]
+          }
+        ]
+      },
+      "/@/(.*)/video/": {
+        details: (await strings).viewTikTok,
+        state: `${document
+          .querySelector(".user-nickname")
+          ?.textContent.split("·")[0]
+          .trim()} (@${document
+          .querySelector(".user-username")
+          ?.textContent.trim()})`,
+        smallImageKey:
+          document.querySelector(".play-button") === null ? "play" : "pause",
+        buttons: [
+          {
+            label: (await strings).buttonViewTikTok,
+            url: document.URL.split("?")[0]
+          }
+        ]
+      },
+      "v2/@/(.*)/video/": {
+        details: (await strings).viewTikTok,
+        state:
+          (document.querySelectorAll(
+            `a[href="${document.URL.split("#")[1]?.split("/video")[0]}?${
+              document.URL.split("?")[1]?.split("&")[0]
+            }"]`
+          )[0] as HTMLLinkElement)?.title.replace(" Official | TikTok", "") ||
+          (document.querySelectorAll(
+            `a[href="${document.URL.split("#")[1]?.split("/video")[0]}/live/?${
+              document.URL.split("?")[1]?.split("&")[0]
+            }"]`
+          )[0] as HTMLLinkElement)?.title.replace(" Official | TikTok", "") ||
+          (document.querySelectorAll(
+            `a[href="${document.URL.split("#")[1]?.split("/video")[0]}?${
+              document.URL.split("?")[1]?.split("&")[0]
+            }"]`
+          )[1] as HTMLLinkElement)?.title.replace(" Official | TikTok", "") ||
+          (document.querySelectorAll(
+            `a[href="${document.URL.split("#")[1]?.split("/video")[0]}/live/?${
+              document.URL.split("?")[1]?.split("&")[0]
+            }"]`
+          )[1] as HTMLLinkElement)?.title.replace(" Official | TikTok", ""),
+        smallImageKey: document.querySelectorAll("video")[
+          document.querySelectorAll("video")?.length - 1
+        ]?.paused
+          ? "pause"
+          : "play",
+        buttons: [
+          {
+            label: (await strings).buttonViewTikTok,
+            url: `https://www.tiktok.com${document.URL.split("#")[1]}/`
+          }
+        ]
+      }
+    };
+
+  for (const [k, v] of Object.entries(statics)) {
+    if (path.match(k)) {
+      presenceData = { ...presenceData, ...v };
+    }
+  }
+
+  if (!buttons) delete presenceData.buttons;
+
+  presence.setActivity(presenceData);
 });

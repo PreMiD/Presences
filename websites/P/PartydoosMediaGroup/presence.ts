@@ -1,30 +1,38 @@
-var presence = new Presence({
-  clientId: "671918505267822594"
-});
-var strings = presence.getStrings({
-  browsing: "presence.activity.browsing"
-});
+const presence = new Presence({
+    clientId: "671918505267822594"
+  }),
+  strings = presence.getStrings({
+    browsing: "presence.activity.browsing"
+  });
 
-var oldUrl, elapsed;
+let oldUrl: string, elapsed: number;
 
-var data: PresenceData = {
+const data: PresenceData = {
   largeImageKey: "pmg"
 };
 
-presence.on("UpdateData", async () => {
-  var string = (await strings).browsing;
-  const _stc = {
-    "": {
-      details: "Browsing"
-    },
-    "/privacy.html": {
-      details: "Viewing",
-      state: "Privacy and Terms of Service"
+function setObject(path: string) {
+  switch (path) {
+    case "": {
+      return {
+        details: "Browsing"
+      };
     }
-  };
 
-  const host = location.host;
-  const path = location.pathname.replace(/\/$/, "");
+    case "/privacy.html": {
+      return {
+        details: "Viewing",
+        state: "Privacy and Terms of Service"
+      };
+    }
+  }
+}
+
+presence.on("UpdateData", async () => {
+  const string = (await strings).browsing,
+    host = location.host,
+    path = location.pathname.replace(/\/$/, ""),
+    detailsObj = setObject(path);
 
   if (oldUrl !== host) {
     oldUrl = host;
@@ -35,9 +43,8 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = elapsed;
   }
 
-  if (path in _stc) {
-    data = { ...data, ..._stc[path] };
-  }
+  data.details = detailsObj.details;
+  data.state = detailsObj.state;
 
   if (data.details !== undefined) {
     if (data.details.match("(Viewing|Browsing)")) {

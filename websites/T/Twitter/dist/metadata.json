@@ -1,15 +1,16 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Bas950",
+    "id": "241278257335500811"
   },
   "contributors": [
     {
-      "name": "Bas950",
-      "id": "241278257335500811"
+    "name": "Alanexei ✔",
+    "id": "163319338403627008"
     }
   ],
   "service": "Twitter",
+  "altnames": ["Tiwitɛri", "Твитер", "Твиттер", "Твіттер", "Թվիթթեր", "טוויטער", "טוויטר", "توئیتر", "تويتر", "تویتەر", "تىۋىتتېر", "تۊئيتر", "ٹویٹر", "ټویټر", "ٽوئيٽر", "ट्विटर", "টুইটার", "টুইটাৰ", "ਟਵਿਟਰ", "ટ્વિટર", "ଟୁଇଟର", "டுவிட்டர்", "ట్విట్టర్", "ಟ್ವಿಟ್ಟರ್", "ട്വിറ്റർ", "ට්විටර්", "ทวิตเตอร์", "ທະວິດເຕີ", "တုၺ်ႉတႃႇ", "တွစ်တာ", "ትዊተር", "ᎤᏍᏆᎳ ᎧᏃᎮᏗ", "ធ្វិតថឺរ", "ᱴᱩᱭᱴᱚᱨ", "推特", "트위터"],
   "description": {
     "en": "From breaking news and entertainment to sports and politics, from big events to everyday interests. If it's happening anywhere, it's happening on Twitter.",
     "nl": "Van het laatste nieuws en entertainment tot sport en politiek, van grote evenementen tot dagelijkse interesses. Als het ergens gebeurt, gebeurt het op Twitter.",
@@ -20,7 +21,7 @@
     "twitter.com",
     "tweetdeck.twitter.com"
   ],
-  "version": "2.0.0",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/sm7Qccu.png",
   "thumbnail": "https://i.imgur.com/0RULzdw.png",
   "color": "#48C0EB",

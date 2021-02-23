@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "Anontpp",
   "settings": [
     {
@@ -31,7 +37,7 @@
     "anontpp.com",
     "goplay.anontpp.com"
   ],
-  "version": "1.0.5",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/Sr0u6MC.png",
   "thumbnail": "https://i.imgur.com/ViBgH8i.png",
   "color": "#F4ADEE",

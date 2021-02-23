@@ -11,35 +11,39 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as Function,
-  get function(): Function {
-    return this._function;
+    _function: null as () => void,
+    get function(): () => void {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
-  set function(parameter) {
-    this._function = parameter;
-  },
-  get present(): boolean {
-    return this._function !== null;
-  }
-};
-
-/**
- * Initialize/reset presenceData.
- */
-const resetData = (): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-  presenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
   };
-};
 
 ((): void => {
   let title: string;
 
-  const titleFromURL = (): string => currentPath[1];
+  const titleFromURL = (): string => {
+    const raw = currentPath.slice(1).join("/");
+    return decodeURI(raw.replace(/_/g, " "));
+  };
 
   try {
     title = document.querySelector("h1.firstHeading span").textContent;
@@ -48,33 +52,23 @@ const resetData = (): void => {
   }
 
   if (currentPath[0] === "") {
-    presenceData.details = "On the home page";
+    presenceData.details = "On the main page";
   } else if (document.querySelector(".error_content")) {
     presenceData.details = "On a non-existent page";
-  } else if (currentPath[0] === "news") {
-    presenceData.details = "Viewing a page";
-    presenceData.state = "Wikiwand Today";
-  } else if (currentPath[0] === "about") {
-    presenceData.details = "Viewing a page";
-    presenceData.state = "About";
-  } else if (currentPath[0] === "press") {
-    presenceData.details = "Viewing a page";
-    presenceData.state = "Press";
-  } else if (currentPath[0] === "terms") {
-    presenceData.details = "Viewing a page";
-    presenceData.state = "Terms of Service";
-  } else if (currentPath[0] === "privacy") {
-    presenceData.details = "Viewing a page";
-    presenceData.state = "Privacy Policy";
-  } else {
+  } else if (title) {
     presenceData.details = "Reading a wiki page";
     presenceData.state = title;
+    if (currentPath[0] !== "en") presenceData.state += ` (${currentPath[0]})`;
+  } else {
+    presenceData.details = "Viewing a page";
+    presenceData.state = document.title.replace(" - Wikiwand", "");
   }
 })();
 
 if (updateCallback.present) {
+  const defaultData = { ...presenceData };
   presence.on("UpdateData", async () => {
-    resetData();
+    resetData(defaultData);
     updateCallback.function();
     presence.setActivity(presenceData);
   });
