@@ -2,7 +2,8 @@ const presence = new Presence({
   clientId: "798502531847421962"
 }), browsingStamp = Math.floor(Date.now() / 1000);
 
-let title: Element;
+let title: HTMLElement;
+let search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -112,15 +113,15 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "FAQ";
   }
   else if (document.location.pathname.includes("/tracker.php")) {
-    title = document.querySelector(
+    search = document.querySelector(
       "body > div.maxwidth > table > tbody > tr > td.bodyline > form#form > table.forumline:nth-child(18) > tbody > tr:nth-child(2) > td.row4 > table:nth-child(3) > tbody > tr > td.row4:nth-child(3) > div > fieldset.fieldset > div > input.post"
     );
     presenceData.startTimestamp = browsingStamp;
-    if (title.value == "" || !showSearchQuery) {
+    if (search.value == "" || !showSearchQuery) {
       presenceData.details = "Щось шукаю";
     } else {
       presenceData.details = "Шукаю:";
-      presenceData.state = title.value;
+      presenceData.state = search.value;
     }
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Пошук";
@@ -262,15 +263,15 @@ presence.on("UpdateData", async () => {
     presenceData.state = "яким можна допомогти";
   }
   else if (document.location.pathname.includes("/googlesearch.php")) {
-    title = document.querySelector(
+    search = document.querySelector(
       "body > div.maxwidth > table > tbody > tr > td.bodyline > table.forumline > tbody > tr > td.row1 > div#___gcse_0 > div.gsc-control-cse.gsc-control-cse-uk > div.gsc-control-wrapper-cse > form.gsc-search-box.gsc-search-box-tools > table.gsc-search-box > tbody > tr > td.gsc-input > div#gsc-iw-id1.gsc-input-box > table#gs_id50.gstl_50.gsc-input > tbody > tr > td#gs_tti50.gsib_a > input#gsc-i-id1.gsc-input"
     );
     presenceData.startTimestamp = browsingStamp;
-    if (title.value == "" || !showSearchQuery) {
+    if (search.value == "" || !showSearchQuery) {
       presenceData.details = "Щось шукаю";
     } else {
       presenceData.details = "Шукаю:";
-      presenceData.state = title.value;
+      presenceData.state = search.value;
     }
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Пошук";
