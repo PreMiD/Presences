@@ -7,8 +7,7 @@ interface PageContext {
   ) => Promise<PresenceData> | PresenceData;
 }
 function getQuery() {
-  let queryString = location.search.split("?", 2);
-  let query =
+  const queryString = location.search.split("?", 2), query =
     queryString && queryString.length > 0 && queryString[1]
       ? queryString[1].split("&").reduce(function (l, r) {
           const entry = r ? r.split("=", 2) : null;
@@ -31,7 +30,7 @@ function getQuery() {
           query
         }: {
           strings: { [key: string]: string };
-          query: { [key: string]: any };
+          query: { page: number };
         }
       ) => {
         if (!context) return null;
@@ -81,7 +80,7 @@ function getQuery() {
           query
         }: {
           strings: { [key: string]: string };
-          query: { [key: string]: any };
+          query: { page: number, q: string };
         }
       ) => {
         if (!context) return null;
@@ -106,7 +105,6 @@ function getQuery() {
           showButton
         }: {
           strings: { [key: string]: string };
-          query: { [key: string]: any };
           showButton: boolean;
         }
       ) => {
@@ -123,7 +121,7 @@ function getQuery() {
         if (showButton) {
           data.buttons = [
             {
-              label: "Open Wallpaper",
+              label: "Open Wallpaper URL",
               url: document.URL
             }
           ];
@@ -136,15 +134,15 @@ function getQuery() {
     },
     {
       middleware: (ref) => !!ref.window,
-      exec: (context, data, { strings }: { strings: any }) => {
+      exec: (context, data, { strings }: { strings: { browsing: string } }) => {
         if (!context) return null;
         data.state = strings.browsing;
         data.details = "";
         return data;
       }
     }
-  ];
-  const presence = new Presence({
+  ],
+   presence = new Presence({
     clientId: "813563332753752112"
   });
 
@@ -155,14 +153,13 @@ function getQuery() {
         largeImageText: "Wallhaven"
       } as PresenceData;
       if (document.location.hostname == "wallhaven.cc") {
-        const query: { [key: string]: any } = getQuery();
-        const strings: { [key: string]: string } = await app.getStrings({
+        const query: { [key: string]: unknown } = getQuery(),
+         strings: { [key: string]: string } = await app.getStrings({
             play: "presence.playback.playing",
             pause: "presence.playback.paused",
             browsing: "presence.activity.browsing",
             searching: "presence.activity.searching",
-            reading: "presence.activity.reading",
-            idling: "Idling..."
+            reading: "presence.activity.reading"
           }),
           context = pages.find((x) => x.middleware(window, [query]));
         if (!context) return false;

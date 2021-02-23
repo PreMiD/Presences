@@ -25,7 +25,7 @@
   "settings": [
     {
       "id": "buttons",
-      "title": "Share Wallpaper URL",
+      "title": "Show button for wallpaper url",
       "icon": "fas fa-external-link-alt",
       "value": true
     }
