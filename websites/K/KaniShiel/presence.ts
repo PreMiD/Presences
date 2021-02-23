@@ -8,7 +8,6 @@ presence.on("UpdateData", async () => {
     },
     browsingStamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
-    button = await presence.getSetting("button"),
     sprivacy = await presence.getSetting("super-privacy");
   presenceData.startTimestamp = browsingStamp;
   if (sprivacy) {

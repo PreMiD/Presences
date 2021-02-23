@@ -33,15 +33,6 @@
       "title": "Privacy mode",
       "icon": "fad fa-user-secret",
       "value": false
-    },
-    {
-      "id": "button",
-      "if": {
-        "privacy": false
-      },
-      "title": "Add Button",
-      "icon": "fas fa-compress-arrows-alt",
-      "value": true
     }
   ]
 }
