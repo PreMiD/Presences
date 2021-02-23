@@ -1,9 +1,9 @@
 interface PageContext {
-  middleware: (ref: Window, ...args: any[]) => boolean;
+  middleware: (ref: Window, ...args: unknown[]) => boolean;
   exec: (
     context: Presence,
     data: PresenceData,
-    options?: { [key: string]: any }
+    options?: { [key: string]: unknown }
   ) => Promise<PresenceData> | PresenceData;
 }
 function getQuery() {
@@ -21,7 +21,7 @@ function getQuery() {
 (function () {
   const pages: PageContext[] = [
     {
-      middleware: (ref, []) =>
+      middleware: (ref) =>
         !!ref.location.pathname.match(/\/(latest|toplist|hot|random)/gi),
       exec: (
         context,
@@ -45,7 +45,7 @@ function getQuery() {
       }
     },
     {
-      middleware: (ref, []) =>
+      middleware: (ref) =>
         ref.location.pathname === "/forums" ||
         !!ref.location.pathname.match(/\/forums((\/thread|\/board))/gi),
       exec: (
@@ -72,7 +72,7 @@ function getQuery() {
       }
     },
     {
-      middleware: (ref, []) => !!ref.location.pathname.match(/\/search/gi),
+      middleware: (ref) => !!ref.location.pathname.match(/\/search/gi),
       exec: (
         context,
         data,
@@ -98,7 +98,7 @@ function getQuery() {
       }
     },
     {
-      middleware: (ref, []) => !!ref.location.pathname.match(/\/w\/(\w+)/gi),
+      middleware: (ref) => !!ref.location.pathname.match(/\/w\/(\w+)/gi),
       exec: (
         context,
         data,
