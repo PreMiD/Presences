@@ -5,10 +5,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "home_assistant_logo" //banner
-    presenceData.startTimestamp = browsingStamp; // Start browsingStamp
   }; 
   
-  
+  presenceData.startTimestamp = browsingStamp; // Start browsingStamp
 
   function homeassistant(state: string) {
     presenceData.details = "Viewing";
