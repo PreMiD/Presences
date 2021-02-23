@@ -10,7 +10,7 @@ const presence = new Presence({
   
 let video: HTMLVideoElement;
 
-presence.on("iFrameData", async (msg: any) => {
+presence.on("iFrameData", async (msg: HTMLVideoElement) => {
   if (!msg) return;
   video = msg;
 });
