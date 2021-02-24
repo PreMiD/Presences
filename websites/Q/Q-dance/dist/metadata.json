@@ -1,16 +1,22 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Alexx",
+    "id": "604182077088202784"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Q-dance",
   "description": {
     "en": "Q-Dance is a Dutch company that organizes events and festivals that focuses on the harder styles of dance music-mainly Hardstyle, Hardcore, and Hard Trance. Popular events and festivals organized by Q-Dance are Defqon.1 Festival, Q-BASE, Qlimax, and X-Qlusive."
   },
   "url": "www.q-dance.com",
-  "version": "1.1.5",
-  "logo": "https://i.gyazo.com/48dc40e4519fa8b1ef6dd5e22d38b5b0.png",
-  "thumbnail": "https://i.gyazo.com/229ad40a7c41fdfeb3e24c30cc266ee7.png",
+  "version": "1.1.6",
+  "logo": "https://i.imgur.com/wkzP4tG.png",
+  "thumbnail": "https://i.imgur.com/NIfFOgK.png",
   "color": "#EA580C",
   "tags": [
     "q-dance",

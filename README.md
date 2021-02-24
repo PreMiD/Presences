@@ -27,8 +27,17 @@ You can see it [**here**](https://docs.premid.app/dev/presence).
 ```bash
 presence
 ├── dist
-│   ├── metadata.json
-│   └── presence.js
+│   └── metadata.json
 ├── presence.ts
+└── tsconfig.json
+```
+
+For presences with ``iframe.ts``:
+```bash
+presence
+├── dist
+│   └── metadata.json
+├── presence.ts
+├── iframe.ts
 └── tsconfig.json
 ```
