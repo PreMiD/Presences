@@ -6,8 +6,7 @@ presence.on("UpdateData", async () => {
     let details, state;
     const title = document.title;
     var privacy = await presence.getSetting("privacy");
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    const queryString = window.location.search, urlParams = new URLSearchParams(queryString);
     elapsed = Math.floor(Date.now() / 1000);
     if (privacy) {
         details = "Vewing a Page";
@@ -15,7 +14,7 @@ presence.on("UpdateData", async () => {
     }
     else {
         if (window.location.href == "https://www.nytimes.com/") {
-            details = "Vewing Home Page";
+            details = "Viewing Home Page";
             state = "";
         }
         else if (document.location.pathname.includes("/interactive/")) {
