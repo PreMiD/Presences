@@ -122,6 +122,12 @@ if (info) {
       presenceData.smallImageKey = "search";
       presence.error("Can't read page.");
     }
+  } else if(document.querySelector("#main_bg > div:nth-child(5) > div > div.section-header > h3").textContent == " Result search"){
+    presence.info("Searching");
+    presenceData.details = "Searching:";
+    presenceData.state = document.location.href.replace("https://vidcloud9.com/search.html?keyword=","");
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Searching";
   } //If it can't get the page it will output an error
   else {
     presenceData.startTimestamp = browsingStamp;
