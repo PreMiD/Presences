@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
     if (!data.ep && !isVShow && isMovie) data.ep = "Movie";
     if (isVShow) data.ep = "Variety show";
     if (!isVShow && !isMovie)
-      data.ep = `${(await strings).episode} ${contentEp[0]}`;
+      data.ep = contentEp?.length ? `${(await strings).episode} ${contentEp[0]}` : "Drama";
 
     if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
