@@ -7,10 +7,7 @@ let elapsed;
 presence.on("UpdateData", async () => {
 
     let details, state;
-    const title = document.title;
-    const privacy = await presence.getSetting("privacy");
-
-    const queryString = window.location.search, urlParams = new URLSearchParams(queryString);
+    const title = document.title, privacy = await presence.getSetting("privacy"), queryString = window.location.search, urlParams = new URLSearchParams(queryString);
 
     elapsed = Math.floor(Date.now() / 1000);
     if (privacy) {
