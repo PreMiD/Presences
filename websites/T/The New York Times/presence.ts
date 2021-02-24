@@ -12,11 +12,9 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
     if (privacy) {
       details = "Vewing a Page";
-      state = "";
     } else {
       if (window.location.href == "https://www.nytimes.com/") {
       details = "Viewing Home Page";
-      state = "";
     } else if (document.location.pathname.includes("/interactive/")) {
       details = "Viewing an Interactive: ";
       state = title.replace(" - The New York Times", "");
@@ -47,20 +45,22 @@ presence.on("UpdateData", async () => {
   }
     }
 
-    const data: PresenceData = {
+    let data: PresenceData = {
       details: details,
-      state: state,
       largeImageKey: "logo",
-      startTimestamp: elapsed
+      startTimestamp: elapsed,
+      state: state
     };
 
+    if (data.state == null) {
+      delete data.state;
+    }
+
     if (data.details == null) {
-      //This will fire if you do not set presence details
-      presence.setTrayTitle(); //Clears the tray title for mac users
-      presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
+      presence.setTrayTitle();
+      presence.setActivity();
     } else {
-      //This will fire if you set presence details
       presence.setTrayTitle(data.state);
-      presence.setActivity(data); //Update the presence with all the values from the presenceData object
+      presence.setActivity(data);
     }
 });
