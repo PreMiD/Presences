@@ -113,8 +113,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Profile";
   }
   else{
-    presenceData.state = "Navigating...";
-    presenceData.details = "";
+    presenceData.details = "Navigating...";
   }   
 
   if (presenceData.details == null) {
