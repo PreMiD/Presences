@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
 
     let details, state;
     const title = document.title;
-    var privacy = await presence.getSetting("privacy")
+    var privacy = await presence.getSetting("privacy");
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -51,7 +51,6 @@ presence.on("UpdateData", async () => {
   }
     }
     
-  
     var data: PresenceData = {
       details: details,
       state: state,
