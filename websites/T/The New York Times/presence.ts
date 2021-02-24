@@ -2,13 +2,13 @@ const presence = new Presence({
     clientId: "813781191308083239"
 });
 
-var elapsed;
+let elapsed;
 
 presence.on("UpdateData", async () => {
 
     let details, state;
     const title = document.title;
-    var privacy = await presence.getSetting("privacy");
+    let privacy = await presence.getSetting("privacy");
 
     const queryString = window.location.search, urlParams = new URLSearchParams(queryString);
 
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
   }
     }
 
-    var data: PresenceData = {
+    let data: PresenceData = {
       details: details,
       state: state,
       largeImageKey: "logo",
