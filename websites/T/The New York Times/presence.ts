@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
 
     elapsed = Math.floor(Date.now() / 1000);
     if (privacy) {
-      details = "Vewing a Page";
+      details = "Viewing a Page";
     } else {
       if (window.location.href == "https://www.nytimes.com/") {
       details = "Viewing Home Page";
