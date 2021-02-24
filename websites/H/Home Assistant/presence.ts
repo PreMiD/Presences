@@ -5,119 +5,115 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "home_assistant_logo", //banner
-    startTimestamp: browsingStamp
+    startTimestamp: browsingStamp,
+    details : "Viewing"
   }; 
-
-  function homeassistant(state: string) {
-    presenceData.details = "Viewing";
-    presenceData.state = state;
-  }
 
   //#region Main
   if (document.location.pathname.includes("/lovelace")) {
-    homeassistant("Homepage");
+    presenceData.state = "Homepage";
   }
   else if (document.location.pathname.startsWith("/auth")){
-    homeassistant("Login");
+    presenceData.state = "Login";
   }   
   else if (document.location.pathname.includes("/map")){
-    homeassistant("Map");
+    presenceData.state = "Map";
   }
   else if (document.location.pathname.includes("/logbook")) {
-    homeassistant("Logbook");
+    presenceData.state = "Logbook";
   }   
   else if (document.location.pathname.includes("/history")){
-    homeassistant("History");
+    presenceData.state = "History";
   }
   else if (document.location.pathname.includes("/media-browser")){
-    homeassistant("Media browser");
+    presenceData.state = "Media browser";
   }
   else if (document.location.pathname.includes("/developer-tools")){
-    homeassistant("Developer-tools");
+    presenceData.state = "Developer-tools";
   }
   //#endregion
 
   //#region Supervisor   
   else if (document.location.pathname.startsWith("/hassio/store")){
-    homeassistant("Add-on store");
+    presenceData.state = "Add-on store";
   }
   else if (document.location.pathname.startsWith("/hassio/dashboard")) {
-    homeassistant("Add-on dashboard");
+    presenceData.state = "Add-on dashboard";
   }
 
   //#region add-on
   else if (document.location.pathname.includes("hassio/addon/core_samba")) {
-    homeassistant("Samba share add-on");
+    presenceData.state = "Samba share add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/core_letsencrypt")) {
-    homeassistant("Let's encrypt add-on");
+    presenceData.state = "Let's encrypt add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/a0d7b954_aircast")) {
-    homeassistant("AirCast add-on");
+    presenceData.state = "AirCast add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/core_duckdns")) {
-    homeassistant("DuckDNS add-on");
+    presenceData.state = "DuckDNS add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/core_nginx_proxy")) {
-    homeassistant("Nginx proxy add-on");
+    presenceData.state = "Nginx proxy add-on";
   }
   else if (document.location.pathname.endsWith("core_configurator")) {
-    homeassistant("File editor");
+    presenceData.state = "File editor";
   }
   else if (document.location.pathname.includes("/hassio/addon/core_git_pull")) {
-    homeassistant("Git pull add-on");
+    presenceData.state = "Git pull add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/core_cec_scan/")) {
-    homeassistant("CEC scan add-on");
+    presenceData.state = "CEC scan add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/core_google_assistant")) {
-    homeassistant("Google assistant SDK add-on");
+    presenceData.state = "Google assistant SDK add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/core_mosquitto")) {
-    homeassistant("MQTT add-on");
+    presenceData.state = "MQTT add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/core_ssh")) {
-    homeassistant("SSH add-on");
+    presenceData.state = "SSH add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/core_rpc_shutdown")) {
-    homeassistant("RPC shutdown add-on");
+    presenceData.state = "RPC shutdown add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/a0d7b954_airsonos")) {
-    homeassistant("Air sonos add-on");
+    presenceData.state = "Air sonos add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/a0d7b954_bitwarden")) {
-    homeassistant("Bitwarden add-on");
+    presenceData.state = "Bitwarden add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/a0d7b954_phpmyadmin")) {
-    homeassistant("PHP my admin add-on");
+    presenceData.state = "PHP my admin add-on";
   }
   else if (document.location.pathname.includes("/hassio/addon/a0d7b954_unifi")) {
-    homeassistant("UniFI controller add-on");
+    presenceData.state = "UniFI controller add-on";
   }
   else if (document.location.pathname.includes("addon")) {
-    homeassistant("Add-on");
+    presenceData.state = "Add-on";
   }
   //#endregion
 
   else if (document.location.pathname.endsWith("hassio/system")) {
-    homeassistant("System Info");
+    presenceData.state = "System Info";
   }
   else if (document.location.pathname.endsWith("hassio/snapshots")) {
-    homeassistant("Snapshots");
+    presenceData.state = "Snapshots";
   }
   //#endregion
 
   //#region settings
   else if (document.location.pathname.startsWith("/config/")) {
-    homeassistant("Settings");
+    presenceData.state = "Settings";
   }
   //#endregion
 
   else if (document.location.pathname.includes("/profile")) {
-    homeassistant("Profile");
+    presenceData.state = "Profile";
   }
   else{
-    homeassistant("Navigating...");
+    presenceData.state = "Navigating...";
     presenceData.details = "";
   }   
 
