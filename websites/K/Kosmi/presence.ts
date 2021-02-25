@@ -9,7 +9,7 @@ let details: string,
     smallImageKey: string,
     smallImageText: string;
 
-const noPlayIndicator: Array<string> = ["Video Chat", "Web view", "Paint", "Table", "Virtual room"];
+const noPlayIndicator: string[] = ["Video Chat", "Web view", "Paint", "Table", "Virtual room"];
 
 presence.on("UpdateData", async () => {
 
@@ -31,6 +31,7 @@ presence.on("UpdateData", async () => {
             else if ( location.pathname.includes("room") ) {
                     details = "In a room";
                     state = "Choosing an activity";
+                    smallImageKey = null;
                 
                 if ((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement)  !== null && !noPlayIndicator.includes((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText ) ) {
                     state = "Playing " + (document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText;
@@ -38,8 +39,8 @@ presence.on("UpdateData", async () => {
                     smallImageText = `With ${parseInt((document.querySelector(`a[class="item swipableMenuItem-2YW"]`) as HTMLElement).innerText.trim(), 10) - 1} other(s)`;
                     
                 } else if ((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement)  !== null && noPlayIndicator.includes((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText)) {
-                    state = `${((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText) == "Paint" ? "Painting" : "In a " + (document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText}`;
-                    smallImageKey = `${((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText) == "Paint" ? "paintbrush" : "vcall"  }`;
+                    state = `${((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText) === "Paint" ? "Painting" : "In a " + (document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText}`;
+                    smallImageKey = `${((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText) === "Paint" ? "paintbrush" : "vcall"  }`;
                     smallImageText = `With ${parseInt((document.querySelector(`a[class="item swipableMenuItem-2YW"]`) as HTMLElement).innerText.trim(), 10) - 1} other(s)`;
                 
                 } else if ( (document.querySelector(`video`) as HTMLElement)  !== null || (document.querySelector(`iframe`) as HTMLElement)  !== null ) {
