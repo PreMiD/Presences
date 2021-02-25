@@ -6,7 +6,7 @@ strings = presence.getStrings({
     pause: "presence.playback.paused"
 });
 
-let browsingStamp =  Math.floor(Date.now() / 1000)
+const browsingStamp =  Math.floor(Date.now() / 1000)
 
 let details: string;
 
