@@ -60,12 +60,13 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.title.replace(" - BuildTheEarth", "");
       if (window.location.pathname.length != 1) {
         presenceData.details = "Viewing a BuildTeam:";
-      if(button) presenceData.buttons = [
-          {
-            label: "View the team",
-            url: document.URL
-          }
-        ];
+        if (button)
+          presenceData.buttons = [
+            {
+              label: "View the team",
+              url: document.URL
+            }
+          ];
       }
     }
   }

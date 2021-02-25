@@ -7,8 +7,8 @@ const presence = new Presence({
   });
 
 let lastPlaybackState = null,
- playback,
- browsingStamp = Math.floor(Date.now() / 1000);
+  playback,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -16,9 +16,7 @@ if (lastPlaybackState != playback) {
 }
 presence.on("UpdateData", async () => {
   playback =
-    document.querySelector(".vjs-current-time-display") !== null
-      ? true
-      : false;
+    document.querySelector(".vjs-current-time-display") !== null ? true : false;
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
@@ -32,18 +30,18 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData, true);
   }
 
-  const video: HTMLVideoElement =
-    document.querySelector("#example_video_1_html5_api");
+  const video: HTMLVideoElement = document.querySelector(
+    "#example_video_1_html5_api"
+  );
 
   if (video !== null && !isNaN(video.duration)) {
     const series = document.querySelector("a#titleleft"),
-    seriesTitle = series.textContent,
-    episode = document.querySelector("span#titleleft").textContent,
-
-     timestamps = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-    );
+      seriesTitle = series.textContent,
+      episode = document.querySelector("span#titleleft").textContent,
+      timestamps = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
