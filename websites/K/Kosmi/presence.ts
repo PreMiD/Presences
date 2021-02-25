@@ -14,19 +14,19 @@ function updateMetadata() {
 
     switch (location.host) {
         case "kosmi.io":
-            details = "On the Startpage"
+            details = "On the Startpage";
             break;
         case "app.kosmi.io": 
             if (location.pathname === "/") {
-                details =  "Viewing the Home Page..."
+                details =  "Viewing the Home Page...";
             }
                 
             else if (location.pathname === "/lobby") {
-                details = "Browsing public rooms..."
+                details = "Browsing public rooms...";
             }
                 
             else if (location.pathname.includes("/room/")) {
-                details = "In a room"
+                details = "In a room";
             }
                     
             break;
@@ -46,13 +46,13 @@ presence.on("UpdateData", async () => {
         const presenceData: PresenceData = {
             largeImageKey: "kosmimain",
             details,
-            startTimestamp: browsingStamp,
+            startTimestamp: browsingStamp
         };
 
         if (presenceData.details == null) {
             presence.setTrayTitle();
             presence.setActivity();
         } else {
-            presence.setActivity(presenceData)
+            presence.setActivity(presenceData);
         }      
 });
