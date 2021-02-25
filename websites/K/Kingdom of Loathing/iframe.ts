@@ -9,7 +9,7 @@ function updateCombat(i: iFrame) {
     const monster = name.innerText;
     if (monster !== currentMonster) {
       currentMonster = monster;
-      i.send({ type: "MONSTER", payload: monster });
+      return i.send({ type: "MONSTER", payload: monster });
     }
   }
 }
@@ -24,7 +24,7 @@ function updateChoice(i: iFrame) {
     const choiceId = Number(choice.value);
     if (choiceId !== currentChoiceId) {
       currentChoiceId = choiceId;
-      i.send({ type: "CHOICE", payload: choiceId });
+      return i.send({ type: "CHOICE", payload: choiceId });
     }
   }
 }
@@ -56,10 +56,10 @@ function updateCharpane(i: iFrame) {
   }
 
   if (adventures !== -1) {
-    if (adventures != currentAdventures || Date.now() - lastPing > KEEP_ALIVE) {
+    if (adventures !== currentAdventures || Date.now() - lastPing > KEEP_ALIVE) {
       currentAdventures = adventures;
       lastPing = Date.now();
-      i.send({ type: "ADVENTURES", payload: adventures });
+      return i.send({ type: "ADVENTURES", payload: adventures });
     }
   }
 }
@@ -90,5 +90,7 @@ koliFrame.on("UpdateData", async () => {
       }
     case "charpane":
       return updateCharpane(koliFrame);
+    default:
+      return;
   }
 });
