@@ -10,9 +10,9 @@ const browsingStamp =  Math.floor(Date.now() / 1000)
 
 let details: string;
 
-function updateMetadata() {
+presence.on("UpdateData", async () => {
 
-    switch (location.host) {
+      switch (location.host) {
         case "kosmi.io":
             details = "On the Startpage";
             break;
@@ -32,16 +32,6 @@ function updateMetadata() {
             break;
       default: break;
     }
-
-}
-
-setInterval(updateMetadata, 1000);
-
-
-
-
-presence.on("UpdateData", async () => {
-
 
         const presenceData: PresenceData = {
             largeImageKey: "kosmimain",
