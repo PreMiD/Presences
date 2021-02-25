@@ -60,9 +60,7 @@ presence.on("UpdateData", async () => {
     }
 
     presenceData.buttons = [
-      { label: "Ver Película",
-        url: window.location.href
-      }
+      { label: "Ver Película", url: window.location.href }
     ];
 
     presence.setActivity(presenceData, !video.paused);
@@ -71,9 +69,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "browsing";
     presenceData.smallImageText = (await strings).browsing;
     presenceData.buttons = [
-      { label: "Ver Episodio",
-        url: window.location.href
-      }
+      { label: "Ver Episodio", url: window.location.href }
     ];
     presence.setActivity(presenceData);
   } else {

@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = browsingStamp;
   if (sprivacy) {
     presenceData.details = "Browsing";
-  } else { 
+  } else {
     if (window.location.pathname.endsWith("commandes")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Commands";

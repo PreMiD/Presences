@@ -3,25 +3,25 @@ const presence = new Presence({
 });
 
 let gametypequery: string,
- gamemodequery: string,
- gametype: string,
- gamemode: string,
- killcount: string,
- alivecount: string,
- place: string;
+  gamemodequery: string,
+  gametype: string,
+  gamemode: string,
+  killcount: string,
+  alivecount: string,
+  place: string;
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo"
-  },
-   broadcasttc = await presence.getSetting("broadcasttc"),
-   active =
-    window.getComputedStyle(document.getElementById("start-menu-wrapper"))
-      .display == "none",
-   end = document.querySelector(".ui-stats-current") !== null;
-   data.startTimestamp = browsingStamp;
+      largeImageKey: "logo"
+    },
+    broadcasttc = await presence.getSetting("broadcasttc"),
+    active =
+      window.getComputedStyle(document.getElementById("start-menu-wrapper"))
+        .display == "none",
+    end = document.querySelector(".ui-stats-current") !== null;
+  data.startTimestamp = browsingStamp;
 
   if (end) {
     // Player is looking at match results, this needs to be before checking if active due to the way the active variable is set up
@@ -36,16 +36,13 @@ presence.on("UpdateData", async () => {
       "block"
     ) {
       // If the player made a team
-      if (
-        broadcasttc &&
-        (gametype == "Duo" || gametype == "Squad")
-      ) {
+      if (broadcasttc && (gametype == "Duo" || gametype == "Squad")) {
         data.buttons = [
           {
-                  label: "Join Game",
-                  url: document.baseURI
-              }
-          ];
+            label: "Join Game",
+            url: document.baseURI
+          }
+        ];
         data.smallImageKey = gametype.toLowerCase();
         data.smallImageText = document.querySelector("#team-code").textContent;
       }
