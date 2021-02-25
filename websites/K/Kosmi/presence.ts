@@ -16,11 +16,11 @@ function updateMetadata() {
             details = "On the Startpage"
             break;
         case "app.kosmi.io": 
-            if (location.pathname == "/") {
+            if (location.pathname === "/") {
                 details =  "Viewing the Home Page..."
             }
                 
-            else if (location.pathname == "/lobby") {
+            else if (location.pathname === "/lobby") {
                 details = "Browsing public rooms..."
             }
                 
