@@ -21,18 +21,18 @@ presence.on("UpdateData", async () => {
     videoElement: HTMLVideoElement = document.querySelector("#vp-player > video"),
     videoTitle: HTMLHeadingElement = document.querySelector("h1.video__info-title"),
     videoChannel: HTMLAnchorElement = document.querySelector("a.influencer__info-link");
-    if (path === "/")
-        presenceData.details = strings.homepage,
-        presenceData.state = strings.browsing,
+    if (path === "/") {
+        presenceData.details = strings.homepage;
+        presenceData.state = strings.browsing;
         presenceData.smallImageKey = "malltvbrowsing";
-    else if (channel !== null)
-        presenceData.details = channel.textContent,
-        presenceData.state = strings.browsing,
+    } else if (channel !== null) {
+        presenceData.details = channel.textContent;
+        presenceData.state = strings.browsing;
         presenceData.smallImageKey = "malltvbrowsing";
-    else if (videoTitle !== null && videoChannel !== null) {
+    } else if (videoTitle !== null && videoChannel !== null) {
         const videoTimestamp: number[] = presence.getTimestampsfromMedia(videoElement),
         videoLive: HTMLButtonElement = document.querySelector("button.vp-live");
-        presenceData.details = videoTitle.textContent,
+        presenceData.details = videoTitle.textContent;
         presenceData.state = videoChannel.textContent;
         presenceData.buttons = [
             {
@@ -44,17 +44,18 @@ presence.on("UpdateData", async () => {
                 url: videoChannel.href
             }
         ];
-        if (videoLive.style.display !== "none")
-            presenceData.smallImageKey = "malltvlive",
+        if (videoLive.style.display !== "none") {
+            presenceData.smallImageKey = "malltvlive";
             presenceData.smallImageText = strings.live;
-        else if (!videoElement.paused)
-            presenceData.startTimestamp = videoTimestamp[0],
-            presenceData.endTimestamp = videoTimestamp[1],
-            presenceData.smallImageKey = "malltvplaying",
+        } else if (!videoElement.paused) {
+            presenceData.startTimestamp = videoTimestamp[0];
+            presenceData.endTimestamp = videoTimestamp[1];
+            presenceData.smallImageKey = "malltvplaying";
             presenceData.smallImageText = strings.playing;
-        else
-            presenceData.smallImageKey = "malltvpaused",
+        } else {
+            presenceData.smallImageKey = "malltvpaused";
             presenceData.smallImageText = strings.paused;
+        }
     }
     if (presenceData.details == null) {
         presence.setTrayTitle();
