@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "author": {
+        "name": "gausie",
+        "id": "263438077865754644"
+    },
+    "contributors": [],
+    "service": "Kingdom of Loathing",
+    "altnames": ["KoL", "KoLmafia"],
+    "description": {
+        "en": "Presence for the Kingdom of Loathing"
+    },
+    "version": "0.0.1",
+    "logo": "https://s3.amazonaws.com/images.kingdomofloathing.com/otherimages/leftswordguy.gif",
+    "thumbnail": "https://s3.amazonaws.com/images.kingdomofloathing.com/otherimages/leftswordguy.gif",
+    "color": "#0000ff",
+    "tags": ["rpg", "asym", "kol"],
+    "category": "games",
+    "regExp": "([a-z0-9]+\\.)*kingdomofloathing.com|(127\\.0\\.0\\.1|localhost):6008\\d",
+    "iFrameRegExp": ".*?\\.php",
+    "iframe": true
+}
