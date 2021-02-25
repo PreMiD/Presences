@@ -29,6 +29,7 @@ function updateMetadata() {
             }
                     
             break;
+      default: break;
     }
 
 }
