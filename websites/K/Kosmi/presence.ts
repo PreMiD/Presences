@@ -8,6 +8,7 @@ strings = presence.getStrings({
 
 let browsingStamp =  Math.floor(Date.now() / 1000)
 
+let details: string;
 
 function updateMetadata() {
 
