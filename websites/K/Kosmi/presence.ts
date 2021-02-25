@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
 
         const presenceData: PresenceData = {
             largeImageKey: "kosmimain",
-            details: details,
+            details,
             startTimestamp: browsingStamp,
         };
 
