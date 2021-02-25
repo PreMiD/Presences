@@ -14,15 +14,27 @@ interface KoLStatus {
   daysthisrun: string;
 }
 
-type Action = { type: 'MONSTER', payload: string }
-  | { type: 'CHOICE', payload: number }
-  | { type: 'ADVENTURES', payload: number }
-  | { type: 'MALL' | 'KMAIL' | 'UNHANDLED' | 'FAMILIAR' | 'INVENTORY' | 'SKILLS' | 'SENDMESSAGE' };
+type Action =
+  | { type: "MONSTER"; payload: string }
+  | { type: "CHOICE"; payload: number }
+  | { type: "ADVENTURES"; payload: number }
+  | {
+      type:
+        | "MALL"
+        | "KMAIL"
+        | "UNHANDLED"
+        | "FAMILIAR"
+        | "INVENTORY"
+        | "SKILLS"
+        | "SENDMESSAGE";
+    };
 
 let kolStatus: Partial<KoLStatus> = {};
 
 async function fetchStatus() {
-  const response = await window.fetch(`${location.origin}/api.php?what=status&for=PreMiD`);
+  const response = await window.fetch(
+    `${location.origin}/api.php?what=status&for=PreMiD`
+  );
   kolStatus = await response.json();
   return kolStatus;
 }
@@ -53,7 +65,8 @@ function formatDetails() {
     className = classId in classNames ? classNames[classId] : "Unknown Class";
 
   if (path > 0) {
-    const hardcore = Number(kolStatus.hardcore) === 1 ? "HC" : "SC", pathName = kolStatus.pathname;
+    const hardcore = Number(kolStatus.hardcore) === 1 ? "HC" : "SC",
+      pathName = kolStatus.pathname;
     return `[${kolStatus.turnsthisrun}/${kolStatus.daysthisrun}] ${hardcore} ${pathName}`;
   }
 
@@ -62,7 +75,10 @@ function formatDetails() {
 
 function generateButtons() {
   return [
-    { label: 'Visit profile', url: `https://kingdomofloathing.com/showplayer.php?who=${kolStatus.playerid}` }
+    {
+      label: "Visit profile",
+      url: `https://kingdomofloathing.com/showplayer.php?who=${kolStatus.playerid}`
+    }
   ];
 }
 
@@ -114,7 +130,7 @@ presence.on("iFrameData", async (action: Action) => {
     case "UNHANDLED":
       setActivity("Thinking carefully");
       break;
-    default: 
+    default:
       presence.setTrayTitle();
       presence.setActivity();
       break;
