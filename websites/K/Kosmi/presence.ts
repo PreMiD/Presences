@@ -8,9 +8,7 @@ strings = presence.getStrings({
 
 let browsingStamp =  Math.floor(Date.now() / 1000)
 
-let viewerCount: any;
-let details: string;
-let playIndicator: string;
+
 
 function updateMetadata() {
 
@@ -46,8 +44,6 @@ presence.on("UpdateData", async () => {
 
         const presenceData: PresenceData = {
             largeImageKey: "kosmimain",
-            smallImageKey: playIndicator,
-            smallImageText: viewerCount,
             details: details,
             startTimestamp: browsingStamp,
         };
