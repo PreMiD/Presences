@@ -16,6 +16,7 @@
     "color": "#0000ff",
     "tags": ["rpg", "asym", "kol"],
     "category": "games",
+    "url": "kingdomofloathing.com",
     "regExp": "([a-z0-9]+\\.)*kingdomofloathing.com|(127\\.0\\.0\\.1|localhost):6008\\d",
     "iFrameRegExp": ".*?\\.php",
     "iframe": true
