@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
   elapsed = await presence.getSetting("sTE"), 
   videoTime = await presence.getSetting("sVT");
   if (videoTime) {
-    if (lastPlaybackState != playback) {
+    if (lastPlaybackState !== playback) {
       lastPlaybackState = playback;
       presence.info("Video Time is On");
     }
@@ -83,14 +83,14 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > #wrapper_bg > #wrapper > #main_bg > div > div > div.video-info-left > h1"
       );
-      if (title != null) {
+      if (title !== null) {
         presenceData.state = title.innerText;
 
         if (
           iFrameVideo == true &&
           !isNaN(duration) &&
-          title != null &&
-          video != null
+          title !== null &&
+          video !== null
         ) {
           if (!paused) {
             presenceData.details = "Watching:";
@@ -108,7 +108,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Paused:";
             presenceData.smallImageKey = "pause";
           }
-        } else if (iFrameVideo == null && isNaN(duration) && title != null) {
+        } else if (iFrameVideo == null && isNaN(duration) && title !== null) {
           presenceData.details = "Viewing:";
           presenceData.state = title.innerText;
           presenceData.startTimestamp = browsingStamp;
