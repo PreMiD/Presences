@@ -30,14 +30,20 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/episodio")
   ) {
     const timestamps = presence.getTimestamps(
-        Math.floor(video.currentTime),
-        Math.floor(video.duration)
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
       ),
       titulo = document.querySelector(`h1.Title`).textContent,
       subtitulo = document.querySelector(`h2.SubTitle`).textContent;
 
-    if (!document.location.pathname.includes("/episodio"))
+    if (!document.location.pathname.includes("/episodio")) {
       presenceData.details = titulo;
+      presenceData.buttons = [
+        { label: "Ver Película",
+          url: window.location.href
+        }
+      ];
+    }
     else {
       presenceData.details = titulo
         .replace(document.querySelector(`h1.Title > span`).textContent, ``)
@@ -45,6 +51,11 @@ presence.on("UpdateData", async () => {
         .trim();
       presenceData.state =
         document.querySelector(`h1.Title > span`).textContent + " " + subtitulo;
+      presenceData.buttons = [
+        { label: "Ver Episodio",
+          url: window.location.href
+        }
+      ];
     }
 
     (presenceData.smallImageKey = video.paused ? "pause" : "play"),
@@ -59,18 +70,11 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
-    presenceData.buttons = [
-      { label: "Ver Película", url: window.location.href }
-    ];
-
     presence.setActivity(presenceData, !video.paused);
   } else if (document.location.pathname.includes("/serie/")) {
     presenceData.details = document.querySelector(`h1.Title`).textContent;
     presenceData.smallImageKey = "browsing";
     presenceData.smallImageText = (await strings).browsing;
-    presenceData.buttons = [
-      { label: "Ver Episodio", url: window.location.href }
-    ];
     presence.setActivity(presenceData);
   } else {
     presenceData.details = (await strings).browsing;
