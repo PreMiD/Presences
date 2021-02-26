@@ -43,10 +43,7 @@ presence.on("UpdateData", async () => {
   } = {};
 
   // Update strings when user sets language
-  if (!oldLang) {
-    oldLang = newLang;
-    strings = await getStrings();
-  } else if (oldLang !== newLang) {
+  if (!oldLang || oldLang !== newLang) {
     oldLang = newLang;
     strings = await getStrings();
   }
@@ -68,7 +65,7 @@ presence.on("UpdateData", async () => {
       const timestamps: number[] = presence.getTimestampsfromMedia(video);
 
       if (groupWatchId) {
-        groupWatchCount = parseInt(document.querySelector(
+        groupWatchCount = Number(document.querySelector(
           ".btm-media-overlays-container .group-profiles-control .group-profiles-control__count"
         )?.textContent);
       }
