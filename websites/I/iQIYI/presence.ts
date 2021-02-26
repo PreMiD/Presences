@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
 
     if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
-    if (video && !isNaN(video.duration)) {
+    if (video && !Number["isNaN"](Number(video.duration))) {
       if (isPreview && !isMovie && !isVShow) data.ep = `${data.ep} preview`;
       else if (video.duration < 270 && !isMovie && !isPreview && !isTrial)
         data.ep = "Highlight";
@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
       }
     }
 
-    if (isNaN(video.duration)) {
+    if (Number["isNaN"](Number(video.duration))) {
       presenceData.details = "Looking at:";
       presenceData.state = data.title;
       presenceData.startTimestamp = browsingStamp;
@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
 
         if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
-        if (video !== null && !isNaN(video.duration)){
+        if (video !== null && !Number["isNaN"](Number(video.duration))){
             const timestamps: number[] = presence.getTimestampsfromMedia(video);
 
             if (isPreview && !isMovie) data.ep = `${data.ep} preview`;
