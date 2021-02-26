@@ -1,0 +1,59 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "Project_Piffa",
+      "id": "525634922321412096"
+    },
+    "url": [
+      "pcpartpicker.com",
+      "it.pcpartpicker.com",
+      "ar.pcpartpicker.com",
+      "au.pcpartpicker.com",
+      "bh.pcpartpicker.com",
+      "be.pcpartpicker.com",
+      "ca.pcpartpicker.com",
+      "dk.pcpartpicker.com",
+      "fi.pcpartpicker.com",
+      "fr.pcpartpicker.com",
+      "de.pcpartpicker.com",
+      "hk.pcpartpicker.com",
+      "in.pcpartpicker.com",
+      "ie.pcpartpicker.com",
+      "il.pcpartpicker.com",
+      "jp.pcpartpicker.com",
+      "kw.pcpartpicker.com",
+      "mx.pcpartpicker.com",
+      "nl.pcpartpicker.com",
+      "nz.pcpartpicker.com",
+      "no.pcpartpicker.com",
+      "om.pcpartpicker.com",
+      "ph.pcpartpicker.com",
+      "pt.pcpartpicker.com",
+      "qa.pcpartpicker.com",
+      "ro.pcpartpicker.com",
+      "sa.pcpartpicker.com",
+      "sg.pcpartpicker.com",
+      "kr.pcpartpicker.com",
+      "es.pcpartpicker.com",
+      "se.pcpartpicker.com",
+      "th.pcpartpicker.com",
+      "tr.pcpartpicker.com",
+      "ae.pcpartpicker.com",
+      "uk.pcpartpicker.com"
+    ],
+    "description": {
+      "en": "Pick parts. Build your pc. Compare and share.",
+      "it": "Scegli i componenti. Costruisci il tuo pc. Confronta e condividi"
+    },
+    "service": "Pc part picker",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/TScJR5H.png",
+    "thumbnail": "https://i.imgur.com/PA4XAgR.png",
+    "color": "#EDA920",
+    "tags": [
+      "pc",
+      "computer",
+      "build"
+    ],
+    "category": "other"
+  }
