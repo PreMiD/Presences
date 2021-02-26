@@ -4,15 +4,14 @@
         "name": "gausie",
         "id": "263438077865754644"
     },
-    "contributors": [],
     "service": "Kingdom of Loathing",
     "altnames": ["KoL", "KoLmafia"],
     "description": {
         "en": "Presence for the Kingdom of Loathing"
     },
-    "version": "0.0.1",
-    "logo": "https://s3.amazonaws.com/images.kingdomofloathing.com/otherimages/leftswordguy.gif",
-    "thumbnail": "https://s3.amazonaws.com/images.kingdomofloathing.com/otherimages/leftswordguy.gif",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/FBkmCGO.gif",
+    "thumbnail": "https://i.imgur.com/FBkmCGO.gif",
     "color": "#0000ff",
     "tags": ["rpg", "asym", "kol"],
     "category": "games",
