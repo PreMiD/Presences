@@ -23,7 +23,7 @@ const presence = new Presence({
         watchVideo: "general.buttonWatchVideo",
         watchMovie: "general.buttonViewMovie",
         watchEpisode: "general.buttonViewEpisode"
-    }, await presence.getSetting('lang') ?? "en");
+    }, await presence.getSetting('lang'));
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href,
