@@ -2,6 +2,8 @@ const presence = new Presence({
     clientId: "813781191308083239"
 });
 
+const time = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
 
     let details, state;
@@ -45,12 +47,17 @@ presence.on("UpdateData", async () => {
     const data: PresenceData = {
       details: details,
       largeImageKey: "logo",
-      startTimestamp: Math.floor(Date.now() / 1000),
-      state: state
+      startTimestamp: time,
+      state: state,
+      buttons: [{label: "View Page", url: document.URL}]
     };
 
     if (data.state == null) {
       delete data.state;
+    }
+
+    if (await presence.getSetting("privacy")) {
+      delete data.buttons;
     }
 
     if (data.details == null) {
