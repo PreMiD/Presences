@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
     else if(document.querySelector("#main_bg > div:nth-child(5) > div > div.section-header > h3").textContent == " Result search"){
       presence.info("Searching");
       presenceData.details = "Searching:";
-      presenceData.state = document.location.href.replace("https://gogo-stream.com/search.html?keyword=","");
+      presenceData.state = document.location.href.replace("https://gogo-stream.com/search.html?keyword=","").split("%20").join(" ");
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
     }//If it can't get the page it will output an error
