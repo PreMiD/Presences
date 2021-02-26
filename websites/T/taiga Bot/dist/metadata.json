@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "CRUGG",
     "id": "228965621478588416"
@@ -10,23 +11,15 @@
     "fr": "taiga est un Bot Discord avec plein de fonctionnalités comme des Cartes à Jouer Virtuelles, un système d'économie et même un Marché aux Plugin à venir",
     "nl": "taiga is een Discord Bot met vele kenmerken zoals Virtuele Ruil Kaarten, een economie systeem en in de toekomst zelfs een Plugin Marketplace."
   },
-  "url": [
-    "taigabot.net",
-    "anigifs.taigabot.net",
-    "api.taigabot.net",
-    "cdn.taigabot.net",
-    "cdnadmin.taigabot.net",
-    "community.taigabot.net",
-    "taipl.taigabot.net",
-    "telegram.taigabot.net"
-  ],
-  "version": "2.0.2",
-  "logo": "https://cdn.taigabot.net/assets/branding/taiga/premid_logo.png",
-  "thumbnail": "https://cdn.taigabot.net/assets/branding/taiga/premid_banner2.png",
+  "url": "taigabot.net",
+  "version": "3.0.1",
+  "logo": "https://i.imgur.com/EYWqVuf.png",
+  "thumbnail": "https://i.imgur.com/B8rnRpx.png",
   "color": "#ff006d",
   "tags": [
     "discord",
-    "bot"
+    "bot",
+    "taiga"
   ],
   "category": "other"
 }

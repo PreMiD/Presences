@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
+  },
+  "service": "Joyn",
+  "description": {
+    "en": "Joyn GmbH is a German joint venture of the media groups ProSiebenSat.1 Media and Discovery, which deals with streaming media products.",
+    "de": "Die Joyn GmbH ist ein deutsches Gemeinschaftsunternehmen der Medienkonzerne ProSiebenSat.1 Media und Discovery, das sich mit Streaming-Media-Produkten beschäftigt."
+  },
+  "url": [
+    "www.joyn.de",
+    "joyn.de"
+  ],
+  "version": "1.2.1",
+  "logo": "https://i.imgur.com/SrAaJDz.jpg",
+  "thumbnail": "https://i.imgur.com/NsmbW8l.png",
+  "color": "#000",
+  "tags": [
+    "streaming",
+    "joyn"
+  ],
+  "category": "videos",
+  "settings": [
+    {
+      "id": "timeRemaining",
+      "title": "Verbleibende Zeit einblenden",
+      "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Buttons anzeigen",
+      "icon": "fad fa-mouse-pointer",
+      "value": true
+    }
+  ]
+}

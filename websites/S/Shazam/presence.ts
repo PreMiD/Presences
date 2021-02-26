@@ -1,24 +1,14 @@
 const presence = new Presence({
-  clientId: "735588731637203080"
-});
-const strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  browse: "presence.activity.browsing"
-});
-
-const getElement = (query: string): string | undefined => {
-  return document.querySelector(query)?.textContent;
-};
-
-const getTimestamps = (
-  videoTime: number,
-  videoDuration: number
-): Array<number> => {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), Math.floor(endTime)];
-};
+    clientId: "735588731637203080"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browse: "presence.activity.browsing"
+  }),
+  getElement = (query: string): string | undefined => {
+    return document.querySelector(query)?.textContent;
+  };
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href;
@@ -51,13 +41,11 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const path = location.pathname.replace(/\/?$/, "/");
-
-  const showSong = await presence.getSetting("song");
-  const showTimestamps = await presence.getSetting("timestamp");
-
-  const song: HTMLVideoElement = document.querySelector("#audioctrl");
-  const songPlaying = song ? !song.paused : false;
+  const path = location.pathname.replace(/\/?$/, "/"),
+    showSong = await presence.getSetting("song"),
+    showTimestamps = await presence.getSetting("timestamp"),
+    song: HTMLVideoElement = document.querySelector("#audioctrl"),
+    songPlaying = song ? !song.paused : false;
 
   let data: PresenceData = {
     details: undefined,
@@ -86,7 +74,7 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "play";
     data.smallImageText = (await strings).play;
 
-    const timestamps = getTimestamps(song.currentTime, song.duration);
+    const timestamps = presence.getTimestamps(song.currentTime, song.duration);
     data.startTimestamp = timestamps[0];
     data.endTimestamp = timestamps[1];
   }

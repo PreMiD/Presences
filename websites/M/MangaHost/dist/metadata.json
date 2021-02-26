@@ -5,15 +5,15 @@
     "id": "288834890772905984"
   },
   "url": [
-    "mangahost2.com",
-    "www.mangahost2.com"
+    "mangahosted.com",
+    "www.mangahosted.com"
   ],
   "description": {
     "en": "The most complete and well organized online reader where you can find stories and mangás in portuguese language.",
     "pt_BR": "Mais completo e organizado leitor de histórias e Mangás Livre Online em português."
   },
   "service": "MangaHost",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/t04Xe6q.png",
   "thumbnail": "https://i.imgur.com/b7YuC1M.png",
   "color": "#56e0ff",

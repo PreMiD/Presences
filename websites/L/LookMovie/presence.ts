@@ -7,11 +7,6 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
 function getTimestamps(
   videoTime: number,
   videoDuration: number
@@ -25,7 +20,7 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "lm"
     },
-    video: HTMLVideoElement = document.querySelectorAll("video")[0];
+    video: HTMLVideoElement = document.querySelector("video");
 
   if (video != null && !isNaN(video.duration)) {
     const timestamps = getTimestamps(

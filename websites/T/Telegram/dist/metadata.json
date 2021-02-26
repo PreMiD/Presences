@@ -6,10 +6,12 @@
   "service": "Telegram",
   "description": {
     "en": "Telegram is a secure instant messaging service with multi-platform support.",
-    "tr": "Telegram, çoklu platform desteği sunan, güvenli anlık mesajlaşma servisidir."
+    "tr": "Telegram, çoklu platform desteği sunan, güvenli anlık mesajlaşma servisidir.",
+    "ru": "Telegram - это безопасный сервис обмена мгновенными сообщениями с поддержкой нескольких платформ.",
+    "uk_UA": "Telegram - це безпечний та мультиплатформенний сервіс обміну миттєвими повідомленнями."
   },
   "url": "web.telegram.org",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/3hsUon3.png",
   "thumbnail": "https://i.imgur.com/aTmmCpt.png",
   "color": "#33abe0",
@@ -18,5 +20,13 @@
     "message",
     "social"
   ],
-  "category": "socials"
+  "category": "socials",
+  "settings": [
+    {
+      "id": "name",
+      "title": "Show name",
+      "icon": "fas fa-user",
+      "value": true
+    }
+  ]
 }

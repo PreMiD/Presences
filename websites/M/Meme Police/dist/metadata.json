@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "churuya",
+    "id": "173177499272871937"
+  },
+  "url": "meme-police.ru",
+  "description": {
+    "en": "Online versions of popular board games",
+    "ru": "Веб-версии популярных настольных игр"
+  },
+  "service": "Meme Police",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/8T258D8.png",
+  "thumbnail": "https://i.imgur.com/5N7oOem.png",
+  "color": "#9C27B0",
+  "tags": [
+    "games",
+    "meme-police"
+  ],
+  "category": "games",
+  "iframe": true
+}

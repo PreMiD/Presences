@@ -1,16 +1,22 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Kedi",
+    "id": "238668511222693888"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Starz",
   "description": {
     "en": "Starz is an American premium cable and satellite television network which serves as the flagship service of Starz Inc., which is ultimately owned by Lionsgate. Starz's programming features theatrically released motion pictures and first-run original television series."
   },
   "url": "www.starz.com",
-  "version": "1.1.6",
-  "logo": "https://i.gyazo.com/c5acd3cb0ba6e70d4a3ba9f84f8822a1.png",
-  "thumbnail": "https://i.gyazo.com/5a52a7bd1f996dbc6876d9d32f8133d5.png",
+  "version": "1.2.2",
+  "logo": "https://i.imgur.com/qssGc1m.png",
+  "thumbnail": "https://i.imgur.com/jPv0Zw1.png",
   "color": "#000",
   "tags": [
     "starz",

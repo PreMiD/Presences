@@ -6,13 +6,13 @@
   },
   "url": "codare.fun",
   "description": {
-    "tr": "CodAre'ın kod paylaşım sitesi.",
-    "en": "CodAre's code sharing website."
+    "tr": "CodAre discord botları ve daha fazlası için basit bir kod paylaşım platformudur.",
+    "en": "CodAre is a simple code sharing platform for discord bots and more."
   },
   "service": "CodAre",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/f2U2Zd9.png",
-  "thumbnail": "https://i.imgur.com/9VV6XNf.png",
+  "thumbnail": "https://i.imgur.com/YZAHqu7.png",
   "color": "#3b1b8a",
   "tags": [
     "discord",
