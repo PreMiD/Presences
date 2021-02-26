@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
   }
     }
 
-    let data: PresenceData = {
+    const data: PresenceData = {
       details: details,
       largeImageKey: "logo",
       startTimestamp: Math.floor(Date.now() / 1000),
