@@ -17,10 +17,10 @@
     "category": "other",
     "settings": [
       {
-        "id": "privacy",
-        "title": "Privacy Mode",
-        "icon": "fad fa-user-secret",
-        "value": false
+        "id": "buttons",
+        "title": "Show Buttons",
+        "icon": "fas fa-compress-arrows-alt",
+        "value": true
       }
     ]
 }
