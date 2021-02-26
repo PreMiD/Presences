@@ -4,12 +4,13 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
 
-    let details, state, title = document.title;
+    let details, state;
+    const title = document.title;
 
     if (await presence.getSetting("privacy")) {
       details = "Viewing a Page";
     } else {
-      if (window.location.href == "https://www.nytimes.com/") {
+      if (window.location.href === "https://www.nytimes.com/") {
       details = "Viewing Home Page";
     } else if (document.location.pathname.includes("/interactive/")) {
       details = "Viewing an Interactive: ";
