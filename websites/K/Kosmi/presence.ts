@@ -7,57 +7,73 @@ const presence = new Presence({
 let details: string,
     state: string,
     smallImageKey: string,
-    smallImageText: string;
+    activityName: HTMLDivElement,
+    userCount: number;
 
-const noPlayIndicator: string[] = ["Video Chat", "Web view", "Paint", "Table", "Virtual room"];
+const noGames: string[] = ["Video Chat", "Web view", "Paint", "Table", "Virtual room", "Watch Party"];
 
 presence.on("UpdateData", async () => {
 
-      switch (location.host) {
-        case "kosmi.io":
-            details = "On the Startpage";
-            break;
-        case "app.kosmi.io": 
             if (location.pathname === "/") {
                 details =  "Viewing the Home Page...";
-                state = " ";
+                (location.hash === "#contactScreen") ? state = "Viewing Contact Information" : state = null;
+                smallImageKey = "reading";
             }
                 
             else if (location.pathname === "/lobby") {
                 details = "Browsing public rooms...";
-                state = "";
+                state = null;
+                smallImageKey = "search";
             }
                 
             else if ( location.pathname.includes("room") ) {
-                    details = "In a room";
-                    state = "Choosing an activity";
-                    smallImageKey = null;
-                
-                if ((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement)  !== null && !noPlayIndicator.includes((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText ) ) {
-                    state = "Playing " + (document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText;
-                    smallImageKey = "gamepad";
-                    smallImageText = `With ${parseInt((document.querySelector(`a[class="item swipableMenuItem-2YW"]`) as HTMLElement).innerText.trim(), 10) - 1} other(s)`;
+                /*Try to get Metadata: Viewers, Game Name, if the elements don't exist, assume the user is on the indexpage */
+                try {
+                    activityName = (document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLDivElement);
+                    userCount= parseInt((document.querySelector(`a[class="item swipableMenuItem-2YW"]`) as HTMLElement).textContent.trim(), 10) - 1;
+                } catch {
+                    details = "Choosing an activity";
+                    smallImageKey = "reading";
+                    state = null;
+                 }
+                 /* Re-set the index status, as user is likely on the index page again and the Metadata objects exist now */
+                details = "Choosing an activity";
+                smallImageKey = "reading";
+                 /* Show the usercount in the lower text */
+                 state = userCount === 0 && userCount !== undefined ? "Alone" : `In a room with ${userCount} others`;
                     
-                } else if ((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement)  !== null && noPlayIndicator.includes((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText)) {
-                    state = `${((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText) === "Paint" ? "Painting" : "In a " + (document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText}`;
-                    smallImageKey = `${((document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLElement).innerText) === "Paint" ? "paintbrush" : "vcall"  }`;
-                    smallImageText = `With ${parseInt((document.querySelector(`a[class="item swipableMenuItem-2YW"]`) as HTMLElement).innerText.trim(), 10) - 1} other(s)`;
-                
-                } else if ( (document.querySelector(`video`) as HTMLElement)  !== null || (document.querySelector(`iframe`) as HTMLElement)  !== null ) {
-                    state = `In a watchparty`;
-                    smallImageKey = "live";
-                    smallImageText = `With ${parseInt((document.querySelector(`a[class="item swipableMenuItem-2YW"]`) as HTMLElement).innerText.trim(), 10) - 1} other(s)`;
+                /* This is executed if the user plays a game that is not in the "Special Activities" Array */
+                if (activityName !== null && !noGames.includes(activityName.textContent ) ) {
+                    details = "Playing " + activityName.textContent;
+                    smallImageKey = "gamepad";
+                    
+                } else if ( activityName !== null && noGames.includes(activityName.textContent)) {
+
+                        switch (activityName.textContent) { /* Proper Grammar for the Activities */
+                                case "Watch Party":
+                                    details = "In a " + activityName.textContent;
+                                    smallImageKey = "live";
+                                    break;
+                                case "Paint":
+                                    details = "Painting";
+                                    smallImageKey = "paintbrush";
+                                    break;
+                                case "Table":
+                                    details = "At the Table";
+                                    break;
+                                default: 
+                                    details = "In a " + activityName.textContent;
+                                    smallImageKey = "vcam";
+                                    break;
+
+                        }                 
                 }
             }
-                    
-            break;
-      default: break;
-    }
 
         const presenceData: PresenceData = {
             largeImageKey: "kosmimain",
             smallImageKey,
-            smallImageText,
+            smallImageText: userCount === 0 ? "Alone" : `With ${userCount} other(s)`,
             details,
             state,
             startTimestamp: browsingStamp
