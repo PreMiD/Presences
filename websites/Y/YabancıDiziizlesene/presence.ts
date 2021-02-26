@@ -24,18 +24,13 @@ presence.on("iFrameData", async (msg: Video) => {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
-
-  const seriesBool = document.querySelector(
-    "body > section > div > div > div.content__inner.movie__page.d-flex.justify-content-between > div.content__sidebar > div.card.card__bg1.mb-4.mb-hidden > div.card__title.title__no-icon.d-flex.justify-content-between > h2"
-  )
-    ? true
-    : false;
-  const movieBool = document.querySelector(
-    "body > section > div > div.content > div > div.content__sidebar > div.card.card__bg1.mb-4 > div.card__title.title__1 > h2 > strong"
-  )
-    ? true
-    : false;
+  },
+    seriesBool = document.querySelector(
+      "body > section > div > div > div.content__inner.movie__page.d-flex.justify-content-between > div.content__sidebar > div.card.card__bg1.mb-4.mb-hidden > div.card__title.title__no-icon.d-flex.justify-content-between > h2"
+    ) ? true : false,
+    movieBool = document.querySelector(
+      "body > section > div > div.content > div > div.content__sidebar > div.card.card__bg1.mb-4 > div.card__title.title__1 > h2 > strong"
+    ) ? true : false;
 
   if (!seriesBool && !movieBool) {
     video = null;
@@ -56,10 +51,10 @@ presence.on("UpdateData", async () => {
   else if (movieBool) {
     const movieTitle = document.querySelector(
       "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > h2"
-    ).textContent;
-    const movieTitle2 = document.querySelector(
-      "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > span"
-    ).textContent;
+    ).textContent,
+      movieTitle2 = document.querySelector(
+        "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > span"
+      ).textContent;
 
     presenceData.details = movieTitle;
     presenceData.state = movieTitle2;
