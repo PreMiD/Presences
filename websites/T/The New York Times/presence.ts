@@ -2,15 +2,11 @@ const presence = new Presence({
     clientId: "813781191308083239"
 });
 
-let elapsed;
-
 presence.on("UpdateData", async () => {
 
-    let details, state;
-    const title = document.title, privacy = await presence.getSetting("privacy"), queryString = window.location.search, urlParams = new URLSearchParams(queryString);
+    let details, state, title = document.title;
 
-    elapsed = Math.floor(Date.now() / 1000);
-    if (privacy) {
+    if (await presence.getSetting("privacy")) {
       details = "Viewing a Page";
     } else {
       if (window.location.href == "https://www.nytimes.com/") {
@@ -32,7 +28,7 @@ presence.on("UpdateData", async () => {
       state = title.replace(" - The New York Times", "");
     } else if (document.location.pathname.includes("/search")) {
       details = "Searching for:";
-      state = urlParams.get('query');
+      state = new URLSearchParams(window.location.search).get('query');
     } else if (document.location.pathname.includes("/video/")) {
       details = "Viewing a Video Section: ";
       state = title.replace(" - The New York Times", "");
@@ -48,7 +44,7 @@ presence.on("UpdateData", async () => {
     let data: PresenceData = {
       details: details,
       largeImageKey: "logo",
-      startTimestamp: elapsed,
+      startTimestamp: Math.floor(Date.now() / 1000),
       state: state
     };
 
