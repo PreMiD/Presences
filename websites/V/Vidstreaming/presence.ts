@@ -34,11 +34,11 @@ presence.on("UpdateData", async () => {
   if (videoTime) {
     if (lastPlaybackState != playback) {
       lastPlaybackState = playback;
-      browsingStamp = Math.floor(Date.now() / 1000);
       presence.info("Video Time is On");
     }
   }
   else{
+    lastPlaybackState = null;
     presence.info("Video Time is Off");
   }
   if (elapsed) {
