@@ -41,11 +41,11 @@ presence.on("UpdateData", async () => {
         presenceData.details =document.querySelector("#products > section > div > div.wrapper.wrapper__pageTitle > section > h1").textContent;
     } 
     else if (document.location.pathname.endsWith("/blog/")) {
-        presenceData.details = "Reading:"
+        presenceData.details = "Reading:";
         presenceData.state =document.querySelector("#blog-roll > div.wrapper.wrapper__pageTitle > section > h1").textContent;
     }
     else if (document.location.pathname.includes("/blog/")) {
-      presenceData.details = "Reading:"
+      presenceData.details = "Reading:";
       presenceData.state =document.querySelector("#blog-article > div.wrapper.wrapper__pageTitle > section > h1").textContent;
     }  
     else if (document.location.pathname.endsWith("/forums/")) {
@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
         presenceData.state ="Downloads";
     } 
     else if (document.location.pathname.startsWith("/about/")) {
-      presenceData.details = "Reading:"  
+      presenceData.details = "Reading:";  
       presenceData.state ="About us";
     } 
     else if (document.location.pathname.startsWith("/contact/")) {
