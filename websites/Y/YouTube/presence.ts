@@ -52,6 +52,7 @@ interface LangStrings {
   watchLive: string;
   browsing: string;
   searchSomething: string;
+  watchStreamButton: string;
   watchVideoButton: string;
   viewChannelButton: string;
 }
@@ -102,6 +103,7 @@ async function getStrings(): Promise<LangStrings> {
       watchLive: "general.watchingLive",
       browsing: "general.browsing",
       searchSomething: "general.searchSomething",
+      watchStreamButton: "general.buttonWatchStream",
       watchVideoButton: "general.buttonWatchVideo",
       viewChannelButton: "general.buttonViewChannel"
     },
@@ -327,7 +329,9 @@ presence.on("UpdateData", async () => {
     } else if (buttons) {
       presenceData.buttons = [
         {
-          label: (await strings).watchVideoButton,
+          label: live
+            ? (await strings).watchStreamButton
+            : (await strings).watchVideoButton,
           url: document.URL.includes("/watch?v=")
             ? document.URL.split("&")[0]
             : `https://www.youtube.com/watch?v=${document

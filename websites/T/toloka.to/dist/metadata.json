@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "PlayDay",
+    "id": "249952042557243402"
+  },
+  "url": "toloka.to",
+  "description": {
+    "en": "Toloka.to is the largest BitTorrent tracker of UKRnet, specializing in the distribution of content exclusively in Ukrainian language.",
+    "ru": "Toloka.to - крупнейший BitTorrent-трекер в УКРнете, специализирующаяся на распространении контента исключительно на украинском языке",
+    "uk_UA": "Toloka.to — найбільший BitTorrent-трекер УКРнету, що спеціалізується на поширенні контенту виключно українською мовою."
+  },
+  "service": "Toloka",
+  "altnames": [
+    "Толока"
+  ],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/CZEc0f0.png",
+  "thumbnail": "https://i.imgur.com/39koG5p.png",
+  "color": "#9FB820",
+  "tags": [
+    "torrent",
+    "toloka",
+    "ua",
+    "ukranian",
+    "ukraine"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "name",
+      "title": "Показувати нікнейми співрозмовників в ПП",
+      "icon": "fas fa-user",
+      "value": true
+    },
+    {
+      "id": "search",
+      "title": "Показувати пошукові запити",
+      "icon": "fas fa-search",
+      "value": true
+    }
+  ]
+}

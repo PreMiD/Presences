@@ -59,11 +59,18 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
 
+    presenceData.buttons = [
+      { label: "Ver Película", url: window.location.href }
+    ];
+
     presence.setActivity(presenceData, !video.paused);
   } else if (document.location.pathname.includes("/serie/")) {
     presenceData.details = document.querySelector(`h1.Title`).textContent;
     presenceData.smallImageKey = "browsing";
     presenceData.smallImageText = (await strings).browsing;
+    presenceData.buttons = [
+      { label: "Ver Episodio", url: window.location.href }
+    ];
     presence.setActivity(presenceData);
   } else {
     presenceData.details = (await strings).browsing;

@@ -13,7 +13,7 @@
     "www.joyn.de",
     "joyn.de"
   ],
-  "version": "1.1.1",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/SrAaJDz.jpg",
   "thumbnail": "https://i.imgur.com/NsmbW8l.png",
   "color": "#000",
@@ -27,6 +27,12 @@
       "id": "timeRemaining",
       "title": "Verbleibende Zeit einblenden",
       "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Buttons anzeigen",
+      "icon": "fad fa-mouse-pointer",
       "value": true
     }
   ]
