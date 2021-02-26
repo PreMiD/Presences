@@ -21,7 +21,7 @@
   },
   "url": "www.disneyplus.com",
   "regExp": "([a-z0-9-]+[.])*disneyplus[.]com[/]|([a-z0-9-]+[.])*hotstar[.]com[/]",
-  "version": "1.3.8",
+  "version": "1.4.0",
   "logo": "https://i.imgur.com/zuUeb2A.png",
   "thumbnail": "https://i.imgur.com/KKRJx25.png",
   "color": "#233778",

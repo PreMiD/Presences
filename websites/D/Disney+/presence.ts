@@ -23,24 +23,24 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: LangStrings;
-let oldLang: string;
-let title: string;
-let subtitle: string;
-let groupWatchCount: number;
+let strings: LangStrings,
+    oldLang: string,
+    title: string,
+    subtitle: string,
+    groupWatchCount: number;
 
 presence.on("UpdateData", async () => {
-  const newLang: string = await presence.getSetting("lang");
-  const time: boolean = await presence.getSetting("time");
-  const buttons: boolean = await presence.getSetting("buttons");
-  const groupWatchBtn: boolean = await presence.getSetting("groupWatchBtn");
-  const isHostDP = /(www\.)?disneyplus\.com/.test(location.hostname);
-  const isHostHS = /(www\.)?hotstar\.com/.test(location.hostname);
-  const data: PresenceData & {
-    partyId?: string;
-    partySize?: number;
-    partyMax?: number;
-  } = {};
+  const newLang: string = await presence.getSetting("lang"),
+        time: boolean = await presence.getSetting("time"),
+        buttons: boolean = await presence.getSetting("buttons"),
+        groupWatchBtn: boolean = await presence.getSetting("groupWatchBtn"),
+        isHostDP = /(www\.)?disneyplus\.com/.test(location.hostname),
+        isHostHS = /(www\.)?hotstar\.com/.test(location.hostname),
+        data: PresenceData & {
+          partyId?: string;
+          partySize?: number;
+          partyMax?: number;
+        } = {};
 
   // Update strings when user sets language
   if (!oldLang || oldLang !== newLang) {
@@ -61,8 +61,8 @@ presence.on("UpdateData", async () => {
     );
 
     if (video && !isNaN(video.duration)) {
-      const groupWatchId = new URLSearchParams(location.search).get("groupWatchId");
-      const timestamps: number[] = presence.getTimestampsfromMedia(video);
+      const groupWatchId = new URLSearchParams(location.search).get("groupWatchId"),
+            timestamps: number[] = presence.getTimestampsfromMedia(video);
 
       if (groupWatchId) {
         groupWatchCount = Number(document.querySelector(
@@ -70,19 +70,15 @@ presence.on("UpdateData", async () => {
         )?.textContent);
       }
 
-      const titleField: HTMLDivElement = document.querySelector(
-        ".btm-media-overlays-container .title-field"
-      );
+      const titleField: HTMLDivElement = document.querySelector(".btm-media-overlays-container .title-field"),
+            subtitleField: HTMLDivElement = document.querySelector(".btm-media-overlays-container .subtitle-field");
+
       title = titleField?.textContent;
-      const subtitleField: HTMLDivElement = document.querySelector(
-        ".btm-media-overlays-container .subtitle-field"
-      );
-      // subtitleField is episode for series, empty for movies
-      subtitle = subtitleField?.textContent;
+      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
 
       if (groupWatchId) {
-        data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`
-        data.state = "In a GroupWatch"
+        data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
+        data.state = "In a GroupWatch";
       } else {
         data.details = title;
         data.state = subtitle || "Movie";
@@ -145,9 +141,8 @@ presence.on("UpdateData", async () => {
       title = movieField?.alt;
     }
 
-    data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`
-    data.state = "Starting a GroupWatch"
-
+    data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
+    data.state = "Starting a GroupWatch";
     // set GroupWatch participants size
     data.partySize = groupWatchCount;
     data.partyMax = 7;
@@ -169,21 +164,15 @@ presence.on("UpdateData", async () => {
     );
 
     if (video && !isNaN(video.duration)) {
-      const timestamps: number[] = presence.getTimestampsfromMedia(video);
+      const timestamps: number[] = presence.getTimestampsfromMedia(video),
+            titleField: HTMLDivElement = document.querySelector(".controls-overlay .primary-title"),
+            subtitleField: HTMLDivElement = document.querySelector(".controls-overlay .show-title");
 
-      const titleField: HTMLDivElement = document.querySelector(
-        ".controls-overlay .primary-title"
-      );
       title = titleField?.textContent;
-      const subtitleField: HTMLDivElement = document.querySelector(
-        ".controls-overlay .show-title"
-      );
-      subtitle = subtitleField?.textContent;
+      subtitle = subtitleField?.textContent; // episode or empty if it's a movie
 
-      // subtitleField is episode for series, empty for movies
       data.details = title;
       data.state = subtitle || "Movie";
-
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused
         ? strings.pause
