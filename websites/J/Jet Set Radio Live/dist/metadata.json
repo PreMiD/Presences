@@ -15,7 +15,7 @@
     "en": "Yo! You've heard about Jet Set Radio, right? It's only the hottest radio station straight outta Tokyo-to! Tune in. Turn on. Jet Set Radiooo!!!"
   },
   "url": "jetsetradio.live",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "logo": "https://i.imgur.com/ZiIN6t9.png",
   "thumbnail": "https://i.imgur.com/TmgNbn4.jpeg",
   "color": "#FFE222",
@@ -35,6 +35,12 @@
       "id": "timestamp",
       "title": "Show Timestamps",
       "icon": "fas fa-clock",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Presence Buttons",
+      "icon": "fas fa-th-large",
       "value": true
     }
   ]

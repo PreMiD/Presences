@@ -14,6 +14,7 @@
     }
   ],
   "service": "YouTube",
+  "altnames": ["Ютюб", "Եություպ", "ՅուԹյուբ", "יוטוב", "יוטיוב", "يوتوب", "يوتىيۇب", "يوتيوب", "يوټيوب", "يوٽيوب", "یو ٹیوب", "یوتیوب", "یووتیووب", "یوٹیوب", "युट्युब", "यूट्यूब", "ইউটিউব", "ਯੂਟਿਊਬ", "યુટ્યુબ", "ୟୁ ଟ୍ୟୁବ", "யூடியூப்", "యూట్యూబ్", "ಯೂಟ್ಯೂಬ್‌", "യൂട്യൂബ്", "යූ ටියුබ්", "ยูทูบ", "ຢູທູບ", "ယူကျု(ဘ်)", "ယူႇၵျုပ်ႉ", "ዩ ቱብ", "ᱤᱭᱩᱴᱩᱵᱽ", "優管", "유튜브"],
   "description": {
     "en": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
     "ro": "Bucură-te de videoclipuri și muzica pe care o iubești, încarcă conținut original, și partajează-le cu prietenii, familia și lumea de pe YouTube.",
@@ -29,7 +30,7 @@
     "www.youtube.com",
     "studio.youtube.com"
   ],
-  "version": "5.0.0",
+  "version": "5.1.1",
   "logo": "https://i.imgur.com/C9ZEmge.png",
   "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
   "color": "#E40813",
@@ -73,7 +74,16 @@
       "title": "Video Details row2",
       "icon": "fas fa-comment-alt-edit",
       "value": "%uploader%",
-      "placeholder": "Use %title% or %uploader%"
+      "placeholder": "Use %title%, %uploader% or {0} to delete the row completely"
+    },
+    {
+      "id": "buttons",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
     }
   ]
 }

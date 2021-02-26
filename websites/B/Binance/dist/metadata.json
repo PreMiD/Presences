@@ -6,6 +6,8 @@
   },
   "url": [
     "www.binance.com",
+    "voptions.binance.com",
+    "cloud.binance.com",
     "pool.binance.com",
     "academy.binance.com",
     "launchpad.binance.com",
@@ -16,7 +18,7 @@
     "ru": "Крупнейшая в мире криптобиржа"
   },
   "service": "Binance",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/3uoPh09.png",
   "thumbnail": "https://i.imgur.com/m5v9X9P.jpg",
   "color": "#f0b90b",

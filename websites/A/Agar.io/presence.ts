@@ -26,8 +26,9 @@ let gameStartTimestamp: number = null,
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "agar"
-  };
+      largeImageKey: "agar"
+    },
+    buttons = await presence.getSetting("buttons");
 
   if (agarData) {
     if (agarData.connecting) {
@@ -56,6 +57,17 @@ presence.on("UpdateData", async () => {
       }
       data.state = gameModeMap[agarData.gameMode];
       data.startTimestamp = gameStartTimestamp;
+
+      if (buttons) {
+        const code = document.querySelector(".partymode-info > #code");
+        if (code)
+          data.buttons = [
+            {
+              label: "Join Party",
+              url: document.URL
+            }
+          ];
+      }
     }
   }
 
