@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
       if (!search) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Viewing the homepage";
-      } else if (search.value != "") {
+      } else if (search.value !== "") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Searching For:";
         presenceData.state = search.value;
@@ -105,7 +105,7 @@ presence.on("UpdateData", async () => {
     search = document.querySelector("#\\31 37\\:0");
     title = document.querySelector("head > title");
     if (page === "/s/") {
-      if (search.value != "") {
+      if (search.value !== "") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Helpdesk searching for:";
         presenceData.state = search.value;
