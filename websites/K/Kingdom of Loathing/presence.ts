@@ -91,7 +91,6 @@ function setActivity(state: string) {
     details: formatDetails(),
     state,
     largeImageKey: "kol",
-    largeImageText: kolStatus.name,
     buttons: generateButtons()
   } as PresenceData);
 }
