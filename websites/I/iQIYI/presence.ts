@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
       isTrial = document.querySelector('.iqp-player-g.iqp-player .iqp-tip-stream .iqp-txt-vip')?.textContent !== undefined,
       lastestEp: string[] = document.querySelector('div.broken-line')?.nextSibling?.nextSibling?.nextSibling?.textContent?.match(/[1-9]?[0-9]?[0-9]/g),
       contentEp: string[] = isVShowToo ?  data.ep.match(/([1-9]?[0-9]?[0-9]? ?\([1-9]?[0-9]\))/g) : data.ep.match(/[1-9]?[0-9]?[0-9]/g),
-      isPreview = (lastestEp && contentEp) ? parseInt(contentEp[0], 10) > parseInt(lastestEp[0], 10) : data.ep.toLowerCase().includes("preview");
+      isPreview = (lastestEp && contentEp && !isVShow && !isVShowToo) ? parseInt(contentEp[0], 10) > parseInt(lastestEp[0], 10) : data.ep.toLowerCase().includes("preview");
 
       if (!data.ep && !isVShow && isMovie) data.ep = "Movie";
       if (isVShowToo) { 
