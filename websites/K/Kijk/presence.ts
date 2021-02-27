@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
          rp2 = rp23.length + 21,
          rp = titles.content.slice(-rp2);
         presenceData.details = titles.content.replace("Seizoen", "").replace("aflevering", "").replace(/[0-9]/g, '');
-        presenceData.state = rp.replace("/\,/g", ":").replace("Seizoen", "S").replace("aflevering", ":E").replace(/\s/g, "");
+        presenceData.state = rp.replace("/,/g", ":").replace("Seizoen", "S").replace("aflevering", ":E").replace(/\s/g, "");
         title2 = document.querySelector("#player");
         if (title2.className.includes("paused")) {
           delete presenceData.endTimestamp;
