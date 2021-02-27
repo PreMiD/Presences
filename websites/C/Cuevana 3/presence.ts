@@ -29,10 +29,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.match("^/[0-9]") ||
     document.location.pathname.includes("/episodio")
   ) {
-    const timestamps = presence.getTimestamps(
-      Math.floor(video.currentTime),
-      Math.floor(video.duration)
-      ),
+    const timestamps = presence.getTimestamps(video.currentTime, video.duration),
       titulo = document.querySelector(`h1.Title`).textContent,
       subtitulo = document.querySelector(`h2.SubTitle`).textContent;
 
