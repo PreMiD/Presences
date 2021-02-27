@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = showname[0].textContent;
       title3 = document.querySelector("#player")
       if (title3.className.includes("paused")) {
-        delete presenceData.endTimestamp
+        delete presenceData.endTimestamp;
         presenceData.smallImageKey = "pause";
       } else if (title3.className.includes("playing")) {
         const currentTime = presence.timestampFromFormat(
@@ -66,21 +66,21 @@ presence.on("UpdateData", async () => {
             .textContent
         ),
         timestamps = presence.getTimestamps(currentTime, durationss);
-        presenceData.endTimestamp = timestamps[1]
+        presenceData.endTimestamp = timestamps[1];
         presenceData.smallImageKey = "play";
     }
   }
       if (page.includes("/afleveringen/video/")) {
-        delete presenceData.startTimestamp
+        delete presenceData.startTimestamp;
         const titles = document.querySelector('meta[name="og:title"]') as HTMLMetaElement,
          rp23 = titles.content.replace(/[^0-9.]/g, ''),
          rp2 = rp23.length + 21,
          rp = titles.content.slice(-rp2);
-        presenceData.details = titles.content.replace("Seizoen", "").replace("aflevering", "").replace(/[0-9]/g, '')
+        presenceData.details = titles.content.replace("Seizoen", "").replace("aflevering", "").replace(/[0-9]/g, '');
         presenceData.state = rp.replace("/\,/g", ":").replace("Seizoen", "S").replace("aflevering", ":E").replace(/\s/g, "");
-        title3 = document.querySelector("#player")
+        title3 = document.querySelector("#player");
         if (title3.className.includes("paused")) {
-          delete presenceData.endTimestamp
+          delete presenceData.endTimestamp;
           presenceData.smallImageKey = "pause";
         } else if (title3.className.includes("playing")) {
           const currentTime = presence.timestampFromFormat(
@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
               .textContent
           ),
           timestamps = presence.getTimestamps(currentTime, durationss);
-          presenceData.endTimestamp = timestamps[1]
+          presenceData.endTimestamp = timestamps[1];
           presenceData.smallImageKey = "play";
       } else {
       title = document.querySelector("#__next > div > div > div.Mainstyle__MainContentStyle-l53ku6-1.kgsvtU > div > div.Layoutstyle__LightStyle-ecv4pg-0.Formatstyle__FormatLightStyleWrapperStyle-q2lvra-0.beAxHC > div.PromoImageHeadingstyle__PromoImageHeadingStyle-sc-13od09h-0.bwAzes > div.PromoImageHeadingstyle__PromoImageHeadingInnerWrapperStyle-sc-13od09h-2.klAHSa > div > div > div > div.FormatHeadingstyle__FormatHeadingImageWithTextWrapperStyle-sc-148hpqf-1.YJtQc > div.FormatHeadingstyle__FormatHeadingTextStyle-sc-148hpqf-2.glOvjd > h1")
