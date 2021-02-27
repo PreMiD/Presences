@@ -3,16 +3,7 @@ const presence = new Presence({
 }), browsingStamp = Math.floor(Date.now() / 1000);
 let search: HTMLInputElement,
 title: HTMLElement,
-title2: HTMLElement,
-title3: HTMLElement;
-
-function checkFlag(titles: Element) {
-  if(titles === null) {
-     window.setTimeout(checkFlag, 100); /* this checks the flag every 100 milliseconds*/
-  } else {
-    return;
-  }
-}
+title2: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -39,24 +30,24 @@ presence.on("UpdateData", async () => {
       }
     }
     if (page === "/programmas" || page === "/programmas/") {
-      presenceData.details = "Discovering:"
-      presenceData.state = "Programma's"
+      presenceData.details = "Discovering:";
+      presenceData.state = "Programma's";
       presenceData.startTimestamp = browsingStamp;
     }
     if (page === "/films" || page === "/films/") {
-      presenceData.details = "Discovering:"
-      presenceData.state = "Films"
+      presenceData.details = "Discovering:";
+      presenceData.state = "Films";
       presenceData.startTimestamp = browsingStamp;
     }
     if (page.includes("/films/video/")) {
-      delete presenceData.startTimestamp
+      delete presenceData.startTimestamp;
        const showname = document.getElementsByClassName("Textstyle__VideoMetaDataTitle-sc-2ihbn2-17") as HTMLCollection;
         presenceData.details = showname[0].textContent;
-      title3 = document.querySelector("#player")
-      if (title3.className.includes("paused")) {
+      title2 = document.querySelector("#player");
+      if (title2.className.includes("paused")) {
         delete presenceData.endTimestamp;
         presenceData.smallImageKey = "pause";
-      } else if (title3.className.includes("playing")) {
+      } else if (title2.className.includes("playing")) {
         const currentTime = presence.timestampFromFormat(
           document.querySelector("#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-elapsed")
             .textContent
@@ -78,11 +69,11 @@ presence.on("UpdateData", async () => {
          rp = titles.content.slice(-rp2);
         presenceData.details = titles.content.replace("Seizoen", "").replace("aflevering", "").replace(/[0-9]/g, '');
         presenceData.state = rp.replace("/\,/g", ":").replace("Seizoen", "S").replace("aflevering", ":E").replace(/\s/g, "");
-        title3 = document.querySelector("#player");
-        if (title3.className.includes("paused")) {
+        title2 = document.querySelector("#player");
+        if (title2.className.includes("paused")) {
           delete presenceData.endTimestamp;
           presenceData.smallImageKey = "pause";
-        } else if (title3.className.includes("playing")) {
+        } else if (title2.className.includes("playing")) {
           const currentTime = presence.timestampFromFormat(
             document.querySelector("#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-elapsed")
               .textContent
@@ -95,7 +86,7 @@ presence.on("UpdateData", async () => {
           presenceData.endTimestamp = timestamps[1];
           presenceData.smallImageKey = "play";
       } else {
-      title = document.querySelector("#__next > div > div > div.Mainstyle__MainContentStyle-l53ku6-1.kgsvtU > div > div.Layoutstyle__LightStyle-ecv4pg-0.Formatstyle__FormatLightStyleWrapperStyle-q2lvra-0.beAxHC > div.PromoImageHeadingstyle__PromoImageHeadingStyle-sc-13od09h-0.bwAzes > div.PromoImageHeadingstyle__PromoImageHeadingInnerWrapperStyle-sc-13od09h-2.klAHSa > div > div > div > div.FormatHeadingstyle__FormatHeadingImageWithTextWrapperStyle-sc-148hpqf-1.YJtQc > div.FormatHeadingstyle__FormatHeadingTextStyle-sc-148hpqf-2.glOvjd > h1")
+      title = document.querySelector("#__next > div > div > div.Mainstyle__MainContentStyle-l53ku6-1.kgsvtU > div > div.Layoutstyle__LightStyle-ecv4pg-0.Formatstyle__FormatLightStyleWrapperStyle-q2lvra-0.beAxHC > div.PromoImageHeadingstyle__PromoImageHeadingStyle-sc-13od09h-0.bwAzes > div.PromoImageHeadingstyle__PromoImageHeadingInnerWrapperStyle-sc-13od09h-2.klAHSa > div > div > div > div.FormatHeadingstyle__FormatHeadingImageWithTextWrapperStyle-sc-148hpqf-1.YJtQc > div.FormatHeadingstyle__FormatHeadingTextStyle-sc-148hpqf-2.glOvjd > h1");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing:";
       presenceData.state = title.textContent;
