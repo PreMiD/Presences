@@ -30,17 +30,15 @@ presence.on("UpdateData", async () => {
                 /*Try to get Metadata: Viewers, Game Name, if the elements don't exist, assume the user is on the indexpage */
                 try {
                     activityName = (document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLDivElement);
-                    userCount= parseInt((document.querySelector(`a[class="item swipableMenuItem-2YW"]`) as HTMLElement).textContent.trim(), 10) - 1;
+                    userCount = parseInt((document.querySelectorAll(`div[class="ui tabular swipableMenu-xjk menu"] > a`)[1] as HTMLDivElement).textContent.trim(), 10) - 1;
                 } catch {
-                    details = "Choosing an activity";
-                    smallImageKey = "reading";
-                    state = null;
+                    return "element does not exist"
                  }
                  /* Re-set the index status, as user is likely on the index page again and the Metadata objects exist now */
                 details = "Choosing an activity";
                 smallImageKey = "reading";
                  /* Show the usercount in the lower text */
-                 state = userCount === 0 && userCount !== undefined ? "Alone" : `In a room with ${userCount} others`;
+                 state = userCount === 0 ? "Alone" : `With ${userCount} others`;
                     
                 /* This is executed if the user plays a game that is not in the "Special Activities" Array */
                 if (activityName !== null && !noGames.includes(activityName.textContent ) ) {
@@ -73,7 +71,6 @@ presence.on("UpdateData", async () => {
         const presenceData: PresenceData = {
             largeImageKey: "kosmimain",
             smallImageKey,
-            smallImageText: userCount === 0 ? "Alone" : `With ${userCount} other(s)`,
             details,
             state,
             startTimestamp: browsingStamp
