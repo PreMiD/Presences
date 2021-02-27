@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
                     activityName = (document.querySelector(`div[class="appTitle-WJ3"]`) as HTMLDivElement);
                     userCount = parseInt((document.querySelectorAll(`div[class="ui tabular swipableMenu-xjk menu"] > a`)[1] as HTMLDivElement).textContent.trim(), 10) - 1;
                 } catch {
-                    return "element does not exist"
+                    return "element does not exist";
                  }
                  /* Re-set the index status, as user is likely on the index page again and the Metadata objects exist now */
                 details = "Choosing an activity";
