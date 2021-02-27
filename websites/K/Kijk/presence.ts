@@ -7,7 +7,7 @@ title2: HTMLElement,
 title3: HTMLElement;
 
 function checkFlag(titles: Element) {
-  if(titles == null) {
+  if(titles === null) {
      window.setTimeout(checkFlag, 100); /* this checks the flag every 100 milliseconds*/
   } else {
     return;
@@ -22,8 +22,8 @@ presence.on("UpdateData", async () => {
   host = document.location.hostname; 
 
     presenceData.startTimestamp = browsingStamp;
-    if (host == "www.kijk.nl") {
-    if (page == "/") {
+    if (host === "www.kijk.nl") {
+    if (page === "/") {
       search = document.querySelector("#__next > div > div > div.SearchModalstyle__SearchModalStyle-sc-1h6b5wy-0.knmuVj > div.SearchModalstyle__SearchModalHeaderStyle-sc-1h6b5wy-1.kNvWZE > div > div:nth-child(2) > div.SearchModalstyle__SearchModalInputWrapperStyle-sc-1h6b5wy-5.iwOFOK > input");
       if (!search) {
         presenceData.startTimestamp = browsingStamp;
@@ -38,19 +38,19 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing the homepage";
       }
     }
-    if (page == "/programmas" || page == "/programmas/") {
+    if (page === "/programmas" || page === "/programmas/") {
       presenceData.details = "Discovering:"
       presenceData.state = "Programma's"
       presenceData.startTimestamp = browsingStamp;
     }
-    if (page == "/films" || page == "/films/") {
+    if (page === "/films" || page === "/films/") {
       presenceData.details = "Discovering:"
       presenceData.state = "Films"
       presenceData.startTimestamp = browsingStamp;
     }
     if (page.includes("/films/video/")) {
       delete presenceData.startTimestamp
-       var showname = document.getElementsByClassName("Textstyle__VideoMetaDataTitle-sc-2ihbn2-17") as HTMLCollection;
+       const showname = document.getElementsByClassName("Textstyle__VideoMetaDataTitle-sc-2ihbn2-17") as HTMLCollection;
         presenceData.details = showname[0].textContent;
       title3 = document.querySelector("#player")
       if (title3.className.includes("paused")) {
@@ -72,12 +72,12 @@ presence.on("UpdateData", async () => {
   }
       if (page.includes("/afleveringen/video/")) {
         delete presenceData.startTimestamp
-        let titles = document.querySelector('meta[name="og:title"]') as HTMLMetaElement;
-        let rp23 = titles.content.replace(/[^0-9.]/g, '');
-        let rp2 = rp23.length + 21
-        let rp = titles.content.slice(-rp2)
+        const titles = document.querySelector('meta[name="og:title"]') as HTMLMetaElement,
+         rp23 = titles.content.replace(/[^0-9.]/g, ''),
+         rp2 = rp23.length + 21,
+         rp = titles.content.slice(-rp2);
         presenceData.details = titles.content.replace("Seizoen", "").replace("aflevering", "").replace(/[0-9]/g, '')
-        presenceData.state = rp.replace(",", ":").replace("Seizoen", "S").replace("aflevering", ":E").replace(/\s/g, "");
+        presenceData.state = rp.replace("/\,/g", ":").replace("Seizoen", "S").replace("aflevering", ":E").replace(/\s/g, "");
         title3 = document.querySelector("#player")
         if (title3.className.includes("paused")) {
           delete presenceData.endTimestamp
@@ -101,10 +101,10 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.textContent;
     }
   }
-  } else if (host == "help.marktplaats.nl") {
+  } else if (host === "help.marktplaats.nl") {
     search = document.querySelector("#\\31 37\\:0");
     title = document.querySelector("head > title");
-    if (page == "/s/") {
+    if (page === "/s/") {
       if (search.value != "") {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Helpdesk searching for:";
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
