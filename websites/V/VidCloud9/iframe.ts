@@ -6,9 +6,9 @@ iframe.on("UpdateData", async () => {
       "#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
     ) !== null
   ) {
-    video = (document.querySelector(
+    video = document.querySelector(
       "#myVideo > div.jw-wrapper.jw-reset > div.jw-media.jw-reset > video"
-    ) as HTMLVideoElement);
+    ) as HTMLVideoElement;
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {
@@ -20,7 +20,7 @@ iframe.on("UpdateData", async () => {
       });
     }
   } else if (document.querySelector("#myVideo") !== null) {
-    video = (document.querySelector("#myVideo") as HTMLVideoElement);
+    video = document.querySelector("#myVideo") as HTMLVideoElement;
     if (video != undefined && !isNaN(video.duration)) {
       iframe.send({
         iframe_video: {

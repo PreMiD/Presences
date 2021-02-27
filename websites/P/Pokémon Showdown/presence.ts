@@ -25,10 +25,10 @@ presence.on("UpdateData", async () => {
     data.state = users;
     data.buttons = [
       {
-              label: "Spectate",
-              url: document.baseURI
-          }
-      ];
+        label: "Spectate",
+        url: document.baseURI
+      }
+    ];
     if (elapsed == null) {
       elapsed = Math.floor(Date.now() / 1000);
     }

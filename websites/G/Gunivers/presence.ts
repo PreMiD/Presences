@@ -30,7 +30,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.title
         .replace(" | Gunivers", "")
         .replace("Chronique Mensuelle - ", "");
-        if(button) presenceData.buttons = [
+      if (button)
+        presenceData.buttons = [
           {
             label: "View chronicle",
             url: document.URL
@@ -79,21 +80,23 @@ presence.on("UpdateData", async () => {
     ) {
       presenceData.details = "Reading an article:";
       presenceData.state = document.title.replace(" | Gunivers", "");
-      if(button) presenceData.buttons = [
-        {
-          label: "View article",
-          url: document.URL
-        }
-      ];
-      if (window.location.pathname.includes("/author/")) {
-        presenceData.details = "Looking for an user:";
-        presenceData.state = document.title.replace(" | Gunivers", "");
-        if(button) presenceData.buttons = [
+      if (button)
+        presenceData.buttons = [
           {
-            label: "View user",
+            label: "View article",
             url: document.URL
           }
         ];
+      if (window.location.pathname.includes("/author/")) {
+        presenceData.details = "Looking for an user:";
+        presenceData.state = document.title.replace(" | Gunivers", "");
+        if (button)
+          presenceData.buttons = [
+            {
+              label: "View user",
+              url: document.URL
+            }
+          ];
       }
     } else if (
       window.location.pathname.length === 1 ||
@@ -112,21 +115,23 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.startsWith("/projects/")) {
       presenceData.details = "Reading a project:";
       presenceData.state = document.title.split(" - ")[1];
-    if(button) presenceData.buttons = [
-        {
-          label: "View project",
-          url: document.URL
-        }
-      ];
+      if (button)
+        presenceData.buttons = [
+          {
+            label: "View project",
+            url: document.URL
+          }
+        ];
     } else if (window.location.pathname.startsWith("/users/")) {
       presenceData.details = "Looking for an user:";
       presenceData.state = document.querySelector("#content > h2").textContent;
-      if(button) presenceData.buttons = [
-        {
-          label: "View user",
-          url: document.URL
-        }
-      ];
+      if (button)
+        presenceData.buttons = [
+          {
+            label: "View user",
+            url: document.URL
+          }
+        ];
     }
   }
 
