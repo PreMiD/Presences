@@ -92,27 +92,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.textContent;
     }
   }
-  } else if (host === "help.marktplaats.nl") {
-    search = document.querySelector("#\\31 37\\:0");
-    title = document.querySelector("head > title");
-    if (page === "/s/") {
-      if (search.value !== "") {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Helpdesk searching for:";
-        presenceData.state = search.value;
-        presenceData.smallImageKey = "searching";
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Checking out the helpdesk";
-      }
     }
-    if (page.includes("/topic/")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Helpdesk viewing:";
-      presenceData.state = title.textContent.replace(" | Helpdesk", "");
-      presenceData.smallImageKey = "reading";
-    }
-  }
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
