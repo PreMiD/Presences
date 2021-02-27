@@ -37,7 +37,6 @@ presence.on("UpdateData", async () => {
         isHostDP = /(www\.)?disneyplus\.com/.test(location.hostname),
         isHostHS = /(www\.)?hotstar\.com/.test(location.hostname),
         data: PresenceData & {
-          partyId?: string;
           partySize?: number;
           partyMax?: number;
         } = {};
