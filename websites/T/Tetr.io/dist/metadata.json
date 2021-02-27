@@ -21,7 +21,13 @@
   "settings": [
     {
       "id": "privateRoom",
-      "title": "Show \"Enter Room\" button in private rooms",
+      "title": "Show Private Room button",
+      "icon": "fas fa-user-secret",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
     }

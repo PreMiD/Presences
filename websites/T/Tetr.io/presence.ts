@@ -28,6 +28,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo"
     }, showPrivButton = await presence.getSetting("privateRoom"),
+    showButtons = await presence.getSetting("showButtons"),
     header = getText(SelectorMap["header"]),
     status = getText(SelectorMap["social_status"]),
     game = getText(SelectorMap["game"]),
@@ -97,7 +98,7 @@ presence.on("UpdateData", async () => {
     browsingStamp = Math.floor(Date.now() / 1000);
     presenceData.details = "In Menus";
   }
-  if (getText(SelectorMap["username"]) !== "" && !getText(SelectorMap["username"]).includes("guest-")) {
+  if (getText(SelectorMap["username"]) !== "" && !getText(SelectorMap["username"]).includes("guest-") && showButtons) {
     buttons.push({
       label: "Check Profile",
       url: "https://ch.tetr.io/u/" + getText(SelectorMap["username"])
