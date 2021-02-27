@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
+  },
+  "url": "www.kijk.nl",
+  "description": {
+    "nl": "Kijk opent je ogen",
+    "en": "Kijk opens your eyes."
+  },
+  "service": "Kijk",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/LSOqk1G.png",
+  "thumbnail": "https://i.imgur.com/vBQdKP7.jpg",
+  "color": "#FF0000",
+  "tags": [
+    "nl",
+    "dutch",
+    "kijk",
+    "nederlands",
+    "video"
+  ],
+  "category": "videos"
+}
