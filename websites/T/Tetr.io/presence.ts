@@ -62,13 +62,13 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Custom Room";
     if(status.includes("public"))
       buttons.push({
-        label: "Enter Room",
+        label: "Enter Public Room",
         url: "https://tetr.io/" + roomID
       });
     else
       if(showPrivButton)
         buttons.push({
-          label: "Enter Room",
+          label: "Enter Private Room",
           url: "https://tetr.io/" + roomID
         });
   } else if (status.includes("QUICK")){
