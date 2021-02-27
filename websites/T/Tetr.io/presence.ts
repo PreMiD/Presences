@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
     status = getText(SelectorMap["social_status"]),
     game = getText(SelectorMap["game"]),
     roomID = getText(SelectorMap["roomid"]);
-  let buttons:{ label: string; url: string; }[] = new Array();
+  let buttons:Array<{ label: string; url: string; }> = [];
   if (menuPrincipal.includes(header)){
     browsingStamp = Math.floor(Date.now() / 1000);
     presenceData.details = header;
