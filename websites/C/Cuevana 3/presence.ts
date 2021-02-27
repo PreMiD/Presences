@@ -7,16 +7,16 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-let video = {
-  duration: 0,
-  currentTime: 0,
-  paused: true
-};
+let iFrameVideo:boolean,
+  videoPaused:boolean,
+  timestamps: number[];
 
 presence.on(
   "iFrameData",
-  (data: { duration: number; currentTime: number; paused: boolean }) => {
-    video = data;
+  (data: { iFrameVideo:boolean; duration: number; currentTime: number; paused: boolean }) => {
+    iFrameVideo = data.iFrameVideo;
+    timestamps = presence.getTimestamps(data.currentTime, data.duration);
+    videoPaused = data.paused;
   }
 );
 
@@ -29,8 +29,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.match("^/[0-9]") ||
     document.location.pathname.includes("/episodio")
   ) {
-    const timestamps = presence.getTimestamps(video.currentTime, video.duration),
-      titulo = document.querySelector(`h1.Title`).textContent,
+    const titulo = document.querySelector(`h1.Title`).textContent,
       subtitulo = document.querySelector(`h2.SubTitle`).textContent;
 
     if (!document.location.pathname.includes("/episodio")) {
@@ -55,19 +54,21 @@ presence.on("UpdateData", async () => {
       ];
     }
 
-    (presenceData.smallImageKey = video.paused ? "pause" : "play"),
-      (presenceData.smallImageText = video.paused
-        ? (await strings).pause
-        : (await strings).play),
-      (presenceData.startTimestamp = timestamps[0]),
-      (presenceData.endTimestamp = timestamps[1]);
+    if(iFrameVideo) {
+      (presenceData.smallImageKey = videoPaused ? "pause" : "play"),
+        (presenceData.smallImageText = videoPaused
+          ? (await strings).pause
+          : (await strings).play),
+        (presenceData.startTimestamp = timestamps[0]),
+        (presenceData.endTimestamp = timestamps[1]);
 
-    if (video.paused) {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
+      if (videoPaused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
     }
 
-    presence.setActivity(presenceData, !video.paused);
+    presence.setActivity(presenceData, !videoPaused);
   } else if (document.location.pathname.includes("/serie/")) {
     presenceData.details = document.querySelector(`h1.Title`).textContent;
     presenceData.smallImageKey = "browsing";
