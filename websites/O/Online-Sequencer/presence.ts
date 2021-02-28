@@ -16,19 +16,19 @@ presence.on("UpdateData", async () => {
   if (document.getElementsByClassName("fas fa-stop")[0] != undefined) {
     presenceData.details = "Listening to a sequence";
     presenceData.state =
-      "Title: " + (<HTMLInputElement>document.getElementById("title")).value;
-    presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(<HTMLAnchorElement>document.querySelector("#titlebar div a")).href}];
+      "Title: " + (document.getElementById("title") as HTMLInputElement).value;
+    presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(document.querySelector("#titlebar div a") as HTMLAnchorElement).href}];
   } else if (document.location.pathname == "/") {
     presenceData.details = "Writing a new sequence";
     presenceData.state =
-      "Title: " + (<HTMLInputElement>document.getElementById("title")).value;
+      "Title: " + (document.getElementById("title") as HTMLInputElement).value;
   } else if (document.location.pathname == "/sequences") {
     presenceData.details = "Browsing sequences";
     if (document.getElementsByTagName("input")[2].value != "") {
       refreshtime = false;
       presenceData.state =
         "Searching: " +
-        (<HTMLInputElement>document.getElementsByTagName("input")[2]).value;
+        (document.getElementsByTagName("input")[2] as HTMLInputElement).value;
     }
   } else if (document.location.pathname == "/memberlist") {
     presenceData.details = "Viewing members";
@@ -36,20 +36,18 @@ presence.on("UpdateData", async () => {
       refreshtime = false;
       presenceData.state =
         "Searching: " +
-        (<HTMLInputElement>document.getElementsByTagName("input")[2]).value;
+        (document.getElementsByTagName("input")[2] as HTMLInputElement).value;
     }
   } else if (document.location.pathname.startsWith("/members/")) {
     presenceData.details = "Viewing member:";
-    presenceData.state = (<HTMLElement>(
-      document.getElementsByClassName("profile_header")[0]
-    )).innerText;
+    presenceData.state = (
+      document.getElementsByClassName("profile_header")[0] as HTMLElement).innerText;
   } else if (document.location.pathname.startsWith("/import")) {
     presenceData.details = "Importing MIDI file";
   } else if (document.location.pathname.startsWith("/forum/showthread")) {
     presenceData.details = "Viewing Forum Thread:";
-    const threadtitle = (<HTMLElement>(
-      document.getElementsByClassName("thead")[0]
-    )).innerText;
+    const threadtitle = (
+      document.getElementsByClassName("thead")[0] as HTMLElement).innerText;
     if (threadtitle.includes("Thread Modes")) {
       presenceData.state = threadtitle.substr(13);
     } else {
@@ -57,13 +55,11 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.startsWith("/forum/announcements")) {
     presenceData.details = "Viewing Forum Announcement:";
-    presenceData.state = (<HTMLElement>document.getElementsByClassName("thead")[0])
-      .innerText;
+    presenceData.state = (document.getElementsByClassName("thead")[0] as HTMLElement).innerText;
   } else if (document.location.pathname.startsWith("/forum/forumdisplay")) {
     presenceData.details = "Viewing Forum Category:";
-    presenceData.state = (<HTMLElement>(
-      document.getElementsByClassName("pull-left navbar-header")[0]
-    )).innerText;
+    presenceData.state = (
+      document.getElementsByClassName("pull-left navbar-header")[0] as HTMLElement).innerText;
   } else if (document.location.pathname.startsWith("/forum/memberlist")) {
     presenceData.details = "Viewing Forum Members";
   } else if (document.location.pathname.startsWith("/forum")) {
@@ -73,13 +69,12 @@ presence.on("UpdateData", async () => {
       document.getElementsByClassName("active tooltipstered")[0] == undefined
     ) {
       presenceData.details = "Viewing a sequence";
-      presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(<HTMLAnchorElement>document.querySelector("#titlebar div a")).href}];
+      presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(document.querySelector("#titlebar div a") as HTMLAnchorElement).href}];
     } else {
       presenceData.details = "Editing a sequence";
     }
-    const str = (<HTMLElement>(
-      document.getElementsByClassName("text")[1]
-    )).innerHTML.trim();
+    const str = (
+      document.getElementsByClassName("text")[1] as HTMLElement).innerHTML.trim();
     if (str.includes("by <a")) {
       presenceData.state = "Title: " + str.substring(0, str.indexOf("by <a"));
     } else {
