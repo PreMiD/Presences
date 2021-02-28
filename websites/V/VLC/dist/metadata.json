@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "DooMLorD",
-    "id": "654398152513945611"
+    "name": "ririxi",
+    "id": "192490421308489731"
   },
   "service": "VLC",
   "description": {
@@ -11,9 +11,9 @@
     "localhost",
     "127.0.0.1"
   ],
-  "version": "1.4.10",
-  "logo": "https://doomlord.s-ul.eu/MHqVX7v0",
-  "thumbnail": "https://doomlord.s-ul.eu/LOCgKTnx",
+  "version": "1.4.12",
+  "logo": "https://i.imgur.com/WuzLOQu.png",
+  "thumbnail": "https://i.imgur.com/Bg2AFYN.png",
   "color": "#ff7c00",
   "tags": [
     "videolan",

@@ -1,16 +1,15 @@
 const presence = new Presence({
-    clientId: "747683982279180359"
-  });
+  clientId: "747683982279180359"
+});
 
 presence.on("UpdateData", async () => {
   const host = window.location.hostname.replace("www.", ""),
-  path = window.location.pathname.split("/").slice(1),
-  presenceData: PresenceData = {
-    details: "Rustlabs",
-    largeImageKey: "logo_big"
-  },
-
-  browsingStamp = Math.floor(Date.now() / 1000);
+    path = window.location.pathname.split("/").slice(1),
+    presenceData: PresenceData = {
+      details: "Rustlabs",
+      largeImageKey: "logo_big"
+    },
+    browsingStamp = Math.floor(Date.now() / 1000);
 
   switch (host) {
     //Homepage
@@ -20,7 +19,7 @@ presence.on("UpdateData", async () => {
         case "group=weapons":
           presenceData.details = "Browsing Weapons";
           presenceData.startTimestamp = browsingStamp;
- 
+
           break;
         //Construction
         case "group=build":
@@ -38,7 +37,7 @@ presence.on("UpdateData", async () => {
         case "group=resources":
           presenceData.details = "Browsing Resources";
           presenceData.startTimestamp = browsingStamp;
-          
+
           break;
         //Attire
         case "group=clothing":
@@ -104,13 +103,13 @@ presence.on("UpdateData", async () => {
         case "skins":
           presenceData.details = "Looking at Skins ";
           presenceData.startTimestamp = browsingStamp;
-          
+
           break;
         //About
         case "about":
           presenceData.details = "Browsing About";
           presenceData.startTimestamp = browsingStamp;
-          
+
           break;
         //Unknown
         default:
@@ -119,7 +118,6 @@ presence.on("UpdateData", async () => {
           return;
       }
       break;
-      
   }
 
   presence.setActivity(presenceData);

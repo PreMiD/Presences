@@ -8,14 +8,15 @@
     "en": "Groovy is an easy-to-use music bot that supports every major site, including Spotify."
   },
   "url": "groovy.bot",
-  "version": "1.2.4",
-  "logo": "https://erens.glitch.me/QKiB.png",
-  "thumbnail": "https://erens.glitch.me/Y6Po.png",
+  "version": "1.2.6",
+  "logo": "https://i.imgur.com/3u4u1EP.png",
+  "thumbnail": "https://i.imgur.com/oYZqVuD.png",
   "color": "#A910E7",
   "tags": [
     "bot",
-    "english",
-    "groovy"
+    "groovy",
+    "discord",
+    "music-bot"
   ],
   "category": "other"
 }

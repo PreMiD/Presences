@@ -4,45 +4,34 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+      largeImageKey: "logo"
+    },
+    page = window.location.pathname,
+    browsingStamp = Math.floor(Date.now() / 1000);
 
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  const page = window.location.pathname;
   presenceData.startTimestamp = browsingStamp;
 
-  if (page.startsWith("/settings.html")) {
-    presenceData.details = "Viewing a page:";
-    presenceData.state = "Settings";
-  } else if (page.startsWith("/commands.html")) {
-    presenceData.details = "Viewing a page:";
-    presenceData.state = "Commands";
-  } else if (page.startsWith("/faq.html")) {
-    presenceData.details = "Viewing a page:";
-    presenceData.state = "FAQ & Guides";
-  } else if (page.startsWith("/about")) {
-    presenceData.details = "Viewing a page:";
-    presenceData.state = "About Tatsumaki";
-  } else if (page.startsWith("/globalRankings")) {
-    presenceData.details = "Viewing a page:";
-    presenceData.state = "Global Rankings";
-  } else if (page.startsWith("/dashboard")) {
-    presenceData.details = "Viewing dashboard";
-  } else if (page.startsWith("/profile")) {
-    presenceData.details = "Viewing/editing their profile";
-  } else if (page.startsWith("/serverRankings/")) {
-    const yArraabeni = document.querySelector(
-      "#top > div.jumbotron > div > div > div.col-md-10 > p"
-    ).textContent;
-    const sgoc = "Besto Rankings @";
-    const ahmetabibanimiactioley = yArraabeni.replace(sgoc, "");
-    presenceData.details =
-      "Viewing " + ahmetabibanimiactioley + "'s leaderboard";
-  } else if (page.startsWith("/guild/")) {
-    presenceData.details = "Managing a server";
+  if (page.endsWith("/editcard")) {
+    presenceData.details = "Editing their profile card";
+  } else if (page.endsWith("/inventory")) {
+    presenceData.details = "Viewing their inventory";
+  } else if (page.endsWith("/settings")) {
+    presenceData.details = "Editing their settings";
+  } else if (page.startsWith("/blog")) {
+    presenceData.details = "Viewing all blogs";
+  } else if (page.startsWith("/article")) {
+    presenceData.details = "Reading an article:";
     presenceData.state = document.querySelector(
-      "#top > div.jumbotron > div > div > div.col-md-10 > h1"
+      "#__next > main > div.css-vxgrp0 > main > div > div.css-17cwizr > div > h1"
     ).textContent;
+  } else if (page.endsWith("/servers")) {
+    presenceData.details = "On dashboard";
+  } else if (page.startsWith("/server")) {
+    presenceData.details = "Managing/Viewing a server";
+  } else if (page.startsWith("/shops")) {
+    presenceData.details = "On shop menu";
+  } else if (page.startsWith("/profile")) {
+    presenceData.details = "Viewing their profile";
   }
 
   if (presenceData.details == null) {

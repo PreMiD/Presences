@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "MrBartusek",
+    "id": "212988300137463809"
+  },
+  "service": "Zoom",
+  "description": {
+    "en": "Stay connected wherever you go – start or join a secure meeting with flawless video and audio, instant screen sharing, and cross-platform instant messaging - for free!"
+  },
+  "url": "zoom.us",
+  "regExp": "(.*?)[.]?zoom.us",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/R4guHwc.png",
+  "thumbnail": "https://i.imgur.com/MJptA60.jpg",
+  "color": "#0e71eb",
+  "tags": [
+    "video",
+    "media",
+    "meeting",
+    "conference",
+    "social"
+  ],
+  "category": "socials"
+}

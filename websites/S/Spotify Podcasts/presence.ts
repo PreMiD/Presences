@@ -1,55 +1,97 @@
-const genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
+const presence = new Presence({
+    clientId: "619561001234464789",
+    injectOnComplete: true
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-function PMD_error(message): void {
-  console.log(
-    "%cPreMiD%cERROR%c " + message,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
-    "color: unset;"
+let title: string,
+  uploader: string,
+  search: HTMLInputElement,
+  playback: boolean,
+  recentlyCleared = 0;
+
+interface LangStrings {
+  play: string;
+  pause: string;
+  featured: string;
+  bestPodcasts: string;
+  charts: string;
+  genres: string;
+  latest: string;
+  discover: string;
+  browse: string;
+  podcastLike: string;
+  artistLike: string;
+  albumLike: string;
+  songLike: string;
+  forMeh: string;
+  playlist: string;
+  viewPlaylist: string;
+  download: string;
+  viewing: string;
+  account: string;
+  search: string;
+  searchFor: string;
+  searchSomething: string;
+  browsing: string;
+  listening: string;
+  show: string;
+}
+
+async function getStrings(): Promise<LangStrings> {
+  return presence.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused",
+      featured: "spotify.featured",
+      bestPodcasts: "spotify.bestPodcasts",
+      charts: "spotify.charts",
+      genres: "spotify.genres",
+      latest: "spotify.latest",
+      discover: "spotify.discover",
+      browse: "spotify.browse",
+      podcastLike: "spotify.podcastsLike",
+      artistLike: "spotify.artistsLike",
+      albumLike: "spotify.albumLike",
+      songLike: "spotify.songsLike",
+      forMeh: "spotify.madeForYou",
+      playlist: "spotify.playlists",
+      viewPlaylist: "general.viewPlaylist",
+      download: "spotify.download",
+      viewing: "general.viewing",
+      account: "general.viewAccount",
+      search: "general.search",
+      searchFor: "general.searchFor",
+      searchSomething: "general.searchSomething",
+      browsing: "general.browsing",
+      listening: "general.listeningMusic",
+      show: "general.viewShow"
+    },
+    await presence.getSetting("lang")
   );
 }
 
-const presence = new Presence({
-    clientId: "619561001234464789"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-let title: any, uploader: any, search: any;
-let video: any,
-  videoDuration: any,
-  videoCurrentTime: any,
-  progress: any,
-  progressduration: any,
-  progress2: any,
-  progressduration2: any,
-  pause: any;
-
-const browsingStamp = Math.floor(Date.now() / 1000);
-let playback: boolean;
+let strings: Promise<LangStrings> = getStrings(),
+  oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "spotify"
-  };
+  //* Update strings if user selected another language.
+  const newLang = await presence.getSetting("lang"),
+    privacy = await presence.getSetting("privacy"),
+    time = await presence.getSetting("time");
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
 
-  video = document.querySelector("span.react-contextmenu-wrapper > span > a");
+  const presenceData: PresenceData = {
+      largeImageKey: "spotify"
+    },
+    video: HTMLLinkElement = document.querySelector(
+      "div.now-playing > div > div > a"
+    );
 
   if (video !== null) {
     if (video.href.includes("/show/")) {
@@ -61,167 +103,192 @@ presence.on("UpdateData", async () => {
     playback = false;
   }
 
-  console.log(playback);
+  let searching = false;
 
   if (!playback) {
-    presenceData.startTimestamp = browsingStamp;
+    if (time) presenceData.startTimestamp = browsingStamp;
     presenceData.smallImageKey = "reading";
-    if (
-      document.location.hostname == "open.spotify.com" &&
-      document.querySelector(
-        ".control-button.spoticon-pause-16.control-button--circled"
-      ) == null
-    ) {
+    if (document.location.hostname === "open.spotify.com") {
       if (document.location.pathname.includes("browse/featured")) {
-        presenceData.details = "Browsing through the"; //general.viewList
-        presenceData.state = "featured songs"; //spotify.featured
+        presenceData.details = (await strings).browse;
+        presenceData.state = (await strings).featured;
       } else if (document.location.pathname.includes("browse/podcasts")) {
-        presenceData.details = "Browsing through the"; //general.viewList
-        presenceData.state = "best podcasts"; //spotify.bestPodcasts
+        presenceData.details = (await strings).browse;
+        presenceData.state = (await strings).bestPodcasts;
       } else if (document.location.pathname.includes("browse/charts")) {
-        presenceData.details = "Browsing through"; //spotify.charts
-        presenceData.state = "the charts";
+        presenceData.details = (await strings).charts;
       } else if (document.location.pathname.includes("browse/genres")) {
-        presenceData.details = "Browsing through"; //spotify.genres
-        presenceData.state = "the genres";
+        presenceData.details = (await strings).genres;
       } else if (document.location.pathname.includes("browse/newreleases")) {
-        presenceData.details = "Browsing through the"; //spotify.latest
-        presenceData.state = "latest releases";
+        presenceData.details = (await strings).latest;
       } else if (document.location.pathname.includes("browse/discover")) {
-        presenceData.details = "Discovering new songs"; //spotify.discover
+        presenceData.details = (await strings).discover;
       } else if (document.location.pathname.includes("/search/")) {
         search = document.querySelector("input");
-        presenceData.details = "Searching for:"; //general.searchFor general.searchSomething
+        searching = true;
+        presenceData.details = (await strings).searchFor;
         presenceData.state = search.value;
         if (search.value.length <= 3) {
           presenceData.state = "something...";
         }
         presenceData.smallImageKey = "search";
       } else if (document.location.pathname.includes("/search")) {
-        presenceData.details = "Searching for"; //general.searchSomething
-        presenceData.state = "new songs";
+        searching = true;
+        presenceData.details = (await strings).search;
         presenceData.smallImageKey = "search";
       } else if (document.location.pathname.includes("collection/playlists")) {
-        presenceData.details = "Browsing through"; //spotify.browse
-        presenceData.state = "their playlists"; //spotify.playlists
+        presenceData.details = (await strings).browse;
+        presenceData.state = (await strings).playlist;
       } else if (
         document.location.pathname.includes("collection/made-for-you")
       ) {
-        presenceData.details = "Browsing through"; //spotify.browse
-        presenceData.state = '"Made for you"'; //spotify.madeForYou
+        presenceData.details = (await strings).browse;
+        presenceData.state = (await strings).forMeh;
       } else if (document.location.pathname.includes("collection/tracks")) {
-        presenceData.details = "Browsing through"; //spotify.browse
-        presenceData.state = "songs that they like"; //spotify.songsLike
+        presenceData.details = (await strings).browse;
+        presenceData.state = (await strings).songLike;
       } else if (document.location.pathname.includes("collection/albums")) {
-        presenceData.details = "Browsing through"; //spotify.browse
-        presenceData.state = "albums that they like"; //spotify.albumLike
+        presenceData.details = (await strings).browse;
+        presenceData.state = (await strings).albumLike;
       } else if (document.location.pathname.includes("collection/artists")) {
-        presenceData.details = "Browsing through"; //spotify.browse
-        presenceData.state = "artists that they like"; //spotify.artistsLike
+        presenceData.details = (await strings).browse;
+        presenceData.state = (await strings).artistLike;
       } else if (document.location.pathname.includes("collection/podcasts")) {
-        presenceData.details = "Browsing through"; //spotify.browse
-        presenceData.state = "podcasts that they like"; //spotify.podcastsLike
+        presenceData.details = (await strings).browse;
+        presenceData.state = (await strings).podcastLike;
       } else if (document.location.pathname.includes("/playlist/")) {
-        title = document.querySelector(".mo-info-name > span");
-        presenceData.details = "Viewing playlist:"; //general.viewPlaylist
-        presenceData.state = title.textContent;
+        title = document.querySelector(
+          "div.main-view-container__scroll-node-child > section > div > div > span > button > h1"
+        ).textContent;
+        presenceData.details = (await strings).viewPlaylist;
+        presenceData.state = title;
+        delete presenceData.smallImageKey;
+      } else if (document.location.pathname.includes("/show/")) {
+        title = document.querySelector(
+          "div.main-view-container__scroll-node-child > section > div > div > h1"
+        ).textContent;
+        presenceData.details = (await strings).show;
+        presenceData.state = title;
         delete presenceData.smallImageKey;
       } else if (document.location.pathname.includes("/settings")) {
-        presenceData.details = "Viewing their settings"; //general.viewAccount
+        presenceData.details = (await strings).account;
         delete presenceData.smallImageKey;
       }
     } else if (document.location.hostname == "support.spotify.com") {
-      presenceData.details = "Browsing through the";
+      presenceData.details = (await strings).browse;
       presenceData.state = "Support Center";
     } else if (document.location.hostname == "investors.spotify.com") {
-      presenceData.details = "Browsing through the";
+      presenceData.details = (await strings).browse;
       presenceData.state = "Support Center";
     } else if (document.location.hostname == "developer.spotify.com") {
-      presenceData.details = "Browsing through the";
+      presenceData.details = (await strings).browse;
       presenceData.state = "Spotify for Developers";
     } else if (document.location.hostname == "artists.spotify.com") {
-      presenceData.details = "Browsing through the";
+      presenceData.details = (await strings).browse;
       presenceData.state = "Spotify for Artists";
     } else if (document.location.hostname == "newsroom.spotify.com") {
-      presenceData.details = "Browsing through the";
+      presenceData.details = (await strings).browse;
       presenceData.state = "Spotify for Newsroom";
+    } else if (document.location.hostname == "podcasters.spotify.com") {
+      presenceData.details = (await strings).browse;
+      presenceData.state = "Spotify for Podcasters";
     } else if (document.location.hostname == "www.spotify.com") {
       if (document.location.pathname.includes("/premium")) {
-        presenceData.details = "Looking at"; //general.viewing
+        presenceData.details = (await strings).viewing;
         presenceData.state = "Spotify Premium";
         delete presenceData.smallImageKey;
       } else if (document.location.pathname.includes("/download")) {
-        presenceData.details = "Downloading Spotify"; //spotify.download
+        presenceData.details = (await strings).download;
         presenceData.smallImageKey = "downloading";
       } else if (document.location.pathname.includes("/account")) {
-        presenceData.details = "Looking at"; //general.viewAccount
-        presenceData.state = "their account";
+        presenceData.details = (await strings).account;
         delete presenceData.smallImageKey;
       }
     }
+    const control = document.querySelector(
+      "div.player-controls__buttons > button:nth-child(3)"
+    ) as HTMLButtonElement;
     if (
-      document.querySelector(
-        ".control-button.spoticon-pause-16.control-button--circled"
-      ) == null
+      document.querySelector(".now-playing-bar-hidden") !== null ||
+      control === null ||
+      control.dataset.testid === "control-button-play"
     ) {
       if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
       } else {
-        presence.setActivity(presenceData);
+        if (privacy) {
+          if (searching) {
+            presenceData.details = (await strings).searchSomething;
+            delete presenceData.state;
+          } else {
+            presenceData.details = (await strings).browsing;
+            delete presenceData.state;
+            delete presenceData.smallImageKey;
+          }
+          presence.setActivity(presenceData);
+        } else {
+          presence.setActivity(presenceData);
+        }
       }
     } else {
-      presence.clearActivity();
+      if (recentlyCleared < Date.now() - 1000) {
+        presence.clearActivity();
+      }
+      recentlyCleared = Date.now();
     }
   } else {
-    progress = document.querySelector(
-      ".playback-bar__progress-time:nth-child(1)"
-    );
-    progress2 = progress.textContent.split(":");
-    progressduration = document.querySelector(
-      ".playback-bar__progress-time:nth-child(3)"
-    );
-    progressduration2 = progressduration.textContent.split(":");
+    const currentTime = presence.timestampFromFormat(
+        document.querySelector(".playback-bar__progress-time:nth-child(1)")
+          .textContent
+      ),
+      duration = presence.timestampFromFormat(
+        document.querySelector(".playback-bar__progress-time:nth-child(3)")
+          .textContent
+      ),
+      timestamps = presence.getTimestamps(currentTime, duration);
 
-    videoCurrentTime = progress2[0] * 60 + +progress2[1];
-    videoDuration = progressduration2[0] * 60 + +progressduration2[1];
+    let pause: boolean;
 
     if (
-      document.querySelector(
-        ".control-button.spoticon-play-16.control-button--circled"
-      ) !== null
+      (document.querySelector(
+        "div.player-controls__buttons > button:nth-child(3)"
+      ) as HTMLButtonElement).dataset.testid === "control-button-play"
     ) {
       pause = true;
     } else {
       pause = false;
     }
 
-    const timestamps = getTimestamps(
-      Math.floor(videoCurrentTime),
-      Math.floor(videoDuration)
-    );
-
-    presenceData.smallImageKey = pause ? "pause" : "play"; // if the video is paused, show the pause icon else the play button
+    presenceData.smallImageKey = pause ? "pause" : "play";
     presenceData.smallImageText = pause
       ? (await strings).pause
       : (await strings).play;
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
 
-    if (pause) {
+    if (pause || !time) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-    title = document.querySelector("div.react-contextmenu-wrapper > span > a");
+    title = document.querySelector(
+      "div.now-playing > div:nth-child(2) > div:nth-child(1)"
+    ).textContent;
     uploader = document.querySelector(
-      "span.react-contextmenu-wrapper > span > a"
-    );
-    presenceData.details = title.textContent;
-    presenceData.state = uploader.textContent;
+      "div.now-playing > div:nth-child(2) > div:nth-child(2)"
+    ).textContent;
+    presenceData.details = title;
+    presenceData.state = uploader;
+
+    if (privacy) {
+      presenceData.details = (await strings).listening;
+      delete presenceData.state;
+    }
+
     if (title !== null && uploader !== null) {
       presence.setActivity(presenceData);
     } else {
-      PMD_error("Error while getting podcast name and title");
+      presence.error("Error while getting podcast name and title");
     }
   }
 });

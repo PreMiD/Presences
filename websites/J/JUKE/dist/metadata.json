@@ -1,21 +1,32 @@
 {
   "author": {
-    "name": "STEPHAN",
-    "id": "183233556150091776"
+    "name": "QkeleQ10",
+    "id": "807917674477649943"
   },
+  "contributors": [
+    {
+      "name": "STEPHAN",
+      "id": "183233556150091776"
+    }
+  ],
   "service": "JUKE",
   "description": {
-    "en": "JUKE is a dutch radio channel collection site. JUKE is a Talpa Network Company.",
+    "en": "JUKE is a Dutch radio channel collection site. JUKE is a Talpa Network company.",
     "nl": "JUKE is een verzamelingssite voor radiostations. JUKE is een merk van Talpa Network."
   },
   "url": "juke.nl",
-  "version": "1.2.5",
-  "logo": "https://i.imgur.com/Rh4L1UQ.png",
-  "thumbnail": "https://i.imgur.com/yHG4Vyg.png",
+  "version": "2.0.1",
+  "logo": "https://i.imgur.com/axm6M00.png",
+  "thumbnail": "https://i.imgur.com/kVj50nG.png",
   "color": "#38af85",
   "tags": [
+    "juke",
+    "talpa",
+    "radio",
     "music",
-    "radio"
+    "muziek",
+    "free",
+    "gratis"
   ],
   "category": "music"
 }

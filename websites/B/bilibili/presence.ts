@@ -23,28 +23,39 @@ let user: HTMLElement,
   inread_title: HTMLElement,
   page: HTMLElement;
 let video: HTMLVideoElement,
-  videoDuration: any,
-  videoCurrentTime: any,
-  videoPaused: any;
+  videoDuration: number,
+  videoCurrentTime: number,
+  videoPaused: boolean;
 const huodong_title = document.querySelector("#viewbox_report > h1 > a"),
   hudong_title = document.querySelector("#viewbox_report > h1 > span.activity"),
   multi_user = document.querySelector(
     "#app > div > div.r-con > div.members-info"
   );
-let currentTime: any,
-  duration: any,
-  paused: any,
-  playback: any,
-  iFramePaused: any;
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+let currentTime: number,
+  duration: number,
+  paused: boolean,
+  playback: boolean,
+  iFramePaused: boolean;
 
-  if (playback) {
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    iFramePaused = data.iframe_video.test;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      duration: number;
+      currTime: number;
+      dur: number;
+      test: boolean;
+    };
+  }) => {
+    playback = data.iframe_video.duration !== null ? true : false;
+
+    if (playback) {
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.dur;
+      iFramePaused = data.iframe_video.test;
+    }
   }
-});
+);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {

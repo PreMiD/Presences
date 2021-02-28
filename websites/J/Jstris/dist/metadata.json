@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "ayanamy.jy126",
+    "id": "243279723487035393"
+  },
+  "service": "Jstris",
+  "description": {
+    "en": "Jstris is just standard competitive multiplayer Tetris, but made with JS."
+  },
+  "url": "jstris.jezevec10.com",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/YWrUCdh.png",
+  "thumbnail": "https://i.imgur.com/LKLaEd8.png",
+  "color": "#375a7f",
+  "tags": [
+    "puzzle"
+  ],
+  "category": "games"
+}

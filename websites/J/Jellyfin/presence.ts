@@ -264,79 +264,62 @@ interface MediaInfo {
   Height: number;
 }
 
-// official website
-const JELLYFIN_URL = "jellyfin.org";
+const // official website
+  JELLYFIN_URL = "jellyfin.org",
+  // web client app name
+  APP_NAME = "Jellyfin Web",
+  // all the presence art assets uploaded to discord
+  PRESENCE_ART_ASSETS = {
+    download: "downloading",
+    live: "live",
+    logo: "banner-icon",
+    pause: "pause",
+    play: "play",
+    read: "reading",
+    search: "search",
+    write: "writing"
+  },
+  presenceData: PresenceData = {
+    largeImageKey: PRESENCE_ART_ASSETS.logo
+  };
 
-// web client app name
-const APP_NAME = "Jellyfin Web";
-
-// all the presence art assets uploaded to discord
-const PRESENCE_ART_ASSETS = {
-  download: "downloading",
-  live: "live",
-  logo: "banner-icon",
-  pause: "pause",
-  play: "play",
-  read: "reading",
-  search: "search",
-  write: "writing"
-};
-
-const presenceData: PresenceData = {
-  largeImageKey: PRESENCE_ART_ASSETS.logo
-};
-
-let ApiClient: ApiClient;
-
-// generic log style for PMD_[info|error|success] calls
-const GENERIC_LOG_STYLE = "font-weight: 800; padding: 2px 5px; color: white;";
-
-/**
- * PMD_info - log into the user console info messages
- *
- * @param  {string} txt text to log into the console
- */
-function PMD_info(message: string): void {
-  console.log(
-    "%cPreMiD%cINFO%c " + message,
-    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
-    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-let presence: Presence;
+let ApiClient: ApiClient, presence: Presence;
 
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
-function handleAudioPlayback(): void {
+async function handleAudioPlayback(): Promise<void> {
   // sometimes the buttons are not created fast enough
   try {
-    const audioElem = document.getElementsByTagName("audio")[0];
-    const infoContainer = document.getElementsByClassName("nowPlayingBar")[0];
-    const buttons = infoContainer.querySelectorAll("button.itemAction");
+    const audioElem = document.getElementsByTagName("audio")[0],
+      infoContainer = document.getElementsByClassName("nowPlayingBar")[0],
+      title: HTMLAnchorElement = infoContainer
+        .getElementsByClassName("nowPlayingBarText")[0]
+        .querySelector("a"),
+      artist: HTMLDivElement = infoContainer.getElementsByClassName(
+        "nowPlayingBarSecondaryText"
+      )[0] as HTMLDivElement;
 
     presenceData.details = `Listening to: ${
-      buttons.length >= 1 ? buttons[0].textContent : "unknown title"
+      title ? title.innerText : "unknown title"
     }`;
-    presenceData.state = `By: ${
-      buttons.length >= 2 ? buttons[1].textContent : "unknown artist"
-    }`;
+    presenceData.state = `By: ${artist ? artist.innerText : "unknown artist"}`;
 
     // playing
     if (!audioElem.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
-      presenceData.endTimestamp = new Date(
-        Date.now() + (audioElem.duration - audioElem.currentTime) * 1000
-      ).getTime();
+
+      if (await presence.getSetting("showMediaTimestamps")) {
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(
+          audioElem
+        )[1];
+      }
 
       // paused
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
-      delete presenceData.endTimestamp;
     }
   } catch (e) {
     // do nothing
@@ -429,18 +412,20 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   }
 
   media[itemId] = "pending";
+  const basePath = location.pathname.replace(
+      location.pathname.split("/").slice(-2).join("/"),
+      ""
+    ),
+    res = await fetch(`${basePath}Users/${getUserId()}/Items/${itemId}`, {
+      credentials: "include",
+      headers: {
+        "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
+      }
+    }),
+    json = await res.json();
 
-  fetch(`/Users/${getUserId()}/Items/${itemId}`, {
-    credentials: "include",
-    headers: {
-      "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
-    }
-  })
-    .then((resp) => resp.json())
-    .then((json) => {
-      media[itemId] = json;
-      return media[itemId];
-    });
+  media[itemId] = json;
+  return media[itemId];
 }
 
 /**
@@ -457,30 +442,23 @@ async function handleVideoPlayback(): Promise<void> {
   const videoPlayerElem = document.getElementsByTagName("video")[0];
 
   // this variables content will be replaced in details and status properties on presenceData
-  let title;
-  let subtitle;
+  let title, subtitle;
 
-  // title on the header
-  const headerTitleElem = document.querySelector("h3.pageTitle");
-
-  // title on the osdControls
-  const osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle");
+  const // title on the header
+    headerTitleElem = document.querySelector("h3.pageTitle") as HTMLElement,
+    // title on the osdControls
+    osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle") as HTMLElement;
 
   // media metadata
   let mediaInfo: string | MediaInfo;
 
-  const videoPlayerContainerElem = document.body.getElementsByClassName(
-    "videoPlayerContainer"
-  )[0];
-
   // no background image, we're playing live tv
-  if ((videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage) {
-    // with this url we can obtain the id of the item we are playing back
-    const backgroundImageUrl = (videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage
-      .split('"')[1]
-      .replace(ApiClient["_serverAddress"], "");
+  if ((videoPlayerElem as HTMLVideoElement).getAttribute("poster")) {
+    const backgroundImageUrl = (videoPlayerElem as HTMLVideoElement).getAttribute(
+      "poster"
+    );
 
-    mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[2]);
+    mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[4]);
   }
 
   // display generic info
@@ -493,15 +471,15 @@ async function handleVideoPlayback(): Promise<void> {
     switch (mediaInfo.Type) {
       case "Movie":
         title = "Watching a Movie";
-        subtitle = osdTitleElem.textContent;
+        subtitle = osdTitleElem.innerText;
         break;
       case "Series":
-        title = `Watching ${headerTitleElem.textContent}`;
-        subtitle = osdTitleElem.textContent;
+        title = `Watching ${headerTitleElem.innerText}`;
+        subtitle = osdTitleElem.innerText;
         break;
       case "TvChannel":
         title = "Watching Live Tv";
-        subtitle = osdTitleElem.textContent;
+        subtitle = osdTitleElem.innerText;
         break;
       default:
         title = `Watching ${mediaInfo.Type}`;
@@ -516,16 +494,17 @@ async function handleVideoPlayback(): Promise<void> {
     } else if (!videoPlayerElem.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
-      presenceData.endTimestamp = new Date(
-        Date.now() +
-          (videoPlayerElem.duration - videoPlayerElem.currentTime) * 1000
-      ).getTime();
+
+      if (await presence.getSetting("showMediaTimestamps")) {
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(
+          videoPlayerElem
+        )[1];
+      }
 
       // paused
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
-      delete presenceData.endTimestamp;
     }
   }
 
@@ -610,7 +589,7 @@ async function handleWebClient(): Promise<void> {
     audioElems[0].classList.contains("mediaPlayerAudio") &&
     audioElems[0].src
   ) {
-    handleAudioPlayback();
+    await handleAudioPlayback();
     return;
   }
 
@@ -637,7 +616,7 @@ async function handleWebClient(): Promise<void> {
     case "myprofile.html": // profile
     case "mypreferencesdisplay.html": // display
     case "mypreferenceshome.html": // home
-    case "mypreferenceslanguages.html": // languages
+    case "mypreferencesplayback.html": // playback
     case "mypreferencessubtitles.html": // subtitles
       presenceData.state = "On user preferences";
       break;
@@ -647,15 +626,22 @@ async function handleWebClient(): Promise<void> {
     case "dashboardgeneral.html": // general
     case "userprofiles.html": // user profiles
     case "useredit.html": // editing user profile
+    case "userlibraryaccess.html": // editing user profile > library access
+    case "userparentalcontrol.html": // editing user profile > parental control
+    case "userpassword.html": // editing user profile > password
     case "library.html": // managing library
     case "librarydisplay.html": // library display settings
     case "metadataimages.html": // library metadata settings
     case "metadatanfo.html": // library NFO settings
-    case "encodingsettings.html": // encoding settings // devices section
+    case "encodingsettings.html": // encoding settings > transcoding
+    case "playbackconfiguration.html": // encoding settings > resume
+    case "streamingsettings.html": // encoding settings > streaming
     case "devices.html": // devices
     case "device.html": // editing device
     case "serveractivity.html": // server activity
-    case "dlnasettings.html": // dlna settings // live tv section
+    case "dlnasettings.html": // dlna settings > settings
+    case "dlnaprofiles.html": // dlna settings > profiles
+    case "dlnaprofile.html": // dlna settings > add profile
     case "livetvstatus.html": // manage live tv
     case "livetvtuner.html": // add/manage tv tuner
     case "livetvguideprovider.html": // add/manage tv guide provider
@@ -691,7 +677,7 @@ async function handleWebClient(): Promise<void> {
       presenceData.state = "Editing media metadata";
       break;
 
-    case "itemdetails.html":
+    case "details":
       await handleItemDetails();
       break;
 
@@ -706,9 +692,9 @@ async function handleWebClient(): Promise<void> {
 }
 
 /**
- * setDefaultsToPresence - set defaul values to the presenceData object
+ * setDefaultsToPresence - set default values to the presenceData object
  */
-function setDefaultsToPresence(): void {
+async function setDefaultsToPresence(): Promise<void> {
   if (presenceData.smallImageKey) {
     delete presenceData.smallImageKey;
   }
@@ -720,6 +706,10 @@ function setDefaultsToPresence(): void {
   }
   if (presenceData.endTimestamp) {
     delete presenceData.endTimestamp;
+  }
+
+  if (await presence.getSetting("showTimestamps")) {
+    presenceData.startTimestamp = Date.now();
   }
 }
 
@@ -747,7 +737,7 @@ async function isJellyfinWebClient(): Promise<boolean> {
  * updateData - tick function, this is called several times a second by UpdateData event
  */
 async function updateData(): Promise<void> {
-  setDefaultsToPresence();
+  await setDefaultsToPresence();
 
   let showPresence = false;
 
@@ -762,9 +752,12 @@ async function updateData(): Promise<void> {
     await handleWebClient();
   }
 
-  // force the display of some counter
-  if (!presenceData.startTimestamp || !presenceData.endTimestamp) {
-    presenceData.startTimestamp = Date.now();
+  // hide start timestamp on media playback
+  if (
+    presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
+    presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause
+  ) {
+    delete presenceData.startTimestamp;
   }
 
   // if jellyfin is detected init/update the presence status
@@ -782,12 +775,13 @@ async function updateData(): Promise<void> {
  * init - check if the presence should be initialized, if so start doing the magic
  */
 async function init(): Promise<void> {
-  let validPage = false;
+  let validPage = false,
+    infoMessage;
 
   // jellyfin website
   if (location.host === JELLYFIN_URL) {
     validPage = true;
-    PMD_info("Jellyfin website detected");
+    infoMessage = "Jellyfin website detected";
 
     // web client
   } else {
@@ -801,7 +795,7 @@ async function init(): Promise<void> {
           30 * 1000
         ) {
           validPage = true;
-          PMD_info("Jellyfin web client detected");
+          infoMessage = "Jellyfin web client detected";
         }
       }
     } catch (e) {
@@ -814,6 +808,7 @@ async function init(): Promise<void> {
       clientId: "669359568391766018"
     });
 
+    presence.info(infoMessage);
     presence.on("UpdateData", updateData);
   }
 }

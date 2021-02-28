@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "607587875122446359"
-}),
+    clientId: "607587875122446359"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000),
   search = "/search?q=",
   searchURL = new URL(document.location.href),
@@ -8,14 +8,14 @@ const presence = new Presence({
   profileURL = new URL(document.location.href);
 
 presence.on("UpdateData", async () => {
-  let profileName: HTMLElement = null, 
+  let profileName: HTMLElement = null,
     profileNickname: HTMLElement = null,
-    repositoryAuthor: HTMLElement = null, 
+    repositoryAuthor: HTMLElement = null,
     repositoryName: HTMLElement = null,
     repositoryLocation: HTMLElement = null,
     repositoryLocation2: NodeListOf<HTMLElement> = null,
-    pullRequestTitle: HTMLElement = null, 
-    pullRequestAuthor: NodeListOf<HTMLElement> = null, 
+    pullRequestTitle: HTMLElement = null,
+    pullRequestAuthor: NodeListOf<HTMLElement> = null,
     pullRequestID: HTMLElement = null,
     issueTitle: HTMLElement = null,
     issueAuthor: NodeListOf<HTMLElement> = null,
@@ -28,7 +28,9 @@ presence.on("UpdateData", async () => {
   repositoryName = document.querySelector(
     "body > div.application-main > div > main > div.bg-gray-light.pt-3.hide-full-screen.mb-5 > div > div > h1 > strong > a"
   );
-  repositoryLocation = document.querySelector("#branch-select-menu > summary > span.css-truncate-target");
+  repositoryLocation = document.querySelector(
+    "#branch-select-menu > summary > span.css-truncate-target"
+  );
   repositoryLocation2 = document.querySelectorAll("#blob-path");
 
   pullRequestTitle = issueTitle = document.querySelector(
@@ -37,7 +39,9 @@ presence.on("UpdateData", async () => {
   pullRequestAuthor = issueAuthor = document.querySelectorAll(
     "div div.timeline-comment-header.clearfix h3 strong a"
   );
-  pullRequestID = issueID = document.querySelector("#span.f1-light.text-gray-light");
+  pullRequestID = issueID = document.querySelector(
+    "#span.f1-light.text-gray-light"
+  );
 
   let profileTabs: string, profileCurrentTab: string;
 
@@ -156,6 +160,12 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.details;
+  } else if (document.location.pathname.startsWith("/codespaces")) {
+    presenceData.state = "Browsing codespaces...";
+
+    presenceData.startTimestamp = browsingStamp;
+
+    delete presenceData.details;
   } else if (document.location.pathname.indexOf(search)) {
     presenceData.details = "Searching for: ";
 
@@ -168,7 +178,10 @@ presence.on("UpdateData", async () => {
       repositoryAuthor.innerText.length > 0 &&
       repositoryName.innerText.length > 0 &&
       document.location.pathname.toLowerCase() ==
-        "/" + repositoryAuthor.innerText.toLowerCase() + "/" + repositoryName.innerText.toLowerCase()
+        "/" +
+          repositoryAuthor.innerText.toLowerCase() +
+          "/" +
+          repositoryName.innerText.toLowerCase()
     ) {
       presenceData.details = "Browsing a repository...";
 
@@ -183,7 +196,7 @@ presence.on("UpdateData", async () => {
       repositoryLocation.innerText.length > 0
     ) {
       const repLoc = repositoryLocation.innerText;
-      
+
       presenceData.details =
         "Browsing " +
         repositoryAuthor.innerText +
@@ -199,18 +212,21 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/blob/") &&
       repositoryLocation2.length > 0
     ) {
-      let repLoc2: string;
+      const filePath: HTMLElement = document.querySelector("#blob-path");
 
-      repositoryLocation2.forEach((item: HTMLElement) => {
-        repLoc2 = item.innerText;
-      });
       presenceData.details =
         "Looking at a file from " +
         repositoryAuthor.innerText +
         "/" +
         repositoryName.innerText;
 
-      presenceData.state = repLoc2;
+      presenceData.state =
+        filePath.querySelector("details") !== null
+          ? filePath.textContent
+              .replace(filePath.querySelector("details").textContent, "")
+              .trim()
+              .slice(0, -1)
+          : filePath.textContent.trim();
 
       presenceData.startTimestamp = browsingStamp;
     } else if (
@@ -239,13 +255,15 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (
-      document.location.pathname.toLowerCase().includes(
-        "/" +
-          repositoryAuthor.innerText.toLowerCase() +
+      document.location.pathname
+        .toLowerCase()
+        .includes(
           "/" +
-          repositoryName.innerText.toLowerCase() +
-          "/pull/"
-      )
+            repositoryAuthor.innerText.toLowerCase() +
+            "/" +
+            repositoryName.innerText.toLowerCase() +
+            "/pull/"
+        )
     ) {
       presenceData.details =
         "Looking on pull request " + pullRequestID.innerText;
@@ -255,13 +273,15 @@ presence.on("UpdateData", async () => {
 
       presenceData.startTimestamp = browsingStamp;
     } else if (
-      document.location.pathname.toLowerCase().includes(
-        "/" +
-          repositoryAuthor.innerText.toLowerCase() +
+      document.location.pathname
+        .toLowerCase()
+        .includes(
           "/" +
-          repositoryName.innerText.toLowerCase() +
-          "/issues/"
-      )
+            repositoryAuthor.innerText.toLowerCase() +
+            "/" +
+            repositoryName.innerText.toLowerCase() +
+            "/issues/"
+        )
     ) {
       presenceData.details = "Looking on issue " + issueID.innerText;
 

@@ -63,6 +63,10 @@ presence.on("UpdateData", async () => {
     presenceData.state = `${author}`;
     presenceData.smallImageKey = `reading`;
     presenceData.smallImageText = (await strings).reading;
+  } else if (pathname.startsWith(`/notifications`)) {
+    presenceData.details = `Viewing notifications`;
+  } else if (pathname.startsWith(`/settings`)) {
+    presenceData.details = `Changing settings`;
   }
   presence.setActivity(presenceData, true);
 });

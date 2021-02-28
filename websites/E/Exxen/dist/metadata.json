@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Kabal",
+    "id": "269581360316940299"
+  },
+  "url": [
+    "exxen.com",
+    "www.exxen.com"
+  ],
+  "description": {
+    "tr": "Exxen, Acun Medya içeriklerini barındıran bir dizi ve film platformudur.",
+    "en": "Exxen is a platform with the movies and series of Acun Medya."
+  },
+  "service": "Exxen",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/6ZtGZ8v.png",
+  "thumbnail": "https://i.imgur.com/IEDjeHn.png",
+  "color": "#F9C623",
+  "tags": [
+    "watch",
+    "series",
+    "movies"
+  ],
+  "category": "videos"
+}

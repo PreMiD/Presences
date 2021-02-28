@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Mirax",
+    "id": "223355525826347018"
+  },
+  "service": "Coub",
+  "description": {
+    "ru": "Coub это сайт-видеохостинг, позволяющий своим пользователям публиковать короткие зацикленные видеоролики с несинхронным звуковым сопровождением — «коубы». ",
+    "en": "Coub is a video sharing website. It allows users to create and share looping videos up to ten seconds long, using existing video from YouTube, Vimeo, or their own files"
+  },
+  "url": "coub.com",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/aZwjjLI.png",
+  "thumbnail": "https://i.imgur.com/fcUbUgZ.png",
+  "color": "#0084FF",
+  "tags": [
+    "socials",
+    "music",
+    "video",
+    "media"
+  ],
+  "category": "videos"
+}

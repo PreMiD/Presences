@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Kazo",
+    "id": "393071912189952011"
+  },
+  "service": "Riot Games",
+  "description": {
+    "en": "The Presence for *all* websites related to Riot Games!",
+    "de": "Die Presence für *alle* Webseiten die von Riot Games sind!"
+  },
+  "url": [
+    "riotgames.com",
+    "leagueoflegends.com",
+    "playruneterra.com",
+    "playvalorant.com"
+  ],
+  "regExp": "([a-z0-9-]+[.])*(riotgames|leagueoflegends|playruneterra|playvalorant)[.]com[/]",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/ren8U6k.png",
+  "thumbnail": "https://i.imgur.com/rP0vQlr.jpg",
+  "color": "#d13639",
+  "tags": ["lol", "leagueoflegends", "esport", "riot", "riotgames", "valorant", "legendsofruneterra", "teamfighttactics", "leagueoflegendswildrift"],
+  "category": "games"
+}

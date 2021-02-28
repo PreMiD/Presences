@@ -8,12 +8,9 @@ presence.on("UpdateData", () => {
   } - ${document.querySelector(".player-title-text").textContent} `;
   const dj = document.querySelector(".live-name").textContent;
   const liveTill = document.querySelector(".live-time").textContent;
-  const pageName = document.title.slice(13);
   const liveTime = liveTill.slice(6);
   const presenceData: PresenceData = {
-    largeImageKey: "tfmlogo",
-    smallImageKey: "smalltfmlogo",
-    smallImageText: `Viewing: ${pageName}`
+    largeImageKey: "tfmlogo"
   };
 
   let stateText = "";
