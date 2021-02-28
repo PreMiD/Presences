@@ -24,13 +24,13 @@ presence.on("UpdateData", async () => {
   username = getUsername();
 
   if (joinLinkArr.length !== 0) {
-    let joinUrl = joinLinkArr[joinLinkArr.length-1].innerHTML;
+    const joinUrl = joinLinkArr[joinLinkArr.length-1].innerHTML;
     tempButtons.push({ label: "Join", url: joinUrl });
   }
   //Sets button for viewing profile.
   
   if (typeof username !== "undefined") {
-    let profileUrl = `${BaseUrl}/u/${username.replace(/\n/g, '')}`;
+    const profileUrl = `${BaseUrl}/u/${username.replace(/\n/g, '')}`;
     tempButtons.push({ label: "View Profile", url: profileUrl });
   }
   
