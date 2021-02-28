@@ -102,7 +102,6 @@ presence.on("UpdateData", async () => {
                 case "SPORTS":
                     presenceData.details = videoD.title;
                     presenceData.state = `${(await strings).episode} ${videoD.epText}`;
-                    break;
 
                 case "DRAMA":
                     presenceData.details = videoD.title;
@@ -172,10 +171,10 @@ presence.on("UpdateData", async () => {
                 case "PREVIEW":
                     presenceData.details = videoD.title;
                     presenceData.state = `${(await strings).episode} ${videoD.epText} | Preview`;
-                    break;
 
                 default:
-                    presence.error("Unknown type was found");
+                    presenceData.details = videoD.title;
+                    presenceData.state = `${(await strings).episode} ${videoD.epText} | Preview`;
                     break;
             }
 
