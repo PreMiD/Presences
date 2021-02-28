@@ -43,9 +43,9 @@ presence.on("UpdateData", async () => {
     presenceData.state = title.textContent;
   }
   if (page.includes("/members/")) {
-    var title = document.querySelector("#item-header-content > div > div > div.flex.align-items-center.member-title-wrap > h2");
+    const titles = document.querySelector("#item-header-content > div > div > div.flex.align-items-center.member-title-wrap > h2");
     presenceData.details = "Viendo:";
-    presenceData.state = `${title.textContent}'s Perfil`;
+    presenceData.state = `${titles.textContent}'s Perfil`;
   }
   if (page.includes("/category/")) {
     title = document.querySelector("#main > header > h1 > span");
