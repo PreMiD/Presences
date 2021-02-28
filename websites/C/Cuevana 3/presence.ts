@@ -29,12 +29,12 @@ presence.on("UpdateData", async () => {
     document.location.pathname.match("^/[0-9]") ||
     document.location.pathname.includes("/episodio")
   ) {
-    const titulo = document.querySelector(`h1.Title`).textContent,
-      subtitulo = document.querySelector(`h2.SubTitle`).textContent;
+    const titulo = document.querySelector("h1.Title").textContent,
+      subtitulo = document.querySelector("h2.SubTitle").textContent;
 
     if (!document.location.pathname.includes("/episodio")) {
       presenceData.details = titulo;
-      presenceData.state = subtitulo;
+      (subtitulo == titulo) ? delete presenceData.state : presenceData.state = subtitulo;
       presenceData.buttons = [
         { label: "Ver Película",
           url: window.location.href
