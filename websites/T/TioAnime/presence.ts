@@ -13,7 +13,7 @@ function getTimestamps(videoTime, videoDuration) {
     const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
 }
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
     lastPlaybackState = playback;
     browsingStamp = Math.floor(Date.now() / 1000);
 }
