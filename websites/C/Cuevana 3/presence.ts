@@ -34,6 +34,7 @@ presence.on("UpdateData", async () => {
 
     if (!document.location.pathname.includes("/episodio")) {
       presenceData.details = titulo;
+      presenceData.state = subtitulo;
       presenceData.buttons = [
         { label: "Ver Película",
           url: window.location.href
