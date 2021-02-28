@@ -11,22 +11,27 @@ presence.on("UpdateData", async () => {
     queryString = document.location.search.substring(1);
   presenceData.startTimestamp = browsingStamp;
   
-  var BaseUrl = 'https://jstris.jezevec10.com';
+  //Sets BaseUrl
+  let BaseUrl = 'https://jstris.jezevec10.com',
 
   //Inits temporary button array that is to be applied to presenceData later.
-  var tempButtons = new Array;
+  tempButtons = new Array(0),
 
   //Sets button for joining.
-  var joinLinkArr = document.getElementsByClassName('joinLink');
+  joinLinkArr = document.getElementsByClassName('joinLink'),
+
+  //Sets username
+  username = getUsername();
+
   if (joinLinkArr.length !== 0) {
-    var url = joinLinkArr[joinLinkArr.length-1].innerHTML;
-    tempButtons.push({ label: "Join", url: url });
+    let joinUrl = joinLinkArr[joinLinkArr.length-1].innerHTML;
+    tempButtons.push({ label: "Join", url: joinUrl });
   }
   //Sets button for viewing profile.
-  var username = getUsername();
+  
   if (typeof username !== "undefined") {
-    var url = `${BaseUrl}/u/${username.replace(/\n/g, '')}`;
-    tempButtons.push({ label: "View Profile", url: url });
+    let profileUrl = `${BaseUrl}/u/${username.replace(/\n/g, '')}`;
+    tempButtons.push({ label: "View Profile", url: profileUrl });
   }
   
   switch (pathname[0]) {
