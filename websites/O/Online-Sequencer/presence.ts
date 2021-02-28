@@ -8,96 +8,93 @@ function refreshTime() {
 }
 
 presence.on("UpdateData", async () => {
-  let upperText,
-    lowerText,
-    refreshtime = true;
+  const presenceData: PresenceData = {
+    largeImageKey: "online_sequencer_icon",
+    startTimestamp: timestart
+  };
+  let refreshtime = true;
   if (document.getElementsByClassName("fas fa-stop")[0] != undefined) {
-    upperText = "Listening to a sequence";
-    lowerText =
+    presenceData.details = "Listening to a sequence";
+    presenceData.state =
       "Title: " + (<HTMLInputElement>document.getElementById("title")).value;
+    presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(<HTMLAnchorElement>document.querySelector("#titlebar div a")).href}];
   } else if (document.location.pathname == "/") {
-    upperText = "Writing a new sequence";
-    lowerText =
+    presenceData.details = "Writing a new sequence";
+    presenceData.state =
       "Title: " + (<HTMLInputElement>document.getElementById("title")).value;
   } else if (document.location.pathname == "/sequences") {
-    upperText = "Browsing sequences";
+    presenceData.details = "Browsing sequences";
     if (document.getElementsByTagName("input")[2].value != "") {
       refreshtime = false;
-      lowerText =
+      presenceData.state =
         "Searching: " +
         (<HTMLInputElement>document.getElementsByTagName("input")[2]).value;
     }
   } else if (document.location.pathname == "/memberlist") {
-    upperText = "Viewing members";
+    presenceData.details = "Viewing members";
     if (document.getElementsByTagName("input")[2].value != "") {
       refreshtime = false;
-      lowerText =
+      presenceData.state =
         "Searching: " +
         (<HTMLInputElement>document.getElementsByTagName("input")[2]).value;
     }
   } else if (document.location.pathname.startsWith("/members/")) {
-    upperText = "Viewing member:";
-    lowerText = (<HTMLElement>(
+    presenceData.details = "Viewing member:";
+    presenceData.state = (<HTMLElement>(
       document.getElementsByClassName("profile_header")[0]
     )).innerText;
   } else if (document.location.pathname.startsWith("/import")) {
-    upperText = "Importing MIDI file";
+    presenceData.details = "Importing MIDI file";
   } else if (document.location.pathname.startsWith("/forum/showthread")) {
-    upperText = "Viewing Forum Thread:";
+    presenceData.details = "Viewing Forum Thread:";
     const threadtitle = (<HTMLElement>(
       document.getElementsByClassName("thead")[0]
     )).innerText;
     if (threadtitle.includes("Thread Modes")) {
-      lowerText = threadtitle.substr(13);
+      presenceData.state = threadtitle.substr(13);
     } else {
-      lowerText = threadtitle;
+      presenceData.state = threadtitle;
     }
   } else if (document.location.pathname.startsWith("/forum/announcements")) {
-    upperText = "Viewing Forum Announcement:";
-    lowerText = (<HTMLElement>document.getElementsByClassName("thead")[0])
+    presenceData.details = "Viewing Forum Announcement:";
+    presenceData.state = (<HTMLElement>document.getElementsByClassName("thead")[0])
       .innerText;
   } else if (document.location.pathname.startsWith("/forum/forumdisplay")) {
-    upperText = "Viewing Forum Category:";
-    lowerText = (<HTMLElement>(
+    presenceData.details = "Viewing Forum Category:";
+    presenceData.state = (<HTMLElement>(
       document.getElementsByClassName("pull-left navbar-header")[0]
     )).innerText;
   } else if (document.location.pathname.startsWith("/forum/memberlist")) {
-    upperText = "Viewing Forum Members";
+    presenceData.details = "Viewing Forum Members";
   } else if (document.location.pathname.startsWith("/forum")) {
-    upperText = "Viewing Forum";
+    presenceData.details = "Viewing Forum";
   } else if (!isNaN(parseInt(document.location.pathname.substr(1)))) {
     if (
       document.getElementsByClassName("active tooltipstered")[0] == undefined
     ) {
-      upperText = "Viewing a sequence";
+      presenceData.details = "Viewing a sequence";
+      presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(<HTMLAnchorElement>document.querySelector("#titlebar div a")).href}];
     } else {
-      upperText = "Editing a sequence";
+      presenceData.details = "Editing a sequence";
     }
     const str = (<HTMLElement>(
       document.getElementsByClassName("text")[1]
     )).innerHTML.trim();
     if (str.includes("by <a")) {
-      lowerText = "Title: " + str.substring(0, str.indexOf("by <a"));
+      presenceData.state = "Title: " + str.substring(0, str.indexOf("by <a"));
     } else {
-      lowerText = "Title: " + str;
+      presenceData.state = "Title: " + str;
     }
   }
 
   if (document.getElementById("chatbox") != null) {
     refreshtime = true;
-    upperText = "Viewing Chat";
+    presenceData.details = "Viewing Chat";
   }
 
   if (refreshtime) {
     refreshTime();
   }
-
-  const presenceData: PresenceData = {
-    largeImageKey: "online_sequencer_icon",
-    details: upperText,
-    state: lowerText,
-    startTimestamp: timestart
-  };
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
