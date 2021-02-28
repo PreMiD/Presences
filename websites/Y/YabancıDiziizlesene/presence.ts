@@ -23,14 +23,18 @@ presence.on("iFrameData", async (msg: Video) => {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  },
+      largeImageKey: "logo"
+    },
     seriesBool = document.querySelector(
       "body > section > div > div > div.content__inner.movie__page.d-flex.justify-content-between > div.content__sidebar > div.card.card__bg1.mb-4.mb-hidden > div.card__title.title__no-icon.d-flex.justify-content-between > h2"
-    ) ? true : false,
+    )
+      ? true
+      : false,
     movieBool = document.querySelector(
       "body > section > div > div.content > div > div.content__sidebar > div.card.card__bg1.mb-4 > div.card__title.title__1 > h2 > strong"
-    ) ? true : false;
+    )
+      ? true
+      : false;
 
   if (!seriesBool && !movieBool) {
     video = null;
@@ -50,8 +54,8 @@ presence.on("UpdateData", async () => {
   // Movies
   else if (movieBool) {
     const movieTitle = document.querySelector(
-      "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > h2"
-    ).textContent,
+        "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > h2"
+      ).textContent,
       movieTitle2 = document.querySelector(
         "body > section > div > div.content > div > div.content__container > div:nth-child(1) > div > div > div.watch__title > div.watch__title__name > div > span"
       ).textContent;
@@ -68,10 +72,15 @@ presence.on("UpdateData", async () => {
 
   if (video) {
     presenceData.smallImageKey = video.paused ? "pause" : "play";
-    presenceData.smallImageText = video.paused ? (await strings).paused : (await strings).playing;
+    presenceData.smallImageText = video.paused
+      ? (await strings).paused
+      : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      const timestamps = presence.getTimestamps(video.currentTime, video.duration);
+      const timestamps = presence.getTimestamps(
+        video.currentTime,
+        video.duration
+      );
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
     }
