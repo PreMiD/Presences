@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
         timestamps = video ? presence.getTimestampsfromMedia(video) : [browsingStamp, null];
 
         if (videoD.title.includes("[")) videoD.title = videoD.title.replace(/(\[.+\])/g, "");
-        if (videoD.title.includes("EP.") || videoD.title.includes("ตอน")) videoD.title = videoD.title.replace(/(ตอนต่อไป EP.[1-9]?[0-9]?[0-9]|EP.[1-9]?[0-9]?[0-9]|ตอน?\.? [1-9]?[0-9]?[0-9])/, "");
+        if (videoD.title.includes("EP.")) videoD.title = videoD.title.replace(/(ตอนต่อไป EP.[1-9]?[0-9]?[0-9]|EP.[1-9]?[0-9]?[0-9])/, "");
         if (videoD.title.match(/ \| | \|(?!.)/)) videoD.title = videoD.title.replace(/ \| | \|(?!.)/, " ");
         if (videoD.title.match(/(highlight)/i)) videoD.title = videoD.title.replace(/(highlight)/i, "");
         if (videoD.aTitle.match(/(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9])/g)) videoD.episodes = videoD.aTitle.match(/(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9]|\([1-9]\/[1-9]\))/g);
