@@ -12,6 +12,7 @@
   "service": "AnimeFLV",
   "description": {
     "en": "AnimeFLV is a streaming website where you can watch anime with Spanish subtitles.",
+    "es": "AnimeFLV es un sitio web de streaming donde puedes ver anime con subtítulos en español.",
     "zh_CN": "AnimeFLV是一个视频网站，您可以在其中观看带有西班牙语字幕的动漫。"
   },
   "url": [
