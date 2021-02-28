@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Error 02: Watching unknown anime.";
         presenceData.smallImageKey = "search";
-        presence.error("Watching an unknown show.")
+        presence.error("Watching an unknown show.");
       }
     }
     else if(document.querySelector("#main_bg > div:nth-child(5) > div > div.section-header > h3").textContent == " Result search"){
