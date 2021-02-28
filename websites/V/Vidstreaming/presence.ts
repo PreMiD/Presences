@@ -38,7 +38,6 @@ presence.on("UpdateData", async () => {
     }
   }
   else{
-    lastPlaybackState = null;
     presence.info("Video Time is Off");
   }
   if (elapsed) {
@@ -46,7 +45,6 @@ presence.on("UpdateData", async () => {
     presence.info("Elapsed is On");
   }
   else{
-    browsingStamp = null;
     presence.info("Elapsed is Off");
   }
 
@@ -142,7 +140,6 @@ presence.on("UpdateData", async () => {
       presence.error("Can't read page.");
     }
   } else {
-    presenceData.details = null;
     presence.info("Info is off.");
   }
   if (presenceData.details == null) {
