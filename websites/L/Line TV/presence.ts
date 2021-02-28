@@ -166,7 +166,7 @@ presence.on("UpdateData", async () => {
 
                 default:
                     presenceData.details = videoD.title;
-                    presenceData.state = `${(await strings).episode} ${videoD.epText} | Preview`;
+                    presenceData.state = `${(await strings).episode} ${videoD.epText}`;
                     break;
             }
 
