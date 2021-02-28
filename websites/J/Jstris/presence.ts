@@ -12,10 +12,10 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = browsingStamp;
   
   //Sets BaseUrl
-  let BaseUrl = 'https://jstris.jezevec10.com',
+  const BaseUrl = 'https://jstris.jezevec10.com';
 
   //Inits temporary button array that is to be applied to presenceData later.
-  tempButtons = new Array(0),
+  let tempButtons = new Array(0),
 
   //Sets button for joining.
   joinLinkArr = document.getElementsByClassName('joinLink'),
