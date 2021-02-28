@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
 
         if (videoD.title.includes("[")) videoD.title = videoD.title.replace(/(\[.+\])/g, "");
         if (videoD.title.includes("EP.")) videoD.title = videoD.title.replace(/(ตอนต่อไป EP.[1-9]?[0-9]?[0-9]|EP.[1-9]?[0-9]?[0-9])/, "");
-        if (videoD.title.match(/ \| | \|(?!.)/)) videoD.title = videoD.title.replace(/ \| | \|(?!.)/, "");
+        if (videoD.title.match(/ \| | \|(?!.)/)) videoD.title = videoD.title.replace(/ \| | \|(?!.)/, " ");
         if (videoD.title.match(/(highlight)/i)) videoD.title = videoD.title.replace(/(highlight)/i, "");
         if (videoD.aTitle.match(/(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\])/g)) videoD.episodes = videoD.aTitle.match(/(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|\([1-9]\/[1-9]\))/g);
         if (videoD.episodes) videoD.epText = (videoD.episodes[0].includes("[") || videoD.episodes[0].includes("(")) ? ` ${videoD.episodes[0]}` : ` ${videoD.episodes[0].match(/[1-9]?[0-9]?[0-9]/)[0]}${videoD.episodes.length > 1 ? ` | ${videoD.episodes[1]}` : ""}`;
