@@ -102,6 +102,11 @@ presence.on("UpdateData", async () => {
                 case "SPORTS":
                     presenceData.details = videoD.title;
                     presenceData.state = `${(await strings).episode} ${videoD.epText}`;
+                
+                case "CHILD":
+                    presenceData.details = videoD.title;
+                    presenceData.state = `${(await strings).episode} ${videoD.epText}`;
+                    break; 
 
                 case "DRAMA":
                     presenceData.details = videoD.title;
@@ -163,14 +168,10 @@ presence.on("UpdateData", async () => {
                     videoD.buttonLabel =  (await strings).watchStream;
                     break;
 
-                case "CHILD":
-                    presenceData.details = videoD.title;
-                    presenceData.state = `${(await strings).episode} ${videoD.epText}`;
-                    break;
-
                 case "PREVIEW":
                     presenceData.details = videoD.title;
                     presenceData.state = `${(await strings).episode} ${videoD.epText} | Preview`;
+                    break;
 
                 default:
                     presenceData.details = videoD.title;
@@ -209,7 +210,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).searching;
 
         if (resutls){
-            presenceData.state = `${resutls} matching ${resutls > 1 ? "results" : "result"}`
+            presenceData.state = `${resutls} matching ${resutls > 1 ? "results" : "result"}`;
         } else {
             presenceData.state = "No matching result";
         }
