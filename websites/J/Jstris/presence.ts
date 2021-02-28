@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
             }
             break;
           case "2":
-            presenceData.details = "Practise";
+            presenceData.details = "Practice";
             break;
           case "3":
             presenceData.details = "Cheese Race";
