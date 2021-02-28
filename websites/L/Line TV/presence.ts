@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
             smallImagePlay: "play",
             epText: null,
             id: videoData.nClipNo,
-            genre: videoData.sCategoryCode,
+            genre: videoData.sCategoryCode
         },
         timestamps = video ? presence.getTimestampsfromMedia(video) : [browsingStamp, null];
 
@@ -99,15 +99,6 @@ presence.on("UpdateData", async () => {
                                   .replace("%playlist%", videoD.playList);
 
             switch (videoD.genre) {
-                case "SPORTS":
-                    presenceData.details = videoD.title;
-                    presenceData.state = `${(await strings).episode} ${videoD.epText}`;
-                
-                case "CHILD":
-                    presenceData.details = videoD.title;
-                    presenceData.state = `${(await strings).episode} ${videoD.epText}`;
-                    break; 
-
                 case "DRAMA":
                     presenceData.details = videoD.title;
                     presenceData.state = (videoD.epText?.startsWith(" [") && videoD.episodes) ? `Drama | ${videoD.epText}` : videoD.episodes ? `${(await strings).episode} ${videoD.epText}` : "Highlight";    
