@@ -10,6 +10,25 @@ presence.on("UpdateData", async () => {
     pathname = document.location.pathname.split("/").splice(1),
     queryString = document.location.search.substring(1);
   presenceData.startTimestamp = browsingStamp;
+  
+  var BaseUrl = 'https://jstris.jezevec10.com';
+
+  //Inits temporary button array that is to be applied to presenceData later.
+  var tempButtons = new Array;
+
+  //Sets button for joining.
+  var joinLinkArr = document.getElementsByClassName('joinLink');
+  if (joinLinkArr.length !== 0) {
+    var url = joinLinkArr[joinLinkArr.length-1].innerHTML;
+    tempButtons.push({ label: "Join", url: url });
+  }
+  //Sets button for viewing profile.
+  var username = getUsername();
+  if (typeof username !== "undefined") {
+    var url = `${BaseUrl}/u/${username.replace(/\n/g, '')}`;
+    tempButtons.push({ label: "View Profile", url: url });
+  }
+  
   switch (pathname[0]) {
     //Play Modes
     case "":
@@ -41,6 +60,9 @@ presence.on("UpdateData", async () => {
           case "6":
             presenceData.details = "Playing Custom Map";
             presenceData.state = "Map ID: " + queryObj.map;
+            if (tempButtons.length !== 2) {
+              tempButtons.unshift({ label: "Play Map", url: `${BaseUrl}/?play=6&map=${queryObj.map}` });
+            }
             break;
           case "7":
             presenceData.details = "20TSD";
@@ -94,6 +116,11 @@ presence.on("UpdateData", async () => {
       break;
   }
 
+  //Sets the buttons:
+  if (tempButtons.length !== 0 && tempButtons.length <= 2) {
+    presenceData.buttons = tempButtons;
+  }
+
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
@@ -101,6 +128,10 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
+
+function getUsername() {
+  return document.getElementsByClassName('navbar-right')[0].getElementsByClassName('dropdown-toggle')[1].textContent;
+}
 
 function parseQuery(search: string) {
   return JSON.parse(
@@ -110,9 +141,11 @@ function parseQuery(search: string) {
     }
   );
 }
+
 function leaderboardText(innerText: string) {
   return "Browsing " + innerText + " Leaderboards";
 }
+
 function sprintLineMode(mode: string) {
   switch (mode) {
     case "1":
