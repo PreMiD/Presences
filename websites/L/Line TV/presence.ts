@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 
     if (pathname.includes('/v/') || pathname.includes("/special/")){
         const video = document.querySelector('video'),
-        videoD: videoDType = {
+        videoD: VideoDType = {
             title: (videoData.sClipTitle.match(/.+?(?=\[|【|「)/) || [videoData.sClipTitle])[0],
             playList: (document.querySelector('tooltip') as HTMLElement)?.title,
             aTitle: videoData.sClipTitle,
@@ -175,8 +175,7 @@ presence.on("UpdateData", async () => {
                     break;
 
                 default:
-                    presenceData.details = videoD.title;
-                    presenceData.state = `${(await strings).episode} ${videoD.epText}`;
+                    presence.error("Unknown type was found");
                     break;
             }
 
@@ -220,7 +219,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
 });
 
-interface videoDType {
+interface VideoDType {
     title: string
     aTitle: string
     isTrailer: boolean
