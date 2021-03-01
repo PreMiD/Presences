@@ -235,7 +235,7 @@ presence.on("UpdateData", async function () {
         }
       }
     } else if (urlpath[1] === "t") {
-      presenceData.details = "Liest Beitrag:"
+      presenceData.details = "Liest Beitrag:";
       presenceData.state = document.querySelector(".fancy-title").textContent;
       if(set_showButtons) {
         presenceData.buttons = [
