@@ -19,13 +19,13 @@ presence.on("UpdateData", async () => {
     presenceData.state =
       "Title: " + (document.getElementById("title") as HTMLInputElement).value;
     presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(document.querySelector("#titlebar div a") as HTMLAnchorElement).href}];
-  } else if (document.location.pathname == "/") {
+  } else if (document.location.pathname === "/") {
     prevPage = currPage;
     currPage = "w";
     presenceData.details = "Writing a new sequence";
     presenceData.state =
       "Title: " + (document.getElementById("title") as HTMLInputElement).value;
-  } else if (document.location.pathname == "/sequences") {
+  } else if (document.location.pathname === "/sequences") {
     prevPage = currPage;
     currPage = "bs";
     presenceData.details = "Browsing sequences";
@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
         "Searching: " +
         (document.getElementsByTagName("input")[2] as HTMLInputElement).value;
     }
-  } else if (document.location.pathname == "/memberlist") {
+  } else if (document.location.pathname === "/memberlist") {
     prevPage = currPage;
     currPage = "ml";
     presenceData.details = "Viewing members";
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
     prevPage = currPage;
     currPage = "s";
     if (
-      document.getElementsByClassName("active tooltipstered")[0] == undefined
+      document.getElementsByClassName("active tooltipstered")[0] === undefined
     ) {
       presenceData.details = "Viewing a sequence";
       presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(document.querySelector("#titlebar div a") as HTMLAnchorElement).href}];
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
     refreshTime();
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
