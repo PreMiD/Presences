@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
 
     if (pathname.includes('/v/') || pathname.includes("/special/")){
         const video = document.querySelector('video'),
-        videoD: videoDType = {
+        videoD: VideoDType = {
             title: (videoData.sClipTitle.match(/.+?(?=\[|【|「)/) || [videoData.sClipTitle])[0],
             playList: (document.querySelector('tooltip') as HTMLElement)?.title,
             aTitle: videoData.sClipTitle,
@@ -74,15 +74,15 @@ presence.on("UpdateData", async () => {
             smallImagePlay: "play",
             epText: null,
             id: videoData.nClipNo,
-            genre: videoData.sCategoryCode,
+            genre: videoData.sCategoryCode
         },
         timestamps = video ? presence.getTimestampsfromMedia(video) : [browsingStamp, null];
 
         if (videoD.title.includes("[")) videoD.title = videoD.title.replace(/(\[.+\])/g, "");
         if (videoD.title.includes("EP.")) videoD.title = videoD.title.replace(/(ตอนต่อไป EP.[1-9]?[0-9]?[0-9]|EP.[1-9]?[0-9]?[0-9])/, "");
-        if (videoD.title.match(/ \| | \|(?!.)/)) videoD.title = videoD.title.replace(/ \| | \|(?!.)/, "");
+        if (videoD.title.match(/ \| | \|(?!.)/)) videoD.title = videoD.title.replace(/ \| | \|(?!.)/, " ");
         if (videoD.title.match(/(highlight)/i)) videoD.title = videoD.title.replace(/(highlight)/i, "");
-        if (videoD.aTitle.match(/(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\])/g)) videoD.episodes = videoD.aTitle.match(/(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|\([1-9]\/[1-9]\))/g);
+        if (videoD.aTitle.match(/(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9])/g)) videoD.episodes = videoD.aTitle.match(/(EP.[1-9]?[0-9]?[0-9]|\[[1-9]\/[1-9]\]|ตอน?\.? [1-9]?[0-9]?[0-9]|\([1-9]\/[1-9]\))/g);
         if (videoD.episodes) videoD.epText = (videoD.episodes[0].includes("[") || videoD.episodes[0].includes("(")) ? ` ${videoD.episodes[0]}` : ` ${videoD.episodes[0].match(/[1-9]?[0-9]?[0-9]/)[0]}${videoD.episodes.length > 1 ? ` | ${videoD.episodes[1]}` : ""}`;
 
         if (video){ 
@@ -99,11 +99,6 @@ presence.on("UpdateData", async () => {
                                   .replace("%playlist%", videoD.playList);
 
             switch (videoD.genre) {
-                case "SPORTS":
-                    presenceData.details = videoD.title;
-                    presenceData.state = `${(await strings).episode} ${videoD.epText}`;
-                    break;
-
                 case "DRAMA":
                     presenceData.details = videoD.title;
                     presenceData.state = (videoD.epText?.startsWith(" [") && videoD.episodes) ? `Drama | ${videoD.epText}` : videoD.episodes ? `${(await strings).episode} ${videoD.epText}` : "Highlight";    
@@ -164,11 +159,6 @@ presence.on("UpdateData", async () => {
                     videoD.buttonLabel =  (await strings).watchStream;
                     break;
 
-                case "CHILD":
-                    presenceData.details = videoD.title;
-                    presenceData.state = `${(await strings).episode} ${videoD.epText}`;
-                    break;
-
                 case "PREVIEW":
                     presenceData.details = videoD.title;
                     presenceData.state = `${(await strings).episode} ${videoD.epText} | Preview`;
@@ -211,7 +201,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).searching;
 
         if (resutls){
-            presenceData.state = `${resutls} matching ${resutls > 1 ? "results" : "result"}`
+            presenceData.state = `${resutls} matching ${resutls > 1 ? "results" : "result"}`;
         } else {
             presenceData.state = "No matching result";
         }
@@ -220,7 +210,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
 });
 
-interface videoDType {
+interface VideoDType {
     title: string
     aTitle: string
     isTrailer: boolean
