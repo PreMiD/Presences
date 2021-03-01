@@ -21,14 +21,14 @@ presence.on("UpdateData", async function () {
     }
   }
   if (
-    document.location.hostname == "reallifegtav.de" ||
-    document.location.hostname == "rlv.link"
+    document.location.hostname === "reallifegtav.de" ||
+    document.location.hostname === "rlv.link"
   ) {
     if (set_timeElapsed) {
       presenceData.startTimestamp = browsingStamp;
     }
     if (
-      (urlpath[1] == "" || document.location.pathname.includes("/home")) &&
+      (urlpath[1] === "" || document.location.pathname.includes("/home")) &&
       urlpath[2] != ""
     ) {
       presenceData.details =
@@ -158,55 +158,55 @@ presence.on("UpdateData", async function () {
       }
     }
   } else if (
-    document.location.hostname == "forum.reallifegtav.de" ||
-    document.location.hostname == "forum.rlv.link"
+    document.location.hostname === "forum.reallifegtav.de" ||
+    document.location.hostname === "forum.rlv.link"
   ) {
     if (set_timeElapsed) {
       presenceData.startTimestamp = browsingStamp;
     }
-    if (urlpath[1] == "" || document.location.pathname.includes("/categories")) {
+    if (urlpath[1] === "" || document.location.pathname.includes("/categories")) {
       presenceData.details = "Schaut sich im Forum um";
-    } else if (urlpath[1] == "admin") {
+    } else if (urlpath[1] === "admin") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Admin Page";
-    } else if (urlpath[1] == "team-build") {
+    } else if (urlpath[1] === "team-build") {
       const tb_type = urlpath[2] || "High-Scores";
       let tb_user = "";
       if(urlpath[3] != undefined) tb_user = " von " + capitalizeFirstLetter(urlpath[3]) + ":";
 
       presenceData.details = "Team-Building";
       presenceData.state = capitalizeFirstLetter(tb_type) + tb_user;
-    } else if (urlpath[1] == "map") {
+    } else if (urlpath[1] === "map") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Karte";
-    } else if (urlpath[1] == "latest") {
+    } else if (urlpath[1] === "latest") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Aktuelle Beiträge";
-    } else if (urlpath[1] == "top") {
+    } else if (urlpath[1] === "top") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Beliebte Beiträge";
-    } else if (urlpath[1] == "about") {
+    } else if (urlpath[1] === "about") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Über uns";
-    } else if (urlpath[1] == "faq") {
+    } else if (urlpath[1] === "faq") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "FAQ";
-    } else if (urlpath[1] == "tos") {
+    } else if (urlpath[1] === "tos") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Nutzungsbedienungen";
-    } else if (urlpath[1] == "privacy") {
+    } else if (urlpath[1] === "privacy") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Datenschutzerklärung";
-    } else if (urlpath[1] == "review") {
+    } else if (urlpath[1] === "review") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Reports";
-    } else if (urlpath[1] == "g") {
+    } else if (urlpath[1] === "g") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Gruppen";
-    } else if (urlpath[1] == "unread") {
+    } else if (urlpath[1] === "unread") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Ungelesene Beiträge";
-    } else if (urlpath[1] == "c") {
+    } else if (urlpath[1] === "c") {
       if (urlpath[2] != undefined) {
         presenceData.details ="Betrachtet Kategorie:";
         presenceData.state = document.querySelector(".category-name").textContent;
@@ -219,8 +219,8 @@ presence.on("UpdateData", async function () {
           ];
         }
       }
-    } else if (urlpath[1] == "u") {
-      if (urlpath[2] == "" || urlpath[2] == undefined) {
+    } else if (urlpath[1] === "u") {
+      if (urlpath[2] === "" || urlpath[2] == undefined) {
         presenceData.details = "Schaut alle User an";
       } else if (urlpath[2] != "" && urlpath[1] != "t") {
         presenceData.details = "Betrachtet Profil:";
@@ -234,7 +234,7 @@ presence.on("UpdateData", async function () {
           ];
         }
       }
-    } else if (urlpath[1] == "t") {
+    } else if (urlpath[1] === "t") {
       presenceData.details = "Liest Beitrag:"
       presenceData.state = document.querySelector(".fancy-title").textContent;
       if(set_showButtons) {
