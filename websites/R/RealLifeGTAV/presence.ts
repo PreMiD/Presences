@@ -170,8 +170,8 @@ presence.on("UpdateData", async function () {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Admin Page";
     } else if (urlpath[1] == "team-build") {
-      var tb_type = urlpath[2] || "High-Scores";
-      var tb_user = "";
+      const tb_type = urlpath[2] || "High-Scores";
+      let tb_user = "";
       if(urlpath[3] != undefined) tb_user = " von " + capitalizeFirstLetter(urlpath[3]) + ":";
 
       presenceData.details = "Team-Building";
@@ -197,9 +197,6 @@ presence.on("UpdateData", async function () {
     } else if (urlpath[1] == "privacy") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Datenschutzerklärung";
-    } else if (urlpath[1] == "about") {
-      presenceData.details = "Betrachtet:";
-      presenceData.state = "Über uns";
     } else if (urlpath[1] == "review") {
       presenceData.details = "Betrachtet:";
       presenceData.state = "Reports";
