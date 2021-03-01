@@ -7,7 +7,6 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "fontsred",
         smallImageKey: "google",
-        smallImageText: "Google",
         startTimestamp: tmb
     },
     path = document.location.pathname.toLowerCase(),
