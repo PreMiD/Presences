@@ -24,22 +24,22 @@ async function getStrings(): Promise<LangStrings> {
 }
 
 let strings: LangStrings,
-    oldLang: string,
-    title: string,
-    subtitle: string,
-    groupWatchCount: number;
+  oldLang: string,
+  title: string,
+  subtitle: string,
+  groupWatchCount: number;
 
 presence.on("UpdateData", async () => {
   const newLang: string = await presence.getSetting("lang"),
-        time: boolean = await presence.getSetting("time"),
-        buttons: boolean = await presence.getSetting("buttons"),
-        groupWatchBtn: boolean = await presence.getSetting("groupWatchBtn"),
-        isHostDP = /(www\.)?disneyplus\.com/.test(location.hostname),
-        isHostHS = /(www\.)?hotstar\.com/.test(location.hostname),
-        data: PresenceData & {
-          partySize?: number;
-          partyMax?: number;
-        } = {};
+    time: boolean = await presence.getSetting("time"),
+    buttons: boolean = await presence.getSetting("buttons"),
+    groupWatchBtn: boolean = await presence.getSetting("groupWatchBtn"),
+    isHostDP = /(www\.)?disneyplus\.com/.test(location.hostname),
+    isHostHS = /(www\.)?hotstar\.com/.test(location.hostname),
+    data: PresenceData & {
+      partySize?: number;
+      partyMax?: number;
+    } = {};
 
   // Update strings when user sets language
   if (!oldLang || oldLang !== newLang) {
@@ -60,17 +60,25 @@ presence.on("UpdateData", async () => {
     );
 
     if (video && !isNaN(video.duration)) {
-      const groupWatchId = new URLSearchParams(location.search).get("groupWatchId"),
-            timestamps: number[] = presence.getTimestampsfromMedia(video);
+      const groupWatchId = new URLSearchParams(location.search).get(
+          "groupWatchId"
+        ),
+        timestamps: number[] = presence.getTimestampsfromMedia(video);
 
       if (groupWatchId) {
-        groupWatchCount = Number(document.querySelector(
-          ".btm-media-overlays-container .group-profiles-control .group-profiles-control__count"
-        )?.textContent);
+        groupWatchCount = Number(
+          document.querySelector(
+            ".btm-media-overlays-container .group-profiles-control .group-profiles-control__count"
+          )?.textContent
+        );
       }
 
-      const titleField: HTMLDivElement = document.querySelector(".btm-media-overlays-container .title-field"),
-            subtitleField: HTMLDivElement = document.querySelector(".btm-media-overlays-container .subtitle-field");
+      const titleField: HTMLDivElement = document.querySelector(
+          ".btm-media-overlays-container .title-field"
+        ),
+        subtitleField: HTMLDivElement = document.querySelector(
+          ".btm-media-overlays-container .subtitle-field"
+        );
 
       title = titleField?.textContent;
       subtitle = subtitleField?.textContent; // episode or empty if it's a movie
@@ -102,10 +110,12 @@ presence.on("UpdateData", async () => {
 
       // add buttons, if enabled
       if (buttons) {
-        data.buttons = [{
-          label: subtitle ? strings.watchEpisode : strings.watchVideo,
-          url: `https://www.disneyplus.com${location.pathname}`
-        }];
+        data.buttons = [
+          {
+            label: subtitle ? strings.watchEpisode : strings.watchVideo,
+            url: `https://www.disneyplus.com${location.pathname}`
+          }
+        ];
 
         // change button if GroupWatch is active and user enabled the button
         if (groupWatchId && groupWatchBtn) {
@@ -119,7 +129,7 @@ presence.on("UpdateData", async () => {
       if (title) presence.setActivity(data, !video.paused);
     }
 
-  // GroupWatch lobby
+    // GroupWatch lobby
   } else if (isHostDP && location.pathname.includes("/groupwatch/")) {
     groupWatchCount = document.querySelectorAll(
       ".gw-avatar-enter-done:not([id=gw-invite-button])"
@@ -148,15 +158,17 @@ presence.on("UpdateData", async () => {
 
     // add button, if enabled
     if (buttons && groupWatchBtn) {
-      data.buttons = [{
-        label: "Join GroupWatch",
-        url: location.pathname
-      }];
+      data.buttons = [
+        {
+          label: "Join GroupWatch",
+          url: location.pathname
+        }
+      ];
     }
 
     if (title) presence.setActivity(data, false);
 
-  // Disney+ Hotstar video
+    // Disney+ Hotstar video
   } else if (isHostHS && /\/(tv|movies)\//.test(location.pathname)) {
     const video: HTMLVideoElement = document.querySelector(
       ".player-base video"
@@ -164,8 +176,12 @@ presence.on("UpdateData", async () => {
 
     if (video && !isNaN(video.duration)) {
       const timestamps: number[] = presence.getTimestampsfromMedia(video),
-            titleField: HTMLDivElement = document.querySelector(".controls-overlay .primary-title"),
-            subtitleField: HTMLDivElement = document.querySelector(".controls-overlay .show-title");
+        titleField: HTMLDivElement = document.querySelector(
+          ".controls-overlay .primary-title"
+        ),
+        subtitleField: HTMLDivElement = document.querySelector(
+          ".controls-overlay .show-title"
+        );
 
       title = titleField?.textContent;
       subtitle = subtitleField?.textContent; // episode or empty if it's a movie
@@ -173,9 +189,7 @@ presence.on("UpdateData", async () => {
       data.details = title;
       data.state = subtitle || "Movie";
       data.smallImageKey = video.paused ? "pause" : "play";
-      data.smallImageText = video.paused
-        ? strings.pause
-        : strings.play;
+      data.smallImageText = video.paused ? strings.pause : strings.play;
       data.startTimestamp = timestamps[0];
       data.endTimestamp = timestamps[1];
 
@@ -185,16 +199,18 @@ presence.on("UpdateData", async () => {
       }
 
       if (buttons) {
-        data.buttons = [{
-          label: strings.watchVideo,
-          url: location.pathname
-        }];
+        data.buttons = [
+          {
+            label: strings.watchVideo,
+            url: location.pathname
+          }
+        ];
       }
 
       if (title) presence.setActivity(data, !video.paused);
     }
 
-  // Browsing
+    // Browsing
   } else {
     data.details = strings.browsing;
     presence.setActivity(data);
