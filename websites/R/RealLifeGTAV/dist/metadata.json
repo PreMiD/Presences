@@ -37,6 +37,12 @@
       "title": "Timestamp einblenden",
       "icon": "fad fa-hourglass-half",
       "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Buttons anzeigen",
+      "icon": "fad fa-mouse-pointer",
+      "value": true
     }
   ]
 }

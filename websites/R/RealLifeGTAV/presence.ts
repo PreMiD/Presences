@@ -11,6 +11,7 @@ presence.on("UpdateData", async function () {
     },
     set_showUsername = await presence.getSetting("showUsername"),
     set_timeElapsed = await presence.getSetting("timeElapsed"),
+    set_showButtons = await presence.getSetting("showButtons"),
     urlpath = window.location.pathname.split("/");
   function ifSettingEnabled(setting, string) {
     if (setting) {
@@ -30,7 +31,6 @@ presence.on("UpdateData", async function () {
       (urlpath[1] == "" || document.location.pathname.includes("/home")) &&
       urlpath[2] != ""
     ) {
-      presenceData.smallImageKey = "downloading";
       presenceData.details =
         "Startseite" +
         ifSettingEnabled(
@@ -60,7 +60,7 @@ presence.on("UpdateData", async function () {
           set_showUsername,
           " | User: " + document.querySelector("#RPC_Username").textContent
         );
-      presenceData.smallImageKey = "reading";
+
     } else if (document.location.pathname.includes("/faq")) {
       presenceData.details =
         "FAQ" +
@@ -68,7 +68,7 @@ presence.on("UpdateData", async function () {
           set_showUsername,
           " | User: " + document.querySelector("#RPC_Username").textContent
         );
-      presenceData.smallImageKey = "reading";
+
     } else if (document.location.pathname.includes("/jobs")) {
       presenceData.details =
         "Jobs" +
@@ -84,7 +84,7 @@ presence.on("UpdateData", async function () {
           set_showUsername,
           " | User: " + document.querySelector("#RPC_Username").textContent
         );
-      presenceData.smallImageKey = "reading";
+
     } else if (document.location.pathname.includes("/partner")) {
       presenceData.details =
         "Partner Panel" +
@@ -92,7 +92,7 @@ presence.on("UpdateData", async function () {
           set_showUsername,
           " | User: " + document.querySelector("#RPC_Username").textContent
         );
-      presenceData.smallImageKey = "reading";
+
     } else if (document.location.pathname.includes("/luxurycars")) {
       presenceData.details =
         "LuxuryAutos Shop" +
@@ -100,7 +100,7 @@ presence.on("UpdateData", async function () {
           set_showUsername,
           " | User: " + document.querySelector("#RPC_Username").textContent
         );
-      presenceData.smallImageKey = "reading";
+
     } else if (document.location.pathname.includes("/rules")) {
       presenceData.details =
         "Regelwerk" +
@@ -108,7 +108,7 @@ presence.on("UpdateData", async function () {
           set_showUsername,
           " | User: " + document.querySelector("#RPC_Username").textContent
         );
-      presenceData.smallImageKey = "reading";
+
     } else if (
       document.location.pathname.includes("/transactions") &&
       !window.location.search.substr(1)
@@ -119,7 +119,7 @@ presence.on("UpdateData", async function () {
           set_showUsername,
           " | User: " + document.querySelector("#RPC_Username").textContent
         );
-      presenceData.smallImageKey = "reading";
+
     } else if (
       document.location.pathname.includes("/transactions") &&
       window.location.search.substr(1)
@@ -130,7 +130,6 @@ presence.on("UpdateData", async function () {
         inputfield = "...";
       }
       presenceData.details = "Überweisung an " + inputfield;
-      presenceData.smallImageKey = "writing";
     } else if (document.location.pathname.includes("/pages")) {
       if (document.location.pathname.includes("/impressum")) {
         presenceData.details =
@@ -139,7 +138,7 @@ presence.on("UpdateData", async function () {
             set_showUsername,
             " | User: " + document.querySelector("#RPC_Username").textContent
           );
-        presenceData.smallImageKey = "reading";
+
       } else if (document.location.pathname.includes("/datenschutz")) {
         presenceData.details =
           "Datenschutzerklärung" +
@@ -147,7 +146,7 @@ presence.on("UpdateData", async function () {
             set_showUsername,
             " | User: " + document.querySelector("#RPC_Username").textContent
           );
-        presenceData.smallImageKey = "reading";
+
       } else if (document.location.pathname.includes("/tos")) {
         presenceData.details =
           "Terms Of Service" +
@@ -155,7 +154,7 @@ presence.on("UpdateData", async function () {
             set_showUsername,
             " | User: " + document.querySelector("#RPC_Username").textContent
           );
-        presenceData.smallImageKey = "reading";
+
       }
     }
   } else if (
@@ -165,49 +164,90 @@ presence.on("UpdateData", async function () {
     if (set_timeElapsed) {
       presenceData.startTimestamp = browsingStamp;
     }
-    if (
-      urlpath[1] == "" ||
-      document.location.pathname.includes("/categories")
-    ) {
-      presenceData.smallImageKey = "reading";
+    if (urlpath[1] == "" || document.location.pathname.includes("/categories")) {
       presenceData.details = "Schaut sich im Forum um";
-    } else if (
-      document.location.pathname.includes("/latest") &&
-      !document.location.pathname.includes("/c") &&
-      !document.location.pathname.includes("/u")
-    ) {
-      presenceData.smallImageKey = "reading";
-      presenceData.details = "Schaut aktuelle Beiträge an";
-    } else if (
-      document.location.pathname.includes("/top") &&
-      !document.location.pathname.includes("/c") &&
-      !document.location.pathname.includes("/u")
-    ) {
-      presenceData.smallImageKey = "reading";
-      presenceData.details = "Schaut beliebte Beiträge an";
-    } else if (document.location.pathname.includes("/c")) {
+    } else if (urlpath[1] == "admin") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Admin Page";
+    } else if (urlpath[1] == "team-build") {
+      var tb_type = urlpath[2] || "High-Scores";
+      var tb_user = "";
+      if(urlpath[3] != undefined) tb_user = " von " + capitalizeFirstLetter(urlpath[3]) + ":";
+
+      presenceData.details = "Team-Building";
+      presenceData.state = capitalizeFirstLetter(tb_type) + tb_user;
+    } else if (urlpath[1] == "map") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Karte";
+    } else if (urlpath[1] == "latest") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Aktuelle Beiträge";
+    } else if (urlpath[1] == "top") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Beliebte Beiträge";
+    } else if (urlpath[1] == "about") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Über uns";
+    } else if (urlpath[1] == "faq") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "FAQ";
+    } else if (urlpath[1] == "tos") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Nutzungsbedienungen";
+    } else if (urlpath[1] == "privacy") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Datenschutzerklärung";
+    } else if (urlpath[1] == "about") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Über uns";
+    } else if (urlpath[1] == "review") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Reports";
+    } else if (urlpath[1] == "g") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Gruppen";
+    } else if (urlpath[1] == "unread") {
+      presenceData.details = "Betrachtet:";
+      presenceData.state = "Ungelesene Beiträge";
+    } else if (urlpath[1] == "c") {
       if (urlpath[2] != undefined) {
-        presenceData.details =
-          "Schaut " +
-          document.querySelector(".category-name").textContent +
-          " an";
-        presenceData.smallImageKey = "reading";
+        presenceData.details ="Betrachtet Kategorie:";
+        presenceData.state = document.querySelector(".category-name").textContent;
+        if(set_showButtons) {
+          presenceData.buttons = [
+            {
+              label: 'Kategorie anschauen',
+              url: window.location.href
+            }
+          ];
+        }
       }
-    } else if (document.location.pathname.includes("/u")) {
+    } else if (urlpath[1] == "u") {
       if (urlpath[2] == "" || urlpath[2] == undefined) {
         presenceData.details = "Schaut alle User an";
-        presenceData.smallImageKey = "reading";
       } else if (urlpath[2] != "" && urlpath[1] != "t") {
-        presenceData.details =
-          "Profil von " + capitalizeFirstLetter(urlpath[2]);
-        presenceData.smallImageKey = "reading";
+        presenceData.details = "Betrachtet Profil:";
+        presenceData.state = capitalizeFirstLetter(urlpath[2]);
+        if(set_showButtons) {
+          presenceData.buttons = [
+            {
+              label: 'Profil anschauen',
+              url: window.location.href
+            }
+          ];
+        }
       }
-    } else if (document.location.pathname.includes("/t")) {
-      presenceData.details =
-        "Liest:" +
-        document.querySelector(".fancy-title").textContent +
-        "Beitrag";
-      presenceData.smallImageKey = "reading";
+    } else if (urlpath[1] == "t") {
+      presenceData.details = "Liest Beitrag:"
+      presenceData.state = document.querySelector(".fancy-title").textContent;
+      if(set_showButtons) {
+        presenceData.buttons = [
+          {
+            label: 'Beitrag anschauen',
+            url: window.location.href
+          }
+        ];
+      }
     }
   }
   if (presenceData.details == null) {
