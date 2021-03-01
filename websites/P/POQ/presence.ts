@@ -12,17 +12,17 @@ function cal(str: string) {
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: 'poq1',
-    startTimestamp: browsingStamp
+    startTimestamp: browsingStamp,
   };
 
   if (document.location.hostname == 'www.poq.gg') {
+    presenceData.details = `Home`;
     presenceData.buttons = [
       {
         label: `POQ.gg`,
         url: `https://poq.gg/`,
       },
     ];
-    presenceData.details = `Home`;
     console.log('Connected');
     if (document.querySelector('div.css-sqne7k')) {
       presenceData.details = `Staring at a 404 error`;
@@ -35,13 +35,13 @@ presence.on('UpdateData', async () => {
       presenceData.details = `Viewing their own profile`;
       const ign = document.querySelector('h3').textContent;
       presenceData.state = ign;
-      console.log(`https://poq.gg/${ign}`);
-      /*presenceData.buttons = [
+      delete presenceData.buttons;
+      presenceData.buttons = [
         {
           label: `${ign}'s Profile`,
           url: `https://poq.gg/${ign}`,
-        }
-      ];*/
+        },
+      ];
     }
     if (document.location.pathname.startsWith('/games')) {
       presenceData.details = 'Browsing through';
@@ -62,7 +62,6 @@ presence.on('UpdateData', async () => {
     if (document.location.pathname.startsWith('/call-of-duty-warzone')) {
       presenceData.details = 'Looking at';
       presenceData.state = `Call of Duty: Warzone Tournaments`;
-
     }
     if (document.location.pathname.startsWith('/discord')) {
       presenceData.details = `Linking their POQ account`;
@@ -100,8 +99,8 @@ presence.on('UpdateData', async () => {
       presenceData.buttons = [
         {
           label: `View Tournament`,
-          url: `${document.URL}`
-        }
+          url: `${document.URL}`,
+        },
       ];
     }
     else if (document.location.href.indexOf('?' + `game` + '=') != -1) {
@@ -110,9 +109,11 @@ presence.on('UpdateData', async () => {
       gm = gm.replace(/-/g, ' ');
       gm = cal(gm);
       presenceData.state = `${gm} Tournaments`;
-
     }
-
+    if (document.querySelector("div.css-37pl01")) {
+      presenceData.details = `Buying Quarters`;
+      presenceData.state = ``;
+    }
   }
   const showPrize: boolean = await presence.getSetting('prize');
 
@@ -172,53 +173,57 @@ presence.on('UpdateData', async () => {
     presenceData.state = `on POQ.gg`;
     presenceData.smallImageKey = `user`;
     presenceData.smallImageText = `account.poq.gg`;
-  }
-  if (document.location.pathname.startsWith('/login')) {
-    presenceData.details = `Logging into POQ.gg`;
-    presenceData.state = ``;
-  }
-  if (document.location.pathname.startsWith('/oauth/')) {
-    presenceData.details = `Signing into the`;
-    presenceData.state = `Prize Store`;
-  }
-  if (document.location.pathname.startsWith('/invest')) {
-    presenceData.details = 'Reading about POQ';
-    presenceData.state = ``;
-  }
-  if (document.location.pathname.startsWith('/developers')) {
-    presenceData.details = 'Reading about the';
-    presenceData.state = `Developer API`;
-  }
-  if (document.location.pathname.startsWith('/home')) {
-    presenceData.details = `Watching the home page`;
-    presenceData.state = ``;
-  }
-  if (document.location.pathname.startsWith('/change-password')) {
-    const showPass: boolean = await presence.getSetting('pass');
-    if (showPass) {
-      presenceData.details = `Changing their password`;
+    if (document.location.pathname.startsWith('/login')) {
+      presenceData.details = `Logging into POQ.gg`;
       presenceData.state = ``;
     }
-    else {
-      presenceData.details = `Exploring account settings`;
+    if (document.location.pathname.startsWith('/oauth/')) {
+      presenceData.details = `Signing into the`;
+      presenceData.state = `Prize Store`;
+    }
+    if (document.location.pathname.startsWith('/invest')) {
+      presenceData.details = 'Reading about POQ';
       presenceData.state = ``;
     }
-  }
-  if (document.location.pathname.startsWith('/accounts')) {
-    presenceData.details = `Looking at their acccount`;
-    presenceData.state = ``;
-  }
-  if (document.location.pathname.startsWith('/apps/')) {
-    presenceData.details = `Viewing one of their`;
-    presenceData.state = `Developer apps`;
-  }
-  if (document.location.pathname.startsWith('/join')) {
-    presenceData.details = `Setting up their account`;
-    presenceData.state = `for the first time`;
-  }
-  if (document.location.pathname.startsWith('/rewards')) {
-    presenceData.details = `Looking at the rewards`;
-    presenceData.state = `they can earn.`;
+    if (document.location.pathname.startsWith('/developers')) {
+      presenceData.details = 'Reading about the';
+      presenceData.state = `Developer API`;
+    }
+    if (document.location.pathname.startsWith('/home')) {
+      presenceData.details = `Watching the home page`;
+      presenceData.state = ``;
+    }
+    if (document.location.pathname.startsWith('/change-password')) {
+      const showPass: boolean = await presence.getSetting('pass');
+      if (showPass) {
+        presenceData.details = `Changing their password`;
+        presenceData.state = ``;
+      }
+      else {
+        presenceData.details = `Exploring account settings`;
+        presenceData.state = ``;
+      }
+    }
+    if (document.location.pathname.startsWith('/accounts')) {
+      presenceData.details = `Looking at their acccount`;
+      presenceData.state = ``;
+    }
+    if (document.location.pathname.startsWith('/apps/')) {
+      presenceData.details = `Viewing one of their`;
+      presenceData.state = `Developer apps`;
+    }
+    if (document.location.pathname.startsWith('/join')) {
+      presenceData.details = `Setting up their account`;
+      presenceData.state = `for the first time`;
+    }
+    if (document.location.pathname.startsWith('/rewards')) {
+      presenceData.details = `Looking at the rewards`;
+      presenceData.state = `they can earn.`;
+    }
+    if (document.querySelector("iframe")) {
+      presenceData.details = `Buying Quarters`;
+      presenceData.state = `Terminal3`;
+    }
   }
   presence.setActivity(presenceData);
 });
