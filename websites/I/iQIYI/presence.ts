@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
           ep: (document.querySelector('h1') || document.querySelector(".topice-source-list-item.item-active"))?.textContent.replace(document.querySelector('h1 a')?.textContent || "", '')
       },
 
-      URLItem: string = JSON['parse'](document.querySelectorAll('script[type="application/ld+json"]')[1]?.innerHTML || "{}")[0]?.itemListElement[0]?.item ?? document.URL,
+      URLItem: string = JSON.parse(document.querySelectorAll('script[type="application/ld+json"]')[1]?.innerHTML || "{}")[0]?.itemListElement[0]?.item ?? document.URL,
       video: HTMLVideoElement = document.querySelector('video'),
       isMovie = URLItem.includes('movie'),
       isVShow = URLItem.includes('variety-show'),
@@ -88,7 +88,7 @@ presence.on("UpdateData", async () => {
 
       if (isTrial && !isPreview) data.ep = `${data.ep} (Trial)`;
 
-      if (video !== null && !Number["isNaN"](Number(video.duration))){
+      if (video !== null && !Number.isNaN(Number(video.duration))){
           const timestamps: number[] = presence.getTimestampsfromMedia(video);
 
           if (isPreview && !isMovie) data.ep = `${data.ep} preview`;
