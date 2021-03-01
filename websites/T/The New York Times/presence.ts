@@ -37,12 +37,12 @@ presence.on("UpdateData", async () => {
     details = "Viewing an Article: ";
     state = title.replace(" - The New York Times", "");
   }
-
+    
     const data: PresenceData = {
-      details: details,
+      details,
       largeImageKey: "logo",
       startTimestamp: time,
-      state: state,
+      state,
       buttons: [{label: "View Page", url: document.URL}]
     };
 
