@@ -23,19 +23,16 @@ presence.on('UpdateData', async () => {
         url: `https://poq.gg/`,
       },
     ];
-    console.log('Connected');
     if (document.querySelector('div.css-sqne7k')) {
       presenceData.details = `Staring at a 404 error`;
     }
     if (document.querySelector("div.css-surn0g")) {
       presenceData.details = `Signing into POQ`;
-      console.log("Clicked");
     }
     if (document.location.pathname.startsWith('/profile')) {
       presenceData.details = `Viewing their own profile`;
       const ign = document.querySelector('h3').textContent;
       presenceData.state = ign;
-      console.log("alive")
     }
     if (document.location.pathname.startsWith('/games')) {
       presenceData.details = 'Browsing through';
@@ -95,8 +92,8 @@ presence.on('UpdateData', async () => {
       presenceData.buttons = [
         {
           label: `View Tournament`,
-          url: `${document.URL}`,
-        },
+          url: `${document.URL}`
+        }
       ];
     }
     else if (document.location.href.indexOf('?' + `game` + '=') != -1) {
