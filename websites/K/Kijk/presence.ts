@@ -9,11 +9,9 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   },
-  page = window.location.pathname,
-  host = document.location.hostname; 
+  page = window.location.pathname;
 
     presenceData.startTimestamp = browsingStamp;
-    if (host === "www.kijk.nl") {
     if (page === "/") {
       search = document.querySelector("#__next > div > div > div.SearchModalstyle__SearchModalStyle-sc-1h6b5wy-0.knmuVj > div.SearchModalstyle__SearchModalHeaderStyle-sc-1h6b5wy-1.kNvWZE > div > div:nth-child(2) > div.SearchModalstyle__SearchModalInputWrapperStyle-sc-1h6b5wy-5.iwOFOK > input");
       if (!search) {
@@ -89,7 +87,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.textContent;
     }
   }
-    }
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
