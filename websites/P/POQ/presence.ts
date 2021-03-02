@@ -86,7 +86,7 @@ presence.on('UpdateData', async () => {
         const part1 = part.childNodes[0].textContent;
         presenceData.state = `Host: ${part1}`;
         presenceData.smallImageKey = `${part1.toLowerCase()}`;
-        presenceData.smallImageText = `${part1}`;
+        presenceData.smallImageText = `Partnered Creator: ${part1}`;
       }
       if (af !== null && part == null) {
         const af1 = af.childNodes[0].textContent;
