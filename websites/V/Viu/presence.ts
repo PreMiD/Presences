@@ -1,7 +1,6 @@
 const presence = new Presence({
   clientId: "815947069117169684"
 }),
-  startTime = Math.floor(Date.now() / 1000),
   getStrings = async (): Promise<LangStrings> =>
   presence.getStrings(
     {
@@ -18,7 +17,6 @@ const presence = new Presence({
   }, await presence.getSetting("lang"));
 
 let browsingStamp = Math.floor(Date.now() / 1000),
-    prevUrl = document.location.href,
     strings: Promise<LangStrings> = getStrings(),
     oldLang: string = null;
 
@@ -27,7 +25,7 @@ presence.on("UpdateData", async () => {
       details: (await strings).browse,
       smallImageKey: "reading",
       smallImageText: (await strings).browse,
-      startTimestamp: startTime 
+      startTimestamp: browsingStamp 
     },
       newLang = await presence.getSetting("lang"),
       buttonsOn = await presence.getSetting("buttons?"),
@@ -82,7 +80,7 @@ presence.on("UpdateData", async () => {
           presenceData.buttons = [{
             label: isMovie ? (await strings).watchMovie : (await strings).watchEpisode,
             url: document.baseURI
-          }]
+          }];
         }
 
         if (video.paused){
