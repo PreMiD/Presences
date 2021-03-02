@@ -96,7 +96,7 @@ presence.on('UpdateData', async () => {
         }
       ];
     }
-    else if (document.location.href.indexOf('?' + `game` + '=') != -1) {
+    else if (document.location.href.indexOf('?' + `game` + '=') !== -1) {
       presenceData.details = 'Looking at';
       let gm = document.location.pathname.replace(/^.*[\\/]/, '');
       gm = gm.replace(/-/g, ' ');
