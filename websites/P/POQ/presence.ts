@@ -139,7 +139,7 @@ presence.on('UpdateData', async () => {
         presenceData.state = `${h1.textContent}`;
       }
     }
-    if (document.location.href.indexOf('?' + `s` + '=') != -1) {
+    if (document.location.href.indexOf('?' + `s` + '=') !== -1) {
       presenceData.details = `Searching for a product:`;
       const match = document.getElementById("search") as HTMLInputElement;
       presenceData.state = `${match.value}`;
