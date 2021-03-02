@@ -4,7 +4,7 @@
     "name": "Priim0",
     "id": "774995448485773342"
   },
-  "service": "AnimeShitai",
+  "service": "Anime Shitai",
   "description": {
     "en": "Anime Shitai is a German Anime Source where you can watch Animes here with german subtitle and german dubbed. We have over 1000 Animes that wait for you to watch!",
     "de": "Anime Shitai ist eine Anime Stream Source wo ihr über 1000 kostenlose Anime Serien anschauen könnt, Jede woche gibt auch noch die neuste Anime Folgen frisch aus Japan mit deutschem Untertitel nur für euch und das völlig Kostenlos auf Full HD / 1080p ",
@@ -14,7 +14,7 @@
     "www.anime-shitai.com",
     "anime-shitai.com"
   ],
-  "version": "1.3.8",
+  "version": "1.0.0",
   "logo": "https://i.imgur.com/8PWKaRe.jpg",
   "thumbnail": "https://i.imgur.com/9cPeVMA.jpg",
   "color": "#6bb8f4",
