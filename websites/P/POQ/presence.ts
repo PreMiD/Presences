@@ -35,13 +35,7 @@ presence.on('UpdateData', async () => {
       presenceData.details = `Viewing their own profile`;
       const ign = document.querySelector('h3').textContent;
       presenceData.state = ign;
-      delete presenceData.buttons;
-      presenceData.buttons = [
-        {
-          label: `${ign}'s Profile`,
-          url: `https://poq.gg/${ign}`,
-        },
-      ];
+      console.log("alive")
     }
     if (document.location.pathname.startsWith('/games')) {
       presenceData.details = 'Browsing through';
@@ -91,6 +85,8 @@ presence.on('UpdateData', async () => {
       if (part !== null && af == null) {
         const part1 = part.childNodes[0].textContent;
         presenceData.state = `Host: ${part1}`;
+        presenceData.smallImageKey = `${part1.toLowerCase()}`;
+        presenceData.smallImageText = `${part1}`;
       }
       if (af !== null && part == null) {
         const af1 = af.childNodes[0].textContent;
@@ -132,6 +128,12 @@ presence.on('UpdateData', async () => {
         const pl = document.title.split('–');
         console.log(pl[0]);
         presenceData.state = `${pl[0]}`;
+        presenceData.buttons = [
+          {
+            label: `View Product`,
+            url: document.URL,
+          },
+        ];
       }
     }
     if (document.location.pathname.startsWith("/product-category/")) {
@@ -207,6 +209,10 @@ presence.on('UpdateData', async () => {
     if (document.location.pathname.startsWith('/accounts')) {
       presenceData.details = `Looking at their acccount`;
       presenceData.state = ``;
+      if (document.querySelector("iframe")) {
+        presenceData.details = `Buying Quarters`;
+        presenceData.state = `Terminal3`;
+      }
     }
     if (document.location.pathname.startsWith('/apps/')) {
       presenceData.details = `Viewing one of their`;
@@ -219,10 +225,6 @@ presence.on('UpdateData', async () => {
     if (document.location.pathname.startsWith('/rewards')) {
       presenceData.details = `Looking at the rewards`;
       presenceData.state = `they can earn.`;
-    }
-    if (document.querySelector("iframe")) {
-      presenceData.details = `Buying Quarters`;
-      presenceData.state = `Terminal3`;
     }
   }
   presence.setActivity(presenceData);
