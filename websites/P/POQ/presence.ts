@@ -20,8 +20,8 @@ presence.on('UpdateData', async () => {
     presenceData.buttons = [
       {
         label: `POQ.gg`,
-        url: `https://poq.gg/`,
-      },
+        url: `https://poq.gg/`
+      }
     ];
     if (document.querySelector('div.css-sqne7k')) {
       presenceData.details = `Staring at a 404 error`;
@@ -123,7 +123,6 @@ presence.on('UpdateData', async () => {
       if (showPrize) {
         presenceData.details = `Browsing a product:`;
         const pl = document.title.split('–');
-        console.log(pl[0]);
         presenceData.state = `${pl[0]}`;
         presenceData.buttons = [
           {
