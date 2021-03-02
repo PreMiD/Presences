@@ -12,10 +12,10 @@ function cal(str: string) {
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     largeImageKey: 'poq1',
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
 
-  if (document.location.hostname == 'www.poq.gg') {
+  if (document.location.hostname === 'www.poq.gg') {
     presenceData.details = `Home`;
     presenceData.buttons = [
       {
@@ -77,8 +77,8 @@ presence.on('UpdateData', async () => {
     }
     else if (document.location.pathname.startsWith('/events/')) {
       presenceData.details = `${document.getElementsByClassName('css-p1puod').item(0).innerHTML}`;
-      const part = document.querySelector('div.css-azex1v');
-      const af = document.querySelector('div.css-1rtjxms');
+      const part = document.querySelector('div.css-azex1v'),
+      af = document.querySelector('div.css-1rtjxms');
       if (part !== null && af == null) {
         const part1 = part.childNodes[0].textContent;
         presenceData.state = `Host: ${part1}`;
@@ -127,8 +127,8 @@ presence.on('UpdateData', async () => {
         presenceData.buttons = [
           {
             label: `View Product`,
-            url: document.URL,
-          },
+            url: document.URL
+          }
         ];
       }
     }
