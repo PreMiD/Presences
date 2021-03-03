@@ -1,17 +1,18 @@
 const presence = new Presence({ clientId: "729087463452049559" }),
-  timestamp = Math.floor(Date.now() / 1000);
-let data: {
-    listeners: number;
-    song: {
-      artist: string;
-      title: string;
-      text: string;
-    };
-    onAir: {
-      name: string;
-    };
-  },
+  timestamp = Math.floor(Date.now() / 1000),
   newStats = async () => data = await (await window.fetch("https://staff.repeatradio.net/_api/nowPlaying")).json();
+
+let data: {
+  listeners: number;
+  song: {
+    artist: string;
+    title: string;
+    text: string;
+  };
+  onAir: {
+    name: string;
+  };
+};
 
 setInterval(newStats, 10000);
 newStats();
