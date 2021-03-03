@@ -19,10 +19,11 @@
     "streaming",
     "embedded-links",
     "anime",
-	"tio",
-	"español",
-	"tio anime",
-	"animes"
+    "tio",
+    "español",
+    "tioanime",
+    "animes",
+    "animetio" 
   ],
   "category": "anime",
   "iframe": true
