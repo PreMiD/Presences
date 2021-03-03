@@ -3,8 +3,7 @@ const presence = new Presence({
 });
 let playback,lastPlaybackState=null,browsingStamp=Math.floor(Date.now()/1e3),video={duration:0,currentTime:0};
 presence.getTimestamps(videoTime, videoDuration) {
-    const startTime = Date.now();
-    const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+const startTime=Date.now(),endTime=Math.floor(startTime/1e3)-videoTime+videoDuration;
     return [Math.floor(startTime / 1000), endTime];
 }
 if (lastPlaybackState !== playback) {
