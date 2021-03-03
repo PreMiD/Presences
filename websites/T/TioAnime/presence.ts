@@ -1,14 +1,8 @@
 const presence = new Presence({
     clientId: "815653970445205544"
 });
-let lastPlaybackState = null;
-let playback;
-let browsingStamp = Math.floor(Date.now() / 1000);
-let video = {
-    duration: 0,
-    currentTime: 0
-};
-function getTimestamps(videoTime, videoDuration) {
+let playback,lastPlaybackState=null,browsingStamp=Math.floor(Date.now()/1e3),video={duration:0,currentTime:0};
+presence.getTimestamps(videoTime, videoDuration) {
     const startTime = Date.now();
     const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
     return [Math.floor(startTime / 1000), endTime];
@@ -26,10 +20,7 @@ presence.on("UpdateData", async () => {
     };
     if (video != null &&
         document.location.pathname.includes("/ver")) {
-        const videoTitle = document
-            .evaluate("//body//h1[1]", document)
-            .iterateNext();
-        const episode = videoTitle.textContent.split(/(\w+)$/);
+const videoTitle=document.evaluate("//body//h1[1]",document).iterateNext(),episode=videoTitle.textContent.split(/(\w+)$/);
         if (!video.paused) {
             const timestamps = getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration));
             presenceData.startTimestamp = timestamps[0];
