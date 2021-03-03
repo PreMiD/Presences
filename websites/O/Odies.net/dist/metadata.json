@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "bris",
+    "id": "656165298818514946"
+  },
+  "service": "Odies.net",
+  "description": {
+    "tr": "Odies, botlarınız ve siteleriniz için ücretsiz kod, yardım alabileceğiniz bir sitedir.",
+    "en": "Odies, is a free code for your bots and sites, a site where you can get help."
+  },
+  "url": "odies.net",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/lwgHpv0.png",
+  "thumbnail": "https://i.imgur.com/niuo4Af.jpg",
+  "color": "#4898E2",
+  "tags": [
+    "discord",
+    "bot"
+  ],
+  "category": "other"
+}
