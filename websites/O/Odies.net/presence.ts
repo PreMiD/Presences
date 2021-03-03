@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     },
     browsingStamp = Math.floor(Date.now() / 1000);
   presenceData.startTimestamp = browsingStamp;
-  if (window.location.hostname.toLowerCase() === "odies.net") {
+  if (window.location.hostname.toLowerCase() == "odies.net") {
     if (
       document
         .querySelector("head > title")
@@ -22,16 +22,16 @@ presence.on("UpdateData", async () => {
           "body > div.container-fluid.error-content > div > h1"
         ).innerHTML +
         ") ";
-    } else if (window.location.pathname.toLowerCase() === "/") {
+    } else if (window.location.pathname.toLowerCase() == "/") {
       presenceData.details = "Bir sayfaya göz atıyor:";
       presenceData.state = "Ana sayfa";
-    } else if (window.location.pathname.toLowerCase() === "/request/new") {
+    } else if (window.location.pathname.toLowerCase() == "/request/new") {
       presenceData.details = "Bir sayfaya göz atıyor:";
       presenceData.state = "Istek Kod";
-    } else if (window.location.pathname.toLowerCase() === "/code/new/user") {
+    } else if (window.location.pathname.toLowerCase() == "/code/new/user") {
       presenceData.details = "Bir sayfaya göz atıyor:";
       presenceData.state = "Kod paylaş";
-    } else if (window.location.pathname.toLowerCase() === "/sss") {
+    } else if (window.location.pathname.toLowerCase() == "/sss") {
       presenceData.details = "Bir sayfaya göz atıyor:";
       presenceData.state = "Sıkça sorulan soruları (SSS)";
     } else if (
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
         .replace("ozel15", "15. Seviye")
         .replace("ozel30", "30. Seviye")
         .replace("ozel50", "50. Seviye");
-    } else if (window.location.pathname.toLowerCase() === "/profile") {
+    } else if (window.location.pathname.toLowerCase() == "/profile") {
       presenceData.details = `"${
         document.querySelector("div.main-content p").innerHTML.split("#")[0]
       }" adlı kullanıcının profiline bakıyor`;
@@ -74,4 +74,5 @@ presence.on("UpdateData", async () => {
   } else {
     presence.setActivity(presenceData);
   }
+  
 });
