@@ -109,7 +109,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
    }
 
-
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
