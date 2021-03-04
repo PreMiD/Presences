@@ -6,7 +6,8 @@ const presence = new Presence({
     username: "h1#me_username",
     status: "div#social_status",
     game: "div#social_status > b",
-    roomid: "div#roomid"
+    roomid: "div#roomid",
+    replay: "div#data_replay"
   },
   menuPrincipal = ["SOLO","MULTIPLAYER"],
   soloModes:{ [key: string]: string } = {
@@ -34,7 +35,8 @@ presence.on("UpdateData", async () => {
     header = getText(SelectorMap["header"]),
     status = getText(SelectorMap["status"]),
     game = getText(SelectorMap["game"]),
-    roomID = getText(SelectorMap["roomid"]);
+    roomID = getText(SelectorMap["roomid"]),
+    replay = getText(SelectorMap["replay"]);
   let buttons:Array<{ label: string; url: string; }> = [];
   if (status.includes("Idle") || status.includes("Busy") || status.includes("Offline")) {
     presenceData.details = status;
@@ -108,6 +110,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = game;
       presenceData.smallImageKey = Object.keys(soloModes).find(key => soloModes[key] === game);
       presenceData.smallImageText = game;
+    } else if (!document.querySelector("#replay").classList.contains('hidden')) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "REPLAY";
+      presenceData.state = replay;
     } else {
       browsingStamp = Math.floor(Date.now() / 1000);
       presenceData.details = status;
