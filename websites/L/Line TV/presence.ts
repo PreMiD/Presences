@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
         videoData = await presence.getPageletiable('ghtEnv'),
         pathname = document.location.pathname,
         newLang = await presence.getSetting("lang"),
-        showButton = await presence.getSetting("Buttons?"),
+        showButton = await presence.getSetting("Buttons"),
         showSearch = await presence.getSetting("searchQuery"),
         pDetail = await presence.getSetting("detail");
 
