@@ -126,6 +126,7 @@ presence.on("UpdateData", async () => {
     });
     presenceData.buttons = buttons;
   } else {
+    buttons = [];
     delete presenceData.buttons;
   }
   if (presenceData.details == null) {
