@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "812646634663837706"
-}),
+    clientId: "812646634663837706"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (window.location.pathname.includes('/leaderboards')) {
+  if (window.location.pathname.includes("/leaderboards")) {
     presenceData.details = "Viewing Leaderboard:";
 
     const selects = document.querySelectorAll("select"),
@@ -32,32 +32,36 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
-  } else if (window.location.pathname.includes('/search')) {
+  } else if (window.location.pathname.includes("/search")) {
     presenceData.details = "Searching Player:";
-    presenceData.state = document.querySelector(
-      "#__layout > div > div.layout-default__content > div.container__wrapper--content > div > main > div > div.page-search__wrapper > div > div > div.page-search__results__header--left > span.page-search__results__header--light"
-    ).textContent.trim().slice(1, -1);
-  } else if (window.location.pathname.includes('/stats')) {
+    presenceData.state = document
+      .querySelector(
+        "#__layout > div > div.layout-default__content > div.container__wrapper--content > div > main > div > div.page-search__wrapper > div > div > div.page-search__results__header--left > span.page-search__results__header--light"
+      )
+      .textContent.trim()
+      .slice(1, -1);
+  } else if (window.location.pathname.includes("/stats")) {
     presenceData.details = "Viewing Player:";
-    presenceData.state = document.querySelector(
-      "#__layout > div > div.layout-default__content > div.container__wrapper--content > div > main > div > div.player-header > div.player-header__about > div.player-header__about__meta > div.player-header__about__meta--player > div > span.player-info__player__username"
-    ).textContent.trim();
+    presenceData.state = document
+      .querySelector(
+        "#__layout > div > div.layout-default__content > div.container__wrapper--content > div > main > div > div.player-header > div.player-header__about > div.player-header__about__meta > div.player-header__about__meta--player > div > span.player-info__player__username"
+      )
+      .textContent.trim();
     presenceData.buttons = [
       {
         label: "View Stats",
-        url: document.URL
-          .replace("/operators", "")
+        url: document.URL.replace("/operators", "")
           .replace("/seasons", "")
           .replace("/weapons", "")
       }
     ];
-  } else if (window.location.pathname.includes('/compare')) {
+  } else if (window.location.pathname.includes("/compare")) {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Compare Players";
-  } else if (window.location.pathname.includes('/account')) {
+  } else if (window.location.pathname.includes("/account")) {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Personal Account";
-  } else if (window.location.pathname.includes('/privacy-policy')) {
+  } else if (window.location.pathname.includes("/privacy-policy")) {
     presenceData.details = "Viewing Page:";
     presenceData.state = "Privacy Policy";
   } else {
