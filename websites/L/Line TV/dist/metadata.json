@@ -23,7 +23,7 @@
       "multiLanguage": true
     },
     {
-      "id": "Buttons?",
+      "id": "Buttons",
       "title": "Show buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
