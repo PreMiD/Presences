@@ -3,8 +3,6 @@ const presence = new Presence({
 }),
   browsingStamp = Math.floor(Date.now() / 1000);
 function cal(str: string) {
-  // -------------------------------------------------------- SEE LINE 70 ------------------------------------------------------------
-  // converting first letter to uppercase
   const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
 
   return capitalized;

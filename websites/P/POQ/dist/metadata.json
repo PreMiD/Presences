@@ -11,21 +11,21 @@
   },
   "service": "POQ",
   "version": "1.0.0",
-  "logo": "https://pbs.twimg.com/profile_images/1303313694546423808/PAaYFaSK_400x400.jpg",
-  "thumbnail": "https://i.gyazo.com/7a15adb09474fd4103ac1a64fa5590cb.jpg",
+  "logo": "https://i.imgur.com/Z3j7Dxl.jpg",
+  "thumbnail": "https://i.imgur.com/rCJpho9.jpg",
   "color": "#FDE21F",
   "tags": ["gaming", "fortnite", "tournaments", "poq", "esports"],
   "category": "games",
   "settings": [
     {
       "id": "prize",
-      "title": "Show what item you're viewing in the prize store.",
+      "title": "Show items in prize store",
       "icon": "fas fa-shopping-cart",
       "value": true
     },
     { 
       "id": "pass",
-      "title": "Show when you're editing you account info",
+      "title": "Show account info",
       "icon": "fas fa-lock",
       "value": true
     }
