@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     };
 
-  if (lastPath != curPath || lastPlaybackState != playback) {
+  if (lastPath !== curPath || lastPlaybackState !== playback) {
     lastPath = curPath;
     lastPlaybackState = playback;
     browsingStamp = Math.floor(Date.now() / 1000);

@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     };
 
-  if (lastPath != curPath) {
+  if (lastPath !== curPath) {
     lastPath = curPath;
     browsingStamp = Math.floor(Date.now() / 1000);
   }
