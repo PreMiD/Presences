@@ -7,13 +7,16 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-let iFrameVideo:boolean,
-  videoPaused:boolean,
-  timestamps: number[];
+let iFrameVideo: boolean, videoPaused: boolean, timestamps: number[];
 
 presence.on(
   "iFrameData",
-  (data: { iFrameVideo:boolean; duration: number; currentTime: number; paused: boolean }) => {
+  (data: {
+    iFrameVideo: boolean;
+    duration: number;
+    currentTime: number;
+    paused: boolean;
+  }) => {
     iFrameVideo = data.iFrameVideo;
     timestamps = presence.getTimestamps(data.currentTime, data.duration);
     videoPaused = data.paused;
@@ -34,14 +37,13 @@ presence.on("UpdateData", async () => {
 
     if (!document.location.pathname.includes("/episodio")) {
       presenceData.details = titulo;
-      (subtitulo === titulo) ? delete presenceData.state : presenceData.state = subtitulo;
+      subtitulo === titulo
+        ? delete presenceData.state
+        : (presenceData.state = subtitulo);
       presenceData.buttons = [
-        { label: "Ver Película",
-          url: window.location.href
-        }
+        { label: "Ver Película", url: window.location.href }
       ];
-    }
-    else {
+    } else {
       presenceData.details = titulo
         .replace(document.querySelector(`h1.Title > span`).textContent, ``)
         .replace(/\s+/g, ` `)
@@ -49,13 +51,11 @@ presence.on("UpdateData", async () => {
       presenceData.state =
         document.querySelector(`h1.Title > span`).textContent + " " + subtitulo;
       presenceData.buttons = [
-        { label: "Ver Episodio",
-          url: window.location.href
-        }
+        { label: "Ver Episodio", url: window.location.href }
       ];
     }
 
-    if(iFrameVideo) {
+    if (iFrameVideo) {
       (presenceData.smallImageKey = videoPaused ? "pause" : "play"),
         (presenceData.smallImageText = videoPaused
           ? (await strings).pause
