@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp 
     },
       newLang = await presence.getSetting("lang"),
-      buttonsOn = await presence.getSetting("buttons?"),
+      buttonsOn = await presence.getSetting("buttons"),
       searchQueryOn = await presence.getSetting("searchQ"),
       videoData: VideoData = await presence.getPageletiable("GA_DIMENSIONS"),
       PresenceLogo: number = await presence.getSetting("logo"),
