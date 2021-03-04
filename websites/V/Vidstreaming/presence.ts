@@ -5,53 +5,72 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   });
-let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean, video: {
-   iframe_video:
-    { 
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  video: {
+    iframe_video: {
       duration: number;
-      iFrameVideo: boolean; 
+      iFrameVideo: boolean;
       currTime: number;
       dur: number;
-      paused: boolean; 
-    }; 
-  }, lastPlaybackState: boolean, playback: boolean, browsingStamp = Math.floor(Date.now() / 1000), title:HTMLTextAreaElement;
+      paused: boolean;
+    };
+  },
+  lastPlaybackState: boolean,
+  playback: boolean,
+  browsingStamp = Math.floor(Date.now() / 1000),
+  title: HTMLTextAreaElement;
 
-presence.on("iFrameData", (data: { iframe_video: { duration: number; iFrameVideo: boolean; currTime: number; dur: number; paused: boolean; }; }) => {
-  playback = data.iframe_video.duration !== null ? true : false;
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
-    video = data;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      duration: number;
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+    };
+  }) => {
+    playback = data.iframe_video.duration !== null ? true : false;
+    if (playback) {
+      iFrameVideo = data.iframe_video.iFrameVideo;
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.dur;
+      paused = data.iframe_video.paused;
+      video = data;
+    }
   }
-});
+);
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sSI"), 
-  elapsed = await presence.getSetting("sTE"), 
-  videoTime = await presence.getSetting("sVT");
+  const info = await presence.getSetting("sSI"),
+    elapsed = await presence.getSetting("sTE"),
+    videoTime = await presence.getSetting("sVT");
   if (videoTime) {
     if (lastPlaybackState !== playback) {
       lastPlaybackState = playback;
       presence.info("Video Time is On");
     }
-  }
-  else{
+  } else {
     presence.info("Video Time is Off");
   }
   if (elapsed) {
     browsingStamp = Math.floor(Date.now() / 1000);
     presence.info("Elapsed is On");
-  }
-  else{
+  } else {
     presence.info("Elapsed is Off");
   }
 
-  const timestamps = presence.getTimestamps(Math.floor(currentTime), Math.floor(duration)),
-   presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+  const timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
+    presenceData: PresenceData = {
+      largeImageKey: "logo"
+    };
   if (info) {
     presence.info("Info is On.");
     if (document.location.pathname == "/") {
@@ -116,7 +135,9 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = browsingStamp;
           presenceData.smallImageKey = "search";
           presenceData.smallImageText = "Error 3";
-          presence.error("Can't tell what you are watching. Fix a variable or line of code.");
+          presence.error(
+            "Can't tell what you are watching. Fix a variable or line of code."
+          );
         }
       } else {
         //Can't get the basic site information
@@ -125,14 +146,20 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "search";
         presence.error("Watching an unknown show.");
       }
-    }
-    else if(document.querySelector("#main_bg > div:nth-child(5) > div > div.section-header > h3").textContent == " Result search"){
+    } else if (
+      document.querySelector(
+        "#main_bg > div:nth-child(5) > div > div.section-header > h3"
+      ).textContent == " Result search"
+    ) {
       presence.info("Searching");
       presenceData.details = "Searching:";
-      presenceData.state = document.location.href.replace("https://gogo-stream.com/search.html?keyword=","").split("%20").join(" ");
+      presenceData.state = document.location.href
+        .replace("https://gogo-stream.com/search.html?keyword=", "")
+        .split("%20")
+        .join(" ");
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Searching";
-    }//If it can't get the page it will output an error
+    } //If it can't get the page it will output an error
     else {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Error 01: Can't Read Page";
