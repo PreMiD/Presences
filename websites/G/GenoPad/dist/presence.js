@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
         smallImageKey: "dark",
         startTimestamp: new Date().getTime()
     };
-    if (document.location.hostname == "pad.genoweb.xyz") {
+    if (document.location.hostname === "pad.genoweb.xyz") {
         presenceData.details = getMeta('premid:details');
         presenceData.state = getMeta('premid:state');
         presenceData.smallImageText = `GenoPad v${getMeta('app:version')}`;
