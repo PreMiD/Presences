@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
       if (randomDomainPicker) {
         presenceData.state = `Adding a random domain`;
       } else if (!document.body.textContent.includes("Loading")) {
-        presenceData.state = `Viewing ${document.body.textContent.match(/\d/g).join("").substring(1, 4)} domains`;
+        presenceData.state = `Viewing ${document.querySelectorAll('strong')[0].innerHTML} domains`;
       }
       break;
     }
