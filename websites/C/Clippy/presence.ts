@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "A private image uploader";
       break;
     case "/dashboard": {
-      presenceData.details = "Viewing the dasboard";
+      presenceData.details = "Viewing the dashboard";
       const uploads = document.getElementsByClassName("statContent___2xKiA")[0];
       presenceData.state = `${uploads ? uploads.innerHTML.replace(/\D/g, "") : "0"} files uploaded`;
       break;
