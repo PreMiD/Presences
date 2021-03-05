@@ -11,40 +11,38 @@ let presenceData: PresenceData = {
   startTimestamp: browsingStamp
 };
 const updateCallback = {
-  _function: null as Function,
-  get function(): Function {
-    return this._function;
+    _function: null as () => void,
+    get function(): () => void {
+      return this._function;
+    },
+    set function(parameter) {
+      this._function = parameter;
+    },
+    get present(): boolean {
+      return this._function !== null;
+    }
   },
-  set function(parameter) {
-    this._function = parameter;
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
   },
-  get present(): boolean {
-    return this._function !== null;
-  }
-};
-
-/**
- * Initialize/reset presenceData.
- */
-const resetData = (
-  defaultData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  }
-): void => {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
-  presenceData = { ...defaultData };
-};
-
-/**
- * Search for URL parameters.
- * @param urlParam The parameter that you want to know about the value.
- */
-const getURLParam = (urlParam: string): string => {
-  return currentURL.searchParams.get(urlParam);
-};
+  /**
+   * Search for URL parameters.
+   * @param urlParam The parameter that you want to know about the value.
+   */
+  getURLParam = (urlParam: string): string => {
+    return currentURL.searchParams.get(urlParam);
+  };
 
 ((): void => {
   if (
@@ -87,7 +85,7 @@ const getURLParam = (urlParam: string): string => {
       );
       pageType = getURLParam("action");
     } else {
-      const locationType = {
+      const locationType: { [index: string]: string } = {
         Home: "home",
         Login: "login", // action guessed
         Registration: "register", // action guessed

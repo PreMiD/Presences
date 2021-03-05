@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "TheSite",
   "settings": [
     {
@@ -34,16 +40,11 @@
   "description": {
     "en": "TheSite is a service that provides the public with access to motion pictures, television, and other audio-visual entertainment streamed over the internet to certain internet-connected TV's, computers smartphones, tablets, and other devices."
   },
-  "url": "relx.site",
-  "version": "1.0.4",
+  "url": ["relx.site", "calmx.site"],
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/XpFN1EZ.png",
   "thumbnail": "https://i.imgur.com/Q2isu1b.png",
   "color": "#00A0EC",
-  "tags": [
-    "relx",
-    "movies",
-    "shows",
-    "entertainment"
-  ],
+  "tags": ["relx", "calmx", "movies", "shows", "entertainment"],
   "category": "videos"
 }
