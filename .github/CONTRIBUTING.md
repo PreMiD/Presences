@@ -135,7 +135,7 @@ A list of fields and their rules are listed below:
 
 ### **`*contributors`**
 
-- Do **not** add yourself as a contributor, and do not add someone else as a contributor unless they have helped with the presence.
+- Do **not** add yourself as a contributor, and do not add someone else as a contributor unless they did pull request making changes that satisfy everyone.
 
 ### **`service`**
 
