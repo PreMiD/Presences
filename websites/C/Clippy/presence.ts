@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
       state: null,
       buttons: [
         {label: "Website", url: "https://clippy.gg"},
-        {label: "Discord", url: "https://discord.gg/image"}]
+        {label: "Discord", url: "https://discord.com/invite/image"}]
     };
 
   switch (path) {
@@ -20,12 +20,13 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Clippy.gg.";
       presenceData.state = "A private image uploader";
       break;
-    case "/dashboard":
+    case "/dashboard": {
       presenceData.details = "Viewing the dasboard";
       const uploads = document.getElementsByClassName("statContent___2xKiA")[0];
-      presenceData.state = `${uploads ? uploads.innerHTML.replace(/\D/g, "") : "0"} files uploaded`
+      presenceData.state = `${uploads ? uploads.innerHTML.replace(/\D/g, "") : "0"} files uploaded`;
       break;
-    case "/settings":
+    }
+    case "/settings": {
       const intervalEditor = document.getElementsByClassName("ant-modal-wrap ant-modal-centered")[0] as HTMLElement,
         embedEditor = document.getElementsByClassName("embedEditor")[0] as HTMLElement,
         domainPicker = document.getElementsByClassName("ant-select-open")[0] as HTMLElement,
@@ -43,7 +44,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Viewing their settings";
       }
       break;
-    case "/settings/domains":
+    }
+    case "/settings/domains": {
       const randomDomainPicker = document.getElementsByClassName("ant-select-open")[0] as HTMLElement;
       if (randomDomainPicker) {
         presenceData.state = `Adding a random domain`;
@@ -51,6 +53,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = `Viewing ${document.body.textContent.match(/\d/g).join("").substring(1, 4)} domains`;
       }
       break;
+    }
     case "/tools/upload":
       presenceData.state = "Uploading a file";
       presenceData.details = "Viewing the uploader";
