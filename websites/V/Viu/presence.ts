@@ -24,7 +24,6 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       details: (await strings).browse,
       smallImageKey: "reading",
-      smallImageText: (await strings).browse,
       startTimestamp: browsingStamp 
     },
       newLang = await presence.getSetting("lang"),
