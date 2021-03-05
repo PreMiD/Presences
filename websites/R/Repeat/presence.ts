@@ -22,20 +22,20 @@ presence.on("UpdateData", async () => {
     details: (await presence.getSetting("details"))
       .replace("%listeners%", data.listeners || "Listeners"),
       state: (await presence.getSetting("state"))
-      .replace("%artist%", data.song.artist || "Artist")
-      .replace("%songText", data.song.text || "Song")
-      .replace("%title%", data.song.title || "Title"),
+      .replace("%artist%", data.song?.artist || "Artist")
+      .replace("%songText", data.song?.text || "Song")
+      .replace("%title%", data.song?.title || "Title"),
     timestamp: await presence.getSetting("timestamp")
   },
   presenceData: PresenceData = {
     largeImageKey: "logo",
     details: settings.details,
     state: settings.state,
-    smallImageText: `${data.onAir.name || "AutoDJ"} is live!`
+    smallImageText: `${data.onAir?.name || "AutoDJ"} is live!`
   };
 
   if(settings.timestamp) presenceData.startTimestamp = timestamp;
-  if(data.onAir.name !== "AutoDJ") presenceData.smallImageKey = "bouncelive";
+  if(data.onAir?.name !== "AutoDJ") presenceData.smallImageKey = "bouncelive";
   else delete presenceData.smallImageText;
 
   presence.setActivity(presenceData);
