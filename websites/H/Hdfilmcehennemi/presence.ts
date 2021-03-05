@@ -12,7 +12,7 @@ categories: {[index: string]:string} = {
   "/en-cok-begenilen-filmler-izle/": "En Çok Beğenilenler",
   "/dil/turkce-dublajli-film-izleyin/": "Türkçe Dublaj",
   "/dil/turkce-altyazili-film-izleme-sitesi/": "Türkçe Altyazı"
-}
+};
 
 presence.on("UpdateData", async () => {
 
@@ -34,7 +34,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = categories[page];
   } else if (page.includes("/category/") || page.includes("/tur/") || page.includes("/yil/")) {
     presenceData.details = "Film Arıyor:";
-    // @ts-ignore
     let category = document.getElementsByClassName("tab-title")[0].firstChild.innerHTML;
     category.includes("Kategorisi") ? category = category.replace(/Kategorisi(.*)/, "") : "";
     category.includes("izle") ? category = category.replace(/izle(.*)/, "") : "";
@@ -51,7 +50,6 @@ presence.on("UpdateData", async () => {
   } else {
     presenceData.details = "Geziniyor";
   }
-
 
   presence.setActivity(presenceData);
 });
