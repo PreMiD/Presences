@@ -63,6 +63,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Viewing their account";
       presenceData.details = "Clippy Account";
       break;
+    default:
+      presenceData.state = "Viewing clippy.gg";
   }
   if (!isNaN(parseInt(path.charAt(path.length - 1), 10))) {
     presenceData.state = `Viewing ${document.getElementsByClassName("title___aqmzM")[0].innerHTML}'s profile`;
