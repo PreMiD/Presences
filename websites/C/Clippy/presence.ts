@@ -18,8 +18,8 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = Date.now();
     presenceData.details = "Viewing the gallery";
   } else if(path.endsWith("/settings")) {
-    const intervalEditor = <HTMLElement>document.getElementsByClassName("ant-modal-wrap ant-modal-centered")[0],
-    embedEditor = <HTMLElement>document.getElementsByClassName("embedEditor")[0],
+    const intervalEditor = document.getElementsByClassName("ant-modal-wrap ant-modal-centered")[0] as HTMLElement,
+    embedEditor = document.getElementsByClassName("embedEditor")[0] as HTMLElement,
     domainPicker = document.getElementsByClassName("ant-select-open")[0];
 
    if (embedEditor && embedEditor.parentElement.style.display !== "none") {
@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
   } else if (path.endsWith("/account")) {
     presenceData.details = "Viewing their account";
     presenceData.startTimestamp = Date.now();
-  } else if (!isNaN(parseInt(path.charAt(path.length - 1)))) {
+  } else if (!isNaN(parseInt(path.charAt(path.length - 1),10))) {
     presenceData.state = `Viewing ${document.getElementsByClassName("title___aqmzM")[0].innerHTML}'s profile`;
     presenceData.startTimestamp = Date.now();
   }
