@@ -18,6 +18,3 @@ package-lock.json
 
 # Exception for extension recommendations
 !**/.vscode/extensions.json
-
-# Config files for IDEA based IDE's
-.idea/
