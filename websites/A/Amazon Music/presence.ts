@@ -1,19 +1,50 @@
+interface LangStrings {
+  play: string;
+  pause: string;
+  viewPlaylist: string;
+  viewArtist: string;
+}
+
 const presence = new Presence({
     clientId: "808756700022702120"
   }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  getStrings = async (): Promise<LangStrings> => {
+    return presence.getStrings(
+      {
+        play: "general.playing",
+        pause: "general.paused",
+        viewPlaylist: "general.buttonViewPlaylist",
+        viewArtist: "general.buttonViewArtist"
+      },
+      await presence.getSetting("lang")
+    );
+  };
 
 let fullscreen: boolean,
   player = false,
   paused,
   currentTime,
   timeLeft,
-  timestamps;
+  timestamps,
+  playlistLink,
+  artistLink,
+  strings: Promise<LangStrings> = getStrings(),
+  oldLang: string = null;
 
 presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+      largeImageKey: "logo"
+    },
+    buttons = await presence.getSetting("buttons"),
+    newLang = await presence.getSetting("lang"),
+    showPlaylist = await presence.getSetting("showPlaylist");
+
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
   player =
     document.querySelector(
       "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
@@ -44,29 +75,41 @@ presence.on("UpdateData", async () => {
 
       timestamps = presence.getTimestamps(
         presence.timestampFromFormat(currentTime),
-        (presence.timestampFromFormat(timeLeft) + presence.timestampFromFormat(currentTime))
+        presence.timestampFromFormat(timeLeft) +
+          presence.timestampFromFormat(currentTime)
       );
 
-      const data: PresenceData = {
-        details: title,
-        state: artist,
-        smallImageKey: paused == true ? "pause" : "play",
-        smallImageText:
-          paused == true ? (await strings).pause : (await strings).play,
-        largeImageKey: "logo",
-        startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
-      };
+      presenceData.details = title;
+      presenceData.state = artist;
+      (presenceData.smallImageKey = paused == true ? "pause" : "play"),
+        (presenceData.smallImageText =
+          paused == true ? (await strings).pause : (await strings).play);
+      presenceData.largeImageKey = "logo";
+      presenceData.startTimestamp = timestamps[0];
+      presenceData.endTimestamp = timestamps[1];
 
       if (paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
       if (title !== null && artist !== null) {
-        presence.setActivity(data);
+        presence.setActivity(presenceData);
       }
     } else {
+      playlistLink = document
+        .querySelector(
+          "music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
+        )
+        .shadowRoot.querySelector("div > div > span")
+        .children[2].querySelector("a").href;
+
+      artistLink = document
+        .querySelector(
+          "music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
+        )
+        .shadowRoot.querySelector("div > div > span")
+        .children[0].querySelector("a").href;
       const title = document
           .querySelector(
             "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
@@ -94,34 +137,51 @@ presence.on("UpdateData", async () => {
         .textContent.split(" - ")[1]),
         (timestamps = presence.getTimestamps(
           presence.timestampFromFormat(currentTime),
-          (presence.timestampFromFormat(timeLeft) + presence.timestampFromFormat(currentTime))
+          presence.timestampFromFormat(timeLeft) +
+            presence.timestampFromFormat(currentTime)
         ));
 
-      const data: PresenceData = {
-        details: title,
-        state: artist,
-        largeImageKey: "logo",
-        startTimestamp: timestamps[0],
-        smallImageKey: paused == true ? "pause" : "play",
-        smallImageText:
+        presenceData.details = title,
+        presenceData.state = artist,
+        presenceData.largeImageKey = "logo",
+        presenceData.startTimestamp = timestamps[0],
+        presenceData.smallImageKey = paused == true ? "pause" : "play",
+        presenceData.smallImageText =
           paused == true ? (await strings).pause : (await strings).play,
-        endTimestamp: timestamps[1]
-      };
+        presenceData.endTimestamp = timestamps[1];
+
+      if (showPlaylist && buttons) {
+        presenceData.buttons = [
+          {
+            label: (await strings).viewArtist,
+            url: artistLink
+          },
+          {
+            label: (await strings).viewPlaylist,
+            url: playlistLink
+          }
+        ];
+      } else {
+        presenceData.buttons = [
+          {
+            label: (await strings).viewArtist,
+            url: artistLink
+          }
+        ];
+      }
 
       if (paused) {
-        delete data.startTimestamp;
-        delete data.endTimestamp;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
 
       if (title !== null && artist !== null) {
-        presence.setActivity(data);
+        presence.setActivity(presenceData);
       }
     }
   } else {
-    const data: PresenceData = {
-      details: "Browsing...",
-      largeImageKey: "logo"
-    };
-    presence.setActivity(data);
+    presenceData.details = "Browsing...";
+    presenceData.largeImageKey = "logo";
+    presence.setActivity(presenceData);
   }
 });
