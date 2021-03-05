@@ -27,7 +27,7 @@
       "id": "showISP",
       "title": "Show ISP Name",
       "icon": "fad fa-user-secret",
-      "value": true
+      "value": false
     }
   ]
 }
