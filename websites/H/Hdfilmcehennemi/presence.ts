@@ -2,13 +2,13 @@ const presence = new Presence({
   clientId: "817292272508731392"
 })
 
-const pages: {[index: string]:any} = {
+const pages: {[index: string]:string} = {
   "/film-istekleri-yap/": "Film İstekleri",
   "/site-hakkinda/": "Yasal Bildirim",
   "/iletisim/": "İletişim"
 }
 
-const categories: {[index: string]:any} = {
+const categories: {[index: string]:string} = {
   "/imdb-7-puan-uzeri-filmler/": "Imdb 7+ Filmler",
   "/en-cok-yorumlananlar/": "En Çok Yorumlananlar",
   "/en-cok-begenilen-filmler-izle/": "En Çok Beğenilenler",
@@ -47,6 +47,9 @@ presence.on("UpdateData", async () => {
     movieName.includes("izle") ? movieName = movieName.replace(/izle(.*)/, "") : "";
     presenceData.details = "Film İzliyor:";
     presenceData.state = movieName;
+    /*
+    Commented until I find something that fits into guidelines.
+
     presenceData.buttons = [
       {
         label: "İzle",
@@ -55,6 +58,7 @@ presence.on("UpdateData", async () => {
         label: "Siteye Git",
         url: "https://hdfilmcehennemi.net"
     }];
+    */
   } else if (myParam) {
     presenceData.details = "Film Arıyor:";
     presenceData.state = myParam;
