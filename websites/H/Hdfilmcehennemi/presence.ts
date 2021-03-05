@@ -1,14 +1,12 @@
 const presence = new Presence({
   clientId: "817292272508731392"
-})
-
-const pages: {[index: string]:string} = {
+}),
+pages: {[index: string]:string} = {
   "/film-istekleri-yap/": "Film İstekleri",
   "/site-hakkinda/": "Yasal Bildirim",
   "/iletisim/": "İletişim"
-}
-
-const categories: {[index: string]:string} = {
+},
+categories: {[index: string]:string} = {
   "/imdb-7-puan-uzeri-filmler/": "Imdb 7+ Filmler",
   "/en-cok-yorumlananlar/": "En Çok Yorumlananlar",
   "/en-cok-begenilen-filmler-izle/": "En Çok Beğenilenler",
@@ -19,8 +17,8 @@ const categories: {[index: string]:string} = {
 presence.on("UpdateData", async () => {
 
   let page = document.location.pathname;
-  const urlParams = new URLSearchParams(window.location.search);
-  const myParam = urlParams.get('s');
+  const urlParams = new URLSearchParams(window.location.search),
+  myParam = urlParams.get('s');
 
   if (!page.endsWith("/")) page = page + "/";
 
