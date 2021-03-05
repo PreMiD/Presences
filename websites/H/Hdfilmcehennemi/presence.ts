@@ -45,18 +45,6 @@ presence.on("UpdateData", async () => {
     movieName.includes("izle") ? movieName = movieName.replace(/izle(.*)/, "") : "";
     presenceData.details = "Film İzliyor:";
     presenceData.state = movieName;
-    /*
-    Commented until I find something that fits into guidelines.
-
-    presenceData.buttons = [
-      {
-        label: "İzle",
-        url: window.location.href
-      }, {
-        label: "Siteye Git",
-        url: "https://hdfilmcehennemi.net"
-    }];
-    */
   } else if (myParam) {
     presenceData.details = "Film Arıyor:";
     presenceData.state = myParam;
