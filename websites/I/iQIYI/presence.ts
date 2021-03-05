@@ -24,9 +24,9 @@ const presence = new Presence({
         watchMovie: "general.buttonViewMovie",
         watchEpisode: "general.buttonViewEpisode"
     }, await presence.getSetting('lang')), 
-    
-    browsingStamp = Math.floor(Date.now() / 1000),
-    strings: Promise<LangStrings> = getStrings(),
+    browsingStamp = Math.floor(Date.now() / 1000);
+      
+let strings: Promise<LangStrings> = getStrings(),
     oldLang: string = null;
 
 presence.on("UpdateData", async () => {
