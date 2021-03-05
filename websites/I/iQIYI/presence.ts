@@ -23,12 +23,11 @@ const presence = new Presence({
         watchVideo: "general.buttonWatchVideo",
         watchMovie: "general.buttonViewMovie",
         watchEpisode: "general.buttonViewEpisode"
-    }, await presence.getSetting('lang'));
-
-let browsingStamp = Math.floor(Date.now() / 1000),
-  prevUrl = document.location.href,
-  strings: Promise<LangStrings> = getStrings(),
-  oldLang: string = null;
+    }, await presence.getSetting('lang')), 
+    
+    browsingStamp = Math.floor(Date.now() / 1000),
+    strings: Promise<LangStrings> = getStrings(),
+    oldLang: string = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -41,12 +40,7 @@ presence.on("UpdateData", async () => {
     newLang = await presence.getSetting("lang"),
     showButtons: boolean = await presence.getSetting("buttons"),
     searchQuery: boolean = await presence.getSetting("searchQuery");
-
-  if (document.location.href !== prevUrl) {
-    prevUrl = document.location.href;
-    browsingStamp = Math.floor(Date.now() / 1000);
-  }
-
+  
   if (!oldLang) {
     oldLang = newLang;
   } else if (oldLang !== newLang) {
