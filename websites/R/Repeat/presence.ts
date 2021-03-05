@@ -17,9 +17,7 @@ let data: {
 setInterval(newStats, 10000);
 newStats();
 
-presence.on("UpdateData", async () => {
-  if(!data) return;
-  
+presence.on("UpdateData", async () => {  
   const settings = {
     details: (await presence.getSetting("details"))
       .replace("%listeners%", data.listeners || "Listeners"),
