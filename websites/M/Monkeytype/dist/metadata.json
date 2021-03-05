@@ -14,11 +14,11 @@
     "www.monkeytype.com",
     "monkeytype.com"
   ],
-    "description": {
+  "description": {
     "en": "A minimalistic, customisable typing website. Test yourself in various modes, track your progress and improve your typing speed."
   },
   "service": "Monkeytype",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/OnkMhFB.png",
   "thumbnail": "https://i.imgur.com/HH1UVqD.png",
   "color": "#383200",
