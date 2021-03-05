@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Shrunkie",
+    "id": "720161708664160310"
+  },
+  "url": "clippy.gg",
+  "description": {
+    "en": "Clippy, an image host platform, with lots of features."
+  },
+  "service": "Clippy",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/O5zzAu7.png",
+  "thumbnail": "https://i.imgur.com/EyJkv3e.png",
+  "color": "#58b9ff",
+  "tags": ["clippy","image","hosting", "sharex", "host"],
+  "category": "other"
+}
