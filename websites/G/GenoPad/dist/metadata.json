@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "GenoPad",
+  "author": {
+    "name": "Deleted 7.12i",
+    "id": "591702135310385157"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/QAwnyL4.png",
+  "thumbnail": "https://i.imgur.com/Tp42TcS.png",
+  "version": "0.0.4",
+  "color": "#0090ff",
+  "tags": [
+    "genopad",
+    "pad",
+    "code",
+    "prog",
+    "dev"
+  ],
+  "url": "pad.genoweb.xyz",
+  "description": {
+    "fr": "GenoPad est une plateforme gratuite d'hébergement de codes à partager où à intégrer facilement sur son site.",
+    "en": "GenoPad is a free platform for hosting codes to share or easily integrate on its site."
+  }
+}
