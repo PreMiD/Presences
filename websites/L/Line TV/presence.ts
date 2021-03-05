@@ -41,8 +41,7 @@ presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "linetv_logo",
         startTimestamp: browsingStamp,
-        details: (await strings).browse,
-        smallImageKey: "reading"
+        details: (await strings).browse
     },
         videoData = await presence.getPageletiable('ghtEnv'),
         pathname = document.location.pathname,
