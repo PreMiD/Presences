@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
       ".info-line-left.flex-box .flex-column.flex-justify-center div"
     );
     streamer = document.querySelector(
-      "div.channel-header span.dlive-name span.overflow-ellipsis"
+      "div.channel-header span.DLive-name span.overflow-ellipsis"
     );
 
     const presenceData: PresenceData = {
