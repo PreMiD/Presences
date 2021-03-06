@@ -10,27 +10,30 @@ presence.on("UpdateData", async () => {
     pathname = document.location.pathname.split("/").splice(1),
     queryString = document.location.search.substring(1);
   presenceData.startTimestamp = browsingStamp;
-
+  
   //Sets BaseUrl
-  const BaseUrl = "https://jstris.jezevec10.com",
-    //Inits temporary button array that is to be applied to presenceData later.
-    tempButtons = new Array(0),
-    //Sets button for joining.
-    joinLinkArr = document.getElementsByClassName("joinLink"),
-    //Sets username
-    username = getUsername();
+  const BaseUrl = 'https://jstris.jezevec10.com',
+
+  //Inits temporary button array that is to be applied to presenceData later.
+  tempButtons = new Array(0),
+    
+  //Sets button for joining.
+  joinLinkArr = document.getElementsByClassName('joinLink'),
+
+  //Sets username
+  username = getUsername();
 
   if (joinLinkArr.length !== 0) {
-    const joinUrl = joinLinkArr[joinLinkArr.length - 1].innerHTML;
+    const joinUrl = joinLinkArr[joinLinkArr.length-1].innerHTML;
     tempButtons.push({ label: "Join", url: joinUrl });
   }
   //Sets button for viewing profile.
-
+  
   if (typeof username !== "undefined") {
-    const profileUrl = `${BaseUrl}/u/${username.replace(/\n/g, "")}`;
+    const profileUrl = `${BaseUrl}/u/${username}`;
     tempButtons.push({ label: "View Profile", url: profileUrl });
   }
-
+  
   switch (pathname[0]) {
     //Play Modes
     case "":
@@ -63,10 +66,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Playing Custom Map";
             presenceData.state = "Map ID: " + queryObj.map;
             if (tempButtons.length !== 2) {
-              tempButtons.unshift({
-                label: "Play Map",
-                url: `${BaseUrl}/?play=6&map=${queryObj.map}`
-              });
+              tempButtons.unshift({ label: "Play Map", url: `${BaseUrl}/?play=6&map=${queryObj.map}` });
             }
             break;
           case "7":
@@ -135,9 +135,12 @@ presence.on("UpdateData", async () => {
 });
 
 function getUsername() {
-  return document
-    .getElementsByClassName("navbar-right")[0]
-    .getElementsByClassName("dropdown-toggle")[1].textContent;
+  try {
+    return document.getElementsByClassName('navbar-right')[0].getElementsByClassName('dropdown-toggle')[1].textContent.replace(/\n/g, '');
+  }
+  catch(err) {
+    return undefined;
+  }
 }
 
 function parseQuery(search: string) {
