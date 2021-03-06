@@ -15,14 +15,12 @@ presence.on("UpdateData", async () => {
     document.location.pathname == "/fr.php" ||
     document.location.pathname == "/en.php"
   ) {
-    
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname == "/forum.php") {
     
     presenceData.details = "Viewing the forum's menu";
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "index.php") {
-    
     presenceData.details = "Viewing home page";
   }
   const elt = document.querySelector("#compteur0 > div") as HTMLElement;
