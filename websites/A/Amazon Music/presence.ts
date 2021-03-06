@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = title;
       presenceData.state = artist;
-      (presenceData.smallImageKey = paused == true ? "pause" : "play"),
+      (presenceData.smallImageKey = paused ? "pause" : "play"),
         (presenceData.smallImageText =
           paused == true ? (await strings).pause : (await strings).play);
       presenceData.largeImageKey = "logo";
