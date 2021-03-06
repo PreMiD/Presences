@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("/gameblock")) {
       currentQuestion = document.querySelector(
         "div.top-bar__QuestionNumber-sc-186o9v8-2"
-      ).textContent.replace(' of ', (await strings).of.replace('{0}', '').replace('{1}', ''));
+      ).textContent;
       score = document.querySelector("div.bottom-bar__Score-sc-1bibjvm-2")
         .textContent
         ? document.querySelector("div.bottom-bar__Score-sc-1bibjvm-2")
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("/getready")) {
       currentQuestion = document.querySelector(
         "div.top-bar__QuestionNumber-sc-186o9v8-2"
-      ).textContent.replace(' of ', (await strings).of.replace('{0}', '').replace('{1}', ''));
+      ).textContent;
       presenceData.details = (await strings).questionLoading;
       presenceData.state = `${(await strings).questionShowing} ${currentQuestion}`;
     } else if (path.includes("/result")) {
