@@ -204,7 +204,7 @@ presence.on("UpdateData", async () => {
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
           .textContent.split("/")[1]
       }`;
-      presenceData.state = `Question: ${questionNo}`;
+      presenceData.state = `${(await strings).questionShowing} ${questionNo}`;
     } else {
       presenceData.details = (await strings).loadingPage;
     }
