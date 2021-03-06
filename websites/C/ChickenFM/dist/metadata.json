@@ -3,17 +3,14 @@
     "name": "TheChicken14",
     "id": "354289971361742848"
   },
-  "url": [
-    "chickenfm.com",
-    "www.chickenfm.com"
-  ],
+  "url": "chickenfm.com",
   "description": {
     "en": "ChickenFM is an online radio station that plays the latest hits!"
   },
   "service": "ChickenFM",
-  "version": "1.2.3",
-  "logo": "https://i.imgur.com/U7I4HoG.png",
-  "thumbnail": "https://i.imgur.com/U7I4HoG.png",
+  "version": "2.0.2",
+  "logo": "https://i.imgur.com/XHDl4rk.png",
+  "thumbnail": "https://i.imgur.com/O8tjiZv.png",
   "color": "#0049FF",
   "category": "music",
   "tags": [

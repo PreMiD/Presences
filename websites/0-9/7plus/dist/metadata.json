@@ -13,6 +13,10 @@
   "logo": "https://i.imgur.com/ZY2K3CC.png",
   "thumbnail": "https://i.imgur.com/A50n9nx.png",
   "color": "#FF0000",
-  "tags": ["video", "media", "streaming"],
+  "tags": [
+    "video",
+    "media",
+    "streaming"
+  ],
   "category": "videos"
 }

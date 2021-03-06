@@ -8,16 +8,20 @@ presence.on("UpdateData", () => {
   } - ${document.querySelector(".player-title-text").textContent} `;
   const dj = document.querySelector(".live-name").textContent;
   const liveTill = document.querySelector(".live-time").textContent;
-  const pageName = document.title.slice(13);
   const liveTime = liveTill.slice(6);
   const presenceData: PresenceData = {
-    largeImageKey: "tfmlogo",
-    smallImageKey: "smalltfmlogo",
-    smallImageText: `Viewing: ${pageName}`
+    largeImageKey: "tfmlogo"
   };
 
+  let stateText = "";
+  if (liveTill) {
+    stateText = `${dj} till ${liveTime}`;
+  } else {
+    stateText = `${dj}`;
+  }
+
   presenceData.details = `${title}`;
-  presenceData.state = `${dj} till ${liveTime}`;
+  presenceData.state = `${stateText}`;
 
   presence.setActivity(presenceData);
   presence.setTrayTitle();

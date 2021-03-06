@@ -15,7 +15,7 @@ let webtoon: string, chapter: string, seriesPage: string;
 presence.on("UpdateData", async () => {
   if (path.includes("list")) {
     webtoon = document.querySelector(".subj").textContent;
-    presenceData.details = "Looking a webtoon";
+    presenceData.details = "Looking at a webtoon";
     presenceData.state = webtoon;
     delete presenceData.smallImageKey;
   } else if (path.includes("viewer")) {

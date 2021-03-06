@@ -7,17 +7,15 @@ presence.on("UpdateData", () => {
     largeImageKey: "bundle"
   };
 
-  if (window.location.pathname.startsWith("/detay/")) {
-    const kaynak = document.querySelector(
-      "body > div.site > div.detailpage > div > div.detail > div.channel > h4"
-    ).textContent;
+  const page = window.location.pathname;
+  const browsingStamp = Math.floor(Date.now() / 1000);
 
-    presenceData.details = "Bir haber okuyor:";
-    presenceData.state =
-      document.querySelector("body > div.site > div.detailpage > div > h2")
-        .textContent +
-      " | " +
-      kaynak;
+  if (page.startsWith("/detay/")) {
+    presenceData.details = "Bir haber okuyor";
+    presenceData.state = document.querySelector(
+      "body > div.site > div.detailpage > div > h2"
+    ).textContent;
+    presenceData.startTimestamp = browsingStamp;
   }
 
   if (presenceData.details == null) {

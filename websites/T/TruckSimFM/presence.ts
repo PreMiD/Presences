@@ -1,12 +1,12 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "640538683392655370"
 });
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-var player: any;
-var dj: any;
-var listeners: any;
+const browsingStamp = Math.floor(Date.now() / 1000);
+let title: HTMLElement;
+let player: HTMLAudioElement;
+let dj: HTMLElement;
+let listeners: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
   //presenceData.startTimestamp = browsingStamp;
   player = document.querySelector("#player");
   if (!player.paused) {
-    title = document.querySelector("#songname");
+    title = document.querySelector("#song");
     dj = document.querySelector("#djname");
     listeners = document.querySelector("#listeners");
     presenceData.details = title.textContent;

@@ -9,9 +9,9 @@
     "tr": "Ralex, Türkçe bir Discord botudur. Tamamiyle ayarlanabilir ve yönetim paneli ile sunucunuz için harika bir eğlence ve moderasyon botu!"
   },
   "url": "bot.ralex.xyz",
-  "version": "1.0.1",
-  "logo": "http://snowy.is-online.me/i/8j39ohjqc2c1olz.png",
-  "thumbnail": "http://snowy.is-online.me/i/z24sxxl5q5kvwht.png",
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/VEX5zcU.jpg",
+  "thumbnail": "https://i.imgur.com/AIjqBrT.png",
   "color": "#FFBA00",
   "tags": [
     "discord",

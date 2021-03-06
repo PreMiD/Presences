@@ -1,4 +1,4 @@
-let presence: Presence, newID, latestID;
+let presence: Presence, newID: string, latestID: string;
 function presenceSet(): void {
   if (document.location.pathname.includes("/cookieclicker/")) {
     presence = new Presence({ clientId: "676126246928777250" });

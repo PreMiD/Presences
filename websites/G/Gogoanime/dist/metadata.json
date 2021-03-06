@@ -8,10 +8,10 @@
     "en": "Watch anime online in English. You can watch free series and movies online with English subtitles."
   },
   "url": [
-    "www2.gogoanime.video",
-    "www17.gogoanime.io"
+    "gogoanime.vc",
+    "www2.gogoanime.sh"
   ],
-  "version": "1.0.4",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/Awp1MUc.png",
   "thumbnail": "https://i.imgur.com/RZwilwc.png",
   "color": "#4CA64C",

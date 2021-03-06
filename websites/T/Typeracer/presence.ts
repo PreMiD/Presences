@@ -1,18 +1,18 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "655247212728811530"
 });
 
-var currentURL = new URL(document.location.href),
-  currentPath = currentURL.pathname.slice(1).split("/"),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  presenceData: PresenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  },
-  updateCallback = {
-    _function: null as Function,
-    get function(): Function {
+let currentURL = new URL(document.location.href),
+  currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+const browsingStamp = Math.floor(Date.now() / 1000);
+let presenceData: PresenceData = {
+  details: "Viewing an unsupported page",
+  largeImageKey: "lg",
+  startTimestamp: browsingStamp
+};
+const updateCallback = {
+    _function: null as () => void,
+    get function(): () => void {
       return this._function;
     },
     set function(parameter) {
@@ -21,29 +21,33 @@ var currentURL = new URL(document.location.href),
     get present(): boolean {
       return this._function !== null;
     }
+  },
+  /**
+   * Initialize/reset presenceData.
+   */
+  resetData = (
+    defaultData: PresenceData = {
+      details: "Viewing an unsupported page",
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
+    }
+  ): void => {
+    currentURL = new URL(document.location.href);
+    currentPath = currentURL.pathname.replace(/^\/|\/$/g, "").split("/");
+    presenceData = { ...defaultData };
   };
-
-/**
- * Initialize/reset presenceData.
- */
-function resetData(): void {
-  currentURL = new URL(document.location.href);
-  currentPath = currentURL.pathname.slice(1).split("/");
-  presenceData = {
-    details: "Viewing an unsupported page",
-    largeImageKey: "lg",
-    startTimestamp: browsingStamp
-  };
-}
 
 ((): void => {
-  var raceStamp = null;
+  let raceStamp: number = null;
 
   if (currentURL.hostname === "play.typeracer.com") {
-    //
-    //		Part 1
-    //		play.typeracer.com (game page)
-    //
+    /*
+
+		Part 1
+		play.typeracer.com (game page)
+		
+		*/
+
     updateCallback.function = (): void => {
       if (document.querySelector(".gameView")) {
         presenceData.details = "Playing a race";
@@ -69,9 +73,9 @@ function resetData(): void {
           gameStatusLabel === "Go!"
         ) {
           const textBox = document.querySelector(
-            "table.gameView > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div > div"
-          );
-          const lettersTotal = textBox.textContent.length;
+              "table.gameView > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(1) > td > table > tbody > tr:nth-child(1) > td > div > div"
+            ),
+            lettersTotal = textBox.textContent.length;
           let lettersTyped = 0;
           for (const i in textBox.children) {
             if (
@@ -87,10 +91,10 @@ function resetData(): void {
             }
           }
           const percentage =
-            Math.round((lettersTyped / lettersTotal) * 10000) / 100;
-          const wpm = document
-            .querySelector(".rankPanelWpm-self")
-            .textContent.toUpperCase();
+              Math.round((lettersTyped / lettersTotal) * 10000) / 100,
+            wpm = document
+              .querySelector(".rankPanelWpm-self")
+              .textContent.toUpperCase();
           presenceData.state = `${percentage}%, ${wpm}`;
           if (raceStamp === null) raceStamp = Math.floor(Date.now() / 1000);
           presenceData.startTimestamp = raceStamp;
@@ -100,14 +104,14 @@ function resetData(): void {
         ) {
           presenceData.details = "Just finished with a race";
           const wpm = document
-            .querySelector(".rankPanelWpm-self")
-            .textContent.toUpperCase();
-          const accuracy = document.querySelector(
-            ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)"
-          ).textContent;
-          const time = document.querySelector(
-            ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(2)"
-          ).textContent;
+              .querySelector(".rankPanelWpm-self")
+              .textContent.toUpperCase(),
+            accuracy = document.querySelector(
+              ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2)"
+            ).textContent,
+            time = document.querySelector(
+              ".tblOwnStats > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(2)"
+            ).textContent;
           presenceData.state = `${wpm}, ${accuracy} acc., ${time}`;
           presenceData.startTimestamp = browsingStamp;
         }
@@ -116,10 +120,13 @@ function resetData(): void {
       }
     };
   } else if (currentURL.hostname === "data.typeracer.com") {
-    //
-    //		Part 2
-    //		data.typeracer.com (pit stop and misc. pages)
-    //
+    /*
+		
+		Part 2
+		data.typeracer.com (pit stop and misc. pages)
+		
+		*/
+
     if (currentPath[0] === "pit") {
       if (currentPath[1] === "profile") {
         presenceData.details = "Viewing a racer profile";
@@ -141,13 +148,13 @@ function resetData(): void {
       } else if (currentPath[1] === "competitions") {
         presenceData.details = "Viewing the competition result";
         const option = document
-          .querySelector("option[selected]")
-          .textContent.trim();
-        const strong = document
-          .querySelector("div.themeContent > div:nth-child(5) > strong")
-          .textContent.trim()
-          .slice(0, -1)
-          .split(" ");
+            .querySelector("option[selected]")
+            .textContent.trim(),
+          strong = document
+            .querySelector("div.themeContent > div:nth-child(5) > strong")
+            .textContent.trim()
+            .slice(0, -1)
+            .split(" ");
         if (option === "day") presenceData.state = strong.join(" ");
         else if (option === "week")
           presenceData.state = `${strong[1]} ${strong[2]}, ${strong[4]}`;
@@ -157,7 +164,7 @@ function resetData(): void {
       } else if (currentPath[1] === "login") {
         presenceData.details = "Logging in";
       } else {
-        const pageNames = {
+        const pageNames: { [index: string]: string } = {
           upgrade_account: "Upgrade your account",
           tos: "Terms of Service",
           privacy_poicy: "Privacy Policy"
@@ -177,8 +184,9 @@ function resetData(): void {
 })();
 
 if (updateCallback.present) {
+  const defaultData = { ...presenceData };
   presence.on("UpdateData", async () => {
-    resetData();
+    resetData(defaultData);
     updateCallback.function();
     presence.setActivity(presenceData);
   });

@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "GURRMAN375D",
     "id": "446528923535278082"
@@ -8,7 +9,7 @@
     "en": "GitLab is a project management and code versioning system as well as a social network platform made for developers."
   },
   "url": "gitlab.com",
-  "version": "1.0.3",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/SWx8pPn.png",
   "thumbnail": "https://i.imgur.com/ISBVR2q.png",
   "color": "#ff4400",
@@ -19,5 +20,5 @@
     "gitlab"
   ],
   "category": "other",
-  "regExp": ".*[.]gitlab[.]com[/]"
+  "regExp": "([a-z0-9-]+[.])*gitlab[.]com[/]"
 }

@@ -17,17 +17,31 @@ function getTimestamps(
 }
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let iFrameVideo, currentTime, duration, paused, playback;
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: any,
+  playback;
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.duration;
-    paused = data.iframe_video.paused;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      duration: any;
+      iFrameVideo: any;
+      currTime: any;
+      paused: any;
+    };
+  }) => {
+    playback = data.iframe_video.duration !== null ? true : false;
+    if (playback) {
+      iFrameVideo = data.iframe_video.iFrameVideo;
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.duration;
+      paused = data.iframe_video.paused;
+    }
   }
-});
+);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -41,56 +55,64 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "home";
     presenceData.smallImageText = "Homepage";
     presenceData.details = "Nella homepage";
-  } else if (document.location.pathname.startsWith("/contact")) {
+  } else if (
+    document.location.pathname.startsWith("/changelog") ||
+    document.location.pathname.startsWith("/contact") ||
+    document.location.pathname.startsWith("/cookie") ||
+    document.location.pathname.startsWith("/termini")
+  ) {
     // Contact
     presenceData.smallImageKey = "info";
     presenceData.smallImageText = "Contatti";
-    presenceData.details = "Sta guardando informazioni";
+    presenceData.details = "Sta leggendo le info";
     presenceData.state = "su AnimeWorld";
-  } else if (document.location.pathname.startsWith("/user/")) {
-    // User Settings
-    if (document.location.pathname.startsWith("/user/settings")) {
-      // General Settings
-      presenceData.smallImageKey = "settings";
-      presenceData.smallImageText = "Impostazioni";
-      presenceData.details = "Nelle sue impostazioni";
-    } else if (document.location.href.includes("watchlist")) {
-      // WatchList
+  } else if (document.location.pathname.startsWith("/login")) {
+    // Contact
+    presenceData.smallImageKey = "info";
+    presenceData.smallImageText = "Login";
+    presenceData.details = "Sta accedendo al suo";
+    presenceData.state = "account";
+  } else if (document.location.pathname.startsWith("/settings")) {
+    // General Settings
+    presenceData.smallImageKey = "settings";
+    presenceData.smallImageText = "Impostazioni";
+    presenceData.details = "Nelle sue impostazioni";
+  } else if (document.location.pathname.startsWith("/mal-import")) {
+    // Import WL
+    presenceData.smallImageKey = "import";
+    presenceData.smallImageText = "Importa la WatchList";
+    presenceData.details = "Sta importando la sua";
+    presenceData.state = "WatchList da MAL";
+  } else if (document.location.pathname.startsWith("/notifications")) {
+    // Notifications
+    presenceData.smallImageKey = "notifications";
+    presenceData.smallImageText = "Notifiche";
+    presenceData.details = "Sfoglia le notifiche";
+  } else if (document.location.pathname.startsWith("/profile")) {
+    const username = document.title.split("Profilo di ")[1];
+    presenceData.smallImageKey = "user";
+    presenceData.smallImageText = "Profilo di " + username;
+    presenceData.details = "Guarda il profilo di:";
+    presenceData.state = username;
+  } else if (document.location.href.includes("watchlist")) {
+    if (document.querySelector("#rich-presence-proprietary")) {
       presenceData.smallImageKey = "wlsettings";
       presenceData.smallImageText = "Imposta la WatchList";
-      presenceData.details = "Sta modificando la";
-      presenceData.state = "sua WatchList";
-    } else if (document.location.pathname.startsWith("/user/import")) {
-      // Import WL
-      presenceData.smallImageKey = "import";
-      presenceData.smallImageText = "Importa la WatchList";
-      presenceData.details = "Sta importando la sua";
-      presenceData.state = "WatchList da MAL";
-    } else if (document.location.pathname.startsWith("/user/notifications")) {
-      // Notifications
-      presenceData.smallImageKey = "notifications";
-      presenceData.smallImageText = "Notifiche";
-      presenceData.details = "Sfoglia le notifiche";
+      presenceData.details = "Sta modificando la sua";
+      presenceData.state = "WatchList";
     } else {
-      presenceData.smallImageKey = "settings";
-      presenceData.smallImageText = "Impostazioni";
-      presenceData.details = "Nelle impostazioni";
-    }
-  } else if (document.location.pathname.startsWith("/profile")) {
-    // Profile
-    if (document.location.href.includes("watchlist")) {
       const usernamewl = document.title.split("Watchlist di ")[1];
       presenceData.smallImageKey = "userwl";
       presenceData.smallImageText = "WatchList di " + usernamewl;
       presenceData.details = "Guarda la WatchList di:";
       presenceData.state = usernamewl;
-    } else {
-      const username = document.title.split("Profilo di ")[1];
-      presenceData.smallImageKey = "user";
-      presenceData.smallImageText = "Profilo di " + username;
-      presenceData.details = "Guarda il profilo di:";
-      presenceData.state = username;
     }
+  } else if (document.location.pathname.startsWith("/request-serie")) {
+    // Import WL
+    presenceData.smallImageKey = "new";
+    presenceData.smallImageText = "Richiede un'anime";
+    presenceData.details = "Sta facendo la richiesta";
+    presenceData.state = "per aggiungere un'anime";
   } else if (document.location.pathname.startsWith("/genre")) {
     // Genre
     if (document.location.href.includes("?page=")) {
@@ -176,9 +198,9 @@ presence.on("UpdateData", async () => {
     // Search
     presenceData.smallImageKey = "search";
     presenceData.smallImageText =
-      "Cerca : " + document.title.replace("AnimeWorld: ", "");
+      "Cerca : " + document.title.replace("AnimeWorld - ", "");
     presenceData.details = "Sta cercando:";
-    presenceData.state = document.title.replace("AnimeWorld: ", "");
+    presenceData.state = document.title.replace("AnimeWorld - ", "");
   } else if (document.location.pathname.startsWith("/news")) {
     // News
     if (
@@ -197,7 +219,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Pagina: 1";
       }
     } else {
-      const newsName = document.title.split("~ ")[1];
+      const newsName = document.title.split("- ")[1];
       presenceData.smallImageKey = "paper";
       presenceData.smallImageText = newsName;
       presenceData.details = "Legge la notizia:";
@@ -210,14 +232,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Sta facendo una ricerca";
     presenceData.state = "avanzata";
   } // Categories
-  else if (document.location.pathname.startsWith("/tv-series")) {
+  else if (document.location.pathname.startsWith("/animes")) {
     // TV-Series
     if (document.location.href.includes("tv-series?page=")) {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Categoria: Anime";
       presenceData.details = "Nella categoria: Anime";
       presenceData.state =
-        "Pagina: " + document.location.href.split("tv-series?page=")[1];
+        "Pagina: " + document.location.href.split("/animes")[1];
     } else {
       presenceData.smallImageKey = "search";
       presenceData.smallImageText = "Categoria: Anime";
@@ -280,6 +302,20 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Nella categoria: Specials";
       presenceData.state = "Pagina: 1";
     }
+  } else if (document.location.pathname.startsWith("/music")) {
+    // Specials
+    if (document.location.href.includes("music?page=")) {
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = "Categoria: Musicali";
+      presenceData.details = "Nella categoria: Musicali";
+      presenceData.state =
+        "Pagina: " + document.location.href.split("specials?page=")[1];
+    } else {
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = "Categoria: Musicali";
+      presenceData.details = "Nella categoria: Musicali";
+      presenceData.state = "Pagina: 1";
+    }
   } else if (document.location.pathname.startsWith("/preview")) {
     // Preview
     if (document.location.href.includes("preview?page=")) {
@@ -295,26 +331,26 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Pagina: 1";
     }
   } // End Categories
-  else if (document.location.pathname.startsWith("/watch")) {
+  else if (document.location.pathname.startsWith("/play/")) {
     // Anime Episode
     const releaseDate = document.querySelector(
-      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(4)"
+      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(1) > dd:nth-child(6)"
     ).textContent;
-    const author = document.querySelector(
-      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(8)"
+    const studio = document.querySelector(
+      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(1) > dd:nth-child(10) > a"
     ).textContent;
     const episode = document.querySelector(
-      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(2) > dd:nth-child(8) > font"
+      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(2) > dd:nth-child(6)"
     ).textContent;
-    const vote = document.querySelector(
-      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(2) > dd.rating > span:nth-child(1)"
+    let vote = document.querySelector(
+      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(2) > dd:nth-child(10)"
     ).textContent;
     const visual = document.querySelector(
-      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(2) > dd:nth-child(10)"
+      "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(2) > dd:nth-child(10)"
     ).textContent;
-    if (document.querySelector("#animeId > div > img") != null) {
+    if (document.querySelector("#unavailable") != null) {
       let newname = document.title
-        .split("AnimeWorld: ")[1]
+        .split("AnimeWorld - ")[1]
         .split(" Streaming & ")[0];
       if (newname.includes("(ITA)")) {
         newname = newname.split(" (ITA)")[0];
@@ -323,15 +359,15 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = newname;
       presenceData.details = "Guarda l'annunciato:\n" + newname;
       presenceData.state =
-        "Per più informazioni 🎦\n" +
+        "Più informazioni quì 📌\n" +
         "\nUscirà il: " +
         releaseDate +
         "\n" +
         "Episodi: " +
         episode +
         "\n" +
-        "Autore: " +
-        author +
+        "Studio: " +
+        studio +
         "\n" +
         "Voto: " +
         vote +
@@ -339,15 +375,18 @@ presence.on("UpdateData", async () => {
         "Visualizzazioni: " +
         visual;
     } else {
+      vote = document.querySelector(
+        "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(2) > dd.rating > span:nth-child(1)"
+      ).textContent;
       if (
         document
           .querySelector(
-            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(2)"
+            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(1) > dd:nth-child(2)"
           )
           .textContent.includes("Anime")
       ) {
         let animename = document.title
-          .replace("AnimeWorld: ", "")
+          .replace("AnimeWorld - ", "")
           .split(" Episodio")[0];
         if (animename.includes("(ITA)")) {
           animename = animename.split(" (ITA)")[0];
@@ -389,8 +428,8 @@ presence.on("UpdateData", async () => {
             "Episodio: " +
             animenumber +
             "\n" +
-            "Autore: " +
-            author +
+            "Studio: " +
+            studio +
             "\n" +
             "Voto: " +
             vote +
@@ -401,12 +440,12 @@ presence.on("UpdateData", async () => {
       } else if (
         document
           .querySelector(
-            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(2)"
+            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(1) > dd:nth-child(2)"
           )
           .textContent.includes("Movie")
       ) {
         let moviename = document.title
-          .replace("AnimeWorld: ", "")
+          .replace("AnimeWorld - ", "")
           .split(" Episodio")[0];
         if (moviename.includes("(ITA)")) {
           moviename = moviename.split(" (ITA)")[0];
@@ -440,8 +479,8 @@ presence.on("UpdateData", async () => {
             "\nUscito il: " +
             releaseDate +
             "\n" +
-            "Autore: " +
-            author +
+            "Studio: " +
+            studio +
             "\n" +
             "Voto: " +
             vote +
@@ -453,12 +492,12 @@ presence.on("UpdateData", async () => {
       } else if (
         document
           .querySelector(
-            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(2)"
+            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(1) > dd:nth-child(2)"
           )
           .textContent.includes("OVA")
       ) {
         let oavname = document.title
-          .replace("AnimeWorld: ", "")
+          .replace("AnimeWorld - ", "")
           .split(" Episodio")[0];
         if (oavname.includes("(ITA)")) {
           oavname = oavname.split(" (ITA)")[0];
@@ -496,8 +535,8 @@ presence.on("UpdateData", async () => {
             "\n" +
             oavnumber +
             "° OAV\n" +
-            "Autore: " +
-            author +
+            "Studio: " +
+            studio +
             "\n" +
             "Voto: " +
             vote +
@@ -508,12 +547,12 @@ presence.on("UpdateData", async () => {
       } else if (
         document
           .querySelector(
-            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(2)"
+            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(1) > dd:nth-child(2)"
           )
           .textContent.includes("ONA")
       ) {
         let onaname = document.title
-          .replace("AnimeWorld: ", "")
+          .replace("AnimeWorld - ", "")
           .split(" Episodio")[0];
         if (onaname.includes("(ITA)")) {
           onaname = onaname.split(" (ITA)")[0];
@@ -551,8 +590,8 @@ presence.on("UpdateData", async () => {
             "\n" +
             onanumber +
             "° ONA\n" +
-            "Autore: " +
-            author +
+            "Studio: " +
+            studio +
             "\n" +
             "Voto: " +
             vote +
@@ -563,12 +602,12 @@ presence.on("UpdateData", async () => {
       } else if (
         document
           .querySelector(
-            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(2)"
+            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(1) > dd:nth-child(2)"
           )
           .textContent.includes("Special")
       ) {
         let specialname = document.title
-          .replace("AnimeWorld: ", "")
+          .replace("AnimeWorld - ", "")
           .split(" Episodio")[0];
         if (specialname.includes("(ITA)")) {
           specialname = specialname.split(" (ITA)")[0];
@@ -607,9 +646,10 @@ presence.on("UpdateData", async () => {
             "\nUscito il: " +
             releaseDate +
             "\n" +
+            specialnumber +
             "° Special\n" +
-            "Autore: " +
-            author +
+            "Studio: " +
+            studio +
             "\n" +
             "Voto: " +
             vote +
@@ -620,12 +660,12 @@ presence.on("UpdateData", async () => {
       } else if (
         document
           .querySelector(
-            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-19 > div.row > dl:nth-child(1) > dd:nth-child(2)"
+            "#main > div > div.widget.info > div > div:nth-child(1) > div.info.col-md-9 > div.row > dl:nth-child(1) > dd:nth-child(2)"
           )
           .textContent.includes("Preview")
       ) {
         let previewname = document.title
-          .replace("AnimeWorld: ", "")
+          .replace("AnimeWorld - ", "")
           .split(" Episodio")[0];
         if (previewname.includes("(ITA)")) {
           previewname = previewname.split(" (ITA)")[0];
@@ -659,8 +699,8 @@ presence.on("UpdateData", async () => {
             "\nUscito il: " +
             releaseDate +
             "\n" +
-            "Autore: " +
-            author +
+            "Studio: " +
+            studio +
             "\n" +
             "Voto: " +
             vote +

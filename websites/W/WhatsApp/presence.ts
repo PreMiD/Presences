@@ -4,10 +4,10 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const name: HTMLSpanElement = document.querySelector(
-      "#main > header > div._5SiUq > div._16vzP > div > span"
+      "#main > header > div._33QME > div._2FCjS > div > span"
     ),
     typing: any = document.querySelector(
-      "#main > footer > div._3pkkz.V42si.copyable-area > div._1Plpp > div > div._2S1VP.copyable-text.selectable-text"
+      "#main > footer > div > div._3uMse > div > div._3FRCZ"
     ),
     textPermission: any = document.querySelector(
       "#main > footer > .copyable-area"

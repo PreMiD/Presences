@@ -4,42 +4,34 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  if (window.location.pathname.endsWith("about")) {
-    presenceData.details = "Hakkında kısmına göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("settings.html")) {
-    presenceData.details = "Sunucu ayarları sekmesine göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("commands.html")) {
-    presenceData.details = "Tüm komutlara göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("faq.html")) {
-    presenceData.details = "Sıkça sorulan sorulara göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("globalRankings")) {
-    presenceData.details = "Küresel sıralamaya göz atıyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("dashboard")) {
-    presenceData.details = "Dashboard'da bir şeyleri kontrol ediyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.endsWith("profile")) {
-    presenceData.details = "Profilini düzenliyor...";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.startsWith("/serverRankings/")) {
-    presenceData.details = "Bir sunucunun level sıralamasına bakıyor...";
+      largeImageKey: "logo"
+    },
+    page = window.location.pathname,
+    browsingStamp = Math.floor(Date.now() / 1000);
+
+  presenceData.startTimestamp = browsingStamp;
+
+  if (page.endsWith("/editcard")) {
+    presenceData.details = "Editing their profile card";
+  } else if (page.endsWith("/inventory")) {
+    presenceData.details = "Viewing their inventory";
+  } else if (page.endsWith("/settings")) {
+    presenceData.details = "Editing their settings";
+  } else if (page.startsWith("/blog")) {
+    presenceData.details = "Viewing all blogs";
+  } else if (page.startsWith("/article")) {
+    presenceData.details = "Reading an article:";
     presenceData.state = document.querySelector(
-      "#top > div.jumbotron > div > div > div.col-md-10 > p"
+      "#__next > main > div.css-vxgrp0 > main > div > div.css-17cwizr > div > h1"
     ).textContent;
-    presenceData.startTimestamp = browsingStamp;
-  } else if (window.location.pathname.startsWith("/guild/")) {
-    presenceData.details = "Bir sunucunun ayarlarını düzenliyor:";
-    presenceData.state = document.querySelector(
-      "#top > div.jumbotron > div > div > div.col-md-10 > h1"
-    ).textContent;
-    presenceData.startTimestamp = browsingStamp;
+  } else if (page.endsWith("/servers")) {
+    presenceData.details = "On dashboard";
+  } else if (page.startsWith("/server")) {
+    presenceData.details = "Managing/Viewing a server";
+  } else if (page.startsWith("/shops")) {
+    presenceData.details = "On shop menu";
+  } else if (page.startsWith("/profile")) {
+    presenceData.details = "Viewing their profile";
   }
 
   if (presenceData.details == null) {

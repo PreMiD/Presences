@@ -1,84 +1,278 @@
-var presence = new Presence({
-  clientId: "607697998490894356"
+const presence = new Presence({
+  clientId: "802958833214423081"
 });
-var strings = presence.getStrings({
+const strings = presence.getStrings({
   play: "presence.playback.playing",
-  pause: "presence.playback.paused"
+  pause: "presence.playback.paused",
+  browse: "presence.activity.browsing",
+  search: "presence.activity.searching"
 });
 
-function getTime(list: string[]): number {
-  var ret = 0;
+const getTime = (list: string[]): number => {
+  let ret = 0;
   for (let index = list.length - 1; index >= 0; index--) {
     ret += parseInt(list[index]) * 60 ** index;
   }
   return ret;
-}
+};
 
-function getTimestamps(
+const getTimestamps = (
   audioTime: string,
   audioDuration: string
-): Array<number> {
-  var splitAudioTime = audioTime.split(":").reverse();
-  var splitAudioDuration = audioDuration.split(":").reverse();
+): Array<number> => {
+  const splitAudioTime = audioTime.split(":").reverse();
+  const splitAudioDuration = audioDuration.split(":").reverse();
 
-  var parsedAudioTime = getTime(splitAudioTime);
-  var parsedAudioDuration = getTime(splitAudioDuration);
+  const parsedAudioTime = getTime(splitAudioTime);
+  const parsedAudioDuration = getTime(splitAudioDuration);
 
-  var startTime = Date.now();
-  var endTime =
+  const startTime = Date.now();
+  const endTime =
     Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
-}
+};
+
+const getElement = (query: string): string | undefined => {
+  let text = "";
+
+  const element = document.querySelector(query);
+  if (element) {
+    if (element.childNodes.length > 1) {
+      text = element.childNodes[0].textContent;
+    } else {
+      text = element.textContent;
+    }
+  }
+
+  return text.trimStart().trimEnd();
+};
+
+const capitalize = (text: string): string => {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+};
+
+let elapsed = Math.floor(Date.now() / 1000),
+  prevUrl = document.location.href;
+
+const statics = {
+  "/stream/": {
+    details: "Browsing...",
+    state: "Latest Posts"
+  },
+  "/terms-of-use/": {
+    details: "Viewing...",
+    state: "Terms of Service"
+  },
+  "/pages/privacy/": {
+    details: "Viewing...",
+    state: "Privacy Policy"
+  },
+  "/pages/cookies/": {
+    details: "Viewing...",
+    state: "Cookies Policy"
+  },
+  "/pages/copyright/": {
+    details: "Viewing...",
+    state: "Copyright"
+  },
+  "/pages/copyright/report": {
+    details: "Viewing...",
+    state: "Report Copyright Infringement"
+  },
+  "/pages/contact": {
+    details: "Viewing...",
+    state: "Contact"
+  },
+  "/imprint/": {
+    details: "Viewing...",
+    state: "Imprint"
+  },
+  "/community-guidelines/": {
+    details: "Viewing...",
+    state: "Community Guidelines"
+  },
+  "/law-enforcement-guidelines/": {
+    details: "Viewing...",
+    state: "Law Enforcement Guidelines"
+  },
+  "/network-enforcement-act/": {
+    details: "Viewing...",
+    state: "Network Enforcement Act"
+  },
+  "/mobile/": {
+    details: "Viewing App...",
+    state: "SoundCloud Mobile"
+  },
+  "/mobile/pulse/": {
+    details: "Viewing App...",
+    state: "Pulse"
+  },
+  "/notifications/": {
+    details: "Browsing...",
+    state: "Notifications"
+  },
+  "/messages/": {
+    details: "Browsing...",
+    state: "Messages"
+  },
+  "/popular/searches/": {
+    details: "Browsing...",
+    state: "Popular Searches"
+  },
+  "/people/": {
+    details: "Viewing...",
+    state: "Who to Follow"
+  },
+  "/upload": {
+    details: "Uploading..."
+  },
+  "/logout": {
+    details: "Logged Out"
+  }
+};
 
 presence.on("UpdateData", async () => {
-  var player = document.querySelector(".playControls__elements");
+  const path = location.pathname.replace(/\/?$/, "/");
 
-  if (player) {
-    var player_button: HTMLButtonElement = document.querySelector(
-      ".playControls__play"
+  const showBrowsing = await presence.getSetting("browse");
+  const showSong = await presence.getSetting("song");
+  const showTimestamps = await presence.getSetting("timestamp");
+
+  let data: PresenceData = {
+    details: undefined,
+    state: undefined,
+    largeImageKey: "soundcloud",
+    smallImageKey: undefined,
+    smallImageText: undefined,
+    startTimestamp: elapsed,
+    endTimestamp: undefined
+  };
+
+  if (document.location.href !== prevUrl) {
+    prevUrl = document.location.href;
+    elapsed = Math.floor(Date.now() / 1000);
+  }
+
+  const playButton = document.querySelector(".playControls__play.playing");
+  const playing = playButton ? true : false;
+
+  if ((playing || (!playing && !showBrowsing)) && showSong) {
+    data.details = getElement(
+      ".playbackSoundBadge__titleLink > span:nth-child(2)"
     );
+    data.state = getElement(".playbackSoundBadge__lightLink");
+    const current = getElement(
+      ".playbackTimeline__timePassed > span:nth-child(2)"
+    );
+    const duration = getElement(
+      ".playbackTimeline__duration > span:nth-child(2)"
+    );
+    const timestamps = getTimestamps(current, duration);
+    data.startTimestamp = timestamps[0];
+    data.endTimestamp = timestamps[1];
+    data.smallImageKey = playing ? "play" : "pause";
+    data.smallImageText = (await strings)[playing ? "play" : "pause"];
+  }
 
-    var paused = player_button.classList.contains("playing") === false;
-
-    try {
-      var title = document.querySelector(
-        ".playbackSoundBadge__titleLink > span:nth-child(2)"
-      ).textContent;
-      var author = document.querySelector(".playbackSoundBadge__lightLink")
-        .textContent;
-      var audioTime = document.querySelector(
-        ".playbackTimeline__timePassed > span:nth-child(2)"
-      ).textContent;
-      var audioDuration = document.querySelector(
-        ".playbackTimeline__duration > span:nth-child(2)"
-      ).textContent;
-      var timestamps = getTimestamps(audioTime, audioDuration);
-    } catch (err) {
-      console.log(
-        "An unusual error occured. Please contact the developer of this presence and screenshot the following error:"
-      );
-      console.error(err);
+  if ((!playing || !showSong) && showBrowsing) {
+    for (const [k, v] of Object.entries(statics)) {
+      if (path.match(k)) {
+        data = { ...data, ...v };
+      }
     }
 
-    var data: PresenceData = {
-      details: title,
-      state: author,
-      largeImageKey: "soundcloud",
-      smallImageKey: paused ? "pause" : "play",
-      smallImageText: paused ? (await strings).pause : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+    if (path === "/") {
+      data.details = "Browsing...";
+      data.state = "Home";
+    }
 
-    if (paused) {
+    if (path.includes("/charts/")) {
+      data.details = "Browsing Charts...";
+
+      const heading = path.split("/").slice(-2)[0];
+      data.state =
+        heading && !heading.includes("charts") && capitalize(heading);
+    }
+
+    if (path.includes("/you/")) {
+      data.details = "Browsing My Content...";
+
+      const heading = location.pathname.split("/").pop();
+      data.state = heading && capitalize(heading);
+    }
+
+    if (path.includes("/settings/")) {
+      data.details = "Browsing Settings...";
+      data.state = getElement(".g-tabs-link.active");
+    }
+
+    if (path.includes("/search/")) {
+      data.details = "Searching...";
+
+      const searchBox: HTMLInputElement = document.querySelector(
+        ".headerSearch__input"
+      );
+      data.state = searchBox && searchBox.value;
+    }
+
+    if (path.includes("/discover/")) {
+      data.details = "Discovering...";
+      data.state = "Music";
+
+      const setLabel = getElement(".fullHero__titleTextLineBig > span");
+      if (setLabel) {
+        data.details = "Browsing Set...";
+        data.state = setLabel;
+      }
+    }
+
+    if (path.includes("/stats/")) {
+      data.details = "Viewing Stats...";
+      data.state = getElement(".statsNavigation .g-tabs-link.active");
+    }
+
+    const username =
+      getElement(".profileHeaderInfo__userName") ||
+      getElement(".userNetworkTop__title > a");
+    if (username) {
+      data.details = "Viewing Profile...";
+      data.state = username + ` (${getElement(".g-tabs-link.active")})`;
+    }
+
+    const waveform = document.querySelector(".fullListenHero .waveform__layer");
+    if (waveform) {
+      if (waveform.childElementCount >= 3) {
+        data.details = "Viewing Song...";
+      } else {
+        data.details = "Browsing Playlist/Album...";
+      }
+      data.state = `${getElement(".soundTitle__title > span")} by ${getElement(
+        ".soundTitle__username"
+      )}`;
+    }
+  }
+
+  if (data.details) {
+    if (data.details.match("(Browsing|Viewing|Discovering)")) {
+      data.smallImageKey = "reading";
+      data.smallImageText = (await strings).browse;
+    }
+    if (data.details.match("(Searching)")) {
+      data.smallImageKey = "search";
+      data.smallImageText = (await strings).search;
+    }
+    if (data.details.match("(Uploading)")) {
+      data.smallImageKey = "uploading";
+      data.smallImageText = "Uploading..."; // no string available
+    }
+    if (!showTimestamps || (!playing && !showBrowsing)) {
       delete data.startTimestamp;
       delete data.endTimestamp;
     }
 
-    if (title !== null && author !== null) {
-      presence.setActivity(data, !paused);
-    }
+    presence.setActivity(data);
   } else {
-    presence.clearActivity();
+    presence.setActivity();
+    presence.setTrayTitle();
   }
 });

@@ -16,8 +16,11 @@
     "it": "Scopri il nostro sito di Streaming Anime (Sub ITA). Scarica o guarda le tue serie preferite completamente gratis.",
     "zh_CN": "在这里，你可以找到完全免费的意大利语字幕动漫视频。"
   },
-  "url": "www.animeworld.tv",
-  "version": "3.1.7",
+  "url": [
+    "www.animeworld.tv",
+    "animeworld.tv"
+  ],
+  "version": "4.0.2",
   "logo": "https://i.imgur.com/UOy5uus.png",
   "thumbnail": "https://i.imgur.com/mTlQ9up.png",
   "color": "#165fa7",

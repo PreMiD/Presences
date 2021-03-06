@@ -12,7 +12,7 @@
     "www.cartooncrazy.net",
     "www1.cartooncrazy.tv"
   ],
-  "version": "1.1.5",
+  "version": "1.2.0",
   "logo": "https://i.imgur.com/bAG66wt.png",
   "thumbnail": "https://i.imgur.com/f98XgRX.png",
   "color": "#d8008b",
@@ -21,5 +21,6 @@
     "videos"
   ],
   "iframe": true,
-  "category": "videos"
+  "category": "videos",
+  "regExp": "www1?[.]cartooncrazy[.](net|tv)"
 }

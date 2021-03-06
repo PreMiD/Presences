@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Striker",
+    "id": "215509157837537280"
+  },
+  "url": [
+    "translate.yandex.com",
+    "translate.yandex.ru",
+    "ceviri.yandex.com.tr",
+    "translate.yandex.ua"
+  ],
+  "description": {
+    "en": "Yandex's free service instantly translates words, phrases, and web pages between English and 98 other languages!"
+  },
+  "service": "Yandex.Translate",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/kAHbOW1.png",
+  "thumbnail": "https://i.imgur.com/iRYR5Rj.png",
+  "color": "#FF2222",
+  "tags": [
+    "translate",
+    "yandex",
+    "utility"
+  ],
+  "category": "other",
+  "regExp": "(translate|ceviri).yandex([.][a-z]+)+[/]",
+  "settings": [
+    {
+      "id": "type",
+      "title": "Show translation type",
+      "icon": "fas fa-info",
+      "value": false
+    },
+    {
+      "id": "stamp",
+      "title": "Show time elapsed",
+      "icon": "fas fa-stopwatch",
+      "value": true
+    }
+  ]
+}

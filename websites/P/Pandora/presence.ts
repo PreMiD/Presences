@@ -1,54 +1,42 @@
 const presence = new Presence({
-  clientId: "608109837657702566"
-});
-const strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
+    clientId: "608109837657702566"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused"
+  });
 
-function stripText(element: HTMLElement, id = "None", log = true): any {
+function stripText(element: HTMLElement, id = "None", log = true) {
   if (element && element.firstChild) {
     return element.firstChild.textContent;
   } else {
     if (log)
-      console.log(
+      presence.info(
         "%cPandora%cERROR%c An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
-          id,
-        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 25px 0 0 25px; background: #596cae;",
-        "font-weight: 800; padding: 2px 5px; color: white; border-radius: 0 25px 25px 0; background: #ff5050;",
-        "color: unset;"
+          id
       );
     return null;
   }
 }
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var state;
+let state;
 
 presence.on("UpdateData", async () => {
-  var title, artist, smallImageKey, smallImageText, audioTime, audioDuration;
-
-  var audioElement: HTMLAudioElement = document.querySelector(
-    "audio:last-child"
-  );
+  let title: HTMLElement,
+    artist: HTMLElement,
+    smallImageKey,
+    smallImageText,
+    audioTime,
+    audioDuration,
+    details,
+    timestamps,
+    status,
+    audioElement: HTMLAudioElement = document.querySelector("audio:last-child");
   audioElement === null
     ? (audioElement = document.querySelector("audio"))
     : null;
 
-  var audioBar: HTMLElement = document.querySelector(
+  const audioBar: HTMLElement = document.querySelector(
     ".Tuner__Audio__NowPlayingHitArea"
   );
 
@@ -62,13 +50,13 @@ presence.on("UpdateData", async () => {
       if (title === null && artist === null) {
         return;
       } else {
-        title = stripText(title, "Title");
-        artist = stripText(artist, "Title");
+        details = stripText(title, "Title");
+        status = stripText(artist, "Title");
       }
 
       smallImageKey = "play";
       smallImageText = (await strings).play;
-      var timestamps = getTimestamps(
+      timestamps = presence.getTimestamps(
         Math.floor(audioElement.currentTime),
         Math.floor(audioElement.duration)
       );
@@ -77,13 +65,13 @@ presence.on("UpdateData", async () => {
       break;
 
     default:
-      title = "Browsing...";
+      details = "Browsing...";
       break;
   }
 
-  var data: PresenceData = {
-    details: title,
-    state: artist,
+  const data: PresenceData = {
+    details: details,
+    state: status,
     largeImageKey: "pandora",
     smallImageKey: smallImageKey,
     smallImageText: smallImageText,

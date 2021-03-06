@@ -1,26 +1,32 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "612653415419609088"
 });
 
-var lastPlaybackState = null;
-var reading;
-var browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState = null;
+let reading;
+let browsingStamp = Math.floor(Date.now() / 1000);
 
-var title: any,
+let title: any,
   title2: any,
   currentPage: any,
   pageNumber: any,
   tabTitle: any,
-  homeCurrentPage: any;
+  homeCurrentPage: any,
+  favoriteCurrentPage: HTMLElement;
 
-var pattern = "- Page";
+const pattern = "- Page";
 
-var character: any, parody: any;
+let character: any,
+  parody: any,
+  group: HTMLElement,
+  user: HTMLElement,
+  tag: HTMLElement,
+  artist: HTMLElement;
 
-var searchURL = new URL(document.location.href);
-var searchResult = searchURL.searchParams.get("q");
+const searchURL = new URL(document.location.href);
+const searchResult = searchURL.searchParams.get("q");
 
-var truncateAfter = function (str, pattern): string {
+const truncateAfter = function (str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern));
 };
 
@@ -36,7 +42,7 @@ presence.on("UpdateData", async () => {
 
   tabTitle = document.title;
 
-  title = document.querySelector("#info > h1");
+  title = document.querySelector("#info > h1 > span.pretty");
 
   if (document.location.pathname == "/" || !document.location.pathname) {
     homeCurrentPage = document.querySelector(
@@ -51,11 +57,11 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/g/")) {
     if (tabTitle.includes("Page")) {
       currentPage = document.querySelector(
-        "#pagination-page-top > button > span.current"
+        "#content > section.reader-bar > div.reader-pagination > button > span.current"
       );
 
       pageNumber = document.querySelector(
-        "#pagination-page-top > button > span.num-pages"
+        "#content > section.reader-bar > div.reader-pagination > button > span.num-pages"
       );
 
       title2 = truncateAfter(tabTitle, pattern);
@@ -113,6 +119,15 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
+  } else if (document.location.pathname.includes("/favorites/")) {
+    favoriteCurrentPage = document.querySelector(
+      "#content > section.pagination > a.page.current"
+    );
+    presenceData.details = "Favorites";
+
+    presenceData.state = "Page: " + favoriteCurrentPage.innerText;
+
+    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/search/")) {
     presenceData.details = "Searching for: ";
 
@@ -120,19 +135,51 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/character/")) {
-    character = document.querySelector("#content > h1 > span:nth-child(2)");
+    character = document.querySelector("#content > h1 > a > span.name");
 
     presenceData.details = "Searching by character: ";
 
     presenceData.state = character.innerText;
 
     presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/tag/")) {
+    tag = document.querySelector("#content > h1 > a > span.name");
+
+    presenceData.details = "Searching by tag: ";
+
+    presenceData.state = tag.innerText;
+
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/artist/")) {
+    artist = document.querySelector("#content > h1 > a > span.name");
+
+    presenceData.details = "Searching by artist:";
+
+    presenceData.state = artist.innerText;
+
+    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/parody/")) {
-    parody = document.querySelector("#content > h1 > span:nth-child(2)");
+    parody = document.querySelector("#content > h1 > a > span.name");
 
     presenceData.details = "Searching by parody: ";
 
     presenceData.state = parody.innerText;
+
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/group/")) {
+    group = document.querySelector("#content > h1 > a > span.name");
+
+    presenceData.details = "Searching by group: ";
+
+    presenceData.state = group.innerText;
+
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/users/")) {
+    user = document.querySelector("#user-container > div.user-info > h1");
+
+    presenceData.details = "Viewing an user: ";
+
+    presenceData.state = user.innerText;
 
     presenceData.startTimestamp = browsingStamp;
   } else {

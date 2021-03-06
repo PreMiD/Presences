@@ -1,13 +1,11 @@
-var presence = new Presence({
-  clientId: "704186478410072065"
-});
+const presence = new Presence({ clientId: "704186478410072065" });
 
-let channelName: any,
-  channelNumber: any,
-  songName: any,
-  songArtist: any,
-  searchTerm: any,
-  categoryTerm: any;
+let channelName: HTMLElement,
+  channelNumber: HTMLElement,
+  songName: HTMLElement,
+  songArtist: HTMLElement,
+  searchTerm: HTMLElement,
+  categoryTerm: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -26,7 +24,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Talk Home";
   } else if (document.location.pathname == "/home/howard") {
     presenceData.details = "Viewing Howard Stern Home";
-  } else if (document.location.pathname == "/now-playing") {
+  } else if (
+    document.querySelector("p.now-playing-info-label__text").textContent ===
+    "On Air Show"
+  ) {
     channelName = document.querySelector("p.channel-name");
     channelNumber = document.querySelector("p.channel-number");
     songName = document.querySelector("span.track-name");
@@ -35,6 +36,35 @@ presence.on("UpdateData", async () => {
     presenceData.details = songName.innerText + " - " + songArtist.innerText;
     presenceData.state =
       channelName.innerText + " - " + channelNumber.innerText;
+  } else if (
+    document.querySelector("p.now-playing-info-label__text").textContent ===
+    "Xtra Channel"
+  ) {
+    channelName = document.querySelector("p.channel-name");
+    songName = document.querySelector("span.track-name");
+    songArtist = document.querySelector("span.artist-name");
+
+    presenceData.details = songName.innerText + " - " + songArtist.innerText;
+    presenceData.state = channelName.innerText + " - Xtra Channel";
+  } else if (
+    document.querySelector("p.now-playing-info-label__text").textContent ===
+    "Episode"
+  ) {
+    songName = document.querySelector("p.track-name");
+    songArtist = document.querySelector("p.show-title");
+
+    presenceData.details = songName.innerText + " - " + songArtist.innerText;
+    presenceData.state = "On Demand Episode";
+  } else if (
+    document.querySelector("p.now-playing-info-label__text").textContent ===
+    "Pandora Station"
+  ) {
+    channelName = document.querySelector("p.channel-name");
+    songName = document.querySelector("span.track-name");
+    songArtist = document.querySelector("span.artist-name");
+
+    presenceData.details = songName.innerText + " - " + songArtist.innerText;
+    presenceData.state = channelName.innerText + " - Pandora Station";
   } else if (document.location.pathname == "/favorites/channels") {
     presenceData.details = "Viewing Favorite Channels";
   } else if (document.location.pathname == "/favorites/shows") {

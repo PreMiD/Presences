@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "D3rise",
+    "id": "253913831896645632"
+  },
+  "url": "music.yandex.ru",
+  "description": {
+    "ru": "Стриминговый сервис компании «Яндекс», позволяющий прослушивать музыкальные композиции, альбомы, подборки музыкальных треков и получать персональные рекомендации.",
+    "en": "Yandex streaming service that allows you to listen to music tracks, albums, and collections of music tracks and get personal recommendations."
+  },
+  "service": "Yandex Music",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/d1za28M.png",
+  "thumbnail": "https://i.imgur.com/JohXxhi.png",
+  "color": "#FDCD01",
+  "tags": [
+    "audio",
+    "music"
+  ],
+  "category": "music"
+}

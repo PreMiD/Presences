@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "659516842691395585"
+    clientId: "760589463792910388"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -21,8 +21,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -44,17 +44,22 @@ presence.on("UpdateData", async () => {
       Math.floor(video.duration)
     );
 
-    if (document.querySelector("#content h1 > a")) {
-      data.details = document.querySelector("#content h1 > a").textContent;
+    data.details = document.querySelector(
+      "body div.summary-block > p > a"
+    ).textContent;
+    if (
+      document
+        .querySelector("body div.summary-block > p")
+        ?.firstChild?.textContent.includes("حلقة")
+    )
       data.state = document
-        .querySelector("#content h1")
-        .textContent.substr(
+        .querySelector("body div.summary-block > p")
+        .firstChild.textContent.substr(
           0,
-          document.querySelector("#content h1").textContent.indexOf("من")
+          document
+            .querySelector("body div.summary-block > p")
+            .firstChild.textContent.indexOf("من")
         );
-    } else {
-      data.details = document.querySelector("#content h3").textContent;
-    }
 
     data.smallImageKey = video.paused ? "pause" : "play";
     data.smallImageText = video.paused

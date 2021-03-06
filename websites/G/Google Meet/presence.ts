@@ -14,11 +14,10 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = time;
     presence.setActivity(presenceData);
   } else {
-    const text = "textContent" in document.body ? "textContent" : "innerText";
-    document.title = document.getElementsByTagName("span")[30][text];
+    const users = document.querySelector(".wnPUne").innerHTML;
     presenceData.smallImageKey = "vcall";
     presenceData.details = "In a meeting";
-    presenceData.state = document.title + " user(s) in the room";
+    presenceData.state = users + " users in the room";
     presenceData.startTimestamp = time;
     presence.setActivity(presenceData);
   }

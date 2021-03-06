@@ -14,7 +14,7 @@
     "nl": "Anihub is een braziliaanse website die een plek bied om gratis anime te bekijken, zowel online als offline en zonder misbruik van advertenties."
   },
   "url": "anihub.tv",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/HClem6o.png",
   "thumbnail": "https://i.imgur.com/ehkk7qZ.png",
   "color": "#1997C6",
@@ -24,7 +24,8 @@
     "anime"
   ],
   "category": "anime",
-  "settings": [{
+  "settings": [
+    {
       "id": "customPaths",
       "title": "Outros Caminhos Ativados",
       "icon": "fas fa-exclamation-triangle",

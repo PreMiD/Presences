@@ -4,9 +4,11 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+      largeImageKey: "logo"
+    },
+    browsingStamp = Math.floor(Date.now() / 1000);
 
+  presenceData.startTimestamp = browsingStamp;
   if (window.location.pathname.endsWith("commands")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Commands";

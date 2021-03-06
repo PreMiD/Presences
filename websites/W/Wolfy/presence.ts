@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "644235680012042261"
+    clientId: "760589758845550632"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -27,8 +27,8 @@ function getTimestamps(
   const splitAudioDuration = audioDuration.split(":").reverse(),
     parsedAudioDuration = getTime(splitAudioDuration),
     startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - audioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
+    endTime = audioTime + parsedAudioDuration * 1000;
+  return [startTime, endTime];
 }
 
 presence.on("UpdateData", async () => {
@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
     path.split("/")[2].length > 1
   ) {
     data.state = document
-      .querySelector("#chat p.phase")
+      .querySelector("#chat div.nameState")
       .textContent.toUpperCase();
 
     if (data.state !== prevState) {
@@ -70,7 +70,8 @@ presence.on("UpdateData", async () => {
       delete data.endTimestamp;
       prevState = data.state;
       cp = Date.now();
-      currTime = document.querySelector("#chat p.time").textContent;
+      currTime = document.querySelector("#chat div.timeState.timer")
+        .textContent;
     }
 
     const timestamps = getTimestamps(cp, currTime);

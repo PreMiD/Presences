@@ -80,6 +80,18 @@ presence.on("UpdateData", () => {
     presenceData.state = "Joue sur l'hôtel";
   }
 
+  if (window.location.pathname.toLowerCase() === "/meet") {
+    presenceData.details = "Meet";
+    presenceData.state = "Regarde les relations les plus populaires de l'hôtel";
+    const meet = (window.document.getElementById(
+      "meetSearch"
+    ) as HTMLInputElement).value;
+    if (meet != "") {
+      presenceData.details = "Meet - " + meet;
+      presenceData.state = "Regarde les relations de " + meet;
+    }
+  }
+
   if (window.location.pathname.toLowerCase() === "/news") {
     presenceData.details = "Nouveautés";
     presenceData.state = "Regarde les dernières nouveautés";
@@ -250,7 +262,7 @@ presence.on("UpdateData", () => {
       "136": "Aide"
     };
     presenceData.details = "Forum - Nouveau sujet";
-    if (title !== "") {
+    if (title != "") {
       presenceData.state =
         "Crée un nouveau sujet dans " + nbcategory[category] + " - " + title;
     } else {

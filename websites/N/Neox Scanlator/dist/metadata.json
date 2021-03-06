@@ -9,15 +9,16 @@
     "pt_BR": "Uma das gigantes fansubs do Brasil, onde traduzem e libera ao público, também conhecida por traduzir obras como Solo Leveling além de outras obras famosas.",
     "pt": "Uma das gigantes fansubs do Brasil, onde traduzem e libera ao público, também conhecida por traduzir obras como Solo Leveling além de outras obras famosas."
   },
-  "url": "neoxscan.com",
-  "version": "1.0.5",
+  "url": "neoxscans.com",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/L5sBw6j.png",
   "thumbnail": "https://i.imgur.com/ljNKCp1.png",
   "color": "#079ac7",
   "tags": [
     "manga",
-    "fansub",
-    "neox"
+    "scan",
+    "neox",
+    "scanlator"
   ],
   "category": "other"
 }

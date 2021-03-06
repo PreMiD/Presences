@@ -1,16 +1,16 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "634081860972052490"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     browsing: "presence.activity.browsing"
-  }),
-  video = {
-    duration: 0,
-    currentTime: 0,
-    paused: true
-  };
+  });
+let video = {
+  duration: 0,
+  currentTime: 0,
+  paused: true
+};
 
 /**
  * Get Timestamps
@@ -21,31 +21,36 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-presence.on("iFrameData", (data) => {
-  video = data;
-});
+presence.on(
+  "iFrameData",
+  (data: { duration: number; currentTime: number; paused: boolean }) => {
+    video = data;
+  }
+);
 
 presence.on("UpdateData", async () => {
-  var data: PresenceData = {
+  const data: PresenceData = {
     largeImageKey: "animeflv"
   };
 
   if (
     video != null &&
     !isNaN(video.duration) &&
-    document.location.pathname.includes("/watch")
+    document.location.pathname.includes("/ver")
   ) {
-    var timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
 
-    data.details = document.querySelector("#XpndCn .title").textContent;
+    data.details = document.querySelector(
+      "#XpndCn .Title, .CapiCnt .Title"
+    ).textContent;
     (data.smallImageKey = video.paused ? "pause" : "play"),
       (data.smallImageText = video.paused
         ? (await strings).pause

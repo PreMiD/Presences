@@ -7,6 +7,10 @@
     {
       "name": "Callum",
       "id": "506899274748133376"
+    },
+    {
+      "name": "Striker",
+      "id": "215509157837537280"
     }
   ],
   "service": "Google Translate",
@@ -16,7 +20,8 @@
     "ga_IE": "Aistríonn seirbhís saor in aisce Google focail, frásaí agus leathanaigh ghréasáin go tapa idir an Béarla agus níos mó ná 100 teanga eile."
   },
   "url": "translate.google.com",
-  "version": "2.0.3",
+  "regExp": "translate.google([.][a-z]+)+[/]",
+  "version": "2.0.6",
   "logo": "https://i.imgur.com/TblAuvW.png",
   "thumbnail": "https://i.imgur.com/HSrkJq0.png",
   "color": "#4c8bf5",

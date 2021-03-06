@@ -8,7 +8,7 @@
     "en": "Vudu distributes full-length movies and TV shows to internet-enabled devices in the United States of America."
   },
   "service": "VUDU",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/ialSC46.png",
   "thumbnail": "https://i.imgur.com/4z07lus.png",
   "color": "#236cba",

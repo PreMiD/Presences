@@ -20,7 +20,7 @@
     "th": "สร้างแอปที่ใช้งานข้ามแพลตฟอร์มได้ด้วย JavaScript, HTML และ CSS"
   },
   "service": "Electron",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/QjEGajr.png",
   "thumbnail": "https://i.imgur.com/jXKMM75.png",
   "color": "#74b1be",

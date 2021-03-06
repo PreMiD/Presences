@@ -1,16 +1,15 @@
-var presence = new Presence({
-  clientId: "614200757989670934"
-});
+const presence = new Presence({
+    clientId: "614200757989670934"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var translatePageTitle: any;
-
-var translatingFile: any, translateProject: any, translatingLanguage: any;
-
-var profileName: any, profileNickname: any;
-
-var projectsTab: any;
+let translatePageTitle: HTMLElement,
+  translatingFile: HTMLElement,
+  translateProject: HTMLElement,
+  translatingLanguage: HTMLElement,
+  profileName: HTMLElement,
+  profileNickname: HTMLElement,
+  projectsTab: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -67,13 +66,14 @@ presence.on("UpdateData", async () => {
     translatingLanguage = document.querySelector(
       "#file-language-info > a.btn.mdc-button.open-language-menu > span"
     );
-    translateProject = document.querySelector(
-      "#project-menu-content > ul > li:nth-child(1) > h3"
-    );
+    translateProject = document.querySelector("title");
 
     presenceData.details = "Translating " + translatingFile.innerHTML;
     presenceData.state =
-      translateProject.innerText + " (" + translatingLanguage.innerHTML + ")";
+      translateProject.innerText.split("-")[1] +
+      " (" +
+      translatingLanguage.innerHTML +
+      ")";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/profile")) {
     profileName = document.querySelector(
