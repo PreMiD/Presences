@@ -8,7 +8,7 @@ interface LangStrings {
   incorrectAnswer: string;
   correctAnswer: string;
   resultsQuestion: string;
-  contentBlockView: string;
+  slideViewing: string;
   gameOver: string;
   gameCreate: string;
   loadingPage: string;
@@ -16,13 +16,14 @@ interface LangStrings {
   firstPlace: string;
   points: string;
   questionsCorrect: string;
-  contentShowing: string;
+  slideShowing: string;
   questionShowing: string;
   stString: string;
   ndString: string;
   rdString: string;
   topX: string;
   of: string;
+  questionNumber: string;
 }
 
 async function findRanking(rankingSelector: HTMLElement) {
@@ -56,7 +57,7 @@ const presence = new Presence({
         incorrectAnswer: "kahoot.incorrectAnswer",
         correctAnswer: "kahoot.correctAnswer",
         resultsQuestion: "kahoot.resultsQuestion",
-        contentBlockView: "kahoot.contentBlockView",
+        slideViewing: "kahoot.slideViewing",
         gameOver: "kahoot.gameOver",
         gameCreate: "kahoot.gameCreate",
         loadingPage: "kahoot.loadingPage",
@@ -64,13 +65,14 @@ const presence = new Presence({
         firstPlace: "kahoot.firstPlace",
         points: "kahoot.points",
         questionsCorrect: "kahoot.questionsCorrect",
-        contentShowing: "kahoot.contentShowing",
+        slideShowing: "kahoot.slideShowing",
         questionShowing: "kahoot.questionShowing",
         stString: "kahoot.stString",
         ndString: "kahoot.ndString",
         rdString: "kahoot.rdString",
         topX: "kahoot.topX",
-        of: "kahoot.of"
+        of: "kahoot.of",
+        questionNumber: "kahoot.questionNumber"
       },
       await presence.getSetting("lang")
     );
@@ -134,7 +136,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = (await strings).resultsQuestion;
       presenceData.state = result;
     } else if (path.includes("/contentblock")) {
-      presenceData.details = (await strings).contentBlockView;
+      presenceData.details = (await strings).slideViewing;
     } else if (path.includes("/ranking")) {
       rankingSelector = document.querySelector(
         "p.shadow-text__Text-sc-1mgpgij-1"
@@ -182,7 +184,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = `${(await strings).firstPlace} ${firstPlaceName} ${(await strings).points} ${firstPlacePoints}`;
       presenceData.state = `${(await strings).questionsCorrect} ${firstPlaceQuetions}`;
     } else if (path.includes("/contentblock")) {
-      presenceData.details = (await strings).contentShowing;
+      presenceData.details = (await strings).slideShowing;
       const questionNo = `${
         document
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
@@ -192,9 +194,9 @@ presence.on("UpdateData", async () => {
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
           .textContent.split("/")[1]
       }`;
-      presenceData.state = `Question: ${questionNo}`;
+      presenceData.state = `${(await strings).questionShowing} ${questionNo}`;
     } else if (path.includes("/gameblock")) {
-      presenceData.details = "Showing Question:";
+      presenceData.details = (await strings).questionNumber;
       const questionNo = `${
         document
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")

@@ -39,7 +39,7 @@
     "id": "buttons",
     "title": "Show Buttons",
     "icon": "fas fa-compress-arrows-alt",
-    "value": true
+    "value": false
    }
  ]
 }
