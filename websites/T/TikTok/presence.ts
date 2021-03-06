@@ -96,25 +96,15 @@ presence.on("UpdateData", async () => {
       "/@/(.*)/video/": {
         details: (await strings).viewTikTok,
         state: `${
-          currentVidElements.length > 4
-            ? currentVidElements
-                .find((v) =>
-                  v.firstElementChild?.className?.includes("nickname")
-                )
-                ?.textContent.split("·")[0]
-            : currentVidElements
-                .find((v) => v.className.includes("video-card"))
-                ?.parentElement.parentElement.parentElement.firstElementChild.children[1].textContent.split(
-                  "·"
-                )[0]
+          currentVidElements
+            .find((v) => v.className.includes("video-card"))
+            ?.parentElement.parentElement.parentElement.firstElementChild.children[1].textContent.split(
+              "·"
+            )[0]
         } (@${
-          currentVidElements.length > 4
-            ? currentVidElements.find((v) =>
-                v.firstElementChild?.className?.includes("uniqueId")
-              )?.textContent
-            : currentVidElements.find((v) => v.className.includes("video-card"))
-                ?.parentElement.parentElement.parentElement.firstElementChild
-                .children[0].textContent
+          currentVidElements.find((v) => v.className.includes("video-card"))
+            ?.parentElement.parentElement.parentElement.firstElementChild
+            .children[0].textContent
         })`,
         smallImageKey: (currentVidElements.find((v) =>
           v.className.includes("video-card")
