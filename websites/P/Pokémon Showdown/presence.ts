@@ -23,6 +23,12 @@ presence.on("UpdateData", async () => {
       users = document.querySelector("a.roomtab.button.cur span").textContent;
     data.details = title;
     data.state = users;
+    data.buttons = [
+      {
+        label: "Spectate",
+        url: document.baseURI
+      }
+    ];
     if (elapsed == null) {
       elapsed = Math.floor(Date.now() / 1000);
     }

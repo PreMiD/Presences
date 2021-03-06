@@ -39,10 +39,13 @@ presence.on("UpdateData", async () => {
 
     if (await presence.getSetting("showprofilename")) {
       presenceData.state = userName.length < 2 ? "User: " + userName : userName;
-      if (buttons) presenceData.buttons = [{
-        label: 'View Profile',
-        url: location.origin
-      }];
+      if (buttons)
+        presenceData.buttons = [
+          {
+            label: "View Profile",
+            url: location.origin
+          }
+        ];
     }
 
     if (document.location.pathname.startsWith("/fans")) {
@@ -82,12 +85,15 @@ presence.on("UpdateData", async () => {
           .querySelector(".item-details-main")
           .textContent.trim();
         presenceData.details = "Listening to audio";
-        if (await presence.getSetting("itemname")){
+        if (await presence.getSetting("itemname")) {
           presenceData.state = itemName + " by " + artist;
-          if (buttons) presenceData.buttons = [{
-            label: 'Listen',
-            url: document.URL
-          }];
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "Listen",
+                url: document.URL
+              }
+            ];
         }
         presenceData.smallImageKey = "audio_pause";
         presenceData.smallImageText = "Audio - Paused";
@@ -115,10 +121,13 @@ presence.on("UpdateData", async () => {
         if (await presence.getSetting("itemname")) {
           presenceData.state =
             itemName.length < 2 ? "Art: " + itemName : itemName;
-          if (buttons) presenceData.buttons = [{
-            label: 'View',
-            url: document.URL
-          }];
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "View",
+                url: document.URL
+              }
+            ];
         }
       }
     } else if (document.location.pathname.startsWith("/portal")) {
@@ -131,10 +140,13 @@ presence.on("UpdateData", async () => {
             if (await presence.getSetting("itemname")) {
               presenceData.state =
                 itemName.length < 2 ? "Movie: " + itemName : itemName;
-              if (buttons) presenceData.buttons = [{
-                label: 'Watch',
-                url: document.URL
-              }];
+              if (buttons)
+                presenceData.buttons = [
+                  {
+                    label: "Watch",
+                    url: document.URL
+                  }
+                ];
             }
             // Some movies might not have the NG player
             if (document.querySelector(".ng-video-player")) {
@@ -172,10 +184,13 @@ presence.on("UpdateData", async () => {
             if (await presence.getSetting("itemname")) {
               presenceData.state =
                 itemName.length < 2 ? "Game: " + itemName : itemName;
-              if (buttons) presenceData.buttons = [{
-                label: 'Play',
-                url: document.URL
-              }];
+              if (buttons)
+                presenceData.buttons = [
+                  {
+                    label: "Play",
+                    url: document.URL
+                  }
+                ];
             }
             presenceData.smallImageKey = "games_play";
             presenceData.smallImageText = "Games - Playing";
@@ -204,10 +219,13 @@ presence.on("UpdateData", async () => {
         if (await presence.getSetting("topicname")) {
           presenceData.state =
             itemName.length < 2 ? "Topic: " + itemName : itemName;
-          if (buttons) presenceData.buttons = [{
-            label: 'View Topic',
-            url: document.URL
-          }];
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "View Topic",
+                url: document.URL
+              }
+            ];
         }
       }
     } else if (document.location.pathname.startsWith("/community")) {
@@ -221,10 +239,13 @@ presence.on("UpdateData", async () => {
         if (await presence.getSetting("itemname")) {
           presenceData.state =
             itemName.length < 2 ? "Collection: " + itemName : itemName;
-          if (buttons) presenceData.buttons = [{
-            label: 'View Collection',
-            url: document.URL
-          }];
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "View Collection",
+                url: document.URL
+              }
+            ];
         }
       }
     } else if (document.location.pathname.startsWith("/social")) {
@@ -244,10 +265,13 @@ presence.on("UpdateData", async () => {
         if (await presence.getSetting("itemname")) {
           presenceData.state =
             itemName.length < 2 ? "Playlist: " + itemName : itemName;
-          if (buttons) presenceData.buttons = [{
-            label: 'View Playlist',
-            url: document.URL
-          }];
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "View Playlist",
+                url: document.URL
+              }
+            ];
         }
       }
     } else if (document.location.pathname.startsWith("/chat")) {

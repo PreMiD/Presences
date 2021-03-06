@@ -8,7 +8,7 @@
     "en": "Multporn.net is an Adult Website for Comics of any kind."
   },
   "url": "www.multporn.net",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/aBu33JP.png",
   "thumbnail": "https://i.imgur.com/v5BuHwD.png",
   "color": "#cc0000",
@@ -17,5 +17,13 @@
     "multporn"
   ],
   "category": "other",
-  "regExp": "multporn[.]net"
+  "regExp": "multporn[.]net",
+  "settings": [
+    {
+      "id": "button",
+      "title": "Enable Button",
+      "icon": "fas fa-info",
+      "value": false
+    }
+  ]
 }

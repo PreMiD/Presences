@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Hibanka",
+    "id": "467658348158779393"
+  },
+  "url": "r6stats.com",
+  "description": {
+    "en": "View and compare your Rainbow Six: Siege statistics with millions of other players around the world!",
+    "ru": "Посматривайте и сравнивайте свою статистику в Rainbow Six: Siege с миллионами других игроков со всего мира!"
+  },
+  "service": "R6Stats",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/DCvK0Bz.png",
+  "thumbnail": "https://i.imgur.com/nOrZDpv.png",
+  "color": "#ffda0c",
+  "tags": [
+    "rainbow6"
+  ],
+  "category": "games"
+}

@@ -20,9 +20,9 @@ let actionTimestamp: number = null;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "quizlet"
-  },
-  buttons = await presence.getSetting("buttons");
+      largeImageKey: "quizlet"
+    },
+    buttons = await presence.getSetting("buttons");
 
   if (qzData && qzData.layer) {
     const pathSplits = qzData.layer.path.split("/");
@@ -40,10 +40,13 @@ presence.on("UpdateData", async () => {
         data.state = document.querySelector(
           ".ProfileHeader-username"
         ).textContent;
-        if (buttons) data.buttons = [{
-          label: 'View Profile',
-          url: document.URL
-        }];
+        if (buttons)
+          data.buttons = [
+            {
+              label: "View Profile",
+              url: document.URL
+            }
+          ];
         actionTimestamp = null;
         break;
       case "Topic":
@@ -64,10 +67,13 @@ presence.on("UpdateData", async () => {
             if (!actionTimestamp) actionTimestamp = Date.now();
             data.details = "Viewing a set";
             data.state = qzData.layer.studyableTitle;
-            if (buttons) data.buttons = [{
-              label: 'View Set',
-              url: document.URL
-            }];
+            if (buttons)
+              data.buttons = [
+                {
+                  label: "View Set",
+                  url: document.URL
+                }
+              ];
             break;
           case "new":
             data.details = "Creating a set";

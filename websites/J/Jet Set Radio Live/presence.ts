@@ -80,10 +80,13 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).pause;
     }
 
-    if (buttons) presenceData.buttons = [{
-      label: 'Tune In',
-      url: document.URL
-    }];
+    if (buttons)
+      presenceData.buttons = [
+        {
+          label: "Tune In",
+          url: document.URL
+        }
+      ];
   }
 
   if (presenceData.details == null && presenceData.state == null) {
