@@ -30,5 +30,16 @@
     "qna",
     "fun"
   ],
-  "category": "games"
+  "category": "games",
+  "settings": [{
+    "id": "lang",
+    "multiLanguage": true
+   },
+   {
+    "id": "buttons",
+    "title": "Show Buttons",
+    "icon": "fas fa-compress-arrows-alt",
+    "value": true
+   }
+ ]
 }
