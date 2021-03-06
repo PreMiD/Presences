@@ -2,7 +2,7 @@ const sinefy = new Presence({
     clientId: "817552908991594530"
   }),
   strings = async () => {
-    return await sinefy.getStrings(
+    return sinefy.getStrings(
       {
         play: "general.playing",
         pause: "general.paused"
