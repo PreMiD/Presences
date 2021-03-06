@@ -15,14 +15,14 @@ presence.on("UpdateData", async () => {
     document.location.pathname == "/fr.php" ||
     document.location.pathname == "/en.php"
   ) {
-    presenceData.startTimestamp = browsingStamp;
+    
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname == "/forum.php") {
-    presenceData.startTimestamp = browsingStamp;
+    
     presenceData.details = "Viewing the forum's menu";
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "index.php") {
-    presenceData.startTimestamp = browsingStamp;
+    
     presenceData.details = "Viewing home page";
   }
   const elt = document.querySelector("#compteur0 > div") as HTMLElement;
@@ -33,21 +33,17 @@ presence.on("UpdateData", async () => {
       { label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" }
     ];
   } else if (document.location.pathname == "/mariokart.php") {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "browsing map's";
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "/category.php") {
-    presenceData.startTimestamp = browsingStamp;
     user = document.querySelector("html > body > main > h1");
     presenceData.details = "Viewing the following category: " + user.innerHTML;
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "/topic.php") {
-    presenceData.startTimestamp = browsingStamp;
     user = document.querySelector("html > body > main > h1");
     presenceData.details = "Viewing: " + user.innerHTML;
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "/profil.php") {
-    presenceData.startTimestamp = browsingStamp;
     user = document.querySelector("html > body > main > h1");
     presenceData.details = "Viewing: " + user.innerHTML;
     presenceData.smallImageKey = "search";
@@ -57,5 +53,6 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
+    presenceData.startTimestamp = browsingStamp;
   }
 });
