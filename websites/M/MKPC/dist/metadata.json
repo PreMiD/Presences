@@ -16,7 +16,7 @@
     "fr": "Vous connaissez certainement Mario Kart, le jeu de course le plus fun de tous les temps ! Mario Kart PC reprend les mêmes principes que le jeu original mais il est jouable sur navigateur, et gratuitement.  La plupart des modes issus de Mario Kart ont été repris : Grand Prix, courses VS, batailles de ballons, contre-la-montre... Et un dernier mode inédit : l'éditeur de circuits ! Placez les lignes droites et les virages, ajoutez les objets, insérez des accélérateurs... Tout est personnalisable ! Votre imagination est la seule limite ! Vous pouvez également partager vos créations et essayer celles des autres grâce à l'outil de partage. Plusieurs milliers de circuits ont déjà été partagés !  Enfin, il est possible d'affronter les joueurs du monde entier grâce au mode multijoueurs en ligne ! Grimpez dans le classement et devenez champion du monde !"
   },
   "service": "MKPC",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://imgur.com/T2WTLEM.jpeg",
   "thumbnail": "https://imgur.com/LZwSRDe.jpeg",
   "color": "#FF001B",
