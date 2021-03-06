@@ -39,8 +39,18 @@ presence.on("UpdateData", async () => {
     largeImageKey: "codenames"
   };
 
+  const buttons = await presence.getSetting("buttons");
+
   //* If in a game or not
   if (document.querySelector("#gamescene")) {
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: "Join room",
+          url: document.URL
+        }
+      ];
+    }
     if (document.querySelector(".justify-start.items-center")) {
       presenceData.details = "Waiting for game";
       presenceData.state = "to start...";
@@ -164,8 +174,24 @@ presence.on("UpdateData", async () => {
 
     if (document.location.pathname.includes("/room/create")) {
       presenceData.details = "Creating a room...";
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "Join room",
+            url: document.URL
+          }
+        ];
+      }
     } else if (document.location.pathname.includes("/room/")) {
       presenceData.details = "Joining a room...";
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: "Join room",
+            url: document.URL
+          }
+        ];
+      }
     } else {
       presenceData.details = "Browsing...";
     }

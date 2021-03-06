@@ -18,5 +18,13 @@
     "operatives",
     "boardgame"
   ],
-  "category": "games"
+  "category": "games",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": false
+    }
+  ]
 }
