@@ -35,8 +35,8 @@ presence.on("UpdateData", async () => {
     smallImageText: `${data.presenter?.name || "AutoDJ"} is live!`,
     buttons: [
       {
-        label: "Visit website",
-        url: "https://itsbounce.net"
+        label: "Tune in",
+        url: "https://live.itsbounce.net"
       }
     ]
   };
