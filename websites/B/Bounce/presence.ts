@@ -2,7 +2,18 @@ const presence = new Presence({ clientId: "817772461109018664" }),
   timestamp = Math.floor(Date.now() / 1000),
   newStats = async () => data = await (await window.fetch("https://api.itsbounce.net")).json();
 
-let data: any;
+let data: {
+  listeners: {
+    total: string;
+  };
+  nowplaying: {
+    artist: string;
+    title: string;
+  }
+  presenter: {
+    name: string;
+  }
+};
 
 setInterval(newStats, 10000);
 newStats();
