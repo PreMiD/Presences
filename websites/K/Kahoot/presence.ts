@@ -10,7 +10,9 @@ presence.on("UpdateData", async () => {
   if (document.location.href.match("https://kahoot.it")) {
     switch(document.location.pathname) {
       case "/":
-        
+       presenceData.state = 'Browsing the homepage',
+      case "/test":
+        presenceData.startTimestamp = "test",
     }
   }
   
