@@ -61,7 +61,7 @@ sinefy.on("UpdateData", async () => {
           ?.textContent || null;
 
     // Set status state
-    activity.details = title?.replace(episode, "");
+    activity.details = title.replace(episode, "");
     if (episode) activity.state = episode.replace("izle", "");
 
     if (video) {
