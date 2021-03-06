@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.premid.app/metadata/1.3",
+	"service": "Legends of Idleon",
+	"author": {
+		"name": "Fish",
+		"id": "221838320223649792"
+	},
+	"category": "games",
+	"logo": "https://i.imgur.com/n1n47pY.png",
+	"thumbnail": "https://i.imgur.com/m1mu2xw.png",
+	"version": "1.0.0",
+	"color": "#8c32cc",
+	"tags": [
+		"game",
+		"idle",
+		"mmo"
+	],
+	"url": "www.legendsofidleon.com",
+	"description": {
+		"en": "In this idle game, you get build your own guild of unique characters and play as each one in a huge multiplayer pixel world! Cast spells on bosses, talk with other players, complete quests, and level up skills!"
+	}
+}
