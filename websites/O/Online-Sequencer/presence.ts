@@ -1,7 +1,9 @@
 const presence = new Presence({
   clientId: "802379096122196050"
 });
-let timestart = Math.round(new Date().getTime() / 1000), prevPage="", currPage="";
+let timestart = Math.round(new Date().getTime() / 1000),
+  prevPage = "",
+  currPage = "";
 
 function refreshTime() {
   timestart = Math.round(new Date().getTime() / 1000);
@@ -18,7 +20,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Listening to a sequence";
     presenceData.state =
       "Title: " + (document.getElementById("title") as HTMLInputElement).value;
-    presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(document.querySelector("#titlebar div a") as HTMLAnchorElement).href}];
+    presenceData.buttons = [
+      { label: "View Sequence", url: window.location.href },
+      {
+        label: "View Creator",
+        url: (document.querySelector("#titlebar div a") as HTMLAnchorElement)
+          .href
+      }
+    ];
   } else if (document.location.pathname === "/") {
     prevPage = currPage;
     currPage = "w";
@@ -47,8 +56,9 @@ presence.on("UpdateData", async () => {
     prevPage = currPage;
     currPage = "m";
     presenceData.details = "Viewing member:";
-    presenceData.state = (
-      document.getElementsByClassName("profile_header")[0] as HTMLElement).innerText;
+    presenceData.state = (document.getElementsByClassName(
+      "profile_header"
+    )[0] as HTMLElement).innerText;
   } else if (document.location.pathname.startsWith("/import")) {
     prevPage = currPage;
     currPage = "i";
@@ -57,8 +67,9 @@ presence.on("UpdateData", async () => {
     prevPage = currPage;
     currPage = "ft";
     presenceData.details = "Viewing Forum Thread:";
-    const threadtitle = (
-      document.getElementsByClassName("thead")[0] as HTMLElement).innerText;
+    const threadtitle = (document.getElementsByClassName(
+      "thead"
+    )[0] as HTMLElement).innerText;
     if (threadtitle.includes("Thread Modes")) {
       presenceData.state = threadtitle.substr(13);
     } else {
@@ -68,13 +79,16 @@ presence.on("UpdateData", async () => {
     prevPage = currPage;
     currPage = "fa";
     presenceData.details = "Viewing Forum Announcement:";
-    presenceData.state = (document.getElementsByClassName("thead")[0] as HTMLElement).innerText;
+    presenceData.state = (document.getElementsByClassName(
+      "thead"
+    )[0] as HTMLElement).innerText;
   } else if (document.location.pathname.startsWith("/forum/forumdisplay")) {
     prevPage = currPage;
     currPage = "fd";
     presenceData.details = "Viewing Forum Category:";
-    presenceData.state = (
-      document.getElementsByClassName("pull-left navbar-header")[0] as HTMLElement).innerText;
+    presenceData.state = (document.getElementsByClassName(
+      "pull-left navbar-header"
+    )[0] as HTMLElement).innerText;
   } else if (document.location.pathname.startsWith("/forum/memberlist")) {
     prevPage = currPage;
     currPage = "fm";
@@ -90,12 +104,20 @@ presence.on("UpdateData", async () => {
       document.getElementsByClassName("active tooltipstered")[0] === undefined
     ) {
       presenceData.details = "Viewing a sequence";
-      presenceData.buttons = [{label:"View Sequence", url:window.location.href},{label:"View Creator", url:(document.querySelector("#titlebar div a") as HTMLAnchorElement).href}];
+      presenceData.buttons = [
+        { label: "View Sequence", url: window.location.href },
+        {
+          label: "View Creator",
+          url: (document.querySelector("#titlebar div a") as HTMLAnchorElement)
+            .href
+        }
+      ];
     } else {
       presenceData.details = "Editing a sequence";
     }
-    const str = (
-      document.getElementsByClassName("text")[1] as HTMLElement).innerHTML.trim();
+    const str = (document.getElementsByClassName(
+      "text"
+    )[1] as HTMLElement).innerHTML.trim();
     if (str.includes("by <a")) {
       presenceData.state = "Title: " + str.substring(0, str.indexOf("by <a"));
     } else {
