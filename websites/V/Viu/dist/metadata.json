@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.0",
+    "author": {
+      "name": "SlowLife",
+      "id": "374905512661221377"
+    },
+    "url": "www.viu.com",
+    "description": {
+      "en": "Viu delivers content in different genres from Asia's top content providers with local language subtitles, as well as original production series under 'Viu Original' initiative."
+    },
+    "service": "Viu",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/IyPu6Yf.png",
+    "thumbnail": "https://i.imgur.com/ThcGMw3.png",
+    "color": "#ffbf00",
+    "tags": [
+      "viu",
+      "drama",
+      "anime",
+      "movie"
+    ],
+    "category": "videos",
+    "settings": [
+      {
+        "id": "lang",
+        "multiLanguage": true
+      },
+      {
+        "id": "buttons",
+        "title": "Show Buttons",
+        "icon": "fas fa-compress-arrows-alt",
+        "value": true
+      },
+      {
+        "id": "searchQ",
+        "title": "Show Search Query",
+        "icon": "fas fa-search",
+        "value": false
+      },
+      {
+        "id": "logo",
+        "title": "Viu Logo",
+        "value": 0,
+        "icon": "fas fa-paint-roller",
+        "values": ["Normal", "With Text"]
+      }
+    ]
+  }
