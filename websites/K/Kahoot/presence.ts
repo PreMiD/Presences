@@ -118,13 +118,13 @@ presence.on("UpdateData", async () => {
         : document.querySelector("div.podium-bottom-bar__Score-ssrx8z-1")
             .textContent;
       presenceData.details = (await strings).playing;
-      presenceData.state = `${(await strings).questionShowing} ${currentQuestion} | ${(await strings).points} ${score}`;
+      presenceData.state = `${(await strings).questionNumber} ${currentQuestion} | ${(await strings).points} ${score}`;
     } else if (path.includes("/getready")) {
       currentQuestion = document.querySelector(
         "div.top-bar__QuestionNumber-sc-186o9v8-2"
       ).textContent;
       presenceData.details = (await strings).questionLoading;
-      presenceData.state = `${(await strings).questionShowing} ${currentQuestion}`;
+      presenceData.state = `${(await strings).questionNumber} ${currentQuestion}`;
     } else if (path.includes("/result")) {
       const result = document
         .querySelector("div.styles__MessageBody-sc-15a2o5w-4")
@@ -192,9 +192,9 @@ presence.on("UpdateData", async () => {
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
           .textContent.split("/")[1]
       }`;
-      presenceData.state = `${(await strings).questionShowing} ${questionNo}`;
+      presenceData.state = `${(await strings).questionNumber} ${questionNo}`;
     } else if (path.includes("/gameblock")) {
-      presenceData.details = (await strings).questionNumber;
+      presenceData.details = (await strings).questionShowing;
       const questionNo = `${
         document
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
@@ -204,7 +204,7 @@ presence.on("UpdateData", async () => {
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
           .textContent.split("/")[1]
       }`;
-      presenceData.state = `${(await strings).questionShowing} ${questionNo}`;
+      presenceData.state = `${(await strings).questionNumber} ${questionNo}`;
     } else {
       presenceData.details = (await strings).loadingPage;
     }
