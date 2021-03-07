@@ -75,10 +75,8 @@ presence.on("UpdateData", async () => {
           : false;
 
     if (!show) {
-      (title = document.querySelector(".track-link:nth-child(1)").textContent),
-        (artist = document.querySelector(".track-link:nth-child(2)")
-          .textContent);
-
+      title = document.querySelector(".track-link:nth-child(1)").textContent;
+      artist = document.querySelector(".track-link:nth-child(2)").textContent;
           presenceData.details = title,
           presenceData.state = artist,
           presenceData.largeImageKey = "deezer",
@@ -152,7 +150,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing...";
       presenceData.state = "User's Loved";
     } else if (pathname.includes("playlists")) {
-      (presenceData.details = "Browsing..."), (presenceData.state = "User's Playlists");
+      presenceData.details = "Browsing...";
+      presenceData.state = "User's Playlists";
     } else if (pathname.includes("albums")) {
       presenceData.details = "Browsing...";
       presenceData.state = "User's Albums";

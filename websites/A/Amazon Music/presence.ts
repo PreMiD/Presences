@@ -65,10 +65,10 @@ presence.on("UpdateData", async () => {
         pausedIcon = document
           .querySelector("music-button.hydrated:nth-child(4)")
           .shadowRoot.querySelector("button > div > music-icon");
-      (paused = pausedIcon.attributes[1].value == "pause" ? false : true),
-        (currentTime = document.querySelector(
+      paused = pausedIcon.attributes[1].value == "pause" ? false : true;
+      currentTime = document.querySelector(
           "div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(1)"
-        ).textContent);
+        ).textContent;
       timeLeft = document
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(2)")
         .textContent.replace(" - ", "");
@@ -81,9 +81,9 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = title;
       presenceData.state = artist;
-      (presenceData.smallImageKey = paused ? "pause" : "play"),
-        (presenceData.smallImageText =
-          paused == true ? (await strings).pause : (await strings).play);
+      presenceData.smallImageKey = paused ? "pause" : "play";
+      presenceData.smallImageText =
+          paused == true ? (await strings).pause : (await strings).play;
       presenceData.largeImageKey = "logo";
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
