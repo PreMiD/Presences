@@ -38,12 +38,6 @@
     "multiLanguage": true
   },
   {
-    "id": "showPlaylist",
-    "title": "Show Playlist",
-    "icon": "fad fa-list-music",
-    "value": true
-  },
-  {
     "id": "buttons",
     "title": "Show Buttons",
     "icon": "fas fa-compress-arrows-alt",
