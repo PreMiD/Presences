@@ -4,22 +4,16 @@
       "name": "ICEPrey",
       "id": "256973318588989440"
     },
-    "contributors": [
-      {
-        "name": "ICEPrey",
-        "id": "256973318588989440"
-      }
-    ],
     "service": "Aniorb",
     "description": {
       "en": "Aniorb is a free anime website with no ads and the highest quality animes."
     },
     "url": "aniorb.me",
-    "version": "1.0.1",
-    "logo": "https://i.imgur.com/ng8qXxu.png",
-    "thumbnail": "https://i.imgur.com/WCgM5dd.png",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/9qhIuod.png",
+    "thumbnail": "https://i.imgur.com/THrtHoe.png",
     "color": "#000000",
-    "tags": ["aniorb", "anime"],
+    "tags": ["aniorb", "ani", "orb", "4anime", "animelist", "aniwatch", "animekisa", "gogoanime", "anime" , "watching" , "popular", "streaming", "free", "fast", "1080p", "website"],
     "category": "anime",
     "iframe": true,
     "readLogs": false
