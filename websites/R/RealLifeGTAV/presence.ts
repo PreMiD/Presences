@@ -13,13 +13,6 @@ presence.on("UpdateData", async function () {
     set_timeElapsed = await presence.getSetting("timeElapsed"),
     set_showButtons = await presence.getSetting("showButtons"),
     urlpath = window.location.pathname.split("/");
-  function ifSettingEnabled(setting, string) {
-    if (setting) {
-      return string;
-    } else {
-      return "";
-    }
-  }
   if (
     document.location.hostname === "reallifegtav.de" ||
     document.location.hostname === "rlv.link"
@@ -32,94 +25,40 @@ presence.on("UpdateData", async function () {
       urlpath[2] != ""
     ) {
       presenceData.details =
-        "Startseite" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
+        "Startseite" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (document.location.pathname.includes("/login")) {
       presenceData.details =
-        "Meldet sich an" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-      presenceData.smallImageKey = "writing";
+        "Meldet sich an" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (document.location.pathname.includes("/register")) {
       presenceData.details =
-        "Registriert sich" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-      presenceData.smallImageKey = "writing";
+        "Registriert sich" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (document.location.pathname.includes("/dashboard")) {
       presenceData.details =
-        "Dashboard" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-
+        "Dashboard" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (document.location.pathname.includes("/faq")) {
       presenceData.details =
-        "FAQ" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-
+        "FAQ" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (document.location.pathname.includes("/jobs")) {
       presenceData.details =
-        "Jobs" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-      presenceData.smallImageKey = "writing";
+        "Jobs" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (document.location.pathname.includes("/ingame-jobs")) {
       presenceData.details =
-        "Ingame Jobs" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-
+        "Ingame Jobs" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (document.location.pathname.includes("/partner")) {
       presenceData.details =
-        "Partner Panel" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-
+        "Partner Panel" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (document.location.pathname.includes("/luxurycars")) {
       presenceData.details =
-        "LuxuryAutos Shop" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-
+        "LuxuryAutos Shop" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (document.location.pathname.includes("/rules")) {
       presenceData.details =
-        "Regelwerk" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-
+        "Regelwerk" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (
       document.location.pathname.includes("/transactions") &&
       !window.location.search.substr(1)
     ) {
       presenceData.details =
-        "Transaktionen" +
-        ifSettingEnabled(
-          set_showUsername,
-          " | User: " + document.querySelector("#RPC_Username").textContent
-        );
-
+        "Transaktionen" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
     } else if (
       document.location.pathname.includes("/transactions") &&
       window.location.search.substr(1)
@@ -133,28 +72,13 @@ presence.on("UpdateData", async function () {
     } else if (document.location.pathname.includes("/pages")) {
       if (document.location.pathname.includes("/impressum")) {
         presenceData.details =
-          "Impressum" +
-          ifSettingEnabled(
-            set_showUsername,
-            " | User: " + document.querySelector("#RPC_Username").textContent
-          );
-
+          "Impressum" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
       } else if (document.location.pathname.includes("/datenschutz")) {
         presenceData.details =
-          "Datenschutzerklärung" +
-          ifSettingEnabled(
-            set_showUsername,
-            " | User: " + document.querySelector("#RPC_Username").textContent
-          );
-
+          "Datenschutzerklärung" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
       } else if (document.location.pathname.includes("/tos")) {
         presenceData.details =
-          "Terms Of Service" +
-          ifSettingEnabled(
-            set_showUsername,
-            " | User: " + document.querySelector("#RPC_Username").textContent
-          );
-
+          "Terms Of Service" + if(set_showUsername) " | User: " + document.querySelector("#RPC_Username").textContent;
       }
     }
   } else if (
@@ -173,7 +97,6 @@ presence.on("UpdateData", async function () {
       const tb_type = urlpath[2] || "High-Scores";
       let tb_user = "";
       if(urlpath[3] != undefined) tb_user = " von " + capitalizeFirstLetter(urlpath[3]) + ":";
-
       presenceData.details = "Team-Building";
       presenceData.state = capitalizeFirstLetter(tb_type) + tb_user;
     } else if (urlpath[1] === "map") {
