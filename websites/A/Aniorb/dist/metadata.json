@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "author": {
+      "name": "ICEPrey",
+      "id": "256973318588989440"
+    },
+    "contributors": [
+      {
+        "name": "ICEPrey",
+        "id": "256973318588989440"
+      }
+    ],
+    "service": "Aniorb",
+    "description": {
+      "en": "Aniorb is a free anime website with no ads and the highest quality animes."
+    },
+    "url": "aniorb.me",
+    "version": "1.0.1",
+    "logo": "https://i.imgur.com/ng8qXxu.png",
+    "thumbnail": "https://i.imgur.com/WCgM5dd.png",
+    "color": "#000000",
+    "tags": ["aniorb", "anime"],
+    "category": "anime",
+    "iframe": true,
+    "readLogs": false
+  }
