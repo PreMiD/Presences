@@ -56,7 +56,10 @@ function updateCharpane(i: iFrame) {
   }
 
   if (adventures !== -1) {
-    if (adventures !== currentAdventures || Date.now() - lastPing > KEEP_ALIVE) {
+    if (
+      adventures !== currentAdventures ||
+      Date.now() - lastPing > KEEP_ALIVE
+    ) {
       currentAdventures = adventures;
       lastPing = Date.now();
       return i.send({ type: "ADVENTURES", payload: adventures });

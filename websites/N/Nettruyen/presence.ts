@@ -18,14 +18,21 @@ presence.on("UpdateData", async () => {
 
   if (curPath.startsWith("/hot"))
     presenceData.details = "Đang xem truyện hot nhất...";
-  else if (curPath.startsWith("/theo-doi") || curPath.startsWith("/Secure/ComicFollowed.aspx"))
+  else if (
+    curPath.startsWith("/theo-doi") ||
+    curPath.startsWith("/Secure/ComicFollowed.aspx")
+  )
     presenceData.details = "Đang xem truyện theo dõi...";
   else if (curPath.startsWith("/lich-su"))
     presenceData.details = "Đang xem lịch sử...";
   else if (curPath.startsWith("/tim-truyen-nang-cao"))
     presenceData.details = "Tìm truyện nâng cao...";
   else if (curPath.startsWith("/tim-truyen")) {
-    presenceData.state = "Thể loại: " + document.querySelector("#ctl00_divRight > div > .ModuleContent > .nav > .active > a").innerHTML;
+    presenceData.state =
+      "Thể loại: " +
+      document.querySelector(
+        "#ctl00_divRight > div > .ModuleContent > .nav > .active > a"
+      ).innerHTML;
     presenceData.details = "Đang tìm truyện...";
   } else if (curPath.startsWith("/truyen-con-gai"))
     presenceData.details = "Đang tìm truyện con gái...";
@@ -52,17 +59,23 @@ presence.on("UpdateData", async () => {
   else if (curPath.startsWith("/truyen-tranh")) {
     const tmp = document.querySelector(".txt-primary");
     if (tmp === null) {
-      presenceData.details = document.querySelector(".detail-info > div > div:nth-child(2) > div > a > span").innerHTML;
+      presenceData.details = document.querySelector(
+        ".detail-info > div > div:nth-child(2) > div > a > span"
+      ).innerHTML;
       presenceData.state = "Đang chọn chap...";
     } else {
       presenceData.details = tmp.querySelector("a").innerHTML;
-      presenceData.state = "Đang đọc: " + tmp.querySelector("span").innerHTML.substr(2);
+      presenceData.state =
+        "Đang đọc: " + tmp.querySelector("span").innerHTML.substr(2);
     }
-  } else
-    presenceData.details = "Đang xem trang chủ...";
+  } else presenceData.details = "Đang xem trang chủ...";
   presenceData.startTimestamp = browsingStamp;
 
-  if (!curPath.startsWith("/truyen-tranh") && !curPath.startsWith("/tim-truyen")) delete presenceData.state;
+  if (
+    !curPath.startsWith("/truyen-tranh") &&
+    !curPath.startsWith("/tim-truyen")
+  )
+    delete presenceData.state;
   delete presenceData.smallImageKey;
 
   presence.setActivity(presenceData, false);

@@ -51,7 +51,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = document
           .querySelector(".jdlrx > h1")
           .textContent.replace(/Subtitle Indonesia/gi, "");
-       presenceData.buttons = [{ label: "View anime", url: document.location.href }];
+        presenceData.buttons = [
+          { label: "View anime", url: document.location.href }
+        ];
       }
       const mirrorStream = document.querySelector(".mirrorstream");
       if (mirrorStream) {
@@ -60,8 +62,13 @@ presence.on("UpdateData", async () => {
           .querySelector(".posttl")
           .textContent.replace(/Subtitle Indonesia/gi, "");
         presenceData.buttons = [
-          { label: "Watch Anime", url: document.location.href }, 
-          { label: "View Anime", url: [...document.querySelectorAll("a")].find(x => /See All Episodes/gi.exec(x.textContent)).href }
+          { label: "Watch Anime", url: document.location.href },
+          {
+            label: "View Anime",
+            url: [...document.querySelectorAll("a")].find((x) =>
+              /See All Episodes/gi.exec(x.textContent)
+            ).href
+          }
         ];
       }
       break;
