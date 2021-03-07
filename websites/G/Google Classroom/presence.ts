@@ -6,7 +6,8 @@ let presenceData: PresenceData = {
 };
 
 presence.on("UpdateData", async () => {
-  const path: string[] = document.location.pathname.split("/");
+  const path: string[] = document.location.pathname.split("/"),
+  privacy = await presence.getSetting("privacy");
   path.shift();
   if (path[0] === "u") {
     path.splice(0, 2);
@@ -26,11 +27,14 @@ presence.on("UpdateData", async () => {
         }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     if (path[2] && path[2] === "a") {
-      presenceData.details = "Viewing an assignment in:";
+      presenceData.details = "Viewing an assignment in";
     } else {
-      presenceData.details = "Viewing class:";
+      presenceData.details = "Viewing class";
     }
     presenceData.state = classroom;
+    if(privacy) {
+      delete presenceData.state;
+    }
   } else if (path[0] === "w") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
@@ -41,6 +45,11 @@ presence.on("UpdateData", async () => {
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     presenceData.details = "Viewing classworks of:";
     presenceData.state = classroom;
+    if(privacy) {
+      delete presenceData.details;
+      delete presenceData.state;
+      presenceData.details = "Viewing classwork";
+    }
   } else if (path[0] === "r") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
@@ -51,6 +60,11 @@ presence.on("UpdateData", async () => {
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     presenceData.details = "Viewing members of:";
     presenceData.state = classroom;
+    if(privacy) {
+      delete presenceData.details;
+      delete presenceData.state;
+      presenceData.details = "Viewing class members";
+    }
   } else if (path[0] === "s") {
     presenceData.details = "Configuring settings";
   }

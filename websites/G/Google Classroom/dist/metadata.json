@@ -3,6 +3,12 @@
     "name": "allvzx",
     "id": "369507341973979136"
   },
+  "contributors": [
+    {
+      "name": "Encrypted",
+      "id": "564434085708038144"
+    }
+  ],
   "service": "Google Classroom",
   "description": {
     "en": "Google Classroom is a free web service, developed by Google for schools, that aims to simplify creating, distributing, and grading assignments in a paperless way. The primary purpose of Google Classroom is to streamline the process of sharing files between teachers and students."
@@ -17,5 +23,13 @@
     "other",
     "classroom"
   ],
-  "category": "other"
+  "category": "other",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": true
+    }
+  ]
 }
