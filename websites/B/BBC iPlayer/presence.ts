@@ -1,157 +1,235 @@
-let currentTime, duration, paused, playback;
 const presence = new Presence({
-  clientId: "648938148050632745"
-});
+  clientId: "658230518520741915"
+}),
+  startsTime = Math.floor(Date.now() / 1000),
+  getStrings = async (): Promise<LangStrings> =>
+    presence.getStrings(
+      {
+        play: "general.playing",
+        pause: "general.paused",
+        browse: "general.browsing",
+        viewMovie: "general.buttonViewMovie",
+        viewEpisode: "general.buttonViewEpisode",
+        viewPage: "general.viewPage",
+        viewSeries: "general.buttonViewSeries",
+    }, await presence.getSetting('lang'));
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let oldLang: string = null,
+    strings = getStrings(),
+    currentTime: number, 
+    duration: number, 
+    paused: boolean, 
+    playback: boolean,
+    currentTimeS: number, 
+    durationS: number, 
+    pausedS: boolean, 
+    title: string = "Loading...";
 
-presence.on("iFrameData", (data) => {
-  playback = data.iframe_video.duration !== null ? true : false;
+presence.on("iFrameData", (data: IFrameData) => {
+  playback = (data.iframe_video?.duration || data.iframe_audio?.duration) !== undefined ? true : false;
   if (playback) {
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+    currentTime = data.iframe_video?.currentTime;
+    duration = data.iframe_video?.duration;
+    paused = data.iframe_video?.paused;
+    title = data.iframe_audio?.title;
+    currentTimeS = data.iframe_audio?.currentTime;
+    durationS = data.iframe_audio?.duration;
+    pausedS = data.iframe_audio?.paused;
   }
 });
 
-presence.on("UpdateData", () => {
+presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "HelloYouLookingAtThisThisIsntRealHahaLOL"
-  };
+    largeImageKey: "bbc_logo"
+  },
+    path = document.location.pathname,
+    newLang = await presence.getSetting("lang"),
+    IPlayer: IPlayerData = await presence.getPageletiable("__IPLAYER_REDUX_STATE__"),
+    soundData: SoundData = await presence.getPageletiable("__PRELOADED_STATE__"),
+    buttonsE = await presence.getSetting("buttons");
 
-  const path = document.location.pathname;
+  if (!oldLang){
+    oldLang = newLang;
+  } else if (oldLang !== newLang){
+    oldLang = newLang;
+    strings = getStrings();
+  }
 
-  if (document.location.pathname.includes("/iplayer/")) {
-    if (duration == null) {
-      presenceData.details = document.querySelector(
-        ".channel-panel-item__link__title.typo.typo--skylark.typo--bold"
-      ).textContent;
-      presenceData.state = document.querySelector(
-        ".channel-panel-item__link__subtitle.typo.typo--canary"
-      ).textContent;
-      presenceData.smallImageKey = "live";
-      presenceData.smallImageText = "Watching Live";
-    } else {
-      const timestamps = getTimestamps(
-        Math.floor(currentTime),
-        Math.floor(duration)
-      );
+  if (path.includes("/iplayer")) {
+    presenceData.largeImageKey = "bbciplayer_logo";
+    presenceData.details = (await strings).browse;
 
-      presenceData.details = document.querySelector(
-        ".play-cta__title-container > span"
-      ).textContent;
-      presenceData.state = document.querySelector(
-        ".typo.typo--skylark.play-cta__subtitle"
-      ).textContent;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-      presenceData.smallImageKey = "play";
-      presenceData.smallImageText = "Playing";
-
-      if (paused) {
-        delete presenceData.startTimestamp;
-        delete presenceData.endTimestamp;
-        presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = "Paused";
+    if (path.includes("/iplayer/episode")){
+      if (!duration) {
+        if (IPlayer.channel?.onAir){
+          presenceData.details = IPlayer.channel.title;
+          presenceData.state = "Live";
+          
+          presenceData.smallImageKey = "live";
+        } else if (!IPlayer.channel) {
+          presenceData.details = (await strings).viewPage;
+          presenceData.state = (IPlayer.episode || IPlayer.header).title;
+  
+          presenceData.startTimestamp = startsTime;
+        }
+      } else {
+        const timestamps = presence.getTimestamps(currentTime, duration);
+  
+        presenceData.details = (IPlayer.episode || IPlayer.header).title;
+        presenceData.state = (document.querySelector(
+          '[class="typo typo--skylark play-cta__subtitle"]'
+          ) || document.querySelector(
+            '[class="typo typo--bold play-cta__title typo--skylark"]'
+        ))?.textContent || IPlayer.episode.labels?.category || "Animation";
+  
+        presenceData.startTimestamp = timestamps[0];
+        presenceData.endTimestamp = timestamps[1];
+  
+        presenceData.smallImageKey = paused ? "pause" : "play";
+        presenceData.smallImageText = paused ? (await strings).pause : (await strings).play;
+  
+        if (IPlayer.relatedEpisodes?.count){
+          presenceData.buttons = [
+            {
+              label: (await strings).viewEpisode,
+              url: `https://www.bbc.co.uk/iplayer/episode/${document.location.pathname.split("/")[3]}`
+            },
+            {
+              label: (await strings).viewSeries,
+              url: `https://www.bbc.co.uk/iplayer/episode/${IPlayer.relatedEpisodes.episodes[0].episode.id}`
+            }
+          ]
+        } else {
+          presenceData.buttons = [
+            {
+              label: (await strings).viewEpisode,
+              url: `https://www.bbc.co.uk/iplayer/episode/${document.location.pathname.split("/")[3]}`
+            }
+          ]
+        }
+  
+        if (paused || !duration) {
+          delete presenceData.startTimestamp;
+          delete presenceData.endTimestamp;
+        }
       }
     }
-
-    switch (path) {
-      case "/iplayer/live/bbcthree":
-        presenceData.largeImageKey = "bbcthree";
-        break;
-      case "/iplayer/live/bbcone":
-        presenceData.largeImageKey = "bbcone";
-        break;
-      case "/iplayer/live/bbctwo":
-        presenceData.largeImageKey = "bbctwo";
-        break;
-      case "/iplayer/live/bbcfour":
-        presenceData.largeImageKey = "bbcfour";
-        break;
-      case "/iplayer/live/radio1":
-        presenceData.largeImageKey = "radio1";
-        break;
-      case "/iplayer/live/cbbc":
-        presenceData.largeImageKey = "cbbc";
-        break;
-      case "/iplayer/live/cbeebies":
-        presenceData.largeImageKey = "cbeebies";
-        break;
-      case "/iplayer/live/bbcscotland":
-        presenceData.largeImageKey = "bbcscotland";
-        break;
-      case "/iplayer/live/bbcnews":
-        presenceData.largeImageKey = "bbcnews";
-        break;
-      case "/iplayer/live/bbcparliament":
-        presenceData.largeImageKey = "bbcparliament";
-        break;
-      case "/iplayer/live/bbcalba":
-        presenceData.largeImageKey = "bbcalba";
-        break;
-      case "/iplayer/live/s4c":
-        presenceData.largeImageKey = "s4c";
-        break;
-      default:
-        presenceData.largeImageKey = "bbciplayer";
-    }
-
-    if (document.location.pathname.includes("/iplayer/episode/")) {
-      presenceData.largeImageKey = "bbciplayer";
-    }
   } else if (path === "/iplayer") {
-    presenceData.details = "Home Page";
-    presenceData.largeImageKey = "bbciplayer";
-  } else if (path === "/bbcone") {
-    presenceData.details = "Browsing BBC One";
-    presenceData.largeImageKey = "bbcone";
-  } else if (path === "/bbctwo") {
-    presenceData.details = "Browsing BBC Two";
-    presenceData.largeImageKey = "bbctwo";
-  } else if (path === "/tv/bbcthree") {
-    presenceData.details = "Browsing BBC Three";
-    presenceData.largeImageKey = "bbcthree";
-  } else if (path === "/bbcfour") {
-    presenceData.details = "Browsing BBC Four";
-    presenceData.largeImageKey = "bbcfour";
-  } else if (path === "/tv/radio1") {
-    presenceData.details = "Browsing Radio 1";
-    presenceData.largeImageKey = "radio1";
-  } else if (path === "/tv/cbbc") {
-    presenceData.details = "Browsing CBBC";
-    presenceData.largeImageKey = "cbbc";
-  } else if (path === "/tv/cbeebies") {
-    presenceData.details = "Browsing Cbeebies";
-    presenceData.largeImageKey = "cbeebies";
-  } else if (path === "/tv/bbcscotland") {
-    presenceData.details = "Browsing BBC Scotland";
-    presenceData.largeImageKey = "bbcscotland";
-  } else if (path === "/tv/bbcnews") {
-    presenceData.details = "Browsing BBC News";
-    presenceData.largeImageKey = "bbcnews";
-  } else if (path === "/tv/bbcparliament") {
-    presenceData.details = "Browsing BBC Parliament";
-    presenceData.largeImageKey = "bbcparliament";
-  } else if (path === "/tv/bbcalba") {
-    presenceData.details = "Browsing BBC Alba";
-    presenceData.largeImageKey = "bbcalba";
-  } else if (path === "/tv/s4c") {
-    presenceData.details = "Browsing S4C";
-    presenceData.largeImageKey = "s4c";
+    presenceData.largeImageKey = "bbciplayer_logo";
+    presenceData.details = (await strings).browse;
+
+    presenceData.smallImageKey = "reading";
+  } else if (path.includes("/sounds")){
+    presenceData.largeImageKey = "bbcsounds_logo";
+    presenceData.details = (await strings).browse;
+
+    if (path.includes("/play/")){
+      const timestamps = presence.getTimestamps(currentTimeS, durationS),
+            isLive = path.includes("live:");
+
+      presenceData.details = "Listening to:";
+
+      if (isLive){
+        presenceData.state = soundData.modules.data[0].data[0].network.short_title;
+        presenceData.smallImageKey = "live";
+      } else {
+        presenceData.state = `${soundData.modules.data[0].data[0].network.short_title} • ${title}`;        
+        presenceData.smallImageKey = (pausedS || !durationS) ? "pause" : "play";
+      }
+
+      presenceData.smallImageText = (pausedS || !durationS) ? (await strings).pause : (await strings).play;
+      
+      presenceData.startTimestamp = timestamps[0];
+      presenceData.endTimestamp = timestamps[1];
+
+      presenceData.buttons = [{
+          label: "Listen",
+          url: `https://www.bbc.co.uk/sounds/play/${document.URL.split("/")[5]}`
+      }];
+
+      if (paused || isLive){
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
+    }
   }
 
-  if (presenceData.details == null) {
+  if (!buttonsE) delete presenceData.buttons
+
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
   }
 });
+
+interface LangStrings {
+  play: string
+  pause: string
+  viewMovie: string
+  browse: string
+  viewEpisode: string
+  viewPage: string
+  viewSeries: string
+}
+
+interface IPlayerData {
+  episode?: {
+    title: string
+    subtitle: string
+    labels?: {
+      category: string
+    }
+  }
+  relatedEpisodes?: {
+    count: number
+    episodes: {
+      episode: {
+        id: string
+        title: string
+        subtile: string
+        labels?: {
+          category: string
+        }
+      }
+    }[]
+  }
+  channel?: {
+    title: string
+    onAir: boolean
+  }
+  header?: {
+    title: string
+  }
+}
+
+interface BuutonI {
+  ariaLabel: string
+}
+
+interface IFrameData {
+  iframe_video: {
+    duration: number
+    currentTime: number
+    paused: boolean
+  }
+  iframe_audio: {
+    duration: number
+    currentTime: number
+    paused: boolean
+    title: string
+  }
+}
+
+interface SoundData {
+   modules: {
+     data: {
+       data: {
+         network: {
+           short_title: string
+         }
+       }[]
+     }[]
+   }
+}
