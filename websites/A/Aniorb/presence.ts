@@ -12,20 +12,10 @@ duration: 0,
 currentTime: 0,
 paused: true
 };
-
-/**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
-function getTimestamps(
-videoTime: number,
-videoDuration: number
-): Array<number> {
-const startTime = Date.now(),
-  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
-}
+  const timestamps = presence.getTimestamps(
+    Math.floor(video.currentTime),
+    Math.floor(video.duration)
+  );
 presence.on(
 "iFrameData",
 (data: {
@@ -74,16 +64,14 @@ else if (
   document.querySelector("#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span").textContent.toUpperCase() !== null &&
   document.querySelector("video") !== null &&
   video.video
-) {
-  // on page of a episode
-  const timestamps = getTimestamps(
-    Math.floor(video.currentTime),
-    Math.floor(video.duration)
-  );
-  presenceData.details = document.querySelector("#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span").textContent.toUpperCase()
-  presenceData.state = document
-    .querySelector("#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span").textContent.toUpperCase()
-
+) if (video !== null && !isNaN(video.duration)) {
+  const series =   document.querySelector("#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span"),
+    seriesTitle = series.textContent.toUpperCase(),
+    episode = document.querySelector("#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.flex.w-full.justify-between.items-end > span").textContent,
+    timestamps = presence.getTimestamps(
+      Math.floor(video.currentTime),
+      Math.floor(video.duration)
+    );
   presenceData.smallImageKey = video.paused ? "pause" : "play";
   presenceData.smallImageText = video.paused
     ? (await strings).pause
@@ -91,10 +79,22 @@ else if (
   presenceData.startTimestamp = timestamps[0];
   presenceData.endTimestamp = timestamps[1];
 
+  presence.setTrayTitle(video.paused ? "" : seriesTitle);
+
+  presenceData.buttons = [
+    {
+      label: "Watch Episode",
+      url: document.baseURI
+    },
+  ];
+  presenceData.details = seriesTitle;
+  presenceData.state = episode;
+
   if (video.paused) {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }
+  presence.setActivity(presenceData, !video.paused);
 }
 if (presenceData.details == null) {
   presenceData.details = (await strings).browsing;
