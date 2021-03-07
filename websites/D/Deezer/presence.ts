@@ -58,12 +58,12 @@ presence.on("UpdateData", async () => {
       document.querySelector(
         ".svg-icon-group-item:nth-child(3) .svg-icon-pause"
       ) === null;
-    (currentTime = document.querySelector(
+    currentTime = document.querySelector(
       "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
-    ).textContent),
-      (duration = document.querySelector(
+    ).textContent;
+    duration = document.querySelector(
         "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
-      ).textContent);
+      ).textContent;
 
     const timestamps = presence.getTimestamps(
         presence.timestampFromFormat(currentTime),
