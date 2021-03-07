@@ -41,6 +41,12 @@
       "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
+    },
+    {
+      "id": "showPlaylist",
+      "title": "Show Playlist",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
     }
   ]
 }

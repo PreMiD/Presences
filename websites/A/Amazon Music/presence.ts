@@ -128,18 +128,18 @@ presence.on("UpdateData", async () => {
         pausedIcon = document
           .querySelector("music-button.hydrated:nth-child(4)")
           .shadowRoot.querySelector("button > div > music-icon");
-      (paused = pausedIcon.attributes[1].value == "pause" ? false : true),
-        (currentTime = document
+      paused = pausedIcon.attributes[1].value == "pause" ? false : true;
+      currentTime = document
           .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
-          .textContent.split(" - ")[0]);
-      (timeLeft = document
+          .textContent.split(" - ")[0];
+      timeLeft = document
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
-        .textContent.split(" - ")[1]),
-        (timestamps = presence.getTimestamps(
+        .textContent.split(" - ")[1];
+      timestamps = presence.getTimestamps(
           presence.timestampFromFormat(currentTime),
           presence.timestampFromFormat(timeLeft) +
             presence.timestampFromFormat(currentTime)
-        ));
+        );
 
       (presenceData.details = title),
         (presenceData.state = artist),
