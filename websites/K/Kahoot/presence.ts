@@ -12,7 +12,6 @@ interface LangStrings {
   gameOver: string;
   gameCreate: string;
   loadingPage: string;
-  waitingStart: string;
   firstPlace: string;
   points: string;
   questionsCorrect: string;
@@ -61,7 +60,6 @@ const presence = new Presence({
         gameOver: "kahoot.gameOver",
         gameCreate: "kahoot.gameCreate",
         loadingPage: "kahoot.loadingPage",
-        waitingStart: "kahoot.waitingStart",
         firstPlace: "kahoot.firstPlace",
         points: "kahoot.points",
         questionsCorrect: "kahoot.questionsCorrect",
@@ -106,7 +104,7 @@ presence.on("UpdateData", async () => {
     if (path == "/" || path.includes("/join") || path == "/v2/") {
       presenceData.details = (await strings).joiningGame;
     } else if (path.includes("/instructions")) {
-      presenceData.details = (await strings).waitingStart;
+      presenceData.details = (await strings).waiting;
     } else if (path.includes("/start")) {
       presenceData.details = (await strings).gameStarting;
     } else if (path.includes("/gameblock")) {
@@ -161,7 +159,7 @@ presence.on("UpdateData", async () => {
     if (path == "/v2/") {
       presenceData.details = (await strings).gameCreate;
     } else if (path.includes("/lobby")) {
-      presenceData.details = (await strings).waitingStart;
+      presenceData.details = (await strings).waiting;
       
       if (buttons) {
         presenceData.buttons = [
