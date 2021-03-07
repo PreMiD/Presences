@@ -1,13 +1,13 @@
 const presence = new Presence({
   clientId: "632293282847784973"
 });
-let presenceData: PresenceData = {
-  largeImageKey: "logo"
-};
 
 presence.on("UpdateData", async () => {
-  const path: string[] = document.location.pathname.split("/"),
-  privacy = await presence.getSetting("privacy");
+  const presenceData: PresenceData = {
+    largeImageKey: "logo"
+  },
+    path: string[] = document.location.pathname.split("/"),
+    privacy = await presence.getSetting("privacy");
   path.shift();
   if (path[0] === "u") {
     path.splice(0, 2);
@@ -22,54 +22,39 @@ presence.on("UpdateData", async () => {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
     )
-      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
-          document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
-        }`
+      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
+      }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     if (path[2] && path[2] === "a") {
       presenceData.details = "Viewing an assignment in";
     } else {
       presenceData.details = "Viewing class";
     }
-    presenceData.state = classroom;
-    if(privacy) {
-      delete presenceData.state;
-    }
+    presenceData.state = privacy ? null : classroom;
   } else if (path[0] === "w") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
     )
-      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
-          document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
-        }`
+      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
+      }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
-    presenceData.details = "Viewing classworks of:";
-    presenceData.state = classroom;
-    if(privacy) {
-      delete presenceData.details;
-      delete presenceData.state;
-      presenceData.details = "Viewing classwork";
-    }
+    presenceData.details = privacy
+      ? "Viewing classwork"
+      : "Viewing classwork of:";
+    presenceData.state = privacy ? null : classroom;
   } else if (path[0] === "r") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
     )
-      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
-          document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
-        }`
+      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
+      }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
-    presenceData.details = "Viewing members of:";
-    presenceData.state = classroom;
-    if(privacy) {
-      delete presenceData.details;
-      delete presenceData.state;
-      presenceData.details = "Viewing class members";
-    }
+    presenceData.details = privacy
+      ? "Viewing class members"
+      : "Viewing members of:";
+    presenceData.state = privacy ? null : classroom;
   } else if (path[0] === "s") {
     presenceData.details = "Configuring settings";
   }
   presence.setActivity(presenceData);
-  presenceData = {
-    largeImageKey: "logo"
-  };
 });
