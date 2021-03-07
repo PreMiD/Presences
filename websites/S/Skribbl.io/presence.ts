@@ -43,7 +43,7 @@ presence.on("UpdateData", async () => {
     if (buttons) {
       presenceData.buttons = [
         {
-          label: (await strings).buttonJoinGame,
+          label: (await strings).buttonJoinGame.replace("{0}", ""),
           url: document.location.href
         }
       ];
