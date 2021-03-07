@@ -67,8 +67,8 @@ presence.on("UpdateData", async () => {
           .shadowRoot.querySelector("button > div > music-icon");
       paused = pausedIcon.attributes[1].value == "pause" ? false : true;
       currentTime = document.querySelector(
-          "div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(1)"
-        ).textContent;
+        "div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(1)"
+      ).textContent;
       timeLeft = document
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(2)")
         .textContent.replace(" - ", "");
@@ -83,7 +83,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = artist;
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText =
-          paused == true ? (await strings).pause : (await strings).play;
+        paused == true ? (await strings).pause : (await strings).play;
       presenceData.largeImageKey = "logo";
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
@@ -141,14 +141,14 @@ presence.on("UpdateData", async () => {
             presence.timestampFromFormat(currentTime)
         ));
 
-        presenceData.details = title,
-        presenceData.state = artist,
-        presenceData.largeImageKey = "logo",
-        presenceData.startTimestamp = timestamps[0],
-        presenceData.smallImageKey = paused == true ? "pause" : "play",
-        presenceData.smallImageText =
-          paused == true ? (await strings).pause : (await strings).play,
-        presenceData.endTimestamp = timestamps[1];
+      (presenceData.details = title),
+        (presenceData.state = artist),
+        (presenceData.largeImageKey = "logo"),
+        (presenceData.startTimestamp = timestamps[0]),
+        (presenceData.smallImageKey = paused == true ? "pause" : "play"),
+        (presenceData.smallImageText =
+          paused == true ? (await strings).pause : (await strings).play),
+        (presenceData.endTimestamp = timestamps[1]);
 
       if (showPlaylist && buttons) {
         presenceData.buttons = [

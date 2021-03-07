@@ -118,13 +118,22 @@ presence.on("UpdateData", async () => {
         : document.querySelector("div.podium-bottom-bar__Score-ssrx8z-1")
             .textContent;
       presenceData.details = (await strings).playing; // Playing:
-      presenceData.state = `${(await strings).questionNumber.replace("{0}" ,"")} ${currentQuestion} | ${(await strings).points.replace("{0}" ,"")} ${score}`; // Question: 1 of 3 | 1000 points
+      presenceData.state = `${(await strings).questionNumber.replace(
+        "{0}",
+        ""
+      )} ${currentQuestion} | ${(await strings).points.replace(
+        "{0}",
+        ""
+      )} ${score}`; // Question: 1 of 3 | 1000 points
     } else if (path.includes("/getready")) {
       currentQuestion = document.querySelector(
         "div.top-bar__QuestionNumber-sc-186o9v8-2"
       ).textContent;
       presenceData.details = (await strings).questionLoading; // Loading Question:
-      presenceData.state = `${(await strings).questionNumber.replace("{0}" ,"")} ${currentQuestion}`; // Question: 1 of 3
+      presenceData.state = `${(await strings).questionNumber.replace(
+        "{0}",
+        ""
+      )} ${currentQuestion}`; // Question: 1 of 3
     } else if (path.includes("/result")) {
       const result = document
         .querySelector("div.styles__MessageBody-sc-15a2o5w-4")
@@ -148,8 +157,13 @@ presence.on("UpdateData", async () => {
         : document.querySelector("div.podium-bottom-bar__Score-ssrx8z-1")
             .textContent;
       presenceData.details = top5
-        ? `${(await strings).gameOver} | ${ranking} | ${(await strings).points.replace("{0}" ,"")} ${score}` // Game Over | 1st, 2nd, 3rd, Top 5 |  Points: 
-        : `${(await strings).gameOver} | ${(await strings).points.replace("{0}" ,"")} ${score}`; // Game Over | Points:
+        ? `${(await strings).gameOver} | ${ranking} | ${(
+            await strings
+          ).points.replace("{0}", "")} ${score}` // Game Over | 1st, 2nd, 3rd, Top 5 |  Points:
+        : `${(await strings).gameOver} | ${(await strings).points.replace(
+            "{0}",
+            ""
+          )} ${score}`; // Game Over | Points:
     } else {
       presenceData.details = (await strings).loadingPage;
     }
@@ -160,12 +174,17 @@ presence.on("UpdateData", async () => {
       presenceData.details = (await strings).gameCreate; // Creating a Game...
     } else if (path.includes("/lobby")) {
       presenceData.details = (await strings).waiting; // Waiting to Start...
-      
+
       if (buttons) {
         presenceData.buttons = [
           {
-            "label": `${(await strings).buttonJoinGame.replace('{0}', document.querySelector("div.headerstyles__GamePinGrouped-jk6b9n-9").textContent)}`, // Join Game: ID
-            "url": `https://kahoot.it/`
+            label: `${(await strings).buttonJoinGame.replace(
+              "{0}",
+              document.querySelector(
+                "div.headerstyles__GamePinGrouped-jk6b9n-9"
+              ).textContent
+            )}`, // Join Game: ID
+            url: `https://kahoot.it/`
           }
         ];
       }
@@ -179,32 +198,47 @@ presence.on("UpdateData", async () => {
         firstPlaceQuetions = document.querySelector(
           "div.bar-styles__Count-ws2yhg-3"
         ).textContent;
-      presenceData.details = `${(await strings).firstPlace.replace("{0}" ,"")} ${firstPlaceName} | ${(await strings).points.replace("{0}" ,"")} ${firstPlacePoints}`; // First Place: User | Points: 100000
-      presenceData.state = `${(await strings).questionsCorrect.replace("{0}" ,"")} ${firstPlaceQuetions}`; // Questions Correct: 1 of 10
+      presenceData.details = `${(await strings).firstPlace.replace(
+        "{0}",
+        ""
+      )} ${firstPlaceName} | ${(await strings).points.replace(
+        "{0}",
+        ""
+      )} ${firstPlacePoints}`; // First Place: User | Points: 100000
+      presenceData.state = `${(await strings).questionsCorrect.replace(
+        "{0}",
+        ""
+      )} ${firstPlaceQuetions}`; // Questions Correct: 1 of 10
     } else if (path.includes("/contentblock")) {
       presenceData.details = (await strings).slideShowing; // Showing a Slide with Content:
       const questionNo = `${
         document
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
           .textContent.split("/")[0]
-      } ${(await strings).of.replace("{0}" ,"").replace("{1}", "")} ${
+      } ${(await strings).of.replace("{0}", "").replace("{1}", "")} ${
         document
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
           .textContent.split("/")[1]
       }`;
-      presenceData.state = `${(await strings).questionNumber.replace("{0}" ,"")} ${questionNo}`; // Question: 1 of 3
+      presenceData.state = `${(await strings).questionNumber.replace(
+        "{0}",
+        ""
+      )} ${questionNo}`; // Question: 1 of 3
     } else if (path.includes("/gameblock")) {
-      presenceData.details = (await strings).questionShowing;  // Showing Question:
+      presenceData.details = (await strings).questionShowing; // Showing Question:
       const questionNo = `${
         document
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
           .textContent.split("/")[0]
-      } ${(await strings).of.replace("{0}" ,"").replace("{1}", "")} ${
+      } ${(await strings).of.replace("{0}", "").replace("{1}", "")} ${
         document
           .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
           .textContent.split("/")[1]
       }`;
-      presenceData.state = `${(await strings).questionNumber.replace("{0}" ,"")} ${questionNo}`; // Question: 1 of 3
+      presenceData.state = `${(await strings).questionNumber.replace(
+        "{0}",
+        ""
+      )} ${questionNo}`; // Question: 1 of 3
     } else {
       presenceData.details = (await strings).loadingPage; // Loading Page:
     }

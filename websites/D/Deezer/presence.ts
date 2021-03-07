@@ -77,23 +77,25 @@ presence.on("UpdateData", async () => {
     if (!show) {
       title = document.querySelector(".track-link:nth-child(1)").textContent;
       artist = document.querySelector(".track-link:nth-child(2)").textContent;
-          presenceData.details = title,
-          presenceData.state = artist,
-          presenceData.largeImageKey = "deezer",
-          presenceData.smallImageKey = paused ? "pause" : "play",
-          presenceData.smallImageText = paused ? (await strings).pause : (await strings).play,
-          presenceData.startTimestamp = timestamps[0],
-          presenceData.endTimestamp = timestamps[1];
+      presenceData.details = title;
+      presenceData.state = artist;
+      presenceData.largeImageKey = "deezer";
+      presenceData.smallImageKey = paused ? "pause" : "play";
+      presenceData.smallImageText = paused
+        ? (await strings).pause
+        : (await strings).play;
+      presenceData.startTimestamp = timestamps[0];
+      presenceData.endTimestamp = timestamps[1];
 
       if (buttons) {
         presenceData.buttons = [
           {
-            "label": (await strings).viewArtist,
-            "url": artistLink.href
+            label: (await strings).viewArtist,
+            url: artistLink.href
           },
           {
-            "label": (await strings).viewAlbum,
-            "url": albumLink.href
+            label: (await strings).viewAlbum,
+            url: albumLink.href
           }
         ];
       }
@@ -111,20 +113,23 @@ presence.on("UpdateData", async () => {
       episode = document
         .querySelector("div.marquee-content")
         .textContent.split(" · ")[0];
-      showLink = albumLink = document.querySelector("div.marquee-content").children[0] as HTMLAnchorElement;
-        presenceData.details = title,
-        presenceData.state = episode,
-        presenceData.largeImageKey = "deezer",
-        presenceData.smallImageKey = paused ? "pause" : "play",
-        presenceData.smallImageText = paused ? (await strings).pause : (await strings).play,
-        presenceData.startTimestamp = timestamps[0],
-        presenceData.endTimestamp = timestamps[1];
-      
+      showLink = albumLink = document.querySelector("div.marquee-content")
+        .children[0] as HTMLAnchorElement;
+      presenceData.details = title;
+      presenceData.state = episode;
+      presenceData.largeImageKey = "deezer";
+      presenceData.smallImageKey = paused ? "pause" : "play";
+      presenceData.smallImageText = paused
+        ? (await strings).pause
+        : (await strings).play;
+      presenceData.startTimestamp = timestamps[0];
+      presenceData.endTimestamp = timestamps[1];
+
       if (buttons) {
         presenceData.buttons = [
           {
-            "label": (await strings).viewPodcast,
-            "url": showLink.href
+            label: (await strings).viewPodcast,
+            url: showLink.href
           }
         ];
       }
