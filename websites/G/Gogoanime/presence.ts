@@ -1,5 +1,3 @@
-type domainList = string[];
-
 interface GogoanimeApiResponse {
   error: boolean;
   errors: {
@@ -7,10 +5,10 @@ interface GogoanimeApiResponse {
     code: string
   }[],
   payload: {
-    allDomains: domainList;
-    activeDomains: domainList;
-    asianServers: domainList;
-    northAmericanServers: domainList;
+    allDomains: string[];
+    activeDomains: string[];
+    asianServers: string[];
+    northAmericanServers: string[];
   },
   date: {
     data: number;
@@ -107,7 +105,7 @@ async function checkDomain(): Promise<boolean> {
     }
     const data: GogoanimeApiResponse = await body.json();
     if (data) {
-      const domains: domainList = data.payload.allDomains;
+      const domains: string[] = data.payload.allDomains;
       document.cookie = `${cookieName}=${domains.join("-")}; max-age=1800`;
       if (domains.includes(currentDomain)) {
         invalid = false;
