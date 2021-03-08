@@ -1,10 +1,24 @@
+interface LangStrings {
+  play: string;
+  pause: string;
+  viewSeries: string;
+  watchEpisode: string;
+}
+
 const presence = new Presence({
     clientId: "806539630878261328"
   }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  getStrings = async (): Promise<LangStrings> => {
+    return presence.getStrings(
+      {
+        play: "general.playing",
+        pause: "general.paused",
+        viewSeries: "general.buttonViewSeries",
+        watchEpisode: "general.buttonViewEpisode"
+      },
+      await presence.getSetting("lang")
+    );
+  };
 
 let browsingStamp = Math.floor(Date.now() / 1000),
   video = {
@@ -19,7 +33,9 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   playback: boolean,
   currentAnimeWatching: Array<string>,
   currentAnimeTitle: string,
-  currentAnimeEpisode: string;
+  currentAnimeEpisode: string,
+  strings: Promise<LangStrings> = getStrings(),
+  oldLang: string = null;
 
 presence.on(
   "iFrameData",
@@ -47,9 +63,18 @@ presence.on("UpdateData", async () => {
     ),
     presenceData: PresenceData = {
       largeImageKey: "animelon"
-    };
+    },
+    buttons = await presence.getSetting("buttons"),
+    newLang = await presence.getSetting("lang");
 
   presenceData.startTimestamp = browsingStamp;
+
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
 
   if (document.location.pathname.includes("/video/")) {
     if (playback == true && !isNaN(duration)) {
@@ -68,6 +93,19 @@ presence.on("UpdateData", async () => {
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
 
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: (await strings).watchEpisode,
+            url: document.URL
+          },
+          {
+            label: (await strings).viewSeries,
+            url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`
+          }
+        ];
+      }
+
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
@@ -82,6 +120,19 @@ presence.on("UpdateData", async () => {
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
 
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: (await strings).watchEpisode,
+            url: document.URL
+          },
+          {
+            label: (await strings).viewSeries,
+            url: `https://animelon.com/series/${encodeURI(currentAnimeTitle)}`
+          }
+        ];
+      }
+
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
@@ -91,6 +142,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Browsing...";
     currentAnimeTitle = document.title.replace(" - Animelon", "");
     presenceData.state = currentAnimeTitle;
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: (await strings).viewSeries,
+          url: document.URL
+        }
+      ];
+    }
   } else {
     presenceData.details = "Browsing...";
   }

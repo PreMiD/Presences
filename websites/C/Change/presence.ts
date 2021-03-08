@@ -10,11 +10,20 @@ presence.on("UpdateData", async () => {
     ".mtl.mbxxxl.xs-mts.xs-mbxs.petition-title"
   );
   if (title !== null) {
-    const votes = document.querySelector(".mbxs span strong");
+    const link = document.location.href,
+      votes = document.querySelector(".mbxs span strong")
+        ? document.querySelector(".mbxs span strong")
+        : document.querySelector("p.type-weak");
+
     presenceData.details = (title as HTMLElement).textContent;
     presenceData.state = (votes as HTMLElement).textContent;
     presenceData.largeImageKey = "logo";
-
+    presenceData.buttons = [
+      {
+        label: "View Petition",
+        url: link
+      }
+    ];
     presence.setActivity(presenceData);
   } else {
     const pageData: PresenceData = {

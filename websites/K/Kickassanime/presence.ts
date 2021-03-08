@@ -1,10 +1,26 @@
+interface LangStrings {
+  play: string;
+  pause: string;
+  viewSeries: string;
+  viewMovie: string;
+  watchEpisode: string;
+}
+
 const presence = new Presence({
     clientId: "802964241179082822"
   }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  }),
+  getStrings = async (): Promise<LangStrings> => {
+    return presence.getStrings(
+      {
+        play: "general.playing",
+        pause: "general.paused",
+        viewSeries: "general.buttonViewSeries",
+        viewMovie: "general.buttonViewMovie",
+        watchEpisode: "general.buttonViewEpisode"
+      },
+      await presence.getSetting("lang")
+    );
+  },
   nextEpisodeElement = document.querySelector(
     "div#sidebar-anime-info > div.border.rounded.mb-3.p-3:nth-child(2) > div:nth-child(1) > a.ka-url-wrapper"
   ),
@@ -26,7 +42,9 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   currentAnimeTitle: string,
   currentAnimeEpisode: string,
   isMovie: boolean = null,
-  episodeNumber;
+  episodeNumber,
+  strings: Promise<LangStrings> = getStrings(),
+  oldLang: string = null;
 
 function checkIfMovie() {
   nextEpisodeElement == null && previousEpisodeElement == null
@@ -66,9 +84,18 @@ presence.on("UpdateData", async () => {
     ),
     presenceData: PresenceData = {
       largeImageKey: "kaa"
-    };
+    },
+    buttons = await presence.getSetting("buttons"),
+    newLang = await presence.getSetting("lang");
 
   presenceData.startTimestamp = browsingStamp;
+
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
 
   if (
     document.location.pathname.includes("/anime/") &&
@@ -94,8 +121,34 @@ presence.on("UpdateData", async () => {
           episodeNumber = currentAnimeEpisode;
         }
         currentAnimeEpisode = `Episode ${episodeNumber}`;
+
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).watchEpisode,
+              url: document.URL
+            },
+            {
+              label: (await strings).viewSeries,
+              url: document.URL.replace(document.URL.split("/")[5], "")
+            }
+          ];
+        }
       } else {
         currentAnimeEpisode = "Movie";
+
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).watchEpisode,
+              url: document.URL
+            },
+            {
+              label: (await strings).viewMovie,
+              url: document.URL.replace(document.URL.split("/")[5], "")
+            }
+          ];
+        }
       }
 
       presenceData.details = `${currentAnimeTitle}`;
@@ -118,8 +171,34 @@ presence.on("UpdateData", async () => {
           episodeNumber = currentAnimeEpisode;
         }
         currentAnimeEpisode = `Episode ${episodeNumber}`;
+
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).watchEpisode,
+              url: document.URL
+            },
+            {
+              label: (await strings).viewSeries,
+              url: document.URL.replace(document.URL.split("/")[5], "")
+            }
+          ];
+        }
       } else {
         currentAnimeEpisode = "Movie";
+
+        if (buttons) {
+          presenceData.buttons = [
+            {
+              label: (await strings).watchEpisode,
+              url: document.URL
+            },
+            {
+              label: (await strings).viewMovie,
+              url: document.URL.replace(document.URL.split("/")[5], "")
+            }
+          ];
+        }
       }
 
       presenceData.details = `${currentAnimeTitle}`;
@@ -138,6 +217,15 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Looking at:";
     presenceData.state = `${currentAnimeTitle}`;
     presenceData.smallImageKey = "searching";
+
+    if (buttons) {
+      presenceData.buttons = [
+        {
+          label: (await strings).viewSeries,
+          url: document.URL
+        }
+      ];
+    }
   } else if (document.location.pathname.includes("anime-list")) {
     presenceData.details = "Looking at:";
     presenceData.state = "Anime List";
