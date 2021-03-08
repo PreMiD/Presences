@@ -27,7 +27,7 @@ let strings = getStrings(),
     playback: boolean,
     duration: number,
     currentTime: number,
-    paused: boolean
+    paused: boolean;
 
 presence.on("iFrameData", (data: IFrameData) => {
     playback = data.iframe_video?.duration !== undefined ? true : false;
@@ -216,7 +216,7 @@ presence.on("UpdateData", async () => {
             label: (await strings).viewSeries,
             url: (document.querySelector('h2.sub > a') as unknown as EHref).href
           }
-        ]
+        ];
 
         if (paused){
           delete presenceData.startTimestamp;

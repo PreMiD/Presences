@@ -11,7 +11,7 @@ const presence = new Presence({
         viewMovie: "general.buttonViewMovie",
         viewEpisode: "general.buttonViewEpisode",
         viewPage: "general.viewPage",
-        viewSeries: "general.buttonViewSeries",
+        viewSeries: "general.buttonViewSeries"
     }, await presence.getSetting('lang'));
 
 let oldLang: string = null,
@@ -23,7 +23,7 @@ let oldLang: string = null,
     currentTimeS: number, 
     durationS: number, 
     pausedS: boolean, 
-    title: string = "Loading...";
+    title = "Loading...";
 
 presence.on("iFrameData", (data: IFrameData) => {
   playback = (data.iframe_video?.duration || data.iframe_audio?.duration) !== undefined ? true : false;
@@ -98,14 +98,14 @@ presence.on("UpdateData", async () => {
               label: (await strings).viewSeries,
               url: `https://www.bbc.co.uk/iplayer/episode/${IPlayer.relatedEpisodes.episodes[0].episode.id}`
             }
-          ]
+          ];
         } else {
           presenceData.buttons = [
             {
               label: presenceData.state.toLocaleLowerCase().includes("film") ? (await strings).viewMovie : (await strings).viewEpisode,
               url: `https://www.bbc.co.uk/iplayer/episode/${document.location.pathname.split("/")[3]}`
             }
-          ]
+          ];
         }
   
         if (paused || !duration) {
@@ -154,7 +154,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!buttonsE) delete presenceData.buttons
+  if (!buttonsE) delete presenceData.buttons;
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
