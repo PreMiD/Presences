@@ -2,9 +2,12 @@ const presence = new Presence({
   clientId: "632293282847784973"
 });
 
+const browsingStamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
   },
     path: string[] = document.location.pathname.split("/"),
     privacy = await presence.getSetting("privacy");
@@ -26,7 +29,7 @@ presence.on("UpdateData", async () => {
       }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     if (path[2] && path[2] === "a") {
-      presenceData.details = "Viewing an assignment in";
+      presenceData.details = privacy ? "Vieiwng assignment" : "Viewing an assignment in";
     } else {
       presenceData.details = "Viewing class";
     }
