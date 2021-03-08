@@ -15,6 +15,5 @@
     "color": "#000000",
     "tags": ["aniorb", "ani", "orb", "4anime", "animelist", "aniwatch", "animekisa", "gogoanime", "anime" , "watching" , "popular", "streaming", "free", "fast", "1080p", "website"],
     "category": "anime",
-    "iframe": true,
-    "readLogs": false
+    "iframe": true
   }
