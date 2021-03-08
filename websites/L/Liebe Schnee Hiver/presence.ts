@@ -36,9 +36,9 @@ LSHiver.on("UpdateData", async () => {
     presenceData.state = genre;
 
     LSHiver.setActivity(presenceData);
-  } else if (page === "/" && location.search.includes("?s=")) {
+  } else if (page === "/" && location.search?.includes("?s=")) {
     const searchingFor =
-      decodeURI(location.search)?.replace("?s=", "")?.replace(/\+/g, " ") ||
+      decodeURI(location.search).replace("?s=", "").replace(/\+/g, " ") ||
       "Bilinmeyen Terim";
 
     presenceData.details = "Bir şey arıyor:";
@@ -87,7 +87,7 @@ LSHiver.on("UpdateData", async () => {
       episodeNumber = episodeTitle?.replace("Bölüm ", "")?.trim();
 
     presenceData.details =
-      chapterTitle?.replace(episodeNumber, "") || "Bilinmeyen Manga";
+      chapterTitle.replace(episodeNumber, "") || "Bilinmeyen Manga";
     presenceData.state = episodeTitle;
 
     presenceData.smallImageText = "Bir manga okuyor";
