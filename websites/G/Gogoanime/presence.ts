@@ -19,7 +19,6 @@ interface GogoanimeApiResponse {
 
 const presence = new Presence({
   clientId: "696341580096733185",
-  injectOnComplete: false,
   appMode: true
 });
 

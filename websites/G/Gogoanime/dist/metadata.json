@@ -11,6 +11,18 @@
   "description": {
     "en": "Watch anime online in English. You can watch free series and movies online and English subtitle. Free download high quality anime."
   },
+  "url": [
+    "gogoanime.io",
+    "gogoanime.sh",
+    "gogoanime.so",
+    "gogoanime.movie",
+    "gogoanimes.co",
+    "gogoanime.tv",
+    "gogoanime.in",
+    "gogoanime.video",
+    "gogoanime.ai",
+    "gogoanime.vc"
+  ],
   "regExp":"[0-9w]{0,6}.*gogoanime[s]*.[a-z]+",
   "version": "1.1.0",
   "logo": "https://i.imgur.com/OnaEYdo.png",
