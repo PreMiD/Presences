@@ -82,13 +82,13 @@ else if (
     delete presenceData.endTimestamp;
   }
   presence.setActivity(presenceData, !video.paused);
+  presenceData.buttons = [
+    {
+      label: "Watch Episode",
+      url: document.baseURI
+    }
+  ];
 }
-presenceData.buttons = [
-  {
-    label: "Watch Episode",
-    url: document.baseURI
-  }
-];
 if (presenceData.details == null) {
   presenceData.details = (await strings).browsing;
   presenceData.smallImageKey = "reading";
