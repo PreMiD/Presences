@@ -18,9 +18,9 @@ presence.on("UpdateData", async () => {
   if (path[0] === "h") {
     presenceData.details = "Home Page";
   } else if (path[0] === "calendar") {
-    presenceData.details = "Viewing the calendar";
+    presenceData.details = "Viewing their calendar";
   } else if (path[0] === "a") {
-    presenceData.details = "Viewing to-do list";
+    presenceData.details = "Viewing their to-do list";
   } else if (path[0] === "c") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
@@ -29,9 +29,9 @@ presence.on("UpdateData", async () => {
       }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     if (path[2] && path[2] === "a") {
-      presenceData.details = privacy ? "Vieiwng assignment" : "Viewing an assignment in";
+      presenceData.details = privacy ? "Vieiwng an assignment" : "Viewing an assignment in";
     } else {
-      presenceData.details = "Viewing class";
+      presenceData.details = "Viewing a class";
     }
     presenceData.state = privacy ? null : classroom;
   } else if (path[0] === "w") {
@@ -42,8 +42,8 @@ presence.on("UpdateData", async () => {
       }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     presenceData.details = privacy
-      ? "Viewing classwork"
-      : "Viewing classwork of:";
+      ? "Viewing their classwork"
+      : "Viewing their classwork of:";
     presenceData.state = privacy ? null : classroom;
   } else if (path[0] === "r") {
     const classroom: string = document.querySelector(
