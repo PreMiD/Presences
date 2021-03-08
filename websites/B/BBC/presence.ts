@@ -133,7 +133,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = soundData.modules.data[0].data[0].network.short_title;
         presenceData.smallImageKey = "live";
       } else {
-        presenceData.state = `${soundData.modules.data[0].data[0].network.short_title} • ${title}`;        
+        presenceData.state = title;        
         presenceData.smallImageKey = (pausedS || !durationS) ? "pause" : "play";
       }
 

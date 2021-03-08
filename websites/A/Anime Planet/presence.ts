@@ -188,7 +188,7 @@ presence.on("UpdateData", async () => {
       if (content.titleAndEpisode.length > 1){
         content.episode.title = document.querySelector('h2.sub').textContent
         .replace(document.querySelector('h2.sub > a').textContent, "")
-        .trim().split("-")[1].trim();
+        .trim().split("-").slice(1).join("").trim();
       }
 
       content.episode.ep = document.querySelector('h2.sub').textContent
@@ -244,7 +244,7 @@ presence.on("UpdateData", async () => {
     }
 
     for (const [key, value] of Object.entries(animePlanetPages)){
-      if (path.includes(key) && path !==  "/characters/" && path !== "/manga/" && path !== "/anime/"){
+      if (path.includes(key) && path !==  "/characters/" && !path.includes("/videos/") && path !== "/manga/" && path !== "/anime/"){
           presenceData = { ...presenceData, ...value};
           break;
       } else if (path ===  "/characters/"){
