@@ -27,12 +27,11 @@ let videoInfos = {
   duration: 0,
   currentTime: 0,
   paused: false
-};
-
-let framaDataUpdated = false;
-let isDomainChecked = false; // we only need to verify the authenticity of the domain ONCE
-let isClone = false; // true if the current gogoanime domain is a clone
-let oldTime = 0;
+},
+framaDataUpdated = false,
+isDomainChecked = false, // we only need to verify the authenticity of the domain ONCE
+isClone = false, // true if the current gogoanime domain is a clone
+oldTime = 0;
 
 const states = {
   NOTFOUND: "404",
@@ -42,7 +41,7 @@ const states = {
   LOGIN: "Logging in...",
   SIGNUP: "Signing up...",
   BOOKMARK: "Managing bookmarks..."
-}
+};
 
 presence.on(
   "iFrameData",
@@ -62,8 +61,8 @@ function formatStr(anime: string[]): string {
   }, "").replace(/Dub/g, "(Dub)");
 }
 
-function parseCookieString(cookie: string): any[] {
-  let dict = [];
+function parseCookieString(cookie: string): Object[] {
+  const dict: Object[] = [];
   if(cookie){
   const cookies = cookie.split(";");
   for (let i = 0; i < cookies.length; i++) {
@@ -91,9 +90,9 @@ async function sendRequestToDomainAPI(): Promise<Response> {
 }
 
 async function checkDomain(): Promise<boolean> {
-  const cookies = parseCookieString(document.cookie);
-  const currentDomain = document.location.hostname;
-  const cookieName = "PMD_GOGOANIME_VALID_DOMAINS";
+  const cookies = parseCookieString(document.cookie),
+  currentDomain = document.location.hostname,
+  cookieName = "PMD_GOGOANIME_VALID_DOMAINS";
   for (let i = 0; i < cookies.length; i++) {
     if (cookies[i].key === cookieName) {
       if (cookies[i].value.split("-").includes(currentDomain)) {
@@ -101,7 +100,7 @@ async function checkDomain(): Promise<boolean> {
       }
     }
   }
-  
+
   let invalid = true;
   await sendRequestToDomainAPI().then(async body => {
     if(body.status !== 200){
@@ -145,8 +144,8 @@ presence.on("UpdateData", async () => {
     } 
     
     const currentPath = document.location.pathname;
-    let detail: string;
-    let state: string = states.BROWSING;
+    let detail: string,
+    state: string = states.BROWSING;
     const is404 = document.querySelector("#wrapper_bg > section > section.content_left > h1")?.textContent === states.NOTFOUND;
     if (is404) {
       state = states.NOTFOUND;
@@ -190,8 +189,8 @@ presence.on("UpdateData", async () => {
       detail = `Anime genre: ${upperCaseFirstChar(genre)}`;
     }
     else if (currentPath.includes("/category/")) {
-      const animeTitle = document.querySelector("#wrapper_bg > section > section.content_left > div.main_body > div:nth-child(2) > div.anime_info_body_bg > h1")?.textContent;
-      const anime = animeTitle ?? formatStr(currentPath.split("/").pop().split("-")); // use the url path as fallback
+      const animeTitle = document.querySelector("#wrapper_bg > section > section.content_left > div.main_body > div:nth-child(2) > div.anime_info_body_bg > h1")?.textContent,
+      anime = animeTitle ?? formatStr(currentPath.split("/").pop().split("-")); // use the url path as fallback
       detail = `Anime: ${anime}`;
     }
     else if (currentPath.includes("/sub-category/")) {
@@ -214,12 +213,12 @@ presence.on("UpdateData", async () => {
     }
     else {
       state = states.WATCHING;
-      const anime = currentPath.split("/").pop().split("-");
-      const episode = `${anime[anime.length - 2]} ${anime[anime.length - 1]}`;
+      const anime = currentPath.split("/").pop().split("-"),
+      episode = `${anime[anime.length - 2]} ${anime[anime.length - 1]}`;
       detail = `${formatStr(anime.slice(0, anime.length - 2))}: ${upperCaseFirstChar(episode)}`;
     }
     
-    let presenceData: PresenceData = {
+    const presenceData: PresenceData = {
       largeImageKey: "logo",
       details: state,
       state: detail
@@ -252,4 +251,3 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     }
   });
-      
