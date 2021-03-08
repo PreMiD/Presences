@@ -99,5 +99,5 @@ LSHiver.on("UpdateData", async () => {
     presenceData.state = pages[page] || pages[page.slice(0, -1)];
 
     LSHiver.setActivity(presenceData);
-  }
+  } else LSHiver.setActivity()
 });
