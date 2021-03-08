@@ -16,18 +16,4 @@
   "thumbnail": "https://i.imgur.com/E5H5Rsc.png",
   "color": "#669900",
   "tags": ["manga", "turkish"],
-  "settings": [
-    {
-      "icon": "fas fa-address-card",
-      "id": "buttons",
-      "title": "Butonları Göster",
-      "value": true
-    },
-    {
-      "icon": "fas fa-heading",
-      "id": "show-title",
-      "title": "Manga Adını Göster",
-      "value": true
-    }
-  ]
 }
