@@ -1,18 +1,7 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  episode: string;
-  browse: string;
-  searchFor: string;
-  watchVideo: string;
-  watchEpisode: string;
-  watchMovie: string;
-}
-
 const presence = new Presence({
     clientId: "809748404963770398"
   }),
-  getStrings = async (): Promise<LangStrings> =>
+  getStrings = async () =>
     presence.getStrings(
       {
         play: "general.playing",
@@ -26,7 +15,7 @@ const presence = new Presence({
     }, await presence.getSetting('lang')), 
     browsingStamp = Math.floor(Date.now() / 1000);
       
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
     oldLang: string = null;
 
 presence.on("UpdateData", async () => {

@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "658230518520741915"
 }),
   startsTime = Math.floor(Date.now() / 1000),
-  getStrings = async (): Promise<LangStrings> =>
+  getStrings = async () =>
     presence.getStrings(
       {
         play: "general.playing",
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
           '[class="typo typo--skylark play-cta__subtitle"]'
           ) || document.querySelector(
             '[class="typo typo--bold play-cta__title typo--skylark"]'
-        ))?.textContent || IPlayer.episode.labels?.category || "Animation";
+        ))?.textContent  || IPlayer.episode.labels?.category || "Animation";
   
         presenceData.startTimestamp = timestamps[0];
         presenceData.endTimestamp = timestamps[1];
@@ -102,7 +102,7 @@ presence.on("UpdateData", async () => {
         } else {
           presenceData.buttons = [
             {
-              label: (await strings).viewEpisode,
+              label: presenceData.state.toLocaleLowerCase().includes("film") ? (await strings).viewMovie : (await strings).viewEpisode,
               url: `https://www.bbc.co.uk/iplayer/episode/${document.location.pathname.split("/")[3]}`
             }
           ]
@@ -163,16 +163,6 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
-
-interface LangStrings {
-  play: string
-  pause: string
-  viewMovie: string
-  browse: string
-  viewEpisode: string
-  viewPage: string
-  viewSeries: string
-}
 
 interface IPlayerData {
   episode?: {
