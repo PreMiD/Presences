@@ -4,60 +4,97 @@ const presence = new Presence({
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
+async function getStrings() {
+  return presence.getStrings(
+    {
+      home: "google classroom.home",
+      calendar: "google classroom.calendar",
+      todo: "google classroom.todo",
+      assignmentPrivate: "google classroom.assignment",
+      assignment: "google classroom.assignment",
+      class: "google classroom.class",
+      classworkPrivate: "google classroom.classwork",
+      classwork: "google classroom.classwork",
+      classmembersPrivate: "google classroom.classmembers",
+      classmembers: "google classroom.classmembers",
+      settings: "google classroom.settings"
+    },
+    await presence.getSetting("lang")
+  );
+}
+
+let strings = getStrings(),
+  oldLang: string = null;
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  },
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    },
     path: string[] = document.location.pathname.split("/"),
-    privacy = await presence.getSetting("privacy");
+    privacy = await presence.getSetting("privacy"),
+    newLang = await presence.getSetting("lang");
+
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
+
   path.shift();
   if (path[0] === "u") {
     path.splice(0, 2);
   }
   if (path[0] === "h") {
-    presenceData.details = "Home Page";
+    presenceData.details = (await strings).homepage;
   } else if (path[0] === "calendar") {
-    presenceData.details = "Viewing their calendar";
+    presenceData.details = (await strings).calendar;
   } else if (path[0] === "a") {
-    presenceData.details = "Viewing their to-do list";
+    presenceData.details = (await strings).todo;
   } else if (path[0] === "c") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
     )
-      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
-      }`
+      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
+          document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
+        }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     if (path[2] && path[2] === "a") {
-      presenceData.details = privacy ? "Vieiwng an assignment" : "Viewing an assignment in";
+      presenceData.details = privacy
+        ? (await strings).assignmentPrivate
+        : (await strings).assignment;
     } else {
-      presenceData.details = "Viewing a class";
+      presenceData.details = (await strings).class;
     }
-    presenceData.state = privacy ? null : classroom;
+    if (!privacy) presenceData.state = classroom;
   } else if (path[0] === "w") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
     )
-      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
-      }`
+      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
+          document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
+        }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     presenceData.details = privacy
-      ? "Viewing their classwork"
-      : "Viewing their classwork of:";
-    presenceData.state = privacy ? null : classroom;
+      ? (await strings).classworkPrivate
+      : (await strings).classwork;
+    if (!privacy) presenceData.state = classroom;
   } else if (path[0] === "r") {
     const classroom: string = document.querySelector(
       'span[class="YVvGBb dDKhVc"]'
     )
-      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
-      }`
+      ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
+          document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
+        }`
       : document.querySelector('span[id="UGb2Qe"]').textContent;
     presenceData.details = privacy
-      ? "Viewing class members"
-      : "Viewing members of:";
-    presenceData.state = privacy ? null : classroom;
+      ? (await strings).classmembersPrivate
+      : (await strings).classmembers;
+
+    if (!privacy) presenceData.state = classroom;
   } else if (path[0] === "s") {
-    presenceData.details = "Configuring settings";
+    presenceData.details = (await strings).settings;
   }
   presence.setActivity(presenceData);
 });
