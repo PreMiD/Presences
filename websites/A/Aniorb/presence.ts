@@ -1,3 +1,5 @@
+/* eslint no-dupe-else-if: "error" */
+/*eslint linebreak-style: ["error", "windows"]*/
 const presence = new Presence({
   clientId: "776312991939428373"
 }),
@@ -53,7 +55,7 @@ const presenceData: PresenceData = {
 }
 else if (document.querySelector("#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span").textContent.toUpperCase() !== null) {
   presenceData.details = "Watching:";
-  presenceData.state = document.querySelector("#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span").textContent.toUpperCase()
+  presenceData.state = document.querySelector("#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span").textContent.toUpperCase();
   presenceData.smallImageKey = "watching";
 }
 else if (
@@ -87,7 +89,7 @@ presenceData.buttons = [
   {
     label: "Watch Episode",
     url: document.baseURI
-  },
+  }
 ];
 if (presenceData.details == null) {
   presenceData.details = (await strings).browsing;
