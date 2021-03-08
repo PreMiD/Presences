@@ -194,10 +194,6 @@ interface IPlayerData {
   }
 }
 
-interface BuutonI {
-  ariaLabel: string
-}
-
 interface IFrameData {
   iframe_video: {
     duration: number
