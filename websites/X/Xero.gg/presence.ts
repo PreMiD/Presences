@@ -104,6 +104,15 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/notifications")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Notifications";
+  } else if (document.location.pathname.includes("/commands")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Commands";
+  } else if (document.location.pathname.includes("/room/options")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Room options";
+  } else if (document.location.pathname.includes("/sensitivity")) {
+    presenceData.details = "Viewing a page:";
+    presenceData.state = "Sensitivity";
   } else if (document.location.pathname.includes("/chat")) {
     if (showChat) {
       try {
