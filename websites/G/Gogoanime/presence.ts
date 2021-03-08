@@ -61,8 +61,8 @@ function formatStr(anime: string[]): string {
   }, "").replace(/Dub/g, "(Dub)");
 }
 
-function parseCookieString(cookie: string): Object[] {
-  const dict: Object[] = [];
+function parseCookieString(cookie: string): Record<string,string>[] {
+  const dict: Record<string,string>[] = [];
   if(cookie){
   const cookies = cookie.split(";");
   for (let i = 0; i < cookies.length; i++) {
@@ -131,14 +131,19 @@ presence.on("UpdateData", async () => {
     isDomainChecked = true;
     await checkDomain().then(result => {
       isClone = result; 
-      console.log(
-        `[Premid Gogoganime Presence] The following gogoanime domain is ${result ? "a clone therefore not supported" : "supported"} by this extension.`);
-      });
+      if(result){
+        presence.error("The following gogoanime domain is a clone therefore not supported by this extension.");
+      }
+      else{
+        presence.success("The following gogoanime domain is supported by this extension.");
+      }
+    });
+
       if(isClone){
         presence.clearActivity();
       }
     }
-    
+      
     if (isClone) {
       return;
     } 
@@ -160,14 +165,14 @@ presence.on("UpdateData", async () => {
               case "DUB":
                 detail = "Recent Dubbed anime releases";
                 break;
-                case "Chinese":
-                  detail = "Recent Chinese anime releases";
-                  break;
-                default:
-                   detail = "Recent anime releases";
-                   break;
+              case "Chinese":
+                detail = "Recent Chinese anime releases";
+                break;
+              default:
+                detail = "Recent anime releases";
+                break;
                   }
-                  break;
+            break;
                 }
               }
             } 
@@ -251,3 +256,4 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData);
     }
   });
+    
