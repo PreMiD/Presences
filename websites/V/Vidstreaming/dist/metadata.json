@@ -38,6 +38,12 @@
       "title": "Show Video Time",
       "icon": "fas fa-clock",
       "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
     }
   ]
 }

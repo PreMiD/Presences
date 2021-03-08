@@ -15,13 +15,9 @@ let iFrameVideo: boolean,
       iFrameVideo: boolean;
       currTime: number;
       dur: number;
-      paused: boolean;
-    };
-  },
-  lastPlaybackState: boolean,
-  playback: boolean,
-  browsingStamp = Math.floor(Date.now() / 1000),
-  title: HTMLTextAreaElement;
+      paused: boolean; 
+    }; 
+  }, lastPlaybackState: boolean, playback: boolean, browsingStamp: number, title:HTMLTextAreaElement, firstVideo:string, childLength:number;
 
 presence.on(
   "iFrameData",
@@ -46,22 +42,25 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sSI"),
-    elapsed = await presence.getSetting("sTE"),
-    videoTime = await presence.getSetting("sVT");
+  const info = await presence.getSetting("sSI"), 
+  elapsed = await presence.getSetting("sTE"), 
+  videoTime = await presence.getSetting("sVT"),
+  buttons = await presence.getSetting("buttons");
   if (videoTime) {
     if (lastPlaybackState !== playback) {
       lastPlaybackState = playback;
-      presence.info("Video Time is On");
+      // presence.info("Video Time is On");
     }
-  } else {
-    presence.info("Video Time is Off");
+  }
+  else{
+    // presence.info("Video Time is Off");
   }
   if (elapsed) {
     browsingStamp = Math.floor(Date.now() / 1000);
-    presence.info("Elapsed is On");
-  } else {
-    presence.info("Elapsed is Off");
+    // presence.info("Elapsed is On");
+  }
+  else{
+    // presence.info("Elapsed is Off");
   }
 
   const timestamps = presence.getTimestamps(
@@ -72,7 +71,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     };
   if (info) {
-    presence.info("Info is On.");
+    // presence.info("Info is On.");
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page or recently subbed";
@@ -102,7 +101,21 @@ presence.on("UpdateData", async () => {
       );
       if (title !== null) {
         presenceData.state = title.innerText;
-
+        if(buttons){
+          childLength = document.querySelector("#main_bg > div:nth-child(5) > div > div.video-info-left > ul").children.length;
+          firstVideo = document.querySelector("#main_bg > div:nth-child(5) > div > div.video-info-left > ul > li:nth-child(" + (childLength - 1) + ")").firstElementChild.getAttribute("href");
+          // presence.info("https://gogo-stream.com" + firstVideo);
+          presenceData.buttons = [
+          {
+            label: "Current Episode",
+            url: document.location.href
+          },
+          {
+            label: "First Episode",
+            url: "https://gogo-stream.com" + firstVideo
+          }
+          ];
+        }
         if (
           iFrameVideo == true &&
           !isNaN(duration) &&
@@ -146,12 +159,9 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "search";
         presence.error("Watching an unknown show.");
       }
-    } else if (
-      document.querySelector(
-        "#main_bg > div:nth-child(5) > div > div.section-header > h3"
-      ).textContent == " Result search"
-    ) {
-      presence.info("Searching");
+    }
+    else if(document.querySelector("#main_bg > div:nth-child(5) > div > div.section-header > h3").textContent == " Result search"){
+      // presence.info("Searching");
       presenceData.details = "Searching:";
       presenceData.state = document.location.href
         .replace("https://gogo-stream.com/search.html?keyword=", "")
@@ -167,7 +177,7 @@ presence.on("UpdateData", async () => {
       presence.error("Can't read page.");
     }
   } else {
-    presence.info("Info is off.");
+    // presence.info("Info is off.");
   }
   if (presenceData.details == null) {
     //This will fire if you do not set presence details
