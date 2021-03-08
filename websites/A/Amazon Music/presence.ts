@@ -130,25 +130,25 @@ presence.on("UpdateData", async () => {
           .shadowRoot.querySelector("button > div > music-icon");
       paused = pausedIcon.attributes[1].value == "pause" ? false : true;
       currentTime = document
-          .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
-          .textContent.split(" - ")[0];
+        .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
+        .textContent.split(" - ")[0];
       timeLeft = document
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
         .textContent.split(" - ")[1];
       timestamps = presence.getTimestamps(
-          presence.timestampFromFormat(currentTime),
-          presence.timestampFromFormat(timeLeft) +
-            presence.timestampFromFormat(currentTime)
-        );
+        presence.timestampFromFormat(currentTime),
+        presence.timestampFromFormat(timeLeft) +
+          presence.timestampFromFormat(currentTime)
+      );
 
-      (presenceData.details = title),
-        (presenceData.state = artist),
-        (presenceData.largeImageKey = "logo"),
-        (presenceData.startTimestamp = timestamps[0]),
-        (presenceData.smallImageKey = paused == true ? "pause" : "play"),
-        (presenceData.smallImageText =
-          paused == true ? (await strings).pause : (await strings).play),
-        (presenceData.endTimestamp = timestamps[1]);
+      presenceData.details = title;
+      presenceData.state = artist;
+      presenceData.largeImageKey = "logo";
+      presenceData.startTimestamp = timestamps[0];
+      presenceData.smallImageKey = paused == true ? "pause" : "play";
+      presenceData.smallImageText =
+        paused == true ? (await strings).pause : (await strings).play;
+      presenceData.endTimestamp = timestamps[1];
 
       if (showPlaylist && buttons) {
         presenceData.buttons = [
