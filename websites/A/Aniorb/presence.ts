@@ -1,5 +1,3 @@
-/* eslint no-dupe-else-if: "error" */
-/*eslint linebreak-style: ["error", "windows"]*/
 const presence = new Presence({
   clientId: "776312991939428373"
 }),
