@@ -69,8 +69,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           );
           if (!activeMedia) return null;
           const title = activeMedia
-              .querySelector(".description__title")
-              .textContent?.trim(),
+              .querySelector(".description__title")?.textContent?.trim(),
             activeTab =
               document.querySelector<HTMLElement>(
                 ".page__content .page-menu > .page-menu__inner > .page-menu__item.-active"
