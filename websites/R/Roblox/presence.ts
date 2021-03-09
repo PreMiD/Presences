@@ -1,19 +1,17 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "612416330003382314"
-});
+}), browsingStamp = Math.floor(Date.now() / 1000);
+let
+  profileName,
+  profileTabs,
+  messageTab,
+  friendsTab,
+  inventoryTab,
+  groupName,
+  groupTab,
+  gameTab;
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var profileName: any,
-  profileTabs: any,
-  messageTab: any,
-  friendsTab: any,
-  inventoryTab: any,
-  groupName: any,
-  groupTab: any,
-  gameName: any,
-  gameTab: any;
-
-gameName = document.querySelector(
+const gameName = <HTMLHeadingElement>document.querySelector(
   "div.game-calls-to-action > div.game-title-container > h2"
 );
 
@@ -33,11 +31,11 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/users") &&
     document.location.pathname.includes("/profile")
   ) {
-    profileName = document.querySelector(
+    profileName = <HTMLHeadingElement>document.querySelector(
       "div.profile-header-top > div.header-caption > div.header-title > h2"
     );
 
-    profileTabs = document.querySelector(
+    profileTabs = <HTMLAnchorElement>document.querySelector(
       "#horizontal-tabs li.rbx-tab.active a"
     );
 
@@ -57,7 +55,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.includes("/my/messages")) {
-    messageTab = document.querySelector(
+    messageTab = <HTMLLIElement>document.querySelector(
       "#wrap > div.container-main > div.content > div.messages-container.ng-scope > div > ul > li.rbx-tab.ng-scope.active"
     );
 
@@ -67,7 +65,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/users/friends")) {
-    friendsTab = document.querySelector("li.rbx-tab.active");
+    friendsTab = <HTMLAnchorElement>document.querySelector(".rbx-tab-heading.active");
 
     presenceData.details = "Friends";
 
@@ -84,7 +82,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/users") &&
     document.location.pathname.includes("/inventory")
   ) {
-    inventoryTab = document.querySelector(
+    inventoryTab = <HTMLLIElement>document.querySelector(
       "#vertical-menu > li.menu-option.ng-scope.active"
     );
 
@@ -103,11 +101,11 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/groups") &&
     !document.location.pathname.includes("/search")
   ) {
-    groupName = document.querySelector(
-      "div.section-content > div.group-header > div.group-caption.group-caption-with-image > h1"
+    groupName = <HTMLHeadingElement>document.querySelector(
+      ".group-name"
     );
 
-    groupTab = document.querySelector("#horizontal-tabs li.rbx-tab.active");
+    groupTab = <HTMLLIElement>document.querySelector("#horizontal-tabs li.rbx-tab.active");
 
     presenceData.details = groupName.innerText;
 
@@ -115,9 +113,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/search/groups")) {
-    var searchURL = new URL(document.location.href);
-
-    var searchResult = searchURL.searchParams.get("keyword");
+    const searchURL = new URL(document.location.href), searchResult = searchURL.searchParams.get("keyword");
 
     presenceData.details = "Searching for a group:";
 
@@ -132,14 +128,14 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Feed";
 
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname == "/games/" && gameName == null) {
+  } else if ((document.location.pathname == "/games/" || document.location.pathname == "/games") && gameName == null) {
     presenceData.details = "Browsing games...";
 
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
   } else if (document.location.pathname.includes("/games/")) {
-    gameTab = document.querySelector("#horizontal-tabs li.rbx-tab.active");
+    gameTab = <HTMLLIElement>document.querySelector("#horizontal-tabs li.rbx-tab.active");
 
     presenceData.details = "Game: " + gameName.innerText;
 
@@ -147,9 +143,7 @@ presence.on("UpdateData", async () => {
 
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes("/catalog/")) {
-    const searchURL = new URL(document.location.href);
-
-    const searchResult = searchURL.searchParams.get("Keyword");
+    const searchURL = new URL(document.location.href), searchResult = searchURL.searchParams.get("Keyword");
 
     presenceData.details = "Current page:";
 
@@ -165,9 +159,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
     }
   } else if (document.location.pathname.includes("/search/users")) {
-    const searchURL = new URL(document.location.href);
-
-    const searchResult = searchURL.searchParams.get("keyword");
+    const searchURL = new URL(document.location.href), searchResult = searchURL.searchParams.get("keyword");
 
     presenceData.details = "Searching for an user:";
 
@@ -175,6 +167,31 @@ presence.on("UpdateData", async () => {
 
     presenceData.smallImageKey = "search";
 
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/develop")) {
+    presenceData.details = "Developer Page";
+    const developTabs = (<HTMLDivElement>document.querySelector("#DevelopTabs .tab-active")).innerText;
+    if (developTabs=="My Creations"){
+      presenceData.state = "Tab: "+developTabs+" > "+(<HTMLAnchorElement>document.querySelector(".tab-item-selected")).innerText;
+    } else if (developTabs=="Library"){
+      presenceData.state = "Tab: "+developTabs+" > "+(<HTMLAnchorElement>document.querySelector(".selectedAssetTypeFilter")).innerText;
+    } else {
+      presenceData.state = "Tab: "+developTabs;
+    }
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/robux")) {
+    presenceData.details = "Current page:";
+    presenceData.state = "Robux";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.location.pathname.includes("/catalog")) {
+    presenceData.details = "Current page:";
+    presenceData.state = "Avatar Shop";
+    presenceData.startTimestamp = browsingStamp;
+  }
+
+  if (document.querySelector(".notification-stream-container")!=null){
+    presenceData.details = "Viewing Notifications";
+    delete presenceData.state;
     presenceData.startTimestamp = browsingStamp;
   }
 
