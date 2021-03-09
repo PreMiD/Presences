@@ -9,7 +9,7 @@
     "en": "Vidstreaming is a website where you can find the latest anime released."
   },
   "url": "gogo-stream.com",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "logo": "https://i.imgur.com/bEtLVB2.png",
   "thumbnail": "https://i.imgur.com/xRsdose.png",
   "color": "#ff9200",
@@ -37,6 +37,12 @@
       "id": "sVT",
       "title": "Show Video Time",
       "icon": "fas fa-clock",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
       "value": true
     }
   ]

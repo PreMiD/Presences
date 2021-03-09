@@ -11,11 +11,11 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v2
       - name: Use Node.js 12
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.1.5
         with:
           node-version: 12
       - name: Restore CI Cache
-        uses: actions/cache@v1
+        uses: actions/cache@v2.1.4
         with:
           path: node_modules
           key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
