@@ -69,7 +69,8 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           );
           if (!activeMedia) return null;
           const title = activeMedia
-              .querySelector(".description__title")?.textContent?.trim(),
+              .querySelector(".description__title")
+              ?.textContent?.trim(),
             activeTab =
               document.querySelector<HTMLElement>(
                 ".page__content .page-menu > .page-menu__inner > .page-menu__item.-active"
@@ -123,18 +124,21 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           if (showWatch)
             data.buttons.push(
               ...[
-                ...getSourceLink(sourceLink?.href),
                 {
                   label: "Watch on Coub",
                   url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
-                }
+                },
+                ...getSourceLink(sourceLink?.href)
               ]
             );
           if (showBridge)
-            data.buttons.push({
-              label: "Download via Bridge",
-              url: parseBridgeUrl(activeMedia.dataset.permalink)
-            });
+            data.buttons = [
+              ...(data.buttons[0] ? [data.buttons[0]] : []),
+              {
+                label: "Download via Bridge",
+                url: parseBridgeUrl(activeMedia.dataset.permalink)
+              }
+            ];
           return data;
         }
       },
@@ -177,14 +181,10 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           if (!title || !userName) return null;
           data.state = `Browsing ${activeTabTitle} from ${userName}`;
           data.details = `${title}${isLiked ? " (❤)" : ""}`;
-          const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
-            ".description__stamp a.description__stamp__source"
-          );
           data.buttons = [];
           if (showWatch)
             data.buttons.push(
               ...[
-                ...getSourceLink(sourceLink?.href),
                 {
                   label: "Watch on Coub",
                   url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
@@ -198,10 +198,13 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               ]
             );
           if (showBridge)
-            data.buttons.push({
-              label: "Download via Bridge",
-              url: parseBridgeUrl(activeMedia.dataset.permalink)
-            });
+            data.buttons = [
+              ...(data.buttons[0] ? [data.buttons[0]] : []),
+              {
+                label: "Download via Bridge",
+                url: parseBridgeUrl(activeMedia.dataset.permalink)
+              }
+            ];
           return data;
         }
       },
@@ -234,18 +237,21 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           if (showWatch)
             data.buttons.push(
               ...[
-                ...getSourceLink(sourceLink?.href),
                 {
                   label: "Watch on Coub",
                   url: document.location.href
-                }
+                },
+                ...getSourceLink(sourceLink?.href)
               ]
             );
           if (showBridge)
-            data.buttons.push({
-              label: "Download via Bridge",
-              url: parseBridgeUrl(activeMedia.dataset.permalink)
-            });
+            data.buttons = [
+              ...(data.buttons[0] ? [data.buttons[0]] : []),
+              {
+                label: "Download via Bridge",
+                url: parseBridgeUrl(activeMedia.dataset.permalink)
+              }
+            ];
           return data;
         }
       },
@@ -286,19 +292,22 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           if (showWatch)
             data.buttons.push(
               ...[
-                ...getSourceLink(sourceLink?.href),
                 {
                   label: "Watch on Coub",
                   url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
-                }
+                },
+                ...getSourceLink(sourceLink?.href)
               ]
             );
 
           if (showBridge)
-            data.buttons.push({
-              label: "Download via Bridge",
-              url: parseBridgeUrl(activeMedia.dataset.permalink)
-            });
+            data.buttons = [
+              ...(data.buttons[0] ? [data.buttons[0]] : []),
+              {
+                label: "Download via Bridge",
+                url: parseBridgeUrl(activeMedia.dataset.permalink)
+              }
+            ];
           return data;
         }
       },
