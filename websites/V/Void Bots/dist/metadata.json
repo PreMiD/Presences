@@ -1,0 +1,54 @@
+{
+  "author": {
+    "name": "DanPlayz",
+    "id": "209796601357533184"
+  },
+  "service": "Void Bots",
+  "description": {
+    "en": "Void Bots was designed to promote developers and their bots. We strive to create a friendly and inviting environment where developers can work together!"
+  },
+  "url": [
+    "voidbots.net",
+    "beta.voidbots.net",
+    "docs.voidbots.net"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/LG38jL3.png",
+  "thumbnail": "https://i.imgur.com/eQfwKHr.png",
+  "color": "#B04BEC",
+  "tags": [
+    "discord",
+    "bot",
+    "bot-list",
+    "discord-bot-list",
+    "void",
+    "development",
+    "programming",
+    "coding"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "incognito",
+      "title": "Privacy Mode",
+      "icon": "fas fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "showTimestamp",
+      "title": "Display Timestamp",
+      "icon": "fas fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
