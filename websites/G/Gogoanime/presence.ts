@@ -177,7 +177,7 @@ presence.on("UpdateData", async () => {
               }
             } 
             else{
-              detail = "Home"
+              detail = "Home";
             }
           }
     else if (currentPath === "/anime-list.html") {
@@ -193,16 +193,16 @@ presence.on("UpdateData", async () => {
       detail = "Most popular anime";
     }
     else if(currentPath === "/news/reviews"){
-      detail = "Anime reviews"
+      detail = "Anime reviews";
     }
     else if(currentPath === "/news/trailers"){
-      detail = "Anime trailers"
+      detail = "Anime trailers";
     }
     else if(currentPath === "/requested-list.html"){
-      detail = "The requested anime list"
+      detail = "The requested anime list";
     }
     else if(currentPath === "/upcoming-anime"){
-      detail = "Upcoming anime"
+      detail = "Upcoming anime";
     }
     else if (currentPath.includes("/genre/")) {
       const genre = currentPath.split("/").pop();
@@ -218,10 +218,10 @@ presence.on("UpdateData", async () => {
       detail = `${formatStr(cat)}`;
     }
     else if(currentPath === "/announcement.html"){
-      detail = "Announcements"
+      detail = "Announcements";
     }
     else if(currentPath === "/news.html"){
-      detail = "Latest News"
+      detail = "Latest News";
     }
     else if(currentPath.includes("/requested/")){
       const animeTitle = document.querySelector("#wrapper_bg > section > section.content_left > div > div.anime_info_body > div > h1")?.textContent,
@@ -245,11 +245,11 @@ presence.on("UpdateData", async () => {
     }
     else if(currentPath.includes("/privacy.html")){
       state = states.READING;
-      detail = "The website's privacy notes"
+      detail = "The website's privacy notes";
     }
     else if(currentPath.includes("/about-us.html")){
       state = states.READING;
-      detail = "The website's about us"
+      detail = "The website's about us";
     }
     else if(currentPath.includes("/request-anime.html")){
       state = states.REQUESTING;
