@@ -55,7 +55,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         middleware: (ref) =>
           !!ref.location.pathname.match(
             /^\/(hot|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs)/gi
-          ),
+          ) || ref.location.pathname === "/",
         exec: (
           context,
           data,
