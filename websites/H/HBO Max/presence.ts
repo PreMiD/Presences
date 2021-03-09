@@ -172,7 +172,7 @@ setInterval(async function () {
             pathHandler(":extra:") || pathHandler("/extra/")
               ? "Extra"
               : "Feature"
-          }${desc ? " • " + desc : ""}`,
+          }${desc ? " • " + desc : ""}`
         });
 
         if (video?.currentTime && video?.currentTime > 0)

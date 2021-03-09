@@ -8,56 +8,7 @@ function truncateAfter(str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern));
 }
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  live: string;
-  ad: string;
-  search: string;
-  browsingVid: string;
-  browsingPlayl: string;
-  viewCPost: string;
-  ofChannel: string;
-  readChannel: string;
-  searchChannel: string;
-  trending: string;
-  browsingThrough: string;
-  subscriptions: string;
-  library: string;
-  history: string;
-  purchases: string;
-  reports: string;
-  upload: string;
-  viewChannel: string;
-  viewAllPlayL: string;
-  viewEvent: string;
-  viewLiveDash: string;
-  viewAudio: string;
-  studioVid: string;
-  studioEdit: string;
-  studioAnaly: string;
-  studioComments: string;
-  studioTranslate: string;
-  studioTheir: string;
-  studioCAnaly: string;
-  studioCComments: string;
-  studioCTranslate: string;
-  studioArtist: string;
-  studioDash: string;
-  viewPlaylist: string;
-  readAbout: string;
-  viewAccount: string;
-  viewHome: string;
-  watchVid: string;
-  watchLive: string;
-  browsing: string;
-  searchSomething: string;
-  watchStreamButton: string;
-  watchVideoButton: string;
-  viewChannelButton: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "general.playing",
@@ -111,7 +62,7 @@ async function getStrings(): Promise<LangStrings> {
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
