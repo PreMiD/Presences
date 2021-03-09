@@ -1,6 +1,6 @@
-const Office = new Presence({ clientId: "818822000176791553" });
+const OneDrive = new Presence({ clientId: "818822000176791553" });
 
-Office.on("UpdateData", async () => {
+OneDrive.on("UpdateData", async () => {
   const
     title = document.title.split('-'),
     fileName = title[0],
@@ -13,15 +13,12 @@ Office.on("UpdateData", async () => {
   if (fileType == "OneDrive") {
     presenceData.details = "Browsing a directory";
     presenceData.state = fileName;
-
-    Office.setActivity(presenceData);
   } else if (fileType == "Word" || fileType == "Excel" || fileType == "PowerPoint") {
     presenceData.largeImageKey = `${fileType.toLowerCase()}-logo`;
     presenceData.smallImageKey = "office-logo";
     presenceData.smallImageText = "Microsoft Office Online";
     presenceData.details = `Editing ${fileType.charAt(0) == "E"? "an": "a"} ${fileType} file`;
     presenceData.state = fileName;
-
-    Office.setActivity(presenceData);
   }
+  OneDrive.setActivity(presenceData);
 });
