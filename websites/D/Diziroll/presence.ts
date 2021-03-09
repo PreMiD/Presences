@@ -26,10 +26,8 @@ function getTimestamps(
 
 
 presence.on("UpdateData", async () => {
-    const path: string = document.location.pathname,
-    presenceData: PresenceData = {
-      largeImageKey: "diziroll"
-    };
+    const path: string = document.location.pathname;
+    const presenceData: PresenceData = {largeImageKey: "diziroll"};
     if(path.startsWith("/arsiv")){
     presenceData.details = "Bir sayfaya bakıyor:";
     presenceData.state = "Arşiv";
@@ -62,7 +60,6 @@ presence.on("UpdateData", async () => {
           {label: "Diziyi Görüntüle", url: document.location.origin + "/" +document.location.pathname.split("/")[1]}
         ];
         if (stream.paused == true) {
-            console.log("test")
             presenceData.smallImageKey = "pause";
             presenceData.smallImageText = "Durduruldu";
           } else {
@@ -79,4 +76,4 @@ presence.on("UpdateData", async () => {
 
     }
     presence.setActivity(presenceData);
-})
+});
