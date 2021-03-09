@@ -1,247 +1,371 @@
-const presence = new Presence({
-  clientId: "760186916213227520"
-});
-
-// Variables
-let Routes: string[], Queries;
-
-presence.on("UpdateData", async () => {
-  // Presence Data
-  const data: PresenceData = {
-    largeImageKey: "coub_large"
-  };
-
-  // Setup Routes & Query
-  Routes = document.location.href
-    .replace(document.location.search, "")
-    .split("/")
-    .splice(3);
-  Queries = Object.fromEntries(
-    document.location.search
-      .slice(1)
-      .split("&")
-      .map((k, i, a) => {
-        const item: string[] = k.replace(/\[(.*?)\]+/g, "").split("="),
-          Keys = a
-            .map((i) => i.replace(/\[(.*?)\]+/g, "").split("="))
-            .filter((i) => i[0] === item[0]),
-          Values = Keys.map((i) => i[1]);
-        i;
-
-        if (Keys.length === 1) return item;
-        else return [item[0], Values];
-      })
+interface PageContext {
+  middleware: (ref: Window, ...args: unknown[]) => boolean;
+  exec: (
+    context: Presence,
+    data: PresenceData,
+    options?: { [key: string]: unknown }
+  ) => Promise<PresenceData> | PresenceData;
+}
+interface LocalizedStrings {
+  [key: string]: string;
+}
+interface ExecutionArguments {
+  showWatch?: boolean;
+  showBridge?: boolean;
+  strings: LocalizedStrings;
+  [key: string]: unknown;
+}
+function getQuery() {
+  const queryString = location.search.split("?", 2),
+    query =
+      queryString && queryString.length > 0 && queryString[1]
+        ? queryString[1].split("&").reduce(function (l, r) {
+            const entry = r ? r.split("=", 2) : null;
+            if (entry == null) return l;
+            return Object.assign(l, { [entry[0]]: entry[1] });
+          }, {})
+        : {};
+  return query;
+}
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+const matchYoutubeUrl = (url: string): boolean =>
+  !!url.match(
+    /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/gm
   );
-
-  // Web Pages
-  if (!Routes[0] || Routes[0] === "hot") {
-    // First page - Hot
-    data.details = "Hot";
-    data.state = "Watching coubs...";
-  } else if (Routes[0] === "rising") {
-    // Rising Coubs
-    data.details = "Rising";
-    data.state = "Watching coubs...";
-  } else if (Routes[0] === "fresh") {
-    // Fresh Coubs
-    data.details = "Fresh";
-    data.state = "Watching coubs...";
-  } else if (Routes[0] === "feed") {
-    // Feed page
-    data.details = "Feed";
-    data.state = "Watching coubs...";
-  } else if (Routes[0] === "stories") {
-    // Stories page
-
-    if (!Routes[1]) {
-      data.details = "Stories feed";
-      data.state = "Watching mashups...";
-    } else if (Routes[1] === "new") {
-      data.details = "Stories";
-      data.state =
-        "Creating by " +
-        document.querySelector(
-          ".story-form__stamp .story-form__channels-dropdown button span"
-        ).textContent;
-    } else {
-      data.details = "Stories";
-      data.state = document.querySelector(".story__header h1").textContent;
-    }
-  } else if (Routes[0] === "random") {
-    // Random page
-
-    if (!Routes[1]) {
-      data.details = "Random";
-      data.state = "Watching popular coubs...";
-    } else if (Routes[1] === "top") {
-      data.details = "Random";
-      data.state = "Watching top coubs...";
-    }
-  } else if (Routes[0] === "promote") {
-    data.details = "Promoted Coubs";
-    data.state =
-      "Spent: " +
-      document.querySelector(".promoted-coubs__summary div:nth-child(5) span")
-        .textContent +
-      " | Views: " +
-      document.querySelector(".promoted-coubs__summary div:nth-child(1) span")
-        .textContent;
-  } else if (Routes[0] === "chat") {
-    // Chat page
-    data.details = "Chat";
-
-    const user = document.querySelector(
-      ".sc-jAaTju.eNyegn a .sc-hSdWYo.eioDHx .sc-eHgmQL.hoWqal"
-    );
-    data.state = user ? "Chatting with " + user.textContent : "Chatting...";
-  } else if (Routes[0] === "create") {
-    // Create new coub
-    data.details = "Creating new coub...";
-  } else if (Routes[0] === "featured") {
-    // Featured page
-
-    if (Routes[1] === "coubs") {
-      data.details = "Featured coubs";
-
-      if (!Routes[2] || Routes[2] === "recent") {
-        data.state = "Watching recent coubs...";
-      } else if (Routes[2] === "top_of_the_month") {
-        data.state = "Watching top coubs of the month...";
-      } else if (Routes[2] === "undervalued") {
-        data.state = "Watching undervalued coubs...";
+function parseBridgeUrl(id: string) {
+  return `coubdl-bridge://${id}`;
+}
+function getSourceLink(url: string): { label: string; url: string }[] {
+  if (!url) return [];
+  if (matchYoutubeUrl(url)) {
+    return [
+      {
+        label: "Watch Youtube Source",
+        url
       }
-    } else if (Routes[1] === "channels") {
-      data.details = "Featured channels";
-      data.state = "Watching channels...";
-    } else if (Routes[1] === "stories") {
-      data.details = "Featured stories";
-
-      if (!Routes[2] || Routes[2] === "recent") {
-        data.state = "Watching recent stories...";
-      } else if (Routes[2] === "likes") {
-        data.state = "Watching top stories...";
-      }
-    }
-  } else if (Routes[0] === "weekly") {
-    data.details = "Best weekly coubs";
-    data.state = document.querySelector(
-      ".weekly__menu .page-menu__item.-active"
-    ).textContent;
-  } else if (Routes[0] === "royal.coubs") {
-    data.details = "Coub Picks";
-
-    if (!Routes[1]) {
-      data.state = "Watching coubs...";
-    } else if (Routes[1] === "coubs") {
-      data.state = "Watching coubs...";
-    } else if (Routes[1] === "reposts") {
-      data.state = "Watching coubs...";
-    } else if (Routes[1] === "stories") {
-      data.state = "Watching coubs...";
-    }
-  } else if (Routes[0] === "best") {
-    data.details = "Best coubs " + Routes[1];
-
-    if (!Routes[2]) {
-      data.state = "Most popular";
-    } else if (Routes[2] === "memes") {
-      data.state = "Best memes";
-    } else if (Routes[2] === "hidden-gems") {
-      data.state = "Hidden gems";
-    }
-  } else if (Routes[0] === "likes") {
-    data.details = "My likes";
-
-    if (!Routes[1] || Routes[1] === "recent") {
-      data.state = "Recent coubs";
-    } else if (Routes[1] === "top") {
-      data.state = "Top coubs";
-    } else if (Routes[1] === "views") {
-      data.state = "Views count coubs";
-    } else if (Routes[1] === "oldest") {
-      data.state = "Oldest coubs";
-    }
-  } else if (Routes[0] === "bookmarks") {
-    data.details = "Bookmarks";
-
-    if (!Routes[1] || Routes[1] === "recent") {
-      data.state = "Recent coubs";
-    } else if (Routes[1] === "top") {
-      data.state = "Top coubs";
-    } else if (Routes[1] === "views") {
-      data.state = "Views count coubs";
-    } else if (Routes[1] === "oldest") {
-      data.state = "Oldest coubs";
-    }
-  } else if (Routes[0] === "view") {
-    if (Routes[1]) {
-      data.details = document.querySelector(
-        ".coub__description .description__info h5.description__title"
-      ).textContent;
-      data.state = document.querySelector(
-        ".coub__description .description__info .description__stamp"
-      ).textContent;
-    }
-  } else if (Routes[0] === "friends") {
-    // Friends page - useless page
-    data.details = "Friends";
-  } else if (Routes[0] === "account") {
-    // Account page - wotk in progress
-    data.details = "My account";
-  } else if (Routes[0] === "search") {
-    // Search page
-    data.details = "Search: " + Queries.q.replace(/\W\d+/g, " ");
-
-    if (!Routes[1] || Routes[1] === "recent") {
-      data.state = "Relevance coubs";
-    } else if (Routes[1] === "likes") {
-      data.state = "Top coubs";
-    } else if (Routes[1] === "views") {
-      data.state = "Views count";
-    } else if (Routes[1] === "fresh") {
-      data.state = "Most recent";
-    } else if (Routes[1] === "channels") {
-      data.state = "Channels";
-    }
-  } else if (Routes[0] === "community") {
-    // Search page
-    data.details =
-      "Community: " +
-      document.querySelector(".hot__community .title h2").textContent;
-
-    if (Routes[1] === "featured") {
-      // Featured community
-      data.state =
-        document.querySelector(".featured__menu .-active.page-menu__item")
-          .textContent + " coubs";
-    } else {
-      if (!Routes[2]) {
-        data.state = "Hot coubs";
-      } else if (Routes[2] === "rising") {
-        data.state = "Rising coubs";
-      } else if (Routes[2] === "fresh") {
-        data.state = "Fresh coubs";
-      } else if (Routes[2] === "top") {
-        data.state = "Top coubs";
-      } else if (Routes[2] === "views") {
-        data.state = "Views count coubs";
-      } else if (Routes[2] === "random") {
-        data.state = "Random coubs";
-      }
-    }
-  } else {
-    data.details =
-      "Channel: " +
-      document.querySelector(".channel .channel__description h1").textContent;
-
-    if (Routes[1] === "edit") {
-      data.state = "Edit channel";
-    } else {
-      data.state = document.querySelector(
-        ".profile__menu .page-menu__item.-active"
-      ).textContent;
-    }
+    ];
   }
+  return [];
+}
+(function () {
+  const pages: PageContext[] = [
+      {
+        middleware: (ref) =>
+          !!ref.location.pathname.match(
+            /^\/(hot|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs)/gi
+          ),
+        exec: (
+          context,
+          data,
+          { showWatch, showBridge }: ExecutionArguments
+        ) => {
+          if (!context) return null;
+          const activeMedia = document.querySelector<HTMLElement>(
+            ".coub[coub-block].active"
+          );
+          if (!activeMedia) return null;
+          const title = activeMedia
+              .querySelector(".description__title")
+              .textContent?.trim(),
+            activeTab =
+              document.querySelector<HTMLElement>(
+                ".page__content .page-menu > .page-menu__inner > .page-menu__item.-active"
+              ) ||
+              document.querySelector<HTMLElement>(
+                ".best2020__container .page-menu > .page-menu__inner > .page-menu__item.-active"
+              ) ||
+              document.querySelector<HTMLElement>(
+                ".page__content .story__header"
+              ),
+            isWeekly = !!document.querySelector(
+              ".page__content .page-menu.weekly__menu"
+            ),
+            isBestOfTheYear = location.pathname.startsWith("/best"),
+            isCoubPicks = location.pathname.startsWith("/royal.coubs"),
+            isLiked = !!activeMedia.querySelector(
+              ".coub__like-button[widget-like-button].-on"
+            ),
+            activeTabTitle =
+              activeTab?.textContent?.trim() ||
+              activeTab?.dataset?.title ||
+              "Feed";
+          if (!title) return null;
+          const pageType = document
+            .querySelector(".page__content")
+            ?.getAttributeNames()
+            ?.map((x) => x.match(/^pages-(\w+)-page/i))
+            .filter((x) => !!x && x.length > 1 && x[1])
+            .map((x) => capitalizeFirstLetter(x[1]));
+          data.state =
+            `Browsing ${
+              isCoubPicks && activeTabTitle.match(/^(\w+)/gi)
+                ? activeTabTitle.match(/^(\w+)/gi)[0]
+                : activeTabTitle
+            }` +
+            (pageType?.length > 0 &&
+            activeTabTitle.toLowerCase() !== pageType[0].toLowerCase()
+              ? ` in ${pageType[0]}`
+              : isWeekly
+              ? " in Weekly"
+              : isBestOfTheYear
+              ? " in Best of the Year"
+              : isCoubPicks
+              ? " in Coub Picks"
+              : "");
+          data.details = `${title}${isLiked ? " (❤)" : ""}`;
+          const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
+            ".description__stamp a.description__stamp__source"
+          );
+          data.buttons = [];
+          if (showWatch)
+            data.buttons.push(
+              ...[
+                ...getSourceLink(sourceLink?.href),
+                {
+                  label: "Watch on Coub",
+                  url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
+                }
+              ]
+            );
+          if (showBridge)
+            data.buttons.push({
+              label: "Download via Bridge",
+              url: parseBridgeUrl(activeMedia.dataset.permalink)
+            });
+          return data;
+        }
+      },
+      {
+        middleware: (ref) =>
+          !!ref.document.querySelector(".hero-cover[channel-id]"),
+        exec: (
+          context,
+          data,
+          { showWatch, showBridge }: ExecutionArguments
+        ) => {
+          if (!context) return null;
+          const activeMedia = document.querySelector<HTMLElement>(
+            ".coub[coub-block].active"
+          );
+          if (!activeMedia) return null;
+          const title = activeMedia
+              .querySelector(".description__title")
+              .textContent?.trim(),
+            userName = document.querySelector<HTMLHeadingElement>(
+              ".channel__description > h1[title]"
+            ).title,
+            activeTab =
+              document.querySelector<HTMLElement>(
+                ".page__content .page-menu > .page-menu__inner > .page-menu__item.-active"
+              ) ||
+              document.querySelector<HTMLElement>(
+                ".best2020__container .page-menu > .page-menu__inner > .page-menu__item.-active"
+              ) ||
+              document.querySelector<HTMLElement>(
+                ".page__content .story__header"
+              ),
+            isLiked = !!activeMedia.querySelector(
+              ".coub__like-button[widget-like-button].-on"
+            ),
+            activeTabTitle =
+              activeTab?.textContent.trimStart().split("\n")[0]?.trim() ||
+              activeTab?.dataset?.title ||
+              "Feed";
+          if (!title || !userName) return null;
+          data.state = `Browsing ${activeTabTitle} from ${userName}`;
+          data.details = `${title}${isLiked ? " (❤)" : ""}`;
+          const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
+            ".description__stamp a.description__stamp__source"
+          );
+          data.buttons = [];
+          if (showWatch)
+            data.buttons.push(
+              ...[
+                ...getSourceLink(sourceLink?.href),
+                {
+                  label: "Watch on Coub",
+                  url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
+                },
+                {
+                  label: "View Profile",
+                  url: `${document.location.origin}/${
+                    document.location.pathname.split("/")[1]
+                  }`
+                }
+              ]
+            );
+          if (showBridge)
+            data.buttons.push({
+              label: "Download via Bridge",
+              url: parseBridgeUrl(activeMedia.dataset.permalink)
+            });
+          return data;
+        }
+      },
+      {
+        middleware: (ref) => !!ref.location.pathname.match(/^\/view\/(.*)/gi),
+        exec: (
+          context,
+          data,
+          { strings, showBridge, showWatch }: ExecutionArguments
+        ) => {
+          if (!context) return null;
+          const activeMedia = document.querySelector<HTMLElement>(
+            ".coub[coub-block]"
+          );
+          if (!activeMedia) return null;
+          const title = activeMedia
+              .querySelector(".coub__description h5.description__title")
+              ?.textContent?.trim(),
+            isLiked = !!activeMedia.querySelector(
+              ".coub__like-button[widget-like-button].-on"
+            );
 
-  presence.setActivity(data, true);
-});
+          if (!title) return null;
+          data.state = strings.watching;
+          data.details = `${title}${isLiked ? " (❤)" : ""}`;
+          const sourceLink = activeMedia.parentElement.querySelector<HTMLAnchorElement>(
+            `.coub__info .media-block__item > a[type="embedPopup"]`
+          );
+          data.buttons = [];
+          if (showWatch)
+            data.buttons.push(
+              ...[
+                ...getSourceLink(sourceLink?.href),
+                {
+                  label: "Watch on Coub",
+                  url: document.location.href
+                }
+              ]
+            );
+          if (showBridge)
+            data.buttons.push({
+              label: "Download via Bridge",
+              url: parseBridgeUrl(activeMedia.dataset.permalink)
+            });
+          return data;
+        }
+      },
+      {
+        middleware: (ref) => !!ref.location.pathname.match(/^\/(community)/gi),
+        exec: (
+          context,
+          data,
+          { showWatch, showBridge }: ExecutionArguments
+        ) => {
+          if (!context) return null;
+          const communityParent = document.querySelector(
+            ".hot__community[data-community-id]"
+          );
+          if (!communityParent) return null;
+          const activeMedia = document.querySelector<HTMLElement>(
+            ".coub.active"
+          );
+          if (!activeMedia) return null;
+          const communityTitle = communityParent
+              .querySelector(".description > .title > h2")
+              ?.textContent?.trim(),
+            title = activeMedia
+              .querySelector(".description__title")
+              ?.textContent?.trim(),
+            activeTabTitle =
+              communityParent.parentElement.querySelector<HTMLElement>(
+                ".page-menu.hot__menu > .page-menu__inner > .page-menu__item.-active"
+              )?.dataset?.title || "Hot";
+
+          if (!communityTitle || !title) return null;
+          data.state = `Browsing ${communityTitle} in ${activeTabTitle}`;
+          data.details = `${title}`;
+          const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
+            ".description__stamp a.description__stamp__source"
+          );
+          data.buttons = [];
+          if (showWatch)
+            data.buttons.push(
+              ...[
+                ...getSourceLink(sourceLink?.href),
+                {
+                  label: "Watch on Coub",
+                  url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
+                }
+              ]
+            );
+
+          if (showBridge)
+            data.buttons.push({
+              label: "Download via Bridge",
+              url: parseBridgeUrl(activeMedia.dataset.permalink)
+            });
+          return data;
+        }
+      },
+      {
+        middleware: (ref) => !!ref.window,
+        exec: (
+          context,
+          data,
+          { strings }: { strings: { browsing: string } }
+        ) => {
+          if (!context) return null;
+          data.state = strings.browsing;
+          data.details = "";
+          return data;
+        }
+      }
+    ],
+    presence = new Presence({
+      clientId: "818598086984728576"
+    });
+
+  (function (app: Presence) {
+    app.on("UpdateData", async () => {
+      const presenceData: PresenceData = {
+        largeImageKey: "logo",
+        largeImageText: "Coub"
+      } as PresenceData;
+      if (document.location.hostname == "coub.com") {
+        const query: { [key: string]: unknown } = getQuery(),
+          strings: { [key: string]: string } = await app.getStrings({
+            play: "presence.playback.playing",
+            pause: "presence.playback.paused",
+            browsing: "presence.activity.browsing",
+            searching: "presence.activity.searching",
+            watching: "presence.playback.playing"
+          }),
+          context = pages.find((x) => x.middleware(window, [query]));
+        if (!context) return false;
+
+        const result = Promise.resolve(
+          context.exec(app, presenceData, {
+            strings,
+            query,
+            showWatch: await app
+              .getSetting("show_button_watching")
+              .then((x) => !!x)
+              .catch(() => true),
+            showBridge: await app
+              .getSetting("show_coubbridge")
+              .then((x) => !!x)
+              .catch(() => false)
+          })
+        );
+        return result.then((data) => {
+          console.log("premid:coub", data);
+          if (!data) {
+            presence.setTrayTitle();
+            presence.setActivity({
+              largeImageKey: "logo",
+              state: strings.browsing
+            });
+          } else {
+            if (data.details) presence.setActivity(data);
+            if (data.buttons && data.buttons.length === 0) delete data.buttons;
+          }
+          return data;
+        });
+      }
+    });
+  })(presence);
+})();
