@@ -24,10 +24,9 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-
 presence.on("UpdateData", async () => {
-    const path: string = document.location.pathname;
-    const presenceData: PresenceData = {largeImageKey: "diziroll"};
+    const path: string = document.location.pathname,
+    presenceData: PresenceData = {largeImageKey: "diziroll"};
     if(path.startsWith("/arsiv")){
     presenceData.details = "Bir sayfaya bakıyor:";
     presenceData.state = "Arşiv";
