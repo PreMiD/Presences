@@ -16,7 +16,7 @@ matrixPresence.on("UpdateData", async () => {
     matrixPData.smallImageKey = "browsing";
     matrixPData.smallImageText = "Browsing Bots";
   }
-  if (matrixPage.includes("/bots")) {
+  else if (matrixPage.includes("/bots")) {
     const bot: string = document.evaluate("/html/body/div[4]/h2/text()", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent;
     matrixPData.buttons = [
       {
@@ -29,12 +29,12 @@ matrixPresence.on("UpdateData", async () => {
     matrixPData.smallImageText = "Browsing Bot";
     matrixPData.smallImageKey = "browsing";
   }
-  if (matrixPage == "/me") {
+  else if (matrixPage == "/me") {
     const username: string = document.getElementsByTagName("h1")[0].innerHTML;
     matrixPData.details = "Watching Profile:";
     matrixPData.state = username;
   }
-  if (matrixPage == "/add") {
+  else if (matrixPage == "/add") {
     matrixPData.details = "Adding Bot";
     matrixPData.smallImageKey = "writing";
     matrixPData.smallImageText = "Writing Text";
