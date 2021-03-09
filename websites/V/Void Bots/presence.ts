@@ -68,7 +68,6 @@ presence.on("UpdateData", async () => {
     }
   } else {
     presenceData.details = strings.privacyVisit;
-    if (showButtons === true) presenceData.buttons = [ {label: 'Website', url: 'https://voidbots.net/'} ]
   }
 
   if (presenceData.details == null) {
