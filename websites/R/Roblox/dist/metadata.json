@@ -1,27 +1,34 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Roblox",
   "author": {
     "name": "TheDrop.",
     "id": "293828021134295040"
   },
-  "service": "Roblox",
-  "description": {
-    "en": "Roblox’s mission is to bring the world together through play.",
-    "ro": "Misiunea Roblox-ului este de a aduce lumea mai aproape să se joace împreună.",
-    "nl": "De missie van Roblox is om de wereld samen te brengen door te spelen.",
-    "zh_CN": "Roblox的使命是通过游戏将世界融合在一起。"
-  },
-  "url": [
-    "www.roblox.com",
-    "web.roblox.com"
-  ],
-  "version": "2.3.5",
-  "logo": "https://i.imgur.com/O8T2o2j.png",
-  "thumbnail": "https://i.imgur.com/pufi4q1.png",
+  "category": "games",
+  "logo": "https://proxy.duckduckgo.com/iu/?u=https://i.imgur.com/75dFVYB.png",
+  "thumbnail": "https://proxy.duckduckgo.com/iu/?u=https://i.imgur.com/pufi4q1.png",
+  "version": "2.4.0",
   "color": "#1b1d1e",
   "tags": [
     "game",
     "community",
     "gaming"
   ],
-  "category": "games"
+  "url": [
+    "www.roblox.com",
+    "web.roblox.com"
+  ],
+  "description": {
+    "en": "Roblox’s mission is to bring the world together through play.",
+    "ro": "Misiunea Roblox-ului este de a aduce lumea mai aproape să se joace împreună.",
+    "nl": "De missie van Roblox is om de wereld samen te brengen door te spelen.",
+    "zh_CN": "Roblox的使命是通过游戏将世界融合在一起。"
+  },
+  "contributors": [
+    {
+      "name": "YJJcoolcool",
+      "id": "300929818231308288"
+    }
+  ]
 }
