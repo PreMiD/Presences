@@ -22,7 +22,6 @@ Tailwind.on("UpdateData", async () => {
       } else {
         presenceData.details = "Browsing components";
         presenceData.smallImageKey = "search";
-        delete presenceData.state;
       }
     } else if (path === "/pricing") {
       presenceData.state = "Tailwind UI - Pricing";
@@ -39,7 +38,6 @@ Tailwind.on("UpdateData", async () => {
     } else {
       presenceData.details = "Browsing articles";
       presenceData.smallImageKey = "search";
-      delete presenceData.state;
     }
   } else if (subdomain === "play") {
     presenceData.details = "In Tailwind Play";
@@ -48,13 +46,11 @@ Tailwind.on("UpdateData", async () => {
     presenceData.state = document.querySelector("#content-wrapper div h1")?.textContent || "Unknown page";
   } else if (path === "/") {
     presenceData.details = "Viewing homepage";
-    delete presenceData.state;
   } else if (path === "/resources") {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Resources";
   } else {
     presenceData.details = "Viewing an unknown page";
-    delete presenceData.state;
   }
   Tailwind.setActivity(presenceData);
 });
