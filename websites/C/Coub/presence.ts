@@ -9,12 +9,14 @@ interface PageContext {
 interface LocalizedStrings {
   [key: string]: string;
 }
+
 interface ExecutionArguments {
   showWatch?: boolean;
   showBridge?: boolean;
   strings: LocalizedStrings;
   [key: string]: unknown;
 }
+
 function getQuery() {
   const queryString = location.search.split("?", 2),
     query =

@@ -29,13 +29,13 @@
   "settings": [
     {
       "id": "show_button_watching",
-      "title": "Show button for current playing",
+      "title": "Show current playing button",
       "icon": "fas fa-external-link-alt",
       "value": true
     },
     {
       "id": "show_coubbridge",
-      "title": "Show download implementation for CoubDL-Bridge",
+      "title": "Show CoubDL-Bridge",
       "icon": "fas fa-download",
       "value": false
     }
