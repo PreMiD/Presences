@@ -1,8 +1,4 @@
-const Tailwind = new Presence({ clientId: "818756651279450144" }),
-  staticPages: { [k: string]: string } = {
-    "/": "Home",
-    "/resources": "Resources"
-  };
+const Tailwind = new Presence({ clientId: "818756651279450144" });
 
 Tailwind.on("UpdateData", async () => {
   const
@@ -17,10 +13,10 @@ Tailwind.on("UpdateData", async () => {
     presenceData.details = "Viewing page:";
     if (path.includes("/components")) {
       if (path.includes("/components/")) {
-        let pathnames = location.pathname.split('/'),
-          category = pathnames[pathnames.length -2].replace(/\-/g, " ").replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+        const pathnames = location.pathname.split('/'),
+          category = pathnames[pathnames.length -2].replace(/-/g, " ").replace(/(^\w|\s\w)/g, m => m.toUpperCase());
 
-        presenceData.details = "Viewing component:"
+        presenceData.details = "Viewing component:";
         presenceData.state = `${category} - ${document.querySelector("main .max-w-8xl h2")?.textContent || "Unknown component"}`;
 
         Tailwind.setActivity(presenceData);
@@ -34,7 +30,7 @@ Tailwind.on("UpdateData", async () => {
     } else if (path === "/pricing") {
       presenceData.state = "Tailwind UI - Pricing";
     } else if (path === "/login") {
-      presenceData.state = "Tailwind UI - Login"
+      presenceData.state = "Tailwind UI - Login";
     } else if (path === "/") {
       presenceData.state = "Tailwind UI - Home";
     }
@@ -54,7 +50,7 @@ Tailwind.on("UpdateData", async () => {
       Tailwind.setActivity(presenceData);
     }
   } else if (subdomain === "play") {
-    presenceData.details = "In Tailwind Play"
+    presenceData.details = "In Tailwind Play";
 
     Tailwind.setActivity(presenceData);
   } else if (path.includes("/docs")) {
@@ -68,7 +64,7 @@ Tailwind.on("UpdateData", async () => {
 
     Tailwind.setActivity(presenceData);
   } else if (path === "/resources") {
-    presenceData.details = "Viewing a page:"
+    presenceData.details = "Viewing a page:";
     presenceData.state = "Resources";
 
     Tailwind.setActivity(presenceData);
