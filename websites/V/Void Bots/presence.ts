@@ -29,18 +29,12 @@ presence.on("UpdateData", async () => {
     showTimestamp: boolean = await presence.getSetting("showTimestamp"),
     showButtons: boolean = await presence.getSetting("buttons"),
     newLang: string = await presence.getSetting("lang");
-  if (!oldLang) { 
+  if (!oldLang || oldLang !== newLang) { 
     oldLang = newLang;
     strings = await translateStrings({
-      details: getMeta('details'),
-      state: getMeta('state'),
-      smallImgText: getMeta('smallImageText'),
-      button1: getMeta('button_1_Label'),
-      button2: getMeta('button_2_Label')
-    })
-  } else if (oldLang !== newLang) {
-    oldLang = newLang;
-    strings = await translateStrings({
+      docsViewer1: 'general.viewing',
+      docsViewer2: 'premid.docs',
+      privacyVisit: 'general.browsing',
       details: getMeta('details'),
       state: getMeta('state'),
       smallImgText: getMeta('smallImageText'),
@@ -67,12 +61,14 @@ presence.on("UpdateData", async () => {
         if (hasMeta('button_2_Label') && hasMeta('button_2_Url')) presenceData.buttons.push({label: getMeta('button_2_Label'), url: getMeta('button_2_Url') })
       }
     } else if (window.location.hostname === 'docs.voidbots.net') {
-      presenceData.details = "Viewing the docs";
+      presenceData.details = `${strings.docsViewer1.slice(0, -1)} ${strings.docsViewer2.toLowerCase()}:`
+      presenceData.smallImageKey = 'img_icon_code';
+      presenceData.smallImageText = 'Confusion 100';
       presenceData.state = document.querySelector("title").textContent || "Home";
     }
   } else {
-    presenceData.details = 'Visiting';
-    if (showButtons === true) presenceData.buttons = [ {label: 'Website', url: 'https://voidbots.net/'}, {label: 'Discord', url: 'https://voidbots.net/join'} ]
+    presenceData.details = strings.privacyVisit;
+    if (showButtons === true) presenceData.buttons = [ {label: 'Website', url: 'https://voidbots.net/'} ]
   }
 
   if (presenceData.details == null) {
