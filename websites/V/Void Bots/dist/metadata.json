@@ -49,12 +49,6 @@
       "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
-    },
-    {
-      "id": "debug",
-      "title": "Debug Mode",
-      "icon": "fas fa-bug",
-      "value": false
     }
   ]
 }
