@@ -19,13 +19,10 @@ Tailwind.on("UpdateData", async () => {
         presenceData.details = "Viewing component:";
         presenceData.state = `${category} - ${document.querySelector("main .max-w-8xl h2")?.textContent || "Unknown component"}`;
 
-        Tailwind.setActivity(presenceData);
       } else {
         presenceData.details = "Browsing components";
         presenceData.smallImageKey = "search";
         delete presenceData.state;
-
-        Tailwind.setActivity(presenceData);
       }
     } else if (path === "/pricing") {
       presenceData.state = "Tailwind UI - Pricing";
@@ -34,44 +31,30 @@ Tailwind.on("UpdateData", async () => {
     } else if (path === "/") {
       presenceData.state = "Tailwind UI - Home";
     }
-    Tailwind.setActivity(presenceData);
   } else if (subdomain === "blog") {
     if (path !== "/") {
       presenceData.details = "Reading an article:";
       presenceData.state = document.querySelector("article header div div h1")?.textContent || "Unknown article";
       presenceData.smallImageKey = "reading";
-
-      Tailwind.setActivity(presenceData);
     } else {
       presenceData.details = "Browsing articles";
       presenceData.smallImageKey = "search";
       delete presenceData.state;
-
-      Tailwind.setActivity(presenceData);
     }
   } else if (subdomain === "play") {
     presenceData.details = "In Tailwind Play";
-
-    Tailwind.setActivity(presenceData);
   } else if (path.includes("/docs")) {
     presenceData.details = "Viewing documentation";
     presenceData.state = document.querySelector("#content-wrapper div h1")?.textContent || "Unknown page";
-
-    Tailwind.setActivity(presenceData);
   } else if (path === "/") {
     presenceData.details = "Viewing homepage";
     delete presenceData.state;
-
-    Tailwind.setActivity(presenceData);
   } else if (path === "/resources") {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Resources";
-
-    Tailwind.setActivity(presenceData);
   } else {
     presenceData.details = "Viewing an unknown page";
     delete presenceData.state;
-
-    Tailwind.setActivity(presenceData);
   }
+  Tailwind.setActivity(presenceData);
 });
