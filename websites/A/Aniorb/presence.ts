@@ -71,9 +71,11 @@ else if (
     : (await strings).play;
   presenceData.startTimestamp = timestamps[0];
   presenceData.endTimestamp = timestamps[1];
-  (!video.paused) presence.setTrayTitle(seriesTitle);
-  presenceData.details = seriesTitle;
-  presenceData.state = episode;
+  if (!video.paused) {
+    presence.setTrayTitle(seriesTitle);
+    presenceData.details = seriesTitle;
+    presenceData.state = episode;
+  }
   if (video.paused) {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
