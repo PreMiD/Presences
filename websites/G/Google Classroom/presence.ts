@@ -15,7 +15,7 @@ async function getStrings() {
       class: "google classroom.class",
       classworkPrivate: "google classroom.classworkPrivate",
       classwork: "google classroom.classwork",
-      classmembersPrivate: "google classroom.classmembers",
+      classmembersPrivate: "google classroom.classmembersPrivate",
       classmembers: "google classroom.classmembers",
       settings: "google classroom.settings"
     },
