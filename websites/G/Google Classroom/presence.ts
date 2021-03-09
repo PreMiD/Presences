@@ -7,13 +7,13 @@ const browsingStamp = Math.floor(Date.now() / 1000);
 async function getStrings() {
   return presence.getStrings(
     {
-      home: "google classroom.home",
+      home: "general.viewHome",
       calendar: "google classroom.calendar",
       todo: "google classroom.todo",
-      assignmentPrivate: "google classroom.assignment",
+      assignmentPrivate: "google classroom.assignmentPrivate",
       assignment: "google classroom.assignment",
       class: "google classroom.class",
-      classworkPrivate: "google classroom.classwork",
+      classworkPrivate: "google classroom.classworkPrivate",
       classwork: "google classroom.classwork",
       classmembersPrivate: "google classroom.classmembers",
       classmembers: "google classroom.classmembers",
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
     path.splice(0, 2);
   }
   if (path[0] === "h") {
-    presenceData.details = (await strings).homepage;
+    presenceData.details = (await strings).home;
   } else if (path[0] === "calendar") {
     presenceData.details = (await strings).calendar;
   } else if (path[0] === "a") {
