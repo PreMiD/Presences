@@ -9,21 +9,6 @@ presence.on(
     (stream = data)
 );
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
     const path: string = document.location.pathname,
     presenceData: PresenceData = {largeImageKey: "diziroll"};
@@ -62,7 +47,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "pause";
             presenceData.smallImageText = "Durduruldu";
           } else {
-            const timestamps = getTimestamps(
+            const timestamps = presence.getTimestamps(
               Math.floor(stream?.currentTime),
               Math.floor(stream?.duration)
             );
