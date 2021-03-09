@@ -2,7 +2,9 @@ const presence = new Presence({
   clientId: "765261270814949417"
 });
 
-let oldLang: string = null
+const browsingStamp = Math.floor(Date.now() / 1000);
+let oldLang: string = null,
+  strings: any = {}
 
 function getMeta(metaName: string): string {
   metaName = "PreMiD_"+metaName;
@@ -26,61 +28,53 @@ presence.on("UpdateData", async () => {
   const incognito: boolean = await presence.getSetting("incognito"),
     showTimestamp: boolean = await presence.getSetting("showTimestamp"),
     showButtons: boolean = await presence.getSetting("buttons"),
-    debugMode: boolean = await presence.getSetting('debug'),
     newLang: string = await presence.getSetting("lang");
-  if (!oldLang) { oldLang = newLang; } else if (oldLang !== newLang) { oldLang = newLang; }
+  if (!oldLang) { 
+    oldLang = newLang;
+    strings = await translateStrings({
+      details: getMeta('details'),
+      state: getMeta('state'),
+      smallImgText: getMeta('smallImageText'),
+      button1: getMeta('button_1_Label'),
+      button2: getMeta('button_2_Label')
+    })
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = await translateStrings({
+      details: getMeta('details'),
+      state: getMeta('state'),
+      smallImgText: getMeta('smallImageText'),
+      button1: getMeta('button_1_Label'),
+      button2: getMeta('button_2_Label')
+    })
+  }
 
   const presenceData: PresenceData = {
     largeImageKey: "img_logo"
   };
 
-  if (showTimestamp == true) {
-    const browsingStamp = Math.floor(Date.now() / 1000);
-    presenceData.startTimestamp = browsingStamp;
-  } else {
-    delete presenceData.startTimestamp;
-    delete presenceData.endTimestamp;
-  }
+  if (showTimestamp == true) presenceData.startTimestamp = browsingStamp;
 
-  let presenceButtons: { label: string; url: string }[] = [];
-  if (incognito == false) {
-    if (['voidbots.net', 'beta.voidbots.net'].includes(window.location.hostname)) {
-      let strings = await translateStrings({
-        details: getMeta('details'),
-        state: getMeta('state'),
-        smallImageText: getMeta('smallImageText')//,
-        // button1label: getMeta('button_1_label'),
-        // button2label: getMeta('button_2_label')
-      })
+  if(incognito === false) {
+    if(['voidbots.net', 'beta.voidbots.net'].includes(window.location.hostname)) {
       if (hasMeta('details')) presenceData.details = strings.details || getMeta('details');
       if (hasMeta('state')) presenceData.state = strings.state || getMeta('state');
       if (hasMeta('smallImageKey')) presenceData.smallImageKey = getMeta('smallImageKey');
-      if (hasMeta('smallImageText')) presenceData.smallImageText = strings.smallImageText || getMeta('smallImageText');
-      // if (hasMeta('button_1_label') && hasMeta('button_1_url')) presenceButtons.push({label: strings.button1label || getMeta('button_1_label'), url: getMeta('button_1_url') })
-      // if (hasMeta('button_2_label') && hasMeta('button_2_url')) presenceButtons.push({label: strings.button2label || getMeta('button_2_label'), url: getMeta('button_1_url') })
-    } else if (window.location.hostname == 'docs.voidbots.net') {
+      if (hasMeta('smallImageText')) presenceData.smallImageText = strings.smallImgText || getMeta('smallImageText');
+      if (showButtons === true) {
+        if ((hasMeta('button_1_Label') && hasMeta('button_1_Url')) || (hasMeta('button_2_Label') && hasMeta('button_2_Url'))) presenceData.buttons = [];
+        if (hasMeta('button_1_Label') && hasMeta('button_1_Url')) presenceData.buttons.push({label: getMeta('button_1_Label'), url: getMeta('button_1_Url') })
+        if (hasMeta('button_2_Label') && hasMeta('button_2_Url')) presenceData.buttons.push({label: getMeta('button_2_Label'), url: getMeta('button_2_Url') })
+      }
+    } else if (window.location.hostname === 'docs.voidbots.net') {
       presenceData.details = "Viewing the docs";
       presenceData.state = document.querySelector("title").textContent || "Home";
     }
   } else {
     presenceData.details = 'Visiting';
-    presenceButtons = [ { label: 'Website', url: 'https://voidbots.net/'}, { label: 'Discord', url: 'https://voidbots.net/join'} ]
+    if (showButtons === true) presenceData.buttons = [ {label: 'Website', url: 'https://voidbots.net/'}, {label: 'Discord', url: 'https://voidbots.net/join'} ]
   }
 
-  if (showButtons == true) presenceData.buttons = presenceButtons;
-
-  if (debugMode) {
-    console.log('------------------')
-    console.log(`Details (${hasMeta('details')}): ${getMeta('details')}`)
-    console.log(`State (${hasMeta('state')}): ${getMeta('state')}`)
-    console.log(`smallImageKey (${hasMeta('smallImageKey')}): ${getMeta('smallImageKey')}`)
-    console.log(`smallImageText (${hasMeta('smallImageText')}): ${getMeta('smallImageText')}`)
-    console.log(`button_1_label (${hasMeta('button_1_label')}): ${getMeta('button_1_label')}`)
-    console.log(`button_2_label (${hasMeta('button_2_label')}): ${getMeta('button_2_label')}`)
-    console.log(`Buttons Array:`, presenceButtons)
-    console.log('Presence Data: ', presenceData)
-    console.log(`Set Presence? ${presenceData.details == null ? 'false' : 'true'}`)
-  }
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
