@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "765261270814949417" }), 
   browsingStamp = Math.floor(Date.now() / 1000);
 let oldLang: string = null,
-  strings: any = {}
+  strings: LangStrings
 
 function getMeta(metaName: string): string {
   metaName = "PreMiD_"+metaName;
@@ -17,10 +17,6 @@ function hasMeta(metaName: string): boolean {
   return false;
 }
 
-async function translateStrings(strings: any) {
-  return await presence.getStrings(strings, oldLang);
-}
-
 presence.on("UpdateData", async () => {
   const incognito: boolean = await presence.getSetting("incognito"),
     showTimestamp: boolean = await presence.getSetting("showTimestamp"),
@@ -28,7 +24,7 @@ presence.on("UpdateData", async () => {
     newLang: string = await presence.getSetting("lang");
   if (!oldLang || oldLang !== newLang) { 
     oldLang = newLang;
-    strings = await translateStrings({
+    strings = await presence.getStrings({
       docsViewer1: 'general.viewing',
       docsViewer2: 'premid.docs',
       privacyVisit: 'general.browsing',
@@ -37,7 +33,7 @@ presence.on("UpdateData", async () => {
       smallImageText: getMeta('smallImageText'),
       button1: getMeta('button_1_Label'),
       button2: getMeta('button_2_Label')
-    });
+    }, oldLang);
   }
 
   const presenceData: PresenceData = {
@@ -74,3 +70,14 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
   }
 });
+
+interface LangStrings {
+  docsViewer1: string;
+  docsViewer2: string;
+  privacyVisit: string;
+  details: string;
+  state: string;
+  smallImageText: string;
+  button1: string;
+  button2: string;
+}
