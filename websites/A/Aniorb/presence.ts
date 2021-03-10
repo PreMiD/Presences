@@ -55,54 +55,55 @@ if (document.location.pathname.includes("/genre")) {
     .querySelector(
       "#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span"
     )
-    .textContent.toUpperCase() !== null
-) {
-  presenceData.details = "Watching:";
-  presenceData.state = document
-    .querySelector(
-      "#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span"
-    )
-    .textContent.toUpperCase();
-  presenceData.smallImageKey = "watching";
-} else if (
-  document
-    .querySelector(
-      "#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span"
-    )
     .textContent.toUpperCase() !== null &&
   document.querySelector("video") !== null &&
   video.video
 )
-  if (video !== null && !isNaN(video.duration)) {
-    const series = document.querySelector(
+  if (
+    document
+      .querySelector(
         "#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span"
-      ),
-      seriesTitle = series.textContent.toUpperCase(),
-      episode = document.querySelector(
-        "#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.flex.w-full.justify-between.items-end > span"
-      ).textContent,
-      timestamps = presence.getTimestampsfromMedia(video);
-    presenceData.smallImageKey = video.paused ? "pause" : "play";
-    presenceData.smallImageText = video.paused
-      ? (await strings).pause
-      : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
-    if (!video.paused) presence.setTrayTitle(seriesTitle);
-    presenceData.details = seriesTitle;
-    presenceData.state = episode;
-    if (video.paused) {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
-    }
-    presenceData.buttons = [
-      {
-        label: "Watch Episode",
-        url: document.baseURI
-      }
-    ];
-    presence.setActivity(presenceData, !video.paused);
+      )
+      .textContent.toUpperCase() !== null
+  ) {
+    presenceData.details = "Watching:";
+    presenceData.state = document
+      .querySelector(
+        "#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span"
+      )
+      .textContent.toUpperCase();
+    presenceData.smallImageKey = "watching";
   }
+if (video !== null && !isNaN(video.duration)) {
+  const series = document.querySelector(
+      "#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.w-full.py-4.uppercase.flex.flex-col.items-start.lg\\:items-start > span"
+    ),
+    seriesTitle = series.textContent.toUpperCase(),
+    episode = document.querySelector(
+      "#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div > div.flex.flex-col.pb-2.xl\\:w-player.justify-between.items-center.w-full.text-white.my-4 > div.flex.w-full.justify-between.items-end > span"
+    ).textContent,
+    timestamps = presence.getTimestampsfromMedia(video);
+  presenceData.smallImageKey = video.paused ? "pause" : "play";
+  presenceData.smallImageText = video.paused
+    ? (await strings).pause
+    : (await strings).play;
+  presenceData.startTimestamp = timestamps[0];
+  presenceData.endTimestamp = timestamps[1];
+  if (!video.paused) presence.setTrayTitle(seriesTitle);
+  presenceData.details = seriesTitle;
+  presenceData.state = episode;
+  if (video.paused) {
+    delete presenceData.startTimestamp;
+    delete presenceData.endTimestamp;
+  }
+  presenceData.buttons = [
+    {
+      label: "Watch Episode",
+      url: document.baseURI
+    }
+  ];
+  presence.setActivity(presenceData, !video.paused);
+}
 if (presenceData.details == null) {
   presenceData.details = (await strings).browsing;
   presenceData.smallImageKey = "reading";
