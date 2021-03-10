@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
         if (new URL(document.location.href).searchParams.get('icon.query') === null) {
             if (document.getElementsByClassName("mdc-chip--selected")[0]) {
                 const iconsFilter = document.getElementsByClassName("mdc-chip--selected")[0].textContent.toLowerCase();
-                presenceData.details = "Browsing Material icons" // The icons are named "Material icons" like this on the Fonts website
+                presenceData.details = "Browsing Material icons"; // The icons are named "Material icons" like this on the Fonts website
                 presenceData.state = `Looking at the ${iconsFilter} icons`;
             } else {
                 presenceData.details = "Browsing Material icons";
