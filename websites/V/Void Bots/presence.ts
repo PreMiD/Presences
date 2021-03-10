@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "765261270814949417" }), 
   browsingStamp = Math.floor(Date.now() / 1000);
 let oldLang: string = null,
-  strings: LangStrings
+  strings: LangStrings;
 
 function getMeta(metaName: string): string {
   metaName = "PreMiD_"+metaName;
