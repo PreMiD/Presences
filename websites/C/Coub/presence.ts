@@ -60,7 +60,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         exec: (
           context,
           data,
-          { showWatch, showBridge, strings }: ExecutionArguments
+          { showWatch, strings }: ExecutionArguments
         ) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
@@ -139,7 +139,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         exec: (
           context,
           data,
-          { showWatch, showBridge, strings }: ExecutionArguments
+          { showWatch, strings }: ExecutionArguments
         ) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
@@ -196,7 +196,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         exec: (
           context,
           data,
-          { strings, showBridge, showWatch }: ExecutionArguments
+          { strings, showWatch }: ExecutionArguments
         ) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
@@ -235,7 +235,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         exec: (
           context,
           data,
-          { showWatch, showBridge, strings }: ExecutionArguments
+          { showWatch, strings }: ExecutionArguments
         ) => {
           if (!context) return null;
           const communityParent = document.querySelector(
