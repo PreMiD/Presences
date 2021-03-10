@@ -6,19 +6,19 @@ let oldLang: string = null,
 function getMeta(metaName: string): string {
   metaName = "PreMiD_"+metaName;
   const metas = document.getElementsByTagName('meta');
-  for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === metaName) { return metas[i].getAttribute('content'); } }
+  for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === metaName) { return metas[i].getAttribute('content') } }
   return '';
 }
 
 function hasMeta(metaName: string): boolean {
   metaName = "PreMiD_"+metaName;
   const metas = document.getElementsByTagName('meta');
-  for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === metaName) { return true; } }
+  for (let i = 0; i < metas.length; i++) { if (metas[i].getAttribute('name') === metaName) { return true } }
   return false;
 }
 
 async function translateStrings(strings: any) {
-  return await presence.getStrings(strings, oldLang)
+  return await presence.getStrings(strings, oldLang);
 }
 
 presence.on("UpdateData", async () => {
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       smallImageText: getMeta('smallImageText'),
       button1: getMeta('button_1_Label'),
       button2: getMeta('button_2_Label')
-    })
+    });
   }
 
   const presenceData: PresenceData = {
@@ -54,11 +54,11 @@ presence.on("UpdateData", async () => {
       if (hasMeta('smallImageText')) presenceData.smallImageText = strings.smallImageText || getMeta('smallImageText');
       if (showButtons === true) {
         if ((hasMeta('button_1_Label') && hasMeta('button_1_Url')) || (hasMeta('button_2_Label') && hasMeta('button_2_Url'))) presenceData.buttons = [];
-        if (hasMeta('button_1_Label') && hasMeta('button_1_Url')) presenceData.buttons.push({label: getMeta('button_1_Label'), url: getMeta('button_1_Url') })
-        if (hasMeta('button_2_Label') && hasMeta('button_2_Url')) presenceData.buttons.push({label: getMeta('button_2_Label'), url: getMeta('button_2_Url') })
+        if (hasMeta('button_1_Label') && hasMeta('button_1_Url')) presenceData.buttons.push({label: getMeta('button_1_Label'), url: getMeta('button_1_Url') });
+        if (hasMeta('button_2_Label') && hasMeta('button_2_Url')) presenceData.buttons.push({label: getMeta('button_2_Label'), url: getMeta('button_2_Url') });
       }
     } else if (window.location.hostname === 'docs.voidbots.net') {
-      presenceData.details = `${strings.docsViewer1.slice(0, -1)} ${strings.docsViewer2.toLowerCase()}:`
+      presenceData.details = `${strings.docsViewer1.slice(0, -1)} ${strings.docsViewer2.toLowerCase()}:`;
       presenceData.smallImageKey = 'img_icon_code';
       presenceData.smallImageText = 'Confusion 100';
       presenceData.state = document.querySelector("title").textContent || "Home";
