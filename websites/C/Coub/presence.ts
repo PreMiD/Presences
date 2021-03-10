@@ -57,11 +57,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           !!ref.location.pathname.match(
             /^\/(hot|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs)/gi
           ) || ref.location.pathname === "/",
-        exec: (
-          context,
-          data,
-          { showWatch, strings }: ExecutionArguments
-        ) => {
+        exec: (context, data, { showWatch, strings }: ExecutionArguments) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
             ".coub[coub-block].active"
@@ -136,11 +132,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       {
         middleware: (ref) =>
           !!ref.document.querySelector(".hero-cover[channel-id]"),
-        exec: (
-          context,
-          data,
-          { showWatch, strings }: ExecutionArguments
-        ) => {
+        exec: (context, data, { showWatch, strings }: ExecutionArguments) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
             ".coub[coub-block].active"
@@ -193,11 +185,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       },
       {
         middleware: (ref) => !!ref.location.pathname.match(/^\/view\/(.*)/gi),
-        exec: (
-          context,
-          data,
-          { strings, showWatch }: ExecutionArguments
-        ) => {
+        exec: (context, data, { strings, showWatch }: ExecutionArguments) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
             ".coub[coub-block]"
@@ -232,11 +220,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       },
       {
         middleware: (ref) => !!ref.location.pathname.match(/^\/(community)/gi),
-        exec: (
-          context,
-          data,
-          { showWatch, strings }: ExecutionArguments
-        ) => {
+        exec: (context, data, { showWatch, strings }: ExecutionArguments) => {
           if (!context) return null;
           const communityParent = document.querySelector(
             ".hot__community[data-community-id]"
@@ -297,47 +281,53 @@ function getSourceLink(url: string): { label: string; url: string }[] {
     });
 
   (function (app: Presence) {
+    let currentLang: string, localizedStrings: { [key: string]: string };
     app.on("UpdateData", async () => {
-      const presenceData: PresenceData = {
-        largeImageKey: "logo",
-        largeImageText: "Coub"
-      } as PresenceData;
-      if (document.location.hostname == "coub.com") {
-        const query: { [key: string]: unknown } = getQuery(),
-          strings: { [key: string]: string } = await app.getStrings({
+      const newLang = await app.getSetting("lang");
+      if (newLang !== currentLang) {
+        currentLang = newLang;
+        localizedStrings = await app.getStrings(
+          {
             browsing: "presence.activity.browsing",
             watching: "presence.playback.playing",
             watchVideo: "general.buttonWatchVideo",
-            viewProfil: "general.buttonViewProfile"
-          }),
-          context = pages.find((x) => x.middleware(window, [query]));
-        if (!context) return false;
-
-        const result = Promise.resolve(
-          context.exec(app, presenceData, {
-            strings,
-            query,
-            showWatch: await app
-              .getSetting("show_button_watching")
-              .then((x) => !!x)
-              .catch(() => true)
-          })
+            viewProfile: "general.buttonViewProfile"
+          },
+          newLang
         );
-        return result.then((data) => {
-          if (!data) {
-            presence.setTrayTitle();
-            presence.setActivity({
-              largeImageKey: "logo",
-              state: strings.browsing
-            });
-          } else {
-            if (data.details) presence.setActivity(data);
-            if (data.buttons && data.buttons.length === 0) delete data.buttons;
-            else data.buttons = data.buttons?.slice(0, 2);
-          }
-          return data;
-        });
       }
+      const presenceData: PresenceData = {
+          largeImageKey: "logo",
+          largeImageText: "Coub"
+        } as PresenceData,
+        query: { [key: string]: unknown } = getQuery(),
+        context = pages.find((x) => x.middleware(window, [query]));
+      if (!context) return false;
+
+      const result = Promise.resolve(
+        context.exec(app, presenceData, {
+          strings: localizedStrings,
+          query,
+          showWatch: await app
+            .getSetting("show_button_watching")
+            .then((x) => !!x)
+            .catch(() => true)
+        })
+      );
+      return result.then((data) => {
+        if (!data) {
+          presence.setTrayTitle();
+          presence.setActivity({
+            largeImageKey: "logo",
+            state: localizedStrings.browsing
+          });
+        } else {
+          if (data.details) presence.setActivity(data);
+          if (data.buttons && data.buttons.length === 0) delete data.buttons;
+          else data.buttons = data.buttons?.slice(0, 2);
+        }
+        return data;
+      });
     });
   })(presence);
 })();
