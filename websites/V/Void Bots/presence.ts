@@ -48,6 +48,7 @@ presence.on("UpdateData", async () => {
       if (hasMeta('state')) presenceData.state = strings.state || getMeta('state');
       if (hasMeta('smallImageKey')) presenceData.smallImageKey = getMeta('smallImageKey');
       if (hasMeta('smallImageText')) presenceData.smallImageText = strings.smallImageText || getMeta('smallImageText');
+      if (hasMeta('largeImageKey')) presenceData.largeImageKey = getMeta('largeImageKey');
       if (showButtons === true) {
         if ((hasMeta('button_1_Label') && hasMeta('button_1_Url')) || (hasMeta('button_2_Label') && hasMeta('button_2_Url'))) presenceData.buttons = [];
         if (hasMeta('button_1_Label') && hasMeta('button_1_Url')) presenceData.buttons.push({label: getMeta('button_1_Label'), url: getMeta('button_1_Url') });
