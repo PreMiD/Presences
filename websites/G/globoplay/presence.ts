@@ -297,7 +297,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/2255000/")) {
         presenceData.details = "Big Brother Brasil";
-        presenceData.state = "Acompanhe a Casa Extra";
+        presenceData.state = "Quarto Secreto";
         presenceData.smallImageKey = "live";
         presenceData.largeImageKey = "bbb";
         presenceData.startTimestamp = browsingStamp;
