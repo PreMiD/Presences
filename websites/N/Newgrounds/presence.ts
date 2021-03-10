@@ -28,15 +28,26 @@ presence.on("UpdateData", async () => {
     },
     itemName = document.querySelector('[itemprop="name"]')
       ? document.querySelector('[itemprop="name"]').textContent
-      : null;
+      : null,
+    buttons = await presence.getSetting("buttons");
 
   if (location.hostname !== "www.newgrounds.com") {
     const userName = document.querySelector(".user-link").textContent;
     presenceData.details = "Viewing a user's profile";
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "User Profile";
-    if (await presence.getSetting("showprofilename"))
+
+    if (await presence.getSetting("showprofilename")) {
       presenceData.state = userName.length < 2 ? "User: " + userName : userName;
+      if (buttons)
+        presenceData.buttons = [
+          {
+            label: "View Profile",
+            url: location.origin
+          }
+        ];
+    }
+
     if (document.location.pathname.startsWith("/fans")) {
       presenceData.details = "Viewing a user's fans";
     } else if (document.location.pathname.startsWith("/news")) {
@@ -74,8 +85,16 @@ presence.on("UpdateData", async () => {
           .querySelector(".item-details-main")
           .textContent.trim();
         presenceData.details = "Listening to audio";
-        if (await presence.getSetting("itemname"))
+        if (await presence.getSetting("itemname")) {
           presenceData.state = itemName + " by " + artist;
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "Listen",
+                url: document.URL
+              }
+            ];
+        }
         presenceData.smallImageKey = "audio_pause";
         presenceData.smallImageText = "Audio - Paused";
         if (
@@ -99,9 +118,17 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Art";
       if (document.location.pathname.startsWith("/art/view")) {
         presenceData.details = "Viewing art";
-        if (await presence.getSetting("itemname"))
+        if (await presence.getSetting("itemname")) {
           presenceData.state =
             itemName.length < 2 ? "Art: " + itemName : itemName;
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "View",
+                url: document.URL
+              }
+            ];
+        }
       }
     } else if (document.location.pathname.startsWith("/portal")) {
       presenceData.details = "Viewing the portal";
@@ -110,9 +137,17 @@ presence.on("UpdateData", async () => {
         switch (metaType.getAttribute("content")) {
           case "movie":
             presenceData.details = "Watching a movie";
-            if (await presence.getSetting("itemname"))
+            if (await presence.getSetting("itemname")) {
               presenceData.state =
                 itemName.length < 2 ? "Movie: " + itemName : itemName;
+              if (buttons)
+                presenceData.buttons = [
+                  {
+                    label: "Watch",
+                    url: document.URL
+                  }
+                ];
+            }
             // Some movies might not have the NG player
             if (document.querySelector(".ng-video-player")) {
               presenceData.smallImageKey = "movies_pause";
@@ -146,9 +181,17 @@ presence.on("UpdateData", async () => {
               lastGameChange = Date.now();
             }
             presenceData.details = "Playing a game";
-            if (await presence.getSetting("itemname"))
+            if (await presence.getSetting("itemname")) {
               presenceData.state =
                 itemName.length < 2 ? "Game: " + itemName : itemName;
+              if (buttons)
+                presenceData.buttons = [
+                  {
+                    label: "Play",
+                    url: document.URL
+                  }
+                ];
+            }
             presenceData.smallImageKey = "games_play";
             presenceData.smallImageText = "Games - Playing";
             if (await presence.getSetting("timestamp"))
@@ -173,9 +216,17 @@ presence.on("UpdateData", async () => {
       } else if (document.location.pathname.startsWith("/bbs/topic/")) {
         const itemName = document.querySelector(".pod-head h2").textContent;
         presenceData.details = "Viewing a forum topic";
-        if (await presence.getSetting("topicname"))
+        if (await presence.getSetting("topicname")) {
           presenceData.state =
             itemName.length < 2 ? "Topic: " + itemName : itemName;
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "View Topic",
+                url: document.URL
+              }
+            ];
+        }
       }
     } else if (document.location.pathname.startsWith("/community")) {
       presenceData.details = "Browsing the community";
@@ -185,9 +236,17 @@ presence.on("UpdateData", async () => {
         const itemName = document.querySelector(".column.wide .pod-head h2")
           .textContent;
         presenceData.details = "Viewing a collection";
-        if (await presence.getSetting("itemname"))
+        if (await presence.getSetting("itemname")) {
           presenceData.state =
             itemName.length < 2 ? "Collection: " + itemName : itemName;
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "View Collection",
+                url: document.URL
+              }
+            ];
+        }
       }
     } else if (document.location.pathname.startsWith("/social")) {
       presenceData.details = "Browsing their feed";
@@ -203,9 +262,17 @@ presence.on("UpdateData", async () => {
         const itemName = document.querySelector(".column.wide .pod-head h2")
           .textContent;
         presenceData.details = "Viewing a playlist";
-        if (await presence.getSetting("itemname"))
+        if (await presence.getSetting("itemname")) {
           presenceData.state =
             itemName.length < 2 ? "Playlist: " + itemName : itemName;
+          if (buttons)
+            presenceData.buttons = [
+              {
+                label: "View Playlist",
+                url: document.URL
+              }
+            ];
+        }
       }
     } else if (document.location.pathname.startsWith("/chat")) {
       presenceData.details = "in Newgrounds Chat";

@@ -1,161 +1,195 @@
-var presence = new Presence({
-  clientId: "702668334990098523"
-});
-var strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused",
-  browse: "presence.activity.browsing",
-  search: "presence.activity.searching"
-});
+const presence = new Presence({
+    clientId: "702668334990098523"
+  }),
+  strings = presence.getStrings({
+    play: "presence.playback.playing",
+    pause: "presence.playback.paused",
+    browse: "presence.activity.browsing",
+    search: "presence.activity.searching"
+  }),
+  getElement = (query: string): string => {
+    const element = document.querySelector(query);
+    if (element) {
+      return element.textContent.replace(/^\s+|\s+$/g, "");
+    } else return "Loading...";
+  },
+  videoStatus = (video: HTMLVideoElement): string => {
+    return video.paused ? "pause" : "play";
+  };
 
-const getElement = (query: string): string => {
-  const element = document.querySelector(query);
-  if (element) {
-    return element.textContent.replace(/^\s+|\s+$/g, "");
-  } else return "Loading...";
-};
-
-const videoStatus = (video: HTMLVideoElement): string => {
-  return video.paused ? "pause" : "play";
-};
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-var oldUrl,
-  elapsed,
+let oldUrl: string,
+  elapsed: number,
   searchText = "",
   searchElapsed = 0;
 
-const statics = {
-  "/": {
-    details: "Browsing"
-  },
-  "/login/": {
-    details: "Logging In"
-  },
-  "/password/forgot/": {
-    details: "Forgot Password"
-  },
-  "/pages/kodi_plugin/": {
-    details: "Viewing",
-    state: "Kodi Plugin"
-  },
-  "/pages/contact/": {
-    details: "Viewing",
-    state: "Contact"
-  },
-  "/pages/faq/": {
-    details: "Viewing",
-    state: "FAQ"
-  },
-  "/pages/terms/": {
-    details: "Viewing",
-    state: "Terms of Service"
-  },
-  "/pages/privacy/": {
-    details: "Viewing",
-    state: "Privacy Info"
-  },
-  "/pages/cookies/": {
-    details: "Viewing",
-    state: "Cookie Info"
-  },
-  "/pages/social_terms/": {
-    details: "Viewing",
-    state: "Social Terms"
-  },
-  "/account/gifts/": {
-    details: "Redeeming",
-    state: "Gift-Code"
-  },
-  "/account/favorites/": {
-    details: "Viewing",
-    state: "Favorites"
-  },
-  "/account/playlist/wl/": {
-    details: "Viewing",
-    state: "Watch Later"
-  },
-  "/account/pin/": {
-    details: "Logging In",
-    state: "Pin"
-  },
-  "/premium/primary/": {
-    details: "Buying",
-    state: "Premium"
-  },
-  "/movies/": {
-    details: "Browsing",
-    state: "Movies"
-  },
-  "/shows/": {
-    details: "Browsing",
-    state: "TV Shows"
-  },
-  "/latest/episodes/": {
-    details: "Browsing",
-    state: "Latest Episodes"
-  },
-  "/schedule/": {
-    details: "Viewing",
-    state: "Schedule"
-  },
-  "/sets/children/": {
-    details: "Viewing Set",
-    state: "Children"
-  },
-  "/sets/comedies/": {
-    details: "Viewing Set",
-    state: "Comedies"
-  },
-  "/sets/action/": {
-    details: "Viewing Set",
-    state: "Action"
-  },
-  "/sets/dramas/": {
-    details: "Viewing Set",
-    state: "Dramas"
-  },
-  "/sets/romance/": {
-    details: "Viewing Set",
-    state: "Romance"
-  },
-  "/sets/sci-fi/": {
-    details: "Viewing Set",
-    state: "Science Fiction"
-  },
-  "/sets/horror/": {
-    details: "Viewing Set",
-    state: "Horror"
+function setObject(path: string) {
+  switch (path) {
+    case "/": {
+      return {
+        details: "Browsing"
+      };
+    }
+    case "/login/": {
+      return {
+        details: "Logging in"
+      };
+    }
+    case "/password/forgot": {
+      return {
+        details: "Forgot Password"
+      };
+    }
+    case "/pages/kodi_plugin": {
+      return {
+        details: "Viewing",
+        state: "Kodi Plugin"
+      };
+    }
+    case "/pages/contact": {
+      return {
+        details: "Viewing",
+        state: "Contact"
+      };
+    }
+    case "/pages/faq": {
+      return {
+        details: "Viewing",
+        state: "FAQ"
+      };
+    }
+    case "/pages/terms": {
+      return {
+        details: "Viewing",
+        state: "Terms of Service"
+      };
+    }
+    case "/pages/privacy": {
+      return {
+        details: "Viewing",
+        state: "Privacy Info"
+      };
+    }
+    case "/pages/cookies": {
+      return {
+        details: "Viewing",
+        state: "Cookie Info"
+      };
+    }
+    case "/pages/social_terms": {
+      return {
+        details: "Viewing",
+        state: "Social Terms"
+      };
+    }
+    case "/account/gifts": {
+      return {
+        details: "Redeeming",
+        state: "Gift-Code"
+      };
+    }
+    case "/account/favorites/": {
+      return {
+        details: "Viewing",
+        state: "Favorites"
+      };
+    }
+    case "/account/playlist/wl/": {
+      return {
+        details: "Viewing",
+        state: "Watch Later"
+      };
+    }
+    case "/account/pin": {
+      return {
+        details: "Logging In",
+        state: "Via PIN"
+      };
+    }
+    case "/premium/primary": {
+      return {
+        details: "Buying",
+        state: "Premium"
+      };
+    }
+    case "/movies/": {
+      return {
+        details: "Browsing",
+        state: "Movies"
+      };
+    }
+    case "/shows/": {
+      return {
+        details: "Browsing",
+        state: "TV Shows"
+      };
+    }
+    case "/schedule/": {
+      return {
+        details: "Viewing",
+        state: "Schedule"
+      };
+    }
+    case "/sets/children": {
+      return {
+        details: "Viewing Set",
+        state: "Children"
+      };
+    }
+    case "/sets/comedies": {
+      return {
+        details: "Viewing Set",
+        state: "Comedies"
+      };
+    }
+    case "/sets/action": {
+      return {
+        details: "Viewing Set",
+        state: "Action"
+      };
+    }
+    case "/sets/dramas": {
+      return {
+        details: "Viewing Set",
+        state: "Dramas"
+      };
+    }
+    case "/sets/romance": {
+      return {
+        details: "Viewing Set",
+        state: "Romance"
+      };
+    }
+    case "/sets/sci-fi": {
+      return {
+        details: "Viewing Set",
+        state: "Science Fiction"
+      };
+    }
+    case "/sets/horror": {
+      return {
+        details: "Viewing Set",
+        state: "Horror"
+      };
+    }
   }
-};
+}
 
 presence.on("UpdateData", async () => {
-  const path = location.pathname.replace(/\/?$/, "/");
-
-  const video: HTMLVideoElement = document.querySelector("video");
-  const search: HTMLInputElement = document.querySelector("input");
-
-  const showSearchInfo = await presence.getSetting("search");
-  const showBrowseInfo = await presence.getSetting("browse");
-  const showVideoInfo = await presence.getSetting("video");
-
-  var data: PresenceData = {
-    details: undefined,
-    state: undefined,
-    largeImageKey: "thesite",
-    smallImageKey: undefined,
-    smallImageText: undefined,
-    startTimestamp: undefined,
-    endTimestamp: undefined
-  };
+  const path = location.pathname.replace(/\/?$/, "/"),
+    video: HTMLVideoElement = document.querySelector("video"),
+    search: HTMLInputElement = document.querySelector("input"),
+    showSearchInfo = await presence.getSetting("search"),
+    showBrowseInfo = await presence.getSetting("browse"),
+    showVideoInfo = await presence.getSetting("video"),
+    data: PresenceData = {
+      details: undefined,
+      state: undefined,
+      largeImageKey: "thesite",
+      smallImageKey: undefined,
+      smallImageText: undefined,
+      startTimestamp: undefined,
+      endTimestamp: undefined
+    };
 
   if (oldUrl !== path) {
     oldUrl = path;
@@ -171,7 +205,10 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = status;
     data.smallImageText = (await strings)[status];
     if (status === "play") {
-      const timestamps = getTimestamps(video.currentTime, video.duration);
+      const timestamps = presence.getTimestamps(
+        video.currentTime,
+        video.duration
+      );
       data.startTimestamp = timestamps[0];
       data.endTimestamp = timestamps[1];
     }
@@ -202,20 +239,20 @@ presence.on("UpdateData", async () => {
       }
     }
 
-    if (path in statics) {
-      data = { ...data, ...statics[path] };
-    }
+    const detailsObj = setObject(path);
+    data.details = detailsObj.details;
+    data.state = detailsObj.state;
   }
 
   /* Video Info */
   if (showVideoInfo) {
-    const wl = path.includes("/list");
-    const wl_movie = wl && getElement(".media-body .genre");
-    const wl_show = wl && !wl_movie;
+    const wl = path.includes("/list"),
+      wl_movie = wl && getElement(".media-body .genre"),
+      wl_show = wl && !wl_movie;
 
     if (wl_movie || path.includes("/movies")) {
-      const menu: HTMLElement = document.querySelector(".mv-movie-info");
-      const title: string = getElement(".mv-movie-title > span");
+      const menu: HTMLElement = document.querySelector(".mv-movie-info"),
+        title: string = getElement(".mv-movie-title > span");
 
       if (menu) {
         if (menu.style.display === "none") {
@@ -230,20 +267,19 @@ presence.on("UpdateData", async () => {
     }
     /* Non Watch Later */
     if (path.includes("/shows")) {
-      const menu: HTMLElement = document.querySelector(".mv-movie-info");
-
-      const regex: RegExpMatchArray = getElement(
-        ".mv-movie-title > span > span > strong"
-      ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/);
-      const setting = await presence.getSetting("show-format");
-      const title: string = getElement(".mv-movie-title > span > a");
+      const menu: HTMLElement = document.querySelector(".mv-movie-info"),
+        regex: RegExpMatchArray = getElement(
+          ".mv-movie-title > span > span > strong"
+        ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/),
+        setting = await presence.getSetting("show-format"),
+        title: string = getElement(".mv-movie-title > span > a");
       if (title !== "Loading...") {
-        const season = regex.groups.season;
-        const episode = regex.groups.episode;
-        const state = setting
-          .replace("%show%", title)
-          .replace("%season%", season)
-          .replace("%episode%", episode);
+        const season = regex.groups.season,
+          episode = regex.groups.episode,
+          state = setting
+            .replace("%show%", title)
+            .replace("%season%", season)
+            .replace("%episode%", episode);
 
         if (menu) {
           if (menu.style.display === "none") {
@@ -262,20 +298,19 @@ presence.on("UpdateData", async () => {
     }
     /* Watch Later */
     if (wl_show) {
-      const menu: HTMLElement = document.querySelector(".mv-movie-info");
-
-      const regex: RegExpMatchArray = getElement(
-        ".full-title > .content > .seq > em"
-      ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/);
-      const setting = await presence.getSetting("show-format");
-      const title: string = getElement(".full-title > .content > .title");
+      const menu: HTMLElement = document.querySelector(".mv-movie-info"),
+        regex: RegExpMatchArray = getElement(
+          ".full-title > .content > .seq > em"
+        ).match(/S(?<season>\d{1,4})E(?<episode>\d{1,4})/),
+        setting = await presence.getSetting("show-format"),
+        title: string = getElement(".full-title > .content > .title");
       if (title !== "Loading...") {
-        const season = regex.groups.season;
-        const episode = regex.groups.episode;
-        const state = setting
-          .replace("%show%", title)
-          .replace("%season%", season)
-          .replace("%episode%", episode);
+        const season = regex.groups.season,
+          episode = regex.groups.episode,
+          state = setting
+            .replace("%show%", title)
+            .replace("%season%", season)
+            .replace("%episode%", episode);
 
         if (menu) {
           if (menu.style.display === "none") {

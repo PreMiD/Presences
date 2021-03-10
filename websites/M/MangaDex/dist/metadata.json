@@ -1,12 +1,16 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
   "contributors": [
     {
       "name": "Aya",
       "id": "256422547556401152"
+    },
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
     }
   ],
   "service": "MangaDex",
@@ -19,9 +23,9 @@
     "mangadex.cc",
     "www.mangadex.cc"
   ],
-  "version": "1.3.6",
-  "logo": "https://i.gyazo.com/3c8e4b08707f7b8dc2a3d1ef447e7b9d.png",
-  "thumbnail": "https://i.gyazo.com/ebb5c92c5b72a7ec50f7a3ec31eec278.png",
+  "version": "1.3.8",
+  "logo": "https://i.imgur.com/zs8myqz.png",
+  "thumbnail": "https://i.imgur.com/xiKNaUJ.png",
   "color": "#F18F1E",
   "tags": [
     "mangadex",

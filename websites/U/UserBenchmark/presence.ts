@@ -1,14 +1,13 @@
 const presence = new Presence({
-  clientId: "735229766701154357"
-});
-const strings = presence.getStrings({
-  browse: "presence.activity.browsing",
-  search: "presence.activity.searching"
-});
-
-const getElement = (query: string): string | undefined => {
-  return document.querySelector(query)?.textContent;
-};
+    clientId: "735229766701154357"
+  }),
+  strings = presence.getStrings({
+    browse: "presence.activity.browsing",
+    search: "presence.activity.searching"
+  }),
+  getElement = (query: string): string | undefined => {
+    return document.querySelector(query)?.textContent;
+  };
 
 let elapsed = Math.floor(Date.now() / 1000),
   prevUrl = document.location.href;
@@ -51,11 +50,10 @@ const statics = {
 };
 
 presence.on("UpdateData", async () => {
-  const host = location.host;
-  const path = location.pathname.replace(/\/?$/, "/");
-
-  const showSearch = await presence.getSetting("search");
-  const showTimestamps = await presence.getSetting("timestamp");
+  const host = location.host,
+    path = location.pathname.replace(/\/?$/, "/"),
+    showSearch = await presence.getSetting("search"),
+    showTimestamps = await presence.getSetting("timestamp");
 
   let data: PresenceData = {
     details: undefined,
@@ -87,14 +85,12 @@ presence.on("UpdateData", async () => {
     data.details = `Comparing ${getElement(".fastinslowout.active")}s...`;
 
     const parseComparison = (text: string, date: string): string => {
-      return date ? text : "Unspecified";
-    };
-
-    const comp1 = getElement("#select2-chosen-1");
-    const comp2 = getElement("#select2-chosen-2");
-
-    const compDate1 = getElement(".cmp-cpt-l");
-    const compDate2 = getElement(".cmp-cpt-r");
+        return date ? text : "Unspecified";
+      },
+      comp1 = getElement("#select2-chosen-1"),
+      comp2 = getElement("#select2-chosen-2"),
+      compDate1 = getElement(".cmp-cpt-l"),
+      compDate2 = getElement(".cmp-cpt-r");
 
     data.state = `${parseComparison(comp1, compDate1)} vs ${parseComparison(
       comp2,
@@ -106,17 +102,16 @@ presence.on("UpdateData", async () => {
     data.details = "Comparing PC with EFps...";
 
     const games = [
-      "Counter Strike: Global Offensive",
-      "Grand Theft Auto 5",
-      "Overwatch",
-      "PlayerUnknown's Battlegrounds",
-      "Fortnite"
-    ];
-
-    const activeBtn = document.querySelector(
-      ".btn-group-justified > .btn.btn-default.active"
-    );
-    const btnId = Array.from(activeBtn.parentNode.children).indexOf(activeBtn);
+        "Counter Strike: Global Offensive",
+        "Grand Theft Auto 5",
+        "Overwatch",
+        "PlayerUnknown's Battlegrounds",
+        "Fortnite"
+      ],
+      activeBtn = document.querySelector(
+        ".btn-group-justified > .btn.btn-default.active"
+      ),
+      btnId = Array.from(activeBtn.parentNode.children).indexOf(activeBtn);
 
     data.state = games[btnId];
   }

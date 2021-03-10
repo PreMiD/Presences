@@ -35,7 +35,7 @@
     "www.netflix.com",
     "netflix.com"
   ],
-  "version": "4.0.0",
+  "version": "4.1.0",
   "logo": "https://i.imgur.com/gvnSwSK.png",
   "thumbnail": "https://i.imgur.com/LWcRBZs.jpg",
   "color": "#db0000",
@@ -112,7 +112,7 @@
       "title": "Video Details row2",
       "icon": "fas fa-comment-alt-edit",
       "value": "%episode%",
-      "placeholder": "Use %title% or %episode%"
+      "placeholder": "Use %title% or %episode% or {0} to delete the row completely"
     },
     {
       "id": "timestamp",

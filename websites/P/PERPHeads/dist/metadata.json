@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "Jackelele",
+      "id": "377175513372033024"
+    },
+    "service": "PERPHeads",
+    "description": {
+      "en": "An awesome Garry's Mod community"
+    },
+    "url": "perpheads.com",
+    "version": "1.0.1",
+    "logo": "https://i.imgur.com/Zbr5ofa.png",
+    "thumbnail": "https://i.imgur.com/xeeFig2.png",
+    "color": "#FFA500",
+    "tags": [
+      "garrysmod",
+      "perpheads"
+    ],
+    "category": "games",
+    "regExp": "([a-z0-9-]+[.])*perpheads[.]com[/]"
+  }

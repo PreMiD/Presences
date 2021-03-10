@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "697552926876368917"
   }),
   strings = presence.getStrings({
@@ -6,52 +6,75 @@ var presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-var iFrameVideo, currentTime, duration, paused;
-var video;
-var lastPlaybackState = null;
-var playback;
-var title;
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  video: {
+    iframe_video: {
+      duration: number;
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+    };
+  },
+  playback: boolean,
+  title: HTMLTextAreaElement,
+  browsingStamp: number;
 
-presence.on("iFrameData", (data) => {
-  video = data;
-  playback = data.iframe_video.duration !== null ? true : false;
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
+presence.on(
+  "iFrameData",
+  (data: {
+    iframe_video: {
+      duration: number;
+      iFrameVideo: boolean;
+      currTime: number;
+      dur: number;
+      paused: boolean;
+    };
+  }) => {
+    video = data;
+    playback = data.iframe_video.duration !== null ? true : false;
+    if (playback) {
+      iFrameVideo = data.iframe_video.iFrameVideo;
+      currentTime = data.iframe_video.currTime;
+      duration = data.iframe_video.dur;
+      paused = data.iframe_video.paused;
+    }
   }
-});
-
-function getTimestamps(videoTime, videoDuration): any {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+);
 
 presence.on("UpdateData", async () => {
-  const info = await presence.getSetting("sSI");
-  const elapsed = await presence.getSetting("sTE");
-  const videoTime = await presence.getSetting("sVT");
+  const info = await presence.getSetting("sSI"),
+    elapsed = await presence.getSetting("sTE"),
+    videoTime = await presence.getSetting("sVT");
 
   if (elapsed) {
-    var browsingStamp = Math.floor(Date.now() / 1000);
-    console.log("Elapsed is on");
+    browsingStamp = Math.floor(Date.now() / 1000);
+    presence.info("Elapsed is on");
+  } else {
+    browsingStamp = null;
+    presence.info("Elapsed Off");
   }
-  var timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
-  var presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+  const timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ),
+    presenceData: PresenceData = {
+      largeImageKey: "logo"
+    };
   if (videoTime) {
-    console.log("IS ON");
-    if (lastPlaybackState != playback) {
-      lastPlaybackState = playback;
+    presence.info("Video Time is On");
+    if (playback == true) {
+      // lastPlaybackState = playback;
       browsingStamp = Math.floor(Date.now() / 1000);
     }
   } else {
-    lastPlaybackState = console.log("Video time is off");
+    presence.info("Video time is off");
   }
   if (info) {
+    presence.info("Info is On.");
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
@@ -74,7 +97,7 @@ presence.on("UpdateData", async () => {
         "#main_bg > div:nth-child(5) > div > div.video-info-left > h1"
       );
       if (title != null) {
-        presenceData.state = title.innerText;
+        presenceData.state = (title as HTMLTextAreaElement).innerText;
         if (
           iFrameVideo == true &&
           !isNaN(duration) &&
@@ -96,10 +119,11 @@ presence.on("UpdateData", async () => {
             delete presenceData.endTimestamp;
             presenceData.details = "Paused:";
             presenceData.smallImageKey = "pause";
+            presenceData.smallImageText = (await strings).pause;
           }
         } else if (iFrameVideo == null && isNaN(duration) && title != null) {
           presenceData.details = "Viewing:";
-          presenceData.state = title.innerText;
+          presenceData.state = (title as HTMLTextAreaElement).innerText;
           presenceData.startTimestamp = browsingStamp;
         } else {
           presenceData.details = "Error 03: Watching unknown show/movie.";
@@ -107,22 +131,40 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = browsingStamp;
           presenceData.smallImageKey = "search";
           presenceData.smallImageText = "Error 3";
+          presence.error(
+            "Can't tell what you are watching. Fix a variable or line of code."
+          );
         }
       } else {
         //Can't get the basic site information
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Error 02: Watching unknown show/movie.";
         presenceData.smallImageKey = "search";
+        presence.error("Can't read page.");
       }
+    } else if (
+      document.querySelector(
+        "#main_bg > div:nth-child(5) > div > div.section-header > h3"
+      ).textContent == " Result search"
+    ) {
+      presence.info("Searching");
+      presenceData.details = "Searching:";
+      presenceData.state = document.location.href.replace(
+        "https://vidcloud9.com/search.html?keyword=",
+        ""
+      );
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = "Searching";
     } //If it can't get the page it will output an error
     else {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Error 01: Can't Read Page";
       presenceData.smallImageKey = "search";
+      presence.error("Can't read page. Set up a conditional.");
     }
   } else {
-    presence.setActivity(presenceData);
-    return;
+    presenceData.details = null;
+    presence.info("Info is off.");
   }
 
   if (presenceData.details == null) {

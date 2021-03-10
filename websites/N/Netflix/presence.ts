@@ -36,9 +36,9 @@ const presence = new Presence({
         searchFor: "general.searchFor",
         searchSomething: "general.searchSomething",
         genre: "general.viewGenre",
-        viewSeries: "netflix.viewSeries",
-        viewMovies: "netflix.viewMovie",
-        viewEpisode: "netflix.viewEpisode",
+        viewSeries: "general.buttonViewSeries",
+        viewMovies: "general.buttonViewMovie",
+        viewEpisode: "general.buttonViewEpisode",
         viewList: "netflix.viewList",
         profile: "netflix.profile",
         latest: "netflix.latest",
@@ -158,6 +158,7 @@ presence.on("UpdateData", async () => {
                 }`
               }
             ];
+            if (seriesState.includes("{0}")) delete presenceData.state;
           } else {
             presenceData.details = (await strings).watchingSeries;
           }
@@ -182,6 +183,7 @@ presence.on("UpdateData", async () => {
             presenceData.state = seriesState
               .replace("%title%", title.replace(regExp[0], ""))
               .replace("%episode%", regExp[1]);
+            if (seriesState.includes("{0}")) delete presenceData.state;
           } else if (showSeries) {
             presenceData.details = (await strings).watchingSeries;
           } else if (showBrowsing) {

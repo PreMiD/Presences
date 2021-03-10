@@ -1,66 +1,41 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Bas950",
+    "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "NameMC",
   "description": {
-    "en": "Check the availability of Minecraft names, look up the name history of Minecraft accounts, view Minecraft skins in 3D, convert UUIDs, and much more! Check out our list of the latest popular Minecraft skins for Java and PE! Download the skin that suits you best!"
+    "en": "Check the availability of Minecraft names, look up the name history of Minecraft accounts, view Minecraft skins in 3D, convert UUIDs, and much more!",
+    "nl": "Bekijk de beschikbaarheid van Minecraft namen, bekijk de naam geschiedenis van Minecraft accounts. Bekijk Minecraft skins in 3D, converteer UUIDs, en nog veel meer!"
   },
-  "url": [
-    "namemc.com",
-    "ca.namemc.com",
-    "fr-ca.namemc.com",
-    "da.namemc.com",
-    "ja.namemc.com",
-    "id.namemc.com",
-    "de.namemc.com",
-    "he.namemc.com",
-    "bg.namemc.com",
-    "th.namemc.com",
-    "zh.namemc.com",
-    "fi.namemc.com",
-    "hi.namemc.com",
-    "vi.namemc.com",
-    "sk.namemc.com",
-    "uk.namemc.com",
-    "es-cl.namemc.com",
-    "el.namemc.com",
-    "nl.namemc.com",
-    "pl.namemc.com",
-    "sl.namemc.com",
-    "zh-cn.namemc.com",
-    "en.namemc.com",
-    "ko.namemc.com",
-    "no.namemc.com",
-    "ro.namemc.com",
-    "ar.namemc.com",
-    "fr.namemc.com",
-    "hr.namemc.com",
-    "sr.namemc.com",
-    "tr.namemc.com",
-    "cs.namemc.com",
-    "es.namemc.com",
-    "ms.namemc.com",
-    "et.namemc.com",
-    "it.namemc.com",
-    "lt.namemc.com",
-    "pt.namemc.com",
-    "hu.namemc.com",
-    "ru.namemc.com",
-    "lv.namemc.com",
-    "sv.namemc.com",
-    "iw.namemc.com",
-    "zh-tw.namemc.com"
-  ],
-  "version": "1.2.5",
-  "logo": "https://i.gyazo.com/c29c5b9e440f37979823e96a597089fc.jpg",
-  "thumbnail": "https://i.gyazo.com/a57949ce7bd6e6a2b80d86675deb074f.png",
+  "url": "namemc.com",
+  "regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
+  "version": "2.0.0",
+  "logo": "https://i.imgur.com/9JDmZaF.png",
+  "thumbnail": "https://i.imgur.com/XIZsGTQ.png",
   "color": "#000000",
   "tags": [
     "namemc",
     "minecraft",
     "gaming"
   ],
-  "category": "games"
+  "category": "games",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Rare Akuma ☆",
+    "id": "250044591686811669"
+  },
+  "url": "tetr.io",
+  "service": "TETR.IO",
+  "description": {
+    "en": "TETR.IO is a free-to-play online multiplayer and single player fan game"
+  },
+  "version": "1.1.0",
+  "logo": "https://i.imgur.com/f2PMsG4.jpg",
+  "thumbnail": "https://i.imgur.com/n7wLG8i.jpg",
+  "color": "#142472",
+  "tags": [
+    "puzzle",
+    "multiplayer",
+    "online"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "privateRoom",
+      "title": "Show Private Room button",
+      "icon": "fas fa-user-secret",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

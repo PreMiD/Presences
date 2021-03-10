@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Nevylish",
+    "id": "343847696483745794"
+  },
+  "url": "www.speedtest.net",
+  "description": {
+    "de": "Der umfassende Breitband-Geschwindigkeitstest",
+    "en": "The Global Broadband Speed Test",
+    "es": "La prueba de velocidad de banda ancha global",
+    "fr": "Le test de vitesse de connexion global"
+  },
+  "service": "Speedtest",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/MOxmNLG.png",
+  "thumbnail": "https://i.imgur.com/JXIDlOL.png",
+  "color": "#141526",
+  "tags": [
+    "speed",
+    "test",
+    "speedtest"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "showISP",
+      "title": "Show ISP Name",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
+  ]
+}

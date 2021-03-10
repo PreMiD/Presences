@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "author": {
+      "name": "John Smith",
+      "id": "233950379065212938"
+    },
+    "service": "The New York Times",
+    "description": {
+      "en": "The New York Times is an American daily newspaper based in New York City with a worldwide readership. Founded in 1851, the Times has since won 130 Pulitzer Prizes, and has long been regarded within the industry as a national 'newspaper of record'. It is ranked 18th in the world by circulation and 3rd in the U.S."
+    },
+    "url": "www.nytimes.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/e5xEpfu.jpg",
+    "thumbnail": "https://i.imgur.com/p8luyGx.png",
+    "color": "#ffffff",
+    "tags": ["news", "articles"],
+    "category": "other",
+    "settings": [
+      {
+        "id": "buttons",
+        "title": "Show Buttons",
+        "icon": "fas fa-compress-arrows-alt",
+        "value": true
+      }
+    ]
+}
