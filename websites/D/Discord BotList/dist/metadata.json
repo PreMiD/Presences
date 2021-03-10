@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Discord BotList",
+    "author": {
+      "name": "OGMatrix",
+      "id": "657290880947978241"
+    },
+    "category": "other",
+    "logo": "https://i.imgur.com/V8TuIHR.jpg",
+    "thumbnail": "https://i.imgur.com/utk2huo.png",
+    "version": "1.0.0",
+    "color": "#3563ed",
+    "tags": [
+      "discord",
+      "botlist",
+      "list"
+    ],
+    "url": "discord-botlist.eu",
+    "description": {
+      "en": "Discord Bots is a cool Discord Bot List were users can add their Bots!",
+      "de": "Discord Bots ist eine coole Discord Bot-Liste, in der Benutzer ihre Bots hinzufügen können!"
+    }
+  }
