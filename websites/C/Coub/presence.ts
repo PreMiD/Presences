@@ -12,7 +12,6 @@ interface LocalizedStrings {
 
 interface ExecutionArguments {
   showWatch?: boolean;
-  showBridge?: boolean;
   strings: LocalizedStrings;
   [key: string]: unknown;
 }
@@ -131,14 +130,6 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                 ...getSourceLink(sourceLink?.href)
               ]
             );
-          if (showBridge)
-            data.buttons = [
-              ...(data.buttons[0] ? [data.buttons[0]] : []),
-              {
-                label: `${strings.downloadVia} Bridge`,
-                url: parseBridgeUrl(activeMedia.dataset.permalink)
-              }
-            ];
           return data;
         }
       },
@@ -197,14 +188,6 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                 }
               ]
             );
-          if (showBridge)
-            data.buttons = [
-              ...(data.buttons[0] ? [data.buttons[0]] : []),
-              {
-                label: `${strings.downloadVia} Bridge`,
-                url: parseBridgeUrl(activeMedia.dataset.permalink)
-              }
-            ];
           return data;
         }
       },
@@ -244,14 +227,6 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                 ...getSourceLink(sourceLink?.href)
               ]
             );
-          if (showBridge)
-            data.buttons = [
-              ...(data.buttons[0] ? [data.buttons[0]] : []),
-              {
-                label: `${strings.downloadVia} Bridge`,
-                url: parseBridgeUrl(activeMedia.dataset.permalink)
-              }
-            ];
           return data;
         }
       },
@@ -300,14 +275,6 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               ]
             );
 
-          if (showBridge)
-            data.buttons = [
-              ...(data.buttons[0] ? [data.buttons[0]] : []),
-              {
-                label: `${strings.downloadVia} Bridge`,
-                url: parseBridgeUrl(activeMedia.dataset.permalink)
-              }
-            ];
           return data;
         }
       },
@@ -341,8 +308,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             browsing: "presence.activity.browsing",
             watching: "presence.playback.playing",
             watchVideo: "general.buttonWatchVideo",
-            viewProfil: "general.buttonViewProfile",
-            downloadVia: "general.downloadVia"
+            viewProfil: "general.buttonViewProfile"
           }),
           context = pages.find((x) => x.middleware(window, [query]));
         if (!context) return false;
@@ -354,11 +320,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             showWatch: await app
               .getSetting("show_button_watching")
               .then((x) => !!x)
-              .catch(() => true),
-            showBridge: await app
-              .getSetting("show_coubbridge")
-              .then((x) => !!x)
-              .catch(() => false)
+              .catch(() => true)
           })
         );
         return result.then((data) => {
@@ -371,6 +333,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           } else {
             if (data.details) presence.setActivity(data);
             if (data.buttons && data.buttons.length === 0) delete data.buttons;
+            else data.buttons = data.buttons?.slice(0, 2);
           }
           return data;
         });
