@@ -62,8 +62,8 @@ presence.on("UpdateData", async () => {
       "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-current"
     ).textContent;
     duration = document.querySelector(
-        "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
-      ).textContent;
+      "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
+    ).textContent;
 
     const timestamps = presence.getTimestamps(
         presence.timestampFromFormat(currentTime),
