@@ -74,7 +74,7 @@ botPresence.on("UpdateData", async() => {
       botData.buttons = [
         {
           "label": "View Bot",
-          "url": document.URL,
+          "url": document.URL
         }
       ];
     }
