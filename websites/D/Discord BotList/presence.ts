@@ -24,8 +24,8 @@ botPresence.on("UpdateData", async() => {
       }
     ];
   } else if(botPage == "/bots/tag") {
-    const urlParams: any = new URLSearchParams(window.location.search);
-    const myParam: any = urlParams.get('tag');
+    const urlParams: URLSearchParams = new URLSearchParams(window.location.search),
+      myParam: string = urlParams.get('tag');
     botData.details = "Searching Tag:";
     botData.state = myParam;
     botData.buttons = [
@@ -87,7 +87,7 @@ botPresence.on("UpdateData", async() => {
     botData.buttons = [
       {
         "label": "View ToS",
-        "url": document.URL,
+        "url": document.URL
       }
     ];
   } else if (botPage == "/privacypolicy/") {
