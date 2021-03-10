@@ -61,7 +61,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         exec: (
           context,
           data,
-          { showWatch, showBridge }: ExecutionArguments
+          { showWatch, showBridge, strings }: ExecutionArguments
         ) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
@@ -125,7 +125,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             data.buttons.push(
               ...[
                 {
-                  label: "Watch on Coub",
+                  label: strings.watchVideo,
                   url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
                 },
                 ...getSourceLink(sourceLink?.href)
@@ -148,7 +148,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         exec: (
           context,
           data,
-          { showWatch, showBridge }: ExecutionArguments
+          { showWatch, showBridge, strings }: ExecutionArguments
         ) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
@@ -186,7 +186,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             data.buttons.push(
               ...[
                 {
-                  label: "Watch on Coub",
+                  label: strings.watchVideo,
                   url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
                 },
                 {
@@ -238,7 +238,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             data.buttons.push(
               ...[
                 {
-                  label: "Watch on Coub",
+                  label: strings.watchVideo,
                   url: document.location.href
                 },
                 ...getSourceLink(sourceLink?.href)
@@ -260,7 +260,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         exec: (
           context,
           data,
-          { showWatch, showBridge }: ExecutionArguments
+          { showWatch, showBridge, strings }: ExecutionArguments
         ) => {
           if (!context) return null;
           const communityParent = document.querySelector(
@@ -293,7 +293,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             data.buttons.push(
               ...[
                 {
-                  label: "Watch on Coub",
+                  label: strings.watchVideo,
                   url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
                 },
                 ...getSourceLink(sourceLink?.href)
@@ -342,7 +342,8 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             pause: "presence.playback.paused",
             browsing: "presence.activity.browsing",
             searching: "presence.activity.searching",
-            watching: "presence.playback.playing"
+            watching: "presence.playback.playing",
+            watchVideo: "general.buttonWatchVideo"
           }),
           context = pages.find((x) => x.middleware(window, [query]));
         if (!context) return false;
