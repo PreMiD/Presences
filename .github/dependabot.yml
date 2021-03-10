@@ -6,6 +6,20 @@ updates:
       interval: "weekly"
     assignees:
       - "TheDropX"
+      - "Timeraa"
+    commit-message:
+      prefix: "🔼"
+      prefix-development: "🔼"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 15
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    assignees:
+      - "TheDropX"
+      - "Timeraa"
     commit-message:
       prefix: "🔼"
       prefix-development: "🔼"

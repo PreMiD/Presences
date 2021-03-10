@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "QkeleQ10",
+    "id": "807917674477649943"
+  },
+  "url": "magister.net",
+  "regExp": "([a-z0-9-]+[.])*magister[.]net[/]",
+  "description": {
+    "en": "Magister 6 is a popular student information system in the Netherlands.",
+    "nl": "Magister 6 is een populair leerlingvolgsysteem in Nederland."
+  },
+  "version": "1.0.3",
+  "service": "Magister",
+  "logo": "https://i.imgur.com/jk4XMSO.png",
+  "thumbnail": "https://i.imgur.com/TVjDmC4.png",
+  "color": "#1F97F9",
+  "tags": [
+    "magister",
+    "lvs",
+    "leerlingvolgsysteem",
+    "leerling",
+    "systeem",
+    "student",
+    "system"
+  ],
+  "category": "other"
+}

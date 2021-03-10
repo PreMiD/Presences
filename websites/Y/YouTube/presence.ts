@@ -8,53 +8,7 @@ function truncateAfter(str: string, pattern: string): string {
   return str.slice(0, str.indexOf(pattern));
 }
 
-interface LangStrings {
-  play: string;
-  pause: string;
-  live: string;
-  ad: string;
-  search: string;
-  browsingVid: string;
-  browsingPlayl: string;
-  viewCPost: string;
-  ofChannel: string;
-  readChannel: string;
-  searchChannel: string;
-  trending: string;
-  browsingThrough: string;
-  subscriptions: string;
-  library: string;
-  history: string;
-  purchases: string;
-  reports: string;
-  upload: string;
-  viewChannel: string;
-  viewAllPlayL: string;
-  viewEvent: string;
-  viewLiveDash: string;
-  viewAudio: string;
-  studioVid: string;
-  studioEdit: string;
-  studioAnaly: string;
-  studioComments: string;
-  studioTranslate: string;
-  studioTheir: string;
-  studioCAnaly: string;
-  studioCComments: string;
-  studioCTranslate: string;
-  studioArtist: string;
-  studioDash: string;
-  viewPlaylist: string;
-  readAbout: string;
-  viewAccount: string;
-  viewHome: string;
-  watchVid: string;
-  watchLive: string;
-  browsing: string;
-  searchSomething: string;
-}
-
-async function getStrings(): Promise<LangStrings> {
+async function getStrings() {
   return presence.getStrings(
     {
       play: "general.playing",
@@ -99,13 +53,16 @@ async function getStrings(): Promise<LangStrings> {
       watchVid: "general.watchingVid",
       watchLive: "general.watchingLive",
       browsing: "general.browsing",
-      searchSomething: "general.searchSomething"
+      searchSomething: "general.searchSomething",
+      watchStreamButton: "general.buttonWatchStream",
+      watchVideoButton: "general.buttonWatchVideo",
+      viewChannelButton: "general.buttonViewChannel"
     },
     await presence.getSetting("lang")
   );
 }
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
@@ -114,7 +71,8 @@ presence.on("UpdateData", async () => {
     privacy = await presence.getSetting("privacy"),
     time = await presence.getSetting("time"),
     vidDetail = await presence.getSetting("vidDetail"),
-    vidState = await presence.getSetting("vidState");
+    vidState = await presence.getSetting("vidState"),
+    buttons = await presence.getSetting("buttons");
   if (!oldLang) {
     oldLang = newLang;
   } else if (oldLang !== newLang) {
@@ -283,14 +241,16 @@ presence.on("UpdateData", async () => {
       endTimestamp: timestamps[1]
     };
 
+    if (vidState.includes("{0}")) delete presenceData.state;
+
     presence.setTrayTitle(
       video.paused
         ? ""
-        : title == null
+        : finalTitle == null
         ? document.querySelector(
             ".title.style-scope.ytd-video-primary-info-renderer"
           ).textContent
-        : title.textContent
+        : finalTitle
     );
 
     //* Remove timestamps if paused or live
@@ -317,6 +277,25 @@ presence.on("UpdateData", async () => {
       delete presenceData.state;
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
+    } else if (buttons) {
+      presenceData.buttons = [
+        {
+          label: live
+            ? (await strings).watchStreamButton
+            : (await strings).watchVideoButton,
+          url: document.URL.includes("/watch?v=")
+            ? document.URL.split("&")[0]
+            : `https://www.youtube.com/watch?v=${document
+                .querySelector("#page-manager > ytd-watch-flexy")
+                .getAttribute("video-id")}`
+        },
+        {
+          label: (await strings).viewChannelButton,
+          url: (document.querySelector(
+            "#top-row > ytd-video-owner-renderer > a"
+          ) as HTMLLinkElement).href
+        }
+      ];
     }
 
     if (!time) {

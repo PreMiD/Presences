@@ -1,6 +1,6 @@
 ---
 Name: Presence Modification
-About: Pull request template for publishing changes for a presnce.
+About: Pull request template for publishing changes for a presence.
 ---
 
 _In order to property modify presences, please take a look at the [documentation](https://docs.premid.app/dev/presence). Take a look at the guidelines to see what is acceptable._

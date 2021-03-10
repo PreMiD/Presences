@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "Board Game Online",
   "description": {
     "en": "BG Online is an online interactive website where you can play many classical board games with other users."
@@ -13,7 +19,7 @@
     "boardgame-online.com",
     "www.boardgame-online.com"
   ],
-  "version": "1.1.6",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/MhNYI8n.png",
   "thumbnail": "https://i.imgur.com/QTDzIqh.png",
   "color": "#EF3A26",

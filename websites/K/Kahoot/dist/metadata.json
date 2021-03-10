@@ -1,8 +1,18 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Encrypted",
+      "id": "564434085708038144"
+    },
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "Kahoot",
   "description": {
     "en": "Kahoot! is a game-based platform that makes learning awesome for millions of people all over the world."
@@ -11,7 +21,7 @@
     "kahoot.it",
     "play.kahoot.it"
   ],
-  "version": "1.2.5",
+  "version": "2.0.0",
   "logo": "https://i.imgur.com/GkXv1zy.jpg",
   "thumbnail": "https://i.imgur.com/3DGbV8e.png",
   "color": "#8A5CD7",
@@ -20,5 +30,16 @@
     "qna",
     "fun"
   ],
-  "category": "games"
+  "category": "games",
+  "settings": [{
+    "id": "lang",
+    "multiLanguage": true
+   },
+   {
+    "id": "buttons",
+    "title": "Show Buttons",
+    "icon": "fas fa-compress-arrows-alt",
+    "value": false
+   }
+ ]
 }

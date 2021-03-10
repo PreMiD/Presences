@@ -10,6 +10,7 @@
     }
   ],
   "service": "Twitch",
+  "altnames": ["تويتش", "توییچ", "ٹویچ ڈاٹ ٹی وی", "트위치"],
   "description": {
     "en": "Twitch is the world's leading live streaming platform for gamers and the things we love. Watch and chat now with millions of other fans from around the world.",
     "tr": "Twitch, oyuncular ve sevdiğimiz şeyler için dünyanın önde gelen canlı yayın platformudur.",
@@ -17,7 +18,7 @@
     "pt_BR": "Twitch é a plataforma líder mundial em streaming para gamers e coisas que amamos. Assista e converse agora com milhões de outros fãs ao redor do mundo.",
     "fr": "Twitch est la plateforme leader mondial en streaming pour gamers e choses que nous aimons. Regardez et discutez maintenant avec des millions d'autres fans du monde entier.",
     "uk_UA": "Twitch - це провідна в світі платформа прямого ефіру для геймерів та речей, які ми любимо. Дивіться та спілкуйтеся зараз із мільйонами інших шанувальників з усього світу.",
-    "nl": "Twitch is 's werelds leider in live streaming platform voor gamers en de dingen waar we van houden. Kijk en chat nu met miljoenen andere fans van over de hele wereld.",
+    "nl": "Twitch is 's werelds grootste livestreaming-platform voor gamers en de dingen waar we van houden. Kijk en chat nu met miljoenen andere fans van over de hele wereld.",
     "zh_CN": "Twitch是面向游戏玩家和各种事物的全球领先的直播平台。快来与来自世界各地的数百万粉丝一起观看和聊天。",
     "zh_TW": "Twitch是面向遊戲玩家和各種事物的全球領先的實時串流平台。快來與來自世界各地的數百萬粉絲一起觀看和聊天。"
   },
@@ -33,7 +34,7 @@
     "devstatus.twitch.tv",
     "status.twitch.tv"
   ],
-  "version": "3.0.0",
+  "version": "3.1.2",
   "logo": "https://i.imgur.com/So7h3G0.png",
   "thumbnail": "https://i.imgur.com/OAcBmwW.png",
   "color": "#9146FF",
@@ -74,7 +75,7 @@
       "title": "Stream Details row1",
       "icon": "fas fa-comment-alt-edit",
       "value": "%title%",
-      "placeholder": "Use %title% or %streamer%"
+      "placeholder": "Use %title% or %streamer% or %game%"
     },
     {
       "id": "streamState",
@@ -84,7 +85,7 @@
       "title": "Stream Details row2",
       "icon": "fas fa-comment-alt-edit",
       "value": "%streamer%",
-      "placeholder": "Use %title% or %streamer%"
+      "placeholder": "Use %title% or %streamer% or %game%"
     },
     {
       "id": "video",
@@ -100,7 +101,7 @@
       "title": "Video Details row1",
       "icon": "fas fa-comment-alt-edit",
       "value": "%title%",
-      "placeholder": "Use %title% or %uploader%"
+      "placeholder": "Use %title% or %uploader% or %game%"
     },
     {
       "id": "vidState",
@@ -110,7 +111,7 @@
       "title": "Video Details row2",
       "icon": "fas fa-comment-alt-edit",
       "value": "%uploader%",
-      "placeholder": "Use %title% or %uploader%"
+      "placeholder": "Use %title% or %uploader% or %game%"
     },
     {
       "id": "timestamp",
@@ -131,6 +132,15 @@
       "icon": "fab fa-twitch",
       "value": 0,
       "values": ["Normal", "White", "Purple"]
+    },
+    {
+      "id": "buttons",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
     }
   ]
 }

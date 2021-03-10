@@ -1,21 +1,43 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Encrypted",
+      "id": "564434085708038144"
+    },
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "Skribbl.io",
   "description": {
     "en": "Skribbl.io a free multiplayer drawing and guessing game. Draw and guess words with your friends and people all around the world! Score the most points and be the winner!",
-    "zh_CN": "Skribbl.io提供免费的多人绘图和猜谜游戏。与您的朋友或世界各地的人一起你画我猜！大吉大利，今晚吃鸡！"
+    "zh_CN": "Skribbl.io提供免费的多人绘图和猜谜游戏。与您的朋友或世界各地的人一起你画我猜！大吉大利，今晚吃鸡！",
+    "nl": "Skribbl.io is een gratis multiplayer teken- en raadspel. Teken en raad woorden met je vrienden en mensen van over de hele wereld! Scoor de meeste punten en wees de winnaar!"
   },
   "url": "skribbl.io",
-  "version": "1.1.5",
-  "logo": "https://i.gyazo.com/e13c00937b0147c72d0dd6ecc1bf25e8.gif",
-  "thumbnail": "https://i.gyazo.com/42df1c786153f5dbac2e77466e9c671a.png",
+  "version": "1.1.8",
+  "logo": "https://i.imgur.com/au4OO2A.jpg",
+  "thumbnail": "https://i.imgur.com/sDWwUZk.png",
   "color": "#245195",
   "tags": [
     "skribbl-io",
     "games"
   ],
-  "category": "games"
+  "category": "games",
+  "settings": [{
+    "id": "lang",
+    "multiLanguage": true
+   },
+   {
+    "id": "buttons",
+    "title": "Show Buttons",
+    "icon": "fas fa-compress-arrows-alt",
+    "value": false
+   }
+ ]
 }

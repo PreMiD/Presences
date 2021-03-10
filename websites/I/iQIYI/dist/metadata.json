@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "SlowLife",
+    "id": "374905512661221377"
+  },
+  "url": "www.iq.com",
+  "description": {
+    "en": "iQIYI is the world's leading online movie and video streaming website, offering TV dramas, movies, variety shows, animation, and other quality content.",
+    "zh_TW": "愛奇藝-全球領先的線上影音視頻網站-正版高清影片影視免費線上看"
+  },
+  "service": "iQIYI",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/6BDrbxk.png",
+  "thumbnail": "https://i.imgur.com/4PESzW3.png",
+  "color": "#0BBE06",
+  "tags": [
+    "iqiyi",
+    "drama",
+    "anime",
+    "movie"
+  ],
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "searchQuery",
+      "title": "Show search query",
+      "icon": "fas fa-search",
+      "value": false
+    }
+  ]
+}

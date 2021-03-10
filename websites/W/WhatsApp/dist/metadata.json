@@ -14,10 +14,11 @@
     "en": "Quickly send and receive WhatsApp messages right from your computer.",
     "tr": "Bilgisayarınızdan hızlıca WhatsApp üzerinden mesaj gönderin ve alın.",
     "zh_CN": "WhatsApp是一款非常受欢迎的跨平台应用程序，用于智能手机之间的通讯。",
-    "zh_TW": "WhatsApp是Facebook公司的旗下一款用於智慧型手機的跨平台加密即時通訊應用程式。"
+    "zh_TW": "WhatsApp是Facebook公司的旗下一款用於智慧型手機的跨平台加密即時通訊應用程式。",
+    "nl": "Ontvang en verzend gemakkelijk WhatsApp-berichten vanaf je computer."
   },
   "url": "web.whatsapp.com",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "logo": "https://premid.is-inside.me/hYF0mBZI.png",
   "thumbnail": "https://premid.is-inside.me/0JktExu1.jpg",
   "color": "#0dc143",

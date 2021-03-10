@@ -13,9 +13,10 @@ function displayPresence(presenceData: PresenceData) {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: new Date().getTime()
-  }, path = document.location.pathname;
+      largeImageKey: "logo",
+      startTimestamp: new Date().getTime()
+    },
+    path = document.location.pathname;
 
   // prod site
   if (document.location.hostname === "pays.host") {
@@ -45,10 +46,8 @@ presence.on("UpdateData", async () => {
         const domainCount = document.getElementById("domain-count").innerText;
         delete presenceData.state;
 
-        if (domainCount)
-          presenceData.state = `Viewing ${domainCount} domains`;
-        else
-          presenceData.state = "Viewing domains";
+        if (domainCount) presenceData.state = `Viewing ${domainCount} domains`;
+        else presenceData.state = "Viewing domains";
 
         break;
       }
@@ -82,20 +81,23 @@ presence.on("UpdateData", async () => {
   }
   // beta site
   else if (document.location.hostname === "beta.pays.host") {
-    const siteVersionElement = document.querySelector("body div.row div.sidebar-header a");
+    const siteVersionElement = document.querySelector(
+      "body div.row div.sidebar-header a"
+    );
     presenceData.details = "Browsing pays.host beta";
 
     if (siteVersionElement) {
       const siteVersionString = siteVersionElement.textContent,
         [, siteVersion] = /\((.*?)\)/.exec(siteVersionString);
-      if (siteVersion)
-        presenceData.details += ` (${siteVersion})`;
+      if (siteVersion) presenceData.details += ` (${siteVersion})`;
     }
 
     const hiddenUsernameSetting = await presence.getSetting("usernameHidden");
 
     if (!hiddenUsernameSetting) {
-      const welcomeMessageElement = document.getElementsByClassName("welcomeText")[0];
+      const welcomeMessageElement = document.getElementsByClassName(
+        "welcomeText"
+      )[0];
 
       if (welcomeMessageElement) {
         const welcomeMessage = welcomeMessageElement.textContent,
@@ -117,14 +119,14 @@ presence.on("UpdateData", async () => {
       }
 
       case "/domains": {
-        const domainCountString = document.querySelector("main div p:nth-child(3)").textContent,
+        const domainCountString = document.querySelector(
+            "main div p:nth-child(3)"
+          ).textContent,
           [domainCount] = /\d+/.exec(domainCountString);
         delete presenceData.state;
 
-        if (domainCount)
-          presenceData.state = `Viewing ${domainCount} domains`;
-        else
-          presenceData.state = "Viewing domains";
+        if (domainCount) presenceData.state = `Viewing ${domainCount} domains`;
+        else presenceData.state = "Viewing domains";
 
         break;
       }
@@ -169,8 +171,7 @@ presence.on("UpdateData", async () => {
         const uploadCount = document.getElementById("totalCount").innerText;
         presenceData.state = "Viewing gallery";
 
-        if (uploadCount)
-          presenceData.state += ` (${uploadCount} uploads)`;
+        if (uploadCount) presenceData.state += ` (${uploadCount} uploads)`;
 
         break;
       }
@@ -222,7 +223,10 @@ presence.on("UpdateData", async () => {
         presenceData.state = `Viewing ${changelogVersion} changelog`;
       }
       // User pages follow format of "/user/UID"
-      else if (path.startsWith("/user/") && /\d+\/?$/.test(path.replace("/user/", ""))) {
+      else if (
+        path.startsWith("/user/") &&
+        /\d+\/?$/.test(path.replace("/user/", ""))
+      ) {
         const usernameElement = document.querySelector("main h2");
 
         if (usernameElement) {
@@ -234,7 +238,10 @@ presence.on("UpdateData", async () => {
         }
       }
       // User admin pages follow format of "/user/UID/admin"
-      else if (path.startsWith("/user/") && /\d+\/admin\/?/.test(path.replace("/user/", ""))) {
+      else if (
+        path.startsWith("/user/") &&
+        /\d+\/admin\/?/.test(path.replace("/user/", ""))
+      ) {
         const usernameElement = document.querySelector("main h2");
 
         if (usernameElement) {
@@ -249,11 +256,15 @@ presence.on("UpdateData", async () => {
       else if (/\b[a-zA-Z0-9]{8}\b/.test(path) || invisiblePath) {
         if (invisiblePath) {
           let id;
-          const binaryString = decodedPath.replace(/\u200b/g, "0").replace(/\u200c/g, "1"),
+          const binaryString = decodedPath
+              .replace(/\u200b/g, "0")
+              .replace(/\u200c/g, "1"),
             bytes = binaryString.match(/.{8}/g);
 
           if (bytes)
-            id = bytes.map(bin => String.fromCharCode(parseInt(bin, 2))).join("");
+            id = bytes
+              .map((bin) => String.fromCharCode(parseInt(bin, 2)))
+              .join("");
 
           // Check the decoded invisible path does not follow valid image ID format
           if (!/\b[a-zA-Z0-9]{8}\b/.test(id)) {
@@ -264,8 +275,7 @@ presence.on("UpdateData", async () => {
 
         const imageOwnerElement = document.querySelector("h5 span.text-muted");
 
-        if (!imageOwnerElement)
-          presenceData.state = "Page not found";
+        if (!imageOwnerElement) presenceData.state = "Page not found";
         else {
           const imageOwner = imageOwnerElement.textContent;
           presenceData.state = `Viewing an upload by ${imageOwner}`;
@@ -278,7 +288,9 @@ presence.on("UpdateData", async () => {
   // status page
   else if (document.location.hostname === "status.pays.host") {
     presenceData.details = "Browsing pays.host status";
-    presenceData.state = document.getElementsByClassName("statusbar-text")[0].textContent;
+    presenceData.state = document.getElementsByClassName(
+      "statusbar-text"
+    )[0].textContent;
   }
 
   return displayPresence(presenceData);
