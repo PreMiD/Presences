@@ -1,16 +1,16 @@
 const presence = new Presence({
-  clientId: "776312991939428373",
+  clientId: "776312991939428373"
 }),
 strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
-  browsing: "presence.activity.browsing",
+  browsing: "presence.activity.browsing"
 });
 let video = {
 video: false,
 duration: 0,
 currentTime: 0,
-paused: true,
+paused: true
 };
 presence.on(
 "iFrameData",
@@ -25,7 +25,7 @@ presence.on(
 );
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
-  largeImageKey: "aniorb",
+  largeImageKey: "aniorb"
 };
 if (document.location.pathname.includes("/genre")) {
   presenceData.details = "Browsing Through";
@@ -98,8 +98,8 @@ if (document.location.pathname.includes("/genre")) {
     presenceData.buttons = [
       {
         label: "Watch Episode",
-        url: document.baseURI,
-      },
+        url: document.baseURI
+      }
     ];
     presence.setActivity(presenceData, !video.paused);
   }
