@@ -135,7 +135,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             data.buttons = [
               ...(data.buttons[0] ? [data.buttons[0]] : []),
               {
-                label: "Download via Bridge",
+                label: `${strings.downloadVia} Bridge`,
                 url: parseBridgeUrl(activeMedia.dataset.permalink)
               }
             ];
@@ -190,7 +190,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
                   url: `${document.location.origin}/view/${activeMedia.dataset.permalink}`
                 },
                 {
-                  label: "View Profile",
+                  label: strings.viewProfil,
                   url: `${document.location.origin}/${
                     document.location.pathname.split("/")[1]
                   }`
@@ -201,7 +201,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             data.buttons = [
               ...(data.buttons[0] ? [data.buttons[0]] : []),
               {
-                label: "Download via Bridge",
+                label: `${strings.downloadVia} Bridge`,
                 url: parseBridgeUrl(activeMedia.dataset.permalink)
               }
             ];
@@ -248,7 +248,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             data.buttons = [
               ...(data.buttons[0] ? [data.buttons[0]] : []),
               {
-                label: "Download via Bridge",
+                label: `${strings.downloadVia} Bridge`,
                 url: parseBridgeUrl(activeMedia.dataset.permalink)
               }
             ];
@@ -304,7 +304,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             data.buttons = [
               ...(data.buttons[0] ? [data.buttons[0]] : []),
               {
-                label: "Download via Bridge",
+                label: `${strings.downloadVia} Bridge`,
                 url: parseBridgeUrl(activeMedia.dataset.permalink)
               }
             ];
@@ -338,12 +338,11 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       if (document.location.hostname == "coub.com") {
         const query: { [key: string]: unknown } = getQuery(),
           strings: { [key: string]: string } = await app.getStrings({
-            play: "presence.playback.playing",
-            pause: "presence.playback.paused",
             browsing: "presence.activity.browsing",
-            searching: "presence.activity.searching",
             watching: "presence.playback.playing",
-            watchVideo: "general.buttonWatchVideo"
+            watchVideo: "general.buttonWatchVideo",
+            viewProfil: "general.buttonViewProfile",
+            downloadVia: "general.downloadVia"
           }),
           context = pages.find((x) => x.middleware(window, [query]));
         if (!context) return false;
