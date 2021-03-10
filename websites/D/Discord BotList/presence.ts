@@ -5,7 +5,7 @@ const botPresence = new Presence({
 
 botPresence.on("UpdateData", async() => {
   const botData: PresenceData = {
-    largeImageKey: "logo",
+    largeImageKey: "logo"
   },
     botPage = document.location.pathname;
 
@@ -14,47 +14,47 @@ botPresence.on("UpdateData", async() => {
   if (botPage == "/") {
     botData.details = "Browsing";
   } else if(botPage == "/search") {
-    const search: any = document.querySelector("[name='search']").getAttribute("value");
+    const search: string = document.querySelector("[name='search']").getAttribute("value");
     botData.details = "Searching Bot:";
     botData.state = search;
     botData.buttons = [
       {
         "label": "View Search",
-        "url": document.URL,
+        "url": document.URL
       }
     ];
   } else if(botPage == "/bots/tag") {
-    const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('tag');
+    const urlParams: any = new URLSearchParams(window.location.search);
+    const myParam: any = urlParams.get('tag');
     botData.details = "Searching Tag:";
     botData.state = myParam;
     botData.buttons = [
       {
         "label": "View Tag",
-        "url": document.URL,
+        "url": document.URL
       }
     ];
   } else if (botPage == "/login_err/") {
     botData.details = "Login In Page";
   } else if (botPage.includes("/users/")) {
-    const username: any = document.querySelector("#Username").textContent;
+    const username: string = document.querySelector("#Username").textContent;
     botData.details = "Viewing Profile:";
     botData.state = username;
     botData.buttons = [
       {
         "label": "View Profile",
-        "url": document.URL,
+        "url": document.URL
       }
     ];
   } else if (botPage.includes("/bots/")) {
     if (botPage.includes("/vote")) {
-      const voteBotName: any = document.querySelector("#vote1 > h1").textContent.replace("Vote for ", "")
+      const voteBotName: string = document.querySelector("#vote1 > h1").textContent.replace("Vote for ", "");
       botData.details = "Voting for:";
       botData.state = voteBotName;
       botData.buttons = [
         {
           "label": "Vote for " + voteBotName,
-          "url": document.URL,
+          "url": document.URL
         }
       ];
     } else if (botPage.includes("/edit")) {
@@ -64,11 +64,11 @@ botPresence.on("UpdateData", async() => {
       botData.buttons = [
         {
           "label": "View Bots",
-          "url": document.URL,
+          "url": document.URL
         }
       ];
     } else {
-      const botName: any = document.getElementById("botname").textContent;
+      const botName: string = document.getElementById("botname").textContent;
       botData.details = "Viewing Bot:";
       botData.state = botName;
       botData.buttons = [
