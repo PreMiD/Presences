@@ -77,7 +77,7 @@ presence.on("UpdateData", async () => {
                 presenceData.state = "Looking at all icons";
             }
         } else {
-            const iconSearch = new URL(document.location.href).searchParams.get('icon.query')
+            const iconSearch = new URL(document.location.href).searchParams.get('icon.query');
         presenceData.details = "Searching for icons";
         presenceData.state = `Search query: ${iconSearch}`;
         }
