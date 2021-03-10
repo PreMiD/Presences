@@ -24,7 +24,7 @@
     "nl": "Luister altijd en overal naar alle nummers waar je van houdt."
   },
   "url": "www.deezer.com",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/GKMQi3h.png",
   "thumbnail": "https://i.imgur.com/gVAvQ6k.png",
   "color": "#A31D7C",
@@ -33,14 +33,16 @@
     "music"
   ],
   "category": "music",
-  "settings": [{
-    "id": "lang",
-    "multiLanguage": true
-  },
-  {
-    "id": "buttons",
-    "title": "Show Buttons",
-    "icon": "fas fa-compress-arrows-alt",
-    "value": true
-  }]
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }
