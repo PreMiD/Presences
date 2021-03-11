@@ -13,6 +13,7 @@ interface LocalizedStrings {
 interface ExecutionArguments {
   showWatch?: boolean;
   strings: LocalizedStrings;
+  images: { [key: string]: string };
   [key: string]: unknown;
 }
 
@@ -55,9 +56,13 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       {
         middleware: (ref) =>
           !!ref.location.pathname.match(
-            /^\/(hot|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs)/gi
+            /^\/(hot|tags|rising|fresh|feed|rising|stories|random|bookmarks|likes|weekly|best|stories|royal\.coubs)/gi
           ) || ref.location.pathname === "/",
-        exec: (context, data, { showWatch, strings }: ExecutionArguments) => {
+        exec: (
+          context,
+          data,
+          { showWatch, strings, images }: ExecutionArguments
+        ) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
             ".coub[coub-block].active"
@@ -79,6 +84,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             isWeekly = !!document.querySelector(
               ".page__content .page-menu.weekly__menu"
             ),
+            isPlaying = activeMedia.querySelector("video")?.paused === false,
             isBestOfTheYear = location.pathname.startsWith("/best"),
             isCoubPicks = location.pathname.startsWith("/royal.coubs"),
             isLiked = !!activeMedia.querySelector(
@@ -112,6 +118,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               ? " in Coub Picks"
               : "");
           data.details = `${title}${isLiked ? " (❤)" : ""}`;
+          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
           const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
             ".description__stamp a.description__stamp__source"
           );
@@ -132,7 +139,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       {
         middleware: (ref) =>
           !!ref.document.querySelector(".hero-cover[channel-id]"),
-        exec: (context, data, { showWatch, strings }: ExecutionArguments) => {
+        exec: (context, data, { showWatch, strings, images }: ExecutionArguments) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
             ".coub[coub-block].active"
@@ -157,6 +164,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             isLiked = !!activeMedia.querySelector(
               ".coub__like-button[widget-like-button].-on"
             ),
+            isPlaying = activeMedia.querySelector("video")?.paused === false,
             activeTabTitle =
               activeTab?.textContent.trimStart().split("\n")[0]?.trim() ||
               activeTab?.dataset?.title ||
@@ -164,6 +172,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           if (!title || !userName) return null;
           data.state = `Browsing ${activeTabTitle} from ${userName}`;
           data.details = `${title}${isLiked ? " (❤)" : ""}`;
+          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
           data.buttons = [];
           if (showWatch)
             data.buttons.push(
@@ -185,7 +194,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       },
       {
         middleware: (ref) => !!ref.location.pathname.match(/^\/view\/(.*)/gi),
-        exec: (context, data, { strings, showWatch }: ExecutionArguments) => {
+        exec: (context, data, { strings, showWatch, images }: ExecutionArguments) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
             ".coub[coub-block]"
@@ -196,11 +205,13 @@ function getSourceLink(url: string): { label: string; url: string }[] {
               ?.textContent?.trim(),
             isLiked = !!activeMedia.querySelector(
               ".coub__like-button[widget-like-button].-on"
-            );
+            ),
+            isPlaying = activeMedia.querySelector("video")?.paused === false;
 
           if (!title) return null;
           data.state = strings.watching;
           data.details = `${title}${isLiked ? " (❤)" : ""}`;
+          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
           const sourceLink = activeMedia.parentElement.querySelector<HTMLAnchorElement>(
             `.coub__info .media-block__item > a[type="embedPopup"]`
           );
@@ -220,7 +231,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       },
       {
         middleware: (ref) => !!ref.location.pathname.match(/^\/(community)/gi),
-        exec: (context, data, { showWatch, strings }: ExecutionArguments) => {
+        exec: (context, data, { showWatch, strings, images }: ExecutionArguments) => {
           if (!context) return null;
           const communityParent = document.querySelector(
             ".hot__community[data-community-id]"
@@ -236,6 +247,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             title = activeMedia
               .querySelector(".description__title")
               ?.textContent?.trim(),
+            isPlaying = activeMedia.querySelector("video")?.paused === false,
             activeTabTitle =
               communityParent.parentElement.querySelector<HTMLElement>(
                 ".page-menu.hot__menu > .page-menu__inner > .page-menu__item.-active"
@@ -243,6 +255,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
 
           if (!communityTitle || !title) return null;
           data.state = `Browsing ${communityTitle} in ${activeTabTitle}`;
+          data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
           data.details = `${title}`;
           const sourceLink = activeMedia.querySelector<HTMLAnchorElement>(
             ".description__stamp a.description__stamp__source"
@@ -272,6 +285,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           if (!context) return null;
           data.state = strings.browsing;
           data.details = "";
+          if (data.smallImageKey) delete data.smallImageKey;
           return data;
         }
       }
@@ -282,6 +296,10 @@ function getSourceLink(url: string): { label: string; url: string }[] {
 
   (function (app: Presence) {
     let currentLang: string, localizedStrings: { [key: string]: string };
+    const IMAGES = {
+      PLAY: "playx1024",
+      PAUSE: "pausex1024"
+    };
     app.on("UpdateData", async () => {
       const newLang = await app.getSetting("lang");
       if (newLang !== currentLang) {
@@ -308,6 +326,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
         context.exec(app, presenceData, {
           strings: localizedStrings,
           query,
+          images: IMAGES,
           showWatch: await app
             .getSetting("show_button_watching")
             .then((x) => !!x)
