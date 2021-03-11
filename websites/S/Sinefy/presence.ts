@@ -32,9 +32,15 @@ const sinefy = new Presence({
     "/netflix-filmleri-izle": "Netflix Filmleri"
   };
 
-let video: HTMLVideoElement;
-sinefy.on("iFrameData", (data: { video: HTMLVideoElement }) => {
-  if (data.video) video = data.video;
+interface iframeData {
+  duration: number;
+  currentTime: number;
+  paused: boolean;
+}
+
+let video: iframeData;
+sinefy.on("iFrameData", (data: iframeData) => {
+  if (data) video = data;
 });
 
 const startTimestamp = Math.floor(Date.now() / 1000);
@@ -45,8 +51,7 @@ sinefy.on("UpdateData", async () => {
       startTimestamp
     },
     settings = {
-      buttons: await sinefy.getSetting("buttons"),
-      showTitle: await sinefy.getSetting("show-title")
+      buttons: await sinefy.getSetting("buttons")
     };
 
   if (page.includes("/izle/")) {
@@ -64,7 +69,7 @@ sinefy.on("UpdateData", async () => {
     activity.details = title.replace(episode, "");
     if (episode) activity.state = episode.replace("izle", "");
 
-    if (video) {
+    if (Object.keys(video || {}).length > 0) {
       const timestamps = sinefy.getTimestamps(
         video.currentTime,
         video.duration
@@ -73,6 +78,19 @@ sinefy.on("UpdateData", async () => {
       // Set timestamps
       activity.startTimestamp = timestamps[0];
       activity.endTimestamp = timestamps[1];
+
+      if (video.paused) {
+        delete activity.startTimestamp;
+        delete activity.endTimestamp;
+      }
+
+      if (settings.buttons)
+        activity.buttons = [
+          {
+            label: "Filmi/Diziyi İzle",
+            url: location.href
+          }
+        ];
 
       // Set playing/paused text
       activity.smallImageKey = video.paused ? "pause" : "play";
