@@ -12,8 +12,6 @@ botPresence.on("UpdateData", async () => {
 
   botData.startTimestamp = botBrowsing;
 
-  console.log(botHost)
-
   if (botHost == "discord-botlist.eu") {
     if (botPage == "/") {
       botData.details = "Browsing";
