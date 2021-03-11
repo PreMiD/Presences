@@ -11,15 +11,13 @@ let
   groupTab,
   gameTab;
 
-const gameName = <HTMLHeadingElement>document.querySelector(
-  "div.game-calls-to-action > div.game-title-container > h2"
-);
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     details: "Unknown page",
     largeImageKey: "lg"
-  };
+  }, gameName = <HTMLHeadingElement>document.querySelector(
+    "div.game-calls-to-action > div.game-title-container > h2"
+  );
 
   if (document.location.pathname.includes("/home")) {
     presenceData.details = "Current page: ";
