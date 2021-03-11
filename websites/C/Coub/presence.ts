@@ -36,9 +36,6 @@ const matchYoutubeUrl = (url: string): boolean =>
   !!url.match(
     /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w-]+\?v=|embed\/|v\/)?)([\w-]+)(\S+)?$/gm
   );
-function parseBridgeUrl(id: string) {
-  return `coubdl-bridge://${id}`;
-}
 function getSourceLink(url: string): { label: string; url: string }[] {
   if (!url) return [];
   if (matchYoutubeUrl(url)) {
