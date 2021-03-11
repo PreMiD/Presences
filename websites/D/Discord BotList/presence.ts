@@ -91,7 +91,7 @@ botPresence.on("UpdateData", async () => {
     } else if (botPage == "/privacypolicy/") {
       botData.details = "Viewing Privacy Policy";
     } else if (botPage == "/Imprint/") {
-      botData.details = "Viewing Impressum";
+      botData.details = "Viewing Imprint";
     }
   } else if (botHost == "docs.discord-botlist.eu") {
     const page = document.querySelector("#__GITBOOK__ROOT__CLIENT__ > div.reset-3c756112--body-68cac36c > div.reset-3c756112--bodyContent-2f98451b > div > div.reset-3c756112--wholeContentBody-554be184 > div.reset-3c756112--wholeContentPage-6c3f1fc5 > div > div.reset-3c756112--pageContainer-544d6e9c > div.reset-3c756112 > div.reset-3c756112--pageHeader-15724735 > div > div > div.reset-3c756112--horizontalFlex-5a0077e0 > div.reset-3c756112--pageHeaderIntro-0c1463da > h1 > span").textContent;
