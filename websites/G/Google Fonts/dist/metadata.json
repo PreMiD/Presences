@@ -16,10 +16,10 @@
     "fr": "Google Fonts est un service de Google qui propose plus de mille polices d'écriture gratuites et sous licences libres à disposition de projets Android ou d'applications web (via CSS)."
   },
   "url": "fonts.google.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://zupimages.net/up/21/10/3xo3.png",
   "thumbnail": "https://i.imgur.com/lVved9l.png",
-  "color": "#ff5756",
+  "color": "#1A73E8",
   "tags": [
     "google",
     "fonts"
