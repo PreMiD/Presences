@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "632293282847784973"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "632293282847784973"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 async function getStrings() {
   return presence.getStrings(
