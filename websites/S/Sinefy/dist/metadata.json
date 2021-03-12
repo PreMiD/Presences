@@ -19,10 +19,6 @@
   "iframe": true,
   "settings": [
     {
-      "id": "lang",
-      "multiLanguage": true
-    },
-    {
       "icon": "fas fa-address-card",
       "id": "buttons",
       "title": "Butonları Göster",

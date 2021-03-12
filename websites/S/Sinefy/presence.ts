@@ -1,15 +1,13 @@
 const sinefy = new Presence({
     clientId: "817552908991594530"
   }),
-  strings = async () => {
-    return sinefy.getStrings(
-      {
-        play: "general.playing",
-        pause: "general.paused"
-      },
-      await sinefy.getSetting("lang")
-    );
-  },
+  strings = sinefy.getStrings(
+    {
+      play: "general.playing",
+      pause: "general.paused"
+    },
+    "tr"
+  ),
   pages: { [k: string]: string } = {
     "/": "Ana Sayfa",
     "/gozat": "Göz At",
@@ -65,7 +63,6 @@ sinefy.on("UpdateData", async () => {
         document.querySelector(".bg-cover-faker h1.page-title span")
           ?.textContent || null;
 
-    // Set status state
     activity.details = title.replace(episode, "");
     if (episode) activity.state = episode.replace("izle", "");
 
@@ -75,7 +72,6 @@ sinefy.on("UpdateData", async () => {
         video.duration
       );
 
-      // Set timestamps
       activity.startTimestamp = timestamps[0];
       activity.endTimestamp = timestamps[1];
 
@@ -92,14 +88,12 @@ sinefy.on("UpdateData", async () => {
           }
         ];
 
-      // Set playing/paused text
       activity.smallImageKey = video.paused ? "pause" : "play";
       activity.smallImageText = video.paused
-        ? (await strings()).pause
-        : (await strings()).play;
+        ? (await strings).pause
+        : (await strings).play;
     }
 
-    // Set activity
     sinefy.setActivity(activity);
   } else if (page.includes("/gozat/")) {
     const title =
@@ -118,7 +112,6 @@ sinefy.on("UpdateData", async () => {
     activity.details = "Bir kullanıcıya göz atıyor:";
     activity.state = username;
 
-    // Set buttons if settings is turned on
     if (settings.buttons === true)
       activity.buttons = [
         {
