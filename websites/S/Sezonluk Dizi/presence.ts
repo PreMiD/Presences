@@ -105,7 +105,7 @@ sezonlukDizi.on("UpdateData", async () => {
     presenceData.state = showTitle;
     presenceData.smallImageKey = "reading";
     presenceData.smallImageText = "Bir tartışma okuyor";
-  } else if (Object.keys(video || {})?.length > 0) {
+  } else if (Object.keys(video || {}).length > 0) {
     const showTitle =
         document.querySelector(".content strong h1.header a")?.textContent ||
         "Bilinmeyen İsim",
