@@ -668,7 +668,6 @@ presence.on("UpdateData", async () => {
       } else if (path.includes("/world/") && !VideoMedia.duration){
         presenceData.details = (await strings).viewPage; 
         presenceData.state = "World News";
-        break;
       } else if (VideoMedia.duration){
         const timestamps = presence.getTimestamps(VideoMedia.currentTime, VideoMedia.duration);
 
@@ -690,8 +689,6 @@ presence.on("UpdateData", async () => {
           label: (await strings).watchVideo,
           url: document.baseURI
         }];
-
-        break;
       } else if (path.match(/(-[0-9])/)) {
         presenceData.details = (await strings).readingAricle; 
         presenceData.state = title;
@@ -700,8 +697,6 @@ presence.on("UpdateData", async () => {
           label: "Read",
           url: document.baseURI
         }];
-
-        break;
       }
     }
   } else if (path === "/search"){
