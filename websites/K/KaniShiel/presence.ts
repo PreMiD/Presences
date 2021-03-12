@@ -13,42 +13,43 @@ presence.on("UpdateData", async () => {
   if (sprivacy) {
     presenceData.details = "Browsing";
   } else {
-    if (window.location.pathname.endsWith("commandes")) {
-      presenceData.details = "Viewing a page:";
+    let PATH = window.location.pathname.replace('.php','');
+    if (PATH.endsWith("commandes")) {
+      presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Commands";
-    } else if (window.location.pathname.endsWith("informations")) {
-      presenceData.details = "Viewing a page:";
+    } else if (PATH.endsWith("informations")) {
+      presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Informations";
-    } else if (window.location.pathname.endsWith("roles")) {
+    } else if (PATH.endsWith("roles")) {
       presenceData.smallImageKey = "roles";
-      presenceData.details = "Viewing a page:";
+      presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Werewolf roles";
-    } else if (window.location.pathname.endsWith("credits_kani")) {
-      presenceData.details = "Viewing a page:";
+    } else if (PATH.endsWith("credits_kani")) {
+      presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Credits";
-    } else if (window.location.pathname.endsWith("maintenance")) {
-      presenceData.details = "Viewing a page:";
+    } else if (PATH.endsWith("maintenance")) {
+      presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Maintenance";
-    } else if (window.location.pathname.endsWith("contact_kani")) {
-      presenceData.details = "Viewing a page:";
+    } else if (PATH.endsWith("contact_kani")) {
+      presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Contact";
-    } else if (window.location.pathname.endsWith("choix_serv")) {
+    } else if (PATH.endsWith("choix_serv")) {
       presenceData.smallImageKey = "dashboard";
-      presenceData.details = "Using the dashboard:";
+      presenceData.details = "Using the KaniShiel's dashboard:";
       presenceData.state = "Choosing a server";
-    } else if (window.location.pathname.startsWith("/dashboard")) {
+    } else if (PATH.startsWith("/dashboard")) {
       presenceData.smallImageKey = "dashboard";
       if (privacy) {
         presenceData.details = "Editing a server";
-        presenceData.state = "with the dashboard";
+        presenceData.state = "with the KaniShiel's dashboard";
       } else {
-        presenceData.details = "Using the dashboard of :";
+        presenceData.details = "Using the KaniShiel's dashboard of :";
         presenceData.state = document.getElementById(
           "563749920683720709"
         ).textContent;
       }
     } else {
-      presenceData.details = "Viewing a page:";
+      presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Home";
     }
   }

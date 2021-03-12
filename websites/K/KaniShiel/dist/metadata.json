@@ -4,10 +4,10 @@
     "name": "fantomitechno 🦊",
     "id": "563749920683720709"
   },
-  "url": "kanishiel.com",
+  "url": "kaniwork.com",
   "description": {
-    "en": "KaniShiel is a discord bot that can host multiple games on an indefinite number of simultaneous servers.",
-    "fr": "KaniShiel est un bot de jeu qui peut animer de multiple jeu sur un nombre indéfini de serveur simultané."
+    "en": "KaniShiel is a discord bot that can host multiple games on an indefinite number of simultaneous servers. He is also part of a bot network : the Kani NetWork",
+    "fr": "KaniShiel est un bot de jeu qui peut animer de multiple jeu sur un nombre indéfini de serveur simultané. Il fait aussi parti d'un réseau : le Kani NetWork"
   },
   "service": "KaniShiel",
   "version": "1.2.1",
@@ -18,13 +18,14 @@
     "bot",
     "kanishiel",
     "discord",
-    "game-bot"
+    "game-bot",
+    "kani-network"
   ],
   "category": "other",
   "settings": [
     {
       "id": "privacy",
-      "title": "Hide server",
+      "title": "Hide server in the dashboard",
       "icon": "fad fa-user-secret",
       "value": false
     },
