@@ -181,7 +181,7 @@ presence.on("UpdateData", async () => {
             url: document.baseURI
           }
         ];
-      } else if ("/formula1/"){
+      } else if (path.includes("/formula1/")){
         presenceData.details = (await strings).readingAricle;
         presenceData.state = title;
         presenceData.buttons = [
@@ -387,7 +387,7 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [{
           label: (await strings).watchVideo,
           url: document.baseURI
-        }]
+        }];
       }
     }
 
@@ -427,7 +427,7 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [{
           label: (await strings).watchVideo,
           url: document.baseURI
-        }]
+        }];
       }
     }
 
@@ -473,7 +473,7 @@ presence.on("UpdateData", async () => {
           url: document.baseURI
         }]
       }
-    }
+    };
 
     for (const [key, value] of Object.entries(weatherPages)){
       if (path.match(key) && !VideoMedia.duration){
@@ -658,7 +658,7 @@ presence.on("UpdateData", async () => {
       "/business": {
         details: (await strings).viewPage,
         state: "Business news"
-      },
+      }
     };
 
     for (const [key, value] of Object.entries(newsPages)){
@@ -689,15 +689,18 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [{
           label: (await strings).watchVideo,
           url: document.baseURI
-        }]
+        }];
+
         break;
       } else if (path.match(/(-[0-9])/)) {
         presenceData.details = (await strings).readingAricle; 
         presenceData.state = title;
+
         presenceData.buttons = [{
           label: "Read",
           url: document.baseURI
         }];
+
         break;
       }
     }
