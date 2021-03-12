@@ -160,6 +160,12 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.details;
+  } else if (document.location.pathname.startsWith("/codespaces")) {
+    presenceData.state = "Browsing codespaces...";
+
+    presenceData.startTimestamp = browsingStamp;
+
+    delete presenceData.details;
   } else if (document.location.pathname.indexOf(search)) {
     presenceData.details = "Searching for: ";
 

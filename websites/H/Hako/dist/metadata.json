@@ -1,0 +1,28 @@
+{
+  "author": {
+    "name": "Kinue",
+    "id": "634246091293851649"
+  },
+  "service": "Hako",
+  "description": {
+    "en": "Read vietnamese translated light/web novels online.",
+    "vi_VN": "Đọc light/web novels đã đươc dịch online"
+  },
+  "url": [
+    "docln.net",
+    "ln.hako.re"
+  ],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/rkmqU73.png",
+  "thumbnail": "https://i.imgur.com/tn5PhoK.png",
+  "color": "#1e5069",
+  "tags": [
+    "anime",
+    "hako",
+    "docln",
+    "webnovel",
+    "lightnovel",
+    "novel"
+  ],
+  "category": "anime"
+}

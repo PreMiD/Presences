@@ -59,17 +59,17 @@ presence.on("iFrameData", (data: IFrameData) => {
 presence.on("UpdateData", async () => {
   const page: string = document.location.pathname,
     movieTitle = document
-      .querySelector("#t1 > li > div.ssag > h1")
-      ?.textContent.split("|")[0]
-      .replace("izle", ""),
+      .querySelector('h1[itemprop="name"]')
+      ?.textContent?.replace(/(( +)| )izle \| hd|izle|hd/gi, ""),
     isVideoData = Object.keys(video).length > 0 ? true : false;
 
   // Search Results
-  if (page.includes("/?s")) {
+  if (
+    page.includes("/?s") &&
+    new URLSearchParams(document.location.search).get("s")
+  ) {
     presenceData.details = "Arama sonuçları:";
-    presenceData.state = document
-      .querySelector("#sayfa > div.sayfa-sol > div:nth-child(1)")
-      ?.textContent.replace(" Video Arama Sonuçları", "");
+    presenceData.state = new URLSearchParams(document.location.search).get("s");
   }
 
   // Pages
@@ -86,6 +86,9 @@ presence.on("UpdateData", async () => {
       "#sayfa > div.sayfa-sol > div.t-baslik"
     )?.textContent;
     presenceData.startTimestamp = browsingStamp;
+  } else if (page.startsWith("/diziler/") && document.title.includes(" | ")) {
+    presenceData.details = "Bir kategoriye göz atıyor:";
+    presenceData.state = document.title.split(" | ")[0];
   }
 
   // Members
@@ -114,7 +117,7 @@ presence.on("UpdateData", async () => {
 
   // Movies & Series
   if (
-    document.querySelector("#t1 > li > div.ssag > h1")?.textContent &&
+    document.querySelector('h1[itemprop="name"]')?.textContent &&
     video?.currentTime &&
     isVideoData
   ) {
@@ -143,7 +146,7 @@ presence.on("UpdateData", async () => {
       delete presenceData.endTimestamp;
     }
   } else if (
-    document.querySelector("#t1 > li > div.ssag > h1")?.textContent &&
+    document.querySelector('h1[itemprop="name"]')?.textContent &&
     isVideoData
   ) {
     if (movieTitle.includes("Sezon") && movieTitle.includes("Bölüm"))

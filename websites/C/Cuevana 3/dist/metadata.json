@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Rare Akuma ☆",
+    "id": "250044591686811669"
+  },
+  "url": "cuevana3.io",
+  "service": "Cuevana 3",
+  "description": {
+    "en": "Cuevana 3 is a streaming website where you can watch and download movies and series in spanish, english and subtitled.",
+    "es": "Cuevana 3 es una pagina web donde puedes ver y descargar películas y series en latino, español, ingles y subtitulado."
+  },
+  "version": "1.1.4",
+  "logo": "https://i.imgur.com/uu5XX85.png",
+  "thumbnail": "https://i.imgur.com/TckG8Jd.png",
+  "color": "#007AFF",
+  "tags": [
+    "cuevana",
+    "streaming",
+    "movies",
+    "series"
+  ],
+  "category": "videos",
+  "iframe": true
+}

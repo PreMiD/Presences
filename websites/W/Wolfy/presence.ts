@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "721798189111443537"
+    clientId: "760589758845550632"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -26,8 +26,8 @@ function getTimestamps(
 ): Array<number> {
   const splitAudioDuration = audioDuration.split(":").reverse(),
     parsedAudioDuration = getTime(splitAudioDuration),
-    startTime = Date.now();
-  const endTime = audioTime + parsedAudioDuration * 1000;
+    startTime = Date.now(),
+    endTime = audioTime + parsedAudioDuration * 1000;
   return [startTime, endTime];
 }
 

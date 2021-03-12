@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "UserBenchmark",
   "description": {
     "en": "Top Market Research & Genuine Product Insight from our Users. Quickly find category leading products with UserBenchmark."
@@ -16,7 +22,7 @@
     "ram.userbenchmark.com",
     "usb.userbenchmark.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/4TBit6H.png",
   "thumbnail": "https://i.imgur.com/JOE2SVg.png",
   "color": "#FDA217",

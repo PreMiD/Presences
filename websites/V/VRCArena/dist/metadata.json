@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "KnuffelBeestje",
+    "id": "219155156569161731"
+  },
+  "url": "www.vrcarena.com",
+  "description": {
+    "en": "Download and upload various kinds of assets and tutorials for the different species found in the online multiplayer VR social game VRChat.",
+    "nl": "Download en upload verschillende assets en tutorials voor verschillende (dier)soorten die te vinden zijn in het VR online multiplayer spel VRChat."
+  },
+  "service": "VRCArena",
+  "version": "1.0.4",
+  "logo": "https://i.imgur.com/Kio1VbP.jpg",
+  "thumbnail": "https://i.imgur.com/F7iayRw.png",
+  "color": "#5f3d8a",
+  "tags": [
+    "vrchat",
+    "vr",
+    "games"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fas fa-user-secret",
+      "value": false
+    }
+  ]
+}

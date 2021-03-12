@@ -1,0 +1,35 @@
+{
+  "author": {
+    "name": "Striker",
+    "id": "215509157837537280"
+  },
+  "service": "Kickassanime",
+  "description": {
+    "en": "Kickassanime is a streaming website where you can watch anime in dubbed formats and subbed formats."
+  },
+  "url": "kickassanime.rs",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/r0G232F.png",
+  "thumbnail": "https://i.imgur.com/c2vGXuN.png",
+  "color": "#c7c95b",
+  "tags": [
+    "anime",
+    "videos",
+    "movies"
+  ],
+  "iframe": true,
+  "regExp": "([a-z0-9-]+[.])*kickassanime([.][a-z]+)+[/]",
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

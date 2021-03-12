@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "Metastream",
   "description": {
     "en": "Watch and listen to your favorite content with friends."
@@ -11,7 +17,7 @@
     "getmetastream.com",
     "app.getmetastream.com"
   ],
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/vAozqPN.png",
   "thumbnail": "https://i.imgur.com/CGjj2MG.png",
   "color": "#DAAFB9",

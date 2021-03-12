@@ -3,6 +3,12 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Striker",
+      "id": "215509157837537280"
+    }
+  ],
   "service": "YummyAnime",
   "description": {
     "en": "Watch anime online (Russion Subbed) in high quality and direct download for FREE! New anime manga daily added.",
@@ -10,7 +16,7 @@
     "zh_CN": "在线观看及免费下载高画质俄语字幕的动漫，每日更新新动漫和番剧。"
   },
   "url": "yummyanime.club",
-  "version": "1.1.7",
+  "version": "1.1.9",
   "logo": "https://i.imgur.com/12xbQOt.png",
   "thumbnail": "https://i.imgur.com/5C3B63m.png",
   "color": "#ff6766",

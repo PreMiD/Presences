@@ -1,0 +1,27 @@
+{
+  "author": {
+    "name": "Bas1C",
+    "id": "303603391941050370"
+  },
+  "service": "AnizmTV",
+  "description": {
+    "tr": "AnizmTV türkçe altyazılı animeyi kaliteli ve güncel izleyebileceğiniz sitedir.",
+    "en": "AnizmTV is a website which enables you to watch subtitled anime with high quality broadcasting and up-to-date episodes."
+  },
+  "url": [
+    "www.anizm.tv",
+    "anizm.tv"
+  ],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/TZZcyOQ.png",
+  "thumbnail": "https://i.imgur.com/o4P1a0J.png",
+  "color": "#fc9003",
+  "tags": [
+    "anime",
+    "türk",
+    "anizm",
+    "anizmtv"
+  ],
+  "category": "videos",
+  "iframe": true
+}

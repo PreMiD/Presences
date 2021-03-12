@@ -11,12 +11,8 @@
     "en": "V LIVE is a global entertainment platform that connects Korean stars and their fans.",
     "nl": "V LIVE is een wereldwijd entertainmentplatform dat Koreaanse sterren en hun fans met elkaar verbindt."
   },
-  "url": [
-    "www.vlive.tv",
-    "channels.vlive.tv",
-    "vtoday.vlive.tv"
-  ],
-  "version": "1.4.7",
+  "url": "www.vlive.tv",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/K6z2UeE.png",
   "thumbnail": "https://i.imgur.com/dLde4Ko.png",
   "color": "#54f7ff",
@@ -26,5 +22,81 @@
     "streaming",
     "kpop"
   ],
-  "category": "videos"
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "browse",
+      "title": "Show Browsing Status",
+      "icon": "fad fa-book-reader",
+      "value": true
+    },
+    {
+      "id": "live",
+      "title": "Show Livestreams",
+      "icon": "fad fa-podcast",
+      "value": true
+    },
+    {
+      "id": "streamDetail",
+      "if": {
+        "privacy": false
+      },
+      "title": "Stream Details row1",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%title%",
+      "placeholder": "Use %title% or %streamer%"
+    },
+    {
+      "id": "streamState",
+      "if": {
+        "privacy": false
+      },
+      "title": "Stream Details row2",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%streamer%",
+      "placeholder": "Use %title% or %streamer%"
+    },
+    {
+      "id": "video",
+      "title": "Show Videos",
+      "icon": "fas fa-video",
+      "value": true
+    },
+    {
+      "id": "vidDetail",
+      "if": {
+        "privacy": false
+      },
+      "title": "Video Details row1",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%title%",
+      "placeholder": "Use %title% or %uploader%"
+    },
+    {
+      "id": "vidState",
+      "if": {
+        "privacy": false
+      },
+      "title": "Video Details row2",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%uploader%",
+      "placeholder": "Use %title% or %uploader%"
+    },
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
 }

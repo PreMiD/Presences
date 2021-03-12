@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "EGGSY",
-    "id": "162969778699501569"
+    "name": "Bas950",
+    "id": "241278257335500811"
   },
   "contributors": [
     {
@@ -19,11 +19,16 @@
     {
       "name": "Callum",
       "id": "506899274748133376"
+    },
+    {
+    "name": "EGGSY",
+    "id": "162969778699501569"
     }
   ],
   "service": "PreMiD",
   "description": {
     "en": "PreMiD adds Discord Rich Presence support to a lot of services you use and love.",
+    "nl": "PreMiD voegt ondersteuning voor Discord Rich Presence toe aan veel services die u gebruikt en waar u van houdt.",
     "ga_IE": "Cuireann PreMiD tacaíocht Discord Rich Presence ar fáil do go leor seirbhísí a úsáideann tú agus a bhfuil grá agat dóibh.",
     "de": "PreMiD ergänzt viele Dienste, die du nutzt und liebst, um die Unterstützung von Discord Rich Presence.",
     "fr": "PreMiD ajoute le support de Discord Rich Presence à de nombreux services que vous utilisez et aimez.",
@@ -35,9 +40,9 @@
     "beta.premid.app",
     "status.premid.app"
   ],
-  "version": "2.2.6",
-  "logo": "https://crugg.de/premid/premid2.png",
-  "thumbnail": "https://crugg.de/premid/premid3.png",
+  "version": "3.0.2",
+  "logo": "https://i.imgur.com/eYLI4hf.png",
+  "thumbnail": "https://i.imgur.com/OYxIOZ8.png",
   "color": "#7289DA",
   "tags": [
     "discord",
@@ -45,5 +50,17 @@
     "inception"
   ],
   "category": "other",
-  "button": false
+  "button": false,
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "time",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
 }

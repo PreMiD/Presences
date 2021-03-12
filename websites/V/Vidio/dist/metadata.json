@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "Zen",
+    "id": "725331428962992131"
+  },
+  "service": "Vidio",
+  "description": {
+    "en": "Vidio.com is a video streaming service with various streaming content for tv, films, soap operas, original series and sports such as League 1, Champions and Europe"
+  },
+  "url": [
+    "vidio.com",
+    "www.vidio.com"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/WiWFwcn.png",
+  "thumbnail": "https://i.imgur.com/rrNGa2h.jpg",
+  "color": "#ffffff",
+  "tags": [
+    "streaming",
+    "vidio",
+    "other"
+  ],
+  "category": "videos"
+}

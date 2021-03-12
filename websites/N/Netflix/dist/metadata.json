@@ -5,6 +5,10 @@
   },
   "contributors": [
     {
+      "name": "Bas950",
+      "id": "241278257335500811"
+    },
+    {
       "name": "Bryan",
       "id": "293775922757238784"
     },
@@ -14,6 +18,7 @@
     }
   ],
   "service": "Netflix",
+  "altnames": ["Нетфликс", "Նեթֆլիքս", "נטפליקס", "נעטפליקס", "نتفليكس", "نتفلیکس", "نيتفليكس", "نیٹ فلکس", "نیٹ فلیکس", "نێتفلیکس", "نەتفلىكىس", "नेटफ्लिक्स", "নেটফ্লিক্স", "ਨੈਟਫਲਿਕਸ", "நெற்ஃபிளிக்சு", "నెట్‌ఫ్లిక్స్", "ನೆಟ್‍ಫ್ಲಿಕ್ಸ್", "നെറ്റ്ഫ്ലിക്സ്", "เน็ตฟลิกซ์", "網飛", "넷플릭스"],
   "description": {
     "en": "Netflix is the world's leading internet entertainment service with 139 million paid memberships in over 190 countries enjoying TV series, documentaries and feature films across a wide variety of genres and languages.",
     "de": "Netflix ist der weltweit führende Internet-Entertainment-Dienst mit 139 Millionen bezahlten Mitgliedschaften in über 190 Ländern, die TV-Serien, Dokumentationen und Spielfilme in einer Vielzahl von Genres und Sprachen genießen.",
@@ -30,14 +35,106 @@
     "www.netflix.com",
     "netflix.com"
   ],
-  "version": "3.6.5",
-  "logo": "https://i.gyazo.com/2161fe603eec5196905176f5b8dcc325.png",
-  "thumbnail": "https://i.gyazo.com/28e3c4caccda67a4a299588c8058da50.jpg",
+  "version": "4.1.0",
+  "logo": "https://i.imgur.com/gvnSwSK.png",
+  "thumbnail": "https://i.imgur.com/LWcRBZs.jpg",
   "color": "#db0000",
   "tags": [
     "netflix",
     "video",
     "media"
   ],
-  "category": "videos"
+  "category": "videos",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "browse",
+      "title": "Show Browsing Status",
+      "icon": "fad fa-book-reader",
+      "value": true
+    },
+    {
+      "id": "movie",
+      "title": "Show Movies",
+      "icon": "fad fa-camera-movie",
+      "value": true
+    },
+    {
+      "id": "movieDetail",
+      "if": {
+        "privacy": false
+      },
+      "title": "Movie Details row1",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%title%",
+      "placeholder": "Use %title% or {0} to delete the row completely"
+    },
+    {
+      "id": "movieState",
+      "if": {
+        "privacy": false
+      },
+      "title": "Movie Details row2",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "Movie",
+      "placeholder": "Use %title% or {0} to delete the row completely"
+    },
+    {
+      "id": "series",
+      "title": "Show Series",
+      "icon": "fad fa-film",
+      "value": true
+    },
+    {
+      "id": "seriesDetail",
+      "if": {
+        "privacy": false
+      },
+      "title": "Series Details row1",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%title%",
+      "placeholder": "Use %title% or %episode%"
+    },
+    {
+      "id": "seriesState",
+      "if": {
+        "privacy": false
+      },
+      "title": "Video Details row2",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%episode%",
+      "placeholder": "Use %title% or %episode% or {0} to delete the row completely"
+    },
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "if": {
+        "privacy": false
+      },
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "logo",
+      "title": "Icon",
+      "icon": "fad fa-images",
+      "value": 0,
+      "values": ["Normal", "No Background"]
+    }
+  ]
 }
