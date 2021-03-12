@@ -119,7 +119,7 @@ sezonlukDizi.on("UpdateData", async () => {
     presenceData.details = showTitle;
     presenceData.state = episode;
 
-    // Set timestamps
+
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
 
@@ -135,7 +135,7 @@ sezonlukDizi.on("UpdateData", async () => {
       }
     ];
 
-    // Set playing/paused text
+
     presenceData.smallImageKey = video.paused ? "pause" : "play";
     presenceData.smallImageText = video.paused
       ? (await strings).pause
