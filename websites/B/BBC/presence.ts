@@ -495,8 +495,6 @@ presence.on("UpdateData", async () => {
           delete presenceData.startTimestamp;
           delete presenceData.endTimestamp;
         }
-
-        break;
       }
     }
 
