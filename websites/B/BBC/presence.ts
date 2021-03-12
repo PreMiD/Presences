@@ -715,12 +715,7 @@ presence.on("UpdateData", async () => {
   if (!buttonsE) delete presenceData.buttons;
   if (presenceData.details === (await strings).searchFor && !showSearchQuery) presenceData.state = "(Hidden)";
 
-  if (presenceData.details === null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  presence.setActivity(presenceData);
 });
 
 interface IPlayerData {
