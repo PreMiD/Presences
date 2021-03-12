@@ -19,16 +19,10 @@ let strings = getStrings(),
     oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "iqiyi_logo",
-      details: (await strings).browse,
-      smallImageKey: "search",
-      smallImageText: (await strings).browse,
-      startTimestamp: browsingStamp
-    },
-    newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang"),
     showButtons: boolean = await presence.getSetting("buttons"),
-    searchQuery: boolean = await presence.getSetting("searchQuery");
+    searchQuery: boolean = await presence.getSetting("searchQuery"),
+    logo = ["iqiyi_logo", "iqiyi_logo_b"][await presence.getSetting("logo")];
   
   if (!oldLang) {
     oldLang = newLang;
@@ -36,6 +30,14 @@ presence.on("UpdateData", async () => {
     oldLang = newLang;
     strings = getStrings();
   }
+
+  const presenceData: PresenceData = {
+    largeImageKey: logo,
+    details: (await strings).browse,
+    smallImageKey: "search",
+    smallImageText: (await strings).browse,
+    startTimestamp: browsingStamp
+  };
 
   if (document.location.pathname.includes('/play') || document.location.pathname.includes("/intl-common/")){
 

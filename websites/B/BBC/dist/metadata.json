@@ -8,7 +8,7 @@
   "description": {
     "en": "The best of the BBC, with the latest news and sport headlines, weather, TV & radio highlights and much more from across the whole of BBC Online."
   },
-  "url": "www.bbc.co.uk",
+  "url": [ "www.bbc.co.uk", "www.bbc.com" ],
   "version": "2.0.0",
   "logo": "https://i.imgur.com/4GzQf9o.png",
   "thumbnail": "https://i.imgur.com/fBxxQDw.png",
@@ -16,9 +16,13 @@
   "tags": [
     "bbc",
     "bbc-iplayer",
-    "bbc-sounds"
+    "bbc-sounds",
+    "movie",
+    "weather",
+    "bbc-weather",
+    "news"
   ],
-  "category": "videos",
+  "category": "other",
   "iframe": true,
   "settings": [
     {
@@ -27,8 +31,14 @@
     },
     {
       "id": "buttons",
-      "title": "Show buttons",
+      "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "search",
+      "title": "Show Search Query",
+      "icon": "fas fa-search",
       "value": true
     }
   ]
