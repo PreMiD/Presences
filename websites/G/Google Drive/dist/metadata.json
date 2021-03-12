@@ -14,10 +14,11 @@
     "en": "Google Drive is a file storage and synchronization service developed by Google. Launched on April 24, 2012, Google Drive allows users to store files on their servers, synchronize files across devices, and share files.",
     "zh_CN": "Google云端硬盘是Google的一个在线同步存储服务，同时结合Google文档及Google我的地图的在线文件编辑功能。",
     "zh_TW": "Google雲端硬碟是Google的一個線上同步儲存服務，同時結合Google文件及Google我的地圖的線上檔案編輯功能。",
-    "ga_IE": "Is seirbhís stórála agus sioncronaithe é Google Drive a d'fhorbair Google. Le seoladh ar 24 Aibreán, 2012, ceadaíonn Google Drive d'úsáideoirí comhaid a stóráil ar a bhfreastalaithe, comhaid a shioncrónú ar fud na bhfeistí, agus comhaid a roinnt."
+    "ga_IE": "Is seirbhís stórála agus sioncronaithe é Google Drive a d'fhorbair Google. Le seoladh ar 24 Aibreán, 2012, ceadaíonn Google Drive d'úsáideoirí comhaid a stóráil ar a bhfreastalaithe, comhaid a shioncrónú ar fud na bhfeistí, agus comhaid a roinnt.",
+    "nl": "Google Drive is een service voor bestandsopslag en synchronisatie die is gemaakt en wordt beheerd door Google. Met Google Drive kunnen documenten in de cloud worden opgeslagen, bestanden worden gedeeld en documenten samen met anderen worden bewerkt."
   },
   "url": "drive.google.com",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "logo": "https://i.imgur.com/LUYnD71.png",
   "thumbnail": "https://i.imgur.com/mZdtUw5.png",
   "color": "#3aa154",

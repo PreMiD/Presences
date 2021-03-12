@@ -5,6 +5,10 @@
   },
   "contributors": [
     {
+      "name": "Encrypted",
+      "id": "564434085708038144"
+    },
+    {
       "name": "Bryan",
       "id": "293775922757238784"
     }
@@ -16,7 +20,7 @@
     "zh_TW": "Amazon Music是由Amazon.com經營的音樂串流平台和在線音樂商店。"
   },
   "url": "music.amazon.com",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/AUKbzxX.png",
   "thumbnail": "https://i.imgur.com/htSGR6k.png",
   "color": "#21293C",
@@ -27,5 +31,23 @@
     "media"
   ],
   "category": "music",
-  "regExp": "music[.]amazon([.][a-z]+)+[/]"
+  "regExp": "music[.]amazon([.][a-z]+)+[/]",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "showPlaylist",
+      "title": "Show Playlist",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }
