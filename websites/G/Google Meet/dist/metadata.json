@@ -3,18 +3,25 @@
     "name": "Drull",
     "id": "244953147154366464"
   },
+  "contributors": [
+    {
+      "name": "Maxou",
+      "id": "448518859184406529"
+    }
+  ],
   "url": "meet.google.com",
   "description": {
     "en": " Google Meet is a communication platform, developed by Google, which includes instant messaging, video chat, SMS and VOIP.",
     "pt_BR": "Google Meet é uma plataforma de comunicação, desenvolvida pela Google, que inclui mensagens instantâneas, chat de vídeo, SMS e VOIP.",
+    "fr": "Google Meet est un service de visioconférence développé par Google (pour remplacer Google Hangouts).",
     "nl": "Google Meet is een communicatieplatform ontwikkeld door Google en heeft de mogelijkheid om te chatten, te (video)bellen en te sms'en."
   },
   "service": "Google Meet",
-  "version": "1.2.3",
-  "logo": "https://i.imgur.com/OFbN8Uu.png",
-  "thumbnail": "https://i.imgur.com/6BRZ63d.png",
-  "color": "#308574",
-  "tags": ["google", "meet", "video"],
+  "version": "1.2.4",
+  "logo": "https://zupimages.net/up/21/10/57a3.png",
+  "thumbnail": "https://zupimages.net/up/21/10/ebdo.jpeg",
+  "color": "#00AC47",
+  "tags": ["google", "meet", "telework", "video"],
   "category": "socials",
   "regExp": "meet[.]google([.][a-z]+)+[/]"
 }
