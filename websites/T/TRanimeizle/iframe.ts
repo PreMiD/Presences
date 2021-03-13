@@ -1,10 +1,10 @@
-const sinefyIframe = new iFrame();
+const TRanimeizleIframe = new iFrame();
 
-sinefyIframe.on("UpdateData", () => {
+TRanimeizleIframe.on("UpdateData", () => {
   const video: HTMLVideoElement = document.querySelector("video");
 
   if (video && !isNaN(video.duration))
-    sinefyIframe.send({
+    TRanimeizleIframe.send({
       duration: video.duration,
       currentTime: video.currentTime,
       paused: video.paused
