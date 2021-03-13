@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     };
 
-  if (lastPath != curPath || lastPlaybackState != playback) {
+  if (lastPath !== curPath || lastPlaybackState !== playback) {
     lastPath = curPath;
     lastPlaybackState = playback;
     browsingStamp = Math.floor(Date.now() / 1000);
@@ -46,12 +46,24 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Đang đăng nhập...";
     else if (curPath.startsWith("/register.php"))
       presenceData.details = "Đang đăng ký...";
+    else if (curPath.startsWith("/genres.php")) {
+      presenceData.state =
+        "Thể loại: " + document.querySelector(".genreh2").innerHTML;
+      presenceData.details = "Đang chọn phim...";
+    } else if (curPath.startsWith("/history.php"))
+      presenceData.details = "Đang xem lịch sử...";
+    else if (curPath.startsWith("/saved.php"))
+      presenceData.details = "Đang xem danh sách theo dõi...";
     else if (curPath.startsWith("/reset-password"))
       presenceData.details = "Đang đặt lại mật khẩu...";
     else presenceData.details = "Đang xem trang chủ...";
     presenceData.startTimestamp = browsingStamp;
 
-    if (!curPath.startsWith("/entity.php")) delete presenceData.state;
+    if (
+      !curPath.startsWith("/entity.php") &&
+      !curPath.startsWith("/genres.php")
+    )
+      delete presenceData.state;
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData, true);
