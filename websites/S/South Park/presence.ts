@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
   if (!buttons) delete presenceData.buttons;
 
   presence.setActivity(presenceData);
-})
+});
 
 interface __DATA__ {
   children: {
