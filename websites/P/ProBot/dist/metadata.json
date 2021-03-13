@@ -12,8 +12,7 @@
   "service": "ProBot",
   "description": {
     "en": "Welcome images, moderation, global levels, logs, high quality music and many many more!",
-    "fr": "ProBot est un bot Discord polyvalent très personnalisable pour les images de bienvenue, les actions récentes détaillés, les commandes sociales, la musique, la modération et bien plus encore...",
-    "fr_CA": "ProBot est un robot Discord polyvalent très personnalisable pour les images de bienvenue, les actions récentes détaillés, les commandes sociales, la musique, la modération et bien plus encore..."
+    "fr": "ProBot est un bot Discord polyvalent très personnalisable pour les images de bienvenue, les actions récentes détaillés, les commandes sociales, la musique, la modération et bien plus encore..."
   },
   "url": "probot.io",
   "version": "1.3.5",
