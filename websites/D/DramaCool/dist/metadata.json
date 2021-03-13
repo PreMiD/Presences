@@ -5,6 +5,7 @@
       "id": "374905512661221377"
     },
     "url": "dramacool.vc",
+    "regExp": "[0-9w]{0,6}.*dramacool.[a-z]+",
     "description": {
       "en": "Dramacool - Watch Asian Dramas, Movies and Shows with English Subtitles on Dramacool in Full HD For Free. A cool Site for Great Peoples."
     },
