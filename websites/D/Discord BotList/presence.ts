@@ -8,7 +8,9 @@ botPresence.on("UpdateData", async () => {
     largeImageKey: "logo"
   },
     botPage = document.location.pathname,
-    botHost = document.location.hostname;
+    botHost = document.location.hostname,
+    buttons = await botPresence.getSetting("buttons"),
+    submitP = await botPresence.getSetting("submit");
 
   botData.startTimestamp = botBrowsing;
 
@@ -69,7 +71,12 @@ botPresence.on("UpdateData", async () => {
             "url": document.URL
           }
         ];
-      } else {
+      } else if (botPage.includes("/new")) {
+        if (!submitP) return;
+        botData.details = "Submitting Bot:";
+        botData.state = document.querySelector("#Sub_botname > input[type=text]").textContent;
+      }
+       else {
         const botName: string = document.getElementById("botname").textContent;
         botData.details = "Viewing Bot:";
         botData.state = botName;
@@ -96,6 +103,8 @@ botPresence.on("UpdateData", async () => {
     botData.details = "Viewing Docs";
     botData.state = "Page: " + page;
   }
+
+  if (!buttons) delete botData.buttons;
 
   if (botData.details == null) {
     botPresence.setTrayTitle();
