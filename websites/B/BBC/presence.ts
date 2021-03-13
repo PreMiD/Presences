@@ -515,7 +515,7 @@ presence.on("UpdateData", async () => {
         details: (await strings).viewPage,
         state: "Coronavirus pandemic"
       },
-      "(-|\/)([0-9])": {
+      "(-|/)([0-9])": {
         details: (await strings).readingAricle,
         state: title,
         buttons: [
