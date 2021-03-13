@@ -23,8 +23,7 @@ let strings = getStrings(),
 presence.on("UpdateData", async () => {
   const newLang = await presence.getSetting("lang"),
     showButtons: boolean = await presence.getSetting("buttons"),
-    searchQuery: boolean = await presence.getSetting("searchQuery"),
-    logo = ["iqiyi_logo", "iqiyi_logo_b"][await presence.getSetting("logo")];
+    searchQuery: boolean = await presence.getSetting("searchQuery");
 
   if (!oldLang) {
     oldLang = newLang;
@@ -34,7 +33,7 @@ presence.on("UpdateData", async () => {
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: logo,
+    largeImageKey: ["iqiyi_logo", "iqiyi_logo_b"][await presence.getSetting("logo")],
     details: (await strings).browse,
     smallImageKey: "search",
     smallImageText: (await strings).browse,

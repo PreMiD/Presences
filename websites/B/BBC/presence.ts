@@ -177,7 +177,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -186,7 +186,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -206,7 +206,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -215,7 +215,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -236,7 +236,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -278,7 +278,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -298,7 +298,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -320,7 +320,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -336,7 +336,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -352,7 +352,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
         presenceData.buttons = [
           {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ];
@@ -362,7 +362,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title;
       presenceData.buttons = [
         {
-          label: "Read",
+          label: "Read Aricle",
           url: document.baseURI
         }
       ];
@@ -460,7 +460,7 @@ presence.on("UpdateData", async () => {
         smallImageText: weather,
         smallImageKey: "reading",
         buttons: [{
-          label: "View",
+          label: "View Weather",
           url: document.baseURI
         }]
       },
@@ -469,7 +469,7 @@ presence.on("UpdateData", async () => {
         state: title,
         smallImageKey: "reading",
         buttons: [{
-          label: "Read",
+          label: "Read Aricle",
           url: document.baseURI
         }]
       }
@@ -515,86 +515,12 @@ presence.on("UpdateData", async () => {
         details: (await strings).viewPage,
         state: "Coronavirus pandemic"
       },
-      "/world_radio_and_tv-": {
-        details: (await strings).readingAricle,
-        state: title
-      },
-      "/blogs-": {
+      "(-|\/)([0-9])": {
         details: (await strings).readingAricle,
         state: title,
         buttons: [
           {
-            label: "Read",
-            url: document.baseURI
-          }
-        ]
-      },
-      "/technology-": {
-        details: (await strings).readingAricle,
-        state: title,
-        buttons: [
-          {
-            label: "Read",
-            url: document.baseURI
-          }
-        ]
-      },
-      "/science-environment-": {
-        details: (await strings).readingAricle,
-        state: title,
-        buttons: [
-          {
-            label: "Read",
-            url: document.baseURI
-          }
-        ]
-      },
-      "/stories-": {
-        details: (await strings).readingAricle,
-        state: title,
-        buttons: [
-          {
-            label: "Read",
-            url: document.baseURI
-          }
-        ]
-      },
-      "/entertainment_and_arts-":  {
-        details: (await strings).readingAricle,
-        state: title,
-        buttons: [
-          {
-            label: "Read",
-            url: document.baseURI
-          }
-        ]
-      },
-      "/health-": {
-        details: (await strings).readingAricle,
-        state: title,
-        buttons: [
-          {
-            label: "Read",
-            url: document.baseURI
-          }
-        ]
-      },
-      "/world-": {
-        details: (await strings).readingAricle,
-        state: title,
-        buttons: [
-          {
-            label: "Read",
-            url: document.baseURI
-          }
-        ]
-      },
-      "/business-": {
-        details: (await strings).readingAricle,
-        state: title,
-        buttons: [
-          {
-            label: "Read",
+            label: "Read Aricle",
             url: document.baseURI
           }
         ]
@@ -606,16 +532,6 @@ presence.on("UpdateData", async () => {
       "/reality_check": {
         details: (await strings).viewPage,
         state: "Reality Check"
-      },
-      "/newsbeat-": {
-        details: (await strings).readingAricle,
-        state: title,
-        buttons: [
-          {
-            label: "Read",
-            url: document.baseURI
-          }
-        ]
       },
       "/the_reporters": {
         details: (await strings).viewPage,
@@ -660,7 +576,7 @@ presence.on("UpdateData", async () => {
     };
 
     for (const [key, value] of Object.entries(newsPages)){
-      if (path.includes(key) && !path.includes("/world/") && !VideoMedia.duration){
+      if (path.match(key) && !path.includes("/world/") && !VideoMedia.duration){
         presenceData = { ...presenceData, ...value };
         break;
       } else if (path.includes("/world/") && !VideoMedia.duration){
@@ -692,7 +608,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title;
 
         presenceData.buttons = [{
-          label: "Read",
+          label: "Read Aricle",
           url: document.baseURI
         }];
       }

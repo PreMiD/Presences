@@ -214,7 +214,7 @@ presence.on("UpdateData", async () => {
           },
           {
             label: (await strings).viewSeries,
-            url: (document.querySelector('h2.sub > a') as unknown as EHref).href
+            url: document.querySelector<EHref>('h2.sub > a').href
           }
         ];
 
@@ -237,7 +237,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.buttons = [
         {
-          label: "Read",
+          label: "Read Chapter",
           url: document.baseURI
         }
       ];
@@ -264,7 +264,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceData);
 });
 
-interface EHref {
+interface EHref extends HTMLElement {
   href: string
 }
 
