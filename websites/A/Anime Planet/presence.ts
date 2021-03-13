@@ -93,7 +93,7 @@ presence.on("UpdateData", async () => {
         state: `${content.title} • ${document.querySelector('table > tbody > tr > td')?.textContent}`,
         buttons: [
           {
-            label: "View",
+            label: "View Character",
             url: document.baseURI
           }
         ]
@@ -103,7 +103,7 @@ presence.on("UpdateData", async () => {
         state: content.title,
         buttons: [
           {
-            label: "Read",
+            label: "Read Forum",
             url: document.baseURI
           }
         ]
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
         state: content.title,
         buttons: [
           {
-            label: "Read",
+            label: "Read Thread",
             url: document.baseURI
           }
         ]
