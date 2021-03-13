@@ -697,18 +697,12 @@ async function setDefaultsToPresence(): Promise<void> {
   if (presenceData.smallImageText) {
     delete presenceData.smallImageText;
   }
-  /*
   if (presenceData.startTimestamp) {
     delete presenceData.startTimestamp;
   }
   if (presenceData.endTimestamp && isNaN(presenceData.endTimestamp)) {
     delete presenceData.endTimestamp;
   }
-  */
-
-  // set default values, required for Math.floor on devHelper.ts
-  presenceData.startTimestamp = 0;
-  presenceData.endTimestamp = 0;
 
   if (await presence.getSetting("showTimestamps")) {
     presenceData.startTimestamp = Date.now();
