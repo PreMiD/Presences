@@ -16,7 +16,7 @@
   "service": "myCANAL",
   "description": {
     "en": "Canal+ is a French subscription provider associated to the channel of the same name. It is owned by Vivendi with a hundred percent share.",
-    "fr": "myCANAL est un service français de distribution de contenu par Internet du groupe Canal+. Il permet d’accéder aux programmes en direct et en replay des chaînes du groupe Canal+, mais aussi aux programmes des chaînes de la TNT gratuite française."
+    "fr": "myCANAL est un service français de distribution de contenu par Internet du groupe Canal+. Il permet d’accéder aux programmes en direct et en replay des chaînes du groupe Canal+, mais aussi aux programmes des chaines de la TNT gratuite française."
   },
   "url": "www.canalplus.com",
   "version": "1.1.8",
@@ -26,7 +26,6 @@
   "tags": [
     "mycanal",
     "video",
-    "canal+",
     "canal",
     "media"
   ],
