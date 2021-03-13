@@ -5,99 +5,92 @@ const presence = new Presence({
 
 let title: string;
 
+async function getStrings() {
+  return presence.getStrings(
+    {
+      editingDoc: "google docs.editingDoc",
+      viewingDoc: "google docs.viewingDoc",
+      browsingDoc: "google docs.browsingDoc",
+      editingForm: "google docs.editingForm",
+      viewingForm: "google docs.viewingForm",
+      browsingForm: "google docs.browsingForm",
+      editingSheet: "google docs.editingSheet",
+      viewingSheet: "google docs.viewingSheet",
+      browsingSheet: "google docs.browsingSheet",
+      editingPresentation: "google docs.editingPresentation",
+      browsingPresentation: "google docs.browsingPresentation",
+      vieiwngPresentation: "google docs.viewingPresentation"
+    },
+    await presence.getSetting("lang")
+  );
+}
+
+let strings = getStrings(),
+  oldLang: string = null;
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       startTimestamp: browsingStamp
     },
-    privacy = await presence.getSetting("privacy");
-  if (window.location.pathname.toLowerCase().includes("/document")) {
+    privacy = await presence.getSetting("privacy"),
+    newLang = await presence.getSetting("lang");
+
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
+
+  if (document.location.pathname.includes("/document")) {
     presenceData.largeImageKey = "docslogo";
     title = document.title.replace("- Google Docs", "");
-    if (window.location.pathname.toLowerCase().includes("/edit")) {
-      presenceData.details = privacy
-        ? "Editing a document"
-        : "Editing a document:";
-      presenceData.state = privacy ? null : title;
+    if (document.location.pathname.includes("/edit")) {
+      presenceData.details = (await strings).editingDoc;
+      if (!privacy) presenceData.state = title;
+    } else if (document.location.pathname.includes("/document/u/")) {
+      presenceData.details = (await strings).browsingDoc;
     } else {
-      if (window.location.pathname.toLowerCase() === "/document/u/0") {
-        presenceData.details = "Browsing documents";
-      } else {
-        presenceData.details = privacy
-          ? "Viewing a document"
-          : "Viewing a document:";
-        presenceData.state = privacy ? null : title;
-      }
+      presenceData.details = (await strings).viewingDoc;
+      if (!privacy) presenceData.state = title;
     }
-  }
-
-  if (window.location.pathname.toLowerCase().includes("/forms")) {
+  } else if (document.location.pathname.includes("/forms/")) {
     presenceData.largeImageKey = "formslogo";
     title = document.title.replace("- Google Forms", "");
-    if (window.location.pathname.toLowerCase().includes("/edit")) {
-      presenceData.details = privacy ? "Editing a form" : "Editing a form:";
-      presenceData.state = privacy ? null : title;
-    } else if(document.location.pathname === "/forms/u/0/"){
-      if (window.location.pathname.toLowerCase() === "/forms/u/0/") {
-        presenceData.details = "Browsing forms";
-      } else {
-        if (window.location.pathname.toLowerCase() === "/forms/u/0") {
-          presenceData.details = "Browsing forms";
-        } else {
-          presenceData.details = privacy ? "Viewing a form" : "Viewing a form:";
-          presenceData.state = privacy ? null : title;
-        }
-      }
+    if (document.location.pathname.includes("/edit")) {
+      presenceData.details = (await strings).editingForm;
+      if (!privacy) presenceData.state = title;
+    } else if (document.location.pathname.includes("/forms/u/")) {
+      presenceData.details = (await strings).browsingForm;
+    } else {
+      presenceData.details = (await strings).viewingForm;
+      if (!privacy) presenceData.state = title;
     }
-  }
-
-  if (window.location.pathname.toLowerCase().includes("/spreadsheets")) {
+  } else if (document.location.pathname.includes("/spreadsheets")) {
     presenceData.largeImageKey = "sheetslogo";
     title = document.title.replace("- Google Sheets", "");
-    if (window.location.pathname.toLowerCase().includes("/edit")) {
-      presenceData.details = privacy
-        ? "Editing a spreadsheet"
-        : "Editing a spreadsheet:";
-      presenceData.state = privacy ? null : title;
+    if (document.location.pathname.includes("/edit")) {
+      presenceData.details = (await strings).editingSheet;
+      if (!privacy) presenceData.state = title;
+    } else if (document.location.pathname.includes("/spreadsheets/u/")) {
+      presenceData.details = (await strings).browsingSheet;
     } else {
-      if (window.location.pathname.toLowerCase() === "/spreadsheets/u/0/") {
-        presenceData.details = "Browsing spreadsheets";
-      } else {
-        if (window.location.pathname.toLowerCase() === "/spreadsheets/u/0") {
-          presenceData.details = "Browsing spreadsheets";
-        } else {
-          presenceData.details = privacy
-            ? "Viewing a spreadsheet"
-            : "Viewing a spreadsheet:";
-          presenceData.state = privacy ? null : title;
-        }
-      }
+      presenceData.details = (await strings).viewingSheet;
+      if (!privacy) presenceData.state = title;
     }
-  }
-  if (window.location.pathname.toLowerCase().includes("/presentation")) {
+  } else if (document.location.pathname.includes("/presentation/")) {
     presenceData.largeImageKey = "slideslogo";
     title = document.title.replace("- Google Slides", "");
-    if (window.location.pathname.toLowerCase().includes("/edit")) {
-      presenceData.details = privacy
-        ? "Editing a slidesheet"
-        : "Editing a slidesheet:";
-      presenceData.state = privacy ? null : title;
+    if (document.location.pathname.includes("/edit")) {
+      presenceData.details = (await strings).editingPresentation;
+      if (!privacy) presenceData.state = title;
+    } else if (document.location.pathname.includes("/presentation/u/")) {
+      presenceData.details = (await strings).browsingPresentation;
     } else {
-      if (window.location.pathname.toLowerCase() === "/document/u/0/") {
-        presenceData.details = "Browsing slidesheets";
-      } else {
-        presenceData.largeImageKey = "slideslogo";
-        if (window.location.pathname.toLowerCase() === "/presentation/u/0") {
-          presenceData.details = "Browsing slidesheets";
-        } else {
-          presenceData.details = privacy
-            ? "Viewing a slidesheet"
-            : "Viewing a slidesheet:";
-          presenceData.state = privacy ? null : title;
-        }
-      }
+      presenceData.details = (await strings).vieiwngPresentation;
+      if (!privacy) presenceData.state = title;
     }
   }
-
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
