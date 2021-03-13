@@ -21,15 +21,13 @@
   "logo": "https://i.imgur.com/m768cDN.png",
   "thumbnail": "https://i.imgur.com/jbuIiwv.jpg",
   "color": "#3a404a",
-  "tags": [
-    "google",
-    "sheets",
-    "slides",
-    "forms",
-    "docs"
-  ],
+  "tags": ["google", "sheets", "slides", "forms", "docs"],
   "category": "other",
   "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
     {
       "id": "privacy",
       "title": "Privacy Mode",
