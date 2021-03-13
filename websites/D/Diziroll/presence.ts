@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
       stream.duration ? Math.floor(stream.duration) : null);
       presenceData.smallImageKey = stream.paused ? "pause" : "play";
       presenceData.smallImageText = stream.paused ? "Durduruldu" : "Oynatılıyor";
-      if (stream.paused == false) {
+      if (!stream.paused) {
           presenceData.startTimestamp = timestamps[0];
           presenceData.endTimestamp = timestamps[1];
         }
