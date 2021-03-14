@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
     date.textContent != ""
   ) {
     presence.setActivity({
-      largeImageKey: "po-logo",
+      largeImageKey: "icon-white",
       details: postTitle.textContent || "Belirsiz",
       state: `Yazar: ${author.textContent} (${date.textContent})`,
       smallImageKey: "reading",
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
     _author.textContent != ""
   ) {
     presence.setActivity({
-      largeImageKey: "po-logo",
+      largeImageKey: "icon-white",
       details: "Bir yazara göz atıyor:",
       smallImageKey: "author",
       smallImageText: `${_author.textContent} yazarına göz atıyor...`,
@@ -63,7 +63,7 @@ presence.on("UpdateData", async () => {
       );
 
     presence.setActivity({
-      largeImageKey: "po-logo",
+      largeImageKey: "icon-white",
       details: "Bir etikete göz atıyor:",
       smallImageKey: "tag",
       smallImageText: `${tag.textContent || "Belirsiz"} etiketine göz atıyor...`,
@@ -80,7 +80,7 @@ presence.on("UpdateData", async () => {
           : null;
 
     presence.setActivity({
-      largeImageKey: "po-logo",
+      largeImageKey: "icon-white",
       details: "Bir şey arıyor:",
       state: fixedSearch || "Belirsiz",
       smallImageKey: "searching",
@@ -89,7 +89,7 @@ presence.on("UpdateData", async () => {
     });
   } else if (pages[page] || pages[page.slice(0, -1)]) {
     presence.setActivity({
-      largeImageKey: "po-logo",
+      largeImageKey: "icon-white",
       details: "Bir sayfaya göz atıyor:",
       smallImageKey: "page",
       smallImageText: `${pages[page] || pages[page.slice(0, -1)]} sayfasına göz atıyor...`,
@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
     });
   } else {
     presence.setActivity({
-      largeImageKey: "po-logo",
+      largeImageKey: "icon-white",
       details: "Bir sayfaya göz atıyor:",
       state: "Ana Sayfa",
       smallImageKey: "home",
