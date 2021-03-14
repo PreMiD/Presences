@@ -12,13 +12,14 @@
   "service": "Google Calendar",
   "description": {
     "en": "Google Calendar is a time-management and scheduling calendar service developed by Google.",
-    "it": "Google Calendar è un sistema di calendari concepito da Google."
+    "it": "Google Calendar è un sistema di calendari concepito da Google.",
+    "nl": "Google Agenda is een online agenda. Het is een gratis service van Google en kan worden gebruikt met een Google-account."
   },
   "url": [
     "calendar.google.com",
     "www.calendar.google.com"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/AxEDCqw.png",
   "thumbnail": "https://i.imgur.com/yaq6y1d.png",
   "color": "#4689F4",
