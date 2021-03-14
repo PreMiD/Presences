@@ -39,7 +39,10 @@ presence.on("UpdateData", async () => {
       state: `Yazar: ${author.textContent} (${date.textContent})`,
       smallImageKey: "reading",
       smallImageText: "Bir gönderi okuyor...",
-      startTimestamp: Math.floor(Date.now() / 1000)
+      startTimestamp: Math.floor(Date.now() / 1000),
+      buttons: [
+        {label: "Oku", url: document.location.href}
+      ]
     });
   } else if (
     page.includes("/author/") &&
