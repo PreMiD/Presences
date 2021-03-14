@@ -1,0 +1,23 @@
+{
+  "service": "Pilli Oyun",
+  "author": {
+    "name": "KeremWho",
+    "id": "179997163294556161"
+  },
+  "category": "other",
+  "logo": "https://pillioyun.com/wp-content/uploads/2021/03/Favicon.png",
+  "thumbnail": "https://pillioyun.com/premid-assets/screenshot.png",
+  "version": "1.0.0",
+  "color": "#ffcf40",
+  "tags": [
+    "pilli-oyun",
+    "oyun-haberleri",
+    "news",
+    "turkish"
+  ],
+  "url": "pillioyun.com",
+  "description": {
+    "tr": "Pilli Oyun ile oyun haberlerine yakın kalın.",
+    "en": "Stay up to date with game news with Pilli Oyun."
+  }
+}
