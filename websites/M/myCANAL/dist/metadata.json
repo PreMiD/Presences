@@ -3,16 +3,6 @@
     "name": "Alexx",
     "id": "604182077088202784"
   },
-  "contributors": [
-    {
-      "name": "Maxou",
-      "id": "448518859184406529"
-    },
-    {
-      "name": "Bryan",
-      "id": "293775922757238784"
-    }
-  ],
   "service": "myCANAL",
   "description": {
     "en": "Canal+ is a French subscription provider associated to the channel of the same name. It is owned by Vivendi with a hundred percent share.",
@@ -20,7 +10,7 @@
   },
   "url": "www.canalplus.com",
   "version": "1.1.8",
-  "logo": "https://pbs.twimg.com/profile_images/1036635170911264769/k58Mme9E_400x400.jpg",
+  "logo": "https://i.imgur.com/3OyvorH.jpg",
   "thumbnail": "https://i.imgur.com/xRKwqvI.png",
   "color": "#000",
   "tags": [
