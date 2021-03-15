@@ -4,12 +4,6 @@
     "name": "Paulé",
     "id": "376812375795302402"
   },
-  "contributors": [
-    {
-      "name": "Maxou",
-      "id": "448518859184406529"
-    }
-  ],
   "service": "Google Fonts",
   "description": {
     "en": "Google Fonts is a Google service which provides more than a thousand free licensed font families for Android projects or CSS use.",
@@ -17,7 +11,7 @@
   },
   "url": "fonts.google.com",
   "version": "1.0.2",
-  "logo": "https://zupimages.net/up/21/10/3xo3.png",
+  "logo": "https://i.imgur.com/kwgV2RF.png",
   "thumbnail": "https://i.imgur.com/lVved9l.png",
   "color": "#1A73E8",
   "tags": [
