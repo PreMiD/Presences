@@ -3,12 +3,6 @@
     "name": "Cairo",
     "id": "208105877838888960"
   },
-  "contributors": [
-    {
-      "name": "Maxou",
-      "id": "448518859184406529"
-    }
-  ],
   "url": "www.bing.com",
   "description": {
     "en": "Bing is a search engine that finds and organizes the answers you need so you can make faster, more informed decisions.",
@@ -16,8 +10,8 @@
   },
   "service": "Bing",
   "version": "1.2.7",
-  "logo": "https://zupimages.net/up/21/10/c6kr.png",
-  "thumbnail": "https://www.zupimages.net/up/21/10/4l50.jpeg",
+  "logo": "https://i.imgur.com/AwsWWHW.png",
+  "thumbnail": "https://i.imgur.com/ZBBiUF6.jpg",
   "color": "#3AB1F8",
   "tags": [
     "internet",
