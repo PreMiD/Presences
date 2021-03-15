@@ -3,12 +3,6 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
-  "contributors": [
-    {
-      "name": "Maxou",
-      "id": "448518859184406529"
-    }
-  ],
   "service": "Zalando",
   "description": {
     "en": "Zalando | Buy shoes online: Shoes from top brands.",
@@ -18,7 +12,7 @@
   },
   "url": "www.zalando.com",
   "version": "1.2.6",
-  "logo": "https://zupimages.net/up/21/10/b97a.png",
+  "logo": "https://i.imgur.com/s45Ysbd.png",
   "thumbnail": "https://i.imgur.com/lFWmRc9.png",
   "color": "#FF4E00",
   "tags": [
