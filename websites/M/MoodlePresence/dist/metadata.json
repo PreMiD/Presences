@@ -1,23 +1,26 @@
 {
     "$schema": "https://schemas.premid.app/metadata/1.3",
     "author": {
-        "name": "Kiara",
+        "name": " .•` KIΛRΛ `•. ",
         "id": "586905336850677760"
     },
     "contributors": [
         {
-            "name": "Kiara",
-            "id": "11258690533685067776012"
+            "name": "ΛΚΘRΛ",
+            "id": "387655649934311427"
         }
     ],
     "service": "Moodle",
     "version": "1.0.0",
-    "color": "#3563ed",
+    "color": "#ffbc4f",
     "description": {
-        "en": "DESCRIPTION"
+        "en": "Moodle Rich Presence"
     },
-    "url": [
-        "moodle.ibb-schulen.de",
-        "moodle.ibb-schulen.de"
-    ]
+    "tags": [
+        "moodle"
+    ],
+    "category": "socials",
+    "logo": "https://cdn.discordapp.com/app-assets/821059536768335902/821099230214750279.png",
+    "thumbnail": "https://cdn.discordapp.com/app-assets/821059536768335902/821099230214750279.png",
+    "regExp": "moodle.(.*?)[.](.*?)"
 }

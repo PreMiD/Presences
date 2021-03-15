@@ -13,13 +13,11 @@ presence.on("UpdateData", async () => {
         pages = pathName.split('/').filter(p => p);
 
     const presenceData: PresenceData = {
-        largeImageKey:
-            "largeimage",
-        smallImageKey:
-            "smallimage",
+        largeImageKey: "largeimage",
+        // smallImageKey:    "smallimage",
         smallImageText: 'reading I guess',
         details: pathName,
-        state: "Reading something . . .",
+        //  state: "Reading something . . .",
         startTimestamp: timebrowsed,
     };
 
@@ -57,6 +55,10 @@ presence.on("UpdateData", async () => {
         presenceData.details = 'Submitting Assignment'
         presenceData.state = query(".page-header-headings").textContent;
     }
+    if (pages[0] === 'login' && pages[1].includes('index.php')) {
+        presenceData.details = 'Logging In . . .'
+    }
+
 
     if (presenceData.details == null) {
         presence.setTrayTitle();
