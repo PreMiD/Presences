@@ -3,12 +3,6 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
-  "contributors": [
-    {
-      "name": "Maxou",
-      "id": "448518859184406529"
-    }
-  ],
   "service": "Messenger",
   "description": {
     "en": "Instantly reach the people in your life—for free. Messenger is just like texting, but you don't have to pay for every message (it works with your data plan).",
@@ -17,8 +11,8 @@
   },
   "url": "www.messenger.com",
   "version": "1.1.6",
-  "logo": "https://zupimages.net/up/21/10/dfg2.png",
-  "thumbnail": "https://store-images.s-microsoft.com/image/apps.4185.9007199266726596.9588152f-e20d-432b-9843-ea6d09be8cbc.ca7120e4-4fd5-4411-b227-7983c011c60a?w=1400&h=875&q=90&format=jpg",
+  "logo": "https://i.imgur.com/VA6lfBw.png",
+  "thumbnail": "https://i.imgur.com/V8dVAM3.jpg",
   "color": "#C33ED0",
   "tags": [
     "facebook",
