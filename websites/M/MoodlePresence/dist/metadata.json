@@ -20,6 +20,7 @@
         "moodle"
     ],
     "category": "socials",
+    "url": "moodle.com",
     "logo": "https://cdn.discordapp.com/app-assets/821059536768335902/821099230214750279.png",
     "thumbnail": "https://cdn.discordapp.com/app-assets/821059536768335902/821099230214750279.png",
     "regExp": "moodle.(.*?)[.](.*?)"
