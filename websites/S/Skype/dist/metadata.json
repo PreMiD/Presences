@@ -3,12 +3,6 @@
     "name": "Bas950",
     "id": "241278257335500811"
   },
-  "contributors": [
-    {
-      "name": "Maxou",
-      "id": "448518859184406529"
-    }
-  ],
   "service": "Skype",
   "description": {
     "en": "Stay in touch! Free online calls, messaging, affordable international calling to mobiles or landlines and Skype for Business for effective collaboration.",
@@ -21,7 +15,7 @@
     "www.skype.com"
   ],
   "version": "1.5.6",
-  "logo": "https://zupimages.net/up/21/10/mkz7.png",
+  "logo": "https://i.imgur.com/ToGp1YQ.png",
   "thumbnail": "https://i.imgur.com/upHWjaY.png",
   "color": "#00B1ED",
   "tags": [
