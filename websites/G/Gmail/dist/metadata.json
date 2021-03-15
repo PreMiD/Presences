@@ -11,10 +11,6 @@
     {
       "name": "Bryan",
       "id": "293775922757238784"
-    },
-    {
-      "name": "Maxou",
-      "id": "448518859184406529"
     }
   ],
   "service": "Gmail",
@@ -26,8 +22,8 @@
   },
   "url": "mail.google.com",
   "version": "1.3.8",
-  "logo": "https://zupimages.net/up/21/10/8hd5.png",
-  "thumbnail": "https://www.google.com/gmail/about/static/images/assets/fr/2_Cross_Devices_New_Branding.png",
+  "logo": "https://i.imgur.com/oMfxBtm.png",
+  "thumbnail": "https://i.imgur.com/5W8ILsS.png",
   "color": "#EA4235",
   "tags": [
     "gmail",
