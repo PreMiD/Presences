@@ -3,12 +3,6 @@
     "name": "Callum",
     "id": "506899274748133376"
   },
-  "contributors": [
-    {
-      "name": "Maxou",
-      "id": "448518859184406529"
-    }
-  ],
   "service": "Google Docs",
   "description": {
     "en": "Google Docs is a word processor included as part of a free, web-based software office suite offered by Google within its Google Drive service. This service also includes Google Sheets and Google Slides, a spreadsheet and presentation program respectively.",
@@ -20,8 +14,8 @@
   },
   "url": "docs.google.com",
   "version": "1.4.6",
-  "logo": "https://zupimages.net/up/21/10/k9p8.png",
-  "thumbnail": "https://zupimages.net/up/21/10/8e9a.jpeg",
+  "logo": "https://i.imgur.com/FtSxPUr.png",
+  "thumbnail": "https://i.imgur.com/qP5qRGH.jpg",
   "color": "#2684FC",
   "tags": [
     "docs",
