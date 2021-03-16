@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Paulé",
+    "id": "376812375795302402"
+  },
+  "service": "OpenClassrooms",
+  "description": {
+    "fr": "OpenClassrooms est une plateforme éducative proposant des formations en ligne certifiants et des parcours débouchant sur des métiers en croissance. Les contenus sont réalisés par des bénévoles, écoles, universités ou entreprises comme Microsoft ou IBM.",
+    "en": "OpenClassrooms is an educational platform that offers online certifying courses leading to growing jobs. The content of the website is produced by volunteers, schools, colleges or companies like Microsoft or IBM."
+  },
+  "url": "openclassrooms.com",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/jRkfInn.png",
+  "thumbnail": "https://i.imgur.com/dwBBYyp.png",
+  "color": "#7451EB",
+  "tags": [
+    "openclassrooms"
+  ],
+  "category": "other"
+}

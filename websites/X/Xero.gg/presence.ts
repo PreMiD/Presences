@@ -18,17 +18,17 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = getTimeStamp();
   if (document.location.pathname.includes("/player/")) {
-    const player_nickname = document.querySelector(
-      "#player-profile-header-heading > div:nth-child(2) > div > div > div.medium.normal-color-name"
-    ).textContent;
     if (showProfile) {
-      presenceData.details = `Player: ${player_nickname}`;
+      const player_nickname = document.querySelector(
+        "#player-profile-header-heading > div:nth-child(2) > div > div > div.medium.normal-color-name"
+      ).textContent;
       try {
+        presenceData.details = `Player: ${player_nickname}`;
         const player_clan = document.querySelector("#s4db-player-view-clan > a")
           .textContent;
         presenceData.details += `(${player_clan})`;
       } catch {
-        //Catch nothing
+        presenceData.details = `Player: ${player_nickname}`;
       }
     } else {
       presenceData.details = `Viewing a profile`;
@@ -42,8 +42,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Viewing Inventory";
     }
   } else if (document.location.pathname.includes("/news")) {
-    presenceData.details = "Viewing a page:";
-    presenceData.state = "News";
     try {
       const news_title = document
         .querySelector(
@@ -53,7 +51,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reading news:";
       presenceData.state = `${news_title}`;
     } catch {
-      //Catch nothing
+      presenceData.details = "Viewing a page:";
+      presenceData.state = "News";
     }
   } else if (document.location.pathname.includes("/clan")) {
     const clan_name = document.querySelector(
@@ -96,6 +95,12 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/download")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Download";
+  } else if (document.location.pathname.includes("/challenge")) {
+    const challenges_title = document.querySelector(
+      "#settings-data-container > div.xero-header-standalone"
+    ).textContent;
+    presenceData.details = "Viewing a page:";
+    presenceData.state = `Challenges (${challenges_title})`;
   } else if (document.location.pathname.includes("/notifications")) {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Notifications";

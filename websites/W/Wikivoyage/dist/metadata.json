@@ -7,13 +7,13 @@
   "service": "Wikivoyage",
   "description": {
     "en": "Wikivoyage aims to create the world's largest free, complete and up-to-date worldwide travel guide.",
-    "ar": "يهدف ويكي الرحلات إلى إنشاء أكبر دليل سفر مجاني وكامل وحديث في جميع أنحاء العالم.",
+    "ar_SA": "يهدف ويكي الرحلات إلى إنشاء أكبر دليل سفر مجاني وكامل وحديث في جميع أنحاء العالم.",
     "zh_CN": "維基導遊旨在創建世界上最大的免費，完整和最新的全球旅行指南。",
     "fr": "Wikivoyage vise à créer le plus grand guide de voyage libre, complet et à jour pour le monde entier.",
     "es": "Wikiviajes tiene como fin crear la guía de viajes más grande, completa y actualizada en todo el mundo."
   },
   "url": "wikivoyage.org",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/rvZf7UA.png",
   "thumbnail": "https://i.imgur.com/LnIR7ny.png",
   "color": "#f9f9f9",

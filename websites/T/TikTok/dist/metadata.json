@@ -1,21 +1,40 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Bas950",
+    "id": "241278257335500811"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ],
   "service": "TikTok",
   "description": {
-    "en": "TikTok is an iOS and Android social media video app for creating and sharing short lip-sync, comedy, and talent videos. The app was launched in 2017 by ByteDance, for markets outside of China. ByteDance has previously launched Douyin for the China market in September 2016."
+    "en": "TikTok - trends start here. On a device or on the web, viewers can watch and discover millions of personalized short videos.",
+    "nl": "TikTok - trends beginnen hier. Kijkers kunnen op mobiele apparaten of op het web miljoenen gepersonaliseerde korte video's bekijken."
   },
   "url": "www.tiktok.com",
-  "version": "1.1.6",
-  "logo": "https://i.gyazo.com/b1038ecba518a169bf44afdb59fb22a1.jpg",
-  "thumbnail": "https://i.gyazo.com/77bde3691012b44d8b6249ad22847153.png",
-  "color": "#000",
+  "version": "2.1.1",
+  "logo": "https://i.imgur.com/KBAjCOX.png",
+  "thumbnail": "https://i.imgur.com/QAxUXB4.png",
+  "color": "#000000",
   "tags": [
     "tiktok",
     "video",
     "social"
   ],
-  "category": "socials"
+  "category": "socials",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }

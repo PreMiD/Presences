@@ -91,6 +91,10 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Contact";
         presence.setActivity(presenceData);
         break;
+      case "/vrchatplus":
+        presenceData.state = "VRChat Plus";
+        presence.setActivity(presenceData);
+        break;
     }
   } else if (document.location.hostname == "vrchat.com") {
     if (document.location.pathname.includes("/home")) {
@@ -137,9 +141,14 @@ presence.on("UpdateData", async () => {
           const searchresult = window.location
             .toString()
             .substr(window.location.toString().lastIndexOf("/") + 1);
-          presenceData.details = "Searching:";
-          presenceData.state = searchresult;
-          presence.setActivity(presenceData);
+          if (!privacymode) {
+            presenceData.details = "Searching:";
+            presenceData.state = searchresult;
+            presence.setActivity(presenceData);
+          } else {
+            presenceData.details = "Searching";
+            presence.setActivity(presenceData);
+          }
         } else if (document.location.pathname.includes("/avatar")) {
           /* Viewing a specific avatar*/
           const avatarname = document.querySelector("div.col-12 > h3")
@@ -190,21 +199,26 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.hostname == "feedback.vrchat.com") {
-    if (document.location.pathname.includes("/p/")) {
-      /* Viewing a post */
-      const postname = document.querySelector("div.postTitle").textContent;
-      presenceData.details = "Viewing feedback post:";
-      presenceData.state = postname;
-      presence.setActivity(presenceData);
-    } else if (document.location.pathname == "/") {
-      presenceData.details = "Browsing feedback...";
-      presence.setActivity(presenceData);
+    if (!privacymode) {
+      if (document.location.pathname.includes("/p/")) {
+        /* Viewing a post */
+        const postname = document.querySelector("div.postTitle").textContent;
+        presenceData.details = "Viewing feedback post:";
+        presenceData.state = postname;
+        presence.setActivity(presenceData);
+      } else if (document.location.pathname == "/") {
+        presenceData.details = "Browsing feedback...";
+        presence.setActivity(presenceData);
+      } else {
+        /* Not viewing a post, display category */
+        const category = document.querySelector("div.optionContent > div")
+          .textContent;
+        presenceData.details = "Browsing feedback...";
+        presenceData.state = category;
+        presence.setActivity(presenceData);
+      }
     } else {
-      /* Not viewing a post, display category */
-      const category = document.querySelector("div.optionContent > div")
-        .textContent;
       presenceData.details = "Browsing feedback...";
-      presenceData.state = category;
       presence.setActivity(presenceData);
     }
   }

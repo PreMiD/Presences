@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "SlowLife",
+    "id": "374905512661221377"
+  },
+  "url": "radiooooo.com",
+  "description": {
+    "en": "Radiooooo - The Musical Time Machine."
+  },
+  "service": "Radiooooo",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/EktlHNP.png",
+  "thumbnail": "https://i.imgur.com/AT7vWm9.jpg",
+  "color": "#108cb4",
+  "tags": [
+    "music",
+    "radio"
+  ],
+  "category": "music",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "song_1",
+      "title": "Song Details row1",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%title%",
+      "placeholder": "Use %title%, %place%, %year% or %artist%"
+    },
+    {
+      "id": "song_2",
+      "title": "Song Details row2",
+      "icon": "fas fa-comment-alt-edit",
+      "value": "%artist%",
+      "placeholder": "Use %title%, %place%, %year% or %artist%"
+    }
+  ]
+}

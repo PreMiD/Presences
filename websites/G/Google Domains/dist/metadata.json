@@ -1,14 +1,20 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "Google Domains",
   "description": {
     "en": "Google Domains is an internet domain name registration service offered by Google. Google Domains offers domain registration, DNS hosting, DNSSEC, Dynamic DNS, domain forwarding, and email forwarding."
   },
   "url": "domains.google.com",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/345qLaW.jpg",
   "thumbnail": "https://i.imgur.com/5EXKSHI.png",
   "color": "#FCBC03",

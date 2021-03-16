@@ -1,202 +1,247 @@
-var presence = new Presence({
-  clientId: "612793327510749210"
-});
-
-var genericStyle = "font-weight: 800; padding: 2px 5px; color: white;";
-
-function logError(name: string, message: string): void {
-  console.log(
-    `%c${name}%cINFO%c ${message}`,
-    genericStyle + "border-radius: 25px 0 0 25px; background: #596cae;",
-    genericStyle + "border-radius: 0 25px 25px 0; background: #ff5050;",
-    "color: unset;"
-  );
+interface LangStrings {
+  buttonJoinGame: string;
+  joiningGame: string;
+  waiting: string;
+  gameStarting: string;
+  playing: string;
+  questionLoading: string;
+  incorrectAnswer: string;
+  correctAnswer: string;
+  resultsQuestion: string;
+  slideViewing: string;
+  gameOver: string;
+  gameCreate: string;
+  loadingPage: string;
+  firstPlace: string;
+  points: string;
+  questionsCorrect: string;
+  slideShowing: string;
+  questionShowing: string;
+  stString: string;
+  ndString: string;
+  rdString: string;
+  topX: string;
+  of: string;
+  questionNumber: string;
 }
 
-function stripText(element: HTMLElement, id = "None", log = true): any {
-  if (element && element.firstChild) {
-    return element.firstChild.textContent;
-  } else {
-    if (log) {
-      logError(
-        "Kahoot",
-        "An error occurred while stripping data off the page. Please contact Alanexei on the PreMiD Discord server, and send him a screenshot of this error. ID: " +
-          id
-      );
-    }
-    return null;
-  }
+async function findRanking(rankingSelector: HTMLElement) {
+  const stString = (await strings).stString,
+    ndString = (await strings).ndString,
+    rdString = (await strings).rdString,
+    topX = (await strings).topX;
+
+  if (
+    rankingSelector.textContent == stString ||
+    rankingSelector.textContent == ndString ||
+    rankingSelector.textContent == rdString ||
+    rankingSelector.textContent == topX
+  )
+    return true;
+  else return false;
 }
 
-var oldUrl, elapsed, state, gameName, gameScore, gamePlace, gameQuestions;
-
-presence.on("UpdateData", async () => {
-  var title, info;
-
-  const href = window.location.href;
-  const path = window.location.pathname;
-
-  if (oldUrl !== href) {
-    oldUrl = href;
-    elapsed = Math.floor(Date.now() / 1000);
-  }
-
-  href.match("https://kahoot.it") ? (state = "player") : (state = "host");
-
-  switch (state) {
-    case "player": {
-      title = "Playing";
-      info = "Idling";
-
-      const playerName = stripText(
-        document.querySelector(".question-top-bar__Username-sc-1pwisow-1"),
-        "Player Name",
-        false
-      );
-
-      const playerScore = stripText(
-        document.querySelector(".question-top-bar__Score-sc-1pwisow-4"),
-        "Player Score",
-        false
-      );
-
-      const playerPlace = stripText(
-        document.querySelector(".rank-text__Rank-sc-1smelag-0 > span"),
-        "Player Place",
-        false
-      );
-
-      if (playerName) {
-        gameName = playerName;
-      }
-
-      if (playerScore) {
-        gameScore = playerScore;
-      }
-
-      if (playerPlace) {
-        gamePlace = playerPlace.slice(10);
-      }
-
-      const join = path.match("/join");
-      if (join) {
-        info = "Joining Game";
-      }
-
-      const instructions = path.match("/instructions");
-      if (instructions) {
-        info = "In Lobby";
-      } else {
-        if (gameName && gamePlace && gameScore) {
-          title = `Playing | ${gameName} - ${gameScore} - ${gamePlace}`;
-        }
-      }
-
-      const playerStart = path.match("/start");
-      if (playerStart) {
-        info = "Game Starting";
-      }
-
-      const playerGetReady = path.match("/getready");
-      if (playerGetReady) {
-        info = "Waiting For Question";
-      }
-
-      const playerGameBlock = path.match("/gameblock");
-      if (playerGameBlock) {
-        info = "Viewing Question";
-      }
-
-      const answerSent = path.match("/answer/sent");
-      if (answerSent) {
-        info = "Waiting For Results";
-      }
-
-      const answerResult = path.match("/answer/result");
-      if (answerResult) {
-        info = "Viewing Results";
-      }
-
-      const ranking = path.match("ranking");
-      if (ranking) {
-        info = "Viewing Rankings";
-      }
-
-      const playerFeedback = path.match("/feedback");
-      if (playerFeedback) {
-        info = "Giving Feedback";
-      }
-      break;
-    }
-    case "host": {
-      title = "Hosting";
-      info = "Idling";
-
-      const hostQuestions = stripText(
-        document.querySelector(".status-bar__TopBar-ivth8h-1 > header > span"),
-        "Host Questions",
-        false
-      );
-
-      if (hostQuestions && hostQuestions.match("Question")) {
-        gameQuestions = hostQuestions.slice(9);
-      }
-
-      const intro = path.match("/intro");
-      if (intro) {
-        info = "Loading Game";
-      }
-
-      const lobby = path.match("/lobby");
-      if (lobby) {
-        info = "In Lobby";
-      } else {
-        if (gameQuestions) {
-          title = `Hosting | ${gameQuestions}`;
-        }
-      }
-
-      const hostStart = path.match("/start");
-      if (hostStart) {
-        info = "Game Starting";
-      }
-
-      const hostGetReady = path.match("/getready");
-      if (hostGetReady) {
-        info = "Preparing Question";
-      }
-
-      const hostGameBlock = path.match("/gameblock");
-      if (hostGameBlock) {
-        info = "Showing Question";
-      }
-
-      const scoreboard = path.match("/scoreboard");
-      if (scoreboard) {
-        info = "Viewing Scoreboard";
-      }
-
-      const gameover = path.match("/gameover");
-      if (gameover) {
-        info = "Game Over";
-      }
-
-      const hostFeedback = path.match("/feedback");
-      if (hostFeedback) {
-        info = "Giving Feedback";
-      }
-      break;
-    }
-    default:
-      break;
-  }
-
-  var data: PresenceData = {
-    details: title,
-    state: info,
-    largeImageKey: "kahoot",
-    startTimestamp: elapsed
+const presence = new Presence({
+    clientId: "612793327510749210"
+  }),
+  getStrings = async (): Promise<LangStrings> => {
+    return presence.getStrings(
+      {
+        buttonJoinGame: "kahoot.buttonJoinGame",
+        joiningGame: "kahoot.joiningGame",
+        waiting: "kahoot.waiting",
+        gameStarting: "kahoot.gameStarting",
+        playing: "kahoot.playing",
+        questionLoading: "kahoot.questionLoading",
+        incorrectAnswer: "kahoot.incorrectAnswer",
+        correctAnswer: "kahoot.correctAnswer",
+        resultsQuestion: "kahoot.resultsQuestion",
+        slideViewing: "kahoot.slideViewing",
+        gameOver: "kahoot.gameOver",
+        gameCreate: "kahoot.gameCreate",
+        loadingPage: "kahoot.loadingPage",
+        firstPlace: "kahoot.firstPlace",
+        points: "kahoot.points",
+        questionsCorrect: "kahoot.questionsCorrect",
+        slideShowing: "kahoot.slideShowing",
+        questionShowing: "kahoot.questionShowing",
+        stString: "kahoot.stString",
+        ndString: "kahoot.ndString",
+        rdString: "kahoot.rdString",
+        topX: "kahoot.topX",
+        of: "kahoot.of",
+        questionNumber: "kahoot.questionNumber"
+      },
+      await presence.getSetting("lang")
+    );
   };
 
-  presence.setActivity(data, true);
+let currentQuestion: string,
+  score: string,
+  ranking: string,
+  top5: Promise<boolean>,
+  strings: Promise<LangStrings> = getStrings(),
+  oldLang: string = null,
+  rankingSelector: HTMLElement;
+
+presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+      largeImageKey: "kahoot"
+    },
+    buttons = await presence.getSetting("buttons"),
+    newLang = await presence.getSetting("lang");
+
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
+
+  if (document.location.href.match("https://kahoot.it")) {
+    const path = document.location.pathname;
+
+    if (path == "/" || path.includes("/join") || path == "/v2/") {
+      presenceData.details = (await strings).joiningGame; // Joining Game...
+    } else if (path.includes("/instructions")) {
+      presenceData.details = (await strings).waiting; // Waiting to Start...
+    } else if (path.includes("/start")) {
+      presenceData.details = (await strings).gameStarting; // Game Starting!
+    } else if (path.includes("/gameblock")) {
+      currentQuestion = document.querySelector(
+        "div.top-bar__QuestionNumber-sc-186o9v8-2"
+      ).textContent;
+      score = document.querySelector("div.bottom-bar__Score-sc-1bibjvm-2")
+        .textContent
+        ? document.querySelector("div.bottom-bar__Score-sc-1bibjvm-2")
+            .textContent
+        : document.querySelector("div.podium-bottom-bar__Score-ssrx8z-1")
+            .textContent;
+      presenceData.details = (await strings).playing; // Playing:
+      presenceData.state = `${(await strings).questionNumber.replace(
+        "{0}",
+        ""
+      )} ${currentQuestion} | ${(await strings).points.replace(
+        "{0}",
+        ""
+      )} ${score}`; // Question: 1 of 3 | 1000 points
+    } else if (path.includes("/getready")) {
+      currentQuestion = document.querySelector(
+        "div.top-bar__QuestionNumber-sc-186o9v8-2"
+      ).textContent;
+      presenceData.details = (await strings).questionLoading; // Loading Question:
+      presenceData.state = `${(await strings).questionNumber.replace(
+        "{0}",
+        ""
+      )} ${currentQuestion}`; // Question: 1 of 3
+    } else if (path.includes("/result")) {
+      const result = document
+        .querySelector("div.styles__MessageBody-sc-15a2o5w-4")
+        .children[0].className.includes("Incorrect")
+        ? (await strings).incorrectAnswer // Incorrect Answer
+        : (await strings).correctAnswer; // Correct Answer
+      presenceData.details = (await strings).resultsQuestion; // Looking at Results:
+      presenceData.state = result;
+    } else if (path.includes("/contentblock")) {
+      presenceData.details = (await strings).slideViewing; // Looking at Slide with Content:
+    } else if (path.includes("/ranking")) {
+      rankingSelector = document.querySelector(
+        "p.shadow-text__Text-sc-1mgpgij-1"
+      );
+      top5 = findRanking(rankingSelector);
+      ranking = rankingSelector.textContent;
+      score = document.querySelector("div.bottom-bar__Score-sc-1bibjvm-2")
+        .textContent
+        ? document.querySelector("div.bottom-bar__Score-sc-1bibjvm-2")
+            .textContent
+        : document.querySelector("div.podium-bottom-bar__Score-ssrx8z-1")
+            .textContent;
+      presenceData.details = top5
+        ? `${(await strings).gameOver} | ${ranking} | ${(
+            await strings
+          ).points.replace("{0}", "")} ${score}` // Game Over | 1st, 2nd, 3rd, Top 5 |  Points:
+        : `${(await strings).gameOver} | ${(await strings).points.replace(
+            "{0}",
+            ""
+          )} ${score}`; // Game Over | Points:
+    } else {
+      presenceData.details = (await strings).loadingPage;
+    }
+    presence.setActivity(presenceData);
+  } else if (document.location.href.match("https://play.kahoot.it")) {
+    const path = document.location.pathname;
+    if (path == "/v2/") {
+      presenceData.details = (await strings).gameCreate; // Creating a Game...
+    } else if (path.includes("/lobby")) {
+      presenceData.details = (await strings).waiting; // Waiting to Start...
+
+      if (buttons) {
+        presenceData.buttons = [
+          {
+            label: `${(await strings).buttonJoinGame.replace(
+              "{0}",
+              document.querySelector(
+                "div.headerstyles__GamePinGrouped-jk6b9n-9"
+              ).textContent
+            )}`, // Join Game: ID
+            url: `https://kahoot.it/`
+          }
+        ];
+      }
+    } else if (path.includes("/gameover")) {
+      const firstPlaceName = document.querySelector(
+          "div.player-name__PlayerName-sc-1m2ooy2-1"
+        ).textContent,
+        firstPlacePoints = document.querySelector(
+          "div.bar-styles__Score-ws2yhg-2"
+        ).textContent,
+        firstPlaceQuetions = document.querySelector(
+          "div.bar-styles__Count-ws2yhg-3"
+        ).textContent;
+      presenceData.details = `${(await strings).firstPlace.replace(
+        "{0}",
+        ""
+      )} ${firstPlaceName} | ${(await strings).points.replace(
+        "{0}",
+        ""
+      )} ${firstPlacePoints}`; // First Place: User | Points: 100000
+      presenceData.state = `${(await strings).questionsCorrect.replace(
+        "{0}",
+        ""
+      )} ${firstPlaceQuetions}`; // Questions Correct: 1 of 10
+    } else if (path.includes("/contentblock")) {
+      presenceData.details = (await strings).slideShowing; // Showing a Slide with Content:
+      const questionNo = `${
+        document
+          .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
+          .textContent.split("/")[0]
+      } ${(await strings).of.replace("{0}", "").replace("{1}", "")} ${
+        document
+          .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
+          .textContent.split("/")[1]
+      }`;
+      presenceData.state = `${(await strings).questionNumber.replace(
+        "{0}",
+        ""
+      )} ${questionNo}`; // Question: 1 of 3
+    } else if (path.includes("/gameblock")) {
+      presenceData.details = (await strings).questionShowing; // Showing Question:
+      const questionNo = `${
+        document
+          .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
+          .textContent.split("/")[0]
+      } ${(await strings).of.replace("{0}", "").replace("{1}", "")} ${
+        document
+          .querySelector("div.styles__QuestionCount-sc-17ic93d-8")
+          .textContent.split("/")[1]
+      }`;
+      presenceData.state = `${(await strings).questionNumber.replace(
+        "{0}",
+        ""
+      )} ${questionNo}`; // Question: 1 of 3
+    } else {
+      presenceData.details = (await strings).loadingPage; // Loading Page:
+    }
+    presence.setActivity(presenceData);
+  }
 });

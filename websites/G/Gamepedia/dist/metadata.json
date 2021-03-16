@@ -1,12 +1,12 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "$schema": "https://schemas.premid.app/metadata/1.3",
   "author": {
     "name": "Hans5958",
     "id": "279855717203050496"
   },
   "service": "Gamepedia",
   "url": "gamepedia.com",
-  "version": "1.1.10",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/EUu0IPu.png",
   "thumbnail": "https://i.imgur.com/Dr5wG06.png",
   "color": "#F48020",

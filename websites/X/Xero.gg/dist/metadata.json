@@ -8,7 +8,7 @@
     "en": "xero.gg is a website Player- and Clan database for a private server of the game S4 League."
   },
   "url": "xero.gg",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/7GG8BKZ.png",
   "thumbnail": "https://i.imgur.com/zQcNcIm.png",
   "color": "#428DE3",
@@ -21,7 +21,7 @@
   "settings": [
     {
       "id": "showchat",
-      "title": "Show chatting opponent",
+      "title": "Show chatting partner",
       "icon": "fas fa-comment-dots",
       "value": false
     },

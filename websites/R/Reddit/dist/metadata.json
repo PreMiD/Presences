@@ -9,14 +9,14 @@
     "de": "Reddit bietet dir das Beste aus dem Internet an einem Ort. Bekomme einen ständig aktualisierten Feed mit aktuellen Nachrichten, lustigen Geschichten, Bildern, Memes und Videos, nur für dich.",
     "pt_BR": "Reddit te apresenta o melhor da internet em um único lugar. Tenha constante atualizações de notícias, histórias engraçadas, imagens, memes, e vídeos apenas pra você.",
     "uk_UA": "Reddit дає вам все найкраще в Інтернеті в одному місці. Отримайте постійно оновлювані новини, цікаві історії, фотографії, меми та відео лише для вас.",
-    "nl": "Reddit biedt u het beste van internet op één plek. Ontvang een constant bijgewerkte feed met het laatste nieuws, leuke verhalen, foto's, memes en video's speciaal voor jou.",
+    "nl": "Reddit biedt je het beste van internet op één plek. Ontvang een constant bijgewerkte feed met het laatste nieuws, leuke verhalen, foto's, memes en video's speciaal voor jou.",
     "zh_CN": "RReddit是一个可以让您获得适合您的最新新闻，有趣的故事，图片，梗和视频的有趣网站。"
   },
   "url": [
     "www.reddit.com",
     "old.reddit.com"
   ],
-  "version": "2.4.5",
+  "version": "2.4.6",
   "logo": "https://i.imgur.com/Yzr4SeJ.png",
   "thumbnail": "https://i.imgur.com/fPUwXN5.png",
   "color": "#ff4500",

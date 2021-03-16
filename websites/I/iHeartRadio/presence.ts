@@ -1,5 +1,5 @@
-var presence = new Presence({
-    clientId: "620283906234777600"
+const presence = new Presence({
+    clientId: "808777200119316521"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -15,49 +15,43 @@ function checkLength(string: string): string {
   }
 }
 
-function getTime(list: string[]): number {
-  var ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}
-
-function getTimestamps(
+function parseAudioTimestamps(
   audioTime: string,
   audioDuration: string
 ): Array<number> {
-  var splitAudioTime = audioTime.split(":").reverse();
-  var splitAudioDuration = audioDuration.split(":").reverse();
-
-  var parsedAudioTime = getTime(splitAudioTime);
-  var parsedAudioDuration = getTime(splitAudioDuration);
-
-  var startTime = Date.now();
-  var endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
+  const splitAudioTime = audioTime.split(":"),
+    splitAudioDuration = audioDuration.split(":"),
+    parsedAudioTime =
+      parseInt(splitAudioTime[0]) * 60 + parseInt(splitAudioTime[1]),
+    parsedAudioDuration =
+      parseInt(splitAudioDuration[0]) * 60 + parseInt(splitAudioDuration[1]),
+    startTime = Date.now(),
+    endTime =
+      Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var elapsed = Math.floor(Date.now() / 1000);
-var title, author, song, subtitle;
+let elapsed = Math.floor(Date.now() / 1000),
+  title,
+  author,
+  song,
+  subtitle;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "iheartradio-logo"
-  };
-
-  var playerCheck = document.querySelector("div.css-s6sc4j.e14pqrjs0")
-    ? true
-    : false;
+      largeImageKey: "logo"
+    },
+    playerCheck = document.querySelector("div.css-s6sc4j.e14pqrjs0")
+      ? true
+      : false;
   if (playerCheck) {
-    var liveCheck = document.querySelector(
+    const liveCheck = document.querySelector(
       "div.css-1gs73tw.e1ka8agw0 time[data-test='player-current-time']"
     )
       ? false
       : true;
     if (liveCheck) {
-      var playCheck = document.querySelector(
+      const playCheck = document.querySelector(
         "button.ekca8d00 span[aria-labelledby='Stop']"
       )
         ? true
@@ -95,14 +89,18 @@ presence.on("UpdateData", async () => {
         song = document.querySelector(".css-1uhpu6r").textContent;
         subtitle = song + " - " + author;
       }
-      var audioTime = document.querySelector(".css-9dpnv0").textContent;
-      var audioDuration = document.querySelector(".css-xf5pff").textContent;
-      var timestamps = getTimestamps(audioTime, audioDuration);
-      const paused = document.querySelector(
-        "button.ekca8d00 span[aria-labelledby='Play']"
-      )
-        ? true
-        : false;
+      const audioTime = document.querySelector(".css-9dpnv0").textContent,
+        audioDuration = document.querySelector(".css-xf5pff").textContent,
+        parsedTimestamps = parseAudioTimestamps(audioTime, audioDuration),
+        timestamps = presence.getTimestamps(
+          parsedTimestamps[0],
+          parsedTimestamps[1]
+        ),
+        paused = document.querySelector(
+          "button.ekca8d00 span[aria-labelledby='Play']"
+        )
+          ? true
+          : false;
 
       title = checkLength(title);
       data.details = title;
@@ -123,6 +121,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(data);
     }
   } else {
-    presence.clearActivity();
+    data.details = "Browsing...";
+    presence.setActivity(data);
   }
 });

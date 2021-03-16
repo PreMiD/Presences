@@ -95,6 +95,18 @@ presence.on("UpdateData", async () => {
     if (stream.paused == true) {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = "Durduruldu";
+      presenceData.buttons = [
+        { label: "İzle", url: document.location.href },
+        {
+          label: "Diziyi Görüntüle",
+          url:
+            document.location.origin +
+            "/" +
+            document.location.pathname.split("/")[1] +
+            "/" +
+            document.location.pathname.split("/")[2]
+        }
+      ];
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     } else {
@@ -105,6 +117,18 @@ presence.on("UpdateData", async () => {
 
       presenceData.smallImageKey = "play";
       presenceData.smallImageText = "Oynatılıyor";
+      presenceData.buttons = [
+        { label: "İzle", url: document.location.href },
+        {
+          label: "Diziyi Görüntüle",
+          url:
+            document.location.origin +
+            "/" +
+            document.location.pathname.split("/")[1] +
+            "/" +
+            document.location.pathname.split("/")[2]
+        }
+      ];
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
     }

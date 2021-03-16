@@ -1,21 +1,26 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
   "contributors": [
     {
       "name": "Tellen",
       "id": "535214819520020510"
+    },
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
     }
   ],
   "service": "Gmail",
   "description": {
     "en": "Gmail is a free email service developed by Google. Users can access Gmail on the web and using third-party programs that synchronize email content through POP or IMAP protocols. Gmail started as a limited beta release on April 1, 2004 and ended its testing phase on July 7, 2009.",
-    "zh_CN": "Gmail是Google开发的免费电子邮件服务。"
+    "zh_CN": "Gmail是Google开发的免费电子邮件服务。",
+    "nl": "Gmail is een gratis e-mailservice van Google. Gebruikers hebben toegang tot Gmail via beveiligde webmail of via het POP3- of IMAP4-protocol."
   },
   "url": "mail.google.com",
-  "version": "1.3.4",
+  "version": "1.3.7",
   "logo": "https://i.imgur.com/RFFiUCL.png",
   "thumbnail": "https://i.imgur.com/zLejTHm.png",
   "color": "#DD4B3E",

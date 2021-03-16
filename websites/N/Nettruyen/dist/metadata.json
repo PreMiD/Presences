@@ -1,0 +1,25 @@
+{
+  "author": {
+    "name": "Kinue",
+    "id": "634246091293851649"
+  },
+  "service": "Nettruyen",
+  "description": {
+    "en": "Biggest manga website in Vietnam with latest update",
+    "vi_VN": "Web đọc truyện tranh online lớn nhất Việt Nam được cập nhật liên tục mỗi ngày"
+  },
+  "url": [
+    "www.nettruyen.com",
+    "nettruyen.com"
+  ],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/h9AaSGw.png",
+  "thumbnail": "https://i.imgur.com/eGhdGi5.png",
+  "color": "#3d3665",
+  "tags": [
+    "anime",
+    "manga",
+    "nettruyen"
+  ],
+  "category": "anime"
+}

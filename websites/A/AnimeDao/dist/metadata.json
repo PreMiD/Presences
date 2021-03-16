@@ -9,12 +9,8 @@
     "pt_BR": "Assista episódios de anime e filmes legendados em inglês, SD ou HD e em qualquer dispositivo: pc, tablet, mobile.",
     "zh_CN": "在任何设备上（PC，平板电脑，移动设备）观看带有英语字幕的高清动漫。"
   },
-  "url": [
-    "animedao.com",
-    "animedao26.stream",
-    "animedao28.stream"
-  ],
-  "version": "1.2.5",
+  "url": "animedao.to",
+  "version": "1.2.7",
   "logo": "https://viruz.s-ul.eu/p6OJmHM3",
   "thumbnail": "https://viruz.s-ul.eu/99mNuO8S",
   "color": "#0ab4fc",

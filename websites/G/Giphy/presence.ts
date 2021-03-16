@@ -18,8 +18,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "creating";
     presenceData.smallImageText = "creating";
   } else {
-    var at = document.location.pathname;
-    var doing;
+    const at = document.location.pathname;
+    let doing;
     if (at.includes("entertainment")) {
       doing = "Entertainment";
     } else if (at.includes("sports")) {
@@ -36,4 +36,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "browsing";
     presenceData.smallImageText = "browsing";
   }
+
+  presence.setActivity(presenceData);
 });

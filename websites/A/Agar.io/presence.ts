@@ -1,6 +1,14 @@
 const presence = new Presence({
-  clientId: "719974375188725770"
-});
+    clientId: "719974375188725770"
+  }),
+  gameModeMap: ItemMap = {
+    ":battleroyale": "Battle Royale",
+    ":experimental": "Experimental",
+    ":ffa": "Free-For-All",
+    ":party": "Party",
+    ":teamrush": "Team Rush",
+    ":teams": "Teams"
+  };
 
 interface AgarData {
   state: number;
@@ -9,29 +17,18 @@ interface AgarData {
   connecting: boolean;
 }
 
-let agarData: AgarData = null;
-
 interface ItemMap {
   [key: string]: string;
 }
 
-// A map of game mode IDs with their names.
-const gameModeMap: ItemMap = {
-  ":battleroyale": "Battle Royale",
-  ":experimental": "Experimental",
-  ":ffa": "Free-For-All",
-  ":party": "Party",
-  ":teamrush": "Team Rush",
-  ":teams": "Teams"
-};
-
-// The timestamp of the first time a game was detected.
-let gameStartTimestamp: number = null;
+let gameStartTimestamp: number = null,
+  agarData: AgarData = null;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "agar"
-  };
+      largeImageKey: "agar"
+    },
+    buttons = await presence.getSetting("buttons");
 
   if (agarData) {
     if (agarData.connecting) {
@@ -44,7 +41,9 @@ presence.on("UpdateData", async () => {
           gameStartTimestamp = null;
           break;
         case 1:
-          data.details = `Playing as ${agarData.nick}`;
+          if (await presence.getSetting("showName"))
+            data.details = `Playing as ${agarData.nick}`;
+          else data.details = "Playing";
           if (!gameStartTimestamp) gameStartTimestamp = Date.now();
           break;
         case 2:
@@ -58,6 +57,17 @@ presence.on("UpdateData", async () => {
       }
       data.state = gameModeMap[agarData.gameMode];
       data.startTimestamp = gameStartTimestamp;
+
+      if (buttons) {
+        const code = document.querySelector(".partymode-info > #code");
+        if (code)
+          data.buttons = [
+            {
+              label: "Join Party",
+              url: document.URL
+            }
+          ];
+      }
     }
   }
 

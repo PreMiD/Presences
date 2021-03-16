@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "isladot",
+    "id": "385895205406244865"
+  },
+  "url": "www.linkedin.com",
+  "description": {
+    "en": "Manage your professional identity. Build and engage with your professional network. Access knowledge, insights and opportunities.",
+    "it": "Gestisci la tua identità professionale. Costruisci e interagisci con la tua rete professionale. Accedi a conoscenze, approfondimenti e opportunità."
+  },
+  "service": "LinkedIn",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/2E9VuHw.png",
+  "thumbnail": "https://i.imgur.com/b4LpEa9.png",
+  "color": "#2867B2",
+  "tags": [
+    "jobs"
+  ],
+  "category": "socials",
+  "settings": [
+    {
+      "id": "showJobsQuery",
+      "title": "Show jobs searching query.",
+      "icon": "fas fa-briefcase",
+      "value": false
+    },
+    {
+      "id": "showChatUsername",
+      "title": "Show profile name while messaging.",
+      "icon": "fas fa-user",
+      "value": false
+    }
+  ]
+}

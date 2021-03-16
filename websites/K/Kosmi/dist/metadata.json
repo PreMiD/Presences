@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "ducc1",
+    "id": "242385294123335690"
+  },
+  "url": [
+    "app.kosmi.io",
+    "kosmi.io"
+  ],
+  "description": {
+    "en": "Online Hangouts Made Easy."
+  },
+  "service": "kosmi.io",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/Qr9bR87.png",
+  "thumbnail": "https://i.imgur.com/ZzMzc1l.png",
+  "color": "#322484",
+  "tags": [
+    "streaming",
+    "video"
+  ],
+  "category": "videos"
+}

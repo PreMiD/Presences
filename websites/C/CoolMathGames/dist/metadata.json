@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "CoolMathGames",
   "description": {
     "en": "Coolmath Games is a brain-training site, for everyone, where logic & thinking & math meets fun & games."
@@ -11,7 +17,7 @@
     "www.coolmathgames.com",
     "coolmathgames.com"
   ],
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/3eJRTgJ.png",
   "thumbnail": "https://i.imgur.com/VZ4v1P7.png",
   "color": "#3DB5F9",

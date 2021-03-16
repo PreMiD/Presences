@@ -1,22 +1,40 @@
 {
   "author": {
-    "name": "PsychoPast",
+    "name": "Psycho",
     "id": "444779014888882177"
   },
+  "contributors": [
+    {
+      "name": "Undo",
+      "id": "246660882803720193"
+    }
+  ],
   "service": "Gogoanime",
   "description": {
-    "en": "Watch anime online in English. You can watch free series and movies online with English subtitles."
+    "en": "Watch anime online in English. You can watch free series and movies online and English subtitle. Free download high quality anime."
   },
   "url": [
-    "www2.gogoanime.video",
-    "gogoanime.so"
+    "gogoanime.io",
+    "gogoanime.sh",
+    "gogoanime.so",
+    "gogoanime.movie",
+    "gogoanimes.co",
+    "gogoanime.tv",
+    "gogoanime.in",
+    "gogoanime.video",
+    "gogoanime.ai",
+    "gogoanime.vc",
+    "gogoanime.news"
   ],
-  "version": "1.0.6",
-  "logo": "https://i.imgur.com/Awp1MUc.png",
+  "regExp": "[0-9w]{0,6}.*gogoanime[s]*.[a-z]+",
+  "version": "2.0.3",
+  "logo": "https://i.imgur.com/OnaEYdo.png",
   "thumbnail": "https://i.imgur.com/RZwilwc.png",
   "color": "#4CA64C",
   "tags": [
-    "anime"
+    "anime",
+    "video",
+    "streaming"
   ],
   "category": "anime",
   "iframe": true

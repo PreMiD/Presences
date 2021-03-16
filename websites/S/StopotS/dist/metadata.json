@@ -1,16 +1,22 @@
 {
   "author": {
-    "name": "Bryan",
-    "id": "293775922757238784"
+    "name": "Alexx",
+    "id": "604182077088202784"
   },
+  "contributors": [
+    {
+      "name": "Bryan",
+      "id": "293775922757238784"
+    }
+  ], 
   "service": "StopotS",
   "description": {
     "en": "StopotS, the stop game on the internet. Play this popular game for free and without downloads."
   },
-  "url": "stopots.com.br",
-  "version": "1.2.5",
+  "url": "stopots.com",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/2LqhoUb.png",
-  "thumbnail": "https://i.gyazo.com/6d16fbb429e2190a739a3ca2d3ab5649.png",
+  "thumbnail": "https://i.imgur.com/Bg869KE.png",
   "color": "#FFBE55",
   "tags": [
     "stopots",
