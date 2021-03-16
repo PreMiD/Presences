@@ -14,14 +14,23 @@
     "version": "1.0.0",
     "color": "#ffbc4f",
     "description": {
-        "en": "Moodle Rich Presence"
+        "en": "Your end-to-end online learning platform for K12, higher education and workplace training. The most used open source LMS in the world."
     },
     "tags": [
-        "moodle"
+        "moodle",
+        "education",
+        "media"
     ],
     "category": "socials",
     "url": "moodle.com",
     "logo": "https://cdn.discordapp.com/app-assets/821059536768335902/821099230214750279.png",
     "thumbnail": "https://cdn.discordapp.com/app-assets/821059536768335902/821099230214750279.png",
-    "regExp": "moodle.(.*?)[.](.*?)"
+    "regExp": "moodle.(.*?)[.](.*?)",
+    "settings": [
+        {
+            "id": "displayCourse",
+            "title": "Dispaly Coursename",
+            "value": false
+        }
+    ]
 }
