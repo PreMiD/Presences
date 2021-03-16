@@ -6,8 +6,7 @@ const pPresence = new Presence({
 pPresence.on("UpdateData", async() => {
   const pData: PresenceData = {
     largeImageKey: "icon2"
-  },
-    pPage = window.location.pathname;
+  };
 
   pData.startTimestamp = pBrowsing;
 

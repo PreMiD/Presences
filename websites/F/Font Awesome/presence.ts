@@ -21,7 +21,7 @@ pPresence.on("UpdateData", async () => {
     if (myParam == null) {
       try {
         const icon: string = document.querySelector("#page-top > div.view.flex.flex-column.min-vh-100.db-pr > div.flex-grow-1.flex-shrink-0.flex-basis-auto > div > div.ph6-l > div > section > header > div.flex.flex-column.flex-row-xl.items-center-xl.justify-between-xl.mb2.mb4-l > h1 > span").textContent;
-        pData.details = "Watching Icon:";
+        pData.details = "Viewing Icon:";
         pData.state = icon;
         pData.buttons = [
           {
