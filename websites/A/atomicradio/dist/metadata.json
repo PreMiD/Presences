@@ -4,20 +4,28 @@
         "name": "VocalZero",
         "id": "223891083724193792"
     },
+    "contributors": [
+        {
+          "name": "InstabilSpielt",
+          "id": "425706045453893642"
+        }
+    ],
     "service": "atomicradio",
     "description": {
         "en": "Experience the best of the music world and show your friends what you're listening to!"
     },
-    "url": "atomicradio.eu",
+    "url": [
+        "atomicradio.eu",
+        "status.atomicradio.eu"
+    ],
     "version": "1.0.0",
-    "logo": "https://i.imgur.com/aNN2w0z.png",
+    "logo": "https://i.imgur.com/7VFqGv9.png",
     "thumbnail": "https://i.imgur.com/DHcDFc7.png",
     "color": "#954fb4",
     "tags": [
         "atomicradio",
 		"music",
-		"radio",
-		"webradio"
+		"radio"
     ],
     "category": "music"
 }
