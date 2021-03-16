@@ -10,8 +10,8 @@ presence.on("UpdateData", async () => {
             largeImageKey: "largeimage",
             smallImageText: 'Reading . . .',
             startTimestamp: timebrowsed
-        };
-    let displayCourse = await presence.getSetting('displayCourse');
+        },
+        displayCourse = await presence.getSetting('displayCourse');
 
     if (pages[0] === 'course') {
         data.details = 'Viewing Course';
