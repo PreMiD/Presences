@@ -181,7 +181,10 @@ presence.on("UpdateData", async () => {
       presenceData.state = `No matching result`;
     }
   } else if (document.location.pathname.includes("/personal")){
-    const type = (new URLSearchParams(document.location.search)).get("type");
+    const type = (new URLSearchParams(document.location.search)).get("type"),
+    all = document.querySelector("div.trans-contributions-detail > span:nth-child(1) > i")?.textContent,
+    passed = document.querySelector("div.trans-contributions-detail > span:nth-child(2) > i")?.textContent,
+    adopted = document.querySelector("div.trans-contributions-detail > span:nth-child(2) > i")?.textContent;
 
     switch(type){
       case "settings":
@@ -197,10 +200,6 @@ presence.on("UpdateData", async () => {
         break;
 
       case "translation":
-        const all = document.querySelector("div.trans-contributions-detail > span:nth-child(1) > i").textContent,
-              passed = document.querySelector("div.trans-contributions-detail > span:nth-child(2) > i").textContent,
-              adopted = document.querySelector("div.trans-contributions-detail > span:nth-child(2) > i").textContent;
-        
         presenceData.details = "Viewing their subtitle translation";
         presenceData.state = `All: ${all} • Passed: ${passed} • Adopted: ${adopted}`;
         break;
@@ -231,4 +230,4 @@ function YouCanSeeThis(element: HTMLElement) {
         clientRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
         clientRect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
-};
+}
