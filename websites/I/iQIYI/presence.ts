@@ -11,7 +11,13 @@ const presence = new Presence({
         searchFor: "general.searchFor",
         watchVideo: "general.buttonWatchVideo",
         watchMovie: "general.buttonViewMovie",
-        watchEpisode: "general.buttonViewEpisode"
+        watchEpisode: "general.buttonViewEpisode",
+        browsingThrough: "discord.browseThrough",
+        viewingSettings : "discord.settings",
+        viewingHistory: "amazon.history",
+        viewingList: "netflix.viewList",
+        viewAccount: "general.viewAccount",
+        viewPage: "general.viewPage"
       },
       await presence.getSetting("lang")
     ),
@@ -40,7 +46,13 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (
+  if (document.location.pathname === "/"){
+    const category = Object.values(document.querySelectorAll('div')
+                    ).filter(entry => entry?.className === "row-title" && YouCanSeeThis(entry))[0]?.textContent;
+
+    presenceData.details = (await strings).browsingThrough;
+    presenceData.state = category || "Home page";
+  } else if (
     document.location.pathname.includes("/play") ||
     document.location.pathname.includes("/intl-common/")
   ) {
@@ -96,7 +108,7 @@ presence.on("UpdateData", async () => {
         data.ep = `Variety show`;
       }
 
-      data.title = data.title.match(/.+?(?=\s{2})/g)[0];
+      data.title = (data.title.match(/.+?(?=\s{2})/g) || [null])[0];
     }
     if (isVShow && !isVShowToo) data.ep = "Variety show";
     if (!isVShow && !isVShowToo && !isMovie && contentEp !== null)
@@ -142,7 +154,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else {
+    } else if (data.title) {
       presenceData.details = "Looking at:";
       presenceData.state = data.title;
       presenceData.startTimestamp = browsingStamp;
@@ -168,7 +180,55 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.state = `No matching result`;
     }
+  } else if (document.location.pathname.includes("/personal")){
+    const type = (new URLSearchParams(document.location.search)).get("type");
+
+    switch(type){
+      case "settings":
+        presenceData.details = (await strings).viewingSettings;
+        break;
+
+      case "history":
+        presenceData.details = (await strings).viewingHistory;
+        break;
+      
+      case "favorite":
+        presenceData.details = (await strings).viewingList;
+        break;
+
+      case "translation":
+        const all = document.querySelector("div.trans-contributions-detail > span:nth-child(1) > i").textContent,
+              passed = document.querySelector("div.trans-contributions-detail > span:nth-child(2) > i").textContent,
+              adopted = document.querySelector("div.trans-contributions-detail > span:nth-child(2) > i").textContent;
+        
+        presenceData.details = "Viewing their subtitle translation";
+        presenceData.state = `All: ${all} • Passed: ${passed} • Adopted: ${adopted}`;
+        break;
+      
+      default:
+        presenceData.details = (await strings).viewAccount;
+        break;
+    }
+  } else if (document.location.pathname.includes("/vip/")) {
+    presenceData.details = (await strings).viewPage;
+    presenceData.state = "VIP membership";
   }
 
   presence.setActivity(presenceData);
 });
+
+/**
+ * Check if your eyes can see this element :)
+ * @param element The element you want to check
+ * @returns The result you want
+ */
+
+function YouCanSeeThis(element: HTMLElement) {
+    const clientRect = element.getBoundingClientRect();
+    return (
+        clientRect.top >= 0 &&
+        clientRect.left >= 0 &&
+        clientRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        clientRect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
