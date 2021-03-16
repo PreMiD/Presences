@@ -136,7 +136,11 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       {
         middleware: (ref) =>
           !!ref.document.querySelector(".hero-cover[channel-id]"),
-        exec: (context, data, { showWatch, strings, images }: ExecutionArguments) => {
+        exec: (
+          context,
+          data,
+          { showWatch, strings, images }: ExecutionArguments
+        ) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
             ".coub[coub-block].active"
@@ -191,7 +195,11 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       },
       {
         middleware: (ref) => !!ref.location.pathname.match(/^\/view\/(.*)/gi),
-        exec: (context, data, { strings, showWatch, images }: ExecutionArguments) => {
+        exec: (
+          context,
+          data,
+          { strings, showWatch, images }: ExecutionArguments
+        ) => {
           if (!context) return null;
           const activeMedia = document.querySelector<HTMLElement>(
             ".coub[coub-block]"
@@ -228,7 +236,11 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       },
       {
         middleware: (ref) => !!ref.location.pathname.match(/^\/(community)/gi),
-        exec: (context, data, { showWatch, strings, images }: ExecutionArguments) => {
+        exec: (
+          context,
+          data,
+          { showWatch, strings, images }: ExecutionArguments
+        ) => {
           if (!context) return null;
           const communityParent = document.querySelector(
             ".hot__community[data-community-id]"
