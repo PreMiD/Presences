@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
             smallImageText: 'Reading . . .',
             startTimestamp: timebrowsed
         };
-    var displayCourse = await presence.getSetting('displayCourse')
+    let displayCourse = await presence.getSetting('displayCourse')
 
     if (pages[0] === 'course') {
         data.details = 'Viewing Course';
