@@ -30,8 +30,6 @@ OMGUbuntu.on("UpdateData", async () => {
 
     presenceData.details = "Looking at a tag:";
     presenceData.state = tag;
-
-    OMGUbuntu.setActivity(presenceData);
   } else if (page.includes("/category/")) {
     const category =
       document
@@ -40,15 +38,11 @@ OMGUbuntu.on("UpdateData", async () => {
 
     presenceData.details = "Looking at a category:";
     presenceData.state = category;
-
-    OMGUbuntu.setActivity(presenceData);
   } else if (page.includes("/page/")) {
     const articlesPage = location.pathname.split("/")[2] || "Unknown Page";
 
     presenceData.details = "Looking at articles";
     presenceData.state = `Page: ${articlesPage}`;
-
-    OMGUbuntu.setActivity(presenceData);
   } else if (page === "/" && location.search?.includes("?s=")) {
     const searching =
       decodeURI(location.search).replace("?s=", "").replace(/\+/g, " ") ||
@@ -57,19 +51,14 @@ OMGUbuntu.on("UpdateData", async () => {
     presenceData.details = "Searching for:";
     presenceData.smallImageKey = "searching";
     presenceData.state = searching;
-
-    OMGUbuntu.setActivity(presenceData);
   } else if (page.includes("/") && articleHeader) {
     presenceData.details = "Reading an article:";
     presenceData.smallImageKey = "reading";
     presenceData.state = articleHeader;
     presenceData.buttons = [{ label: "Read Article", url: location.href }];
-
-    OMGUbuntu.setActivity(presenceData);
   } else if (pages[page]) {
     presenceData.details = "Looking at a page:";
     presenceData.state = pages[page];
-
-    OMGUbuntu.setActivity(presenceData);
-  } else OMGUbuntu.setActivity();
+  }
+  OMGUbuntu.setActivity(presenceData);
 });
