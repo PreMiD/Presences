@@ -71,5 +71,5 @@ OMGUbuntu.on("UpdateData", async () => {
     presenceData.state = pages[page];
 
     OMGUbuntu.setActivity(presenceData);
-  } else OMGUbuntu.setActivity(presenceData);
+  } else OMGUbuntu.setActivity();
 });
