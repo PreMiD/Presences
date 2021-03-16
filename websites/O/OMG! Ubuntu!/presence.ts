@@ -28,7 +28,7 @@ OMGUbuntu.on("UpdateData", async () => {
         .querySelector(".content-container .loop h2")
         ?.lastChild.textContent.trim() || "Unknown Tag";
 
-    presenceData.details = "Looking a tag:";
+    presenceData.details = "Looking at a tag:";
     presenceData.state = tag;
 
     OMGUbuntu.setActivity(presenceData);
@@ -38,7 +38,7 @@ OMGUbuntu.on("UpdateData", async () => {
         .querySelector(".content-container .loop h2")
         ?.lastChild.textContent.trim() || "Unknown Category";
 
-    presenceData.details = "Looking a category:";
+    presenceData.details = "Looking at a category:";
     presenceData.state = category;
 
     OMGUbuntu.setActivity(presenceData);
@@ -67,7 +67,7 @@ OMGUbuntu.on("UpdateData", async () => {
 
     OMGUbuntu.setActivity(presenceData);
   } else if (pages[page]) {
-    presenceData.details = "Looking a page:";
+    presenceData.details = "Looking at a page:";
     presenceData.state = pages[page];
 
     OMGUbuntu.setActivity(presenceData);
