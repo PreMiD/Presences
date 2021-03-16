@@ -14,10 +14,10 @@ botPresence.on("UpdateData", async () => {
 
   botData.startTimestamp = botBrowsing;
 
+  botData.details = "Browsing";
+
   if (botHost == "discord-botlist.eu") {
-    if (botPage == "/") {
-      botData.details = "Browsing";
-    } else if (botPage == "/search") {
+    if (botPage == "/search") {
       const search: string = document.querySelector("[name='search']").getAttribute("value");
       botData.details = "Searching Bot:";
       botData.state = search;

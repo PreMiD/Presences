@@ -11,11 +11,9 @@ pPresence.on("UpdateData", async() => {
 
   pData.startTimestamp = pBrowsing;
 
-  if (pPage.includes("/")) {
-    const title: string = document.getElementsByTagName("h1")[0].textContent.replace("#", "");
-    pData.details = "Viewing Docs";
-    pData.state = "Page: " + title; 
-  }
+  const title: string = document.getElementsByTagName("h1")[0].textContent.replace("#", "");
+  pData.details = "Viewing Docs";
+  pData.state = "Page: " + title; 
 
   if (pData.details == null) {
     pPresence.setTrayTitle();
