@@ -15,7 +15,7 @@ pPresence.on("UpdateData", async() => {
   pData.state = "Page: " + title; 
 
   if (pData.details == null) {
-    pPresence.setTrayTitle();
+    pPresence.setTrayTitle(); 
     pPresence.setActivity();
   } else {
     pPresence.setActivity(pData);
