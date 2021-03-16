@@ -6,7 +6,6 @@ const OMGUbuntu = new Presence({
     "/about-us": "About",
     "/commenting-conduct": "Code of Conduct",
     "/privacy-policy": "Privacy Policy",
-    "/feed": "RSS Feed",
     "/tip": "Contact"
   },
   startTimestamp = Math.round(Date.now() / 1000),
@@ -46,7 +45,7 @@ OMGUbuntu.on("UpdateData", async () => {
   } else if (page.includes("/page/")) {
     const articlesPage = location.pathname.split("/")[2] || "Unknown Page";
 
-    presenceData.details = "Looking articles";
+    presenceData.details = "Looking at articles";
     presenceData.state = `Page: ${articlesPage}`;
 
     OMGUbuntu.setActivity(presenceData);
