@@ -23,8 +23,8 @@
     ],
     "category": "socials",
     "url": "moodle.com",
-    "logo": "https://cdn.discordapp.com/app-assets/821059536768335902/821099230214750279.png",
-    "thumbnail": "https://cdn.discordapp.com/app-assets/821059536768335902/821099230214750279.png",
+    "logo": "https://imgur.com/a/q2jcE68",
+    "thumbnail": "https://imgur.com/a/q2jcE68",
     "regExp": "moodle.(.*?)[.](.*?)",
     "settings": [
         {

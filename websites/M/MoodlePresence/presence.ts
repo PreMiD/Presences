@@ -8,7 +8,6 @@ presence.on("UpdateData", async () => {
         pages = pathName.split('/').filter(p => p),
         data: PresenceData = {
             largeImageKey: "largeimage",
-            smallImageText: 'Reading . . .',
             startTimestamp: timebrowsed
         },
         displayCourse = await presence.getSetting('displayCourse');
