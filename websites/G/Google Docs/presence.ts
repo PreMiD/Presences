@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     .replace("- Google Docs", "")
     .replace("- Google Forms", "")
     .replace("- Google Sheets", "")
-    .replace("- Google Slides", "")
+    .replace("- Google Slides", "");
 
   if (document.location.pathname.includes("/document")) {
     presenceData.largeImageKey = "docslogo";
