@@ -20,28 +20,21 @@ OMGUbuntu.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "omgubuntu-logo",
       startTimestamp
-    };
+    },
+    header = document
+      .querySelector(".content-container .loop h2")
+      ?.lastChild.textContent.trim();
 
   if (page.includes("/tag/")) {
-    const tag =
-      document
-        .querySelector(".content-container .loop h2")
-        ?.lastChild.textContent.trim() || "Unknown Tag";
-
     presenceData.details = "Looking at a tag:";
-    presenceData.state = tag;
+    presenceData.state = header || "Unknown Tag";
   } else if (page.includes("/category/")) {
-    const category =
-      document
-        .querySelector(".content-container .loop h2")
-        ?.lastChild.textContent.trim() || "Unknown Category";
-
     presenceData.details = "Looking at a category:";
-    presenceData.state = category;
+    presenceData.state = header || "Unknown Category";
   } else if (page.includes("/page/")) {
-    const articlesPage = location.pathname.split("/")[2] || "Unknown Page";
+    const articlesPage = location.pathname.split("/")[2] || "Unknown";
 
-    presenceData.details = "Looking at articles";
+    presenceData.details = "Looking at article pages";
     presenceData.state = `Page: ${articlesPage}`;
   } else if (page === "/" && location.search?.includes("?s=")) {
     const searching =
@@ -57,8 +50,7 @@ OMGUbuntu.on("UpdateData", async () => {
     presenceData.state = articleHeader;
     presenceData.buttons = [{ label: "Read Article", url: location.href }];
   } else if (pages[page]) {
-    presenceData.details = "Looking at a page:";
-    presenceData.state = pages[page];
+    presenceData.details = `Looking at the ${pages[page]} page`;
   }
   OMGUbuntu.setActivity(presenceData);
 });
