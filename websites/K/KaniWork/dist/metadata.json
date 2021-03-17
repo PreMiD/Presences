@@ -25,7 +25,7 @@
   "settings": [
     {
       "id": "privacy",
-      "title": "Hide server in the kanishiel's dashboard",
+      "title": "Hide server",
       "icon": "fad fa-user-secret",
       "value": false
     },
