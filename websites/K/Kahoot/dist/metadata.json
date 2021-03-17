@@ -5,6 +5,10 @@
   },
   "contributors": [
     {
+      "name": "Encrypted",
+      "id": "564434085708038144"
+    },
+    {
       "name": "Alanexei ✔",
       "id": "163319338403627008"
     }
@@ -17,7 +21,7 @@
     "kahoot.it",
     "play.kahoot.it"
   ],
-  "version": "1.2.7",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/GkXv1zy.jpg",
   "thumbnail": "https://i.imgur.com/3DGbV8e.png",
   "color": "#8A5CD7",
@@ -26,5 +30,17 @@
     "qna",
     "fun"
   ],
-  "category": "games"
+  "category": "games",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": false
+    }
+  ]
 }

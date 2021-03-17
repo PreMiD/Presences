@@ -5,10 +5,11 @@
   },
   "service": "Google Classroom",
   "description": {
-    "en": "Google Classroom is a free web service, developed by Google for schools, that aims to simplify creating, distributing, and grading assignments in a paperless way. The primary purpose of Google Classroom is to streamline the process of sharing files between teachers and students."
+    "en": "Google Classroom is a free web service, developed by Google for schools, that aims to simplify creating, distributing, and grading assignments in a paperless way. The primary purpose of Google Classroom is to streamline the process of sharing files between teachers and students.",
+    "nl": "Google Classroom is een gratis en makkelijke tool waarmee docenten voortgang efficiënt kunnen beheren en beoordelen, en waarmee ze in contact kunnen blijven met leerlingen, zelfs onderweg of vanuit huis."
   },
   "url": "classroom.google.com",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/cZ0dXeF.png",
   "thumbnail": "https://i.imgur.com/35OLcKf.png",
   "color": "#1e8e3e",

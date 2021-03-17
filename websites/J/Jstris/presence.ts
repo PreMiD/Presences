@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
   //Sets button for viewing profile.
 
   if (typeof username !== "undefined") {
-    const profileUrl = `${BaseUrl}/u/${username.replace(/\n/g, "")}`;
+    const profileUrl = `${BaseUrl}/u/${username}`;
     tempButtons.push({ label: "View Profile", url: profileUrl });
   }
 
@@ -135,9 +135,14 @@ presence.on("UpdateData", async () => {
 });
 
 function getUsername() {
-  return document
-    .getElementsByClassName("navbar-right")[0]
-    .getElementsByClassName("dropdown-toggle")[1].textContent;
+  try {
+    return document
+      .getElementsByClassName("navbar-right")[0]
+      .getElementsByClassName("dropdown-toggle")[1]
+      .textContent.replace(/\n/g, "");
+  } catch (err) {
+    return undefined;
+  }
 }
 
 function parseQuery(search: string) {
