@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
   if (sprivacy) {
     presenceData.details = "Browsing";
   } else {
-    let PATH = window.location.pathname.replace('.php','');
+    const PATH = window.location.pathname.replace('.php','');
     if (PATH.endsWith("commandes")) {
       presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Commands";
