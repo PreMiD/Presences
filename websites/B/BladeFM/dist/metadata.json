@@ -3,22 +3,22 @@
     "name": "Callum",
     "id": "506899274748133376"
   },
-  "service": "BoltFm",
+  "service": "BladeFM",
   "description": {
     "en": "Providing non-stop music, 24/7",
     "ga_IE": "Ag soláthar ceoil gan stad, 24/7"
   },
-  "url": "boltfm.net",
+  "url": "bladefm.com.au",
   "version": "1.0.0",
-  "logo": "https://i.imgur.com/VWZZldG.png",
-  "thumbnail": "https://i.imgur.com/6DB8VEh.png",
+  "logo": "https://i.imgur.com/Sjj3gx6.png",
+  "thumbnail": "https://i.imgur.com/DWa62sw.png",
   "color": "#203391",
   "tags": [
     "music",
     "radio",
-    "bolt",
-    "boltradio",
-    "boltfm"
+    "blade",
+    "bladeradio",
+    "bladefm"
   ],
   "category": "music",
   "settings": [
@@ -43,5 +43,5 @@
       "placeholder": "%artist% - %song%"
     }
   ],
-  "regExp": "([a-z0-9-]+[.])*(boltfm[.]net)[/]"
+  "regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]"
 }

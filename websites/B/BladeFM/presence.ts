@@ -1,6 +1,6 @@
-const presence = new Presence({ clientId: "821762747544895540" }),
+const presence = new Presence({ clientId: "821776987570962532" }),
   timestamp = Math.floor(Date.now() / 1000),
-  newStats = async () => (data = await (await window.fetch("https://stats.boltfm.net/")).json());
+  newStats = async () => (data = await (await window.fetch("https://cast.bladefm.com.au/api/nowplaying/1")).json());
 
 let data: { 
   listeners: { 
@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
     };
 
   if (settings.timestamp) presenceData.startTimestamp = timestamp;
-  if (data.live.is_live) presenceData.smallImageKey = "live";
+  if (data.live.is_live && data.live.streamer_name !== "Admin") presenceData.smallImageKey = "live";
   else delete presenceData.smallImageText;
 
   presence.setActivity(presenceData);
