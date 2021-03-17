@@ -3,19 +3,18 @@ var presence = new Presence({
   });
   
   const time = Math.floor(Date.now() / 1000);
-  const buttons = presence.getSetting("buttons")
   presence.on("UpdateData", async () => {
 
   
     // Fotos
-    if (document.location.pathname == "/") {
-      const homepagePresence: PresenceData = {
+    if (document.location.pathname.includes("/")) {
+      const presenceData: PresenceData = {
         details: "Photos",
         state: "Viewing your photos",
         largeImageKey: "photos",
         startTimestamp: time
       };
-      presence.setActivity(homepagePresence);
+      presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/photo/")) {
       const presenceData: PresenceData = {
         details: "Photos",
@@ -266,7 +265,7 @@ var presence = new Presence({
       startTimestamp: time
     };
     presence.setActivity(presenceData);
-  } else if (document.location.pathname.startsWith("/activities/photos_likes")) {
+  } else (document.location.pathname.startsWith("/activities/photos_likes"))
     const presenceData: PresenceData = {
       details: "Activity Register",
       state: "Checking your likes...",
@@ -274,6 +273,5 @@ var presence = new Presence({
       startTimestamp: time
     };
     presence.setActivity(presenceData);
-    }
   });
   
