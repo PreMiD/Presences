@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       buttons: [
         {
           label: "Tune in",
-          url: "https://live.itsbounce.net"
+          url: "https://live.boltfm.net"
         }
       ]
     };
