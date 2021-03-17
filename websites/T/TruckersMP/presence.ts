@@ -5,11 +5,10 @@ var presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo",
-    startTimestamp: browsingStamp
-  };
-
-  const buttons = await presence.getSetting("buttons");
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
+    },
+    buttons = await presence.getSetting("buttons");
 
   if (document.location.hostname == "truckersmp.com") {
     // MAIN WEBSITE
