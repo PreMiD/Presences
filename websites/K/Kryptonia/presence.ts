@@ -4,7 +4,7 @@ const presence = new Presence({
   presence.on("UpdateData", async () => {
     const data: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp: Date.now()/1000
+      startTimestamp: Math.floor(Date.now()/1000)
     };
     // Landing Site - kryptonia.fr
     if (window.location.hostname == "kryptonia.fr") {
