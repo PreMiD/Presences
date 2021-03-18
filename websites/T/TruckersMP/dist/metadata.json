@@ -3,10 +3,10 @@
     "name": "Encrypted",
     "id": "564434085708038144"
   },
-  "contributors": {
+  "contributors": [{
     "name": "Bas950",
     "id": "241278257335500811"
-  },
+  }],
   "service": "TruckersMP",
   "description": {
     "en": "TruckersMP is a multiplayer truckers experience for SCS Software's Euro Truck Simulator 2 and American Truck Simulator."
@@ -23,12 +23,10 @@
   "color": "#B92025",
   "tags": ["ets2", "ats", "scs", "drive", "truck"],
   "category": "games",
-  "settings": [
-    {
-      "id": "buttons",
-      "title": "Show Buttons",
-      "icon": "fas fa-compress-arrows-alt",
-      "value": true
-    }
-  ]
+  "settings": [{
+    "id": "buttons",
+    "title": "Show Buttons",
+    "icon": "fas fa-compress-arrows-alt",
+    "value": true
+  }]
 }
