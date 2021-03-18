@@ -40,4 +40,3 @@ const presence = new Presence({
     }
     presence.setActivity(data);
   });
-  
