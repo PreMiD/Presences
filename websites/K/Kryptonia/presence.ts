@@ -29,6 +29,9 @@ const presence = new Presence({
           data.state = document.querySelector("head > title").textContent.replace("| Kryptonia", "");
         }
       }
+      else if(window.location.pathname.includes("/forums/")) {
+          data.state = "📌 " + document.querySelector("head > title").textContent.replace("| Kryptonia", "");
+      }
       else {
         data.state = document.querySelector("head > title").textContent.replace("Kryptonia", "").replace("| ", "");
       }
