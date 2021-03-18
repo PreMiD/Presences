@@ -5,16 +5,16 @@ const presence = new Presence({
 strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "general.paused"
-});
+}),
 
-const startBrowsingStamp = Math.floor(Date.now() / 1000);
+startBrowsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
-  };
+  },
+  path = document.location.pathname;
 
-  const path = document.location.pathname;
   if (path == '/') {
     presenceData.startTimestamp = startBrowsingStamp;
     presenceData.details = `Смотрит домашнюю страницу`;
@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
         const isVideoPlaying = (video: HTMLVideoElement) => !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2);
 
         if (isVideoPlaying(video as HTMLVideoElement)) {
-          presenceData.endTimestamp = Number.isNaN(timestamps[1]) ? null:  timestamps[1];
+          presenceData.endTimestamp = Number.isNaN(timestamps[1]) ? null : timestamps[1];
           presenceData.smallImageKey = 'play';
           presenceData.smallImageText = (await strings).play;
         } else {
@@ -62,10 +62,10 @@ presence.on("UpdateData", async () => {
       
       if (name) {
         const nameArray =  name.textContent.trim().split(' ');
-        nameArray.shift()
+        nameArray.shift();
 
-        const episode = nameArray[nameArray.indexOf('серия') - 1];
-        const season = nameArray[nameArray.indexOf('сезон') - 1];
+        const episode = nameArray[nameArray.indexOf('серия') - 1],
+        season = nameArray[nameArray.indexOf('сезон') - 1];
 
         if (season) {
           nameArray.splice(nameArray.indexOf('сезон') - 1, 4);
