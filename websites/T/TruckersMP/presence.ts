@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "821104573329440848"
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
@@ -11,7 +11,6 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons");
 
   if (document.location.hostname == "truckersmp.com") {
-    // MAIN WEBSITE
     presenceData.details = "Viewing the home page";
     presenceData.smallImageKey = "reading";
     if (document.location.pathname.includes("/team")) {
@@ -30,9 +29,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing the rules";
     } else if (document.location.pathname.includes("/download")) {
       presenceData.details = "Viewing the downloads page";
-    }
-    //PROFILES
-    else if (document.location.pathname.includes("/user")) {
+    } else if (document.location.pathname.includes("/user")) {
       presenceData.details = "Viewing a user profile";
       presenceData.state = document.querySelector(
         "div.col-md-12 > h1 > span"
@@ -40,9 +37,7 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [{ label: "View Profile", url: document.URL }];
     } else if (document.location.pathname == "/profile/settings") {
       presenceData.details = "Viewing profile settings";
-    }
-    //VTC CENTER
-    else if (document.location.pathname == "/vtc") {
+    } else if (document.location.pathname == "/vtc") {
       presenceData.details = "Viewing the VTC center";
     } else if (document.location.pathname == "/vtc/search") {
       delete presenceData.smallImageKey;
@@ -59,9 +54,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/members/")) {
       presenceData.details = "Viewing VTC members";
       presenceData.state = document.querySelector("h2").innerText;
-    }
-    //BLOG CENTER
-    else if (document.location.pathname == "/blog") {
+    } else if (document.location.pathname == "/blog") {
       delete presenceData.smallImageKey;
       presenceData.smallImageKey = "search";
       presenceData.details = "Browsing the blog";
@@ -72,9 +65,7 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         { label: "Read News Article", url: document.URL }
       ];
-    }
-    //EVENTS CENTER
-    else if (document.location.pathname == "/events") {
+    } else if (document.location.pathname == "/events") {
       presenceData.details = "Browsing the events center";
     } else if (document.location.pathname == "/events/manage") {
       delete presenceData.smallImageKey;
@@ -144,6 +135,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "editing";
     }
   }
-  if (buttons) delete presenceData.buttons;
+  if (!buttons) delete presenceData.buttons;
   presence.setActivity(presenceData);
 });
