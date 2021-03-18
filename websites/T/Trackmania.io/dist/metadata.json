@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "Greep",
+    "id": "330030648456642562"
+  },
+  "service": "Trackmania.io",
+  "altnames": [
+    "TM.io"
+  ],
+  "url": [
+    "trackmania.io",
+    "www.trackmania.io"
+  ],
+  "version": "0.0.1",
+  "logo": "https://trackmania.io/img/square.png",
+  "thumbnail": "https://i.imgur.com/oCyBucc.jpg",
+  "color": "#0A7FB4",
+  "tags": [
+    "cars",
+    "racing",
+    "tm",
+    "tmio",
+    "tm2020",
+    "trackmania-io",
+    "trackmania-2020",
+    "trackmania",
+    "ubisoft",
+    "nadeo"
+  ],
+  "description": {
+    "en": "Trackmania.io is an overview of the Trackmania Live services into your website. This service is provided by OpenPlanet.",
+    "fr": "Trackmania.io est une vue d'ensemble sur les services live de Trackmania dans votre navigateur. Ce service est offert par OpenPlanet."
+  },
+  "category": "games"
+}
