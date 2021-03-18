@@ -7,7 +7,7 @@ var presence = new Presence({
 
   
     // Fotos
-    if (document.location.pathname.includes("/")) {
+    if (document.location.pathname.startsWith("/")) {
       const presenceData: PresenceData = {
         details: "Photos",
         state: "Viewing your photos",
