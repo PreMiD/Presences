@@ -31,9 +31,9 @@ presence.on("UpdateData", async () => {
     const mangaTitle = document.getElementById('the_manga_title');
 
     if (mangaTitle) {
-      const nameArray =  mangaTitle.childNodes[0].nodeValue.trim().substring(0, mangaTitle.childNodes[0].nodeValue.trim().length - 1).split(' ');
+      const nameArray =  mangaTitle.childNodes[0].nodeValue.trim().substring(0, mangaTitle.childNodes[0].nodeValue.trim().length - 1).split(' '),
 
-      const chapter = nameArray[nameArray.indexOf('глава') - 1];
+      chapter = nameArray[nameArray.indexOf('глава') - 1];
       presenceData.state = `${chapter} глава`;
 
       const mangaName = nameArray.splice(nameArray.indexOf('манги') + 1);
@@ -43,9 +43,9 @@ presence.on("UpdateData", async () => {
       const video = document.querySelector('#my-player_html5_api');
 
       if (video) {
-        const timestamps = presence.getTimestampsfromMedia(video as HTMLMediaElement);
+        const timestamps = presence.getTimestampsfromMedia(video as HTMLMediaElement),
       
-        const isVideoPlaying = (video: HTMLVideoElement) => !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2);
+        isVideoPlaying = (video: HTMLVideoElement) => !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2);
 
         if (isVideoPlaying(video as HTMLVideoElement)) {
           presenceData.endTimestamp = Number.isNaN(timestamps[1]) ? null : timestamps[1];
