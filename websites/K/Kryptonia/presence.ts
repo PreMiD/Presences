@@ -9,7 +9,7 @@ const presence = new Presence({
     // Landing Site - kryptonia.fr
     if (window.location.hostname == "kryptonia.fr") {
       data.details = "Navigue sur le site";
-      data.state = document.querySelector("head > title").textContent.replace("- Kryptonia", "")
+      data.state = document.querySelector("head > title").textContent.replace("- Kryptonia", "");
     }
     // Forum - forum.kryptonia.fr
     if (window.location.hostname == "forum.kryptonia.fr") {
