@@ -33,14 +33,14 @@
       "title": "Change Line #1 (Song Details)",
       "icon": "fas fa-music",
       "value": "Streaming to %listeners% listeners",
-      "placeholder": "%listeners%"
+      "placeholder": "%artist%, %listeners% %songText% %title%"
     },
     {
       "id": "state",
       "title": "Change Line #2 (Presenter Details)",
       "icon": "fas fa-microphone",
       "value": "%songText%",
-      "placeholder": "%artist% - %song%"
+      "placeholder": "%artist%, %listeners% %songText% %title%"
     }
   ],
   "regExp": "([a-z0-9-]+[.])*(boltfm[.]net)[/]"
