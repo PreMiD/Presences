@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/article/")) {
       presenceData.details = "Viewing a knowledge base article";
       presenceData.state = document.querySelector("h1").innerHTML;
-      presenceData.buttons = [{ label: "Article", url: document.URL }];
+      presenceData.buttons = [{ label: "Read Article", url: document.URL }];
     } else if (document.location.pathname.includes("/support")) {
       presenceData.details = "Viewing the Support Center";
     } else if (document.location.pathname.includes("/rules")) {
@@ -37,7 +37,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(
         "div.col-md-12 > h1 > span"
       ).innerHTML;
-      presenceData.buttons = [{ label: "User", url: document.URL }];
+      presenceData.buttons = [{ label: "View Profile", url: document.URL }];
     } else if (document.location.pathname == "/profile/settings") {
       presenceData.details = "Viewing profile settings";
     }
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/vtc/")) {
       presenceData.details = "Viewing a VTC";
       presenceData.state = document.querySelector("h2").innerText;
-      presenceData.buttons = [{ label: "VTC", url: document.URL }];
+      presenceData.buttons = [{ label: "View VTC", url: document.URL }];
     } else if (document.location.pathname.includes("/members/")) {
       presenceData.details = "Viewing VTC members";
       presenceData.state = document.querySelector("h2").innerText;
@@ -69,7 +69,9 @@ presence.on("UpdateData", async () => {
       const blogTitle = document.querySelector("div.container-fluid > h1");
       presenceData.details = "Reading the blog:";
       presenceData.state = blogTitle.innerHTML.substring(0, 125) + "...";
-      presenceData.buttons = [{ label: "News Article", url: document.URL }];
+      presenceData.buttons = [
+        { label: "Read News Article", url: document.URL }
+      ];
     }
     //EVENTS CENTER
     else if (document.location.pathname == "/events") {
@@ -91,19 +93,21 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/events/")) {
       presenceData.details = "Viewing an event";
       presenceData.state = document.querySelectorAll("h1")[1].innerText;
-      presenceData.buttons = [{ label: "Event", url: document.URL }];
+      presenceData.buttons = [{ label: "View Event", url: document.URL }];
     }
   } else if (document.location.hostname == "forum.truckersmp.com") {
     if (document.location.pathname.includes("/forum/")) {
       presenceData.details = "Browsing a forum category";
       presenceData.state = document.querySelector("header > h1").innerHTML;
-      presenceData.buttons = [{ label: "Forum Category", url: document.URL }];
+      presenceData.buttons = [
+        { label: "View Forum Category", url: document.URL }
+      ];
     } else if (document.location.pathname.includes("/topic/")) {
       presenceData.details = "Viewing a forum topic";
       presenceData.state = document.querySelector(
         "main > div > div > div > div > div > div > h1 > span.ipsType_break > span"
       ).innerHTML;
-      presenceData.buttons = [{ label: "Forum Topic", url: document.URL }];
+      presenceData.buttons = [{ label: "Read Forum Topic", url: document.URL }];
     } else if (document.location.pathname.includes("/profile/")) {
       presenceData.details = "Viewing a forum user";
       presenceData.state = document
@@ -111,7 +115,7 @@ presence.on("UpdateData", async () => {
           "main > div > div > div> div > header > div  > div > div"
         )[1]
         .querySelector("div > h1 > span").innerHTML;
-      presenceData.buttons = [{ label: "Forum User", url: document.URL }];
+      presenceData.buttons = [{ label: "View Forum User", url: document.URL }];
     }
     presenceData.details = "Viewing the forum";
   } else if (document.location.hostname == "map.truckersmp.com") {
@@ -140,10 +144,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "editing";
     }
   }
-
-  if (presenceData.details == null) presenceData.details = "Unknown page";
   if (buttons) delete presenceData.buttons;
-
   presence.setActivity(presenceData);
-  presence.setTrayTitle();
 });
