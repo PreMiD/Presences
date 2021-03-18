@@ -9,9 +9,7 @@ const presence = new Presence({
     // Landing Site - kryptonia.fr
     if (window.location.hostname == "kryptonia.fr") {
       data.details = "Navigue sur le site";
-      data.state = document
-      .querySelector("head > title")
-      .textContent.replace("- Kryptonia", "")
+      data.state = document.querySelector("head > title").textContent.replace("- Kryptonia", "")
     }
     // Forum - forum.kryptonia.fr
     if (window.location.hostname == "forum.kryptonia.fr") {
@@ -24,18 +22,15 @@ const presence = new Presence({
         .replace("Important", "");
       }
       else if(window.location.pathname.startsWith("/members/")) {
-        if(window.location.pathname == "/members/") {
-          data.state = "Membres notables";
+        if(document.querySelector("#top > div.p-body > div > div > div > div > div > div > div > div > div > div.memberHeader-main > div > h1 > span > span")) {
+          data.state = "👤 " + document.querySelector("#top > div.p-body > div > div > div > div > div > div > div > div > div > div.memberHeader-main > div > h1 > span > span").textContent;
         }
         else {
-          data.state = "👤 " + document.querySelector("#top > div.p-body > div > div > div > div > div > div > div > div > div > div.memberHeader-main > div > h1 > span > span").textContent;
+          data.state = document.querySelector("head > title").textContent.replace("| Kryptonia", "");
         }
       }
       else {
-        data.state = document
-        .querySelector("head > title")
-        .textContent.replace("Kryptonia", "")
-        .replace("| ", "");
+        data.state = document.querySelector("head > title").textContent.replace("Kryptonia", "").replace("| ", "");
       }
     }
     presence.setActivity(data);
