@@ -1,8 +1,3 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-}
-
 const presence = new Presence({
     clientId: "812656134120931330"
   }),
@@ -17,7 +12,7 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let oldLang: string = null,
-  strings: Promise<LangStrings> = getStrings();
+  strings = getStrings();
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {

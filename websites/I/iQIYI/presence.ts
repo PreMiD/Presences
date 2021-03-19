@@ -1,18 +1,7 @@
-interface LangStrings {
-  play: string;
-  pause: string;
-  episode: string;
-  browse: string;
-  searchFor: string;
-  watchVideo: string;
-  watchEpisode: string;
-  watchMovie: string;
-}
-
 const presence = new Presence({
     clientId: "809748404963770398"
   }),
-  getStrings = async (): Promise<LangStrings> =>
+  getStrings = async () =>
     presence.getStrings(
       {
         play: "general.playing",
@@ -22,24 +11,23 @@ const presence = new Presence({
         searchFor: "general.searchFor",
         watchVideo: "general.buttonWatchVideo",
         watchMovie: "general.buttonViewMovie",
-        watchEpisode: "general.buttonViewEpisode"
+        watchEpisode: "general.buttonViewEpisode",
+        browsingThrough: "discord.browseThrough",
+        viewingSettings : "discord.settings",
+        viewingHistory: "amazon.history",
+        viewingList: "netflix.viewList",
+        viewAccount: "general.viewAccount",
+        viewPage: "general.viewPage"
       },
       await presence.getSetting("lang")
     ),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let strings: Promise<LangStrings> = getStrings(),
+let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "iqiyi_logo",
-      details: (await strings).browse,
-      smallImageKey: "search",
-      smallImageText: (await strings).browse,
-      startTimestamp: browsingStamp
-    },
-    newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang"),
     showButtons: boolean = await presence.getSetting("buttons"),
     searchQuery: boolean = await presence.getSetting("searchQuery");
 
@@ -50,7 +38,21 @@ presence.on("UpdateData", async () => {
     strings = getStrings();
   }
 
-  if (
+  const presenceData: PresenceData = {
+    largeImageKey: ["iqiyi_logo", "iqiyi_logo_b"][await presence.getSetting("logo")],
+    details: (await strings).browse,
+    smallImageKey: "search",
+    smallImageText: (await strings).browse,
+    startTimestamp: browsingStamp
+  };
+
+  if (document.location.pathname === "/"){
+    const category = Object.values(document.querySelectorAll('div')
+                    ).filter(entry => entry?.className === "row-title" && YouCanSeeThis(entry))[0]?.textContent;
+
+    presenceData.details = (await strings).browsingThrough;
+    presenceData.state = category || "Home page";
+  } else if (
     document.location.pathname.includes("/play") ||
     document.location.pathname.includes("/intl-common/")
   ) {
@@ -106,7 +108,7 @@ presence.on("UpdateData", async () => {
         data.ep = `Variety show`;
       }
 
-      data.title = data.title.match(/.+?(?=\s{2})/g)[0];
+      data.title = (data.title.match(/.+?(?=\s{2})/g) || [null])[0];
     }
     if (isVShow && !isVShowToo) data.ep = "Variety show";
     if (!isVShow && !isVShowToo && !isMovie && contentEp !== null)
@@ -152,7 +154,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
-    } else {
+    } else if (data.title) {
       presenceData.details = "Looking at:";
       presenceData.state = data.title;
       presenceData.startTimestamp = browsingStamp;
@@ -178,7 +180,54 @@ presence.on("UpdateData", async () => {
     } else {
       presenceData.state = `No matching result`;
     }
+  } else if (document.location.pathname.includes("/personal")){
+    const type = (new URLSearchParams(document.location.search)).get("type"),
+    all = document.querySelector("div.trans-contributions-detail > span:nth-child(1) > i")?.textContent,
+    passed = document.querySelector("div.trans-contributions-detail > span:nth-child(2) > i")?.textContent,
+    adopted = document.querySelector("div.trans-contributions-detail > span:nth-child(2) > i")?.textContent;
+
+    switch(type){
+      case "settings":
+        presenceData.details = (await strings).viewingSettings;
+        break;
+
+      case "history":
+        presenceData.details = (await strings).viewingHistory;
+        break;
+      
+      case "favorite":
+        presenceData.details = (await strings).viewingList;
+        break;
+
+      case "translation":
+        presenceData.details = "Viewing their subtitle translation";
+        presenceData.state = `All: ${all} • Passed: ${passed} • Adopted: ${adopted}`;
+        break;
+      
+      default:
+        presenceData.details = (await strings).viewAccount;
+        break;
+    }
+  } else if (document.location.pathname.includes("/vip/")) {
+    presenceData.details = (await strings).viewPage;
+    presenceData.state = "VIP membership";
   }
 
   presence.setActivity(presenceData);
 });
+
+/**
+ * Check if your eyes can see this element :)
+ * @param element The element you want to check
+ * @returns The result you want
+ */
+
+function YouCanSeeThis(element: HTMLElement) {
+    const clientRect = element.getBoundingClientRect();
+    return (
+        clientRect.top >= 0 &&
+        clientRect.left >= 0 &&
+        clientRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        clientRect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
