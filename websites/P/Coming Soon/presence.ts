@@ -7,20 +7,26 @@ const presence = new Presence({
       pause: "presence.playback.paused",
       live: "presence.activity.live",
       search: "presence.activity.searching",
-      showName: await presence.getPageletiable("CBS.Registry.Show.name") as string
+      //showName: new Window("CBS") 
     });
+    showName: 
     function capitalize(text: string): string {
       text = text.toLowerCase();
       return text.charAt(0).toUpperCase() + text.slice(1);
     }
   
+    let title: string;
+
     let elapsed: number = undefined,
       oldUrl: string = undefined,
-     // header, 
-      title,
+      // header, 
       item;
   
     presence.on("UpdateData", async () => {
+      const titleField: HTMLDivElement = document.querySelector(
+        ".skin-metadata-manager-header"
+        )
+     
       let video: HTMLVideoElement = null,
         details = undefined,
         state = undefined,
@@ -31,7 +37,7 @@ const presence = new Presence({
   
       const href = window.location.href,
         path = window.location.pathname;
-  
+          
       if (href !== oldUrl) {
         oldUrl = href;
         elapsed = Math.floor(Date.now() / 1000);
@@ -43,20 +49,20 @@ const presence = new Presence({
   
       if (path.includes("/home")) {
         state = "Home Page";
-      } else if (path.includes("/shows")) {
+      } else if (path.includes("/shows") && document.querySelector("video") == null && document.querySelector(".subnav__items--tuneInfo") && !path.includes("/video")) {
         item = document.querySelector(".Subnav__item.active");
         details = "Viewing Series";
-        console.log(strings.showName)
-        if (strings.showName) {
-          state = strings.showName;
+       // console.log(strings.showName)
+     //   if (strings.showName) {
+          //state = strings.showName;
 
-        }
+       // }
       } else if (path.includes("/movie")) {
-        title = document.querySelector(".Masthead__title");
+        //title = document.querySelector(".Masthead__title");
         item = document.querySelector(".Subnav__item.active");
         details = "Viewing Movie";
         if (title) {
-          state = title.textContent;
+          //state = title.textContent;
           if (item) {
             state = state + `'s ${item.textContent}`;
           }
@@ -74,21 +80,21 @@ const presence = new Presence({
           }
         }
       } else if (path.includes("/sports_episode")) {
-        title = document.querySelector(".Masthead__title");
+        //title = document.querySelector(".Masthead__title");
         item = document.querySelector(".Subnav__item.active");
         details = "Viewing Sports Episode";
         if (title) {
-          state = title.textContent;
+          //state = title.textContent;
           if (item) {
             state = state + `'s ${item.textContent}`;
           }
         }
       } else if (path.includes("/sports_team")) {
-        title = document.querySelector(".Masthead__title");
+        //title = document.querySelector(".Masthead__title");
         item = document.querySelector(".Subnav__item.active");
         details = "Viewing Sports Team";
         if (title) {
-          state = title.textContent;
+          state = title//.textContent;
           if (item) {
             state = state + `'s ${item.textContent}`;
           }
@@ -107,12 +113,12 @@ const presence = new Presence({
         const category = document.querySelector(
           ".LiveGuide__filter-item--selected"
         );
-        title = document.querySelector(".ModalHeader__showname");
+       // title = document.querySelector(".ModalHeader__showname");
         details = "Viewing Live";
         if (category) {
           state = capitalize(category.textContent);
           if (title) {
-            state = state + ` (${title.textContent})`;
+            state = state + ` (${title/*.textContent*/})`;
           }
         }
       } else if (path.includes("/my-stuff")) {
@@ -123,11 +129,16 @@ const presence = new Presence({
         if (item) {
           state = capitalize(item.textContent);
         }
-      } else if (path.includes("/watch")) {
-        video = document.querySelector(".content-video-player");
+      } else if (path.includes("/video")) {
+        video = document.querySelector("video");
         if (video) {
-          title = document.querySelector(".metadata-area__second-line");
-          const content = document.querySelector(".metadata-area__third-line"),
+          
+          title = titleField?.textContent
+          // console.log(title) 
+          const content = document.getElementsByClassName("subTitle")[0].textContent 
+          + " " + 
+          document.getElementsByClassName("video__metadata__topline")[0]
+          .querySelector("h1").textContent,
             timestamps = presence.getTimestamps(
               Math.floor(video.currentTime),
               Math.floor(video.duration)
@@ -135,10 +146,11 @@ const presence = new Presence({
             live = timestamps[1] === Infinity;
           details = "Watching";
           if (title) {
-            details = title.textContent;
+            details = title;
           }
-          if (content && content.textContent.length > 0) {
-            state = content.textContent;
+          if (content) {
+            state = content;
+            //presence.getPageletiable
           }
           smallImageKey = live ? "live" : video.paused ? "pause" : "play";
           smallImageText = live
@@ -152,43 +164,9 @@ const presence = new Presence({
             startTimestamp = undefined;
             endTimestamp = undefined;
           }
-        } else {
-          video = document.querySelector("video#content-video-player");
-          details = "Viewing Watch History";
-          if (video) {
-            title = document.querySelector(
-              "#web-player-app div.PlayerMetadata__titleText"
-            );
-            const content = document.querySelector(
-                "#web-player-app div.PlayerMetadata__subTitle"
-              ),
-              timestamps = presence.getTimestamps(
-                Math.floor(video.currentTime),
-                Math.floor(video.duration)
-              ),
-              live = timestamps[1] === Infinity;
-            details = "Watching";
-            if (title) {
-              details = title.textContent;
-            }
-            if (content && content.textContent.length > 0) {
-              state = content.textContent;
-            }
-            smallImageKey = live ? "live" : video.paused ? "pause" : "play";
-            smallImageText = live
-              ? strings.live
-              : video.paused
-              ? strings.pause
-              : strings.play;
-            startTimestamp = live ? elapsed : timestamps[0];
-            endTimestamp = live ? undefined : timestamps[1];
-            if (video.paused) {
-              startTimestamp = undefined;
-              endTimestamp = undefined;
-            }
-          }
-        }
+        } 
       }
+    
   
       const data: PresenceData = {
         details: details,
@@ -203,6 +181,3 @@ const presence = new Presence({
       presence.setTrayTitle(details);
     });
   })()
-
-
-  
