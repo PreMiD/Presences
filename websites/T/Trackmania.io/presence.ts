@@ -15,10 +15,7 @@ presence.on("UpdateData", async () => {
             presenceData.details = "Track Of The Day";
             if (!window.location.hash.includes("leaderboard")) {
                 const title = document.getElementsByClassName("title")[1].textContent,
-                month = title.substring(
-                    title.indexOf("-") + 2,
-                    title.length
-                );
+                month = title.substring(title.indexOf("-") + 2);
                 presenceData.state = month;
             } else {
                 const trackName = document.getElementsByClassName("game-text")[0].textContent;
@@ -43,9 +40,7 @@ presence.on("UpdateData", async () => {
             if (!window.location.hash.endsWith("campaigns")){
                 if (!window.location.hash.includes("leaderboard")){
                     presenceData.details = "Campaign";
-                    const mapName = document.getElementsByClassName("game-text")[0].textContent;
-        
-                    presenceData.state = mapName;
+                    presenceData.state = document.getElementsByClassName("game-text")[0].textContent;
                 } else {
                     presenceData.details = "Leaderboard";
                     const campaignName = document.getElementsByClassName("game-text")[0].textContent,
@@ -82,19 +77,15 @@ presence.on("UpdateData", async () => {
                 presenceData.state = `${text} (${members})`;
             }
         } else if (window.location.hash.startsWith("#/matchmaking")) {
-            const text = document.getElementsByClassName("title")[1]
-                .textContent;
-            presenceData.details = text;
+            presenceData.details = document.getElementsByClassName("title")[1].textContent;
             presenceData.state = "Leaderboard";
         } else if (window.location.hash.startsWith("#/matches")) {
             presenceData.state = "Matches";
         } else if (window.location.hash.startsWith("#/match")) {
             presenceData.state = "Matches";
             if (!window.location.hash.endsWith("match")){
-                presenceData.details = "Match";
-                const text = document.getElementsByClassName("title")[1].textContent;
-    
-                presenceData.state = `${text}`;
+                presenceData.details = "Match";    
+                presenceData.state = document.getElementsByClassName("title")[1].textContent;
             }
         } else if (window.location.hash.startsWith("#/players")) {
             presenceData.state = "Player search";
@@ -109,25 +100,14 @@ presence.on("UpdateData", async () => {
         } else if (window.location.hash.startsWith("#/player")) {
             presenceData.state = "Player";
             if (!window.location.hash.endsWith("player")){
-                presenceData.details = "Player";
-                const text = document.getElementsByClassName("title")[1].textContent;
-    
-                presenceData.state = text;
+                presenceData.details = "Player";    
+                presenceData.state =  document.getElementsByClassName("title")[1].textContent;
             }
-        } else if (window.location.hash.startsWith("#/news")) {
-            const text = document.getElementsByClassName("title")[1].textContent;
-    
-            presenceData.state = text;
+        } else if (window.location.hash.startsWith("#/news")) {    
+            presenceData.state = document.getElementsByClassName("title")[1].textContent;
         }
     } else if (window.location.pathname.startsWith("/api")){
         presenceData.state = `Viewing API (${window.location.pathname.substr("/api/".length)})`;
     }
-    
-    if (presenceData.details == null) {
-        presence.setTrayTitle(); //Clears the tray title for mac users
-        presence.setActivity(); /*Update the presence with no data, therefore clearing it and making the large image the Discord Application icon, and the text the Discord Application name*/
-    } else {
-        //This will fire if you set presence details
-        presence.setActivity(presenceData); //Update the presence with all the values from the presenceData object
-    }
+    presence.setActivity(presenceData);
 });
