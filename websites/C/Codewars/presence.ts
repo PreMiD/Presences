@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
         if (pages[1]) {
             data.details = 'Viewing Topic';
             data.state = pages[1];
-        } else { data.details = 'Viewing Forum'; }
+        } else { data.details = 'Viewing Forum' }
     }
     else if (pages[0] === 'kumite') {
         data.details = 'Viewing kumite';
