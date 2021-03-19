@@ -123,57 +123,56 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingTimestamp;
       presence.setActivity(presenceData, true);
       return;
-    default:
-      const playBar = document.getElementById("PlayBar"),
-        playerButtonState = document.getElementById("Player_Play_Button_State"),
-        channel = String(
-          document.getElementById("Player_Station_Name").innerText
-        ).split(".")[1];
-      let playerOpen = false;
-      if (playBar.style.display == "block") {
-        playerOpen = true;
-        if (playerButtonState.className.includes("fa-play")) {
-          playerOpen = false;
-        }
-      }
+  }
+ 
+  const playBar = document.getElementById("PlayBar"),
+    playerButtonState = document.getElementById("Player_Play_Button_State"),
+    channel = String(
+      document.getElementById("Player_Station_Name").innerText
+    ).split(".")[1];
+  let playerOpen = false;
+  if (playBar.style.display == "block") {
+    playerOpen = true;
+    if (playerButtonState.className.includes("fa-play")) {
+      playerOpen = false;
+    }
+  }
 
-      if (playerOpen) {
-        getStationData(channel);
-      } else {
-        clearPresenceData();
-        if (
-          window.location.pathname == "/" ||
-          window.location.pathname.startsWith("/home")
-        ) {
-          presenceData.details = "Browsing...";
-          delete presenceData.startTimestamp;
-          presence.setActivity(presenceData, true);
-        } else if (window.location.pathname.startsWith("/partner")) {
-          presenceData.details = "Viewing the partner information";
-          presenceData.startTimestamp = browsingTimestamp;
-          presence.setActivity(presenceData, true);
-        } else if (window.location.pathname.startsWith("/history")) {
-          presenceData.details = "Viewing the song history";
-          presenceData.startTimestamp = browsingTimestamp;
-          presence.setActivity(presenceData, true);
-        } else if (window.location.pathname.startsWith("/streams")) {
-          presenceData.details = "Viewing the streamurls";
-          presenceData.startTimestamp = browsingTimestamp;
-          presence.setActivity(presenceData, true);
-        } else if (window.location.pathname.startsWith("/imprint")) {
-          presenceData.details = "Viewing the imprint";
-          presenceData.startTimestamp = browsingTimestamp;
-          presence.setActivity(presenceData, true);
-        } else if (window.location.pathname.startsWith("/privacy")) {
-          presenceData.details = "Viewing the privacy";
-          presenceData.startTimestamp = browsingTimestamp;
-          presence.setActivity(presenceData, true);
-        } else {
-          presenceData.details = "Browsing...";
-          delete presenceData.startTimestamp;
-          presence.setActivity(presenceData, true);
-        }
-      }
-      break;
+  if (playerOpen) {
+    getStationData(channel);
+  } else {
+    clearPresenceData();
+    if (
+      window.location.pathname == "/" ||
+      window.location.pathname.startsWith("/home")
+    ) {
+      presenceData.details = "Browsing...";
+      delete presenceData.startTimestamp;
+      presence.setActivity(presenceData, true);
+    } else if (window.location.pathname.startsWith("/partner")) {
+      presenceData.details = "Viewing the partner information";
+      presenceData.startTimestamp = browsingTimestamp;
+      presence.setActivity(presenceData, true);
+    } else if (window.location.pathname.startsWith("/history")) {
+      presenceData.details = "Viewing the song history";
+      presenceData.startTimestamp = browsingTimestamp;
+      presence.setActivity(presenceData, true);
+    } else if (window.location.pathname.startsWith("/streams")) {
+      presenceData.details = "Viewing the streamurls";
+      presenceData.startTimestamp = browsingTimestamp;
+      presence.setActivity(presenceData, true);
+    } else if (window.location.pathname.startsWith("/imprint")) {
+      presenceData.details = "Viewing the imprint";
+      presenceData.startTimestamp = browsingTimestamp;
+      presence.setActivity(presenceData, true);
+    } else if (window.location.pathname.startsWith("/privacy")) {
+      presenceData.details = "Viewing the privacy";
+      presenceData.startTimestamp = browsingTimestamp;
+      presence.setActivity(presenceData, true);
+    } else {
+      presenceData.details = "Browsing...";
+      delete presenceData.startTimestamp;
+      presence.setActivity(presenceData, true);
+    }
   }
 });
