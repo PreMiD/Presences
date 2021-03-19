@@ -24,5 +24,17 @@
     "en": "discord-botlist.eu - your Discord Bot List! We give you the availability to apply your bot and give your bot a page on our website.",
     "de": "discord-botlist.eu - Ihre Discord Bot List! Wir geben Ihnen die Möglichkeit, Ihren Bot anzuwenden und Ihrem Bot eine Seite auf unserer Website zu geben.",
     "fr": "discord-botlist.eu - votre liste de robots Discord! Nous vous donnons la possibilité d'appliquer votre bot et de donner à votre bot une page sur notre site Web."
-  }
+  },
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "value": true
+    },    
+    {
+      "id": "submitP",
+      "title": "Show Submit Page",
+      "value": true
+    }
+  ]
 }
