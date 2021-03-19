@@ -5,11 +5,10 @@ const matrixPresence = new Presence({
 
 matrixPresence.on("UpdateData", async () => {
   const matrixPData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: matrixBrowsing
     },
     matrixPage = window.location.pathname;
-
-  matrixPData.startTimestamp = matrixBrowsing;
 
   if (matrixPage == "/") {
     matrixPData.details = "Browsing";

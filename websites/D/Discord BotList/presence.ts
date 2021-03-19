@@ -5,12 +5,11 @@ const botPresence = new Presence({
 
 botPresence.on("UpdateData", async () => {
   const botData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: botBrowsing
     },
     botPage = document.location.pathname,
     botHost = document.location.hostname;
-
-  botData.startTimestamp = botBrowsing;
 
   if (botHost == "discord-botlist.eu") {
     if (botPage == "/") {
