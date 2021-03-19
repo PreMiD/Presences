@@ -4,12 +4,6 @@
         "name": " .•` KIΛRΛ `•. ",
         "id": "586905336850677760"
     },
-    "contributors": [
-        {
-            "name": "ΛΚΘRΛ",
-            "id": "387655649934311427"
-        }
-    ],
     "service": "Moodle",
     "version": "1.0.0",
     "color": "#ffbc4f",
@@ -24,7 +18,7 @@
     "category": "socials",
     "url": "moodle.com",
     "logo": "https://i.imgur.com/ltzuG6b.png",
-    "thumbnail": "https://i.imgur.com/ltzuG6b.png",
+    "thumbnail": "https://i.imgur.com/d9AWeEL.png",
     "settings": [
         {
             "id": "displayCourse",
