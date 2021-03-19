@@ -9,9 +9,9 @@
     "ru": "Jut.su это русский аниме сайт"
   },
   "url": "jut.su",
-  "version": "0.0.1",
-  "logo": "https://gen.jut.su/apple-touch-icon.png",
-  "thumbnail": "https://gen.jut.su/templates/school/images/logo_home.png",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/vxFJhoZ.png",
+  "thumbnail": "https://i.imgur.com/rVed3iz.png",
   "color": "#c9e58b",
   "tags": [
     "jutsu",
