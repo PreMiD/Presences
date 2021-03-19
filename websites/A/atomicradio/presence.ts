@@ -8,10 +8,31 @@ const presence = new Presence({
     smallImageKey: "play-button"
   };
 
-let channelInfos = {
-  one: {},
-  dance: {},
-  trap: {}
+const channelInfos = {
+  one: {
+    name: "",
+    listeners: 0,
+    artist: "LISTEN TO THE DIFFERENCE!",
+    title: "ATOMICRADIO",
+    start_at: 0,
+    end_at: 0
+  },
+  dance: {
+    name: "",
+    listeners: 0,
+    artist: "LISTEN TO THE DIFFERENCE!",
+    title: "ATOMICRADIO",
+    start_at: 0,
+    end_at: 0
+  },
+  trap: {
+    name: "",
+    listeners: 0,
+    artist: "LISTEN TO THE DIFFERENCE!",
+    title: "ATOMICRADIO",
+    start_at: 0,
+    end_at: 0
+  }
 };
 
 webSocket.onmessage = (message) => {
@@ -51,7 +72,14 @@ webSocket.onmessage = (message) => {
 };
 
 async function getStationData(channel: string) {
-  let channelInfo: any;
+  let channelInfo = {
+    name: "",
+    listeners: 0,
+    artist: "LISTEN TO THE DIFFERENCE!",
+    title: "ATOMICRADIO",
+    start_at: 0,
+    end_at: 0
+  };
   switch (channel) {
     case "ONE":
       channelInfo = channelInfos.one;
