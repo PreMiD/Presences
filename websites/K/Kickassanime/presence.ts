@@ -56,6 +56,16 @@ function checkIfMovie() {
     : nextEpisodeElement !== null && previousEpisodeElement !== null
     ? (isMovie = false)
     : (isMovie = true);
+
+  !isMovie
+    ? presence
+        .getPageletiable("appData")
+        .catch((appData) =>
+          appData.anime.types[0].name == "Movie" ? (isMovie = true) : false
+        )
+    : presence.info(
+        "Unable to determine if show is a Movie or TV Series.\nYou may be watching an OVA, or this is broken & you need to contact Striker#1337"
+      );
 }
 
 presence.on(
