@@ -104,22 +104,22 @@ presence.on("UpdateData", async () => {
           ? (await strings).watchingVid
           : (await strings).watching,
         state: privacy
-          ? "NEEDS RESET"
+          ? null
           : document.querySelector(".brid-poster-title")?.textContent,
         smallImageKey: video?.paused ? "pause" : "play",
         smallImageText: video?.paused
           ? (await strings).pause
           : (await strings).play,
         startTimestamp: video?.paused
-          ? 0
+          ? null
           : video
           ? presence.getTimestampsfromMedia(video)[0]
-          : 0,
+          : null,
         endTimestamp: video?.paused
-          ? 0
+          ? null
           : video
           ? presence.getTimestampsfromMedia(video)[1]
-          : 0,
+          : null,
         buttons: [
           { label: (await strings).buttonWatchVideo, url: document.URL }
         ]
@@ -132,7 +132,7 @@ presence.on("UpdateData", async () => {
               document.querySelector("#yttitle")?.textContent
             ),
         state: privacy
-          ? "NEEDS RESET"
+          ? null
           : (await strings).triviaGame
               .replace(
                 "{0}",
@@ -208,9 +208,8 @@ presence.on("UpdateData", async () => {
         smallImageText: (await strings).search
       }
     };
-  if (showTimestamp) {
-    presenceData.startTimestamp = browsingStamp;
-  }
+
+  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
   if (showBrowsing) {
     for (const [k, v] of Object.entries(statics)) {
@@ -230,16 +229,14 @@ presence.on("UpdateData", async () => {
     delete presenceData.state;
   }
 
-  if (!showButtons || privacy) {
-    delete presenceData.buttons;
-  }
+  if (!showButtons || privacy) delete presenceData.buttons;
 
-  if (presenceData.details === "NEEDS RESET") delete presenceData.details;
-  if (presenceData.state === "NEEDS RESET") delete presenceData.state;
-  if (presenceData.startTimestamp === 0) delete presenceData.startTimestamp;
-  if (presenceData.endTimestamp === 0) delete presenceData.endTimestamp;
+  if (!presenceData.details) delete presenceData.details;
+  if (!presenceData.state) delete presenceData.state;
+  if (!presenceData.startTimestamp) delete presenceData.startTimestamp;
+  if (!presenceData.endTimestamp) delete presenceData.endTimestamp;
 
-  if (presenceData.details === null) {
+  if (!presenceData.details) {
     presence.setActivity();
     presence.setTrayTitle();
   } else {
