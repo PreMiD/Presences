@@ -25,6 +25,7 @@
     "url": "moodle.com",
     "logo": "https://i.imgur.com/ltzuG6b.png",
     "thumbnail": "https://i.imgur.com/ltzuG6b.png",
+    "regExp": "moodle.(.*?)[.](.*?)",
     "settings": [
         {
             "id": "displayCourse",
