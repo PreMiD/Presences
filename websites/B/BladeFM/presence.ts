@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       buttons: [
         {
           label: "Tune in",
-          url: "https://live.boltfm.net"
+          url: "https://cast.bladefm.com.au/radio/8000/radio.mp3"
         }
       ]
     };
