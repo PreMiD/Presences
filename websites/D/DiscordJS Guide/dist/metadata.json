@@ -8,10 +8,9 @@
     "category": "other",
     "logo": "https://i.imgur.com/Zt4i2l3.png",
     "thumbnail": "https://i.imgur.com/ojmsp7f.png",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "color": "#20f856",
     "tags": [
-      "ogmatrix",
       "discordjs",
       "discord",
       "guide"

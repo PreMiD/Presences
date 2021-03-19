@@ -19,19 +19,19 @@ pPresence.on("UpdateData", async () => {
       myParam: string = urlParams.get('q');
 
     if (myParam == null) {
-      try {
-        const icon: string = document.querySelector("#page-top > div.view.flex.flex-column.min-vh-100.db-pr > div.flex-grow-1.flex-shrink-0.flex-basis-auto > div > div.ph6-l > div > section > header > div.flex.flex-column.flex-row-xl.items-center-xl.justify-between-xl.mb2.mb4-l > h1 > span").textContent;
+      const icon: any = document.querySelector("#page-top > div.view.flex.flex-column.min-vh-100.db-pr > div.flex-grow-1.flex-shrink-0.flex-basis-auto > div > div.ph6-l > div > section > header > div.flex.flex-column.flex-row-xl.items-center-xl.justify-between-xl.mb2.mb4-l > h1 > span");
+      if (icon.textContent === null) {
+        pData.details = "Browsing Page:";
+        pData.state = "Icons";
+      } else {
         pData.details = "Viewing Icon:";
-        pData.state = icon;
+        pData.state = icon.textContent;
         pData.buttons = [
           {
             "label": "View Icon",
             "url": document.URL
           }
         ];
-      } catch (e) {
-        pData.details = "Browsing Page:";
-        pData.state = "Icons";
       }
     } else {
       pData.details = "Searching:";
