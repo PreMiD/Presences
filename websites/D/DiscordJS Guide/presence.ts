@@ -7,9 +7,9 @@ pPresence.on("UpdateData", async() => {
   const pData: PresenceData = {
     largeImageKey: "icon2",
     startTimestamp: pBrowsing
-  };
-
-  const title: string = document.getElementsByTagName("h1")[0].textContent.replace("#", "");
+  },
+    title: string = document.getElementsByTagName("h1")[0].textContent.replace("#", "");
+    
   pData.details = "Viewing Docs";
   pData.state = "Page: " + title; 
 
