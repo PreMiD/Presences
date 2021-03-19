@@ -17,17 +17,16 @@ presence.on("UpdateData", async () => {
         if (displayStats) data.state = document.querySelector(".ml-10px").textContent + ' Honor';
     }
     else if (pages[0] === 'topics') {
-        data.details = 'Viewing Forum';
+        if (pages[1]) {
+            data.details = 'Viewing Topic';
+            data.state = pages[1];
+        } else { data.details = 'Viewing Forum'; }
     }
     else if (pages[0] === 'kumite') {
         data.details = 'Viewing kumite';
     }
     else if (pages[0] === 'subscription') {
         data.details = 'Viewing Codewars Red';
-    }
-    else if (pages[0] === 'topics' && pages[1]) {
-        data.details = 'Viewing Topic';
-        data.state = pages[1];
     }
     else if (pages[0] === 'users' && pages[1] === 'leaderboard') {
         data.details = 'Viewing Leaderboard';
@@ -54,7 +53,7 @@ presence.on("UpdateData", async () => {
             if (displayStats) data.state = document.querySelector(".ml-10px").textContent + ' Honor | ' + document.querySelector('.small-hex').textContent;
         } else {
             data.details = 'Viewing Profile from';
-            let stats = Array.from(document.querySelector('.stat-box').children),
+            const stats = Array.from(document.querySelector('.stat-box').children),
                 clan = stats.find(e => e.innerHTML.startsWith('<b>Clan:</b>'));
             if (displayStats) data.state = document.querySelector('.stat').textContent.slice('Name:'.length) + ' | ' + clan.textContent.slice('Clan:'.length);
         }
