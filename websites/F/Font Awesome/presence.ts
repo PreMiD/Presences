@@ -18,9 +18,9 @@ pPresence.on("UpdateData", async () => {
     const urlParams: URLSearchParams = new URLSearchParams(window.location.search),
       myParam: string = urlParams.get('q');
 
-    if (myParam == null) {
-      const icon: any = document.querySelector("#page-top > div.view.flex.flex-column.min-vh-100.db-pr > div.flex-grow-1.flex-shrink-0.flex-basis-auto > div > div.ph6-l > div > section > header > div.flex.flex-column.flex-row-xl.items-center-xl.justify-between-xl.mb2.mb4-l > h1 > span");
-      if (icon.textContent === null) {
+    if (myParam === null) {
+      const icon: HTMLElement = document.querySelector("#page-top > div.view.flex.flex-column.min-vh-100.db-pr > div.flex-grow-1.flex-shrink-0.flex-basis-auto > div > div.ph6-l > div > section > header > div.flex.flex-column.flex-row-xl.items-center-xl.justify-between-xl.mb2.mb4-l > h1 > span");
+      if (icon === null) {
         pData.details = "Browsing Page:";
         pData.state = "Icons";
       } else {
