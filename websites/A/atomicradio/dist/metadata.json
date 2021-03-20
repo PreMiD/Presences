@@ -28,5 +28,6 @@
 		"music",
 		"radio"
     ],
-    "category": "music"
+    "category": "music",
+    "button": false
 }
