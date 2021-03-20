@@ -60,7 +60,7 @@ function checkIfMovie() {
   !isMovie
     ? presence
         .getPageletiable("appData")
-        .catch((appData) =>
+        .then((appData) =>
           appData.anime.types[0].name == "Movie" ? (isMovie = true) : false
         )
     : presence.info(
