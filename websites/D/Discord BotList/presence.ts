@@ -57,10 +57,8 @@ botPresence.on("UpdateData", async () => {
       if (botPage.includes("/new")) {
         if (sSubmit) {
           botData.details = "Adding Bot";
-        } else {
-          return;
         }
-      }
+      } 
       if (botPage.includes("/vote")) {
         const voteBotName: string = document
           .querySelector("#vote1 > h1")
