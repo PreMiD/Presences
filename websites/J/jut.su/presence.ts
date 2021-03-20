@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = 'play';
           presenceData.smallImageText = (await strings).play;
         } else {
-          presenceData.endTimestamp = null;
+          delete presenceData.endTimestamp;
           presenceData.smallImageKey = 'pause';
           presenceData.smallImageText = (await strings).pause;
         }
@@ -61,21 +61,26 @@ presence.on("UpdateData", async () => {
       const name = document.querySelector('[itemprop="name"]');
       
       if (name) {
-        const nameArray =  name.textContent.trim().split(' ');
+        const nameArray = name.textContent.trim().split(' ');
         nameArray.shift();
 
         const episode = nameArray[nameArray.indexOf('серия') - 1],
         season = nameArray[nameArray.indexOf('сезон') - 1];
 
-        if (season) {
-          nameArray.splice(nameArray.indexOf('сезон') - 1, 4);
-          presenceData.details = nameArray.join(' ');
-        } else {
-          nameArray.splice(nameArray.indexOf('серия') - 1, 2);
-          presenceData.details = nameArray.join(' ');
-        }
+        nameArray.splice(nameArray.indexOf('сезон') - 1, season ? 4 : 2);
+        presenceData.details = nameArray.join(' ');
 
         if (episode) presenceData.state = `${season ? `${season} сезон ` : ''}${episode} серия`;
+      }
+
+      const namePreview = document.querySelector('.header_video.allanimevideo.anime_padding_for_title');
+
+      if (namePreview) {
+        const namePreviewArray = namePreview.textContent.trim().split(' ');
+        namePreviewArray.shift();
+
+        namePreviewArray.splice(namePreviewArray.indexOf('все'));
+        presenceData.details = namePreviewArray.join(' ');
       }
     }
   }
