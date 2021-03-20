@@ -29,6 +29,7 @@
         {
             "id": "statsdisplay",
             "title": "Dispaly Stats",
+            "icon": "fa fa-bar-chart",
             "value": true
         }
     ]
