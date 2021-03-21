@@ -31,6 +31,17 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector("#botlistitle").textContent.substring(8);
       }
     }
+ 
+    // Staff Section
+    if (window.location.pathname.startsWith("/panel/")) {
+      if (window.location.pathname.endsWith("/queue")) {
+      presenceData.details = "Viewing: Bots Queue";
+      presenceData.state = `x Bots In Queue`;
+      } else if (window.location.pathname.endsWith("/cerification")) {
+      presenceData.details = "Viewing: Certification Queue";
+      presenceData.state = `x Bots In Queue`;
+      }
+    }
 
     // Servers Sections
     if (window.location.pathname.startsWith("/servers/")) {
