@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "812069625067077662"
-}),
+    clientId: "812069625067077662"
+  }),
   browsingStamp = Math.round(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -35,7 +35,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.includes("/jobs/")) {
     presenceData.details = "Viewing Job";
-    presenceData.state = document.querySelector(".hy-title.job__title.hy-pad-t-2.hy-mar-t-6").textContent.trim();
+    presenceData.state = document
+      .querySelector(".hy-title.job__title.hy-pad-t-2.hy-mar-t-6")
+      .textContent.trim();
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname === "/contact") {
     presenceData.details = "Viewing the";
@@ -44,8 +46,14 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing the";
     presenceData.state = "Press information";
   } else if (document.location.pathname.includes("/docs/")) {
-    const docName = document.location.pathname.split("/").pop().replace(".pdf", "").replace("press-release-", "").split("-");
-    for (let i = 0; i < docName.length; i++) docName[i] = docName[i].charAt(0).toUpperCase() + docName[i].slice(1);
+    const docName = document.location.pathname
+      .split("/")
+      .pop()
+      .replace(".pdf", "")
+      .replace("press-release-", "")
+      .split("-");
+    for (let i = 0; i < docName.length; i++)
+      docName[i] = docName[i].charAt(0).toUpperCase() + docName[i].slice(1);
     presenceData.details = "Reading the document";
     presenceData.state = docName.join(" ");
     presenceData.smallImageKey = "reading";

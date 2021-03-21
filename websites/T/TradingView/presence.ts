@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "809817256686649344"
-}),
+    clientId: "809817256686649344"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
@@ -14,16 +14,22 @@ presence.on("UpdateData", async () => {
   } else {
     if (window.location.pathname === "/") {
       presenceData.details = "Home Page";
-    } else if (window.location.pathname.startsWith("/markets/cryptocurrencies")) {
+    } else if (
+      window.location.pathname.startsWith("/markets/cryptocurrencies")
+    ) {
       presenceData.details = "Cryptocurrency Market";
       if (window.location.pathname.includes("/ideas")) {
         presenceData.state = "Ideas";
       } else if (window.location.pathname.includes("/prices-all")) {
         presenceData.state = "Prices";
       } else if (window.location.pathname.includes("/prices")) {
-        presenceData.state = "Prices: " + document.querySelector(
-          "#js-category-content > header > div > div.tv-category-header__title-line > div > h1"
-        ).textContent.trim();
+        presenceData.state =
+          "Prices: " +
+          document
+            .querySelector(
+              "#js-category-content > header > div > div.tv-category-header__title-line > div > h1"
+            )
+            .textContent.trim();
       } else if (window.location.pathname.includes("/global-charts")) {
         presenceData.state = "Market Cap";
       } else {
@@ -63,9 +69,11 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Overview";
       }
     } else if (window.location.pathname.startsWith("/markets/stocks")) {
-      presenceData.details = document.querySelector(
-        "#js-category-content > header > div > div.tv-category-header__title-line > div > span > span > h1"
-      ).textContent.trim();
+      presenceData.details = document
+        .querySelector(
+          "#js-category-content > header > div > div.tv-category-header__title-line > div > span > span > h1"
+        )
+        .textContent.trim();
       if (window.location.pathname.includes("/ideas")) {
         presenceData.state = "Ideas";
       } else if (window.location.pathname.includes("/market-movers")) {
@@ -110,44 +118,52 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Markets";
     } else if (window.location.pathname.startsWith("/symbols")) {
       presenceData.details = "Viewing Market...";
-      presenceData.state = document.querySelector(
-        "#anchor-page-1 > div > div.tv-category-header__title-line > div.tv-category-header__title > h1 > div > div"
-      ).textContent.trim();
+      presenceData.state = document
+        .querySelector(
+          "#anchor-page-1 > div > div.tv-category-header__title-line > div.tv-category-header__title > h1 > div > div"
+        )
+        .textContent.trim();
     } else if (window.location.pathname.startsWith("/chart")) {
       presenceData.details = "Viewing Chart...";
 
       const title =
-      // Full Interactive Chart
-        document.querySelector(
-          "body > div.js-rootresizer__contents > div.layout__area--right > div > div.widgetbar-pages > div.widgetbar-pagescontent > div.widgetbar-page.active > div.widget-1UXejvkz.widgetbar-widget.widgetbar-widget-detail > div.widgetbar-widgetbody > div > div.wrapper-1CeUhfBr > div:nth-child(1) > div:nth-child(1) > span > a > span.text-H5Jbe1VB"
-        )?.textContent?.trim() ||
-      // Popup Chart Idea
-      document.querySelector(
-        "#overlap-manager-root > div > div.tv-dialog__modal-wrap > div > div > div > div:nth-child(1) > div > div > div > div:nth-child(1) > div.tv-chart-view__header > div.tv-chart-view__title.selectable > div > div.tv-chart-view__title-row.tv-chart-view__title-row--symbol.tv-chart-view__symbol.js-chart-view__symbol.js-chart-view__ticker.quote-ticker-inited > a:nth-child(1)"
-        )?.textContent?.trim() ||
-      // Full Chart Idea Page
-        document.querySelector(
-          "body > div.tv-main > div.tv-content > div > div > div:nth-child(1) > div.tv-chart-view__header > div.tv-chart-view__title.selectable > div > div.tv-chart-view__title-row.tv-chart-view__title-row--symbol.tv-chart-view__symbol.js-chart-view__symbol.js-chart-view__ticker.quote-ticker-inited > a:nth-child(1)"
-        )?.textContent?.trim();
+        // Full Interactive Chart
+        document
+          .querySelector(
+            "body > div.js-rootresizer__contents > div.layout__area--right > div > div.widgetbar-pages > div.widgetbar-pagescontent > div.widgetbar-page.active > div.widget-1UXejvkz.widgetbar-widget.widgetbar-widget-detail > div.widgetbar-widgetbody > div > div.wrapper-1CeUhfBr > div:nth-child(1) > div:nth-child(1) > span > a > span.text-H5Jbe1VB"
+          )
+          ?.textContent?.trim() ||
+        // Popup Chart Idea
+        document
+          .querySelector(
+            "#overlap-manager-root > div > div.tv-dialog__modal-wrap > div > div > div > div:nth-child(1) > div > div > div > div:nth-child(1) > div.tv-chart-view__header > div.tv-chart-view__title.selectable > div > div.tv-chart-view__title-row.tv-chart-view__title-row--symbol.tv-chart-view__symbol.js-chart-view__symbol.js-chart-view__ticker.quote-ticker-inited > a:nth-child(1)"
+          )
+          ?.textContent?.trim() ||
+        // Full Chart Idea Page
+        document
+          .querySelector(
+            "body > div.tv-main > div.tv-content > div > div > div:nth-child(1) > div.tv-chart-view__header > div.tv-chart-view__title.selectable > div > div.tv-chart-view__title-row.tv-chart-view__title-row--symbol.tv-chart-view__symbol.js-chart-view__symbol.js-chart-view__ticker.quote-ticker-inited > a:nth-child(1)"
+          )
+          ?.textContent?.trim();
 
       if (title) {
         presenceData.state = title;
       }
     } else if (window.location.pathname.startsWith("/script")) {
       presenceData.details = "Viewing Script...";
-    } else if (window.location.pathname.startsWith('/ideas')) {
+    } else if (window.location.pathname.startsWith("/ideas")) {
       presenceData.details = "Trading Ideas";
-    } else if (window.location.pathname.startsWith('/education')) {
+    } else if (window.location.pathname.startsWith("/education")) {
       presenceData.details = "Educational Ideas";
-    } else if (window.location.pathname.startsWith('/scripts')) {
+    } else if (window.location.pathname.startsWith("/scripts")) {
       presenceData.details = "Scripts";
-    } else if (window.location.pathname.startsWith('/screener')) {
+    } else if (window.location.pathname.startsWith("/screener")) {
       presenceData.details = "Stock Screener";
-    } else if (window.location.pathname.startsWith('/forex-screener')) {
+    } else if (window.location.pathname.startsWith("/forex-screener")) {
       presenceData.details = "Forex Screener";
-    } else if (window.location.pathname.startsWith('/crypto-screener')) {
+    } else if (window.location.pathname.startsWith("/crypto-screener")) {
       presenceData.details = "Crypto Screener";
-    } else if (window.location.pathname.startsWith('/streams')) {
+    } else if (window.location.pathname.startsWith("/streams")) {
       presenceData.details = "Streams";
     } else if (window.location.pathname.startsWith("/broker-awards")) {
       presenceData.details = "Broker Awards";
@@ -155,14 +171,18 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Brokers";
     } else if (window.location.pathname.startsWith("/broker/")) {
       presenceData.details = "Broker Profile";
-      presenceData.state = document.querySelector(
-        "#anchor-page-1 > div > div.tv-category-header__title-line > div.tv-category-header__title > div > h1"
-      ).textContent.trim();
+      presenceData.state = document
+        .querySelector(
+          "#anchor-page-1 > div > div.tv-category-header__title-line > div.tv-category-header__title > div > h1"
+        )
+        .textContent.trim();
     } else if (window.location.pathname.startsWith("/u/")) {
       presenceData.details = "User Profile";
-      presenceData.state = document.querySelector(
-        "#tv-profile > div > div > div.tv-profile__name-block > span > h1"
-      ).textContent.trim();
+      presenceData.state = document
+        .querySelector(
+          "#tv-profile > div > div > div.tv-profile__name-block > span > h1"
+        )
+        .textContent.trim();
     } else if (window.location.pathname.startsWith("/chat")) {
       presenceData.details = "Chatting...";
     } else if (window.location.pathname.startsWith("/contacts")) {

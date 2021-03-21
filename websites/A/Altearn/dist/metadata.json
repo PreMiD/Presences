@@ -10,7 +10,7 @@
     "fr": "Altearn est une association à but non-lucratif qui vise à déveloper et mettre en place des solutions et événements dans un but pédagogique, scientifique ou de sensibilisation."
   },
   "service": "Altearn",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/FXRVkUd.png",
   "thumbnail": "https://i.imgur.com/dWA3LHB.png",
   "color": "#888888",
@@ -25,6 +25,15 @@
       "title": "Privacy mode",
       "icon": "fad fa-user-secret",
       "value": false
+    },
+    {
+      "id": "button",
+      "if": {
+        "privacy": false
+      },
+      "title": "Add Button",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
     }
   ]
 }

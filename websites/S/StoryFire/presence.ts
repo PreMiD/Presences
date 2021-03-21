@@ -17,7 +17,8 @@ presence.on("UpdateData", async () => {
     },
     video: HTMLVideoElement = document.querySelector(
       "#storyfire-player_html5_api"
-    );
+    ),
+    buttons = await presence.getSetting("buttons");
 
   if (document.location.pathname.startsWith("/video-details")) {
     const timestamps = getTimestamps(
@@ -39,6 +40,14 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = (await strings).pause;
     }
+
+    if (buttons)
+      presenceData.buttons = [
+        {
+          label: "Watch",
+          url: document.URL
+        }
+      ];
   } else if (document.location.pathname.startsWith("/forgot-password")) {
     presenceData.details = "Forgot Password";
   } else if (document.location.pathname.startsWith("/social")) {

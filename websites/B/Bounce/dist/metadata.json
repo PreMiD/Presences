@@ -11,12 +11,14 @@
     "ga_IE": "Is stáisiún ceoil idirnáisiúnta buailte é Bounce Radio a chuireann ceol buailte ar fáil do gach duine. Déanta ag gamers do gamers."
   },
   "url": [
-    "wearebounce.net",
-    "www.wearebounce.net"
+    "itsbounce.net",
+    "itsbounce.com",
+    "itsbounce.uk",
+    "wearebounce.co.uk"
   ],
-  "version": "2.5.3",
-  "logo": "https://boun.cc/cdn/noshadow.png",
-  "thumbnail": "https://i.imgur.com/XmJTiZY.png",
+  "version": "3.0.1",
+  "logo": "https://i.imgur.com/ZXbdFGq.png",
+  "thumbnail": "https://i.imgur.com/FZQsMTt.png",
   "color": "#32a852",
   "tags": [
     "music",
@@ -27,5 +29,27 @@
     "bounceradio"
   ],
   "category": "music",
-  "regExp": "([a-z0-9-]+[.])*(wearebounce[.]net|boun[.]cc)[/]"
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamp",
+      "icon": "fas fa-history",
+      "value": true
+    },
+    {
+      "id": "details",
+      "title": "Change Line #1 (Song Details)",
+      "icon": "fas fa-music",
+      "value": "Streaming to %listeners% listeners",
+      "placeholder": "%listeners%"
+    },
+    {
+      "id": "state",
+      "title": "Change Line #2 (Presenter Details)",
+      "icon": "fas fa-microphone",
+      "value": "%songText%",
+      "placeholder": "%artist% - %song%"
+    }
+  ],
+  "regExp": "([a-z0-9-]+[.])*(itsbounce[.]net|itsbounce[.]com|itsbounce[.]uk|wearebounce[.]co[.]uk)[/]"
 }

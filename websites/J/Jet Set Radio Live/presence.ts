@@ -48,7 +48,8 @@ presence.on("UpdateData", async () => {
     ),
     loadingSong = document.querySelector(
       '#loadingTrackCircle:not([style*="hidden"])'
-    );
+    ),
+    buttons = await presence.getSetting("buttons");
 
   if (songName.textContent.length < 1 || !audio) {
     presenceData.details = "Not tuned in.";
@@ -78,6 +79,14 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = (await strings).pause;
     }
+
+    if (buttons)
+      presenceData.buttons = [
+        {
+          label: "Tune In",
+          url: document.URL
+        }
+      ];
   }
 
   if (presenceData.details == null && presenceData.state == null) {

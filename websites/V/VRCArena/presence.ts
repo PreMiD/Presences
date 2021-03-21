@@ -11,6 +11,14 @@ presence.on("UpdateData", async () => {
     privacymode = await presence.getSetting("privacy");
 
   if (document.location.hostname == "www.vrcarena.com") {
+    if (!privacymode) {
+      presenceData.buttons = [
+        {
+          label: "View on VRCArena",
+          url: document.URL.split("?")[0]
+        }
+      ];
+    }
     // Categories
     if (document.location.pathname.includes("/category")) {
       switch (document.location.pathname) {

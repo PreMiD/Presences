@@ -21,34 +21,34 @@ presence.on("UpdateData", async () => {
         },
         "/who-we-are/": {
           details: "Looking at:",
-          state: "Who we are - Riot Games"
+          state: "Who we are | Riot Games"
         },
         "/work-with-us/": {
           details: "Looking at:",
-          state: "Work with us! - Riot Games"
+          state: "Work with us! | Riot Games"
         },
         "/news/": {
           details: "Looking at News:",
           state:
             Array.from(document.querySelectorAll("div")).find((c) =>
               c.className?.includes("style__Title")
-            )?.textContent + " - Riot Games"
+            )?.textContent + " | Riot Games"
         },
         "/category/": {
           details: "Browsing Store:",
-          state: document.querySelector("h1")?.textContent + " - Riot Merch"
+          state: document.querySelector("h1")?.textContent + " | Riot Merch"
         },
         "/product/": {
           details: "Looking at Product:",
-          state: document.querySelector("h1")?.textContent + " - Riot Merch"
+          state: document.querySelector("h1")?.textContent + " | Riot Merch"
         },
         "/account/": {
           details: "Looking at Account:",
-          state: document.querySelector("h1")?.textContent + " - Riot Merch"
+          state: document.querySelector("h1")?.textContent + " | Riot Merch"
         },
         "/cart/": {
           details: "Looking at Cart:",
-          state: document.querySelector("h1")?.textContent + " - Riot Merch"
+          state: document.querySelector("h1")?.textContent + " | Riot Merch"
         }
       };
     for (const [k, v] of Object.entries(statics)) {
@@ -73,11 +73,11 @@ presence.on("UpdateData", async () => {
           state:
             Array.from(document.querySelectorAll("div")).find((c) =>
               c.className?.includes("style__Title")
-            )?.textContent + " - TfT"
+            )?.textContent + " | TfT"
         },
         "/set-overview/": {
           details: "Looking at:",
-          state: "Set-Overview - TfT"
+          state: "Set-Overview | TfT"
         }
       };
     for (const [k, v] of Object.entries(statics)) {
@@ -99,15 +99,15 @@ presence.on("UpdateData", async () => {
         },
         "/news/": {
           details: "Looking at News:",
-          state: document.querySelector("h1")?.textContent + " - LoL: Wild Rift"
+          state: document.querySelector("h1")?.textContent + " | LoL: Wild Rift"
         },
         "/game-overview/": {
           details: "Looking at:",
-          state: "Game-Overview - LoL:Wild Rift"
+          state: "Game-Overview | LoL:Wild Rift"
         },
         "/champions/": {
           details: "Looking at Champion:",
-          state: document.querySelector("h3")?.textContent + " - LoL: Wild Rift"
+          state: document.querySelector("h3")?.textContent + " | LoL: Wild Rift"
         }
       };
     for (const [k, v] of Object.entries(statics)) {
@@ -129,18 +129,18 @@ presence.on("UpdateData", async () => {
         },
         "/news/": {
           details: "Looking at News:",
-          state: document.querySelector("h2")?.textContent + " - VALORANT"
+          state: document.querySelector("h2")?.textContent + " | VALORANT"
         },
         "/maps/": {
           details: "Looking at:",
-          state: "Maps - VALORANT"
+          state: "Maps | VALORANT"
         },
         "/agents/": {
           details: "Looking at:",
           state:
             document.querySelector(
               ".slick-slide.slick-active.slick-center.slick-current > div > div > h2"
-            )?.textContent + " - VALORANT" //ENTER HEADER
+            )?.textContent + " | VALORANT" //ENTER HEADER
         },
         "/media/": {
           details: "Browsing Media",
@@ -152,11 +152,11 @@ presence.on("UpdateData", async () => {
         },
         "/specs/": {
           details: "Looking at:",
-          state: "Specs - VALORANT"
+          state: "Specs | VALORANT"
         },
         "/arsenal/": {
           details: "Looking at:",
-          state: "Arsenal - VALORANT"
+          state: "Arsenal | VALORANT"
         }
       };
     for (const [k, v] of Object.entries(statics)) {
@@ -178,64 +178,64 @@ presence.on("UpdateData", async () => {
         },
         "/how-to-play/": {
           details: "Looking at:",
-          state: "How to Play! - LoL"
+          state: "How to Play! | LoL"
         },
         "/champions/": {
           details: "Looking at Champion:",
-          state: document.querySelector("strong")?.textContent + " - LoL"
+          state: document.querySelector("strong")?.textContent + " | LoL"
         },
         "/champion/": {
           details: "Looking at Champion:",
           state:
             Array.from(document.querySelectorAll("span")).find((c) =>
               c.className?.includes("title")
-            )?.textContent + " - LoL"
+            )?.textContent + " | LoL"
         },
         "/news/": {
           details: "Looking at News:",
           state:
             Array.from(document.querySelectorAll("div")).find((c) =>
               c.className?.includes("style__Title")
-            )?.textContent + " - LoL"
+            )?.textContent + " | LoL"
         },
         "/news/tags/patch-notes/": {
           details: "Looking at:",
-          state: "Patch notes Overview - LoL"
+          state: "Patch notes Overview | LoL"
         },
         "/featured/": {
           details: "Looking at:",
-          state: "League Displays - LoL"
+          state: "League Displays | LoL"
         },
         "/story/": {
           details: "Reading Story:",
-          state: document.querySelector("h1")?.textContent + " - LoL"
+          state: document.querySelector("h1")?.textContent + " | LoL"
         },
         "/regions/": {
           details: "Looking at Region:",
           state:
             Array.from(document.querySelectorAll("span")).find((c) =>
               c.className?.includes("title")
-            )?.textContent + " - LoL"
+            )?.textContent + " | LoL"
         },
         "/comic/": {
           details: "LoL - Reading comic:",
-          state: document.querySelector("h1")?.textContent + " - LoL"
+          state: document.querySelector("h1")?.textContent + " | LoL"
         },
         "/kda/": {
           details: "Alt Universe:",
-          state: "K/DA - LoL"
+          state: "K/DA | LoL"
         },
         "/star-guardian/": {
           details: "Alt Universe:",
-          state: "Star Guardians - LoL"
+          state: "Star Guardians | LoL"
         },
         "/odyssey/": {
           details: "Alt Universe:",
-          state: "Odyssey - LoL"
+          state: "Odyssey | LoL"
         },
         "/explore/": {
           details: "Searching through:",
-          state: "Everything League - LoL"
+          state: "Everything League | LoL"
         }
       };
     for (const [k, v] of Object.entries(statics)) {
@@ -256,15 +256,15 @@ presence.on("UpdateData", async () => {
           details: "Idling..."
         },
         "/news/": {
-          details: "LoR - Looking at news:",
+          details: "Looking at news:",
           state:
             Array.from(document.querySelectorAll("div")).find((c) =>
               c.className?.includes("style__Title")
-            )?.textContent + " - LoR"
+            )?.textContent + " | LoR"
         },
         "/news/competitive/": {
-          details: "LoR - Tournaments:",
-          state: document.querySelector("h1")?.textContent + " - LoR"
+          details: "Tournaments:",
+          state: document.querySelector("h1")?.textContent + " | LoR"
         }
       };
     for (const [k, v] of Object.entries(statics)) {
