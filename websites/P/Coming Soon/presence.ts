@@ -15,6 +15,8 @@ const presence = new Presence({
     }
   
     let title: string;
+    let seasonEpi: string;
+    let movTitle: string;
 
     let elapsed: number = undefined,
       oldUrl: string = undefined,
@@ -22,7 +24,7 @@ const presence = new Presence({
       item;
   
     presence.on("UpdateData", async () => {
-
+       
      
       let video: HTMLVideoElement = null,
         details = undefined,
@@ -39,7 +41,7 @@ const presence = new Presence({
         oldUrl = href;
         elapsed = Math.floor(Date.now() / 1000);
       }
-  
+      //var pageStuff = path.includes
 
       state = undefined;
       
@@ -64,35 +66,12 @@ const presence = new Presence({
           state = title
           details = "Viewing Series:"
         } 
-      } else if (path.includes("/movies") && document.querySelector("video") == null) {
-        
-        details = "Browsing:"
-        state = "Viewing Movies"
+      } else if (document.querySelector("video") == null && path.includes("/movies")) {
       
-      } else if(path.includes("/movies") && document.querySelector("video")) {
+        state = "Viewing Movies"
+        details = "Browsing:"  
         
-        let title = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).name,
-        timestamps = presence.getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
-        ), live = timestamps[1] === Infinity
-
-        if (title) {
-          details = "Watching Movie:"
-          state = title
-        }
-        smallImageKey = live ? "live" : video.paused ? "pause" : "play";
-        smallImageText = live
-          ? strings.live
-          : video.paused
-          ? strings.pause
-          : strings.play;
-        startTimestamp = live ? elapsed : timestamps[0];
-        endTimestamp = live ? undefined : timestamps[1];
-        if (video.paused) {
-          startTimestamp = undefined;
-          endTimestamp = undefined;
-        }
+        
       } else if (path.includes("/network")) {
         const brand: HTMLImageElement = document.querySelector(
           ".SimpleModalNav__brandImage"
@@ -155,21 +134,31 @@ const presence = new Presence({
         if (item) {
           state = capitalize(item.textContent);
         }
-      } else if (path.includes("/video")) {
+      } else if (path.includes("/video") || path.includes("/movies")) {
         video = document.querySelector("video");
         if (video) {
+          if (path.includes("/movies")) {
+            movTitle = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).name
+          } else if (path.includes("/video")) {
+            title = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).partOfSeries.name
+            seasonEpi = "S" + JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).partOfSeason.seasonNumber + ":" +
+                        "E" + JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).episodeNumber + " " +
+                        JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).name
+          }
           
-          let title = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).partOfSeries.name
-          const content = document.getElementsByClassName("subTitle")[0].textContent 
-          + " " + 
-          document.getElementsByClassName("video__metadata__topline")[0]
-          .querySelector("h1").textContent,
+          const content = seasonEpi,
             timestamps = presence.getTimestamps(
               Math.floor(video.currentTime),
               Math.floor(video.duration)
             ),
             live = timestamps[1] === Infinity;
-          details = "Watching";
+          details = "Watching Movie";
+              if(movTitle) {
+                state = movTitle
+                details = details
+              }
+
+          
           if (title) {
             details = title;
           }
