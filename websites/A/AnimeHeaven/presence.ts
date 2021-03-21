@@ -4,41 +4,26 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-
-let lastPlaybackState = null,
-  playback,
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-if (lastPlaybackState != playback) {
-  lastPlaybackState = playback;
-  browsingStamp = Math.floor(Date.now() / 1000);
-}
-
-let iFrameVideo: HTMLVideoElement;
-presence.on("iFrameData", ({ video }: { video: HTMLVideoElement }) => {
-  iFrameVideo = video;
+type VideoData = {
+  paused: boolean;
+  currentTime: number;
+  duration: number;
+};
+let iFrameVideo: VideoData;
+presence.on("iFrameData", (videoData: VideoData) => {
+  iFrameVideo = videoData;
 });
 
-presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-      largeImageKey: "logo"
-    },
-    path = window.location.pathname.toLowerCase();
-
-  presenceData.state = "Browsing...";
-  presenceData.startTimestamp = browsingStamp;
-
-  if (path.startsWith("/detail")) {
-    const title = document.querySelector(
-      ".infobox .infoboxc .infodesbox .infodes h1"
-    ).textContent;
-    presenceData.details = title;
-  } else if (path.startsWith("/watch")) {
+const paths = {
+  async "/watch"(presenceData: PresenceData) {
     const title = document.querySelector(".now2 .c a").textContent,
       episode = document
         .querySelector(".now2 .c")
-        .lastChild.textContent.substring(3);
+        .lastChild.textContent.match(/\s*-\s*(.+)/)[1];
+
     presenceData.details = title;
     presenceData.state = episode;
 
@@ -59,9 +44,76 @@ presence.on("UpdateData", async () => {
         presenceData.endTimestamp = endTimestamp;
       }
 
-      return presence.setActivity(presenceData, !video.paused);
+      return !video.paused;
+    }
+  },
+  "/search"(presenceData: PresenceData) {
+    presenceData.state = "Searching...";
+
+    const searchParams = new URLSearchParams(window.location.search);
+    let searchQuery = searchParams.get("q");
+
+    if (searchQuery) {
+      if (searchQuery.length > 18) {
+        searchQuery = `${searchQuery.substring(0, 18)}…`;
+      }
+      presenceData.details = `"${searchQuery}"`;
+    }
+  },
+  "/detail"(presenceData: PresenceData) {
+    presenceData.state = "Viewing...";
+
+    const title = document.querySelector(
+      ".infobox .infoboxc .infodesbox .infodes h1"
+    ).textContent;
+    presenceData.details = title;
+  },
+  "/animeheaven.eu"(presenceData: PresenceData) {
+    presenceData.state = "Viewing front page...";
+  },
+  "/anime-list"(presenceData: PresenceData) {
+    presenceData.details = "Latest Anime";
+  },
+  "/dubbed-anime"(presenceData: PresenceData) {
+    presenceData.details = "Latest Dubbed Anime";
+  },
+  "/anime-series"(presenceData: PresenceData) {
+    presenceData.details = "Anime";
+  },
+  "/anime-movies"(presenceData: PresenceData) {
+    presenceData.details = "Anime Movies";
+  },
+  "/ongoing"(presenceData: PresenceData) {
+    presenceData.details = "Ongoing Anime";
+  },
+  "/popular"(presenceData: PresenceData) {
+    presenceData.details = "Popular Anime";
+  },
+  "/schedule"(presenceData: PresenceData) {
+    presenceData.details = "Anime Schedule";
+  },
+  "/"(presenceData: PresenceData) {
+    presenceData.state = "Viewing landing page...";
+  }
+};
+
+presence.on("UpdateData", async () => {
+  const presenceData: PresenceData = {
+      largeImageKey: "logo"
+    },
+    currentPath = window.location.pathname.toLowerCase();
+
+  presenceData.state = "Browsing...";
+  presenceData.startTimestamp = browsingStamp;
+
+  let playback = true;
+  for (const [path, setPresence] of Object.entries(paths)) {
+    if (currentPath.startsWith(path)) {
+      const isPlaying = await setPresence(presenceData);
+      if (isPlaying === false) playback = isPlaying;
+      break;
     }
   }
 
-  presence.setActivity(presenceData, true);
+  presence.setActivity(presenceData, playback);
 });
