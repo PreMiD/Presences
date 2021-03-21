@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
       const tradeType = document.querySelector('div.css-4mvl8x > a:nth-child(1)').textContent.trim(),
         tradeLeverage = document.querySelector('div.css-4mvl8x > a:nth-child(2)').textContent.trim(),
         tradePair = document.querySelector('div.css-17i092f > h1').textContent.trim(),
-        tradeTerm = document.querySelector('div.css-17i092f > div').textContent.trim()
+        tradeTerm = document.querySelector('div.css-17i092f > div').textContent.trim();
 
       presenceData.details = `Trading on ${tradeType} ${tradeLeverage}:`;
       presenceData.state = `${tradePair} ${tradeTerm}`;
