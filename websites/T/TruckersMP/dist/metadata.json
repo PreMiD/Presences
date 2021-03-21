@@ -9,7 +9,8 @@
   }],
   "service": "TruckersMP",
   "description": {
-    "en": "TruckersMP is a multiplayer truckers experience for SCS Software's Euro Truck Simulator 2 and American Truck Simulator."
+    "en": "TruckersMP is a multiplayer truckers experience for SCS Software's Euro Truck Simulator 2 and American Truck Simulator.",
+    "nl": "TruckersMP een Multiplayer Truckers ervaring voor SCS Software's Euro Truck Simulator 2 en American Truck Simulator."
   },
   "url": [
     "truckersmp.com",
