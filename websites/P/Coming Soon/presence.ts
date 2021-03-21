@@ -7,7 +7,6 @@ const presence = new Presence({
       pause: "presence.playback.paused",
       live: "presence.activity.live",
       search: "presence.activity.searching",
-      //showName: new Window("CBS") 
     });
     showName: 
     function capitalize(text: string): string {
@@ -23,9 +22,7 @@ const presence = new Presence({
       item;
   
     presence.on("UpdateData", async () => {
-      const titleField: HTMLDivElement = document.querySelector(
-        ".skin-metadata-manager-header"
-        )
+
      
       let video: HTMLVideoElement = null,
         details = undefined,
@@ -43,29 +40,58 @@ const presence = new Presence({
         elapsed = Math.floor(Date.now() / 1000);
       }
   
-      details = "Browsing...";
+
       state = undefined;
-      startTimestamp = elapsed;
+      
   
       if (path.includes("/home")) {
+        
+        details = "Browsing:";
         state = "Home Page";
+        startTimestamp = elapsed;
+      
+      } else if (path.includes("/shows") && document.querySelector(".subnav__items--tuneInfo") == null) {
+        
+        details = "Browsing:"
+        state = "Viewing Shows"
+        startTimestamp = elapsed;
+      
       } else if (path.includes("/shows") && document.querySelector("video") == null && document.querySelector(".subnav__items--tuneInfo") && !path.includes("/video")) {
-        item = document.querySelector(".Subnav__item.active");
-        details = "Viewing Series";
-       // console.log(strings.showName)
-     //   if (strings.showName) {
-          //state = strings.showName;
-
-       // }
-      } else if (path.includes("/movie")) {
-        //title = document.querySelector(".Masthead__title");
-        item = document.querySelector(".Subnav__item.active");
-        details = "Viewing Movie";
+        
+        title = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).name
+        
         if (title) {
-          //state = title.textContent;
-          if (item) {
-            state = state + `'s ${item.textContent}`;
-          }
+          state = title
+          details = "Viewing Series:"
+        } 
+      } else if (path.includes("/movies") && document.querySelector("video") == null) {
+        
+        details = "Browsing:"
+        state = "Viewing Movies"
+      
+      } else if(path.includes("/movies") && document.querySelector("video")) {
+        
+        let title = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).name,
+        timestamps = presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        ), live = timestamps[1] === Infinity
+
+        if (title) {
+          details = "Watching Movie:"
+          state = title
+        }
+        smallImageKey = live ? "live" : video.paused ? "pause" : "play";
+        smallImageText = live
+          ? strings.live
+          : video.paused
+          ? strings.pause
+          : strings.play;
+        startTimestamp = live ? elapsed : timestamps[0];
+        endTimestamp = live ? undefined : timestamps[1];
+        if (video.paused) {
+          startTimestamp = undefined;
+          endTimestamp = undefined;
         }
       } else if (path.includes("/network")) {
         const brand: HTMLImageElement = document.querySelector(
@@ -133,8 +159,7 @@ const presence = new Presence({
         video = document.querySelector("video");
         if (video) {
           
-          title = titleField?.textContent
-          // console.log(title) 
+          let title = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).partOfSeries.name
           const content = document.getElementsByClassName("subTitle")[0].textContent 
           + " " + 
           document.getElementsByClassName("video__metadata__topline")[0]
@@ -150,7 +175,6 @@ const presence = new Presence({
           }
           if (content) {
             state = content;
-            //presence.getPageletiable
           }
           smallImageKey = live ? "live" : video.paused ? "pause" : "play";
           smallImageText = live
