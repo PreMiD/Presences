@@ -54,7 +54,7 @@
       },
       {
         "id": "buttons",
-        "title": "Show buttons",
+        "title": "Show Buttons",
         "icon": "fas fa-compress-arrows-alt",
         "value": true
       },
