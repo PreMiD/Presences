@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "HentaiZ",
+  "author": {
+    "name": "Mi China",
+    "id": "589255309277790218"
+  },
+  "contributors": [
+    {
+      "name": "Zumi",
+      "id": "808957206183280640"
+    }
+  ],
+  "category": "anime",
+  "regExp": "hentaiz.net",
+  "logo": "https://hentaiz.net/wp-content/themes/hz2/images/Icon/512.png",
+  "thumbnail": "https://hentaiz.net/images/Screenshot2021.png",
+  "version": "1.0.0",
+  "color": "#1f1f1f",
+  "tags": [
+    "anime",
+    "hentai",
+    "ahegao",
+    "harem",
+    "loli",
+    "adult",
+    "porn",
+    "sex",
+    "japan",
+    "nsfw"
+  ],
+  "url": [
+    "hentaiz.net",
+    "www.hentaiz.net"
+  ],
+  "description": {
+    "vi": "HentaiZ - Trang xem hentai anime vietsub online miễn phí chất lượng cao",
+    "en": "HentaiZ - Top #1 Anime Hentai website in Vietnam with high quality"
+  }
+}
