@@ -60,14 +60,9 @@ function checkIfMovie() {
   !isMovie
     ? presence
         .getPageletiable("appData")
-<<<<<<< HEAD
-        .then((appData) =>
+        .then((appData) => {
           appData.anime.types[0].name == "Movie" ? (isMovie = true) : false
-=======
-        .catch((appData) =>
-          isMovie = appData.anime.types[0].name == "Movie" ? true : false
->>>>>>> kickassanime
-        )
+        })
     : presence.info(
         "Unable to determine if show is a Movie or TV Series.\nYou may be watching an OVA, or this is broken & you need to contact Striker#1337"
       );
