@@ -29,7 +29,7 @@ let strings = getStrings(),
     currentTime: number,
     paused: boolean,
     oldHref: string,
-    oldSettings: boolean = false;
+    oldSettings = false;
 
 presence.on("iFrameData", (data: IFrameData) => {
     playback = data.iframe_video?.duration !== undefined ? true : false;
