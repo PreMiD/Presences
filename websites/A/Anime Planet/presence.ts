@@ -27,7 +27,9 @@ let strings = getStrings(),
     playback: boolean,
     duration: number,
     currentTime: number,
-    paused: boolean;
+    paused: boolean,
+    oldHref: string,
+    oldSettings: boolean = false;
 
 presence.on("iFrameData", (data: IFrameData) => {
     playback = data.iframe_video?.duration !== undefined ? true : false;
@@ -40,13 +42,27 @@ presence.on("iFrameData", (data: IFrameData) => {
 });    
 
 presence.on("UpdateData", async () => {
-    const newLang = await presence.getSetting("lang");
+    const newLang: string = await presence.getSetting("lang"),
+          AnimeDetails: string = await presence.getSetting("AnimeDetails"),
+          AnimeState: string = await presence.getSetting("AnimeState"),
+          MangaDetails: string = await presence.getSetting("MangaDetails"),
+          MangaState: string = await presence.getSetting("MangaState"),
+          timestamp: boolean = await presence.getSetting("timestamp");
 
     if (!oldLang){
       oldLang = newLang;
     } else if (oldLang !== newLang){
       oldLang = newLang;
       strings = getStrings();
+    }
+
+    if (!oldHref){
+      oldHref = document.location.href;
+      presence.hideSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
+    } else if (oldHref !== document.location.href){
+      oldHref = document.location.href;
+      presence.hideSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
+      oldSettings = false;
     }
 
     let presenceData: PresenceData = {
@@ -67,7 +83,7 @@ presence.on("UpdateData", async () => {
                     .replace(document.querySelector('h2.sub > a')?.textContent, "")
                     .trim().split("-")
     },
-      buttonsE = await presence.getSetting("buttons"),
+      buttons = await presence.getSetting("buttons"),
 
     animePlanetPages: {
       [key: string]: PresenceData
@@ -130,7 +146,7 @@ presence.on("UpdateData", async () => {
         details: (await strings).viewPage,
         state: `Community • ${content.title}`
       },
-      "reviews":  {
+      "reviews.php":  {
         details: (await strings).viewPage,
         state: `${content.title} • ${location.search.endsWith("anime") ? "Anime" : "Manga"}`
       },
@@ -145,46 +161,58 @@ presence.on("UpdateData", async () => {
           }
         ]
       },
-      "/manga/top-manga": {
+      "/studios/": {
+        details: `Viewing studio:`,
+        state: content.title
+      },
+      "/manga/(read-online|recommendations|light-novels|top-manga|all|magazines)": {
         details: (await strings).viewPage,
         state: content.title
       },
-      "/manga/light-novels": {
-        details: (await strings).viewPage,
-        state: content.title
-      },
-      "/manga/recommendations": {
-        details: (await strings).viewPage,
+      "/manga/tags/": {
+        details: `Manga | Viewing tag:`,
         state: content.title
       },
       "/manga/": {
         details: (await strings).viewManga,
         state: content.title
       },
-      "/anime/all": {
+      "/anime/(watch-online|top-anime|seasons|all|recommendations)": {
         details: (await strings).viewPage,
         state: content.title
       },
-      "/anime/recommendations": {
-        details: (await strings).viewPage,
-        state: content.title
-      },
-      "/anime/seasons": {
-        details: (await strings).viewPage,
-        state: content.title
-      },
-      "/anime/top-anime": {
-        details: (await strings).viewPage,
+      "/anime/tags/": {
+        details: `Anime | Viewing tag:`,
         state: content.title
       },
       "/anime/": {
         details: (await strings).viewAnime,
         state: content.title
+      },
+      "/login": {
+        details: (await strings).viewPage,
+        state: "The login page"
+      },
+      "/sign-up": {
+        details: (await strings).viewPage,
+        state: "The sign up page"
       }
     };
 
+    for (const [key, value] of Object.entries(animePlanetPages)){
+      if (path.match(key)){
+          presenceData = { ...presenceData, ...value};
+          break;
+      }
+    }
+
     if (path.includes("/videos/")){
-      
+
+      if (!oldSettings){
+        presence.showSetting(["AnimeDetails", "AnimeState"]);
+        oldSettings = true;
+      }
+
       if (content.titleAndEpisode.length > 1){
         content.episode.title = document.querySelector('h2.sub').textContent
         .replace(document.querySelector('h2.sub > a').textContent, "")
@@ -198,8 +226,12 @@ presence.on("UpdateData", async () => {
       if (!isNaN(duration)){
         const timestamps = presence.getTimestamps(currentTime, duration);
 
-        presenceData.details = content.title;
-        presenceData.state = `EP.${content.episode.ep}${content.episode.title ? ` • ${content.episode.title}` : ``}`;
+        presenceData.details = AnimeDetails
+                                      .replace("%title%", content.title)
+                                      .replace("%episode%", `EP.${content.episode.ep} ${content.episode.title ?? ""}`);
+        presenceData.state = AnimeState
+                                      .replace("%title%", content.title)
+                                      .replace("%episode%", `EP.${content.episode.ep} ${content.episode.title ?? ""}`);
 
         presenceData.startTimestamp = timestamps[0];
         presenceData.endTimestamp = timestamps[1];
@@ -214,7 +246,7 @@ presence.on("UpdateData", async () => {
           },
           {
             label: (await strings).viewSeries,
-            url: document.querySelector<EHref>('h2.sub > a').href
+            url: document.querySelector<ElementHref>('h2.sub > a').href
           }
         ];
 
@@ -227,11 +259,21 @@ presence.on("UpdateData", async () => {
         presenceData.state = content.title;
       }
     } else if (path.includes("/chapters/")){
+
+      if (!oldSettings){
+        presence.showSetting(["MangaDetails", "MangaState"]);
+        oldSettings = true;
+      }
+
       content.episode.ep = document.querySelector("h1").textContent
                           .replace(content.title, "").match(/[1-9]?[0-9]?[0-9]?.?[1-9]?[0-9]?[0-9]/g)[0];
 
-      presenceData.details = content.title;
-      presenceData.state = `${(await strings).chapter} ${content.episode.ep}`;
+      presenceData.details = MangaDetails
+                                  .replace("%title%", content.title)
+                                  .replace("%chapter%", `${(await strings).chapter} ${content.episode.ep}`);
+      presenceData.state = MangaState
+                                  .replace("%title%", content.title)
+                                  .replace("%chapter%", `${(await strings).chapter} ${content.episode.ep}`);
 
       presenceData.smallImageText = (await strings).reading;
 
@@ -243,28 +285,16 @@ presence.on("UpdateData", async () => {
       ];
     }
 
-    for (const [key, value] of Object.entries(animePlanetPages)){
-      if (path.includes(key) && path !==  "/characters/" && !path.includes("/videos/") && path !== "/manga/" && path !== "/anime/"){
-          presenceData = { ...presenceData, ...value};
-          break;
-      } else if (path ===  "/characters/"){
-        presenceData.details = (await strings).viewPage;
-        presenceData.state = "Characters";
-      } else if (path === "/anime/"){
-        presenceData.details = (await strings).viewPage;
-        presenceData.state = "Anime";
-      } else if (path === "/manga/"){
-        presenceData.details = (await strings).viewPage;
-        presenceData.state = "Manga";
-      }
+    if (!buttons) delete presenceData.buttons;
+    if (!timestamp) {
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
-
-    if (!buttonsE) delete presenceData.buttons;
 
     presence.setActivity(presenceData);
 });
 
-interface EHref extends HTMLElement {
+interface ElementHref extends HTMLElement {
   href: string
 }
 
