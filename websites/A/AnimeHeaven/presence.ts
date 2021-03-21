@@ -19,13 +19,13 @@ presence.on("iFrameData", (videoData: VideoData) => {
 
 const paths = {
   async "/watch"(presenceData: PresenceData) {
-    const title = document.querySelector(".now2 .c a").textContent,
+    const title = document.querySelector(".now2 .c a")?.textContent,
       episode = document
         .querySelector(".now2 .c")
-        .lastChild.textContent.match(/\s*-\s*(.+)/)[1];
+        ?.lastChild?.textContent?.match(/\s*-\s*(.+)/)[1];
 
-    presenceData.details = title;
-    presenceData.state = episode;
+    presenceData.details = title || "Unknown title";
+    presenceData.state = episode || "Unknown episode";
 
     if (iFrameVideo) {
       const video = iFrameVideo;
@@ -61,12 +61,16 @@ const paths = {
     }
   },
   "/detail"(presenceData: PresenceData) {
-    presenceData.state = "Viewing...";
-
     const title = document.querySelector(
       ".infobox .infoboxc .infodesbox .infodes h1"
-    ).textContent;
-    presenceData.details = title;
+    )?.textContent;
+
+    if (title) {
+      presenceData.state = "Viewing info...";
+      presenceData.details = title;
+    } else {
+      presenceData.state = "Viewing info for a title...";
+    }
   },
   "/animeheaven.eu"(presenceData: PresenceData) {
     presenceData.state = "Viewing front page...";
