@@ -87,12 +87,8 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.includes("/convert")) {
       presenceData.details = "Converting Crypto:";
 
-      const inputCrypto = document.querySelector(
-        "#__APP > div.css-531ugn > div.content.css-81xrsn > div > div.first-row.css-vurnku > div.css-1257pax > div > div > div.css-tiagpy > div.css-9wgib6"
-      ).textContent.trim(),
-        outputCrypto = document.querySelector(
-          "#__APP > div.css-531ugn > div.content.css-81xrsn > div > div.second-row.css-vurnku > div.css-1257pax > div > div > div > div.css-9wgib6"
-        ).textContent.trim();
+      const inputCrypto = document.querySelector("div.css-9wgib6").textContent.trim(),
+        outputCrypto = document.querySelector("div.css-9wgib6").textContent.trim();
 
       presenceData.state = `${inputCrypto} to ${outputCrypto}`;
     } else if (window.location.pathname.includes("/trade")) {
