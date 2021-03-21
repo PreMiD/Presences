@@ -1,0 +1,36 @@
+{
+  "service": "InfinityBotList",
+  "author": {
+    "name": "MaximKing",
+    "id": "713632188863610911"
+  },
+  "category": "other",
+  "logo": "https://imgur.com/fWqyv5V.png",
+  "thumbnail": "https://imgur.com/fWqyv5V.png",
+  "version": "1.0.0",
+  "color": "#0059ff",
+  "tags": [
+    "botlist"
+  ],
+  "url": [
+    "infinitybots.xyz",
+    "www.infinitybots.xyz",
+    "mobile.infinitybots.xyz",
+    "www.mobile.infinitybots.xyz"
+  ],
+  "description": {
+    "en": "InfinityBotList is the Next Gen Bot List"
+  },
+    "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "time",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
+}
