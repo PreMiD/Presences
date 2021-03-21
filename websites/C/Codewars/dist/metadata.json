@@ -28,7 +28,7 @@
     "settings": [
         {
             "id": "statsdisplay",
-            "title": "Dispaly Stats",
+            "title": "Display Stats",
             "icon": "fas fa-bar-chart",
             "value": true
         }

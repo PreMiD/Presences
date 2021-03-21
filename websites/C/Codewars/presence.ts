@@ -8,7 +8,8 @@ presence.on("UpdateData", async () => {
         pages = pathName.split('/').filter(p => p),
         data: PresenceData = {
             largeImageKey: "largeimage",
-            startTimestamp: timebrowsed
+            startTimestamp: timebrowsed,
+            details: 'Browsing ...'
         },
         displayStats = await presence.getSetting('statsdisplay');
 
@@ -33,7 +34,7 @@ presence.on("UpdateData", async () => {
     }
     else if (pages[0] === 'kata') {
         if (pages[2]) {
-            data.details = 'Seacrhing Katas';
+            data.details = 'Searching Katas';
             data.state = document.querySelector(".ml-0").textContent + '';
         } else {
             data.details = 'Solving Kata | ' + document.querySelector('.inner-small-hex > span').textContent;
