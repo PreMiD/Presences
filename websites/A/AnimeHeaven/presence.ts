@@ -41,14 +41,15 @@ const presence = new Presence({
             }
         );
 
-    let browsingStamp = Math.floor(Date.now() / 1000), path = document.location.pathname, title, link;
+    const browsingStamp = Math.floor(Date.now() / 1000), path = document.location.pathname
+    let title, link;
     presence.on("UpdateData", async () => {
         const buttons = await presence.getSetting("buttons"),
         timestamps = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
-        );
-        let data: PresenceData = {
+        ),
+        data: PresenceData = {
             largeImageKey: "logo",
             startTimestamp: browsingStamp
         }; 
