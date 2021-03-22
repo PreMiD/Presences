@@ -14,8 +14,8 @@ presence.on("UpdateData", async () => {
   if (["streaming.pramborsfm.com", "live.pramborsfm.com"].includes(document.location.hostname)) {
     presenceData.buttons = [
       {
-          label: "Listen to Prambors",
-          url: "https://live.pramborsfm.com"
+        label: "Listen to Prambors",
+        url: "https://live.pramborsfm.com"
       }
     ];
     if (!timestamp) timestamp = Date.now();
