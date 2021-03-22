@@ -42,7 +42,7 @@ const presence = new Presence({
         );
 
     const browsingStamp = Math.floor(Date.now() / 1000), path = document.location.pathname;
-    let title, link, episode;
+    let title, link;
     presence.on("UpdateData", async () => {
         const buttons = await presence.getSetting("buttons"), videoTime = await presence.getSetting("sVT"),
         data: PresenceData = {
