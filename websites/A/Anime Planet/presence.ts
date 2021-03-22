@@ -224,7 +224,7 @@ presence.on("UpdateData", async () => {
         },
         {
           label: (await strings).viewSeries,
-          url: document.querySelector<ElementHref>('h2.sub > a').href
+          url: document.querySelector<HTMLAnchorElement>('h2.sub > a').href
         }
       ];
 
@@ -266,10 +266,6 @@ presence.on("UpdateData", async () => {
 
   presence.setActivity(presenceData);
 });
-
-interface ElementHref extends HTMLElement {
-  href: string
-}
 
 interface IFrameData {
   iframe_video: {
