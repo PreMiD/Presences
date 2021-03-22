@@ -87,15 +87,19 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.includes("/convert")) {
       presenceData.details = "Converting Crypto:";
 
-      const inputCrypto = document.querySelector("div.css-9wgib6").textContent.trim(),
-        outputCrypto = document.querySelector("div.css-9wgib6").textContent.trim();
+      const inputCrypto = document
+          .querySelector("div.css-9wgib6")
+          .textContent.trim(),
+        outputCrypto = document
+          .querySelector("div.css-9wgib6")
+          .textContent.trim();
 
       presenceData.state = `${inputCrypto} to ${outputCrypto}`;
     } else if (window.location.pathname.includes("/trade")) {
       const tradeType =
-        document.querySelector("div.css-109wawx")?.textContent?.trim() ||
-        document.querySelector("div.css-119y1m9")?.textContent?.trim(),
-        tradePair = document.querySelector('div.css-mzoqhr').textContent.trim();
+          document.querySelector("div.css-109wawx")?.textContent?.trim() ||
+          document.querySelector("div.css-119y1m9")?.textContent?.trim(),
+        tradePair = document.querySelector("div.css-mzoqhr").textContent.trim();
 
       presenceData.details = `Trading on ${tradeType}:`;
       presenceData.state = tradePair;
@@ -103,10 +107,18 @@ presence.on("UpdateData", async () => {
       window.location.pathname.includes("/futures") ||
       window.location.pathname.includes("/delivery")
     ) {
-      const tradeType = document.querySelector('div.css-4mvl8x > a:nth-child(1)').textContent.trim(),
-        tradeLeverage = document.querySelector('div.css-4mvl8x > a:nth-child(2)').textContent.trim(),
-        tradePair = document.querySelector('div.css-17i092f > h1').textContent.trim(),
-        tradeTerm = document.querySelector('div.css-17i092f > div').textContent.trim();
+      const tradeType = document
+          .querySelector("div.css-4mvl8x > a:nth-child(1)")
+          .textContent.trim(),
+        tradeLeverage = document
+          .querySelector("div.css-4mvl8x > a:nth-child(2)")
+          .textContent.trim(),
+        tradePair = document
+          .querySelector("div.css-17i092f > h1")
+          .textContent.trim(),
+        tradeTerm = document
+          .querySelector("div.css-17i092f > div")
+          .textContent.trim();
 
       presenceData.details = `Trading on ${tradeType} ${tradeLeverage}:`;
       presenceData.state = `${tradePair} ${tradeTerm}`;
