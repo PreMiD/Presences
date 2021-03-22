@@ -74,28 +74,35 @@ presence.on("UpdateData", async () => {
     } else if (
       window.location.pathname.includes("/futuresng-activity/leaderboard")
     ) {
-      presenceData.details = "Futures Leaderboard";
+      presenceData.state = "Futures Leaderboard";
+    } else if (window.location.pathname.includes("/multipleChart")) {
+      presenceData.details = "Viewing Charts...";
+    } else if (window.location.pathname.includes("/convert")) {
+      presenceData.details = "Converting Crypto:";
+
+      const inputCrypto = document.querySelector("div.css-9wgib6").textContent.trim(),
+        outputCrypto = document.querySelector("div.css-9wgib6").textContent.trim();
+
+      presenceData.state = `${inputCrypto} to ${outputCrypto}`;
     } else if (window.location.pathname.includes("/trade")) {
-      presenceData.details = "Trading";
-      if (getLastPath(window.location.pathname).includes("_")) {
-        presenceData.state =
-          "Exchange: " +
-          getLastPath(window.location.pathname).replace("_", "/").toUpperCase();
-      }
-    } else if (window.location.pathname.includes("/futures")) {
-      presenceData.details = "Futures Trading";
-      if (getLastPath(window.location.pathname).includes("_")) {
-        presenceData.state =
-          "Exchange: " +
-          getLastPath(window.location.pathname).replace("_", "/").toUpperCase();
-      }
-    } else if (window.location.pathname.includes("/delivery")) {
-      presenceData.details = "Delivery Trading";
-      if (getLastPath(window.location.pathname).includes("_")) {
-        presenceData.state = getLastPath(window.location.pathname)
-          .replace("_", "/")
-          .toUpperCase();
-      }
+      const tradeType =
+        document.querySelector("div.css-109wawx")?.textContent?.trim() ||
+        document.querySelector("div.css-119y1m9")?.textContent?.trim(),
+        tradePair = document.querySelector('div.css-mzoqhr').textContent.trim();
+
+      presenceData.details = `Trading on ${tradeType}:`;
+      presenceData.state = tradePair;
+    } else if (
+      window.location.pathname.includes("/futures") ||
+      window.location.pathname.includes("/delivery")
+    ) {
+      const tradeType = document.querySelector('div.css-4mvl8x > a:nth-child(1)').textContent.trim(),
+        tradeLeverage = document.querySelector('div.css-4mvl8x > a:nth-child(2)').textContent.trim(),
+        tradePair = document.querySelector('div.css-17i092f > h1').textContent.trim(),
+        tradeTerm = document.querySelector('div.css-17i092f > div').textContent.trim();
+
+      presenceData.details = `Trading on ${tradeType} ${tradeLeverage}:`;
+      presenceData.state = `${tradePair} ${tradeTerm}`;
     } else {
       presenceData.details = "Browsing...";
     }
