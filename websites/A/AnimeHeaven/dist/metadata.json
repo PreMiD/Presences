@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Anime Heaven",
+    "author": {
+      "name": "Gurr",
+      "id": "446528923535278082"
+    },
+    "category": "anime",
+    "logo": "https://i.imgur.com/xXyBAR6.png",
+    "thumbnail": "https://i.imgur.com/Llbbxhb.png",
+    "version": "1.0.0",
+    "color": "#e61d2f",
+    "tags": [
+      "animeheaven"
+    ],
+    "url": "animeheaven.ru",
+    "description": {
+      "en": "AnimeHeaven.to is the best anime's online website, where you can watch anime online completely free. No download, no surveys and only instant premium streaming of anime's."
+    },
+    "iframe": true,
+    "settings": [
+      {
+        "id": "sVT",
+        "title": "Show Video Time",
+        "icon": "fas fa-clock",
+        "value": true
+      },
+      {
+        "id": "buttons",
+        "title": "Show Buttons",
+        "icon": "fas fa-compress-arrows-alt",
+        "value": true
+      }
+    ]
+
+  }
