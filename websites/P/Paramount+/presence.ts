@@ -30,7 +30,6 @@ const presence = new Presence({
       elapsed = Math.floor(Date.now() / 1000);
     }
 
-    delete presenceData.state;
 
     if (path.includes("/home")) {
 
