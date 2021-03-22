@@ -8,22 +8,19 @@ const presence = new Presence({
     live: "presence.activity.live",
     search: "presence.activity.searching",
   });
-  showName:
-    function capitalize(text: string): string {
-      text = text.toLowerCase();
-      return text.charAt(0).toUpperCase() + text.slice(1);
-    }
+  
 
   let title: string;
   let seasonEpi: string;
   let movTitle: string;
   let jsonData: any;
   let vidArea: Element;
+  let vidMdTl: any;
+  let liveTitle: any;
 
   let elapsed: number = undefined,
     oldUrl: string = undefined;
-    // header, 
-    //item;
+
 
   presence.on("UpdateData", () => {
 
@@ -43,7 +40,7 @@ const presence = new Presence({
       oldUrl = href;
       elapsed = Math.floor(Date.now() / 1000);
     }
-    //var pageStuff = path.includes
+
 
     state = undefined;
 
@@ -65,8 +62,10 @@ const presence = new Presence({
       title = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML).name
 
       if (title) {
+        
         state = title
         details = "Viewing Series:"
+      
       }
     } else if (!vidArea && path.includes("/movies")) {
 
@@ -84,32 +83,110 @@ const presence = new Presence({
       if (input && input.value.length > 0) {
         state = input.value;
       }
-    } else if (path.includes("/live")) {
-      const category = document.querySelector(
-        ".LiveGuide__filter-item--selected"
-      );
-      // title = document.querySelector(".ModalHeader__showname");
-      details = "Viewing Live";
-      if (category) {
-        state = capitalize(category.textContent);
-        if (title) {
-          state = state + ` (${title/*.textContent*/})`;
-        }
+    } else if (path.includes("/account")) {
+      details = "Viewing Account"
+
+      if (path.includes("/signin")) {
+        details = null
       }
+
+    } else if (path.includes("/user-profile/whos-watching")) {
+      
+      details = "User Profiles"
+      state = "Selecting User..."
+      
+    } else if (path.includes("/news/") && !path.includes("video")) {
+
+      details = "Browsing News"
+      state = "CBSN"
+      startTimestamp = elapsed
+
+    } else if (path.includes("/brands")) {
+
+      details = "Browsing Brands:"
+      state = "Selecting Brand..."
+
+      if (path.includes("/cbs/")) {
+
+        state = "CBS"
+        startTimestamp = elapsed
+        smallImageKey = "cbs"
+
+      } else if (path.includes("/bet/")) {
+
+        state = "BET"
+        startTimestamp = elapsed
+        smallImageKey = "bet"
+
+      } else if (path.includes("/comedy-central/")) {
+
+        state = "Comedy Central"
+        startTimestamp = elapsed
+        smallImageKey = "comedycentral"
+
+      } else if (path.includes("/mtv/")) {
+
+        state = "MTV"
+        startTimestamp = elapsed
+        smallImageKey = "mtv"
+
+      } else if (path.includes("/nickelodeon/")) {
+
+        state = "Nickelodeon"
+        startTimestamp = elapsed
+        smallImageKey = "nickelodeon"
+
+      } else if (path.includes("/smithsonian-channel/")) {
+
+        state = "Smithsonian Channel"
+        startTimestamp = elapsed
+        smallImageKey = "smithsonian"
+      }
+
+    } else if (path.includes("/live")) {
+
+      vidMdTl = document.getElementsByClassName("video__player-area")[0].querySelector("h1").textContent
+      liveTitle = document.getElementsByClassName("video__player-area")[0].querySelector("span.subTitle").textContent
+
+      smallImageKey = "live"
+      smallImageText = strings.live
+      startTimestamp = elapsed
+
+      details = "Watching WCBS Live"
+      state = liveTitle
+
+
+      if (path.includes("/cbsn/")) {
+
+        details = "Watching CBSN News"
+        state = vidMdTl
+
+      } else if (path.includes("/sports/")) {
+
+        details = "Watching CBS Sports"
+        state = vidMdTl
+
+      } else if (path.includes("/etl/")) {
+
+        details = "Watching ET Live"
+        state = vidMdTl
+
+      }
+
+
     } else if (vidArea && path.includes("/video") || path.includes("/movies")) {
       video = document.querySelector("video");
       jsonData = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML)
       if (vidArea) {
         if (path.includes("/movies")) {
-          
+
           movTitle = jsonData.name
 
         } else if (path.includes("/video")) {
 
           title = jsonData.partOfSeries.name
 
-          seasonEpi =
-            "S" + jsonData.partOfSeason.seasonNumber + ":" +
+          seasonEpi = "S" + jsonData.partOfSeason.seasonNumber + ":" +
             "E" + jsonData.episodeNumber + " " +
             jsonData.name
         }
@@ -130,9 +207,16 @@ const presence = new Presence({
         if (title) {
           details = title;
         }
+
         if (content) {
           state = content;
         }
+
+        if (path.includes("/news/")) {
+          details = "Watching News Content"
+          state = jsonData.partOfSeries.name + ": " + jsonData.name
+        }
+
         smallImageKey = live ? "live" : video.paused ? "pause" : "play";
         smallImageText = live ?
           strings.live :
@@ -141,6 +225,7 @@ const presence = new Presence({
           strings.play;
         startTimestamp = live ? elapsed : timestamps[0];
         endTimestamp = live ? undefined : timestamps[1];
+
         if (video.paused) {
           startTimestamp = undefined;
           endTimestamp = undefined;
