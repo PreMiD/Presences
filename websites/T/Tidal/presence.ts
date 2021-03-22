@@ -95,6 +95,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "browsing";
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     presence.setTrayTitle();
+    presence.setActivity(presenceData);
     return;
   }
 
@@ -102,6 +103,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).listening;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     presence.setTrayTitle();
+    presence.setActivity(presenceData);
     return;
   }
 
