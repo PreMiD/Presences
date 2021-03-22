@@ -1,8 +1,8 @@
 const iframe = new iFrame();
 
 iframe.on("UpdateData", async () => {
-  if (document.querySelector("#player_html5_api") !== null) {
-    const video: HTMLVideoElement = document.querySelector("#player_html5_api");
+  if (document.querySelector("video") !== null) {
+    const video = document.querySelector("video");
 
     if (video !== undefined && !isNaN(video?.duration)) {
 
