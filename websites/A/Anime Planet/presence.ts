@@ -29,9 +29,7 @@ let strings = getStrings(),
   playback: boolean,
   duration: number,
   currentTime: number,
-  paused: boolean,
-  oldHref: string,
-  oldSettings: boolean;
+  paused: boolean;
 
 presence.on("iFrameData", (data: IFrameData) => {
   playback = data.iframe_video?.duration !== undefined ? true : false;
@@ -57,12 +55,6 @@ presence.on("UpdateData", async () => {
   } else if (oldLang !== newLang){
     oldLang = newLang;
     strings = getStrings();
-  }
-
-  if (document.location.href !== oldHref){
-    oldHref = document.location.href;
-    oldSettings = false;
-    presence.showSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
   }
 
   let presenceData: PresenceData = {
@@ -199,11 +191,6 @@ presence.on("UpdateData", async () => {
 
   if (path.includes("/videos/")){
 
-    if (!oldSettings){
-      presence.hideSetting(["MangaDetails", "MangaState"]);
-      oldSettings = true;
-    }
-
     if (content.titleAndEpisode.length > 1){
       content.episode.title = document.querySelector('h2.sub').textContent
       .replace(document.querySelector('h2.sub > a').textContent, "")
@@ -250,11 +237,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = content.title;
     }
   } else if (path.includes("/chapters/")){
-
-    if (!oldSettings){
-      presence.hideSetting(["AnimeDetails", "AnimeState"]);
-      oldSettings = true;
-    }
 
     content.episode.ep = document.querySelector("h1").textContent
                                 .replace(content.title, "").match(/[1-9]?[0-9]?[0-9]?.?[1-9]?[0-9]?[0-9]/g)[0];
