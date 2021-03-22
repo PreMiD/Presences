@@ -70,7 +70,7 @@ const presence = new Presence({
       
       presenceData.details = "Viewing Account";
 
-      if (path.includes("/signin")) presenceData.details = null
+      if (path.includes("/signin")) presenceData.details = null;
 
     } else if (path.includes("/user-profile/whos-watching")) {
       
