@@ -19,30 +19,31 @@ presence.on("iFrameData", (videoData: VideoData) => {
 
 const paths = {
   async "/watch"(presenceData: PresenceData, buttons: boolean) {
-    const title = document.querySelector(".now2 .c a")?.textContent,
+    const title = document.querySelector<HTMLAnchorElement>(".now2 .c a")
+        ?.textContent,
       episode = document
-        .querySelector(".now2 .c")
+        .querySelector<HTMLElement>(".now2 .c")
         ?.lastChild?.textContent?.match(/\s*-\s*(.+)/)[1];
 
     presenceData.details = title || "Unknown title";
     presenceData.state = episode || "Unknown episode";
 
     if (buttons) {
-      const link = (document.querySelector(
-        ".now2 > div > a"
-      ) as HTMLLinkElement)?.href;
       presenceData.buttons = [
         {
           label: "Current Episode",
           url: window.location.href
-        },
-        link
-          ? {
-              label: "Episode List",
-              url: link
-            }
-          : undefined
+        }
       ];
+
+      const link = document.querySelector<HTMLAnchorElement>(".now2 > div > a")
+        ?.href;
+      if (link) {
+        presenceData.buttons.push({
+          label: "Episode List",
+          url: link
+        });
+      }
     }
 
     if (iFrameVideo) {
@@ -80,7 +81,7 @@ const paths = {
     }
   },
   "/detail"(presenceData: PresenceData) {
-    const title = document.querySelector(
+    const title = document.querySelector<HTMLHeadingElement>(
       ".infobox .infoboxc .infodesbox .infodes h1"
     )?.textContent;
 
