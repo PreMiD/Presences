@@ -12,13 +12,10 @@ const presence = new Presence({
   let title: string,
     seasonEpi: string,
     movTitle: string,
-    jsonData: any,
     vidArea: Element,
-    vidMdTl: any,
-    liveTitle: any,
+    vidMdTl: Element,
     elapsed: number = undefined,
     oldUrl: string = undefined;
-
 
   presence.on("UpdateData", () => {
 
@@ -137,8 +134,8 @@ const presence = new Presence({
 
     } else if (path.includes("/live")) {
 
-      vidMdTl = document.getElementsByClassName("video__player-area")[0].querySelector("h1").textContent;
-      liveTitle = document.getElementsByClassName("video__player-area")[0].querySelector("span.subTitle").textContent;
+      vidMdTl = document.getElementsByClassName("video__player-area")[0].querySelector("h1");
+      const liveTitle = document.getElementsByClassName("video__player-area")[0].querySelector("span.subTitle").textContent;
 
       smallImageKey = "live";
       smallImageText = strings.live;
@@ -151,36 +148,36 @@ const presence = new Presence({
       if (path.includes("/cbsn/")) {
 
         details = "Watching CBSN News";
-        state = vidMdTl;
+        state = vidMdTl.textContent;
 
       } else if (path.includes("/sports/")) {
 
         details = "Watching CBS Sports";
-        state = vidMdTl;
+        state = vidMdTl.textContent;
 
       } else if (path.includes("/etl/")) {
 
         details = "Watching ET Live";
-        state = vidMdTl;
+        state = vidMdTl.textContent;
 
       }
 
 
     } else if (vidArea && path.includes("/video") || path.includes("/movies")) {
       video = document.querySelector("video");
-      jsonData = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML)
+      const jsonData = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML)
       if (vidArea) {
         if (path.includes("/movies")) {
 
-          movTitle = jsonData.name
+          movTitle = jsonData.name;
 
         } else if (path.includes("/video")) {
 
-          title = jsonData.partOfSeries.name
+          title = jsonData.partOfSeries.name;
 
           seasonEpi = "S" + jsonData.partOfSeason.seasonNumber + ":" +
             "E" + jsonData.episodeNumber + " " +
-            jsonData.name
+            jsonData.name;
         }
 
         const content = seasonEpi,
@@ -191,8 +188,8 @@ const presence = new Presence({
           live = timestamps[1] === Infinity;
         details = "Watching Movie";
         if (movTitle) {
-          state = movTitle
-          details = details
+          state = movTitle;
+          details = details;
         }
 
 
@@ -205,8 +202,8 @@ const presence = new Presence({
         }
 
         if (path.includes("/news/")) {
-          details = "Watching News Content"
-          state = jsonData.partOfSeries.name + ": " + jsonData.name
+          details = "Watching News Content";
+          state = jsonData.partOfSeries.name + ": " + jsonData.name;
         }
 
         smallImageKey = live ? "live" : video.paused ? "pause" : "play";
@@ -238,4 +235,4 @@ const presence = new Presence({
     presence.setActivity(data, video ? !video.paused : true);
     presence.setTrayTitle(details);
   });
-})()
+})();
