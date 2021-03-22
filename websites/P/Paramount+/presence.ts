@@ -173,9 +173,8 @@ const presence = new Presence({
           timestamps = presence.getTimestamps(
             Math.floor(video.currentTime),
             Math.floor(video.duration)
-          ),
-          live = timestamps[1] === Infinity;
-        
+          );
+          
         if (movTitle) {
           presenceData.state = movTitle;
           presenceData.details = "Watching Movie:";
@@ -190,14 +189,13 @@ const presence = new Presence({
           presenceData.state = jsonData.partOfSeries.name + ": " + jsonData.name;
         }
 
-        presenceData.smallImageKey = live ? "live" : video.paused ? "pause" : "play";
-        presenceData.smallImageText = live ?
-          (await strings).live :
+        presenceData.smallImageKey =  video.paused ? "pause" : "play";
+        presenceData.smallImageText = 
           video.paused ?
           (await strings).pause :
           (await strings).play;
-        presenceData.startTimestamp = live ? elapsed : timestamps[0];
-        if (live) presenceData.endTimestamp = timestamps[1];
+        presenceData.startTimestamp = timestamps[0];
+        presenceData.endTimestamp = timestamps[1];
 
         if (video.paused) {
           delete presenceData.startTimestamp;
