@@ -10,8 +10,8 @@ botPresence.on("UpdateData", async () => {
     },
     botPage = document.location.pathname,
     botHost = document.location.hostname,
-    buttons = botPresence.getSetting("buttons"),
-    sSubmit = botPresence.getSetting("submitP");
+    buttons = await botPresence.getSetting("buttons"),
+    sSubmit = await botPresence.getSetting("submitP");
 
   if (botHost == "discord-botlist.eu") {
     if (botPage == "/") {
@@ -55,11 +55,9 @@ botPresence.on("UpdateData", async () => {
       ];
     } else if (botPage.includes("/bots/")) {
       if (botPage.includes("/new")) {
-        if (sSubmit) {
-          botData.details = "Adding Bot";
-        }
-      } 
-      if (botPage.includes("/vote")) {
+        botData.details = "Adding a Bot";
+      }
+      else if (botPage.includes("/vote")) {
         const voteBotName: string = document
           .querySelector("#vote1 > h1")
           .textContent.replace("Vote for ", "");
@@ -110,6 +108,8 @@ botPresence.on("UpdateData", async () => {
     botData.details = "Viewing Docs";
     botData.state = "Page: " + page;
   }
+
+  if (!sSubmit && botData.details === "Adding a Bot") delete botData.details;
 
   if (!buttons) delete botData.buttons;
 
