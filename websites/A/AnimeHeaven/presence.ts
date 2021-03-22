@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "822949091776004177"
+    clientId: "816042675626442783"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -18,7 +18,7 @@ presence.on("iFrameData", (videoData: VideoData) => {
 });
 
 const paths = {
-  async "/watch"(presenceData: PresenceData) {
+  async "/watch"(presenceData: PresenceData, buttons: boolean) {
     const title = document.querySelector(".now2 .c a")?.textContent,
       episode = document
         .querySelector(".now2 .c")
@@ -26,6 +26,24 @@ const paths = {
 
     presenceData.details = title || "Unknown title";
     presenceData.state = episode || "Unknown episode";
+
+    if (buttons) {
+      const link = (document.querySelector(
+        ".now2 > div > a"
+      ) as HTMLLinkElement)?.href;
+      presenceData.buttons = [
+        {
+          label: "Current Episode",
+          url: window.location.href
+        },
+        link
+          ? {
+              label: "Episode List",
+              url: link
+            }
+          : undefined
+      ];
+    }
 
     if (iFrameVideo) {
       const video = iFrameVideo;
@@ -49,6 +67,7 @@ const paths = {
   },
   "/search"(presenceData: PresenceData) {
     presenceData.state = "Searching...";
+    presenceData.smallImageKey = "search";
 
     const searchParams = new URLSearchParams(window.location.search);
     let searchQuery = searchParams.get("q");
@@ -82,7 +101,7 @@ const paths = {
     presenceData.details = "Latest Dubbed Anime";
   },
   "/anime-series"(presenceData: PresenceData) {
-    presenceData.details = "Anime";
+    presenceData.details = "Anime Series";
   },
   "/anime-movies"(presenceData: PresenceData) {
     presenceData.details = "Anime Movies";
@@ -102,7 +121,8 @@ const paths = {
 };
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
+  const buttons = await presence.getSetting("buttons"),
+    presenceData: PresenceData = {
       largeImageKey: "logo"
     },
     currentPath = window.location.pathname.toLowerCase();
@@ -113,7 +133,7 @@ presence.on("UpdateData", async () => {
   let playback = true;
   for (const [path, setPresence] of Object.entries(paths)) {
     if (currentPath.startsWith(path)) {
-      const isPlaying = await setPresence(presenceData);
+      const isPlaying = await setPresence(presenceData, buttons);
       if (isPlaying === false) playback = isPlaying;
       break;
     }

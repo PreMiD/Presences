@@ -5,6 +5,12 @@
     "name": "Tenri",
     "id": "138685670448168960"
   },
+  "contributors": [
+    {
+      "name": "Gurr",
+      "id": "446528923535278082"
+    }
+  ],
   "category": "anime",
   "logo": "https://i.imgur.com/jnm6ava.png",
   "thumbnail": "https://i.imgur.com/jy7RZMJ.png",
@@ -17,6 +23,14 @@
   "iframe": true,
   "url": "animeheaven.ru",
   "description": {
-    "en": "animeheaven.ru is a free anime streaming site."
-  }
+    "en": "animeheaven.ru is the best anime's online website, where you can watch anime online completely free. No download, no surveys and only instant premium streaming of anime's."
+  },
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }
