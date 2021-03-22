@@ -38,7 +38,6 @@ const presence = new Presence({
 
     state = undefined;
 
-
     if (path.includes("/home")) {
 
       details = "Browsing:";
@@ -68,10 +67,13 @@ const presence = new Presence({
       startTimestamp = elapsed;
 
     } else if (path.includes("/search")) {
+      
       details = "Searching";
       smallImageKey = "search";
       smallImageText = strings.search;
+    
     } else if (path.includes("/account")) {
+      
       details = "Viewing Account";
 
       if (path.includes("/signin")) {
@@ -143,7 +145,6 @@ const presence = new Presence({
       details = "Watching WCBS Live";
       state = liveTitle;
 
-
       if (path.includes("/cbsn/")) {
 
         details = "Watching CBSN News";
@@ -161,10 +162,9 @@ const presence = new Presence({
 
       }
 
-
     } else if (vidArea && path.includes("/video") || path.includes("/movies")) {
       video = document.querySelector("video");
-      const jsonData = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML)
+      const jsonData = JSON.parse(document.querySelector('[type="application/ld+json"]').innerHTML);
       if (vidArea) {
         if (path.includes("/movies")) {
 
@@ -190,7 +190,6 @@ const presence = new Presence({
           state = movTitle;
           details = "Watching Movie:";
         }
-
 
         if (title) {
           details = title;
@@ -220,7 +219,6 @@ const presence = new Presence({
         }
       }
     }
-
 
     const data: PresenceData = {
       details: details,
