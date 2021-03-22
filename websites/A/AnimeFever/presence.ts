@@ -70,18 +70,6 @@ function getQuery() {
         : {};
   return query;
 }
-function clamp(number: number, lower: number, upper: number) {
-  number = +number;
-  lower = +lower;
-  upper = +upper;
-  lower = lower === lower ? lower : 0;
-  upper = upper === upper ? upper : 0;
-  if (number === number) {
-    number = number <= upper ? number : upper;
-    number = number >= lower ? number : lower;
-  }
-  return number;
-}
 function getAnimeEntity(): AnimeEntity {
   const object = Array.from(
     document.querySelectorAll(`script[type="application/ld+json"]`)
@@ -117,8 +105,12 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
             animeEpisode = getAnimeEpsiodeEntity();
           if (!animeData) return data;
           const videoInstance = document.querySelector<HTMLVideoElement>(
-            `.jw-wrapper video`
-          );
+              `.jw-wrapper video`
+            ),
+            videoTime = context.getTimestamps(
+              videoInstance.currentTime,
+              videoInstance.duration
+            );
           data.state = `${animeEpisode.episodeNumber} - ${
             animeData.alternateName || animeData.name
           }`;
@@ -127,14 +119,13 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
             ? images.PAUSE
             : images.PLAY;
           data.details = strings.viewEpisode;
-          data.endTimestamp =
-            Date.now() +
-            clamp(
-              Math.floor(videoInstance.duration - videoInstance.currentTime),
-              0,
-              videoInstance.duration
-            ) *
-              1000;
+          if (videoInstance.paused) {
+            if (data.startTimestamp) delete data.startTimestamp;
+            if (data.endTimestamp) delete data.endTimestamp;
+          } else {
+            data.startTimestamp = videoTime[0];
+            data.endTimestamp = videoTime[1];
+          }
           return data;
         }
       },
@@ -266,20 +257,22 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
           images: IMAGES
         })
       );
-      return result.then((data) => {
-        if (!data) {
-          presence.setTrayTitle();
-          presence.setActivity({
-            largeImageKey: IMAGES.LOGO,
-            state: localizedStrings.browsing
-          });
-        } else {
-          if (data.details) presence.setActivity(data);
-          if (data.buttons && data.buttons.length === 0) delete data.buttons;
-          else data.buttons = data.buttons?.slice(0, 2);
-        }
-        return data;
-      }).catch(presence.error);
+      return result
+        .then((data) => {
+          if (!data) {
+            presence.setTrayTitle();
+            presence.setActivity({
+              largeImageKey: IMAGES.LOGO,
+              state: localizedStrings.browsing
+            });
+          } else {
+            if (data.details) presence.setActivity(data);
+            if (data.buttons && data.buttons.length === 0) delete data.buttons;
+            else data.buttons = data.buttons?.slice(0, 2);
+          }
+          return data;
+        })
+        .catch(presence.error);
     });
   })(presence);
 })();
