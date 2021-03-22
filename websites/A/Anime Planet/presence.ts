@@ -49,7 +49,8 @@ presence.on("UpdateData", async () => {
         AnimeState: string = await presence.getSetting("AnimeState"),
         MangaDetails: string = await presence.getSetting("MangaDetails"),
         MangaState: string = await presence.getSetting("MangaState"),
-        timestamp: boolean = await presence.getSetting("timestamp");
+        timestamp: boolean = await presence.getSetting("timestamp"),
+        buttons = await presence.getSetting("buttons");
 
   if (!oldLang) {
     oldLang = newLang;
@@ -94,7 +95,6 @@ presence.on("UpdateData", async () => {
         .trim()
         .split("-")
     },
-    buttons = await presence.getSetting("buttons"),
 
     animePlanetPages: {
       [key: string]: PresenceData;
@@ -280,7 +280,7 @@ presence.on("UpdateData", async () => {
       }
 
       content.episode.ep = document.querySelector("h1").textContent
-                          .replace(content.title, "").match(/[1-9]?[0-9]?[0-9]?.?[1-9]?[0-9]?[0-9]/g)[0];
+                                  .replace(content.title, "").match(/[1-9]?[0-9]?[0-9]?.?[1-9]?[0-9]?[0-9]/g)[0];
 
       presenceData.details = MangaDetails
                                   .replace("%title%", content.title)
@@ -289,6 +289,12 @@ presence.on("UpdateData", async () => {
                                   .replace("%title%", content.title)
                                   .replace("%chapter%", `${(await strings).chapter} ${content.episode.ep}`);
   }
+
+    if (!buttons) delete presenceData.buttons;
+    if (!timestamp){
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
+    }
 
     presence.setActivity(presenceData);
 });
