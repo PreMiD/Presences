@@ -20,10 +20,10 @@ const presence = new Presence({
   presence.on("UpdateData", async () => {
 
     vidArea = document.querySelector(".video__player-area");
-    let video: HTMLVideoElement = null,
-    PresenceData: PresenceData = { 
-      largeImageKey: "logo",
-    }
+    let video: HTMLVideoElement = null;
+    const PresenceData: PresenceData = { 
+      largeImageKey: "logo"
+    };
     const href = window.location.href,
       path = window.location.pathname;
 
@@ -219,4 +219,3 @@ const presence = new Presence({
     presence.setActivity(PresenceData, video ? !video.paused : true);
     presence.setTrayTitle(PresenceData.details);
   });
-;
