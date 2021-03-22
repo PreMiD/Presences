@@ -36,7 +36,6 @@ const presence = new Presence({
       elapsed = Math.floor(Date.now() / 1000);
     }
 
-
     state = undefined;
 
 
@@ -186,10 +185,10 @@ const presence = new Presence({
             Math.floor(video.duration)
           ),
           live = timestamps[1] === Infinity;
-        details = "Watching Movie";
+        
         if (movTitle) {
           state = movTitle;
-          details = details;
+          details = "Watching Movie:";
         }
 
 
