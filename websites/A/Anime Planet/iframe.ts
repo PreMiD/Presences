@@ -5,7 +5,6 @@ iframe.on("UpdateData", async () => {
     const video: HTMLVideoElement = document.querySelector("#player_html5_api");
 
     if (video !== undefined && !isNaN(video?.duration)) {
-
       iframe.send({
         iframe_video: {
           currentTime: video?.currentTime,

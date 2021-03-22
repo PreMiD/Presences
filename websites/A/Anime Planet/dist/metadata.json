@@ -1,34 +1,34 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.3",
-    "author": {
-      "name": "SlowLife",
-      "id": "374905512661221377"
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "SlowLife",
+    "id": "374905512661221377"
+  },
+  "service": "Anime Planet",
+  "description": {
+    "en": "Anime and manga recommendations, reviews and more! Keep track of what you've seen in your own anime and manga list and make new friends."
+  },
+  "url": "www.anime-planet.com",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/0qpwOvt.jpg",
+  "thumbnail": "https://i.imgur.com/lYQlABH.png",
+  "color": "#ec554a",
+  "tags": [
+    "anime",
+    "anime-planet"
+  ],
+  "category": "anime",
+  "iframe": true,
+  "settings": [
+    {
+      "multiLanguage": true,
+      "id": "lang"
     },
-    "service": "Anime Planet",
-    "description": {
-      "en": "Anime and manga recommendations, reviews and more! Keep track of what you've seen in your own anime and manga list and make new friends."
-    },
-    "url": "www.anime-planet.com",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/0qpwOvt.jpg",
-    "thumbnail": "https://i.imgur.com/lYQlABH.png",
-    "color": "#ec554a",
-    "tags": [
-      "anime",
-      "anime-planet"
-    ],
-    "category": "anime",
-    "iframe": true,
-    "settings": [
-      {
-        "multiLanguage": true,
-        "id": "lang"
-      },
-      {
-        "id": "buttons",
-        "title": "Show buttons",
-        "icon": "fas fa-compress-arrows-alt",
-        "value": true
-      }
-    ]
-  }
+    {
+      "id": "buttons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
