@@ -145,7 +145,7 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
           if (!context) return null;
           const animeData = getAnimeEntity();
           if (!animeData) return data;
-          data.state = animeData.alternateName || animeData.name;
+          data.state = `${animeData.alternateName || animeData.name}`;
           data.smallImageText = animeData.name;
           data.smallImageKey = images.BROWSE;
           data.details = strings.viewAnime;
@@ -225,7 +225,6 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
     });
 
   (function (app: Presence) {
-    console.log("premid", "init");
     let currentLang: string, localizedStrings: { [key: string]: string };
     const IMAGES = {
       LOGO: "logox1024",
@@ -268,7 +267,6 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
         })
       );
       return result.then((data) => {
-        console.log("premid", data);
         if (!data) {
           presence.setTrayTitle();
           presence.setActivity({
@@ -281,7 +279,7 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
           else data.buttons = data.buttons?.slice(0, 2);
         }
         return data;
-      });
+      }).catch(presence.error);
     });
   })(presence);
 })();
