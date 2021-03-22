@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name": "Bas950",
+    "id": "241278257335500811"
+  },
+  "service": "Codenames",
+  "description": {
+    "en": "The two rival spymasters know the secret identities of 25 agents. Their teammates know the agents only by their CODENAMES. The teams compete to see who can make contact with all of their agents first. Spymasters give one-word clues that can point to multiple words on the board. Their teammates try to guess words of the right color while avoiding those that belong to the opposing team.",
+    "nl": "Twee spymasters is verschillende teams kennen de geheime identiteiten van 25 agents. Hun teamgenoten weten alleen hun CODENAMES. De teams strijden om te zien wie als eerst contact kan leggen met hun agents. Spymasters geven hints van één woord die op meerdere codenames op het bord kunnen wijzen. Hun teamgenoten proberen de woorden van de juiste kleur te raden, maar de agents van de tegenstanders te vermijden."
+  },
+  "url": "codenames.game",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/Bf7TsWG.png",
+  "thumbnail": "https://i.imgur.com/vihPw8r.jpg",
+  "color": "#fcd611",
+  "tags": [
+    "spymasters",
+    "agents",
+    "operatives",
+    "boardgame"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": false
+    }
+  ]
+}

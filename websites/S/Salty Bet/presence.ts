@@ -4,13 +4,14 @@ const presence = new Presence({ clientId: "802246778010730548" }),
     Blue: "div#sbettors2 > span.bluetext > strong",
     estatus: "div#status > span#betstatus",
     tmode: "span#tournament-note",
-    emode: "div#footer-alert",
+    footer: "div#footer-alert",
     betRed: "span#lastbet.dynamic-view > span.redtext",
     betBlue: "span#lastbet.dynamic-view > span.bluetext",
     prize: "span#lastbet.dynamic-view > span.greentext",
     oddsRed: "span#lastbet.dynamic-view > span.redtext:nth-last-child(2)",
     oddsBlue: "span#lastbet.dynamic-view > span.bluetext:nth-last-child(1)",
-    betsView: "span#lastbet.dynamic-view"
+    betsView: "span#lastbet.dynamic-view",
+    balance: "span#balance.dollar"
   };
 
 let fightersCheck: string,
@@ -28,13 +29,13 @@ function getText(selector: string) {
 function getModeImageKey(): string[] {
   if (
     getText(SelectorMap["tmode"]) !== null ||
-    getText(SelectorMap["emode"]).includes("bracket!") ||
-    getText(SelectorMap["emode"]).includes("FINAL")
+    getText(SelectorMap["footer"]).includes("bracket!") ||
+    getText(SelectorMap["footer"]).includes("FINAL")
   ) {
     return ["trofeo", "Tournament Mode"];
   } else if (
-    getText(SelectorMap["emode"]).includes("exhibition") ||
-    getText(SelectorMap["emode"]).includes("Exhibition")
+    getText(SelectorMap["footer"]).includes("exhibition") ||
+    getText(SelectorMap["footer"]).includes("Exhibition")
   ) {
     return ["saltgirl", "Exhibition Mode"];
   } else {
@@ -51,17 +52,105 @@ function getFighters(): string {
   else return "Loading Fighters...";
 }
 
+function isBetOpen(): boolean {
+  return getText(SelectorMap["estatus"]).includes("OPEN!");
+}
+
+function getBetStatus(show: boolean): string {
+  if (!isBetOpen()) {
+    if (!getText(SelectorMap["estatus"]).includes("Payouts")) {
+      if (getText(SelectorMap["betsView"]).includes("|") && show) {
+        if (getText(SelectorMap["betRed"]).includes("$"))
+          return (
+            "$" +
+            abbrNum(+getText(SelectorMap["betRed"]).replace("$", ""), 1) +
+            "(Red) → " +
+            "+$" +
+            abbrNum(+getText(SelectorMap["prize"]).replace("+$", ""), 1) +
+            " | " +
+            getText(SelectorMap["oddsRed"]) +
+            ":" +
+            getText(SelectorMap["oddsBlue"])
+          );
+        else
+          return (
+            "$" +
+            abbrNum(+getText(SelectorMap["betBlue"]).replace("$", ""), 1) +
+            "(Blue) → " +
+            "+$" +
+            abbrNum(+getText(SelectorMap["prize"]).replace("+$", ""), 1) +
+            " | " +
+            getText(SelectorMap["oddsRed"]) +
+            ":" +
+            getText(SelectorMap["oddsBlue"])
+          );
+      } else {
+        if (
+          getText(SelectorMap["oddsRed"]) !== null &&
+          getText(SelectorMap["oddsBlue"]) !== null
+        )
+          return (
+            "Odds: " +
+            getText(SelectorMap["oddsRed"]) +
+            ":" +
+            getText(SelectorMap["oddsBlue"])
+          );
+        else return "Loading...";
+      }
+    } else {
+      if (getText(SelectorMap["estatus"]) !== null) {
+        if (getText(SelectorMap["estatus"]).split("wins!")[0].length <= 32)
+          return getText(SelectorMap["estatus"]).split("wins!")[0] + "wins!";
+        else
+          return (
+            getText(SelectorMap["estatus"])
+              .replace(".", "")
+              .split(" ")
+              .splice(-2)
+              .join(" ") + " wins!"
+          );
+      } else return "Loading...";
+    }
+  } else {
+    if (getText(SelectorMap["estatus"]) !== null)
+      return getText(SelectorMap["estatus"]);
+    else return "Loading...";
+  }
+}
+
+function abbrNum(number: number, decPlaces: number): string {
+  if (number >= 1000) {
+    let abbr: number, letter: string;
+    decPlaces = Math.pow(10, decPlaces);
+    const abbrev = ["k", "m", "b", "t"];
+    for (let i = abbrev.length - 1; i >= 0; i--) {
+      const size = Math.pow(10, (i + 1) * 3);
+      if (size <= number) {
+        number = Math.round((number * decPlaces) / size) / decPlaces;
+        if (number == 1000 && i < abbrev.length - 1) {
+          number = 1;
+          i++;
+        }
+        letter = abbrev[i];
+        abbr = number;
+        break;
+      }
+    }
+    return String(abbr) + letter;
+  } else return String(number);
+}
+
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "salty"
-  };
+  const bet = await presence.getSetting("bet"),
+    buttons = await presence.getSetting("buttons"),
+    presenceData: PresenceData = {
+      largeImageKey: "salty"
+    };
   if (
     document.location.pathname == "/" ||
     document.location.pathname == "/index"
   ) {
     const mode = getModeImageKey();
-    presenceData.smallImageKey = mode[0];
-    presenceData.smallImageText = mode[1];
 
     if (fightersCheck !== getFighters()) {
       presenceData.details = getFighters();
@@ -71,52 +160,48 @@ presence.on("UpdateData", async () => {
       fightersCheck = getFighters() + "‎";
     }
 
-    if (!getText(SelectorMap["estatus"]).includes("OPEN!")) {
-      if (!getText(SelectorMap["estatus"]).includes("Payouts")) {
-        if (getText(SelectorMap["betsView"]).includes("|")) {
-          presenceData.startTimestamp = browsingStamp;
-          if (getText(SelectorMap["betRed"]).includes("$"))
-            presenceData.state =
-              getText(SelectorMap["betRed"]) +
-              "(Red) → " +
-              getText(SelectorMap["prize"]) +
-              " | " +
-              getText(SelectorMap["oddsRed"]) +
-              ":" +
-              getText(SelectorMap["oddsBlue"]);
-          else
-            presenceData.state =
-              getText(SelectorMap["betBlue"]) +
-              "(Blue) → " +
-              getText(SelectorMap["prize"]) +
-              " | " +
-              getText(SelectorMap["oddsRed"]) +
-              ":" +
-              getText(SelectorMap["oddsBlue"]);
-        } else {
-          presenceData.startTimestamp = browsingStamp;
-          if (
-            getText(SelectorMap["oddsRed"]) !== null &&
-            getText(SelectorMap["oddsBlue"]) !== null
-          )
-            presenceData.state =
-              "Odds: " +
-              getText(SelectorMap["oddsRed"]) +
-              ":" +
-              getText(SelectorMap["oddsBlue"]);
-          else presenceData.state = "Loading...";
-        }
-      } else presenceData.state = getText(SelectorMap["estatus"]);
-    } else {
-      presenceData.state = getText(SelectorMap["estatus"]);
-      browsingStamp = Math.floor(Date.now() / 1000);
-    }
+    presenceData.state = getBetStatus(bet);
+
+    presenceData.smallImageKey = mode[0];
+    presenceData.smallImageText = mode[1];
+
+    isBetOpen()
+      ? (browsingStamp = Math.floor(Date.now() / 1000))
+      : (presenceData.startTimestamp = browsingStamp);
+
+    if (buttons)
+      switch (mode[0]) {
+        case "trofeo":
+          presenceData.buttons = [
+            {
+              label: "Tournament Bracket",
+              url: "https://www.saltybet.com/shaker?bracket=1"
+            }
+          ];
+          break;
+        case "saltgirl":
+          presenceData.buttons = [
+            {
+              label: "Exhibition Queue",
+              url: "https://www.saltybet.com/shaker?activerequests=1"
+            }
+          ];
+          break;
+      }
   } else if (document.location.pathname == "/authenticate") {
     presenceData.details = "Signing in...";
-    delete presenceData.startTimestamp;
+    presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname == "/bank") {
     presenceData.details = "Checking Bank";
-    delete presenceData.startTimestamp;
+    presenceData.startTimestamp = browsingStamp;
+  } else if (document.URL == "https://www.saltybet.com/shaker?bracket=1") {
+    presenceData.details = "Checking Tournament Bracket";
+    presenceData.startTimestamp = browsingStamp;
+  } else if (
+    document.URL == "https://www.saltybet.com/shaker?activerequests=1"
+  ) {
+    presenceData.details = "Checking Exhibition Queue";
+    presenceData.startTimestamp = browsingStamp;
   } else {
     presenceData.details = null;
   }

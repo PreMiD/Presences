@@ -9,7 +9,7 @@
     "en": "We are recreating the entire planet in Minecraft."
   },
   "service": "BuildTheEarth",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/XvapvDX.png",
   "thumbnail": "https://i.imgur.com/YzqC7ju.png",
   "color": "#104D92",
@@ -30,6 +30,15 @@
       "title": "Hide map position",
       "icon": "fad fa-user-secret",
       "value": false
+    },
+    {
+      "id": "button",
+      "if": {
+        "privacy": false
+      },
+      "title": "Add Button",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
     }
   ]
 }

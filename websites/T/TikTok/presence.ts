@@ -58,6 +58,12 @@ presence.on("UpdateData", async () => {
       .replace("?", "/")
       .replace("@", "@/")
       .replace("#", ""),
+    currentVidElements = Array.from(document.querySelectorAll("a")).filter(
+      (a) =>
+        a.href?.includes(
+          path.split(path.match("/@/(.*)/video/")?.[0])[1]?.split("/")[0]
+        ) && a.href?.includes(`@${path.match("/@/(.*)/video/")?.[1]}`)
+    ),
     statics: {
       [name: string]: PresenceData;
     } = {
@@ -89,47 +95,21 @@ presence.on("UpdateData", async () => {
       },
       "/@/(.*)/video/": {
         details: (await strings).viewTikTok,
-        state: `${document
-          .querySelector(".user-nickname")
-          ?.textContent.split("·")[0]
-          .trim()} (@${document
-          .querySelector(".user-username")
-          ?.textContent.trim()})`,
-        smallImageKey:
-          document.querySelector(".play-button") === null ? "play" : "pause",
-        buttons: [
-          {
-            label: (await strings).buttonViewTikTok,
-            url: document.URL.split("?")[0]
-          }
-        ]
-      },
-      "v2/@/(.*)/video/": {
-        details: (await strings).viewTikTok,
-        state:
-          (document.querySelectorAll(
-            `a[href="${document.URL.split("#")[1]?.split("/video")[0]}?${
-              document.URL.split("?")[1]?.split("&")[0]
-            }"]`
-          )[0] as HTMLLinkElement)?.title.replace(" Official | TikTok", "") ||
-          (document.querySelectorAll(
-            `a[href="${document.URL.split("#")[1]?.split("/video")[0]}/live/?${
-              document.URL.split("?")[1]?.split("&")[0]
-            }"]`
-          )[0] as HTMLLinkElement)?.title.replace(" Official | TikTok", "") ||
-          (document.querySelectorAll(
-            `a[href="${document.URL.split("#")[1]?.split("/video")[0]}?${
-              document.URL.split("?")[1]?.split("&")[0]
-            }"]`
-          )[1] as HTMLLinkElement)?.title.replace(" Official | TikTok", "") ||
-          (document.querySelectorAll(
-            `a[href="${document.URL.split("#")[1]?.split("/video")[0]}/live/?${
-              document.URL.split("?")[1]?.split("&")[0]
-            }"]`
-          )[1] as HTMLLinkElement)?.title.replace(" Official | TikTok", ""),
-        smallImageKey: document.querySelectorAll("video")[
-          document.querySelectorAll("video")?.length - 1
-        ]?.paused
+        state: `${
+          currentVidElements
+            .find((v) => v.className.includes("video-card"))
+            ?.parentElement.parentElement.parentElement.firstElementChild.children[1].textContent.split(
+              "·"
+            )[0]
+        } (@${
+          currentVidElements.find((v) => v.className.includes("video-card"))
+            ?.parentElement.parentElement.parentElement.firstElementChild
+            .children[0].textContent
+        })`,
+        smallImageKey: (currentVidElements.find((v) =>
+          v.className.includes("video-card")
+        )?.firstElementChild?.firstElementChild
+          ?.firstElementChild as HTMLVideoElement)?.paused
           ? "pause"
           : "play",
         buttons: [

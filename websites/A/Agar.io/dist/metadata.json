@@ -9,7 +9,7 @@
     "en": "The smash hit game! Control your cell and eat other players to grow larger! Play with millions of players around the world and try to become the biggest cell of all!"
   },
   "service": "Agar.io",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/x2QZCXF.png",
   "thumbnail": "https://i.imgur.com/R1Ytqci.png",
   "color": "#ED1C24",
@@ -25,6 +25,12 @@
       "id": "showName",
       "title": "Show username",
       "icon": "fas fa-user",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Presence Buttons",
+      "icon": "fas fa-th-large",
       "value": true
     }
   ]

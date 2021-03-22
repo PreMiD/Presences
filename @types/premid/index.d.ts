@@ -253,7 +253,10 @@ declare class Presence {
    * @param language Language
    * @link https://docs.premid.app/dev/presence/class#getstringsobject
    */
-  getStrings(strings: Object, language?: string): Promise<any>;
+  getStrings<T extends { [K: string]: string }>(
+    strings: T,
+    language?: string
+  ): Promise<T>;
   /**
    * Get letiables from the actual site
    * @param {Array} letiables Array of letiable names to get
