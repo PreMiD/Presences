@@ -98,7 +98,7 @@ presence.on("UpdateData", async () => {
     return;
   }
 
-  if (!privacy) {
+  if (privacy) {
     presenceData.details = (await strings).listening;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     presence.setTrayTitle();
