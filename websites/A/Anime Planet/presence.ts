@@ -59,10 +59,9 @@ presence.on("UpdateData", async () => {
 
     if (!oldHref){
       oldHref = document.location.href;
-      presence.hideSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
     } else if (oldHref !== document.location.href){
       oldHref = document.location.href;
-      presence.hideSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
+      presence.showSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
       oldSettings = false;
     }
 
@@ -209,7 +208,7 @@ presence.on("UpdateData", async () => {
     if (path.includes("/videos/")){
 
       if (!oldSettings){
-        presence.showSetting(["AnimeDetails", "AnimeState"]);
+        presence.hideSetting(["MangaDetails", "MangaState"]);
         oldSettings = true;
       }
 
@@ -261,7 +260,7 @@ presence.on("UpdateData", async () => {
     } else if (path.includes("/chapters/")){
 
       if (!oldSettings){
-        presence.showSetting(["MangaDetails", "MangaState"]);
+        presence.hideSetting(["AnimeDetails", "AnimeState"]);
         oldSettings = true;
       }
 
