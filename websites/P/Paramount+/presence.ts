@@ -30,7 +30,6 @@ const presence = new Presence({
       elapsed = Math.floor(Date.now() / 1000);
     }
 
-
     if (path.includes("/home")) {
 
       presenceData.details = "Browsing:";
