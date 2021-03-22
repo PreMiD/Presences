@@ -23,7 +23,7 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let oldLang: string = null,
-  strings = getStrings();
+    strings = getStrings();
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {

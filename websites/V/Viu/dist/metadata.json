@@ -9,7 +9,7 @@
     "en": "Viu delivers content in different genres from Asia's top content providers with local language subtitles, as well as original production series under 'Viu Original' initiative."
   },
   "service": "Viu",
-  "version": "1.0.3",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/IyPu6Yf.png",
   "thumbnail": "https://i.imgur.com/ThcGMw3.png",
   "color": "#ffbf00",
@@ -42,10 +42,7 @@
       "title": "Viu Logo",
       "value": 0,
       "icon": "fas fa-paint-roller",
-      "values": [
-        "Normal",
-        "With Text"
-      ]
+      "values": ["Normal", "With Text"]
     }
   ]
 }

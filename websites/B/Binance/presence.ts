@@ -3,140 +3,114 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
+function getLastPath(path: string) {
+  const vals = path.split("/");
+  return vals[vals.length - 1];
+}
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
   };
 
-  presenceData.details = "Viewing Page:";
-
-  if (window.location.hostname == "www.binance.com") {
+  if (window.location.host === "www.binance.com") {
     if (window.location.pathname.includes("/markets")) {
-      presenceData.state = "Markets";
-    } else if (window.location.pathname.includes("/my/dashboard")) {
-      presenceData.state = "Dashboard";
-    } else if (window.location.pathname.includes("/my/payment")) {
-      presenceData.state = "Payment";
-    } else if (window.location.pathname.includes("/my/security")) {
-      presenceData.state = "Security";
-    } else if (window.location.pathname.includes("/my/coupon")) {
-      presenceData.state = "Reward Center";
-    } else if (window.location.pathname.includes("/my/task")) {
-      presenceData.state = "Task Center";
-    } else if (window.location.pathname.includes("/my/settings")) {
-      presenceData.state = "Settings";
-    } else if (window.location.pathname.includes("/activity/referral")) {
-      presenceData.state = "Referral";
+      presenceData.details = "Markets";
     } else if (window.location.pathname.includes("/my/wallet/account/main")) {
-      presenceData.state = "Main Wallet";
+      presenceData.details = "Main Wallet";
     } else if (window.location.pathname.includes("/my/wallet/account/margin")) {
-      presenceData.state = "Margin Wallet";
+      presenceData.details = "Margin Wallet";
     } else if (
       window.location.pathname.includes("/my/wallet/account/futures")
     ) {
-      presenceData.state = "Futures Wallet";
+      presenceData.details = "Futures Wallet";
     } else if (window.location.pathname.includes("/my/wallet/account/c2c")) {
-      presenceData.state = "P2P Wallet";
+      presenceData.details = "P2P Wallet";
     } else if (window.location.pathname.includes("/my/wallet/account/saving")) {
-      presenceData.state = "Earn Wallet";
+      presenceData.details = "Earn Wallet";
     } else if (window.location.pathname.includes("/my/wallet/account/mining")) {
-      presenceData.state = "Pool Wallet";
+      presenceData.details = "Pool Wallet";
     } else if (window.location.pathname.includes("/my/wallet")) {
-      presenceData.state = "Wallet";
+      presenceData.details = "Wallet";
     } else if (window.location.pathname.includes("/pos")) {
-      presenceData.state = "Locked Staking";
+      presenceData.details = "Locked Staking";
     } else if (window.location.pathname.includes("/defi-staking")) {
-      presenceData.state = "DeFi Staking";
+      presenceData.details = "DeFi Staking";
     } else if (window.location.pathname.includes("/broker")) {
-      presenceData.state = "Broker";
+      presenceData.details = "Broker";
     } else if (window.location.pathname.includes("/about")) {
-      presenceData.state = "About";
+      presenceData.details = "About";
     } else if (window.location.pathname.includes("/career")) {
-      presenceData.state = "Binance Careers";
+      presenceData.details = "Binance Careers";
     } else if (window.location.pathname.includes("/press")) {
-      presenceData.state = "Binance Press Center";
+      presenceData.details = "Binance Press Center";
     } else if (window.location.pathname.includes("/community")) {
-      presenceData.state = "Binance Community";
+      presenceData.details = "Binance Community";
     } else if (window.location.pathname.includes("/earn")) {
-      presenceData.state = "Binance Earn";
+      presenceData.details = "Binance Earn";
     } else if (window.location.pathname.includes("/blog")) {
-      presenceData.state = "Binance Blog";
+      presenceData.details = "Binance Blog";
     } else if (window.location.pathname.includes("/support")) {
-      presenceData.state = "Binance Support";
+      presenceData.details = "Binance Support";
     } else if (window.location.pathname.includes("/terms")) {
-      presenceData.state = "Terms of Use";
+      presenceData.details = "Terms of Use";
     } else if (window.location.pathname.includes("/privacy")) {
-      presenceData.state = "Privacy Policy";
+      presenceData.details = "Privacy Policy";
+    } else if (window.location.pathname.includes("/convert")) {
+      presenceData.details = "Convert";
     } else if (window.location.pathname.includes("/leveraged-tokens")) {
-      presenceData.state = "Leveraged Tokens";
+      presenceData.details = "Leveraged Tokens";
     } else if (window.location.pathname.includes("/loan")) {
-      presenceData.state = "Crypto Loans";
+      presenceData.details = "Crypto Loans";
     } else if (window.location.pathname.includes("/swap/liquidity")) {
-      presenceData.state = "Liquid Swap";
+      presenceData.details = "Liquid Swap";
+    } else if (window.location.pathname.includes("/multipleChart")) {
+      presenceData.details = "Charts";
     } else if (
       window.location.pathname.includes("/futuresng-activity/battle")
     ) {
-      presenceData.state = "Futures Battle";
+      presenceData.details = "Futures Battle";
     } else if (
       window.location.pathname.includes("/futuresng-activity/leaderboard")
     ) {
-      presenceData.state = "Futures Leaderboard";
-    } else if (window.location.pathname.includes("/multipleChart")) {
-      presenceData.details = "Viewing Charts...";
-    } else if (window.location.pathname.includes("/convert")) {
-      presenceData.details = "Converting Crypto:";
-
-      const inputCrypto = document
-          .querySelector("div.css-9wgib6")
-          .textContent.trim(),
-        outputCrypto = document
-          .querySelector("div.css-9wgib6")
-          .textContent.trim();
-
-      presenceData.state = `${inputCrypto} to ${outputCrypto}`;
+      presenceData.details = "Futures Leaderboard";
     } else if (window.location.pathname.includes("/trade")) {
-      const tradeType =
-          document.querySelector("div.css-109wawx")?.textContent?.trim() ||
-          document.querySelector("div.css-119y1m9")?.textContent?.trim(),
-        tradePair = document.querySelector("div.css-mzoqhr").textContent.trim();
-
-      presenceData.details = `Trading on ${tradeType}:`;
-      presenceData.state = tradePair;
-    } else if (
-      window.location.pathname.includes("/futures") ||
-      window.location.pathname.includes("/delivery")
-    ) {
-      const tradeType = document
-          .querySelector("div.css-4mvl8x > a:nth-child(1)")
-          .textContent.trim(),
-        tradeLeverage = document
-          .querySelector("div.css-4mvl8x > a:nth-child(2)")
-          .textContent.trim(),
-        tradePair = document
-          .querySelector("div.css-17i092f > h1")
-          .textContent.trim(),
-        tradeTerm = document
-          .querySelector("div.css-17i092f > div")
-          .textContent.trim();
-
-      presenceData.details = `Trading on ${tradeType} ${tradeLeverage}:`;
-      presenceData.state = `${tradePair} ${tradeTerm}`;
+      presenceData.details = "Trading";
+      if (getLastPath(window.location.pathname).includes("_")) {
+        presenceData.state =
+          "Exchange: " +
+          getLastPath(window.location.pathname).replace("_", "/").toUpperCase();
+      }
+    } else if (window.location.pathname.includes("/futures")) {
+      presenceData.details = "Futures Trading";
+      if (getLastPath(window.location.pathname).includes("_")) {
+        presenceData.state =
+          "Exchange: " +
+          getLastPath(window.location.pathname).replace("_", "/").toUpperCase();
+      }
+    } else if (window.location.pathname.includes("/delivery")) {
+      presenceData.details = "Delivery Trading";
+      if (getLastPath(window.location.pathname).includes("_")) {
+        presenceData.state = getLastPath(window.location.pathname)
+          .replace("_", "/")
+          .toUpperCase();
+      }
     } else {
       presenceData.details = "Browsing...";
     }
-  } else if (window.location.hostname.startsWith("voptions")) {
-    presenceData.state = "Vanilla Options";
-  } else if (window.location.hostname.startsWith("cloud")) {
-    presenceData.state = "Binance Cloud";
-  } else if (window.location.hostname.startsWith("pool")) {
-    presenceData.state = "Binance Pool";
-  } else if (window.location.hostname.startsWith("academy")) {
-    presenceData.state = "Binance Academy";
-  } else if (window.location.hostname.startsWith("launchpad")) {
-    presenceData.state = "Binance Launchpad";
-  } else if (window.location.hostname.startsWith("research")) {
-    presenceData.state = "Binance Research";
+  } else if (window.location.host.startsWith("voptions")) {
+    presenceData.details = "Vanilla Options";
+  } else if (window.location.host.startsWith("cloud")) {
+    presenceData.details = "Binance Cloud";
+  } else if (window.location.host.startsWith("pool")) {
+    presenceData.details = "Binance Pool";
+  } else if (window.location.host.startsWith("academy")) {
+    presenceData.details = "Binance Academy";
+  } else if (window.location.host.startsWith("launchpad")) {
+    presenceData.details = "Binance Launchpad";
+  } else if (window.location.host.startsWith("research")) {
+    presenceData.details = "Binance Research";
   } else {
     presenceData.details = "Browsing...";
   }

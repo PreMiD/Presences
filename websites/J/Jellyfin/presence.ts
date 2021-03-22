@@ -439,17 +439,13 @@ async function handleVideoPlayback(): Promise<void> {
     return;
   }
 
-  const videoPlayerElem = document.getElementsByTagName(
-    "video"
-  )[0] as HTMLVideoElement;
+  const videoPlayerElem = document.getElementsByTagName("video")[0] as HTMLVideoElement;
 
   // this variables content will be replaced in details and status properties on presenceData
   let title, subtitle;
 
   // title on the header
-  const headerTitleElem = document.querySelector(
-    "h3.pageTitle"
-  ) as HTMLHeadingElement;
+  const headerTitleElem = document.querySelector("h3.pageTitle") as HTMLHeadingElement;
 
   // media metadata
   let mediaInfo: string | MediaInfo;

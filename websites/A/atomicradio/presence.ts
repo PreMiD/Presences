@@ -124,7 +124,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, true);
       return;
   }
-
+ 
   const playBar = document.getElementById("PlayBar"),
     playerButtonState = document.getElementById("Player_Play_Button_State"),
     channel = String(
