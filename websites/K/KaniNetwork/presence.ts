@@ -17,23 +17,23 @@ presence.on("UpdateData", async () => {
   } else {
     const path = window.location.pathname.replace('.php','');
     if (path.endsWith("commandes")) {
-      presenceData.details = "Viewing a page: (KaniShiel)";
+      presenceData.details = "Viewing a page:";
       presenceData.state = "Commands";
     } else if (path.endsWith("informations")) {
-      presenceData.details = "Viewing a page: (KaniShiel)";
+      presenceData.details = "Viewing a page:";
       presenceData.state = "Informations";
     } else if (path.endsWith("roles")) {
       presenceData.smallImageKey = "roles";
-      presenceData.details = "Viewing a page: (KaniShiel)";
+      presenceData.details = "Viewing a page:";
       presenceData.state = "Werewolf roles";
     } else if (path.endsWith("credits_kani")) {
-      presenceData.details = "Viewing a page: (KaniShiel)";
+      presenceData.details = "Viewing a page:";
       presenceData.state = "Credits";
     } else if (path.endsWith("maintenance")) {
-      presenceData.details = "Viewing a page: (KaniShiel)";
+      presenceData.details = "Viewing a page:";
       presenceData.state = "Maintenance";
     } else if (path.endsWith("contact_kani")) {
-      presenceData.details = "Viewing a page: (KaniShiel)";
+      presenceData.details = "Viewing a page:";
       presenceData.state = "Contact";
     } else if (path.endsWith("choix_serv")) {
       presenceData.smallImageKey = "dashboard";
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
         ).textContent;
       }
     } else {
-      presenceData.details = "Viewing a page: (KaniShiel)";
+      presenceData.details = "Viewing a page:";
       presenceData.state = "Home";
     }
   }
