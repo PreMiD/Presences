@@ -4,40 +4,42 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      smallImageKey: "logo",
+      smallImageText: "KaniShiel"
     },
     browsingStamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
     sprivacy = await presence.getSetting("super-privacy");
   presenceData.startTimestamp = browsingStamp;
-  if (sprivacy) {
+  if (sprivacy || window.location.pathname === ':8080') {
     presenceData.details = "Browsing";
   } else {
-    const PATH = window.location.pathname.replace('.php','');
-    if (PATH.endsWith("commandes")) {
+    const path = window.location.pathname.replace('.php','');
+    if (path.endsWith("commandes")) {
       presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Commands";
-    } else if (PATH.endsWith("informations")) {
+    } else if (path.endsWith("informations")) {
       presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Informations";
-    } else if (PATH.endsWith("roles")) {
+    } else if (path.endsWith("roles")) {
       presenceData.smallImageKey = "roles";
       presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Werewolf roles";
-    } else if (PATH.endsWith("credits_kani")) {
+    } else if (path.endsWith("credits_kani")) {
       presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Credits";
-    } else if (PATH.endsWith("maintenance")) {
+    } else if (path.endsWith("maintenance")) {
       presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Maintenance";
-    } else if (PATH.endsWith("contact_kani")) {
+    } else if (path.endsWith("contact_kani")) {
       presenceData.details = "Viewing a page: (KaniShiel)";
       presenceData.state = "Contact";
-    } else if (PATH.endsWith("choix_serv")) {
+    } else if (path.endsWith("choix_serv")) {
       presenceData.smallImageKey = "dashboard";
       presenceData.details = "Using the KaniShiel's dashboard:";
       presenceData.state = "Choosing a server";
-    } else if (PATH.startsWith("/dashboard")) {
+    } else if (path.startsWith("/dashboard")) {
       presenceData.smallImageKey = "dashboard";
       if (privacy) {
         presenceData.details = "Editing a server";
