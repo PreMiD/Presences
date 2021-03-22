@@ -30,7 +30,7 @@ const presence = new Presence({
       elapsed = Math.floor(Date.now() / 1000);
     }
 
-    presenceData.state = undefined;
+    delete presenceData.state;
 
     if (path.includes("/home")) {
 
@@ -38,7 +38,7 @@ const presence = new Presence({
       presenceData.state = "Home Page";
       presenceData.startTimestamp = elapsed;
 
-    } else if (path.includes("/shows") && document.querySelector(".subnav__items--tuneInfo") == null) {
+    } else if (path.includes("/shows") && document.querySelector(".subnav__items--tuneInfo") === null) {
 
       presenceData.details = "Browsing:";
       presenceData.state = "Viewing Shows";
@@ -70,7 +70,7 @@ const presence = new Presence({
       
       presenceData.details = "Viewing Account";
 
-      if (path.includes("/signin")) presenceData.details = null;
+      if (path.includes("/signin")) delete presenceData.details;
 
     } else if (path.includes("/user-profile/whos-watching")) {
       
@@ -199,7 +199,7 @@ const presence = new Presence({
           (await strings).pause :
           (await strings).play;
         presenceData.startTimestamp = live ? elapsed : timestamps[0];
-        presenceData.endTimestamp = live ? null : timestamps[1];
+        if (live) presenceData.endTimestamp = timestamps[1];
 
         if (video.paused) {
           delete presenceData.startTimestamp;
