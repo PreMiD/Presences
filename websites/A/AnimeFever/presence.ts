@@ -53,7 +53,6 @@ interface AggregateRating {
 }
 
 interface ExecutionArguments {
-  showWatch?: boolean;
   strings: LocalizedStrings;
   images: { [key: string]: string };
   [key: string]: unknown;
@@ -265,11 +264,7 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
         context.exec(app, presenceData, {
           strings: localizedStrings,
           query,
-          images: IMAGES,
-          showWatch: await app
-            .getSetting("show_button_watching")
-            .then((x) => !!x)
-            .catch(() => true)
+          images: IMAGES
         })
       );
       return result.then((data) => {
