@@ -20,18 +20,6 @@
     "iframe": true,
     "settings": [
       {
-        "id": "sSI",
-        "title": "Show Site Info",
-        "icon": "fas fa-info",
-        "value": true
-      },
-      {
-        "id": "sTE",
-        "title": "Show Time Elapsed",
-        "icon": "fas fa-clock",
-        "value": true
-      },
-      {
         "id": "sVT",
         "title": "Show Video Time",
         "icon": "fas fa-clock",
