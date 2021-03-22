@@ -40,14 +40,12 @@ const presence = new Presence({
             }
             }
         );
-        
-
 
     const browsingStamp = Math.floor(Date.now() / 1000), path = document.location.pathname;
     let title, link, episode;
     presence.on("UpdateData", async () => {
-        const buttons = await presence.getSetting("buttons"), videoTime = await presence.getSetting("sVT");
-        const data: PresenceData = {
+        const buttons = await presence.getSetting("buttons"), videoTime = await presence.getSetting("sVT"),
+        data: PresenceData = {
         largeImageKey: "logo"
         }, timestamps = presence.getTimestamps(
             Math.floor(currentTime),
@@ -88,13 +86,12 @@ const presence = new Presence({
         }
         else if(path.includes("/detail/")){
             title = document.querySelector("body > div.notmain > div.maindark > div.infobox > div.infoboxc > div.infodesbox > div.infodes").textContent;
-            data.details = "Viewing:"
+            data.details = "Viewing:";
             data.state = title;
             data.startTimestamp = browsingStamp;
         }
         else if (path.includes("/watch/")) {
-            title = (document.querySelector("#main > div.now2 > div > a") as HTMLTextAreaElement);
-            episode = (document.querySelector("#main > div.now2 > div") as HTMLTextAreaElement);
+            title = (document.querySelector("#main > div.now2 > div") as HTMLTextAreaElement);
             link = (document.querySelector("#main > div.now2 > div > a") as HTMLLinkElement).href;
             if (title !== null) {
                 data.state = title.innerText;
@@ -109,9 +106,6 @@ const presence = new Presence({
                     url: link
                     }
                     ];
-                }
-                else{
-                    console.log("No Buttons");
                 }
                 if (
                     iFrameVideo == true &&
