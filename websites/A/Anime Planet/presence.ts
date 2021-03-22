@@ -1,98 +1,109 @@
 const presence = new Presence({
     clientId: "818135576074387507"
-}),
-    getStrings = async () =>
-      presence.getStrings(
-        {
-          play: "general.playing",
-          pause: "general.paused",
-          browse: "general.browsing",
-          viewPage: "general.viewPage",
-          viewEpisode: "general.buttonViewEpisode",
-          viewSeries: "general.buttonViewSeries",
-          viewAnime: "general.viewAnime",
-          chapter: "general.chapter",
-          readingAricle: "general.readingArticle",
-          reading: "general.reading",
-          viewProfile: "general.viewProfile",
-          anime: "general.anime",
-          searchFor: "general.searchFor",
-          viewManga: "general.viewManga",
-          buttonViewProfile: "general.buttonViewProfile"
-      }, await presence.getSetting('lang')),
-      startsTime = Math.floor(Date.now() / 1000);
+  }),
+  getStrings = async () =>
+    presence.getStrings(
+      {
+        play: "general.playing",
+        pause: "general.paused",
+        browse: "general.browsing",
+        viewPage: "general.viewPage",
+        viewEpisode: "general.buttonViewEpisode",
+        viewSeries: "general.buttonViewSeries",
+        viewAnime: "general.viewAnime",
+        chapter: "general.chapter",
+        readingAricle: "general.readingArticle",
+        reading: "general.reading",
+        viewProfile: "general.viewProfile",
+        anime: "general.anime",
+        searchFor: "general.searchFor",
+        viewManga: "general.viewManga",
+        buttonViewProfile: "general.buttonViewProfile"
+      },
+      await presence.getSetting("lang")
+    ),
+  startsTime = Math.floor(Date.now() / 1000);
 
 let strings = getStrings(),
-    oldLang: string = null,
-    playback: boolean,
-    duration: number,
-    currentTime: number,
-    paused: boolean,
-    oldHref: string,
-    oldSettings = false;
+  oldLang: string = null,
+  playback: boolean,
+  duration: number,
+  currentTime: number,
+  paused: boolean,
+  oldHref: string,
+  oldSettings = false;
 
 presence.on("iFrameData", (data: IFrameData) => {
-    playback = data.iframe_video?.duration !== undefined ? true : false;
+  playback = data.iframe_video?.duration !== undefined ? true : false;
 
-    if (playback){
-      duration = data.iframe_video.duration;
-      currentTime = data.iframe_video.currentTime;
-      paused = data.iframe_video.paused;
-    }
-});    
+  if (playback) {
+    duration = data.iframe_video.duration;
+    currentTime = data.iframe_video.currentTime;
+    paused = data.iframe_video.paused;
+  }
+});
 
 presence.on("UpdateData", async () => {
-    const newLang: string = await presence.getSetting("lang"),
-          AnimeDetails: string = await presence.getSetting("AnimeDetails"),
-          AnimeState: string = await presence.getSetting("AnimeState"),
-          MangaDetails: string = await presence.getSetting("MangaDetails"),
-          MangaState: string = await presence.getSetting("MangaState"),
-          timestamp: boolean = await presence.getSetting("timestamp");
+  const newLang: string = await presence.getSetting("lang"),
+        AnimeDetails: string = await presence.getSetting("AnimeDetails"),
+        AnimeState: string = await presence.getSetting("AnimeState"),
+        MangaDetails: string = await presence.getSetting("MangaDetails"),
+        MangaState: string = await presence.getSetting("MangaState"),
+        timestamp: boolean = await presence.getSetting("timestamp");
 
-    if (!oldLang){
-      oldLang = newLang;
-    } else if (oldLang !== newLang){
-      oldLang = newLang;
-      strings = getStrings();
-    }
+  if (!oldLang) {
+    oldLang = newLang;
+  } else if (oldLang !== newLang) {
+    oldLang = newLang;
+    strings = getStrings();
+  }
 
-    if (!oldHref){
-      oldHref = document.location.href;
-      presence.hideSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
-    } else if (oldHref !== document.location.href){
-      oldHref = document.location.href;
-      presence.hideSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
-      oldSettings = false;
-    }
+  if (!oldHref){
+    oldHref = document.location.href;
+    presence.hideSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
+  } else if (oldHref !== document.location.href){
+    oldHref = document.location.href;
+    presence.hideSetting(["AnimeDetails", "AnimeState", "MangaDetails", "MangaState"]);
+    oldSettings = false;
+  }
 
-    let presenceData: PresenceData = {
-      largeImageKey: "animep_logo",
-      details: (await strings).browse,
-      smallImageKey: "reading",
-      startTimestamp: startsTime
-    };
+  let presenceData: PresenceData = {
+    largeImageKey: "animep_logo",
+    details: (await strings).browse,
+    smallImageKey: "reading",
+    startTimestamp: startsTime
+  };
 
-    const path = document.location.pathname,
-      content = {
-        title: (document.querySelector('h2>a') || document.querySelector('h1>a') || document.querySelector('h1'))?.textContent.trim(),
-        episode: {
-            title: "",
-            ep: ""
-          },
-        titleAndEpisode: document.querySelector('h2.sub')?.textContent
-                    .replace(document.querySelector('h2.sub > a')?.textContent, "")
-                    .trim().split("-")
+  const path = document.location.pathname,
+    content = {
+      title: (
+        document.querySelector("h2>a") ||
+        document.querySelector("h1>a") ||
+        document.querySelector("h1")
+      )?.textContent.trim(),
+      episode: {
+        title: "",
+        ep: ""
+      },
+      titleAndEpisode: document
+        .querySelector("h2.sub")
+        ?.textContent.replace(
+          document.querySelector("h2.sub > a")?.textContent,
+          ""
+        )
+        .trim()
+        .split("-")
     },
-      buttons = await presence.getSetting("buttons"),
+    buttons = await presence.getSetting("buttons"),
 
     animePlanetPages: {
-      [key: string]: PresenceData
+      [key: string]: PresenceData;
     } = {
       "/characters/top-loved": {
         details: (await strings).viewPage,
         state: content.title
       },
-      "/characters/all":{
+      "/characters/all": {
         details: (await strings).viewPage,
         state: "Characters"
       },
@@ -106,7 +117,9 @@ presence.on("UpdateData", async () => {
       },
       "/characters/": {
         details: "Viewing character:",
-        state: `${content.title} • ${document.querySelector('table > tbody > tr > td')?.textContent}`,
+        state: `${content.title} • ${
+          document.querySelector("table > tbody > tr > td")?.textContent
+        }`,
         buttons: [
           {
             label: "View Character",
@@ -123,7 +136,7 @@ presence.on("UpdateData", async () => {
             url: document.baseURI
           }
         ]
-      }, 
+      },
       "/forum/threads/": {
         details: "Reading thread:",
         state: content.title,
@@ -134,7 +147,7 @@ presence.on("UpdateData", async () => {
           }
         ]
       },
-      "/forum/":  {
+      "/forum/": {
         details: (await strings).viewPage,
         state: "Forums"
       },
@@ -148,12 +161,15 @@ presence.on("UpdateData", async () => {
       },
       "reviews.php":  {
         details: (await strings).viewPage,
-        state: `${content.title} • ${location.search.endsWith("anime") ? "Anime" : "Manga"}`
+        state: `${content.title} • ${
+          location.search.endsWith("anime") ? "Anime" : "Manga"
+        }`
       },
-      "/users/":  {
+      "/users/": {
         details: (await strings).viewProfile,
-        state: document.querySelector('h1')?.textContent.trim(),
-        smallImageText: document.querySelector('p:nth-child(2) > a').textContent,
+        state: document.querySelector("h1")?.textContent.trim(),
+        smallImageText: document.querySelector("p:nth-child(2) > a")
+          .textContent,
         buttons: [
           {
             label: (await strings).buttonViewProfile,
@@ -246,10 +262,9 @@ presence.on("UpdateData", async () => {
           },
           {
             label: (await strings).viewSeries,
-            url: document.querySelector<ElementHref>('h2.sub > a').href
+            url: document.querySelector<HTMLElement>('h2.sub > a').href
           }
         ];
-
         if (paused){
           delete presenceData.startTimestamp;
           delete presenceData.endTimestamp;
@@ -259,7 +274,6 @@ presence.on("UpdateData", async () => {
         presenceData.state = content.title;
       }
     } else if (path.includes("/chapters/")){
-
       if (!oldSettings){
         presence.showSetting(["MangaDetails", "MangaState"]);
         oldSettings = true;
@@ -274,34 +288,15 @@ presence.on("UpdateData", async () => {
       presenceData.state = MangaState
                                   .replace("%title%", content.title)
                                   .replace("%chapter%", `${(await strings).chapter} ${content.episode.ep}`);
-
-      presenceData.smallImageText = (await strings).reading;
-
-      presenceData.buttons = [
-        {
-          label: "Read Chapter",
-          url: document.baseURI
-        }
-      ];
-    }
-
-    if (!buttons) delete presenceData.buttons;
-    if (!timestamp) {
-      delete presenceData.startTimestamp;
-      delete presenceData.endTimestamp;
-    }
+  }
 
     presence.setActivity(presenceData);
 });
 
-interface ElementHref extends HTMLElement {
-  href: string
-}
-
 interface IFrameData {
   iframe_video: {
-    duration: number
-    currentTime: number
-    paused: boolean
-  }
+    duration: number;
+    currentTime: number;
+    paused: boolean;
+  };
 }
