@@ -41,54 +41,45 @@ const presence = new Presence({
             }
         );
 
-    const browsingStamp = Math.floor(Date.now() / 1000), path = document.location.pathname;
-    let title, link;
+    let browsingStamp = Math.floor(Date.now() / 1000), path = document.location.pathname, title, link;
     presence.on("UpdateData", async () => {
-        const buttons = await presence.getSetting("buttons"), videoTime = await presence.getSetting("sVT"),
-        data: PresenceData = {
-        largeImageKey: "logo"
-        }, timestamps = presence.getTimestamps(
+        const buttons = await presence.getSetting("buttons"),
+        timestamps = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
         );
-
+        let data: PresenceData = {
+            largeImageKey: "logo",
+            startTimestamp: browsingStamp
+        }; 
         if(path == "/animeheaven.eu" || path == "/"){
             data.details = "Viewing Homepage";
-            data.startTimestamp = browsingStamp;
-        }
+            }
         else if (path == "/anime-list"){
             data.details = "Viewing Anime List";
-            data.startTimestamp = browsingStamp;
         }
         else if(path == "/dubbed-anime"){
             data.details = "Viewing Dubbed Anime";
-            data.startTimestamp = browsingStamp;
         }
         else if(path == "/anime-series"){
             data.details = "Viewing Anime Series";
-            data.startTimestamp = browsingStamp;
         }
         else if(path == "/anime-movies"){
             data.details = "Viewing Anime Movies";
-            data.startTimestamp = browsingStamp;
         }
         else if(path == "/ongoing"){
             data.details = "Viewing Ongoing Series";
-            data.startTimestamp = browsingStamp;
         }
         else if(path == "/popular"){
             data.details = "Viewing Popular";
-            data.startTimestamp = browsingStamp;
         }
         else if(path == "/schedule"){
             data.details = "Viewing Schedule";
-            data.startTimestamp = browsingStamp;
         }
         else if(path.includes("/detail/")){
             title = document.querySelector("body > div.notmain > div.maindark > div.infobox > div.infoboxc > div.infodesbox > div.infodes").textContent;
             data.details = "Viewing:";
             data.state = title;
-            data.startTimestamp = browsingStamp;
         }
         else if (path.includes("/watch/")) {
             title = (document.querySelector("#main > div.now2 > div") as HTMLTextAreaElement);
@@ -116,13 +107,11 @@ const presence = new Presence({
                     if (!paused) {
                     data.details = "Watching:";
                     data.smallImageKey = paused ? "pause" : "play";
-                    if (videoTime) {
-                        data.smallImageText = paused
+                    data.smallImageText = paused
                         ? (await strings).pause
                         : (await strings).play;
-                        data.startTimestamp = timestamps[0];
-                        data.endTimestamp = timestamps[1];
-                    }
+                    data.startTimestamp = timestamps[0];
+                    data.endTimestamp = timestamps[1];
                     } else if (paused) {
                     delete data.startTimestamp;
                     delete data.endTimestamp;
@@ -151,11 +140,9 @@ const presence = new Presence({
             
         }
         if (data.details == null) {
-            //This will fire if you do not set presence details
             presence.setTrayTitle();
             presence.setActivity();
         } else {
-            //This will fire if you set presence details
             presence.setActivity(data);
         }
     });
