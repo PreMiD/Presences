@@ -124,12 +124,11 @@ const paths = {
 presence.on("UpdateData", async () => {
   const buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      state: "Browsing...",
+      startTimestamp: browsingStamp
     },
     currentPath = window.location.pathname.toLowerCase();
-
-  presenceData.state = "Browsing...";
-  presenceData.startTimestamp = browsingStamp;
 
   let playback = true;
   for (const [path, setPresence] of Object.entries(paths)) {
