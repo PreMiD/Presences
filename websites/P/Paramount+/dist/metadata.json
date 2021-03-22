@@ -5,8 +5,8 @@
       "name": "IF6+",
       "id": "713439286552297556"
     },
-    "category": "socials",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/3/36/Paramount%2B_2021.svg",
+    "category": "videos",
+    "logo": "https://i.imgur.com/VWrl85V.jpg",
     "thumbnail": "https://i.imgur.com/s70veYl.png",
     "version": "1.0.0",
     "color": "#6c8fd0",
@@ -23,6 +23,6 @@
       "paramountplus.com"
     ],
     "description": {
-      "en": "Paramount+ is an American subscription video on-demand over-the-top streaming service. This service contains original Paramount+ original and even includes shows from Nick, Nick. Jr and Nick Toons."
+      "en": "Paramount+ is an American subscription video on-demand over-the-top streaming service. This service contains Paramount+ originals and even includes shows from Nick, Nick. Jr and Nick Toons."
     }
   }
