@@ -96,13 +96,13 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#main_bg > div:nth-child(5) > div > div.video-info-left > h1"
       );
-      if (title != null) {
+      if (title !== null) {
         presenceData.state = (title as HTMLTextAreaElement).innerText;
         if (
           iFrameVideo == true &&
           !isNaN(duration) &&
-          title != null &&
-          video != null
+          title !== null &&
+          video !== null
         ) {
           if (!paused) {
             presenceData.details = "Watching:";
@@ -121,7 +121,7 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "pause";
             presenceData.smallImageText = (await strings).pause;
           }
-        } else if (iFrameVideo == null && isNaN(duration) && title != null) {
+        } else if (iFrameVideo == null && isNaN(duration) && title !== null) {
           presenceData.details = "Viewing:";
           presenceData.state = (title as HTMLTextAreaElement).innerText;
           presenceData.startTimestamp = browsingStamp;
@@ -162,7 +162,15 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presence.error("Can't read page. Set up a conditional.");
     }
-  } else {
+
+  } else if(document.querySelector("#main_bg > div:nth-child(5) > div > div.section-header > h3").textContent == " Result search"){
+    presence.info("Searching");
+    presenceData.details = "Searching:";
+    presenceData.state = document.location.href.replace("https://vidcloud9.com/search.html?keyword=","").split("%20").join(" ");
+    presenceData.smallImageKey = "search";
+    presenceData.smallImageText = "Searching";
+  } //If it can't get the page it will output an error
+   else {
     presenceData.details = null;
     presence.info("Info is off.");
   }

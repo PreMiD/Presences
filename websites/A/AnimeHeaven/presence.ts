@@ -110,6 +110,9 @@ const presence = new Presence({
                     }
                     ];
                 }
+                else{
+                    console.log("No Buttons");
+                }
                 if (
                     iFrameVideo == true &&
                     !isNaN(duration) &&
@@ -138,11 +141,20 @@ const presence = new Presence({
         }
         else if(path == "/search"){
             search = (document.querySelector("body > div.header > div > div.searchbox > form > input.searchinput") as HTMLInputElement).value;
-            data.details = "Searching:";
-            data.state = search;
-            data.startTimestamp = browsingStamp;
-            data.smallImageKey = "search";
-            data.smallImageText = "Searching";
+            if(document.querySelector("#error")  !== null){
+                data.details = "Error:";
+                data.state = "Unable to search item.";
+                data.smallImageKey = "search";
+                data.smallImageText = "Error";
+            }
+            else{
+                data.details = "Searching:";
+                data.state = search;
+                data.startTimestamp = browsingStamp;
+                data.smallImageKey = "search";
+                data.smallImageText = "Searching";
+            }
+            
         }
         if (data.details == null) {
             //This will fire if you do not set presence details
