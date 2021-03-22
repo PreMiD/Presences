@@ -4,14 +4,8 @@
     "name": " .•` KIΛRΛ `•. ",
     "id": "586905336850677760"
   },
-  "contributors": [
-    {
-      "name": "ΛΚΘRΛ",
-      "id": "387655649934311427"
-    }
-  ],
   "service": "Codewars",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "color": "#9c1414",
   "description": {
     "en": "Codewars is where developers achieve code mastery through challenge. Train on kata in the dojo and reach your highest potential."
