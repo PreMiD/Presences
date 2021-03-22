@@ -1,8 +1,7 @@
 const presence = new Presence({
   clientId: "821433038335377418"
-});
-
-  const strings = presence.getStrings({
+}), 
+  strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     live: "presence.activity.live",
@@ -23,8 +22,7 @@ const presence = new Presence({
     let video: HTMLVideoElement = null;
     const PresenceData: PresenceData = { 
       largeImageKey: "logo"
-    };
-    const href = window.location.href,
+    }, href = window.location.href,
       path = window.location.pathname;
 
     if (href !== oldUrl) {
