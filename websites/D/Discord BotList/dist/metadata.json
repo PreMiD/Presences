@@ -29,12 +29,14 @@
     {
       "id": "buttons",
       "title": "Show Buttons",
-      "value": true
+      "value": true,
+      "icon": "fas fa-compress-arrows-alt"
     },    
     {
       "id": "submitP",
       "title": "Show Submit Page",
-      "value": true
+      "value": true,
+      "icon": "fas fa-plus"
     }
   ]
 }
