@@ -41,7 +41,7 @@ const presence = new Presence({
             }
         );
 
-    const browsingStamp = Math.floor(Date.now() / 1000), path = document.location.pathname
+    const browsingStamp = Math.floor(Date.now() / 1000), path = document.location.pathname;
     let title, link;
     presence.on("UpdateData", async () => {
         const buttons = await presence.getSetting("buttons"),
