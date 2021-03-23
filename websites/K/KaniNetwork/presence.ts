@@ -2,10 +2,12 @@ const presence = new Presence({
   clientId: "801742167608787015"
 });
 
+/*
 function LookingKaniShiel(presenceData: PresenceData) {
   presenceData.smallImageKey = "logo";
   presenceData.smallImageText = "KaniShiel";
 }
+*/
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { 
@@ -22,11 +24,9 @@ presence.on("UpdateData", async () => {
     if (path.endsWith("commandes")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Commands";
-      LookingKaniShiel(presenceData)
     } else if (path.endsWith("informations")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Informations";
-      LookingKaniShiel(presenceData)
     } else if (path.endsWith("roles")) {
       presenceData.smallImageKey = "roles";
       presenceData.details = "Viewing a page:";
