@@ -15,7 +15,7 @@ presence.on("UpdateData", () => {
   presenceData.buttons = [
 	{
 		label: 'Tune into TFM',
-		url: 'https://truckers.fm'
+		url: 'https://truckers.fm/listen'
 	}
   ];
 	
@@ -24,8 +24,8 @@ presence.on("UpdateData", () => {
 	presenceData.buttons.push({
 		label: 'Listen on Spotify',
 		url: spotifyUrl
-	})
-  };
+	});
+  }
 
   presence.setActivity(presenceData);
   presence.setTrayTitle();
