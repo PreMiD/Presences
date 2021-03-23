@@ -1,8 +1,6 @@
 const presence = new Presence({
   clientId: "640914619082211338"
-});
-const browsingStamp = Math.floor(Date.now() / 1000);
-
+}), browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "tfmlogo",
@@ -19,7 +17,7 @@ presence.on("UpdateData", () => {
 		label: 'Tune into TFM',
 		url: 'https://truckers.fm'
 	}
-  ]		
+  ];
 	
   const spotifyUrl = document.querySelector(".player-artist-text a").getAttribute('href');	
   if(spotifyUrl) {
@@ -27,7 +25,7 @@ presence.on("UpdateData", () => {
 		label: 'Listen on Spotify',
 		url: spotifyUrl
 	})
-  }	
+  };
 
   presence.setActivity(presenceData);
   presence.setTrayTitle();
