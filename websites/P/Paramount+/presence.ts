@@ -11,7 +11,6 @@ const presence = new Presence({
   let title: string,
     seasonEpi: string,
     movTitle: string,
-    vidArea: Element,
     vidMdTl: Element,
     elapsed: number = undefined,
     oldUrl: string = undefined;
@@ -170,7 +169,7 @@ const presence = new Presence({
         }
 
         const content = seasonEpi,
-          timestamps = presence.getTimestampsfromMedia(video)
+          timestamps = presence.getTimestampsfromMedia(video);
           
         if (movTitle) {
           presenceData.state = movTitle;
