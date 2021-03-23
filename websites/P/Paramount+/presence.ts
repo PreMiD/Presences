@@ -18,7 +18,7 @@ const presence = new Presence({
 
   presence.on("UpdateData", async () => {
 
-    vidArea = document.querySelector(".video__player-area");
+    const vidArea = document.querySelector(".video__player-area");
     let video: HTMLVideoElement = null;
     const presenceData: PresenceData = { 
       largeImageKey: "logo"
@@ -170,10 +170,7 @@ const presence = new Presence({
         }
 
         const content = seasonEpi,
-          timestamps = presence.getTimestamps(
-            Math.floor(video.currentTime),
-            Math.floor(video.duration)
-          );
+          timestamps = presence.getTimestampsfromMedia(video)
           
         if (movTitle) {
           presenceData.state = movTitle;
