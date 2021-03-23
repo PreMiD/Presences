@@ -1,7 +1,7 @@
 const presence = new Presence({
   clientId: "640914619082211338"
 });
-let browsingStamp = Math.floor(Date.now() / 1000);
+const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -13,7 +13,6 @@ presence.on("UpdateData", () => {
   presenceData.state = document.querySelector(".live-name").textContent
     ? document.querySelector(".live-name").textContent
     : 'AutoDJ';
-  console.log(presenceData)	
 	
   presenceData.buttons = [
 	{
