@@ -165,8 +165,6 @@ presence.on("UpdateData", async () => {
           url: document.baseURI
         }];
 
-        presenceData.startTimestamp = startTimestamp;
-
         return { title };
       } else {
         PageStatus = "WatchingAnime";
@@ -199,8 +197,6 @@ presence.on("UpdateData", async () => {
     "/anime/"(){
       PageStatus = "viewAnime";
 
-      const title = document.querySelector('h1 > div')?.textContent;
-
       presenceData.smallImageKey = "search";
       presenceData.startTimestamp = startTimestamp;
 
@@ -209,9 +205,7 @@ presence.on("UpdateData", async () => {
         url: document.baseURI
       }];
 
-      presenceData.startTimestamp = startTimestamp;
-
-      return { title };
+      return { title: document.querySelector('h1 > div')?.textContent };
     },
     "/browse/"(){
       const SearchQuery = (new URLSearchParams(document.location.search)).get("search");
