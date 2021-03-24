@@ -1,21 +1,21 @@
 const presence = new Presence({
     clientId: "823524858746241085"
 }),
-  startTimestamp = Math.floor(Date.now() / 1000);
+  startTimestamp = Math.floor(Date.now() / 1000),
+  pagesData: {
+    [key: string]: {
+      title?: string,
+      episode?: string,
+      day?: string,
+      SearchQuery?: string
+    }
+  } = {};
 
 let playback: boolean,
     duration: number,
     currentTime: number,
     paused: boolean,
-    PageStatus: string,
-    pagesData: {
-      [key: string]: {
-        title?: string,
-        episode?: string,
-        day?: string,
-        SearchQuery?: string
-      }
-    } = {};
+    PageStatus: string;
 
 presence.on("iFrameData", (data: IFrameData) => {
   playback = data.iframe_video?.duration !== undefined ? true : false;
@@ -125,7 +125,7 @@ presence.on("UpdateData", async () => {
         setTo: "Seaching",
         enabled: await presence.getSetting("searchQuery")
       }]
-    },
+    }
   },
 
   pages = {
@@ -143,7 +143,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "search";
       presenceData.startTimestamp = startTimestamp;
 
-      return { day }
+      return { day };
     },
     "/stream/"(){
       const timestamps = presence.getTimestamps(currentTime, duration),
@@ -214,7 +214,7 @@ presence.on("UpdateData", async () => {
       return { title };
     },
     "/browse/"(){
-      const SearchQuery = (new URLSearchParams(document.location.search)).get("search")
+      const SearchQuery = (new URLSearchParams(document.location.search)).get("search");
 
       if (SearchQuery){
         PageStatus = "Searching";
