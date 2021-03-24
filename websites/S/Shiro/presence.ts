@@ -147,7 +147,7 @@ presence.on("UpdateData", async () => {
     },
     "/stream/"(){
       const timestamps = presence.getTimestamps(currentTime, duration),
-            title = document.querySelector("span:nth-child(3) > a > span")?.textContent.trim() || "Loading",
+            title = document.querySelector("span:nth-child(3) > a > span")?.textContent.trim(),
             episode = (document.querySelector(
               "div.entry-content > h2"
             )?.textContent.replace(title, "").match(/[1-9]?[0-9]?[0-9]/g) || ["0"])[0];
@@ -199,7 +199,7 @@ presence.on("UpdateData", async () => {
     "/anime/"(){
       PageStatus = "viewAnime";
 
-      const title = document.querySelector('h1 > div')?.textContent || "Loading...";
+      const title = document.querySelector('h1 > div')?.textContent;
 
       presenceData.smallImageKey = "search";
       presenceData.startTimestamp = startTimestamp;
@@ -253,7 +253,7 @@ presence.on("UpdateData", async () => {
           let replaced = condition.setTo;
 
           for (const replace of condition.replace.toRepalce) 
-          replaced = replaced.replace(replace.text, (pagesData[condition.page]||{})[replace.with]);
+          replaced = replaced.replace(replace.text, ((pagesData[condition.page]||{})[replace.with]||"Loading..."));
 
           presenceData[setting as "state" | "details"] = replaced;
         } else if (condition.delete && !condition.enabled) delete presenceData[setting as keyof PresenceData];
