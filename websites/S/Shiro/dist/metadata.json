@@ -33,25 +33,25 @@
         },
         {
             "id": "ViewAnime",
-            "title": "Viewing Anime row1",
+            "title": "View Anime row1",
             "icon": "fas fa-pen-square",
             "value": "Viewing anime:"
         },
         {
             "id": "ViewAnime2",
-            "title": "Viewing Anime row2",
+            "title": "View Anime row2",
             "icon": "fas fa-pen-square",
             "value": "%title%"
         },
         {
             "id": "ViewSchedule",
-            "title": "Viewing Schedule row2",
+            "title": "View Schedule row2",
             "icon": "fas fa-pen-square",
             "value": "Viewing schedule of:"
         },
         {
             "id": "ViewSchedule2",
-            "title": "Viewing Schedule row2",
+            "title": "View Schedule row2",
             "icon": "fas fa-pen-square",
             "value": "%day%"
         },
