@@ -47,7 +47,7 @@
             "id": "ViewSchedule",
             "title": "Viewing Schedule row2",
             "icon": "fas fa-pen-square",
-            "value": "View schedule of:"
+            "value": "Viewing schedule of:"
         },
         {
             "id": "ViewSchedule2",
