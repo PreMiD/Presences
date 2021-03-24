@@ -29,7 +29,6 @@ presence.on("iFrameData", (data: IFrameData) => {
 
 presence.on("UpdateData", async () => {
   PageStatus = "";
-
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   },
