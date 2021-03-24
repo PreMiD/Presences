@@ -28,6 +28,8 @@ presence.on("iFrameData", (data: IFrameData) => {
 });
 
 presence.on("UpdateData", async () => {
+  PageStatus = "";
+
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   },
@@ -79,7 +81,7 @@ presence.on("UpdateData", async () => {
         }
       }, {
         page: "ViewSchedule",
-        setTo: await presence.getSetting("ViewSchedule"),
+        setTo: await presence.getSetting("ViewSchedule2"),
         replace: {
           toRepalce: [{
             text: "%day%",
@@ -112,7 +114,7 @@ presence.on("UpdateData", async () => {
         }
       }, {
         page: "ViewSchedule",
-        setTo: await presence.getSetting("ViewSchedule2"),
+        setTo: await presence.getSetting("ViewSchedule"),
         replace: {
           toRepalce: [{
             text: "%day%",
