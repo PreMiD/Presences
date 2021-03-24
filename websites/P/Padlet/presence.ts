@@ -6,16 +6,14 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   // Presence Data
   const timestamp = presence.getTimestamps(Date.now(), 0),
+    routes = document.location.href.replace(document.location.search, '').split("/").splice(3).join('/'),
+    topicName = document.querySelector('.surface-title .title-heading')?.textContent.trim(),
+    topicDescription = document.querySelector('.surface-title .title-description')?.textContent.trim(),
+    appBarTitle = document.querySelector('.app-bar-headline .app-bar-title')?.textContent.trim(),
     data: PresenceData = {
       largeImageKey: "padlet_image",
       startTimestamp: timestamp[ 0 ]
     };
-
-  // Setup Routes & Query (For Features)
-  const routes = document.location.href.replace(document.location.search, '').split("/").splice(3).join('/'),
-    topicName = document.querySelector('.surface-title .title-heading')?.textContent.trim(),
-    topicDescription = document.querySelector('.surface-title .title-description')?.textContent.trim(),
-    appBarTitle = document.querySelector('.app-bar-headline .app-bar-title')?.textContent.trim();
 
   // padlet.com/features
   if (routes.startsWith('features')) {
