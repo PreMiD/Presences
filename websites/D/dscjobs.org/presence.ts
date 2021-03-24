@@ -19,23 +19,26 @@ presence.on("UpdateData", async () => {
   presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname == "/") {
-    presenceData.details = "Browsing in mainpage...";
+    presenceData.details = "Browsing in Home...";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/profiles") {
-    presenceData.details = "Browsing through";
-    presenceData.state = "top upvoted profiles...";
+  } else if (document.location.pathname == "/moderators") {
+    presenceData.details = "Searching in";
+    presenceData.state = "Most voted moderators";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/plans") {
-    presenceData.details = "Browsing through";
-    presenceData.state = "Premium plans";
+  } else if (document.location.pathname == "/profile") {
+    presenceData.details = "At Profile";
+    presenceData.state = "Author profile page";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/customise") {
-    presenceData.details = "Edit profile";
+  } else if (document.location.pathname == "/create") {
+    presenceData.details = "Creating Curriculum Vitae";
     presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/p/")) {
+  }else if (document.location.pathname == "/settings") {
+    presenceData.details = "Modifying Curriculum Vitae";
+    presence.setActivity(presenceData);
+  } else if (document.location.pathname.includes("/cv/")) {
     const nameofprofile = document.location.pathname.split("/");
-    presenceData.details = "Viewing profile";
-    presenceData.state = "dsc.bio/" + nameofprofile[2];
+    presenceData.details = "Viewing Curriculum Vitae";
+    presenceData.state = "dscjobs.org/" + nameofprofile[2];
     presence.setActivity(presenceData);
   }
   presence.setActivity(presenceData);
