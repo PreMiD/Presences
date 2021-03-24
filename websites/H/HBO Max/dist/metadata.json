@@ -1,8 +1,8 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
-    "name": "DooMLorD",
-    "id": "654398152513945611"
+    "name": "PreMiD",
+    "id": "503557087041683458"
   },
   "service": "HBO Max",
   "description": {
@@ -14,7 +14,7 @@
     "play.hbomax.com",
     "help.hbomax.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/UxH7DDE.png",
   "thumbnail": "https://i.imgur.com/d1bktD4.jpg",
   "color": "#c600ff",

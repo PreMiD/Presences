@@ -1,8 +1,18 @@
 {
   "author": {
-    "name": "TheSlowly",
-    "id": "505071508851523599"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Encrypted",
+      "id": "564434085708038144"
+    },
+    {
+      "name": "TheSlowly",
+      "id": "505071508851523599"
+    }
+  ],
   "service": "Change",
   "description": {
     "en": "Change the world",
@@ -11,7 +21,7 @@
     "pt_BR": "Mude o mundo"
   },
   "url": "www.change.org",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/BwMtgWb.jpg",
   "thumbnail": "https://i.imgur.com/bjNVk3Z.png",
   "color": "#FF0000",

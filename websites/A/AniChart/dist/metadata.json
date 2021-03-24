@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "Zen",
+    "id": "725331428962992131"
+  },
+  "service": "AniChart",
+  "description": {
+    "en": "Find, track, and share upcoming seasonal anime shows and movies on AniChart.net"
+  },
+  "url": "anichart.net",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/8jwNL3C.png",
+  "thumbnail": "https://i.imgur.com/C1DeRp2.png",
+  "color": "#ffffff",
+  "tags": [
+    "anime",
+    "other"
+  ],
+  "category": "anime"
+}

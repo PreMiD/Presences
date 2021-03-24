@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "NMW03",
+    "id": "534099893979971584"
+  },
+  "url": "www.hackerrank.com",
+  "description": {
+    "en": "Market–leading technical interview platform to identify and hire developers with the right skills."
+  },
+  "service": "HackerRank",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/4Q8nbiR.png",
+  "thumbnail": "https://i.imgur.com/eBvlYZU.png",
+  "color": "#23BB5B",
+  "tags": [
+    "coding"
+  ],
+  "category": "other"
+}

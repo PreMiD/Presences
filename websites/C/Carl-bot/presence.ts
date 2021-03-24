@@ -12,9 +12,12 @@ presence.on("UpdateData", () => {
 
   if (document.location.hostname == "carl.gg") {
     if (document.location.pathname.startsWith("/dashboard/")) {
-      const title = document.querySelector(
-        "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
-      ).textContent;
+      const title = document
+        .querySelector(
+          "body > div.app > header > ul.navbar-nav.ml-auto.d-none.d-sm-inline-block > div > div"
+        )
+        .textContent.split("Jump to")[0]
+        .trim();
       presenceData.details = "Managing the settings of:";
       presenceData.state = title;
     } else if (document.location.pathname.startsWith("/servers")) {
@@ -26,10 +29,12 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (presenceData.details == null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
+  if (document.location.hostname === "docs.carl.gg") {
+    presenceData.smallImageKey = "reading";
+    presenceData.details = "Documentation";
+
+    presenceData.state = document.querySelector("h1").textContent;
   }
+
+  presence.setActivity(presenceData);
 });

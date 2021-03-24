@@ -1,16 +1,14 @@
 const presence = new Presence({
-  clientId: "620072679139180575"
-});
-
-const elapsed = Math.floor(Date.now() / 1000);
+    clientId: "808667100319186964"
+  }),
+  elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "gmail-logo"
-  };
-
-  const path = window.location.href;
-  const emailCheck = window.location.href.split("/").length == 7 ? false : true;
+      largeImageKey: "logo"
+    },
+    path = window.location.href,
+    emailCheck = window.location.href.split("/").length == 7 ? false : true;
 
   if (emailCheck) {
     if (path.endsWith("#category/social")) {
@@ -26,7 +24,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing Promotions Mails";
       presenceData.startTimestamp = elapsed;
     } else if (path.match("/#label/")) {
-      var labelname = document.querySelector("head > title").textContent;
+      const labelname = document.querySelector("head > title").textContent;
       presenceData.details = "In the Label: ";
       presenceData.state = labelname.replace('"', "").split('" - ')[0];
       presenceData.startTimestamp = elapsed;

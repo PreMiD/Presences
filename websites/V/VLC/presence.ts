@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "721748388143562852"
+    clientId: "760591393281277983"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -37,8 +37,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -69,10 +69,9 @@ presence.on("UpdateData", async () => {
     document.querySelector(".footer").textContent.includes("VLC")
   ) {
     const data: PresenceData = {
-      largeImageKey: "vlc"
-    };
-
-    const timestamps = getTimestamps(Number(media.time), Number(media.length));
+        largeImageKey: "vlc"
+      },
+      timestamps = getTimestamps(Number(media.time), Number(media.length));
 
     if (media.state !== prev) {
       prev = media.state;
@@ -329,7 +328,7 @@ const getStatus = setLoop(function () {
             clearInterval(getStatus);
             media.state = "stopped";
             alert(
-              "Something went wrong with the request, please contact DooMLorD#2792 at https://discord.premid.app with the following infos (RES: " +
+              "Something went wrong with the request, please contact ririxi#2721 at https://discord.premid.app with the following infos (RES: " +
                 req.status +
                 " / S: " +
                 req.readyState +
@@ -340,9 +339,8 @@ const getStatus = setLoop(function () {
       }
     };
 
-    req.onerror = function (e): void {
+    req.onerror = function (): void {
       media.state = "stopped";
-      console.log(e);
     };
 
     req.open(
@@ -357,7 +355,7 @@ const getStatus = setLoop(function () {
     );
     req.send();
   }
-}, (navigator.userAgent.toLowerCase().indexOf("firefox") > -1 ? 5 : 2) * 1000); // if you lower it, you may as well fry the CPU
+}, (navigator.userAgent.toLowerCase().indexOf("firefox") > -1 ? 5 : 2) * 1000);
 
 interface MediaObj {
   time?: string;

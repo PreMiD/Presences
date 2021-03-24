@@ -1,5 +1,5 @@
 const presence = new Presence({
-    clientId: "721740741570986016"
+    clientId: "760586876854992926"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -20,32 +20,30 @@ function getTimestamps(
   audioDuration: string
 ): Array<number> {
   const aT = getTime(audioTime.split(":").reverse()),
-    aD = getTime(audioDuration.split(":").reverse());
-
-  const endTime = Math.floor(Date.now() / 1000) - aT + aD;
+    aD = getTime(audioDuration.split(":").reverse()),
+    endTime = Math.floor(Date.now() / 1000) - aT + aD;
 
   return [Math.floor(Date.now() / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "anlg"
-  };
-
-  const playback: boolean = document.querySelector("anghami-player") != null;
+      largeImageKey: "anlg"
+    },
+    playback: boolean = document.querySelector("anghami-player") != null;
 
   if (playback) {
     const selectors: NodeListOf<Node> = document.querySelectorAll(
-      ".duration-text"
-    );
-    const current: string =
+        ".duration-text"
+      ),
+      current: string =
         (selectors[0] && selectors[0].textContent.trim()) || "0:0",
       length: string =
         (selectors[1] && selectors[1].textContent.trim()) || "0:0",
-      timestamps = getTimestamps(current, length);
-
-    const playing: boolean =
-      document.querySelector("anghami-player anghami-icon.icon.pause") != null;
+      timestamps = getTimestamps(current, length),
+      playing: boolean =
+        document.querySelector("anghami-player anghami-icon.icon.pause") !=
+        null;
     let selector: Node = document.querySelector(
       "anghami-player .action-title .trim"
     );

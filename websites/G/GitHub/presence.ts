@@ -160,6 +160,12 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.details;
+  } else if (document.location.pathname.startsWith("/codespaces")) {
+    presenceData.state = "Browsing codespaces...";
+
+    presenceData.startTimestamp = browsingStamp;
+
+    delete presenceData.details;
   } else if (document.location.pathname.indexOf(search)) {
     presenceData.details = "Searching for: ";
 
@@ -206,18 +212,21 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/blob/") &&
       repositoryLocation2.length > 0
     ) {
-      let repLoc2: string;
+      const filePath: HTMLElement = document.querySelector("#blob-path");
 
-      repositoryLocation2.forEach((item: HTMLElement) => {
-        repLoc2 = item.innerText;
-      });
       presenceData.details =
         "Looking at a file from " +
         repositoryAuthor.innerText +
         "/" +
         repositoryName.innerText;
 
-      presenceData.state = repLoc2;
+      presenceData.state =
+        filePath.querySelector("details") !== null
+          ? filePath.textContent
+              .replace(filePath.querySelector("details").textContent, "")
+              .trim()
+              .slice(0, -1)
+          : filePath.textContent.trim();
 
       presenceData.startTimestamp = browsingStamp;
     } else if (

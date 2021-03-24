@@ -30,7 +30,6 @@ const presence = new Presence({
     "episode:series:altname": "#Viewport a > div > span > span"
   };
 
-// checkmate javascript, once again
 function pathHandler(string: string): boolean {
   return document.location.pathname.toLowerCase().includes(string);
 }
@@ -68,24 +67,11 @@ function nodeSelector(
   );
 }
 
-/**
- * Get Timestamps
- * @param {Number} currentTime Current video time seconds
- * @param {Number} duration Video duration seconds
- */
-function getTimestamps(currentTime: number, duration: number): Array<number> {
-  if (!currentTime || !duration) return [undefined, undefined];
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - currentTime + duration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 setInterval(async function () {
   if (document.readyState !== "complete") return;
 
   const data: PresenceData = {
-      largeImageKey: "lg",
-      startTimestamp: timer
+      largeImageKey: "lg"
     },
     video: HTMLVideoElement = document.querySelector("video");
 
@@ -134,13 +120,6 @@ setInterval(async function () {
             ?.textContent ||
           undefined;
 
-        const timestamps = getTimestamps(
-          video?.currentTime > 0 ? Math.floor(video.currentTime) : undefined,
-          video && !isNaN(video.duration)
-            ? Math.floor(video.duration)
-            : undefined
-        );
-
         Object.assign(data, {
           details:
             nodeSelector(
@@ -157,9 +136,7 @@ setInterval(async function () {
           state:
             epnumber && epname
               ? `${epnumber} • ${epname}`
-              : epnumber || epname || "Episode",
-          startTimestamp: timestamps[0] || timer,
-          endTimestamp: timestamps[1] || undefined
+              : epnumber || epname || "Episode"
         });
 
         if (video?.currentTime && video?.currentTime > 0)
@@ -184,13 +161,6 @@ setInterval(async function () {
             "14px"
           )?.textContent;
 
-        const timestamps = getTimestamps(
-          video?.currentTime > 0 ? Math.floor(video.currentTime) : undefined,
-          video && !isNaN(video.duration)
-            ? Math.floor(video.duration)
-            : undefined
-        );
-
         Object.assign(data, {
           details:
             nodeSelector(selectors["feature:name"], "street2_medium", "28px")
@@ -202,9 +172,7 @@ setInterval(async function () {
             pathHandler(":extra:") || pathHandler("/extra/")
               ? "Extra"
               : "Feature"
-          }${desc ? " • " + desc : ""}`,
-          startTimestamp: timestamps[0] || timer,
-          endTimestamp: timestamps[1] || undefined
+          }${desc ? " • " + desc : ""}`
         });
 
         if (video?.currentTime && video?.currentTime > 0)
@@ -228,14 +196,5 @@ setInterval(async function () {
       }
     }
   }
-
-  if (video && video.paused) {
-    data.startTimestamp = timer;
-    delete data.endTimestamp;
-  }
-
-  const rpc = data.details || data.state ? true : false;
-  const bool = data.startTimestamp || data.endTimestamp || !rpc ? true : false;
-
-  presence.setActivity(rpc ? data : { startTimestamp: timer }, bool);
-}, 2000);
+  presence.setActivity(data);
+});

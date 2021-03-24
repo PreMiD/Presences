@@ -1,9 +1,11 @@
-const presence = new Presence({
-  clientId: "658192386899312651"
-});
-let presenceData: PresenceData;
+const presence = new Presence({ clientId: "658192386899312651" }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  presenceData: PresenceData = {
+    largeImageKey: "buk-logo",
+    startTimestamp: browsingStamp
+  };
 
-function makeRPC(title, category): void {
+function makeRPC(title: string, category: string): void {
   if (category == "kategori") {
     presenceData.details = "Bir kategoriye göz atıyor:";
     presenceData.state = title;
@@ -18,22 +20,6 @@ function makeRPC(title, category): void {
 
 presence.on("UpdateData", () => {
   const page = document.location.pathname;
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  var pageray = [
-    "/kategori",
-    "/author",
-    "/ara",
-    "/page",
-    "/",
-    "",
-    "/wp-login",
-    "/wp-admin",
-    "/etiket"
-  ];
-  presenceData = {
-    largeImageKey: "buk-logo",
-    startTimestamp: browsingStamp
-  };
 
   // Homepage
   if (page.length <= 1 || page.startsWith("/page")) {
@@ -43,20 +29,20 @@ presence.on("UpdateData", () => {
 
   // Reading an article
   if (
-    document.getElementsByClassName("entry-title").length == 1 &&
-    pageray.some((pagey) => !page.includes(pagey))
+    document.querySelector("#content > div:nth-child(2) > article > div > h1")
+      ?.textContent
   ) {
-    const title = document.getElementsByClassName("entry-title")[0];
     presenceData.details = "Bir haber okuyor...";
-    presenceData.state = title ? title.textContent : "Bilinmeyen";
+    presenceData.state = document.querySelector(
+      "#content > div:nth-child(2) > article > div > h1"
+    ).textContent;
   }
 
   if (page.startsWith("/kategori") && page !== "/kategori") {
-    const category = document.querySelector("#blog-entries > header > h1")
-      ? document
-          .querySelector("#blog-entries > header > h1")
-          .textContent.substring(10)
-      : "Bilinmeyen";
+    const category =
+      document.querySelector(
+        "#content > div.page-title.hu-pad.group > h1 > span"
+      )?.textContent ?? "Bilinmeyen";
     makeRPC(category, "kategori");
   }
 
@@ -70,14 +56,37 @@ presence.on("UpdateData", () => {
     makeRPC(category, "etiket");
   }
 
-  if (page.startsWith("/author")) {
-    const author = document.querySelector("#blog-entries > header > h1 > span");
-    const authort = author ? author.textContent : "Bilinmeyen";
-    makeRPC(authort, "author");
+  if (page.startsWith("/yazar")) {
+    const author =
+      document.querySelector(
+        "#content > div.page-title.hu-pad.group > h1 > span"
+      )?.textContent ?? "Bilinmeyen";
+    makeRPC(author, "author");
+  }
+
+  if (new URLSearchParams(window.location.search).get("s")) {
+    presenceData.details = "Arama sonuçları:";
+    presenceData.state = new URLSearchParams(window.location.search).get("s");
   }
 
   if (page.startsWith("/ara")) {
     presenceData.details = "Arama bölümünde...";
+  }
+
+  if (
+    ["/kunye", "/iletisim", "/gizlilik-politikasi"].some((pac) =>
+      page.startsWith(pac)
+    )
+  ) {
+    if (
+      !document.querySelector("#content > div.page-title.hu-pad.group > h1")
+        ?.textContent
+    )
+      return;
+    presenceData.details = "Bir sayfaya göz atıyor...";
+    presenceData.state = document.querySelector(
+      "#content > div.page-title.hu-pad.group > h1"
+    )?.textContent;
   }
 
   if (presenceData.details == null) {

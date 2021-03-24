@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.0",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -9,16 +10,12 @@
     "tr": "yabancıdizi, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir.",
     "zh_CN": "yabancıdizi 是土耳其最大国外电视节目秀提供商之一"
   },
-  "url": "yabancidizi.vip",
-  "version": "1.1.5",
-  "logo": "https://premid.is-inside.me/zi1WNlTV.png",
-  "thumbnail": "https://premid.is-inside.me/dEtgRixU.png",
+  "url": "yabancidizi.pw",
+  "version": "1.1.6",
+  "logo": "https://i.imgur.com/L51zWz0.png",
+  "thumbnail": "https://i.imgur.com/G8um9Ng.png",
   "color": "#14161d",
-  "tags": [
-    "video",
-    "tvshows",
-    "turkish"
-  ],
+  "tags": ["video", "tvshows", "turkish"],
   "iframe": true,
   "category": "videos"
 }

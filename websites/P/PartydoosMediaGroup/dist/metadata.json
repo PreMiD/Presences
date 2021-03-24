@@ -1,14 +1,20 @@
 {
   "author": {
-    "name": "Alanexei ✔",
-    "id": "163319338403627008"
+    "name": "Striker",
+    "id": "215509157837537280"
   },
+  "contributors": [
+    {
+      "name": "Alanexei ✔",
+      "id": "163319338403627008"
+    }
+  ],
   "service": "PartydoosMediaGroup",
   "description": {
     "en": "An upcoming site which will have services such as web hosting in cloud environments."
   },
   "url": "partydoosmediagroup.weebly.com",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/Qejrged.png",
   "thumbnail": "https://i.imgur.com/3vMtIJb.png",
   "color": "#F97D00",

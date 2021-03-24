@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Zen",
+    "id": "725331428962992131"
+  },
+  "service": "Otakudesu",
+  "description": {
+    "en": "Download, watch and stream anime with Indonesian subtitle and with 240p, 360p, 480p, & 720p resolution with MP4 format & MKV along with the batch."
+  },
+  "url": "otakudesu.moe",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/RrlRhIJ.png",
+  "thumbnail": "https://i.imgur.com/wHfvj2a.png",
+  "color": "#ffffff",
+  "tags": [
+    "anime",
+    "videos",
+    "streaming",
+    "other"
+  ],
+  "category": "anime"
+}

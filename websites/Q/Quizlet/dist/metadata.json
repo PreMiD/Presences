@@ -9,7 +9,7 @@
     "en": "Quizlet makes simple learning tools that let you study anything. Start learning today with flashcards, games and learning tools — all for free."
   },
   "service": "Quizlet",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/5K8iXcX.png",
   "thumbnail": "https://i.imgur.com/Bnxt3z4.png",
   "color": "#4257B2",
@@ -18,5 +18,13 @@
     "study"
   ],
   "category": "other",
-  "iframe": true
+  "iframe": true,
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Display Join Party Button",
+      "icon": "fas fa-plus-square",
+      "value": true
+    }
+  ]
 }

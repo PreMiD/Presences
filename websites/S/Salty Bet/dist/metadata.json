@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Rare Akuma ☆",
+    "id": "250044591686811669"
+  },
+  "url": "www.saltybet.com",
+  "description": {
+    "en": "SaltyBet (also known as Salty's Dream Cast Casino) is a betting site where users may bet fake money on the outcomes of A.I.-controlled M.U.G.E.N battles."
+  },
+  "service": "Salty Bet",
+  "version": "2.1.1",
+  "logo": "https://i.imgur.com/0GEzMXM.png",
+  "thumbnail": "https://i.imgur.com/thkngQH.png",
+  "color": "#00adef",
+  "tags": [
+    "games",
+    "video",
+    "entertainment",
+    "fighting-games",
+    "betting-game",
+    "streaming",
+    "mugen"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "bet",
+      "title": "Show Bet Status",
+      "icon": "fad fa-dollar-sign",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
