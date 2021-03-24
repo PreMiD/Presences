@@ -2,42 +2,92 @@ const presence = new Presence({
   clientId: "760981805695762441"
 });
 
-// Timestamp
-function getTimeStamp() {
-  return Math.floor(Date.now() / 1000);
-}
-
 // Variables 
-let isPadlet: boolean,
-  PadletTitle: string;
-
 presence.on("UpdateData", async () => {
   // Presence Data
-  const PadletElement = document.querySelector('#surface-header .surface-title .title-heading'),
+  const 
+    timestamp = presence.getTimestamps(Date.now(), 0),
     data: PresenceData = {
-      largeImageKey: "padlet_image"
-    };
+      largeImageKey: "padlet_image",
+      startTimestamp: timestamp[0],
+    }
 
   // Setup Routes & Query (For Features)
-  // Routes = document.location.href.replace(document.location.search, '').split("/").splice(3);
-  // Queries = Object.fromEntries(document.location.search.slice(1).split("&").map((k, i, a) => {
-  //   const item: string[] = k.replace(/\[(.*?)\]+/g, '').split('='),
-  //     Keys = a.map(i => i.replace(/\[(.*?)\]+/g, '').split('=')).filter(i => i[0] === item[0]),
-  //     Values = Keys.map(i => i[1]);
-  //   if (Keys.length === 1) return item;
-  //   else return [item[0], Values];
-  // }));
+  const 
+    routes = document.location.href.replace(document.location.search, '').split("/").splice(3).join('/'),
+    topicName = document.querySelector('.surface-title .title-heading')?.textContent.trim(),
+    topicDescription = document.querySelector('.surface-title .title-description')?.textContent.trim(),
+    appBarTitle = document.querySelector('.app-bar-headline .app-bar-title')?.textContent.trim()
 
-  PadletTitle = PadletElement && PadletElement.textContent;
-  isPadlet = !!PadletElement;
+  // padlet.com/features
+  if (routes.startsWith('features')) {
+    data.details = 'Product Features'
+  }
+  // padlet.com/premium
+  else if (routes.startsWith('premium')) {
+    data.details = 'Premium'
+  }
+  // padlet.com/support
+  else if (routes.startsWith('support')) {
+    data.details = 'Support'
 
-  if (isPadlet) {
-    data.details = PadletTitle;
-    data.state = 'Working with Padlet...';
-    data.startTimestamp = getTimeStamp();
-  } else {
-    data.details = 'Idle';
-    data.state = 'Idle';
+    if (topicName) {
+      data.details = `Support • ${topicName}`
+    }
+
+    if (topicDescription) {
+      data.state = topicDescription
+    }
+  }
+  // padlet.com/gallery
+  else if (routes.startsWith('gallery')) {
+    data.details = 'Gallery'
+
+    if (topicName) {
+      data.details = `Gallery • ${topicName}`
+    }
+
+    if (topicDescription) {
+      data.state = topicDescription
+    }
+  }
+  // padlet.com/contact-us
+  else if (routes.startsWith('contact-us')) {
+    data.details = 'Contact Us'
+  }
+  // padlet.com/about
+  else if (routes.startsWith('about')) {
+    if (topicName) {
+      data.details = `About • ${topicName}`
+    }
+
+    if (topicDescription) {
+      data.state = topicDescription
+    }
+  }
+  // padlet.com/dashboard
+  else if (routes.startsWith('dashboard')) {
+    data.details = `Dashboard`
+    if (appBarTitle) {
+      data.state = appBarTitle
+    }
+  }
+  // padlet.com/create
+  else if (routes.startsWith('create')) {
+    data.details = `Dashboard`
+    if (appBarTitle) {
+      data.state = appBarTitle
+    }
+  }
+  // padlet.com/:username
+  else {
+    if (topicName) {
+      data.details = topicName
+    }
+
+    if (topicDescription) {
+      data.state = topicDescription
+    }
   }
 
   presence.setActivity(data, true);
