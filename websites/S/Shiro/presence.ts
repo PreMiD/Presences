@@ -253,7 +253,7 @@ presence.on("UpdateData", async () => {
           let replaced = condition.setTo;
 
           for (const replace of condition.replace.toRepalce) 
-          replaced = replaced.replace(replace.text, pagesData[condition.page][replace.with]);
+          replaced = replaced.replace(replace.text, (pagesData[condition.page]||{})[replace.with]);
 
           presenceData[setting as "state" | "details"] = replaced;
         } else if (condition.delete && !condition.enabled) delete presenceData[setting as keyof PresenceData];
