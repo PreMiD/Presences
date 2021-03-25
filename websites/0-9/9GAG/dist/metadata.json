@@ -8,10 +8,11 @@
     "en": "9GAG has the best funny pics, gifs, videos, gaming, anime, manga, movie, tv, cosplay, sport, food, memes, cute, fail, wtf photos on the internet!",
     "nl": "9GAG heeft de beste grappige foto's, gifs, video's, gaming, anime, manga, film, tv, cosplay, sport, eten, memes, schattige, mislukkingen, wtf-foto's op het internet!",
     "zh_CN": "9GAG是一个社交媒体网站。使用者们在此上传并分享“用户自创”的图像与视频。",
-    "zh_TW": "9GAG是一個社交媒體網站。使用者們在此上傳並分享「用戶自創」的圖像與影片。"
+    "zh_TW": "9GAG是一個社交媒體網站。使用者們在此上傳並分享「用戶自創」的圖像與影片。",
+    "ga_IE": "Tá na grianghraif greannmhar, gifs, físeáin, cearrbhachas, anime, manga, scannán, teilifís, cosplay, spórt, bia, memes, gleoite, teip, grianghraif wtf ar an idirlíon ag 9GAG!"
   },
   "url": "9gag.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/t2BG2Fj.png",
   "thumbnail": "https://i.imgur.com/CmOz6oG.png",
   "color": "#ffffff",
