@@ -26,6 +26,6 @@
       "value": false
     }
   ],
-  "category": "nsfw",
+  "category": "socials",
   "regExp": "([a-z0-9-]+[.])*(sickipedia[.]net)[/]"
 }
