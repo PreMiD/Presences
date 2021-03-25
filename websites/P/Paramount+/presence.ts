@@ -17,7 +17,6 @@ const presence = new Presence({
 
   presence.on("UpdateData", async () => {
 
-    
     let video: HTMLVideoElement = null;
     const vidArea = document.querySelector(".video__player-area"),
     presenceData: PresenceData = { 
