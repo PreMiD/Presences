@@ -25,8 +25,12 @@ newStats();
 presence.on("UpdateData", async () => {
   const settings = {
       details: (await presence.getSetting("details"))
-        .replace("%listeners%", data.listeners?.unique ?? "Listeners"),
+        .replace("%listeners%", data.listeners?.unique ?? "Listeners")
+        .replace("%artist%", data.now_playing?.song.artist || "Artist")
+        .replace("%songText%", data.now_playing.song.text || "Song")
+        .replace("%title%", data.now_playing?.song.title || "Title"),
       state: (await presence.getSetting("state"))
+        .replace("%listeners%", data.listeners?.unique ?? "Listeners")
         .replace("%artist%", data.now_playing?.song.artist || "Artist")
         .replace("%songText%", data.now_playing.song.text || "Song")
         .replace("%title%", data.now_playing?.song.title || "Title"),
@@ -40,7 +44,7 @@ presence.on("UpdateData", async () => {
       buttons: [
         {
           label: "Tune in",
-          url: "https://live.boltfm.net"
+          url: "https://cast.bladefm.com.au/radio/8000/radio.mp3"
         }
       ]
     };
