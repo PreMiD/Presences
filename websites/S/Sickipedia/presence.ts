@@ -43,7 +43,18 @@ presence.on("UpdateData", async () => {
     updateData("Viewing page:", "Reported posts");
   else if(matchPage("/manage/profile"))
     updateData("Viewing page:", "Manage Profile");
+  else if(matchPage("/Faq"))
+    updateData("Viewing page:", "FAQ")
+  else if(matchPage("/Terms"))
+    updateData("Viewing page:", "Terms and conditions")
+  else if(matchPage("/Privacy"))
+    updateData("Viewing page:", "Privacy policy")
+  else if(matchPage("/Team"))
+    updateData("Viewing page:", "Sickipedia team")
+  else if(matchPage("/ContactUs"))
+    updateData("Viewing page:", "Contact Us")
 
+  
   if(matchPage(null, "/user/"))
     updateData("Viewing profile:", window.location.pathname.split("/")[2]);
   else if(matchPage(null, "/joke/tag/"))
