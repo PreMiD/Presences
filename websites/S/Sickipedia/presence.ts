@@ -26,7 +26,7 @@ presence.on("UpdateData", async () => {
   else if(matchPage("/notification"))
     updateData("Viewing page:", "Notifications");
   else if(matchPage("/Rules"))
-    updateData("Viewing pageL", "Rules");
+    updateData("Viewing page:", "Rules");
   else if(matchPage("/Announcement"))
     updateData("Viewing page:", "Announcements");
   else if(matchPage("/account/register"))
