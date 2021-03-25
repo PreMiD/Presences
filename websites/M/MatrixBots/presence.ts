@@ -5,11 +5,10 @@ const matrixPresence = new Presence({
 
 matrixPresence.on("UpdateData", async () => {
   const matrixPData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: matrixBrowsing
     },
     matrixPage = window.location.pathname;
-
-  matrixPData.startTimestamp = matrixBrowsing;
 
   if (matrixPage == "/") {
     matrixPData.details = "Browsing";
@@ -41,6 +40,15 @@ matrixPresence.on("UpdateData", async () => {
     matrixPData.details = "Adding Bot";
     matrixPData.smallImageKey = "writing";
     matrixPData.smallImageText = "Writing Text";
+  } else if (matrixPage == "/staff") {
+    matrixPData.details = "Viewing:";
+    matrixPData.state = "Staff Page";
+  } else if (matrixPage == "/admin") {
+    matrixPData.details = "Viewing:";
+    matrixPData.state = "Admin Page";
+  } else if (matrixPage.includes("/api")) {
+    matrixPData.details = "Viewing:";
+    matrixPData.state = "API";
   }
 
   if (matrixPData.details == null) {
