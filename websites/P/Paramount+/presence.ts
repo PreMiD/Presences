@@ -17,9 +17,10 @@ const presence = new Presence({
 
   presence.on("UpdateData", async () => {
 
-    const vidArea = document.querySelector(".video__player-area");
+    
     let video: HTMLVideoElement = null;
-    const presenceData: PresenceData = { 
+    const vidArea = document.querySelector(".video__player-area"),
+    presenceData: PresenceData = { 
       largeImageKey: "logo"
     }, href = window.location.href,
       path = window.location.pathname;
