@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
     updateData("Viewing page:", "Terms and conditions")
   else if(matchPage("/Privacy"))
     updateData("Viewing page:", "Privacy policy")
-  else if(matchPage("/Team"))
+  else if(matchPage("/team"))
     updateData("Viewing page:", "Sickipedia team")
   else if(matchPage("/ContactUs"))
     updateData("Viewing page:", "Contact Us")
