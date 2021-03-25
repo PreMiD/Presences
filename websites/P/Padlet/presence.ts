@@ -5,7 +5,7 @@ const presence = new Presence({
 // Variables 
 presence.on("UpdateData", async () => {
   // Presence Data
-  const timestamp = presence.getTimestamps(Date.now(), 0),
+  const timestamp = Math.floor(Date.now() / 1000),
     routes = document.location.href.replace(document.location.search, '').split("/").splice(3).join('/'),
     topicName = document.querySelector('.surface-title .title-heading')?.textContent.trim(),
     topicDescription = document.querySelector('.surface-title .title-description')?.textContent.trim(),
@@ -86,5 +86,5 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  presence.setActivity(data, true);
+  presence.setActivity(data);
 });
