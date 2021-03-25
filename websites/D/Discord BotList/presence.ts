@@ -5,12 +5,13 @@ const botPresence = new Presence({
 
 botPresence.on("UpdateData", async () => {
   const botData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: botBrowsing
     },
     botPage = document.location.pathname,
-    botHost = document.location.hostname;
-
-  botData.startTimestamp = botBrowsing;
+    botHost = document.location.hostname,
+    buttons = await botPresence.getSetting("buttons"),
+    sSubmit = await botPresence.getSetting("submitP");
 
   if (botHost == "discord-botlist.eu") {
     if (botPage == "/") {
@@ -53,7 +54,9 @@ botPresence.on("UpdateData", async () => {
         }
       ];
     } else if (botPage.includes("/bots/")) {
-      if (botPage.includes("/vote")) {
+      if (botPage.includes("/new")) {
+        botData.details = "Adding a Bot";
+      } else if (botPage.includes("/vote")) {
         const voteBotName: string = document
           .querySelector("#vote1 > h1")
           .textContent.replace("Vote for ", "");
@@ -104,6 +107,10 @@ botPresence.on("UpdateData", async () => {
     botData.details = "Viewing Docs";
     botData.state = "Page: " + page;
   }
+
+  if (!sSubmit && botData.details === "Adding a Bot") delete botData.details;
+
+  if (!buttons) delete botData.buttons;
 
   if (botData.details == null) {
     botPresence.setTrayTitle();
