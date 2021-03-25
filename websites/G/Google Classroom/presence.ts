@@ -34,24 +34,27 @@ presence.on("UpdateData", async () => {
     privacy = await presence.getSetting("privacy"),
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang)
+  if (!oldLang) {
     oldLang = newLang;
-  else if (oldLang !== newLang) {
+  } else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   path.shift();
-  if (path[0] === "u")
+  if (path[0] === "u") {
     path.splice(0, 2);
-  else if (path[0] === "h")
+  }
+  if (path[0] === "h") {
     presenceData.details = (await strings).home;
-  else if (path[0] === "calendar")
+  } else if (path[0] === "calendar") {
     presenceData.details = (await strings).calendar;
-  else if (path[0] === "a")
+  } else if (path[0] === "a") {
     presenceData.details = (await strings).todo;
-  else if (path[0] === "c") {
-    const classroom: string = document.querySelector('span[class="YVvGBb dDKhVc"]')
+  } else if (path[0] === "c") {
+    const classroom: string = document.querySelector(
+      'span[class="YVvGBb dDKhVc"]'
+    )
       ? `${document.querySelector('span[id="UGb2Qe"]').textContent} - ${
           document.querySelector('span[class="YVvGBb dDKhVc"]').textContent
         }`
@@ -60,9 +63,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = privacy
         ? (await strings).assignmentPrivate
         : (await strings).assignment;
-    } else
+    } else {
       presenceData.details = (await strings).class;
-
+    }
     if (!privacy) presenceData.state = classroom;
   } else if (path[0] === "w") {
     const classroom: string = document.querySelector(
@@ -89,8 +92,8 @@ presence.on("UpdateData", async () => {
       : (await strings).classmembers;
 
     if (!privacy) presenceData.state = classroom;
-  } else if (path[0] === "s")
+  } else if (path[0] === "s") {
     presenceData.details = (await strings).settings;
-
+  }
   presence.setActivity(presenceData);
 });
