@@ -5,7 +5,8 @@
   },
   "service": "Sickipedia",
   "description": {
-    "en": "506899274748133376"
+    "en": "Sickipedia is an online forum for sharing innapropriate jokes and memes.",
+    "ga_IE": "Is fóram ar líne é Sickipedia chun scéalta grinn agus memes mí-oiriúnacha a roinnt."
   },
   "url": ["sickipedia.net", "www.sickipedia.net"],
   "version": "1.0.0",
