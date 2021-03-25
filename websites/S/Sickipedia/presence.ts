@@ -44,15 +44,15 @@ presence.on("UpdateData", async () => {
   else if(matchPage("/manage/profile"))
     updateData("Viewing page:", "Manage Profile");
   else if(matchPage("/Faq"))
-    updateData("Viewing page:", "FAQ")
+    updateData("Viewing page:", "FAQ");
   else if(matchPage("/Terms"))
-    updateData("Viewing page:", "Terms and conditions")
+    updateData("Viewing page:", "Terms and conditions");
   else if(matchPage("/Privacy"))
-    updateData("Viewing page:", "Privacy policy")
+    updateData("Viewing page:", "Privacy policy");
   else if(matchPage("/team"))
-    updateData("Viewing page:", "Sickipedia team")
+    updateData("Viewing page:", "Sickipedia team");
   else if(matchPage("/ContactUs"))
-    updateData("Viewing page:", "Contact Us")
+    updateData("Viewing page:", "Contact Us");
 
   
   if(matchPage(null, "/user/"))
@@ -79,7 +79,7 @@ function matchPage(href: string, option?: string) {
     return false;
 }
 
-function updateData(details?: string, state?: string, buttons: boolean = true) {
+function updateData(details?: string, state?: string, buttons = true) {
   if(buttons && !data.privacyMode) data.presenceData.buttons = [{ label: "View Page", url: window.location.href }];
   if(details && !data.privacyMode) data.presenceData.details = details;
   if(state && !data.privacyMode) data.presenceData.state = state;
