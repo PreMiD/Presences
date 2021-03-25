@@ -1,31 +1,28 @@
 const presence = new Presence({
-  clientId: "682781181863133220"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "682781181863133220"
+  }), 
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "upbeat"
-  };
-
-  const paused = document
+  }, 
+  paused = document
     .querySelector("#radioPlayer > span > i")
-    .className.includes("fa-play");
-  const newsreporterapply =
-    document.querySelector("#modalmediaAppButton") !== null;
-  const partner = document.querySelector("#modalpartnerEnquiryButton") !== null;
-  const request = document.querySelector("#modalrequestFormModal") !== null;
-  const enquiry = document.querySelector("#modalcontactUsButton") !== null;
-  const djapply = document.querySelector("#modaldjAppButton") !== null;
-  const feedback = document.querySelector("#modalundefined") !== null;
-  const editingbio = document.querySelector("#accountBio") !== null;
-  const format1 = await presence.getSetting("sFormatNoDj1");
-  const format2 = await presence.getSetting("sFormatNoDj2");
-  const elapsed = await presence.getSetting("tElapsed");
-  const format = await presence.getSetting("sFormat");
-  const info = await presence.getSetting("sInfo");
-  const dj = await presence.getSetting("sDJ");
+    .className.includes("fa-play"),
+    newsreporterapply = document.querySelector("#modalmediaAppButton") !== null,
+    partner = document.querySelector("#modalpartnerEnquiryButton") !== null,
+    request = document.querySelector("#modalrequestFormModal") !== null,
+    enquiry = document.querySelector("#modalcontactUsButton") !== null,
+    djapply = document.querySelector("#modaldjAppButton") !== null,
+    feedback = document.querySelector("#modalundefined") !== null,
+    editingbio = document.querySelector("#accountBio") !== null,
+    format1 = await presence.getSetting("sFormatNoDj1"),
+    format2 = await presence.getSetting("sFormatNoDj2"),
+    elapsed = await presence.getSetting("tElapsed"),
+    format = await presence.getSetting("sFormat"),
+    info = await presence.getSetting("sInfo"),
+    dj = await presence.getSetting("sDJ");
   let djType;
 
   if (elapsed) presenceData.startTimestamp = browsingStamp;
@@ -42,59 +39,34 @@ presence.on("UpdateData", async () => {
             document.querySelector(".stats-artist").textContent
           );
       } else {
-        if (document.querySelector(".stats-djName").textContent == "UpBeat") {
+        if (document.querySelector(".stats-djName").textContent == "UpBeat")
           djType = "AutoDJ - ";
-        } else {
+        else 
           djType = "DJ: ";
-        }
 
         presenceData.smallImageKey = "play";
 
         if (dj) {
           presenceData.details = format
-            .replace(
-              "%song%",
-              document.querySelector(".stats-song").textContent
-            )
-            .replace(
-              "%artist%",
-              document.querySelector(".stats-artist").textContent
-            );
-          presenceData.state =
-            djType + document.querySelector(".stats-djName").textContent;
+            .replace("%song%", document.querySelector(".stats-song").textContent)
+            .replace("%artist%", document.querySelector(".stats-artist").textContent);
+          presenceData.state = djType + document.querySelector(".stats-djName").textContent;
         } else {
           presenceData.details = format1
-            .replace(
-              "%song%",
-              document.querySelector(".stats-song").textContent
-            )
-            .replace(
-              "%artist%",
-              document.querySelector(".stats-artist").textContent
-            );
+            .replace("%song%", document.querySelector(".stats-song").textContent)
+            .replace("%artist%", document.querySelector(".stats-artist").textContent);
           presenceData.state = format2
-            .replace(
-              "%song%",
-              document.querySelector(".stats-song").textContent
-            )
-            .replace(
-              "%artist%",
-              document.querySelector(".stats-artist").textContent
-            );
+            .replace("%song%", document.querySelector(".stats-song").textContent)
+            .replace("%artist%", document.querySelector(".stats-artist").textContent);
         }
       }
     } else if (document.location.pathname.includes("/News.Article")) {
-      presenceData.details =
-        "Reading article: " +
-        document.querySelector(".title").textContent.trim();
-      presenceData.state =
-        "Written by: " + document.querySelector(".info > a").textContent.trim();
+      presenceData.details = "Reading article: " + document.querySelector(".title").textContent.trim();
+      presenceData.state = "Written by: " + document.querySelector(".info > a").textContent.trim();
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/Account.Profile")) {
       presenceData.details = "Viewing profile of:";
-      presenceData.state = document.querySelector(
-        ".profileName > span"
-      ).textContent;
+      presenceData.state = document.querySelector(".profileName > span").textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/Account.Settings")) {
       presenceData.details = "Changing their settings...";
@@ -123,7 +95,7 @@ presence.on("UpdateData", async () => {
       let type = document
         .querySelector("#mainContent > div.m-b-md.m-t-sm > ul > .active > a")
         .textContent.toLowerCase();
-      if (type == "vip's") type = "VIP";
+    if (type == "vip's") type = "VIP";
       presenceData.details = "Viewing the";
       presenceData.state = type + " members";
       presenceData.smallImageKey = "reading";
@@ -162,34 +134,23 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "writing";
     }
   } else {
-    if (document.querySelector(".stats-djName").textContent == "UpBeat") {
+    if (document.querySelector(".stats-djName").textContent == "UpBeat")
       djType = "AutoDJ - ";
-    } else {
+    else 
       djType = "DJ: ";
-    }
 
     if (dj) {
       presenceData.details = format
         .replace("%song%", document.querySelector(".stats-song").textContent)
-        .replace(
-          "%artist%",
-          document.querySelector(".stats-artist").textContent
-        );
-      presenceData.state =
-        djType + document.querySelector(".stats-djName").textContent;
+        .replace("%artist%", document.querySelector(".stats-artist").textContent);
+      presenceData.state = djType + document.querySelector(".stats-djName").textContent;
     } else {
       presenceData.details = format1
         .replace("%song%", document.querySelector(".stats-song").textContent)
-        .replace(
-          "%artist%",
-          document.querySelector(".stats-artist").textContent
-        );
+        .replace("%artist%", document.querySelector(".stats-artist").textContent);
       presenceData.state = format2
         .replace("%song%", document.querySelector(".stats-song").textContent)
-        .replace(
-          "%artist%",
-          document.querySelector(".stats-artist").textContent
-        );
+        .replace("%artist%", document.querySelector(".stats-artist").textContent);
     }
 
     presenceData.smallImageKey = "play";
@@ -198,7 +159,5 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

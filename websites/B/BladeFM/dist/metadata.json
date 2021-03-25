@@ -3,27 +3,22 @@
     "name": "Callum",
     "id": "506899274748133376"
   },
-  "service": "Repeat",
+  "service": "BladeFM",
   "description": {
-    "en": "Repeating your favourite tunes daily."
+    "en": "Providing non-stop music, 24/7",
+    "ga_IE": "Ag soláthar ceoil gan stad, 24/7"
   },
-  "url": [
-    "www.repeatradio.net",
-    "repeatradio.net",
-    "repeat.pw"
-  ],
-  "version": "2.0.2",
-  "logo": "https://i.imgur.com/ufIgYNI.png",
-  "thumbnail": "https://i.imgur.com/JLSMA5e.png",
-  "color": "#781629",
+  "url": "bladefm.com.au",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/Sjj3gx6.png",
+  "thumbnail": "https://i.imgur.com/DWa62sw.png",
+  "color": "#203391",
   "tags": [
     "music",
     "radio",
-    "gamers",
-    "community",
-    "repeat",
-    "repeatradio",
-    "online-radio"
+    "blade",
+    "bladeradio",
+    "bladefm"
   ],
   "category": "music",
   "settings": [
@@ -38,15 +33,15 @@
       "title": "Change Line #1 (Song Details)",
       "icon": "fas fa-music",
       "value": "Streaming to %listeners% listeners",
-      "placeholder": "%listeners%"
+      "placeholder": "%artist%, %listeners%, %songText%, %title%"
     },
     {
       "id": "state",
       "title": "Change Line #2 (Presenter Details)",
       "icon": "fas fa-microphone",
       "value": "%songText%",
-      "placeholder": "%artist% - %song%"
+      "placeholder": "%artist%, %listeners%, %songText%, %title%"
     }
   ],
-  "regExp": "([a-z0-9-]+[.])*(repeatradio[.]net|repeat[.]pw)[/]"
+  "regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]"
 }
