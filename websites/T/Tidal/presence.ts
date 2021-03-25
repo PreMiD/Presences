@@ -24,6 +24,18 @@ const getLanguages = async () => {
       await presence.getSetting("language")
     );
   },
+  SongQuality = (quality: string): string => {
+    switch (quality) {
+      case "LOSSLESS":
+        return "Hi-Fi";
+      case "HIGH":
+        return "High";
+      case "LOW":
+        return "Normal";
+      default:
+        return "Unknown";
+    }
+  },
   getAuthorString = (): string => {
     let authorsArray: Array<HTMLAnchorElement>, authorString: string;
     const authors: NodeListOf<HTMLAnchorElement> = document.querySelectorAll(
@@ -51,6 +63,7 @@ let strings: Promise<langStrings> = getLanguages(),
 presence.on("UpdateData", async () => {
   const newLang = await presence.getSetting("language"),
     privacy = await presence.getSetting("privacy"),
+    showSongQuality = await presence.getSetting("showQuality"),
     songTitle: string | null = document.querySelector<HTMLElement>(
       "#footerPlayer > div.css-pk7civ > div.css-1g3qvkb > div.css-vvwwhy > a > span"
     )
@@ -128,8 +141,17 @@ presence.on("UpdateData", async () => {
       songTimestamps: Array<number> = presence.getTimestamps(
         Math.floor(songCurrentTimestamp[0] * 60 + songCurrentTimestamp[1]),
         Math.floor(songEndTimestamp[0] * 60 + songEndTimestamp[1])
-      );
-    presenceData.details = songTitle;
+      ),
+      songQuality: string = document
+        .querySelector<HTMLElement>(
+          "#footerPlayer > div.css-ydx5c7 > button.css-1pnqyx0"
+        )
+        .getAttribute("data-test-streaming-quality"),
+      dataState = showSongQuality
+        ? `${songTitle} (${SongQuality(songQuality)})`
+        : songTitle;
+
+    presenceData.details = dataState;
     presenceData.state = getAuthorString();
 
     switch (playingButton) {
