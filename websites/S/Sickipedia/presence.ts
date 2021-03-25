@@ -54,7 +54,6 @@ presence.on("UpdateData", async () => {
   else if(matchPage("/ContactUs"))
     updateData("Viewing page:", "Contact Us");
 
-  
   if(matchPage(null, "/user/"))
     updateData("Viewing profile:", window.location.pathname.split("/")[2]);
   else if(matchPage(null, "/joke/tag/"))
