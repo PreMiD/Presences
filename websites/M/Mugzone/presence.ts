@@ -6,7 +6,7 @@ browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const privacy = await presence.getSetting("privacy"),
    presenceData: PresenceData = {
-  largeImageKey:"malody",
+  largeImageKey:"malody"
 };  
 if (privacy){
   presence.setTrayTitle();
@@ -22,11 +22,11 @@ if (privacy){
     presenceData.smallImageKey = "chart";
     presenceData.details = "Browsing Chart Store";
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes ("/page/all/player")) {
+  } else if (document.location.pathname.startsWith ("/page/all/player")) {
     presenceData.smallImageKey = "leaderboard";
     presenceData.details = "Viewing Leaderboard";
     presenceData.startTimestamp = browsingStamp;
-      if (document.querySelector ("#content > div > div.mode > a.curr")){
+       if (document.location.href.endsWith ("?from=0&mode=0")) {
       presenceData.smallImageKey = "key";
       presenceData.smallImageText = "KeyMode";
       presenceData.state = "Key Mode";
@@ -50,7 +50,11 @@ if (privacy){
       presenceData.smallImageKey = "slide";
       presenceData.smallImageText = "SlideMode";
       presenceData.state = "Slide Mode";
-    } 
+    } else if (document.location.pathname.endsWith ("/player")) {
+      presenceData.smallImageKey = "key";
+      presenceData.smallImageText = "KeyMode";
+      presenceData.state = "Key Mode";
+    }
   } else if (document.location.href.includes("/song")) {
     presenceData.smallImageKey = "song";
     presenceData.details = "Viewing a song" ;
@@ -61,7 +65,7 @@ if (privacy){
           label: "View Song",
            url: document.URL
      }
-   ]
+   ];
   } else if (document.location.href.includes("/chart")) {
     presenceData.smallImageKey = "song";
     presenceData.details = document.querySelector ("#content > div.song_title.g_rblock > div.right > h2.textfix.title").textContent;
@@ -122,7 +126,7 @@ if (privacy){
   
   } else if (document.location.pathname.startsWith ("/accounts")) {
     if (document.location.pathname.includes ("/login")){
-    presenceData.details = "Logging in"
+    presenceData.details = "Logging in";
    } else if (document.location.pathname.includes ("/user")) {
     presenceData.details = "Viewing User: ";
     presenceData.state = document.querySelector("#content > div.user_head.g_rblock > div.right > p.name > span").textContent;
@@ -145,13 +149,9 @@ if (privacy){
     presenceData.smallImageKey = "search";
     presenceData.details = document.querySelector ("#content > div.g_title").textContent;
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname.includes ("/page/all")) {
+  } else if (document.location.pathname = ("/page/all")) {
     presenceData.smallImageKey = "eye";
-    if (document.location.pathname = "/") {
     presenceData.details = "Viewing All Pages";
-    } else if (document.location.pathname = "/cate") {
-      presenceData.details = "Viewing All Category";
-    }
   } else if (document.location.pathname.includes ("/page/latest")) {
     presenceData.smallImageKey = "eye";
     presenceData.details = "Viewing Recent Changes";
@@ -168,8 +168,8 @@ if (privacy){
   }
    else if (document.location.pathname.startsWith ("/wiki")) {
     presenceData.smallImageKey = "eye";
-    presenceData.details = "Viewing Wiki"
-    presenceData.state = document.querySelector("#content > div.wiki_title.g_rblock > div.title").textContent
+    presenceData.details = "Viewing Wiki";
+    presenceData.state = document.querySelector("#content > div.wiki_title.g_rblock > div.title").textContent;
   }
   
   presence.setActivity(presenceData);
