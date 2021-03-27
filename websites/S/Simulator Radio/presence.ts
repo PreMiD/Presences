@@ -57,7 +57,7 @@ presence.on("UpdateData", function () {
     } else if (document.location.pathname.includes("/articles") || document.location.pathname.includes("/news")) {
       presenceData.details = "Browsing the Blog";
     } else if (document.location.pathname.includes("/post") || document.location.pathname.includes("/blog")) {
-      let possibilityOne = document.querySelector(".blog-title"), possibilityTwo = document.querySelector(".blog-page-title");
+      const possibilityOne = document.querySelector(".blog-title"), possibilityTwo = document.querySelector(".blog-page-title");
 
       presenceData.details = "Reading Blog Post";
       presenceData.state = possibilityOne != null ? possibilityOne.textContent : possibilityTwo.textContent;
