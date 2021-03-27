@@ -7,7 +7,6 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     largeImageKey: "ibl",
-    smallImageKey: "ibl",
     smallImageText: "Infinity Bot List"
   };
 
@@ -86,6 +85,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Legal";
     presenceData.startTimestamp = browsingStamp;
   }
+  
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
