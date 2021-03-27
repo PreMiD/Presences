@@ -76,7 +76,7 @@ if (privacy){
           label: "View Chart",
            url: document.URL
      }
-   ]
+   ];
   } else if (document.location.pathname.startsWith ("/store")) {
     if (document.location.pathname.includes("/skin")) {
     presenceData.smallImageKey = "skin";
@@ -158,13 +158,11 @@ if (privacy){
     presenceData.state = "Pages";
     presenceData.startTimestamp = browsingStamp;
   } else if (document.location.pathname.includes ("/page/create")) {
-    if (document.location.pathname = "/"){
     presenceData.smallImageKey = "edit";
     presenceData.details = "Creating a New Page";
-    } else if (document.location.href.includes ("?type=6")) {
-      presenceData.smallImageKey = "edit";
-      presenceData.details = "Creating a Template";
-    }
+  } else if (document.location.href.includes ("/page/create?type=6")) {
+    presenceData.smallImageKey = "edit";
+    presenceData.details = "Creating a Template";
   }
    else if (document.location.pathname.startsWith ("/wiki")) {
     presenceData.smallImageKey = "eye";
