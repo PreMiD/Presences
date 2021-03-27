@@ -149,7 +149,7 @@ if (privacy){
     presenceData.smallImageKey = "search";
     presenceData.details = document.querySelector ("#content > div.g_title").textContent;
     presenceData.startTimestamp = browsingStamp;
-  } else if (document.location.pathname = ("/page/all")) {
+  } else if (document.location.pathname.includes ("/page/all")) {
     presenceData.smallImageKey = "eye";
     presenceData.details = "Viewing All Pages";
   } else if (document.location.pathname.includes ("/page/latest")) {
