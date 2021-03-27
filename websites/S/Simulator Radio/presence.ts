@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "651455140477272065"
 });
 
-let currentTitle: string = "Simulator Radio", currentArtist: string = "Your #1 Simulation Station", currentListeners: number = 0, currentDj: string = "Otto";
+let currentTitle = "Simulator Radio", currentArtist = "Your #1 Simulation Station", currentListeners = 0, currentDj = "Otto";
 
 function newStats(): void {
   fetch("https://apiv2.simulatorradio.com/metadata/combined?premid").then(response => {
@@ -57,8 +57,7 @@ presence.on("UpdateData", function () {
     } else if (document.location.pathname.includes("/articles") || document.location.pathname.includes("/news")) {
       presenceData.details = "Browsing the Blog";
     } else if (document.location.pathname.includes("/post") || document.location.pathname.includes("/blog")) {
-      var possibilityOne = document.querySelector(".blog-title");
-      var possibilityTwo = document.querySelector(".blog-page-title");
+      let possibilityOne = document.querySelector(".blog-title"), possibilityTwo = document.querySelector(".blog-page-title");
 
       presenceData.details = "Reading Blog Post";
       presenceData.state = possibilityOne != null ? possibilityOne.textContent : possibilityTwo.textContent;
