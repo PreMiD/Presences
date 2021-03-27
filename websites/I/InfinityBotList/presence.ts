@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
   } else if (window.location.pathname.includes("/packs/")) {
     presenceData.details = "Viewing: Bot Packs";
   } else if (window.location.pathname.includes("/profile")) {
-    presenceData.details = "Viewing: Profile"
+    presenceData.details = "Viewing: Profile";
   }
 
   // Legal Pages
