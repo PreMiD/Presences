@@ -53,32 +53,28 @@ presence.on("UpdateData", async () => {
       presenceData.details = (await strings).editingDoc;
     else if (document.location.pathname.includes("/document/u/"))
       presenceData.details = (await strings).browsingDoc;
-    else 
-      presenceData.details = (await strings).viewingDoc;
+    else presenceData.details = (await strings).viewingDoc;
   } else if (document.location.pathname.includes("/forms/")) {
-      presenceData.largeImageKey = "formslogo";
+    presenceData.largeImageKey = "formslogo";
     if (document.location.pathname.includes("/edit"))
       presenceData.details = (await strings).editingForm;
     else if (document.location.pathname.includes("/forms/u/"))
       presenceData.details = (await strings).browsingForm;
-    else
-      presenceData.details = (await strings).viewingForm;
+    else presenceData.details = (await strings).viewingForm;
   } else if (document.location.pathname.includes("/spreadsheets")) {
-      presenceData.largeImageKey = "sheetslogo";
+    presenceData.largeImageKey = "sheetslogo";
     if (document.location.pathname.includes("/edit"))
       presenceData.details = (await strings).editingSheet;
     else if (document.location.pathname.includes("/spreadsheets/u/"))
       presenceData.details = (await strings).browsingSheet;
-    else 
-      presenceData.details = (await strings).viewingSheet;
+    else presenceData.details = (await strings).viewingSheet;
   } else if (document.location.pathname.includes("/presentation/")) {
-      presenceData.largeImageKey = "slideslogo";
+    presenceData.largeImageKey = "slideslogo";
     if (document.location.pathname.includes("/edit"))
       presenceData.details = (await strings).editingPresentation;
     else if (document.location.pathname.includes("/presentation/u/"))
       presenceData.details = (await strings).browsingPresentation;
-    else
-      presenceData.details = (await strings).vieiwngPresentation;
+    else presenceData.details = (await strings).vieiwngPresentation;
   }
 
   if (!privacy) presenceData.state = title;

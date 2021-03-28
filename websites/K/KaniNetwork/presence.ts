@@ -3,17 +3,17 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = { 
+  const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
     browsingStamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
     sprivacy = await presence.getSetting("super-privacy");
   presenceData.startTimestamp = browsingStamp;
-  if (sprivacy || window.location.host === 'kaniwork.com:8080') {
+  if (sprivacy || window.location.host === "kaniwork.com:8080") {
     presenceData.details = "Browsing";
   } else {
-    const path = window.location.pathname.replace('.php','');
+    const path = window.location.pathname.replace(".php", "");
     if (path.endsWith("commandes")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Commands";
