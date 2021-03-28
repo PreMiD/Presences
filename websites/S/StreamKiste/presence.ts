@@ -190,7 +190,6 @@ function getQuery() {
       );
       return await result
         .then((data) => {
-          console.log("premid", data, frameData);
           if (
             lastPageIndex !== undefined &&
             lastPageIndex !== pageIndex &&
