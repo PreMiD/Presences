@@ -7,8 +7,7 @@ presence.on("UpdateData", () => {
     largeImageKey: "logo-dlm"
   };
 
-  const browsingStamp = Math.floor(Date.now() / 1000);
-  presenceData.startTimestamp = browsingStamp;
+  presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
   if (window.location.pathname.endsWith("/")) {
     presenceData.details = "Viewing a page:";
