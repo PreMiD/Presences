@@ -1,12 +1,12 @@
 const presence = new Presence({
-  clientId: "823408394098311178",
+  clientId: "823408394098311178"
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 const privacy = await presence.getSetting("privacy"),
   presenceData: PresenceData = {
-    largeImageKey: "malody",
+    largeImageKey: "malody"
   };
 if (privacy) {
   presence.setTrayTitle();
@@ -65,8 +65,8 @@ if (privacy) {
     presenceData.buttons = [
       {
         label: "View Song",
-        url: document.URL,
-      },
+        url: document.URL
+      }
     ];
   } else if (document.location.href.includes("/chart")) {
     presenceData.smallImageKey = "song";
