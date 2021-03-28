@@ -57,65 +57,64 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname == "/" || !document.location.pathname) {
-    presenceData.state = "Home";
-    delete presenceData.details;
+    presenceData.details = "Home";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/settings")) {
-    presenceData.state = "Settings";
-
-    delete presenceData.details;
+    presenceData.details = "Settings";
+    delete presenceData.state;
   } else if (
     document.location.pathname.startsWith("/explore") ||
     document.location.pathname.startsWith("/discover")
   ) {
-    presenceData.state = "Browsing repositories...";
-    delete presenceData.details;
+    presenceData.details = "Browsing repositories...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/marketplace")) {
-    presenceData.state = "Browsing marketplace...";
-    delete presenceData.details;
+    presenceData.details = "Browsing marketplace...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/pulls")) {
-    presenceData.state = "Browsing pull requests...";
-    delete presenceData.details;
+    presenceData.details = "Browsing pull requests...";
+    delete presenceData.state;
   } else if (document.location.pathname == "/notifications") {
-    presenceData.state = "Browsing notifications...";
-    delete presenceData.details;
+    presenceData.details = "Browsing notifications...";
+    delete presenceData.state;
   } else if (
     document.location.pathname.startsWith("/notifications/subscriptions")
   ) {
-    presenceData.state = "Browsing subscriptions...";
-    delete presenceData.details;
+    presenceData.details = "Browsing subscriptions...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/watching")) {
-    presenceData.state = "Browsing interested repositories...";
-    delete presenceData.details;
+    presenceData.details = "Browsing interested repositories...";
+    delete presenceData.state;
   } else if (document.location.pathname == "/new") {
-    presenceData.state = "Creating a new repository...";
-    delete presenceData.details;
+    presenceData.details = "Creating a new repository...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/new/import")) {
-    presenceData.state = "Importing a repository...";
-    delete presenceData.details;
+    presenceData.details = "Importing a repository...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/new/project")) {
-    presenceData.state = "Creating a new project...";
-    delete presenceData.details;
+    presenceData.details = "Creating a new project...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/organizations/new")) {
-    presenceData.state = "Creating a new organization...";
-    delete presenceData.details;
+    presenceData.details = "Creating a new organization...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/topics")) {
-    presenceData.state = "Browsing topics...";
-    delete presenceData.details;
+    presenceData.details = "Browsing topics...";
+    delete presenceData.state;
   } else if (document.location.pathname == "/trending") {
-    presenceData.state = "Browsing trending repositories...";
-    delete presenceData.details;
+    presenceData.details = "Browsing trending repositories...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/trending/developers")) {
-    presenceData.state = "Browsing trending developers...";
-    delete presenceData.details;
+    presenceData.details = "Browsing trending developers...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/collections")) {
-    presenceData.state = "Browsing collections...";
-    delete presenceData.details;
+    presenceData.details = "Browsing collections...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/events")) {
-    presenceData.state = "Browsing events...";
-    delete presenceData.details;
+    presenceData.details = "Browsing events...";
+    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/codespaces")) {
-    presenceData.state = "Browsing codespaces...";
-    delete presenceData.details;
+    presenceData.details = "Browsing codespaces...";
+    delete presenceData.state;
   } else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching for: ";
     presenceData.state = searchResult;
