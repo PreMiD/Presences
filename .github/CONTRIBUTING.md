@@ -24,6 +24,13 @@ The general rules of presence development are as follows:
 - Presences for online radios are only allowed if the radio has at least 100 weekly listeners and 15 concurrent and must have some features than only showing album/song title etc.
 - Presences are not allowed to run JS code with their own function to get variables.
 - Low quality presences (or ones with little context) are **not** allowed (for e.g., only showing a logo and text but never changing it again.)
+- Presences for services like Discord Bot/Servers Lists must follow our requirements that are down below:
+  - Site should be min. **6 months** old.
+  - Unique visitors per day:
+    - 6 months old site: **20.000 unique visitors/day**.
+    - 12 months old site and more: **45.000 unique visitors/day**.
+  - Site can't be on cheap domain like ``.xyz``, ``.club`` and so on.
+  - Site itself must be in very good quality (design etc.).
 - Including the `dist` folder, `presence.ts` file, `iframe.ts` file, and `metadata.json` file is mandatory so the result would be what is represented in the following schema:
 
 ```bash
