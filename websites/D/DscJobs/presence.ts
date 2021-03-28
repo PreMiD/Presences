@@ -10,8 +10,6 @@ presence.on("UpdateData", async () => {
   },
     page = document.location.pathname;
 
-  console.log(document.location.hostname + page);
-
   if (page === "/") {
     presenceData.details = "Browsing:";
     presenceData.state = "Main Page";
