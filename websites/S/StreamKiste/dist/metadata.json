@@ -35,11 +35,9 @@
   "thumbnail": "https://i.imgur.com/TrhRNwT.jpg",
   "color": "#4DB8C9",
   "tags": [
-    "anime",
-    "games",
+    "movie",
     "video",
-    "media",
-    "nsfw"
+    "media"
   ],
   "settings": [
     {
@@ -48,5 +46,5 @@
     }
   ],
   "iframe": true,
-  "category": "games"
+  "category": "videos"
 }
