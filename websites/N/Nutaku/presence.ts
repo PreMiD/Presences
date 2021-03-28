@@ -78,7 +78,9 @@ function getQuery() {
         }
       },
       {
-        middleware: (ref) => !!ref.location.pathname.match(/^\/games/i) && !!document.querySelector('.cnt-game-catalog > .game-search'),
+        middleware: (ref) =>
+          !!ref.location.pathname.match(/^\/games/i) &&
+          !!document.querySelector(".cnt-game-catalog > .game-search"),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
           data.details = strings.searching;
@@ -148,9 +150,9 @@ function getQuery() {
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
           data.details = strings.browsing;
-          data.state = 'News';
+          data.state = "News";
           data.smallImageKey = images.BROWSE;
-          data.smallImageText = 'News';
+          data.smallImageText = "News";
           return data;
         }
       },

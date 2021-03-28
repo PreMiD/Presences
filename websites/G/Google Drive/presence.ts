@@ -27,11 +27,14 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Viewing storage quota";
   else if (path.startsWith("/file/")) {
     const main = document.title.split("."),
-      fileName = main.length == 2 ? main[0] : main.slice(0, -1).join("").toString(),
+      fileName =
+        main.length == 2 ? main[0] : main.slice(0, -1).join("").toString(),
       fileExtension = main.slice(-1).toString().replace("- Google Drive", "");
 
     presenceData.details = `Viewing a file of type ${fileExtension.toUpperCase()} :`;
-    presenceData.state = await presence.getSetting("filename") ? fileName : "Filename Hidden";
+    presenceData.state = (await presence.getSetting("filename"))
+      ? fileName
+      : "Filename Hidden";
   } else presenceData.state = "Browsing...";
 
   presence.setActivity(presenceData);
