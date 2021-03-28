@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "DscJobs",
+    "author": {
+      "name": "OGMatrix",
+      "id": "780079091172900884"
+    },
+    "category": "socials",
+    "logo": "https://i.imgur.com/RTY7ysC.png",
+    "thumbnail": "https://i.imgur.com/AyD4JTR.png",
+    "version": "1.0.0",
+    "color": "#0e0e11",
+    "tags": [
+      "discord",
+      "jobs",
+      "social"
+    ],
+    "url": "dscjobs.org",
+    "description": {
+      "en": "Find the best moderators for your server!",
+      "de": "Finden Sie die besten Moderatoren für Ihren Server!",
+      "fr": "Trouvez les meilleurs modérateurs pour votre serveur!"
+    }
+  }
