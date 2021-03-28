@@ -52,13 +52,12 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     details: "Unsupported page",
-    largeImageKey: "lg"
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
   };
 
   if (document.location.pathname == "/" || !document.location.pathname) {
     presenceData.state = "Home";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/settings")) {
     presenceData.state = "Settings";
@@ -69,90 +68,57 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/discover")
   ) {
     presenceData.state = "Browsing repositories...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/marketplace")) {
     presenceData.state = "Browsing marketplace...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/pulls")) {
     presenceData.state = "Browsing pull requests...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname == "/notifications") {
     presenceData.state = "Browsing notifications...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (
     document.location.pathname.startsWith("/notifications/subscriptions")
   ) {
     presenceData.state = "Browsing subscriptions...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/watching")) {
     presenceData.state = "Browsing interested repositories...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname == "/new") {
     presenceData.state = "Creating a new repository...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/new/import")) {
     presenceData.state = "Importing a repository...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/new/project")) {
     presenceData.state = "Creating a new project...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/organizations/new")) {
     presenceData.state = "Creating a new organization...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/topics")) {
     presenceData.state = "Browsing topics...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname == "/trending") {
     presenceData.state = "Browsing trending repositories...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/trending/developers")) {
     presenceData.state = "Browsing trending developers...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/collections")) {
     presenceData.state = "Browsing collections...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/events")) {
     presenceData.state = "Browsing events...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.startsWith("/codespaces")) {
     presenceData.state = "Browsing codespaces...";
-    presenceData.startTimestamp = browsingStamp;
-
     delete presenceData.details;
   } else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching for: ";
     presenceData.state = searchResult;
-    presenceData.startTimestamp = browsingStamp;
   }
 
   const pathData: string[] = document.location.pathname.split("/");
@@ -170,8 +136,6 @@ presence.on("UpdateData", async () => {
 
       presenceData.state =
         repository.author.innerText + " / " + repository.name.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
     } else if (
       repository.author.innerText.length > 0 &&
       repository.name.innerText.length > 0 &&
@@ -188,8 +152,6 @@ presence.on("UpdateData", async () => {
         .split("/")
         .slice(4)
         .join("/")}`;
-
-      presenceData.startTimestamp = browsingStamp;
     } else if (
       repository.author.innerText.toString().length > 0 &&
       repository.name.innerText.toString().length > 0 &&
@@ -205,8 +167,6 @@ presence.on("UpdateData", async () => {
         repository.name.innerText;
 
       presenceData.state = `📝 ${file.textContent}`;
-
-      presenceData.startTimestamp = browsingStamp;
     } else if (
       document.location.pathname.toLowerCase() ==
       "/" +
@@ -216,22 +176,16 @@ presence.on("UpdateData", async () => {
         "/issues/"
     ) {
       presenceData.details = "Browsing issues from:";
-
       presenceData.state =
         repository.author.innerText + " / " + repository.name.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
     } else if (
       repository.author.innerText.length > 0 &&
       repository.name.innerText.length > 0 &&
       document.location.pathname.includes("/pulls")
     ) {
       presenceData.details = "Browsing pull requests from:";
-
       presenceData.state =
         repository.author.innerText + " / " + repository.name.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
     } else if (
       document.location.pathname
         .toLowerCase()
@@ -251,8 +205,6 @@ presence.on("UpdateData", async () => {
         nodeListOf.PRandIssueAuthor[0].innerText +
         " - " +
         PRandIssues.title.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
     } else if (
       document.location.pathname
         .toLowerCase()
@@ -272,8 +224,6 @@ presence.on("UpdateData", async () => {
         nodeListOf.PRandIssueAuthor[0].innerText +
         " - " +
         PRandIssues.title.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
     } else if (
       document.location.pathname.includes("/pulse") ||
       document.location.pathname.includes("/graphs/contributors") ||
@@ -296,16 +246,12 @@ presence.on("UpdateData", async () => {
         repository.name.innerText;
 
       presenceData.state = insightsTab.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
     } else {
       presenceData.details = `Browsing ${
         pathData[3] === "pulls" ? "pull requests" : pathData[3]
       } from:`;
       presenceData.state =
         repository.author.innerText + " / " + repository.name.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
     }
   } else if (
     repository.author &&
@@ -314,16 +260,12 @@ presence.on("UpdateData", async () => {
   ) {
     presenceData.details = `Viewing action from ${pathData[1]}/${pathData[2]}`;
     presenceData.state = action.title.textContent;
-
-    presenceData.startTimestamp = browsingStamp;
   } else if (
     !repository.author &&
     !repository.name &&
     document.location.pathname.includes("/issues")
   ) {
     presenceData.details = "Browsing issues...";
-
-    presenceData.startTimestamp = browsingStamp;
   }
   if (profile.name && profile.nickname) {
     if (!document.location.pathname.indexOf(profileTabs)) {
@@ -336,8 +278,6 @@ presence.on("UpdateData", async () => {
       } else
         presenceData.state =
           profile.name.innerText + " | " + profile.nickname.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.indexOf(profileTabs)) {
       presenceData.details = "Browsing " + profileCurrentTab + " from:";
 
@@ -359,15 +299,11 @@ presence.on("UpdateData", async () => {
         } else
           presenceData.state =
             profile.name.innerText + " | " + profile.nickname.innerText;
-
-        presenceData.startTimestamp = browsingStamp;
       }
     }
   } else if (organization.name) {
     presenceData.details = "Viewing an organization";
     presenceData.state = organization.name.innerText;
-
-    presenceData.startTimestamp = browsingStamp;
   } else if (
     !organization.name &&
     document.location.pathname.includes(`/orgs/`)
@@ -376,8 +312,6 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = `Viewing ${pathData[1]} from`;
     presenceData.state = pathData[0];
-
-    presenceData.startTimestamp = browsingStamp;
   }
   presence.setActivity(presenceData);
 });

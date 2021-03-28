@@ -11,7 +11,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "lg"
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
   };
 
   if ((homepageInput && homepageImage) || !document.location.pathname) {
@@ -29,20 +30,16 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/about")) {
       presenceData.details = "Doodles";
       presenceData.state = "About";
-      presenceData.startTimestamp = browsingStamp;
     } else if (doodleTitle != null) {
       presenceData.details = "Viewing a doodle:";
       presenceData.state = doodleTitle.innerText;
-      presenceData.startTimestamp = browsingStamp;
     } else if (doodleResult && document.location.pathname == "/doodles/") {
       presenceData.details = "Searching for a doodle:";
       presenceData.state = doodleResult;
-      presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "search";
     } else {
       presenceData.details = "Current page:";
       presenceData.state = "Doodles";
-      presenceData.startTimestamp = browsingStamp;
     }
   } else if (document.location.pathname.startsWith("/search")) {
     const searchURL = new URL(document.location.href),
@@ -54,31 +51,24 @@ presence.on("UpdateData", async () => {
     if (!searchTab) {
       presenceData.details = "Searching for " + homepageInput.value;
       presenceData.state = resultsInfo.textContent;
-      presenceData.startTimestamp = browsingStamp;
     } else if (searchTab == "isch") {
       presenceData.details = "Google Images";
       presenceData.state = "Searching for " + imgInput.value;
-      presenceData.startTimestamp = browsingStamp;
     } else if (searchTab == "vid") {
       presenceData.details = "Google Videos";
       presenceData.state = "Searching for " + pageInput.value;
-      presenceData.startTimestamp = browsingStamp;
     } else if (searchTab == "nws") {
       presenceData.details = "Google News";
       presenceData.state = "Searching for " + pageInput.value;
-      presenceData.startTimestamp = browsingStamp;
     } else if (searchTab == "bks") {
       presenceData.details = "Google Books";
       presenceData.state = "Searching for " + pageInput.value;
-      presenceData.startTimestamp = browsingStamp;
     } else if (searchTab == "fin") {
       presenceData.details = "Google Finance";
       presenceData.state = "Searching for " + pageInput.value;
-      presenceData.startTimestamp = browsingStamp;
     } else if (searchTab == "pers") {
       presenceData.details = "Google Personal";
       presenceData.state = "Searching for " + pageInput.value;
-      presenceData.startTimestamp = browsingStamp;
     }
   }
 
