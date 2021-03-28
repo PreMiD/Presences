@@ -313,8 +313,7 @@ function getSourceLink(url: string): { label: string; url: string }[] {
       }
       const presenceData: PresenceData = {
           largeImageKey: "logo",
-          largeImageText: "Coub"
-        } as PresenceData,
+        },
         query: { [key: string]: unknown } = getQuery(),
         context = pages.find((x) => x.middleware(window, [query]));
       if (!context) return false;
