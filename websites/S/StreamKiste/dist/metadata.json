@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "Cascade",
+    "id": "442612628104151040"
+  },
+  "service": "StreamKiste",
+  "description": {
+    "de": "Bei StreamKiste.tv findet Ihr stets aktuelle Kinofilme, HD Movies kostenlos als online Stream direkt zum anschauen. Immer den schnellsten Stream.",
+    "en": "At StreamKiste.tv you will always find the latest movies, HD movies for free as online streams to watch directly. Always the fastest stream."
+  },
+  "url": [
+    "streamkiste.tv",
+    "www.streamkiste.tv",
+    "streamkiste.pro",
+    "streamkiste.org",
+    "streamkiste.me",
+    "streamkiste.club",
+    "streamkiste.fun",
+    "streamkiste.net",
+    "streamkiste.pw",
+    "streamkiste.win",
+    "streamkiste.site",
+    "streamkiste.space",
+    "streamkiste.stream",
+    "streamkiste.party",
+    "streamkiste.press",
+    "streamkiste.website",
+    "streamkiste.download",
+    "streamkiste.network",
+    "streamkiste.online"
+  ],
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/bdGvqBo.png",
+  "thumbnail": "https://i.imgur.com/TrhRNwT.jpg",
+  "color": "#4DB8C9",
+  "tags": [
+    "anime",
+    "games",
+    "video",
+    "media",
+    "nsfw"
+  ],
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    }
+  ],
+  "iframe": true,
+  "category": "games"
+}
