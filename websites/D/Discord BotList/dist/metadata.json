@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/V8TuIHR.jpg",
   "thumbnail": "https://i.imgur.com/utk2huo.png",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "color": "#3563ed",
   "tags": [
     "discord",
@@ -31,7 +31,7 @@
       "title": "Show Buttons",
       "value": true,
       "icon": "fas fa-compress-arrows-alt"
-    },    
+    },
     {
       "id": "submitP",
       "title": "Show Submit Page",

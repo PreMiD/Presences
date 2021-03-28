@@ -9,7 +9,14 @@
     "en": "The best Hentai Games online on Nutaku. Your number 1 destination for uncensored browser, mobile and downloadable hentai games."
   },
   "regExp": "([a-z]+[.])nutaku.net[/]",
+<<<<<<< HEAD
   "url": ["nutaku.net", "www.nutaku.net"],
+=======
+  "url": [
+    "nutaku.net",
+    "www.nutaku.net"
+  ],
+>>>>>>> 02f5dec3ee4d8fc0e909c353c139d6479182da53
   "version": "1.0.1",
   "logo": "https://i.imgur.com/fvSnqjK.png",
   "thumbnail": "https://i.imgur.com/ypxOFV9.jpg",
