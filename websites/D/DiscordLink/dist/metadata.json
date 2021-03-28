@@ -5,6 +5,7 @@
     "id": "625470157300564009"
   },
   "service": "DiscordLink",
+  "altnames": ["dlme"],
   "description": {
     "en": "Latest and most popular discord server listing, gain thousands of members!"
   },
