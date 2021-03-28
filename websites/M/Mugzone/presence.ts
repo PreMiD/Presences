@@ -80,8 +80,8 @@ if (privacy) {
     presenceData.buttons = [
       {
         label: "View Chart",
-        url: document.URL,
-      },
+        url: document.URL
+      }
     ];
   } else if (document.location.pathname.startsWith("/store")) {
     if (document.location.pathname.includes("/skin")) {
