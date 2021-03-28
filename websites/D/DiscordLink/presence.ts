@@ -17,8 +17,14 @@ presence.on("UpdateData", () => {
     presenceData.details = "Adding a server";
   } else if (window.location.pathname.endsWith("/view")) {
     presenceData.details = "Viewing a server";
+    presenceData.state = document.querySelector(
+      "#bigytxt > span"
+    ).textContent;
   } else if (window.location.pathname.startsWith("/edit")) {
     presenceData.details = "Editing a server";
+    presenceData.state = document.querySelector(
+      "#bigytxt > span"
+    ).textContent;
   } else if (window.location.pathname.startsWith("/tags")) {
     presenceData.details = "Viewing tags list";
   } else if (window.location.pathname.includes("/store")) {
