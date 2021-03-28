@@ -199,9 +199,8 @@ function getQuery() {
         );
       }
       const presenceData: PresenceData = {
-          largeImageKey: IMAGES.LOGO,
-          largeImageText: app.metadata.service
-        } as PresenceData,
+          largeImageKey: IMAGES.LOGO
+        },
         query: { [key: string]: unknown } = getQuery(),
         pageIndex = pages.findIndex((x) => x.middleware(window, [query])),
         context = pages[pageIndex];
