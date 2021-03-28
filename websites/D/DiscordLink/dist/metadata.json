@@ -1,0 +1,22 @@
+
+ {
+  "author": {
+    "name": "ImKyleJK",
+    "id": "625470157300564009"
+  },
+  "service": "DiscordLink",
+  "description": {
+    "en": "Latest and most popular discord server listing, gain thousands of members!"
+  },
+  "url": "discordlink.me",
+  "version": "1.2.7",
+  "logo": "https://discordlink.me/cdn/nHlgAAAABJRU5ErkJggg.png",
+  "thumbnail": "https://https://discordlink.me/cdn/Ujs82nsPxz.png",
+  "color": "#10C0E7",
+  "tags": [
+    "discord",
+    "servers",
+    "discord-server-list"
+  ],
+  "category": "other"
+}
