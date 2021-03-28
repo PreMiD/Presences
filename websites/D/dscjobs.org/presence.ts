@@ -1,45 +1,71 @@
 const presence = new Presence({
-  clientId: "807748912940711996"
-});
-
-let browsingStamp = Math.floor(Date.now() / 1000),
-  lastPlaybackState,
-  playback;
+  clientId: "825744203350802462"
+}),
+  browsing = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+    startTimestamp: browsing,
+    largeImageKey: "icon"
+  },
+    page = document.location.pathname;
 
-  if (lastPlaybackState != playback) {
-    lastPlaybackState = playback;
-    browsingStamp = Math.floor(Date.now() / 1000);
+  console.log(document.location.hostname + page);
+
+  if (page === "/") {
+    presenceData.details = "Browsing:";
+    presenceData.state = "Main Page";
+  } else if (page === "/profile") {
+    const username: string = document.querySelector("body > div.profile_header > div > div > h1").textContent;
+    presenceData.details = "Watching Profile:";
+    presenceData.state = `${username}`;
+  } else if (page === "/search") {
+    const urlParams: URLSearchParams = new URLSearchParams(
+      window.location.search
+    ),
+    myParam: string = urlParams.get("term");
+    presenceData.details = "Searching:";
+    presenceData.state = myParam;
+  } else if (page === "/settings") {
+    presenceData.details = "Editing his Profile";
+  } else if (page === "/faq") {
+    presenceData.details = "Browsing:";
+    presenceData.state = "FaQ Page";
+  } else if (page === "/moderators") {
+    const urlParams: URLSearchParams = new URLSearchParams(
+      window.location.search
+    ),
+    myParam: string = urlParams.get("page");
+
+    presenceData.details = "Watching Moderators";
+    presenceData.state = "Page: " + myParam;
+  } else if (page.includes("/cv/")) {
+    if (page.includes("/rate")) {
+      presenceData.details = "Rating for:";
+      presenceData.state = document.querySelector("#box1 > div.vote_box > h1").textContent;
+      presenceData.buttons = [
+        {
+          url: document.URL,
+          label: "Rate Profile"
+        }
+      ];
+    } else {
+      const username: string = document.querySelector("body > div:nth-child(5) > div.user_box > div.container.left > div > h2").getAttribute("data-title");
+      presenceData.details = "Watching Profile:";
+      presenceData.state = username + document.getElementsByClassName("note small")[0].textContent;
+      presenceData.buttons = [
+        {
+          url: document.URL,
+          label: "View Profile"
+        }
+      ];
+    }
   }
 
-  presenceData.startTimestamp = browsingStamp;
-
-  if (document.location.pathname == "/") {
-    presenceData.details = "Browsing in Home...";
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/moderators") {
-    presenceData.details = "Searching in";
-    presenceData.state = "Most voted moderators";
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/profile") {
-    presenceData.details = "At Profile";
-    presenceData.state = "Author profile page";
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname == "/create") {
-    presenceData.details = "Creating Curriculum Vitae";
-    presence.setActivity(presenceData);
-  }else if (document.location.pathname == "/settings") {
-    presenceData.details = "Modifying Curriculum Vitae";
-    presence.setActivity(presenceData);
-  } else if (document.location.pathname.includes("/cv/")) {
-    const nameofprofile = document.location.pathname.split("/");
-    presenceData.details = "Viewing Curriculum Vitae";
-    presenceData.state = "dscjobs.org/" + nameofprofile[2];
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
     presence.setActivity(presenceData);
   }
-  presence.setActivity(presenceData);
 });
