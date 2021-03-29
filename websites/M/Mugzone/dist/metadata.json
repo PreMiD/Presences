@@ -17,11 +17,10 @@
     ],
     "settings": [
     {
-        "id": "privacy",
-        "title": "Keep me hidden",
-        "icon": "fas fa-eye-slash",
-        "value": false
-        
+      "id": "privacy",
+      "title": "Keep me hidden",
+      "icon": "fas fa-eye-slash",
+      "value": false
     }
     ],
     "url": "m.mugzone.net",

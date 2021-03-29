@@ -183,7 +183,6 @@ if (privacy) {
       "#content > div.wiki_title.g_rblock > div.title"
     ).textContent;
   }
-
   presence.setActivity(presenceData);
 }
 });
