@@ -14,10 +14,11 @@
     "en": "alltheflavors.com is a DIY recipe and flavor information site.",
     "nl": "alltheflavors.com is een doe-het-zelf recept- en smaakinformatiesite.",
     "zh_CN": "alltheflavors.com是一个DIY食谱教程网站。",
-    "zh_TW": "alltheflavors.com是一個DIY食譜教程和調味資訊網站"
+    "zh_TW": "alltheflavors.com是一個DIY食譜教程和調味資訊網站",
+    "ga_IE": "Is oideas DIY agus láithreán faisnéise blas é alltheflavors.com."
   },
   "url": "alltheflavors.com",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "thumbnail": "https://i.imgur.com/ncLBJMx.png",
   "logo": "https://i.imgur.com/y9Bj4mt.png",
   "color": "#FF6347",
