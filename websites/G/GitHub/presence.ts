@@ -58,63 +58,45 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname == "/" || !document.location.pathname) {
     presenceData.details = "Home";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/settings")) {
     presenceData.details = "Settings";
-    delete presenceData.state;
   } else if (
     document.location.pathname.startsWith("/explore") ||
     document.location.pathname.startsWith("/discover")
   ) {
     presenceData.details = "Browsing repositories...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/marketplace")) {
     presenceData.details = "Browsing marketplace...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/pulls")) {
     presenceData.details = "Browsing pull requests...";
-    delete presenceData.state;
   } else if (document.location.pathname == "/notifications") {
     presenceData.details = "Browsing notifications...";
-    delete presenceData.state;
   } else if (
     document.location.pathname.startsWith("/notifications/subscriptions")
   ) {
     presenceData.details = "Browsing subscriptions...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/watching")) {
     presenceData.details = "Browsing interested repositories...";
-    delete presenceData.state;
   } else if (document.location.pathname == "/new") {
     presenceData.details = "Creating a new repository...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/new/import")) {
     presenceData.details = "Importing a repository...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/new/project")) {
     presenceData.details = "Creating a new project...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/organizations/new")) {
     presenceData.details = "Creating a new organization...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/topics")) {
     presenceData.details = "Browsing topics...";
-    delete presenceData.state;
   } else if (document.location.pathname == "/trending") {
     presenceData.details = "Browsing trending repositories...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/trending/developers")) {
     presenceData.details = "Browsing trending developers...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/collections")) {
     presenceData.details = "Browsing collections...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/events")) {
     presenceData.details = "Browsing events...";
-    delete presenceData.state;
   } else if (document.location.pathname.startsWith("/codespaces")) {
     presenceData.details = "Browsing codespaces...";
-    delete presenceData.state;
   } else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching for: ";
     presenceData.state = searchResult;
