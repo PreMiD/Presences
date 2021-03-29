@@ -9,8 +9,9 @@ const privacy = await presence.getSetting("privacy"),
     largeImageKey: "malody"
   };
 if (privacy) {
-  presence.setTrayTitle();
-  presence.setActivity();
+presenceData.details = "Browsing Malody Website";
+presenceData.startTimestamp = browsingStamp;
+presence.setActivity(presenceData);
 } else {
   if (document.location.pathname == "/") {
     presenceData.details = "Malody Main Page";
