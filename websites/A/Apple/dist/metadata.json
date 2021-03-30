@@ -6,10 +6,11 @@
   "url": "www.apple.com",
   "description": {
     "pt_BR": "Apple Inc. é uma empresa multinacional norte-americana que tem o objetivo de projetar e comercializar produtos eletrônicos de consumo, software de computador e computadores pessoais.",
-    "en": " Apple Inc. is an American multinational company that aims to design and market consumer electronics, computer software and personal computers."
+    "en": "Apple Inc. is an American multinational company that aims to design and market consumer electronics, computer software and personal computers.",
+    "ga_IE": "Is cuideachta ilnáisiúnta Meiriceánach é Apple Inc. a bhfuil sé mar aidhm aige leictreonaic tomhaltóra, bogearraí ríomhaireachta agus ríomhairí pearsanta a dhearadh agus a mhargú."
   },
   "service": "Apple",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/rBAusA5.png",
   "thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
   "color": "#606C80",

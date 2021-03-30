@@ -5,10 +5,11 @@
   },
   "url": "fauux.neocities.org",
   "description": {
-    "en": "make me sad"
+    "en": "make me sad",
+    "ga_IE": "cuir brón orm"
   },
   "service": "Wired Sound For Wired People",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://menma.is-inside.me/mNBzC9bR.gif",
   "thumbnail": "https://menma.is-inside.me/j6DCnZe6.png",
   "color": "#D2738A",
