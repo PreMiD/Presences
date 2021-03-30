@@ -10,10 +10,11 @@
     "ar_SA": "تهدف ويكي الكتب إلى إنشاء مجموعة من موارد الكتب الإلكترونية المجانية بما في ذلك الكتب النصية ، والنصوص المشروحة ، والأدلة الإرشادية ، والأدلة.",
     "zh_CN": "維基教科書旨在建立一系列免費電子書資源，包括教科書，註釋文本，教學指南和手冊。",
     "fr": "Wikilivres vise à constituer une bibliothèque de ressources livresques électroniques, composée de manuels scolaires et techniques ainsi que de textes annotés et de guides.",
-    "es": "Wikilibros busca construir una colección de recursos libres en e-book incluyendo libros de texto, versiones comentadas, guías instructivas y manuales."
+    "es": "Wikilibros busca construir una colección de recursos libres en e-book incluyendo libros de texto, versiones comentadas, guías instructivas y manuales.",
+    "ga_IE": "Tá sé mar aidhm ag Wikibooks bailiúchán d’acmhainní r-leabhar saor in aisce a thógáil lena n-áirítear téacsleabhair, téacsanna anótáilte, treoracha teagaisc agus lámhleabhair."
   },
   "url": "wikibooks.org",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/Y6Z6NKa.png",
   "thumbnail": "https://i.imgur.com/zhJBMJe.png",
   "color": "#f9f9f9",

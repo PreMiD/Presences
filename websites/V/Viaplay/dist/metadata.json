@@ -5,7 +5,8 @@
   },
   "service": "Viaplay",
   "description": {
-    "en": "Stream TV, comics, movies and sports online!"
+    "en": "Stream TV, comics, movies and sports online!",
+    "ga_IE": "Sruthán teilifíse, greannáin, scannáin agus spóirt ar líne!"
   },
   "url": [
     "viaplay.se",
@@ -13,7 +14,7 @@
     "viaplay.no",
     "viaplay.fi"
   ],
-  "version": "1.3.5",
+  "version": "1.3.6",
   "logo": "https://i.imgur.com/ChKRz5r.png",
   "thumbnail": "https://i.imgur.com/Kntj5Fp.png",
   "color": "#ec5a7f",

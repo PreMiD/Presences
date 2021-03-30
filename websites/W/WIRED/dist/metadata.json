@@ -5,10 +5,11 @@
   },
   "service": "WIRED",
   "description": {
-    "en": "An American science and technology magazine and website."
+    "en": "An American science and technology magazine and website.",
+    "ga_IE": "Iris agus suíomh Gréasáin eolaíochta agus teicneolaíochta Mheiriceá."
   },
   "url": "www.wired.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/Qjzo1W1.png",
   "thumbnail": "https://i.imgur.com/YWSISdY.png",
   "color": "#ffffff",

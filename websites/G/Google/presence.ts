@@ -1,6 +1,6 @@
 const presence = new Presence({
-  clientId: "612704158826496028"
-}),
+    clientId: "612704158826496028"
+  }),
   browsingStamp = Math.floor(Date.now() / 1000),
   pageInput: HTMLInputElement = document.querySelector("#lst-ib"),
   homepageInput: HTMLInputElement = document.querySelector(
