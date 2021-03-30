@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"skipLibCheck": true,
+		"target": "es2018",
+		"module": "commonjs",
+		"outDir": "dist",
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"strict": false
+	},
+	"include": ["src"]
+}

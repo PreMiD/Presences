@@ -42,8 +42,7 @@ presence.on("UpdateData", async () => {
     searchURL = new URL(document.location.href),
     searchResult = searchURL.searchParams.get("q");
 
-  let profileTabs: string,
-    profileCurrentTab: string;
+  let profileTabs: string, profileCurrentTab: string;
 
   if (profile.name) {
     profileTabs = "/" + profile.nickname.innerText + "?tab=";
