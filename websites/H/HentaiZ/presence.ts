@@ -6,15 +6,6 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let lastPlaybackState: boolean,
   lastPath: string, video = {
     duration: 0,
@@ -81,7 +72,7 @@ presence.on("UpdateData", async () => {
   if (video !== null && !isNaN(video.duration)) {
     const title = document.querySelector("h1").innerHTML,
       brand = document.querySelector("#nhasx").innerHTML,
-      timestamps = getTimestamps(
+      timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
