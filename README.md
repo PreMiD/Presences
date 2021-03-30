@@ -49,14 +49,12 @@ presence
 
 ---
 
-## How to use the Translator Tool
-
-##### Created by Callum#6052 & Bas950#0950
+## Translator Tool Guide
 
 ### Setup
 
 - Clone the PreMiD repository to your system.
-- Download node modules with `yarn` or `npm install`
+- Install repository modules with `yarn` or `npm install`.
 
 ### Using the script
 
