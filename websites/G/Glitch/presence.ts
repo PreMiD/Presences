@@ -31,12 +31,18 @@ presence.on("UpdateData", () => {
     } else if (window.location.pathname.toLowerCase() === "/categories") {
       presenceData.details = "Viewing support topics";
       presenceData.state = "Categories";
-    } else if (window.location.href.toLowerCase().includes("support.glitch.com/t/")) {
+    } else if (
+      window.location.href.toLowerCase().includes("support.glitch.com/t/")
+    ) {
       presenceData.details = "Viewing a topic:";
       presenceData.state = document.title;
-    } else if (window.location.href.toLowerCase().includes("support.glitch.com/u/")) {
+    } else if (
+      window.location.href.toLowerCase().includes("support.glitch.com/u/")
+    ) {
       presenceData.details = "Viewing a user profile:";
-      presenceData.state = document.querySelector("body > section > div > div > div > section > section > div > div > div > div > h2 ").innerHTML;
+      presenceData.state = document.querySelector(
+        "body > section > div > div > div > section > section > div > div > div > div > h2 "
+      ).innerHTML;
     }
   } else {
     presenceData.details = "Viewing a page:";
@@ -62,7 +68,9 @@ presence.on("UpdateData", () => {
       presenceData.state = "Legal";
     } else if (window.location.pathname.toLowerCase().includes("edit")) {
       presenceData.details = "Editing a project:";
-      presenceData.state = document.querySelector("body > div > div > header > nav > button > div > span").innerHTML;
+      presenceData.state = document.querySelector(
+        "body > div > div > header > nav > button > div > span"
+      ).innerHTML;
     } else if (window.location.pathname.toLowerCase().includes("~")) {
       presenceData.details = "Viewing a project:";
       presenceData.state = window.location.pathname.replace("/", "");
