@@ -18,7 +18,7 @@ export class Translator {
 
   loadSpinner: Ora;
 
-  async loadFiles(language): Promise<boolean> {
+  async loadFiles(language: string): Promise<boolean> {
     this.info("Loading and caching files.");
 
     this.language = language;
