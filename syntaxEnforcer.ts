@@ -6,6 +6,7 @@ import { sync as glob } from "glob";
 import { join, normalize, relative, resolve, sep } from "path";
 import { format as prettier, resolveConfig } from "prettier";
 import { coerce, inc } from "semver";
+
 import execa = require("execa");
 
 /**
@@ -150,29 +151,38 @@ main();
 
 /** Typings for the Metadata JSON file */
 interface Metadata {
-  author: { name: string; id: string };
-  contributors?: Array<{ name: string; id: string }>;
+  author: {
+    name: string;
+    id: string;
+  };
+  contributors?: Array<{
+    name: string;
+    id: string;
+  }>;
   service: string;
+  altnames?: Array<string>;
   description: Record<string, string>;
-  url: string;
+  url: string | Array<string>;
   version: string;
   logo: string;
   thumbnail: string;
   color: string;
-  tags: string | Array<string>;
-  category: string;
+  tags: Array<string>;
+  category: "anime" | "games" | "music" | "socials" | "videos" | "other";
   iframe?: boolean;
   regExp?: RegExp;
   iframeRegExp?: RegExp;
+  readLogs?: boolean;
   button?: boolean;
   warning?: boolean;
   settings?: Array<{
     id: string;
-    title: string;
-    icon: string;
-    if?: Record<string, string>;
+    title?: string;
+    icon?: string;
+    if?: Record<string, string | number | boolean>;
     placeholder?: string;
     value?: string | number | boolean;
     values?: Array<string | number | boolean>;
+    multiLanguage?: boolean | string | Array<string>;
   }>;
 }
