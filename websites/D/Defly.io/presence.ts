@@ -17,7 +17,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing the change log";
   } else if (document.location.pathname == "/") {
     presenceData.
-    if (document.location.href.includes("#0")) {
+    if (document.location.href.includes("#")) {
       presenceData.buttons = [{label: "Join Game",
             url: document.location.href }];
       presenceData.details = "Playing FFA mode";
