@@ -62,7 +62,6 @@ presence.on("UpdateData", async () => {
 
     if (!search.startsWith("?s=") && !curPath.includes("/category"))
       delete presenceData.state;
-    delete presenceData.smallImageKey;
 
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData, false);
