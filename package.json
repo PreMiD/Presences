@@ -40,7 +40,7 @@
     "mongodb": "^3.6.5",
     "ora": "^5.4.0",
     "prettier": "^2.2.1",
-    "semver": "^7.3.4",
+    "semver": "^7.3.5",
     "source-map-support": "^0.5.19",
     "terser": "^5.6.1",
     "typescript": "^3.9.9"
