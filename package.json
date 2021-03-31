@@ -37,6 +37,8 @@
     "execa": "^5.0.0",
     "glob": "^7.1.6",
     "inquirer": "^8.0.0",
+    "inquirer-checkbox-plus-prompt": "^1.0.1",
+    "inquirer-list-search-prompt": "^1.0.2",
     "jsonschema": "^1.4.0",
     "mongodb": "^3.6.5",
     "ora": "^5.4.0",
