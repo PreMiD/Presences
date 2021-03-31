@@ -13,7 +13,7 @@
     "pu": "node ./presenceUpdater.js",
     "pu:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./presenceUpdater.ts",
     "translator": "npm run translator:compile && node ./translator.js",
-    "translator:compile": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./translator.ts"
+    "translator:compile": "tsc --module CommonJS --target ES2020 --typeRoots @types --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./translator.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
