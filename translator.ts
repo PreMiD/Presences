@@ -8,9 +8,11 @@ import axios from "axios";
 import { green, hex, red, white, yellow } from "chalk";
 import debug from "debug";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
-import { Answers, prompt } from "inquirer";
+import { Answers, prompt, registerPrompt } from "inquirer";
 import ora, { Ora } from "ora";
 
+registerPrompt("acList", require("inquirer-list-search-prompt"));
+registerPrompt("acCheckbox", require("inquirer-checkbox-plus-prompt"));
 debug.enable("Translator:*");
 let loadSpinner: Ora,
   language: string,
@@ -97,11 +99,23 @@ const spinnerSettings = {
     langLoadSpinner.succeed(green(` Loaded all languages.`));
     const language: string = await prompt([
         {
-          type: "list",
+          type: "acList",
           prefix: "●",
           message: green("Pick the language you want to translate:"),
           name: "selectedLang",
-          choices: langs.sort()
+          source: (_: Record<string, unknown>, input: string) => {
+            return new Promise((resolve) => {
+              resolve(
+                langs
+                  .sort()
+                  .filter((l) =>
+                    input
+                      ? l.toLowerCase().startsWith(input.toLowerCase())
+                      : true
+                  )
+              );
+            });
+          }
         }
       ]).then((answer: Answers) => answer.selectedLang),
       loadFilesSpinner = ora({
@@ -185,11 +199,24 @@ const spinnerSettings = {
         {
           const selected = await prompt([
             {
-              type: "checkbox",
+              type: "acCheckbox",
               prefix: "●",
               message: green("Pick the Presences:"),
               name: "selected",
-              choices: (Array.from(filesMap) as Files).map((f) => f[0])
+              searchable: true,
+              source: (_: Record<string, unknown>, input: string) => {
+                return new Promise((resolve) => {
+                  resolve(
+                    (Array.from(filesMap) as Files)
+                      .map((f) => f[0])
+                      .filter((s) =>
+                        input
+                          ? s.toLowerCase().startsWith(input.toLowerCase())
+                          : true
+                      )
+                  );
+                });
+              }
             }
           ]).then((answer: Answers) => answer.selected);
           files = (Array.from(filesMap) as Files).filter((f) =>
@@ -214,7 +241,7 @@ const spinnerSettings = {
         continue;
       }
 
-      const response = await prompt([
+      const response: string = await prompt([
           {
             type: "input",
             prefix: "●",
