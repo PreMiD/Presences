@@ -2,17 +2,16 @@
  * Translation Tool for PreMiD Presences.
  * @author callumok2004 <callumokane123@gmail.com>
  * @author Bas950 <me@bas950.com>
+ * @contributor ririxidev <mail@ririxi.dev>
  */
 
 import axios from "axios";
-import { green, hex, red, white, yellow } from "chalk";
+import { gray, green, hex, red, white, yellow } from "chalk";
 import debug from "debug";
+import { prompt } from "enquirer";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
-import { Answers, prompt, registerPrompt } from "inquirer";
 import ora, { Ora } from "ora";
 
-registerPrompt("acList", require("inquirer-list-search-prompt"));
-registerPrompt("acCheckbox", require("inquirer-checkbox-plus-prompt"));
 debug.enable("Translator:*");
 let loadSpinner: Ora,
   language: string,
@@ -99,25 +98,19 @@ const spinnerSettings = {
     langLoadSpinner.succeed(green(` Loaded all languages.`));
     const language: string = await prompt([
         {
-          type: "acList",
-          prefix: "●",
+          type: "autocomplete",
           message: green("Pick the language you want to translate:"),
           name: "selectedLang",
-          source: (_: Record<string, unknown>, input: string) => {
-            return new Promise((resolve) => {
-              resolve(
-                langs
-                  .sort()
-                  .filter((l) =>
-                    input
-                      ? l.toLowerCase().startsWith(input.toLowerCase())
-                      : true
-                  )
-              );
-            });
+          // @ts-expect-error
+          limit: 7,
+          choices: langs.sort(),
+          footer() {
+            return gray("(Scroll up and down to reveal more choices)");
           }
         }
-      ]).then((answer: Answers) => answer.selectedLang),
+      ])
+        .then((answer: { selectedLang: string }) => answer.selectedLang)
+        .catch(() => process.exit()),
       loadFilesSpinner = ora({
         text: green(`Loading presences... \n`)
       });
@@ -130,26 +123,30 @@ const spinnerSettings = {
 
     const mode: Mode = await prompt([
       {
-        type: "list",
-        prefix: "●",
+        type: "select",
         message: green("Pick the Translator Mode:"),
         name: "mode",
         choices: [
           {
-            name: "Translate every Presence in order.",
+            name: "EVERY",
+            message: "Translate every Presence in order.",
             value: "EVERY"
           },
           {
-            name: "Translate every Presence of category.",
+            name: "CATEGORY",
+            message: "Translate every Presence of category.",
             value: "CATEGORY"
           },
           {
-            name: "Translate selected Presences.",
+            name: "SELECT",
+            message: "Translate selected Presences.",
             value: "SELECT"
           }
         ]
       }
-    ]).then((answer: Answers) => answer.mode);
+    ])
+      .then((answer: { mode: Mode }) => answer.mode)
+      .catch(() => process.exit());
     switch (mode) {
       case "EVERY":
         files = Array.from(filesMap);
@@ -158,38 +155,47 @@ const spinnerSettings = {
         {
           const category: Metadata["category"] = await prompt([
             {
-              type: "list",
-              prefix: "●",
+              type: "select",
               message: green("Pick a category:"),
               name: "category",
               choices: [
                 {
-                  name: "Anime",
+                  name: "anime",
+                  message: "Anime",
                   value: "anime"
                 },
                 {
-                  name: "Games",
+                  name: "games",
+                  message: "Games",
                   value: "games"
                 },
                 {
-                  name: "Music",
+                  name: "music",
+                  message: "Music",
                   value: "music"
                 },
                 {
-                  name: "Socials",
+                  name: "socials",
+                  message: "Socials",
                   value: "socials"
                 },
                 {
-                  name: "Videos & Streams",
+                  name: "videos",
+                  message: "Videos & Streams",
                   value: "videos"
                 },
                 {
-                  name: "Other",
+                  name: "other",
+                  message: "Other",
                   value: "other"
                 }
               ]
             }
-          ]).then((answer: Answers) => answer.category);
+          ])
+            .then(
+              (answer: { category: Metadata["category"] }) => answer.category
+            )
+            .catch(() => process.exit());
           files = (Array.from(filesMap) as Files).filter(
             (f) => f[1].category === category
           );
@@ -199,33 +205,30 @@ const spinnerSettings = {
         {
           const selected = await prompt([
             {
-              type: "acCheckbox",
-              prefix: "●",
+              type: "autocomplete",
               message: green("Pick the Presences:"),
               name: "selected",
-              searchable: true,
-              source: (_: Record<string, unknown>, input: string) => {
-                return new Promise((resolve) => {
-                  resolve(
-                    (Array.from(filesMap) as Files)
-                      .map((f) => f[0])
-                      .filter((s) =>
-                        input
-                          ? s.toLowerCase().startsWith(input.toLowerCase())
-                          : true
-                      )
-                  );
-                });
+              // @ts-expect-error
+              limit: 7,
+              multiple: true,
+              choices: (Array.from(filesMap) as Files).map((f) => f[0]),
+              footer() {
+                const selectedPresences = this.selected.length;
+                return gray(
+                  `(Scroll up and down to reveal more choices)\n(You selected ${selectedPresences} presences)`
+                );
               }
             }
-          ]).then((answer: Answers) => answer.selected);
+          ])
+            .then((answer: { selected: string }) => answer.selected)
+            .catch(() => process.exit());
           files = (Array.from(filesMap) as Files).filter((f) =>
             selected.includes(f[0])
           );
         }
         break;
       default:
-        error(red("Unknown Mode selected…"));
+        error(red("Unknown Mode selected..."));
         process.exit();
     }
 
@@ -241,34 +244,47 @@ const spinnerSettings = {
         continue;
       }
 
-      const response: string = await prompt([
-          {
-            type: "input",
-            prefix: "●",
-            message:
-              green("Please translate the following description of ") +
-              yellow(file[0]) +
-              green(`:\n"`) +
-              hex("#bebebe")(file[1].description["en"]) +
-              green(`":\n`) +
-              hex("#bebebe")(`(Type "skip" to skip)`),
-            name: "translatedDes"
-          }
-        ]).then((answer: Answers) => answer.translatedDes),
+      const response: string = await prompt({
+          type: "input",
+          message:
+            green("Please translate the following description of ") +
+            yellow(file[0]) +
+            green(`:\n"`) +
+            hex("#bebebe")(file[1].description["en"]) +
+            green(`":\n`) +
+            hex("#bebebe")(`(Type "skip" to skip or "stop" to stop)`),
+          name: "translatedDes"
+        }).then((answer: { translatedDes: string }) => answer.translatedDes),
         ver = data.version.split(".");
 
-      if (response === "skip") {
-        filesMap.delete(file[0]);
-        await checkCount();
-        continue;
-      }
-      data.version = `${ver[0]}.${ver[1]}.${Number(ver[2]) + 1}`;
-      data.description[language] = response;
-      delete data.path;
+      switch (response) {
+        case "skip": {
+          filesMap.delete(file[0]);
+          await checkCount();
+          continue;
+        }
 
-      writeFileSync(path, JSON.stringify(data, null, 2));
-      filesMap.delete(file[0]);
-      await checkCount();
+        case "stop":
+          process.exit();
+
+        default: {
+          data.version = `${ver[0]}.${ver[1]}.${Number(ver[2]) + 1}`;
+          data.description[language] = response;
+          delete data.path;
+
+          writeFileSync(path, JSON.stringify(data, null, 2));
+          filesMap.delete(file[0]);
+          await checkCount();
+
+          if (!JSON.parse(readFileSync(path).toString()).description[language])
+            return (
+              error(
+                `An error occured while saving the file. Please manually add the translation to: ${language}. The version was automatically bumped.`
+              ),
+              process.exit()
+            );
+        }
+      }
     }
   };
 
@@ -278,5 +294,6 @@ main();
 interface metadata extends Metadata {
   path?: string;
 }
+
 type Mode = "EVERY" | "CATEGORY" | "SELECT";
 type Files = [string, metadata][];

@@ -68,4 +68,4 @@ presence
   some aditional information to finalize your filter.
 - Then at last you will be asked to fill in you translations. (You can type
   "skip" to skip)
-- To stop at any time, hit `ctrl+c`
+- To stop at any time, hit `ctrl+c` or type `stop`.
