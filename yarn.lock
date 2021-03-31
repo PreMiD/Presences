@@ -1907,11 +1907,11 @@ inherits@2, inherits@^2.0.3, inherits@^2.0.4, inherits@~2.0.3:
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-inquirer-checkbox-plus-prompt@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/inquirer-checkbox-plus-prompt/-/inquirer-checkbox-plus-prompt-1.0.1.tgz#54ff1ed09777a103538562276b5cf4521a31d16d"
-  integrity sha1-VP8e0Jd3oQNThWIna1z0Uhox0W0=
+"inquirer-checkbox-plus-prompt@github:erhhung/inquirer-checkbox-plus-prompt":
+  version "1.0.2"
+  resolved "https://codeload.github.com/erhhung/inquirer-checkbox-plus-prompt/tar.gz/f8a8e3f4f4563d299a080f92fba851f9ebccdab1"
   dependencies:
+    chalk "^2.0.0"
     cli-cursor "^2.1.0"
     figures "^2.0.0"
     inquirer "^5.1.0"
