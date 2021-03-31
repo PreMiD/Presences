@@ -7,7 +7,7 @@
     "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
     "inc": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
     "se": "node ./syntaxEnforcer.js",
-    "se:compile": "tsc --module CommonJS --target ES2020 --typeRoots @types --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./syntaxEnforcer.ts",
+    "se:compile": "tsc --module CommonJS --target ES2020 --typeRoots '@types,node_modules/@types' --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./syntaxEnforcer.ts",
     "sv": "node ./schemaValidator.js",
     "sv:compile": "tsc --module CommonJS --target ES2020 --typeRoots '@types,node_modules/@types' --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./schemaValidator.ts",
     "pu": "node ./presenceUpdater.js",
