@@ -16,7 +16,6 @@ presence.on("UpdateData", () => {
   } else if (document.location.pathname.includes("/changelog")) {
     presenceData.details = "Viewing the change log";
   } else if (document.location.pathname == "/") {
-    presenceData.
     if (document.location.href.includes("#")) {
       presenceData.buttons = [{label: "Join Game",
             url: document.location.href }];
