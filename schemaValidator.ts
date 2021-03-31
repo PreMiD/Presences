@@ -1,8 +1,9 @@
 import "source-map-support/register";
 
-import axios from "axios";
 import { blue, green, red, yellow } from "chalk";
-import * as fs from "fs";
+
+import axios from "axios";
+import { readFileSync } from "fs";
 import { validate } from "jsonschema";
 
 const latestMetadataSchema = "https://schemas.premid.app/metadata/1.3",
@@ -26,11 +27,8 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.3",
     stats.failedToValidate++;
   },
   loadMetadata = (path: string): metadata =>
-    JSON.parse(fs.readFileSync(path, "utf-8")),
-  changedFiles = fs
-    .readFileSync("./file_changes.txt", "utf-8")
-    .trim()
-    .split("\n"),
+    JSON.parse(readFileSync(path, "utf-8")),
+  changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
   metaFiles = changedFiles.filter((f: string) => f.endsWith("metadata.json"));
 
 (async (): Promise<void> => {

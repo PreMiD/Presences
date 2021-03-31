@@ -101,7 +101,7 @@ const spinnerSettings = {
           type: "autocomplete",
           message: green("Pick the language you want to translate:"),
           name: "selectedLang",
-          // @ts-expect-error
+          // @ts-expect-error Limit doesn't exist in Options.
           limit: 7,
           choices: langs.sort(),
           footer() {
@@ -208,7 +208,7 @@ const spinnerSettings = {
               type: "autocomplete",
               message: green("Pick the Presences:"),
               name: "selected",
-              // @ts-expect-error
+              // @ts-expect-error Limit doesn't exist in Options.
               limit: 7,
               multiple: true,
               choices: (Array.from(filesMap) as Files).map((f) => f[0]),
@@ -266,6 +266,7 @@ const spinnerSettings = {
 
         case "stop":
           process.exit();
+          break;
 
         default: {
           data.version = `${ver[0]}.${ver[1]}.${Number(ver[2]) + 1}`;
