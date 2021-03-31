@@ -17,8 +17,7 @@ presence.on("UpdateData", () => {
     presenceData.details = "Viewing the change log";
   } else if (document.location.pathname == "/") {
     if (document.location.href.includes("#")) {
-      presenceData.buttons = [{label: "Join Game",
-            url: document.location.href }];
+      presenceData.buttons = [{label: "Join Game", url: document.location.href }];
       presenceData.details = "Playing FFA mode";
       presenceData.state = "on server: " + document.location.href.split("#")[1];
     } else if (document.location.href.includes("#1")) {
