@@ -5,7 +5,7 @@
  */
 
 import axios from "axios";
-import chalk from "chalk";
+import { green, hex, red, white, yellow } from "chalk";
 import debug from "debug";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
 import { Answers, prompt } from "inquirer";
@@ -20,14 +20,14 @@ let loadSpinner: Ora,
 const spinnerSettings = {
     interval: 80,
     frames: [
-      chalk.hex("#bebebe")(`( ${chalk.white("●")}   )`),
-      chalk.hex("#bebebe")(`(  ${chalk.white("●")}  )`),
-      chalk.hex("#bebebe")(`(   ${chalk.white("●")} )`),
-      chalk.hex("#bebebe")(`(    ${chalk.white("●")})`),
-      chalk.hex("#bebebe")(`(   ${chalk.white("●")} )`),
-      chalk.hex("#bebebe")(`(  ${chalk.white("●")}  )`),
-      chalk.hex("#bebebe")(`( ${chalk.white("●")}   )`),
-      chalk.hex("#bebebe")(`(${chalk.white("●")}    )`)
+      hex("#bebebe")(`( ${white("●")}   )`),
+      hex("#bebebe")(`(  ${white("●")}  )`),
+      hex("#bebebe")(`(   ${white("●")} )`),
+      hex("#bebebe")(`(    ${white("●")})`),
+      hex("#bebebe")(`(   ${white("●")} )`),
+      hex("#bebebe")(`(  ${white("●")}  )`),
+      hex("#bebebe")(`( ${white("●")}   )`),
+      hex("#bebebe")(`(${white("●")}    )`)
     ]
   },
   filesMap = new Map(),
@@ -70,14 +70,14 @@ const spinnerSettings = {
       if (file[1].description[language]) filesMap.delete(file[0]);
 
     loadSpinner.succeed(
-      chalk.green(` Loaded all presences… (${filesMap.size} to translate)`)
+      green(` Loaded all presences… (${filesMap.size} to translate)`)
     );
 
     return true;
   },
   main = async () => {
     const langLoadSpinner = ora({
-      text: chalk.green(`Loading languages…`)
+      text: green(`Loading languages…`)
     });
     langLoadSpinner.spinner = spinnerSettings;
     langLoadSpinner.start();
@@ -94,18 +94,18 @@ const spinnerSettings = {
     ).data.data.langFiles
       .map((c: { lang: string }) => c.lang)
       .filter((c: string) => c !== "en");
-    langLoadSpinner.succeed(chalk.green(` Loaded all languages.`));
+    langLoadSpinner.succeed(green(` Loaded all languages.`));
     const language: string = await prompt([
         {
           type: "list",
           prefix: "●",
-          message: chalk.green("Pick the language you want to translate:"),
+          message: green("Pick the language you want to translate:"),
           name: "selectedLang",
           choices: langs.sort()
         }
       ]).then((answer: Answers) => answer.selectedLang),
       loadFilesSpinner = ora({
-        text: chalk.green(`Loading presences...`)
+        text: green(`Loading presences... \n`)
       });
 
     loadSpinner = loadFilesSpinner;
@@ -118,7 +118,7 @@ const spinnerSettings = {
       {
         type: "list",
         prefix: "●",
-        message: chalk.green("Pick the Translator Mode:"),
+        message: green("Pick the Translator Mode:"),
         name: "mode",
         choices: [
           {
@@ -146,7 +146,7 @@ const spinnerSettings = {
             {
               type: "list",
               prefix: "●",
-              message: chalk.green("Pick a category:"),
+              message: green("Pick a category:"),
               name: "category",
               choices: [
                 {
@@ -187,7 +187,7 @@ const spinnerSettings = {
             {
               type: "checkbox",
               prefix: "●",
-              message: chalk.green("Pick the Presences:"),
+              message: green("Pick the Presences:"),
               name: "selected",
               choices: (Array.from(filesMap) as Files).map((f) => f[0])
             }
@@ -198,7 +198,7 @@ const spinnerSettings = {
         }
         break;
       default:
-        error(chalk.red("Unknown Mode selected…"));
+        error(red("Unknown Mode selected…"));
         process.exit();
     }
 
@@ -219,12 +219,12 @@ const spinnerSettings = {
             type: "input",
             prefix: "●",
             message:
-              chalk.green("Please translate the following description of ") +
-              chalk.yellow(file[0]) +
-              chalk.green(`:\n"`) +
-              chalk.hex("#bebebe")(file[1].description["en"]) +
-              chalk.green(`":\n`) +
-              chalk.hex("#bebebe")(`(Type "skip" to skip)`),
+              green("Please translate the following description of ") +
+              yellow(file[0]) +
+              green(`:\n"`) +
+              hex("#bebebe")(file[1].description["en"]) +
+              green(`":\n`) +
+              hex("#bebebe")(`(Type "skip" to skip)`),
             name: "translatedDes"
           }
         ]).then((answer: Answers) => answer.translatedDes),
@@ -247,7 +247,7 @@ const spinnerSettings = {
 
 main();
 
-//* Extends types to Metadata
+//* Types
 interface metadata extends Metadata {
   path?: string;
 }
