@@ -5,13 +5,14 @@
   },
   "service": "Minecraft Central",
   "description": {
-    "en": "Play Minigames, Factions, Skyblock, Prison, Survival and much more on Minecraft Central!"
+    "en": "Play Minigames, Factions, Skyblock, Prison, Survival and much more on Minecraft Central!",
+    "ga_IE": "Play Minigames, Faicsin, Skyblock, Príosún, Marthanais agus i bhfad níos mó ar Minecraft Centraft!"
   },
   "url": [
     "mccentral.org",
     "buy.mccentral.org"
   ],
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/W7XIUCd.png",
   "thumbnail": "https://i.imgur.com/yTWQ5RJ.png",
   "color": "#da8a00",

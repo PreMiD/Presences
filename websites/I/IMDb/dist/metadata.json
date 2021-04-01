@@ -5,10 +5,11 @@
   },
   "service": "IMDb",
   "description": {
-    "en": "IMDb (Internet Movie Database) is an online database of information related to films, television programs, home videos, video games, and streaming content online – including cast, production crew and personal biographies, plot summaries, trivia, fan and critical reviews, and ratings."
+    "en": "IMDb (Internet Movie Database) is an online database of information related to films, television programs, home videos, video games, and streaming content online – including cast, production crew and personal biographies, plot summaries, trivia, fan and critical reviews, and ratings.",
+    "ga_IE": "Is éard atá i gceist le IMDB (Bunachar Sonraí Scannán Idirlín) bunachar sonraí ar líne a bhaineann le scannáin, cláir theilifíse, físeáin baile, cluichí físeáin, agus ábhar a shruthú ar líne - lena n-áirítear cast, criú táirgthe agus beathaisnéisí pearsanta, achoimrí plota, trivia, lucht leanúna agus athbhreithnithe criticiúla, agusrátálacha."
   },
   "url": "www.imdb.com",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/OCAWBbv.png",
   "thumbnail": "https://i.imgur.com/hPrMgUE.png",
   "color": "#e6b91e",

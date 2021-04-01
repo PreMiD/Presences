@@ -16,10 +16,11 @@
     "ja_JP": "広告なしで、4000万曲にオンデマンドでアクセス。ダウンロードしてオフラインで再生。お好みの曲を最大 50,000 曲アップロードして、いつでもどこでも再生できます。",
     "pt_BR": "Rádio grátis para tudo o que você fazer. Guarde até 50,000 músicas em sua coleção pessoal. Inscreva-se para acesso sob demanda para 40 milhões de músicas e modo offline.",
     "uk_UA": "Безкоштовне радіо для всього, що ви робите. Зберігайте 50 000 композицій у особистій колекції. Підпишіться для доступу за потребою до 40 мільйонів пісень та прослуховування в режимі офлайн.",
-    "nl": "Gratis radio voor alles wat je doet. Bewaar 50.000 nummers uit uw persoonlijke verzameling. Abonneer op on-demand voor toegang tot 40 miljoen nummers en offline luisteren."
+    "nl": "Gratis radio voor alles wat je doet. Bewaar 50.000 nummers uit uw persoonlijke verzameling. Abonneer op on-demand voor toegang tot 40 miljoen nummers en offline luisteren.",
+    "ga_IE": "Raidió saor in aisce do gach rud a dhéanann tú.Stóráil 50,000 rianta ó do bhailiúchán pearsanta.Liostáil le haghaidh rochtain ar éileamh ar 40 milliún amhrán agus éisteacht as líne."
   },
   "url": "play.google.com",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "logo": "https://i.imgur.com/jFuYt2A.png",
   "thumbnail": "https://i.imgur.com/NQrR9PK.jpg",
   "color": "#ff5722",

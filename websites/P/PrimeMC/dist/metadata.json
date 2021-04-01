@@ -6,13 +6,14 @@
   "service": "PrimeMC",
   "description": {
     "en": "Join the competitive community of PrimeMC, ranging from a content filled Skyblock realm and other interesting gamemodes on the side.",
-    "nl": "Word lid van de competitieve community van PrimeMC, variërend van een content-gevuld Skyblock en andere interessante gamemodes aan de zijkant."
+    "nl": "Word lid van de competitieve community van PrimeMC, variërend van een content-gevuld Skyblock en andere interessante gamemodes aan de zijkant.",
+    "ga_IE": "Bí ar an bpobal iomaíoch de Primemc, ag dul ó ábhar líonta ar réimse spiorad agus gamemodes suimiúla eile ar an taobh."
   },
   "url": [
     "primemc.org",
     "buy.primemc.org"
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/XNUEGd9.png",
   "thumbnail": "https://i.imgur.com/NKZxaeG.png",
   "color": "#00c3c5",

@@ -5,10 +5,11 @@
   },
   "url": "duckduckgo.com",
   "description": {
-    "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs."
+    "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs.",
+    "ga_IE": "An chuideachta phríobháideachais Idirlín a thugann cumhacht duit smacht a fháil ar do chuid faisnéise pearsanta, gan aon tráddenoffs."
   },
   "service": "DuckDuckGo",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/zl3jobl.png",
   "thumbnail": "https://i.imgur.com/VlPQGur.png",
   "color": "#FF5900",

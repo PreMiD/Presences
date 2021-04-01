@@ -6,10 +6,11 @@
   },
   "service": "Google Messages",
   "description": {
-    "en": "Google Messages is a simple, helpful messaging app that keeps you connected with the people who matter most. Text anyone from anywhere across devices."
+    "en": "Google Messages is a simple, helpful messaging app that keeps you connected with the people who matter most. Text anyone from anywhere across devices.",
+    "ga_IE": "Is feidhmchlár teachtaireachtaí simplí, cabhrach é Teachtaireachtaí Google a choinníonn nasctha leat leis na daoine is tábhachtaí.Cuir téacs ar bith ó áit ar bith thar na feistí."
   },
   "url": "messages.google.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/lkQjuwL.png",
   "thumbnail": "https://i.imgur.com/ja7iISJ.jpg",
   "color": "#1a73e8",

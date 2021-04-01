@@ -11,10 +11,11 @@
   ],
   "service": "iHeartRadio",
   "description": {
-    "en": "iHeartRadio is a free broadcast, podcast and streaming radio platform owned by iHeartMedia, Inc. It was founded in April 2008."
+    "en": "iHeartRadio is a free broadcast, podcast and streaming radio platform owned by iHeartMedia, Inc. It was founded in April 2008.",
+    "ga_IE": "Is ardán raidió saor in aisce é IhearTradio faoi úinéireacht IheartMedia, Inc. Bunaíodh é i mí Aibreáin 2008."
   },
   "url": "www.iheart.com",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "logo": "https://i.imgur.com/VhqYveJ.png",
   "thumbnail": "https://i.imgur.com/jb8OK5e.png",
   "color": "#C42224",

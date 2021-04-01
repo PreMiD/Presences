@@ -5,10 +5,11 @@
   },
   "service": "DaFont",
   "description": {
-    "en": "Archive of freely downloadable fonts. Browse by alphabetical listing, by style, by author or by popularity."
+    "en": "Archive of freely downloadable fonts. Browse by alphabetical listing, by style, by author or by popularity.",
+    "ga_IE": "Cartlann na gclónna atá in-íoslódáilte faoi shaoirse.Brabhsáil trí liosta aibítre, de réir stíle, de réir údair nó de réir tóir."
   },
   "url": "www.dafont.com",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/rc9ODvW.png",
   "thumbnail": "https://i.imgur.com/OTjFjMj.jpg",
   "color": "#eb4034",

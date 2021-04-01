@@ -13,10 +13,11 @@
   "service": "osu!online",
   "description": {
     "en": "This is an unofficial implementation of osu!. Scoring and judgement rules differ from official versions. Some music might not be perfectly syncing. Modes other than osu! (std) are unsupported.",
-    "zh_CN": "这是个非官方的osu!工具。不同于官方版本的计分和判定，某些音乐可能无法完美同步，不支持osu!std以外的模式。"
+    "zh_CN": "这是个非官方的osu!工具。不同于官方版本的计分和判定，某些音乐可能无法完美同步，不支持osu!std以外的模式。",
+    "ga_IE": "Is é seo an cur i bhfeidhm neamhoifigiúil OSU!.Is ionann rialacha scórála agus breithiúnais ó leaganacha oifigiúla.B'fhéidir nach mbeadh roinnt ceoil ag sinteoireacht go foirfe.Modhanna seachas OSU!(STD) níl sé gan tacaíocht."
   },
   "url": "osugame.online",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/P95A0bS.png",
   "thumbnail": "https://i.imgur.com/ZbJSTDO.png",
   "color": "#B63258",

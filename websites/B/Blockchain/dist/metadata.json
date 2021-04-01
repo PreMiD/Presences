@@ -5,7 +5,8 @@
   },
   "service": "Blockchain",
   "description": {
-    "en": "The World's Most Popular Way to Buy, Hold, and Use Crypto"
+    "en": "The World's Most Popular Way to Buy, Hold, and Use Crypto",
+    "ga_IE": "An bealach is coitianta ar domhan chun Crypto a cheannach, a shealbhú, agus a úsáid"
   },
   "url": [
     "www.blockchain.com",
@@ -14,10 +15,16 @@
     "support.blockchain.com",
     "www.blockchain-status.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/rmmWPPP.png",
   "thumbnail": "https://i.imgur.com/1W01XgV.png",
   "color": "#3d89f5",
-  "tags": ["crypto", "mining", "blockchain", "network", "exchange"],
+  "tags": [
+    "crypto",
+    "mining",
+    "blockchain",
+    "network",
+    "exchange"
+  ],
   "category": "other"
 }

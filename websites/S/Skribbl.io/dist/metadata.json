@@ -17,10 +17,11 @@
   "description": {
     "en": "Skribbl.io a free multiplayer drawing and guessing game. Draw and guess words with your friends and people all around the world! Score the most points and be the winner!",
     "zh_CN": "Skribbl.io提供免费的多人绘图和猜谜游戏。与您的朋友或世界各地的人一起你画我猜！大吉大利，今晚吃鸡！",
-    "nl": "Skribbl.io is een gratis multiplayer teken- en raadspel. Teken en raad woorden met je vrienden en mensen van over de hele wereld! Scoor de meeste punten en wees de winnaar!"
+    "nl": "Skribbl.io is een gratis multiplayer teken- en raadspel. Teken en raad woorden met je vrienden en mensen van over de hele wereld! Scoor de meeste punten en wees de winnaar!",
+    "ga_IE": "Skribbl.io a líníocht il-imreora saor in aisce agus cluiche guessing.Tarraing agus buille faoi thuairim focail le do chairde agus do dhaoine ar fud an domhain!Scóráil na pointí is mó agus bí an buaiteoir!"
   },
   "url": "skribbl.io",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "logo": "https://i.imgur.com/au4OO2A.jpg",
   "thumbnail": "https://i.imgur.com/sDWwUZk.png",
   "color": "#245195",

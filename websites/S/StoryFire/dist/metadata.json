@@ -6,10 +6,11 @@
   },
   "url": "storyfire.com",
   "description": {
-    "en": "Join the StoryFire rebellion! Watch and create the stories and videos that you want while growing a massive fanbase!"
+    "en": "Join the StoryFire rebellion! Watch and create the stories and videos that you want while growing a massive fanbase!",
+    "ga_IE": "Cláraigh leis an Scéalta Éirí Amach!Féach agus cruthaigh na scéalta agus na físeáin a theastaíonn uait agus tú ag fás Fanbase ollmhór!"
   },
   "service": "StoryFire",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/1RGQMmt.png",
   "thumbnail": "https://i.imgur.com/voBWTFb.png",
   "color": "#fc9000",

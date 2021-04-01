@@ -6,10 +6,11 @@
   "service": "G2A",
   "description": {
     "en": "Buy & Sell Online: PC Games, Software, Gift Cards and More on G2A.COM",
-    "nl": "Online kopen en verkopen: pc-games, software, cadeaubonnen en meer op G2A.COM"
+    "nl": "Online kopen en verkopen: pc-games, software, cadeaubonnen en meer op G2A.COM",
+    "ga_IE": "Ceannaigh & Díol ar líne: Cluichí PC, bogearraí, cártaí bronntanais agus níos mó ar G2A.com"
   },
   "url": "www.g2a.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/TJO23bI.png",
   "thumbnail": "https://i.imgur.com/z6IBeG6.png",
   "color": "#f05f00",

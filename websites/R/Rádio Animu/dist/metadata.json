@@ -12,10 +12,11 @@
   "service": "Rádio Animu",
   "description": {
     "en": "The most moe radio in Brazil",
-    "pt_BR": "A rádio mais moe do Brasil"
+    "pt_BR": "A rádio mais moe do Brasil",
+    "ga_IE": "An Radio MOE sa Bhrasaíl"
   },
   "url": "www.animu.com.br",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/vMsQ4Bd.png",
   "thumbnail": "https://i.imgur.com/Ke5HBcL.png",
   "color": "#2c004b",

@@ -7,10 +7,11 @@
   "url": "r6stats.com",
   "description": {
     "en": "View and compare your Rainbow Six: Siege statistics with millions of other players around the world!",
-    "ru": "Посматривайте и сравнивайте свою статистику в Rainbow Six: Siege с миллионами других игроков со всего мира!"
+    "ru": "Посматривайте и сравнивайте свою статистику в Rainbow Six: Siege с миллионами других игроков со всего мира!",
+    "ga_IE": "Féach agus déan comparáid idir do Rainbow Sé: Staitisticí Léigear le milliúin imreoirí eile ar fud an domhain!"
   },
   "service": "R6Stats",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/DCvK0Bz.png",
   "thumbnail": "https://i.imgur.com/nOrZDpv.png",
   "color": "#ffda0c",

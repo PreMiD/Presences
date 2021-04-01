@@ -16,10 +16,11 @@
     "pt_BR": "duelingnexus.com é um simulador de Yu-Gi-Oh online gratuito para navegadores.",
     "fr": "duelingnexus.com est un simulateur en ligne gratuit de Yu-Gi-Oh pour les navigateurs.",
     "uk_UA": "duelingnexus.com не має симулятора, а також відвідає багато навігацій.",
-    "nl": "duelingnexus.com is een gratis online Yu-Gi-Oh-simulator voor browsers"
+    "nl": "duelingnexus.com is een gratis online Yu-Gi-Oh-simulator voor browsers",
+    "ga_IE": "Is Insamhlóir Free Online Yu-Gi-Oh é Duelingnexus.com do bhrabhsálaithe."
   },
   "url": "duelingnexus.com",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "logo": "https://i.imgur.com/JFzVAdh.png",
   "thumbnail": "https://i.imgur.com/7NXj9ih.jpg",
   "color": "#FF4500",

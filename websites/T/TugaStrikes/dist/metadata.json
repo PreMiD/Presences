@@ -5,10 +5,11 @@
   },
   "service": "TugaStrikes",
   "description": {
-    "en": "TugaStrikes is a Gaming Community Founded in 2017 focusing on CS:GO"
+    "en": "TugaStrikes is a Gaming Community Founded in 2017 focusing on CS:GO",
+    "ga_IE": "Is pobal cearrbhachais é Tugastrikes a bunaíodh in 2017 ag díriú ar CS: Téigh"
   },
   "url": "tugastrikes.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/nDCQmhr.png",
   "thumbnail": "https://i.imgur.com/fgUUaYV.png",
   "color": "#00ecec",

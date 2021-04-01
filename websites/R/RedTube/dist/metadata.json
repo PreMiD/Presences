@@ -11,7 +11,8 @@
     "fr": "RedTube est une plateforme de partage de vidéos pour adultes de premier ordre.",
     "uk_UA": "RedTube - це провідна платформа для обміну відео для дорослих.",
     "nl": "RedTube is een vooraanstaand platform voor het delen van video's voor volwassenen.",
-    "zh_CN": "RedTube是知名的黄色视频共享平台。"
+    "zh_CN": "RedTube是知名的黄色视频共享平台。",
+    "ga_IE": "Is ardán comhroinnte físe premier é RedTube."
   },
   "url": [
     "www.redtube.com",
@@ -24,7 +25,7 @@
     "jp.redtube.com",
     "fr.redtube.com"
   ],
-  "version": "2.2.6",
+  "version": "2.2.7",
   "logo": "https://i.imgur.com/MlqNqGr.jpg",
   "thumbnail": "https://i.imgur.com/6DD83q7.png",
   "color": "#af181f",

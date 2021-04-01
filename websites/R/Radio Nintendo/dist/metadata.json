@@ -5,10 +5,11 @@
   },
   "service": "Radio Nintendo",
   "description": {
-    "en": "Radio Nintendo is a online radio that streams Nintendo related music and shows."
+    "en": "Radio Nintendo is a online radio that streams Nintendo related music and shows.",
+    "ga_IE": "Radio Nintendo Is raidió ar líne é a shruthaíonn ceol agus seónna a bhaineann le Nintendo."
   },
   "url": "radionintendo.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/rjBHMMc.png",
   "thumbnail": "https://i.imgur.com/95jt41L.png",
   "color": "#B80300",

@@ -13,10 +13,11 @@
     "uk_UA": "Простий, веселий та творчий спосіб зйомки, редагування та обміну фотографіями, відео та повідомленнями з друзями та родиною.",
     "nl": "Een eenvoudige, leuke en creatieve manier om foto's, video's en berichten vast te leggen, te bewerken en te delen met vrienden en familie.",
     "zh_CN": "Instagram是一款运行在移动端上的社交应用，以一种快速、美妙和有趣的方式将你随时抓拍下的图片彼此分享。",
-    "zh_TW": "Instagram是Facebook公司旗下一款免費提供線上圖片及視訊分享的社群應用軟體。"
+    "zh_TW": "Instagram是Facebook公司旗下一款免費提供線上圖片及視訊分享的社群應用軟體。",
+    "ga_IE": "Bealach simplí, spraoi agus cruthaitheach chun grianghraif, físeáin agus teachtaireachtaí a ghabháil, a eagrú agus a roinnt le cairde agus teaghlaigh."
   },
   "url": "www.instagram.com",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "logo": "https://crugg.de/premid/iglogo.png",
   "thumbnail": "https://crugg.de/premid/igbanner.png",
   "color": "#E1306C",

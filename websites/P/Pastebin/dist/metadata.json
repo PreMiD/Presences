@@ -5,13 +5,14 @@
   },
   "service": "Pastebin",
   "description": {
-    "en": "Pastebin.com is the number one paste tool since 2002. Pastebin is a website where you can store text online for a set period of time."
+    "en": "Pastebin.com is the number one paste tool since 2002. Pastebin is a website where you can store text online for a set period of time.",
+    "ga_IE": "Is é Pastebin.com an Uimhir Greamaigh Uimhir a hAon ó 2002. Is láithreán gréasáin é Pastebin inar féidir leat téacs a stóráil ar líne ar feadh tréimhse ama."
   },
   "url": [
     "pastebin.com",
     "www.pastebin.com"
   ],
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/bqmMq6t.png",
   "thumbnail": "https://i.imgur.com/kZT3m1r.png",
   "color": "#023859",

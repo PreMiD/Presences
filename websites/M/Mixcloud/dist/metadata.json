@@ -15,10 +15,11 @@
     "de": "Höre kostenlos den besten DJs und Radiomoderatoren der Welt zu.",
     "pt_BR": "Escute os melhores DJs e apresentadores de rádio do mundo de graça.",
     "uk_UA": "Слухайте найкращих діджеїв та радіоведучих у цілому світі безкоштовно.",
-    "nl": "Luister gratis naar de beste DJ's en radiopresentatoren ter wereld."
+    "nl": "Luister gratis naar de beste DJ's en radiopresentatoren ter wereld.",
+    "ga_IE": "Éist leis na láithreoirí DJanna agus raidió is fearr ar domhan saor in aisce."
   },
   "url": "www.mixcloud.com",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/I3yX6NQ.png",
   "thumbnail": "https://i.imgur.com/x4W3FoT.jpg",
   "color": "#5000ff",

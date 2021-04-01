@@ -7,10 +7,11 @@
   "url": "www.kijk.nl",
   "description": {
     "nl": "Kijk opent je ogen",
-    "en": "Kijk opens your eyes."
+    "en": "Kijk opens your eyes.",
+    "ga_IE": "Osclaíonn Kijk do shúile."
   },
   "service": "Kijk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/LSOqk1G.png",
   "thumbnail": "https://i.imgur.com/vBQdKP7.jpg",
   "color": "#FF0000",

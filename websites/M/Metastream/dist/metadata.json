@@ -11,13 +11,14 @@
   ],
   "service": "Metastream",
   "description": {
-    "en": "Watch and listen to your favorite content with friends."
+    "en": "Watch and listen to your favorite content with friends.",
+    "ga_IE": "Bí ag faire agus ag éisteacht le do ábhar is fearr leat le cairde."
   },
   "url": [
     "getmetastream.com",
     "app.getmetastream.com"
   ],
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/vAozqPN.png",
   "thumbnail": "https://i.imgur.com/CGjj2MG.png",
   "color": "#DAAFB9",

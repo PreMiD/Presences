@@ -6,10 +6,11 @@
   },
   "url": "www.motorsport.com",
   "description": {
-    "en": "Motorsport.com is a website specializing in motor racing news. Sports like Formula 1, NASCAR, IndyCar, MotoGP, and WEC."
+    "en": "Motorsport.com is a website specializing in motor racing news. Sports like Formula 1, NASCAR, IndyCar, MotoGP, and WEC.",
+    "ga_IE": "Is láithreán gréasáin é Motorsport.com a dhíríonn ar nuacht rásaíochta mótair.Spórt cosúil le Foirmle 1, NASCAR, IndyCar, MotoGP, agus WEC."
   },
   "service": "motorsport.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/Dvs107P.png",
   "thumbnail": "https://i.imgur.com/7ha5AqJ.jpg",
   "color": "#E7FF7B",

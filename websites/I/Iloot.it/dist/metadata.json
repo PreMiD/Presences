@@ -5,10 +5,11 @@
   },
   "service": "Iloot.it",
   "description": {
-    "en": "iLoot.it is an earnings platform desinged for gamers by gamers. Get money by doing tasks to buy yourself a new game."
+    "en": "iLoot.it is an earnings platform desinged for gamers by gamers. Get money by doing tasks to buy yourself a new game.",
+    "ga_IE": "Is ardán tuillimh é Iloot.It atá deartha le haghaidh gamers ag gamers.Faigh airgead trí thascanna a dhéanamh chun cluiche nua a cheannach duit féin."
   },
   "url": "iloot.it",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/t04RdxC.png",
   "thumbnail": "https://i.imgur.com/y5AkLOI.png",
   "color": "#d4af37",

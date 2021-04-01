@@ -6,10 +6,11 @@
   },
   "url": "www.brick-hill.com",
   "description": {
-    "en": "Brick Hill is the ultimate building block game, allowing you to push the limits of digital bricks and make your own games."
+    "en": "Brick Hill is the ultimate building block game, allowing you to push the limits of digital bricks and make your own games.",
+    "ga_IE": "Is é cnoc bríce an cluiche bloc tógála deiridh, rud a ligeann duit na teorainneacha brící digiteacha a bhrú agus do chuid cluichí féin a dhéanamh."
   },
   "service": "Brick Hill",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/zeeZUb0.png",
   "thumbnail": "https://i.imgur.com/Gy5U4QK.png",
   "color": "#00A9FE",

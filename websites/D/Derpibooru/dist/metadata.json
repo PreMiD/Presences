@@ -7,10 +7,11 @@
   "description": {
     "en": "Derpibooru is an image repository which lets people bring together art from all over the internet, annotate the images with tags and an original source URL for easy searching, and discuss the artwork.",
     "de": "Derpibooru ist ein Bildarchiv, das es Menschen ermöglicht, Kunst aus dem ganzen Internet zusammenzubringen, die Bilder mit Tags und einer originellen Quell-URL zur einfachen Suche zu kommentieren und über das Kunstwerk zu diskutieren.",
-    "nl": "Derpibooru is een afbeeldingsrepository waarmee mensen kunst van over het hele internet kunnen samenbrengen, de afbeeldingen kunnen voorzien worden met tags en een originele URL voor eenvoudig zoeken en de kunstwerken te kunnen bespreken."
+    "nl": "Derpibooru is een afbeeldingsrepository waarmee mensen kunst van over het hele internet kunnen samenbrengen, de afbeeldingen kunnen voorzien worden met tags en een originele URL voor eenvoudig zoeken en de kunstwerken te kunnen bespreken.",
+    "ga_IE": "Is stór íomhá é Derpibooru a ligeann do dhaoine ealaín a thabhairt le chéile ó gach cearn den idirlíon, anótáil na híomhánna le clibeanna agus URL foinse bhunaidh chun cuardach éasca a dhéanamh, agus an saothar ealaíne a phlé."
   },
   "url": "derpibooru.org",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/XWZYhJA.png",
   "thumbnail": "https://i.imgur.com/en2ygta.png",
   "color": "#3D92D0",

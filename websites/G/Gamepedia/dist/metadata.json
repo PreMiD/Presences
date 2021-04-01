@@ -6,7 +6,7 @@
   },
   "service": "Gamepedia",
   "url": "gamepedia.com",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/EUu0IPu.png",
   "thumbnail": "https://i.imgur.com/Dr5wG06.png",
   "color": "#F48020",
@@ -18,7 +18,8 @@
     "games"
   ],
   "description": {
-    "en": "Gamepedia is the largest video game wiki platform on the web, featuring thousands of community-driven wiki projects.\nOwned and operated by FANDOM, Gamepedia is home to everything from indie title wikis to some of the best-known gaming wikis such as the Official Minecraft Wiki, Leaguepedia, and the Official ARK Wiki."
+    "en": "Gamepedia is the largest video game wiki platform on the web, featuring thousands of community-driven wiki projects.\nOwned and operated by FANDOM, Gamepedia is home to everything from indie title wikis to some of the best-known gaming wikis such as the Official Minecraft Wiki, Leaguepedia, and the Official ARK Wiki.",
+    "ga_IE": "Is é Gamepedia an físeán físeán is mó ardán Wiki ar an ngréasán, featuring na mílte tionscadal wiki pobal-tiomáinte.\nÚinéireacht agus oibriú ag FANDOM, tá gamepedia sa bhaile do gach rud ó Wikis Teideal Indie do chuid de na wikis cearrbhachais is fearr ar a dtugtar, mar shampla an t-oifigiúil Minecraft Wiki, Leaguepedia, agus an t-ark oifigiúil Wiki."
   },
   "category": "other",
   "regExp": "[a-z0-9-]+[.]gamepedia[.]com[/]"

@@ -6,10 +6,11 @@
   "service": "Hypixel",
   "description": {
     "en": "Play award winning minecraft games and mini-games with your friends for free. Only on the Hypixel minecraft server!",
-    "nl": "Speel bekroonde minecraft-games en mini-games gratis met je vrienden. Alleen op de Hypixel minecraft-server!"
+    "nl": "Speel bekroonde minecraft-games en mini-games gratis met je vrienden. Alleen op de Hypixel minecraft-server!",
+    "ga_IE": "Imríonn bronntanas a bhuaigh cluichí Minecraft agus mionchluichí le do chairde saor in aisce.Ar an bhfreastalaí Minecraft Hypixel amháin!"
   },
   "url": "hypixel.net",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/NaF7FcT.png",
   "thumbnail": "https://i.imgur.com/9eFIHYS.jpg",
   "color": "#d9992a",

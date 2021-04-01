@@ -6,7 +6,8 @@
   "service": "Slack",
   "description": {
     "en": "Slack is where work flows. It's where the people you need, the information you share, and the tools you use come together to get things done.",
-    "nl": "Slack is waar werk stroomt. Hier komen de mensen die je nodig hebt, de informatie die je deelt en de tools die je gebruikt samen om dingen gedaan te krijgen."
+    "nl": "Slack is waar werk stroomt. Hier komen de mensen die je nodig hebt, de informatie die je deelt en de tools die je gebruikt samen om dingen gedaan te krijgen.",
+    "ga_IE": "Is é an t-uafás ná an áit a sreabhadh oibre.Is é an áit a dtagann na daoine a theastaíonn uait, agus na huirlisí a úsáideann tú le chéile chun rudaí a dhéanamh."
   },
   "url": [
     "slack.com",
@@ -14,7 +15,7 @@
     "get.slack.help",
     "slackhq.com"
   ],
-  "version": "1.4.5",
+  "version": "1.4.6",
   "logo": "https://i.imgur.com/wgUEowI.png",
   "thumbnail": "https://i.imgur.com/cnx0MKh.png",
   "color": "#611f69",

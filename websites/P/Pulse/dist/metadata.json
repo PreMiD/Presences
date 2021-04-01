@@ -6,10 +6,11 @@
   },
   "url": "itspulse.net",
   "description": {
-    "en": "Pulse is an internet radio community originally started in 2019, after much disrespect and un-professional antics across the radio community; we decided to make our own project that gives people the chance and opportunity to take control of how they want a community."
+    "en": "Pulse is an internet radio community originally started in 2019, after much disrespect and un-professional antics across the radio community; we decided to make our own project that gives people the chance and opportunity to take control of how they want a community.",
+    "ga_IE": "Is pobal raidió Idirlín é PULSE a thosaigh ar dtús in 2019, tar éis go leor dímheasúil agus antics neamh-ghairmiúil ar fud an phobail raidió;Shocraíomar ár dtionscadal féin a dhéanamh a thugann deis do dhaoine an deis agus an deis a fháil chun smacht a fháil ar an dóigh a dteastaíonn pobal uathu."
   },
   "service": "Pulse",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/IPlZPxB.png",
   "thumbnail": "https://i.imgur.com/bGeTjan.png",
   "color": "#EE0B0B",

@@ -11,10 +11,11 @@
   ],
   "service": "Gartic.io",
   "description": {
-    "en": "Play Gartic.io online and for free. Draw and guess the words as fastest as you can! Join on worldwide rooms or create your own."
+    "en": "Play Gartic.io online and for free. Draw and guess the words as fastest as you can! Join on worldwide rooms or create your own.",
+    "ga_IE": "Seinn gartic.io ar líne agus saor in aisce.Tarraing agus buille faoi thuairim na focail is tapúla agus is féidir leat!Bí páirteach ar sheomraí ar fud an domhain nó cruthaigh do chuid féin."
   },
   "url": "gartic.io",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "logo": "https://i.imgur.com/JkOc5Vo.png",
   "thumbnail": "https://i.imgur.com/n7XRf46.png",
   "color": "#FBD981",

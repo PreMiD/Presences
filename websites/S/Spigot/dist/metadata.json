@@ -6,14 +6,15 @@
   "service": "Spigot",
   "description": {
     "en": "Spigot a high performance, no lag customized CraftBukkit Minecraft server API, and BungeeCord, the cloud server proxy. (SpigotSearchEngine is supported!)",
-    "nl": "Spigot, een hoogwaardige, geen lag CraftBukkit Minecraft server API en BungeeCord, de cloud server proxy. (SpigotSearchEngine wordt ondersteund!)"
+    "nl": "Spigot, een hoogwaardige, geen lag CraftBukkit Minecraft server API en BungeeCord, de cloud server proxy. (SpigotSearchEngine wordt ondersteund!)",
+    "ga_IE": "Spigot ardfheidhmíochta, níl aon mhoill saincheaptha Craftbukkit Minecraft Server API, agus BungeeCord, an seachfhreastalaí Freastalaí Cloud.(Tacaítear le Spigotsearchengine!)"
   },
   "url": [
     "www.spigotmc.org",
     "hub.spigotmc.org",
     "irc.spi.gt"
   ],
-  "version": "1.3.5",
+  "version": "1.3.6",
   "logo": "https://i.imgur.com/GCwhS4p.png",
   "thumbnail": "https://i.imgur.com/HISmCgw.png",
   "color": "#c68623",

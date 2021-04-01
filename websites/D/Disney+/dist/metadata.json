@@ -17,11 +17,12 @@
     "fi": "Disney+ tarjoaa suosikkielokuviasi ja tv-ohjelmia yksinoikeudella tekijöiltä Disney, Pixar, Marvel, Star Wars, National Geographic ja Star. Aloita katselu tänään.",
     "sv_SE": "Disney+ är det enda hemmet för dina favoritfilmer och tv-program från Disney, Pixar, Marvel, Star Wars, National Geographic och Star. Börja streama idag.",
     "da_DK": "Disney+ er det eksklusive hjem for dine yndlingsfilm og -tv-serier fra Disney, Pixar, Marvel, Star Wars, National Geographic og Star. Begynd at se i dag.",
-    "pt_BR": "O Disney+ é o serviço exclusivo para ver os seus filmes e programas preferidos da Disney, Pixar, Marvel, Star Wars e National Geographic. Comece a assistir hoje mesmo."
+    "pt_BR": "O Disney+ é o serviço exclusivo para ver os seus filmes e programas preferidos da Disney, Pixar, Marvel, Star Wars e National Geographic. Comece a assistir hoje mesmo.",
+    "ga_IE": "Is é Disney + an baile eisiach do do scannáin agus seónna teilifíse is fearr leat ó Disney, Pixar, Marvel, Star Wars, Náisiúnta Geographic, agus Star.Tosaigh ag sruthú inniu."
   },
   "url": "www.disneyplus.com",
   "regExp": "([a-z0-9-]+[.])*disneyplus[.]com[/]|([a-z0-9-]+[.])*hotstar[.]com[/]",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "logo": "https://i.imgur.com/zuUeb2A.png",
   "thumbnail": "https://i.imgur.com/KKRJx25.png",
   "color": "#233778",

@@ -6,10 +6,11 @@
   },
   "url": "thisiscloudx.com",
   "description": {
-    "en": "CloudX is an online radio station that strives to provide you with the best and latest hit from all around the world!"
+    "en": "CloudX is an online radio station that strives to provide you with the best and latest hit from all around the world!",
+    "ga_IE": "Is stáisiún raidió ar líne é Cloudx a dhéanann iarracht an bua is fearr agus is déanaí a sholáthar duit ó gach cearn den domhan!"
   },
   "service": "CloudX",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/fmrRLua.png",
   "thumbnail": "https://i.imgur.com/DGMbWTv.png",
   "color": "#E056FD",

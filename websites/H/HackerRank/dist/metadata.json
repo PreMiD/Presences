@@ -6,10 +6,11 @@
   },
   "url": "www.hackerrank.com",
   "description": {
-    "en": "Market–leading technical interview platform to identify and hire developers with the right skills."
+    "en": "Market–leading technical interview platform to identify and hire developers with the right skills.",
+    "ga_IE": "Ardán agallaimh theicniúil an mhargaidh chun forbróirí a aithint agus a fhostú leis na scileanna cearta."
   },
   "service": "HackerRank",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/4Q8nbiR.png",
   "thumbnail": "https://i.imgur.com/eBvlYZU.png",
   "color": "#23BB5B",

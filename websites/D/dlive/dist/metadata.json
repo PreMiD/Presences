@@ -10,10 +10,11 @@
     "ro": "DLive.tv este cea mai mare comunitate de live streaming pe blockchain cu spirjinul blockchain-ului Lino.",
     "pt_BR": "DLive.tv é a maior comunidade de transmissão ao vivo em blockchain que é alimentada pela Lino blockchain.",
     "uk_UA": "DLive.tv — найбільша спільнота потокової трансляції у блокчейні, що працює на базі блокчейна Lino.",
-    "nl": "DLive.tv is de grootste live streaming community op blockchain die wordt aangedreven door Lino blockchain."
+    "nl": "DLive.tv is de grootste live streaming community op blockchain die wordt aangedreven door Lino blockchain.",
+    "ga_IE": "Is é DLIVE.TV an pobal sruthú beo is mó ar BlocChain a thiomáintear le Lino BlocChain."
   },
   "url": "dlive.tv",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "logo": "https://i.imgur.com/pScqtTz.png",
   "thumbnail": "https://i.imgur.com/JLYXbc7.png",
   "color": "#ffd300",

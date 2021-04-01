@@ -5,10 +5,11 @@
   },
   "service": "Flare Radio",
   "description": {
-    "en": "Flare is an online radio community playing you the biggest tunes from around the globe all the time."
+    "en": "Flare is an online radio community playing you the biggest tunes from around the globe all the time.",
+    "ga_IE": "Is pobal raidió ar líne é Flare ag seinm na foinn is mó ó gach cearn den domhan."
   },
   "url": "flareradio.net",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "logo": "https://i.imgur.com/h8yxgtj.png",
   "thumbnail": "https://i.imgur.com/5ZtrzDG.png",
   "color": "#663399",

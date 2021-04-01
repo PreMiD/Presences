@@ -6,7 +6,8 @@
   "service": "SpongePowered",
   "description": {
     "en": "A community-driven open source Minecraft: Java Edition modding platform.",
-    "nl": "Een community-gestuurd open source Minecraft: Java Edition modding platform."
+    "nl": "Een community-gestuurd open source Minecraft: Java Edition modding platform.",
+    "ga_IE": "Foinse Oscailte Pobail-tiomáinte Minecraft: Ardán Mómála Edition Java."
   },
   "url": [
     "jd.spongepowered.org",
@@ -15,7 +16,7 @@
     "docs.spongepowered.org",
     "forums.spongepowered.org"
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/7uYnBAN.png",
   "thumbnail": "https://i.imgur.com/Kne85nE.png",
   "color": "#f6ce16",

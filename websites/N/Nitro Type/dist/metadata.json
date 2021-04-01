@@ -5,13 +5,14 @@
   },
   "service": "Nitro Type",
   "description": {
-    "en": "Improve your typing skills while competing in fast-paced races with up to 5 typers from around the world. Compete against your friends, earn new cars, track your scores, and so much more... all for free!"
+    "en": "Improve your typing skills while competing in fast-paced races with up to 5 typers from around the world. Compete against your friends, earn new cars, track your scores, and so much more... all for free!",
+    "ga_IE": "Feabhas a chur ar do chuid scileanna clóscríofa agus tú ag iomaíocht i rásaí tapaidh le suas le 5 thybyard ar fud an domhain.Iomaíocht i gcoinne do chairde, gluaisteáin nua a thuilleamh, a rianú do scóir, agus an oiread sin níos mó ... go léir saor in aisce!"
   },
   "url": [
     "nitrotype.com",
     "www.nitrotype.com"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/CCu7nqD.png",
   "thumbnail": "https://i.imgur.com/6MjQV86.png",
   "color": "#D62F3A",

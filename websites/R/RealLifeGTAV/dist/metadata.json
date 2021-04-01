@@ -7,7 +7,8 @@
   "service": "RealLifeGTAV",
   "description": {
     "en": "Real Life GTAV is a german FiveM roleplay server with custom scripts and more!",
-    "de": "Real Life GTAV ist ein deutscher FiveM Roleplay Server mit eigenen Scripts und mehr!"
+    "de": "Real Life GTAV ist ein deutscher FiveM Roleplay Server mit eigenen Scripts und mehr!",
+    "ga_IE": "Is é atá i gceist le GTAV fíor-saoil ná freastalaí Rólghlacadh Féar Gearmánach le scripteanna saincheaptha agus níos mó!"
   },
   "url": [
     "reallifegtav.de",
@@ -15,7 +16,7 @@
     "forum.reallifegtav.de",
     "forum.rlv.link"
   ],
-  "version": "2.1.1",
+  "version": "2.1.2",
   "logo": "https://i.imgur.com/FDkOoBd.png",
   "thumbnail": "https://i.imgur.com/QjWhm3D.png",
   "color": "#000",

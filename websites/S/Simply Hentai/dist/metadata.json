@@ -10,10 +10,11 @@
     "pt_BR": "Simply Hentai é um serviço de hospedagem gratuito para mangás de hentai.",
     "fr": "Simply Hentai est un service d'hébergement de mangas hentai gratuit.",
     "uk_UA": "Simply Hentai це безкоштовний хостинговий сервіс для хентайних манг",
-    "nl": "Simply Hentai is een gratis hostingservice voor hentai manga's."
+    "nl": "Simply Hentai is een gratis hostingservice voor hentai manga's.",
+    "ga_IE": "Níl ort ach hentai is seirbhís óstála saor in aisce do mangas hentai."
   },
   "url": "www.simply-hentai.com",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "logo": "https://i.imgur.com/rs9kEod.png",
   "thumbnail": "https://i.imgur.com/9PuX1Jf.png",
   "color": "#f3c669",

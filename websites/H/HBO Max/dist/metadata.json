@@ -6,7 +6,8 @@
   },
   "service": "HBO Max",
   "description": {
-    "en": "The streaming platform that bundles all of HBO together with even more movies and TV series, plus new Max Originals."
+    "en": "The streaming platform that bundles all of HBO together with even more movies and TV series, plus new Max Originals.",
+    "ga_IE": "An t-ardán sruthú go mbeartaigh gach ceann de HBO mar aon le níos mó scannáin agus sraith teilifíse, móide bunchóipeanna nua."
   },
   "url": [
     "hbomax.com",
@@ -14,7 +15,7 @@
     "play.hbomax.com",
     "help.hbomax.com"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/UxH7DDE.png",
   "thumbnail": "https://i.imgur.com/d1bktD4.jpg",
   "color": "#c600ff",

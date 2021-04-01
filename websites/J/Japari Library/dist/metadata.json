@@ -5,10 +5,11 @@
   },
   "url": "japari-library.com",
   "description": {
-    "en": "Japari Library is a wiki based around the Kemono Friends multimedia franchise."
+    "en": "Japari Library is a wiki based around the Kemono Friends multimedia franchise.",
+    "ga_IE": "Is Wiki é Leabharlann Japari atá bunaithe ar an gceart vótála ilmheán cairde Konomo."
   },
   "service": "Japari Library",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/Y3BtrFi.png",
   "thumbnail": "https://i.imgur.com/nGO9Amx.png",
   "color": "#4CC5FF",

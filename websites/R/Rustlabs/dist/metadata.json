@@ -5,10 +5,11 @@
   },
   "service": "Rustlabs",
   "description": {
-    "en": "Rust Labs is a reliable database for the video game, Rust. It provides weekly updates and revised statistical information for items and game mechanics."
+    "en": "Rust Labs is a reliable database for the video game, Rust. It provides weekly updates and revised statistical information for items and game mechanics.",
+    "ga_IE": "Is bunachar sonraí iontaofa é Labs Meirge don chluiche físeáin, meirge.Soláthraíonn sé nuashonruithe seachtainiúla agus faisnéis staitistiúil athbhreithnithe le haghaidh míreanna agus meicneoirí cluiche."
   },
   "url": "rustlabs.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/Yp2IGUO.png?1",
   "thumbnail": "https://i.imgur.com/ECb6rlA.jpg",
   "color": "#c98b29",

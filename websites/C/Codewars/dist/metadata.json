@@ -5,10 +5,11 @@
     "id": "586905336850677760"
   },
   "service": "Codewars",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "color": "#9c1414",
   "description": {
-    "en": "Codewars is where developers achieve code mastery through challenge. Train on kata in the dojo and reach your highest potential."
+    "en": "Codewars is where developers achieve code mastery through challenge. Train on kata in the dojo and reach your highest potential.",
+    "ga_IE": "Is é Codewars an áit a mbaineann forbróirí máistreacht amach as dúshlán.Traenáil ar kata sa dojo agus bain amach do chumas is airde."
   },
   "tags": [
     "codewars",

@@ -7,10 +7,11 @@
   "url": "dramacool.vc",
   "regExp": "[0-9w]{0,6}.*dramacool.[a-z]+",
   "description": {
-    "en": "Dramacool - Watch Asian Dramas, Movies and Shows with English Subtitles on Dramacool in Full HD For Free. A cool Site for Great Peoples."
+    "en": "Dramacool - Watch Asian Dramas, Movies and Shows with English Subtitles on Dramacool in Full HD For Free. A cool Site for Great Peoples.",
+    "ga_IE": "Dramacool - féachaint ar dhrámaí na hÁise, scannáin agus seónna le fotheidil Bhéarla ar Dramacool i HD iomlán saor in aisce.Suíomh fionnuar do phobal mór."
   },
   "service": "DramaCool",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/Bn5qNZO.png",
   "thumbnail": "https://i.imgur.com/f3AIc30.png",
   "color": "#26bdc6",

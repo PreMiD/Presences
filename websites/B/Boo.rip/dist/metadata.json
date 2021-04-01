@@ -6,10 +6,11 @@
   "service": "Boo.rip",
   "description": {
     "en": "Boo is a elite connection optimizer that aims to improve user gameplay.",
-    "nl": "Boo is een elite-verbindingsoptimalisator die de gameplay van gebruikers wil verbeteren."
+    "nl": "Boo is een elite-verbindingsoptimalisator die de gameplay van gebruikers wil verbeteren.",
+    "ga_IE": "Is Optimizer nasc mionlach é Boo a bhfuil sé mar aidhm aige gameplay úsáideora a fheabhsú."
   },
   "url": "boo.rip",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/sm6sc5e.png",
   "thumbnail": "https://i.imgur.com/FiYFSLb.png",
   "color": "#6a0dad",

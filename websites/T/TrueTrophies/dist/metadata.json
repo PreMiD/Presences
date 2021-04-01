@@ -6,10 +6,11 @@
   "service": "TrueTrophies",
   "description": {
     "en": "TrueTrophies is the home of Playstation news, achievement lists and guides, reviews, interviews, leaderboards and more.",
-    "nl": "TrueTrophies is de plaats voor Playstation nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer."
+    "nl": "TrueTrophies is de plaats voor Playstation nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer.",
+    "ga_IE": "Is é Truetrophies an baile nuachta, liostaí gnóthachtála agus treoracha, athbhreithnithe, agallaimh, cláir Leader agus níos mó."
   },
   "url": "www.truetrophies.com",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/bCSGyWh.png",
   "thumbnail": "https://i.imgur.com/WQSwVVv.png",
   "color": "#2e94d8",

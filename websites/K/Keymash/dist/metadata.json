@@ -6,10 +6,11 @@
   },
   "url": "keyma.sh",
   "description": {
-    "en": "Take your typing to the next level! An online multiplayer typing game where you can go head to head versus players around the world."
+    "en": "Take your typing to the next level! An online multiplayer typing game where you can go head to head versus players around the world.",
+    "ga_IE": "Tóg do chlóscríobh go dtí an chéad leibhéal eile!Cluiche clóscríofa ar líne ar líne áit ar féidir leat dul chuig imreoirí i gcoinne an domhain."
   },
   "service": "Keymash",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/vDGvohb.png",
   "thumbnail": "https://i.imgur.com/ZHE29sF.png",
   "color": "#FB923C",

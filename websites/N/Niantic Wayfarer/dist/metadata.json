@@ -7,10 +7,11 @@
   "description": {
     "en": "By participating to Niantic Wayfarer you can help shape future adventures for yourself and others by reviewing interesting locations across the globe.",
     "nl": "Door deel te nemen aan Niantic Wayfarer kun je toekomstige avonturen voor jezelf en anderen helpen vormgeven door interessante locaties over de hele wereld te beoordelen.",
-    "fr": "En participant à Niantic Wayfarer vous pouvez aider à créer de nouvelles aventures pour vous et les autres joueurs en passant en revue des points d'intérêt intéressants autour du monde."
+    "fr": "En participant à Niantic Wayfarer vous pouvez aider à créer de nouvelles aventures pour vous et les autres joueurs en passant en revue des points d'intérêt intéressants autour du monde.",
+    "ga_IE": "Trí pháirt a ghlacadh in Aghaidh Neachas WayFarer is féidir leat cabhrú le heachtraí sa todhchaí a mhúnlú duit féin agus do dhaoine eile trí athbhreithniú a dhéanamh ar shuíomhanna suimiúla ar fud na cruinne."
   },
   "url": "wayfarer.nianticlabs.com",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/dOqOUxw.png",
   "thumbnail": "https://i.imgur.com/VhUKz5t.jpg",
   "color": "#fc4513",

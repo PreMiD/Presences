@@ -6,10 +6,11 @@
   "service": "splix.io",
   "description": {
     "en": "Conquer as much land as possible and try to become biggest of them all.",
-    "nl": "Verover zoveel mogelijk land en probeer de grootste van allemaal te worden."
+    "nl": "Verover zoveel mogelijk land en probeer de grootste van allemaal te worden.",
+    "ga_IE": "Conquer an oiread talún agus is féidir agus déan iarracht a bheith níos mó acu go léir."
   },
   "url": "splix.io",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/rD9lZrN.png",
   "thumbnail": "https://i.imgur.com/pSyDDdg.png",
   "color": "#a42925",

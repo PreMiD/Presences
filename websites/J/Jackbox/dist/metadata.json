@@ -5,10 +5,11 @@
   },
   "service": "Jackbox",
   "description": {
-    "en": "It's easy to use this website to turn your phone, tablet or computer into a controller for one of Jackbox Games many party games. All you'll need is a room code"
+    "en": "It's easy to use this website to turn your phone, tablet or computer into a controller for one of Jackbox Games many party games. All you'll need is a room code",
+    "ga_IE": "Tá sé éasca an suíomh gréasáin seo a úsáid chun do ghuthán, táibléad nó ríomhaire a iompú isteach i rialaitheoir do cheann de na cluichí seo a leanas go leor cluichí páirtí.Is cód seomra é gach uait"
   },
   "url": "jackbox.tv",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "logo": "https://i.imgur.com/Dyoab1j.jpg",
   "thumbnail": "https://i.imgur.com/poY2KNc.png",
   "color": "#4254f4",

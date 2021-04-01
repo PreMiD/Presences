@@ -7,10 +7,11 @@
   "description": {
     "en": "Trade your Rocket League keys, wheels, decals and other items automatically.",
     "nl": "Ruil uw Rocket League keys, wielen, decals en andere items automatisch in.",
-    "zh_CN": "自动交易您的Rocket League钥匙，轮子，贴纸和其他物品。"
+    "zh_CN": "自动交易您的Rocket League钥匙，轮子，贴纸和其他物品。",
+    "ga_IE": "Trádáil do eochracha sraithe roicéad, rothaí, decals agus míreanna eile go huathoibríoch."
   },
   "url": "rl.deals",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/VfH0XLv.png",
   "thumbnail": "https://i.imgur.com/dc5Sj0U.png",
   "color": "#ff8500",

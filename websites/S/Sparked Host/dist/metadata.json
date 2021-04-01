@@ -17,10 +17,11 @@
     "web-01.sparkedhost.us"
   ],
   "description": {
-    "en": "Sparking your ideas to life by providing the most powerful, most reliable, and highest quality hosting at the most affordable price since 2017."
+    "en": "Sparking your ideas to life by providing the most powerful, most reliable, and highest quality hosting at the most affordable price since 2017.",
+    "ga_IE": "Do chuid smaointe a chur ar an saol tríd an óstáil is cumhachtaí, is iontaofa agus is airde a sholáthar ag an bpraghas is inacmhainne ó 2017."
   },
   "service": "Sparked Host",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/LIRCNuJ.png",
   "thumbnail": "https://i.imgur.com/uVujqhk.png",
   "color": "#FF9F00",

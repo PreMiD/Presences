@@ -5,10 +5,11 @@
   },
   "service": "TCRF",
   "description": {
-    "en": "The Cutting Room Floor is a site dedicated to unearthing and researching unused and cut content from video games."
+    "en": "The Cutting Room Floor is a site dedicated to unearthing and researching unused and cut content from video games.",
+    "ga_IE": "Is é an t-urlár seomra gearrtha ina shuíomh atá tiomnaithe do unearthing agus taighde a dhéanamh ar ábhar neamhúsáidte agus gearrtha ó cluichí físeáin."
   },
   "url": "tcrf.net",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "thumbnail": "https://i.imgur.com/Q1bzBtD.png",
   "logo": "https://i.imgur.com/uyVNYME.png",
   "color": "#D3D3D3",

@@ -9,10 +9,11 @@
     "www.epicgames.com"
   ],
   "description": {
-    "en": "Epic Games, Inc. is an American video game and software developer and publisher based in Cary, North Carolina."
+    "en": "Epic Games, Inc. is an American video game and software developer and publisher based in Cary, North Carolina.",
+    "ga_IE": "Cluichí Epic, Inc Is cluiche físeán Meiriceánach agus forbróir bogearraí agus foilsitheoir atá bunaithe i Carolina Thuaidh."
   },
   "service": "Epic Games",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/CAsgHOc.png",
   "thumbnail": "https://i.imgur.com/sLgae3U.png",
   "color": "#2A2A2A",

@@ -6,10 +6,11 @@
   "service": "I Love Music",
   "description": {
     "en": "The best Web-Radio of Germany - The best Music for everyone!",
-    "de": "Das beste Internet-Radio in Deutschland - Die beste Musik für jeden!"
+    "de": "Das beste Internet-Radio in Deutschland - Die beste Musik für jeden!",
+    "ga_IE": "An Gréasán Gréasáin is Fearr sa Ghearmáin - an ceol is fearr do gach duine!"
   },
   "url": "www.ilovemusic.de",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "logo": "https://i.imgur.com/jO86Aqk.png",
   "thumbnail": "https://i.imgur.com/LFMmAHc.png",
   "color": "#F7C516",

@@ -6,14 +6,15 @@
   "service": "MCStacker",
   "description": {
     "en": "Minecraft command generator.",
-    "nl": "Minecraft command generator."
+    "nl": "Minecraft command generator.",
+    "ga_IE": "Gineadóir ordaithe Minecraft."
   },
   "url": [
     "mcstacker.net",
     "bimbimma.com",
     "mcstacker.bimbimma.com"
   ],
-  "version": "1.3.5",
+  "version": "1.3.6",
   "logo": "https://i.imgur.com/DLMu1BF.png",
   "thumbnail": "https://i.imgur.com/fnpxzpy.png",
   "color": "#fe5f10",

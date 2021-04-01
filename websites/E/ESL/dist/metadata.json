@@ -7,7 +7,8 @@
   "description": {
     "en": "World's largest eSports company.",
     "nl": "'S Werelds grootste eSports-bedrijf.",
-    "de": "Weltweit größte eSports-Organisation."
+    "de": "Weltweit größte eSports-Organisation.",
+    "ga_IE": "Cuideachta ESPORTS is mó ar domhan."
   },
   "url": [
     "www.eslgaming.com",
@@ -25,7 +26,7 @@
     "intelgrandslam.eslgaming.com",
     "www.schulmeisterschaft.de"
   ],
-  "version": "2.3.5",
+  "version": "2.3.6",
   "logo": "https://i.imgur.com/wKmn7nB.png",
   "thumbnail": "https://i.imgur.com/76vHTIg.png",
   "color": "#46afe4",

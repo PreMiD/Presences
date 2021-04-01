@@ -6,10 +6,11 @@
   "service": "speedrun.com",
   "description": {
     "en": "Speedrunning leaderboards, resources, forums, and more!",
-    "nl": "Speedrunning leaderboards, bronnen, forums en meer!"
+    "nl": "Speedrunning leaderboards, bronnen, forums en meer!",
+    "ga_IE": "Cláir LeaderRunning, Acmhainní, Fóraim, agus níos mó!"
   },
   "url": "www.speedrun.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/MExOoiX.png",
   "thumbnail": "https://i.imgur.com/jsMsjMk.png",
   "color": "#c6a24c",

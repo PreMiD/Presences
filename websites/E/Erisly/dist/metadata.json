@@ -5,7 +5,8 @@
   },
   "service": "Erisly",
   "description": {
-    "en": "Hiya! My name is Erisly, your friendly neighbourhood goddess! I use my powers and talents to play as a \"Discord Bot\", where I provide you some quality features and commands for your Discord Server!"
+    "en": "Hiya! My name is Erisly, your friendly neighbourhood goddess! I use my powers and talents to play as a \"Discord Bot\", where I provide you some quality features and commands for your Discord Server!",
+    "ga_IE": "Hiya!Is é an t-ainm atá orm, tá an bandia comharsanachta cairdiúil!Úsáidim mo chumhachtaí agus mo bhuanna a imirt mar \"bot discord\", áit a gcuirim roinnt gnéithe agus orduithe ar fáil duit do do fhreastalaí discord!"
   },
   "url": [
     "erisly.com",
@@ -13,7 +14,7 @@
     "translate.erisly.com",
     "wiki.erisly.com"
   ],
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/kN9Y2bv.png",
   "thumbnail": "https://i.imgur.com/MxsShw4.png",
   "color": "#FF6394",

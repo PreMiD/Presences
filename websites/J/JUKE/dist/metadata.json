@@ -12,10 +12,11 @@
   "service": "JUKE",
   "description": {
     "en": "JUKE is a Dutch radio channel collection site. JUKE is a Talpa Network company.",
-    "nl": "JUKE is een verzamelingssite voor radiostations. JUKE is een merk van Talpa Network."
+    "nl": "JUKE is een verzamelingssite voor radiostations. JUKE is een merk van Talpa Network.",
+    "ga_IE": "Is suíomh bailithe cainéal raidió Ollainnis é Juke.Is cuideachta líonra Talpa é Juke."
   },
   "url": "juke.nl",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/axm6M00.png",
   "thumbnail": "https://i.imgur.com/kVj50nG.png",
   "color": "#38af85",

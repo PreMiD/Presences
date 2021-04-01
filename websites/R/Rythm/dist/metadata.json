@@ -6,10 +6,11 @@
   "service": "Rythm",
   "description": {
     "en": "Rythm makes it possible to listen to your favorite music with all your friends. Add it to Discord today and start listening!",
-    "de": "Rythm macht es möglich deine Lieblingsmusik mit all deinen Freunden zu hören. Füge ihn noch heute deinem Discord hinzu und beginne Musik zu hören!"
+    "de": "Rythm macht es möglich deine Lieblingsmusik mit all deinen Freunden zu hören. Füge ihn noch heute deinem Discord hinzu und beginne Musik zu hören!",
+    "ga_IE": "Déanann Rhythm gur féidir éisteacht le do cheol is fearr leat le do chairde go léir.Cuir é le discord inniu agus tosnaigh ag éisteacht!"
   },
   "url": "rythm.fm",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/lqwAK0n.png",
   "thumbnail": "https://i.imgur.com/NqYLjmB.jpg",
   "color": "#e5393d",

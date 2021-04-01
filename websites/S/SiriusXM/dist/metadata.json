@@ -3,13 +3,16 @@
     "name": "Alexx",
     "id": "604182077088202784"
   },
-  "url": ["player.siriusxm.com",
-          "player.siriusxm.ca"],
+  "url": [
+    "player.siriusxm.com",
+    "player.siriusxm.ca"
+  ],
   "description": {
-    "en": "SiriusXM is like nothing you've ever heard before — it's a whole new world of radio. Imagine channels and channels of anything you want to listen to."
+    "en": "SiriusXM is like nothing you've ever heard before — it's a whole new world of radio. Imagine channels and channels of anything you want to listen to.",
+    "ga_IE": "Tá Siriusxm cosúil le rud ar bith a chuala tú riamh roimhe seo - is domhan raidió iomlán é.Samhlaigh cainéil agus bealaí aon rud is mian leat a éisteacht."
   },
   "service": "SiriusXM",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/WKHpLxp.jpg",
   "thumbnail": "https://i.imgur.com/kqez7xt.png",
   "color": "#0081FF",

@@ -11,10 +11,11 @@
     "pt_BR": "Uma neko faz seu dia brilhar - nekos.life fornece para você milhares de imagens SFW e NSFW de nekos (mulheres-gato).",
     "fr": "Un neko rend votre journée lumineuse - nekos.life vous fournit des milliers d'images SFW et NSFW de nekos (femmes-chat).",
     "uk_UA": "Неко робить ваш день яскравим - nekos.life надає вам тисячі зображень SFW та NSFW з nekos (кішка-дівчина).",
-    "nl": "Een neko maakt je dag helder - nekos.life biedt je duizenden SFW- en NSFW-afbeeldingen van nekos (kattenmeisjes)."
+    "nl": "Een neko maakt je dag helder - nekos.life biedt je duizenden SFW- en NSFW-afbeeldingen van nekos (kattenmeisjes).",
+    "ga_IE": "Déanann Neko do lá geal - cuireann Nekos.life na mílte íomhá SFW agus NSFW ar fáil duit de Nekos (Cat-Cailíní)."
   },
   "url": "nekos.life",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "logo": "https://crugg.de/premid/nllogo.png",
   "thumbnail": "https://crugg.de/premid/nlbanner.png",
   "color": "#512da8",

@@ -6,10 +6,11 @@
   "service": "CurseForge",
   "description": {
     "en": "CurseForge allows for the uploading and reviewing of plugins, add-ons, and modifications for various games.",
-    "nl": "CurseForge zorgt voor het uploaden en beoordelen van plug-ins, add-ons en mods voor verschillende games."
+    "nl": "CurseForge zorgt voor het uploaden en beoordelen van plug-ins, add-ons en mods voor verschillende games.",
+    "ga_IE": "Ceadaíonn Curseforge forlíontáin, breiseáin, agus modhnuithe a uaslódáil agus a athbhreithniú do chluichí éagsúla."
   },
   "url": "www.curseforge.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/3V6FWir.png",
   "thumbnail": "https://i.imgur.com/IClUTAu.png",
   "color": "#f16725",

@@ -5,10 +5,11 @@
   },
   "service": "Groovy",
   "description": {
-    "en": "Groovy is an easy-to-use music bot that supports every major site, including Spotify."
+    "en": "Groovy is an easy-to-use music bot that supports every major site, including Spotify.",
+    "ga_IE": "Is Bot ceol atá éasca le húsáid é Groovy a thacaíonn le gach mórláithreán, lena n-áirítear Spotify."
   },
   "url": "groovy.bot",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/3u4u1EP.png",
   "thumbnail": "https://i.imgur.com/oYZqVuD.png",
   "color": "#A910E7",

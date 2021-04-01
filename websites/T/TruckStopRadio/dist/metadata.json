@@ -6,10 +6,11 @@
   },
   "url": "truckstopradio.co.uk",
   "description": {
-    "en": "Truck Stop Radio, a new but popular radio station for Euro Truck Simulator and American Truck Simulator."
+    "en": "Truck Stop Radio, a new but popular radio station for Euro Truck Simulator and American Truck Simulator.",
+    "ga_IE": "Radio Stop Truck, stáisiún raidió nua ach tóir do Insamhlóir Truck Euro agus Insamhlóir Truck Meiriceánach."
   },
   "service": "TruckStopRadio",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/M0t5a2Z.png",
   "thumbnail": "https://i.imgur.com/fk8Ia9g.png",
   "color": "#ff002c",

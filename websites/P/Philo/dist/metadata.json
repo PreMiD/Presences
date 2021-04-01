@@ -5,10 +5,14 @@
   },
   "service": "Philo",
   "description": {
-    "en": "Live & on-demand TV. 60+ channels. Unlimited DVR. No contract."
+    "en": "Live & on-demand TV. 60+ channels. Unlimited DVR. No contract.",
+    "ga_IE": "Teilifís bheo & ar-éileamh.Cainéil 60+.DVR neamhtheoranta.Gan aon chonradh."
   },
-  "url": ["www.philo.com", "philo.com"],
-  "version": "1.0.1",
+  "url": [
+    "www.philo.com",
+    "philo.com"
+  ],
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/Np5TVJB.png",
   "thumbnail": "https://i.imgur.com/R9ivBkz.jpg",
   "color": "#0C93F2",

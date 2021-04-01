@@ -7,13 +7,14 @@
   "description": {
     "en": "Polish site where you can watch anime",
     "nl": "Poolse site waar je anime kunt bekijken",
-    "pl": "Polska strona, na której można obejrzeć anime"
+    "pl": "Polska strona, na której można obejrzeć anime",
+    "ga_IE": "Suíomh na Polainne áit ar féidir leat féachaint ar anime"
   },
   "url": [
     "shinden.pl",
     "forum.shinden.pl"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/sGSeLBJ.png",
   "thumbnail": "https://i.imgur.com/atx9P8n.png",
   "color": "#6a2b8b",

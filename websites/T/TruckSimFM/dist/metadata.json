@@ -6,10 +6,11 @@
   "service": "TruckSimFM",
   "description": {
     "en": "TruckSimFM is an online radio station, dedicated to the Simulation Community, live 24/7 with nothing but great music, Online, On Mobile, and On Your Smart Speaker.",
-    "nl": "TruckSimFM is een online radiostation, gewijd aan de Simulation Community, 24/7 live met niets dan geweldige muziek, online, op mobiel en op je slimme luidspreker."
+    "nl": "TruckSimFM is een online radiostation, gewijd aan de Simulation Community, 24/7 live met niets dan geweldige muziek, online, op mobiel en op je slimme luidspreker.",
+    "ga_IE": "Is stáisiún raidió ar líne é Trucksimfm, atá tiomanta don phobal insamhalta, beo 24/7 le rud ar bith ach ceol mór, ar líne, ar phóca, agus ar do chainteoir cliste."
   },
   "url": "trucksim.fm",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/X7rXtq7.png",
   "thumbnail": "https://i.imgur.com/i4Q6yaC.png",
   "color": "#5398ee",

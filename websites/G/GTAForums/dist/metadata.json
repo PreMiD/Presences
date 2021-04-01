@@ -5,10 +5,11 @@
   },
   "service": "GTAForums",
   "description": {
-    "en": "GTAForums is the largest and ever-growing fan forum dedicated to the Grand Theft Auto series and Rockstar Games."
+    "en": "GTAForums is the largest and ever-growing fan forum dedicated to the Grand Theft Auto series and Rockstar Games.",
+    "ga_IE": "Is é gtaforums an fóram lucht leanúna is mó agus ag fás i gcónaí atá tiomnaithe don tsraith Grand Goid Auto agus cluichí Rockstar."
   },
   "url": "gtaforums.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/9iQgDdN.png",
   "thumbnail": "https://i.imgur.com/ZQHcc96.png",
   "color": "#244052",

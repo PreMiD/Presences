@@ -5,10 +5,11 @@
   },
   "service": "CyTube",
   "description": {
-    "en": "Content Sharing Platform with wide platform support of simultaneously enjoying videos/music with a live chat and tons of customization/moderation tools"
+    "en": "Content Sharing Platform with wide platform support of simultaneously enjoying videos/music with a live chat and tons of customization/moderation tools",
+    "ga_IE": "Ardán comhroinnte inneachar le tacaíocht ardán leathan as taitneamh a bhaint as físeáin / ceol ag an am céanna le comhrá beo agus tonna de uirlisí saincheaptha / modhnuithe"
   },
   "url": "cytu.be",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/gp4nfwi.png",
   "thumbnail": "https://i.imgur.com/kKZRocg.png",
   "color": "#263144",

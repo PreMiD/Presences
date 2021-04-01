@@ -8,7 +8,7 @@
   "category": "videos",
   "logo": "https://i.imgur.com/VWrl85V.jpg",
   "thumbnail": "https://i.imgur.com/s70veYl.png",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "color": "#6c8fd0",
   "tags": [
     "entertainment",
@@ -23,6 +23,7 @@
     "paramountplus.com"
   ],
   "description": {
-    "en": "Paramount+ is an American subscription video on-demand over-the-top streaming service. This service contains Paramount+ originals and even includes shows from Nick, Nick. Jr and Nick Toons."
+    "en": "Paramount+ is an American subscription video on-demand over-the-top streaming service. This service contains Paramount+ originals and even includes shows from Nick, Nick. Jr and Nick Toons.",
+    "ga_IE": "Is éard atá i gceist le Paramount + ná físeán síntiúis Meiriceánach ar an éileamh ar-an-chuid den scoth.Tá an tseirbhís seo paramount + bunchóipeanna agus folaíonn sé fiú seónna ó Nick, Nick.Toons JR agus Nick."
   }
 }

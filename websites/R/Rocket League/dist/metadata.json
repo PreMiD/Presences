@@ -7,13 +7,14 @@
   "description": {
     "en": "Rocket League® combines soccer with driving in an unbelievable physics-based multiplayer-focused sequel to Supersonic Acrobatic Rocket-Powered Battle-Cars!",
     "nl": "Rocket League® combineert voetbal met autorijden in een ongelooflijk op physics gebaseerd multiplayer-gericht vervolg op Supersonic Acrobatische Rocket-Powered Battle-Cars!",
-    "zh_CN": "RocketLeague®将足球与驾驶结合在一起，成为超音速杂技火箭动力战车不可思议的基于物理学的多人游戏！"
+    "zh_CN": "RocketLeague®将足球与驾驶结合在一起，成为超音速杂技火箭动力战车不可思议的基于物理学的多人游戏！",
+    "ga_IE": "Comhcheanglaíonn Rocket League® sacar le tiomáint i seicheamh ilchineálach atá bunaithe ar fhisic-bhunaithe go mór le supersonic acrobatic-thiomáint carranna carranna!"
   },
   "url": [
     "www.rocketleague.com",
     "www.rocketleagueesports.com"
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/mW47NQQ.png",
   "thumbnail": "https://i.imgur.com/rAqm5wD.jpg",
   "color": "#0055ab",

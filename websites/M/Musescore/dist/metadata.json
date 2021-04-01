@@ -5,14 +5,15 @@
   },
   "service": "Musescore",
   "description": {
-    "en": "Musescore allows you to share, find and play sheet music that other people have made."
+    "en": "Musescore allows you to share, find and play sheet music that other people have made.",
+    "ga_IE": "Ceadaíonn Musescore duit ceol bileoga a roinnt, a aimsiú agus a imirt a rinne daoine eile."
   },
   "url": [
     "musescore.com",
     "help.musescore.com",
     "musescore.org"
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/tx2Qvq4.png",
   "thumbnail": "https://i.imgur.com/QRerzOv.png",
   "color": "#2e86e8",

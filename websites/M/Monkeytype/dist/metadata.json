@@ -15,10 +15,11 @@
     "monkeytype.com"
   ],
   "description": {
-    "en": "A minimalistic, customisable typing website. Test yourself in various modes, track your progress and improve your typing speed."
+    "en": "A minimalistic, customisable typing website. Test yourself in various modes, track your progress and improve your typing speed.",
+    "ga_IE": "Láithreán gréasáin clóscríofa minimalistic, customizable.Déan tástáil ort féin i modhanna éagsúla, déan do dhul chun cinn a rianú agus feabhas a chur ar do luas clóscríofa."
   },
   "service": "Monkeytype",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/OnkMhFB.png",
   "thumbnail": "https://i.imgur.com/HH1UVqD.png",
   "color": "#383200",

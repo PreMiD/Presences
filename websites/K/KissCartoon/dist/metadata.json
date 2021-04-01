@@ -6,10 +6,11 @@
   "service": "KissCartoon",
   "description": {
     "en": "Watch cartoon online free in HD. Watch cartoon free without downloading.",
-    "nl": "Bekijk cartoon online gratis in HD. Bekijk cartoon gratis zonder te downloaden."
+    "nl": "Bekijk cartoon online gratis in HD. Bekijk cartoon gratis zonder te downloaden.",
+    "ga_IE": "Féach ar chartúin ar líne saor in aisce i HD.Féach ar chartúin saor in aisce gan íoslódáil."
   },
   "url": "kisscartoon.nz",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/RDkTKRh.png",
   "thumbnail": "https://i.imgur.com/48Y2kFC.png",
   "color": "#f5d80b",

@@ -6,13 +6,14 @@
   "service": "Crowdin",
   "description": {
     "en": "Crowdin is a cloud-based solution that streamlines localization management for your team.",
-    "ro": "Crowdin este o soluție bazată pe cloud care eficientizează gestionarea localizării pentru echipa ta."
+    "ro": "Crowdin este o soluție bazată pe cloud care eficientizează gestionarea localizării pentru echipa ta.",
+    "ga_IE": "Is réiteach bunaithe ar scamall é an lámha a chuimsíonn bainistíocht logánú do d'fhoireann."
   },
   "url": [
     "translate.premid.app",
     "crowdin.com"
   ],
-  "version": "2.2.6",
+  "version": "2.2.7",
   "logo": "https://i.imgur.com/rtkC4kS.png",
   "thumbnail": "https://i.imgur.com/Cn7yyqe.png",
   "color": "#2e3340",

@@ -5,10 +5,11 @@
   },
   "service": "Scratch",
   "description": {
-    "en": "Scratch is a block-based visual programming language and online community targeted primarily at children. Users of the site can create online projects using a block-like interface. The service is developed by the MIT Media Lab, has been translated into 70+ languages, and is used in most parts of the world."
+    "en": "Scratch is a block-based visual programming language and online community targeted primarily at children. Users of the site can create online projects using a block-like interface. The service is developed by the MIT Media Lab, has been translated into 70+ languages, and is used in most parts of the world.",
+    "ga_IE": "Is teanga clársceidealaithe blocbhunaithe é an scratch agus pobal ar líne atá dírithe go príomha ar leanaí.Is féidir le húsáideoirí an tsuímh tionscadail ar líne a chruthú ag baint úsáide as comhéadan bloc-mhaith.Is é an tseirbhís a fhorbairt ag an MIT MEDIA Lab, aistrithe go 70+ teanga, agus úsáidtear é i bhformhór na gcodanna den domhan."
   },
   "url": "scratch.mit.edu",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "http://i.cubeupload.com/vHaa4W.png",
   "thumbnail": "https://downbeat.is-inside.me/iLWNLsjM.png",
   "color": "#fc8c03",

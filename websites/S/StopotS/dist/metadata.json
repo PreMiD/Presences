@@ -8,13 +8,14 @@
       "name": "Bryan",
       "id": "293775922757238784"
     }
-  ], 
+  ],
   "service": "StopotS",
   "description": {
-    "en": "StopotS, the stop game on the internet. Play this popular game for free and without downloads."
+    "en": "StopotS, the stop game on the internet. Play this popular game for free and without downloads.",
+    "ga_IE": "Stopts, an cluiche stad ar an Idirlíon.Seinn an cluiche coitianta seo le haghaidh saor in aisce agus gan íoslódálacha."
   },
   "url": "stopots.com",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/2LqhoUb.png",
   "thumbnail": "https://i.imgur.com/Bg869KE.png",
   "color": "#FFBE55",

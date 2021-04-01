@@ -12,10 +12,11 @@
   ],
   "url": "mydramalist.com",
   "description": {
-    "en": "MyDramaList is the only tool you'll need to help you keep track of all the Asian Dramas [TV Shows], Asian Films, and Asian Variety Shows that you love!"
+    "en": "MyDramaList is the only tool you'll need to help you keep track of all the Asian Dramas [TV Shows], Asian Films, and Asian Variety Shows that you love!",
+    "ga_IE": "Is é Mydramalist an t-aon uirlis a bheidh de dhíth ort chun cabhrú leat súil a choinneáil ar na drámaí na hÁise go léir [seónna teilifíse], scannáin na hÁise, agus taispeánann éagsúlacht na hÁise go bhfuil grá agat!"
   },
   "service": "MyDramaList",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/EmAGyTj.png",
   "thumbnail": "https://i.imgur.com/1yEErjU.jpg",
   "color": "#0006FF",

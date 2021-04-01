@@ -7,10 +7,11 @@
   "description": {
     "en": "TVNOW offers you exciting films and series. Also many shows and documentaries can be found in the online stream! Watch your favorite show online now!",
     "nl": "TVNOW biedt spannende films en series. Ook zijn er veel shows en documentaires te vinden in de online stream! Bekijk nu uw favoriete programma online!",
-    "de": "TVNOW bietet Dir spannende Filme und Serien. Auch viele Shows und Dokus sind im Online-Stream zu finden! Deine Lieblingssendung jetzt online anschauen!"
+    "de": "TVNOW bietet Dir spannende Filme und Serien. Auch viele Shows und Dokus sind im Online-Stream zu finden! Deine Lieblingssendung jetzt online anschauen!",
+    "ga_IE": "Tugann TVNow scannáin agus sraith spreagúla duit.Chomh maith leis sin is féidir go leor seónna agus cláir faisnéise a fháil sa sruth ar líne!Féach ar an seó is fearr leat ar líne anois!"
   },
   "url": "www.tvnow.de",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/Z9NwC2O.png",
   "thumbnail": "https://i.imgur.com/2TqBWPd.png",
   "color": "#ffbc2d",

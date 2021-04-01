@@ -9,7 +9,7 @@
     "www.geoguessr.com",
     "geoguessr.com"
   ],
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/Zew5cN7.png",
   "thumbnail": "https://i.imgur.com/3C7yuPw.png",
   "color": "#CC2F2F",
@@ -19,7 +19,8 @@
     "guessing"
   ],
   "description": {
-    "en": "GeoGuessr is a web-based geographic discovery game designed by Anton Wallén, a Swedish IT consultant, released on 9 May 2013."
+    "en": "GeoGuessr is a web-based geographic discovery game designed by Anton Wallén, a Swedish IT consultant, released on 9 May 2013.",
+    "ga_IE": "Is cluiche Geografach Geografach é GeoGuess a dhearann Anton Wallén, comhairleoir TF na Sualainne, a scaoileadh an 9 Bealtaine 2013."
   },
   "category": "games"
 }

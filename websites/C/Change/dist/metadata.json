@@ -18,10 +18,11 @@
     "en": "Change the world",
     "de": "Verändere die Welt",
     "nl": "Verander de wereld",
-    "pt_BR": "Mude o mundo"
+    "pt_BR": "Mude o mundo",
+    "ga_IE": "Athraigh an domhan"
   },
   "url": "www.change.org",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/BwMtgWb.jpg",
   "thumbnail": "https://i.imgur.com/bjNVk3Z.png",
   "color": "#FF0000",

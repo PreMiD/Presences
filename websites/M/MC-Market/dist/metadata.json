@@ -6,13 +6,14 @@
   "service": "MC-Market",
   "description": {
     "en": "MC-Market.org is the home of Minecraft trades and sales, since August 2014.",
-    "nl": "MC-Market.org is sinds Augustus 2014 de thuisbasis van Minecraft-transacties en -verkoop."
+    "nl": "MC-Market.org is sinds Augustus 2014 de thuisbasis van Minecraft-transacties en -verkoop.",
+    "ga_IE": "Is é Mc-market.org baile na gceirdeanna agus na ndíolachán Minecraft, ó mhí Lúnasa 2014."
   },
   "url": [
     "www.mc-market.org",
     "status.mc-market.org"
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/W9zIBqd.png",
   "thumbnail": "https://i.imgur.com/bF8QEff.png",
   "color": "#3396d9",

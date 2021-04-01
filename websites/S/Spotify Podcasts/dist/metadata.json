@@ -11,7 +11,8 @@
     "en": "Music for everyone. Note: Only podcasts and site info! To show normal songs use the Spotify x Discord connection.",
     "nl": "Muziek voor iedereen. Let op: Alleen podcasts en pagina informatie! Om normale liedjes te laten zien gebruik de Spotify x Discord connectie.",
     "zh_TW": "音樂人人愛。注意：僅播客和網站信息！要顯示歌曲信息，請使你的Spotify賬號與Discord連接。",
-    "zh_CN": "音乐人人爱。注意：仅播客和网站信息！要显示普通歌曲，请使用Spotify x Discord连接。"
+    "zh_CN": "音乐人人爱。注意：仅播客和网站信息！要显示普通歌曲，请使用Spotify x Discord连接。",
+    "ga_IE": "Ceol do gach duine.Nóta: Níl ach podchraoltaí agus eolas suímh!Chun gnáth-amhráin a thaispeáint bain úsáid as an nasc Discord X Spotify."
   },
   "url": [
     "www.spotify.com",
@@ -23,7 +24,7 @@
     "support.spotify.com",
     "podcasters.spotify.com"
   ],
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/q3tKDRA.png",
   "thumbnail": "https://i.imgur.com/AzNhQ4j.png",
   "color": "#1ed760",

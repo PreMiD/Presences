@@ -13,10 +13,11 @@
     "uk_UA": "Crunchyroll — найбільше у світі місце аніме та манги, яке може похвалитися світовою спільнотою з понад 45 мільйонів зареєстрованих користувачів та понад 2 мільйони підписників.",
     "nl": "Crunchyroll is 's werelds grootste bestemming voor anime en mange, met een wereldwijde gemeenschap met meer dan 45 miljoen geregistreerde gebruikers en meer dan 2 miljoen abonnees.",
     "zh_CN": "Crunchyroll是美国的一家提供东亚相关流媒体影视服务和国际交流社区的网站。",
-    "zh_TW": "Crunchyroll是美國的一家提供東亞相關串流媒體影視服務和國際交流社區的網站。"
+    "zh_TW": "Crunchyroll是美國的一家提供東亞相關串流媒體影視服務和國際交流社區的網站。",
+    "ga_IE": "Is é Creunchyroll an ceann scríbe is mó ar domhan le haghaidh Anime agus Manga, ag cur pobal domhanda de níos mó ná 45 milliún úsáideoir cláraithe agus os cionn 2 mhilliún síntiúsóir."
   },
   "url": "www.crunchyroll.com",
-  "version": "2.6.6",
+  "version": "2.6.7",
   "logo": "https://i.imgur.com/LpTKP8c.png",
   "thumbnail": "https://i.imgur.com/hzM7YCb.png",
   "color": "#f47521",

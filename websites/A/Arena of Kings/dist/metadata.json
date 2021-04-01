@@ -12,9 +12,10 @@
     "fr": "Arena of Kings est un jeu next-gen PvP rapide joué dans le navigateur. Unissez-vous aux héros pour revendiquer le trône!",
     "uk_UA": "Arena of Kings - це браузерна гра з PvP ареною нового покоління з постійними оновленнями. Об’єднайте свої сили з героями, щоб зайняти трон!",
     "nl": "Arena of Kings is een snelle PvP Arena Game van de volgende generatie die gespeelt wordt in uw browser. Werk samen met helden om de troon op te eisen!",
-    "zh_CN": "Arena of Kings是在浏览器中进行的快节奏PvP竞技场游戏。快来与英雄们联手夺取王位！"
+    "zh_CN": "Arena of Kings是在浏览器中进行的快节奏PvP竞技场游戏。快来与英雄们联手夺取王位！",
+    "ga_IE": "Is é Arena na Ríthe aren-Gen-Gen Fast-paceed PvP cluiche a bhí sa bhrabhsálaí.Cláraigh le fórsaí le laochra chun an ríchathaoir a éileamh!"
   },
-  "version": "2.3.5",
+  "version": "2.3.6",
   "url": "arenaofkings.com",
   "logo": "https://i.imgur.com/939UKF6.png",
   "thumbnail": "https://i.imgur.com/2K6n54H.png",

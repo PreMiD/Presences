@@ -5,10 +5,11 @@
   },
   "service": "Chaturbate",
   "description": {
-    "en": "Chaturbate is a popular webcam site which launched in 2011 where amateurs livestream erotic or pornographic performances."
+    "en": "Chaturbate is a popular webcam site which launched in 2011 where amateurs livestream erotic or pornographic performances.",
+    "ga_IE": "Is láithreán ceamara gréasáin coitianta é Chaturbate a seoladh in 2011 nuair a livestream léirithe erotic nó pornagrafaíochta."
   },
   "url": "chaturbate.com",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "logo": "https://i.imgur.com/PjQ6k9n.png",
   "thumbnail": "https://i.imgur.com/iszRY6f.png",
   "color": "#f68a1a",

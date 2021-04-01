@@ -6,10 +6,11 @@
   "service": "bol.com",
   "description": {
     "en": "Bol.com is a webshop in the Netherlands and Belgium offering over 20 million products.",
-    "nl": "Bol.com is een webwinkel in Nederland en België met meer dan 20 miljoen artikelen."
+    "nl": "Bol.com is een webwinkel in Nederland en België met meer dan 20 miljoen artikelen.",
+    "ga_IE": "Is webshop é Bol.com san Ísiltír agus sa Bheilg a thairgeann os cionn 20 milliún táirge."
   },
   "url": "www.bol.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/HWwm0q0.png",
   "thumbnail": "https://i.imgur.com/pxhPD9e.png",
   "color": "#0000a4",

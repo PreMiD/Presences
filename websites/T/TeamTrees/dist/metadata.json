@@ -6,10 +6,11 @@
   "service": "TeamTrees",
   "description": {
     "en": "Help us plant 20 million trees around the globe by January 1st, 2020.",
-    "nl": "Help ons om tegen 1 januari 2020 wereldwijd 20 miljoen bomen over de hele wereld te planten."
+    "nl": "Help ons om tegen 1 januari 2020 wereldwijd 20 miljoen bomen over de hele wereld te planten.",
+    "ga_IE": "Cabhraigh linn plandáil 20 milliún crann ar fud na cruinne faoi 1 Eanáir, 2020."
   },
   "url": "teamtrees.org",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/vrYCBSK.png",
   "thumbnail": "https://i.imgur.com/t0W0P5C.jpg",
   "color": "#8ab740",

@@ -6,10 +6,11 @@
   "service": "Reach Radio",
   "description": {
     "en": "The Station Made For Gaming - Playing All The Hits 24/7!",
-    "nl": "Het station gemaakt voor gaming - 24/7 alle hits spelen!"
+    "nl": "Het station gemaakt voor gaming - 24/7 alle hits spelen!",
+    "ga_IE": "An stáisiún a rinneadh le haghaidh cearrbhachais - ag seinm na n-amas go léir 24/7!"
   },
   "url": "reachradio.co.uk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/4OAAc9O.png",
   "thumbnail": "https://i.imgur.com/03m7awX.png",
   "color": "#003d91",

@@ -6,10 +6,11 @@
   "service": "ListenOnRepeat",
   "description": {
     "en": "Discover music, check out the latest trending videos, and 24/7 curated content! Try ListenOnRepeat today.",
-    "nl": "Ontdek muziek, bekijk de nieuwste trending video's en 24/7 samengestelde inhoud! Probeer ListenOnRepeat vandaag nog."
+    "nl": "Ontdek muziek, bekijk de nieuwste trending video's en 24/7 samengestelde inhoud! Probeer ListenOnRepeat vandaag nog.",
+    "ga_IE": "Discover Music, féach ar na físeáin trending is déanaí, agus 24/7 ábhar coimeádaithe!Bain triail as éisteacht inniu."
   },
   "url": "listenonrepeat.com",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "logo": "https://i.imgur.com/F7W7Vnn.png",
   "thumbnail": "https://i.imgur.com/jhah8BE.png",
   "color": "#ff0066",

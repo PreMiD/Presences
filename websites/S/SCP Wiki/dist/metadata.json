@@ -5,7 +5,8 @@
   },
   "service": "SCP Wiki",
   "description": {
-    "en": "Operating clandestine and worldwide, the Foundation operates beyond jurisdiction, empowered and entrusted by every major national government with the task of containing anomalous objects, entities, and phenomena."
+    "en": "Operating clandestine and worldwide, the Foundation operates beyond jurisdiction, empowered and entrusted by every major national government with the task of containing anomalous objects, entities, and phenomena.",
+    "ga_IE": "Oibríonn oibriú folaitheach agus ar fud an domhain, oibríonn an Foras thar dhlínse, a chumhachtú agus a chur ar iontaoibh ag gach rialtas náisiúnta mór leis an tasc ina bhfuil rudaí aimhrialta, eintitis, agus feiniméin."
   },
   "url": [
     "www.scp-wiki.net",
@@ -27,7 +28,7 @@
     "scp-sandbox-3.wikidot.com",
     "www.scpwiki.com"
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/S00mP8l.png",
   "thumbnail": "https://i.imgur.com/el9c68A.png",
   "color": "#BB0011",

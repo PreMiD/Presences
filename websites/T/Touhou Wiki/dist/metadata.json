@@ -5,10 +5,11 @@
   },
   "service": "Touhou Wiki",
   "description": {
-    "en": "Touhou Wiki covers the official Touhou Project games and materials and any fan-made games and media, along with other related games developed by the former members of Amusement Makers or in conjunction with Team Shanghai Alice."
+    "en": "Touhou Wiki covers the official Touhou Project games and materials and any fan-made games and media, along with other related games developed by the former members of Amusement Makers or in conjunction with Team Shanghai Alice.",
+    "ga_IE": "Clúdaíonn Touhou Wiki na cluichí agus na hábhair tionscadail oifigiúla Touhou agus aon cluichí agus meáin a dhéantar lucht leanúna, mar aon le cluichí gaolmhara eile a d'fhorbair na hiarbhaill de dhéantóirí siamsaíochta nó i gcomhar le foireann Shanghai Alice."
   },
   "url": "touhouwiki.net",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://menma.is-inside.me/NURdVr2c.png",
   "thumbnail": "https://menma.is-inside.me/TzsO9Q1O.png",
   "color": "#9B0101",

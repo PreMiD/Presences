@@ -6,10 +6,11 @@
   },
   "url": "www.ryouflashcards.com",
   "description": {
-    "en": "Ryou Flashcards is a web app for learning Japanese and studying kanji and vocabulary words."
+    "en": "Ryou Flashcards is a web app for learning Japanese and studying kanji and vocabulary words.",
+    "ga_IE": "Is app Gréasáin é Ryou Flashcards chun foghlaim na Seapáine a fhoghlaim agus chun staidéar a dhéanamh ar Kanji agus Focail foclóra."
   },
   "service": "Ryou Flashcards",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/snEsbAL.png",
   "thumbnail": "https://i.imgur.com/tWNhZxF.png",
   "color": "#4C8FFB",

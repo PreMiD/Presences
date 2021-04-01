@@ -9,10 +9,11 @@
     "en.onlinesoccermanager.com"
   ],
   "description": {
-    "en": "Manage your favorite football team in Online Soccer Manager (OSM)! This free-to-play game contains all real and authentic football leagues, clubs and players in the world."
+    "en": "Manage your favorite football team in Online Soccer Manager (OSM)! This free-to-play game contains all real and authentic football leagues, clubs and players in the world.",
+    "ga_IE": "Bainistigh an fhoireann peile is fearr leat i mBainisteoir Sacair Líne (OSM)!Sa chluiche seo-le-PLAY seo tá gach sraithe, clubanna agus imreoirí peile fíor agus barántúla ar fud an domhain."
   },
   "service": "Online Soccer Manager",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/SZFDa07.png",
   "thumbnail": "https://i.imgur.com/G9nRkaR.png",
   "color": "#FF971B",

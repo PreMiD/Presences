@@ -15,13 +15,14 @@
   ],
   "service": "Kahoot",
   "description": {
-    "en": "Kahoot! is a game-based platform that makes learning awesome for millions of people all over the world."
+    "en": "Kahoot! is a game-based platform that makes learning awesome for millions of people all over the world.",
+    "ga_IE": "Kahoot!Is ardán-bhunaithe é a dhéanann foghlaim uamhnach do na milliúin duine ar fud an domhain."
   },
   "url": [
     "kahoot.it",
     "play.kahoot.it"
   ],
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/GkXv1zy.jpg",
   "thumbnail": "https://i.imgur.com/3DGbV8e.png",
   "color": "#8A5CD7",

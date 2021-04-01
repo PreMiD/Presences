@@ -12,10 +12,11 @@
   ],
   "description": {
     "en": "File sharing and storage made simple",
-    "nl": "Bestanden delen en opslag is simpel gemaakt"
+    "nl": "Bestanden delen en opslag is simpel gemaakt",
+    "ga_IE": "Comhroinnt agus Stóráil Comhad Simplí"
   },
   "service": "Mediafire",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/nIZ0XtN.png",
   "thumbnail": "https://i.imgur.com/DwfSIyG.jpg",
   "color": "#FF0000",

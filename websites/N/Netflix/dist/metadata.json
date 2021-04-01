@@ -18,7 +18,29 @@
     }
   ],
   "service": "Netflix",
-  "altnames": ["Нетфликс", "Նեթֆլիքս", "נטפליקס", "נעטפליקס", "نتفليكس", "نتفلیکس", "نيتفليكس", "نیٹ فلکس", "نیٹ فلیکس", "نێتفلیکس", "نەتفلىكىس", "नेटफ्लिक्स", "নেটফ্লিক্স", "ਨੈਟਫਲਿਕਸ", "நெற்ஃபிளிக்சு", "నెట్‌ఫ్లిక్స్", "ನೆಟ್‍ಫ್ಲಿಕ್ಸ್", "നെറ്റ്ഫ്ലിക്സ്", "เน็ตฟลิกซ์", "網飛", "넷플릭스"],
+  "altnames": [
+    "Нетфликс",
+    "Նեթֆլիքս",
+    "נטפליקס",
+    "נעטפליקס",
+    "نتفليكس",
+    "نتفلیکس",
+    "نيتفليكس",
+    "نیٹ فلکس",
+    "نیٹ فلیکس",
+    "نێتفلیکس",
+    "نەتفلىكىس",
+    "नेटफ्लिक्स",
+    "নেটফ্লিক্স",
+    "ਨੈਟਫਲਿਕਸ",
+    "நெற்ஃபிளிக்சு",
+    "నెట్‌ఫ్లిక్స్",
+    "ನೆಟ್‍ಫ್ಲಿಕ್ಸ್",
+    "നെറ്റ്ഫ്ലിക്സ്",
+    "เน็ตฟลิกซ์",
+    "網飛",
+    "넷플릭스"
+  ],
   "description": {
     "en": "Netflix is the world's leading internet entertainment service with 139 million paid memberships in over 190 countries enjoying TV series, documentaries and feature films across a wide variety of genres and languages.",
     "de": "Netflix ist der weltweit führende Internet-Entertainment-Dienst mit 139 Millionen bezahlten Mitgliedschaften in über 190 Ländern, die TV-Serien, Dokumentationen und Spielfilme in einer Vielzahl von Genres und Sprachen genießen.",
@@ -29,13 +51,14 @@
     "nl": "Netflix is wereldwijd de leider in online entertainmentdienst met 139 miljoen betaalde lidmaatschappen in meer dan 190 landen die genieten van tv-series, documentaires en speelfilms in een breed scala aan genres en talen.",
     "tr": "Netflix, 190'dan fazla ülkede 139 milyon ücretli üyeliğin, dizi, belgesel ve çeşitli tür ve dillerdeki sinema filmlerinin tadını çıkarttığı, dünyanın önde gelen internet dizi/film hizmetidir.",
     "zh_CN": "Netflix是全球领先的网络视频点播服务网站，在190多个国家/地区拥有1.39亿付费会员，他们收看各种类型和语言的电视连续剧，纪录片和故事片以及电影。",
-    "zh_TW": "Netflix是全球領先的網路隨選串流影片服務網站，在190多個國家/地區擁有1.39億付費會員，他們收看各種類型和語言的電視連續劇，紀錄片和故事片以及電影。"
+    "zh_TW": "Netflix是全球領先的網路隨選串流影片服務網站，在190多個國家/地區擁有1.39億付費會員，他們收看各種類型和語言的電視連續劇，紀錄片和故事片以及電影。",
+    "ga_IE": "Is é Netflix seirbhís siamsaíochta Idirlín ar fud an domhain le 139 milliún ballraíocht íoctha i níos mó ná 190 tír ag baint taitnimh as sraith teilifíse, cláir faisnéise agus gné scannáin ar fud réimse leathan seánraí agus teangacha."
   },
   "url": [
     "www.netflix.com",
     "netflix.com"
   ],
-  "version": "4.1.0",
+  "version": "4.1.1",
   "logo": "https://i.imgur.com/gvnSwSK.png",
   "thumbnail": "https://i.imgur.com/LWcRBZs.jpg",
   "color": "#db0000",
@@ -134,7 +157,10 @@
       "title": "Icon",
       "icon": "fad fa-images",
       "value": 0,
-      "values": ["Normal", "No Background"]
+      "values": [
+        "Normal",
+        "No Background"
+      ]
     }
   ]
 }

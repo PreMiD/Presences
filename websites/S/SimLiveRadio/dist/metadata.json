@@ -7,13 +7,14 @@
   "description": {
     "en": "SimLiveRadio is the most successful infotainment radio for simulation games in Germany, Austria and Switzerland!",
     "nl": "SimLiveRadio is de meest succesvolle infotainment radio voor simulatiespellen in Duitsland, Oostenrijk en Zwitserland!",
-    "de": "Deutschlands Radio Nr. 1 für Simulationsspiele"
+    "de": "Deutschlands Radio Nr. 1 für Simulationsspiele",
+    "ga_IE": "Is é SimliveRadio an raidió infotainment is rathúla le haghaidh cluichí insamhalta sa Ghearmáin, san Ostair agus san Eilvéis!"
   },
   "url": [
     "simliveradio.net",
     "laut.fm"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/GCpxrYu.png",
   "thumbnail": "https://i.imgur.com/d8J0v3O.png",
   "color": "#f87d04",

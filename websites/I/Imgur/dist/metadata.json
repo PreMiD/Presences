@@ -6,7 +6,8 @@
   "service": "Imgur",
   "description": {
     "en": "Imgur is the easiest way to discover and enjoy the magic of the Internet. It’s where you’ll find the funniest, most informative and inspiring images, memes, GIFs, and visual stories served up in an endless stream of bite-sized fun. Powered by a passionate community of people from all around the world.",
-    "nl": "Imgur is de gemakkelijkste manier om de magie van internet te ontdekken en ervan te genieten. Hier vind je de grappigste, meest informatieve en inspirerende afbeeldingen, memes, GIF's en visuele verhalen vertoond in een eindeloze stroom van plezier. Aangedreven door een gepassioneerde gemeenschap van mensen over de hele wereld."
+    "nl": "Imgur is de gemakkelijkste manier om de magie van internet te ontdekken en ervan te genieten. Hier vind je de grappigste, meest informatieve en inspirerende afbeeldingen, memes, GIF's en visuele verhalen vertoond in een eindeloze stroom van plezier. Aangedreven door een gepassioneerde gemeenschap van mensen over de hele wereld.",
+    "ga_IE": "Is é IMGUR an bealach is éasca le fáil amach agus chun taitneamh a bhaint as draíocht an Idirlín.Tá sé i gcás ina mbainfidh tú teacht ar na híomhánna is greannmhaire, is mó faisnéiseach agus spreagúil, memes, gifs, agus scéalta amhairc a sheirbheáil suas i sruth endless de spraoi bite-meánmhéide.Powered ag pobal paiseanta de dhaoine ó gach cearn den domhan."
   },
   "url": [
     "imgur.com",
@@ -18,7 +19,7 @@
     "apidocs.imgur.com",
     "community.imgur.com"
   ],
-  "version": "1.1.5",
+  "version": "1.1.6",
   "logo": "https://i.imgur.com/eZf3wsO.png",
   "thumbnail": "https://i.imgur.com/vTLBJYm.jpg",
   "color": "#89c624",

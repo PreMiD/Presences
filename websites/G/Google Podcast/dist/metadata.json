@@ -7,10 +7,11 @@
   "service": "Google Podcast",
   "description": {
     "en": "With Google Podcasts, you can find and listen to the world's podcasts for free",
-    "pl": "Z Google Podcast, możesz odkrywac i słuchać podcasty za darmo"
+    "pl": "Z Google Podcast, możesz odkrywac i słuchać podcasty za darmo",
+    "ga_IE": "Le Podchraoltaí Google, is féidir leat podchraoltaí ar domhan a aimsiú agus éisteacht leo saor in aisce"
   },
   "url": "podcasts.google.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/OiPOkMA.png",
   "thumbnail": "https://i.imgur.com/iI3qc0M.jpg",
   "color": "#ffffff",

@@ -6,10 +6,11 @@
   "service": "PlutoTV",
   "description": {
     "en": "It’s Free TV.",
-    "nl": "Het is gratis TV."
+    "nl": "Het is gratis TV.",
+    "ga_IE": "Is teilifíse saor in aisce é."
   },
   "url": "pluto.tv",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "logo": "https://i.imgur.com/oIasj8d.png",
   "thumbnail": "https://i.imgur.com/ySBvYkV.png",
   "color": "#ffffff",

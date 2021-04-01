@@ -6,13 +6,14 @@
   "service": "Hako",
   "description": {
     "en": "Read vietnamese translated light/web novels online.",
-    "vi_VN": "Đọc light/web novels đã đươc dịch online"
+    "vi_VN": "Đọc light/web novels đã đươc dịch online",
+    "ga_IE": "Léigh úrscéalta solais / gréasáin aistrithe Vítneam ar líne."
   },
   "url": [
     "docln.net",
     "ln.hako.re"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/rkmqU73.png",
   "thumbnail": "https://i.imgur.com/tn5PhoK.png",
   "color": "#1e5069",

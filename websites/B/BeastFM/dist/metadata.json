@@ -6,10 +6,11 @@
   },
   "url": "beastfm.pw",
   "description": {
-    "en": "BeastFM is a US radio station with the #1 hits 24/7"
+    "en": "BeastFM is a US radio station with the #1 hits 24/7",
+    "ga_IE": "Is stáisiún raidió SAM é BeastFM leis an # 1 Hits 24/7"
   },
   "service": "BeastFM",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/l6meesB.png",
   "thumbnail": "https://i.imgur.com/tWSpYUK.png",
   "color": "#ff8300",

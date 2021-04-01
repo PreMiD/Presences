@@ -7,10 +7,11 @@
   "url": "dizilla.net",
   "description": {
     "en": "Dizilla is one of the most beautiful and populer Turkish TV series website.",
-    "tr": "Dizilla, Türkiye'de hizmet veren yerel bir dizi yayın platformudur."
+    "tr": "Dizilla, Türkiye'de hizmet veren yerel bir dizi yayın platformudur.",
+    "ga_IE": "Tá Dizilla ar cheann de shuíomh gréasáin sraith teilifíse na Tuirce is áille agus is coitianta."
   },
   "service": "Dizilla",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/EqxZ0d3.png",
   "thumbnail": "https://i.imgur.com/aqrhBjE.png",
   "color": "#d32028",

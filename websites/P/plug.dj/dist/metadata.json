@@ -11,10 +11,11 @@
     "pt_BR": "Escute, assista, descubra e conecte-se com fãs de músicas ao redor do mundo!",
     "fr": "Écoutez, jouez, découvrez et connectez-vous avec des fans de musique du monde entier!",
     "uk_UA": "Слухайте, грайте, відкривайте для себе та спілкуйтесь із фанатами музики по всьому світу!",
-    "nl": "Luister, speel, ontdek en maak contact met muziekfans over de hele wereld!"
+    "nl": "Luister, speel, ontdek en maak contact met muziekfans over de hele wereld!",
+    "ga_IE": "Éist, súgradh, faigh amach agus ceangail le lucht leanúna ceoil ar fud an domhain!"
   },
   "url": "plug.dj",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "logo": "https://crugg.de/premid/pdjlogo.png",
   "thumbnail": "https://crugg.de/premid/pdjbanner.png",
   "color": "#E1306C",

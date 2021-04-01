@@ -5,10 +5,11 @@
   },
   "service": "HepBoat",
   "description": {
-    "en": "HepBoat is a fork of b1nzy's rowboat, a utilitarian and administration assistant for Discord."
+    "en": "HepBoat is a fork of b1nzy's rowboat, a utilitarian and administration assistant for Discord.",
+    "ga_IE": "Is é atá i Hepboat ná forc de Rowboat B1NZY, Cúntóir Utilitarian agus Riaracháin do Discord."
   },
   "url": "mod.teamhydra.dev",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/ekuyFww.png",
   "thumbnail": "https://i.imgur.com/ECTw8rL.png",
   "color": "#7289da",

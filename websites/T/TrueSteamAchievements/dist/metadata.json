@@ -6,10 +6,11 @@
   "service": "TrueSteamAchievements",
   "description": {
     "en": "TrueSteamAchievements is the home of Steam news, achievement lists and guides, reviews, interviews, leaderboards and more.",
-    "nl": "TrueSteamAchievements is de plaats voor Steam nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer."
+    "nl": "TrueSteamAchievements is de plaats voor Steam nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer.",
+    "ga_IE": "Is é TruestEAMachCievents an baile nuachta gaile, liostaí gnóthachtála agus treoracha, athbhreithnithe, agallaimh, cláir Leader agus níos mó."
   },
   "url": "truesteamachievements.com",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/8EEEcoh.png",
   "thumbnail": "https://i.imgur.com/emAb1iF.jpg",
   "color": "#FFF",

@@ -6,13 +6,14 @@
   "service": "MangaKakalot",
   "description": {
     "en": "Read manga online free at Mangakakalot.com, update fastest, most full, synthesized 24h free with high-quality images and be the first one to publish new chapters.",
-    "nl": "Lees manga online gratis op Mangakakalot.com, update de snelste, meest volledige, gesynthetiseerde 24 uur gratis met afbeeldingen van hoge kwaliteit en wees de eerste die nieuwe hoofdstukken publiceert."
+    "nl": "Lees manga online gratis op Mangakakalot.com, update de snelste, meest volledige, gesynthetiseerde 24 uur gratis met afbeeldingen van hoge kwaliteit en wees de eerste die nieuwe hoofdstukken publiceert.",
+    "ga_IE": "Léigh Manga ar líne saor in aisce ag Mangakakalot.com, nuashonraigh an ceann is tapúla, an chuid is mó, 24h saor in aisce le híomhánna ardcháilíochta agus a bheith ar an gcéad cheann chun caibidlí nua a fhoilsiú."
   },
   "url": [
     "mangakakalot.com",
     "manganelo.com"
   ],
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/juJuZOu.png",
   "thumbnail": "https://i.imgur.com/nOsKW98.jpg",
   "color": "#f05759",

@@ -6,10 +6,11 @@
   },
   "url": "www.saltybet.com",
   "description": {
-    "en": "SaltyBet (also known as Salty's Dream Cast Casino) is a betting site where users may bet fake money on the outcomes of A.I.-controlled M.U.G.E.N battles."
+    "en": "SaltyBet (also known as Salty's Dream Cast Casino) is a betting site where users may bet fake money on the outcomes of A.I.-controlled M.U.G.E.N battles.",
+    "ga_IE": "Is SaltyBet (ar a dtugtar freisin ar a dtugtar Casino aisling goirt amháin) ar shuíomh gealltóireachta nuair a d'fhéadfadh úsáideoirí airgead a ghealladh ar thorthaí A.I.-rialú M.U.G.N.N cathanna."
   },
   "service": "Salty Bet",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "logo": "https://i.imgur.com/0GEzMXM.png",
   "thumbnail": "https://i.imgur.com/thkngQH.png",
   "color": "#00adef",

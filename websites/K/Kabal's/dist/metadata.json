@@ -6,10 +6,11 @@
   "service": "Kabal's",
   "description": {
     "en": "Kabal's bot is providing social aspects including member profile, fun stuff and moderation..",
-    "tr": "Kabal's bot Türkiye'de popüler olan bir bot."
+    "tr": "Kabal's bot Türkiye'de popüler olan bir bot.",
+    "ga_IE": "Tá bot Kabal ag soláthar gnéithe sóisialta lena n-áirítear próifíl ball, rudaí spraíúla agus modhnóireacht .."
   },
   "url": "bot.emirkabal.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/8V5NfYD.png",
   "thumbnail": "https://i.imgur.com/nitFxle.png",
   "color": "#2942BF",

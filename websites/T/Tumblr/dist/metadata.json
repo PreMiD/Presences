@@ -6,10 +6,11 @@
   "service": "Tumblr",
   "description": {
     "en": "Tumblr is a place to express yourself, discover yourself, and bond over the stuff you love. It's where your interests connect you with your people.",
-    "nl": "Tumblr is een plek om jezelf te uiten, jezelf te ontdekken en een band op te bouwen over dingen waar je van houdt. Het is waar uw interesses u verbinden met uw mensen."
+    "nl": "Tumblr is een plek om jezelf te uiten, jezelf te ontdekken en een band op te bouwen over dingen waar je van houdt. Het is waar uw interesses u verbinden met uw mensen.",
+    "ga_IE": "Is áit é Tumblr chun tú féin a chur in iúl, tú féin a chur in iúl, agus bannaí thar na rudaí a bhfuil grá agat dóibh.Is é an áit a dtéann do chuid spéiseanna leat le do dhaoine."
   },
   "url": "www.tumblr.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/AE5bq1T.png",
   "thumbnail": "https://i.imgur.com/FZ3Zrxb.png",
   "color": "#395976",

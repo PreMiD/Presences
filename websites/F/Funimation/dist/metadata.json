@@ -6,10 +6,11 @@
   "service": "Funimation",
   "description": {
     "en": "Stream and buy official anime including My Hero Academia, Drifters and Fairy Tail. Watch free anime online or subscribe for more.",
-    "nl": "Stream en koop officiële anime inclusief My Hero Academia, Drifters en Fairy Tail. Bekijk gratis anime online of abonneer je op meer."
+    "nl": "Stream en koop officiële anime inclusief My Hero Academia, Drifters en Fairy Tail. Bekijk gratis anime online of abonneer je op meer.",
+    "ga_IE": "Sruth agus ceannaigh anime oifigiúil lena n-áirítear mo shaol acadúil, drifters agus eireaball fairy.Féach ar anime saor in aisce ar líne nó suibscríobh le haghaidh níos mó."
   },
   "url": "www.funimation.com",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/WYKbg0v.png",
   "thumbnail": "https://i.imgur.com/PI37V2S.png",
   "color": "#42009c",

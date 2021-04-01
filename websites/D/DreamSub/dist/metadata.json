@@ -10,10 +10,11 @@
   ],
   "description": {
     "en": "Watch all the series thanks to our archive of Anime in Streaming Sub ITA HD / FULL HD and Free Download. Find the best series ever completely free.",
-    "it": "Guarda tutte le serie grazie al nostro archivio di Anime in Streaming Sub ITA HD/FULL HD e Download gratis. Trova le migliori serie di sempre completamente gratuite."
+    "it": "Guarda tutte le serie grazie al nostro archivio di Anime in Streaming Sub ITA HD/FULL HD e Download gratis. Trova le migliori serie di sempre completamente gratuite.",
+    "ga_IE": "Féach ar an tsraith go léir a bhuíochas dár gcartlann Anime i sruthú fo-Ita HD / HD iomlán agus íoslódáil saor in aisce.Faigh an tsraith is fearr riamh saor in aisce."
   },
   "service": "DreamSub",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/vCJqRBO.png",
   "thumbnail": "https://i.imgur.com/MYEWI2L.png",
   "color": "#4281bb",

@@ -5,10 +5,11 @@
   },
   "url": "einthusan.tv",
   "description": {
-    "en": "Einthusan: The leading Premium South Asian streaming content provider of full-length feature films in on-demand superior HD. We're expanding to bring you high-bitrate audio albums, movie clips, and music videos. Explore the social entertainment hub where users discover and consume South Asian content at it's best."
+    "en": "Einthusan: The leading Premium South Asian streaming content provider of full-length feature films in on-demand superior HD. We're expanding to bring you high-bitrate audio albums, movie clips, and music videos. Explore the social entertainment hub where users discover and consume South Asian content at it's best.",
+    "ga_IE": "Erinusan: Is é an príomhphréimh préimh tosaigh na hÁise Theas sruthú an tsoláthraí de ghnáth-scannáin fhadtéarmacha in ar-éileamh HD níos fearr.Táimid ag leathnú chun albam fuaime ard-giotán, gearrthóga scannáin, agus físeáin ceoil a thabhairt leat.Déan iniúchadh ar an Mol Siamsaíochta Sóisialta áit a bhfaigheann úsáideoirí amach agus a ithe ábhar na hÁise Theas ag sé is fearr."
   },
   "service": "Einthusan",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/63yIrXo.jpg",
   "thumbnail": "https://i.imgur.com/Gmrtp1s.png",
   "color": "#888888",

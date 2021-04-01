@@ -13,10 +13,11 @@
   "description": {
     "en": "Watch the best entertainment videos, live sports, journalism, and more whenever and wherever you want.",
     "nl": "Bekijk de beste entertainmentvideo's, live sport, journalistiek en meer wanneer en waar u maar wilt.",
-    "pt_BR": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser."
+    "pt_BR": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser.",
+    "ga_IE": "Féach ar na físeáin siamsaíochta is fearr, spóirt beo, iriseoireacht, agus níos mó aon uair agus cibé áit is mian leat."
   },
   "url": "globoplay.globo.com",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "logo": "https://i.imgur.com/nPyw54J.png",
   "thumbnail": "https://i.imgur.com/eEb3Dy7.png",
   "color": "#ED1A37",

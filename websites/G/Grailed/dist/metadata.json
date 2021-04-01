@@ -6,10 +6,11 @@
   },
   "service": "Grailed",
   "description": {
-    "en": "Grailed is the one-stop destination for buying, selling and exploring menswear."
+    "en": "Grailed is the one-stop destination for buying, selling and exploring menswear.",
+    "ga_IE": "Is é an t-ainm atá ar an gceann scríbe aon-stad chun éadaí mens a cheannach, a dhíol agus a iniúchadh."
   },
   "url": "www.grailed.com",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/ahnInCZ.png",
   "thumbnail": "https://i.imgur.com/PksjgBn.jpg",
   "color": "#666666",

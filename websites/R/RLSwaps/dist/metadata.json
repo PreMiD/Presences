@@ -7,10 +7,11 @@
   "description": {
     "en": "Swap your Rocket League items against higher value items!",
     "nl": "Ruil je Rocket League-items tegen items met een hogere waarde!",
-    "zh_CN": "将您的火箭联盟物品与更高价值的物品互换！"
+    "zh_CN": "将您的火箭联盟物品与更高价值的物品互换！",
+    "ga_IE": "Babhtáil do mhíreanna League Rocket i gcoinne míreanna luach níos airde!"
   },
   "url": "rlswaps.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/BsWzTyA.png",
   "thumbnail": "https://i.imgur.com/VAR7dc1.png",
   "color": "#008eff",

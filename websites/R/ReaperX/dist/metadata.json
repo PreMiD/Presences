@@ -6,10 +6,11 @@
   "service": "ReaperX",
   "description": {
     "en": "ReaperX is a Robux Shop (R$) with our professional service, our service is the most popular and lowest priced",
-    "th": "ReaperX ร้านรับเติม ROBUX (R$, โรบัค) ด้วยการบริการเเบบมืออาชีพ บริการของเราเป็นที่นิยมเเละราคาถูก"
+    "th": "ReaperX ร้านรับเติม ROBUX (R$, โรบัค) ด้วยการบริการเเบบมืออาชีพ บริการของเราเป็นที่นิยมเเละราคาถูก",
+    "ga_IE": "Is siopa Robux é Reaperx (R $) lenár seirbhís ghairmiúil, is é ár seirbhís an praghas is coitianta agus is ísle"
   },
   "url": "reaperx.in.th",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/tvquFhV.jpeg",
   "thumbnail": "https://i.imgur.com/ANijzlW.png",
   "color": "#d61515",

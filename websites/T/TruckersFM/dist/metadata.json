@@ -11,10 +11,11 @@
   ],
   "service": "TruckersFM",
   "description": {
-    "en": "Truckers.FM is the No.1 Hit Music Station as voted by the TruckersMP Community 5 years, providing round the clock entertainment broadcasting a variety of shows, ranging from the Top 40 to the biggest throwbacks."
+    "en": "Truckers.FM is the No.1 Hit Music Station as voted by the TruckersMP Community 5 years, providing round the clock entertainment broadcasting a variety of shows, ranging from the Top 40 to the biggest throwbacks.",
+    "ga_IE": "Is é Truckers.fm an stáisiún ceoil Uimh.1 buailte mar a vótáil an pobal TruckersMP 5 bliana, ag soláthar siamsaíochta an chloig ag craoladh seónna éagsúla, ag dul ó na 40 barr go dtí na caithimh is mó."
   },
   "url": "truckers.fm",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "logo": "https://i.imgur.com/O6EaBmv.png",
   "thumbnail": "https://i.imgur.com/vMj6Rcz.png",
   "color": "#C82372",

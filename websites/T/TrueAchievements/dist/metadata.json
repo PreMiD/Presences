@@ -6,10 +6,11 @@
   "service": "TrueAchievements",
   "description": {
     "en": "TrueAchievements is the home of Xbox news, achievement lists and guides, reviews, interviews, leaderboards and more.",
-    "nl": "TrueAchievements is de plaats voor Xbox nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer."
+    "nl": "TrueAchievements is de plaats voor Xbox nieuws, prestatielijsten en gidsen, recensies, interviews, scoreborden en meer.",
+    "ga_IE": "Is é Truigevents baile nuachta, liostaí gnóthachtála agus treoracha, athbhreithnithe, agallaimh, cláir Leader agus níos mó."
   },
   "url": "www.trueachievements.com",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/5TOMgkl.png",
   "thumbnail": "https://i.imgur.com/rrvYL5I.png",
   "color": "#c1f800",

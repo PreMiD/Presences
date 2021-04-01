@@ -11,10 +11,11 @@
     "pt_BR": "Giphy é um mecanismo de pesquisa e criação de GIF.",
     "fr": "Giphy est un moteur de recherche et création de GIF.",
     "uk_UA": "Giphy - це система пошуку та створення GIF.",
-    "nl": "Giphy is een GIF-zoek- en creatiesysteem."
+    "nl": "Giphy is een GIF-zoek- en creatiesysteem.",
+    "ga_IE": "Is inneall cuardaigh agus cruthú GIF é Giphy."
   },
   "url": "giphy.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/VHG3gfC.png",
   "thumbnail": "https://i.imgur.com/Vtg6NxY.png",
   "color": "#00FF00",

@@ -8,10 +8,11 @@
     "www.codepen.io"
   ],
   "description": {
-    "en": "CodePen is an online community for testing and showcasing user-created HTML, CSS and JavaScript code snippets."
+    "en": "CodePen is an online community for testing and showcasing user-created HTML, CSS and JavaScript code snippets.",
+    "ga_IE": "Is pobal ar líne é Codepen chun tástáil a dhéanamh ar HTML, CSS agus Cód JavaScript a cruthaíodh le húsáid ag an úsáideoir."
   },
   "service": "CodePen",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/fAkYGNA.png",
   "thumbnail": "https://i.imgur.com/4cRd5t5.png",
   "color": "#0ebeff",

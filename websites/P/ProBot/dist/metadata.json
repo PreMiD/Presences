@@ -5,10 +5,11 @@
   },
   "service": "ProBot",
   "description": {
-    "en": "Welcome images, moderation, global levels, logs, high quality music and many many more!"
+    "en": "Welcome images, moderation, global levels, logs, high quality music and many many more!",
+    "ga_IE": "Fáilte Íomhánna, Modention, Leibhéil Dhomhanda, Logchomhaid, Ceol Ardchaighdeáin agus go leor eile!"
   },
   "url": "probot.io",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/Oq9jXbz.png",
   "thumbnail": "https://i.imgur.com/98zTh1t.png",
   "color": "#450F40",

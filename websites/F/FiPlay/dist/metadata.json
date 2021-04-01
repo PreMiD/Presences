@@ -11,10 +11,11 @@
     "pt_BR": "FiPlay é um site de streaming da Finlândia focado em séries e filmes.",
     "fr": "FiPlay est un site de streaming finlandais centré sur des séries et films.",
     "uk_UA": "FiPlay — це сайт з Фінляндії, який створений для перегляду онлайн фільмів чи серіалів.",
-    "nl": "FiPlay is een online site voor het streamen van films en series uit Finland."
+    "nl": "FiPlay is een online site voor het streamen van films en series uit Finland.",
+    "ga_IE": "Is suíomh sruthú scannán / sraith ar líne é Fiplay ón bhFionlainn."
   },
   "url": "fiplay.net",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "logo": "https://i.imgur.com/WpVz6hj.png",
   "thumbnail": "https://i.imgur.com/1PibvI2.png",
   "color": "#0397d6",

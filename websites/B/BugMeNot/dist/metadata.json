@@ -5,13 +5,14 @@
   },
   "service": "BugMeNot",
   "description": {
-    "en": "Access and share logins for websites that require you to register in order to view content"
+    "en": "Access and share logins for websites that require you to register in order to view content",
+    "ga_IE": "Rochtain agus scair logins do láithreáin ghréasáin a éilíonn ort clárú chun ábhar a fheiceáil"
   },
   "url": [
     "bugmenot.com",
     "www.bugmenot.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/I8ZDjmA.png",
   "thumbnail": "https://i.imgur.com/75lVUGU.png",
   "color": "#fa3631",

@@ -11,10 +11,11 @@
   ],
   "url": "madnessfm.com",
   "description": {
-    "en": "MadnessFM is a 24/7 online radio station, based in the UK. We have been around for almost a year and love bringing you the greatest hits! We also have a golden oldies station as well. This radio station is brought to you by Kane Productions!"
+    "en": "MadnessFM is a 24/7 online radio station, based in the UK. We have been around for almost a year and love bringing you the greatest hits! We also have a golden oldies station as well. This radio station is brought to you by Kane Productions!",
+    "ga_IE": "Is stáisiún raidió 24/7 ar líne é MadnessFM, atá lonnaithe sa Ríocht Aontaithe.Táimid tar éis a bheith thart ar feadh beagnach bliain agus grá a thabhairt duit na amas is mó!Tá stáisiún Oldies Golden againn chomh maith.Tugtar Kane Productions an stáisiún raidió seo chugat!"
   },
   "service": "MadnessFM",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "logo": "https://i.imgur.com/pqY3sU3.png",
   "thumbnail": "https://i.imgur.com/VSCllaE.png",
   "color": "#00FFDD",

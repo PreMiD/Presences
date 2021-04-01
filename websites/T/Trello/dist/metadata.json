@@ -6,7 +6,8 @@
   "service": "Trello",
   "description": {
     "en": "Trello keeps track of everything, from the big picture to the minute details.",
-    "nl": "Trello houdt alles bij, van het grote geheel tot de kleine details."
+    "nl": "Trello houdt alles bij, van het grote geheel tot de kleine details.",
+    "ga_IE": "Coinníonn Trello súil ar gach rud, ón bpictiúr mór go dtí na sonraí nóiméad."
   },
   "url": [
     "trello.com",
@@ -14,7 +15,7 @@
     "blog.trello.com",
     "developers.trello.com"
   ],
-  "version": "2.1.10",
+  "version": "2.1.11",
   "logo": "https://i.imgur.com/Yncl9Qc.png",
   "thumbnail": "https://i.imgur.com/YnAyvct.png",
   "color": "#0080cb",

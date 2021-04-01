@@ -7,13 +7,14 @@
   "description": {
     "en": "Best music app for charts, rap and gaming. Listen to 15+ music streams for free - nonstop. The best and latest music only for you!",
     "nl": "Beste muziek-app voor hitlijsten, rap en gaming. Luister non-stop gratis naar meer dan 15 muziekstreams. De beste en nieuwste muziek alleen voor jou!",
-    "de": "Beste Musik App für Charts, Rap und Gaming. Kostenlos Radio hören mit 15+ Musik-Streams. Höre auf verschiedenen Musik-Channels deinen Lieblingssound – täglich neu zusammengestellt von unseren Musikenthusiasten."
+    "de": "Beste Musik App für Charts, Rap und Gaming. Kostenlos Radio hören mit 15+ Musik-Streams. Höre auf verschiedenen Musik-Channels deinen Lieblingssound – täglich neu zusammengestellt von unseren Musikenthusiasten.",
+    "ga_IE": "App ceoil is fearr le haghaidh cairteacha, rap agus cearrbhachas.Éist le 15+ sruthanna ceoil le haghaidh saor in aisce - nonstop.An ceol is fearr agus is déanaí duitse!"
   },
   "url": [
     "www.reyfm.de",
     "status.reyfm.de"
   ],
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/hNoHWQK.png",
   "thumbnail": "https://i.imgur.com/G9lihv1.png",
   "color": "#cd6ef4",

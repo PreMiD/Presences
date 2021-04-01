@@ -6,10 +6,11 @@
   "service": "Bandcamp",
   "description": {
     "en": "Discover amazing music and directly support the artists who make it.",
-    "nl": "Ontdek geweldige muziek en ondersteun direct de artiesten die het maken."
+    "nl": "Ontdek geweldige muziek en ondersteun direct de artiesten die het maken.",
+    "ga_IE": "Faigh amach ceol iontach agus tacaíonn sé go díreach leis na healaíontóirí a dhéanann é."
   },
   "url": "bandcamp.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/FozA4oY.png",
   "thumbnail": "https://i.imgur.com/OcNBvvP.png",
   "color": "#61929c",

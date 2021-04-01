@@ -11,10 +11,11 @@
   ],
   "service": "Google Domains",
   "description": {
-    "en": "Google Domains is an internet domain name registration service offered by Google. Google Domains offers domain registration, DNS hosting, DNSSEC, Dynamic DNS, domain forwarding, and email forwarding."
+    "en": "Google Domains is an internet domain name registration service offered by Google. Google Domains offers domain registration, DNS hosting, DNSSEC, Dynamic DNS, domain forwarding, and email forwarding.",
+    "ga_IE": "Is Google Fearainn seirbhís clárúcháin ainm fearainn idirlín a thairgeann Google.Cuireann Google Fearainn clárú fearainn, DNS óstáil, DNSSEC, DNS dinimiciúil, ar aghaidh fearainn, agus seol ar aghaidh ríomhphoist."
   },
   "url": "domains.google.com",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/345qLaW.jpg",
   "thumbnail": "https://i.imgur.com/5EXKSHI.png",
   "color": "#FCBC03",

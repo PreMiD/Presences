@@ -14,7 +14,8 @@
     "en": "bilibili is a well-known video barrage website in China. Here is the most timely animation new fan, the best ACG atmosphere, the most creative Up master. Everyone can find a lot of joy here.",
     "nl": "bilibili is een bekende videowerversite in China. Hier is de meest actuele animatie nieuwe fan, de beste ACG-sfeer, de meest creatieve Up-meester. Iedereen kan hier veel plezier beleven.",
     "zh_CN": "bilibili是国内知名的视频弹幕网站，这里有最及时的动漫新番，最棒的ACG氛围，最有创意的Up主。大家可以在这里找到许多欢乐。",
-    "zh_TW": "bilibili是大陸知名的具有彈幕功能的影片串流網站，這裡有最即時的動漫新番，最棒的ACG氛圍，最有創意的實況主。大家可以在這裡找到許多歡樂。"
+    "zh_TW": "bilibili是大陸知名的具有彈幕功能的影片串流網站，這裡有最即時的動漫新番，最棒的ACG氛圍，最有創意的實況主。大家可以在這裡找到許多歡樂。",
+    "ga_IE": "Is láithreán gréasáin barrage físeán aitheanta é Bilibili sa tSín. Seo an lucht leanúna nua is tráthúla nua, an t-atmaisféar ACG is fearr, an máistir is cruthaitheora.Is féidir le gach duine a lán áthais a fháil anseo."
   },
   "url": [
     "www.bilibili.com",
@@ -30,7 +31,7 @@
     "account.bilibili.com",
     "biligame.com"
   ],
-  "version": "2.2.5",
+  "version": "2.2.6",
   "logo": "https://i.imgur.com/w7q6IS0.png",
   "thumbnail": "https://i.imgur.com/wKnEEei.jpg",
   "color": "#05acff",

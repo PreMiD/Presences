@@ -13,7 +13,8 @@
   "description": {
     "en": "IFTTT, the easiest way to do more with your favorite apps and devices for free. Make your home more relaxing. Make your work more productive. Keep your data private and secure.",
     "de": "IFTTT, der einfachste Weg kostenlos mehr aus deinen favorisierten Apps und Geräten zu holen. Mach dein Zuhause relaxter. Mach deine Arbeit produktiver. Halte deine Daten privat und sicher.",
-    "nl": "IFTTT, de eevoudigste manier om meer te doen met jou favorite apps en devices, helemaal gratis! Maak uw huis relaxter. Maak uw werk productiever. Houd uw gegevens privé en veilig."
+    "nl": "IFTTT, de eevoudigste manier om meer te doen met jou favorite apps en devices, helemaal gratis! Maak uw huis relaxter. Maak uw werk productiever. Houd uw gegevens privé en veilig.",
+    "ga_IE": "IFTTT, an bealach is éasca chun níos mó a dhéanamh le do apps agus feistí is fearr leat saor in aisce.Déan do theach níos suaimhní.Déan do chuid oibre níos táirgiúla.Coinnigh do chuid sonraí príobháideach agus slán."
   },
   "url": [
     "ift.tt",
@@ -21,7 +22,7 @@
     "help.ifttt.com",
     "platform.ifttt.com"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/1d8TEw1.png",
   "thumbnail": "https://i.imgur.com/oHMcwT3.png",
   "color": "#0d99fd",

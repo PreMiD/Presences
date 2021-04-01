@@ -5,10 +5,11 @@
   },
   "service": "LabyDesigns",
   "description": {
-    "en": "LabyDesigns creates a free Bandana/Cape design according to your wishes for LabyMod!"
+    "en": "LabyDesigns creates a free Bandana/Cape design according to your wishes for LabyMod!",
+    "ga_IE": "Cruthaíonn Labydesigns dearadh saor in aisce Bandana / Rinn de réir do mhianta do Labymod!"
   },
   "url": "www.labysigns.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/RSfSMLM.png",
   "thumbnail": "https://i.imgur.com/RuYcGnT.png",
   "color": "#757575",

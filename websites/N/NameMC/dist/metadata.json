@@ -12,11 +12,12 @@
   "service": "NameMC",
   "description": {
     "en": "Check the availability of Minecraft names, look up the name history of Minecraft accounts, view Minecraft skins in 3D, convert UUIDs, and much more!",
-    "nl": "Bekijk de beschikbaarheid van Minecraft namen, bekijk de naam geschiedenis van Minecraft accounts. Bekijk Minecraft skins in 3D, converteer UUIDs, en nog veel meer!"
+    "nl": "Bekijk de beschikbaarheid van Minecraft namen, bekijk de naam geschiedenis van Minecraft accounts. Bekijk Minecraft skins in 3D, converteer UUIDs, en nog veel meer!",
+    "ga_IE": "Seiceáil infhaighteacht na n-ainmneacha Minecraft, breathnaigh ar an ainm ainm na gcuntas Minecraft, amharc ar chraiceann Minecraft i 3D, tiontaigh UUIDanna, agus i bhfad níos mó!"
   },
   "url": "namemc.com",
   "regExp": "([a-z0-9-]+[.])*namemc[.]com[/]",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/9JDmZaF.png",
   "thumbnail": "https://i.imgur.com/XIZsGTQ.png",
   "color": "#000000",

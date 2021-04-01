@@ -5,10 +5,11 @@
   },
   "service": "Memesena",
   "description": {
-    "en": "The perfect place for memers where we have Desi and English meme templates, meme articles, meme arts, copypastas, emojipastas and meme bots."
+    "en": "The perfect place for memers where we have Desi and English meme templates, meme articles, meme arts, copypastas, emojipastas and meme bots.",
+    "ga_IE": "An áit iontach do mhemeers áit a bhfuil teimpléid desi agus Béarla meme, earraí meme, ealaíona meme, copypastlas, emojipastanas agus bots meme."
   },
   "url": "memesena.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/ycc0TEL.png",
   "thumbnail": "https://i.imgur.com/lof7cPb.png",
   "color": "#FF9100",

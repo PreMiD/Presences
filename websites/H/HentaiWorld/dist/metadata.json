@@ -13,10 +13,11 @@
   "description": {
     "en": "Discover our Hentai Streaming (Italian & English Subbed). Download or stream your favorite series completely for free.",
     "nl": "Ontdek onze Hentai Streaming (Italian & English Subbed). Download of stream je favoriete serie helemaal gratis.",
-    "it": "Scopri il nostro sito di Streaming Hentai (Sub EN/ITA). Scarica o guarda le tue serie preferite completamente gratis."
+    "it": "Scopri il nostro sito di Streaming Hentai (Sub EN/ITA). Scarica o guarda le tue serie preferite completamente gratis.",
+    "ga_IE": "Faigh amach ár Streaming Hentai (Fo-Chlabtha Iodáilis & Béarla).Íoslódáil nó sruthán do shraith is fearr leat go hiomlán saor in aisce."
   },
   "url": "www.hentaiworld.eu",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "logo": "https://i.imgur.com/2DEdIVo.png",
   "thumbnail": "https://i.imgur.com/iaS3nRp.png",
   "color": "#dd1f26",

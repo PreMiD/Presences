@@ -5,10 +5,11 @@
   },
   "service": "Otakudesu",
   "description": {
-    "en": "Download, watch and stream anime with Indonesian subtitle and with 240p, 360p, 480p, & 720p resolution with MP4 format & MKV along with the batch."
+    "en": "Download, watch and stream anime with Indonesian subtitle and with 240p, 360p, 480p, & 720p resolution with MP4 format & MKV along with the batch.",
+    "ga_IE": "Íoslódáil, faire agus sruth anime le fotheideal Indinéisis agus le 240p, 360p, 480p, & 720p Rún le formáid MP4 & MKV chomh maith leis an bhaisc."
   },
   "url": "otakudesu.moe",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/RrlRhIJ.png",
   "thumbnail": "https://i.imgur.com/wHfvj2a.png",
   "color": "#ffffff",

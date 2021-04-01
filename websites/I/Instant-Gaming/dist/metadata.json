@@ -6,10 +6,11 @@
   "url": "www.instant-gaming.com",
   "description": {
     "en": "Instant-Gaming.com - All your favourites games for Steam, Origin, Battle.net, Uplay and Indie games up to 70% off! Digital games, Instant delivery 24/7!",
-    "de": "Instant-Gaming.com - Deine Lieblingsspiele für Steam, Origin, Battle.net, Uplay und Indie Games mit bis zu 70% Rabatt! Digitaler Download, Sofortige Lieferung, 24/7!"
+    "de": "Instant-Gaming.com - Deine Lieblingsspiele für Steam, Origin, Battle.net, Uplay und Indie Games mit bis zu 70% Rabatt! Digitaler Download, Sofortige Lieferung, 24/7!",
+    "ga_IE": "Instant-Gaming.com - Gach do rogha cluichí le haghaidh gaile, tionscnaimh, cath.net, uplay agus cluichí indie suas le 70% Off!Cluichí Digiteacha, Seachadadh Meandarach 24/7!"
   },
   "service": "Instant-Gaming",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "logo": "https://i.imgur.com/ULmYGzW.png",
   "thumbnail": "https://i.imgur.com/N0SrNHb.jpg",
   "color": "#e37d00",

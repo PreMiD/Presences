@@ -6,14 +6,15 @@
   "service": "sahibinden.com",
   "description": {
     "en": "sahibinden.com is a website that you can buy any kind of used/not used props, cars, electronic stuff and much more.",
-    "tr": "sahibinden.com, her türlü ürünün sıfır veya ikinci elini bulup satın alabileceğiniz internet sitesidir."
+    "tr": "sahibinden.com, her türlü ürünün sıfır veya ikinci elini bulup satın alabileceğiniz internet sitesidir.",
+    "ga_IE": "Is suíomh gréasáin é Sahibinden.com gur féidir leat aon chineál a úsáidtear / nach n-úsáidtear a cheannach, gluaisteáin, rudaí leictreonacha agus i bhfad níos mó."
   },
   "url": [
     "www.sahibinden.com",
     "secure.sahibinden.com",
     "banaozel.sahibinden.com"
   ],
-  "version": "1.1.4",
+  "version": "1.1.5",
   "logo": "https://premid.is-inside.me/HaZkV37U.png",
   "thumbnail": "https://premid.is-inside.me/tMlRFq7w.png",
   "color": "#ffe800",

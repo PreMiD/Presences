@@ -7,10 +7,11 @@
   "service": "FurAffinity",
   "description": {
     "en": "FurAffinity is a furry art and media website, where you can create your own profile and share, like and comment art of thousands of users.",
-    "de": "FurAffinity ist eine Furry Community, auf der man sein eigenes Profil erstellen kann und Bilder, sowie Medien aller Art, mit tausenden anderen Benutzern teilen, liken und kommentieren kann."
+    "de": "FurAffinity ist eine Furry Community, auf der man sein eigenes Profil erstellen kann und Bilder, sowie Medien aller Art, mit tausenden anderen Benutzern teilen, liken und kommentieren kann.",
+    "ga_IE": "Is é atá i Furaffinity ná suíomh gréasáin ealaíne agus meán Furry, áit ar féidir leat do phróifíl féin a chruthú agus a roinnt, amhail agus trácht a dhéanamh ar ealaín na mílte úsáideoirí."
   },
   "url": "www.furaffinity.net",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/AYTzoMo.png",
   "thumbnail": "https://i.imgur.com/qoVAM68.jpg",
   "color": "#353b45",

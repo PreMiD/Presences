@@ -18,10 +18,11 @@
     "fr": "La communauté et banque de données d'animés et mangas en ligne la plus active du monde. Joignez-vous à la communauté, créez votre liste d'animés et mangas e beaucoup plus!",
     "uk_UA": "Найактивніша спільнота для створення бази даних аніме та манги в світі. Приєднуйтесь до нас, створюйте свій список аніме та манги та багато чого іншого!",
     "nl": "'s Werelds meest actieve online anime- en mangacommunity en database. Word lid van de online community, maak je anime- en manga-lijst en nog veel meer!",
-    "zh_CN": "世界上最活跃的在线动漫和漫画社区。加入在线社区，创建属于您的动漫和漫画列表！"
+    "zh_CN": "世界上最活跃的在线动漫和漫画社区。加入在线社区，创建属于您的动漫和漫画列表！",
+    "ga_IE": "An Anime is gníomhaí ar líne anime is gníomhaí agus an pobal agus an bunachar sonraí.Bí páirteach sa phobal ar líne, cruthaigh do liosta Anime agus Manga agus an oiread sin níos mó!"
   },
   "url": "myanimelist.net",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "logo": "https://i.imgur.com/AoF1JnY.png",
   "thumbnail": "https://i.imgur.com/VyAAcEN.png",
   "color": "#2e51a2",

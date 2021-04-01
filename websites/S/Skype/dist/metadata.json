@@ -6,14 +6,15 @@
   "service": "Skype",
   "description": {
     "en": "Stay in touch! Free online calls, messaging, affordable international calling to mobiles or landlines and Skype for Business for effective collaboration.",
-    "nl": "Blijf op de hoogte! Gratis online bellen, berichten sturen, betaalbaar internationaal bellen naar mobiele telefoons of vaste lijnen en Skype voor Bedrijven voor een effectieve samenwerking."
+    "nl": "Blijf op de hoogte! Gratis online bellen, berichten sturen, betaalbaar internationaal bellen naar mobiele telefoons of vaste lijnen en Skype voor Bedrijven voor een effectieve samenwerking.",
+    "ga_IE": "Coimead i dteagmhail!Glaonna ar líne saor in aisce, teachtaireachtaí, glaoch idirnáisiúnta inacmhainne le fóin phóca nó le línte talún agus Skype le haghaidh gnó le haghaidh comhoibriú éifeachtach."
   },
   "url": [
     "web.skype.com",
     "preview.web.skype.com",
     "www.skype.com"
   ],
-  "version": "1.5.5",
+  "version": "1.5.6",
   "logo": "https://i.imgur.com/Q4myT8y.png",
   "thumbnail": "https://i.imgur.com/upHWjaY.png",
   "color": "#00acf0",

@@ -6,10 +6,11 @@
   "service": "Dyno",
   "description": {
     "en": "A fully customizable server moderation Discord bot for your Discord server that features a simple and intuitive web dashboard. Server management just got a whole lot easier.",
-    "nl": "Een volledig aanpasbare servermoderatie Discord-bot voor uw Discord-server met een eenvoudig en intuïtief webdashboard. Serverbeheer is nu een stuk eenvoudiger geworden."
+    "nl": "Een volledig aanpasbare servermoderatie Discord-bot voor uw Discord-server met een eenvoudig en intuïtief webdashboard. Serverbeheer is nu een stuk eenvoudiger geworden.",
+    "ga_IE": "A go hiomlán customizable Freastalaí modhnóireachta bot do do fhreastalaí discord go bhfuil gnéithe painéal gréasáin simplí agus iomasach.Fuair bainistíocht an fhreastalaí ach i bhfad níos éasca."
   },
   "url": "dyno.gg",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/IW9vsn2.png",
   "thumbnail": "https://i.imgur.com/aVvA17u.png",
   "color": "#337fd5",

@@ -16,7 +16,7 @@
     "deviantartads.com",
     "sta.sh"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/6ZCPjDK.png",
   "thumbnail": "https://i.imgur.com/zW8OMC7.png",
   "color": "#05cc47",
@@ -29,7 +29,8 @@
     "deviation"
   ],
   "description": {
-    "en": "Founded in August 2000, DeviantArt is the largest online social network for artists and art enthusiasts, and a platform for emerging and established artists to exhibit, promote, and share their works with an enthusiastic, art-centric community."
+    "en": "Founded in August 2000, DeviantArt is the largest online social network for artists and art enthusiasts, and a platform for emerging and established artists to exhibit, promote, and share their works with an enthusiastic, art-centric community.",
+    "ga_IE": "Bunaithe i mí Lúnasa 2000, is é Deviantart an líonra sóisialta is mó ar líne d'ealaíontóirí agus do dhíograiseoirí ealaíne, agus ardán do ealaíontóirí atá ag teacht chun cinn agus bunaithe chun a gcuid saothar a thaispeáint, a chur chun cinn agus a roinnt le pobal díograiseach lár-lárnach."
   },
   "category": "other",
   "settings": [

@@ -5,10 +5,11 @@
   },
   "url": "www.steamprices.com",
   "description": {
-    "en": "SteamPrices.com is a website that enables anyone to compare prices between regions, such as the US, UK, and many more."
+    "en": "SteamPrices.com is a website that enables anyone to compare prices between regions, such as the US, UK, and many more.",
+    "ga_IE": "Is láithreán gréasáin é Steamprices.com a chuireann ar chumas duine ar bith praghsanna a chur i gcomparáid idir réigiúin, mar shampla na Stáit Aontaithe, an Ríocht Aontaithe, agus go leor eile."
   },
   "service": "SteamPrices.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/L2jiSxb.png",
   "thumbnail": "https://i.imgur.com/bL4A5Re.png",
   "color": "#4277BC",

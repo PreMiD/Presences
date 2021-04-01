@@ -6,13 +6,14 @@
   "service": "DirtMC",
   "description": {
     "en": "Home to MrCrainer, DirtMC is a skyblock server packed with unique features.",
-    "nl": "DirtMC is de thuisbasis van MrCrainer en is een skyblock-server boordevol unieke functies."
+    "nl": "DirtMC is de thuisbasis van MrCrainer en is een skyblock-server boordevol unieke functies.",
+    "ga_IE": "Baile go MrCnainer, tá DIRTMC ina fhreastalaí Skyblock Pacáilte le gnéithe uathúla."
   },
   "url": [
     "dirtmc.net",
     "buy.dirtmc.net"
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/hevy5Kg.png",
   "thumbnail": "https://i.imgur.com/uJxqhBB.png",
   "color": "#eb2025",

@@ -10,9 +10,10 @@
     "KoLmafia"
   ],
   "description": {
-    "en": "Kingdom of Loathing (abbreviated KoL) is a browser-based multiplayer role-playing game designed and operated by Asymmetric Publications"
+    "en": "Kingdom of Loathing (abbreviated KoL) is a browser-based multiplayer role-playing game designed and operated by Asymmetric Publications",
+    "ga_IE": "Is cluiche il-imreora il-imreora atá bunaithe ar bhrabhsálaí é Ríocht Mhuineacháin (KOL giorraithe) atá deartha agus oibriú ag foilseacháin neamhshiméadracha"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/ZRf8Giq.png",
   "thumbnail": "https://i.imgur.com/ZhJPGTN.png",
   "color": "#0000ff",

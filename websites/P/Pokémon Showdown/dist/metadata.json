@@ -14,13 +14,14 @@
     "Pokemon Showdown"
   ],
   "description": {
-    "en": "Pokémon Showdown is a Pokémon battle simulator. Play Pokémon battles online! Play with randomly generated teams, or build your own! Fully animated!"
+    "en": "Pokémon Showdown is a Pokémon battle simulator. Play Pokémon battles online! Play with randomly generated teams, or build your own! Fully animated!",
+    "ga_IE": "Is é atá i Pokémon Showdown ná Insamhlóir Cath Pokémon.Seinn Pokémon Cathanna ar líne!Seinn le foirne a ghintear go randamach, nó tóg do chuid féin!Beoite go hiomlán!"
   },
   "url": [
     "pokemonshowdown.com",
     "play.pokemonshowdown.com"
   ],
-  "version": "1.1.10",
+  "version": "1.1.11",
   "logo": "https://i.imgur.com/p3ZpoFY.png",
   "thumbnail": "https://i.imgur.com/q4nY8bG.png",
   "color": "#FFF942",

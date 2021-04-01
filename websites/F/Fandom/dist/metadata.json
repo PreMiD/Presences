@@ -6,7 +6,7 @@
   },
   "service": "Fandom",
   "url": "fandom.com",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/sko4P3c.png",
   "thumbnail": "https://i.imgur.com/VrVSD2b.png",
   "color": "#002A32",
@@ -23,7 +23,8 @@
     "anime"
   ],
   "description": {
-    "en": "The entertainment site where fans come first. Your daily source for all things TV, movies, and games, including Star Wars, Fallout, Marvel, DC and more.\nThis presence works on the editoral side of Fandom (www.fandom.com) and the wiki side of fandom (formerly Wikia)."
+    "en": "The entertainment site where fans come first. Your daily source for all things TV, movies, and games, including Star Wars, Fallout, Marvel, DC and more.\nThis presence works on the editoral side of Fandom (www.fandom.com) and the wiki side of fandom (formerly Wikia).",
+    "ga_IE": "An suíomh siamsaíochta ina dtagann lucht leanúna ar dtús.Do fhoinse laethúil do gach rud teilifíse, scannáin, agus cluichí, lena n-áirítear cogaí réalta, fallout, marvel, DC agus níos mó.\nOibríonn an láithreacht seo ar an taobh eagarthóireachta de FANDOM (www.fandom.com) agus taobh Wiki de Fandom (Wikia roimhe seo)."
   },
   "category": "other",
   "regExp": "[a-z0-9-]+[.]fandom[.]com[/]"

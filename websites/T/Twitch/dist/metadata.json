@@ -10,7 +10,12 @@
     }
   ],
   "service": "Twitch",
-  "altnames": ["تويتش", "توییچ", "ٹویچ ڈاٹ ٹی وی", "트위치"],
+  "altnames": [
+    "تويتش",
+    "توییچ",
+    "ٹویچ ڈاٹ ٹی وی",
+    "트위치"
+  ],
   "description": {
     "en": "Twitch is the world's leading live streaming platform for gamers and the things we love. Watch and chat now with millions of other fans from around the world.",
     "tr": "Twitch, oyuncular ve sevdiğimiz şeyler için dünyanın önde gelen canlı yayın platformudur.",
@@ -20,7 +25,8 @@
     "uk_UA": "Twitch - це провідна в світі платформа прямого ефіру для геймерів та речей, які ми любимо. Дивіться та спілкуйтеся зараз із мільйонами інших шанувальників з усього світу.",
     "nl": "Twitch is 's werelds grootste livestreaming-platform voor gamers en de dingen waar we van houden. Kijk en chat nu met miljoenen andere fans van over de hele wereld.",
     "zh_CN": "Twitch是面向游戏玩家和各种事物的全球领先的直播平台。快来与来自世界各地的数百万粉丝一起观看和聊天。",
-    "zh_TW": "Twitch是面向遊戲玩家和各種事物的全球領先的實時串流平台。快來與來自世界各地的數百萬粉絲一起觀看和聊天。"
+    "zh_TW": "Twitch是面向遊戲玩家和各種事物的全球領先的實時串流平台。快來與來自世界各地的數百萬粉絲一起觀看和聊天。",
+    "ga_IE": "Is é Twitch an t-ardán sruthú beo ar domhan do gamers agus na rudaí a bhfuil grá againn dóibh.Féach agus comhrá anois leis na milliúin lucht leanúna eile ar fud an domhain."
   },
   "url": [
     "www.twitch.tv",
@@ -34,7 +40,7 @@
     "devstatus.twitch.tv",
     "status.twitch.tv"
   ],
-  "version": "3.1.2",
+  "version": "3.1.3",
   "logo": "https://i.imgur.com/So7h3G0.png",
   "thumbnail": "https://i.imgur.com/OAcBmwW.png",
   "color": "#9146FF",
@@ -124,14 +130,24 @@
       "title": "Twitch Icon",
       "icon": "fab fa-twitch",
       "value": 0,
-      "values": ["Normal", "Black Ops", "White", "Purple", "Pride"]
+      "values": [
+        "Normal",
+        "Black Ops",
+        "White",
+        "Purple",
+        "Pride"
+      ]
     },
     {
       "id": "devLogo",
       "title": "Twitch Developers Icon",
       "icon": "fab fa-twitch",
       "value": 0,
-      "values": ["Normal", "White", "Purple"]
+      "values": [
+        "Normal",
+        "White",
+        "Purple"
+      ]
     },
     {
       "id": "buttons",

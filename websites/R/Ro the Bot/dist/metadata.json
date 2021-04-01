@@ -5,13 +5,14 @@
   },
   "service": "Ro the Bot",
   "description": {
-    "en": "Ro the bot is the most diverse discord bot! Just imagine a function, and it probably has it."
+    "en": "Ro the bot is the most diverse discord bot! Just imagine a function, and it probably has it.",
+    "ga_IE": "RO Is é an bot an bot discord is éagsúil!Just a shamhlú feidhm, agus is dócha go bhfuil sé."
   },
   "url": [
     "ro-the-bot.ga",
     "status.ro-the-bot.ga"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/scjBxBz.png",
   "thumbnail": "https://i.imgur.com/LlC2upI.png",
   "color": "#4E83F9",

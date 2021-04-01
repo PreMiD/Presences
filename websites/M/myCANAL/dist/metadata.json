@@ -11,10 +11,11 @@
   ],
   "service": "myCANAL",
   "description": {
-    "en": "Canal+ is a French subscription provider associated to the channel of the same name. It is owned by Vivendi with a hundred percent share."
+    "en": "Canal+ is a French subscription provider associated to the channel of the same name. It is owned by Vivendi with a hundred percent share.",
+    "ga_IE": "Is soláthraí síntiús na Fraince é an Chanáil + a bhaineann le cainéal an ainm céanna.Tá sé faoi úinéireacht Vivendi le céad faoin gcéad."
   },
   "url": "www.canalplus.com",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/H3IXznl.png",
   "thumbnail": "https://i.imgur.com/xRKwqvI.png",
   "color": "#000",

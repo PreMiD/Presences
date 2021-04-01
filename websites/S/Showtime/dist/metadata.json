@@ -11,10 +11,11 @@
   ],
   "service": "Showtime",
   "description": {
-    "en": "Showtime is an American premium television network that serves as the flagship service of the Showtime Networks subsidiary of CBS Corporation, which also owns sister services The Movie Channel and Flix."
+    "en": "Showtime is an American premium television network that serves as the flagship service of the Showtime Networks subsidiary of CBS Corporation, which also owns sister services The Movie Channel and Flix.",
+    "ga_IE": "Is Líonra Teilifíse Meiriceánach Préimhe é Showtime a fhreastalaíonn ar sheirbhís shuaitheanta an fhochuideachta Líonra Showtime Corporation CBS, a bhfuil seirbhísí deirfiúr ar an gcainéal scannáin agus an Flix."
   },
   "url": "www.sho.com",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/NF61OBJ.png",
   "thumbnail": "https://i.imgur.com/PrH5IJL.png",
   "color": "#B20000",

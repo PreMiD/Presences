@@ -8,13 +8,14 @@
       "name": "Bryan",
       "id": "293775922757238784"
     }
-  ], 
+  ],
   "service": "TuneIn",
   "description": {
-    "en": "TuneIn In is an American audio streaming service delivering live news, radio, sports, music, and podcasts to over 60 million monthly active users. As of 2019, TuneIn has more than 75 million monthly active users. TuneIn is operated by company TuneIn Inc which is based in San Francisco, California."
+    "en": "TuneIn In is an American audio streaming service delivering live news, radio, sports, music, and podcasts to over 60 million monthly active users. As of 2019, TuneIn has more than 75 million monthly active users. TuneIn is operated by company TuneIn Inc which is based in San Francisco, California.",
+    "ga_IE": "Is seirbhís sruthú fuaime Mheiriceá é Tunein i ag seachadadh nuacht beo, raidió, spóirt, ceol, agus podchraoltaí go dtí os cionn 60 milliún úsáideoir gníomhach míosúil.Amhail 2019, tá níos mó ná 75 milliún úsáideoir gníomhach míosúil ag Tunein.Tá Tunein á oibriú ag an gCuideachta Tunein Inc atá bunaithe i San Francisco, California."
   },
   "url": "tunein.com",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/mcwhb4p.png",
   "thumbnail": "https://i.imgur.com/lewvpKU.png",
   "color": "#33B6A8",

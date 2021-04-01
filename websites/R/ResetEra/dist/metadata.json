@@ -5,10 +5,11 @@
   },
   "service": "ResetEra",
   "description": {
-    "en": "ResetEra is the internet's premier video gaming forum destination. A savory assortment of enthusiasts, journalists, & developers."
+    "en": "ResetEra is the internet's premier video gaming forum destination. A savory assortment of enthusiasts, journalists, & developers.",
+    "ga_IE": "Is é Resela an ceann scríbe fóraim chearrbhachais físchearrthóra idirlín.Meascán blasta díograiseoirí, iriseoirí, agus forbróirí."
   },
   "url": "www.resetera.com",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://menma.is-inside.me/5GNyzR3j.png",
   "thumbnail": "https://menma.is-inside.me/LQ7PORQa.png",
   "color": "#8050BF",

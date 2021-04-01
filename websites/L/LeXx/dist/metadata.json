@@ -7,10 +7,11 @@
   "regExp": "([a-z0-9-]+[.])*lexx[.]app[/]",
   "description": {
     "de": "LeXx bietet einen Discord Bot mit vielen Funktionen und Anwendungsmöglichkeiten",
-    "en": "LeXx offers a Discord Bot with many functions and uses"
+    "en": "LeXx offers a Discord Bot with many functions and uses",
+    "ga_IE": "Tairgeann Lexx bot discord le go leor feidhmeanna agus úsáidí"
   },
   "service": "LeXx",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/EOjQZQe.png",
   "thumbnail": "https://i.imgur.com/VFnKuxl.png",
   "color": "#FF7D00",

@@ -12,10 +12,11 @@
   "service": "LabyMod",
   "description": {
     "en": "An all in one Minecraft PvP Modification to increase your ingame experience.",
-    "nl": "Een alles-in-één Minecraft PvP modificatie om uw ingame-ervaring te verbeteren."
+    "nl": "Een alles-in-één Minecraft PvP modificatie om uw ingame-ervaring te verbeteren.",
+    "ga_IE": "Modhnú Minecraft Minecraft go léir chun do thaithí Ingame a mhéadú."
   },
   "url": "www.labymod.net",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/PHdC5bf.png",
   "thumbnail": "https://i.imgur.com/SDMxfEg.png",
   "color": "#008fe8",

@@ -5,10 +5,11 @@
   },
   "service": "Hacktoberfest",
   "description": {
-    "en": "Hacktoberfest® is open to everyone in our global community. Whether you’re a developer, student learning to code, event host, or company of any size, you can help drive growth of open source and make positive contributions to an ever-growing community. All backgrounds and skill levels are encouraged to complete the challenge. "
+    "en": "Hacktoberfest® is open to everyone in our global community. Whether you’re a developer, student learning to code, event host, or company of any size, you can help drive growth of open source and make positive contributions to an ever-growing community. All backgrounds and skill levels are encouraged to complete the challenge. ",
+    "ga_IE": "Tá Hacktoberfest® oscailte do gach duine inár bpobal domhanda.Cibé an bhfuil tú i do fhorbróir, foghlaim mac léinn chun cód, óstach teagmhas, nó cuideachta ar aon mhéid, is féidir leat cabhrú le fás foinse oscailte a thiomáint agus ranníocaíochtaí dearfacha a dhéanamh le pobal atá ag fás i gcónaí.Spreagtar gach cúlra agus leibhéal scileanna chun an dúshlán a chríochnú."
   },
   "url": "hacktoberfest.digitalocean.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/W4srxuR.png",
   "thumbnail": "https://i.imgur.com/sTgmNCW.jpg",
   "color": "#183D5D",

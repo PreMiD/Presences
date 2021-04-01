@@ -7,7 +7,8 @@
   "service": "Invidious",
   "description": {
     "en": "Invidious is an alternative front-end to YouTube.",
-    "de": "Invidious ist eine alternative Oberfläche für YouTube."
+    "de": "Invidious ist eine alternative Oberfläche für YouTube.",
+    "ga_IE": "Is é atá i gceist le dochreidte ná deireadh a chur le YouTube."
   },
   "url": [
     "invidiou.site",
@@ -23,7 +24,7 @@
     "vid.mint.lgbt",
     "yewtu.be"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/Cfm6lRV.png",
   "thumbnail": "https://i.imgur.com/qBOgRqU.jpg",
   "color": "#00B6F0",

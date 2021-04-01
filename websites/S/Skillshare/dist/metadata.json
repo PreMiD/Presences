@@ -6,10 +6,11 @@
   "service": "Skillshare",
   "description": {
     "en": "Skillshare is a learning platform with online classes taught by the world's best practitioners.",
-    "nl": "Skillshare is een leerplatform met online lessen gegeven door 's werelds best practitioners."
+    "nl": "Skillshare is een leerplatform met online lessen gegeven door 's werelds best practitioners.",
+    "ga_IE": "Is ardán foghlama é SkillShare le ranganna ar líne a mhúineann cleachtóirí is fearr an domhain."
   },
   "url": "www.skillshare.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/WTfjamG.png",
   "thumbnail": "https://i.imgur.com/PdormPN.png",
   "color": "#2abfc6",

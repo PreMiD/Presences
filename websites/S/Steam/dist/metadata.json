@@ -9,13 +9,14 @@
     "ro": "Steam este destinatia finală pentru a te juca, discuta și de a crea jocuri.",
     "nl": "Steam is de ultieme bestemming voor het spelen, bespreken en maken van games.",
     "zh_CN": "Steam平台是目前全球最大的综合性数字发行平台之一。玩家可以在该平台购买、下载、讨论、上传和分享游戏和软件。",
-    "zh_TW": "Steam遊戲平台是目前全球最大的數位發行平台，提供數位版權管理、多人遊戲、串流媒體和社群網路服務等功能。"
+    "zh_TW": "Steam遊戲平台是目前全球最大的數位發行平台，提供數位版權管理、多人遊戲、串流媒體和社群網路服務等功能。",
+    "ga_IE": "Is é Gaile an ceann scríbe deiridh le haghaidh imirt, ag plé, agus ag cruthú cluichí."
   },
   "url": [
     "steamcommunity.com",
     "store.steampowered.com"
   ],
-  "version": "2.2.5",
+  "version": "2.2.6",
   "logo": "https://i.imgur.com/cek4hGt.png",
   "thumbnail": "https://i.imgur.com/vChtnTL.png",
   "color": "#000000",

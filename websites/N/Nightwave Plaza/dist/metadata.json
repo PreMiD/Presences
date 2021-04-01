@@ -5,10 +5,11 @@
   },
   "service": "Nightwave Plaza",
   "description": {
-    "en": "Nightwave Plaza is a free 24/7 online vaporwave radio station. The broadcast also includes some future funk and experimental genres. We hope you enjoy."
+    "en": "Nightwave Plaza is a free 24/7 online vaporwave radio station. The broadcast also includes some future funk and experimental genres. We hope you enjoy.",
+    "ga_IE": "Is stáisiún raidió saor in aisce 24/7 é Plaza Nightwave.Cuimsíonn an craoladh roinnt seánraí func sa todhchaí agus turgnamhach.Tá súil againn go mbainfidh tú taitneamh as."
   },
   "url": "plaza.one",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/rNVPwya.png",
   "thumbnail": "https://i.imgur.com/qnTU97o.jpg",
   "color": "#F58EA8",

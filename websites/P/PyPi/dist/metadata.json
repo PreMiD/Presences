@@ -5,10 +5,11 @@
   },
   "service": "PyPi",
   "description": {
-    "en": "The Python Package Index (PyPI) is a repository of software for the Python programming language."
+    "en": "The Python Package Index (PyPI) is a repository of software for the Python programming language.",
+    "ga_IE": "Is stór bogearraí é Innéacs Pacáiste Python (PYPI) do theanga chlárúcháin Python."
   },
   "url": "pypi.org",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "logo": "https://i.imgur.com/Nzzr10E.png",
   "thumbnail": "https://i.imgur.com/asXjia1.jpg",
   "color": "#ebcc34",

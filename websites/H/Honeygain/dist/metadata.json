@@ -5,13 +5,14 @@
   },
   "service": "Honeygain",
   "description": {
-    "en": "Honeygain is a crowdsourced network company which enables other businesses to conduct web intelligence, market research and content delivery."
+    "en": "Honeygain is a crowdsourced network company which enables other businesses to conduct web intelligence, market research and content delivery.",
+    "ga_IE": "Is cuideachta líonra sluaite é Honeygain a chuireann ar chumas gnólachtaí eile faisnéis gréasáin, taighde margaidh agus seachadadh ábhair a dhéanamh."
   },
   "url": [
     "www.honeygain.com",
     "dashboard.honeygain.com"
   ],
-  "version": "1.1.4",
+  "version": "1.1.5",
   "logo": "https://i.imgur.com/fjaT2cF.jpg",
   "thumbnail": "https://i.imgur.com/pThjE43.png",
   "color": "#fad63a",

@@ -6,10 +6,11 @@
   },
   "service": "Radio Garden",
   "description": {
-    "en": "By bringing distant voices close, radio connects people and places. Radio Garden allows listeners to tune into live radio across entire globe."
+    "en": "By bringing distant voices close, radio connects people and places. Radio Garden allows listeners to tune into live radio across entire globe.",
+    "ga_IE": "Trí guthanna i bhfad i gcéin a thabhairt gar, nascann an raidió daoine agus áiteanna.Ceadaíonn Gairdín Raidió éisteoirí chun tune isteach i raidió beo ar fud na cruinne ar fad."
   },
   "url": "radio.garden",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/Q2l6Bw8.png",
   "thumbnail": "https://i.imgur.com/4Zzi2Lv.png",
   "color": "#0DF675",

@@ -7,10 +7,11 @@
   "description": {
     "en": "TopFlix - Watch Free HD Movies Online",
     "nl": "TopFlix - Bekijk gratis online HD-films",
-    "pt_BR": "TopFlix - Assistir filmes online grátis HD"
+    "pt_BR": "TopFlix - Assistir filmes online grátis HD",
+    "ga_IE": "Topflix - Féach Scannáin HD SAOR IN AISCE ar líne"
   },
   "url": "topflix.tv",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/GA1Vftf.png",
   "thumbnail": "https://i.imgur.com/an3xoQw.png",
   "color": "#df003f",

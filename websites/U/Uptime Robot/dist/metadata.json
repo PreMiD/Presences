@@ -11,10 +11,11 @@
   ],
   "service": "Uptime Robot",
   "description": {
-    "en": "Uptime Robot is all about helping you to keep your websites up."
+    "en": "Uptime Robot is all about helping you to keep your websites up.",
+    "ga_IE": "Baineann róbat Agat ar fad le cuidiú leat do láithreáin ghréasáin a choinneáil suas."
   },
   "url": "uptimerobot.com",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "logo": "https://i.imgur.com/D2RsWKt.jpg",
   "thumbnail": "https://i.imgur.com/9uhpjDJ.png",
   "color": "#7FFF00",

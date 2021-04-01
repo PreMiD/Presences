@@ -6,10 +6,11 @@
   },
   "service": "Flickr",
   "description": {
-    "en": "Flickr is an American image hosting and video hosting service, as well as an online community. It was created by Ludicorp in 2004 and has been popular with hosting high resolution photos by amateur and professional photographers. (Wikipédia: https://en.wikipedia.org/wiki/Flickr)"
+    "en": "Flickr is an American image hosting and video hosting service, as well as an online community. It was created by Ludicorp in 2004 and has been popular with hosting high resolution photos by amateur and professional photographers. (Wikipédia: https://en.wikipedia.org/wiki/Flickr)",
+    "ga_IE": "Is seirbhís óstála íomhá Mheiriceá é Flickr, chomh maith le pobal ar líne.Chruthaigh Ludicorp é i 2004 agus tá an-tóir air le grianghraif ardtaifigh a óstáil ag grianghrafadóirí amaitéaracha agus gairmiúla.(Wikipédia: https://en.wikipedia.org/wiki/flickr)"
   },
   "url": "www.flickr.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/ZSCbG9X.png",
   "thumbnail": "https://i.imgur.com/g3hrWth.png",
   "color": "#FF0084",

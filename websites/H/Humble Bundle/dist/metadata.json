@@ -6,10 +6,11 @@
   "service": "Humble Bundle",
   "description": {
     "en": "Pay what you want. Support charity. Get awesome games.",
-    "nl": "Betaal wat je wilt. Steun een goede doel. Krijg geweldige games."
+    "nl": "Betaal wat je wilt. Steun een goede doel. Krijg geweldige games.",
+    "ga_IE": "Íoc an rud atá uait.Tacú le carthanas.Faigh cluichí uamhnach."
   },
   "url": "www.humblebundle.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/BOUZiVY.png",
   "thumbnail": "https://i.imgur.com/nLBIlpU.png",
   "color": "#cc2929",

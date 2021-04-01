@@ -11,10 +11,11 @@
   ],
   "description": {
     "ru": "Многофункциональный, полностью настраиваемый бот для платформы Discord, с панелью управления.",
-    "en": "Fluffy Discord Bot (Music, Ranking, Reminder, Vk Community bridge, WikiFur)"
+    "en": "Fluffy Discord Bot (Music, Ranking, Reminder, Vk Community bridge, WikiFur)",
+    "ga_IE": "Fluffy Discord Bot (ceol, rangú, meabhrúchán, droichead pobail VK, Wikifur)"
   },
   "service": "Juniperbot",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/YYk1v1F.png",
   "thumbnail": "https://i.imgur.com/XOcpBkV.png",
   "color": "#C27C0E",

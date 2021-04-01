@@ -5,13 +5,14 @@
   },
   "service": "Jisho",
   "description": {
-    "en": "Jisho is a powerful Japanese-English dictionary. It lets you find words, kanji, example sentences and more quickly and easily."
+    "en": "Jisho is a powerful Japanese-English dictionary. It lets you find words, kanji, example sentences and more quickly and easily.",
+    "ga_IE": "Is Jisho tá cumhachtach Seapáinis-Béarla Foclóir.Ligeann sé duit focail, Kanji, abairtí mar shampla a aimsiú agus níos gasta agus go héasca."
   },
   "url": [
     "jisho.org",
     "classic.jisho.org"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/nAtEXHe.png",
   "thumbnail": "https://i.imgur.com/Kk2NUkd.png",
   "color": "#0bba17",

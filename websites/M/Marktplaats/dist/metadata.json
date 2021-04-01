@@ -11,10 +11,11 @@
   "regExp": "([a-z0-9-]+[.])*marktplaats[.]nl[/]",
   "description": {
     "nl": "Ga ervoor het begint op Marktplaats.",
-    "en": "Go for it, it starts on Marktplaats."
+    "en": "Go for it, it starts on Marktplaats.",
+    "ga_IE": "Téigh air, tosaíonn sé ar MarkTlats."
   },
   "service": "Marktplaats",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/K0yeNeC.png",
   "thumbnail": "https://i.imgur.com/xOUBejy.jpg",
   "color": "#FF0000",

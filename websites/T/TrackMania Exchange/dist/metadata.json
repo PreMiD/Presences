@@ -18,7 +18,7 @@
     "original.tm-exchange.com",
     "blog.tm-exchange.com"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/9OFSS6T.png",
   "thumbnail": "https://i.imgur.com/CKJ2Wqm.png",
   "color": "#c8c8c8",
@@ -38,7 +38,8 @@
     "trackmania"
   ],
   "description": {
-    "en": "TrackMania Exchange (TMX) is the biggest and best TrackMania track-swapping website in the world. This one is not for the newer, TrackmaniaExchange, which is for the 2020 Trackmania. Use the ManiaExchange presence for that."
+    "en": "TrackMania Exchange (TMX) is the biggest and best TrackMania track-swapping website in the world. This one is not for the newer, TrackmaniaExchange, which is for the 2020 Trackmania. Use the ManiaExchange presence for that.",
+    "ga_IE": "Is é Trackmania Exchange (TMX) an suíomh gréasáin is mó agus is fearr Trackmania Trackmania ar fud an domhain.Níl an ceann seo don Newer, Trackmaniaexchange, atá le haghaidh an Trackmania 2020.Bain úsáid as an láithreacht Maniaxchange chuige sin."
   },
   "category": "games"
 }

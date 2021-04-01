@@ -9,10 +9,11 @@
     "news.codecademy.com"
   ],
   "description": {
-    "en": "Learn the technical skills you need for the job you want. As leaders in online education and learning to code, we’ve taught over 45 million people using a tested curriculum and an interactive learning environment. Start with HTML, CSS, JavaScript, SQL, Python, Data Science, and more."
+    "en": "Learn the technical skills you need for the job you want. As leaders in online education and learning to code, we’ve taught over 45 million people using a tested curriculum and an interactive learning environment. Start with HTML, CSS, JavaScript, SQL, Python, Data Science, and more.",
+    "ga_IE": "Foghlaim na scileanna teicniúla a theastaíonn uait don phost a theastaíonn uait.Mar cheannairí in oideachas ar líne agus foghlaim le cód, mhúin muid níos mó ná 45 milliún duine ag baint úsáide as curaclam tástála agus timpeallacht foghlama idirghníomhach.Tosaigh le HTML, CSS, Javascript, SQL, Python, Eolaíocht Sonraí, agus níos mó."
   },
   "service": "Codecademy",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/TnKcxoz.jpg",
   "thumbnail": "https://i.imgur.com/Npzs51Y.png",
   "color": "#152B39",

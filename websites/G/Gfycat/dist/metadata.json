@@ -5,10 +5,11 @@
   },
   "service": "Gfycat",
   "description": {
-    "en": "Gfycat is the top destination for GIFs and videos. Create your own GIF or browse the best gaming GIFs, reactions GIFs, funny GIFs and more."
+    "en": "Gfycat is the top destination for GIFs and videos. Create your own GIF or browse the best gaming GIFs, reactions GIFs, funny GIFs and more.",
+    "ga_IE": "Is é Gfycat an ceann scríbe is fearr le haghaidh gifs agus físeáin.Cruthaigh do GIF féin nó brabhsáil ar an gifs cearrbhachais is fearr, gifs imoibrithe, gifs greannmhar agus níos mó."
   },
   "url": "gfycat.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/PRr2kHO.png",
   "thumbnail": "https://i.imgur.com/Fr03jyG.png",
   "color": "#3aa8ff",

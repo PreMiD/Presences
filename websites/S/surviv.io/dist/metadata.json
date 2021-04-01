@@ -5,10 +5,11 @@
   },
   "service": "surviv.io",
   "description": {
-    "en": "Like games such as Player Unknown's Battlegrounds (PUBG), Fortnite or Apex Legends? Play this free 2d battle royale io game in your browser!"
+    "en": "Like games such as Player Unknown's Battlegrounds (PUBG), Fortnite or Apex Legends? Play this free 2d battle royale io game in your browser!",
+    "ga_IE": "Cosúil le cluichí cosúil le cadhglóra imreoir anaithnid (pubg), finscéalta Fortnite nó Apex?Seinn an cluiche seo saor in aisce 2D Royale IO Cluiche i do bhrabhsálaí!"
   },
   "url": "surviv.io",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/L5tTe5e.png",
   "thumbnail": "https://i.imgur.com/eTT4eEI.png",
   "color": "#83AF50",

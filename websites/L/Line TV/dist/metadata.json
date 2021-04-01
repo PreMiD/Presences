@@ -6,10 +6,11 @@
   },
   "url": "tv.line.me",
   "description": {
-    "en": "LINE TV is a global video streaming service. You can watch high-quality video content in a variety of categories such as TV dramas, entertainment shows."
+    "en": "LINE TV is a global video streaming service. You can watch high-quality video content in a variety of categories such as TV dramas, entertainment shows.",
+    "ga_IE": "Is seirbhís shruthúcháin físe domhanda é an teilifís líne.Is féidir leat féachaint ar ábhar físe ardcháilíochta i gcatagóirí éagsúla amhail drámaí teilifíse, seónna siamsaíochta."
   },
   "service": "Line TV",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/F2sWIqN.png",
   "thumbnail": "https://i.imgur.com/5sqClBZ.png",
   "color": "#01d145",

@@ -5,10 +5,11 @@
   },
   "service": "Dank Memer",
   "description": {
-    "en": "Dank Memer is packed full of memes, fun, and unique experiences! Whether you gamble, steal from your friends, check the latest hot memes, roast your friends, create your own memes, or use one of our other 260+ commands."
+    "en": "Dank Memer is packed full of memes, fun, and unique experiences! Whether you gamble, steal from your friends, check the latest hot memes, roast your friends, create your own memes, or use one of our other 260+ commands.",
+    "ga_IE": "Pacáilte go hiomlán de Memes, spraoi, agus eispéiris uathúla!Cibé an bhfuil tú gamble, ghoid tú ó do chairde, seiceáil na memes te is déanaí, rósta do chairde, cruthaigh do memes féin, nó bain úsáid as ceann dár 260 + orduithe eile."
   },
   "url": "dankmemer.lol",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/MovN0IN.png",
   "thumbnail": "https://i.imgur.com/jHWdjyU.png",
   "color": "#555C56",

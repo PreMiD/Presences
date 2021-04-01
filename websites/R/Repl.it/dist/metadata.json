@@ -5,10 +5,11 @@
   },
   "service": "Repl.it",
   "description": {
-    "en": "Repl.it is a San Francisco based start-up and an online IDE (integrated development environment) supporting 40 programming languages, including Python, Lua, JavaScript, Julia, C++, C++11, C, C#, HTML/CSS/JS, Python with turtle and LOLCODE. Repl.it allows users to write code and build apps using a browser, without having to install any software on their devices."
+    "en": "Repl.it is a San Francisco based start-up and an online IDE (integrated development environment) supporting 40 programming languages, including Python, Lua, JavaScript, Julia, C++, C++11, C, C#, HTML/CSS/JS, Python with turtle and LOLCODE. Repl.it allows users to write code and build apps using a browser, without having to install any software on their devices.",
+    "ga_IE": "Is é atá i gceist le SAN FRANCISCO ná IDE SAN FRANCISCO agus IDE ar líne (timpeallacht forbartha chomhtháite) a thacaíonn le 40 teanga chláir, lena n-áirítear Python, Lua, JavaScript, Julia, C ++, C ++ 11, C, C #, HTML / CSS / JS, Python le turtar agus lolcode.Ligeann sé d'úsáideoirí cód a scríobh agus apps a thógáil ag baint úsáide as brabhsálaí, gan aon bhogearraí a shuiteáil ar a gcuid feistí."
   },
   "url": "repl.it",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "logo": "https://i.imgur.com/jL7ohN5.png",
   "thumbnail": "https://i.imgur.com/4AwIxoc.png",
   "color": "#808080",

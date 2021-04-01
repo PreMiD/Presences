@@ -7,10 +7,11 @@
   "description": {
     "en": "Connect with friends, family and other people you know. Share photos and videos, send messages and get updates.",
     "nl": "Maak contact met vrienden, familie en andere mensen die je kent. Deel foto's en video's, verzend berichten en ontvang updates.",
-    "zh_CN": "与朋友、家人和其他你认识的人联系。分享照片和视频、发送消息和获取更新。"
+    "zh_CN": "与朋友、家人和其他你认识的人联系。分享照片和视频、发送消息和获取更新。",
+    "ga_IE": "Ceangail le cairde, teaghlaigh agus daoine eile atá ar eolas agat.Comhroinn grianghraif agus físeáin, teachtaireachtaí a sheoladh agus nuashonruithe a fháil."
   },
   "url": "www.facebook.com",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/jWYZLvY.png",
   "thumbnail": "https://i.imgur.com/WcKmon0.png",
   "color": "#4267B2",

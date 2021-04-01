@@ -5,10 +5,11 @@
   },
   "service": "Rooster Teeth",
   "description": {
-    "en": "Rooster Teeth is a pioneering media and entertainment company responsible for some of the biggest online series in history, such as the award-winning and longest-running web series, Red vs. Blue"
+    "en": "Rooster Teeth is a pioneering media and entertainment company responsible for some of the biggest online series in history, such as the award-winning and longest-running web series, Red vs. Blue",
+    "ga_IE": "Is cuideachta mheáin chumarsáide agus siamsaíochta é fiacla Rooster atá freagrach as cuid de na sraitheanna ar líne is mó i stair, mar shampla an tsraith gréasáin a bhuaigh duaiseanna agus is faide an-rith, dearg vs gorm"
   },
   "url": "roosterteeth.com",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/sxZnjmY.png",
   "thumbnail": "https://i.imgur.com/BwJU788.png",
   "color": "#2c2420",

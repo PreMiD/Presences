@@ -6,10 +6,11 @@
   "service": "HLTV",
   "description": {
     "en": "The leading CS:GO site in the world, featuring news, demos, pictures, statistics, on-site coverage and much much more!",
-    "nl": "De beste CS:GO website ter wereld, met nieuws, demo's, foto's, statistieken, on-site dekking en nog veel meer!"
+    "nl": "De beste CS:GO website ter wereld, met nieuws, demo's, foto's, statistieken, on-site dekking en nog veel meer!",
+    "ga_IE": "An CSS CS: Go Suíomh ar fud an domhain, featuring nuacht, demos, pictiúir, staitisticí, clúdach ar an láthair agus i bhfad i bhfad níos mó!"
   },
   "url": "www.hltv.org",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/ATYXE8g.png",
   "thumbnail": "https://i.imgur.com/xKUNEbz.png",
   "color": "#3e6ea0",

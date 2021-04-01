@@ -6,10 +6,11 @@
   "service": "KissAsian",
   "description": {
     "en": "Watch drama online in high quality. Free download high quality drama. Various formats from 240p to 720p HD (or even 1080p). HTML5 available for mobile devices.",
-    "nl": "Bekijk drama online in hoge kwaliteit. Gratis download van hoge kwaliteit drama. Verschillende formaten van 240p tot 720p HD (of zelfs 1080p). HTML5 beschikbaar voor mobiele apparaten."
+    "nl": "Bekijk drama online in hoge kwaliteit. Gratis download van hoge kwaliteit drama. Verschillende formaten van 240p tot 720p HD (of zelfs 1080p). HTML5 beschikbaar voor mobiele apparaten.",
+    "ga_IE": "Féach drámaíocht ar líne ar ardchaighdeán.Drámaíocht ardchaighdeáin a íoslódáil saor in aisce.Formáidí éagsúla ó 240p go 720p HD (nó fiú 1080P).HTML5 ar fáil le haghaidh gléasanna soghluaiste."
   },
   "url": "kissasian.sh",
-  "version": "2.2.7",
+  "version": "2.2.8",
   "logo": "https://i.imgur.com/B8evsEL.png",
   "thumbnail": "https://i.imgur.com/AG3nCsQ.png",
   "color": "#f5d80b",

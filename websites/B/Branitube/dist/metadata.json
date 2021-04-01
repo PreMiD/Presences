@@ -9,10 +9,11 @@
     "de": "Branitube ist eine brasilianische Anime Streaming Seite.",
     "ro": "Branitube este un site de streaming brazilian pentru anime.",
     "pt_BR": "Branitube é um site brasileiro de streaming de animes.",
-    "nl": "Branitube is een braziliaanse anime streaming website."
+    "nl": "Branitube is een braziliaanse anime streaming website.",
+    "ga_IE": "Is suíomh sruthú anime Brasaíle é Branitube."
   },
   "url": "www.branitube.net",
-  "version": "2.5.5",
+  "version": "2.5.6",
   "logo": "https://i.imgur.com/7MI23R4.png",
   "thumbnail": "https://i.imgur.com/c3ELKV2.png",
   "color": "#1384c3",

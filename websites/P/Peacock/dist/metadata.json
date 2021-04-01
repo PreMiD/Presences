@@ -6,13 +6,14 @@
   },
   "service": "Peacock",
   "description": {
-    "en": "Watch TV shows and movies online with Peacock. Stream iconic shows and movies, exclusive Peacock originals, live news and sports and more."
+    "en": "Watch TV shows and movies online with Peacock. Stream iconic shows and movies, exclusive Peacock originals, live news and sports and more.",
+    "ga_IE": "Féach ar na seónna teilifíse agus scannáin ar líne le Peacock.Seónna agus scannáin íocónacha sruth, bunchóipeanna eisiach peacock, nuacht beo agus spóirt agus níos mó."
   },
   "url": [
     "www.peacocktv.com",
     "peacocktv.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/6t52fkP.png",
   "thumbnail": "https://i.imgur.com/63bMEv5.png",
   "color": "#FCCC12",

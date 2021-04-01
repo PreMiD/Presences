@@ -5,10 +5,11 @@
   },
   "service": "Tune Radio",
   "description": {
-    "en": "Tune Radio is a new radio station, aiming to provide all of the latest and greatest hits easily to everyone across the globe."
+    "en": "Tune Radio is a new radio station, aiming to provide all of the latest and greatest hits easily to everyone across the globe.",
+    "ga_IE": "Is stáisiún raidió nua é Raidió Tune, agus é mar aidhm aige na hamanna is déanaí agus is mó a sholáthar do gach duine ar fud na cruinne."
   },
   "url": "www.tuneradio.co.uk",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "http://i.imgur.com/1xUo71o.png",
   "thumbnail": "https://i.imgur.com/SAMg80l.jpg",
   "color": "#45a5fc",

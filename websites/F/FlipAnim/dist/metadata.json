@@ -6,10 +6,11 @@
   "service": "FlipAnim",
   "description": {
     "en": "Create flipbook animations online!",
-    "nl": "Maak flipbook-animaties online!"
+    "nl": "Maak flipbook-animaties online!",
+    "ga_IE": "Cruthaigh beochan Flipbook ar líne!"
   },
   "url": "flipanim.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/BXd1SBE.png",
   "thumbnail": "https://i.imgur.com/D0tVFhI.png",
   "color": "#f2a012",

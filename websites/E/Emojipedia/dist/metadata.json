@@ -8,10 +8,11 @@
     "blog.emojipedia.org"
   ],
   "description": {
-    "en": "The emoji search engine. A fast emoji search experience with options to browse every emoji by name, category, or platform."
+    "en": "The emoji search engine. A fast emoji search experience with options to browse every emoji by name, category, or platform.",
+    "ga_IE": "An t-inneall cuardaigh emoji.Taithí Chuardaigh Emoji Fast le roghanna chun gach emoji a bhrabhsáil de réir ainm, catagóir, nó ardán."
   },
   "service": "Emojipedia",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/3ogkQzN.png",
   "thumbnail": "https://i.imgur.com/H6zazLW.png",
   "color": "#EE7300",

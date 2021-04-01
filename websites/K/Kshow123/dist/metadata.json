@@ -6,10 +6,11 @@
   "service": "Kshow123",
   "description": {
     "en": "Watch online Korean shows with English subtitles in high quality.",
-    "nl": "Bekijk online Koreaanse shows met Engelse ondertiteling in hoge kwaliteit."
+    "nl": "Bekijk online Koreaanse shows met Engelse ondertiteling in hoge kwaliteit.",
+    "ga_IE": "Féach ar taispeánaí Cóiré ar líne le fotheidil Bhéarla ar ardchaighdeán."
   },
   "url": "kshow123.net",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "logo": "https://i.imgur.com/xYJbv9k.png",
   "thumbnail": "https://i.imgur.com/JMRVXls.png",
   "color": "#2daae1",

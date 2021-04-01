@@ -5,10 +5,11 @@
   },
   "url": "www.threenow.co.nz",
   "description": {
-    "en": "Watch the latest TV On Demand episodes of all your favourite shows from Three with ThreeNow. Watch Three livestream, Newshub, Three Movies and Three shows."
+    "en": "Watch the latest TV On Demand episodes of all your favourite shows from Three with ThreeNow. Watch Three livestream, Newshub, Three Movies and Three shows.",
+    "ga_IE": "Féach ar an teilifís is déanaí ar eipeasóid éilimh de na seónna is fearr leat ó thriúr le Threeenow.Féach ar thrí livestream, newshub, trí scannáin agus trí sheó."
   },
   "service": "ThreeNow",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/t7j0bcF.png",
   "thumbnail": "https://i.imgur.com/N8CRfMJ.png",
   "color": "#FF0050",
