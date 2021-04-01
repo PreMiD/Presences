@@ -1,22 +1,25 @@
 const presence = new Presence({ clientId: "821776987570962532" }),
   timestamp = Math.floor(Date.now() / 1000),
-  newStats = async () => (data = await (await window.fetch("https://cast.bladefm.com.au/api/nowplaying/1")).json());
+  newStats = async () =>
+    (data = await (
+      await window.fetch("https://cast.bladefm.com.au/api/nowplaying/1")
+    ).json());
 
-let data: { 
-  listeners: { 
-    unique: number; 
-  }; 
-  now_playing: { 
-    song: { 
-      artist: string; 
-      text: string; 
-      title: string; 
+let data: {
+  listeners: {
+    unique: number;
+  };
+  now_playing: {
+    song: {
+      artist: string;
+      text: string;
+      title: string;
     };
-  }; 
-  live: { 
-    is_live: boolean; 
-    streamer_name: string; 
-  }; 
+  };
+  live: {
+    is_live: boolean;
+    streamer_name: string;
+  };
 };
 
 setInterval(newStats, 10000);
@@ -40,7 +43,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       details: settings.details,
       state: settings.state,
-      smallImageText: `${data.live.is_live ? data.live.streamer_name : "AutoDJ"} is live!`,
+      smallImageText: `${
+        data.live.is_live ? data.live.streamer_name : "AutoDJ"
+      } is live!`,
       buttons: [
         {
           label: "Tune in",
@@ -50,7 +55,8 @@ presence.on("UpdateData", async () => {
     };
 
   if (settings.timestamp) presenceData.startTimestamp = timestamp;
-  if (data.live.is_live && data.live.streamer_name !== "Admin") presenceData.smallImageKey = "live";
+  if (data.live.is_live && data.live.streamer_name !== "Admin")
+    presenceData.smallImageKey = "live";
   else delete presenceData.smallImageText;
 
   presence.setActivity(presenceData);

@@ -12,7 +12,11 @@ let timestamp: number;
 
 presence.on("UpdateData", async () => {
   const pause = (await strings).pause;
-  if (["streaming.pramborsfm.com", "live.pramborsfm.com"].includes(document.location.hostname)) {
+  if (
+    ["streaming.pramborsfm.com", "live.pramborsfm.com"].includes(
+      document.location.hostname
+    )
+  ) {
     presenceData.buttons = [
       {
         label: "Listen to Prambors",
@@ -42,7 +46,12 @@ presence.on("UpdateData", async () => {
         break;
       }
       case "live.pramborsfm.com": {
-        const buttonAction = [...[...document.querySelectorAll("button")].pop().classList].pop().split("--").pop();
+        const buttonAction = [
+          ...[...document.querySelectorAll("button")].pop().classList
+        ]
+          .pop()
+          .split("--")
+          .pop();
         if (buttonAction === "play") {
           timestamp = null;
           delete presenceData.startTimestamp;
@@ -53,12 +62,12 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageText = "Listening";
           presenceData.startTimestamp = timestamp;
         }
-        presenceData.state = document
-          .querySelector(".td-player-vertical__track-info__artist-name")
-          .textContent;
-        presenceData.details = document
-          .querySelector(".td-player-vertical__track-info__cue-title")
-          .textContent;
+        presenceData.state = document.querySelector(
+          ".td-player-vertical__track-info__artist-name"
+        ).textContent;
+        presenceData.details = document.querySelector(
+          ".td-player-vertical__track-info__cue-title"
+        ).textContent;
         break;
       }
     }
