@@ -254,7 +254,9 @@ const spinnerSettings = {
             green(`":\n`) +
             hex("#bebebe")(`(Type "skip" to skip or "stop" to stop)`),
           name: "translatedDes"
-        }).then((answer: { translatedDes: string }) => answer.translatedDes),
+        })
+          .then((answer: { translatedDes: string }) => answer.translatedDes)
+          .catch(() => process.exit()),
         ver = data.version.split(".");
 
       switch (response) {
