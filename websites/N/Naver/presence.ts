@@ -455,17 +455,17 @@ presence.on("UpdateData", async () => {
           v.setPresenceData();
           break;
         }
-        for (const [key, todo] of Object.entries(v.data)){
-          if (!todo.if && todo.setTo) presenceData[<"state"> key] = <string> todo.setTo;
-          else if (todo.if) {
-              if (todo.if.s.k === todo.if.s.v){
-                if (!todo.if.s.then.delete) presenceData[<"state"> key] = <string> todo.if.s.then.v;
+        for (const [key, PData] of Object.entries(v.data)){
+          if (!PData.if && PData.setTo) presenceData[<"state"> key] = <string> PData.setTo;
+          else if (PData.if) {
+              if (PData.if.s.k === PData.if.s.v){
+                if (!PData.if.s.then.delete) presenceData[<"state"> key] = <string> PData.if.s.then.v;
                 else delete presenceData[<"state"> key];
-              } else if (todo.if.s.else){
-                if (!todo.if.s.else.delete) presenceData[<"state"> key] = <string> todo.if.s.else.v;
+              } else if (PData.if.s.else){
+                if (!PData.if.s.else.delete) presenceData[<"state"> key] = <string> PData.if.s.else.v;
                 else delete presenceData[<"state"> key];
-              } else if (todo.if.else){
-                for (const elseStatement of Object.values(todo.if.else)){
+              } else if (PData.if.else){
+                for (const elseStatement of Object.values(PData.if.else)){
                   if (elseStatement.k === elseStatement.v){
                     if (!elseStatement.then.delete) presenceData[<"state"> key] = <string> elseStatement.then.v;
                     else delete presenceData[<"state"> key];
