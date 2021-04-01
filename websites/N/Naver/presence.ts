@@ -45,7 +45,7 @@ const presence = new Presence({
                 k: unknown,
                 v: unknown,
                 then?: {
-                  v?: unknown
+                  v?: unknown,
                   delete?: boolean
                 },
                 else?: {
@@ -62,8 +62,8 @@ const presence = new Presence({
                 },
                 else?: {
                   v?: unknown,
-                  delete?: boolean,
-                },
+                  delete?: boolean
+                }
               }[],
             }
           }
