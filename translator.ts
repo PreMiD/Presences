@@ -278,9 +278,8 @@ const spinnerSettings = {
           await checkCount();
 
           if (!JSON.parse(readFileSync(path).toString()).description[language])
-              error(
-                `An error occured while saving the file. Please manually add the translation to: ${language}. The version was automatically bumped.`
-              )
+            error(
+              `An error occured while saving the file. Please manually add the translation to: ${language}. The version was automatically bumped.`
             );
         }
       }
