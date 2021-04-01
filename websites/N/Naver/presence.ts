@@ -64,7 +64,7 @@ const presence = new Presence({
                   v?: unknown,
                   delete?: boolean
                 }
-              }[],
+              }[]
             }
           }
         }
