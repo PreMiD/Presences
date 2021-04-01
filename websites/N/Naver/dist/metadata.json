@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Naver",
+    "author": {
+        "name": "SlowLife",
+        "id": "374905512661221377"
+    },
+    "description": {
+      "en": "This Presence will includes the following serviers: Naver, Naver TV, Naver NOW, Naver Webtoon, Naver Papago, Naver Blog"
+    },
+    "version": "1.0.0",
+    "url": [
+       "www.naver.com",
+       "tv.naver.com",
+       "now.naver.com",
+       "papago.naver.com",
+       "comic.naver.com",
+       "entertain.naver.com",
+       "blog.naver.com"
+    ],
+    "regExp": "([a-z]+)[.]naver[.]([a-z0-9]+)",
+    "logo": "https://i.imgur.com/jhOVwwe.png",
+    "thumbnail": "https://i.imgur.com/QZs7QHH.png",
+    "color": "#03d05a",
+    "tags": [
+      "naver",
+      "naver-tv",
+      "naver-now",
+      "naver-webtoon",
+      "naver-papago",
+      "naver-blog"
+    ],
+    "altnames": ["네이버"],
+    "category": "other",
+    "iframe": true,
+    "settings": [{
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }]
+}
