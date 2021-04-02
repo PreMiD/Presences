@@ -1,22 +1,23 @@
 const presence = new Presence({ clientId: "821762747544895540" }),
   timestamp = Math.floor(Date.now() / 1000),
-  newStats = async () => (data = await (await window.fetch("https://stats.boltfm.net/")).json());
+  newStats = async () =>
+    (data = await (await window.fetch("https://stats.boltfm.net/")).json());
 
-let data: { 
-  listeners: { 
-    unique: number; 
-  }; 
-  now_playing: { 
-    song: { 
-      artist: string; 
-      text: string; 
-      title: string; 
+let data: {
+  listeners: {
+    unique: number;
+  };
+  now_playing: {
+    song: {
+      artist: string;
+      text: string;
+      title: string;
     };
-  }; 
-  live: { 
-    is_live: boolean; 
-    streamer_name: string; 
-  }; 
+  };
+  live: {
+    is_live: boolean;
+    streamer_name: string;
+  };
 };
 
 setInterval(newStats, 10000);
@@ -40,7 +41,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       details: settings.details,
       state: settings.state,
-      smallImageText: `${data.live.is_live ? data.live.streamer_name : "AutoDJ"} is live!`,
+      smallImageText: `${
+        data.live.is_live ? data.live.streamer_name : "AutoDJ"
+      } is live!`,
       buttons: [
         {
           label: "Tune in",

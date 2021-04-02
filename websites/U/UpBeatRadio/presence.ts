@@ -1,15 +1,15 @@
 const presence = new Presence({
     clientId: "682781181863133220"
-  }), 
+  }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "upbeat"
-  }, 
-  paused = document
-    .querySelector("#radioPlayer > span > i")
-    .className.includes("fa-play"),
+      largeImageKey: "upbeat"
+    },
+    paused = document
+      .querySelector("#radioPlayer > span > i")
+      .className.includes("fa-play"),
     newsreporterapply = document.querySelector("#modalmediaAppButton") !== null,
     partner = document.querySelector("#modalpartnerEnquiryButton") !== null,
     request = document.querySelector("#modalrequestFormModal") !== null,
@@ -41,32 +41,55 @@ presence.on("UpdateData", async () => {
       } else {
         if (document.querySelector(".stats-djName").textContent == "UpBeat")
           djType = "AutoDJ - ";
-        else 
-          djType = "DJ: ";
+        else djType = "DJ: ";
 
         presenceData.smallImageKey = "play";
 
         if (dj) {
           presenceData.details = format
-            .replace("%song%", document.querySelector(".stats-song").textContent)
-            .replace("%artist%", document.querySelector(".stats-artist").textContent);
-          presenceData.state = djType + document.querySelector(".stats-djName").textContent;
+            .replace(
+              "%song%",
+              document.querySelector(".stats-song").textContent
+            )
+            .replace(
+              "%artist%",
+              document.querySelector(".stats-artist").textContent
+            );
+          presenceData.state =
+            djType + document.querySelector(".stats-djName").textContent;
         } else {
           presenceData.details = format1
-            .replace("%song%", document.querySelector(".stats-song").textContent)
-            .replace("%artist%", document.querySelector(".stats-artist").textContent);
+            .replace(
+              "%song%",
+              document.querySelector(".stats-song").textContent
+            )
+            .replace(
+              "%artist%",
+              document.querySelector(".stats-artist").textContent
+            );
           presenceData.state = format2
-            .replace("%song%", document.querySelector(".stats-song").textContent)
-            .replace("%artist%", document.querySelector(".stats-artist").textContent);
+            .replace(
+              "%song%",
+              document.querySelector(".stats-song").textContent
+            )
+            .replace(
+              "%artist%",
+              document.querySelector(".stats-artist").textContent
+            );
         }
       }
     } else if (document.location.pathname.includes("/News.Article")) {
-      presenceData.details = "Reading article: " + document.querySelector(".title").textContent.trim();
-      presenceData.state = "Written by: " + document.querySelector(".info > a").textContent.trim();
+      presenceData.details =
+        "Reading article: " +
+        document.querySelector(".title").textContent.trim();
+      presenceData.state =
+        "Written by: " + document.querySelector(".info > a").textContent.trim();
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/Account.Profile")) {
       presenceData.details = "Viewing profile of:";
-      presenceData.state = document.querySelector(".profileName > span").textContent;
+      presenceData.state = document.querySelector(
+        ".profileName > span"
+      ).textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/Account.Settings")) {
       presenceData.details = "Changing their settings...";
@@ -95,7 +118,7 @@ presence.on("UpdateData", async () => {
       let type = document
         .querySelector("#mainContent > div.m-b-md.m-t-sm > ul > .active > a")
         .textContent.toLowerCase();
-    if (type == "vip's") type = "VIP";
+      if (type == "vip's") type = "VIP";
       presenceData.details = "Viewing the";
       presenceData.state = type + " members";
       presenceData.smallImageKey = "reading";
@@ -136,21 +159,30 @@ presence.on("UpdateData", async () => {
   } else {
     if (document.querySelector(".stats-djName").textContent == "UpBeat")
       djType = "AutoDJ - ";
-    else 
-      djType = "DJ: ";
+    else djType = "DJ: ";
 
     if (dj) {
       presenceData.details = format
         .replace("%song%", document.querySelector(".stats-song").textContent)
-        .replace("%artist%", document.querySelector(".stats-artist").textContent);
-      presenceData.state = djType + document.querySelector(".stats-djName").textContent;
+        .replace(
+          "%artist%",
+          document.querySelector(".stats-artist").textContent
+        );
+      presenceData.state =
+        djType + document.querySelector(".stats-djName").textContent;
     } else {
       presenceData.details = format1
         .replace("%song%", document.querySelector(".stats-song").textContent)
-        .replace("%artist%", document.querySelector(".stats-artist").textContent);
+        .replace(
+          "%artist%",
+          document.querySelector(".stats-artist").textContent
+        );
       presenceData.state = format2
         .replace("%song%", document.querySelector(".stats-song").textContent)
-        .replace("%artist%", document.querySelector(".stats-artist").textContent);
+        .replace(
+          "%artist%",
+          document.querySelector(".stats-artist").textContent
+        );
     }
 
     presenceData.smallImageKey = "play";

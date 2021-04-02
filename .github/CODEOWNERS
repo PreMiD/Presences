@@ -7,4 +7,5 @@ yarn.lock @Timeraa @Fruxh @TheDropX
 presenceUpdater.ts @Timeraa
 syntaxEnforcer.ts @SeMiD
 qualityAssurance.ts @SeMiD
+translator.ts @Bas950 @ririxidev
 .gitignore @Timeraa @Fruxh

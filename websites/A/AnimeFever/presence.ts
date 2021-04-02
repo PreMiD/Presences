@@ -243,9 +243,8 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
         );
       }
       const presenceData: PresenceData = {
-          largeImageKey: IMAGES.LOGO,
-          largeImageText: "AnimeFever"
-        } as PresenceData,
+          largeImageKey: IMAGES.LOGO
+        },
         query: { [key: string]: unknown } = getQuery(),
         context = pages.find((x) => x.middleware(window, [query]));
       if (!context) return false;
