@@ -3,14 +3,6 @@
  * @param {Number} videoTime Current video time seconds
  * @param {Number} videoDuration Video duration seconds
  */
- function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
 
 const presence = new Presence({ clientId: "639591760791732224" }),
   strings = presence.getStrings({
@@ -98,7 +90,7 @@ presence.on("UpdateData", async () => {
       videoCurrentTime = video.currentTime;
       videoPaused = video.paused;
 
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
         Math.floor(videoCurrentTime),
         Math.floor(videoDuration)
       );
@@ -141,7 +133,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing their history";
       //活动
     } else if (document.location.pathname.includes("/blackboard/")) {
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       );
@@ -193,7 +185,7 @@ presence.on("UpdateData", async () => {
       videoCurrentTime = video.currentTime;
       paused = video.paused;
 
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
         Math.floor(videoCurrentTime),
         Math.floor(videoDuration)
       );
@@ -340,7 +332,7 @@ presence.on("UpdateData", async () => {
     videoCurrentTime = video.currentTime;
     videoPaused = video.paused;
 
-    const timestamps = getTimestamps(
+    const timestamps = presence.getTimestamps(
       Math.floor(videoCurrentTime),
       Math.floor(videoDuration)
     );
