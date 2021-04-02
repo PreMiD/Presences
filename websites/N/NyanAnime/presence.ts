@@ -1,10 +1,12 @@
 const presence = new Presence({
     clientId: "827663128216600618"
-})
+}),
+startTimestamp = Date.now();
 
-const startTimestamp = Date.now();
-let last_update = Date.now();
-let start_time = 0, end_time = 0;
+let last_update = Date.now(),
+start_time = 0,
+end_time = 0;
+
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "logo",
@@ -37,12 +39,12 @@ presence.on("UpdateData", async () => {
             break;
     }
     if(currentPath.includes("/episodes/")) {
-        const animeTitle = document.querySelector(".episode-overview-type-link").textContent;
-        const episodeTitle = document.querySelector(".episode-overview-title-type").textContent;
-        const episodeNumber = episodeTitle.substring("Episode ".length, episodeTitle.indexOf(" -"));
-        const paused = (document.querySelector(".episode-video") as HTMLMediaElement).paused;
-
-        const playerTime = document.querySelector(".episode-video-controls-time");
+        const animeTitle = document.querySelector(".episode-overview-type-link").textContent,
+        episodeTitle = document.querySelector(".episode-overview-title-type").textContent,
+        episodeNumber = episodeTitle.substring("Episode ".length, episodeTitle.indexOf(" -")),
+        paused = (document.querySelector(".episode-video") as HTMLMediaElement).paused,
+        playerTime = document.querySelector(".episode-video-controls-time");
+        
         if(playerTime != null) {
             let start = playerTime.textContent.substring(0, playerTime.textContent.indexOf("/"));
             if(start != null) {
