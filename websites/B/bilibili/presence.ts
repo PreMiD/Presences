@@ -3,7 +3,7 @@
  * @param {Number} videoTime Current video time seconds
  * @param {Number} videoDuration Video duration seconds
  */
-function getTimestamps(
+ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
@@ -73,11 +73,11 @@ presence.on("UpdateData", async () => {
       //video
     } else if (document.location.pathname.includes("/video/")) {
       video = document.querySelector(
-        "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+        "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside.video-control-show > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
       );
       if (video == null) {
         video = document.querySelector(
-          "#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.video-state-pause > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+          "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
       }
       if (video == null) {
@@ -129,7 +129,7 @@ presence.on("UpdateData", async () => {
         );
       } else {
         user = document.querySelector(
-          "#v_upinfo > div.u-info > div > a.username"
+          "#v_upinfo > div.up-info_right > div.name > a.username"
         );
       }
       presenceData.details = title.innerText;
@@ -172,7 +172,7 @@ presence.on("UpdateData", async () => {
       );
       if (video == null) {
         video = document.querySelector(
-          "#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.video-state-pause > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+          "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
       }
       if (video == null) {
