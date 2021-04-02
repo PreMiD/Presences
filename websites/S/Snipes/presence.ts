@@ -2,9 +2,7 @@ const presence = new Presence({
   clientId: "827620297896230912"
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
-function capitalizeFirstLetter(string) {
-return string.charAt(0).toUpperCase() + string.slice(1);
-}
+
 presence.on("UpdateData", async function () {
 const presenceData = {
       largeImageKey: "logo"
@@ -57,8 +55,7 @@ if(!urlpath[1]) {
     presenceData.state = document.querySelector("li.b-breadcrumb-item>span.b-breadcrumb-text").textContent;
   }
 } else if (urlpath[1] === "p") {
-  const num = (urlpath[2] === 'men' || urlpath[2] === 'women' || urlpath[2] === 'kids') ? "3" : "2",
-        prod = document.querySelector("div.js-target").textContent,
+  const prod = document.querySelector("div.js-target").textContent,
         prodModel = document.querySelector("div.js-target>.h-hide").textContent,
         brand = document.querySelector("div.js-target>a").textContent,
         product = prod.replace(prodModel, "").replace(brand, "").replace(/\s+/g, " ").trim();
