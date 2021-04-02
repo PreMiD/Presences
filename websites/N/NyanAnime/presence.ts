@@ -1,15 +1,10 @@
 const presence = new Presence({
     clientId: "827663128216600618"
-}),
-strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-});
+})
 
+const startTimestamp = Date.now();
 let last_update = Date.now();
-let start_time = 0;
-let end_time = 0;
-let startTimestamp = Date.now();
+let start_time = 0, end_time = 0;
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "logo",
@@ -42,12 +37,12 @@ presence.on("UpdateData", async () => {
             break;
     }
     if(currentPath.includes("/episodes/")) {
-        let animeTitle = document.querySelector(".episode-overview-type-link").textContent;
-        let episodeTitle = document.querySelector(".episode-overview-title-type").textContent;
-        let episodeNumber = episodeTitle.substring("Episode ".length, episodeTitle.indexOf(" -"));
-        let paused = (document.querySelector(".episode-video") as HTMLMediaElement).paused;
+        const animeTitle = document.querySelector(".episode-overview-type-link").textContent;
+        const episodeTitle = document.querySelector(".episode-overview-title-type").textContent;
+        const episodeNumber = episodeTitle.substring("Episode ".length, episodeTitle.indexOf(" -"));
+        const paused = (document.querySelector(".episode-video") as HTMLMediaElement).paused;
 
-        let playerTime = document.querySelector(".episode-video-controls-time");
+        const playerTime = document.querySelector(".episode-video-controls-time");
         if(playerTime != null) {
             let start = playerTime.textContent.substring(0, playerTime.textContent.indexOf("/"));
             if(start != null) {
@@ -90,9 +85,9 @@ presence.on("UpdateData", async () => {
                 label: "Watch",
                 url: document.location.href
             }
-        ]
+        ];
     } else if(currentPath.startsWith("/animes/")) {
-        let animeTitle = document.querySelector(".anime-overview-title").textContent;
+        const animeTitle = document.querySelector(".anime-overview-title").textContent;
         presenceData.state = "Anime: " + animeTitle;
     }
 
