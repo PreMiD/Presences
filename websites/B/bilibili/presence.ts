@@ -111,7 +111,7 @@ presence.on("UpdateData", async () => {
       }
       if (multi_user != null) {
         user = document.querySelector(
-          "#member-container > div:nth-child(1) > div.panel > div > a"
+          "#member-container > div:nth-child(1) > div.avatar-name__container > a"
         );
       } else {
         user = document.querySelector(
