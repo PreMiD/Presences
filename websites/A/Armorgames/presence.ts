@@ -103,8 +103,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Error | idk this page."
       presenceData.state = "Create an issue on github"
     }
-   
-
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
