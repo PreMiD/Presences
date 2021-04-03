@@ -35,8 +35,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Viewing the forums`;
     } else if (page.includes("/forum/")) {
       title = document.querySelector("#content-canvas > main > h1");
-      presenceData.details = `Viewing Forum:`
-      presenceData.state = title.textContent.replace("Forums → ", "")
+      presenceData.details = `Viewing Forum:`;
+      presenceData.state = title.textContent.replace("Forums → ", "");
       presenceData.buttons = [{label: "View Forum", url: window.location.href}];
     } else if (page.includes("thread")) {
       title = document.querySelector("#thread-title");
@@ -93,11 +93,11 @@ presence.on("UpdateData", async () => {
       title = document.querySelector("#content-canvas > section.game-header.clearfix > h1");
       presenceData.details = "Browsing:";
       presenceData.state = "All Games";
-      presenceData.buttons = [{label: "Browse Games", url: window.location.href}]
+      presenceData.buttons = [{label: "Browse Games", url: window.location.href}];
     } else if (page.includes("game")) {
       title = document.querySelector("#content-canvas > section.game-header.clearfix > h1");
       presenceData.details = "Playing:";
-      presenceData.state = title.textContent
+      presenceData.state = title.textContent;
       presenceData.buttons = [{label: "Play Game", url: window.location.href}];
     } else {
       presenceData.details = "Error | idk this page.";
