@@ -254,7 +254,9 @@ const spinnerSettings = {
             green(`":\n`) +
             hex("#bebebe")(`(Type "skip" to skip or "stop" to stop)`),
           name: "translatedDes"
-        }).then((answer: { translatedDes: string }) => answer.translatedDes),
+        })
+          .then((answer: { translatedDes: string }) => answer.translatedDes)
+          .catch(() => process.exit()),
         ver = data.version.split(".");
 
       switch (response) {
@@ -278,9 +280,8 @@ const spinnerSettings = {
           await checkCount();
 
           if (!JSON.parse(readFileSync(path).toString()).description[language])
-              error(
-                `An error occured while saving the file. Please manually add the translation to: ${language}. The version was automatically bumped.`
-              )
+            error(
+              `An error occured while saving the file. Please manually add the translation to: ${language}. The version was automatically bumped.`
             );
         }
       }
