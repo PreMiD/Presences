@@ -144,6 +144,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "edit";
       presenceData.details =
         document.querySelector("#content > div.g_title").textContent +
+        "profile";
     } else if (document.location.pathname.includes("/page/search")) {
       presenceData.smallImageKey = "search";
       presenceData.details = document.querySelector(
