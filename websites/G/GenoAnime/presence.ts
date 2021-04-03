@@ -34,10 +34,11 @@ title = document.title; //title of the page
     presenceData.details = "Searching Catalogue";
   }
   else if (document.location.pathname.includes("/amv")) {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Watching cool AMV videos";
-	    presenceData.buttons = [{label:"Check It Yourself",url: document.location.href}];
-  }
+    presenceData.startTimestamp = browsingStamp;
+    presenceData.details = "Watching cool AMV videos";
+    presenceData.buttons = [{label:"Check It Yourself",url: document.location.href}];
+ }
+
   else if (document.location.pathname.includes("/favorite")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Browsing Favourites";
