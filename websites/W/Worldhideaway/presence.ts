@@ -9,11 +9,9 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   },
   page = window.location.pathname,
-  expage = window.location.href,
-  host = document.location.hostname; 
+  expage = window.location.href;
 
     presenceData.startTimestamp = browsingStamp;
-    if (host === "www.worldhideaway.com" || host === "worldhideaway.com") {
     if (page === "/") {
       search = document.querySelector("#masthead > div.header-search-wrap > div > form > label > input");
       if (!search) {
@@ -106,7 +104,6 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
    }
 
-    }
 
   else if (presenceData.details === null) {
     presence.setTrayTitle();
