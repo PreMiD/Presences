@@ -1,7 +1,7 @@
 const presence = new Presence({ clientId: "821762747544895540" }),
   timestamp = Math.floor(Date.now() / 1000),
   newStats = async () =>
-    (data = await (await window.fetch("https://stats.boltfm.net/")).json());
+    (data = await (await window.fetch("https://radio.boltfm.net/api/nowplaying/2")).json());
 
 let data: {
   listeners: {
