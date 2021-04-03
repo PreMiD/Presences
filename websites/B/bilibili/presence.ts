@@ -1,9 +1,3 @@
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-
 const presence = new Presence({ clientId: "639591760791732224" }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
