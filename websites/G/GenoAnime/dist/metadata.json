@@ -11,12 +11,14 @@
   "service": "GenoAnime",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/44orW6Y.png",
-  "thumbnail": "https://i.imgur.com/Og5K5YU.png",
-  "color": "#2E83FA",
+  "thumbnail": "https://i.imgur.com/lANOUyc.png",
+  "color": "#42b5f7",
   "tags": [
     "anime",
     "entertainment",
-    "genoanime"
+    "genoanime",
+    "amv",
+    "videos"
   ],
   "category": "anime"
 }
