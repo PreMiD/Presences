@@ -13,15 +13,12 @@ presence.on("UpdateData", async () => {
   expage = window.location.href;
     if (page === "/") {
       search = document.querySelector("#masthead > div.header-search-wrap > div > form > label > input");
-      if (!search) {
+      if (!search || search.value === "") {
         presenceData.details = "Viendo Inicio";
-      } else if (search.value !== "") {
+      } else {
         presenceData.details = "Buscando:";
         presenceData.state = search.value;
         presenceData.smallImageKey = "searching";
-      } else { 
-        presenceData.details = "Viendo Inicio";
-      }
     } else if (page === "/activity/") {
     presenceData.details = "Leyendo Sobre:";
     presenceData.state = "Actividad";
