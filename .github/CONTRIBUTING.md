@@ -235,7 +235,7 @@ Here is a list of rules you must follow when writing your `presence.ts` file:
 - You many only make HTTP/HTTPS requests to `premid.app` or the presence website API. If you are using external domains, you will be required to explain why it is necessary. Only allowed API to make request is [`Fetch API`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 - Do **not** set fields in the presence data object to undefined after it has been declared, use the `delete` keyword instead. (for e.g., use `delete data.startTimestamp` instead of `data.startTimestamp = undefined`)
 - You are **not** allowed to write presences that change the functionality of a given website. This includes the addition, deletion, or modification of DOM elements.
-- Presences that uses ``buttons`` should follow extra requirements:
+- Presences that use ``buttons`` should follow extra requirements:
   - Redirects to main page are prohibited.
   - Promoting websites by them is prohibited.
   - They can't show addinational data when you can't show them in other fields.
