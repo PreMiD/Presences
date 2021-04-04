@@ -4,9 +4,8 @@ const presence = new Presence({
 strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+browsingStamp = Math.floor(Date.now() / 1000);
 
 let timestamps: number[],
   video:HTMLVideoElement,
@@ -14,7 +13,7 @@ let timestamps: number[],
   duration: number,
   paused: boolean,
   iFrameVideo: boolean,
-  playback:boolean
+  playback:boolean;
 
   presence.on(
     "iFrameData",
