@@ -34,7 +34,7 @@ title = document.title; //title of the page
   }
   else if (document.location.pathname.includes("/amv")) {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Watching cool AMV videos";
+    presenceData.details = "Watching AMV videos";
     presenceData.buttons = [{label:"Watch Video",url: document.location.href}];
  }
 
