@@ -7,7 +7,7 @@ const presence = new Presence({
     live: "presence.activity.live"
   });
 
-let author: string, title: string, url: string;
+let author: string, title: string, url: string, openUrlText: string;
 
 presence.on("UpdateData", async () => {
   const player = document.querySelector(
@@ -34,11 +34,13 @@ presence.on("UpdateData", async () => {
       title = normalDetails.textContent;
       url = new URL(normalDetails.getAttribute("href"), window.location.origin)
         .href;
+      openUrlText = 'Listen to Show';
       author = document.querySelector(
         "[class^='PlayerControls__ShowOwnerName']"
       ).textContent;
     } else if (liveIsPlaying) {
       url = window.location.href;
+      openUrlText = 'View Livestream';
       title = document.querySelector(
         "[class^='LiveStreamDetails__StreamTitleContainer'] > h4"
       ).textContent;
@@ -53,7 +55,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "mixcloud",
       smallImageKey: isPlaying ? "play" : "pause",
       smallImageText: isPlaying ? (await strings).play : (await strings).pause,
-      buttons: [{ label: 'OPEN', url: url }]
+      buttons: [{ label: openUrlText, url: url }]
     };
 
     if (liveIsPlaying) {
