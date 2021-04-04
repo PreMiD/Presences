@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     } else if (page.includes("/friends/")) {
       title = document.querySelector("#main > h2");
       if (title.textContent == "Your Friends") {
-        presenceData.details = `Viewing my friends`;
+        presenceData.details = `Viewing their friends`;
         presenceData.buttons = [{label: "View Friends", url: window.location.href}];
       } else {
         presenceData.details = `Viewing the friends of:`;
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "General Settings";
     } else if (page == "/settings/friends") {
       presenceData.details = "Viewing:";
-      presenceData.state = "My Friends";
+      presenceData.state = "Their Friends";
     } else if (page == "/settings/quests") {
       presenceData.details = "Viewing:";
       presenceData.state = "Quests";
@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.textContent;
       presenceData.buttons = [{label: "Play Game", url: window.location.href}];
     } else {
-      presenceData.details = "Error | idk this page.";
+      presenceData.details = "idk this page.";
       presenceData.state = "Create an issue on github";
     }
 
