@@ -1,16 +1,41 @@
 const presence = new Presence({
   clientId: "810203651317432351"
 }),
-browsingStamp = Math.floor(Date.now() / 1000);
+strings = presence.getStrings({
+  play: "presence.playback.playing",
+  pause: "presence.playback.paused",
+  browsing: "presence.activity.browsing"
+});
 
+function getTimestamps(
+videoTime: number,
+videoDuration: number
+): Array<number> {
+const startTime = Date.now(),
+  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+return [Math.floor(startTime / 1000), endTime];
+}
+const browsingStamp = Math.floor(Date.now() / 1000);
+
+
+let timestamps,
+  video:any,
+  iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean,
+  playback;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "geno",
     startTimestamp: browsingStamp
 
   },
+
+  
 title = document.title; //title of the page
 
+  
   if (document.location.pathname == "/" ) {
     presenceData.details = "Exploring Genoanime";
   } else if (document.location.pathname.includes("/browse")) {
@@ -24,6 +49,28 @@ title = document.title; //title of the page
     presenceData.details = title;
     presenceData.state = 'Episode '+ String(document.location.href.split("episode=")[1]);
     presenceData.buttons = [{label:"Watch Episode",url: document.location.href}];
+    video = document.querySelector(
+      "div > div.plyr__video-wrapper > video"
+    );
+    (currentTime = video.currentTime),
+    (duration = video.duration),
+    (paused = video.paused),
+    (timestamps = getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    ));
+    if (!isNaN(duration)) {
+      presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
+      presenceData.smallImageText = paused
+        ? (await strings).pause
+        : (await strings).play;
+      presenceData.startTimestamp = timestamps[0];
+      presenceData.endTimestamp = timestamps[1];
+      if (paused) {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
+    }
  }
   else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching Catalogue";
