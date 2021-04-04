@@ -19,6 +19,12 @@
   "category": "other",
   "settings": [
     {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
       "id": "timeElapsed",
       "title": "Show elapsed time",
       "icon": "fad fa-hourglass-half",
@@ -29,12 +35,6 @@
       "title": "Show buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
-    },
-    {
-      "id": "privacy",
-      "title": "Privacy Mode",
-      "icon": "fad fa-user-secret",
-      "value": false
     },
     {
       "id": "logo",
