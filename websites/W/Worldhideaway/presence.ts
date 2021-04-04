@@ -6,12 +6,11 @@ title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
   },
   page = window.location.pathname,
   expage = window.location.href;
-
-    presenceData.startTimestamp = browsingStamp;
     if (page === "/") {
       search = document.querySelector("#masthead > div.header-search-wrap > div > form > label > input");
       if (!search) {
