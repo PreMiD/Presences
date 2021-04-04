@@ -12,14 +12,12 @@ presence.on("UpdateData", async () => {
   page = window.location.pathname;
     if (page === "/") {
       search = document.querySelector("#search-input");
-      if (!search) {
+      if (!search || search.value === "") {
         presenceData.details = "Viewing The Homepage";
-      } else if (search.value !== "") {
+      } else {
         presenceData.details = "Searching:";
         presenceData.state = search.value;
         presenceData.smallImageKey = "searching";
-      } else { 
-        presenceData.details = "Viewing the homepage";
       }
     } else if (page.includes("/category/")) {
       if (page == "/category/all") {
@@ -64,30 +62,25 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [{label: "View Profile", url: window.location.href}];
     } else if (page == "/register" || page == "/register/") {
       presenceData.details = "Registering";
-    } else if (page == "/settings/general") {
+    } else if (page.includes("/settings")) {
       presenceData.details = "Viewing:";
+    if (page == "/settings/general") {
       presenceData.state = "General Settings";
     } else if (page == "/settings/friends") {
-      presenceData.details = "Viewing:";
       presenceData.state = "Their Friends";
     } else if (page == "/settings/quests") {
-      presenceData.details = "Viewing:";
       presenceData.state = "Quests";
     } else if (page == "/settings/favs") {
-      presenceData.details = "Viewing:";
       presenceData.state = "Favs";
     } else if (page == "/settings/contact") {
-      presenceData.details = "Viewing:";
       presenceData.state = "Contact Settings";
     } else if (page == "/settings/accounts") {
-      presenceData.details = "Viewing:";
       presenceData.state = "Soicial Settings";
     } else if (page == "/settings/purchases") {
-      presenceData.details = "Viewing:";
       presenceData.state = "My Purchases";
     } else if (page == "/settings/password") {
-      presenceData.details = "Viewing:";
       presenceData.state = "Password Settings";
+    }
     } else if (page.includes("/games/")) {
       title = document.querySelector("#content-canvas > section.game-header.clearfix > h1");
       presenceData.details = "Browsing:";
