@@ -1,17 +1,3 @@
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 const presence = new Presence({ clientId: "639591760791732224" }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -73,11 +59,11 @@ presence.on("UpdateData", async () => {
       //video
     } else if (document.location.pathname.includes("/video/")) {
       video = document.querySelector(
-        "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+        "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside.video-control-show > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
       );
       if (video == null) {
         video = document.querySelector(
-          "#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.video-state-pause > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+          "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
       }
       if (video == null) {
@@ -98,7 +84,7 @@ presence.on("UpdateData", async () => {
       videoCurrentTime = video.currentTime;
       videoPaused = video.paused;
 
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
         Math.floor(videoCurrentTime),
         Math.floor(videoDuration)
       );
@@ -125,11 +111,11 @@ presence.on("UpdateData", async () => {
       }
       if (multi_user != null) {
         user = document.querySelector(
-          "#member-container > div:nth-child(1) > div.panel > div > a"
+          "#member-container > div:nth-child(1) > div.avatar-name__container > a"
         );
       } else {
         user = document.querySelector(
-          "#v_upinfo > div.u-info > div > a.username"
+          "#v_upinfo > div.up-info_right > div.name > a.username"
         );
       }
       presenceData.details = title.innerText;
@@ -141,7 +127,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing their history";
       //活动
     } else if (document.location.pathname.includes("/blackboard/")) {
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       );
@@ -172,7 +158,7 @@ presence.on("UpdateData", async () => {
       );
       if (video == null) {
         video = document.querySelector(
-          "#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.video-state-pause > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
+          "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
       }
       if (video == null) {
@@ -193,7 +179,7 @@ presence.on("UpdateData", async () => {
       videoCurrentTime = video.currentTime;
       paused = video.paused;
 
-      const timestamps = getTimestamps(
+      const timestamps = presence.getTimestamps(
         Math.floor(videoCurrentTime),
         Math.floor(videoDuration)
       );
@@ -340,7 +326,7 @@ presence.on("UpdateData", async () => {
     videoCurrentTime = video.currentTime;
     videoPaused = video.paused;
 
-    const timestamps = getTimestamps(
+    const timestamps = presence.getTimestamps(
       Math.floor(videoCurrentTime),
       Math.floor(videoDuration)
     );
