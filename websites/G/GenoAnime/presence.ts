@@ -20,7 +20,7 @@ title = document.title; //title of the page
   }
   else if (document.location.pathname.includes("/details")) {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Browsing on Genoanime";
+    presenceData.details = "Browsing...";
   } 
   else if (document.location.pathname.includes("/watch")) {
     presenceData.startTimestamp = browsingStamp;
