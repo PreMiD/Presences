@@ -4,7 +4,7 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    live: "presence.activity.live",
+    live: "presence.activity.live"
   });
 
 let author: string, title: string, url: string;
@@ -18,14 +18,13 @@ presence.on("UpdateData", async () => {
     const normalIsPlaying: boolean =
       document
         .querySelector("div[class^='PlayButton__PlayerControl']")
-        ?.getAttribute("aria-label") === "Pause";
-
-    const liveIsPlaying: boolean =
+        ?.getAttribute("aria-label") === "Pause"
+    ,
+    liveIsPlaying: boolean =
       document
         .querySelector("[class^=LiveVideo__VideoContainer] .shaka-play-button")
-        ?.getAttribute("icon") === "pause";
-
-    const isPlaying = normalIsPlaying || liveIsPlaying;
+        ?.getAttribute("icon") === "pause",
+     isPlaying = normalIsPlaying || liveIsPlaying;
 
     if (normalIsPlaying) {
       const normalDetails = document.querySelector(
