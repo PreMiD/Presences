@@ -4,7 +4,6 @@ const presence = new Presence({
 strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused",
-  browsing: "presence.activity.browsing"
 });
 
 function getTimestamps(
@@ -17,14 +16,11 @@ return [Math.floor(startTime / 1000), endTime];
 }
 const browsingStamp = Math.floor(Date.now() / 1000);
 
-
 let timestamps,
-  video:any,
-  iFrameVideo: boolean,
+  video:HTMLVideoElement,
   currentTime: number,
   duration: number,
-  paused: boolean,
-  playback;
+  paused: boolean;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "geno",
