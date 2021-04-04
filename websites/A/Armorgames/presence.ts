@@ -99,8 +99,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.textContent;
       presenceData.buttons = [{label: "Play Game", url: window.location.href}];
     } else {
-      presenceData.details = "idk this page.";
-      presenceData.state = "Create an issue on github";
+      presenceData.details = "Page Not Found";
     }
 
   if (presenceData.details === null) {
