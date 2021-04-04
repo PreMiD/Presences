@@ -6,21 +6,36 @@ strings = presence.getStrings({
   pause: "presence.playback.paused"
 });
 
-function getTimestamps(
-videoTime: number,
-videoDuration: number
-): Array<number> {
-const startTime = Date.now(),
-  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-return [Math.floor(startTime / 1000), endTime];
-}
 const browsingStamp = Math.floor(Date.now() / 1000);
 
-let timestamps,
+let timestamps: number[],
   video:HTMLVideoElement,
   currentTime: number,
   duration: number,
-  paused: boolean;
+  paused: boolean,
+  iFrameVideo: boolean,
+  playback:boolean
+
+  presence.on(
+    "iFrameData",
+    (data: {
+      iframe_video: {
+        duration: number;
+        iFrameVideo: boolean;
+        currTime: number;
+        paused: boolean;
+      };
+    }) => {
+      playback = data.iframe_video.duration !== null ? true : false;
+      if (playback) {
+        iFrameVideo = data.iframe_video.iFrameVideo;
+        currentTime = data.iframe_video.currTime;
+        duration = data.iframe_video.duration;
+        paused = data.iframe_video.paused;
+      }
+    }
+  );
+  
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "geno",
@@ -43,16 +58,27 @@ title = document.title; //title of the page
     presenceData.details = title;
     presenceData.state = 'Episode '+ String(document.location.href.split("episode=")[1]);
     presenceData.buttons = [{label:"Watch Episode",url: document.location.href}];
-    video = document.querySelector(
-      "div > div.plyr__video-wrapper > video"
-    );
-    (currentTime = video.currentTime),
-    (duration = video.duration),
-    (paused = video.paused),
-    (timestamps = getTimestamps(
-      Math.floor(currentTime),
-      Math.floor(duration)
-    ));
+
+    if (iFrameVideo) {
+      timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      );
+    } else{
+      video = document.querySelector(
+        "div > div.plyr__video-wrapper > video"
+      );
+      if (video){
+        (currentTime = video.currentTime),
+        (duration = video.duration),
+        (paused = video.paused),
+        (timestamps = presence.getTimestamps(
+          Math.floor(currentTime),
+          Math.floor(duration)
+        ));
+      }
+    }
+    
     if (!isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
       presenceData.smallImageText = paused

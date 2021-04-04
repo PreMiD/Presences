@@ -20,5 +20,6 @@
     "amv",
     "videos"
   ],
+  "iframe": true,
   "category": "anime"
 }
