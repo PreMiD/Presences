@@ -28,9 +28,7 @@ presence.on("UpdateData", async () => {
 
   },
 
-  
 title = document.title; //title of the page
-
   
   if (document.location.pathname == "/" ) {
     presenceData.details = "Exploring Genoanime";
