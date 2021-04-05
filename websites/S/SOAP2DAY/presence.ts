@@ -33,7 +33,7 @@ constructAction: Record<string, string> = {
   "home":      "Checking out the home page",
   "faq":       "Reading the FAQ",
   "tv":        "Relaxing to some TV"
-}
+};
 
 presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
