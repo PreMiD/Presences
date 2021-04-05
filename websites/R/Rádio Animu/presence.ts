@@ -1,16 +1,16 @@
 const presence = new Presence({
-    clientId: "691794350081966080"
+    clientId: "828278673680498699"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing"
   });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let artist;
-let title;
-let playing;
+let artist: string;
+let title: string;
+let playing: boolean ;
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", (data: any) => {
   playing = data.iframe_radio.playing;
   if (playing) {
     artist = data.iframe_radio.artist;
@@ -29,6 +29,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = title;
     presenceData.smallImageKey = "play";
     presenceData.smallImageText = (await strings).play;
+    presenceData.buttons = [{label: "Ouça aqui!", url: document.location.href }];
   } else if (document.location.pathname.includes("/grade/")) {
     presenceData.details = "Grade de Programação";
     presenceData.smallImageKey = "reading";
@@ -50,10 +51,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/suafansingaqui/")) {
     presenceData.details = "Sua Fansing Aqui";
     presenceData.smallImageKey = "reading";
+  } else if (document.location.pathname == "/historia/") {
+    presenceData.details = "História";
+    presenceData.smallImageKey = "reading";
   } else if (document.location.pathname == "/") {
     presenceData.details = "Página inicial";
     presenceData.smallImageKey = "reading";
-  }
+  } 
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
