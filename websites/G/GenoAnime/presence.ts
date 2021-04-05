@@ -59,7 +59,6 @@ title = document.title.slice(0, -13); //title of the page
     presenceData.state = 'Episode '+ String(document.location.href.split("episode=")[1]);
     synopsis_link = String(document.querySelector("#anime_details_breadcrumbs"));
     presenceData.buttons = [{label:"Watch Episode",url: document.location.href},{label:"Check Synopsis",url: String(synopsis_link)}];
-    // presenceData.buttons = [{label:"Watch Episode",url: document.location.href}];
 
     if (iFrameVideo) {
       timestamps = presence.getTimestamps(
