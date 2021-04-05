@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
     presenceData = {
       state: getTitle(),
       ...presenceData
-    }
+    };
   }
 
   if (presenceData.details == null) {
