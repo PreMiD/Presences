@@ -37,12 +37,14 @@ const constructAction: Record<string, string> = {
 }
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
+  let presenceData: PresenceData = {
     largeImageKey: "icon",
     details: constructAction[getAction()],
-    state: ["movie", "tv", "sport"].includes(getAction()) ? getTitle() : "",
-    startTimestamp: new Date().getTime(),
+    startTimestamp: Math.floor(Date.now() / 1000),
   };
+  if (["movie", "tv", "sport"].includes(getAction())) {
+    presenceData.state = getTitle();
+  }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
