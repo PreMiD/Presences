@@ -6,7 +6,6 @@ strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused"
 }),
-      
 browsingStamp = Math.floor(Date.now() / 1000); 
 
 let timestamps: number[],
@@ -69,13 +68,13 @@ title = document.title.slice(0, -13); //title of the page
         "div > div.plyr__video-wrapper > video"
       );
       if (video){
-        (currentTime = video.currentTime),
-        (duration = video.duration),
-        (paused = video.paused),
-        (timestamps = presence.getTimestamps(
+        currentTime = video.currentTime,
+        duration = video.duration,
+        paused = video.paused,
+        timestamps = presence.getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
-        ));
+        );
       }
     }
     
@@ -91,7 +90,6 @@ title = document.title.slice(0, -13); //title of the page
         delete presenceData.endTimestamp;
       }
     }
-    else if (isNaN(duration)){presenceData.startTimestamp = browsingStamp}
  }
   else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching For...";
