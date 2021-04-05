@@ -1,3 +1,4 @@
+
 const presence = new Presence({
   clientId: "810203651317432351"
 }),
@@ -13,7 +14,7 @@ let timestamps: number[],
   paused: boolean,
   iFrameVideo: boolean,
   playback:boolean,
-  senpai: string; 
+  senpai: string;
   presence.on(
     "iFrameData",
     (data: {
@@ -41,10 +42,6 @@ presence.on("UpdateData", async () => {
 title = document.title.slice(0, -13); //title of the page  
   if (document.location.pathname == "/" ) {
     presenceData.details = "Exploring Genoanime";
-	 presenceData.smallImageKey = "pause";
-	presenceData.smallImageText = pause
-        ? (await strings).pause
-        : (await strings).play;
   } else if (document.location.pathname.includes("/browse")) {
     presenceData.details = "Exploring Genoanime library";
     presenceData.buttons = [{label:"View Library",url: document.location.href}];
