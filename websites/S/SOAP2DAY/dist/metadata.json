@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "SOAP2DAY",
+  "author": {
+    "name": "fun",
+    "id": "217348698294714370"
+  },
+  "category": "socials",
+  "logo": "https://www.google.com/s2/favicons?domain=soap2day.to",
+  "thumbnail": "https://strelizia.cc/zcC8wBhzhFn1aRS5qiLylH7TSy9Lmpiq.png",
+  "version": "1.0.0",
+  "color": "#9eeae7",
+  "tags": [
+    "stream",
+    "soap2day",
+    "movies",
+    "tv",
+    "friends"
+  ],
+  "url": [
+    "soap2day.to",
+    "soap2day.im",
+    "soap2day.ac",
+    "soap2day.se",
+    "s2dfree.to",
+    "s2dfree.is",
+    "s2dfree.in",
+    "s2dfree.nl",
+    "s2dfree.cc",
+    "s2dfree.de"
+  ],
+  "description": {
+    "en": "You can watch all videos without logging in or registration. Soap2day is free all the time, but there are few ads on videoplayer page."
+  }
+}
