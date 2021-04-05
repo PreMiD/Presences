@@ -42,7 +42,10 @@ presence.on("UpdateData", async () => {
     startTimestamp: Math.floor(Date.now() / 1000)
   };
   if (["movie", "tv", "sport"].includes(getAction())) {
-    presenceData.state = getTitle();
+    presenceData = {
+      state: getTitle(),
+      ...presenceData
+    }
   }
 
   if (presenceData.details == null) {
