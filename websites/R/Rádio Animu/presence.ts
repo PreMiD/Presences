@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = title;
     presenceData.smallImageKey = "play";
     presenceData.smallImageText = (await strings).play;
-    presenceData.buttons = [{label: "Ouça aqui!", url: document.location.href }];
+    presenceData.buttons = [{label: "Ouça aqui!", url: "https://www.animu.com.br/"}];
   } else if (document.location.pathname.includes("/grade/")) {
     presenceData.details = "Grade de Programação";
     presenceData.smallImageKey = "reading";
