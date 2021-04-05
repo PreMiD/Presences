@@ -19,6 +19,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Buscando:";
         presenceData.state = search.value;
         presenceData.smallImageKey = "searching";
+      }
     } else if (page === "/activity/") {
     presenceData.details = "Leyendo Sobre:";
     presenceData.state = "Actividad";
@@ -100,7 +101,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "reading";
    }
 
-  else if (presenceData.details === null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
