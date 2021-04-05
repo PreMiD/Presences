@@ -44,9 +44,6 @@ const presenceData: PresenceData = {
   title = document.title.slice(0, -13); //title of the page
 if (document.location.pathname == "/") {
   presenceData.details = "Exploring Genoanime";
-  presenceData.buttons = [
-    { label: "Visit Genoanime", url: document.location.href }
-  ];
 } else if (document.location.pathname.includes("/browse")) {
   presenceData.details = "Exploring Genoanime library";
   presenceData.buttons = [
