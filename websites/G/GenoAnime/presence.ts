@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
 
   },
 
-title = document.title; //title of the page
+title = document.title.slice(0, -13); //title of the page
   
   if (document.location.pathname == "/" ) {
     presenceData.details = "Exploring Genoanime";
@@ -79,7 +79,7 @@ title = document.title; //title of the page
     }
     
     if (!isNaN(duration)) {
-      presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
+      presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
@@ -90,6 +90,7 @@ title = document.title; //title of the page
         delete presenceData.endTimestamp;
       }
     }
+    else if (isNaN(duration)){presenceData.startTimestamp = browsingStamp;}
  }
   else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching Catalogue";
