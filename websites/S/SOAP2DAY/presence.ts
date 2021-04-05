@@ -1,8 +1,7 @@
 const presence = new Presence({
   clientId: "828549761376059441"
-});
-
-const getAction = (): string => {
+}),
+getAction = (): string => {
   if (window.location.href.indexOf("movielist") != -1) {
     return "movielist";
   } else if (window.location.href.indexOf("sportlist") != -1) {
@@ -19,12 +18,12 @@ const getAction = (): string => {
     return "faq";
   } else if (window.location.href.indexOf("Eczo") != -1) {
     return "tv";
-  } else { return "home"; }
-}
-const getTitle = (): string => {
+  } else { return "home" }
+},
+getTitle = (): string => {
   return document.getElementsByClassName("player-title-bar")[0].textContent.trim();
-}
-const constructAction: Record<string, string> = {
+},
+constructAction: Record<string, string> = {
   "movielist": "Searching for a movie",
   "sportlist": "Keeping up with sports",
   "tvlist":    "Looking for a TV show",
@@ -33,14 +32,14 @@ const constructAction: Record<string, string> = {
   "sport":     "Enjoying some sports",
   "home":      "Checking out the home page",
   "faq":       "Reading the FAQ",
-  "tv":        "Relaxing to some TV",
+  "tv":        "Relaxing to some TV"
 }
 
 presence.on("UpdateData", async () => {
   let presenceData: PresenceData = {
     largeImageKey: "icon",
     details: constructAction[getAction()],
-    startTimestamp: Math.floor(Date.now() / 1000),
+    startTimestamp: Math.floor(Date.now() / 1000)
   };
   if (["movie", "tv", "sport"].includes(getAction())) {
     presenceData.state = getTitle();
