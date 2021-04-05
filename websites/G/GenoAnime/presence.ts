@@ -6,14 +6,15 @@ strings = presence.getStrings({
   pause: "presence.playback.paused"
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
-
+     
 let timestamps: number[],
   video:HTMLVideoElement,
   currentTime: number,
   duration: number,
   paused: boolean,
   iFrameVideo: boolean,
-  playback:boolean;
+  playback:boolean,
+  synopsis_link: string; 
 
   presence.on(
     "iFrameData",
@@ -56,7 +57,9 @@ title = document.title.slice(0, -13); //title of the page
   else if (document.location.pathname.includes("/watch")) {
     presenceData.details = title;
     presenceData.state = 'Episode '+ String(document.location.href.split("episode=")[1]);
-    presenceData.buttons = [{label:"Watch Episode",url: document.location.href}];
+    synopsis_link = String(document.querySelector("#anime_details_breadcrumbs"));
+    presenceData.buttons = [{label:"Watch Episode",url: document.location.href},{label:"Check Synopsis",url: String(synopsis_link)}];
+    // presenceData.buttons = [{label:"Watch Episode",url: document.location.href}];
 
     if (iFrameVideo) {
       timestamps = presence.getTimestamps(
