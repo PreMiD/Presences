@@ -10,11 +10,11 @@ let artist: string;
 let title: string;
 let playing: boolean ;
 
-presence.on("iFrameData", (data: any) => {
-  playing = data.iframe_radio.playing;
+presence.on("iFrameData", (data: {playing: boolean, artist: string, title: string}) => {
+  playing = data.playing;
   if (playing) {
-    artist = data.iframe_radio.artist;
-    title = data.iframe_radio.title;
+    artist = data.artist;
+    title = data.title;
   }
 });
 
@@ -29,7 +29,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = title;
     presenceData.smallImageKey = "play";
     presenceData.smallImageText = (await strings).play;
-    presenceData.buttons = [{label: "Ouça aqui!", url: "https://www.animu.com.br/"}];
   } else if (document.location.pathname.includes("/grade/")) {
     presenceData.details = "Grade de Programação";
     presenceData.smallImageKey = "reading";
