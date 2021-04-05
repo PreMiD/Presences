@@ -78,8 +78,8 @@ presence.on("UpdateData", async () => {
     presenceData = {
       startTimestamp: Math.floor(Date.now() / 1000),
       ...presenceData
-    }
-  };
+    };
+  }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
