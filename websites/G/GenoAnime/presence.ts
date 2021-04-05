@@ -40,7 +40,6 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "geno",
     startTimestamp: browsingStamp
-
   },
 
 title = document.title.slice(0, -13); //title of the page
@@ -70,16 +69,15 @@ title = document.title.slice(0, -13); //title of the page
         "div > div.plyr__video-wrapper > video"
       );
       if (video){
-        (currentTime = video.currentTime),
-        (duration = video.duration),
-        (paused = video.paused),
-        (timestamps = presence.getTimestamps(
+        currentTime = video.currentTime,
+        duration = video.duration,
+        paused = video.paused,
+        timestamps = presence.getTimestamps(
           Math.floor(currentTime),
           Math.floor(duration)
-        ));
+        );
       }
     }
-    
     if (!isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
@@ -92,7 +90,6 @@ title = document.title.slice(0, -13); //title of the page
         delete presenceData.endTimestamp;
       }
     }
-    else if (isNaN(duration)){presenceData.startTimestamp = browsingStamp}
  }
   else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching Catalogue";
