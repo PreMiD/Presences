@@ -24,15 +24,15 @@ getText = (text: string): string => {
   return document.getElementsByClassName(text)[0].textContent.trim();
 },
 epochWithOffset = (h?: number, m?: number, s?: number): number => {
-  let now = new Date();
-  if (h) { now.setTime(now.getTime() + (h * 1000 * 60 * 60)); } // Hours
-  if (m) { now.setTime(now.getTime() + (m * 1000 * 60)); }      // Minutes
-  if (s) { now.setTime(now.getTime() + (s * 1000)); }           // Seconds
+  const now = new Date();
+  if (h) { now.setTime(now.getTime() + (h * 1000 * 60 * 60)) } // Hours
+  if (m) { now.setTime(now.getTime() + (m * 1000 * 60)) }      // Minutes
+  if (s) { now.setTime(now.getTime() + (s * 1000)) }           // Seconds
   return now.setTime(now.getTime());
 },
 getStatus = (): string => {
   const element = document.getElementById("t3").textContent.trim();
-  if (element === "") { return "Loading" } else { return element; }
+  if (element === "") { return "Loading" } else { return element }
 },
 constructAction: Record<string, string> = {
   "movielist": "Searching for a movie",
@@ -46,19 +46,18 @@ constructAction: Record<string, string> = {
   "tv":        "Relaxing to some TV"
 };
 let flag = false,
-watchStamp = 0,
-flag_set = false;
+watchStamp = 0;
 
 presence.on("UpdateData", async () => {
 
   let presenceData: PresenceData = {
     largeImageKey: "icon",
-    details: constructAction[getAction()],
+    details: constructAction[getAction()]
   };
   // If the user is watching something, get the title and set duration.
   if (["movie", "tv", "sport"].includes(getAction())) {
     // If paused, reset update remaining.
-    if (getStatus() == "Pause") { flag = false; }
+    if (getStatus() == "Pause") { flag = false }
 
     if (!flag) {
       const duration = getText("jw-text-duration").split(":").map(e => parseInt(e));
@@ -67,7 +66,7 @@ presence.on("UpdateData", async () => {
         case 2: watchStamp = epochWithOffset(null, duration[0], duration[1]);        break;
         case 3: watchStamp = epochWithOffset(duration[0], duration[1], duration[2]); break;
       }
-      if (!isNaN(watchStamp)) { flag = true; }
+      if (!isNaN(watchStamp)) { flag = true }
     }
     presenceData = {
       state: `${getStatus()} | ${getText("player-title-bar")}`,
@@ -80,7 +79,7 @@ presence.on("UpdateData", async () => {
       startTimestamp: Math.floor(Date.now() / 1000),
       ...presenceData
     }
-  }
+  };
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
