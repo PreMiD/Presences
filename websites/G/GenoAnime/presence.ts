@@ -90,7 +90,7 @@ title = document.title.slice(0, -13); //title of the page
         delete presenceData.endTimestamp;
       }
     }
-    else if (isNaN(duration)){presenceData.startTimestamp = browsingStamp;}
+    else if (isNaN(duration)){presenceData.startTimestamp = browsingStamp}
  }
   else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching Catalogue";
