@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "searching";
       }
     } else if (page.includes("/category/")) {
-      if (page == "/category/all") {
+      if (page === "/category/all") {
         presenceData.details = "Viewing All Categories";
       } else {
         title = document.querySelector("#content-canvas > div.cap > div > h2 > a > span");
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = title.textContent;
         presenceData.buttons = [{label: "View Category", url: window.location.href}];
       }
-    } else if (page == "/community") {
+    } else if (page === "/community") {
       presenceData.details = `Viewing the forums`;
     } else if (page.includes("/forum/")) {
       title = document.querySelector("#content-canvas > main > h1");
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [{label: "View Thread", url: window.location.href}];
     } else if (page.includes("/friends/")) {
       title = document.querySelector("#main > h2");
-      if (title.textContent == "Your Friends") {
+      if (title.textContent === "Your Friends") {
         presenceData.details = `Viewing their friends`;
         presenceData.buttons = [{label: "View Friends", url: window.location.href}];
       } else {
@@ -60,27 +60,18 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Viewing Games Made By:`;
       presenceData.state = title.textContent;
       presenceData.buttons = [{label: "View Profile", url: window.location.href}];
-    } else if (page == "/register" || page == "/register/") {
+    } else if (page === "/register" || page === "/register/") {
       presenceData.details = "Registering";
     } else if (page.includes("/settings")) {
       presenceData.details = "Viewing:";
-    if (page == "/settings/general") {
-      presenceData.state = "General Settings";
-    } else if (page == "/settings/friends") {
-      presenceData.state = "Their Friends";
-    } else if (page == "/settings/quests") {
-      presenceData.state = "Quests";
-    } else if (page == "/settings/favs") {
-      presenceData.state = "Favs";
-    } else if (page == "/settings/contact") {
-      presenceData.state = "Contact Settings";
-    } else if (page == "/settings/accounts") {
-      presenceData.state = "Soicial Settings";
-    } else if (page == "/settings/purchases") {
-      presenceData.state = "My Purchases";
-    } else if (page == "/settings/password") {
-      presenceData.state = "Password Settings";
-    }
+    if (page === "/settings/general") presenceData.state = "General Settings";
+     else if (page === "/settings/friends") presenceData.state = "Their Friends";
+     else if (page === "/settings/quests") presenceData.state = "Quests";
+     else if (page === "/settings/favs") presenceData.state = "Favs";
+     else if (page === "/settings/contact") presenceData.state = "Contact Settings";
+     else if (page === "/settings/accounts") presenceData.state = "Soicial Settings";
+     else if (page === "/settings/purchases") presenceData.state = "My Purchases";
+     else if (page === "/settings/password") presenceData.state = "Password Settings";
     } else if (page.includes("/games/")) {
       title = document.querySelector("#content-canvas > section.game-header.clearfix > h1");
       presenceData.details = "Browsing:";
