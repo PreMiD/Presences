@@ -12,25 +12,22 @@ presence.on("UpdateData", async () => {
   page = window.location.pathname;
     if (page === "/") {
       search = document.querySelector("#search-input");
-      if (!search || search.value === "") {
-        presenceData.details = "Viewing The Homepage";
-      } else {
+      if (!search || search.value === "") presenceData.details = "Viewing The Homepage";
+       else {
         presenceData.details = "Searching:";
         presenceData.state = search.value;
         presenceData.smallImageKey = "searching";
       }
     } else if (page.includes("/category/")) {
-      if (page === "/category/all") {
-        presenceData.details = "Viewing All Categories";
-      } else {
+      if (page === "/category/all") presenceData.details = "Viewing All Categories";
+      else {
         title = document.querySelector("#content-canvas > div.cap > div > h2 > a > span");
         presenceData.details = "Viewing Category:";
         presenceData.state = title.textContent;
         presenceData.buttons = [{label: "View Category", url: window.location.href}];
       }
-    } else if (page === "/community") {
-      presenceData.details = `Viewing the forums`;
-    } else if (page.includes("/forum/")) {
+    } else if (page === "/community") presenceData.details = `Viewing the forums`;
+     else if (page.includes("/forum/")) {
       title = document.querySelector("#content-canvas > main > h1");
       presenceData.details = `Viewing Forum:`;
       presenceData.state = title.textContent.replace("Forums → ", "");
@@ -60,9 +57,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Viewing Games Made By:`;
       presenceData.state = title.textContent;
       presenceData.buttons = [{label: "View Profile", url: window.location.href}];
-    } else if (page === "/register" || page === "/register/") {
-      presenceData.details = "Registering";
-    } else if (page.includes("/settings")) {
+    } else if (page === "/register" || page === "/register/")  presenceData.details = "Registering";
+     else if (page.includes("/settings")) {
       presenceData.details = "Viewing:";
     if (page === "/settings/general") presenceData.state = "General Settings";
      else if (page === "/settings/friends") presenceData.state = "Their Friends";
@@ -82,14 +78,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Playing:";
       presenceData.state = title.textContent;
       presenceData.buttons = [{label: "Play Game", url: window.location.href}];
-    } else {
-      presenceData.details = "Page Not Found";
-    }
+    } else presenceData.details = "Page Not Found";
 
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
