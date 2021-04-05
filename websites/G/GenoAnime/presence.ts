@@ -1,12 +1,14 @@
-
 const presence = new Presence({
   clientId: "810203651317432351"
 }),
+      
 strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused"
 }),
-browsingStamp = Math.floor(Date.now() / 1000);     
+      
+browsingStamp = Math.floor(Date.now() / 1000); 
+
 let timestamps: number[],
   video:HTMLVideoElement,
   currentTime: number,
