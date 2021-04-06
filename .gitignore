@@ -16,5 +16,8 @@ package-lock.json
 **/.vscode/*
 **/.history
 
+# DeepCode cache
+**/.dccache
+
 # Exception for extension recommendations
 !**/.vscode/extensions.json
