@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
+  },
+  "contributors": [{
+    "name": "Brotツ",
+    "id": "495901098926669825"
+  }],
+  "service": "Tesla",
+  "description": {
+    "en": "Tesla, Inc. is an American electric vehicle and clean energy company based in Palo Alto, California. Tesla's current products include electric cars, battery energy storage from home to grid scale, solar panels and solar roof tiles, as well as other related products and services."
+  },
+  "url": "www.tesla.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/8FrVa6D.png",
+  "thumbnail": "https://i.imgur.com/20F9yxy.png",
+  "color": "#E82127",
+  "category": "other",
+  "settings": [
+    {
+      "id": "logo",
+      "title": "Icon",
+      "icon": "fad fa-icons",
+      "value": 0,
+      "values": ["Red", "Red with text", "White", "White with text"]
+    },
+    {
+      "id": "timeElapsed",
+      "title": "Show elapsed time",
+      "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
