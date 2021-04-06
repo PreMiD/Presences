@@ -7,10 +7,11 @@
   "url": "altearn.xyz",
   "description": {
     "en": "Altearn is a non-profit association which aims to develop and implement solutions and events for educational, scientific or awareness purposes.",
-    "fr": "Altearn est une association à but non-lucratif qui vise à déveloper et mettre en place des solutions et événements dans un but pédagogique, scientifique ou de sensibilisation."
+    "fr": "Altearn est une association à but non-lucratif qui vise à déveloper et mettre en place des solutions et événements dans un but pédagogique, scientifique ou de sensibilisation.",
+    "ga_IE": "Is cumann neamhbhrabúis é Altearn a bhfuil sé mar aidhm aige réitigh agus imeachtaí a fhorbairt agus a chur i bhfeidhm chun críocha oideachais, eolaíochta nó feasachta."
   },
   "service": "Altearn",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/FXRVkUd.png",
   "thumbnail": "https://i.imgur.com/dWA3LHB.png",
   "color": "#888888",

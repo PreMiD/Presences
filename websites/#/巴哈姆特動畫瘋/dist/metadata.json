@@ -8,10 +8,11 @@
     "en": "Completely free animation platform.",
     "nl": "Volledig gratis animatieplatform.",
     "zh_CN": "完全免费的动画平台。",
-    "zh_TW": "完全免費的動畫平台。"
+    "zh_TW": "完全免費的動畫平台。",
+    "ga_IE": "Ardán beochana go hiomlán saor in aisce."
   },
   "url": "ani.gamer.com.tw",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/24VLERu.png",
   "thumbnail": "https://i.imgur.com/atthc8l.png",
   "color": "#58bec9",

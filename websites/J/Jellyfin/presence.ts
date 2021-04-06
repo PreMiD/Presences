@@ -163,7 +163,7 @@ interface MediaSource {
   MediaAttachments: [];
   Formats: [];
   Bitrate: number;
-  RequiredHttpHeaders: {};
+  RequiredHttpHeaders: unknown;
   DefaultAudioStreamIndex: number;
 }
 
@@ -439,24 +439,24 @@ async function handleVideoPlayback(): Promise<void> {
     return;
   }
 
-  const videoPlayerElem = document.getElementsByTagName("video")[0];
+  const videoPlayerElem = document.getElementsByTagName(
+    "video"
+  )[0] as HTMLVideoElement;
 
   // this variables content will be replaced in details and status properties on presenceData
   let title, subtitle;
 
-  const // title on the header
-    headerTitleElem = document.querySelector("h3.pageTitle") as HTMLElement,
-    // title on the osdControls
-    osdTitleElem = videoPlayerPage.querySelector("h3.osdTitle") as HTMLElement;
+  // title on the header
+  const headerTitleElem = document.querySelector(
+    "h3.pageTitle"
+  ) as HTMLHeadingElement;
 
   // media metadata
   let mediaInfo: string | MediaInfo;
 
   // no background image, we're playing live tv
-  if ((videoPlayerElem as HTMLVideoElement).getAttribute("poster")) {
-    const backgroundImageUrl = (videoPlayerElem as HTMLVideoElement).getAttribute(
-      "poster"
-    );
+  if (videoPlayerElem.hasAttribute("poster")) {
+    const backgroundImageUrl = videoPlayerElem.getAttribute("poster");
 
     mediaInfo = await obtainMediaInfo(backgroundImageUrl.split("/")[4]);
   }
@@ -470,16 +470,16 @@ async function handleVideoPlayback(): Promise<void> {
   } else {
     switch (mediaInfo.Type) {
       case "Movie":
-        title = "Watching a Movie";
-        subtitle = osdTitleElem.innerText;
+        title = "Watching a Movie:";
+        subtitle = headerTitleElem.innerText;
         break;
       case "Series":
-        title = `Watching ${headerTitleElem.innerText}`;
-        subtitle = osdTitleElem.innerText;
+        title = "Watching a Series:";
+        subtitle = headerTitleElem.innerText;
         break;
       case "TvChannel":
         title = "Watching Live Tv";
-        subtitle = osdTitleElem.innerText;
+        subtitle = headerTitleElem.innerText;
         break;
       default:
         title = `Watching ${mediaInfo.Type}`;
@@ -681,7 +681,7 @@ async function handleWebClient(): Promise<void> {
       await handleItemDetails();
       break;
 
-    case "videoosd.html":
+    case "video":
       await handleVideoPlayback();
       break;
 
@@ -704,7 +704,7 @@ async function setDefaultsToPresence(): Promise<void> {
   if (presenceData.startTimestamp) {
     delete presenceData.startTimestamp;
   }
-  if (presenceData.endTimestamp) {
+  if (presenceData.endTimestamp && isNaN(presenceData.endTimestamp)) {
     delete presenceData.endTimestamp;
   }
 

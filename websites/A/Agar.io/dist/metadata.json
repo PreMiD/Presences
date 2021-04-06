@@ -6,10 +6,11 @@
   },
   "url": "agar.io",
   "description": {
-    "en": "The smash hit game! Control your cell and eat other players to grow larger! Play with millions of players around the world and try to become the biggest cell of all!"
+    "en": "The smash hit game! Control your cell and eat other players to grow larger! Play with millions of players around the world and try to become the biggest cell of all!",
+    "ga_IE": "An cluiche buailte smash! Rialú do chill agus ithe imreoirí eile chun fás níos mó! Seinn leis na milliúin imreoirí ar fud an domhain agus déan iarracht a bheith ar an gcill is mó ar fad!"
   },
   "service": "Agar.io",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "logo": "https://i.imgur.com/x2QZCXF.png",
   "thumbnail": "https://i.imgur.com/R1Ytqci.png",
   "color": "#ED1C24",

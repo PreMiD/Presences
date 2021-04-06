@@ -10,10 +10,11 @@
     "ar_SA": "ويكي الاقتباس هي عبارة عن مجموعة من الاقتباسات من الأشخاص البارزين والأعمال الإبداعية في أكثر من 75 لغة. ويشمل أيضا الأمثال ، والمأثورات والشعارات.",
     "zh_CN": "維基語錄是一個收集超過75種語言來自著名人物和創意作品的引文庫。 它包括諺語，助記符號和口號。",
     "fr": "Wikiquote est un recueil en ligne de citations sourcées de personnes et œuvres célèbres en plus de 75 langues. Il comporte également des proverbes, des formules mnémotechniques et des slogans.",
-    "es": "Wikiquote es una colección online de citas referenciadas de personas destacadas y trabajos creativos en más de 75 idiomas. Incluye proverbios, mnemotecnias y lemas."
+    "es": "Wikiquote es una colección online de citas referenciadas de personas destacadas y trabajos creativos en más de 75 idiomas. Incluye proverbios, mnemotecnias y lemas.",
+    "ga_IE": "Is bailiúchán ar líne é Wikiquote de luachana foinsithe ó dhaoine suntasacha agus saothair chruthaitheacha i mbreis agus 75 teanga. Cuimsíonn sé seanfhocail, mnemonics agus slogans freisin."
   },
   "url": "wikiquote.org",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/WCkNcSb.png",
   "thumbnail": "https://i.imgur.com/MZrut8J.png",
   "color": "#f9f9f9",

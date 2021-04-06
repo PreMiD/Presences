@@ -6,6 +6,7 @@ import { sync as glob } from "glob";
 import { join, normalize, relative, resolve, sep } from "path";
 import { format as prettier, resolveConfig } from "prettier";
 import { coerce, inc } from "semver";
+
 import execa = require("execa");
 
 /**
@@ -147,32 +148,3 @@ const readFile = (path: string): string =>
 
 // Call main
 main();
-
-/** Typings for the Metadata JSON file */
-interface Metadata {
-  author: { name: string; id: string };
-  contributors?: Array<{ name: string; id: string }>;
-  service: string;
-  description: Record<string, string>;
-  url: string;
-  version: string;
-  logo: string;
-  thumbnail: string;
-  color: string;
-  tags: string | Array<string>;
-  category: string;
-  iframe?: boolean;
-  regExp?: RegExp;
-  iframeRegExp?: RegExp;
-  button?: boolean;
-  warning?: boolean;
-  settings?: Array<{
-    id: string;
-    title: string;
-    icon: string;
-    if?: Record<string, string>;
-    placeholder?: string;
-    value?: string | number | boolean;
-    values?: Array<string | number | boolean>;
-  }>;
-}

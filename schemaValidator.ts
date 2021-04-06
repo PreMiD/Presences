@@ -1,10 +1,9 @@
 import "source-map-support/register";
 
-import * as fs from "fs";
-
 import { blue, green, red, yellow } from "chalk";
 
 import axios from "axios";
+import { readFileSync } from "fs";
 import { validate } from "jsonschema";
 
 const latestMetadataSchema = "https://schemas.premid.app/metadata/1.3",
@@ -27,12 +26,9 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.3",
     );
     stats.failedToValidate++;
   },
-  loadMetadata = (path: string): Metadata =>
-    JSON.parse(fs.readFileSync(path, "utf-8")),
-  changedFiles = fs
-    .readFileSync("./file_changes.txt", "utf-8")
-    .trim()
-    .split("\n"),
+  loadMetadata = (path: string): metadata =>
+    JSON.parse(readFileSync(path, "utf-8")),
+  changedFiles = readFileSync("./file_changes.txt", "utf-8").trim().split("\n"),
   metaFiles = changedFiles.filter((f: string) => f.endsWith("metadata.json"));
 
 (async (): Promise<void> => {
@@ -96,31 +92,6 @@ const latestMetadataSchema = "https://schemas.premid.app/metadata/1.3",
   }
 })();
 
-interface Metadata {
+interface metadata extends Metadata {
   schema: string;
-  author: { name: string; id: string };
-  contributors?: Array<{ name: string; id: string }>;
-  service: string;
-  description: Record<string, string>;
-  url: string;
-  version: string;
-  logo: string;
-  thumbnail: string;
-  color: string;
-  tags: string | Array<string>;
-  category: string;
-  iframe?: boolean;
-  regExp?: RegExp;
-  iframeRegExp?: RegExp;
-  button?: boolean;
-  warning?: boolean;
-  settings?: Array<{
-    id: string;
-    title: string;
-    icon: string;
-    if?: Record<string, string>;
-    placeholder?: string;
-    value?: string | number | boolean;
-    values?: Array<string | number | boolean>;
-  }>;
 }

@@ -202,7 +202,7 @@ presence.on("UpdateData", async () => {
         data.buttons = [
           {
             label: strings.watchVideo,
-            url: location.pathname
+            url: `https://www.hotstar.com${location.pathname}`
           }
         ];
       }

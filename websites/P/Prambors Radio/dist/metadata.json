@@ -8,11 +8,11 @@
     "en": "Prambors FM is a commercial radio network based in Jakarta, Indonesia. Launched on March 18, 1971 in Jakarta, the purpose of station was to play pop music with their target audience being teenagers and young adults. Prambors is known as a teen icon in Indonesia throughout the 80's and 90's. It is owned and operated by Masima Radio Network"
   },
   "url": [
-    "pramborsfm.com",
     "www.pramborsfm.com",
+    "live.pramborsfm.com",
     "streaming.pramborsfm.com"
   ],
-  "version": "1.2.5",
+  "version": "1.3.1",
   "logo": "https://i.imgur.com/GHM1owM.png",
   "thumbnail": "https://i.imgur.com/mhwloZI.png",
   "color": "#ffc925",

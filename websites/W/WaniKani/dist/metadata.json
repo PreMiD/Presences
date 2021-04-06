@@ -11,10 +11,11 @@
     "knowledge.wanikani.com"
   ],
   "description": {
-    "en": "WaniKani is a kanji learning application by Tofugu. 2,000 kanji. 6,000 vocabulary words. In just over a year."
+    "en": "WaniKani is a kanji learning application by Tofugu. 2,000 kanji. 6,000 vocabulary words. In just over a year.",
+    "ga_IE": "Is feidhmchlár foghlama kanji le Tofugu é WaniKani. 2,000 kanji. 6,000 focal foclóra. I mbeagán níos mó ná bliain."
   },
   "service": "WaniKani",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/NdlB8M5.png",
   "thumbnail": "https://i.imgur.com/8OKXkxY.png",
   "color": "#1BA0ED",

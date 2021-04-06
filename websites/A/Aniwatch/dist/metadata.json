@@ -5,10 +5,11 @@
   },
   "url": "aniwatch.me",
   "description": {
-    "en": "Aniwatch.me is a free anime streaming site with no ads and easy to use UI."
+    "en": "Aniwatch.me is a free anime streaming site with no ads and easy to use UI.",
+    "ga_IE": "Suíomh sruthú anime saor in aisce é Aniwatch.me gan aon fhógraí agus Chomhéadain atá éasca le húsáid."
   },
   "service": "Aniwatch",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://i.imgur.com/vyvEtfe.png",
   "thumbnail": "https://i.imgur.com/ai1Lxd6.png",
   "color": "#348FFF",

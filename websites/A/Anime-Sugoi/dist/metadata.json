@@ -6,10 +6,11 @@
   "service": "Anime-Sugoi",
   "description": {
     "en": "Anime-Sugoi stream your favorite anime completely for free with thai-sub and thai sound! | This website may requied vpn for access, other country will blocked!",
-    "th": "Anime-Sugoi เว็ปไซต์สตรีมมิ่งอนิเมะที่ทุกคนชื่นชอบ ฟรีเเละมีซับไทย"
+    "th": "Anime-Sugoi เว็ปไซต์สตรีมมิ่งอนิเมะที่ทุกคนชื่นชอบ ฟรีเเละมีซับไทย",
+    "ga_IE": "Sruthlaigh Anime-Sugoi an anime is fearr leat go hiomlán saor in aisce le fuaim thai-sub agus Téalainnis! | Féadfaidh an láithreán gréasáin seo vpn a iarraidh ar rochtain, cuirfear bac ar thír eile!"
   },
   "url": "www.anime-sugoi.com",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/7mAxf63.png",
   "thumbnail": "https://i.imgur.com/3wTOxd0.jpg",
   "color": "#ff6666",

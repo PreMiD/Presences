@@ -1,22 +1,16 @@
 import "source-map-support/register";
 
-import {
-  MongoClient,
-  DeleteWriteOpResultObject,
-  UpdateWriteOpResult
-} from "mongodb";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { sync as glob } from "glob";
-import {
-  CompilerOptions,
-  createProgram,
-  flattenDiagnosticMessageText,
-  getPreEmitDiagnostics
-} from "typescript";
-import { valid } from "semver";
+import { DeleteWriteOpResultObject, MongoClient, UpdateWriteOpResult } from "mongodb";
 import { join, normalize, resolve as rslv, sep } from "path";
-import { transformFileAsync as transform } from "@babel/core";
+import { valid } from "semver";
 import { minify as terser } from "terser";
+import {
+	CompilerOptions, createProgram, flattenDiagnosticMessageText, getPreEmitDiagnostics
+} from "typescript";
+
+import { transformFileAsync as transform } from "@babel/core";
 
 const url = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_IP}:27017`,
   dbname = "PreMiD";
@@ -191,7 +185,7 @@ const readFile = (path: string): string =>
 
     const compiledPresences = await Promise.all(
       dbDiff.map(async (file) => {
-        let metadata = file[0];
+        let metadata: customMetadata = file[0];
         const path = file[1],
           sources = glob(`${path}*.ts`),
           metadataFile = readJson<Metadata>(`${path}dist/metadata.json`);
@@ -346,17 +340,14 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-interface Metadata {
-  schema: string;
-  service: string;
-  version: string;
-  iframe?: boolean;
+interface customMetadata extends Metadata {
+  schema?: string;
 }
 
 interface DBdata {
   name: string;
   url: string;
-  metadata: Metadata;
+  metadata: customMetadata;
   presenceJs: string;
   iframeJs?: string;
 }

@@ -16,7 +16,7 @@
     "pl": "Tidal to strona do streamingowania muzyki z bardzo wysoką jakością audio."
   },
   "service": "Tidal",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "logo": "https://i.imgur.com/clJrylu.jpg",
   "thumbnail": "https://i.imgur.com/UXbP7qG.png",
   "color": "#000000",
@@ -32,6 +32,12 @@
       "title": "Privacy Mode",
       "icon": "fad fa-user-secret",
       "value": false
+    },
+    {
+      "id": "showQuality",
+      "title": "Show Song Quality",
+      "icon": "fas fa-music-alt",
+      "value": true
     }
   ]
 }
