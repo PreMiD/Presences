@@ -52,6 +52,39 @@ presence.on("UpdateData", async function () {
       }
     }
 
+  } else if(urlpath[urlpNum].startsWith("cybertruck")){
+    const num = parseInt(urlpNum) + 1;
+
+    presenceData.details = "Cybertruck";
+
+    if(urlpath[num] === "design") {
+      presenceData.state = "Designing";
+
+      if(set_showButtons) {
+        presenceData.buttons = [
+          {
+            label: "View Cybertruck",
+            url: window.location.href.replace(urlpath[num], "")
+          },
+          {
+            label: "Design Cybertruck",
+            url: window.location.href
+          }
+        ];
+      }
+    } else {
+      presenceData.details = "Viewing Cybertruck";
+
+      if(set_showButtons) {
+        presenceData.buttons = [
+          {
+            label: "View Cybertruck",
+            url: window.location.href
+          }
+        ];
+      }
+    }
+
   } else if(urlpath[urlpNum] === "teslaaccount") {
     const num = parseInt(urlpNum) + 1;
     presenceData.details = "Account";
