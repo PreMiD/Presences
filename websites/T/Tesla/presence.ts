@@ -113,7 +113,6 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if(urlpath[urlpNum] === "solarpanels") {
-      const num = parseInt(urlpNum) + 1;
       presenceData.details = "Solar Panels";
 
       if(set_showButtons) {
