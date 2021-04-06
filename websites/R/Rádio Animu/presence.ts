@@ -6,9 +6,7 @@ const presence = new Presence({
   });
 
 const browsingStamp = Math.floor(Date.now() / 1000);
-let artist: string;
-let title: string;
-let playing: boolean ;
+let artist: string, title: string, playing: boolean; 
 
 presence.on("iFrameData", (data: {playing: boolean, artist: string, title: string}) => {
   playing = data.playing;

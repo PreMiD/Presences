@@ -8,10 +8,10 @@
       "name": "fror",
       "id": "515668127829458945"
     },
-	{
-	 "name": "Bas950",
-     "id": "241278257335500811"
-	}
+    {
+      "name": "Bas950",
+      "id": "241278257335500811"
+    }
   ],
   "service": "Rádio Animu",
   "description": {
@@ -26,8 +26,8 @@
   "tags": [
     "brasil",
     "anime",
-	"radio",
-	"moe"
+    "radio",
+    "moe"
   ],
   "category": "music",
   "iframe": true
