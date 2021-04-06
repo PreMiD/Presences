@@ -138,7 +138,6 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if(urlpath[urlpNum] === "powerwall") {
-      const num = parseInt(urlpNum) + 1;
       presenceData.details = "Powerwall";
 
       if(set_showButtons) {
