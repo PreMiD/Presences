@@ -12,7 +12,10 @@
   "description": {
     "en": "Tesla, Inc. is an American electric vehicle and clean energy company based in Palo Alto, California. Tesla's current products include electric cars, battery energy storage from home to grid scale, solar panels and solar roof tiles, as well as other related products and services."
   },
-  "url": "www.tesla.com",
+  "url": [
+    "www.tesla.com",
+    "shop.tesla.com"
+  ],
   "version": "1.0.0",
   "logo": "https://i.imgur.com/8FrVa6D.png",
   "thumbnail": "https://i.imgur.com/20F9yxy.png",
@@ -39,6 +42,12 @@
       "id": "showButtons",
       "title": "Show buttons",
       "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "showCheckout",
+      "title": "Show shop summary",
+      "icon": "fas fa-store",
       "value": true
     }
   ]
