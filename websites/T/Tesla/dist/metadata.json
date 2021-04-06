@@ -18,6 +18,9 @@
   "thumbnail": "https://i.imgur.com/20F9yxy.png",
   "color": "#E82127",
   "category": "other",
+  "tags": [
+    "cars"
+  ],
   "settings": [
     {
       "id": "logo",
