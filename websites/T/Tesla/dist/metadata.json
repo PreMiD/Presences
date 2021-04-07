@@ -6,7 +6,7 @@
   },
   "contributors": [{
     "name": "Brotツ",
-    "id": "495901098926669825"
+    "id": "530707801463586816"
   }],
   "service": "Tesla",
   "description": {
@@ -17,7 +17,7 @@
     "www.tesla.com",
     "shop.tesla.com"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/8FrVa6D.png",
   "thumbnail": "https://i.imgur.com/20F9yxy.png",
   "color": "#E82127",
