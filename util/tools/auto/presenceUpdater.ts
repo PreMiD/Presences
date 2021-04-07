@@ -100,7 +100,7 @@ const readFile = (path: string): string =>
     }
   },
   compile = async (filesToCompile: string[]): Promise<void> => {
-    const premidTypings = join(__dirname, "@types", "premid", "index.d.ts"),
+    const premidTypings = join(__dirname, "../../../@types", "premid", "index.d.ts"),
       { compilerOptions: baseTsConfig } = readJson<{
         compilerOptions: CompilerOptions;
       }>(rslv(__dirname, "../../../tsconfig.json"));
