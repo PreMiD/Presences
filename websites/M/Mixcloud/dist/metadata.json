@@ -7,6 +7,10 @@
     {
       "name": "LaneSh4d0w",
       "id": "391596266087251969"
+    },
+    {
+      "name": "MilMike",
+      "id": "320501989375082496"
     }
   ],
   "service": "Mixcloud",
@@ -18,7 +22,7 @@
     "nl": "Luister gratis naar de beste DJ's en radiopresentatoren ter wereld."
   },
   "url": "www.mixcloud.com",
-  "version": "1.2.6",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/I3yX6NQ.png",
   "thumbnail": "https://i.imgur.com/x4W3FoT.jpg",
   "color": "#5000ff",

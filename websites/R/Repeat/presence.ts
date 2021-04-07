@@ -38,7 +38,13 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       details: settings.details,
       state: settings.state,
-      smallImageText: `${data.onAir.name || "AutoDJ"} is live!`
+      smallImageText: `${data.onAir.name || "AutoDJ"} is live!`,
+      buttons: [
+        {
+          label: "Tune in",
+          url: "https://live.repeat.pw"
+        }
+      ]
     };
 
   if (settings.timestamp) presenceData.startTimestamp = timestamp;

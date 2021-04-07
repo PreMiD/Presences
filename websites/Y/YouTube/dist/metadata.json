@@ -24,13 +24,14 @@
     "nl": "Geniet van de video's en muziek waar je van houdt, upload originele inhoud en deel het allemaal met vrienden, familie en de wereld op YouTube.",
     "tr": "Sevdiğiniz videoların ve müziğin keyfini çıkarın, orijinal içerik yükleyin ve hepsini YouTube'da arkadaşlarınızla, ailenizle ve tüm dünyayla paylaşın.",
     "zh_CN": "享受你喜欢的视频和音乐，上传原创内容，并在YouTube上与朋友、家人和世界分享。",
-    "zh_TW": "欣賞您喜歡的影片和音樂，上傳原始內容，並在YouTube上與朋友，家人和世界分享。"
+    "zh_TW": "欣賞您喜歡的影片和音樂，上傳原始內容，並在YouTube上與朋友，家人和世界分享。",
+    "ga_IE": "Bain sult as na físeáin agus an ceol is breá leat, uaslódáil ábhar bunaidh, agus déan é a roinnt le cairde, le do mhuintir agus leis an domhan ar YouTube."
   },
   "url": [
     "www.youtube.com",
     "studio.youtube.com"
   ],
-  "version": "5.1.1",
+  "version": "5.1.2",
   "logo": "https://i.imgur.com/C9ZEmge.png",
   "thumbnail": "https://i.imgur.com/3QfIc5v.jpg",
   "color": "#E40813",

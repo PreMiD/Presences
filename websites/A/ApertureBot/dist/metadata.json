@@ -14,7 +14,7 @@
     "aperturebot.science",
     "dashboard.aperturebot.science"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/0Tw3aDA.png",
   "thumbnail": "https://i.imgur.com/LOClCfu.png",
   "color": "#2c2834",
@@ -26,7 +26,8 @@
   "description": {
     "en": "ApertureBot is a fork of b1nzy's rowboat, a utilitarian and administration assistant for Discord.",
     "nl": "ApertureBot is een fork van de rowboat van b1nzy, een utilitaire en administratieve assistent voor Discord.",
-    "zh_CN": "ApertureBot, 你全新的Discord服务器助理！"
+    "zh_CN": "ApertureBot, 你全新的Discord服务器助理！",
+    "ga_IE": "Is forc é ApertureBot de bhád rósta b1nzy, cúntóir utilitarian agus riaracháin do Discord."
   },
   "category": "other"
 }

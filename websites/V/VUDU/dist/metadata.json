@@ -5,10 +5,11 @@
   },
   "url": "www.vudu.com",
   "description": {
-    "en": "Vudu distributes full-length movies and TV shows to internet-enabled devices in the United States of America."
+    "en": "Vudu distributes full-length movies and TV shows to internet-enabled devices in the United States of America.",
+    "ga_IE": "Dáileann Vudu scannáin lánfhada agus seónna teilifíse ar ghléasanna atá cumasaithe ar an idirlíon i Stáit Aontaithe Mheiriceá."
   },
   "service": "VUDU",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "logo": "https://i.imgur.com/ialSC46.png",
   "thumbnail": "https://i.imgur.com/4z07lus.png",
   "color": "#236cba",

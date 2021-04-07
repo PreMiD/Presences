@@ -1,44 +1,76 @@
 const presence = new Presence({
-  clientId: "630428033966276612"
-});
-const strings = presence.getStrings({
-  play: "presence.playback.playing",
-  pause: "presence.playback.paused"
-});
-let presenceData: PresenceData = {
-  largeImageKey: "logo"
-};
+    clientId: "630428033966276612"
+  }),
+  strings = presence.getStrings({
+    pause: "presence.playback.paused"
+  }),
+  presenceData: PresenceData = {
+    largeImageKey: "logo"
+  };
+
 let timestamp: number;
 
 presence.on("UpdateData", async () => {
-  const pause = (await strings).pause,
-    play = (await strings).play;
-  if (document.location.hostname.startsWith("streaming")) {
+  const pause = (await strings).pause;
+  if (
+    ["streaming.pramborsfm.com", "live.pramborsfm.com"].includes(
+      document.location.hostname
+    )
+  ) {
+    presenceData.buttons = [
+      {
+        label: "Listen to Prambors",
+        url: "https://live.pramborsfm.com"
+      }
+    ];
     if (!timestamp) timestamp = Date.now();
-    const status = document.querySelector("#playerBtn")
-      ? document.querySelector("#playerBtn").className
-      : null;
-    if (status === "stopped") {
-      timestamp = null;
-      delete presenceData.startTimestamp;
-      presenceData.smallImageKey = "pause";
-      presenceData.smallImageText = pause;
-    } else if (status === "playing") {
-      presenceData.smallImageKey = "live";
-      presenceData.smallImageText = "Streaming";
-      presenceData.startTimestamp = timestamp;
-    } else {
-      presenceData.smallImageKey = "play";
-      presenceData.smallImageText = play;
+    switch (document.location.hostname) {
+      case "streaming.pramborsfm.com": {
+        const status = document.querySelector("#playerBtn")?.className;
+        if (status === "stopped") {
+          timestamp = null;
+          delete presenceData.startTimestamp;
+          presenceData.smallImageKey = "pause";
+          presenceData.smallImageText = pause;
+        } else if (status === "playing") {
+          presenceData.smallImageKey = "live";
+          presenceData.smallImageText = "Listening";
+          presenceData.startTimestamp = timestamp;
+        }
+        presenceData.state = document
+          .querySelectorAll("span[data-radium=true]")
+          .item(3).textContent;
+        presenceData.details = document
+          .querySelectorAll("span[data-radium=true]")
+          .item(2).textContent;
+        break;
+      }
+      case "live.pramborsfm.com": {
+        const buttonAction = [
+          ...[...document.querySelectorAll("button")].pop().classList
+        ]
+          .pop()
+          .split("--")
+          .pop();
+        if (buttonAction === "play") {
+          timestamp = null;
+          delete presenceData.startTimestamp;
+          presenceData.smallImageKey = "pause";
+          presenceData.smallImageText = pause;
+        } else if (buttonAction === "pause") {
+          presenceData.smallImageKey = "live";
+          presenceData.smallImageText = "Listening";
+          presenceData.startTimestamp = timestamp;
+        }
+        presenceData.state = document.querySelector(
+          ".td-player-vertical__track-info__artist-name"
+        ).textContent;
+        presenceData.details = document.querySelector(
+          ".td-player-vertical__track-info__cue-title"
+        ).textContent;
+        break;
+      }
     }
-    presenceData.state = document
-      .querySelectorAll("span[data-radium=true]")
-      .item(3).textContent;
-    presenceData.details = document
-      .querySelectorAll("span[data-radium=true]")
-      .item(2).textContent;
-  } else {
-    presenceData = null;
   }
-  presenceData ? presence.setActivity(presenceData) : presence.setActivity();
+  presence.setActivity(presenceData);
 });
