@@ -1,25 +1,22 @@
 const presence = new Presence({
     clientId: "817856303719907389"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+    browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = { 
         largeImageKey: "logo",
         startTimestamp: browsingStamp
     };
-
     if (document.location.pathname.includes("/")) {
-        
         presenceData.details = "Viewing Page:";
         presenceData.state = "Home page";
         presenceData.startTimestamp = browsingStamp;
         };
     if (document.location.pathname.includes("/mangas")) {
 
-        let chapter = document.getElementById("selectCh") as HTMLSelectElement;
-        let page = document.getElementById("selectPg") as HTMLSelectElement;
+        let chapter = document.getElementById("selectCh") as HTMLSelectElement,
+            page = document.getElementById("selectPg") as HTMLSelectElement;
 
         presenceData.details = "Reading " + 
             document.querySelector(".tl-titre").textContent + ":";
