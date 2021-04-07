@@ -10,7 +10,8 @@
   }],
   "service": "Tesla",
   "description": {
-    "en": "Tesla, Inc. is an American electric vehicle and clean energy company based in Palo Alto, California. Tesla's current products include electric cars, battery energy storage from home to grid scale, solar panels and solar roof tiles, as well as other related products and services."
+    "en": "Tesla is accelerating the world's transition to sustainable energy with electric cars, solar and integrated renewable energy solutions for homes and businesses.",
+    "nl": "Tesla versnelt de wereldwijde transitie naar duurzame energie, met elektrische auto's, zonnepanelen en geïntegreerde duurzame energieoplossingen voor woningen en bedrijven."
   },
   "url": [
     "www.tesla.com",
