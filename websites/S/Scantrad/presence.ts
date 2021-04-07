@@ -14,12 +14,10 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingStamp;
         };
     if (document.location.pathname.includes("/mangas")) {
-
         let chapter = document.getElementById("selectCh") as HTMLSelectElement,
             page = document.getElementById("selectPg") as HTMLSelectElement;
 
-        presenceData.details = "Reading " + 
-            document.querySelector(".tl-titre").textContent + ":";
+        presenceData.details = "Reading " + document.querySelector(".tl-titre").textContent + ":";
         presenceData.state = chapter.options[chapter.selectedIndex].text.replace('Chapitre', 'Chapter') + " | " + page.options[page.selectedIndex].text;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Reading a scan";
