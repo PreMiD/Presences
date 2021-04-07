@@ -1,17 +1,16 @@
 const presence = new Presence({
   clientId: "825888886285795329"
-})
+});
 let elapsedTime: number = null;
 
 presence.on("UpdateData", async () => {
   const locationHref = document.location.href, 
         locationHost = document.location.host, 
-        locationPath = document.location.pathname;
+        locationPath = document.location.pathname,
+        presenceData: PresenceData = {
+          largeImageKey: "glimesh_logo"
+        };
 
-  const presenceData: PresenceData = {
-    largeImageKey: "glimesh_logo"
-  }
-  
   if (locationHost == "glimesh.tv") {
     // On Main Glimesh Website... Global Presence incase new directory we don't yet support.
     
@@ -23,7 +22,7 @@ presence.on("UpdateData", async () => {
     } else if (locationPath.match("/streams/")) {
       // Streams
 
-      let category = document.title.replace(' - Glimesh', "");
+      const category = document.title.replace(' - Glimesh', "");
       presenceData.details = "Viewing Category";
       presenceData.state = category;
     } else if (locationPath == "/users" || locationPath == "/users/") {
@@ -154,7 +153,7 @@ presence.on("UpdateData", async () => {
             label: "View Profile",
             url: profileURL.href
           }
-        ]
+        ];
       }
 
       // Double Checks if Video Element Exists & Makes sure the user is live.
