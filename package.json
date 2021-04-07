@@ -6,14 +6,14 @@
   "scripts": {
     "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
     "inc": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
-    "se": "node ./syntaxEnforcer.js",
-    "se:compile": "tsc --module CommonJS --target ES2020 --typeRoots '@types,node_modules/@types' --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./syntaxEnforcer.ts",
-    "sv": "node ./schemaValidator.js",
-    "sv:compile": "tsc --module CommonJS --target ES2020 --typeRoots '@types,node_modules/@types' --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./schemaValidator.ts",
-    "pu": "node ./presenceUpdater.js",
-    "pu:compile": "tsc --module CommonJS --target ES2020 --typeRoots @types --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./presenceUpdater.ts",
-    "translator": "npm run translator:compile && node ./translator.js",
-    "translator:compile": "tsc --module CommonJS --target ES2020 --typeRoots @types --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./translator.ts"
+    "se": "node ./tools/auto/syntaxEnforcer.js",
+    "se:compile": "tsc -p ./configs/tsconfig.auto.syntaxEnforcer.json",
+    "sv": "node ./tools/auto/schemaValidator.js",
+    "sv:compile": "tsc -p ./configs/tsconfig.auto.schemaValidator.json",
+    "pu": "node ./tools/auto/presenceUpdater.js",
+    "pu:compile": "tsc -p ./configs/tsconfig.auto.presenceUpdater.json",
+    "translator": "npm run translator:compile && node ./tools/translator.js",
+    "translator:compile": "tsc -p ./configs/tsconfig.translator.json"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
@@ -34,7 +34,6 @@
     "debug": "^4.3.1",
     "enquirer": "^2.3.6",
     "eslint": "^7.22.0",
-    "execa": "^5.0.0",
     "glob": "^7.1.6",
     "jsonschema": "^1.4.0",
     "mongodb": "^3.6.5",

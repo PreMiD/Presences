@@ -2,15 +2,16 @@
  * Translation Tool for PreMiD Presences.
  * @author callumok2004 <callumokane123@gmail.com>
  * @author Bas950 <me@bas950.com>
- * @contributor ririxidev <mail@ririxi.dev>
+ * @author ririxidev <mail@ririxi.dev>
  */
 
-import axios from "axios";
+import { existsSync, readFileSync, readdirSync, writeFileSync } from "fs";
 import { gray, green, hex, red, white, yellow } from "chalk";
+import ora, { Ora } from "ora";
+
+import axios from "axios";
 import debug from "debug";
 import { prompt } from "enquirer";
-import { existsSync, readdirSync, readFileSync, writeFileSync } from "fs";
-import ora, { Ora } from "ora";
 
 debug.enable("Translator:*");
 let loadSpinner: Ora,
@@ -45,7 +46,7 @@ const spinnerSettings = {
   loadFiles = async (lang: string): Promise<boolean> => {
     language = lang;
     info("Loading and caching files.");
-    const src = `${process.cwd()}/websites/`;
+    const src = `./websites/`;
     if (!existsSync(src))
       return (
         error("Presences folder could not be found... exiting."), process.exit()
