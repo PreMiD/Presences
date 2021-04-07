@@ -11,11 +11,10 @@
     "version": "1.0.0",
     "color": "#14171a",
     "tags": [
-        "API",
-        "Reddit-APIs",
-        "Reddit-API",
-        "APIs",
-        "api"
+        "api",
+        "reddit-apis",
+        "reddit-api",
+        "apis"
     ],
     "altnames": [
         "EvergeneIO",
