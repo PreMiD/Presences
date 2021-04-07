@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
 const presenceData = {
   largeImageKey: "evergene-logo",
   startTimestamp: browsingStamp,
-  details: "On the homepage of Evergene"
+  details: "On the homepage"
 }
 if (document.location.pathname.includes("/api")){
   presenceData.details = "Browsing APIs";
@@ -31,7 +31,10 @@ else if (document.location.pathname.includes("/changelog")){
 else if (document.location.pathname.includes("/partner")){
   presenceData.details = "Reading about the partners of Evergene";
 }
-
+else if (document.location.pathname.includes("/discord")){
+  presenceData.details = "In the Discord of Evergene"
+}
+  
 if (!presenceData.details) presence.setTrayTitle();
 else presence.setActivity(presenceData);
 });
