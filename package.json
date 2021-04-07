@@ -6,14 +6,14 @@
   "scripts": {
     "pretty": "prettier --write **/*.ts **/{metadata,tsconfig}.json",
     "inc": "tsc --module CommonJS --target ES2020 --esModuleInterop --removeComments --noUnusedParameters --noUnusedLocals --noFallthroughCasesInSwitch --newLine lf --inlineSourceMap ./massVer.ts && node ./massVer.js",
-    "se": "node ./tools/auto/syntaxEnforcer.js",
-    "se:compile": "tsc -p ./configs/tsconfig.auto.syntaxEnforcer.json",
-    "sv": "node ./tools/auto/schemaValidator.js",
-    "sv:compile": "tsc -p ./configs/tsconfig.auto.schemaValidator.json",
-    "pu": "node ./tools/auto/presenceUpdater.js",
-    "pu:compile": "tsc -p ./configs/tsconfig.auto.presenceUpdater.json",
-    "translator": "npm run translator:compile && node ./tools/translator.js",
-    "translator:compile": "tsc -p ./configs/tsconfig.translator.json"
+    "se": "node ./util/tools/auto/syntaxEnforcer.js",
+    "se:compile": "tsc -p ./util/configs/tsconfig.auto.syntaxEnforcer.json",
+    "sv": "node ./util/tools/auto/schemaValidator.js",
+    "sv:compile": "tsc -p ./util/configs/tsconfig.auto.schemaValidator.json",
+    "pu": "node ./util/tools/auto/presenceUpdater.js",
+    "pu:compile": "tsc -p ./util/configs/tsconfig.auto.presenceUpdater.json",
+    "translator": "npm run translator:compile && node ./util/tools/translator.js",
+    "translator:compile": "tsc -p ./util/configs/tsconfig.translator.json"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
