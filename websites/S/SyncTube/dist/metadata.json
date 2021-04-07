@@ -9,7 +9,7 @@
     "en": "A simple platform where you can create rooms, manage permissions and chat while watching YouTube videos synchronized with your friends."
   },
   "url": "sync-tube.de",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/I7PhFlB.png",
   "thumbnail": "https://i.imgur.com/2cTHWAe.png",
   "color": "#381010",
@@ -41,7 +41,10 @@
       "title": "Icon",
       "icon": "fad fa-icons",
       "value": 0,
-      "values": ["With text", "Icon"]
+      "values": [
+        "With text",
+        "Icon"
+      ]
     }
   ]
 }
