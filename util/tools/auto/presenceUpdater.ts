@@ -111,7 +111,7 @@ const readFile = (path: string): string =>
 
       const { compilerOptions: presenceConfig } = readJson<{
           compilerOptions: CompilerOptions;
-        }>(rslv(normalizedPath.join(sep), "tsconfig.json")),
+        }>(rslv(normalizedPath.join(sep), "../../../tsconfig.json")),
         tsConfig: CompilerOptions = {
           ...baseTsConfig,
           ...presenceConfig,
