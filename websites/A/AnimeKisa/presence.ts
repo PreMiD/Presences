@@ -92,7 +92,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "dubbed anime";
     presenceData.smallImageKey = "reading";
   }
-  
+
   if (presenceData.details == null) {
     presenceData.details = (await strings).browsing;
     presenceData.smallImageKey = "reading";
