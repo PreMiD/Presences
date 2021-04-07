@@ -32,7 +32,7 @@ else if (document.location.pathname.includes("/partner")){
   presenceData.details = "Reading about the partners of Evergene";
 }
 else if (document.location.pathname.includes("/discord")){
-  presenceData.details = "In the Discord of Evergene"
+  presenceData.details = "In the Discord of Evergene";
 }
   
 if (!presenceData.details) presence.setTrayTitle();
