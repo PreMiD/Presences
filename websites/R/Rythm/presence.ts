@@ -5,7 +5,7 @@ type repeatingState = "none" | "one" | "queue";
 /**
  * Rythm API namespace
  */
-type apiNamespace = "r1" | "r2" | "r3" | "r4" | "r5" | "rc";
+type apiNamespace = "r1" | "r2" | "r3" | "r4" | "r5" | "rc" | "rchan";
 
 /**
  * Rythm PreMiD Presence
@@ -22,7 +22,8 @@ const presence = new Presence({
     r3: "Rythm 3",
     r4: "Rythm 4",
     r5: "Rythm 5",
-    rc: "Rythm Canary"
+    rc: "Rythm Canary",
+    rchan: "Rythm-chan"
   },
   separator = "•",
   apiNamespaceVar = "window.apiNamespace",
@@ -45,11 +46,9 @@ presence.on("UpdateData", async () => {
 
   // Dashboard
   if (path[0] == "app") {
-    const namespace: apiNamespace = (await getPageletiable(
-        apiNamespaceVar
-      )) as apiNamespace,
-      socketUrl: string =
-        (await getPageletiable(apiWebsocketUrlVar)) + "/" + namespace,
+    const namespace: apiNamespace = path[1] as apiNamespace ||
+      await getPageletiable(apiNamespaceVar) as apiNamespace,
+      socketUrl: string = `${await getPageletiable(apiWebsocketUrlVar)}/${namespace}`,
       apiReady = await checkAPIConnection(namespace, socketUrl);
 
     // Make sure the API connection is ready before continuing
@@ -70,7 +69,7 @@ presence.on("UpdateData", async () => {
     }
 
     // Get the current API data
-    const apiData = apiConnection.getData();
+    const apiData = apiConnection.data;
 
     // Check if a song is currently playing or paused
     if (apiData.title) {
@@ -272,13 +271,20 @@ class APIConnection {
   /**
    * API Data
    */
-  private data: APIData = {};
+  private apiData: APIData = {};
 
   /**
    * WebSocket connection state
    */
   public get state(): number {
     return this.websocket.readyState;
+  }
+
+  /**
+   * API data
+   */
+  public get data(): APIData {
+    return this.apiData;
   }
 
   /**
@@ -290,14 +296,6 @@ class APIConnection {
     this.namespace = namespace;
     this.socketUrl = socketUrl;
     this.websocket = new WebSocket(socketUrl);
-  }
-
-  /**
-   * Get API data
-   * @returns API data
-   */
-  public getData(): APIData {
-    return this.data;
   }
 
   /**
@@ -325,7 +323,16 @@ class APIConnection {
        * WebSocket opens
        */
       connection.websocket.onopen = function () {
-        delete connection.websocket.onerror;
+        delete this.onerror;
+
+        this.onclose = function (event: CloseEvent) {
+          presence.info(
+            `Disconnected from Rythm's API [${namespace}]` +
+              (event && event.reason ? `: ${event.reason}` : "")
+          );
+        }
+
+        presence.success(`Connected to Rythm's API [${namespace}]`);
         resolve(connection);
       };
 
@@ -334,7 +341,11 @@ class APIConnection {
        * @param event Event
        */
       connection.websocket.onerror = function (event: ErrorEvent) {
-        reject(event.message);
+        presence.error(
+          `Unable to connect to Rythm's API [${namespace}]` +
+            (event && event.message ? `: ${event.message}` : "")
+        );
+        reject(event);
       };
 
       /**
@@ -344,7 +355,7 @@ class APIConnection {
       connection.websocket.onmessage = function (event: MessageEvent) {
         presence.info(`Message from Rythm's API: ${event.data}`);
         if (event.data) {
-          connection.data = { ...connection.data, ...JSON.parse(event.data) };
+          connection.apiData = { ...connection.apiData, ...JSON.parse(event.data) };
         }
       };
     });
@@ -380,14 +391,9 @@ async function checkAPIConnection(
     try {
       // Make connection
       apiConnection = await APIConnection.create(namespace, socketUrl);
-      presence.success(`Connected to Rythm's API [${namespace}]`);
     } catch (e) {
       // Handle errors
       fail = true;
-      presence.error(
-        `Unable to connect to Rythm's API [${namespace}]` +
-          (e && e.message ? `: ${e.message}` : "")
-      );
     }
 
     // Connection ready
@@ -444,8 +450,8 @@ async function getStrings(): Promise<LangStrings> {
 
 /**
  * Get result of running JS in the page
- * This function is needed because the browser freezes when using the current version of getPageletiable
- * @param js js JS to run in page
+ * This function is needed because Firefox freezes after some time when using the current version of getPageletiable
+ * @param js JS to run in page
  * @see {@link https://github.com/PreMiD/Extension/pull/23/files}
  */
 function getPageletiable(js: string): Promise<string> {

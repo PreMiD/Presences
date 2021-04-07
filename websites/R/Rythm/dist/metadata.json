@@ -9,10 +9,10 @@
     "de": "Rythm macht es möglich deine Lieblingsmusik mit all deinen Freunden zu hören. Füge ihn noch heute deinem Discord hinzu und beginne Musik zu hören!"
   },
   "url": "rythm.fm",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/lqwAK0n.png",
   "thumbnail": "https://i.imgur.com/NqYLjmB.jpg",
-  "color": "#e5393d",
+  "color": "#fb0f32",
   "tags": [
     "discord",
     "music",
