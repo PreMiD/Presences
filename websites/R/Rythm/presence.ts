@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
   if (path[0] == "app") {
     const namespace: apiNamespace = path[1] as apiNamespace ||
       await getPageletiable(apiNamespaceVar) as apiNamespace,
-      socketUrl: string = `${await getPageletiable(apiWebsocketUrlVar)}/${namespace}`,
+      socketUrl = `${await getPageletiable(apiWebsocketUrlVar)}/${namespace}`,
       apiReady = await checkAPIConnection(namespace, socketUrl);
 
     // Make sure the API connection is ready before continuing
@@ -330,7 +330,7 @@ class APIConnection {
             `Disconnected from Rythm's API [${namespace}]` +
               (event && event.reason ? `: ${event.reason}` : "")
           );
-        }
+        };
 
         presence.success(`Connected to Rythm's API [${namespace}]`);
         resolve(connection);
