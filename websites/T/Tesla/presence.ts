@@ -12,7 +12,7 @@ presence.on("UpdateData", async function () {
         urlpath = window.location.pathname.split("/"),
         langs = ["en_ca", "es_mx", "en_pr", "nl_be", "cs_cz", "da_dk", "de_de", "el_gr", "es_es", "fr_fr", "hr_hr", "en_ie", "is_is", "it_it", "fr_lu", "nl_nl", "no_no", "de_at", "pl_pl", "pt_pt", "sl_si", "fr_ch","sv_se", "fi_fi", "en_gb", "en_eu", "he_il", "en_ae", "en_jo", "zh_cn", "zh_hk", "en_mo", "zh_tw", "ja_jp", "en_sg", "ko_kr", "en_au", "en_nz"],
         urlpNum = (new RegExp(langs.join("|")).test(urlpath[1])) ? "2" : "1",
-        presenceData = {
+        presenceData: PresenceData = {
               largeImageKey: logoArr[set_logo] || "logo_red"
             };
 
