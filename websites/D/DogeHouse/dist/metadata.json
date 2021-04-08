@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "author": {
+      "name": "Crispy",
+      "id": "522503261941661727"
+    },
+    "contributors": [
+      {
+        "name": "s3ansh33p",
+        "id": "521266981278842881"
+      }
+    ],
+    "service": "DogeHouse",
+    "description": {
+      "en": "Taking voice conversations to the moon 🚀"
+    },
+    "url": "dogehouse.tv",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/cQLx3pp.png",
+    "thumbnail": "https://i.imgur.com/7LcLlQA.png",
+    "color": "#EFE7DC",
+    "tags": ["voice", "communications", "rooms", "chat"],
+    "category": "socials",
+    "regExp": "dogehouse.tv",
+    "iFrameRegExp": "([a-z0-9]+)[.]dogehouse[.]tv",
+    "iframe": false,
+    "readLogs": false
+  }
