@@ -4,7 +4,7 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "repl"
+      largeImageKey: "replit"
     },
     Path = document.location.pathname;
 
