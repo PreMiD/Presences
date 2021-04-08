@@ -8,13 +8,9 @@ presence.on("UpdateData", async () => {
         largeImageKey: "logo",
         startTimestamp: browsingStamp
     };
-    if (document.location.pathname.includes("/")) {
-        presenceData.details = "Viewing Page:";
-        presenceData.state = "Home page";
-        presenceData.startTimestamp = browsingStamp;
-        };
+
     if (document.location.pathname.includes("/mangas")) {
-        let chapter = document.getElementById("selectCh") as HTMLSelectElement,
+        const chapter = document.getElementById("selectCh") as HTMLSelectElement,
             page = document.getElementById("selectPg") as HTMLSelectElement;
 
         presenceData.details = "Reading " + document.querySelector(".tl-titre").textContent + ":";
@@ -22,25 +18,30 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Reading a scan";
         presenceData.startTimestamp = browsingStamp;
-        };
-    if (document.location.pathname.includes("/connexion") || document.location.pathname.includes("/inscription")) {
+        } 
+    else if (document.location.pathname.includes("/connexion") || document.location.pathname.includes("/inscription")) {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Login page";
         presenceData.startTimestamp = browsingStamp;
-        };
-    if (document.location.pathname.includes("/planning")) {
+        }
+    else if (document.location.pathname.includes("/planning")) {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Planning page";
         presenceData.startTimestamp = browsingStamp;
-        };
-    if (document.location.pathname.includes("/rejoindre")) {
+        }
+    else if (document.location.pathname.includes("/rejoindre")) {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Jobs page";
         presenceData.startTimestamp = browsingStamp;
-        };
-    if (document.location.pathname.includes("/dons")) {
+        }
+    else if (document.location.pathname.includes("/dons")) {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Donation page";
+        presenceData.startTimestamp = browsingStamp;
+        }
+    else {
+        presenceData.details = "Viewing Page:";
+        presenceData.state = "Home page";
         presenceData.startTimestamp = browsingStamp;
         };
 
