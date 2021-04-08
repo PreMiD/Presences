@@ -9,8 +9,7 @@ const presence = new Presence({
   
   async function getStatistics() {
     async function fetchAsync(url: string) {
-      const response = await fetch(url);
-      const data = await response.json();
+      const response = await fetch(url), data = await response.json();
       return data;
     }
   
@@ -34,9 +33,7 @@ const presence = new Presence({
       smallImageText: "dogehouse.tv",
       details: "Other",
       state: "Other"
-    };
-  
-    const room = document.getElementsByClassName(
+    }, room = document.getElementsByClassName(
       "text-2xl truncate max-w-lg text-center px-2"
     )[0];
   
@@ -55,25 +52,23 @@ const presence = new Presence({
         }
       ];
       let muted = true;
-      let group: any = document.getElementsByClassName(
+      let group: Element = document.getElementsByClassName(
         "w-full grid gap-5 mb-24"
-      )[0];
-      let roomPosition = "Speaking";
+      )[0], roomPosition = "Speaking";
       if (group !== undefined) {
         const username: string = document
           .getElementsByClassName("ml-auto pr-2")[0]
           .children[0].getAttribute("title");
         for (let i = 0; i < group.children.length; i++) {
-          if (group.children[i].innerText.trim() == username) {
+          if (group.children[i].innerHTML.trim() == username) {
             if (
               document.getElementsByClassName(
                 "col-span-full text-xl ml-2.5 text-white"
               )[1] !== undefined
             ) {
-              const child: any = document.getElementsByClassName(
+              const child: Element = document.getElementsByClassName(
                 "col-span-full text-xl ml-2.5 text-white"
-              )[1];
-              const index: number = Array.prototype.indexOf.call(
+              )[1], index: number = Array.prototype.indexOf.call(
                 child.parentNode.children,
                 child
               );
@@ -100,31 +95,29 @@ const presence = new Presence({
         }
       }
   
-      let speakerCount = 0;
-      let listenerCount = 0;
-      group = document.getElementsByClassName(
+      let speakerCount = 0, listenerCount = 0, group2 = document.getElementsByClassName(
         "col-span-full text-xl ml-2.5 text-white"
       );
-      if (group.length !== 0) {
+      if (group2.length !== 0) {
         speakerCount += parseInt(
-          group[0].innerText.slice(
-            group[0].innerText.indexOf("(") + 1,
-            group[0].innerText.indexOf(")")
+          group2[0].innerHTML.slice(
+            group2[0].innerHTML.indexOf("(") + 1,
+            group2[0].innerHTML.indexOf(")")
           )
         );
-        if (group[1] !== undefined) {
+        if (group2[1] !== undefined) {
           listenerCount += parseInt(
-            group[1].innerText.slice(
-              group[1].innerText.indexOf("(") + 1,
-              group[1].innerText.indexOf(")")
+            group2[1].innerHTML.slice(
+              group2[1].innerHTML.indexOf("(") + 1,
+              group2[1].innerHTML.indexOf(")")
             )
           );
         }
-        if (group[2] !== undefined) {
+        if (group2[2] !== undefined) {
           listenerCount += parseInt(
-            group[2].innerText.slice(
-              group[2].innerText.indexOf("(") + 1,
-              group[2].innerText.indexOf(")")
+            group2[2].innerHTML.slice(
+              group2[2].innerHTML.indexOf("(") + 1,
+              group2[2].innerHTML.indexOf(")")
             )
           );
         }
@@ -150,7 +143,7 @@ const presence = new Presence({
       presenceData.details = "User Settings";
       presenceData.state = `Editing Sound Settings`;
     } else if (pathname.includes("/user")) {
-      let username = document.getElementsByClassName("font-mono")[0];
+      const username = document.getElementsByClassName("font-mono")[0];
       const profileName = username.innerHTML;
       presenceData.details = "User Profile";
       presenceData.state = `Viewing ${await profileName}`;
