@@ -18,9 +18,9 @@ class DaumPresence extends Presence {
       case !!url.match(/blog([.]v)?[.]daum[.]([a-z0-9]+)/):
         return "DAUM_BLOG";
       case !!url.match(/auto([.]v)?[.]daum[.]([a-z0-9]+)/):
-        return "DAUM_AUTO"
+        return "DAUM_AUTO";
       case !!url.match(/mail([.]v)?[.]daum[.]([a-z0-9]+)/):
-        return "DAUM_MAIL" 
+        return "DAUM_MAIL";
       case !!url.match(/([a-z]+)([.]v)?[.]daum[.]([a-z0-9]+)/):
         return "DAUM";
       default:
@@ -334,7 +334,7 @@ presence.on("UpdateData", async () => {
         service: "DAUM_MAIL",
         hash: true,
         setPresenceData(){
-          presenceData.details = "Viewing thier settings"
+          presenceData.details = "Viewing thier settings";
         }
       },
       "\\?composer": {
