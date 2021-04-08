@@ -11,7 +11,7 @@ presence.on("UpdateData", async function () {
         logoArr = ["logo_red", "logo_red_text", "logo_white", "logo_white_text"],
         urlpath = window.location.pathname.split("/"),
         langs = ["en_ca", "es_mx", "en_pr", "nl_be", "cs_cz", "da_dk", "de_de", "el_gr", "es_es", "fr_fr", "hr_hr", "en_ie", "is_is", "it_it", "fr_lu", "nl_nl", "no_no", "de_at", "pl_pl", "pt_pt", "sl_si", "fr_ch","sv_se", "fi_fi", "en_gb", "en_eu", "he_il", "en_ae", "en_jo", "zh_cn", "zh_hk", "en_mo", "zh_tw", "ja_jp", "en_sg", "ko_kr", "en_au", "en_nz"],
-        urlpNum = (new RegExp(langs.join("|")).test(urlpath[1])) ? "2" : "1",
+        urlpNum = (new RegExp(langs.join("|")).test(urlpath[1])) ? 2 : 1,
         presenceData: PresenceData = {
               largeImageKey: logoArr[set_logo] || "logo_red"
             };
@@ -22,7 +22,7 @@ presence.on("UpdateData", async function () {
     if(!urlpath[urlpNum])
       presenceData.details = "Home";
     else if(urlpath[urlpNum].startsWith("model")) {
-      const num = parseInt(urlpNum) + 1;
+      const num = urlpNum + 1;
       let model = null;
       if(urlpath[num] === "design") {
         model = document.querySelector(".text-loader--content.tds-text--center.text-loader--subtitle>span").textContent;
@@ -55,7 +55,7 @@ presence.on("UpdateData", async function () {
       }
 
     } else if(urlpath[urlpNum].startsWith("cybertruck")){
-      const num = parseInt(urlpNum) + 1;
+      const num = urlpNum + 1;
 
       presenceData.details = "Cybertruck";
 
@@ -88,7 +88,7 @@ presence.on("UpdateData", async function () {
       }
 
     } else if(urlpath[urlpNum] === "teslaaccount") {
-      const num = parseInt(urlpNum) + 1;
+      const num = urlpNum + 1;
       presenceData.details = "Account";
 
       if(urlpath[num] === "payment-history")
@@ -99,7 +99,7 @@ presence.on("UpdateData", async function () {
         presenceData.state = "Ownership";
 
     } else if(urlpath[urlpNum] === "solarroof") {
-      const num = parseInt(urlpNum) + 1;
+      const num = urlpNum + 1;
       presenceData.details = "Solar Roof";
 
       if(urlpath[num] === "design") presenceData.state = "Designing";
@@ -124,7 +124,7 @@ presence.on("UpdateData", async function () {
         ];
       }
     } else if(urlpath[urlpNum] === "energy") {
-      const num = parseInt(urlpNum) + 1;
+      const num = urlpNum + 1;
       presenceData.details = "Energy";
 
       if(urlpath[num] === "design") presenceData.state = "Designing";
@@ -173,7 +173,7 @@ presence.on("UpdateData", async function () {
         presenceData.details = "Other";
     }
   } else if(window.location.hostname === "shop.tesla.com") {
-    const num = parseInt(urlpNum) + 1;
+    const num = urlpNum + 1;
 
     presenceData.details = "Shop";
     if(urlpath[urlpNum] === "category" && urlpath[num]) {
