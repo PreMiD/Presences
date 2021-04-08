@@ -79,7 +79,10 @@ const updateCallback = {
     } else if (currentPath[0] === "register") {
       presenceData.details = "Registering an account";
     }
-  } else {
+  } else if (
+    currentURL.hostname.endsWith("fandom.com") &&
+    currentPath.includes("wiki")
+  ) {
     /*
 
 		Chapter 2
@@ -87,15 +90,24 @@ const updateCallback = {
 		
 		*/
 
+    if (!document.querySelector("#netbar")) {
+      // Do not run on Fandom wikis.
+      presenceData = null;
+      return;
+    }
+
     let title: string, sitename: string;
     const actionResult = (): string =>
         getURLParam("action") || getURLParam("veaction"),
       titleFromURL = (): string => {
-        const raw =
+        const raw: string =
           currentPath[0] === "index.php"
             ? getURLParam("title")
-            : currentPath.join("/");
-        return decodeURI(raw.replace(/_/g, " "));
+            : currentPath[0] === "wiki"
+            ? currentPath.slice(1).join("/")
+            : currentPath.slice(2).join("/");
+        //let lang: string = currentPath[0]
+        return raw.replace(/_/g, " ");
       };
 
     try {
@@ -114,10 +126,16 @@ const updateCallback = {
         ) ||
           document.querySelector("#p-navigation a") ||
           document.querySelector(".mw-wiki-logo")) as HTMLAnchorElement).href,
-        mainPageURL = new URL(mainPageHref);
-      sitename = decodeURI(
-        mainPageURL.pathname.replace(/^\/|\/$/g, "").replace(/_/g, " ")
-      );
+        mainPageURL = new URL(mainPageHref),
+        mainPagePath = mainPageURL.pathname.replace(/^\/|\/$/g, "").split("/"),
+        mainPageRaw = decodeURI(
+          mainPagePath[0] === "index.php"
+            ? getURLParam("title")
+            : mainPagePath[0] === "wiki"
+            ? mainPagePath.slice(1).join("/")
+            : mainPagePath.slice(2).join("/")
+        );
+      sitename = mainPageRaw.replace(/_/g, " ");
     }
 
     /**
@@ -170,9 +188,6 @@ const updateCallback = {
         ] || "Viewing a wiki page"
       );
     };
-
-    presence.info(title);
-    presence.info(titleFromURL());
 
     if (
       ((document.querySelector("#n-mainpage-description a") ||
@@ -237,13 +252,15 @@ const updateCallback = {
 
 if (updateCallback.present) {
   const defaultData = { ...presenceData };
-  presence.on("UpdateData", async () => {
-    resetData(defaultData);
-    updateCallback.function();
-    presence.setActivity(presenceData);
-  });
+  if (presenceData)
+    presence.on("UpdateData", async () => {
+      resetData(defaultData);
+      updateCallback.function();
+      presence.setActivity(presenceData);
+    });
 } else {
-  presence.on("UpdateData", async () => {
-    presence.setActivity(presenceData);
-  });
+  if (presenceData)
+    presence.on("UpdateData", async () => {
+      presence.setActivity(presenceData);
+    });
 }
