@@ -43,12 +43,12 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Home page";
         presenceData.startTimestamp = browsingStamp;
-        };
+        }
 
     if (presenceData.details == null) {
         presence.setTrayTitle();
         presence.setActivity();
     } else {
         presence.setActivity(presenceData);
-  };
+  }
 });
