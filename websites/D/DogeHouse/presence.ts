@@ -9,12 +9,12 @@ const presence = new Presence({
   
   async function getStatistics() {
     async function fetchAsync(url: string) {
-      let response = await fetch(url);
-      let data = await response.json();
+      const response = await fetch(url);
+      const data = await response.json();
       return data;
     }
   
-    let data = await fetchAsync(
+    const data = await fetchAsync(
       "https://api.dogehouse.xyz/v1/statistics?presence"
     );
     roomCount = data.totalRooms || 0;
@@ -54,26 +54,26 @@ const presence = new Presence({
           url: "https://dogehouse.tv/room/" + pathname.slice(6)
         }
       ];
-      let muted: boolean = true;
+      let muted = true;
       let group: any = document.getElementsByClassName(
         "w-full grid gap-5 mb-24"
       )[0];
-      let roomPosition: string = "Speaking";
+      let roomPosition = "Speaking";
       if (group !== undefined) {
-        let username: string = document
+        const username: string = document
           .getElementsByClassName("ml-auto pr-2")[0]
           .children[0].getAttribute("title");
-        for (let i: number = 0; i < group.children.length; i++) {
+        for (let i = 0; i < group.children.length; i++) {
           if (group.children[i].innerText.trim() == username) {
             if (
               document.getElementsByClassName(
                 "col-span-full text-xl ml-2.5 text-white"
               )[1] !== undefined
             ) {
-              let child: any = document.getElementsByClassName(
+              const child: any = document.getElementsByClassName(
                 "col-span-full text-xl ml-2.5 text-white"
               )[1];
-              let index: number = Array.prototype.indexOf.call(
+              const index: number = Array.prototype.indexOf.call(
                 child.parentNode.children,
                 child
               );
@@ -100,8 +100,8 @@ const presence = new Presence({
         }
       }
   
-      let speakerCount: number = 0;
-      let listenerCount: number = 0;
+      let speakerCount = 0;
+      let listenerCount = 0;
       group = document.getElementsByClassName(
         "col-span-full text-xl ml-2.5 text-white"
       );
@@ -150,8 +150,8 @@ const presence = new Presence({
       presenceData.details = "User Settings";
       presenceData.state = `Editing Sound Settings`;
     } else if (pathname.includes("/user")) {
-      let username: any = document.getElementsByClassName("font-mono")[0];
-      let profileName = username.innerHTML;
+      let username = document.getElementsByClassName("font-mono")[0];
+      const profileName = username.innerHTML;
       presenceData.details = "User Profile";
       presenceData.state = `Viewing ${await profileName}`;
       presenceData.buttons = [
@@ -174,4 +174,3 @@ const presence = new Presence({
       presence.setActivity(presenceData);
     }
   });
-  
