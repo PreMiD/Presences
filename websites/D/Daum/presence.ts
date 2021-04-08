@@ -51,7 +51,6 @@ const presence = new DaumPresence({
           | "DAUM_NEWS"
           | "DAUM_SPORTS"
           | "DAUM_BLOG"
-          | "DAUM_BLOG"
           | "DAUM_MAIL"
           | "DAUM_ENTERTAIN"
           | "ANY";
@@ -124,6 +123,18 @@ presence.on("UpdateData", async () => {
               delete presenceData.endTimestamp;
             }
           }
+        }
+      },
+      "/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)":{
+        service: "DAUM_BLOG",
+        setPresenceData(){
+          presenceData.details = "Reading blog:";
+          presenceData.state = document.querySelector("a.link-title")?.textContent;
+
+          presenceData.buttons = [{
+            label: "Read Blog",
+            url: document.baseURI
+          }];
         }
       },
       "vod/view/([0-9a-zA-Z]+)": {
