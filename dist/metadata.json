@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Cemetech",
+  "author": {
+    "name": "KnightsWhoSayNi",
+    "id": "313418685551214592"
+  },
+  "category": "socials",
+  "logo": "https://i.imgur.com/ljAwjQt.png",
+  "thumbnail": "https://i.imgur.com/C8NDnLZ.png",
+  "version": "1.0.0",
+  "color": "#c11f1f",
+  "tags": [
+    "programming",
+    "forum"
+  ],
+  "url": "www.cemetech.net",
+  "description": {
+    "en": "Rich Presence for the Cemetech.net Calculator Programming Forum"
+  },
+  "settings": [
+  ]
+}
