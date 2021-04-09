@@ -51,8 +51,7 @@ const presence = new Presence({
           url: "https://dogehouse.tv/room/" + pathname.slice(6)
         }
       ];
-      let muted = true;
-      let group: Element = document.getElementsByClassName(
+      let muted = true, group: Element = document.getElementsByClassName(
         "w-full grid gap-5 mb-24"
       )[0], roomPosition = "Speaking";
       if (group !== undefined) {
@@ -95,7 +94,8 @@ const presence = new Presence({
         }
       }
   
-      let speakerCount = 0, listenerCount = 0, group2 = document.getElementsByClassName(
+      let speakerCount = 0, listenerCount = 0
+      const group2 = document.getElementsByClassName(
         "col-span-full text-xl ml-2.5 text-white"
       );
       if (group2.length !== 0) {
@@ -122,11 +122,11 @@ const presence = new Presence({
           );
         }
       }
-      presenceData.details = `${await roomPosition} (${await speakerCount} | ${await listenerCount})`;
-      presenceData.state = `In ${await roomName}`;
+      presenceData.details = `${roomPosition} (${await speakerCount} | ${await listenerCount})`;
+      presenceData.state = `In ${roomName}`;
     } else if (pathname.includes("/scheduled-rooms")) {
       presenceData.details = "Scheduled Rooms";
-      presenceData.state = `Viewing ${await scheduledRoomCount} Rooms`;
+      presenceData.state = `Viewing ${scheduledRoomCount} Rooms`;
     } else if (pathname.includes("/me")) {
       presenceData.details = "User Settings";
       presenceData.state = `Editing Profile`;
@@ -143,10 +143,9 @@ const presence = new Presence({
       presenceData.details = "User Settings";
       presenceData.state = `Editing Sound Settings`;
     } else if (pathname.includes("/user")) {
-      const username = document.getElementsByClassName("font-mono")[0];
-      const profileName = username.innerHTML;
+      const username = document.getElementsByClassName("font-mono")[0], profileName = username.innerHTML;
       presenceData.details = "User Profile";
-      presenceData.state = `Viewing ${await profileName}`;
+      presenceData.state = `Viewing ${profileName}`;
       presenceData.buttons = [
         {
           label: "Visit Profile",
@@ -157,7 +156,7 @@ const presence = new Presence({
       browsingStamp = Math.floor(Date.now() / 1000);
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Rooms";
-      presenceData.state = `${await roomCount} Public Rooms`;
+      presenceData.state = `${roomCount} Public Rooms`;
     }
   
     if (presenceData.details == null) {
