@@ -51,9 +51,10 @@ const presence = new Presence({
           url: "https://dogehouse.tv/room/" + pathname.slice(6)
         }
       ];
-      let muted = true, group: Element = document.getElementsByClassName(
+      const group: Element = document.getElementsByClassName(
         "w-full grid gap-5 mb-24"
-      )[0], roomPosition = "Speaking";
+      )[0];
+      let muted = true, roomPosition = "Speaking";
       if (group !== undefined) {
         const username: string = document
           .getElementsByClassName("ml-auto pr-2")[0]
@@ -122,7 +123,7 @@ const presence = new Presence({
           );
         }
       }
-      presenceData.details = `${roomPosition} (${await speakerCount} | ${await listenerCount})`;
+      presenceData.details = `${roomPosition} (${speakerCount} | ${listenerCount})`;
       presenceData.state = `In ${roomName}`;
     } else if (pathname.includes("/scheduled-rooms")) {
       presenceData.details = "Scheduled Rooms";
