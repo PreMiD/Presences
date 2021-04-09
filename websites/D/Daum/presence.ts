@@ -59,7 +59,7 @@ const presence = new DaumPresence({
           | "ANY";
           href?: boolean,
           hash?: boolean,
-          artitle?: boolean
+          article?: boolean
         setPresenceData?: () => void;
       }
     }
@@ -91,7 +91,6 @@ presence.on("iFrameData", (data: {
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "daum",
-      details: "Browsing...",
       startTimestamp: startTime
     };
 
@@ -111,7 +110,7 @@ presence.on("UpdateData", async () => {
     data.presence = {
       "/v/([0-9a-zA-Z]+)": {
         service: "ANY",
-        artitle: true,
+        article: true,
         setPresenceData(){
           presenceData.details = "Reading article:";
           presenceData.state = document.querySelector("h3.tit_view")?.textContent;
@@ -130,7 +129,6 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = video.paused ? "pause" : "play";
             presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-            presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
 
             presenceData.buttons = [{
@@ -230,7 +228,6 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = video.paused ? "pause" : "play";
             presenceData.smallImageText = video.paused ? "Paused" : "Playing";
 
-            presenceData.startTimestamp = timestamps[0];
             presenceData.endTimestamp = timestamps[1];
 
             presenceData.buttons = [{
@@ -256,7 +253,6 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = video?.paused ? "pause" : "play";
           presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
-          presenceData.startTimestamp = timestamps[0];
           presenceData.endTimestamp = timestamps[1];
 
           presenceData.buttons = [{
@@ -281,7 +277,6 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = video?.paused ? "pause" : "play";
           presenceData.smallImageText = video?.paused ? "Paused" : "Playing";
 
-          presenceData.startTimestamp = timestamps[0];
           presenceData.endTimestamp = timestamps[1];
 
           presenceData.buttons = [{
@@ -428,9 +423,9 @@ presence.on("UpdateData", async () => {
 
     for (const [pathname, PData] of Object.entries(data.presence)){
       if ((document.location.pathname.match(pathname) || PData.hash && document.location.hash.match(pathname) || PData.href && document.location.href.match(pathname)) && (PData.service === presence.serviceName || PData.service === "ANY")){
-        if (PData.artitle && PData.artitle === presence.isReadingArticle)
+        if (PData.article && PData.article === presence.isReadingArticle)
             PData.setPresenceData();
-        else if (!PData.artitle) PData.setPresenceData();
+        else if (!PData.article) PData.setPresenceData();
       }
     }
 
@@ -443,5 +438,6 @@ presence.on("UpdateData", async () => {
         }
     }
 
-    presence.setActivity(presenceData);
+    if (!presenceData.details) presence.setActivity();
+    else presence.setActivity(presenceData);
 });
