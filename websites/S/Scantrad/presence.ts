@@ -17,32 +17,26 @@ presence.on("UpdateData", async () => {
         presenceData.state = chapter.options[chapter.selectedIndex].text.replace('Chapitre', 'Chapter') + " | " + page.options[page.selectedIndex].text;
         presenceData.smallImageKey = "reading";
         presenceData.smallImageText = "Reading a scan";
-        presenceData.startTimestamp = browsingStamp;
         } 
     else if (document.location.pathname.includes("/connexion") || document.location.pathname.includes("/inscription")) {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Login page";
-        presenceData.startTimestamp = browsingStamp;
         }
     else if (document.location.pathname.includes("/planning")) {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Planning page";
-        presenceData.startTimestamp = browsingStamp;
         }
     else if (document.location.pathname.includes("/rejoindre")) {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Jobs page";
-        presenceData.startTimestamp = browsingStamp;
         }
     else if (document.location.pathname.includes("/dons")) {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Donation page";
-        presenceData.startTimestamp = browsingStamp;
         }
     else {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Home page";
-        presenceData.startTimestamp = browsingStamp;
         }
 
     if (presenceData.details == null) {
