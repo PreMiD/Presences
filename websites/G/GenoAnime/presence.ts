@@ -71,7 +71,7 @@ presence.on("UpdateData", async () =>
 		anime_breadcumb =
 			document.querySelector < HTMLAnchorElement > (
 				"#container > section > div > div.anime__details__content > div > div.col-lg-9 > div > div.anime__details__btn > a.watch-btn"
-			).href
+			).href;
 		presenceData.buttons = [
 		{
 			label: "Watch It",
