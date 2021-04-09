@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
           ).href
       presenceData.buttons = [{
               label: "Watch It",
-              url: String(anime_breadcumb)
+              url: anime_breadcumb
           },
           {
               label: "Check Synopsis",
