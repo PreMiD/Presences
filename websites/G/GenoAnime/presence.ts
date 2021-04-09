@@ -79,7 +79,7 @@ presence.on("UpdateData", async () => {
           },
           {
               label: "Check Synopsis",
-              url: String(anime_breadcumb)
+              url: anime_breadcumb
           }
       ];
       if (iFrameVideo) {
