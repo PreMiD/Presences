@@ -86,10 +86,6 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing Member List";
     presenceData.state = "";
-  } else if (document.location.pathname == "/forum/memberlist.php") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing Member List";
-    presenceData.state = "";
   } else if (document.location.pathname == "/resources/") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing Resources";
