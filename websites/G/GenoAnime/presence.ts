@@ -55,11 +55,10 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(
           ".anime__details__title h3"
       ).textContent;
-      anime_breadcumb = String(
-          document.querySelector(
+      anime_breadcumb =
+          document.querySelector<HTMLAnchorElement>(
               "#container > section > div > div.anime__details__content > div > div.col-lg-9 > div > div.anime__details__btn > a.watch-btn"
-          )
-      );
+          ).href
       presenceData.buttons = [{
               label: "Watch It",
               url: String(anime_breadcumb)
