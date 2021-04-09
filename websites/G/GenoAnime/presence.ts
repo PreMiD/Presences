@@ -14,7 +14,7 @@ duration: number,
 paused: boolean,
 iFrameVideo: boolean,
 playback: boolean,
-senpai: string;
+anime_breadcumb: string;
 
 presence.on(
 "iFrameData",
@@ -54,23 +54,23 @@ if (document.location.pathname == "/") {
   presenceData.state = document.querySelector(
     ".anime__details__title h3"
   ).textContent;
-  senpai = String(
+  anime_breadcumb = String(
     document.querySelector(
       "#container > section > div > div.anime__details__content > div > div.col-lg-9 > div > div.anime__details__btn > a.watch-btn"
     )
   );
   presenceData.buttons = [
-    { label: "Watch It", url: String(senpai) },
+    { label: "Watch It", url: String(anime_breadcumb) },
     { label: "Check Synopsis", url: document.location.href }
   ];
 } else if (document.location.pathname.includes("/watch")) {
   presenceData.details = title;
   presenceData.state =
     "Episode " + String(document.location.href.split("episode=")[1]);
-  senpai = String(document.querySelector("#anime_details_breadcrumbs"));
+  anime_breadcumb = String(document.querySelector("#anime_details_breadcrumbs"));
   presenceData.buttons = [
     { label: "Watch Episode", url: document.location.href },
-    { label: "Check Synopsis", url: String(senpai) }
+    { label: "Check Synopsis", url: String(anime_breadcumb) }
   ];
   if (iFrameVideo) {
     timestamps = presence.getTimestamps(

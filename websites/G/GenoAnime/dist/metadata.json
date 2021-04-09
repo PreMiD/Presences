@@ -8,7 +8,7 @@
   "description": {
     "en": "Enjoy the our website, view any anime episodes and movies"
   },
-  "service": "GenoAnime",
+  "service": "Genoanime",
   "version": "1.0.0",
   "logo": "https://i.imgur.com/44orW6Y.png",
   "thumbnail": "https://i.imgur.com/lANOUyc.png",
@@ -16,7 +16,6 @@
   "tags": [
     "anime",
     "entertainment",
-    "genoanime",
     "amv",
     "videos"
   ],
