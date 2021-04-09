@@ -95,7 +95,7 @@ const presence = new Presence({
         }
       }
   
-      let speakerCount = 0, listenerCount = 0
+      let speakerCount = 0, listenerCount = 0;
       const group2 = document.getElementsByClassName(
         "col-span-full text-xl ml-2.5 text-white"
       );
