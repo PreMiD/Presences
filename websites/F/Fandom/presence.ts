@@ -125,6 +125,12 @@ const updateCallback = {
 		
 		*/
 
+    if (!document.querySelector("#globalNavigation")) {
+      // Do not run on Gamepedia wikis.
+      presenceData = null;
+      return;
+    }
+
     let title: string, sitename: string;
     const actionResult = (): string =>
         getURLParam("action") || getURLParam("veaction"),
@@ -140,7 +146,7 @@ const updateCallback = {
       };
 
     try {
-      title = document.querySelector(".page-header__title").innerHTML;
+      title = document.querySelector("h1").textContent;
     } catch (e) {
       title = titleFromURL();
     }
@@ -284,7 +290,6 @@ const updateCallback = {
       }
     }
 
-    presenceData.startTimestamp = browsingStamp;
     if (presenceData.state) presenceData.state += " | " + sitename;
     else presenceData.state = sitename;
   } else if (currentPath[0] === "f") {
@@ -337,13 +342,15 @@ const updateCallback = {
 
 if (updateCallback.present) {
   const defaultData = { ...presenceData };
-  presence.on("UpdateData", async () => {
-    resetData(defaultData);
-    updateCallback.function();
-    presence.setActivity(presenceData);
-  });
+  if (presenceData)
+    presence.on("UpdateData", async () => {
+      resetData(defaultData);
+      updateCallback.function();
+      presence.setActivity(presenceData);
+    });
 } else {
-  presence.on("UpdateData", async () => {
-    presence.setActivity(presenceData);
-  });
+  if (presenceData)
+    presence.on("UpdateData", async () => {
+      presence.setActivity(presenceData);
+    });
 }
