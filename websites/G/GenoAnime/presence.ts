@@ -72,8 +72,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/watch")) {
       presenceData.details = title;
       presenceData.state =
-          "Episode " + String(document.location.href.split("episode=")[1]);
-      anime_breadcumb = String(document.querySelector("#anime_details_breadcrumbs"));
+          "Episode " + document.location.href.split("episode=")[1];
+      anime_breadcumb = document.querySelector<HTMLAnchorElement>("#anime_details_breadcrumbs").href;
       presenceData.buttons = [{
               label: "Watch Episode",
               url: document.location.href
