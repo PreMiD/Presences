@@ -87,9 +87,6 @@ const presence = new Presence({
                 presenceData.smallImageText = "Unmuted";
                 presenceData.smallImageKey = "mic_on";
               }
-            } else {
-              presenceData.smallImageText = "";
-              presenceData.smallImageKey = "";
             }
           }
         }
