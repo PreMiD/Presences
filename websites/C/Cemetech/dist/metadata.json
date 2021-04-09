@@ -17,7 +17,5 @@
   "url": "www.cemetech.net",
   "description": {
     "en": "Rich Presence for the Cemetech.net Calculator Programming Forum"
-  },
-  "settings": [
-  ]
+  }
 }
