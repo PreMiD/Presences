@@ -106,10 +106,8 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageText = paused ?
               (await strings).pause :
               (await strings).play;
-          presenceData.startTimestamp = timestamps[0];
           presenceData.endTimestamp = timestamps[1];
           if (paused) {
-              delete presenceData.startTimestamp;
               delete presenceData.endTimestamp;
           }
       }
