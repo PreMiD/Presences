@@ -1,8 +1,7 @@
 const presence = new Presence({
     clientId: "829371771702345759"
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
-var title;
+let browsingStamp = Math.floor(Date.now() / 1000), title;
 presence.on("UpdateData", async () => {
     const presenceData = {
         largeImageKey: "icon"
@@ -77,11 +76,6 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Profile:";
         title = document.querySelector("#page_content_parent > div.mainbody > div > div.profile_cols > div.profile_brief > span:nth-child(2)");
         presenceData.state = title.innerText;
-    }
-    else if (document.location.pathname == "/forum/memberlist.php") {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Viewing Member List";
-        presenceData.state = "";
     }
     else if (document.location.pathname == "/forum/memberlist.php") {
         presenceData.startTimestamp = browsingStamp;
