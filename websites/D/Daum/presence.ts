@@ -21,6 +21,8 @@ class DaumPresence extends Presence {
         return "DAUM_AUTO";
       case !!url.match(/mail([.]v)?[.]daum[.]([a-z0-9]+)/):
         return "DAUM_MAIL";
+      case !!url.match(/(top[.])?cafe([.]v)?[.]daum[.]([a-z0-9]+)/):
+        return "DAUM_CAFE";
       case !!url.match(/([a-z]+)([.]v)?[.]daum[.]([a-z0-9]+)/):
         return "DAUM";
       default:
@@ -53,6 +55,7 @@ const presence = new DaumPresence({
           | "DAUM_BLOG"
           | "DAUM_MAIL"
           | "DAUM_ENTERTAIN"
+          | "DAUM_CAFE"
           | "ANY";
           href?: boolean,
           hash?: boolean,
@@ -70,23 +73,40 @@ let video : {
   currentTime: number,
   paused: boolean,
   title?: string,
-};
+},
+  cafe: {
+    name: string,
+    title: string,
+    article: string
+  };
 
 presence.on("iFrameData", (data: {
-  duration: number,
-  currentTime: number,
-  paused: boolean,
-  title?: string
-}) => video = data );
+  video?: typeof video,
+  cafe?: typeof cafe
+}) => { 
+  if (data.video) video = data.video;
+  if (data.cafe) cafe = data.cafe;
+});
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "daum",
+      details: "Browsing...",
       startTimestamp: startTime
     };
 
-    if (presence.serviceName === "DAUM_MAIL")
-        presenceData.largeImageKey = "daum_mail";
+    switch (presence.serviceName) {
+      case "DAUM_MAIL":
+        presenceData.largeImageKey = presence.serviceName.toLowerCase();
+        break;
+      
+      case "DAUM_CAFE":
+        presenceData.largeImageKey = presence.serviceName.toLowerCase();
+        break;
+
+      default:
+        break;
+    }
 
     data.presence = {
       "/v/([0-9a-zA-Z]+)": {
@@ -97,7 +117,7 @@ presence.on("UpdateData", async () => {
           presenceData.state = document.querySelector("h3.tit_view")?.textContent;
 
           presenceData.buttons = [{
-            url: document.baseURI,
+            url: document.URL,
             label: "Read Article"
           }];
 
@@ -115,7 +135,7 @@ presence.on("UpdateData", async () => {
 
             presenceData.buttons = [{
               label: "Watch Video",
-              url: document.baseURI
+              url: document.URL
             }];
 
             if (video.paused){
@@ -133,7 +153,7 @@ presence.on("UpdateData", async () => {
 
           presenceData.buttons = [{
             label: "Read Blog",
-            url: document.baseURI
+            url: document.URL
           }];
         }
       },
@@ -153,7 +173,7 @@ presence.on("UpdateData", async () => {
 
           presenceData.buttons = [{
             label: "Watch Video",
-            url: document.baseURI
+            url: document.URL
           }];
 
           if (video?.paused){
@@ -170,7 +190,7 @@ presence.on("UpdateData", async () => {
 
           presenceData.buttons = [{
             label: "View Car",
-            url: document.baseURI
+            url: document.URL
           }];
         }
       },
@@ -182,19 +202,19 @@ presence.on("UpdateData", async () => {
 
           presenceData.buttons = [{
             label: "View Movie",
-            url: document.baseURI
+            url: document.URL
           }];
         }
       },
       "/person/": {
         service: "DAUM_MOVIE",
         setPresenceData(){
-          presenceData.details = "Viewing cast:";
+          presenceData.details = "Viewing actor:";
           presenceData.state = document.querySelector('span.txt_tit')?.textContent;
 
           presenceData.buttons = [{
-            label: "View Cast",
-            url: document.baseURI
+            label: "View Actor",
+            url: document.URL
           }];
         }
       },
@@ -215,7 +235,7 @@ presence.on("UpdateData", async () => {
 
             presenceData.buttons = [{
               label: "Watch Video",
-              url: document.baseURI
+              url: document.URL
             }];
 
             if (video.paused){
@@ -241,7 +261,7 @@ presence.on("UpdateData", async () => {
 
           presenceData.buttons = [{
             label: "Watch Video",
-            url: document.baseURI
+            url: document.URL
           }];
 
           if (video?.paused){
@@ -266,7 +286,7 @@ presence.on("UpdateData", async () => {
 
           presenceData.buttons = [{
             label: "Watch Video",
-            url: document.baseURI
+            url: document.URL
           },{
             label: "View Channel",
             url: document.querySelector<HTMLAnchorElement>('a.link_txt')?.href
@@ -354,6 +374,42 @@ presence.on("UpdateData", async () => {
         setPresenceData(){
           presenceData.details = "Composing a new mail";
         }
+      },
+      "/([a-zA-Z0-9]+)": {
+        service: "DAUM_CAFE",
+        setPresenceData(){
+          presenceData.details = "Viewing cafe:";
+          presenceData.state = cafe.name ?? "Unknown";
+
+          presenceData.buttons = [{
+            label: "View Cafe",
+            url: document.URL
+          }];
+        }
+      },
+      "/([0-9a-zA-Z]+)/([0-9A-Za-z]+)": {
+        service: "DAUM_CAFE",
+        setPresenceData(){
+          presenceData.details = "Viewing page:";
+          presenceData.state = `${cafe.title ?? "Unknown"} • ${cafe.name ?? "Unknown"}`;
+
+          presenceData.buttons = [{
+            label: "View Page",
+            url: document.URL
+          }];
+        }
+      },
+      "/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)": {
+        service: "DAUM_CAFE",
+        setPresenceData(){
+          presenceData.details = "Reading article:";
+          presenceData.state = `${cafe.article ?? "Unknown"} • ${cafe.name ?? "Unknown"}`;
+
+          presenceData.buttons = [{
+            label: "Read Article",
+            url: document.URL
+          }];
+        }
       }
     };
 
@@ -387,8 +443,5 @@ presence.on("UpdateData", async () => {
         }
     }
 
-    if (!presenceData.details){
-      presence.setTrayTitle();
-      presence.setActivity();
-    } else presence.setActivity(presenceData);
+    presence.setActivity(presenceData);
 });

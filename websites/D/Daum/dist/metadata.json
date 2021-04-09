@@ -20,9 +20,11 @@
         "entertain.daum.net",
         "auto.daum.net",
         "mail.daum.net",
-        "blog.daum.net"
+        "blog.daum.net",
+        "top.cafe.daum.net",
+        "cafe.daum.net"
     ],
-    "regExp": "([a-z]+)([.]v)?[.]daum[.]([a-z0-9]+)",
+    "regExp": "(top[.])?([a-z]+)([.]v)?[.]daum[.]([a-z0-9]+)",
     "color": "#f4f7fb",
     "altnames": ["다음", "다음 뉴스", "다음 메일"],
     "tags": ["daum", "news", "blog"],
