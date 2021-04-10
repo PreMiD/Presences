@@ -46,8 +46,9 @@ presence.on("UpdateData", async () => {
 
   // Dashboard
   if (path[0] == "app") {
-    const namespace: apiNamespace = path[1] as apiNamespace ||
-      await getPageletiable(apiNamespaceVar) as apiNamespace,
+    const namespace: apiNamespace =
+        (path[1] as apiNamespace) ||
+        ((await getPageletiable(apiNamespaceVar)) as apiNamespace),
       socketUrl = `${await getPageletiable(apiWebsocketUrlVar)}/${namespace}`,
       apiReady = await checkAPIConnection(namespace, socketUrl);
 
@@ -355,7 +356,10 @@ class APIConnection {
       connection.websocket.onmessage = function (event: MessageEvent) {
         presence.info(`Message from Rythm's API: ${event.data}`);
         if (event.data) {
-          connection.apiData = { ...connection.apiData, ...JSON.parse(event.data) };
+          connection.apiData = {
+            ...connection.apiData,
+            ...JSON.parse(event.data)
+          };
         }
       };
     });
