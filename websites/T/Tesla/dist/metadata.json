@@ -13,7 +13,7 @@
     "www.tesla.com",
     "shop.tesla.com"
   ],
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/8FrVa6D.png",
   "thumbnail": "https://i.imgur.com/20F9yxy.png",
   "color": "#E82127",
@@ -27,7 +27,12 @@
       "title": "Icon",
       "icon": "fad fa-icons",
       "value": 0,
-      "values": ["Red", "Red with text", "White", "White with text"]
+      "values": [
+        "Red",
+        "Red with text",
+        "White",
+        "White with text"
+      ]
     },
     {
       "id": "timeElapsed",
