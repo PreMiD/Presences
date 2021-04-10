@@ -264,6 +264,9 @@ presence.on("UpdateData", async () => {
     case pathIncludes("/settings"):
       presenceData.details = "Updating settings";
       break;
+    case pathIncludes("/notifications"):
+      presenceData.details = "Notifications";
+      break;
     case pathIncludes("/dashboard"):
       presenceData.details = "Dashboard Analytics";
       break;
