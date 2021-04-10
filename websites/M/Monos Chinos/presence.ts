@@ -39,7 +39,7 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-presence.on("iFrameData", async (context: any) => {
+presence.on("iFrameData", async (context) => {
   video = context;
 });
 
