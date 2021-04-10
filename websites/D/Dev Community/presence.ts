@@ -12,7 +12,7 @@ let articleTitle: string,
   listingTitle: string,
   podcastTitle: string,
   searchTerm: string,
-  searchLength: Number,
+  searchLength: number,
   contentStateKey: string,
   contentStateText: string;
 
