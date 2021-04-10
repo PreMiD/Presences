@@ -3,16 +3,18 @@ const presence = new Presence({
   }),
   timestamp = Math.floor(Date.now() / 1000);
 
-let articleTitle = "",
-  authorName = "",
-  authorUrl = "",
-  feedTop = "",
-  feedTag = "",
-  feedListings = "",
-  listingTitle = "",
-  podcastTitle = "",
-  contentStateKey = "",
-  contentStateText = "";
+let articleTitle: string,
+  authorName: string,
+  authorUrl: string,
+  feedTop: string,
+  feedTag: string,
+  feedListings: string,
+  listingTitle: string,
+  podcastTitle: string,
+  searchTerm: string,
+  searchLength: Number,
+  contentStateKey: string,
+  contentStateText: string;
 
 // checkmate javascript
 function pathIncludes(string: string): boolean {
@@ -249,6 +251,15 @@ presence.on("UpdateData", async () => {
           }
         ];
       break;
+    case pathIncludes("/search"):
+      searchTerm = (<HTMLInputElement>(
+        document.querySelector(".crayons-textfield")
+      )).value;
+      searchLength = document.querySelector("#substories").children.length;
+      presenceData.details = "Search: " + searchTerm;
+      presenceData.state = searchLength + " Results";
+      presenceData.smallImageKey = "search";
+      presenceData.smallImageText = "Searching...";
       break;
     case pathIncludes("/settings"):
       presenceData.details = "Updating settings";
@@ -294,7 +305,6 @@ presence.on("UpdateData", async () => {
     case pathIncludes("/onboarding"):
       presenceData.details = "Setting up Profile";
       break;
-
     default:
       presenceData.details = "General Feed";
   }

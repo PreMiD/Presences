@@ -3,7 +3,7 @@
     "name": "The Gamerzs",
     "id": "730142125181894657"
   },
-  "service": "Dev Commnuity",
+  "service": "Dev Community",
   "description": {
     "en": "A constructive and inclusive social network for software developers. With you every step of your journey."
   },
@@ -14,7 +14,6 @@
   "color": "#7289DA",
   "tags": ["tutorials", "dev-to", "community"],
   "category": "socials",
-  "buttons": true,
   "settings": [
     {
       "id": "buttons",
