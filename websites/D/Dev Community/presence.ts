@@ -238,6 +238,18 @@ presence.on("UpdateData", async () => {
     case pathIncludes("/readinglist"):
       presenceData.details = "Viewing Read List";
       break;
+    case pathIncludes("/series"):
+      authorName = document.querySelector("h1").textContent;
+      presenceData.details = authorName;
+      if (buttons)
+        presenceData.buttons = [
+          {
+            label: "View Series",
+            url: document.location.href
+          }
+        ];
+      break;
+      break;
     case pathIncludes("/settings"):
       presenceData.details = "Updating settings";
       break;
