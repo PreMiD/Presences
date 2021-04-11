@@ -12,11 +12,11 @@
   "service": "top.gg",
   "description": {
     "en": "Rich Presence for top.gg - The biggest Discord Bot List and more",
-    "tr": "top.gg, en büyük ve en gelişmiş Discord bot listesidir.",
+    "tr": "top.gg için Rich Presence. - En büyük Discord Bot listesi ve dahası.",
     "de": "Rich Presence für top.gg - Die größte Discord Bot Liste und mehr"
   },
   "url": "top.gg",
-  "version": "1.3.9",
+  "version": "1.4.0",
   "logo": "https://i.imgur.com/fu207UB.png",
   "thumbnail": "https://i.imgur.com/6RKANLa.png",
   "color": "#7289DA",
