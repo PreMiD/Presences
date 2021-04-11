@@ -23,7 +23,6 @@ presence.on("UpdateData", () => {
       const fileType: string = (document.querySelector(
         "#workspace-root > div > div.jsx-132086333.content > div.jsx-77352756.workspace-page-wrapper.desktop > div > div > div:nth-child(1) > header > div > div.jsx-1874997921.left > div > div > div.jsx-2652062152.workspace-header-info > div.jsx-2652062152.language-icon-container > img"
       ) as HTMLImageElement).alt;
-
       const projectName: string =
         Path.split("/").filter((elm) => elm !== "")[1] +
         `${window.location.hash ? ` - ${window.location.hash.substr(1)}` : ""}`;
@@ -53,15 +52,15 @@ presence.on("UpdateData", () => {
     }`;
   } else if (Path.startsWith("/talk")) {
     presenceData.details = "Surfing feed";
+    const postType: string = Path.replace("/talk/", "").split("/")[0];
+    const postElement: HTMLDivElement = document.querySelector(
+      "#__next > div > div.jsx-132086333.content > div.jsx-2019133593 > div.jsx-2019133593.post-page-content > div.jsx-347352367 > div.jsx-347352367.board-post-detail-header > div.jsx-347352367.board-post-detail-title"
+    );
     switch (Path.replace("/talk/", "")) {
       case "all":
         presenceData.state = "All posts";
         break;
       default:
-        const postType: string = Path.replace("/talk/", "").split("/")[0];
-        const postElement: HTMLDivElement = document.querySelector(
-          "#__next > div > div.jsx-132086333.content > div.jsx-2019133593 > div.jsx-2019133593.post-page-content > div.jsx-347352367 > div.jsx-347352367.board-post-detail-header > div.jsx-347352367.board-post-detail-title"
-        );
         presenceData.state = `${postType
           .charAt(0)
           .toUpperCase()}${postType.substr(1)}${
