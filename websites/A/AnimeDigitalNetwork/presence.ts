@@ -36,7 +36,9 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div > div.sc-pAArZ.idjhKu > div:nth-child(2) > div > div > div > div.sc-jwDLgl.jjQkhb > div > h1"),  t2 = t.textContent.toLowerCase(), title = t2.charAt(0).toUpperCase() + t2.slice(1), data = {
+    const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div > div.sc-pAArZ.idjhKu > div:nth-child(2) > div > div > div > div.sc-jwDLgl.jjQkhb > div > h1"),  
+          t2 = t.textContent.toLowerCase(), 
+          title = t2.charAt(0).toUpperCase() + t2.slice(1), data = {
         details: "Browsing...",
         state: title,
         largeImageKey: "logo"
