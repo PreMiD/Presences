@@ -11,9 +11,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("video") && video) {
     if (video && !isNaN(video.duration)) {
-      const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div:nth-child(1) > div.sc-jOdeeR.sc-kHIeKe.fmWHUu > div:nth-child(1) > div > div > h1 > a")
-      const t2 = t.textContent.toLowerCase()
-      const title = t2.charAt(0).toUpperCase() + t2.slice(1), timestamps = presence.getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), data = {
+      const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div:nth-child(1) > div.sc-jOdeeR.sc-kHIeKe.fmWHUu > div:nth-child(1) > div > div > h1 > a"), t2 = t.textContent.toLowerCase(), title = t2.charAt(0).toUpperCase() + t2.slice(1), timestamps = presence.getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), data = {
           details: title,
           largeImageKey: "logo",
           smallImageKey: video.paused ? "pause" : "play",
@@ -29,14 +27,12 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
 
-      if (title !== null) {
+      if (t !== null) {
         presence.setActivity(data, !video.paused);
       }
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div > div.sc-pAArZ.idjhKu > div:nth-child(2) > div > div > div > div.sc-jwDLgl.jjQkhb > div > h1")
-    const t2 = t.textContent.toLowerCase()
-    const title = t2.charAt(0).toUpperCase() + t2.slice(1), data = {
+    const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div > div.sc-pAArZ.idjhKu > div:nth-child(2) > div > div > div > div.sc-jwDLgl.jjQkhb > div > h1"),  t2 = t.textContent.toLowerCase(), title = t2.charAt(0).toUpperCase() + t2.slice(1), data = {
         details: "Browsing...",
         state: title,
         largeImageKey: "logo"
