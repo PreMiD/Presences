@@ -11,7 +11,11 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("video") && video) {
     if (video && !isNaN(video.duration)) {
-      const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div:nth-child(1) > div.sc-jOdeeR.sc-kHIeKe.fmWHUu > div:nth-child(1) > div > div > h1 > a"), t2 = t.textContent.toLowerCase(), title = t2.charAt(0).toUpperCase() + t2.slice(1), timestamps = presence.getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), data = {
+      const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div:nth-child(1) > div.sc-jOdeeR.sc-kHIeKe.fmWHUu > div:nth-child(1) > div > div > h1 > a"), 
+      t2 = t.textContent.toLowerCase(), 
+      title = t2.charAt(0).toUpperCase() + t2.slice(1), 
+      timestamps = presence.getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), 
+      data: PresenceData = {
           details: title,
           largeImageKey: "logo",
           smallImageKey: video.paused ? "pause" : "play",
