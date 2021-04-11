@@ -23,11 +23,9 @@ getAction = (): string => {
 getText = (text: string): string => {
   return document.getElementsByClassName(text)[0].textContent.trim();
 },
-epochWithOffset = (h?: number, m?: number, s?: number): number => {
+epochWithOffset = (t: number): number => {
   const now = new Date();
-  if (h) { now.setTime(now.getTime() + (h * 1000 * 60 * 60)) } // Hours
-  if (m) { now.setTime(now.getTime() + (m * 1000 * 60)) }      // Minutes
-  if (s) { now.setTime(now.getTime() + (s * 1000)) }           // Seconds
+  now.setTime(now.getTime() + t);
   return now.setTime(now.getTime());
 },
 getStatus = (): string => {
@@ -60,12 +58,7 @@ presence.on("UpdateData", async () => {
     if (getStatus() == "Pause") { flag = false }
 
     if (!flag) {
-      const duration = getText("jw-text-duration").split(":").map(e => parseInt(e));
-      switch (duration.length) {
-        case 1: watchStamp = epochWithOffset(null, null, duration[2]);               break;
-        case 2: watchStamp = epochWithOffset(null, duration[0], duration[1]);        break;
-        case 3: watchStamp = epochWithOffset(duration[0], duration[1], duration[2]); break;
-      }
+      watchStamp = epochWithOffset(document.getElementsByTagName("video")[0].duration);
       if (!isNaN(watchStamp)) { flag = true }
     }
     presenceData = {
