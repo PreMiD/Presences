@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "mwnew"
   };
 
-  if (document.location.href == "https://mangaworld.tv/") {
+  if (document.location.href == "https://mangaworld.cc") {
     data.smallImageKey = "search";
     data.smallImageText = "Homepage";
     data.details = "Navigando...";
