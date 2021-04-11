@@ -65,7 +65,7 @@ presence.on("UpdateData", () => {
         break;
     }
   } else if (Path.startsWith("/templates")) {
-    presenceData.details = "Viewing repl.it templates";
+    presenceData.details = "Viewing replit templates";
   } else {
     presenceData.details = "Viewing unsupported page";
   }
