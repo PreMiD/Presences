@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "ReXulEc",
+    "id": "709376748206293002"
+  },
+  "service": "Bionluk",
+  "description": {
+    "en": "Talented Freelancer Platform",
+    "tr": "Yetenekli Freelancer Platformu"
+  },
+  "url": "www.bionluk.com",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/pfS8opX.png",
+  "thumbnail": "https://i.imgur.com/gehIuui.png",
+  "color": "#f83e57",
+  "tags": [
+    "bionluk",
+    "freelancer",
+    "talent"
+  ],
+  "category": "other"
+}
