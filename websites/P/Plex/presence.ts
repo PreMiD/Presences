@@ -198,13 +198,16 @@ presence.on("UpdateData", async () => {
       user =
         document.querySelector(
           "#plex > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a"
+        ) ||
+        document.querySelector(
+          "#plex > div:nth-child(4) > div > div:nth-child(4) > div > div > div:nth-child(2) > div:nth-child(1) > div > a"
         );
       title =
         document.querySelector(
           "#plex > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > span"
         ) ||
         document.querySelector(
-          "#plex > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > span"
+          "#plex > div:nth-child(4) > div > div:nth-child(4) > div > div > div:nth-child(2) > div:nth-child(1) > div > span"
         );
       presenceData.details = user.textContent;
       if (title) {
