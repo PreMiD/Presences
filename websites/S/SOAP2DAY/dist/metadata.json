@@ -17,20 +17,8 @@
     "tv",
     "friends"
   ],
-  "url": [
-    "soap2day.to",
-    "soap2day.im",
-    "soap2day.ac",
-    "soap2day.se",
-    "s2dfree.to",
-    "s2dfree.is",
-    "s2dfree.in",
-    "s2dfree.nl",
-    "s2dfree.cc",
-    "s2dfree.de"
-  ],
   "description": {
     "en": "You can watch all videos without logging in or registration. Soap2day is free all the time, but there are few ads on videoplayer page."
   },
-  "regExp": "soap2day|s2dfree."
+  "regExp": "(soap2day|s2dfree)[.]"
 }
