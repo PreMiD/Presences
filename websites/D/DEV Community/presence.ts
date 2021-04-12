@@ -168,7 +168,6 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
       break;
-      break;
     case isPodcast():
       presenceData.details = podcastTitle;
       presenceData.state = authorName;
