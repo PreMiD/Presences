@@ -168,6 +168,9 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = Date.parse(channel.timeStart);
           presenceData.endTimestamp = Date.parse(channel.timeEnd);
           showFormat3 = true;
+          presenceData.buttons = [
+            { label: "Listen along!", url: `https://reyfm.de/${channel.name}` }
+          ];
         } else {
           artist = document.querySelector(
             "#player > div.wrapper > div.current > span.artist"
@@ -196,8 +199,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = format2
         .replace("%title%", track)
         .replace("%artist%", artist);
-
-      presenceData.buttons = [{ label: "Listen along!", url: document.URL }];
     }
   } else if (
     document.location.hostname == "www.reyfm.de" &&
