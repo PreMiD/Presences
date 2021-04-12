@@ -98,8 +98,8 @@ async function sendRequestToDomainAPI(): Promise<Response> {
 }
 
 async function checkDomain(): Promise<DomainCheckState> {
-  const result: DomainCheckState = {invalid: true, validDomains: null}
-  const cookies = parseCookieString(document.cookie),
+  const result: DomainCheckState = {invalid: true, validDomains: null},
+       cookies = parseCookieString(document.cookie),
     cookieName = "PMD_GOGOANIME_VALID_DOMAINS",
     domainParts = document.location.hostname.split('.');
   let currentDomain: string;
@@ -129,7 +129,7 @@ async function checkDomain(): Promise<DomainCheckState> {
     if (data) {
       const domains: string[] = data.payload.allDomains;
       document.cookie = `${cookieName}=${domains.join("-")}; max-age=1800`;
-      result.validDomains = domains.join('\n')
+      result.validDomains = domains.join('\n');
       if (domains.includes(currentDomain)) {
         result.invalid = false;
       }
