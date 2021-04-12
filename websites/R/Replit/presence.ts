@@ -26,9 +26,8 @@ presence.on("UpdateData", () => {
       presenceData.state = projectName;
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     }
-  } else if (Path.startsWith("/notifications")) {
-    presenceData.details = `Viewing notifications`;
-  } else if (Path.startsWith("/languages")) {
+  } else if (Path.startsWith("/notifications")) presenceData.details = `Viewing notifications`;
+    else if (Path.startsWith("/languages")) {
     presenceData.details = "Browsing languages:";
     presenceData.state = "All languages";
   } else if (Path.startsWith("/new")) {
@@ -64,10 +63,7 @@ presence.on("UpdateData", () => {
         }`;
         break;
     }
-  } else if (Path.startsWith("/templates")) {
-    presenceData.details = "Viewing replit templates";
-  } else {
-    presenceData.details = "Viewing unsupported page";
-  }
+  } else if (Path.startsWith("/templates")) presenceData.details = "Viewing replit templates";
+    else presenceData.details = "Viewing unsupported page";
   presence.setActivity(presenceData);
 });
