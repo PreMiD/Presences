@@ -161,10 +161,13 @@ presence.on("UpdateData", async () => {
       endTimestamp = presence.getTimestampsfromMedia(
         document.querySelector("video")
       )[1];
-      if (contentStateKey === "play" && endTimestamp > 0)
+      if (contentStateKey == "play" && endTimestamp > 0) {
         presenceData.endTimestamp = endTimestamp;
-      else
+      } else {
+        delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
+      }
+      break;
       break;
     case isPodcast():
       presenceData.details = podcastTitle;
