@@ -92,9 +92,9 @@ presence.on("UpdateData", async () => {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
         data.state = "In a GroupWatch";
       } else {
-        if (privacy) {
+        if (privacy)
           data.state = subtitle ? strings.watchingSeries : strings.watchingMovie;
-        } else {
+        else {
           data.details = title;
           data.state = subtitle || "Movie";
         }
@@ -195,9 +195,9 @@ presence.on("UpdateData", async () => {
       title = titleField?.textContent;
       subtitle = subtitleField?.textContent; // episode or empty if it's a movie
 
-      if (privacy) {
+      if (privacy)
         data.state = subtitle ? strings.watchingSeries : strings.watchingMovie;
-      } else {
+      else {
         data.details = title;
         data.state = subtitle || "Movie";
       }
