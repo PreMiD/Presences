@@ -193,10 +193,12 @@ presence.on("UpdateData", async () => {
       endTimestamp = presence.getTimestampsfromMedia(
         document.querySelector("#audio")
       )[1];
-      if (contentStateKey === "play" && endTimestamp > 0)
+      if (contentStateKey == "play" && endTimestamp > 0) {
         presenceData.endTimestamp = endTimestamp;
-      else
+      } else {
+        delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
+      }
       break;
     case pathIncludes("/top/"):
       feedTop = document.querySelector(
