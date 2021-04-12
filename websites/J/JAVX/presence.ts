@@ -1,7 +1,5 @@
 const presence = new Presence({
-    clientId: "830476272978362408",
-    injectOnComplete: true,
-    appMode: true
+    clientId: "830476272978362408"
   }),
   strings = presence.getStrings({
     playing: "general.playing",
@@ -31,36 +29,30 @@ presence.on("UpdateData", async () => {
 
   if (search.startsWith("?s")) {
     const s = new URLSearchParams(search).get("s");
-
-    if (s) {
-      presenceData.details = "Đang tìm phim với từ khoá:";
-      presenceData.state = encodeURI(s);
-    } else {
-      presenceData.details = "Đang tìm phim";
-    }
-  } else if (pathname === "/") {
-    presenceData.details = "Đang ở trang chủ";
-  } else if (pathname.startsWith("/sign-up")) {
+    presenceData.details = s ? "Đang tìm phim với từ khoá:" : "Đang tìm phim";
+    if (s) presenceData.state = encodeURI(s);
+  } else if (pathname === "/") presenceData.details = "Đang ở trang chủ";
+  else if (pathname.startsWith("/sign-up"))
     presenceData.details = "Đang đăng ký tài khoản";
-  } else if (pathname.startsWith("/sign-in")) {
+  else if (pathname.startsWith("/sign-in"))
     presenceData.details = "Đang đăng nhập";
-  } else if (pathname.startsWith("/profile")) {
+  else if (pathname.startsWith("/profile"))
     presenceData.details = "Đang xem hồ sơ cá nhân";
-  } else if (pathname.startsWith("/favorite")) {
+  else if (pathname.startsWith("/favorite"))
     presenceData.details = "Đang xem danh sách các phim đã lưu";
-  } else if (pathname.startsWith("/censored")) {
+  else if (pathname.startsWith("/censored"))
     presenceData.details = "Đang ở trang JAV có che";
-  } else if (pathname.startsWith("/uncensored")) {
+  else if (pathname.startsWith("/uncensored"))
     presenceData.details = "Đang ở trang JAV không che";
-  } else if (pathname.startsWith("/porn")) {
+  else if (pathname.startsWith("/porn"))
     presenceData.details = "Đang ở trang Porn châu Âu";
-  } else if (pathname.startsWith("/actresses")) {
+  else if (pathname.startsWith("/actresses"))
     presenceData.details = "Đang xem danh sách JAV Idols (diễn viễn JAV)";
-  } else if (pathname.startsWith("/studios")) {
+  else if (pathname.startsWith("/studios"))
     presenceData.details = "Đang xem danh sách JAV Studios (hãng sản xuất JAV)";
-  } else if (pathname.startsWith("/years")) {
+  else if (pathname.startsWith("/years"))
     presenceData.details = "Đang xem danh sách các năm phát hành JAV";
-  } else if (pathname.startsWith("/category/")) {
+  else if (pathname.startsWith("/category/")) {
     const labelWithVideoCounter = document
         .querySelector("h2")
         .textContent.trim(),
@@ -121,23 +113,19 @@ presence.on("UpdateData", async () => {
     const { playback, currentTime, duration, paused } = video;
 
     if (playback) {
-      const [start, end] = presence.getTimestamps(currentTime, duration);
+      const timestamps = presence.getTimestamps(currentTime, duration);
 
-      presenceData.startTimestamp = start;
-      presenceData.endTimestamp = end;
+      presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).paused
         : (await strings).playing;
 
       if (paused) {
-        delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
     }
-  } else {
-    delete presenceData.startTimestamp;
   }
 
-  presence.setActivity(presenceData, !!presenceData.startTimestamp);
+  presence.setActivity(presenceData);
 });
