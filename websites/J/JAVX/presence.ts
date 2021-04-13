@@ -2,9 +2,54 @@ const presence = new Presence({
     clientId: "830476272978362408"
   }),
   strings = presence.getStrings({
+    viewHome: "general.viewHome",
+    viewPage: "general.viewPage",
+    viewList: "general.viewList",
+    viewSeries: "general.viewSeries",
+    viewGenre: "general.viewGenre",
+    viewAccount: "general.viewAccount",
+    watchingVid: "general.watchingVid",
     playing: "general.playing",
-    paused: "general.paused"
-  });
+    paused: "general.paused",
+    searchFor: "general.searchFor",
+    searchSomething: "general.searchSomething",
+    search: "general.search",
+    buttonViewPage: "general.buttonViewPage",
+    buttonWatchVideo: "general.buttonWatchVideo"
+  }),
+  getSearchKeyword = (): string =>
+    new URLSearchParams(location.search).get("s"),
+  upperFirstLetter = (text: string): string =>
+    text.charAt(0).toUpperCase() + text.slice(1),
+  getPage = (): string => {
+    const elPagination = document.querySelector("ul.pagination");
+    if (!elPagination) return "p.1/1";
+
+    const currentPage = elPagination
+        .querySelector("li.page-item.active > a")
+        .textContent.trim(),
+      lastPage = parseInt(
+        elPagination
+          .querySelector("li.page-item:last-child > a")
+          .getAttribute("href")
+          .split("page/")
+          .pop()
+      );
+
+    return `p.${currentPage}/${lastPage}`;
+  },
+  getEpisode = (): string => {
+    const elEpisodes = document.querySelector("#episodes");
+    if (!elEpisodes) return "ep.1/1";
+
+    const currentEpisode = elEpisodes
+        .querySelector("button.active")
+        .textContent.replace("Tập", "")
+        .trim(),
+      totalEpisodes = elEpisodes.childNodes.length;
+
+    return `ep.${currentEpisode}/${totalEpisodes}`;
+  };
 
 let video = { playback: false, currentTime: 0, duration: 0, paused: false };
 
@@ -25,75 +70,82 @@ presence.on("UpdateData", async () => {
       largeImageKey: "javx",
       startTimestamp: Math.floor(Date.now() / 1000)
     },
-    { pathname, search } = document.location;
+    { pathname, search } = location,
+    pagesWithoutTermName = [
+      "/censored",
+      "/uncensored",
+      "/porn",
+      "/favorite",
+      "/actresses",
+      "/studios",
+      "/years"
+    ],
+    pagesWithTermName = ["/actress", "/studio", "/release_year"];
 
-  if (search.startsWith("?s")) {
-    const s = new URLSearchParams(search).get("s");
-    presenceData.details = s ? "Đang tìm phim với từ khoá:" : "Đang tìm phim";
-    if (s) presenceData.state = encodeURI(s);
-  } else if (pathname === "/") presenceData.details = "Đang ở trang chủ";
-  else if (pathname.startsWith("/sign-up"))
-    presenceData.details = "Đang đăng ký tài khoản";
-  else if (pathname.startsWith("/sign-in"))
-    presenceData.details = "Đang đăng nhập";
-  else if (pathname.startsWith("/profile"))
-    presenceData.details = "Đang xem hồ sơ cá nhân";
-  else if (pathname.startsWith("/favorite"))
-    presenceData.details = "Đang xem danh sách các phim đã lưu";
-  else if (pathname.startsWith("/censored"))
-    presenceData.details = "Đang ở trang JAV có che";
-  else if (pathname.startsWith("/uncensored"))
-    presenceData.details = "Đang ở trang JAV không che";
-  else if (pathname.startsWith("/porn"))
-    presenceData.details = "Đang ở trang Porn châu Âu";
-  else if (pathname.startsWith("/actresses"))
-    presenceData.details = "Đang xem danh sách JAV Idols (diễn viễn JAV)";
-  else if (pathname.startsWith("/studios"))
-    presenceData.details = "Đang xem danh sách JAV Studios (hãng sản xuất JAV)";
-  else if (pathname.startsWith("/years"))
-    presenceData.details = "Đang xem danh sách các năm phát hành JAV";
-  else if (pathname.startsWith("/category/")) {
-    const labelWithVideoCounter = document
-        .querySelector("h2")
+  if (pathname === "/" && !search) {
+    presenceData.details = (await strings).viewHome;
+    presenceData.state = (await strings).searchSomething;
+  } else if (search.startsWith("?s")) {
+    const keyword = getSearchKeyword(),
+      page = getPage();
+
+    presenceData.details = keyword
+      ? (await strings).searchFor
+      : (await strings).search;
+    presenceData.state = keyword ? `"${encodeURI(keyword)}" ${page}` : page;
+  } else if (pathname.startsWith("/sign-")) {
+    presenceData.details = (await strings).viewPage;
+    presenceData.state = document
+      .querySelector(".navbar .border-left")
+      .textContent.trim();
+  } else if (pathname.startsWith("/profile")) {
+    const name = document.querySelector("h2").textContent.trim(),
+      role = document.querySelector("p > small").textContent.trim();
+
+    presenceData.details = (await strings).viewAccount;
+    presenceData.state = `${upperFirstLetter(role.toLowerCase())}: ${name}`;
+  } else if (pathname.startsWith("/category")) {
+    const genre = document
+      .querySelector("h2")
+      .textContent.replace(/\(.*\)$/, "")
+      .trim();
+
+    presenceData.details = (await strings).viewGenre;
+    presenceData.state = `${genre} ${getPage()}`;
+  } else if (pathname.startsWith("/tag")) {
+    const tag = document
+      .querySelector("h2")
+      .textContent.replace(/\(.*\)$/, "")
+      .trim();
+
+    presenceData.details = (await strings).viewSeries;
+    presenceData.state = `${tag} ${getPage()}`;
+  } else if (~pagesWithoutTermName.findIndex((x) => pathname.startsWith(x))) {
+    const title = document
+      .querySelector("h2")
+      .textContent.replace(/\(.*\)$/, "")
+      .trim();
+
+    presenceData.details = (await strings).viewList;
+    presenceData.state = `${title} ${getPage()}`;
+  } else if (~pagesWithTermName.findIndex((x) => pathname.startsWith(x))) {
+    const title = document
+        .querySelector(".navbar .border-left")
         .textContent.trim(),
-      labelWithoutCounter = labelWithVideoCounter.replace(/\(\d+\)$/, "");
-
-    presenceData.details = "Đang xem các phim thuộc thể loại:";
-    presenceData.state = labelWithoutCounter;
-  } else if (pathname.startsWith("/tag/")) {
-    const labelWithVideoCounter = document
+      name = document
         .querySelector("h2")
-        .textContent.trim(),
-      labelWithoutCounter = labelWithVideoCounter.replace(/\(\d+\)$/, "");
+        .textContent.replace(/\(.*\)$/, "")
+        .trim();
 
-    presenceData.details = "Đang xem các phim có nhãn:";
-    presenceData.state = labelWithoutCounter;
-  } else if (pathname.startsWith("/actress/")) {
-    const nameWithVideoCounter = document
-        .querySelector("h2")
-        .textContent.trim(),
-      nameWithoutCounter = nameWithVideoCounter.replace(/\(\d+\)$/, "");
-
-    presenceData.details = "Đang xem các phim của idol:";
-    presenceData.state = nameWithoutCounter;
-  } else if (pathname.startsWith("/studio/")) {
-    const nameWithVideoCounter = document
-        .querySelector("h2")
-        .textContent.trim(),
-      nameWithoutCounter = nameWithVideoCounter.replace(/\(\d+\)$/, "");
-
-    presenceData.details = "Đang xem các phim của hãng:";
-    presenceData.state = nameWithoutCounter;
-  } else if (pathname.startsWith("/release_year/")) {
-    const yearWithVideoCounter = document
-        .querySelector("h2")
-        .textContent.trim(),
-      yearWithoutCounter = yearWithVideoCounter.replace(/\(\d+\)$/, "");
-
-    presenceData.details = "Đang xem các phim của năm:";
-    presenceData.state = yearWithoutCounter;
+    presenceData.details = (await strings).viewList;
+    presenceData.state = `${title} ${name} ${getPage()}`;
   } else if (Object.keys(video).length > 0) {
-    const title = document.querySelector("#title").textContent.trim(),
+    const censorship = document
+        .querySelector("#censorship > a")
+        .textContent.trim(),
+      engname = document.querySelector("#title").textContent.trim(),
+      id = document.querySelector("#id .list-inline-item").textContent.trim(),
+      title = censorship === "Porn" ? engname : id,
       actresses: string[] = [],
       studios: string[] = [];
 
@@ -104,16 +156,21 @@ presence.on("UpdateData", async () => {
       .querySelectorAll("#studios .stretched-link")
       .forEach((studio) => studios.push(studio.textContent.trim()));
 
-    const strActresses = actresses.join(", "),
-      strStudios = studios.join(", ");
+    const episodes = getEpisode(),
+      strActresses = actresses.join(", "),
+      strStudios = studios.join(", "),
+      strTitle = `${title} ${episodes}`;
 
-    presenceData.details = title;
+    presenceData.details = `${(await strings).watchingVid}: ${strTitle}`;
     presenceData.state = `${strActresses} - ${strStudios}`;
 
     const { playback, currentTime, duration, paused } = video;
 
     if (playback) {
-      const timestamps = presence.getTimestamps(currentTime, duration);
+      const timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      );
 
       presenceData.endTimestamp = timestamps[1];
       presenceData.smallImageKey = paused ? "pause" : "play";
@@ -121,11 +178,9 @@ presence.on("UpdateData", async () => {
         ? (await strings).paused
         : (await strings).playing;
 
-      if (paused) {
-        delete presenceData.endTimestamp;
-      }
+      if (paused) delete presenceData.endTimestamp;
     }
-  }
+  } else presenceData.details = (await strings).searchSomething;
 
   presence.setActivity(presenceData);
 });
