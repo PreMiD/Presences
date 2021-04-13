@@ -13,9 +13,7 @@ const presence = new Presence({
     paused: "general.paused",
     searchFor: "general.searchFor",
     searchSomething: "general.searchSomething",
-    search: "general.search",
-    buttonViewPage: "general.buttonViewPage",
-    buttonWatchVideo: "general.buttonWatchVideo"
+    search: "general.search"
   }),
   getSearchKeyword = (): string =>
     new URLSearchParams(location.search).get("s"),
