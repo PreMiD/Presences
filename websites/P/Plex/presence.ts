@@ -85,7 +85,7 @@ function getTranslation(stringName: string): string {
         case "de":
           return "Sieht sich Podcasts an";
         case "sv":
-           return "Bläddrar igenom podcasts";
+          return "Bläddrar igenom podcasts";
         default:
           return "Browsing podcasts";
       }
@@ -175,13 +175,10 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.querySelector("#plex") !== null) {
-    if (
-      document.querySelector("#plex > div:nth-child(4) > div") !== null
-    ) {
-      const video: HTMLVideoElement =
-          document.querySelector(
-            "#plex > div:nth-child(4) > div > div:nth-child(1) > video"
-          ),
+    if (document.querySelector("#plex > div:nth-child(4) > div") !== null) {
+      const video: HTMLVideoElement = document.querySelector(
+          "#plex > div:nth-child(4) > div > div:nth-child(1) > video"
+        ),
         currentTime = video.currentTime,
         duration = video.duration,
         paused = video.paused,
