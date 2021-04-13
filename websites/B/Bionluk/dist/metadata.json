@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "ReXulEc",
+    "id": "709376748206293002"
+  },
+  "service": "Bionluk",
+  "description": {
+    "en": "Talented Freelancer Community",
+    "tr": "Yetenekli Freelancer Topluluğu"
+  },
+  "url": "bionluk.com",
+  "version": "2.0.2",
+  "logo": "https://i.imgur.com/pfS8opX.png",
+  "thumbnail": "https://i.imgur.com/gehIuui.png",
+  "color": "#E1306C",
+  "tags": [
+    "freelancer",
+    "talent",
+    "fiverr"
+  ],
+  "category": "socials"
+}
