@@ -163,8 +163,7 @@ presence.on("UpdateData", async () => {
       )[1];
       if (contentStateKey === "play" && endTimestamp > 0)
         presenceData.endTimestamp = endTimestamp;
-      else
-        delete presenceData.endTimestamp;
+      else delete presenceData.endTimestamp;
       break;
     case isPodcast():
       presenceData.details = podcastTitle;
@@ -195,8 +194,7 @@ presence.on("UpdateData", async () => {
       )[1];
       if (contentStateKey === "play" && endTimestamp > 0)
         presenceData.endTimestamp = endTimestamp;
-      else
-        delete presenceData.endTimestamp;
+      else delete presenceData.endTimestamp;
       break;
     case pathIncludes("/top/"):
       feedTop = document.querySelector(
