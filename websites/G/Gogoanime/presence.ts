@@ -17,7 +17,7 @@ interface GogoanimeApiResponse {
 
 interface DomainCheckState {
   invalid: boolean;
-  validDomains: string;
+  validDomains: string[];
 }
 
 const presence = new Presence({
@@ -99,21 +99,16 @@ async function sendRequestToDomainAPI(): Promise<Response> {
 
 async function checkDomain(): Promise<DomainCheckState> {
   const result: DomainCheckState = {invalid: true, validDomains: null},
-       cookies = parseCookieString(document.cookie),
-    cookieName = "PMD_GOGOANIME_VALID_DOMAINS",
-    domainParts = document.location.hostname.split('.');
-  let currentDomain: string;
-  if(domainParts.length == 1){
-    currentDomain = document.location.hostname; 
-    }
-  else{
-      currentDomain = `${domainParts[1]}.${domainParts[2]}`; // ignore the subdomain
-    }
-    
-  for (let i = 0; i < cookies.length; i++) {
+        cookies = parseCookieString(document.cookie),
+        cookieName = "PMD_GOGOANIME_VALID_DOMAINS";
+  let currentDomain = document.location.hostname;
+  if(currentDomain.split('.').length > 2){
+    currentDomain = document.location.hostname.substring(document.location.hostname.indexOf('.') + 1); // ignore the subdomain; 
+  }
+ 
+    for (let i = 0; i < cookies.length; i++) {
     if (cookies[i].key === cookieName) {
-      const cachedValidDomains: string[] = cookies[i].value.split("-");
-      result.validDomains = cachedValidDomains.join("\n");
+      const cachedValidDomains = result.validDomains = cookies[i].value.split("-");
       if (cachedValidDomains.includes(currentDomain)) {
         result.invalid = false;
         return result;
@@ -127,9 +122,8 @@ async function checkDomain(): Promise<DomainCheckState> {
     }
     const data: GogoanimeApiResponse = await body.json();
     if (data) {
-      const domains: string[] = data.payload.allDomains;
+      const domains: string[] = result.validDomains = data.payload.allDomains;
       document.cookie = `${cookieName}=${domains.join("-")}; max-age=1800`;
-      result.validDomains = domains.join('\n');
       if (domains.includes(currentDomain)) {
         result.invalid = false;
       }
@@ -153,7 +147,7 @@ presence.on("UpdateData", async () => {
       isClone = result.invalid;
       if (isClone) {
         presence.error(
-          `The following gogoanime domain is a clone therefore not supported by this extension. The valid domains are:\n${result.validDomains}`
+          `The following gogoanime domain is a clone therefore not supported by this extension. The valid domains are:\n${result.validDomains.join("\n")}`
         );
       } else {
         presence.success(
