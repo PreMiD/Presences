@@ -5,6 +5,10 @@ const presence = new Presence({
 
 startTimestamp = Math.floor(Date.now() / 1000);
 
+const presenceData: PresenceData = {
+  largeImageKey: "anicloud"
+};
+
 /**
 * Get Timestamps
 * @param {Number} videoTime Current video time seconds
@@ -19,7 +23,7 @@ const startTime = Math.floor(Date.now() / 1000),
 return [startTime, endTime];
 }
 
-let ep,
+let timestamps,
 current: number,
 duration: number,
 paused: boolean,
@@ -47,9 +51,6 @@ const strings = await presence.getStrings({
   browsing: "presence.activity.browsing"
 });
 
-const presenceData: PresenceData = {
-  largeImageKey: "anicloud1"
-};
 if (pathname.startsWith("/anime/")) {
   const title = document.querySelector("h1").textContent,
   ep = document.querySelector("#wrapper > div.seriesContentBox > div.container.marginBottom > ul > li.currentActiveLink > a > span").textContent.match(/Episode\W\d/),
@@ -60,7 +61,7 @@ if (pathname.startsWith("/anime/")) {
       {
         label: "Current Anime",
         url: document.location.href
-      },
+      }
     ]; 
  
   const video: HTMLVideoElement = document.querySelector(`video`);
