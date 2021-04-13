@@ -2,7 +2,6 @@ const presence = new Presence({
   clientId: `830517484472762408`
 }),
 { pathname } = window.location,
-{ hostname } = window.location,
 
 startTimestamp = Math.floor(Date.now() / 1000);
 
@@ -20,7 +19,7 @@ const startTime = Math.floor(Date.now() / 1000),
 return [startTime, endTime];
 }
 
-let episode,
+let ep,
 current: number,
 duration: number,
 paused: boolean,
@@ -49,7 +48,7 @@ const strings = await presence.getStrings({
 });
 
 const presenceData: PresenceData = {
-  largeImageKey: "anicloud"
+  largeImageKey: "anicloud1"
 };
 if (pathname.startsWith("/anime/")) {
   const title = document.querySelector("h1").textContent,
@@ -62,7 +61,7 @@ if (pathname.startsWith("/anime/")) {
         label: "Current Anime",
         url: document.location.href
       },
-    ]   
+    ]; 
  
   const video: HTMLVideoElement = document.querySelector(`video`);
   if (video != null) {
@@ -71,7 +70,9 @@ if (pathname.startsWith("/anime/")) {
     current = video.currentTime;
     paused = video.paused;
   
-  }document.querySelector
+  }
+  
+  document.querySelector;
   if (played) {
     if (!paused) {
       const timestamps = getTimestamps(current, duration);
@@ -83,14 +84,12 @@ if (pathname.startsWith("/anime/")) {
       ? (await strings).paused
       : (await strings).playing;
     }
-  
 
 } else if (pathname == `/`) {
   presenceData.details = "Home";
   presenceData.startTimestamp = startTimestamp;
 
 }
-
 
 else if (pathname.startsWith('/animes')) {
   const sotiert = document.querySelector("#wrapper > div.container.marginBottom > div.seriesListNavigation > strong").textContent;
@@ -110,9 +109,8 @@ else if (pathname.startsWith('/beliebte-animes')) {
 
 }
 
-
 else if (pathname.startsWith('/animekalender')) {
-  const date = document.querySelector(".col-md-4").textContent
+  const date = document.querySelector(".col-md-4").textContent;
   presenceData.details = "Animekalender";
   presenceData.state = "- " + date;
 
@@ -141,7 +139,6 @@ else if (pathname.startsWith('/katalog')) {
   presenceData.details = "Anime Katalog";
   presenceData.state = "- " + katalog;
 
-
 }
 
 else if (pathname.startsWith('/genre')) {
@@ -149,25 +146,21 @@ else if (pathname.startsWith('/genre')) {
   presenceData.details = "Genre";
   presenceData.state = "- " + genre;
 
-
 }
 
 else if (pathname.startsWith('/neu')) {
   const neu = document.querySelector("h1").textContent;
   presenceData.details = neu;
 
-
 }
 
 else if (pathname.startsWith('/login')) {
   presenceData.details = "Login bei AniCloud";
 
-
 }
 
 else if (pathname.startsWith('/registrierung')) {
   presenceData.details = "Registrierung bei AniCloud";
-
 
 }
 
@@ -177,7 +170,7 @@ else if (pathname.startsWith('/user/')) {
   presenceData.details = rank;
   presenceData.state = "- " + user;
   presenceData.smallImageKey = "user";
-  presenceData.smallImageText = rank
+  presenceData.smallImageText = rank;
 
 }
 
@@ -192,22 +185,22 @@ else if (pathname.endsWith('/account')) {
 
 else if (pathname.endsWith('/settings')) {
   presenceData.details = "Account";
-  presenceData.state = "- Einstellungen"
+  presenceData.state = "- Einstellungen";
 }
 
 else if (pathname.endsWith('/change-email')) {
   presenceData.details = "Account";
-  presenceData.state = "- E-Mail anpassen"
+  presenceData.state = "- E-Mail anpassen";
 }
 
 else if (pathname.endsWith('/profile-picture')) {
   presenceData.details = "Account";
-  presenceData.state = "- Profilbild ändern"
+  presenceData.state = "- Profilbild ändern";
 }
 
 else if (pathname.endsWith('/profile-background')) {
   presenceData.details = "Account";
-  presenceData.state = "- Profil Hintergrund ändern"
+  presenceData.state = "- Profil Hintergrund ändern";
 }
 
 else if (pathname.includes('/frage')) {
@@ -227,7 +220,7 @@ else if (pathname.endsWith('/nachrichten')) {
 
 else if (pathname.endsWith('/watchlist')) {
   const name = document.querySelector(".name").textContent;
-  presenceData.details = "Profile | " + name
+  presenceData.details = "Profile | " + name;
   presenceData.state = "- Watchlist";
 }
 
