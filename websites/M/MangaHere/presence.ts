@@ -3,7 +3,6 @@ const presence = new Presence({
 }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "mangahere"
@@ -80,8 +79,6 @@ presence.on("UpdateData", async () => {
       }
       data.startTimestamp = browsingStamp;
     }
-    
-
     //Manga Viewing
     else if (pathname.startsWith("/manga") && pathname.endsWith("/")) {
       const title = document.querySelector(".detail-info-right-title-font").textContent,
@@ -108,13 +105,11 @@ presence.on("UpdateData", async () => {
          progress = readingPage + "/" + totalPages;
         data.state = chapter + " page " + progress;
       }
-      
       data.details = title;
       data.startTimestamp = browsingStamp;
       data.smallImageKey = "reading";
       data.smallImageText = "Reading";
     }
-
     //Searching
     else if (pathname.startsWith("/search")) {
       const queryString = window.location.search,
