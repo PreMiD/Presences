@@ -26,7 +26,7 @@ let video,
 current: number,
 duration: number,
 paused: boolean,
-played: boolean
+played: boolean;
 
 presence.on(
 "iFrameData",
