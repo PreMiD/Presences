@@ -3,7 +3,6 @@ const presence = new Presence({
 }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-// let username: string;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -21,7 +20,7 @@ presence.on("UpdateData", async () => {
               "tragedy", "mecha"
             ];
 
-  if (hostname === "mangahere.cc" || hostname === "www.mangahere.cc") {
+  if (hostname === "www.mangahere.cc") {
 
     if (pathname == "/") {
       data.details = "Viewing the Homepage";
@@ -50,7 +49,8 @@ presence.on("UpdateData", async () => {
     }
     //ganre/new/
     else if (pathname.endsWith("/new/")) {
-      const splitUrl = url.split('/');
+      const url = pathname,
+       splitUrl = url.split('/');
       if (splitUrl[1] == "new") {
         data.details = "Browsing new manga";
       } else {
@@ -60,7 +60,8 @@ presence.on("UpdateData", async () => {
     }
     //ganre/completed/
     else if (pathname.endsWith("/completed/")) {
-      let splitUrl = url.split('/');
+      const url = pathname,
+       splitUrl = url.split('/');
       if (splitUrl[1] == "completed") {
         data.details = "Browsing completed manga";
       } else {
@@ -70,8 +71,8 @@ presence.on("UpdateData", async () => {
     }
     //ganre/on_going/
     else if (pathname.endsWith("/on_going/")) {
-      var url = pathname;
-      var splitUrl = url.split('/');
+      const url = pathname,
+       splitUrl = url.split('/');
       if (splitUrl[1] == "on_going") {
         data.details = "Browsing ongoing manga";
       } else {
@@ -83,8 +84,8 @@ presence.on("UpdateData", async () => {
 
     //Manga Viewing
     else if (pathname.startsWith("/manga") && pathname.endsWith("/")) {
-      const title = document.querySelector(".detail-info-right-title-font").textContent;
-      let link = window.location.href;
+      const title = document.querySelector(".detail-info-right-title-font").textContent,
+       link = window.location.href;
       data.details = "Viewing manga:";
       data.state = title;
       data.startTimestamp = browsingStamp;
@@ -94,17 +95,17 @@ presence.on("UpdateData", async () => {
     }
     //Manga Reading
     else if (pathname.startsWith("/manga") && pathname.endsWith(".html")) {
-      let title = document.querySelector(".reader-header-title-1").textContent;
-      let chapter = document.querySelector(".reader-header-title-2").textContent;
+      const title = document.querySelector(".reader-header-title-1").textContent,
+       chapter = document.querySelector(".reader-header-title-2").textContent,
       //setting up page progress
-      let current = document.querySelector('.pager-list-left span');
+       current = document.querySelector('.pager-list-left span');
       if(current == null){
         data.state = chapter;
       }else{
-        let len = current.children.length;
-        let totalPages = current.children[len - 2].textContent;
-        let readingPage = document.querySelector(".pager-list-left > span > .active").textContent;
-        let progress = readingPage + "/" + totalPages;
+         const len = current.children.length,
+         totalPages = current.children[len - 2].textContent,
+         readingPage = document.querySelector(".pager-list-left > span > .active").textContent,
+         progress = readingPage + "/" + totalPages;
         data.state = chapter + " page " + progress;
       }
       
@@ -116,10 +117,10 @@ presence.on("UpdateData", async () => {
 
     //Searching
     else if (pathname.startsWith("/search")) {
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const search = urlParams.get('title');
-      var searchName = "";
+      const queryString = window.location.search,
+       urlParams = new URLSearchParams(queryString),
+       search = urlParams.get('title');
+       let searchName = "";
       if (search == "") {
         searchName = urlParams.get('name');
       } else {
