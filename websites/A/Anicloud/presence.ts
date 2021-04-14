@@ -1,13 +1,12 @@
 const presence = new Presence({
   clientId: `830517484472762408`
 }),
-{ pathname } = window.location,
 
-startTimestamp = Math.floor(Date.now() / 1000);
-
-const presenceData: PresenceData = {
-  largeImageKey: "anicloud"
-};
+  strings = presence.getStrings({
+  playing: "presence.playback.playing",
+  paused: "presence.playback.paused",
+  browsing: "presence.activity.browsing"
+});
 
 /**
 * Get Timestamps
@@ -23,7 +22,7 @@ const startTime = Math.floor(Date.now() / 1000),
 return [startTime, endTime];
 }
 
-let timestamps,
+let video,
 current: number,
 duration: number,
 paused: boolean,
@@ -45,13 +44,12 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-const strings = await presence.getStrings({
-  playing: "presence.playback.playing",
-  paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing"
-});
+  const presenceData: PresenceData = {
+    largeImageKey: "anicloud"
+  };
+  
 
-if (pathname.startsWith("/anime/")) {
+if (document.location.pathname.startsWith("/anime/")) {
   const title = document.querySelector("h1").textContent,
   ep = document.querySelector("#wrapper > div.seriesContentBox > div.container.marginBottom > ul > li.currentActiveLink > a > span").textContent.match(/Episode\W\d/),
   actvie = document.querySelector("h2").textContent;
@@ -86,86 +84,85 @@ if (pathname.startsWith("/anime/")) {
       : (await strings).playing;
     }
 
-} else if (pathname == `/`) {
+} else if (document.location.pathname == `/`) {
   presenceData.details = "Home";
-  presenceData.startTimestamp = startTimestamp;
 
 }
 
-else if (pathname.startsWith('/animes')) {
+else if (document.location.pathname.startsWith('/animes')) {
   const sotiert = document.querySelector("#wrapper > div.container.marginBottom > div.seriesListNavigation > strong").textContent;
 presenceData.details = "Alle Animes";
 presenceData.state = "Sortiert nach: " + sotiert;
 
 }
 
-else if (pathname.startsWith('/search')) {
+else if (document.location.pathname.startsWith('/search')) {
   presenceData.details = "Erweiterte Suche";
 
 }
 
-else if (pathname.startsWith('/beliebte-animes')) {
+else if (document.location.pathname.startsWith('/beliebte-animes')) {
   const text = document.querySelector("title").textContent.split("|")[0];
   presenceData.details = text;
 
 }
 
-else if (pathname.startsWith('/animekalender')) {
+else if (document.location.pathname.startsWith('/animekalender')) {
   const date = document.querySelector(".col-md-4").textContent;
   presenceData.details = "Animekalender";
   presenceData.state = "- " + date;
 
 }
 
-else if (pathname.startsWith('/random')) {
+else if (document.location.pathname.startsWith('/random')) {
   presenceData.details = "Der Anime - ";
   presenceData.state = "Zufallsgenerator";
 
 }
 
-else if (pathname.startsWith('/zufall')) {
+else if (document.location.pathname.startsWith('/zufall')) {
   presenceData.details = "Der Anime - ";
   presenceData.state = "Zufallsgenerator";
 
 }
 
-else if (pathname.startsWith('/animewuensche')) {
+else if (document.location.pathname.startsWith('/animewuensche')) {
   const date = document.querySelector("title").textContent.split("|")[0];
   presenceData.details = date;
 
 }
 
-else if (pathname.startsWith('/katalog')) {
+else if (document.location.pathname.startsWith('/katalog')) {
   const katalog = document.querySelector("h1").textContent;
   presenceData.details = "Anime Katalog";
   presenceData.state = "- " + katalog;
 
 }
 
-else if (pathname.startsWith('/genre')) {
+else if (document.location.pathname.startsWith('/genre')) {
   const genre = document.querySelector("h1").textContent;
   presenceData.details = "Genre";
   presenceData.state = "- " + genre;
 
 }
 
-else if (pathname.startsWith('/neu')) {
+else if (document.location.pathname.startsWith('/neu')) {
   const neu = document.querySelector("h1").textContent;
   presenceData.details = neu;
 
 }
 
-else if (pathname.startsWith('/login')) {
+else if (document.location.pathname.startsWith('/login')) {
   presenceData.details = "Login bei AniCloud";
 
 }
 
-else if (pathname.startsWith('/registrierung')) {
+else if (document.location.pathname.startsWith('/registrierung')) {
   presenceData.details = "Registrierung bei AniCloud";
 
 }
 
-else if (pathname.startsWith('/user/')) {
+else if (document.location.pathname.startsWith('/user/')) {
   const user = document.querySelector("h1").textContent,
   rank = document.querySelector("#userDetails > div > div > div:nth-child(3) > div").textContent;
   presenceData.details = rank;
@@ -175,67 +172,65 @@ else if (pathname.startsWith('/user/')) {
 
 }
 
-else if (pathname.endsWith('/anleitung')) {
+else if (document.location.pathname.endsWith('/anleitung')) {
   presenceData.details = "So funktioniert's";
   presenceData.state = "- Die Anleitung";
 }
 
-else if (pathname.endsWith('/account')) {
+else if (document.location.pathname.endsWith('/account')) {
   presenceData.details = "Mein Account";
 }
 
-else if (pathname.endsWith('/settings')) {
+else if (document.location.pathname.endsWith('/settings')) {
   presenceData.details = "Account";
   presenceData.state = "- Einstellungen";
 }
 
-else if (pathname.endsWith('/change-email')) {
+else if (document.location.pathname.endsWith('/change-email')) {
   presenceData.details = "Account";
   presenceData.state = "- E-Mail anpassen";
 }
 
-else if (pathname.endsWith('/profile-picture')) {
+else if (document.location.pathname.endsWith('/profile-picture')) {
   presenceData.details = "Account";
   presenceData.state = "- Profilbild ändern";
 }
 
-else if (pathname.endsWith('/profile-background')) {
+else if (document.location.pathname.endsWith('/profile-background')) {
   presenceData.details = "Account";
   presenceData.state = "- Profil Hintergrund ändern";
 }
 
-else if (pathname.includes('/frage')) {
+else if (document.location.pathname.includes('/frage')) {
   presenceData.details = "Fragen & Antworten";
-  presenceData.startTimestamp = startTimestamp;
 }
 
-else if (pathname.startsWith('/support')) {
+else if (document.location.pathname.startsWith('/support')) {
   presenceData.details = "Hilfe & Support";
-  presenceData.startTimestamp = startTimestamp;
 }
 
-else if (pathname.endsWith('/nachrichten')) {
+else if (document.location.pathname.endsWith('/nachrichten')) {
   presenceData.details = "Account";
   presenceData.state = "- Nachrichten";
 }
 
-else if (pathname.endsWith('/watchlist')) {
+else if (document.location.pathname.endsWith('/watchlist')) {
   const name = document.querySelector(".name").textContent;
   presenceData.details = "Profile | " + name;
   presenceData.state = "- Watchlist";
 }
 
-else if (pathname.endsWith('/subscribed')) {
+else if (document.location.pathname.endsWith('/subscribed')) {
   presenceData.details = "Account";
   presenceData.state = "- Abonnierte Serien";
 }
 
-else if (pathname.endsWith('/notifications')) {
+else if (document.location.pathname.endsWith('/notifications')) {
   presenceData.details = "Account";
   presenceData.state = "- Benachrichtigungen";
 }
 
-else if (pathname.startsWith('/dmca')) {
+else if (document.location.pathname.startsWith('/dmca')) {
   presenceData.details = "Digital Millennium - ";
   presenceData.state = "Copyright Act of 1998";
 }
