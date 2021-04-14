@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
             case (path.includes("/statistics")):
             case (path.includes("/common-core-maths")):
             case (path.includes("/probability")):
-                presenceData.details = "Reading for..."
+                presenceData.details = "Reading for...";
                 presenceData.state = title + " examples";
                 presenceData.smallImageKey = "reading";
                 presenceData.smallImageText = "Mathematics";
@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
             case (path.includes("/physical-geography")):
             case (path.includes("/health-and-medicine")):
             case (path.includes("/food-science")):
-                presenceData.details = "Reading for..."
+                presenceData.details = "Reading for...";
                 presenceData.state = title + " examples";
                 presenceData.smallImageKey = "reading";
                 presenceData.smallImageText = "Science & Technology";
@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
             case (path.includes("/games-and-puzzles")):
             case (path.includes("/economic-data")):
             case (path.includes("/education")):
-                presenceData.details = "Reading for..."
+                presenceData.details = "Reading for...";
                 presenceData.state = title + " examples";
                 presenceData.smallImageKey = "reading";
                 presenceData.smallImageText = "Society & Culture";
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
             case (path.includes("/dates-and-times")):
             case (path.includes("/todays-world")):
             case (path.includes("/hobbies")):
-                presenceData.details = "Reading for..."
+                presenceData.details = "Reading for...";
                 presenceData.state = title + " examples";
                 presenceData.smallImageKey = "reading";
                 presenceData.smallImageText = "Everyday life";
@@ -137,10 +137,10 @@ presence.on("UpdateData", async () => {
     }
     else if (path.includes("/problem-generator")) {
         if (path.includes("/quiz")) {
-            const theme = document.querySelector(".categoryTitle").textContent.trim()
-            let determinant = "a "
+            const theme = document.querySelector(".categoryTitle").textContent.trim();
+            let determinant = "a ";
             if (theme.startsWith("A")) {
-                determinant = "an "
+                determinant = "an ";
             }
             presenceData.details = "Playing " + determinant + theme + " Quiz:";
             presenceData.state = document.querySelector(".topicTitle").textContent.trim() +

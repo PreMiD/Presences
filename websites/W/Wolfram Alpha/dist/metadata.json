@@ -3,7 +3,7 @@
     "name": "Kozou",
     "id": "379362415428632576"
   },
-  "service": "Wolfram Alpha",
+  "service": "WolframAlpha",
   "description": {
     "en": "Compute answers using Wolfram's breakthrough technology & knowledgebase, relied on by millions of students & professionals. For math, science, nutrition,...",
     "fr": "Calculez des réponses en utilisant la technologie de pointe et la base de connaissances de Wolfram, auxquelles des millions d'étudiants et de professionnels font confiance. Pour les mathématiques, les sciences, la nutrition,..."
@@ -17,7 +17,7 @@
   "thumbnail": "https://i.imgur.com/M8EhvsC.png",
   "color": "#c24802",
   "tags": [
-    "wolfram alpha",
+    "wolframalpha",
     "wiki",
     "wolfram"
   ],
