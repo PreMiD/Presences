@@ -77,6 +77,23 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
+  } else if (document.location.pathname.includes("/genre")) {
+    presenceData.details =
+      "Viewing The Genre " +
+      document.querySelector(
+        "span.text-red-500.capitalize.px-16.font-thin.text-xl"
+      ).textContent;
+    presenceData.smallImageKey = "genre";
+    presenceData.buttons = [
+      {
+        label:
+          "View The Genre " +
+          document.querySelector(
+            "span.text-red-500.capitalize.px-16.font-thin.text-xl"
+          ).textContent,
+        url: document.location.href
+      }
+    ];
   } else if (document.location.pathname.includes("/details")) {
     presenceData.details = `Checking Synopsis`;
     presenceData.smallImageKey = "details";
