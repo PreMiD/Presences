@@ -2,7 +2,7 @@ const presence = new Presence ({
     clientId: "826428815365373994"
 }),
     browsingStamp = Math.floor(Date.now() / 1000),
-    path = document.location.pathname
+    path = document.location.pathname;
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
@@ -197,10 +197,6 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Page:";
         presenceData.state = "ToS page";
     }
-    else if (path.includes("/social")) {
-        presenceData.details = "Viewing Page:";
-        presenceData.state = "Social page";
-    }
     else {
         presenceData.details = "Viewing Page:";
         presenceData.state = "Home page";
@@ -211,5 +207,5 @@ presence.on("UpdateData", async () => {
         presence.setActivity();
   } else {
         presence.setActivity(presenceData);
-  };
+  }
 });
