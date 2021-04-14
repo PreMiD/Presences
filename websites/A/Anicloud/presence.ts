@@ -26,7 +26,7 @@ let video,
 current: number,
 duration: number,
 paused: boolean,
-played: boolean;
+played: boolean
 
 presence.on(
 "iFrameData",
@@ -47,7 +47,6 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "anicloud"
   };
-  
 
 if (document.location.pathname.startsWith("/anime/")) {
   const title = document.querySelector("h1").textContent,
@@ -68,10 +67,7 @@ if (document.location.pathname.startsWith("/anime/")) {
     duration = video.duration;
     current = video.currentTime;
     paused = video.paused;
-  
   }
-  
-  document.querySelector;
   if (played) {
     if (!paused) {
       const timestamps = getTimestamps(current, duration);
