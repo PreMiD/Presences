@@ -10,14 +10,22 @@ presence.on("UpdateData", async () => {
     largeImageKey: "mangahere"
   },
     pathname = document.location.pathname,
-    hostname = document.location.hostname;
+    hostname = document.location.hostname,
+    ganres = ["martial-arts", "action", "school-life",
+              "sci-fi", "yoi", "shotacon", "mystery", "shoujo",
+              "ecchi", "doujinshi", "lolicon", "adventure", "romance",
+              "gender-bender", "harem", "sports", "webtoons", "comedy",
+              "shounen-ai", "josei", "shoujo-ai", "adult", "fantasy", "supernatural",
+              "psychological", "yuri", "one-shot", "historical", "drama",
+              "seinen", "mature", "smut", "horror", "shounen", "slice-of-life",
+              "tragedy", "mecha"
+            ];
 
   if (hostname === "mangahere.cc" || hostname === "www.mangahere.cc") {
 
     if (pathname == "/") {
       data.details = "Viewing the Homepage";
       data.startTimestamp = browsingStamp;
-      console.log(data.details);
       data.buttons = [{ label: "Visit the website", url: "www.mangahere.cc" }];
     }
     if (pathname == "/latest/") {
@@ -63,6 +71,25 @@ presence.on("UpdateData", async () => {
       }
       data.startTimestamp = browsingStamp;
     }
+    //ganre/on_going/
+    if (pathname.endsWith("/on_going/")) {
+      var url = pathname;
+      var splitUrl = url.split('/');
+      if (splitUrl[1] == "on_going") {
+        data.details = "Browsing ongoing manga";
+      } else {
+        data.details = "Browsing ongoing " + splitUrl[1] + " manga";
+      }
+      data.startTimestamp = browsingStamp;
+    }
+    //Browisng ganre
+    for(var i = 0; i<ganres.length; i++){
+      if(pathname.substring(1, pathname.length-1) == ganres[i]){
+        data.details = "Browsing:";
+        data.state = ganres[i].replace('-',' ') +" manga"
+      data.startTimestamp = browsingStamp;
+      }
+    }
 
     //Manga Viewing
     if (pathname.startsWith("/manga") && pathname.endsWith("/")) {
@@ -79,21 +106,20 @@ presence.on("UpdateData", async () => {
     if (pathname.startsWith("/manga") && pathname.endsWith(".html")) {
       const title = document.querySelector(".reader-header-title-1").textContent;
       const chapter = document.querySelector(".reader-header-title-2").textContent;
-      //var elements=document.querySelector('.pager-list-left').children;
-      //var test = elements.item(2);
-      //console.log(test);
+      //setting up page progress
       var current = document.querySelector('.pager-list-left span');
-      var len = current.children.length;
-      var totalPages = current.children[len - 2].textContent;
-      console.log(totalPages);
-
-
-
-      var readingPage = document.querySelector(".pager-list-left > span > .active").textContent;
-
-      var progress = readingPage + "/" + totalPages;
+      if(current == null){
+        data.state = chapter;
+      }else{
+        var len = current.children.length;
+        var totalPages = current.children[len - 2].textContent;
+        console.log(totalPages);
+        var readingPage = document.querySelector(".pager-list-left > span > .active").textContent;
+        var progress = readingPage + "/" + totalPages;
+        data.state = chapter + " page " + progress;
+      }
+      
       data.details = title;
-      data.state = chapter + " page " + progress;
       data.startTimestamp = browsingStamp;
       data.smallImageKey = "reading";
       data.smallImageText = "Reading";
@@ -113,6 +139,8 @@ presence.on("UpdateData", async () => {
       data.details = "Searching:";
       data.state = searchName;
       data.startTimestamp = browsingStamp;
+      data.smallImageKey = "searching";
+      data.smallImageText = "Searching";
     }
   }
   presence.setActivity(data);
