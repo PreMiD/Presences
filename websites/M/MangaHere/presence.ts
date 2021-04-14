@@ -31,7 +31,6 @@ presence.on("UpdateData", async () => {
     if (pathname == "/latest/") {
       data.details = "Browsing latest manga";
       data.startTimestamp = browsingStamp;
-      console.log(data.details);
     }
     if (pathname == "/ranking/") {
       data.details = "Browsing by ranking";
@@ -51,8 +50,8 @@ presence.on("UpdateData", async () => {
     }
     //ganre/new/
     if (pathname.endsWith("/new/")) {
-      var url = pathname;
-      var splitUrl = url.split('/');
+      let url = pathname;
+      let splitUrl = url.split('/');
       if (splitUrl[1] == "new") {
         data.details = "Browsing new manga";
       } else {
@@ -83,10 +82,10 @@ presence.on("UpdateData", async () => {
       data.startTimestamp = browsingStamp;
     }
     //Browisng ganre
-    for(var i = 0; i<ganres.length; i++){
+    for(let i = 0; i<ganres.length; i++){
       if(pathname.substring(1, pathname.length-1) == ganres[i]){
         data.details = "Browsing:";
-        data.state = ganres[i].replace('-',' ') +" manga"
+        data.state = ganres[i].replace('-',' ') +" manga";
       data.startTimestamp = browsingStamp;
       }
     }
@@ -94,7 +93,7 @@ presence.on("UpdateData", async () => {
     //Manga Viewing
     if (pathname.startsWith("/manga") && pathname.endsWith("/")) {
       const title = document.querySelector(".detail-info-right-title-font").textContent;
-      var link = window.location.href;
+      let link = window.location.href;
       data.details = "Viewing manga:";
       data.state = title;
       data.startTimestamp = browsingStamp;
@@ -104,18 +103,17 @@ presence.on("UpdateData", async () => {
     }
     //Manga Reading
     if (pathname.startsWith("/manga") && pathname.endsWith(".html")) {
-      const title = document.querySelector(".reader-header-title-1").textContent;
-      const chapter = document.querySelector(".reader-header-title-2").textContent;
+      let title = document.querySelector(".reader-header-title-1").textContent
+      let chapter = document.querySelector(".reader-header-title-2").textContent;
       //setting up page progress
-      var current = document.querySelector('.pager-list-left span');
+      let current = document.querySelector('.pager-list-left span');
       if(current == null){
         data.state = chapter;
       }else{
-        var len = current.children.length;
-        var totalPages = current.children[len - 2].textContent;
-        console.log(totalPages);
-        var readingPage = document.querySelector(".pager-list-left > span > .active").textContent;
-        var progress = readingPage + "/" + totalPages;
+        let len = current.children.length;
+        let totalPages = current.children[len - 2].textContent;
+        let readingPage = document.querySelector(".pager-list-left > span > .active").textContent;
+        let progress = readingPage + "/" + totalPages;
         data.state = chapter + " page " + progress;
       }
       
@@ -134,7 +132,7 @@ presence.on("UpdateData", async () => {
       if (search == "") {
         searchName = urlParams.get('name');
       } else {
-        searchName = urlParams.get('title')
+        searchName = urlParams.get('title');
       }
       data.details = "Searching:";
       data.state = searchName;
