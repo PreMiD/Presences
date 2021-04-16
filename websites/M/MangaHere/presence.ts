@@ -109,13 +109,8 @@ presence.on("UpdateData", async () => {
     else if (pathname.startsWith("/search")) {
       const queryString = window.location.search,
        urlParams = new URLSearchParams(queryString),
-       search = urlParams.get('title');
-       let searchName = "";
-      if (search == "") {
-        searchName = urlParams.get('name');
-      } else {
-        searchName = urlParams.get('title');
-      }
+       search = urlParams.get('title'),
+       searchName = search === "" ? urlParams.get("name") : urlParams.get("title");
       data.details = "Searching:";
       data.state = searchName;
       data.startTimestamp = browsingStamp;
