@@ -4,14 +4,14 @@ const presence = new Presence({
 let elapsedTime: number = null;
 
 presence.on("UpdateData", async () => {
-  const locationHref = document.location.href, 
-        locationHost = document.location.host, 
-        locationPath = document.location.pathname,
-        presenceData: PresenceData = {
-          largeImageKey: "glimesh_logo"
-        };
+  const locationHref = document.location.href,
+    locationHost = document.location.host,
+    locationPath = document.location.pathname,
+    presenceData: PresenceData = {
+      largeImageKey: "glimesh_logo"
+    };
 
-  if (locationHost == "glimesh.tv") {   
+  if (locationHost == "glimesh.tv") {
     presenceData.details = "Browsing...";
     if (locationPath == "/") {
       presenceData.details = "Viewing Home Page";
@@ -80,17 +80,24 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.getElementById("video-column") != null) {
       const username = document.querySelector("h3"),
-            title = document.title.replace(" - Glimesh", "");
+        title = document.title.replace(" - Glimesh", "");
 
-      presenceData.details = await presence.getSetting("show_details") ? title : "Watching a Stream";
+      presenceData.details = (await presence.getSetting("show_details"))
+        ? title
+        : "Watching a Stream";
       if (await presence.getSetting("show_details")) {
         presenceData.state = username.textContent;
       }
 
       const video = document.querySelector("video");
 
-      if (await presence.getSetting("show_buttons") && await presence.getSetting("show_details")) {
-        const profileURL: HTMLAnchorElement = document.querySelector("#video-column > div > div.card-footer.p-1.d-none.d-sm-block > div > div.col-8.d-inline-flex.align-items-center > a");
+      if (
+        (await presence.getSetting("show_buttons")) &&
+        (await presence.getSetting("show_details"))
+      ) {
+        const profileURL: HTMLAnchorElement = document.querySelector(
+          "#video-column > div > div.card-footer.p-1.d-none.d-sm-block > div > div.col-8.d-inline-flex.align-items-center > a"
+        );
         presenceData.buttons = [
           {
             label: "View Profile",
@@ -100,7 +107,10 @@ presence.on("UpdateData", async () => {
       }
 
       if (video != null && !isNaN(video.duration)) {
-        if (await presence.getSetting("show_buttons") && await presence.getSetting("show_details")) {
+        if (
+          (await presence.getSetting("show_buttons")) &&
+          (await presence.getSetting("show_details"))
+        ) {
           presenceData.buttons.unshift({
             label: "Watch Stream",
             url: locationHref

@@ -5,11 +5,9 @@ iframe.on("UpdateData", async () => {
     document.querySelector("#playpause").className == "playing"
   ) {
     iframe.send({
-      iframe_radio: {
-        artist: document.querySelector(".status").textContent.split(" - ")[0],
-        title: document.querySelector(".status").textContent.split(" - ")[1],
-        playing: true
-      }
+      artist: document.querySelector(".status").textContent.split(" - ")[0],
+      title: document.querySelector(".status").textContent.split(" - ")[1],
+      playing: true
     });
   }
 });
