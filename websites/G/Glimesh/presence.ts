@@ -16,35 +16,19 @@ presence.on("UpdateData", async () => {
     if (locationPath == "/") {
       presenceData.details = "Viewing Home Page";
     } else if (locationPath.match("/streams/")) {
-      const category = document.title.replace(' - Glimesh', "");
+      const category = document.title.replace(" - Glimesh", "");
       presenceData.details = "Viewing Category";
       presenceData.state = category;
     } else if (locationPath == "/users" || locationPath == "/users/") {
       presenceData.details = "Viewing All Users";
     } else if (locationPath.match("users/settings")) {
       presenceData.details = "Viewing Settings";
-    } else if (locationPath.match("/blog")) {
-      presenceData.details = "Viewing Blogs";
-      if (locationPath != "/blog" && locationPath != "/blog/") {
-        const blogPost = document.title.replace(" - Glimesh", "");
-        
-        presenceData.details = "Reading" + (!await presence.getSetting("show_details") ? " a " : " ") + "Blog";
-        if (await presence.getSetting("show_details")) {
-          presenceData.state = blogPost;
-        }
-
-        if (await presence.getSetting("show_buttons")) {
-          presenceData.buttons = [
-            {
-              label: "View Blog Post",
-              url: locationHref
-            }
-          ];
-        }
-      }
     } else if (locationPath.match("/about")) { 
       presenceData.details = "Reading about Glimesh";
-      if (locationPath.match("streaming")) {
+      if (locationPath.match("alpha")) {
+        presenceData.details = "Reading About";
+        presenceData.state = "Alpha Features"
+      } else if (locationPath.match("streaming")) {
         presenceData.details = "Reading About";
         presenceData.state = "Streaming";
       } else if (locationPath.match("team")) {
@@ -70,8 +54,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Privacy Policy";
       } else if (locationPath.match("open-data")) {
         presenceData.details = "Viewing Open Data";
-        
         presenceData.state = "Platform User Growth";
+
         if (locationPath.match("subscriptions")) {
           presenceData.state = "Recurring Subscriptions";
         } else if (locationPath.match("streams")) {
@@ -80,11 +64,12 @@ presence.on("UpdateData", async () => {
       }
     } else if (locationPath.match("/profile")) {
       const username = document.title.replace("'s Profile - Glimesh", "");
-
       presenceData.details = "Viewing" + (!await presence.getSetting("show_details") ? " a " : " ") + "Profile";
+
       if (await presence.getSetting("show_details")) {
         presenceData.state = username;
       }
+      
       if (await presence.getSetting("show_buttons") && await presence.getSetting("show_details")) {
         presenceData.buttons = [
           {
@@ -147,6 +132,26 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Merch Store";
   } else if (locationHost == "support.glimesh.tv") {
     presenceData.details = "Viewing Support";
+  } else if (locationHost == "blog.glimesh.tv") {
+    presenceData.details = "Viewing Blogs";
+
+    if (locationPath.match("/posts")) {
+      const blogPost = document.querySelector("body > div > div > div > h1 > a").textContent;
+      
+      presenceData.details = "Reading" + (!await presence.getSetting("show_details") ? " a " : " ") + "Blog";
+      if (await presence.getSetting("show_details")) {
+        presenceData.state = blogPost;
+      }
+
+      if (await presence.getSetting("show_buttons") && await presence.getSetting("show_details")) {
+        presenceData.buttons = [
+          {
+            label: "View Blog Post",
+            url: locationHref
+          }
+        ];
+      }
+    }
   }
 
   if (presenceData.details == null) {
