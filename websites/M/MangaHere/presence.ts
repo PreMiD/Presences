@@ -50,11 +50,7 @@ presence.on("UpdateData", async () => {
     else if (pathname.endsWith("/new/")) {
       const url = pathname,
        splitUrl = url.split('/');
-      if (splitUrl[1] == "new") {
-        data.details = "Browsing new manga";
-      } else {
-        data.details = "Browsing new " + splitUrl[1] + " manga";
-      }
+      data.details = splitUrl[1] === "new" ? "Browsing new manga" : `Browsing new ${splitUrl[1]} manga`
       data.startTimestamp = browsingStamp;
     }
     //ganre/completed/
