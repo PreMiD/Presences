@@ -92,9 +92,8 @@ presence.on("UpdateData", async () => {
        chapter = document.querySelector(".reader-header-title-2").textContent,
       //setting up page progress
        current = document.querySelector('.pager-list-left span');
-      if(current == null){
-        data.state = chapter;
-      }else{
+      if(!current) data.state = chapter;
+      else {
          const len = current.children.length,
          totalPages = current.children[len - 2].textContent,
          readingPage = document.querySelector(".pager-list-left > span > .active").textContent,
