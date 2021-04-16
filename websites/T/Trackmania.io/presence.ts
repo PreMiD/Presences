@@ -138,7 +138,14 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.getElementsByClassName(
         "title"
       )[1].textContent;
-    }
+    } else if (window.location.hash.startsWith("#/leaderboard")) {
+        const trackName = document.getElementsByClassName("game-text")[0]
+          .textContent,
+          mapperName = document.getElementsByClassName("subtitle")[0]
+          .textContent;
+        presenceData.details = "Leaderboard";
+        presenceData.state = `${trackName} (${mapperName})`;
+      }
   } else if (window.location.pathname.startsWith("/api")) {
     presenceData.state = `Viewing API (${window.location.pathname.substr(
       "/api/".length
