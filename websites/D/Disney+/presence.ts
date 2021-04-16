@@ -93,7 +93,9 @@ presence.on("UpdateData", async () => {
         data.state = "In a GroupWatch";
       } else {
         if (privacy)
-          data.state = subtitle ? strings.watchingSeries : strings.watchingMovie;
+          data.state = subtitle
+            ? strings.watchingSeries
+            : strings.watchingMovie;
         else {
           data.details = title;
           data.state = subtitle || "Movie";
@@ -139,7 +141,11 @@ presence.on("UpdateData", async () => {
     }
 
     // GroupWatch lobby
-  } else if (isHostDP && !privacy && location.pathname.includes("/groupwatch/")) {
+  } else if (
+    isHostDP &&
+    !privacy &&
+    location.pathname.includes("/groupwatch/")
+  ) {
     groupWatchCount = document.querySelectorAll(
       ".gw-avatar-enter-done:not([id=gw-invite-button])"
     ).length;
