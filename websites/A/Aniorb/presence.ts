@@ -39,9 +39,9 @@ presence.on("UpdateData", async () => {
     largeImageKey: "aniorb",
     startTimestamp: browsingStamp
   };
-  if (document.location.pathname == "/") {
+  if (document.location.pathname == "/")
     presenceData.details = "Browsing Aniorb";
-  } else if (document.location.pathname.includes("/recentlyadded")) {
+  else if (document.location.pathname.includes("/recentlyadded")) {
     presenceData.details = "Browsing Recently Added";
     presenceData.smallImageKey = "recent";
     presenceData.buttons = [
@@ -95,19 +95,17 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/details")) {
-    presenceData.details = `Checking Synopsis`;
+    presenceData.details = "Checking Synopsis";
     presenceData.smallImageKey = "details";
     presenceData.state = document.querySelector(
       "span.font-bold.text-4xl"
     ).textContent;
     presenceData.buttons = [
       {
-        // details
         label: "Check Synopsis",
         url: document.location.href
       },
       {
-        // manga link
         label: "Read Manga",
         url: document
           .querySelector("span.text-red-500.text-center > a")
@@ -164,7 +162,7 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.pathname.includes("/search")) {
-    presenceData.details = "Searching For...";
+    presenceData.details = "Searching For";
     presenceData.smallImageKey = "search";
     presenceData.state = document.querySelector(
       "#__next > div > div.flex.justify-between > div.w-full.justify-center.items-center.min-h-screen.lg\\:h-full.lg\\:w-10\\/12 > div.mt-28.lg\\:mt-0 > span.text-red-500.capitalize.px-16.font-thin.text-xl"
