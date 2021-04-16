@@ -27,7 +27,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Reading about Glimesh";
       if (locationPath.match("alpha")) {
         presenceData.details = "Reading About";
-        presenceData.state = "Alpha Features"
+        presenceData.state = "Alpha Features";
       } else if (locationPath.match("streaming")) {
         presenceData.details = "Reading About";
         presenceData.state = "Streaming";
