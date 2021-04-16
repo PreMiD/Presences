@@ -60,12 +60,12 @@ presence.on("UpdateData", async () => {
           )[0].textContent;
         } else {
           presenceData.details = "Leaderboard";
-          const campaignName = document.getElementsByClassName("game-text")[0]
+          const mapName = document.getElementsByClassName("game-text")[0]
               .textContent,
             mapperName = document.getElementsByClassName("subtitle")[0]
               .textContent;
 
-          presenceData.state = `${campaignName} (${mapperName})`;
+          presenceData.state = `${mapName} (${mapperName})`;
         }
       }
     } else if (window.location.hash.startsWith("#/rooms")) {
