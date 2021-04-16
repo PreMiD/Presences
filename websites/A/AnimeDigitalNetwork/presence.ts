@@ -11,10 +11,17 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("video") && video) {
     if (video && !isNaN(video.duration)) {
-      const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div:nth-child(1) > div.sc-jOdeeR.sc-kHIeKe.fmWHUu > div:nth-child(1) > div > div > h1 > a").textContent.toLowerCase(),
-      title = t.charAt(0).toUpperCase() + t.slice(1), 
-      timestamps = presence.getTimestamps(Math.floor(video.currentTime), Math.floor(video.duration)), 
-      data: PresenceData = {
+      const t = document
+          .querySelector(
+            "#root > div > div > div.sc-qXJnB.ijvXfJ > div > div:nth-child(1) > div.sc-jOdeeR.sc-kHIeKe.fmWHUu > div:nth-child(1) > div > div > h1 > a"
+          )
+          .textContent.toLowerCase(),
+        title = t.charAt(0).toUpperCase() + t.slice(1),
+        timestamps = presence.getTimestamps(
+          Math.floor(video.currentTime),
+          Math.floor(video.duration)
+        ),
+        data: PresenceData = {
           details: title,
           largeImageKey: "logo",
           smallImageKey: video.paused ? "pause" : "play",
@@ -35,8 +42,13 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const t = document.querySelector("#root > div > div > div.sc-qXJnB.ijvXfJ > div > div > div.sc-pAArZ.idjhKu > div:nth-child(2) > div > div > div > div.sc-jwDLgl.jjQkhb > div > h1").textContent.toLowerCase(),
-          title = t.charAt(0).toUpperCase() + t.slice(1), data = {
+    const t = document
+        .querySelector(
+          "#root > div > div > div.sc-qXJnB.ijvXfJ > div > div > div.sc-pAArZ.idjhKu > div:nth-child(2) > div > div > div > div.sc-jwDLgl.jjQkhb > div > h1"
+        )
+        .textContent.toLowerCase(),
+      title = t.charAt(0).toUpperCase() + t.slice(1),
+      data = {
         details: "Browsing...",
         state: title,
         largeImageKey: "logo"
