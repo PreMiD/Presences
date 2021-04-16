@@ -1,13 +1,29 @@
 import "source-map-support/register";
 
+import { coerce, inc } from "semver";
 import { green, yellow } from "chalk";
-import { readFileSync, writeFileSync } from "fs";
-import { sync as glob } from "glob";
 import { join, normalize, relative, resolve, sep } from "path";
 import { format as prettier, resolveConfig } from "prettier";
-import { coerce, inc } from "semver";
+import { readFileSync, writeFileSync } from "fs";
 
-import execa = require("execa");
+import { exec } from "child_process";
+import { sync as glob } from "glob";
+
+/**
+ * Executes a shell command and return it as a Promise.
+ * @param cmd {string[]}
+ * @return Promise<string>
+ */
+function execShellCommand(cmd: string[]) {
+  return new Promise<string>((resolve) => {
+    exec(cmd.join(" "), (error, stdout, stderr) => {
+      if (error) {
+        console.warn(error);
+      }
+      resolve(stdout ? stdout : stderr);
+    });
+  });
+}
 
 /**
  * Helper function to read any file as string
@@ -129,7 +145,8 @@ const readFile = (path: string): string =>
     );
 
     // Use Git to check what files have changed after TypeScript compilation
-    const { stdout: listOfChangedFiles } = await execa("git", [
+    const listOfChangedFiles = await execShellCommand([
+        "git",
         "--no-pager",
         "diff",
         "--name-only"
