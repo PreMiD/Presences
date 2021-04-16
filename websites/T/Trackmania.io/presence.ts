@@ -25,15 +25,18 @@ presence.on("UpdateData", async () => {
 
   if (window.location.hash.startsWith("#")) {
     if (window.location.hash.startsWith("#/totd")) {
-      presenceData.details = "Track Of The Day";
       if (!window.location.hash.includes("leaderboard")) {
         const title = document.getElementsByClassName("title")[1].textContent,
           month = title.substring(title.indexOf("-") + 2);
+        presenceData.details = "Track Of The Day";
         presenceData.state = month;
       } else {
         const trackName = document.getElementsByClassName("game-text")[0]
+          .textContent,
+          mapperName = document.getElementsByClassName("subtitle")[0]
           .textContent;
-        presenceData.state = `Leaderboard - ${trackName}`;
+        presenceData.details = "Leaderboard - Track Of The Day";
+        presenceData.state = `${trackName} (${mapperName})`;
       }
     } else if (window.location.hash.startsWith("#/cotd")) {
       presenceData.state = "Cup Of The Day";
