@@ -13,10 +13,11 @@
     "nl": "Een nieuwe muziekservice met officiële albums, singles, video's, remixes, live optredens en meer voor Android, iOS en desktop. Het is er allemaal.",
     "tr": "Android, iOS ve masaüstü için resmi albümler, single'lar, videolar, remix'ler, canlı performanslar ve daha fazlasıyla yeni bir müzik servisi.",
     "zh_CN": "全新的音乐服务，包含适用于Android，iOS和PC的官方专辑，单曲，视频，混音，现场表演等。都在这里！",
-    "zh_TW": "全新的音樂服務，包含適用於Android，iOS和PC的官方專輯，單曲，視頻，混音，現場表演等。都在這裡！"
+    "zh_TW": "全新的音樂服務，包含適用於Android，iOS和PC的官方專輯，單曲，視頻，混音，現場表演等。都在這裡！",
+    "ga_IE": "Seirbhís nua ceoil le halbaim oifigiúla, singles, físeáin, remixes, léirithe beo agus go leor eile do Android, iOS agus deasc. Tá sé ar fad anseo."
   },
   "url": "music.youtube.com",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "logo": "https://i.imgur.com/cIZnPDy.png",
   "thumbnail": "https://i.imgur.com/iQ8MA50.png",
   "color": "#E40813",

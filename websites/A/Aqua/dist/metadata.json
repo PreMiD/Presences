@@ -5,10 +5,11 @@
   },
   "service": "Aqua",
   "description": {
-    "en": "An online radio station made by the community for the community."
+    "en": "An online radio station made by the community for the community.",
+    "ga_IE": "Stáisiún raidió ar líne a rinne an pobal don phobal."
   },
   "url": "itsaqua.net",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/dBqeZ3q.png",
   "thumbnail": "https://i.imgur.com/y1Uot2b.png",
   "color": "#2980b9",

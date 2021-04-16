@@ -6,10 +6,11 @@
   "service": "WoxeBot",
   "description": {
     "en": "WoxeBot is a Discord bot that you can add to your server to manage it easily with confidence!",
-    "tr": "WoxeBot sunucularınıza güvenle ekleyebileceğiniz ve işinizi kolaylaştıracak bir Discord botudur"
+    "tr": "WoxeBot sunucularınıza güvenle ekleyebileceğiniz ve işinizi kolaylaştıracak bir Discord botudur",
+    "ga_IE": "Is bot Discord é WoxeBot ar féidir leat a chur le do fhreastalaí chun é a bhainistiú go héasca le muinín!"
   },
   "url": "panel.woxe.me",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/bPgn0X2.png",
   "thumbnail": "https://i.imgur.com/bPgn0X2.png",
   "color": "#49ABE3",

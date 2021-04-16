@@ -12,13 +12,14 @@
   "service": "AnimeWho",
   "description": {
     "tr": "AnimeWho? Türkçe anime & manga izleyip, okuyabileceğiniz bir sitedir.",
-    "en": "AnimeWho? is a site where you can watch Turkish subtitle anime & read manga."
+    "en": "AnimeWho? is a site where you can watch Turkish subtitle anime & read manga.",
+    "ga_IE": "AnimeWho? Is suíomh é inar féidir leat féachaint ar anime fotheideal Tuircis & manga a léamh."
   },
   "url": [
     "www.animewho.com",
     "animewho.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/y0RA8SX.jpg",
   "thumbnail": "https://i.imgur.com/HmLMCzv.png",
   "color": "#fc0043",

@@ -28,7 +28,7 @@ Blockbench.on("UpdateData", async () => {
           .querySelector("#main_toolbar #mode_selector li.selected")
           ?.textContent.toLowerCase() || "Unknown",
       modelType = document.querySelectorAll<HTMLElement>(
-        "#page_wrapper #status_bar div[title]"
+        "#page_wrapper #status_bar div[title]:not(.f_left)"
       )[1]?.title;
 
     switch (modelType?.toLowerCase()) {
