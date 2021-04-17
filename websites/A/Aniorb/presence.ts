@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "recent";
     presenceData.buttons = [
       {
-        label: "View Recently Added",
+        label: "View Recently Added Anime",
         url: document.location.href
       }
     ];
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "season";
     presenceData.buttons = [
       {
-        label: "View New Season",
+        label: "View New Season Animes",
         url: document.location.href
       }
     ];
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "movie";
     presenceData.buttons = [
       {
-        label: "View Movies",
+        label: "View Anime Movies",
         url: document.location.href
       }
     ];
@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "star";
     presenceData.buttons = [
       {
-        label: "View Popular",
+        label: "View Popular Animes",
         url: document.location.href
       }
     ];
