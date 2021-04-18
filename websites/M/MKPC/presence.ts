@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname == "doublecomptes.php"
   ) {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing staff backend"
+    presenceData.details = "Viewing staff backend";
   } else if (document.location.pathname == "/profil.php") { 
     presenceData.startTimestamp = browsingStamp;
     user = document.querySelector("body > main > div > div.profile-summary > h1");
