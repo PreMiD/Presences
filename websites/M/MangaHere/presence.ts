@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
       data.details = "Viewing manga:";
       data.state = title;
       data.startTimestamp = browsingStamp;
-      data.buttons = [{ label: "Read", url: link }];
+      data.buttons = [{ label: "View Manga", url: link }];
       data.smallImageKey = "viewing";
       data.smallImageText = "Viewing";
     }
