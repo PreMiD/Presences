@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
-    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-env": "^7.13.15",
     "@types/babel__core": "^7.1.14",
     "@types/chrome": "^0.0.134",
     "@types/debug": "^4.1.5",
@@ -28,7 +28,7 @@
     "@types/prettier": "^2.2.3",
     "@types/semver": "^7.3.4",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
-    "@typescript-eslint/parser": "^4.19.0",
+    "@typescript-eslint/parser": "^4.22.0",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "debug": "^4.3.1",
