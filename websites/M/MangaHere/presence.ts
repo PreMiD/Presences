@@ -24,7 +24,6 @@ presence.on("UpdateData", async () => {
     if (pathname == "/") {
       data.details = "Viewing the Homepage";
       data.startTimestamp = browsingStamp;
-      data.buttons = [{ label: "Visit the website", url: "www.mangahere.cc" }];
     }
     else if (pathname == "/latest/") {
       data.details = "Browsing latest manga";
