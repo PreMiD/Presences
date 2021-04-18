@@ -79,7 +79,8 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname.includes("/genre")) {
     presenceData.details =
-      "Viewing The Genre " +
+      "Viewing genre:";
+    presenceData.state = 
       document.querySelector(
         "span.text-red-500.capitalize.px-16.font-thin.text-xl"
       ).textContent;
