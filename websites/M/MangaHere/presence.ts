@@ -21,28 +21,28 @@ presence.on("UpdateData", async () => {
 
   if (hostname === "www.mangahere.cc") {
 
-    if (pathname == "/") {
+    if (pathname === "/") {
       data.details = "Viewing the Homepage";
       data.startTimestamp = browsingStamp;
-      data.buttons = [{ label: "Visit the website", url: "www.mangahere.cc" }];
+      data.buttons = [{ label: "Visit the website", url: "http://www.mangahere.cc" }];
     }
-    else if (pathname == "/latest/") {
+    else if (pathname === "/latest/") {
       data.details = "Browsing latest manga";
       data.startTimestamp = browsingStamp;
     }
-    else if (pathname == "/ranking/") {
+    else if (pathname === "/ranking/") {
       data.details = "Browsing by ranking";
       data.startTimestamp = browsingStamp;
     }
-    else if (pathname == "/spoilers/") {
+    else if (pathname === "/spoilers/") {
       data.details = "Browsing spoilers and news";
       data.startTimestamp = browsingStamp;
     }
-    else if (pathname == "/directory/") {
+    else if (pathname === "/directory/") {
       data.details = "Browsing all manga";
       data.startTimestamp = browsingStamp;
     }
-    else if (pathname == "/on_going/") {
+    else if (pathname === "/on_going/") {
       data.details = "Browsing ongoing manga";
       data.startTimestamp = browsingStamp;
     }
@@ -127,14 +127,13 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "searching";
       data.smallImageText = "Searching";
     }
-    //Browisng ganre
-    for(let i = 0; i<ganres.length; i++){
-      if(pathname.substring(1, pathname.length-1) == ganres[i]){
+    ganres.forEach(function(ganre){
+      if(pathname.substring(1, pathname.length-1) === ganre){
         data.details = "Browsing:";
-        data.state = ganres[i].replace('-',' ') +" manga";
+        data.state = ganre.replace('-',' ') +" manga";
       data.startTimestamp = browsingStamp;
       }
-    }
+    })
   }
   presence.setActivity(data);
 });
