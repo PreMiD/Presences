@@ -25,7 +25,7 @@ presence.on("UpdateData", async () => {
   } const elt = document.querySelector("#compteur0 > div") as HTMLElement;
   if (elt) {
     const lap = elt.innerText.replace(/.+? /g, "");
-    presenceData.details = "Lap" + lap;
+    presenceData.details = "Lap " + lap;
     presenceData.buttons = [
       { label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" }
     ];
