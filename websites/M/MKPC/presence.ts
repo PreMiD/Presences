@@ -6,7 +6,8 @@ const presence = new Presence({
 let user;
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp,
   };
 
   if (
@@ -15,10 +16,8 @@ presence.on("UpdateData", async () => {
     document.location.pathname == "/fr.php" ||
     document.location.pathname == "/en.php"
   ) {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname == "/forum.php") {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing the Forum's menu";
     presenceData.smallImageKey = "search"; 
     presenceData.buttons = [{ label: "View Forum", url: document.location.href }];
@@ -31,17 +30,14 @@ presence.on("UpdateData", async () => {
     ];
     presenceData.smallImageKey = "wheel";
   } else if (document.location.pathname == "/mariokart.php") {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "browsing map's";
     presenceData.smallImageKey = "search";
   } else if (document.location.pathname == "/category.php") {
-    presenceData.startTimestamp = browsingStamp;
     user = document.querySelector("html > body > main > h1");
     presenceData.details = "Viewing the following category: " + user.innerHTML;
     presenceData.smallImageKey = "search";
     presenceData.buttons = [{ label: "View category", url: document.location.href }];
   } else if (document.location.pathname == "/topic.php") {
-    presenceData.startTimestamp = browsingStamp;
     user = document.querySelector("html > body > main > h1");
     presenceData.details = "Viewing: " + user.innerHTML;
     presenceData.smallImageKey = "search";
@@ -51,11 +47,9 @@ presence.on("UpdateData", async () => {
     document.location.pathname == "/admin.php" ||
     document.location.pathname == "doublecomptes.php"
   ) {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing staff backend";
   } else if (document.location.pathname == "/profil.php") { 
-    presenceData.startTimestamp = browsingStamp;
-    user = document.querySelector("body > main > div > div.profile-summary > h1");
+     user = document.querySelector("body > main > div > div.profile-summary > h1");
     presenceData.details = "Viewing: " + user.innerHTML;
     presenceData.smallImageKey = "search";
     presenceData.buttons = [{ label: "View profile", url: document.location.href }];
