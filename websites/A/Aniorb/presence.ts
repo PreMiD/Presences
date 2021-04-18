@@ -87,11 +87,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "genre";
     presenceData.buttons = [
       {
-        label:
-          "View The Genre " +
-          document.querySelector(
-            "span.text-red-500.capitalize.px-16.font-thin.text-xl"
-          ).textContent,
+        label: "View Genre ",
         url: document.location.href
       }
     ];
