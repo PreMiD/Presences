@@ -1,6 +1,6 @@
 const presence = new Presence({
-    clientId: "812176837748457483"
-  }),
+  clientId: "812176837748457483"
+}),
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let user;
@@ -19,19 +19,17 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname == "/forum.php") {
     presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing the forum's menu";
-    presenceData.smallImageKey = "search";
-  } else if (document.location.pathname == "index.php") {
-    presenceData.startTimestamp = browsingStamp;
-    presenceData.details = "Viewing home page";
-  }
-  const elt = document.querySelector("#compteur0 > div") as HTMLElement;
+    presenceData.details = "Viewing the Forum's menu";
+    presenceData.smallImageKey = "search"; 
+    presenceData.buttons = [{ label: "View Forum", url: document.location.href }];
+  } const elt = document.querySelector("#compteur0 > div") as HTMLElement;
   if (elt) {
     const lap = elt.innerText.replace(/.+? /g, "");
-    presenceData.details = "On: Lap " + lap;
+    presenceData.details = "Lap " + lap;
     presenceData.buttons = [
       { label: "Play Game", url: "https://mkpc.malahieude.net/mariokart.php" }
     ];
+    presenceData.smallImageKey = "wheel";
   } else if (document.location.pathname == "/mariokart.php") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "browsing map's";
@@ -41,16 +39,26 @@ presence.on("UpdateData", async () => {
     user = document.querySelector("html > body > main > h1");
     presenceData.details = "Viewing the following category: " + user.innerHTML;
     presenceData.smallImageKey = "search";
+    presenceData.buttons = [{ label: "View category", url: document.location.href }];
   } else if (document.location.pathname == "/topic.php") {
     presenceData.startTimestamp = browsingStamp;
     user = document.querySelector("html > body > main > h1");
     presenceData.details = "Viewing: " + user.innerHTML;
     presenceData.smallImageKey = "search";
-  } else if (document.location.pathname == "/profil.php") {
+    presenceData.buttons = [{ label: "View topic", url: document.location.href }];
+  } else if (
+    document.location.pathname == "/ban-player.php" ||
+    document.location.pathname == "/admin.php" ||
+    document.location.pathname == "doublecomptes.php"
+  ) {
     presenceData.startTimestamp = browsingStamp;
-    user = document.querySelector("html > body > main > h1");
+    presenceData.details = "Viewing staff backend";
+  } else if (document.location.pathname == "/profil.php") { 
+    presenceData.startTimestamp = browsingStamp;
+    user = document.querySelector("body > main > div > div.profile-summary > h1");
     presenceData.details = "Viewing: " + user.innerHTML;
     presenceData.smallImageKey = "search";
+    presenceData.buttons = [{ label: "View profile", url: document.location.href }];
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();
