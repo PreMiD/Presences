@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
     else if (pathname.endsWith("/new/")) {
       const url = pathname,
        splitUrl = url.split('/');
-      data.details = splitUrl[1] === "new" ? "Browsing new manga" : `Browsing new ${splitUrl[1]} manga`
+      data.details = splitUrl[1] === "new" ? "Browsing new manga" : `Browsing new ${splitUrl[1]} manga`;
     }
     //ganre/completed/
     else if (pathname.endsWith("/completed/")) {
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
         data.details = "Browsing:";
         data.state = ganre.replace('-',' ') +" manga";
       }
-    })
+    });
   }
   presence.setActivity(data);
 });
