@@ -27,7 +27,7 @@
     "@types/ora": "^3.2.0",
     "@types/prettier": "^2.2.3",
     "@types/semver": "^7.3.4",
-    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
