@@ -3,24 +3,9 @@ const presence = new Presence({
 }),
 
   strings = presence.getStrings({
-  playing: "presence.playback.playing",
-  paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing"
+  play: "presence.playback.playing",
+  pause: "presence.playback.paused"
 });
-
-/**
-* Get Timestamps
-* @param {Number} videoTime Current video time seconds
-* @param {Number} videoDuration Video duration seconds
-*/
-function getTimestamps(
-videoTime: number,
-videoDuration: number
-): Array<number> {
-const startTime = Math.floor(Date.now() / 1000),
-  endTime = Math.floor(startTime - videoTime + videoDuration);
-return [startTime, endTime];
-}
 
 let video,
 current: number,
@@ -50,19 +35,19 @@ presence.on("UpdateData", async () => {
 
 if (document.location.pathname.startsWith("/anime/")) {
   const title = document.querySelector("h1").textContent,
-  ep = document.querySelector("#wrapper > div.seriesContentBox > div.container.marginBottom > ul > li.currentActiveLink > a > span").textContent.match(/Episode\W\d/),
+  ep = document.querySelector("#wrapper > div.seriesContentBox > div.container.marginBottom > ul > li.currentActiveLink > a > span").textContent.match(/Episode\W\d+/),
   actvie = document.querySelector("h2").textContent;
     presenceData.details = title;
     presenceData.state = ep + " | " + actvie;
     presenceData.buttons = [
       {
-        label: "Current Anime",
+        label: "Watch Episode",
         url: document.location.href
       }
     ]; 
  
-  const video: HTMLVideoElement = document.querySelector(`video`);
-  if (video != null) {
+  video = document.querySelector(`video`);
+  if (video !== null) {
     played = video.currentTime != 0;
     duration = video.duration;
     current = video.currentTime;
@@ -70,14 +55,13 @@ if (document.location.pathname.startsWith("/anime/")) {
   }
   if (played) {
     if (!paused) {
-      const timestamps = getTimestamps(current, duration);
-      presenceData.startTimestamp = timestamps[0];
+      const timestamps = presence.getTimestamps(current, duration);
       presenceData.endTimestamp = timestamps[1];
     }
     presenceData.smallImageKey = paused ? "pause" : "play";
     presenceData.smallImageText = paused
-      ? (await strings).paused
-      : (await strings).playing;
+      ? (await strings).pause
+      : (await strings).play;
     }
 
 } else if (document.location.pathname == `/`) {
@@ -164,7 +148,7 @@ else if (document.location.pathname.startsWith('/user/')) {
   presenceData.details = rank;
   presenceData.state = "- " + user;
   presenceData.smallImageKey = "user";
-  presenceData.smallImageText = rank;
+  presenceData.smallImageText = user;
 
 }
 
