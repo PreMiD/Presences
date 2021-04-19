@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     };
 
     if (path.includes("/input")) {
-        presenceData.details = "Searching for...";
+        presenceData.details = "Searching...";
         presenceData.state = document.querySelector("._9CcbX").textContent;
         presenceData.smallImageKey = "search";
     }
