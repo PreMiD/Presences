@@ -24,12 +24,16 @@ function getTimestamps(
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "pvid" };
   presenceData.startTimestamp = browsingStamp;
-  const title: HTMLElement = document.querySelector(
+  let title: HTMLElement = document.querySelector(
       ".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h1"
     ),
     title2: HTMLElement = document.querySelector(
       ".av-detail-section > div > h1"
-    );
+    )
+  if (title == null && title2 == null) {
+    title =  document.querySelector(".atvwebplayersdk-title-text");
+    title2 = document.querySelector(".atvwebplayersdk-subtitle-text");
+  }
   if (title !== null || title2 !== null) {
     let video: HTMLVideoElement = document.querySelector(
       ".scalingVideoContainer > div.scalingVideoContainerBottom > div > video"
@@ -42,7 +46,7 @@ presence.on("UpdateData", async () => {
     }
     const subtitle: HTMLElement = document.querySelector(
       ".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h2"
-    );
+    ) || document.querySelector(".atvwebplayersdk-subtitle-text");
 
     if (video !== null && title && !video.className.includes("tst")) {
       presenceData.details = title.textContent;
