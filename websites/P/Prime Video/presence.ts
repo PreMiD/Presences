@@ -24,9 +24,10 @@ function getTimestamps(
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "pvid" };
   presenceData.startTimestamp = browsingStamp;
-  const title: HTMLElement = document.querySelector(
-      ".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h1"
-    ),
+  const title: HTMLElement =
+      document.querySelector(
+        ".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h1"
+      ) || document.querySelector(".atvwebplayersdk-title-text"),
     title2: HTMLElement = document.querySelector(
       ".av-detail-section > div > h1"
     );
@@ -40,9 +41,10 @@ presence.on("UpdateData", async () => {
     if (video == null || isNaN(video.duration)) {
       video = document.querySelector("video:nth-child(2)");
     }
-    const subtitle: HTMLElement = document.querySelector(
-      ".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h2"
-    );
+    const subtitle: HTMLElement =
+      document.querySelector(
+        ".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h2"
+      ) || document.querySelector(".atvwebplayersdk-subtitle-text");
 
     if (video !== null && title && !video.className.includes("tst")) {
       presenceData.details = title.textContent;
