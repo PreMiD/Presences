@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "AnimeFire",
+  "author": {
+    "name": "gota",
+    "id": "665589500860301315"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/oywkGeI.png",
+  "thumbnail": "https://i.imgur.com/81uwyhK.png",
+  "version": "1.0.0",
+  "color": "#007bff",
+  "tags": [
+    "anime",
+    "animefire",
+    "animebr",
+    "animes",
+    "animesbr",
+    "animesfire",
+    "fireanime"
+  ],
+  "url": "animefire.net",
+  "description": {
+    "en": "Watch new and old animes, Subtitled or Dubbed, here you will find several types of animes, and in great quality! You can also download!",
+    "pt-BR": "Assista animes novos e antigos, Legendados ou Dublados, aqui você encontra diversos tipos de animes, e em ótima qualidade! Você também pode baixar!"
+  }
+}
