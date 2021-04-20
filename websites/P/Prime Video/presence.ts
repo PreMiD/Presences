@@ -111,8 +111,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Searching for:";
     presenceData.state = document
       .querySelector(".av-refine-bar-summaries")
-      .textContent.split('"')[1]
-      .split('"')[0];
+      .textContent.split(/["„]/)[1]
+      .split(/[”"]/)[0];
     presenceData.smallImageKey = "search";
   }
 
