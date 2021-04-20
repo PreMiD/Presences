@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
     };
 
     if (path.includes("/input")) {
-        presenceData.details = "Searching...";
+        presenceData.details = "Searching for:";
         presenceData.state = document.querySelector("._9CcbX").textContent;
         presenceData.smallImageKey = "search";
     }
@@ -42,13 +42,13 @@ presence.on("UpdateData", async () => {
             case (path.includes("/statistics")):
             case (path.includes("/common-core-maths")):
             case (path.includes("/probability")):
-                presenceData.details = "Reading about...";
+                presenceData.details = "Reading about:";
                 presenceData.state = title + " examples";
                 presenceData.smallImageKey = "reading";
                 presenceData.smallImageText = "Mathematics";
                 break;
             default:
-                presenceData.details = "Looking at...";
+                presenceData.details = "Looking at:";
                 presenceData.state = "Mathematics examples";
                 presenceData.smallImageKey = "reading";
         }
@@ -68,13 +68,13 @@ presence.on("UpdateData", async () => {
             case (path.includes("/physical-geography")):
             case (path.includes("/health-and-medicine")):
             case (path.includes("/food-science")):
-                presenceData.details = "Reading about...";
+                presenceData.details = "Reading about:";
                 presenceData.state = title + " examples";
                 presenceData.smallImageKey = "reading";
                 presenceData.smallImageText = "Science & Technology";
                 break;
             default:
-                presenceData.details = "Looking at...";
+                presenceData.details = "Looking at:";
                 presenceData.state = "Science & technology examples";
                 presenceData.smallImageKey = "reading";
         }
@@ -94,13 +94,13 @@ presence.on("UpdateData", async () => {
             case (path.includes("/games-and-puzzles")):
             case (path.includes("/economic-data")):
             case (path.includes("/education")):
-                presenceData.details = "Reading about...";
+                presenceData.details = "Reading about:";
                 presenceData.state = title + " examples";
                 presenceData.smallImageKey = "reading";
                 presenceData.smallImageText = "Society & Culture";
                 break;
             default:
-                presenceData.details = "Looking at...";
+                presenceData.details = "Looking at:";
                 presenceData.state = "Society & culture examples";
                 presenceData.smallImageKey = "reading";
         }
@@ -115,19 +115,19 @@ presence.on("UpdateData", async () => {
             case (path.includes("/dates-and-times")):
             case (path.includes("/todays-world")):
             case (path.includes("/hobbies")):
-                presenceData.details = "Reading about...";
+                presenceData.details = "Reading about:";
                 presenceData.state = title + " examples";
                 presenceData.smallImageKey = "reading";
                 presenceData.smallImageText = "Everyday life";
                 break;
             default:
-                presenceData.details = "Looking at...";
+                presenceData.details = "Looking at:";
                 presenceData.state = "Everyday life examples";
                 presenceData.smallImageKey = "reading";
         }
     }
     else if (path.includes("/api")) {
-        presenceData.details = "Reading about...";
+        presenceData.details = "Reading about:";
         presenceData.state = "API documentation";
         presenceData.smallImageKey = "reading";
     }
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
              " | Correct: " + document.querySelector(".purpleBox").textContent.trim();
         }
         else {
-            presenceData.details = "Looking at...";
+            presenceData.details = "Looking at:";
             presenceData.state = "Maths problems";
             presenceData.smallImageKey = "search";
         }
