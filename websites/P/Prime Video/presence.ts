@@ -24,14 +24,20 @@ function getTimestamps(
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "pvid" };
   presenceData.startTimestamp = browsingStamp;
-  const title: HTMLElement =
+  const titleElement: HTMLElement =
       document.querySelector(
         ".webPlayerSDKUiContainer > div > div > div > div:nth-child(2) > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(2) > div > div > div > h1"
       ) || document.querySelector(".atvwebplayersdk-title-text"),
-    title2: HTMLElement = document.querySelector(
+    title2Element: HTMLElement = document.querySelector(
       ".av-detail-section > div > h1"
-    );
-  if (title !== null || title2 !== null) {
+    ),
+    title: string = titleElement?.textContent,
+    title2: string =
+      title2Element?.textContent ||
+      document.querySelector<HTMLImageElement>(
+        ".av-detail-section > div > h1 > div > img"
+      )?.alt;
+  if (title !== undefined || title2 !== undefined) {
     let video: HTMLVideoElement = document.querySelector(
       ".scalingVideoContainer > div.scalingVideoContainerBottom > div > video"
     );
@@ -47,11 +53,11 @@ presence.on("UpdateData", async () => {
       ) || document.querySelector(".atvwebplayersdk-subtitle-text");
 
     if (video !== null && title && !video.className.includes("tst")) {
-      presenceData.details = title.textContent;
+      presenceData.details = title;
       if (
         subtitle &&
         subtitle.textContent &&
-        subtitle.textContent.trim() !== title.textContent.trim()
+        subtitle.textContent.trim() !== title.trim()
       ) {
         presenceData.state = subtitle.textContent;
       }
@@ -71,7 +77,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageText = (await strings).playing;
       }
     } else if (video !== null && !video.className.includes("tst")) {
-      presenceData.details = title2.textContent;
+      if (title2 !== "") presenceData.details = title2;
       if (video.paused) {
         presenceData.smallImageKey = "paused";
         presenceData.smallImageText = (await strings).paused;
@@ -86,9 +92,9 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "playing";
         presenceData.smallImageText = (await strings).playing;
       }
-    } else if (title2 !== null) {
+    } else if (title2 !== undefined) {
       presenceData.details = "Viewing:";
-      presenceData.state = title2.textContent;
+      presenceData.state = title2;
     } else if (document.location.pathname.includes("shop")) {
       presenceData.details = "Browsing the store...";
     } else {
