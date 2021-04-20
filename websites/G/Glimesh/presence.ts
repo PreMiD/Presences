@@ -149,9 +149,7 @@ presence.on("UpdateData", async () => {
       const blogPost = document.querySelector("body > div > div > div > h1 > a").textContent;
       
       presenceData.details = "Reading" + (!await presence.getSetting("show_details") ? " a " : " ") + "Blog";
-      if (await presence.getSetting("show_details")) {
-        presenceData.state = blogPost;
-      }
+      if (await presence.getSetting("show_details")) presenceData.state = blogPost;
 
       if (await presence.getSetting("show_buttons") && await presence.getSetting("show_details")) {
         presenceData.buttons = [
