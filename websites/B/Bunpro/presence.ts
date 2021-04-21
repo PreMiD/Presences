@@ -28,7 +28,7 @@ function getLevelInHeader() {
 presence.on("UpdateData", () => {
   const { pathname } = window.location,
     data: PresenceData = {
-      largeImageKey: largeImageKey
+      largeImageKey
     };
   let details: string,
     state: string,
