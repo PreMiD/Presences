@@ -30,7 +30,7 @@ class Timer {
   running: boolean;
 
   constructor() {
-    const storedTimestamp = parseInt(localStorage.getItem("premid__timestamp"));
+    const storedTimestamp = parseInt(sessionStorage.getItem("PMD_timestamp"));
 
     this.elapsed = isNaN(storedTimestamp) ? 0 : storedTimestamp;
 
@@ -41,15 +41,15 @@ class Timer {
     this.elapsed = 0;
     this.running = false;
 
-    localStorage.removeItem("premid__timestamp");
+    sessionStorage.removeItem("PMD_timestamp");
   }
 
   start() {
     if (!this.running) {
-      this.elapsed = Math.round(Date.now() / 1000);
+      this.elapsed = Date.now();
       this.running = true;
 
-      localStorage.setItem("premid__timestamp", this.elapsed.toString());
+      sessionStorage.setItem("PMD_timestamp", this.elapsed.toString());
     }
   }
 }
@@ -109,7 +109,7 @@ presence.on("UpdateData", () => {
 
           smallImageText = successRate.innerText;
 
-          state = hintText ? `${hintText} (${SRSLevel})` : SRSLevel
+          state = hintText ? `${hintText} (${SRSLevel})` : SRSLevel;
 
           break;
         }
@@ -238,13 +238,11 @@ presence.on("UpdateData", () => {
   if (level) {
     data.smallImageKey = getLevelIcon(level);
 
-    if (!smallImageText) smallImageText = `Level ${level}`
+    if (!smallImageText) smallImageText = `Level ${level}`;
   }
   if (smallImageText) data.smallImageText = smallImageText;
 
-  if (timer.running) {
-    data.startTimestamp = timer.elapsed;
-  }
+  if (timer.running) data.startTimestamp = timer.elapsed;
 
   presence.setActivity(data);
 });
