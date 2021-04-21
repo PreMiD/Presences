@@ -7,17 +7,12 @@ const presence: Presence = new Presence({
 function getLevelIcon(level: number) {
   let iconKey = "level-10";
 
-  if (level >= 10 && level < 100) {
+  if (level >= 10 && level < 100)
     iconKey = `level-${+(level / 100).toPrecision(1) * 100}`;
-  }
 
-  if (level < 10) {
-    iconKey = "level-10";
-  }
+  if (level < 10) iconKey = "level-10";
 
-  if (level >= 100) {
-    iconKey = "level-100";
-  }
+  if (level >= 100) iconKey = "level-100";
 
   return iconKey;
 }
@@ -114,11 +109,7 @@ presence.on("UpdateData", () => {
 
           smallImageText = successRate.innerText;
 
-          if (hintText) {
-            state = `${hintText} (${SRSLevel})`;
-          } else {
-            state = `${SRSLevel}`;
-          }
+          state = hintText ? `${hintText} (${SRSLevel})` : SRSLevel
 
           break;
         }
@@ -242,22 +233,14 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (details) {
-    data.details = details;
-  }
-  if (state) {
-    data.state = state;
-  }
+  if (details) data.details = details;
+  if (state) data.state = state;
   if (level) {
     data.smallImageKey = getLevelIcon(level);
 
-    if (!smallImageText) {
-      smallImageText = `Level ${level}`;
-    }
+    if (!smallImageText) smallImageText = `Level ${level}`
   }
-  if (smallImageText) {
-    data.smallImageText = smallImageText;
-  }
+  if (smallImageText) data.smallImageText = smallImageText;
 
   if (timer.running) {
     data.startTimestamp = timer.elapsed;
