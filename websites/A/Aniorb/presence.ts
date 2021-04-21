@@ -78,12 +78,10 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/genre")) {
-    presenceData.details =
-      "Viewing genre:";
-    presenceData.state = 
-      document.querySelector(
-        "span.text-red-500.capitalize.px-16.font-thin.text-xl"
-      ).textContent;
+    presenceData.details = "Viewing genre:";
+    presenceData.state = document.querySelector(
+      "span.text-red-500.capitalize.px-16.font-thin.text-xl"
+    ).textContent;
     presenceData.smallImageKey = "genre";
     presenceData.buttons = [
       {
@@ -138,10 +136,10 @@ presence.on("UpdateData", async () => {
     } else {
       video = document.querySelector("div > div.plyr__video-wrapper > video");
       if (video) {
-        currentTime = video.currentTime;
-        duration = video.duration;
-        paused = video.paused;
-        timestamps = presence.getTimestamps(
+        (currentTime = video.currentTime),
+          (duration = video.duration),
+          (paused = video.paused),
+          (timestamps = presence.getTimestamps(
             Math.floor(currentTime),
             Math.floor(duration)
           ));
