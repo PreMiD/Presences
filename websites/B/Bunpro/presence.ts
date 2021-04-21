@@ -201,7 +201,7 @@ presence.on("UpdateData", () => {
   }
   if (smallImageText) data.smallImageText = smallImageText;
 
-  if (startTimestamp) data.startTimestamp = startTimestamp;
+  if (startTimestamp) data.startTimestamp = Math.round(startTimestamp / 1000);
 
   presence.setActivity(data);
 });
