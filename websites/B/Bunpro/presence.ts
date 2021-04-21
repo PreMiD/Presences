@@ -25,173 +25,77 @@ function getLevelInHeader() {
   return +levelElement.innerText.slice(6);
 }
 
-class Timer {
-  elapsed: number;
-  running: boolean;
-
-  constructor() {
-    const storedTimestamp = parseInt(sessionStorage.getItem("PMD_timestamp"));
-
-    this.elapsed = isNaN(storedTimestamp) ? 0 : storedTimestamp;
-
-    this.running = this.elapsed !== 0;
-  }
-
-  stop() {
-    this.elapsed = 0;
-    this.running = false;
-
-    sessionStorage.removeItem("PMD_timestamp");
-  }
-
-  start() {
-    if (!this.running) {
-      this.elapsed = Date.now();
-      this.running = true;
-
-      sessionStorage.setItem("PMD_timestamp", this.elapsed.toString());
-    }
-  }
-}
-
 presence.on("UpdateData", () => {
-  const { hostname, pathname } = window.location,
+  const { pathname } = window.location,
     data: PresenceData = {
       largeImageKey: largeImageKey
-    },
-    timer = new Timer();
-
-  let details: string, state: string, smallImageText: string;
+    };
+  let details: string,
+    state: string,
+    smallImageText: string,
+    startTimestamp: number;
 
   const level: number = getLevelInHeader();
 
-  switch (hostname) {
-    case "bunpro.jp":
-    case "www.bunpro.jp": {
-      if (/grammar_points\/\d+/i.test(pathname)) {
-        timer.start();
-        details = "Doing Lessons";
+  if (/grammar_points\/\d+/i.test(pathname)) {
+    startTimestamp = Date.now();
+    details = "Doing Lessons";
 
-        const grammarPointElement: HTMLSpanElement = document.querySelector(
-            ".grammar-point__title.grammar-point__title--default"
+    const grammarPointElement: HTMLSpanElement = document.querySelector(
+        ".grammar-point__title.grammar-point__title--default"
+      ),
+      grammarPoint = grammarPointElement.innerText,
+      lessonProgressElement: HTMLDivElement = document.querySelector(
+        ".header__lesson-progress"
+      ),
+      [lessonType, lessonProgress] = lessonProgressElement.innerText.split(
+        ": "
+      );
+
+    state = `Learning ${grammarPoint}`;
+
+    smallImageText = `${lessonType}: ${lessonProgress}`;
+  } else {
+    switch (pathname) {
+      case "/study": {
+        startTimestamp = Date.now();
+        details = "Doing reviews";
+
+        const hint: HTMLDivElement = document.querySelector(
+            ".study-question-english-hint"
           ),
-          grammarPoint = grammarPointElement.innerText,
-          lessonProgressElement: HTMLDivElement = document.querySelector(
-            ".header__lesson-progress"
+          hintText = hint.innerText,
+          SRS: HTMLDivElement = document.querySelector(
+            ".review__stats.srs-tracker"
           ),
-          [lessonType, lessonProgress] = lessonProgressElement.innerText.split(
-            ": "
+          SRSLevel = SRS.innerText,
+          successRate: HTMLDivElement = document.querySelector(
+            ".review__stats.review-percent"
           );
 
-        state = `Learning ${grammarPoint}`;
+        smallImageText = successRate.innerText;
 
-        smallImageText = `${lessonType}: ${lessonProgress}`;
+        state = hintText ? `${hintText} (${SRSLevel})` : SRSLevel;
 
         break;
       }
+      case "/bookmarks":
+      case "/lessons":
+      case "/grammar_points": {
+        details = "Browsing Grammar";
 
-      switch (pathname) {
-        case "/study": {
-          timer.start();
-          details = "Doing reviews";
+        break;
+      }
+      case "/learn": {
+        startTimestamp = Date.now();
 
-          const hint: HTMLDivElement = document.querySelector(
-              ".study-question-english-hint"
-            ),
-            hintText = hint.innerText,
-            SRS: HTMLDivElement = document.querySelector(
-              ".review__stats.srs-tracker"
-            ),
-            SRSLevel = SRS.innerText,
-            successRate: HTMLDivElement = document.querySelector(
-              ".review__stats.review-percent"
-            );
+        const checkQuizzElement: HTMLDivElement = document.querySelector(
+            "#learn-new-grammar-page"
+          ),
+          isOnQuizz = checkQuizzElement.style.display === "block";
 
-          smallImageText = successRate.innerText;
-
-          state = hintText ? `${hintText} (${SRSLevel})` : SRSLevel;
-
-          break;
-        }
-        case "/bookmarks":
-        case "/lessons":
-        case "/grammar_points": {
-          timer.stop();
-          details = "Browsing Grammar";
-
-          break;
-        }
-        case "/learn": {
-          timer.start();
-
-          const checkQuizzElement: HTMLDivElement = document.querySelector(
-              "#learn-new-grammar-page"
-            ),
-            isOnQuizz = checkQuizzElement.style.display === "block";
-
-          if (isOnQuizz) {
-            details = "Learning New Grammar (Quizz)";
-
-            const grammarPointElement: HTMLDivElement = document.querySelector(
-                ".study-question-english-hint"
-              ),
-              grammarPoint = grammarPointElement.innerText,
-              lessonProgressElement: HTMLDivElement = document.querySelector(
-                ".review__stats#reviews"
-              ),
-              lessonProgress = lessonProgressElement.innerText;
-
-            state = `${grammarPoint}`;
-
-            smallImageText = `${lessonProgress}`;
-          } else {
-            details = "Learning New Grammar";
-
-            let activeGrammarPoint: HTMLDivElement;
-
-            activeGrammarPoint = document.querySelector(
-              `.grammar-point-study[style*="display: block"]`
-            );
-
-            if (!activeGrammarPoint) {
-              activeGrammarPoint = document.querySelector(
-                ".grammar-point-study"
-              );
-            }
-
-            const grammarPointElement: HTMLSpanElement = activeGrammarPoint.querySelector(
-                ".grammar-point__title.grammar-point__title--default"
-              ),
-              grammarPoint = grammarPointElement.innerText,
-              lessonProgressElement: HTMLDivElement = activeGrammarPoint.querySelector(
-                ".header__lesson-progress"
-              ),
-              lessonProgress = lessonProgressElement.innerText,
-              activeTabElement: HTMLLIElement = activeGrammarPoint.querySelector(
-                ".navbar_option--active-tab"
-              ),
-              activeTab = activeTabElement.innerText;
-
-            state = `${grammarPoint} | ${activeTab}`;
-
-            smallImageText = lessonProgress;
-          }
-
-          break;
-        }
-        case "/cram": {
-          const cramStartElement: HTMLDivElement = document.querySelector(
-            ".cram-start"
-          );
-
-          if (cramStartElement.style.display !== "none") {
-            timer.stop();
-            details = "Browsing Grammar";
-            break;
-          }
-
-          timer.start();
-          details = "Doing Cram";
+        if (isOnQuizz) {
+          details = "Learning New Grammar (Quizz)";
 
           const grammarPointElement: HTMLDivElement = document.querySelector(
               ".study-question-english-hint"
@@ -200,35 +104,90 @@ presence.on("UpdateData", () => {
             lessonProgressElement: HTMLDivElement = document.querySelector(
               ".review__stats#reviews"
             ),
-            lessonType = lessonProgressElement.innerText;
+            lessonProgress = lessonProgressElement.innerText;
 
-          state = `Reviewing ${grammarPoint}`;
+          state = `${grammarPoint}`;
 
-          smallImageText = `${lessonType}`;
+          smallImageText = `${lessonProgress}`;
+        } else {
+          details = "Learning New Grammar";
 
-          break;
-        }
-        case "/":
-        case "/dashboard":
-        case "/login":
-        default: {
-          timer.stop();
+          let activeGrammarPoint: HTMLDivElement;
 
-          const reviews: HTMLDivElement = document.querySelector(
-            "#user-dashboard > div:nth-child(1) > div.col-lg-7.col-md-12.height-100.d-flex.flex-column.flex-grow-2.pl-0.pr-xl-3.pr-0 > div:nth-child(1) > div.col-md-6.col-12.pl-md-1.pr-md-0.pr-0.pl-0 > div > div:nth-child(3)"
+          activeGrammarPoint = document.querySelector(
+            `.grammar-point-study[style*="display: block"]`
           );
 
-          if (reviews) {
-            const reviewsCount: string = reviews.innerText;
-
-            details = "Viewing Dashboard";
-            state = `${reviewsCount} reviews`;
-          } else {
-            details = "Browsing Pages";
+          if (!activeGrammarPoint) {
+            activeGrammarPoint = document.querySelector(".grammar-point-study");
           }
 
+          const grammarPointElement: HTMLSpanElement = activeGrammarPoint.querySelector(
+              ".grammar-point__title.grammar-point__title--default"
+            ),
+            grammarPoint = grammarPointElement.innerText,
+            lessonProgressElement: HTMLDivElement = activeGrammarPoint.querySelector(
+              ".header__lesson-progress"
+            ),
+            lessonProgress = lessonProgressElement.innerText,
+            activeTabElement: HTMLLIElement = activeGrammarPoint.querySelector(
+              ".navbar_option--active-tab"
+            ),
+            activeTab = activeTabElement.innerText;
+
+          state = `${grammarPoint} | ${activeTab}`;
+
+          smallImageText = lessonProgress;
+        }
+
+        break;
+      }
+      case "/cram": {
+        const cramStartElement: HTMLDivElement = document.querySelector(
+          ".cram-start"
+        );
+
+        if (cramStartElement.style.display !== "none") {
+          details = "Browsing Grammar";
           break;
         }
+
+        startTimestamp = Date.now();
+        details = "Doing Cram";
+
+        const grammarPointElement: HTMLDivElement = document.querySelector(
+            ".study-question-english-hint"
+          ),
+          grammarPoint = grammarPointElement.innerText,
+          lessonProgressElement: HTMLDivElement = document.querySelector(
+            ".review__stats#reviews"
+          ),
+          lessonType = lessonProgressElement.innerText;
+
+        state = `Reviewing ${grammarPoint}`;
+
+        smallImageText = `${lessonType}`;
+
+        break;
+      }
+      case "/":
+      case "/dashboard":
+      case "/login":
+      default: {
+        const reviews: HTMLDivElement = document.querySelector(
+          "#user-dashboard > div:nth-child(1) > div.col-lg-7.col-md-12.height-100.d-flex.flex-column.flex-grow-2.pl-0.pr-xl-3.pr-0 > div:nth-child(1) > div.col-md-6.col-12.pl-md-1.pr-md-0.pr-0.pl-0 > div > div:nth-child(3)"
+        );
+
+        if (reviews) {
+          const reviewsCount: string = reviews.innerText;
+
+          details = "Viewing Dashboard";
+          state = `${reviewsCount} reviews`;
+        } else {
+          details = "Browsing Pages";
+        }
+
+        break;
       }
     }
   }
@@ -242,7 +201,7 @@ presence.on("UpdateData", () => {
   }
   if (smallImageText) data.smallImageText = smallImageText;
 
-  if (timer.running) data.startTimestamp = timer.elapsed;
+  if (startTimestamp) data.startTimestamp = startTimestamp;
 
   presence.setActivity(data);
 });
