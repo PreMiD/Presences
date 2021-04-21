@@ -136,13 +136,13 @@ presence.on("UpdateData", async () => {
     } else {
       video = document.querySelector("div > div.plyr__video-wrapper > video");
       if (video) {
-        (currentTime = video.currentTime),
-          (duration = video.duration),
-          (paused = video.paused),
-          (timestamps = presence.getTimestamps(
-            Math.floor(currentTime),
-            Math.floor(duration)
-          ));
+        currentTime = video.currentTime;
+        duration = video.duration;
+        paused = video.paused;
+        timestamps = presence.getTimestamps(
+          Math.floor(currentTime),
+          Math.floor(duration)
+        );
       }
     }
 
