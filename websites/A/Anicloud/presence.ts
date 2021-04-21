@@ -1,5 +1,6 @@
 const presence = new Presence({
   clientId: `830517484472762408`
+
 }),
 
   strings = presence.getStrings({
