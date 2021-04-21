@@ -9,17 +9,11 @@
     "en": "Aniorb is a free premium anime streaming website"
   },
   "service": "Aniorb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/nbP5DtJ.png",
   "thumbnail": "https://i.imgur.com/sFTMLrc.png",
   "color": "#f33412",
-  "tags": [
-    "anime",
-    "aniorb",
-    "entertainment",
-    "amv",
-    "videos"
-  ],
+  "tags": ["anime", "aniorb", "entertainment", "amv", "videos"],
   "iframe": true,
   "category": "anime"
 }
