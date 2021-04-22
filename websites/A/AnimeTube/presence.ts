@@ -24,7 +24,7 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname === "/") {
      data.details = "| Startseite";
-     data.state = "Starrt auf die Startseite";
+     data.state = "Starrt auf die neuen Sachen";
   } else if (document.location.pathname.startsWith("/anime/list")) {
     data.details = "| Suche";
     data.state = "Sucht nach einem neuen Lieblingsanime";
@@ -35,13 +35,10 @@ presence.on("UpdateData", async () => {
     data.state = titleSplit[2];
   } else if (document.location.pathname === "/static/calendar") {
     data.details = "| Kalendar";
-    data.state = "Campt die Releases";
+    data.state = "Schaut sich die neuen Releases an";
   } else if (document.URL.includes("/user/me?page=delete")) {
     data.details = "| Account Löschen";
     data.state = "Eine Straftat begehen";
-  } else if (document.URL.includes("/user/me?page=password")) {
-    data.details = "| Passwort ändern";
-    data.state = "Hier könnte ihr Passwort stehen";
   } else if (document.location.pathname.includes("/user/me")) {
     data.details = "| Einstellungen";
     data.state = "Macht irgendwas kaputt";
@@ -50,13 +47,13 @@ presence.on("UpdateData", async () => {
     userName = titleSplit[1];
 
     data.details = "| Benutzerinfo";
-    data.state = `Stalkt ${userName}`;
+    data.state = `Profil von ${userName}`;
   } else if (document.location.pathname === "/easteregg") {
-    data.details = "| Ist das ein Easteregg?";
-    data.state = "Ja, ja das ist es, was jetzt?";
+    data.details = "| Easteregg?";
+    data.state = "Jup, Easeregg!";
   } else if (document.location.pathname.startsWith("/static/")) {
     data.details = "| Hilfe & Infos";
-    data.state = "Ach, das liest du doch eh nicht!";
+    data.state = "Ließt intensiv durch die Infoseiten";
   } else if (document.location.pathname.includes('/anime') && document.location.pathname.includes('/watch')) {
     const titleSplit = document.title.split('›').map((s) => s.trim()),
     animeName = titleSplit[2],
@@ -78,16 +75,13 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname === "/login") {
     data.details = "| Login";
-    data.state = "Wo warst du Senpai?";
-  } else if (document.location.pathname === "/password/reset") {
-    data.details = "| Passwort zurücksetzen";
-    data.state = "Du bist so vergesslich, onee-chan! >->";
+    data.state = "Willkommen zurück!";
   } else if (document.location.pathname === "/register") {
     data.details = "| Registrieren";
-    data.state = "Wer bist du denn? owo";
+    data.state = "Ein neuer User!";
   } else {
-    data.details = "| Error 404";
-    data.state = "Was hast du diesmal kaputt gemacht?";
+    data.details = "| Error";
+    data.state = "Wie bist du hier gelandet?";
   }
 
   presence.setActivity(data);
