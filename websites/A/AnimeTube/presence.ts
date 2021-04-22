@@ -13,7 +13,6 @@ let videoData: {
 };
 
 presence.on("iFrameData", (data: typeof videoData) => {
-    if (data !== null)
     videoData = data;
 });
 
