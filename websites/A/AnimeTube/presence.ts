@@ -20,7 +20,7 @@ presence.on("iFrameData", (data: typeof videoData) => {
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "animetube",
+    largeImageKey: "animetube"
   };
 
   if (document.location.pathname === "/") {
