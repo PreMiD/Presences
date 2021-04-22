@@ -29,13 +29,13 @@ presence.on("UpdateData", () => {
   const { pathname } = window.location,
     data: PresenceData = {
       largeImageKey
-    };
+    },
+    level: number = getLevelInHeader();
+    
   let details: string,
     state: string,
     smallImageText: string,
     startTimestamp: number;
-
-  const level: number = getLevelInHeader();
 
   if (/grammar_points\/\d+/i.test(pathname)) {
     startTimestamp = Date.now();
