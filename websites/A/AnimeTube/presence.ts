@@ -16,7 +16,7 @@ let videoData: {
 presence.on("iFrameData", (data: typeof videoData) => {
     if (data !== null)
     videoData = data;
-})
+});
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
