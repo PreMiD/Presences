@@ -8,6 +8,6 @@ iframe.on("UpdateData", async () => {
       currentTime: video.currentTime,
       paused: video.paused,
       duration: video.duration
-    })
+    });
   }
 });
