@@ -32,9 +32,9 @@ presence.on("UpdateData", async () => {
         presenceData.state = month;
       } else {
         const trackName = document.getElementsByClassName("game-text")[0]
-          .textContent,
+            .textContent,
           mapperName = document.getElementsByClassName("subtitle")[0]
-          .textContent;
+            .textContent;
         presenceData.details = "Leaderboard - Track Of The Day";
         presenceData.state = `${trackName} (${mapperName})`;
       }
@@ -139,13 +139,12 @@ presence.on("UpdateData", async () => {
         "title"
       )[1].textContent;
     } else if (window.location.hash.startsWith("#/leaderboard")) {
-        const trackName = document.getElementsByClassName("game-text")[0]
+      const trackName = document.getElementsByClassName("game-text")[0]
           .textContent,
-          mapperName = document.getElementsByClassName("subtitle")[0]
-          .textContent;
-        presenceData.details = "Leaderboard";
-        presenceData.state = `${trackName} (${mapperName})`;
-      }
+        mapperName = document.getElementsByClassName("subtitle")[0].textContent;
+      presenceData.details = "Leaderboard";
+      presenceData.state = `${trackName} (${mapperName})`;
+    }
   } else if (window.location.pathname.startsWith("/api")) {
     presenceData.state = `Viewing API (${window.location.pathname.substr(
       "/api/".length
