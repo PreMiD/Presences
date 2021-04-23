@@ -5,10 +5,11 @@
   },
   "service": "Brony Radio Germany",
   "description": {
-    "en": "Brony Radio Germany is the web radio for German-speaking Bronies. We stream 24/7 music for everyone and it's all about ponies."
+    "en": "Brony Radio Germany is the web radio for German-speaking Bronies. We stream 24/7 music for everyone and it's all about ponies.",
+    "nl": "Brony Radio Duitsland is de webradio voor Duitstalige Bronies. We streamen 24/7 muziek voor iedereen en het draait allemaal om pony's."
   },
   "url": "www.bronyradiogermany.com",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/oSYAi8F.png",
   "thumbnail": "https://i.imgur.com/btr8ygf.png",
   "color": "#FF0000",
