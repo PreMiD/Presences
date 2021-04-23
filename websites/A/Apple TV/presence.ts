@@ -24,7 +24,7 @@ class AppleTV extends Presence {
     const title = document.querySelector("div.product-header__image-logo.clr-primary-text-on-dark > a > h2")?.textContent;
 
     if (title) return title;
-    else return document.querySelector("img")?.alt;
+    else return document.querySelector<HTMLImageElement>("img").alt;
   }
 
   getEpisodeTitle(){
