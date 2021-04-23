@@ -7,10 +7,11 @@
   "url": "milkandcookies.games",
   "description": {
     "es": "¡Comunidad de Discord para todos!",
-    "en": "Discord Community for everyone!"
+    "en": "Discord Community for everyone!",
+    "nl": "Discord Community voor iedereen!"
   },
   "service": "Milk and Cookies",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/g2C5xmp.png",
   "thumbnail": "https://i.imgur.com/rmO4baN.png",
   "color": "#FF0098",
