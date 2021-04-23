@@ -155,7 +155,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Viewing their settings";
         }
       }
-    }
+    };
 
     data.settings = [
       {
