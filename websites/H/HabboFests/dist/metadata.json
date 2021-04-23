@@ -11,10 +11,11 @@
   ],
   "service": "HabboFests",
   "description": {
-    "en": "Habbo fansite"
+    "en": "Habbo fansite",
+    "nl": "Habbo fansite"
   },
   "url": "habbofests.com",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "logo": "https://i.imgur.com/1KxRWTE.png",
   "thumbnail": "https://i.imgur.com/MNuaxiQ.png",
   "color": "#00c3c5",

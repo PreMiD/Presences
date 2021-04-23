@@ -5,10 +5,11 @@
   },
   "service": "Jackbox",
   "description": {
-    "en": "It's easy to use this website to turn your phone, tablet or computer into a controller for one of Jackbox Games many party games. All you'll need is a room code"
+    "en": "It's easy to use this website to turn your phone, tablet or computer into a controller for one of Jackbox Games many party games. All you'll need is a room code",
+    "nl": "Het is gemakkelijk om deze website te gebruiken om van je telefoon, tablet of computer een controller te maken voor een van de vele partygames van Jackbox Games. Het enige dat u nodig heeft, is een kamercode"
   },
   "url": "jackbox.tv",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "logo": "https://i.imgur.com/Dyoab1j.jpg",
   "thumbnail": "https://i.imgur.com/poY2KNc.png",
   "color": "#4254f4",
