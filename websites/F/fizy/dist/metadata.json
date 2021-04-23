@@ -5,11 +5,12 @@
   },
   "service": "fizy",
   "description": {
-    "en": " fizy is an online music search engine based in Turkey and available in Turkey and Ukraine.",
-    "tr": "fizy milyonlarca şarkı, video klip, onlarca radyo kanalı ve fazlasına ulaşmanı sağlayan dijital müzik platformudur."
+    "en": "fizy is an online music search engine based in Turkey and available in Turkey and Ukraine.",
+    "tr": "fizy milyonlarca şarkı, video klip, onlarca radyo kanalı ve fazlasına ulaşmanı sağlayan dijital müzik platformudur.",
+    "nl": "fizy is een online muziekzoekmachine, gevestigd in Turkije en beschikbaar in Turkije en Oekraïne."
   },
   "url": "play.fizy.com",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "logo": "https://premid.is-inside.me/0A7BU9oG.png",
   "thumbnail": "https://premid.is-inside.me/uawrzAU0.png",
   "color": "#fed200",
