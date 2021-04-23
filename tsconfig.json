@@ -10,7 +10,6 @@
     "noImplicitAny": true,
     "noUnusedParameters": true,
     "typeRoots": ["@types"],
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "esModuleInterop": true
   }
 }
