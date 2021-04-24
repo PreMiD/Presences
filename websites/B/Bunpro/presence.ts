@@ -31,7 +31,7 @@ presence.on("UpdateData", () => {
       largeImageKey
     },
     level: number = getLevelInHeader();
-    
+
   let details: string,
     state: string,
     smallImageText: string,
@@ -192,8 +192,10 @@ presence.on("UpdateData", () => {
     }
   }
 
-  if (details) data.details = details;
+  data.details = details;
+
   if (state) data.state = state;
+
   if (level) {
     data.smallImageKey = getLevelIcon(level);
 
