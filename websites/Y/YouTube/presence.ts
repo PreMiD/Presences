@@ -219,10 +219,11 @@ presence.on("UpdateData", async () => {
       "div[itemtype='http://schema.org/VideoObject'] > link"
     );
     if (
+      metaVideoElement &&
       metaVideoElement.href ==
-      `https://www.youtube.com/watch?v=${document
-        .querySelector("#page-manager > ytd-watch-flexy")
-        .getAttribute("video-id")}`
+        `https://www.youtube.com/watch?v=${document
+          .querySelector("#page-manager > ytd-watch-flexy")
+          .getAttribute("video-id")}`
     ) {
       const unlistedVideoElement = document.querySelector<HTMLMetaElement>(
         "div[itemtype='http://schema.org/VideoObject'] > meta[itemprop='unlisted']"
