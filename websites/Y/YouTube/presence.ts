@@ -86,7 +86,7 @@ presence.on("UpdateData", async () => {
     let oldYouTube: boolean = null,
       YouTubeTV: boolean = null,
       YouTubeEmbed: boolean = null,
-      UnlistedVideo = false,
+      unlistedVideo = false,
       title: HTMLElement;
 
     //* Checking if user has old YT layout.
@@ -227,7 +227,7 @@ presence.on("UpdateData", async () => {
       const unlistedVideoElement = document.querySelector<HTMLMetaElement>(
         "div[itemtype='http://schema.org/VideoObject'] > meta[itemprop='unlisted']"
       );
-      UnlistedVideo =
+      unlistedVideo =
         unlistedVideoElement && unlistedVideoElement.content === "True";
     }
     const presenceData: PresenceData = {
@@ -293,7 +293,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
-      if (!UnlistedVideo) {
+      if (!unlistedVideo) {
         presenceData.buttons = [
           {
             label: live
