@@ -5,10 +5,11 @@
   },
   "service": "fastani.net",
   "description": {
-    "en": "fastani.net is a free anime streaming site without ads."
+    "en": "fastani.net is a free anime streaming site without ads.",
+    "nl": "fastani.net is een gratis anime streaming site zonder advertenties."
   },
   "url": "fastani.net",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/RUhG7q4.png",
   "thumbnail": "https://i.imgur.com/QdPCzFo.png",
   "color": "#d01110",

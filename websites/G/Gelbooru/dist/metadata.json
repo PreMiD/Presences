@@ -6,10 +6,11 @@
   "service": "Gelbooru",
   "description": {
     "en": "NSFW Anime Image board running on Gelbooru",
-    "de": "NSFW Anime Image board running on Gelbooru"
+    "de": "NSFW Anime Image board running on Gelbooru",
+    "nl": "NSFW Anime Afbeeldingen bord loopt op Gelbooru"
   },
   "url": "gelbooru.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/CgGzxXy.png",
   "thumbnail": "https://i.imgur.com/T7ge6JO.png",
   "color": "#0773FB",

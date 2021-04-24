@@ -6,10 +6,11 @@
   },
   "url": "otaku-streamers.com",
   "description": {
-    "en": "Otaku-Streamers is a site where you can find the latest anime, discussions and hang with some cool people."
+    "en": "Otaku-Streamers is a site where you can find the latest anime, discussions and hang with some cool people.",
+    "nl": "Otaku-Streamers is een site waar je de nieuwste anime, discussies en leuke mensen kunt vinden."
   },
   "service": "Otaku-Streamers",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/uAylLfi.png",
   "thumbnail": "https://i.imgur.com/5poNugg.png",
   "color": "#920121",

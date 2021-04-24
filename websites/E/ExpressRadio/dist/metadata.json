@@ -6,10 +6,11 @@
   "service": "ExpressRadio",
   "description": {
     "en": "Express Radio is a non-profitable radio station providing you with the latest and best hits.",
-    "ga_IE": "Is stáisiún raidió neamhbhrabúsach é Express Radio a sholáthraíonn na amas is déanaí agus is fearr duit."
+    "ga_IE": "Is stáisiún raidió neamhbhrabúsach é Express Radio a sholáthraíonn na amas is déanaí agus is fearr duit.",
+    "nl": "Express Radio is een radiostation zonder winstoogmerk dat u de nieuwste en beste hits laat horen."
   },
   "url": "expressradio.co",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/LUJdDO9.png",
   "thumbnail": "https://i.imgur.com/AabDDeg.png",
   "color": "#4a9aa8",

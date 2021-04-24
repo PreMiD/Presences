@@ -6,10 +6,11 @@
   },
   "service": "Radio Garden",
   "description": {
-    "en": "By bringing distant voices close, radio connects people and places. Radio Garden allows listeners to tune into live radio across entire globe."
+    "en": "By bringing distant voices close, radio connects people and places. Radio Garden allows listeners to tune into live radio across entire globe.",
+    "nl": "Door verre stemmen dichtbij te brengen, verbindt radio mensen en plaatsen. Met Radio Garden kunnen luisteraars afstemmen op live-radio over de hele wereld."
   },
   "url": "radio.garden",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "logo": "https://i.imgur.com/Q2l6Bw8.png",
   "thumbnail": "https://i.imgur.com/4Zzi2Lv.png",
   "color": "#0DF675",

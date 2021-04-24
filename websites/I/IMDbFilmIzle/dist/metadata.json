@@ -15,10 +15,11 @@
   ],
   "description": {
     "tr": "En yeni ve en güncel filmleri sitemizde Full HD izleyebilirsiniz. 720p film izle denildiğinde akla gelen en kaliteli film izleme sitesi.",
-    "en": "Watch newest movies as Full HD in our website. The best website to watch films when it comes to quality."
+    "en": "Watch newest movies as Full HD in our website. The best website to watch films when it comes to quality.",
+    "nl": "Bekijk de nieuwste films in Full HD op onze website. De beste website om films te kijken als het om kwaliteit gaat."
   },
   "service": "IMDbFilmizle",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/rDIoqZb.png",
   "thumbnail": "https://i.imgur.com/RdOXsqx.png",
   "color": "#FFDB4C",

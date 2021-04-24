@@ -4,10 +4,6 @@
     "name": "N0chteil ^^",
     "id": "495901098926669825"
   },
-  "contributors": [{
-    "name": "Brotツ",
-    "id": "530707801463586816"
-  }],
   "service": "Tesla",
   "description": {
     "en": "Tesla is accelerating the world's transition to sustainable energy with electric cars, solar and integrated renewable energy solutions for homes and businesses.",
@@ -17,7 +13,7 @@
     "www.tesla.com",
     "shop.tesla.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/8FrVa6D.png",
   "thumbnail": "https://i.imgur.com/20F9yxy.png",
   "color": "#E82127",
@@ -31,7 +27,12 @@
       "title": "Icon",
       "icon": "fad fa-icons",
       "value": 0,
-      "values": ["Red", "Red with text", "White", "White with text"]
+      "values": [
+        "Red",
+        "Red with text",
+        "White",
+        "White with text"
+      ]
     },
     {
       "id": "timeElapsed",

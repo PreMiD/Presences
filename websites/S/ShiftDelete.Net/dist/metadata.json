@@ -6,13 +6,14 @@
   "service": "ShiftDelete.Net",
   "description": {
     "en": "ShiftDelete.Net is one of the biggest technology blogs in Turkey.",
-    "tr": "ShiftDelete.Net, Türkiye'nin en büyük teknoloji haberleri ve forum sitelerinden birisidir.."
+    "tr": "ShiftDelete.Net, Türkiye'nin en büyük teknoloji haberleri ve forum sitelerinden birisidir..",
+    "nl": "ShiftDelete.Net is een van de grootste technologie blogs in Turkije."
   },
   "url": [
     "shiftdelete.net",
     "forum.shiftdelete.net"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://premid.is-inside.me/wmPRERck.png",
   "thumbnail": "https://premid.is-inside.me/A4v9naOV.png",
   "color": "#fedd00",

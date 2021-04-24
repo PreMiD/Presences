@@ -5,10 +5,11 @@
   },
   "url": "skyra.pw",
   "description": {
-    "en": "A fully customizable server moderation Discord bot for your Discord server that features a simple and intuitive web dashboard. Server management just got a whole lot easier."
+    "en": "A fully customizable server moderation Discord bot for your Discord server that features a simple and intuitive web dashboard. Server management just got a whole lot easier.",
+    "nl": "Een volledig aanpasbare server moderatie Discord bot voor je Discord server die beschikt over een eenvoudig en intuïtief web dashboard. Serverbeheer is net een stuk eenvoudiger geworden."
   },
   "service": "Skyra",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/vUk6eWg.png",
   "thumbnail": "https://i.imgur.com/4C39tqP.png",
   "color": "#7087D8",

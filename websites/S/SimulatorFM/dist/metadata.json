@@ -6,13 +6,14 @@
   },
   "service": "SimulatorFM",
   "description": {
-    "en": "Simulator FM, a new but popular radio station for Euro Truck Simulator and American Truck Simulator."
+    "en": "Simulator FM, a new but popular radio station for Euro Truck Simulator and American Truck Simulator.",
+    "nl": "Simulator FM, een nieuw maar populair radiostation voor Euro Truck Simulator en American Truck Simulator."
   },
   "url": [
     "simulator.fm",
     "panel.simulator.fm"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/yKFc2V1.png",
   "thumbnail": "https://i.imgur.com/71zEPjv.png",
   "color": "#65B6FF",
