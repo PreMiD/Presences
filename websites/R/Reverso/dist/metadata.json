@@ -4,7 +4,22 @@
         "name": "PiggyPlex",
         "id": "695608126602477629"
     },
-    "url": "reverso.net",
+    "url": [
+        "www.reverso.net",
+        "context.reverso.net",
+        "synonyms.reverso.net",
+        "conjugator.reverso.net",
+        "documents.reverso.net",
+        "grammar.reverso.net",
+        "grammaire.reverso.net",
+        "dictionary.reverso.net",
+        "dicionario.reverso.net",
+        "dizionario.reverso.net",
+        "woerterbuch.reverso.net",
+        "diccionario.reverso.net",
+        "dictionnaire.reverso.net",
+        "www.corporate-translation.reverso.com"
+    ],
     "description": {
         "en": "Reverso.net : Free  online translation in French, Spanish, Italian, German, Russian, Portuguese, Hebrew, Japanese, English.",
         "es": "Reverso.net: traductor online en Inglés, Francés, Italiano, Portugués, Alemán, Ruso, Hebreo",
