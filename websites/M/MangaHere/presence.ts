@@ -21,25 +21,24 @@ presence.on("UpdateData", async () => {
             ];
 
   if (hostname === "www.mangahere.cc") {
-
-    if (pathname === "/") {
+    if (pathname === "/") 
       data.details = "Viewing the Homepage";
-    }
-    else if (pathname === "/latest/") {
+
+    else if (pathname === "/latest/") 
       data.details = "Browsing latest manga";
-    }
-    else if (pathname === "/ranking/") {
+
+    else if (pathname === "/ranking/") 
       data.details = "Browsing by ranking";
-    }
-    else if (pathname === "/spoilers/") {
+
+    else if (pathname === "/spoilers/") 
       data.details = "Browsing spoilers and news";
-    }
-    else if (pathname === "/directory/") {
+    
+    else if (pathname === "/directory/") 
       data.details = "Browsing all manga";
-    }
-    else if (pathname === "/on_going/") {
+    
+    else if (pathname === "/on_going/") 
       data.details = "Browsing ongoing manga";
-    }
+    
     //ganre/new/
     else if (pathname.endsWith("/new/")) {
       const url = pathname,
@@ -74,7 +73,6 @@ presence.on("UpdateData", async () => {
       data.state = title;
       data.buttons = [{ label: "View Manga", url: link }];
       data.smallImageKey = "viewing";
-      data.smallImageText = "Viewing";
     }
     //Manga Reading
     else if (pathname.startsWith("/manga") && pathname.endsWith(".html")) {
@@ -92,7 +90,6 @@ presence.on("UpdateData", async () => {
       }
       data.details = title;
       data.smallImageKey = "reading";
-      data.smallImageText = "Reading";
     }
     //Searching
     else if (pathname.startsWith("/search")) {
@@ -103,7 +100,6 @@ presence.on("UpdateData", async () => {
       data.details = "Searching:";
       data.state = searchName;
       data.smallImageKey = "searching";
-      data.smallImageText = "Searching";
     }
     ganres.forEach(function(ganre){
       if(pathname.substring(1, pathname.length-1) === ganre){
