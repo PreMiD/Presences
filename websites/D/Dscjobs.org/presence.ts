@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Editing his Profile";
   } else if (page === "/faq") {
     presenceData.details = "Browsing:";
-    presenceData.state = "FaQ Page";
+    presenceData.state = "FAQ Page";
   } else if (page === "/moderators") {
     const urlParams: URLSearchParams = new URLSearchParams(
       window.location.search
