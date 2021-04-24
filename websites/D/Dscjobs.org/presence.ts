@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
   } else if (page === "/profile") {
     const username: string = document.querySelector("body > div.profile_header > div > div > h1").textContent;
     presenceData.details = "Watching Profile:";
-    presenceData.state = `${username}`;
+    presenceData.state = username;
   } else if (page === "/search") {
     const urlParams: URLSearchParams = new URLSearchParams(
       window.location.search
