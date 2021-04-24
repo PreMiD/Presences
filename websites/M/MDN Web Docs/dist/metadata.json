@@ -8,7 +8,7 @@
   "description": {
     "en": "The web docs of MDN, here you can found JS docs and more...",
     "es": "La documentacion web de MDN, puedes encontrar documentacion de JS y mas...",
-    "nl": "De webdocumenten van MDN, hier vind je JS-documenten en meer ..."
+    "nl": "De webdocumenten van MDN, hier vind je JS-documenten en meer..."
   },
   "service": "MDN Web Docs",
   "version": "1.0.2",

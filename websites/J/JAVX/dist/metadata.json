@@ -22,6 +22,6 @@
   ],
   "category": "videos",
   "regExp": "([a-z0-9-]+[.])*javx([.][a-z]+)+[/]",
-  "iFrameRegExp": "([a-z0-9-]+[.])*ijav.tv/play/([a-z0-9-])+",
+  "iFrameRegExp": "([a-z0-9-]+[.])*ijav.tv\/play\/([a-z0-9-])+",
   "iframe": true
 }
