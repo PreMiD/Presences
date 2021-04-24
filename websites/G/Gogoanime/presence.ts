@@ -122,7 +122,7 @@ async function checkDomain(): Promise<DomainCheckState> {
     }
     const data: GogoanimeApiResponse = await body.json();
     if (data) {
-      const domains: string[] = result.validDomains = data.payload.allDomains;
+      const domains: string[] = (result.validDomains = data.payload.allDomains);
       document.cookie = `${cookieName}=${domains.join("-")}; max-age=1800`;
       if (domains.includes(currentDomain)) {
         result.invalid = false;
@@ -147,7 +147,9 @@ presence.on("UpdateData", async () => {
       isClone = result.invalid;
       if (isClone) {
         presence.error(
-          `The following gogoanime domain is a clone therefore not supported by this extension. The valid domains are:\n${result.validDomains.join("\n")}`
+          `The following gogoanime domain is a clone therefore not supported by this extension. The valid domains are:\n${result.validDomains.join(
+            "\n"
+          )}`
         );
       } else {
         presence.success(

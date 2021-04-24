@@ -5,10 +5,11 @@
   },
   "service": "BanG Dream! Wikia",
   "description": {
-    "en": "Presence for the English Wikia of the BanG Dream! series"
+    "en": "Presence for the English Wikia of the BanG Dream! series",
+    "nl": "Presence voor de Engelse Wikia van de BanG Dream! serie"
   },
   "url": "bandori.fandom.com",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://menma.is-inside.me/dkYgISvl.png",
   "thumbnail": "https://menma.is-inside.me/kwCzrtSv.png",
   "color": "#E5004F",

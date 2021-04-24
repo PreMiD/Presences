@@ -6,10 +6,11 @@
   "url": "proxer.me",
   "description": {
     "en": "Free and open German Anime Community",
-    "de": "Kostenlose und Freie deutsche Anime Community"
+    "de": "Kostenlose und Freie deutsche Anime Community",
+    "nl": "Gratis en open Duitse Anime-community"
   },
   "service": "Proxer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "iframe": true,
   "logo": "https://i.imgur.com/ZrO8bHg.png",
   "thumbnail": "https://i.imgur.com/j0hV7nO.png",

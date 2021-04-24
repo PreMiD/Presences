@@ -6,10 +6,11 @@
   "service": "RealBooru",
   "description": {
     "en": "NSFW Porn Image board running on Gelbooru",
-    "de": "NSFW Porn Image board running on Gelbooru"
+    "de": "NSFW Porn Image board running on Gelbooru",
+    "nl": "NSFW Porno Beeld bord draait op Gelbooru"
   },
   "url": "realbooru.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/g09SOs0.png",
   "thumbnail": "https://i.imgur.com/m41BGlq.png",
   "color": "#171717",

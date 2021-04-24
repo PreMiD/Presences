@@ -5,10 +5,11 @@
   },
   "service": "p90.zone",
   "description": {
-    "en": "p90.zone is a website that shows random WebMs (mostly memes) uploaded by their users"
+    "en": "p90.zone is a website that shows random WebMs (mostly memes) uploaded by their users",
+    "nl": "p90.zone is een website die willekeurige WebM's (meestal memes) laat zien die door hun gebruikers zijn geüpload"
   },
   "url": "p90.zone",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://menma.is-inside.me/0wNhvPhL.png",
   "thumbnail": "https://menma.is-inside.me/4uJAbkpD.png",
   "color": "#000084",

@@ -5,10 +5,11 @@
   },
   "service": "Legends of Equestria",
   "description": {
-    "en": "Legends of Equestria is a free-to-play MMORPG, available to play right now in Open Access! The in-development game is full of adventures, magic, and small horses. You will be able to fly, dance, play with pets, and more with friends or by yourself."
+    "en": "Legends of Equestria is a free-to-play MMORPG, available to play right now in Open Access! The in-development game is full of adventures, magic, and small horses. You will be able to fly, dance, play with pets, and more with friends or by yourself.",
+    "nl": "Legends of Equestria is een gratis te spelen MMORPG, nu beschikbaar om te spelen in Open Access! Het in-ontwikkeling zijnde spel zit vol met avonturen, magie en kleine paarden. Je kunt vliegen, dansen, spelen met huisdieren en nog veel meer met vrienden of alleen."
   },
   "url": "www.legendsofequestria.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/UR8jlF9.png",
   "thumbnail": "https://i.imgur.com/lvYtzNm.png",
   "color": "#FF0000",

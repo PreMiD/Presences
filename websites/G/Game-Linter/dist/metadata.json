@@ -6,13 +6,19 @@
   },
   "service": "Game-Linter",
   "description": {
-    "en": "Game-Linter is a file sharing and a torrent index as well as a magnet link provider."
+    "en": "Game-Linter is a file sharing and a torrent index as well as a magnet link provider.",
+    "nl": "Game-Linter is een bestand delen en een torrent index en een magneet link provider."
   },
   "url": "game-linter.com",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/tQrygFc.png",
   "thumbnail": "https://i.imgur.com/ISdHrQA.png",
   "color": "#30ACCE",
-  "tags": ["gaming", "filesharing", "coding", "sharing"],
+  "tags": [
+    "gaming",
+    "filesharing",
+    "coding",
+    "sharing"
+  ],
   "category": "other"
 }

@@ -10,10 +10,11 @@
   ],
   "description": {
     "en": "Free Stock Charts, Stock Quotes and Trade Ideas",
-    "ru": "Бесплатные онлайн-графики акций, котировки и идеи"
+    "ru": "Бесплатные онлайн-графики акций, котировки и идеи",
+    "nl": "Gratis voorraadgrafieken, aandelenkoersen en handelsideeën"
   },
   "service": "TradingView",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/1LFiAqv.png",
   "thumbnail": "https://i.imgur.com/ow48UTD.png",
   "color": "#2196f3",

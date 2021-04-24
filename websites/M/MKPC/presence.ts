@@ -19,9 +19,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname == "/forum.php") {
     presenceData.details = "Viewing the Forum's menu";
-    presenceData.smallImageKey = "search"; 
-    presenceData.buttons = [{ label: "View Forum", url: document.location.href }];
-  } const elt = document.querySelector("#compteur0 > div") as HTMLElement;
+    presenceData.smallImageKey = "search";
+    presenceData.buttons = [
+      { label: "View Forum", url: document.location.href }
+    ];
+  }
+  const elt = document.querySelector("#compteur0 > div") as HTMLElement;
   if (elt) {
     const lap = elt.innerText.replace(/.+? /g, "");
     presenceData.details = "Lap " + lap;
@@ -48,11 +51,15 @@ presence.on("UpdateData", async () => {
     document.location.pathname == "doublecomptes.php"
   ) {
     presenceData.details = "Viewing staff backend";
-  } else if (document.location.pathname == "/profil.php") { 
-     user = document.querySelector("body > main > div > div.profile-summary > h1");
+  } else if (document.location.pathname == "/profil.php") {
+    user = document.querySelector(
+      "body > main > div > div.profile-summary > h1"
+    );
     presenceData.details = "Viewing: " + user.innerHTML;
     presenceData.smallImageKey = "search";
-    presenceData.buttons = [{ label: "View profile", url: document.location.href }];
+    presenceData.buttons = [
+      { label: "View profile", url: document.location.href }
+    ];
   }
   if (presenceData.details == null) {
     presence.setTrayTitle();

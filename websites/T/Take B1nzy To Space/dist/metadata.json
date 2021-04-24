@@ -6,10 +6,11 @@
   },
   "url": "takeb1nzyto.space",
   "description": {
-    "en": "Travel through space while listening to amazing music on a website developed by former Discord staff and Senior Ratelimiter B1nzy!"
+    "en": "Travel through space while listening to amazing music on a website developed by former Discord staff and Senior Ratelimiter B1nzy!",
+    "nl": "Reis door de ruimte terwijl je naar geweldige muziek luistert op een website die is ontwikkeld door voormalige Discord-medewerkers en Senior Ratelimiter B1nzy!"
   },
   "service": "Take B1nzy To Space",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/httSU0V.png",
   "thumbnail": "https://i.imgur.com/Zf7Dl4W.png",
   "color": "#060A22",
