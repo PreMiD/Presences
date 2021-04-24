@@ -53,7 +53,7 @@ presence.on('UpdateData', () => {
   let pagename = location.pathname;
   pagename = pagename.startsWith('/') ? pagename.slice(1) : pagename;
   pagename = pagename.endsWith('/') ? pagename.slice(0, -1) : pagename;
-  let pageData = pageMap[pagename];
+  const pageData = pageMap[pagename];
   if (pageData && typeof pageData === 'object') {
     presenceData.details = pageData.action ?? '';
     presenceData.state = pageData.text ?? '';
@@ -67,7 +67,7 @@ presence.on('UpdateData', () => {
       presenceData.details = 'Google\'s office locations';
       presenceData.state = `in ${location.search.split('region=')[1].replace(/-/g, ' ').replace(/./, (a) => a.toUpperCase())}`;
     }
-    location.search.split('region=')[1]
+    location.search.split('region=')[1];
   } else {
     const metaTitle: HTMLMetaElement = document.querySelector('meta[property="og:title"]'),
     h1 = document.querySelector('h1');
