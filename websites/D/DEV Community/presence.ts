@@ -101,7 +101,6 @@ presence.on("UpdateData", async () => {
 
   let endTimestamp = 0;
 
-  //Add shop
   switch (true) {
     case isShop():
       presenceData.details = "Browsing Shop";
@@ -161,9 +160,12 @@ presence.on("UpdateData", async () => {
       endTimestamp = presence.getTimestampsfromMedia(
         document.querySelector("video")
       )[1];
-      if (contentStateKey === "play" && endTimestamp > 0)
+      if (contentStateKey === "play" && endTimestamp > 0) {
         presenceData.endTimestamp = endTimestamp;
-      else delete presenceData.endTimestamp;
+      } else {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
       break;
     case isPodcast():
       presenceData.details = podcastTitle;
@@ -192,9 +194,12 @@ presence.on("UpdateData", async () => {
       endTimestamp = presence.getTimestampsfromMedia(
         document.querySelector("#audio")
       )[1];
-      if (contentStateKey === "play" && endTimestamp > 0)
+      if (contentStateKey === "play" && endTimestamp > 0) {
         presenceData.endTimestamp = endTimestamp;
-      else delete presenceData.endTimestamp;
+      } else {
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
+      }
       break;
     case pathIncludes("/top/"):
       feedTop = document.querySelector(
