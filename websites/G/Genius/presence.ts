@@ -87,12 +87,12 @@ presence.on("UpdateData", async () => {
           url: document.URL
         }
       ];
-  } else if (document.querySelector(".song_body-lyrics") !== null) {
+  } else if (document.querySelector("div[class*='SongPageGrid'") !== null) {
     const song = document
-        .querySelector("h1.header_with_cover_art-primary_info-title")
+        .querySelector("h1[class*='SongHeader__Title-sc'")
         .textContent.trim(),
       artist = document
-        .querySelector("a.header_with_cover_art-primary_info-primary_artist")
+        .querySelector("a[class*='SongHeader__Artist'")
         .textContent.trim();
     presenceData.details = (await strings).lyrics;
     presenceData.state = artist + " - " + song;
