@@ -60,11 +60,7 @@ presence.on("UpdateData", async () => {
     else if (pathname.endsWith("/on_going/")) {
       const url = pathname,
        splitUrl = url.split('/');
-      if (splitUrl[1] == "on_going") {
-        data.details = "Browsing ongoing manga";
-      } else {
-        data.details = "Browsing ongoing " + splitUrl[1] + " manga";
-      }
+      data.details = splitUrl[1] === "on_going" ? "Browsing ongoing manga" : `Browsing ongoing ${splitUrl[1]} manga`;
     }
     //Manga Viewing
     else if (pathname.startsWith("/manga") && pathname.endsWith("/")) {
