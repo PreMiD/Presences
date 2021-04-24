@@ -4,8 +4,9 @@
 LICENSE @Fruxh
 package.json @Timeraa @Fruxh @TheDropX
 yarn.lock @Timeraa @Fruxh @TheDropX
-presenceUpdater.ts @Timeraa
+presenceUpdater.ts @SeMiD
 syntaxEnforcer.ts @SeMiD
 qualityAssurance.ts @SeMiD
 translator.ts @Bas950 @ririxidev
 .gitignore @Timeraa @Fruxh
+.github/CONTRIBUTING.md @Bas950 @ririxidev
