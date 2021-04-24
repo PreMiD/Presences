@@ -31,12 +31,15 @@ pageMap: { [ key: string ]: { action?: string, text?: string } } = {
     text: 'Human Rights'
   },
   commitments: {
-    text: 'Commitments'
+    action: 'Reading about:',
+    text: 'Google\'s commitments'
   },
   'commitments/racialequity': {
+    action: 'Reading about:',
     text: 'Racial equality'
   },
   stories: {
+    action: 'Reading a page:',
     text: 'Stories'
   }
 };
