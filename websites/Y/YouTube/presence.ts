@@ -101,7 +101,7 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/embed")
       ? (YouTubeEmbed = true)
       : (YouTubeEmbed = false);
-    
+
     //* Due to differences between old and new YouTube, we should add different selectors.
     // Get title
     YouTubeEmbed
@@ -215,10 +215,20 @@ presence.on("UpdateData", async () => {
         ".style-scope.ytd-channel-name > a"
       ).textContent;
     }
-    const metaVideoElement = document.querySelector<HTMLLinkElement>("div[itemtype='http://schema.org/VideoObject'] > link");
-    if (metaVideoElement.href == `https://www.youtube.com/watch?v=${document.querySelector("#page-manager > ytd-watch-flexy").getAttribute("video-id")}`){
-      const unlistedVideoElement = document.querySelector<HTMLMetaElement>("div[itemtype='http://schema.org/VideoObject'] > meta[itemprop='unlisted']");
-      UnlistedVideo = (unlistedVideoElement && unlistedVideoElement.content === "True");
+    const metaVideoElement = document.querySelector<HTMLLinkElement>(
+      "div[itemtype='http://schema.org/VideoObject'] > link"
+    );
+    if (
+      metaVideoElement.href ==
+      `https://www.youtube.com/watch?v=${document
+        .querySelector("#page-manager > ytd-watch-flexy")
+        .getAttribute("video-id")}`
+    ) {
+      const unlistedVideoElement = document.querySelector<HTMLMetaElement>(
+        "div[itemtype='http://schema.org/VideoObject'] > meta[itemprop='unlisted']"
+      );
+      UnlistedVideo =
+        unlistedVideoElement && unlistedVideoElement.content === "True";
     }
     const presenceData: PresenceData = {
       details: vidDetail
@@ -283,7 +293,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
-      if (!UnlistedVideo){
+      if (!UnlistedVideo) {
         presenceData.buttons = [
           {
             label: live
