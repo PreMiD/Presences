@@ -4,22 +4,20 @@
         "name": "PiggyPlex",
         "id": "695608126602477629"
     },
-    "url": "www.keybr.com",
+    "url": "about.google",
     "description": {
         "en": "Teaching the world to type at the speed of thought! Typing lessons that work."
     },
-    "service": "keybr.com",
-    "version": "1.0.1",
-    "logo": "https://i.imgur.com/5ZUdx7o.png",
-    "thumbnail": "https://i.imgur.com/D6gTvpU.png",
-    "color": "#F5F0F0",
+    "service": "about.google",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/Kt0jT65.png",
+    "thumbnail": "https://i.imgur.com/5Xjh1EI.png",
+    "color": "#1a73e8",
     "tags": [
-        "typing",
-        "type",
-        "keybr"
+        "google"
     ],
     "altnames": [
         "About Google"
     ],
-    "category": "games"
+    "category": "other"
 }
