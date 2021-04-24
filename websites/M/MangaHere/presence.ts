@@ -50,11 +50,7 @@ presence.on("UpdateData", async () => {
     else if (pathname.endsWith("/completed/")) {
       const url = pathname,
        splitUrl = url.split('/');
-      if (splitUrl[1] == "completed") {
-        data.details = "Browsing completed manga";
-      } else {
-        data.details = "Browsing completed " + splitUrl[1] + " manga";
-      }
+      data.details = splitUrl[1] === "completed" ? "Browsing completed manga" : `Browsing completed ${splitUrl[1]} manga`;
     }
     //ganre/on_going/
     else if (pathname.endsWith("/on_going/")) {
