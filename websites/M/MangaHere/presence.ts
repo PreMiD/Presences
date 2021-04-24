@@ -9,7 +9,6 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   },
     pathname = document.location.pathname,
-    hostname = document.location.hostname,
     ganres = ["martial-arts", "action", "school-life",
               "sci-fi", "yoi", "shotacon", "mystery", "shoujo",
               "ecchi", "doujinshi", "lolicon", "adventure", "romance",
@@ -20,7 +19,6 @@ presence.on("UpdateData", async () => {
               "tragedy", "mecha"
             ];
 
-  if (hostname === "www.mangahere.cc") {
     if (pathname === "/") 
       data.details = "Viewing the Homepage";
 
@@ -99,6 +97,5 @@ presence.on("UpdateData", async () => {
         data.state = ganre.replace('-',' ') +" manga";
       }
     });
-  }
   presence.setActivity(data);
 });
