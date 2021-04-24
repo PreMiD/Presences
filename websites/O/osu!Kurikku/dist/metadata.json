@@ -6,14 +6,15 @@
   },
   "service": "osu!Kurikku",
   "description": {
-    "en": "One of the best CIS community osu! server."
+    "en": "One of the best CIS community osu! server.",
+    "nl": "Een van de beste CIS-community osu! server."
   },
   "url": [
     "kurikku.pw",
     "sig.kurikku.pw",
     "status.kurikku.pw"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/99lEgeG.png",
   "thumbnail": "https://i.imgur.com/Oa9jhmt.png",
   "color": "#FF66AA",

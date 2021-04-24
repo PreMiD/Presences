@@ -6,14 +6,15 @@
   },
   "service": "Nutaku",
   "description": {
-    "en": "The best Hentai Games online on Nutaku. Your number 1 destination for uncensored browser, mobile and downloadable hentai games."
+    "en": "The best Hentai Games online on Nutaku. Your number 1 destination for uncensored browser, mobile and downloadable hentai games.",
+    "nl": "De beste Hentai-spellen online op Nutaku. Uw nummer 1 bestemming voor ongecensureerde browser-, mobiele en downloadbare hentai-spellen."
   },
   "regExp": "([a-z]+[.])nutaku.net[/]",
   "url": [
     "nutaku.net",
     "www.nutaku.net"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/fvSnqjK.png",
   "thumbnail": "https://i.imgur.com/ypxOFV9.jpg",
   "color": "#E53155",

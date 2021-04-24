@@ -5,10 +5,11 @@
   },
   "service": "Radio Nintendo",
   "description": {
-    "en": "Radio Nintendo is a online radio that streams Nintendo related music and shows."
+    "en": "Radio Nintendo is a online radio that streams Nintendo related music and shows.",
+    "nl": "Radio Nintendo is een online radio die Nintendo-gerelateerde muziek en shows streamt."
   },
   "url": "radionintendo.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/rjBHMMc.png",
   "thumbnail": "https://i.imgur.com/95jt41L.png",
   "color": "#B80300",
