@@ -52,7 +52,7 @@ presence.on('UpdateData', () => {
   if (["tasrif.reverso.net", "konjugator.reverso.net", "conjugator.reverso.net", "conjugador.reverso.net", "conjugueur.reverso.net", "pealim.reverso.net", "coniugazione.reverso.net", "doushi.reverso.net", "conjugacao.reverso.net", "glagol.reverso.net", "tasrif.reverso.net", "konjugator.reverso.net", "conjugator.reverso.net", "conjugador.reverso.net", "conjugueur.reverso.net", "pealim.reverso.net", "coniugazione.reverso.net", "doushi.reverso.net", "conjugacao.reverso.net", "glagol.reverso.net"].includes(domain)) {
     presenceData.details = 'Conjugator';
     presenceData.state = document.querySelector('.content-head') ? (<HTMLElement>document.querySelector('.content-head')).innerText : document.querySelector('title').innerText.split('|')[0];
-    if (['conjugation-english.html', '活用-英語.html', 'coniugazione-inglese.html', 'conjugacao-ingles.html', ].includes(pagename)) presenceData.state = 'Homepage';
+    if (['conjugation-english.html', '活用-英語.html', 'coniugazione-inglese.html', 'conjugacao-ingles.html'].includes(pagename)) presenceData.state = 'Homepage';
     if (pagename.match(/conjugation-.+-verb-.+\.html/g)) {
       presenceData.details = `Conjugator (${(<HTMLLabelElement>document.querySelector('#content-menu > div.tableForm.clearfix > div > div.select-wrap > a > label'))?.innerText || 'English'})`;
       presenceData.state = `Searching "${(<HTMLInputElement>document.getElementById('txtVerb')).value}"`;
