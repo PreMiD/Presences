@@ -5,10 +5,6 @@ const presence = new Presence({
 
 let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
-function pathIncludes(string: string): boolean {
-  return document.location.pathname.toLowerCase().includes(string);
-}
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
