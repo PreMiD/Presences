@@ -9,7 +9,7 @@
     "de": "Jetzt über 1.000+ Animes als Stream kostenlos bei AniCloud ansehen. Anime Video-On-Demand: ✓ 100% Kostenlos ✓ Sofort online ✓ Exclusive Animes"
   },
   "url": "anicloud.io",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/eCZpN6e.png",
   "thumbnail": "https://i.imgur.com/fKBCijM.png",
   "color": "#637cf9",
@@ -20,4 +20,4 @@
   ],
   "category": "anime",
   "iframe": true
-} 
+}
