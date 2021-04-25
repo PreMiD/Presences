@@ -5,36 +5,41 @@ const presence = new Presence({
 
 let currencyTitle, currencyEffort, effortType, wallet24Revenue: string;
 
+function pathIncludes(string: string): boolean {
+  return document.location.pathname.toLowerCase().includes(string);
+}
+
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
 
-  switch (window.location.hash) {
-    case "#/":
+
+  switch (window.location.pathname) {
+    case "/":
       presenceData.state =
         document.querySelector("div.contentContainer > span")
           .childElementCount + " Coins";
       presenceData.details = "Charts Overview";
       break;
-    case "#/faq":
+    case "/faq":
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "FAQ";
       break;
-    case "#/privacy":
+    case "/privacy":
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Privacy Policy";
       break;
-    case "#/tos":
+    case "/tos":
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Terms of Service";
       break;
-    case "#/raveos":
+    case "/raveos":
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Rave OS Redirect";
       break;
     default:
-      if (window.location.hash.includes("coin")) {
+      if (window.location.pathname.includes("coin")) {
         currencyTitle = document.querySelector(
           "div.mainContent > div.typeSelection > div.coinTitle.flexEqual > div:nth-child(2)"
         ).textContent;
