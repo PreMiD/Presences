@@ -47,15 +47,38 @@ presence.on("UpdateData", async () => {
   episodeSelection = document.querySelector("div#all-episodes");
   if (document.location.hostname == "kissasian.la") {
     if (document.location.pathname == "/") {
+      const searchField: HTMLInputElement = document.querySelector("input[type='search'].search-field");
+      if (searchField.value !== ""){
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Searching for";
+        presenceData.state = searchField.value;
+      } else {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Viewing home page";
+      }
+    } else if (document.querySelector("header.entry-header > div.entry-meta") && document.querySelector("header.entry-header > div.entry-meta").textContent.toLowerCase().includes("posted")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing home page";
+      const userElement = document.querySelector(
+        "h1.entry-title"
+      );
+      presenceData.details = "Reading post:";
+      presenceData.state = userElement.textContent;
+      presenceData.smallImageKey = "reading";
+    } else if (document.querySelector("div.synopsis")) {
+      presenceData.startTimestamp = browsingStamp;
+      const userElement = document.querySelector(
+        "header.entry-header"
+      );
+      presenceData.details = "Viewing drama:";
+      presenceData.state = userElement.textContent;
+      presenceData.smallImageKey = "reading";
     } else if (episodeSelection) {
       episodeTitle = document
         .querySelector("div#player-content > header > h1").textContent;
         // .textContent.replace("information", "")
         // .replace("Drama", "");
-        dramaTitle = document
-        .querySelector(".meta-cat > a").textContent;
+      dramaTitle = document
+      .querySelector(".meta-cat > a").textContent;
 
       const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
       if (!isNaN(duration)) {
@@ -78,19 +101,35 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Looking at:";
         presenceData.state = episodeTitle;
       }
-    } else if (document.location.pathname.includes("/Drama/")) {
-      presenceData.startTimestamp = browsingStamp;
-      const userElement = document.querySelector(
-        "#leftside > div:nth-child(1) > div.barContent > div:nth-child(2) > a"
-      );
-      presenceData.details = "Viewing drama:";
-      presenceData.state = userElement.textContent;
-      presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/DramaList")) {
+    } else if (document.location.pathname.includes("/asian-drama-list/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing drama list";
       presenceData.smallImageKey = "reading";
-    }
+    } else if (document.location.pathname.includes("/tag/most-popular/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing most popular dramas";
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/category/drama/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing dramas";
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/category/movies/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing movies";
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/category/latest-asian-drama-releases/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing lastest asian drama releases";
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/category/latest-kshow-releases/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Browsing lastest kshow releases";
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/asian-movie-list/")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing movie list";
+      presenceData.smallImageKey = "reading";
+    } 
   }
 
   if (presenceData.details == null) {
