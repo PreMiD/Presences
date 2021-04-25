@@ -7,13 +7,13 @@ const presence = new Presence({
   });
 
 let videoData: {
-  duration: number,
-  paused: boolean,
-  currentTime: number
+  duration: number;
+  paused: boolean;
+  currentTime: number;
 };
 
 presence.on("iFrameData", (data: typeof videoData) => {
-    videoData = data;
+  videoData = data;
 });
 
 presence.on("UpdateData", async () => {
@@ -22,13 +22,16 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname === "/") {
-     data.details = "| Startseite";
-     data.state = "Starrt auf die neuen Sachen";
+    data.details = "| Startseite";
+    data.state = "Starrt auf die neuen Sachen";
   } else if (document.location.pathname.startsWith("/anime/list")) {
     data.details = "| Suche";
     data.state = "Sucht nach einem neuen Lieblingsanime";
-  } else if (document.location.pathname.startsWith('/anime') && !document.location.pathname.includes('/watch') ) {
-    const titleSplit = document.title.split('›').map((s) => s.trim());
+  } else if (
+    document.location.pathname.startsWith("/anime") &&
+    !document.location.pathname.includes("/watch")
+  ) {
+    const titleSplit = document.title.split("›").map((s) => s.trim());
 
     data.details = "| Übersicht";
     data.state = titleSplit[2];
@@ -42,8 +45,8 @@ presence.on("UpdateData", async () => {
     data.details = "| Einstellungen";
     data.state = "Macht irgendwas kaputt";
   } else if (document.location.pathname.includes("/user/")) {
-    const titleSplit = document.title.split('Profil von '),
-    userName = titleSplit[1];
+    const titleSplit = document.title.split("Profil von "),
+      userName = titleSplit[1];
 
     data.details = "| Benutzerinfo";
     data.state = `Profil von ${userName}`;
@@ -53,24 +56,29 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/static/")) {
     data.details = "| Hilfe & Infos";
     data.state = "Ließt intensiv durch die Infoseiten";
-  } else if (document.location.pathname.includes('/anime') && document.location.pathname.includes('/watch')) {
-    const titleSplit = document.title.split('›').map((s) => s.trim()),
-    animeName = titleSplit[2],
-    episode = titleSplit[3];
-  
+  } else if (
+    document.location.pathname.includes("/anime") &&
+    document.location.pathname.includes("/watch")
+  ) {
+    const titleSplit = document.title.split("›").map((s) => s.trim()),
+      animeName = titleSplit[2],
+      episode = titleSplit[3];
+
     data.details = `| schaut ${animeName}`;
     data.state = episode;
 
-    if (videoData){
-      const timestamps = presence.getTimestamps(videoData.currentTime, videoData.duration);
+    if (videoData) {
+      const timestamps = presence.getTimestamps(
+        videoData.currentTime,
+        videoData.duration
+      );
 
       data.smallImageKey = videoData.paused ? "pause" : "play";
       data.smallImageText = videoData.paused ? "Pausiert" : "Spielt";
 
       data.endTimestamp = timestamps[1];
 
-      if (videoData.paused)
-        delete data.endTimestamp;
+      if (videoData.paused) delete data.endTimestamp;
     }
   } else if (document.location.pathname === "/login") {
     data.details = "| Login";
