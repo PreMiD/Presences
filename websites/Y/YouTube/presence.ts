@@ -86,6 +86,7 @@ presence.on("UpdateData", async () => {
     let oldYouTube: boolean = null,
       YouTubeTV: boolean = null,
       YouTubeEmbed: boolean = null,
+      unlistedVideo = false,
       title: HTMLElement;
 
     //* Checking if user has old YT layout.
@@ -214,7 +215,22 @@ presence.on("UpdateData", async () => {
         ".style-scope.ytd-channel-name > a"
       ).textContent;
     }
-
+    const metaVideoElement = document.querySelector<HTMLLinkElement>(
+      "div[itemtype='http://schema.org/VideoObject'] > link"
+    );
+    if (
+      metaVideoElement &&
+      metaVideoElement.href ==
+        `https://www.youtube.com/watch?v=${document
+          .querySelector("#page-manager > ytd-watch-flexy")
+          .getAttribute("video-id")}`
+    ) {
+      const unlistedVideoElement = document.querySelector<HTMLMetaElement>(
+        "div[itemtype='http://schema.org/VideoObject'] > meta[itemprop='unlisted']"
+      );
+      unlistedVideo =
+        unlistedVideoElement && unlistedVideoElement.content === "True";
+    }
     const presenceData: PresenceData = {
       details: vidDetail
         .replace("%title%", finalTitle)
@@ -278,26 +294,27 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
-      presenceData.buttons = [
-        {
-          label: live
-            ? (await strings).watchStreamButton
-            : (await strings).watchVideoButton,
-          url: document.URL.includes("/watch?v=")
-            ? document.URL.split("&")[0]
-            : `https://www.youtube.com/watch?v=${document
-                .querySelector("#page-manager > ytd-watch-flexy")
-                .getAttribute("video-id")}`
-        },
-        {
-          label: (await strings).viewChannelButton,
-          url: (document.querySelector(
-            "#top-row > ytd-video-owner-renderer > a"
-          ) as HTMLLinkElement).href
-        }
-      ];
+      if (!unlistedVideo) {
+        presenceData.buttons = [
+          {
+            label: live
+              ? (await strings).watchStreamButton
+              : (await strings).watchVideoButton,
+            url: document.URL.includes("/watch?v=")
+              ? document.URL.split("&")[0]
+              : `https://www.youtube.com/watch?v=${document
+                  .querySelector("#page-manager > ytd-watch-flexy")
+                  .getAttribute("video-id")}`
+          },
+          {
+            label: (await strings).viewChannelButton,
+            url: (document.querySelector(
+              "#top-row > ytd-video-owner-renderer > a"
+            ) as HTMLLinkElement).href
+          }
+        ];
+      }
     }
-
     if (!time) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
