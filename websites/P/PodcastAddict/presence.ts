@@ -13,7 +13,31 @@ presence.on("UpdateData", async () => {
       data.details = "Viewing the Homepage";
       data.startTimestamp = browsingStamp;
     }
+    else if(pathname.startsWith("/podcast")){
+      const title = document.querySelector(".caption").textContent;
+      data.details = "Viewing:";
+      data.state = title;
+    }
+    else if(pathname.startsWith("/episode")){
+      const title = document.querySelector(".pure-button").innerHTML,
+      episode = document.querySelector(".title").textContent,
+      playPause = document.querySelector("#play-pause-button");
+      let remainingTime = document.querySelector("#remainingTime").textContent.substr(1);
+      //let elapsedTime = document.querySelector("#elapsedTime").textContent;
 
-    
+      let rem = presence.timestampFromFormat(remainingTime);
+     // let elap = presence.timestampFromFormat(elapsedTime);
+      //let times = presence.getTimestamps(elap, rem);
+
+
+      data.details = title;
+      data.state = episode;
+      if(!playPause.classList.contains('fa-play-circle')){
+        //data.startTimestamp = times[0];
+        data.endTimestamp = rem;
+        data.smallImageKey = "play"
+      }else
+      data.smallImageKey = "pause";
+    }
   presence.setActivity(data);
 });
