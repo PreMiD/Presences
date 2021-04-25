@@ -23,18 +23,18 @@ presence.on("UpdateData", async () => {
       episode = document.querySelector(".title").textContent,
       playPause = document.querySelector("#play-pause-button");
       let remainingTime = document.querySelector("#remainingTime").textContent.substr(1);
-      //let elapsedTime = document.querySelector("#elapsedTime").textContent;
+      let elapsedTime = document.querySelector("#elapsedTime").textContent;
 
       let rem = presence.timestampFromFormat(remainingTime);
-     // let elap = presence.timestampFromFormat(elapsedTime);
-      //let times = presence.getTimestamps(elap, rem);
+      let elap = presence.timestampFromFormat(elapsedTime);
+      let times = presence.getTimestamps(elap, rem+elap);
 
 
       data.details = title;
       data.state = episode;
       if(!playPause.classList.contains('fa-play-circle')){
-        //data.startTimestamp = times[0];
-        data.endTimestamp = rem;
+        data.startTimestamp = times[0];
+        data.endTimestamp = times[1];
         data.smallImageKey = "play"
       }else
       data.smallImageKey = "pause";
