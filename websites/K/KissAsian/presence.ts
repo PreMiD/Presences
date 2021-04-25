@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "641402862961950733"
   }),
   strings = presence.getStrings({
@@ -15,21 +15,20 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+   endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user: any;
-var title: any;
-var currentTime: any,
-  duration: any,
-  paused: any,
-  playback: any,
-  video: HTMLVideoElement,
-  timestamps: any;
-presence.on("iFrameData", (data) => {
+const browsingStamp = Math.floor(Date.now() / 1000);
+ let episodeTitle: string,
+ dramaTitle: string,
+ currentTime: number,
+  duration: number,
+  paused: boolean,
+  playback: boolean;
+  
+presence.on("iFrameData", (data: {iframe_video: {currTime: number, duration:number, paused:boolean, iFrameVideo:boolean}}) => {
   playback = data.iframe_video.duration !== null ? true : false;
 
   //console.log(data.iframe_video);
@@ -37,39 +36,28 @@ presence.on("iFrameData", (data) => {
 
   if (playback) {
     currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
+    duration = data.iframe_video.duration;
     paused = data.iframe_video.paused;
   }
 });
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "ka"
-  };
-
-  if (document.location.hostname == "kissasian.sh") {
+  },
+  episodeSelection = document.querySelector("div#all-episodes");
+  if (document.location.hostname == "kissasian.la") {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
-    } else if (document.querySelector("#selectEpisode") !== null) {
-      video =
-        document.querySelector("#my_video_1_html5_api") ||
-        document.querySelector("#centerDivVideo > div > div > video") ||
-        document.querySelector("video");
-      if (video !== null) {
-        currentTime = video.currentTime;
-        duration = video.duration;
-        paused = video.paused;
-      }
-      title = document
-        .querySelector("#navsubbar > p > a")
-        .textContent.replace("information", "")
-        .replace("Drama", "");
-      user = document
-        .querySelector("head > title")
-        .textContent.replace("Watch", "")
-        .replace("online with English sub | KissAsian", "");
+    } else if (episodeSelection) {
+      episodeTitle = document
+        .querySelector("div#player-content > header > h1").textContent;
+        // .textContent.replace("information", "")
+        // .replace("Drama", "");
+        dramaTitle = document
+        .querySelector(".meta-cat > a").textContent;
 
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
+      const timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration));
       if (!isNaN(duration)) {
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.smallImageText = paused
@@ -78,8 +66,8 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = timestamps[0];
         presenceData.endTimestamp = timestamps[1];
 
-        presenceData.details = title;
-        presenceData.state = user.replace(title.trim(), "");
+        presenceData.details = dramaTitle;
+        presenceData.state = episodeTitle.replace(dramaTitle.trim(), "");
 
         if (paused) {
           delete presenceData.startTimestamp;
@@ -88,15 +76,15 @@ presence.on("UpdateData", async () => {
       } else if (isNaN(duration)) {
         presenceData.startTimestamp = browsingStamp;
         presenceData.details = "Looking at:";
-        presenceData.state = user;
+        presenceData.state = episodeTitle;
       }
     } else if (document.location.pathname.includes("/Drama/")) {
       presenceData.startTimestamp = browsingStamp;
-      user = document.querySelector(
+      const userElement = document.querySelector(
         "#leftside > div:nth-child(1) > div.barContent > div:nth-child(2) > a"
       );
       presenceData.details = "Viewing drama:";
-      presenceData.state = user.textContent;
+      presenceData.state = userElement.textContent;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/DramaList")) {
       presenceData.startTimestamp = browsingStamp;
