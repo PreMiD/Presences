@@ -41,23 +41,17 @@ presence.on("UpdateData", async () => {
     if (page.includes("/rate")) {
       presenceData.details = "Rating for:";
       presenceData.state = document.querySelector("#box1 > div.vote_box > h1").textContent;
-      presenceData.buttons = [
-        {
-          url: document.URL,
-          label: "Rate Profile"
-        }
-      ];
     } else {
       const username: string = document.querySelector("body > div:nth-child(5) > div.user_box > div.container.left > div > h2").getAttribute("data-title");
       presenceData.details = "Watching Profile:";
       presenceData.state = username + document.getElementsByClassName("note small")[0].textContent;
-      presenceData.buttons = [
+    }
+       presenceData.buttons = [
         {
           url: document.URL,
           label: "View Profile"
         }
       ];
-    }
   }
 
   if (presenceData.details == null) {
