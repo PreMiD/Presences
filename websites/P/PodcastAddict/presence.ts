@@ -40,11 +40,10 @@ presence.on("UpdateData", async () => {
       const title = document.querySelector(".pure-button").innerHTML,
       episode = document.querySelector(".title").textContent,
       playPause = document.querySelector("#play-pause-button"),
-      link = window.location.href;
-
-      let remainingTime = presence.timestampFromFormat(document.querySelector("#remainingTime").textContent.substr(1)),
-       elapsedTime = presence.timestampFromFormat(document.querySelector("#elapsedTime").textContent),
-       timestamps = presence.getTimestamps(elapsedTime, remainingTime+elapsedTime);
+      link = window.location.href,
+      remainingTime = presence.timestampFromFormat(document.querySelector("#remainingTime").textContent.substr(1)),
+      elapsedTime = presence.timestampFromFormat(document.querySelector("#elapsedTime").textContent),
+      timestamps = presence.getTimestamps(elapsedTime, remainingTime+elapsedTime);
       
       data.buttons = [{ label: "Listen", url: link }];
       data.details = title;
@@ -52,7 +51,7 @@ presence.on("UpdateData", async () => {
       if(!playPause.classList.contains('fa-play-circle')){
         data.startTimestamp = timestamps[0];
         data.endTimestamp = timestamps[1];
-        data.smallImageKey = "play"
+        data.smallImageKey = "play";
       }else
       data.smallImageKey = "pause";
     }
