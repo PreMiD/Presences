@@ -7,34 +7,51 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
   },
-    pathname = document.location.pathname
+    pathname = document.location.pathname;
 
-    if (pathname === "/"){
+    if(pathname === "/" && document.location.search.substr(0,2) == "?q"){
+      const query = document.querySelector(".caption").textContent;
+      data.details = "Searching:";
+      data.state = query;
+      data.startTimestamp = browsingStamp;
+      data.smallImageKey = "search";
+    }
+    else if (pathname === "/"){
       data.details = "Viewing the Homepage";
       data.startTimestamp = browsingStamp;
     }
+    else if(pathname.startsWith("/app")){
+      data.details = "Viewing app page";
+      data.startTimestamp = browsingStamp;
+    }
+    else if(pathname.startsWith("/ads")){
+      data.details = "Viewing ads page";
+      data.startTimestamp = browsingStamp;
+    }
     else if(pathname.startsWith("/podcast")){
-      const title = document.querySelector(".caption").textContent;
+      const title = document.querySelector(".caption").textContent,
+      link = window.location.href;
       data.details = "Viewing:";
       data.state = title;
+      data.smallImageKey = "view";
+      data.buttons = [{ label: "Listen", url: link }];
     }
     else if(pathname.startsWith("/episode")){
       const title = document.querySelector(".pure-button").innerHTML,
       episode = document.querySelector(".title").textContent,
-      playPause = document.querySelector("#play-pause-button");
-      let remainingTime = document.querySelector("#remainingTime").textContent.substr(1);
-      let elapsedTime = document.querySelector("#elapsedTime").textContent;
+      playPause = document.querySelector("#play-pause-button"),
+      link = window.location.href;
 
-      let rem = presence.timestampFromFormat(remainingTime);
-      let elap = presence.timestampFromFormat(elapsedTime);
-      let times = presence.getTimestamps(elap, rem+elap);
-
-
+      let remainingTime = presence.timestampFromFormat(document.querySelector("#remainingTime").textContent.substr(1)),
+       elapsedTime = presence.timestampFromFormat(document.querySelector("#elapsedTime").textContent),
+       timestamps = presence.getTimestamps(elapsedTime, remainingTime+elapsedTime);
+      
+      data.buttons = [{ label: "Listen", url: link }];
       data.details = title;
       data.state = episode;
       if(!playPause.classList.contains('fa-play-circle')){
-        data.startTimestamp = times[0];
-        data.endTimestamp = times[1];
+        data.startTimestamp = timestamps[0];
+        data.endTimestamp = timestamps[1];
         data.smallImageKey = "play"
       }else
       data.smallImageKey = "pause";
