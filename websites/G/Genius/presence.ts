@@ -87,13 +87,17 @@ presence.on("UpdateData", async () => {
           url: document.URL
         }
       ];
-  } else if (document.querySelector("div[class*='SongPageGrid'") !== null) {
+  } else if (document.querySelector("div[class*='SongPageGrid']") !== null || document.querySelector(".song_body-lyrics") !== null) {
     const song = document
-        .querySelector("h1[class*='SongHeader__Title-sc'")
-        .textContent.trim(),
+        .querySelector("h1[class*='SongHeader__Title-sc']")
+        ?.textContent.trim() ||  document
+        .querySelector("h1.header_with_cover_art-primary_info-title")
+        ?.textContent.trim(),
       artist = document
-        .querySelector("a[class*='SongHeader__Artist'")
-        .textContent.trim();
+        .querySelector("a[class*='SongHeader__Artist']")
+        ?.textContent.trim() || document
+        .querySelector("a.header_with_cover_art-primary_info-primary_artist")
+        ?.textContent.trim();
     presenceData.details = (await strings).lyrics;
     presenceData.state = artist + " - " + song;
     if (buttons)
