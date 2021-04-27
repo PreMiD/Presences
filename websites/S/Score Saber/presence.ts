@@ -50,6 +50,12 @@ presence.on("UpdateData", async () => {
     presenceData.state = document
     .querySelector("h4.title.is-5.songInfos > a")
     .textContent;
+    presenceData.buttons = [
+      {
+        label: "View Page",
+        url: document.location.href
+      }
+    ];
   else if (document.location.pathname.includes("/u/"))
     presenceData.details = "Viewing User",
     presenceData.state = document
