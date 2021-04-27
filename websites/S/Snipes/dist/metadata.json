@@ -15,7 +15,9 @@
     "www.snipes.fr",
     "www.snipes.nl",
     "www.snipes.it",
-    "www.snipes.es"
+    "www.snipes.es",
+    "www.snipes.be",
+    "www.snipes.ch"
   ],
   "version": "1.0.1",
   "logo": "https://i.imgur.com/9HmTAOR.png",
@@ -29,13 +31,19 @@
   "settings": [
     {
       "id": "timeElapsed",
-      "title": "Show elapsed time",
+      "title": "Show Elapsed Time",
       "icon": "fad fa-hourglass-half",
       "value": true
     },
     {
       "id": "showButtons",
-      "title": "Show buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "showSmallImages",
+      "title": "Show Small Images",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
     }
