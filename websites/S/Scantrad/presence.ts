@@ -10,16 +10,20 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname.includes("/mangas")) {
-    const chapter = document.getElementById("selectCh") as HTMLSelectElement,
+    const chapter = document.querySelector("label.chapitre-main"),
       page = document.getElementById("selectPg") as HTMLSelectElement;
 
     presenceData.details =
-      "Reading " + document.querySelector(".tl-titre").textContent + ":";
+      "Reading " +
+      document
+        .querySelector("title")
+        .textContent.replace(
+          /^Scan Chapitre \d+ de (.+) - Scantrad France$/,
+          "$1"
+        ) +
+      ":";
     presenceData.state =
-      chapter.options[chapter.selectedIndex].text.replace(
-        "Chapitre",
-        "Chapter"
-      ) +
+      chapter.textContent.replace("Chapitre", "Chapter") +
       " | " +
       page.options[page.selectedIndex].text;
     presenceData.smallImageKey = "reading";
