@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
       data.details = "Viewing:";
       data.state = title;
       data.smallImageKey = "view";
-      data.buttons = [{ label: "Listen", url: link }];
+      data.buttons = [{ label: "View", url: link }];
     }
     else if(pathname.startsWith("/episode")){
       const title = document.querySelector(".pure-button").innerHTML,
