@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Rank Request",
     presenceData.state = document
     .querySelector("h4.title.is-5.songInfos > a")
-    .textContent;
+    .textContent,
     presenceData.buttons = [
       {
         label: "View Page",
