@@ -14,12 +14,12 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.pathname.includes("/global"))
-    if (document.location.href.includes("?search="))
-      presenceData.details = "Searching Users",
+    if (document.location.href.includes("?search=")) {
+      presenceData.details = "Searching Users";
       presenceData.state = document
       .querySelector("input.input")
       .getAttribute("value");
-    else if (document.location.href.includes("?country="))
+    } else if (document.location.href.includes("?country="))
       presenceData.details = "Browsing " 
       + document.location.href.split("=")[1] 
       + " Rankings";
