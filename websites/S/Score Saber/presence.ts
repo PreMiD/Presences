@@ -76,13 +76,11 @@ presence.on("UpdateData", async () => {
     else
       presenceData.details = "Browsing Leaderboards";
 
-  if (!time) {
+  if (!time)
     delete presenceData.startTimestamp;
-  }
 
-  if (!buttons) {
+  if (!buttons)
     delete presenceData.buttons;
-  }
 
   if (privacy) {
     delete presenceData.state,
