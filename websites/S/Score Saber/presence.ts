@@ -7,9 +7,8 @@ presence.on("UpdateData", async () => {
 
   const time = await presence.getSetting("time"),
     privacy = await presence.getSetting("privacy"),
-    buttons = await presence.getSetting("buttons");
-
-  const presenceData: PresenceData = {
+    buttons = await presence.getSetting("buttons"),
+    presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
   };
