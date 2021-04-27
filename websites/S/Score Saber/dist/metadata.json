@@ -22,6 +22,7 @@
       "gaming"
     ],
     "category": "games",
+    "readLogs": false,
     "settings": [
       {
         "id": "time",
