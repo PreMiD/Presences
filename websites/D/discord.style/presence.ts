@@ -21,7 +21,7 @@ presenceClient.on("UpdateData", async () => {
                     ];
                 }
                 return resultButton;
-            }
+            };
     if (hostName.toLowerCase() === "www.discord.style") {
         presenceData.details = "Viewing page:";
         if (pathName.toLowerCase() === "/") {
