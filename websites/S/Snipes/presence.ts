@@ -20,7 +20,7 @@ presence.on("UpdateData", async function () {
     presenceData.details = "Home";
   else if (urlpath[urlpNum + 1] === "c") {
     let num = (urlpath[2] === 'men' || urlpath[2] === 'women' || urlpath[2] === 'kids') ? 3 : 2;
-    if(document.location.hostname === 'www.snipes.be' || 'www.snipes.ch') num = num + urlpNum;
+    if(document.location.hostname === 'www.snipes.be' || document.location.hostname === 'www.snipes.ch') num = num + urlpNum;
     if(document.querySelector("a.b-refinements-category-link.active")){
       const category = document.querySelector("a.b-refinements-category-link.active").getAttribute("data-name");
       if (urlpath[num + 1]) presenceData.state = category;
