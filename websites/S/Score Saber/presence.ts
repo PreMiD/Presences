@@ -30,24 +30,24 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/faq"))
     presenceData.details = "Viewing FAQ";
   else if (document.location.pathname.includes("/leaderboard"))
-    if (document.location.pathname.includes("/leaderboard/"))
-      presenceData.details = "Viewing Leaderboard",
+    if (document.location.pathname.includes("/leaderboard/")) {
+      presenceData.details = "Viewing Leaderboard";
       presenceData.state = document
       .querySelector("h4 > a")
-      .textContent,  
+      .textContent;  
       presenceData.smallImageKey = document
       .querySelector("li.is-active > a > span")
-      .textContent.toLowerCase().replace("+","_"),
+      .textContent.toLowerCase().replace("+","_");
       presenceData.smallImageText = document
       .querySelector("li.is-active > a > span")
-      .textContent,
+      .textContent;
       presenceData.buttons = [
           {
             label: "View Page",
             url: document.location.href
           }
         ];
-    else
+    } else
       presenceData.details = "Viewing Leaderboard";
   else if (document.location.pathname.includes("/ranking/requests"))
     presenceData.details = "Browsing Rank Requests";
