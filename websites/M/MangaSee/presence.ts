@@ -71,7 +71,7 @@ const presence = new Presence({
       data.smallImageKey = v2icons ? "read" : "read-v2";
       if(buttons){
         const link = window.location.href;
-        data.buttons = [{label: "View manga", url: link}]
+        data.buttons = [{label: "View manga", url: link}];
       }
     }
     presence.setActivity(data);
