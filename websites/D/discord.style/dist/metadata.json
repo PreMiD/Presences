@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "bris",
+    "id": "656165298818514946"
+  },
+  "service": "Discord Style",
+  "description": {
+    "en": "Discord.style is a website built to help make a discord server easier."
+  },
+  "url": "www.discord.style",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/hcok4z2.png",
+  "thumbnail": "https://i.imgur.com/x0rz7Rb.png",
+  "color": "#1f2131",
+  "tags": [
+    "discord"
+  ],
+  "category": "other",
+  "settings": [
+      {
+          "id": "buttonsData",
+          "title": "View Buttons",
+          "value": true
+      }
+  ]
+}
