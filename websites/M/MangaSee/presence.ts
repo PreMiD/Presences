@@ -6,10 +6,10 @@ const presence = new Presence({
   presence.on("UpdateData", async () => {
   const entries = await presence.getSetting("entries"),
         buttons = await presence.getSetting("buttons"),
-        v2icons = await presence.getSetting("v2icons");
-  const data: PresenceData = {
+        v2icons = await presence.getSetting("v2icons"),
+        data: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   },
     pathname = document.location.pathname;
     if (pathname === "/"){
@@ -33,7 +33,7 @@ const presence = new Presence({
             link = window.location.href;
       data.details = "Discussion: " + title;
       data.state = "by " + author;
-      data.buttons = [{label: "Join discussion", url: link}]
+      data.buttons = [{label: "Join discussion", url: link}];
     }
     else if(pathname.endsWith("/subscription.php")){
       data.details = "Viewing subscriptions";
@@ -59,7 +59,7 @@ const presence = new Presence({
       data.smallImageKey = v2icons ? "view" : "view-v2";
       if(buttons){
         const link = window.location.href;
-        data.buttons = [{label: "View manga", url: link}]
+        data.buttons = [{label: "View manga", url: link}];
       }
     }
     else if(pathname.startsWith("/read-online/")){
