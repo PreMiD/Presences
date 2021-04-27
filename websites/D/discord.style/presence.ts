@@ -5,23 +5,23 @@ const presenceClient = new Presence({
 presenceClient.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "logo"
-    }
+    };
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
-    const pathName: string = window.location.pathname;
-    const hostName: string = window.location.hostname;
-    const buttonValue = await presenceClient.getSetting("buttonsData")
-    const getButton = (labelData: string, urlData: string) => {
-        var resultButton;
-        if (labelData && urlData) {
-            resultButton = [
-                {
-                    label: labelData,
-                    url: urlData
+    const pathName: string = window.location.pathname,
+          hostName: string = window.location.hostname,
+          buttonValue = await presenceClient.getSetting("buttonsData"),
+          getButton = (labelData: string, urlData: string) => {
+              let resultButton;
+              if (labelData && urlData) {
+                  resultButton = [
+                      {
+                          label: labelData,
+                          url: urlData
+                        }
+                    ];
                 }
-            ]
-        }
-        return resultButton
-    }
+                return resultButton;
+            }
     if (hostName.toLowerCase() === "www.discord.style") {
         presenceData.details = "Viewing page:";
         if (pathName.toLowerCase() === "/") {
@@ -45,7 +45,7 @@ presenceClient.on("UpdateData", async () => {
                 presenceData.buttons = getButton("View page", `https://www.discord.style${pathName}`);
             }
         } else if (pathName.startsWith("/new")) {
-            presenceData.details = "Adding a new template";
+            presenceData.state = "Add new template";
             if (buttonValue) {
                 presenceData.buttons = getButton("View page", `https://www.discord.style${pathName}`);
             }
