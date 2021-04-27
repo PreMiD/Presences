@@ -8,7 +8,6 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   },
     pathname = document.location.pathname;
-    console.log(pathname);
     if (pathname === "/genshin/"){
       data.details = "Viewing the Homepage";
       data.startTimestamp = browsingStamp;
@@ -109,4 +108,3 @@ presence.on("UpdateData", async () => {
     }
     presence.setActivity(data);
   });
-  
