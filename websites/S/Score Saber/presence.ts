@@ -47,8 +47,6 @@ presence.on("UpdateData", async () => {
             url: document.location.href
           }
         ];
-
-
     else
       presenceData.details = "Viewing Leaderboard";
   else if (document.location.pathname.includes("/ranking/requests"))
