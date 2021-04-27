@@ -22,13 +22,19 @@
       {
         "id": "entries",
         "title": "Entries number",
-        "icon": "fad fa-eye",
+        "icon": "fas fa-eye",
         "value": true
       },
       {
         "id": "buttons",
         "title": "Show buttons",
-        "icon": "fad fa-compress-arrows-alt",
+        "icon": "fas fa-compress-arrows-alt",
+        "value": true
+      },
+      {
+        "id": "v2icons",
+        "title": "Circle icons",
+        "icon": "fas fa-circle",
         "value": true
       }
     ]

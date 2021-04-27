@@ -5,7 +5,8 @@ const presence = new Presence({
 
   presence.on("UpdateData", async () => {
   const entries = await presence.getSetting("entries"),
-        buttons = await presence.getSetting("buttons");
+        buttons = await presence.getSetting("buttons"),
+        v2icons = await presence.getSetting("v2icons");
   const data: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp,
@@ -14,18 +15,16 @@ const presence = new Presence({
     if (pathname === "/"){
       data.details = "Viewing the Homepage";
     }
-    else if(pathname == "/directory/")
-        data.details = "Browsing all manga";
     else if(pathname == "/search/" && window.location.search.substr(0,1) == "?"){
-        const query = document.location.search,
-              urlParams = new URLSearchParams(query),
-              search = urlParams.get('name');
-        data.details = "Searching: ";
-        data.state = search;
-        data.smallImageKey = "search";
+      const query = document.location.search,
+      urlParams = new URLSearchParams(query),
+      search = urlParams.get('name');
+      data.details = "Searching: ";
+      data.state = search;
+      data.smallImageKey = v2icons ? "search" : "search-v2";
     }
-    else if(pathname == "/search/")
-      data.details = "Browsing all anime";
+    else if(pathname == "/directory/" || pathname == "/search/")
+        data.details = "Browsing all manga";
     else if(pathname == "/discussion/")
         data.details = "Viewing discussion page";
     else if(pathname.endsWith("post.php")){
@@ -57,7 +56,7 @@ const presence = new Presence({
       const title = document.querySelector(".list-group-item > h1").textContent;
       data.details = "Viewing manga:";
       data.state = title;
-      data.smallImageKey = "view";
+      data.smallImageKey = v2icons ? "view" : "view-v2";
       if(buttons){
         const link = window.location.href;
         data.buttons = [{label: "View manga", url: link}]
@@ -69,7 +68,7 @@ const presence = new Presence({
             page = document.querySelector('button[data-target="#PageModal"]').textContent.replace(new RegExp("\\\t","g"),'').replace(new RegExp("\\\n","g"),'');
       data.details = title;
       data.state = "📖Ch. " + chapter.split(" ")[1] + " 📄 " + page.split(" ")[1];
-      data.smallImageKey = "read";
+      data.smallImageKey = v2icons ? "read" : "read-v2";
       if(buttons){
         const link = window.location.href;
         data.buttons = [{label: "View manga", url: link}]
