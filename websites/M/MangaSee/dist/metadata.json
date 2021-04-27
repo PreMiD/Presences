@@ -17,5 +17,19 @@
     "url": "www.mangasee123.com",
     "description": {
       "en": "Read free manga online. Read the latest chapters of Tower of God, One Piece, Onepunch-Man, Berserk, Boku no Hero Academia, Naruto."
-    }
+    },
+    "settings": [
+      {
+        "id": "entries",
+        "title": "Entries number",
+        "icon": "fad fa-eye",
+        "value": true
+      },
+      {
+        "id": "buttons",
+        "title": "Show buttons",
+        "icon": "fad fa-compress-arrows-alt",
+        "value": true
+      }
+    ]
   }
