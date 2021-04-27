@@ -13,8 +13,6 @@ presence.on("UpdateData", async () => {
       window.location.search
     );
 
-  console.log(page)
-
   if (page == "/") {
     presenceD.details = "Browsing";
   } else if (page == "/moderators") {
@@ -38,7 +36,7 @@ presence.on("UpdateData", async () => {
   } else if (page == "/create") {
     presenceD.details = "Creating Profile";
   } else if (page.includes("/cv/")) {
-    const username: string = document.querySelector("body > div:nth-child(8) > div.user_box > div.container.left > div > h2").getAttribute("data-title")
+    const username: string = document.querySelector("body > div:nth-child(8) > div.user_box > div.container.left > div > h2").getAttribute("data-title");
     presenceD.details = "Watching CV Page";
     presenceD.state = "of " + username;
     presenceD.buttons = [
