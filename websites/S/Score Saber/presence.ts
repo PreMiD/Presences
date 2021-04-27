@@ -69,24 +69,24 @@ presence.on("UpdateData", async () => {
       }
     ];
   else if (document.location.pathname.includes("/u/"))
-    presenceData.details = "Viewing User",
+    presenceData.details = "Viewing User";
     presenceData.state = document
     .querySelector("h5.title.is-5 > a")
-    .textContent,
+    .textContent;
     presenceData.buttons = [
       {
         label: "View Page",
         url: document.location.href
       }
     ];
-  else if (document.location.pathname == ("/"))
-    if (document.location.href.includes("?search="))
-      presenceData.details = "Searching Leaderboards",
+  } else if (document.location.pathname == ("/")) {
+    if (document.location.href.includes("?search=")) {
+      presenceData.details = "Searching Leaderboards";
       presenceData.state = document
       .querySelector("input.input")
       .getAttribute("value");
-    else
-      presenceData.details = "Browsing Leaderboards";
+    } else presenceData.details = "Browsing Leaderboards";
+  }
 
   if (!time)
     delete presenceData.startTimestamp;
