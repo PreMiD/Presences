@@ -35,12 +35,20 @@ presence.on("UpdateData", async () => {
       presenceData.state = document
       .querySelector("h4 > a")
       .textContent,  
+      presenceData.smallImageKey = document
+      .querySelector("li.is-active > a > span")
+      .textContent.toLowerCase().replace("+","_"),
+      presenceData.smallImageText = document
+      .querySelector("li.is-active > a > span")
+      .textContent,
       presenceData.buttons = [
           {
             label: "View Page",
             url: document.location.href
           }
         ];
+
+
     else
       presenceData.details = "Viewing Leaderboard";
   else if (document.location.pathname.includes("/ranking/requests"))
@@ -49,6 +57,12 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Rank Request",
     presenceData.state = document
     .querySelector("h4.title.is-5.songInfos > a")
+    .textContent,
+    presenceData.smallImageKey = document
+    .querySelector("li.is-active > a > span")
+    .textContent.toLowerCase().replace("+","_"),
+    presenceData.smallImageText = document
+    .querySelector("li.is-active > a > span")
     .textContent,
     presenceData.buttons = [
       {
