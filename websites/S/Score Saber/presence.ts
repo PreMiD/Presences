@@ -1,8 +1,7 @@
 const presence = new Presence({
   clientId: "833644176967991346"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
 
@@ -12,7 +11,7 @@ presence.on("UpdateData", async () => {
 
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: browsingStamp,
+    startTimestamp: browsingStamp
   };
 
   if (document.location.pathname.includes("/global"))
@@ -40,7 +39,7 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
           {
             label: "View Page",
-            url: document.location.href,
+            url: document.location.href
           }
         ];
     else
@@ -60,7 +59,7 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: "View Page",
-        url: document.location.href,
+        url: document.location.href
       }
     ];
   else if (document.location.pathname == ("/"))
@@ -75,7 +74,6 @@ presence.on("UpdateData", async () => {
   if (!time) {
     delete presenceData.startTimestamp;
   }
-
 
   if (!buttons) {
     delete presenceData.buttons;
