@@ -12,6 +12,18 @@ presence.on("UpdateData", async () => {
     if (pathname === "/"){
       data.details = "Viewing the Homepage";
     }
+    else if(pathname == "/directory/")
+        data.details = "Browsing all manga";
+    else if(pathname == "/search/" && window.location.search.substr(0,5) == "?sort"){
+        const query = document.location.search,
+              urlParams = new URLSearchParams(query),
+              search = urlParams.get('name');
+        data.details = "Searching: ";
+        data.state = search;
+        data.smallImageKey = "search";
+    }
+    else if(pathname == "/discussion/")
+        data.details = "Viewing discussion";
     
     presence.setActivity(data);
   });
