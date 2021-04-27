@@ -38,6 +38,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "ka"
     },
     episodeSelection = document.querySelector("div#all-episodes");
+  // Kissasian.la and kissasian.li are different sites with different DOM structure
   if (document.location.hostname == "kissasian.la") {
     if (document.location.pathname == "/") {
       const searchField: HTMLInputElement = document.querySelector(
@@ -129,10 +130,66 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing movie list";
       presenceData.smallImageKey = "reading";
-    }
-    else if (document.location.pathname.includes("/category/kshow/")) {
+    } else if (document.location.pathname.includes("/category/kshow/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing KShow list";
+      presenceData.smallImageKey = "reading";
+    }
+  } else if (document.location.hostname == "kissasian.li") {
+    if (document.location.pathname == "/") {
+      presenceData.details = "Viewing home page";
+    } else if (document.querySelector("#selectEpisode") !== null) {
+      const video: HTMLVideoElement =
+        document.querySelector("#my_video_1_html5_api") ||
+        document.querySelector("#centerDivVideo > div > div > video") ||
+        document.querySelector("video");
+      if (video !== null) {
+        currentTime = video.currentTime;
+        duration = video.duration;
+        paused = video.paused;
+      }
+      const title = document
+          .querySelector("#navsubbar > p > a")
+          .textContent.replace("information", "")
+          .replace("Drama", ""),
+        user = document
+          .querySelector("head > title")
+          .textContent.replace("Watch", "")
+          .replace("online with English sub | KissAsian", ""),
+        timestamps = presence.getTimestamps(
+          Math.floor(currentTime),
+          Math.floor(duration)
+        );
+      if (!isNaN(duration)) {
+        presenceData.smallImageKey = paused ? "pause" : "play";
+        presenceData.smallImageText = paused
+          ? (await strings).pause
+          : (await strings).play;
+        presenceData.endTimestamp = timestamps[1];
+
+        presenceData.details = title;
+        presenceData.state = user.replace(title.trim(), "");
+
+        if (paused) {
+          delete presenceData.startTimestamp;
+          delete presenceData.endTimestamp;
+        }
+      } else if (isNaN(duration)) {
+        presenceData.startTimestamp = browsingStamp;
+        presenceData.details = "Looking at:";
+        presenceData.state = user;
+      }
+    } else if (document.location.pathname.includes("/Drama/")) {
+      presenceData.startTimestamp = browsingStamp;
+      const user = document.querySelector(
+        "#leftside > div:nth-child(1) > div.barContent > div:nth-child(2) > a"
+      );
+      presenceData.details = "Viewing drama:";
+      presenceData.state = user.textContent;
+      presenceData.smallImageKey = "reading";
+    } else if (document.location.pathname.includes("/DramaList")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing drama list";
       presenceData.smallImageKey = "reading";
     }
   }
