@@ -48,7 +48,7 @@ presence.on("UpdateData", async () => {
       progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
       data.details = title;
       data.state = "📖 " + chapter + " 🔸 " + progress + "%";
-      data.largeImageKey = title.includes("Solo Leveling") ? "solo" : "logo";
+      data.largeImageKey = title.includes("Solo Leveling") ? "solo" : (logo) == 0 ? "logo" : "logo-v2";
       data.smallImageKey = (v2icons) ? "read-v2" : "read";
       if (buttons) data.buttons = [{label: "Read Webtoon", url: window.location.href}];
     }
@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
       data.details = "Viewing:";
       data.state = title;
       data.smallImageKey = (v2icons) ? "view-v2" : "view";
-      data.largeImageKey = title.includes("Solo Leveling") ? "solo" : "logo";
+      data.largeImageKey = title.includes("Solo Leveling") ? "solo" : (logo) == 0 ? "logo" : "logo-v2";
       if (buttons) data.buttons = [{label: "View Webtoon", url: window.location.href}];
     }
     else if(pathname == "/user-settings/"){
