@@ -247,7 +247,6 @@ presence.on("UpdateData", async () => {
           : isPlaylistLoop
           ? "Playlist on loop"
           : (await strings).play,
-        startTimestamp: timestamps[0],
         endTimestamp: timestamps[1]
       };
 
