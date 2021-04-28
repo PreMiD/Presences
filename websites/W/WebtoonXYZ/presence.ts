@@ -40,6 +40,15 @@ presence.on("UpdateData", async () => {
       data.state = "Completed webtoons"
       data.smallImageKey = v2icons ? "search-v2" : "search";
     }
+    else if(pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0){
+      const title = document.querySelector("#chapter-heading").textContent.split("-")[0],
+            chapter = document.querySelector("#chapter-heading").textContent.split("-")[1];
+      let progress = (document.documentElement.scrollTop) / (document.querySelector(".reading-content").scrollHeight - window.innerHeight)*100;
+      progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
+      data.details = title;
+      data.state = "📖 " + chapter + " 🔸 " + progress + "%";
+      data.smallImageKey = v2icons ? "read-v2" : "read";
+    }
     else if(pathname.startsWith("/read")){
       const title = document.querySelector(".post-title").textContent;
       data.details = "Viewing:";
@@ -47,7 +56,31 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = v2icons ? "view-v2" : "view";
       data.buttons = [{label: "View webtoon", url: window.location.href}];
     }
-
+    // else if(pathname == "/user-settings/" && window.location.search == "?tab=history"){
+    //   data.details = "User settings:";
+    //   data.state = "History";
+    //   data.smallImageKey = v2icons ? "settings-v2" : "settings";
+    // }
+    else if(pathname == "/user-settings/"){
+      data.smallImageKey = v2icons ? "settings-v2" : "settings";
+      switch(window.location.search){
+        case "?tab=history":
+          data.details = "User settings:";
+          data.state = "History";
+          break;
+        case "?tab=bookmark":
+          data.details = "User settings:";
+          data.state = "Bookmarks";
+          break;
+        case "?tab=account-settings":
+          data.details = "User settings:";
+          data.state = "Account settings";
+          break;
+        default:
+          data.details = "User settings:";
+          data.state = "Bookmarks";
+      }
+    }
     presence.setActivity(data);
   });
   
