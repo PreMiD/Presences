@@ -16,8 +16,7 @@ const presence = new Presence({
       data.details = "Viewing the Homepage";
     }
     else if(pathname == "/search/" && window.location.search.substr(0,1) == "?"){
-      const query = document.location.search,
-      urlParams = new URLSearchParams(query),
+      const urlParams = new URLSearchParams(document.location.search),
       search = urlParams.get('name');
       data.details = "Searching: ";
       data.state = search;
