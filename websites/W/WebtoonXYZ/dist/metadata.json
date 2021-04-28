@@ -17,5 +17,26 @@
     "url": "www.webtoon.xyz",
     "description": {
       "en": "WEBTOON.XYZ is a place for Webtoon lovers. If you are a lover of Korean, Japanese or Chinese comics, and you want to read all kinds of comics online manhwa, manga, manhua. This is a right place for you. You can read thousands of high-quality free Korean manhwa online. We want you to know that Webtoon.xyz was born for you."
-    }
+    },
+    "settings": [
+      {
+        "id": "buttons",
+        "title": "Show buttons",
+        "icon": "fas fa-compress-arrows-alt",
+        "value": true
+      },
+      {
+        "id": "v2icons",
+        "title": "V2 icons (circle)",
+        "icon": "fas fa-circle",
+        "value": false
+      },
+      {  
+        "id": "logo",
+        "title": "Icon",
+        "icon": "fad fa-images",
+        "value": 0,
+        "values": ["Without bg", "With bg"]
+      }
+    ]
   }
