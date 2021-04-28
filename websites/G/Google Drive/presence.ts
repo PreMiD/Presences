@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = (await presence.getSetting("filename"))
       ? `${fileName}.${fileExtension.toUpperCase()}`
       : `NameHidden`;
-  } else presenceData.state = "Browsing...";
+  } else presenceData.details = "Browsing...";
 
   presence.setActivity(presenceData);
 });
