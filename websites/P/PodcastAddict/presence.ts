@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
       data.details = "Viewing:";
       data.state = title;
       data.smallImageKey = "view";
-      data.buttons = [{ label: "Listen", url: link }];
+      data.buttons = [{ label: "View Podcast", url: link }];
     }
     else if(pathname.startsWith("/episode")){
       const title = document.querySelector(".pure-button").innerHTML,
@@ -42,11 +42,10 @@ presence.on("UpdateData", async () => {
       elapsedTime = presence.timestampFromFormat(document.querySelector("#elapsedTime").textContent),
       timestamps = presence.getTimestamps(elapsedTime, remainingTime+elapsedTime);
       
-      data.buttons = [{ label: "Listen", url: link }];
+      data.buttons = [{ label: "Listen Along", url: link }];
       data.details = title;
       data.state = episode;
       if(!playPause.classList.contains('fa-play-circle')){
-        data.startTimestamp = timestamps[0];
         data.endTimestamp = timestamps[1];
         data.smallImageKey = "play";
       }else
