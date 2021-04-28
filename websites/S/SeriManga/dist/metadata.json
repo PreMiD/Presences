@@ -17,11 +17,5 @@
     "url": "serimanga.com",
     "description": {
       "en": "Türkçe Manga ve Çizgi Romanları ücretsiz ve kaliteli bir şekilde okuyabileceğiniz site."
-    },
-    "settings": [
-      {
-        "id": "ID",
-        "multiLanguage": true
-      }
-    ]
+    }
   }
