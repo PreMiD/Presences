@@ -33,7 +33,7 @@ const presence = new Presence({
             link = window.location.href;
       data.details = "Discussion: " + title;
       data.state = "by " + author;
-      data.buttons = [{label: "Join discussion", url: link}];
+      data.buttons = [{label: "View discussion", url: link}];
     }
     else if(pathname.endsWith("/subscription.php")){
       data.details = "Viewing subscriptions";
