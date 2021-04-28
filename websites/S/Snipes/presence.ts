@@ -117,11 +117,7 @@ presence.on("UpdateData", async function () {
 
   if(set_smallImages) {
     if(smallimage === 'com') {
-      if(document.location.hostname === "www.snipesusa.com") {
-        smallimage = 'usa';
-      } else {
-        smallimage = 'de';
-      }
+      smallimage = document.location.hostname === "www.snipesusa.com" ? "usa" : "de";
     }
 
     presenceData.smallImageKey = smallimage;
