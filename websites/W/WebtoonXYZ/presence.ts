@@ -39,7 +39,14 @@ presence.on("UpdateData", async () => {
       data.details = "Browsing:";
       data.state = "Completed webtoons"
       data.smallImageKey = v2icons ? "search-v2" : "search";
-    } 
+    }
+    else if(pathname.startsWith("/read")){
+      const title = document.querySelector(".post-title").textContent;
+      data.details = "Viewing:";
+      data.state = title;
+      data.smallImageKey = v2icons ? "view-v2" : "view";
+      data.buttons = [{label: "View webtoon", url: window.location.href}];
+    }
 
     presence.setActivity(data);
   });
