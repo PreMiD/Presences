@@ -56,10 +56,7 @@ const presence = new Presence({
       data.details = "Viewing manga:";
       data.state = title;
       data.smallImageKey = v2icons ? "view" : "view-v2";
-      if(buttons){
-        const link = window.location.href;
-        data.buttons = [{label: "View manga", url: link}];
-      }
+      if (buttons) data.buttons = [{label: "View manga", url: window.location.href}];
     }
     else if(pathname.startsWith("/read-online/")){
       const title = document.querySelector(".col-lg-4 > a").textContent.replace(new RegExp("\\\t","g"),'').replace(new RegExp("\\\n","g"),''),
