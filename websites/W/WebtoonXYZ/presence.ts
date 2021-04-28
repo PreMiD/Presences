@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = (v2icons) ? "search-v2" : "search";
     }    
     else if(pathname == "/")
-      data.details = "Viewing the homepage"
+      data.details = "Viewing the homepage";
     else if(pathname.endsWith("/webtoons/")){
       const results = document.querySelector(".c-blog__heading > .h4").textContent;
       data.details = "Browsing all webtoons";
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     }
     else if(pathname == "/completed-webtoons/"){
       data.details = "Browsing:";
-      data.state = "Completed webtoons"
+      data.state = "Completed webtoons";
       data.smallImageKey = (v2icons) ? "search-v2" : "search";
     }
     else if(pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0){
@@ -82,4 +82,3 @@ presence.on("UpdateData", async () => {
     }
     presence.setActivity(data);
   });
-  
