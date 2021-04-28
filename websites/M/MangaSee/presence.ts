@@ -65,10 +65,7 @@ const presence = new Presence({
       data.details = title;
       data.state = "📖 Ch. " + chapter.split(" ")[1] + " 📄 " + page.split(" ")[1];
       data.smallImageKey = v2icons ? "read" : "read-v2";
-      if(buttons){
-        const link = window.location.href;
-        data.buttons = [{label: "View manga", url: link}];
-      }
+      if (buttons)  data.buttons = [{label: "View manga", url: window.location.href}];
     }
     presence.setActivity(data);
   });
