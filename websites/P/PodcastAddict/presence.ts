@@ -5,7 +5,8 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
   },
     pathname = document.location.pathname;
 
@@ -13,20 +14,16 @@ presence.on("UpdateData", async () => {
       const query = document.querySelector(".caption").textContent;
       data.details = "Searching:";
       data.state = query;
-      data.startTimestamp = browsingStamp;
       data.smallImageKey = "search";
     }
     else if (pathname === "/"){
       data.details = "Viewing the Homepage";
-      data.startTimestamp = browsingStamp;
     }
     else if(pathname.startsWith("/app")){
       data.details = "Viewing app page";
-      data.startTimestamp = browsingStamp;
     }
     else if(pathname.startsWith("/ads")){
       data.details = "Viewing ads page";
-      data.startTimestamp = browsingStamp;
     }
     else if(pathname.startsWith("/podcast")){
       const title = document.querySelector(".caption").textContent,
