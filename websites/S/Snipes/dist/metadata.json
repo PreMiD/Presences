@@ -9,20 +9,12 @@
     "en": "SNIPES is a store for popular brand clothes.",
     "de": "SNIPES ist ein Handel für beliebte Markenklamotten."
   },
-  "url": [
-    "www.snipes.com",
-    "www.snipes.at",
-    "www.snipes.fr",
-    "www.snipes.nl",
-    "www.snipes.it",
-    "www.snipes.es",
-    "www.snipes.be",
-    "www.snipes.ch"
-  ],
+  "url": "www.snipes.com",
   "version": "1.1.0",
   "logo": "https://i.imgur.com/9HmTAOR.png",
   "thumbnail": "https://i.imgur.com/bKZ2EQH.png",
   "color": "#DF632F",
+  "regExp": "REGEXP",
   "tags": [
     "shop",
     "clothes"
