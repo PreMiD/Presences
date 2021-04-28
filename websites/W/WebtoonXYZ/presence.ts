@@ -6,8 +6,9 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const v2icons = await presence.getSetting("v2icons"),
         logo = await presence.getSetting("logo"),
+        buttons = await presence.getSetting("buttons"),
         data: PresenceData = {
-          largeImageKey: logo==0 ? "logo" : "logo-v2",
+          largeImageKey: (logo) == 0 ? "logo" : "logo-v2",
           startTimestamp: browsingStamp
         },
     pathname = document.location.pathname;
@@ -19,7 +20,7 @@ presence.on("UpdateData", async () => {
             results = document.querySelector(".c-blog__heading > .h4").textContent.split(" ")[1];
       data.details = "Searching:";
       data.state = search + " 🔸 " + results +" results";
-      data.smallImageKey = v2icons ? "search-v2" : "search";
+      data.smallImageKey = (v2icons) ? "search-v2" : "search";
     }    
     else if(pathname == "/")
       data.details = "Viewing the homepage"
@@ -33,12 +34,12 @@ presence.on("UpdateData", async () => {
             results = document.querySelector(".c-blog__heading > .h4").textContent;
       data.details = "Browsing " + genre + " webtoons";
       data.state = "📋 " +results; 
-      data.smallImageKey = v2icons ? "search-v2" : "search";
+      data.smallImageKey = (v2icons) ? "search-v2" : "search";
     }
     else if(pathname == "/completed-webtoons/"){
       data.details = "Browsing:";
       data.state = "Completed webtoons"
-      data.smallImageKey = v2icons ? "search-v2" : "search";
+      data.smallImageKey = (v2icons) ? "search-v2" : "search";
     }
     else if(pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0){
       const title = document.querySelector("#chapter-heading").textContent.split("-")[0],
@@ -47,22 +48,20 @@ presence.on("UpdateData", async () => {
       progress = Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
       data.details = title;
       data.state = "📖 " + chapter + " 🔸 " + progress + "%";
-      data.smallImageKey = v2icons ? "read-v2" : "read";
+      data.largeImageKey = title.includes("Solo Leveling") ? "solo" : "logo";
+      data.smallImageKey = (v2icons) ? "read-v2" : "read";
+      if (buttons) data.buttons = [{label: "Read Webtoon", url: window.location.href}];
     }
     else if(pathname.startsWith("/read")){
       const title = document.querySelector(".post-title").textContent;
       data.details = "Viewing:";
       data.state = title;
-      data.smallImageKey = v2icons ? "view-v2" : "view";
-      data.buttons = [{label: "View webtoon", url: window.location.href}];
+      data.smallImageKey = (v2icons) ? "view-v2" : "view";
+      data.largeImageKey = title.includes("Solo Leveling") ? "solo" : "logo";
+      if (buttons) data.buttons = [{label: "View Webtoon", url: window.location.href}];
     }
-    // else if(pathname == "/user-settings/" && window.location.search == "?tab=history"){
-    //   data.details = "User settings:";
-    //   data.state = "History";
-    //   data.smallImageKey = v2icons ? "settings-v2" : "settings";
-    // }
     else if(pathname == "/user-settings/"){
-      data.smallImageKey = v2icons ? "settings-v2" : "settings";
+      data.smallImageKey = (v2icons) ? "settings-v2" : "settings";
       switch(window.location.search){
         case "?tab=history":
           data.details = "User settings:";
