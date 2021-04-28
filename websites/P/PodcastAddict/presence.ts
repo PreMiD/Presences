@@ -45,7 +45,7 @@ presence.on("UpdateData", async () => {
       elapsedTime = presence.timestampFromFormat(document.querySelector("#elapsedTime").textContent),
       timestamps = presence.getTimestamps(elapsedTime, remainingTime+elapsedTime);
       
-      data.buttons = [{ label: "Listen along", url: link }];
+      data.buttons = [{ label: "Listen Along", url: link }];
       data.details = title;
       data.state = episode;
       if(!playPause.classList.contains('fa-play-circle')){
