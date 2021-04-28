@@ -66,7 +66,7 @@ const presence = new Presence({
             chapter = document.querySelector('button[data-target="#ChapterModal"]').textContent.replace(new RegExp("\\\t","g"),'').replace(new RegExp("\\\n","g"),''),
             page = document.querySelector('button[data-target="#PageModal"]').textContent.replace(new RegExp("\\\t","g"),'').replace(new RegExp("\\\n","g"),'');
       data.details = title;
-      data.state = "📖Ch. " + chapter.split(" ")[1] + " 📄 " + page.split(" ")[1];
+      data.state = "📖 Ch. " + chapter.split(" ")[1] + " 📄 " + page.split(" ")[1];
       data.smallImageKey = v2icons ? "read" : "read-v2";
       if(buttons){
         const link = window.location.href;
