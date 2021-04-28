@@ -10,11 +10,11 @@
     "de": "SNIPES ist ein Handel für beliebte Markenklamotten."
   },
   "url": "www.snipes.com",
+  "regExp": "REGEXP",
   "version": "1.1.0",
   "logo": "https://i.imgur.com/9HmTAOR.png",
   "thumbnail": "https://i.imgur.com/bKZ2EQH.png",
   "color": "#DF632F",
-  "regExp": "REGEXP",
   "tags": [
     "shop",
     "clothes"
