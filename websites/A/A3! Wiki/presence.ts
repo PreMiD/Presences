@@ -18,18 +18,17 @@ presence.on("UpdateData", () => {
   const actionResult = actionURL.searchParams.get("action");
   const title2Result = title2URL.searchParams.get("title");
 
-  //to yaycupcake.com not yaycupcake.com/a3
   if (document.location.pathname == "/") {
     presenceData.details = "Viewing main page";
     presenceData.startTimestamp = browsingStamp;
   }
 
-  else if (title !== null) {
+  if (title !== null) {
     presenceData.details = "Viewing page:";
     presenceData.state = title.textContent;
   }
 
-  else if (actionResult == "edit" && title2Result){
+  if (actionResult == "edit" && title2Result){
     presenceData.details = "Editing page:";
     if (title2Result.includes("_")) {
       presenceData.state = title2Result.replace(/_/g, " ");
@@ -40,7 +39,7 @@ presence.on("UpdateData", () => {
     presenceData.startTimestamp = browsingStamp;
   }
 
-  else if (actionResult == "history" && title2Result){
+  if (actionResult == "history" && title2Result){
     presenceData.details = "Viewing revision history of:";
     if (title2Result.includes("_")) {
       presenceData.state = title2Result.replace(/_/g, " ");
