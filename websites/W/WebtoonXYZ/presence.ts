@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
         logo = await presence.getSetting("logo"),
         buttons = await presence.getSetting("buttons"),
         data: PresenceData = {
-          largeImageKey: (logo) == 0 ? "logo" : "logo-v2",
+          largeImageKey: !logo ? "logo" : "logo-v2",
           startTimestamp: browsingStamp
         },
     pathname = document.location.pathname;
