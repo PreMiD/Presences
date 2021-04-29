@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "A3! Wiki",
+    "author": {
+      "name": "Riarisu",
+      "id": "506090262964076555"
+    },
+    "category": "anime",
+    "logo": "https://yaycupcake.com/a3/skins/common/images/wiki.png",
+    "thumbnail": "https://i.imgur.com/LUjQH3U.png",
+    "version": "1.0.0",
+    "color": "#ff6f96",
+    "tags": [
+      "a3game",
+      "a3",
+      "a3-wiki"
+    ],
+    "url": "yaycupcake.com",
+    "description": {
+      "en": "An English Wiki for A3! (Act! Addict! Actors!), a mobile game by Liber Entertainment."
+    }
+  }
