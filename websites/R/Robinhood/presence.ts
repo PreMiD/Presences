@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "836301630059839506"
+  clientId: "836301630059839506"
 });
 var browsingStamp = Math.floor(Date.now() / 1000);
 var user;
@@ -9,12 +9,11 @@ presence.on("UpdateData", async () => {
     startTimestamp: 1577232000,
     details: "Viewing Portfolio",
   };
-  if (document.location.pathname == "/") 
-  {
+  if (document.location.pathname == "/") {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Portfolio";
     data.state = document.querySelector('.up').getAttribute('aria-label');
-  } 
+  }
   else if (document.location.pathname.includes("/stocks")) {
     data.startTimestamp = browsingStamp;
     data.state = document.title;
@@ -51,7 +50,7 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/account")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Account";
-  }  
+  }
   if (data.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
