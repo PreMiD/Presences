@@ -52,7 +52,7 @@ const presence = new Presence({
     presence: {},
     meta: {},
     startedSince: ~~ (Date.now() / 1000),
-    oldLang: "null",
+    oldLang: "null"
   };
 
 let strings = getStrings();
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
           presenceData.details = "Viewing program:";
           presenceData.state = (document.querySelector<HTMLImageElement>(
             "img.program__title.program__title--logo"
-            )?.alt || document.querySelector("h1.program__title")?.textContent);
+            )?.alt ?? document.querySelector("h1.program__title")?.textContent);
 
           presenceData.buttons = [{
             label: "View Program",
