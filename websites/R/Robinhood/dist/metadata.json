@@ -1,0 +1,21 @@
+{
+    "author": {
+      "name": "Rick",
+      "id": "211982234964590592"
+    },
+    "service": "Robinhood",
+    "description": {
+      "en": "The Largest Anime Discord Server in the World!"
+    },
+    "url": "robinhood.com",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/MvPXVu5.png",
+    "thumbnail": "https://i.imgur.com/Qszmur6.png",
+    "color": "#7289da",
+    "tags": [
+      "market",
+      "crypto",
+      "stocks"
+    ],
+    "category": "other"
+  }
