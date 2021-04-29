@@ -1,8 +1,7 @@
-var presence = new Presence({
-  clientId: "836301630059839506"
+const presence = new Presence({
+  clientId: "836301630059839506",
 });
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user;
+const browsingStamp = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const data = {
     largeImageKey: "robinhood",
@@ -12,42 +11,34 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname == "/") {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Portfolio";
-    data.state = document.querySelector('.up').getAttribute('aria-label');
-  }
-  else if (document.location.pathname.includes("/stocks")) {
+    data.state = document.querySelector(".up").getAttribute("aria-label");
+  } else if (document.location.pathname.includes("/stocks")) {
     data.startTimestamp = browsingStamp;
     data.state = document.title;
     data.details = "Viewing Stocks";
-  }
-  else if (document.location.pathname.includes("/crypto")) {
+  } else if (document.location.pathname.includes("/crypto")) {
     data.startTimestamp = browsingStamp;
     data.state = document.title;
     data.details = "Viewing Crypto";
-  }
-  else if (document.location.pathname.includes("/profile")) {
+  } else if (document.location.pathname.includes("/profile")) {
     data.startTimestamp = browsingStamp;
     data.state = document.title;
     data.details = "Viewing Profile";
-  }
-  else if (document.location.pathname.includes("/messages")) {
+  } else if (document.location.pathname.includes("/messages")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Messages";
-  }
-  else if (document.location.pathname.includes("/cash/")) {
+  } else if (document.location.pathname.includes("/cash/")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Cash";
-  }
-  else if (document.location.pathname.includes("/news")) {
+  } else if (document.location.pathname.includes("/news")) {
     data.startTimestamp = browsingStamp;
-    data.state = document.querySelector('.css-of9o7b').textContent;
+    data.state = document.querySelector(".css-of9o7b").textContent;
     data.details = "Viewing News";
-  }
-  else if (document.location.pathname.includes("/lists")) {
+  } else if (document.location.pathname.includes("/lists")) {
     data.startTimestamp = browsingStamp;
     data.state = document.title;
     data.details = "Viewing Lists";
-  }
-  else if (document.location.pathname.includes("/account")) {
+  } else if (document.location.pathname.includes("/account")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Account";
   }
