@@ -1,6 +1,6 @@
 {
     "$schema": "https://schemas.premid.app/metadata/1.3",
-    "service": "DscJobs.org",
+    "service": "DscJobs",
     "author": {
       "name": "OGMatrix",
       "id": "780079091172900884"

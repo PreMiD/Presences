@@ -37,12 +37,11 @@ presence.on("UpdateData", async () => {
     presenceD.details = "Creating Profile";
   } else if (page.includes("/cv/")) {
     const username: string = document.querySelector("body > div:nth-child(8) > div.user_box > div.container.left > div > h2").getAttribute("data-title");
-    presenceD.details = "Watching CV Page";
-    presenceD.state = "of " + username;
+    presenceD.details = "Viewing " + username + "'s CV";
     presenceD.buttons = [
       {
         url: document.URL,
-        label: "View CV Page"
+        label: "View user's CV"
       }
     ];
   }
@@ -54,4 +53,3 @@ presence.on("UpdateData", async () => {
     presence.setActivity(presenceD);
   }
 });
-  
