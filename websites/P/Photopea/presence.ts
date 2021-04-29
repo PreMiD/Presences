@@ -19,7 +19,7 @@ presence.on("UpdateData", () => {
   } else if (Path == "/") {
     switch (
       document.querySelector(
-        "body > div.flexrow.photopea > div:nth-child(1) > div.flexrow > div.panelblock.mainblock > div > div.panelhead"
+        "body > div[class='flexrow app'] > div:nth-child(1) > div.flexrow > div.panelblock.mainblock > div > div.panelhead"
       ).children.length
     ) {
       case 0:

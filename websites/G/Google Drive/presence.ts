@@ -4,38 +4,39 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "drivelogo"
+      largeImageKey: "drivenewlogo",
+      details: "Viewing page:"
     },
-    path = document.location.pathname.toLowerCase();
+    path = document.location.pathname.toLowerCase().replace(/(\/u\/([0-9])+)/g, "");
 
   if (path.startsWith("/drive/folders")) {
     presenceData.details = "Viewing folder:";
     presenceData.state = document.title.replace("- Google Drive", "");
   } else if (path.startsWith("/drive/computer"))
-    presenceData.state = "Viewing linked computers";
+    presenceData.state = "Linked computers";
   else if (path.startsWith("/drive/shared-with-me"))
-    presenceData.state = "Viewing shared files";
+    presenceData.state = "Shared files";
   else if (path.startsWith("/drive/recent"))
-    presenceData.state = "Looking through recently updated files";
+    presenceData.state = "Recently updated files";
   else if (path.startsWith("/drive/starred"))
-    presenceData.state = "Looking through starred files";
+    presenceData.state = "Starred files";
   else if (path.startsWith("/drive/trash"))
-    presenceData.state = "Viewing previously deleted files";
+    presenceData.state = "Deleted files";
   else if (path.startsWith("/drive/backups"))
-    presenceData.state = "Going through backups";
+    presenceData.state = "Backups";
   else if (path.startsWith("/drive/quota"))
-    presenceData.state = "Viewing storage quota";
+    presenceData.state = "Storage quota";
   else if (path.startsWith("/file/")) {
     const main = document.title.split("."),
       fileName =
         main.length == 2 ? main[0] : main.slice(0, -1).join("").toString(),
       fileExtension = main.slice(-1).toString().replace("- Google Drive", "");
 
-    presenceData.details = `Viewing a file of type ${fileExtension.toUpperCase()} :`;
+    presenceData.details = `Viewing a file:`;
     presenceData.state = (await presence.getSetting("filename"))
-      ? fileName
-      : "Filename Hidden";
-  } else presenceData.state = "Browsing...";
+      ? `${fileName}.${fileExtension.toUpperCase()}`
+      : `unknown.${fileExtension.toUpperCase()} (File name hidden)`;
+  } else presenceData.details = "Browsing...";
 
   presence.setActivity(presenceData);
 });
