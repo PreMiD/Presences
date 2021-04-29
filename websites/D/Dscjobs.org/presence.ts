@@ -1,48 +1,50 @@
 const presence = new Presence({
-  clientId: "837429681975459850"
+  clientId: "807748912940711996"
 });
 
-const path = window.location.pathname;
-presence.on("UpdateData", () => {
-   const presenceData: PresenceData = {
-     largeImageKey: "logo",
-     startTimestamp: Math.floor(Date.now() / 1000),
-     details: "View a Page:"
-   };
+var time = Math.floor(Date.now() / 1000);
+var path = window.location.pathname;
 
-  switch(path.toLowerCase()){
-    case '/': presenceData.state = "Home Page"; break;
-    case '/premium': presenceData.state = "Premium"; break;
-    case '/create': presenceData.state = "Creating Profile"; break;
-    case '/legal': presenceData.state = "Legal Page"; break;
-    case '/partners': presenceData.state = "Partners Page"; break;
-    case '/partners': presenceData.state = "Partners Page"; break;
-    case '/supporters': presenceData.state = "Supporters Page"; break;
-    case '/supporters': presenceData.state = "Supporters Page"; break;
-    case '/settings': presenceData.state = "Modifying Resume"; break;
-    case '/profile': 
-       var name = document.querySelector("body > div.profile_header > div > div > h1").textContent;
-       presenceData.details = "Viewing Profile";
-       presenceData.state = name;
-       presenceData.buttons = [
-         {
-           url: document.URL,
-           label: "Visit Profile"
-         }
-       ];
-    break;
-    case 'cv':
-       var name = document.querySelector("body > div:nth-child(8) > div.user_box > div.container.left > div > h2").getAttribute("data-title")
-       presenceData.details = "Viewing CV Page";
-       presenceData.state = name;
-       presenceData.buttons = [
-         {
-           url: document.URL,
-           label: "Visit Resume"
-         }
-       ];
-     break;
-     default: presenceData.state = "Unknown Page"; break;
+presence.on("UpdateData", () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: time
+  };
+
+  switch (path) {
+    case '/': presenceData.details = "Viewing Home Page"; break;
+    case '/premium': presenceData.details = "Viewing Premium Page"; break;
+    case '/create': presenceData.details = "Creating Profile"; break;
+    case '/legal': presenceData.details = "Viewing Legal Page"; break;
+    case '/partners': presenceData.details = "Viewing Partners Page"; break;
+    case '/supporters': presenceData.details = "Viewing Supporters"; break;
+    case '/moderators': presenceData.details = `Viewing Moderators Page ${location.href.split("=")[1]}`; break;
+    case '/settings': presenceData.details = "Modifying CV"; break;
+    case '/profile': presenceData.details = "Viewing Profile Page"; break;
+    default:
+      if (path.includes("cv")) {
+        var name = !path.endsWith("/rate") 
+        ? document.querySelector("body > div:nth-child(7) > div.user_box > div.container.left > div > h2")?.getAttribute("data-title")
+        : document.querySelector("#box1 > div.vote_box > h1")?.textContent.split("#")[0]
+
+        presenceData.details = `${path.endsWith("/rate") ? "Rating" : "Viewing"} ${name || "Dummy"} CV`;
+        presenceData.buttons = [
+          {
+            url: location.href,
+            label: "Visit CV Page"
+          }
+        ];
+      } else if (path.includes("u")) {
+        var name = document.querySelector("body > div.profile_header > div > div > h1")?.textContent.split("#")[0];
+        presenceData.details = `Viewing ${name || "Dummy"} Profile`;
+        presenceData.buttons = [
+          {
+            url: location.href,
+            label: "Visit User Page"
+          }
+        ];
+      } else presenceData.details = "Unknown Page";
+      break;
   }
 
   if (presenceData.details == null) {
