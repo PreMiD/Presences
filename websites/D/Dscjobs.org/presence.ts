@@ -7,7 +7,7 @@ presence.on("UpdateData", () => {
    const presenceData: PresenceData = {
      largeImageKey: "logo",
      startTimestamp: Math.floor(Date.now() / 1000),
-     details = "View a Page:"
+     details: "View a Page:"
    };
 
   switch(path.toLowerCase()){
@@ -22,20 +22,20 @@ presence.on("UpdateData", () => {
     case '/settings': presenceData.state = "Modifying Resume"; break;
     case '/profile': 
        var name = document.querySelector("body > div.profile_header > div > div > h1").textContent;
-       presenceD.details = "Viewing Profile";
-       presenceD.state = name;
-       presenceD.buttons = [
+       presenceData.details = "Viewing Profile";
+       presenceData.state = name;
+       presenceData.buttons = [
          {
            url: document.URL,
            label: "Visit Profile"
          }
        ];
     break;
-    case: 'cv':
+    case 'cv':
        var name = document.querySelector("body > div:nth-child(8) > div.user_box > div.container.left > div > h2").getAttribute("data-title")
-       presenceD.details = "Viewing CV Page";
-       presenceD.state = name;
-       presenceD.buttons = [
+       presenceData.details = "Viewing CV Page";
+       presenceData.state = name;
+       presenceData.buttons = [
          {
            url: document.URL,
            label: "Visit Resume"
