@@ -13,37 +13,22 @@ presence.on("UpdateData", async () => {
       window.location.search
     );
 
-  if (page == "/") {
-    presenceD.details = "Browsing";
-  } else if (page == "/moderators") {
-    const mpage: string = urlParams.get("page");
-    presenceD.details = "Browsing Moderators";
-    presenceD.state = "Page " + mpage;
-  } else if (page == "/profile") {
-    const username: string = document.querySelector("body > div.profile_header > div > div > h1").textContent;
-    presenceD.details = "Watching Profile";
-    presenceD.state = username;
-  } else if (page == "/premium") {
-    presenceD.details = "Browsing Premium Page";
-  } else if (page == "/legal") {
-    presenceD.details = "Prowsing Legal Page";
-  } else if (page == "/partners") {
-    presenceD.details = "Browsing Partner Page";
-  } else if (page == "/supporters") {
-    presenceD.details = "Browsing Supporter Page";
-  } else if (page == "/settings") {
-    presenceD.details = "Editing Profile";
-  } else if (page == "/create") {
-    presenceD.details = "Creating Profile";
-  } else if (page.includes("/cv/")) {
-    const username: string = document.querySelector("body > div:nth-child(8) > div.user_box > div.container.left > div > h2").getAttribute("data-title");
-    presenceD.details = "Viewing " + username + "'s CV";
-    presenceD.buttons = [
-      {
-        url: document.URL,
-        label: "View user's CV"
-      }
-    ];
+  switch(page) {
+     case "/": /* code */ break;
+     case "/moderators": /* code */ break;
+     case "/profile": /* code */ break;
+     case "/premium": /* code */ break;
+     case "/legal" : /* code */ break;
+     case "/partners": /* code */ break;
+     case "/supporters": /* code */ break;
+     case "/settings": /* code */ break;
+     case "/create": /* code */ break;
+     default: {
+        if (page.includes("/cv/")) {
+         /* code */
+        }
+        /* code for unknown page */
+     } break;
   }
 
   if (presenceD.details == null) {
