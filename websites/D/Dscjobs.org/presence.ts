@@ -21,7 +21,6 @@ presence.on("UpdateData", () => {
     case '/moderators': presenceData.details = `Viewing Moderators Page ${location.href.split("=")[1]}`; break;
     case '/settings': presenceData.details = "Modifying CV"; break;
     case '/profile': presenceData.details = "Viewing Profile Page"; break;
-<<<<<<< HEAD
     case '/search':
       presenceData.details = `Searching for ${escape(location.href.split("term=")[1].split("&")[0])}`;
       presenceData.state = `at Page ${location.href.split("page=")[1]}`;
@@ -31,13 +30,6 @@ presence.on("UpdateData", () => {
         var name = !path.endsWith("/rate")
           ? document.querySelector("body > div:nth-child(7) > div.user_box > div.container.left > div > h2")?.getAttribute("data-title")
           : document.querySelector("#box1 > div.vote_box > h1")?.textContent.split("#")[0]
-=======
-    default:
-      if (path.includes("cv")) {
-        var name = !path.endsWith("/rate") 
-        ? document.querySelector("body > div:nth-child(7) > div.user_box > div.container.left > div > h2")?.getAttribute("data-title")
-        : document.querySelector("#box1 > div.vote_box > h1")?.textContent.split("#")[0]
->>>>>>> f8449e789f011c1cef6bf8ab7af6f1e2fd4e484f
 
         presenceData.details = `${path.endsWith("/rate") ? "Rating" : "Viewing"} ${name || "Dummy"} CV`;
         presenceData.buttons = [
