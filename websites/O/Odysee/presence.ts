@@ -6,8 +6,17 @@ const presence = new Presence({ clientId: "837270687638224906" }),
 presence.on("UpdateData", async () => {
   const buttons = await presence.getSetting("buttons");
   if (document.location.hostname === "odysee.com") {
-    if (document.location.pathname === "/") {
+    const floatingViewer: HTMLElement = document.querySelector(
+      ".content__viewer--floating"
+    );
+    if (document.location.pathname === "/" && !floatingViewer) {
       presenceData.details = "Browsing homepage";
+      delete presenceData.smallImageKey;
+      delete presenceData.smallImageText;
+      delete presenceData.buttons;
+      delete presenceData.endTimestamp;
+      delete presenceData.startTimestamp;
+      delete presenceData.state;
     } else if (document.location.pathname.startsWith("/$/")) {
       const path = document.location.pathname;
       if (path.includes("/$/following")) {
@@ -31,7 +40,7 @@ presence.on("UpdateData", async () => {
       } else {
         presenceData.details = "Browsing subpage";
       }
-    } else if (document.location.pathname.includes("/@")) {
+    } else if (floatingViewer || document.location.pathname.includes("/@")) {
       const userName: HTMLVideoElement = document.querySelector(
           "h1.channel__title"
         ),
@@ -40,10 +49,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = `Viewing ${userName.textContent} page`;
         presenceData.state = userTag.textContent;
       } else {
-        const floatingViewer: HTMLElement = document.querySelector(
-            ".content__viewer--floating"
-          ),
-          title: HTMLElement = floatingViewer
+        const title: HTMLElement = floatingViewer
             ? document.querySelector(
                 ".content__viewer--floating div.claim-preview__title span.button__label"
               )
@@ -56,8 +62,8 @@ presence.on("UpdateData", async () => {
                 "div.card__main-actions div.claim-preview__title > span.truncated-text"
               ),
           video: HTMLVideoElement = floatingViewer
-            ? document.querySelector(".content__viewer--floating video")
-            : document.querySelector("video"),
+            ? document.querySelector(".content__viewer--floating .vjs-tech")
+            : document.querySelector(".vjs-tech"),
           uploaderUrlElement: HTMLLinkElement = floatingViewer
             ? document.querySelector("div.draggable.content__info > a")
             : document.querySelector(
