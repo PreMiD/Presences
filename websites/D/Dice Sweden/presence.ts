@@ -15,7 +15,7 @@ let articleTitle: string, articleDate: string, gameTitle: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "lg"
+    largeImageKey: "logo"
   };
 
   switch (window.location.pathname) {
