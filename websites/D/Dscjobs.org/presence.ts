@@ -29,7 +29,7 @@ presence.on("UpdateData", () => {
       if (path.includes("cv")) {
         var name = !path.endsWith("/rate")
           ? document.querySelector("body > div:nth-child(7) > div.user_box > div.container.left > div > h2")?.getAttribute("data-title")
-          : document.querySelector("#box1 > div.vote_box > h1")?.textContent.split("#")[0]
+          : document.querySelector("#box1 > div.vote_box > h1")?.textContent.split("#")[0];
 
         presenceData.details = `${path.endsWith("/rate") ? "Rating" : "Viewing"} ${name || "Dummy"} CV`;
         presenceData.buttons = [
