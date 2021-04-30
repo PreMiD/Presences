@@ -1,0 +1,17 @@
+{
+  "author": {
+    "name": "The Gamerzs",
+    "id": "730142125181894657"
+  },
+  "service": "Dice",
+  "description": {
+    "en": "At DICE, we all share the passion to create exceptional games."
+  },
+  "url": "www.dice.se",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/lrOPkX5.jpg",
+  "thumbnail": "https://i.imgur.com/PFWnovQ.png",
+  "color": "#000",
+  "tags": ["gaming"],
+  "category": "games"
+}
