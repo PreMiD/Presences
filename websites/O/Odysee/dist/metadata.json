@@ -17,5 +17,13 @@
     "video",
     "media"
   ],
-  "category": "videos"
+  "category": "videos",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }

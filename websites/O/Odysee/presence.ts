@@ -1,5 +1,6 @@
 const presence = new Presence({ clientId: "837270687638224906" });
 presence.on("UpdateData", async () => {
+  const buttons = await presence.getSetting("buttons");
   if (document.location.hostname === "odysee.com") {
     const presenceData: PresenceData = {
       details: "Odysee",
@@ -35,30 +36,48 @@ presence.on("UpdateData", async () => {
       if (userName) {
         presenceData.details = `Viewing ${userName.textContent} page`;
         presenceData.state = userTag.textContent;
-      }
-    } else {
-      const title: HTMLElement = document.querySelector("h1.card__title"),
-        uploaderName: HTMLElement = document.querySelector(
-          "div.card__main-actions div.claim-preview__title > span.truncated-text"
-        ),
-        uploaderTag: HTMLElement = document.querySelector(
-          "div.card__main-actions div.media__subtitle  span.channel-name"
-        ),
-        video: HTMLVideoElement = document.querySelector("video");
-      if (title && uploaderName) {
-        presenceData.details = title.textContent;
-        presenceData.state =
-          uploaderName.textContent + " " + uploaderTag.textContent;
-        presenceData.smallImageKey = "paused";
-        presenceData.smallImageText = "Paused";
-      }
-      if (video) {
-        presenceData.endTimestamp = presence.getTimestampsfromMedia(video)[1];
-        presenceData.smallImageKey = video.paused ? "paused" : "play";
-        presenceData.smallImageText = video.paused ? "Paused" : "Watching";
-        if (video.paused) {
-          delete presenceData.startTimestamp;
-          delete presenceData.endTimestamp;
+      } else {
+        const title: HTMLElement = document.querySelector("h1.card__title"),
+          uploaderName: HTMLElement = document.querySelector(
+            "div.card__main-actions div.claim-preview__title > span.truncated-text"
+          ),
+          uploaderTag: HTMLElement = document.querySelector(
+            "div.card__main-actions div.media__subtitle  span.channel-name"
+          ),
+          video: HTMLVideoElement = document.querySelector("video");
+        if (title && uploaderName) {
+          presenceData.details = title.textContent;
+          presenceData.state =
+            uploaderName.textContent + " " + uploaderTag.textContent;
+          presenceData.smallImageKey = "paused";
+          presenceData.smallImageText = "Paused";
+
+          const uploaderUrlElement: HTMLLinkElement = document.querySelector(
+            "div.media__subtitle > a.button--uri-indicator"
+          );
+          if (uploaderUrlElement && buttons) {
+            presenceData.buttons = [
+              {
+                label: "Watch video",
+                url: document.URL
+              },
+              {
+                label: "View author's channel",
+                url: uploaderUrlElement.href
+              }
+            ];
+          }
+          if (video) {
+            presenceData.endTimestamp = presence.getTimestampsfromMedia(
+              video
+            )[1];
+            presenceData.smallImageKey = video.paused ? "paused" : "play";
+            presenceData.smallImageText = video.paused ? "Paused" : "Watching";
+            if (video.paused) {
+              delete presenceData.startTimestamp;
+              delete presenceData.endTimestamp;
+            }
+          }
         }
       }
     }
