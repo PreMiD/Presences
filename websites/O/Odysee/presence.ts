@@ -1,33 +1,36 @@
-const presence = new Presence({ clientId: "837270687638224906" });
+const presence = new Presence({ clientId: "837270687638224906" }),
+  presenceData: PresenceData = {
+    details: "Odysee",
+    largeImageKey: "logo"
+  };
 presence.on("UpdateData", async () => {
   const buttons = await presence.getSetting("buttons");
   if (document.location.hostname === "odysee.com") {
-    const presenceData: PresenceData = {
-      details: "Odysee",
-      largeImageKey: "logo"
-    };
     if (document.location.pathname === "/") {
       presenceData.details = "Browsing homepage";
-    } else if (document.location.pathname.includes("/$/following")) {
-      presenceData.details = "Browsing followed content";
-    } else if (document.location.pathname.includes("/$/uploads")) {
-      presenceData.details = "Browsing own uploads";
-    } else if (document.location.pathname.includes("/$/channels")) {
-      presenceData.details = "Browsing own channels";
-    } else if (document.location.pathname.includes("/$/settings")) {
-      presenceData.details = "Browsing settings";
-    } else if (document.location.pathname.includes("/$/wallet")) {
-      presenceData.details = "Looking inside wallet";
-    } else if (document.location.pathname.includes("/$/dashboard")) {
-      presenceData.details = "Reading dashboard";
-    } else if (document.location.pathname.includes("/$/rewards")) {
-      presenceData.details = "Browsing own rewards";
-    } else if (document.location.pathname.includes("/$/notifications")) {
-      presenceData.details = "Reading notifications";
-    } else if (document.location.pathname.includes("/$/upload")) {
-      presenceData.details = "Planning to upload some content";
-    } else if (document.location.pathname.includes("/$/")) {
-      presenceData.details = "Browsing subhomepage";
+    } else if (document.location.pathname.startsWith("/$/")) {
+      const path = document.location.pathname;
+      if (path.includes("/$/following")) {
+        presenceData.details = "Browsing followed content";
+      } else if (path.includes("/$/uploads")) {
+        presenceData.details = "Browsing own uploads";
+      } else if (path.includes("/$/channels")) {
+        presenceData.details = "Browsing own channels";
+      } else if (path.includes("/$/settings")) {
+        presenceData.details = "Browsing settings";
+      } else if (path.includes("/$/wallet")) {
+        presenceData.details = "Looking inside wallet";
+      } else if (path.includes("/$/dashboard")) {
+        presenceData.details = "Reading dashboard";
+      } else if (path.includes("/$/rewards")) {
+        presenceData.details = "Browsing own rewards";
+      } else if (path.includes("/$/notifications")) {
+        presenceData.details = "Reading notifications";
+      } else if (path.includes("/$/upload")) {
+        presenceData.details = "Planning to upload some content";
+      } else {
+        presenceData.details = "Browsing subpage";
+      }
     } else if (document.location.pathname.includes("/@")) {
       const userName: HTMLVideoElement = document.querySelector(
           "h1.channel__title"
@@ -37,24 +40,42 @@ presence.on("UpdateData", async () => {
         presenceData.details = `Viewing ${userName.textContent} page`;
         presenceData.state = userTag.textContent;
       } else {
-        const title: HTMLElement = document.querySelector("h1.card__title"),
-          uploaderName: HTMLElement = document.querySelector(
-            "div.card__main-actions div.claim-preview__title > span.truncated-text"
+        const floatingViewer: HTMLElement = document.querySelector(
+            ".content__viewer--floating"
           ),
-          uploaderTag: HTMLElement = document.querySelector(
-            "div.card__main-actions div.media__subtitle  span.channel-name"
-          ),
-          video: HTMLVideoElement = document.querySelector("video");
+          title: HTMLElement = floatingViewer
+            ? document.querySelector(
+                ".content__viewer--floating div.claim-preview__title span.button__label"
+              )
+            : document.querySelector("h1.card__title"),
+          uploaderName: HTMLElement = floatingViewer
+            ? document.querySelector(
+                ".content__viewer--floating span.channel-name"
+              )
+            : document.querySelector(
+                "div.card__main-actions div.claim-preview__title > span.truncated-text"
+              ),
+          video: HTMLVideoElement = floatingViewer
+            ? document.querySelector(".content__viewer--floating video")
+            : document.querySelector("video"),
+          uploaderUrlElement: HTMLLinkElement = floatingViewer
+            ? document.querySelector("div.draggable.content__info > a")
+            : document.querySelector(
+                "div.media__subtitle > a.button--uri-indicator"
+              ),
+          uploaderTag: HTMLElement = floatingViewer
+            ? undefined
+            : document.querySelector(
+                "div.card__main-actions div.media__subtitle  span.channel-name"
+              );
         if (title && uploaderName) {
           presenceData.details = title.textContent;
           presenceData.state =
-            uploaderName.textContent + " " + uploaderTag.textContent;
+            uploaderName.textContent +
+            (uploaderTag ? " " + uploaderTag.textContent : "");
           presenceData.smallImageKey = "paused";
           presenceData.smallImageText = "Paused";
 
-          const uploaderUrlElement: HTMLLinkElement = document.querySelector(
-            "div.media__subtitle > a.button--uri-indicator"
-          );
           if (uploaderUrlElement && buttons) {
             presenceData.buttons = [
               {
