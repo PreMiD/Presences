@@ -17,12 +17,15 @@ presence.on("UpdateData", () => {
     case '/legal': presenceData.details = "Viewing Legal Page"; break;
     case '/partners': presenceData.details = "Viewing Partners Page"; break;
     case '/supporters': presenceData.details = "Viewing Supporters Page"; break;
-    case '/moderators': presenceData.details = `Viewing Moderators Page ${location.href.split("page=")[1].split("&")[0]}`; break;
     case '/settings': presenceData.details = "Modifying CV"; break;
     case '/profile': presenceData.details = "Viewing Profile Page"; break;
+    case '/moderators': 
+      presenceData.details = `Viewing Moderators`; 
+      presenceData.state = `at Page ${location.href.split("page=")[1].split("&")[0]}`;
+      break;
     case '/search':
       presenceData.details = `Searching for ${escape(location.href.split("term=")[1].split("&")[0])}`;
-      presenceData.state = `at Page ${location.href.split("page=")[1]}`;
+      presenceData.state = `at Page ${location.href.split("page=")[1].split("&")[0]}`;
       break;
     default:
       if (path.includes("cv")) {
