@@ -1,14 +1,15 @@
 const presence = new Presence({
     clientId: "834093191485063258"
 }),
-    presenceData: PresenceData = {
-      largeImageKey: "icon"
-},
+
   customData = false;
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
+    const presenceData: PresenceData = {
+            largeImageKey: "icon"
+};
     presenceData.startTimestamp = browsingStamp;
 
 const getElement = (query: string): string | undefined => {
@@ -17,7 +18,7 @@ const getElement = (query: string): string | undefined => {
 
 function capLet(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-}
+};
 
 // Yes I know the code is bad. I apologise in advance for your eyes
 
