@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "HackTheBox",
+  "author": {
+    "name": "Satsujin",
+    "id": "672986823185661955"
+  },
+  "category": "games",
+  "logo": "https://i.imgur.com/24mS5lC.png",
+  "thumbnail": "https://i.imgur.com/Ua7kNm9.png",
+  "version": "1.0.0",
+  "color": "#9fef00",
+  "tags": [
+    "security",
+    "games"
+  ],
+  "url": "www.hackthebox.eu",
+  "description": {
+    "en": "Hack The Box is a massive, online cyber security training platform, allowing individuals, companies, universities and all kinds of organizations around the world to level up their hacking skills."
+  }
+}
