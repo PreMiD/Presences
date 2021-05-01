@@ -31,7 +31,7 @@ The general rules of presence development are as follows:
     - For 12+ month old domains: **45,000 unique visitors/day**.
   - The website can't be on a cheap domain like `.xyz`, `.club` and so on.
   - The website itself must have a very good quality, design, etc.
-- Presences should use common details, you can achieve this using multilanguage with the provided strings, if your presences requires custom strings you shouldn't use multilanguage until the presence gets 1k users. Find example [here](https://docs.premid.app/dev/presence/class#getstringsobject).
+- Presences should use [common details](https://api.premid.app/v2/langFile/presence/en) (strings starting with "general."). You can achieve this using `multiLanguage` with the provided strings. If your presence requires custom strings, then you shouldn't use `multiLanguage` until the presence gets 1000 users. You can find an example [here](https://docs.premid.app/dev/presence/class#getstringsobject).
 - Including the `dist` folder, `presence.ts` file, `iframe.ts` file, and `metadata.json` file is mandatory so the result would be what is represented in the following schema:
 
 ```bash
