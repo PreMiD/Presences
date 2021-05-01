@@ -1,0 +1,35 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Neon",
+    "author": {
+      "name": "Kety The Folf",
+      "id": "263443630767734784"
+    },
+    "category": "videos",
+    "logo": "https://i.imgur.com/VdcSlNL.png",
+    "thumbnail": "https://i.imgur.com/dO4SNtS.png",
+    "version": "1.0.0",
+    "color": "#000000",
+    "tags": ["videos", "streams"],
+    "url": [
+      "www.neontv.co.nz",
+      "neontv.co.nz"
+    ],
+    "description": {
+      "en": "Neon, marketed as NEON until 2020, is a subscription video on demand service offering a range of television shows and movies. The platform is a division of Sky Network Television Limited."
+    },
+    "settings": [
+      {
+        "id": "timestamp",
+        "title": "Show Timestamps",
+        "icon": "fad fa-stopwatch",
+        "value": true
+      },
+      {
+        "id": "buttons",
+        "title": "Show Buttons",
+        "icon": "fas fa-compress-arrows-alt",
+        "value": true
+      }
+    ]
+}
