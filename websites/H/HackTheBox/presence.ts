@@ -2,13 +2,14 @@ const presence = new Presence({
     clientId: "834093191485063258"
 });
 
-const browsingStamp = Math.floor(Date.now() / 1000);
+var browsingStamp = Math.floor(Date.now() / 1000);
 
-presence.on("UpdateData", async () => {
-    const presenceData: PresenceData = {
-            largeImageKey: "icon"
+presence.on("UpdateData", () => {
+    var presenceData: PresenceData = {
+      largeImageKey: "logo"
 };
-    presenceData.startTimestamp = browsingStamp;
+
+presenceData.startTimestamp = browsingStamp;
 
 const getElement = (query: string): string | undefined => {
     return document.querySelector(query) ? document.querySelector(query).textContent: undefined;
