@@ -13,5 +13,13 @@
   "thumbnail": "https://i.imgur.com/PFWnovQ.png",
   "color": "#000",
   "tags": ["gaming"],
-  "category": "games"
+  "category": "games",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
 }
