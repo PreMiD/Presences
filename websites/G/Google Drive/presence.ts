@@ -7,7 +7,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "drivenewlogo",
       details: "Viewing page:"
     },
-    path = document.location.pathname.toLowerCase().replace(/(\/u\/([0-9])+)/g, "");
+    path = document.location.pathname
+      .toLowerCase()
+      .replace(/(\/u\/([0-9])+)/g, "");
 
   if (path.startsWith("/drive/folders")) {
     presenceData.details = "Viewing folder:";
@@ -22,8 +24,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Starred files";
   else if (path.startsWith("/drive/trash"))
     presenceData.state = "Deleted files";
-  else if (path.startsWith("/drive/backups"))
-    presenceData.state = "Backups";
+  else if (path.startsWith("/drive/backups")) presenceData.state = "Backups";
   else if (path.startsWith("/drive/quota"))
     presenceData.state = "Storage quota";
   else if (path.startsWith("/file/")) {
