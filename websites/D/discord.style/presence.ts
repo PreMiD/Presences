@@ -23,7 +23,6 @@ presenceClient.on("UpdateData", async () => {
     presenceData.details = "Viewing page:";
     if (pathName.toLowerCase() === "/") {
         presenceData.state = "Homepage";
-        presenceData.buttons = getButton("View page", `https://www.discord.style${pathName}`);
     } else if (pathName.startsWith("/browse")) {
         presenceData.state = "Browse templates";
         presenceData.buttons = getButton("View page", `https://www.discord.style${pathName}`);
