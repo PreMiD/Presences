@@ -1,4 +1,4 @@
-let presence = new Presence({
+const presence = new Presence({
     clientId: "834093191485063258"
 }),
     presenceData: PresenceData = {
@@ -9,12 +9,11 @@ let presence = new Presence({
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-    customData = false;
     presenceData.startTimestamp = browsingStamp;
 
 const getElement = (query: string): string | undefined => {
     return document.querySelector(query) ? document.querySelector(query).textContent: undefined;
-}
+};
 
 function capLet(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -29,12 +28,11 @@ if(document.location.pathname.startsWith("/home/users/profile/")) {
     const title = getElement(".header-title h3");
     presenceData.details = `Viewing Machine Name: ${title}`;
 } else if(document.location.pathname.startsWith("/home/challenges/")) {
-    const URL = window.location.href;
-    const Challenge = URL.substr(URL.lastIndexOf('/') + 1).split('?')[0];
-        if (Challenge === "submit") {
+    const URL = window.location.href.substr(window.location.href.lastIndexOf('/') + 1).split('?')[0];
+        if (URL === "submit") {
             presenceData.details = `Submitting a Challenge`;
         } else {
-    presenceData.details = `Viewing ${capLet(Challenge)} Challenges`;
+    presenceData.details = `Viewing ${capLet(URL)} Challenges`;
     }
 } else if(document.location.pathname.startsWith("/home/endgame/view/")) {
     const endgame = getElement(".header-title h3");
@@ -54,7 +52,7 @@ if(document.location.pathname.startsWith("/home/users/profile/")) {
 } else if(document.location.pathname.startsWith("/home/universities/profile")) { 
     const university = getElement(".header-title h3");
     presenceData.details = `Viewing University: ${university}`;
-} else if(document.location.pathname.startsWith("/home/country/rankings/")) {  
+} else if(document.location.pathname.startsWith("/home/country/rankings")) {  
     const country = getElement(".header-title h3");
     presenceData.details = `Viewing ${country}`;
 } else if(document.location.pathname.startsWith("/home/labs/pro/rankings/")) { 
@@ -119,14 +117,6 @@ if(document.location.pathname.startsWith("/home/users/profile/")) {
 
     case "/home/universities/rankings":
         presenceData.details = "Viewing University Rankings";
-        break;
-
-    case "/home/country/rankings":
-        presenceData.details = "Viewing Country Rankings";
-        break;
-
-    case "/home/country/rankings":
-        presenceData.details = "Viewing Country Rankings";
         break;
 
     case "/home/vip/rankings":
@@ -201,4 +191,4 @@ if(document.location.pathname.startsWith("/home/users/profile/")) {
 if (!customData) {
     presence.setActivity(presenceData);
   }
-})
+});
