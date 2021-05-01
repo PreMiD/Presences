@@ -11,18 +11,26 @@ function isGame() {
   return window.location.pathname.includes("/game/");
 }
 
-let articleTitle: string, articleDate: string, gameTitle: string;
+function isProfile() {
+  return window.location.pathname.includes("/people/");
+}
+
+let articleTitle: string,
+  articleDate: string,
+  gameTitle: string,
+  profileTitle: string,
+  profileStatus: string;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
+      largeImageKey: "logo"
+    },
+    showButtons: boolean = await presence.getSetting("buttons");
 
   switch (window.location.pathname) {
     case "/":
       presenceData.details = "Home";
       presenceData.startTimestamp = timestamp;
-      presenceData.buttons = [{ label: "Home", url: "https://www.dice.se" }];
       break;
     case "/games":
       presenceData.details = "Games";
@@ -121,17 +129,23 @@ presence.on("UpdateData", async () => {
         }
       ];
       break;
-    default:
-      presenceData.details = "Home";
+    case "/students":
+      presenceData.details = "Students";
       presenceData.startTimestamp = timestamp;
-      presenceData.buttons = [{ label: "Home", url: "https://www.dice.se" }];
+      presenceData.buttons = [
+        {
+          label: "Students",
+          url: "https://www.dice.se/students"
+        }
+      ];
       break;
   }
 
   if (isArticle()) {
-    articleTitle = document.querySelector(".BlogItem-title").textContent;
-    articleDate = document.querySelector("div.Blog-meta.BlogItem-meta > time")
-      .textContent;
+    articleTitle = document.querySelector(".BlogItem-title").textContent.trim();
+    articleDate = document
+      .querySelector(".BlogItem-meta > time")
+      .textContent.trim();
 
     presenceData.details = articleTitle;
     presenceData.state = articleDate;
@@ -141,9 +155,7 @@ presence.on("UpdateData", async () => {
       { label: "View Article", url: window.location.href }
     ];
   } else if (isGame()) {
-    gameTitle = document
-      .querySelector("#post-5db6fd8a337fa571747892b1 > h1")
-      .textContent.trim();
+    gameTitle = document.querySelector(".BlogItem-title").textContent.trim();
 
     presenceData.details = gameTitle;
 
@@ -151,6 +163,29 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       { label: "View " + gameTitle, url: window.location.href }
     ];
+  } else if (isProfile()) {
+    profileTitle = document
+      .querySelector(".BlogItem-title")
+      ?.textContent.trim();
+    profileStatus =
+      document
+        .querySelector(".sqs-row > div > div:nth-child(3) > div > p")
+        .textContent.trim() ??
+      document
+        .querySelector(".sqs-row > div > div:nth-child(2) > div > p")
+        .textContent.trim();
+
+    presenceData.details = profileTitle;
+    presenceData.state = profileStatus;
+
+    delete presenceData.buttons;
+    presenceData.buttons = [
+      { label: "View " + profileTitle, url: window.location.href }
+    ];
+  }
+
+  if (!showButtons && presenceData.buttons) {
+    delete presenceData.buttons;
   }
 
   if (presenceData.details == null) {
