@@ -78,11 +78,11 @@ presence.on("UpdateData", async () => {
         if (uploaderUrlElement && buttons) {
           presenceData.buttons = [
             {
-              label: "Watch video",
+              label: "Watch Video",
               url: document.URL
             },
             {
-              label: "View author's channel",
+              label: "View Channel",
               url: uploaderUrlElement.href
             }
           ];
@@ -92,7 +92,6 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = video.paused ? "paused" : "play";
           presenceData.smallImageText = video.paused ? "Paused" : "Watching";
           if (video.paused) {
-            delete presenceData.startTimestamp;
             delete presenceData.endTimestamp;
           }
         }
