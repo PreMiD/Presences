@@ -33,7 +33,7 @@
     "chalk": "^4.1.0",
     "debug": "^4.3.1",
     "enquirer": "^2.3.6",
-    "eslint": "^7.24.0",
+    "eslint": "^7.25.0",
     "glob": "^7.1.6",
     "jsonschema": "^1.4.0",
     "mongodb": "^3.6.6",
