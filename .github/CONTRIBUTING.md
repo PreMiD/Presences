@@ -31,6 +31,7 @@ The general rules of presence development are as follows:
     - For 12+ month old domains: **45,000 unique visitors/day**.
   - The website can't be on a cheap domain like `.xyz`, `.club` and so on.
   - The website itself must have a very good quality, design, etc.
+- Presence must support `multiLanguage` option if it's possible and available (for e.g., String `Playing` that is used in presence, could be translated to every language by `multiLanguage` option). Find example [here](https://docs.premid.app/dev/presence/class#getstringsobject).
 - Including the `dist` folder, `presence.ts` file, `iframe.ts` file, and `metadata.json` file is mandatory so the result would be what is represented in the following schema:
 
 ```bash
