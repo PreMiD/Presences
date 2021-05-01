@@ -1,8 +1,6 @@
 const presence = new Presence({
     clientId: "834093191485063258"
-}),
-
-  customData = false;
+});
 
 const browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -189,7 +187,10 @@ if(document.location.pathname.startsWith("/home/users/profile/")) {
   }
 }
 
-if (!customData) {
+if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
     presence.setActivity(presenceData);
   }
 });
