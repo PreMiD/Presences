@@ -17,7 +17,7 @@ const getElement = (query: string): string | undefined => {
 
 function capLet(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-};
+}
 
 // Yes I know the code is bad. I apologise in advance for your eyes
 
