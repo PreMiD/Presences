@@ -3,18 +3,6 @@ const presence = new Presence({
   }),
   timestamp = Math.floor(Date.now() / 1000);
 
-function isArticle() {
-  return window.location.pathname.includes("/news-articles/");
-}
-
-function isGame() {
-  return window.location.pathname.includes("/game/");
-}
-
-function isProfile() {
-  return window.location.pathname.includes("/people/");
-}
-
 let articleTitle: string,
   articleDate: string,
   gameTitle: string,
@@ -141,7 +129,7 @@ presence.on("UpdateData", async () => {
       break;
   }
 
-  if (isArticle()) {
+  if (window.location.pathname.includes("/news-articles/")) {
     articleTitle = document.querySelector(".BlogItem-title").textContent.trim();
     articleDate = document
       .querySelector(".BlogItem-meta > time")
@@ -154,7 +142,7 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       { label: "View Article", url: window.location.href }
     ];
-  } else if (isGame()) {
+  } else if (window.location.pathname.includes("/game/")) {
     gameTitle = document.querySelector(".BlogItem-title").textContent.trim();
 
     presenceData.details = gameTitle;
@@ -163,7 +151,7 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       { label: "View " + gameTitle, url: window.location.href }
     ];
-  } else if (isProfile()) {
+  } else if (window.location.pathname.includes("/people/")) {
     profileTitle = document
       .querySelector(".BlogItem-title")
       ?.textContent.trim();
