@@ -239,7 +239,7 @@ Here is a list of rules you must follow when writing your `presence.ts` file:
 - Presences that use buttons should follow extra requirements:
   - Redirects to main page are prohibited.
   - Promoting websites by them is prohibited.
-  - They can't show addinational data when you can't show them in other fields.
+  - They can't show additional data when you can't show them in other fields.
   - Redirecting directly to audio/video stream is prohibited.
 
 
