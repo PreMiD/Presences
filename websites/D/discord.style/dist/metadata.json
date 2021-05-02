@@ -15,12 +15,5 @@
   "tags": [
     "discord"
   ],
-  "category": "other",
-  "settings": [
-      {
-          "id": "buttonsData",
-          "title": "Show Buttons",
-          "value": false
-      }
-  ]
+  "category": "other"
 }

@@ -21,20 +21,16 @@ presenceClient.on("UpdateData", async () => {
         return resultButton;
     };
     presenceData.details = "Viewing page:";
-    if (pathName.toLowerCase() === "/") {
+    if (pathName.toLowerCase() === "/") 
         presenceData.state = "Homepage";
-    } else if (pathName.startsWith("/browse")) {
+    else if (pathName.startsWith("/browse")) {
         presenceData.state = "Browse templates";
-        presenceData.buttons = getButton("View page", `https://www.discord.style${pathName}`);
     } else if (pathName.startsWith("/latest")) {
         presenceData.state = "Latest templates";
-        presenceData.buttons = getButton("View page", `https://www.discord.style${pathName}`);
     } else if (pathName.startsWith("/bot")) {
         presenceData.state = "dsc.st bot";
-        presenceData.buttons = getButton("View page", `https://www.discord.style${pathName}`);
     } else if (pathName.startsWith("/new")) {
         presenceData.state = "Add new template";
-        presenceData.buttons = getButton("View page", `https://www.discord.style${pathName}`);
     } else if (pathName.startsWith("/template")) {
         presenceData.details = "Viewing template:";
         presenceData.state = document.querySelectorAll("h1")[1].innerHTML.trim() || document.querySelector("head > title").innerHTML.split("by")[0].trim();
@@ -47,9 +43,8 @@ presenceClient.on("UpdateData", async () => {
         presenceData.details = "Viewing:";
         presenceData.state = "Results " + document.querySelector("h2").innerText.split("results")[1].replace(/"/g, "").trim();
     }
-    if (presenceData.state == null) {
+    if (presenceData.state == null)
         presenceClient.setTrayTitle();
-    } else {
+    else
         presenceClient.setActivity(presenceData);
-    }
 });
