@@ -31,9 +31,8 @@ presence.on("UpdateData", async () => {
 
     if (video && !isNaN(video.duration)) {
       //* Get required tags
-      const title: HTMLElement = document.querySelector(".video-wrapper .title-container .title");
-
-      const uploader: HTMLElement = document.querySelector(
+      const title: HTMLElement = document.querySelector(".video-wrapper .title-container .title"),
+        uploader: HTMLElement = document.querySelector(
         ".video-actions-container .video-info-row .usernameWrap a"
       ),
         timestamps = getTimestamps(
