@@ -6,39 +6,22 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
-
   //* If user is on /view_video...
-  if(window.location.pathname == "/view_video.php") {
-    const video: HTMLVideoElement = document.querySelector(
-      ".mgp_videoWrapper video"
-    ) ?? null,
+  if (window.location.pathname == "/view_video.php") {
+    const video: HTMLVideoElement =
+        document.querySelector(".mgp_videoWrapper video") ?? null,
       showTime = await presence.getSetting("time");
 
     if (video && !isNaN(video.duration)) {
       //* Get required tags
-      const title: HTMLElement = document.querySelector(".video-wrapper .title-container .title"),
-        uploader: HTMLElement = document.querySelector(
-        ".video-actions-container .video-info-row .usernameWrap a"
-      ),
-        timestamps = getTimestamps(
-          Math.floor(video.currentTime),
-          Math.floor(video.duration)
+      const title: HTMLElement = document.querySelector(
+          ".video-wrapper .title-container .title"
         ),
+        uploader: HTMLElement = document.querySelector(
+          ".video-actions-container .video-info-row .usernameWrap a"
+        ),
+        timestamps = presence.getTimestampsfromMedia(video),
         presenceData: PresenceData = {
           details: title ? title.innerText : "Title not found...",
           state: uploader ? uploader.textContent : "Uploader not found...",
@@ -47,7 +30,6 @@ presence.on("UpdateData", async () => {
           smallImageText: video.paused
             ? (await strings).pause
             : (await strings).play,
-          startTimestamp: timestamps[0],
           endTimestamp: timestamps[1]
         };
 
@@ -55,7 +37,6 @@ presence.on("UpdateData", async () => {
 
       //* Remove timestamps if paused or not show timestamps
       if (video.paused || !showTime) {
-        delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
 
