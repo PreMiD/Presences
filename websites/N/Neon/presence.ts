@@ -70,7 +70,6 @@ presence.on("UpdateData", async () => {
       break;
     
     case pathname.includes("/my-list"):
-        console.log("i got in the switch case");
       presenceData.details = "Viewing their list";
       break;
 
