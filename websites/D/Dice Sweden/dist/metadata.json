@@ -24,7 +24,7 @@
     {
       "id": "timestamps",
       "title": "Show Elapsed Time",
-      "icon": "fas fa-compress-arrows-alt",
+      "icon": "fad fa-stopwatch",
       "value": true
     }
   ]
