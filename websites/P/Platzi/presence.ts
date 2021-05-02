@@ -5,9 +5,9 @@ estimatedTime = Math.floor(Date.now() / 1000);
 
 let available_logos: Array<string>, 
 schools: Array<string>,
-titleToID: object,
+titleToID: Record<string, string>,
 categoriesEventListener: boolean = false,
-activeCategory: string = '';
+activeCategory = '';
 
 fetch('https://cdn.jsdelivr.net/gh/brunoocal/PlatziPreMID/coursesData.json')
 .then((res) => res.json())
@@ -32,7 +32,7 @@ const stripPlatziProfileFlags = (url: string) => {
     values: string[] = Object.values(titleToID),
     keyOfTitle: string = keys.find((key) => key === title);
 
-    if (!!keyOfTitle) {
+    if (keyOfTitle) {
       const iKey: number = keys.indexOf(keyOfTitle);
       return values[iKey];
     }
@@ -44,9 +44,8 @@ presence.on('UpdateData', async () => {
 const presenceData: PresenceData = {
   details: 'Pagina desconocida',
   largeImageKey: 'lg-dark'
-};
-
-const pathname = document.location.pathname;
+},
+pathname = document.location.pathname;
 
 if (pathname.includes('/home')) {
   const SearchInputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(
@@ -78,22 +77,22 @@ if (pathname.includes('/home')) {
 
   presenceData.details = 'Viendo el Blog';
 
-  if (!!Input.value) {
+  if (Input.value) {
     const rp: string = Input.value.replace(/[ ]/gi, '');
 
     presenceData.state = 'Viendo el Blog';
     delete presenceData.details;
 
-    if (!!BlogPage) {
+    if (BlogPage) {
       presenceData.state = `Página ${BlogPage.textContent}`;
     }
 
     if (rp !== '') {
-      !!BlogPage
+      BlogPage
         ? (presenceData.state = `Buscando: ${Input.value} [Pagina ${BlogPage.textContent}]`)
         : (presenceData.state = `Buscando: ${Input.value}`);
     }
-  } else if (!!BlogPage) {
+  } else if (BlogPage) {
     presenceData.state = `Página ${BlogPage.textContent}`;
   }
 } else if (pathname.startsWith('/blog/')) {
@@ -113,7 +112,7 @@ if (pathname.includes('/home')) {
     ),
      ArticleDate: HTMLParagraphElement = document.querySelector(
       '.DiscussionInfo-time'
-    )
+    );
 
     presenceData.details = `Blog: ${ArticleTitle.textContent}`;
     presenceData.state = `de ${ArticleOwner.textContent} [${ArticleOwnerPoints.textContent} pts] ${ArticleDate.textContent}`;
@@ -131,22 +130,22 @@ if (pathname.includes('/home')) {
 
   presenceData.details = 'Viendo el Foro';
 
-  if (!!Input.value) {
+  if (Input.value) {
     const rp: string = Input.value.replace(/[ ]/gi, '');
 
     presenceData.state = 'Viendo el Foro';
     delete presenceData.details;
 
-    if (!!ForumPage) {
+    if (ForumPage) {
       presenceData.state = `Página ${ForumPage.textContent}`;
     }
 
     if (rp !== '') {
-      !!ForumPage
+      ForumPage
         ? (presenceData.state = `Buscando: ${Input.value} [Pagina ${ForumPage.textContent}]`)
         : (presenceData.state = `Buscando: ${Input.value}`);
     }
-  } else if (!!ForumPage) {
+  } else if (ForumPage) {
     presenceData.state = `Página ${ForumPage.textContent}`;
   }
 } else if (pathname.startsWith('/precios/')) {
@@ -185,15 +184,17 @@ if (pathname.includes('/home')) {
     (tab) => tab.textContent === 'Mi Portafolio'
   );
 
-  let FinalString: string = '';
+  let FinalString = '';
 
-  if (!!UserFullName) FinalString += ` ${UserFullName.textContent} `;
-  if (!!UserFlag)
+  FinalString += ` ${UserFullName.textContent} `;
+  if (UserFlag)
     FinalString += ` ${stripPlatziProfileFlags(
       UserFlag.getAttribute('src')
     )} `;
-  if (!!UserPoints) FinalString += ` [${UserPoints.textContent} pts] `;
-  if (!!UserLink) {
+
+  FinalString += ` [${UserPoints.textContent} pts] `;
+
+  if (UserLink) {
     presenceData.buttons = [
       {label: 'Link personal', url: `${UserLink.href}`}
     ];
@@ -233,7 +234,7 @@ if (pathname.includes('/home')) {
     {
       label: 'Ver curso',
       url: `https://platzi.com${pathname}`
-    },
+    }
   ];
   if (available_logos.includes(pathNameSplitted[1])) {
     presenceData.largeImageKey = pathNameSplitted[1];
@@ -279,7 +280,7 @@ if (pathname.includes('/home')) {
     {label: 'Ver Clase', url: `https://platzi.com${pathname}`}
   ];
 
-  let pathArray: string[] = pathNameSplitted[1].split('-');
+  const pathArray: string[] = pathNameSplitted[1].split('-');
   pathArray.shift();
   const pathName = pathArray.join('-');
 
