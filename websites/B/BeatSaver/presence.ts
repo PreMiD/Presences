@@ -30,9 +30,10 @@ presence.on("UpdateData", async () => {
     else if (document.querySelector("span.tag.is-normal") != null)
       presenceData.smallImageKey = "normal",
         presenceData.smallImageText = "Top Diff: Normal";
-    else
+    else {
       presenceData.smallImageKey = "easy";
-        presenceData.smallImageText = "Top Diff: Easy";
+      presenceData.smallImageText = "Top Diff: Easy";
+    }
     presenceData.details = document
       .querySelector("h1.is-size-1")
       .textContent;
@@ -61,37 +62,49 @@ presence.on("UpdateData", async () => {
           url: document.location.href
         }
       ];
-  else if (document.location.pathname.includes("/browse/latest"))
-    presenceData.details = "Browsing By Latest";
-  else if (document.location.pathname.includes("/browse/plays"))
-    presenceData.details = "Browsing By Plays";
-  else if (document.location.pathname.includes("/browse/downloads"))
-    presenceData.details = "Browsing By Downloads";
-  else if (document.location.pathname.includes("/browse/rating"))
-    presenceData.details = "Browsing By Rating";
-  else if (document.location.pathname.includes("/browse/hot"))
-    presenceData.details = "Browsing By Hot";
-  else if (document.location.pathname.includes("/ranking/requests"))
-    presenceData.details = "Browsing Rank Requests";
-  else if (document.location.pathname.includes("/legal/license"))
-    presenceData.details = "Viewing License";
-  else if (document.location.pathname.includes("/legal/privacy"))
-    presenceData.details = "Viewing Privacy Policy";
-  else if (document.location.pathname == ("/legal/dmca"))
-    presenceData.details = "Viewing DMCA Policy";
-  else if (document.location.pathname == ("/auth/login"))
-    presenceData.details = "Logging In...";
-  else if (document.location.pathname == ("/auth/register"))
-    presenceData.details = "Registering...";
-  else if (document.location.pathname == ("/user/upload"))
-    presenceData.details = "Uploading...";
-  else if (document.location.href == ("https://beatsaver.com/"))
-    presenceData.details = "Viewing Home Page";
+  switch (document.location.pathname) {
+    case "/browse/latest":
+      presenceData.details = "Browsing By Latest";
+      break;
+    case "/browse/plays":
+      presenceData.details = "Browsing By Plays";
+      break;
+    case "/browse/downloads":
+      presenceData.details = "Browsing By Downloads";
+      break;
+    case "/browse/rating":
+      presenceData.details = "Browsing By Rating";
+      break;
+    case "/browse/hot":
+      presenceData.details = "Browsing By Hot";
+      break;
+    case "/legal/license":
+      presenceData.details = "Viewing License";
+      break;
+    case "/legal/privacy":
+      presenceData.details = "Viewing Privacy Policy";
+      break;
+    case "/legal/dmca":
+      presenceData.details = "Viewing DMCA Policy";
+      break;
+    case "/auth/login":
+      presenceData.details = "Logging In...";
+      break;
+    case "/auth/register":
+      presenceData.details = "Registering...";
+      break;
+    case "/user/upload":
+      presenceData.details = "Uploading...";
+      break;
+    case "/":
+      presenceData.details = "Viewing Home Page";
+      break;
+  }
 
   if (!time)
     delete presenceData.startTimestamp;
 
-  if (!buttons)
+  if (!buttons && presenceData.buttons)
     delete presenceData.buttons;
 
   presence.setActivity(presenceData);
