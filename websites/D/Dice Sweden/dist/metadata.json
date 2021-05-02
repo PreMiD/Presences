@@ -23,7 +23,7 @@
     },
     {
       "id": "timestamps",
-      "title": "Show Time Elapsed",
+      "title": "Show Elapsed Time",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
     }
