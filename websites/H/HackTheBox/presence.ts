@@ -12,12 +12,10 @@ presence.on("UpdateData", () => {
 presenceData.startTimestamp = browsingStamp;
 
 const getElement = (query: string): string | undefined => {
-    return document.querySelector(query) ? document.querySelector(query).textContent: undefined;
+    return document.querySelector(query) ? document.querySelector(query).textContent : undefined;
+}, capLet = (text: string): string => {
+    return text.charAt(0).toUpperCase() + text.slice(1);
 };
-
-function capLet(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 // Yes I know the code is bad. I apologise in advance for your eyes
 
