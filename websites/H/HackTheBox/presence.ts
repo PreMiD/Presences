@@ -28,12 +28,8 @@ if(document.location.pathname.startsWith("/home/users/profile/")) {
     const title = getElement(".header-title h3");
     presenceData.details = `Viewing Machine Name: ${title}`;
 } else if(document.location.pathname.startsWith("/home/challenges/")) {
-    const URL = window.location.href.substr(window.location.href.lastIndexOf('/') + 1).split('?')[0];
-        if (URL === "submit") {
-            presenceData.details = `Submitting a Challenge`;
-        } else {
-    presenceData.details = `Viewing ${capLet(URL)} Challenges`;
-    }
+    const url = window.location.href.substr(window.location.href.lastIndexOf('/') + 1).split('?')[0];
+    presenceData.details = url === "submit" ? "Submitting a Challenge" : `Viewing ${capLet(url)} Challenges`
 } else if(document.location.pathname.startsWith("/home/endgame/view/")) {
     const endgame = getElement(".header-title h3");
     presenceData.details = `Viewing Endgame Name: ${endgame}`;
