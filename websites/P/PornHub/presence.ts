@@ -15,8 +15,8 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  let startTime = Date.now();
-  let endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now();
+  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
@@ -31,10 +31,9 @@ presence.on("UpdateData", async () => {
 
     if (video && !isNaN(video.duration)) {
       //* Get required tags
-      let title: any;
-      title = document.querySelector(".video-wrapper .title-container .title");
+      const title: HTMLElement = document.querySelector(".video-wrapper .title-container .title");
 
-      const uploader = document.querySelector(
+      const uploader: HTMLElement = document.querySelector(
         ".video-actions-container .video-info-row .usernameWrap a"
       ),
         timestamps = getTimestamps(
@@ -62,7 +61,7 @@ presence.on("UpdateData", async () => {
       }
 
       //* If tags are not "null"
-      if (title !== null && uploader !== null) {
+      if (title && uploader) {
         presence.setActivity(presenceData, !video.paused);
       } else {
         presence.setActivity();
