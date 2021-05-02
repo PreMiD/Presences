@@ -6,7 +6,7 @@ estimatedTime = Math.floor(Date.now() / 1000);
 let available_logos: Array<string>, 
 schools: Array<string>,
 titleToID: Record<string, string>,
-categoriesEventListener: boolean = false,
+categoriesEventListener = false,
 activeCategory = '';
 
 fetch('https://cdn.jsdelivr.net/gh/brunoocal/PlatziPreMID/coursesData.json')
@@ -166,7 +166,7 @@ if (pathname.includes('/home')) {
     '.Paginator-number.is-current'
   );
 
-  if (!!NotificationPage) {
+  if (NotificationPage) {
     presenceData.state = `Página ${NotificationPage.textContent}`;
   }
 } else if (pathname.startsWith('/p/')) {
