@@ -3,7 +3,6 @@ const presence = new Presence({
 }),
 estimatedTime = Math.floor(Date.now() / 1000);
 
-
 let categoriesEventListener = false,
 activeCategory = '';
 
@@ -14,7 +13,8 @@ const stripPlatziProfileFlags = (url: string) => {
   },
   setPresenceFromEvent = (learning_path: string) => {
     activeCategory = learning_path;
-  }
+  };
+  
 presence.on('UpdateData', async () => {
 const presenceData: PresenceData = {
   largeImageKey: 'lg-dark'
@@ -169,7 +169,6 @@ if (pathname.includes('/home')) {
 
   if (isUserProfile.length > 0) presenceData.details = 'Viendo su perfil';
   
-
   presenceData.state = FinalString;
 } else if (pathname == '/agenda/') {
   presenceData.state = 'Viendo la Agenda';
