@@ -10,13 +10,18 @@ presence.on("UpdateData", async () => {
     presenceData: PresenceData = {
       largeImageKey: "logo",
       startTimestamp: browsingStamp
-    };
+    },
+    showAutos = <HTMLInputElement>document.querySelector("#showAutos");
 
   if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching Beatmaps";
     presenceData.state = document
       .querySelector("input.input")
       .getAttribute("value");
+    if (showAutos.checked == true) {
+      presenceData.smallImageKey = "showauto";
+      presenceData.smallImageText = "Showing Auto-generated Beatmaps";
+    }
   } else if (document.location.pathname.includes("/beatmap/")) {
     if (document.querySelector("span.tag.is-expert-plus") != null)
       presenceData.smallImageKey = "expert_",
@@ -51,17 +56,23 @@ presence.on("UpdateData", async () => {
       }
     ];
   }
-  else if (document.location.pathname.includes("/uploader/"))
-    presenceData.details = "Browsing By Uploader",
-      presenceData.state = document
-        .querySelector("h1.is-size-2.has-text-weight-light.has-text-centered")
-        .textContent.split(" ")[2],
-      presenceData.buttons = [
-        {
-          label: "View Page",
-          url: document.location.href
-        }
-      ];
+  else if (document.location.pathname.includes("/uploader/")) {
+    presenceData.details = "Browsing By Uploader";
+    presenceData.state = document
+      .querySelector("h1.is-size-2.has-text-weight-light.has-text-centered")
+      .textContent.split(" ")[2];
+    presenceData.buttons = [
+      {
+        label: "View Page",
+        url: document.location.href
+      }
+    ];
+    if (showAutos.checked == true) {
+      presenceData.smallImageKey = "showauto";
+      presenceData.smallImageText = "Showing Auto-generated Beatmaps";
+    }
+  }
+
   switch (document.location.pathname) {
     case "/browse/latest":
       presenceData.details = "Browsing By Latest";
@@ -99,6 +110,13 @@ presence.on("UpdateData", async () => {
     case "/":
       presenceData.details = "Viewing Home Page";
       break;
+  }
+
+  if (document.location.pathname.split("/")[1].includes("browse")) {
+    if (showAutos.checked == true) {
+      presenceData.smallImageKey = "showauto";
+      presenceData.smallImageText = "Showing Auto-generated Beatmaps";
+    }
   }
 
   if (!time)
