@@ -1,0 +1,24 @@
+{
+   "$schema":"https://schemas.premid.app/metadata/1.0",
+   "author":{
+      "name":"BBQ",
+      "id":"298888568279924746"
+   },
+   "url":"codesty.org",
+   "description":{
+      "tr":"Discord sunucuları ve kullanıcıları için istatistiklerin ve rekabet ortamının bulunduğu; yarattığı fark ile tercih edilen adaletli ve yenilikçi bir topluluk projesi.",
+      "en":"Community project engaged in creating competitive atmosphere for users and servers, chosen by its newest design & powerful structure."
+   },
+   "service":"Codesty",
+   "version":"1.0.0",
+   "logo":"https://i.imgur.com/mR9LSzV.png",
+   "thumbnail":"https://i.imgur.com/AxGp2zf.png",
+   "color":"#000000",
+   "tags":[
+      "discord",
+      "stats",
+      "list",
+      "turkish"
+   ],
+   "category":"other"
+}
