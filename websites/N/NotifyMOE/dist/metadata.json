@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "BasicallyWiz",
+    "id": "324588568951390220"
+  },
+  "service": "NotifyMOE",
+  "altnames": [ "Notify.moe" ],
+  "description": {
+    "en": "A website similar to MyAnimeList with an official extension, so you don't have to stop watching anime to keep your list up to date, as well as giving your browser notifications when an anime goes live."
+  },
+  "url": "notify.moe",
+  "version": "NotPubliclyAvailable",
+  "logo": "https://media.notify.moe/images/brand/64.png",
+  "thumbnail": "https://media.notify.moe/images/elements/framed-screenshot-transparent.png",
+  "color": "#e3b7a7",
+  "tags": [ "notify", "anime list", "anime", "notifymoe", "notify me" ],
+  "category": "anime",
+  "iframe": false,
+  "readLogs": false
+}
