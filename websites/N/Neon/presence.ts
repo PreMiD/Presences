@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
 
   if(pathname.includes("/series/")){
     presenceData.details = "Viewing series:";
-      let seriesName = document.getElementsByClassName("z5");
+      const seriesName = document.getElementsByClassName("z5");
           presenceData.state = seriesName[0].innerHTML;
          presenceData.buttons = [
            {
@@ -29,7 +29,7 @@ presence.on("UpdateData", async () => {
          ];
    }else if(pathname.includes("/movie/")){
       presenceData.details = "Viewing movie:";   
-       let  movieName = document.getElementsByClassName("e2");
+       const movieName = document.getElementsByClassName("e2");
        presenceData.state = movieName[0].innerHTML;
          presenceData.buttons = [
            {
