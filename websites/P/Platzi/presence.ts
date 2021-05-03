@@ -3,21 +3,9 @@ const presence = new Presence({
 }),
 estimatedTime = Math.floor(Date.now() / 1000);
 
-let available_logos: Array<string>, 
-schools: Array<string>,
-titleToID: Record<string, string>,
-categoriesEventListener = false,
+
+let categoriesEventListener = false,
 activeCategory = '';
-
-fetch('https://cdn.jsdelivr.net/gh/brunoocal/PlatziPreMID/coursesData.json')
-.then((res) => res.json())
-.then((data) => {
-  available_logos = data.available_logos;
-  schools = data.schools;
-  titleToID = data.titleToID;
-
-  //I tried unstructuring the data object but it throws an error, whatever xD
-});
 
 const stripPlatziProfileFlags = (url: string) => {
   return url
@@ -26,23 +14,9 @@ const stripPlatziProfileFlags = (url: string) => {
   },
   setPresenceFromEvent = (learning_path: string) => {
     activeCategory = learning_path;
-  },
-  getIDByTitle = (title: string) => {
-    const keys: string[] = Object.keys(titleToID),
-    values: string[] = Object.values(titleToID),
-    keyOfTitle: string = keys.find((key) => key === title);
-
-    if (keyOfTitle) {
-      const iKey: number = keys.indexOf(keyOfTitle);
-      return values[iKey];
-    }
-
-    return '';
-  };
-
+  }
 presence.on('UpdateData', async () => {
 const presenceData: PresenceData = {
-  details: 'Pagina desconocida',
   largeImageKey: 'lg-dark'
 },
 pathname = document.location.pathname;
@@ -56,13 +30,11 @@ if (pathname.includes('/home')) {
     .filter(Boolean);
 
   presenceData.state = 'Página de inicio';
-  delete presenceData.details;
 
   if (InputValues.length > 0) {
     const rp: string = InputValues[0].replace(/[ ]/gi, '');
 
     presenceData.state = 'Página de inicio';
-    delete presenceData.details;
 
     if (rp !== '') {
       presenceData.details = 'Página de inicio';
@@ -81,16 +53,13 @@ if (pathname.includes('/home')) {
     const rp: string = Input.value.replace(/[ ]/gi, '');
 
     presenceData.state = 'Viendo el Blog';
-    delete presenceData.details;
 
-    if (BlogPage) {
-      presenceData.state = `Página ${BlogPage.textContent}`;
-    }
-
+    if (BlogPage) presenceData.state = `Página ${BlogPage.textContent}`;
+    
     if (rp !== '') {
       BlogPage
-        ? (presenceData.state = `Buscando: ${Input.value} [Pagina ${BlogPage.textContent}]`)
-        : (presenceData.state = `Buscando: ${Input.value}`);
+      ? presenceData.state = `Buscando: ${Input.value} [Pagina ${BlogPage.textContent}]`
+      : presenceData.state = `Buscando: ${Input.value}`;
     }
   } else if (BlogPage) {
     presenceData.state = `Página ${BlogPage.textContent}`;
@@ -134,12 +103,9 @@ if (pathname.includes('/home')) {
     const rp: string = Input.value.replace(/[ ]/gi, '');
 
     presenceData.state = 'Viendo el Foro';
-    delete presenceData.details;
 
-    if (ForumPage) {
-      presenceData.state = `Página ${ForumPage.textContent}`;
-    }
-
+    if (ForumPage) presenceData.state = `Página ${ForumPage.textContent}`;
+    
     if (rp !== '') {
       ForumPage
         ? (presenceData.state = `Buscando: ${Input.value} [Pagina ${ForumPage.textContent}]`)
@@ -150,10 +116,10 @@ if (pathname.includes('/home')) {
   }
 } else if (pathname.startsWith('/precios/')) {
   presenceData.state = `Viendo los planes de compra`;
-  delete presenceData.details;
+
 } else if (pathname.startsWith('/empresas/')) {
   presenceData.state = `Viendo el plan para empresas`;
-  delete presenceData.details;
+
 } else if (pathname.startsWith('/comprar/')) {
   const planName = document.querySelector('.Details-name');
 
@@ -166,9 +132,8 @@ if (pathname.includes('/home')) {
     '.Paginator-number.is-current'
   );
 
-  if (NotificationPage) {
-    presenceData.state = `Página ${NotificationPage.textContent}`;
-  }
+  if (NotificationPage) presenceData.state = `Página ${NotificationPage.textContent}`;
+  
 } else if (pathname.startsWith('/p/')) {
   const UserFullName: HTMLElement = document.querySelector(
     '.ProfileHeader-name'
@@ -202,21 +167,18 @@ if (pathname.includes('/home')) {
 
   presenceData.details = 'Viendo el perfil de';
 
-  if (isUserProfile.length > 0) {
-    presenceData.details = 'Viendo su perfil';
-  }
+  if (isUserProfile.length > 0) presenceData.details = 'Viendo su perfil';
+  
 
   presenceData.state = FinalString;
 } else if (pathname == '/agenda/') {
   presenceData.state = 'Viendo la Agenda';
-  delete presenceData.details;
 } else if (pathname == '/live/') {
   presenceData.state = 'Viendo Platzi Live';
   presenceData.startTimestamp = estimatedTime;
   presenceData.buttons = [
     {label: 'Ver Live', url: `https://platzi.com${pathname}`}
   ];
-  delete presenceData.details;
 } else if (
   pathname.includes('/clases/') &&
   pathname.split('/').filter(Boolean).length === 2
@@ -226,8 +188,8 @@ if (pathname.includes('/home')) {
   ),
    teacher: HTMLSpanElement = document.querySelector(
     '.TeacherList-full-name'
-  ),
-  pathNameSplitted: string[] = pathname.split('/').filter(Boolean);
+  );
+
   presenceData.state = `de ${teacher.textContent}`;
   presenceData.details = course.textContent;
   presenceData.buttons = [
@@ -236,18 +198,13 @@ if (pathname.includes('/home')) {
       url: `https://platzi.com${pathname}`
     }
   ];
-  if (available_logos.includes(pathNameSplitted[1])) {
-    presenceData.largeImageKey = pathNameSplitted[1];
-  } else {
-    presenceData.largeImageKey = 'lg-dark';
-  }
+
 } else if (
   pathname.includes('/clases/') &&
   pathname.split('/').filter(Boolean).length > 2 &&
   !pathname.includes('examen')
 ) {
-  const pathNameSplitted: Array<string> = pathname.split('/').filter(Boolean),
-   course: HTMLAnchorElement = document.querySelector(
+  const course: HTMLAnchorElement = document.querySelector(
     '.Header-course-info-content a'
   ),
    episodeNameHTML: string = document.querySelector(
@@ -280,16 +237,6 @@ if (pathname.includes('/home')) {
     {label: 'Ver Clase', url: `https://platzi.com${pathname}`}
   ];
 
-  const pathArray: string[] = pathNameSplitted[1].split('-');
-  pathArray.shift();
-  const pathName = pathArray.join('-');
-
-  if (available_logos.includes(pathName)) {
-    presenceData.largeImageKey = pathName;
-  } else {
-    presenceData.largeImageKey = 'lg-dark';
-  }
-
   if (
     video !== null &&
     !isNaN(video.duration) &&
@@ -297,7 +244,6 @@ if (pathname.includes('/home')) {
   ) {
     timestamps = presence.getTimestampsfromMedia(video);
 
-    presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
   }
 } else if (pathname.includes('/cursos/')) {
@@ -309,20 +255,14 @@ if (pathname.includes('/home')) {
     ),
     teacher: HTMLElement = document.querySelector(
       '.Hero-teacher-name strong'
-    ),
-    pathNameSplitted: string[] = pathname.split('/').filter(Boolean);
+    );
+
     presenceData.state = `de ${teacher.textContent}`;
     presenceData.details = course.textContent;
 
-    if (available_logos.includes(pathNameSplitted[1])) {
-      presenceData.largeImageKey = pathNameSplitted[1];
-    } else {
-      presenceData.largeImageKey = 'lg-dark';
-    }
   } else {
     presenceData.state = 'Buscando cursos...';
     presenceData.startTimestamp = estimatedTime;
-    delete presenceData.details;
   }
 } else if (pathname.includes('/categorias/')) {
   const pathNameSplitted: string[] = pathname.split('/').filter(Boolean);
@@ -336,10 +276,8 @@ if (pathname.includes('/home')) {
     presenceData.state = categoryTitle.textContent;
     presenceData.details = activeCategory;
 
-    if (activeCategory !== '') {
-      presenceData.details = activeCategory;
-    }
-
+    if (activeCategory !== '') presenceData.details = activeCategory;
+    
     if (!categoriesEventListener) {
       learningPaths.forEach((learning_path) => {
         learning_path.addEventListener('mouseover', () =>
@@ -352,35 +290,11 @@ if (pathname.includes('/home')) {
 } else if (pathname.includes('/tutoriales/')) {
   const CourseName: HTMLAnchorElement = document.querySelector(
     '.Breadcrumb-desktop span:nth-child(2) a'
-  ),
-   SplittedHref: Array<string> = CourseName.getAttribute('href')
-    .split('/')
-    .filter(Boolean);
-
-  delete presenceData.details;
-
-  if (available_logos.includes(SplittedHref[1])) {
-    presenceData.largeImageKey = SplittedHref[1];
-  } else {
-    presenceData.largeImageKey = 'lg-dark';
-  }
+  );
 
   presenceData.details = CourseName.textContent;
   presenceData.state = 'Viendo un tutorial...';
-} else if (
-  schools.includes(pathname.replace(/[/]/gi, '')) &&
-  pathname.split('/').filter(Boolean).length === 1
-) {
-  const SchoolName: string = pathname.replace(/[/]/gi, ''),
-  SchoolHeading: HTMLHeadingElement = document.querySelector(
-    '.Hero-route-title h1'
-  );
-
-  presenceData.state = SchoolHeading.textContent;
-  presenceData.details = 'Viendo la escuela de';
-  presenceData.largeImageKey = SchoolName;
 } else if (pathname.split('/').filter(Boolean).includes('examen')) {
-  presenceData.largeImageKey = 'lg-dark';
 
   if (pathname.includes('tomar_examen')) {
     const CourseName: HTMLHeadingElement = document.querySelector(
@@ -399,13 +313,6 @@ if (pathname.includes('/home')) {
       '-'
     )}]`;
 
-    if (
-      [...available_logos, ...schools].includes(
-        getIDByTitle(CourseName.textContent)
-      )
-    ) {
-      presenceData.largeImageKey = getIDByTitle(CourseName.textContent);
-    }
   } else {
     if (pathname.includes('review')) {
       const CourseName: HTMLHeadingElement = document.querySelector(
@@ -414,13 +321,6 @@ if (pathname.includes('/home')) {
       presenceData.details = CourseName.textContent;
       presenceData.state = `Revisando sus respuestas...`;
 
-      if (
-        [...available_logos, ...schools].includes(
-          getIDByTitle(CourseName.textContent)
-        )
-      ) {
-        presenceData.largeImageKey = getIDByTitle(CourseName.textContent);
-      }
     } else if (pathname.includes('resultados')) {
       const CourseName: HTMLParagraphElement = document.querySelector(
         '.CourseRow-title'
@@ -437,13 +337,6 @@ if (pathname.includes('/home')) {
         Score >= 9 ? 'aprovado' : 'no aprovado'
       }. [${Score} en ${Questions} preguntas]`;
 
-      if (
-        [...available_logos, ...schools].includes(
-          getIDByTitle(CourseName.textContent)
-        )
-      ) {
-        presenceData.largeImageKey = getIDByTitle(CourseName.textContent);
-      }
     } else {
       const CourseName: HTMLHeadingElement = document.querySelector(
         '.StartExamOverview-course-title'
@@ -455,27 +348,20 @@ if (pathname.includes('/home')) {
       presenceData.details = CourseName.textContent;
       presenceData.state = `Empezando el exámen [${ExamQuestions.textContent}]`;
 
-      if (
-        [...available_logos, ...schools].includes(
-          getIDByTitle(CourseName.textContent)
-        )
-      ) {
-        presenceData.largeImageKey = getIDByTitle(CourseName.textContent);
-      }
     }
   }
 } else if (pathname.startsWith('/direct-messages/u/soporte-platzi')) {
   presenceData.state = 'Hablando con el Soporte Platzi';
-  delete presenceData.details;
+
 } else if (pathname.startsWith('/mensajes-directos/')) {
   presenceData.state = 'Viendo sus Mensajes';
-  delete presenceData.details;
+
 } else if (pathname.startsWith('/empleos/')) {
   presenceData.state = 'Viendo la lista de Empleos';
-  delete presenceData.details;
+
 } else if (pathname.startsWith('/mi-suscripcion/beneficiario/')) {
   presenceData.state = 'Viendo su Beneficiario';
-  delete presenceData.details;
+
 } else if (pathname.startsWith('/mi-suscripcion/facturas/')) {
   const FullName: HTMLDivElement = document.querySelector(
     '.ProfileMenu-name'
@@ -491,7 +377,6 @@ if (pathname.includes('/home')) {
 
   presenceData.state = 'Viendo sus referidos';
   presenceData.buttons = [{label: 'Referido', url: `${Input.value}`}];
-  delete presenceData.details;
 } else if (pathname.startsWith('/mi--suscripcion/')) {
   const SubscriptionName: HTMLDivElement = document.querySelector(
     '.CurrentPlan-name'
