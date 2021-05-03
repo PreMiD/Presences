@@ -6,7 +6,6 @@ const presence = new Presence({
   presence.on("UpdateData", async () => {
   const entries = await presence.getSetting("entries"),
         buttons = await presence.getSetting("buttons"),
-        v2icons = await presence.getSetting("v2icons"),
         data: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
@@ -20,7 +19,7 @@ const presence = new Presence({
       search = urlParams.get('name');
       data.details = "Searching: ";
       data.state = search;
-      data.smallImageKey = v2icons ? "search" : "search-v2";
+      data.smallImageKey = "search";
     }
     else if(pathname == "/directory/" || pathname == "/search/")
         data.details = "Browsing all manga";
@@ -55,7 +54,7 @@ const presence = new Presence({
       const title = document.querySelector(".list-group-item > h1").textContent;
       data.details = "Viewing manga:";
       data.state = title;
-      data.smallImageKey = v2icons ? "view" : "view-v2";
+      data.smallImageKey = "view";
       if (buttons) data.buttons = [{label: "View manga", url: window.location.href}];
     }
     else if(pathname.startsWith("/read-online/")){
@@ -64,7 +63,7 @@ const presence = new Presence({
             page = document.querySelector('button[data-target="#PageModal"]').textContent.replace(new RegExp("\\\t","g"),'').replace(new RegExp("\\\n","g"),'');
       data.details = title;
       data.state = "📖 Ch. " + chapter.split(" ")[1] + " 📄 " + page.split(" ")[1];
-      data.smallImageKey = v2icons ? "read" : "read-v2";
+      data.smallImageKey = "read";
       if (buttons)  data.buttons = [{label: "View manga", url: window.location.href}];
     }
     presence.setActivity(data);
