@@ -62,6 +62,44 @@ presence.on("UpdateData", () => {
     }
   }
 
+  if (document.location.hostname == "i.discord.fr") {
+    presenceData.details = "Consulte une image";
+    presenceData.state = "i.discord.fr";
+    presenceData.largeImageKey = "image";
+    presenceData.smallImageKey = "dfr";
+    presenceData.smallImageText = "i.discord.fr";
+  }
+
+  if (document.location.hostname == "support.discord.fr") {
+    presenceData.details = "Team Support";
+    presenceData.state = "via ModMail";
+    presenceData.largeImageKey = "support";
+    presenceData.smallImageKey = "dfr";
+    presenceData.smallImageText = "support.discord.fr";
+  }
+
+  if (document.location.hostname == "support.discord.fr") {
+    presenceData.details = "Team Support";
+    presenceData.state = "via ModMail";
+    presenceData.largeImageKey = "support";
+    presenceData.smallImageKey = "dfr";
+    presenceData.smallImageText = "support.discord.fr";
+    if (document.location.pathname.includes("/logs")) {
+      presenceData.details = "Consulte une archive";
+      presenceData.state = "d'un ticket support";
+      presenceData.largeImageKey = "logs";
+      presenceData.smallImageKey = "dfr";
+    } 
+  }
+
+  if (document.location.hostname == "status.discord.fr") {
+    presenceData.details = "Consulte l'état des services";
+    presenceData.state = "status.discord.fr";
+    presenceData.largeImageKey = "status";
+    presenceData.smallImageKey = "dfr";
+    presenceData.smallImageText = "status.discord.fr";
+  }
+
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
