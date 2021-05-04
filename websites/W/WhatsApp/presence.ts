@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
   if (
     settings.showNumbers === false &&
     typeof name === "string" &&
-    !isNaN(Number(name?.replace(/[^a-zA-Z0-9 ]/g, "")?.replace(/ /g, "") || ""))
+    !isNaN(Number(name.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "")))
   )
     name = null;
 
