@@ -111,7 +111,7 @@ presence.on("UpdateData", () => {
     }
     else if (document.location.pathname.includes("/blog/20")) {
       presenceData.details = "Consulte le Blog";
-      presenceData.state = "Lis un article"
+      presenceData.state = "Lis un article";
       presenceData.largeImageKey = "blog";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/blog/";
