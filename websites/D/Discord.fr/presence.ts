@@ -118,7 +118,7 @@ presence.on("UpdateData", () => {
     }
     else if (document.location.pathname.includes("/wiki")) {
       presenceData.details = "Consulte le wiki";
-      presenceData.state = "Lis un article"
+      presenceData.state = "Lis un article";
       presenceData.largeImageKey = "wiki";
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/wiki/";
