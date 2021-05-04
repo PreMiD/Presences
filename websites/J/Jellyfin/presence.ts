@@ -320,6 +320,8 @@ async function handleAudioPlayback(): Promise<void> {
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
+
+      delete presenceData.endTimestamp;
     }
   } catch (e) {
     // do nothing
@@ -515,6 +517,8 @@ async function handleVideoPlayback(): Promise<void> {
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
+
+      delete presenceData.endTimestamp;
     }
   }
 
