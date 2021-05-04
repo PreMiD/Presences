@@ -5,10 +5,11 @@
   },
   "service": "GBAtemp.net",
   "description": {
-    "en": "GBAtemp is a user friendly independent video game community with millions of posts about 3DS and Nintendo DS, Wii and Wii U, Switch and other general consoles including PC gaming."
+    "en": "GBAtemp is a user friendly independent video game community with millions of posts about 3DS and Nintendo DS, Wii and Wii U, Switch and other general consoles including PC gaming.",
+    "nl": "GBAtemp is een gebruikersvriendelijke onafhankelijke videogame community met miljoenen berichten over 3DS en Nintendo DS, Wii en Wii U, Switch en andere algemene consoles inclusief PC gaming."
   },
   "url": "gbatemp.net",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "logo": "https://sks316.s-ul.eu/W9R84hRo.jpg",
   "thumbnail": "https://sks316.s-ul.eu/t5yTsmfn.png",
   "color": "#7692aa",

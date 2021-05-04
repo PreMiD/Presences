@@ -5,10 +5,11 @@
   },
   "url": "downdetector.com",
   "description": {
-    "en": "Real-time problem & outage monitoring"
+    "en": "Real-time problem & outage monitoring",
+    "nl": "Real-time probleem- en uitvalbewaking"
   },
   "service": "Downdetector",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/STs8Nfw.png",
   "thumbnail": "https://i.imgur.com/Qy1lbXE.png",
   "color": "#FF160A",

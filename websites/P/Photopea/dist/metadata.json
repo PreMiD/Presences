@@ -5,7 +5,8 @@
   },
   "service": "Photopea",
   "description": {
-    "en": "Photopea online image editor is a free Photoshop clone with advanced tools"
+    "en": "Photopea online image editor is a free Photoshop clone with advanced tools",
+    "nl": "Photopea online afbeeldingseditor is een gratis Photoshop-kloon met geavanceerde tools"
   },
   "url": "www.photopea.com",
   "version": "1.4.5",

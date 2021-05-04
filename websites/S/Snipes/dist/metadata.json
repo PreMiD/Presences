@@ -7,11 +7,18 @@
   "service": "Snipes",
   "description": {
     "en": "SNIPES is a store for popular brand clothes.",
-    "de": "SNIPES ist ein Handel für beliebte Markenklamotten."
+    "de": "SNIPES ist ein Handel für beliebte marken Klamotten.",
+    "nl": "SNIPES is een winkel voor kleding van populaire merken."
   },
-  "url": "www.snipes.com",
-  "regExp": "www[.]snipes(usa)?[.]([a-z]+)",
-  "version": "1.1.2",
+  "url": [
+    "www.snipes.com",
+    "www.snipes.at",
+    "www.snipes.fr",
+    "www.snipes.nl",
+    "www.snipes.it",
+    "www.snipes.es"
+  ],
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/9HmTAOR.png",
   "thumbnail": "https://i.imgur.com/bKZ2EQH.png",
   "color": "#DF632F",
@@ -23,19 +30,13 @@
   "settings": [
     {
       "id": "timeElapsed",
-      "title": "Show Elapsed Time",
+      "title": "Show elapsed time",
       "icon": "fad fa-hourglass-half",
       "value": true
     },
     {
       "id": "showButtons",
-      "title": "Show Buttons",
-      "icon": "fas fa-compress-arrows-alt",
-      "value": true
-    },
-    {
-      "id": "showSmallImages",
-      "title": "Show Small Images",
+      "title": "Show buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
     }

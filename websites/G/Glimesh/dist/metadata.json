@@ -19,11 +19,11 @@
   "url": [
     "glimesh.tv",
     "support.glimesh.tv",
-    "blog.glimesh.tv",
     "glim.shop"
   ],
   "description": {
-    "en": "Glimesh is the next generation streaming platform built by the community for the community."
+    "en": "Glimesh is the next generation streaming platform built by the community for the community.",
+    "nl": "Glimesh is het streamingplatform van de volgende generatie dat door de community voor de community is gebouwd."
   },
   "settings": [
     {

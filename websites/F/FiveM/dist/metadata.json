@@ -1,28 +1,29 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.0",
-    "author": {
-      "name": "Marino",
-      "id": "598953747963707409"
-    },
-    "url": [
-      "fivem.net",
-      "docs.fivem.net",
-      "servers.fivem.net"
-    ],
-    "description": {
-      "en": "FiveM is a multiplayer modification framework for GTA V, allowing you to play on customized dedicated servers."
-    },
-    "service": "FiveM",
-    "version": "1.0.1",
-    "logo": "https://i.imgur.com/BvGqA4s.png",
-    "thumbnail": "https://i.imgur.com/b6Kd7z8.png",
-    "color": "#FF7300",
-    "tags": [
-      "gta",
-      "games",
-      "fivem",
-      "online",
-      "five"
-    ],
-    "category": "games"
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "Marino",
+    "id": "598953747963707409"
+  },
+  "url": [
+    "fivem.net",
+    "docs.fivem.net",
+    "servers.fivem.net"
+  ],
+  "description": {
+    "en": "FiveM is a multiplayer modification framework for GTA V, allowing you to play on customized dedicated servers.",
+    "nl": "FiveM is een multiplayer modificatie framework voor GTA V, waarmee je op aangepaste dedicated servers kunt spelen."
+  },
+  "service": "FiveM",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/BvGqA4s.png",
+  "thumbnail": "https://i.imgur.com/b6Kd7z8.png",
+  "color": "#FF7300",
+  "tags": [
+    "gta",
+    "games",
+    "fivem",
+    "online",
+    "five"
+  ],
+  "category": "games"
 }

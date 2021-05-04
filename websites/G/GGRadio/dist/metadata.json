@@ -5,10 +5,11 @@
   },
   "service": "GGRadio",
   "description": {
-    "en": "Welcome to GGRadio, the #1 international eSports gaming radio. Playing 24/7 since 2015, available on all your favourite games and devices."
+    "en": "Welcome to GGRadio, the #1 international eSports gaming radio. Playing 24/7 since 2015, available on all your favourite games and devices.",
+    "nl": "Welkom bij GGRadio, de #1 internationale eSports gaming radio. 24 uur per dag, 7 dagen per week, beschikbaar op al je favoriete games en apparaten."
   },
   "url": "ggradio.net",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/IOmdiIb.png",
   "thumbnail": "https://i.imgur.com/7pjD8sv.png",
   "color": "#ff6101",

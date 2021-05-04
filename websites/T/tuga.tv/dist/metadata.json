@@ -6,10 +6,11 @@
   "service": "tuga.tv",
   "description": {
     "en": "O site tuga.tv é um agregador de vídeos disponíveis na Internet, que possibilita de forma completamente grátis, segura e anónima ver mais de 20000 vídeos.",
-    "pt_BR": "O site tuga.tv é um agregador de vídeos disponíveis na Internet, que possibilita de forma completamente grátis, segura e anónima ver mais de 20000 vídeos."
+    "pt_BR": "O site tuga.tv é um agregador de vídeos disponíveis na Internet, que possibilita de forma completamente grátis, segura e anónima ver mais de 20000 vídeos.",
+    "nl": "De site is beschikbaar op internet, is beschikbaar op internet, is mogelijk tot volledige grootte, is een jaar geleden tot 20000 weergaven."
   },
   "url": "tuga.tv",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "logo": "https://viruz.s-ul.eu/OhUMdsvv",
   "thumbnail": "https://viruz.s-ul.eu/9rCjD4qj",
   "color": "#171717",

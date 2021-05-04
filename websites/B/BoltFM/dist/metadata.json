@@ -6,10 +6,11 @@
   "service": "BoltFm",
   "description": {
     "en": "Providing non-stop music, 24/7",
-    "ga_IE": "Ag soláthar ceoil gan stad, 24/7"
+    "ga_IE": "Ag soláthar ceoil gan stad, 24/7",
+    "nl": "Bied 24/7 non-stop muziek aan"
   },
   "url": "boltfm.net",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/VWZZldG.png",
   "thumbnail": "https://i.imgur.com/6DB8VEh.png",
   "color": "#203391",

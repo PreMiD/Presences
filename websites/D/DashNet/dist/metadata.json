@@ -8,10 +8,11 @@
     "Cookie Clicker"
   ],
   "description": {
-    "en": "DashNet by Orteil and Opti, a 2-people team that makes browser games, generators, and other wacky experiments."
+    "en": "DashNet by Orteil and Opti, a 2-people team that makes browser games, generators, and other wacky experiments.",
+    "nl": "DashNet van Orteil en Opti, een team van twee mensen dat browsergames, generatoren en andere gekke experimenten maakt."
   },
   "url": "dashnet.org",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/sbtwgku.png",
   "thumbnail": "https://i.imgur.com/PnsZ4Nv.png",
   "color": "#042B48",

@@ -5,10 +5,11 @@
   },
   "url": "chickenfm.com",
   "description": {
-    "en": "ChickenFM is an online radio station that plays the latest hits!"
+    "en": "ChickenFM is an online radio station that plays the latest hits!",
+    "nl": "ChickenFM is een online radiostation dat de nieuwste hits speelt!"
   },
   "service": "ChickenFM",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/XHDl4rk.png",
   "thumbnail": "https://i.imgur.com/O8tjiZv.png",
   "color": "#0049FF",
