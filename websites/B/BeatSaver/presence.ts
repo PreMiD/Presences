@@ -18,7 +18,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = document
       .querySelector("input.input")
       .getAttribute("value");
-    if (showAutos.checked == true) {
+    if (showAutos.checked) {
       presenceData.smallImageKey = "showauto";
       presenceData.smallImageText = "Showing Auto-generated Beatmaps";
     }
@@ -67,7 +67,7 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
-    if (showAutos.checked == true) {
+    if (showAutos.checked) {
       presenceData.smallImageKey = "showauto";
       presenceData.smallImageText = "Showing Auto-generated Beatmaps";
     }
@@ -113,7 +113,7 @@ presence.on("UpdateData", async () => {
   }
 
   if (document.location.pathname.split("/")[1].includes("browse")) {
-    if (showAutos.checked == true) {
+    if (showAutos.checked) {
       presenceData.smallImageKey = "showauto";
       presenceData.smallImageText = "Showing Auto-generated Beatmaps";
     }
