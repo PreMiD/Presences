@@ -19,7 +19,7 @@ presence.on("UpdateData", () => {
     presenceData.largeImageKey = "discordfr";
     presenceData.smallImageKey = "rooster";
     presenceData.smallImageText = "Page d'accueil";
-    if (document.location.pathname.includes("/serveur")) {
+    if (document.location.pathname == "/serveur/") {
       presenceData.details = "Slash FR - Serveur communautaire Français";
       presenceData.state = "discord.gg/fr";
       presenceData.largeImageKey = "serveur";
@@ -59,6 +59,69 @@ presence.on("UpdateData", () => {
       presenceData.largeImageKey = "unban";
       presenceData.smallImageKey = "rooster";
       presenceData.smallImageText = "discord.fr/unban";
+    }
+    else if (document.location.pathname == "/blog/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Page principale";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog";
+    }
+    else if (document.location.pathname == "/blog/categories/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Toutes les catégories";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/";
+    }
+    else if (document.location.pathname == "/blog/categories/actualite/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Actualités";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/actualite";
+    }
+    else if (document.location.pathname == "/blog/categories/bot/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Bots";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/bot";
+    }
+    else if (document.location.pathname == "/blog/categories/developpement/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Développement";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/developpement";
+    }
+    else if (document.location.pathname == "/blog/categories/guide/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Guides";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/guide";
+    }
+    else if (document.location.pathname == "/blog/categories/serveur/") {
+      presenceData.details = "Navigue sur le Blog";
+      presenceData.state = "Catégorie: Serveurs";
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/categories/serveur";
+    }
+    else if (document.location.pathname.includes("/blog/20")) {
+      presenceData.details = "Consulte le Blog";
+      presenceData.state = "Lis un article"
+      presenceData.largeImageKey = "blog";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/blog/";
+    }
+    else if (document.location.pathname.includes("/wiki")) {
+      presenceData.details = "Consulte le wiki";
+      presenceData.state = "Lis un article"
+      presenceData.largeImageKey = "wiki";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/wiki/";
     }
   }
 
