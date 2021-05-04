@@ -403,28 +403,38 @@ const media: Record<string, string | MediaInfo> = {};
  * @return {object}        metadata of the item
  */
 async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
-  if (media[itemId]) {
-    if (media[itemId] !== "pending") {
-      return media[itemId];
-    }
-
-    return;
+  const pending = "pending";
+  if (
+    media[itemId] &&
+    media[itemId] !== pending
+  ) {
+    return media[itemId];
   }
 
-  media[itemId] = "pending";
-  const basePath = location.pathname.replace(
+  media[itemId] = pending;
+  const basePath =
+    location.pathname.replace(
       location.pathname.split("/").slice(-2).join("/"),
       ""
     ),
-    res = await fetch(`${basePath}Users/${getUserId()}/Items/${itemId}`, {
+    baseLocation = location.protocol + "//" + location.host + basePath,
+    res = await fetch(`${baseLocation}Users/${getUserId()}/Items/${itemId}`, {
       credentials: "include",
       headers: {
-        "x-emby-authorization": `MediaBrowser Client="${ApiClient["_appName"]}", Device="${ApiClient["_deviceName"]}", DeviceId="${ApiClient["_deviceId"]}", Version="${ApiClient["_appVersion"]}", Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
+        "x-emby-authorization":
+          `MediaBrowser Client="${ApiClient["_appName"]}",` +
+          `Device="${ApiClient["_deviceName"]}",` +
+          `DeviceId="${ApiClient["_deviceId"]}",` +
+          `Version="${ApiClient["_appVersion"]}",`+
+          `Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
       }
     }),
-    json = await res.json();
+    mediaInfo = await res.json();
 
-  media[itemId] = json;
+  if (media[itemId] === pending) {
+    media[itemId] = mediaInfo;
+  }
+
   return media[itemId];
 }
 
