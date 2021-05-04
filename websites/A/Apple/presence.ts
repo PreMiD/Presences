@@ -3,8 +3,8 @@ var presence = new Presence({
 });
 var time = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
-  var urlpath = window.location.pathname.toLowerCase().split("/");
-  const setting = {
+  const urlpath = window.location.pathname.toLowerCase().split("/"),
+      setting = {
         timeElapsed: await presence.getSetting("timeElapsed"),
         buttons: await presence.getSetting("showButtons"),
         logo: await presence.getSetting("logo"),
