@@ -32,6 +32,34 @@ presence.on("UpdateData", () => {
       presenceData.smallImageKey = "dfr";
       presenceData.smallImageText = "discord.fr/mentions-legales";
     }
+    else if (document.location.pathname.includes("/search")) {
+      presenceData.details = "Recherche un";
+      presenceData.state = "élément sur le site";
+      presenceData.largeImageKey = "search";
+      presenceData.smallImageKey = "dfr";
+      presenceData.smallImageText = "discord.fr/search";
+    }
+    else if (document.location.pathname.includes("/recrutement")) {
+      presenceData.details = "Consulte le formulaire";
+      presenceData.state = "de recrutement";
+      presenceData.largeImageKey = "recrutement";
+      presenceData.smallImageKey = "rooster";
+      presenceData.smallImageText = "discord.fr/recrutement";
+    }
+    else if (document.location.pathname.includes("/partenariat")) {
+      presenceData.details = "Consulte le formulaire";
+      presenceData.state = "de partenariat";
+      presenceData.largeImageKey = "partenariat";
+      presenceData.smallImageKey = "rooster";
+      presenceData.smallImageText = "discord.fr/partenariat";
+    }
+    else if (document.location.pathname.includes("/unban")) {
+      presenceData.details = "Consulte le formulaire";
+      presenceData.state = "d'appel";
+      presenceData.largeImageKey = "unban";
+      presenceData.smallImageKey = "rooster";
+      presenceData.smallImageText = "discord.fr/unban";
+    }
   }
 
   if (presenceData.details == null) {
