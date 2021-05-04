@@ -214,32 +214,41 @@ presence.on("UpdateData", async () => {
         ".style-scope.ytd-channel-name > a"
       ).textContent;
     }
-
-    const presenceData: PresenceData = {
-      details: vidDetail
-        .replace("%title%", finalTitle)
-        .replace("%uploader%", finalUploader),
-      state: vidState
-        .replace("%title%", finalTitle)
-        .replace("%uploader%", finalUploader),
-      largeImageKey: "yt_lg",
-      smallImageKey: video.paused
-        ? "pause"
-        : video.loop
-        ? "repeat-one"
-        : isPlaylistLoop
-        ? "repeat"
-        : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : video.loop
-        ? "On loop"
-        : isPlaylistLoop
-        ? "Playlist on loop"
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+    const unlistedPathElement = document.querySelector<SVGPathElement>(
+        "g#privacy_unlisted > path"
+      ),
+      unlistedBadgeElement = document.querySelector<SVGPathElement>(
+        "h1.title+ytd-badge-supported-renderer path"
+      ),
+      unlistedVideo =
+        unlistedPathElement !== null &&
+        unlistedBadgeElement !== null &&
+        unlistedPathElement.getAttribute("d") ===
+          unlistedBadgeElement.getAttribute("d"),
+      presenceData: PresenceData = {
+        details: vidDetail
+          .replace("%title%", finalTitle)
+          .replace("%uploader%", finalUploader),
+        state: vidState
+          .replace("%title%", finalTitle)
+          .replace("%uploader%", finalUploader),
+        largeImageKey: "yt_lg",
+        smallImageKey: video.paused
+          ? "pause"
+          : video.loop
+          ? "repeat-one"
+          : isPlaylistLoop
+          ? "repeat"
+          : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : video.loop
+          ? "On loop"
+          : isPlaylistLoop
+          ? "Playlist on loop"
+          : (await strings).play,
+        endTimestamp: timestamps[1]
+      };
 
     if (vidState.includes("{0}")) delete presenceData.state;
 
@@ -278,26 +287,27 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = Math.floor(Date.now() / 1000);
       delete presenceData.endTimestamp;
     } else if (buttons) {
-      presenceData.buttons = [
-        {
-          label: live
-            ? (await strings).watchStreamButton
-            : (await strings).watchVideoButton,
-          url: document.URL.includes("/watch?v=")
-            ? document.URL.split("&")[0]
-            : `https://www.youtube.com/watch?v=${document
-                .querySelector("#page-manager > ytd-watch-flexy")
-                .getAttribute("video-id")}`
-        },
-        {
-          label: (await strings).viewChannelButton,
-          url: (document.querySelector(
-            "#top-row > ytd-video-owner-renderer > a"
-          ) as HTMLLinkElement).href
-        }
-      ];
+      if (!unlistedVideo) {
+        presenceData.buttons = [
+          {
+            label: live
+              ? (await strings).watchStreamButton
+              : (await strings).watchVideoButton,
+            url: document.URL.includes("/watch?v=")
+              ? document.URL.split("&")[0]
+              : `https://www.youtube.com/watch?v=${document
+                  .querySelector("#page-manager > ytd-watch-flexy")
+                  .getAttribute("video-id")}`
+          },
+          {
+            label: (await strings).viewChannelButton,
+            url: (document.querySelector(
+              "#top-row > ytd-video-owner-renderer > a"
+            ) as HTMLLinkElement).href
+          }
+        ];
+      }
     }
-
     if (!time) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
