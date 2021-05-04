@@ -9,8 +9,6 @@ presence.on("UpdateData", async () => {
     largeImageKey: "notifymoe_1024"
   };
 
-  
-
   if (!document.getElementById("audio-player-anime-info").classList.contains("hidden")) //    Check for music
   {
     let musicPlayer = document.getElementById("audio-player");
@@ -18,6 +16,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageKey = "notifymoe_512";
     presenceData.smallImageText = "Listening to " + musicPlayer.children[1].innerHTML;
 
+    presenceData.buttons[0] = { label: "Listen", url: "https://notify.moe" }
   }
 
   var location = document.location.toString();
