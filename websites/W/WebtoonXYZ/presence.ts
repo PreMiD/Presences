@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
     if(pathname == "/" && window.location.search.substr(0,2) == "?s"){
       const urlParams = new URLSearchParams(window.location.search),
             nsfw = urlParams.get("adult"),
-            search = nsfw == "1" ? "nsfw" : nsfw == "0" ? "non nsfw" : urlParams.get("s"),
+            search = nsfw === "1" ? "nsfw" : nsfw === "0" ? "non nsfw" : urlParams.get("s"),
             results = document.querySelector(".c-blog__heading > .h4").textContent.split(" ")[1];
       data.details = "Searching:";
       data.state = search + " 🔸 " + results +" results";
