@@ -60,7 +60,7 @@ presence.on("UpdateData", async () => {
       data.largeImageKey = title.includes("Solo Leveling") ? "solo" : (logo) == 0 ? "logo" : "logo-v2";
       if (buttons) data.buttons = [{label: "View Webtoon", url: window.location.href}];
     }
-    else if(pathname == "/user-settings/"){
+    else if(pathname === "/user-settings/"){
       data.smallImageKey = "settings";
       switch(window.location.search){
         case "?tab=history":
