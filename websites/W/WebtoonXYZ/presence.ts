@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
       if (buttons) data.buttons = [{label: "View Webtoon", url: window.location.href}];
     }
     else if(pathname == "/user-settings/"){
-      data.smallImageKey = (v2icons) ? "settings-v2" : "settings";
+      data.smallImageKey = "settings";
       switch(window.location.search){
         case "?tab=history":
           data.details = "User settings:";
