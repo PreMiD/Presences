@@ -16,7 +16,7 @@ getStrings = async () => {
       viewMovie: "general.viewMovie",
       buttonViewMovie: "general.buttonViewMovie",
       watchMovie: "general.watchingMovie",
-      watchSeries: "general.watchingSeries",
+      watchSeries: "general.watchingSeries"
     },
     await presence.getSetting("lang").catch(() => "en")
   );
