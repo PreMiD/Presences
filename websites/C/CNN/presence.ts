@@ -123,7 +123,6 @@ presence.on("UpdateData", async function () {
   else
     presenceData.details = "Other";
 
-
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
