@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
             results = document.querySelector(".c-blog__heading > .h4").textContent.split(" ")[1];
       data.details = "Searching:";
       data.state = search + " 🔸 " + results +" results";
-      data.smallImageKey = (v2icons) ? "search-v2" : "search";
+      data.smallImageKey = "search";
     }    
     else if(pathname === "/")
       data.details = "Viewing the homepage";
