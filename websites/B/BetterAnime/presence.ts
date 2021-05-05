@@ -142,7 +142,8 @@ presence.on("UpdateData", async () => {
         const video = document.querySelector("video"),
           timestamps = presence.getTimestampsfromMedia(video);
 
-        data.meta["title"] = document.querySelector("div.anime-title").textContent;
+        data.meta["title"] = document.querySelector("div.anime-title").textContent
+                             .replace(document.querySelector("div.anime-title > h3").textContent, "");
 
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
@@ -168,8 +169,7 @@ presence.on("UpdateData", async () => {
       disabled: privacy || !movie,
       async setPresenceData() {
         presenceData.details = (await strings).viewMovie;
-        presenceData.state = document.querySelector("div.infos_left > div > h2").textContent
-                             .replace(document.querySelector("div.anime-title > h3").textContent, "");
+        presenceData.state = document.querySelector("div.infos_left > div > h2").textContent;
 
         presenceData.buttons = [
           {
