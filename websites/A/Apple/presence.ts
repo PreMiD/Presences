@@ -191,7 +191,8 @@ presence.on("UpdateData", async () => {
         "airpods-max",
         "airpods-2nd-generation",
         "homepod",
-        "homepod-mini"
+        "homepod-mini",
+        "ipod-touch"
       ],
       services = [
         "apple-fitness-plus",
