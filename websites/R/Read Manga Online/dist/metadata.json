@@ -6,15 +6,15 @@
       "id": "141206144264699904"
     },
     "category": "anime",
-    "logo": "https://i.imgur.com/NtPeZ9u.png",
-    "thumbnail": "https://i.imgur.com/oPFkbqC.png",
+    "logo": "https://i.imgur.com/GTbLxVt.png",
+    "thumbnail": "https://i.imgur.com/fpxf9Hb.png",
     "version": "1.0.0",
     "color": "#2d2f33",
     "tags": [
       "manga",
       "manhwa"
     ],
-    "url": "www.readm.org",
+    "url": ["www.readm.org", "readm.org"],
     "description": {
       "en": "Biggest manga library on the web. Absolutely free and daily updated English translated manga online for free!"
     }

@@ -9,9 +9,8 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   },
     pathname = document.location.pathname;
-    if (pathname === "/"){
+    if (pathname === "/" )
       data.details = "Viewing the Homepage";
-    }
     else if(pathname === "/popular-manga"){
       data.details = "Viewing: ";
       data.state = "Popular Manga";
@@ -78,7 +77,10 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "view";
       data.buttons = [{ label: "View manga", url: document.location.href }];
     }
-    
+    else if(pathname.startsWith('/user-panel')){
+      data.details = "Viewing their: ";
+      data.state = document.querySelector('a.active').textContent;
+      data.smallImageKey = "settings";
+    }
     presence.setActivity(data);
   });
-  
