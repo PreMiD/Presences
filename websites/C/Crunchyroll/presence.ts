@@ -26,7 +26,7 @@ function getTimestamps(
 }
 
 var lastPlaybackState = null;
-var playback: Boolean;
+var playback: boolean;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
@@ -53,15 +53,15 @@ presence.on("UpdateData", async () => {
   };
 
   if (!playback && document.location.pathname.includes("/manga")) {
-    var reading: boolean = false;
+    let reading: boolean = false;
 
     if(document.location.pathname.includes("/read")) {
       browsingStamp = Math.floor(Date.now() / 1000);
-      var title = document.querySelector(".chapter-header a").innerHTML;
-      var currChapter = document.querySelector(".chapter-header").innerHTML.split("</a>")[1].split("\n")[0];
-      var currPage = document.querySelector(".first-page-number").innerHTML;
+      let title = document.querySelector(".chapter-header a").innerHTML;
+      let currChapter = document.querySelector(".chapter-header").innerHTML.split("</a>")[1].split("\n")[0];
+      let currPage = document.querySelector(".first-page-number").innerHTML;
       currPage = currPage == "" ? "1" : currPage;
-      var lastPage = document.querySelector(".images").children.length;
+      let lastPage = document.querySelector(".images").children.length;
 
       presenceData.details = title;
       presenceData.state = `${(await strings).reading} ${currChapter}`;
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 
       reading = true;
     } else if(document.location.pathname.includes("/volumes"))  {
-      var title = document.querySelector(".ellipsis").innerHTML.split("&gt;")[1];
+      let title = document.querySelector(".ellipsis").innerHTML.split("&gt;")[1];
 
       presenceData.details = (await strings).viewManga;
       presenceData.state = title;
@@ -149,7 +149,7 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [{ 
         "label": (await strings).watchEpisode,
         "url": document.location.toString()
-      }]
+      }];
       presence.setActivity(presenceData, !paused);
     }
   }
