@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
         },
     pathname = document.location.pathname;
 
-    if(pathname == "/" && window.location.search.substr(0,2) == "?s"){
+    if(pathname === "/" && window.location.search.substr(0,2) == "?s"){
       const urlParams = new URLSearchParams(window.location.search),
             nsfw = urlParams.get("adult"),
             search = nsfw === "1" ? "nsfw" : nsfw === "0" ? "non nsfw" : urlParams.get("s"),
