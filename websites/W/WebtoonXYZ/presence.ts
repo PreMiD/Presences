@@ -22,7 +22,7 @@ presence.on("UpdateData", async () => {
       data.state = search + " 🔸 " + results +" results";
       data.smallImageKey = (v2icons) ? "search-v2" : "search";
     }    
-    else if(pathname == "/")
+    else if(pathname === "/")
       data.details = "Viewing the homepage";
     else if(pathname.endsWith("/webtoons/")){
       const results = document.querySelector(".c-blog__heading > .h4").textContent;
