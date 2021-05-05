@@ -4,7 +4,11 @@ var presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
-    browse: "presence.activity.browsing"
+    browse: "presence.activity.browsing",
+    reading: "presence.activity.reading",
+    viewManga: "general.viewManga",
+    watchEpisode: "general.buttonViewEpisode",
+    manga: "general.manga"
   });
 
 /**
@@ -22,7 +26,7 @@ function getTimestamps(
 }
 
 var lastPlaybackState = null;
-var playback;
+var playback: Boolean;
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
@@ -32,7 +36,7 @@ if (lastPlaybackState != playback) {
 
 var iFrameVideo: any, currentTime: any, duration: any, paused: any;
 
-presence.on("iFrameData", (data) => {
+presence.on("iFrameData", (data: any) => {
   playback = data.iframe_video !== null ? true : false;
 
   if (playback) {
@@ -48,7 +52,53 @@ presence.on("UpdateData", async () => {
     largeImageKey: "lg"
   };
 
-  if (!playback) {
+  if (!playback && document.location.pathname.includes("/manga")) {
+    var reading: boolean = false;
+
+    if(document.location.pathname.includes("/read")) {
+      browsingStamp = Math.floor(Date.now() / 1000);
+      var title = document.querySelector(".chapter-header a").innerHTML;
+      var currChapter = document.querySelector(".chapter-header").innerHTML.split("</a>")[1].split("\n")[0];
+      var currPage = document.querySelector(".first-page-number").innerHTML;
+      currPage = currPage == "" ? "1" : currPage;
+      var lastPage = document.querySelector(".images").children.length;
+
+      presenceData.details = title;
+      presenceData.state = `${(await strings).reading} ${currChapter}`;
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.smallImageKey = "book_open";
+      presenceData.smallImageText = `Page ${currPage}/${lastPage}`;
+      presenceData.buttons = [{
+        "label": "Read Chapter",
+        "url": document.location.toString()
+      }];
+
+      reading = true;
+    } else if(document.location.pathname.includes("/volumes"))  {
+      var title = document.querySelector(".ellipsis").innerHTML.split("&gt;")[1];
+
+      presenceData.details = (await strings).viewManga;
+      presenceData.state = title;
+      presenceData.buttons = [{
+        "label": "View " + (await strings).manga,
+        "url": document.location.toString()
+      }];
+      reading = false;
+    } else {
+
+      presenceData.details = (await strings).browse;
+      presenceData.startTimestamp = browsingStamp;
+
+      delete presenceData.state;
+      delete presenceData.smallImageKey;
+
+      reading = true;
+    }
+
+    presence.setActivity(presenceData, reading);
+  }
+
+  if (!playback && !document.location.pathname.includes("/manga")) {
     presenceData.details = (await strings).browse;
     presenceData.startTimestamp = browsingStamp;
 
@@ -95,6 +145,11 @@ presence.on("UpdateData", async () => {
     }
 
     if (videoTitle !== null) {
+
+      presenceData.buttons = [{ 
+        "label": (await strings).watchEpisode,
+        "url": document.location.toString()
+      }]
       presence.setActivity(presenceData, !paused);
     }
   }
