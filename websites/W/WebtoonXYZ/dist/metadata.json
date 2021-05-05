@@ -26,12 +26,6 @@
         "icon": "fas fa-compress-arrows-alt",
         "value": true
       },
-      {
-        "id": "v2icons",
-        "title": "V2 icons (circle)",
-        "icon": "fas fa-circle",
-        "value": false
-      },
       {  
         "id": "logo",
         "title": "Icon",
