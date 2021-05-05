@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       data.state = "📋 " +results; 
       data.smallImageKey = "search";
     }
-    else if(pathname == "/completed-webtoons/"){
+    else if(pathname === "/completed-webtoons/"){
       data.details = "Browsing:";
       data.state = "Completed webtoons";
       data.smallImageKey = "search";
