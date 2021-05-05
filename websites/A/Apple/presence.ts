@@ -207,10 +207,12 @@ presence.on("UpdateData", async () => {
         "apple-one",
         "apple-card",
         "apple-books",
-        "app-store"
+        "app-store",
+        "music",
+        "apple-music"
       ],
       urlpNum = langs.indexOf(urlpath[1]) > -1 ? 2 : 1,
-      presenceData = {
+      presenceData: PresenceData = {
         largeImageKey: logoArr[setting.logo] || "logo"
       };
 
