@@ -1,7 +1,8 @@
-var presence = new Presence({
-  clientId: "839150832036872213"
-});
-var time = Math.floor(Date.now() / 1000);
+const presence = new Presence({
+    clientId: "839150832036872213"
+  }),
+  time = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", async () => {
   const urlpath = window.location.pathname.toLowerCase().split("/"),
       setting = {
