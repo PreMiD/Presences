@@ -34,7 +34,7 @@ presence.on("UpdateData", async () => {
             results = document.querySelector(".c-blog__heading > .h4").textContent;
       data.details = "Browsing " + genre + " webtoons";
       data.state = "📋 " +results; 
-      data.smallImageKey = (v2icons) ? "search-v2" : "search";
+      data.smallImageKey = "search";
     }
     else if(pathname == "/completed-webtoons/"){
       data.details = "Browsing:";
