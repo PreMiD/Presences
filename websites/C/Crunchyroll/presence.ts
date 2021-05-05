@@ -36,7 +36,16 @@ if (lastPlaybackState != playback) {
 
 var iFrameVideo: any, currentTime: any, duration: any, paused: any;
 
-presence.on("iFrameData", (data: any) => {
+interface iFrameData {
+  iframe_video: {
+    iFrameVideo: boolean,
+    currTime: number,
+    dur: number,
+    paused: boolean
+  }
+}
+
+presence.on("iFrameData", (data: iFrameData) => {
   playback = data.iframe_video !== null ? true : false;
 
   if (playback) {
@@ -56,7 +65,6 @@ presence.on("UpdateData", async () => {
     let reading = false;
 
     if(document.location.pathname.includes("/read")) {
-      browsingStamp = Math.floor(Date.now() / 1000);
       const title = document.querySelector(".chapter-header a").innerHTML,
       currChapter = document.querySelector(".chapter-header").innerHTML.split("</a>")[1].split("\n")[0];
       let currPage = document.querySelector(".first-page-number").innerHTML;
