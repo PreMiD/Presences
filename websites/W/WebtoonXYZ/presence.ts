@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
       data.details = title;
       data.state = "📖 " + chapter + " 🔸 " + progress + "%";
       data.largeImageKey = title.includes("Solo Leveling") ? "solo" : (logo) == 0 ? "logo" : "logo-v2";
-      data.smallImageKey = (v2icons) ? "read-v2" : "read";
+      data.smallImageKey = "read";
       if (buttons) data.buttons = [{label: "Read Webtoon", url: window.location.href}];
     }
     else if(pathname.startsWith("/read")){
