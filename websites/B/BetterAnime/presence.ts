@@ -168,7 +168,8 @@ presence.on("UpdateData", async () => {
       disabled: privacy || !movie,
       async setPresenceData() {
         presenceData.details = (await strings).viewMovie;
-        presenceData.state = document.querySelector("div.infos_left > div > h2").textContent;
+        presenceData.state = document.querySelector("div.infos_left > div > h2").textContent
+                             .replace(document.querySelector("div.anime-title > h3").textContent, "");
 
         presenceData.buttons = [
           {
