@@ -56,7 +56,7 @@ presence.on("UpdateData", async () => {
       const title = document.querySelector(".post-title").textContent;
       data.details = "Viewing:";
       data.state = title;
-      data.smallImageKey = (v2icons) ? "view-v2" : "view";
+      data.smallImageKey = "view";
       data.largeImageKey = title.includes("Solo Leveling") ? "solo" : (logo) == 0 ? "logo" : "logo-v2";
       if (buttons) data.buttons = [{label: "View Webtoon", url: window.location.href}];
     }
