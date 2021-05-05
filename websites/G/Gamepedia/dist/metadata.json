@@ -22,5 +22,5 @@
     "nl": "Gamepedia is het grootste wikiplatform voor videospellen op het web, met duizenden wikiprojecten die door de gemeenschap worden aangestuurd.Gamepedia is eigendom van en wordt beheerd door FANDOM en biedt onderdak aan alles van wiki's voor indie-titels tot enkele van de bekendste gamewiki's, zoals de officiële Minecraft Wiki, Leaguepedia en de officiële ARK Wiki."
   },
   "category": "other",
-  "regExp": "[a-z0-9-]+[.]((gamepedia)|(fandom))[.]com[/]"
+  "regExp": "(([a-z0-9-]+[.])fandom[.]com[/])|(((www)|(fandomauth))[.]gamepedia[.]com[/])"
 }
