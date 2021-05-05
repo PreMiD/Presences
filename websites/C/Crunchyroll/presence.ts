@@ -25,9 +25,9 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var lastPlaybackState = null;
-var playback: boolean;
-var browsingStamp = Math.floor(Date.now() / 1000);
+let lastPlaybackState = null,
+playback: boolean,
+browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
@@ -53,15 +53,15 @@ presence.on("UpdateData", async () => {
   };
 
   if (!playback && document.location.pathname.includes("/manga")) {
-    let reading: boolean = false;
+    let reading = false;
 
     if(document.location.pathname.includes("/read")) {
       browsingStamp = Math.floor(Date.now() / 1000);
-      let title = document.querySelector(".chapter-header a").innerHTML;
-      let currChapter = document.querySelector(".chapter-header").innerHTML.split("</a>")[1].split("\n")[0];
+      const title = document.querySelector(".chapter-header a").innerHTML,
+      currChapter = document.querySelector(".chapter-header").innerHTML.split("</a>")[1].split("\n")[0];
       let currPage = document.querySelector(".first-page-number").innerHTML;
       currPage = currPage == "" ? "1" : currPage;
-      let lastPage = document.querySelector(".images").children.length;
+      const lastPage = document.querySelector(".images").children.length;
 
       presenceData.details = title;
       presenceData.state = `${(await strings).reading} ${currChapter}`;
@@ -75,7 +75,7 @@ presence.on("UpdateData", async () => {
 
       reading = true;
     } else if(document.location.pathname.includes("/volumes"))  {
-      let title = document.querySelector(".ellipsis").innerHTML.split("&gt;")[1];
+      const title = document.querySelector(".ellipsis").innerHTML.split("&gt;")[1];
 
       presenceData.details = (await strings).viewManga;
       presenceData.state = title;
