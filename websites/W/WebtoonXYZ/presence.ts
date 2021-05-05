@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
     else if(pathname == "/completed-webtoons/"){
       data.details = "Browsing:";
       data.state = "Completed webtoons";
-      data.smallImageKey = (v2icons) ? "search-v2" : "search";
+      data.smallImageKey = "search";
     }
     else if(pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0){
       const title = document.querySelector("#chapter-heading").textContent.split("-")[0],
