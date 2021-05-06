@@ -104,7 +104,7 @@ presence.on("UpdateData", async () => {
     epName = document.querySelector("h4#showmedia_about_name"),
     episode = episod[1].innerHTML + " - " + epName.innerHTML;
 
-    let timestamps = presence.getTimestamps(
+    const timestamps = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     );
