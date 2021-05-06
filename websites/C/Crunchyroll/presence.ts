@@ -51,10 +51,9 @@ presence.on("UpdateData", async () => {
 
     if(document.location.pathname.includes("/read")) {
       const title = document.querySelector(".chapter-header a").innerHTML,
-      currChapter = document.querySelector(".chapter-header").innerHTML.split("</a>")[1].split("\n")[0];
-      let currPage = document.querySelector(".first-page-number").innerHTML;
-      currPage = currPage == "" ? "1" : currPage;
-      const lastPage = document.querySelector(".images").children.length;
+      currChapter = document.querySelector(".chapter-header").innerHTML.split("</a>")[1].split("\n")[0],
+      lastPage = document.querySelector(".images").children.length,
+      currPage = document.querySelector(".first-page-number").innerHTML === "" ? "1" : document.querySelector(".first-page-number").innerHTML;
 
       presenceData.details = title;
       presenceData.state = `${(await strings).reading} ${currChapter}`;
