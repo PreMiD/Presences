@@ -99,12 +99,12 @@ presence.on("UpdateData", async () => {
   }
 
   if (iFrameVideo !== false && !isNaN(duration)) {
-    let videoTitle = document.querySelector(".ellipsis .text-link span"),
+    const videoTitle = document.querySelector(".ellipsis .text-link span"),
     episod = document.querySelectorAll("#showmedia_about_media h4"),
     epName = document.querySelector("h4#showmedia_about_name"),
     episode = episod[1].innerHTML + " - " + epName.innerHTML;
 
-    var timestamps = presence.getTimestamps(
+    let timestamps = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     );
