@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
+  },
+  "service": "WebUntis",
+  "description": {
+    "en": "WebUntis is an application for publishing the timetable in the browser. It is aimed at teachers, pupils and their parents."
+  },
+  "url": "nessa.webuntis.com",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/tPKlUqh.png",
+  "thumbnail": "https://i.imgur.com/v4GVd28.png",
+  "color": "#F18923",
+  "category": "other",
+  "tags": [
+    "school"
+  ],
+  "settings": [
+    {
+      "id": "timeElapsed",
+      "title": "Show elapsed time",
+      "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showSName",
+      "title": "Show school name",
+      "icon": "fas fa-school",
+      "value": false
+    }
+  ]
+}
