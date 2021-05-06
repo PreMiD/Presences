@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "608065709741965327"
   }),
   strings = presence.getStrings({
