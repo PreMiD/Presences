@@ -61,9 +61,8 @@ if (pathname.includes('/home')) {
       ? presenceData.state = `Buscando: ${Input.value} [Pagina ${BlogPage.textContent}]`
       : presenceData.state = `Buscando: ${Input.value}`;
     }
-  } else if (BlogPage) {
-    presenceData.state = `Página ${BlogPage.textContent}`;
-  }
+  } else if (BlogPage) presenceData.state = `Página ${BlogPage.textContent}`;
+
 } else if (pathname.startsWith('/blog/')) {
   presenceData.details = 'Viendo el Blog';
 
@@ -111,9 +110,8 @@ if (pathname.includes('/home')) {
         ? (presenceData.state = `Buscando: ${Input.value} [Pagina ${ForumPage.textContent}]`)
         : (presenceData.state = `Buscando: ${Input.value}`);
     }
-  } else if (ForumPage) {
-    presenceData.state = `Página ${ForumPage.textContent}`;
-  }
+  } else if (ForumPage) presenceData.state = `Página ${ForumPage.textContent}`;
+ 
 } else if (pathname.startsWith('/precios/')) {
   presenceData.state = `Viendo los planes de compra`;
 
