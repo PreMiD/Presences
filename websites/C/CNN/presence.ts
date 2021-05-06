@@ -29,7 +29,7 @@ presence.on("UpdateData", async function () {
     if(setting.showButtons && !setting.privacy) {
       presenceData.buttons = [
         {
-          label: `View Category`,
+          label: "View Category",
           url: window.location.href
         }
       ];
@@ -43,7 +43,7 @@ presence.on("UpdateData", async function () {
     if(setting.showButtons && !setting.privacy) {
       presenceData.buttons = [
         {
-          label: `View Article`,
+          label: "View Article",
           url: window.location.href
         }
       ];
@@ -57,7 +57,7 @@ presence.on("UpdateData", async function () {
     if(setting.showButtons && !setting.privacy) {
       presenceData.buttons = [
         {
-          label: `View Profile`,
+          label: "View Profile",
           url: window.location.href
         }
       ];
@@ -79,7 +79,7 @@ presence.on("UpdateData", async function () {
       if(setting.showButtons && !setting.privacy) {
         presenceData.buttons = [
           {
-            label: `View Special`,
+            label: "View Special",
             url: window.location.href
           }
         ];
@@ -101,7 +101,7 @@ presence.on("UpdateData", async function () {
       if(setting.showButtons && !setting.privacy) {
         presenceData.buttons = [
           {
-            label: `View Results`,
+            label: "View Results",
             url: window.location.href
           }
         ];
