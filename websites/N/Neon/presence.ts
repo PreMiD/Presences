@@ -19,8 +19,8 @@ presence.on("UpdateData", async () => {
 
   if(pathname.includes("/series/")){
     presenceData.details = "Viewing series:";
-      const seriesName = document.getElementsByClassName("z5");
-          presenceData.state = seriesName[0].innerHTML;
+    presenceData.state = document.querySelector('[data-lbx-e2e="show-title"]')?.textContent;
+    
          presenceData.buttons = [
            {
              label: "View Series",
@@ -29,8 +29,7 @@ presence.on("UpdateData", async () => {
          ];
    }else if(pathname.includes("/movie/")){
       presenceData.details = "Viewing movie:";   
-       const movieName = document.getElementsByClassName("e2");
-       presenceData.state = movieName[0].innerHTML;
+      presenceData.state = document.querySelector('[data-lbx-e2e="movie-title"]')?.textContent;
          presenceData.buttons = [
            {
              label: "View Movie",
