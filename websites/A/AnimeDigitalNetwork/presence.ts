@@ -27,7 +27,6 @@ presence.on("UpdateData", async () => {
           smallImageText: video.paused
             ? (await strings).pause
             : (await strings).play,
-          startTimestamp: timestamps[0],
           endTimestamp: timestamps[1]
         };
 
@@ -47,7 +46,7 @@ presence.on("UpdateData", async () => {
         )
         .textContent,
       data = {
-        details: "Browsing...",
+        details: "Looking at...",
         state: title,
         largeImageKey: "logo"
       };
