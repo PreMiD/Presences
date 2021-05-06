@@ -102,9 +102,8 @@ presence.on("UpdateData", async () => {
     const videoTitle = document.querySelector(".ellipsis .text-link span"),
     episod = document.querySelectorAll("#showmedia_about_media h4"),
     epName = document.querySelector("h4#showmedia_about_name"),
-    episode = episod[1].innerHTML + " - " + epName.innerHTML;
-
-    const timestamps = presence.getTimestamps(
+    episode = episod[1].innerHTML + " - " + epName.innerHTML,
+    timestamps = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     );
