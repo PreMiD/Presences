@@ -90,10 +90,13 @@ presence.on("UpdateData", async function () {
     presenceData.details = "Election " + urlpath[2];
 
     if(urlpath[4] === 'president') {
-      presenceData.state = document.querySelectorAll("div.bop-main-scorestyles__BOPName-sc-17mbuqb-3")[1]?.textContent + ": " +
-                          document.querySelectorAll("div.bop-main-scorestyles__BOPCount-sc-17mbuqb-2")[1]?.textContent + " - " +
-                          document.querySelectorAll("div.bop-main-scorestyles__BOPName-sc-17mbuqb-3")[2]?.textContent + ": " +
-                          document.querySelectorAll("div.bop-main-scorestyles__BOPCount-sc-17mbuqb-2")[2]?.textContent;
+      const scoreStyle = document.querySelectorAll("div.bop-main-scorestyles__BOPCount-sc-17mbuqb-2"),
+            scoreStyle2 = document.querySelectorAll("div.bop-main-scorestyles__BOPName-sc-17mbuqb-3");
+
+      presenceData.state = scoreStyle2[1]?.textContent + ": " +
+                           scoreStyle[1]?.textContent + " - " +
+                            scoreStyle2[2]?.textContent + ": " +
+                            scoreStyle[2]?.textContent;
     } else if(urlpath[4] === 'state') {
       const details = document.querySelector("h1.pagestyles__DesktopH1-sc-7kqwl2-74")?.textContent;
       presenceData.state = details;
