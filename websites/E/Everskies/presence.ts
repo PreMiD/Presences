@@ -179,7 +179,7 @@ presence.on("UpdateData", async () => {
 
   for (const [k, v] of Object.entries(data.presence)) {
     if (document.location.pathname.match(k) && !v.disabled) {
-      v.setPresenceData()
+      v.setPresenceData();
     }
   }
 
