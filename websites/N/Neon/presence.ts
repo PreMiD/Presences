@@ -1,23 +1,23 @@
 const presence = new Presence({
-  clientId: "837985880408457217"
-}),
+    clientId: "837985880408457217"
+  }),
   timestamp = Math.floor(Date.now() / 1000);
 
 function findElement(tagName: string, className: string): Element {
-  return Array.from(
-    document.querySelectorAll(tagName)
-  ).find((x) => x.className.includes(className));
+  return Array.from(document.querySelectorAll(tagName)).find((x) =>
+    x.className.includes(className)
+  );
 }
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "key",
-    details: "Browsing...",
-    startTimestamp: timestamp
-  },
-  pathname = document.location.pathname;
+      largeImageKey: "key",
+      details: "Browsing...",
+      startTimestamp: timestamp
+    },
+    pathname = document.location.pathname;
 
-  if(pathname.includes("/series/")){
+  if (pathname.includes("/series/")) {
     presenceData.details = "Viewing series:";
     presenceData.state = document.querySelector('[data-lbx-e2e="show-title"]')?.textContent;
     
@@ -99,7 +99,7 @@ presence.on("UpdateData", async () => {
 
   if (!(await presence.getSetting("buttons")) && presenceData.buttons)
     delete presenceData.buttons;
-  if (!(await presence.getSetting("timestamp"))){
+  if (!(await presence.getSetting("timestamp"))) {
     delete presenceData.startTimestamp;
     delete presenceData.endTimestamp;
   }
