@@ -158,60 +158,6 @@ presence.on("UpdateData", async () => {
         "lae",
         "la"
       ],
-      products = [
-        "ipad",
-        "ipad-air",
-        "ipad-pro",
-        "ipad-10.2",
-        "ipad-mini",
-        "apple-pencil",
-        "ipad-keyboards",
-        "airpods",
-        "iphone",
-        "iphone-12-pro",
-        "iphone-12",
-        "iphone-se",
-        "airtag",
-        "mac",
-        "macbook-air",
-        "macbook-pro-13",
-        "macbook-pro-16",
-        "imac-24",
-        "imac-27",
-        "mac-pro",
-        "mac-mini",
-        "pro-display-xdr",
-        "watch",
-        "apple-watch-series-6",
-        "apple-watch-se",
-        "apple-watch-series-3",
-        "apple-watch-nike",
-        "apple-watch-hermes",
-        "airpods",
-        "airpods-pro",
-        "airpods-max",
-        "airpods-2nd-generation",
-        "homepod",
-        "homepod-mini",
-        "ipod-touch"
-      ],
-      services = [
-        "apple-fitness-plus",
-        "tv",
-        "apple-tv-plus",
-        "airplay",
-        "apple-tv-app",
-        "apple-tv-4k",
-        "apple-arcade",
-        "icloud",
-        "apple-news",
-        "apple-one",
-        "apple-card",
-        "apple-books",
-        "app-store",
-        "music",
-        "apple-music"
-      ],
       urlpNum = langs.indexOf(urlpath[1]) > -1 ? 2 : 1,
       presenceData: PresenceData = {
         largeImageKey: logoArr[setting.logo] || "logo"
@@ -225,7 +171,7 @@ presence.on("UpdateData", async () => {
 
     if(!urlpath[urlpNum])
       presenceData.details = 'Home';
-    else if(products.indexOf(urlpath[urlpNum]) > -1) {
+    else if(urlpath[urlpNum] === 'ipad' || urlpath[urlpNum] === 'ipad-air' || urlpath[urlpNum] === 'ipad-pro' || urlpath[urlpNum] === 'ipad-10.2' || urlpath[urlpNum] === 'ipad-mini' || urlpath[urlpNum] === 'apple-pencil' || urlpath[urlpNum] === 'ipad-keyboards' || urlpath[urlpNum] === 'airpods' || urlpath[urlpNum] === 'iphone' || urlpath[urlpNum] === 'iphone-12-pro' || urlpath[urlpNum] === 'iphone-12' || urlpath[urlpNum] === 'iphone-se' || urlpath[urlpNum] === 'airtag' || urlpath[urlpNum] === 'mac' || urlpath[urlpNum] === 'macbook-air' || urlpath[urlpNum] === 'macbook-pro-13' || urlpath[urlpNum] === 'macbook-pro-16' || urlpath[urlpNum] === 'imac-24' || urlpath[urlpNum] === 'imac-27' || urlpath[urlpNum] === 'mac-pro' || urlpath[urlpNum] === 'mac-mini' || urlpath[urlpNum] === 'pro-display-xdr' || urlpath[urlpNum] === 'watch' || urlpath[urlpNum] === 'apple-watch-series-6' || urlpath[urlpNum] === 'apple-watch-se' || urlpath[urlpNum] === 'apple-watch-series-3' || urlpath[urlpNum] === 'apple-watch-nike' || urlpath[urlpNum] === 'apple-watch-hermes' || urlpath[urlpNum] === 'airpods' || urlpath[urlpNum] === 'airpods-pro' || urlpath[urlpNum] === 'airpods-max' || urlpath[urlpNum] === 'airpods-2nd-generation' || urlpath[urlpNum] === 'homepod' || urlpath[urlpNum] === 'homepod-mini' || urlpath[urlpNum] === 'ipod-touch') {
       if(urlpath[urlpNum + 1] === 'compare') {
         presenceData.details = 'Comparing:';
         presenceData.state = document.title.split('-')[0].replace(/ *\([^)]*\) */g, "");
@@ -244,7 +190,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-    } else if(services.indexOf(urlpath[urlpNum]) > -1) {
+    } else if(urlpath[urlpNum] === 'apple-fitness-plus' || urlpath[urlpNum] === 'tv' || urlpath[urlpNum] === 'apple-tv-plus' || urlpath[urlpNum] === 'airplay' || urlpath[urlpNum] === 'apple-tv-app' || urlpath[urlpNum] === 'apple-tv-4k' || urlpath[urlpNum] === 'apple-arcade' || urlpath[urlpNum] === 'icloud' || urlpath[urlpNum] === 'apple-news' || urlpath[urlpNum] === 'apple-one' || urlpath[urlpNum] === 'apple-card' || urlpath[urlpNum] === 'apple-books' || urlpath[urlpNum] === 'app-store' || urlpath[urlpNum] === 'music' || urlpath[urlpNum] === 'apple-music' || urlpath[urlpNum] === 'swift') {
       const service = getPSName();
       presenceData.details = 'Viewing Service:';
       presenceData.state = service;
