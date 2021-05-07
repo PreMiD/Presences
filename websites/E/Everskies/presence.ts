@@ -85,11 +85,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Browsing users...";
 
         if (document.location.search.startsWith("?")){
-          if (searchParams.get("friends"))
-            presenceData.details = "Viewing their friends";
-          else if (searchParams.get("q")){
-            presenceData.details = "Searching for user:";
-            presenceData.state = searchParams.get("q");
+          presenceData.details = searchParams.get("friends") ? "Viewing their friends" : "Searching for user:"
+          if(searchParams.get("q") presenceData.state = searchParams.get("q");
           }
         }
       }
