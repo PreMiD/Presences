@@ -87,7 +87,6 @@ presence.on("UpdateData", async () => {
         if (document.location.search.startsWith("?")){
            presenceData.details = searchParams.get("friends") ? "Viewing their friends" : "Searching for user:";
            if(searchParams.get("q")) presenceData.state = searchParams.get("q");
-          }
         }
       }
     },
