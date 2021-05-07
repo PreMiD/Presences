@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
     if(urlpath.length === (2 || 3))
       presenceData.details = 'Home';
     else if(includesProduct) {
-    if(urlpath.includes("compare") && includesProduct) {
+    if(urlpath.includes("compare")) {
         presenceData.details = 'Comparing:';
         presenceData.state = document.title.split('-')[0].replace(/ *\([^)]*\) */g, "");
       } else {
