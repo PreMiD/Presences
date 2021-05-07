@@ -94,7 +94,7 @@ presence.on("UpdateData", async () => {
       if(setting.buttons) {
         presenceData.buttons = [
           {
-            label: `View Product`,
+            label: "View Product",
             url: window.location.href
           }
         ];
@@ -107,7 +107,7 @@ presence.on("UpdateData", async () => {
       if(setting.buttons) {
         presenceData.buttons = [
           {
-            label: `View Service`,
+            label: "View Service",
             url: window.location.href
           }
         ];
@@ -123,7 +123,7 @@ presence.on("UpdateData", async () => {
         if(setting.buttons) {
           presenceData.buttons = [
             {
-              label: `View Article`,
+              label: "View Article",
               url: window.location.href
             }
           ];
@@ -138,7 +138,7 @@ presence.on("UpdateData", async () => {
         if(setting.buttons) {
           presenceData.buttons = [
             {
-              label: `View Article`,
+              label: "View Article",
               url: window.location.href
             }
           ];
@@ -175,7 +175,7 @@ presence.on("UpdateData", async () => {
       if(setting.buttons) {
         presenceData.buttons = [
           {
-            label: `View Product`,
+            label: "View Product",
             url: `https://www.apple.com/shop/${urlpath[num]}/${urlpath[num + 1]}`
           }
         ];
@@ -189,7 +189,7 @@ presence.on("UpdateData", async () => {
       if(setting.buttons) {
         presenceData.buttons = [
           {
-            label: `View Product`,
+            label: "View Product",
             url: window.location.href
           }
         ];
@@ -290,7 +290,7 @@ presence.on("UpdateData", async () => {
       if(setting.buttons) {
         presenceData.buttons = [
           {
-            label: `View App`,
+            label: "View App",
             url: window.location.href
           }
         ];
@@ -307,7 +307,7 @@ presence.on("UpdateData", async () => {
       if(setting.buttons) {
         presenceData.buttons = [
           {
-            label: `View Developer`,
+            label: "View Developer",
             url: window.location.href
           }
         ];
