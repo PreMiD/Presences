@@ -54,7 +54,6 @@ presence.on("UpdateData", async () => {
         "ae",
         "ae-ar",
         "au",
-        "hk/en",
         "hk",
         "id",
         "jp",
