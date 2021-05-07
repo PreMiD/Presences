@@ -2,7 +2,7 @@ const presence = new Presence({
   clientId: "840126038205923369"
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
-let search: HTMLInputElement, title: Element, title2: Element;
+let title: Element, title2: Element;
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
@@ -10,62 +10,63 @@ const presenceData: PresenceData = {
   },
   page = window.location.pathname,
   pageh = document.location.href;
-
 presenceData.startTimestamp = browsingStamp;
+
+function waitForElement(){
+  if(title2 != undefined){
+    if (title2.className.includes("paused")) {
+      delete presenceData.endTimestamp;
+      presenceData.smallImageKey = "pause";
+    } else if (title2.className.includes("playing")) {
+      const currentTime = presence.timestampFromFormat(
+        document.querySelector(
+          `#vjs_video_${title2.className.slice(40, 55).replace(/[^0-9.]/g, "")} > div.vjs-control-bar.progress-in-menu > div.vjs-current-time.vjs-time-control.vjs-control > span.vjs-current-time-display`
+        ).textContent
+      ),
+      
+      durationss = presence.timestampFromFormat(
+        document.querySelector(
+          `#vjs_video_${title2.className.slice(40, 55).replace(/[^0-9.]/g, "")} > div.vjs-control-bar.progress-in-menu > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display`
+        ).textContent
+      ),
+      timestamps = presence.getTimestamps(currentTime, durationss);
+      presenceData.endTimestamp = timestamps[1];
+      presenceData.smallImageKey = "play";
+    }
+  }
+  else{
+      setTimeout(waitForElement, 3000);
+  }
+}
+
 if (page == "/") {
   presenceData.details = "Bekijkt:";
   presenceData.state = "De Home Pagina";
 } else if (pageh.includes("plaatjes")) {
-  var element = document.querySelector('meta[property~="og:title"]');
+  let element = document.querySelector('meta[property~="og:title"]');
   if (!element) {
     presenceData.details = "Bekijkt:";
     presenceData.state = "Plaatjes";
   } else {
-  var content = element && element.getAttribute("content");
+let content = element && element.getAttribute("content");
  presenceData.details = content;
   }
 } else if (pageh.includes("filmpjes")) {
-  var element = document.querySelector('meta[property~="og:title"]');
+  let element = document.querySelector('meta[property~="og:title"]');
   if (!element) {
     presenceData.details = "Bekijkt:";
     presenceData.state = "Filmpjes";
   } else {
-  var content = element && element.getAttribute("content");
+  let content = element && element.getAttribute("content");
  presenceData.details = content;
   }
 } else if (pageh.includes("selectedId=") || pageh.includes("/item/")) {
   delete presenceData.startTimestamp;
   title2 = document.querySelector("[id*='vjs_video_']");
-  waitForElement()
-  function waitForElement(){
-      if(title2 != undefined){
-        if (title2.className.includes("paused")) {
-          delete presenceData.endTimestamp;
-          presenceData.smallImageKey = "pause";
-        } else if (title2.className.includes("playing")) {
-          const currentTime = presence.timestampFromFormat(
-            document.querySelector(
-              `#vjs_video_${title2.className.slice(40, 55).replace(/[^0-9.]/g, "")} > div.vjs-control-bar.progress-in-menu > div.vjs-current-time.vjs-time-control.vjs-control > span.vjs-current-time-display`
-            ).textContent
-          ),
-          
-          durationss = presence.timestampFromFormat(
-            document.querySelector(
-              `#vjs_video_${title2.className.slice(40, 55).replace(/[^0-9.]/g, "")} > div.vjs-control-bar.progress-in-menu > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display`
-            ).textContent
-          ),
-          timestamps = presence.getTimestamps(currentTime, durationss);
-          presenceData.endTimestamp = timestamps[1];
-          presenceData.smallImageKey = "play";
-        }
-      }
-      else{
-          setTimeout(waitForElement, 3000);
-      }
-  }
+  waitForElement();
   
-  var element = document.querySelector('meta[property~="og:title"]');
-  var content = element && element.getAttribute("content");
+  let element = document.querySelector('meta[property~="og:title"]'),
+  content = element && element.getAttribute("content");
  presenceData.details = content;
 } else if (page.includes("toppers")) {
   presenceData.details = "Bekijkt:";
