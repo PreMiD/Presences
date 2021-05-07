@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "BasicallyWiz",
+    "id": "324588568951390220"
+  },
+  "service": "Anime Notifier",
+  "altnames": [ "Notify moe", "notify me" ],
+  "description": {
+    "en": "Started as a site to give you notifications whenever your favourite anime goes live, Anime Notifier is now also useable as an anime list, with an extention so you don't have to leave your anime to keep your list up-to-date."
+  },
+  "url": "notify.moe",
+  "version": "0.0.1",
+  "logo": "https://media.notify.moe/images/brand/64.png",
+  "thumbnail": "https://media.notify.moe/images/elements/framed-screenshot-transparent.png",
+  "color": "#e3b7a7",
+  "tags": [ "notify", "anime", "notifymoe", "notifier" ],
+  "category": "anime",
+  "iframe": false,
+  "readLogs": false,
+  "settings": [
+    {
+      "id": "button-to-list",
+      "title": "Show 'View My List' button",
+      "value": false
+    },
+    {
+      "id": "set-user-name",
+      "if": {"button-to-list": true},
+      "title": "Notify user name",
+      "value": "+BasicallyWiz",
+      "placeholder": "+UserNameCaseSensitive"
+    },
+
+    {
+      "id": "other-button",
+      "title": "show-secondary-button",
+      "value": false
+    },
+    {
+      "id": "secondary-button",
+      "if": {"other-button": true},
+      "title": "Secondary Button Content",
+      "value": 0,
+      "values": ["My list", "Playing song", "Favourite anime"]
+    }
+  ]
+}
