@@ -12,152 +12,62 @@ presence.on("UpdateData", async () => {
         shopCheckout: await presence.getSetting("shopCheckout")
       },
       logoArr = ["logo", "logo-rainbow"],
-      langs = [
-        "bh",
-        "bh-ar",
-        "bw",
-        "cm",
-        "cf",
-        "ci",
-        "ch",
-        "ch-de",
-        "ch-fr",
-        "eg",
-        "eg-ar",
-        "gw",
-        "gn",
-        "gq",
-        "in",
-        "il",
-        "jo",
-        "jo-ar",
-        "ke",
-        "kw",
-        "kw-ar",
-        "mg",
-        "ml",
-        "ma",
-        "mu",
-        "mz",
-        "ne",
-        "ng",
-        "om",
-        "om-ar",
-        "qa",
-        "qa-ar",
-        "sa",
-        "sa-ar",
-        "sn",
-        "za",
-        "tn",
-        "ug",
-        "ae",
-        "ae-ar",
-        "au",
-        "hk",
-        "id",
-        "jp",
-        "kr",
-        "mo",
-        "my",
-        "nz",
-        "ph",
-        "sg",
-        "tw",
-        "th",
-        "vn",
-        "am",
-        "az",
-        "by",
-        "benl",
-        "befr",
-        "bg",
-        "cz",
-        "dk",
-        "de",
-        "ee",
-        "es",
-        "fr",
-        "ge",
-        "gr",
-        "hr",
-        "ie",
-        "it",
-        "kz",
-        "kg",
-        "lv",
-        "li",
-        "lt",
-        "lu",
-        "hu",
-        "mt",
-        "md",
-        "me",
-        "nl",
-        "mk",
-        "no",
-        "at",
-        "pl",
-        "pt",
-        "ro",
-        "ru",
-        "sk",
-        "si",
-        "chde",
-        "chfr",
-        "fi",
-        "se",
-        "tj",
-        "tr",
-        "tm",
-        "uk",
-        "ua",
-        "uz",
-        "us",
-        "lae",
-        "lae",
-        "la",
-        "lae",
-        "lae",
-        "lae",
-        "la",
-        "br",
-        "lae",
-        "lae",
-        "cl",
-        "co",
-        "la",
-        "lae",
-        "la",
-        "la",
-        "la",
-        "lae",
-        "la",
-        "lae",
-        "la",
-        "lae",
-        "mx",
-        "lae",
-        "la",
-        "la",
-        "la",
-        "la",
-        "lae",
-        "lae",
-        "lae",
-        "lae",
-        "lae",
-        "lae",
-        "lae",
-        "la",
-        "la",
-        "la",
-        "lae",
-        "ca",
-        "lae",
-        "la"
+      products = [
+        "ipad",
+        "ipad-air",
+        "ipad-pro",
+        "ipad-10.2",
+        "ipad-mini",
+        "apple-pencil",
+        "ipad-keyboards",
+        "airpods",
+        "iphone",
+        "iphone-12-pro",
+        "iphone-12",
+        "iphone-se",
+        "airtag",
+        "mac",
+        "macbook-air",
+        "macbook-pro-13",
+        "macbook-pro-16",
+        "imac-24",
+        "imac-27",
+        "mac-pro",
+        "mac-mini",
+        "pro-display-xdr",
+        "watch",
+        "apple-watch-series-6",
+        "apple-watch-se",
+        "apple-watch-series-3",
+        "apple-watch-nike",
+        "apple-watch-hermes",
+        "airpods",
+        "airpods-pro",
+        "airpods-max",
+        "airpods-2nd-generation",
+        "homepod",
+        "homepod-mini",
+        "ipod-touch"
       ],
-      urlpNum = langs.indexOf(urlpath[1]) > -1 ? 2 : 1,
+      services = [
+        "apple-fitness-plus",
+        "tv",
+        "apple-tv-plus",
+        "airplay",
+        "apple-tv-app",
+        "apple-tv-4k",
+        "apple-arcade",
+        "icloud",
+        "apple-news",
+        "apple-one",
+        "apple-card",
+        "apple-books",
+        "app-store",
+        "music",
+        "apple-music"
+      ],
+      includesProduct = products.find(e => urlpath.includes(e)),
+      includesService = services.find(e => urlpath.includes(e)),
       presenceData: PresenceData = {
         largeImageKey: logoArr[setting.logo] || "logo"
       };
@@ -166,12 +76,12 @@ presence.on("UpdateData", async () => {
     return document.querySelector("div.ac-ln-title>a")?.textContent || document.title.replace(" - Apple - Apple", "").replace(" - Apple", "").replace(/ *\([^)]*\) */g, "");
   }
 
-  if(urlpath[urlpNum] !== 'shop' && window.location.hostname === "www.apple.com") {
+  if(urlpath[1] !== 'shop' && urlpath[2] !== 'shop' && window.location.hostname === "www.apple.com") {
 
-    if(!urlpath[urlpNum])
+    if(!urlpath.length === (2 || 3))
       presenceData.details = 'Home';
-    else if(urlpath[urlpNum] === 'ipad' || urlpath[urlpNum] === 'ipad-air' || urlpath[urlpNum] === 'ipad-pro' || urlpath[urlpNum] === 'ipad-10.2' || urlpath[urlpNum] === 'ipad-mini' || urlpath[urlpNum] === 'apple-pencil' || urlpath[urlpNum] === 'ipad-keyboards' || urlpath[urlpNum] === 'airpods' || urlpath[urlpNum] === 'iphone' || urlpath[urlpNum] === 'iphone-12-pro' || urlpath[urlpNum] === 'iphone-12' || urlpath[urlpNum] === 'iphone-se' || urlpath[urlpNum] === 'airtag' || urlpath[urlpNum] === 'mac' || urlpath[urlpNum] === 'macbook-air' || urlpath[urlpNum] === 'macbook-pro-13' || urlpath[urlpNum] === 'macbook-pro-16' || urlpath[urlpNum] === 'imac-24' || urlpath[urlpNum] === 'imac-27' || urlpath[urlpNum] === 'mac-pro' || urlpath[urlpNum] === 'mac-mini' || urlpath[urlpNum] === 'pro-display-xdr' || urlpath[urlpNum] === 'watch' || urlpath[urlpNum] === 'apple-watch-series-6' || urlpath[urlpNum] === 'apple-watch-se' || urlpath[urlpNum] === 'apple-watch-series-3' || urlpath[urlpNum] === 'apple-watch-nike' || urlpath[urlpNum] === 'apple-watch-hermes' || urlpath[urlpNum] === 'airpods' || urlpath[urlpNum] === 'airpods-pro' || urlpath[urlpNum] === 'airpods-max' || urlpath[urlpNum] === 'airpods-2nd-generation' || urlpath[urlpNum] === 'homepod' || urlpath[urlpNum] === 'homepod-mini' || urlpath[urlpNum] === 'ipod-touch') {
-      if(urlpath[urlpNum + 1] === 'compare') {
+    else if(includesProduct) {
+    if(urlpath.includes("compare") && includesProduct) {
         presenceData.details = 'Comparing:';
         presenceData.state = document.title.split('-')[0].replace(/ *\([^)]*\) */g, "");
       } else {
@@ -185,11 +95,11 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: `View Product`,
-            url: `https://www.apple.com/${urlpath[urlpNum]}`
+            url: window.location.href
           }
         ];
       }
-    } else if(urlpath[urlpNum] === 'apple-fitness-plus' || urlpath[urlpNum] === 'tv' || urlpath[urlpNum] === 'apple-tv-plus' || urlpath[urlpNum] === 'airplay' || urlpath[urlpNum] === 'apple-tv-app' || urlpath[urlpNum] === 'apple-tv-4k' || urlpath[urlpNum] === 'apple-arcade' || urlpath[urlpNum] === 'icloud' || urlpath[urlpNum] === 'apple-news' || urlpath[urlpNum] === 'apple-one' || urlpath[urlpNum] === 'apple-card' || urlpath[urlpNum] === 'apple-books' || urlpath[urlpNum] === 'app-store' || urlpath[urlpNum] === 'music' || urlpath[urlpNum] === 'apple-music' || urlpath[urlpNum] === 'swift') {
+    } else if(includesService) {
       const service = getPSName();
       presenceData.details = 'Viewing Service:';
       presenceData.state = service;
@@ -198,14 +108,14 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: `View Service`,
-            url: `https://www.apple.com/${urlpath[urlpNum]}`
+            url: window.location.href
           }
         ];
       }
-    } else if(urlpath[urlpNum] === 'newsroom') {
+    } else if(urlpath.includes('newsroom')) {
       presenceData.details = 'Newsroom';
 
-      if(urlpath[urlpNum + 1] === 'topics')
+      if(urlpath.includes('topics'))
         presenceData.state = document.querySelector("h1.section-head")?.getAttribute("aria-label");
       else {
         presenceData.state = document.querySelector(".hero-headline")?.textContent;
@@ -219,10 +129,10 @@ presence.on("UpdateData", async () => {
           ];
         }
       }
-    } else if(urlpath[urlpNum] === 'today') {
+    } else if(urlpath.includes('today')) {
       presenceData.details = 'Today at Apple';
 
-      if(urlpath[urlpNum + 1] === 'feature') {
+      if(urlpath.includes('feature')) {
         presenceData.state = document.querySelector("h1.editorial-page__header-headline")?.textContent;
 
         if(setting.buttons) {
@@ -234,22 +144,22 @@ presence.on("UpdateData", async () => {
           ];
         }
       }
-    } else if(urlpath[urlpNum] === 'retail') {
-      if(urlpath[urlpNum + 1] === 'instore-shopping-session')
+    } else if(urlpath.includes('retail')) {
+      if(urlpath.includes('instore-shopping-session'))
         presenceData.details = 'Purchasing advice';
       else
         presenceData.details = 'Store finder';
-    } else if(urlpath[urlpNum] === 'store-opening-letter')
+    } else if(urlpath.includes('store-opening-letter'))
       presenceData.details = 'COVID‑19 store information';
-    else if(urlpath[urlpNum] === 'trade-in')
+    else if(urlpath.includes('trade-in'))
       presenceData.details = 'Apple Trade In';
-    else if(urlpath[urlpNum] === 'choose-country-region')
+    else if(urlpath.includes('choose-country-region'))
       presenceData.details = 'Choosing language...';
     else
       presenceData.details = 'Other';
 
-  } else if(urlpath[urlpNum] === 'shop' && window.location.hostname === "www.apple.com") {
-    const num = urlpNum + 1;
+  } else if((urlpath[1] === 'shop' || urlpath[2] === 'shop') && window.location.hostname === "www.apple.com") {
+    const num = (urlpath[1] === 'shop') ? 2 : 3;
 
     presenceData.largeImageKey = "apple-store";
 
@@ -353,10 +263,10 @@ presence.on("UpdateData", async () => {
 
     presenceData.largeImageKey = "apple-support";
 
-    if(!urlpath[urlpNum]) {
+    if(urlpath.length === (2 || 3)) {
       presenceData.details = "Apple Support";
       presenceData.state = "Home";
-    } else if(sProducts.indexOf(urlpath[urlpNum]) > -1) {
+    } else if(sProducts.find(e => urlpath.includes(e))) {
       presenceData.details = "Apple Support";
       presenceData.state = document.querySelector("h1.pageTitle-heading")?.textContent || document.querySelector("h1#main-title")?.textContent;
     } else if(document.querySelector("div.mod-date")) {
@@ -368,7 +278,7 @@ presence.on("UpdateData", async () => {
   } else if(window.location.hostname === "apps.apple.com") {
     presenceData.largeImageKey = "app-store";
 
-    if(urlpath[urlpNum] === 'app') {
+    if(urlpath.includes('app')) {
       if(document.querySelector("p.we-connecting__instructions")) {
         presenceData.details = 'App Store';
         presenceData.state = "Connecting...";
@@ -381,11 +291,11 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: `View App`,
-            url: `https://apps.apple.com/app/${urlpath[urlpNum + 1]}/${urlpath[urlpNum + 2]}`
+            url: window.location.href
           }
         ];
       }
-    } else if(urlpath[urlpNum] === 'developer') {
+    } else if(urlpath.includes('developer')) {
       if(document.querySelector("p.we-connecting__instructions")) {
         presenceData.details = 'App Store';
         presenceData.state = "Connecting...";
@@ -398,7 +308,7 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: `View Developer`,
-            url: `https://apps.apple.com/developer/${urlpath[urlpNum + 1]}/${urlpath[urlpNum + 2]}`
+            url: window.location.href
           }
         ];
       }
