@@ -74,7 +74,7 @@ if (page == "/") {
   title = document.querySelector("#app > div > div:nth-child(6) > div > div.grid > main > div > div > div > h1");
   if (!title) {
     presenceData.details = "Zoekt Voor:";
-    presenceData.state = page.replace("/zoek/", "");
+    presenceData.state = page.replace("/zoek/", "").replace("-", " ").replace(/%20/g, " ");
   } else {
     presenceData.details = "Zoekt Voor:";
     presenceData.state = title.textContent.replace("Geen resultaten voor", "");
