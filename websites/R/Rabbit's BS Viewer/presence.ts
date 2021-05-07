@@ -6,6 +6,7 @@
 presence.on("UpdateData", async () => {
   const elapsed = await presence.getSetting("elapsed"),
     timeleft = await presence.getSetting("timeleft"),
+    privacy = await presence.getSetting("privacy"),
     buttons = await presence.getSetting("buttons"),
     presenceData: PresenceData = {
       largeImageKey: "logo",
@@ -55,6 +56,8 @@ presence.on("UpdateData", async () => {
   else if (document.location.pathname.includes("/mapping-tools/")) {
     presenceData.details = "Mapping Tool";
     presenceData.state = document.querySelector(".selected-tab").textContent;
+    if ((document.querySelector("input#file-input.file-input") as HTMLInputElement).value !== "" && !privacy)
+      presenceData.state = document.querySelector(".selected-tab").textContent + " (" + (document.querySelector("input#file-input.file-input") as HTMLInputElement).value.replace("C:\\fakepath\\", "") + ")";
   }
   else if (document.location.pathname.includes("/"))
     presenceData.details = "Viewing Homepage";

@@ -21,6 +21,12 @@
   "category": "games",
   "settings": [
     {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
       "id": "elapsed",
       "title": "Show Elapsed Time",
       "icon": "fad fa-stopwatch",
