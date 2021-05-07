@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
 
   if(urlpath[1] !== 'shop' && urlpath[2] !== 'shop' && window.location.hostname === "www.apple.com") {
 
-    if(!urlpath.length === (2 || 3))
+    if(urlpath.length === (2 || 3))
       presenceData.details = 'Home';
     else if(includesProduct) {
     if(urlpath.includes("compare") && includesProduct) {
