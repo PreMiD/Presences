@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Dumpert",
+  "author": {
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
+  },
+  "category": "socials",
+  "logo": "https://i.imgur.com/XkqdDI8.png",
+  "thumbnail": "https://i.imgur.com/qxQsVF6.jpg",
+  "version": "1.0.0",
+  "color": "#66c221",
+  "tags": [
+    "dumpert",
+    "nederlands",
+    "nl",
+    "dutch"
+  ],
+  "url": ["dumpert.nl", "www.dumpert.nl"],
+  "description": {
+    "nl": "Dumpert is een Nederlandse social media platform waar je fotos/videos kan posten",
+    "en": "Dumpert is a Dutch social media platform where you can post photos/videos"
+  }
+}
