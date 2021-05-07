@@ -7,36 +7,6 @@ presence.on("UpdateData", async () => {
         largeImageKey: "logo",
     };
 
-    const exts = [
-        "css",
-        "scss",
-        "md", 
-        "js", 
-        "py", 
-        "ts", 
-        "Lua", 
-        "cpp", 
-        "c", 
-        "bat", 
-        "h", 
-        "pl", 
-        "java", 
-        "sh", 
-        "swift", 
-        "vb", 
-        "cs", 
-        "haml", 
-        "yml", 
-        "markdown", 
-        "hs", 
-        "pl", 
-        "ex", 
-        "yaml", 
-        "jsx", 
-        "tsx", 
-        "txt"
-    ];
-
     const stamps = Math.floor(Date.now() / 1000)
 
     if (document.location.hostname == "cordx.wtf") {
@@ -93,8 +63,6 @@ presence.on("UpdateData", async () => {
             presenceData.smallImageKey = "ts"
             presenceData.details = "Viewing a TS File"
             presenceData.smallImageText = "TypeScript"
-        } else if (document.location.pathname.includes("")) {
-
         }
     }
 
