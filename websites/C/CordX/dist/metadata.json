@@ -1,0 +1,26 @@
+{
+    "author": {
+        "name": "Toxic Dev",
+        "id": "241278257335500811"
+    },
+    "service": "CordX",
+    "description": {
+        "en": "A powerful ShareX file and image hosting service."
+    },
+    "url": "cordx.wtf",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/Ar06j5e.png",
+    "thumbnail": "https://i.imgur.com/WO2raRu.png",
+    "color": "#9C8CE8",
+    "tags": [
+        "cordx",
+        "sharex",
+        "image",
+        "and",
+        "file",
+        "sharing",
+        "and",
+        "hosting"
+    ],
+    "category": "other"
+}
