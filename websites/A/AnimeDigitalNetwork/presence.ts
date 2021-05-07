@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
         )
         .textContent,
       data = {
-        details: "Looking at...",
+        details: "Looking at",
         state: title,
         largeImageKey: "logo"
       };
