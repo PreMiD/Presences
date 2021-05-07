@@ -85,6 +85,7 @@ presence.on("iFrameData", (data: { blog: string }) => {
 });
 
 presence.on("UpdateData", async () => {
+
   if (!data.isChecked) {
     data.service = getServiceName();
     data.isChecked = true;
@@ -93,7 +94,10 @@ presence.on("UpdateData", async () => {
   const ghtEnv: {
       sPageName: string;
       sChannelName: string;
-    } = await presence.getPageletiable("ghtEnv"),
+    } = {
+      sPageName: document.querySelector("div.ch_inf.open") ? "channel" : "",
+      sChannelName: document.querySelector("strong.rmc_name")?.textContent
+    },
     presenceData: PresenceData = {
       largeImageKey: data.service?.toLowerCase(),
       details: "Browsing...",
@@ -101,36 +105,33 @@ presence.on("UpdateData", async () => {
     },
     getImageOrTimestamp = (
       video: HTMLVideoElement,
-      type: "starts" | "ends" | "imageKey" | "imageText"
+      type: "startTimestamp" | "endTimestamp" | "smallImageKey" | "smallImageText"
     ) => {
       const timestamps = presence.getTimestamps(
           video?.currentTime,
           video?.duration
         ),
         tempData: {
-          start: number;
-          end: number;
-          key: string;
-          text: string;
+          startTimestamp: number;
+          endTimestamp: number;
+          smallImageKey: string;
+          smallImageText: string;
         } = {
-          start: timestamps[0],
-          end: timestamps[1],
-          key: `${data.service.toLowerCase()}_play`,
-          text: "Playing"
+          startTimestamp: timestamps[0],
+          endTimestamp: timestamps[1],
+          smallImageKey: `${data.service.toLowerCase()}_play`,
+          smallImageText: "Playing"
         };
 
       if (video?.paused) {
-        delete tempData.start;
-        delete tempData.end;
+        delete tempData.startTimestamp;
+        delete tempData.endTimestamp;
 
-        tempData.key = `${data.service.toLowerCase()}_pause`;
-        tempData.text = "Paused";
+        tempData.smallImageKey = `${data.service.toLowerCase()}_pause`;
+        tempData.smallImageText = "Paused";
       }
 
-      if (type === "starts") return tempData.start;
-      else if (type === "ends") return tempData.end;
-      else if (type === "imageKey") return tempData.key;
-      else if (type === "imageText") return tempData.text;
+      return tempData[type];
     };
 
   data.settings = [
@@ -153,26 +154,26 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = <number>(
             getImageOrTimestamp(
               document.querySelector('[data-role="videoEl"]'),
-              "starts"
+              "startTimestamp"
             )
           );
           presenceData.endTimestamp = <number>(
             getImageOrTimestamp(
               document.querySelector('[data-role="videoEl"]'),
-              "ends"
+              "endTimestamp"
             )
           );
 
           presenceData.smallImageKey = <string>(
             getImageOrTimestamp(
               document.querySelector('[data-role="videoEl"]'),
-              "imageKey"
+              "smallImageKey"
             )
           );
           presenceData.smallImageText = <string>(
             getImageOrTimestamp(
               document.querySelector('[data-role="videoEl"]'),
-              "imageText"
+              "smallImageText"
             )
           );
         } else {
@@ -184,17 +185,17 @@ presence.on("UpdateData", async () => {
             ?.textContent.trim();
 
           presenceData.startTimestamp = <number>(
-            getImageOrTimestamp(document.querySelector("video"), "starts")
+            getImageOrTimestamp(document.querySelector("video"), "startTimestamp")
           );
           presenceData.endTimestamp = <number>(
-            getImageOrTimestamp(document.querySelector("video"), "ends")
+            getImageOrTimestamp(document.querySelector("video"), "endTimestamp")
           );
 
           presenceData.smallImageKey = <string>(
-            getImageOrTimestamp(document.querySelector("video"), "imageKey")
+            getImageOrTimestamp(document.querySelector("video"), "smallImageKey")
           );
           presenceData.smallImageText = <string>(
-            getImageOrTimestamp(document.querySelector("video"), "imageText")
+            getImageOrTimestamp(document.querySelector("video"), "smallImageText")
           );
 
           presenceData.buttons = [
@@ -213,13 +214,13 @@ presence.on("UpdateData", async () => {
     },
     channel: {
       env: true,
-      service: "NAVER",
+      service: "NAVER_TV",
       data: {
         details: {
           setTo: "Viewing channel:"
         },
         state: {
-          setTo: ghtEnv?.sChannelName
+          setTo: ghtEnv.sChannelName
         },
         buttons: {
           setTo: [
@@ -420,17 +421,17 @@ presence.on("UpdateData", async () => {
           presenceData.state = "• HIGHLIGHT";
 
           presenceData.startTimestamp = <number>(
-            getImageOrTimestamp(video, "starts")
+            getImageOrTimestamp(video, "startTimestamp")
           );
           presenceData.endTimestamp = <number>(
-            getImageOrTimestamp(video, "ends")
+            getImageOrTimestamp(video, "endTimestamp")
           );
 
           presenceData.smallImageKey = <string>(
-            getImageOrTimestamp(video, "imageKey")
+            getImageOrTimestamp(video, "smallImageKey")
           );
           presenceData.smallImageText = <string>(
-            getImageOrTimestamp(video, "imageText")
+            getImageOrTimestamp(video, "smallImageText")
           );
 
           presenceData.buttons = [
@@ -535,7 +536,7 @@ presence.on("UpdateData", async () => {
       (document.location.pathname.match(k) &&
         (data.service === v.service || v.service === "ANY") &&
         !v.env) ||
-      (v.env && k === ghtEnv?.sPageName)
+      (v.env && k === ghtEnv.sPageName)
     ) {
       if (v.setPresenceData) {
         v.setPresenceData();
