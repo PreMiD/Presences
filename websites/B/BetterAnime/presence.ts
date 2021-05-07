@@ -16,7 +16,7 @@ getStrings = async () => {
       viewMovie: "general.viewMovie",
       buttonViewMovie: "general.buttonViewMovie",
       watchMovie: "general.watchingMovie",
-      watchSeries: "general.watchingSeries",
+      watchSeries: "general.watchingSeries"
     },
     await presence.getSetting("lang").catch(() => "en")
   );
@@ -142,7 +142,8 @@ presence.on("UpdateData", async () => {
         const video = document.querySelector("video"),
           timestamps = presence.getTimestampsfromMedia(video);
 
-        data.meta["title"] = document.querySelector("div.anime-title").textContent;
+        data.meta["title"] = document.querySelector("div.anime-title").textContent
+                             .replace(document.querySelector("div.anime-title > h3").textContent, "");
 
         presenceData.smallImageKey = video.paused ? "pause" : "play";
         presenceData.smallImageText = video.paused
