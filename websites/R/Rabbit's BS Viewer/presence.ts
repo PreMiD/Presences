@@ -13,7 +13,7 @@ presence.on("UpdateData", async () => {
     };
 
   if (document.location.pathname.includes("/bs-viewer/")) {
-    if (document.querySelector("#songname").textContent == "") {
+    if (document.querySelector("#songname").textContent === "") {
       presenceData.details = "Selecting Beatmap";
     }
     else {
@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
           url: document.location.href
         }
       ];
-      if (document.location.href == "https://skystudioapps.com/bs-viewer/")
+      if (document.location.href === "https://skystudioapps.com/bs-viewer/")
         delete presenceData.buttons;
     }
     switch (document.querySelector("#play-button").getAttribute("class")) {
