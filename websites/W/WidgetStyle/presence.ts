@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/privacy")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing 🎭 privacy policy page";
-    } else if (document.location.pathname.includes("/privacy")) {
+    } else if (document.location.pathname.includes("/terms")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing 📖 tos page";
     } else if (document.location.pathname.includes("/user/")) {
