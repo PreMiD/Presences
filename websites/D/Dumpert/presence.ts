@@ -52,12 +52,12 @@ const content = element && element.getAttribute("content");
  presenceData.details = content;
   }
 } else if (pageh.includes("filmpjes")) {
-  let element = document.querySelector('meta[property~="og:title"]');
+  const element = document.querySelector('meta[property~="og:title"]');
   if (!element) {
     presenceData.details = "Bekijkt:";
     presenceData.state = "Filmpjes";
   } else {
-  let content = element && element.getAttribute("content");
+  const content = element && element.getAttribute("content");
  presenceData.details = content;
   }
 } else if (pageh.includes("selectedId=") || pageh.includes("/item/")) {
