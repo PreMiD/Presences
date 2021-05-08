@@ -9,9 +9,9 @@
     "fr": "Scantrad est un site internet français gratuit qui vous permet de lire les derniers scans du moment."
   },
   "url": "scantrad.net",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "logo": "https://i.imgur.com/SJmPvgX.png",
-  "thumbnail": "https://i.imgur.com/tpoyjHJ.png",
+  "thumbnail": "https://i.imgur.com/BMhCrx7.png",
   "color": "#cf4104",
   "tags": [
     "scantrad",
