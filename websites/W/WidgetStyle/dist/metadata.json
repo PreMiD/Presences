@@ -13,9 +13,10 @@
     "tags": [
       "discord",
       "widgetstyle",
-      "widget"
+      "widget",
+      "widget.style"
     ],
-    "url": "widgetstyle.xyz",
+    "url": "widget.style",
     "description": {
       "fr": "Un look moderne sur les widgets Discord obsolètes.",
       "tr": "Güncelliğini yitirmiş Discord widget'larına modern bir görünüm.",

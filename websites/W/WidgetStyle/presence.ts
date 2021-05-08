@@ -7,7 +7,7 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-  if (document.location.hostname == "widgetstyle.xyz") {
+  if (document.location.hostname == "widget.style") {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing 🏠 home page";
@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
       ];
     } else if (document.location.pathname.includes("/widgets")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing ⚙ widgets page";
+      presenceData.details = "Viewing ⚙️ widgets page";
       presenceData.buttons = [
         {
           label: "🌐 View Page",
