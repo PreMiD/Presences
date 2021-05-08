@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.premid.app/metadata/1.3",
   "author": {
     "name": "EGGSY",
     "id": "162969778699501569"
@@ -19,14 +20,28 @@
     "ga_IE": "Seol agus faigh teachtaireachtaí WhatsApp go tapa ó do ríomhaire."
   },
   "url": "web.whatsapp.com",
-  "version": "1.2.11",
-  "logo": "https://premid.is-inside.me/hYF0mBZI.png",
-  "thumbnail": "https://premid.is-inside.me/0JktExu1.jpg",
+  "version": "2.0.0",
+  "logo": "https://i.imgur.com/iI0LOkF.png",
+  "thumbnail": "https://i.imgur.com/Gk23OEd.jpg",
   "color": "#0dc143",
   "tags": [
     "whatsapp",
     "social",
     "media"
+  ],
+  "settings": [
+    {
+      "id": "showRecipient",
+      "title": "Show recipient name",
+      "icon": "fas fa-user-alt",
+      "value": true
+    },
+    {
+      "id": "showNumbers",
+      "title": "Show numbers",
+      "icon": "fas fa-shield-alt",
+      "value": false
+    }
   ],
   "category": "socials"
 }

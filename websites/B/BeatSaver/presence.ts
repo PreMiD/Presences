@@ -52,8 +52,7 @@ presence.on("UpdateData", async () => {
           document.querySelector("h2.is-size-4 > a").getAttribute("href")
       }
     ];
-  }
-  else if (document.location.pathname.includes("/uploader/")) {
+  } else if (document.location.pathname.includes("/uploader/")) {
     presenceData.details = "Browsing By Uploader";
     presenceData.state = document
       .querySelector("h1.is-size-2.has-text-weight-light.has-text-centered")
@@ -116,8 +115,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (!time)
-    delete presenceData.startTimestamp;
+  if (!time) delete presenceData.startTimestamp;
 
   if (!buttons && presenceData.buttons) delete presenceData.buttons;
 

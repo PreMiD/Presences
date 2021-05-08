@@ -406,16 +406,12 @@ const media: Record<string, string | MediaInfo> = {};
  */
 async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   const pending = "pending";
-  if (
-    media[itemId] &&
-    media[itemId] !== pending
-  ) {
+  if (media[itemId] && media[itemId] !== pending) {
     return media[itemId];
   }
 
   media[itemId] = pending;
-  const basePath =
-    location.pathname.replace(
+  const basePath = location.pathname.replace(
       location.pathname.split("/").slice(-2).join("/"),
       ""
     ),
@@ -427,7 +423,7 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
           `MediaBrowser Client="${ApiClient["_appName"]}",` +
           `Device="${ApiClient["_deviceName"]}",` +
           `DeviceId="${ApiClient["_deviceId"]}",` +
-          `Version="${ApiClient["_appVersion"]}",`+
+          `Version="${ApiClient["_appVersion"]}",` +
           `Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
       }
     }),
