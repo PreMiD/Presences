@@ -23,12 +23,10 @@ presence.on("UpdateData", () => {
     } else if (path.endsWith("junkemail")) presenceData.state = "Junkemail";
     else if (path.endsWith("drafts")) presenceData.state = "Drafts";
     else if (path.endsWith("sentitems")) presenceData.state = "Sent Items";
-    else if (path.endsWith("deleteditems"))
-      presenceData.state = "Deleted Items";
+    else if (path.endsWith("deleteditems")) presenceData.state = "Deleted Items";
     else if (path.endsWith("archive")) presenceData.state = "Archived Items";
     else if (path.endsWith("notes")) presenceData.state = "Notes";
-    else if (path.endsWith("conversationhistory"))
-      presenceData.state = "Conversation History";
+    else if (path.endsWith("conversationhistory")) presenceData.state = "Conversation History";
     else presenceData.state = "Personal Folder";
   } else if (path.includes("calendar")) presenceData.state = "Calendar";
   else if (path.includes("people")) presenceData.state = "People";
