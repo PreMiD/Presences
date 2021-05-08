@@ -1,6 +1,6 @@
 const presence = new Presence({
   clientId: "828789217793409054"
-}), browsingStamp = Math.floor(Date.now() / 1000); ;
+}), browsingStamp = Math.floor(Date.now() / 1000); 
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -20,7 +20,13 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/team")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing 😎 team page";
-    }  else if (document.location.pathname.includes("/user/")) {
+    } else if (document.location.pathname.includes("/privacy")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing 🎭 privacy policy page";
+    } else if (document.location.pathname.includes("/privacy")) {
+      presenceData.startTimestamp = browsingStamp;
+      presenceData.details = "Viewing 📖 tos page";
+    } else if (document.location.pathname.includes("/user/")) {
       presenceData.startTimestamp = browsingStamp;
       const user = document.getElementById("username");
       presenceData.details = `Viewing 👤 user: ${user.innerText}`;
