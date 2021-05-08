@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Outlook",
+  "author": {
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/BWRqt67.png",
+  "thumbnail": "https://i.imgur.com/RCWDZLd.jpg",
+  "version": "1.0.0",
+  "color": "#1681d7",
+  "tags": [
+    "outlook",
+    "email",
+    "mail",
+    "live",
+    "hotmail"
+  ],
+  "url": "outlook.live.com",
+  "description": {
+    "en": "Connect. Organize. Get things done",
+    "nl": "Verbinden. Organiseer. Krijg dingen gedaan."
+  }
+}
