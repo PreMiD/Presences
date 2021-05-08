@@ -19,7 +19,7 @@ presence.on("UpdateData", async () => {
       ];
     } else if (document.location.pathname.includes("/widgets")) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing ⚙ widgets page";
+      presenceData.details = "Viewing ⚙️ widgets page";
       presenceData.buttons = [
         {
           label: "🌐 View Page",
