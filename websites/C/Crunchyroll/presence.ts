@@ -12,23 +12,26 @@ const presence = new Presence({
   });
 
 let lastPlaybackState = null,
-playback: boolean,
-browsingStamp = Math.floor(Date.now() / 1000);
+  playback: boolean,
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 if (lastPlaybackState != playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
 
-let iFrameVideo: boolean, currentTime: number, duration: number, paused: boolean;
+let iFrameVideo: boolean,
+  currentTime: number,
+  duration: number,
+  paused: boolean;
 
 interface iFrameData {
   iframe_video: {
-    iFrameVideo: boolean,
-    currTime: number,
-    dur: number,
-    paused: boolean
-  }
+    iFrameVideo: boolean;
+    currTime: number;
+    dur: number;
+    paused: boolean;
+  };
 }
 
 presence.on("iFrameData", (data: iFrameData) => {
@@ -48,40 +51,48 @@ presence.on("UpdateData", async () => {
   };
 
   if (!playback && document.location.pathname.includes("/manga")) {
-
-    if(document.location.pathname.includes("/read")) {
+    if (document.location.pathname.includes("/read")) {
       const title = document.querySelector(".chapter-header a").innerHTML,
-      currChapter = document.querySelector(".chapter-header").innerHTML.split("</a>")[1].split("\n")[0],
-      lastPage = document.querySelector(".images").children.length,
-      currPage = document.querySelector(".first-page-number").innerHTML === "" ? "1" : document.querySelector(".first-page-number").innerHTML;
+        currChapter = document
+          .querySelector(".chapter-header")
+          .innerHTML.split("</a>")[1]
+          .split("\n")[0],
+        lastPage = document.querySelector(".images").children.length,
+        currPage =
+          document.querySelector(".first-page-number").innerHTML === ""
+            ? "1"
+            : document.querySelector(".first-page-number").innerHTML;
 
       presenceData.details = title;
       presenceData.state = `${(await strings).reading} ${currChapter}`;
       presenceData.startTimestamp = browsingStamp;
       presenceData.smallImageKey = "book_open";
       presenceData.smallImageText = `Page ${currPage}/${lastPage}`;
-      presenceData.buttons = [{
-        "label": "Read Chapter",
-        "url": document.location.toString()
-      }];
-
-    } else if(document.location.pathname.includes("/volumes"))  {
-      const title = document.querySelector(".ellipsis").innerHTML.split("&gt;")[1];
+      presenceData.buttons = [
+        {
+          label: "Read Chapter",
+          url: document.location.toString()
+        }
+      ];
+    } else if (document.location.pathname.includes("/volumes")) {
+      const title = document
+        .querySelector(".ellipsis")
+        .innerHTML.split("&gt;")[1];
 
       presenceData.details = (await strings).viewManga;
       presenceData.state = title;
-      presenceData.buttons = [{
-        "label": "View " + (await strings).manga,
-        "url": document.location.toString()
-      }];
+      presenceData.buttons = [
+        {
+          label: "View " + (await strings).manga,
+          url: document.location.toString()
+        }
+      ];
     } else {
-
       presenceData.details = (await strings).browse;
       presenceData.startTimestamp = browsingStamp;
 
       delete presenceData.state;
       delete presenceData.smallImageKey;
-
     }
 
     presence.setActivity(presenceData);
@@ -99,13 +110,13 @@ presence.on("UpdateData", async () => {
 
   if (iFrameVideo !== false && !isNaN(duration)) {
     const videoTitle = document.querySelector(".ellipsis .text-link span"),
-    episod = document.querySelectorAll("#showmedia_about_media h4"),
-    epName = document.querySelector("h4#showmedia_about_name"),
-    episode = episod[1].innerHTML + " - " + epName.innerHTML,
-    timestamps = presence.getTimestamps(
-      Math.floor(currentTime),
-      Math.floor(duration)
-    );
+      episod = document.querySelectorAll("#showmedia_about_media h4"),
+      epName = document.querySelector("h4#showmedia_about_name"),
+      episode = episod[1].innerHTML + " - " + epName.innerHTML,
+      timestamps = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      );
     presenceData.smallImageKey = paused ? "pause" : "play";
     presenceData.smallImageText = paused
       ? (await strings).pause
@@ -130,11 +141,12 @@ presence.on("UpdateData", async () => {
     }
 
     if (videoTitle !== null) {
-
-      presenceData.buttons = [{ 
-        "label": (await strings).watchEpisode,
-        "url": document.location.toString()
-      }];
+      presenceData.buttons = [
+        {
+          label: (await strings).watchEpisode,
+          url: document.location.toString()
+        }
+      ];
       presence.setActivity(presenceData, !paused);
     }
   }
