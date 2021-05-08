@@ -39,16 +39,16 @@ function waitForElement(){
   }
 }
 
-if (page == "/") {
+if (page === "/") {
   presenceData.details = "Bekijkt:";
   presenceData.state = "De Home Pagina";
 } else if (pageh.includes("plaatjes")) {
-  let element = document.querySelector('meta[property~="og:title"]');
+  const element = document.querySelector('meta[property~="og:title"]');
   if (!element) {
     presenceData.details = "Bekijkt:";
     presenceData.state = "Plaatjes";
   } else {
-let content = element && element.getAttribute("content");
+const content = element && element.getAttribute("content");
  presenceData.details = content;
   }
 } else if (pageh.includes("filmpjes")) {
@@ -65,7 +65,7 @@ let content = element && element.getAttribute("content");
   title2 = document.querySelector("[id*='vjs_video_']");
   waitForElement();
   
-  let element = document.querySelector('meta[property~="og:title"]'),
+  const element = document.querySelector('meta[property~="og:title"]'),
   content = element && element.getAttribute("content");
  presenceData.details = content;
 } else if (page.includes("toppers")) {
