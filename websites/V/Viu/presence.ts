@@ -20,7 +20,8 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let strings = getStrings(),
-  oldLang: string = null;
+  oldLang: string = null,
+  videoData: VideoData = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -31,11 +32,13 @@ presence.on("UpdateData", async () => {
     newLang = await presence.getSetting("lang"),
     buttonsOn = await presence.getSetting("buttons"),
     searchQueryOn = await presence.getSetting("searchQ"),
-    videoData: VideoData = await presence.getPageletiable("GA_DIMENSIONS"),
     PresenceLogo: number = await presence.getSetting("logo"),
     logos = ["viu_logo", "viu_logo_text"];
 
   presenceData.largeImageKey = logos[PresenceLogo];
+
+  if(!videoData)
+    videoData = await presence.getPageletiable("GA_DIMENSIONS");
 
   if (!oldLang) {
     oldLang = newLang;
@@ -76,15 +79,15 @@ presence.on("UpdateData", async () => {
       if (isMovie) {
         presenceData.state = "Movie";
       } else if (isHighlight) {
-        presenceData.state = `Highlight • E${episode}${
+        presenceData.state = `Highlight • EP.${episode}${
           part ? ` • ${part[0]} ` : ""
         }${hasEpName ? ` • ${episodeName}` : ""}`;
       } else if (isTrailer) {
-        presenceData.state = `Trailer • E${episode}${
+        presenceData.state = `Trailer • EP.${episode}${
           part ? ` • ${part[0]} ` : ""
         }${hasEpName ? ` • ${episodeName}` : ""}`;
       } else {
-        presenceData.state = `E${episode}${part ? ` • ${part[0]} ` : ""}${
+        presenceData.state = `EP.${episode}${part ? ` • ${part[0]} ` : ""}${
           hasEpName ? ` • ${episodeName}` : ""
         }`;
       }
