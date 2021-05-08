@@ -1,10 +1,6 @@
 const presence = new Presence({
   clientId: "828789217793409054"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
-
-let user: any;
+}), browsingStamp = Math.floor(Date.now() / 1000); ;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -26,7 +22,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing 😎 team page";
     }  else if (document.location.pathname.includes("/user/")) {
       presenceData.startTimestamp = browsingStamp;
-      user = document.getElementById("username");
+      const user = document.getElementById("username");
       presenceData.details = `Viewing 👤 user: ${user.innerText}`;
     }
   }
