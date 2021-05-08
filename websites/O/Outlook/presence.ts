@@ -10,6 +10,7 @@ presence.on("UpdateData", () => {
     },
     path = window.location.href;
   presenceData.details = "Viewing:";
+  presenceData.startTimestamp = elapsed;
   if (path.includes("mail")) {
     if (path.endsWith("inbox")) {
       title = document.querySelector(
