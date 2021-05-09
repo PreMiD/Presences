@@ -68,7 +68,16 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing User";
     presenceData.state = document.querySelector(
       "h5.title.is-5 > a"
-    ).textContent;
+    ).textContent
+      .slice(0, -9)
+      + "("
+      + document.querySelectorAll(
+        "div.column > ul > li"
+      ).item(1)
+      .textContent
+      .split(":")[1]
+      .slice(1)
+      + ")";
     presenceData.buttons = [
       {
         label: "View Page",
