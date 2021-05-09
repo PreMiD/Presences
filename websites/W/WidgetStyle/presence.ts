@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (document.location.pathname.includes("/widgets")) {
-      const search = document.getElementById("search")?.getAttribute("value")
+      const search = document.getElementById("search")?.getAttribute("value");
       presenceData.details = `Viewing ⚙️ widgets page`;
       presenceData.state = `🔍 Searching for: ${search || "Nothing"}`;
       presenceData.buttons = [
