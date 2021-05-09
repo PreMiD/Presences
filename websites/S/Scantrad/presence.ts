@@ -14,12 +14,12 @@ presence.on("UpdateData", async () => {
 
     if (document.body.contains(document.querySelector(".titre"))) {
         const titre = (<HTMLElement>document.querySelector(".titre")).innerText;
-        presenceData.details = "Visite la page du manga :"
+        presenceData.details = "Visite la page du manga :";
         presenceData.state = titre;
     }
     else if (path.includes("/forum")) {
         presenceData.details = "Visite une page :";
-        presenceData.state = "Page du Forum"
+        presenceData.state = "Page du Forum";
         if (path.includes("/forum/d")) {
             const groupName = document.querySelector(".TagLabel-text").textContent.trim(),
                   topicName = document.querySelector(".DiscussionHero-title").textContent;
@@ -33,16 +33,17 @@ presence.on("UpdateData", async () => {
         const chapter = (<HTMLElement>document.querySelector(".chapitre-main")).textContent,
             page = (<HTMLElement>document.querySelector(".pageLinkAct")).textContent,
             fullMangaName = mangaName.split('-').join(' ');
+        var fntC;
 
-        function titleCase (title: string) {
-            var arr = title.split(' ');
-            var result = arr.map(
-                function(value: any) {
+        fntC = function(title: string) {
+            let arr = title.split(' '),
+                result = arr.map(
+                function(value: string) {
                     return value.replace(value.charAt(0), value.charAt(0).toUpperCase());
                 });
-            return result.join(' ')
-        };
-        const manga = titleCase(fullMangaName);
+            return result.join(' ');
+        }
+        const manga = fntC(fullMangaName);
 
         presenceData.details = "Entrain de lire "  + manga + " :";
         presenceData.state = chapter + " | " + page;
