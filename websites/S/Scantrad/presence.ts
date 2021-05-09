@@ -32,18 +32,16 @@ presence.on("UpdateData", async () => {
     else if (path.includes("mangas/") + mangaName) {
         const chapter = (<HTMLElement>document.querySelector(".chapitre-main")).textContent,
             page = (<HTMLElement>document.querySelector(".pageLinkAct")).textContent,
-            fullMangaName = mangaName.split('-').join(' ');
-        let fntC;
-
-        fntC = function(title: string) {
-            const arr = title.split(' '),
-                result = arr.map(
-                function(value: string) {
-                    return value.replace(value.charAt(0), value.charAt(0).toUpperCase());
-                });
+            fullMangaName = mangaName.split('-').join(' '),
+            fntC =  function(title: string) {
+                const arr = title.split(' '),
+                      result = arr.map(
+                        function(value: string) {
+                            return value.replace(value.charAt(0), value.charAt(0).toUpperCase());
+                        });
             return result.join(' ');
-        };
-        const manga = fntC(fullMangaName);
+            },
+            manga = fntC(fullMangaName);
 
         presenceData.details = "Entrain de lire "  + manga + " :";
         presenceData.state = chapter + " | " + page;
