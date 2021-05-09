@@ -17,8 +17,8 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (document.location.pathname.includes("/widgets")) {
-      const search = document.getElementById("search")?.getAttribute("value");
-      const total = document.getElementById("widgettotal")?.getAttribute("total");
+      const search = document.getElementById("search")?.getAttribute("value"), 
+      total = document.getElementById("widgettotal")?.getAttribute("total");
       presenceData.details = `Viewing ⚙️ ${total} widgets`;
       presenceData.state = `🔍 Searching for: ${search || "Nothing"}`;
       presenceData.buttons = [
@@ -60,10 +60,10 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (document.location.pathname.includes("/user/")) {
-      const user = document.getElementById("username");
-      const usertotal = document.getElementById("usertotal")?.getAttribute("usertotal");
+      const user = document.getElementById("username"),
+      usertotal = document.getElementById("usertotal")?.getAttribute("usertotal");
       presenceData.details = `Viewing 👤 user: ${user.innerText}`;
-      presenceData.state = `They have ${usertotal || "0"} widget(s)`
+      presenceData.state = `They have ${usertotal || "0"} widget(s)`;
       presenceData.buttons = [
         {
           label: `🌐 View ${user.innerText}'s Page`,
