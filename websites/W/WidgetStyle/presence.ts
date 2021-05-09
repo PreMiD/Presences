@@ -17,7 +17,9 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (document.location.pathname.includes("/widgets")) {
-      presenceData.details = "Viewing ⚙️ widgets page";
+      const search = document.getElementById("search")?.getAttribute("value")
+      presenceData.details = `Viewing ⚙️ widgets page`;
+      presenceData.state = `🔍 Searching for: ${search || "Nothing"}`;
       presenceData.buttons = [
         {
           label: "🌐 View Page",
@@ -61,7 +63,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Viewing 👤 user: ${user.innerText}`;
       presenceData.buttons = [
         {
-          label: "🌐 View Page",
+          label: `🌐 View ${user.innerText}'s Page`,
           url: document.location.href
         }
       ];
