@@ -7,47 +7,42 @@ const presence = new Presence({
   });
 
 presence.on("UpdateData", async () => {
-  //* If user is on /view_video...
-  if (window.location.pathname == "/view_video.php") {
-    const video: HTMLVideoElement =
-        document.querySelector(".mgp_videoWrapper video") ?? null,
-      showTime = await presence.getSetting("time");
+  const presenceData: PresenceData = {
+      largeImageKey: "lg"
+    },
+    showTime = await presence.getSetting("time");
 
-    if (video && !isNaN(video.duration)) {
-      //* Get required tags
-      const title: HTMLElement = document.querySelector(
-          ".video-wrapper .title-container .title"
-        ),
-        uploader: HTMLElement = document.querySelector(
+  switch (window.location.pathname) {
+    case "/view_video.php":
+      const video: HTMLVideoElement =
+          document.querySelector(".mgp_videoWrapper video") ?? null,
+        title = document.querySelector(".video-wrapper .title-container .title")
+          .textContent,
+        uploader = document.querySelector(
           ".video-actions-container .video-info-row .usernameWrap a"
-        ),
-        timestamps = presence.getTimestampsfromMedia(video),
-        presenceData: PresenceData = {
-          details: title ? title.innerText : "Title not found...",
-          state: uploader ? uploader.textContent : "Uploader not found...",
-          largeImageKey: "lg",
-          smallImageKey: video.paused ? "pause" : "play",
-          smallImageText: video.paused
-            ? (await strings).pause
-            : (await strings).play,
-          endTimestamp: timestamps[1]
-        };
+        ).textContent;
 
-      presence.setTrayTitle(video.paused ? "" : title.innerText);
+      if (video && !isNaN(video.duration)) {
+        const timestamps = presence.getTimestampsfromMedia(video);
 
+        presenceData.details = title ?? "Title not found...";
+        presenceData.state = uploader ?? "Uploader not found...";
+
+        presenceData.smallImageKey = video.paused ? "pause" : "play";
+        (presenceData.smallImageText = video.paused
+          ? (await strings).pause
+          : (await strings).play),
+          (presenceData.endTimestamp = timestamps[1]);
+      }
       //* Remove timestamps if paused or not show timestamps
-      if (video.paused || !showTime) {
+      if (video?.paused || !showTime) {
         delete presenceData.endTimestamp;
       }
+      break;
+  }
 
-      //* If tags are not "null"
-      if (title && uploader) {
-        presence.setActivity(presenceData, !video.paused);
-      } else {
-        presence.setActivity();
-        presence.setTrayTitle();
-      }
-    }
+  if (presenceData.details != null) {
+    presence.setActivity(presenceData);
   } else {
     presence.setActivity();
     presence.setTrayTitle();
