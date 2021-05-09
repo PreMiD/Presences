@@ -20,7 +20,7 @@ presence.on("UpdateData", async () => {
         .getAttribute("value");
     } else if (document.location.href.includes("country=")) {
       presenceData.details =
-        "Browsing " + document.location.href.split("=")[1] + " Rankings";
+        "Browsing " + document.location.href.split("=")[1].toUpperCase() + " Rankings";
       if (!document.location.href.includes("?country="))
         presenceData.state = "Page "
           + document.location.href.split("/")[4].split("&")[0];
