@@ -20,7 +20,7 @@
     "description": {
       "fr": "Un look moderne sur les widgets Discord obsolètes.",
       "tr": "Güncelliğini yitirmiş Discord widget'larına modern bir görünüm.",
-      "ja": "古いDiscordウィジェットのモダンな外観。",
+      "ja_JP": "古いDiscordウィジェットのモダンな外観。",
       "zh_CN": "过时的Discord小部件的现代外观。",
       "en": "A modern look on outdated Discord Widgets."
     }
