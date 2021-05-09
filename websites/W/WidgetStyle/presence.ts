@@ -4,9 +4,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
   }; 
-presenceData.startTimestamp = browsingStamp;  
 
     if (document.location.pathname == "/") {
       presenceData.details = "Viewing 🏠 home page";
