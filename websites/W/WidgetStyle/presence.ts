@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing 🏠 home page";
       presenceData.buttons = [
         {
-          label: "🌐 View Page",
+          label: "View Page",
           url: document.location.href
         }
       ];
@@ -23,7 +23,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `🔍 Searching for: ${search || "Nothing"}`;
       presenceData.buttons = [
         {
-          label: "🌐 View Page",
+          label: "View Widgets",
           url: document.location.href
         }
       ];
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing 🤝 partners page";
       presenceData.buttons = [
         {
-          label: "🌐 View Page",
+          label: "View Page",
           url: document.location.href
         }
       ];
@@ -39,7 +39,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing 😎 team page";
       presenceData.buttons = [
         {
-          label: "🌐 View Page",
+          label: "View Page",
           url: document.location.href
         }
       ];
@@ -47,7 +47,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing 🎭 privacy policy page";
       presenceData.buttons = [
         {
-          label: "🌐 View Page",
+          label: "View Page",
           url: document.location.href
         }
       ];
@@ -55,7 +55,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing 📖 tos page";
       presenceData.buttons = [
         {
-          label: "🌐 View Page",
+          label: "View Page",
           url: document.location.href
         }
       ];
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `They have ${usertotal || "0"} widget(s)`;
       presenceData.buttons = [
         {
-          label: `🌐 View ${user.innerText}'s Page`,
+          label: `View ${user.innerText}'s Page`,
           url: document.location.href
         }
       ];
