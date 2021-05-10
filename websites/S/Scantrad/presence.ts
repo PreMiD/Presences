@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
         const chapter = (<HTMLElement>document.querySelector(".chapitre-main")).textContent,
             page = (<HTMLElement>document.querySelector(".pageLinkAct")).textContent,
             fullMangaName = mangaName.split('-').join(' '),
-            upperCaseWords =  function(title: string) {
+            upperCaseWords = (title: string) => {
                 const arr = title.split(' '),
                       result = arr.map(
                         function(value: string) {
