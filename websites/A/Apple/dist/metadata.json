@@ -5,8 +5,8 @@
   },
   "contributors": [
     {
-    "name": "Drull",
-    "id": "244953147154366464"
+      "name": "Drull",
+      "id": "244953147154366464"
     }
   ],
   "url": [
@@ -23,7 +23,7 @@
     "de": "Apple Inc. ist ein amerikanisches multinationales Unternehmen, das sich mit der Entwicklung und Vermarktung von Unterhaltungselektronik, Computersoftware und Personal Computern beschäftigt."
   },
   "service": "Apple",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/rBAusA5.png",
   "thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
   "color": "#606C80",

@@ -11,11 +11,9 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("video") && video) {
     if (video && !isNaN(video.duration)) {
-      const title = document
-          .querySelector(
-            "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-jWJfXU.sc-kbKFCX.ibhpg > div:nth-child(1) > div > div > h1 > a"
-          )
-          .textContent,
+      const title = document.querySelector(
+          "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-jWJfXU.sc-kbKFCX.ibhpg > div:nth-child(1) > div > div > h1 > a"
+        ).textContent,
         timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
@@ -40,11 +38,9 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const title = document
-        .querySelector(
-          "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-jWJfXU.sc-kbKFCX.ibhpg > div:nth-child(1) > div > div > h1 > a"
-        )
-        .textContent,
+    const title = document.querySelector(
+        "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-jWJfXU.sc-kbKFCX.ibhpg > div:nth-child(1) > div > div > h1 > a"
+      ).textContent,
       data = {
         details: "Looking at",
         state: title,
