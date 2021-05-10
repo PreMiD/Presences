@@ -1,45 +1,26 @@
-// official website
-const EMBY_URL = "emby.media";
+const
+  // official website
+  EMBY_URL = "emby.media",
+  // web client app name
+  APP_NAME = "Emby Web",
+  // all the presence art assets uploaded to discord
+  PRESENCE_ART_ASSETS = {
+    download: "downloading",
+    live: "live",
+    logo: "banner-icon",
+    pause: "pause",
+    play: "play",
+    read: "reading",
+    search: "search",
+    write: "writing"
+  },
+  // cache the requested media
+  media: Array<any> = [];
 
-// web client app name
-const APP_NAME = "Emby Web";
-
-// all the presence art assets uploaded to discord
-const PRESENCE_ART_ASSETS = {
-  download: "downloading",
-  live: "live",
-  logo: "banner-icon",
-  pause: "pause",
-  play: "play",
-  read: "reading",
-  search: "search",
-  write: "writing"
-};
-
-// generic log style for PMD_[info|error|success] calls
-const GENERIC_LOG_STYLE = "font-weight: 800; padding: 2px 5px; color: white;";
-
-/**
- * PMD_info - log into the user console info messages
- *
- * @param  {string} txt text to log into the console
- */
-function PMD_info(message): void {
-  console.log(
-    "%cPreMiD%cINFO%c " + message,
-    GENERIC_LOG_STYLE + "border-radius: 25px 0 0 25px; background: #596cae;",
-    GENERIC_LOG_STYLE + "border-radius: 0 25px 25px 0; background: #5050ff;",
-    "color: unset;"
-  );
-}
-
-let presence, ApiClient, ApiClientt;
+let presence: Presence, ApiClient: any, ApiClientt: any;
 const presenceData: PresenceData = {
   largeImageKey: PRESENCE_ART_ASSETS.logo
 };
-
-// cache the requested media
-const media = [];
 
 /**
  * handleOfficialWebsite - handle the presence while the user is in the official website
@@ -113,9 +94,9 @@ async function isEmbyWebClient(): Promise<boolean> {
 function handleAudioPlayback(): void {
   // sometimes the buttons are not created fast enough
   try {
-    const audioElem = document.getElementsByTagName("audio")[0];
-    const infoContainer = document.getElementsByClassName("nowPlayingBar")[0];
-    const buttons = infoContainer.querySelectorAll("button.itemAction");
+    const audioElem = document.getElementsByTagName("audio")[0],
+      infoContainer = document.getElementsByClassName("nowPlayingBar")[0],
+      buttons = infoContainer.querySelectorAll("button.itemAction");
 
     presenceData.details = `Listening to: ${
       buttons.length >= 1 ? buttons[0].textContent : "unknown title"
@@ -180,7 +161,7 @@ function getUserId(): string {
  * @param  {string} itemId id of the item to get metadata of
  * @return {object}        metadata of the item
  */
-async function obtainMediaInfo(itemId): Promise<any> {
+async function obtainMediaInfo(itemId: any): Promise<any> {
   if (media[itemId]) {
     if (media[itemId] !== "pending") {
       return media[itemId];
@@ -217,14 +198,13 @@ async function handleVideoPlayback(): Promise<void> {
   const videoPlayerElem = document.getElementsByTagName("video")[0];
 
   // this variables content will be replaced in details and status properties on presenceData
-  let title;
-  let subtitle;
+  let title,
+    subtitle;
 
   // title on the header
-  const headerTitleElem = videoPlayerPage.querySelector("h3.videoOsdTitle");
-
-  // title on the osdControls
-  const osdParentTitleElem = videoPlayerPage.querySelector(
+  const headerTitleElem = videoPlayerPage.querySelector("h3.videoOsdTitle"),
+    // title on the osdControls
+    osdParentTitleElem = videoPlayerPage.querySelector(
     "h2.videoOsdParentTitle"
   );
 
@@ -470,7 +450,7 @@ async function handleWebClient(): Promise<void> {
 
     default:
       if (path.substr(0, 3) !== "dlg") {
-        PMD_info(`path: ${path}`);
+        presence.info(`path: ${path}`);
       }
   }
 }
@@ -524,6 +504,7 @@ async function updateData(): Promise<void> {
       presence.setActivity();
     } else {
       presence.setActivity(presenceData);
+      presence.info(JSON.stringify(presenceData));
     }
   }
 }
@@ -534,12 +515,13 @@ async function updateData(): Promise<void> {
  * @return {void}
  */
 async function init(): Promise<void> {
-  let validPage = false;
+  let validPage = false,
+    isWebClient = false;
 
   // emby website
   if (location.host === EMBY_URL) {
     validPage = true;
-    PMD_info("Emby website detected");
+    presence.info("Emby website detected");
 
     // web client
   } else {
@@ -553,7 +535,7 @@ async function init(): Promise<void> {
           30 * 1000
         ) {
           validPage = true;
-          PMD_info("Emby web client detected");
+          isWebClient = true;
         }
       }
     } catch (e) {
@@ -565,6 +547,10 @@ async function init(): Promise<void> {
     presence = new Presence({
       clientId: "671807692297207828"
     });
+
+    if (isWebClient) {
+      presence.info("Emby web client detected");
+    }
 
     presence.on("UpdateData", updateData);
   }
