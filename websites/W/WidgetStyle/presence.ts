@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   }; 
 
-    if (document.location.pathname == "/") {
+    if (document.location.pathname === "/") {
       presenceData.details = "Viewing 🏠 home page";
       presenceData.buttons = [
         {
