@@ -12,7 +12,6 @@ const presenceData: PresenceData = {
   pageh = document.location.href;
 presenceData.startTimestamp = browsingStamp;
 
-
 if (page === "/") {
   presenceData.details = "Bekijkt:";
   presenceData.state = "De Home Pagina";
