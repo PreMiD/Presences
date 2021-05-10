@@ -37,8 +37,7 @@ presence.on("UpdateData", async () => {
 
   presenceData.largeImageKey = logos[PresenceLogo];
 
-  if(!videoData)
-    videoData = await presence.getPageletiable("GA_DIMENSIONS");
+  if (!videoData) videoData = await presence.getPageletiable("GA_DIMENSIONS");
 
   if (!oldLang) {
     oldLang = newLang;

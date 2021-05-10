@@ -85,7 +85,6 @@ presence.on("iFrameData", (data: { blog: string }) => {
 });
 
 presence.on("UpdateData", async () => {
-
   if (!data.isChecked) {
     data.service = getServiceName();
     data.isChecked = true;
@@ -105,7 +104,11 @@ presence.on("UpdateData", async () => {
     },
     getImageOrTimestamp = (
       video: HTMLVideoElement,
-      type: "startTimestamp" | "endTimestamp" | "smallImageKey" | "smallImageText"
+      type:
+        | "startTimestamp"
+        | "endTimestamp"
+        | "smallImageKey"
+        | "smallImageText"
     ) => {
       const timestamps = presence.getTimestamps(
           video?.currentTime,
@@ -185,17 +188,26 @@ presence.on("UpdateData", async () => {
             ?.textContent.trim();
 
           presenceData.startTimestamp = <number>(
-            getImageOrTimestamp(document.querySelector("video"), "startTimestamp")
+            getImageOrTimestamp(
+              document.querySelector("video"),
+              "startTimestamp"
+            )
           );
           presenceData.endTimestamp = <number>(
             getImageOrTimestamp(document.querySelector("video"), "endTimestamp")
           );
 
           presenceData.smallImageKey = <string>(
-            getImageOrTimestamp(document.querySelector("video"), "smallImageKey")
+            getImageOrTimestamp(
+              document.querySelector("video"),
+              "smallImageKey"
+            )
           );
           presenceData.smallImageText = <string>(
-            getImageOrTimestamp(document.querySelector("video"), "smallImageText")
+            getImageOrTimestamp(
+              document.querySelector("video"),
+              "smallImageText"
+            )
           );
 
           presenceData.buttons = [
