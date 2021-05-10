@@ -12,32 +12,6 @@ const presenceData: PresenceData = {
   pageh = document.location.href;
 presenceData.startTimestamp = browsingStamp;
 
-function waitForElement(){
-  if(title2 != undefined){
-    if (title2.className.includes("paused")) {
-      delete presenceData.endTimestamp;
-      presenceData.smallImageKey = "pause";
-    } else if (title2.className.includes("playing")) {
-      const currentTime = presence.timestampFromFormat(
-        document.querySelector(
-          `#vjs_video_${title2.className.slice(40, 55).replace(/[^0-9.]/g, "")} > div.vjs-control-bar.progress-in-menu > div.vjs-current-time.vjs-time-control.vjs-control > span.vjs-current-time-display`
-        ).textContent
-      ),
-      
-      durationss = presence.timestampFromFormat(
-        document.querySelector(
-          `#vjs_video_${title2.className.slice(40, 55).replace(/[^0-9.]/g, "")} > div.vjs-control-bar.progress-in-menu > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display`
-        ).textContent
-      ),
-      timestamps = presence.getTimestamps(currentTime, durationss);
-      presenceData.endTimestamp = timestamps[1];
-      presenceData.smallImageKey = "play";
-    }
-  }
-  else{
-      setTimeout(waitForElement, 3000);
-  }
-}
 
 if (page === "/") {
   presenceData.details = "Bekijkt:";
@@ -63,7 +37,25 @@ const content = element && element.getAttribute("content");
 } else if (pageh.includes("selectedId=") || pageh.includes("/item/")) {
   delete presenceData.startTimestamp;
   title2 = document.querySelector("[id*='vjs_video_']");
-  waitForElement();
+  if (title2.className.includes("paused")) {
+    delete presenceData.endTimestamp;
+    presenceData.smallImageKey = "pause";
+  } else if (title2.className.includes("playing")) {
+    const currentTime = presence.timestampFromFormat(
+      document.querySelector(
+        `#vjs_video_${title2.className.slice(40, 55).replace(/[^0-9.]/g, "")} > div.vjs-control-bar.progress-in-menu > div.vjs-current-time.vjs-time-control.vjs-control > span.vjs-current-time-display`
+      ).textContent
+    ),
+    
+    durationss = presence.timestampFromFormat(
+      document.querySelector(
+        `#vjs_video_${title2.className.slice(40, 55).replace(/[^0-9.]/g, "")} > div.vjs-control-bar.progress-in-menu > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display`
+      ).textContent
+    ),
+    timestamps = presence.getTimestamps(currentTime, durationss);
+    presenceData.endTimestamp = timestamps[1];
+    presenceData.smallImageKey = "play";
+  }
   
   const element = document.querySelector('meta[property~="og:title"]'),
   content = element && element.getAttribute("content");
