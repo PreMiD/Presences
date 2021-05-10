@@ -386,9 +386,7 @@ async function handleAudioPlayback(): Promise<void> {
           audioElem
         )[1];
 
-      } else {
-        delete presenceData.endTimestamp;
-      }
+      } else delete presenceData.endTimestamp;
 
       // paused
     } else {
@@ -446,9 +444,7 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   const pending = "pending";
 
   if (media[itemId]) {
-    if (media[itemId] !== pending) {
-      return media[itemId];
-    }
+    if (media[itemId] !== pending) return media[itemId];
 
     return;
   }
@@ -527,9 +523,8 @@ async function handleVideoPlayback(): Promise<void> {
   if (!mediaInfo) {
     title = "Watching unknown content";
     subtitle = "No metadata could be obtained";
-  } else if (typeof mediaInfo === "string") {
-    return;
-  } else {
+  } else if (typeof mediaInfo === "string") return;
+  else {
     switch (mediaInfo.Type) {
       case "Movie":
         title = "Watching a Movie";
@@ -563,9 +558,7 @@ async function handleVideoPlayback(): Promise<void> {
           videoPlayerElem
         )[1];
 
-      } else {
-        delete presenceData.endTimestamp;
-      }
+      } else delete presenceData.endTimestamp;
 
       // paused
     } else {
@@ -603,9 +596,8 @@ async function handleItemDetails(): Promise<void> {
   if (!data) {
     presenceData.details = "Browsing details of an item";
     presenceData.state = "Could not get item details";
-  } else if (typeof data === "string") {
-    return;
-  } else {
+  } else if (typeof data === "string") return;
+  else {
     presenceData.details = `Browsing details of: ${data.Name}`;
 
     switch (data.Type) {
@@ -775,9 +767,8 @@ async function setDefaultsToPresence(): Promise<void> {
     delete presenceData.endTimestamp;
   }
 
-  if (await presence.getSetting("showTimestamps")) {
-    presenceData.startTimestamp = Date.now();
-  }
+  if (await presence.getSetting("showTimestamps"))
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 }
 
 /**
@@ -857,9 +848,7 @@ async function init(): Promise<void> {
       clientId: "671807692297207828"
     });
 
-    if (isWebClient) {
-      presence.info("Emby web client detected");
-    }
+    if (isWebClient) presence.info("Emby web client detected");
 
     presence.on("UpdateData", updateData);
   }
