@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Tyler.C",
+    "id": "351991098387988491"
+  },
+  "service": "Harmony",
+  "description": {
+    "en": "Harmony Radio, we provide you with some of the biggest and greatest hits!"
+  },
+  "url": "weareharmony.net",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/x2n5e6W.jpg",
+  "thumbnail": "https://i.imgur.com/ItuN0xP.png",
+  "color": "#ff00fb",
+  "tags": [
+    "music",
+    "radio",
+    "gamers",
+    "community",
+    "harmony",
+    "weare",
+    "harmonyradio"
+  ],
+  "category": "music",
+  "regExp": "([a-z0-9-]+[.])*weareharmony[.]net[/]"
+}
