@@ -7,69 +7,68 @@ const presence = new Presence({
     live: "presence.activity.live"
   });
 
-let live, prevLive, author: string, title: string;
+let author: string, title: string, url: string, openUrlText: string;
 
 presence.on("UpdateData", async () => {
   const player = document.querySelector(
-    ".PlayerControls__PlayerContainer-vo7mt3-4"
+    "[class^='PlayerControls__PlayerContainer']"
   );
 
   if (player) {
-    const paused =
-        document.querySelector(".PlayButton__PlayerControl-rvh8d9-1") === null,
-      on_air = document.querySelector(
-        ".LiveStreamPage__LiveStreamPageHeader-hwzri8-1"
+    const normalIsPlaying: boolean =
+        document
+          .querySelector("div[class^='PlayButton__PlayerControl']")
+          ?.getAttribute("aria-label") === "Pause",
+      liveIsPlaying: boolean =
+        document
+          .querySelector(
+            "[class^=LiveVideo__VideoContainer] .shaka-play-button"
+          )
+          ?.getAttribute("icon") === "pause",
+      isPlaying = normalIsPlaying || liveIsPlaying;
+
+    if (normalIsPlaying) {
+      const normalDetails = document.querySelector(
+        "[class^='shared__ShowDetails'] > a:nth-child(1)"
       );
 
-    if (on_air) {
-      live = true;
-      if (prevLive !== live) {
-        prevLive = live;
-      }
-    } else {
-      live = false;
-    }
-
-    if (!live) {
+      title = normalDetails.textContent;
+      url = new URL(normalDetails.getAttribute("href"), window.location.origin)
+        .href;
+      openUrlText = "Listen to Show";
+      author = document.querySelector(
+        "[class^='PlayerControls__ShowOwnerName']"
+      ).textContent;
+    } else if (liveIsPlaying) {
+      url = window.location.href;
+      openUrlText = "View Livestream";
       title = document.querySelector(
-        ".shared__ShowDetails-gqlx6k-1 > a:nth-child(1)"
+        "[class^='LiveStreamDetails__StreamTitleContainer'] > h4"
       ).textContent;
       author = document.querySelector(
-        "p.Typography__BodyExtraSmall-sc-1swbs0s-16:nth-child(2) > a:nth-child(1)"
+        "[class^='LiveStreamStreamerDetails__StreamerDetailsTextContainer'] h4"
       ).textContent;
-    } else {
-      title = document.querySelector(".Typography__Headline1Small-sc-1swbs0s-8")
-        .textContent;
-      author = "Mixcloud Live";
     }
 
     const data: PresenceData = {
       details: title,
       state: author,
       largeImageKey: "mixcloud",
-      smallImageKey: paused ? "pause" : "play",
-      smallImageText: paused ? (await strings).pause : (await strings).play
+      smallImageKey: isPlaying ? "play" : "pause",
+      smallImageText: isPlaying ? (await strings).play : (await strings).pause,
+      buttons: [{ label: openUrlText, url: url }]
     };
 
-    if (live) {
+    if (liveIsPlaying) {
       data.smallImageKey = "live";
       data.smallImageText = (await strings).live;
     }
 
-    if (paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
+    if (isPlaying) {
+      presence.setActivity(data);
+    } else {
+      presence.setActivity();
+      presence.setTrayTitle();
     }
-
-    presence.setActivity(
-      {
-        details: data.details,
-        state: data.state,
-        largeImageKey: "mixcloud"
-      },
-      true
-    );
-  } else if (title !== null && author !== null) {
-    presence.setActivity(data, !paused);
   }
 });

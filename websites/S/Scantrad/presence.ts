@@ -7,10 +7,10 @@ const presence = new Presence({
     mangaName = pathSplit[2];
 
 presence.on("UpdateData", async () => {
-    const presenceData: PresenceData = { 
-        largeImageKey: "logo",
-        startTimestamp: browsingStamp
-    };
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  };
 
     if (document.body.contains(document.querySelector(".titre"))) {
         const titre = (<HTMLElement>document.querySelector(".titre")).innerText;
@@ -73,10 +73,10 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Page d'accueil";
         }
 
-    if (presenceData.details == null) {
-        presence.setTrayTitle();
-        presence.setActivity();
-    } else {
-        presence.setActivity(presenceData);
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
   }
 });

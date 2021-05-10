@@ -19,7 +19,15 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Learning more about";
     presenceData.state = "Hytale";
     presenceData.smallImageKey = "reading";
-  } else if (document.location.pathname === "/jobs") {
+  } else if (document.location.pathname === "/our-team") {
+    presenceData.details = "Getting to know";
+    presenceData.smallImageKey = "reading";
+    if (document.querySelector(".selected-member__container")) {
+      presenceData.state = document.querySelector(
+        ".hy-heading-4.selected-member__name"
+      ).textContent;
+    } else presenceData.state = "the team";
+  } else if (document.location.pathname === "/jobs/") {
     presenceData.details = "Viewing Job Openings";
     presenceData.smallImageKey = "reading";
     if (document.location.hash === "#our-process") {
