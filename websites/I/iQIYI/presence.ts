@@ -39,12 +39,11 @@ presence.on("UpdateData", async () => {
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: ["iqiyi_logo", "iqiyi_logo_b"][
+    largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][
       await presence.getSetting("logo")
     ],
     details: (await strings).browse,
     smallImageKey: "search",
-    smallImageText: (await strings).browse,
     startTimestamp: browsingStamp
   };
 
@@ -192,7 +191,7 @@ presence.on("UpdateData", async () => {
         "div.trans-contributions-detail > span:nth-child(2) > i"
       )?.textContent,
       adopted = document.querySelector(
-        "div.trans-contributions-detail > span:nth-child(2) > i"
+        "div.trans-contributions-detail > span:nth-child(3) > i"
       )?.textContent;
 
     switch (type) {

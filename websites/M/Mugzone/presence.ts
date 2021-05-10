@@ -13,20 +13,18 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = browsingStamp;
     presence.setActivity(presenceData);
   } else {
+    presenceData.startTimestamp = browsingStamp;
     if (document.location.pathname == "/") {
       presenceData.details = "Malody Main Page";
     } else if (document.location.pathname == "/index") {
       presenceData.smallImageKey = "home";
       presenceData.details = "Viewing Home Page";
-      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.endsWith("/chart")) {
-      presenceData.smallImageKey = "chart";
+      presenceData.smallImageKey = "store";
       presenceData.details = "Browsing Chart Store";
-      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.startsWith("/page/all/player")) {
       presenceData.smallImageKey = "leaderboard";
       presenceData.details = "Viewing Leaderboard";
-      presenceData.startTimestamp = browsingStamp;
       if (document.location.href.endsWith("?from=0&mode=0")) {
         presenceData.smallImageKey = "key";
         presenceData.smallImageText = "KeyMode";
@@ -62,7 +60,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(
         "#content > div.song_title.g_rblock > div.right > h2.textfix.title"
       ).textContent;
-      presenceData.startTimestamp = browsingStamp;
       presenceData.buttons = [
         {
           label: "View Song",
@@ -77,7 +74,6 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.querySelector(
         "#content > div.song_title.g_rblock > div.right > h2.mode > span:nth-child(2)"
       ).textContent;
-      presenceData.startTimestamp = browsingStamp;
       presenceData.buttons = [
         {
           label: "View Chart",
@@ -88,11 +84,9 @@ presence.on("UpdateData", async () => {
       if (document.location.pathname.includes("/skin")) {
         presenceData.smallImageKey = "skin";
         presenceData.details = "Browsing Skin Store";
-        presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.endsWith("/all")) {
         presenceData.smallImageKey = "store";
         presenceData.details = "Browsing Item Store";
-        presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.endsWith("/my")) {
         presenceData.smallImageKey = "inventory";
         presenceData.details = "Viewing Inventory";
@@ -110,11 +104,9 @@ presence.on("UpdateData", async () => {
         if (document.location.pathname.endsWith("/user")) {
           presenceData.smallImageKey = "talk";
           presenceData.details = "Checking Inbox";
-          presenceData.startTimestamp = browsingStamp;
         } else if (document.location.pathname.endsWith("/notify")) {
           presenceData.smallImageKey = "notification";
           presenceData.details = "Viewing Notification";
-          presenceData.startTimestamp = browsingStamp;
         }
       } else if (document.location.pathname.includes("/group")) {
         presenceData.details = "Viewing Discussion Page";
@@ -141,28 +133,23 @@ presence.on("UpdateData", async () => {
           "#content > div.user_head.g_rblock > div.right > p.name > span"
         ).textContent;
         presenceData.smallImageKey = "user";
-        presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.endsWith("/friend")) {
         presenceData.smallImageKey = "user";
         presenceData.details = "Viewing Friends List";
-        presenceData.startTimestamp = browsingStamp;
       } else if (document.location.pathname.includes("/config/profile")) {
         presenceData.smallImageKey = "edit";
         presenceData.details = "Editing Profile";
-        presenceData.startTimestamp = browsingStamp;
       }
     } else if (document.location.pathname.includes("/page/userpage/edit/")) {
       presenceData.smallImageKey = "edit";
       presenceData.details =
         document.querySelector("#content > div.g_title").textContent +
-        " Profile";
-      presenceData.startTimestamp = browsingStamp;
+        "profile";
     } else if (document.location.pathname.includes("/page/search")) {
       presenceData.smallImageKey = "search";
       presenceData.details = document.querySelector(
         "#content > div.g_title"
       ).textContent;
-      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/page/all")) {
       presenceData.smallImageKey = "eye";
       presenceData.details = "Viewing All Pages";
@@ -170,7 +157,6 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "eye";
       presenceData.details = "Viewing Recent Changes";
       presenceData.state = "Pages";
-      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/page/create")) {
       presenceData.smallImageKey = "edit";
       presenceData.details = "Creating a New Page";
@@ -178,7 +164,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "edit";
       presenceData.details = "Creating a Template";
     } else if (document.location.pathname.startsWith("/wiki")) {
-      presenceData.smallImageKey = "eye";
+      presenceData.smallImageKey = "wiki";
       presenceData.details = "Viewing Wiki";
       presenceData.state = document.querySelector(
         "#content > div.wiki_title.g_rblock > div.title"

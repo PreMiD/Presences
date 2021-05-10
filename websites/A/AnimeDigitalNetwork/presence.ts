@@ -11,22 +11,20 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("video") && video) {
     if (video && !isNaN(video.duration)) {
-      const title = document.querySelector(".adn-player-header a").textContent,
-        subtitle = document.querySelector(".adn-player-header span")
-          .textContent,
+      const title = document.querySelector(
+          "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-jWJfXU.sc-kbKFCX.ibhpg > div:nth-child(1) > div > div > h1 > a"
+        ).textContent,
         timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         ),
         data: PresenceData = {
           details: title,
-          state: subtitle,
           largeImageKey: "logo",
           smallImageKey: video.paused ? "pause" : "play",
           smallImageText: video.paused
             ? (await strings).pause
             : (await strings).play,
-          startTimestamp: timestamps[0],
           endTimestamp: timestamps[1]
         };
 
@@ -35,15 +33,16 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
 
-      if (title !== null && subtitle !== null) {
-        presence.setActivity(data, !video.paused);
+      if (title !== null) {
+        presence.setActivity(data);
       }
     }
   } else if (document.location.pathname.includes("video") && !video) {
-    const title = document.querySelector("h1.sc-pzMyG.sc-jHngDS.efMrJJ")
-        .textContent,
-      data: PresenceData = {
-        details: "Browsing...",
+    const title = document.querySelector(
+        "#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-jWJfXU.sc-kbKFCX.ibhpg > div:nth-child(1) > div > div > h1 > a"
+      ).textContent,
+      data = {
+        details: "Looking at",
         state: title,
         largeImageKey: "logo"
       };
