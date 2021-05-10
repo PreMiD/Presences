@@ -1,3 +1,269 @@
+/*
+ * The interfaces may have some things missing,
+ * I've tried to set as many properties as I could find.
+ */
+
+interface ApiClient {
+  enableAutomaticBitrateDetection: boolean;
+  enableAutomaticNetworking: boolean;
+  lastDetectedBitrate: number;
+  lastDetectedBitrateTime: number; // timestamp
+  lastFetch: number; // timestamp
+  lastPlaybackProgressReport: number;
+  lastPlaybackProgressReportTicks: number;
+  manualAddressOnly: boolean;
+  _appName: string;
+  _appVersion: string;
+  _currentUser: {
+    Configuration: {
+      AudioLanguagePreference: string;
+      DisplayCollectionsView: boolean;
+      DisplayMissingEpisodes: boolean;
+      EnableLocalPassword: boolean;
+      EnableNextEpisodeAutoPlay: boolean;
+      // GroupedFolders: Array; // don't know type of content of the array
+      HidePlayedInLatest: boolean;
+      // LatestItemsExcludes: Array; // don't know type of content of the array
+      // MyMediaExcludes: Array; // don't know type of content of the array
+      OrderedViews: Array<string>;
+      PlayDefaultAudioTrack: boolean;
+      RememberAudioSelections: boolean;
+      RememberSubtitleSelections: boolean;
+      SubtitleLanguagePreference: string;
+      SubtitleMode: string;
+    };
+    HasConfiguredEasyPassword: boolean;
+    HasConfiguredPassword: boolean;
+    HasPassword: boolean;
+    Id: string;
+    LastActivityDate: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
+    LastLoginDate: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
+    Name: string;
+    Policy: {
+      // AccessSchedules: Array; // don't know type of content of the array
+      AuthenticationProviderId: string;
+      // BlockUnratedItems: Array; // don't know type of content of the array
+      // BlockedTags: Array; // don't know type of content of the array
+      EnableAllChannels: boolean;
+      EnableAllDevices: boolean;
+      EnableAllFolders: boolean;
+      EnableAudioPlaybackTranscoding: boolean;
+      EnableContentDeletion: boolean;
+      // EnableContentDeletionFromFolders: Array; // don't know type of content of the array
+      EnableContentDownloading: boolean;
+      EnableLiveTvAccess: boolean;
+      EnableLiveTvManagement: boolean;
+      EnableMediaConversion: boolean;
+      EnableMediaPlayback: boolean;
+      EnablePlaybackRemuxing: boolean;
+      EnablePublicSharing: boolean;
+      EnableRemoteAccess: boolean;
+      EnableRemoteControlOfOtherUsers: boolean;
+      EnableSharedDeviceControl: boolean;
+      EnableSyncTranscoding: boolean;
+      EnableUserPreferenceAccess: boolean;
+      EnableVideoPlaybackTranscoding: boolean;
+      // EnabledChannels: Array; // don't know type of content of the array
+      // EnabledDevices: Array; // don't know type of content of the array
+      // EnabledFolders: Array; // don't know type of content of the array
+      ForceRemoteSourceTranscoding: boolean;
+      InvalidLoginAttemptCount: boolean;
+      IsAdministrator: boolean;
+      IsDisabled: boolean;
+      IsHidden: boolean;
+      LoginAttemptsBeforeLockout: number;
+      PasswordResetProviderId: string;
+      RemoteClientBitrateLimit: number;
+    };
+    PrimaryImageAspectRatio: number;
+    PrimaryImageTag: string;
+    ServerId: string;
+  };
+  _deviceId: string;
+  _deviceName: string;
+  _endPointInfo: {
+    IsInNetwork: boolean;
+    IsLocal: boolean;
+  };
+  _serverAddress: string;
+  _serverInfo: {
+    AccessToken: string;
+    DateLastAccessed: number; // timestamp
+    ExchangeToken: string;
+    Id: string;
+    LastConnectionMode: number;
+    ManualAddress: string;
+    Name: string;
+    UserId: string;
+    // UserLinkType: any; // unknown
+    manualAddressOnly: boolean;
+  };
+  _serverVersion: string;
+  _webSocket: {
+    binaryType: string;
+    bufferedAmount: number;
+    extensions: string;
+    protocol: string;
+    readyState: number;
+    url: string;
+  };
+}
+
+interface MediaStream {
+  Codec: string;
+  TimeBase: string;
+  CodecTimeBase: string;
+  VideoRange: string;
+  DisplayTitle: string;
+  IsInterlaced: boolean;
+  BitRate: number;
+  RefFrames: number;
+  IsDefault: boolean;
+  IsForced: boolean;
+  Height: number;
+  Width: number;
+  AverageFrameRate: number;
+  RealFrameRate: number;
+  Profile: string;
+  Type: string;
+  AspectRatio: string;
+  Index: number;
+  IsExternal: boolean;
+  IsTextSubtitleStream: boolean;
+  SupportsExternalStream: boolean;
+  PixelFormat: string;
+  Level: number;
+}
+
+interface MediaSource {
+  Protocol: string;
+  Id: string;
+  Path: string;
+  Type: string;
+  Container: string;
+  Size: number;
+  Name: string;
+  IsRemote: boolean;
+  ETag: string;
+  RunTimeTicks: number;
+  ReadAtNativeFramerate: boolean;
+  IgnoreDts: boolean;
+  IgnoreIndex: boolean;
+  GenPtsInput: boolean;
+  SupportsTranscoding: true;
+  SupportsDirectStream: boolean;
+  SupportsDirectPlay: boolean;
+  IsInfiniteStream: boolean;
+  RequiresOpening: boolean;
+  RequiresClosing: boolean;
+  RequiresLooping: boolean;
+  SupportsProbing: true;
+  VideoType: string;
+  MediaStreams: Array<MediaStream>;
+  MediaAttachments: [];
+  Formats: [];
+  Bitrate: number;
+  RequiredHttpHeaders: unknown;
+  DefaultAudioStreamIndex: number;
+}
+
+interface ExternalUrl {
+  Name: string;
+  Url: string;
+}
+
+interface Person {
+  Name: string;
+  Id: string;
+  Role: string;
+  Type: string;
+  PrimaryImageTag: string;
+}
+
+interface UserData {
+  PlaybackPositionTicks: number;
+  PlayCount: number;
+  IsFavorite: boolean;
+  LastPlayedDate: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
+  Played: boolean;
+  Key: string;
+}
+
+interface Chapter {
+  StartPositionTicks: number;
+  Name: string;
+  ImageDateModified: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
+}
+
+interface MediaInfo {
+  Name: string;
+  OriginalTitle: string;
+  ServerId: string;
+  Id: string;
+  Etag: string;
+  DateCreated: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
+  CanDelete: boolean;
+  CanDownload: boolean;
+  HasSubtitles: boolean;
+  Container: string;
+  SortName: string;
+  PremiereDate: string; // date, ex: "2020-05-30T21:51:23.9732162Z"
+  ExternalUrls: Array<ExternalUrl>;
+  MediaSources: Array<MediaSource>;
+  Path: string;
+  EnableMediaSourceDisplay: boolean;
+  Overview: string;
+  // TagLines: Array;
+  // Genres: Array;
+  CommunityRating: number;
+  RunTimeTicks: number;
+  PlayAccess: string;
+  ProductionYear: number;
+  IndexNumber: number;
+  ParentIndexNumber: number;
+  // RemoteTrailers: Array;
+  ProviderIds: {
+    Tvdb?: number;
+  };
+  IsHD: boolean;
+  IsFolder: boolean;
+  ParentId: number;
+  Type: string;
+  People: Array<Person>;
+  // Studios: Array;
+  // GenreItems: Array;
+  ParentBackdropItemId: string;
+  ParentBackdropImageTags: Array<string>;
+  LocalTrailerCount: number;
+  UserData: UserData;
+  RecursiveItemCount: number;
+  Status: string;
+  SeriesName: string;
+  SeriesId: string;
+  SeasonId: string;
+  SpecialFeatureCount: number;
+  DisplayPreferencesId: string;
+  // Tags: Array;
+  PrimaryImageAspectRatio: number;
+  SeriesPrimaryImageTag: string;
+  SeasonName: string;
+  MediaStreams: Array<MediaStream>;
+  VideoType: string;
+  ImageTags: {
+    Primary: string;
+  };
+  // BackdropImageTags: Array;
+  // ScreenshotImageTags: Array;
+  SeriesStudio: string;
+  Chapters: Array<Chapter>;
+  LocationType: string;
+  MediaType: string;
+  // LockedFields: Array;
+  LockData: boolean;
+  Width: number;
+  Height: number;
+}
+
 const
   // official website
   EMBY_URL = "emby.media",
@@ -14,13 +280,12 @@ const
     search: "search",
     write: "writing"
   },
-  // cache the requested media
-  media: Array<any> = [];
+  presenceData: PresenceData = {
+    largeImageKey: PRESENCE_ART_ASSETS.logo
+  };
 
-let presence: Presence, ApiClient: any, ApiClientt: any;
-const presenceData: PresenceData = {
-  largeImageKey: PRESENCE_ART_ASSETS.logo
-};
+  let presence: Presence,
+    ApiClient: ApiClient;
 
 /**
  * handleOfficialWebsite - handle the presence while the user is in the official website
@@ -65,6 +330,14 @@ function handleOfficialWebsite(): void {
       }
   }
 }
+/**
+ * getApiClient - Obtains the ApiClient variable from the web client
+ *
+ * @return {ApiClient} ApiClient object
+ */
+async function getApiClient(): Promise<ApiClient> {
+  return await presence.getPageletiable("ApiClient");
+}
 
 /**
  * isEmbyWebClient - imports the ApiClient variable and
@@ -74,13 +347,11 @@ function handleOfficialWebsite(): void {
  */
 async function isEmbyWebClient(): Promise<boolean> {
   if (!ApiClient) {
-    ApiClientt = await presence.getPageletiable("ApiClient");
-  } else {
-    ApiClientt = ApiClient;
+    ApiClient = await getApiClient();
   }
 
-  if (ApiClientt && typeof ApiClientt === "object") {
-    if (ApiClientt["_appName"] && ApiClientt["_appName"] === APP_NAME) {
+  if (typeof ApiClient === "object") {
+    if (ApiClient["_appName"] && ApiClient["_appName"] === APP_NAME) {
       return true;
     }
   }
@@ -109,9 +380,9 @@ function handleAudioPlayback(): void {
     if (!audioElem.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
-      presenceData.endTimestamp = new Date(
-        Date.now() + (audioElem.duration - audioElem.currentTime) * 1000
-      ).getTime();
+      presenceData.endTimestamp = presence.getTimestampsfromMedia(
+        audioElem
+      )[1];
 
       // paused
     } else {
@@ -131,7 +402,7 @@ function handleAudioPlayback(): void {
  */
 function getUserId(): string {
   try {
-    return ApiClientt["_currentUser"]["Id"];
+    return ApiClient["_currentUser"]["Id"];
   } catch (e) {
     const servers = JSON.parse(localStorage.getItem("servercredentials3"))
       .Servers;
@@ -155,33 +426,53 @@ function getUserId(): string {
   }
 }
 
+// cache the requested media
+const media: Record<string, string | MediaInfo> = {};
+
 /**
  * obtainMediaInfo - obtain the metadata of the given id
  *
  * @param  {string} itemId id of the item to get metadata of
  * @return {object}        metadata of the item
  */
-async function obtainMediaInfo(itemId: any): Promise<any> {
+async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
+  const pending = "pending";
+
   if (media[itemId]) {
-    if (media[itemId] !== "pending") {
+    if (media[itemId] !== pending) {
       return media[itemId];
     }
 
     return;
   }
 
-  media[itemId] = "pending";
-  fetch(`/emby/Users/${getUserId()}/Items/${itemId}`, {
-    credentials: "include",
-    headers: {
-      "x-emby-authorization": `MediaBrowser Client="${ApiClientt["_appName"]}", Device="${ApiClientt["_deviceName"]}", DeviceId="${ApiClientt["_deviceId"]}", Version="${ApiClientt["_appVersion"]}", Token="${ApiClientt["_serverInfo"]["AccessToken"]}"`
-    }
-  })
-    .then((resp) => resp.json())
-    .then((json) => {
-      media[itemId] = json;
-      return media[itemId];
-    });
+  if (!ApiClient["_serverInfo"]["AccessToken"]) {
+    ApiClient = await getApiClient();
+    return;
+  }
+
+  media[itemId] = pending;
+
+  const basePath = location.pathname.replace(
+      location.pathname.split("/").slice(-2).join("/"),
+      ""
+    ),
+    baseLocation = location.protocol + "//" + location.host + basePath,
+    res = await fetch(
+      `${baseLocation}emby/Users/${getUserId()}/Items/${itemId}?` +
+      `X-Emby-Client=${ApiClient["_appName"]}&` +
+      `X-Emby-Device-Name=${ApiClient["_deviceName"]}&` +
+      `X-Emby-Device-Id=${ApiClient["_deviceId"]}&` +
+      `X-Emby-Client-Version=${ApiClient["_appVersion"]}&` +
+      `X-Emby-Token=${ApiClient["_serverInfo"]["AccessToken"]}`
+    ),
+    mediaInfo = await res.json();
+
+  if (media[itemId] === pending) {
+    media[itemId] = mediaInfo;
+  }
+
+  return media[itemId];
 }
 
 /**
@@ -209,7 +500,7 @@ async function handleVideoPlayback(): Promise<void> {
   );
 
   // media metadata
-  let mediaInfo;
+  let mediaInfo: string | MediaInfo;
 
   const videoPlayerContainerElem = document.body.getElementsByClassName(
     "videoPlayerContainer"
@@ -223,17 +514,14 @@ async function handleVideoPlayback(): Promise<void> {
       .split("/")[5];
 
     mediaInfo = await obtainMediaInfo(mediaId);
-  } else {
-    // simulate the expected data
-    mediaInfo = {
-      Type: "TvChannel"
-    };
   }
 
   // display generic info
   if (!mediaInfo) {
     title = "Watching unknown content";
     subtitle = "No metadata could be obtained";
+  } else if (typeof mediaInfo === "string") {
+    return;
   } else {
     switch (mediaInfo.Type) {
       case "Movie":
@@ -252,27 +540,26 @@ async function handleVideoPlayback(): Promise<void> {
         title = `Watching ${mediaInfo.Type}`;
         subtitle = mediaInfo.Name;
     }
-  }
 
-  // watching live tv
-  if (mediaInfo && mediaInfo.Type === "TvChannel") {
-    presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
-    presenceData.smallImageText = "Live TV";
+    // watching live tv
+    if (mediaInfo && mediaInfo.Type === "TvChannel") {
+      presenceData.smallImageKey = PRESENCE_ART_ASSETS.live;
+      presenceData.smallImageText = "Live TV";
 
-    // playing
-  } else if (!videoPlayerElem.paused) {
-    presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
-    presenceData.smallImageText = "Playing";
-    presenceData.endTimestamp = new Date(
-      Date.now() +
-        (videoPlayerElem.duration - videoPlayerElem.currentTime) * 1000
-    ).getTime();
+      // playing
+    } else if (!videoPlayerElem.paused) {
+      presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
+      presenceData.smallImageText = "Playing";
+      presenceData.endTimestamp = presence.getTimestampsfromMedia(
+        videoPlayerElem
+      )[1];
 
-    // paused
-  } else {
-    presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
-    presenceData.smallImageText = "Paused";
-    delete presenceData.endTimestamp;
+      // paused
+    } else {
+      presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
+      presenceData.smallImageText = "Paused";
+      delete presenceData.endTimestamp;
+    }
   }
 
   presenceData.details = title;
@@ -302,6 +589,8 @@ async function handleItemDetails(): Promise<void> {
   if (!data) {
     presenceData.details = "Browsing details of an item";
     presenceData.state = "Could not get item details";
+  } else if (typeof data === "string") {
+    return;
   } else {
     presenceData.details = `Browsing details of: ${data.Name}`;
 
@@ -504,7 +793,6 @@ async function updateData(): Promise<void> {
       presence.setActivity();
     } else {
       presence.setActivity(presenceData);
-      presence.info(JSON.stringify(presenceData));
     }
   }
 }
