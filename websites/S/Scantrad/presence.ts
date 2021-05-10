@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
         const chapter = (<HTMLElement>document.querySelector(".chapitre-main")).textContent,
             page = (<HTMLElement>document.querySelector(".pageLinkAct")).textContent,
             fullMangaName = mangaName.split('-').join(' '),
-            fntC =  function(title: string) {
+            upperCaseWords =  function(title: string) {
                 const arr = title.split(' '),
                       result = arr.map(
                         function(value: string) {
@@ -41,7 +41,7 @@ presence.on("UpdateData", async () => {
                         });
             return result.join(' ');
             },
-            manga = fntC(fullMangaName);
+            manga = upperCaseWords(fullMangaName);
 
         presenceData.details = "Entrain de lire "  + manga + " :";
         presenceData.state = chapter + " | " + page;
