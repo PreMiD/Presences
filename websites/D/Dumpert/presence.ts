@@ -6,11 +6,11 @@ let title: Element, title2: Element;
 
 presence.on("UpdateData", async () => {
 const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
   },
   page = window.location.pathname,
   pageh = document.location.href;
-presenceData.startTimestamp = browsingStamp;
 
 if (page === "/") {
   presenceData.details = "Bekijkt:";
