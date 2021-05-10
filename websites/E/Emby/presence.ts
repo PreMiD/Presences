@@ -362,7 +362,7 @@ async function isEmbyWebClient(): Promise<boolean> {
 /**
  * handleAudioPlayback - handles the presence when the audio player is active
  */
-function handleAudioPlayback(): void {
+async function handleAudioPlayback(): Promise<void> {
   // sometimes the buttons are not created fast enough
   try {
     const audioElem = document.getElementsByTagName("audio")[0],
@@ -380,14 +380,21 @@ function handleAudioPlayback(): void {
     if (!audioElem.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
-      presenceData.endTimestamp = presence.getTimestampsfromMedia(
-        audioElem
-      )[1];
+
+      if (await presence.getSetting("showMediaTimestamps")) {
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(
+          audioElem
+        )[1];
+
+      } else {
+        delete presenceData.endTimestamp;
+      }
 
       // paused
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
+
       delete presenceData.endTimestamp;
     }
   } catch (e) {
@@ -550,14 +557,21 @@ async function handleVideoPlayback(): Promise<void> {
     } else if (!videoPlayerElem.paused) {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.play;
       presenceData.smallImageText = "Playing";
-      presenceData.endTimestamp = presence.getTimestampsfromMedia(
-        videoPlayerElem
-      )[1];
+
+      if (await presence.getSetting("showMediaTimestamps")) {
+        presenceData.endTimestamp = presence.getTimestampsfromMedia(
+          videoPlayerElem
+        )[1];
+
+      } else {
+        delete presenceData.endTimestamp;
+      }
 
       // paused
     } else {
       presenceData.smallImageKey = PRESENCE_ART_ASSETS.pause;
       presenceData.smallImageText = "Paused";
+
       delete presenceData.endTimestamp;
     }
   }
@@ -643,7 +657,7 @@ async function handleWebClient(): Promise<void> {
     audioElems[0].classList.contains("mediaPlayerAudio") &&
     audioElems[0].src
   ) {
-    handleAudioPlayback();
+    await handleAudioPlayback();
     return;
   }
 
@@ -747,7 +761,7 @@ async function handleWebClient(): Promise<void> {
 /**
  * setDefaultsToPresence - set defaul values to the presenceData object
  */
-function setDefaultsToPresence(): void {
+async function setDefaultsToPresence(): Promise<void> {
   if (presenceData.smallImageKey) {
     delete presenceData.smallImageKey;
   }
@@ -760,13 +774,17 @@ function setDefaultsToPresence(): void {
   if (presenceData.endTimestamp) {
     delete presenceData.endTimestamp;
   }
+
+  if (await presence.getSetting("showTimestamps")) {
+    presenceData.startTimestamp = Date.now();
+  }
 }
 
 /**
  * updateData - tick function, this is called several times a second by UpdateData event
  */
 async function updateData(): Promise<void> {
-  setDefaultsToPresence();
+  await setDefaultsToPresence();
 
   let showPresence = false;
 
@@ -781,9 +799,12 @@ async function updateData(): Promise<void> {
     await handleWebClient();
   }
 
-  // force the display of some counter
-  if (!presenceData.startTimestamp || !presenceData.endTimestamp) {
-    presenceData.startTimestamp = Date.now();
+  // hide start timestamp on media playback
+  if (
+    presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
+    presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause
+  ) {
+    delete presenceData.startTimestamp;
   }
 
   // if emby is detected init/update the presence status

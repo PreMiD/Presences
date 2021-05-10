@@ -26,5 +26,19 @@
     "tv",
     "media"
   ],
-  "regExp": ".*[/]web[/]index[.]html"
+  "regExp": ".*[/]web[/]index[.]html",
+  "settings": [
+    {
+      "id": "showMediaTimestamps",
+      "title": "Show media timestamps",
+      "icon": "fad fa-play",
+      "value": true
+    },
+    {
+      "id": "showTimestamps",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
 }
