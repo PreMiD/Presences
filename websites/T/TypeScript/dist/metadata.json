@@ -1,0 +1,25 @@
+{
+    "author": {
+      "name": "DieKatze",
+      "id": "292588280304893952"
+    },
+    "service": "TypeScript",
+    "description": {
+      "en": "TypeScript is an open-source language which builds on JavaScript, one of the world’s most used tools, by adding static type definitions.",
+      "de": "TypeScript ist eine Open-Source-Sprache, die auf JavaScript builded, sie ist eine der weltweit am häufigsten verwendeten Tools indem sie statische Typdefinitionen hinzufügt.",
+      "fr": "TypeScript est un langage open-source qui s'appuie sur JavaScript, l'un des outils les plus utilisés au monde, en ajoutant des définitions de types statiques.",
+      "nl": "TypeScript is een open-source taal die voortbouwt op JavaScript, een van 's werelds meest gebruikte programma's, door statische typedefinities toe te voegen.",
+      "ja": "TypeScriptは、世界で最も使われているツールの一つであるJavaScriptに、静的な型定義を追加して構築されたオープンソースの言語です。"
+    },
+    "url": "www.typescriptlang.org",
+    "version": "0.1",
+    "logo": "https://imgur.com/ABqC4tK.png",
+    "thumbnail": "https://imgur.com/4ByLmN3.png",
+    "color": "#007ACC",
+    "tags": [
+      "typescript",
+      "coding",
+      "ts"
+    ],
+    "category": "other"
+  }
