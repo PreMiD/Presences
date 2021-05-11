@@ -8,7 +8,7 @@
   "category": "socials",
   "logo": "https://i.imgur.com/MnsPDQu.png",
   "thumbnail": "https://i.imgur.com/scedVmN.png",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "color": "#c9bfff",
   "tags": [
     "everskies",
@@ -16,7 +16,8 @@
   ],
   "url": "everskies.com",
   "description": {
-    "en": "A community site for teens and young adults with focus on creativity!"
+    "en": "A community site for teens and young adults with focus on creativity!",
+    "nl": "Een community-site voor tieners en jongvolwassenen met focus op creativiteit!"
   },
   "settings": [
     {
