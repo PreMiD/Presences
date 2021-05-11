@@ -11,14 +11,15 @@
   ],
   "service": "Byte",
   "description": {
-    "en": "A new looping app by the creator of vine."
+    "en": "A new looping app by the creator of vine.",
+    "nl": "Een nieuwe looping app van de maker van Vine."
   },
   "url": [
     "byte.co",
     "community.byte.co",
     "help.byte.co"
   ],
-  "version": "1.1.7",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/Ijm00A7.png",
   "thumbnail": "https://i.imgur.com/MaC2lww.png",
   "color": "#6001E5",

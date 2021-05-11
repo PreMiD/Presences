@@ -6,13 +6,14 @@
   "service": "Hepsiburada",
   "description": {
     "en": "Hepsiburada is a popular shopping website in Turkey.",
-    "tr": "Hepsiburada, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir."
+    "tr": "Hepsiburada, Türkiye'de hizmet gösteren en büyük alışveriş sitelerinden birisidir.",
+    "nl": "Hepsiburada is een populaire winkelwebsite in Turkije."
   },
   "url": [
     "www.hepsiburada.com",
     "hepsiburada.com"
   ],
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://premid.is-inside.me/TSOUCLm9.png",
   "thumbnail": "https://premid.is-inside.me/uLqeYMMA.png",
   "color": "#ff6000",

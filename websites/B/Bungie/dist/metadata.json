@@ -6,7 +6,8 @@
   },
   "service": "Bungie",
   "description": {
-    "en": "Bungie.net is the home for all your Destiny/Destiny Two needs!"
+    "en": "Bungie.net is the home for all your Destiny/Destiny Two needs!",
+    "nl": "Bungie.net is de thuisbasis voor al uw Destiny/Destiny Two behoeften!"
   },
   "url": [
     "www.bungie.net",
@@ -14,7 +15,7 @@
     "comics.bungie.net",
     "bungiestore.com"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/7N4tOFk.jpg",
   "thumbnail": "https://i.imgur.com/ivK2Uww.png",
   "color": "#12171C",

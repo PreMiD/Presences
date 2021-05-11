@@ -8,7 +8,7 @@
   "category": "music",
   "logo": "https://i.imgur.com/tOin3KD.png",
   "thumbnail": "https://i.imgur.com/IB8PF6i.jpg",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "color": "#fc7e0f",
   "tags": [
     "podcast",
@@ -19,6 +19,7 @@
     "www.podcastaddict.com"
   ],
   "description": {
-    "en": "Podcast Addict is Android #1 podcast app with over 10M downloads, 500K reviews and an average rating of 4.7/5"
+    "en": "Podcast Addict is Android #1 podcast app with over 10M downloads, 500K reviews and an average rating of 4.7/5",
+    "nl": "Podcast Addict is Android's #1 podcast app met meer dan 10M downloads, 500K reviews en een gemiddelde waardering van 4.7/5"
   }
 }

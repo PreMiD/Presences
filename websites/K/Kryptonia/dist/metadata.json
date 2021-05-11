@@ -8,7 +8,7 @@
   "category": "games",
   "logo": "https://i.imgur.com/mWyID87.png",
   "thumbnail": "https://i.imgur.com/EsJ99aG.png",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "color": "#12d968",
   "tags": [
     "kryptonia",
@@ -20,6 +20,7 @@
   ],
   "description": {
     "fr": "Kryptonia est un serveur Minecraft PvP Factions 1.7.10 sous launcher ayant ouvert ses portes en octobre 2016.",
-    "en": "Kryptonia is a 1.7.10 French Minecraft PVP Factions server with launcher that opened in October 2016."
+    "en": "Kryptonia is a 1.7.10 French Minecraft PVP Factions server with launcher that opened in October 2016.",
+    "nl": "Kryptonia is een 1.7.10 Franse Minecraft PVP Factions-server met launcher die in oktober 2016 werd geopend."
   }
 }

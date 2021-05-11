@@ -6,10 +6,10 @@
   "service": "mvs4u",
   "description": {
     "en": "a streaming website where you can watch TV and movies with arabic subtitles",
-    "ar_SA": "موفيز فور يو لتحميل و مشاهدة المسلسلات والأفلام مباشرة اون لاين عربى واجنبى"
+    "nl": "een streamingwebsite waar je tv en films kunt kijken met Arabische ondertitels"
   },
   "url": "movs4u.tv",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "logo": "https://i.imgur.com/ZR0bRKQ.png",
   "thumbnail": "https://i.imgur.com/Bz9Prvj.png",
   "color": "#ff7800",

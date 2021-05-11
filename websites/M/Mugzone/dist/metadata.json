@@ -8,7 +8,7 @@
   "category": "games",
   "logo": "https://i.imgur.com/HP5fcgM.png",
   "thumbnail": "https://i.imgur.com/JkhV3Q0.png",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "color": "#b1b8cd",
   "tags": [
     "malody",
@@ -25,6 +25,7 @@
   ],
   "url": "m.mugzone.net",
   "description": {
-    "en": "Malody, cross-platform music game community."
+    "en": "Malody, cross-platform music game community.",
+    "nl": "Malody, platformonafhankelijke muziekgame-community."
   }
 }

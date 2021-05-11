@@ -11,10 +11,11 @@
   ],
   "service": "Genius",
   "description": {
-    "en": "Genius is the world’s biggest collection of song lyrics and musical knowledge."
+    "en": "Genius is the world’s biggest collection of song lyrics and musical knowledge.",
+    "nl": "Genius is 's werelds grootste verzameling van songteksten en muzikale kennis."
   },
   "url": "genius.com",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/C2J5rrN.png",
   "thumbnail": "https://i.imgur.com/mxOLBAC.png",
   "color": "#FFFF64",

@@ -5,10 +5,11 @@
   },
   "service": "DscJobs",
   "description": {
-    "en": "Find the best moderators for your server!"
+    "en": "Find the best moderators for your server!",
+    "nl": "Vind de beste moderators voor je server!"
   },
   "url": "dscjobs.org",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/LWjm8w3.png",
   "thumbnail": "https://i.imgur.com/z9fg21S.png",
   "color": "#555C56",

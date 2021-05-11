@@ -6,10 +6,11 @@
   },
   "url": "bonkleagues.io",
   "description": {
-    "en": "The best tools for bonk.io, featuring a skin manager, XP checker and more for bonk.io"
+    "en": "The best tools for bonk.io, featuring a skin manager, XP checker and more for bonk.io",
+    "nl": "De beste tools voor bonk.io, met een skin manager, XP checker en meer voor bonk.io"
   },
   "service": "Bonk Leagues",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/NSmuGT9.png",
   "thumbnail": "https://i.imgur.com/MVJuzz9.png",
   "color": "#ff0170",

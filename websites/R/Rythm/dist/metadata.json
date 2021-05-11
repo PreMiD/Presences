@@ -6,10 +6,11 @@
   "service": "Rythm",
   "description": {
     "en": "Rythm makes it possible to listen to your favorite music with all your friends. Add it to Discord today and start listening!",
-    "de": "Rythm macht es möglich deine Lieblingsmusik mit all deinen Freunden zu hören. Füge ihn noch heute deinem Discord hinzu und beginne Musik zu hören!"
+    "de": "Rythm macht es möglich deine Lieblingsmusik mit all deinen Freunden zu hören. Füge ihn noch heute deinem Discord hinzu und beginne Musik zu hören!",
+    "nl": "Rythm maakt het mogelijk om naar je favoriete muziek te luisteren met al je vrienden. Voeg het vandaag nog toe aan Discord en begin met luisteren!"
   },
   "url": "rythm.fm",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "logo": "https://i.imgur.com/lqwAK0n.png",
   "thumbnail": "https://i.imgur.com/NqYLjmB.jpg",
   "color": "#fb0f32",
