@@ -111,7 +111,7 @@ function getTranslation(stringName: string): string {
       break;
     default:
       PMD_error(
-        "Unknown StringName please contact the Developer of this presence!\nYou can contact him/her in the PreMiD Discord (discord.gg/premid)"
+        "Unknown StringName please contact the Developer of this presence!\nYou can contact him/her in the PreMiD Discord (discord.premid.app)"
       );
       return "Unknown stringName";
       break;

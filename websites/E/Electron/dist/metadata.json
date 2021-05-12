@@ -17,10 +17,11 @@
     "de": "Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln",
     "es": "rea aplicaciones multiplataforma de escritorio con JavaScript, HTML y CSS",
     "zh_CN": "使用 JavaScript，HTML 和 CSS 构建跨平台的桌面应用程序",
-    "th": "สร้างแอปที่ใช้งานข้ามแพลตฟอร์มได้ด้วย JavaScript, HTML และ CSS"
+    "th": "สร้างแอปที่ใช้งานข้ามแพลตฟอร์มได้ด้วย JavaScript, HTML และ CSS",
+    "nl": "Bouw cross-platform desktop apps met JavaScript, HTML en CSS"
   },
   "service": "Electron",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/QjEGajr.png",
   "thumbnail": "https://i.imgur.com/jXKMM75.png",
   "color": "#74b1be",

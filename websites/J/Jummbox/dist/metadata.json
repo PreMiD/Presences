@@ -5,10 +5,11 @@
   },
   "url": "jummbus.bitbucket.io",
   "description": {
-    "en": "Allows users to see music creation info and time used"
+    "en": "Allows users to see music creation info and time used",
+    "nl": "Hiermee kunnen gebruikers informatie over het maken van muziek en de gebruikte tijd zien"
   },
   "service": "Jummbox",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "logo": "https://i.imgur.com/sjvwfGn.png",
   "thumbnail": "https://i.imgur.com/ZdN3BgW.png",
   "color": "#7744FF",

@@ -7,10 +7,11 @@
   "url": "hypixelstudios.com",
   "description": {
     "en": "Our mission: empowering players",
-    "pt": "A nossa missão: empoderar os jogadores"
+    "pt": "A nossa missão: empoderar os jogadores",
+    "nl": "Onze missie: spelers versterken"
   },
   "service": "Hypixel Studios",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/ThI2LFZ.jpg",
   "thumbnail": "https://i.imgur.com/DVmrFaP.jpg",
   "color": "#15243A",

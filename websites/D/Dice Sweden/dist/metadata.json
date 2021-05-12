@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "The Gamerzs",
+    "id": "730142125181894657"
+  },
+  "service": "Dice Sweden",
+  "description": {
+    "en": "At DICE, we all share the passion to create exceptional games.",
+    "nl": "Bij DICE delen we allemaal de passie om uitzonderlijke games te maken."
+  },
+  "url": "www.dice.se",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/gDWQwS4.png",
+  "thumbnail": "https://i.imgur.com/PFWnovQ.png",
+  "color": "#000",
+  "tags": [
+    "gaming"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    },
+    {
+      "id": "timestamps",
+      "title": "Show Elapsed Time",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
+}

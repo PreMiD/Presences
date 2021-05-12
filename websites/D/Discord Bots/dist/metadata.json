@@ -6,10 +6,11 @@
   "service": "Discord Bots",
   "description": {
     "en": "Discord bots is a website that lists discord bots.",
-    "tr": "Discord bots, bütün botları listeleyen bir sistemdir."
+    "tr": "Discord bots, bütün botları listeleyen bir sistemdir.",
+    "nl": "Discord bots is een website die discord bots opsomt."
   },
   "url": "discord.bots.gg",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/lDlL1TY.png",
   "thumbnail": "https://i.imgur.com/TrG2ku7.png",
   "color": "#1C48D1",

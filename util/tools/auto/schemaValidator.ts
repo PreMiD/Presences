@@ -6,7 +6,8 @@ import axios from "axios";
 import { readFileSync } from "fs";
 import { validate } from "jsonschema";
 
-const latestMetadataSchema = "https://schemas.premid.app/metadata/1.3",
+// https://schemas.premid.app/metadata/1.3
+const latestMetadataSchema = "https://raw.githubusercontent.com/PreMiD/Schemas/master/schemas/metadata/1.3.json",
   stats = {
     validated: 0,
     validatedWithWarnings: 0,

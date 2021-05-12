@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Neon",
+  "author": {
+    "name": "Kety The Folf",
+    "id": "263443630767734784"
+  },
+  "contributors": [
+    {
+      "name": "SlowLife",
+      "id": "374905512661221377"
+    }
+  ],
+  "category": "videos",
+  "logo": "https://i.imgur.com/VdcSlNL.png",
+  "thumbnail": "https://i.imgur.com/dO4SNtS.png",
+  "version": "1.0.4",
+  "color": "#000000",
+  "tags": [
+    "videos",
+    "streams"
+  ],
+  "url": [
+    "www.neontv.co.nz",
+    "neontv.co.nz"
+  ],
+  "description": {
+    "en": "Watch hit TV shows on-demand and rent blockbuster movies with NEON. No term contracts.",
+    "nl": "Bekijk populaire TV shows on-demand en huur blockbuster films met NEON. Geen termijncontracten."
+  },
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

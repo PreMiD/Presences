@@ -12,16 +12,17 @@
   ],
   "service": "atomicradio",
   "description": {
-    "en": "Experience the best of the music world and show your friends what you're listening to!"
+    "en": "Experience the best of the music world and show your friends what you're listening to!",
+    "nl": "Ervaar het beste van de muziekwereld en laat je vrienden zien waar je naar luistert!"
   },
   "url": [
     "atomicradio.eu",
     "status.atomicradio.eu",
     "docs.atomicradio.eu"
   ],
-  "version": "2.0.2",
-  "logo": "https://i.imgur.com/7VFqGv9.png",
-  "thumbnail": "https://i.imgur.com/DHcDFc7.png",
+  "version": "2.0.4",
+  "logo": "https://i.imgur.com/7ugs4Iz.png",
+  "thumbnail": "https://i.imgur.com/caziz3t.png",
   "color": "#954fb4",
   "tags": [
     "atomicradio",

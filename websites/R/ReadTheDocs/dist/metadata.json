@@ -7,9 +7,10 @@
   "url": "readthedocs.io",
   "regExp": "([a-z0-9-]+[.])*readthedocs[.](io|org)[/]?",
   "description": {
-    "en": "Read the Docs simplifies software documentation by automating building, versioning, and hosting of your docs for you."
+    "en": "Read the Docs simplifies software documentation by automating building, versioning, and hosting of your docs for you.",
+    "nl": "Read the Docs vereenvoudigt softwaredocumentatie door de opbouw, versiebeheer en hosting van uw documenten voor u te automatiseren."
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "service": "Read the Docs",
   "logo": "https://i.imgur.com/imTvu2G.png",
   "thumbnail": "https://i.imgur.com/i7xxsx3.png",

@@ -5,10 +5,11 @@
   },
   "service": "Picarto",
   "description": {
-    "en": "Picarto is the world’s leading live streaming platform for creative minds. Come join us and watch artists from all over the world during their creative process!"
+    "en": "Picarto is the world’s leading live streaming platform for creative minds. Come join us and watch artists from all over the world during their creative process!",
+    "nl": "Picarto is 's werelds toonaangevende live streamingplatform voor creatieve geesten. Doe mee en kijk naar artiesten van over de hele wereld tijdens hun creatieve proces!"
   },
   "url": "picarto.tv",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/Oljre0e.png",
   "thumbnail": "https://i.imgur.com/DSNnMk5.png",
   "color": "#FF0000",

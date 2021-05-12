@@ -5,13 +5,14 @@
   },
   "service": "LucidChart",
   "description": {
-    "en": "Lucidchart is a visual workspace that combines diagramming, data visualization, and collaboration to accelerate understanding and drive innovation."
+    "en": "Lucidchart is a visual workspace that combines diagramming, data visualization, and collaboration to accelerate understanding and drive innovation.",
+    "nl": "Lucidchart is een visuele werkruimte die diagrammen, gegevensvisualisatie en samenwerking combineert om het begrip te versnellen en innovatie te stimuleren."
   },
   "url": [
     "www.lucidchart.com",
     "lucidchart.com"
   ],
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/dWTAS94.png",
   "thumbnail": "https://i.imgur.com/XAxo7fd.png",
   "color": "#F38D32",
