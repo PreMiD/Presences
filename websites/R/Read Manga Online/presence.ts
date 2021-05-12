@@ -12,7 +12,7 @@ presence.on("UpdateData", async () => {
     if (pathname === "/" )
       data.details = "Viewing the Homepage";
     else if(pathname === "/popular-manga"){
-      data.details = "Viewing: ";
+      data.details = "Looking at";
       data.state = "Popular Manga";
     }
     else if(pathname === "/manga-list"){
