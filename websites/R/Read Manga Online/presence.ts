@@ -78,7 +78,7 @@ presence.on("UpdateData", async () => {
       data.buttons = [{ label: "View manga", url: document.location.href }];
     }
     else if(pathname.startsWith('/user-panel')){
-      data.details = "Viewing their: ";
+      data.details = "Viewing their:";
       data.state = document.querySelector('a.active').textContent;
       data.smallImageKey = "settings";
     }
