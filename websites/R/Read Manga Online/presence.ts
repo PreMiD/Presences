@@ -44,7 +44,7 @@ presence.on("UpdateData", async () => {
       data.state = "Latest releases";
     }
     else if(pathname === "/collections"){
-      data.details = "Viewing: ";
+      data.details = "Viewing:";
       data.state = "Collections";
     }
     else if(pathname.startsWith("/collection")){
