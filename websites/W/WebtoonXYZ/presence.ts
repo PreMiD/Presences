@@ -64,6 +64,7 @@ presence.on("UpdateData", async () => {
       data.buttons = [{ label: "Read Webtoon", url: window.location.href }];
   } else if (pathname.startsWith("/read")) {
     const title = document.querySelector(".post-title").textContent;
+    data.details = "Viewing:";
     data.state = title;
     data.smallImageKey = "view";
     data.largeImageKey = title.includes("Solo Leveling")
