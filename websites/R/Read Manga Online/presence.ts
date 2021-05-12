@@ -32,7 +32,7 @@ presence.on("UpdateData", async () => {
       data.state = "Manga on " + pathname.split('/')[2].toUpperCase();
     }
     else if(pathname === "/manga-list/hash/ongoing"){
-      data.details = "Viewing: ";
+      data.details = "Looking at";
       data.state = "Ongoing Manga List";
     }
     else if(pathname === "/manga-list/hash/completed"){
