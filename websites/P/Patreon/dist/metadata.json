@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "rexulec",
+    "id": "709376748206293002"
+  },
+  "service": "Patreon",
+  "description": {
+    "en": "Patreon is an Internet-based platform that allows creators to set up their own subscription content services.",
+    "tr": "Patreon, içerik oluşturucularına kendi abonelik içeriği hizmetlerini kurmalarına izin veren, İnternet tabanlı bir platformdur.",
+    "de": "Patreon ist eine internetbasierte Plattform, mit der Entwickler ihre eigenen Abonnementinhaltsdienste einrichten können."
+  },
+  "url": "www.patreon.com",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/d0YtwcF.png",
+  "thumbnail": "https://i.imgur.com/hT1CAqd.png",
+  "color": "#f86754",
+  "tags": [
+    "subs",
+    "paid"
+  ],
+  "category": "other"
+}
