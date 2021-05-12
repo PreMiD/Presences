@@ -5,10 +5,11 @@
   },
   "service": "htmlcsscolor",
   "description": {
-    "en": "The ultimate color collection!"
+    "en": "The ultimate color collection!",
+    "nl": "De ultieme kleurencollectie!"
   },
   "url": "www.htmlcsscolor.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/Kk099mM.png",
   "thumbnail": "https://i.imgur.com/qCP9Sxb.png",
   "color": "#93C54B",

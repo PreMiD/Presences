@@ -5,10 +5,11 @@
   },
   "service": "NON-STOP NYAN CAT!",
   "description": {
-    "en": "Basically just an endless Nyan Cat. That's all there is to it."
+    "en": "Basically just an endless Nyan Cat. That's all there is to it.",
+    "nl": "Eigenlijk gewoon een eindeloze Nyan Cat. Dat is alles wat er is."
   },
   "url": "www.nyan.cat",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "logo": "https://sks316.s-ul.eu/7KnwLG3G.png",
   "thumbnail": "https://sks316.s-ul.eu/xr6iqj4a.png",
   "color": "#0f4d8f",

@@ -6,10 +6,11 @@
   "service": "Blockdit",
   "description": {
     "en": "Blockdit is a social network platform that connects all great ideas together. Blockdit offers you remarkable stories, ideas, and knowledges in 'blocks' which are easy to read ",
-    "th": "Blockdit เป็นแพลตฟอร์มเครือข่ายสังคมออนไลน์ที่เชื่อมโยงความคิดที่ยอดเยี่ยมทั้งหมดเข้าด้วยกัน Blockdit นำเสนอเรื่องราวความคิดและความรู้ที่น่าทึ่งใน 'บล็อก' ซึ่งอ่านง่าย"
+    "th": "Blockdit เป็นแพลตฟอร์มเครือข่ายสังคมออนไลน์ที่เชื่อมโยงความคิดที่ยอดเยี่ยมทั้งหมดเข้าด้วยกัน Blockdit นำเสนอเรื่องราวความคิดและความรู้ที่น่าทึ่งใน 'บล็อก' ซึ่งอ่านง่าย",
+    "nl": "Blockdit is een sociaal netwerkplatform dat alle geweldige ideeën met elkaar verbindt. Blockdit biedt je opmerkelijke verhalen, ideeën en kennis in 'blokken' die gemakkelijk te lezen zijn"
   },
   "url": "www.blockdit.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/WdOZbWQ.png",
   "thumbnail": "https://i.imgur.com/s1U0Bq7.png",
   "color": "#4a7fe0",

@@ -9,10 +9,11 @@
     "app.destinyitemmanager.com"
   ],
   "description": {
-    "en": "Swap items, check stats, and build the loadout to Become Legend with DIM"
+    "en": "Swap items, check stats, and build the loadout to Become Legend with DIM",
+    "nl": "Verwissel items, check stats, en bouw de uitrusting om Legend te worden met DIM"
   },
   "service": "Destiny Item Manager",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/OwMBJAm.png",
   "thumbnail": "https://i.imgur.com/rKhKMNY.jpg",
   "color": "#ee6d0d",

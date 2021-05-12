@@ -25,15 +25,18 @@ presence.on("UpdateData", async () => {
 
   if (window.location.hash.startsWith("#")) {
     if (window.location.hash.startsWith("#/totd")) {
-      presenceData.details = "Track Of The Day";
       if (!window.location.hash.includes("leaderboard")) {
         const title = document.getElementsByClassName("title")[1].textContent,
           month = title.substring(title.indexOf("-") + 2);
+        presenceData.details = "Track Of The Day";
         presenceData.state = month;
       } else {
         const trackName = document.getElementsByClassName("game-text")[0]
-          .textContent;
-        presenceData.state = `Leaderboard - ${trackName}`;
+            .textContent,
+          mapperName = document.getElementsByClassName("subtitle")[0]
+            .textContent;
+        presenceData.details = "Leaderboard - Track Of The Day";
+        presenceData.state = `${trackName} (${mapperName})`;
       }
     } else if (window.location.hash.startsWith("#/cotd")) {
       presenceData.state = "Cup Of The Day";
@@ -57,12 +60,12 @@ presence.on("UpdateData", async () => {
           )[0].textContent;
         } else {
           presenceData.details = "Leaderboard";
-          const campaignName = document.getElementsByClassName("game-text")[0]
+          const mapName = document.getElementsByClassName("game-text")[0]
               .textContent,
             mapperName = document.getElementsByClassName("subtitle")[0]
               .textContent;
 
-          presenceData.state = `${campaignName} (${mapperName})`;
+          presenceData.state = `${mapName} (${mapperName})`;
         }
       }
     } else if (window.location.hash.startsWith("#/rooms")) {
@@ -135,6 +138,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = document.getElementsByClassName(
         "title"
       )[1].textContent;
+    } else if (window.location.hash.startsWith("#/leaderboard")) {
+      const trackName = document.getElementsByClassName("game-text")[0]
+          .textContent,
+        mapperName = document.getElementsByClassName("subtitle")[0].textContent;
+      presenceData.details = "Leaderboard";
+      presenceData.state = `${trackName} (${mapperName})`;
     }
   } else if (window.location.pathname.startsWith("/api")) {
     presenceData.state = `Viewing API (${window.location.pathname.substr(

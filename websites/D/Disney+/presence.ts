@@ -6,6 +6,8 @@ interface LangStrings {
   play: string;
   pause: string;
   browsing: string;
+  watchingMovie: string;
+  watchingSeries: string;
   watchEpisode: string;
   watchVideo: string;
 }
@@ -16,6 +18,8 @@ async function getStrings(): Promise<LangStrings> {
       play: "general.playing",
       pause: "general.paused",
       browsing: "general.browsing",
+      watchingMovie: "general.watchingMovie",
+      watchingSeries: "general.watchingSeries",
       watchEpisode: "general.buttonViewEpisode",
       watchVideo: "general.buttonWatchVideo"
     },
@@ -31,6 +35,7 @@ let strings: LangStrings,
 
 presence.on("UpdateData", async () => {
   const newLang: string = await presence.getSetting("lang"),
+    privacy: boolean = await presence.getSetting("privacy"),
     time: boolean = await presence.getSetting("time"),
     buttons: boolean = await presence.getSetting("buttons"),
     groupWatchBtn: boolean = await presence.getSetting("groupWatchBtn"),
@@ -65,7 +70,7 @@ presence.on("UpdateData", async () => {
         ),
         timestamps: number[] = presence.getTimestampsfromMedia(video);
 
-      if (groupWatchId) {
+      if (!privacy && groupWatchId) {
         groupWatchCount = Number(
           document.querySelector(
             ".btm-media-overlays-container .group-profiles-control .group-profiles-control__count"
@@ -83,12 +88,18 @@ presence.on("UpdateData", async () => {
       title = titleField?.textContent;
       subtitle = subtitleField?.textContent; // episode or empty if it's a movie
 
-      if (groupWatchId) {
+      if (!privacy && groupWatchId) {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
         data.state = "In a GroupWatch";
       } else {
-        data.details = title;
-        data.state = subtitle || "Movie";
+        if (privacy)
+          data.state = subtitle
+            ? strings.watchingSeries
+            : strings.watchingMovie;
+        else {
+          data.details = title;
+          data.state = subtitle || "Movie";
+        }
       }
 
       data.smallImageKey = video.paused ? "pause" : "play";
@@ -103,13 +114,13 @@ presence.on("UpdateData", async () => {
       }
 
       // set GroupWatch participants size
-      if (groupWatchId) {
+      if (!privacy && groupWatchId) {
         data.partySize = groupWatchCount;
         data.partyMax = 7;
       }
 
       // add buttons, if enabled
-      if (buttons) {
+      if (!privacy && buttons) {
         data.buttons = [
           {
             label: subtitle ? strings.watchEpisode : strings.watchVideo,
@@ -130,7 +141,11 @@ presence.on("UpdateData", async () => {
     }
 
     // GroupWatch lobby
-  } else if (isHostDP && location.pathname.includes("/groupwatch/")) {
+  } else if (
+    isHostDP &&
+    !privacy &&
+    location.pathname.includes("/groupwatch/")
+  ) {
     groupWatchCount = document.querySelectorAll(
       ".gw-avatar-enter-done:not([id=gw-invite-button])"
     ).length;
@@ -186,8 +201,12 @@ presence.on("UpdateData", async () => {
       title = titleField?.textContent;
       subtitle = subtitleField?.textContent; // episode or empty if it's a movie
 
-      data.details = title;
-      data.state = subtitle || "Movie";
+      if (privacy)
+        data.state = subtitle ? strings.watchingSeries : strings.watchingMovie;
+      else {
+        data.details = title;
+        data.state = subtitle || "Movie";
+      }
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused ? strings.pause : strings.play;
       data.startTimestamp = timestamps[0];
@@ -198,7 +217,7 @@ presence.on("UpdateData", async () => {
         delete data.endTimestamp;
       }
 
-      if (buttons) {
+      if (!privacy && buttons) {
         data.buttons = [
           {
             label: strings.watchVideo,

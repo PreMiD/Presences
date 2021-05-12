@@ -6,10 +6,11 @@
   },
   "service": "Flickr",
   "description": {
-    "en": "Flickr is an American image hosting and video hosting service, as well as an online community. It was created by Ludicorp in 2004 and has been popular with hosting high resolution photos by amateur and professional photographers. (Wikipédia: https://en.wikipedia.org/wiki/Flickr)"
+    "en": "Flickr is an American image hosting and video hosting service, as well as an online community. It was created by Ludicorp in 2004 and has been popular with hosting high resolution photos by amateur and professional photographers. (Wikipédia: https://en.wikipedia.org/wiki/Flickr)",
+    "nl": "Flickr is een Amerikaanse dienst voor het hosten van foto's en video's, en ook een online community. Het werd opgericht door Ludicorp in 2004 en is populair geworden door het hosten van hoge resolutie foto's door amateur- en professionele fotografen. (Wikipédia: https://nl.wikipedia.org/wiki/Flickr)"
   },
   "url": "www.flickr.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/ZSCbG9X.png",
   "thumbnail": "https://i.imgur.com/g3hrWth.png",
   "color": "#FF0084",

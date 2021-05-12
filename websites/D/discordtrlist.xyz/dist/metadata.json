@@ -6,10 +6,11 @@
   "service": "discordtrlist.xyz",
   "description": {
     "tr": "Türkiyenin en gelişmiş listi.",
-    "en": "Turkey's most advanced bot list"
+    "en": "Turkey's most advanced bot list",
+    "nl": "Turkije's meest geavanceerde botlijst"
   },
   "url": "discordtrlist.xyz",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "logo": "https://i.hizliresim.com/Z5GBgg.jpg",
   "thumbnail": "https://i.hizliresim.com/Z5GBgg.jpg",
   "color": "#F10C0C",

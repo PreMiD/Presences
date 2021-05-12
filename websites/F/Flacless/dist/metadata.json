@@ -5,13 +5,14 @@
   },
   "service": "Flacless",
   "description": {
-    "en": "Flacless is a website that provide original songs with very high bit rate (320 kbps and up to 1411 kbps flac), allowing users to download music for free."
+    "en": "Flacless is a website that provide original songs with very high bit rate (320 kbps and up to 1411 kbps flac), allowing users to download music for free.",
+    "nl": "Flacless is een website die originele liedjes aanbiedt met een zeer hoge bitsnelheid (320 kbps en tot 1411 kbps flac), zodat gebruikers gratis muziek kunnen downloaden."
   },
   "url": [
     "flacless.com",
     "www.flacless.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/vj1vvdb.png",
   "thumbnail": "https://i.imgur.com/ksSctsj.png",
   "color": "#F95B40",

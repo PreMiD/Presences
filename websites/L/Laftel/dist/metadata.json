@@ -6,10 +6,11 @@
   "service": "Laftel",
   "description": {
     "en": "Anime streaming service in korea.",
-    "ko_KR": "한국 애니메이션 스트리밍 서비스"
+    "ko_KR": "한국 애니메이션 스트리밍 서비스",
+    "nl": "Anime-streamingdienst in Korea."
   },
   "url": "laftel.net",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/xGOEvzT.png",
   "thumbnail": "https://i.imgur.com/8E8G9sC.png",
   "color": "#bd34eb",

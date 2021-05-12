@@ -8,7 +8,7 @@
   "category": "socials",
   "logo": "https://i.imgur.com/KjLAKp8.png",
   "thumbnail": "https://i.imgur.com/fWMKtiQ.jpg",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "color": "#242424",
   "tags": [
     "social",
@@ -19,6 +19,7 @@
   "url": "www.matrixbots.xyz",
   "description": {
     "en": "MatrixBots is a small Discord Bot List",
-    "de": "MatrixBots ist eine kleine Discord Bot Liste"
+    "de": "MatrixBots ist eine kleine Discord Bot Liste",
+    "nl": "MatrixBots is een kleine Discord Bot-lijst"
   }
 }

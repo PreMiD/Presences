@@ -12,10 +12,11 @@
   "service": "RunoPW",
   "description": {
     "en": "Make Friends & Chat With Millions In A Virtual World",
-    "tr": "Müthiş İnsanlarla Dolu İlginç Bir Yer"
+    "tr": "Müthiş İnsanlarla Dolu İlginç Bir Yer",
+    "nl": "Vrienden maken en chatten met miljoenen in een virtuele wereld"
   },
   "url": "runo.pw",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "logo": "https://i.imgur.com/utrvCGI.png",
   "thumbnail": "https://i.imgur.com/6CXFU3R.png",
   "color": "#ffff00",

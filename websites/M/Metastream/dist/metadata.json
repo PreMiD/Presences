@@ -11,13 +11,14 @@
   ],
   "service": "Metastream",
   "description": {
-    "en": "Watch and listen to your favorite content with friends."
+    "en": "Watch and listen to your favorite content with friends.",
+    "nl": "Bekijk en luister naar uw favoriete inhoud met vrienden."
   },
   "url": [
     "getmetastream.com",
     "app.getmetastream.com"
   ],
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/vAozqPN.png",
   "thumbnail": "https://i.imgur.com/CGjj2MG.png",
   "color": "#DAAFB9",
