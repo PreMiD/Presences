@@ -40,7 +40,7 @@ presence.on("UpdateData", async () => {
       data.state = "Completed Manga List";
     }
     else if(pathname === "/latest-releases"){
-      data.details = "Viewing: ";
+      data.details = "Viewing:";
       data.state = "Latest releases";
     }
     else if(pathname === "/collections"){
