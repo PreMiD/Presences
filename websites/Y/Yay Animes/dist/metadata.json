@@ -7,10 +7,12 @@
   "description": {
     "en": "Yay Animes it's a brazilian website that provides free anime to watch or download.",
     "pt_BR": "Yay Animes é um site brasileiro que oferece animes de graça para assistir ou baixar.",
-    "zh_CN": "Yay Animes 是一个提供免费观看或下载动漫的巴西网站。"
+    "zh_CN": "Yay Animes 是一个提供免费观看或下载动漫的巴西网站。",
+    "ga_IE": "Suíomh Gréasáin Brasaíle é Yay Animes a sholáthraíonn anime saor in aisce le féachaint air nó le híoslódáil.",
+    "nl": "Yay Animes is een Braziliaanse website die gratis anime biedt om te bekijken of te downloaden."
   },
   "url": "yayanimes.net",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/x0qBIc9.png",
   "thumbnail": "https://i.imgur.com/mbVdXbm.png",
   "color": "#1759e7",

@@ -6,13 +6,14 @@
   },
   "service": "NativShark",
   "description": {
-    "en": "NativShark is an online language learning platform for Japanese."
+    "en": "NativShark is an online language learning platform for Japanese.",
+    "nl": "NativShark is een online platform voor het leren van talen voor Japans."
   },
   "url": [
     "nativshark.com",
     "www.nativshark.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/bnlBeoi.png",
   "thumbnail": "https://i.imgur.com/fvIL7w3.png",
   "color": "#2c2c44",

@@ -8,14 +8,20 @@
   "description": {
     "en": "yabancıdizi is one of the biggest Turkish foreign TV show providers on internet.",
     "tr": "yabancıdizi, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir.",
-    "zh_CN": "yabancıdizi 是土耳其最大国外电视节目秀提供商之一"
+    "zh_CN": "yabancıdizi 是土耳其最大国外电视节目秀提供商之一",
+    "ga_IE": "Tá yabancıdizi ar cheann de na soláthraithe seó teilifíse eachtrach Tuircis is mó ar an idirlíon.",
+    "nl": "yabancıdizi is een van de grootste Turkse buitenlandse tv-showproviders op internet."
   },
   "url": "yabancidizi.pw",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/L51zWz0.png",
   "thumbnail": "https://i.imgur.com/G8um9Ng.png",
   "color": "#14161d",
-  "tags": ["video", "tvshows", "turkish"],
+  "tags": [
+    "video",
+    "tvshows",
+    "turkish"
+  ],
   "iframe": true,
   "category": "videos"
 }

@@ -6,10 +6,12 @@
   },
   "url": "quora.com",
   "description": {
-    "en": "Quora is a place to gain and share knowledge. It's a platform to ask questions and connect with people who contribute unique insights and quality answers."
+    "en": "Quora is a place to gain and share knowledge. It's a platform to ask questions and connect with people who contribute unique insights and quality answers.",
+    "ga_IE": "Is áit é Quora chun eolas a fháil agus a roinnt. Is ardán é chun ceisteanna a chur agus ceangal a dhéanamh le daoine a chuireann léargas uathúil agus freagraí ardchaighdeáin ar fáil.",
+    "nl": "Quora is een plek om kennis op te doen en te delen. Het is een platform om vragen te stellen en in contact te komen met mensen die unieke inzichten en kwaliteitsantwoorden inbrengen."
   },
   "service": "Quora",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/WBwFUzx.png",
   "thumbnail": "https://imgur.com/rrhEpI3.png",
   "color": "#A70000",

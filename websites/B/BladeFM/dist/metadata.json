@@ -1,0 +1,48 @@
+{
+  "author": {
+    "name": "Callum",
+    "id": "506899274748133376"
+  },
+  "service": "BladeFM",
+  "description": {
+    "en": "Providing non-stop music, 24/7",
+    "ga_IE": "Ag soláthar ceoil gan stad, 24/7",
+    "nl": "Bied 24/7 non-stop muziek aan"
+  },
+  "url": "bladefm.com.au",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/Sjj3gx6.png",
+  "thumbnail": "https://i.imgur.com/DWa62sw.png",
+  "color": "#203391",
+  "tags": [
+    "music",
+    "radio",
+    "blade",
+    "bladeradio",
+    "bladefm"
+  ],
+  "category": "music",
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamp",
+      "icon": "fas fa-history",
+      "value": true
+    },
+    {
+      "id": "details",
+      "title": "Change Line #1 (Song Details)",
+      "icon": "fas fa-music",
+      "value": "Streaming to %listeners% listeners",
+      "placeholder": "%artist%, %listeners%, %songText%, %title%"
+    },
+    {
+      "id": "state",
+      "title": "Change Line #2 (Presenter Details)",
+      "icon": "fas fa-microphone",
+      "value": "%songText%",
+      "placeholder": "%artist%, %listeners%, %songText%, %title%"
+    }
+  ],
+  "regExp": "([a-z0-9-]+[.])*(bladefm[.]com[.]au)[/]"
+}

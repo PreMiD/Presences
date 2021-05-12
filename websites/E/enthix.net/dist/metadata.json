@@ -5,10 +5,11 @@
   },
   "service": "enthix.net",
   "description": {
-    "en": "MultiPlatform Games Network"
+    "en": "MultiPlatform Games Network",
+    "nl": "MultiPlatform Games Netwerk"
   },
   "url": "enthix.net",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/pFmxUh4.png",
   "thumbnail": "https://i.imgur.com/QnDRaNN.png",
   "color": "#ff0000",

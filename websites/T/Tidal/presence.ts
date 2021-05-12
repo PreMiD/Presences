@@ -24,26 +24,35 @@ const getLanguages = async () => {
       await presence.getSetting("language")
     );
   },
+  SongQuality = (quality: string): string => {
+    switch (quality) {
+      case "LOSSLESS":
+        return "Hi-Fi";
+      case "HIGH":
+        return "High";
+      case "LOW":
+        return "Normal";
+      default:
+        return "Unknown";
+    }
+  },
   getAuthorString = (): string => {
     let authorsArray: Array<HTMLAnchorElement>, authorString: string;
     const authors: NodeListOf<HTMLAnchorElement> = document.querySelectorAll(
-      "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > div.mediaArtists--2pRii > a"
+      "#footerPlayer > div.css-pk7civ > div.css-1g3qvkb > div.css-14o5h2y > span > span > a"
     );
 
-    //* Author tags more than one =>
     if (authors.length > 1) {
-      //* Convert to js array for .map function
       authorsArray = Array.from(authors);
 
-      //* Build output string
       authorString = `${authorsArray
         .slice(0, authorsArray.length)
         .map((a) => a.innerText)
         .join(", ")}`;
     } else
-      authorString = (document.querySelector(
-        "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > div.mediaArtists--2pRii > a"
-      ) as HTMLAnchorElement).innerText;
+      authorString = document.querySelector<HTMLAnchorElement>(
+        "#footerPlayer > div.css-pk7civ > div.css-1g3qvkb > div.css-14o5h2y > span > span > a"
+      ).innerText;
 
     return authorString;
   };
@@ -54,33 +63,34 @@ let strings: Promise<langStrings> = getLanguages(),
 presence.on("UpdateData", async () => {
   const newLang = await presence.getSetting("language"),
     privacy = await presence.getSetting("privacy"),
-    songTitle: string | null = (document.querySelector(
-      "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > span > a"
-    ) as HTMLElement)
-      ? (document.querySelector(
-          "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > span > a"
-        ) as HTMLElement).textContent
+    showSongQuality = await presence.getSetting("showQuality"),
+    songTitle: string | null = document.querySelector<HTMLElement>(
+      "#footerPlayer > div.css-pk7civ > div.css-1g3qvkb > div.css-vvwwhy > a > span"
+    )
+      ? document.querySelector<HTMLElement>(
+          "#footerPlayer > div.css-pk7civ > div.css-1g3qvkb > div.css-vvwwhy > a > span"
+        ).textContent
       : null,
-    songCurrentTime: string | null = (document.querySelector(
-      "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.css-ozow3x"
-    ) as HTMLElement)
-      ? (document.querySelector(
-          "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.css-ozow3x"
-        ) as HTMLElement).textContent
+    songCurrentTime: string | null = document.querySelector<HTMLElement>(
+      "#footerPlayer > div.css-1mzzcqg > div.css-1er6xdl > span > div > div.css-vyfuyi > time.current-time.css-19xy0fs"
+    )
+      ? document.querySelector<HTMLElement>(
+          "#footerPlayer > div.css-1mzzcqg > div.css-1er6xdl > span > div > div.css-vyfuyi > time.current-time.css-19xy0fs"
+        ).textContent
       : null,
-    videoTitle: string | null = (document.querySelector(
-      "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > span"
-    ) as HTMLElement)
-      ? (document.querySelector(
-          "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > span"
-        ) as HTMLElement).textContent
+    videoTitle: string | null = document.querySelector<HTMLElement>(
+      "#footerPlayer > div.css-pk7civ > div.css-1g3qvkb > div.css-vvwwhy > span"
+    )
+      ? document.querySelector<HTMLElement>(
+          "#footerPlayer > div.css-pk7civ > div.css-1g3qvkb > div.css-vvwwhy > span"
+        ).textContent
       : null,
-    videoCurrentTime: string | null = (document.querySelector(
-      "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.css-ozow3x"
-    ) as HTMLElement)
-      ? (document.querySelector(
-          "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.css-ozow3x"
-        ) as HTMLElement).textContent
+    videoCurrentTime: string | null = document.querySelector<HTMLElement>(
+      "#footerPlayer > div.css-1mzzcqg > div.css-1er6xdl > span > div > div.css-vyfuyi > time.current-time.css-19xy0fs"
+    )
+      ? document.querySelector<HTMLElement>(
+          "#footerPlayer > div.css-1mzzcqg > div.css-1er6xdl > span > div > div.css-vyfuyi > time.current-time.css-19xy0fs"
+        ).textContent
       : null,
     presenceData: PresenceData = {
       largeImageKey: "logo"
@@ -93,120 +103,132 @@ presence.on("UpdateData", async () => {
     strings = getLanguages();
   }
 
-  if ((songTitle || videoTitle) && (songCurrentTime || videoCurrentTime)) {
-    if (!privacy) {
-      if (songTitle && songCurrentTime) {
-        const songEndTime: string | null = (document.querySelector(
-            "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(2) > time.css-165d6xj"
-          ) as HTMLElement).textContent,
-          songCurrentTimestamp: Array<number> = songCurrentTime
-            .split(":")
-            .map(Number),
-          songEndTimestamp: Array<number> = songEndTime.split(":").map(Number),
-          playingButton: string = (document.querySelector(
-            "#footerPlayer > div.centerColumn--3fkzm > div > button.playback-controls__button--white-icon.playbackToggle--3B2S9"
-          ) as HTMLElement).getAttribute("data-type"),
-          albumTitle: string | null = (document.querySelector(
-            "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > div.container--20aEj.playingFrom--3H6Cu > a > span"
-          ) as HTMLElement)
-            ? (document.querySelector(
-                "#footerPlayer > div.leftColumn--yVbBY > div.dragItem--3i9Xz > div.css-124sz32.mediaInformation--1QcQT > div.container--20aEj.playingFrom--3H6Cu > a > span"
-              ) as HTMLElement).textContent
-            : null,
-          repeatOn: string = (document.querySelector(
-            "#footerPlayer > div.centerColumn--3fkzm > div > button.repeatButton--ONfa5"
-          ) as HTMLElement).getAttribute("data-type"),
-          timestamps: Array<number> = presence.getTimestamps(
-            ~~songCurrentTimestamp[0] * 60 + songCurrentTimestamp[1],
-            ~~songEndTimestamp[0] * 60 + songEndTimestamp[1]
-          );
-        presenceData.details = songTitle + ` (${albumTitle ? albumTitle : ""})`;
-        presenceData.state = getAuthorString();
-
-        switch (playingButton) {
-          case "button__play":
-            presenceData.smallImageKey =
-              repeatOn === "button__repeatAll"
-                ? "repeat-all"
-                : repeatOn === "button__repeatSingle"
-                ? "repeat"
-                : "play";
-            presenceData.smallImageText =
-              repeatOn === "button__repeatAll"
-                ? (await strings).repeatAll
-                : repeatOn === "button__repeatSingle"
-                ? (await strings).repeat
-                : (await strings).play;
-            delete presenceData.endTimestamp;
-            presenceData.endTimestamp = timestamps[1];
-            presence.setTrayTitle(songTitle);
-            break;
-          case "button__pause":
-            presenceData.smallImageKey = "pause";
-            presenceData.smallImageText = (await strings).pause;
-            delete presenceData.endTimestamp;
-            presence.setTrayTitle();
-            break;
-        }
-      } else if (videoTitle && videoCurrentTime) {
-        const videoEndTime: string = (document.querySelector(
-            "#footerPlayer > div.rightColumn--2vWPK > div:nth-child(1) > time.css-165d6xj"
-          ) as HTMLElement).textContent,
-          videoCurrentTimestamp: Array<number> = videoCurrentTime
-            .split(":")
-            .map(Number),
-          videoEndTimestamp: Array<number> = videoEndTime
-            .split(":")
-            .map(Number),
-          playingButton: string = (document.querySelector(
-            "#footerPlayer > div.centerColumn--3fkzm > div > button.playback-controls__button--white-icon.playbackToggle--3B2S9"
-          ) as HTMLElement).getAttribute("data-type"),
-          repeatOn: string = (document.querySelector(
-            "#nowPlaying > div.scrollWrapper--2Hy7_ > div > div.leftColumn--3OQ30 > div.row--3oQhD.rowMediaControls--2ERj6 > div:nth-child(2) > div > button.repeatButton--ONfa5"
-          ) as HTMLElement).getAttribute("data-type"),
-          timestamps: Array<number> = presence.getTimestamps(
-            ~~videoCurrentTimestamp[0] * 60 + videoCurrentTimestamp[1],
-            ~~videoEndTimestamp[0] * 60 + videoEndTimestamp[1]
-          );
-        presenceData.details = videoTitle;
-        presenceData.state = getAuthorString();
-
-        switch (playingButton) {
-          case "button__play":
-            presenceData.smallImageKey =
-              repeatOn === "button__repeatAll"
-                ? "repeat-all"
-                : repeatOn === "button__repeatSingle"
-                ? "repeat"
-                : "play";
-            presenceData.smallImageText =
-              repeatOn === "button__repeatAll"
-                ? (await strings).repeatAll
-                : repeatOn === "button__repeatSingle"
-                ? (await strings).repeat
-                : (await strings).play;
-            delete presenceData.endTimestamp;
-            presenceData.endTimestamp = timestamps[1];
-            presence.setTrayTitle(songTitle);
-            break;
-          case "button__pause":
-            presenceData.smallImageKey = "pause";
-            presenceData.smallImageText = (await strings).pause;
-            delete presenceData.endTimestamp;
-            presence.setTrayTitle();
-            break;
-        }
-      }
-    } else {
-      presenceData.details = (await strings).listening;
-      presenceData.startTimestamp = Date.now();
-      presence.setTrayTitle();
-    }
-  } else {
+  if (!(songTitle || videoTitle) && !(songCurrentTime || videoCurrentTime)) {
     presenceData.details = (await strings).browsing;
-    presenceData.startTimestamp = Date.now();
     presenceData.smallImageKey = "browsing";
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     presence.setTrayTitle();
+    presence.setActivity(presenceData);
+    return;
+  }
+
+  if (privacy) {
+    presenceData.details = (await strings).listening;
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
+    presence.setTrayTitle();
+    presence.setActivity(presenceData);
+    return;
+  }
+
+  if (songTitle && songCurrentTime) {
+    const songEndTime: string | null = document.querySelector<HTMLElement>(
+        "#footerPlayer > div.css-1mzzcqg > div.css-1er6xdl > span > div > div.css-119caa0 > time.duration-time.css-p7n8gi"
+      ).textContent,
+      songCurrentTimestamp: Array<number> = songCurrentTime
+        .split(":")
+        .map(Number),
+      songEndTimestamp: Array<number> = songEndTime.split(":").map(Number),
+      playingButton: string = document
+        .querySelector<HTMLElement>(
+          "#footerPlayer > div.css-1mzzcqg > div.css-ict1qq > div > button"
+        )
+        .getAttribute("data-type"),
+      repeatOn: string = document
+        .querySelector<HTMLElement>(
+          "#footerPlayer > div.css-1mzzcqg > div.css-ict1qq > button:nth-child(5)"
+        )
+        .getAttribute("data-type"),
+      songTimestamps: Array<number> = presence.getTimestamps(
+        Math.floor(songCurrentTimestamp[0] * 60 + songCurrentTimestamp[1]),
+        Math.floor(songEndTimestamp[0] * 60 + songEndTimestamp[1])
+      ),
+      songQuality: string = document
+        .querySelector<HTMLElement>(
+          "#footerPlayer > div.css-ydx5c7 > button.css-1pnqyx0"
+        )
+        .getAttribute("data-test-streaming-quality"),
+      dataState = showSongQuality
+        ? `${songTitle} (${SongQuality(songQuality)})`
+        : songTitle;
+
+    presenceData.details = dataState;
+    presenceData.state = getAuthorString();
+
+    switch (playingButton) {
+      case "button__play":
+        presenceData.smallImageKey =
+          repeatOn === "button__repeatAll"
+            ? "repeat-all"
+            : repeatOn === "button__repeatSingle"
+            ? "repeat"
+            : "play";
+        presenceData.smallImageText =
+          repeatOn === "button__repeatAll"
+            ? (await strings).repeatAll
+            : repeatOn === "button__repeatSingle"
+            ? (await strings).repeat
+            : (await strings).play;
+        delete presenceData.endTimestamp;
+        presenceData.endTimestamp = songTimestamps[1];
+        presence.setTrayTitle(songTitle);
+        break;
+      case "button__pause":
+        presenceData.smallImageKey = "pause";
+        presenceData.smallImageText = (await strings).pause;
+        delete presenceData.endTimestamp;
+        presence.setTrayTitle();
+        break;
+    }
+  } else if (videoTitle && videoCurrentTime) {
+    const videoEndTime: string = document.querySelector<HTMLElement>(
+        "#footerPlayer > div.css-1mzzcqg > div.css-1er6xdl > span > div > div.css-119caa0 > time.duration-time.css-p7n8gi"
+      ).textContent,
+      videoCurrentTimestamp: Array<number> = videoCurrentTime
+        .split(":")
+        .map(Number),
+      videoEndTimestamp: Array<number> = videoEndTime.split(":").map(Number),
+      playingButton: string = document
+        .querySelector<HTMLElement>(
+          "#footerPlayer > div.css-1mzzcqg > div.css-ict1qq > div > button"
+        )
+        .getAttribute("data-type"),
+      repeatOn: string = document
+        .querySelector<HTMLElement>(
+          "#footerPlayer > div.css-1mzzcqg > div.css-ict1qq > button:nth-child(6)"
+        )
+        .getAttribute("data-type"),
+      videoTimestamps: Array<number> = presence.getTimestamps(
+        Math.floor(videoCurrentTimestamp[0] * 60 + videoCurrentTimestamp[1]),
+        Math.floor(videoEndTimestamp[0] * 60 + videoEndTimestamp[1])
+      );
+    presenceData.details = videoTitle;
+    presenceData.state = getAuthorString();
+
+    switch (playingButton) {
+      case "button__play":
+        presenceData.smallImageKey =
+          repeatOn === "button__repeatAll"
+            ? "repeat-all"
+            : repeatOn === "button__repeatSingle"
+            ? "repeat"
+            : "play";
+        presenceData.smallImageText =
+          repeatOn === "button__repeatAll"
+            ? (await strings).repeatAll
+            : repeatOn === "button__repeatSingle"
+            ? (await strings).repeat
+            : (await strings).play;
+        delete presenceData.endTimestamp;
+        presenceData.endTimestamp = videoTimestamps[1];
+        presence.setTrayTitle(songTitle);
+        break;
+      case "button__pause":
+        presenceData.smallImageKey = "pause";
+        presenceData.smallImageText = (await strings).pause;
+        delete presenceData.endTimestamp;
+        presence.setTrayTitle();
+        break;
+    }
   }
 
   if (!presenceData.details) {

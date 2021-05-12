@@ -6,13 +6,14 @@
 
 import "source-map-support/register";
 
-import { sync as glob } from "glob";
+import { coerce, inc, valid } from "semver";
 import {
   existsSync as exists,
   readFileSync as readFile,
   writeFileSync as writeFile
 } from "fs";
-import { valid, inc, coerce } from "semver";
+
+import { sync as glob } from "glob";
 
 function isValidJSON(text: string): boolean {
   try {

@@ -2,7 +2,6 @@ const presence = new Presence({
     clientId: "777954584013963265"
   }),
   browsingTimestamp = Date.now(),
-  webSocket = new WebSocket("wss://api.atomicradio.eu/websocket"),
   presenceData: PresenceData = {
     largeImageKey: "atr-logo",
     smallImageKey: "play-button"
@@ -34,41 +33,51 @@ const presence = new Presence({
     }
   };
 
-webSocket.onmessage = (message) => {
-  const data = JSON.parse(message.data);
-  switch (data.name) {
-    case "atr.one":
-      channelInfos.one = {
-        name: data.name,
-        listeners: data.listeners,
-        artist: data.song.artist,
-        title: data.song.title,
-        start_at: data.song.start_at,
-        end_at: data.song.end_at
-      };
-      break;
-    case "atr.dance":
-      channelInfos.dance = {
-        name: data.name,
-        listeners: data.listeners,
-        artist: data.song.artist,
-        title: data.song.title,
-        start_at: data.song.start_at,
-        end_at: data.song.end_at
-      };
-      break;
-    case "atr.trap":
-      channelInfos.trap = {
-        name: data.name,
-        listeners: data.listeners,
-        artist: data.song.artist,
-        title: data.song.title,
-        start_at: data.song.start_at,
-        end_at: data.song.end_at
-      };
-      break;
-  }
-};
+function startWebSocket() {
+  const webSocket = new WebSocket("wss://api.atomicradio.eu/websocket");
+
+  webSocket.onmessage = (message) => {
+    const data = JSON.parse(message.data);
+    switch (data.name) {
+      case "atr.one":
+        channelInfos.one = {
+          name: data.name,
+          listeners: data.listeners,
+          artist: data.song.artist,
+          title: data.song.title,
+          start_at: data.song.start_at,
+          end_at: data.song.end_at
+        };
+        break;
+      case "atr.dance":
+        channelInfos.dance = {
+          name: data.name,
+          listeners: data.listeners,
+          artist: data.song.artist,
+          title: data.song.title,
+          start_at: data.song.start_at,
+          end_at: data.song.end_at
+        };
+        break;
+      case "atr.trap":
+        channelInfos.trap = {
+          name: data.name,
+          listeners: data.listeners,
+          artist: data.song.artist,
+          title: data.song.title,
+          start_at: data.song.start_at,
+          end_at: data.song.end_at
+        };
+        break;
+    }
+  };
+  webSocket.onclose = () => {
+    setTimeout(() => {
+      startWebSocket();
+    }, 10000);
+  };
+}
+startWebSocket();
 
 async function getStationData(channel: string) {
   let channelInfo = {
@@ -124,7 +133,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, true);
       return;
   }
- 
+
   const playBar = document.getElementById("PlayBar"),
     playerButtonState = document.getElementById("Player_Play_Button_State"),
     channel = String(

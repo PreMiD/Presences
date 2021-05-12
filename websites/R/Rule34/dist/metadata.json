@@ -7,13 +7,14 @@
   "description": {
     "en": "Rule 34 - If it exists, there's porn of it. If not, start uploading!",
     "de": "Regel 34 - Wenn es existiert, gibt es Porn davon. Falls nicht, fang an etwas hochzuladen!",
-    "zh_CN": "Rule 34 - 这里在搞黄色，如果没有，那就上传!"
+    "zh_CN": "Rule 34 - 这里在搞黄色，如果没有，那就上传!",
+    "nl": "Regel 34 - Als het bestaat, is er porno van. Zo niet, begin met uploaden!"
   },
   "url": [
     "rule34.xxx",
     "rule34.paheal.net"
   ],
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/3jHxZJW.png",
   "thumbnail": "https://i.imgur.com/hnS39Sk.png",
   "color": "#AAE5A3",

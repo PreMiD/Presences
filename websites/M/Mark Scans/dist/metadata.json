@@ -7,10 +7,11 @@
   "description": {
     "en": "A brazilian scanlator that make webtoons and mangas",
     "pt_BR": "Uma scan brasileira fazendo webtoons e mangás",
-    "pt": "Uma scan brasileira fazendo webtoons e mangás"
+    "pt": "Uma scan brasileira fazendo webtoons e mangás",
+    "nl": "Een Braziliaanse scanlator die webtoons en manga's maakt"
   },
   "url": "markscans.online",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/jBlCITq.png",
   "thumbnail": "https://i.imgur.com/QEdn2iJ.png",
   "tags": [

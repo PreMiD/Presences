@@ -6,10 +6,12 @@
   },
   "url": "play.aidungeon.io",
   "description": {
-    "en": "AI Dungeon is an open-source text adventure game that uses the GPT-2 text prediction model created by OpenAI to generate effectively limitless open-ended story lines."
+    "en": "AI Dungeon is an open-source text adventure game that uses the GPT-2 text prediction model created by OpenAI to generate effectively limitless open-ended story lines.",
+    "ga_IE": "Is cluiche eachtraíochta téacs foinse oscailte é AI Dungeon a úsáideann an tsamhail tuartha téacs GPT-2 a chruthaigh OpenAI chun línte scéal oscailte gan teorainn a ghiniúint go héifeachtach.",
+    "nl": "AI Dungeon is een open-source tekstavonturenspel dat het GPT-2-tekstvoorspellingsmodel gebruikt dat is gemaakt door OpenAI om effectief grenzeloze verhaallijnen met een open einde te genereren."
   },
   "service": "AI Dungeon",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/570X8KK.png",
   "thumbnail": "https://i.imgur.com/LOh8Cbf.png",
   "color": "#484848",

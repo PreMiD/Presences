@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Kozou",
+    "id": "379362415428632576"
+  },
+  "service": "WolframAlpha",
+  "description": {
+    "en": "Compute answers using Wolfram's breakthrough technology & knowledgebase, relied on by millions of students & professionals. For math, science, nutrition,...",
+    "fr": "Calculez des réponses en utilisant la technologie de pointe et la base de connaissances de Wolfram, auxquelles des millions d'étudiants et de professionnels font confiance. Pour les mathématiques, les sciences, la nutrition,...",
+    "nl": "Bereken antwoorden met behulp van Wolfram's baanbrekende technologie en kennisdatabase, waarop miljoenen studenten en professionals vertrouwen. Voor wiskunde, wetenschap, voeding,..."
+  },
+  "url": [
+    "www.wolframalpha.com",
+    "products.wolframalpha.com"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/blEGmMK.png",
+  "thumbnail": "https://i.imgur.com/M8EhvsC.png",
+  "color": "#c24802",
+  "tags": [
+    "wolframalpha",
+    "wiki",
+    "wolfram"
+  ],
+  "category": "other"
+}

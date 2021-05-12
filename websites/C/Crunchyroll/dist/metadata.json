@@ -3,6 +3,12 @@
     "name": "TheDrop.",
     "id": "293828021134295040"
   },
+  "contributors": [
+    {
+      "name": "ScarVite",
+      "id": "141218912934166528"
+    }
+  ],
   "service": "Crunchyroll",
   "description": {
     "en": "Crunchyroll is the world’s largest destination for anime and manga, boasting a global community of more than 45 million registered users and over 2 million subscribers.",
@@ -16,13 +22,14 @@
     "zh_TW": "Crunchyroll是美國的一家提供東亞相關串流媒體影視服務和國際交流社區的網站。"
   },
   "url": "www.crunchyroll.com",
-  "version": "2.6.6",
+  "version": "2.6.8",
   "logo": "https://i.imgur.com/LpTKP8c.png",
   "thumbnail": "https://i.imgur.com/hzM7YCb.png",
   "color": "#f47521",
   "tags": [
     "video",
-    "anime"
+    "anime",
+    "manga"
   ],
   "iframe": true,
   "category": "anime"

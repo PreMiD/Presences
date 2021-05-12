@@ -6,13 +6,15 @@
   "service": "AnizmTV",
   "description": {
     "tr": "AnizmTV türkçe altyazılı animeyi kaliteli ve güncel izleyebileceğiniz sitedir.",
-    "en": "AnizmTV is a website which enables you to watch subtitled anime with high quality broadcasting and up-to-date episodes."
+    "en": "AnizmTV is a website which enables you to watch subtitled anime with high quality broadcasting and up-to-date episodes.",
+    "ga_IE": "Is suíomh Gréasáin é AnizmTV a chuireann ar do chumas féachaint ar anime le fotheidil le craoladh ar ardchaighdeán agus le heachtraí cothrom le dáta.",
+    "nl": "AnizmTV is een website waarmee u ondertitelde anime kunt bekijken met uitzendingen van hoge kwaliteit en actuele afleveringen."
   },
   "url": [
     "www.anizm.tv",
     "anizm.tv"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/TZZcyOQ.png",
   "thumbnail": "https://i.imgur.com/o4P1a0J.png",
   "color": "#fc9003",

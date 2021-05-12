@@ -15,10 +15,11 @@
   ],
   "description": {
     "en": "Loritta is a Discord bot for utility, fun, entertainment, moderation and more!",
-    "pt_BR": "Loritta é um bot no Discord de utilidade, diversão, entretenimento, moderação e muito mais!"
+    "pt_BR": "Loritta é um bot no Discord de utilidade, diversão, entretenimento, moderação e muito mais!",
+    "nl": "Loritta is een Discord-bot voor nut, plezier, entertainment, moderatie en meer!"
   },
   "service": "Loritta",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/Smoq0Ty.png",
   "thumbnail": "https://i.imgur.com/24HdLNN.png",
   "color": "#00FFDA",

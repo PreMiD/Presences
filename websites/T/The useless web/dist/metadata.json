@@ -5,7 +5,8 @@
   },
   "service": "The useless web",
   "description": {
-    "en": "The useless web is a website made for people who are bored and want something to pass the time! The useless web consists of one button, which when clicked, takes you to a random website, which is - completely useless!"
+    "en": "The useless web is a website made for people who are bored and want something to pass the time! The useless web consists of one button, which when clicked, takes you to a random website, which is - completely useless!",
+    "nl": "Het nutteloze web is een website gemaakt voor mensen die zich vervelen en iets willen om de tijd te doden! Het nutteloze web bestaat uit één knop, die, wanneer erop wordt geklikt, u naar een willekeurige website brengt, die - volkomen nutteloos is!"
   },
   "url": [
     "heeeeeeeey.co",
@@ -77,7 +78,7 @@
     "www.theuselessweb.com",
     "theuselessweb.com"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/YeXjpVB.jpg",
   "thumbnail": "https://downbeat.is-inside.me/LBnja6ty.png",
   "color": "#ae3484",

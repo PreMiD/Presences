@@ -9,10 +9,12 @@
     "www.qwantjunior.com"
   ],
   "description": {
-    "en": "Qwant is a search engine that respects your privacy and eases discovering and sharing via a social approach."
+    "en": "Qwant is a search engine that respects your privacy and eases discovering and sharing via a social approach.",
+    "ga_IE": "Is inneall cuardaigh é Qwant a urramaíonn do phríobháideacht agus a éascaíonn fionnachtain agus comhroinnt trí chur chuige sóisialta.",
+    "nl": "Qwant is een zoekmachine die uw privacy respecteert en het ontdekken en delen via een sociale benadering vergemakkelijkt."
   },
   "service": "Qwant",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/peAp6sZ.png",
   "thumbnail": "https://i.imgur.com/nEMCic5.png",
   "color": "#4BA2EA",

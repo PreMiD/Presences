@@ -6,13 +6,14 @@
   },
   "service": "Tokopedia",
   "description": {
-    "en": "The Indonesian E-Commerce Site"
+    "en": "The Indonesian E-Commerce Site",
+    "nl": "De Indonesische e-commerce-site"
   },
   "url": [
     "www.tokopedia.com",
     "seller.tokopedia.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/SS97GWA.png",
   "thumbnail": "https://i.imgur.com/ixO23A2.png",
   "color": "#90ee90",

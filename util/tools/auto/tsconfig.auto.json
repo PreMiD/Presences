@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["../../../@types", "../../../node_modules/@types"],
+    "module": "CommonJS",
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "removeComments": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "newLine": "lf",
+    "inlineSourceMap": true
+  }
+}

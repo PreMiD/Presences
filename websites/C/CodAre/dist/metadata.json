@@ -7,10 +7,11 @@
   "url": "codare.fun",
   "description": {
     "tr": "CodAre discord botları ve daha fazlası için basit bir kod paylaşım platformudur.",
-    "en": "CodAre is a simple code sharing platform for discord bots and more."
+    "en": "CodAre is a simple code sharing platform for discord bots and more.",
+    "nl": "CodAre is een eenvoudig platform voor het delen van codes voor discord bots en meer."
   },
   "service": "CodAre",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/f2U2Zd9.png",
   "thumbnail": "https://i.imgur.com/YZAHqu7.png",
   "color": "#3b1b8a",

@@ -17,10 +17,11 @@
     "web-01.sparkedhost.us"
   ],
   "description": {
-    "en": "Sparking your ideas to life by providing the most powerful, most reliable, and highest quality hosting at the most affordable price since 2017."
+    "en": "Sparking your ideas to life by providing the most powerful, most reliable, and highest quality hosting at the most affordable price since 2017.",
+    "nl": "Uw ideeën tot leven brengen door de krachtigste, betrouwbaarste en meest kwalitatieve hosting aan te bieden tegen de meest betaalbare prijs sinds 2017."
   },
   "service": "Sparked Host",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/LIRCNuJ.png",
   "thumbnail": "https://i.imgur.com/uVujqhk.png",
   "color": "#FF9F00",

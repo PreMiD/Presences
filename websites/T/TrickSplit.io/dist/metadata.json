@@ -6,10 +6,11 @@
   },
   "url": "tricksplit.io",
   "description": {
-    "en": "Alternative Agar.io website, with different modes."
+    "en": "Alternative Agar.io website, with different modes.",
+    "nl": "Alternatieve Agar.io-website, met verschillende modi."
   },
   "service": "TrickSplit.io",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/JdlCrl8.png",
   "thumbnail": "https://i.imgur.com/UshRMAY.png",
   "color": "#ABCF44",
