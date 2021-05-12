@@ -49,7 +49,7 @@ presence.on("UpdateData", async () => {
     }
     else if(pathname.startsWith("/collection")){
       const collection_name = document.querySelector('.page-title').textContent;
-      data.details = "Viewing collection: ";
+      data.details = "Viewing collection:";
       data.state = collection_name;
     }
     else if(pathname === "/advanced-search"){
