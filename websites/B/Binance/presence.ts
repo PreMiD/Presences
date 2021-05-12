@@ -88,10 +88,10 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Converting Crypto:";
 
       const inputCrypto = document
-          .querySelector("div.css-9wgib6")
+          .querySelectorAll("div.css-9wgib6")[0]
           .textContent.trim(),
         outputCrypto = document
-          .querySelector("div.css-9wgib6")
+          .querySelectorAll("div.css-9wgib6")[1]
           .textContent.trim();
 
       presenceData.state = `${inputCrypto} to ${outputCrypto}`;
