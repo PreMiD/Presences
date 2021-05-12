@@ -96,10 +96,23 @@ presence.on("UpdateData", async () => {
 
       presenceData.state = `${inputCrypto} to ${outputCrypto}`;
     } else if (window.location.pathname.includes("/trade")) {
-      const tradeType =
-          document.querySelector("div.css-109wawx")?.textContent?.trim() ||
-          document.querySelector("div.css-119y1m9")?.textContent?.trim(),
-        tradePair = document.querySelector("div.css-mzoqhr").textContent.trim();
+      const tradePair = document.querySelector("div.css-mzoqhr").textContent.trim();
+      let tradeType: string;
+
+      switch (new URLSearchParams(window.location.search).get('type')) {
+        case 'spot':
+          tradeType = 'Spot'
+          break;
+        case 'isolated':
+          tradeType = 'Isolated'
+          break;
+        case 'cross':
+          tradeType = 'Cross'
+          break;
+        default:
+          tradeType = 'Unknown'
+          break;
+      }
 
       presenceData.details = `Trading on ${tradeType}:`;
       presenceData.state = tradePair;
