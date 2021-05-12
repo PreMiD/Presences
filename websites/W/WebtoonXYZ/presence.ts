@@ -4,8 +4,7 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const v2icons = await presence.getSetting("v2icons"),
-        logo = await presence.getSetting("logo"),
+  const logo = await presence.getSetting("logo"),
         buttons = await presence.getSetting("buttons"),
         data: PresenceData = {
           largeImageKey: !logo ? "logo" : "logo-v2",
