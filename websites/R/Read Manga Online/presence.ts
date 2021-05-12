@@ -33,7 +33,7 @@ presence.on("UpdateData", async () => {
     }
     else if(pathname === "/manga-list/hash/ongoing"){
       data.details = "Viewing: ";
-      data.state = "Ongoing Manga";
+      data.state = "Ongoing Manga List";
     }
     else if(pathname === "/manga-list/hash/completed"){
       data.details = "Viewing: ";
