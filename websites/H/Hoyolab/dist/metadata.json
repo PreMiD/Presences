@@ -8,7 +8,7 @@
   "category": "games",
   "logo": "https://i.imgur.com/NtPeZ9u.png",
   "thumbnail": "https://i.imgur.com/oPFkbqC.png",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "color": "#2d2f33",
   "tags": [
     "games",
@@ -17,6 +17,7 @@
   ],
   "url": "www.hoyolab.com",
   "description": {
-    "en": "Genshin Impact Official Community is the official discussion forum for Genshin Impact, miHoYo's open-world action RPG."
+    "en": "Genshin Impact Official Community is the official discussion forum for Genshin Impact, miHoYo's open-world action RPG.",
+    "nl": "Genshin Impact Official Community is het officiële discussieforum voor Genshin Impact, miHoYo's open-wereld actie RPG."
   }
 }

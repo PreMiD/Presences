@@ -7,13 +7,14 @@
   "service": "Dropbox",
   "description": {
     "en": "Dropbox is a file hosting service operated by the American company Dropbox, Inc., headquartered in San Francisco, California, that offers cloud storage, file synchronization, personal cloud, and client software.",
-    "pl": "Dropbox to usługa świadczona przez Dropbox, Inc. polegająca na udostępnieniu przestrzeni dyskowej na serwerach tej firmy. Wysyłanie, przeglądanie i pobieranie danych jest możliwe poprzez zwykłą przeglądarkę lub poprzez dedykowaną aplikację zainstalowaną na komputerze."
+    "pl": "Dropbox to usługa świadczona przez Dropbox, Inc. polegająca na udostępnieniu przestrzeni dyskowej na serwerach tej firmy. Wysyłanie, przeglądanie i pobieranie danych jest możliwe poprzez zwykłą przeglądarkę lub poprzez dedykowaną aplikację zainstalowaną na komputerze.",
+    "nl": "Dropbox is een dienst voor het hosten van bestanden die wordt geëxploiteerd door het Amerikaanse bedrijf Dropbox, Inc., met hoofdkantoor in San Francisco, Californië, dat cloudopslag, bestandssynchronisatie, een persoonlijke cloud en clientsoftware biedt."
   },
   "url": [
     "www.dropbox.com",
     "showcase.dropbox.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/oFRDuay.png",
   "thumbnail": "https://i.imgur.com/uBR0ASw.png",
   "color": "#0062ff",

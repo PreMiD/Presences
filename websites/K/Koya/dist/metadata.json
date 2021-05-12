@@ -9,10 +9,11 @@
   ],
   "description": {
     "fr": "Un puissant bot Discord multifonctionnel et configurable.",
-    "en": "A powerful multi-function and configurable Discord bot."
+    "en": "A powerful multi-function and configurable Discord bot.",
+    "nl": "Een krachtige multifunctionele en configureerbare Discord-bot."
   },
   "service": "Koya",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/WeKgGeX.png",
   "thumbnail": "https://i.imgur.com/zQ7KPjZ.png",
   "color": "#7289da",

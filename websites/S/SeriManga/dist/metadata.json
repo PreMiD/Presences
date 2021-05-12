@@ -8,7 +8,7 @@
   "category": "anime",
   "logo": "https://i.imgur.com/vWBdu2A.png",
   "thumbnail": "https://i.imgur.com/BYGkJwg.png",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "color": "#2d2f33",
   "tags": [
     "manga",
@@ -17,6 +17,7 @@
   "url": "serimanga.com",
   "description": {
     "en": "Read Turkish manga online for free. High quality images and huge library.",
-    "tr": "Türkçe Manga ve Çizgi Romanları ücretsiz ve kaliteli bir şekilde okuyabileceğiniz site."
+    "tr": "Türkçe Manga ve Çizgi Romanları ücretsiz ve kaliteli bir şekilde okuyabileceğiniz site.",
+    "nl": "Lees gratis Turkse manga online. Afbeeldingen van hoge kwaliteit en enorme bibliotheek."
   }
 }

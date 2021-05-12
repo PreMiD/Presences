@@ -9,10 +9,11 @@
     "superiorservers.co"
   ],
   "description": {
-    "en": "SuperiorServers.co! The #1 DarkRP Garry's Mod Server!"
+    "en": "SuperiorServers.co! The #1 DarkRP Garry's Mod Server!",
+    "nl": "SuperiorServers.co! De #1 DarkRP Garry's Mod Server!"
   },
   "service": "SuperiorServers.co",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/uryXMgr.png",
   "thumbnail": "https://i.imgur.com/vyjsudO.png",
   "color": "#273341",

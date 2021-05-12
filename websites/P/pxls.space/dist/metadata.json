@@ -6,10 +6,11 @@
   },
   "service": "pxls.space",
   "description": {
-    "en": "Pxls.space is a clone of the r/place social experiment performed by the social platform Reddit on the 1st of April 2017. (April Fools Day) After several weeks, the canvas resets and takes on a new shape. "
+    "en": "Pxls.space is a clone of the r/place social experiment performed by the social platform Reddit on the 1st of April 2017. (April Fools Day) After several weeks, the canvas resets and takes on a new shape. ",
+    "nl": "Pxls.space is een kloon van het sociale experiment r / place uitgevoerd door het sociale platform Reddit op 1 april 2017. (April Fools Day) Na enkele weken wordt het canvas gereset en krijgt het een nieuwe vorm."
   },
   "url": "pxls.space",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/XEH4agn.jpeg",
   "thumbnail": "https://i.imgur.com/Lvi2tue.png",
   "color": "#F00",

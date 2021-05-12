@@ -6,10 +6,11 @@
   "service": "Coinbase",
   "description": {
     "en": "Coinbase is a secure online platform for buying, selling, transferring, and storing digital currency.",
-    "de": "Coinbase ist eine sichere online Plattform um digitale Währungen zu kaufen, überweisen, verkaufen und zu lagern."
+    "de": "Coinbase ist eine sichere online Plattform um digitale Währungen zu kaufen, überweisen, verkaufen und zu lagern.",
+    "nl": "Coinbase is een veilig online platform voor het kopen, verkopen, overdragen en opslaan van digitale valuta."
   },
   "url": "www.coinbase.com",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/Is0F38Z.png",
   "thumbnail": "https://i.imgur.com/4ttiUZu.jpg",
   "color": "#1751f0",

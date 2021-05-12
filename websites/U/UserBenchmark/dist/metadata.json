@@ -11,7 +11,8 @@
   ],
   "service": "UserBenchmark",
   "description": {
-    "en": "Top Market Research & Genuine Product Insight from our Users. Quickly find category leading products with UserBenchmark."
+    "en": "Top Market Research & Genuine Product Insight from our Users. Quickly find category leading products with UserBenchmark.",
+    "nl": "Topmarktonderzoek en authentiek productinzicht van onze gebruikers. Vind snel toonaangevende producten met UserBenchmark."
   },
   "url": [
     "www.userbenchmark.com",
@@ -22,7 +23,7 @@
     "ram.userbenchmark.com",
     "usb.userbenchmark.com"
   ],
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/4TBit6H.png",
   "thumbnail": "https://i.imgur.com/JOE2SVg.png",
   "color": "#FDA217",

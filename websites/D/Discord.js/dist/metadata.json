@@ -7,10 +7,11 @@
   "service": "Discord.js",
   "description": {
     "en": "Discord.js is a powerful node.js module that allows you to interact with the Discord API very easily.",
-    "es": "Discord.js es un módulo poderoso de node.js que te permite interactuar con la API de Discord de fácilmente."
+    "es": "Discord.js es un módulo poderoso de node.js que te permite interactuar con la API de Discord de fácilmente.",
+    "nl": "Discord.js is een krachtige node.js module die je toelaat om zeer eenvoudig te interageren met de Discord API."
   },
   "url": "discord.js.org",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/v4Qb6IT.png",
   "thumbnail": "https://i.imgur.com/lXDvidg.png",
   "color": "#8dd6f1",

@@ -6,10 +6,11 @@
   "service": "dizilab",
   "description": {
     "en": "dizilab is one of the biggest Turkish foreign TV show providers on internet.",
-    "tr": "dizilab, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir."
+    "tr": "dizilab, son çıkan, güncel ve bir çok yabancı diziyi izleyebileceğiniz bir yabancı dizi sitesidir.",
+    "nl": "dizilab is een van de grootste aanbieders van Turkse buitenlandse TV-programma's op internet."
   },
   "url": "dizilab.pw",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "logo": "https://premid.is-inside.me/7h01itFO.png",
   "thumbnail": "https://premid.is-inside.me/ObIqC0NJ.png",
   "color": "#444f53",

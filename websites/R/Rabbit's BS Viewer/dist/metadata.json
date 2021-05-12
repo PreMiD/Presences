@@ -6,10 +6,11 @@
   },
   "service": "Rabbit's BS Viewer",
   "description": {
-    "en": "preview Beat Saber custom levels in your browser"
+    "en": "preview Beat Saber custom levels in your browser",
+    "nl": "Bekijk aangepaste Beat Saber levels in je browser"
   },
   "url": "skystudioapps.com",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/FDP38pa.png",
   "thumbnail": "https://i.imgur.com/wseLQzZ.png",
   "color": "#232325",

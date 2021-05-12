@@ -5,10 +5,11 @@
   },
   "url": "nexusmods.com",
   "description": {
-    "en": "We support modding for all PC games. If you can mod it, we'll host it."
+    "en": "We support modding for all PC games. If you can mod it, we'll host it.",
+    "nl": "We ondersteunen modding voor alle pc-games. Als je het kunt aanpassen, zullen we het hosten."
   },
   "service": "Nexus Mods",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/An5OwGg.png",
   "thumbnail": "https://i.imgur.com/RCC92Ny.png",
   "color": "#DA8E35",

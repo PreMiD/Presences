@@ -7,10 +7,11 @@
   "description": {
     "en": "One of the giants fansubs in Brazil where they translate and distribute to the public, also known for translating Solo Leveling and other famous manga.",
     "pt_BR": "Uma das gigantes fansubs do Brasil, onde traduzem e libera ao público, também conhecida por traduzir obras como Solo Leveling além de outras obras famosas.",
-    "pt": "Uma das gigantes fansubs do Brasil, onde traduzem e libera ao público, também conhecida por traduzir obras como Solo Leveling além de outras obras famosas."
+    "pt": "Uma das gigantes fansubs do Brasil, onde traduzem e libera ao público, também conhecida por traduzir obras como Solo Leveling além de outras obras famosas.",
+    "nl": "Een van de giganten fansubs in Brazilië waar ze vertalen en verspreiden onder het publiek, ook bekend om het vertalen van Solo Leveling en andere beroemde manga."
   },
   "url": "neoxscans.com",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "logo": "https://i.imgur.com/L5sBw6j.png",
   "thumbnail": "https://i.imgur.com/ljNKCp1.png",
   "color": "#079ac7",
