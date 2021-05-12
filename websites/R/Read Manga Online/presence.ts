@@ -72,7 +72,7 @@ presence.on("UpdateData", async () => {
     }
     else if(pathname.startsWith('/manga')){
       const title = document.querySelector('.page-title').textContent;
-      data.details = "Viewing: ";
+      data.details = "Reading:";
       data.state = title;
       data.smallImageKey = "view";
       data.buttons = [{ label: "View manga", url: document.location.href }];
