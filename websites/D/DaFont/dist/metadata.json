@@ -5,10 +5,11 @@
   },
   "service": "DaFont",
   "description": {
-    "en": "Archive of freely downloadable fonts. Browse by alphabetical listing, by style, by author or by popularity."
+    "en": "Archive of freely downloadable fonts. Browse by alphabetical listing, by style, by author or by popularity.",
+    "nl": "Archief van gratis downloadbare lettertypen. Blader door alfabetische lijst, stijl, auteur of populariteit."
   },
   "url": "www.dafont.com",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/rc9ODvW.png",
   "thumbnail": "https://i.imgur.com/OTjFjMj.jpg",
   "color": "#eb4034",

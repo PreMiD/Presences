@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/Zt4i2l3.png",
   "thumbnail": "https://i.imgur.com/ojmsp7f.png",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "color": "#20f856",
   "tags": [
     "discordjs",
@@ -18,6 +18,7 @@
   "url": "discordjs.guide",
   "description": {
     "en": "A guide made by the community of discord.js for its users.",
-    "de": "Ein Leitfaden der Community von discord.js für ihre Benutzer."
+    "de": "Ein Leitfaden der Community von discord.js für ihre Benutzer.",
+    "nl": "Een gids gemaakt door de gemeenschap van discord.js voor haar gebruikers."
   }
 }

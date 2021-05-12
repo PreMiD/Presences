@@ -6,13 +6,16 @@
   },
   "url": "dmoj.ca",
   "description": {
-    "en": "The DMOJ is a modern contest platform and archive of programming problems."
+    "en": "The DMOJ is a modern contest platform and archive of programming problems.",
+    "nl": "De DMOJ is een modern wedstrijdplatform en een archief van programmeringsproblemen."
   },
   "service": "DMOJ",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/wrX7Tpu.png",
   "thumbnail": "https://i.imgur.com/5OmbMhc.png",
   "color": "#FCDB05",
-  "tags": ["coding"],
+  "tags": [
+    "coding"
+  ],
   "category": "other"
 }

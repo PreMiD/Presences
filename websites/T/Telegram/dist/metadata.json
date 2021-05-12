@@ -8,10 +8,11 @@
     "en": "Telegram is a secure instant messaging service with multi-platform support.",
     "tr": "Telegram, çoklu platform desteği sunan, güvenli anlık mesajlaşma servisidir.",
     "ru": "Telegram - это безопасный сервис обмена мгновенными сообщениями с поддержкой нескольких платформ.",
-    "uk_UA": "Telegram - це безпечний та мультиплатформенний сервіс обміну миттєвими повідомленнями."
+    "uk_UA": "Telegram - це безпечний та мультиплатформенний сервіс обміну миттєвими повідомленнями.",
+    "nl": "Telegram is een veilige instant messaging-service met ondersteuning voor meerdere platforms."
   },
   "url": "web.telegram.org",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "logo": "https://i.imgur.com/3hsUon3.png",
   "thumbnail": "https://i.imgur.com/aTmmCpt.png",
   "color": "#33abe0",

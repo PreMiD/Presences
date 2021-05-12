@@ -6,10 +6,11 @@
   "service": "Dizipub",
   "description": {
     "en": "Dizipub is a website that you can watch your favorite series and films.",
-    "tr": "Dizipub, favori film ve dizilerinizi kolayca bulabileceğiniz bir film sitesidir."
+    "tr": "Dizipub, favori film ve dizilerinizi kolayca bulabileceğiniz bir film sitesidir.",
+    "nl": "Dizipub is een website waar je je favoriete series en films kunt bekijken."
   },
   "url": "dizipub.net",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/ordWdun.png",
   "thumbnail": "https://i.imgur.com/ordWdun.png",
   "color": "#00BA66",

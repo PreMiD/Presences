@@ -6,10 +6,11 @@
   },
   "service": "SpinShare",
   "description": {
-    "en": "SpinShare is a chart sharing service for Spin Rhythm XD."
+    "en": "SpinShare is a chart sharing service for Spin Rhythm XD.",
+    "nl": "SpinShare is een dienst voor het delen van kaarten voor Spin Rhythm XD."
   },
   "url": "spinsha.re",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/Brh0MPv.png",
   "thumbnail": "https://i.imgur.com/iXVtBfT.png",
   "color": "#e22c78",

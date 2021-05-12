@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "service": "Kael",
   "category": "other",
   "color": "#eb798d",
@@ -11,7 +11,8 @@
   },
   "description": {
     "pt_BR": "Kael, um bot brasileiro multifuncional projetado para gerenciamento de servidores Discord.",
-    "en": "Kael, a multifunctional Brazilian bot designed for managing Discord servers."
+    "en": "Kael, a multifunctional Brazilian bot designed for managing Discord servers.",
+    "nl": "Kael, een multifunctionele Braziliaanse bot die is ontworpen voor het beheren van Discord-servers."
   },
   "url": [
     "kaelbot.xyz",
