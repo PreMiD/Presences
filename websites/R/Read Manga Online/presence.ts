@@ -54,7 +54,7 @@ presence.on("UpdateData", async () => {
     }
     else if(pathname === "/advanced-search"){
       const query = (<HTMLInputElement>document.querySelector('[name="manga-name"]')).value;
-      data.details = "Searching: ";
+      data.details = "Searching for:";
       data.state = query;
       data.smallImageKey = "search";
     }
