@@ -13,7 +13,8 @@
     "color": "#eb2e73",
     "tags": [
       "manhwa",
-      "webtoon"
+      "webtoon",
+      "nsfw"
     ],
     "url": "www.webtoon.xyz",
     "description": {
@@ -25,12 +26,6 @@
         "title": "Show buttons",
         "icon": "fas fa-compress-arrows-alt",
         "value": true
-      },
-      {
-        "id": "v2icons",
-        "title": "V2 icons (circle)",
-        "icon": "fas fa-circle",
-        "value": false
       },
       {  
         "id": "logo",

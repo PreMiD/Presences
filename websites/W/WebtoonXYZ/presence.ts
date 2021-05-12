@@ -9,26 +9,30 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
+<<<<<<< HEAD
   const v2icons = await presence.getSetting("v2icons"),
 <<<<<<< HEAD
         logo = await presence.getSetting("logo"),
+=======
+  const logo = await presence.getSetting("logo"),
+>>>>>>> 767aeb0b2255d8212067fb3f6328079f09d573bd
         buttons = await presence.getSetting("buttons"),
         data: PresenceData = {
-          largeImageKey: (logo) == 0 ? "logo" : "logo-v2",
+          largeImageKey: !logo ? "logo" : "logo-v2",
           startTimestamp: browsingStamp
         },
     pathname = document.location.pathname;
 
-    if(pathname == "/" && window.location.search.substr(0,2) == "?s"){
+    if(pathname === "/" && window.location.search.substr(0,2) == "?s"){
       const urlParams = new URLSearchParams(window.location.search),
             nsfw = urlParams.get("adult"),
-            search = nsfw == "1" ? "nsfw" : nsfw == "0" ? "non nsfw" : urlParams.get("s"),
+            search = nsfw === "1" ? "nsfw" : nsfw === "0" ? "non nsfw" : urlParams.get("s"),
             results = document.querySelector(".c-blog__heading > .h4").textContent.split(" ")[1];
       data.details = "Searching:";
       data.state = search + " 🔸 " + results +" results";
-      data.smallImageKey = (v2icons) ? "search-v2" : "search";
+      data.smallImageKey = "search";
     }    
-    else if(pathname == "/")
+    else if(pathname === "/")
       data.details = "Viewing the homepage";
     else if(pathname.endsWith("/webtoons/")){
       const results = document.querySelector(".c-blog__heading > .h4").textContent;
@@ -40,12 +44,12 @@ presence.on("UpdateData", async () => {
             results = document.querySelector(".c-blog__heading > .h4").textContent;
       data.details = "Browsing " + genre + " webtoons";
       data.state = "📋 " +results; 
-      data.smallImageKey = (v2icons) ? "search-v2" : "search";
+      data.smallImageKey = "search";
     }
-    else if(pathname == "/completed-webtoons/"){
+    else if(pathname === "/completed-webtoons/"){
       data.details = "Browsing:";
       data.state = "Completed webtoons";
-      data.smallImageKey = (v2icons) ? "search-v2" : "search";
+      data.smallImageKey = "search";
     }
     else if(pathname.startsWith("/read") && pathname.indexOf("/chapter") > 0){
       const title = document.querySelector("#chapter-heading").textContent.split("-")[0],
@@ -55,19 +59,19 @@ presence.on("UpdateData", async () => {
       data.details = title;
       data.state = "📖 " + chapter + " 🔸 " + progress + "%";
       data.largeImageKey = title.includes("Solo Leveling") ? "solo" : (logo) == 0 ? "logo" : "logo-v2";
-      data.smallImageKey = (v2icons) ? "read-v2" : "read";
+      data.smallImageKey = "read";
       if (buttons) data.buttons = [{label: "Read Webtoon", url: window.location.href}];
     }
     else if(pathname.startsWith("/read")){
       const title = document.querySelector(".post-title").textContent;
       data.details = "Viewing:";
       data.state = title;
-      data.smallImageKey = (v2icons) ? "view-v2" : "view";
+      data.smallImageKey = "view";
       data.largeImageKey = title.includes("Solo Leveling") ? "solo" : (logo) == 0 ? "logo" : "logo-v2";
       if (buttons) data.buttons = [{label: "View Webtoon", url: window.location.href}];
     }
-    else if(pathname == "/user-settings/"){
-      data.smallImageKey = (v2icons) ? "settings-v2" : "settings";
+    else if(pathname === "/user-settings/"){
+      data.smallImageKey = "settings";
       switch(window.location.search){
         case "?tab=history":
           data.details = "User settings:";
@@ -88,6 +92,7 @@ presence.on("UpdateData", async () => {
     }
     presence.setActivity(data);
   });
+<<<<<<< HEAD
 =======
     logo = await presence.getSetting("logo"),
     buttons = await presence.getSetting("buttons"),
@@ -182,3 +187,5 @@ presence.on("UpdateData", async () => {
   presence.setActivity(data);
 });
 >>>>>>> fccbe719f844f90613be3cfd51f2bde62886d5f6
+=======
+>>>>>>> 767aeb0b2255d8212067fb3f6328079f09d573bd
