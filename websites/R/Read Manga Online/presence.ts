@@ -16,7 +16,7 @@ presence.on("UpdateData", async () => {
       data.state = "Popular Manga";
     }
     else if(pathname === "/manga-list"){
-      data.details = "Viewing: ";
+      data.details = "Viewing:";
       data.state = "All Manga";
     }
     else if(pathname.startsWith("/manga-list") && pathname.endsWith('/completed')){
