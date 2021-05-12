@@ -8,7 +8,7 @@
   "category": "anime",
   "logo": "https://i.imgur.com/9MxXOK3.png",
   "thumbnail": "https://i.imgur.com/gz0tYlg.png",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "color": "#9b403f",
   "tags": [
     "anime"
@@ -17,6 +17,7 @@
   "url": "anime-tube.tv",
   "description": {
     "de": "Die Anime Community mit hunderten Anime als Livestream.",
-    "en": "The Anime Community with hundreds of Anime livestreams."
+    "en": "The Anime Community with hundreds of Anime livestreams.",
+    "nl": "De Anime community met honderden Anime livestreams."
   }
 }

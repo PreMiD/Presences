@@ -6,13 +6,14 @@
   "service": "osu!gatari",
   "description": {
     "en": "Welcome to the best osu! server osu!gatari.",
-    "zh_CN": "欢迎来到最棒的osu!私服:osu!gatari。"
+    "zh_CN": "欢迎来到最棒的osu!私服:osu!gatari。",
+    "nl": "Welkom bij de beste osu! server osu! gatari."
   },
   "url": [
     "osu.gatari.pw",
     "sig.gatari.pw"
   ],
-  "version": "1.4.5",
+  "version": "1.4.6",
   "logo": "https://i.imgur.com/yVkDTh4.png",
   "thumbnail": "https://i.imgur.com/y8IrnYg.png",
   "color": "#B21964",

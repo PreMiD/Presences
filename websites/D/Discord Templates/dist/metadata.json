@@ -7,11 +7,18 @@
   "url": "discordtemplates.com",
   "description": {
     "en": "Start creating your own community with our awesome templates. Build your own kingdom.",
-    "tr": "Sitemizdeki ücretsiz şablonlarla kendi topluluğunuzu kurun ve eğlenin!"
+    "tr": "Sitemizdeki ücretsiz şablonlarla kendi topluluğunuzu kurun ve eğlenin!",
+    "nl": "Begin met het creëren van je eigen gemeenschap met onze geweldige sjablonen. Bouw je eigen koninkrijk."
   },
   "service": "Discord Templates",
-  "altnames": ["Discord Themes", "Discord Şablonları", "Discord Sunucu Şablonları", "Discord Şablon", "Hazır Sunucu"],
-  "version": "1.1.1",
+  "altnames": [
+    "Discord Themes",
+    "Discord Şablonları",
+    "Discord Sunucu Şablonları",
+    "Discord Şablon",
+    "Hazır Sunucu"
+  ],
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/W7MRtdq.jpeg",
   "thumbnail": "https://i.imgur.com/JRNtvRF.png",
   "color": "#0F6BFD",

@@ -11,10 +11,11 @@
   ],
   "service": "Just Light Novels",
   "description": {
-    "en": "Just Light Novels! Home of All Light Novels"
+    "en": "Just Light Novels! Home of All Light Novels",
+    "nl": "Gewoon lichte romans! Huis van alle lichte romans"
   },
   "url": "justlightnovels.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/HyOSTGP.png",
   "thumbnail": "https://i.imgur.com/KWY5wqt.png",
   "color": "#0000ff",

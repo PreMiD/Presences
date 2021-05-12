@@ -7,10 +7,11 @@
   "description": {
     "en": "Easily play back the music that is stored on your cloud service, directly in your browser or on your phone.",
     "ro": "Redă ușor muzica care este stocată in serviciul tău cloud, direct pe browser-ul/telefonul tău.",
-    "zh_CN": "直接在浏览器或手机上轻松播放存储在云服务中的音乐。"
+    "zh_CN": "直接在浏览器或手机上轻松播放存储在云服务中的音乐。",
+    "nl": "Speel eenvoudig de muziek af die is opgeslagen op uw cloudservice, rechtstreeks in uw browser of op uw telefoon."
   },
   "url": "play.asti.ga",
-  "version": "2.6.5",
+  "version": "2.6.6",
   "logo": "https://i.imgur.com/5cNh7kv.png",
   "thumbnail": "https://i.imgur.com/xcbh1rC.png",
   "color": "#605da9",

@@ -5,10 +5,11 @@
   },
   "service": "IMDb",
   "description": {
-    "en": "IMDb (Internet Movie Database) is an online database of information related to films, television programs, home videos, video games, and streaming content online – including cast, production crew and personal biographies, plot summaries, trivia, fan and critical reviews, and ratings."
+    "en": "IMDb (Internet Movie Database) is an online database of information related to films, television programs, home videos, video games, and streaming content online – including cast, production crew and personal biographies, plot summaries, trivia, fan and critical reviews, and ratings.",
+    "nl": "IMDb (Internet Movie Database) is een online database met informatie met betrekking tot films, televisieprogramma's, homevideo's, videogames en online streaming-inhoud - inclusief cast, productieploeg en persoonlijke biografieën, samenvattingen van plot, trivia, fan- en kritische recensies, en waarderingen."
   },
   "url": "www.imdb.com",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/OCAWBbv.png",
   "thumbnail": "https://i.imgur.com/hPrMgUE.png",
   "color": "#e6b91e",

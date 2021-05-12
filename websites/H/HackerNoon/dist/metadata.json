@@ -6,13 +6,14 @@
   "service": "HackerNoon",
   "description": {
     "en": "HackerNoon is an Independent Tech Media Site",
-    "tr": "HackerNoon, Bağımsız bir Teknik Medya Sitesidir"
+    "tr": "HackerNoon, Bağımsız bir Teknik Medya Sitesidir",
+    "nl": "HackerNoon is een onafhankelijke technische mediasite"
   },
   "url": [
     "www.hackernoon.com",
     "hackernoon.com"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://bunyamin.is-inside.me/DdQYE09Y.png",
   "thumbnail": "https://bunyamin.is-inside.me/s5uYuU1w.png",
   "color": "#00ff01",

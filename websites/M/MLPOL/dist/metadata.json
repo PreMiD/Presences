@@ -6,10 +6,11 @@
   },
   "url": "mlpol.net",
   "description": {
-    "en": "Welcome to the Mongolian political horsewhispering forum, also known as /mlpol/"
+    "en": "Welcome to the Mongolian political horsewhispering forum, also known as /mlpol/",
+    "nl": "Welkom bij het Mongoolse politieke paardenverluisterforum, ook bekend als /mlpol/"
   },
   "service": "MLPOL",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/djCvvIV.png",
   "thumbnail": "https://i.imgur.com/jORyHwa.png",
   "color": "#FF0000",

@@ -12,10 +12,11 @@
   ],
   "service": "freeCodeCamp",
   "description": {
-    "en": "Learn to code. Build projects. Earn certifications. Since 2015, 40,000 graduates have gotten jobs at tech companies including Google, Apple, Amazon, and Microsoft."
+    "en": "Learn to code. Build projects. Earn certifications. Since 2015, 40,000 graduates have gotten jobs at tech companies including Google, Apple, Amazon, and Microsoft.",
+    "nl": "Leer coderen. Bouw projecten. Verdien certificaten. Sinds 2015 hebben 40.000 afgestudeerden een baan gekregen bij technologiebedrijven als Google, Apple, Amazon en Microsoft."
   },
   "url": "www.freecodecamp.org",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://i.imgur.com/asmbZdS.png",
   "thumbnail": "https://i.imgur.com/3jskcBw.png",
   "color": "#00008B",

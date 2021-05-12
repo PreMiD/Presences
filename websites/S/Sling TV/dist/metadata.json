@@ -6,13 +6,14 @@
   },
   "service": "Sling TV",
   "description": {
-    "en": "Get more of the live TV you love for less."
+    "en": "Get more of the live TV you love for less.",
+    "nl": "Ontvang meer live tv voor minder geld."
   },
   "url": [
     "sling.com",
     "watch.sling.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/iTHexWR.png",
   "thumbnail": "https://i.imgur.com/5q37Xgd.png",
   "color": "#008FCE",
