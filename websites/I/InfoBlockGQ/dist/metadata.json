@@ -1,0 +1,17 @@
+{
+    "author": {
+      "name": "InfoBlock",
+      "id": "124220790001500161"
+    },
+    "service": "InfoBlock.gq",
+    "description": {
+      "en": "The Official Website of InfoBlock and Block Giveaways",
+      "de": "Die Offizielle Webseite von InfoBlock und Block Giveaways"
+    },
+    "url": "infoblock.gq",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/HhVAM3d.png",
+    "thumbnail": "https://i.imgur.com/HhVAM3d.png",
+    "color": "#000000",
+    "category": "other"
+  }

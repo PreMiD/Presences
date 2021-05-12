@@ -7,10 +7,11 @@
   "description": {
     "fi": "Voit kuunnella suomalaisia radiokanavia internetissä!",
     "en": "You can listen to Finnish radio channels on the Internet!",
-    "nl": "U kunt op internet naar Finse radiokanalen luisteren!"
+    "nl": "U kunt op internet naar Finse radiokanalen luisteren!",
+    "de": "skio"
   },
   "url": "www.radio-suomi.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/nhxjVmG.png",
   "thumbnail": "https://i.imgur.com/POhcIvd.png",
   "color": "#002F6C",
