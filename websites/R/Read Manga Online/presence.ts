@@ -59,7 +59,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = "search";
     }
     else if(pathname.startsWith('/category')){
-      data.details = "Browsing category: ";
+      data.details = "Browsing category:";
       data.state = pathname.split('/')[2].replace('-', ' ');
     }
     else if(pathname.endsWith('/all-pages')){
