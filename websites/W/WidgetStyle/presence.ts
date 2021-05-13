@@ -10,12 +10,6 @@ presence.on("UpdateData", async () => {
 
     if (document.location.pathname === "/") {
       presenceData.details = "Viewing 🏠 home page";
-      presenceData.buttons = [
-        {
-          label: "View Page",
-          url: document.location.href
-        }
-      ];
     } else if (document.location.pathname.includes("/widgets")) {
       const search = document.getElementById("search")?.getAttribute("value"), 
       total = document.getElementById("widgettotal")?.getAttribute("total");
