@@ -106,10 +106,11 @@ presence.on("UpdateData", async () => {
             ?.parentElement.parentElement.parentElement.firstElementChild
             .children[0].textContent
         })`,
-        smallImageKey: (currentVidElements.find((v) =>
-          v.className.includes("video-card")
-        )?.firstElementChild?.firstElementChild
-          ?.firstElementChild as HTMLVideoElement)?.paused
+        smallImageKey: (
+          currentVidElements.find((v) => v.className.includes("video-card"))
+            ?.firstElementChild?.firstElementChild
+            ?.firstElementChild as HTMLVideoElement
+        )?.paused
           ? "pause"
           : "play",
         buttons: [

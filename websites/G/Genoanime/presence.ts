@@ -117,9 +117,9 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching For...";
-    presenceData.state = (document.getElementById(
-      "search-anime"
-    ) as HTMLInputElement).value;
+    presenceData.state = (
+      document.getElementById("search-anime") as HTMLInputElement
+    ).value;
   } else if (document.location.pathname.includes("/amv")) {
     presenceData.details = "Watching AMV videos";
     presenceData.buttons = [

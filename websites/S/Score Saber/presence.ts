@@ -20,20 +20,18 @@ presence.on("UpdateData", async () => {
         .getAttribute("value");
     } else if (document.location.href.includes("country=")) {
       presenceData.details =
-        "Browsing " + document.location.href.split("=")[1].toUpperCase() + " Rankings";
+        "Browsing " +
+        document.location.href.split("=")[1].toUpperCase() +
+        " Rankings";
       if (!document.location.href.includes("?country="))
-        presenceData.state = "Page "
-          + document.location.href.split("/")[4].split("&")[0];
-      else
-        presenceData.state = "Page 1";
-    }
-    else {
+        presenceData.state =
+          "Page " + document.location.href.split("/")[4].split("&")[0];
+      else presenceData.state = "Page 1";
+    } else {
       presenceData.details = "Browsing Global Rankings";
       if (document.location.href.includes("/global/"))
-        presenceData.state = "Page "
-          + document.location.href.split("/")[4];
-      else
-        presenceData.state = "Page 1";
+        presenceData.state = "Page " + document.location.href.split("/")[4];
+      else presenceData.state = "Page 1";
     }
   else if (document.location.pathname.includes("/rankings"))
     presenceData.details = "Browsing Global Rankings";
@@ -79,18 +77,15 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname.includes("/u/")) {
     presenceData.details = "Viewing User";
-    presenceData.state = document.querySelector(
-      "h5.title.is-5 > a"
-    ).textContent
-      .slice(0, -9)
-      + "("
-      + document.querySelectorAll(
-        "div.column > ul > li"
-      ).item(1)
-      .textContent
-      .split(":")[1]
-      .slice(1)
-      + ")";
+    presenceData.state =
+      document.querySelector("h5.title.is-5 > a").textContent.slice(0, -9) +
+      "(" +
+      document
+        .querySelectorAll("div.column > ul > li")
+        .item(1)
+        .textContent.split(":")[1]
+        .slice(1) +
+      ")";
     presenceData.buttons = [
       {
         label: "View Page",

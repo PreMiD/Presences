@@ -9,8 +9,9 @@ presence.on("UpdateData", async () => {
     titulo = document.title;
 
   if (titulo.includes("Resultados da pesquisa")) {
-    const result = document.querySelector("body > div.pagAniTitulo > div > h1")
-      .textContent;
+    const result = document.querySelector(
+      "body > div.pagAniTitulo > div > h1"
+    ).textContent;
     presenceData.details = "Página de Busca";
     presenceData.state =
       "Pesquisando: " + result.replace("Você pesquisou por:", "");
@@ -28,8 +29,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Calendário de Animes";
     presenceData.startTimestamp = tempo;
   } else if (titulo.includes("Todos os Epi")) {
-    const nameAni = document.querySelector("body > div.pagAniTitulo > div > h1")
-        .textContent,
+    const nameAni = document.querySelector(
+        "body > div.pagAniTitulo > div > h1"
+      ).textContent,
       genrAni = document.querySelector(
         "#anime > div.animeFlexContainer > div.right > div > div:nth-child(2)"
       ).textContent;

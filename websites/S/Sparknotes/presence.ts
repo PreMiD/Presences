@@ -112,9 +112,9 @@ presence.on("UpdateData", async () => {
   } else if (path == "/us-government-and-politics/") {
     subjectCondition("us-government-and-politics");
   } else if (path == "/search") {
-    title = (document.querySelector(
-      "#results-search-input"
-    ) as HTMLInputElement).value;
+    title = (
+      document.querySelector("#results-search-input") as HTMLInputElement
+    ).value;
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Searching:";
     presenceData.state = title;

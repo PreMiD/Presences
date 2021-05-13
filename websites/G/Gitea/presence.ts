@@ -126,12 +126,14 @@ presence.on("UpdateData", async () => {
       } else if (document.location.pathname.split("/")[3] == "activity") {
         presenceData.state = "Viewing Activity...";
       } else if (document.location.pathname.split("/")[3] == "src") {
-        const branch = document.getElementsByClassName("octicon-git-branch")[1]
-          .parentNode.lastChild.textContent;
+        const branch =
+          document.getElementsByClassName("octicon-git-branch")[1].parentNode
+            .lastChild.textContent;
         presenceData.state = "Viewing Files... (" + branch + " Branch)";
       } else if (document.location.pathname.split("/")[3] == "commits") {
-        const branch = document.getElementsByClassName("octicon-git-branch")[1]
-          .parentNode.lastChild.textContent;
+        const branch =
+          document.getElementsByClassName("octicon-git-branch")[1].parentNode
+            .lastChild.textContent;
         presenceData.state = "Viewing Commits... (" + branch + " Branch)";
       } else if (document.location.pathname.split("/")[3] == "branches") {
         presenceData.state = "Viewing Branches";

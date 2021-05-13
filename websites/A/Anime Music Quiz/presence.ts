@@ -42,8 +42,8 @@ presence.on("UpdateData", async () => {
               document.querySelector("#battleRoyalPage").className ==
               "text-center"
             ) {
-              timeRemainingBR = document.querySelector("#brTimeLeft")
-                .textContent;
+              timeRemainingBR =
+                document.querySelector("#brTimeLeft").textContent;
               data.smallImageKey = "btr";
               data.smallImageText = "Time remaining: " + timeRemainingBR;
               data.details = "Choosing songs for";
@@ -88,8 +88,8 @@ presence.on("UpdateData", async () => {
                   data.state = "Waiting for the results...";
                   presence.setActivity(data);
                 } else {
-                  timeRemaining = document.querySelector("#qpHiderText")
-                    .textContent;
+                  timeRemaining =
+                    document.querySelector("#qpHiderText").textContent;
                   data.smallImageKey = "gamepad";
                   data.smallImageText =
                     "Round: " +
@@ -162,8 +162,8 @@ presence.on("UpdateData", async () => {
               document.querySelector("#battleRoyalPage").className ==
               "text-center"
             ) {
-              timeRemainingBR = document.querySelector("#brTimeLeft")
-                .textContent;
+              timeRemainingBR =
+                document.querySelector("#brTimeLeft").textContent;
               data.smallImageKey = "btr";
               data.smallImageText = "Tempo rimanente: " + timeRemainingBR;
               data.details = "Sceglie le canzoni per";
@@ -208,8 +208,8 @@ presence.on("UpdateData", async () => {
                   data.state = "Aspettando i risultati...";
                   presence.setActivity(data);
                 } else {
-                  timeRemaining = document.querySelector("#qpHiderText")
-                    .textContent;
+                  timeRemaining =
+                    document.querySelector("#qpHiderText").textContent;
                   data.smallImageKey = "gamepad";
                   data.smallImageText =
                     "Round: " +

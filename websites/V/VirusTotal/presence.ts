@@ -37,8 +37,9 @@ presence.on("UpdateData", () => {
       .querySelector("body > vt-virustotal-app")
       .shadowRoot.querySelector("#toolbar")
       .shadowRoot.querySelector("#omnibarWrapper > vt-ui-account-widget")
-      .shadowRoot.querySelector("#userDropdown > div.avatar-section > span")
-      .textContent;
+      .shadowRoot.querySelector(
+        "#userDropdown > div.avatar-section > span"
+      ).textContent;
     presenceData.details = "Update their profile...";
     presenceData.state = nickname;
     presence.setActivity(presenceData);

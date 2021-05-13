@@ -18,10 +18,12 @@ presence.on("UpdateData", async () => {
     ? false
     : true;
   if (radioCheck) {
-    var song = document.querySelector(".audioplayer-nowplaying__track")
-      .textContent;
-    var artist = document.querySelector(".audioplayer-nowplaying__artist")
-      .textContent;
+    var song = document.querySelector(
+      ".audioplayer-nowplaying__track"
+    ).textContent;
+    var artist = document.querySelector(
+      ".audioplayer-nowplaying__artist"
+    ).textContent;
     (data.details = song),
       (data.state = artist),
       (data.smallImageKey = "live"),
