@@ -120,20 +120,17 @@ presence.on("UpdateData", async () => {
       window.location.pathname.includes("/futures") ||
       window.location.pathname.includes("/delivery")
     ) {
-      const tradeType = document
-          .querySelector("div.css-4mvl8x > a:nth-child(1)")
-          .textContent.trim(),
-        tradeLeverage = document
-          .querySelector("div.css-4mvl8x > a:nth-child(2)")
+      const tradeLeverage = document
+          .querySelector("div.css-1kk0gzs > a:nth-child(2)")
           .textContent.trim(),
         tradePair = document
-          .querySelector("div.css-17i092f > h1")
+          .querySelector("div.css-1wd9czp > h1")
           .textContent.trim(),
         tradeTerm = document
-          .querySelector("div.css-17i092f > div")
+          .querySelector("div.css-1wd9czp > div > h1")
           .textContent.trim();
 
-      presenceData.details = `Trading on ${tradeType} ${tradeLeverage}:`;
+      presenceData.details = `Futures Trading on ${tradeLeverage}:`
       presenceData.state = `${tradePair} ${tradeTerm}`;
     } else {
       presenceData.details = "Browsing...";
