@@ -10,7 +10,7 @@
     "nl": "Gitea is een Open-Source Git Platform, sterk geïnspireerd door GitHub"
   },
   "url": "gitea.com",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://crugg.de/premid/gitealogo.png",
   "thumbnail": "https://crugg.de/premid/giteabanner.png",
   "color": "#5aa509",

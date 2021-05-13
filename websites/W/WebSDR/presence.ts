@@ -42,9 +42,11 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/") {
     if (intHandle == undefined) intHandle = setInterval(updateMode, 1000);
 
-    frequency = (document.querySelector(
-      "div.ctl > form > span > input"
-    ) as HTMLInputElement).value;
+    frequency = (
+      document.querySelector(
+        "div.ctl > form > span > input"
+      ) as HTMLInputElement
+    ).value;
 
     presenceData.details = frequency + " " + modes[mode];
 

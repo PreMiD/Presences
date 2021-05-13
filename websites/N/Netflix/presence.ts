@@ -266,10 +266,11 @@ presence.on("UpdateData", async () => {
             ? (await strings).viewingSeries
             : (await strings).viewingMovie,
           state:
-            (document.querySelector(
-              ".previewModal--player-titleTreatment-logo"
-            ) as HTMLImageElement)?.title ||
-            document.querySelector("h1.title-title")?.textContent,
+            (
+              document.querySelector(
+                ".previewModal--player-titleTreatment-logo"
+              ) as HTMLImageElement
+            )?.title || document.querySelector("h1.title-title")?.textContent,
           buttons: [
             {
               label: document.querySelector(".btn.btn-get-started")
@@ -293,18 +294,20 @@ presence.on("UpdateData", async () => {
         },
         "/search/": {
           details: (await strings).searchFor,
-          state: (document.querySelector(
-            ".searchInput > input"
-          ) as HTMLInputElement)?.value,
+          state: (
+            document.querySelector(".searchInput > input") as HTMLInputElement
+          )?.value,
           smallImageKey: "search"
         },
         "jbv/(\\d*)/": {
           details: document.querySelector(".episodeSelector")
             ? (await strings).viewingSeries
             : (await strings).viewingMovie,
-          state: (document.querySelector(
-            ".previewModal--player-titleTreatment-logo"
-          ) as HTMLImageElement)?.title,
+          state: (
+            document.querySelector(
+              ".previewModal--player-titleTreatment-logo"
+            ) as HTMLImageElement
+          )?.title,
           buttons: [
             {
               label: document.querySelector(".episodeSelector")

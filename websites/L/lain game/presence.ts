@@ -25,9 +25,8 @@ presence.on("UpdateData", async () => {
   } else if (new URLSearchParams(window.location.search).has("tag")) {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "viewing an tag:";
-    presenceData.state = document.querySelector(
-      "body > center > h1"
-    ).textContent;
+    presenceData.state =
+      document.querySelector("body > center > h1").textContent;
   } else if (
     document.location.pathname == "/" ||
     document.location.pathname == "/index.html"

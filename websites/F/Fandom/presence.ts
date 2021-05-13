@@ -93,9 +93,8 @@ if (
                   .querySelector(".jw-icon-playback")
                   .getAttribute("aria-label") === "Pause"
               ) {
-                const video: HTMLVideoElement = document.querySelector(
-                    ".jw-video"
-                  ),
+                const video: HTMLVideoElement =
+                    document.querySelector(".jw-video"),
                   timestamps = presence.getTimestampsfromMedia(video);
                 presenceData.endTimestamp = timestamps[1];
               } else {
@@ -107,9 +106,8 @@ if (
           };
         } else if (currentPath[0] === "curated") {
           presenceData.details = "Viewing a curation";
-          presenceData.state = document.querySelector(
-            ".card__title"
-          ).textContent;
+          presenceData.state =
+            document.querySelector(".card__title").textContent;
         } else if (currentPath[0] === "u") {
           presenceData.details = "Viewing a profile page";
           presenceData.state = `${
@@ -162,12 +160,15 @@ if (
         }
 
         try {
-          sitename = (document.querySelector(
-            "meta[property='og:site_name']"
-          ) as HTMLMetaElement).content;
+          sitename = (
+            document.querySelector(
+              "meta[property='og:site_name']"
+            ) as HTMLMetaElement
+          ).content;
         } catch (e) {
-          sitename = document.querySelector(".wds-community-header__sitename")
-            .textContent;
+          sitename = document.querySelector(
+            ".wds-community-header__sitename"
+          ).textContent;
         }
 
         /**
@@ -238,15 +239,17 @@ if (
         };
 
         if (title === "Home") {
-          sitename = (document.querySelector(
-            "meta[property='og:title']"
-          ) as HTMLMetaElement).content;
+          sitename = (
+            document.querySelector(
+              "meta[property='og:title']"
+            ) as HTMLMetaElement
+          ).content;
           presenceData.details = "On the home page";
         } else if (document.querySelector("#search-v2-form")) {
           presenceData.details = "Searching for a page";
-          presenceData.state = (document.querySelector(
-            "#search-v2-input"
-          ) as HTMLInputElement).value;
+          presenceData.state = (
+            document.querySelector("#search-v2-input") as HTMLInputElement
+          ).value;
         } else if (actionResult() === "history") {
           presenceData.details = "Viewing revision history";
           presenceData.state = titleFromURL();
@@ -318,12 +321,15 @@ if (
         let sitename: string;
 
         try {
-          sitename = (document.querySelector(
-            "meta[property='og:site_name']"
-          ) as HTMLMetaElement).content;
+          sitename = (
+            document.querySelector(
+              "meta[property='og:site_name']"
+            ) as HTMLMetaElement
+          ).content;
         } catch (e) {
-          sitename = document.querySelector(".wds-community-header__sitename")
-            .textContent;
+          sitename = document.querySelector(
+            ".wds-community-header__sitename"
+          ).textContent;
         }
 
         updateCallback.function = (): void => {

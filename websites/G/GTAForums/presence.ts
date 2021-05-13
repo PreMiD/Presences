@@ -49,9 +49,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.startsWith("/forum/")) {
     delete presenceData.details;
     presenceData.details = "Browsing a category...";
-    presenceData.state = document.getElementsByClassName(
-      "ipsType_pageTitle"
-    )[0].textContent;
+    presenceData.state =
+      document.getElementsByClassName("ipsType_pageTitle")[0].textContent;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
     if (document.location.href.match("/?do=add")) {
       delete presenceData.details;

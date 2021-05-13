@@ -11,9 +11,9 @@ presence.on("UpdateData", async () => {
       document.getElementsByClassName("Ut8Gr")[1].innerHTML;
 
   if (podcastTitle) {
-    presenceData.details = (document.querySelector(
-      ".GmW3rb > .BhVIWc"
-    ) as HTMLImageElement).alt;
+    presenceData.details = (
+      document.querySelector(".GmW3rb > .BhVIWc") as HTMLImageElement
+    ).alt;
     presenceData.state = podcastTitle;
 
     const isPaused =

@@ -19,8 +19,8 @@ presence.on("iFrameData", (videoData: VideoData) => {
 
 const paths = {
   async "/watch"(presenceData: PresenceData, buttons: boolean) {
-    const title = document.querySelector<HTMLAnchorElement>(".now2 .c a")
-        ?.textContent,
+    const title =
+        document.querySelector<HTMLAnchorElement>(".now2 .c a")?.textContent,
       episode = document
         .querySelector<HTMLElement>(".now2 .c")
         ?.lastChild?.textContent?.match(/\s*-\s*(.+)/)[1];
@@ -36,8 +36,8 @@ const paths = {
         }
       ];
 
-      const link = document.querySelector<HTMLAnchorElement>(".now2 > div > a")
-        ?.href;
+      const link =
+        document.querySelector<HTMLAnchorElement>(".now2 > div > a")?.href;
       if (link) {
         presenceData.buttons.push({
           label: "Episode List",

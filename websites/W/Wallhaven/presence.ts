@@ -35,9 +35,10 @@ function getQuery() {
           }
         ) => {
           if (!context) return null;
-          const pageType = (document.querySelector<HTMLElement>(
-            "header.listing-header>h1"
-          ).innerText as string)?.trim();
+          const pageType = (
+            document.querySelector<HTMLElement>("header.listing-header>h1")
+              .innerText as string
+          )?.trim();
           data.state = strings.browsing;
           data.details = `${pageType}, Page ${query?.page || 1}`;
           data.buttons = [];

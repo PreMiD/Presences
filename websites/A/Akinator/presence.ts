@@ -15,8 +15,8 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname == "/theme-selection") {
     presenceData.details = "Selecting Theme";
   } else if (document.location.pathname == "/game") {
-    const current = document.getElementsByClassName("bubble-body")[0]
-      .textContent;
+    const current =
+      document.getElementsByClassName("bubble-body")[0].textContent;
     const hover = document.querySelectorAll(":hover")[12].textContent;
     presenceData.details = `Q: ${current}`;
     presenceData.state = `Selecting: ${

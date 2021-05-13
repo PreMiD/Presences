@@ -215,8 +215,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Tags";
       break;
     case pathIncludes("/listings"):
-      feedListings = document.querySelector(".crayons-link--current")
-        .textContent;
+      feedListings = document.querySelector(
+        ".crayons-link--current"
+      ).textContent;
       listingTitle =
         document.querySelector(
           ".crayons-modal__box__body > div > div >div > div > header > h2 > a"
