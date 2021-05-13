@@ -140,7 +140,7 @@ presence.on("UpdateData", async () => {
           .querySelector("div.css-1wd9czp > div > h1")
           .textContent.trim();
 
-      presenceData.details = `Futures Trading on ${tradeLeverage}:`
+      presenceData.details = `Futures Trading on ${tradeLeverage}:`;
       presenceData.state = `${tradePair} ${tradeTerm}`;
     } else {
       presenceData.details = "Browsing...";
