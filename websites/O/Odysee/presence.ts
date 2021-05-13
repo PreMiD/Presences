@@ -34,9 +34,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Browsing subpage";
     }
   } else if (floatingViewer || document.location.pathname.includes("/@")) {
-    const userName: HTMLVideoElement = document.querySelector(
-        "h1.channel__title"
-      ),
+    const userName: HTMLVideoElement =
+        document.querySelector("h1.channel__title"),
       userTag: HTMLVideoElement = document.querySelector("span.channel-name");
     if (userName) {
       presenceData.details = `Viewing ${userName.textContent} page`;

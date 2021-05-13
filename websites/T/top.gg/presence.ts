@@ -14,8 +14,8 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = "dblstaff";
 
     if (window.location.pathname == "/moderation") {
-      const personalquota = document.getElementsByClassName("quotaindiv")[0]
-        .textContent;
+      const personalquota =
+        document.getElementsByClassName("quotaindiv")[0].textContent;
       const botamount = personalquota.substring(
         personalquota.indexOf("reviewed") + 9,
         personalquota.indexOf("/")

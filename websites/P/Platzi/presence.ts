@@ -22,9 +22,8 @@ presence.on("UpdateData", async () => {
     pathname = document.location.pathname;
 
   if (pathname.includes("/home")) {
-    const SearchInputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(
-        ".SearchBar input"
-      ),
+    const SearchInputs: NodeListOf<HTMLInputElement> =
+        document.querySelectorAll(".SearchBar input"),
       InputValues: string[] = [...SearchInputs]
         .map((input) => input.value)
         .filter(Boolean);
@@ -200,8 +199,9 @@ presence.on("UpdateData", async () => {
     const course: HTMLAnchorElement = document.querySelector(
         ".Header-course-info-content a"
       ),
-      episodeNameHTML: string = document.querySelector(".Header-class-title h2")
-        .outerHTML,
+      episodeNameHTML: string = document.querySelector(
+        ".Header-class-title h2"
+      ).outerHTML,
       video: HTMLVideoElement = document.querySelector(".vjs-tech"),
       checkPause: HTMLElement = document.querySelector(".VideoPlayer > div");
     let timestamps: number[];
@@ -256,9 +256,8 @@ presence.on("UpdateData", async () => {
       const categoryTitle: HTMLSpanElement = document.querySelector(
           ".HeroCoursesItem-title span"
         ),
-        learningPaths: NodeListOf<HTMLAnchorElement> = document.querySelectorAll(
-          ".LearningPathItem"
-        );
+        learningPaths: NodeListOf<HTMLAnchorElement> =
+          document.querySelectorAll(".LearningPathItem");
       presenceData.state = categoryTitle.textContent;
       presenceData.details = activeCategory;
 
@@ -305,9 +304,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = CourseName.textContent;
         presenceData.state = `Revisando sus respuestas...`;
       } else if (pathname.includes("resultados")) {
-        const CourseName: HTMLParagraphElement = document.querySelector(
-            ".CourseRow-title"
-          ),
+        const CourseName: HTMLParagraphElement =
+            document.querySelector(".CourseRow-title"),
           Score: number = parseFloat(
             document.querySelector(".ExamResults-score-grade").textContent
           ),
@@ -340,9 +338,8 @@ presence.on("UpdateData", async () => {
   } else if (pathname.startsWith("/mi-suscripcion/beneficiario/")) {
     presenceData.state = "Viendo su Beneficiario";
   } else if (pathname.startsWith("/mi-suscripcion/facturas/")) {
-    const FullName: HTMLDivElement = document.querySelector(
-        ".ProfileMenu-name"
-      ),
+    const FullName: HTMLDivElement =
+        document.querySelector(".ProfileMenu-name"),
       Pts: HTMLDivElement = document.querySelector(".ProfileMenu-rank"),
       NOfPayments: HTMLHeadingElement = document.querySelector(
         ".InvoicesList-title"
@@ -355,9 +352,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Viendo sus referidos";
     presenceData.buttons = [{ label: "Referido", url: `${Input.value}` }];
   } else if (pathname.startsWith("/mi--suscripcion/")) {
-    const SubscriptionName: HTMLDivElement = document.querySelector(
-      ".CurrentPlan-name"
-    );
+    const SubscriptionName: HTMLDivElement =
+      document.querySelector(".CurrentPlan-name");
     presenceData.details = "Viendo su suscripcion";
     presenceData.state = `${SubscriptionName.textContent}`;
   }

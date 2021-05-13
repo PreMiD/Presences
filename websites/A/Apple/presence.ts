@@ -130,9 +130,8 @@ presence.on("UpdateData", async () => {
           .querySelector("h1.section-head")
           ?.getAttribute("aria-label");
       else {
-        presenceData.state = document.querySelector(
-          ".hero-headline"
-        )?.textContent;
+        presenceData.state =
+          document.querySelector(".hero-headline")?.textContent;
 
         if (setting.buttons) {
           presenceData.buttons = [
@@ -225,9 +224,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Apple Accessoriess";
     } else if (urlpath[num + 1] === "accessories") {
       presenceData.details = "Shop";
-      presenceData.state = document.querySelector(
-        "a.localnav-title"
-      )?.textContent;
+      presenceData.state =
+        document.querySelector("a.localnav-title")?.textContent;
     } else if (urlpath[num] === "studio") {
       const product = document
         .querySelector("div.as-designstudio-title>a>img")
@@ -266,8 +264,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Shop";
       presenceData.state = "Certified Refurbished";
     } else if (urlpath[num] === "bag") {
-      const summary = document.querySelector("div.rs-summary-value")
-        ?.textContent;
+      const summary = document.querySelector(
+        "div.rs-summary-value"
+      )?.textContent;
 
       if (setting.shopCheckout && summary !== undefined) {
         presenceData.details = "Shop - Bag";
@@ -306,9 +305,8 @@ presence.on("UpdateData", async () => {
         document.querySelector("h1#main-title")?.textContent;
     } else if (document.querySelector("div.mod-date")) {
       presenceData.details = "Apple Support - Article:";
-      presenceData.state = document.querySelector(
-        "h1#howto-title"
-      )?.textContent;
+      presenceData.state =
+        document.querySelector("h1#howto-title")?.textContent;
     } else if (window.location.hostname === "getsupport.apple.com") {
       presenceData.details = "Apple Support";
     }

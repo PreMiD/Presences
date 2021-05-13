@@ -14,8 +14,9 @@ presence.on("UpdateData", async () => {
       "div.product > div.infos > div.shadow.mainshadow > div.title > h1"
     ).textContent;
     const product_price = document.querySelector("div.price").textContent;
-    var product_platform = document.querySelector("div.subinfos > a.platform")
-      .textContent;
+    var product_platform = document.querySelector(
+      "div.subinfos > a.platform"
+    ).textContent;
     if (product_platform.startsWith("Other")) {
       product_platform = "N/A";
     }

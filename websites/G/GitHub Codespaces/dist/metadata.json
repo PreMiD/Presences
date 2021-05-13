@@ -11,7 +11,7 @@
     "nl": "Draag bij aan projecten zonder uw lokale installatie ingewikkelder te maken. Zet met één klik een ontwikkelomgeving op, zelfs voor projecten waar u nog niet eerder aan hebt gewerkt, en schakel er gemakkelijk tussen."
   },
   "service": "GitHub Codespaces",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/JWaYQC8.png",
   "thumbnail": "https://i.imgur.com/fLQ6JLS.png",
   "color": "#000000",

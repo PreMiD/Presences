@@ -104,8 +104,9 @@ presence.on("UpdateData", async () => {
             Math.floor(duration)
           ));
       }
-      title = document.querySelector("#aligncenter > span.animetitle")
-        .textContent;
+      title = document.querySelector(
+        "#aligncenter > span.animetitle"
+      ).textContent;
 
       if (!isNaN(duration)) {
         presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";

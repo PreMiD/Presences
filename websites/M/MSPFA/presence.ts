@@ -65,9 +65,8 @@ presence.on("UpdateData", async () => {
     case "/my/stories/pages/":
       // See above
       presenceData.smallImageKey = "writing";
-      presenceData.state = document.querySelector(
-        "a#storyname.major"
-      ).innerHTML;
+      presenceData.state =
+        document.querySelector("a#storyname.major").innerHTML;
       break;
     case "/achievements/":
       // Typescript yelled at me when I tried to use innerText
@@ -76,15 +75,13 @@ presence.on("UpdateData", async () => {
       break;
     case "/log/":
       // See above
-      presenceData.state = document.querySelector(
-        "a#storyname.major"
-      ).innerHTML;
+      presenceData.state =
+        document.querySelector("a#storyname.major").innerHTML;
       break;
     case "/search/":
       // See above
-      presenceData.state = document.querySelector(
-        "a#storyname.major"
-      ).innerHTML;
+      presenceData.state =
+        document.querySelector("a#storyname.major").innerHTML;
       break;
     default:
       break;

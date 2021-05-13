@@ -51,8 +51,8 @@ const updateCallback = {
     updateCallback.function = (): void => {
       if (document.querySelector(".gameView")) {
         presenceData.details = "Playing a race";
-        const gameStatusLabel = document.querySelector(".gameStatusLabel")
-          .textContent;
+        const gameStatusLabel =
+          document.querySelector(".gameStatusLabel").textContent;
 
         if (gameStatusLabel === "Waiting for more people...") {
           presenceData.state = "Waiting for more people...";
