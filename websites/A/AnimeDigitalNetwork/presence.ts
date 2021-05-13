@@ -7,8 +7,8 @@ strings = presence.getStrings({
 });
 
 presence.on("UpdateData", async () => {
-const video: HTMLVideoElement = document.querySelector("video.vjs-tech");
-const presenceData: PresenceData = {
+const video: HTMLVideoElement = document.querySelector("video.vjs-tech"),
+presenceData: PresenceData = {
   largeImageKey: "logo"
 };
 
@@ -35,9 +35,7 @@ if (document.location.pathname.includes("video") && video) {
   const title = document.querySelector("#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-kbKFCX.sc-kgMcbC.kecmmo > div:nth-child(1) > div > div > h1 > a");
       presenceData.details = "Looking at";
       presenceData.state = title.textContent;
-} else {
-  presenceData.details = "Browsing...";
-}
+} else presenceData.details = "Browsing...";
 if (presenceData.details === null) {
   presence.setTrayTitle();
   presence.setActivity();
