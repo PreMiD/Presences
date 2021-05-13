@@ -8,6 +8,9 @@ strings = presence.getStrings({
 
 presence.on("UpdateData", async () => {
 const video: HTMLVideoElement = document.querySelector("video.vjs-tech");
+const presenceData: PresenceData = {
+  largeImageKey: "logo"
+};
 
 if (document.location.pathname.includes("video") && video) {
   if (video && !isNaN(video.duration)) {
@@ -15,39 +18,30 @@ if (document.location.pathname.includes("video") && video) {
       timestamps = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
-      ),
-      data: PresenceData = {
-        details: title.textContent,
-        largeImageKey: "logo",
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
+      );
+      presenceData.details = title.textContent;
+      presenceData.smallImageKey = video.paused ? "pause" : "play";
+      presenceData.smallImageText = video.paused
           ? (await strings).pause
-          : (await strings).play,
-        endTimestamp: timestamps[1]
-      };
+          : (await strings).play;
+        presenceData.endTimestamp = timestamps[1];
 
     if (video.paused) {
-      delete data.startTimestamp;
-      delete data.endTimestamp;
-    }
-
-    if (title !== null) {
-      presence.setActivity(data);
+      delete presenceData.startTimestamp;
+      delete presenceData.endTimestamp;
     }
   }
 } else if (document.location.pathname.includes("video") && !video) {
-  const title = document.querySelector("#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-kbKFCX.sc-kgMcbC.kecmmo > div:nth-child(1) > div > div > h1 > a"),
-    data = {
-      details: "Looking at",
-      state: title.textContent,
-      largeImageKey: "logo"
-    };
-  presence.setActivity(data);
+  const title = document.querySelector("#root > div > div > div.sc-pbWVv.hTvDIL > div > div:nth-child(1) > div.sc-kbKFCX.sc-kgMcbC.kecmmo > div:nth-child(1) > div > div > h1 > a");
+      presenceData.details = "Looking at";
+      presenceData.state = title.textContent;
 } else {
-  const browsingPresence: PresenceData = {
-    details: "Browsing...",
-    largeImageKey: "logo"
-  };
-  presence.setActivity(browsingPresence);
+  presenceData.details = "Browsing...";
+}
+if (presenceData.details === null) {
+  presence.setTrayTitle();
+  presence.setActivity();
+} else {
+  presence.setActivity(presenceData);
 }
 });
