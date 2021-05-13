@@ -19,7 +19,7 @@ const presence = new Presence({
         viewAccount: "general.viewAccount",
         viewPage: "general.viewPage"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     ),
   browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -27,7 +27,7 @@ let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     showButtons: boolean = await presence.getSetting("buttons"),
     searchQuery: boolean = await presence.getSetting("searchQuery");
 
