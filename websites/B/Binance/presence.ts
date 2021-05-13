@@ -72,6 +72,13 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Leveraged Tokens";
     } else if (window.location.pathname.includes("/loan")) {
       presenceData.state = "Crypto Loans";
+    } else if (window.location.pathname.includes("/stock-token/trade")) {
+      const tradePair = document.querySelector("div.css-vurnku > h1").textContent.trim();
+      
+      presenceData.details = `Trading Stock Tokens:`;
+      presenceData.state = tradePair;
+    } else if (window.location.pathname.includes("/stock-token")) {
+      presenceData.state = "Stock Tokens";
     } else if (window.location.pathname.includes("/swap/liquidity")) {
       presenceData.state = "Liquid Swap";
     } else if (
