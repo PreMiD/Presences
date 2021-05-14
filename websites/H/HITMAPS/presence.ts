@@ -8,9 +8,9 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname === "roulette.hitmaps.com") {
-    presenceData.details = "Playing HITMAPS™ Roulette"
-    if (document.querySelector("h1")?.innerHTML.includes("SELECT MISSION")) presenceData.state = "Choosing a mission"
-    if (document.querySelector("h1")?.innerHTML.includes("CURRENT MISSION")) presenceData.state = "Mission:" + document.querySelector("h1").innerHTML.split("CURRENT MISSION:")[1]
+    presenceData.details = "Playing HITMAPS™ Roulette";
+    if (document.querySelector("h1")?.innerHTML.includes("SELECT MISSION")) presenceData.state = "Choosing a mission";
+    if (document.querySelector("h1")?.innerHTML.includes("CURRENT MISSION")) presenceData.state = "Mission:" + document.querySelector("h1").innerHTML.split("CURRENT MISSION:")[1];
   } else if (document.location.pathname === "/") {
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname === "/support-the-site") {
@@ -27,22 +27,22 @@ presence.on("UpdateData", async () => {
     switch (document.location.pathname.split("/games/")[1].split("/")[0]) {
       case "hitman":
         presenceData.details = "Viewing HITMAN™";
-        break
+        break;
       case "hitman2":
         presenceData.details = "Viewing HITMAN™ 2";
-        break
+        break;
       case "hitman3":
         presenceData.details = "Viewing HITMAN 3";
-        break
+        break;
       case "sniper-assassin":
         presenceData.details = "Viewing HITMAN™ 2: Sniper Assassin";
-        break
+        break;
       case "absolution":
         presenceData.details = "Viewing Hitman: Absolution";
-        break
+        break;
       default:
         presenceData.details = "Viewing a game";
-        break
+        break;
     }
   }
 
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = capitaliseEachWord(document.location.pathname.split("/")[3].replace(/[0-9]/g, "").replace(/-/g, " "));
 
     if (document.title.includes(" | HITMAPS™")) {
-      presenceData.state += " - " + document.title.split(" | HITMAPS™")[0]
+      presenceData.state += " - " + document.title.split(" | HITMAPS™")[0];
     } else if (document.location.pathname.split("/")[4]) {
       presenceData.state += " - " + capitaliseEachWord(document.location.pathname.split("/")[4].replace(/-/g, " "));
     }
@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
 });
 
 function capitaliseEachWord(string: string) {
-  let words = string.split(" ");
+  const words = string.split(" ");
   for (let i = 0; i < words.length; i++) {
     words[i] = words[i][0].toUpperCase() + words[i].substr(1);
   }
