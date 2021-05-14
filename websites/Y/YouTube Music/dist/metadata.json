@@ -3,6 +3,16 @@
     "name": "Timeraa",
     "id": "223238938716798978"
   },
+  "contributors": [
+    {
+      "name": "Ai",
+      "id": "90431685472038912"
+    },
+    {
+      "name": "Atharv Attri",
+      "id": "679100560720396339"
+    }
+  ],
   "service": "YouTube Music",
   "description": {
     "en": "A new music service with official albums, singles, videos, remixes, live performances and more for Android, iOS and desktop. It's all here.",
