@@ -6,14 +6,15 @@
     },
     "service": "AnimeJunkies",
     "description": {
-      "en": "Official Presence for AnimeJunkies"
+      "en": "The community website about anime!",
+      "de": "Die Communitywebseite über Anime!",
+      "nl": "De communitywebsite over anime!"
     },
     "url": ["animejunkies.tv", "www.animejunkies.tv"],
-    "version": "0.0.1",
-    "logo": "https://animejunkies.tv/wp-content/uploads/2020/05/AnimeJunkies-Logo.png",
-    "thumbnail": "https://cloud.animejunkies.tv/index.php/s/PNG5APC7j5J8Y6H/preview",
+    "version": "1.0.0",
+    "logo": "https://i.imgur.com/P2OQZwx.png",
+    "thumbnail": "https://i.imgur.com/uLii2rm.png",
     "color": "#ff0000",
     "tags": ["anime"],
-    "category": "anime",
-    "readLogs": false
+    "category": "anime"
 }
