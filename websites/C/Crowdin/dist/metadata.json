@@ -3,6 +3,12 @@
     "name": "TheDrop.",
     "id": "293828021134295040"
   },
+  "contributors": [
+    {
+      "name": "Rodry",
+      "id": "240875059953139714"
+    }
+  ],
   "service": "Crowdin",
   "description": {
     "en": "Crowdin is a cloud-based solution that streamlines localization management for your team.",
@@ -13,7 +19,7 @@
     "translate.premid.app",
     "crowdin.com"
   ],
-  "version": "2.2.7",
+  "version": "2.2.8",
   "logo": "https://i.imgur.com/rtkC4kS.png",
   "thumbnail": "https://i.imgur.com/Cn7yyqe.png",
   "color": "#2e3340",

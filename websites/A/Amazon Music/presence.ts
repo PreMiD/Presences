@@ -16,7 +16,7 @@ const presence = new Presence({
         viewPlaylist: "general.buttonViewPlaylist",
         viewArtist: "general.buttonViewArtist"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     );
   };
 
@@ -36,7 +36,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo"
     },
     buttons = await presence.getSetting("buttons"),
-    newLang = await presence.getSetting("lang"),
+    newLang = await presence.getSetting("lang").catch(() => "en"),
     showPlaylist = await presence.getSetting("showPlaylist");
 
   if (!oldLang) {

@@ -191,7 +191,7 @@ const presence = new Presence({
         watchStream: "general.buttonWatchStream",
         watchVideo: "general.buttonWatchVideo"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     );
   };
 
@@ -206,7 +206,7 @@ presence.on("UpdateData", async () => {
     showLive = await presence.getSetting("live"),
     showVideo = await presence.getSetting("video"),
     showTimestamps = await presence.getSetting("timestamp"),
-    newLang = await presence.getSetting("lang"),
+    newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     vidDetail = await presence.getSetting("vidDetail"),
     vidState = await presence.getSetting("vidState"),
