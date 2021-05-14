@@ -4,7 +4,7 @@ let last_path = "",
     time_stamp: number = Date.now();
 
 presence.on("UpdateData", async () => {
-    let presence_data = {details: "", state: "", smallImageKey: "", smallImageText: ""};
+    const presence_data = {details: "", state: "", smallImageKey: "", smallImageText: ""};
     if(last_path != window.location.pathname) {
 
       last_path = window.location.pathname;
@@ -17,7 +17,7 @@ presence.on("UpdateData", async () => {
 
     }else if(window.location.pathname.startsWith("/community/")) {
 
-      let path_name = window.location.pathname;
+      const path_name = window.location.pathname;
       if(path_name == "/community/") {
         presence_data.details = "Erkundet alle Foren";
       }else if(path_name.startsWith("/community/forum/")) {
@@ -31,7 +31,7 @@ presence.on("UpdateData", async () => {
 
     }else {
 
-      let x = document.getElementsByClassName("entry-title");
+      const x = document.getElementsByClassName("entry-title");
       
       if(x.length != 0 && document.getElementsByClassName("author-box-header").length != 0) {
         
