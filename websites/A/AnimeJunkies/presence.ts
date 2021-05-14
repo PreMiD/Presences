@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
     details: "",
     state: "",
     smallImageKey: "",
-    smallImageText: "",
+    smallImageText: ""
   };
   if (last_path != window.location.pathname) {
     last_path = window.location.pathname;
@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
     smallImageText: presence_data.smallImageText,
     details: presence_data.details,
     state: presence_data.state,
-    startTimestamp: time_stamp,
+    startTimestamp: time_stamp
   };
 
   if (presenceData.details == null) {
