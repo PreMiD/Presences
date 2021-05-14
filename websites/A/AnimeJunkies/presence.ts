@@ -29,6 +29,11 @@ presence.on("UpdateData", async () => {
         }
       }
 
+    }else if(window.location.pathname.startsWith("/animeliste/")){
+      
+      presence_data.details = "Durchstöbert";
+      presence_data.state = "» Anime Liste";
+
     }else {
 
       const x = document.getElementsByClassName("entry-title");
@@ -41,7 +46,7 @@ presence.on("UpdateData", async () => {
 
       }else {
 
-        presence_data.details = "";
+        presence_data.details = "Erkundet AnimeJunkies";
         presence_data.state = "";
 
       }
