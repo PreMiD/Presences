@@ -9,6 +9,8 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "roulette.hitmaps.com") {
     presenceData.details = "Playing HITMAPS™ Roulette"
+    if (document.querySelector("h1")?.innerHTML.includes("SELECT MISSION")) presenceData.state = "Choosing a mission"
+    if (document.querySelector("h1")?.innerHTML.includes("CURRENT MISSION")) presenceData.state = "Mission:" + document.querySelector("h1").innerHTML.split("CURRENT MISSION:")[1]
   } else if (document.location.pathname === "/") {
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname === "/support-the-site") {
