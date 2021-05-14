@@ -73,9 +73,10 @@ presence.on("UpdateData", async () => {
   const video = document.getElementsByTagName("video")[0];
 
   if (video !== null && !isNaN(video.duration)) {
-    const titleArr = (document.getElementById("title") !== null
-        ? document.getElementById("title").innerHTML
-        : "Không thấy tên phim!... - Tập ?"
+    const titleArr = (
+        document.getElementById("title") !== null
+          ? document.getElementById("title").innerHTML
+          : "Không thấy tên phim!... - Tập ?"
       ).split(" - "),
       timestamps = getTimestamps(
         Math.floor(video.currentTime),

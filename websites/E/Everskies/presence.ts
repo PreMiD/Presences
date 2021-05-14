@@ -105,9 +105,8 @@ presence.on("UpdateData", async () => {
     "/user/([a-zA-Z0-9-]+)": {
       setPresenceData() {
         presenceData.details = "Viewing user:";
-        presenceData.state = document.querySelector(
-          "x-user-name > div"
-        )?.textContent;
+        presenceData.state =
+          document.querySelector("x-user-name > div")?.textContent;
 
         presenceData.buttons = [
           {
@@ -147,9 +146,8 @@ presence.on("UpdateData", async () => {
     "/games/": {
       setPresenceData() {
         presenceData.details = "Playing a game:";
-        presenceData.state = document.querySelector(
-          "div.box-title"
-        ).textContent;
+        presenceData.state =
+          document.querySelector("div.box-title").textContent;
 
         presenceData.buttons = [
           {
@@ -162,9 +160,8 @@ presence.on("UpdateData", async () => {
     "/wardrobe": {
       setPresenceData() {
         presenceData.details = "Looking at:";
-        presenceData.state = document.querySelector(
-          "div.box-title"
-        ).textContent;
+        presenceData.state =
+          document.querySelector("div.box-title").textContent;
       }
     },
     "/magazine": {
@@ -183,9 +180,8 @@ presence.on("UpdateData", async () => {
     "/page/([a-z-])": {
       setPresenceData() {
         presenceData.details = "Viewing page:";
-        presenceData.state = document.querySelector(
-          "div.box-title"
-        ).textContent;
+        presenceData.state =
+          document.querySelector("div.box-title").textContent;
       }
     }
   };

@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
         presenceData.state = document.querySelector("h1.section-head")?.getAttribute("aria-label");
       else {
         presenceData.state = document.querySelector(".hero-headline")?.textContent;
-
+        
         if(setting.buttons) {
           presenceData.buttons = [
             {

@@ -17,8 +17,8 @@ englishPresence.on("UpdateData", async () => {
       // Making 100% sure it's the english wiki
       let page = "N/A";
       try {
-        page = document.getElementsByClassName("page-header__title")[0]
-          .textContent;
+        page =
+          document.getElementsByClassName("page-header__title")[0].textContent;
       } catch (err) {
         const errCode = "TWIKI_WIKIEN_GETPAGETITLE";
         console.log(
@@ -43,8 +43,9 @@ englishPresence.on("UpdateData", async () => {
         // Making 100% sure it's the german wiki
         let page = "N/A";
         try {
-          page = document.getElementsByClassName("page-header__title")[0]
-            .textContent;
+          page =
+            document.getElementsByClassName("page-header__title")[0]
+              .textContent;
         } catch (err) {
           const errCode = "TWIKI_WIKIDE_GETPAGETITLE";
           console.log(

@@ -7,19 +7,25 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname != "/projects/premid/custom-status") {
     // Adding this, probably not needed but it's fine.
     const details = document.querySelector("[name~=premid-details][content]")
-        ? (document.querySelector(
-            "[name~=premid-details][content]"
-          ) as HTMLMetaElement).content
+        ? (
+            document.querySelector(
+              "[name~=premid-details][content]"
+            ) as HTMLMetaElement
+          ).content
         : null,
       state = document.querySelector("[name~=premid-state][content]")
-        ? (document.querySelector(
-            "[name~=premid-state][content]"
-          ) as HTMLMetaElement).content
+        ? (
+            document.querySelector(
+              "[name~=premid-state][content]"
+            ) as HTMLMetaElement
+          ).content
         : null,
       smallImage = document.querySelector("[name~=premid-smallImage][content]")
-        ? (document.querySelector(
-            "[name~=premid-smallImage][content]"
-          ) as HTMLMetaElement).content
+        ? (
+            document.querySelector(
+              "[name~=premid-smallImage][content]"
+            ) as HTMLMetaElement
+          ).content
         : null;
 
     if (state && details)

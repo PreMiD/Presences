@@ -201,9 +201,8 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           { strings, showWatch, images }: ExecutionArguments
         ) => {
           if (!context) return null;
-          const activeMedia = document.querySelector<HTMLElement>(
-            ".coub[coub-block]"
-          );
+          const activeMedia =
+            document.querySelector<HTMLElement>(".coub[coub-block]");
           if (!activeMedia) return null;
           const title = activeMedia
               .querySelector(".coub__description h5.description__title")
@@ -217,9 +216,10 @@ function getSourceLink(url: string): { label: string; url: string }[] {
           data.state = strings.watching;
           data.details = `${title}${isLiked ? " (❤)" : ""}`;
           data.smallImageKey = isPlaying ? images.PLAY : images.PAUSE;
-          const sourceLink = activeMedia.parentElement.querySelector<HTMLAnchorElement>(
-            `.coub__info .media-block__item > a[type="embedPopup"]`
-          );
+          const sourceLink =
+            activeMedia.parentElement.querySelector<HTMLAnchorElement>(
+              `.coub__info .media-block__item > a[type="embedPopup"]`
+            );
           data.buttons = [];
           if (showWatch)
             data.buttons.push(
@@ -246,9 +246,8 @@ function getSourceLink(url: string): { label: string; url: string }[] {
             ".hot__community[data-community-id]"
           );
           if (!communityParent) return null;
-          const activeMedia = document.querySelector<HTMLElement>(
-            ".coub.active"
-          );
+          const activeMedia =
+            document.querySelector<HTMLElement>(".coub.active");
           if (!activeMedia) return null;
           const communityTitle = communityParent
               .querySelector(".description > .title > h2")

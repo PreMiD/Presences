@@ -50,9 +50,8 @@ presence.on("UpdateData", async () => {
       ) {
         presenceData.state = document.querySelector(".row > h1").textContent;
       } else {
-        presenceData.state = document.querySelector(
-          ".ajaxbloc > h1"
-        ).textContent;
+        presenceData.state =
+          document.querySelector(".ajaxbloc > h1").textContent;
       }
     } else if (parseQueryString(document.location.hash).page === "contact") {
       presenceData.state = document.querySelector(".t-body > h1").textContent;

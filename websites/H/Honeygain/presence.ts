@@ -70,9 +70,11 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing Referrals";
       presenceData.state =
         "Referral Code: " +
-        (document.getElementsByClassName(
-          "sc-RefOD izklIM sc-bwCtUz gqfLZQ"
-        )[0] as HTMLInputElement).value.split("https://r.honeygain.money/")[1];
+        (
+          document.getElementsByClassName(
+            "sc-RefOD izklIM sc-bwCtUz gqfLZQ"
+          )[0] as HTMLInputElement
+        ).value.split("https://r.honeygain.money/")[1];
     } else if (path.includes("/faq")) {
       presenceData.details = "Viewing FAQ";
     } else if (path.includes("/profile")) {

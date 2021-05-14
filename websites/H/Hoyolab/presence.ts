@@ -65,8 +65,9 @@ presence.on("UpdateData", async () => {
         data.state = "Hot";
     }
   } else if (pathname.startsWith("/genshin/article/")) {
-    const title = document.querySelector(".mhy-article-page__title > h1")
-        .textContent,
+    const title = document.querySelector(
+        ".mhy-article-page__title > h1"
+      ).textContent,
       author = document.querySelector(
         ".mhy-article-page-author > .mhy-user-card__info > a > span"
       ).innerHTML,

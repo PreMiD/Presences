@@ -501,8 +501,9 @@ presence.on("UpdateData", async () => {
       time = (
         document.querySelector("time>span") || document.querySelector("b")
       )?.textContent,
-      weather = document.querySelector("div.wr-day-summary > div > span")
-        ?.textContent,
+      weather = document.querySelector(
+        "div.wr-day-summary > div > span"
+      )?.textContent,
       weatherPages: {
         [key: string]: PresenceData;
       } = {
@@ -697,9 +698,8 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (path === "/search") {
-    const searchValue = document.querySelector<HTMLInputElement>(
-      "#search-input"
-    )?.value;
+    const searchValue =
+      document.querySelector<HTMLInputElement>("#search-input")?.value;
 
     presenceData.details = (await strings).searchFor;
     presenceData.state = searchValue;

@@ -20,7 +20,7 @@
   },
   "url": "discord.com",
   "regExp": "([a-z0-9-]+[.])*(discord[.]com|discord[.]gg|discordapp[.]com|discordmerch[.]com|discordstatus[.]com)[/]",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "logo": "https://i.imgur.com/3KteXfn.png",
   "thumbnail": "https://i.imgur.com/0v13nHT.png",
   "color": "#7289DA",
@@ -79,7 +79,11 @@
       "title": "Icon",
       "icon": "fab fa-discord",
       "value": 0,
-      "values": ["White", "Blurple", "Black"]
+      "values": [
+        "White",
+        "Blurple",
+        "Black"
+      ]
     }
   ]
 }
