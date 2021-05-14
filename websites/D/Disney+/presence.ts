@@ -23,7 +23,7 @@ async function getStrings(): Promise<LangStrings> {
       watchEpisode: "general.buttonViewEpisode",
       watchVideo: "general.buttonWatchVideo"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
@@ -34,7 +34,7 @@ let strings: LangStrings,
   groupWatchCount: number;
 
 presence.on("UpdateData", async () => {
-  const newLang: string = await presence.getSetting("lang"),
+  const newLang: string = await presence.getSetting("lang").catch(() => "en"),
     privacy: boolean = await presence.getSetting("privacy"),
     time: boolean = await presence.getSetting("time"),
     buttons: boolean = await presence.getSetting("buttons"),

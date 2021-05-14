@@ -22,7 +22,7 @@ const presence = new Presence({
         viewTikTok: "tiktok.viewing",
         buttonViewTikTok: "tiktok.buttonViewTikTok"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     );
   };
 
@@ -32,7 +32,7 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     buttons = await presence.getSetting("buttons");
 
   if (document.URL !== prevUrl) {
