@@ -132,7 +132,7 @@ const presence = new Presence({
         viewPage: "general.viewPage",
         shopCart: "general.shopCart"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     );
   };
 
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
     showInvites: boolean = await presence.getSetting("invite"),
     privacy: boolean = await presence.getSetting("privacy"),
     showCalls: boolean = await presence.getSetting("call"),
-    newLang: string = await presence.getSetting("lang"),
+    newLang: string = await presence.getSetting("lang").catch(() => "en"),
     logo: number = await presence.getSetting("logo"),
     logoArr = ["discordwhite", "discord", "discordblack"];
 
