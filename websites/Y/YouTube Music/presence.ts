@@ -117,7 +117,7 @@ presence.on("UpdateData", async () => {
         endTimestamp: timestamps[1],
         buttons: [
           {
-            label: "Listen along!",
+            label: "Listen Along",
             url: window.location.href.split("&")[0]
           }
         ]
