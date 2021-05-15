@@ -1,16 +1,14 @@
 const presence = new Presence({
   clientId: "655050505726197781"
-}), browsingStamp = Math.floor(Date.now() / 1000), page = window.location.pathname, page2 = document.title, e1 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div > div.moduleTitle.txt-light > h4");
+}), browsingStamp = Math.floor(Date.now() / 1000), page = window.location.pathname, page2 = document.title, l = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div > div.moduleTitle.txt-light > h4"),
+l2 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div.pt-25.moduleS > div.moduleTitle.txt-light > h4"),
+l3 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div.moduleTitle.txt-light > h4");
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "probot",
     startTimestamp: browsingStamp
   };
-
-  const l = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div > div.moduleTitle.txt-light > h4"),
-  l2 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div.pt-25.moduleS > div.moduleTitle.txt-light > h4"),
-  l3 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div.moduleTitle.txt-light > h4");
 
     if (page.includes("/server")) {
       if (l3) {
