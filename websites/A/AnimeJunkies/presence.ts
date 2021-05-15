@@ -34,12 +34,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = b.textContent;
     } else {
       presenceData.details = "Erkundet AnimeJunkies";
-      presenceData.state = "";
+      delete presenceData.state;
     }
   }
 
   if (presenceData.details == null) {
-    presence.setTrayTitle();
+    presence.setTrayTitle(); 
     presence.setActivity();
   } else {
     presence.setActivity(presenceData);
