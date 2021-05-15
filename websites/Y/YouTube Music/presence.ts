@@ -114,7 +114,13 @@ presence.on("UpdateData", async () => {
           ? "Playlist on loop"
           : (await strings).play,
         startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
+        endTimestamp: timestamps[1],
+        buttons: [
+          {
+            label: "Listen Along",
+            url: window.location.href.split("&")[0]
+          }
+        ]
       };
 
     if (video.paused) {
