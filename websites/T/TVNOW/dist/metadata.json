@@ -9,7 +9,12 @@
     "nl": "TVNOW biedt spannende films en series. Ook zijn er veel shows en documentaires te vinden in de online stream! Bekijk nu uw favoriete programma online!",
     "de": "TVNOW bietet Dir spannende Filme und Serien. Auch viele Shows und Dokus sind im Online-Stream zu finden! Deine Lieblingssendung jetzt online anschauen!"
   },
-  "url": "www.tvnow.de",
+  "url": [
+    "www.tvnow.at",
+    "tvnow.at",
+    "tvnow.de",
+    "www.tvnow.de"
+  ],
   "version": "1.2.6",
   "logo": "https://i.imgur.com/Z9NwC2O.png",
   "thumbnail": "https://i.imgur.com/2TqBWPd.png",
