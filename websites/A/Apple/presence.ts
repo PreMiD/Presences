@@ -564,7 +564,7 @@ presence.on("UpdateData", async () => {
     } else if(urlpath[1] === 'games')
       presenceData.state = "Games";
     else if(urlpath[1] === 'forums') {
-      let buttons = {
+      const buttons = {
         show: false,
         label: "View Page",
         url: window.location.href
