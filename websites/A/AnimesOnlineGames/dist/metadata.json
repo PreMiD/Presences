@@ -1,0 +1,25 @@
+{
+  "author": {
+    "name": "Koalin",
+    "id": "354233941550694400"
+  },
+  "service": "AnimesOnline.Games",
+  "description": {
+    "en": "One of the sites with the largest anime catalog to watch in Brazil",
+    "pt": "Um dos sites com o maior catálogo de animes para assistir no Brasil",
+    "pt_BR": "Um dos sites com o maior catálogo de animes para assistir no Brasil"
+  },
+  "url": "animesonline.games",
+  "version": "1.0.5",
+  "logo": "https://user-images.githubusercontent.com/82522020/114811989-7f7c5d00-9d85-11eb-82b8-c5cc32410582.png",
+  "thumbnail": "https://cdn.discordapp.com/attachments/758353335534616596/843566379147198484/bem_vindo.png",
+  "color": "#69cf65",
+  "tags": [
+    "anime",
+    "animes",
+    "online",
+	"games",
+	"animesonlinegames"
+  ],
+  "category": "anime"
+}
