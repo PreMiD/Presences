@@ -74,11 +74,15 @@ presence.on("UpdateData", async () => {
         JSON.parse(
           document.querySelectorAll('script[type="application/ld+json"]')[1]
             ?.innerHTML || "{}"
-        )[0]?.itemListElement.map((x: {
-          item: {
-            name: string
-          }
-        }) => x.item.name.toLowerCase()).join(" ") ?? "",
+        )[0]
+          ?.itemListElement.map(
+            (x: {
+              item: {
+                name: string;
+              };
+            }) => x.item.name.toLowerCase()
+          )
+          .join(" ") ?? "",
       video: HTMLVideoElement = document.querySelector("video"),
       isMovie = URLItem.includes("movie"),
       isVShow = URLItem.includes("variety-show"),

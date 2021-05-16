@@ -73,8 +73,10 @@ presence.on("UpdateData", async () => {
     } else if (window.location.pathname.includes("/loan")) {
       presenceData.state = "Crypto Loans";
     } else if (window.location.pathname.includes("/stock-token/trade")) {
-      const tradePair = document.querySelector("div.css-vurnku > h1").textContent.trim();
-      
+      const tradePair = document
+        .querySelector("div.css-vurnku > h1")
+        .textContent.trim();
+
       presenceData.details = `Trading Stock Tokens:`;
       presenceData.state = tradePair;
     } else if (window.location.pathname.includes("/stock-token")) {
@@ -110,18 +112,18 @@ presence.on("UpdateData", async () => {
           .querySelector("div.css-t7ggbb > div.css-mzoqhr > h1")
           .textContent.trim();
 
-      switch (new URLSearchParams(window.location.search).get('type')) {
-        case 'spot':
+      switch (new URLSearchParams(window.location.search).get("type")) {
+        case "spot":
           presenceData.details = `Trading on Spot:`;
           break;
-        case 'isolated':
+        case "isolated":
           presenceData.details = `Trading on Isolated ${tradeLeverage}:`;
           break;
-        case 'cross':
+        case "cross":
           presenceData.details = `Trading on Cross ${tradeLeverage}:`;
           break;
         default:
-          presenceData.details = 'Trading:';
+          presenceData.details = "Trading:";
           break;
       }
 
