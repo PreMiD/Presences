@@ -9,8 +9,12 @@ presence.on("UpdateData", async () => {
 
   if (document.location.hostname === "roulette.hitmaps.com") {
     presenceData.details = "Playing HITMAPS™ Roulette";
-    if (document.querySelector("h1")?.innerHTML.includes("SELECT MISSION")) presenceData.state = "Choosing a mission";
-    if (document.querySelector("h1")?.innerHTML.includes("CURRENT MISSION")) presenceData.state = "Mission:" + document.querySelector("h1").innerHTML.split("CURRENT MISSION:")[1];
+    if (document.querySelector("h1")?.innerHTML.includes("SELECT MISSION"))
+      presenceData.state = "Choosing a mission";
+    if (document.querySelector("h1")?.innerHTML.includes("CURRENT MISSION"))
+      presenceData.state =
+        "Mission:" +
+        document.querySelector("h1").innerHTML.split("CURRENT MISSION:")[1];
   } else if (document.location.pathname === "/") {
     presenceData.details = "Viewing home page";
   } else if (document.location.pathname === "/support-the-site") {
@@ -46,16 +50,33 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (document.location.pathname.split("/games/")[1] && document.location.pathname.split("/")[3]) {
-    presenceData.state = capitaliseEachWord(document.location.pathname.split("/")[3].replace(/[0-9]/g, "").replace(/-/g, " "));
+  if (
+    document.location.pathname.split("/games/")[1] &&
+    document.location.pathname.split("/")[3]
+  ) {
+    presenceData.state = capitaliseEachWord(
+      document.location.pathname
+        .split("/")[3]
+        .replace(/[0-9]/g, "")
+        .replace(/-/g, " ")
+    );
 
     if (document.title.includes(" | HITMAPS™")) {
       presenceData.state += " - " + document.title.split(" | HITMAPS™")[0];
     } else if (document.location.pathname.split("/")[4]) {
-      presenceData.state += " - " + capitaliseEachWord(document.location.pathname.split("/")[4].replace(/-/g, " "));
+      presenceData.state +=
+        " - " +
+        capitaliseEachWord(
+          document.location.pathname.split("/")[4].replace(/-/g, " ")
+        );
     }
     if (document.querySelector('meta[property="og:image"]')) {
-      if (document.querySelector('meta[property="og:image"]').getAttribute("content").includes("elusive")) {
+      if (
+        document
+          .querySelector('meta[property="og:image"]')
+          .getAttribute("content")
+          .includes("elusive")
+      ) {
         presenceData.state += " (Elusive Target)";
       }
     }
