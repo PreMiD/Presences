@@ -74,7 +74,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: logoArr[setting.logo] || "logo"
     };
 
-    var showElapsed = true;
+    let showElapsed = true;
 
   function getPSName() {
     return (
@@ -564,7 +564,7 @@ presence.on("UpdateData", async () => {
     } else if(urlpath[1] === 'games')
       presenceData.state = "Games";
     else if(urlpath[1] === 'forums') {
-      var buttons = {
+      let buttons = {
         show: false,
         label: "View Page",
         url: window.location.href
