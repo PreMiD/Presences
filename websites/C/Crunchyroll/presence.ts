@@ -46,7 +46,7 @@ presence.on("iFrameData", (data: iFrameData) => {
 });
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
+  const presenceData: PresenceData = {
     largeImageKey: "lg"
   };
 
@@ -107,16 +107,26 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData, true);
   }
-
+// c-heading--family-type-one title
   if (iFrameVideo !== false && !isNaN(duration)) {
-    const videoTitle = document.querySelector(".ellipsis .text-link span"),
-      episod = document.querySelectorAll("#showmedia_about_media h4"),
-      epName = document.querySelector("h4#showmedia_about_name"),
-      episode = episod[1].innerHTML + " - " + epName.innerHTML,
-      timestamps = presence.getTimestamps(
-        Math.floor(currentTime),
-        Math.floor(duration)
-      );
+    let videoTitle,
+    type,
+    episode;
+    if (document.location.hostname.startsWith("beta")){
+      videoTitle = document.querySelectorAll(".c-text.c-text--l.c-text--semibold.c-text--fixed-size")[0].innerHTML;
+      episode = document.querySelector(".c-heading.c-heading--xs.c-heading--family-type-one.title").innerHTML;
+      type = document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[2].innerHTML == "Subtitled" ? " (Sub)" : " (Dub)";
+      videoTitle = videoTitle + type;
+    } else {
+      videoTitle = document.querySelector(".ellipsis .text-link span").innerHTML;
+      const episod = document.querySelectorAll("#showmedia_about_media h4"),
+        epName = document.querySelector("h4#showmedia_about_name");
+      episode = episod[1].innerHTML + " - " + epName.innerHTML;
+    }
+    const timestamps = presence.getTimestamps(
+      Math.floor(currentTime),
+      Math.floor(duration)
+    );
     presenceData.smallImageKey = paused ? "pause" : "play";
     presenceData.smallImageText = paused
       ? (await strings).pause
@@ -127,12 +137,12 @@ presence.on("UpdateData", async () => {
       paused
         ? ""
         : videoTitle !== null
-        ? videoTitle.innerHTML
+        ? videoTitle
         : "Title not found..."
     );
 
     presenceData.details =
-      videoTitle !== null ? videoTitle.innerHTML : "Title not found...";
+      videoTitle !== null ? videoTitle : "Title not found...";
     presenceData.state = episode;
 
     if (paused) {
