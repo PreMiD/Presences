@@ -57,17 +57,17 @@
     }else if(document.location.pathname.includes("/hentai") || (document.location.pathname.includes("/video") && document.location.search.includes("t=4"))){
             if (document.querySelector("#body > section > div.col-12.col-l-9.fiche-look > div.row.blocshadow > div > h1") !== null) {
         title = document.querySelector("#body > section > div.col-12.col-l-9.fiche-look > div.row.blocshadow > div > h1")
-        presenceData.details = "Viewing Hentai:";
+        presenceData.details = "Viewing Anime (-18):";
         presenceData.state = title.innerText;
              presenceData.buttons = [
             {
-              label: "View Hentai",
+              label: "View Anime (-18)",
 
               url: document.URL
             }
           ];
       }else{
-        presenceData.details = "Looking for juicy contents";
+        presenceData.details = "Looking for animes (-18)";
     } 
   }else if(document.location.pathname.includes("/club")){
      if (document.querySelector("#body > section > div.col-12.col-l-9.blocm.box-display.club-global > h1 > span:nth-child(1)") !== null) {
