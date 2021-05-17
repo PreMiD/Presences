@@ -147,9 +147,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Today at Apple";
 
       if (urlpath.includes("feature")) {
-        presenceData.state = document.querySelector(
-          "h1.editorial-page__header-headline"
-        )?.textContent || "Unknown";
+        presenceData.state =
+          document.querySelector("h1.editorial-page__header-headline")
+            ?.textContent || "Unknown";
 
         if (setting.buttons) {
           presenceData.buttons = [

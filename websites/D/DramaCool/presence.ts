@@ -117,7 +117,8 @@ presence.on("UpdateData", async () => {
         },
         {
           label: (await strings).viewSeriesButton,
-          url: document.querySelector<HTMLAnchorElement>("div.category > a").href
+          url: document.querySelector<HTMLAnchorElement>("div.category > a")
+            .href
         }
       ];
 
