@@ -16,7 +16,9 @@
   "url": "www.adkami.com",
   "description": {
     "fr": "ADKami est un site qui a pour objectif d'aider les gens a suivre les sortie des episodes d'animes sur les plateforme legal.",
-    "en": "ADKami is a site that aims to help people follow the release of anime episodes on the legal platform."
+    "en": "ADKami is a site that aims to help people follow the release of anime episodes on the legal platform.",
+    "nl": "ADKami is een site die mensen wil helpen de releases van anime-afleveringen op een legale platform te volgen."
   },
+
   "regExp": "([a-z0-9-]+[.])*adkami[.]com[/]"
 }

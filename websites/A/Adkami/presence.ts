@@ -87,7 +87,7 @@
   }else if(document.location.pathname.includes("/news")){
         presenceData.details = "Browsing News";
   }else{
-    presenceData.details = "Surfing on the site";
+    presenceData.details = "Browsing...";
   }
 }
           
