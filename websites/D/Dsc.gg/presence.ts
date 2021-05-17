@@ -53,7 +53,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = `🏓 Tab: ${location.href.replace(`https://dsc.gg/dashboard/l/${link[1]}#tab=`, " ")}`;
       presenceData.buttons = [
         {
-          label: "View Link",
+          label: "Visit Link",
           url: `https://dsc.gg/${link[1]}`
         }
       ];
