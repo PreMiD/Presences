@@ -100,7 +100,7 @@ presence.on("UpdateData", async function () {
         if(setting.showButtons) {
           presenceData.buttons = [
             {
-              label: `View Collection`,
+              label: "View Collection",
               url: window.location.href
             }
           ];
