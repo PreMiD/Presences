@@ -51,15 +51,9 @@ presence.on("UpdateData", () => {
       break;
     default:
       if (path.includes("cv")) {
-        const name = !path.endsWith("/rate")
-          ? document
-              .querySelector(
-                "body > div:nth-child(7) > div.user_box > div.container.left > div > h2"
-              )
-              ?.getAttribute("data-title")
-          : document
-              .querySelector("#box1 > div.vote_box > h1")
-              ?.textContent.split("#")[0];
+        const name = !path.endsWith("/vote")
+          ? document.querySelector("body > div:nth-child(8) > div.user_box > div.container.left > div > h2")?.getAttribute("data-title")
+          : document.querySelector("#box1 > div.vote_box > h1")?.textContent.split("#")[0];
 
         presenceData.details = `${
           path.endsWith("/rate") ? "Rating" : "Viewing"
