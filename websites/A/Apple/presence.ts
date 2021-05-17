@@ -74,8 +74,6 @@ presence.on("UpdateData", async () => {
       largeImageKey: logoArr[setting.logo] || "logo"
     };
 
-    let showElapsed = true;
-
   function getPSName() {
     return (
       document.querySelector("div.ac-ln-title>a")?.textContent ||
@@ -538,7 +536,7 @@ presence.on("UpdateData", async () => {
       if (setting.buttons && page) {
         presenceData.buttons = [
           {
-            label: `View Page`,
+            label: "View Page",
             url: window.location.href
           }
         ];
@@ -639,10 +637,7 @@ presence.on("UpdateData", async () => {
 
         presenceData.state = document.querySelector("li.supplement.details>h1")?.textContent;
 
-        showElapsed = false;
-
         if(vid) {
-          presenceData.startTimestamp = video_startTime;
           presenceData.endTimestamp = video_endTime;
 
           if (!vid.paused) {
@@ -686,7 +681,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (setting.timeElapsed && showElapsed) presenceData.startTimestamp = time;
+  if (setting.timeElapsed && !window.location.href.startsWith("https://developer.apple.com/videos/play")) presenceData.startTimestamp = time;
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
