@@ -107,13 +107,13 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(presenceData, true);
   }
-// c-heading--family-type-one title
+
   if (iFrameVideo !== false && !isNaN(duration)) {
     let videoTitle,
     type,
     series,
     episode;
-    if (document.location.hostname.startsWith("beta")){
+    if (document.location.hostname.startsWith("beta")) {
       series = document.querySelectorAll(".c-text.c-text--l.c-text--semibold.c-text--fixed-size")[0].innerHTML;
       episode = document.querySelector(".c-heading.c-heading--xs.c-heading--family-type-one.title").innerHTML;
       type = document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[2].innerHTML == "Subtitled" ? " (Sub)" : " (Dub)";
