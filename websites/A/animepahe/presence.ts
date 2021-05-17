@@ -118,7 +118,6 @@ presence.on('UpdateData', async () => {
     presenceData.smallImageText = (await strings).browse;
     presenceData.details = `${(await strings).browse.slice(0, -3)} Latest Releases`;
     presenceData.state = 'animepahe';
-    //presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
   // a-z all browse
   } else if (path == '/anime') {
@@ -126,7 +125,6 @@ presence.on('UpdateData', async () => {
     presenceData.smallImageText = (await strings).browse;
     presenceData.details = `${(await strings).browse.slice(0, -3)} A-Z`;
     presenceData.state = 'animepahe';
-    //presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
   // season browse
   } else if (!path.split('anime/')[1].includes('/')) {
@@ -149,7 +147,6 @@ presence.on('UpdateData', async () => {
     presenceData.smallImageText = (await strings).browse;
     presenceData.details = title;
     presenceData.state = `${(await strings).browse.slice(0, -3)} ${type}`;
-    //presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
     presenceData.buttons = [
       {
