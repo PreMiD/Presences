@@ -53,20 +53,6 @@ class anime_storage {
 
 const anime_store = new anime_storage();
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 function getTimes(time: number): Record<string, number> {
   let seconds = Math.round(time),
     minutes = Math.floor(seconds / 60);
@@ -162,8 +148,8 @@ presence.on('UpdateData', async () => {
 
   // playback / episode
   if (path.split('/')[1] == 'play') {
-    const timestamps = getTimestamps(
-        Math.floor(iframe_response.current_time),
+    const timestamps = presence.getTimestamps(
+        Math.floor(iframe_response.current_time), 
         Math.floor(iframe_response.duration)
       ),
       movie: boolean = document.getElementsByClassName('anime-status')[0].firstElementChild.textContent == 'Movie',
