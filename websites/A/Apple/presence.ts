@@ -631,13 +631,14 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Videos - Topic";
         presenceData.state = document.querySelector("section.inline-block>h1.collection-title")?.textContent || document.title.replace(" - Videos - Apple Developer", "") || "Other";
       } else if(urlpath[2] === 'play') {
-        const vid = document.querySelector("video#video"),
-          video_startTime = Date.now(),
-          video_endTime = Math.floor(video_startTime / 1000) - vid.currentTime + vid.duration + 1;
+        const vid = document.querySelector("video#video");
 
         presenceData.state = document.querySelector("li.supplement.details>h1")?.textContent;
 
         if(vid) {
+          const video_startTime = Date.now(),
+            video_endTime = Math.floor(video_startTime / 1000) - vid.currentTime + vid.duration + 1;
+
           presenceData.endTimestamp = video_endTime;
 
           if (!vid.paused) {
