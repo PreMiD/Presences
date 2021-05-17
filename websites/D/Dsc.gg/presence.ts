@@ -43,6 +43,8 @@ presence.on("UpdateData", async () => {
           url: document.location.href
         }
       ];
+    } else if (document.location.pathname === ("/developers/dashboard")) {
+      presenceData.details = `Viewing 🖥️ developer dashboard`;
     } else if (document.location.pathname === ("/dashboard")) {
       presenceData.details = `Viewing 👤 dashboard`;
     } else if (document.location.pathname.includes("/dashboard/l/")) {
