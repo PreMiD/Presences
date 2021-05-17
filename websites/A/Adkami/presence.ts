@@ -8,8 +8,7 @@
     largeImageKey: "adkami",
     startTimestamp: browsingStamp
   }
-    
-  if (document.location.hostname == "www.adkami.com") {
+
     if (document.location.pathname == "/") {
       presenceData.details = "Viewing Home Page";
     }else if(document.location.pathname.includes("/anime") || (document.location.pathname.includes("/video") && document.location.search.includes("t=0"))){
