@@ -111,12 +111,13 @@ presence.on("UpdateData", async () => {
   if (iFrameVideo !== false && !isNaN(duration)) {
     let videoTitle,
     type,
+    series,
     episode;
     if (document.location.hostname.startsWith("beta")){
-      videoTitle = document.querySelectorAll(".c-text.c-text--l.c-text--semibold.c-text--fixed-size")[0].innerHTML;
+      series = document.querySelectorAll(".c-text.c-text--l.c-text--semibold.c-text--fixed-size")[0].innerHTML;
       episode = document.querySelector(".c-heading.c-heading--xs.c-heading--family-type-one.title").innerHTML;
       type = document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[2].innerHTML == "Subtitled" ? " (Sub)" : " (Dub)";
-      videoTitle = videoTitle + type;
+      videoTitle = series + type;
     } else {
       videoTitle = document.querySelector(".ellipsis .text-link span").innerHTML;
       const episod = document.querySelectorAll("#showmedia_about_media h4"),
