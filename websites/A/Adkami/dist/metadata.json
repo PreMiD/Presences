@@ -1,0 +1,22 @@
+{
+  "service": "Adkami",
+  "author": {
+    "name": "Inacraft",
+    "id": "1929"
+  },
+  "category": "anime",
+  "logo": "https://www.adkami.com/favicon2.png",
+  "thumbnail": "https://i.imgur.com/wrDZOtv.png",
+  "version": "1.0.0",
+  "color": "#7ccd18",
+  "tags": [
+    "animes",
+    "nsfw"
+  ],
+  "url": "www.adkami.com",
+  "description": {
+    "fr": "ADKami est un site qui a pour objectif d'aider les gens a suivre les sortie des episodes d'animes sur les plateforme legal.",
+    "en": "ADKami is a site that aims to help people follow the release of anime episodes on the legal platform."
+  },
+  "regExp": "([a-z0-9-]+[.])*adkami[.]com[/]"
+}
