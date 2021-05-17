@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
+  },
+  "service": "Daily Wire",
+  "description": {
+    "en": "The Daily Wire is an American conservative news website and media company founded in 2015 by political commentator Ben Shapiro and director Jeremy Boreing. The site has been criticised for promoting misinformation."
+  },
+  "url": "www.dailywire.com",
+  "version": "1.0.6",
+  "logo": "https://i.imgur.com/BevxEyq.png",
+  "thumbnail": "https://i.imgur.com/4eXamxn.png",
+  "color": "#000",
+  "category": "other",
+  "tags": [
+    "cars"
+  ],
+  "settings": [
+    {
+      "id": "timeElapsed",
+      "title": "Show elapsed time",
+      "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
