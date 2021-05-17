@@ -19,8 +19,8 @@ presence.on("UpdateData", async () => {
           url: document.location.href
         }
       ];
-    } else if (document.location.pathname === ("/about")) {
-      presenceData.details = `Viewing ✨ about page`;
+    } else if (document.location.pathname === "/about") {
+      presenceData.details = "Viewing ✨ about page";
       presenceData.buttons = [
         {
           label: "View Page",
@@ -28,25 +28,25 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (document.location.pathname.includes("/premium")) {
-      presenceData.details = `Viewing 💎 premium page`;
+      presenceData.details = "Viewing 💎 premium page";
       presenceData.buttons = [
         {
           label: "View Page",
           url: document.location.href
         }
       ];
-    } else if (document.location.pathname === ("/developers/about")) {
-      presenceData.details = `Viewing 💻 developer page`;
+    } else if (document.location.pathname === "/developers/about") {
+      presenceData.details = "Viewing 💻 developer page";
       presenceData.buttons = [
         {
           label: "View Page",
           url: document.location.href
         }
       ];
-    } else if (document.location.pathname === ("/developers/dashboard")) {
-      presenceData.details = `Viewing 🖥️ developer dashboard`;
-    } else if (document.location.pathname === ("/dashboard")) {
-      presenceData.details = `Viewing 👤 dashboard`;
+    } else if (document.location.pathname === "/developers/dashboard") {
+      presenceData.details = "Viewing 🖥️ developer dashboard";
+    } else if (document.location.pathname === "/dashboard") {
+      presenceData.details = "Viewing 👤 dashboard";
     } else if (document.location.pathname.includes("/dashboard/l/")) {
       const link = document.location.pathname.split("/dashboard/l/");
       presenceData.details = `Editing 🔗 ${link[1]} link`;
