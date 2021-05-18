@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "620723559345684510"
+  clientId: "844108029543972885"
 });
 
 var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "stopots-logo",
+    largeImageKey: "logo",
     startTimestamp: elapsed
   };
 

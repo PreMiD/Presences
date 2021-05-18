@@ -1,12 +1,12 @@
 var presence = new Presence({
-  clientId: "619286440353726465"
+  clientId: "844109006679179265"
 });
 
 var browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "tvtime-logo"
+    largeImageKey: "logo"
   };
 
   if (

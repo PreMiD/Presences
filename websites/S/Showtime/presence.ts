@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "617741834701242406"
+    clientId: "844107447933075498"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -69,7 +69,7 @@ presence.on("UpdateData", async () => {
     var data: PresenceData = {
       details: title,
       state: currentState,
-      largeImageKey: "showtime-logo",
+      largeImageKey: "logo",
       smallImageKey: smallImageKey,
       smallImageText: smallImageText,
       startTimestamp: timestamps[0],
@@ -87,7 +87,7 @@ presence.on("UpdateData", async () => {
   } else {
     const browsingPresence: PresenceData = {
       details: "Browsing...",
-      largeImageKey: "showtime-logo"
+      largeImageKey: "logo"
     };
     presence.setActivity(browsingPresence);
   }

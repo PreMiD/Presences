@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "619768959717343242"
+    clientId: "844107169205190686"
   }),
   strings = presence.getStrings({
     live: "presence.activity.live"
@@ -9,7 +9,7 @@ var elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "qdance-logo"
+    largeImageKey: "logo"
   };
 
   var radioCheck = document.querySelector(

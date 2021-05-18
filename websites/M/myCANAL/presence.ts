@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "620678620041576478"
+    clientId: "844106861711196179"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -26,7 +26,7 @@ var title;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "mycanal-logo"
+    largeImageKey: "logo"
   };
 
   var video: HTMLVideoElement = document.querySelector(

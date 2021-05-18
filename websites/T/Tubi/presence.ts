@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "621835880474345473"
+    clientId: "844108500996718622"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -24,7 +24,7 @@ var subtitle;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "tubi-logo"
+    largeImageKey: "logo"
   };
 
   var video: HTMLVideoElement = document.querySelector(

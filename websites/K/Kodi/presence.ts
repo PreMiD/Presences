@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "706585201479909476"
+  clientId: "844106518751215616"
 });
 
 let Name: any, Artist: any, timeDuration: any, timeElapsed: any;

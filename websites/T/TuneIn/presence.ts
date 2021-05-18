@@ -1,5 +1,5 @@
 var presence = new Presence({
-    clientId: "619817171928743938"
+    clientId: "844108776793178122"
   }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
@@ -36,7 +36,7 @@ var title, author;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "tunein-logo"
+    largeImageKey: "logo"
   };
 
   var playerCheck = document.querySelector(".player__playerContainer___JEJ2U")
