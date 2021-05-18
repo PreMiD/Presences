@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Page d'accueil";
   }
   else if (path.includes("/ordinateurs")){
-    presenceData.details = "Visite une page :"
+    presenceData.details = "Visite une page :";
     presenceData.state = "Accéssoires - Ordinateurs";
   }
   else if (path.includes("/micro")){
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "0 article";
   }
   else if (path.includes("/cart") && document.body.contains(document.querySelector("#cart-block > div.row > div.col-12.col-lg-9.cart-list > div.cart-list__body"))){
-    const articles = document.querySelectorAll("#cart-block > div.row > div.col-12.col-lg-9.cart-list > div.cart-list__body > div.cart-table").length - 1
+    const articles = document.querySelectorAll("#cart-block > div.row > div.col-12.col-lg-9.cart-list > div.cart-list__body > div.cart-table").length - 1;
     presenceData.details = "Regarde son panier :";
     presenceData.state = articles + " article(s)";
   }
@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
     }
     else {
       presenceData.details = "Page introuvable";
-      console.error("Page Introuvale PreMiD | Veuillez contacter le développeur Kozou#0001");
+      console.log("Page Introuvale PreMiD | Veuillez contacter le développeur Kozou#0001");
     }  
   }
   if (presenceData.details == null) {
