@@ -24,7 +24,7 @@ presence.on("UpdateData", async function () {
     if (setting.showButtons) {
       presenceData.buttons = [
         {
-          label: "View Article",
+          label: "Read Article",
           url: window.location.href
         }
       ];
@@ -36,7 +36,7 @@ presence.on("UpdateData", async function () {
     if (setting.showButtons) {
       presenceData.buttons = [
         {
-          label: "View Episode",
+          label: "Watch Episode",
           url: window.location.href
         }
       ];
@@ -48,7 +48,7 @@ presence.on("UpdateData", async function () {
     if (setting.showButtons) {
       presenceData.buttons = [
         {
-          label: "View Show",
+          label: "Watch Show",
           url: window.location.href
         }
       ];
