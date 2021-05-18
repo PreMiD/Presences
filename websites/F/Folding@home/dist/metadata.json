@@ -1,8 +1,14 @@
 {
   "author": {
-    "name": "Alexx",
-    "id": "604182077088202784"
+    "name": "Dark_Ville",
+    "id": "638080361179512853"
   },
+  "contributors": [
+    {
+      "name": "Alexx",
+      "id": "604182077088202784"
+    }
+  ],
   "url": "client.foldingathome.org",
   "description": {
     "en": "Folding@home is a project focused on disease research. The problems we're solving require so many computer calcul­ations - and we need your help to find the cures! Fight diseases Together with us.",

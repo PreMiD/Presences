@@ -1,5 +1,5 @@
 var presence = new Presence({
-  clientId: "843061081290178560"
+  clientId: "705454018343862362"
 });
 
 let courseName: any, lessonName: any, lessonActivity: any;
