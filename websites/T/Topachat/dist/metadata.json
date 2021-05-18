@@ -6,7 +6,8 @@
   "service": "Topachat",
   "description": {
     "en": "Top Achat is a retail chain of computer and electronic products for the general public carrying out its activities exclusively on the Web.",
-    "fr": "Top Achat est une enseigne de distribution de produits informatiques et électroniques grand public exerçant ses activités uniquement sur le Web."
+    "fr": "Top Achat est une enseigne de distribution de produits informatiques et électroniques grand public exerçant ses activités uniquement sur le Web.",
+    "nl": "Top Achat is een winkelketen van computer- en elektronische producten voor het grote publiek die zijn activiteiten uitsluitend op internet uitvoert."
   },
   "url": ["www.topachat.com",
           "secure.topachat.com"],

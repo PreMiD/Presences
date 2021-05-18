@@ -81,6 +81,7 @@ presence.on("UpdateData", async () => {
     }
     else {
       presenceData.details = "Page introuvable";
+      presence.info("Page Introuvale PreMiD | Veuillez contacter le développeur Kozou#0001");
     }  
   }
   if (presenceData.details == null) {
