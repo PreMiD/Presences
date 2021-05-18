@@ -110,9 +110,8 @@ async function checkDomain(): Promise<DomainCheckState> {
 
   for (let i = 0; i < cookies.length; i++) {
     if (cookies[i].key === cookieName) {
-      const cachedValidDomains = (result.validDomains = cookies[i].value.split(
-        "-"
-      ));
+      const cachedValidDomains = (result.validDomains =
+        cookies[i].value.split("-"));
       if (cachedValidDomains.includes(currentDomain)) {
         result.invalid = false;
         return result;

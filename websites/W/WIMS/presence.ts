@@ -141,9 +141,9 @@ if (!loggedout) {
       ) *
         60 +
         parseInt(
-          (document.querySelector(
-            "p#exam_clock"
-          ) as HTMLElement).innerText.split(":")[2]
+          (
+            document.querySelector("p#exam_clock") as HTMLElement
+          ).innerText.split(":")[2]
         )) *
         1000;
   }

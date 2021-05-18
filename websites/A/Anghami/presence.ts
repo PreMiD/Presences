@@ -33,9 +33,8 @@ presence.on("UpdateData", async () => {
     playback: boolean = document.querySelector("anghami-player") != null;
 
   if (playback) {
-    const selectors: NodeListOf<Node> = document.querySelectorAll(
-        ".duration-text"
-      ),
+    const selectors: NodeListOf<Node> =
+        document.querySelectorAll(".duration-text"),
       current: string =
         (selectors[0] && selectors[0].textContent.trim()) || "0:0",
       length: string =

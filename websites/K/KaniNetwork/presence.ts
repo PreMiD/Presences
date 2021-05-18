@@ -44,9 +44,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = "with the KaniShiel's dashboard";
       } else {
         presenceData.details = "Using the KaniShiel's dashboard of :";
-        presenceData.state = document.getElementById(
-          "563749920683720709"
-        ).textContent;
+        presenceData.state =
+          document.getElementById("563749920683720709").textContent;
       }
     } else {
       presenceData.details = "Viewing a page:";

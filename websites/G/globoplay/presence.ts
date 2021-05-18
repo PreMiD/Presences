@@ -109,8 +109,9 @@ presence.on("UpdateData", async () => {
           ".video-info__data-title"
         ).textContent;
       } else {
-        title = document.querySelector(".playkit-video-info__ep-title")
-          .textContent;
+        title = document.querySelector(
+          ".playkit-video-info__ep-title"
+        ).textContent;
       }
 
       if (!isNaN(duration)) {

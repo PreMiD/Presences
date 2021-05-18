@@ -4,8 +4,7 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const v2icons = await presence.getSetting("v2icons"),
-    logo = await presence.getSetting("logo"),
+  const logo = await presence.getSetting("logo"),
     buttons = await presence.getSetting("buttons"),
     data: PresenceData = {
       largeImageKey: !logo ? "logo" : "logo-v2",
@@ -26,8 +25,9 @@ presence.on("UpdateData", async () => {
     data.smallImageKey = "search";
   } else if (pathname === "/") data.details = "Viewing the homepage";
   else if (pathname.endsWith("/webtoons/")) {
-    const results = document.querySelector(".c-blog__heading > .h4")
-      .textContent;
+    const results = document.querySelector(
+      ".c-blog__heading > .h4"
+    ).textContent;
     data.details = "Browsing all webtoons";
     data.state = results;
   } else if (pathname.startsWith("/webtoon-genre/")) {

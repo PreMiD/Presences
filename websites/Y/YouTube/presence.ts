@@ -58,7 +58,7 @@ async function getStrings() {
       watchVideoButton: "general.buttonWatchVideo",
       viewChannelButton: "general.buttonViewChannel"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
@@ -67,7 +67,7 @@ let strings = getStrings(),
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     time = await presence.getSetting("time"),
     vidDetail = await presence.getSetting("vidDetail"),
@@ -301,9 +301,11 @@ presence.on("UpdateData", async () => {
           },
           {
             label: (await strings).viewChannelButton,
-            url: (document.querySelector(
-              "#top-row > ytd-video-owner-renderer > a"
-            ) as HTMLLinkElement).href
+            url: (
+              document.querySelector(
+                "#top-row > ytd-video-owner-renderer > a"
+              ) as HTMLLinkElement
+            ).href
           }
         ];
       }

@@ -180,9 +180,8 @@ presence.on("UpdateData", async () => {
             )
           );
         } else {
-          presenceData.details = document.querySelector(
-            "h3._clipTitle"
-          )?.textContent;
+          presenceData.details =
+            document.querySelector("h3._clipTitle")?.textContent;
           presenceData.state = document
             .querySelector("div.ch_tit")
             ?.textContent.trim();

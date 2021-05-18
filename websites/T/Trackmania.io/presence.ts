@@ -31,10 +31,10 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Track Of The Day";
         presenceData.state = month;
       } else {
-        const trackName = document.getElementsByClassName("game-text")[0]
-            .textContent,
-          mapperName = document.getElementsByClassName("subtitle")[0]
-            .textContent;
+        const trackName =
+            document.getElementsByClassName("game-text")[0].textContent,
+          mapperName =
+            document.getElementsByClassName("subtitle")[0].textContent;
         presenceData.details = "Leaderboard - Track Of The Day";
         presenceData.state = `${trackName} (${mapperName})`;
       }
@@ -42,8 +42,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Cup Of The Day";
       if (!window.location.hash.endsWith("cotd")) {
         presenceData.details = "Cup Of The Day";
-        const text = document.getElementsByClassName("game-text")[0]
-            .textContent,
+        const text =
+            document.getElementsByClassName("game-text")[0].textContent,
           cotd = text.substring(presenceData.details.length, text.length),
           cotdDate = new Date(cotd),
           month = monthsList[cotdDate.getMonth()];
@@ -55,15 +55,14 @@ presence.on("UpdateData", async () => {
       if (!window.location.hash.endsWith("campaigns")) {
         if (!window.location.hash.includes("leaderboard")) {
           presenceData.details = "Campaign";
-          presenceData.state = document.getElementsByClassName(
-            "game-text"
-          )[0].textContent;
+          presenceData.state =
+            document.getElementsByClassName("game-text")[0].textContent;
         } else {
           presenceData.details = "Leaderboard";
-          const mapName = document.getElementsByClassName("game-text")[0]
-              .textContent,
-            mapperName = document.getElementsByClassName("subtitle")[0]
-              .textContent;
+          const mapName =
+              document.getElementsByClassName("game-text")[0].textContent,
+            mapperName =
+              document.getElementsByClassName("subtitle")[0].textContent;
 
           presenceData.state = `${mapName} (${mapperName})`;
         }
@@ -72,8 +71,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Club Rooms";
       if (!window.location.hash.endsWith("rooms")) {
         presenceData.details = "Club Room";
-        const text = document.getElementsByClassName("game-text")[0]
-            .textContent,
+        const text =
+            document.getElementsByClassName("game-text")[0].textContent,
           players = document.getElementsByClassName("subtitle")[0].textContent;
 
         presenceData.state = `${text} (${players})`;
@@ -82,8 +81,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Clubs";
       if (!window.location.hash.endsWith("clubs")) {
         presenceData.details = "Club";
-        const text = document.getElementsByClassName("game-text")[0]
-            .textContent,
+        const text =
+            document.getElementsByClassName("game-text")[0].textContent,
           members = document.getElementsByClassName("subtitle")[0].textContent;
 
         presenceData.state = `${text} (${members})`;
@@ -92,16 +91,15 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Events";
       if (!window.location.hash.endsWith("competitions")) {
         presenceData.details = "Event";
-        const text = document.getElementsByClassName("game-text")[0]
-            .textContent,
+        const text =
+            document.getElementsByClassName("game-text")[0].textContent,
           members = document.getElementsByClassName("subtitle")[0].textContent;
 
         presenceData.state = `${text} (${members})`;
       }
     } else if (window.location.hash.startsWith("#/matchmaking")) {
-      presenceData.details = document.getElementsByClassName(
-        "title"
-      )[1].textContent;
+      presenceData.details =
+        document.getElementsByClassName("title")[1].textContent;
       presenceData.state = "Leaderboard";
     } else if (window.location.hash.startsWith("#/matches")) {
       presenceData.state = "Matches";
@@ -109,9 +107,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Matches";
       if (!window.location.hash.endsWith("match")) {
         presenceData.details = "Match";
-        presenceData.state = document.getElementsByClassName(
-          "title"
-        )[1].textContent;
+        presenceData.state =
+          document.getElementsByClassName("title")[1].textContent;
       }
     } else if (window.location.hash.startsWith("#/players")) {
       presenceData.state = "Player search";
@@ -130,17 +127,15 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Player";
       if (!window.location.hash.endsWith("player")) {
         presenceData.details = "Player";
-        presenceData.state = document.getElementsByClassName(
-          "title"
-        )[1].textContent;
+        presenceData.state =
+          document.getElementsByClassName("title")[1].textContent;
       }
     } else if (window.location.hash.startsWith("#/news")) {
-      presenceData.state = document.getElementsByClassName(
-        "title"
-      )[1].textContent;
+      presenceData.state =
+        document.getElementsByClassName("title")[1].textContent;
     } else if (window.location.hash.startsWith("#/leaderboard")) {
-      const trackName = document.getElementsByClassName("game-text")[0]
-          .textContent,
+      const trackName =
+          document.getElementsByClassName("game-text")[0].textContent,
         mapperName = document.getElementsByClassName("subtitle")[0].textContent;
       presenceData.details = "Leaderboard";
       presenceData.state = `${trackName} (${mapperName})`;

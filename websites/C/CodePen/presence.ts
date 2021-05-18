@@ -70,9 +70,9 @@ presence.on("UpdateData", () => {
     if ((document.getElementById("title") as HTMLInputElement).value == "") {
       presenceData.state = "Thinking about what the title should be.";
     } else {
-      presenceData.state = (document.getElementById(
-        "title"
-      ) as HTMLInputElement).value;
+      presenceData.state = (
+        document.getElementById("title") as HTMLInputElement
+      ).value;
     }
   } else if (window.location.pathname == "/") {
     presenceData.details = "On the home page";

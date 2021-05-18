@@ -242,9 +242,9 @@ const updateCallback = {
             .textContent.trim()
             .split(" ...")[0]
             .slice(15),
-          usernameSearched = (document.querySelector(
-            "#UserUsername"
-          ) as HTMLInputElement).value;
+          usernameSearched = (
+            document.querySelector("#UserUsername") as HTMLInputElement
+          ).value;
         presenceData.details = "Searching for a user";
         if (usernameSearched)
           presenceData.state = `${usernameSearched}, ${searchSummary.slice(

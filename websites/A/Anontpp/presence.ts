@@ -70,9 +70,9 @@ presence.on("UpdateData", async () => {
   if (showVideoInfo) {
     if (video) {
       const show = getElement("#episodetitle") !== "Feature Film",
-        state = (document.querySelector(
-          "#infotitle"
-        ) as HTMLElement).innerText.split("\n");
+        state = (
+          document.querySelector("#infotitle") as HTMLElement
+        ).innerText.split("\n");
       if (show) {
         // Show Logic
         data.details = "Watching Show";
