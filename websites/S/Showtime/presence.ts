@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "844107447933075498"
   }),
   strings = presence.getStrings({
@@ -16,20 +16,20 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(),
+  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
 presence.on("UpdateData", async () => {
-  var video: HTMLVideoElement = document.querySelector(
+  const video: HTMLVideoElement = document.querySelector(
     "#main-container > div > video"
   );
 
-  var description;
+  let description;
 
   if (video && !isNaN(video.duration)) {
-    var title = document.querySelector(
+    const title = document.querySelector(
       "#player-video-overlay .player-title .player-title-name"
     ).textContent;
     if (document.location.pathname.includes("/live")) {
@@ -66,7 +66,7 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
     }
 
-    var data: PresenceData = {
+    const data: PresenceData = {
       details: title,
       state: currentState,
       largeImageKey: "logo",

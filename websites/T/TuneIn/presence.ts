@@ -31,15 +31,13 @@ function getTimestamps(
   return [Math.floor(startTime / 1000), endTime];
 }
 
-let elapsed = Math.floor(Date.now() / 1000);
-let title, author;
+let elapsed = Math.floor(Date.now() / 1000), title, author;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
-  };
-
-  const playerCheck = document.querySelector(".player__playerContainer___JEJ2U")
+  },
+  playerCheck = document.querySelector(".player__playerContainer___JEJ2U")
     ? true
     : false;
   if (playerCheck) {

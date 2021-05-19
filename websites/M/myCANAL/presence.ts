@@ -1,4 +1,4 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "844106861711196179"
   }),
   strings = presence.getStrings({
@@ -16,26 +16,24 @@ function getTimestamps(
   videoTime: number,
   videoDuration: number
 ): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+  const startTime = Date.now(), 
+  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
   return [Math.floor(startTime / 1000), endTime];
 }
 
-var elapsed = Math.floor(Date.now() / 1000);
-var title;
+const elapsed = Math.floor(Date.now() / 1000);
+let title;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
-  };
-
-  var video: HTMLVideoElement = document.querySelector(
+  }, video: HTMLVideoElement = document.querySelector(
     ".aPWk0-TaQEzvggxIT6qvP"
   );
   if (video && !isNaN(video.duration)) {
-    var Ad = document.querySelector("._3uUpH58Juk_Qbizq6j5ThG") ? true : false;
+    const Ad = document.querySelector("._3uUpH58Juk_Qbizq6j5ThG") ? true : false;
     if (!Ad) {
-      var path = document.location.pathname;
+      const path = document.location.pathname;
       if (path.includes("/live/")) {
         title = document.querySelector("._3tdt8zwgvMCJ6v_sElXneQ").textContent;
         data.smallImageKey = "live";
@@ -43,7 +41,7 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = elapsed;
       } else {
         title = document.querySelector(".bodyTitle___DZEtt").textContent;
-        var timestamps = getTimestamps(
+        const timestamps = getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );
@@ -54,7 +52,7 @@ presence.on("UpdateData", async () => {
         (data.startTimestamp = timestamps[0]),
           (data.endTimestamp = timestamps[1]);
       }
-      var subtitle = document.querySelector(
+      const subtitle = document.querySelector(
         "._39WJKEhrSYo7ftwMlFjZtA  ._3tdt8zwgvMCJ6v_sElXneQ"
       ).textContent;
       data.details = title;

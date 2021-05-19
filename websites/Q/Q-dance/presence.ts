@@ -1,11 +1,10 @@
-var presence = new Presence({
+const presence = new Presence({
     clientId: "844107169205190686"
   }),
   strings = presence.getStrings({
     live: "presence.activity.live"
   });
-
-var elapsed = Math.floor(Date.now() / 1000);
+   let elapsed = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {

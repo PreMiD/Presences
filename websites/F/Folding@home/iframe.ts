@@ -10,5 +10,5 @@ iframe.on("UpdateData", async () => {
  progress: l2.textContent,
     }
 });
-  };
+  }
 });
