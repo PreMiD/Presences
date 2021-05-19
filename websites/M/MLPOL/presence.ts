@@ -4,74 +4,72 @@ const browsingStamp = Math.floor(Date.now() / 1000),
   });
 
 presence.on("UpdateData", async () => {
-  let presenceData: PresenceData;
-
-  //I was gonna do a bunch of DOM manipulation but I give up on life so I'm just gonna do the most spaghetti way of doing this humanly possible.
-
-  // Home
-  if (document.location.pathname == "/") {
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
+  },
+  page = document.location.pathname;
+  if (page == "/") {
     presenceData.details = "Homepage";
   }
 
   //Boards
-  if (document.location.pathname == "/mlpol") {
+  if (page == "/mlpol") {
     presenceData.details = "/mlpol/ - My Little Politics";
   }
-  if (document.location.pathname == "/qa") {
+  if (page == "/qa") {
     presenceData.details = "/qa/ - Questions and Answers";
   }
-  if (document.location.pathname == "/go") {
+  if (page == "/go") {
     presenceData.details = "/go/ - Golden Oaks";
   }
-  if (document.location.pathname == "/1ntr") {
+  if (page == "/1ntr") {
     presenceData.details = "/1ntr/ - Internet & Imageboards";
   }
-  if (document.location.pathname == "/vx") {
+  if (page == "/vx") {
     presenceData.details = "/vx/ - Videogames and Paranormal";
   }
-  if (document.location.pathname == "/cyb") {
+  if (page == "/cyb") {
     presenceData.details = "/cyb/ - Cyberpunk Fiction and Fact";
   }
-  if (document.location.pathname == "/sp") {
+  if (page == "/sp") {
     presenceData.details = "/sp/ - Football";
   }
-  if (document.location.pathname == "/ub") {
+  if (page == "/ub") {
     presenceData.details = "/ub/ - Überhengst";
   }
-  if (document.location.pathname == "/a") {
+  if (page == "/a") {
     presenceData.details = "/a/ - Anime and Manga";
   }
 
   //Starts With
-  if (document.location.pathname.startsWith("/mlpol/")) {
+  if (page.startsWith("/mlpol/")) {
     presenceData.details = "/mlpol/ - My Little Politics";
   }
-  if (document.location.pathname.startsWith("/qa/")) {
+  if (page.startsWith("/qa/")) {
     presenceData.details = "/qa/ - Questions and Answers";
   }
-  if (document.location.pathname.startsWith("/go/")) {
+  if (page.startsWith("/go/")) {
     presenceData.details = "/go/ - Golden Oaks";
   }
-  if (document.location.pathname.startsWith("/1ntr/")) {
+  if (page.startsWith("/1ntr/")) {
     presenceData.details = "/1ntr/ - Internet & Imageboards";
   }
-  if (document.location.pathname.startsWith("/vx/")) {
+  if (page.startsWith("/vx/")) {
     presenceData.details = "/vx/ - Videogames and Paranormal";
   }
-  if (document.location.pathname.startsWith("/cyb/")) {
+  if (page.startsWith("/cyb/")) {
     presenceData.details = "/cyb/ - Cyberpunk Fiction and Fact";
   }
-  if (document.location.pathname.startsWith("/sp/")) {
+  if (page.startsWith("/sp/")) {
     presenceData.details = "/sp/ - Football";
   }
-  if (document.location.pathname.startsWith("/ub/")) {
+  if (page.startsWith("/ub/")) {
     presenceData.details = "/ub/ - Überhengst";
   }
-  if (document.location.pathname.startsWith("/a/")) {
+  if (page.startsWith("/a/")) {
     presenceData.details = "/a/ - Anime and Manga";
   }
 
-  presenceData.largeImageKey = "logo";
-  presenceData.startTimestamp = browsingStamp;
   presence.setActivity(presenceData);
 });
