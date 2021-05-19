@@ -1,6 +1,6 @@
 class Emanate extends Presence {
   constructor(options: PresenceOptions){
-    super(options)
+    super(options);
   }
 
   get startTime(){
@@ -41,7 +41,7 @@ emanate.on("UpdateData", async () => {
 
         switch (location.pathname.split("/")[2]) {
           case "profile":
-            presenceData.state = "Account"
+            presenceData.state = "Account";
             break;
           case "tracks":
             presenceData.state = "My Tracks";
