@@ -7,7 +7,7 @@ iframe.on("UpdateData", async () => {
   iframe.send({
     iframe_d: {
  points: l1.textContent,
- progress: l2.textContent,
+ progress: l2.textContent
     }
 });
   }

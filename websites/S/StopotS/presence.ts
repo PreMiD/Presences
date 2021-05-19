@@ -6,9 +6,7 @@ presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: elapsed
-  };
-
-  const path = document.location.pathname,
+  }, path = document.location.pathname,
   inGame = document.querySelector(".ctUsers") ? true : false;
   if (inGame) {
     const user = document.querySelector(".you .nick").textContent,
