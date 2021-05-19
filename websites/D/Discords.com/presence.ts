@@ -32,6 +32,17 @@ presence.on("UpdateData", async () => {
           url: document.location.href
         }
       ];
+    } else if (document.location.pathname.includes("/servers/tags/")) {
+      const page = document.querySelector("li.page-item.active")?.textContent,
+      tag = document.querySelector("h1.text-center")?.textContent.replace("Discord Servers", " ");
+      presenceData.details = `Viewing 🔑 ${tag || "Nothing"} keyword`;
+      presenceData.state = `📖 Page ${page}`;
+      presenceData.buttons = [
+        {
+          label: "View Keyword",
+          url: document.location.href
+        }
+      ];
     } else if (document.location.pathname === "/servers/top-100") {
       const page = document.querySelector("li.page-item.active")?.textContent;
       presenceData.details = "Viewing 🏅 top-100 servers";
