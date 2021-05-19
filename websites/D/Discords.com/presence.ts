@@ -56,12 +56,14 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/join")) {
       const server_name_join = document.querySelector("h2.mt-4")?.textContent;
       presenceData.details = `Joining 🚦 ${server_name_join || "Nothing"} `;
-      if(server_name_join) presenceData.buttons = [
+      if(server_name_join) {
+      presenceData.buttons = [
         {
           label: `Join ${server_name_join}`,
           url: document.location.href
         }
       ];
+      }
     } else if (document.location.pathname.includes("/upvote")) {
       const server_name_upvote = document.querySelector("h1.JoinUpvote_clickable-server-name__3l6Es")?.textContent;
       presenceData.details = `Upvoting 🗳️ ${server_name_upvote || "Nothing"} `;
