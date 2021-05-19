@@ -61,7 +61,7 @@ presence.on("UpdateData", async () => {
       boosts = document.querySelectorAll("span.mr-2")[2]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[2]?.textContent}`, `${"💎" + document.querySelectorAll("span.mr-2")[2]?.textContent}`),
       server = document.querySelector("h1.servernameh1")?.textContent.replace("PREMIUM", " ");
       presenceData.details = `Viewing 🎨 ${server}`;
-      presenceData.state = `${membersonline || "No members online"}, ${members || "No members"}, ${boosts || "No boosts"}`;
+      presenceData.state = `${membersonline || "N/A"}, ${members || "N/A"}, ${boosts || "No boosts"}`;
       presenceData.buttons = [
         {
           label: "Join",
