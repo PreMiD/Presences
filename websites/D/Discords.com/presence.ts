@@ -45,12 +45,12 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/servers/")) {
       const join = document.querySelectorAll("a.btn")[1]?.getAttribute("href"),
       upvote = document.querySelectorAll("a.btn")[2]?.getAttribute("href"),
-      membersonline = document.querySelectorAll("span.mr-2")[0]?.textContent,
-      members = document.querySelectorAll("span.mr-2")[1]?.textContent,
-      boosts = document.querySelectorAll("span.mr-2")[2]?.textContent,
+      membersonline = document.querySelectorAll("span.mr-2")[0]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[0]?.textContent}`, `${"👥" + document.querySelectorAll("span.mr-2")[0]?.textContent}`),
+      members = document.querySelectorAll("span.mr-2")[1]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[1]?.textContent}`, `${"🎁" + document.querySelectorAll("span.mr-2")[1]?.textContent}`),
+      boosts = document.querySelectorAll("span.mr-2")[2]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[2]?.textContent}`, `${"💎" + document.querySelectorAll("span.mr-2")[2]?.textContent}`),
       server = document.querySelector("h1.servernameh1")?.textContent.replace("PREMIUM", " ");
       presenceData.details = `Viewing 🎨 ${server}`;
-      presenceData.state = `${"🟢" + membersonline}, ${"🟣" + members}, ${boosts || "none"}`;
+      presenceData.state = `${membersonline || "none"}, ${members || "none"}, ${boosts || "none"}`;
       presenceData.buttons = [
         {
           label: "Join",
