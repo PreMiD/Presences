@@ -1,6 +1,6 @@
 const presence = new Presence({
   clientId: "843791837273391104"
-}), browsingStamp = Math.floor(Date.now() / 1000); 
+}), browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -50,6 +50,24 @@ presence.on("UpdateData", async () => {
       presenceData.buttons = [
         {
           label: "View Top-100",
+          url: document.location.href
+        }
+      ];
+    } else if (document.location.pathname.includes("/join")) {
+      const server_name_join = document.querySelector("h2.mt-4")?.textContent;
+      presenceData.details = `Joining 🚦 ${server_name_join || "Nothing"} `;
+      presenceData.buttons = [
+        {
+          label: `Join ${server_name_join || "Nothing"}`,
+          url: document.location.href
+        }
+      ];
+    } else if (document.location.pathname.includes("/upvote")) {
+      const server_name_upvote = document.querySelector("h1.JoinUpvote_clickable-server-name__3l6Es")?.textContent;
+      presenceData.details = `Upvoting 🗳️ ${server_name_upvote || "Nothing"} `;
+      presenceData.buttons = [
+        {
+          label: `Upvote ${server_name_upvote || "Nothing"}`,
           url: document.location.href
         }
       ];
