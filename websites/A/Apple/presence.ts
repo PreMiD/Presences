@@ -64,7 +64,8 @@ presence.on("UpdateData", async () => {
       "apple-books",
       "app-store",
       "music",
-      "apple-music"
+      "apple-music",
+      "maps"
     ],
     includesProduct = products.find((e) => urlpath.includes(e)),
     includesService = services.find((e) => urlpath.includes(e)),
@@ -146,9 +147,41 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Today at Apple";
 
       if (urlpath.includes("feature")) {
-        presenceData.state = document.querySelector(
-          "h1.editorial-page__header-headline"
-        )?.textContent;
+        presenceData.state =
+          document.querySelector("h1.editorial-page__header-headline")
+            ?.textContent || "Unknown";
+
+        if (setting.buttons) {
+          presenceData.buttons = [
+            {
+              label: "View Article",
+              url: window.location.href
+            }
+          ];
+        }
+      } else if (urlpath.includes("event")) {
+        presenceData.state =
+          document.querySelector("h1.typography-headline-elevated")
+            ?.textContent ||
+          document.querySelector("h1.typography-headline-reduced")
+            ?.textContent ||
+          "Unknown";
+
+        if (setting.buttons) {
+          presenceData.buttons = [
+            {
+              label: "View Event",
+              url: window.location.href
+            }
+          ];
+        }
+      } else if (document.querySelector("h1.typography-headline-elevated")) {
+        presenceData.state =
+          document.querySelector("h1.typography-headline-elevated")
+            ?.textContent ||
+          document.querySelector("h1.typography-headline-reduced")
+            ?.textContent ||
+          "Unknown";
 
         if (setting.buttons) {
           presenceData.buttons = [
@@ -159,14 +192,65 @@ presence.on("UpdateData", async () => {
           ];
         }
       }
+    } else if (urlpath.includes("healthcare")) {
+      presenceData.details = "Healthcare";
+
+      if (urlpath.includes("apple-watch")) presenceData.state = "Apple Watch";
+      else if (urlpath.includes("products-platform"))
+        presenceData.state = "Products and Platform";
+      else if (urlpath.includes("health-records"))
+        presenceData.state = "Health records";
+      else presenceData.state = "Overview";
     } else if (urlpath.includes("retail")) {
       if (urlpath.includes("instore-shopping-session"))
         presenceData.details = "Purchasing advice";
       else presenceData.details = "Store finder";
+    } else if (
+      urlpath.includes("ios") ||
+      urlpath.includes("watchos") ||
+      urlpath.includes("ipados") ||
+      urlpath.includes("macos")
+    ) {
+      const OS =
+        document.querySelector("div.ac-ln-title>a") ||
+        document.querySelector(
+          "h1.typography-hero-eyebrow.hero-eyebrow.hero-copy-item"
+        );
+
+      presenceData.details = "Viewing:";
+      presenceData.state = OS?.textContent || "Unknown";
+
+      if (setting.buttons && OS) {
+        presenceData.buttons = [
+          {
+            label: `View ${OS?.textContent}`,
+            url: window.location.href
+          }
+        ];
+      }
+    } else if (urlpath.includes("apple-events")) {
+      const event = document.querySelector(
+        "p.hero-subhead.typography-quote-reduced"
+      );
+
+      presenceData.details = event ? "Viewing Event:" : "Apple Events";
+      if (event) presenceData.state = event?.textContent || "Unknown";
+
+      if (setting.buttons && event) {
+        presenceData.buttons = [
+          {
+            label: "View Event",
+            url: window.location.href
+          }
+        ];
+      }
     } else if (urlpath.includes("store-opening-letter"))
       presenceData.details = "COVID‑19 store information";
     else if (urlpath.includes("trade-in"))
       presenceData.details = "Apple Trade In";
+    else if (urlpath.includes("supplier-responsibility"))
+      presenceData.details = "Supplier Responsibility";
+    else if (urlpath.includes("contact")) presenceData.details = "Contact";
     else if (urlpath.includes("choose-country-region"))
       presenceData.details = "Choosing language...";
     else presenceData.details = "Other";
@@ -290,25 +374,27 @@ presence.on("UpdateData", async () => {
       "watch",
       "airpods",
       "music",
-      "tv"
+      "tv",
+      "displays"
     ];
 
     presenceData.largeImageKey = "apple-support";
 
-    if (urlpath.length === (2 || 3)) {
-      presenceData.details = "Apple Support";
-      presenceData.state = "Home";
-    } else if (sProducts.find((e) => urlpath.includes(e))) {
+    if (sProducts.find((e) => urlpath.includes(e))) {
       presenceData.details = "Apple Support";
       presenceData.state =
         document.querySelector("h1.pageTitle-heading")?.textContent ||
-        document.querySelector("h1#main-title")?.textContent;
+        document.querySelector("h1#main-title")?.textContent ||
+        "Unknown";
     } else if (document.querySelector("div.mod-date")) {
       presenceData.details = "Apple Support - Article:";
       presenceData.state =
-        document.querySelector("h1#howto-title")?.textContent;
+        document.querySelector("h1#howto-title")?.textContent || "Unknown";
     } else if (window.location.hostname === "getsupport.apple.com") {
       presenceData.details = "Apple Support";
+    } else {
+      presenceData.details = "Apple Support";
+      presenceData.state = "Home";
     }
   } else if (window.location.hostname === "apps.apple.com") {
     presenceData.largeImageKey = "app-store";
@@ -369,6 +455,12 @@ presence.on("UpdateData", async () => {
     else if (urlpath[1] === "keynote") presenceData.state = "Keynote";
     else if (urlpath[1] === "fmf") presenceData.state = "Find My Friends";
     else if (urlpath[1] === "find") presenceData.state = "Find My";
+  } else if (window.location.hostname === "card.apple.com") {
+    presenceData.largeImageKey = "apple-card";
+    presenceData.details = "Apple Card";
+
+    if (!urlpath[1]) presenceData.state = "Home";
+    else if (urlpath[1] === "apply") presenceData.state = "Apply";
   }
 
   if (setting.timeElapsed) presenceData.startTimestamp = time;

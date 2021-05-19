@@ -44,7 +44,7 @@ const presence = new Presence({
         latest: "netflix.latest",
         refer: "netflix.referral"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     );
   };
 
@@ -64,7 +64,7 @@ presence.on("UpdateData", async () => {
     showTimestamp: boolean = await presence.getSetting("timestamp"),
     showButtons: boolean = await presence.getSetting("buttons"),
     privacy = await presence.getSetting("privacy"),
-    newLang = await presence.getSetting("lang"),
+    newLang = await presence.getSetting("lang").catch(() => "en"),
     logo: number = await presence.getSetting("logo"),
     logoArr = ["nflix_lg", "noback"];
 

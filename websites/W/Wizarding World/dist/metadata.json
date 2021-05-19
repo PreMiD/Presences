@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
+  },
+  "service": "Wizarding World",
+  "description": {
+    "en": "The Wizarding World is a fantasy media franchise and shared fictional universe centred on a series of films, based on the Harry Potter novel series by J. K. Rowling.",
+    "nl": "The Wizarding World is een fantasy-mediafranchise en gedeeld fictief universum rond een reeks films, gebaseerd op de Harry Potter-serie van J. K. Rowling."
+  },
+  "url": [
+    "www.wizardingworld.com",
+    "my.wizardingworld.com"
+  ],
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/vvHuXVu.jpg",
+  "thumbnail": "https://i.imgur.com/9KBCmqs.png",
+  "color": "#000",
+  "category": "other",
+  "tags": [
+    "potter",
+    "hogwarts",
+    "magic"
+  ],
+  "settings": [
+    {
+      "id": "timeElapsed",
+      "title": "Show elapsed time",
+      "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "WidgetStyle",
+  "author": {
+    "name": "Anaxes",
+    "id": "567885938160697377"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/fl8x8n1.png",
+  "thumbnail": "https://i.imgur.com/HYYkUG6.png",
+  "version": "1.0.1",
+  "color": "#7289da",
+  "tags": [
+    "discord",
+    "widgetstyle",
+    "widget"
+  ],
+  "url": "widget.style",
+  "description": {
+    "nl": "Een moderne blik op verouderde Discord Widgets.",
+    "fr": "Un look moderne sur les widgets Discord obsolètes.",
+    "tr": "Güncelliğini yitirmiş Discord widget'larına modern bir görünüm.",
+    "ja_JP": "古いDiscordウィジェットのモダンな外観。",
+    "zh_CN": "过时的Discord小部件的现代外观。",
+    "en": "A modern look on outdated Discord Widgets."
+  }
+}
