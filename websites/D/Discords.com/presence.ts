@@ -56,38 +56,32 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/join")) {
       const server_name_join = document.querySelector("h2.mt-4")?.textContent;
       presenceData.details = `Joining 🚦 ${server_name_join || "Nothing"} `;
-      presenceData.buttons = [
+      if(server_name_join) presenceData.buttons = [
         {
-          label: `Join ${server_name_join || "Nothing"}`,
+          label: `Join ${server_name_join}`,
           url: document.location.href
         }
       ];
     } else if (document.location.pathname.includes("/upvote")) {
       const server_name_upvote = document.querySelector("h1.JoinUpvote_clickable-server-name__3l6Es")?.textContent;
       presenceData.details = `Upvoting 🗳️ ${server_name_upvote || "Nothing"} `;
-      presenceData.buttons = [
+      if(server_name_upvote) presenceData.buttons = [
         {
-          label: `Upvote ${server_name_upvote || "Nothing"}`,
+          label: `Upvote ${server_name_upvote}`,
           url: document.location.href
         }
       ];
     } else if (document.location.pathname.includes("/servers/")) {
-      const join = document.querySelectorAll("a.btn")[1]?.getAttribute("href"),
-      upvote = document.querySelectorAll("a.btn")[2]?.getAttribute("href"),
-      membersonline = document.querySelectorAll("span.mr-2")[0]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[0]?.textContent}`, `${"👥" + document.querySelectorAll("span.mr-2")[0]?.textContent}`),
+      const membersonline = document.querySelectorAll("span.mr-2")[0]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[0]?.textContent}`, `${"👥" + document.querySelectorAll("span.mr-2")[0]?.textContent}`),
       members = document.querySelectorAll("span.mr-2")[1]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[1]?.textContent}`, `${"🎁" + document.querySelectorAll("span.mr-2")[1]?.textContent}`),
       boosts = document.querySelectorAll("span.mr-2")[2]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[2]?.textContent}`, `${"💎" + document.querySelectorAll("span.mr-2")[2]?.textContent}`),
       server = document.querySelector("h1.servernameh1")?.textContent.replace("PREMIUM", " ");
       presenceData.details = `Viewing 🎨 ${server}`;
-      presenceData.state = `${membersonline || "N/A"}, ${members || "N/A"}, ${boosts || "No boosts"}`;
+      presenceData.state = `${membersonline || "0 members online"}, ${members || "0 members"}, ${boosts || "0 boosts"}`;
       presenceData.buttons = [
         {
-          label: "Join",
-          url: `https://discords.com${join}`
-        },
-        {
-          label: "Upvote",
-          url: `https://discords.com${upvote}`
+          label: "View Page",
+          url: document.location.href
         }
       ];
     } else if (document.location.pathname.includes("/about")) {
@@ -160,7 +154,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing 👩‍⚖️ Terms of Service";
       presenceData.buttons = [
         {
-          label: "View TOS",
+          label: "View Page",
           url: document.location.href
         }
       ];
