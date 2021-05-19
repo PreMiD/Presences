@@ -10,18 +10,16 @@ var elapsed = Math.floor(Date.now() / 1000);
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
     largeImageKey: "logo"
-  };
-
-  var radioCheck = document.querySelector(
+  }, radioCheck = document.querySelector(
     "svg.audioplayer-controls__icon--play"
   )
     ? false
     : true;
   if (radioCheck) {
-    var song = document.querySelector(
+    const song = document.querySelector(
       ".audioplayer-nowplaying__track"
-    ).textContent;
-    var artist = document.querySelector(
+    ).textContent,
+    artist = document.querySelector(
       ".audioplayer-nowplaying__artist"
     ).textContent;
     (data.details = song),

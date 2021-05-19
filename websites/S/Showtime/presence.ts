@@ -46,12 +46,12 @@ presence.on("UpdateData", async () => {
       description = "Movie";
     }
 
-    var timestamps = getTimestamps(
+    const timestamps = getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
 
-    var currentState, smallImageKey, smallImageText;
+    let currentState: string, smallImageKey: string, smallImageText: string;
     if (description.includes("ON NOW")) {
       currentState = "Live TV";
       timestamps[0] = 0;
