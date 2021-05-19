@@ -67,12 +67,14 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/upvote")) {
       const server_name_upvote = document.querySelector("h1.JoinUpvote_clickable-server-name__3l6Es")?.textContent;
       presenceData.details = `Upvoting 🗳️ ${server_name_upvote || "Nothing"} `;
-      if(server_name_upvote) presenceData.buttons = [
+      if(server_name_upvote) { 
+      presenceData.buttons = [
         {
           label: `Upvote ${server_name_upvote}`,
           url: document.location.href
         }
       ];
+      }
     } else if (document.location.pathname.includes("/servers/")) {
       const membersonline = document.querySelectorAll("span.mr-2")[0]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[0]?.textContent}`, `${"👥" + document.querySelectorAll("span.mr-2")[0]?.textContent}`),
       members = document.querySelectorAll("span.mr-2")[1]?.textContent.replace(`${document.querySelectorAll("span.mr-2")[1]?.textContent}`, `${"🎁" + document.querySelectorAll("span.mr-2")[1]?.textContent}`),
