@@ -5,23 +5,8 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     live: "presence.activity.live"
-  });
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(), 
-  endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const elapsed = Math.floor(Date.now() / 1000);
+  }),
+ elapsed = Math.floor(Date.now() / 1000);
 let title;
 
 presence.on("UpdateData", async () => {
@@ -41,7 +26,7 @@ presence.on("UpdateData", async () => {
         data.startTimestamp = elapsed;
       } else {
         title = document.querySelector(".bodyTitle___DZEtt").textContent;
-        const timestamps = getTimestamps(
+        const timestamps = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
         );

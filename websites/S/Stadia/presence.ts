@@ -1,5 +1,5 @@
 const presence = new Presence({
-  clientId: "844107770402701332"
+  clientId: "713114770584109150"
 });
 const browsingStamp = Math.floor(Date.now() / 1000);
 let gameName: HTMLElement;

@@ -7,30 +7,6 @@ const presence = new Presence({
     live: "presence.activity.live"
   });
 
-function getTime(list: string[]): number {
-  let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}
-
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const splitAudioTime = audioTime.split(":").reverse(),
-   splitAudioDuration = audioDuration.split(":").reverse(),
-
-   parsedAudioTime = getTime(splitAudioTime),
-   parsedAudioDuration = getTime(splitAudioDuration),
-
-  startTime = Date.now(),
-   endTime =
-    Math.floor(startTime / 1000) - parsedAudioTime + parsedAudioDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let elapsed = Math.floor(Date.now() / 1000), title, author;
 
 presence.on("UpdateData", async () => {
@@ -81,7 +57,9 @@ presence.on("UpdateData", async () => {
       author = document.querySelector("#playerSubtitle").textContent;
       const audioTime = document.querySelector("#scrubberElapsed").textContent,
       audioDuration = document.querySelector("#scrubberDuration").textContent,
-      timestamps = getTimestamps(audioTime, audioDuration),
+      timestamp1 = presence.timestampFromFormat(audioTime),
+      timestamp2 = presence.timestampFromFormat(audioDuration),
+      timestamps = presence.getTimestamps(timestamp1, timestamp2),
       paused = document.querySelector(
         ".player-play-button__playerPlayButton___1Kc2Y[data-testid='player-status-paused']"
       )

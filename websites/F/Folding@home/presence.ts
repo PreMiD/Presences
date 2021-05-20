@@ -14,8 +14,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
 
-    presenceData.details = points;
-    presenceData.state = progress;
+    presenceData.details = `Contributing to: ${points}`;
+    presenceData.state = `Project Progress: ${progress}`;
     
   if (presenceData.details == null) {
     presence.setTrayTitle();
