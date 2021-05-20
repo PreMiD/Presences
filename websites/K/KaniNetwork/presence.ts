@@ -3,17 +3,17 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = { 
+  const presenceData: PresenceData = {
       largeImageKey: "logo"
     },
     browsingStamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
     sprivacy = await presence.getSetting("super-privacy");
   presenceData.startTimestamp = browsingStamp;
-  if (sprivacy || window.location.host === 'kaniwork.com:8080') {
+  if (sprivacy || window.location.host === "kaniwork.com:8080") {
     presenceData.details = "Browsing";
   } else {
-    const path = window.location.pathname.replace('.php','');
+    const path = window.location.pathname.replace(".php", "");
     if (path.endsWith("commandes")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Commands";
@@ -44,9 +44,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = "with the KaniShiel's dashboard";
       } else {
         presenceData.details = "Using the KaniShiel's dashboard of :";
-        presenceData.state = document.getElementById(
-          "563749920683720709"
-        ).textContent;
+        presenceData.state =
+          document.getElementById("563749920683720709").textContent;
       }
     } else {
       presenceData.details = "Viewing a page:";
