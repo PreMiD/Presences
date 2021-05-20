@@ -58,11 +58,11 @@ function checkIfMovie() {
     : (isMovie = true);
 
   !isMovie
-    ? presence
-        .getPageletiable("appData")
-        .then((appData) => {
-          isMovie = appData.anime.types?.find(x => x.name === "Movie") ? true : false;
-        })
+    ? presence.getPageletiable("appData").then((appData) => {
+        isMovie = appData.anime.types?.find((x) => x.name === "Movie")
+          ? true
+          : false;
+      })
     : presence.info(
         "Unable to determine if show is a Movie or TV Series.\nYou may be watching an OVA, or this is broken & you need to contact Striker#1337"
       );
@@ -119,8 +119,8 @@ presence.on("UpdateData", async () => {
         : (await strings).play;
       presenceData.startTimestamp = timestamps[0];
       presenceData.endTimestamp = timestamps[1];
-      currentAnimeTitle = document.querySelector("a.ka-url-wrapper")
-        .textContent;
+      currentAnimeTitle =
+        document.querySelector("a.ka-url-wrapper").textContent;
       currentAnimeEpisode = document.location.pathname
         .split("/")[3]
         .split("-")[1];
@@ -169,8 +169,8 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else {
-      currentAnimeTitle = document.querySelector("a.ka-url-wrapper")
-        .textContent;
+      currentAnimeTitle =
+        document.querySelector("a.ka-url-wrapper").textContent;
       currentAnimeEpisode = document.location.pathname
         .split("/")[3]
         .split("-")[1];

@@ -5,10 +5,12 @@
   },
   "service": "Vibe Radio",
   "description": {
-    "en": "your hit music station, this is vibe"
+    "en": "your hit music station, this is vibe",
+    "ga_IE": "do stáisiún ceoil buailte, tá sé seo vibe",
+    "nl": "je populaire muziekstation, dit is vibe"
   },
   "url": "theviberadio.com",
-  "version": "1.3.4",
+  "version": "1.3.6",
   "logo": "https://i.imgur.com/tFY2T7E.png",
   "thumbnail": "https://i.imgur.com/efWwqtQ.png",
   "color": "#ed9074",

@@ -53,12 +53,16 @@ function getAuthorString(): string {
     authorString = (document.querySelector(
       "span yt-formatted-string.ytmusic-player-bar a"
     ) as HTMLAnchorElement)
-      ? (document.querySelector(
-          "span yt-formatted-string.ytmusic-player-bar a"
-        ) as HTMLAnchorElement).innerText
-      : (document.querySelector(
-          "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
-        ) as HTMLAnchorElement).innerText;
+      ? (
+          document.querySelector(
+            "span yt-formatted-string.ytmusic-player-bar a"
+          ) as HTMLAnchorElement
+        ).innerText
+      : (
+          document.querySelector(
+            "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
+          ) as HTMLAnchorElement
+        ).innerText;
 
   return authorString;
 }
@@ -78,9 +82,9 @@ function getTimestamps(
 }
 
 presence.on("UpdateData", async () => {
-  const title = (document.querySelector(
-      ".ytmusic-player-bar.title"
-    ) as HTMLElement).innerText,
+  const title = (
+      document.querySelector(".ytmusic-player-bar.title") as HTMLElement
+    ).innerText,
     video = document.querySelector(".video-stream") as HTMLVideoElement,
     repeatMode = document
       .querySelector('ytmusic-player-bar[slot="player-bar"]')
@@ -110,7 +114,13 @@ presence.on("UpdateData", async () => {
           ? "Playlist on loop"
           : (await strings).play,
         startTimestamp: timestamps[0],
-        endTimestamp: timestamps[1]
+        endTimestamp: timestamps[1],
+        buttons: [
+          {
+            label: "Listen Along",
+            url: window.location.href.split("&")[0]
+          }
+        ]
       };
 
     if (video.paused) {

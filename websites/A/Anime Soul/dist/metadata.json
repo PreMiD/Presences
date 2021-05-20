@@ -6,10 +6,12 @@
   "service": "Anime Soul",
   "description": {
     "en": "The Largest Anime Discord Server in the World!",
-    "zh_CN": "世界上最大的动漫Discord服务器！"
+    "zh_CN": "世界上最大的动漫Discord服务器！",
+    "ga_IE": "An Freastalaí Discord Anime is Mó ar Domhan!",
+    "nl": "De grootste Anime Discord server ter wereld!"
   },
   "url": "animesoul.com",
-  "version": "1.1.7",
+  "version": "1.1.9",
   "logo": "https://i.imgur.com/OhVpByX.png",
   "thumbnail": "https://i.imgur.com/jvhu7Ww.jpg",
   "color": "#7289da",

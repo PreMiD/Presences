@@ -6,10 +6,11 @@
   "service": "Valtox Gaming Group",
   "description": {
     "en": "Valtox Gaming Group is a Gaming Community creating a new experience.",
-    "nl": "Valtox Gaming Group is een gamingcommunity die een nieuwe ervaring creëert."
+    "nl": "Valtox Gaming Group is een gamingcommunity die een nieuwe ervaring creëert.",
+    "ga_IE": "Is Pobal Cearrbhachais é Grúpa Cearrbhachais Valtox a chruthaíonn eispéireas nua."
   },
   "url": "valtoxgaminggroup.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/N9hqBPt.png",
   "thumbnail": "https://i.imgur.com/voX96Tr.png",
   "color": "#ff0000",

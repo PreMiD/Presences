@@ -6,10 +6,12 @@
   "service": "Webtekno",
   "description": {
     "en": "Webtekno is one of the biggest technology blogs in Turkey.",
-    "tr": "Türkiye'nin en güncel ve samimi teknoloji sitesi Webtekno için Discord RPC'si."
+    "tr": "Türkiye'nin en güncel ve samimi teknoloji sitesi Webtekno için Discord RPC'si.",
+    "ga_IE": "Tá Webtekno ar cheann de na blaganna teicneolaíochta is mó sa Tuirc.",
+    "nl": "Webtekno is een van de grootste technologieblogs in Turkije."
   },
   "url": "www.webtekno.com",
-  "version": "1.3.4",
+  "version": "1.3.6",
   "logo": "https://premid.is-inside.me/Hqp5M5Xr.png",
   "thumbnail": "https://premid.is-inside.me/qSiqDn47.png",
   "color": "#f54b37",

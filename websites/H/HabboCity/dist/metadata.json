@@ -6,7 +6,8 @@
   "service": "HabboCity",
   "description": {
     "fr": "HabboCity est un grand rétro Habbo français. Rejoins-nous et deviens célèbre, fais de nouvelles rencontres, tchates, construis, participe à des jeux et bien plus encore...",
-    "en": "HabboCity is a great French Habbo retro. Join us and become famous, meet new people, chat, build, participate in games and much more ..."
+    "en": "HabboCity is a great French Habbo retro. Join us and become famous, meet new people, chat, build, participate in games and much more ...",
+    "nl": "HabboCity is een geweldige Franse Habbo-retro. Doe mee en word beroemd, ontmoet nieuwe mensen, chat, bouw, doe mee aan games en nog veel meer ..."
   },
   "url": [
     "www.habbocity.me",
@@ -14,7 +15,7 @@
     "habbocity.fr",
     "www.habbocity.fr"
   ],
-  "version": "1.1.7",
+  "version": "1.1.9",
   "logo": "https://i.imgur.com/IC0Md4k.png",
   "thumbnail": "https://i.imgur.com/plMx986.png",
   "color": "#FFEE51",

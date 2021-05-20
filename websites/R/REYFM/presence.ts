@@ -54,8 +54,10 @@ function findChannel(): string {
       for (const channel of rows.children) {
         if (
           !channel.className.includes("desktop") &&
-          (channel.firstElementChild.children[2]
-            .firstElementChild as HTMLImageElement).src.includes("stop.png")
+          (
+            channel.firstElementChild.children[2]
+              .firstElementChild as HTMLImageElement
+          ).src.includes("stop.png")
         ) {
           return channel.firstElementChild.id.replace("channel-", "");
         }
@@ -78,6 +80,7 @@ presence.on("UpdateData", async () => {
     format1 = await presence.getSetting("sFormat1"),
     format2 = await presence.getSetting("sFormat2"),
     format3 = await presence.getSetting("sListeners"),
+    buttons = await presence.getSetting("buttons"),
     logo: number = await presence.getSetting("logo"),
     logoArr = [
       "reywhitebacksmall",
@@ -103,8 +106,20 @@ presence.on("UpdateData", async () => {
     } else if (document.location.hostname == "www.reyfm.de") {
       if (document.location.pathname.includes("/bots")) {
         presenceData.details = "Viewing bots";
+        presenceData.buttons = [
+          {
+            label: "View Bots",
+            url: "https://www.reyfm.de/bots"
+          }
+        ];
       } else if (document.location.pathname.includes("/discord-bot")) {
         presenceData.details = "Viewing the Discord bot";
+        presenceData.buttons = [
+          {
+            label: "View Bot",
+            url: "https://www.reyfm.de/discord-bot"
+          }
+        ];
       } else if (document.location.pathname.includes("/partner")) {
         presenceData.details = "Viewing partners";
       } else if (document.location.pathname.includes("/stream-urls")) {
@@ -135,9 +150,9 @@ presence.on("UpdateData", async () => {
       (document.querySelector("#player") as HTMLElement).style.cssText !==
       "display: none;"
     ) {
-      const paused = (document.querySelector(
-        "#miniplayer-play"
-      ) as HTMLImageElement).src.includes("play.png");
+      const paused = (
+        document.querySelector("#miniplayer-play") as HTMLImageElement
+      ).src.includes("play.png");
 
       let track: string, artist: string;
 
@@ -155,6 +170,9 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = Date.parse(channel.timeStart);
           presenceData.endTimestamp = Date.parse(channel.timeEnd);
           showFormat3 = true;
+          presenceData.buttons = [
+            { label: "Listen along!", url: `https://reyfm.de/${channel.name}` }
+          ];
         } else {
           artist = document.querySelector(
             "#player > div.wrapper > div.current > span.artist"
@@ -192,9 +210,9 @@ presence.on("UpdateData", async () => {
         .querySelector("#channel-player")
         .className.replace("shadow channel-color-", ""),
       channel = channels.find((channel) => channel.id === channelID),
-      paused = (document.querySelector(
-        "#play"
-      ) as HTMLImageElement).src.includes("play.png");
+      paused = (
+        document.querySelector("#play") as HTMLImageElement
+      ).src.includes("play.png");
 
     paused
       ? (presenceData.smallImageKey = "pause")
@@ -213,6 +231,8 @@ presence.on("UpdateData", async () => {
 
     showFormat3 = true;
 
+    presenceData.buttons = [{ label: "Listen along!", url: document.URL }];
+
     if (!paused) {
       presenceData.startTimestamp = Date.parse(channel.timeStart);
       presenceData.endTimestamp = Date.parse(channel.timeEnd);
@@ -225,6 +245,8 @@ presence.on("UpdateData", async () => {
   showFormat3
     ? presence.showSetting("sListeners")
     : presence.hideSetting("sListeners");
+
+  if (!buttons) delete presenceData.buttons;
 
   if (presenceData.details == null) {
     presence.setTrayTitle();

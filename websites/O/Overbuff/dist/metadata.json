@@ -5,10 +5,11 @@
   },
   "service": "Overbuff",
   "description": {
-    "en": "Overbuff is a website dedicated to helping Overwatch players improve their game. You can track your progress on heroes, see what your friends have been playing, and keep tabs on pro players."
+    "en": "Overbuff is a website dedicated to helping Overwatch players improve their game. You can track your progress on heroes, see what your friends have been playing, and keep tabs on pro players.",
+    "nl": "Overbuff is een website die is bedoeld om Overwatch-spelers te helpen hun spel te verbeteren. Je kunt je voortgang op helden volgen, zien wat je vrienden hebben gespeeld en professionele spelers in de gaten houden."
   },
   "url": "www.overbuff.com",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "logo": "https://i.imgur.com/iPdbPrZ.png",
   "thumbnail": "https://i.imgur.com/AvUP9R2.png",
   "color": "#FF8D00",

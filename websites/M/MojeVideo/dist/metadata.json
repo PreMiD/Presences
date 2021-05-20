@@ -5,10 +5,11 @@
     "id": "284370397535666188"
   },
   "url": "www.mojevideo.sk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": {
     "en": "MojeVideo is a Slovak video streaming/sharing website mostly with funny, short videos",
-    "sk": "Nové zábavné videá každý deň, zabavte sa, zasmejte sa, alebo nám pošlite vaše videá"
+    "sk": "Nové zábavné videá každý deň, zabavte sa, zasmejte sa, alebo nám pošlite vaše videá",
+    "nl": "MojeVideo is een Slowaakse website voor het streamen / delen van video's, meestal met grappige, korte video's"
   },
   "service": "MojeVideo",
   "logo": "https://i.imgur.com/gilsj7t.png",

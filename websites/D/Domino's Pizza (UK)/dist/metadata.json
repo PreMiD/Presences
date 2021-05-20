@@ -5,13 +5,14 @@
   },
   "service": "Domino's Pizza (UK)",
   "description": {
-    "en": "Order your favourite pizza custom made to your taste"
+    "en": "Order your favourite pizza custom made to your taste",
+    "nl": "Bestel uw favoriete pizza op maat naar uw smaak"
   },
   "url": [
     "www.dominos.co.uk",
     "dominos.co.uk"
   ],
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/GYkNfcY.png",
   "thumbnail": "https://i.imgur.com/Rld7QY1.png",
   "color": "#E31837",

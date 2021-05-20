@@ -5,13 +5,15 @@
   },
   "service": "VLC",
   "description": {
-    "en": "VLC presence for PreMiD! Please read [this page](https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) to get started!"
+    "en": "VLC presence for PreMiD! Please read [this page](https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) to get started!",
+    "ga_IE": "Láithreacht VLC do PreMiD! Léigh [an leathanach seo] le do thoil (https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) chun tosú",
+    "nl": "VLC aanwezigheid voor PreMiD! Lees [deze pagina] (https://github.com/PreMiD/Presences/blob/master/websites/V/VLC/readme.md) om te beginnen!"
   },
   "url": [
     "localhost",
     "127.0.0.1"
   ],
-  "version": "1.4.12",
+  "version": "1.4.15",
   "logo": "https://i.imgur.com/WuzLOQu.png",
   "thumbnail": "https://i.imgur.com/Bg2AFYN.png",
   "color": "#ff7c00",

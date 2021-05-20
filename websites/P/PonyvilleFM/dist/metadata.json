@@ -5,10 +5,11 @@
   },
   "service": "PonyvilleFM",
   "description": {
-    "en": "PonyvilleFM is one of the oldest Brony and Pony EDM Radio Station with Live Mixes and Performances from our very talented line-up of DJs."
+    "en": "PonyvilleFM is one of the oldest Brony and Pony EDM Radio Station with Live Mixes and Performances from our very talented line-up of DJs.",
+    "nl": "PonyvilleFM is een van de oudste Brony en Pony EDM-radiostations met live mixen en optredens van onze zeer getalenteerde line-up van dj's."
   },
   "url": "ponyvillefm.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://sks316.s-ul.eu/Sm3JjQe0.png",
   "thumbnail": "https://sks316.s-ul.eu/N9SKruqx.png",
   "color": "#4D0F80",

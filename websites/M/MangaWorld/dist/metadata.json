@@ -6,13 +6,14 @@
   "service": "MangaWorld",
   "description": {
     "en": "Check out our MangaWorld site to read your favorite Manga in Italian and completely free.",
-    "it": "Scopri il nostro sito MangaWorld per leggere i tuoi Manga preferiti in Italiano e completamente gratis."
+    "it": "Scopri il nostro sito MangaWorld per leggere i tuoi Manga preferiti in Italiano e completamente gratis.",
+    "nl": "Bekijk onze MangaWorld-site om je favoriete Manga in het Italiaans en helemaal gratis te lezen."
   },
   "url": [
     "mangaworld.tv",
     "www.mangaworld.tv"
   ],
-  "version": "2.1.8",
+  "version": "2.1.9",
   "logo": "https://i.imgur.com/MdYzAHr.png",
   "thumbnail": "https://i.imgur.com/BFsORve.png",
   "color": "#EE6B00",

@@ -1,42 +1,40 @@
 const presence = new Presence({
-  clientId: "628019683718856714"
-});
+    clientId: "628019683718856714"
+  }),
+  getSettings = async (): Promise<{
+    showRecipient: boolean;
+    showNumbers: boolean;
+  }> => ({
+    showRecipient: await presence.getSetting("showRecipient"),
+    showNumbers: await presence.getSetting("showNumbers")
+  });
 
-presence.on("UpdateData", () => {
-  const name: HTMLSpanElement = document.querySelector(
-      "#main > header > div._33QME > div._2FCjS > div > span"
-    ),
-    typing: any = document.querySelector(
-      "#main > footer > div > div._3uMse > div > div._3FRCZ"
-    ),
-    textPermission: any = document.querySelector(
-      "#main > footer > .copyable-area"
+presence.on("UpdateData", async () => {
+  const settings = await getSettings(),
+    typing = document.querySelector(
+      "div#main footer div[contenteditable=true].copyable-text"
     );
 
-  let contactName = null;
+  let name =
+    settings.showRecipient &&
+    document.querySelector("div#main header span[title]")?.textContent;
 
-  if (!name || name.innerText == "") return presence.setActivity();
   if (
-    isNaN(
-      Number(name.innerText.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, ""))
-    )
+    settings.showNumbers === false &&
+    typeof name === "string" &&
+    !isNaN(Number(name.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "")))
   )
-    contactName = name.innerText;
+    name = null;
 
-  const data: PresenceData = {
-    largeImageKey: "waweb-logo",
-    details: `Texting with ${contactName ? contactName : "someone"}`,
-    state: `${
-      typing && typing.textContent
-        ? "Typing..."
-        : `${
-            !typing && !textPermission
-              ? "Can't really type..."
-              : "Just waiting..."
-          }`
-    }`,
-    startTimestamp: Math.floor(Date.now() / 1000)
-  };
-
-  presence.setActivity(data);
+  if (!name && typing === null) return presence.setActivity();
+  else
+    presence.setActivity({
+      largeImageKey: "waweb-logo",
+      details: `Texting with ${name || "someone"}`,
+      state:
+        (typing?.textContent && "Typing...") ||
+        (typing === null && "No type permission.") ||
+        "Just waiting...",
+      startTimestamp: Math.floor(Date.now() / 1000)
+    });
 });

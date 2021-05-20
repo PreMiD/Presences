@@ -5,10 +5,11 @@
   },
   "service": "Divine Discord Bot List",
   "description": {
-    "en": "A small list of Discord bots for your servers"
+    "en": "A small list of Discord bots for your servers",
+    "nl": "Een kleine lijst van Discord bots voor uw servers"
   },
   "url": "divinediscordbots.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/UqSU82Q.jpg",
   "thumbnail": "https://i.imgur.com/jPruBUE.png",
   "color": "#0594ff",

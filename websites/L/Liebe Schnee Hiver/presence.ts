@@ -47,8 +47,9 @@ LSHiver.on("UpdateData", async () => {
 
     LSHiver.setActivity(presenceData);
   } else if (page.includes("/blog")) {
-    const title = document.querySelector(".entry-header h1.entry-title")
-      ?.textContent;
+    const title = document.querySelector(
+      ".entry-header h1.entry-title"
+    )?.textContent;
 
     if (title) {
       presenceData.details = "Bir gönderi okuyor:";

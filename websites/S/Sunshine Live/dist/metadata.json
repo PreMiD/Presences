@@ -6,10 +6,11 @@
   "service": "Sunshine Live",
   "description": {
     "en": "German radio station with many channels like Charts, Summer, 90s, House and much more",
-    "de": "Deutscher Radiosender mit vielen Kanälen wie Charts, Sommer, 90er, House und viel mehr"
+    "de": "Deutscher Radiosender mit vielen Kanälen wie Charts, Sommer, 90er, House und viel mehr",
+    "nl": "Duits radiostation met veel kanalen zoals Charts, Summer, 90s, House en nog veel meer"
   },
   "url": "www.sunshine-live.de",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "logo": "https://crugg.de/premid/ssllogo.png",
   "thumbnail": "https://crugg.de/premid/sslbanner.png",
   "color": "#F47216",

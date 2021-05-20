@@ -7,13 +7,14 @@
   "service": "Wikisource",
   "description": {
     "en": "Wikisource is a library of freely-licensed source texts and historical documents, including poetry, government documents, constitutions of many countries, and general literature.",
-    "ar_SA": "ويكي مصدر هي مكتبة لنصوص المصدر المرخص لها بحرية والوثائق التاريخية ، بما في ذلك الشعر والوثائق الحكومية ودساتير العديد من البلدان والأدب العام.",
     "zh_CN": "維基文庫是一個自由許可的源文本和歷史文檔庫，包括詩歌，政府文檔，許多國家的憲法和一般文獻。",
     "fr": "Wikisource est une bibliothèque de textes de référence et de documents historiques sous licence libre, qu’il s’agisse de poèmes, de documents officiels, de constitutions de nombreux pays ou de littérature générale.",
-    "es": "Wikisource es una biblioteca de licencias libres, textos y documentos históricos incluyendo poesía, documentos de gobierno, constituciones de muchos países y literatura en general."
+    "es": "Wikisource es una biblioteca de licencias libres, textos y documentos históricos incluyendo poesía, documentos de gobierno, constituciones de muchos países y literatura en general.",
+    "ga_IE": "Is leabharlann é Wikisource de théacsanna foinse agus doiciméid stairiúla atá ceadúnaithe go saor, lena n-áirítear filíocht, rialtas",
+    "nl": "Wikisource is een bibliotheek met bronteksten en historische documenten met vrije licentie, waaronder poëzie, overheidsdocumenten, grondwetten van veel landen en algemene literatuur."
   },
   "url": "wikisource.org",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "logo": "https://i.imgur.com/HS37uGx.png",
   "thumbnail": "https://i.imgur.com/K7f8lKG.png",
   "color": "#f9f9f9",

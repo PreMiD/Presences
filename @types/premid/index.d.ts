@@ -151,7 +151,7 @@ interface Metadata {
    * A string used to represent the category the presence falls under.
    * @link https://docs.premid.app/dev/presence/metadata#presence-categories
    */
-  category: string;
+  category: "anime" | "games" | "music" | "socials" | "videos" | "other";
   /**
    * Defines whether `iFrames` are used.
    */

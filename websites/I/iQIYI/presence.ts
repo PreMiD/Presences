@@ -19,7 +19,7 @@ const presence = new Presence({
         viewAccount: "general.viewAccount",
         viewPage: "general.viewPage"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     ),
   browsingStamp = Math.floor(Date.now() / 1000);
 
@@ -27,7 +27,7 @@ let strings = getStrings(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     showButtons: boolean = await presence.getSetting("buttons"),
     searchQuery: boolean = await presence.getSetting("searchQuery");
 
@@ -39,12 +39,11 @@ presence.on("UpdateData", async () => {
   }
 
   const presenceData: PresenceData = {
-    largeImageKey: ["iqiyi_logo", "iqiyi_logo_b"][
+    largeImageKey: ["iqiyi_logo_b", "iqiyi_logo"][
       await presence.getSetting("logo")
     ],
     details: (await strings).browse,
     smallImageKey: "search",
-    smallImageText: (await strings).browse,
     startTimestamp: browsingStamp
   };
 
@@ -75,7 +74,15 @@ presence.on("UpdateData", async () => {
         JSON.parse(
           document.querySelectorAll('script[type="application/ld+json"]')[1]
             ?.innerHTML || "{}"
-        )[0]?.itemListElement[0]?.item ?? document.URL,
+        )[0]
+          ?.itemListElement.map(
+            (x: {
+              item: {
+                name: string;
+              };
+            }) => x.item.name.toLowerCase()
+          )
+          .join(" ") ?? "",
       video: HTMLVideoElement = document.querySelector("video"),
       isMovie = URLItem.includes("movie"),
       isVShow = URLItem.includes("variety-show"),
@@ -192,7 +199,7 @@ presence.on("UpdateData", async () => {
         "div.trans-contributions-detail > span:nth-child(2) > i"
       )?.textContent,
       adopted = document.querySelector(
-        "div.trans-contributions-detail > span:nth-child(2) > i"
+        "div.trans-contributions-detail > span:nth-child(3) > i"
       )?.textContent;
 
     switch (type) {

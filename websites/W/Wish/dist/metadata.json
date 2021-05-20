@@ -6,10 +6,12 @@
   "service": "Wish",
   "description": {
     "en": "Buy many products with 80% discount.",
-    "de": "Kaufe viele Produkte mit 80% Rabatt."
+    "de": "Kaufe viele Produkte mit 80% Rabatt.",
+    "ga_IE": "Ceannaigh go leor táirgí le lascaine 80%.",
+    "nl": "Koop veel producten met 80% korting."
   },
   "url": "www.wish.com",
-  "version": "1.4.6",
+  "version": "1.4.8",
   "logo": "https://i.imgur.com/XsZ2IOn.jpg",
   "thumbnail": "https://i.imgur.com/R7AkWiP.png",
   "color": "#48c0eb",

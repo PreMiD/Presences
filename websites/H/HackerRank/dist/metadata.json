@@ -6,10 +6,11 @@
   },
   "url": "www.hackerrank.com",
   "description": {
-    "en": "Market–leading technical interview platform to identify and hire developers with the right skills."
+    "en": "Market–leading technical interview platform to identify and hire developers with the right skills.",
+    "nl": "Marktleidend technisch interviewplatform om ontwikkelaars met de juiste vaardigheden te identificeren en in te huren."
   },
   "service": "HackerRank",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/4Q8nbiR.png",
   "thumbnail": "https://i.imgur.com/eBvlYZU.png",
   "color": "#23BB5B",

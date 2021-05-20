@@ -7,10 +7,11 @@
   "url": "developer.mozilla.org",
   "description": {
     "en": "The web docs of MDN, here you can found JS docs and more...",
-    "es": "La documentacion web de MDN, puedes encontrar documentacion de JS y mas..."
+    "es": "La documentacion web de MDN, puedes encontrar documentacion de JS y mas...",
+    "nl": "De webdocumenten van MDN, hier vind je JS-documenten en meer..."
   },
   "service": "MDN Web Docs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/SmC65Yu.png",
   "thumbnail": "https://i.imgur.com/TkKC4bK.png",
   "color": "#84d4f4",

@@ -6,13 +6,15 @@
   "service": "Watchill",
   "description": {
     "en": "Watchill is one of the biggest Turkish foreign TV show providers on internet.",
-    "tr": "Watchill, son çıkan, güncel ve bir çok yabancı diziyi reklamsız, Türkçe dublajlı ve çift altyazılı izleyebileceğiniz bir yabancı dizi sitesidir."
+    "tr": "Watchill, son çıkan, güncel ve bir çok yabancı diziyi reklamsız, Türkçe dublajlı ve çift altyazılı izleyebileceğiniz bir yabancı dizi sitesidir.",
+    "ga_IE": "Tá Watchill ar cheann de na soláthraithe seó teilifíse eachtrach Tuircis is mó ar an idirlíon.",
+    "nl": "Watchill is een van de grootste Turkse buitenlandse tv-showproviders op internet."
   },
   "url": [
     "watchill.org",
     "www.watchill.org"
   ],
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://premid.is-inside.me/FrT9TBOI.png",
   "thumbnail": "https://premid.is-inside.me/JE9cgAnn.png",
   "color": "#0d1215",

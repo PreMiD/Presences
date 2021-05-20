@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "joerkig",
+    "id": "205984221859151873"
+  },
+  "service": "Rabbit's BS Viewer",
+  "description": {
+    "en": "preview Beat Saber custom levels in your browser",
+    "nl": "Bekijk aangepaste Beat Saber levels in je browser"
+  },
+  "url": "skystudioapps.com",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/FDP38pa.png",
+  "thumbnail": "https://i.imgur.com/wseLQzZ.png",
+  "color": "#232325",
+  "tags": [
+    "skystudioapps",
+    "beatsaber",
+    "gaming"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "elapsed",
+      "title": "Show Elapsed Time",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "timeleft",
+      "title": "Show Time Left",
+      "icon": "fad fa-hourglass",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

@@ -20,7 +20,8 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let strings = getStrings(),
-  oldLang: string = null;
+  oldLang: string = null,
+  videoData: VideoData = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -31,11 +32,12 @@ presence.on("UpdateData", async () => {
     newLang = await presence.getSetting("lang"),
     buttonsOn = await presence.getSetting("buttons"),
     searchQueryOn = await presence.getSetting("searchQ"),
-    videoData: VideoData = await presence.getPageletiable("GA_DIMENSIONS"),
     PresenceLogo: number = await presence.getSetting("logo"),
     logos = ["viu_logo", "viu_logo_text"];
 
   presenceData.largeImageKey = logos[PresenceLogo];
+
+  if (!videoData) videoData = await presence.getPageletiable("GA_DIMENSIONS");
 
   if (!oldLang) {
     oldLang = newLang;
@@ -50,8 +52,9 @@ presence.on("UpdateData", async () => {
     if (video) {
       const timestamps = presence.getTimestampsfromMedia(video),
         episode = videoData.dimension2,
-        episodeName = document.querySelector("h3.video-update-epi-name")
-          .textContent,
+        episodeName = document.querySelector(
+          "h3.video-update-epi-name"
+        ).textContent,
         episodeNameRegex = new RegExp(videoData.dimension1),
         hasEpName = episodeName.match(/([1-9]?[0-9]?[0-9])/)
           ? episode !== episodeName.match(/([1-9]?[0-9]?[0-9])/)[0] &&
@@ -62,9 +65,9 @@ presence.on("UpdateData", async () => {
         isHighlight = videoData.dimension1.match(/(highlight?:? )/i)
           ? true
           : false,
-        isMovie = (document.getElementsByName(
-          "keywords"
-        )[0] as HTMLMetaElement).content
+        isMovie = (
+          document.getElementsByName("keywords")[0] as HTMLMetaElement
+        ).content
           .split(", ")
           .some((keyword) => keyword.toLowerCase().includes("movie"));
 
@@ -76,15 +79,15 @@ presence.on("UpdateData", async () => {
       if (isMovie) {
         presenceData.state = "Movie";
       } else if (isHighlight) {
-        presenceData.state = `Highlight • E${episode}${
+        presenceData.state = `Highlight • EP.${episode}${
           part ? ` • ${part[0]} ` : ""
         }${hasEpName ? ` • ${episodeName}` : ""}`;
       } else if (isTrailer) {
-        presenceData.state = `Trailer • E${episode}${
+        presenceData.state = `Trailer • EP.${episode}${
           part ? ` • ${part[0]} ` : ""
         }${hasEpName ? ` • ${episodeName}` : ""}`;
       } else {
-        presenceData.state = `E${episode}${part ? ` • ${part[0]} ` : ""}${
+        presenceData.state = `EP.${episode}${part ? ` • ${part[0]} ` : ""}${
           hasEpName ? ` • ${episodeName}` : ""
         }`;
       }
@@ -117,9 +120,9 @@ presence.on("UpdateData", async () => {
       presenceData.state = videoData.dimension1;
     }
   } else if (document.location.search) {
-    const searchQuery = (document.querySelector(
-      "input#search"
-    ) as HTMLInputElement).value;
+    const searchQuery = (
+      document.querySelector("input#search") as HTMLInputElement
+    ).value;
 
     presenceData.details = (await strings).searchFor;
     presenceData.state = searchQueryOn

@@ -6,10 +6,11 @@
   "service": "Ranobelib",
   "description": {
     "ru": "Сайт для прочтения ранобэ на русском языке.",
-    "en": "Website for reading ranobe in Russian"
+    "en": "Website for reading ranobe in Russian",
+    "nl": "Website voor het lezen van ranobe in het Russisch"
   },
   "url": "ranobelib.me",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "logo": "https://i.imgur.com/chW9ryh.png",
   "thumbnail": "https://i.imgur.com/SXMD2Qw.png",
   "color": "#0099ff",

@@ -6,10 +6,11 @@
   "service": "Gitea",
   "description": {
     "en": "Gitea is an Open-Source Git Platform heavily inspired by GitHub",
-    "de": "Gitea ist eine Open-Source Git Plattform, welche sehr stark an GitHub angelehnt ist"
+    "de": "Gitea ist eine Open-Source Git Plattform, welche sehr stark an GitHub angelehnt ist",
+    "nl": "Gitea is een Open-Source Git Platform, sterk geïnspireerd door GitHub"
   },
   "url": "gitea.com",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://crugg.de/premid/gitealogo.png",
   "thumbnail": "https://crugg.de/premid/giteabanner.png",
   "color": "#5aa509",

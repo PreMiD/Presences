@@ -6,10 +6,11 @@
   "service": "puhutv",
   "description": {
     "en": " puhutv is a Turkish entertainment and video on demand service!",
-    "tr": "puhutv ile en popüler dizileri ve unutulmaz Türk filmlerini tek parça, HD görüntü kalitesiyle ücretsiz izle!"
+    "tr": "puhutv ile en popüler dizileri ve unutulmaz Türk filmlerini tek parça, HD görüntü kalitesiyle ücretsiz izle!",
+    "nl": "puhutv is een Turkse service voor entertainment en video op aanvraag!"
   },
   "url": "puhutv.com",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "logo": "https://premid.is-inside.me/ivb6ZOak.jpg",
   "thumbnail": "https://premid.is-inside.me/ZaHJ2qz5.png",
   "color": "#232527",

@@ -6,13 +6,15 @@
   "service": "Voiranime",
   "description": {
     "en": "Voiranime is a streaming website where you can watch VF and VOSTFR anime.",
-    "fr": "Voiranime est un site pour regarder des animes gratuits en streaming VF VOSTFR."
+    "fr": "Voiranime est un site pour regarder des animes gratuits en streaming VF VOSTFR.",
+    "ga_IE": "Is suíomh Gréasáin sruthú é Voiranime inar féidir leat féachaint ar VF agus VOSTFR anime.",
+    "nl": "Voiranime is een streamingwebsite waar je VF- en VOSTFR-anime kunt bekijken."
   },
   "url": [
     "voiranime.com",
     "www.voiranime.com"
   ],
-  "version": "1.1.7",
+  "version": "1.1.9",
   "logo": "https://doomlord.s-ul.eu/FgXXdKsC",
   "thumbnail": "https://doomlord.s-ul.eu/Ld8gJh40",
   "color": "#8919be",

@@ -12,10 +12,11 @@
   ],
   "url": "pylon.bot",
   "description": {
-    "en": "Build and deploy Discord bots in minutes using our simple online studio."
+    "en": "Build and deploy Discord bots in minutes using our simple online studio.",
+    "nl": "Bouw en implementeer Discord-bots in enkele minuten met behulp van onze eenvoudige online studio."
   },
   "service": "Pylon",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "logo": "https://i.imgur.com/VrYlcrQ.png",
   "thumbnail": "https://i.imgur.com/hPkh9Br.png",
   "color": "#3961DD",

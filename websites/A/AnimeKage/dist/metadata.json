@@ -8,10 +8,11 @@
     "en": "Online anime series translated into Romanian. Naruto, Naruto Shippuden, Bleach, Gintama, and more. Our site offers translations to hundreds of anime and manga subtitles in Romanian.",
     "nl": "Online animatieserie vertaald in het Roemeens. Naruto, Naruto Shippuden, Bleach, Gintama en meer. Onze site biedt vertalingen naar honderden anime- en manga-ondertitels in het Roemeens.",
     "ro": "Serii anime online traduse în limba română. Naruto, Naruto Shippuden, Bleach, Gintama, şi multe altele. Site-ul nostru oferă traduceri la sute de serii anime şi manga subtitrate în limba română.",
-    "zh_CN": "在线动漫视频网站，我们提供了数百种罗马尼亚语字幕的动漫和漫画供用户观看。"
+    "zh_CN": "在线动漫视频网站，我们提供了数百种罗马尼亚语字幕的动漫和漫画供用户观看。",
+    "ga_IE": "Sraith anime ar líne aistrithe go Rómáinis. Naruto, Naruto Shippuden, Bleach, Gintama, agus go leor eile. Ár suíomh as aistriúcháin chuig na céadta fotheideal anime agus manga sa Rómáinis."
   },
   "url": "ak151.anime-kage.eu",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/zVbpanX.png",
   "thumbnail": "https://i.imgur.com/0pir8CX.png",
   "color": "#2bb4ba",

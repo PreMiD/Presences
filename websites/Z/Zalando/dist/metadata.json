@@ -7,17 +7,15 @@
   "description": {
     "en": "Zalando | Buy shoes online: Shoes from top brands.",
     "nl": "Zalando online shop | Kleding, schoenen, sportartikelen, accessoires en meer | Jouw favoriete brands voor dames, heren en kids",
-    "zh_CN": "Zalando 是总部位于德国柏林的大型网络电子商城， 其主要产品是服装和鞋类。"
+    "zh_CN": "Zalando 是总部位于德国柏林的大型网络电子商城， 其主要产品是服装和鞋类。",
+    "ga_IE": "Zalando | Ceannaigh bróga ar líne: Bróga ó na brandaí is fearr."
   },
   "url": "www.zalando.com",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/APLPI4i.png",
   "thumbnail": "https://i.imgur.com/lFWmRc9.png",
   "color": "#f47127",
-  "tags": [
-    "shop",
-    "fashion"
-  ],
+  "tags": ["shop", "fashion"],
   "category": "other",
   "regExp": "([a-z0-9-]+[.])*zalando([.][a-z]+)+[/]"
 }

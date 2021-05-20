@@ -10,10 +10,11 @@
   ],
   "regExp": "[/](b|gl)[/][\\w]{3}-[\\d\\w]{3}-[\\d\\w]{3}|html5client[/]join[?]|client[/]guest-wait[.]html",
   "description": {
-    "en": "BigBlueButton online learning platform"
+    "en": "BigBlueButton online learning platform",
+    "nl": "BigBlueButton is een online leerplatform"
   },
   "service": "BigBlueButton",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/qjmxCvj.png",
   "thumbnail": "https://i.imgur.com/l4sjPpG.png",
   "color": "#0F70D7",

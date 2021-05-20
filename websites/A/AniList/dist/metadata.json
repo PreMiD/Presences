@@ -8,10 +8,12 @@
     "en": "AniList: Track, Discover, Share Anime & Manga - Sign up for free!",
     "pt_BR": "AniList: Rastreie, encontre e compartilhe animes e mangás - Inscreva-se de graça!",
     "zh_CN": "AniList：追踪，发现，分享动漫和漫画-免费注册！赶快加入我们！",
-    "zh_TW": "AniList：追踪，發掘，分享動漫和漫畫-免費註冊！趕快加入我們！"
+    "zh_TW": "AniList：追踪，發掘，分享動漫和漫畫-免費註冊！趕快加入我們！",
+    "ga_IE": "AniList: Track, Discover, Share Anime & Manga - Sign up for free!",
+    "nl": "AniList: volg, ontdek, deel anime en manga - meld je gratis aan!"
   },
   "url": "anilist.co",
-  "version": "1.4.6",
+  "version": "1.4.9",
   "logo": "https://i.imgur.com/fqyhsZ5.png",
   "thumbnail": "https://i.imgur.com/ooIBlD5.jpg",
   "color": "#02A9FF",

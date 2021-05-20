@@ -7,10 +7,11 @@
   "service": "Novel Mania",
   "description": {
     "en": "Read webnovels in Portuguese anywhere and anytime.",
-    "pt_BR": "Leia webnovels em português a qualquer momento e a qualquer hora."
+    "pt_BR": "Leia webnovels em português a qualquer momento e a qualquer hora.",
+    "nl": "Lees overal en altijd webnovels in het Portugees."
   },
   "url": "novelmania.com.br",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/qAjg3Ws.png",
   "thumbnail": "https://i.imgur.com/lxuE4zN.jpg",
   "color": "#008cff",

@@ -6,10 +6,11 @@
   },
   "service": "TwitLonger",
   "description": {
-    "en": "When you talk too much for Twitter."
+    "en": "When you talk too much for Twitter.",
+    "nl": "Als je teveel praat voor Twitter."
   },
   "url": "www.twitlonger.com",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://menma.is-inside.me/12RBytnm.png",
   "thumbnail": "https://menma.is-inside.me/st3jETE7.png",
   "color": "#428BCA",

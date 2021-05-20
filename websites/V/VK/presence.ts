@@ -129,12 +129,14 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/audios") ||
     document.querySelector(".audio_layer_container")
   ) {
-    var title: string = (document.querySelector(
-        ".audio_page_player_title_song"
-      ) as HTMLElement).textContent,
-      author: string = (document.querySelector(
-        ".audio_page_player_title_performer a"
-      ) as HTMLElement).textContent;
+    var title: string = (
+        document.querySelector(".audio_page_player_title_song") as HTMLElement
+      ).textContent,
+      author: string = (
+        document.querySelector(
+          ".audio_page_player_title_performer a"
+        ) as HTMLElement
+      ).textContent;
 
     if (document.querySelector(".audio_playing") == null) {
       isPlaying = true;
@@ -168,12 +170,12 @@ presence.on("UpdateData", async () => {
 
     var videoTitle = (document.querySelector(".mv_title") as HTMLElement)
         .innerText,
-      videoCurrentTime = (document.querySelector(
-        "._time_current"
-      ) as HTMLElement).innerText.split(":"),
-      videoDuration = (document.querySelector(
-        "._time_duration"
-      ) as HTMLElement).innerText.split(":"),
+      videoCurrentTime = (
+        document.querySelector("._time_current") as HTMLElement
+      ).innerText.split(":"),
+      videoDuration = (
+        document.querySelector("._time_duration") as HTMLElement
+      ).innerText.split(":"),
       videoAuthor = (document.querySelector(".mv_author_name a") as HTMLElement)
         .innerText;
 

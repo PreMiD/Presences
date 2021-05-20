@@ -8,10 +8,11 @@
     "en": "Your official and legal platform for German animes with Sub! Cheap subscription with the best video quality.",
     "nl": "Uw officiële en legale platform voor Duitse animes met Sub! Goedkoop abonnement met de beste videokwaliteit.",
     "de": "Deine offizielle und legale Plattform für deutsche Animes mit Sub! Günstig im Abo mit bester Videoqualität.",
-    "zh_CN": "提供官方德语字幕的在线动漫平台，具有最佳视频质量和非常廉价的付费订阅。"
+    "zh_CN": "提供官方德语字幕的在线动漫平台，具有最佳视频质量和非常廉价的付费订阅。",
+    "ga_IE": "Do ardán oifigiúil agus dlíthiúil le haghaidh animes na Gearmáine le Sub! Síntiús saor leis an gcaighdeán físe is fearr."
   },
   "url": "www.anime-on-demand.de",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/2yPrCa9.png",
   "thumbnail": "https://i.imgur.com/zxsS08j.png",
   "color": "#8da21f",
