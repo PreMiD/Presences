@@ -1,9 +1,8 @@
 const Tailwind = new Presence({ clientId: "818756651279450144" });
 
 Tailwind.on("UpdateData", async () => {
-  const
-    path = location.pathname,
-    subdomain = location.host.split('.')[0],
+  const path = location.pathname,
+    subdomain = location.host.split(".")[0],
     presenceData: PresenceData = {
       largeImageKey: "tailwind-logo",
       startTimestamp: Math.round(Date.now() / 1000)
@@ -13,12 +12,16 @@ Tailwind.on("UpdateData", async () => {
     presenceData.details = "Viewing page:";
     if (path.includes("/components")) {
       if (path.includes("/components/")) {
-        const pathnames = location.pathname.split('/'),
-          category = pathnames[pathnames.length -2].replace(/-/g, " ").replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+        const pathnames = location.pathname.split("/"),
+          category = pathnames[pathnames.length - 2]
+            .replace(/-/g, " ")
+            .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase());
 
         presenceData.details = "Viewing component:";
-        presenceData.state = `${category} - ${document.querySelector("main .max-w-8xl h2")?.textContent || "Unknown component"}`;
-
+        presenceData.state = `${category} - ${
+          document.querySelector("main .max-w-8xl h2")?.textContent ||
+          "Unknown component"
+        }`;
       } else {
         presenceData.details = "Browsing components";
         presenceData.smallImageKey = "search";
@@ -33,7 +36,9 @@ Tailwind.on("UpdateData", async () => {
   } else if (subdomain === "blog") {
     if (path !== "/") {
       presenceData.details = "Reading an article:";
-      presenceData.state = document.querySelector("article header div div h1")?.textContent || "Unknown article";
+      presenceData.state =
+        document.querySelector("article header div div h1")?.textContent ||
+        "Unknown article";
       presenceData.smallImageKey = "reading";
     } else {
       presenceData.details = "Browsing articles";
@@ -43,7 +48,9 @@ Tailwind.on("UpdateData", async () => {
     presenceData.details = "In Tailwind Play";
   } else if (path.includes("/docs")) {
     presenceData.details = "Viewing documentation";
-    presenceData.state = document.querySelector("#content-wrapper div h1")?.textContent || "Unknown page";
+    presenceData.state =
+      document.querySelector("#content-wrapper div h1")?.textContent ||
+      "Unknown page";
   } else if (path === "/") {
     presenceData.details = "Viewing homepage";
   } else if (path === "/resources") {

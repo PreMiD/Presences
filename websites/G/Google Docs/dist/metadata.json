@@ -4,6 +4,12 @@
     "id": "506899274748133376"
   },
   "service": "Google Docs",
+  "contributors": [
+    {
+      "name": "Encrypted",
+      "id": "564434085708038144"
+    }
+  ],
   "description": {
     "en": "Google Docs is a word processor included as part of a free, web-based software office suite offered by Google within its Google Drive service. This service also includes Google Sheets and Google Slides, a spreadsheet and presentation program respectively.",
     "zh_CN": "Google文档，是Google提供的网页式办公包在线服务，包含文字处理（Google文档）、电子表格（Google表格）、幻灯片演示（Google幻灯片）和交互表单（Google表单）。用户可在线免费创建和编辑文件，同时与其他用户共同协作。",
@@ -12,14 +18,23 @@
     "nl": "Google Documenten is een gratis webgebaseerde tekstverwerker die deel uitmaakt van een virtueel kantoor aangeboden door Google binnen de Google Drive-service. Deze dienst bevat ook onder andere Google Spreadsheets en Google Presentaties."
   },
   "url": "docs.google.com",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "logo": "https://i.imgur.com/m768cDN.png",
   "thumbnail": "https://i.imgur.com/jbuIiwv.jpg",
   "color": "#3a404a",
-  "tags": [
-    "docs",
-    "google"
-  ],
+  "tags": ["google", "sheets", "slides", "forms", "docs"],
   "category": "other",
+  "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    }
+  ],
   "regExp": "docs[.]google([.][a-z]+)+[/]"
 }
