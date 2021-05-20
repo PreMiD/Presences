@@ -1,6 +1,6 @@
 {
   "$schema": "https://schemas.premid.app/metadata/1.3",
-  "service": "Folding@Home",
+  "service": "Folding@home",
   "author": {
     "name": "Dark_Ville",
     "id": "638080361179512853"
