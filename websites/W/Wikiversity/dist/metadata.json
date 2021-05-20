@@ -7,13 +7,14 @@
   "service": "Wikiversity",
   "description": {
     "en": "Wikiversity is devoted to learning resources, learning projects, and research for use in all levels, types, and styles of education.",
-    "ar_SA": "ويكي الجامعة مكرسة لمصادر  التعلم ، ومشروعات التعلم ، والأبحاث لاستخدامها في جميع مستويات وأنواع وأنماط التعليم.",
     "zh_CN": "維基學院致力於學習資源，學習項目和研究，以用於所有級別，類型和教育方式。",
     "fr": "La Wikiversité est consacrée aux ressources d’apprentissage, aux projets pédagogiques et à la recherche pour tous les types, styles et niveaux d’éducation.",
-    "es": "Wkiversidad está dedicada a recursos de aprendizaje, proyectos educativos e investigación para su uso en todos los niveles, tipos y estilos de educación."
+    "es": "Wkiversidad está dedicada a recursos de aprendizaje, proyectos educativos e investigación para su uso en todos los niveles, tipos y estilos de educación.",
+    "ga_IE": "Tá Wikiversity dírithe ar acmhainní foghlama, tionscadail foghlama, agus taighde le húsáid ar gach leibhéal, cineál agus stíl oideachais.",
+    "nl": "Wikiversity is gewijd aan leermiddelen, leerprojecten en onderzoek voor gebruik op alle niveaus, typen en stijlen van onderwijs."
   },
   "url": "wikiversity.org",
-  "version": "1.0.4",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/HU6hLSg.png",
   "thumbnail": "https://i.imgur.com/FVkZ2gS.png",
   "color": "#f9f9f9",

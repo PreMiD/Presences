@@ -19,8 +19,9 @@ Blockbench.on("UpdateData", async () => {
       largeImageKey: "blockbench-logo",
       startTimestamp
     },
-    header = document.querySelector(".type-post .page-header .entry-title")
-      ?.textContent,
+    header = document.querySelector(
+      ".type-post .page-header .entry-title"
+    )?.textContent,
     sub = location.host.split(".")[0];
   if (sub === "web") {
     const activity =
@@ -28,7 +29,7 @@ Blockbench.on("UpdateData", async () => {
           .querySelector("#main_toolbar #mode_selector li.selected")
           ?.textContent.toLowerCase() || "Unknown",
       modelType = document.querySelectorAll<HTMLElement>(
-        "#page_wrapper #status_bar div[title]"
+        "#page_wrapper #status_bar div[title]:not(.f_left)"
       )[1]?.title;
 
     switch (modelType?.toLowerCase()) {

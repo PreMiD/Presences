@@ -24,7 +24,7 @@ client.on("UpdateData", async () => {
 
   if (path.includes("/templates/") && !path.includes("templates/top")) {
     let templateName: string | null = document
-        .querySelector(".title-container > h1")
+        .querySelector(".hero-body h1.is-size-3")
         ?.textContent?.trim(),
       string = "Viewing Template",
       buttons = [
@@ -90,7 +90,7 @@ client.on("UpdateData", async () => {
     client.setActivity(object);
   } else if (path.includes("/tag/")) {
     const tag: string = document
-        .querySelector(".hero-body > .column.is-two-thirds > .is-active")
+        .querySelector(".hero-body .column.is-two-thirds .is-active")
         ?.textContent?.trim(),
       object = {
         ...commonValues,

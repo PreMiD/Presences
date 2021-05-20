@@ -10,13 +10,14 @@
     "pt_BR": "Essa presença é para o tema padrão do WIMS. WIMS é um servidor de projeto de propósito geral projetado para exercícios matemáticos. Obtenha-o agora para mostrar para as pessoas o quão difícil você está trabalhando em sua tarefa matemática.",
     "fr": "Cette présence est pour le thème par défaut de WIMS. WIMS est un projet de serveur polyvalent conçu pour des exercices mathématiques. Obtenez-le maintenant pour montrer aux gens à quel point vous travaillez dur sur vos devoirs.",
     "uk_UA": "Ця присутність призначена для теми WIMS за замовчуванням. WIMS - це багатоцільовий серверний проект, призначений для математичних вправ. Поставте це прямо зараз, щоб показати людям, як ви наполегливо працюєте над своїми завданнями.",
-    "nl": "Deze presence is alleen voor WIMS' standaard thema. WIMS is een multifunctioneel server-project ontworpen voor wiskundige oefeningen. Download het nu om mensen te laten zien hoe hard je aan je opdrachten werkt."
+    "nl": "Deze presence is alleen voor WIMS' standaard thema. WIMS is een multifunctioneel server-project ontworpen voor wiskundige oefeningen. Download het nu om mensen te laten zien hoe hard je aan je opdrachten werkt.",
+    "ga_IE": "Tá an láithreacht seo do théama réamhshocraithe WIMS. Is tionscadal freastalaí ilchuspóireach é WIMS atá deartha le haghaidh cleachtaí matamaitice. Faigh é anois chun a thaispeáint do dhaoine cé chomh deacair agus atá tú ag obair ar do thascanna."
   },
   "url": [
     "wims-schaersvoorde.nl",
     "85.148.206.56"
   ],
-  "version": "2.3.6",
+  "version": "2.3.8",
   "logo": "https://i.imgur.com/E9FdAjM.png",
   "thumbnail": "https://i.imgur.com/OLvrsMo.png",
   "color": "#f4f8d7",

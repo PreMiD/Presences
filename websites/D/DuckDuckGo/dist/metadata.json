@@ -5,10 +5,11 @@
   },
   "url": "duckduckgo.com",
   "description": {
-    "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs."
+    "en": "The Internet privacy company that empowers you to seamlessly take control of your personal information online, without any tradeoffs.",
+    "nl": "Het internetprivacybedrijf dat u in staat stelt naadloos controle te krijgen over uw persoonlijke gegevens online, zonder enige concessies."
   },
   "service": "DuckDuckGo",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/zl3jobl.png",
   "thumbnail": "https://i.imgur.com/VlPQGur.png",
   "color": "#FF5900",

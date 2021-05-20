@@ -5,13 +5,14 @@
   },
   "service": "Pastr",
   "description": {
-    "en": "pastr.io is a pasting service that includes multiple features and simple ways to create your own paste."
+    "en": "pastr.io is a pasting service that includes multiple features and simple ways to create your own paste.",
+    "nl": "pastr.io is een plakservice met meerdere functies en eenvoudige manieren om uw eigen plakmiddel te maken."
   },
   "url": [
     "pastr.io",
     "www.pastr.io"
   ],
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/vHvJe1O.png",
   "thumbnail": "https://i.imgur.com/eNVKJVd.png",
   "color": "#008EFF",

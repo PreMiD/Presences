@@ -43,11 +43,9 @@ presence.on("UpdateData", async () => {
     presenceData.startTimestamp = timestamps[0];
     presenceData.endTimestamp = timestamps[1];
     if (url.includes("/tv/")) {
-      const episode = (document.querySelectorAll(
-        "div.now-playing"
-      ) as NodeListOf<HTMLElement>)[0].offsetParent.querySelectorAll(
-        "span.jioTitle"
-      )[1].textContent;
+      const episode = (
+        document.querySelectorAll("div.now-playing") as NodeListOf<HTMLElement>
+      )[0].offsetParent.querySelectorAll("span.jioTitle")[1].textContent;
       presenceData.state = episode.replace("| ", "");
     } else if (url.includes("/movies/")) {
       presenceData.state = "Movie";

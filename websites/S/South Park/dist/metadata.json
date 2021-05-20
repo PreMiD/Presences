@@ -10,10 +10,11 @@
     "www.southpark.cc"
   ],
   "description": {
-    "en": "South Park. Every episode of this critically acclaimed and award-winning show is packed with unforgettable adventures, cutting satire, and hilarious absurdity"
+    "en": "South Park. Every episode of this critically acclaimed and award-winning show is packed with unforgettable adventures, cutting satire, and hilarious absurdity",
+    "nl": "South Park. Elke aflevering van deze veelgeprezen en bekroonde show zit boordevol onvergetelijke avonturen, scherpe satire en hilarische absurditeit"
   },
   "service": "South Park",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/h6b3eEW.jpg",
   "thumbnail": "https://i.imgur.com/No75MzW.jpg",
   "color": "#b6122a",

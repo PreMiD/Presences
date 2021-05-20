@@ -6,10 +6,11 @@
   "service": "Pantip",
   "description": {
     "en": "Pantip is the most popular forum in Thailand for participate in discussions on all issues including entertainment, stocks, beauty, travel, cars, sports, mobile phones, food, politics, family, home, science, health, business",
-    "th": "ร่วมพูดคุยแลกเปลี่ยนความคิดเห็นในทุกประเด็น ทั้งบันเทิง หุ้น ความงาม ท่องเที่ยว รถยนต์ กีฬา โทรศัพท์มือถือ อาหาร การเมือง ครอบครัว บ้าน วิทยาศาสตร์ สุขภาพ ธุรกิจ."
+    "th": "ร่วมพูดคุยแลกเปลี่ยนความคิดเห็นในทุกประเด็น ทั้งบันเทิง หุ้น ความงาม ท่องเที่ยว รถยนต์ กีฬา โทรศัพท์มือถือ อาหาร การเมือง ครอบครัว บ้าน วิทยาศาสตร์ สุขภาพ ธุรกิจ.",
+    "nl": "Pantip is het populairste forum in Thailand om deel te nemen aan discussies over alle onderwerpen, waaronder entertainment, aandelen, schoonheid, reizen, auto's, sport, mobiele telefoons, eten, politiek, gezin, huis, wetenschap, gezondheid, zaken"
   },
   "url": "www.pantip.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/Gx2uf9A.png",
   "thumbnail": "https://i.imgur.com/5ji4rGg.png",
   "color": "#9d93f5",

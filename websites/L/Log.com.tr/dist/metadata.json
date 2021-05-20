@@ -9,10 +9,11 @@
   ],
   "description": {
     "tr": "Log.com.tr, tıpkı Webtekno ve ShiftDelete.Net gibi bir teknolojik haber sitesi.",
-    "en": "Log.com.tr is a technology blog, just like Webtekno ve ShiftDelete.Net."
+    "en": "Log.com.tr is a technology blog, just like Webtekno ve ShiftDelete.Net.",
+    "nl": "Log.com.tr is een technologieblog, net als Webtekno en ShiftDelete.Net."
   },
   "service": "Log.com.tr",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/4LtbS4t.png",
   "thumbnail": "https://i.imgur.com/DJAeZmF.png",
   "color": "#FFFFFF",

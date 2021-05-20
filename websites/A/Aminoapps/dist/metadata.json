@@ -7,10 +7,12 @@
   "url": "aminoapps.com",
   "description": {
     "en": "Amino's network of communities lets you explore, discover, and obsess over the things you're into.",
-    "pt_BR": "Amino permite que você explore, descubra e fique obcecado com o que você gosta."
+    "pt_BR": "Amino permite que você explore, descubra e fique obcecado com o que você gosta.",
+    "ga_IE": "Ligeann líonra pobail Amino duit iniúchadh a dhéanamh, fáil amach agus obsess faoi na rudaí a bhfuil tú iontu.",
+    "nl": "Met Amino's netwerk van communities kun je de dingen die je leuk vindt verkennen, ontdekken en geobsedeerd over raken."
   },
   "service": "AminoApps",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/hMk54q9.png",
   "thumbnail": "https://i.imgur.com/3bOMfHi.png",
   "color": "#00FFA2",

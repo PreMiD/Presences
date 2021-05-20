@@ -17,10 +17,11 @@
     "pt_BR": "Esta presença vai mostrar o que você geralmente faz no VK. Essa presença mostra informação de uma música (se você estiver na página de música), informação de vídeo (quando você estiver assistindo um vídeo) e mostra se você está vendo uma comunidade ou um perfil de usuário.",
     "fr": "Cette présence affichera que vous faites habituellement sur VK. Elle affiche les informations d'une musique (si vous êtes sur la page Musique), des informations sur la vidéo (lorsque vous regardez une vidéo) et des informations si vous regardez une communauté ou un profil utilisateur.",
     "uk_UA": "Цей статус буде показувати штуки, які ви зазвичай робите у ВК. Оновлює інформацію про музику (якщо ви на сторінкці Музика), інформацію про відео! (коли Ви дивитеся його) та інформацію про групи або профілі, які Ви переглядаєте.",
-    "nl": "Deze presence zal dingen weergeven die je gewoonlijk in VK doet. Het toont muziekinfo (als je op de Muziek-pagina bent), video-info (wanneer je videos bekijkt) en info als je een community- of gebruikersprofiel bekijkt."
+    "nl": "Deze presence zal dingen weergeven die je gewoonlijk in VK doet. Het toont muziekinfo (als je op de Muziek-pagina bent), video-info (wanneer je videos bekijkt) en info als je een community- of gebruikersprofiel bekijkt.",
+    "ga_IE": "Beidh an láithreacht seo ag taispeáint rudaí a dhéanann tú de ghnáth i VK. Taispeánann sé eolas ceoil (má tá tú ar an leathanach Ceoil), faisnéis físe (agus tú ag féachaint ar fhíseán) agus faisnéis má tá tú ag féachaint ar phróifíl pobail nó úsáideora."
   },
   "url": "vk.com",
-  "version": "2.2.10",
+  "version": "2.2.12",
   "logo": "https://i.imgur.com/Zd8iMck.png",
   "thumbnail": "https://i.imgur.com/P4TGBga.png",
   "color": "#2787F5",

@@ -18,11 +18,17 @@
     "nl": "Google Documenten is een gratis webgebaseerde tekstverwerker die deel uitmaakt van een virtueel kantoor aangeboden door Google binnen de Google Drive-service. Deze dienst bevat ook onder andere Google Spreadsheets en Google Presentaties."
   },
   "url": "docs.google.com",
-  "version": "1.4.6",
+  "version": "1.4.8",
   "logo": "https://i.imgur.com/m768cDN.png",
   "thumbnail": "https://i.imgur.com/jbuIiwv.jpg",
   "color": "#3a404a",
-  "tags": ["google", "sheets", "slides", "forms", "docs"],
+  "tags": [
+    "google",
+    "sheets",
+    "slides",
+    "forms",
+    "docs"
+  ],
   "category": "other",
   "settings": [
     {

@@ -13,10 +13,11 @@
   "description": {
     "en": "Read novels and mangas.",
     "pt_BR": "Leia novels e mangás.",
-    "nl": "Lees romans en manga's."
+    "nl": "Lees romans en manga's.",
+    "ga_IE": "Léigh úrscéalta agus mangas."
   },
   "url": "www.animexnovel.com",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "logo": "https://i.imgur.com/uyPh5yD.png",
   "thumbnail": "https://i.imgur.com/umMu8Jc.png",
   "color": "#00a896",

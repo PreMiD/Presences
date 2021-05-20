@@ -6,10 +6,11 @@
   "service": "VRV",
   "description": {
     "en": "VRV is the home of your favorite channels, events, and communities celebrating anime, animation, video games, comics, science fiction, fantasy, and tech.",
-    "nl": "VRV is de thuisbasis van je favoriete kanalen, evenementen en communities die anime, animatie, videogames, strips, science fiction, fantasy en tech vieren."
+    "nl": "VRV is de thuisbasis van je favoriete kanalen, evenementen en communities die anime, animatie, videogames, strips, science fiction, fantasy en tech vieren.",
+    "ga_IE": "Is é VRV baile na gcainéal, na n-imeachtaí agus na bpobal is fearr leat ag ceiliúradh anime, beochana, cluichí físeáin, greannáin, ficsean eolaíochta, fantaisíochta agus ardteicneolaíochta."
   },
   "url": "vrv.co",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "logo": "https://i.imgur.com/p6Xv2Bv.png",
   "thumbnail": "https://i.imgur.com/2oWOoen.png",
   "color": "#fdde0a",

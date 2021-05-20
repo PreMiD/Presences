@@ -53,11 +53,11 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/featured/")) {
     let featuredFonts;
     if (document.getElementsByClassName("gmat-headline-1")[0]) {
-      featuredFonts = document.getElementsByClassName("gmat-headline-1")[0]
-        .textContent;
+      featuredFonts =
+        document.getElementsByClassName("gmat-headline-1")[0].textContent;
     } else if (!document.getElementsByClassName("gmat-headline-1")[0]) {
-      featuredFonts = document.getElementsByClassName("gmat-headline-4")[0]
-        .textContent;
+      featuredFonts =
+        document.getElementsByClassName("gmat-headline-4")[0].textContent;
     }
     presenceData.details = "Looking at a featured font:";
     presenceData.state = featuredFonts;

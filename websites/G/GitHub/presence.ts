@@ -1,294 +1,209 @@
 const presence = new Presence({
-    clientId: "607587875122446359"
-  }),
-  browsingStamp = Math.floor(Date.now() / 1000),
-  search = "/search?q=",
-  searchURL = new URL(document.location.href),
-  searchResult = searchURL.searchParams.get("q"),
-  profileURL = new URL(document.location.href);
+  clientId: "607587875122446359"
+});
 
 presence.on("UpdateData", async () => {
-  let profileName: HTMLElement = null,
-    profileNickname: HTMLElement = null,
-    repositoryAuthor: HTMLElement = null,
-    repositoryName: HTMLElement = null,
-    repositoryLocation: HTMLElement = null,
-    repositoryLocation2: NodeListOf<HTMLElement> = null,
-    pullRequestTitle: HTMLElement = null,
-    pullRequestAuthor: NodeListOf<HTMLElement> = null,
-    pullRequestID: HTMLElement = null,
-    issueTitle: HTMLElement = null,
-    issueAuthor: NodeListOf<HTMLElement> = null,
-    issueID: HTMLElement = null;
-
-  profileName = document.querySelector(".vcard-names .p-name");
-  profileNickname = document.querySelector(".vcard-names .p-nickname");
-
-  repositoryAuthor = document.querySelector(".author a");
-  repositoryName = document.querySelector(
-    "body > div.application-main > div > main > div.bg-gray-light.pt-3.hide-full-screen.mb-5 > div > div > h1 > strong > a"
-  );
-  repositoryLocation = document.querySelector(
-    "#branch-select-menu > summary > span.css-truncate-target"
-  );
-  repositoryLocation2 = document.querySelectorAll("#blob-path");
-
-  pullRequestTitle = issueTitle = document.querySelector(
-    "div.gh-header-show h1 span.js-issue-title"
-  );
-  pullRequestAuthor = issueAuthor = document.querySelectorAll(
-    "div div.timeline-comment-header.clearfix h3 strong a"
-  );
-  pullRequestID = issueID = document.querySelector(
-    "#span.f1-light.text-gray-light"
-  );
+  const profile: { [key: string]: HTMLElement } = {
+      name: document.querySelector(".vcard-names .p-name"),
+      nickname: document.querySelector(".vcard-names .p-nickname")
+    },
+    organization: { [key: string]: HTMLElement } = {
+      name: document.querySelector(
+        "#js-pjax-container > div > header > div.container-lg.pt-4.pt-lg-0.p-responsive.clearfix > div > div.flex-auto.ml-3.ml-md-4 > h1"
+      )
+    },
+    repository: { [key: string]: HTMLElement } = {
+      author: document.querySelector(".author a"),
+      name: document.querySelector(
+        "#js-repo-pjax-container > div > div > div > h1 > strong > a"
+      ),
+      location: document.querySelector(
+        "#branch-select-menu > summary > span.css-truncate-target"
+      )
+    },
+    action: { [key: string]: HTMLElement } = {
+      title: document.querySelector(
+        "#repo-content-pjax-container > div > div.js-updatable-content.js-socket-channel.d-flex.flex-items-start.flex-md-items-center.pb-3.pb-md-4.pl-0.pl-md-2.mt-n2.mb-1.ml-1 > div.d-flex.flex-auto.mr-3 > h3 > span"
+      )
+    },
+    PRandIssues: { [key: string]: HTMLElement } = {
+      title: document.querySelector(
+        "div.gh-header-show h1 span.js-issue-title"
+      ),
+      id: document.querySelector("#span.f1-light")
+    },
+    nodeListOf: { [key: string]: NodeListOf<HTMLElement> } = {
+      PRandIssueAuthor: document.querySelectorAll(
+        "div div.timeline-comment-header.clearfix h3 strong a"
+      ),
+      repLoc2: document.querySelectorAll("#blob-path")
+    },
+    browsingStamp = Math.floor(Date.now() / 1000),
+    searchURL = new URL(document.location.href),
+    searchResult = searchURL.searchParams.get("q");
 
   let profileTabs: string, profileCurrentTab: string;
 
-  if (profileName) {
-    profileTabs = "/" + profileNickname.innerText + "?tab=";
-    profileCurrentTab = profileURL.searchParams.get("tab");
+  if (profile.name) {
+    profileTabs = "/" + profile.nickname.innerText + "?tab=";
+    profileCurrentTab = new URL(document.location.href).searchParams.get("tab");
   }
 
   const presenceData: PresenceData = {
-    details: "Unknown page",
-    largeImageKey: "lg"
+    details: "Unsupported page",
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
   };
 
   if (document.location.pathname == "/" || !document.location.pathname) {
-    presenceData.state = "Home";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Home";
   } else if (document.location.pathname.startsWith("/settings")) {
-    presenceData.state = "Settings";
-
-    delete presenceData.details;
+    presenceData.details = "Settings";
   } else if (
     document.location.pathname.startsWith("/explore") ||
     document.location.pathname.startsWith("/discover")
   ) {
-    presenceData.state = "Browsing repositories...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing repositories...";
   } else if (document.location.pathname.startsWith("/marketplace")) {
-    presenceData.state = "Browsing marketplace...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing marketplace...";
   } else if (document.location.pathname.startsWith("/pulls")) {
-    presenceData.state = "Browsing pull requests...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing pull requests...";
   } else if (document.location.pathname == "/notifications") {
-    presenceData.state = "Browsing notifications...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing notifications...";
   } else if (
     document.location.pathname.startsWith("/notifications/subscriptions")
   ) {
-    presenceData.state = "Browsing subscriptions...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing subscriptions...";
   } else if (document.location.pathname.startsWith("/watching")) {
-    presenceData.state = "Browsing interested repositories...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing interested repositories...";
   } else if (document.location.pathname == "/new") {
-    presenceData.state = "Creating a new repository...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Creating a new repository...";
   } else if (document.location.pathname.startsWith("/new/import")) {
-    presenceData.state = "Importing a repository...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Importing a repository...";
   } else if (document.location.pathname.startsWith("/new/project")) {
-    presenceData.state = "Creating a new project...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Creating a new project...";
   } else if (document.location.pathname.startsWith("/organizations/new")) {
-    presenceData.state = "Creating a new organization...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Creating a new organization...";
   } else if (document.location.pathname.startsWith("/topics")) {
-    presenceData.state = "Browsing topics...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing topics...";
   } else if (document.location.pathname == "/trending") {
-    presenceData.state = "Browsing trending repositories...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing trending repositories...";
   } else if (document.location.pathname.startsWith("/trending/developers")) {
-    presenceData.state = "Browsing trending developers...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing trending developers...";
   } else if (document.location.pathname.startsWith("/collections")) {
-    presenceData.state = "Browsing collections...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing collections...";
   } else if (document.location.pathname.startsWith("/events")) {
-    presenceData.state = "Browsing events...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
+    presenceData.details = "Browsing events...";
   } else if (document.location.pathname.startsWith("/codespaces")) {
-    presenceData.state = "Browsing codespaces...";
-
-    presenceData.startTimestamp = browsingStamp;
-
-    delete presenceData.details;
-  } else if (document.location.pathname.indexOf(search)) {
+    presenceData.details = "Browsing codespaces...";
+  } else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching for: ";
-
     presenceData.state = searchResult;
-
-    presenceData.startTimestamp = browsingStamp;
   }
-  if (repositoryAuthor && repositoryName) {
+
+  const pathData: string[] = document.location.pathname.split("/");
+  if (repository.author && repository.name) {
     if (
-      repositoryAuthor.innerText.length > 0 &&
-      repositoryName.innerText.length > 0 &&
+      repository.author.innerText.length > 0 &&
+      repository.name.innerText.length > 0 &&
       document.location.pathname.toLowerCase() ==
         "/" +
-          repositoryAuthor.innerText.toLowerCase() +
+          repository.author.innerText.toLowerCase() +
           "/" +
-          repositoryName.innerText.toLowerCase()
+          repository.name.innerText.toLowerCase()
     ) {
       presenceData.details = "Browsing a repository...";
 
       presenceData.state =
-        repositoryAuthor.innerText + " / " + repositoryName.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
+        repository.author.innerText + " / " + repository.name.innerText;
     } else if (
-      repositoryAuthor.innerText.length > 0 &&
-      repositoryName.innerText.length > 0 &&
+      repository.author.innerText.length > 0 &&
+      repository.name.innerText.length > 0 &&
       document.location.pathname.includes("/tree/") &&
-      repositoryLocation.innerText.length > 0
+      repository.location.innerText.length > 0
     ) {
-      const repLoc = repositoryLocation.innerText;
-
       presenceData.details =
         "Browsing " +
-        repositoryAuthor.innerText +
+        repository.author.innerText +
         "/" +
-        repositoryName.innerText;
+        repository.name.innerText;
 
-      presenceData.state = repLoc;
-
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `📂 ${document.location.pathname
+        .split("/")
+        .slice(4)
+        .join("/")}`;
     } else if (
-      repositoryAuthor.innerText.length > 0 &&
-      repositoryName.innerText.length > 0 &&
+      repository.author.innerText.toString().length > 0 &&
+      repository.name.innerText.toString().length > 0 &&
       document.location.pathname.includes("/blob/") &&
-      repositoryLocation2.length > 0
+      nodeListOf.repLoc2.length > 0
     ) {
-      const filePath: HTMLElement = document.querySelector("#blob-path");
+      const file: HTMLElement = document.querySelector("h2#blob-path > strong");
 
       presenceData.details =
-        "Looking at a file from " +
-        repositoryAuthor.innerText +
+        "📂 Looking at a file from " +
+        repository.author.innerText +
         "/" +
-        repositoryName.innerText;
+        repository.name.innerText;
 
-      presenceData.state =
-        filePath.querySelector("details") !== null
-          ? filePath.textContent
-              .replace(filePath.querySelector("details").textContent, "")
-              .trim()
-              .slice(0, -1)
-          : filePath.textContent.trim();
-
-      presenceData.startTimestamp = browsingStamp;
+      presenceData.state = `📝 ${file.textContent}`;
     } else if (
       document.location.pathname.toLowerCase() ==
       "/" +
-        repositoryAuthor.innerText.toLowerCase() +
+        repository.author.innerText.toLowerCase() +
         "/" +
-        repositoryName.innerText.toLowerCase() +
+        repository.name.innerText.toLowerCase() +
         "/issues/"
     ) {
       presenceData.details = "Browsing issues from:";
-
       presenceData.state =
-        repositoryAuthor.innerText + " / " + repositoryName.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
+        repository.author.innerText + " / " + repository.name.innerText;
     } else if (
-      repositoryAuthor.innerText.length > 0 &&
-      repositoryName.innerText.length > 0 &&
+      repository.author.innerText.length > 0 &&
+      repository.name.innerText.length > 0 &&
       document.location.pathname.includes("/pulls")
     ) {
       presenceData.details = "Browsing pull requests from:";
-
       presenceData.state =
-        repositoryAuthor.innerText + " / " + repositoryName.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
+        repository.author.innerText + " / " + repository.name.innerText;
     } else if (
       document.location.pathname
         .toLowerCase()
         .includes(
           "/" +
-            repositoryAuthor.innerText.toLowerCase() +
+            repository.author.innerText.toLowerCase() +
             "/" +
-            repositoryName.innerText.toLowerCase() +
+            repository.name.innerText.toLowerCase() +
             "/pull/"
         )
     ) {
       presenceData.details =
-        "Looking on pull request " + pullRequestID.innerText;
+        "Looking on pull request #" +
+        document.location.pathname.split("/").slice(2)[2];
 
       presenceData.state =
-        pullRequestAuthor[0].innerText + " - " + pullRequestTitle.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
+        nodeListOf.PRandIssueAuthor[0].innerText +
+        " - " +
+        PRandIssues.title.innerText;
     } else if (
       document.location.pathname
         .toLowerCase()
         .includes(
           "/" +
-            repositoryAuthor.innerText.toLowerCase() +
+            repository.author.innerText.toLowerCase() +
             "/" +
-            repositoryName.innerText.toLowerCase() +
+            repository.name.innerText.toLowerCase() +
             "/issues/"
         )
     ) {
-      presenceData.details = "Looking on issue " + issueID.innerText;
+      presenceData.details =
+        "Looking on issue #" +
+        document.location.pathname.split("/").slice(2)[2];
 
       presenceData.state =
-        issueAuthor[0].innerText + " - " + issueTitle.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
+        nodeListOf.PRandIssueAuthor[0].innerText +
+        " - " +
+        PRandIssues.title.innerText;
     } else if (
       document.location.pathname.includes("/pulse") ||
       document.location.pathname.includes("/graphs/contributors") ||
@@ -306,86 +221,77 @@ presence.on("UpdateData", async () => {
 
       presenceData.details =
         "Browsing insights from " +
-        repositoryAuthor.innerText +
+        repository.author.innerText +
         " / " +
-        repositoryName.innerText;
+        repository.name.innerText;
 
       presenceData.state = insightsTab.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/projects")) {
-      presenceData.details = "Browsing projects from:";
-
+    } else {
+      presenceData.details = `Browsing ${
+        pathData[3] === "pulls" ? "pull requests" : pathData[3]
+      } from:`;
       presenceData.state =
-        repositoryAuthor.innerText + " / " + repositoryName.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/issues")) {
-      presenceData.details = "Browsing issues from:";
-
-      presenceData.state =
-        repositoryAuthor.innerText + " / " + repositoryName.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
-    } else if (document.location.pathname.includes("/upload")) {
-      presenceData.details = "Uploading files to:";
-
-      presenceData.state =
-        repositoryAuthor.innerText + " / " + repositoryName.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
+        repository.author.innerText + " / " + repository.name.innerText;
     }
   } else if (
-    !repositoryAuthor &&
-    !repositoryName &&
+    repository.author &&
+    !repository.name &&
+    document.location.pathname.includes("/runs")
+  ) {
+    presenceData.details = `Viewing action from ${pathData[1]}/${pathData[2]}`;
+    presenceData.state = action.title.textContent;
+  } else if (
+    !repository.author &&
+    !repository.name &&
     document.location.pathname.includes("/issues")
   ) {
     presenceData.details = "Browsing issues...";
-
-    presenceData.startTimestamp = browsingStamp;
   }
-
-  if (profileName && profileNickname) {
+  if (profile.name && profile.nickname) {
     if (!document.location.pathname.indexOf(profileTabs)) {
       presenceData.details = "Browsing a profile...";
 
-      if (profileName.innerText.length == 0) {
-        presenceData.state = profileNickname.innerText;
-      } else if (profileNickname.innerText.length == 0) {
-        presenceData.state = profileName.innerText;
+      if (profile.name.innerText.length == 0) {
+        presenceData.state = profile.nickname.innerText;
+      } else if (profile.nickname.innerText.length == 0) {
+        presenceData.state = profile.name.innerText;
       } else
         presenceData.state =
-          profileName.innerText + " | " + profileNickname.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
+          profile.name.innerText + " | " + profile.nickname.innerText;
     } else if (document.location.pathname.indexOf(profileTabs)) {
       presenceData.details = "Browsing " + profileCurrentTab + " from:";
 
-      if (profileName.innerText.length == 0) {
-        presenceData.state = profileNickname.innerText;
-      } else if (profileNickname.innerText.length == 0) {
-        presenceData.state = profileName.innerText;
+      if (profile.name.innerText.length == 0) {
+        presenceData.state = profile.nickname.innerText;
+      } else if (profile.nickname.innerText.length == 0) {
+        presenceData.state = profile.name.innerText;
       } else
         presenceData.state =
-          profileName.innerText + " | " + profileNickname.innerText;
-
-      presenceData.startTimestamp = browsingStamp;
+          profile.name.innerText + " | " + profile.nickname.innerText;
 
       if (profileCurrentTab == null) {
         presenceData.details = "Browsing a profile...";
 
-        if (profileName.innerText.length == 0) {
-          presenceData.state = profileNickname.innerText;
-        } else if (profileNickname.innerText.length == 0) {
-          presenceData.state = profileName.innerText;
+        if (profile.name.innerText.length == 0) {
+          presenceData.state = profile.nickname.innerText;
+        } else if (profile.nickname.innerText.length == 0) {
+          presenceData.state = profile.name.innerText;
         } else
           presenceData.state =
-            profileName.innerText + " | " + profileNickname.innerText;
-
-        presenceData.startTimestamp = browsingStamp;
+            profile.name.innerText + " | " + profile.nickname.innerText;
       }
     }
-  }
+  } else if (organization.name) {
+    presenceData.details = "Viewing an organization";
+    presenceData.state = organization.name.innerText;
+  } else if (
+    !organization.name &&
+    document.location.pathname.includes(`/orgs/`)
+  ) {
+    const pathData: string[] = document.location.pathname.split("/").slice(2);
 
+    presenceData.details = `Viewing ${pathData[1]} from`;
+    presenceData.state = pathData[0];
+  }
   presence.setActivity(presenceData);
 });

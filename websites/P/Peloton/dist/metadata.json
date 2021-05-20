@@ -10,11 +10,12 @@
     "www.onepeloton.de"
   ],
   "description": {
-    "en": "Peloton is attractive, addictive, and seriously whips you into shape."
+    "en": "Peloton is attractive, addictive, and seriously whips you into shape.",
+    "nl": "Peloton is aantrekkelijk, verslavend en brengt je serieus in vorm."
   },
   "regExp": "([a-z0-9-]+[.])*onepeloton([.][a-z]+)+[/]",
   "service": "Peloton",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "logo": "https://i.imgur.com/f22N41q.png",
   "thumbnail": "https://i.imgur.com/Uioxasy.jpg",
   "color": "#f5f7f9",

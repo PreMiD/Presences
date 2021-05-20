@@ -7,10 +7,11 @@
   "description": {
     "en": "Watch anime episodes and movies with English subtitles in SD and HD on any device: pc, tablet, mobile.",
     "pt_BR": "Assista episódios de anime e filmes legendados em inglês, SD ou HD e em qualquer dispositivo: pc, tablet, mobile.",
-    "zh_CN": "在任何设备上（PC，平板电脑，移动设备）观看带有英语字幕的高清动漫。"
+    "zh_CN": "在任何设备上（PC，平板电脑，移动设备）观看带有英语字幕的高清动漫。",
+    "nl": "Bekijk anime afleveringen en films met Engelse ondertitels in SD en HD op elk apparaat: pc, tablet, mobiel."
   },
   "url": "animedao.to",
-  "version": "1.2.7",
+  "version": "1.2.9",
   "logo": "https://viruz.s-ul.eu/p6OJmHM3",
   "thumbnail": "https://viruz.s-ul.eu/99mNuO8S",
   "color": "#0ab4fc",

@@ -12,9 +12,11 @@ presence.on("UpdateData", async () => {
     format1 = await presence.getSetting("sFormat1"),
     format2 = await presence.getSetting("sFormat2"),
     paused =
-      (document.querySelector(
-        "#react-listen-content > div > div > div.pt-4.startpause.col > button > img"
-      ) as HTMLImageElement).src ==
+      (
+        document.querySelector(
+          "#react-listen-content > div > div > div.pt-4.startpause.col > button > img"
+        ) as HTMLImageElement
+      ).src ==
       "https://radiopanel.s3.nl-ams.scw.cloud/c9a65443-eed1-41ed-b9d2-743223b5ee75/a01dadcd-df3d-484b-8d20-4923156ce77a.svg";
 
   if (info && paused) {
@@ -98,9 +100,8 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname == "/") {
       presenceData.details = "Browsing...";
       presenceData.smallImageKey = "reading";
-      presenceData.smallImageText = document.querySelector(
-        "#current_song"
-      ).textContent;
+      presenceData.smallImageText =
+        document.querySelector("#current_song").textContent;
     }
   } else {
     if (paused) {

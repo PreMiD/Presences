@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "SlowLife",
+    "id": "374905512661221377"
+  },
+  "service": "Apple TV",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/9yI21cv.png",
+  "thumbnail": "https://i.imgur.com/i7Vt4uR.png",
+  "description": {
+    "en": "Apple TV+ is a streaming service featuring Apple Originals — award-winning series, compelling dramas, groundbreaking documentaries, kids’ entertainment, comedies, and more — with new Apple Originals added every month.",
+    "th": "Apple TV+ เป็นบริการสตรีมมิ่งที่มาพร้อมกับ Apple Original ไม่ว่าจะเป็นซีรีส์ที่ได้รับรางวัล ละครที่น่าสนใจ สารคดีแปลกใหม่ รายการบันเทิงสำหรับเด็กๆ รายการตลก และอีกมากมาย รวมไปถึง Apple Original ที่เพิ่มมาใหม่ทุกเดือน",
+    "nl": "Apple TV+ is een streamingdienst met Apple Originals: bekroonde series, spannende drama’s, meeslepende documentaires, entertainment voor kinderen, comedy’s en nog veel meer. En elke maand komen er nieuwe Apple Originals bij."
+  },
+  "url": "tv.apple.com",
+  "color": "#2e2e2e",
+  "altnames": [
+    "애플 TV"
+  ],
+  "tags": [
+    "apple-tv",
+    "movie",
+    "drama"
+  ],
+  "category": "videos",
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

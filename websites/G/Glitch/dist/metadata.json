@@ -6,14 +6,15 @@
   "service": "Glitch",
   "description": {
     "en": "Glitch is the friendly community where you can find or create the app of your dreams. Over a million people have become part of the Glitch community, creating amazing apps, bots, websites, art projects, virtual reality experiences, interactive infographics and much more.",
-    "ga_IE": "Is é Glitch an pobal cairdiúil inar féidir leat an app do aislingí a aimsiú nó a chruthú. Tá níos mó ná milliún duine anois mar chuid de phobal Glitch, ag cruthú apps, bots, láithreáin ghréasáin, tionscadail ealaíne, eispéiris réaltachta fhíorúla, grafaicí faisnéise idirghníomhacha agus i bhfad níos mó."
+    "ga_IE": "Is é Glitch an pobal cairdiúil inar féidir leat an app do aislingí a aimsiú nó a chruthú. Tá níos mó ná milliún duine anois mar chuid de phobal Glitch, ag cruthú apps, bots, láithreáin ghréasáin, tionscadail ealaíne, eispéiris réaltachta fhíorúla, grafaicí faisnéise idirghníomhacha agus i bhfad níos mó.",
+    "nl": "Glitch is de vriendelijke community waar je de app van je dromen kunt vinden of maken. Meer dan een miljoen mensen zijn onderdeel geworden van de Glitch-community en hebben geweldige apps, bots, websites, kunstprojecten, virtual reality-ervaringen, interactieve infographics en nog veel meer gemaakt."
   },
   "url": [
     "glitch.com",
     "support.glitch.com",
     "status.glitch.com"
   ],
-  "version": "1.8.4",
+  "version": "1.8.7",
   "logo": "https://i.imgur.com/zU6eBwQ.png",
   "thumbnail": "https://i.imgur.com/mnilDhS.png",
   "color": "#f003fc",

@@ -114,7 +114,8 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname == "/tags") {
       const lastPageNumber: number = +lastPage;
-      const lastusersortagsPageNumber: number = +usersortagsPageNumber.innerText;
+      const lastusersortagsPageNumber: number =
+        +usersortagsPageNumber.innerText;
 
       if (lastusersortagsPageNumber > lastPageNumber) {
         console.log(lastPageNumber + " --- " + lastusersortagsPageNumber);

@@ -6,10 +6,11 @@
   },
   "service": "Grailed",
   "description": {
-    "en": "Grailed is the one-stop destination for buying, selling and exploring menswear."
+    "en": "Grailed is the one-stop destination for buying, selling and exploring menswear.",
+    "nl": "Grailed is de one-stop-bestemming voor het kopen, verkopen en ontdekken van herenkleding."
   },
   "url": "www.grailed.com",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/ahnInCZ.png",
   "thumbnail": "https://i.imgur.com/PksjgBn.jpg",
   "color": "#666666",

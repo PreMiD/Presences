@@ -9,10 +9,11 @@
   ],
   "description": {
     "tr": "Full Programlar İndir Türkçe bir program indirme sitesidir",
-    "en": "Full Programlar İndir is a website that allows you to download many programs and games"
+    "en": "Full Programlar İndir is a website that allows you to download many programs and games",
+    "nl": "Full Programlar İndir is een website waar u vele programma's en spelletjes kunt downloaden"
   },
   "service": "Full Programlar İndir",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "logo": "https://who.is-inside.me/GFOPO0ef.png",
   "thumbnail": "https://who.is-inside.me/Dnjzzb8t.png",
   "color": "#3F9EDD",

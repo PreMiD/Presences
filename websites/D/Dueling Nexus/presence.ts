@@ -46,8 +46,9 @@ presence.on("UpdateData", async () => {
     let state, status;
 
     if (myname == "Player" || myname == "Opponent") {
-      myname = document.getElementById("game-room-player1-username")
-        .textContent;
+      myname = document.getElementById(
+        "game-room-player1-username"
+      ).textContent;
     }
     if (opponent == "Opponent" || opponent == "Player") {
       if (
@@ -56,8 +57,9 @@ presence.on("UpdateData", async () => {
       ) {
         opponent = "waiting..";
       } else {
-        opponent = document.getElementById("game-room-player2-username")
-          .textContent;
+        opponent = document.getElementById(
+          "game-room-player2-username"
+        ).textContent;
       }
     }
     state = `Current lp: ${mylife}, Opponent LP: ${opplife}`;

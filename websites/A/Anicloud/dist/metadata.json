@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "Emijor",
+    "id": "466885774621540372"
+  },
+  "service": "AniCloud",
+  "description": {
+    "en": "Watch now over 1,000+ animes for free on AniCloud. Anime Video-On Demand: ✓ 100% Free ✓ Instantly Online ✓ Exclusive Animes",
+    "de": "Jetzt über 1.000+ Animes als Stream kostenlos bei AniCloud ansehen. Anime Video-On-Demand: ✓ 100% Kostenlos ✓ Sofort online ✓ Exclusive Animes",
+    "nl": "Bekijk nu meer dan 1.000+ animes gratis op AniCloud. Anime Video-On Demand: 100% Gratis ✓ Direct Online ✓ Exclusieve Animes"
+  },
+  "url": "anicloud.io",
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/eCZpN6e.png",
+  "thumbnail": "https://i.imgur.com/fKBCijM.png",
+  "color": "#637cf9",
+  "tags": [
+    "anime",
+    "streaming",
+    "anicloud"
+  ],
+  "category": "anime",
+  "iframe": true
+}

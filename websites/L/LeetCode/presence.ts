@@ -28,9 +28,8 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Explore";
 
     if (document.getElementsByClassName("question-title")) {
-      presenceData.state = document.getElementsByClassName(
-        "question-title"
-      )[0].textContent;
+      presenceData.state =
+        document.getElementsByClassName("question-title")[0].textContent;
     }
   } else if (document.location.pathname.startsWith("/contest")) {
     presenceData.details = "In a Contest";

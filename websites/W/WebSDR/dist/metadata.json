@@ -5,13 +5,15 @@
   },
   "service": "WebSDR",
   "description": {
-    "en": "A tool that allows anyone on the web to listen to shortwave and longwave radio without spending any money on radio equipment."
+    "en": "A tool that allows anyone on the web to listen to shortwave and longwave radio without spending any money on radio equipment.",
+    "ga_IE": "Uirlis a ligeann d’aon duine ar an ngréasán éisteacht le raidió gearr-thonn agus tonnfhada gan aon airgead a chaitheamh ar threalamh raidió.",
+    "nl": "Een tool waarmee iedereen op internet naar kortegolf- en langegolfradio kan luisteren zonder geld uit te geven aan radioapparatuur."
   },
   "url": [
     "websdr.ewi.utwente.nl",
     "etgd1.ewi.utwente.nl"
   ],
-  "version": "1.0.2",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/duTGqD6.png",
   "thumbnail": "https://i.imgur.com/zaZSyjD.png",
   "color": "#1f38de",

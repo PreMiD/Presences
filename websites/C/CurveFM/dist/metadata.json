@@ -6,10 +6,11 @@
   "service": "CurveFM",
   "description": {
     "en": "Curve Radio is an online radio station purely based on providing amazing entertainment to its listeners.",
-    "ga_IE": "Is stáisiún raidió ar líne é Curve Radio atá bunaithe go dtihiomlán ar shiamsaíocht iontach a sholáthar dá éisteoirí."
+    "ga_IE": "Is stáisiún raidió ar líne é Curve Radio atá bunaithe go dtihiomlán ar shiamsaíocht iontach a sholáthar dá éisteoirí.",
+    "nl": "Curve Radio is een online radiostation dat puur gebaseerd is op het bieden van geweldig entertainment aan zijn luisteraars."
   },
   "url": "curvefm.com",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/wBgEMg7.png",
   "thumbnail": "https://i.imgur.com/Kn9lY6v.png",
   "color": "#4a9aa8",

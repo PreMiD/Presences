@@ -72,6 +72,15 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Leveraged Tokens";
     } else if (window.location.pathname.includes("/loan")) {
       presenceData.state = "Crypto Loans";
+    } else if (window.location.pathname.includes("/stock-token/trade")) {
+      const tradePair = document
+        .querySelector("div.css-vurnku > h1")
+        .textContent.trim();
+
+      presenceData.details = `Trading Stock Tokens:`;
+      presenceData.state = tradePair;
+    } else if (window.location.pathname.includes("/stock-token")) {
+      presenceData.state = "Stock Tokens";
     } else if (window.location.pathname.includes("/swap/liquidity")) {
       presenceData.state = "Liquid Swap";
     } else if (
@@ -88,39 +97,52 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Converting Crypto:";
 
       const inputCrypto = document
-          .querySelector("div.css-9wgib6")
+          .querySelectorAll("div.css-9wgib6")[0]
           .textContent.trim(),
         outputCrypto = document
-          .querySelector("div.css-9wgib6")
+          .querySelectorAll("div.css-9wgib6")[1]
           .textContent.trim();
 
       presenceData.state = `${inputCrypto} to ${outputCrypto}`;
     } else if (window.location.pathname.includes("/trade")) {
-      const tradeType =
-          document.querySelector("div.css-109wawx")?.textContent?.trim() ||
-          document.querySelector("div.css-119y1m9")?.textContent?.trim(),
-        tradePair = document.querySelector("div.css-mzoqhr").textContent.trim();
+      const tradeLeverage = document
+          .querySelector("div.css-t7ggbb > span")
+          ?.textContent?.trim(),
+        tradePair = document
+          .querySelector("div.css-t7ggbb > div.css-mzoqhr > h1")
+          .textContent.trim();
 
-      presenceData.details = `Trading on ${tradeType}:`;
+      switch (new URLSearchParams(window.location.search).get("type")) {
+        case "spot":
+          presenceData.details = `Trading on Spot:`;
+          break;
+        case "isolated":
+          presenceData.details = `Trading on Isolated ${tradeLeverage}:`;
+          break;
+        case "cross":
+          presenceData.details = `Trading on Cross ${tradeLeverage}:`;
+          break;
+        default:
+          presenceData.details = "Trading:";
+          break;
+      }
+
       presenceData.state = tradePair;
     } else if (
       window.location.pathname.includes("/futures") ||
       window.location.pathname.includes("/delivery")
     ) {
-      const tradeType = document
-          .querySelector("div.css-4mvl8x > a:nth-child(1)")
-          .textContent.trim(),
-        tradeLeverage = document
-          .querySelector("div.css-4mvl8x > a:nth-child(2)")
+      const tradeLeverage = document
+          .querySelector("div.css-1kk0gzs > a:nth-child(2)")
           .textContent.trim(),
         tradePair = document
-          .querySelector("div.css-17i092f > h1")
+          .querySelector("div.css-1wd9czp > h1")
           .textContent.trim(),
         tradeTerm = document
-          .querySelector("div.css-17i092f > div")
+          .querySelector("div.css-1wd9czp > div > h1")
           .textContent.trim();
 
-      presenceData.details = `Trading on ${tradeType} ${tradeLeverage}:`;
+      presenceData.details = `Futures Trading on ${tradeLeverage}:`;
       presenceData.state = `${tradePair} ${tradeTerm}`;
     } else {
       presenceData.details = "Browsing...";

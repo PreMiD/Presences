@@ -12,13 +12,15 @@
   "service": "QDSSClub",
   "description": {
     "en": "QDSSClub is a mix between a Blog and a Forum managed by YouTubers: Quei Due Sul Server.",
-    "it": "QDSSClub è un misto tra un Blog e un Forum gestito dagli YouTuber: Quei Due Sul Server."
+    "it": "QDSSClub è un misto tra un Blog e un Forum gestito dagli YouTuber: Quei Due Sul Server.",
+    "ga_IE": "Is meascán é QDSSClub idir Blag agus Fóram atá á bhainistiú ag YouTubers: Freastalaí Sul dlite Quei.",
+    "nl": "QDSSClub is een mix tussen een blog en een forum beheerd door YouTubers: Quei Due Sul Server."
   },
   "url": [
     "qdssclub.com",
     "www.qdssclub.com"
   ],
-  "version": "1.2.4",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/R10jnF3.png",
   "thumbnail": "https://i.imgur.com/G0CHGdM.png",
   "color": "#9A12D6",

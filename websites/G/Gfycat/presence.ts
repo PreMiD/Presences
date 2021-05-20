@@ -36,8 +36,9 @@ presence.on("UpdateData", async () => {
 
     presence.setActivity(data);
   } else if (document.location.pathname.startsWith("/gifs/search")) {
-    var searchText = document.querySelector(".feed-with-player__title")
-      .textContent;
+    var searchText = document.querySelector(
+      ".feed-with-player__title"
+    ).textContent;
 
     data.details = "Searching...";
     if (searchText) {

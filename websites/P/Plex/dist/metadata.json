@@ -10,14 +10,11 @@
     "de": "Mit Plex können Sie Ihre persönlichen Medien zusammen mit Premium-Inhalten verwalten und streamen. Genießen Sie Ihre eigenen Inhalte auf all Ihren Geräten, wo immer Sie mit Plex unterwegs sind."
   },
   "url": "www.plex.tv",
-  "version": "1.7.0",
+  "version": "1.7.3",
   "logo": "https://i.imgur.com/FPxlGGE.png",
   "thumbnail": "https://i.imgur.com/DQvN7Nx.png",
   "color": "#d78c14",
-  "tags": [
-    "video",
-    "music"
-  ],
+  "tags": ["video", "music"],
   "category": "videos",
   "regExp": "(([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)"
 }
