@@ -62,7 +62,9 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname.includes("/join")) {
     const server_name_join = document.querySelector("h2.mt-4")?.textContent;
-    presenceData.details = `Joining 🚦 ${server_name_join || "Nothing"} `;
+    presenceData.details = `Looking at 🚦 ${
+      server_name_join || "N/A"
+    }'s join page`;
     if (server_name_join) {
       presenceData.buttons = [
         {
@@ -75,7 +77,7 @@ presence.on("UpdateData", async () => {
     const server_name_upvote = document.querySelector(
       "h1.JoinUpvote_clickable-server-name__3l6Es"
     )?.textContent;
-    presenceData.details = `Upvoting 🗳️ ${server_name_upvote || "Nothing"} `;
+    presenceData.details = `Upvoting 🗳️ ${server_name_upvote || "N/A"} `;
     if (server_name_upvote) {
       presenceData.buttons = [
         {
@@ -163,9 +165,7 @@ presence.on("UpdateData", async () => {
       emoji_search = document
         .querySelector("h2.EmoList_heading1__3KEr_")
         ?.textContent.replace("Emoji List", " ");
-    presenceData.details = `🔍 Searching for emoji: ${
-      emoji_search || "Nothing"
-    }`;
+    presenceData.details = `🔍 Searching for emoji: ${emoji_search || "N/A"}`;
     presenceData.state = `📖 Page ${page}`;
     presenceData.buttons = [
       {
@@ -178,7 +178,7 @@ presence.on("UpdateData", async () => {
       emoji_tag = document
         .querySelector("h2.EmoList_heading1__3KEr_")
         ?.textContent.replace("Emoji List", " ");
-    presenceData.details = `Viewing 📛 ${emoji_tag || "Nothing"} emoji tag`;
+    presenceData.details = `Looking at 📛 ${emoji_tag || "N/A"} emoji tag`;
     presenceData.state = `📖 Page ${page}`;
     presenceData.buttons = [
       {
