@@ -86,9 +86,5 @@ function memberCount() {
   const counter = document.querySelector(
     ".footer-button__participants-icon > .footer-button__number-counter > span"
   );
-  if (typeof counter === "undefined") {
-    return null;
-  } else {
-    return Number(counter.innerHTML);
-  }
+  typeof counter === "undefined" ? return null : return Number(counter.innerHTML);
 }
