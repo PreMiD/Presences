@@ -19,5 +19,19 @@
     "url": "discords.com",
     "description": {
       "en": "Find discord servers using the most advanced public index."
-    }
+    },
+    "settings": [
+      {
+        "id": "timestamp",
+        "title": "Show Timestamps",
+        "icon": "fad fa-stopwatch",
+        "value": true
+      },
+      {
+        "id": "buttons",
+        "title": "Show Buttons",
+        "icon": "fas fa-compress-arrows-alt",
+        "value": true
+      }
+    ]
   }

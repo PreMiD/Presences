@@ -4,10 +4,11 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData = {
-    largeImageKey: "discords_logo",
-    startTimestamp: browsingStamp
-  };
+  const showTimestamp: boolean = await presence.getSetting("timestamp"),
+    showButtons: boolean = await presence.getSetting("buttons"),
+    presenceData: PresenceData = {
+      largeImageKey: "discords_logo"
+    };
 
   if (document.location.pathname === "/") {
     presenceData.details = "Viewing home page";
@@ -195,6 +196,8 @@ presence.on("UpdateData", async () => {
       }
     ];
   }
+  if (!showButtons) delete presenceData.buttons;
+  if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
