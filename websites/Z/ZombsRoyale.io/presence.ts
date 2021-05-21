@@ -8,7 +8,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   },
-  currentGameState = await this.getPageletiable("game.currentGameState");
+  currentGameState = await getPageletiable("game.currentGameState");
 
   if (currentGameState == "loading" || currentGameState == "UiLoadingOverlay") {
     presenceData.details = "Loading...";
