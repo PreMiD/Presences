@@ -90,6 +90,16 @@ presence.on("UpdateData", async () => {
         episode = "ตอนที่ " + episode;
         presenceData.state = info[0];
         presenceData.details = episode;
+        buttons: [
+    {
+            label: "รับชมตอนนี้",
+            url: path.href
+        },
+        {
+            label: "ดูตอนอื่นๆ",
+            url: "https://www.anime-sugoi.com/index.php?search=" + episode
+        }
+    ];
       } else {
         let info;
         if (title1.includes("ซับไทย")) {
@@ -100,6 +110,12 @@ presence.on("UpdateData", async () => {
         episode = "Movie";
         presenceData.state = info;
         presenceData.details = episode;
+        buttons: [
+    {
+            label: "รับชมเรื่องนี้",
+            url: path.href
+        }
+    ];
       }
 
       presenceData.smallImageKey = video.paused ? "pause" : "playing";
@@ -114,6 +130,12 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "เลือกตอน ";
       presenceData.state = ep1;
+      buttons: [
+    {
+            label: "ดูเรื่องนี้",
+            url: path.href
+        }
+    ];
     } else {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
