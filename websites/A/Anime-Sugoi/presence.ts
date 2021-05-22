@@ -130,7 +130,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "เลือกตอน ";
       presenceData.state = ep1;
-      buttons: [
+      presenceData.buttons = [
     {
             label: "ดูเรื่องนี้",
             url: path.href
