@@ -55,9 +55,7 @@ presence.on("UpdateData", async () => {
   } else if (currentGameState === "UiMapOverlay") {
     presenceData.details = "In Game";
     presenceData.state = "Viewing map";
-  }else {
-    presence.error("Unknown state: " + currentGameState);
-  }
+  } else presence.error("Unknown state: " + currentGameState);
 
   const playing = presenceData.details === "In Game" || presenceData.details === "In Lobby";
 
