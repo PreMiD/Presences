@@ -90,7 +90,7 @@ presence.on("UpdateData", async () => {
         episode = "ตอนที่ " + episode;
         presenceData.state = info[0];
         presenceData.details = episode;
-        buttons: [
+        presenceData.buttons: [
     {
             label: "รับชมตอนนี้",
             url: path.href
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
         episode = "Movie";
         presenceData.state = info;
         presenceData.details = episode;
-        buttons: [
+        presenceData.buttons: [
     {
             label: "รับชมเรื่องนี้",
             url: path.href
