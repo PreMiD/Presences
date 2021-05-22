@@ -151,8 +151,8 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = apiData.seekTimestamp / 1000;
         } else {
           // Show remaining time
-          presenceData.startTimestamp = (apiData.seekTimestamp + apiData.seek) / 1000;
-          presenceData.endTimestamp = (apiData.seekTimestamp + apiData.length) / 1000;
+          presenceData.startTimestamp = (apiData.seekTimestamp - apiData.seek) / 1000;
+          presenceData.endTimestamp = (apiData.seekTimestamp - apiData.seek + apiData.length) / 1000;
         }
       } else {
         // Pause
