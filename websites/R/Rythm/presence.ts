@@ -279,8 +279,8 @@ interface APIData {
   volume?: number; // Bot volume
   members?: APIMember[]; // Members in the voice channel
   users?: APIMember[]; // Members in the voice channel
-  repeatMode?: string; // Repeating state ("none", "one", "queue")
-  repeat?: string; // Repeating state ("none", "one", "queue")
+  repeatMode?: repeatingState; // Repeating state ("none", "one", "queue")
+  repeat?: repeatingState; // Repeating state ("none", "one", "queue")
   voteSkips?: APIEnqueuer[]; // Members in the voice channel that vote to skip
   skipUsers?: APIEnqueuer[]; // Members in the voice channel that vote to skip
 }
