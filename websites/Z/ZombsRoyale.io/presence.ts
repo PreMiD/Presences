@@ -6,21 +6,30 @@ let matchStart: number = null;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  },
-  currentGameState = await getPageletiable("game.currentGameState");
+      largeImageKey: "logo"
+    },
+    currentGameState = await getPageletiable("game.currentGameState");
 
   if (currentGameState === "loading" || currentGameState === "UiLoadingOverlay")
     presenceData.details = "Loading...";
   else if (currentGameState === "MainMenu")
     presenceData.details = "Lurking in main menu";
-  else if (currentGameState === "Cosmetics" || currentGameState === "UiCosmeticSelectorOverlay")
+  else if (
+    currentGameState === "Cosmetics" ||
+    currentGameState === "UiCosmeticSelectorOverlay"
+  )
     presenceData.details = "Viewing cosmetics";
   else if (currentGameState === "Profile")
     presenceData.details = "Viewing their profile";
-  else if (currentGameState === "Shop" || currentGameState === "UiPreviewPackOverlay")
+  else if (
+    currentGameState === "Shop" ||
+    currentGameState === "UiPreviewPackOverlay"
+  )
     presenceData.details = "Browsing Shop";
-  else if (currentGameState === "Friends" || currentGameState === "UiFriendAddOverlay")
+  else if (
+    currentGameState === "Friends" ||
+    currentGameState === "UiFriendAddOverlay"
+  )
     presenceData.details = "Viewing their friends";
   else if (currentGameState === "Leaderboards")
     presenceData.details = "Browsing leaderboards";
@@ -30,7 +39,10 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Changing settings";
   else if (currentGameState === "UiSeasonPurchaseOverlay")
     presenceData.details = "Buying a Battle Pass";
-  else if (currentGameState.startsWith("UiSeason") || currentGameState === "UiPreviewItemOverlay")
+  else if (
+    currentGameState.startsWith("UiSeason") ||
+    currentGameState === "UiPreviewItemOverlay"
+  )
     presenceData.details = "Viewing Battle Pass";
   else if (currentGameState === "UiChallengesOverlay")
     presenceData.details = "Viewing challenges";
@@ -41,7 +53,11 @@ presence.on("UpdateData", async () => {
   else if (currentGameState === "Countdown" || currentGameState === "Lobby") {
     presenceData.details = "In Lobby";
     presenceData.state = "Waiting for game to start";
-  } else if (currentGameState === "Game" || currentGameState === "UiReportPlayerOverlay" || currentGameState === "UiLeaveOverlay") {
+  } else if (
+    currentGameState === "Game" ||
+    currentGameState === "UiReportPlayerOverlay" ||
+    currentGameState === "UiLeaveOverlay"
+  ) {
     presenceData.details = "In Game";
   } else if (currentGameState === "Plane") {
     presenceData.details = "In Game";
@@ -49,7 +65,12 @@ presence.on("UpdateData", async () => {
   } else if (currentGameState === "Parachute") {
     presenceData.details = "In Game";
     presenceData.state = "Parachuting";
-  } else if (currentGameState === "Dead" || currentGameState === "UiGameOver" || currentGameState === "UiSpectator" || currentGameState === "UiFeedbackOverlay") {
+  } else if (
+    currentGameState === "Dead" ||
+    currentGameState === "UiGameOver" ||
+    currentGameState === "UiSpectator" ||
+    currentGameState === "UiFeedbackOverlay"
+  ) {
     presenceData.details = "In Game";
     presenceData.state = "Dead";
   } else if (currentGameState === "UiMapOverlay") {
@@ -57,14 +78,12 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Viewing map";
   } else presence.error("Unknown state: " + currentGameState);
 
-  const playing = presenceData.details === "In Game" || presenceData.details === "In Lobby";
+  const playing =
+    presenceData.details === "In Game" || presenceData.details === "In Lobby";
 
-  if(playing && matchStart === null)
-  {
+  if (playing && matchStart === null) {
     matchStart = Math.floor(Date.now() / 1000);
-  }
-  else if(!playing && matchStart !== null)
-  {
+  } else if (!playing && matchStart !== null) {
     matchStart = null;
   }
 
