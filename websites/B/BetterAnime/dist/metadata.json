@@ -12,7 +12,7 @@
     "betteranime"
   ],
   "url": "betteranime.net",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "color": "#ffffff",
   "category": "anime",
   "description": {
@@ -20,6 +20,7 @@
     "pt_BR": "Vem assistir e baixar todos os Episódios de Animes e Filmes em alta qualidade até FullHD! Assista vários animes online de graça no BetterAnime!",
     "nl": "Bekijk en download alle anime- en filmafleveringen in hoge kwaliteit tot FullHD! Bekijk gratis verschillende anime online op BetterAnime!"
   },
+  "iframe": true,
   "settings": [
     {
       "id": "lang",
