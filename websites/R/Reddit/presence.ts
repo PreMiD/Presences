@@ -84,7 +84,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).live;
     } else {
       delete presenceData.smallImageKey;
-      let sub = document.querySelector(
+      const sub = document.querySelector(
         "span._1GieMuLljOrqnVpRAwz7VP"
       );
       if (sub == null || !sub) {
