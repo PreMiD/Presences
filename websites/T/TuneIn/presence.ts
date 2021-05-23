@@ -5,9 +5,10 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     live: "presence.activity.live"
-  });
+  }),
+  elapsed = Math.floor(Date.now() / 1000);
 
-let elapsed = Math.floor(Date.now() / 1000), title, author;
+let title, author;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
@@ -43,15 +44,6 @@ presence.on("UpdateData", async () => {
 
         data.smallImageKey = "live";
         data.smallImageText = (await strings).live;
-        if (elapsed === null) {
-          elapsed = Math.floor(Date.now() / 1000);
-        }
-        data.startTimestamp = elapsed;
-        presence.setActivity(data);
-      } else {
-        elapsed = null;
-        presence.clearActivity();
-      }
     } else {
       title = document.querySelector("#playerTitle").textContent;
       author = document.querySelector("#playerSubtitle").textContent;
@@ -93,4 +85,5 @@ presence.on("UpdateData", async () => {
   } else {
     presence.clearActivity();
   }
+}
 });
