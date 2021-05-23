@@ -58,7 +58,6 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       smallImageKey: smallImageKey,
       smallImageText: smallImageText,
-      startTimestamp: timestamps[0],
       endTimestamp: timestamps[1]
     };
 
