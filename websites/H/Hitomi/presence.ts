@@ -85,7 +85,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = title;
       presenceData.state = `${document.querySelector(`body > div > div.content > div.gallery.${type}-gallery > h2 > ul > li > a`).textContent} (${parsedUrl[4]})`;
       presenceData.buttons = [{label: "View on Website", url: document.location.href}];
-    };
+    }
 
     if (validateReaderUrl.exec(document.location.pathname)){
       let title = document.title.replace(" | Hitomi.la", "");
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = title;
       presenceData.state = `Reading page ${document.location.hash.replace("#", "")} of ${totalPage} (${validateReaderUrl.exec(document.location.pathname)[1]})`;
       presenceData.buttons = [{label: "Reading on Website", url: document.location.href}];
-    };
+    }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
