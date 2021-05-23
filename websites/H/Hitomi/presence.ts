@@ -81,7 +81,7 @@ presence.on("UpdateData", async () => {
       let title = document.querySelector(`body > div > div.content > div.gallery.${type}-gallery > h1 > a`).textContent;
       if (title.length > 128){
         title = `${title.slice(0, 120)}...`;
-      };
+      }
       presenceData.details = title;
       presenceData.state = `${document.querySelector(`body > div > div.content > div.gallery.${type}-gallery > h2 > ul > li > a`).textContent} (${parsedUrl[4]})`;
       presenceData.buttons = [{label: "View on Website", url: document.location.href}];
@@ -91,7 +91,7 @@ presence.on("UpdateData", async () => {
       let title = document.title.replace(" | Hitomi.la", "");
       if (title.length > 128){
         title = `${title.slice(0, 120)}...`;
-      };
+      }
       const selectValue = document.querySelector("#single-page-select") as HTMLSelectElement,
       totalPage = selectValue.options[selectValue.options.length - 1].value;
       presenceData.details = title;
