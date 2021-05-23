@@ -12,9 +12,8 @@ const hitomiTypeMapping: interfaceMapping = {
   "cg": "acg",
   "gamecg": "cg",
   "anime": "anime"
-}
-
-const pathMapping: interfaceMapping = {
+},
+pathMapping: interfaceMapping = {
   "/index-indonesian.html": "indonesian",
   "/index-catalan.html": "catalan",
   "/index-cebuano.html": "cebuano",
@@ -58,10 +57,9 @@ const pathMapping: interfaceMapping = {
 }
 
 // /(type)/(title)-(lang)-(number).html
-const validateInfoUrl = /\/(.+)\/(.+)-(.+)-(\d+).html/;
-
+const validateInfoUrl = /\/(.+)\/(.+)-(.+)-(\d+).html/,
 // (number)
-const validateReaderUrl = /\/reader\/(\d+).html/;
+validateReaderUrl = /\/reader\/(\d+).html/;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -78,8 +76,8 @@ presence.on("UpdateData", async () => {
     }
 
     if (validateInfoUrl.exec(document.location.pathname)){
-      const parsedUrl = validateInfoUrl.exec(document.location.pathname);
-      const type = hitomiTypeMapping[parsedUrl[1]];
+      const parsedUrl = validateInfoUrl.exec(document.location.pathname),
+      type = hitomiTypeMapping[parsedUrl[1]];
       let title = document.querySelector(`body > div > div.content > div.gallery.${type}-gallery > h1 > a`).textContent;
       if (title.length > 128){
         title = `${title.slice(0, 120)}...`
@@ -94,8 +92,8 @@ presence.on("UpdateData", async () => {
       if (title.length > 128){
         title = `${title.slice(0, 120)}...`
       }
-      const selectValue = document.querySelector("#single-page-select") as HTMLSelectElement
-      const totalPage = selectValue.options[selectValue.options.length - 1].value
+      const selectValue = document.querySelector("#single-page-select") as HTMLSelectElement,
+      totalPage = selectValue.options[selectValue.options.length - 1].value
       presenceData.details = title;
       presenceData.state = `Reading page ${document.location.hash.replace("#", "")} of ${totalPage} (${validateReaderUrl.exec(document.location.pathname)[1]})`;
       presenceData.buttons = [{label: "Reading on Website", url: document.location.href}];
