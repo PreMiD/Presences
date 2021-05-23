@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Hitomi",
+  "author": {
+    "name": "SaidBySolo",
+    "id": "345265069132742657"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/Awb8oAl.png",
+  "thumbnail": "https://i.imgur.com/648ECEg.png",
+  "version": "1.0.0",
+  "color": "#242d3c",
+  "tags": [
+    "nsfw",
+    "doujinshi",
+    "manga",
+    "hentai"
+  ],
+  "url": "hitomi.la",
+  "description": {
+    "en": "A hentai site that is similar to nhentai, and hosts pornographic hentai and doujinshi manga in a variety of translated languages.",
+    "ko": "nhentai와 유사한 헨타이 사이트로, 다양한 번역 언어로 된 망가와 동인지를 호스팅 합니다."
+  }
+}
