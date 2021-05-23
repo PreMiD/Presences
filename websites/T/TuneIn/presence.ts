@@ -5,14 +5,14 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused",
     live: "presence.activity.live"
-  }),
-  elapsed = Math.floor(Date.now() / 1000);
+  });
 
 let title, author;
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: Math.floor(Date.now() / 1000)
   },
   playerCheck = document.querySelector(".player__playerContainer___JEJ2U")
     ? true
