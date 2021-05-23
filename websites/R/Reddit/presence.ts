@@ -89,13 +89,8 @@ presence.on("UpdateData", async () => {
       );
       if (sub == null || !sub) {
        sub = document.querySelector("#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.q4a8asWOWdfdniAbgNhMh > div > div.QscnL9OySMkHhGudEvEya > div > div._3TG57N4WQtubLLo8SbAXVF > h2");
-       if (!sub) {
         presenceData.details = (await strings).browsing;
-        presenceData.state = "Home";
-       } else {
-       presenceData.details = (await strings).browsing;
-       presenceData.state = sub.textContent;
-       }
+        presenceData.state = !sub ? "Home" : sub.textContent;
       } else {
       presenceData.details = (await strings).browsing;
       presenceData.state = sub.textContent;
