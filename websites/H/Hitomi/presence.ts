@@ -54,10 +54,10 @@ pathMapping: interfaceMapping = {
   "/index-korean.html": "korean",
   "/index-chinese.html": "chinese",
   "/index-japanese.html": "japanese"
-}
+},
 
 // /(type)/(title)-(lang)-(number).html
-const validateInfoUrl = /\/(.+)\/(.+)-(.+)-(\d+).html/,
+validateInfoUrl = /\/(.+)\/(.+)-(.+)-(\d+).html/,
 // (number)
 validateReaderUrl = /\/reader\/(\d+).html/;
 
@@ -73,31 +73,31 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname in pathMapping){
       presenceData.details = "Viewing recently added list";
       presenceData.state = pathMapping[document.location.pathname];
-    }
+    };
 
     if (validateInfoUrl.exec(document.location.pathname)){
       const parsedUrl = validateInfoUrl.exec(document.location.pathname),
       type = hitomiTypeMapping[parsedUrl[1]];
       let title = document.querySelector(`body > div > div.content > div.gallery.${type}-gallery > h1 > a`).textContent;
       if (title.length > 128){
-        title = `${title.slice(0, 120)}...`
-      }
-      presenceData.details = title
+        title = `${title.slice(0, 120)}...`;
+      };
+      presenceData.details = title;
       presenceData.state = `${document.querySelector(`body > div > div.content > div.gallery.${type}-gallery > h2 > ul > li > a`).textContent} (${parsedUrl[4]})`;
       presenceData.buttons = [{label: "View on Website", url: document.location.href}];
-    }
+    };
 
     if (validateReaderUrl.exec(document.location.pathname)){
       let title = document.title.replace(" | Hitomi.la", "");
       if (title.length > 128){
-        title = `${title.slice(0, 120)}...`
-      }
+        title = `${title.slice(0, 120)}...`;
+      };
       const selectValue = document.querySelector("#single-page-select") as HTMLSelectElement,
-      totalPage = selectValue.options[selectValue.options.length - 1].value
+      totalPage = selectValue.options[selectValue.options.length - 1].value;
       presenceData.details = title;
       presenceData.state = `Reading page ${document.location.hash.replace("#", "")} of ${totalPage} (${validateReaderUrl.exec(document.location.pathname)[1]})`;
       presenceData.buttons = [{label: "Reading on Website", url: document.location.href}];
-    }
+    };
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
