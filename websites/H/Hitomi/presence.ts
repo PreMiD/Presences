@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname in pathMapping){
       presenceData.details = "Viewing recently added list";
       presenceData.state = pathMapping[document.location.pathname];
-    };
+    }
 
     if (validateInfoUrl.exec(document.location.pathname)){
       const parsedUrl = validateInfoUrl.exec(document.location.pathname),
