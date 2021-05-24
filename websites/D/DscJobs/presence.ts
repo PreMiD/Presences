@@ -10,9 +10,9 @@ const showTimestamp: boolean = await presence.getSetting("timestamp"),
     largeImageKey: "dscjobs_logo"
   };
 
-if (document.location.pathname === "/") {
+if (document.location.pathname === "/") 
   presenceData.details = "Viewing home page";
-} else if (document.location.pathname.includes("/search")) {
+  else if (document.location.pathname.includes("/search")) {
   const search = document.location.href.split("term=")[1].split("&")[0],
     page = document.location.href.split("page=")[1].split("&")[0];
   presenceData.details = `🔍 Searching for: ${search || "Nothing"}`;
