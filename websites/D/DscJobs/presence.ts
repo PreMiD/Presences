@@ -54,9 +54,9 @@ if (document.location.pathname === "/") {
       url: document.location.href
     }
   ];
-} else if (document.location.pathname.includes("/profile")) {
+} else if (document.location.pathname.includes("/profile"))
   presenceData.details = "Viewing 👤 profile";
-} else if (document.location.pathname.includes("/u/")) {
+ else if (document.location.pathname.includes("/u/")) {
   const username = document.querySelector("h1")?.textContent.split("#")[0];
   presenceData.details = `Viewing 💳 ${username} profile`;
 } else if (document.location.pathname.includes("/vote")) {
