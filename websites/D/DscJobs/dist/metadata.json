@@ -5,6 +5,12 @@
     "name": "Anaxes",
     "id": "567885938160697377"
   },
+  "contributors": [
+    {
+      "name": "Dexter",
+      "id": "780079091172900884"
+    }
+  ],
   "description": {
     "en": "Find the best moderators for your server!",
     "nl": "Vind de beste moderators voor je server!"
