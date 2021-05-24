@@ -48,9 +48,8 @@ presence.on("UpdateData", async () => {
               "div._2SdHzo12ISmrC8H86TgSCp._29WrubtjAcKqzJSPdQqQ4h"
             ).textContent
           : "";
-      subReddit = document.querySelector(
-        "span._1GieMuLljOrqnVpRAwz7VP"
-      ).textContent;
+      subReddit = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP")
+        .textContent;
       subReddit =
         subReddit == "Home" &&
         document.querySelectorAll("._19bCWnxeTjqzBElWZfIlJb")[1] != undefined
@@ -59,9 +58,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Reading '${postTitle}'`;
       presenceData.state = subReddit;
     } else if (pathname.startsWith("/user/")) {
-      username = document.querySelector(
-        "span._1GieMuLljOrqnVpRAwz7VP"
-      ).textContent;
+      username = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP")
+        .textContent;
       nickname = document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ")
         ? document.querySelector("h4._3W1eUu5jHdcamkzFiJDITJ").textContent
         : "";
@@ -84,17 +82,18 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = (await strings).live;
     } else {
       delete presenceData.smallImageKey;
-      const sub = document.querySelector(
-        "span._1GieMuLljOrqnVpRAwz7VP"
-      );
+      const sub = document.querySelector("span._1GieMuLljOrqnVpRAwz7VP");
       if (sub === null) {
-       sub = document.querySelector("#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.q4a8asWOWdfdniAbgNhMh > div > div.QscnL9OySMkHhGudEvEya > div > div._3TG57N4WQtubLLo8SbAXVF > h2");
+        const sub2 = document.querySelector(
+          "#SHORTCUT_FOCUSABLE_DIV > div:nth-child(4) > div > div > div > div._3ozFtOe6WpJEMUtxDOIvtU > div.q4a8asWOWdfdniAbgNhMh > div > div.QscnL9OySMkHhGudEvEya > div > div._3TG57N4WQtubLLo8SbAXVF > h2"
+        );
         presenceData.details = (await strings).browsing;
-        presenceData.state = !sub ? "Home" : sub.textContent;
+        presenceData.state = !sub2 ? "Home" : sub2.textContent;
       } else {
-      presenceData.details = (await strings).browsing;
-      presenceData.state = sub.textContent;
-    } }
+        presenceData.details = (await strings).browsing;
+        presenceData.state = sub.textContent;
+      }
+    }
   }
   presence.setActivity(presenceData, true);
 });
