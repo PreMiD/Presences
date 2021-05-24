@@ -42,7 +42,7 @@ if (document.location.pathname === "/") {
   presenceData.details = "Viewing 💎 premium plan";
   presenceData.buttons = [
     {
-      label: "View Premium",
+      label: "View Premium Plan",
       url: document.location.href
     }
   ];
