@@ -84,9 +84,9 @@ if (document.location.pathname === "/") {
       url: document.location.href
     }
   ];
-} else if (document.location.pathname.includes("/settings")) {
+} else if (document.location.pathname.includes("/settings"))
   presenceData.details = `Editing 📜 curriculum vitae/resume`;
-} else if (document.location.pathname.includes("/legal")) {
+  else if (document.location.pathname.includes("/legal")) {
   presenceData.details = "Viewing 👩‍⚖️ Legal Page";
   presenceData.buttons = [
     {
