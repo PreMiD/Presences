@@ -17,12 +17,6 @@ if (document.location.pathname === "/") {
     page = document.location.href.split("page=")[1].split("&")[0];
   presenceData.details = `🔍 Searching for: ${search || "Nothing"}`;
   presenceData.state = `📖 Page ${page}`;
-  presenceData.buttons = [
-    {
-      label: "View Results",
-      url: document.location.href
-    }
-  ];
 } else if (document.location.pathname === "/moderators") {
   const moderator_page = document.location.href
       .split("page=")[1]
