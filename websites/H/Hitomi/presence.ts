@@ -89,9 +89,8 @@ presence.on("UpdateData", async () => {
 
     if (validateReaderUrl.exec(document.location.pathname)){
       let title = document.title.replace(" | Hitomi.la", "");
-      if (title.length > 128){
+      if (title.length > 128)
         title = `${title.slice(0, 120)}...`;
-      }
       const selectValue = document.querySelector("#single-page-select") as HTMLSelectElement,
       totalPage = selectValue.options[selectValue.options.length - 1].value;
       presenceData.details = title;
