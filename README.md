@@ -4,9 +4,9 @@
 </div>
 
 This repository contains the source code of all presences that are available in
-PreMiD Store. If you would like to **publish** your presence,
+PreMiD Store. If you would like to <strong>publish</strong> your presence,
 please feel free to open a
-[pull request](https://github.com/PreMiD/Presences/pulls).
+<a href="https://github.com/PreMiD/Presences/pulls">pull request</a>.
 
 <div align="left">
     <a target="_blank" href="https://discord.premid.app/" title="Join our Discord!">
@@ -19,7 +19,7 @@ please feel free to open a
 - You must have the
   [latest TypeScript compiler](https://www.typescriptlang.org/#download-links)
   version installed
-- Basic knowlege of TypeScript. [5-minute TS tutorial](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+- Basic knowlege of TypeScript
 
 ## Getting started
 
