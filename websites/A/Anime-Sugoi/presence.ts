@@ -52,7 +52,7 @@ presence.on("UpdateData", async () => {
   };
 
   // Presence
-  if (path.hostname == "anime-sugoi.com" || path.hostname.includes("www.")) {
+  if (path.href.includes == "anime-sugoi.com") {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "อนิเมะอัพเดตล่าสุด";
@@ -111,10 +111,8 @@ presence.on("UpdateData", async () => {
         presenceData.state = info;
         presenceData.details = episode;
         presenceData.buttons = [
-    {
             label: "รับชมเรื่องนี้",
             url: path.href
-        }
     ];
       }
 
