@@ -22,8 +22,8 @@ presence.on("UpdateData", async () => {
         .split("page=")[1]
         .split("&")[0],
       filters = document.location.href.includes("&");
-    presenceData.details = `Viewing 🔨 hireable moderators - Page: ${moderator_page}`;
-    if (filters) presenceData.state = `💿 Filters: True`;
+    presenceData.details = `Viewing 🔨 hireable moderators`;
+    presenceData.state = `${filters ? "💿 Filters: True" : `📖 Page ${moderator_page}`}`;
     presenceData.buttons = [
       {
         label: "View Page",
