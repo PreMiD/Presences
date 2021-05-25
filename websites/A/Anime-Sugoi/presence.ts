@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
         },
         {
             label: "ดูตอนอื่นๆ",
-            url: "https://www.anime-sugoi.com/index.php?search=" + episode
+            url: document.querySelector<HTMLAnchorElement>("h3 > a").href
         }
     ];
       } else {
