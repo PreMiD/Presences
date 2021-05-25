@@ -6,7 +6,8 @@
   "service": "Anime-Sugoi",
   "description": {
     "en": "Anime-Sugoi stream your favorite anime completely for free",
-    "th": "Anime-Sugoi เว็ปไซต์สตรีมมิ่งอนิเมะที่ทุกคนชื่นชอบฟรีเเละมีซับไทย"
+    "th": "Anime-Sugoi เว็ปไซต์สตรีมมิ่งอนิเมะที่ทุกคนชื่นชอบฟรีเเละมีซับไทย",
+    "nl": "Anime-Sugoi streamt je favoriete anime volledig gratis"
   },
   "url": "www.anime-sugoi.com",
   "version": "1.1.0",
