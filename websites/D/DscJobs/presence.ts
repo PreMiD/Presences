@@ -6,6 +6,7 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const showTimestamp: boolean = await presence.getSetting("timestamp"),
     showButtons: boolean = await presence.getSetting("buttons"),
+    showCvButton: boolean = await presence.getSetting("cvButton"),
     presenceData: PresenceData = {
       largeImageKey: "dscjobs_logo"
     };
@@ -23,7 +24,9 @@ presence.on("UpdateData", async () => {
         .split("&")[0],
       filters = document.location.href.includes("&");
     presenceData.details = `Viewing 🔨 hireable moderators`;
-    presenceData.state = `${filters ? "💿 Filters: True" : `📖 Page ${moderator_page}`}`;
+    presenceData.state = `${
+      filters ? "💿 Filters: True" : `📖 Page ${moderator_page}`
+    }`;
     presenceData.buttons = [
       {
         label: "View Page",
@@ -74,12 +77,16 @@ presence.on("UpdateData", async () => {
         ?.getAttribute("data-title");
     presenceData.details = `Viewing 📖 ${cv_page} resume`;
     presenceData.state = `❤️ ${likes} & 👀 ${views}`;
-    presenceData.buttons = [
-      {
-        label: `View Resume`,
-        url: document.location.href
+    if (showButtons) {
+      if (showCvButton) {
+        presenceData.buttons = [
+          {
+            label: `View Resume`,
+            url: document.location.href
+          }
+        ];
       }
-    ];
+    }
   } else if (document.location.pathname.includes("/settings"))
     presenceData.details = `Editing 📜 curriculum vitae/resume`;
   else if (document.location.pathname.includes("/legal")) {
@@ -105,6 +112,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = `📖 Page ${users_page}`;
   } else if (document.location.pathname.includes("/panel")) {
     presenceData.details = "Viewing ⚙️ Staff Panel";
+  } else {
+    presence.setActivity(presenceData);
   }
 
   if (!showButtons) delete presenceData.buttons;

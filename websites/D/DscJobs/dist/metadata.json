@@ -38,6 +38,12 @@
       "title": "Show Buttons",
       "icon": "fas fa-compress-arrows-alt",
       "value": true
+    },
+    {
+      "id": "cvButton",
+      "title": "Show resume button",
+      "icon": "fas fa-id-badge",
+      "value": true
     }
   ]
 }
