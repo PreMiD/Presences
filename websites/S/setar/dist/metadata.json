@@ -1,0 +1,32 @@
+{
+  "author": {
+    "name": "-its^Hadi.Az^",
+    "id": "490519932292038659"
+  },
+  "service": "setar",
+  "altnames": [
+    "SeTar",
+    "3tarbot",
+    "3tar",
+    "SeTar Bot",
+    "سه تار"
+  ],
+  "description": {
+    "en": "First and best persian discord music bot"
+  },
+  "url": [
+    "3tarbot.ir",
+    "pay.3tarbot.ir"
+  ],
+  "version": "0.0.1",
+  "logo": "https://i.imgur.com/k3yTvLv.png",
+  "thumbnail": "https://i.imgur.com/amj6QVh.png",
+  "color": "#ffdab9",
+  "tags": [
+    "songs",
+    "music",
+    "bot",
+    "discord"
+  ],
+  "category": "other"
+}
