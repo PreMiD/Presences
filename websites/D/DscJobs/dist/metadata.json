@@ -41,7 +41,7 @@
     },
     {
       "id": "cvButton",
-      "title": "Show resume button",
+      "title": "Show Resume Button",
       "icon": "fas fa-id-badge",
       "value": true
     }
