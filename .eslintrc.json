@@ -23,6 +23,7 @@
     "quotes": "off",
     "indent": "off",
     "camelcase": "off",
+    "curly": ["error", "multi"],
     "comma-dangle": ["warn", "never"],
     "one-var": ["warn", "consecutive"],
     "linebreak-style": ["warn", "unix"],
@@ -53,7 +54,7 @@
       }
     }
   ],
-  "reportUnusedDisableDirectives": true,	
+  "reportUnusedDisableDirectives": true,
   "noInlineConfig": true,
   "plugins": ["@typescript-eslint"]
 }
