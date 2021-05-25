@@ -86,30 +86,23 @@ presence.on("UpdateData", async () => {
   const path = document.location.pathname,
         params = document.location.search,
         parsedUrl = path.split("/"); // It's a very bad design, but they have a slash document.
-  if (parsedUrl === null) return;
 
   /**
    * 
    * Setting Details & State
    * 
    */
-  let privateMode = false;
   const action = parsedUrl[1], details = boardTypeMapping[action];
   presenceData.details = details === undefined ? "Unknown Action" : details;
 
   let page;
   /* View Contribute */
   if ((page = validateContributeUrl.exec(path))) {
-    if (page[1] === "author")
-      page = `User: ${page[2]}`;
-    else {
-      privateMode = true;
-      page = "IP User";
-    }
+    if (page[1] === "author") page = `User: ${page[2]}`;
+    else page = "IP User";
 
   /* View Membership */
   } else if ((page = validateMembershipUrl.exec(path))) {
-    privateMode = true; // Privacy
     presenceData.details = "Member Page";
     page = membersMapping[page[1]];
 
@@ -135,8 +128,8 @@ presence.on("UpdateData", async () => {
   else if (details !== undefined) page = decodeURI(path.substring(`/${action}/`.length));
   else page = null;
 
-  if (page === null || page === undefined) page = "";
-  presenceData.state = ((page.length > 128) ? `${page.slice(0, 120)}...` : page);
+  if (action === "w") presenceData.buttons = [{ label: "View Page", url: document.location.href }];
+  if (page !== null && page !== undefined) presenceData.state = ((page.length > 128) ? `${page.slice(0, 120)}...` : page);
 
   /**
    * 
@@ -170,8 +163,7 @@ presence.on("UpdateData", async () => {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
-    presenceData.buttons = (privateMode ? null : [{ label: "View Page", url: document.location.href }]);
-    presenceData.startTimestamp = (!showTimestamp || privateMode ? null : currentTime);
+    if (showTimestamp) presenceData.startTimestamp = currentTime;
     presence.setActivity(presenceData);
   }
 });
