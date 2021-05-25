@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
       }
     } else if (path.href) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "เลือกตอน ";
+      presenceData.details = "กำลังเลือกตอน ";
       presenceData.state = ep1;
       presenceData.buttons = [
     {
