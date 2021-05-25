@@ -57,14 +57,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/vote")) {
     const username_vote = document.querySelector("h1")?.textContent;
     presenceData.details = `Voting 🗳️ ${username_vote || "N/A"} `;
-    if (username_vote) {
+    if (username_vote)
       presenceData.buttons = [
         {
           label: `Vote ${username_vote}`,
           url: document.location.href
         }
       ];
-    }
   } else if (document.location.pathname.includes("/cv/")) {
     const cv_page = document
         .querySelector("h2.cursor")
@@ -78,14 +77,13 @@ presence.on("UpdateData", async () => {
     presenceData.details = `Viewing 📖 ${cv_page} resume`;
     presenceData.state = `❤️ ${likes} & 👀 ${views}`;
     if (showButtons) {
-      if (showCvButton) {
+      if (showCvButton)
         presenceData.buttons = [
           {
             label: `View Resume`,
             url: document.location.href
           }
         ];
-      }
     }
   } else if (document.location.pathname.includes("/settings"))
     presenceData.details = `Editing 📜 curriculum vitae/resume`;
@@ -112,8 +110,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = `📖 Page ${users_page}`;
   } else if (document.location.pathname.includes("/panel")) {
     presenceData.details = "Viewing ⚙️ Staff Panel";
-  } else {
-    presence.setActivity(presenceData);
   }
 
   if (!showButtons) delete presenceData.buttons;
@@ -122,7 +118,5 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });
