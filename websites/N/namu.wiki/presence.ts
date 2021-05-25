@@ -78,21 +78,18 @@ validateContributeUrl = /\/contribution\/(.+)\/(.+)\/(.+)/;
 let currentPage = document.location.pathname, currentTime = Date.now();
 presence.on("UpdateData", async () => {
   const privacy = await presence.getSetting("privacy"),
-  showTimestamp = await presence.getSetting("showTimestamp"),
-  presenceData: PresenceData = {
-    largeImageKey: "namu"
-  };
-
-  const path = document.location.pathname,
+        showTimestamp = await presence.getSetting("showTimestamp"),
+        path = document.location.pathname,
         params = document.location.search,
-        parsedUrl = path.split("/"); // It's a very bad design, but they have a slash document.
+        parsedUrl = path.split("/"), // It's a very bad design, but they have a slash document.
+        action = parsedUrl[1], details = boardTypeMapping[action],
+        presenceData: PresenceData = { largeImageKey: "namu" };
 
   /**
    * 
    * Setting Details & State
    * 
    */
-  const action = parsedUrl[1], details = boardTypeMapping[action];
   presenceData.details = details === undefined ? "Unknown Action" : details;
 
   let page;
