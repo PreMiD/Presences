@@ -78,12 +78,11 @@ validateContributeUrl = /\/contribution\/(.+)\/(.+)\/(.+)/;
 let currentPage = document.location.pathname, currentTime = Date.now();
 presence.on("UpdateData", async () => {
   const privacy = await presence.getSetting("privacy"),
-  showTimestamp = await presence.getSetting("show_timestamp"),
+  showTimestamp = await presence.getSetting("showTimestamp"),
   presenceData: PresenceData = {
     largeImageKey: "namu"
   };
 
-  if (document.location.hostname !== "namu.wiki") return;
   const path = document.location.pathname,
         params = document.location.search,
         parsedUrl = path.split("/"); // It's a very bad design, but they have a slash document.
@@ -96,14 +95,14 @@ presence.on("UpdateData", async () => {
    */
   let privateMode = false;
   const action = parsedUrl[1], details = boardTypeMapping[action];
-  presenceData.details = ((details === undefined) ? "Unknown Action" : details);
+  presenceData.details = details === undefined ? "Unknown Action" : details;
 
   let page;
   /* View Contribute */
   if ((page = validateContributeUrl.exec(path))) {
-    if (page[1] === "author") {
+    if (page[1] === "author")
       page = `User: ${page[2]}`;
-    } else {
+    else {
       privateMode = true;
       page = "IP User";
     }
@@ -159,7 +158,7 @@ presence.on("UpdateData", async () => {
    */
   if (currentPage !== path) {
     currentPage = path;
-    currentTime = Date.now();
+    currentTime = ~~(Date.now() / 1000);
   }
 
   /**

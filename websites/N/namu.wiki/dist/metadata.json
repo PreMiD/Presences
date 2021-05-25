@@ -27,7 +27,7 @@
       "value": false
     },
     {
-      "id": "show_timestamp",
+      "id": "showTimestamp",
       "title": "Show Timestamp",
       "icon": "fad fa-clock",
       "value": true
