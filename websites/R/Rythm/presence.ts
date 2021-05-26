@@ -89,37 +89,31 @@ presence.on("UpdateData", async () => {
     // Select the large image to logo of the Rythm version currently being used
     presenceData.largeImageKey = namespace;
 
-    // Check if buttons should be displayed
-    if (showButtons) {
-      // Add the open dashboard button
-      presenceData.buttons = [
-        {
-          label: "Open Dashboard",
-          url: `https://${host}/${path.length > 0 ? path[0] : ""}`
-        }
-      ];
-    }
+    // Add the open dashboard button if buttons should be displayed
+    if (showButtons) presenceData.buttons = [
+      {
+        label: "Open Dashboard",
+        url: `https://${host}/${path.length > 0 ? path[0] : ""}`
+      }
+    ];
 
     // Get the current API data
     const apiData = connection.data;
 
     // Check if a song is currently playing or paused
     if (apiData.title) {
+      // Reset the idle time
       idleStamp = 0;
 
       // Add song information
       presenceData.details = apiData.title;
-      if (showUsernames)
-        presenceData.state = `Requested by: ${apiData.nowPlayingUserDisplayName}`;
+      if (showUsernames) presenceData.state = `Requested by: ${apiData.nowPlayingUserDisplayName}`;
 
-      // Check if buttons should be displayed
-      if (showButtons) {
-        // Add the view song button
-        presenceData.buttons.push({
-          label: (await strings).buttonViewSong,
-          url: apiData.referenceId
-        });
-      }
+      // Add the view song button if buttons should be displayed
+      if (showButtons) presenceData.buttons.push({
+        label: (await strings).buttonViewSong,
+        url: apiData.referenceId
+      });
 
       // Check if the song isn't paused
       if (apiData.pause == false) {
@@ -157,16 +151,13 @@ presence.on("UpdateData", async () => {
       } else {
         // Pause
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText =
-          rythms[namespace] + ` ${separator} ` + (await strings).pause;
+        presenceData.smallImageText = rythms[namespace] + ` ${separator} ` + (await strings).pause;
       }
     } else {
       // Check if server details can and should be shown
       if (showServerDetails && apiData.guildDisplayName) {
         // Get the amount of DJs and normal users
-        const djAmount = apiData.users.reduce((result, user) => {
-            return user.isAdmin ? result + 1 : result;
-          }, 0),
+        const djAmount = apiData.users.filter(user => user.isAdmin).length,
           userAmount = apiData.users.length - djAmount;
 
         // Add server information
@@ -181,10 +172,8 @@ presence.on("UpdateData", async () => {
             `Users: ${userAmount}`;
         }
       } else {
-        // Check idle time
-        if (idleStamp == 0) {
-          idleStamp = Date.now() / 1000;
-        }
+        // Check the idle time
+        if (idleStamp == 0) idleStamp = Date.now() / 1000;
 
         // Add idle information
         presenceData.details = "Idle";
@@ -470,9 +459,7 @@ class APIConnection {
        */
       connection.websocket.onmessage = function (event: MessageEvent) {
         presence.info(`Message from Rythm's API: ${event.data}`);
-        if (event.data) {
-          connection.apiData = { ...connection.apiData, ...JSON.parse(event.data) };
-        }
+        if (event.data) connection.apiData = { ...connection.apiData, ...JSON.parse(event.data) };
       };
     });
   }
@@ -489,11 +476,8 @@ async function checkAPIConnection(
   socketUrl: string
 ): Promise<boolean> {
   // Make sure the check runs only once at a time
-  if (connectionCheck) {
-    return false; // Connection is getting checked already
-  } else {
-    connectionCheck = true;
-  }
+  if (connectionCheck) return false;
+  connectionCheck = true;
 
   // Check if a connection exists
   if (connection && connection.state != WebSocket.CLOSED) {
@@ -530,9 +514,11 @@ async function getAPIInfo(path: string[]): Promise<APIInfo> {
 
   // Fallback mechanism for older extensions
   if (version >= 224) {
+    // For newer extension versions, use getPageletiable of the presence class
     namespace = path[1] as apiNamespace || await presence.getPageletiable(namespaceLetiable) as apiNamespace;
     socketUrl = `${await presence.getPageletiable(socketUrlLetiable)}/${namespace}`;
   } else {
+    // For older versions, use the custom getPageletiable as a fallback
     presence.error(`Using fallback for older extensions: ${version}`);
     namespace = path[1] as apiNamespace || await getPageletiable("window." + namespaceLetiable) as apiNamespace;
     socketUrl = `${await getPageletiable("window." + socketUrlLetiable)}/${namespace}`;
