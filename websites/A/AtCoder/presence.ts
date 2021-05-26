@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "845360129715994685"
   }),
-  timeElapsed: number = new Date().getTime();
+  timeElapsed: number = ~~Date.now() / 1000;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -10,8 +10,8 @@ presence.on("UpdateData", async () => {
   };
 
   if (location.pathname.split("/")[1] === "")
-    presenceData.details = "Viewing Home Page";
-  else
+    presenceData.details = "Viewing Home Page12";
+  else {
     switch (location.pathname.split("/")[1]) {
       case "home": {
         presenceData.details = "Viewing Home Page";
@@ -163,6 +163,7 @@ presence.on("UpdateData", async () => {
         }
       }
     }
+  }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
