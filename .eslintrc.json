@@ -23,7 +23,7 @@
     "quotes": "off",
     "indent": "off",
     "camelcase": "off",
-    "curly": ["error", "multi"],
+    "curly": ["warn", "multi-or-nest"],
     "comma-dangle": ["warn", "never"],
     "one-var": ["warn", "consecutive"],
     "linebreak-style": ["warn", "unix"],
