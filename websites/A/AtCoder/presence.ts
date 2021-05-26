@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (location.pathname.split("/")[1] === "")
-    presenceData.details = "Viewing Home Page12";
+    presenceData.details = "Viewing Home Page";
   else {
     switch (location.pathname.split("/")[1]) {
       case "home": {
