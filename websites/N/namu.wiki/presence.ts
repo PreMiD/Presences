@@ -94,12 +94,12 @@ presence.on("UpdateData", async () => {
 
   let page;
   /* View Contribute */
-  if ((page = validateContributeUrl.exec(path))) {
+  if ((page = validateContributeUrl.exec(path)))
     if (page[1] === "author") page = `User: ${page[2]}`;
     else page = "IP User";
 
   /* View Membership */
-  } else if ((page = validateMembershipUrl.exec(path))) {
+  else if ((page = validateMembershipUrl.exec(path))) {
     presenceData.details = "Member Page";
     page = membersMapping[page[1]];
 
