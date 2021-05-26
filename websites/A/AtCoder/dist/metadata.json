@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "AtCoder",
+  "author": {
+    "name": "Zai",
+    "id": "90431685472038912"
+  },
+  "contributors": [
+    {
+      "name": "AD",
+      "id": "511232034346369055"
+    }
+  ],
+  "category": "other",
+  "logo": "https://i.imgur.com/sljarC4.png",
+  "thumbnail": "https://i.imgur.com/zuvLy06.png",
+  "version": "1.0.0",
+  "color": "#101010",
+  "tags": [
+    "coding",
+    "competition",
+    "developer",
+    "education",
+    "technology"
+  ],
+  "url": "atcoder.jp",
+  "description": {
+    "en": "AtCoder is a programming contest site for anyone from beginners to experts. We hold weekly programming contests online."
+  }
+}
