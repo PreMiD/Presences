@@ -90,12 +90,14 @@ presence.on("UpdateData", async () => {
     presenceData.largeImageKey = namespace;
 
     // Add the open dashboard button if buttons should be displayed
-    if (showButtons) presenceData.buttons = [
-      {
-        label: "Open Dashboard",
-        url: `https://${host}/${path.length > 0 ? path[0] : ""}`
-      }
-    ];
+    if (showButtons) {
+      presenceData.buttons = [
+        {
+          label: "Open Dashboard",
+          url: `https://${host}/${path.length > 0 ? path[0] : ""}`
+        }
+      ];
+    }
 
     // Get the current API data
     const apiData = connection.data;
@@ -110,10 +112,12 @@ presence.on("UpdateData", async () => {
       if (showUsernames) presenceData.state = `Requested by: ${apiData.nowPlayingUserDisplayName}`;
 
       // Add the view song button if buttons should be displayed
-      if (showButtons) presenceData.buttons.push({
-        label: (await strings).buttonViewSong,
-        url: apiData.referenceId
-      });
+      if (showButtons) {
+        presenceData.buttons.push({
+          label: (await strings).buttonViewSong,
+          url: apiData.referenceId
+        });
+      }
 
       // Check if the song isn't paused
       if (apiData.pause == false) {
