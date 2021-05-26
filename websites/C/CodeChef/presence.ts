@@ -1,12 +1,12 @@
 const presence = new Presence({
     clientId: "845716323296083999"
   }),
-  startTimestamp = Math.floor(Date.now() / 1000);
+  timeElapsed: number = ~~Date.now() / 1000;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
       largeImageKey: "logo",
-      startTimestamp
+      startTimestamp: timeElapsed
     },
     domain = location.host;
 
