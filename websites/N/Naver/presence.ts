@@ -13,6 +13,8 @@ const presence = new Presence({
         return "NAVER_PAPAGO";
       case !!url.match(/blog[.]naver[.]([a-z0-9]+)/):
         return "NAVER_BLOG";
+      case !!url.match(/cafe[.]naver[.]([a-z0-9]+)/):
+        return "NAVER_CAFE";
       case !!url.match(/([a-z]+)[.]naver[.]([a-z0-9]+)/):
         return "NAVER";
       default:
@@ -37,6 +39,7 @@ const presence = new Presence({
           | "NAVER_WEBTOON"
           | "NAVER_TV"
           | "NAVER_BLOG"
+          | "NAVER_CAFE"
           | "ANY";
         setPresenceData?: () => void;
         data?: {
@@ -78,7 +81,8 @@ const presence = new Presence({
     presence: null
   };
 
-let blog: string;
+let blog: string,
+  cafeTitle: string;
 
 presence.on("iFrameData", (data: { blog: string }) => {
   blog = data.blog;
@@ -522,21 +526,34 @@ presence.on("UpdateData", async () => {
       }
     },
     "/([a-z])": {
-      service: "NAVER_BLOG",
-      data: {
-        details: {
-          setTo: "Reading blog of:"
-        },
-        state: {
-          setTo: blog
-        },
-        buttons: {
-          setTo: [
+      service: "ANY",
+      async setPresenceData(){
+        if (data.service === "NAVER_BLOG"){
+          presenceData.details = "Reading blog of:";
+          presenceData.state = blog;
+          
+          presenceData.buttons = [
             {
-              url: document.baseURI,
+              url: document.URL,
               label: "Read Blog"
             }
-          ]
+          ];
+        } else if (data.service === "NAVER_CAFE"){
+          if (!cafeTitle) cafeTitle = document.querySelector("h1.d-none")?.textContent;
+          if (cafeTitle){
+            presenceData.details = "Viewing cafe:";
+            presenceData.state = cafeTitle;
+  
+            presenceData.buttons = [
+              {
+                label: "View Cafe",
+                url: document.URL
+              }
+            ];
+          } else if (document.location.pathname.includes("/search/")){
+            presenceData.details = "Searching for:";
+            presenceData.state = (new URLSearchParams(document.location.search)).get("q");
+          }
         }
       }
     }
