@@ -23,7 +23,8 @@ const presence = new Presence({
   browsingStamp = Math.floor(Date.now() / 1000);
 
 let oldLang: string = null,
-  strings = getStrings();
+  strings = getStrings(),
+  videoData: { sClipTitle:  string, sCategoryCode: string, nClipNo: number, sLiveStatus: string };
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -31,12 +32,13 @@ presence.on("UpdateData", async () => {
       startTimestamp: browsingStamp,
       details: (await strings).browse
     },
-    videoData = await presence.getPageletiable("ghtEnv"),
     pathname = document.location.pathname,
     newLang = await presence.getSetting("lang"),
     showButton = await presence.getSetting("Buttons"),
     showSearch = await presence.getSetting("searchQuery"),
     pDetail = await presence.getSetting("detail");
+
+  if (!videoData) videoData = await presence.getPageletiable("ghtEnv");
 
   if (!oldLang) {
     oldLang = newLang;
