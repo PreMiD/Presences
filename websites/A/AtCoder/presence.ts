@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "845360129715994685"
   }),
-  timeElapsed: number = ~~Date.now() / 1000;
+  timeElapsed: number = Date.now() / 1000;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -9,7 +9,7 @@ presence.on("UpdateData", async () => {
     startTimestamp: timeElapsed
   };
 
-  if (location.pathname.split("/")[1] === "")
+  if (!location.pathname.split("/")[1])
     presenceData.details = "Viewing Home Page";
   else {
     switch (location.pathname.split("/")[1]) {
@@ -140,7 +140,6 @@ presence.on("UpdateData", async () => {
         if (location.pathname.split("/")[3] === "history")
           presenceData.state = `${username}'s Competition History`;
         else presenceData.state = username;
-
         break;
       }
 
@@ -165,7 +164,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
