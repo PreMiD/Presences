@@ -27,7 +27,7 @@ else if (document.location.pathname.includes("/results")) {
   presenceData.state = `👇 ${downloads}, ❤️ ${likes}, 💬 ${comments}, 📆 ${age}`;
   presenceData.buttons = [
     {
-      label: "View Page",
+      label: "View Template",
       url: document.location.href
     }
   ];
@@ -39,7 +39,7 @@ else if (document.location.pathname.includes("/results")) {
   presenceData.state = `🖼️ ${templates} & ❤️ ${liked}`;
   presenceData.buttons = [
     {
-      label: `View Page`,
+      label: `View User`,
       url: document.location.href
     } 
   ];
