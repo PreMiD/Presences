@@ -448,7 +448,7 @@ presence.on("UpdateData", async () => {
     showButtons = await presence.getSetting("buttons");
 
   // Billing management
-  if (path[0] == "app" && path[1] == "billing") {
+  if (path[0] === "app" && path[1] === "billing") {
     presenceData.largeImageKey = "r1";
     presenceData.details = "Billing management";
 
@@ -458,7 +458,7 @@ presence.on("UpdateData", async () => {
   }
 
   // Dashboard
-  if (path[0] == "app") {
+  if (path[0] === "app") {
     // Check if the api info needs to be fetched
     if (lastPath != path.join("/")) {
       // Currently, getPageletiable causes high cpu and memory usage,
@@ -521,7 +521,7 @@ presence.on("UpdateData", async () => {
       }
 
       // Check if the song isn't paused
-      if (apiData.pause == false) {
+      if (apiData.pause === false) {
         // Add the Rythm version name and seperator
         presenceData.smallImageText = `${rythms[namespace]} ${separator} `;
 
@@ -578,7 +578,7 @@ presence.on("UpdateData", async () => {
         }
       } else {
         // Check the idle time
-        if (idleStamp == 0) idleStamp = Date.now() / 1000;
+        if (idleStamp === 0) idleStamp = Date.now() / 1000;
 
         // Add idle information
         presenceData.details = "Idle";
@@ -592,7 +592,7 @@ presence.on("UpdateData", async () => {
   }
 
   // Documentation
-  if (path[0] == "docs") {
+  if (path[0] === "docs") {
     presenceData.largeImageKey = "r1";
     presenceData.details = "Documentation";
     presenceData.state = document.querySelector("h1").textContent;
@@ -603,10 +603,10 @@ presence.on("UpdateData", async () => {
   }
 
   // Premium
-  if (path[0] == "premium") {
+  if (path[0] === "premium") {
     presenceData.largeImageKey = "r1";
     presenceData.details = "Premium";
-    if (hash == "#plans") presenceData.state = "Pricing and plans";
+    if (hash === "#plans") presenceData.state = "Pricing and plans";
 
     presence.setActivity(presenceData);
     presence.setTrayTitle(`Rythm ${separator} Premium`);
