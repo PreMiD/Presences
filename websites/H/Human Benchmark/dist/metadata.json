@@ -9,16 +9,11 @@
     "nl": "Meet je vaardigheden met hersenspellen en cognitieve tests."
   },
   "service": "Human Benchmark",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/vTQeYvH.png",
   "thumbnail": "https://i.imgur.com/jDQRXXN.jpg",
   "color": "#FFA600",
-  "tags": [
-    "games",
-    "tests",
-    "brain",
-    "cognitive"
-  ],
+  "tags": ["games", "tests", "brain", "cognitive"],
   "category": "other",
   "settings": [
     {
