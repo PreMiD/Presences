@@ -34,7 +34,7 @@
     "quote-props": ["error", "as-needed"],
     "prefer-destructuring": "warn",
     "prefer-template": "warn",
-    "space-before-function-paren": ["warn", "asyncArrow"],
+    "space-before-function-paren": ["warn", { "asyncArrow": "always" }],
     "space-before-blocks": ["error", "always"],
     "space-infix-ops": "warn",
     "func-call-spacing": ["error", "never"],
