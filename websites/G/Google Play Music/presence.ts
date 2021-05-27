@@ -61,8 +61,9 @@
       location.pathname.startsWith("/music/listen") &&
       document.querySelector(".now-playing-info-wrapper")
     ) {
-      const title = document.querySelector("#currently-playing-title")
-        .textContent;
+      const title = document.querySelector(
+        "#currently-playing-title"
+      ).textContent;
       const artist =
         document.querySelector("#player-artist").textContent ||
         document
@@ -91,8 +92,9 @@
       };
 
       if (!document.hidden) {
-        const elapsed = document.querySelector("#time_container_current")
-          .textContent;
+        const elapsed = document.querySelector(
+          "#time_container_current"
+        ).textContent;
         presenceData.startTimestamp =
           Math.floor(Date.now() / 1000) - getTimesec(elapsed).elapsedSec;
       }

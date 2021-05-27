@@ -53,8 +53,9 @@ document.querySelector("#roomlistjoinbutton").addEventListener("click", () => {
 
 iframe.on("UpdateData", async () => {
   const element = document.querySelector(selector),
-    lobbyGameMode = document.querySelector("#newbonklobby_modetext")
-      ?.textContent,
+    lobbyGameMode = document.querySelector(
+      "#newbonklobby_modetext"
+    )?.textContent,
     state =
       document.querySelector("#pretty_top_name").textContent +
       " - " +

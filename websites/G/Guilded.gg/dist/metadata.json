@@ -5,10 +5,11 @@
   },
   "service": "Guilded.gg",
   "description": {
-    "en": "Guilded is the new standard in gaming team management. With Discord bots, Overwatch stats, Fortnite scrims, CS:GO team finder, Destiny 2 LFG, and more."
+    "en": "Guilded is the new standard in gaming team management. With Discord bots, Overwatch stats, Fortnite scrims, CS:GO team finder, Destiny 2 LFG, and more.",
+    "nl": "Guilded is de nieuwe standaard in gamingteammanagement. Met Discord-bots, Overwatch-statistieken, Fortnite-scrims, CS: GO-teamzoeker, Destiny 2 LFG en meer."
   },
   "url": "www.guilded.gg",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://i.imgur.com/rJxhNAw.png",
   "thumbnail": "https://i.imgur.com/51zS6sN.jpg",
   "color": "#ffff00",

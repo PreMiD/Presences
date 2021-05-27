@@ -5,10 +5,11 @@
   },
   "service": "Multporn",
   "description": {
-    "en": "Multporn.net is an Adult Website for Comics of any kind."
+    "en": "Multporn.net is an Adult Website for Comics of any kind.",
+    "nl": "Multporn.net is een website voor volwassenen voor alle soorten strips."
   },
   "url": "www.multporn.net",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/aBu33JP.png",
   "thumbnail": "https://i.imgur.com/v5BuHwD.png",
   "color": "#cc0000",

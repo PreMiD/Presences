@@ -205,8 +205,9 @@ presence.on("UpdateData", async function () {
       presenceData.details = "Wall Connector";
     else {
       if (document.querySelector(".error-container>.error-code")) {
-        const error = document.querySelector(".error-container>.error-code")
-          .textContent;
+        const error = document.querySelector(
+          ".error-container>.error-code"
+        ).textContent;
         if (error === "404")
           (presenceData.details = "Error 404"),
             (presenceData.state = "Page not found");

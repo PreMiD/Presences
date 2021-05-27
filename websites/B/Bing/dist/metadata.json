@@ -5,10 +5,11 @@
   },
   "url": "www.bing.com",
   "description": {
-    "en": "Bing is a search engine that finds and organizes the answers you need so you can make faster, more informed decisions."
+    "en": "Bing is a search engine that finds and organizes the answers you need so you can make faster, more informed decisions.",
+    "nl": "Bing is een zoekmachine die de antwoorden vindt en organiseert die u nodig heeft, zodat u snellere en beter geïnformeerde beslissingen kunt nemen."
   },
   "service": "Bing",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/vyaJqJh.png",
   "thumbnail": "https://i.imgur.com/ds4icXO.png",
   "color": "#00809D",

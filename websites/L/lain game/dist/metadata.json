@@ -5,10 +5,11 @@
   },
   "service": "lain game",
   "description": {
-    "en": "lain game is a website trying to reproduce 1998's PlayStation game 'Serial Experiments Lain' in web form."
+    "en": "lain game is a website trying to reproduce 1998's PlayStation game 'Serial Experiments Lain' in web form.",
+    "nl": "lain game is een website die probeert de PlayStation-game 'Serial Experiments Lain' uit 1998 in webvorm te reproduceren."
   },
   "url": "laingame.net",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "logo": "https://menma.is-inside.me/exojC2sX.png",
   "thumbnail": "https://menma.is-inside.me/8WlCGlXm.png",
   "color": "#000000",

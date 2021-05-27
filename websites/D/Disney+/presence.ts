@@ -23,7 +23,7 @@ async function getStrings(): Promise<LangStrings> {
       watchEpisode: "general.buttonViewEpisode",
       watchVideo: "general.buttonWatchVideo"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
@@ -34,7 +34,7 @@ let strings: LangStrings,
   groupWatchCount: number;
 
 presence.on("UpdateData", async () => {
-  const newLang: string = await presence.getSetting("lang"),
+  const newLang: string = await presence.getSetting("lang").catch(() => "en"),
     privacy: boolean = await presence.getSetting("privacy"),
     time: boolean = await presence.getSetting("time"),
     buttons: boolean = await presence.getSetting("buttons"),
@@ -185,9 +185,8 @@ presence.on("UpdateData", async () => {
 
     // Disney+ Hotstar video
   } else if (isHostHS && /\/(tv|movies)\//.test(location.pathname)) {
-    const video: HTMLVideoElement = document.querySelector(
-      ".player-base video"
-    );
+    const video: HTMLVideoElement =
+      document.querySelector(".player-base video");
 
     if (video && !isNaN(video.duration)) {
       const timestamps: number[] = presence.getTimestampsfromMedia(video),

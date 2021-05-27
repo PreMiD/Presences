@@ -20,9 +20,11 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing a user's profile";
       presenceData.state = user;
     } else {
-      const fileType: string = (document.querySelector(
-          "#workspace-root > div > div.jsx-132086333.content > div.jsx-77352756.workspace-page-wrapper.desktop > div > div > div:nth-child(1) > header > div > div.jsx-1874997921.left > div > div > div.jsx-2652062152.workspace-header-info > div.jsx-2652062152.language-icon-container > img"
-        ) as HTMLImageElement).alt,
+      const fileType: string = (
+          document.querySelector(
+            "#workspace-root > div > div.jsx-132086333.content > div.jsx-77352756.workspace-page-wrapper.desktop > div > div > div:nth-child(1) > header > div > div.jsx-2650114939.left > div > div > div.jsx-2652062152.workspace-header-info > div.jsx-2652062152.language-icon-container > img"
+          ) as HTMLImageElement
+        ).alt,
         projectName: string =
           Path.split("/").filter((elm) => elm !== "")[1] +
           `${
@@ -38,9 +40,9 @@ presence.on("UpdateData", () => {
     presenceData.details = "Browsing languages:";
     presenceData.state = "All languages";
   } else if (Path.startsWith("/new")) {
-    const language: string = (document.querySelector(
-      "#languageSelector-input"
-    ) as HTMLInputElement).value;
+    const language: string = (
+      document.querySelector("#languageSelector-input") as HTMLInputElement
+    ).value;
     presenceData.details = "Creating new repl:";
     presenceData.state = `${language}`;
   } else if (Path.startsWith("/repls")) {

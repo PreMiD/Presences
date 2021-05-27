@@ -6,10 +6,11 @@
   },
   "service": "SyncTube",
   "description": {
-    "en": "A simple platform where you can create rooms, manage permissions and chat while watching YouTube videos synchronized with your friends."
+    "en": "A simple platform where you can create rooms, manage permissions and chat while watching YouTube videos synchronized with your friends.",
+    "nl": "Een eenvoudig platform waar je kamers kunt aanmaken, rechten kunt beheren en kunt chatten terwijl je samen met je vrienden gesynchroniseerde YouTube-video's bekijkt."
   },
   "url": "sync-tube.de",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/I7PhFlB.png",
   "thumbnail": "https://i.imgur.com/2cTHWAe.png",
   "color": "#381010",

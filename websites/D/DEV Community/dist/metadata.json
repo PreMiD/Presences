@@ -5,14 +5,22 @@
   },
   "service": "DEV Community",
   "description": {
-    "en": "A constructive and inclusive social network for software developers. With you every step of your journey."
+    "en": "A constructive and inclusive social network for software developers. With you every step of your journey.",
+    "nl": "Een constructief en inclusief sociaal netwerk voor software ontwikkelaars. Bij u elke stap van uw reis."
   },
-  "url": ["dev.to", "shop.dev.to"],
-  "version": "1.0.2",
+  "url": [
+    "dev.to",
+    "shop.dev.to"
+  ],
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/dcx0aN7.png",
   "thumbnail": "https://i.imgur.com/1qV4crv.png",
   "color": "#7289DA",
-  "tags": ["tutorials", "dev-to", "community"],
+  "tags": [
+    "tutorials",
+    "dev-to",
+    "community"
+  ],
   "category": "socials",
   "settings": [
     {

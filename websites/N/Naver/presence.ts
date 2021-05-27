@@ -13,6 +13,8 @@ const presence = new Presence({
         return "NAVER_PAPAGO";
       case !!url.match(/blog[.]naver[.]([a-z0-9]+)/):
         return "NAVER_BLOG";
+      case !!url.match(/cafe[.]naver[.]([a-z0-9]+)/):
+        return "NAVER_CAFE";
       case !!url.match(/([a-z]+)[.]naver[.]([a-z0-9]+)/):
         return "NAVER";
       default:
@@ -37,6 +39,7 @@ const presence = new Presence({
           | "NAVER_WEBTOON"
           | "NAVER_TV"
           | "NAVER_BLOG"
+          | "NAVER_CAFE"
           | "ANY";
         setPresenceData?: () => void;
         data?: {
@@ -78,7 +81,8 @@ const presence = new Presence({
     presence: null
   };
 
-let blog: string;
+let blog: string,
+  cafeTitle: string;
 
 presence.on("iFrameData", (data: { blog: string }) => {
   blog = data.blog;
@@ -93,7 +97,10 @@ presence.on("UpdateData", async () => {
   const ghtEnv: {
       sPageName: string;
       sChannelName: string;
-    } = await presence.getPageletiable("ghtEnv"),
+    } = {
+      sPageName: document.querySelector("div.ch_inf.open") ? "channel" : "",
+      sChannelName: document.querySelector("strong.rmc_name")?.textContent
+    },
     presenceData: PresenceData = {
       largeImageKey: data.service?.toLowerCase(),
       details: "Browsing...",
@@ -101,36 +108,37 @@ presence.on("UpdateData", async () => {
     },
     getImageOrTimestamp = (
       video: HTMLVideoElement,
-      type: "starts" | "ends" | "imageKey" | "imageText"
+      type:
+        | "startTimestamp"
+        | "endTimestamp"
+        | "smallImageKey"
+        | "smallImageText"
     ) => {
       const timestamps = presence.getTimestamps(
           video?.currentTime,
           video?.duration
         ),
         tempData: {
-          start: number;
-          end: number;
-          key: string;
-          text: string;
+          startTimestamp: number;
+          endTimestamp: number;
+          smallImageKey: string;
+          smallImageText: string;
         } = {
-          start: timestamps[0],
-          end: timestamps[1],
-          key: `${data.service.toLowerCase()}_play`,
-          text: "Playing"
+          startTimestamp: timestamps[0],
+          endTimestamp: timestamps[1],
+          smallImageKey: `${data.service.toLowerCase()}_play`,
+          smallImageText: "Playing"
         };
 
       if (video?.paused) {
-        delete tempData.start;
-        delete tempData.end;
+        delete tempData.startTimestamp;
+        delete tempData.endTimestamp;
 
-        tempData.key = `${data.service.toLowerCase()}_pause`;
-        tempData.text = "Paused";
+        tempData.smallImageKey = `${data.service.toLowerCase()}_pause`;
+        tempData.smallImageText = "Paused";
       }
 
-      if (type === "starts") return tempData.start;
-      else if (type === "ends") return tempData.end;
-      else if (type === "imageKey") return tempData.key;
-      else if (type === "imageText") return tempData.text;
+      return tempData[type];
     };
 
   data.settings = [
@@ -153,48 +161,56 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = <number>(
             getImageOrTimestamp(
               document.querySelector('[data-role="videoEl"]'),
-              "starts"
+              "startTimestamp"
             )
           );
           presenceData.endTimestamp = <number>(
             getImageOrTimestamp(
               document.querySelector('[data-role="videoEl"]'),
-              "ends"
+              "endTimestamp"
             )
           );
 
           presenceData.smallImageKey = <string>(
             getImageOrTimestamp(
               document.querySelector('[data-role="videoEl"]'),
-              "imageKey"
+              "smallImageKey"
             )
           );
           presenceData.smallImageText = <string>(
             getImageOrTimestamp(
               document.querySelector('[data-role="videoEl"]'),
-              "imageText"
+              "smallImageText"
             )
           );
         } else {
-          presenceData.details = document.querySelector(
-            "h3._clipTitle"
-          )?.textContent;
+          presenceData.details =
+            document.querySelector("h3._clipTitle")?.textContent;
           presenceData.state = document
             .querySelector("div.ch_tit")
             ?.textContent.trim();
 
           presenceData.startTimestamp = <number>(
-            getImageOrTimestamp(document.querySelector("video"), "starts")
+            getImageOrTimestamp(
+              document.querySelector("video"),
+              "startTimestamp"
+            )
           );
           presenceData.endTimestamp = <number>(
-            getImageOrTimestamp(document.querySelector("video"), "ends")
+            getImageOrTimestamp(document.querySelector("video"), "endTimestamp")
           );
 
           presenceData.smallImageKey = <string>(
-            getImageOrTimestamp(document.querySelector("video"), "imageKey")
+            getImageOrTimestamp(
+              document.querySelector("video"),
+              "smallImageKey"
+            )
           );
           presenceData.smallImageText = <string>(
-            getImageOrTimestamp(document.querySelector("video"), "imageText")
+            getImageOrTimestamp(
+              document.querySelector("video"),
+              "smallImageText"
+            )
           );
 
           presenceData.buttons = [
@@ -213,13 +229,13 @@ presence.on("UpdateData", async () => {
     },
     channel: {
       env: true,
-      service: "NAVER",
+      service: "NAVER_TV",
       data: {
         details: {
           setTo: "Viewing channel:"
         },
         state: {
-          setTo: ghtEnv?.sChannelName
+          setTo: ghtEnv.sChannelName
         },
         buttons: {
           setTo: [
@@ -420,17 +436,17 @@ presence.on("UpdateData", async () => {
           presenceData.state = "• HIGHLIGHT";
 
           presenceData.startTimestamp = <number>(
-            getImageOrTimestamp(video, "starts")
+            getImageOrTimestamp(video, "startTimestamp")
           );
           presenceData.endTimestamp = <number>(
-            getImageOrTimestamp(video, "ends")
+            getImageOrTimestamp(video, "endTimestamp")
           );
 
           presenceData.smallImageKey = <string>(
-            getImageOrTimestamp(video, "imageKey")
+            getImageOrTimestamp(video, "smallImageKey")
           );
           presenceData.smallImageText = <string>(
-            getImageOrTimestamp(video, "imageText")
+            getImageOrTimestamp(video, "smallImageText")
           );
 
           presenceData.buttons = [
@@ -510,21 +526,34 @@ presence.on("UpdateData", async () => {
       }
     },
     "/([a-z])": {
-      service: "NAVER_BLOG",
-      data: {
-        details: {
-          setTo: "Reading blog of:"
-        },
-        state: {
-          setTo: blog
-        },
-        buttons: {
-          setTo: [
+      service: "ANY",
+      async setPresenceData(){
+        if (data.service === "NAVER_BLOG"){
+          presenceData.details = "Reading blog of:";
+          presenceData.state = blog;
+          
+          presenceData.buttons = [
             {
-              url: document.baseURI,
+              url: document.URL,
               label: "Read Blog"
             }
-          ]
+          ];
+        } else if (data.service === "NAVER_CAFE"){
+          if (!cafeTitle) cafeTitle = document.querySelector("h1.d-none")?.textContent;
+          if (cafeTitle){
+            presenceData.details = "Viewing cafe:";
+            presenceData.state = cafeTitle;
+  
+            presenceData.buttons = [
+              {
+                label: "View Cafe",
+                url: document.URL
+              }
+            ];
+          } else if (document.location.pathname.includes("/search/")){
+            presenceData.details = "Searching for:";
+            presenceData.state = (new URLSearchParams(document.location.search)).get("q");
+          }
         }
       }
     }
@@ -535,7 +564,7 @@ presence.on("UpdateData", async () => {
       (document.location.pathname.match(k) &&
         (data.service === v.service || v.service === "ANY") &&
         !v.env) ||
-      (v.env && k === ghtEnv?.sPageName)
+      (v.env && k === ghtEnv.sPageName)
     ) {
       if (v.setPresenceData) {
         v.setPresenceData();

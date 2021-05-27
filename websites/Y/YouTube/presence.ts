@@ -58,7 +58,7 @@ async function getStrings() {
       watchVideoButton: "general.buttonWatchVideo",
       viewChannelButton: "general.buttonViewChannel"
     },
-    await presence.getSetting("lang")
+    await presence.getSetting("lang").catch(() => "en")
   );
 }
 
@@ -67,7 +67,7 @@ let strings = getStrings(),
 
 presence.on("UpdateData", async () => {
   //* Update strings if user selected another language.
-  const newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     time = await presence.getSetting("time"),
     vidDetail = await presence.getSetting("vidDetail"),
@@ -86,7 +86,6 @@ presence.on("UpdateData", async () => {
     let oldYouTube: boolean = null,
       YouTubeTV: boolean = null,
       YouTubeEmbed: boolean = null,
-      unlistedVideo = false,
       title: HTMLElement;
 
     //* Checking if user has old YT layout.
@@ -215,47 +214,41 @@ presence.on("UpdateData", async () => {
         ".style-scope.ytd-channel-name > a"
       ).textContent;
     }
-    const metaVideoElement = document.querySelector<HTMLLinkElement>(
-      "div[itemtype='http://schema.org/VideoObject'] > link"
-    );
-    if (
-      metaVideoElement &&
-      metaVideoElement.href ==
-        `https://www.youtube.com/watch?v=${document
-          .querySelector("#page-manager > ytd-watch-flexy")
-          .getAttribute("video-id")}`
-    ) {
-      const unlistedVideoElement = document.querySelector<HTMLMetaElement>(
-        "div[itemtype='http://schema.org/VideoObject'] > meta[itemprop='unlisted']"
-      );
+    const unlistedPathElement = document.querySelector<SVGPathElement>(
+        "g#privacy_unlisted > path"
+      ),
+      unlistedBadgeElement = document.querySelector<SVGPathElement>(
+        "h1.title+ytd-badge-supported-renderer path"
+      ),
       unlistedVideo =
-        unlistedVideoElement && unlistedVideoElement.content === "True";
-    }
-    const presenceData: PresenceData = {
-      details: vidDetail
-        .replace("%title%", finalTitle)
-        .replace("%uploader%", finalUploader),
-      state: vidState
-        .replace("%title%", finalTitle)
-        .replace("%uploader%", finalUploader),
-      largeImageKey: "yt_lg",
-      smallImageKey: video.paused
-        ? "pause"
-        : video.loop
-        ? "repeat-one"
-        : isPlaylistLoop
-        ? "repeat"
-        : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : video.loop
-        ? "On loop"
-        : isPlaylistLoop
-        ? "Playlist on loop"
-        : (await strings).play,
-      startTimestamp: timestamps[0],
-      endTimestamp: timestamps[1]
-    };
+        unlistedPathElement !== null &&
+        unlistedBadgeElement !== null &&
+        unlistedPathElement.getAttribute("d") ===
+          unlistedBadgeElement.getAttribute("d"),
+      presenceData: PresenceData = {
+        details: vidDetail
+          .replace("%title%", finalTitle)
+          .replace("%uploader%", finalUploader),
+        state: vidState
+          .replace("%title%", finalTitle)
+          .replace("%uploader%", finalUploader),
+        largeImageKey: "yt_lg",
+        smallImageKey: video.paused
+          ? "pause"
+          : video.loop
+          ? "repeat-one"
+          : isPlaylistLoop
+          ? "repeat"
+          : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : video.loop
+          ? "On loop"
+          : isPlaylistLoop
+          ? "Playlist on loop"
+          : (await strings).play,
+        endTimestamp: timestamps[1]
+      };
 
     if (vidState.includes("{0}")) delete presenceData.state;
 
@@ -308,9 +301,11 @@ presence.on("UpdateData", async () => {
           },
           {
             label: (await strings).viewChannelButton,
-            url: (document.querySelector(
-              "#top-row > ytd-video-owner-renderer > a"
-            ) as HTMLLinkElement).href
+            url: (
+              document.querySelector(
+                "#top-row > ytd-video-owner-renderer > a"
+              ) as HTMLLinkElement
+            ).href
           }
         ];
       }

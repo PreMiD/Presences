@@ -5,10 +5,11 @@
   },
   "service": "Dash Radio",
   "description": {
-    "en": "100% Free Music. More Variety. Zero Commercials. The Best DJ's & Stations. No BS"
+    "en": "100% Free Music. More Variety. Zero Commercials. The Best DJ's & Stations. No BS",
+    "nl": "100% gratis muziek. Meer afwisseling. Geen reclames. De beste dj's en stations. Geen BS"
   },
   "url": "dashradio.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/o4Ea2f9.png",
   "thumbnail": "https://i.imgur.com/WrEODCb.png",
   "color": "#55effa",

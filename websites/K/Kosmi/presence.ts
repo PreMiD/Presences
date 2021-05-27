@@ -37,9 +37,11 @@ presence.on("UpdateData", async () => {
       ) as HTMLDivElement;
       userCount =
         parseInt(
-          (document.querySelectorAll(
-            `div[class="ui tabular swipableMenu-xjk menu"] > a`
-          )[1] as HTMLDivElement).textContent.trim(),
+          (
+            document.querySelectorAll(
+              `div[class="ui tabular swipableMenu-xjk menu"] > a`
+            )[1] as HTMLDivElement
+          ).textContent.trim(),
           10
         ) - 1;
     } catch {

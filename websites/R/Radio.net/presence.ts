@@ -58,9 +58,9 @@ presence.on("UpdateData", async () => {
           presenceData.endTimestamp = browsingStamp;
 
           //Get the start / current position
-          const [start, end] = (document.querySelector(
-            ".player__timing-wrap"
-          ) as HTMLElement).textContent
+          const [start, end] = (
+            document.querySelector(".player__timing-wrap") as HTMLElement
+          ).textContent
             .split("|")
             .map((e) => e.split(":").reverse());
 

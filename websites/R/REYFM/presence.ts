@@ -54,8 +54,10 @@ function findChannel(): string {
       for (const channel of rows.children) {
         if (
           !channel.className.includes("desktop") &&
-          (channel.firstElementChild.children[2]
-            .firstElementChild as HTMLImageElement).src.includes("stop.png")
+          (
+            channel.firstElementChild.children[2]
+              .firstElementChild as HTMLImageElement
+          ).src.includes("stop.png")
         ) {
           return channel.firstElementChild.id.replace("channel-", "");
         }
@@ -148,9 +150,9 @@ presence.on("UpdateData", async () => {
       (document.querySelector("#player") as HTMLElement).style.cssText !==
       "display: none;"
     ) {
-      const paused = (document.querySelector(
-        "#miniplayer-play"
-      ) as HTMLImageElement).src.includes("play.png");
+      const paused = (
+        document.querySelector("#miniplayer-play") as HTMLImageElement
+      ).src.includes("play.png");
 
       let track: string, artist: string;
 
@@ -208,9 +210,9 @@ presence.on("UpdateData", async () => {
         .querySelector("#channel-player")
         .className.replace("shadow channel-color-", ""),
       channel = channels.find((channel) => channel.id === channelID),
-      paused = (document.querySelector(
-        "#play"
-      ) as HTMLImageElement).src.includes("play.png");
+      paused = (
+        document.querySelector("#play") as HTMLImageElement
+      ).src.includes("play.png");
 
     paused
       ? (presenceData.smallImageKey = "pause")

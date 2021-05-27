@@ -5,10 +5,11 @@
   },
   "service": "e621",
   "description": {
-    "en": "e621 is a mature image board replacement for the image board Sidechan. A general audience image board, e926 (formerly e961) complements this site. E621 runs off of the Ouroboros platform, a danbooru styled software specifically designed for the site."
+    "en": "e621 is a mature image board replacement for the image board Sidechan. A general audience image board, e926 (formerly e961) complements this site. E621 runs off of the Ouroboros platform, a danbooru styled software specifically designed for the site.",
+    "nl": "e621 is een volwassen imageboardvervanger voor het imageboard Sidechan. Een image board voor algemeen publiek, e926 (voorheen e961) vult deze site aan. E621 draait op het Ouroboros platform, een danbooru-achtige software speciaal ontworpen voor de site."
   },
   "url": "e621.net",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/kw3r8T7.png",
   "thumbnail": "https://i.imgur.com/m0h7xnO.png",
   "color": "#284A81",

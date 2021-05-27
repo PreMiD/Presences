@@ -1,35 +1,36 @@
 {
-    "$schema": "https://schemas.premid.app/metadata/1.0",
-    "author": {
-      "name": "isladot",
-      "id": "385895205406244865"
-    },
-    "url": "www.atlassian.com",
-    "description": {
-      "en": "Jira Software is built for every member of your software team to plan, track, and release great software. WARN: For now, only projects hosted on atlassian domains are supported.",
-      "it": "Jira Software è creato apposta per ogni membro del tuo team di sviluppo software, per pianificare, tenere traccia e rilasciare software fantastici. WARN: Per il momento, sono supportati solo i progetti hostati sui domini atlassian."
-    },
-    "service": "Jira Software",
-    "version": "1.0.0",
-    "logo": "https://i.imgur.com/ZPX99We.png",
-    "thumbnail": "https://i.imgur.com/lRV5RQt.png",
-    "color": "#2684FF",
-    "tags": [
-      "projects",
-      "board",
-      "software",
-      "management",
-      "issues",
-      "tasks"
-    ],
-    "category": "other",
-    "regExp": "[a-z0-9]+[.]atlassian[.]net",
-    "settings": [
-      {
-        "id": "showSettingsSections",
-        "title": "Show Settings sub-sections.",
-        "icon": "fas fa-cogs",
-        "value": true
-      }
-    ]
-  }
+  "$schema": "https://schemas.premid.app/metadata/1.0",
+  "author": {
+    "name": "isladot",
+    "id": "385895205406244865"
+  },
+  "url": "www.atlassian.com",
+  "description": {
+    "en": "Jira Software is built for every member of your software team to plan, track, and release great software. WARN: For now, only projects hosted on atlassian domains are supported.",
+    "it": "Jira Software è creato apposta per ogni membro del tuo team di sviluppo software, per pianificare, tenere traccia e rilasciare software fantastici. WARN: Per il momento, sono supportati solo i progetti hostati sui domini atlassian.",
+    "nl": "Jira Software is gebouwd zodat elk lid van uw softwareteam geweldige software kan plannen, volgen en vrijgeven. WAARSCHUWING: voorlopig worden alleen projecten ondersteund die worden gehost op atlassian-domeinen."
+  },
+  "service": "Jira Software",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/ZPX99We.png",
+  "thumbnail": "https://i.imgur.com/lRV5RQt.png",
+  "color": "#2684FF",
+  "tags": [
+    "projects",
+    "board",
+    "software",
+    "management",
+    "issues",
+    "tasks"
+  ],
+  "category": "other",
+  "regExp": "[a-z0-9]+[.]atlassian[.]net",
+  "settings": [
+    {
+      "id": "showSettingsSections",
+      "title": "Show Settings sub-sections.",
+      "icon": "fas fa-cogs",
+      "value": true
+    }
+  ]
+}

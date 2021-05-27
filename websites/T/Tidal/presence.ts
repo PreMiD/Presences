@@ -21,7 +21,7 @@ const getLanguages = async () => {
         repeat: "general.repeat",
         repeatAll: "general.repeatAll"
       },
-      await presence.getSetting("language")
+      await presence.getSetting("language").catch(() => "en")
     );
   },
   SongQuality = (quality: string): string => {
@@ -61,7 +61,7 @@ let strings: Promise<langStrings> = getLanguages(),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("language"),
+  const newLang = await presence.getSetting("language").catch(() => "en"),
     privacy = await presence.getSetting("privacy"),
     showSongQuality = await presence.getSetting("showQuality"),
     songTitle: string | null = document.querySelector<HTMLElement>(

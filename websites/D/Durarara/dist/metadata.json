@@ -5,10 +5,11 @@
   },
   "service": "Durarara",
   "description": {
-    "en": "Durarara!! fan community, DOLLARS Chatroom."
+    "en": "Durarara!! fan community, DOLLARS Chatroom.",
+    "nl": "Durarara!! fan gemeenschap, DOLLARS chatroom."
   },
   "url": "drrr.com",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/BBE7mHc.jpg",
   "thumbnail": "https://i.imgur.com/h4NdSYG.png",
   "color": "#696969",

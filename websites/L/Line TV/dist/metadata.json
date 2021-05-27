@@ -6,10 +6,11 @@
   },
   "url": "tv.line.me",
   "description": {
-    "en": "LINE TV is a global video streaming service. You can watch high-quality video content in a variety of categories such as TV dramas, entertainment shows."
+    "en": "LINE TV is a global video streaming service. You can watch high-quality video content in a variety of categories such as TV dramas, entertainment shows.",
+    "nl": "LINE TV is een wereldwijde videostreamingservice. U kunt video-inhoud van hoge kwaliteit bekijken in verschillende categorieën, zoals tv-drama's en entertainmentprogramma's."
   },
   "service": "Line TV",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "logo": "https://i.imgur.com/F2sWIqN.png",
   "thumbnail": "https://i.imgur.com/5sqClBZ.png",
   "color": "#01d145",

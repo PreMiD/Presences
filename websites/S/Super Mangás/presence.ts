@@ -38,12 +38,10 @@ presence.on("UpdateData", async () => {
   const selectHunter: HTMLSelectElement = document.querySelector(
     "#corpo > div:nth-child(1) > div.box_content > div > select"
   );
-  const indicacaoTipo: HTMLSelectElement = document.querySelector(
-    "#conteudoSelect"
-  );
-  const indicacaoGenero: HTMLSelectElement = document.querySelector(
-    "#generoSelect"
-  );
+  const indicacaoTipo: HTMLSelectElement =
+    document.querySelector("#conteudoSelect");
+  const indicacaoGenero: HTMLSelectElement =
+    document.querySelector("#generoSelect");
   const nomePerfil: HTMLElement = document.querySelector(
     "#corpo > header > div.perfil_header_photos > div.perfil_box_photo > h1"
   );
