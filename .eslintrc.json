@@ -24,6 +24,7 @@
     "indent": "off",
     "camelcase": "off",
     "curly": ["warn", "multi-or-nest"],
+    "eqeqeq": ["error", "always"],
     "comma-dangle": ["warn", "never"],
     "one-var": ["warn", "consecutive"],
     "linebreak-style": ["warn", "unix"],
