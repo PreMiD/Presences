@@ -34,7 +34,7 @@ else if (document.location.pathname.includes("/results")) {
 } else if (document.location.pathname.includes("/user")) {
   const username = document.querySelector("h1.text-2xl.font-semibold.text-white")?.textContent,
   templates = document.querySelectorAll("span.text-on-naked.text-xs")[0]?.textContent,
-  liked = document.querySelectorAll("span.text-on-naked.text-xs")[1]?.textContent
+  liked = document.querySelectorAll("span.text-on-naked.text-xs")[1]?.textContent;
   presenceData.details = `Viewing ${username.endsWith("s") ? `${username + "'"}` : `${username + "'s"}`} profile`;
   presenceData.state = `🖼️ ${templates} & ❤️ ${liked}`;
   presenceData.buttons = [
