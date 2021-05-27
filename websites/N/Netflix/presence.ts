@@ -86,12 +86,12 @@ presence.on("UpdateData", async () => {
 
   if (document.location.pathname.includes("/watch")) {
     const video: HTMLVideoElement = document.querySelector(
-      ".VideoContainer video"
+      "video"
     );
     if (video && !isNaN(video.duration)) {
-      const showCheck = document.querySelector(
-          "[class$='title'] .ellipsize-text span"
-        )
+      const showCheck =(document.querySelector(
+        "[class$='title'] .ellipsize-text span"
+        ) ?? $("div", "data-uia", "video-title").childElementCount)
           ? true
           : false,
         timestamps = presence.getTimestampsfromMedia(video);
@@ -114,36 +114,34 @@ presence.on("UpdateData", async () => {
           if (
             document.querySelector(
               "[class$='title'] .ellipsize-text span:nth-child(3)"
-            )
+            ) ?? $("div", "data-uia", "video-title").children[2]
           ) {
             //* if the episode has a title, it's added to season and episode numbers
             state =
-              document.querySelector("[class$='title'] .ellipsize-text span")
-                .textContent +
+              (document.querySelector("[class$='title'] .ellipsize-text span")
+              ?? $("div", "data-uia", "video-title").children[1]).textContent +
               " " +
-              document.querySelector(
+              (document.querySelector(
                 "[class$='title'] .ellipsize-text span:nth-child(3)"
-              ).textContent;
+              ) ?? $("div", "data-uia", "video-title").children[2]).textContent;
           } else {
             //* if no episode title, it proceeds with the season and episode numbers only
-            state = document.querySelector(
+            state = (document.querySelector(
               "[class$='title'] .ellipsize-text span"
-            ).textContent;
+            ) ?? $("div", "data-uia", "video-title").children[1]).textContent;
           }
 
           if (!privacy) {
             presenceData.details = seriesDetail
               .replace(
                 "%title%",
-                document.querySelector("[class$='title'] .ellipsize-text h4")
-                  .textContent
+                (document.querySelector("[class$='title'] .ellipsize-text h4") ?? $("div", "data-uia", "video-title").children[0]).textContent
               )
               .replace("%episode%", state);
             presenceData.state = seriesState
               .replace(
                 "%title%",
-                document.querySelector("[class$='title'] .ellipsize-text h4")
-                  .textContent
+                (document.querySelector("[class$='title'] .ellipsize-text h4") ?? $("div", "data-uia", "video-title").children[0]).textContent
               )
               .replace("%episode%", state);
             presenceData.buttons = [
@@ -170,9 +168,9 @@ presence.on("UpdateData", async () => {
         }
       } else {
         //* if not a show
-        const title = document.querySelector(
+        const title = (document.querySelector(
           "[class$='title'] h4.ellipsize-text"
-        ).textContent;
+        ) ??  $("div", "data-uia", "video-title")).textContent;
         if (/\(([^)]+)\)/.test(title.toLowerCase())) {
           if (showSeries && !privacy) {
             //* if is an extra, trailer, teaser or something else
@@ -367,3 +365,8 @@ presence.on("UpdateData", async () => {
     }
   }
 });
+
+function $(tag: string, attribute: string, is: string){
+  return Array.from(document.querySelectorAll(tag))
+       .find((x) => x.getAttribute(attribute) === is);
+}
