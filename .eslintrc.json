@@ -42,7 +42,6 @@
     "dot-notation": "error",
     "no-case-declarations": "error",
     "no-mixed-operators": "error",
-    "nonblock-statement-body-position": ["error", "beside"],
     "brace-style": "error",
     "template-curly-spacing": "warn",
     "no-console": "error",
