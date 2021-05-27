@@ -6,12 +6,11 @@ const presence = new Presence({
     pause: "presence.playback.paused",
     live: "presence.activity.live",
     search: "presence.activity.searching"
-  });
-
-function capitalize(text: string): string {
-  text = text.toLowerCase();
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
+  }),
+  capitalize = (text: string): string => {
+    text = text.toLowerCase();
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  };
 
 let elapsed: number = undefined,
   oldUrl: string = undefined,
@@ -28,7 +27,7 @@ presence.on("UpdateData", async () => {
     startTimestamp = undefined,
     endTimestamp = undefined;
 
-  const href = window.location.href,
+  const { href } = window.location,
     path = window.location.pathname;
 
   if (href !== oldUrl) {
@@ -46,9 +45,7 @@ presence.on("UpdateData", async () => {
     details = "Viewing Category";
     if (header) {
       state = header.textContent;
-      if (title) {
-        state = state + ` (${title.textContent})`;
-      }
+      if (title) state = `${state} (${title.textContent})`;
     }
   } else if (path.includes("/genre")) {
     header = document.querySelector(".Hub__title");
@@ -56,9 +53,7 @@ presence.on("UpdateData", async () => {
     details = "Viewing Genre";
     if (header) {
       state = header.textContent;
-      if (title) {
-        state = state + ` (${title.textContent})`;
-      }
+      if (title) state = `${state} (${title.textContent})`;
     }
   } else if (path.includes("/series")) {
     title = document.querySelector(".Masthead__title");
@@ -66,9 +61,7 @@ presence.on("UpdateData", async () => {
     details = "Viewing Series";
     if (title) {
       state = title.textContent;
-      if (item) {
-        state = state + `'s ${item.textContent}`;
-      }
+      if (item) state = `${state}'s ${item.textContent}`;
     }
   } else if (path.includes("/movie")) {
     title = document.querySelector(".Masthead__title");
@@ -76,9 +69,7 @@ presence.on("UpdateData", async () => {
     details = "Viewing Movie";
     if (title) {
       state = title.textContent;
-      if (item) {
-        state = state + `'s ${item.textContent}`;
-      }
+      if (item) state = `${state}'s ${item.textContent}`;
     }
   } else if (path.includes("/network")) {
     const brand: HTMLImageElement = document.querySelector(
@@ -88,9 +79,7 @@ presence.on("UpdateData", async () => {
     details = "Viewing Network";
     if (brand) {
       state = brand.alt;
-      if (item) {
-        state = state + `'s ${item.textContent}`;
-      }
+      if (item) state = `${state}'s ${item.textContent}`;
     }
   } else if (path.includes("/sports_episode")) {
     title = document.querySelector(".Masthead__title");
@@ -98,9 +87,7 @@ presence.on("UpdateData", async () => {
     details = "Viewing Sports Episode";
     if (title) {
       state = title.textContent;
-      if (item) {
-        state = state + `'s ${item.textContent}`;
-      }
+      if (item) state = `${state}'s ${item.textContent}`;
     }
   } else if (path.includes("/sports_team")) {
     title = document.querySelector(".Masthead__title");
@@ -108,18 +95,14 @@ presence.on("UpdateData", async () => {
     details = "Viewing Sports Team";
     if (title) {
       state = title.textContent;
-      if (item) {
-        state = state + `'s ${item.textContent}`;
-      }
+      if (item) state = `${state}'s ${item.textContent}`;
     }
   } else if (path.includes("/search")) {
     const input: HTMLInputElement = document.querySelector(".cu-search-input");
     details = "Searching";
     smallImageKey = "search";
     smallImageText = (await strings).search;
-    if (input && input.value.length > 0) {
-      state = input.value;
-    }
+    if (input && input.value.length > 0) state = input.value;
   } else if (path.includes("/live")) {
     const category = document.querySelector(
       ".LiveGuide__filter-item--selected"
@@ -128,18 +111,13 @@ presence.on("UpdateData", async () => {
     details = "Viewing Live";
     if (category) {
       state = capitalize(category.textContent);
-      if (title) {
-        state = state + ` (${title.textContent})`;
-      }
+      if (title) state = `${state} (${title.textContent})`;
     }
-  } else if (path.includes("/my-stuff")) {
-    details = "Viewing My Stuff";
-  } else if (path.includes("/manage-dvr")) {
+  } else if (path.includes("/my-stuff")) details = "Viewing My Stuff";
+  else if (path.includes("/manage-dvr")) {
     item = document.querySelector(".Subnav__item.active");
     details = "Viewing My DVR";
-    if (item) {
-      state = capitalize(item.textContent);
-    }
+    if (item) state = capitalize(item.textContent);
   } else if (path.includes("/watch")) {
     video = document.querySelector(".content-video-player");
     if (video) {
@@ -151,18 +129,17 @@ presence.on("UpdateData", async () => {
         ),
         live = timestamps[1] === Infinity;
       details = "Watching";
-      if (title) {
-        details = title.textContent;
-      }
-      if (content && content.textContent.length > 0) {
+      if (title) details = title.textContent;
+
+      if (content && content.textContent.length > 0)
         state = content.textContent;
-      }
+
       smallImageKey = live ? "live" : video.paused ? "pause" : "play";
       smallImageText = live
         ? (await strings).live
         : video.paused
-        ? (await strings).pause
-        : (await strings).play;
+          ? (await strings).pause
+          : (await strings).play;
       startTimestamp = live ? elapsed : timestamps[0];
       endTimestamp = live ? undefined : timestamps[1];
       if (video.paused) {
@@ -185,18 +162,17 @@ presence.on("UpdateData", async () => {
           ),
           live = timestamps[1] === Infinity;
         details = "Watching";
-        if (title) {
-          details = title.textContent;
-        }
-        if (content && content.textContent.length > 0) {
+        if (title) details = title.textContent;
+
+        if (content && content.textContent.length > 0)
           state = content.textContent;
-        }
+
         smallImageKey = live ? "live" : video.paused ? "pause" : "play";
         smallImageText = live
           ? (await strings).live
           : video.paused
-          ? (await strings).pause
-          : (await strings).play;
+            ? (await strings).pause
+            : (await strings).play;
         startTimestamp = live ? elapsed : timestamps[0];
         endTimestamp = live ? undefined : timestamps[1];
         if (video.paused) {
@@ -208,14 +184,15 @@ presence.on("UpdateData", async () => {
   }
 
   const data: PresenceData = {
-    details: details,
-    state: state,
+    details,
+    state,
     largeImageKey: "hulu",
-    smallImageKey: smallImageKey,
-    smallImageText: smallImageText,
-    startTimestamp: startTimestamp,
-    endTimestamp: endTimestamp
+    smallImageKey,
+    smallImageText,
+    startTimestamp
   };
+  if (!endTimestamp) delete data.endTimestamp;
+
   presence.setActivity(data, video ? !video.paused : true);
   presence.setTrayTitle(details);
 });
