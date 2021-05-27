@@ -13,11 +13,6 @@ let video = {
   paused: true
 };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
 function getTimestamps(
   videoTime: number,
   videoDuration: number
@@ -50,9 +45,24 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "icon"
   };
+  
+  /**
+  * Get Timestamps
+   * @param {Number} videoTime Current video time seconds
+  * @param {Number} videoDuration Video duration seconds
+  */
+
+  function getTimestamps(
+    videoTime: number,
+    videoDuration: number
+    ): Array<number> {
+    const startTime = Date.now();
+    const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
+    return [Math.floor(startTime / 1000), endTime];
+  }
+  
 
   // Presence
-  if (path.hostname == "anime-sugoi.com" || path.hostname.includes("www.")) {
     if (document.location.pathname == "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "อนิเมะอัพเดตล่าสุด";
@@ -90,16 +100,6 @@ presence.on("UpdateData", async () => {
         episode = "ตอนที่ " + episode;
         presenceData.state = info[0];
         presenceData.details = episode;
-        presenceData.buttons = [
-    {
-            label: "รับชมตอนนี้",
-            url: path.href
-        },
-        {
-            label: "ดูตอนอื่นๆ",
-            url: document.querySelector<HTMLAnchorElement>("h3 > a").href
-        }
-    ];
       } else {
         let info;
         if (title1.includes("ซับไทย")) {
@@ -110,12 +110,6 @@ presence.on("UpdateData", async () => {
         episode = "Movie";
         presenceData.state = info;
         presenceData.details = episode;
-        presenceData.buttons = [
-          {
-            label: "รับชมเรื่องนี้",
-            url: path.href
-          }
-    ];
       }
 
       presenceData.smallImageKey = video.paused ? "pause" : "playing";
@@ -128,19 +122,12 @@ presence.on("UpdateData", async () => {
       }
     } else if (path.href) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "กำลังเลือกตอน ";
+      presenceData.details = "เลือกตอน ";
       presenceData.state = ep1;
-      presenceData.buttons = [
-    {
-            label: "ดูเรื่องนี้",
-            url: path.href
-        }
-    ];
     } else {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
-  }
 
   if (presenceData.details == null) {
     presence.setTrayTitle();
