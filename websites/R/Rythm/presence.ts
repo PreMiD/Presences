@@ -395,7 +395,7 @@ presence.on("UpdateData", async () => {
   // Setup
   const host = window.location.hostname,
     path = window.location.pathname.split("/").slice(1),
-    hash = window.location.hash,
+    hash = window.location.hash.slice(1),
     presenceData: PresenceData = {},
     showUsernames = await presence.getSetting("usernames"),
     showNicknames = await presence.getSetting("nicknames"),
@@ -560,7 +560,7 @@ presence.on("UpdateData", async () => {
   if (path[0] === "premium") {
     presenceData.largeImageKey = "r1";
     presenceData.details = "Premium";
-    if (hash === "#plans") presenceData.state = "Pricing and plans";
+    if (hash === "plans") presenceData.state = "Pricing and plans";
 
     presence.setActivity(presenceData);
     presence.setTrayTitle(`Rythm ${separator} Premium`);
