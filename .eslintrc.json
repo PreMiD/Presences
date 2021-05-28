@@ -22,7 +22,7 @@
     "no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
     "quotes": ["warn", "double"],
     "camelcase": ["warn", { "properties": "always" }],
-    "indent": ["warn", 2],
+    "indent": "off",
     "curly": ["warn", "multi-or-nest"],
     "eqeqeq": ["error", "always"],
     "comma-dangle": ["warn", "never"],
@@ -34,7 +34,6 @@
     "quote-props": ["error", "as-needed"],
     "prefer-destructuring": "warn",
     "prefer-template": "warn",
-    "space-before-function-paren": ["warn", "asyncArrow"],
     "space-before-blocks": ["error", "always"],
     "space-infix-ops": "warn",
     "func-call-spacing": ["error", "never"],
@@ -42,7 +41,6 @@
     "dot-notation": "error",
     "no-case-declarations": "error",
     "no-mixed-operators": "error",
-    "nonblock-statement-body-position": ["error", "beside"],
     "brace-style": "error",
     "template-curly-spacing": "warn",
     "no-console": "error",
@@ -55,7 +53,6 @@
         "message": "Usage of const enums is forbidden."
       }
     ],
-    "@typescript-eslint/camelcase": ["warn", { "properties": "always" }],
     "@typescript-eslint/no-explicit-any": "error"
   },
   "overrides": [
