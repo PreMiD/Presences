@@ -38,18 +38,16 @@ function getAuthorString(): string {
         .join(", ")} - ${
         authorsArray[authorsArray.length - 1].innerText
       } (${year})`;
-    }
-    //* Else, the song is a user upload
-    else {
+    } else {
+      //* Else, the song is a user upload
       //* Build output string
       authorString = `${authorsArray
         .slice(0, authorsArray.length - 1)
         .map((a) => a.innerText)
         .join(", ")} - ${authorsArray[authorsArray.length - 1].innerText}`;
     }
-  }
-  //* If from default YouTube music return Uploader
-  else
+  } else {
+    //* If from default YouTube music return Uploader
     authorString = (document.querySelector(
       "span yt-formatted-string.ytmusic-player-bar a"
     ) as HTMLAnchorElement)
@@ -63,6 +61,7 @@ function getAuthorString(): string {
             "span yt-formatted-string.ytmusic-player-bar span:nth-child(1)"
           ) as HTMLAnchorElement
         ).innerText;
+  }
 
   return authorString;
 }
@@ -101,16 +100,16 @@ presence.on("UpdateData", async () => {
         largeImageKey: "ytm_lg",
         smallImageKey: video.paused
           ? "pause"
-          : repeatMode == "ONE"
+          : repeatMode === "ONE"
           ? "repeat-one"
-          : repeatMode == "ALL"
+          : repeatMode === "ALL"
           ? "repeat"
           : "play",
         smallImageText: video.paused
           ? (await strings).pause
-          : repeatMode == "ONE"
+          : repeatMode === "ONE"
           ? "On loop"
-          : repeatMode == "ALL"
+          : repeatMode === "ALL"
           ? "Playlist on loop"
           : (await strings).play,
         startTimestamp: timestamps[0],

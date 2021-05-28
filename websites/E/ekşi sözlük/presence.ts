@@ -1,7 +1,7 @@
 const presence = new Presence({
     clientId: "643762072626266125"
   }),
-  pages = {
+  pages: { [k: string]: string } = {
     "/": "Ana Sayfa",
     "/giris": "Giriş",
     "/kayit": "Kayıt Ol",
@@ -50,7 +50,7 @@ presence.on("UpdateData", async () => {
       state: pages[page] || pages[page.slice(0, -1)],
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (entry && entry.textContent != "") {
+  } else if (entry && entry.textContent !== "") {
     presence.setActivity({
       largeImageKey: "es-logo",
       details: "Bir entry'e göz atıyor:",

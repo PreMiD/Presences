@@ -85,7 +85,7 @@ emanate.on("UpdateData", async () => {
       break;
     } else if (emanate.isListening()) {
       const songData = emanate.getSong(),
-        timestamps = emanate.getTimestamps(
+        [, endTimestamp] = emanate.getTimestamps(
           songData.currentTime,
           songData.duration
         );
@@ -97,7 +97,7 @@ emanate.on("UpdateData", async () => {
         .replace("%title%", songData.title)
         .replace("%author%", songData.author);
 
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
 
       presenceData.smallImageKey = songData.paused ? "pause" : "play";
       presenceData.smallImageText = songData.paused ? "Paused" : "Playing";

@@ -10,15 +10,15 @@ presence.on("UpdateData", () => {
   if (
     document.URL === "https://emojipedia.org/" ||
     document.URL === "https://emojipedia.org"
-  ) {
+  )
     presenceData.details = "Staring at the main page";
-  } else if (document.location.href.includes("https://blog.emojipedia.org")) {
+  else if (document.location.href.includes("https://blog.emojipedia.org")) {
     if (
       document.URL === "https://blog.emojipedia.org/" ||
       document.URL === "https://blog.emojipedia.org"
-    ) {
+    )
       presenceData.details = "Skimming through the blog homepage";
-    } else {
+    else {
       presenceData.details = "Reading a blog post...";
       presenceData.state =
         document.getElementsByClassName("post-full-title")[0].textContent;
@@ -29,68 +29,65 @@ presence.on("UpdateData", () => {
       presenceData.state = (
         document.getElementById("id_q") as HTMLInputElement
       ).value;
-    } else {
-      presenceData.state = "Nothing.. you alright there?";
-    }
+    } else presenceData.state = "Nothing.. you alright there?";
   } else {
     const categoryURLs = [
-      "https://emojipedia.org/people",
-      "https://emojipedia.org/nature",
-      "https://emojipedia.org/food-drink",
-      "https://emojipedia.org/activity",
-      "https://emojipedia.org/travel-places",
-      "https://emojipedia.org/symbols",
-      "https://emojipedia.org/flags"
-    ];
+        "https://emojipedia.org/people",
+        "https://emojipedia.org/nature",
+        "https://emojipedia.org/food-drink",
+        "https://emojipedia.org/activity",
+        "https://emojipedia.org/travel-places",
+        "https://emojipedia.org/symbols",
+        "https://emojipedia.org/flags"
+      ],
+      eventURLs = [
+        "https://emojipedia.org/australia-day",
+        "https://emojipedia.org/bastille-day",
+        "https://emojipedia.org/birthday",
+        "https://emojipedia.org/black-friday",
+        "https://emojipedia.org/canada-day",
+        "https://emojipedia.org/carnaval",
+        "https://emojipedia.org/chinese-new-year",
+        "https://emojipedia.org/christmas",
+        "https://emojipedia.org/cinco-de-mayo",
+        "https://emojipedia.org/coronavirus",
+        "https://emojipedia.org/diwali",
+        "https://emojipedia.org/dragon-boat-festival",
+        "https://emojipedia.org/easter",
+        "https://emojipedia.org/emoji-movie",
+        "https://emojipedia.org/fall-autumn",
+        "https://emojipedia.org/fathers-day",
+        "https://emojipedia.org/festivus",
+        "https://emojipedia.org/graduation",
+        "https://emojipedia.org/guy-fawkes",
+        "https://emojipedia.org/halloween",
+        "https://emojipedia.org/hanukkah",
+        "https://emojipedia.org/hearts",
+        "https://emojipedia.org/holi",
+        "https://emojipedia.org/independence-day",
+        "https://emojipedia.org/mothers-day",
+        "https://emojipedia.org/new-years-eve",
+        "https://emojipedia.org/olypmics",
+        "https://emojipedia.org/pride",
+        "https://emojipedia.org/queens-birthday",
+        "https://emojipedia.org/ramadan",
+        "https://emojipedia.org/spring",
+        "https://emojipedia.org/st-patricks-day",
+        "https://emojipedia.org/spring",
+        "https://emojipedia.org/summer",
+        "https://emojipedia.org/super-bowl",
+        "https://emojipedia.org/thanksgiving",
+        "https://emojipedia.org/valentines-day",
+        "https://emojipedia.org/wedding-marriage",
+        "https://emojipedia.org/winter",
+        "https://emojipedia.org/winter-olympics",
+        "https://emojipedia.org/world-cup",
+        "https://emojipedia.org/world-emoji-day"
+      ];
 
-    const eventURLs = [
-      "https://emojipedia.org/australia-day",
-      "https://emojipedia.org/bastille-day",
-      "https://emojipedia.org/birthday",
-      "https://emojipedia.org/black-friday",
-      "https://emojipedia.org/canada-day",
-      "https://emojipedia.org/carnaval",
-      "https://emojipedia.org/chinese-new-year",
-      "https://emojipedia.org/christmas",
-      "https://emojipedia.org/cinco-de-mayo",
-      "https://emojipedia.org/coronavirus",
-      "https://emojipedia.org/diwali",
-      "https://emojipedia.org/dragon-boat-festival",
-      "https://emojipedia.org/easter",
-      "https://emojipedia.org/emoji-movie",
-      "https://emojipedia.org/fall-autumn",
-      "https://emojipedia.org/fathers-day",
-      "https://emojipedia.org/festivus",
-      "https://emojipedia.org/graduation",
-      "https://emojipedia.org/guy-fawkes",
-      "https://emojipedia.org/halloween",
-      "https://emojipedia.org/hanukkah",
-      "https://emojipedia.org/hearts",
-      "https://emojipedia.org/holi",
-      "https://emojipedia.org/independence-day",
-      "https://emojipedia.org/mothers-day",
-      "https://emojipedia.org/new-years-eve",
-      "https://emojipedia.org/olypmics",
-      "https://emojipedia.org/pride",
-      "https://emojipedia.org/queens-birthday",
-      "https://emojipedia.org/ramadan",
-      "https://emojipedia.org/spring",
-      "https://emojipedia.org/st-patricks-day",
-      "https://emojipedia.org/spring",
-      "https://emojipedia.org/summer",
-      "https://emojipedia.org/super-bowl",
-      "https://emojipedia.org/thanksgiving",
-      "https://emojipedia.org/valentines-day",
-      "https://emojipedia.org/wedding-marriage",
-      "https://emojipedia.org/winter",
-      "https://emojipedia.org/winter-olympics",
-      "https://emojipedia.org/world-cup",
-      "https://emojipedia.org/world-emoji-day"
-    ];
-
-    let bypass = false;
-    let isCategory = false;
-    let isEvent = false;
+    let bypass = false,
+      isCategory = false,
+      isEvent = false;
 
     for (let n = 0; n < categoryURLs.length; n++) {
       if (document.URL.includes(categoryURLs[n]))
@@ -132,7 +129,5 @@ presence.on("UpdateData", () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -45,12 +45,12 @@ presence.on("UpdateData", async () => {
       largeImageKey: "es-logo",
       details: "Bir şey arıyor:",
       state:
-        searchingFor && searchingFor.textContent != ""
+        searchingFor && searchingFor.textContent !== ""
           ? searchingFor.textContent
           : "Belirsiz",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (postTitle && postTitle.textContent != "") {
+  } else if (postTitle && postTitle.textContent !== "") {
     presence.setActivity({
       largeImageKey: "es-logo",
       details: "Bir gönderiyi okuyor:",

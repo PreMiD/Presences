@@ -317,9 +317,9 @@ function handleOfficialWebsite(): void {
       break;
     default:
       // reading the docs
-      if (location.pathname.startsWith("/community")) {
+      if (location.pathname.startsWith("/community"))
         presenceData.state = "On community page";
-      } else if (
+      else if (
         document.querySelector(".w-pagehead > h1") &&
         document.querySelector(".w-pagehead > h1").textContent === "Emby Blog"
       ) {
@@ -344,15 +344,10 @@ async function getApiClient(): Promise<ApiClient> {
  * @return {boolean} true once the variable has been imported, otherwise false
  */
 async function isEmbyWebClient(): Promise<boolean> {
-  if (!ApiClient) {
-    ApiClient = await getApiClient();
-  }
+  if (!ApiClient) ApiClient = await getApiClient();
 
-  if (typeof ApiClient === "object") {
-    if (ApiClient["_appName"] && ApiClient["_appName"] === APP_NAME) {
-      return true;
-    }
-  }
+  if (typeof ApiClient === "object")
+    if (ApiClient._appName && ApiClient._appName === APP_NAME) return true;
 
   return false;
 }
@@ -363,8 +358,8 @@ async function isEmbyWebClient(): Promise<boolean> {
 async function handleAudioPlayback(): Promise<void> {
   // sometimes the buttons are not created fast enough
   try {
-    const audioElem = document.getElementsByTagName("audio")[0],
-      infoContainer = document.getElementsByClassName("nowPlayingBar")[0],
+    const [audioElem] = document.getElementsByTagName("audio"),
+      [infoContainer] = document.getElementsByClassName("nowPlayingBar"),
       buttons = infoContainer.querySelectorAll("button.itemAction");
 
     presenceData.details = `Listening to: ${
@@ -380,8 +375,8 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp =
-          presence.getTimestampsfromMedia(audioElem)[1];
+        const [, endTimestamp] = presence.getTimestampsfromMedia(audioElem);
+        presenceData.endTimestamp = endTimestamp;
       } else delete presenceData.endTimestamp;
 
       // paused
@@ -403,7 +398,7 @@ async function handleAudioPlayback(): Promise<void> {
  */
 function getUserId(): string {
   try {
-    return ApiClient["_currentUser"]["Id"];
+    return ApiClient._currentUser.Id;
   } catch (e) {
     const servers = JSON.parse(
       localStorage.getItem("servercredentials3")
@@ -413,18 +408,13 @@ function getUserId(): string {
     if (location.hash.indexOf("?") > 0) {
       for (const param of location.hash.split("?")[1].split("&")) {
         if (param.startsWith("serverId")) {
-          const serverId = param.split("=")[1];
+          const [, serverId] = param.split("=");
 
-          for (const server of servers) {
-            if (server.Id === serverId) {
-              return server.UserId;
-            }
-          }
+          for (const server of servers)
+            if (server.Id === serverId) return server.UserId;
         }
       }
-    } else {
-      return servers[0].UserId;
-    }
+    } else return servers[0].UserId;
   }
 }
 
@@ -446,7 +436,7 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
     return;
   }
 
-  if (!ApiClient["_serverInfo"]["AccessToken"]) {
+  if (!ApiClient._serverInfo.AccessToken) {
     ApiClient = await getApiClient();
     return;
   }
@@ -457,20 +447,18 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
       location.pathname.split("/").slice(-2).join("/"),
       ""
     ),
-    baseLocation = location.protocol + "//" + location.host + basePath,
+    baseLocation = `${location.protocol}//${location.host}${basePath}`,
     res = await fetch(
       `${baseLocation}emby/Users/${getUserId()}/Items/${itemId}?` +
-        `X-Emby-Client=${ApiClient["_appName"]}&` +
-        `X-Emby-Device-Name=${ApiClient["_deviceName"]}&` +
-        `X-Emby-Device-Id=${ApiClient["_deviceId"]}&` +
-        `X-Emby-Client-Version=${ApiClient["_appVersion"]}&` +
-        `X-Emby-Token=${ApiClient["_serverInfo"]["AccessToken"]}`
+        `X-Emby-Client=${ApiClient._appName}&` +
+        `X-Emby-Device-Name=${ApiClient._deviceName}&` +
+        `X-Emby-Device-Id=${ApiClient._deviceId}&` +
+        `X-Emby-Client-Version=${ApiClient._appVersion}&` +
+        `X-Emby-Token=${ApiClient._serverInfo.AccessToken}`
     ),
     mediaInfo = await res.json();
 
-  if (media[itemId] === pending) {
-    media[itemId] = mediaInfo;
-  }
+  if (media[itemId] === pending) media[itemId] = mediaInfo;
 
   return media[itemId];
 }
@@ -486,7 +474,7 @@ async function handleVideoPlayback(): Promise<void> {
     return;
   }
 
-  const videoPlayerElem = document.getElementsByTagName("video")[0];
+  const [videoPlayerElem] = document.getElementsByTagName("video");
 
   // this variables content will be replaced in details and status properties on presenceData
   let title, subtitle;
@@ -501,18 +489,18 @@ async function handleVideoPlayback(): Promise<void> {
   // media metadata
   let mediaInfo: string | MediaInfo;
 
-  const videoPlayerContainerElem = document.body.getElementsByClassName(
+  const [videoPlayerContainerElem] = document.body.getElementsByClassName(
     "videoPlayerContainer"
-  )[0];
+  );
 
   // no background image, we're playing live tv
   if ((videoPlayerContainerElem as HTMLVideoElement).style.backgroundImage) {
     // with this url we can obtain the id of the item we are playing back
-    const mediaId = (
+    const [, , , , , mediaId] = (
       videoPlayerContainerElem as HTMLVideoElement
     ).style.backgroundImage
       .split('"')[1]
-      .split("/")[5];
+      .split("/");
 
     mediaInfo = await obtainMediaInfo(mediaId);
   }
@@ -552,8 +540,9 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp =
-          presence.getTimestampsfromMedia(videoPlayerElem)[1];
+        const [, endTimestamp] =
+          presence.getTimestampsfromMedia(videoPlayerElem);
+        presenceData.endTimestamp = endTimestamp;
       } else delete presenceData.endTimestamp;
 
       // paused
@@ -568,9 +557,7 @@ async function handleVideoPlayback(): Promise<void> {
   presenceData.details = title;
   presenceData.state = subtitle;
 
-  if (!presenceData.state) {
-    delete presenceData.state;
-  }
+  if (!presenceData.state) delete presenceData.state;
 }
 
 /**
@@ -582,7 +569,7 @@ async function handleItemDetails(): Promise<void> {
 
   for (const param of params) {
     if (param.startsWith("id=")) {
-      id = param.split("=")[1];
+      [, id] = param.split("=");
       break;
     }
   }
@@ -740,9 +727,7 @@ async function handleWebClient(): Promise<void> {
       break;
 
     default:
-      if (path.substr(0, 3) !== "dlg") {
-        presence.info(`path: ${path}`);
-      }
+      if (path.substr(0, 3) !== "dlg") presence.info(`path: ${path}`);
   }
 }
 
@@ -750,18 +735,13 @@ async function handleWebClient(): Promise<void> {
  * setDefaultsToPresence - set defaul values to the presenceData object
  */
 async function setDefaultsToPresence(): Promise<void> {
-  if (presenceData.smallImageKey) {
-    delete presenceData.smallImageKey;
-  }
-  if (presenceData.smallImageText) {
-    delete presenceData.smallImageText;
-  }
-  if (presenceData.startTimestamp) {
-    delete presenceData.startTimestamp;
-  }
-  if (presenceData.endTimestamp) {
-    delete presenceData.endTimestamp;
-  }
+  if (presenceData.smallImageKey) delete presenceData.smallImageKey;
+
+  if (presenceData.smallImageText) delete presenceData.smallImageText;
+
+  if (presenceData.startTimestamp) delete presenceData.startTimestamp;
+
+  if (presenceData.endTimestamp) delete presenceData.endTimestamp;
 
   if (await presence.getSetting("showTimestamps"))
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
@@ -790,18 +770,15 @@ async function updateData(): Promise<void> {
   if (
     presenceData.smallImageKey === PRESENCE_ART_ASSETS.play ||
     presenceData.smallImageKey === PRESENCE_ART_ASSETS.pause
-  ) {
+  )
     delete presenceData.startTimestamp;
-  }
 
   // if emby is detected init/update the presence status
   if (showPresence) {
-    if (presenceData.details == null) {
+    if (presenceData.details === null) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
-      presence.setActivity(presenceData);
-    }
+    } else presence.setActivity(presenceData);
   }
 }
 

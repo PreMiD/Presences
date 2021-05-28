@@ -1,50 +1,46 @@
-var presence = new Presence({
-  clientId: "620721262112538625" // CLIENT ID FOR YOUR PRESENCE
-});
+const presence = new Presence({
+    clientId: "620721262112538625"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var item: any;
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+let item: HTMLElement | HTMLInputElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "etsy"
+    largeImageKey: "etsy",
+    startTimestamp: browsingStamp
   };
 
-  presenceData.startTimestamp = browsingStamp;
-
-  if (document.location.hostname == "investors.etsy.com") {
+  if (document.location.hostname === "investors.etsy.com") {
     presenceData.details = "Viewing page:";
     presenceData.state = "Etsy Investors";
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "help.etsy.com") {
+  } else if (document.location.hostname === "help.etsy.com") {
     presenceData.details = "Viewing page:";
     presenceData.state = "Etsy Help Center";
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "help.etsy.com") {
+  } else if (document.location.hostname === "community.etsy.com") {
     presenceData.details = "Viewing page:";
     presenceData.state = "Etsy Community";
 
     delete presenceData.smallImageKey;
 
     presence.setActivity(presenceData);
-  } else if (document.location.hostname == "www.etsy.com") {
+  } else if (document.location.hostname === "www.etsy.com") {
     if (document.location.pathname.includes("/listing/")) {
       item = document.querySelector(
         "#listing-page-cart > div > div.listing-page-title-component > h1"
       );
       presenceData.details = "Viewing product:";
-      if (item.innerText.length > 128) {
-        presenceData.state = item.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = item.innerText;
-      }
+      if (item.innerText.length > 128)
+        presenceData.state = `${item.innerText.substring(0, 125)}...`;
+      else presenceData.state = item.innerText;
 
       delete presenceData.smallImageKey;
 
@@ -145,10 +141,12 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData);
     } else if (document.location.pathname.includes("/search")) {
-      item = document.querySelector("#global-enhancements-search-query");
+      item = document.querySelector<HTMLInputElement>(
+        "#global-enhancements-search-query"
+      );
 
       presenceData.details = "Searching for:";
-      presenceData.state = item.value;
+      presenceData.state = (item as HTMLInputElement).value;
 
       presenceData.smallImageKey = "search";
 

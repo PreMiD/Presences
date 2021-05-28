@@ -6,15 +6,6 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let lastPlaybackState: boolean,
   lastPath: string,
   browsingStamp = Math.floor(Date.now() / 1000);
@@ -47,8 +38,9 @@ presence.on("UpdateData", async () => {
     else if (curPath.startsWith("/register.php"))
       presenceData.details = "Đang đăng ký...";
     else if (curPath.startsWith("/genres.php")) {
-      presenceData.state =
-        "Thể loại: " + document.querySelector(".genreh2").innerHTML;
+      presenceData.state = `Thể loại: ${
+        document.querySelector(".genreh2").innerHTML
+      }`;
       presenceData.details = "Đang chọn phim...";
     } else if (curPath.startsWith("/history.php"))
       presenceData.details = "Đang xem lịch sử...";
@@ -70,15 +62,15 @@ presence.on("UpdateData", async () => {
     return;
   }
 
-  const video = document.getElementsByTagName("video")[0];
+  const [video] = document.getElementsByTagName("video");
 
   if (video !== null && !isNaN(video.duration)) {
-    const titleArr = (
+    const [titleArr, titleArraySecond] = (
         document.getElementById("title") !== null
           ? document.getElementById("title").innerHTML
           : "Không thấy tên phim!... - Tập ?"
       ).split(" - "),
-      timestamps = getTimestamps(
+      [, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -86,13 +78,12 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    presenceData.endTimestamp = endTimestamp;
 
-    presence.setTrayTitle(video.paused ? "" : titleArr[0]);
+    presence.setTrayTitle(video.paused ? "" : titleArr);
 
-    presenceData.details = "Đang xem: " + titleArr[0];
-    presenceData.state = titleArr[1];
+    presenceData.details = `Đang xem: ${titleArr}`;
+    presenceData.state = titleArraySecond;
 
     if (video.paused) {
       delete presenceData.startTimestamp;
