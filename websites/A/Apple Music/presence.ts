@@ -4,25 +4,23 @@ const presence = new Presence({
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
+  }),
+  calculateEndTime = (elapsedTime: number) => {
+    const startTime = Date.now(),
+      endTime = Math.floor(startTime / 1000) + elapsedTime;
 
-const calculateEndTime = (elapsedTime: number) => {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) + elapsedTime;
-
-  return endTime;
-};
+    return endTime;
+  };
 
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
-    largeImageKey: "applemusic-logo"
-  };
-
-  const playerCheck = document.querySelector(
-    ".web-chrome-playback-controls__playback-btn[disabled]"
-  )
-    ? false
-    : true;
+      largeImageKey: "applemusic-logo"
+    },
+    playerCheck = document.querySelector(
+      ".web-chrome-playback-controls__playback-btn[disabled]"
+    )
+      ? false
+      : true;
   if (playerCheck) {
     const title = document
         .querySelector(
@@ -38,7 +36,7 @@ presence.on("UpdateData", async () => {
         document.querySelector(".web-chrome-playback-lcd__time-end")
           ?.textContent
       ),
-      timestamps = presence.getTimestamps(
+      [, endTimestamp] = presence.getTimestamps(
         Math.floor(Date.now() / 1000),
         calculateEndTime(endTime)
       ),
@@ -52,7 +50,7 @@ presence.on("UpdateData", async () => {
     data.state = author;
     data.smallImageKey = paused ? "pause" : "play";
     data.smallImageText = paused ? (await strings).pause : (await strings).play;
-    data.endTimestamp = timestamps[1];
+    data.endTimestamp = endTimestamp;
 
     if (paused) {
       delete data.startTimestamp;
