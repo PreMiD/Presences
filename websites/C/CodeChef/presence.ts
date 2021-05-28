@@ -19,12 +19,14 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing All Blogs";
       else if (location.pathname.split("/")[1] === "author") {
         presenceData.details = "Viewing Profile: ";
-        presenceData.state = "Author: " + location.pathname.split("/")[2];
+        presenceData.state = `Author: ${location.pathname.split("/")[2]}`;
       } else if (location.pathname.split("/")[4]) {
-        presenceData.details =
-          "Reading: " + document.querySelector(".posttitle").textContent;
-        presenceData.state =
-          "Author: " + document.querySelector(".author-username").textContent;
+        presenceData.details = `Reading: ${
+          document.querySelector(".posttitle").textContent
+        }`;
+        presenceData.state = `Author: ${
+          document.querySelector(".author-username").textContent
+        }`;
         presenceData.smallImageKey = "reading";
       }
       break;
@@ -44,7 +46,7 @@ presence.on("UpdateData", async () => {
     }
 
     default: {
-      if (location.pathname.split("/")[1] == "")
+      if (location.pathname.split("/")[1] === "")
         presenceData.details = "Viewing Home Page";
       else if (location.pathname.split("/").includes("tags")) {
         presenceData.details = "Viewing:";
@@ -52,9 +54,9 @@ presence.on("UpdateData", async () => {
       } else if (location.pathname.split("/").includes("problems")) {
         const contestName: string =
             document.querySelector(".breadcrumbs").lastElementChild.textContent,
-          problemName: string = document.title.split("|")[0];
+          [problemName] = document.title.split("|");
         presenceData.details = contestName;
-        presenceData.state = "Solving: " + problemName;
+        presenceData.state = `Solving: ${problemName}`;
         presenceData.smallImageKey = "code";
       } else {
         // ? https://codechef.com
@@ -64,7 +66,7 @@ presence.on("UpdateData", async () => {
               document.querySelector(".chosen-single").childNodes[0]
                 .textContent;
             presenceData.details = "Using IDE";
-            presenceData.state = "Editing " + compilerName + " file";
+            presenceData.state = `Editing ${compilerName} file`;
             presenceData.smallImageKey = "code";
             break;
           }
@@ -117,7 +119,7 @@ presence.on("UpdateData", async () => {
           case "users": {
             const displayName: string =
                 document.querySelector("header > h2").textContent,
-              userName: string = document.title.split("|")[0];
+              [userName] = document.title.split("|");
             presenceData.details = "Viewing Profile:";
             presenceData.state = `${userName} (${displayName})`;
             break;
@@ -127,7 +129,7 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);
