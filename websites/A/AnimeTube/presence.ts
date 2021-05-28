@@ -1,10 +1,6 @@
 const presence = new Presence({
-    clientId: "833689728774832168"
-  }),
-  strings = presence.getStrings({
-    play: "presence.playback.playing",
-    pause: "presence.playback.paused"
-  });
+  clientId: "833689728774832168"
+});
 
 let videoData: {
   duration: number;
@@ -31,10 +27,10 @@ presence.on("UpdateData", async () => {
     document.location.pathname.startsWith("/anime") &&
     !document.location.pathname.includes("/watch")
   ) {
-    const titleSplit = document.title.split("›").map((s) => s.trim());
+    const [, , titleSplit] = document.title.split("›").map((s) => s.trim());
 
     data.details = "| Übersicht";
-    data.state = titleSplit[2];
+    data.state = titleSplit;
   } else if (document.location.pathname === "/static/calendar") {
     data.details = "| Kalendar";
     data.state = "Schaut sich die neuen Releases an";
@@ -45,8 +41,8 @@ presence.on("UpdateData", async () => {
     data.details = "| Einstellungen";
     data.state = "Macht irgendwas kaputt";
   } else if (document.location.pathname.includes("/user/")) {
-    const titleSplit = document.title.split("Profil von "),
-      userName = titleSplit[1];
+    const [, titleSplit] = document.title.split("Profil von "),
+      userName = titleSplit;
 
     data.details = "| Benutzerinfo";
     data.state = `Profil von ${userName}`;
@@ -60,15 +56,17 @@ presence.on("UpdateData", async () => {
     document.location.pathname.includes("/anime") &&
     document.location.pathname.includes("/watch")
   ) {
-    const titleSplit = document.title.split("›").map((s) => s.trim()),
-      animeName = titleSplit[2],
-      episode = titleSplit[3];
+    const [, , titleSplit, titleEpisode] = document.title
+        .split("›")
+        .map((s) => s.trim()),
+      animeName = titleSplit,
+      episode = titleEpisode;
 
     data.details = `| schaut ${animeName}`;
     data.state = episode;
 
     if (videoData) {
-      const timestamps = presence.getTimestamps(
+      const [, endTimestamp] = presence.getTimestamps(
         videoData.currentTime,
         videoData.duration
       );
@@ -76,7 +74,7 @@ presence.on("UpdateData", async () => {
       data.smallImageKey = videoData.paused ? "pause" : "play";
       data.smallImageText = videoData.paused ? "Pausiert" : "Spielt";
 
-      data.endTimestamp = timestamps[1];
+      data.endTimestamp = endTimestamp;
 
       if (videoData.paused) delete data.endTimestamp;
     }

@@ -11,53 +11,54 @@ const presence = new Presence({
     browse: "presence.activity.browsing"
   });
 
-let iframe_response = {
+let iframeResponse = {
   paused: true,
   duration: 0,
-  current_time: 0
+  currentTime: 0
 };
 
-type store_type = Record<string, { id: number; time: number }>;
+type storeType = Record<string, { id: number; time: number }>;
 
-class anime_storage {
-  private list: store_type;
+class AnimeStorage {
+  private list: storeType;
 
   public anime(title: string, playing: boolean) {
     if (this.list[title]) return this.list[title].id;
     else if (playing) return undefined;
     else {
-      const share_link = document.getElementsByClassName("modal-body")[1]
+      const shareLink = document.getElementsByClassName("modal-body")[1]
         .lastElementChild.lastElementChild as HTMLAnchorElement;
 
       this.list[title] = {
-        id: parseInt(share_link.href.split("/a/")[1]),
+        id: parseInt(shareLink.href.split("/a/")[1]),
         time: Date.now()
       };
 
       // Removes the oldest stored anime if the store length has exceeded 10
-      if (Object.keys(this.list).length === 11)
+      if (Object.keys(this.list).length === 11) {
         delete this.list[
           Object.entries(Object.assign({}, this.list)).sort(
             (a, b) => a[1].time - b[1].time
           )[0][0]
         ];
+      }
 
       localStorage.setItem("presence_data", btoa(JSON.stringify(this.list)));
     }
   }
 
   constructor() {
-    let storage: store_type | string | null =
+    let storage: storeType | string | null =
       localStorage.getItem("presence_data");
     if (storage) {
       storage = JSON.parse(atob(storage));
 
-      this.list = storage as store_type;
+      this.list = storage as storeType;
     } else this.list = {};
   }
 }
 
-const anime_store = new anime_storage();
+const animeStore = new AnimeStorage();
 
 function getTimes(time: number): Record<string, number> {
   let seconds = Math.round(time),
@@ -84,14 +85,14 @@ function getTimestamp(time: number): string {
   const { sec, min, hrs } = getTimes(time);
 
   return hrs > 0
-    ? hrs + ":" + lessTen(min) + min + ":" + lessTen(sec) + sec
-    : min + ":" + lessTen(sec) + sec;
+    ? `${hrs}:${lessTen(min)}${min}:${lessTen(sec)}${sec}`
+    : `${min}:${lessTen(sec)}${sec}`;
 }
 
 presence.on(
   "iFrameData",
-  (data: { paused: boolean; duration: number; current_time: number }) => {
-    iframe_response = data;
+  (data: { paused: boolean; duration: number; currentTime: number }) => {
+    iframeResponse = data;
   }
 );
 
@@ -115,7 +116,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = "animepahe";
 
     // a-z all browse
-  } else if (path == "/anime") {
+  } else if (path === "/anime") {
     presenceData.smallImageKey = "presence_browsing_all";
     presenceData.smallImageText = (await strings).browse;
     presenceData.details = `${(await strings).browse.slice(0, -3)} A-Z`;
@@ -128,11 +129,12 @@ presence.on("UpdateData", async () => {
     for (const info of document.getElementsByClassName("anime-info")[0]
       .children) {
       // Not uniform info order... ugh
-      if (info.children[0].textContent == "Type:")
-        info.children[1].textContent == "TV"
+      if (info.children[0].textContent === "Type:") {
+        info.children[1].textContent === "TV"
           ? (type = "Season")
           : (type = info.children[1].textContent);
-      if (info.children[0].textContent == "External Links:")
+      }
+      if (info.children[0].textContent === "External Links:")
         anilist = (info.children[1] as HTMLAnchorElement).href;
     }
 
@@ -148,7 +150,7 @@ presence.on("UpdateData", async () => {
     presenceData.buttons = [
       {
         label: "View on Pahe",
-        url: `https://pahe.win/a/${anime_store.anime(title, false)}`
+        url: `https://pahe.win/a/${animeStore.anime(title, false)}`
       },
       {
         label: "View on AniList",
@@ -158,14 +160,14 @@ presence.on("UpdateData", async () => {
   }
 
   // playback / episode
-  if (path.split("/")[1] == "play") {
-    const timestamps = presence.getTimestamps(
-        Math.floor(iframe_response.current_time),
-        Math.floor(iframe_response.duration)
+  if (path.split("/")[1] === "play") {
+    const [, endTimestamp] = presence.getTimestamps(
+        Math.floor(iframeResponse.currentTime),
+        Math.floor(iframeResponse.duration)
       ),
       movie: boolean =
         document.getElementsByClassName("anime-status")[0].firstElementChild
-          .textContent == "Movie",
+          .textContent === "Movie",
       title =
         document.getElementsByClassName("theatre-info")[0].children[1]
           .children[1].textContent,
@@ -177,10 +179,10 @@ presence.on("UpdateData", async () => {
       );
 
     presenceData.smallImageKey = `presence_playback_${
-      iframe_response.paused ? "paused" : "playing"
+      iframeResponse.paused ? "paused" : "playing"
     }`;
 
-    presenceData.smallImageText = iframe_response.paused
+    presenceData.smallImageText = iframeResponse.paused
       ? (await strings).pause
       : (await strings).play;
 
@@ -188,29 +190,26 @@ presence.on("UpdateData", async () => {
       !movie ? `${(await strings).episode.slice(0, -3)} ${episode} of ` : ""
     }${title}`;
 
-    if (!iframe_response.paused) {
+    if (!iframeResponse.paused) {
       presenceData.state = `${(await strings).play}`;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
     } else {
-      presenceData.startTimestamp = null;
       presenceData.state = `${(await strings).pause} - ${getTimestamp(
-        iframe_response.current_time
+        iframeResponse.currentTime
       )}`;
     }
 
-    const anime_id = anime_store.anime(title, true);
+    const animeID = animeStore.anime(title, true);
 
-    if (anime_id)
+    if (animeID) {
       presenceData.buttons = [
         {
           label: `Watch ${movie ? "Movie" : "Episode"}`,
-          url: `https://pahe.win/a/${anime_id}/${episode}`
+          url: `https://pahe.win/a/${animeID}/${episode}`
         }
       ];
+    }
 
     presence.setActivity(presenceData, true);
-  } else {
-    presence.setActivity(presenceData, false);
-  }
+  } else presence.setActivity(presenceData, false);
 });

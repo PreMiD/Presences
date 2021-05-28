@@ -31,7 +31,8 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   paused = true,
   lastPlaybackState: boolean = null,
   playback: boolean,
-  currentAnimeWatching: Array<string>,
+  currentAnimeWatching: string,
+  currentAnimeWatch: string,
   currentAnimeTitle: string,
   currentAnimeEpisode: string,
   strings: Promise<LangStrings> = getStrings(),
@@ -43,13 +44,9 @@ presence.on(
     video = data;
     playback = video.duration !== null ? true : false;
 
-    if (playback) {
-      currentTime = video.currentTime;
-      duration = video.duration;
-      paused = video.paused;
-    }
+    if (playback) ({ currentTime, duration, paused } = video);
 
-    if (lastPlaybackState != playback) {
+    if (lastPlaybackState !== playback) {
       lastPlaybackState = playback;
       browsingStamp = Math.floor(Date.now() / 1000);
     }
@@ -57,7 +54,7 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const timestamps = presence.getTimestamps(
+  const [, endTimestamp] = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     ),
@@ -69,26 +66,24 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
   if (document.location.pathname.includes("/video/")) {
-    if (playback == true && !isNaN(duration)) {
+    if (playback && !isNaN(duration)) {
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
-      currentAnimeWatching = document.title
+      presenceData.endTimestamp = endTimestamp;
+      [currentAnimeWatching, currentAnimeWatch] = document.title
         .replace(" - Animelon", "")
         .split(" Episode ");
-      currentAnimeTitle = currentAnimeWatching[0];
-      currentAnimeEpisode = "Episode " + currentAnimeWatching[1];
+      currentAnimeTitle = currentAnimeWatching;
+      currentAnimeEpisode = `Episode ${currentAnimeWatch}`;
 
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
@@ -111,11 +106,11 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else {
-      currentAnimeWatching = document.title
+      [currentAnimeWatching, currentAnimeWatch] = document.title
         .replace(" - Animelon", "")
         .split(" Episode ");
-      currentAnimeTitle = currentAnimeWatching[0];
-      currentAnimeEpisode = "Episode " + currentAnimeWatching[1];
+      currentAnimeTitle = currentAnimeWatching;
+      currentAnimeEpisode = `Episode ${currentAnimeWatch}`;
 
       presenceData.details = `${currentAnimeTitle}`;
       presenceData.state = `${currentAnimeEpisode}`;
@@ -150,9 +145,7 @@ presence.on("UpdateData", async () => {
         }
       ];
     }
-  } else {
-    presenceData.details = "Browsing...";
-  }
+  } else presenceData.details = "Browsing...";
 
   presence.setActivity(presenceData);
 });

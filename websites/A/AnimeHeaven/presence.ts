@@ -74,9 +74,9 @@ const paths = {
     let searchQuery = searchParams.get("q");
 
     if (searchQuery) {
-      if (searchQuery.length > 18) {
+      if (searchQuery.length > 18)
         searchQuery = `${searchQuery.substring(0, 18)}…`;
-      }
+
       presenceData.details = `"${searchQuery}"`;
     }
   },
@@ -88,9 +88,7 @@ const paths = {
     if (title) {
       presenceData.state = "Viewing info...";
       presenceData.details = title;
-    } else {
-      presenceData.state = "Viewing info for a title...";
-    }
+    } else presenceData.state = "Viewing info for a title...";
   },
   "/animeheaven.eu"(presenceData: PresenceData) {
     presenceData.state = "Viewing front page...";

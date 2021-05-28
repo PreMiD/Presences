@@ -25,7 +25,6 @@ let fullscreen: boolean,
   paused,
   currentTime,
   timeLeft,
-  timestamps,
   playlistLink,
   artistLink,
   strings: Promise<LangStrings> = getStrings(),
@@ -39,33 +38,32 @@ presence.on("UpdateData", async () => {
     newLang = await presence.getSetting("lang").catch(() => "en"),
     showPlaylist = await presence.getSetting("showPlaylist");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
   player =
     document.querySelector(
       "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
-    ) != undefined
+    ) !== undefined
       ? true
       : false;
 
-  if (player == true) {
+  if (player) {
     const exitFSButton = document.querySelector(
       "div._2kGtEHAlQ5t5sY3jvz-wwl > div._1Wgs9MKFGuL58IFgKSM811 > div._2HXusrWftEtKAYukKt5IuO > music-button"
     );
-    exitFSButton != null ? (fullscreen = true) : (fullscreen = false);
-    if (fullscreen == true) {
+    exitFSButton !== null ? (fullscreen = true) : (fullscreen = false);
+    if (fullscreen) {
       const title = document.querySelector("a.music-headline-2").textContent,
-        artist = document
+        [artist] = document
           .querySelector("a.music-primary-text")
-          .textContent.split(" - ")[0],
+          .textContent.split(" - "),
         pausedIcon = document
           .querySelector("music-button.hydrated:nth-child(4)")
           .shadowRoot.querySelector("button > div > music-icon");
-      paused = pausedIcon.attributes[1].value == "pause" ? false : true;
+      paused = pausedIcon.attributes[1].value === "pause" ? false : true;
       currentTime = document.querySelector(
         "div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(1)"
       ).textContent;
@@ -73,7 +71,7 @@ presence.on("UpdateData", async () => {
         .querySelector("div.sXaGQzYs9WqImj2uxDCBs > span:nth-child(2)")
         .textContent.replace(" - ", "");
 
-      timestamps = presence.getTimestamps(
+      const [, endTimestamp] = presence.getTimestamps(
         presence.timestampFromFormat(currentTime),
         presence.timestampFromFormat(timeLeft) +
           presence.timestampFromFormat(currentTime)
@@ -82,20 +80,18 @@ presence.on("UpdateData", async () => {
       presenceData.details = title;
       presenceData.state = artist;
       presenceData.smallImageKey = paused ? "pause" : "play";
-      presenceData.smallImageText =
-        paused == true ? (await strings).pause : (await strings).play;
+      presenceData.smallImageText = paused
+        ? (await strings).pause
+        : (await strings).play;
       presenceData.largeImageKey = "logo";
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
 
       if (paused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
 
-      if (title !== null && artist !== null) {
-        presence.setActivity(presenceData);
-      }
+      if (title !== null && artist !== null) presence.setActivity(presenceData);
     } else {
       playlistLink = document
         .querySelector(
@@ -117,38 +113,35 @@ presence.on("UpdateData", async () => {
           .shadowRoot.querySelector(
             "div.item.parent-undefined > div.center > music-link.hydrated > a"
           ).textContent,
-        artist = document
+        [artist] = document
           .querySelector(
             "body > div#root > music-app.hydrated > div.BAibzabUKijQgULVQbqCf > div#transport._333T0bVoft6GGOqUYjsnIA > div._3l2xsX5-KkYUgDHJDu-L0r > music-horizontal-item"
           )
           .shadowRoot.querySelector(
             "div.item.parent-undefined > div.center > span"
           )
-          .textContent.split("-")[0],
+          .textContent.split("-"),
         pausedIcon = document
           .querySelector("music-button.hydrated:nth-child(4)")
           .shadowRoot.querySelector("button > div > music-icon");
-      paused = pausedIcon.attributes[1].value == "pause" ? false : true;
-      currentTime = document
-        .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
-        .textContent.split(" - ")[0];
-      timeLeft = document
-        .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
-        .textContent.split(" - ")[1];
-      timestamps = presence.getTimestamps(
-        presence.timestampFromFormat(currentTime),
-        presence.timestampFromFormat(timeLeft) +
-          presence.timestampFromFormat(currentTime)
-      );
+      paused = pausedIcon.attributes[1].value === "pause" ? false : true;
+      const [currentTime, timeLeft] = document
+          .querySelector("div.sXaGQzYs9WqImj2uxDCBs._1KQKoAP31YB14fDTsoEmwh")
+          .textContent.split(" - "),
+        [, endTimestamp] = presence.getTimestamps(
+          presence.timestampFromFormat(currentTime),
+          presence.timestampFromFormat(timeLeft) +
+            presence.timestampFromFormat(currentTime)
+        );
 
       presenceData.details = title;
       presenceData.state = artist;
       presenceData.largeImageKey = "logo";
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.smallImageKey = paused == true ? "pause" : "play";
-      presenceData.smallImageText =
-        paused == true ? (await strings).pause : (await strings).play;
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.smallImageKey = paused ? "pause" : "play";
+      presenceData.smallImageText = paused
+        ? (await strings).pause
+        : (await strings).play;
+      presenceData.endTimestamp = endTimestamp;
 
       if (showPlaylist && buttons) {
         presenceData.buttons = [
@@ -175,9 +168,7 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
 
-      if (title !== null && artist !== null) {
-        presence.setActivity(presenceData);
-      }
+      if (title !== null && artist !== null) presence.setActivity(presenceData);
     }
   } else {
     presenceData.details = "Browsing...";

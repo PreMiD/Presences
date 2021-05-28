@@ -7,16 +7,6 @@ let video = {
   currentTime: 0,
   paused: true
 };
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 presence.on(
   "iFrameData",
   (data: { duration: number; currentTime: number; paused: boolean }) => {
@@ -31,7 +21,7 @@ presence.on("UpdateData", async () => {
   };
 
   if (location.pathname.startsWith("/episode")) {
-    const timestamps = getTimestamps(
+    const [, endTimestamp] = presence.getTimestamps(
       Math.floor(video.currentTime),
       Math.floor(video.duration)
     );
@@ -50,8 +40,7 @@ presence.on("UpdateData", async () => {
 
     data.smallImageKey = video.paused ? "paused" : "played";
     data.smallImageText = video.paused ? "Paused" : "Played";
-    data.startTimestamp = timestamps[0];
-    data.endTimestamp = timestamps[1];
+    data.endTimestamp = endTimestamp;
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;

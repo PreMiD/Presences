@@ -7,41 +7,24 @@ const presence = new Presence({
     browsing: "presence.activity.browsing"
   });
 
-function getTime(list: string[]): number {
-  let ret = 0;
-  for (let index = list.length - 1; index >= 0; index--) {
-    ret += parseInt(list[index]) * 60 ** index;
-  }
-  return ret;
-}
-
-function getTimestamps(
-  audioTime: string,
-  audioDuration: string
-): Array<number> {
-  const aT = getTime(audioTime.split(":").reverse()),
-    aD = getTime(audioDuration.split(":").reverse()),
-    endTime = Math.floor(Date.now() / 1000) - aT + aD;
-
-  return [Math.floor(Date.now() / 1000), endTime];
-}
-
 presence.on("UpdateData", async () => {
   const data: PresenceData = {
       largeImageKey: "anlg"
     },
-    playback: boolean = document.querySelector("anghami-player") != null;
+    playback: boolean = document.querySelector("anghami-player") !== null;
 
   if (playback) {
     const selectors: NodeListOf<Node> =
         document.querySelectorAll(".duration-text"),
-      current: string =
-        (selectors[0] && selectors[0].textContent.trim()) || "0:0",
-      length: string =
-        (selectors[1] && selectors[1].textContent.trim()) || "0:0",
-      timestamps = getTimestamps(current, length),
+      current: number = presence.timestampFromFormat(
+        (selectors[0] && selectors[0].textContent.trim()) || "00:00"
+      ),
+      length: number = presence.timestampFromFormat(
+        (selectors[1] && selectors[1].textContent.trim()) || "00:00"
+      ),
+      [, endTimestamp] = presence.getTimestamps(current, length),
       playing: boolean =
-        document.querySelector("anghami-player anghami-icon.icon.pause") !=
+        document.querySelector("anghami-player anghami-icon.icon.pause") !==
         null;
     let selector: Node = document.querySelector(
       "anghami-player .action-title .trim"
@@ -54,8 +37,7 @@ presence.on("UpdateData", async () => {
     data.smallImageText = playing
       ? (await strings).play
       : (await strings).pause;
-    data.startTimestamp = timestamps[0];
-    data.endTimestamp = timestamps[1];
+    data.endTimestamp = endTimestamp;
 
     if (!playing) {
       delete data.startTimestamp;

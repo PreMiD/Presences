@@ -32,13 +32,9 @@ let strings = getStrings(),
   paused: boolean;
 
 presence.on("iFrameData", (data: IFrameData) => {
-  playback = data.iframe_video?.duration !== undefined ? true : false;
+  playback = data.iframeVideo?.duration !== undefined ? true : false;
 
-  if (playback) {
-    duration = data.iframe_video.duration;
-    currentTime = data.iframe_video.currentTime;
-    paused = data.iframe_video.paused;
-  }
+  if (playback) ({ duration, currentTime, paused } = data.iframeVideo);
 });
 
 presence.on("UpdateData", async () => {
@@ -50,9 +46,8 @@ presence.on("UpdateData", async () => {
     timestamp: boolean = await presence.getSetting("timestamp"),
     buttons = await presence.getSetting("buttons");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -158,7 +153,7 @@ presence.on("UpdateData", async () => {
         ]
       },
       "/studios/": {
-        details: `Viewing studio:`,
+        details: "Viewing studio:",
         state: content.title
       },
       "/manga/(read-online|recommendations|light-novels|top-manga|all|magazines)":
@@ -167,7 +162,7 @@ presence.on("UpdateData", async () => {
           state: content.title
         },
       "/manga/tags/": {
-        details: `Manga | Viewing tag:`,
+        details: "Manga | Viewing tag:",
         state: content.title
       },
       "/manga/": {
@@ -179,7 +174,7 @@ presence.on("UpdateData", async () => {
         state: content.title
       },
       "/anime/tags/": {
-        details: `Anime | Viewing tag:`,
+        details: "Anime | Viewing tag:",
         state: content.title
       },
       "/anime/": {
@@ -227,7 +222,7 @@ presence.on("UpdateData", async () => {
       .trim();
 
     if (!isNaN(duration)) {
-      const timestamps = presence.getTimestamps(currentTime, duration);
+      const [, endTimestamp] = presence.getTimestamps(currentTime, duration);
 
       presenceData.details = AnimeDetails.replace(
         "%title%",
@@ -241,8 +236,7 @@ presence.on("UpdateData", async () => {
         `EP.${content.episode.ep} ${content.episode.title ?? ""}`
       );
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
 
       presenceData.smallImageKey = paused ? "pause" : "play";
       presenceData.smallImageText = paused
@@ -269,10 +263,11 @@ presence.on("UpdateData", async () => {
       presenceData.state = content.title;
     }
   } else if (path.includes("/chapters/")) {
-    content.episode.ep = document
+    const [contentTitle] = document
       .querySelector("h1")
       .textContent.replace(content.title, "")
-      .match(/[1-9]?[0-9]?[0-9]?.?[1-9]?[0-9]?[0-9]/g)[0];
+      .match(/[1-9]?[0-9]?[0-9]?.?[1-9]?[0-9]?[0-9]/g);
+    content.episode.ep = contentTitle;
 
     presenceData.details = MangaDetails.replace(
       "%title%",
@@ -303,7 +298,7 @@ presence.on("UpdateData", async () => {
 });
 
 interface IFrameData {
-  iframe_video: {
+  iframeVideo: {
     duration: number;
     currentTime: number;
     paused: boolean;

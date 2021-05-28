@@ -9,63 +9,59 @@ const presence: Presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "anilist_lg",
-    startTimestamp
-  };
-  const { pathname } = window.location;
-  if (pathname.startsWith(`/home`)) {
+      largeImageKey: "anilist_lg",
+      startTimestamp
+    },
+    { pathname } = window.location;
+  if (pathname.startsWith("/home")) {
     presenceData.details = (await strings).browsing;
     presenceData.state = "Home";
-  } else if (pathname.startsWith(`/user`)) {
+  } else if (pathname.startsWith("/user")) {
     const user = document.querySelector(".name").textContent;
-    if (pathname.includes(`mangalist`)) {
+    if (pathname.includes("mangalist"))
       presenceData.details = `Viewing ${user}'s manga list`;
-    } else if (pathname.includes(`animelist`)) {
+    else if (pathname.includes("animelist"))
       presenceData.details = `Viewing ${user}'s anime list`;
-    } else {
-      presenceData.details = `Viewing ${user}'s profile`;
-    }
-  } else if (pathname.startsWith(`/search`)) {
+    else presenceData.details = `Viewing ${user}'s profile`;
+  } else if (pathname.startsWith("/search")) {
     presenceData.details = "Searching";
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Searching";
-  } else if (pathname.startsWith(`/anime`)) {
+  } else if (pathname.startsWith("/anime")) {
     const title = document.querySelector("div.content > h1").textContent.trim();
     presenceData.details = "Viewing an anime";
     presenceData.state = title;
-  } else if (pathname.startsWith(`/manga`)) {
+  } else if (pathname.startsWith("/manga")) {
     const title = document.querySelector("div.content > h1").textContent.trim();
     presenceData.details = "Viewing a manga";
     presenceData.state = title;
-  } else if (pathname.startsWith(`/forum`)) {
+  } else if (pathname.startsWith("/forum")) {
     if (pathname.split("/").length > 3) {
       presenceData.details = "Reading a forum post";
       presenceData.state = `'${document
         .querySelector("h1.title")
         .textContent.trim()}'`;
-      presenceData.smallImageKey = `reading`;
+      presenceData.smallImageKey = "reading";
       presenceData.smallImageText = (await strings).reading;
-    } else {
-      presenceData.details = "Browsing the forum";
-    }
-  } else if (pathname.startsWith(`/studio`)) {
+    } else presenceData.details = "Browsing the forum";
+  } else if (pathname.startsWith("/studio")) {
     presenceData.details = "Viewing a studio";
     presenceData.state =
       document.querySelector("div.container > h1").textContent;
-  } else if (pathname.startsWith(`/review`)) {
-    const title = document.querySelector(`a.title`).textContent.trim();
+  } else if (pathname.startsWith("/review")) {
+    const title = document.querySelector("a.title").textContent.trim();
     presenceData.details = `Reading a '${title}' review`;
     const author = document
-      .querySelector(`a.author`)
+      .querySelector("a.author")
       .textContent.trim()
-      .replace(`a review `, ``);
+      .replace("a review ", "");
     presenceData.state = `${author}`;
-    presenceData.smallImageKey = `reading`;
+    presenceData.smallImageKey = "reading";
     presenceData.smallImageText = (await strings).reading;
-  } else if (pathname.startsWith(`/notifications`)) {
-    presenceData.details = `Viewing notifications`;
-  } else if (pathname.startsWith(`/settings`)) {
-    presenceData.details = `Changing settings`;
-  }
+  } else if (pathname.startsWith("/notifications"))
+    presenceData.details = "Viewing notifications";
+  else if (pathname.startsWith("/settings"))
+    presenceData.details = "Changing settings";
+
   presence.setActivity(presenceData, true);
 });

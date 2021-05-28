@@ -1,17 +1,17 @@
-var presence = new Presence({
-  clientId: "672156210627084328"
-});
-var browsingStamp = Math.floor(Date.now() / 1000);
-var user;
+const presence = new Presence({
+    clientId: "672156210627084328"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+let user: string;
 presence.on("UpdateData", async () => {
   const data = {
     largeImageKey: "animesoul",
-    startTimestamp: 1577232000,
+    startTimestamp: browsingStamp,
     details: "Viewing home page"
   };
   if (
-    document.location.pathname == "/" ||
-    document.location.pathname == "/home/"
+    document.location.pathname === "/" ||
+    document.location.pathname === "/home/"
   ) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing home page";
@@ -40,16 +40,10 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/events")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing AS Events";
-  }
-
-  /// Anime Soul anime section ///
-  else if (document.location.pathname.includes("/anime")) {
+  } else if (document.location.pathname.includes("/anime")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Anime";
-  }
-
-  /// Anime Soul shop section ///
-  else if (document.location.pathname.includes("/shop")) {
+  } else if (document.location.pathname.includes("/shop")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing the Shop";
   } else if (document.location.pathname.includes("/bank")) {
@@ -76,19 +70,13 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/trades")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Trades List";
-  }
-
-  /// Anime Soul games section ///
-  else if (document.location.pathname.includes("/this-or-that")) {
+  } else if (document.location.pathname.includes("/this-or-that")) {
     data.startTimestamp = browsingStamp;
     data.details = "Playing This or That";
   } else if (document.location.pathname.includes("/mini-games")) {
     data.startTimestamp = browsingStamp;
     data.details = "Playing Mini Games";
-  }
-
-  /// Anime Soul community section ///
-  else if (document.location.pathname.includes("/creators")) {
+  } else if (document.location.pathname.includes("/creators")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing AS Creators";
   } else if (document.location.pathname.includes("/medals")) {
@@ -103,10 +91,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/servers")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing AS Servers";
-  }
-
-  /// Anime Soul support section ///
-  else if (document.location.pathname.includes("/appeals")) {
+  } else if (document.location.pathname.includes("/appeals")) {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Appeals";
   } else if (document.location.pathname.includes("/updates")) {
@@ -125,10 +110,8 @@ presence.on("UpdateData", async () => {
     data.startTimestamp = browsingStamp;
     data.details = "Viewing Hidden Page";
   }
-  if (data.details == null) {
+  if (data.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(data);
-  }
+  } else presence.setActivity(data);
 });

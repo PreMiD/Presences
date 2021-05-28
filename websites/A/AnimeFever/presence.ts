@@ -9,16 +9,6 @@ interface PageContext {
 interface LocalizedStrings {
   [key: string]: string;
 }
-interface AnimeVideoEntity {
-  "@type": string;
-  name: string;
-  duration: string;
-  description: string;
-  thumbnail: string;
-  thumbnailUrl: string;
-  contentUrl: string;
-  uploadDate: string;
-}
 
 interface AnimeEpisodeEntity {
   "@type": string;
@@ -64,7 +54,7 @@ function getQuery() {
       queryString && queryString.length > 0 && queryString[1]
         ? queryString[1].split("&").reduce(function (l, r) {
             const entry = r ? r.split("=", 2) : null;
-            if (entry == null) return l;
+            if (entry === null) return l;
             return Object.assign(l, { [entry[0]]: entry[1] });
           }, {})
         : {};
@@ -72,22 +62,22 @@ function getQuery() {
 }
 function getAnimeEntity(): AnimeEntity {
   const object = Array.from(
-    document.querySelectorAll(`script[type="application/ld+json"]`)
+    document.querySelectorAll('script[type="application/ld+json"]')
   ).find(
     (x) =>
       x.textContent.indexOf(location.pathname) !== -1 &&
-      x.textContent.indexOf(`"@type":"TVSeries"`) !== -1
+      x.textContent.indexOf('"@type":"TVSeries"') !== -1
   )?.textContent;
   if (!object) return null;
   return JSON.parse(object);
 }
 function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
   const object = Array.from(
-    document.querySelectorAll(`script[type="application/ld+json"]`)
+    document.querySelectorAll('script[type="application/ld+json"]')
   ).find(
     (x) =>
       x.textContent.indexOf(location.pathname) !== -1 &&
-      x.textContent.indexOf(`"@type":"TVEpisode"`) !== -1
+      x.textContent.indexOf('"@type":"TVEpisode"') !== -1
   )?.textContent;
   if (!object) return null;
   return JSON.parse(object);
@@ -105,8 +95,8 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
             animeEpisode = getAnimeEpsiodeEntity();
           if (!animeData) return data;
           const videoInstance =
-              document.querySelector<HTMLVideoElement>(`.jw-wrapper video`),
-            videoTime = context.getTimestamps(
+              document.querySelector<HTMLVideoElement>(".jw-wrapper video"),
+            [, endTimestamp] = context.getTimestamps(
               videoInstance.currentTime,
               videoInstance.duration
             );
@@ -121,10 +111,8 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
           if (videoInstance.paused) {
             if (data.startTimestamp) delete data.startTimestamp;
             if (data.endTimestamp) delete data.endTimestamp;
-          } else {
-            data.startTimestamp = videoTime[0];
-            data.endTimestamp = videoTime[1];
-          }
+          } else data.endTimestamp = endTimestamp;
+
           return data;
         }
       },
@@ -146,24 +134,24 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
         middleware: (ref) => !!ref.location.pathname.match(/^\/series$/i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
-          const searchSidebar = document.querySelector(`.uk-filter-content`);
+          const searchSidebar = document.querySelector(".uk-filter-content");
           if (!searchSidebar) return data;
           const searchedValue =
               searchSidebar.querySelector<HTMLInputElement>(
-                `input[type="text"]`
+                'input[type="text"]'
               )?.value,
             isExclude =
               searchSidebar
                 .querySelector<HTMLInputElement>(
-                  `.uk-section-content:nth-child(2) input[type="text"]`
+                  '.uk-section-content:nth-child(2) input[type="text"]'
                 )
                 ?.value.toLowerCase() === "exclude";
           if (!searchedValue) {
             const genres = Array.from(
               searchSidebar.querySelectorAll(
                 isExclude
-                  ? `#genre-container > li:nth-child(2) .el-checkbox`
-                  : `#genre-container .el-checkbox`
+                  ? "#genre-container > li:nth-child(2) .el-checkbox"
+                  : "#genre-container .el-checkbox"
               )
             );
             let activatedGenres: string[] = [];
@@ -177,12 +165,9 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
               data.state = `${isExclude ? "Exclude - " : ""} ${activatedGenres
                 .slice(0, 5)
                 .join(", ")}`;
-            } else {
-              data.state = "-";
-            }
-          } else {
-            data.state = searchedValue;
-          }
+            } else data.state = "-";
+          } else data.state = searchedValue;
+
           data.smallImageText = strings.searching;
           data.smallImageKey = images.BROWSE;
           data.details = strings.searchFor;

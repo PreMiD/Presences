@@ -6,11 +6,8 @@ function pathStarts(string: string): boolean {
   return document.location.pathname.startsWith(string);
 }
 function isHome(string: string): boolean {
-  if (string === "/") {
-    if (document.location.pathname === "/") {
-      return true;
-    }
-  }
+  if (string === "/" && document.location.pathname === "/") return true;
+
   return false;
 }
 function pathIncludes(string: string): boolean {
@@ -28,10 +25,10 @@ function getGuildTitle(): string {
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "aminoapps",
-    startTimestamp: new Date().getTime()
-  };
-  const host = document.location.hostname;
+      largeImageKey: "aminoapps",
+      startTimestamp: new Date().getTime()
+    },
+    host = document.location.hostname;
   if (host === "aminoapps.com") {
     switch (true) {
       case isHome("/"):
@@ -97,7 +94,7 @@ presence.on("UpdateData", async () => {
         break;
       }
       case pathStarts("/contact"):
-        presenceData.details = `Contact`;
+        presenceData.details = "Contact";
         break;
       case pathStarts("/c"):
         presenceData.details = "Viewing a Community...";

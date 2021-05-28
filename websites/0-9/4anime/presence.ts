@@ -10,7 +10,7 @@ let lastPlaybackState = null,
   playback,
   browsingStamp = Math.floor(Date.now() / 1000);
 
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -18,11 +18,11 @@ presence.on("UpdateData", async () => {
   playback =
     document.querySelector(".vjs-current-time-display") !== null ? true : false;
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
   };
   if (!playback) {
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
@@ -38,7 +38,7 @@ presence.on("UpdateData", async () => {
     const series = document.querySelector("a#titleleft"),
       seriesTitle = series.textContent,
       episode = document.querySelector("span#titleleft").textContent,
-      timestamps = presence.getTimestamps(
+      [, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -46,10 +46,9 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    presenceData.endTimestamp = endTimestamp;
 
-    presence.setTrayTitle(video.paused ? "" : seriesTitle);
+    if (!video.paused) presence.setTrayTitle(seriesTitle);
 
     presenceData.buttons = [
       {
