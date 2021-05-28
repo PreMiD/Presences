@@ -81,8 +81,7 @@ const presence = new Presence({
     presence: null
   };
 
-let blog: string,
-  cafeTitle: string;
+let blog: string, cafeTitle: string;
 
 presence.on("iFrameData", (data: { blog: string }) => {
   blog = data.blog;
@@ -527,32 +526,35 @@ presence.on("UpdateData", async () => {
     },
     "/([a-z])": {
       service: "ANY",
-      async setPresenceData(){
-        if (data.service === "NAVER_BLOG"){
+      async setPresenceData() {
+        if (data.service === "NAVER_BLOG") {
           presenceData.details = "Reading blog of:";
           presenceData.state = blog;
-          
+
           presenceData.buttons = [
             {
               url: document.URL,
               label: "Read Blog"
             }
           ];
-        } else if (data.service === "NAVER_CAFE"){
-          if (!cafeTitle) cafeTitle = document.querySelector("h1.d-none")?.textContent;
-          if (cafeTitle){
+        } else if (data.service === "NAVER_CAFE") {
+          if (!cafeTitle)
+            cafeTitle = document.querySelector("h1.d-none")?.textContent;
+          if (cafeTitle) {
             presenceData.details = "Viewing cafe:";
             presenceData.state = cafeTitle;
-  
+
             presenceData.buttons = [
               {
                 label: "View Cafe",
                 url: document.URL
               }
             ];
-          } else if (document.location.pathname.includes("/search/")){
+          } else if (document.location.pathname.includes("/search/")) {
             presenceData.details = "Searching for:";
-            presenceData.state = (new URLSearchParams(document.location.search)).get("q");
+            presenceData.state = new URLSearchParams(
+              document.location.search
+            ).get("q");
           }
         }
       }
