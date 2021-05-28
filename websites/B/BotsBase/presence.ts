@@ -1,17 +1,16 @@
 const presence = new Presence({
-  clientId: "730486476059705354"
-});
-browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "730486476059705354"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let priceEls;
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "botsbase"
+    largeImageKey: "botsbase",
+    startTimestamp: browsingStamp
   };
 
-  presenceData.startTimestamp = browsingStamp;
-
-  if (document.location.hostname == "botsbase.net") {
+  if (document.location.hostname === "botsbase.net") {
     presenceData.details = "Viewing a page:";
     presenceData.state = "Home";
     if (document.location.pathname.includes("/bots")) {
@@ -72,10 +71,8 @@ presence.on("UpdateData", () => {
       presenceData.state = "Search Bot";
     }
   }
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

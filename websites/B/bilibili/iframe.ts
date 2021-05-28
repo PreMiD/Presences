@@ -1,19 +1,17 @@
-var iframe = new iFrame();
+const iframe = new iFrame();
 iframe.on("UpdateData", async () => {
   if (document.querySelector(".bilibili-player-video video") !== null) {
-    var video: HTMLVideoElement = document.querySelector(
+    const video: HTMLVideoElement = document.querySelector(
       ".bilibili-player-video video"
     );
 
-    if (video != undefined && !isNaN(video.duration)) {
-      var test = video.paused;
+    if (video !== undefined && !isNaN(video.duration)) {
       iframe.send({
-        iframe_video: {
+        iframeVideo: {
           iFrameVideo: true,
-          test: test,
-          currTime: video.currentTime,
-          dur: video.duration,
-          pause: test
+          currentTime: video.currentTime,
+          duration: video.duration,
+          paused: video.paused
         }
       });
     }

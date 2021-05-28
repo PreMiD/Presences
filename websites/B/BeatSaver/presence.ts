@@ -22,19 +22,19 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = "Showing Auto-generated Beatmaps";
     }
   } else if (document.location.pathname.includes("/beatmap/")) {
-    if (document.querySelector("span.tag.is-expert-plus") != null)
+    if (document.querySelector("span.tag.is-expert-plus") !== null) {
       (presenceData.smallImageKey = "expert_"),
         (presenceData.smallImageText = "Top Diff: Expert+");
-    else if (document.querySelector("span.tag.is-expert") != null)
+    } else if (document.querySelector("span.tag.is-expert") !== null) {
       (presenceData.smallImageKey = "expert"),
         (presenceData.smallImageText = "Top Diff: Expert");
-    else if (document.querySelector("span.tag.is-hard") != null)
+    } else if (document.querySelector("span.tag.is-hard") !== null) {
       (presenceData.smallImageKey = "hard"),
         (presenceData.smallImageText = "Top Diff: Hard");
-    else if (document.querySelector("span.tag.is-normal") != null)
+    } else if (document.querySelector("span.tag.is-normal") !== null) {
       (presenceData.smallImageKey = "normal"),
         (presenceData.smallImageText = "Top Diff: Normal");
-    else {
+    } else {
       presenceData.smallImageKey = "easy";
       presenceData.smallImageText = "Top Diff: Easy";
     }
@@ -47,16 +47,17 @@ presence.on("UpdateData", async () => {
       },
       {
         label: "View Uploader's Page",
-        url:
-          "https://beatsaver.com" +
-          document.querySelector("h2.is-size-4 > a").getAttribute("href")
+        url: `https://beatsaver.com${document
+          .querySelector("h2.is-size-4 > a")
+          .getAttribute("href")}`
       }
     ];
   } else if (document.location.pathname.includes("/uploader/")) {
-    presenceData.details = "Browsing By Uploader";
-    presenceData.state = document
+    const [, , text] = document
       .querySelector("h1.is-size-2.has-text-weight-light.has-text-centered")
-      .textContent.split(" ")[2];
+      .textContent.split(" ");
+    presenceData.details = "Browsing By Uploader";
+    presenceData.state = text;
     presenceData.buttons = [
       {
         label: "View Page",

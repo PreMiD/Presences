@@ -37,12 +37,12 @@ let oldLang: string = null,
 
 presence.on("iFrameData", (data: IFrameData) => {
   playback =
-    (data.iframe_video?.duration || data.iframe_audio?.duration) !== undefined
+    (data.iframeVideo?.duration || data.iframeAudio?.duration) !== undefined
       ? true
       : false;
   if (playback) {
-    VideoMedia = data.iframe_video;
-    SoundMedia = data.iframe_audio;
+    VideoMedia = data.iframeVideo;
+    SoundMedia = data.iframeAudio;
   }
 });
 
@@ -58,9 +58,8 @@ presence.on("UpdateData", async () => {
     buttonsE = await presence.getSetting("buttons"),
     showSearchQuery = await presence.getSetting("search");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -89,7 +88,7 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = startsTime;
         }
       } else {
-        const timestamps = presence.getTimestamps(
+        const [, endTimestamp] = presence.getTimestamps(
           VideoMedia.currentTime,
           VideoMedia.duration
         );
@@ -107,8 +106,7 @@ presence.on("UpdateData", async () => {
           IPlayer.episode.labels?.category ||
           "Animation";
 
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        presenceData.endTimestamp = endTimestamp;
 
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
@@ -152,7 +150,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = (await strings).browse;
 
     if (path.includes("/play/")) {
-      const timestamps = presence.getTimestamps(
+      const [, endTimestamp] = presence.getTimestamps(
           SoundMedia.currentTime,
           SoundMedia.duration
         ),
@@ -165,7 +163,7 @@ presence.on("UpdateData", async () => {
       } else {
         presenceData.details = SoundMedia.title;
         presenceData.state =
-          soundData.modules["data"][0].data[0].titles?.secondary;
+          soundData.modules.data[0].data[0].titles?.secondary;
         presenceData.smallImageKey =
           SoundMedia.paused || !SoundMedia.duration ? "pause" : "play";
       }
@@ -175,8 +173,7 @@ presence.on("UpdateData", async () => {
           ? (await strings).pause
           : (await strings).play;
 
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
 
       presenceData.buttons = [
         {
@@ -406,7 +403,7 @@ presence.on("UpdateData", async () => {
       ];
 
       if (VideoMedia.duration) {
-        const timestamps = presence.getTimestamps(
+        const [, endTimestamp] = presence.getTimestamps(
           VideoMedia.currentTime,
           VideoMedia.duration
         );
@@ -414,8 +411,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = title;
         presenceData.state = document.querySelector("time")?.textContent;
 
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        presenceData.endTimestamp = endTimestamp;
 
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
@@ -453,7 +449,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = title;
     } else if (path.includes("/av/")) {
       if (VideoMedia.duration) {
-        const timestamps = presence.getTimestamps(
+        const [, endTimestamp] = presence.getTimestamps(
           VideoMedia.currentTime,
           VideoMedia.duration
         );
@@ -463,8 +459,7 @@ presence.on("UpdateData", async () => {
           "span.qa-status-date-output"
         )?.textContent;
 
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        presenceData.endTimestamp = endTimestamp;
 
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
@@ -491,9 +486,9 @@ presence.on("UpdateData", async () => {
     const searchValue = document.querySelector<HTMLInputElement>(
         "input.location-search-input__input"
       )?.value,
-      location = (document
+      [location] = document
         .querySelector("h1#wr-location-name-id")
-        ?.textContent.split(" - ") || [null])[0],
+        ?.textContent.split(" - ") || [null],
       title = (
         document.querySelector("h2#wr-c-regional-forecast-slice__title") ||
         document.querySelector("h1")
@@ -547,7 +542,7 @@ presence.on("UpdateData", async () => {
         presenceData = { ...presenceData, ...value };
         break;
       } else if (VideoMedia.duration) {
-        const timestamps = presence.getTimestamps(
+        const [, endTimestamp] = presence.getTimestamps(
           VideoMedia.currentTime,
           VideoMedia.duration
         );
@@ -555,8 +550,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = title;
         presenceData.state = time;
 
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        presenceData.endTimestamp = endTimestamp;
 
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
@@ -658,7 +652,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = (await strings).viewPage;
         presenceData.state = "World News";
       } else if (VideoMedia.duration) {
-        const timestamps = presence.getTimestamps(
+        const [, endTimestamp] = presence.getTimestamps(
           VideoMedia.currentTime,
           VideoMedia.duration
         );
@@ -666,8 +660,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = title;
         presenceData.state = document.querySelector("time")?.textContent;
 
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
+        presenceData.endTimestamp = endTimestamp;
 
         presenceData.smallImageKey = VideoMedia.paused ? "pause" : "play";
         presenceData.smallImageText = VideoMedia.paused
@@ -744,12 +737,12 @@ interface IPlayerData {
 }
 
 interface IFrameData {
-  iframe_video: {
+  iframeVideo: {
     duration: number;
     currentTime: number;
     paused: boolean;
   };
-  iframe_audio: {
+  iframeAudio: {
     duration: number;
     currentTime: number;
     paused: boolean;
@@ -773,9 +766,7 @@ interface SoundData {
           secondary?: string;
           tertiary?: string;
         };
-        network: {
-          short_title: string;
-        };
+        network: Record<string, string>;
       }[];
     }[];
   };

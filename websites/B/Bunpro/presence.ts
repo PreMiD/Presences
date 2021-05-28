@@ -113,12 +113,11 @@ presence.on("UpdateData", () => {
           let activeGrammarPoint: HTMLDivElement;
 
           activeGrammarPoint = document.querySelector(
-            `.grammar-point-study[style*="display: block"]`
+            '.grammar-point-study[style*="display: block"]'
           );
 
-          if (!activeGrammarPoint) {
+          if (!activeGrammarPoint)
             activeGrammarPoint = document.querySelector(".grammar-point-study");
-          }
 
           const grammarPointElement: HTMLSpanElement =
               activeGrammarPoint.querySelector(
@@ -180,9 +179,7 @@ presence.on("UpdateData", () => {
 
           details = "Viewing Dashboard";
           state = `${reviewsCount} reviews`;
-        } else {
-          details = "Browsing Pages";
-        }
+        } else details = "Browsing Pages";
 
         break;
       }

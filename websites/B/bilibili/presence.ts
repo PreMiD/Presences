@@ -2,22 +2,22 @@ const presence = new Presence({ clientId: "639591760791732224" }),
   strings = presence.getStrings({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
-  });
-const browsingStamp = Math.floor(Date.now() / 1000);
-let user: HTMLElement,
-  title: HTMLElement,
-  inread_title: HTMLElement,
-  page: HTMLElement;
-let video: HTMLVideoElement,
-  videoDuration: number,
-  videoCurrentTime: number,
-  videoPaused: boolean;
-const huodong_title = document.querySelector("#viewbox_report > h1 > a"),
-  hudong_title = document.querySelector("#viewbox_report > h1 > span.activity"),
-  multi_user = document.querySelector(
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000),
+  huodongTitle = document.querySelector("#viewbox_report > h1 > a"),
+  hudongTitle = document.querySelector("#viewbox_report > h1 > span.activity"),
+  multiUser = document.querySelector(
     "#app > div > div.r-con > div.members-info"
   );
-let currentTime: number,
+let user: HTMLElement,
+  title: HTMLElement,
+  inreadTitle: HTMLElement,
+  page: HTMLElement,
+  video: HTMLVideoElement,
+  videoDuration: number,
+  videoCurrentTime: number,
+  videoPaused: boolean,
+  currentTime: number,
   duration: number,
   paused: boolean,
   playback: boolean,
@@ -26,20 +26,15 @@ let currentTime: number,
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iframeVideo: {
+      currentTime: number;
       duration: number;
-      currTime: number;
-      dur: number;
-      test: boolean;
+      paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.duration !== null ? true : false;
+    playback = data.iframeVideo.duration !== null ? true : false;
 
-    if (playback) {
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.dur;
-      iFramePaused = data.iframe_video.test;
-    }
+    if (playback) ({ currentTime, duration, paused } = data.iframeVideo);
   }
 );
 
@@ -49,8 +44,8 @@ presence.on("UpdateData", async () => {
   };
 
   // Maincode
-  if (document.location.hostname == "www.bilibili.com") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.bilibili.com") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing...";
       user = document.querySelector(
@@ -61,20 +56,20 @@ presence.on("UpdateData", async () => {
       video = document.querySelector(
         "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside.video-control-show > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
       );
-      if (video == null) {
+      if (!video) {
         video = document.querySelector(
           "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
       }
-      if (video == null) {
+      if (!video) {
         video = document.querySelector(
           "#bilibiliPlayer > div.bilibili-player-area.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
       }
-      if (video == null) {
+      if (!video)
         video = document.querySelector(".bilibili-player-video > video");
-      }
-      if (video == null) {
+
+      if (!video) {
         video = document.querySelector(
           "#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.progress-shadow-show > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
@@ -84,7 +79,7 @@ presence.on("UpdateData", async () => {
       videoCurrentTime = video.currentTime;
       videoPaused = video.paused;
 
-      const timestamps = presence.getTimestamps(
+      const [, endTimestamp] = presence.getTimestamps(
         Math.floor(videoCurrentTime),
         Math.floor(videoDuration)
       );
@@ -92,24 +87,22 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = videoPaused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
 
       if (videoPaused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
       }
 
-      if (huodong_title != null) {
+      if (huodongTitle !== null)
         title = document.querySelector("#viewbox_report > h1 > span");
-      } else if (hudong_title != null) {
+      else if (hudongTitle !== null) {
         title = document.querySelector(
           "#viewbox_report > h1 > span.tit.tr-fix"
         );
-      } else {
-        title = document.querySelector("#viewbox_report > h1");
-      }
-      if (multi_user != null) {
+      } else title = document.querySelector("#viewbox_report > h1");
+
+      if (multiUser !== null) {
         user = document.querySelector(
           "#member-container > div:nth-child(1) > div.avatar-name__container > a"
         );
@@ -122,12 +115,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.innerText;
 
       //播放历史
-    } else if (document.location.pathname == "/account/history") {
+    } else if (document.location.pathname === "/account/history") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing their history";
       //活动
     } else if (document.location.pathname.includes("/blackboard/")) {
-      const timestamps = presence.getTimestamps(
+      const [, endTimestamp] = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       );
@@ -135,8 +128,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = iFramePaused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
       if (iFramePaused) {
         delete presenceData.startTimestamp;
         delete presenceData.endTimestamp;
@@ -156,20 +148,20 @@ presence.on("UpdateData", async () => {
       video = document.querySelector(
         "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-control-show.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
       );
-      if (video == null) {
+      if (!video) {
         video = document.querySelector(
           "#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
       }
-      if (video == null) {
+      if (!video) {
         video = document.querySelector(
           "#bilibiliPlayer > div.bilibili-player-area.video-state-blackside > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
       }
-      if (video == null) {
+      if (!video)
         video = document.querySelector(".bilibili-player-video > video");
-      }
-      if (video == null) {
+
+      if (!video) {
         video = document.querySelector(
           "#bilibiliPlayer > div.bilibili-player-area.video-state-blackside.progress-shadow-show > div.bilibili-player-video-wrap > div.bilibili-player-video > video"
         );
@@ -177,9 +169,9 @@ presence.on("UpdateData", async () => {
 
       videoDuration = video.duration;
       videoCurrentTime = video.currentTime;
-      paused = video.paused;
+      ({ paused } = video);
 
-      const timestamps = presence.getTimestamps(
+      const [, endTimestamp] = presence.getTimestamps(
         Math.floor(videoCurrentTime),
         Math.floor(videoDuration)
       );
@@ -188,8 +180,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
 
       if (paused) {
         delete presenceData.startTimestamp;
@@ -202,16 +193,16 @@ presence.on("UpdateData", async () => {
       );
 
       presenceData.details = title.innerText;
-      presenceData.state = "Episode: " + page.innerText + "";
+      presenceData.state = `Episode: ${page.innerText}`;
       //小黑屋
-    } else if (document.location.pathname == "/blackroom/") {
+    } else if (document.location.pathname === "/blackroom/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Blackroom system";
     } else if (document.location.pathname.includes("/blackroom/ban/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Blackroom system";
       presenceData.state = "Browsing Banned";
-    } else if (document.location.pathname == "/judgement/") {
+    } else if (document.location.pathname === "/judgement/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Judgement system";
     } else if (document.location.pathname.includes("/judgement/index")) {
@@ -227,7 +218,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Judgement system";
       presenceData.state = "Overwatching case";
       //ranking
-    } else if (document.location.pathname == "/ranking") {
+    } else if (document.location.pathname === "/ranking") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Ranking";
     } else if (document.location.pathname.includes("/ranking/all/")) {
@@ -266,9 +257,9 @@ presence.on("UpdateData", async () => {
       title = document.querySelector("head > title");
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing for subcategory";
-      if (title.innerText == "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili") {
+      if (title.innerText === "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili")
         presenceData.state = "资讯";
-      } else {
+      else {
         presenceData.state = title.innerText.replace(
           " - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili",
           ""
@@ -293,14 +284,14 @@ presence.on("UpdateData", async () => {
       }
     }
     //dynamic
-  } else if (document.location.hostname == "t.bilibili.com") {
+  } else if (document.location.hostname === "t.bilibili.com") {
     user = document.querySelector(
       "#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a"
     );
     if (user !== null) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing dynamic";
-      presenceData.state = "of: " + user.innerText;
+      presenceData.state = `of: ${user.innerText}`;
       presenceData.smallImageKey = "reading";
     } else if (document.location.pathname.includes("/topic")) {
       title = document.querySelector(
@@ -308,13 +299,13 @@ presence.on("UpdateData", async () => {
       );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing dynamic";
-      presenceData.state = "Tag: " + title.innerText;
+      presenceData.state = `Tag: ${title.innerText}`;
     } else {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing for dynamic";
     }
     //shortfilm
-  } else if (document.location.hostname == "vc.bilibili.com") {
+  } else if (document.location.hostname === "vc.bilibili.com") {
     user = document.querySelector(
       "#app > div > div.left-section.f-left > div.uploader-box.module-card.border-box > div > div > div.user > a"
     );
@@ -326,7 +317,7 @@ presence.on("UpdateData", async () => {
     videoCurrentTime = video.currentTime;
     videoPaused = video.paused;
 
-    const timestamps = presence.getTimestamps(
+    const [, endTimestamp] = presence.getTimestamps(
       Math.floor(videoCurrentTime),
       Math.floor(videoDuration)
     );
@@ -334,21 +325,19 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = videoPaused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    presenceData.endTimestamp = endTimestamp;
 
     if (videoPaused) {
       delete presenceData.startTimestamp;
       delete presenceData.endTimestamp;
     }
     if (user !== null) {
-      presenceData.details = "Watching " + user.innerText + "'s shortfilm";
+      presenceData.details = `Watching ${user.innerText}'s shortfilm`;
       presenceData.smallImageKey = "vcall";
-    } else {
-      presenceData.details = "Browsing for shortfilm";
-    }
+    } else presenceData.details = "Browsing for shortfilm";
+
     //space
-  } else if (document.location.hostname == "space.bilibili.com") {
+  } else if (document.location.hostname === "space.bilibili.com") {
     user = document.querySelector("#h-name");
     if (user !== null) {
       presenceData.startTimestamp = browsingStamp;
@@ -358,19 +347,19 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Someone's space";
     }
-  } else if (document.location.hostname == "account.bilibili.com") {
+  } else if (document.location.hostname === "account.bilibili.com") {
     if (document.location.pathname.includes("/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing their settings";
     }
     //创作中心
-  } else if (document.location.hostname == "member.bilibili.com") {
+  } else if (document.location.hostname === "member.bilibili.com") {
     if (document.location.pathname.includes("/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing their dashboard";
     }
     //会员购
-  } else if (document.location.hostname == "show.bilibili.com") {
+  } else if (document.location.hostname === "show.bilibili.com") {
     title = document.querySelector(
       "#app > div.buyticket > div.whole-detail-info-wrapper > div.detail-info-wrapper > div.product-info-name"
     );
@@ -383,8 +372,8 @@ presence.on("UpdateData", async () => {
       presenceData.details = "会员购";
     }
     //漫画
-  } else if (document.location.hostname == "manga.bilibili.com") {
-    inread_title = document.querySelector(
+  } else if (document.location.hostname === "manga.bilibili.com") {
+    inreadTitle = document.querySelector(
       "body > div.reader-layout.w-100.h-100.p-absolute.p-zero > div > div.manga-reader-ui > div.navbar-container.w-100.p-absolute.p-zero.a-move-in-bottom > nav > div > div.read-nav > a.manga-title.t-over-hidden"
     );
     page = document.querySelector(
@@ -395,8 +384,8 @@ presence.on("UpdateData", async () => {
     );
     if (page !== null) {
       presenceData.startTimestamp = browsingStamp;
-      presenceData.details = inread_title.innerText;
-      presenceData.state = "Reading P." + page.innerText;
+      presenceData.details = inreadTitle.innerText;
+      presenceData.state = `Reading P.${page.innerText}`;
       presenceData.smallImageKey = "reading";
     } else if (title !== null) {
       presenceData.startTimestamp = browsingStamp;
@@ -408,7 +397,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageKey = "reading";
     }
     //手游
-  } else if (document.location.hostname == "www.biligame.com") {
+  } else if (document.location.hostname === "www.biligame.com") {
     title = document.querySelector(
       "body > div.bui-gc > div.header-bar.one-row > div.right-panel > div > div > h2 > span:nth-child(1)"
     );
@@ -420,13 +409,13 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Game";
     }
-  } else if (document.location.hostname == "game.bilibili.com") {
+  } else if (document.location.hostname === "game.bilibili.com") {
     if (document.location.pathname.includes("/")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing Game";
     }
     //live
-  } else if (document.location.hostname == "live.bilibili.com") {
+  } else if (document.location.hostname === "live.bilibili.com") {
     user = document.querySelector(
       "#head-info-vm > div > div > div.room-info-down-row > a.room-owner-username.live-skin-normal-a-text.dp-i-block.v-middle"
     );
@@ -449,7 +438,7 @@ presence.on("UpdateData", async () => {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing live channels";
     }
-  } else if (document.location.hostname == "search.bilibili.com") {
+  } else if (document.location.hostname === "search.bilibili.com") {
     if (document.location.pathname.includes("/")) {
       const searchinput = document.querySelector("head > title");
       presenceData.startTimestamp = browsingStamp;
@@ -460,7 +449,7 @@ presence.on("UpdateData", async () => {
       );
       presenceData.smallImageKey = "search";
     }
-  } else if (document.location.hostname == "message.bilibili.com") {
+  } else if (document.location.hostname === "message.bilibili.com") {
     if (document.URL.includes("/#/reply")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Their notifications";
@@ -492,10 +481,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

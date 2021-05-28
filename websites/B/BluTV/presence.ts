@@ -1,12 +1,12 @@
 const presence = new Presence({
-  clientId: "664216462038401066"
-});
-
-const strings = presence.getStrings({
-  playing: "presence.playback.playing",
-  paused: "presence.playback.paused",
-  browsing: "presence.activity.browsing"
-});
+    clientId: "664216462038401066"
+  }),
+  strings = presence.getStrings({
+    playing: "presence.playback.playing",
+    paused: "presence.playback.paused",
+    browsing: "presence.activity.browsing"
+  }),
+  startTimestamp = Math.floor(Date.now() / 1000);
 
 function seriesName(name: string): string {
   return name.replace(/([^\W_]+[^\s-]*) */g, function (text) {
@@ -14,36 +14,24 @@ function seriesName(name: string): string {
   });
 }
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let data: {
+    video: { paused: boolean; duration: number; currentTime: number };
+    movie?: { name: string };
+    series?: { name: string; ep: string; season: string };
+  },
+  video: { paused: boolean; duration: number; currentTime: number };
 
-const startTimestamp = Math.floor(Date.now() / 1000);
-
-let data: any, video: HTMLVideoElement;
-
-presence.on("iFrameData", async (msg) => {
+presence.on("iFrameData", async (msg: typeof data) => {
   if (!msg) return;
   data = msg;
-  video = msg.video;
+  ({ video } = msg);
 });
 
 presence.on("UpdateData", async () => {
-  const path = document.location.pathname;
-
-  const presenceData: PresenceData = {
-    largeImageKey: "blutv"
-  };
+  const path = document.location.pathname,
+    presenceData: PresenceData = {
+      largeImageKey: "blutv"
+    };
 
   if (!path.includes("izle")) {
     video = null;
@@ -71,7 +59,7 @@ presence.on("UpdateData", async () => {
         ? (await strings).paused
         : (await strings).playing;
 
-      const timestamps = getTimestamps(
+      const [, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -79,10 +67,8 @@ presence.on("UpdateData", async () => {
         video.duration &&
         !video.paused &&
         !document.location.pathname.startsWith("/canli-yayin")
-      ) {
-        presenceData.startTimestamp = timestamps[0];
-        presenceData.endTimestamp = timestamps[1];
-      }
+      )
+        presenceData.endTimestamp = endTimestamp;
     }
   } else {
     presenceData.startTimestamp = startTimestamp;
