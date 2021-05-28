@@ -4,34 +4,33 @@ const presence = new Presence({
 
 let paginaAtual: HTMLElement, ultimaPagina: HTMLElement;
 const nomeObra: HTMLElement = document.querySelector(
-  "body > main > div > div > div.col-sm-12 > div.manga-page > div.pst-block-head-manga > h2"
-);
-const categoriasObra: HTMLElement = document.querySelector(
-  "body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(3)"
-);
-const noticiaTitulo: HTMLElement = document.querySelector(
-  "body > main > div > div:nth-child(1) > div > h2"
-);
-const nomeObraLeitor: HTMLElement = document.querySelector(
-  "#navbar-collapse-1 > ul > li:nth-child(1) > a"
-);
-const leitorCapitulo: HTMLElement = document.querySelector(
-  "#chapter-list > ul > li.active > a"
-);
-const categoria1: HTMLElement = document.querySelector(
-  "body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(4)"
-);
+    "body > main > div > div > div.col-sm-12 > div.manga-page > div.pst-block-head-manga > h2"
+  ),
+  categoriasObra: HTMLElement = document.querySelector(
+    "body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(3)"
+  ),
+  noticiaTitulo: HTMLElement = document.querySelector(
+    "body > main > div > div:nth-child(1) > div > h2"
+  ),
+  nomeObraLeitor: HTMLElement = document.querySelector(
+    "#navbar-collapse-1 > ul > li:nth-child(1) > a"
+  ),
+  leitorCapitulo: HTMLElement = document.querySelector(
+    "#chapter-list > ul > li.active > a"
+  ),
+  categoria1: HTMLElement = document.querySelector(
+    "body > main > div > div > div.col-sm-12 > div.manga-page > div.info-manga-esq > div:nth-child(1) > div.info-manga > dl > dt:nth-child(4)"
+  );
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
-  };
-  const path: any = document.location.pathname;
+      largeImageKey: "logo"
+    },
+    path: string = document.location.pathname;
 
   presenceData.startTimestamp = Math.floor(Date.now() / 1000);
 
-  if (path == "/") {
-    presenceData.details = "Início";
-  } else if (path == "/manga-list") {
+  if (path === "/") presenceData.details = "Início";
+  else if (path === "/manga-list") {
     paginaAtual = document.querySelector(
       "body > main > div > div.row.row-branca > div > div > div.type-content > div.row > div > div.row > div > ul > li.active > span"
     );
@@ -39,9 +38,8 @@ presence.on("UpdateData", async () => {
       "body > main > div > div.row.row-branca > div > div > div.type-content > div.row > div > div.row > div > ul > li:nth-child(6) > a"
     );
     presenceData.details = "Lista de Mangás";
-    presenceData.state =
-      "Página " + paginaAtual.innerText + " de " + ultimaPagina.innerText;
-  } else if (path == "/latest-release") {
+    presenceData.state = `Página ${paginaAtual.innerText} de ${ultimaPagina.innerText}`;
+  } else if (path === "/latest-release") {
     paginaAtual = document.querySelector(
       "body > main > div > div:nth-child(1) > div > div.row > div > ul > li.active > span"
     );
@@ -49,10 +47,9 @@ presence.on("UpdateData", async () => {
       "body > main > div > div:nth-child(1) > div > div.row > div > ul > li:nth-child(12) > a"
     );
     presenceData.details = "Últimas Atualizações";
-    presenceData.state =
-      "Página " + paginaAtual.innerText + " de " + ultimaPagina.innerText;
+    presenceData.state = `Página ${paginaAtual.innerText} de ${ultimaPagina.innerText}`;
   } else if (path.includes("/manga/")) {
-    document.location.pathname.split("/").length - 1 == 4
+    document.location.pathname.split("/").length - 1 === 4
       ? ((presenceData.details = nomeObraLeitor.innerText.replace(
           "Manga",
           " "
@@ -67,9 +64,7 @@ presence.on("UpdateData", async () => {
   } else if (path.includes("/news/")) {
     presenceData.details = "Nóticias";
     presenceData.state = noticiaTitulo.innerText;
-  } else {
-    presenceData.details = "Navegando...";
-  }
+  } else presenceData.details = "Navegando...";
 
   presence.setActivity(presenceData);
 });

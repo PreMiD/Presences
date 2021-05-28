@@ -29,9 +29,9 @@ presence.on("UpdateData", () => {
     presenceData.state =
       document.querySelector("#article-body > h1").textContent;
     presenceData.details = "Bir blog okuyor:";
-  } else if (window.location.pathname.endsWith("forum/")) {
+  } else if (window.location.pathname.endsWith("forum/"))
     presenceData.details = "Tüm forumlara göz atıyor.";
-  } else if (window.location.pathname.endsWith("canli/")) {
+  else if (window.location.pathname.endsWith("canli/")) {
     presenceData.state = "CHIP Online";
     presenceData.details = "Tüm Tech-Talk arşivine göz atıyor.";
   } else if (window.location.pathname.startsWith("/forum/")) {
@@ -40,10 +40,8 @@ presence.on("UpdateData", () => {
       document.querySelector("#forumwrap > h1").textContent;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

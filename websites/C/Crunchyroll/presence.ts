@@ -15,7 +15,7 @@ let lastPlaybackState = null,
   playback: boolean,
   browsingStamp = Math.floor(Date.now() / 1000);
 
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -26,37 +26,34 @@ let iFrameVideo: boolean,
   paused: boolean;
 
 interface iFrameData {
-  iframe_video: {
+  iframeVideo: {
     iFrameVideo: boolean;
-    currTime: number;
-    dur: number;
+    currentTime: number;
+    duration: number;
     paused: boolean;
   };
 }
 
 presence.on("iFrameData", (data: iFrameData) => {
-  playback = data.iframe_video !== null ? true : false;
+  playback = data.iframeVideo !== null ? true : false;
 
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
-  }
+  if (playback)
+    ({ iFrameVideo, currentTime, duration, paused } = data.iframeVideo);
 });
 
 presence.on("UpdateData", async () => {
-  var presenceData: PresenceData = {
-    largeImageKey: "lg"
+  const presenceData: PresenceData = {
+    largeImageKey: "lg",
+    startTimestamp: browsingStamp
   };
 
   if (!playback && document.location.pathname.includes("/manga")) {
     if (document.location.pathname.includes("/read")) {
       const title = document.querySelector(".chapter-header a").innerHTML,
-        currChapter = document
+        [currChapter] = document
           .querySelector(".chapter-header")
           .innerHTML.split("</a>")[1]
-          .split("\n")[0],
+          .split("\n"),
         lastPage = document.querySelector(".images").children.length,
         currPage =
           document.querySelector(".first-page-number").innerHTML === ""
@@ -65,7 +62,7 @@ presence.on("UpdateData", async () => {
 
       presenceData.details = title;
       presenceData.state = `${(await strings).reading} ${currChapter}`;
-      presenceData.startTimestamp = browsingStamp;
+
       presenceData.smallImageKey = "book_open";
       presenceData.smallImageText = `Page ${currPage}/${lastPage}`;
       presenceData.buttons = [
@@ -75,21 +72,20 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (document.location.pathname.includes("/volumes")) {
-      const title = document
+      const [, title] = document
         .querySelector(".ellipsis")
-        .innerHTML.split("&gt;")[1];
+        .innerHTML.split("&gt;");
 
       presenceData.details = (await strings).viewManga;
       presenceData.state = title;
       presenceData.buttons = [
         {
-          label: "View " + (await strings).manga,
+          label: `View ${(await strings).manga}`,
           url: document.location.toString()
         }
       ];
     } else {
       presenceData.details = (await strings).browse;
-      presenceData.startTimestamp = browsingStamp;
 
       delete presenceData.state;
       delete presenceData.smallImageKey;
@@ -100,7 +96,6 @@ presence.on("UpdateData", async () => {
 
   if (!playback && !document.location.pathname.includes("/manga")) {
     presenceData.details = (await strings).browse;
-    presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
@@ -112,8 +107,8 @@ presence.on("UpdateData", async () => {
     const videoTitle = document.querySelector(".ellipsis .text-link span"),
       episod = document.querySelectorAll("#showmedia_about_media h4"),
       epName = document.querySelector("h4#showmedia_about_name"),
-      episode = episod[1].innerHTML + " - " + epName.innerHTML,
-      timestamps = presence.getTimestamps(
+      episode = `${episod[1].innerHTML} - ${epName.innerHTML}`,
+      [, endTimestamp] = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
       );
@@ -121,7 +116,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.endTimestamp = timestamps[1];
+    presenceData.endTimestamp = endTimestamp;
 
     presence.setTrayTitle(
       paused

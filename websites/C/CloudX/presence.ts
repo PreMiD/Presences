@@ -3,7 +3,7 @@ const presence = new Presence({
   }),
   browsingStamp = Math.floor(Date.now() / 1000);
 
-let title, artist, dj, playbackStatus: string;
+let title: string, artist: string, dj: string, playbackStatus: string;
 
 function listener(): void {
   const json = JSON.parse(this.responseText);
@@ -21,11 +21,9 @@ function getData(): void {
 
 function getStatus(): string {
   const playPauseBtn = document.querySelector("#play");
-  if (playPauseBtn.className === "fas fa-play") {
-    return "Paused";
-  } else if (playPauseBtn.className === "fas fa-pause") {
-    return "Playing";
-  }
+  if (playPauseBtn.className === "fas fa-play") return "Paused";
+  else if (playPauseBtn.className === "fas fa-pause") return "Playing";
+
   return "Playing";
 }
 
@@ -34,30 +32,25 @@ setInterval(getData, 5000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
   };
 
   if (
     document.location.hostname === "www.thisiscloudx.com" ||
     document.location.hostname === "thisiscloudx.com"
   ) {
-    presenceData.startTimestamp = browsingStamp;
     playbackStatus = getStatus();
-    if (playbackStatus === "Paused") {
-      presenceData.smallImageKey = "pause";
-    } else if (playbackStatus === "Playing") {
-      presenceData.smallImageKey = "play";
-    }
+    if (playbackStatus === "Paused") presenceData.smallImageKey = "pause";
+    else if (playbackStatus === "Playing") presenceData.smallImageKey = "play";
 
     presenceData.details = `🎵 | ${artist} - ${title}`;
     presenceData.state = `🎙️ | ${dj}`;
     presenceData.smallImageText = playbackStatus;
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

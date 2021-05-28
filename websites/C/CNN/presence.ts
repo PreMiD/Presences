@@ -63,7 +63,7 @@ presence.on("UpdateData", async function () {
     }
   } else if (
     urlpath[1] >= "1900" &&
-    urlpath[1] <= new Date().getFullYear() &&
+    urlpath[1] <= String(new Date().getFullYear()) &&
     urlpath[2] >= "01" &&
     urlpath[2] <= "12" &&
     urlpath[3] >= "01" &&
@@ -128,7 +128,7 @@ presence.on("UpdateData", async function () {
       }
     } else presenceData.details = "Specials";
   } else if (urlpath[1] === "election" && urlpath[2] >= "1900") {
-    presenceData.details = "Election " + urlpath[2];
+    presenceData.details = `Election ${urlpath[2]}`;
 
     if (urlpath[4] === "president") {
       const scoreStyle = document.querySelectorAll(
@@ -138,14 +138,7 @@ presence.on("UpdateData", async function () {
           "div.bop-main-scorestyles__BOPName-sc-17mbuqb-3"
         );
 
-      presenceData.state =
-        scoreStyle2[1]?.textContent +
-        ": " +
-        scoreStyle[1]?.textContent +
-        " - " +
-        scoreStyle2[2]?.textContent +
-        ": " +
-        scoreStyle[2]?.textContent;
+      presenceData.state = `${scoreStyle2[1]?.textContent}: ${scoreStyle[1]?.textContent} - ${scoreStyle2[2]?.textContent}: ${scoreStyle[2]?.textContent}`;
     } else if (urlpath[4] === "state") {
       const details = document.querySelector(
         "h1.pagestyles__DesktopH1-sc-7kqwl2-74"
@@ -175,10 +168,8 @@ presence.on("UpdateData", async function () {
     presenceData.details = "Browsing Newsletters";
   else presenceData.details = "Other";
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

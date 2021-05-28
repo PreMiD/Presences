@@ -18,9 +18,9 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.pathname == "/" || !document.location.pathname) {
+  if (document.location.pathname === "/" || !document.location.pathname)
     presenceData.details = "Website Home";
-  } else if (document.location.pathname.includes("/project/")) {
+  else if (document.location.pathname.includes("/project/")) {
     translateProject =
       document.querySelector(
         ".title-name.project-name-preview.text-overflow"
@@ -31,15 +31,15 @@ presence.on("UpdateData", () => {
     );
 
     presenceData.details = translateProject.innerText;
-    if (document.location.pathname.includes("activity_stream")) {
+    if (document.location.pathname.includes("activity_stream"))
       presenceData.state = "Viewing activity";
-    } else if (document.location.pathname.includes("reports")) {
+    else if (document.location.pathname.includes("reports"))
       presenceData.state = "Viewing reports";
-    } else if (document.location.pathname.includes("discussions")) {
+    else if (document.location.pathname.includes("discussions"))
       presenceData.state = "Viewing discussions";
-    } else if (document.location.pathname.includes("tasks")) {
+    else if (document.location.pathname.includes("tasks"))
       presenceData.state = "Viewing tasks";
-    } else {
+    else {
       presenceData.state =
         translatePageTitle?.innerText || "Viewing project home";
     }
@@ -50,7 +50,7 @@ presence.on("UpdateData", () => {
     );
     translateProject = document.querySelector("title");
 
-    presenceData.details = "Translating " + translatingFile.innerHTML;
+    presenceData.details = `Translating ${translatingFile.innerHTML}`;
     presenceData.state = `${translateProject.innerText.split("-")[1].trim()} (${
       translatingLanguage.innerHTML
     })`;
