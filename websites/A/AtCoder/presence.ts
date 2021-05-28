@@ -30,12 +30,12 @@ presence.on("UpdateData", async () => {
 
       case "contests": {
         presenceData.details = "Viewing Contest";
-        presenceData.state = document.title.split("-")[0];
+        presenceData.state = `${document.title.split("-")[0]}`;
 
         switch (location.pathname.split("/")[3]) {
           case "tasks": {
             presenceData.details = "Viewing Contest Tasks";
-            presenceData.state = document.title.split("-")[1];
+            presenceData.state = `${document.title.split("-")[1]}`;
 
             if (location.pathname.split("/").length === 5) {
               presenceData.details =
@@ -47,8 +47,9 @@ presence.on("UpdateData", async () => {
 
           case "clarifications": {
             presenceData.details = "Viewing Clarifications";
-            presenceData.state =
-              "Contest: " + location.pathname.split("/")[2].toUpperCase();
+            presenceData.state = `Contest: ${location.pathname
+              .split("/")[2]
+              .toUpperCase()}`;
             break;
           }
 
@@ -59,9 +60,9 @@ presence.on("UpdateData", async () => {
               compilerName = document
                 .querySelectorAll(".select2-selection__rendered")
                 .item(1).textContent;
-            presenceData.details =
-              "Submitting Solution: " +
-              location.pathname.split("/")[2].toUpperCase();
+            presenceData.details = `Submitting Solution: ${location.pathname
+              .split("/")[2]
+              .toUpperCase()}`;
             presenceData.state = `${problemName} [${compilerName}]`;
             break;
           }
@@ -88,40 +89,45 @@ presence.on("UpdateData", async () => {
               presenceData.details = "Viewing Virtual Standings";
             else presenceData.details = "Viewing Standings";
 
-            presenceData.state =
-              "Contest: " + location.pathname.split("/")[2].toUpperCase();
+            presenceData.state = `Contest: ${location.pathname
+              .split("/")[2]
+              .toUpperCase()}`;
             break;
           }
 
           case "results": {
             presenceData.details = "Viewing Result";
-            presenceData.state =
-              "Contest: " + location.pathname.split("/")[2].toUpperCase();
+            presenceData.state = `Contest: ${location.pathname
+              .split("/")[2]
+              .toUpperCase()}`;
             break;
           }
 
           case "editorial": {
             presenceData.details = "Viewing Editorial";
-            presenceData.state =
-              "Contest: " + location.pathname.split("/")[2].toUpperCase();
+            presenceData.state = `Contest: ${location.pathname
+              .split("/")[2]
+              .toUpperCase()}`;
 
             if (location.pathname.split("/").length === 5) {
               presenceData.details = "Reading Editorial";
-              presenceData.state =
-                location.pathname.split("/")[2].toUpperCase() +
-                ": " +
+              presenceData.state = `${location.pathname
+                .split("/")[2]
+                .toUpperCase()}: ${
                 document
                   .querySelector("#main-container")
                   .querySelector("h2")
-                  .querySelector("a").textContent;
+                  .querySelector("a").textContent
+              }`;
             }
             break;
           }
 
           case "custom_test": {
             presenceData.details = "Performing Custom Test";
-            presenceData.state =
-              "Contest: " + location.pathname.split("/")[2].toUpperCase();
+            presenceData.state = `Contest: ${location.pathname
+              .split("/")[2]
+              .toUpperCase()}`;
             break;
           }
         }
