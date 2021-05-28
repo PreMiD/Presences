@@ -15,15 +15,12 @@ presence.on("UpdateData", async () => {
     search = document.querySelector(
       "#__next > div > div > div.SearchModalstyle__SearchModalStyle-sc-1h6b5wy-0.knmuVj > div.SearchModalstyle__SearchModalHeaderStyle-sc-1h6b5wy-1.kNvWZE > div > div:nth-child(2) > div.SearchModalstyle__SearchModalInputWrapperStyle-sc-1h6b5wy-5.iwOFOK > input"
     );
-    if (!search) {
-      presenceData.details = "Bekijkt de homepagina";
-    } else if (search.value !== "") {
+    if (!search) presenceData.details = "Bekijkt de homepagina";
+    else if (search.value !== "") {
       presenceData.details = "Zoekt voor:";
       presenceData.state = search.value;
       presenceData.smallImageKey = "searching";
-    } else {
-      presenceData.details = "Bekijkt de homepagina";
-    }
+    } else presenceData.details = "Bekijkt de homepagina";
   }
   if (page === "/programmas" || page === "/programmas/") {
     presenceData.details = "Ontdekt:";
@@ -54,15 +51,15 @@ presence.on("UpdateData", async () => {
             "#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-duration"
           ).textContent
         ),
-        timestamps = presence.getTimestamps(currentTime, durationss);
-      presenceData.endTimestamp = timestamps[1];
+        [, endTimestamp] = presence.getTimestamps(currentTime, durationss);
+      presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = "play";
     }
   }
   if (page.includes("/afleveringen/video/")) {
     delete presenceData.startTimestamp;
     const titles = document.querySelector(
-        'meta[name="og:title"]'
+        "meta[name=\"og:title\"]"
       ) as HTMLMetaElement,
       rp23 = titles.content.replace(/[^0-9.]/g, ""),
       rp2 = rp23.length + 21,
@@ -72,7 +69,7 @@ presence.on("UpdateData", async () => {
       .replace("aflevering", "")
       .replace(/[0-9]/g, "");
     presenceData.state = rp
-      .replace("/,/g", ":")
+      .replace(/,/g, ":")
       .replace("Seizoen", "S")
       .replace("aflevering", ":E")
       .replace(/\s/g, "");
@@ -91,8 +88,8 @@ presence.on("UpdateData", async () => {
             "#player-jw-wrapper > div.jw-controls.jw-reset > div.jw-controlbar.jw-reset > div.jw-reset.jw-button-container > div.jw-icon.jw-icon-inline.jw-text.jw-reset.jw-text-duration"
           ).textContent
         ),
-        timestamps = presence.getTimestamps(currentTime, durationss);
-      presenceData.endTimestamp = timestamps[1];
+        [, endTimestamp] = presence.getTimestamps(currentTime, durationss);
+      presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = "play";
     } else {
       title = document.querySelector(
@@ -107,7 +104,5 @@ presence.on("UpdateData", async () => {
   if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

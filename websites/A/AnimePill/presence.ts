@@ -100,16 +100,15 @@ const pages: PageContext[] = [
     } else if (
       !lastIframeData ||
       (Date.now() - lastIframeData.getTime()) / 1000 / 60 > 10
-    ) {
+    )
       currentVideo = null;
-    }
   });
   presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
       largeImageKey: "logo",
       largeImageText: "AnimePill"
     } as PresenceData;
-    if (document.location.hostname == "animepill.com") {
+    if (document.location.hostname === "animepill.com") {
       const strings: { [key: string]: string } = await presence.getStrings({
           play: "presence.playback.playing",
           pause: "presence.playback.paused",
@@ -121,7 +120,7 @@ const pages: PageContext[] = [
         context.exec(presence, presenceData, { strings, video: currentVideo })
       );
       return result.then((data) => {
-        if (data.details == null) {
+        if (data?.details === null) {
           data.details = strings.browsing;
           presence.setTrayTitle();
           presence.setActivity();
@@ -133,11 +132,9 @@ const pages: PageContext[] = [
       });
     }
 
-    if (presenceData.details == null) {
+    if (presenceData.details === null) {
       presence.setTrayTitle();
       presence.setActivity();
-    } else {
-      presence.setActivity(presenceData);
-    }
+    } else presence.setActivity(presenceData);
   });
 })();

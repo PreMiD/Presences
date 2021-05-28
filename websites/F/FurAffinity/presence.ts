@@ -13,29 +13,26 @@ let showBrowsingArt: boolean,
 const browsingStamp = Math.floor(Date.now() / 1000);
 
 function checkCurrentPage() {
-  if (document.location.hostname == "www.furaffinity.net") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "www.furaffinity.net") {
+    if (document.location.pathname === "/")
       presenceData.details = "Viewing home page";
-    } else if (
-      document.location.pathname.includes("/view/") &&
-      showBrowsingArt
-    ) {
+    else if (document.location.pathname.includes("/view/") && showBrowsingArt) {
       const title = document.querySelector(".submission-title>h2>p").innerHTML,
         user = document.querySelector(
-          '.submission-id-sub-container a[href*="user"] strong'
+          ".submission-id-sub-container a[href*=\"user\"] strong"
         ).innerHTML;
-      presenceData.details = "Viewing Art: '" + title + "' by " + user;
+      presenceData.details = `Viewing Art: '${title}' by ${user}`;
     } else if (
       document.location.pathname.includes("/msg/submissions") &&
       showBrowsingSubmissions
     ) {
       const submissionCount = parseInt(
         document.querySelector(
-          '.notification-container.inline[href*="submissions"]'
+          ".notification-container.inline[href*=\"submissions\"]"
         ).innerHTML
       );
       presenceData.details = "Viewing latest submissions";
-      presenceData.state = submissionCount + " Submissions";
+      presenceData.state = `${submissionCount} Submissions`;
     } else if (
       document.location.pathname.includes("/browse") &&
       showBrowsingCategory
@@ -49,9 +46,9 @@ function checkCurrentPage() {
             .innerHTML.replace("Browse Page #", "")
         );
       presenceData.details = "Browsing through FA";
-      presenceData.state = "Page " + searchPage;
-      if (category != "All")
-        presenceData.state += ' in category "' + category + '"';
+      presenceData.state = `Page ${searchPage}`;
+      if (category !== "All")
+        presenceData.state += ` in category "${category}"`;
     } else if (
       document.location.pathname.includes("/user/") &&
       showBrowsingProfile
@@ -61,7 +58,7 @@ function checkCurrentPage() {
         .innerHTML.replace(/~/, "")
         .trim();
       presenceData.details = "Viewing user: ";
-      presenceData.state = "@" + user;
+      presenceData.state = `@${user}`;
     } else if (
       document.location.pathname.includes("/gallery/") &&
       showBrowsingProfile
@@ -71,13 +68,13 @@ function checkCurrentPage() {
         .innerHTML.replace(/~/, "")
         .trim();
       presenceData.details = "Viewing gallery of user: ";
-      presenceData.state = "@" + user;
+      presenceData.state = `@${user}`;
     } else if (
       document.location.pathname.includes("/search/") &&
       showBrowsingSearch
     ) {
-      const searchTerm = document.location.search.replace("?q=", ""),
-        searchResults = parseInt(
+      let searchTerm = document.location.search.replace("?q=", "");
+      const searchResults = parseInt(
           document.querySelector("#query-stats>div span:nth-child(2)").innerHTML
         ),
         searchPage = parseInt(
@@ -85,25 +82,25 @@ function checkCurrentPage() {
             .querySelector(".pagination strong")
             .innerHTML.replace("Search Result Page #", "")
         );
-      if (searchTerm == "")
+      if (searchTerm === "") {
         searchTerm = document
           .querySelector(".search_string_input")
           .getAttribute("value");
-      presenceData.details = 'Searching for: "' + searchTerm + '"';
-      presenceData.state = searchResults + " results on page " + searchPage;
+      }
+      presenceData.details = `Searching for: "${searchTerm}"`;
+      presenceData.state = `${searchResults} results on page ${searchPage}`;
     } else if (
       document.location.pathname.includes("/controls/journal") &&
       showCreateJournal &&
       showBrowsingAccount
     ) {
       const journalName = document
-        .querySelector('form input[name*="subject"')
+        .querySelector("form input[name*=\"subject\"")
         .getAttribute("value");
-      if (journalName == "") {
-        presenceData.details = "Creates a Journal";
-      } else {
+      if (journalName === "") presenceData.details = "Creates a Journal";
+      else {
         presenceData.details = "Updates a Journal";
-        presenceData.state = '"' + journalName + '"';
+        presenceData.state = `"${journalName}"`;
       }
     } else if (
       document.location.pathname.includes("/msg/pms/") &&
@@ -113,8 +110,9 @@ function checkCurrentPage() {
       switch (document.location.hash) {
         case "#message": {
           presenceData.details = "Reads a note";
-          presenceData.state =
-            '"' + document.querySelector("#message h2").innerHTML + '"';
+          presenceData.state = `"${
+            document.querySelector("#message h2").innerHTML
+          }"`;
           break;
         }
         case "#MsgForm": {
@@ -139,10 +137,8 @@ presence.on("UpdateData", async () => {
   showBrowsingSearch = await presence.getSetting("search");
   showBrowsingCategory = await presence.getSetting("category");
   presenceData.startTimestamp = browsingStamp;
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

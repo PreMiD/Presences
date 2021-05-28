@@ -50,14 +50,13 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = { largeImageKey: "logo" },
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
 
-  if (host == "juniper.bot") {
+  if (host === "juniper.bot") {
     presenceData.startTimestamp = browsingStamp;
 
     switch (true) {
@@ -102,20 +101,23 @@ presence.on("UpdateData", async () => {
         break;
 
       case pathIncludes("/terms"):
-        presenceData.details =
-          (await strings).reading + " " + (await strings).terms;
+        presenceData.details = `${(await strings).reading} ${
+          (await strings).terms
+        }`;
         presenceData.smallImageKey = "list";
         break;
 
       case pathIncludes("/cookie"):
-        presenceData.details =
-          (await strings).reading + " " + (await strings).cookies;
+        presenceData.details = `${(await strings).reading} ${
+          (await strings).cookies
+        }`;
         presenceData.smallImageKey = "list";
         break;
 
       case pathIncludes("/privacy"):
-        presenceData.details =
-          (await strings).reading + " " + (await strings).privacy;
+        presenceData.details = `${(await strings).reading} ${
+          (await strings).privacy
+        }`;
         presenceData.smallImageKey = "list";
         break;
 
@@ -124,31 +126,23 @@ presence.on("UpdateData", async () => {
         break;
     }
   }
-  if (host == "docs.juniper.bot") {
+  if (host === "docs.juniper.bot") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = document.title;
     presenceData.state = "docs.juniper.bot";
     presenceData.smallImageKey = "list";
   }
-  if (host == "feedback.juniper.bot") {
+  if (host === "feedback.juniper.bot") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.state = "feedback.juniper.bot";
-    switch (true) {
-      case pathIncludes("/posts/"):
-        presenceData.details =
-          (await strings).reading +
-          " " +
-          document.querySelector(".post-header h1").innerHTML;
-        break;
-      default:
-        presenceData.details = (await strings).viewMainPage;
-        break;
-    }
+    if (pathIncludes("/posts/")) {
+      presenceData.details = `${(await strings).reading} ${
+        document.querySelector(".post-header h1").innerHTML
+      }`;
+    } else presenceData.details = (await strings).viewMainPage;
   }
   if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

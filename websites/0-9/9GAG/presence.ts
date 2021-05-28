@@ -1,21 +1,20 @@
-var presence = new Presence({
-  clientId: "631566704648126503"
-});
+const presence = new Presence({
+    clientId: "631566704648126503"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
-var browsingStamp = Math.floor(Date.now() / 1000);
-
-var user: any;
-var title: any;
-var replace: any;
-var search: any;
+let user: HTMLElement,
+  title: HTMLElement,
+  replace: HTMLElement,
+  search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "9gag"
   };
 
-  if (document.location.hostname == "9gag.com") {
-    if (document.location.pathname == "/") {
+  if (document.location.hostname === "9gag.com") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing home page";
     } else if (document.location.pathname.includes("/u/")) {
@@ -42,11 +41,9 @@ presence.on("UpdateData", async () => {
       );
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing gag:";
-      if (title.innerText.length > 128) {
-        presenceData.state = title.innerText.substring(0, 125) + "...";
-      } else {
-        presenceData.state = title.innerText;
-      }
+      if (title.innerText.length > 128)
+        presenceData.state = `${title.innerText.substring(0, 125)}...`;
+      else presenceData.state = title.innerText;
     } else if (document.location.pathname.includes("/hot")) {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing what's hot";
@@ -70,12 +67,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = search.value;
       presenceData.smallImageKey = "search";
     }
-  } else if (document.location.hostname == "about.9gag.com") {
+  } else if (document.location.hostname === "about.9gag.com") {
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Reading all about 9GAG";
     presenceData.smallImageKey = "reading";
-  } else if (document.location.hostname == "shop.9gag.com") {
-    if (document.location.pathname == "/") {
+  } else if (document.location.hostname === "shop.9gag.com") {
+    if (document.location.pathname === "/") {
       presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing store page";
     } else if (document.location.pathname.includes("/products/")) {
@@ -107,10 +104,8 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

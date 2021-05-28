@@ -29,7 +29,9 @@ presence.on("UpdateData", async () => {
         .replace("%artist%", data.nowplaying?.artist || "Artist")
         .replace(
           "%songText%",
-          `${data.nowplaying?.artist} - ${data.nowplaying?.title}` || "Song"
+          data.nowplaying
+            ? `${data.nowplaying.artist} - ${data.nowplaying.title}`
+            : "Song"
         )
         .replace("%title%", data.nowplaying?.title || "Title"),
       timestamp: await presence.getSetting("timestamp")
@@ -38,13 +40,7 @@ presence.on("UpdateData", async () => {
       largeImageKey: "logo",
       details: settings.details,
       state: settings.state,
-      smallImageText: `${data.presenter?.name || "AutoDJ"} is live!`,
-      buttons: [
-        {
-          label: "Tune in",
-          url: "https://live.itsbounce.net"
-        }
-      ]
+      smallImageText: `${data.presenter?.name || "AutoDJ"} is live!`
     };
 
   if (settings.timestamp) presenceData.startTimestamp = timestamp;
