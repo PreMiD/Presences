@@ -11,9 +11,7 @@
     "zh_TW": "全球速賣通是一個面向全球市場的網絡購物平台。",
     "ga_IE": "Siopadóireacht ar líne le haghaidh na leictreonaice is déanaí, faisean, oiriúintí teileafóin, leictreonaic ríomhaire, bréagáin, baile & gairdín, fearais tí, uirlisí, feabhsú tí agus go leor eile."
   },
-  "url": [
-    "www.alliexpress.com"
-  ],
+  "url": "www.alliexpress.com",
   "version": "1.2.7",
   "logo": "https://i.imgur.com/2LONg2Y.png",
   "thumbnail": "https://i.imgur.com/UrX3fAS.png",
