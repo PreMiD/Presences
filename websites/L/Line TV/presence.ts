@@ -24,7 +24,12 @@ const presence = new Presence({
 
 let oldLang: string = null,
   strings = getStrings(),
-  videoData: { sClipTitle:  string, sCategoryCode: string, nClipNo: number, sLiveStatus: string };
+  videoData: {
+    sClipTitle: string;
+    sCategoryCode: string;
+    nClipNo: number;
+    sLiveStatus: string;
+  };
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
