@@ -20,7 +20,7 @@
   "rules": {
     "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
     "no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
-    "quotes": ["warn", "double"],
+    "quotes": ["warn", "double", { "avoidEscape": true }],
     "camelcase": ["warn", { "properties": "always" }],
     "indent": "off",
     "curly": ["warn", "multi-or-nest"],
