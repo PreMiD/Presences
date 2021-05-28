@@ -10,36 +10,33 @@ presence.on("UpdateData", () => {
 
   if (window.location.pathname === "/") {
     const size = document
-      .getElementById("stats-hud")
-      .innerHTML.split("|").length;
-    const hstats = document.getElementById("stats-hud").innerHTML.split(" | ");
-    const mass = document
-      .getElementById("stats-hud")
-      .innerHTML.split("|")[0]
-      .replace("Score: ", "");
-    const modepr = document.getElementsByClassName("is-active")[2].id;
-    const mode = modepr.charAt(0).toUpperCase() + modepr.substring(1);
-    const region = document
-      .getElementsByClassName("is-active")[1]
-      .id.replace("europe", "EU")
-      .replace("america", "NA")
-      .replace("asia", "AS");
+        .getElementById("stats-hud")
+        .innerHTML.split("|").length,
+      hstats = document.getElementById("stats-hud").innerHTML.split(" | "),
+      mass = document
+        .getElementById("stats-hud")
+        .innerHTML.split("|")[0]
+        .replace("Score: ", ""),
+      modepr = document.getElementsByClassName("is-active")[2].id,
+      mode = modepr.charAt(0).toUpperCase() + modepr.substring(1),
+      region = document
+        .getElementsByClassName("is-active")[1]
+        .id.replace("europe", "EU")
+        .replace("america", "NA")
+        .replace("asia", "AS");
 
-    if ((document.getElementById("nick") as HTMLInputElement).value === "") {
+    if ((document.getElementById("nick") as HTMLInputElement).value === "")
       nickname = "Unnamed";
-    } else {
-      nickname = (document.getElementById("nick") as HTMLInputElement).value;
-    }
+    else nickname = (document.getElementById("nick") as HTMLInputElement).value;
 
-    if ((document.getElementById("tag") as HTMLInputElement).value === "") {
+    if ((document.getElementById("tag") as HTMLInputElement).value === "")
       tag = "";
-    } else {
+    else
       tag = `[${(document.getElementById("tag") as HTMLInputElement).value}]`;
-    }
 
     if (size === 2) {
       presenceData.details = `${region} - Main Menu`;
-      presenceData.state = "Gamemode: " + mode;
+      presenceData.state = `Gamemode: ${mode}`;
       presenceData.smallImageText = document
         .getElementById("stats-hud")
         .innerHTML.replace("|", "•");
@@ -49,15 +46,13 @@ presence.on("UpdateData", () => {
 
       presenceData.smallImageText = document
         .getElementById("stats-hud")
-        .innerHTML.replace(hstats[0] + " |", "")
+        .innerHTML.replace(`${hstats[0]} |`, "")
         .replace("|", "•");
     }
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

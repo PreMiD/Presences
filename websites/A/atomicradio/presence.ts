@@ -12,24 +12,24 @@ const presence = new Presence({
       listeners: 0,
       artist: "LISTEN TO THE DIFFERENCE!",
       title: "ATOMICRADIO",
-      start_at: 0,
-      end_at: 0
+      startAt: 0,
+      endAt: 0
     },
     dance: {
       name: "",
       listeners: 0,
       artist: "LISTEN TO THE DIFFERENCE!",
       title: "ATOMICRADIO",
-      start_at: 0,
-      end_at: 0
+      startAt: 0,
+      endAt: 0
     },
     trap: {
       name: "",
       listeners: 0,
       artist: "LISTEN TO THE DIFFERENCE!",
       title: "ATOMICRADIO",
-      start_at: 0,
-      end_at: 0
+      startAt: 0,
+      endAt: 0
     }
   };
 
@@ -45,8 +45,8 @@ function startWebSocket() {
           listeners: data.listeners,
           artist: data.song.artist,
           title: data.song.title,
-          start_at: data.song.start_at,
-          end_at: data.song.end_at
+          startAt: data.song.start_at,
+          endAt: data.song.end_at
         };
         break;
       case "atr.dance":
@@ -55,8 +55,8 @@ function startWebSocket() {
           listeners: data.listeners,
           artist: data.song.artist,
           title: data.song.title,
-          start_at: data.song.start_at,
-          end_at: data.song.end_at
+          startAt: data.song.start_at,
+          endAt: data.song.end_at
         };
         break;
       case "atr.trap":
@@ -65,8 +65,8 @@ function startWebSocket() {
           listeners: data.listeners,
           artist: data.song.artist,
           title: data.song.title,
-          start_at: data.song.start_at,
-          end_at: data.song.end_at
+          startAt: data.song.start_at,
+          endAt: data.song.end_at
         };
         break;
     }
@@ -85,8 +85,8 @@ async function getStationData(channel: string) {
     listeners: 0,
     artist: "LISTEN TO THE DIFFERENCE!",
     title: "ATOMICRADIO",
-    start_at: 0,
-    end_at: 0
+    startAt: 0,
+    endAt: 0
   };
   switch (channel) {
     case "ONE":
@@ -102,8 +102,8 @@ async function getStationData(channel: string) {
 
   presenceData.state = channelInfo.artist;
   presenceData.details = channelInfo.title;
-  presenceData.startTimestamp = channelInfo.start_at;
-  presenceData.endTimestamp = channelInfo.end_at;
+  presenceData.startTimestamp = channelInfo.startAt;
+  presenceData.endTimestamp = channelInfo.endAt;
   presenceData.smallImageText = `ATR.${channel} • ${channelInfo.listeners} listeners`;
   presenceData.smallImageKey = "play-button";
   presence.setActivity(presenceData, true);
@@ -136,23 +136,20 @@ presence.on("UpdateData", async () => {
 
   const playBar = document.getElementById("PlayBar"),
     playerButtonState = document.getElementById("Player_Play_Button_State"),
-    channel = String(
+    [, channel] = String(
       document.getElementById("Player_Station_Name").innerText
-    ).split(".")[1];
+    ).split(".");
   let playerOpen = false;
-  if (playBar.style.display == "block") {
+  if (playBar.style.display === "block") {
     playerOpen = true;
-    if (playerButtonState.className.includes("fa-play")) {
-      playerOpen = false;
-    }
+    if (playerButtonState.className.includes("fa-play")) playerOpen = false;
   }
 
-  if (playerOpen) {
-    getStationData(channel);
-  } else {
+  if (playerOpen) getStationData(channel);
+  else {
     clearPresenceData();
     if (
-      window.location.pathname == "/" ||
+      window.location.pathname === "/" ||
       window.location.pathname.startsWith("/home")
     ) {
       presenceData.details = "Browsing...";

@@ -9,9 +9,8 @@ const presence = new Presence({
   }),
   getElement = (query: string): string => {
     const element = document.querySelector(query);
-    if (element) {
-      return element.textContent.replace(/^\s+|\s+$/g, "");
-    } else return "Loading...";
+    if (element) return element.textContent.replace(/^\s+|\s+$/g, "");
+    else return "Loading...";
   },
   videoStatus = (video: HTMLVideoElement): string => {
     return video.paused ? "pause" : "play";
@@ -27,13 +26,7 @@ presence.on("UpdateData", async () => {
     showBrowseInfo = await presence.getSetting("browse"),
     showVideoInfo = await presence.getSetting("video"),
     data: PresenceData = {
-      details: undefined,
-      state: undefined,
-      largeImageKey: "anontpp",
-      smallImageKey: undefined,
-      smallImageText: undefined,
-      startTimestamp: undefined,
-      endTimestamp: undefined
+      largeImageKey: "anontpp"
     };
 
   if (oldUrl !== path) {
@@ -41,30 +34,25 @@ presence.on("UpdateData", async () => {
     elapsed = Math.floor(Date.now() / 1000);
   }
 
-  if (elapsed) {
-    data.startTimestamp = elapsed;
-  }
+  if (elapsed) data.startTimestamp = elapsed;
 
   const parseVideo = async (): Promise<void> => {
     const status = videoStatus(video);
     data.smallImageKey = status;
-    data.smallImageText = (await strings)[status];
+    data.smallImageText = video.paused
+      ? (await strings).pause
+      : (await strings).play;
     if (status === "play") {
-      const timestamps = presence.getTimestamps(
+      const [, endTimestamp] = presence.getTimestamps(
         video.currentTime,
         video.duration
       );
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      data.endTimestamp = endTimestamp;
     }
   };
 
   /* Browsing Info */
-  if (showBrowseInfo) {
-    if (path === "/") {
-      data.details = "Browsing";
-    }
-  }
+  if (showBrowseInfo && path === "/") data.details = "Browsing";
 
   /* Video Info */
   if (showVideoInfo) {
@@ -86,7 +74,8 @@ presence.on("UpdateData", async () => {
         // Movie Logic
         data.details = "Watching Movie";
         try {
-          data.state = state[0];
+          const [dataState] = state;
+          data.state = dataState;
           await parseVideo();
         } catch {
           // deepscan

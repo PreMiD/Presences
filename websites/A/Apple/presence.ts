@@ -128,11 +128,11 @@ presence.on("UpdateData", async () => {
     } else if (urlpath.includes("newsroom")) {
       presenceData.details = "Newsroom";
 
-      if (urlpath.includes("topics"))
+      if (urlpath.includes("topics")) {
         presenceData.state = document
           .querySelector("h1.section-head")
           ?.getAttribute("aria-label");
-      else {
+      } else {
         presenceData.state =
           document.querySelector(".hero-headline")?.textContent;
 
@@ -356,7 +356,7 @@ presence.on("UpdateData", async () => {
 
       if (setting.shopCheckout && summary !== undefined) {
         presenceData.details = "Shop - Bag";
-        presenceData.state = "Summary: " + summary;
+        presenceData.state = `Summary: ${summary}`;
       } else {
         presenceData.details = "Shop";
         presenceData.state = "Bag";
@@ -392,9 +392,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Apple Support - Article:";
       presenceData.state =
         document.querySelector("h1#howto-title")?.textContent || "Unknown";
-    } else if (window.location.hostname === "getsupport.apple.com") {
+    } else if (window.location.hostname === "getsupport.apple.com")
       presenceData.details = "Apple Support";
-    } else {
+    else {
       presenceData.details = "Apple Support";
       presenceData.state = "Home";
     }
@@ -488,20 +488,20 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Apple Developer";
     presenceData.state = "Home";
 
-    if (dPages.find((e) => urlpath[1] === e))
+    if (dPages.find((e) => urlpath[1] === e)) {
       presenceData.state =
-        document.querySelector("a.ac-gn-link.ac-gn-link-" + cpage + ">span")
+        document.querySelector(`a.ac-gn-link.ac-gn-link-${cpage}>span`)
           ?.textContent ||
         document.querySelector("section.section-hero>h1.section-headline")
           ?.textContent ||
         document.querySelector("h2.localnav-title>a")?.textContent ||
         "Unknown";
-    else if (urlpath[1] === "custom-apps")
+    } else if (urlpath[1] === "custom-apps") {
       presenceData.state =
         document.querySelector("h2.localnav-title>a")?.textContent ||
         document.querySelector("h1.typography-headline")?.textContent ||
         "Unknown";
-    else if (urlpath[1].startsWith("wwdc")) {
+    } else if (urlpath[1].startsWith("wwdc")) {
       const wwdc = document
         .querySelector("a.ac-ln-title-logo>img")
         ?.getAttribute("alt");
@@ -552,10 +552,11 @@ presence.on("UpdateData", async () => {
         presenceData.state = "Distributing software";
       else if (urlpath[1] === "watchos" && urlpath[2] === "features")
         presenceData.state = "Features";
-      else
+      else {
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
           "Other";
+      }
     } else if (urlpath[1] === "documentation") {
       const page = document.querySelector("span.current.item");
 
@@ -578,10 +579,11 @@ presence.on("UpdateData", async () => {
       else if (urlpath[2] === "human-interface-guidelines")
         presenceData.state = "Human Interface Guidelines";
       else if (urlpath[2] === "resources") presenceData.state = "Resources";
-      else
+      else {
         presenceData.state =
           document.querySelector("h1.typography-headline")?.textContent ||
           "Other";
+      }
     } else if (
       urlpath[1] === "safari" ||
       urlpath[1] === "app-store-connect" ||
@@ -595,7 +597,7 @@ presence.on("UpdateData", async () => {
         document.querySelector("h2.localnav-title>a")?.textContent ||
         "Apple Developer";
       presenceData.state =
-        document.querySelector("a.localnav-menu-link.link-" + cpage)
+        document.querySelector(`a.localnav-menu-link.link-${cpage}`)
           ?.textContent ||
         document.querySelector("span.localnav-menu-link.current")
           ?.textContent ||
@@ -643,9 +645,9 @@ presence.on("UpdateData", async () => {
             });
           }
         }
-      } else if (urlpath[2] === "create") {
+      } else if (urlpath[2] === "create")
         presenceData.state = "Creating thread";
-      } else if (urlpath[2] === "register") presenceData.state = "Registration";
+      else if (urlpath[2] === "register") presenceData.state = "Registration";
 
       if (setting.buttons) {
         if (
@@ -692,14 +694,14 @@ presence.on("UpdateData", async () => {
         )?.textContent;
 
         if (vid) {
-          const video_startTime = Date.now(),
-            video_endTime =
-              Math.floor(video_startTime / 1000) -
+          const videoStartTime = Date.now(),
+            videoEndTime =
+              Math.floor(videoStartTime / 1000) -
               vid.currentTime +
               vid.duration +
               1;
 
-          presenceData.endTimestamp = video_endTime;
+          presenceData.endTimestamp = videoEndTime;
 
           if (!vid.paused) {
             presenceData.smallImageKey = "play";
@@ -718,13 +720,14 @@ presence.on("UpdateData", async () => {
             }
           ];
         }
-      } else
+      } else {
         presenceData.state =
           document.querySelector("section.inline-block>h1.collection-title")
             ?.textContent ||
           document.querySelector("span.localnav-menu-link.current")
             ?.textContent ||
           "Other";
+      }
     } else if (urlpath[1] === "news") {
       const urlParams = new URLSearchParams(window.location.search);
 
@@ -756,10 +759,8 @@ presence.on("UpdateData", async () => {
 
   if (presenceData.buttons.length === 0) delete presenceData.buttons;
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

@@ -2,7 +2,8 @@ const presence = new Presence({
     clientId: "631166262881550359"
   }),
   presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: Math.floor(Date.now() / 1000)
   },
   paths = {
     ":": "Home Page",
@@ -23,7 +24,6 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   if (document.location.hostname === "aternos.org") {
-    presenceData.startTimestamp = Date.now();
     let path = document.location.pathname.replace(
       /\//g,
       ""
@@ -34,8 +34,7 @@ presence.on("UpdateData", async () => {
     const page = paths[path];
     if (page) presenceData.details = page;
   } else {
-    const page = document.location.hostname.split(".")[0];
-    presenceData.startTimestamp = Date.now();
+    const [page] = document.location.hostname.split(".");
     switch (page) {
       case "support":
         if (document.location.pathname.includes("categories")) {
@@ -60,9 +59,8 @@ presence.on("UpdateData", async () => {
           const article: HTMLInputElement = document.querySelector("#query");
           presenceData.details = "Help Center - Searching:";
           presenceData.state = article.value;
-        } else {
-          presenceData.details = "Help Center";
-        }
+        } else presenceData.details = "Help Center";
+
         break;
       case "board":
         presenceData.startTimestamp = Date.now();
