@@ -23,11 +23,11 @@ presence.on("UpdateData", async () => {
 
   if (!playback) {
     const presenceData: PresenceData = {
-      largeImageKey: "lg"
+      largeImageKey: "lg",
+      startTimestamp: browsingStamp
     };
 
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
 
     delete presenceData.state;
     delete presenceData.smallImageKey;
@@ -65,7 +65,6 @@ presence.on("UpdateData", async () => {
 
     presenceData.details = videoTitle.innerText;
     presenceData.state = episode.innerText;
-    presenceData.startTimestamp = browsingStamp;
 
     if (video.paused) {
       delete presenceData.startTimestamp;

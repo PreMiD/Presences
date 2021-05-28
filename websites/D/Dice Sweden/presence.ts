@@ -141,7 +141,7 @@ presence.on("UpdateData", async () => {
     presenceData.details = gameTitle;
 
     presenceData.buttons = [
-      { label: "View " + gameTitle, url: window.location.href }
+      { label: `View ${gameTitle}`, url: window.location.href }
     ];
   } else if (window.location.pathname.includes("/people/")) {
     profileTitle = document
@@ -160,22 +160,16 @@ presence.on("UpdateData", async () => {
 
     delete presenceData.buttons;
     presenceData.buttons = [
-      { label: "View " + profileTitle, url: window.location.href }
+      { label: `View ${profileTitle}`, url: window.location.href }
     ];
   }
 
-  if (!showButtons && presenceData.buttons) {
-    delete presenceData.buttons;
-  }
+  if (!showButtons && presenceData.buttons) delete presenceData.buttons;
 
-  if (!showTimestamps) {
-    delete presenceData.startTimestamp;
-  }
+  if (!showTimestamps) delete presenceData.startTimestamp;
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

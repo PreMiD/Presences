@@ -15,12 +15,12 @@ presence.on("UpdateData", async () => {
   const re = new RegExp("https://animex.tech/anime/(.*)/(.*)", "g");
   playback = re.exec(window.location.href) !== null ? true : false;
   const presenceData: PresenceData = {
-    largeImageKey: "animex"
+    largeImageKey: "animex",
+    startTimestamp: browsingStamp
   };
 
   if (playback === false) {
     presenceData.details = "Browsing...";
-    presenceData.startTimestamp = browsingStamp;
     delete presenceData.state;
     delete presenceData.smallImageKey;
     presence.setActivity(presenceData, true);

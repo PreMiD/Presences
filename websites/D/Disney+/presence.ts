@@ -52,11 +52,8 @@ presence.on("UpdateData", async () => {
     strings = await getStrings();
   }
 
-  if (isHostDP) {
-    data.largeImageKey = "disneyplus-logo";
-  } else if (isHostHS) {
-    data.largeImageKey = "disneyplus-hotstar-logo";
-  }
+  if (isHostDP) data.largeImageKey = "disneyplus-logo";
+  else if (isHostHS) data.largeImageKey = "disneyplus-hotstar-logo";
 
   // Disney+ video
   if (isHostDP && location.pathname.includes("/video/")) {
@@ -68,7 +65,7 @@ presence.on("UpdateData", async () => {
       const groupWatchId = new URLSearchParams(location.search).get(
           "groupWatchId"
         ),
-        timestamps: number[] = presence.getTimestampsfromMedia(video);
+        [, endTimestamp] = presence.getTimestampsfromMedia(video);
 
       if (!privacy && groupWatchId) {
         groupWatchCount = Number(
@@ -92,11 +89,11 @@ presence.on("UpdateData", async () => {
         data.details = `${title} ${subtitle ? `- ${subtitle}` : ""}`;
         data.state = "In a GroupWatch";
       } else {
-        if (privacy)
+        if (privacy) {
           data.state = subtitle
             ? strings.watchingSeries
             : strings.watchingMovie;
-        else {
+        } else {
           data.details = title;
           data.state = subtitle || "Movie";
         }
@@ -104,8 +101,7 @@ presence.on("UpdateData", async () => {
 
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused ? strings.pause : strings.play;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      data.endTimestamp = endTimestamp;
 
       // remove timestamps if video is paused or user disabled timestamps
       if (video.paused || !time) {
@@ -189,7 +185,7 @@ presence.on("UpdateData", async () => {
       document.querySelector(".player-base video");
 
     if (video && !isNaN(video.duration)) {
-      const timestamps: number[] = presence.getTimestampsfromMedia(video),
+      const [, endTimestamp] = presence.getTimestampsfromMedia(video),
         titleField: HTMLDivElement = document.querySelector(
           ".controls-overlay .primary-title"
         ),
@@ -208,8 +204,7 @@ presence.on("UpdateData", async () => {
       }
       data.smallImageKey = video.paused ? "pause" : "play";
       data.smallImageText = video.paused ? strings.pause : strings.play;
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
+      data.endTimestamp = endTimestamp;
 
       if (video.paused || !time) {
         delete data.startTimestamp;

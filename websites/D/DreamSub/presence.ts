@@ -1,24 +1,7 @@
 const presence = new Presence({
-  clientId: "711175341825064970"
-});
-
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now(),
-    endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-
-  return [Math.floor(startTime / 1000), endTime];
-}
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+    clientId: "711175341825064970"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 let iFrameVideo: boolean,
   currentTime: number,
   duration: number,
@@ -28,31 +11,26 @@ let iFrameVideo: boolean,
 presence.on(
   "iFrameData",
   (data: {
-    iframe_video: {
+    iframeVideo: {
       duration: number;
       iFrameVideo: boolean;
-      currTime: number;
+      currentTime: number;
       paused: boolean;
     };
   }) => {
-    playback = data.iframe_video.duration !== null ? true : false;
-    if (playback) {
-      iFrameVideo = data.iframe_video.iFrameVideo;
-      currentTime = data.iframe_video.currTime;
-      duration = data.iframe_video.duration;
-      paused = data.iframe_video.paused;
-    }
+    playback = data.iframeVideo.duration !== null ? true : false;
+    if (playback)
+      ({ iFrameVideo, currentTime, duration, paused } = data.iframeVideo);
   }
 );
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "logo_ds" // Banner
+    largeImageKey: "logo_ds",
+    startTimestamp: browsingStamp // Banner
   };
 
-  presenceData.startTimestamp = browsingStamp;
-
-  if (document.location.pathname == "/") {
+  if (document.location.pathname === "/") {
     // dreamsub.stream/
 
     presenceData.smallImageKey = "home";
@@ -60,50 +38,50 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Nella Homepage...";
   } else if (document.location.pathname.includes("/animelist")) {
     // Anime guardati
-    const username = document.title.split("-")[1];
+    const [, username] = document.title.split("-");
     if (document.location.href.includes("?type=watched")) {
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "DreamSub";
       presenceData.details = "Lista Anime Guardati";
-      presenceData.state = "Di" + username;
+      presenceData.state = `Di${username}`;
     } else if (document.location.href.includes("?type=planToWatch")) {
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "DreamSub";
       presenceData.details = "Lista Anime da guardare";
-      presenceData.state = "Di" + username;
+      presenceData.state = `Di${username}`;
     } else if (document.location.href.includes("/animelist?type=watching")) {
       // Anime in corso
 
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "DreamSub";
       presenceData.details = "Lista Anime In corso";
-      presenceData.state = "Di" + username;
+      presenceData.state = `Di${username}`;
     } else if (document.location.href.includes("/animelist?type=planToWatch")) {
       // Anime da guardare
 
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "DreamSub";
       presenceData.details = "Lista Anime Da Guardare";
-      presenceData.state = "Di" + username;
+      presenceData.state = `Di${username}`;
     } else if (document.location.href.includes("/animelist?type=dropped")) {
       // Anime droppati
 
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "DreamSub";
       presenceData.details = "Lista Anime Droppati";
-      presenceData.state = "Di" + username;
+      presenceData.state = `Di${username}`;
     } else if (document.location.href.includes("/animelist?type=paused")) {
       // Anime in pausa
 
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "DreamSub";
       presenceData.details = "Lista Anime In Pausa";
-      presenceData.state = "Di" + username;
+      presenceData.state = `Di${username}`;
     } else if (document.location.href.includes("animelist")) {
       presenceData.smallImageKey = "user";
       presenceData.smallImageText = "DreamSub";
       presenceData.details = "Nella Animelist";
-      presenceData.state = "Di" + username;
+      presenceData.state = `Di${username}`;
     }
   } else if (document.location.pathname.includes("/settings")) {
     // Impostazioni utente
@@ -115,7 +93,7 @@ presence.on("UpdateData", async () => {
   } else if (document.location.pathname.includes("/user")) {
     // Profilo
 
-    const username = document.title.split("-")[1];
+    const [, username] = document.title.split("-");
     presenceData.smallImageKey = "user";
     presenceData.smallImageText = "DreamSub";
     presenceData.details = "Guardando il profilo di:";
@@ -241,45 +219,41 @@ presence.on("UpdateData", async () => {
         "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
       ).textContent,
       vote = document.querySelector("#vote_percent").textContent,
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+      [, endTimestamp] = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      ),
       animepreviewname = document.querySelector(
         "#animeDetails > div > div > div.dc-info > h1 > a > strong"
       ).textContent;
 
     presenceData.smallImageKey = "prewatch";
     presenceData.smallImageText = animepreviewname;
-    presenceData.details = "Sta per guardare:\n" + animepreviewname;
+    presenceData.details = `Sta per guardare:\n${animepreviewname}`;
     presenceData.state =
-      "Per più informazioni 🎦\n" +
-      type +
-      "\n" +
-      episodes +
-      "\n" +
-      releaseDate +
-      "\n" +
-      "Voto: " +
-      vote;
+      `Per più informazioni 🎦\n${type}\n${episodes}\n${releaseDate}\n` +
+      `Voto: ${vote}`;
 
     if (iFrameVideo === true && !isNaN(duration)) {
-      const newname = document.title.split(": Episodio")[0],
-        animenumber = document.title
+      const [newname] = document.title.split(": Episodio"),
+        [animenumber] = document.title
           .split(": ")[1]
-          .split("Streaming & Download HD")[0];
+          .split("Streaming & Download HD");
 
-      if (currentTime == duration) {
+      if (currentTime === duration) {
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = newname + "｜ " + animenumber;
-        presenceData.details = "Guardando: " + newname;
-        presenceData.state = animenumber + "｜Finito";
-      } else if (currentTime != duration) {
+        presenceData.smallImageText = `${newname}｜ ${animenumber}`;
+        presenceData.details = `Guardando: ${newname}`;
+        presenceData.state = `${animenumber}｜Finito`;
+      } else if (currentTime !== duration) {
         presenceData.smallImageKey = paused ? "pause" : "play";
-        presenceData.smallImageText = newname + " | " + animenumber;
-        presenceData.details = "Guardando: " + newname;
-        presenceData.startTimestamp = paused ? null : timestamps[0];
+        presenceData.smallImageText = `${newname} | ${animenumber}`;
+        presenceData.details = `Guardando: ${newname}`;
         presenceData.state = paused
-          ? animenumber + "｜In pausa"
-          : animenumber + "｜In riproduzione";
-        presenceData.endTimestamp = paused ? null : timestamps[1];
+          ? `${animenumber}｜In pausa`
+          : `${animenumber}｜In riproduzione`;
+        if (!paused) presenceData.endTimestamp = endTimestamp;
+        else delete presenceData.endTimestamp;
       }
     }
   } else if (document.location.pathname.includes("movie")) {
@@ -294,44 +268,40 @@ presence.on("UpdateData", async () => {
         "#animeDetails > div > div > div.dc-info > div.dci-spe > div:nth-child(7)"
       ).textContent,
       vote = document.querySelector("#vote_percent").textContent,
-      timestamps = getTimestamps(Math.floor(currentTime), Math.floor(duration)),
+      [, endTimestamp] = presence.getTimestamps(
+        Math.floor(currentTime),
+        Math.floor(duration)
+      ),
       animepreviewname = document.querySelector(
         "#animeDetails > div > div > div.dc-info > h1 > a > strong"
       ).textContent;
 
     presenceData.smallImageKey = "prewatch";
     presenceData.smallImageText = animepreviewname;
-    presenceData.details = "Sta per guardare:\n" + animepreviewname;
+    presenceData.details = `Sta per guardare:\n${animepreviewname}`;
     presenceData.state =
-      "Per più informazioni 🎦\n" +
-      type +
-      "\n" +
-      episodes +
-      "\n" +
-      releaseDate +
-      "\n" +
-      "Voto: " +
-      vote;
+      `Per più informazioni 🎦\n${type}\n${episodes}\n${releaseDate}\n` +
+      `Voto: ${vote}`;
 
     if (iFrameVideo === true && !isNaN(duration)) {
       const newname = document.querySelector(
         "#main-content > div.goblock.play-anime > div.gobread > ol > li.active > h1 > a"
       ).textContent;
 
-      if (currentTime == duration) {
+      if (currentTime === duration) {
         presenceData.smallImageKey = "pause";
         presenceData.smallImageText = newname;
         presenceData.details = "Guardando:";
         presenceData.state = newname;
-      } else if (currentTime != duration) {
+      } else if (currentTime !== duration) {
         presenceData.smallImageKey = paused ? "pause" : "play";
         presenceData.smallImageText = newname;
         presenceData.details = "Guardando: ";
-        presenceData.startTimestamp = paused ? null : timestamps[0];
         presenceData.state = paused
-          ? newname + " | In pausa"
-          : newname + " | In riproduzione";
-        presenceData.endTimestamp = paused ? null : timestamps[1];
+          ? `${newname} | In pausa`
+          : `${newname} | In riproduzione`;
+        if (!paused) presenceData.endTimestamp = endTimestamp;
+        else delete presenceData.endTimestamp;
       }
     }
   } else {
@@ -340,10 +310,8 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Navigando...";
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

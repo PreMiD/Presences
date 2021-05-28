@@ -11,7 +11,8 @@ let min: number,
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "bc"
+    largeImageKey: "bc",
+    startTimestamp: browsingStamp
   };
 
   if (document.location.hostname === "bandcamp.com") {
@@ -72,7 +73,6 @@ presence.on("UpdateData", async () => {
         ).textContent
       }`;
     } else {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing:";
       presenceData.state = document.querySelector("head > title").textContent;
     }
@@ -81,14 +81,12 @@ presence.on("UpdateData", async () => {
       document.querySelector("#content > div:nth-child(2) > h2") !== null &&
       document.location.pathname !== "/"
     ) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Reading article:";
       presenceData.state = document.querySelector(
         "#content > div:nth-child(2) > h2"
       ).textContent;
       presenceData.smallImageKey = "reading";
     } else {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Bandcamp Daily";
       presenceData.state = "Browsing...";
     }
@@ -156,7 +154,6 @@ presence.on("UpdateData", async () => {
         .textContent.trim()} by: ${
         document.querySelector("#name-section > h3 > span > a").textContent
       }`;
-      presenceData.startTimestamp = browsingStamp;
     } else if (
       document.querySelector(
         "#trackInfoInner > div.inline_player.one-track > table > tbody > tr:nth-child(1) > td.play_cell > a > div"
@@ -218,9 +215,7 @@ presence.on("UpdateData", async () => {
         .textContent.trim()} by: ${
         document.querySelector("#name-section > h3 > span > a").textContent
       }`;
-      presenceData.startTimestamp = browsingStamp;
     } else {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing:";
       presenceData.state = document.querySelector("head > title").textContent;
     }

@@ -41,9 +41,8 @@ presence.on("UpdateData", async () => {
     buttons = await presence.getSetting("buttons"),
     newLang = await presence.getSetting("lang");
 
-  if (!oldLang) {
-    oldLang = newLang;
-  } else if (oldLang !== newLang) {
+  if (!oldLang) oldLang = newLang;
+  else if (oldLang !== newLang) {
     oldLang = newLang;
     strings = getStrings();
   }
@@ -65,7 +64,7 @@ presence.on("UpdateData", async () => {
       "div.player-track > div.track-container > div.track-seekbar > div.slider.slider-autohide > div.slider-counter.slider-counter-max"
     ).textContent;
 
-    const timestamps = presence.getTimestamps(
+    const [, endTimestamp] = presence.getTimestamps(
         presence.timestampFromFormat(currentTime),
         presence.timestampFromFormat(duration)
       ),
@@ -84,8 +83,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
 
       if (buttons) {
         presenceData.buttons = [
@@ -107,12 +105,12 @@ presence.on("UpdateData", async () => {
 
       presence.setActivity(presenceData, !paused);
     } else {
-      title = document
+      [, title] = document
         .querySelector("div.marquee-content")
-        .textContent.split(" · ")[1];
-      episode = document
+        .textContent.split(" · ");
+      [episode] = document
         .querySelector("div.marquee-content")
-        .textContent.split(" · ")[0];
+        .textContent.split(" · ");
       showLink = albumLink = document.querySelector("div.marquee-content")
         .children[0] as HTMLAnchorElement;
       presenceData.details = title;
@@ -122,8 +120,7 @@ presence.on("UpdateData", async () => {
       presenceData.smallImageText = paused
         ? (await strings).pause
         : (await strings).play;
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.endTimestamp = endTimestamp;
 
       if (buttons) {
         presenceData.buttons = [
@@ -141,7 +138,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity(presenceData, !paused);
     }
   } else {
-    const pathname = document.location.pathname,
+    const { pathname } = document.location,
       presenceData: PresenceData = {
         largeImageKey: "deezer"
       };
@@ -175,9 +172,8 @@ presence.on("UpdateData", async () => {
     } else if (pathname.includes("artist")) {
       presenceData.details = "Looking at...";
       presenceData.state = "An Artist";
-    } else {
-      presenceData.details = "Browsing...";
-    }
+    } else presenceData.details = "Browsing...";
+
     presence.setActivity(presenceData);
   }
 });

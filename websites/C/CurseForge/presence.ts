@@ -7,7 +7,8 @@ let user: HTMLElement, search: HTMLInputElement, title: HTMLElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "curseforge"
+    largeImageKey: "curseforge",
+    startTimestamp: browsingStamp
   };
   function setStateGame(
     game: string,
@@ -59,7 +60,6 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  presenceData.startTimestamp = browsingStamp;
   if (document.location.hostname === "www.curseforge.com") {
     if (document.location.pathname.includes("/minecraft/")) {
       if (document.location.pathname.includes("/modpacks"))

@@ -44,7 +44,8 @@ presence.on("UpdateData", async () => {
       Math.floor(duration)
     ),
     presenceData: PresenceData = {
-      largeImageKey: "ak"
+      largeImageKey: "ak",
+      startTimestamp: browsingStamp
     };
 
   if (
@@ -75,7 +76,6 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (!iFrameVideo && isNaN(duration)) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Looking at: ";
       title = document.querySelector(
         "body > div:nth-child(2) > div > div > div > div > div > div > div > div > div > h1"
@@ -84,10 +84,8 @@ presence.on("UpdateData", async () => {
       presenceData.state = title.innerText;
       presenceData.smallImageKey = "reading";
     }
-  } else if (document.location.pathname === "/") {
+  } else if (document.location.pathname === "/")
     presenceData.details = "Viewing main page";
-    presenceData.startTimestamp = browsingStamp;
-  }
 
   if (presenceData.details === null) {
     presence.setTrayTitle();

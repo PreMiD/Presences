@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
   if (video !== null && !isNaN(video.duration)) {
     const title = document.querySelector(".VideoInfoTitle__videoTitle___3WLlw"),
       uploader = document.querySelector(".ChannelLine__channelName___3JE1B"),
-      timestamps = presence.getTimestamps(
+      [, endTimestamp] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
@@ -29,8 +29,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = video.paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.startTimestamp = timestamps[0];
-    presenceData.endTimestamp = timestamps[1];
+    presenceData.endTimestamp = endTimestamp;
 
     presence.setTrayTitle(video.paused ? "" : title.textContent);
 

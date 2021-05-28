@@ -5,10 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "aranzulla"
+    largeImageKey: "aranzulla",
+    startTimestamp: browsingStamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname === "/") {
     if (document.location.href.match("/?s=")) {

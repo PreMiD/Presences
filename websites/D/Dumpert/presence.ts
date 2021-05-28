@@ -60,8 +60,8 @@ presence.on("UpdateData", async () => {
               )} > div.vjs-control-bar.progress-in-menu > div.vjs-duration.vjs-time-control.vjs-control > span.vjs-duration-display`
           ).textContent
         ),
-        timestamps = presence.getTimestamps(currentTime, durationss);
-      presenceData.endTimestamp = timestamps[1];
+        [, endTimestamp] = presence.getTimestamps(currentTime, durationss);
+      presenceData.endTimestamp = endTimestamp;
       presenceData.smallImageKey = "play";
     }
 
@@ -93,10 +93,8 @@ presence.on("UpdateData", async () => {
     presenceData.state = "The Latest";
   }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

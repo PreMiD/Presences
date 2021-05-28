@@ -5,9 +5,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-    largeImageKey: "azurlogo"
+    largeImageKey: "azurlogo",
+    startTimestamp: browsingStamp
   };
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.pathname === "/Azur_Lane_Wiki")
     presenceData.details = "Viewing Wiki home page";

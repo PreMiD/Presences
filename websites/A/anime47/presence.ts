@@ -43,7 +43,8 @@ presence.on("UpdateData", async () => {
       Math.floor(duration)
     ),
     presenceData: PresenceData = {
-      largeImageKey: "anime47"
+      largeImageKey: "anime47",
+      startTimestamp: browsingStamp
     };
 
   if (
@@ -55,7 +56,7 @@ presence.on("UpdateData", async () => {
     presenceData.state = document.querySelector(
       "body > div.container > div:nth-child(3) > div > div.movie-info > div > div.block-wrapper.page-single > div > div.block-movie-info.movie-info-box > div > div.col-6.movie-detail > h1 > span.title-1"
     ).textContent;
-    presenceData.startTimestamp = browsingStamp;
+
     presenceData.smallImageKey = "reading";
   } else if (
     document.querySelector(
@@ -80,17 +81,15 @@ presence.on("UpdateData", async () => {
         delete presenceData.endTimestamp;
       }
     } else if (!iFrameVideo && isNaN(duration)) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Đang xem: ";
       title = document.querySelector("head > title").textContent;
 
       presenceData.state = title;
       presenceData.smallImageKey = "reading";
     }
-  } else if (document.location.pathname === "/") {
+  } else if (document.location.pathname === "/")
     presenceData.details = "Đang xem trang chủ";
-    presenceData.startTimestamp = browsingStamp;
-  } else if (document.URL.includes("/the-loai/")) {
+  else if (document.URL.includes("/the-loai/")) {
     presenceData.details = "Đang xem danh mục:";
     presenceData.state = document
       .querySelector(
@@ -98,9 +97,7 @@ presence.on("UpdateData", async () => {
       )
       .textContent.split(":")[1]
       .replace(" - Anime Vietsub Online", "");
-    presenceData.startTimestamp = browsingStamp;
   } else {
-    presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Đang xem:";
     presenceData.state = document.querySelector("head > title").textContent;
   }

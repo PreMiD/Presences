@@ -23,20 +23,6 @@ const presence = new Presence({
     "/iletisim": "İletişim"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  const startTime = Date.now();
-  const endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
-
 let video: { duration: number; currentTime: number; paused: boolean };
 presence.on(
   "iFrameData",
@@ -126,7 +112,7 @@ presence.on("UpdateData", async () => {
     showName?.innerText &&
     episode?.textContent
   ) {
-    const timestamps = getTimestamps(
+    const [, endTimestamp] = presence.getTimestamps(
       Math.floor(video?.currentTime),
       Math.floor(video?.duration)
     );
@@ -138,10 +124,7 @@ presence.on("UpdateData", async () => {
       ? (await strings).pause
       : (await strings).play;
 
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      object.startTimestamp = timestamps[0];
-      object.endTimestamp = timestamps[1];
-    }
+    if (!isNaN(endTimestamp)) object.endTimestamp = endTimestamp;
 
     if (video.paused) {
       delete object.startTimestamp;

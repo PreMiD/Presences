@@ -62,9 +62,8 @@ client.on("UpdateData", async () => {
       buttons
     };
 
-    if (showSensitive === false) delete object["state"];
-    if (showButtons === false || showSensitive === false)
-      delete object["buttons"];
+    if (showSensitive === false) delete object.state;
+    if (showButtons === false || showSensitive === false) delete object.buttons;
 
     client.setActivity(object);
   } else if (path.includes("/users/")) {
@@ -83,9 +82,8 @@ client.on("UpdateData", async () => {
         ]
       };
 
-    if (showSensitive === false) delete object["state"];
-    if (showButtons === false || showSensitive === false)
-      delete object["buttons"];
+    if (showSensitive === false) delete object.state;
+    if (showButtons === false || showSensitive === false) delete object.buttons;
 
     client.setActivity(object);
   } else if (path.includes("/tag/")) {
@@ -99,7 +97,7 @@ client.on("UpdateData", async () => {
         state: tag
       };
 
-    if (showSensitive === false) delete object["state"];
+    if (showSensitive === false) delete object.state;
     client.setActivity(object);
   } else if (path.includes("/search/")) {
     const query: string = decodeURIComponent(path.replace("/search/", "")),
@@ -110,7 +108,7 @@ client.on("UpdateData", async () => {
         state: query
       };
 
-    if (showSensitive === false) delete object["state"];
+    if (showSensitive === false) delete object.state;
     client.setActivity(object);
   } else if (locations[path] || locations[path.slice(0, -1)]) {
     const object = {
@@ -119,7 +117,7 @@ client.on("UpdateData", async () => {
       state: locations[path] || locations[path.slice(0, -1)] || "Unknown"
     };
 
-    if (showSensitive === false) delete object["state"];
+    if (showSensitive === false) delete object.state;
     client.setActivity(object);
   } else return client.setActivity();
 });

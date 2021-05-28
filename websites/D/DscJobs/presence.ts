@@ -14,18 +14,16 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
   else if (document.location.pathname.includes("/search")) {
-    const search = document.location.href.split("term=")[1].split("&")[0],
-      page = document.location.href.split("page=")[1].split("&")[0];
+    const [search] = document.location.href.split("term=")[1].split("&"),
+      [page] = document.location.href.split("page=")[1].split("&");
     presenceData.details = `🔍 Searching for: ${search || "Nothing"}`;
     presenceData.state = `📖 Page ${page}`;
   } else if (document.location.pathname === "/moderators") {
-    const moderator_page = document.location.href
-        .split("page=")[1]
-        .split("&")[0],
+    const [moderatorPage] = document.location.href.split("page=")[1].split("&"),
       filters = document.location.href.includes("&");
-    presenceData.details = `Viewing 🔨 hireable moderators`;
+    presenceData.details = "Viewing 🔨 hireable moderators";
     presenceData.state = `${
-      filters ? "💿 Filters: True" : `📖 Page ${moderator_page}`
+      filters ? "💿 Filters: True" : `📖 Page ${moderatorPage}`
     }`;
     presenceData.buttons = [
       {
@@ -55,17 +53,18 @@ presence.on("UpdateData", async () => {
     const username = document.querySelector("h1")?.textContent.split("#")[0];
     presenceData.details = `Viewing 💳 ${username} profile`;
   } else if (document.location.pathname.includes("/vote")) {
-    const username_vote = document.querySelector("h1")?.textContent;
-    presenceData.details = `Voting 🗳️ ${username_vote || "N/A"} `;
-    if (username_vote)
+    const usernameVote = document.querySelector("h1")?.textContent;
+    presenceData.details = `Voting 🗳️ ${usernameVote || "N/A"} `;
+    if (usernameVote) {
       presenceData.buttons = [
         {
-          label: `Vote ${username_vote}`,
+          label: `Vote ${usernameVote}`,
           url: document.location.href
         }
       ];
+    }
   } else if (document.location.pathname.includes("/cv/")) {
-    const cv_page = document
+    const cvPage = document
         .querySelector("h2.cursor")
         ?.getAttribute("data-title"),
       likes = document
@@ -74,19 +73,20 @@ presence.on("UpdateData", async () => {
       views = document
         .getElementById("views_amount")
         ?.getAttribute("data-title");
-    presenceData.details = `Viewing 📖 ${cv_page} resume`;
+    presenceData.details = `Viewing 📖 ${cvPage} resume`;
     presenceData.state = `❤️ ${likes} & 👀 ${views}`;
     if (showButtons) {
-      if (showCvButton)
+      if (showCvButton) {
         presenceData.buttons = [
           {
-            label: `View Resume`,
+            label: "View Resume",
             url: document.location.href
           }
         ];
+      }
     }
   } else if (document.location.pathname.includes("/settings"))
-    presenceData.details = `Editing 📜 curriculum vitae/resume`;
+    presenceData.details = "Editing 📜 curriculum vitae/resume";
   else if (document.location.pathname.includes("/legal")) {
     presenceData.details = "Viewing 👩‍⚖️ Legal Page";
     presenceData.buttons = [
@@ -97,25 +97,24 @@ presence.on("UpdateData", async () => {
     ];
     // staff panel
   } else if (document.location.pathname.includes("/reviews")) {
-    const review_page = document.location.href.split("page=")[1];
+    const [, reviewPage] = document.location.href.split("page=");
     presenceData.details = "Viewing ⭐ Review Panel";
-    presenceData.state = `📖 Page ${review_page}`;
+    presenceData.state = `📖 Page ${reviewPage}`;
   } else if (document.location.pathname.includes("/reports")) {
-    const report_page = document.location.href.split("page=")[1];
+    const [, reportPage] = document.location.href.split("page=");
     presenceData.details = "Viewing 🛑 Report Panel";
-    presenceData.state = `📖 Page ${report_page}`;
+    presenceData.state = `📖 Page ${reportPage}`;
   } else if (document.location.pathname.includes("/users")) {
-    const users_page = document.location.href.split("page=")[1];
+    const [, usersPage] = document.location.href.split("page=");
     presenceData.details = "Viewing 👥 Members Panel";
-    presenceData.state = `📖 Page ${users_page}`;
-  } else if (document.location.pathname.includes("/panel")) {
+    presenceData.state = `📖 Page ${usersPage}`;
+  } else if (document.location.pathname.includes("/panel"))
     presenceData.details = "Viewing ⚙️ Staff Panel";
-  }
 
   if (!showButtons) delete presenceData.buttons;
   if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else presence.setActivity(presenceData);

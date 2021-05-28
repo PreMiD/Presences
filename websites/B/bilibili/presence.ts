@@ -40,13 +40,13 @@ presence.on(
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "bb"
+    largeImageKey: "bb",
+    startTimestamp: browsingStamp
   };
 
   // Maincode
   if (document.location.hostname === "www.bilibili.com") {
     if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Browsing...";
       user = document.querySelector(
         "#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a"
@@ -115,11 +115,10 @@ presence.on("UpdateData", async () => {
       presenceData.state = user.innerText;
 
       //播放历史
-    } else if (document.location.pathname === "/account/history") {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname === "/account/history")
       presenceData.details = "Viewing their history";
-      //活动
-    } else if (document.location.pathname.includes("/blackboard/")) {
+    //活动
+    else if (document.location.pathname.includes("/blackboard/")) {
       const [, endTimestamp] = presence.getTimestamps(
         Math.floor(currentTime),
         Math.floor(duration)
@@ -195,50 +194,38 @@ presence.on("UpdateData", async () => {
       presenceData.details = title.innerText;
       presenceData.state = `Episode: ${page.innerText}`;
       //小黑屋
-    } else if (document.location.pathname === "/blackroom/") {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname === "/blackroom/")
       presenceData.details = "Blackroom system";
-    } else if (document.location.pathname.includes("/blackroom/ban/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/blackroom/ban/")) {
       presenceData.details = "Blackroom system";
       presenceData.state = "Browsing Banned";
-    } else if (document.location.pathname === "/judgement/") {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname === "/judgement/")
       presenceData.details = "Judgement system";
-    } else if (document.location.pathname.includes("/judgement/index")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/judgement/index")) {
       presenceData.details = "Judgement system";
       presenceData.state = "Home";
     } else if (document.location.pathname.includes("/judgement/vote/")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Judgement system";
       presenceData.state = "Votebanning";
     } else if (document.location.pathname.includes("/judgement/case")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Judgement system";
       presenceData.state = "Overwatching case";
       //ranking
-    } else if (document.location.pathname === "/ranking") {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname === "/ranking")
       presenceData.details = "Ranking";
-    } else if (document.location.pathname.includes("/ranking/all/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/ranking/all/")) {
       presenceData.details = "Ranking";
       presenceData.state = "All";
     } else if (document.location.pathname.includes("/ranking/origin/")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Ranking";
       presenceData.state = "Origin";
     } else if (document.location.pathname.includes("/ranking/bangumi/")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Ranking";
       presenceData.state = "Bangumi";
     } else if (document.location.pathname.includes("/ranking/cinema/")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Ranking";
       presenceData.state = "Cinema";
     } else if (document.location.pathname.includes("/ranking/rookie/")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Ranking";
       presenceData.state = "Newbie";
       //Subcategory
@@ -255,7 +242,7 @@ presence.on("UpdateData", async () => {
       document.location.pathname.includes("/tv/")
     ) {
       title = document.querySelector("head > title");
-      presenceData.startTimestamp = browsingStamp;
+
       presenceData.details = "Browsing for subcategory";
       if (title.innerText === "哔哩哔哩 (゜-゜)つロ 干杯~-bilibili")
         presenceData.state = "资讯";
@@ -274,14 +261,10 @@ presence.on("UpdateData", async () => {
         "body > div.page-container > div.head-container > div.title-container > h1"
       );
       if (user !== null && title !== null) {
-        presenceData.startTimestamp = browsingStamp;
         presenceData.details = title.innerText;
         presenceData.state = user.innerText;
         presenceData.smallImageKey = "reading";
-      } else {
-        presenceData.startTimestamp = browsingStamp;
-        presenceData.details = "Browsing for column";
-      }
+      } else presenceData.details = "Browsing for column";
     }
     //dynamic
   } else if (document.location.hostname === "t.bilibili.com") {
@@ -289,7 +272,6 @@ presence.on("UpdateData", async () => {
       "#app > div > div.detail-content > div > div > div.main-content > div.user-name.fs-16.ls-0.d-i-block.big-vip > a"
     );
     if (user !== null) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing dynamic";
       presenceData.state = `of: ${user.innerText}`;
       presenceData.smallImageKey = "reading";
@@ -297,13 +279,11 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#app > div.page-container.p-rel > div.top-header.p-rel > div.tag-title-content.fs-28.ls-0 > div.tag-title.d-i-block"
       );
-      presenceData.startTimestamp = browsingStamp;
+
       presenceData.details = "Viewing dynamic";
       presenceData.state = `Tag: ${title.innerText}`;
-    } else {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing for dynamic";
-    }
+    } else presenceData.details = "Browsing for dynamic";
+
     //shortfilm
   } else if (document.location.hostname === "vc.bilibili.com") {
     user = document.querySelector(
@@ -340,37 +320,28 @@ presence.on("UpdateData", async () => {
   } else if (document.location.hostname === "space.bilibili.com") {
     user = document.querySelector("#h-name");
     if (user !== null) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing channel:";
       presenceData.state = user.innerText;
-    } else {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing Someone's space";
-    }
+    } else presenceData.details = "Browsing Someone's space";
   } else if (document.location.hostname === "account.bilibili.com") {
-    if (document.location.pathname.includes("/")) {
-      presenceData.startTimestamp = browsingStamp;
+    if (document.location.pathname.includes("/"))
       presenceData.details = "Viewing their settings";
-    }
+
     //创作中心
   } else if (document.location.hostname === "member.bilibili.com") {
-    if (document.location.pathname.includes("/")) {
-      presenceData.startTimestamp = browsingStamp;
+    if (document.location.pathname.includes("/"))
       presenceData.details = "Viewing their dashboard";
-    }
+
     //会员购
   } else if (document.location.hostname === "show.bilibili.com") {
     title = document.querySelector(
       "#app > div.buyticket > div.whole-detail-info-wrapper > div.detail-info-wrapper > div.product-info-name"
     );
     if (title !== null) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "会员购";
       presenceData.state = title.innerText;
-    } else {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "会员购";
-    }
+    } else presenceData.details = "会员购";
+
     //漫画
   } else if (document.location.hostname === "manga.bilibili.com") {
     inreadTitle = document.querySelector(
@@ -383,16 +354,13 @@ presence.on("UpdateData", async () => {
       "body > div.app-layout > div.size-ruler.p-relative.border-box > div.manga-detail > div.header-info.t-no-wrap.header-info > div.manga-info.dp-i-block.p-relative.v-top.border-box > h1"
     );
     if (page !== null) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = inreadTitle.innerText;
       presenceData.state = `Reading P.${page.innerText}`;
       presenceData.smallImageKey = "reading";
     } else if (title !== null) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = title.innerText;
       presenceData.smallImageKey = "reading";
     } else {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Manga";
       presenceData.smallImageKey = "reading";
     }
@@ -402,18 +370,13 @@ presence.on("UpdateData", async () => {
       "body > div.bui-gc > div.header-bar.one-row > div.right-panel > div > div > h2 > span:nth-child(1)"
     );
     if (title !== null) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Viewing Game";
       presenceData.state = title.innerText;
-    } else {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Browsing Game";
-    }
+    } else presenceData.details = "Browsing Game";
   } else if (document.location.hostname === "game.bilibili.com") {
-    if (document.location.pathname.includes("/")) {
-      presenceData.startTimestamp = browsingStamp;
+    if (document.location.pathname.includes("/"))
       presenceData.details = "Browsing Game";
-    }
+
     //live
   } else if (document.location.hostname === "live.bilibili.com") {
     user = document.querySelector(
@@ -423,7 +386,6 @@ presence.on("UpdateData", async () => {
       "#head-info-vm > div > div > div.room-info-upper-row.p-relative > div.normal-mode > div:nth-child(1) > h1 > span.title-length-limit.live-skin-main-text.v-middle.dp-i-block.small-title"
     );
     if (user !== null) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = title.innerText;
       presenceData.state = user.innerText;
       presenceData.smallImageKey = "live";
@@ -431,17 +393,14 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "body > div.app-ctnr > div.wrapper > div > header > h2"
       );
-      presenceData.startTimestamp = browsingStamp;
+
       presenceData.details = "Viewing live channels";
       presenceData.state = title.innerText;
-    } else {
-      presenceData.startTimestamp = browsingStamp;
-      presenceData.details = "Viewing live channels";
-    }
+    } else presenceData.details = "Viewing live channels";
   } else if (document.location.hostname === "search.bilibili.com") {
     if (document.location.pathname.includes("/")) {
       const searchinput = document.querySelector("head > title");
-      presenceData.startTimestamp = browsingStamp;
+
       presenceData.details = "Searching for:";
       presenceData.state = searchinput.innerHTML.replace(
         " - 搜索结果 - 哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ  乾杯~  - bilibili",
@@ -451,31 +410,24 @@ presence.on("UpdateData", async () => {
     }
   } else if (document.location.hostname === "message.bilibili.com") {
     if (document.URL.includes("/#/reply")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Their notifications";
       presenceData.state = "Reply";
     } else if (document.URL.includes("/#/at")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Their notifications";
       presenceData.state = "At";
     } else if (document.URL.includes("/#/love")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Their notifications";
       presenceData.state = "Love";
     } else if (document.URL.includes("/#/system")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Their notifications";
       presenceData.state = "System message";
     } else if (document.URL.includes("/#/whisper")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Their notifications";
       presenceData.state = "Private message";
     } else if (document.URL.includes("/#/archive")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Their notifications";
       presenceData.state = "PM archive";
     } else if (document.URL.includes("/#/config")) {
-      presenceData.startTimestamp = browsingStamp;
       presenceData.details = "Their notifications";
       presenceData.state = "Message setting";
     }

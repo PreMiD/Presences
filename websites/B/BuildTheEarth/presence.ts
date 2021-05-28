@@ -1,17 +1,17 @@
 const presence = new Presence({
-  clientId: "805070274847440916"
-});
+    clientId: "805070274847440916"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
     },
-    browsingStamp = Math.floor(Date.now() / 1000),
     privacy = await presence.getSetting("privacy"),
     button = await presence.getSetting("button"),
     pmap = await presence.getSetting("pmap");
 
-  presenceData.startTimestamp = browsingStamp;
   if (privacy) presenceData.details = "Browsing";
   else {
     if (window.location.pathname.endsWith("me")) {

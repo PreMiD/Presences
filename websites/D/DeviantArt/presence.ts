@@ -45,14 +45,15 @@ const updateCallback = {
      * @param isCritical If the URL is essential to the operation, this should be true, so it will output an error, not a warning.
      */
     pageNotSupported(isCritical = false): void {
-      if (isCritical)
+      if (isCritical) {
         presence.error(
           "Whoops. It seems that this page is not supported. \nPlease report this to Hans5958#0969 on Discord."
         );
-      else
+      } else {
         presence.error(
           "It seems that this page is not fully supported. \nPlease report this to Hans5958#0969 on Discord."
         );
+      }
       presence.info(currentURL.href);
     },
     /**
@@ -79,7 +80,7 @@ const updateCallback = {
 
 	For future developers:
 
-	These domains are supported. 
+	These domains are supported.
 	- www.deviantart.com
 	- about.deviantart.com
 	- chat.deviantart.com
@@ -156,11 +157,13 @@ const updateCallback = {
                 .textContent.split(" by ")[1]
                 .split(" ")[0]
                 .toLowerCase()
-            )
-              return (presenceData.state = document
+            ) {
+              const [title] = document
                 .querySelector("title")
                 .textContent.split(" by ")[1]
-                .split(" ")[0]);
+                .split(" ");
+              return (presenceData.state = title);
+            }
           }
         };
 
@@ -176,11 +179,9 @@ const updateCallback = {
 
 					*/
 
-            if (currentPath[0] === "") {
+            if (currentPath[0] === "")
               presenceData.details = "Viewing the home page";
-
-              /* This needs to be on the top since the 404 errors has no fixed URL. */
-            } else if (
+            /* This needs to be on the top since the 404 errors has no fixed URL. */ else if (
               document.querySelector(".error-400") ||
               document.querySelector(".error-401") ||
               document.querySelector(".error-403") ||
@@ -215,11 +216,11 @@ const updateCallback = {
               document.querySelector("#error-pageflooder") ||
               document.querySelector("#error-suspended") ||
               document.querySelector("#error-threadflooder")
-            ) {
+            )
               presenceData.details = "On a non-existent page";
-
-              /* The functions below is only valid on the Eclipse theme. */
-            } else if (currentPath[0] === "deviations") {
+            /* The functions below is only valid on the Eclipse theme. */ else if (
+              currentPath[0] === "deviations"
+            ) {
               presenceData.details = "Viewing deviations";
               presenceData.state = currentPath
                 .slice(1)
@@ -240,21 +241,21 @@ const updateCallback = {
               ).value;
             } else if (currentPath[0] === "journals") {
               presenceData.details = "Viewing daily deviations";
-              if (currentPath[1])
+              if (currentPath[1]) {
                 presenceData.state = currentPath[1].replace(
                   currentPath[1],
                   currentPath[1].toUpperCase()
                 );
-              else presenceData.state = "All";
-            } else if (currentPath[0] === "status-updates") {
+              } else presenceData.state = "All";
+            } else if (currentPath[0] === "status-updates")
               presenceData.details = "Viewing status updates";
-            } else if (currentPath[0] === "polls") {
+            else if (currentPath[0] === "polls")
               presenceData.details = "Viewing polls";
-            } else if (currentPath[0] === "commissions") {
+            else if (currentPath[0] === "commissions")
               presenceData.details = "Viewing commissions";
-
-              /* The functions below is valid on the Eclipse theme and the old theme. */
-            } else if (currentPath[0] === "tag") {
+            /* The functions below is valid on the Eclipse theme and the old theme. */ else if (
+              currentPath[0] === "tag"
+            ) {
               presenceData.details = "Viewing a tag";
               presenceData.state = `#${currentPath[1]}`;
             } else if (currentPath[0] === "search") {
@@ -270,10 +271,11 @@ const updateCallback = {
             } else if (currentPath[0] === "settings") {
               /* Detailed infos might be disabled by default. */
               presenceData.details = "Doing some settings";
-              if (presenceSettings.detailedSettings)
+              if (presenceSettings.detailedSettings) {
                 presenceData.state = document.querySelector(
                   "ul.menu_holder li > a.active"
                 ).textContent;
+              }
             } else if (currentPath[0] === "account") {
               /* This might expose some stuff, because the page shows orders, points, and earnings. Additional infos might be disabled by default. */
               presenceData.details = "Viewing the account pages";
@@ -281,24 +283,21 @@ const updateCallback = {
             } else if (currentPath[0] === "checkout") {
               /* This might be disabled by default. */
               presenceData.details = "On the checkout";
-            } else if (currentPath[0] === "wishlist") {
+            } else if (currentPath[0] === "wishlist")
               presenceData.details = "Viewing their wishlist";
-            } else if (currentPath[0] === "core-membership") {
+            else if (currentPath[0] === "core-membership") {
               presenceData.details = "Viewing a page";
               presenceData.state = "Core Membership";
             } else if (currentPath[0] === "timeline") {
               presenceData.details = "Viewing a page";
               presenceData.state = "Timeline";
-            } else if (currentPath[0] === "makeagroup") {
+            } else if (currentPath[0] === "makeagroup")
               presenceData.details = "Making a group";
-            } else if (
-              currentPath[0] === "users" &&
-              currentPath[1] === "login"
-            ) {
+            else if (currentPath[0] === "users" && currentPath[1] === "login")
               presenceData.details = "Logging in";
-            } else if (currentPath[0] === "join") {
+            else if (currentPath[0] === "join")
               presenceData.details = "Registering an account";
-            } else if (currentPath[0] === "forum") {
+            else if (currentPath[0] === "forum") {
               if (currentPath[2]) {
                 if (currentPath[3]) {
                   presenceData.details = "Viewing a topic";
@@ -307,9 +306,7 @@ const updateCallback = {
                   presenceData.details = "Viewing a topic category";
                   presenceData.state = document.querySelector("h1").textContent;
                 }
-              } else {
-                presenceData.details = "Viewing the forums";
-              }
+              } else presenceData.details = "Viewing the forums";
             } else if (currentPath[0] === "about") {
               presenceData.details = "Viewing the about pages";
 
@@ -323,41 +320,40 @@ const updateCallback = {
                   presenceData.state = "Terms of Service";
                 if (currentPath[2] === "copyright")
                   presenceData.state = "Copyright Policy";
-              } else {
-                logHandler.pageNotSupported(false);
-              }
-            } else if (currentPath[0] === "watch") {
+              } else logHandler.pageNotSupported(false);
+            } else if (currentPath[0] === "watch")
               presenceData.details = "Viewing the watch list";
-
-              /*
+            /*
 
 					Section 2
 					This section includes all pages below the user/group's directory. (eq. deviantart.com/team/art/..)
-					
-					*/
 
-              /* The function below is vaild for users only. */
-            } else if (currentPath[1] === "art") {
+					*/
+            /* The function below is vaild for users only. */ else if (
+              currentPath[1] === "art"
+            ) {
+              const [title] = document
+                .querySelector("title")
+                .textContent.split(" by ")
+                .pop()
+                .split(" ");
               presenceData.details = document
                 .querySelector("title")
                 .textContent.split(" by ")
                 .slice(0, -1)
                 .join(" - ");
-              presenceData.state = document
-                .querySelector("title")
-                .textContent.split(" by ")
-                .pop()
-                .split(" ")[0];
+              presenceData.state = title;
               /* I actually wanted to get it using the visible elements, but well, it's complicated. */
               if (
                 presenceData.details === presenceDataPlaced.details &&
                 presenceData.state === presenceDataPlaced.state
               )
                 throw new Error("Current status is the same as the previous.");
-              if (presenceData.details === "")
+              if (presenceData.details === "") {
                 throw new Error(
                   "No art title detected and user is from the homepage."
                 );
+              }
 
               /* The functions below are valid for users and groups. */
             } else if (
@@ -373,14 +369,14 @@ const updateCallback = {
                   document.querySelector("h2.uUWfu").textContent
                 } by ${getName()}`;
               } else {
-                if (profileType === "group" && !currentPath[2]) {
+                if (profileType === "group" && !currentPath[2])
                   presenceData.state = getName(true);
-                } else {
-                  if (!document.querySelector(".gallery .active"))
+                else {
+                  if (!document.querySelector(".gallery .active")) {
                     presenceData.state = `${
                       document.querySelector(".folder-title").textContent
                     } by ${getName(true)}`;
-                  else if (
+                  } else if (
                     document
                       .querySelector(".gallery .active")
                       .textContent.slice(1) === "Featured"
@@ -401,7 +397,7 @@ const updateCallback = {
                 document.querySelector("h1 .title").textContent;
               presenceData.state = getName(true);
             } else if (currentPath[1] === "prints") {
-              presenceData.details = `Viewing a user's prints`;
+              presenceData.details = "Viewing a user's prints";
               presenceData.state = getName();
             } else if (currentPath[1] === "posts") {
               /* This part is only valid on the Eclipse theme. */
@@ -421,7 +417,7 @@ const updateCallback = {
                 presenceData.state = `${getName()} (journal)`;
               } else {
                 /* This part is only valid on the old theme. */
-                presenceData.details = `Viewing a user's journals`;
+                presenceData.details = "Viewing a user's journals";
                 presenceData.state = getName();
               }
             } else if (currentPath[1] === "poll") {
@@ -478,9 +474,7 @@ const updateCallback = {
               else presenceData.state = getName();
 
               /* The page is not supported. Whoops. */
-            } else {
-              logHandler.pageNotSupported(true);
-            }
+            } else logHandler.pageNotSupported(true);
 
             // console.groupEnd()
             presence.success("Done!");
@@ -501,14 +495,12 @@ const updateCallback = {
               logHandler.fatalError(error);
             }
           }
-        } else {
-          presenceData = presenceDataPlaced;
-        }
+        } else presenceData = presenceDataPlaced;
       };
     } else if (currentURL.hostname === "chat.deviantart.com") {
-      if (currentPath[0] === "") {
+      if (currentPath[0] === "")
         presenceData.details = "Viewing the chat room list";
-      } else if (currentPath[0] === "chat") {
+      else if (currentPath[0] === "chat") {
         presenceData.details = "On a chat room";
 
         if (presenceSettings.chatChannelNames) {
@@ -540,20 +532,18 @@ const updateCallback = {
                   logHandler.fatalError(error);
                 }
               }
-            } else {
-              presenceData = presenceDataPlaced;
-            }
+            } else presenceData = presenceDataPlaced;
           };
         }
       }
-    } else if (currentURL.hostname === "groups.deviantart.com") {
+    } else if (currentURL.hostname === "groups.deviantart.com")
       presenceData.details = "Looking for a group";
-      /* There might be a way to implement the filters, but finding it is a story for another time. */
-    } else if (currentURL.hostname === "portfolio.deviantart.com") {
+    /* There might be a way to implement the filters, but finding it is a story for another time. */ else if (
+      currentURL.hostname === "portfolio.deviantart.com"
+    )
       presenceData.details = "Creating a portfolio";
-
-      // } else if (currentURL.hostname === "*.daportfolio.com") { /* Trying to avoid using regex, for this time. */
-    } else if (currentURL.hostname === "shop.deviantart.com") {
+    // } else if (currentURL.hostname === "*.daportfolio.com") { /* Trying to avoid using regex, for this time. */
+    else if (currentURL.hostname === "shop.deviantart.com") {
       if (getURLParam("q")) {
         presenceData.details = "Searching something on the shop";
         presenceData.state = getURLParam("q");
@@ -574,19 +564,18 @@ const updateCallback = {
 
       updateCallback.function = (): void => {
         if (currentTitle !== document.title.split(" - ")[0]) {
-          currentTitle = document.title.split(" - ")[0];
+          const [title] = document.title.split(" - ");
+          currentTitle = title;
           presenceData.details = "Viewing the help center/KB";
           presenceData.state = currentTitle;
           presenceDataPlaced = presenceData;
-        } else {
-          presenceData = presenceDataPlaced;
-        }
+        } else presenceData = presenceDataPlaced;
       };
-    } else if (currentURL.hostname === "www.eclipsefeedback.com") {
+    } else if (currentURL.hostname === "www.eclipsefeedback.com")
       presenceData.details = "Giving feedback about Eclipse";
-    } else if (currentURL.hostname === "deviantartads.com") {
+    else if (currentURL.hostname === "deviantartads.com")
       presenceData.details = "Viewing the media kit";
-    } else if (currentURL.hostname === "sta.sh") {
+    else if (currentURL.hostname === "sta.sh") {
       let loadedPath: string,
         forceUpdate = false,
         presenceDataPlaced: PresenceData = {},
@@ -636,9 +625,8 @@ const updateCallback = {
                     .pop()
                     .split("'s")[0]
                 } (sta.sh)`;
-                if (presenceData.details === "") {
+                if (presenceData.details === "")
                   throw new Error("No title found on Sta.sh");
-                }
             }
 
             // console.groupEnd()
@@ -658,9 +646,7 @@ const updateCallback = {
               logHandler.fatalError(error);
             }
           }
-        } else {
-          presenceData = presenceDataPlaced;
-        }
+        } else presenceData = presenceDataPlaced;
       };
     }
   };

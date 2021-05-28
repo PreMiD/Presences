@@ -5,7 +5,7 @@ const presence = new Presence({
     play: "presence.playback.playing",
     pause: "presence.playback.paused"
   }),
-  pages = {
+  pages: { [k: string]: string } = {
     "/": "Ana Sayfa",
     "/uyeler": "Üyeler",
     "/yabanci-dizi-takvimi": "Dizi Takvimi",
@@ -22,30 +22,31 @@ const presence = new Presence({
     "/pano/son-izlediklerim": "Son İzlediklerim"
   };
 
-/**
- * Get Timestamps
- * @param {Number} videoTime Current video time seconds
- * @param {Number} videoDuration Video duration seconds
- */
-function getTimestamps(
-  videoTime: number,
-  videoDuration: number
-): Array<number> {
-  var startTime = Date.now();
-  var endTime = Math.floor(startTime / 1000) - videoTime + videoDuration;
-  return [Math.floor(startTime / 1000), endTime];
-}
+let video: {
+  error?: boolean;
+  dataAvailable?: boolean;
+  currentTime?: number;
+  duration?: number;
+  paused?: boolean;
+};
 
-const video: { [k: string]: any } = {};
-
-presence.on("iFrameData", (data) => {
-  if (!data.error) {
-    video.dataAvailable = true;
-    video.currentTime = data.currentTime;
-    video.duration = data.duration;
-    video.paused = data.paused;
+presence.on(
+  "iFrameData",
+  (data: {
+    error?: boolean;
+    dataAvailable?: boolean;
+    currentTime?: number;
+    duration?: number;
+    paused?: boolean;
+  }) => {
+    if (!data.error) {
+      video.dataAvailable = true;
+      video.currentTime = data.currentTime;
+      video.duration = data.duration;
+      video.paused = data.paused;
+    }
   }
-});
+);
 
 presence.on("UpdateData", async () => {
   const page = document.location.pathname,
@@ -65,9 +66,9 @@ presence.on("UpdateData", async () => {
 
     if (
       !document.location.search ||
-      document.location.search == "" ||
-      (document.location.search != "" && !genre && !showName) ||
-      (document.location.search != "" && genre == "" && showName == "")
+      document.location.search === "" ||
+      (document.location.search !== "" && !genre && !showName) ||
+      (document.location.search !== "" && genre === "" && showName === "")
     ) {
       presence.setActivity({
         largeImageKey: "dl-logo",
@@ -75,10 +76,7 @@ presence.on("UpdateData", async () => {
         state: "Arşiv",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
-    } else if (
-      (genre && genre != "" && !showName) ||
-      (genre && genre != "" && showName == "")
-    ) {
+    } else if (genre && !showName) {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: "Bir kategoriye göz atıyor:",
@@ -86,7 +84,7 @@ presence.on("UpdateData", async () => {
         smallImageKey: "search",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
-    } else if (genre && genre != "" && showName && showName != "") {
+    } else if (genre && showName) {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: "Bir dizi arıyor:",
@@ -94,10 +92,7 @@ presence.on("UpdateData", async () => {
         smallImageKey: "search",
         startTimestamp: Math.floor(Date.now() / 1000)
       });
-    } else if (
-      (!genre && showName) ||
-      (genre == "" && showName && showName != "")
-    ) {
+    } else if ((!genre && showName) || (genre === "" && showName)) {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: "Bir dizi arıyor:",
@@ -117,14 +112,14 @@ presence.on("UpdateData", async () => {
       state: user && user.textContent ? user.textContent.trim() : "Belirsiz",
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (!isVideoData && showTitle && showTitle.textContent != "") {
+  } else if (!isVideoData && showTitle && showTitle.textContent !== "") {
     presence.setActivity({
       largeImageKey: "dl-logo",
       details: "Bir diziyi inceliyor:",
       state: showTitle.textContent,
       startTimestamp: Math.floor(Date.now() / 1000)
     });
-  } else if (!isVideoData && actorName && actorName.textContent != "") {
+  } else if (!isVideoData && actorName && actorName.textContent !== "") {
     presence.setActivity({
       largeImageKey: "dl-logo",
       details: "Bir aktörü inceliyor:",
@@ -143,7 +138,7 @@ presence.on("UpdateData", async () => {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: `${
-          forumTitle && forumTitle.textContent != ""
+          forumTitle && forumTitle.textContent !== ""
             ? forumTitle.textContent.replace(" tartışma forumu", "")
             : "Bilinmeyen"
         } dizisinin forumlarına bakıyor:`,
@@ -154,12 +149,12 @@ presence.on("UpdateData", async () => {
       presence.setActivity({
         largeImageKey: "dl-logo",
         details: `${
-          forumTitle && forumTitle.textContent != ""
+          forumTitle && forumTitle.textContent !== ""
             ? forumTitle.textContent.replace(" tartışma forumu", "")
             : "Bilinmeyen"
         } dizisinin forumlarına bakıyor:`,
         state:
-          postTitle && postTitle.textContent != ""
+          postTitle && postTitle.textContent !== ""
             ? postTitle.textContent
             : "Bilinmeyen",
         startTimestamp: Math.floor(Date.now() / 1000)
@@ -206,33 +201,29 @@ presence.on("UpdateData", async () => {
                 "#container > div.content > div.right > div.right-inner > div.tv-series-head > div.mini-info > h1 > div > span:nth-child(3)"
               ).textContent
             }. Bölüm`
-          : "none found";
-
-    const fixedEpisodeName = episodeX
+          : "none found",
+      fixedEpisodeName = episodeX
         .replace(/\n/g, "")
         .replace(/-/g, "")
         .replace(title.textContent, "")
         .replace(" ", "")
         .trim(),
-      timestamps = getTimestamps(
+      [, endTimestamp] = presence.getTimestamps(
         Math.floor(_video.currentTime),
         Math.floor(_video.duration)
-      );
+      ),
+      data: PresenceData = {
+        largeImageKey: "dl-logo",
+        details: title.textContent,
+        state: fixedEpisodeName,
+        smallImageKey: video.paused ? "pause" : "play",
+        smallImageText: video.paused
+          ? (await strings).pause
+          : (await strings).play
+      };
 
-    const data: { [k: string]: any } = {
-      largeImageKey: "dl-logo",
-      details: title.textContent,
-      state: fixedEpisodeName,
-      smallImageKey: video.paused ? "pause" : "play",
-      smallImageText: video.paused
-        ? (await strings).pause
-        : (await strings).play
-    };
+    if (!isNaN(endTimestamp)) data.endTimestamp = endTimestamp;
 
-    if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-      data.startTimestamp = timestamps[0];
-      data.endTimestamp = timestamps[1];
-    }
     if (video.paused) {
       delete data.startTimestamp;
       delete data.endTimestamp;
@@ -278,32 +269,29 @@ presence.on("UpdateData", async () => {
             }. Bölüm`
           : null;
 
-    if (title && title.textContent != "" && episodeX) {
+    if (title && title.textContent !== "" && episodeX) {
       const fixedEpisodeName = episodeX
           .replace(/\n/g, "")
           .replace(/-/g, "")
           .replace(title.textContent, "")
           .replace(" ", "")
           .trim(),
-        timestamps = getTimestamps(
+        [, endTimestamp] = presence.getTimestamps(
           Math.floor(video.currentTime),
           Math.floor(video.duration)
-        );
+        ),
+        data: PresenceData = {
+          largeImageKey: "dl-logo",
+          details: title.textContent,
+          state: fixedEpisodeName,
+          smallImageKey: video.paused ? "pause" : "play",
+          smallImageText: video.paused
+            ? (await strings).pause
+            : (await strings).play
+        };
 
-      const data: { [k: string]: any } = {
-        largeImageKey: "dl-logo",
-        details: title.textContent,
-        state: fixedEpisodeName,
-        smallImageKey: video.paused ? "pause" : "play",
-        smallImageText: video.paused
-          ? (await strings).pause
-          : (await strings).play
-      };
+      if (!isNaN(endTimestamp)) data.endTimestamp = endTimestamp;
 
-      if (!isNaN(timestamps[0]) && !isNaN(timestamps[1])) {
-        data.startTimestamp = timestamps[0];
-        data.endTimestamp = timestamps[1];
-      }
       if (video.paused) {
         delete data.startTimestamp;
         delete data.endTimestamp;

@@ -1,14 +1,15 @@
 const presence = new Presence({
-  clientId: "749319733807153162"
-});
+    clientId: "749319733807153162"
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
+
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "logo"
+      largeImageKey: "logo",
+      startTimestamp: browsingStamp
     },
-    page = window.location.pathname,
-    browsingStamp = Math.floor(Date.now() / 1000);
+    page = window.location.pathname;
 
-  presenceData.startTimestamp = browsingStamp;
   if (page.startsWith("/kullanici/")) {
     presenceData.details = "Bir kullanıcının profilini görüntülüyor:";
     presenceData.state = document.querySelector(
@@ -30,9 +31,9 @@ presence.on("UpdateData", () => {
     presenceData.details = "Bir sayfayı görüntülüyor:";
     presenceData.state = "HTML kodları";
     presenceData.smallImageKey = "html";
-  } else if (page.endsWith("/rapor")) {
+  } else if (page.endsWith("/rapor"))
     presenceData.details = "Bir şeyi bildiriyor...";
-  } else if (page.endsWith("/yetersiz-rol")) {
+  else if (page.endsWith("/yetersiz-rol")) {
     presenceData.details = "Erişemeyeceği bir yere erişmeye çalışıyor... 👀";
     presenceData.smallImageKey = "x";
   } else if (page.startsWith("/altyapi")) {
@@ -41,14 +42,11 @@ presence.on("UpdateData", () => {
   } else if (page.startsWith("/booster")) {
     presenceData.details = "Booster kısmını görüntülüyor...";
     presenceData.smallImageKey = "booster";
-  } else if (page.startsWith("/yetkili")) {
+  } else if (page.startsWith("/yetkili"))
     presenceData.details = "Yetkili sayfasında dolaşıyor...";
-  }
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

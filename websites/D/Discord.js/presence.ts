@@ -1,13 +1,9 @@
-var presence = new Presence({
+const presence = new Presence({
   clientId: "639659455126044672"
-});
-
-var browsingStamp = Math.floor(Date.now() / 1000);
+}), browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
-  let route = document.location.hash.split("/");
-
-  let data: PresenceData = {
+  const route = document.location.hash.split("/"), data: PresenceData = {
     largeImageKey: "djs",
     startTimestamp: browsingStamp
   };

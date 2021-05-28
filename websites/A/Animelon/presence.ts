@@ -59,12 +59,11 @@ presence.on("UpdateData", async () => {
       Math.floor(duration)
     ),
     presenceData: PresenceData = {
-      largeImageKey: "animelon"
+      largeImageKey: "animelon",
+      startTimestamp: browsingStamp
     },
     buttons = await presence.getSetting("buttons"),
     newLang = await presence.getSetting("lang");
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (!oldLang) oldLang = newLang;
   else if (oldLang !== newLang) {

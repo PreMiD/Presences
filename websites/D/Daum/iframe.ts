@@ -8,7 +8,7 @@ IFrame.on("UpdateData", () => {
     IFrame.send({ video: { duration, currentTime, paused, title } });
   }
 
-  if (document.location.hostname === "cafe.daum.net")
+  if (document.location.hostname === "cafe.daum.net") {
     IFrame.send({
       cafe: {
         name: document
@@ -23,4 +23,5 @@ IFrame.on("UpdateData", () => {
           ?.textContent.trim()
       }
     });
+  }
 });

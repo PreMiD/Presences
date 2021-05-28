@@ -7,27 +7,25 @@ let user: HTMLElement, title: HTMLElement, search: HTMLInputElement;
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "bs"
+    largeImageKey: "bs",
+    startTimestamp: browsingStamp
   };
 
   if (document.location.hostname === "bs.to") {
-    if (document.location.pathname === "/") {
-      presenceData.startTimestamp = browsingStamp;
+    if (document.location.pathname === "/")
       presenceData.details = "Viewing home page";
-    } else if (document.location.pathname.includes("/serie/")) {
-      presenceData.startTimestamp = browsingStamp;
+    else if (document.location.pathname.includes("/serie/")) {
       user = document.querySelector("#sp_left > h2");
       presenceData.details = "Viewing serie:";
       presenceData.state = user.innerText;
       presenceData.smallImageKey = "reading";
-    } else if (document.location.pathname.includes("/andere-serien")) {
-      presenceData.startTimestamp = browsingStamp;
+    } else if (document.location.pathname.includes("/andere-serien"))
       presenceData.details = "Viewing all series";
-    } else if (document.location.pathname.includes("/search")) {
+    else if (document.location.pathname.includes("/search")) {
       search = document.querySelector(
         "#root > section > form > fieldset > label:nth-child(1) > input[type=text]"
       );
-      presenceData.startTimestamp = browsingStamp;
+
       presenceData.details = "Searching for:";
       presenceData.state = search.value;
       presenceData.smallImageKey = "search";

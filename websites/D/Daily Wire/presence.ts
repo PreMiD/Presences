@@ -97,15 +97,13 @@ presence.on("UpdateData", async function () {
     presenceData.details = "Browsing";
   else if (urlpath[1] === "search") {
     presenceData.details = "Searching";
-    presenceData.state = document.querySelector(
+    presenceData.state = document.querySelector<HTMLInputElement>(
       "input.ais-SearchBox-input"
     )?.value;
   } else presenceData.details = "Other";
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
-  }
+  } else presence.setActivity(presenceData);
 });

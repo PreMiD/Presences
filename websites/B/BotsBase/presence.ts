@@ -38,7 +38,6 @@ presence.on("UpdateData", () => {
         const profilename = priceEls[i].textContent;
         presenceData.details = "Viewing a profile:";
         presenceData.state = profilename;
-        presenceData.startTimestamp = browsingStamp;
       }
     } else if (document.location.pathname.includes("/submit/bot")) {
       presenceData.details = "Viewing a page:";
@@ -55,7 +54,6 @@ presence.on("UpdateData", () => {
     } else if (document.location.pathname.includes("/admin")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Admin Panel";
-      presenceData.startTimestamp = browsingStamp;
     } else if (document.location.pathname.includes("/bot/")) {
       priceEls = document.getElementsByClassName("premid bot_name");
       for (let i = 0; i < priceEls.length; i++) {
