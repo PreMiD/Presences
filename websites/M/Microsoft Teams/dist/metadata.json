@@ -4,7 +4,10 @@
     "name": "SlowLife",
     "id": "374905512661221377"
   },
-  "url": [ "teams.live.com", "teams.microsoft.com" ],
+  "url": [
+    "teams.live.com",
+    "teams.microsoft.com"
+  ],
   "description": {
     "en": "Stay connected and organized. Accomplish more together across work, school, and life with Microsoft Teams.",
     "de": "Bleiben Sie gut vernetzt und organisiert – und erreichen Sie gemeinsam mehr mit Microsoft Teams: am Arbeitsplatz, in Schule und Studium und privat.",
@@ -13,7 +16,7 @@
     "nl": "Blijf verbonden en georganiseerd. Bereik samen meer op het werk, op school en in het leven met Microsoft Teams."
   },
   "service": "Microsoft Teams",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "logo": "https://imgur.com/7pDg1Eu.png",
   "thumbnail": "https://imgur.com/6HDv24v.png",
   "color": "#4A51BA",
