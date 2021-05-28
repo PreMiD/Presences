@@ -34,6 +34,15 @@
       "value": true
     },
     {
+      "id": "nicknames",
+      "title": "Show nicknames",
+      "icon": "fas fa-pencil",
+      "value": false,
+      "if": {
+        "usernames": true
+      }
+    },
+    {
       "id": "server-details",
       "title": "Show server details on idle",
       "icon": "fab fa-discord",

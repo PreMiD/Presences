@@ -21,52 +21,26 @@ type repeatingState = "none" | "one" | "queue";
  */
 interface APIData {
   namespace?: string; // API namespace
-  member?: APIEnqueuer; // Dashboard user (server member)
+  member?: APIMember; // Dashboard user (server member)
   isPremiumUser?: boolean; // Has the user premium?
-  avatarUrl?: string; // Member avatar url
-  discriminator?: string; // Member discriminator
-  userId?: string; // Member ID
-  username?: string; // Member name
-  isDonationUser?: boolean; // Has the user donated?
   isLoading?: boolean; // Is the bot / dashboard loading?
   isDJ?: boolean; // Is the member an administrator or dj?
   canInteract?: boolean; // Can the user interact with the bot?
   memberVoiceChannel?: APIVoiceChannel; // Member voice channel
   guild?: APIGuild; // Server
-  guildId?: string; // Server ID
-  guildDisplayName?: string; // Server name
-  isAdmin?: boolean; // Is the member an administrator?
-  interactionAllowed?: boolean; // Is the bot interaction allowed?
   userVoiceChannel?: APIVoiceChannel; // Member voice channel
-  isDonator?: boolean; // Is the member a donator?
   botVoiceChannel?: APIVoiceChannel; // Bot voice channel
   queue?: APIPlayingTrack[]; // Server queue
   queueActualLength?: number; // Queue length
   queueActualDuration?: number; // Queue duration
-  queue_actual_length?: number; // Queue length
-  queue_actual_duration?: number; // Queue duration
   playingTrack?: APIPlayingTrack; // Current song
-  referenceId?: string; // Song url
-  title?: string; // Song title
-  isStream?: boolean; // Is the current song a livestream? (otherwise it's a video)
-  thumbnail?: string; // Song thumbnail
-  small_thumbnail?: string; // Song thumbnail (small)
-  length?: number; // Song length
-  nowPlayingUserDisplayName?: string; // Song requester name
-  nowPlayingUserImage?: string; // Song requester avatar url
-  nowPlayingUserImageAnimated?: null; // Is the song requester avatar animated?
   seek?: number; // Song seek amount
   seekTimestamp?: number; // Song seek timestamp
-  seek_timestamp?: number; // Song seek timestamp
   isPaused?: boolean; // Is the song paused?
-  pause?: boolean; // Is the song paused?
   volume?: number; // Bot volume
-  members?: APIMember[]; // Members in the voice channel
-  users?: APIMember[]; // Members in the voice channel
+  members?: APIUser[]; // Members in the voice channel
   repeatMode?: repeatingState; // Repeating state ("none", "one", "queue")
-  repeat?: repeatingState; // Repeating state ("none", "one", "queue")
-  voteSkips?: APIEnqueuer[]; // Members in the voice channel that vote to skip
-  skipUsers?: APIEnqueuer[]; // Members in the voice channel that vote to skip
+  voteSkips?: APIMember[]; // Members in the voice channel that vote to skip
 }
 
 /**
@@ -87,35 +61,23 @@ interface APIGuild {
 }
 
 /**
- * API Data - Enqueuer
+ * API Data - Member
  */
-interface APIEnqueuer {
+interface APIMember {
   id?: string; // Member ID
   username?: string; // Member username
   discriminator?: string; // Member discriminator
   displayName?: string; // Member nickname
   avatar?: string; // Member avatar url
   animatedAvatar?: null | string; // Is the member avatar animated?
-  userId?: string; // Member ID
-  userImage?: string; // Member avatar url
-  userImageAnimated?: null | string; // Is the member avatar animated?
 }
 
 /**
- * API Data - Member
+ * API Data - User
  */
-interface APIMember {
-  member?: APIEnqueuer; // Member data
+interface APIUser {
+  member?: APIMember; // Member data
   details?: APIMemberDetails; // Member details
-  userDisplayName?: string; // Member nickname
-  lastConnected?: number; // Last connection timestamp
-  image?: string; // Member avatar url
-  image_animated?: null | string; // Is the member avatar animated?
-  id?: string; // Member ID
-  isAdmin?: boolean; // Is the member an administrator?
-  isDeafened?: boolean; // Is the member deafened?
-  isMuted?: boolean; // Is the member muted?
-  isPremium?: boolean; // Has the member premium?
 }
 
 /**
@@ -140,15 +102,7 @@ interface APIPlayingTrack {
   largeThumbnail?: string; // Song thumbnail (large)
   smallThumbnail?: string; // Song thumbnail (small)
   duration?: number; // Song duration
-  enqueuer?: APIEnqueuer; // Song enqueuer
-  userId?: string; // Enqueuer ID
-  userDisplayName?: string; // Enqueuer nickname
-  userImage?: string; // Enqueuer avatar url
-  userImageAnimated?: null; // Is the Enqueuer avatar animated?
-  thumbnail?: string; // Song thumbnail
-  small_thumbnail?: string; // Song thumbnail (small)
-  length?: number; // Song length
-  queueItemId?: string; // Song ID
+  enqueuer?: APIMember; // Song enqueuer
 }
 
 
@@ -294,7 +248,7 @@ async function checkAPIConnection(
   connectionCheck = true;
 
   // Check if a connection exists
-  if (connection && connection.state != WebSocket.CLOSED) {
+  if (connection && connection.state !== WebSocket.CLOSED) {
     // Connection exists
     connectionCheck = false;
     return true;
@@ -334,8 +288,8 @@ async function getAPIInfo(path: string[]): Promise<APIInfo> {
   } else {
     // For older versions, use the custom getPageletiable as a fallback
     presence.error(`Using fallback for older extensions: ${version}`);
-    namespace = path[1] as apiNamespace || await getPageletiable("window." + namespaceLetiable) as apiNamespace;
-    socketUrl = `${await getPageletiable("window." + socketUrlLetiable)}/${namespace}`;
+    namespace = path[1] as apiNamespace || await getPageletiable(`window.${namespaceLetiable}`) as apiNamespace;
+    socketUrl = `${await getPageletiable(`window.${socketUrlLetiable}`)}/${namespace}`;
   }
 
   return { namespace, socketUrl };
@@ -444,6 +398,7 @@ presence.on("UpdateData", async () => {
     hash = window.location.hash,
     presenceData: PresenceData = {},
     showUsernames = await presence.getSetting("usernames"),
+    showNicknames = await presence.getSetting("nicknames"),
     showServerDetails = await presence.getSetting("server-details"),
     showButtons = await presence.getSetting("buttons");
 
@@ -460,7 +415,7 @@ presence.on("UpdateData", async () => {
   // Dashboard
   if (path[0] === "app") {
     // Check if the api info needs to be fetched
-    if (lastPath != path.join("/")) {
+    if (lastPath !== path.join("/")) {
       // Currently, getPageletiable causes high cpu and memory usage,
       // which results in slowdowns, when used too often. This part
       // should prevent browsers from slowing down when using the web
@@ -474,8 +429,7 @@ presence.on("UpdateData", async () => {
 
       // Fetch api information
       const apiInfo = await getAPIInfo(path);
-      namespace = apiInfo.namespace;
-      socketUrl = apiInfo.socketUrl;
+      ({ namespace, socketUrl} = apiInfo);
 
       // Continue with the next emit of "UpdateData"
       return;
@@ -504,29 +458,29 @@ presence.on("UpdateData", async () => {
     const apiData = connection.data;
 
     // Check if a song is currently playing or paused
-    if (apiData.title) {
+    if (apiData.playingTrack) {
       // Reset the idle time
       idleStamp = 0;
 
       // Add song information
-      presenceData.details = apiData.title;
-      if (showUsernames) presenceData.state = `Requested by: ${apiData.nowPlayingUserDisplayName}`;
+      presenceData.details = apiData.playingTrack.title;
+      if (showUsernames) presenceData.state = `Requested by: ${apiData.playingTrack.enqueuer[showNicknames ? "displayName" : "username"]}`;
 
       // Add the view song button if buttons should be displayed
       if (showButtons) {
         presenceData.buttons.push({
           label: (await strings).buttonViewSong,
-          url: apiData.referenceId
+          url: apiData.playingTrack.uri
         });
       }
 
       // Check if the song isn't paused
-      if (apiData.pause === false) {
+      if (apiData.isPaused === false) {
         // Add the Rythm version name and seperator
         presenceData.smallImageText = `${rythms[namespace]} ${separator} `;
 
         // Check repeating state and add it
-        switch (apiData.repeat) {
+        switch (apiData.repeatMode) {
           // Repeat song
           case "one":
             presenceData.smallImageKey = "repeat-one";
@@ -545,28 +499,28 @@ presence.on("UpdateData", async () => {
         }
 
         // Check if the currently playing song is a livestream
-        if (apiData.isStream) {
+        if (apiData.playingTrack.isStream) {
           // Show elapsed time
           presenceData.startTimestamp = apiData.seekTimestamp / 1000;
         } else {
           // Show remaining time
           presenceData.startTimestamp = (apiData.seekTimestamp - apiData.seek) / 1000;
-          presenceData.endTimestamp = (apiData.seekTimestamp - apiData.seek + apiData.length) / 1000;
+          presenceData.endTimestamp = (apiData.seekTimestamp - apiData.seek + apiData.playingTrack.duration) / 1000;
         }
       } else {
         // Pause
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = rythms[namespace] + ` ${separator} ` + (await strings).pause;
+        presenceData.smallImageText = `${rythms[namespace]} ${separator} ${(await strings).pause}`;
       }
     } else {
       // Check if server details can and should be shown
-      if (showServerDetails && apiData.guildDisplayName) {
+      if (showServerDetails) {
         // Get the amount of DJs and normal users
-        const djAmount = apiData.users.filter(user => user.isAdmin).length,
-          userAmount = apiData.users.length - djAmount;
+        const djAmount = apiData.members.filter(user => user.details.isDJ).length,
+          userAmount = apiData.members.length - djAmount;
 
         // Add server information
-        presenceData.details = apiData.guildDisplayName;
+        presenceData.details = apiData.guild.name;
 
         // Check if any users are connected
         if (djAmount > 0 || userAmount > 0) {
