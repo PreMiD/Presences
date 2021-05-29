@@ -195,7 +195,52 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
+    // discord.bio
+  } else if (document.location.pathname.includes("/profiles")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.smallImageKey = "reading";
+    presenceData.smallImageText = "Browsing...";
+    presenceData.details = "Browsing top bios";
+  } else if (document.location.pathname === "/bio/premium") {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.details = "Viewing 💎 premium plans";
+    presenceData.buttons = [
+      {
+        label: "View Premium Plans",
+        url: document.location.href
+      }
+    ];
+  } else if (document.location.pathname.includes("/customise")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.details = "Editing bio";
+  } else if (document.location.pathname.includes("/settings")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.details = "Viewing ⚙️ settings";
+  } else if (document.location.pathname.includes("/p/")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    const profileName = document.querySelector(
+        "span.text-white.font-bold.text-2xl"
+      )?.textContent,
+      premium = document.querySelector(
+        "div.text-xs.uppercase.tracking-widest.font-bold.text-blue-300"
+      )?.textContent;
+    presenceData.details = `Viewing ${
+      profileName.endsWith("s")
+        ? `${`${profileName}'`}`
+        : `${`${profileName}'s`}`
+    } bio`;
+    presenceData.state = `${premium ? "💎 Premium User" : "🎟️ Normal User"}`;
+    presenceData.buttons = [
+      {
+        label: "View Bio",
+        url: document.location.href
+      }
+    ];
+  } else if (document.location.pathname.includes("/bio")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.details = "Viewing home page";
   }
+
   if (!showButtons) delete presenceData.buttons;
   if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
