@@ -1,5 +1,3 @@
-* @Bas950 @ririxidev @StrikerFRFX @SlowLife1661
-
 @types/* @Timeraa @ririxidev @Bas950
 package.json @Timeraa @Fruxh @TheDropX @ririxidev
 yarn.lock @Timeraa @Fruxh @TheDropX @ririxidev
@@ -8,3 +6,5 @@ yarn.lock @Timeraa @Fruxh @TheDropX @ririxidev
 
 util/tools/translator.ts @Bas950 @ririxidev
 util/tools/auto/* @SeMiD
+
+* @Bas950 @ririxidev @StrikerFRFX @SlowLife1661
