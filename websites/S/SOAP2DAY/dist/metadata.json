@@ -21,5 +21,5 @@
     "en": "You can watch all videos without logging in or registration. Soap2day is free all the time, but there are few ads on videoplayer page."
   },
   "url": "soap2day.to",
-  "regExp": "(soap2day|s2dfree)[.]"
+  "regExp": "([a-z0-9]+[.])*(soap2day|s2dfree)([.][a-z]+)"
 }
