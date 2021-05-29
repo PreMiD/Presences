@@ -72,7 +72,7 @@ else if (document.location.pathname.includes("/results")) {
 } else if (document.location.pathname.includes("/new")) 
   presenceData.details = "Creating 🎨 new template";
  else if (document.location.pathname.includes("/browse")) {
-const [tag] = document.location.href.split("tag=")[1].split("&"),
+  const [tag] = document.location.href.split("tag=")[1].split("&"),
   page = document.querySelector("h2.text-lg.font-semibold.text-white")?.textContent;
   presenceData.details = `Viewing ${tag ? `${`${tag} tag`}` : "Nothing"}`;
   presenceData.state = `📖 Page ${page}`;
