@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Anime1.me ",
+  "author": {
+    "name": "CKHO#3352",
+    "id": "810395995677786154"
+  },
+  "category": "anime",
+  "logo": "https://i.imgur.com/0sVL598.png",
+  "thumbnail": "https://i.imgur.com/wCgZ2T3.png",
+  "version": "1.0.0",
+  "color": "#e4007f",
+  "tags": [
+    "anime",
+    "streaming",
+    "video"
+  ],
+  "url": "anime1.me",
+  "description": {
+    "zh_TW": "動畫線上看",
+    "en": "Watching Anime online"
+  }
+}
