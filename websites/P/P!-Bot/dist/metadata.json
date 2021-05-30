@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "p!-Bot",
+  "author": {
+    "name": "AlbaySIMSEK",
+    "id": "432476132609228800"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/vcTLQMw.png",
+  "thumbnail": "https://i.imgur.com/M510J3C.png",
+  "version": "1.0.0",
+  "color": "#1d203d",
+  "tags": [
+    "bot",
+    "discord"
+  ],
+  "url": [
+    "pbot.app",
+    "panel.pbot.app",
+    "status.pbot.app"
+  ],
+  "description": {
+    "tr": "p!-Bot kullanışlı ve kullanıcılar için yararlı bir discord botudur.",
+    "en": "p!-Bot is a useful and useful discord bot for users."
+  },
+  "settings": [
+    {
+      "id": "showButtons",
+      "title": "Show Buttons",
+      "icon": "fas fa-info",
+      "value": true
+    }
+  ]
+}
