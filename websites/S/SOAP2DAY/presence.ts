@@ -30,7 +30,8 @@ epochWithOffset = (t: number): number => {
 },
 getStatus = (): string => {
   const element = document.getElementById("t3").textContent.trim();
-  if (element === "") { return "Loading" } else { return element }
+  if (element === "") return "Loading";
+  else return element;
 },
 constructAction: Record<string, string> = {
   "movielist": "Searching for a movie",
