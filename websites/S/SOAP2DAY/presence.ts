@@ -2,14 +2,14 @@ const presence = new Presence({
   clientId: "828549761376059441"
 }),
 getAction = (): string => {
-  if (window.location.href.indexOf("movielist") != -1) return "movielist";
-  else if (window.location.href.indexOf("sportlist") != -1) return "sportlist";
-  else if (window.location.href.indexOf("tvlist") != -1) return "tvlist";
-  else if (window.location.href.indexOf("Tczo") != -1) return "tvshow";
-  else if (window.location.href.indexOf("Mczo") != -1) return "movie";
-  else if (window.location.href.indexOf("Sczo") != -1) return "sport";
-  else if (window.location.href.indexOf("faq") != -1) return "faq";
-  else if (window.location.href.indexOf("Eczo") != -1) return "tv";
+  if (window.location.href.indexOf("movielist") !== -1) return "movielist";
+  else if (window.location.href.indexOf("sportlist") !== -1) return "sportlist";
+  else if (window.location.href.indexOf("tvlist") !== -1) return "tvlist";
+  else if (window.location.href.indexOf("Tczo") !== -1) return "tvshow";
+  else if (window.location.href.indexOf("Mczo") !== -1) return "movie";
+  else if (window.location.href.indexOf("Sczo") !== -1) return "sport";
+  else if (window.location.href.indexOf("faq") !== -1) return "faq";
+  else if (window.location.href.indexOf("Eczo") !== -1) return "tv";
   else return "home";
 },
 getText = (text: string): string => {
