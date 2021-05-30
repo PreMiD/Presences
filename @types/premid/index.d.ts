@@ -33,10 +33,11 @@ interface PresenceData {
     /**
      * Array of buttons, max 2, label is the button text, and url is the link
      */
-    buttons?: {
-        label: string;
-        url: string;
-    }[];
+    buttons?: [ButtonData, ButtonData?];
+}
+interface ButtonData {
+  label: string
+  url: string
 }
 /**
  * Options that change the behavior of the presence
