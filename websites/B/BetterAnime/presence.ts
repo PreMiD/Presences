@@ -66,7 +66,16 @@ const presence = new Presence({
     oldLang: ""
   };
 
-let strings = getStrings();
+let strings = getStrings(),
+  video: {
+    duration: number;
+    currentTime: number;
+    paused: boolean;
+  };
+
+presence.on("iFrameData", (data: typeof video) => {
+  if (data) video = data;
+});
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -93,8 +102,10 @@ presence.on("UpdateData", async () => {
     "/anime/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-0-9]+)": {
       disabled: !anime,
       async setPresenceData() {
-        const video = document.querySelector("video"),
-          timestamps = presence.getTimestampsfromMedia(video);
+        const timestamps = presence.getTimestamps(
+          video.currentTime,
+          video.duration
+        );
 
         data.meta["episode"] = document.querySelector(
           "div.anime-title > h3"
@@ -148,8 +159,10 @@ presence.on("UpdateData", async () => {
     "/filme/(dublado|legendado)/([a-zA-Z0-9-]+)/([a-z-]+)": {
       disabled: !movie,
       async setPresenceData() {
-        const video = document.querySelector("video"),
-          timestamps = presence.getTimestampsfromMedia(video);
+        const timestamps = presence.getTimestamps(
+          video.currentTime,
+          video.duration
+        );
 
         data.meta["title"] = document
           .querySelector("div.anime-title")

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Hitomi",
+  "author": {
+    "name": "SaidBySolo",
+    "id": "345265069132742657"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/sQZ65FE.png",
+  "thumbnail": "https://i.imgur.com/648ECEg.png",
+  "version": "1.0.0",
+  "color": "#242d3c",
+  "tags": [
+    "nsfw",
+    "doujinshi",
+    "manga",
+    "hentai"
+  ],
+  "url": "hitomi.la",
+  "description": {
+    "en": "Hitomi.la is the best source of free hentai doujinshi, manga, artist CG, and anime.",
+    "ko_KR": "Hitomi.la는 무료 헨타이 동인지, 만화, 아티스트 CG 그리고 애니메이션의 최고의 소스입니다."
+  }
+}

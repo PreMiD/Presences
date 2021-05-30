@@ -14,6 +14,7 @@
     "support.apple.com",
     "getsupport.apple.com",
     "apps.apple.com",
+    "developer.apple.com",
     "www.icloud.com"
   ],
   "description": {
@@ -24,7 +25,7 @@
     "nl": "Apple Inc. is een Amerikaans multinationaal bedrijf die tot doel heeft consumentenelektronica, computersoftware en personal computers te ontwerpen en op de markt te brengen."
   },
   "service": "Apple",
-  "version": "2.0.5",
+  "version": "2.1.1",
   "logo": "https://i.imgur.com/rBAusA5.png",
   "thumbnail": "https://i.imgur.com/D5b7fQ5.jpg",
   "color": "#606C80",
@@ -65,6 +66,12 @@
       "id": "shopCheckout",
       "title": "Show shop summary",
       "icon": "fas fa-store",
+      "value": true
+    },
+    {
+      "id": "devProfileBtn",
+      "title": "Show Dev Forum profile button",
+      "icon": "fas fa-id-badge",
       "value": true
     }
   ]
