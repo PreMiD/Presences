@@ -17,7 +17,6 @@ function splitOnDashes(input: string, everyFirstLetterUppercase = false) {
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "oculus-logo3",
-    buttons: [],
     startTimestamp: browsingStamp
   },
     hostName = document.location.hostname.replace("www.", ""),
@@ -36,10 +35,10 @@ presence.on("UpdateData", async () => {
           const article = document.querySelector("h1")?.textContent || document.querySelector("h2")?.textContent || document.querySelector("h4")?.textContent;
           if (article) {
             presenceData.state = article.length > 128 ? `${article.slice(0, 125)}...` : article;
-            presenceData.buttons.push({
+            presenceData.buttons = [{
               label: "Open article",
               url: `https://${hostName}/${path[0]}`
-            });
+            }];
           } else 
             presenceData.state = "Unknown article";
           
@@ -109,10 +108,10 @@ presence.on("UpdateData", async () => {
                   let blog = document.querySelector("#blog-heading")?.textContent;
                   if (blog?.length > 128) blog = `${blog.slice(0, 125)}...`;
                   presenceData.state = blog ?? "Unknown blog";
-                  presenceData.buttons.push({
+                  presenceData.buttons = [{
                     label: "Open blog entry",
                     url: `https://${hostName}/${path[0]}/${path[1]}`
-                  });
+                  }];
               }
               break;
             }
@@ -122,10 +121,10 @@ presence.on("UpdateData", async () => {
               presenceData.details = `Store for ${splitOnDashes(path[1], true)}`;
               presenceData.smallImageKey = `${path[1]}`;
               presenceData.smallImageText = splitOnDashes(path[1], true);
-              presenceData.buttons.push({
+              presenceData.buttons = [{
                   label: "Open store",
                   url: `https://${hostName}/${path[0]}`
-              });
+              }];
 
               // Store home page
               if (path[2] === "" || !path[2]) 
