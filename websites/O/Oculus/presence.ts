@@ -104,12 +104,12 @@ presence.on("UpdateData", async () => {
 
               // Viewing a blog
               else {
-                  presenceData.details = "Viewing blog:";
+                  presenceData.details = "Reading blog:";
                   let blog = document.querySelector("#blog-heading")?.textContent;
                   if (blog?.length > 128) blog = `${blog.slice(0, 125)}...`;
                   presenceData.state = blog ?? "Unknown blog";
                   presenceData.buttons = [{
-                    label: "Open blog entry",
+                    label: "Read blog post",
                     url: `https://${hostName}/${path[0]}/${path[1]}`
                   }];
               }
@@ -122,7 +122,7 @@ presence.on("UpdateData", async () => {
               presenceData.smallImageKey = `${path[1]}`;
               presenceData.smallImageText = splitOnDashes(path[1], true);
               presenceData.buttons = [{
-                  label: "Open store",
+                  label: "View store",
                   url: `https://${hostName}/${path[0]}`
               }];
 
@@ -135,7 +135,7 @@ presence.on("UpdateData", async () => {
                   const showCase = document.getElementsByClassName("section-header__title")[0]?.textContent;
                   presenceData.state = `Showcase: ${showCase ?? "Loading..."}`;
                   presenceData.buttons.push({
-                    label: "Open showcase",
+                    label: "View showcase",
                     url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
                   });
 
@@ -144,7 +144,7 @@ presence.on("UpdateData", async () => {
                   const title = document.querySelector("_9cq4")?.textContent ?? "Unknown dev-post";
                   presenceData.state = `Dev-post: ${title.length > 118 ? `${title.slice(0, 115)}...` : title}`;
                   presenceData.buttons.push({
-                    label: "Open dev-post",
+                    label: "Read dev-post",
                     url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`,
                   });
 
@@ -159,7 +159,7 @@ presence.on("UpdateData", async () => {
                   const bundle = document.querySelector("div.bundle-detail-page__description > h1")?.textContent;
                   presenceData.state = `Bundle: ${bundle ?? "Loading..."}`;
                   presenceData.buttons.push({
-                    label: "Open bundle",
+                    label: "View bundle",
                     url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
                   });
 
@@ -168,7 +168,7 @@ presence.on("UpdateData", async () => {
                   const game = document.getElementsByClassName("app-description__title")[0]?.textContent;
                   presenceData.state = `Game: ${game ?? "Loading..."}`;
                   presenceData.buttons.push({
-                    label: "Open game",
+                    label: "View game",
                     url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`,
                   });
 
