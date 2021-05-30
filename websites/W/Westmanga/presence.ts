@@ -1,9 +1,9 @@
 const presence = new Presence({
-  clientId: "848082293427273748",
+  clientId: "848082293427273748"
 }),
 presenceData: PresenceData = {
   largeImageKey: "logo",
-  startTimestamp: Math.floor(Date.now() / 1000),
+  startTimestamp: Math.floor(Date.now() / 1000)
 };
 
 presence.on("UpdateData", async () => {
@@ -45,38 +45,38 @@ switch (
     break;
   default: {
     if (document.location.pathname.includes("/genres/")) {
-      let genres = document.querySelector(
+      const genres = document.querySelector(
         "div.wrapper > div > div > div.releases > h1"
       ).textContent;
       presenceData.details = "Searching by genres...";
-      presenceData.state = "Genre : " + genres;
+      presenceData.state = `Genre: ${genres}`;
       presenceData.smallImageKey = "search";
     }
     if (document.location.pathname.startsWith("/manga")) {
-      let type = document.querySelector(
+      const type = document.querySelector(
         "div.seriestucon > div.seriestucontent > div.seriestucontentr > div.seriestucont > div > table > tbody > tr:nth-child(2) > td:nth-child(2)"
       ).textContent;
-      presenceData.details = "Viewing " + type;
+      presenceData.details = `Viewing ${type}`;
       presenceData.state = document.querySelector(
         "div.seriestucon > div.seriestuheader > h1"
       ).textContent;
       presenceData.buttons = [
-        { label: "View " + type, url: document.location.href },
+        { label: `View ${type}`, url: document.location.href }
       ];
     }
     const readmanga = document.querySelector(".chapterbody");
     if (readmanga) {
-      let manga = document.querySelector("div.headpost > div > a").innerHTML;
-      let chapter =
+      const manga = document.querySelector("div.headpost > div > a").innerHTML;
+      const chapter =
         document.querySelector<HTMLSelectElement>("#chapter")
           .selectedOptions[0].textContent;
-      let lastchapter = document.querySelector(
+      const lastchapter = document.querySelector(
         "#chapter > option:nth-child(2)"
       ).textContent;
-      presenceData.details = "Reading  " + manga;
-      presenceData.state = chapter + "of " + lastchapter;
+      presenceData.details = `Reading ${manga}`;
+      presenceData.state = `${chapter} of ${lastchapter}`;
       presenceData.buttons = [
-        { label: "Read Manga", url: document.location.href },
+        { label: "Read Manga", url: document.location.href }
       ];
     }
     break;
