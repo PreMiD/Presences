@@ -21,9 +21,7 @@ presence.on("UpdateData", async () => {
           presenceData.smallImageKey = "reading";
         }
         else {
-          presenceData.details ="Manga :" +  document
-          .querySelector("head > title")
-          .textContent;
+          presenceData.details ="กำลังเลือก Manga";
         }
     } else if (document.location.pathname.includes("/novel")) {
       if(document.querySelector("head > title").textContent.split("-")[1] != undefined) {
@@ -34,9 +32,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       }
       else {
-        presenceData.details ="Novel :" +  document
-        .querySelector("head > title")
-        .textContent;
+        presenceData.details ="กำลังเลือก Novel";
       }
     } else if (document.location.pathname.includes("/comic")) {
       if(document.querySelector("head > title").textContent.split("-")[1] != undefined) {
@@ -47,9 +43,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       }
       else {
-        presenceData.details ="Comic :" +  document
-        .querySelector("head > title")
-        .textContent;
+        presenceData.details ="กำลังเลือก Original Comic";
       }
     } else if (document.location.pathname.includes("/fiction")) {
       if(document.querySelector("head > title").textContent.split("-")[1] != undefined) {
@@ -60,9 +54,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "reading";
       }
       else {
-        presenceData.details ="ONovel :" +  document
-        .querySelector("head > title")
-        .textContent;
+        presenceData.details ="กำลังเลือก Original Novel";
       }
     } else if (document.location.pathname.includes("/explore")) {
       presenceData.details = "กำลังอ่าน Project list";
