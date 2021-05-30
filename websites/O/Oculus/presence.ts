@@ -1,8 +1,7 @@
 const presence = new Presence({
-  clientId: "837833278777065503",
+  clientId: "837833278777065503"
 }),
   browsingStamp = Math.floor(Date.now() / 1000);
-
 
 /**
 * Replaces "-" with " ", optional first letter of every word in uppercase (the first letter will be always uppercase)
@@ -11,8 +10,8 @@ const presence = new Presence({
 * @returns {string}
 * @example // (false) "terms-of-service" -> "Terms of service"; (true) "rift-s" -> "Rift S"
 */
-function splitOnDashes(input: string, everyFirstLetterUppercase: boolean = false) {
-  return input.split("-").map((s, i) => i == 0 || everyFirstLetterUppercase ? s.charAt(0).toUpperCase() + s.slice(1) : s).join(" ");
+function splitOnDashes(input: string, everyFirstLetterUppercase = false) {
+  return input.split("-").map((s, i) => i === 0 || everyFirstLetterUppercase ? s.charAt(0).toUpperCase() + s.slice(1) : s).join(" ");
 }
 
 presence.on("UpdateData", async () => {
@@ -20,9 +19,8 @@ presence.on("UpdateData", async () => {
     largeImageKey: "oculus-logo3",
     buttons: [],
     startTimestamp: browsingStamp
-  };
-
-  const hostName = document.location.hostname.replace("www.", ""),
+  },
+    hostName = document.location.hostname.replace("www.", ""),
     path = window.location.pathname.split("/").slice(1),
     showButtons: boolean = await presence.getSetting("buttons"),
     showTimestamp: boolean = await presence.getSetting("timestamp");
@@ -32,20 +30,19 @@ presence.on("UpdateData", async () => {
     // Support pages
     case "support.oculus.com": {
       presenceData.details = "Viewing support page:";
-      if (path[0] == "" || !path[0]) {
-          presenceData.state = "Home";
-      } else {
+      if (path[0] === "" || !path[0]) presenceData.state = "Home";
+      else {
           // Gets the biggest title of page
           const article = document.querySelector("h1")?.textContent || document.querySelector("h2")?.textContent || document.querySelector("h4")?.textContent;
           if (article) {
-            presenceData.state = article.length > 128 ? article.slice(0, 125) + "..." : article;
+            presenceData.state = article.length > 128 ? `${article.slice(0, 125)}...` : article;
             presenceData.buttons.push({
               label: "Open article",
               url: `https://${hostName}/${path[0]}`
             });
-          } else {
+          } else 
             presenceData.state = "Unknown article";
-          }
+          
       }
       break;
     }
@@ -53,8 +50,7 @@ presence.on("UpdateData", async () => {
     // Main pages
     case "oculus.com": {
       // Hompage
-      if (path[0] == "" || !path[0]) {
-          presenceData.details = "Viewing home page";
+      if (path[0] == "" || !path[0]) { presenceData.details = "Viewing home page";
       } else {
           switch (path[0]) {
             case "legal": {
@@ -71,17 +67,13 @@ presence.on("UpdateData", async () => {
             case "rift":
             case "rift-s": {
               presenceData.details = "Viewing the page:";
-              if (path[1] == "accessories") {
-                  presenceData.state = `Accessories for ${splitOnDashes(path[0], true)}`;
-              } else {
-                  presenceData.state = splitOnDashes(path[0], true);
-              }
+              if (path[1] === "accessories") presenceData.state = `Accessories for ${splitOnDashes(path[0], true)}`;
+              else presenceData.state = splitOnDashes(path[0], true);
               break;
             }
             case "accessories": {
               presenceData.details = "Viewing the accessory:";
-              presenceData.state = splitOnDashes(path[1])
-
+              presenceData.state = splitOnDashes(path[1]);
               break;
             }
             case "cart": {
@@ -101,27 +93,25 @@ presence.on("UpdateData", async () => {
             }
             case "safety-center": {
               presenceData.details = "Viewing safety center";
-              if (path[1]) {
-                  presenceData.state = `For ${splitOnDashes(path[1], true)}`;
-              }
+              if (path[1]) presenceData.state = `For ${splitOnDashes(path[1], true)}`;
               break;
             }
 
             // Blogs
             case "blog": {
               // All blogs
-              if (!path[1] || path[1] == "") {
-                  presenceData.details = "Viewing all blogs";
+              if (!path[1]) 
+                presenceData.details = "Viewing all blogs";
 
-                  // Viewing a blog
-              } else {
+              // Viewing a blog
+              else {
                   presenceData.details = "Viewing blog:";
                   let blog = document.querySelector("#blog-heading")?.textContent;
                   if (blog?.length > 128) blog = `${blog.slice(0, 125)}...`;
                   presenceData.state = blog ?? "Unknown blog";
                   presenceData.buttons.push({
                     label: "Open blog entry",
-                    url: `https://${hostName}/${path[0]}/${path[1]}`,
+                    url: `https://${hostName}/${path[0]}/${path[1]}`
                   });
               }
               break;
@@ -130,37 +120,37 @@ presence.on("UpdateData", async () => {
             // Store pages
             case "experiences": {
               presenceData.details = `Store for ${splitOnDashes(path[1], true)}`;
-              presenceData.smallImageKey = path[1];
+              presenceData.smallImageKey = `${path[1]}`;
               presenceData.smallImageText = splitOnDashes(path[1], true);
               presenceData.buttons.push({
                   label: "Open store",
-                  url: `https://${hostName}/${path[0]}`,
+                  url: `https://${hostName}/${path[0]}`
               });
 
               // Store home page
-              if (path[2] == "" || !path[2]) {
+              if (path[2] === "" || !path[2]) 
                   presenceData.state = "Home";
 
-                  // Section aka showcases
-              } else if (path[2] == "section") {
+                // Section aka showcases
+              else if (path[2] === "section") {
                   const showCase = document.getElementsByClassName("section-header__title")[0]?.textContent;
                   presenceData.state = `Showcase: ${showCase ?? "Loading..."}`;
                   presenceData.buttons.push({
                     label: "Open showcase",
-                    url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`,
+                    url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
                   });
 
                   // Developer posts
-              } else if (path[2] == "developer-post") {
+              } else if (path[2] === "developer-post") {
                   const title = document.querySelector("_9cq4")?.textContent ?? "Unknown dev-post";
-                  presenceData.state = `Dev-post: ${title.length > 118 ? title.slice(0, 115) + "..." : title}`;
+                  presenceData.state = `Dev-post: ${title.length > 118 ? `${title.slice(0, 115)}...` : title}`;
                   presenceData.buttons.push({
                     label: "Open dev-post",
                     url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`,
                   });
 
                   // Searching
-              } else if (path[2] == "search") {
+              } else if (path[2] === "search") {
                   const searchText = document.querySelector("disco-search__query")?.textContent;
                   presenceData.state = `Searching for: ${searchText}`;
                   presenceData.smallImageKey = "search";
@@ -171,7 +161,7 @@ presence.on("UpdateData", async () => {
                   presenceData.state = `Bundle: ${bundle ?? "Loading..."}`;
                   presenceData.buttons.push({
                     label: "Open bundle",
-                    url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`,
+                    url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
                   });
 
                   // Games
@@ -207,12 +197,12 @@ presence.on("UpdateData", async () => {
     }
   }
 
-  if (presenceData.details == null) {
+  if (!presenceData.details) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
     // Delete button(s) / timestamp relating to the setting
-    if (presenceData.buttons?.length == 0 || !showButtons) delete presenceData.buttons;
+    if (presenceData.buttons?.length && !showButtons) delete presenceData.buttons;
     if (!showTimestamp) delete presenceData.startTimestamp;
     presence.setActivity(presenceData);
   }
