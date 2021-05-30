@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Laila",
+    "id": "636229819620655134"
+  },
+  "service": "color-hex",
+  "description": {
+    "en": "Color-hex gives information about colors.",
+    "de": "Color-hex gibt Informationen über Farben."
+  },
+  "url": "www.color-hex.com",
+  "version": "0.1",
+  "logo": "https://cdn.discordapp.com/app-icons/848520351352619018/806312a02276392f36f508f2574d686e.png",
+  "thumbnail": "https://www.color-hex.com/logo@2x.png",
+  "color": "#FF00FF",
+  "tags": [
+    "colors",
+    "html",
+    "hex"
+  ],
+  "category": "other"
+}
