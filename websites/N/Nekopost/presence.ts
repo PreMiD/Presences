@@ -22,6 +22,7 @@ presence.on("UpdateData", async () => {
         }
         else {
           presenceData.details ="กำลังเลือก Manga";
+          presenceData.smallImageKey = "search";
         }
     } else if (document.location.pathname.includes("/novel")) {
       if(document.querySelector("head > title").textContent.split("-")[1] != undefined) {
@@ -33,6 +34,7 @@ presence.on("UpdateData", async () => {
       }
       else {
         presenceData.details ="กำลังเลือก Novel";
+        presenceData.smallImageKey = "search";
       }
     } else if (document.location.pathname.includes("/comic")) {
       if(document.querySelector("head > title").textContent.split("-")[1] != undefined) {
@@ -44,6 +46,7 @@ presence.on("UpdateData", async () => {
       }
       else {
         presenceData.details ="กำลังเลือก Original Comic";
+        presenceData.smallImageKey = "search";
       }
     } else if (document.location.pathname.includes("/fiction")) {
       if(document.querySelector("head > title").textContent.split("-")[1] != undefined) {
@@ -55,6 +58,7 @@ presence.on("UpdateData", async () => {
       }
       else {
         presenceData.details ="กำลังเลือก Original Novel";
+        presenceData.smallImageKey = "search";
       }
     } else if (document.location.pathname.includes("/explore")) {
       presenceData.details = "กำลังเลือก Project list";
