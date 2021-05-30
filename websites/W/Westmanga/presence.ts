@@ -66,13 +66,13 @@ switch (
     }
     const readmanga = document.querySelector(".chapterbody");
     if (readmanga) {
-      const manga = document.querySelector("div.headpost > div > a").innerHTML;
-      const chapter =
-        document.querySelector<HTMLSelectElement>("#chapter")
-          .selectedOptions[0].textContent;
-      const lastchapter = document.querySelector(
-        "#chapter > option:nth-child(2)"
-      ).textContent;
+      const manga = document.querySelector("div.headpost > div > a").innerHTML,
+        chapter = document.querySelector<HTMLSelectElement>(
+          "#chapter"
+        ).selectedOptions[0].textContent,
+        lastchapter = document.querySelector(
+          "#chapter > option:nth-child(2)"
+        ).textContent;
       presenceData.details = `Reading ${manga}`;
       presenceData.state = `${chapter} of ${lastchapter}`;
       presenceData.buttons = [
