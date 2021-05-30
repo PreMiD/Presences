@@ -201,7 +201,7 @@ presence.on("UpdateData", async () => {
     presence.setActivity();
   } else {
     // Delete button(s) / timestamp relating to the setting
-    if (presenceData.buttons?.length && !showButtons) delete presenceData.buttons;
+    if (presenceData.buttons && !showButtons) delete presenceData.buttons;
     if (!showTimestamp) delete presenceData.startTimestamp;
     presence.setActivity(presenceData);
   }
