@@ -56,11 +56,11 @@ presence.on("UpdateData", async () => {
   // If the user is watching something, get the title and set duration.
   if (["movie", "tv", "sport"].includes(getAction())) {
     // If paused, reset update remaining.
-    if (getStatus() == "Pause") { flag = false }
+    if (getStatus() === "Pause") flag = false;
 
     if (!flag) {
       watchStamp = epochWithOffset(document.getElementsByTagName("video")[0].duration);
-      if (!isNaN(watchStamp)) { flag = true }
+      if (!isNaN(watchStamp)) flag = true;
     }
     presenceData = {
       state: `${getStatus()} | ${getText("player-title-bar")}`,
