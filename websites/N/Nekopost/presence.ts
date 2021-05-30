@@ -57,7 +57,7 @@ presence.on("UpdateData", async () => {
         presenceData.details ="กำลังเลือก Original Novel";
       }
     } else if (document.location.pathname.includes("/explore")) {
-      presenceData.details = "กำลังอ่าน Project list";
+      presenceData.details = "กำลังเลือก Project list";
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname == "/") {
       presenceData.details = "กำลังหา...";
