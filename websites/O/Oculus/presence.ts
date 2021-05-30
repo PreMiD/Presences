@@ -44,6 +44,12 @@ presence.on("UpdateData", async () => {
         }
       }
       else if (document.location.pathname.includes("/rift-s/")) {
+        presenceData.buttons = [
+          {
+            label: "View Page",
+            url: document.location.href
+          }
+        ];
         presenceData.details = "Viewing Product";
         presenceData.state = "Rift S";
         presenceData.smallImageKey = "rifts";
@@ -58,6 +64,8 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Viewing Product";
         presenceData.state = "Quest 2";
         presenceData.smallImageKey = "quest2";
+        if (document.location.pathname.includes("/accessories/"))
+          presenceData.details = "Viewing Accessories";
       }
       else if (document.location.pathname.includes("/experiences/")) {
         if (document.location.pathname.includes("/rift/")) {
