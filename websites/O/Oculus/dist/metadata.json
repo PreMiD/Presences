@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "joerkig",
+    "id": "205984221859151873"
+  },
+  "service": "Oculus",
+  "description": {
+    "en": "Oculus description"
+  },
+  "url": [
+    "oculus.com",
+    "oculusvr.com"
+  ],
+  "regExp": "([a-z0-9-]+[.]*oculus[.]com[/]|[a-z0-9-]+[.]*oculusvr[.]com[/])",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/tI3gY5K.png",
+  "thumbnail": "https://i.imgur.com/bljgRKp.png",
+  "color": "#1D1F20",
+  "tags": [
+    "vr",
+    "gaming"
+  ],
+  "category": "games",
+  "settings": [
+    {
+      "id": "time",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
