@@ -24,7 +24,6 @@ presence.on("UpdateData", async () => {
     showButtons: boolean = await presence.getSetting("buttons"),
     showTimestamp: boolean = await presence.getSetting("timestamp");
 
-
   switch (hostName) {
     // Support pages
     case "support.oculus.com": {
