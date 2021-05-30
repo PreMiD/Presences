@@ -15,11 +15,6 @@ getAction = (): string => {
 getText = (text: string): string => {
   return document.getElementsByClassName(text)[0].textContent.trim();
 },
-epochWithOffset = (t: number): number => {
-  const now = new Date();
-  now.setTime(now.getTime() + t);
-  return now.setTime(now.getTime());
-},
 getStatus = (): string => {
   const element = document.getElementById("t3").textContent.trim();
   if (element === "") return "Loading";
@@ -36,11 +31,10 @@ constructAction: Record<string, string> = {
   "faq":       "Reading the FAQ",
   "tv":        "Relaxing to some TV"
 };
-let flag = false,
+let pauseFlag = true,
 watchStamp = 0;
 
 presence.on("UpdateData", async () => {
-
   let presenceData: PresenceData = {
     largeImageKey: "icon",
     details: constructAction[getAction()]
@@ -48,24 +42,31 @@ presence.on("UpdateData", async () => {
   // If the user is watching something, get the title and set duration.
   if (["movie", "tv", "sport"].includes(getAction())) {
     // If paused, reset update remaining.
-    if (getStatus() === "Pause") flag = false;
+    if (getStatus() === "Pause") pauseFlag = false;
 
-    if (!flag) {
-      watchStamp = epochWithOffset(document.getElementsByTagName("video")[0].duration);
-      if (!isNaN(watchStamp)) flag = true;
+    if (pauseFlag) {
+      watchStamp = (document.getElementsByTagName("video")[0].duration -
+        document.getElementsByTagName("video")[0].currentTime)
+        + Math.floor(Date.now() / 1000);
+      if (!isNaN(watchStamp)) pauseFlag = true;
+      presenceData = {
+        state: `${getStatus()} | ${getText("player-title-bar")}`,
+        endTimestamp: watchStamp,
+        ...presenceData
+      };
+    } else {
+      presenceData = {
+        state: `${getStatus()} | ${getText("player-title-bar")}`,
+        ...presenceData
+      };
     }
-    presenceData = {
-      state: `${getStatus()} | ${getText("player-title-bar")}`,
-      endTimestamp: watchStamp,
-      ...presenceData
-    };
+    pauseFlag = true;
   } else { // If the user is not watching something, return how long they have been browsing.
-    flag = false;
     presenceData = {
       startTimestamp: Math.floor(Date.now() / 1000),
       ...presenceData
     };
   }
 
-presence.setActivity(presenceData);
+  presence.setActivity(presenceData);
 });
