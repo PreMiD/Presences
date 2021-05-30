@@ -53,18 +53,20 @@ presence.on("UpdateData", async () => {
         smallImageKey: "play",
         ...presenceData
       };
-    } else presenceData = {
-      state: `${getStatus()} | ${getText("player-title-bar")}`,
-      smallImageKey: "pause",
-      ...presenceData
-    };
-    
+    } else {
+      presenceData = {
+        state: `${getStatus()} | ${getText("player-title-bar")}`,
+        smallImageKey: "pause",
+        ...presenceData
+      };
+    }
     pauseFlag = true;
-  } else
+  } else { // If the user is not watching something, return how long they have been browsing.
     presenceData = {
       startTimestamp: Math.floor(Date.now() / 1000),
       ...presenceData
     };
+  }
 
   presence.setActivity(presenceData);
 });
