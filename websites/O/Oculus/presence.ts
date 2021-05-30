@@ -77,12 +77,12 @@ presence.on("UpdateData", async () => {
           case "rift":
           case "rift-s": {
             presenceData.details = "Viewing the page:";
-            if (path[1] === "accessories")
+            if (path[1] === "accessories") {
               presenceData.state = `Accessories for ${splitOnDashes(
                 path[0],
                 true
               )}`;
-            else presenceData.state = splitOnDashes(path[0], true);
+            } else presenceData.state = splitOnDashes(path[0], true);
             break;
           }
           case "accessories": {
