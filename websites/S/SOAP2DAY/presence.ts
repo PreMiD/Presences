@@ -52,11 +52,13 @@ presence.on("UpdateData", async () => {
       presenceData = {
         state: `${getStatus()} | ${getText("player-title-bar")}`,
         endTimestamp: watchStamp,
+        smallImageKey: "play",
         ...presenceData
       };
     } else {
       presenceData = {
         state: `${getStatus()} | ${getText("player-title-bar")}`,
+        smallImageKey: "pause",
         ...presenceData
       };
     }
