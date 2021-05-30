@@ -68,14 +68,15 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Login";
     } else if (window.location.pathname.startsWith("/bot/")) {
       presenceData.details = "Viewing a bot:";
-      presenceData.state = document
-        .querySelectorAll("div.container #highlight")[0]
-        .innerHTML.split("<a")[0]
-        .trim();
+      presenceData.state = document.querySelectorAll("div.container #highlight")[0].innerHTML.split("<a")[0].split("<")[0].trim();
     } else if (window.location.pathname.startsWith("/bots/search/")) {
       presenceData.state =
         "Search results (" +
           window.location.pathname.split("/search/")[1].trim() || "" + ")";
+    } else if (window.location.pathname.startsWith("/staff")) {
+      presenceData.largeImageKey = "staff"
+      presenceData.details = "Staff | Viewing page:";
+      presenceData.state = document.querySelector("h1[class='title']").innerHTML.split("(")[0].trim()
     }
   } else if (window.location.hostname == "docs.botsfordiscord.com") {
     if (window.location.pathname.startsWith("/")) {
