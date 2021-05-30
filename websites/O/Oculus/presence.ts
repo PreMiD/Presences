@@ -49,8 +49,8 @@ presence.on("UpdateData", async () => {
     // Main pages
     case "oculus.com": {
       // Hompage
-      if (path[0] == "" || !path[0]) { presenceData.details = "Viewing home page";
-      } else {
+      if (path[0] === "" || !path[0]) presenceData.details = "Viewing home page";
+      else {
           switch (path[0]) {
             case "legal": {
               presenceData.smallImageKey = "reading";
@@ -145,7 +145,7 @@ presence.on("UpdateData", async () => {
                   presenceData.state = `Dev-post: ${title.length > 118 ? `${title.slice(0, 115)}...` : title}`;
                   presenceData.buttons.push({
                     label: "Read dev-post",
-                    url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`,
+                    url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}/${path[3]}`
                   });
 
                   // Searching
@@ -169,7 +169,7 @@ presence.on("UpdateData", async () => {
                   presenceData.state = `Game: ${game ?? "Loading..."}`;
                   presenceData.buttons.push({
                     label: "View game",
-                    url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`,
+                    url: `https://${hostName}/${path[0]}/${path[1]}/${path[2]}`
                   });
 
               }
