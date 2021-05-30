@@ -60,12 +60,11 @@ presence.on("UpdateData", async () => {
     };
     
     pauseFlag = true;
-  } else { // If the user is not watching something, return how long they have been browsing.
+  } else
     presenceData = {
       startTimestamp: Math.floor(Date.now() / 1000),
       ...presenceData
     };
-  }
 
   presence.setActivity(presenceData);
 });
