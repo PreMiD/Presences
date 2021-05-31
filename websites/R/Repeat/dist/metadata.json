@@ -5,14 +5,15 @@
   },
   "service": "Repeat",
   "description": {
-    "en": "Repeating your favourite tunes daily."
+    "en": "Repeating your favourite tunes daily.",
+    "nl": "Je favoriete deuntjes dagelijks herhaalt."
   },
   "url": [
     "www.repeatradio.net",
     "repeatradio.net",
     "repeat.pw"
   ],
-  "version": "2.0.2",
+  "version": "2.0.3",
   "logo": "https://i.imgur.com/ufIgYNI.png",
   "thumbnail": "https://i.imgur.com/JLSMA5e.png",
   "color": "#781629",

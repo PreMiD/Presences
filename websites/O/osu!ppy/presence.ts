@@ -42,10 +42,12 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Beatmap Listings";
       presenceData.smallImageKey = "searching";
     } else {
-      title = document.querySelector(".beatmapset-header__details-text--title")
-        .textContent;
-      diffName = document.querySelector(".beatmapset-header__diff-name")
-        .textContent;
+      title = document.querySelector(
+        ".beatmapset-header__details-text--title"
+      ).textContent;
+      diffName = document.querySelector(
+        ".beatmapset-header__diff-name"
+      ).textContent;
       if (title != null && diffName != null) {
         (beatmapTitle = `${title} [${diffName}]`),
           (presenceData.details = "Looking at the beatmap:");
@@ -71,8 +73,9 @@ presence.on("UpdateData", async () => {
       if (
         document.querySelector("div.u-ellipsis-overflow").textContent !== "All"
       ) {
-        selected = document.querySelector("div.u-ellipsis-overflow")
-          .textContent;
+        selected = document.querySelector(
+          "div.u-ellipsis-overflow"
+        ).textContent;
         presenceData.details = "Browsing...";
         presenceData.state = `The Performance Rankings (for ${selected}) [${gamemode}]`;
         presenceData.smallImageKey = "searching";
@@ -178,12 +181,15 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Their Watchlists";
     presenceData.smallImageKey = "reading";
   } else if (document.location.pathname.startsWith("/users")) {
-    profileName = (document.querySelector(
-      "h1.profile-info__name  span.u-ellipsis-pre-overflow"
-    ) as HTMLElement).textContent;
+    profileName = (
+      document.querySelector(
+        "h1.profile-info__name  span.u-ellipsis-pre-overflow"
+      ) as HTMLElement
+    ).textContent;
     rank = document.querySelector(".value-display__value").textContent;
-    pp = document.querySelector(".value-display--pp .value-display__value")
-      .textContent;
+    pp = document.querySelector(
+      ".value-display--pp .value-display__value"
+    ).textContent;
     profileRanking = `Rank: ${rank} / ${pp}pp`;
     presenceData.details =
       document.querySelector("div.u-relative").textContent == profileName

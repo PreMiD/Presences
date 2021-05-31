@@ -8,10 +8,11 @@
     "blog.emojipedia.org"
   ],
   "description": {
-    "en": "The emoji search engine. A fast emoji search experience with options to browse every emoji by name, category, or platform."
+    "en": "The emoji search engine. A fast emoji search experience with options to browse every emoji by name, category, or platform.",
+    "nl": "De emoji zoekmachine. Een snelle emoji zoekervaring met opties om elke emoji op naam, categorie, of platform te doorzoeken."
   },
   "service": "Emojipedia",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/3ogkQzN.png",
   "thumbnail": "https://i.imgur.com/H6zazLW.png",
   "color": "#EE7300",

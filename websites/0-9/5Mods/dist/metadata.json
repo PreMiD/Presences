@@ -9,11 +9,12 @@
     "de": "5Mods (auch bekannt als GTA5-Mods) ist ein Ort, an welchem tu tausende von Mods für Grand Theft Auto V erhalten kannst.",
     "zh_CN": "5Mods（也称为GTA5-Mods）是一个您可以在其中获得数千个《Grand Theft Auto V》的mods的地方。",
     "zh_TW": "5Mods（也叫做GTA5-Mods）是一個地方您可以在其中獲取數千個《Grand Theft Auto V》的mods。",
-    "ga_IE": "Is áit é 5Mods (ar a dtugtar GTA5-Mods freisin) áit ar féidir leat na mílte mods a fháil le haghaidh Grand Theft Auto V"
+    "ga_IE": "Is áit é 5Mods (ar a dtugtar GTA5-Mods freisin) áit ar féidir leat na mílte mods a fháil le haghaidh Grand Theft Auto V",
+    "nl": "5Mods (ook bekend als GTA5-Mods) is een plek waar je duizenden mods kunt krijgen voor Grand Theft Auto V"
   },
   "url": "gta5-mods.com",
   "regExp": "([a-z0-9-]+[.])*gta5-mods[.]com[/]",
-  "version": "1.3.5",
+  "version": "1.3.7",
   "logo": "https://i.gyazo.com/9fc4e5d84f1a14db819a35bdfc65eb38.jpg",
   "thumbnail": "https://i.gyazo.com/376e92512b5e34c693d8145d39bed5c9.jpg",
   "color": "#20ba4e",

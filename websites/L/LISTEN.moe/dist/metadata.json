@@ -6,10 +6,11 @@
   "service": "LISTEN.moe",
   "description": {
     "en": "LISTEN.moe is a fan-made website that aims to to play Anime/Japanese/Doujin music 24/7",
-    "pt_BR": "LISTEN.moe é um site feito por fãs que procura tocar música de Anime/Japonesa/Doujin 24/7"
+    "pt_BR": "LISTEN.moe é um site feito por fãs que procura tocar música de Anime/Japonesa/Doujin 24/7",
+    "nl": "LISTEN.moe is een door fans gemaakte website die 24/7 anime / Japanse / Doujin-muziek wil spelen"
   },
   "url": "listen.moe",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/MMBVkQu.jpg",
   "thumbnail": "https://i.imgur.com/lfPgJL3.png",
   "color": "#ff015b",

@@ -6,10 +6,11 @@
   "service": "Mangalib",
   "description": {
     "ru": "Сайт для прочтения манги на русском языке.",
-    "en": "Website for reading manga in Russian"
+    "en": "Website for reading manga in Russian",
+    "nl": "Website voor het lezen van manga in het Russisch"
   },
   "url": "mangalib.me",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "logo": "https://i.imgur.com/ed4EKND.png",
   "thumbnail": "https://i.imgur.com/0U4JNOJ.png",
   "color": "#ff8c00",

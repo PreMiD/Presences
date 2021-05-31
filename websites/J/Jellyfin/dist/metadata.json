@@ -12,10 +12,11 @@
   ],
   "url": "jellyfin.org",
   "description": {
-    "en": "The Free Software Media System"
+    "en": "The Free Software Media System",
+    "nl": "Het gratis software mediasysteem"
   },
   "service": "Jellyfin",
-  "version": "1.4.3",
+  "version": "1.5.3",
   "logo": "https://i.imgur.com/nPzEemG.png",
   "thumbnail": "https://i.imgur.com/J61378N.png",
   "color": "#00698c",

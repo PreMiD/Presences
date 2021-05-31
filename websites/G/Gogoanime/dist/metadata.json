@@ -11,7 +11,8 @@
   ],
   "service": "Gogoanime",
   "description": {
-    "en": "Watch anime online in English. You can watch free series and movies online and English subtitle. Free download high quality anime."
+    "en": "Watch anime online in English. You can watch free series and movies online and English subtitle. Free download high quality anime.",
+    "nl": "Bekijk anime online in het Engels. U kunt gratis series en films online bekijken met Engelse ondertiteling. Gratis download anime van hoge kwaliteit."
   },
   "url": [
     "gogoanime.io",
@@ -27,7 +28,7 @@
     "gogoanime.news"
   ],
   "regExp": "[0-9w]{0,6}.*gogoanime[s]*.[a-z]+",
-  "version": "2.0.5",
+  "version": "2.0.7",
   "logo": "https://i.imgur.com/OnaEYdo.png",
   "thumbnail": "https://i.imgur.com/RZwilwc.png",
   "color": "#4CA64C",

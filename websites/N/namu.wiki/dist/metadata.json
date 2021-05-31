@@ -1,0 +1,35 @@
+{
+  "author": {
+    "name": "LemonCaramel",
+    "id": "406748032055377920"
+  },
+  "service": "namu.wiki",
+  "description": {
+    "en": "\"namuwiki, The tree of knowledge that you nurtures.\" namuwiki(나무위키) is a Korean language wiki based on \"the seed\" engine.",
+    "ko_KR": "\"나무위키, 여러분이 가꾸어 나가는 지식의 나무.\" 나무위키(namuwiki)는 \"the seed\" 엔진 기반의 한국어 위키이다."
+  },
+  "url": "namu.wiki",
+  "version": "1.0.1",
+  "logo": "https://i.imgur.com/e5bog1Q.png",
+  "thumbnail": "https://i.imgur.com/LfDu0zZ.png",
+  "color": "#00a495",
+  "tags": [
+    "namuwiki",
+    "나무위키"
+  ],
+  "category": "other",
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Login Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "showTimestamp",
+      "title": "Show Timestamp",
+      "icon": "fad fa-clock",
+      "value": true
+    }
+  ]
+}

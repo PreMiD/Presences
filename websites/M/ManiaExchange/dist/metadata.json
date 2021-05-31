@@ -25,7 +25,7 @@
     "api.mania.exchange",
     "trackmania.exchange"
   ],
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/KPcs9y1.png",
   "thumbnail": "https://i.imgur.com/NYitprM.png",
   "color": "#7ad5ff",
@@ -46,7 +46,8 @@
     "trackmania2"
   ],
   "description": {
-    "en": "The content network for Trackmania and Shootmania - driven by the community. This one supports the newer, TrackmaniaExchange, which is for the 2020 Trackmania. For the older one, uses the TrackMania Exchange presence."
+    "en": "The content network for Trackmania and Shootmania - driven by the community. This one supports the newer, TrackmaniaExchange, which is for the 2020 Trackmania. For the older one, uses the TrackMania Exchange presence.",
+    "nl": "Het inhoudsnetwerk voor Trackmania en Shootmania - aangestuurd door de gemeenschap. Deze ondersteunt de nieuwere TrackmaniaExchange, die voor de Trackmania 2020 is. Gebruikt voor de oudere versie de aanwezigheid van TrackMania Exchange."
   },
   "category": "games"
 }

@@ -5,10 +5,11 @@
   },
   "service": "Keep It Wholesome",
   "description": {
-    "en": "Keep it wholesome brand. Raising awareness about mental health, while creating a growing community of people spreading the message of hope to those that need it. 20% of all profits are donated to charities specializing in mental illness research, supporting those with anxiety depression, or other mental health issues."
+    "en": "Keep it wholesome brand. Raising awareness about mental health, while creating a growing community of people spreading the message of hope to those that need it. 20% of all profits are donated to charities specializing in mental illness research, supporting those with anxiety depression, or other mental health issues.",
+    "nl": "Houd het een gezond merk. Bewustwording creëren over geestelijke gezondheid en tegelijkertijd een groeiende gemeenschap creëren van mensen die de boodschap van hoop verspreiden naar degenen die het nodig hebben. 20% van alle winst wordt gedoneerd aan liefdadigheidsinstellingen die gespecialiseerd zijn in onderzoek naar psychische aandoeningen, mensen met angst, depressie of andere psychische problemen ondersteunen."
   },
   "url": "keepitwholesome.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/2rJQDbA.png",
   "thumbnail": "https://i.imgur.com/7j2cRu4.png?1",
   "color": "#c98b29",

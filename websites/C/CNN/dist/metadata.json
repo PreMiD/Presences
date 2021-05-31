@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "N0chteil ^^",
+    "id": "495901098926669825"
+  },
+  "service": "CNN",
+  "description": {
+    "en": "Cable News Network is a multinational news-based pay television channel headquartered in Atlanta. It is owned by CNN Worldwide, a unit of the WarnerMedia News & Sports division of AT&T's WarnerMedia.",
+    "nl": "Cable News Network is een multinationaal, op nieuws gebaseerd betaalt televisiekanaal met hoofdkantoor in Atlanta. Het is eigendom van CNN Worldwide, een onderdeel van de WarnerMedia News & Sports-divisie van AT&T's WarnerMedia."
+  },
+  "url": [
+    "edition.cnn.com",
+    "us.cnn.com"
+  ],
+  "version": "1.0.2",
+  "logo": "https://i.imgur.com/BVSUjL7.png",
+  "thumbnail": "https://i.imgur.com/xAufghg.png",
+  "color": "#CC1417",
+  "category": "other",
+  "tags": [
+    "news"
+  ],
+  "settings": [
+    {
+      "id": "privacy",
+      "title": "Privacy Mode",
+      "icon": "fad fa-user-secret",
+      "value": false
+    },
+    {
+      "id": "logo",
+      "title": "Icon",
+      "icon": "fad fa-icons",
+      "value": 0,
+      "values": [
+        "Red",
+        "Transparent"
+      ]
+    },
+    {
+      "id": "timeElapsed",
+      "title": "Show elapsed time",
+      "icon": "fad fa-hourglass-half",
+      "value": true
+    },
+    {
+      "id": "showButtons",
+      "title": "Show buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}

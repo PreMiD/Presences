@@ -6,13 +6,14 @@
   "service": "Nettruyen",
   "description": {
     "en": "Biggest manga website in Vietnam with latest update",
-    "vi_VN": "Web đọc truyện tranh online lớn nhất Việt Nam được cập nhật liên tục mỗi ngày"
+    "vi_VN": "Web đọc truyện tranh online lớn nhất Việt Nam được cập nhật liên tục mỗi ngày",
+    "nl": "Grootste manga-website in Vietnam met de laatste update"
   },
   "url": [
     "www.nettruyen.com",
     "nettruyen.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/h9AaSGw.png",
   "thumbnail": "https://i.imgur.com/eGhdGi5.png",
   "color": "#3d3665",

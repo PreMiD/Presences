@@ -22,7 +22,7 @@ const presence = new Presence({
         viewTikTok: "tiktok.viewing",
         buttonViewTikTok: "tiktok.buttonViewTikTok"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     );
   };
 
@@ -32,7 +32,7 @@ let browsingStamp = Math.floor(Date.now() / 1000),
   oldLang: string = null;
 
 presence.on("UpdateData", async () => {
-  const newLang = await presence.getSetting("lang"),
+  const newLang = await presence.getSetting("lang").catch(() => "en"),
     buttons = await presence.getSetting("buttons");
 
   if (document.URL !== prevUrl) {
@@ -106,10 +106,11 @@ presence.on("UpdateData", async () => {
             ?.parentElement.parentElement.parentElement.firstElementChild
             .children[0].textContent
         })`,
-        smallImageKey: (currentVidElements.find((v) =>
-          v.className.includes("video-card")
-        )?.firstElementChild?.firstElementChild
-          ?.firstElementChild as HTMLVideoElement)?.paused
+        smallImageKey: (
+          currentVidElements.find((v) => v.className.includes("video-card"))
+            ?.firstElementChild?.firstElementChild
+            ?.firstElementChild as HTMLVideoElement
+        )?.paused
           ? "pause"
           : "play",
         buttons: [

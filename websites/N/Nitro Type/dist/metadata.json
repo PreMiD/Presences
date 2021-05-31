@@ -5,13 +5,14 @@
   },
   "service": "Nitro Type",
   "description": {
-    "en": "Improve your typing skills while competing in fast-paced races with up to 5 typers from around the world. Compete against your friends, earn new cars, track your scores, and so much more... all for free!"
+    "en": "Improve your typing skills while competing in fast-paced races with up to 5 typers from around the world. Compete against your friends, earn new cars, track your scores, and so much more... all for free!",
+    "nl": "Verbeter uw typevaardigheid terwijl u deelneemt aan snelle races met maximaal 5 typers van over de hele wereld. Speel tegen je vrienden, verdien nieuwe auto's, houd je scores bij en nog veel meer ... helemaal gratis!"
   },
   "url": [
     "nitrotype.com",
     "www.nitrotype.com"
   ],
-  "version": "1.2.4",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/CCu7nqD.png",
   "thumbnail": "https://i.imgur.com/6MjQV86.png",
   "color": "#D62F3A",

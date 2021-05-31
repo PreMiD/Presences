@@ -109,8 +109,9 @@ sezonlukDizi.on("UpdateData", async () => {
     const showTitle =
         document.querySelector(".content strong h1.header a")?.textContent ||
         "Bilinmeyen İsim",
-      episode = document.querySelector(".content strong h1.header small")
-        ?.textContent,
+      episode = document.querySelector(
+        ".content strong h1.header small"
+      )?.textContent,
       timestamps = sezonlukDizi.getTimestamps(
         video.currentTime,
         video.duration

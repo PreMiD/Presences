@@ -6,13 +6,14 @@
   "service": "Ekrem İmamoğlu",
   "description": {
     "en": "Istanbul Metropolitan Municipality president Ekrem Imamoglu's personal page.'",
-    "tr": "İstanbul Büyükşehir Belediyesi başkanı Ekrem İmamoğlu'nun websitesi."
+    "tr": "İstanbul Büyükşehir Belediyesi başkanı Ekrem İmamoğlu'nun websitesi.",
+    "nl": "De persoonlijke pagina van Ekrem Imamoglu, voorzitter van het stadsbestuur van Istanbul."
   },
   "url": [
     "www.ekremimamoglu.com",
     "ekremimamoglu.com"
   ],
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/uFxg05Y.png",
   "thumbnail": "https://i.imgur.com/rZvHq2B.png",
   "color": "#f01c25",

@@ -104,9 +104,8 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
           const animeData = getAnimeEntity(),
             animeEpisode = getAnimeEpsiodeEntity();
           if (!animeData) return data;
-          const videoInstance = document.querySelector<HTMLVideoElement>(
-              `.jw-wrapper video`
-            ),
+          const videoInstance =
+              document.querySelector<HTMLVideoElement>(`.jw-wrapper video`),
             videoTime = context.getTimestamps(
               videoInstance.currentTime,
               videoInstance.duration
@@ -149,9 +148,10 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
           if (!context) return null;
           const searchSidebar = document.querySelector(`.uk-filter-content`);
           if (!searchSidebar) return data;
-          const searchedValue = searchSidebar.querySelector<HTMLInputElement>(
-              `input[type="text"]`
-            )?.value,
+          const searchedValue =
+              searchSidebar.querySelector<HTMLInputElement>(
+                `input[type="text"]`
+              )?.value,
             isExclude =
               searchSidebar
                 .querySelector<HTMLInputElement>(
@@ -174,9 +174,9 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
                 .map((x) => x.querySelector(".el-checkbox__label").textContent))
                 .length > 0
             ) {
-              data.state = `${
-                isExclude ? "Exclude - " : ""
-              } ${activatedGenres.slice(0, 5).join(", ")}`;
+              data.state = `${isExclude ? "Exclude - " : ""} ${activatedGenres
+                .slice(0, 5)
+                .join(", ")}`;
             } else {
               data.state = "-";
             }

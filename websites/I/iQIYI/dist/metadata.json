@@ -7,10 +7,11 @@
   "url": "www.iq.com",
   "description": {
     "en": "iQIYI is the world's leading online movie and video streaming website, offering TV dramas, movies, variety shows, animation, and other quality content.",
-    "zh_TW": "愛奇藝-全球領先的線上影音視頻網站-正版高清影片影視免費線上看"
+    "zh_TW": "愛奇藝-全球領先的線上影音視頻網站-正版高清影片影視免費線上看",
+    "nl": "iQIYI is 's werelds toonaangevende website voor het online streamen van films en video's en biedt tv-drama's, films, variétéshows, animaties en andere inhoud van hoge kwaliteit."
   },
   "service": "iQIYI",
-  "version": "1.1.2",
+  "version": "1.1.5",
   "logo": "https://i.imgur.com/gehI1mg.png",
   "thumbnail": "https://i.imgur.com/4PESzW3.png",
   "color": "#0BBE06",

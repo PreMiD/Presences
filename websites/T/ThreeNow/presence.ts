@@ -59,15 +59,16 @@ presence.on("UpdateData", () => {
       }
     } else {
       presenceData.details = "Viewing a show";
-      presenceData.state = document.getElementsByClassName(
-        "HeroSynopsis-title"
-      )[0].textContent;
+      presenceData.state =
+        document.getElementsByClassName("HeroSynopsis-title")[0].textContent;
     }
   } else if (document.location.pathname.includes("/search")) {
     presenceData.details = "Searching shows";
-    presenceData.state = (document.getElementsByClassName(
-      "SearchInput-input"
-    )[0] as HTMLInputElement).value;
+    presenceData.state = (
+      document.getElementsByClassName(
+        "SearchInput-input"
+      )[0] as HTMLInputElement
+    ).value;
     presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   } else if (document.URL === "https://www.threenow.co.nz/live-tv-guide") {
     presenceData.details = "Viewing the Live TV guide";

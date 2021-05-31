@@ -5,10 +5,11 @@
   },
   "url": "einthusan.tv",
   "description": {
-    "en": "Einthusan: The leading Premium South Asian streaming content provider of full-length feature films in on-demand superior HD. We're expanding to bring you high-bitrate audio albums, movie clips, and music videos. Explore the social entertainment hub where users discover and consume South Asian content at it's best."
+    "en": "Einthusan: The leading Premium South Asian streaming content provider of full-length feature films in on-demand superior HD. We're expanding to bring you high-bitrate audio albums, movie clips, and music videos. Explore the social entertainment hub where users discover and consume South Asian content at it's best.",
+    "nl": "Einthusan: De toonaangevende Premium Zuid-Aziatische streaming content provider van avondvullende speelfilms in on-demand superieure HD. We zijn aan het uitbreiden om u high-bitrate audioalbums, filmclips en muziekvideo's te brengen. Ontdek de sociale entertainment hub waar gebruikers Zuid-Aziatische content ontdekken en consumeren op zijn best."
   },
   "service": "Einthusan",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "logo": "https://i.imgur.com/63yIrXo.jpg",
   "thumbnail": "https://i.imgur.com/Gmrtp1s.png",
   "color": "#888888",

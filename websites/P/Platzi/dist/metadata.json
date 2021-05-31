@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Brunooh",
+    "id": "698582921887481889"
+  },
+  "service": "Platzi",
+  "description": {
+    "es": "Platzi es una de las mejores plataformas de estudio online hispanas, te ayuda a perfeccionar, mejorar y estar informado de las nuevas tendencias de tu carrera.",
+    "en": "Platzi is one of the best online spanish study platforms, it helps you to improve and be informed of new trends in your career.",
+    "nl": "Platzi is een van de beste Spaanse online studieplatforms, het helpt je te verbeteren en op de hoogte te blijven van nieuwe trends in je carrière."
+  },
+  "url": "platzi.com",
+  "version": "1.0.3",
+  "logo": "https://i.imgur.com/TmaFMhm.jpg",
+  "thumbnail": "https://i.imgur.com/wVy2Pqc.png",
+  "color": "#98CA3F",
+  "tags": [
+    "courses",
+    "learning",
+    "platzi"
+  ],
+  "category": "videos"
+}

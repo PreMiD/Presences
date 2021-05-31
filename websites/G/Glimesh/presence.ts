@@ -152,8 +152,9 @@ presence.on("UpdateData", async () => {
     presenceData.details = "Viewing Blogs";
 
     if (locationPath.match("/posts")) {
-      const blogPost = document.querySelector("body > div > div > div > h1 > a")
-        .textContent;
+      const blogPost = document.querySelector(
+        "body > div > div > div > h1 > a"
+      ).textContent;
 
       presenceData.details =
         "Reading" +

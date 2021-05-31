@@ -6,13 +6,14 @@
   "service": "Nyaa.si",
   "description": {
     "en": "Nyaa.si is a BitTorrent website focused on East Asian media.",
-    "pt_BR": "Nyaa.si é um indexador público de BitTorrent focado em contéudo do Leste Asiático."
+    "pt_BR": "Nyaa.si é um indexador público de BitTorrent focado em contéudo do Leste Asiático.",
+    "nl": "Nyaa.si is een BitTorrent-website gericht op Oost-Aziatische media."
   },
   "url": [
     "nyaa.si",
     "sukebei.nyaa.si"
   ],
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://menma.is-inside.me/YSI9l2Us.png",
   "thumbnail": "https://menma.is-inside.me/TCgAh9wq.png",
   "color": "#0084FF",
