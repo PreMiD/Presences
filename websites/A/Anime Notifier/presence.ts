@@ -9,15 +9,6 @@ presence.on("UpdateData", async () => {
     largeImageKey: "notifymoe_1024"
   };
 
-  if (await presence.getSetting("button-to-list") == true) {
-      presenceData.buttons = [
-        {
-          label: "View My List!",
-          url: `https://notify.moe/${await presence.getSetting("set-user-name")}/`
-        }
-      ]
-      console.log(`https://notify.moe/${await presence.getSetting("set-user-name")}/`);
-  }
 
   if (!document.getElementById("audio-player-anime-info").classList.contains("hidden")) //    Check for music
   {
@@ -27,7 +18,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Listening to " + musicPlayer.children[1].innerHTML;
   }
 
-  var location = window.location.pathname.split("/");;
+  var location = window.location.pathname.split("/");
 
   switch (location[1]) {
 
@@ -143,6 +134,15 @@ presence.on("UpdateData", async () => {
     }
       
     break;
+  }
+
+  if (await presence.getSetting("button-to-list") == true) {
+    presenceData.buttons = [
+      {
+        "label": "View my list",
+        "url": `https://notify.moe/${await presence.getSetting("set-user-name")}/`
+      }
+    ]
   }
 
   presence.setActivity(presenceData);
