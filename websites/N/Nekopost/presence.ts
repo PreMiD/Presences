@@ -9,7 +9,6 @@ presence.on("UpdateData", async () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.host === "www.nekopost.net") {
     if (document.location.pathname.includes("/manga")) {
         if(document.location.pathname.includes("/manga/")) {
           if(document.querySelector("head > title").textContent.includes("Ch")) {
@@ -77,6 +76,5 @@ presence.on("UpdateData", async () => {
       presenceData.details = "กำลังหา...";
       presenceData.smallImageKey = "search";
     }
-  } 
     presence.setActivity(presenceData);
 });
