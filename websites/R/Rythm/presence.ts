@@ -7,13 +7,12 @@ type apiNamespace = "r1" | "r2" | "r3" | "r4" | "r5" | "rc" | "rchan";
  */
 type repeatingState = "none" | "one" | "queue";
 
-
 /**
  * API Info
  */
- interface APIInfo {
-  namespace: apiNamespace,
-  socketUrl: string
+interface APIInfo {
+  namespace: apiNamespace;
+  socketUrl: string;
 }
 
 /**
@@ -104,7 +103,6 @@ interface APIPlayingTrack {
   duration?: number; // Song duration
   enqueuer?: APIMember; // Song enqueuer
 }
-
 
 /**
  * API Connection
@@ -209,12 +207,15 @@ class APIConnection {
        */
       connection.websocket.onmessage = function (event: MessageEvent) {
         presence.info(`Message from Rythm's API: ${event.data}`);
-        if (event.data) connection.apiData = { ...connection.apiData, ...JSON.parse(event.data) };
+        if (event.data)
+          connection.apiData = {
+            ...connection.apiData,
+            ...JSON.parse(event.data)
+          };
       };
     });
   }
 }
-
 
 /**
  * Language Strings
@@ -231,7 +232,6 @@ interface LangStrings {
   dj: string;
   buttonViewSong: string;
 }
-
 
 /**
  * Check the API connection
@@ -283,13 +283,21 @@ async function getAPIInfo(path: string[]): Promise<APIInfo> {
   // Fallback mechanism for older extensions
   if (version >= 224) {
     // For newer extension versions, use getPageletiable of the presence class
-    namespace = path[1] as apiNamespace || await presence.getPageletiable(namespaceLetiable) as apiNamespace;
-    socketUrl = `${await presence.getPageletiable(socketUrlLetiable)}/${namespace}`;
+    namespace =
+      (path[1] as apiNamespace) ||
+      ((await presence.getPageletiable(namespaceLetiable)) as apiNamespace);
+    socketUrl = `${await presence.getPageletiable(
+      socketUrlLetiable
+    )}/${namespace}`;
   } else {
     // For older versions, use the custom getPageletiable as a fallback
     presence.error(`Using fallback for older extensions: ${version}`);
-    namespace = path[1] as apiNamespace || await getPageletiable(`window.${namespaceLetiable}`) as apiNamespace;
-    socketUrl = `${await getPageletiable(`window.${socketUrlLetiable}`)}/${namespace}`;
+    namespace =
+      (path[1] as apiNamespace) ||
+      ((await getPageletiable(`window.${namespaceLetiable}`)) as apiNamespace);
+    socketUrl = `${await getPageletiable(
+      `window.${socketUrlLetiable}`
+    )}/${namespace}`;
   }
 
   return { namespace, socketUrl };
@@ -360,7 +368,6 @@ function getPageletiable(js: string): Promise<string> {
   });
 }
 
-
 /**
  * Rythm PreMiD Presence
  */
@@ -388,7 +395,6 @@ let connection: APIConnection = undefined,
   connectionCheck = false,
   idleStamp = 0,
   lastPath: string = undefined;
-
 
 // UpdateData handler
 presence.on("UpdateData", async () => {
@@ -429,7 +435,7 @@ presence.on("UpdateData", async () => {
 
       // Fetch api information
       const apiInfo = await getAPIInfo(path);
-      ({ namespace, socketUrl} = apiInfo);
+      ({ namespace, socketUrl } = apiInfo);
 
       // Continue with the next emit of "UpdateData"
       return;
@@ -464,7 +470,12 @@ presence.on("UpdateData", async () => {
 
       // Add song information
       presenceData.details = apiData.playingTrack.title;
-      if (showUsernames) presenceData.state = `Requested by: ${apiData.playingTrack.enqueuer[showNicknames ? "displayName" : "username"]}`;
+      if (showUsernames)
+        presenceData.state = `Requested by: ${
+          apiData.playingTrack.enqueuer[
+            showNicknames ? "displayName" : "username"
+          ]
+        }`;
 
       // Add the view song button if buttons should be displayed
       if (showButtons) {
@@ -504,19 +515,28 @@ presence.on("UpdateData", async () => {
           presenceData.startTimestamp = apiData.seekTimestamp / 1000;
         } else {
           // Show remaining time
-          presenceData.startTimestamp = (apiData.seekTimestamp - apiData.seek) / 1000;
-          presenceData.endTimestamp = (apiData.seekTimestamp - apiData.seek + apiData.playingTrack.duration) / 1000;
+          presenceData.startTimestamp =
+            (apiData.seekTimestamp - apiData.seek) / 1000;
+          presenceData.endTimestamp =
+            (apiData.seekTimestamp -
+              apiData.seek +
+              apiData.playingTrack.duration) /
+            1000;
         }
       } else {
         // Pause
         presenceData.smallImageKey = "pause";
-        presenceData.smallImageText = `${rythms[namespace]} ${separator} ${(await strings).pause}`;
+        presenceData.smallImageText = `${rythms[namespace]} ${separator} ${
+          (await strings).pause
+        }`;
       }
     } else {
       // Check if server details can and should be shown
       if (showServerDetails) {
         // Get the amount of DJs and normal users
-        const djAmount = apiData.members.filter(user => user.details.isDJ).length,
+        const djAmount = apiData.members.filter(
+            (user) => user.details.isDJ
+          ).length,
           userAmount = apiData.members.length - djAmount;
 
         // Add server information
