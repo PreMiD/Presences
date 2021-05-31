@@ -110,6 +110,9 @@ presence.on("UpdateData", async () => {
       title = document.querySelector(
         "#aligncenter > span.animetitle"
       ).textContent;
+      episode = document.querySelector(
+        "#eptitle > span#eptitleplace"
+      ).textContent.replace(/\D/g, "");
 
       if (!isNaN(duration)) {
         presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
@@ -119,7 +122,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = timestamps[0];
         presenceData.endTimestamp = timestamps[1];
         presenceData.details = "Currently watching...";
-        presenceData.state = title;
+        presenceData.state = title + " - Ep. " + episode;
 
         if (paused) {
           delete presenceData.startTimestamp;
