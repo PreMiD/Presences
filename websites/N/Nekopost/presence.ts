@@ -14,12 +14,12 @@ presence.on("UpdateData", async () => {
     if (document.location.pathname.includes("/manga")) {
         if(document.location.pathname.includes("/manga/")) {
           if(document.querySelector("head > title").textContent.includes("Ch")) {
-            presenceData.details = `Manga :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
+            presenceData.details = `Manga :${document.querySelector("head > title").textContent.split("-")[1]}!`;
             const [state] = document.querySelector("head > title").textContent.split(" ");
             presenceData.state = state;
             presenceData.smallImageKey = "reading";
           } else {
-            presenceData.details = `Manga :,${document.querySelector("head > title").textContent}!`;
+            presenceData.details = `Manga :${document.querySelector("head > title").textContent}!`;
             presenceData.smallImageKey = "search";
           }
         } else {
@@ -29,12 +29,12 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/novel")) {
       if (document.location.pathname.includes("/novel/")) {
         if(document.querySelector("head > title").textContent.includes("Ch")) {
-          presenceData.details = `Novel :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
+          presenceData.details = `Novel :${document.querySelector("head > title").textContent.split("-")[1]}!`;
           const [state] = document.querySelector("head > title").textContent.split(" ");
           presenceData.state = state;
           presenceData.smallImageKey = "reading";
         } else {
-          presenceData.details = `Novel :,${document.querySelector("head > title").textContent}!`;
+          presenceData.details = `Novel :${document.querySelector("head > title").textContent}!`;
           presenceData.smallImageKey = "search";
         }
       } else {
@@ -44,12 +44,12 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/comic")) {
       if (document.location.pathname.includes("/comic/")) {
         if(document.querySelector("head > title").textContent.includes("Ch")) {
-          presenceData.details = `Comic :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
+          presenceData.details = `Comic :${document.querySelector("head > title").textContent.split("-")[1]}!`;
           const [state] = document.querySelector("head > title").textContent.split(" ");
           presenceData.state = state;
           presenceData.smallImageKey = "reading";
         } else {
-          presenceData.details = `Comic :,${document.querySelector("head > title").textContent}!`;
+          presenceData.details = `Comic :${document.querySelector("head > title").textContent}!`;
           presenceData.smallImageKey = "search";
         }
       } else {
@@ -59,12 +59,12 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/fiction")) {
       if (document.location.pathname.includes("/fiction/")) {
         if(document.querySelector("head > title").textContent.includes("Ch")) {
-          presenceData.details = `ONovel :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
+          presenceData.details = `ONovel :${document.querySelector("head > title").textContent.split("-")[1]}!`;
           const [state] = document.querySelector("head > title").textContent.split(" ");
           presenceData.state = state;
           presenceData.smallImageKey = "reading";
         } else {
-          presenceData.details = `ONovel :,${document.querySelector("head > title").textContent}!`;
+          presenceData.details = `ONovel :${document.querySelector("head > title").textContent}!`;
           presenceData.smallImageKey = "search";
         }
       } else {
