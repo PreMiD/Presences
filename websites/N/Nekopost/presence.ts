@@ -5,10 +5,9 @@ browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "nekopost_logo"
+    largeImageKey: "nekopost_logo",
+    startTimestamp: browsingStamp
   };
-
-  presenceData.startTimestamp = browsingStamp;
 
   if (document.location.host === "www.nekopost.net") {
     if (document.location.pathname.includes("/manga")) {
