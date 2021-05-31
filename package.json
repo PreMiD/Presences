@@ -35,7 +35,7 @@
     "eslint": "^7.27.0",
     "glob": "^7.1.7",
     "jsonschema": "^1.4.0",
-    "mongodb": "^3.6.8",
+    "mongodb": "^3.6.9",
     "ora": "^5.4.0",
     "prettier": "^2.3.0",
     "semver": "^7.3.5",
