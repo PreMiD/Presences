@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "Laila",
+    "id": "636229819620655134"
+  },
+  "service": "Hentai AHO Streaming",
+  "description": {
+    "en": "Watch free hentai series online.",
+	"de": "Kostenlose Hentai Serien online anschauen."
+  },
+  "url": "haho.moe",
+  "version": "1.0.0",
+  "logo": "https://i.imgur.com/g53IrTA.png",
+  "thumbnail": "https://i.imgur.com/xv69aql.png",
+  "color": "#ff00ff",
+  "tags": [
+    "nsfw",
+    "videos"
+  ],
+  "category": "anime"
+}
