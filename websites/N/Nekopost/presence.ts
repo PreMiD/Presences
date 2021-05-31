@@ -3,8 +3,6 @@ const presence = new Presence({
 }),
 browsingStamp = Math.floor(Date.now() / 1000);
 
-
-
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "nekopost_logo"
@@ -82,7 +80,7 @@ presence.on("UpdateData", async () => {
     }
   } 
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
   } else {
