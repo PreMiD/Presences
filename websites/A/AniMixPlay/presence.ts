@@ -18,12 +18,15 @@ function getTimestamps(
 const browsingTimer = Math.floor(Date.now() / 1000);
 
 let timestamps,
-  video,
+  video: HTMLVideoElement,
   iFrameVideo: boolean,
   currentTime: number,
   duration: number,
   paused: boolean,
-  playback;
+  playback,
+  title: string,
+  episode: string,
+  urlParams: URLSearchParams;
 
 presence.on(
   "iFrameData",
@@ -46,7 +49,7 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const presenceData: presenceData = {
+  const presenceData: PresenceData  = {
     largeImageKey: "logo-v2"
   };
 
@@ -124,8 +127,8 @@ presence.on("UpdateData", async () => {
         }
       }
     } else if (document.location.pathname.includes("/anime/")) {
-      animepagetitle = document.querySelector("#animepagetitle").textContent;
-      animepagetype = document
+      let animepagetitle = document.querySelector("#animepagetitle").textContent;
+      let animepagetype = document
         .querySelector("#addInfo")
         .textContent.split(" ")[5]
         .trim(-1);
