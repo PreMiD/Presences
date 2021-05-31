@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 12
       - name: Restore CI Cache
-        uses: actions/cache@v2.1.5
+        uses: actions/cache@v2.1.6
         with:
           path: node_modules
           key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
