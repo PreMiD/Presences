@@ -14,9 +14,7 @@ iFrameVideo: boolean,
 currentTime: number,
 duration: number,
 paused: boolean,
-playback,
-title: string,
-episode: string;
+playback;
 
 presence.on(
 "iFrameData",
