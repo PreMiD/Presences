@@ -7,30 +7,29 @@ presence.on("UpdateData", async () => {
 		largeImageKey: "logo"
 	};
 
-  if (document.location.pathname === "/") {
+  if (document.location.pathname === "/") 
       presenceData.details = "Viewing the homepage";
-  } else if (document.location.pathname.startsWith("/stories")) {
+	else if (document.location.pathname.startsWith("/stories")) {
       presenceData.details = "Viewing a story";
       presenceData.state = document.location.pathname.split("/")[2];
   } else if (document.location.pathname.startsWith("/accounts")) {
       presenceData.details = "Settings";
       presenceData.state = "Changing their Settings";
-  } else if (document.location.pathname.startsWith("/p")) {
+  } else if (document.location.pathname.startsWith("/p")) 
       presenceData.details = "Viewing a post";
-  } else if (document.location.pathname.startsWith("/explore")) {
+    else if (document.location.pathname.startsWith("/explore")) 
       presenceData.details = "Exploring...";
-  } else if (document.location.pathname.startsWith("/nametag")) {
+    else if (document.location.pathname.startsWith("/nametag")) 
       presenceData.details = "Viewing nametag";
-  } else if (
+    else if (
     document.location.pathname.startsWith("/direct/inbox") ||
     document.location.pathname.startsWith("/direct/t")
-  ) {
-      presenceData.details = "Direct Messages";
-  } else {
+  ) presenceData.details = "Direct Messages";
+    else {
     // TODO: Check if the page is really a profile
       presenceData.details = "Viewing a profile";
       presenceData.state = document.location.pathname.split("/")[1];
     }
     presence.setActivity(presenceData);
   }
-});
+);
