@@ -13,12 +13,12 @@ presence.on("UpdateData", async () => {
       presenceData.details = `Watching ${document.title.substring(0,document.title.length - 23)}`;
       presenceData.state = `${(document.getElementById("player_fluid_control_duration") as HTMLElement).textContent}`;
   } else if (document.location.pathname.startsWith("/content-rating/")) {
-     presenceData.details = "Viewing Content Rating Index:";
+     presenceData.details = "Viewing content rating index:";
      presenceData.state = `${document.title.substring(0,document.title.length - 23)}`;
-  } else if (document.location.pathname.startsWith("/resolution/") || document.location.pathname.startsWith("/source/") || document.location.pathname.startsWith("/censorship/") || document.location.pathname.startsWith("/status/") || document.location.pathname.startsWith("/type/") || document.location.pathname.startsWith("/production/") || document.location.pathname.startsWith("/group/") || document.location.pathname.startsWith("/genre/") || document.location.pathname.startsWith("/playlist/") || document.location.pathname.startsWith("/episode/")) {
+  } else if (document.location.pathname.startsWith("/resolution/") || document.location.pathname.startsWith("/source/") || document.location.pathname.startsWith("/censorship/") || document.location.pathname.startsWith("/status/") || document.location.pathname.startsWith("/type/") || document.location.pathname.startsWith("/production/") || document.location.pathname.startsWith("/group/") || document.location.pathname.startsWith("/genre/") || document.location.pathname.startsWith("/playlist/")) {
      presenceData.details = `Viewing ${(document.location.pathname.split("/")[1])} index`;
      presenceData.state = `${document.title.substring(0,document.title.length - 23)}`;
-  } else if (document.location.pathname.startsWith("/resolution") || document.location.pathname.startsWith("/source") || document.location.pathname.startsWith("/censorship") || document.location.pathname.startsWith("/status") || document.location.pathname.startsWith("/type") || document.location.pathname.startsWith("/production") || document.location.pathname.startsWith("/group") || document.location.pathname.startsWith("/genre") || document.location.pathname.startsWith("/playlist") || document.location.pathname.startsWith("/episode")) {
+  } else if (document.location.pathname.startsWith("/resolution") || document.location.pathname.startsWith("/source") || document.location.pathname.startsWith("/censorship") || document.location.pathname.startsWith("/status") || document.location.pathname.startsWith("/type") || document.location.pathname.startsWith("/production") || document.location.pathname.startsWith("/group") || document.location.pathname.startsWith("/genre") || document.location.pathname.startsWith("/playlist") || document.location.pathname.startsWith("/episode") || document.location.pathname.startsWith("/anime")) {
      presenceData.details = `Viewing ${(document.location.pathname.split("/")[1])} index`;
   } else {
       presenceData.details = `Viewing ${document.title.substring(0,document.title.length - 23)}`;
