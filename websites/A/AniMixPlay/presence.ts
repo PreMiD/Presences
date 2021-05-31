@@ -49,7 +49,7 @@ presence.on(
 );
 
 presence.on("UpdateData", async () => {
-  const presenceData: PresenceData  = {
+  const presenceData: PresenceData = {
     largeImageKey: "logo-v2"
   };
 
@@ -67,7 +67,6 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = browsingTimer;
         presenceData.details = "Currently exploring...";
         presenceData.state =
-          "" +
           urlParams.get("genre").toLowerCase().replace(/,/g, " + ") +
           " related anime";
         presenceData.smallImageKey = "browsing-v1";
@@ -122,7 +121,7 @@ presence.on("UpdateData", async () => {
         presenceData.startTimestamp = timestamps[0];
         presenceData.endTimestamp = timestamps[1];
         presenceData.details = "Currently watching...";
-        presenceData.state = title + " - Ep. " + episode;
+        presenceData.state = `${title} - Ep. ${episode}`;
 
         if (paused) {
           delete presenceData.startTimestamp;
@@ -130,8 +129,8 @@ presence.on("UpdateData", async () => {
         }
       }
     } else if (document.location.pathname.includes("/anime/")) {
-      let animepagetitle = document.querySelector("#animepagetitle").textContent;
-      let animepagetype = document
+      const animepagetitle = document.querySelector("#animepagetitle").textContent,
+      animepagetype = document
         .querySelector("#addInfo")
         .textContent.split(" ")[5]
         .trim();
