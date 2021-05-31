@@ -1,176 +1,199 @@
 const presence = new Presence({
-
   clientId: "838833715013746729"
 });
 
 presence.on("UpdateData", async () => {
-
   const presenceData: PresenceData = {
     largeImageKey: "notifymoe_1024"
   };
 
-
-  if (!document.getElementById("audio-player-anime-info").classList.contains("hidden")) //    Check for music
-  {
+  if (
+    !document
+      .getElementById("audio-player-anime-info")
+      .classList.contains("hidden")
+  ) {
+    //    Check for music
     let musicPlayer = document.getElementById("audio-player");
 
     presenceData.smallImageKey = "music_512";
-    presenceData.smallImageText = "Listening to " + "\"" + musicPlayer.children[1].innerHTML + "\"";
+    presenceData.smallImageText =
+      "Listening to " + '"' + musicPlayer.children[1].innerHTML + '"';
   }
 
   var location = window.location.pathname.split("/");
 
   switch (location[1]) {
-
     case "activity":
       presenceData.details = "Viewing recent activity";
-    break;
+      break;
 
     case "forum":
       presenceData.details = "Viewing the forum";
-    break;
+      break;
 
     case "explore":
       presenceData.details = "Exploring the explore page";
-    break;
+      break;
 
     case "amvs":
       presenceData.details = "Looking at AMVs";
-    break;
+      break;
 
     case "soundtracks":
       presenceData.details = "Looking at music";
-    break;
+      break;
 
     case "soundtrack":
-      if (location[3] == "edit")
-      {
+      if (location[3] == "edit") {
         presenceData.details = `Editing or uploading a soundtrack`;
+      } else {
+        presenceData.details = `Viewing song: ${
+          document.getElementsByTagName("title")[0].innerHTML
+        }`;
       }
-      else
-      {
-        presenceData.details = `Viewing song: ${document.getElementsByTagName("title")[0].innerHTML}`;
-      }
-    break;
+      break;
 
     case "quotes":
       presenceData.details = "Scrolling through quotes";
-    break;
+      break;
 
     case "quote":
       presenceData.details = `Looking at a quote`;
-    break;
+      break;
 
     case "groups":
       presenceData.details = "Viewing groups";
-    break;
+      break;
 
     case "group":
-      presenceData.details = `Viewing the ${document.getElementsByTagName("title")[0].innerHTML} group`
-    break;
+      presenceData.details = `Viewing the ${
+        document.getElementsByTagName("title")[0].innerHTML
+      } group`;
+      break;
 
     case "users":
       presenceData.details = "Scrolling though users";
-    break;
+      break;
 
     case "support":
       presenceData.details = "Considering supporting";
-    break;
+      break;
 
     case "post":
-      let postAuthor = document.getElementById(`post-${location[2]}`).children[0].children[1].children[0].children[0].children[0].innerHTML;
+      let postAuthor = document.getElementById(`post-${location[2]}`)
+        .children[0].children[1].children[0].children[0].children[0].innerHTML;
       presenceData.details = `Viewing ${postAuthor}'s post`;
-    break;
+      break;
 
     case "thread":
-      presenceData.details = `Viewing ${document.getElementsByTagName("title")[0].innerHTML} on the forums`;
-    break;
+      presenceData.details = `Viewing ${
+        document.getElementsByTagName("title")[0].innerHTML
+      } on the forums`;
+      break;
 
     case "anime":
-      presenceData.details = `Viewing "${document.getElementsByTagName("title")[0].innerHTML}"`;
-    break;
+      presenceData.details = `Viewing "${
+        document.getElementsByTagName("title")[0].innerHTML
+      }"`;
+      break;
 
     case "genres":
       presenceData.details = "Viewing anime by genre";
-    break;
+      break;
 
     case "halloffame":
       presenceData.details = "Viewing the hall of fame";
-    break
+      break;
 
     case "companies":
       presenceData.details = "Scrolling through anime studios";
-    break;
+      break;
 
     case "calendar":
-      case "companies":
+    case "companies":
       presenceData.details = "Viewing the anime calendar";
-    break;
+      break;
 
     case "settings":
       presenceData.details = "Setting settings";
-    break;
+      break;
 
     case "notifications":
       presenceData.details = "Viewing notifications";
-    break;
+      break;
 
     default:
+      if (
+        window.location.toString().startsWith("https://notify.moe/+") &&
+        location.length == 2
+      ) {
+        presenceData.details =
+          "Viewing " +
+          document.getElementsByTagName("title")[0].innerHTML +
+          "'s profile";
+      } else {
+        switch (location[2]) {
+          case "animelist":
+            switch (location[3]) {
+              case "watching":
+                presenceData.details = `Viewing the anime ${location[1].replace(
+                  "+",
+                  ""
+                )} is watching`;
+                break;
 
-    if (window.location.toString().startsWith("https://notify.moe/+") && location.length == 2)
-    {
-      presenceData.details = "Viewing " + document.getElementsByTagName("title")[0].innerHTML + "'s profile";
-    }
-    else 
-    {
-      switch (location[2])
-      {
-        case "animelist":
-          switch (location[3])
-          {
-            case "watching":
-              presenceData.details = `Viewing the anime ${location[1].replace('+', '')} is watching`;
+              case "completed":
+                presenceData.details = `Viewing anime ${location[1].replace(
+                  "+",
+                  ""
+                )} finished`;
+                break;
+
+              case "planned":
+                presenceData.details = `Viewing anime ${location[1].replace(
+                  "+",
+                  ""
+                )} plans to watch`;
+                break;
+
+              case "hold":
+                presenceData.details = `Viewing anime ${location[1].replace(
+                  "+",
+                  ""
+                )} has on hold`;
+                break;
+
+              case "dropped":
+                presenceData.details = `Viewing anime ${location[1].replace(
+                  "+",
+                  ""
+                )} dropped`;
+                break;
+
+              case "anime":
+                presenceData.details = `Putting ${
+                  document.getElementsByTagName("title")[0].innerHTML
+                } on my list`;
+                break;
+            }
             break;
 
-            case "completed":
-              presenceData.details = `Viewing anime ${location[1].replace('+','')} finished`;
+          default:
+            console.error("Something bad happened.");
             break;
-
-            case "planned":
-              presenceData.details = `Viewing anime ${location[1].replace('+','')} plans to watch`;
-            break;
-
-            case "hold":
-              presenceData.details = `Viewing anime ${location[1].replace('+','')} has on hold`;
-            break;
-
-            case "dropped":
-              presenceData.details = `Viewing anime ${location[1].replace('+','')} dropped`;
-            break;
-
-            case "anime":
-              presenceData.details = `Putting ${document.getElementsByTagName("title")[0].innerHTML} on my list`;
-            break;
-
-          }
-        break;
-
-        default:
-          console.error("Something bad happened.");
-        break;
+        }
       }
-    }
-      
-    break;
+
+      break;
   }
 
-  if (await presence.getSetting("button-to-list") == true) {
+  if ((await presence.getSetting("button-to-list")) == true) {
     presenceData.buttons = [
       {
-        "label": "View my list!",
-        "url": `https://notify.moe/${await presence.getSetting("set-user-name")}/`
+        label: "View my list!",
+        url: `https://notify.moe/${await presence.getSetting("set-user-name")}/`
       }
-    ]
+    ];
   }
 
   presence.setActivity(presenceData);

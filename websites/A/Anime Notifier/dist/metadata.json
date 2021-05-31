@@ -5,7 +5,7 @@
     "id": "324588568951390220"
   },
   "service": "Anime Notifier",
-  "altnames": [ "notify moe", "notify me", "notifymoe", "notify.moe" ],
+  "altnames": ["notify moe", "notify me", "notifymoe", "notify.moe"],
   "description": {
     "en": "Started as a site to give you notifications whenever your favourite anime goes live, Anime Notifier is now also useable as an anime list, with an extention so you don't have to leave your anime to keep your list up-to-date."
   },
@@ -14,7 +14,7 @@
   "logo": "https://media.notify.moe/images/brand/64.png",
   "thumbnail": "https://media.notify.moe/images/elements/framed-screenshot-transparent.png",
   "color": "#e3b7a7",
-  "tags": [ "notify", "anime", "notifymoe", "notifier" ],
+  "tags": ["notify", "anime", "notifymoe", "notifier"],
   "category": "anime",
   "iframe": false,
   "readLogs": false,
@@ -26,7 +26,7 @@
     },
     {
       "id": "set-user-name",
-      "if": {"button-to-list": true},
+      "if": { "button-to-list": true },
       "title": "Notify user name",
       "value": "+BasicallyWiz",
       "placeholder": "+UserNameCaseSensitive"
