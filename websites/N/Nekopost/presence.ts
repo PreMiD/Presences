@@ -70,7 +70,7 @@ presence.on("UpdateData", async () => {
         presenceData.smallImageKey = "search";
       }
     } else if (document.location.pathname.includes("/explore")) {
-      presenceData.details = "กำลังเลือก Project list";
+      presenceData.details = "กำลังเลือก Project ";
       presenceData.smallImageKey = "search";
     } else if (document.location.pathname === "/") {
       presenceData.details = "กำลังหา...";
