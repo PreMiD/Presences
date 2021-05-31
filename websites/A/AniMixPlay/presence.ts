@@ -68,7 +68,7 @@ presence.on("UpdateData", async () => {
         presenceData.details = "Currently exploring...";
         presenceData.state =
           "" +
-          urlParams.get("genre").toLowerCase().replaceAll(",", " + ") +
+          urlParams.get("genre").toLowerCase().replace(/,/g, " + ") +
           " related anime";
         presenceData.smallImageKey = "browsing-v1";
         presenceData.smallImageText = "Exploring...";
@@ -131,7 +131,7 @@ presence.on("UpdateData", async () => {
       let animepagetype = document
         .querySelector("#addInfo")
         .textContent.split(" ")[5]
-        .trim(-1);
+        .trim();
       presenceData.details = "Currently reading...";
       presenceData.state = animepagetitle + " (" + animepagetype + ")";
       presenceData.smallImageKey = "reading-v1";
