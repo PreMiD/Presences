@@ -11,7 +11,7 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing the homepage";
 	else if (document.location.pathname.startsWith("/stories")) {
       presenceData.details = "Viewing a story";
-      presenceData.state = document.location.pathname.split("/")[2];
+      presenceData.state = document.location.pathname.split("/")[, , 2];
   } else if (document.location.pathname.startsWith("/accounts")) {
       presenceData.details = "Settings";
       presenceData.state = "Changing their Settings";
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
     else {
     // TODO: Check if the page is really a profile
       presenceData.details = "Viewing a profile";
-      presenceData.state = document.location.pathname.split("/")[1];
+      presenceData.state = document.location.pathname.split("/")[, 1];
     }
     presence.setActivity(presenceData);
   }
