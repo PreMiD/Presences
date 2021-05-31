@@ -167,7 +167,7 @@ presence.on("UpdateData", async () => {
   if (await presence.getSetting("button-to-list") == true) {
     presenceData.buttons = [
       {
-        "label": "View my list",
+        "label": "View my list!",
         "url": `https://notify.moe/${await presence.getSetting("set-user-name")}/`
       }
     ]
