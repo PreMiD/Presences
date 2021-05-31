@@ -15,7 +15,7 @@ presence.on("UpdateData", async () => {
     let musicPlayer = document.getElementById("audio-player");
 
     presenceData.smallImageKey = "music_512";
-    presenceData.smallImageText = "Listening to " + musicPlayer.children[1].innerHTML;
+    presenceData.smallImageText = "Listening to " + "\"" + musicPlayer.children[1].innerHTML + "\"";
   }
 
   var location = window.location.pathname.split("/");
@@ -39,7 +39,18 @@ presence.on("UpdateData", async () => {
     break;
 
     case "soundtracks":
-      presenceData.details = "Looking for music";
+      presenceData.details = "Looking at music";
+    break;
+
+    case "soundtrack":
+      if (location[3] == "edit")
+      {
+        presenceData.details = `Editing or uploading a soundtrack`;
+      }
+      else
+      {
+        presenceData.details = `Viewing song: ${document.getElementsByTagName("title")[0].innerHTML}`;
+      }
     break;
 
     case "quotes":
@@ -76,7 +87,24 @@ presence.on("UpdateData", async () => {
     break;
 
     case "anime":
-      presenceData.details = `Viewing ${document.getElementsByTagName("title")[0].innerHTML}`;
+      presenceData.details = `Viewing "${document.getElementsByTagName("title")[0].innerHTML}"`;
+    break;
+
+    case "genres":
+      presenceData.details = "Viewing anime by genre";
+    break;
+
+    case "halloffame":
+      presenceData.details = "Viewing the hall of fame";
+    break
+
+    case "companies":
+      presenceData.details = "Scrolling through anime studios";
+    break;
+
+    case "calendar":
+      case "companies":
+      presenceData.details = "Viewing the anime calendar";
     break;
 
     case "settings":
@@ -105,7 +133,7 @@ presence.on("UpdateData", async () => {
             break;
 
             case "completed":
-              presenceData.details = `Viewing anime ${location[1].replace('+','')} has finished`;
+              presenceData.details = `Viewing anime ${location[1].replace('+','')} finished`;
             break;
 
             case "planned":
