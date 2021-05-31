@@ -46,7 +46,7 @@ presence.on("UpdateData", async () => {
       liked = document.querySelectorAll("span.text-on-naked.text-xs")[1]
         ?.textContent;
     presenceData.details = `Viewing ${
-      username.endsWith("s") ? `${`${username}'`}` : `${`${username}'s`}`
+      username ? username.endsWith("s") ? `${`${username}'`}` : `${`${username}'s`}` : "Unknown"
     } profile`;
     presenceData.state = `🖼️ ${templates} & ❤️ ${liked}`;
     presenceData.buttons = [

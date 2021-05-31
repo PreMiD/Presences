@@ -207,11 +207,12 @@ class APIConnection {
        */
       connection.websocket.onmessage = function (event: MessageEvent) {
         presence.info(`Message from Rythm's API: ${event.data}`);
-        if (event.data)
+        if (event.data) {
           connection.apiData = {
             ...connection.apiData,
             ...JSON.parse(event.data)
           };
+        }
       };
     });
   }
@@ -470,12 +471,12 @@ presence.on("UpdateData", async () => {
 
       // Add song information
       presenceData.details = apiData.playingTrack.title;
-      if (showUsernames)
-        presenceData.state = `Requested by: ${
-          apiData.playingTrack.enqueuer[
-            showNicknames ? "displayName" : "username"
+      if (showUsernames) {
+        presenceData.state = `Requested by: ${apiData.playingTrack.enqueuer[
+          showNicknames ? "displayName" : "username"
           ]
-        }`;
+          }`;
+      }
 
       // Add the view song button if buttons should be displayed
       if (showButtons) {

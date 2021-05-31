@@ -46,9 +46,9 @@ presence.on("UpdateData", async () => {
     if (getStatus() === "Pause") pauseFlag = false;
 
     if (pauseFlag) {
-      watchStamp = presence.getTimestampsfromMedia(
+      [, watchStamp] = presence.getTimestampsfromMedia(
         document.getElementsByTagName("video")[0]
-      )[1];
+      );
       if (!isNaN(watchStamp)) pauseFlag = true;
       presenceData = {
         state: `${getStatus()} | ${getText("player-title-bar")}`,
