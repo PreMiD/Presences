@@ -11,32 +11,30 @@ presence.on("UpdateData", async () => {
 
   presenceData.startTimestamp = browsingStamp;
 
-  if (document.location.host == "www.nekopost.net") {
+  if (document.location.host === "www.nekopost.net") {
     if (document.location.pathname.includes("/manga")) {
         if(document.location.pathname.includes("/manga/")) {
           if(document.querySelector("head > title").textContent.includes("Ch") == true) {
             presenceData.details =`Manga :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
-            presenceData.state = document
-            .querySelector("head > title")
-            .textContent.split(" ")[0];
+            const [state] = document.querySelector("head > title").textContent.split(" ");
+            presenceData.state = state;
             presenceData.smallImageKey = "reading";
           }
           else{
-            presenceData.details =`Manga :,${document.querySelector("head > title").textContent}!`;
+            presenceData.details = `Manga :,${document.querySelector("head > title").textContent}!`;
           presenceData.smallImageKey = "search";
           }
         }
         else {
-          presenceData.details ="กำลังเลือก Manga";
+          presenceData.details = "กำลังเลือก Manga";
           presenceData.smallImageKey = "search";
         }
     } else if (document.location.pathname.includes("/novel")) {
       if (document.location.pathname.includes("/novel/")) {
         if(document.querySelector("head > title").textContent.includes("Ch") == true) {
           presenceData.details =`Novel :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
-          presenceData.state = document
-          .querySelector("head > title")
-          .textContent.split(" ")[0];
+          const [state] = document.querySelector("head > title").textContent.split(" ");
+          presenceData.state = state;
           presenceData.smallImageKey = "reading";
         }
         else {
@@ -51,37 +49,35 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/comic")) {
       if (document.location.pathname.includes("/comic/")) {
         if(document.querySelector("head > title").textContent.includes("Ch") == true) {
-          presenceData.details =`Comic :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
-          presenceData.state = document
-          .querySelector("head > title")
-          .textContent.split(" ")[0];
+          presenceData.details = `Comic :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
+          const [state] = document.querySelector("head > title").textContent.split(" ");
+          presenceData.state = state;
           presenceData.smallImageKey = "reading";
         }
         else {
-          presenceData.details =`Comic :,${document.querySelector("head > title").textContent}!`;
+          presenceData.details = `Comic :,${document.querySelector("head > title").textContent}!`;
           presenceData.smallImageKey = "search";
         }
       }
       else {
-        presenceData.details ="กำลังเลือก Original Comic";
+        presenceData.details = "กำลังเลือก Original Comic";
         presenceData.smallImageKey = "search";
       }
     } else if (document.location.pathname.includes("/fiction")) {
       if (document.location.pathname.includes("/fiction/")) {
         if(document.querySelector("head > title").textContent.includes("Ch") == true) {
-          presenceData.details =`ONovel :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
-          presenceData.state = document
-          .querySelector("head > title")
-          .textContent.split(" ")[0];
+          presenceData.details = `ONovel :,${document.querySelector("head > title").textContent.split("-")[1]}!`;
+          const [state] = document.querySelector("head > title").textContent.split(" ");
+          presenceData.state = state;
           presenceData.smallImageKey = "reading";
         }
         else {
-          presenceData.details =`ONovel :,${document.querySelector("head > title").textContent}!`;
+          presenceData.details = `ONovel :,${document.querySelector("head > title").textContent}!`;
           presenceData.smallImageKey = "search";
         }
       }
       else {
-        presenceData.details ="กำลังเลือก Original Novel";
+        presenceData.details = "กำลังเลือก Original Novel";
         presenceData.smallImageKey = "search";
       }
     } else if (document.location.pathname.includes("/explore")) {
