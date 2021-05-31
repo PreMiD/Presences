@@ -31,11 +31,6 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing a profile";
       presenceData.state = document.location.pathname.split("/")[1];
     }
-	
-	if (presenceData.details === null) {
-    presence.setTrayTitle();
-    presence.setActivity();
-  } else {
     presence.setActivity(presenceData);
   }
 });
