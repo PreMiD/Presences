@@ -1,13 +1,13 @@
 {
     "$schema": "https://schemas.premid.app/metadata/1.3",
-    "service": "B",
+    "service": "Nekopost",
     "author": {
-      "name": "B",
+      "name": "💘𝓜𝓮𝓰𝓾𝓶𝓲 𝓴𝓪𝓽𝓸💘",
       "id": "424565046748643328"
     },
     "category": "other",
-    "logo": "https://www.nekopost.net/demo/nekopost_logo.png",
-    "thumbnail": "https://www.nekopost.net/demo/nekopost_logo.png",
+    "logo": "https://imgur.com/uoFY9IP",
+    "thumbnail": "https://imgur.com/uoFY9IP",
     "version": "1.0.0",
     "color": "#e7dca5",
     "tags": [
@@ -16,7 +16,9 @@
     ],
     "url": "www.nekopost.net",
     "description": {
-      "th": "Nekopost",
-      "en": "Nekopost"
+      "th": "Nekopost.net ก่อตั้งขึ้นเพื่อส่งเสริมการใช้เวลาว่างไปกับสิ่งที่ชอบ และเกิดประโยชน์ ทั้งแง่ของศิลปะ วัฒนธรรม และภาษา จุดมุ่งหมายสูงสุดของเราคือการพัฒนาวัฒนธรรมที่ตอบสนองความต้องการทางอุดมคติในอนาคตได้
+Nekopost.net ถูกจดทะเบียนเมื่อกลางปี 2009 โดยพัฒนามาจาก Module หนึ่งของเว็บ iamclaz.net โดยมีเพื่อน ๆ ร่วมด้วยช่วยกัน นำผลงานมาลง จนเราสามารถจัดตั้งเว็บไซต์ขนาดกลางได้จนถึงทุกวันนี้",
+      "en": "Nekopost.net was founded to promote spending time with the things I love. And benefit In terms of art, culture and language, our ultimate aim is to develop a culture that meets the ideals of the future.
+Nekopost.net was registered in the middle of 2009, developed from a module of iamclaz.net, with friends working together to bring the results down until we were able to set up a medium sized website to this day."
     }
   }
