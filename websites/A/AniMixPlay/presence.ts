@@ -82,12 +82,12 @@ if (document.location.pathname === "/") {
       Math.floor(duration)
     );
   }
-  title = document.querySelector(
-    "#aligncenter > span.animetitle"
-  ).textContent;
-  episode = document
-    .querySelector("#eptitle > span#eptitleplace")
-    .textContent.replace(/\D/g, "");
+    const title = document.querySelector(
+        "#aligncenter > span.animetitle"
+      ).textContent,
+      episode = document
+        .querySelector("#eptitle > span#eptitleplace")
+        .textContent.replace(/\D/g, "");
 
   if (!isNaN(duration)) {
     presenceData.smallImageKey = paused ? "pause-v1" : "play-v1";
