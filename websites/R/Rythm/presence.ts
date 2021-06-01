@@ -472,10 +472,11 @@ presence.on("UpdateData", async () => {
       // Add song information
       presenceData.details = apiData.playingTrack.title;
       if (showUsernames) {
-        presenceData.state = `Requested by: ${apiData.playingTrack.enqueuer[
-          showNicknames ? "displayName" : "username"
+        presenceData.state = `Requested by: ${
+          apiData.playingTrack.enqueuer[
+            showNicknames ? "displayName" : "username"
           ]
-          }`;
+        }`;
       }
 
       // Add the view song button if buttons should be displayed
