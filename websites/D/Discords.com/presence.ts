@@ -10,9 +10,9 @@ presence.on("UpdateData", async () => {
       largeImageKey: "discords_logo"
     };
 
-  if (document.location.pathname === "/") {
+  if (document.location.pathname === "/")
     presenceData.details = "Viewing home page";
-  } else if (document.location.pathname === "/servers/search") {
+  else if (document.location.pathname === "/servers/search") {
     const page = document.querySelector("li.page-item.active")?.textContent,
       search = document
         .querySelector("h1.text-center")
@@ -62,27 +62,27 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/join")) {
-    const server_name_join = document.querySelector("h2.mt-4")?.textContent;
+    const serverNameJoin = document.querySelector("h2.mt-4")?.textContent;
     presenceData.details = `Looking at 🚦 ${
-      server_name_join || "N/A"
+      serverNameJoin || "N/A"
     }'s join page`;
-    if (server_name_join) {
+    if (serverNameJoin) {
       presenceData.buttons = [
         {
-          label: `Join ${server_name_join}`,
+          label: `Join ${serverNameJoin}`,
           url: document.location.href
         }
       ];
     }
   } else if (document.location.pathname.includes("/upvote")) {
-    const server_name_upvote = document.querySelector(
+    const serverNameUpvote = document.querySelector(
       "h1.JoinUpvote_clickable-server-name__3l6Es"
     )?.textContent;
-    presenceData.details = `Upvoting 🗳️ ${server_name_upvote || "N/A"} `;
-    if (server_name_upvote) {
+    presenceData.details = `Upvoting 🗳️ ${serverNameUpvote || "N/A"} `;
+    if (serverNameUpvote) {
       presenceData.buttons = [
         {
-          label: `Upvote ${server_name_upvote}`,
+          label: `Upvote ${serverNameUpvote}`,
           url: document.location.href
         }
       ];
@@ -195,14 +195,60 @@ presence.on("UpdateData", async () => {
         url: document.location.href
       }
     ];
+    // discord.bio
+  } else if (document.location.pathname.includes("/profiles")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.smallImageKey = "reading";
+    presenceData.smallImageText = "Browsing...";
+    presenceData.details = "Browsing top bios";
+  } else if (document.location.pathname === "/bio/premium") {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.details = "Viewing 💎 premium plans";
+    presenceData.buttons = [
+      {
+        label: "View Premium Plans",
+        url: document.location.href
+      }
+    ];
+  } else if (document.location.pathname.includes("/customise")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.details = "Editing bio";
+  } else if (document.location.pathname.includes("/settings")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.details = "Viewing ⚙️ settings";
+  } else if (document.location.pathname.includes("/p/")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    const profileName = document.querySelector(
+        "span.text-white.font-bold.text-2xl"
+      )?.textContent,
+      premium = document.querySelector(
+        "div.text-xs.uppercase.tracking-widest.font-bold.text-blue-300"
+      )?.textContent;
+    presenceData.details = `Viewing ${
+      profileName
+        ? profileName.endsWith("s")
+          ? `${`${profileName}'`}`
+          : `${`${profileName}'s`}`
+        : "Unknown"
+    } bio`;
+    presenceData.state = `${premium ? "💎 Premium User" : "🎟️ Normal User"}`;
+    presenceData.buttons = [
+      {
+        label: "View Bio",
+        url: document.location.href
+      }
+    ];
+  } else if (document.location.pathname.includes("/bio")) {
+    presenceData.largeImageKey = "discordbio_logo";
+    presenceData.details = "Viewing home page";
   }
+
   if (!showButtons) delete presenceData.buttons;
   if (showTimestamp) presenceData.startTimestamp = browsingStamp;
 
-  if (presenceData.details == null) {
+  if (presenceData.details === null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
-    presence.setActivity(presenceData);
   }
+  presence.setActivity(presenceData);
 });
