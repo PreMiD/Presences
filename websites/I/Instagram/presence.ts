@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
   ) presenceData.details = "Direct Messages";
     else {
     // TODO: Check if the page is really a profile
-      const [, pathName] = document.location.pathname.split("/")
+      const [, pathName] = document.location.pathname.split("/");
       presenceData.details = "Viewing a profile";
       presenceData.state = pathName;
     }
