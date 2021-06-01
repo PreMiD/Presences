@@ -5,11 +5,21 @@
  * Google Hash Code  = 848588586524868701
  * */
 
-let presence = new Presence({
-  clientId: "848587645760176148" // Playing Google's Coding Competitions
-});
+let presence: Presence;
 
-const timeElapsed: number = ~~(Date.now() / 1000);
+function setPresence(): void {
+  if (location.pathname.includes("kickstart"))
+    presence = new Presence({ clientId: "848588920437604382" });
+  else if (location.pathname.includes("codejam"))
+    presence = new Presence({ clientId: "848588299147935744" });
+  else if (location.pathname.includes("hashcode"))
+    presence = new Presence({ clientId: "848588586524868701" });
+  else presence = new Presence({ clientId: "848587645760176148" });
+}
+
+const timeElapsed: number = ~~(Date.now() / 1000); 
+
+setPresence();
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
@@ -20,7 +30,6 @@ presence.on("UpdateData", async () => {
 
   switch (location.pathname.split("/")[1]) {
     case "kickstart": {
-      presence = new Presence({ clientId: "848588920437604382" }); // Playing Google Kick Start
       presenceData.largeImageKey = "kickstart";
 
       switch (location.pathname.split("/")[2]) {
@@ -97,12 +106,10 @@ presence.on("UpdateData", async () => {
     }
 
     case "codejam": {
-      presence = new Presence({ clientId: "848588299147935744" }); // Playing Google Code Jam
       presenceData.largeImageKey = "codejam";
 
       switch (location.pathname.split("/")[2]) {
         case "about": {
-          presenceData.details = "Reading about Code Jam";
           presenceData.smallImageKey = "reading";
           break;
         }
@@ -174,7 +181,6 @@ presence.on("UpdateData", async () => {
     }
 
     case "hashcode": {
-      presence = new Presence({ clientId: "848588586524868701" }); // Playing Google Hash Code
       presenceData.largeImageKey = "hashcode";
 
       switch (location.pathname.split("/")[2]) {
@@ -221,7 +227,6 @@ presence.on("UpdateData", async () => {
     }
 
     default: {
-      // Playing Google's Coding Competitions
       delete presenceData.startTimestamp;
 
       if (location.pathname.includes("profile"))
