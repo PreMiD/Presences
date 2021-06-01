@@ -10,7 +10,7 @@ presence.on("UpdateData", async () => {
   if (document.location.pathname === "/") 
       presenceData.details = "Viewing the homepage";
 	else if (document.location.pathname.startsWith("/stories")) {
-      const [, , pathName] = document.location.pathname.split("/")
+      const [, , pathName] = document.location.pathname.split("/");
       presenceData.details = "Viewing a story";
       presenceData.state = pathName;
   } else if (document.location.pathname.startsWith("/accounts")) {
