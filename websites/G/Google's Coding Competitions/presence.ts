@@ -110,6 +110,7 @@ presence.on("UpdateData", async () => {
 
       switch (location.pathname.split("/")[2]) {
         case "about": {
+          presenceData.details = "Reading about Code Jam";
           presenceData.smallImageKey = "reading";
           break;
         }
