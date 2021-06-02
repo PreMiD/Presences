@@ -5,21 +5,20 @@ const presence = new Presence({
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
-      largeImageKey: "meetlogo"
+      largeImageKey: "meetlogo",
+      startTimestamp: time
     },
     path = document.location.pathname.toLowerCase();
   
   if (path === "/") {
     presenceData.details = "Initial page";
     presenceData.state = "Just waiting";
-    presenceData.startTimestamp = time;
-    presence.setActivity(presenceData);
   } else {
     const users = (document.querySelector(".wnPUne") ?? document.querySelector(".uGOf1d")).innerHTML;
     presenceData.smallImageKey = "vcall";
     presenceData.details = "In a meeting";
     presenceData.state = `${users} users in the room`;
-    presenceData.startTimestamp = time;
-    presence.setActivity(presenceData);
   }
+  
+  presence.setActivity(presenceData);
 });
