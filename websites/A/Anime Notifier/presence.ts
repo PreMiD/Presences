@@ -187,7 +187,7 @@ presence.on("UpdateData", async () => {
       break;
   }
 
-  if ((await presence.getSetting("button-to-list")) == true) {
+  if ((await presence.getSetting("button-to-list"))) {
     presenceData.buttons = [
       {
         label: "View my list!",
