@@ -1,0 +1,36 @@
+{
+  "service": "MKComouting",
+  "author": {
+    "name": "MaximKing",
+    "id": "713632188863610911"
+  },
+  "category": "other",
+  "logo": "https://mkcomputing.uk/logo.jpeg",
+  "thumbnail": "https://mkcomputing.uk/logo.jpeg",
+  "version": "1.0.0",
+  "color": "#0059ff",
+  "tags": [
+    "hosting"
+  ],
+  "url": [
+    "mkcomputing.uk",
+    "www.mkcomputing.uk",
+    "docker.mkcomputing.uk",
+    "portal.mkcomputing.uk"
+  ],
+  "description": {
+    "en": "MKComputing: UK Site Hosting, Domain Registration and Cloud Hosting"
+  },
+    "settings": [
+    {
+      "id": "lang",
+      "multiLanguage": true
+    },
+    {
+      "id": "time",
+      "title": "Show timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    }
+  ]
+}
