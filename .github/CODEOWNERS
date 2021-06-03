@@ -1,10 +1,11 @@
-@types/* @Timeraa @ririxidev @Bas950
+websites/** @PreMiD/presence-verifiers
+
+@types/** @Timeraa @ririxidev @Bas950
 package.json @Timeraa @Fruxh @TheDropX @ririxidev
 yarn.lock @Timeraa @Fruxh @TheDropX @ririxidev
 .eslintrc.json @ririxidev
+.github/CODEOWNERS @ririxidev @Bas950
 .github/CONTRIBUTING.md @Bas950 @ririxidev
 
 util/tools/translator.ts @Bas950 @ririxidev
-util/tools/auto/* @SeMiD
-
-* @Bas950 @ririxidev @StrikerFRFX @SlowLife1661
+util/tools/auto/** @SeMiD
