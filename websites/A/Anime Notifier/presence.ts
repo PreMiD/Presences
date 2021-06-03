@@ -110,7 +110,6 @@ presence.on("UpdateData", async () => {
       break;
 
     case "calendar":
-    case "companies":
       presenceData.details = "Viewing the anime calendar";
       break;
 
