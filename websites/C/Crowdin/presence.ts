@@ -40,7 +40,7 @@ presence.on("UpdateData", () => {
         presenceData.buttons = [
           {
             label: "View section",
-            url: document.location.href
+            url: document.URL
           }
         ];
     } else if (document.location.pathname.includes("/search")) {
@@ -48,22 +48,23 @@ presence.on("UpdateData", () => {
       presenceData.state = (
         document.querySelector(
           ".form-control.form-control__result.input-lg"
-        ) as HTMLInputElement
-      ).value;
+        ) as HTMLInputElement | null
+      )?.value;
       presenceData.smallImageKey = "search";
     } else {
       presenceData.details = "Reading support article";
-      presenceData.state = document.querySelector(".hero").textContent;
+      presenceData.state = document.querySelector(".hero")?.textContent;
       presenceData.smallImageKey = "reading";
       presenceData.buttons = [
         {
           label: "View article",
-          url: document.location.href
+          url: document.URL
         }
       ];
     }
   } else if (document.location.host === "store.crowdin.com") {
     presenceData.details = "Browsing the store";
+    presenceData.smallImageKey = "search";
     if (!document.location.pathname || document.location.pathname == "/") {
       presenceData.details = "On the main store page";
     } else if (document.location.pathname.includes("/collections/")) {
@@ -71,19 +72,20 @@ presence.on("UpdateData", () => {
       presenceData.details = isApp ? "Viewing app" : "Browsing apps";
       presenceData.state =
         document.querySelector(".product-single__title")?.textContent ||
-        document.querySelector(".site-nav--active").textContent;
+        document.querySelector(".site-nav--active")?.textContent;
       if (isApp)
         presenceData.buttons = [
           {
             label: "View app",
-            url: document.location.href
+            url: document.URL
           }
         ];
     } else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching the store";
       presenceData.state = (
-        document.querySelector(".search__input") as HTMLInputElement
-      ).value;
+        document.querySelector(".search__input") as HTMLInputElement | null
+      )?.value;
+      presenceData.smallImageKey = "search";
     }
   } else if (document.location.host == "status.crowdin.com") {
     presenceData.details = "Viewing Crowdin's status";
@@ -97,19 +99,34 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing tag";
       presenceData.state = document
         .querySelector(".text-center.home-bg.home-bg--tags")
-        .textContent.split(":")[1];
+        ?.textContent.split(":")[1];
+      presenceData.buttons = [
+        {
+          label: "View tag",
+          url: document.URL
+        }
+      ];
     } else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching the blog";
       presenceData.state = (
-        document.querySelector(".form-control") as HTMLInputElement
-      ).value;
+        document.querySelector(".form-control") as HTMLInputElement | null
+      )?.value;
+      presenceData.smallImageKey = "search";
     } else if (!document.location.pathname.includes("/page")) {
       presenceData.details = "Reading blog post";
-      presenceData.state = document.querySelector(".hero > h1").textContent;
+      presenceData.state = document.querySelector(".hero > h1")?.textContent;
+      presenceData.buttons = [
+        {
+          label: "View blog post",
+          url: document.URL
+        }
+      ];
     }
   } else {
     if (document.location.pathname == "/" || !document.location.pathname) {
-      presenceData.details = "Website Home";
+      if (document.location.host != "translate.premid.app")
+        presenceData.details = "Website Home";
+      else document.location.pathname = "/project/premid";
     } else if (document.location.pathname.includes("/project/")) {
       translateProject =
         document.querySelector(
@@ -120,7 +137,13 @@ presence.on("UpdateData", () => {
         ".language-header.no-margin-top.margin-bottom"
       );
 
-      presenceData.details = translateProject.innerText;
+      presenceData.details = translateProject?.innerText;
+      presenceData.buttons = [
+        {
+          label: "View project",
+          url: document.URL
+        }
+      ];
       if (document.location.pathname.includes("activity_stream")) {
         presenceData.state = "Viewing activity";
       } else if (document.location.pathname.includes("reports")) {
@@ -140,10 +163,17 @@ presence.on("UpdateData", () => {
       );
       translateProject = document.querySelector("title");
 
-      presenceData.details = "Translating " + translatingFile.innerHTML;
-      presenceData.state = `${translateProject.innerText
+      presenceData.details = "Translating " + translatingFile?.innerHTML;
+      presenceData.state = `${translateProject?.innerText
         .split("-")[1]
-        .trim()} (${translatingLanguage.innerHTML})`;
+        ?.trim()} (${translatingLanguage?.innerHTML})`;
+      presenceData.smallImageKey = "writing";
+      presenceData.buttons = [
+        {
+          label: "Translate project",
+          url: document.URL
+        }
+      ];
     } else if (document.location.pathname.includes("/profile")) {
       profileName = document.querySelector(".username.s-margin-bottom");
       profileNickname = document.querySelector(".user-login");
@@ -168,21 +198,24 @@ presence.on("UpdateData", () => {
       const currentTab =
         document.querySelector("#showcase_current").parentElement.parentElement
           .className == "tab-pane active"
-          ? document.querySelector("#showcase_current").textContent
-          : document.querySelector(".active").textContent;
+          ? document.querySelector("#showcase_current")?.textContent
+          : document.querySelector(".active")?.textContent;
 
       presenceData.details = "Exploring projects";
       presenceData.state = currentTab;
+      presenceData.smallImageKey = "search";
     } else if (document.location.pathname.includes("/resources")) {
       presenceData.details = "Viewing resources";
       presenceData.state = (
-        document.querySelector(".active") as HTMLLIElement
-      ).innerText;
+        document.querySelector(".active") as HTMLLIElement | null
+      )?.innerText;
     } else if (document.location.pathname == "/release-notes") {
       presenceData.details = "Viewing release notes";
       presenceData.state = (
-        document.querySelector(".selected-release-item") as HTMLAnchorElement
-      ).innerText;
+        document.querySelector(
+          ".selected-release-item"
+        ) as HTMLAnchorElement | null
+      )?.innerText;
     } else if (document.location.pathname == "/features") {
       presenceData.details = "Viewing Crowdin's features";
     } else if (document.location.pathname == "/demo-request") {
@@ -191,7 +224,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Reading page";
       presenceData.state =
         document.querySelector(".text-center > h1")?.textContent ??
-        (document.querySelector(".row > h1") as HTMLElement).innerText
+        (document.querySelector(".row > h1") as HTMLElement | null)?.innerText
           .split("\n")
           .join(" ");
     } else if (document.location.pathname.includes("/pricing")) {
@@ -202,6 +235,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Contacting Crowdin";
     } else if (document.location.pathname.includes("/feature-request")) {
       presenceData.details = "Viewing feature requests";
+      // TODO add check for when the user is submitting a feature request/viewing an existing request (iFrame)
     }
   }
 
