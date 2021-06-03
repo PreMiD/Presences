@@ -36,13 +36,14 @@ presence.on("UpdateData", () => {
       presenceData.details = "Reading more about API V2";
       presenceData.state = currentSection;
       presenceData.smallImageKey = "reading";
-      if (activeLabel)
+      if (activeLabel) {
         presenceData.buttons = [
           {
             label: "View section",
             url: document.URL
           }
         ];
+      }
     } else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching support";
       presenceData.state = (
@@ -74,13 +75,14 @@ presence.on("UpdateData", () => {
         (
           document.querySelector("[role=text]") as HTMLElement | null
         )?.innerText.split("\n")?.[1];
-      if (isApp)
+      if (isApp) {
         presenceData.buttons = [
           {
             label: "View app",
             url: document.URL
           }
         ];
+      }
     } else if (document.location.pathname.includes("/search")) {
       presenceData.details = "Searching the store";
       presenceData.state = (
@@ -162,9 +164,10 @@ presence.on("UpdateData", () => {
         presenceData.state = "Viewing discussions";
       else if (document.location.pathname.includes("tasks"))
         presenceData.state = "Viewing tasks";
-      else
+      else {
         presenceData.state =
           translatePageTitle?.innerText || "Viewing project home";
+      }
     } else if (document.location.pathname.includes("/translate")) {
       translatingFile = document.querySelector(".file-name");
       translatingLanguage = document.querySelector(
