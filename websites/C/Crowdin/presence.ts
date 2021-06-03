@@ -64,7 +64,6 @@ presence.on("UpdateData", () => {
     }
   } else if (document.location.host === "store.crowdin.com") {
     presenceData.details = "Browsing the store";
-    presenceData.smallImageKey = "search";
     if (!document.location.pathname || document.location.pathname == "/") {
       presenceData.details = "On the main store page";
     } else if (document.location.pathname.includes("/collections/")) {
@@ -72,7 +71,9 @@ presence.on("UpdateData", () => {
       presenceData.details = isApp ? "Viewing app" : "Browsing apps";
       presenceData.state =
         document.querySelector(".product-single__title")?.textContent ||
-        document.querySelector(".site-nav--active")?.textContent;
+        (
+          document.querySelector("[role=text]") as HTMLElement | null
+        )?.innerText.split("\n")?.[1];
       if (isApp)
         presenceData.buttons = [
           {
@@ -88,14 +89,16 @@ presence.on("UpdateData", () => {
       presenceData.smallImageKey = "search";
     }
   } else if (document.location.host == "status.crowdin.com") {
+    // TODO add incident page (when they have an incident to report lol)
     presenceData.details = "Viewing Crowdin's status";
     if (document.location.pathname == "/subscribe") {
       presenceData.details = "Subscribing to status reports";
     }
   } else if (document.location.host == "blog.crowdin.com") {
-    presenceData.details = "Browsing the blog";
     presenceData.smallImageKey = "reading";
-    if (document.location.pathname.includes("/tag/")) {
+    if (document.location.pathname == "/") {
+      presenceData.details = "Browsing the blog";
+    } else if (document.location.pathname.includes("/tag/")) {
       presenceData.details = "Viewing tag";
       presenceData.state = document
         .querySelector(".text-center.home-bg.home-bg--tags")
@@ -112,22 +115,29 @@ presence.on("UpdateData", () => {
         document.querySelector(".form-control") as HTMLInputElement | null
       )?.value;
       presenceData.smallImageKey = "search";
-    } else if (!document.location.pathname.includes("/page")) {
+    } else if (document.querySelector(".hero > h1")) {
       presenceData.details = "Reading blog post";
-      presenceData.state = document.querySelector(".hero > h1")?.textContent;
+      presenceData.state = document.querySelector(".hero > h1").textContent;
       presenceData.buttons = [
         {
           label: "View blog post",
           url: document.URL
         }
       ];
+    } else {
+      presenceData.details = "Unknown page";
+      presenceData.smallImageKey = "";
     }
   } else {
-    if (document.location.pathname == "/" || !document.location.pathname) {
-      if (document.location.host != "translate.premid.app")
-        presenceData.details = "Website Home";
-      else document.location.pathname = "/project/premid";
-    } else if (document.location.pathname.includes("/project/")) {
+    if (
+      (document.location.pathname == "/" || !document.location.pathname) &&
+      document.location.host == "crowdin.com"
+    ) {
+      presenceData.details = "Website Home";
+    } else if (
+      document.location.pathname.includes("/project/") ||
+      document.location.host != "crowdin.com" && document.location.pathname == "/"
+    ) {
       translateProject =
         document.querySelector(
           ".title-name.project-name-preview.text-overflow"
@@ -210,12 +220,19 @@ presence.on("UpdateData", () => {
         document.querySelector(".active") as HTMLLIElement | null
       )?.innerText;
     } else if (document.location.pathname == "/release-notes") {
-      presenceData.details = "Viewing release notes";
+      presenceData.details = "Reading release notes";
       presenceData.state = (
         document.querySelector(
           ".selected-release-item"
         ) as HTMLAnchorElement | null
       )?.innerText;
+      presenceData.smallImageKey = "reading"
+      presenceData.buttons = [
+        {
+          label: "View release notes",
+          url: document.URL
+        }
+      ]
     } else if (document.location.pathname == "/features") {
       presenceData.details = "Viewing Crowdin's features";
     } else if (document.location.pathname == "/demo-request") {
@@ -227,6 +244,13 @@ presence.on("UpdateData", () => {
         (document.querySelector(".row > h1") as HTMLElement | null)?.innerText
           .split("\n")
           .join(" ");
+          presenceData.smallImageKey = "reading"
+      presenceData.buttons = [
+        {
+          label: "View page",
+          url: document.URL
+        }
+      ]
     } else if (document.location.pathname.includes("/pricing")) {
       presenceData.details = "Viewing pricing";
     } else if (document.location.pathname.includes("/enterprise")) {
