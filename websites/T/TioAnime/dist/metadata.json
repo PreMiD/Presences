@@ -1,0 +1,32 @@
+{
+  "author": {
+    "name": "Mix",
+    "id": "264035354019889154"
+  },
+  "contributors": [
+    {
+      "name": "Giingu",
+      "id": "156481332652802048"
+    }
+  ],
+  "service": "TioAnime",
+  "description": {
+    "en": "TioAnime is a streaming website where you can watch anime with Spanish subtitles.",
+    "es": "TioAnime es un sitio web de streaming donde puedes ver anime con subtítulos en español.",
+    "zh_CN": "TioAnime是一个视频网站，您可以在其中观看带有西班牙语字幕的动漫。",
+    "ga_IE": "Is suíomh Gréasáin sruthú é TioAnime inar féidir leat féachaint ar anime le fotheidil Spáinneacha.",
+    "nl": "TioAnime is een streamingwebsite waar je anime kunt kijken met Spaanse ondertiteling."
+  },
+  "url": "tioanime.com",
+  "version": "1.0",
+  "logo": "https://i.imgur.com/2MfJUZJ.png",
+  "thumbnail": "https://i.imgur.com/Rf5mnKb.png",
+  "color": "#282248",
+  "tags": [
+    "tioanime",
+    "streaming",
+    "embedded-links"
+  ],
+  "category": "anime",
+  "iframe": true
+}
