@@ -46,10 +46,11 @@ presence.on("UpdateData", async () => {
       if (location[3] === "edit")
         presenceData.details = "Editing or uploading a soundtrack";
       else
+      {
         presenceData.details = `Viewing song: ${
           document.getElementsByTagName("title")[0].innerHTML
         }`;
-      
+      }
       break;
 
     case "quotes":
@@ -78,8 +79,7 @@ presence.on("UpdateData", async () => {
       break;
 
     case "post":
-      const postAuthor = document.getElementById(`post-${location[2]}`).children[0].children[1].children[0].children[0].children[0].innerHTML;
-      presenceData.details = `Viewing ${postAuthor}'s post`;
+      presenceData.details = `Viewing ${document.getElementsByClassName("post-header-info")[0].children[0].innerHTML}'s post`;
       break;
 
     case "thread":
@@ -122,9 +122,9 @@ presence.on("UpdateData", async () => {
       if (
         window.location.toString().startsWith("https://notify.moe/+") &&
         location.length === 2
-      ) {
-        presenceData.details = "Viewing "+document.getElementsByTagName("title")[0].innerHTML+"'s profile";
-      } else {
+      )
+      presenceData.details = `Viewing ${document.getElementsByTagName("title")[0].innerHTML}'s profile`;
+       else 
         switch (location[2]) {
           case "animelist":
             switch (location[3]) {
@@ -171,7 +171,6 @@ presence.on("UpdateData", async () => {
             }
             break;
         }
-      }
 
       break;
   }
