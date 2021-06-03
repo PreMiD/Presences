@@ -1,0 +1,66 @@
+const presence = new Presence({
+  clientId: "849684658563055627"
+});
+
+let lobbyStartTime: number;
+let gameStartTime: number;
+
+presence.on("UpdateData", () => {
+  const presenceData: PresenceData = {
+    largeImageKey: "logo",
+    startTimestamp: Math.floor(Date.now() / 1000)
+  };
+
+  if (document.querySelector(".my-table") || document.querySelector(".score-page")) {
+    if (lobbyStartTime == 0) {
+      lobbyStartTime = Math.floor(Date.now() / 1000);
+    }
+    gameStartTime = 0;
+    
+    const isHost = document.querySelector(".rules-editor") !== null || document.querySelector("button[ng-click=\"$ctrl.editTable()\"]") !== null;
+    const members = document.querySelector(".participant-list-label").textContent;
+
+    presenceData.details = `In Lobby: ${members}`;
+    presenceData.state = isHost ? "Host" : null;
+    presenceData.startTimestamp = lobbyStartTime;
+  } else if (document.querySelector(".game-page")) {
+    if (gameStartTime == 0) {
+      gameStartTime = Math.floor(Date.now() / 1000);
+    }
+    lobbyStartTime = 0;
+
+    const membersCount = document.querySelectorAll(".spec-list-line").length;
+    
+    // Find last turn log from end
+    const logs = document.querySelectorAll(".actual-log");
+    for (let i = logs.length; i > 0; i--) {
+      if (!logs[i]) {
+        continue;
+      }
+
+      const logText = logs[i].textContent.trim();
+
+      // Append turn
+      if (/^.+ - \w+$/.test(logText)) {
+        presenceData.state = logText;
+        break;
+      }
+    }
+
+    presenceData.details = `In Game (${membersCount} Players)`;
+    presenceData.startTimestamp = gameStartTime;
+  } else if (document.querySelector(".login-page") || document.querySelector(".lobby-page")) {
+    gameStartTime = lobbyStartTime = 0;
+    presenceData.details = "Main Menu";
+  } else if (document.querySelector(".loading-spinner")) {
+    gameStartTime = lobbyStartTime = 0;
+    presenceData.details = "Loading...";
+  }
+
+  if (presenceData.details == null) {
+    presence.setTrayTitle();
+    presence.setActivity();
+  } else {
+    presence.setActivity(presenceData);
+  }
+});
