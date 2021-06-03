@@ -13,14 +13,13 @@ presence.on("UpdateData", async () => {
       .classList.contains("hidden")
   ) {
     //    Check for music
-    let musicPlayer = document.getElementById("audio-player");
+    const musicPlayer = document.getElementById("audio-player");
 
     presenceData.smallImageKey = "music_512";
-    presenceData.smallImageText =
-      "Listening to " + '"' + musicPlayer.children[1].innerHTML + '"';
+    presenceData.smallImageText = `Listening to "${musicPlayer.children[1].innerHTML}"`;
   }
 
-  var location = window.location.pathname.split("/");
+  const location = window.location.pathname.split("/");
 
   switch (location[1]) {
     case "activity":
@@ -44,13 +43,13 @@ presence.on("UpdateData", async () => {
       break;
 
     case "soundtrack":
-      if (location[3] == "edit") {
-        presenceData.details = `Editing or uploading a soundtrack`;
-      } else {
+      if (location[3] === "edit")
+        presenceData.details = "Editing or uploading a soundtrack";
+      else
         presenceData.details = `Viewing song: ${
           document.getElementsByTagName("title")[0].innerHTML
         }`;
-      }
+      
       break;
 
     case "quotes":
@@ -58,7 +57,7 @@ presence.on("UpdateData", async () => {
       break;
 
     case "quote":
-      presenceData.details = `Looking at a quote`;
+      presenceData.details = "Looking at a quote";
       break;
 
     case "groups":
@@ -66,8 +65,7 @@ presence.on("UpdateData", async () => {
       break;
 
     case "group":
-      presenceData.details = `Viewing the ${
-        document.getElementsByTagName("title")[0].innerHTML
+      presenceData.details = `Viewing the ${document.getElementsByTagName("title")[0].innerHTML
       } group`;
       break;
 
@@ -80,8 +78,7 @@ presence.on("UpdateData", async () => {
       break;
 
     case "post":
-      let postAuthor = document.getElementById(`post-${location[2]}`)
-        .children[0].children[1].children[0].children[0].children[0].innerHTML;
+      const postAuthor = document.getElementById(`post-${location[2]}`).children[0].children[1].children[0].children[0].children[0].innerHTML;
       presenceData.details = `Viewing ${postAuthor}'s post`;
       break;
 
@@ -124,12 +121,9 @@ presence.on("UpdateData", async () => {
     default:
       if (
         window.location.toString().startsWith("https://notify.moe/+") &&
-        location.length == 2
+        location.length === 2
       ) {
-        presenceData.details =
-          "Viewing " +
-          document.getElementsByTagName("title")[0].innerHTML +
-          "'s profile";
+        presenceData.details = "Viewing "+document.getElementsByTagName("title")[0].innerHTML+"'s profile";
       } else {
         switch (location[2]) {
           case "animelist":
@@ -175,10 +169,6 @@ presence.on("UpdateData", async () => {
                 } on my list`;
                 break;
             }
-            break;
-
-          default:
-            console.error("Something bad happened.");
             break;
         }
       }
