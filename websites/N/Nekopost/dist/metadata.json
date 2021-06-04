@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.4",
+  "service": "Nekopost",
+  "author": {
+    "name": "NPC_B",
+    "id": "424565046748643328"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/uoFY9IP.png",
+  "thumbnail": "https://i.imgur.com/iZcmtnY.png",
+  "version": "1.0.1",
+  "color": "#e7dca5",
+  "tags": [
+    "manga",
+    "thai"
+  ],
+  "url": "www.nekopost.net",
+  "description": {
+    "th": "Nekopost.net ก่อตั้งขึ้นเพื่อส่งเสริมการใช้เวลาว่างไปกับสิ่งที่ชอบ และเกิดประโยชน์ ทั้งแง่ของศิลปะ วัฒนธรรม และภาษา จุดมุ่งหมายสูงสุดของเราคือการพัฒนาวัฒนธรรมที่ตอบสนองความต้องการทางอุดมคติในอนาคต",
+    "en": "Nekopost.net was founded to promote spending time with the things I love. And benefit In terms of art, culture and language, our ultimate aim is to develop a culture that meets the ideals of the future."
+  }
+}

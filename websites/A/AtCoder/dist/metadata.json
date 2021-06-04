@@ -2,13 +2,13 @@
   "$schema": "https://schemas.premid.app/metadata/1.4",
   "service": "AtCoder",
   "author": {
-    "name": "Zai",
+    "name": "Palskie",
     "id": "90431685472038912"
   },
   "category": "other",
   "logo": "https://i.imgur.com/sljarC4.png",
   "thumbnail": "https://i.imgur.com/zuvLy06.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#101010",
   "tags": [
     "coding",
