@@ -45,8 +45,7 @@ presence.on("UpdateData", async () => {
     case "soundtrack":
       if (location[3] === "edit")
         presenceData.details = "Editing or uploading a soundtrack";
-      else
-      {
+      else {
         presenceData.details = `Viewing song: ${
           document.getElementsByTagName("title")[0].innerHTML
         }`;
@@ -125,6 +124,7 @@ presence.on("UpdateData", async () => {
       )
       presenceData.details = `Viewing ${document.getElementsByTagName("title")[0].innerHTML}'s profile`;
        else 
+       {
         switch (location[2]) {
           case "animelist":
             switch (location[3]) {
@@ -170,9 +170,10 @@ presence.on("UpdateData", async () => {
                 break;
             }
             break;
+          }
         }
 
-      break;
+    break;
   }
 
   if ((await presence.getSetting("button-to-list"))) {
