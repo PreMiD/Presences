@@ -123,8 +123,7 @@ presence.on("UpdateData", async () => {
         location.length === 2
       )
       presenceData.details = `Viewing ${document.getElementsByTagName("title")[0].innerHTML}'s profile`;
-       else 
-       {
+       else {
         switch (location[2]) {
           case "animelist":
             switch (location[3]) {
