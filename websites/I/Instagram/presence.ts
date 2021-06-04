@@ -3,35 +3,35 @@ const presence = new Presence({
 });
 
 presence.on("UpdateData", async () => {
-	const presenceData: PresenceData = {
-		largeImageKey: "logo"
-	};
+  const presenceData: PresenceData = {
+    largeImageKey: "logo"
+  };
 
-  if (document.location.pathname === "/") 
-      presenceData.details = "Viewing the homepage";
-	else if (document.location.pathname.startsWith("/stories")) {
-      const [, , pathName] = document.location.pathname.split("/");
-      presenceData.details = "Viewing a story";
-      presenceData.state = pathName;
+  if (document.location.pathname === "/")
+    presenceData.details = "Viewing the homepage";
+  else if (document.location.pathname.startsWith("/stories")) {
+    const [, , pathName] = document.location.pathname.split("/");
+    presenceData.details = "Viewing a story";
+    presenceData.state = pathName;
   } else if (document.location.pathname.startsWith("/accounts")) {
-      presenceData.details = "Settings";
-      presenceData.state = "Changing their Settings";
-  } else if (document.location.pathname.startsWith("/p")) 
-      presenceData.details = "Viewing a post";
-    else if (document.location.pathname.startsWith("/explore")) 
-      presenceData.details = "Exploring...";
-    else if (document.location.pathname.startsWith("/nametag")) 
-      presenceData.details = "Viewing nametag";
-    else if (
+    presenceData.details = "Settings";
+    presenceData.state = "Changing their Settings";
+  } else if (document.location.pathname.startsWith("/p"))
+    presenceData.details = "Viewing a post";
+  else if (document.location.pathname.startsWith("/explore"))
+    presenceData.details = "Exploring...";
+  else if (document.location.pathname.startsWith("/nametag"))
+    presenceData.details = "Viewing nametag";
+  else if (
     document.location.pathname.startsWith("/direct/inbox") ||
     document.location.pathname.startsWith("/direct/t")
-  ) presenceData.details = "Direct Messages";
-    else {
+  )
+    presenceData.details = "Direct Messages";
+  else {
     // TODO: Check if the page is really a profile
-      const [, pathName] = document.location.pathname.split("/");
-      presenceData.details = "Viewing a profile";
-      presenceData.state = pathName;
-    }
-    presence.setActivity(presenceData);
+    const [, pathName] = document.location.pathname.split("/");
+    presenceData.details = "Viewing a profile";
+    presenceData.state = pathName;
   }
-);
+  presence.setActivity(presenceData);
+});

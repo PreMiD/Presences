@@ -17,7 +17,7 @@ function setPresence(): void {
   else presence = new Presence({ clientId: "848587645760176148" });
 }
 
-const timeElapsed: number = ~~(Date.now() / 1000); 
+const timeElapsed: number = ~~(Date.now() / 1000);
 
 setPresence();
 
