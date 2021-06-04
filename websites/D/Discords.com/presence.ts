@@ -92,19 +92,19 @@ presence.on("UpdateData", async () => {
         .querySelectorAll("span.mr-2")[0]
         ?.textContent.replace(
           `${document.querySelectorAll("span.mr-2")[0]?.textContent}`,
-          `${"👥" + document.querySelectorAll("span.mr-2")[0]?.textContent}`
+          `${`👥 ${document.querySelectorAll("span.mr-2")[0]?.textContent}`}`
         ),
       members = document
         .querySelectorAll("span.mr-2")[1]
         ?.textContent.replace(
           `${document.querySelectorAll("span.mr-2")[1]?.textContent}`,
-          `${"🎁" + document.querySelectorAll("span.mr-2")[1]?.textContent}`
+          `${`🎁 ${document.querySelectorAll("span.mr-2")[1]?.textContent}`}`
         ),
       boosts = document
         .querySelectorAll("span.mr-2")[2]
         ?.textContent.replace(
           `${document.querySelectorAll("span.mr-2")[2]?.textContent}`,
-          `${"💎" + document.querySelectorAll("span.mr-2")[2]?.textContent}`
+          `${`💎 ${document.querySelectorAll("span.mr-2")[2]?.textContent}`}`
         ),
       server = document
         .querySelector("h1.servernameh1")
@@ -163,10 +163,10 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname === "/emoji-list/search") {
     const page = document.querySelector("li.page-item.active")?.textContent,
-      emoji_search = document
+      emojiSearch = document
         .querySelector("h2.EmoList_heading1__3KEr_")
         ?.textContent.replace("Emoji List", " ");
-    presenceData.details = `🔍 Searching for emoji: ${emoji_search || "N/A"}`;
+    presenceData.details = `🔍 Searching for emoji: ${emojiSearch || "N/A"}`;
     presenceData.state = `📖 Page ${page}`;
     presenceData.buttons = [
       {
@@ -176,10 +176,10 @@ presence.on("UpdateData", async () => {
     ];
   } else if (document.location.pathname.includes("/emoji-list/tag/")) {
     const page = document.querySelector("li.page-item.active")?.textContent,
-      emoji_tag = document
+      emojiTag = document
         .querySelector("h2.EmoList_heading1__3KEr_")
         ?.textContent.replace("Emoji List", " ");
-    presenceData.details = `Looking at 📛 ${emoji_tag || "N/A"} emoji tag`;
+    presenceData.details = `Looking at 📛 ${emojiTag || "N/A"} emoji tag`;
     presenceData.state = `📖 Page ${page}`;
     presenceData.buttons = [
       {
@@ -302,14 +302,14 @@ presence.on("UpdateData", async () => {
       }
     ];
   } else if (document.location.pathname.includes("/templates/search/")) {
-    const query = document.location.pathname.split("/templates/search/")[1];
+    const [, query] = document.location.pathname.split("/templates/search/");
     presenceData.largeImageKey = "discordtemplates_logo";
     presenceData.details = "Searching for:";
     presenceData.state = `${query ? query : "Unknown"}`;
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Searching...";
   } else if (document.location.pathname.includes("/templates/tags/")) {
-    const tagName = document.location.pathname.split("/templates/tags/")[1];
+    const [, tagName] = document.location.pathname.split("/templates/tags/");
     presenceData.largeImageKey = "discordtemplates_logo";
     presenceData.details = "Searching by tag:";
     presenceData.state = `${tagName ? tagName : "Unknown"}`;
