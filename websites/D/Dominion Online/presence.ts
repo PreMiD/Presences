@@ -18,7 +18,7 @@ presence.on("UpdateData", () => {
     gameStartTime = 0;
     
     const isHost = document.querySelector(".rules-editor") !== null || document.querySelector("button[ng-click=\"$ctrl.editTable()\"]") !== null;
-    const members = document.querySelector(".participant-list-label").textContent;
+    const members = document.querySelector(".participant-list-label").textContent.trim();
 
     presenceData.details = `In Lobby: ${members}`;
     presenceData.state = isHost ? "Host" : null;
