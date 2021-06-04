@@ -31,22 +31,22 @@ presence.on("UpdateData", async () => {
       break;
 
     case "explore":
-      presenceData.details = "Exploring the explore page";
+      presenceData.details = "Exploring...";
       break;
 
     case "amvs":
-      presenceData.details = "Looking at AMVs";
+      presenceData.details = "Viewing AMVs";
       break;
 
     case "soundtracks":
-      presenceData.details = "Looking at music";
+      presenceData.details = "Viewing soundtracks";
       break;
 
     case "soundtrack":
       if (location[3] === "edit")
         presenceData.details = "Editing or uploading a soundtrack";
       else {
-        presenceData.details = `Viewing song: ${
+        presenceData.details = `Viewing soundtrack: ${
           document.getElementsByTagName("title")[0].innerHTML
         }`;
       }
@@ -110,7 +110,7 @@ presence.on("UpdateData", async () => {
       break;
 
     case "settings":
-      presenceData.details = "Setting settings";
+      presenceData.details = "Editing settings";
       break;
 
     case "notifications":
