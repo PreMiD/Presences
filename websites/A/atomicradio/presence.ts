@@ -6,70 +6,31 @@ const presence = new Presence({
     largeImageKey: "atr-logo",
     smallImageKey: "play-button"
   },
-  channelInfos = {
-    one: {
-      name: "",
-      listeners: 0,
-      artist: "LISTEN TO THE DIFFERENCE!",
-      title: "ATOMICRADIO",
-      start_at: 0,
-      end_at: 0
-    },
-    dance: {
-      name: "",
-      listeners: 0,
-      artist: "LISTEN TO THE DIFFERENCE!",
-      title: "ATOMICRADIO",
-      start_at: 0,
-      end_at: 0
-    },
-    trap: {
-      name: "",
-      listeners: 0,
-      artist: "LISTEN TO THE DIFFERENCE!",
-      title: "ATOMICRADIO",
-      start_at: 0,
-      end_at: 0
-    }
-  };
+  channelInfos: Map<string, Channel> = new Map();
+
+interface Channel {
+  name: string,
+  listeners: number,
+  artist: string,
+  title: string,
+  start_at: Date,
+  end_at: Date
+}
 
 function startWebSocket() {
-  const webSocket = new WebSocket("wss://api.atomicradio.eu/websocket");
+  const webSocket = new WebSocket("wss://status.atomicradio.eu/websocket");
 
   webSocket.onmessage = (message) => {
-    const data = JSON.parse(message.data);
-    switch (data.name) {
-      case "atr.one":
-        channelInfos.one = {
-          name: data.name,
-          listeners: data.listeners,
-          artist: data.song.artist,
-          title: data.song.title,
-          start_at: data.song.start_at,
-          end_at: data.song.end_at
-        };
-        break;
-      case "atr.dance":
-        channelInfos.dance = {
-          name: data.name,
-          listeners: data.listeners,
-          artist: data.song.artist,
-          title: data.song.title,
-          start_at: data.song.start_at,
-          end_at: data.song.end_at
-        };
-        break;
-      case "atr.trap":
-        channelInfos.trap = {
-          name: data.name,
-          listeners: data.listeners,
-          artist: data.song.artist,
-          title: data.song.title,
-          start_at: data.song.start_at,
-          end_at: data.song.end_at
-        };
-        break;
-    }
+    const data = JSON.parse(message.data), 
+      name = String(data.name).split(".")[1] ?? "one";
+    channelInfos.set(name, {
+      name: data.name,
+      listeners: data.listeners,
+      artist: data.song.artist,
+      title: data.song.title,
+      start_at: data.song.start_at,
+      end_at: data.song.end_at
+    });
   };
   webSocket.onclose = () => {
     setTimeout(() => {
@@ -80,33 +41,32 @@ function startWebSocket() {
 startWebSocket();
 
 async function getStationData(channel: string) {
-  let channelInfo = {
-    name: "",
+  let channelInfo: Channel = {
+    name: channel,
     listeners: 0,
     artist: "LISTEN TO THE DIFFERENCE!",
     title: "ATOMICRADIO",
-    start_at: 0,
-    end_at: 0
+    start_at: null,
+    end_at: null
   };
-  switch (channel) {
-    case "ONE":
-      channelInfo = channelInfos.one;
-      break;
-    case "DANCE":
-      channelInfo = channelInfos.dance;
-      break;
-    case "TRAP":
-      channelInfo = channelInfos.trap;
-      break;
+  const channelData = channelInfos.get(channel.toLowerCase());
+  if(channelData !== undefined) {
+    channelInfo = channelData;
+    presenceData.state = channelInfo.artist;
+    presenceData.details = channelInfo.title;
+    presenceData.startTimestamp = (new Date(channelInfo.start_at).getTime()/1000);
+    presenceData.endTimestamp = (new Date(channelInfo.end_at).getTime()/1000);
+    presenceData.smallImageText = `ATR.${channel} • ${channelInfo.listeners} listeners`;
+    presenceData.smallImageKey = "play-button";
+    presence.setActivity(presenceData, true);
+  } else {
+    presenceData.state = channelInfo.artist;
+    presenceData.details = channelInfo.title;
+    presenceData.smallImageText = `ATR.${channel} • 0 listeners`;
+    presenceData.smallImageKey = "play-button";
+    delete presenceData.startTimestamp;
+    presence.setActivity(presenceData, true);
   }
-
-  presenceData.state = channelInfo.artist;
-  presenceData.details = channelInfo.title;
-  presenceData.startTimestamp = channelInfo.start_at;
-  presenceData.endTimestamp = channelInfo.end_at;
-  presenceData.smallImageText = `ATR.${channel} • ${channelInfo.listeners} listeners`;
-  presenceData.smallImageKey = "play-button";
-  presence.setActivity(presenceData, true);
 }
 
 function clearPresenceData() {
