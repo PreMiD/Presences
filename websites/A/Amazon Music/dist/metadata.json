@@ -18,10 +18,11 @@
     "en": "Amazon Music is a music streaming platform and online music store operated by Amazon.com. Launched in public beta on September 25, 2007, in January 2008 it became the first music store to sell music without digital rights management from the four major music labels, as well as many independents.",
     "zh_CN": "Amazon Music是由Amazon.com经营的音乐媒体平台和在线音乐商店。",
     "zh_TW": "Amazon Music是由Amazon.com經營的音樂串流平台和在線音樂商店。",
-    "ga_IE": "Is ardán sruthú ceoil agus siopa ceoil ar líne é Amazon Music a oibríonn Amazon.com. Seoladh beta poiblí é ar 25 Meán Fómhair, 2007, i mí Eanáir 2008 agus ba é an chéad stór ceoil é chun ceol a dhíol gan bainistíocht ceart digiteach ó na ceithre mhór-lipéad ceoil, chomh maith le go leor neamhspleácha."
+    "ga_IE": "Is ardán sruthú ceoil agus siopa ceoil ar líne é Amazon Music a oibríonn Amazon.com. Seoladh beta poiblí é ar 25 Meán Fómhair, 2007, i mí Eanáir 2008 agus ba é an chéad stór ceoil é chun ceol a dhíol gan bainistíocht ceart digiteach ó na ceithre mhór-lipéad ceoil, chomh maith le go leor neamhspleácha.",
+    "nl": "Amazon Music is een muziekstreamingplatform en een online muziekwinkel die wordt beheerd door Amazon.com. Gelanceerd in openbare bèta op 25 september 2007, werd het in januari 2008 de eerste muziekwinkel die muziek verkocht zonder beheer van digitale rechten van de vier grote muzieklabels, evenals vele onafhankelijke."
   },
   "url": "music.amazon.com",
-  "version": "2.0.4",
+  "version": "2.0.6",
   "logo": "https://i.imgur.com/AUKbzxX.png",
   "thumbnail": "https://i.imgur.com/htSGR6k.png",
   "color": "#21293C",

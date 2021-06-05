@@ -11,10 +11,11 @@
   ],
   "service": "Showtime",
   "description": {
-    "en": "Showtime is an American premium television network that serves as the flagship service of the Showtime Networks subsidiary of CBS Corporation, which also owns sister services The Movie Channel and Flix."
+    "en": "Showtime is an American premium television network that serves as the flagship service of the Showtime Networks subsidiary of CBS Corporation, which also owns sister services The Movie Channel and Flix.",
+    "nl": "Showtime is een Amerikaans premium televisienetwerk dat fungeert als vlaggenschip van de Showtime Networks dochteronderneming van CBS Corporation, die ook zusterdiensten The Movie Channel en Flix bezit."
   },
   "url": "www.sho.com",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "logo": "https://i.imgur.com/NF61OBJ.png",
   "thumbnail": "https://i.imgur.com/PrH5IJL.png",
   "color": "#B20000",

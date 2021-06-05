@@ -8,7 +8,7 @@
   "category": "other",
   "logo": "https://i.imgur.com/V8TuIHR.jpg",
   "thumbnail": "https://i.imgur.com/utk2huo.png",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "color": "#3563ed",
   "tags": [
     "discord",
@@ -23,7 +23,8 @@
   "description": {
     "en": "discord-botlist.eu - your Discord Bot List! We give you the availability to apply your bot and give your bot a page on our website.",
     "de": "discord-botlist.eu - Ihre Discord Bot List! Wir geben Ihnen die Möglichkeit, Ihren Bot anzuwenden und Ihrem Bot eine Seite auf unserer Website zu geben.",
-    "fr": "discord-botlist.eu - votre liste de robots Discord! Nous vous donnons la possibilité d'appliquer votre bot et de donner à votre bot une page sur notre site Web."
+    "fr": "discord-botlist.eu - votre liste de robots Discord! Nous vous donnons la possibilité d'appliquer votre bot et de donner à votre bot une page sur notre site Web.",
+    "nl": "discord-botlist.eu - uw Discord Bot Lijst! Wij geven je de mogelijkheid om je bot aan te melden en je bot een pagina te geven op onze website."
   },
   "settings": [
     {

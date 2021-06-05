@@ -104,22 +104,21 @@ presence.on("UpdateData", () => {
           break;
         }
         case "/review/session": {
-          const available: number = +(document.querySelector(
-              "#available-count"
-            ) as HTMLElement).innerText,
-            completed: number = +(document.querySelector(
-              "#completed-count"
-            ) as HTMLElement).innerText,
-            correctRate: number = +(document.querySelector(
-              "#correct-rate"
-            ) as HTMLElement).innerText,
-            characterElement: HTMLDivElement = document.querySelector(
-              "#character"
-            ),
+          const available: number = +(
+              document.querySelector("#available-count") as HTMLElement
+            ).innerText,
+            completed: number = +(
+              document.querySelector("#completed-count") as HTMLElement
+            ).innerText,
+            correctRate: number = +(
+              document.querySelector("#correct-rate") as HTMLElement
+            ).innerText,
+            characterElement: HTMLDivElement =
+              document.querySelector("#character"),
             characterText: string = characterElement.innerText,
             characterType: string = characterElement.className,
-            questionType: string = document.querySelector("#question-type")
-              .className;
+            questionType: string =
+              document.querySelector("#question-type").className;
           details = "Doing Reviews";
           state = `${characterText} | ${capitalize(characterType)} ${capitalize(
             questionType
@@ -134,17 +133,16 @@ presence.on("UpdateData", () => {
         }
         case "/lesson/session": {
           try {
-            const characterText: string = document.querySelector("#character")
-                .textContent,
-              characterMeaning: string = document.querySelector("#meaning")
-                .textContent,
-              completed: number = +document.querySelector("#completed-count")
-                .textContent,
-              totalStats: NodeList = document.querySelectorAll(
-                "#stats li > span"
-              ),
-              characterType: string = document.querySelector("#main-info")
-                .className;
+            const characterText: string =
+                document.querySelector("#character").textContent,
+              characterMeaning: string =
+                document.querySelector("#meaning").textContent,
+              completed: number =
+                +document.querySelector("#completed-count").textContent,
+              totalStats: NodeList =
+                document.querySelectorAll("#stats li > span"),
+              characterType: string =
+                document.querySelector("#main-info").className;
             details = "Learning Lessons";
             state = `${characterText} - ${characterMeaning}`;
             smallImageKey = characterType;
@@ -155,17 +153,16 @@ presence.on("UpdateData", () => {
             }
           } catch (err) {
             // Likely practicing
-            const characterText: string = document.querySelector("#character")
-                .textContent,
-              characterType: string = document.querySelector("#main-info")
-                .className,
-              questionType: string = document.querySelector("#question-type")
-                .className,
-              completed: number = +document.querySelector("#completed-count")
-                .textContent,
-              totalStats: NodeList = document.querySelectorAll(
-                "#stats li > span"
-              );
+            const characterText: string =
+                document.querySelector("#character").textContent,
+              characterType: string =
+                document.querySelector("#main-info").className,
+              questionType: string =
+                document.querySelector("#question-type").className,
+              completed: number =
+                +document.querySelector("#completed-count").textContent,
+              totalStats: NodeList =
+                document.querySelectorAll("#stats li > span");
             details = "Practicing Lessons";
             state = `${characterText} | ${capitalize(
               characterType
@@ -178,15 +175,17 @@ presence.on("UpdateData", () => {
         case (pathname.match(/^\/(radicals|kanji|vocabulary)\/.+$/) || {})
           .input: {
           const type: string = pathname.split("/")[1],
-            text: string = (document.querySelector(
-              `.${type.replace(/s$/, "")}-icon`
-            ) as HTMLElement).innerText,
+            text: string = (
+              document.querySelector(
+                `.${type.replace(/s$/, "")}-icon`
+              ) as HTMLElement
+            ).innerText,
             textName: string = document.querySelector(
               `.${type.replace(/s$/, "")}-icon`
             ).parentNode.childNodes[4].textContent;
-          let textDescription: string = (document.querySelector(
-            ".mnemonic-content"
-          ) as HTMLElement).innerText;
+          let textDescription: string = (
+            document.querySelector(".mnemonic-content") as HTMLElement
+          ).innerText;
           if (textDescription.length >= 50) {
             textDescription = textDescription.substr(0, 50) + "...";
           }

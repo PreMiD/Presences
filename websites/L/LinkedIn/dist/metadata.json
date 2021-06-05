@@ -7,10 +7,11 @@
   "url": "www.linkedin.com",
   "description": {
     "en": "Manage your professional identity. Build and engage with your professional network. Access knowledge, insights and opportunities.",
-    "it": "Gestisci la tua identità professionale. Costruisci e interagisci con la tua rete professionale. Accedi a conoscenze, approfondimenti e opportunità."
+    "it": "Gestisci la tua identità professionale. Costruisci e interagisci con la tua rete professionale. Accedi a conoscenze, approfondimenti e opportunità.",
+    "nl": "Beheer uw professionele identiteit. Bouw en maak contact met uw professionele netwerk. Toegang krijgen tot kennis, inzichten en kansen."
   },
   "service": "LinkedIn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "logo": "https://i.imgur.com/2E9VuHw.png",
   "thumbnail": "https://i.imgur.com/b4LpEa9.png",
   "color": "#2867B2",

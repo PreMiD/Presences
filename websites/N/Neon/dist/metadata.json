@@ -14,7 +14,7 @@
   "category": "videos",
   "logo": "https://i.imgur.com/VdcSlNL.png",
   "thumbnail": "https://i.imgur.com/dO4SNtS.png",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "color": "#000000",
   "tags": [
     "videos",
@@ -25,7 +25,8 @@
     "neontv.co.nz"
   ],
   "description": {
-    "en": "Watch hit TV shows on-demand and rent blockbuster movies with NEON. No term contracts."
+    "en": "Watch hit TV shows on-demand and rent blockbuster movies with NEON. No term contracts.",
+    "nl": "Bekijk populaire TV shows on-demand en huur blockbuster films met NEON. Geen termijncontracten."
   },
   "settings": [
     {

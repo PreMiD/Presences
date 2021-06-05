@@ -10,10 +10,11 @@
   ],
   "description": {
     "en": "Sürat Kargo, delivery company providing services in Turkey.",
-    "tr": "Sürat Kargo, Türkiye'de hizmet veren bir kargo şirketi"
+    "tr": "Sürat Kargo, Türkiye'de hizmet veren bir kargo şirketi",
+    "nl": "Sürat Kargo, koeriersbedrijf dat diensten verleent in Turkije."
   },
   "service": "Sürat Kargo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/CBsEtCf.png",
   "thumbnail": "https://i.imgur.com/B7H16MR.png",
   "color": "#e33d2f",

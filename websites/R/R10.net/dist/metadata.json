@@ -9,7 +9,7 @@
     "www.r10.net",
     "r10.net"
   ],
-  "version": "1.3.4",
+  "version": "1.3.5",
   "logo": "https://albaysimsek.is-inside.me/9heFpa9o.png",
   "thumbnail": "https://albaysimsek.is-inside.me/4CVQzBSB.png",
   "color": "#1EFF12",
@@ -19,7 +19,8 @@
   ],
   "description": {
     "en": "R10.net Turkey is one of the popular webmaster forum.",
-    "tr": "R10.net, Türkiye'de popüler webmaster forumlarından birisidir."
+    "tr": "R10.net, Türkiye'de popüler webmaster forumlarından birisidir.",
+    "nl": "R10.net Turkije is een van de populaire webmasterforums."
   },
   "category": "other"
 }

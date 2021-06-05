@@ -6,13 +6,13 @@
   "service": "OKanime",
   "description": {
     "en": "OKanime is an anime streaming website with arabic subs/dubs",
-    "ar_SA": "موقع اوك انمي لمشاهدة و تحميل جميع حلقات الانمي و أفلام الانمي و اخر اخبار الانمي و أفضل الانميات مترجمة على ميقا و دريف"
+    "nl": "OKanime is een anime-streamingwebsite met Arabische subs / dubs"
   },
   "url": [
     "okanime.tv",
     "www.okanime.tv"
   ],
-  "version": "1.1.9",
+  "version": "1.1.10",
   "logo": "https://i.imgur.com/mhjMnnU.png",
   "thumbnail": "https://i.imgur.com/NAiM77y.png",
   "color": "#a5173b",

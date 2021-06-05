@@ -11,10 +11,11 @@
   ],
   "service": "Fanfiction",
   "description": {
-    "en": "FanFiction | unleash your imagination"
+    "en": "FanFiction | unleash your imagination",
+    "nl": "FanFiction | laat je fantasie de vrije loop"
   },
   "url": "www.fanfiction.net",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/bKSkTgk.png",
   "thumbnail": "https://i.imgur.com/5dQGIS1.png",
   "color": "#0000FF",

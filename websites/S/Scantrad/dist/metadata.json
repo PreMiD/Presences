@@ -6,12 +6,13 @@
   "service": "Scantrad",
   "description": {
     "en": "Scantrad is a free french website which allow you to read the latest scans of the moment.",
-    "fr": "Scantrad est un site internet français gratuit qui vous permet de lire les derniers scans du moment."
+    "fr": "Scantrad est un site internet français gratuit qui vous permet de lire les derniers scans du moment.",
+    "nl": "Scantrad is een gratis franse website waar u de laatste scans van het moment kunt lezen."
   },
   "url": "scantrad.net",
-  "version": "1.0.2",
+  "version": "2.0.1",
   "logo": "https://i.imgur.com/SJmPvgX.png",
-  "thumbnail": "https://i.imgur.com/tpoyjHJ.png",
+  "thumbnail": "https://i.imgur.com/BMhCrx7.png",
   "color": "#cf4104",
   "tags": [
     "scantrad",

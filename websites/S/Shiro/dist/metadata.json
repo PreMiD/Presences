@@ -4,10 +4,11 @@
     "name": "SlowLife",
     "id": "374905512661221377"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "service": "Shiro",
   "description": {
-    "en": "If you’re looking for the latest Anime videos of various genres, Shiro is exactly what you need. Here you will find a great collection of Anime videos. Browse our catalog to find the most exciting and popular anime."
+    "en": "If you’re looking for the latest Anime videos of various genres, Shiro is exactly what you need. Here you will find a great collection of Anime videos. Browse our catalog to find the most exciting and popular anime.",
+    "nl": "Als u op zoek bent naar de nieuwste Anime video's van verschillende genres, Shiro is precies wat je nodig hebt. Hier vindt u een grote collectie van Anime video's. Blader door onze catalogus om de meest opwindende en populaire anime te vinden."
   },
   "logo": "https://i.imgur.com/wK8qos3.png",
   "thumbnail": "https://i.imgur.com/1HnxUmv.png",

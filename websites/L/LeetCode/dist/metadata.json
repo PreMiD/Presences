@@ -6,10 +6,11 @@
   },
   "service": "LeetCode",
   "description": {
-    "en": "Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview."
+    "en": "Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.",
+    "nl": "Verbeter uw codeervaardigheden en krijg snel een baan. Dit is de beste plek om uw kennis uit te breiden en u voor te bereiden op uw volgende sollicitatiegesprek."
   },
   "url": "leetcode.com",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "logo": "https://i.imgur.com/v6f2jQA.png",
   "thumbnail": "https://i.imgur.com/LHKxFlb.png",
   "color": "#f1a21a",

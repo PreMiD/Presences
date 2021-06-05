@@ -6,10 +6,11 @@
   "service": "Game Jolt",
   "description": {
     "en": "Game Jolt is a hosting service for freeware and commercial video games with social functions.",
-    "tr": "Game Jolt, bağımsız yapımcıların oyunlarını ücretli veya ücretsiz bir şekilde insanlara tanıtabildiği platformdur."
+    "tr": "Game Jolt, bağımsız yapımcıların oyunlarını ücretli veya ücretsiz bir şekilde insanlara tanıtabildiği platformdur.",
+    "nl": "Game Jolt is een hostingdienst voor freeware en commerciële videospelletjes met sociale functies."
   },
   "url": "gamejolt.com",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://premid.is-inside.me/EOMHkNul.png",
   "thumbnail": "https://premid.is-inside.me/ncJH8KMV.png",
   "color": "#191919",

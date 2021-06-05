@@ -11,10 +11,12 @@ presence.on("UpdateData", async () => {
       ? true
       : false;
   if (gameLink) {
-    const user = document.querySelector("div.user.proprio .dados span")
-        .textContent,
-      points = document.querySelector("div.user.proprio .dados pre")
-        .textContent,
+    const user = document.querySelector(
+        "div.user.proprio .dados span"
+      ).textContent,
+      points = document.querySelector(
+        "div.user.proprio .dados pre"
+      ).textContent,
       lobby = document.querySelector("title").innerText;
     data.details = user + " - " + points.split("pontos")[0].trim() + " points";
     data.state = "Lobby: " + lobby.split("-")[0];

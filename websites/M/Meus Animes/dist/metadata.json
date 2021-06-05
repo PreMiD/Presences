@@ -7,10 +7,11 @@
   "description": {
     "en": "One of the most clean websites for watch animes in Brazil",
     "pt": "Um dos sites mais limpos para assistir animes no Brasil",
-    "pt_BR": "Um dos sites mais limpos para assistir animes no Brasil"
+    "pt_BR": "Um dos sites mais limpos para assistir animes no Brasil",
+    "nl": "Een van de meest schone websites voor het kijken van anime in Brazilië"
   },
   "url": "meusanimes.com",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "logo": "https://i.imgur.com/IJ9ufN3.png",
   "thumbnail": "https://i.imgur.com/qzN7gbO.png",
   "color": "#816bab",

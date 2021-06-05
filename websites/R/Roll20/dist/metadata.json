@@ -7,7 +7,8 @@
   "service": "Roll20",
   "description": {
     "en": "Play games anywhere. Share them with anyone. With Roll20 as your virtual tabletop, your adventures are limitless.",
-    "pl": "Graj tam gdzie chcesz. Graj z kim chcesz. Z wirtualnym stołem Roll20, możesz prowadzić prowadzić swoje przygody bez żadnych limitów."
+    "pl": "Graj tam gdzie chcesz. Graj z kim chcesz. Z wirtualnym stołem Roll20, możesz prowadzić prowadzić swoje przygody bez żadnych limitów.",
+    "nl": "Speel overal spelletjes. Deel ze met iedereen. Met Roll20 als uw virtuele tafelblad, zijn uw avonturen grenzeloos."
   },
   "url": [
     "roll20.net",
@@ -16,7 +17,7 @@
     "blog.roll20.net",
     "wiki.roll20.net"
   ],
-  "version": "1.0.1",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/x7iMqpv.png",
   "thumbnail": "https://i.imgur.com/NfgSJAF.png",
   "color": "#af1f8e",

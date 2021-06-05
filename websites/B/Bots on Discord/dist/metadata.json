@@ -6,10 +6,11 @@
   "service": "Bots on Discord",
   "description": {
     "en": "Bots on Discord is listing discord bots.",
-    "tr": "Bots on Discord, disscord botlarını listeler."
+    "tr": "Bots on Discord, disscord botlarını listeler.",
+    "nl": "Bots on Discord maakt een lijst van bots."
   },
   "url": "bots.ondiscord.xyz",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://imgur.com/xHbTLj5.png",
   "thumbnail": "https://i.imgur.com/TZOWrzr.png",
   "color": "#089BEF",

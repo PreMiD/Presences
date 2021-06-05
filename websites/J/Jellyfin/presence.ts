@@ -311,9 +311,8 @@ async function handleAudioPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp = presence.getTimestampsfromMedia(
-          audioElem
-        )[1];
+        presenceData.endTimestamp =
+          presence.getTimestampsfromMedia(audioElem)[1];
       }
 
       // paused
@@ -372,8 +371,9 @@ function getUserId(): string {
   try {
     return ApiClient["_currentUser"]["Id"];
   } catch (e) {
-    const servers = JSON.parse(localStorage.getItem("jellyfin_credentials"))
-      .Servers;
+    const servers = JSON.parse(
+      localStorage.getItem("jellyfin_credentials")
+    ).Servers;
 
     // server id available on browser location
     if (location.hash.indexOf("?") > 0) {
@@ -406,16 +406,12 @@ const media: Record<string, string | MediaInfo> = {};
  */
 async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
   const pending = "pending";
-  if (
-    media[itemId] &&
-    media[itemId] !== pending
-  ) {
+  if (media[itemId] && media[itemId] !== pending) {
     return media[itemId];
   }
 
   media[itemId] = pending;
-  const basePath =
-    location.pathname.replace(
+  const basePath = location.pathname.replace(
       location.pathname.split("/").slice(-2).join("/"),
       ""
     ),
@@ -427,7 +423,7 @@ async function obtainMediaInfo(itemId: string): Promise<string | MediaInfo> {
           `MediaBrowser Client="${ApiClient["_appName"]}",` +
           `Device="${ApiClient["_deviceName"]}",` +
           `DeviceId="${ApiClient["_deviceId"]}",` +
-          `Version="${ApiClient["_appVersion"]}",`+
+          `Version="${ApiClient["_appVersion"]}",` +
           `Token="${ApiClient["_serverInfo"]["AccessToken"]}"`
       }
     }),
@@ -508,9 +504,8 @@ async function handleVideoPlayback(): Promise<void> {
       presenceData.smallImageText = "Playing";
 
       if (await presence.getSetting("showMediaTimestamps")) {
-        presenceData.endTimestamp = presence.getTimestampsfromMedia(
-          videoPlayerElem
-        )[1];
+        presenceData.endTimestamp =
+          presence.getTimestampsfromMedia(videoPlayerElem)[1];
       }
 
       // paused

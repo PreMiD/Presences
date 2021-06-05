@@ -5,10 +5,11 @@
   },
   "service": "MEGA",
   "description": {
-    "en": "Secure Cloud Storage and Communication. Privacy by Design."
+    "en": "Secure Cloud Storage and Communication. Privacy by Design.",
+    "nl": "Veilige cloudopslag en communicatie. Privacy door ontwerp."
   },
   "url": "mega.nz",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/ybsqV7R.png",
   "thumbnail": "https://i.imgur.com/fqgcQtf.png",
   "color": "#d90007",

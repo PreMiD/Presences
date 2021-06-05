@@ -6,10 +6,11 @@
   "service": "BotsBase",
   "description": {
     "tr": "Discord botlarını keşfedebileceğiniz ve botlarınızı paylaşabileceğiniz bir evren!",
-    "en": "A universe where you can discover Discord bots and share your bots!"
+    "en": "A universe where you can discover Discord bots and share your bots!",
+    "nl": "Een universum waar je Discord bots kunt ontdekken en je bots kunt delen!"
   },
   "url": "botsbase.net",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/9GaFIp6.png",
   "thumbnail": "https://i.imgur.com/v0AQBX3.png",
   "color": "#2c2f33",

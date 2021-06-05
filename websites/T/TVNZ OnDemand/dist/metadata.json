@@ -8,10 +8,11 @@
     "login.tech.tvnz.co.nz"
   ],
   "description": {
-    "en": "TVNZ OnDemand. We've rounded up the best of the best for you. Finding your favourite TVNZ shows and discovering new ones has never been easier."
+    "en": "TVNZ OnDemand. We've rounded up the best of the best for you. Finding your favourite TVNZ shows and discovering new ones has never been easier.",
+    "nl": "TVNZ OnDemand. We hebben het beste van het beste voor je op een rijtje gezet. Het vinden van uw favoriete TVNZ-programma's en het ontdekken van nieuwe is nog nooit zo eenvoudig geweest."
   },
   "service": "TVNZ OnDemand",
-  "version": "1.3.4",
+  "version": "1.3.6",
   "logo": "https://i.imgur.com/LCjuLjp.png",
   "thumbnail": "https://i.imgur.com/amcfvyV.png",
   "color": "#167EF5",

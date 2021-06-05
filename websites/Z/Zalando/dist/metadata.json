@@ -11,14 +11,11 @@
     "ga_IE": "Zalando | Ceannaigh bróga ar líne: Bróga ó na brandaí is fearr."
   },
   "url": "www.zalando.com",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/APLPI4i.png",
   "thumbnail": "https://i.imgur.com/lFWmRc9.png",
   "color": "#f47127",
-  "tags": [
-    "shop",
-    "fashion"
-  ],
+  "tags": ["shop", "fashion"],
   "category": "other",
   "regExp": "([a-z0-9-]+[.])*zalando([.][a-z]+)+[/]"
 }

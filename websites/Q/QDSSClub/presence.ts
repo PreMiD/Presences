@@ -148,8 +148,8 @@ presence.on("UpdateData", async () => {
         ""
       );
   } else if (document.location.pathname.startsWith("/forums/discussion/")) {
-    const discussionname = document.querySelector(".text-center h1")
-      .textContent;
+    const discussionname =
+      document.querySelector(".text-center h1").textContent;
     presenceData.details = "Legge la discussione:";
     presenceData.state = discussionname;
   } else if (document.location.pathname.startsWith("/articolo")) {
