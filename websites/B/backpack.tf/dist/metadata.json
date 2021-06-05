@@ -1,1 +1,20 @@
-File and directory created
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Backpack.tf",
+  "author": {
+    "name": "a＠a",
+    "id": "405028899798384640"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/iHCD7nN.png",
+  "thumbnail": "https://i.imgur.com/uQCICM4.png",
+  "version": "1.0.0",
+  "color": "#757575",
+  "tags": [
+    "website"
+  ],
+  "url": "backpack.tf",
+  "description": {
+    "en": "The PriMiD Presence for Backpack.tf!"
+  }
+}
