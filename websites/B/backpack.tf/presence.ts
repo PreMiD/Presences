@@ -55,9 +55,56 @@ presence.on("UpdateData", async () => {
     } else if (document.location.pathname.includes("/premium/subscribe")) {
       presenceData.details = "Viewing Premium subscription";
     }
-    else if (document.location.pathname.includes("/classifieds")) {
+    } else if (document.location.pathname.includes("/pricelist")) {
+      presenceData.details = "Viewing Community Pricelist";
+      presenceData.state = "Pricegrid view";
+    }
+    else if (document.location.pathname.includes("/spreadsheet")) {
+      presenceData.details = "Viewing Community Pricelist";
+      presenceData.state = "Spreadsheet view";
+    }
+    else if (document.location.pathname.includes("/vote")) {
+      presenceData.details = "Browsing Suggestions";
+    }
+    else if (document.location.pathname.includes("/latest")) {
+      presenceData.details = "Viewing the Latest Price Updates";
+    }
+    else if (document.location.pathname.includes("/unusuals")) {
+      presenceData.details = "Viewing Unusual Pricelist";
+      presenceData.state = "Browsing by Item";
+    }
+    else if (document.location.pathname.includes("/effects")) {
+      presenceData.details = "Viewing Unusual Pricelist";
+      presenceData.state = "Browse by Effect";
+    }
+    else if (document.location.pathname.includes("/market")) {
       presenceData.details = "Searching through:";
-      presenceData.state = "Classifieds";
+      presenceData.state = "Steam Community Market Pricelist";
+    }
+    else if (document.location.pathname.includes("/classifieds?steamid")) {
+      presenceData.details = "Viewing Cassifieds of:";
+       title = document.querySelector(
+         "#search-crumbs > a"
+         );
+       presenceData.state = title.innerText;
+     }
+     else if (document.location.pathname.includes("/calculator")) {
+      presenceData.details = "Useing Calculator";
+    }
+    else if (document.location.pathname.includes("/top/backpacks")) {
+      presenceData.details = "Viewing Top Backpacks";
+    }
+    else if (document.location.pathname.includes("/top/donators")) {
+      presenceData.details = "Viewing Top Donators";
+    }
+    else if (document.location.pathname.includes("/top/generous")) {
+      presenceData.details = "Viewing Top Gifters";
+    }
+    else if (document.location.pathname.includes("/top/contributors")) {
+      presenceData.details = "Viewing Top Contributors";
+    }
+    else if (document.location.pathname.includes("/top/accurate")) {
+      presenceData.details = "Viewing The Most Accurate Users";
     }
   }
   if (presenceData.details == null) {
