@@ -18,7 +18,7 @@ interface Channel {
 }
 
 function startWebSocket() {
-  const webSocket = new WebSocket("wss://status.atomicradio.eu/websocket");
+  const webSocket = new WebSocket("wss://api.atomicradio.eu/websocket");
 
   webSocket.onmessage = (message) => {
     const data = JSON.parse(message.data), 
