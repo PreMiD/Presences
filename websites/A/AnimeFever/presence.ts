@@ -104,8 +104,9 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
           const animeData = getAnimeEntity(),
             animeEpisode = getAnimeEpsiodeEntity();
           if (!animeData) return data;
-          const videoInstance =
-              document.querySelector<HTMLVideoElement>(`.jw-wrapper video`),
+          const videoInstance = document.querySelector<HTMLVideoElement>(
+              `.jw-wrapper video`
+            ),
             videoTime = context.getTimestamps(
               videoInstance.currentTime,
               videoInstance.duration
@@ -146,46 +147,14 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
         middleware: (ref) => !!ref.location.pathname.match(/^\/series$/i),
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
-          const searchSidebar = document.querySelector(`.uk-filter-content`);
-          if (!searchSidebar) return data;
-          const searchedValue =
-              searchSidebar.querySelector<HTMLInputElement>(
-                `input[type="text"]`
-              )?.value,
-            isExclude =
-              searchSidebar
-                .querySelector<HTMLInputElement>(
-                  `.uk-section-content:nth-child(2) input[type="text"]`
-                )
-                ?.value.toLowerCase() === "exclude";
-          if (!searchedValue) {
-            const genres = Array.from(
-              searchSidebar.querySelectorAll(
-                isExclude
-                  ? `#genre-container > li:nth-child(2) .el-checkbox`
-                  : `#genre-container .el-checkbox`
-              )
-            );
-            let activatedGenres: string[] = [];
-            if (
-              genres.length > 0 &&
-              (activatedGenres = genres
-                .filter((x) => x.classList.contains("is-checked"))
-                .map((x) => x.querySelector(".el-checkbox__label").textContent))
-                .length > 0
-            ) {
-              data.state = `${isExclude ? "Exclude - " : ""} ${activatedGenres
-                .slice(0, 5)
-                .join(", ")}`;
-            } else {
-              data.state = "-";
-            }
-          } else {
-            data.state = searchedValue;
-          }
+          const searchedValue = document.querySelector<HTMLInputElement>(
+            `.shows-content input[type="text"]`
+          )?.value;
+          if (searchedValue?.trim().length > 0) data.state = searchedValue;
+
+          data.details = data.state ? strings.searchFor : strings.searching;
           data.smallImageText = strings.searching;
           data.smallImageKey = images.BROWSE;
-          data.details = strings.searchFor;
           return data;
         }
       },
@@ -201,7 +170,7 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
         }
       },
       {
-        middleware: (ref) => !!ref.location.hostname.match(/animefever.tv/i),
+        middleware: () => true,
         exec: (context, data, { strings }: ExecutionArguments) => {
           if (!context) return null;
           data.details = strings.browsing;
@@ -266,8 +235,6 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
             });
           } else {
             if (data.details) presence.setActivity(data);
-            if (data.buttons && data.buttons.length === 0) delete data.buttons;
-            else data.buttons = data.buttons?.slice(0, 2);
           }
           return data;
         })
