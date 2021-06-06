@@ -1,7 +1,7 @@
 {
   "author": {
     "name": "Alexx",
-    "id": "604182077088202784"
+    "id": "604453403640463371"
   },
   "url": "client.foldingathome.org",
   "description": {
@@ -9,7 +9,7 @@
     "nl": "Folding@home is een project gericht op onderzoek naar ziektes. De problemen die we oplossen vereisen zo veel computerberekeningen - en we hebben jouw hulp nodig om de remedies te vinden! Bestrijd ziekten samen met ons."
   },
   "service": "Folding@home",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "logo": "https://i.imgur.com/V6FvA5I.png",
   "thumbnail": "https://i.imgur.com/5TNqcl6.png",
   "color": "#BFFF00",

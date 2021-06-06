@@ -1,7 +1,7 @@
 {
   "author": {
     "name": "Alexx",
-    "id": "604182077088202784"
+    "id": "604453403640463371"
   },
   "service": "Deno",
   "description": {
@@ -12,7 +12,7 @@
     "deno.land",
     "doc.deno.land"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/0pNFT2o.png",
   "thumbnail": "https://i.imgur.com/DV0t6Tx.png",
   "color": "#f9f9f9",
