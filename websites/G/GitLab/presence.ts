@@ -21,8 +21,7 @@ presence.on("UpdateData", async () => {
      else if (document.location.pathname.includes("/explore")) {
       if (document.location.pathname === "/explore/snippets") presenceData.details = "Exploring Snippets";
       else presenceData.details = "Exploring projects";
-    } 
-    else if (document.location.pathname === "/dashboard/groups") presenceData.details = "Viewing Groups";
+    } else if (document.location.pathname === "/dashboard/groups") presenceData.details = "Viewing Groups";
 
     else if (document.location.pathname === "/dashboard/activity")presenceData.details = "Viewing Activity";
 
@@ -46,7 +45,6 @@ presence.on("UpdateData", async () => {
 
     else if (document.location.pathname === "/users/sign_in") presenceData.details = "Signning in or Registering";
 
-
     else if (document.location.pathname === "/search") {
       title = document.querySelector(
         "#dashboard_search"
@@ -65,8 +63,7 @@ presence.on("UpdateData", async () => {
       if((presenceprivate as HTMLTextAreaElement).title.startsWith("Private -") && lock) {
         presenceData.details = "Viewing a Private Presence";
         presenceData.state = "or Private Group";
-      }
-      else{
+      } else {
         if (title && owner) {
           presenceData.details = title.innerText;
           presenceData.state = owner.innerText;
