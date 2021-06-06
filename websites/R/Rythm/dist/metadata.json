@@ -10,7 +10,7 @@
     "nl": "Rythm maakt het mogelijk om naar je favoriete muziek te luisteren met al je vrienden. Voeg het vandaag nog toe aan Discord en begin met luisteren!"
   },
   "url": "rythm.fm",
-  "version": "2.0.5",
+  "version": "2.1.3",
   "logo": "https://i.imgur.com/lqwAK0n.png",
   "thumbnail": "https://i.imgur.com/NqYLjmB.jpg",
   "color": "#fb0f32",
@@ -32,6 +32,15 @@
       "title": "Show usernames",
       "icon": "fas fa-user",
       "value": true
+    },
+    {
+      "id": "nicknames",
+      "title": "Show nicknames",
+      "icon": "fas fa-pencil",
+      "value": false,
+      "if": {
+        "usernames": true
+      }
     },
     {
       "id": "server-details",

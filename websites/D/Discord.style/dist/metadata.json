@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Discord.style",
+  "author": {
+    "name": "Anaxes",
+    "id": "567885938160697377"
+  },
+  "category": "socials",
+  "logo": "https://i.imgur.com/1wKlRwf.png",
+  "thumbnail": "https://i.imgur.com/pigr2GZ.jpg",
+  "version": "1.0.3",
+  "color": "#1f2131",
+  "tags": [
+    "discord",
+    "discord-templates"
+  ],
+  "url": "www.discord.style",
+  "description": {
+    "en": "Online library for finding and sharing free Discord Templates. Upload your own Discord Template and collect votes!"
+  },
+  "settings": [
+    {
+      "id": "timestamp",
+      "title": "Show Timestamps",
+      "icon": "fad fa-stopwatch",
+      "value": true
+    },
+    {
+      "id": "buttons",
+      "title": "Show Buttons",
+      "icon": "fas fa-compress-arrows-alt",
+      "value": true
+    }
+  ]
+}
