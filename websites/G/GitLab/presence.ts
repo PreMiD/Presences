@@ -7,8 +7,7 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
-  };
-  const lock = await presence.getSetting("lock");
+  }, lock = await presence.getSetting("lock");
   presenceprivate = document.querySelector("div.d-inline-flex.align-items-baseline > h1 > span");
   if (window.location.hostname == "gitlab.com") {
     if (
