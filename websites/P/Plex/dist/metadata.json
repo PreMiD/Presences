@@ -12,9 +12,9 @@
   "url": "www.plex.tv",
   "version": "1.7.3",
   "logo": "https://i.imgur.com/FPxlGGE.png",
-  "thumbnail": "https://files.vasc.dev/source/DU7ayUCih.png",
-  "color": "#fff",
-  "tags": ["te", "music"],
+  "thumbnail": "https://i.imgur.com/DQvN7Nx.png",
+  "color": "#d78c14",
+  "tags": ["video", "music"],
   "category": "videos",
   "regExp": "(([a-z0-9-]+[.])*plex[.]tv[/])|( *[/]web[/]index[.]html#)"
 }
