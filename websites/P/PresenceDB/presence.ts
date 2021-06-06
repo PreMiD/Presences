@@ -3,7 +3,7 @@ const presence = new Presence({
     }),
     language = window.navigator.language;
 
-function getString(name: String) {
+function getTranslation(name: String) {
     switch(name) {
         case "home":
             switch(language) {
@@ -47,39 +47,44 @@ function getString(name: String) {
                 default:
                     return "Browsing settings page"
             }
+        case "view":
+            switch(language) {
+                case "de":
+                    return "Seite anzeigen"
+                default:
+                    return "View page"
+            }
     }
 }
 
 presence.on("UpdateData", async () => {
     const presenceData: PresenceData = {
         largeImageKey: "logo",
-        smallImageKey: "logo",
-        smallImageText: "PresenceDB.com", //The text which is displayed when hovering over the small image
         startTimestamp: new Date().getTime(), //The unix epoch timestamp for when to start counting from
         buttons: [
             {
-                label: "View page",
+                label: getTranslation("view"),
                 url: window.location.href
             }
         ]
     }; /*Optionally you can set a largeImageKey here and change the rest as variable subproperties, for example presenceSata.type = "blahblah"; type examples: details, state, etc.*/
 
     if (window.location.pathname == "/") {
-        presenceData.details = getString("home");
+        presenceData.details = getTranslation("home");
     }  else if (window.location.pathname == "/search") {
-        presenceData.details = getString("search");
+        presenceData.details = getTranslation("search");
     } else if (window.location.pathname == "/faq") {
-        presenceData.details = getString("faq");
+        presenceData.details = getTranslation("faq");
     } else if (window.location.pathname.includes("/activity/")) {
         const activityName = document.querySelector("#__next > div > main > div > h1").innerHTML;
-        presenceData.details = getString("activity");
+        presenceData.details = getTranslation("activity");
         presenceData.state = activityName;
     } else if (window.location.pathname.includes("/user/")) {
         const username = document.querySelector("#__next > div > main > div > h1").innerHTML.split("<")[0]; // We use split bc I do not want to display the img tag in the presence
-        presenceData.details = getString("user");
+        presenceData.details = getTranslation("user");
         presenceData.state = username;
     } else if (window.location.pathname.includes("/settings")) {
-        presenceData.details = getString("settings");
+        presenceData.details = getTranslation("settings");
     }
 
     if (presenceData.details == null) {
