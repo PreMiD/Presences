@@ -62,7 +62,7 @@ presence.on("UpdateData", async () => {
       owner = document.querySelector(
         "body > div.layout-page.page-with-contextual-sidebar > div.content-wrapper > div.alert-wrapper > nav > div > div > ul > li:nth-child(1) > a"
       ) as HTMLTextAreaElement;
-      if((presenceprivate as HTMLTextAreaElement).title.startsWith("Private -") && lock){
+      if((presenceprivate as HTMLTextAreaElement).title.startsWith("Private -") && lock) {
         presenceData.details = "Viewing a Private Presence";
         presenceData.state = "or Private Group";
       }
@@ -84,53 +84,45 @@ presence.on("UpdateData", async () => {
       }
     }
   } else if (window.location.hostname === "about.gitlab.com") {
-    if (document.location.pathname === "/") {
-      presenceData.details = "Viewing Home Page";
-    } else if (document.location.pathname === "/stages-devops-lifecycle/") {
-      presenceData.details = "Viewing DevOps Lifecycle";
-    } else if (document.location.pathname === "/services/") {
-      presenceData.details = "Viewing Profesional Services";
-    }
+    if (document.location.pathname === "/") presenceData.details = "Viewing Home Page";
+    else if (document.location.pathname === "/stages-devops-lifecycle/") presenceData.details = "Viewing DevOps Lifecycle";
+    else if (document.location.pathname === "/services/") presenceData.details = "Viewing Profesional Services";
     title = document.querySelector(
       "body > div.wrapper.gitlab-ee-page > div.image-title > div > div > h1"
     );
-    if (title) presenceData.details = "Viewing " + title.textContent;
+    if (title) presenceData.details = `Viewing ${title.textContent}`;
 
     else if (title === null) {
       title = document.querySelector("body > div.blank-header > div > h1");
-      if (title) {
-        presenceData.details = "Viewing " + title.textContent;
-        
-      } else if (title === null) {
+      if (title) presenceData.details = `Viewing ${title.textContent}`;
+        else if (title === null) {
         title = document.querySelector("body > div.wrapper > div > h1");
-        if (title) presenceData.details = "Viewing " + title.textContent;
+        if (title) presenceData.details = `Viewing ${title.textContent}`;
         else if (title === null) {
           title = document.querySelector(
             "body > div.wrapper.blog-landing > div.blog-landing-content > div.blog-hero > div > a > h2"
           );
-          if (title) presenceData.details = "Viewing " + title.textContent;
+          if (title) presenceData.details = `Viewing ${title.textContent}`;
             else if (title === null) {
             title = document.querySelector(
               "body > div.blog.article > div.cover > div > div > h1"
             );
-            if (title) presenceData.details = "Viewing " + title.textContent;
+            if (title) presenceData.details = `Viewing ${title.textContent}`;
             else {
               title = document.querySelector(
                 "body > div.reseller-hero.text-center > div > h1"
               );
-              if (title) presenceData.details = "Viewing " + title.textContent;
+              if (title) presenceData.details = `Viewing ${title.textContent}`;
             }
           }
         }
       } else presenceData.details = "Viewing Solutions";
     } else if (document.location.pathname === "/services/implementation/") {
       title = document.querySelector("body > div.wrapper > div > h1");
-      presenceData.details = "Viewing " + title.textContent;
+      presenceData.details = `Viewing ${title.textContent}`;
       
     } else presenceData.details = "Viewing Unknown";
-  } else {
-    presenceData.details = "Viewing Unknown";
-  }
+  } else presenceData.details = "Viewing Unknown";
   if (presenceData.details === null) {
     //This will fire if you do not set presence details
     presence.setTrayTitle();
