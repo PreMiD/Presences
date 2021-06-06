@@ -15,7 +15,7 @@ let lastPlaybackState = null,
   playback: boolean,
   browsingStamp = Math.floor(Date.now() / 1000);
 
-if (lastPlaybackState != playback) {
+if (lastPlaybackState !== playback) {
   lastPlaybackState = playback;
   browsingStamp = Math.floor(Date.now() / 1000);
 }
@@ -120,7 +120,7 @@ presence.on("UpdateData", async () => {
       metadata = await obj.items[0],
       episod = `E${metadata.episode_metadata.episode_number} - ${metadata.title}`;
 
-      type = metadata.episode_metadata.is_dubbed == true ? " (Dub)" : " (Sub)";
+      type = metadata.episode_metadata.is_dubbed === true ? " (Dub)" : " (Sub)";
       videoTitle = metadata.episode_metadata.series_title + type;
       season = `S${metadata.episode_metadata.season_number}`;
       episode = season + episod;
@@ -128,7 +128,7 @@ presence.on("UpdateData", async () => {
       videoTitle = document.querySelector(".ellipsis .text-link span").innerHTML;
       const episod = document.querySelectorAll("#showmedia_about_media h4"),
         epName = document.querySelector("h4#showmedia_about_name");
-      episode = episod[1].innerHTML + " - " + epName.innerHTML;
+      episode = `${episod[1].innerHTML} - ${epName.innerHTML}`;
     }
     const timestamps = presence.getTimestamps(
       Math.floor(currentTime),
