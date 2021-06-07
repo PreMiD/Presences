@@ -13,8 +13,8 @@ interface Channel {
   listeners: number,
   artist: string,
   title: string,
-  start_at: Date,
-  end_at: Date
+  start_at: Date | number,
+  end_at: Date | number
 }
 
 function startWebSocket() {
@@ -22,7 +22,7 @@ function startWebSocket() {
 
   webSocket.onmessage = (message) => {
     const data = JSON.parse(message.data), 
-      name = String(data.name).split(".")[1] ?? "one";
+      name = String(data.name).split(".")[1];
     channelInfos.set(name, {
       name: data.name,
       listeners: data.listeners,
@@ -54,8 +54,13 @@ async function getStationData(channel: string) {
     channelInfo = channelData;
     presenceData.state = channelInfo.artist;
     presenceData.details = channelInfo.title;
-    presenceData.startTimestamp = (new Date(channelInfo.start_at).getTime()/1000);
-    presenceData.endTimestamp = (new Date(channelInfo.end_at).getTime()/1000);
+    if(channelInfo.start_at instanceof Date || channelInfo.end_at instanceof Date) {
+      presenceData.startTimestamp = (new Date(channelInfo.start_at).getTime()/1000);
+      presenceData.endTimestamp = (new Date(channelInfo.end_at).getTime()/1000);
+    } else {
+      presenceData.startTimestamp = channelInfo.start_at;
+      presenceData.endTimestamp = channelInfo.end_at;
+    }
     presenceData.smallImageText = `ATR.${channel} • ${channelInfo.listeners} listeners`;
     presenceData.smallImageKey = "play-button";
     presence.setActivity(presenceData, true);
@@ -100,7 +105,7 @@ presence.on("UpdateData", async () => {
       document.getElementById("Player_Station_Name").innerText
     ).split(".")[1];
   let playerOpen = false;
-  if (playBar.style.display == "block") {
+  if (playBar.style.display === "block") {
     playerOpen = true;
     if (playerButtonState.className.includes("fa-play")) {
       playerOpen = false;
@@ -112,7 +117,7 @@ presence.on("UpdateData", async () => {
   } else {
     clearPresenceData();
     if (
-      window.location.pathname == "/" ||
+      window.location.pathname === "/" ||
       window.location.pathname.startsWith("/home")
     ) {
       presenceData.details = "Browsing...";
