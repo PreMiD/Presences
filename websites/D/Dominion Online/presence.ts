@@ -2,7 +2,8 @@ const presence = new Presence({
   clientId: "849684658563055627"
 });
 
-const generalStartTime = Math.floor(Date.now() / 1000);
+const logRegex = /^.+ - \w+$/,
+  generalStartTime = Math.floor(Date.now() / 1000);
 let lobbyStartTime: number,
   gameStartTime: number;
 
@@ -36,7 +37,7 @@ presence.on("UpdateData", () => {
       const logText = logs[i].textContent.trim();
 
       // Append turn
-      if (/^.+ - \w+$/.test(logText)) {
+      if (logRegex.test(logText)) {
         presenceData.state = logText;
         break;
       }
