@@ -1,8 +1,7 @@
 const presence = new Presence({
   clientId: "849684658563055627"
-});
-
-const logRegex = /^.+ - \w+$/,
+}),
+  logRegex = /^.+ - \w+$/,
   generalStartTime = Math.floor(Date.now() / 1000);
 let lobbyStartTime: number,
   gameStartTime: number;
