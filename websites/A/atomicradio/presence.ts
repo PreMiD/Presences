@@ -13,8 +13,8 @@ interface Channel {
   listeners: number,
   artist: string,
   title: string,
-  start_at: Date | number,
-  end_at: Date | number
+  startAt: Date | number,
+  endAt: Date | number
 }
 
 function startWebSocket() {
@@ -22,14 +22,14 @@ function startWebSocket() {
 
   webSocket.onmessage = (message) => {
     const data = JSON.parse(message.data), 
-      name = String(data.name).split(".")[1];
+      [, name] = String(data.name).split(".");
     channelInfos.set(name, {
       name: data.name,
       listeners: data.listeners,
       artist: data.song.artist,
       title: data.song.title,
-      start_at: data.song.start_at,
-      end_at: data.song.end_at
+      startAt: data.song.start_at,
+      endAt: data.song.end_at
     });
   };
   webSocket.onclose = () => {
@@ -46,20 +46,20 @@ async function getStationData(channel: string) {
     listeners: 0,
     artist: "LISTEN TO THE DIFFERENCE!",
     title: "ATOMICRADIO",
-    start_at: null,
-    end_at: null
+    startAt: null,
+    endAt: null
   };
   const channelData = channelInfos.get(channel.toLowerCase());
   if(channelData !== undefined) {
     channelInfo = channelData;
     presenceData.state = channelInfo.artist;
     presenceData.details = channelInfo.title;
-    if(channelInfo.start_at instanceof Date || channelInfo.end_at instanceof Date) {
-      presenceData.startTimestamp = (new Date(channelInfo.start_at).getTime()/1000);
-      presenceData.endTimestamp = (new Date(channelInfo.end_at).getTime()/1000);
+    if(channelInfo.startAt instanceof Date || channelInfo.endAt instanceof Date) {
+      presenceData.startTimestamp = (new Date(channelInfo.startAt).getTime() / 1000);
+      presenceData.endTimestamp = (new Date(channelInfo.endAt).getTime() / 1000);
     } else {
-      presenceData.startTimestamp = channelInfo.start_at;
-      presenceData.endTimestamp = channelInfo.end_at;
+      presenceData.startTimestamp = channelInfo.startAt;
+      presenceData.endTimestamp = channelInfo.endAt;
     }
     presenceData.smallImageText = `ATR.${channel} • ${channelInfo.listeners} listeners`;
     presenceData.smallImageKey = "play-button";
@@ -101,20 +101,17 @@ presence.on("UpdateData", async () => {
 
   const playBar = document.getElementById("PlayBar"),
     playerButtonState = document.getElementById("Player_Play_Button_State"),
-    channel = String(
+    [, channel] = String(
       document.getElementById("Player_Station_Name").innerText
-    ).split(".")[1];
+    ).split(".");
   let playerOpen = false;
   if (playBar.style.display === "block") {
     playerOpen = true;
-    if (playerButtonState.className.includes("fa-play")) {
-      playerOpen = false;
-    }
+    if (playerButtonState.className.includes("fa-play")) playerOpen = false;
   }
 
-  if (playerOpen) {
-    getStationData(channel);
-  } else {
+  if (playerOpen) getStationData(channel);
+  else {
     clearPresenceData();
     if (
       window.location.pathname === "/" ||
