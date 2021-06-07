@@ -2,13 +2,14 @@ const presence = new Presence({
   clientId: "849684658563055627"
 });
 
+const generalStartTime = Math.floor(Date.now() / 1000);
 let lobbyStartTime: number,
   gameStartTime: number;
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: Math.floor(Date.now() / 1000)
+    startTimestamp: generalStartTime
   };
 
   if (document.querySelector(".my-table") || document.querySelector(".score-page")) {
