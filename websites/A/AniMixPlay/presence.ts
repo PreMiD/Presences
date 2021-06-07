@@ -95,8 +95,8 @@ presence.on("UpdateData", async () => {
         ? (await strings).pause
         : (await strings).play;
       presenceData.endTimestamp = endTimestamp;
-      presenceData.details = "Currently watching...";
-      presenceData.state = `${title} - Ep. ${episode}`;
+      presenceData.details = `Watching ${title}`;
+      presenceData.state = `Episode ${episode}`;
 
       if (paused) {
         delete presenceData.startTimestamp;
