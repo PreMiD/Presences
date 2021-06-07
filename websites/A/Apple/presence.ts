@@ -599,6 +599,8 @@ presence.on("UpdateData", async () => {
           ?.textContent ||
         document.querySelector("span.localnav-menu-link.current")
           ?.textContent ||
+				document.querySelector("a.localnav-menu-link.current")
+	        ?.textContent ||
         "Other";
     } else if (urlpath[1] === "testflight") presenceData.state = "Testflight";
     else if (urlpath[1] === "games") presenceData.state = "Games";
@@ -745,7 +747,8 @@ presence.on("UpdateData", async () => {
           ];
         }
       }
-    }
+    } else if(urlpath[1] === "shareplay")
+			presenceData.state = "Shareplay";
   }
 
   if (
