@@ -30,7 +30,7 @@ presence.on("UpdateData", () => {
       logs = document.querySelectorAll(".actual-log");
     
     // Find last turn log from end
-    for (let i = logs.length; i > 0; i--) {
+    for (let i = logs.length - 1; i >= 0; i--) {
       if (!logs[i]) continue;
 
       const logText = logs[i].textContent.trim();
