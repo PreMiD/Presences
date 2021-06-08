@@ -38,11 +38,11 @@ else if (document.location.pathname == "/market/history"){
 }
 //current subscription
 else if (document.location.pathname.includes("/sub")) {
-  //csgo product
+  //csgo current sub
   if (document.URL.includes("type=csgo")){
     presenceData.details = "Viewing Their CS:GO Sub!";
   }
-  //apex product
+  //apex current sub
   else if(document.URL.includes("type=apex")){
     presenceData.startTimestamp = browsingStamp;
     presenceData.details = "Viewing Their Apex Legends Sub!";
