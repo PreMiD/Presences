@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "Neverlose.cc",
+  "author": {
+    "name": "Oreo",
+    "id": "0001"
+  },
+  "category": "other",
+  "logo": "https://i.imgur.com/vv89A5J.png",
+  "thumbnail": "https://i.imgur.com/OGQ7YQP.png",
+  "version": "1.0.0",
+  "color": "#0091ff",
+  "url": "neverlose.cc",
+  "description": {
+    "en": "One of the best cheats on the market!"
+  }
+}
