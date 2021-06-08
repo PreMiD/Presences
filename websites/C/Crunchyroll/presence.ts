@@ -37,12 +37,8 @@ interface iFrameData {
 presence.on("iFrameData", (data: iFrameData) => {
   playback = data.iframe_video !== null ? true : false;
 
-  if (playback) {
-    iFrameVideo = data.iframe_video.iFrameVideo;
-    currentTime = data.iframe_video.currTime;
-    duration = data.iframe_video.dur;
-    paused = data.iframe_video.paused;
-  }
+  if (playback) 
+    ({iFrameVideo, currTime: currentTime, dur: duration, paused} = data.iframe_video);
 });
 
 presence.on("UpdateData", async () => {
@@ -53,10 +49,10 @@ presence.on("UpdateData", async () => {
   if (!playback && document.location.pathname.includes("/manga")) {
     if (document.location.pathname.includes("/read")) {
       const title = document.querySelector(".chapter-header a").innerHTML,
-        currChapter = document
+        [currChapter] = document
           .querySelector(".chapter-header")
           .innerHTML.split("</a>")[1]
-          .split("\n")[0],
+          .split("\n"),
         lastPage = document.querySelector(".images").children.length,
         currPage =
           document.querySelector(".first-page-number").innerHTML === ""
@@ -75,15 +71,15 @@ presence.on("UpdateData", async () => {
         }
       ];
     } else if (document.location.pathname.includes("/volumes")) {
-      const title = document
+      const [, title] = document
         .querySelector(".ellipsis")
-        .innerHTML.split("&gt;")[1];
+        .innerHTML.split("&gt;");
 
       presenceData.details = (await strings).viewManga;
       presenceData.state = title;
       presenceData.buttons = [
         {
-          label: "View " + (await strings).manga,
+          label: `View ${(await strings).manga}`,
           url: document.location.toString()
         }
       ];
@@ -112,25 +108,23 @@ presence.on("UpdateData", async () => {
     let videoTitle,
     type,
     episode,
-    season;
+    epName,
+    seasonregex,
+    seasonName;
     if (document.location.hostname.startsWith("beta")) {
-      const episodeid = document.location.pathname.match(/watch\/(.*)\/.*/),
-      url = `https://beta-api.crunchyroll.com/cms/v2/US/M3/-/objects/${episodeid[1]}?Signature=A58Y6P76n7z72bcueov582lZiJcWCoJ-~AKn4y6khza30izYCquaIvRH9lhX6mY2goJpCyc9c74mI4QdWwYna8kfHUMiZmgD3ofvSGyZX88XTiR~nSVfNmBmRiGpPAR1MkRYe3pFWbAHOqPMNB89EKCg1Ho~LdecTbuQ3seOMip9QYYH6Z8T0GCFJlOxS3sMKT0hPak~nYHrj4La-IEmAe6PwbSxg59j3iIB7u8ft020CIkel68O~PjPL~MSot1eU7GZMGVQAkAOnKoZFLt~H2KeFQdHzsfp8Ns39jKNcvMwQ9BGU8XlEWQTBCNrWOycnTvafvBCPqFYXWMiTtiNXg__&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9iZXRhLWFwaS5jcnVuY2h5cm9sbC5jb20vY21zL3Y~L1VTL00zLy0vKiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTYyMzA5MDU0M319fV19&Key-Pair-Id=APKAJMWSQ5S7ZB3MF5VA`,
-      obj = await (await fetch(url)).json(),
-      metadata = await obj.items[0],
-      episod = `E${metadata.episode_metadata.episode_number} - ${metadata.title}`;
-
-      type = metadata.episode_metadata.is_dubbed === true ? " (Dub)" : " (Sub)";
-      videoTitle = metadata.episode_metadata.series_title + type;
-      season = `S${metadata.episode_metadata.season_number}`;
-      episode = season + episod;
+      episode = document.querySelector(".c-heading.c-heading--xs.c-heading--family-type-one.title").innerHTML;
+      [,epName] = episode.match(/.* - (.*)/);
+      seasonregex = new RegExp(`(.*) ${epName} - Watch on Crunchyroll`);
+      [,seasonName] = document.title.match(seasonregex);
+      type = document.querySelectorAll(".c-text.c-text--m.c-meta-tags__tag")[2].innerHTML === "Subtitled" ? " (Sub)" : " (Dub)";
+      videoTitle = seasonName + type;
     } else {
       videoTitle = document.querySelector(".ellipsis .text-link span").innerHTML;
       const episod = document.querySelectorAll("#showmedia_about_media h4"),
         epName = document.querySelector("h4#showmedia_about_name");
       episode = `${episod[1].innerHTML} - ${epName.innerHTML}`;
     }
-    const timestamps = presence.getTimestamps(
+    const [, endTimestamp] = presence.getTimestamps(
       Math.floor(currentTime),
       Math.floor(duration)
     );
@@ -138,7 +132,7 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = paused
       ? (await strings).pause
       : (await strings).play;
-    presenceData.endTimestamp = timestamps[1];
+    presenceData.endTimestamp = endTimestamp;
 
     presence.setTrayTitle(
       paused
