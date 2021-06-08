@@ -487,7 +487,7 @@ async function getAPIInfo(path: string[]): Promise<APIInfo> {
  * @param namespace API namespace
  */
 function getRythm(namespace: apiNamespace): Rythm {
-  if(rythms.hasOwnProperty(namespace)) {
+  if(Object.prototype.hasOwnProperty.call(rythms, namespace)) {
     // Get the Rythm name for known namespaces
     return rythms[namespace];
   } else if(/^r\d+$/.test(namespace)) {
@@ -501,7 +501,7 @@ function getRythm(namespace: apiNamespace): Rythm {
     } as Rythm;
   } else {
     // Otherwise use the default namespace
-    return rythms["r1"];
+    return rythms.r1;
   }
 }
 
