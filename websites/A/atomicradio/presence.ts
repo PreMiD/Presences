@@ -13,7 +13,6 @@ interface Channel {
   listeners: number,
   artist: string,
   title: string,
-  startAt: Date | number,
   endAt: Date | number
 }
 
@@ -28,7 +27,6 @@ function startWebSocket() {
       listeners: data.listeners,
       artist: data.song.artist,
       title: data.song.title,
-      startAt: data.song.start_at,
       endAt: data.song.end_at
     });
   };
@@ -46,7 +44,6 @@ async function getStationData(channel: string) {
     listeners: 0,
     artist: "LISTEN TO THE DIFFERENCE!",
     title: "ATOMICRADIO",
-    startAt: null,
     endAt: null
   };
   const channelData = channelInfos.get(channel.toLowerCase());
@@ -54,13 +51,10 @@ async function getStationData(channel: string) {
     channelInfo = channelData;
     presenceData.state = channelInfo.artist;
     presenceData.details = channelInfo.title;
-    if(channelInfo.startAt instanceof Date || channelInfo.endAt instanceof Date) {
-      presenceData.startTimestamp = (new Date(channelInfo.startAt).getTime() / 1000);
-      presenceData.endTimestamp = (new Date(channelInfo.endAt).getTime() / 1000);
-    } else {
-      presenceData.startTimestamp = channelInfo.startAt;
-      presenceData.endTimestamp = channelInfo.endAt;
-    }
+
+    if(channelInfo.endAt instanceof Date) presenceData.endTimestamp = (new Date(channelInfo.endAt).getTime() / 1000);
+    else presenceData.endTimestamp = channelInfo.endAt;
+
     presenceData.smallImageText = `ATR.${channel} • ${channelInfo.listeners} listeners`;
     presenceData.smallImageKey = "play-button";
     presence.setActivity(presenceData, true);
