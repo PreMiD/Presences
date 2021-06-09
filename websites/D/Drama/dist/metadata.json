@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "Drama",
+    "author": {
+      "name": "Toki",
+      "id": "401067750354845727"
+    },
+    "category": "socials & stream",
+    "logo": "https://cdn.discordapp.com/icons/730015520568639509/a_af5921a891d60ff6b22c79f0d44c7e3b.webp?size=512",
+    "thumbnail": "https://zyrex.xyz/storage/a2d579e2-55f2-44a3-81fc-bcae0ff389a6.png",
+    "version": "1.0.0",
+    "color": "#32f597",
+    "tags": [
+      "Forum",
+      "Social",
+      "Drama"
+    ],
+    "url": "drama.gg",
+    "description": {
+      "en": "\"Drama is the undeniable fuel of life\" - Drama.gg"
+    }
+  }
