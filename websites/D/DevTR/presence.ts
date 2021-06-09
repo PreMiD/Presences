@@ -46,25 +46,18 @@ presence.on("UpdateData", () => {
         presenceData.details = "Bir sayfayı görüntülüyor:";
         presenceData.state = "HTML kodları";
         presenceData.smallImageKey = "html";
-    } if (page.endsWith("/rapor")) {
-        presenceData.details = "Bir şeyi bildiriyor...";
     } if (page.startsWith("/hata")) {
         presenceData.details = "Bir hata aldı 👀";
         presenceData.smallImageKey = "x";
     } if (page.startsWith("/kategori=altyapi")) {
         presenceData.details = "Altyapıları görüntülüyor...";
         presenceData.smallImageKey = "alt";
-    } if (page.startsWith("/bekleyenler")) {
-        presenceData.details = " Onay bekleyen kodlara göz atıyor.";
-    } if (page.startsWith("/sikayetler")) {
-        presenceData.details = "Şikayetlere göz atıyor.";
-    } if (page.startsWith("/kodekle")) {
-        presenceData.details = "Yeni bir kod ekliyor.";
-    } if (presenceData.details == null) {
+if (page.startsWith("/bekleyenler")) presenceData.details = " Onay bekleyen kodlara göz atıyor.";
+if (page.startsWith("/sikayetler")) presenceData.details = "Şikayetlere göz atıyor.";
+if (page.startsWith("/kodekle")) presenceData.details = "Yeni bir kod ekliyor.";
+if (page.endsWith("/rapor")) presenceData.details = "Bir şeyi bildiriyor...";
+  if (presenceData.details === null) {
         presence.setTrayTitle();
         presence.setActivity();
-    }
-    else {
-        presence.setActivity(presenceData);
-    }
+    } else presence.setActivity(presenceData);
 });
