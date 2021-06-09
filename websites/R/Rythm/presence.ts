@@ -751,7 +751,7 @@ presence.on("UpdateData", async () => {
         if (idleStamp === 0) idleStamp = Date.now() / 1000;
 
         // Add idle information
-        presenceData.details = "Idle";
+        presenceData.details = "Dashboard";
         presenceData.startTimestamp = idleStamp;
       }
     }
