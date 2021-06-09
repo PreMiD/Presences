@@ -4,6 +4,9 @@ const presence = new Presence({
 const browsingStamp = Math.floor(Date.now() / 1000);
 var title: any;
 presence.on("UpdateData", async () => {
+  const path = window.location.pathname;
+  const host = window.location.hostname;
+  const showButtons = await presence.getSetting("buttons");
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
@@ -17,6 +20,14 @@ presence.on("UpdateData", async () => {
         );
       presenceData.details = "Viewing Item:";
       presenceData.state = title.innerText;
+      if (showButtons) {
+        presenceData.buttons = [
+          {
+            label: "View Item",
+            url: `https://${host}/${path}`
+          }
+        ];
+      }
     }
    else if (document.location.pathname.includes("/u/")) {
      presenceData.details = "Viewing profile:";
@@ -24,6 +35,14 @@ presence.on("UpdateData", async () => {
         "#page-content > div > div.panel-body > div > div > div.title > span > a"
         );
       presenceData.state = title.innerText;
+      if (showButtons) {
+        presenceData.buttons = [
+          {
+            label: "View profile",
+            url: `https://${host}/${path}`
+          }
+        ];
+      }
     }
     else if (document.location.pathname.includes("/profiles/")) {
       presenceData.details = "Viewing profile:";
@@ -31,6 +50,14 @@ presence.on("UpdateData", async () => {
          "#page-content > div > div.panel-body > div > div > div.title > span > a"
          );
        presenceData.state = title.innerText;
+       if (showButtons) {
+        presenceData.buttons = [
+          {
+            label: "View profile",
+            url: `https://${host}/${path}`
+          }
+        ];
+      }
      }
       else if (document.location.pathname.includes("/settings")) {
       presenceData.details = "Viewing a page:";
@@ -87,6 +114,14 @@ presence.on("UpdateData", async () => {
          "#search-crumbs > a"
          );
        presenceData.state = title.innerText;
+       if (showButtons) {
+        presenceData.buttons = [
+          {
+            label: "View Listings",
+            url: `https://${host}/${path}`
+          }
+        ];
+      }
      }
      else if (document.location.pathname.includes("/calculator")) {
       presenceData.details = "Useing Calculator";
@@ -106,7 +141,6 @@ presence.on("UpdateData", async () => {
     else if (document.location.pathname.includes("/top/accurate")) {
       presenceData.details = "Viewing The Most Accurate Users";
     }
-  }
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
