@@ -225,18 +225,18 @@ presence.on("UpdateData", async () => {
       if (setting.buttons && OS) {
         presenceData.buttons = [
           {
-            label: `View ${OS.textContent}`,
+            label: `View ${OS.textContent.replace("Preview", "")}`.substring(0, 30),
             url: window.location.href
           }
         ];
       }
     } else if (urlpath.includes("apple-events")) {
-      const event = document.querySelector(
-        "p.hero-subhead.typography-quote-reduced"
-      );
+      const event = document.querySelector("h1.hero-headline.typography-headline") || document.querySelector(
+				"p.hero-subhead.typography-quote-reduced"
+			);
 
       presenceData.details = event ? "Viewing Event:" : "Apple Events";
-      if (event) presenceData.state = event.textContent || "Unknown";
+      if (event) presenceData.state = event.textContent;
 
       if (setting.buttons && event) {
         presenceData.buttons = [
@@ -599,6 +599,7 @@ presence.on("UpdateData", async () => {
           ?.textContent ||
         document.querySelector("span.localnav-menu-link.current")
           ?.textContent ||
+				document.querySelector("a.localnav-menu-link.current")?.textContent ||
         "Other";
     } else if (urlpath[1] === "testflight") presenceData.state = "Testflight";
     else if (urlpath[1] === "games") presenceData.state = "Games";
@@ -745,7 +746,8 @@ presence.on("UpdateData", async () => {
           ];
         }
       }
-    }
+    } else if(urlpath[1] === "shareplay")
+			presenceData.state = "Shareplay";
   }
 
   if (
