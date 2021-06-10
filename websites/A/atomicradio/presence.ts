@@ -9,18 +9,18 @@ const presence = new Presence({
   channelInfos: Map<string, Channel> = new Map();
 
 interface Channel {
-  name: string,
-  listeners: number,
-  artist: string,
-  title: string,
-  endAt: Date | number
+  name: string;
+  listeners: number;
+  artist: string;
+  title: string;
+  endAt: Date | number;
 }
 
 function startWebSocket() {
   const webSocket = new WebSocket("wss://api.atomicradio.eu/websocket");
 
   webSocket.onmessage = (message) => {
-    const data = JSON.parse(message.data), 
+    const data = JSON.parse(message.data),
       [, name] = String(data.name).split(".");
     channelInfos.set(name, {
       name: data.name,
@@ -47,12 +47,13 @@ async function getStationData(channel: string) {
     endAt: null
   };
   const channelData = channelInfos.get(channel.toLowerCase());
-  if(channelData !== undefined) {
+  if (channelData !== undefined) {
     channelInfo = channelData;
     presenceData.state = channelInfo.artist;
     presenceData.details = channelInfo.title;
 
-    if(channelInfo.endAt instanceof Date) presenceData.endTimestamp = (new Date(channelInfo.endAt).getTime() / 1000);
+    if (channelInfo.endAt instanceof Date)
+      presenceData.endTimestamp = new Date(channelInfo.endAt).getTime() / 1000;
     else presenceData.endTimestamp = channelInfo.endAt;
 
     presenceData.smallImageText = `ATR.${channel} • ${channelInfo.listeners} listeners`;
