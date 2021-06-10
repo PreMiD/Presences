@@ -61,22 +61,22 @@ function getQuery() {
 }
 function getAnimeEntity(): AnimeEntity {
   const object = Array.from(
-    document.querySelectorAll("script[type=\"application/ld+json\"]")
+    document.querySelectorAll('script[type="application/ld+json"]')
   ).find(
     (x) =>
       x.textContent.indexOf(location.pathname) !== -1 &&
-      x.textContent.indexOf("\"@type\":\"TVSeries\"") !== -1
+      x.textContent.indexOf('"@type":"TVSeries"') !== -1
   )?.textContent;
   if (!object) return null;
   return JSON.parse(object);
 }
 function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
   const object = Array.from(
-    document.querySelectorAll("script[type=\"application/ld+json\"]")
+    document.querySelectorAll('script[type="application/ld+json"]')
   ).find(
     (x) =>
       x.textContent.indexOf(location.pathname) !== -1 &&
-      x.textContent.indexOf("\"@type\":\"TVEpisode\"") !== -1
+      x.textContent.indexOf('"@type":"TVEpisode"') !== -1
   )?.textContent;
   if (!object) return null;
   return JSON.parse(object);
@@ -96,7 +96,7 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
           const videoInstance = document.querySelector<HTMLVideoElement>(
               ".jw-wrapper video"
             ),
-            [startTimestamp, endTimestamp] = context.getTimestamps(
+            [, endTimestamp] = context.getTimestamps(
               videoInstance.currentTime,
               videoInstance.duration
             );
@@ -112,7 +112,6 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
             if (data.startTimestamp) delete data.startTimestamp;
             if (data.endTimestamp) delete data.endTimestamp;
           } else {
-            data.startTimestamp = startTimestamp;
             data.endTimestamp = endTimestamp;
           }
           return data;
@@ -137,7 +136,7 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
         exec: (context, data, { strings, images }: ExecutionArguments) => {
           if (!context) return null;
           const searchedValue = document.querySelector<HTMLInputElement>(
-            ".shows-content input[type=\"text\"]"
+            '.shows-content input[type="text"]'
           )?.value;
           if (searchedValue?.trim().length > 0) data.state = searchedValue;
 
