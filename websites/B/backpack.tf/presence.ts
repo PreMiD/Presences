@@ -1,16 +1,14 @@
 const presence = new Presence({
   clientId: "850295838361649153"
 });
-const browsingStamp = Math.floor(Date.now() / 1000);
-var title: any;
-presence.on("UpdateData", async () => {
-  const path = window.location.pathname;
-  const host = window.location.hostname;
-  const showButtons = await presence.getSetting("buttons");
-  const presenceData: PresenceData = {
+browsingStamp = Date.now(),
+presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
-  };
+};
+const title: any;
+presence.on("UpdateData", async () => {
+  const showButtons = await presence.getSetting("buttons");
   if (document.location.hostname == "backpack.tf") {
     if (document.location.pathname.includes("/stats/")) {
       title = document.querySelector(
@@ -22,12 +20,11 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: "View Item",
-            url: `https://${host}/${path}`
+            url: document.location.toString()
           }
         ];
       }
-    }
-   else if (document.location.pathname.includes("/u/")) {
+    } else if (document.location.pathname.includes("/u/")) {
      presenceData.details = "Viewing profile:";
       title = document.querySelector(
         "#page-content > div > div.panel-body > div > div > div.title > span > a"
@@ -37,12 +34,11 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: "View profile",
-            url: `https://${host}/${path}`
+            url: document.location.toString()
           }
         ];
       }
-    }
-    else if (document.location.pathname.includes("/profiles/")) {
+    } else if (document.location.pathname.includes("/profiles/")) {
       presenceData.details = "Viewing profile:";
        title = document.querySelector(
          "#page-content > div > div.panel-body > div > div > div.title > span > a"
@@ -52,12 +48,11 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: "View profile",
-            url: `https://${host}/${path}`
+            url: document.location.toString()
           }
         ];
       }
-     }
-      else if (document.location.pathname.includes("/settings")) {
+     } else if (document.location.pathname.includes("/settings")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Settings";
     } else if (document.location.pathname.includes("/alerts")) {
@@ -79,34 +74,26 @@ presence.on("UpdateData", async () => {
       presenceData.details = "Viewing Donation page";
     } else if (document.location.pathname.includes("/premium/subscribe")) {
       presenceData.details = "Viewing Premium subscription";
-    }
     } else if (document.location.pathname.includes("/pricelist")) {
       presenceData.details = "Viewing Community Pricelist";
       presenceData.state = "Pricegrid view";
-    }
-    else if (document.location.pathname.includes("/spreadsheet")) {
+    } else if (document.location.pathname.includes("/spreadsheet")) {
       presenceData.details = "Viewing Community Pricelist";
       presenceData.state = "Spreadsheet view";
-    }
-    else if (document.location.pathname.includes("/vote")) {
+    } else if (document.location.pathname.includes("/vote")) {
       presenceData.details = "Browsing Suggestions";
-    }
-    else if (document.location.pathname.includes("/latest")) {
+    } else if (document.location.pathname.includes("/latest")) {
       presenceData.details = "Viewing the Latest Price Updates";
-    }
-    else if (document.location.pathname.includes("/unusuals")) {
+    } else if (document.location.pathname.includes("/unusuals")) {
       presenceData.details = "Viewing Unusual Pricelist";
       presenceData.state = "Browsing by Item";
-    }
-    else if (document.location.pathname.includes("/effects")) {
+    } else if (document.location.pathname.includes("/effects")) {
       presenceData.details = "Viewing Unusual Pricelist";
       presenceData.state = "Browse by Effect";
-    }
-    else if (document.location.pathname.includes("/market")) {
+    } else if (document.location.pathname.includes("/market")) {
       presenceData.details = "Searching through:";
       presenceData.state = "Steam Community Market Pricelist";
-    }
-    else if (document.location.pathname.includes("/classifieds?steamid")) {
+    } else if (document.location.pathname.includes("/classifieds?steamid")) {
       presenceData.details = "Viewing Cassifieds of:";
        title = document.querySelector(
          "#search-crumbs > a"
@@ -116,29 +103,16 @@ presence.on("UpdateData", async () => {
         presenceData.buttons = [
           {
             label: "View Listings",
-            url: `https://${host}/${path}`
+            url: document.location.toString()
           }
         ];
       }
-     }
-     else if (document.location.pathname.includes("/calculator")) {
-      presenceData.details = "Useing Calculator";
-    }
-    else if (document.location.pathname.includes("/top/backpacks")) {
-      presenceData.details = "Viewing Top Backpacks";
-    }
-    else if (document.location.pathname.includes("/top/donators")) {
-      presenceData.details = "Viewing Top Donators";
-    }
-    else if (document.location.pathname.includes("/top/generous")) {
-      presenceData.details = "Viewing Top Gifters";
-    }
-    else if (document.location.pathname.includes("/top/contributors")) {
-      presenceData.details = "Viewing Top Contributors";
-    }
-    else if (document.location.pathname.includes("/top/accurate")) {
-      presenceData.details = "Viewing The Most Accurate Users";
-    }
+     } else if (document.location.pathname.includes("/calculator")) presenceData.details = "Useing Calculator";
+     else if (document.location.pathname.includes("/top/backpacks")) presenceData.details = "Viewing Top Backpacks";
+     else if (document.location.pathname.includes("/top/donators")) presenceData.details = "Viewing Top Donators";
+     else if (document.location.pathname.includes("/top/generous")) presenceData.details = "Viewing Top Gifters";
+     else if (document.location.pathname.includes("/top/contributors")) presenceData.details = "Viewing Top Contributors";
+     else if (document.location.pathname.includes("/top/accurate")) presenceData.details = "Viewing The Most Accurate Users";
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
