@@ -11,8 +11,6 @@ presence.on("UpdateData", async () => {
     largeImageKey: "logo"
   };
   if (document.location.hostname == "backpack.tf") {
-    presenceData.startTimestamp = browsingStamp;
-    console.log("Website Detected...");
     if (document.location.pathname.includes("/stats/")) {
       title = document.querySelector(
         "#page-content > div > :nth-child(1) > div.stats-body > div > div > div.stats-header-title"
