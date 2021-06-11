@@ -6,12 +6,11 @@ presenceData: PresenceData = {
     largeImageKey: "logo",
     startTimestamp: browsingStamp
 };
-const title: any;
 presence.on("UpdateData", async () => {
   const showButtons = await presence.getSetting("buttons");
   if (document.location.hostname == "backpack.tf") {
     if (document.location.pathname.includes("/stats/")) {
-      title = document.querySelector(
+      const title = document.querySelector(
         "#page-content > div > :nth-child(1) > div.stats-body > div > div > div.stats-header-title"
         );
       presenceData.details = "Viewing Item:";
@@ -26,7 +25,7 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/u/")) {
      presenceData.details = "Viewing profile:";
-      title = document.querySelector(
+      const title = document.querySelector(
         "#page-content > div > div.panel-body > div > div > div.title > span > a"
         );
       presenceData.state = title.innerText;
@@ -40,7 +39,7 @@ presence.on("UpdateData", async () => {
       }
     } else if (document.location.pathname.includes("/profiles/")) {
       presenceData.details = "Viewing profile:";
-       title = document.querySelector(
+       const title = document.querySelector(
          "#page-content > div > div.panel-body > div > div > div.title > span > a"
          );
        presenceData.state = title.innerText;
@@ -95,7 +94,7 @@ presence.on("UpdateData", async () => {
       presenceData.state = "Steam Community Market Pricelist";
     } else if (document.location.pathname.includes("/classifieds?steamid")) {
       presenceData.details = "Viewing Cassifieds of:";
-       title = document.querySelector(
+       const title = document.querySelector(
          "#search-crumbs > a"
          );
        presenceData.state = title.innerText;
