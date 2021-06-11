@@ -10,7 +10,6 @@ presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "logo"
   };
-  console.log("Working...");
   if (document.location.hostname == "backpack.tf") {
     presenceData.startTimestamp = browsingStamp;
     console.log("Website Detected...");
