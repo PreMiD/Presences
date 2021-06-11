@@ -1,6 +1,6 @@
 const presence = new Presence({
   clientId: "850295838361649153"
-});
+}),
 browsingStamp = Date.now(),
 presenceData: PresenceData = {
     largeImageKey: "logo",
