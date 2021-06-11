@@ -8,7 +8,8 @@ presence.on("UpdateData", async () => {
   const host = window.location.hostname;
   const showButtons = await presence.getSetting("buttons");
   const presenceData: PresenceData = {
-    largeImageKey: "logo"
+    largeImageKey: "logo",
+    startTimestamp: browsingStamp
   };
   if (document.location.hostname == "backpack.tf") {
     if (document.location.pathname.includes("/stats/")) {
