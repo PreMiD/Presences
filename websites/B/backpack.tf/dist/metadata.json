@@ -8,13 +8,15 @@
   "category": "other",
   "logo": "https://i.imgur.com/iHCD7nN.png",
   "thumbnail": "https://i.imgur.com/uQCICM4.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "color": "#757575",
   "tags": [
-    "website"
+    "steam",
+    "TF2",
+    "price"
   ],
   "url": "backpack.tf",
   "description": {
-    "en": "The PriMiD Presence for Backpack.tf!"
+    "en": "The PriMiD Presence for Backpack.tf! Backpack.tf is the main service to get the latest item prices related to the best war-themed hat simulator game, TF2!"
   }
 }
