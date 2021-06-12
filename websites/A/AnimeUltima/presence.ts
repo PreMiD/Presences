@@ -31,6 +31,22 @@ presence.on("UpdateData", () => {
     presenceData.state = search;
     presenceData.smallImageKey = "searching";
     presence.setActivity(presenceData);
+  } else if(document.location.pathname.includes("/ongoing")) {
+    presenceData.details = "Viewing On-Going Shows";
+    presenceData.smallImageKey = "browsing";
+    presence.setActivity(presenceData);
+  } else if(document.location.pathname.includes("/anime-schedule")) {
+    presenceData.details = "Viewing Anime Schedule";
+    presenceData.smallImageKey = "browsing";
+    presence.setActivity(presenceData);
+  } else if(document.location.pathname.includes("/anime-request")) {
+    presenceData.details = "Viewing Anime Requests";
+    presenceData.smallImageKey = "browsing";
+    presence.setActivity(presenceData);
+  } else if(document.location.pathname.includes("/blog")) {
+    presenceData.details = "Viewing Blog";
+    presenceData.smallImageKey = "browsing";
+    presence.setActivity(presenceData);
   } else {
     presenceData.details = "Browsing...";
     presenceData.smallImageKey = "browsing";
