@@ -8,8 +8,6 @@ strings = presence.getStrings({
 
 presence.on("UpdateData", async () => {
 
-
-
   if(document.URL.includes('/d/')) {
     var presenceData: PresenceData = {
       largeImageKey:
@@ -36,6 +34,66 @@ presence.on("UpdateData", async () => {
         details: `Viewing Profile: ${document.URL.split("/")[4]}`,
         state: `Posts: ${document.querySelector("span.Button-badge").textContent} `,
       };
+  } else if(document.URL.includes('/meta')) {
+    var presenceData: PresenceData = {
+      largeImageKey:
+        "dramagg",
+      smallImageKey:
+        "search",
+      smallImageText: "Looking for a thread",
+      details: "Looking for drama!",
+      state: `Looking at meta threads`,
+    };
+  } else if(document.URL.includes('/resolved')) {
+    var presenceData: PresenceData = {
+      largeImageKey:
+        "dramagg",
+      smallImageKey:
+        "search",
+      smallImageText: "Looking for a thread",
+      details: "Looking for drama!",
+      state: `Looking at resolved threads`,
+    }; 
+  } else if(document.URL.includes('/confirmed')) {
+    var presenceData: PresenceData = {
+      largeImageKey:
+        "dramagg",
+      smallImageKey:
+        "search",
+      smallImageText: "Looking for a thread",
+      details: "Looking for drama!",
+      state: `Looking at confirmed threads`,
+    }; 
+  } else if(document.URL.includes('/discussion')) {
+    var presenceData: PresenceData = {
+      largeImageKey:
+        "dramagg",
+      smallImageKey:
+        "search",
+      smallImageText: "Looking for a thread",
+      details: "Looking for drama!",
+      state: `Looking at discussions`,
+    }; 
+  } else if(document.URL.includes('/users')) {
+    var presenceData: PresenceData = {
+      largeImageKey:
+        "dramagg",
+      smallImageKey:
+        "search",
+      smallImageText: "Looking at all users",
+      details: "Looking for drama!",
+      state: `Looking at all users`,
+    };
+  } else if(document.URL.includes('/trinkets')) {
+    var presenceData: PresenceData = {
+      largeImageKey:
+        "dramagg",
+      smallImageKey:
+        "search",
+      smallImageText: "Looking at trinkets",
+      details: "Looking for drama!",
+      state: `Looking at trinkets`,
+    };
   } else {
     var presenceData: PresenceData = {
       largeImageKey:
@@ -44,7 +102,7 @@ presence.on("UpdateData", async () => {
         "search",
       smallImageText: "Looking for a thread",
       details: "Looking for drama!",
-      state: `Browsing.`,
+      state: `Browsing`,
     };  
   } 
 
