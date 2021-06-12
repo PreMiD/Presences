@@ -65,6 +65,11 @@ presence.on("UpdateData", async () => {
     presenceData.smallImageText = "Looking at trinkets";
     presenceData.details = "Looking for drama!";
     presenceData.state = 'Looking at trinkets';
+  } else if(document.querySelector('div.Composer.visible')) {
+    presenceData.smallImageKey = "reading";
+    presenceData.smallImageText = "Writing a thread";
+    presenceData.details = "Starting some drama!";
+    presenceData.state = "Writing a post"
   } else {
     presenceData.smallImageKey = "search";
     presenceData.smallImageText = "Looking for a thread";
