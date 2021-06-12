@@ -15,13 +15,16 @@ const presenceData: PresenceData = {
 
 if (document.location.pathname !== "/") {
   const elements: string[] = document.location.pathname.split("/"),
-    [, logs = "", catalog = "", threadNum = null] = elements,
+    [, logsOrMedia = "", catalog = "", threadNum = null] = elements,
     messageLength = document.getElementById("labelMessageLength") ? parseInt(
       document.getElementById("labelMessageLength").innerText
     ) : 4081;
-  if (logs === "logs.js") {
+  if (logsOrMedia === "logs.js") {
     presenceData.details = "Looking in the logs";
     presenceData.state = "Got banned maybe?";
+  } else if (logsOrMedia === ".media" || logsOrMedia === ".static") {
+    presenceData.details = "Looking at file";
+    presenceData.state = `${catalog}`;
   } else {
     let boardName: string = null;
     if (catalog === "catalog.html")
