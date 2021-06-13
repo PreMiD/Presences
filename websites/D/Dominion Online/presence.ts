@@ -1,10 +1,9 @@
 const presence = new Presence({
-  clientId: "849684658563055627"
-}),
+    clientId: "849684658563055627"
+  }),
   logRegex = /^.+ - \w+$/,
   generalStartTime = Math.floor(Date.now() / 1000);
-let lobbyStartTime: number,
-  gameStartTime: number;
+let lobbyStartTime: number, gameStartTime: number;
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -12,12 +11,19 @@ presence.on("UpdateData", () => {
     startTimestamp: generalStartTime
   };
 
-  if (document.querySelector(".my-table") || document.querySelector(".score-page")) {
+  if (
+    document.querySelector(".my-table") ||
+    document.querySelector(".score-page")
+  ) {
     if (lobbyStartTime === 0) lobbyStartTime = Math.floor(Date.now() / 1000);
     gameStartTime = 0;
-    
-    const isHost = document.querySelector(".rules-editor") !== null || document.querySelector("button[ng-click=\"$ctrl.editTable()\"]") !== null,
-      members = document.querySelector(".participant-list-label").textContent.trim();
+
+    const isHost =
+        document.querySelector(".rules-editor") !== null ||
+        document.querySelector('button[ng-click="$ctrl.editTable()"]') !== null,
+      members = document
+        .querySelector(".participant-list-label")
+        .textContent.trim();
 
     presenceData.details = `In Lobby: ${members}`;
     presenceData.state = isHost ? "Host" : null;
@@ -28,7 +34,7 @@ presence.on("UpdateData", () => {
 
     const membersCount = document.querySelectorAll(".spec-list-line").length,
       logs = document.querySelectorAll(".actual-log");
-    
+
     // Find last turn log from end
     for (let i = logs.length - 1; i >= 0; i--) {
       if (!logs[i]) continue;
@@ -44,7 +50,10 @@ presence.on("UpdateData", () => {
 
     presenceData.details = `In Game (${membersCount} Players)`;
     presenceData.startTimestamp = gameStartTime;
-  } else if (document.querySelector(".login-page") || document.querySelector(".lobby-page")) {
+  } else if (
+    document.querySelector(".login-page") ||
+    document.querySelector(".lobby-page")
+  ) {
     gameStartTime = lobbyStartTime = 0;
     presenceData.details = "Main Menu";
   } else if (document.querySelector(".loading-spinner")) {
