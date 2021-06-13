@@ -6,10 +6,11 @@
   "service": "DiscordLabs.org",
   "description": {
     "en": "Check our our amazing list of lab approved discord bots!",
-    "pl": "Sprawdź naszą niesamowitą listę zatwierdzonych przez laboratorium botów discord!"
+    "pl": "Sprawdź naszą niesamowitą listę zatwierdzonych przez laboratorium botów discord!",
+    "nl": "Bekijk onze geweldige lijst van lab goedgekeurde discord bots!"
   },
   "url": "bots.discordlabs.org",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/f22iobC.png",
   "thumbnail": "https://i.imgur.com/H08Aem9.png",
   "color": "#6a0dad",

@@ -7,10 +7,11 @@
   "service": "Anime Planet",
   "description": {
     "en": "Anime and manga recommendations, reviews and more! Keep track of what you've seen in your own anime and manga list and make new friends.",
-    "ga_IE": "Moltaí anime agus manga, léirmheasanna agus go leor eile! Coinnigh súil ar an méid a chonaic tú i do liosta anime agus manga féin agus déan cairde nua."
+    "ga_IE": "Moltaí anime agus manga, léirmheasanna agus go leor eile! Coinnigh súil ar an méid a chonaic tú i do liosta anime agus manga féin agus déan cairde nua.",
+    "nl": "Aanbevelingen voor anime en manga, recensies en meer! Houd bij wat je hebt gezien in je eigen anime- en mangalijst en maak nieuwe vrienden."
   },
   "url": "www.anime-planet.com",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "logo": "https://i.imgur.com/0qpwOvt.jpg",
   "thumbnail": "https://i.imgur.com/lYQlABH.png",
   "color": "#ec554a",

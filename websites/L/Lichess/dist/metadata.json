@@ -6,10 +6,11 @@
   "service": "Lichess",
   "description": {
     "en": "Lichess is an open-source Internet chess server. Anyone can play anonymously, although players may register an account on the site to play rated games.",
-    "tr": "Lichess, ücretsiz çevrimiçi satranç sitesi ve uygulaması. Kişilerin ücret ödemeden satranç oynamasını amaçlamaktadır."
+    "tr": "Lichess, ücretsiz çevrimiçi satranç sitesi ve uygulaması. Kişilerin ücret ödemeden satranç oynamasını amaçlamaktadır.",
+    "nl": "Lichess is een open-source internet-schaakserver. Iedereen kan anoniem spelen, hoewel spelers een account op de site kunnen registreren om beoordeelde spellen te spelen."
   },
   "url": "lichess.org",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "logo": "https://i.imgur.com/dw8pZ1d.png",
   "thumbnail": "https://i.imgur.com/kXZgHJS.png",
   "color": "#c5c5c5",

@@ -211,16 +211,19 @@ const presence = new Presence({
     "/^pkginfo$/": { image: "manifest" },
     "/^mime\\.types$/i": { image: "manifest" },
     "/^METADATA\\.pb$/": { image: "manifest" },
-    "/[\\/\\\\](?:magic[\\/\\\\]Magdir|file[\\/\\\\]magic)[\\/\\\\][-.\\w]+$/i": {
-      image: "manifest"
-    },
-    "/(\\\\|\\/)dev[-\\w]+\\1(?:[^\\\\\\/]+\\1)*(?!DESC|NOTES)(?:[A-Z][-A-Z]*)(?:\\.in)?$/": {
-      image: "manifest"
-    },
+    "/[\\/\\\\](?:magic[\\/\\\\]Magdir|file[\\/\\\\]magic)[\\/\\\\][-.\\w]+$/i":
+      {
+        image: "manifest"
+      },
+    "/(\\\\|\\/)dev[-\\w]+\\1(?:[^\\\\\\/]+\\1)*(?!DESC|NOTES)(?:[A-Z][-A-Z]*)(?:\\.in)?$/":
+      {
+        image: "manifest"
+      },
     "lib/icons/.icondb.js": { image: "manifest" },
-    "/\\.git[\\/\\\\](.*[\\/\\\\])?(HEAD|ORIG_HEAD|packed-refs|logs[\\/\\\\](.+[\\/\\\\])?[^\\/\\\\]+)$/": {
-      image: "manifest"
-    },
+    "/\\.git[\\/\\\\](.*[\\/\\\\])?(HEAD|ORIG_HEAD|packed-refs|logs[\\/\\\\](.+[\\/\\\\])?[^\\/\\\\]+)$/":
+      {
+        image: "manifest"
+      },
     "/\\.(md|mdown|markdown|mkd|mkdown|mdwn|mkdn|rmd|ron|pmd)$/i": {
       image: "markdown"
     },
@@ -303,13 +306,15 @@ const presence = new Presence({
     "/^wscript$/": { image: "python" },
     "/\\.(r|Rprofile|rsx|rd)$/i": { image: "r" },
     ".re": { image: "reasonml" },
-    "/\\.(rb|ru|ruby|erb|gemspec|god|mspec|pluginspec|podspec|rabl|rake|opal)$/i": {
-      image: "ruby"
-    },
+    "/\\.(rb|ru|ruby|erb|gemspec|god|mspec|pluginspec|podspec|rabl|rake|opal)$/i":
+      {
+        image: "ruby"
+      },
     "/^\\.?(irbrc|gemrc|pryrc|ruby-(gemset|version))$/i": { image: "ruby" },
-    "/^(Appraisals|(Rake|[bB]uild|Cap|Danger|Deliver|Fast|Guard|Jar|Maven|Pod|Puppet|Snap)file(\\.lock)?)$/": {
-      image: "ruby"
-    },
+    "/^(Appraisals|(Rake|[bB]uild|Cap|Danger|Deliver|Fast|Guard|Jar|Maven|Pod|Puppet|Snap)file(\\.lock)?)$/":
+      {
+        image: "ruby"
+      },
     "/\\.(jbuilder|rbuild|rb[wx]|builder)$/i": { image: "ruby" },
     "/^rails$/": { image: "ruby" },
     ".watchr": { image: "ruby" },
@@ -318,21 +323,24 @@ const presence = new Presence({
     ".scss": { image: "scss" },
     ".sass": { image: "scss" },
     "/\\.(sh|rc|bats|bash|tool|install|command)$/i": { image: "shell" },
-    "/^(\\.?bash(rc|[-_]?(profile|login|logout|history|prompt))|_osc|config|install-sh|PKGBUILD)$/i": {
-      image: "shell"
-    },
+    "/^(\\.?bash(rc|[-_]?(profile|login|logout|history|prompt))|_osc|config|install-sh|PKGBUILD)$/i":
+      {
+        image: "shell"
+      },
     "/\\.(ksh|mksh|pdksh)$/i": { image: "shell" },
     ".sh-session": { image: "shell" },
-    "/\\.zsh(-theme|_history)?$|^\\.?(antigen|zpreztorc|zlogin|zlogout|zprofile|zshenv|zshrc)$/i": {
-      image: "shell"
-    },
+    "/\\.zsh(-theme|_history)?$|^\\.?(antigen|zpreztorc|zlogin|zlogout|zprofile|zshenv|zshrc)$/i":
+      {
+        image: "shell"
+      },
     "/\\.fish$|^\\.fishrc$/i": { image: "shell" },
     "/^\\.?(login|profile)$/": { image: "shell" },
     ".inputrc": { image: "shell" },
     ".tmux": { image: "shell" },
-    "/^(configure|config\\.(guess|rpath|status|sub)|depcomp|libtool|compile)$/": {
-      image: "shell"
-    },
+    "/^(configure|config\\.(guess|rpath|status|sub)|depcomp|libtool|compile)$/":
+      {
+        image: "shell"
+      },
     "/^\\/(private\\/)?etc\\/([^\\/]+\\/)*(profile$|nanorc$|rc\\.|csh\\.)/i": {
       image: "shell"
     },
@@ -391,9 +399,10 @@ const presence = new Presence({
     ".wat": { image: "wasm" },
     ".wast": { image: "wasm" },
     ".wasm": { image: "wasm" },
-    "/webpack(\\.dev|\\.development|\\.prod|\\.production)?\\.config(\\.babel)?\\.(js|jsx|coffee|ts|json|json5|yaml|yml)/i": {
-      image: "webpack"
-    },
+    "/webpack(\\.dev|\\.development|\\.prod|\\.production)?\\.config(\\.babel)?\\.(js|jsx|coffee|ts|json|json5|yaml|yml)/i":
+      {
+        image: "webpack"
+      },
     ".xml": { image: "xml" },
     "/\\.ya?ml$/i": { image: "yaml" },
     "/^yarn(\\.lock)?$/i": { image: "yarn" },

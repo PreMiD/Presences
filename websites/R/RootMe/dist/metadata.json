@@ -11,10 +11,11 @@
     "fr": "Root Me est une plateforme permettant à chacun de tester et d'améliorer ses connaissances dans le domaine de la sécurité informatique et du hacking à travers la publication de challenges, de solutions, d'articles.",
     "en": "Root Me is a platform for everyone to test and improve knowledge in computer security and hacking.",
     "es": "plataforma de aprendizaje dedicada a la piratería y la seguridad de la información",
-    "de": "Hacking und Informationssicherheit Learning-Plattform"
+    "de": "Hacking und Informationssicherheit Learning-Plattform",
+    "nl": "Root Me is een platform voor iedereen om kennis in computerbeveiliging en hacking te testen en te verbeteren."
   },
   "service": "RootMe",
-  "version": "1.2.9",
+  "version": "1.2.11",
   "logo": "https://i.imgur.com/RqcY9ZL.png",
   "thumbnail": "https://i.imgur.com/jD8QJKf.png",
   "color": "#191C22",

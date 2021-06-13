@@ -6,10 +6,11 @@
   "service": "NPM Package Registry",
   "description": {
     "en": "The Node Package Manager is a package manager for the JavaScript runtime environment node.js.",
-    "de": "Der Node Package Manager ist ein Paketmanager für die JavaScript-Laufzeitumgebung node.js."
+    "de": "Der Node Package Manager ist ein Paketmanager für die JavaScript-Laufzeitumgebung node.js.",
+    "nl": "De Node Package Manager is een pakketbeheerder voor de JavaScript-runtime-omgeving node.js."
   },
   "url": "www.npmjs.com",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "logo": "https://i.imgur.com/XaosIBS.png",
   "thumbnail": "https://i.imgur.com/Y8lD4GK.png",
   "color": "#C12127",

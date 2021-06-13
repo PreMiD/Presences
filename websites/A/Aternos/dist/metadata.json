@@ -6,14 +6,15 @@
   "service": "Aternos",
   "description": {
     "en": "Minecraft servers. Free. Forever. Your very own Minecraft server, the only one that stays free forever.",
-    "zh_CN": "属于您自己的Minecraft服务器，我们永久免费。"
+    "zh_CN": "属于您自己的Minecraft服务器，我们永久免费。",
+    "nl": "Minecraft servers. Gratis. Voor altijd. Je eigen Minecraft server, de enige die voor altijd gratis blijft."
   },
   "url": [
     "aternos.org",
     "support.aternos.org",
     "board.aternos.org"
   ],
-  "version": "1.1.9",
+  "version": "1.1.10",
   "logo": "https://i.imgur.com/Hjd1K2V.jpg",
   "thumbnail": "https://i.imgur.com/ESxRzaB.png",
   "color": "#2d87d3",

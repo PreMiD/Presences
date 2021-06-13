@@ -5,10 +5,11 @@
   },
   "service": "Rustlabs",
   "description": {
-    "en": "Rust Labs is a reliable database for the video game, Rust. It provides weekly updates and revised statistical information for items and game mechanics."
+    "en": "Rust Labs is a reliable database for the video game, Rust. It provides weekly updates and revised statistical information for items and game mechanics.",
+    "nl": "Rust Labs is een betrouwbare database voor het videospel, Rust. Het biedt wekelijkse updates en herziene statistische informatie voor items en spelmechanica."
   },
   "url": "rustlabs.com",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/Yp2IGUO.png?1",
   "thumbnail": "https://i.imgur.com/ECb6rlA.jpg",
   "color": "#c98b29",

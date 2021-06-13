@@ -5,10 +5,11 @@
   },
   "url": "gardenmc.fr",
   "description": {
-    "en": "A French Minecraft server cultivated by dedicated players."
+    "en": "A French Minecraft server cultivated by dedicated players.",
+    "nl": "Een Franse Minecraft server gecultiveerd door toegewijde spelers."
   },
   "service": "Garden",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "logo": "https://i.imgur.com/XjpOAvU.png",
   "thumbnail": "https://i.imgur.com/3L4UHk9.png",
   "color": "#0f7e49",

@@ -5,10 +5,11 @@
   },
   "service": "Streamable",
   "description": {
-    "en": "Fast and easy video streaming for bloggers and publishers."
+    "en": "Fast and easy video streaming for bloggers and publishers.",
+    "nl": "Snelle en eenvoudige videostreaming voor bloggers en uitgevers."
   },
   "url": "streamable.com",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "logo": "https://i.imgur.com/D38h5SR.png",
   "thumbnail": "https://i.imgur.com/ErpMpF3.png",
   "color": "#0f90fa",

@@ -5,10 +5,11 @@
   },
   "url": "humanbenchmark.com",
   "description": {
-    "en": "Measure your abilities with brain games and congitive tests."
+    "en": "Measure your abilities with brain games and congitive tests.",
+    "nl": "Meet je vaardigheden met hersenspellen en cognitieve tests."
   },
   "service": "Human Benchmark",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "logo": "https://i.imgur.com/vTQeYvH.png",
   "thumbnail": "https://i.imgur.com/jDQRXXN.jpg",
   "color": "#FFA600",

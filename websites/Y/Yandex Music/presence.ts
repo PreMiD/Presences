@@ -18,15 +18,15 @@ function isPodcast(): boolean {
 }
 
 const getData = async (): Promise<void> => {
-  const title = (document.getElementsByClassName(
-      "track__title"
-    )[0] as HTMLElement).innerText,
-    progress = (document.getElementsByClassName(
-      "progress__left"
-    )[0] as HTMLElement).innerText,
-    trackLength = (document.getElementsByClassName(
-      "progress__right"
-    )[0] as HTMLElement).innerText,
+  const title = (
+      document.getElementsByClassName("track__title")[0] as HTMLElement
+    ).innerText,
+    progress = (
+      document.getElementsByClassName("progress__left")[0] as HTMLElement
+    ).innerText,
+    trackLength = (
+      document.getElementsByClassName("progress__right")[0] as HTMLElement
+    ).innerText,
     startedAt = Date.now() - getMillisecondsFromString(progress),
     endAt = startedAt + getMillisecondsFromString(trackLength),
     playing =
@@ -34,13 +34,13 @@ const getData = async (): Promise<void> => {
 
   let artists;
   if (isPodcast()) {
-    artists = (document.getElementsByClassName(
-      "track__podcast"
-    )[0] as HTMLElement).innerText;
+    artists = (
+      document.getElementsByClassName("track__podcast")[0] as HTMLElement
+    ).innerText;
   } else {
-    artists = (document.getElementsByClassName(
-      "track__artists"
-    )[0] as HTMLElement).innerText;
+    artists = (
+      document.getElementsByClassName("track__artists")[0] as HTMLElement
+    ).innerText;
   }
 
   presenceData = {

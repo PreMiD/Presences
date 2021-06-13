@@ -22,14 +22,12 @@ presence.on("UpdateData", () => {
     presenceData.state = "Bütün incelemelere göz atıyor.";
     presenceData.details = "CHIP Online";
   } else if (window.location.pathname.startsWith("/inceleme/")) {
-    presenceData.state = document.querySelector(
-      "#anacontainer > h1"
-    ).textContent;
+    presenceData.state =
+      document.querySelector("#anacontainer > h1").textContent;
     presenceData.details = "Bir incelemeyi okuyor:";
   } else if (window.location.pathname.startsWith("/blog/")) {
-    presenceData.state = document.querySelector(
-      "#article-body > h1"
-    ).textContent;
+    presenceData.state =
+      document.querySelector("#article-body > h1").textContent;
     presenceData.details = "Bir blog okuyor:";
   } else if (window.location.pathname.endsWith("forum/")) {
     presenceData.details = "Tüm forumlara göz atıyor.";
@@ -38,9 +36,8 @@ presence.on("UpdateData", () => {
     presenceData.details = "Tüm Tech-Talk arşivine göz atıyor.";
   } else if (window.location.pathname.startsWith("/forum/")) {
     presenceData.state = "Adlı konuyu/gönderiyi okuyor.";
-    presenceData.details = document.querySelector(
-      "#forumwrap > h1"
-    ).textContent;
+    presenceData.details =
+      document.querySelector("#forumwrap > h1").textContent;
   }
 
   if (presenceData.details == null) {

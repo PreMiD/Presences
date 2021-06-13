@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "author": {
+    "name": "QkeleQ10",
+    "id": "807917674477649943"
+  },
+  "url": [
+    "www.hitmaps.com",
+    "roulette.hitmaps.com"
+  ],
+  "regExp": "([a-z0-9]+)[.]hitmaps[.]com",
+  "description": {
+    "en": "HITMAPS™ is a website that shows interactive maps for the HITMAN series.",
+    "nl": "HITMAPS™ is een website met interactieve kaarten voor de HITMAN-reeks."
+  },
+  "version": "1.0.1",
+  "service": "HITMAPS",
+  "logo": "https://i.imgur.com/CgaXYn2.png",
+  "thumbnail": "https://i.imgur.com/S6DAuSR.png",
+  "color": "#fb0111",
+  "tags": [
+    "hitmaps",
+    "hitman",
+    "ioi",
+    "maps",
+    "events",
+    "community",
+    "game"
+  ],
+  "category": "games"
+}

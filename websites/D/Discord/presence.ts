@@ -132,7 +132,7 @@ const presence = new Presence({
         viewPage: "general.viewPage",
         shopCart: "general.shopCart"
       },
-      await presence.getSetting("lang")
+      await presence.getSetting("lang").catch(() => "en")
     );
   };
 
@@ -148,7 +148,7 @@ presence.on("UpdateData", async () => {
     showInvites: boolean = await presence.getSetting("invite"),
     privacy: boolean = await presence.getSetting("privacy"),
     showCalls: boolean = await presence.getSetting("call"),
-    newLang: string = await presence.getSetting("lang"),
+    newLang: string = await presence.getSetting("lang").catch(() => "en"),
     logo: number = await presence.getSetting("logo"),
     logoArr = ["discordwhite", "discord", "discordblack"];
 
@@ -194,12 +194,11 @@ presence.on("UpdateData", async () => {
         ? true
         : false,
       dmsTyping =
-        Array.from(
-          document.querySelectorAll("div[contenteditable=true]")
-        ).find((c) =>
-          Object.values(c.attributes).find((a) =>
-            a.value?.includes(document.querySelector("h3")?.textContent)
-          )
+        Array.from(document.querySelectorAll("div[contenteditable=true]")).find(
+          (c) =>
+            Object.values(c.attributes).find((a) =>
+              a.value?.includes(document.querySelector("h3")?.textContent)
+            )
         )?.parentElement.children.length === 1
           ? true
           : false,
@@ -207,19 +206,20 @@ presence.on("UpdateData", async () => {
         ? true
         : false,
       dmsUserGroupName = groupDm
-        ? (document.querySelector(
-            "input[name=channel_name]"
-          ) as HTMLInputElement)?.value || "Undefined"
+        ? (
+            document.querySelector(
+              "input[name=channel_name]"
+            ) as HTMLInputElement
+          )?.value || "Undefined"
         : `@${document.querySelector("h3")?.textContent || "Undefined"}`,
       serverTyping =
-        Array.from(
-          document.querySelectorAll("div[contenteditable=true]")
-        ).find((c) =>
-          c.attributes[0].value?.includes(
-            Array.from(document.querySelectorAll("h3")).find((c) =>
-              c.className?.includes("title")
-            )?.textContent
-          )
+        Array.from(document.querySelectorAll("div[contenteditable=true]")).find(
+          (c) =>
+            c.attributes[0].value?.includes(
+              Array.from(document.querySelectorAll("h3")).find((c) =>
+                c.className?.includes("title")
+              )?.textContent
+            )
         )?.parentElement.children.length === 1
           ? true
           : false,
@@ -477,9 +477,9 @@ presence.on("UpdateData", async () => {
               .find((c) => c.className?.includes("rtcConnectionStatus"))
               ?.parentElement.querySelector("a")?.children || []
           ).find((c) => c.className?.includes("channel")),
-          connectedToDm = (connectedTo?.parentElement as HTMLLinkElement)?.href.includes(
-            "/@me/"
-          )
+          connectedToDm = (
+            connectedTo?.parentElement as HTMLLinkElement
+          )?.href.includes("/@me/")
             ? true
             : false;
 

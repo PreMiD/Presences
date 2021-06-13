@@ -9,11 +9,12 @@
     "project.gunivers.net"
   ],
   "description": {
-    "en": "Gunivers est une communauté autour de minecraft d'origine française, mais à destination d'un public français ou international selon les projets.",
-    "fr": "Gunivers is a minecraft community of French origin, but intended for a french or international audience depending of the project."
+    "fr": "Gunivers est une communauté autour de minecraft d'origine française, mais à destination d'un public français ou international selon les projets.",
+    "en": "Gunivers is a minecraft community of French origin, but intended for a french or international audience depending of the project.",
+    "nl": "Gunivers is een communautair autour de minecraft d'origine française, met een bestemming van een openbare français of internationale selon les projets."
   },
   "service": "Gunivers",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "logo": "https://i.imgur.com/lbVBBIz.png",
   "thumbnail": "https://i.imgur.com/8P9s1Pt.png",
   "color": "#FF8C39",

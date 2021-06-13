@@ -6,10 +6,11 @@
   },
   "url": "formuliser.oojmed.com",
   "description": {
-    "en": "Get information on chemical formulae."
+    "en": "Get information on chemical formulae.",
+    "nl": "Krijg informatie over chemische formules."
   },
   "service": "Formuliser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "logo": "https://i.imgur.com/rtkOdlB.png",
   "thumbnail": "https://i.imgur.com/nEJz6j6.png",
   "color": "#1f1f1f",

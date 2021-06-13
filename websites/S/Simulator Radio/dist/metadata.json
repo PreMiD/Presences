@@ -12,10 +12,11 @@
   ],
   "service": "Simulator Radio",
   "description": {
-    "en": "Simulator Radio | Your #1 Simulation Station"
+    "en": "Simulator Radio | Your #1 Simulation Station",
+    "nl": "Simulator Radio: Uw #1 Simulatie Station"
   },
   "url": "simulatorradio.com",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "logo": "https://i.imgur.com/fUvjEoV.png",
   "thumbnail": "https://i.imgur.com/QIy2Kfe.png",
   "color": "#FB352A",

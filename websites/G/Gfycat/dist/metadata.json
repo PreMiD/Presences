@@ -5,10 +5,11 @@
   },
   "service": "Gfycat",
   "description": {
-    "en": "Gfycat is the top destination for GIFs and videos. Create your own GIF or browse the best gaming GIFs, reactions GIFs, funny GIFs and more."
+    "en": "Gfycat is the top destination for GIFs and videos. Create your own GIF or browse the best gaming GIFs, reactions GIFs, funny GIFs and more.",
+    "nl": "Gfycat is de topbestemming voor GIFs en video's. Maak je eigen GIF of blader door de beste gaming GIF's, reacties GIF's, grappige GIF's en meer."
   },
   "url": "gfycat.com",
-  "version": "1.2.5",
+  "version": "1.2.7",
   "logo": "https://i.imgur.com/PRr2kHO.png",
   "thumbnail": "https://i.imgur.com/Fr03jyG.png",
   "color": "#3aa8ff",
