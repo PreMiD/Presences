@@ -1,7 +1,19 @@
 /**
  * Rythm API namespace
  */
-type apiNamespace = "r1" | "r2" | "r3" | "r4" | "r5" | "r6" | "r7" | "r8" | "r9" | "r10" | "rc" | "rchan";
+type apiNamespace =
+  | "r1"
+  | "r2"
+  | "r3"
+  | "r4"
+  | "r5"
+  | "r6"
+  | "r7"
+  | "r8"
+  | "r9"
+  | "r10"
+  | "rc"
+  | "rchan";
 /**
  * Queue repeating state
  */
@@ -134,7 +146,6 @@ interface LangStrings {
   users: string;
   requestedBy: string;
 }
-
 
 /**
  * Rythm PreMiD Presence
@@ -296,7 +307,6 @@ const presence = new Presence({
    */
   socketUrlLetiable = "apiWebsocketUrl";
 
-
 /**
  * API Connection
  */
@@ -411,7 +421,6 @@ class APIConnection {
   }
 }
 
-
 /**
  * Check the API connection
  * @param namespace API Namespace
@@ -487,10 +496,10 @@ async function getAPIInfo(path: string[]): Promise<APIInfo> {
  * @param namespace API namespace
  */
 function getRythm(namespace: apiNamespace): Rythm {
-  if(Object.prototype.hasOwnProperty.call(rythms, namespace)) {
+  if (Object.prototype.hasOwnProperty.call(rythms, namespace)) {
     // Get the Rythm name for known namespaces
     return rythms[namespace];
-  } else if(/^r\d+$/.test(namespace)) {
+  } else if (/^r\d+$/.test(namespace)) {
     // Try to guess the name for unknown namespaces that match the default schema
     const number = parseInt(namespace.slice(1));
     return {
@@ -663,7 +672,9 @@ presence.on("UpdateData", async () => {
       if (showUsernames) {
         presenceData.state = (await strings).requestedBy.replace(
           "{0}",
-          apiData.playingTrack.enqueuer[showNicknames ? "displayName" : "username"]
+          apiData.playingTrack.enqueuer[
+            showNicknames ? "displayName" : "username"
+          ]
         );
       }
 
@@ -680,7 +691,6 @@ presence.on("UpdateData", async () => {
 
       // Check if the song isn't paused
       if (apiData.isPaused === false) {
-
         // Check repeating state and add it
         switch (apiData.repeatMode) {
           // Repeat song
@@ -742,9 +752,13 @@ presence.on("UpdateData", async () => {
         // Check if any users are connected
         if (djAmount > 0 || userAmount > 0) {
           // Add user information
-          presenceData.state = `${(await strings).djs.replace("{0}", djAmount.toString())} ${
-            separator
-          } ${(await strings).users.replace("{0}", userAmount.toString())}`;
+          presenceData.state = `${(await strings).djs.replace(
+            "{0}",
+            djAmount.toString()
+          )} ${separator} ${(await strings).users.replace(
+            "{0}",
+            userAmount.toString()
+          )}`;
         }
       } else {
         // Check the idle time

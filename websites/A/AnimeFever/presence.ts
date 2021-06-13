@@ -93,9 +93,8 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
           const animeData = getAnimeEntity(),
             animeEpisode = getAnimeEpsiodeEntity();
           if (!animeData) return data;
-          const videoInstance = document.querySelector<HTMLVideoElement>(
-              ".jw-wrapper video"
-            ),
+          const videoInstance =
+              document.querySelector<HTMLVideoElement>(".jw-wrapper video"),
             [, endTimestamp] = context.getTimestamps(
               videoInstance.currentTime,
               videoInstance.duration
@@ -221,9 +220,8 @@ function getAnimeEpsiodeEntity(): AnimeEpisodeEntity {
               largeImageKey: IMAGES.LOGO,
               state: localizedStrings.browsing
             });
-          } else 
-            if (data.details) presence.setActivity(data);
-          
+          } else if (data.details) presence.setActivity(data);
+
           return data;
         })
         .catch(presence.error);
