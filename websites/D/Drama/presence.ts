@@ -77,7 +77,6 @@ presence.on("UpdateData", async () => {
     presenceData.state = "Browsing";
   } 
 
-
 if (presenceData.details == null) {
   presence.setTrayTitle();
   presence.setActivity();
