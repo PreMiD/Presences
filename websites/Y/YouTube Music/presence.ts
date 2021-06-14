@@ -6,6 +6,20 @@ const presence = new Presence({
     pause: "presence.playback.paused"
   });
 
+let watchStatus: { title: string; watchID: string };
+
+function getWatchID(title: string): string {
+  const [, , matchUrl] = document.location.href.match(
+    /^.*(music.youtube.com\/|v\/|u\/\w\/|watch\?v=|\\&v=)([^#&?]*).*/
+  );
+
+  if (matchUrl !== "") {
+    watchStatus = { title, watchID: matchUrl };
+    return watchStatus.watchID;
+  } else if (!watchStatus.watchID || watchStatus.title !== title) return null;
+  else return watchStatus.watchID;
+}
+
 function getAuthorString(): string {
   //* Get authors
   const authors = document.querySelectorAll(
@@ -78,9 +92,7 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       ),
-      [, , matchUrl] = document.location.href.match(
-        /^.*(music.youtube.com\/|v\/|u\/\w\/|watch\?v=|\\&v=)([^#&?]*).*/
-      ),
+      url = getWatchID(title),
       presenceData: PresenceData = {
         details: title,
         state: getAuthorString(),
@@ -99,14 +111,17 @@ presence.on("UpdateData", async () => {
           : repeatMode === "ALL"
           ? "Playlist on loop"
           : (await strings).play,
-        endTimestamp,
-        buttons: [
-          {
-            label: "Listen Along",
-            url: `https://music.youtube.com/watch?v=${matchUrl}`
-          }
-        ]
+        endTimestamp
       };
+
+    if (url) {
+      presenceData.buttons = [
+        {
+          label: "Listen Along",
+          url: `https://music.youtube.com/watch?v=${url}`
+        }
+      ];
+    }
 
     if (video.paused) {
       delete presenceData.startTimestamp;
