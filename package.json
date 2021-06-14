@@ -22,7 +22,7 @@
     "@types/chrome": "^0.0.144",
     "@types/debug": "^4.1.5",
     "@types/glob": "^7.1.3",
-    "@types/mongodb": "3.6.17",
+    "@types/mongodb": "3.6.18",
     "@types/node": "^15.12.2",
     "@types/prettier": "^2.2.3",
     "@types/semver": "^7.3.6",
