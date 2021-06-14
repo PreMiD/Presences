@@ -14,7 +14,7 @@ presence.on("UpdateData", async () => {
         "#page-content > div > :nth-child(1) > div.stats-body > div > div > div.stats-header-title"
         );
       presenceData.details = "Viewing Item:";
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -28,7 +28,7 @@ presence.on("UpdateData", async () => {
       const title = document.querySelector(
         "#page-content > div > div.panel-body > div > div > div.title > span > a"
         );
-      presenceData.state = title.innerText;
+      presenceData.state = title.textContent;
       if (showButtons) {
         presenceData.buttons = [
           {
@@ -42,7 +42,7 @@ presence.on("UpdateData", async () => {
        const title = document.querySelector(
          "#page-content > div > div.panel-body > div > div > div.title > span > a"
          );
-       presenceData.state = title.innerText;
+       presenceData.state = title.textContent;
        if (showButtons) {
         presenceData.buttons = [
           {
@@ -51,7 +51,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-     } else if (document.location.pathname.includes("/settings")) {
+    } else if (document.location.pathname.includes("/settings")) {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Settings";
     } else if (document.location.pathname.includes("/alerts")) {
@@ -97,7 +97,7 @@ presence.on("UpdateData", async () => {
        const title = document.querySelector(
          "#search-crumbs > a"
          );
-       presenceData.state = title.innerText;
+       presenceData.state = title.textContent;
        if (showButtons) {
         presenceData.buttons = [
           {
@@ -106,7 +106,7 @@ presence.on("UpdateData", async () => {
           }
         ];
       }
-     } else if (document.location.pathname.includes("/calculator")) presenceData.details = "Useing Calculator";
+    } else if (document.location.pathname.includes("/calculator")) presenceData.details = "Useing Calculator";
      else if (document.location.pathname.includes("/top/backpacks")) presenceData.details = "Viewing Top Backpacks";
      else if (document.location.pathname.includes("/top/donators")) presenceData.details = "Viewing Top Donators";
      else if (document.location.pathname.includes("/top/generous")) presenceData.details = "Viewing Top Gifters";
@@ -115,7 +115,7 @@ presence.on("UpdateData", async () => {
   if (presenceData.details == null) {
     presence.setTrayTitle();
     presence.setActivity();
-  } else {
+  } else 
     presence.setActivity(presenceData);
   }
 });
