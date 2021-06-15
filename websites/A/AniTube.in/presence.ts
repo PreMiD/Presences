@@ -16,14 +16,11 @@ presence.on("UpdateData", async () => {
     searchQuery: string = search !== null ? search.value : null,
     { pathname } = document.location;
 
-  if (searchContainer.style.display === "block") {
+  if (searchContainer.style.display === "block")
     presenceData.details = `Searching for ${searchQuery}`;
-    presenceData.state = "";
-  } else {
-    if (pathname === "/") {
-      presenceData.details = "Browsing Home Page";
-      presenceData.state = "";
-    } else if (pathname === "/busca.php") {
+  else {
+    if (pathname === "/") presenceData.details = "Browsing Home Page";
+    else if (pathname === "/busca.php") {
       const searchBox: HTMLDivElement = document.querySelector(
           ".mContainer_title_small_content"
         ),
@@ -36,24 +33,22 @@ presence.on("UpdateData", async () => {
       pathname === "/doramas" ||
       pathname === "/tokusatsu" ||
       pathname === "/donghua"
-    ) {
+    )
       presenceData.details = "Looking at all Animes";
-      presenceData.state = "";
-    } else if (
+    else if (
       pathname.startsWith("/anime/letra/") ||
       pathname.startsWith("/animes-dublado/letra/") ||
       pathname.startsWith("/doramas/letra/") ||
       pathname.startsWith("/tokusatsu/letra/") ||
       pathname.startsWith("/donghua/letra/")
     ) {
-      const query: string = pathname.substring(pathname.length - pathname.split("").reverse().join("").indexOf("/"));
+      const query: string = pathname.substring(
+        pathname.length - pathname.split("").reverse().join("").indexOf("/")
+      );
       if (query !== "todos") {
         presenceData.details = "Looking for Animes";
         presenceData.state = `starting with ${query}`;
-      } else {
-        presenceData.details = "Looking at all Animes";
-        presenceData.state = "";
-      }
+      } else presenceData.details = "Looking at all Animes";
     } else if (
       pathname.startsWith("/anime/") ||
       pathname.startsWith("/animes-dublado/") ||
@@ -73,18 +68,23 @@ presence.on("UpdateData", async () => {
         ),
         title: string = titleElement.innerText,
         videoElement: HTMLVideoElement = document.querySelector("video"),
-        paused: boolean = videoElement === null ? null : videoElement.paused,
-        duration: number = videoElement !== null ? videoElement.duration : NaN;
+        paused: boolean = videoElement === null ? null : videoElement.paused;
 
-      presenceData.details = `Watching ${title.substr(9, title.substr(9).indexOf("ep"))}`;
-      presenceData.state = `Episode ${parseInt(title.substr(title.indexOf("ep") + 2))}`;
-      presenceData.buttons = [{
-        label: "Watch Along",
-        url: document.location.href
-      }];
-      if (!(paused === null || paused || isNaN(duration))) {
-        presenceData.state = "Time left";
-        [presenceData.startTimestamp, presenceData.endTimestamp] =
+      presenceData.details = `Watching ${title.substr(
+        9,
+        title.substr(9).indexOf("ep")
+      )}`;
+      presenceData.state = `Episode ${parseInt(
+        title.substr(title.indexOf("ep") + 2)
+      )}`;
+      presenceData.buttons = [
+        {
+          label: "Watch Along",
+          url: document.location.href
+        }
+      ];
+      if (!paused && videoElement) {
+        [, presenceData.endTimestamp] =
           presence.getTimestampsfromMedia(videoElement);
       }
     } else if (pathname === "/contato.php")
