@@ -28,7 +28,9 @@ presence.on("UpdateData", async () => {
     // Streaming
     const videoTitle = document.querySelector(
       ".H2-sc-1h18a06-3.fZOeKY"
-    ).innerHTML;
+    ).innerHTML,
+    video: HTMLVideoElement = document.querySelector(".ardplayer-mediacanvas"),
+    timestamps = presence.getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
 
     if (path.startsWith("/live/")) {
       // Livestream
@@ -76,21 +78,13 @@ presence.on("UpdateData", async () => {
         videoDateDIV.innerHTML.indexOf("∙") - 1
       )}`;
 
-const video: HTMLVideoElement = document.querySelector('.ardplayer-mediacanvas'),
-    timestamps = presence.getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
-
-presenceData.startTimestamp = timestamps[0];
-presenceData.endTimestamp = timestamps[1];
-      presenceData.endTimestamp = Date.now() + (remainingSeconds * 1000);
+      presenceData.startTimestamp = timestamps[0];
+      presenceData.endTimestamp = timestamps[1];
       presenceData.buttons = [{ label: (await strings).buttonWatchVideo, url: prevUrl }];
     }
 
     // Player paused ?
-    if (
-      document.querySelector(
-        "div.ardplayer-buttons-main.ardplayer-button-big button[class='ardplayer-button-playpause ardplayer-icon ardplayer-icon-pause']"
-      ) === null
-    ) {
+    if (video.paused) {
       presenceData.smallImageKey = "pause";
       presenceData.smallImageText = (await strings).pause;
       presenceData.startTimestamp = 0;
