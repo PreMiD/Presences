@@ -481,8 +481,7 @@ presence.on("UpdateData", async () => {
       presenceData.largeImageKey = "keynote";
 
       if(iframe?.style.display === "none") presenceData.state = "Waiting room...";
-    }
-    else if (urlpath[1] === "fmf") presenceData.state = "Find My Friends";
+    } else if (urlpath[1] === "fmf") presenceData.state = "Find My Friends";
     else if (urlpath[1] === "find") presenceData.state = "Find My";
   } else if (window.location.hostname === "card.apple.com") {
     presenceData.largeImageKey = "apple-card";
