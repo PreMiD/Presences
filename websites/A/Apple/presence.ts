@@ -464,8 +464,7 @@ presence.on("UpdateData", async () => {
         if(urlpath[2] === "create") presenceData.state = "Creating...";
         else presenceData.state = document.querySelector("div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout")?.textContent;
       } else presenceData.state = "Pages";
-    }
-    else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
+    } else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
     else if (urlpath[1] === "keynote") {
       presenceData.largeImageKey = "keynote";
 
@@ -475,8 +474,7 @@ presence.on("UpdateData", async () => {
         if(urlpath[2] === "create") presenceData.state = "Creating...";
         else presenceData.state = document.querySelector("div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout")?.textContent;
       } else presenceData.state = "Keynote";
-    }
-    else if(urlpath[1] === "keynote-live" && urlpath[2]) {
+    } else if(urlpath[1] === "keynote-live" && urlpath[2]) {
       const iframe = document.querySelector("iframe");
 
       presenceData.details = "iCloud Keynote Live";
