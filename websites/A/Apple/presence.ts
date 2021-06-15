@@ -456,6 +456,8 @@ presence.on("UpdateData", async () => {
     else if (urlpath[1] === "notes") presenceData.state = "Notes";
     else if (urlpath[1] === "reminders") presenceData.state = "Reminders";
     else if (urlpath[1] === "pages") {
+      presenceData.largeImageKey = "pages";
+
       if(urlpath[2]) {
         presenceData.details = "iCloud Pages";
 
@@ -465,6 +467,8 @@ presence.on("UpdateData", async () => {
     }
     else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
     else if (urlpath[1] === "keynote") {
+      presenceData.largeImageKey = "keynote";
+
       if(urlpath[2]) {
         presenceData.details = "iCloud Keynote";
 
@@ -476,6 +480,7 @@ presence.on("UpdateData", async () => {
       const iframe = document.querySelector("iframe");
 
       presenceData.details = "iCloud Keynote Live";
+      presenceData.largeImageKey = "keynote";
 
       if(iframe?.style.display === "none") presenceData.state = "Waiting room...";
     }
