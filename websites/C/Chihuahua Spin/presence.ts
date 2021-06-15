@@ -1,11 +1,11 @@
 const presence = new Presence({
     clientId: "854128240078356480"
-  });
+  }),
+  browsingStamp = Math.floor(Date.now() / 1000);
   
   presence.on("UpdateData", () => {
-    const spins = document.querySelector("#spin").textContent.split("Jump to")[0].trim();
-    const browsingStamp = Math.floor(Date.now() / 1000);
-    const presenceData: PresenceData = {
+    const spins = document.querySelector("#spin").textContent.split("Jump to")[0].trim(),
+    presenceData: PresenceData = {
       largeImageKey: "dogspinthumbnail",
       startTimestamp: browsingStamp,
       details: "Watching the chihuahua spin!",
