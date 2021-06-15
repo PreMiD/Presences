@@ -13,9 +13,8 @@ const presence = new Presence({ clientId: "666074265233260555" }),
     watching: "general.watching",
     episode: "general.episode",
     watchEpisode: "general.buttonViewEpisode",
-    anime: "general.anime",
-  }), 
-  startTimestamp = Math.floor(Date.now() / 1000);
+    anime: "general.anime"
+  });
 
 let video: Video;
 
@@ -33,15 +32,15 @@ presence.on("UpdateData", async () => {
   ep = document.querySelector(
     "#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(2) > a"
   )?.textContent.trim(),
-  animeTitle = document.querySelector('#detayPaylas > div > div.panel-ust > div')?.textContent.trim(),
-  animePage = document.querySelector('#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(1) > a')?.getAttribute('href') || document.URL;
+  animeTitle = document.querySelector("#detayPaylas > div > div.panel-ust > div")?.textContent.trim(),
+  animePage = document.querySelector("#arkaplan > div:nth-child(3) > div.col-xs-8 > div > div:nth-child(3) > div > div.panel-ust > ol > li:nth-child(1) > a")?.getAttribute("href") || document.URL;
 
   // Series & Movies
   if (title && ep) {
     const epNum = ep.match(/[0-9]+\. Bölüm/g);
 
     presenceData.details = `${(await strings).watching} ${title}`;
-    if (epNum) presenceData.state = `${(await strings).episode} ${epNum[0].split('.')[0]}`;
+    if (epNum) presenceData.state = `${(await strings).episode} ${epNum[0].split(".")[0]}`;
 
     presenceData.buttons = [
       {
@@ -53,9 +52,7 @@ presence.on("UpdateData", async () => {
         url: `https://www.turkanime.net/${animePage}`
       }
     ];
-  }
-  // About Anime Page
-  else if (window.location.pathname.startsWith("/anime/") && animeTitle) {
+  } else if (window.location.pathname.startsWith("/anime/") && animeTitle) { // About Anime Page
     presenceData.details = (await strings).viewAnime;
     presenceData.state = animeTitle;
     presenceData.buttons = [
@@ -64,11 +61,9 @@ presence.on("UpdateData", async () => {
         url: animePage
       }
     ];
-  }
-  // Browsing
-  else {
+  } else { // Browsing
     presenceData.details = (await strings).browsing;
-    presenceData.startTimestamp = startTimestamp;
+    presenceData.startTimestamp = Math.floor(Date.now() / 1000);
   }
 
   if (video) {
@@ -78,12 +73,12 @@ presence.on("UpdateData", async () => {
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      const timestamps = presence.getTimestamps(
+      const [currentTime, duration] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      presenceData.startTimestamp = timestamps[0];
-      presenceData.endTimestamp = timestamps[1];
+      presenceData.startTimestamp = currentTime;
+      presenceData.endTimestamp = duration;
     }
   }
 
