@@ -76,17 +76,11 @@ presence.on("UpdateData", async () => {
         videoDateDIV.innerHTML.indexOf("∙") - 1
       )}`;
 
-      const remainingSeconds =
-        parseInt(
-          document
-            .querySelector(".ardplayer-controlbar")
-            .getAttribute("aria-valuemax")
-        ) -
-        parseInt(
-          document
-            .querySelector(".ardplayer-controlbar")
-            .getAttribute("aria-valuenow")
-        );
+const video: HTMLVideoElement = document.querySelector('.ardplayer-mediacanvas'),
+    timestamps = presence.getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
+
+presenceData.startTimestamp = timestamps[0];
+presenceData.endTimestamp = timestamps[1];
       presenceData.endTimestamp = Date.now() + (remainingSeconds * 1000);
       presenceData.buttons = [{ label: (await strings).buttonWatchVideo, url: prevUrl }];
     }
