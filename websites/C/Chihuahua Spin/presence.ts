@@ -9,10 +9,9 @@ const presence = new Presence({
     const presenceData: PresenceData = {
       largeImageKey: "dogspinthumbnail",
       startTimestamp: browsingStamp,
-      details: `Watching the chihuahua spin!`,
+      details: "Watching the chihuahua spin!",
       state: `${spins}`,
       buttons: [{label: "Website", url: "http://chihuahuaspin.com/"}]
     };
     presence.setActivity(presenceData);
   });
-  
