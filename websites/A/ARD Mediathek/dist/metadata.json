@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.premid.app/metadata/1.3",
+    "service": "ARD Mediathek",
+    "author": {
+      "name": "TONi_C137#1757",
+      "id": "328213965299515393"
+    },
+    "category": "videos",
+    "logo": "https://upload.wikimedia.org/wikipedia/de/thumb/a/ad/ARD_Mediathek-Logo.png/600px-ARD_Mediathek-Logo.png",
+    "thumbnail": "https://www.daserste.de/unterhaltung/service-unterhaltung/ard-mediathek-das-erste-100~_v-standard644_d3b97e.jpg",
+    "version": "1.0.0",
+    "color": "#000f2d",
+    "tags": [
+      "videos",
+      "livestreams"
+    ],
+    "url": "www.ardmediathek.de",
+    "description": {
+      "de": "Die ARD Mediathek ist das gemeinsame Video-on-Demand-Angebot der Landesrundfunkanstalten und Gemeinschaftseinrichtungen der ARD. Das Angebot wurde wie die ehemals eigenständige Das Erste: Mediathek erstmals 2007 auf der Internationalen Funkausstellung in Berlin vorgestellt und im Mai 2008 gestartet.",
+      "en": "ARD Mediathek is a shared video-on-demand streaming service offered by German public-sector broadcasters of ARD."
+    }
+  }
