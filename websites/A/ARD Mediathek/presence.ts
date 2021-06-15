@@ -16,14 +16,13 @@ const presence = new Presence({
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
     largeImageKey: "ard_mediathek"
-  };
+  }, path = location.pathname.replace(/\/?$/, "/");
+
 
   if (document.location.href !== prevUrl) {
     prevUrl = document.location.href;
     elapsed = Math.floor(Date.now() / 1000);
   }
-
-  const path = location.pathname.replace(/\/?$/, "/");
 
   if (path.startsWith("/video/") || path.startsWith("/live/")) {
     // Streaming
