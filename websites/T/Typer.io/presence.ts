@@ -27,7 +27,7 @@ presence.on("UpdateData", () => {
         .trim(),
       quickplayAccuracyUnmerged = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_stats__3aNhg > span:nth-child(2)").textContent.split("Jump to")[0]
         .trim().replace("ACCURACY",""),
-        quickplayAccuracy = quickplayAccuracyUnmerged + " acc",
+        quickplayAccuracy = `${quickplayAccuracyUnmerged} acc`,
         quickplayRaceStatus = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3").textContent.split("Jump to")[0]
         .trim();
 
@@ -46,14 +46,15 @@ presence.on("UpdateData", () => {
           presenceData.state = `${quickplayWPM}, ${quickplayAccuracy}, ${quickplayRaceTime}`;
           }
   
-            if (quickplayRacePlace === "-" &&  quickplayWPM !== "undefined" && quickplayRaceStatus === "Game has Ended") {
+            if (quickplayRacePlace === "-" && quickplayWPM !== "undefined" && quickplayRaceStatus === "Game has Ended") {
               presenceData.details = "The game ended, did not place.";
               presenceData.state = `${quickplayWPM}, ${quickplayAccuracy}`;
             }
       } catch {
         presenceData.details = "In a quick play race:";
         presenceData.state = "Connecting...";
-      }}
+      }
+    }
     // typer.io/solo (when playing on the solo mode, aka solo play)
     else if (document.location.pathname.startsWith("/solo")) {
       const soloRaceStatus = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.Status_root__2iFRH > div > h3").textContent.split("Jump to")[0]
@@ -92,7 +93,6 @@ presence.on("UpdateData", () => {
         presenceData.details = "In a solo race:";
         presenceData.state = "Connecting...";
       }
-
     }
     // typer.io/lobby (aka custom play or group play)
     else if (document.location.pathname.startsWith("/lobby")) {
@@ -130,7 +130,7 @@ presence.on("UpdateData", () => {
             }
   
             if (privateRacePlace === "-" && playingStatus === "Game has Ended") {
-              presenceData.details = `The game ended, did not place.`;
+              presenceData.details = "The game ended, did not place.";
               presenceData.state = `${privateWPM}, ${privateAccuracy}`;
             }
       }} 
