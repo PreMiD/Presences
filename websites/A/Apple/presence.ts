@@ -458,29 +458,36 @@ presence.on("UpdateData", async () => {
     else if (urlpath[1] === "pages") {
       presenceData.largeImageKey = "pages";
 
-      if(urlpath[2]) {
+      if (urlpath[2]) {
         presenceData.details = "iCloud Pages";
 
-        if(urlpath[2] === "create") presenceData.state = "Creating...";
-        else presenceData.state = document.querySelector("div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout")?.textContent;
+        if (urlpath[2] === "create") presenceData.state = "Creating...";
+        else
+          presenceData.state = document.querySelector(
+            "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
+          )?.textContent;
       } else presenceData.state = "Pages";
     } else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
     else if (urlpath[1] === "keynote") {
       presenceData.largeImageKey = "keynote";
 
-      if(urlpath[2]) {
+      if (urlpath[2]) {
         presenceData.details = "iCloud Keynote";
 
-        if(urlpath[2] === "create") presenceData.state = "Creating...";
-        else presenceData.state = document.querySelector("div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout")?.textContent;
+        if (urlpath[2] === "create") presenceData.state = "Creating...";
+        else
+          presenceData.state = document.querySelector(
+            "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
+          )?.textContent;
       } else presenceData.state = "Keynote";
-    } else if(urlpath[1] === "keynote-live" && urlpath[2]) {
+    } else if (urlpath[1] === "keynote-live" && urlpath[2]) {
       const iframe = document.querySelector("iframe");
 
       presenceData.details = "iCloud Keynote Live";
       presenceData.largeImageKey = "keynote";
 
-      if(iframe?.style.display === "none") presenceData.state = "Waiting room...";
+      if (iframe?.style.display === "none")
+        presenceData.state = "Waiting room...";
     } else if (urlpath[1] === "fmf") presenceData.state = "Find My Friends";
     else if (urlpath[1] === "find") presenceData.state = "Find My";
   } else if (window.location.hostname === "card.apple.com") {
