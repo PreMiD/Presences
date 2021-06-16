@@ -1,8 +1,8 @@
 const presence = new Presence({
   clientId: "655050505726197781"
-}), browsingStamp = Math.floor(Date.now() / 1000), page = window.location.pathname, page2 = document.title, l = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div > div.moduleTitle.txt-light > h4"),
-l2 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div.pt-25.moduleS > div.moduleTitle.txt-light > h4"),
-l3 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div.moduleTitle.txt-light > h4");
+}), browsingStamp = Math.floor(Date.now() / 1000), page = window.location.pathname, page2 = document.title, Check1 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div > div.moduleTitle.txt-light > h4"),
+check2 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div.pt-25.moduleS > div.moduleTitle.txt-light > h4"),
+check3 = document.querySelector("#root > div > div > div.page-wrapper.inside-panel > div > div:nth-child(1) > div > div.moduleTitle.txt-light > h4");
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -11,8 +11,8 @@ presence.on("UpdateData", () => {
   };
 
     if (page.includes("/server")) {
-      if (l3) {
-        if (l3.textContent.includes("Reaction Roles")) {
+      if (check3) {
+        if (check3.textContent.includes("Reaction Roles")) {
           presenceData.details = "Managing:";
           presenceData.state = "Reaction Roles Settings";
       }
@@ -24,34 +24,34 @@ presence.on("UpdateData", () => {
     } else if (page2.includes("embed")) {
       presenceData.details = "Managing:";
       presenceData.state = "Embeds";
-    } else if (l.textContent.includes("Utility")) {
+    } else if (Check1.textContent.includes("Utility")) {
       presenceData.details = "Managing:";
       presenceData.state = "Utility Settings"; 
-    } else if (l2.textContent.includes("Mod")) {
+    } else if (check2.textContent.includes("Mod")) {
       presenceData.details = "Managing:";
       presenceData.state = "Moderation Settings";
-    } else if (l2.textContent.includes("Automod")) {
+    } else if (check2.textContent.includes("Automod")) {
       presenceData.details = "Managing:";
       presenceData.state = "Automod Settings";
-    } else if (l2.textContent.includes("Welcomer")) {
+    } else if (check2.textContent.includes("Welcomer")) {
       presenceData.details = "Managing:";
       presenceData.state = "Welcomer Settings"; 
-    } else if (l2.textContent.includes("Auto Responder")) {
+    } else if (check2.textContent.includes("Auto Responder")) {
       presenceData.details = "Managing:";
       presenceData.state = "Auto Responder Settings";
-    } else if (l2.textContent.includes("Leveling System")) {
+    } else if (check2.textContent.includes("Leveling System")) {
       presenceData.details = "Managing:";
       presenceData.state = "Leveling Settings";
-    } else if (l2.textContent.includes("Logs")) {
+    } else if (check2.textContent.includes("Logs")) {
       presenceData.details = "Managing:";
       presenceData.state = "Logging Settings";
-    } else if (l2.textContent.includes("Colors")) {
+    } else if (check2.textContent.includes("Colors")) {
       presenceData.details = "Managing:";
       presenceData.state = "Color Settings";
-    } else if (l2.textContent.includes("Auto Roles")) {
+    } else if (check2.textContent.includes("Auto Roles")) {
       presenceData.details = "Managing:";
       presenceData.state = "Auto Roles Settings";
-    } else if (l.textContent.includes("Music")) {
+    } else if (Check1.textContent.includes("Music")) {
       presenceData.details = "Managing:";
       presenceData.state = "Music Settings";
     } else {
