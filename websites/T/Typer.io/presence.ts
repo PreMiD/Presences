@@ -54,8 +54,8 @@ presence.on("UpdateData", () => {
         presenceData.details = "In a quick play race:";
         presenceData.state = "Connecting...";
       }
-    } // typer.io/solo (when playing on the solo mode, aka solo play)
-    else if (document.location.pathname.startsWith("/solo")) {
+    } else if (document.location.pathname.startsWith("/solo")) {
+      // typer.io/solo (when playing on the solo mode, aka solo play)
       const soloRaceStatus = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.Status_root__2iFRH > div > h3").textContent.split("Jump to")[0]
       .trim();
 
@@ -92,9 +92,8 @@ presence.on("UpdateData", () => {
         presenceData.details = "In a solo race:";
         presenceData.state = "Connecting...";
       }
-    }
-    // typer.io/lobby (aka custom play or group play)
-    else if (document.location.pathname.startsWith("/lobby")) {
+    } else if (document.location.pathname.startsWith("/lobby")) {
+      // typer.io/lobby (aka custom play or group play)
       try {
         const lobbyInfo = document.querySelector("#__next > main > div > div.Lobby_container__1Y-Os > div.Banner_root__thCyZ > h3").textContent.split("Jump to")[0]
         .trim();
@@ -133,8 +132,8 @@ presence.on("UpdateData", () => {
               presenceData.state = `${privateWPM}, ${privateAccuracy}`;
             }
           }
-        } // typer.io/forum/posts (when viewing individual posts)
-    else if (document.location.pathname.startsWith("/forum/post/")) {
+        } else if (document.location.pathname.startsWith("/forum/post/")) {
+          // typer.io/forum/posts (when viewing individual posts)
       try {
       const postName = document.querySelector("#__next > div.Post_root__ivA4B > div > div.Post_postContainer__oful_ > div.Post_postContent__2KI4z > div.Post_header__19SiQ > h1").textContent.split("Jump to")[0]
       .trim();
