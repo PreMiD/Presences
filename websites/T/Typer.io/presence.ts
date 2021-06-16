@@ -54,8 +54,7 @@ presence.on("UpdateData", () => {
         presenceData.details = "In a quick play race:";
         presenceData.state = "Connecting...";
       }
-    }
-    // typer.io/solo (when playing on the solo mode, aka solo play)
+    } // typer.io/solo (when playing on the solo mode, aka solo play)
     else if (document.location.pathname.startsWith("/solo")) {
       const soloRaceStatus = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.Status_root__2iFRH > div > h3").textContent.split("Jump to")[0]
       .trim();
@@ -133,8 +132,8 @@ presence.on("UpdateData", () => {
               presenceData.details = "The game ended, did not place.";
               presenceData.state = `${privateWPM}, ${privateAccuracy}`;
             }
-      }} 
-    // typer.io/forum/posts (when viewing individual posts)
+          }
+        } // typer.io/forum/posts (when viewing individual posts)
     else if (document.location.pathname.startsWith("/forum/post/")) {
       try {
       const postName = document.querySelector("#__next > div.Post_root__ivA4B > div > div.Post_postContainer__oful_ > div.Post_postContent__2KI4z > div.Post_header__19SiQ > h1").textContent.split("Jump to")[0]
