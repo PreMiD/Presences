@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "GTA5Mods",
+  "author": {
+    "name": "Cobbrou",
+    "id": "280784667743879178"
+  },
+  "category": "games",
+  "logo": "https://user-images.githubusercontent.com/72723971/120658455-1216af80-c44b-11eb-8e4e-5dfb92ee3b04.png",
+  "thumbnail": "https://pbs.twimg.com/profile_images/747306031907143680/g_vmj0cD.jpg",
+  "version": "1.0.0",
+  "color": "#2eb152",
+  "tags": [
+    "gta",
+    "mods"
+  ],
+  "url": "www.gta5-mods.com",
+  "description": {
+    "fr": "GTA 5 Mods description",
+    "en": "GTA 5 Mods description"
+  }
+}
