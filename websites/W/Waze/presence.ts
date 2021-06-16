@@ -35,8 +35,6 @@ function fnd() {
   if (!path.endsWith("/")) path = `${path}/`;
   path = path.replace(/(\/[a-z]{2}|\/[a-z]{2}-[A-Z]{2})\//,"/");
 
-  console.log(path);
-
   if (path.includes("/live-map")) {
     start = end = "";
     start = (document.querySelector("div.wz-search-container.is-origin > div > div > div.wm-search__selected > span.wm-search__primary") as HTMLSpanElement)?.innerText ?? "somewhere";
