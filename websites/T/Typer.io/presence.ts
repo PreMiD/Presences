@@ -142,15 +142,14 @@ presence.on("UpdateData", () => {
       } catch {
         presenceData.details = "Reading a post on the forum.";
       }
-    }
+    } else if (document.location.pathname === ("/forum")) presenceData.details = "Scrolling through forum posts.";
     // typer.io/forum (when scroling through all the posts on the forum)
-    else if (document.location.pathname === ("/forum")) presenceData.details = "Scrolling through forum posts.";
-    // typer.io/hiscores (when viewing the hiscores page)
     else if (document.location.pathname.startsWith("/hiscores")) presenceData.details = "Viewing the hiscores.";
-    // typer.io/u/settings (when a user is editing their bio/settings)
+    // typer.io/hiscores (when viewing the hiscores page)
     else if (document.location.pathname === "/u/settings") presenceData.details = "Editing account settings...";
-    // typer.io/u/(username) (when viewing a users profile)
+    // typer.io/u/settings (when a user is editing their bio/settings)
     else if (document.location.pathname.startsWith("/u/")) {
+      // typer.io/u/(username) (when viewing a users profile)
       try {
       const user = document.querySelector("#__next > div.Profile_root__2QIUs > div.Profile_headerContainer__IYvIA > div.Profile_profileContainer__k2Fu9 > div.Profile_wrapper__3Ghk7 > div.Profile_content__rWK4h > h3").textContent.split("Jump to")[0]
       .trim();
@@ -159,15 +158,14 @@ presence.on("UpdateData", () => {
       } catch {
         presenceData.details = "Viewing a users profile.";
       }
-    } 
+    } else if (document.location.pathname.startsWith("/login")) presenceData.details = "Logging in...";
     // typer.io/login (when logging into an account via the login page)
-    else if (document.location.pathname.startsWith("/login")) presenceData.details = "Logging in...";
-    // typer.io/singup (when creating account via the signup page)
     else if (document.location.pathname.startsWith("/signup")) presenceData.details = "Creating an account...";
-    // When viewing the home page because every other page is defined. (no ending on the url typer.io)
+    // typer.io/singup (when creating account via the signup page)
     else if (document.location.pathname === "/") presenceData.details = "Viewing the home page.";
-    // When viewing a 404 page
+    // When viewing the home page (typer.io, no ending on the url typer.io)
     else {
+      // When viewing a 404 page
       try {
       const pageNotFoundText = document.querySelector("#__next > main > h1").textContent.split("Jump to")[0]
       .trim();
