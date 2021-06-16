@@ -170,9 +170,8 @@ presence.on("UpdateData", () => {
       const pageNotFoundText = document.querySelector("#__next > main > h1").textContent.split("Jump to")[0]
       .trim();
       presenceData.details = pageNotFoundText;
-      }
-      // When viewing a page which does not have 404 text.
-      catch {
+      } catch {
+        // When viewing a page which does not have 404 text.
         presenceData.details = "Viewing an unsupported page.";
       }
     }
