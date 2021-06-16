@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.hostname == "typer.io") {
+  if (document.location.hostname === "typer.io") {
     // typer.io/play presence (aka quick play)
     if (document.location.pathname.startsWith("/play")) {
 
@@ -22,38 +22,38 @@ presence.on("UpdateData", () => {
         }
 
       try {
-        var quickplayWPM = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_username__3mARu > div.ClientList_usernameWrapper__3AP4s > div")
+        const quickplayWPM = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_username__3mARu > div.ClientList_usernameWrapper__3AP4s > div")
         .textContent.split("Jump to")[0]
         .trim(),
       quickplayAccuracyUnmerged = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_stats__3aNhg > span:nth-child(2)").textContent.split("Jump to")[0]
         .trim().replace("ACCURACY",""),
-        quickplayAccuracy = quickplayAccuracyUnmerged + " acc";
+        quickplayAccuracy = quickplayAccuracyUnmerged + " acc",
+        quickplayRaceStatus = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3").textContent.split("Jump to")[0]
+        .trim();
 
-        if (playingStatus === "GO!") {
+        if (quickplayRaceStatus === "GO!") {
           presenceData.details = "In a quick play race:";
           presenceData.state = `${quickplayWPM}, ${quickplayAccuracy}`;
         }
 
-        var quickplayRacePlace = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_username__3mARu > div.ClientList_placement__3G8W_").textContent.split("Jump to")[0]
+        const quickplayRacePlace = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_username__3mARu > div.ClientList_placement__3G8W_").textContent.split("Jump to")[0]
         .trim(),
         quickplayRaceTime = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_stats__3aNhg > span:nth-child(3)").textContent.split("Jump to")[0]
         .trim().replace("TIME","");
         
-        if (quickplayRacePlace !== "" && quickplayRaceTime != "--:--" || playingStatus === "Game has Ended") {
+        if (quickplayRaceTime !== "--:--") {
           presenceData.details = `Placed ${quickplayRacePlace} in a quick play race!`;
           presenceData.state = `${quickplayWPM}, ${quickplayAccuracy}, ${quickplayRaceTime}`;
           }
   
-            if (quickplayRacePlace === "-" &&  quickplayWPM != "undefined" && playingStatus === "Game has Ended") {
-              presenceData.details = `The game ended, did not place.`;
+            if (quickplayRacePlace === "-" &&  quickplayWPM !== "undefined" && quickplayRaceStatus === "Game has Ended") {
+              presenceData.details = "The game ended, did not place.";
               presenceData.state = `${quickplayWPM}, ${quickplayAccuracy}`;
             }
       } catch {
         presenceData.details = "In a quick play race:";
         presenceData.state = "Connecting...";
-      }
-
-    }
+      }}
     // typer.io/solo (when playing on the solo mode, aka solo play)
     else if (document.location.pathname.startsWith("/solo")) {
       const soloRaceStatus = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.Status_root__2iFRH > div > h3").textContent.split("Jump to")[0]
@@ -72,7 +72,7 @@ presence.on("UpdateData", () => {
       .trim(),
       soloAccuracyUnmerged = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.ClientList_root__3kp8e.ClientList_soloRoot__1gfSf > div > div > div > div.ClientList_stats__3aNhg > span:nth-child(2)").textContent.split("Jump to")[0]
       .trim().replace("ACCURACY",""),
-      soloAccuracy = soloAccuracyUnmerged + " acc",
+      soloAccuracy = `${soloAccuracyUnmerged} acc`,
       soloRaceTime = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.ClientList_root__3kp8e.ClientList_soloRoot__1gfSf > div > div > div > div.ClientList_stats__3aNhg > span:nth-child(3)").textContent.split("Jump to")[0]
       .trim().replace("TIME","");
 
@@ -81,12 +81,12 @@ presence.on("UpdateData", () => {
       presenceData.state = `${soloWPM}, ${soloAccuracy}`;
       }
 
-      if (soloRaceStatus === "Game has Ended" && soloRaceTime != "--:--") {
+      if (soloRaceStatus === "Game has Ended" && soloRaceTime !== "--:--") {
         presenceData.details = "Completed a solo race:";
         presenceData.state = `${soloWPM}, ${soloAccuracy}, ${soloRaceTime}`;
         } else if (soloRaceStatus === "Game has Ended" && soloRaceTime === "--:--") {
           presenceData.details = "Did not complete solo race:";
-          presenceData.state = `${soloWPM}, ${soloAccuracy}`
+          presenceData.state = `${soloWPM}, ${soloAccuracy}`;
         }
       } catch {
         presenceData.details = "In a solo race:";
@@ -99,11 +99,9 @@ presence.on("UpdateData", () => {
       try {
         const lobbyInfo = document.querySelector("#__next > main > div > div.Lobby_container__1Y-Os > div.Banner_root__thCyZ > h3").textContent.split("Jump to")[0]
         .trim();
-        if (lobbyInfo.startsWith("Lobby")) {
         presenceData.details = lobbyInfo;
-        }
       } catch {
-        var playingStatus = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3").textContent.split("Jump to")[0]
+        const playingStatus = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.Status_root__2iFRH > div > h3").textContent.split("Jump to")[0]
       .trim(),
       privateWPM = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div > div > div.ClientList_username__3mARu > div.ClientList_usernameWrapper__3AP4s > div")
       .textContent.split("Jump to")[0]
@@ -112,7 +110,7 @@ presence.on("UpdateData", () => {
         .trim().replace("ACCURACY",""),
       privateRacePlace = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div > div > div.ClientList_username__3mARu > div.ClientList_placement__3G8W_").textContent.split("Jump to")[0]
         .trim(),
-      privateAccuracy = privateAccuracyUnmerged + " acc",
+      privateAccuracy = `${privateAccuracyUnmerged} acc`,
       privateRaceTime = document.querySelector("#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div > div > div.ClientList_stats__3aNhg > span:nth-child(3)").textContent.split("Jump to")[0]
         .trim().replace("TIME","");
 
@@ -135,10 +133,7 @@ presence.on("UpdateData", () => {
               presenceData.details = `The game ended, did not place.`;
               presenceData.state = `${privateWPM}, ${privateAccuracy}`;
             }
-      }
-  
-          
-    } 
+      }} 
     // typer.io/forum/posts (when viewing individual posts)
     else if (document.location.pathname.startsWith("/forum/post/")) {
       try {
@@ -151,17 +146,11 @@ presence.on("UpdateData", () => {
       }
     }
     // typer.io/forum (when scroling through all the posts on the forum)
-    else if (document.location.pathname === ("/forum")) {
-      presenceData.details = "Scrolling through forum posts.";
-    }
+    else if (document.location.pathname === ("/forum")) presenceData.details = "Scrolling through forum posts.";
     // typer.io/hiscores (when viewing the hiscores page)
-    else if (document.location.pathname.startsWith("/hiscores")) {
-      presenceData.details = "Viewing the hiscores.";
-    }
+    else if (document.location.pathname.startsWith("/hiscores")) presenceData.details = "Viewing the hiscores.";
     // typer.io/u/settings (when a user is editing their bio/settings)
-    else if (document.location.pathname === "/u/settings") {
-      presenceData.details = "Editing account settings...";
-    }
+    else if (document.location.pathname === "/u/settings") presenceData.details = "Editing account settings...";
     // typer.io/u/(username) (when viewing a users profile)
     else if (document.location.pathname.startsWith("/u/")) {
       try {
@@ -174,17 +163,11 @@ presence.on("UpdateData", () => {
       }
     } 
     // typer.io/login (when logging into an account via the login page)
-    else if (document.location.pathname.startsWith("/login")) {
-      presenceData.details = "Logging in...";
-    }
+    else if (document.location.pathname.startsWith("/login")) presenceData.details = "Logging in...";
     // typer.io/singup (when creating account via the signup page)
-    else if (document.location.pathname.startsWith("/signup")) {
-      presenceData.details = "Creating an account...";
-    }
+    else if (document.location.pathname.startsWith("/signup")) presenceData.details = "Creating an account...";
     // When viewing the home page because every other page is defined. (no ending on the url typer.io)
-    else if (document.location.pathname === "/") {
-      presenceData.details = "Viewing the home page.";
-    }
+    else if (document.location.pathname === "/") presenceData.details = "Viewing the home page.";
     // When viewing a 404 page
     else {
       try {
