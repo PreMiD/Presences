@@ -52,8 +52,6 @@ fnd();
 setInterval(fnd, 5000);
 
 presence.on("UpdateData", async () => {
-
-
   if (!presenceData.details)
     presence.setActivity();
    else
