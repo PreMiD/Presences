@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.premid.app/metadata/1.3",
+  "service": "AniKuru",
+  "author": {
+    "name": "Jovan",
+    "id": "795608987445755946"
+  },
+  "category": "anime",
+  "logo": "https://imgur.com/8FM9BZw",
+  "thumbnail": "https://imgur.com/OQraFve",
+  "version": "1.0.0",
+  "color": "#ef4444",
+  "tags": [
+    "anime",
+    "streaming"
+  ],
+  "url": "anikuru.me",
+  "description": {
+    "en": "Anikuru is a website where you can watch high quality anime"
+  }
+}
