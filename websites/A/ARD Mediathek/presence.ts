@@ -15,9 +15,9 @@ const presence = new Presence({
 
 presence.on("UpdateData", async () => {
   const presenceData: PresenceData = {
-    largeImageKey: "ard_mediathek"
-  }, path = location.pathname.replace(/\/?$/, "/");
-
+      largeImageKey: "ard_mediathek"
+    },
+    path = location.pathname.replace(/\/?$/, "/");
 
   if (document.location.href !== prevUrl) {
     prevUrl = document.location.href;
@@ -27,19 +27,22 @@ presence.on("UpdateData", async () => {
   if (path.startsWith("/video/") || path.startsWith("/live/")) {
     // Streaming
     const videoTitle = document.querySelector(
-      ".H2-sc-1h18a06-3.fZOeKY"
-    ).innerHTML,
-    video: HTMLVideoElement = document.querySelector(".ardplayer-mediacanvas"),
-    timestamps = presence.getTimestamps(Math.floor(video.currentTime),Math.floor(video.duration));
+        ".H2-sc-1h18a06-3.fZOeKY"
+      ).innerHTML,
+      video: HTMLVideoElement = document.querySelector(
+        ".ardplayer-mediacanvas"
+      ),
+      timestamps = presence.getTimestamps(
+        Math.floor(video.currentTime),
+        Math.floor(video.duration)
+      );
 
     if (path.startsWith("/live/")) {
       // Livestream
       const mediathekLivechannel = document.title
-        .replace(/Livestream \| ARD-Mediathek/, "")
-        .replace(/ Livestream national \| ARD-Mediathek/g, ""),
-       channelLinkA = document.querySelector(
-        ".LogoLink-pae2yt-13.eOVFv"
-      );
+          .replace(/Livestream \| ARD-Mediathek/, "")
+          .replace(/ Livestream national \| ARD-Mediathek/g, ""),
+        channelLinkA = document.querySelector(".LogoLink-pae2yt-13.eOVFv");
       if (channelLinkA !== null) {
         presenceData.largeImageKey = channelLinkA
           .getAttribute("href")
@@ -49,12 +52,11 @@ presence.on("UpdateData", async () => {
         const channelLinkIMG = document
           .querySelector(".src__Box-sc-1sbtrzs-0.Column-wbrv0h-1.llCdnS.hkXjQv")
           .children[0].children[0].getAttribute("src");
-        if (channelLinkIMG === "/images/KdbelgIm.svg") 
+        if (channelLinkIMG === "/images/KdbelgIm.svg")
           presenceData.largeImageKey = "3sat";
-         else if (channelLinkIMG === "/images/siBNbNWW.svg") 
+        else if (channelLinkIMG === "/images/siBNbNWW.svg")
           presenceData.largeImageKey = "deutschewelle";
-         else 
-          presenceData.largeImageKey = "kika";
+        else presenceData.largeImageKey = "kika";
       }
 
       presenceData.smallImageKey = "live";
@@ -62,7 +64,9 @@ presence.on("UpdateData", async () => {
       presenceData.details = `${mediathekLivechannel} Live`;
       presenceData.state = videoTitle;
       presenceData.startTimestamp = elapsed;
-      presenceData.buttons = [{ label: (await strings).buttonWatchStream, url: prevUrl }];
+      presenceData.buttons = [
+        { label: (await strings).buttonWatchStream, url: prevUrl }
+      ];
     } else if (path.startsWith("/video/")) {
       // Video-on-demand
       presenceData.largeImageKey = "ard_mediathek";
@@ -79,7 +83,9 @@ presence.on("UpdateData", async () => {
       )}`;
 
       [, presenceData.endTimestamp] = timestamps;
-      presenceData.buttons = [{ label: (await strings).buttonWatchVideo, url: prevUrl }];
+      presenceData.buttons = [
+        { label: (await strings).buttonWatchVideo, url: prevUrl }
+      ];
     }
 
     // Player paused ?
