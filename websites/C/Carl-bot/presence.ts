@@ -1,8 +1,7 @@
 const presence = new Presence({
   clientId: "653372675166568481"
-});
-
-const browsingStamp = Math.floor(Date.now() / 1000);
+}),
+browsingStamp = Math.floor(Date.now() / 1000);
 
 presence.on("UpdateData", () => {
   const presenceData: PresenceData = {
@@ -10,7 +9,6 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingStamp
   };
 
-  if (document.location.hostname == "carl.gg") {
     if (document.location.pathname.startsWith("/dashboard/")) {
       const title = document
         .querySelector(
@@ -27,7 +25,6 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Carl-bot Status";
     }
-  }
 
   if (document.location.hostname === "docs.carl.gg") {
     presenceData.smallImageKey = "reading";
