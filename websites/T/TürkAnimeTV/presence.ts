@@ -73,7 +73,7 @@ presence.on("UpdateData", async () => {
       : (await strings).playing;
 
     if (!video.paused && video.duration) {
-      const [currentTime, duration] = presence.getTimestamps(
+      const [, duration] = presence.getTimestamps(
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
