@@ -1,0 +1,21 @@
+{
+  "author": {
+    "name": "dEN5",
+    "id": "487955764091027476"
+  },
+  "service": "SIBNET",
+  "description": {
+    "en": "Watch anime online (Russion Subbed) in high quality and direct download for FREE!"},
+  "url": "sibnet.ru",
+  "version": "0.1",
+  "logo": "https://dl.dropboxusercontent.com/s/auw4mqf86adx6lr/sibnet.png",
+  "thumbnail": "https://dl.dropboxusercontent.com/s/2wchprs62da01tc/chrome_JI6lOVbgFr.png",
+  "color": "#ff6766",
+  "tags": [
+    "anime",
+    "videos"
+  ],
+  "iframe": true,
+  "category": "anime",
+  "regExp": "(.*.sibnet.ru.*)"
+}
