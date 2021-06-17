@@ -77,7 +77,6 @@ presence.on("UpdateData", async () => {
         Math.floor(video.currentTime),
         Math.floor(video.duration)
       );
-      presenceData.startTimestamp = currentTime;
       presenceData.endTimestamp = duration;
     }
   }
