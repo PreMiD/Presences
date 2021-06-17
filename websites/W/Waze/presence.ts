@@ -3,7 +3,7 @@ const presence = new Presence({
   }),
   presenceData: PresenceData = {
     largeImageKey: "logo",
-    startTimestamp: Date.now()
+    startTimestamp: ~~(Date.now() / 1000)
   },
   pages: {[key: string]: string} = {
     "/": "Homepage",
