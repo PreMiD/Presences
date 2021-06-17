@@ -4,7 +4,8 @@ iframe.on("UpdateData", async () => {
   if (
     hostname === "voe.sx" ||
     hostname === "streamtape.com" ||
-    hostname == "playtube.ws"
+    hostname == "playtube.ws" ||
+    hostname == "vidoza.net" 
   ) {
     const video = document.querySelector(`video`);
     if (video != null) {

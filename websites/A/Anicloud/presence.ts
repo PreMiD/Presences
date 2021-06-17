@@ -1,6 +1,9 @@
 const presence = new Presence({
   clientId: `830517484472762408`
-}),
+});
+
+const browsingStamp = Math.floor(Date.now() / 1000),
+
   strings = presence.getStrings({
   play: "presence.playback.playing",
   pause: "presence.playback.paused"
@@ -64,13 +67,14 @@ if (document.location.pathname.startsWith("/anime/")) {
     }
 
 } else if (document.location.pathname == `/`) {
-  presenceData.details = "Home";
+  presenceData.details = "Betrachtet die Startseite";
+  presenceData.startTimestamp;
 
 }
 
 else if (document.location.pathname.startsWith('/animes')) {
   const sotiert = document.querySelector("#wrapper > div.container.marginBottom > div.seriesListNavigation > strong").textContent;
-presenceData.details = "Alle Animes";
+presenceData.details = "Betrachtet alle Animes";
 presenceData.state = "Sortiert nach: " + sotiert;
 
 }
@@ -88,7 +92,7 @@ else if (document.location.pathname.startsWith('/beliebte-animes')) {
 
 else if (document.location.pathname.startsWith('/animekalender')) {
   const date = document.querySelector(".col-md-4").textContent;
-  presenceData.details = "Animekalender";
+  presenceData.details = "Betrachtet Animekalender";
   presenceData.state = "- " + date;
 
 }
@@ -120,7 +124,7 @@ else if (document.location.pathname.startsWith('/katalog')) {
 
 else if (document.location.pathname.startsWith('/genre')) {
   const genre = document.querySelector("h1").textContent;
-  presenceData.details = "Genre";
+  presenceData.details = "Betrachtet Genre";
   presenceData.state = "- " + genre;
 
 }
@@ -177,7 +181,7 @@ else if (document.location.pathname.endsWith('/profile-picture')) {
 
 else if (document.location.pathname.endsWith('/profile-background')) {
   presenceData.details = "Account";
-  presenceData.state = "- Profil Hintergrund ändern";
+  presenceData.state = "- Profil-Hintergrund ändern";
 }
 
 else if (document.location.pathname.includes('/frage')) {
@@ -212,6 +216,17 @@ else if (document.location.pathname.endsWith('/notifications')) {
 else if (document.location.pathname.startsWith('/dmca')) {
   presenceData.details = "Digital Millennium - ";
   presenceData.state = "Copyright Act of 1998";
+}
+
+else if (document.location.pathname.endsWith("/friendships")) {
+  presenceData.details = "Account";
+  presenceData.state = "- Freundesliste";
+}
+
+else if (document.location.pathname.endsWith("/watched")) {
+  presenceData.details = "Account";
+  presenceData.state = "- Gesehene Episoden";
+
 }
 
 presence.setActivity(presenceData, true);
