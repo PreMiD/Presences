@@ -32,8 +32,7 @@ presence.on("UpdateData", () => {
         quickplayAccuracyUnmerged = document
           .querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
-          .trim()
-          .replace("ACCURACY", ""),
+          .trim(),
         quickplayAccuracy = `${quickplayAccuracyUnmerged} acc`,
         quickplayRaceStatus = document
           .querySelector(
@@ -47,19 +46,12 @@ presence.on("UpdateData", () => {
         presenceData.state = `${quickplayWPM}, ${quickplayAccuracy}`;
       }
 
-      const quickplayRacePlace = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_username__3mARu > div.ClientList_placement__3G8W_"
-          )
+      const quickplayRacePlace = document.querySelector("#PreMiD-RANK")
           .textContent.split("Jump to")[0]
           .trim(),
-        quickplayRaceTime = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_stats__3aNhg > span:nth-child(3)"
-          )
+        quickplayRaceTime = document.querySelector("#PreMiD-TIME")
           .textContent.split("Jump to")[0]
-          .trim()
-          .replace("TIME", "");
+          .trim();
 
       if (quickplayRaceTime !== "--:--") {
         presenceData.details = `Placed ${quickplayRacePlace} in a quick play race!`;
@@ -104,16 +96,11 @@ presence.on("UpdateData", () => {
         soloAccuracyUnmerged = document
           .querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
-          .trim()
-          .replace("ACCURACY", ""),
+          .trim(),
         soloAccuracy = `${soloAccuracyUnmerged} acc`,
-        soloRaceTime = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.ClientList_root__3kp8e.ClientList_soloRoot__1gfSf > div > div > div > div.ClientList_stats__3aNhg > span:nth-child(3)"
-          )
+        soloRaceTime = document.querySelector("#PreMiD-TIME")
           .textContent.split("Jump to")[0]
-          .trim()
-          .replace("TIME", "");
+          .trim();
 
       if (soloRaceStatus === "GO!") {
         presenceData.details = "In a solo race:";
@@ -159,22 +146,14 @@ presence.on("UpdateData", () => {
         privateAccuracyUnmerged = document
           .querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
-          .trim()
-          .replace("ACCURACY", ""),
-        privateRacePlace = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div > div > div.ClientList_username__3mARu > div.ClientList_placement__3G8W_"
-          )
+          .trim(),
+        privateRacePlace = document.querySelector("#PreMiD-RANK")
           .textContent.split("Jump to")[0]
           .trim(),
         privateAccuracy = `${privateAccuracyUnmerged} acc`,
-        privateRaceTime = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div > div > div.ClientList_stats__3aNhg > span:nth-child(3)"
-          )
+        privateRaceTime = document.querySelector("#PreMiD-TIME")
           .textContent.split("Jump to")[0]
-          .trim()
-          .replace("TIME", "");
+          .trim();
 
       if (playingStatus === "Get Ready..." || playingStatus === "Get Set...") {
         presenceData.details = "In a private lobby race:";
