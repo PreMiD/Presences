@@ -46,10 +46,12 @@ presence.on("UpdateData", () => {
         presenceData.state = `${quickplayWPM}, ${quickplayAccuracy}`;
       }
 
-      const quickplayRacePlace = document.querySelector("#PreMiD-RANK")
+      const quickplayRacePlace = document
+          .querySelector("#PreMiD-RANK")
           .textContent.split("Jump to")[0]
           .trim(),
-        quickplayRaceTime = document.querySelector("#PreMiD-TIME")
+        quickplayRaceTime = document
+          .querySelector("#PreMiD-TIME")
           .textContent.split("Jump to")[0]
           .trim();
 
@@ -98,7 +100,8 @@ presence.on("UpdateData", () => {
           .textContent.split("Jump to")[0]
           .trim(),
         soloAccuracy = `${soloAccuracyUnmerged} acc`,
-        soloRaceTime = document.querySelector("#PreMiD-TIME")
+        soloRaceTime = document
+          .querySelector("#PreMiD-TIME")
           .textContent.split("Jump to")[0]
           .trim();
 
@@ -147,11 +150,13 @@ presence.on("UpdateData", () => {
           .querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
           .trim(),
-        privateRacePlace = document.querySelector("#PreMiD-RANK")
+        privateRacePlace = document
+          .querySelector("#PreMiD-RANK")
           .textContent.split("Jump to")[0]
           .trim(),
         privateAccuracy = `${privateAccuracyUnmerged} acc`,
-        privateRaceTime = document.querySelector("#PreMiD-TIME")
+        privateRaceTime = document
+          .querySelector("#PreMiD-TIME")
           .textContent.split("Jump to")[0]
           .trim();
 
