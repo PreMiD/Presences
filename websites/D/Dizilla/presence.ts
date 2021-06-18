@@ -25,16 +25,15 @@ const dizilla = new Presence({
   };
 
 interface IframeData {
-duration: number; currentTime: number; paused: boolean
+  duration: number;
+  currentTime: number;
+  paused: boolean;
 }
 
 let video: IframeData;
-dizilla.on(
-  "iFrameData",
-  (data: IframeData) => {
-    video = data;
-  }
-);
+dizilla.on("iFrameData", (data: IframeData) => {
+  video = data;
+});
 
 dizilla.on("UpdateData", async () => {
   const path: string = document.location.pathname,
@@ -90,7 +89,6 @@ dizilla.on("UpdateData", async () => {
     const url: URL = new URL(document.location.href),
       query = url.searchParams.get("q");
 
-
     if (query) {
       object.details = "Bir şey arıyor:";
       object.state = query[0].toUpperCase() + query.slice(1).toLowerCase();
@@ -112,7 +110,7 @@ dizilla.on("UpdateData", async () => {
     showName?.innerText &&
     episode?.textContent
   ) {
-    const [startTimestamp, endTimestamp] = dizilla.getTimestamps(
+    const [, endTimestamp] = dizilla.getTimestamps(
       Math.floor(video?.currentTime),
       Math.floor(video?.duration)
     );
@@ -125,10 +123,7 @@ dizilla.on("UpdateData", async () => {
       ? (await strings).pause
       : (await strings).play;
 
-    if (!isNaN(startTimestamp) && !isNaN(endTimestamp)) {
-      object.startTimestamp = startTimestamp;
-      object.endTimestamp = endTimestamp;
-    }
+    if (!isNaN(endTimestamp)) object.endTimestamp = endTimestamp;
 
     if (video.paused) {
       delete object.startTimestamp;
