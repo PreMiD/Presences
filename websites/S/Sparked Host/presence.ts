@@ -9,13 +9,16 @@ presence.on("UpdateData", async () => {
   };
 
   if (document.location.hostname == "sparkedhost.com") {
-    if (document.location.pathname.includes("/budget-minecraft")) {
+    if (document.location.pathname.includes("/budget-minecraft-hosting")) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Budget Packages";
-    } else if (document.location.pathname.includes("/premium-minecraft")) {
+    } else if (document.location.pathname.includes("/enterprise-minecraft-hosting")) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Enterprise Packages";
-    } else if (document.location.pathname.includes("/extreme-minecraft")) {
+    } else if (document.location.pathname.includes("/singapore-minecraft-hosting")) {
+      presenceData.details = "Minecraft Hosting";
+      presenceData.state = "Singapore Packages";
+    } else if (document.location.pathname.includes("/extreme-minecraft-hosting")) {
       presenceData.details = "Minecraft Hosting";
       presenceData.state = "Extreme Packages";
     } else if (document.location.pathname.includes("/game-hosting")) {
