@@ -146,6 +146,13 @@ presence.on("UpdateData", async () => {
     document.location.hostname == "altaruk1.sparkedhost.us" ||
     document.location.hostname == "altar52.sparkedhost.us" ||
     document.location.hostname == "altar57.sparkedhost.us" ||
+    document.location.hostname == "altarau1.supremepanelau1.com" ||
+    document.location.hostname == "altar45.supremepanel45.com" ||
+    document.location.hostname == "altaruk3.supremepanel3.co.uk" ||
+    document.location.hostname == "altaruk2.supremepanel2.co.uk" ||
+    document.location.hostname == "altaruk1.supremepanel1.co.uk" ||
+    document.location.hostname == "altar51.supremepanel51.com" ||
+    document.location.hostname == "cloud852.thundercloud.uk" ||
     document.location.hostname == "web-01.sparkedhost.us"
   ) {
     presenceData.details = "Web Hosting";
