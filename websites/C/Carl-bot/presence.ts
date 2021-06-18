@@ -9,7 +9,7 @@ presence.on("UpdateData", () => {
     startTimestamp: browsingStamp
   };
   
-  if (document.location.hostname == "carl.gg") {
+  if (document.location.hostname === "carl.gg") {
     if (document.location.pathname.startsWith("/dashboard/")) {
       const title = document
         .querySelector(
