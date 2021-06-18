@@ -21,7 +21,7 @@ presence.on("UpdateData", async () => {
     video: HTMLVideoElement = document.querySelector(
       "div.zdfplayer-video_wrapper video"
     );
-    
+
   if (document.location.href !== prevUrl) {
     prevUrl = document.location.href;
     elapsed = Math.floor(Date.now() / 1000);
@@ -31,9 +31,9 @@ presence.on("UpdateData", async () => {
     if (path.startsWith("/live-tv")) {
       // Livestream
       const liveVideo: HTMLVideoElement = document.querySelector(
-        "div.item.livetv-item.js-livetv-scroller-cell.m-activated-done.m-activated.m-active.m-active-done div figure div video"
-      ), 
-       mediathekLivechannel = document
+          "div.item.livetv-item.js-livetv-scroller-cell.m-activated-done.m-activated.m-active.m-active-done div figure div video"
+        ),
+        mediathekLivechannel = document
           .querySelector(
             "div.item.livetv-item.js-livetv-scroller-cell.m-active-done.m-activated-done.m-activated.m-active h2[class='visuallyhidden']"
           )
@@ -113,8 +113,8 @@ presence.on("UpdateData", async () => {
       if (video.paused) {
         presenceData.smallImageKey = "pause";
         presenceData.smallImageText = (await strings).pause;
-        presenceData.startTimestamp = 0;
-        presenceData.endTimestamp = 0;
+        delete presenceData.startTimestamp;
+        delete presenceData.endTimestamp;
       }
     }
   } else {
