@@ -21,8 +21,11 @@
     "zh_CN": "Crunchyroll是美国的一家提供东亚相关流媒体影视服务和国际交流社区的网站。",
     "zh_TW": "Crunchyroll是美國的一家提供東亞相關串流媒體影視服務和國際交流社區的網站。"
   },
-  "url": "www.crunchyroll.com",
-  "version": "2.6.8",
+  "url": [
+    "www.crunchyroll.com",
+    "beta.crunchyroll.com"
+  ],
+  "version": "2.7.1",
   "logo": "https://i.imgur.com/LpTKP8c.png",
   "thumbnail": "https://i.imgur.com/hzM7YCb.png",
   "color": "#f47521",

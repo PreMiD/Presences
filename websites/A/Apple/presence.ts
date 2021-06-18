@@ -225,18 +225,21 @@ presence.on("UpdateData", async () => {
       if (setting.buttons && OS) {
         presenceData.buttons = [
           {
-            label: `View ${OS.textContent}`,
+            label: `View ${OS.textContent.replace("Preview", "")}`.substring(
+              0,
+              30
+            ),
             url: window.location.href
           }
         ];
       }
     } else if (urlpath.includes("apple-events")) {
-      const event = document.querySelector(
-        "p.hero-subhead.typography-quote-reduced"
-      );
+      const event =
+        document.querySelector("h1.hero-headline.typography-headline") ||
+        document.querySelector("p.hero-subhead.typography-quote-reduced");
 
       presenceData.details = event ? "Viewing Event:" : "Apple Events";
-      if (event) presenceData.state = event.textContent || "Unknown";
+      if (event) presenceData.state = event.textContent;
 
       if (setting.buttons && event) {
         presenceData.buttons = [
@@ -452,10 +455,40 @@ presence.on("UpdateData", async () => {
     else if (urlpath[1] === "iclouddrive") presenceData.state = "Drive";
     else if (urlpath[1] === "notes") presenceData.state = "Notes";
     else if (urlpath[1] === "reminders") presenceData.state = "Reminders";
-    else if (urlpath[1] === "pages") presenceData.state = "Pages";
-    else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
-    else if (urlpath[1] === "keynote") presenceData.state = "Keynote";
-    else if (urlpath[1] === "fmf") presenceData.state = "Find My Friends";
+    else if (urlpath[1] === "pages") {
+      presenceData.largeImageKey = "pages";
+
+      if (urlpath[2]) {
+        presenceData.details = "iCloud Pages";
+
+        if (urlpath[2] === "create") presenceData.state = "Creating...";
+        else
+          presenceData.state = document.querySelector(
+            "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
+          )?.textContent;
+      } else presenceData.state = "Pages";
+    } else if (urlpath[1] === "numbers") presenceData.state = "Numbers";
+    else if (urlpath[1] === "keynote") {
+      presenceData.largeImageKey = "keynote";
+
+      if (urlpath[2]) {
+        presenceData.details = "iCloud Keynote";
+
+        if (urlpath[2] === "create") presenceData.state = "Creating...";
+        else
+          presenceData.state = document.querySelector(
+            "div.sc-view.iw-document-status-name-label.iw-ellipsis.sc-static-layout"
+          )?.textContent;
+      } else presenceData.state = "Keynote";
+    } else if (urlpath[1] === "keynote-live" && urlpath[2]) {
+      const iframe = document.querySelector("iframe");
+
+      presenceData.details = "iCloud Keynote Live";
+      presenceData.largeImageKey = "keynote";
+
+      if (iframe?.style.display === "none")
+        presenceData.state = "Waiting room...";
+    } else if (urlpath[1] === "fmf") presenceData.state = "Find My Friends";
     else if (urlpath[1] === "find") presenceData.state = "Find My";
   } else if (window.location.hostname === "card.apple.com") {
     presenceData.largeImageKey = "apple-card";
@@ -599,6 +632,7 @@ presence.on("UpdateData", async () => {
           ?.textContent ||
         document.querySelector("span.localnav-menu-link.current")
           ?.textContent ||
+        document.querySelector("a.localnav-menu-link.current")?.textContent ||
         "Other";
     } else if (urlpath[1] === "testflight") presenceData.state = "Testflight";
     else if (urlpath[1] === "games") presenceData.state = "Games";
@@ -745,7 +779,7 @@ presence.on("UpdateData", async () => {
           ];
         }
       }
-    }
+    } else if (urlpath[1] === "shareplay") presenceData.state = "Shareplay";
   }
 
   if (
