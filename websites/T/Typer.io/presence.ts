@@ -24,16 +24,11 @@ presence.on("UpdateData", () => {
     }
 
     try {
-      const quickplayWPM = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_username__3mARu > div.ClientList_usernameWrapper__3AP4s > div"
-          )
+      const quickplayWPMUnmerged = document.querySelector("#PreMiD-WPM")
           .textContent.split("Jump to")[0]
           .trim(),
-        quickplayAccuracyUnmerged = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div:nth-child(1) > div > div.ClientList_stats__3aNhg > span:nth-child(2)"
-          )
+        quickplayWPM = `${quickplayWPMUnmerged} WPM`,
+        quickplayAccuracyUnmerged = document.querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
           .trim()
           .replace("ACCURACY", ""),
@@ -99,16 +94,11 @@ presence.on("UpdateData", () => {
     }
 
     try {
-      const soloWPM = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.ClientList_root__3kp8e.ClientList_soloRoot__1gfSf > div > div > div > div.ClientList_username__3mARu > div > div"
-          )
+      const soloWPMUnmerged = document.querySelector("#PreMiD-WPM")
           .textContent.split("Jump to")[0]
           .trim(),
-        soloAccuracyUnmerged = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.Play_soloContainer__1IpE4 > div.ClientList_root__3kp8e.ClientList_soloRoot__1gfSf > div > div > div > div.ClientList_stats__3aNhg > span:nth-child(2)"
-          )
+        soloWPM = `${soloWPMUnmerged} WPM`,
+        soloAccuracyUnmerged = document.querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
           .trim()
           .replace("ACCURACY", ""),
@@ -157,16 +147,11 @@ presence.on("UpdateData", () => {
           )
           .textContent.split("Jump to")[0]
           .trim(),
-        privateWPM = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div > div > div.ClientList_username__3mARu > div.ClientList_usernameWrapper__3AP4s > div"
-          )
+        privateWPMUnmerged = document.querySelector("#PreMiD-WPM")
           .textContent.split("Jump to")[0]
           .trim(),
-        privateAccuracyUnmerged = document
-          .querySelector(
-            "#__next > div.Play_root__16QtH > div.Play_container__392yl.false > div.ClientList_root__3kp8e.false > div > div > div > div.ClientList_stats__3aNhg > span:nth-child(2)"
-          )
+        privateWPM = `${privateWPMUnmerged} WPM`,
+        privateAccuracyUnmerged = document.querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
           .trim()
           .replace("ACCURACY", ""),
