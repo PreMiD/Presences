@@ -8,7 +8,8 @@ presence.on("UpdateData", () => {
     largeImageKey: "carllogo",
     startTimestamp: browsingStamp
   };
-
+  
+  if (document.location.hostname == "carl.gg") {
     if (document.location.pathname.startsWith("/dashboard/")) {
       const title = document
         .querySelector(
@@ -25,6 +26,7 @@ presence.on("UpdateData", () => {
       presenceData.details = "Viewing a page:";
       presenceData.state = "Carl-bot Status";
     }
+  }
 
   if (document.location.hostname === "docs.carl.gg") {
     presenceData.smallImageKey = "reading";
