@@ -24,11 +24,13 @@ presence.on("UpdateData", () => {
     }
 
     try {
-      const quickplayWPMUnmerged = document.querySelector("#PreMiD-WPM")
+      const quickplayWPMUnmerged = document
+          .querySelector("#PreMiD-WPM")
           .textContent.split("Jump to")[0]
           .trim(),
         quickplayWPM = `${quickplayWPMUnmerged} WPM`,
-        quickplayAccuracyUnmerged = document.querySelector("#PreMiD-ACC")
+        quickplayAccuracyUnmerged = document
+          .querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
           .trim()
           .replace("ACCURACY", ""),
@@ -94,11 +96,13 @@ presence.on("UpdateData", () => {
     }
 
     try {
-      const soloWPMUnmerged = document.querySelector("#PreMiD-WPM")
+      const soloWPMUnmerged = document
+          .querySelector("#PreMiD-WPM")
           .textContent.split("Jump to")[0]
           .trim(),
         soloWPM = `${soloWPMUnmerged} WPM`,
-        soloAccuracyUnmerged = document.querySelector("#PreMiD-ACC")
+        soloAccuracyUnmerged = document
+          .querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
           .trim()
           .replace("ACCURACY", ""),
@@ -147,11 +151,13 @@ presence.on("UpdateData", () => {
           )
           .textContent.split("Jump to")[0]
           .trim(),
-        privateWPMUnmerged = document.querySelector("#PreMiD-WPM")
+        privateWPMUnmerged = document
+          .querySelector("#PreMiD-WPM")
           .textContent.split("Jump to")[0]
           .trim(),
         privateWPM = `${privateWPMUnmerged} WPM`,
-        privateAccuracyUnmerged = document.querySelector("#PreMiD-ACC")
+        privateAccuracyUnmerged = document
+          .querySelector("#PreMiD-ACC")
           .textContent.split("Jump to")[0]
           .trim()
           .replace("ACCURACY", ""),
